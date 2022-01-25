@@ -1,0 +1,28 @@
+.documnet-detail {
+    padding: 20px;
+    &-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-button {
+        span {
+            cursor: pointer;
+            color: #0053ca;
+        }
+        
+    }
+    .document-edit {
+        .edit-toolbar {
+            padding: 0;
+            flex-wrap: nowrap;
+        }
+        .edit-title {
+            padding: 10px 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+
+    
+}

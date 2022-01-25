@@ -1,0 +1,143 @@
+.search {
+    .search-box {
+        height: 30px;
+        width: 100%;
+        background: #fff;
+        display: flex;
+        border-radius: 7px;
+        padding: 0 10px;
+        border: 2px solid #dddd;
+        align-items: center;
+        .search-input {
+            border: none;
+            height: 100%;
+            width: 90%;
+            outline: none;
+            margin-left: 10px;
+        }
+    }
+    
+    
+    
+    
+}
+.hidden-box {
+    display: none;
+}
+.show-box {
+    width: 100%;
+    min-height: 100px;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: rgba(9,30,66,0.25) 0px 4px 8px, rgba(9,30,66,0.31) 0px 0px 1px;
+    margin-top: 5px;
+    border-radius: 3px;
+    z-index: 1;
+    padding: 10px 0;
+    // display: none;
+    .sort-box {
+        
+        .sort-title {
+            color: #202d407a;
+            font-size: 12px;
+            padding-left: 10px;
+            height: 20px;
+            line-height: 20px;
+        }
+        .item-box {
+            .item-one {
+                padding: 0 10px;
+                display: flex;
+                align-items: center;
+                height: 40px;
+                background-color: #f5f7fa;
+                margin-bottom: 10px;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+                span{
+                    width: 100px;
+                    text-align: left;
+                    margin-left: 20px;
+                    overflow: hidden;
+                }
+            }
+            
+        }
+    }
+}
+.search-resule {
+    .search-box {
+        height: 50px;
+        width: 100%;
+        background: #fff;
+        display: flex;
+        border-radius: 7px;
+        border: 2px solid #dddd;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0;
+        .search-input {
+            border: none;
+            height: 100%;
+            width: 90%;
+            outline: none;
+            margin-left: 10px;
+        }
+        .search-botton {
+            width: 100px;
+            height: 100%;
+            line-height: 44px;
+            text-align: center;
+            background-color: powderblue;
+            color: #999;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    }
+    .wiki-box{
+        .wiki-contant {
+            line-height: 30px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            .wiki-title {
+                // color: $blue-main;
+                color: #0053ca;
+                font-size: 18px;
+                font-weight: 600;
+            }
+            .wiki-item-name {
+                font-weight: 600;
+            }
+        }
+        .wiki-card-item {
+            box-shadow: rgba(9,30,66,0.25) 0px 1px 1px, rgba(9,30,66,0.31) 0px 0px 1px;
+            width: 30%;
+            margin: 10px;
+            border-radius: 5px;
+            padding: 10px;
+            line-height: 30px;
+            .wiki-card-contant {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                img {
+                    width: 36px;
+                }
+                .wiki-card-title {
+                    color: #202d40;
+                    font-weight: 600;
+                }
+                .wiki-card-item-name {
+                    color: #d5d5d5
+                }
+            }
+            .wiki-card-bottom {
+                border-top: 1px solid #f0f0f0;
+                font-size: 12px;
+            }
+        }
+    }
+}

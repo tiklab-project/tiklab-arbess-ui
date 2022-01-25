@@ -1,0 +1,50 @@
+.move-menu {
+    list-style-type:none;
+    min-height: 30vh;
+    cursor: pointer;
+    .wiki-menu-submenu {
+        height: 40px;
+        display: flex;
+        line-height: 40px;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        i{
+            margin-right: 10px;
+        }
+        .wiki-input {
+            outline:0;
+            box-shadow: 0 0 0 2px #1890ff33;
+            min-width: 100px;
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            border-radius: 2px;
+        }
+    }
+    .wiki-menu-submenu:hover {
+        // background-color: $side-hover;
+        background-color: #EDF0F5;
+    }
+    .wiki-menu-submenu-hidden {
+        display: none;
+    }
+    .wiki-menu-select {
+        // background-color: $side-select;
+        background-color: #e3e8f0;
+        border-left: 3px solid #0053ca;
+    }
+    .iconright {
+        margin-left: 10px;
+    }
+}
+.hidden-menu {
+    display: none;
+}
+.icon-show {
+    display: block;
+}
+.icon-hidden {
+    display: none;
+}

@@ -1,0 +1,29 @@
+.emoji-box {
+    min-width: 100px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: rgba(9,30,6,0.25) 0px 4px 8px -2px, rgba(9,30,66,0.31) 0px 0px 1px;
+    box-sizing: border-box;
+    z-index: 2;
+    .emoji-contant {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .emoji-img {
+            padding: 10px;
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        
+    }
+}
+.emoji-tool {
+    position: relative;
+    width: 30px;
+    text-align: center;
+}

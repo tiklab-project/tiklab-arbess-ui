@@ -1,0 +1,68 @@
+.wiki {
+    .wiki-content {
+        height: 100%;
+        .ant-layout-sider {
+            background-color: #fff;
+            height: 100%;
+            border-right: 1px solid #f0f0f0;
+            // 知识库的导航样式
+            .wiki-aside {
+                height: 100%;
+                // background:$side-color;
+                background-color: #F7F8FA;
+                .wiki-title {
+                    height: 40px;
+                    display: flex;
+                    line-height: 40px;
+                    width: 100%;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0 20px;
+                    font-weight: 600;
+                    // color: $blue-main;
+                    color: #0053ca;
+                    border-bottom: 1px solid #f0f2f5;
+                }
+                .wiki-menu {
+                    list-style-type:none;
+                    padding: 0px;
+                    .icon {
+                        margin-right: 10px;
+                    }
+                    li:hover {
+                        // background-color: $side-hover;
+                        background-color: #EDF0F5;
+                    }
+                    .wiki-menu-submenu {
+                        height: 40px;
+                        display: flex;
+                        line-height: 40px;
+                        padding-left: 20px;
+                        width: 100%;
+                        cursor: pointer;
+                        align-items: center;
+                    }
+                    .wiki-menu-select {
+                        // background-color: $side-select;
+                        background-color: #e3e8f0;
+                        border-left: 3px solid #0053ca;
+                    }
+                }
+                .hidden-menu {
+                    display: none;
+                }
+            }
+        }
+        .wiki-table {
+            .ant-row {
+                height: 100%;
+                overflow: auto;
+                .ant-col {
+                    // height: 100%;
+                    background-color: #fff;
+                    padding: 20px 20px;
+                }
+            }
+        }
+    }
+}
