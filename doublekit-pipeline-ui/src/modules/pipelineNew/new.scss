@@ -1,0 +1,19 @@
+.new{
+  margin-top: 30px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 1px solid black;
+  .new-content{
+    width: 60%;
+    height: 60%;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    .new-content-bottom{
+      h1{
+        font-size: 20px;
+      }
+    }
+  }
+}
