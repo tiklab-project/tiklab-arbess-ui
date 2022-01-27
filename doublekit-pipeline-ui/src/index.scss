@@ -1,3 +1,22 @@
-@import '~antd/dist/antd.css';
-@import "./common/styles/_index.scss";
-@import "./assets/font-icon/iconfont.css";
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
+body,html,#root{
+  height: 100%;
+  width: 100%;
+  overflow-x:hidden;
+}
+@import "modules/home/home";
+
+@import "modules/login/login";
+//流水线
+@import "modules/pipeline/pipeline";
+//流水线任务
+@import "modules/pipelineTask/task";
+//新建流水线
+@import "modules/pipelineNew/new";
+//新建部署
+@import "modules/pipelineNewDeployment/newDeployment";
