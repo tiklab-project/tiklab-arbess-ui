@@ -1,10 +1,10 @@
 import React,{Component} from 'react'
 import {Button,Radio,Input,Form,Modal} from "antd";
-import ModalSource from "./sourceAddModal";
+import ModalSource from "./sourceCodeAddModal";
 import { Select } from 'antd';
 
 const { Option } = Select;
-class SourceCodeNewDeployment extends Component{
+class SourceCode extends Component{
     state={
         formStatus:'none',
         isModalVisible:false
@@ -90,4 +90,4 @@ class SourceCodeNewDeployment extends Component{
         )
     }
 }
-export default SourceCodeNewDeployment
+export default SourceCode

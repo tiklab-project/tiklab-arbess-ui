@@ -1,7 +1,7 @@
 import React from "react";
 import {Form, Input,Checkbox } from "antd";
 
-const DeployNewDeployment=()=>{
+const Deploy=()=>{
     return(
         <div className=' anchor'>
             <h1>部署</h1>
@@ -23,4 +23,4 @@ const DeployNewDeployment=()=>{
     )
 }
 
-export default DeployNewDeployment
+export default Deploy

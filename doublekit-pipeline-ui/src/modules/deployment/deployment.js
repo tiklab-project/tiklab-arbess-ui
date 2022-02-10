@@ -1,7 +1,7 @@
 import React from 'react'
-import SourceCodeNewDeployment from "./pages/sourceCode";
-import StructureNewDeployment from "./pages/structure";
-import DeployNewDeployment from "./pages/deploy/deploy";
+import SourceCode from "./pages/SourceCode";
+import Build from "./pages/build";
+import Deploy from "./pages/deploy";
 import NewDeploymentHeader from "./components/header";
 import {Button } from "antd";
 
@@ -62,9 +62,9 @@ const Deployment=()=>{
                 </div>
                 <div className='newDeployment-bc'>
                     <div className='newDeployment-con' id='box' onScroll={handleScroll} >
-                        <div id="a1" ><SourceCodeNewDeployment /></div>
-                        <div id="a2"> <StructureNewDeployment/></div>
-                        <div id="a3"><DeployNewDeployment/></div>
+                        <div id="a1" ><SourceCode /></div>
+                        <div id="a2"> <Build/></div>
+                        <div id="a3"><Deploy/></div>
                         <div style={{backgroundColor:"white",height:700}} />
                     </div>
                     <div className={'btn'}>

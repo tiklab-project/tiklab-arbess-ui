@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import {Input, Form, Radio} from "antd";
 
-class StructureNewDeployment extends Component{
+class Build extends Component{
     state={
         formStatus:'none'
     }
@@ -56,4 +56,4 @@ class StructureNewDeployment extends Component{
     }
 }
 
-export default StructureNewDeployment
+export default Build
