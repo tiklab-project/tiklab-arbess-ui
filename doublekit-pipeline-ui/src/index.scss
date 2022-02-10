@@ -10,13 +10,12 @@ body,html,#root{
   overflow-x:hidden;
 }
 @import "modules/home/home";
-
 @import "modules/login/login";
 //流水线
 @import "modules/pipeline/pipeline";
-//流水线任务
-@import "modules/pipelineTask/task";
+//任务
+@import "modules/task/task";
 //新建流水线
-@import "modules/pipelineNew/new";
-//新建部署
-@import "modules/pipelineNewDeployment/newDeployment";
+@import "modules/new/new";
+//部署
+@import "modules/deployment/deployment";

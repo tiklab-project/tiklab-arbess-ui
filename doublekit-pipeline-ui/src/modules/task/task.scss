@@ -1,0 +1,223 @@
+.ant-layout-task-content{
+  height: 100%;
+  width: 100%;
+  //工作空间
+  .task-work{
+    ul>li{
+      list-style: none;
+      margin: 10px 0;
+    }
+    .task-work-top-h1{
+      font-size: 30px;
+    }
+  }
+
+  //开始构建
+  .task-structure{
+    ul>li{
+      list-style: none;
+    }
+    .task-structure-top-div{
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      border: 3px solid black;
+      text-align: center;
+      float: left;
+    }
+    .task-structure-top{
+      margin-bottom: 50px;
+      .task-structure-top-btn{
+        margin-bottom: 10px;
+        float: right;
+      }
+      .task-structure-top-ul{
+        float: right;
+      }
+      .task-structure-top-card{
+        clear: both;
+      }
+    }
+    .task-structure-bottom{
+      width: 100%;
+      background-color: rgba(196,196,196,0.3);
+      h1{
+        font-size: 20px;
+        margin-left: 30px;
+      }
+    }
+  }
+
+  //配置
+  .task-config{
+    overflow: hidden;
+    .task-config-top{
+      .task-config-top-btn{
+        float: right;
+        margin-bottom:10px ;
+      }
+      .task-config-top-a{
+        display: flex;
+        margin-top: 15px ;
+        ul{
+          .ac{
+            background-color:#F5F5F5;
+          }
+          li{
+            height:50px;
+            line-height:50px;
+            float: left;
+            a{
+              padding:0 10px;
+              display:block;
+              color: black;
+              &:hover{
+                background-color:#F5F5F5;
+              }
+            }
+          }
+        }
+      }
+    }
+    .task-config-bottom{
+      height: 100%;
+      h1{
+        background-color: 	#F5F5F5;
+        margin-bottom: 30px;
+        font-size: 18px;
+      }
+      .anchor{
+        margin:10px 0 50px;
+      }
+      .task-config-radio{
+        margin-bottom: 30px;
+      }
+      .task-config-bottom-con{
+        overflow: auto;
+        height: 100%;
+      }
+      .btn{
+        position:fixed;
+        z-index:999;
+        bottom:15px
+      }
+    }
+  }
+
+  //构建历史
+  .task-history{
+    .task-history-top{
+      h1{
+        font-size: 30px;
+      }
+      Button{
+        float: right;
+      }
+    }
+  }
+
+  //流水线设置
+  .task-assembly{
+    .task-assembly-bottom{
+      margin-top: 100px;
+    }
+  }
+
+  //构建历史的内容
+  .task-build{
+    .task-build-center-div{
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      border: 3px solid black;
+      text-align: center;
+      float: left;
+    }
+    .task-build-top{
+      margin-bottom: 5px;
+      h1{
+        float: left;
+        font-size: 30px;
+      }
+      .task-build-top-btn{
+        float: right;
+        Button:last-child{
+          margin-left: 10px;
+        }
+      }
+    }
+    .task-build-center{
+      clear: both;
+      .task-build-center-ul{
+        float: right;
+      }
+    }
+    .task-build-bottom{
+      margin-top: 50px;
+      width: 100%;
+      background-color: rgba(196,196,196,0.3);
+      h1{
+        font-size: 20px;
+        margin-left: 30px;
+      }
+    }
+  }
+
+  //配置查看过往更改记录
+  .task-pastRecord{
+    h1{
+      font-size: 30px;
+      float: left;
+    }
+    .task-pastRecord-btn{
+      float: right;
+      Button:last-child{
+        margin-left: 30px;
+      }
+    }
+    .task-pastRecord-h{
+      clear: both;
+      margin-bottom: 60px;
+      h2{
+        &:first-child{
+          float: left;
+          margin-left: 14%;
+        }
+        &:last-child{
+          float: right;
+          margin-right: 20%;
+        }
+      }
+    }
+    .this-config{
+      margin-left: 60px;
+      clear: both;
+      float: left;
+    }
+    .last-config{
+      margin-right: 60px;
+      float: right;
+    }
+    .task-pastRecord-config-left{
+      float: left;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .task-pastRecord-config-right{
+      float: right;
+      clear: both;
+      margin-top: -40px;
+    }
+    .task-pastRecord-config-deploy{
+      clear: both;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .task-pastRecord-config-res{
+      margin-bottom: 20px;
+      margin-left: 15px;
+    }
+  }
+}

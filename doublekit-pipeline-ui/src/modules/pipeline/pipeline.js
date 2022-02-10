@@ -1,7 +1,7 @@
 import React,{Component}  from "react";
 import PipelineHeader from "./components/pipelineHeader";
-import PipelineMy from "./pages/my/pipelineMy";
-import PipelineAll from "./pages/all/pipelineAll";
+import PipelineMy from "./pages/my";
+import PipelineAll from "./pages/all";
 import {Button, Tabs} from 'antd';
 import {withRouter} from "react-router-dom";
 import {PlusOutlined} from "@ant-design/icons";
