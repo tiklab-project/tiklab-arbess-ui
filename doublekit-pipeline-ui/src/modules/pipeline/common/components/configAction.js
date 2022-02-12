@@ -1,0 +1,25 @@
+import React from "react";
+import {Form, Input,Checkbox } from "antd";
+
+const Action=props=>{
+    return(
+        <div className={'anchor'}>
+            <h1>构建后管理</h1>
+            <Form
+                layout="vertical"
+            >
+                <Form.Item
+                    label='部署位置'
+                >
+                    <Input/>
+                </Form.Item>
+                <Form.Item>
+                    <Checkbox >
+                        Checkbox
+                    </Checkbox>
+                </Form.Item>
+            </Form>
+        </div>
+    )
+}
+export default Action

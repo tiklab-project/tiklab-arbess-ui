@@ -1,12 +1,10 @@
-import React,{Component} from "react";
+import React from "react";
 
-class System extends Component{
-    render() {
-        return(
-            <div>
-                System
-            </div>
-        )
-    }
+const System = props =>{
+    return(
+        <div>
+            system
+        </div>
+    )
 }
 export default System

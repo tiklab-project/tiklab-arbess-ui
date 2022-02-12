@@ -5,14 +5,29 @@ import Heads from "./components/header";
 
 const { Header, Content } = Layout;
 
-const Home=(props)=>{
+const Home=props=>{
+    const headerRoutes=[
+        {
+            to:'/home/pipeline',
+            title: "流水线",
+            key:'pipeline'
+        },
+        {
+            to:'/home/system',
+            title:'系统设置',
+            key:'system'
+        }
+    ]
     const route=props.route
     return(
         <Layout>
             <Header >
-                <Heads/>
+                <Heads
+                    {...props}
+                    routers={headerRoutes}
+                />
             </Header>
-            <Content className='ant-layout-content' >
+            <Content  >
                 {renderRoutes(route.routes)}
             </Content>
         </Layout>

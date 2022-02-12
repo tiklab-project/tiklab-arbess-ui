@@ -12,10 +12,12 @@ body,html,#root{
 @import "modules/home/home";
 @import "modules/login/login";
 //流水线
-@import "modules/pipeline/pipeline";
+@import "modules/pipeline/pipeline/containers/pipeline";
 //任务
-@import "modules/task/task";
+@import "modules/pipeline/common/containers/task";
+
 //新建流水线
-@import "modules/new/new";
+@import "modules/pipeline/pipeline/components/pipelineAdd";
+
 //部署
-@import "modules/deployment/deployment";
+@import "modules/pipeline/pipeline/components/pipelineDeployment";

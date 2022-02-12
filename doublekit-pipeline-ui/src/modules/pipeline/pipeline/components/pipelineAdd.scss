@@ -1,0 +1,24 @@
+.new{
+  margin-top: 30px;
+  width: 100%;
+  height: 100%;
+  .new-content{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    &-type{
+     &-choose{
+       cursor: pointer;
+       &:active{
+         background-color: #F5F5F5;
+         border: 1px solid black;
+       }
+     }
+    }
+    &-btn{
+      position: fixed;
+      bottom: 15px;
+      opacity: 0.5;
+    }
+  }
+}

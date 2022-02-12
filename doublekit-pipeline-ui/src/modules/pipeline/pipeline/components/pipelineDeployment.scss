@@ -1,0 +1,57 @@
+.newDeployment{
+  overflow: hidden;
+  height: calc(100vh - 75px);
+  //共同样式
+  h1{
+    background-color: 	#F5F5F5;
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+  .anchor{
+    margin:30px 50px 50px;
+  }
+  .newDeployment-radio {
+    margin-bottom: 30px;
+  }
+  //内容样式
+  .newDeployment-bottom{
+    .newDeployment-tab{
+      display: flex;
+      margin-top: 15px ;
+      ul{
+        .ac{
+          background-color:#F5F5F5;
+        }
+        li{
+          height:50px;
+          line-height:50px;
+          float: left;
+          a{
+            padding:0 10px;
+            display:block;
+            color: black;
+            &:hover{
+              background-color:#F5F5F5;
+            }
+          }
+        }
+      }
+    }
+    .newDeployment-bc{
+      height: 75vh;
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      .newDeployment-con{
+        overflow: auto;
+        height: 100%;
+      }
+      .btn{
+        position:fixed;
+        z-index:999;
+        bottom:15px
+      }
+    }
+
+  }
+}
