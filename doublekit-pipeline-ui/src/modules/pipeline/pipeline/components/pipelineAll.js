@@ -4,14 +4,20 @@ import {withRouter} from "react-router-dom";
 import {observer,inject} from "mobx-react";
 
 const PipelineAll= props=>{
+
     const {PIPELINE_STORE}=props
-    const {selectAllPipelineHistory,pipelineList}=PIPELINE_STORE
+    const {selectPipelineStatus,pipelineList}=PIPELINE_STORE
+
     useEffect(()=>{
-        selectAllPipelineHistory()
+        selectPipelineStatus()
     },[])
-    const goPipelineTask=(text,id)=>{
-        props.history.push('/home/task/work',text)
+
+    const goPipelineTask=(text,record)=>{
+        localStorage.setItem('pipelineName',text)
+        localStorage.setItem('pipelineId',record.pipelineId)
+        props.history.push('/home/task/work')
     }
+
     const columns = [
         {
             title: '收藏',
@@ -19,9 +25,9 @@ const PipelineAll= props=>{
             key:"collection",
             render:()=>{
                 return(
-                    <>
+                    <span>
                         收藏
-                    </>
+                    </span>
                 )
             }
         },
@@ -32,11 +38,16 @@ const PipelineAll= props=>{
         },
         {
             title: '任务名',
-            dataIndex: 'projectName',
-            key: 'projectName',
+            dataIndex: 'pipelineName',
+            key: 'pipelineName',
             render:(text,record)=>{
                 return(
-                    <span onClick={()=>goPipelineTask(text,record.id)} className = "span-bottom">
+                    <span
+                        onClick={()=>
+                            goPipelineTask(text,record)
+                        }
+                        className = "span-bottom"
+                    >
                         {text}
                     </span>
                 )
@@ -67,8 +78,7 @@ const PipelineAll= props=>{
     ];
     return(
             <Table
-                rowKey={record => record.id}
-                bordered
+                rowKey={record => record.pipelineId}
                 columns={columns}
                 dataSource={pipelineList}
             />

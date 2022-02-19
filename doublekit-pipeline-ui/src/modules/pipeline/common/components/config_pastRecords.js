@@ -7,8 +7,9 @@ import Config_pastRecordsScreenModal from "./config_pastRecordsScreenModal";
 
 const PastRecordsTask=props=>{
     const [visible, setVisible] = useState(false);
+
     const onCreate = (values) => {
-        console.log('Received values of form: ', values);
+
         setVisible(false);
     };
     return(
@@ -18,7 +19,7 @@ const PastRecordsTask=props=>{
                 <Button type='primary' onClick={()=>props.history.push('/home/task/config')}>
                     返回
                 </Button>
-                <Button onClick={this.onclick}>
+                <Button onClick={()=> setVisible(true)}>
                     筛选
                 </Button>
 

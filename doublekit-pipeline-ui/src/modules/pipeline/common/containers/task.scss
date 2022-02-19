@@ -48,8 +48,13 @@
 
 //配置
 .task-config{
-  overflow: hidden;
   height: calc(100vh - 75px);
+  input{
+    width: 70vh;
+  }
+  &-hidden{
+    margin-top: 15px;
+  }
   &-top{
     &-btn{
       float: right;
@@ -81,7 +86,7 @@
   &-bottom{
     height: 75vh;
     h1{
-      background-color: 	#F5F5F5;
+      background-color:#F5F5F5;
       margin-bottom: 30px;
       font-size: 18px;
     }
@@ -89,13 +94,12 @@
       margin:10px 0 50px;
     }
     &-con{
-      overflow: auto;
       height: 100%;
     }
     .btn{
       position:fixed;
       z-index:999;
-      bottom:15px
+      bottom:50px
     }
   }
   &-radio{

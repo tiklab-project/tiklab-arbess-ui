@@ -1,11 +1,29 @@
-import React from 'react'
-import { Button,Input} from "antd";
-import {withRouter} from "react-router";
+import React,{useEffect} from 'react'
+import { Button,Input,message} from "antd";
+import {withRouter} from "react-router-dom";
 import {PlusOutlined} from "@ant-design/icons";
+import {inject, observer} from "mobx-react";
 
 const { Search } = Input;
 
 const PipelineHeader=props=>{
+
+    const {PIPELINE_STORE}=props
+    const {selectName}=PIPELINE_STORE
+
+    const onSearch = values =>{
+        let param = {
+            pipelineName: values,
+        }
+        selectName(param).then(res=>{
+            if (res.data.length===0){
+                message.info('没有该流水线')
+            }else {
+                props.history.push('/home/searchresult')
+            }
+        })
+    }
+
     return(
         <>
             <div>
@@ -23,9 +41,9 @@ const PipelineHeader=props=>{
                 </div>
             </div>
             <div className='pipeline-top-s'>
-                <Search placeholder="请输入流水线" style={{ width: 200 }} />
+                <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 200 }} />
             </div>
         </>
     )
 }
-export default withRouter(PipelineHeader)
+export default withRouter(inject('PIPELINE_STORE')(observer(PipelineHeader)))

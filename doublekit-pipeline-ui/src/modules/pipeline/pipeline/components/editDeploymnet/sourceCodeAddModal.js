@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {Form, Select, Input, Modal} from "antd";
 
 const { Option } = Select;
 
 const SourceCodeAddModal=({visible, onCreate, onCancel,})=>{
+
     const [form] = Form.useForm();
     return (
        <Modal
            visible={visible}
+           closable={false}
            okText="确认"
            cancelText="取消"
            onCancel={onCancel}
@@ -23,26 +25,37 @@ const SourceCodeAddModal=({visible, onCreate, onCancel,})=>{
                    });
            }}
        >
-           <Form form={form} layout="vertical" name="userForm">
-               <Form.Item label='凭证作用域'>
-                   <Select defaultValue='a'>
-                       <Option value="a">全局凭证</Option>
-                       <Option value="b">系统凭证</Option>
+           <Form form={form} layout="vertical" name="userForm" >
+               <Form.Item label='凭证作用域' name={'proofScope'}>
+                   <Select placeholder='选择作用域'>
+                       <Option value="1">全局凭证</Option>
+                       <Option value="2">系统凭证</Option>
                    </Select>
                </Form.Item>
-               <Form.Item label='凭证类型'>
-                   <Select defaultValue='a' placeholder="SSH">
-                       <Option value="a">SSH</Option>
-                       <Option value="b">password</Option>
+               <Form.Item label={'凭证名称'} name={'proofName'}>
+                   <Input placeholder='名称'/>
+               </Form.Item>
+               <Form.Item label='凭证类型' name={'proofType'}>
+                   <Select placeholder='选择类型'>
+                       <Option value="SSH">SSH</Option>
+                       <Option value="password">password</Option>
                    </Select>
                </Form.Item>
-               <Form.Item name='username' label='username'>
-                   <Input placeholder='用户名'/>
-               </Form.Item>
-               <Form.Item name='password' label='password'>
-                   <Input placeholder='密码'/>
-               </Form.Item>
-               <Form.Item name='info' label='描述'>
+               <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.proofType !== currentValues.proofType}>
+                   {({ getFieldValue })=>
+                       getFieldValue('proofType') === 'password' ? (
+                       <>
+                           <Form.Item name='proofUsername' label='username'>
+                               <Input placeholder='账号'/>
+                           </Form.Item>
+                           <Form.Item name='proofPassword' label='password'>
+                               <Input placeholder='密码'/>
+                           </Form.Item>
+                       </>
+                       ):null
+                   }
+              </Form.Item>
+               <Form.Item name='proofDescribe' label='描述'>
                    <Input.TextArea  placeholder='备注'/>
                </Form.Item>
            </Form>

@@ -8,6 +8,7 @@ const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/containers
 const New=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineAdd'))
 const NewDeployment=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineDeployment'))
 const Task=AsyncComponent(()=>import('./modules/pipeline/common/containers/task'))
+const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/searchResult'))
 
 //任务
 // 工作空间
@@ -48,6 +49,10 @@ export const routers=[
             {
                 path:'/home/deployment',
                 component:NewDeployment,
+            },
+            {
+                path:'/home/searchresult',
+                component:SearchResult,
             },
             {
                 path:'/home/task',

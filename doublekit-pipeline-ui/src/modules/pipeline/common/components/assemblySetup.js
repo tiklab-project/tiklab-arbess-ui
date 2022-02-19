@@ -1,12 +1,42 @@
-import React from 'react'
-import {Input, Form, Button,Popconfirm} from "antd";
+import React,{useEffect} from 'react'
+import {Input, Form, Button, Popconfirm, message} from "antd";
+import {observer,inject} from "mobx-react";
 
 const AssemblyTask=props=>{
+
+    const {ASSEMBLYSETUP_STORE}=props
+
+    const {deletePipeline,updatePipeline}=ASSEMBLYSETUP_STORE
+
+    const [form]=Form.useForm()
+
+    const pipelineId=localStorage.getItem('pipelineId')
+
+    const onConfirm=()=>{
+        deletePipeline(pipelineId)
+        props.history.push('/home/pipeline')
+    }
+
+    const onFinish=(values)=>{
+        let params={
+            pipelineId:localStorage.getItem('pipelineId'),
+            pipelineName:values.pipelineName
+        }
+        updatePipeline(params).then(res=>{
+            if(res.data===null){
+                message.info('名称已经存在')
+            }else {
+                localStorage.setItem('pipelineName',values.pipelineName);
+                props.history.push('/home/task/work')
+            }
+        })
+    }
+
     return(
         <div className='task-assembly'>
             <div className='task-assembly-top'>
-                <Form layout="inline">
-                    <Form.Item  label="重命名" >
+                <Form onFinish={onFinish} form={form} layout="inline">
+                    <Form.Item  label="重命名" name='pipelineName'>
                         <Input />
                     </Form.Item>
                     <Form.Item>
@@ -19,9 +49,7 @@ const AssemblyTask=props=>{
             <div className='task-assembly-bottom'>
                 <Popconfirm
                     title="你确定删除吗"
-                    onConfirm={()=>{
-                        props.history.push('/home/pipeline')
-                    }}
+                    onConfirm={onConfirm}
                     okText="确定"
                     cancelText="取消"
                 >
@@ -34,4 +62,4 @@ const AssemblyTask=props=>{
         </div>
     )
 }
-export default AssemblyTask
+export default inject('ASSEMBLYSETUP_STORE')(observer(AssemblyTask))

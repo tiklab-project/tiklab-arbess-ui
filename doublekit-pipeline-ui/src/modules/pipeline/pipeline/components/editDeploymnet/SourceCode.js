@@ -1,85 +1,103 @@
-import React,{Component} from 'react'
-import {Button,Radio,Input,Form,Modal} from "antd";
+import React,{useState,useEffect} from 'react'
+import {Button, Radio, Input, Form, Space} from "antd";
 import SourceCodeAddModal from "./sourceCodeAddModal";
 import { Select } from 'antd';
 
-const { Option } = Select;
-class SourceCode extends Component{
-    state={
-        formStatus:'none',
-        isModalVisible:false
-    }
-    handlerRadio=(e)=>{
-        if(e.target.value==='b'){
-            if(this.state.formStatus==='none'){
-                this.setState({
-                    formStatus:"block"
-                })
-            }
-        }
-        if(e.target.value==='a'){
-            if(this.state.formStatus){
-                this.setState({
-                    formStatus:"none"
-                })
-            }
-        }
-    }
-    showModal=()=>{
-        this.setState({
-            isModalVisible:true
-        })
-    }
-    onCreate=()=>{
-        this.setState({
-            isModalVisible:false
-        })
-    }
-    onCancel=()=>{
-        this.setState({
-            isModalVisible:false
-        })
-    }
-    render() {
-        return(
-            <div className='anchor'>
-                <h1>源码管理</h1>
-               <div className='newDeployment-radio'>
-                   <Radio.Group defaultValue='a' onChange={this.handlerRadio}>
-                       <Radio value='a'>无</Radio>
-                       <Radio value='b' >git</Radio>
-                   </Radio.Group>
-               </div>
-                <Form
-                    layout="vertical"
-                    style={{display:this.state.formStatus}}
-                >
-                    <Form.Item name="address" label="地址">
-                        <Input  />
-                    </Form.Item>
-                    <Form.Item name='option'>
-                        <Select  placeholder="凭证" style={{ width: 150 }} >
-                            <Option value="a">凭证</Option>
-                            <Option value="b">SSH</Option>
-                            <Option value="c">password</Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item>
-                        <Button onClick={this.showModal}>
-                            添加
-                        </Button>
-                    </Form.Item>
-                </Form>
-                <SourceCodeAddModal
-                    visible={this.state.isModalVisible}
-                    onCreate={this.onCreate}
-                    onCancel={this.onCancel}
-                    okText="确认"
-                    cancelText="取消"
-                />
-            </div>
+import {inject, observer} from "mobx-react";
 
-        )
+const { Option } = Select;
+
+const SourceCode = props => {
+
+    const {PROOF_STORE}=props
+    const {createProof,selectAllProof,selectProofName,allProof}=PROOF_STORE
+
+    const [value,setValue]=useState('a')
+    const [visible,setVisible]=useState(false)
+
+
+    const handlerRadio = e =>{
+        setValue(e.target.value)
     }
+
+    const onCreate=(values)=>{
+        let param = {
+            proofScope:values.proofScope,
+            proofType:values.proofType,
+            proofName:values.proofName,
+            proofUsername:values.proofUsername,
+            proofPassword:values.proofPassword,
+            proofDescribe:values.proofDescribe
+        }
+        createProof(param)
+        setVisible(false)
+    }
+    const onClick = () =>{
+        selectAllProof()
+    }
+    const onChange=(values)=>{
+        console.log(values)
+        localStorage.setItem('proofId',values)
+        selectProofName(values)
+    }
+
+    return(
+        <div className='anchor'>
+            <h1>源码管理</h1>
+            <Form.Item name={'configureCodeSource'} className='newDeployment-radio'>
+                <Radio.Group  onChange={handlerRadio} value={value}>
+                    <Space direction="vertical">
+                        <Radio value='a'>无</Radio>
+                        <Radio value='b' >git
+                        {
+                            value==='b' ?
+                            <div className={'newDeployment-hidden'}>
+                                <Form.Item
+                                    name="configureCodeSourceAddress"
+                                    label="git地址"
+                                    rules={[
+                                        {
+                                            pattern: /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/,
+                                            message:'请输入正确的git地址'
+                                        }
+                                    ]}
+                                >
+                                    <Input  />
+                                </Form.Item>
+                                <Form.Item >
+                                    <Select placeholder="无" style={{ width: 300 }} onChange={onChange} onClick={onClick}>
+                                        {
+                                            allProof.map(item=>{
+                                                return(
+                                                    <Option key={item.proofId} >
+                                                        {item.proofName}
+                                                    </Option>
+                                                )
+                                            })
+                                        }
+
+                                    </Select>
+                                    &nbsp;
+                                    <Button onClick={()=>setVisible(true)}>
+                                        添加
+                                    </Button>
+                                </Form.Item>
+                            </div>:null
+                        }
+                        </Radio>
+                    </Space>
+                </Radio.Group>
+            </Form.Item>
+
+            <SourceCodeAddModal
+                visible={visible}
+                onCreate={onCreate}
+                onCancel={()=>setVisible(false)}
+                okText="确认"
+                cancelText="取消"
+            />
+        </div>
+    )
 }
-export default SourceCode
+
+export default inject('PROOF_STORE')(observer(SourceCode))

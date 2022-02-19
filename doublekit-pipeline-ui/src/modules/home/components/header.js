@@ -33,9 +33,9 @@ const Head =props=>{
                     {renderRouter()}
                 </ul>
                 <ul className="header-content-right">
-                    <li className='header-content-right-search-wrap'>
-                        <Search placeholder="input search text" onSearch={onSearch} style={{ width: 300 ,height:40}} />
-                    </li>
+                    {/*<li className='header-content-right-search-wrap'>*/}
+                    {/*    <Search placeholder="input search text" onSearch={onSearch} style={{ width: 300 ,height:40}} />*/}
+                    {/*</li>*/}
                     <li className={'header-content-right-text'}>
                         <span >欢迎,Admin</span>
                         &nbsp;&nbsp;

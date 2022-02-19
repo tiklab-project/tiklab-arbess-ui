@@ -2,11 +2,10 @@ import React ,{useEffect}from "react";
 import { Breadcrumb } from 'antd';
 import {withRouter} from "react-router-dom";
 import {taskRouters} from "../containers/route";
-
+import {inject, observer} from "mobx-react";
 
 const TaskHeader = props => {
     const {location}=props
-    console.log(location)
     return(
         <Breadcrumb  separator=">">
             <Breadcrumb.Item
@@ -17,7 +16,7 @@ const TaskHeader = props => {
             </Breadcrumb.Item>
 
             <Breadcrumb.Item>
-                {location.state}
+                {localStorage.getItem('pipelineName')}
             </Breadcrumb.Item>
 
             {

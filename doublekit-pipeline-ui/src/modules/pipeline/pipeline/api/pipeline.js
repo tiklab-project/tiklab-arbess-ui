@@ -8,19 +8,29 @@ export function  CreatePipeline(data){
         data
     })
 }
-//查询所有
-export function SelectPipelineQuery(data) {
+//创建流水线配置
+export function CreatePipelineConfigure(data){
     return serviceLoc.request({
-        url:'/PipelineQuery/selectPipelineQuery',
+        url:'/pipelineConfigure/createPipelineConfigure',
         method:'post',
         data
     })
 }
 
-//创建流水线配置
-export function CreatePipelineConfigure(data){
+//查询所有
+export function SelectPipelineStatus(data) {
     return serviceLoc.request({
-        url:' /pipelineConfigure/createPipelineConfigure',
+        url:'/pipeline/selectPipelineStatus',
+        method:'post',
+        data
+    })
+}
+
+
+//搜索流水线
+export function SelectName(data){
+    return serviceLoc.request({
+        url:'/pipeline/selectName',
         method:'post',
         data
     })

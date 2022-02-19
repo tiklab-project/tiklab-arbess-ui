@@ -6,19 +6,35 @@
     width: 80%;
     height: 80%;
     margin: auto;
+    form{
+      border: 1px solid #cccccc;
+      background-color: #F8F8FF;
+      &>div{
+        margin:20px 15px;
+      }
+    }
     &-type{
-     &-choose{
-       cursor: pointer;
-       &:active{
-         background-color: #F5F5F5;
-         border: 1px solid black;
-       }
+      width: 100%;
+      border: 1px solid #cccccc;
+      &-choose{
+        margin: 10px;
+        cursor: pointer;
+        &-c{
+          padding: 4px;
+          span{
+            font-weight: bold;
+            font-size: 18px;
+          }
+        }
      }
+      &-active{
+        border: 1px solid transparent;
+        background-color: #F5F5F5;
+      }
     }
     &-btn{
       position: fixed;
-      bottom: 15px;
-      opacity: 0.5;
+      bottom: 50px;
     }
   }
 }

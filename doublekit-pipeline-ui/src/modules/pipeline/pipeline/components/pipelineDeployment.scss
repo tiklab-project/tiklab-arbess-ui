@@ -1,6 +1,9 @@
 .newDeployment{
   overflow: hidden;
   height: calc(100vh - 75px);
+  input{
+    width: 100vh;
+  }
   //共同样式
   h1{
     background-color: 	#F5F5F5;
@@ -10,11 +13,14 @@
   .anchor{
     margin:30px 50px 50px;
   }
-  .newDeployment-radio {
+  &-hidden{
+    margin-top:15px;
+  }
+  &-radio {
     margin-bottom: 30px;
   }
   //内容样式
-  .newDeployment-bottom{
+  &-bottom{
     .newDeployment-tab{
       display: flex;
       margin-top: 15px ;
@@ -38,12 +44,12 @@
       }
     }
     .newDeployment-bc{
-      height: 75vh;
-      border-left: 1px solid #ccc;
-      border-top: 1px solid #ccc;
-      border-right: 1px solid #ccc;
+      //height: 75vh;
+      //border-left: 1px solid #ccc;
+      //border-top: 1px solid #ccc;
+      //border-right: 1px solid #ccc;
       .newDeployment-con{
-        overflow: auto;
+        //overflow: auto;
         height: 100%;
       }
       .btn{

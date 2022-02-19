@@ -1,25 +1,16 @@
 import React from "react";
-import {Form, Input,Checkbox } from "antd";
+import {Form, Input } from "antd";
 
-const Action=props=>{
+const ConfigAction=()=>{
+
     return(
-        <div className={'anchor'}>
-            <h1>构建后管理</h1>
-            <Form
-                layout="vertical"
-            >
-                <Form.Item
-                    label='部署位置'
-                >
-                    <Input/>
-                </Form.Item>
-                <Form.Item>
-                    <Checkbox >
-                        Checkbox
-                    </Checkbox>
-                </Form.Item>
-            </Form>
+        <div className=' anchor'>
+            <h1>构建后操作</h1>
+            <Form.Item name={'configureDeployAddress'} label='部署位置'>
+                <Input/>
+            </Form.Item>
         </div>
     )
 }
-export default Action
+
+export default ConfigAction

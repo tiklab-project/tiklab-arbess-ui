@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL='http://192.168.2.9:8080'
+const BASE_URL='http://192.168.10.100:8080'
 const serviceLoc = axios.create({
     baseURL:BASE_URL,
     timeout: 5000

@@ -1,16 +1,17 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import SourceCode from "./editDeploymnet/SourceCode";
-import Build from "./editDeploymnet/build";
+import Structure from "./editDeploymnet/structure";
 import Deploy from "./editDeploymnet/deploy";
-import {Breadcrumb, Button} from "antd";
+import {Breadcrumb, Button, Form} from "antd";
+import moment from "../../../../common/moment/moment";
 import {withRouter} from "react-router-dom"
+import {inject, observer} from "mobx-react";
 
 const scrollToAnchor = (anchorName) => {
     if (anchorName) {
         let anchorElement = document.getElementById("box");
         let a = document.getElementById(anchorName)
         if (anchorElement) {
-            console.log(anchorElement.scrollTop,a.offsetTop)
             anchorElement.scrollTop = a.offsetTop -200;
         }
     }
@@ -36,13 +37,32 @@ const  handleScroll=()=>{
     }
 }
 
-const PipelineDeployment= props=>{
-    const route=props.location
+const PipelineDeployment=props=>{
+
+    const {PIPELINE_STORE}=props
+    const {createPipelineConfigure}=PIPELINE_STORE
+
+    const onFinish=(values)=>{
+        let configure={
+            configureCodeSource:values.configureCodeSource,
+            configureCodeSourceAddress:values.configureCodeSourceAddress,
+            configureCodeStructure:values.configureCodeStructure,
+            configureStructureAddress:values.configureStructureAddress,
+            configureStructureOrder:values.configureStructureOrder,
+            configureDeployAddress:values.configureDeployAddress,
+            configureCreateTime:moment.moment,
+            pipelineId:localStorage.getItem('pipelineId'),
+            proofId:localStorage.getItem('proofId'),
+        }
+        createPipelineConfigure(configure)
+        props.history.push('/home/task')
+    }
+
     return (
         <div className='newDeployment' >
             <Breadcrumb separator=">">
                 <Breadcrumb.Item>流水线</Breadcrumb.Item>
-                <Breadcrumb.Item href="">{route.state.pipelineName}</Breadcrumb.Item>
+                <Breadcrumb.Item href="">{localStorage.getItem('pipelineName')}</Breadcrumb.Item>
             </Breadcrumb>
             <div className='newDeployment-bottom'>
                 <div className='newDeployment-tab'>
@@ -66,15 +86,31 @@ const PipelineDeployment= props=>{
                 </div>
                 <div className='newDeployment-bc'>
                     <div className='newDeployment-con' id='box' onScroll={handleScroll} >
-                        <div id="a1" ><SourceCode /></div>
-                        <div id="a2">
-                            <Build />
-                        </div>
-                        <div id="a3"><Deploy/></div>
-                        <div style={{backgroundColor:"white",height:100}} />
+                        <Form
+                            onFinish={onFinish}
+                            id={'form'}
+                            initialValues={{"configureCodeStructure":'b',"configureCodeSource":'a'}}
+                            layout="vertical"
+                            autoComplete = "off"
+                        >
+                            <div id="a1" >
+                                <SourceCode />
+                            </div>
+                            <div id="a2">
+                                <Structure   />
+                            </div>
+                            <div id="a3">
+                                <Deploy/>
+                            </div>
+                        </Form>
+                        <div style={{backgroundColor:"white",height:700}} />
                     </div>
                     <div className={'btn'}>
-                        <Button type='primary' style={{marginLeft:30,marginRight:30}}
+                        <Button
+                            htmlType='submit'
+                            form='form'
+                            type='primary'
+                            style={{marginLeft:30,marginRight:30}}
                         > 保存</Button>
                         <Button>取消</Button>
                     </div>
@@ -83,4 +119,4 @@ const PipelineDeployment= props=>{
         </div>
     )
 }
-export default withRouter(PipelineDeployment)
+export default withRouter(inject('PIPELINE_STORE')(observer(PipelineDeployment)))
