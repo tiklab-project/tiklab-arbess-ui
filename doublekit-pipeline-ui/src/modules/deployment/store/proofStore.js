@@ -39,7 +39,6 @@ class ProofStore{
         SelectAllProof().then(res=>{
             console.log("添加后查看凭证",res)
             this.allProof=res.data.data
-            localStorage.setItem('allProof',JSON.stringify( this.allProof))
         }).catch(error=>{
             console.log(error)
         })
@@ -48,15 +47,17 @@ class ProofStore{
     @action
     selectProofName = values =>{
         const params = qs.stringify({proofId: values})
-        SelectProofName(params).then(res=>{
-            console.log("查找流水名称",res)
-            this.proofName=res.data.data
-            localStorage.setItem('proofName',this.proofName)
-        }).catch(error=>{
-            console.log(error)
+        return new Promise((resolve, reject)=>{
+            SelectProofName(params).then(res=>{
+                console.log("查找流水名称",res)
+                this.proofName=res.data.data
+                resolve(res.data)
+                // localStorage.setItem('proofName',this.proofName)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
         })
     }
-
-
 }
 export default ProofStore

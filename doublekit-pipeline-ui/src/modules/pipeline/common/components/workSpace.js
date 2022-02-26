@@ -2,6 +2,7 @@ import React from 'react'
 import {withRouter} from "react-router-dom";
 
 const WorkTask=props=>{
+
     return(
         <div className='task-work'>
             <div className='task-work-top'>
@@ -22,4 +23,5 @@ const WorkTask=props=>{
         </div>
     )
 }
+
 export default withRouter(WorkTask)

@@ -2,6 +2,7 @@ import React,{Component} from "react";
 import {Input, Form, Radio, Space} from "antd";
 
 class ConfigStructure  extends Component{
+
     constructor(props) {
         super(props)
         this.state = {

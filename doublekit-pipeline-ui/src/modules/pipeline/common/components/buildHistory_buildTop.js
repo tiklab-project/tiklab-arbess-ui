@@ -23,7 +23,6 @@ const BuildHistory_buildTop=props=>{
                         删除本次构建
                     </Button>
                 </Popconfirm>
-
             </div>
         </div>
     )

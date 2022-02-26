@@ -35,14 +35,21 @@ const SourceCode = props => {
     const onClick = () =>{
         selectAllProof()
     }
-    const onChange=(values)=>{
-        console.log(values)
-        localStorage.setItem('proofId',values)
-        selectProofName(values)
+    const onChange=(value)=>{
+
+        selectProofName(value).then(res=>{
+            console.log(res)
+        })
+        if(!value){
+            localStorage.setItem('proofId',null)
+        }else {
+            localStorage.setItem('proofId',value)
+        }
+
     }
 
     return(
-        <div className='anchor'>
+        <div className='anchor-content'>
             <h1>源码管理</h1>
             <Form.Item name={'configureCodeSource'} className='newDeployment-radio'>
                 <Radio.Group  onChange={handlerRadio} value={value}>
@@ -64,12 +71,20 @@ const SourceCode = props => {
                                 >
                                     <Input  />
                                 </Form.Item>
+                                <Form.Item
+                                    name="master"
+                                    label="分支"
+                                    defaultValue={'master'}
+
+                                >
+                                    <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
+                                </Form.Item>
                                 <Form.Item >
                                     <Select placeholder="无" style={{ width: 300 }} onChange={onChange} onClick={onClick}>
                                         {
                                             allProof.map(item=>{
                                                 return(
-                                                    <Option key={item.proofId} >
+                                                    <Option key={item.proofId}>
                                                         {item.proofName}
                                                     </Option>
                                                 )

@@ -6,6 +6,7 @@ const { Option } = Select;
 
 
 const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
+
     const [form]=Form.useForm()
     const oK=()=>{
         form
@@ -29,17 +30,9 @@ const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
             <Form
                 form={form}
                 layout="vertical"
-                initialValues={{
-                    username:"a",
-                    mode:"a",
-                    code:"a",
-                    voucher:"a"
-                }}
+                initialValues={{username:"a", mode:"a", code:"a", voucher:"a"}}
             >
-                <Form.Item
-                    label="状态"
-                    name="status"
-                >
+                <Form.Item label="状态" name="status">
                     <Checkbox.Group style={{ width: '100%' ,marginBottom:-10}}>
                         <Row>
                             <Col span={6}>
@@ -51,47 +44,31 @@ const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
                             <Col span={6}>
                                 <Checkbox value="C">失败</Checkbox>
                             </Col>
-
                         </Row>
                     </Checkbox.Group>
                 </Form.Item>
-                <Form.Item
-                    name="time"
-                    label='时间'
-                >
+                <Form.Item name="time" label='时间'>
                     <RangePicker />
                 </Form.Item>
-                <Form.Item
-                    name='username'
-                    label='执行人'
-                >
+                <Form.Item name='username' label='执行人'>
                     <Select  >
                         <Option value="a">admin</Option>
                         <Option value="b">lucy</Option>
                     </Select>
                 </Form.Item>
-                <Form.Item
-                    name='mode'
-                    label='执行方式'
-                >
+                <Form.Item name='mode' label='执行方式'>
                     <Select >
                         <Option value="a">自动</Option>
                         <Option value="b">手动</Option>
                     </Select>
                 </Form.Item>
-                <Form.Item
-                    name='code'
-                    label='代码源'
-                >
+                <Form.Item name='code' label='代码源'>
                     <Select >
                         <Option value="a">git</Option>
                         <Option value="b">SVN</Option>
                     </Select>
                 </Form.Item>
-                <Form.Item
-                    label='凭证'
-                    name='voucher'
-                >
+                <Form.Item label='凭证' name='voucher'>
                     <Select >
                         <Option value="a">SSH</Option>
                         <Option value="b">password</Option>
@@ -101,4 +78,5 @@ const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
         </Modal>
     )
 }
+
 export default BuildHistoryScreenModal;

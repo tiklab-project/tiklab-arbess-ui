@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/api/requset";
+import {serviceLoc} from "../../../common/api/requset";
 
 //创建凭证
 export function CreateProof(data){

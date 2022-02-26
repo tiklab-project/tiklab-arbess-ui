@@ -4,6 +4,7 @@ import {Form, Select,Input,Modal} from "antd";
 const { Option } = Select;
 
 const ConfigSourceAddModal=({visible,onCancel,onCreate})=>{
+
     const [form]=Form.useForm()
     const oK=()=>{
         form
@@ -16,6 +17,7 @@ const ConfigSourceAddModal=({visible,onCancel,onCreate})=>{
                 console.log('校验失败:', info);
             })
     }
+
     return (
         <Modal
             visible={visible}
@@ -62,6 +64,5 @@ const ConfigSourceAddModal=({visible,onCancel,onCreate})=>{
         </Modal>
     )
 }
-
 
 export default ConfigSourceAddModal

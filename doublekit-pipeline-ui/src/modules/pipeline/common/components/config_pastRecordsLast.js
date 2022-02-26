@@ -1,26 +1,46 @@
 import React from "react";
-
+const lis=[
+    {
+        id:'1',
+        title:"更改人",
+        desc:"admin",
+    },
+    {
+        id:'2',
+        title:"更改时间",
+        desc:" 2022年1月11：41：42",
+    },
+    {
+        id:'3',
+        title:"状态",
+        desc:"成功",
+    },
+    {
+        id:'4',
+        title:"源码管理",
+        desc:"git@192.168.2.101:devops/doublekit-jtest.git",
+    },
+    {
+        id:'5',
+        title:"部署",
+        desc:" D:\idea\doublekit"
+    }
+]
 const Config_pastRecordsLast= props =>{
     return(
-        <div className='last-config'>
-            <div className='task-pastRecord-config-left user'>更改人</div>
-            <div className='task-pastRecord-config-right '>admin</div>
-
-            <div className='task-pastRecord-config-left time'>更改时间</div>
-            <div className='task-pastRecord-config-right '> 2022年1月11：41：42</div>
-
-            <div className='task-pastRecord-config-left status'>状态</div>
-            <div className='task-pastRecord-config-right '>成功</div>
-
-            <div className='task-pastRecord-config-deploy'>源码管理</div>
-            <div className='task-pastRecord-config-res'> git@192.168.2.101:devops/doublekit-jtest.git</div>
-
-            <div className='task-pastRecord-config-deploy'>构建</div>
-            <div className='task-pastRecord-config-res'>clean install package</div>
-
-            <div className='task-pastRecord-config-deploy'>部署</div>
-            <div className='task-pastRecord-config-res'> D:\idea\doublekit</div>
+        <div className='task-pastRecord-last'>
+            {
+                lis && lis.map((item,index)=>{
+                    return(
+                        <div key={item.id} className='task-pastRecord-compare'>
+                            <div className='task-pastRecord-left'>{item.title}</div>
+                            <div className='task-pastRecord-right '>{item.desc}</div>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }
+
 export default Config_pastRecordsLast

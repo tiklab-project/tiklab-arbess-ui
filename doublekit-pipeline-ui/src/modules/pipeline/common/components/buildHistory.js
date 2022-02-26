@@ -3,11 +3,13 @@ import {Button,  Table} from "antd";
 import BuildHistoryScreenModal from "./buildHistoryScreenModal";
 
 const HistoryTask=props=>{
+
     const [visible, setVisible] = useState(false);
     const onCreate = (values) => {
         console.log('Received values of form: ', values);
         setVisible(false);
     };
+
     const columns = [
         {
             title: '构建',
@@ -55,6 +57,7 @@ const HistoryTask=props=>{
             key: 'master',
         },
     ]
+
     const dataSource=[
         {
             key:"1",
@@ -69,6 +72,7 @@ const HistoryTask=props=>{
             master:"master",
         }
     ]
+
     return(
         <div className='task-history'>
             <div className='task-history-top'>

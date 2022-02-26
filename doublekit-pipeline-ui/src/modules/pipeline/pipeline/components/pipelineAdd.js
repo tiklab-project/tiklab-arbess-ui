@@ -1,31 +1,33 @@
-import React, {useEffect, useState} from "react";
-import {Form, Input, Button,message} from "antd";
-import {ApiOutlined} from "@ant-design/icons";
+import React, { useState} from "react";
+import {Form, Input, Button} from "antd";
 import {observer,inject} from "mobx-react";
 import moment from "../../../../common/moment/moment";
 
+const lis= [
+    {
+        id: "0",
+        title: "流水线",
+        desc: "精心地组织一个可以长期运行在多个节点上的任务。适用于构建流水线（更加正式地应当称为工作流），增加或者组织难以采用自由风格的任务类型。"
+    },
+    {
+        id: "1",
+        title: "构建一个maven项目",
+        desc: "构建一个maven项目."
+    }
+]
+
 const PipelineAdd = props => {
 
-    let {PIPELINE_STORE}=props
-    const {createPipeline}=PIPELINE_STORE
+    const {PIPELINE_STORE}=props
+    const {createPipeline,pipelineList}=PIPELINE_STORE
 
-    const pipelineList=JSON.parse(localStorage.getItem('pipelineList'))
+    const pipelineLis=JSON.parse(localStorage.getItem('pipelineList'))
 
-    const [btn,setBtn]=useState(true)
+    const [liStatus, setLiStatus] = useState(0)
 
-    const inputOnChange=(e)=>{
-        pipelineList.map(item=>{
-            if(item.pipelineName===e.target.value){
-                message.info('名称已经存在')
-                setBtn(true)
-            }
-        })
-    }
-
-    const onclick=(e)=>{
-        const div = e.target.parentNode;
-        div.classList.add("new-content-type-active")
-        setBtn(false)
+    //点击类型选择
+    const liStatusData = index => {
+        setLiStatus(index)
 
     }
 
@@ -36,62 +38,74 @@ const PipelineAdd = props => {
             pipelineType:1,
             pipelineCreateTime:moment.moment
         }
-
         createPipeline(aa).then(res=>{
-            // if (res.data===null){
-            //     message.info('名称已经存在')
-            // }else {
-            //     localStorage.setItem('pipelineName',aa.pipelineName)
-            //     props.history.push('/home/deployment',value)
-            // }
             localStorage.setItem('pipelineName',aa.pipelineName)
             props.history.push('/home/deployment',value)
         })
     }
 
-
     return(
         <div className='new'>
-            <div className='new-content'>
-                <Form
-                    id='form'
-                    name="basic"
-                    onFinish={handSubmit}
-                    autoComplete = "off"
-                >
+            <Form id='form' name="basic" onFinish={handSubmit} autoComplete = "off">
                     <Form.Item
-                        rules={[
-                            {
-                                required: true,
-                                message: '请输入流水线名称'
-                            }
-                        ]}
                         label="流水线名称"
                         name="pipelineName"
+                        rules={[
+                            {
+                                required:true,
+                                message:""
+                            },
+                            ({ getFieldValue }) => ({
+                                validator(rule, value) {
+                                    if (!value) {
+                                        return Promise.reject('请输入名称')
+                                    }
+                                    const nameArray = pipelineLis.map(item => item.pipelineName);
+                                    if (nameArray.includes(value)) {
+                                        return Promise.reject('名称已经存在');
+                                    }
+                                    return Promise.resolve()
+                                },
+                            }),
+                        ]}
                     >
-                        <Input style={{width:400}} onChange={inputOnChange} />
+                        <Input
+                            style={{width:400}}
+                            // onChange={inputOnChange}
+                        />
                     </Form.Item>
-                </Form>
-                <div  className={'new-content-type'}>
-                    <div onClick={onclick}  className={'new-content-type-choose'} >
-                       <div className={'new-content-type-choose-c'} >
-                            <span>
-                                <ApiOutlined />&nbsp;流水线
-                            </span>
-                           <p>
-                               精心地组织一个可以长期运行在多个节点上的任务。适用于构建流水线（更加正式地应当称为工作流），增加或者组织难以采用自由风格的任务类型。
-                           </p>
-                       </div>
-
-                    </div>
-                </div>
-                <div className='new-content-btn'>
-                    <Button htmlType="submit"  form="form" type='primary' disabled={btn} >
+            </Form>
+            <div  className={'new-type'}>
+                <ul className={  "new-type-choose"}>
+                    {
+                        lis.map((item,index) => {
+                            return (
+                                <li
+                                    key={item.id}
+                                    onClick={()=> liStatusData(index) }
+                                    className={ liStatus === index ? "new-type-choose-c new-type-active":"new-type-choose-c "}
+                                >
+                                    <label>
+                                        {item.title}
+                                    </label>
+                                    <div>
+                                        {item.desc}
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </div>
+            <div className='new-btn'>
+                <span className='new-btn-span'>
+                    <Button htmlType="submit"  form="form" type='primary' >
                         添加
                     </Button>
-                </div>
+                </span>
             </div>
         </div>
     )
 }
+
 export default inject('PIPELINE_STORE')(observer(PipelineAdd))

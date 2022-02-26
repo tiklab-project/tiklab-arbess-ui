@@ -4,8 +4,8 @@ import SourceCodeAddModal from "./configSourceAddModal";
 
 const { Option } = Select;
 
-
 class ConfigSourceCode extends Component{
+
     constructor(props) {
         super(props)
         this.state = {
@@ -41,18 +41,21 @@ class ConfigSourceCode extends Component{
         this.props.createProof(param)
         this.setState({visible:false})
     }
+
     onClick= () =>{
        this.props.selectAllProof()
     }
+
     onChange = (value) =>{
-        this.props.selectProofName(value)
+        this.props.selectProofName(value).then(res=>{
+            console.log(res)
+        })
+        localStorage.setItem('proofId',value)
     }
 
     render() {
 
         const {value}=this.state
-        // const allProof=JSON.parse(localStorage.getItem('allProof'))
-        const proofName=localStorage.getItem('proofName')
 
         return(
             <div className='anchor'>
@@ -77,13 +80,16 @@ class ConfigSourceCode extends Component{
                                         >
                                             <Input  />
                                         </Form.Item>
+                                        <Form.Item name="master" label="分支" defaultValue={'master'}>
+                                            <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
+                                        </Form.Item>
                                         <Form.Item>
                                             <Select
                                                 placeholder="无"
                                                 style={{ width: 300 }}
                                                 onChange={this.onChange}
                                                 onClick={this.onClick}
-                                                defaultValue={proofName}
+                                                defaultValue={this.props.proofName}
                                             >
                                             {
                                               this.props.allProof.map(item=>{
@@ -117,4 +123,5 @@ class ConfigSourceCode extends Component{
         )
     }
 }
+
 export default ConfigSourceCode

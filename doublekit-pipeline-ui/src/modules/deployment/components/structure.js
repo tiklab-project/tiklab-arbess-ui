@@ -11,7 +11,7 @@ const Structure = props =>{
     }
 
     return(
-        <div className=' anchor'>
+        <div className=' anchor-content'>
             <h1>构建</h1>
             <Form.Item name={'configureCodeStructure'} className='newDeployment-radio'>
                 <Radio.Group  onChange={handlerRadio} value={value}>

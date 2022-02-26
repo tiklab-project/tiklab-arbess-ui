@@ -4,8 +4,14 @@
   div{
     margin-left: 10vh;
     ul li{
-      cursor: pointer;
-      color: #1890ff;
+      padding: 5px;
+    }
+  }
+  &-link{
+    cursor: pointer;
+    color: #1890ff;
+    &:hover{
+      text-decoration: underline;
     }
   }
 }

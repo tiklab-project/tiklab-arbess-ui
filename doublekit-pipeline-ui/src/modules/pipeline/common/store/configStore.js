@@ -20,8 +20,12 @@ class ConfigStore {
         return new Promise((resolve, reject) => {
             SelectPipelineConfig(params).then(res=>{
                 console.log('查看流水线配置',res)
-                this.pipelineConfig=res.data.data
-                localStorage.setItem('proofId',res.data.data.proofId)
+                this.pipelineConfig=res.data
+                if(!res.data.data) {
+                    localStorage.setItem('proofId', null)
+                }else {
+                    localStorage.setItem('proofId',res.data.data.proofId)
+                }
                 resolve(res.data)
             }).catch(error=>{
                 console.log(error)
@@ -50,10 +54,6 @@ class ConfigStore {
             console.log(error)
         })
     }
-
-
-
-
 }
 
 export default ConfigStore

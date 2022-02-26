@@ -7,16 +7,20 @@ import ConfigStructure from "./configStructure";
 import ConfigAction from "./configAction";
 import {inject, observer} from "mobx-react";
 import moment from "../../../../common/moment/moment";
-import {set} from "mobx";
 
 const scrollToAnchor = (anchorName) => {
     if (anchorName) {
-        let anchorElement = document.getElementById("box");
-        let a = document.getElementById(anchorName)
+        const scrollTop=document.body
+        const anchorElement = document.getElementById(anchorName)
         if (anchorElement) {
-            anchorElement.scrollTop = a.offsetTop-200
+            scrollTop.scrollTop = anchorElement.offsetTop-160 ;
         }
     }
+}
+
+const handleScroll = () => {
+    //浏览器滚动的高度
+    const scrollTop=document.body.scrollTop
 }
 
 const ConfigTask=props=>{
@@ -24,24 +28,22 @@ const ConfigTask=props=>{
     const {CONFIG_STORE,PROOF_STORE}=props
     const {selectPipelineConfig,updatePipelineConfig}=CONFIG_STORE
 
-    const {allProof,createProof,selectProofName,selectAllProof}=PROOF_STORE
+    const {allProof,proofName,createProof,selectProofName,selectAllProof}=PROOF_STORE
 
     const [form] = Form.useForm();
 
     const [sourceValue,setSourceValue]=useState('a')
-
-    // const [name,setName]=useState()
 
     const [structure,setStructure]=useState('b')
 
     const pipelineId=localStorage.getItem('pipelineId')
 
     useEffect(()=>{
+        window.addEventListener('scroll', handleScroll);
         selectPipelineConfig(pipelineId).then(res=>{
             if ( !res.data ) {
-                // setSourceValue('a')
-                // setStructure('b')
-                return  false
+                setSourceValue('a')
+                setStructure('b')
             } else {
                 if ( res.data.configureCodeSource==='b'){
                     setSourceValue('b')
@@ -49,10 +51,10 @@ const ConfigTask=props=>{
                 if (res.data.configureCodeStructure==='a'){
                     setStructure('a')
                 }
+                form.setFieldsValue(res.data)
             }
-            form.setFieldsValue(res.data)
+
         })
-        // selectProofName()
     },[])
 
     const onFinish =(values)=>{
@@ -66,7 +68,6 @@ const ConfigTask=props=>{
             configureCreateTime:moment.moment,
             pipelineId:localStorage.getItem('pipelineId'),
             proofId:localStorage.getItem('proofId'),
-            // proofId:null,
         }
         updatePipelineConfig(configure)
         props.history.push('/home/task/work')
@@ -74,62 +75,63 @@ const ConfigTask=props=>{
 
     return(
         <div className='task-config'>
-            <div  className='task-config-top'>
+            <div  className='task-config-top' id={'scrollB'}>
                 <ConfigTop/>
-                <div className='task-config-top-a' >
-                    <ul className='_cf'>
-                        <li className='ac a '>
-                            <a  onClick={()=>scrollToAnchor('b1')}>
-                                源码管理
-                            </a>
-                        </li>
-                        <li className=' a '>
-                            <a  onClick={()=>scrollToAnchor('b2')}>
-                                构建
-                            </a>
-                        </li>
-                        <li className=' a '>
-                            <a  onClick={()=>scrollToAnchor('b3')}>
-                               构建后管理
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
-            <div className='task-config-bottom'>
-                <div className='task-config-bottom-con' id='box'>
-                   <Form
-                       form={form}
-                       id={'form'}
-                       onFinish={onFinish}
-                       layout="vertical"
-                       autoComplete = "off"
-                   >
-                       <div id='b1'>
-                           <ConfigSourceCode
-                               sourceValue={sourceValue}
-                               allProof={allProof}
-                               createProof={createProof}
-                               selectProofName={selectProofName}
-                               selectAllProof={selectAllProof}
-                           />
-                       </div>
-                       <div id='b2'><ConfigStructure structure={structure}/></div>
-                       <div id='b3'><ConfigAction/></div>
-                       <div style={{height:700}}/>
-                   </Form>
-                </div>
-                <div className='btn'>
-                    <Button
-                        htmlType='submit'
-                        form='form'
-                        type='primary'
-                        style={{marginRight:30}}
+            <div className='task-config-offset'>
+                <div className='task-config-anchor'  id={'scrollA'}>
+                    <div
+                        onClick={()=>scrollToAnchor('a')}
+                        className={'task-config-anchor-d task-config-anchor-active'}
                     >
-                        保存
-                    </Button>
-                    <Button onClick={()=>props.history.push('/home/task/work')}>取消</Button>
+                        源码管理
+                    </div>
+                    <div
+                        onClick={()=>scrollToAnchor('b')}
+                        className={'task-config-anchor-d'}
+                    >
+                        构建
+                    </div>
+                    <div
+                        onClick={()=>scrollToAnchor('c')}
+                        className={'task-config-anchor-d' }
+                    >
+                        部署
+                    </div>
+
                 </div>
+                <Form
+                    onFinish={onFinish}
+                    form={form}
+                    id={'form'}
+                    initialValues={{"configureCodeStructure":'b',"configureCodeSource":'a'}}
+                    layout="vertical"
+                    autoComplete = "off"
+                >
+                    <div id='b1'>
+                        <ConfigSourceCode
+                            sourceValue={sourceValue}
+                            allProof={allProof}
+                            createProof={createProof}
+                            selectProofName={selectProofName}
+                            selectAllProof={selectAllProof}
+                            proofName={proofName}
+                        />
+                    </div>
+                    <div id='b2'><ConfigStructure structure={structure}/></div>
+                    <div id='b3'><ConfigAction/></div>
+                    <div className='task-config-btn'>
+                        <Button
+                            htmlType='submit'
+                            form='form'
+                            type='primary'
+                            style={{marginLeft:30,marginRight:30}}
+                        >
+                            保存
+                        </Button>
+                        <Button onClick={()=>props.history.push('/home/task/config')}>取消</Button>
+                    </div>
+                </Form>
             </div>
         </div>
     )

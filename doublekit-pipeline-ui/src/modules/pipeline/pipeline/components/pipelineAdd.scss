@@ -1,40 +1,37 @@
 .new{
-  margin-top: 30px;
   width: 100%;
   height: 100%;
-  .new-content{
-    width: 80%;
-    height: 80%;
-    margin: auto;
-    form{
-      border: 1px solid #cccccc;
-      background-color: #F8F8FF;
-      &>div{
-        margin:20px 15px;
-      }
+  form{
+    border: 1px solid #cccccc;
+    border-radius: 3px 3px 0 0;
+    background-color:  #eaeff2;
+    &>div{
+      margin:20px 30px;
     }
-    &-type{
-      width: 100%;
-      border: 1px solid #cccccc;
-      &-choose{
+  }
+  &-type{
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius:0 0 3px 3px ;
+    background-color: #F5F5F5;
+    &-choose{
+      &-c{
         margin: 10px;
+        padding: 15px;
         cursor: pointer;
-        &-c{
-          padding: 4px;
-          span{
-            font-weight: bold;
-            font-size: 18px;
-          }
+        &:hover {
+          background-color: #ffffff;
+          border-radius: 3px;
         }
-     }
-      &-active{
-        border: 1px solid transparent;
-        background-color: #F5F5F5;
+        label{
+          font-weight: bold;
+          font-size: 18px;
+        }
       }
     }
-    &-btn{
-      position: fixed;
-      bottom: 50px;
+    &-active{
+      background-color: #ffffff;
+      border-radius: 3px;
     }
   }
 }

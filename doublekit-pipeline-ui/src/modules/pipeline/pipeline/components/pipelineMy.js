@@ -57,12 +57,12 @@ const PipelineMy= props=> {
         },
     ];
     return(
-        <>
-            <Table
-                bordered
-                columns={columns}
-                dataSource={dataSource} />
-        </>
+        <Table
+            bordered
+            columns={columns}
+            dataSource={dataSource}
+        />
+
     )
 }
 

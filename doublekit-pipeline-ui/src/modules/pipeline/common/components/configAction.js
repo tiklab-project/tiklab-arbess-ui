@@ -2,7 +2,6 @@ import React from "react";
 import {Form, Input } from "antd";
 
 const ConfigAction=()=>{
-
     return(
         <div className=' anchor'>
             <h1>构建后操作</h1>

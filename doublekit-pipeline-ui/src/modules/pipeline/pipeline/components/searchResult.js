@@ -7,10 +7,10 @@ import './searchResult.scss'
 
 const SearchResult = props => {
 
-    // const {PIPELINE_STORE}=props
-    // const {searchPipelineList}=PIPELINE_STORE
+    const {PIPELINE_STORE}=props
+    const {searchPipelineList}=PIPELINE_STORE
 
-    const searchPipelineList=JSON.parse(localStorage.getItem('searchPipelineList'))
+    // const searchPipelineList=JSON.parse(localStorage.getItem('searchPipelineList'))
 
     const  goPipelineTask= (text) =>{
         localStorage.setItem('pipelineName',text.pipelineName)
@@ -26,10 +26,9 @@ const SearchResult = props => {
                    {
                        searchPipelineList  && searchPipelineList.map((item,index)=>{
                            return(
-                               <li key={item.pipelineId} onClick={()=>
-                                   goPipelineTask(item)
-                               }>
-                                   {index+1}、{item.pipelineName}
+                               <li key={item.pipelineId} >
+                                   <span> {index+1}、</span>
+                                   <span className={'search-link'} onClick={()=> goPipelineTask(item)}>{item.pipelineName}</span>
                                </li>
                            )
                        })
@@ -40,5 +39,4 @@ const SearchResult = props => {
     )
 }
 
-// export default withRouter(inject('PIPELINE_STORE')(observer(SearchResult)))
-export default withRouter(SearchResult)
+export default withRouter(inject('PIPELINE_STORE')(observer(SearchResult)))

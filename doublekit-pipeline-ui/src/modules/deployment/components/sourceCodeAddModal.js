@@ -55,9 +55,11 @@ const SourceCodeAddModal=({visible, onCreate, onCancel,})=>{
                        ):null
                    }
               </Form.Item>
-               <Form.Item name='proofDescribe' label='描述'>
-                   <Input.TextArea  placeholder='备注'/>
-               </Form.Item>
+              <div style={{marginTop:-20}}>
+                  <Form.Item name='proofDescribe' label='描述'>
+                      <Input.TextArea  placeholder='备注'/>
+                  </Form.Item>
+              </div>
            </Form>
        </Modal>
     )

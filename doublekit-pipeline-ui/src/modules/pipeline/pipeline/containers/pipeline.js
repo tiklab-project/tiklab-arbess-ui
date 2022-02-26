@@ -2,7 +2,7 @@ import React  from "react";
 import PipelineHeader from "../components/pipelineHeader";
 import My from "../components/pipelineMy";
 import All from "../components/pipelineAll";
-import {Button, Tabs} from 'antd';
+import { Tabs} from 'antd';
 import {withRouter} from "react-router-dom";
 
 const { TabPane } = Tabs;

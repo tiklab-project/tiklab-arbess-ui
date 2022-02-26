@@ -6,7 +6,7 @@ const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/containers/pipeline'))
 const New=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineAdd'))
-const NewDeployment=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineDeployment'))
+const NewDeployment=AsyncComponent(()=>import('./modules/deployment/containers/deployment'))
 const Task=AsyncComponent(()=>import('./modules/pipeline/common/containers/task'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/searchResult'))
 

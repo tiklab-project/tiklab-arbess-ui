@@ -2,7 +2,7 @@ import React ,{useEffect}from "react";
 import { Breadcrumb } from 'antd';
 import {withRouter} from "react-router-dom";
 import {taskRouters} from "../containers/route";
-import {inject, observer} from "mobx-react";
+
 
 const TaskHeader = props => {
     const {location}=props
@@ -14,11 +14,9 @@ const TaskHeader = props => {
             >
                 流水线
             </Breadcrumb.Item>
-
             <Breadcrumb.Item>
                 {localStorage.getItem('pipelineName')}
             </Breadcrumb.Item>
-
             {
                 taskRouters.map(item=>{
                     if(item.to===location.pathname){
@@ -33,4 +31,5 @@ const TaskHeader = props => {
         </Breadcrumb>
     )
 }
+
 export default withRouter(TaskHeader)

@@ -3,7 +3,7 @@ import {Form, Input,Checkbox } from "antd";
 
 const Deploy=props=>{
     return(
-        <div className=' anchor'>
+        <div className=' anchor-content'>
             <h1>部署</h1>
             <Form.Item name={'configureDeployAddress'} label='部署位置'>
                 <Input/>

@@ -1,18 +1,15 @@
-* {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-decoration: none;
-}
-body,html,#root{
-  height: 100%;
-  width: 100%;
-  overflow-x:hidden;
-}
+@import "~antd/dist/antd.css";
+
+@import "assets/font_icon/iconfont.css";
+
 @import "modules/home/home";
+
 @import "modules/login/login";
+
 //流水线
 @import "modules/pipeline/pipeline/containers/pipeline";
+@import "modules/pipeline/pipeline/components/pipelineAll";
+
 //任务
 @import "modules/pipeline/common/containers/task";
 
@@ -20,4 +17,4 @@ body,html,#root{
 @import "modules/pipeline/pipeline/components/pipelineAdd";
 
 //部署
-@import "modules/pipeline/pipeline/components/pipelineDeployment";
+@import "modules/deployment/containers/deployment";

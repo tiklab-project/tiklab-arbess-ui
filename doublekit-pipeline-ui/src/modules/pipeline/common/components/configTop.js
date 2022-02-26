@@ -5,7 +5,7 @@ import {withRouter} from "react-router-dom";
 const ConfigTop =props=>{
     const [visible, setVisible] = useState(false);
     return(
-        <div className='task-config-top-btn'>
+        <div className='task-config-post'>
                 <Button  onClick={() => setVisible(true)}>过往记录</Button>
                 <Modal
                     title="是否离开"
@@ -21,4 +21,5 @@ const ConfigTop =props=>{
             </div>
     )
 }
+
 export default withRouter(ConfigTop)

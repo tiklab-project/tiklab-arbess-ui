@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import { Button,Input,message} from "antd";
+import { Button,Input,message,Breadcrumb} from "antd";
 import {withRouter} from "react-router-dom";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
@@ -28,7 +28,9 @@ const PipelineHeader=props=>{
         <>
             <div>
                 <div className='pipeline-top-l'>
-                    <h1 >流水线</h1>
+                    <Breadcrumb separator=">">
+                        <Breadcrumb.Item>流水线</Breadcrumb.Item>
+                   </Breadcrumb>
                 </div>
                 <div className='pipeline-top-r'>
                     <Button

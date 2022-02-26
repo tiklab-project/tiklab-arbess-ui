@@ -1,12 +1,12 @@
 import {observable, action} from "mobx";
+import qs from "qs";
 
 import {
     SelectPipelineStatus,
     CreatePipeline,
-    CreatePipelineConfigure,
     SelectName
 } from "../api/pipeline";
-import qs from "qs";
+
 
 class PipelineStore{
     constructor(store) {
@@ -14,17 +14,20 @@ class PipelineStore{
     }
     @observable pipelineList=[]
     @observable searchPipelineList = []
-    @observable allProof=[]
-    @observable proofName=''
 
     //所有流水线
     @action
     selectPipelineStatus=()=>{
-        SelectPipelineStatus().then(res=>{
-            this.pipelineList=res.data.data
-            localStorage.setItem('pipelineList',JSON.stringify(this.pipelineList))
-        }).catch(error=>{
-            console.log(error)
+        return new Promise((resolve, reject) => {
+            SelectPipelineStatus().then(res=>{
+                this.pipelineList=res.data.data
+                localStorage.setItem('pipelineList', JSON.stringify(this.pipelineList))
+                console.log('所有流水线',res)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
         })
     }
 
@@ -39,33 +42,12 @@ class PipelineStore{
         return new Promise((resolve, reject) => {
             CreatePipeline(param).then(res=>{
                 localStorage.setItem('pipelineId',res.data.data)
-                console.log('所有流水线',res)
-                // this.selectPipelineStatus()
+                console.log('创建流水线',res)
                 resolve(res.data)
             }).catch(error=>{
                 console.log(error)
                 reject()
             })
-        })
-    }
-
-    @action
-    createPipelineConfigure=values=>{
-        let param = {
-            configureCodeSource:values.configureCodeSource,
-            configureCodeSourceAddress:values.configureCodeSourceAddress,
-            configureCodeStructure:values.configureCodeStructure,
-            configureStructureAddress:values.configureStructureAddress,
-            configureStructureOrder:values.configureStructureOrder,
-            configureDeployAddress:values.configureDeployAddress,
-            configureCreateTime:values.configureCreateTime,
-            pipelineId:  values.pipelineId,
-            proofId:values.proofId
-        }
-        CreatePipelineConfigure(param).then(res=>{
-            localStorage.setItem('configureId',res.data.data)
-        }).catch(error=>{
-            console.log(error)
         })
     }
 
@@ -77,7 +59,7 @@ class PipelineStore{
         return new Promise((resolve, reject) => {
             SelectName(param).then(res=>{
                 this.searchPipelineList=res.data.data
-                localStorage.setItem('searchPipelineList',JSON.stringify(this.searchPipelineList))
+                // localStorage.setItem('searchPipelineList',JSON.stringify(this.searchPipelineList))
                 console.log("搜索流水线",res)
                 resolve(res.data)
             }).catch(error=>{
@@ -86,7 +68,6 @@ class PipelineStore{
             })
         })
     }
-
-
 }
+
 export default PipelineStore

@@ -23,9 +23,9 @@ const LeftNav=props=>{
                         )
                     })
                 }
-
             </Menu>
         </div>
     )
 }
+
 export default withRouter(LeftNav)

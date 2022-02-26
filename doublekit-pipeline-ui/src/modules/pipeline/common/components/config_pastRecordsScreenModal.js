@@ -3,6 +3,7 @@ import {  Modal, Form,Select,Checkbox,Row,Col,DatePicker } from 'antd';
 const {Option}=Select
 
 const Config_pastRecordsScreenModal = ({ visible, onCreate }) => {
+
     const [form] = Form.useForm();
     const oK=()=>{
         form
@@ -14,6 +15,7 @@ const Config_pastRecordsScreenModal = ({ visible, onCreate }) => {
                 console.log('校验失败:', info);
             })
     }
+
     return (
         <Modal
             closable={false}
@@ -27,35 +29,18 @@ const Config_pastRecordsScreenModal = ({ visible, onCreate }) => {
             cancelText='重置'
             okText='确定'
         >
-            <Form
-                form={form}
-                initialValues={{changeUsers:"a"}}
-            >
-                <Form.Item
-                    name='changeUsers'
-                    label='更改人'
-                >
-                    <Select
-                        style={{width:200}}
-                    >
+            <Form form={form} initialValues={{changeUsers:"a"}}>
+                <Form.Item name='changeUsers' label='更改人'>
+                    <Select style={{width:200}}>
                         <Option value="a">admin</Option>
                         <Option value="b">lucy</Option>
                     </Select>
                 </Form.Item>
-                <Form.Item
-                    name='changeTime'
-                    label='更改时间'
-                >
+                <Form.Item name='changeTime' label='更改时间'>
                     <DatePicker  />
                 </Form.Item>
-
-                <Form.Item
-                    label="状态"
-                    name="status"
-                >
-                    <Checkbox.Group
-                        style={{ width: '100%' }}
-                    >
+                <Form.Item label="状态" name="status">
+                    <Checkbox.Group style={{ width: '100%' }}>
                         <Row>
                             <Col span={6}>
                                 <Checkbox value="A">成功</Checkbox>
@@ -66,14 +51,12 @@ const Config_pastRecordsScreenModal = ({ visible, onCreate }) => {
                             <Col span={6}>
                                 <Checkbox value="C">失败</Checkbox>
                             </Col>
-
                         </Row>
                     </Checkbox.Group>
                 </Form.Item>
-
             </Form>
         </Modal>
-    );
-};
+    )
+}
 
 export default Config_pastRecordsScreenModal;
