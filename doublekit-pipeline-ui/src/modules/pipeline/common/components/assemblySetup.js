@@ -4,9 +4,9 @@ import {observer,inject} from "mobx-react";
 
 const AssemblyTask=props=>{
 
-    const {ASSEMBLYSETUP_STORE}=props
+    const {PIPELINE_STORE}=props
 
-    const {deletePipeline,updatePipeline}=ASSEMBLYSETUP_STORE
+    const {deletePipeline,updatePipeline}=PIPELINE_STORE
 
     const [form]=Form.useForm()
 
@@ -62,4 +62,4 @@ const AssemblyTask=props=>{
         </div>
     )
 }
-export default inject('ASSEMBLYSETUP_STORE')(observer(AssemblyTask))
+export default inject('PIPELINE_STORE')(observer(AssemblyTask))

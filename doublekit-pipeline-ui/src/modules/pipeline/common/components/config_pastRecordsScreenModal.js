@@ -2,7 +2,7 @@ import React from 'react';
 import {  Modal, Form,Select,Checkbox,Row,Col,DatePicker } from 'antd';
 const {Option}=Select
 
-const Config_pastRecordsScreenModal = ({ visible, onCreate }) => {
+const Config_pastRecordsScreenModal = ({ visible, onCreate },props) => {
 
     const [form] = Form.useForm();
     const oK=()=>{

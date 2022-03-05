@@ -8,16 +8,7 @@ const { Option } = Select;
 const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
 
     const [form]=Form.useForm()
-    const oK=()=>{
-        form
-            .validateFields()
-            .then(values => {
-                onCreate(values);
-            })
-            .catch(info => {
-                console.log('校验失败:', info);
-            })
-    }
+
     return(
         <Modal
             closable={false}
@@ -25,7 +16,16 @@ const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
             onCancel={onCancel}
             cancelText='取消'
             okText='确定'
-            onOk={oK}
+            onOk={()=>{
+                form
+                    .validateFields()
+                    .then(values => {
+                        onCreate(values);
+                    })
+                    .catch(info => {
+                        console.log('校验失败:', info);
+                    })
+            }}
         >
             <Form
                 form={form}

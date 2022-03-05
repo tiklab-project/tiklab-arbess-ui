@@ -7,11 +7,11 @@ import Config_pastRecordsScreenModal from "./config_pastRecordsScreenModal";
 
 const PastRecordsTask=props=>{
 
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(false)
 
-    const onCreate = (values) => {
-        setVisible(false);
-    };
+    const onCreate = values => {
+        setVisible(false)
+    }
 
     return(
         <div className='task-pastRecord'>
@@ -25,7 +25,7 @@ const PastRecordsTask=props=>{
                 </Button>
             </div>
             <div className='task-pastRecord-h'>
-                <Card title={<h1>本次构建</h1>} extra={<h1>上次构建</h1>} >
+                <Card title={<h2>本次构建</h2>} extra={<h2>上次构建</h2>} >
                     <Config_pastRecordsThis/>
                     <Config_pastRecordsLast/>
                 </Card>

@@ -1,0 +1,76 @@
+import React from 'react'
+import { Card } from 'antd';
+import Running from "../../../../common/running/running";
+
+const BuildDeploy = props =>{
+
+    const {logList}=props
+
+    const state = () =>{
+        if(!logList){
+            return (
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-yunhang"></use>
+                </svg>
+            )
+        } else {
+            //如果部署状态为10--成功
+            if(logList.logDeployState===10){
+                return (
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-chenggong-"></use>
+                    </svg>
+                )
+            }
+            //如果部署状态为0，构建状态为10--运行
+            else if(logList.logDeployState===0 && logList.logPackState===10){
+                return (
+                    <div className='task-structure-running'>
+                        <Running/>
+                    </div>
+                )
+            }
+            //如果部署状态为1--失败
+            else if(logList.logDeployState===1){
+                return (
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-yunhangshibai1"></use>
+                    </svg>
+                )
+            }else {
+                return (
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-yunhang"></use>
+                    </svg>
+                )
+            }
+        }
+    }
+
+    const time = () => {
+        if(!logList){
+            return (
+                <li>部署时间：0</li>
+            )
+        }else {
+            return (
+                <li>部署时间：{logList.logDeployTime}</li>
+            )
+        }
+    }
+
+    return(
+        <Card title="部署" className='task-structure-card'>
+            <div className='task-structure-div'>
+                {state()}
+            </div>
+            <div className='task-structure-ul' >
+                <ul>
+                    {time()}
+                </ul>
+            </div>
+        </Card>
+    )
+}
+
+export default BuildDeploy

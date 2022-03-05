@@ -21,8 +21,6 @@ const PipelineAdd = props => {
     const {PIPELINE_STORE}=props
     const {createPipeline,pipelineList}=PIPELINE_STORE
 
-    const pipelineLis=JSON.parse(localStorage.getItem('pipelineList'))
-
     const [liStatus, setLiStatus] = useState(0)
 
     //点击类型选择
@@ -39,8 +37,7 @@ const PipelineAdd = props => {
             pipelineCreateTime:moment.moment
         }
         createPipeline(aa).then(res=>{
-            localStorage.setItem('pipelineName',aa.pipelineName)
-            props.history.push('/home/deployment',value)
+            props.history.push({pathname:'/home/deployment',value})
         })
     }
 
@@ -60,7 +57,7 @@ const PipelineAdd = props => {
                                     if (!value) {
                                         return Promise.reject('请输入名称')
                                     }
-                                    const nameArray = pipelineLis.map(item => item.pipelineName);
+                                    const nameArray = pipelineList.map(item => item.pipelineName);
                                     if (nameArray.includes(value)) {
                                         return Promise.reject('名称已经存在');
                                     }
@@ -71,7 +68,6 @@ const PipelineAdd = props => {
                     >
                         <Input
                             style={{width:400}}
-                            // onChange={inputOnChange}
                         />
                     </Form.Item>
             </Form>

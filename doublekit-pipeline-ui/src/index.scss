@@ -8,13 +8,14 @@
 
 //流水线
 @import "modules/pipeline/pipeline/containers/pipeline";
+
 @import "modules/pipeline/pipeline/components/pipelineAll";
 
 //任务
-@import "modules/pipeline/common/containers/task";
+@import "modules/pipeline/common/containers/pipelineDetails";
 
 //新建流水线
 @import "modules/pipeline/pipeline/components/pipelineAdd";
 
 //部署
-@import "modules/deployment/containers/deployment";
+@import "modules/config/containers/config";

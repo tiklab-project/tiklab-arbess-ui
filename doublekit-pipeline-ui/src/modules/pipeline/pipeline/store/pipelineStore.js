@@ -1,11 +1,13 @@
 import {observable, action} from "mobx";
-import qs from "qs";
 
 import {
     SelectPipelineStatus,
     CreatePipeline,
-    SelectName
+    SelectName,
+    DeletePipeline,
+    UpdatePipeline
 } from "../api/pipeline";
+import qs from "qs";
 
 
 class PipelineStore{
@@ -14,20 +16,16 @@ class PipelineStore{
     }
     @observable pipelineList=[]
     @observable searchPipelineList = []
+    @observable pipelineId=''
 
-    //所有流水线
     @action
     selectPipelineStatus=()=>{
-        return new Promise((resolve, reject) => {
-            SelectPipelineStatus().then(res=>{
-                this.pipelineList=res.data.data
-                localStorage.setItem('pipelineList', JSON.stringify(this.pipelineList))
-                console.log('所有流水线',res)
-                resolve(res.data)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
+        SelectPipelineStatus().then(res=>{
+            this.pipelineList=res.data.data
+            // localStorage.setItem('pipelineList', JSON.stringify(this.pipelineList))
+            console.log('所有流水线',res)
+        }).catch(error=>{
+            console.log(error)
         })
     }
 
@@ -41,7 +39,8 @@ class PipelineStore{
         }
         return new Promise((resolve, reject) => {
             CreatePipeline(param).then(res=>{
-                localStorage.setItem('pipelineId',res.data.data)
+                this.pipelineId=res.data.data
+                localStorage.setItem('pipelineId', this.pipelineId)
                 console.log('创建流水线',res)
                 resolve(res.data)
             }).catch(error=>{
@@ -68,6 +67,35 @@ class PipelineStore{
             })
         })
     }
+
+    @action //删除流水线
+    deletePipeline=(values)=>{
+        const params = qs.stringify({'pipelineId': values})
+        DeletePipeline(params).then(res=>{
+            console.log('删除流水线',res)
+        }).catch(error=>{
+            console.log(error)
+        })
+
+    }
+
+    @action
+    updatePipeline=(values)=>{
+        let param={
+            pipelineId:values.pipelineId,
+            pipelineName:values.pipelineName
+        }
+        return new Promise((resolve, reject) => {
+            UpdatePipeline(param).then(res=>{
+                console.log('重命名',res)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
+    }
+
 }
 
 export default PipelineStore

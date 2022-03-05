@@ -29,6 +29,7 @@ const lis=[
 ]
 
 const Config_pastRecordsThis = props =>{
+
     return(
         <div className='task-pastRecord-this' >
             {
@@ -42,7 +43,6 @@ const Config_pastRecordsThis = props =>{
                 })
             }
         </div>
-
     )
 }
 

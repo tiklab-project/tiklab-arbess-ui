@@ -6,17 +6,17 @@ const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/containers/pipeline'))
 const New=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineAdd'))
-const NewDeployment=AsyncComponent(()=>import('./modules/deployment/containers/deployment'))
-const Task=AsyncComponent(()=>import('./modules/pipeline/common/containers/task'))
+const Config=AsyncComponent(()=>import('./modules/config/containers/config'))
+const Task=AsyncComponent(()=>import('./modules/pipeline/common/containers/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/searchResult'))
 
 //任务
 // 工作空间
 const WorkTask=AsyncComponent(()=>import('./modules/pipeline/common/components/workSpace'))
 //开始构建
-const StructureTask=AsyncComponent(()=>import('./modules/pipeline/common/components/startBuild'))
+const StructureTask=AsyncComponent(()=>import('./modules/pipeline/common/components/build'))
 //配置
-const ConfigTask=AsyncComponent(()=>import('./modules/pipeline/common/components/config'))
+const ConfigDetailsTask=AsyncComponent(()=>import('./modules/pipeline/common/components/configDetails'))
 //构建历史
 const HistoryTask=AsyncComponent(()=>import('./modules/pipeline/common/components/buildHistory'))
 //流水线设置
@@ -25,7 +25,7 @@ const AssemblyTask=AsyncComponent(()=>import('./modules/pipeline/common/componen
 //配置的过往记录
 const PastRecordsTask=AsyncComponent(()=>import('./modules/pipeline/common/components/config_pastRecords'))
 //构建历史的构建
-const BuildTask=AsyncComponent(()=>import('./modules/pipeline/common/components/buildHistory_build'))
+const BuildTask=AsyncComponent(()=>import('./modules/pipeline/common/components/buildHistoryDetails'))
 
 export const routers=[
     {
@@ -47,8 +47,8 @@ export const routers=[
                 component: New,
             },
             {
-                path:'/home/deployment',
-                component:NewDeployment,
+                path:'/home/config',
+                component:Config,
             },
             {
                 path:'/home/searchresult',
@@ -59,10 +59,6 @@ export const routers=[
                 component: Task,
                 routes:[
                     {
-                        path:'/home/pipeline',
-                        component:Pipeline
-                    },
-                    {
                         path:'/home/task/work',
                         component: WorkTask
                     },
@@ -72,7 +68,7 @@ export const routers=[
                     },
                     {
                         path:'/home/task/config',
-                        component: ConfigTask,
+                        component: ConfigDetailsTask,
                     },
                     {
                         path:'/home/task/build',

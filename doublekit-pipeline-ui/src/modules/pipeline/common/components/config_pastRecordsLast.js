@@ -1,4 +1,5 @@
 import React from "react";
+
 const lis=[
     {
         id:'1',
@@ -26,7 +27,9 @@ const lis=[
         desc:" D:\idea\doublekit"
     }
 ]
-const Config_pastRecordsLast= props =>{
+
+const Config_pastRecordsLast = props =>{
+
     return(
         <div className='task-pastRecord-last'>
             {

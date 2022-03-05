@@ -6,18 +6,60 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3374824",
+      "name": "等待",
+      "font_class": "dengdai",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "23174798",
+      "name": "等待",
+      "font_class": "dengdai1",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "13082370",
+      "name": "终止",
+      "font_class": "zhongzhi",
+      "unicode": "e6e2",
+      "unicode_decimal": 59106
+    },
+    {
+      "icon_id": "19998904",
+      "name": "已终止",
+      "font_class": "yizhongzhi",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "10073439",
+      "name": "错误",
+      "font_class": "cuowu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "8309282",
+      "name": "成功-01",
+      "font_class": "chenggong-",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "10666917",
+      "name": "成功",
+      "font_class": "chenggong5",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
       "icon_id": "8360881",
       "name": "成功",
       "font_class": "chenggong4",
       "unicode": "e6a9",
       "unicode_decimal": 59049
-    },
-    {
-      "icon_id": "26213561",
-      "name": "成功成功",
-      "font_class": "chenggongchenggong",
-      "unicode": "e609",
-      "unicode_decimal": 58889
     },
     {
       "icon_id": "1951950",
@@ -48,60 +90,11 @@
       "unicode_decimal": 58912
     },
     {
-      "icon_id": "1969061",
-      "name": "小叉叉",
-      "font_class": "xiaochacha",
-      "unicode": "e60e",
-      "unicode_decimal": 58894
-    },
-    {
-      "icon_id": "2596158",
-      "name": "小叉叉",
-      "font_class": "xiaochacha1",
-      "unicode": "e626",
-      "unicode_decimal": 58918
-    },
-    {
-      "icon_id": "7468923",
-      "name": "小叉叉",
-      "font_class": "xiaochacha2",
-      "unicode": "e938",
-      "unicode_decimal": 59704
-    },
-    {
-      "icon_id": "22691584",
-      "name": "小叉叉",
-      "font_class": "xingzhuangjiehe",
-      "unicode": "e673",
-      "unicode_decimal": 58995
-    },
-    {
       "icon_id": "7934640",
       "name": "运行",
       "font_class": "yunhang5",
       "unicode": "e61d",
       "unicode_decimal": 58909
-    },
-    {
-      "icon_id": "9298140",
-      "name": "运行",
-      "font_class": "yunhang6",
-      "unicode": "e631",
-      "unicode_decimal": 58929
-    },
-    {
-      "icon_id": "9393895",
-      "name": "运行",
-      "font_class": "yunhang7",
-      "unicode": "e7f2",
-      "unicode_decimal": 59378
-    },
-    {
-      "icon_id": "12694601",
-      "name": "开始_运行",
-      "font_class": "kaishi_yunhang",
-      "unicode": "e61c",
-      "unicode_decimal": 58908
     },
     {
       "icon_id": "12771505",
@@ -118,13 +111,6 @@
       "unicode_decimal": 58906
     },
     {
-      "icon_id": "9712651",
-      "name": "暂停",
-      "font_class": "zanting",
-      "unicode": "e6b2",
-      "unicode_decimal": 59058
-    },
-    {
       "icon_id": "10885300",
       "name": "暂停",
       "font_class": "zanting1",
@@ -139,13 +125,6 @@
       "unicode_decimal": 58904
     },
     {
-      "icon_id": "6249599",
-      "name": "运行",
-      "font_class": "yunhang2",
-      "unicode": "e64f",
-      "unicode_decimal": 58959
-    },
-    {
       "icon_id": "7312242",
       "name": "运行",
       "font_class": "yunhang3",
@@ -153,25 +132,11 @@
       "unicode_decimal": 58899
     },
     {
-      "icon_id": "12189190",
-      "name": "运行",
-      "font_class": "icon-",
-      "unicode": "e627",
-      "unicode_decimal": 58919
-    },
-    {
       "icon_id": "24079586",
       "name": "暂定_面",
       "font_class": "zanding_mian",
       "unicode": "e60d",
       "unicode_decimal": 58893
-    },
-    {
-      "icon_id": "6687751",
-      "name": "收藏",
-      "font_class": "shoucang2",
-      "unicode": "e602",
-      "unicode_decimal": 58882
     },
     {
       "icon_id": "8962925",
@@ -209,13 +174,6 @@
       "unicode_decimal": 58897
     },
     {
-      "icon_id": "7456847",
-      "name": "运行成功",
-      "font_class": "yunhangchenggong",
-      "unicode": "e651",
-      "unicode_decimal": 58961
-    },
-    {
       "icon_id": "7893806",
       "name": "运行",
       "font_class": "yunhang1",
@@ -244,25 +202,11 @@
       "unicode_decimal": 59024
     },
     {
-      "icon_id": "4393",
-      "name": "收藏",
-      "font_class": "shoucang",
-      "unicode": "e600",
-      "unicode_decimal": 58880
-    },
-    {
       "icon_id": "25973796",
       "name": "收藏",
       "font_class": "shoucang1",
       "unicode": "e601",
       "unicode_decimal": 58881
-    },
-    {
-      "icon_id": "4539890",
-      "name": "星星",
-      "font_class": "xingxing",
-      "unicode": "e617",
-      "unicode_decimal": 58903
     }
   ]
 }

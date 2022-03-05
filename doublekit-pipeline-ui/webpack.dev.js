@@ -66,7 +66,7 @@ module.exports = merge(baseWebpackConfig, {
         historyApiFallback: true,
         inline: true,
         hot: true,
-        host: '0.0.0.0',
+        host: '192.168.10.99',
         hotOnly:true,
         stats: {
             children: false,

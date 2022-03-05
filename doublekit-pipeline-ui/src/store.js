@@ -1,20 +1,15 @@
 import PipelineStore from "./modules/pipeline/pipeline/store/pipelineStore";
-import ConfigStore from "./modules/pipeline/common/store/configStore";
-import AssemblySetupStore from "./modules/pipeline/common/store/assemblySetupStore";
-import DeploymentStore from "./modules/deployment/store/deployment";
-import ProofStore from "./modules/deployment/store/proofStore";
-import StartBuild from "./modules/pipeline/common/store/startBuild";
+import ConfigStore from "./modules/config/store/configStore";
+import ProofStore from "./modules/config/store/proofStore";
+import BuildStore from "./modules/pipeline/common/store/buildStore";
 
 class store{
     constructor() {
         this.PIPELINE_STORE=new  PipelineStore(this)
-        this.CONFIG_STORE=new ConfigStore(this)
-        this.ASSEMBLYSETUP_STORE=new AssemblySetupStore(this)
         this.PROOF_STORE=new ProofStore(this)
-        this.STARTBUILD_STORE=new StartBuild(this)
-        this.DEPLOYMENT_STORE=new DeploymentStore(this)
+        this.BUILD_STORE=new BuildStore(this)
+        this.CONFIG_STORE=new ConfigStore(this)
     }
 }
-
 
 export default new store()

@@ -12,30 +12,16 @@ const PipelineAll= props=>{
 
     //初始化表格
     useEffect(()=>{
-        selectPipelineStatus().then(res=>{
-            console.log(res)
-        })
+        const se=setTimeout(()=>selectPipelineStatus(),100)
+        return ()=>{
+            clearTimeout(se)
+        }
     },[])
 
     //点击收藏按钮
-    const [icoStatus, setIcoStatus] = useState()
+    const [icoStatus, setIcoStatus] = useState(true)
     const icoStatusData = record => {
-        setIcoStatus(record.pipelineId)
-    }
-
-    //最近构建状态
-    const structureStatus = (text,record) =>{
-        // setRun(record.pipelineId )
-        switch (text) {
-            case 0:
-                return (
-                    <div>
-                        <svg className="icon" aria-hidden="true" >
-                            <use xlinkHref="#icon-chenggong4"  />
-                        </svg>
-                    </div>
-                )
-        }
+        setIcoStatus(!icoStatus)
     }
 
     //去详情页面
@@ -46,10 +32,9 @@ const PipelineAll= props=>{
     }
 
     //操作
-    const [run,setRun]=useState()
-    const move = (text,record) =>{
-        setRun(record.pipelineId )
-
+    const [run,setRun]=useState(true)
+    const move = record =>{
+        setRun(!run)
     }
 
     const columns = [
@@ -61,13 +46,13 @@ const PipelineAll= props=>{
                 return(
                     <span className='all-icon' onClick={() => icoStatusData(record)}>
                         {
-                            icoStatus === record.pipelineId   ?
+                            icoStatus   ?
                                 <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-xingxing1"  />
+                                    <use xlinkHref="#icon-xingxing-kong"  />
                                 </svg>
                                 :
                                 <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-xingxing-kong"  />
+                                    <use xlinkHref="#icon-xingxing1"  />
                                 </svg>
                         }
                     </span>
@@ -78,20 +63,18 @@ const PipelineAll= props=>{
             title: '最近构建状态',
             dataIndex: 'structureStatus',
             key: 'structureStatus',
-            // render:structureStatus
-            render:(text ,record)=> {
-                return (
-                    <span className=' all-icon' onClick={() => structureStatus(text,record)}>
-                        {
-                            run === record.pipelineId ?
-                                <Running/>
-                                :
-                                <svg className="icon" aria-hidden="true">
-                                    <use xlinkHref="#icon-yunhang1"/>
+            render:(text,record)=>{
+                switch (text) {
+                    case 30:
+                        return  <svg className="icon" aria-hidden="true" >
+                                    <use xlinkHref="#icon-chenggong-"  />
                                 </svg>
-                        }
-                    </span>
-                )
+                    case 1:
+                        return <svg className="icon" aria-hidden="true" >
+                                    <use xlinkHref="#icon-yunhangshibai1"  />
+                               </svg>
+
+                }
             }
         },
         {
@@ -127,14 +110,14 @@ const PipelineAll= props=>{
             key:"action",
             render:(text ,record)=>{
                 return(
-                    <span className=' all-icon' onClick={() => move(text,record)}>
+                    <span className=' all-icon' onClick={() => move(record)}>
                         {
-                            run===record.pipelineId   ?
-                                <Running />
-                                :
+                            run   ?
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-yunhang1"  />
                                 </svg>
+                                :
+                                <Running />
                         }
                     </span>
                 )

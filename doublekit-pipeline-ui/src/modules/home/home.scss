@@ -7,55 +7,43 @@
 body,html,#root{
   height: 100%;
   width: 100%;
-  //overflow-x:hidden;
 }
 
 .ant-layout{
   background: #ffffff;
-  //头部导航
   &-header{
     width: 100%;
     z-index: 9999;
-    height: 50px;
+    height: 55px;
+    line-height: 55px;
     position: fixed;
     .header{
-      &-content {
-        width: 1190px;
-        margin: 0 auto;
-        ul li{
-          float: left;
-          cursor: pointer;
-          height: 50px;
-          line-height: 50px;
+      display: flex;
+      width: 1200px;
+      margin: 0 auto;
+      &-logo{
+        font-size: 1.5rem;
+        font-style: italic;
+        background: rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        height: 100%;
+        color: #fff;
+        margin-right: 28px;
+      }
+      &-link{
+        display: inline-block;
+        padding: 0 0.5125rem;
+        color: #ccc;
+        cursor: pointer;
+        &-active{
+          color: #1890ff !important;
         }
-        &-logo{
-          width: 100px;
-          text-align: center;
-          font-size: 18px;
-          color: #ffffff;
-        }
-        &-link{
-          float: left;
-          color: #ffffff;
-          &-active{
-            color: #1890ff !important;
-          }
-          :nth-of-type(odd) {
-            padding: 0 40px;
-          }
-        }
-        &-left {
-          float: left;
-        }
-        &-right {
-          float: right;
-          &-text {
-            color: #ffffff;
-          }
-          &-search-wrap{
-            margin:20px 40px;
-          }
-        }
+      }
+      &-nav {
+        display: flex;
+      }
+      &-right {
+        margin-left: auto;
       }
     }
   }
