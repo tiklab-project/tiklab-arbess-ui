@@ -25,6 +25,9 @@ const DeployAddModal=({visible, onCreate, onCancel,})=>{
             }}
         >
             <Form form={form} layout="vertical" name="userForm" >
+                <Form.Item label={'凭证名称'} name={'proofName'}>
+                    <Input placeholder='名称'/>
+                </Form.Item>
                 <Form.Item label='username' name={'proofUsername'}>
                     <Input placeholder='账号'/>
                 </Form.Item>

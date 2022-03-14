@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from 'react'
 import {Button,  Table} from "antd";
 import {withRouter} from "react-router-dom";
-import BuildHistoryScreenModal from "./buildHistoryScreenModal";
+import StructureHistoryScreenModal from "./structureHistoryScreenModal";
 import {observer,inject} from "mobx-react";
 
 const HistoryTask=props=>{
 
-    const {BUILD_STORE}=props
-    const {selectHistoryDetails,buildHistoryList}=BUILD_STORE
+    const {StructureStore}=props
+    const {selectHistoryDetails,buildHistoryList}=StructureStore
 
     const pipelineId=localStorage.getItem('pipelineId')
 
@@ -27,8 +27,7 @@ const HistoryTask=props=>{
     //构建详情
     const goBuildDetails = record =>{
         localStorage.setItem('historyId',record.historyId)
-        localStorage.setItem('historyNumber',record.historyNumber)
-        props.history.push({pathname:'/home/task/build', record})
+        props.history.push(`/home/task/build/${"构建"+record.historyNumber}`)
     }
 
     //执行人详情
@@ -49,7 +48,7 @@ const HistoryTask=props=>{
                         }
                         className='task-history-table'
                     >
-                        {text}
+                        构建{text}
                     </span>
                 )
             }
@@ -111,7 +110,7 @@ const HistoryTask=props=>{
             dataIndex: 'codeSource',
             key: 'codeSource',
             render:(text,record)=>{
-                if(text==='b'){
+                if(text===2){
                     return <span>git</span>
 
                 }else {
@@ -133,14 +132,13 @@ const HistoryTask=props=>{
     ]
 
     return(
-        <div className='task-history'>
+        <div className='task-history task'>
             <div className='task-history-top'>
-                <h1>历史记录</h1>
                 <Button type='primary'  onClick={()=>{setVisible(true)}}>
                     筛选
                 </Button>
-                {/* 弹出框 */}
-                <BuildHistoryScreenModal
+
+                <StructureHistoryScreenModal
                     visible={visible}
                     onCreate={()=>onCreate()}
                     onCancel={() => {
@@ -159,4 +157,4 @@ const HistoryTask=props=>{
     )
 }
 
-export default withRouter(inject('BUILD_STORE')(observer(HistoryTask)))
+export default withRouter(inject('StructureStore')(observer(HistoryTask)))

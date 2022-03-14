@@ -1,14 +1,28 @@
 import React from 'react'
 import {Card} from "antd";
 
-
-
-const BuildHistoryDetailsCenter = props =>{
+const StructureHistoryDetailsCenter = props =>{
 
     const {historyLog}=props
 
     const CodeState = () =>{
         if(historyLog.logCodeState===10){
+            return (
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-chenggong-"></use>
+                </svg>
+            )
+        }else {
+            return (
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-yunhangshibai1"></use>
+                </svg>
+            )
+        }
+    }
+
+    const TestState = () =>{
+        if(historyLog.logTestState===10){
             return (
                 <svg className="icon" aria-hidden="true">
                     <use xlinkHref="#icon-chenggong-"></use>
@@ -69,6 +83,17 @@ const BuildHistoryDetailsCenter = props =>{
                     </div>
                </Card>
 
+                <Card title='测试'  className='task-build-card'>
+                    <div className='task-build-div'>
+                        {TestState()}
+                    </div>
+                    <div className='task-build-ul'>
+                        <ul>
+                            <li>测试时间：{historyLog.logTestTime}</li>
+                        </ul>
+                    </div>
+                </Card>
+
                 <Card title='构建'  className='task-build-card'>
                     <div className='task-build-div'>
                         {PackState()}
@@ -101,4 +126,5 @@ const BuildHistoryDetailsCenter = props =>{
        </div>
     )
 }
-export default BuildHistoryDetailsCenter
+
+export default StructureHistoryDetailsCenter

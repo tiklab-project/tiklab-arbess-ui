@@ -1,6 +1,5 @@
 import React, {useState,Fragment} from 'react'
 import {Input} from "antd";
-import {ArrowRightOutlined} from '@ant-design/icons';
 import {withRouter} from "react-router-dom";
 
 const { Search } = Input;
@@ -49,7 +48,7 @@ const Head =props=>{
                 {/*    <Search placeholder="input search text" onSearch={onSearch} style={{ width: 300 ,height:40}} />*/}
                 {/*</li>*/}
                 <li  className={'header-link'}>
-                    <a href='#' >退出</a>
+                    <a href='#' >登录</a>
                 </li>
             </ul>
         </div>

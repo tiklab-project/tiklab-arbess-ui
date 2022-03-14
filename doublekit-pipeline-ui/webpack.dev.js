@@ -66,11 +66,12 @@ module.exports = merge(baseWebpackConfig, {
         historyApiFallback: true,
         inline: true,
         hot: true,
-        host: '192.168.10.99',
+        host: '192.168.10.101',
         hotOnly:true,
         stats: {
             children: false,
-        }
+        },
+        disableHostCheck:true,
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

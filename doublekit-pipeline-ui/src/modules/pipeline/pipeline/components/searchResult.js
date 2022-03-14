@@ -1,16 +1,17 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import './pipelineHeader'
 import {withRouter} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 import './searchResult.scss'
 
-
 const SearchResult = props => {
 
-    const {PIPELINE_STORE}=props
-    const {searchPipelineList}=PIPELINE_STORE
+    const {PipelineStore,match}=props
+    const {searchPipelineList,selectName}=PipelineStore
 
-    // const searchPipelineList=JSON.parse(localStorage.getItem('searchPipelineList'))
+    useEffect(()=>{
+        selectName(match.params.searchresult)
+    },[])
 
     const  goPipelineTask= (text) =>{
         localStorage.setItem('pipelineName',text.pipelineName)
@@ -39,4 +40,4 @@ const SearchResult = props => {
     )
 }
 
-export default withRouter(inject('PIPELINE_STORE')(observer(SearchResult)))
+export default withRouter(inject('PipelineStore')(observer(SearchResult)))

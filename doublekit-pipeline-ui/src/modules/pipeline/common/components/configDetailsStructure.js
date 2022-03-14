@@ -28,24 +28,24 @@ class ConfigDetailsStructure  extends Component{
         const {value}=this.state
         return(
             <div className=' anchor-content'>
-                <h1>构建</h1>
-                <Form.Item  className='newDeployment-radio'>
+                <h2>构建</h2>
+                <Form.Item  >
                    <Form.Item name={'configureCodeStructure'}>
                        <Radio.Group  onChange={this.handlerRadio} value={value}>
                            <Space direction="vertical">
-                               <Radio value={'a'}>maven</Radio>
+                               <Radio value={1}>无</Radio>
+                               <Radio value={2}>maven</Radio>
                                {
-                                   value==='a' ?
-                                       <div className={'task-config-hidden'}>
+                                   value===2 ?
+                                       <>
                                            <Form.Item name="configureStructureAddress" label="pom文件地址">
                                                <Input />
                                            </Form.Item>
                                            <Form.Item name="configureStructureOrder" label="执行命令">
-                                               <TextArea  />
+                                               <TextArea  autoSize/>
                                            </Form.Item>
-                                       </div>:null
+                                       </>:null
                                }
-                               <Radio value={'b'}>其他</Radio>
                            </Space>
                        </Radio.Group>
                    </Form.Item>

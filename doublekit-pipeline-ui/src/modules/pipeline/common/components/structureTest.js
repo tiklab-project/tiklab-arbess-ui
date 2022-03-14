@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'antd';
 import Running from "../../../../common/running/running";
 
-const BuildDeploy = props =>{
+const StructureTest = props =>{
 
     const {logList}=props
 
@@ -13,25 +13,20 @@ const BuildDeploy = props =>{
                     <use xlinkHref="#icon-yunhang"></use>
                 </svg>
             )
-        } else {
-            //如果部署状态为10--成功
-            if(logList.logDeployState===10){
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-chenggong-"></use>
-                    </svg>
-                )
-            }
-            //如果部署状态为0，构建状态为10--运行
-            else if(logList.logDeployState===0 && logList.logPackState===10){
+        }else {
+            if(logList.logCodeState===10 && logList.logTestState===0){
                 return (
                     <div className='task-structure-running'>
                         <Running/>
                     </div>
                 )
-            }
-            //如果部署状态为1--失败
-            else if(logList.logDeployState===1){
+            }else if(logList.logTestState===10){
+                return (
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-chenggong-"></use>
+                    </svg>
+                )
+            }else if(logList.logTestState===1){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-yunhangshibai1"></use>
@@ -50,21 +45,21 @@ const BuildDeploy = props =>{
     const time = () => {
         if(!logList){
             return (
-                <li>部署时间：0</li>
+                <li>测试时间：0</li>
             )
         }else {
             return (
-                <li>部署时间：{logList.logDeployTime}</li>
+                <li>测试时间：{logList.logTestTime}</li>
             )
         }
     }
 
     return(
-        <Card title="部署" className='task-structure-card'>
+        <Card title="测试" className='task-structure-card'>
             <div className='task-structure-div'>
                 {state()}
             </div>
-            <div className='task-structure-ul' >
+            <div className='task-structure-ul'>
                 <ul>
                     {time()}
                 </ul>
@@ -73,4 +68,4 @@ const BuildDeploy = props =>{
     )
 }
 
-export default BuildDeploy
+export default StructureTest

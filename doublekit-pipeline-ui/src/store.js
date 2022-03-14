@@ -1,14 +1,16 @@
 import PipelineStore from "./modules/pipeline/pipeline/store/pipelineStore";
 import ConfigStore from "./modules/config/store/configStore";
 import ProofStore from "./modules/config/store/proofStore";
-import BuildStore from "./modules/pipeline/common/store/buildStore";
+import StructureStore from "./modules/pipeline/common/store/structureStore";
+import ConfigCommonStore from "./modules/pipeline/common/store/configCommonStore";
 
 class store{
     constructor() {
-        this.PIPELINE_STORE=new  PipelineStore(this)
-        this.PROOF_STORE=new ProofStore(this)
-        this.BUILD_STORE=new BuildStore(this)
-        this.CONFIG_STORE=new ConfigStore(this)
+        this.PipelineStore=new  PipelineStore(this)
+        this.ProofStore=new ProofStore(this)
+        this.StructureStore=new StructureStore(this)
+        this.ConfigStore=new ConfigStore(this)
+        this.ConfigCommonStore=new ConfigCommonStore(this)
     }
 }
 

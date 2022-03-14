@@ -17,19 +17,21 @@ class ConfigStore{
     @action
     createPipelineConfigure=values=>{
         let params = {
-            configureBranch:values.configureBranch,
-            configureDeployIp: values.configureDeployIp,
-            configureTargetAddress: values.configureTargetAddress,
-            proofIdDeploy: values.proofIdDeploy,
-            proofId: values.proofId,
             configureCodeSource:values.configureCodeSource,
             configureCodeSourceAddress:values.configureCodeSourceAddress,
+            configureBranch:values.configureBranch,
             configureCodeStructure:values.configureCodeStructure,
+            configureTestType:values.configureTestType,
+            configureTestText:values.configureTestText,
             configureStructureAddress:values.configureStructureAddress,
             configureStructureOrder:values.configureStructureOrder,
+            configureTargetAddress: values.configureTargetAddress,
             configureDeployAddress:values.configureDeployAddress,
             configureCreateTime:values.configureCreateTime,
+            configureShell:values.configureShell,
             pipelineId:  values.pipelineId,
+            deployProofId: values.deployProofId,
+            gitProofId: values.gitProofId,
         }
         CreatePipelineConfigure(params).then(res=>{
             this.configureId=res.data.data
@@ -45,11 +47,8 @@ class ConfigStore{
         return new Promise((resolve, reject) => {
             SelectPipelineConfig(params).then(res=>{
                 console.log('查看流水线配置',res)
-                this.pipelineConfig=res.data
-                if(!res.data.data) {
-                    localStorage.setItem('proofId', null)
-                }else {
-                    localStorage.setItem('proofId',res.data.data.proofIdStructure)
+                if(res.data.data){
+                    localStorage.setItem('configureId',res.data.data.configureId)
                 }
                 resolve(res.data)
             }).catch(error=>{
@@ -62,23 +61,25 @@ class ConfigStore{
     @action
     updatePipelineConfig=values=> {
         let params = {
+            configureCodeSource:values.configureCodeSource,
+            configureCodeSourceAddress:values.configureCodeSourceAddress,
             configureBranch:values.configureBranch,
-            configureDeployIp: values.configureDeployIp,
+            configureCodeStructure:values.configureCodeStructure,
+            configureTestType:values.configureTestType,
+            configureTestText:values.configureTestText,
+            configureStructureAddress:values.configureStructureAddress,
+            configureStructureOrder:values.configureStructureOrder,
             configureTargetAddress: values.configureTargetAddress,
-            proofIdDeploy: values.proofIdDeploy,
-            configureCodeSource: values.configureCodeSource,
-            configureCodeSourceAddress: values.configureCodeSourceAddress,
-            configureCodeStructure: values.configureCodeStructure,
-            configureStructureAddress: values.configureStructureAddress,
-            configureStructureOrder: values.configureStructureOrder,
-            configureDeployAddress: values.configureDeployAddress,
-            configureCreateTime: values.configureCreateTime,
-            pipelineId: values.pipelineId,
-            proofIdStructure: values.proofIdStructure
+            configureDeployAddress:values.configureDeployAddress,
+            configureCreateTime:values.configureCreateTime,
+            configureShell:values.configureShell,
+            pipelineId:  values.pipelineId,
+            deployProofId: values.deployProofId,
+            gitProofId: values.gitProofId,
+            configureId: values.configureId,
         }
         UpdatePipelineConfig(params).then(res => {
             console.log('更改流水线配置', res)
-            localStorage.setItem('configureId',res.data.data)
         }).catch(error => {
             console.log(error)
         })

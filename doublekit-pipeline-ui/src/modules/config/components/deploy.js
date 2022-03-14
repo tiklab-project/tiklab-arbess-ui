@@ -2,9 +2,12 @@ import React ,{useState} from "react";
 import {Form, Input, Select, Button} from "antd";
 import DeployAddModal from "./deployAddModal";
 
+const {Option}=Select
+const { TextArea } = Input;
+
 const Deploy = props =>{
 
-    const {createProof,selectAllProof,selectProofName,allProof}=props
+    const {createDeployProof,findAllDeployProof,findOneDeployProof,allDeployProof}=props
 
     const [visible,setVisible]=useState(false)
 
@@ -16,15 +19,17 @@ const Deploy = props =>{
             proofPort:values.proofPort,
             proofDescribe:values.proofDescribe,
         }
-        createProof(params)
+        createDeployProof(params)
         setVisible(false)
     }
 
-    const onClick = () =>{
-        selectAllProof()
+    const findAllDeploy = () =>{
+        findAllDeployProof()
     }
-    const onChange=(value)=>{
 
+    const deploySelect = value =>{
+        findOneDeployProof(value)
+        localStorage.setItem('deployProofId',value)
     }
 
     return(
@@ -33,34 +38,34 @@ const Deploy = props =>{
             <Form.Item name={'configureTargetAddress'} label='需要发送的文件地址'>
                 <Input/>
             </Form.Item>
-            <Form.Item name={'configureDeployIp'} label='IP地址'>
-                <Input/>
-            </Form.Item>
-            <Form.Item name={'configureDeployAddress'} label='部署位置'>
-                <Input/>
-            </Form.Item>
-            <Form.Item>
+            <Form.Item  label='请选择Ip地址'>
                 <Select
-                    placeholder="无"
+                    onChange={deploySelect}
+                    onClick={findAllDeploy}
                     style={{ width: 300 }}
-                    onChange={onChange}
-                    onClick={onClick}
                 >
                     {
-                        allProof.map(item=>{
+                        allDeployProof.map(item=>{
                             return(
-                                <Select.Option key={item.proofId}>
-                                    {item.proofName}
-                                </Select.Option>
+                                <Option key={item.proofId}>
+                                    { item.proofName+ "(" + item.proofIp + ")"}
+                                </Option>
                             )
                         })
                     }
                 </Select>
-                &nbsp;
+                &nbsp;&nbsp;
                 <Button onClick={()=>setVisible(true)}>
                     添加
                 </Button>
             </Form.Item>
+            <Form.Item name={'configureDeployAddress'} label='部署位置'>
+                <Input/>
+            </Form.Item>
+            <Form.Item name={'configureShell'} label='shell命令'>
+                <TextArea autoSize/>
+            </Form.Item>
+
             <DeployAddModal
                 visible={visible}
                 onCreate={onCreate}

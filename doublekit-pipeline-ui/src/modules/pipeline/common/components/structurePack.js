@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Running from "../../../../common/running/running";
 import { Card } from 'antd';
 
-const BuildPack = props =>{
+const StructurePack = props =>{
 
     const {logList}=props
 
@@ -14,20 +14,20 @@ const BuildPack = props =>{
                 </svg>
             )
         }else {
+            //如果测试时间为10 --运行
+            if(logList.logTestState===10 && logList.logPackState===0){
+                return (
+                    <div className='task-structure-running'>
+                        <Running/>
+                    </div>
+                )
+            }
             //如果构建状态为10--成功
-            if(logList.logPackState===10){
+            else if(logList.logPackState){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-chenggong-"></use>
                     </svg>
-                )
-            }
-            //如果构建状态为0，克隆状态为10--运行
-            else if(logList.logCodeState===10 && logList.logPackState===0 ){
-                return (
-                   <div className='task-structure-running'>
-                       <Running/>
-                   </div>
                 )
             }
             //如果构建状态为1--失败
@@ -73,4 +73,4 @@ const BuildPack = props =>{
     )
 }
 
-export default BuildPack
+export default StructurePack

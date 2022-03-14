@@ -22,7 +22,7 @@ const recent=[
 const WorkTask=props=>{
 
     return(
-        <div className='task-work'>
+        <div className='task-work task'>
             <div className='task-work-top'>
                 <h1 className='task-work-top-h1'>节点master上的工作空间</h1>
                 <ul>

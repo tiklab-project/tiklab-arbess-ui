@@ -1,19 +1,18 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {Button, Popconfirm} from "antd";
 import {withRouter} from "react-router-dom";
 
-const BuildHistoryDetailsTop = props =>{
+const StructureHistoryDetailsTop = props =>{
 
-    const {historyId,historyNumber,deleteHistoryLog}=props
+    const {historyId,deleteHistoryLog}=props
 
     const onConfirm= ()=>{
         deleteHistoryLog(historyId)
         props.history.push('/home/task/history')
     }
-
     return(
         <div className='task-build-top'>
-            <h1>{historyNumber}</h1>
+            <h1>{props.match.params.historyName}</h1>
             <div className='task-build-top-btn'>
                 <Button type='primary' onClick={()=>props.history.push('/home/task/history')}>
                     返回
@@ -34,4 +33,4 @@ const BuildHistoryDetailsTop = props =>{
     )
 }
 
-export default withRouter(BuildHistoryDetailsTop)
+export default withRouter(StructureHistoryDetailsTop)

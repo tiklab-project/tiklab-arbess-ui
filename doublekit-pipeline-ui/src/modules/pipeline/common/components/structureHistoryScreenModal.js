@@ -5,7 +5,7 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 
-const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
+const StructureHistoryScreenModal=({visible,onCancel,onCreate})=>{
 
     const [form]=Form.useForm()
 
@@ -79,4 +79,4 @@ const BuildHistoryScreenModal=({visible,onCancel,onCreate})=>{
     )
 }
 
-export default BuildHistoryScreenModal;
+export default StructureHistoryScreenModal;

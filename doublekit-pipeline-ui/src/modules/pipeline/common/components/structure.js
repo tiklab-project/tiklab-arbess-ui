@@ -1,42 +1,37 @@
-import React, { useEffect ,useState} from 'react'
+import React, { useEffect } from 'react'
 import {Button} from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
-import BuildClone from "./buildClone";
-import BuildPack from "./buildPack";
-import BuildDeploy from "./buildDeploy";
+import StructureClone from "./structureClone";
+import StructureTest from "./structureTest";
+import StructurePack from "./structurePack";
+import StructureDeploy from "./structureDeploy";
 import { inject, observer } from "mobx-react";
 
 const StructureTask = props => {
 
-    const { BUILD_STORE } = props
-    const { pipelineStructure, selectStructureState,logList } = BUILD_STORE
+    const { StructureStore } = props
+    const { pipelineStructure, selectStructureState,logList } = StructureStore
 
     const pipelineId = localStorage.getItem('pipelineId')
 
     let interval=null
     useEffect(() => {
         pipelineStructure(pipelineId).then(res => {
-            if (res.data==='1' ) {
+            if (res.data==='1' || res.data === '100') {
                 interval = setInterval(() => {
-                    selectStructureState().then(res =>{
+                    selectStructureState(pipelineId).then(res =>{
                         if(res.data.logRunStatus!==0){
                             clearInterval(interval)
                         }
                     })
-                }, 1000)
+                }, 500)
             }
         })
-        return
+        return ()=> clearInterval(interval)
     }, [])
 
-    const log = () =>{
-        if(!logList){
-            return (
-                <div >
-                    null
-                </div>
-            )
-        }else {
+    const logRunLog = () =>{
+        if(logList) {
             return (
                 <div  onLoad={onload()}>
                     {logList.logRunLog}
@@ -46,14 +41,14 @@ const StructureTask = props => {
     }
 
     const onload = () =>{
-        const out=document.getElementById('out')
-        if(out){
-            out.scrollTop = out.scrollHeight;
+        const outLog=document.getElementById('outLog')
+        if(outLog){
+            outLog.scrollTop = outLog.scrollHeight;
         }
     }
 
     return (
-        <div className='task-structure'>
+        <div className='task-structure task'>
             <div className='task-structure-btn'>
                 <Button>
                     <PoweroffOutlined />停止
@@ -61,15 +56,16 @@ const StructureTask = props => {
             </div>
 
             <div style={{ float: "left", width: '100%' }}>
-                <BuildClone logList={logList} />
-                <BuildPack logList={logList} />
-                <BuildDeploy logList={logList} />
+                <StructureClone logList={logList} />
+                <StructureTest logList={logList} />
+                <StructurePack logList={logList} />
+                <StructureDeploy logList={logList} />
             </div>
 
             <div className='task-structure-out'>
                 <h2>输出</h2>
-                <div className='task-structure-outLog'  id='out'>
-                    {log()}
+                <div className='task-structure-outLog'  id='outLog'>
+                    {logRunLog()}
                 </div>
             </div>
 
@@ -77,4 +73,4 @@ const StructureTask = props => {
     )
 }
 
-export default inject('BUILD_STORE')(observer(StructureTask))
+export default inject('StructureStore')(observer(StructureTask))

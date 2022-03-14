@@ -1,5 +1,5 @@
 import React,{ useEffect,useState } from "react";
-import {Table} from "antd";
+import {Table,Tooltip } from "antd";
 import {withRouter} from "react-router-dom";
 import {observer,inject} from "mobx-react";
 import Running from "../../../../common/running/running";
@@ -7,20 +7,18 @@ import Running from "../../../../common/running/running";
 
 const PipelineAll= props=>{
 
-    const {PIPELINE_STORE}=props
-    const {selectPipelineStatus,pipelineList}=PIPELINE_STORE
+    const {PipelineStore,StructureStore}=props
+    const {selectPipelineStatus,pipelineList}=PipelineStore
+    const {pipelineStructure,selectStructureState}=StructureStore
 
     //初始化表格
     useEffect(()=>{
-        const se=setTimeout(()=>selectPipelineStatus(),100)
-        return ()=>{
-            clearTimeout(se)
-        }
+        selectPipelineStatus()
     },[])
 
-    //点击收藏按钮
+    //收藏
     const [icoStatus, setIcoStatus] = useState(true)
-    const icoStatusData = record => {
+    const collectAction = (record) => {
         setIcoStatus(!icoStatus)
     }
 
@@ -32,9 +30,10 @@ const PipelineAll= props=>{
     }
 
     //操作
-    const [run,setRun]=useState(true)
+    const [run,setRun]=useState()
+    let  interval=null
     const move = record =>{
-        setRun(!run)
+        setRun(record.pipelineId)
     }
 
     const columns = [
@@ -44,9 +43,9 @@ const PipelineAll= props=>{
             key:"collection",
             render:(text ,record)=>{
                 return(
-                    <span className='all-icon' onClick={() => icoStatusData(record)}>
+                    <span className='all-icon' onClick={() => collectAction(record)}>
                         {
-                            icoStatus   ?
+                            icoStatus  ?
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-xingxing-kong"  />
                                 </svg>
@@ -63,16 +62,27 @@ const PipelineAll= props=>{
             title: '最近构建状态',
             dataIndex: 'structureStatus',
             key: 'structureStatus',
-            render:(text,record)=>{
+            render:text=>{
                 switch (text) {
                     case 30:
-                        return  <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-chenggong-"  />
-                                </svg>
+                        return  <Tooltip title="成功" className='all-icon'>
+                                    <svg className="icon" aria-hidden="true" >
+                                        <use xlinkHref="#icon-chenggong-"  />
+                                    </svg>
+                                </Tooltip>
                     case 1:
-                        return <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-yunhangshibai1"  />
-                               </svg>
+                        return <Tooltip title="失败" className='all-icon'>
+                                    <svg className="icon" aria-hidden="true" >
+                                        <use xlinkHref="#icon-yunhangshibai1"  />
+                                    </svg>
+                                </Tooltip>
+
+                    case 0:
+                        return  <Tooltip title="待构建" className='all-icon'>
+                                    <svg className="icon" aria-hidden="true" >
+                                        <use xlinkHref="#icon-dengdai1"  />
+                                    </svg>
+                                </Tooltip>
 
                 }
             }
@@ -108,22 +118,23 @@ const PipelineAll= props=>{
             title: '操作',
             dataIndex: 'action',
             key:"action",
-            render:(text ,record)=>{
+            render:(text ,record,index)=>{
                 return(
-                    <span className=' all-icon' onClick={() => move(record)}>
+                    <span className=' all-icon' onClick={() => move(record,index)}>
                         {
-                            run   ?
+                            run===record.pipelineId   ?
+                                <Running />
+                                :
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-yunhang1"  />
                                 </svg>
-                                :
-                                <Running />
+
                         }
                     </span>
                 )
             }
         },
-    ];
+    ]
 
     return(
             <Table
@@ -134,4 +145,4 @@ const PipelineAll= props=>{
     )
 }
 
-export default withRouter(inject('PIPELINE_STORE')(observer(PipelineAll)));
+export default withRouter(inject('PipelineStore','StructureStore')(observer(PipelineAll)));

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState,useEffect} from "react";
 import {Form, Input, Button} from "antd";
 import {observer,inject} from "mobx-react";
 import moment from "../../../../common/moment/moment";
@@ -18,15 +18,19 @@ const lis= [
 
 const PipelineAdd = props => {
 
-    const {PIPELINE_STORE}=props
-    const {createPipeline,pipelineList}=PIPELINE_STORE
+    const {PipelineStore}=props
+    const {createPipeline,pipelineList,selectPipelineStatus}=PipelineStore
 
     const [liStatus, setLiStatus] = useState(0)
+
+    //获取所有pipelinList，然后对pipelineName进行校验
+    useEffect(()=>{
+        selectPipelineStatus()
+    },[])
 
     //点击类型选择
     const liStatusData = index => {
         setLiStatus(index)
-
     }
 
     const handSubmit = value => {
@@ -36,40 +40,43 @@ const PipelineAdd = props => {
             pipelineType:1,
             pipelineCreateTime:moment.moment
         }
-        createPipeline(aa).then(res=>{
-            props.history.push({pathname:'/home/deployment',value})
-        })
+        createPipeline(aa)
+        localStorage.setItem('pipelineName',value.pipelineName)
+        props.history.push({pathname:'/home/config',value})
     }
 
     return(
         <div className='new'>
             <Form id='form' name="basic" onFinish={handSubmit} autoComplete = "off">
-                    <Form.Item
-                        label="流水线名称"
-                        name="pipelineName"
-                        rules={[
-                            {
-                                required:true,
-                                message:""
+                <Form.Item
+                    label="流水线名称"
+                    name="pipelineName"
+                    rules={[
+                        {
+                            required:true,
+                            message:""
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                                if (!value) {
+                                    return Promise.reject('请输入名称')
+                                }
+                                let nameArray = []
+                                if(pipelineList){
+                                    nameArray = pipelineList && pipelineList.map(item =>  item.pipelineName);
+                                }
+                                if (nameArray.includes(value)) {
+                                    return Promise.reject('名称已经存在');
+                                }
+                                return Promise.resolve()
                             },
-                            ({ getFieldValue }) => ({
-                                validator(rule, value) {
-                                    if (!value) {
-                                        return Promise.reject('请输入名称')
-                                    }
-                                    const nameArray = pipelineList.map(item => item.pipelineName);
-                                    if (nameArray.includes(value)) {
-                                        return Promise.reject('名称已经存在');
-                                    }
-                                    return Promise.resolve()
-                                },
-                            }),
-                        ]}
-                    >
-                        <Input
-                            style={{width:400}}
-                        />
-                    </Form.Item>
+                        }),
+                    ]}
+                >
+                    <Input
+                        style={{width:400}}
+                    />
+                </Form.Item>
             </Form>
             <div  className={'new-type'}>
                 <ul className={  "new-type-choose"}>
@@ -104,4 +111,4 @@ const PipelineAdd = props => {
     )
 }
 
-export default inject('PIPELINE_STORE')(observer(PipelineAdd))
+export default inject('PipelineStore')(observer(PipelineAdd))

@@ -5,9 +5,9 @@ import {routers} from "./routes";
 
 const App=()=> {
     return (
-        <BrowserRouter>
+        <HashRouter>
             {renderRoutes(routers)}
-        </BrowserRouter>
+        </HashRouter>
 
     );
 }

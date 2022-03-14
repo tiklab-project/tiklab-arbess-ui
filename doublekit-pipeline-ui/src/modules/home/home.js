@@ -18,7 +18,9 @@ const Home=props=>{
             key:'system'
         }
     ]
-    const route=props.route
+
+    const {route}=props
+
     return(
         <Layout>
             <Header >
@@ -27,7 +29,7 @@ const Home=props=>{
                     routers={headerRoutes}
                 />
             </Header>
-            <Content  >
+            <Content  className={'home'}>
                 {renderRoutes(route.routes)}
             </Content>
         </Layout>

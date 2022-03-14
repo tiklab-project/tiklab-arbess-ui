@@ -9,20 +9,32 @@ export function CreateProof(data){
     })
 }
 
-//添加后查看凭证
-export function SelectAllProof(data){
+//查看所有部署凭证信息
+export function  FindAllGitProof(data){
     return serviceLoc.request({
-        url:'/proof/selectAllProof',
+        url:'/proof/findAllGitProof',
         method:'post',
         data
     })
 }
 
-//查看凭证名名称
-export function  SelectProofName(data){
+//获取源码凭证名称
+export function  FindOneProof(data){
     return serviceLoc.request({
-        url:'/proof/selectProofName',
+        url:'/proof/findOneProof',
         method:'post',
         data
     })
 }
+
+//查看所有部署凭证信息
+export function  FindAllDeployProof(data){
+    return serviceLoc.request({
+        url:'/proof/findAllDeployProof',
+        method:'post',
+        data
+    })
+}
+
+
+

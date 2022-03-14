@@ -2,26 +2,36 @@ import React from 'react'
 import { Card } from 'antd';
 import Running from "../../../../common/running/running";
 
-const BuildClone = props =>{
+const StructureDeploy = props =>{
 
     const {logList}=props
-
 
     const state = () =>{
         if(!logList){
             return (
-                <div className='task-structure-running'>
-                    <Running/>
-                </div>
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-yunhang"></use>
+                </svg>
             )
-        }else {
-            if(logList.logCodeState===10){
+        } else {
+            //如果构建状态为10--运行
+            if(logList.logPackState===10 && logList.logDeployState===0){
+                return (
+                    <div className='task-structure-running'>
+                        <Running/>
+                    </div>
+                )
+            }
+            //如果部署状态为10--成功
+            else if(logList.logDeployState===10){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-chenggong-"></use>
                     </svg>
                 )
-            }else if(logList.logCodeState===1){
+            }
+            //如果部署状态为1--失败
+            else if(logList.logDeployState===1){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-yunhangshibai1"></use>
@@ -40,21 +50,21 @@ const BuildClone = props =>{
     const time = () => {
         if(!logList){
             return (
-                <li>克隆时间：0</li>
+                <li>部署时间：0</li>
             )
         }else {
             return (
-                <li>克隆时间：{logList.logCodeTime}</li>
+                <li>部署时间：{logList.logDeployTime}</li>
             )
         }
     }
 
     return(
-        <Card title="克隆" className='task-structure-card'>
+        <Card title="部署" className='task-structure-card'>
             <div className='task-structure-div'>
                 {state()}
             </div>
-            <div className='task-structure-ul'>
+            <div className='task-structure-ul' >
                 <ul>
                     {time()}
                 </ul>
@@ -63,4 +73,4 @@ const BuildClone = props =>{
     )
 }
 
-export default BuildClone
+export default StructureDeploy

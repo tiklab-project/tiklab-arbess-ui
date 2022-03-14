@@ -19,7 +19,8 @@ body,html,#root{
     position: fixed;
     .header{
       display: flex;
-      width: 1200px;
+      width: 100%;
+      min-width: 1200px;
       margin: 0 auto;
       &-logo{
         font-size: 1.5rem;
@@ -34,6 +35,7 @@ body,html,#root{
         display: inline-block;
         padding: 0 0.5125rem;
         color: #ccc;
+        font-size: 1rem;
         cursor: pointer;
         &-active{
           color: #1890ff !important;
@@ -47,9 +49,10 @@ body,html,#root{
       }
     }
   }
-  &-content{
-    width: 1200px;
+  .home{
+    width: 100%;
+    min-width: 1200px;
     height: 100%;
-    margin: 80px auto;
+    margin: 55px auto 0;
   }
 }

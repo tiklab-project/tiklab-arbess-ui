@@ -1,3 +1,5 @@
+import React from "react";
+import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Login=AsyncComponent(()=>import('./modules/login/login'))
@@ -14,18 +16,18 @@ const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipeline/compon
 // 工作空间
 const WorkTask=AsyncComponent(()=>import('./modules/pipeline/common/components/workSpace'))
 //开始构建
-const StructureTask=AsyncComponent(()=>import('./modules/pipeline/common/components/build'))
+const StructureTask=AsyncComponent(()=>import('./modules/pipeline/common/components/structure'))
 //配置
 const ConfigDetailsTask=AsyncComponent(()=>import('./modules/pipeline/common/components/configDetails'))
 //构建历史
-const HistoryTask=AsyncComponent(()=>import('./modules/pipeline/common/components/buildHistory'))
+const HistoryTask=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistory'))
 //流水线设置
 const AssemblyTask=AsyncComponent(()=>import('./modules/pipeline/common/components/assemblySetup'))
 
 //配置的过往记录
 const PastRecordsTask=AsyncComponent(()=>import('./modules/pipeline/common/components/config_pastRecords'))
 //构建历史的构建
-const BuildTask=AsyncComponent(()=>import('./modules/pipeline/common/components/buildHistoryDetails'))
+const BuildTask=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistoryDetails'))
 
 export const routers=[
     {
@@ -51,13 +53,18 @@ export const routers=[
                 component:Config,
             },
             {
-                path:'/home/searchresult',
+                path:'/home/searchresult/:searchresult',
                 component:SearchResult,
             },
             {
                 path:'/home/task',
                 component: Task,
                 routes:[
+                    {
+                        path: '/home/task',
+                        exact:true,
+                        render:()=>  <Redirect to={"/home/task/work"}/>,
+                    },
                     {
                         path:'/home/task/work',
                         component: WorkTask
@@ -71,7 +78,7 @@ export const routers=[
                         component: ConfigDetailsTask,
                     },
                     {
-                        path:'/home/task/build',
+                        path:'/home/task/build/:historyName',
                         component:BuildTask
                     },
                     {

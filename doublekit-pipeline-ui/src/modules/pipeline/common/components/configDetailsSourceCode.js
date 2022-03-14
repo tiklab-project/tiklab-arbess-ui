@@ -11,8 +11,6 @@ class ConfigDetailsSourceCode extends Component{
         this.state = {
             visible:false,
             value:this.props.sourceValue,
-            formValue:[],
-            proofName:localStorage.getItem('proofName')
         }
     }
 
@@ -39,32 +37,34 @@ class ConfigDetailsSourceCode extends Component{
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe
         }
-        this.props.createProof(param)
+        this.props.createGitProof(param)
         this.setState({visible:false})
     }
 
     onClick=()=>{
-        this.props.selectAllProof()
+        this.props.findAllGitProof()
     }
 
     onChange = (value) =>{
-        this.props.selectProofName(value)
-        localStorage.setItem('proofId',value)
+        this.props.findOneCodeProof(value)
+        localStorage.setItem('gitProofId',value)
     }
 
     render() {
+
         const {value}=this.state
+
         return(
             <div className='anchor-content'>
-                <h1>源码管理</h1>
-                <Form.Item  className='newDeployment-radio' name={'configureCodeSource'}>
+                <h2>源码管理</h2>
+                <Form.Item  name={'configureCodeSource'}>
                     <Radio.Group  onChange={this.handlerRadio} value={value}>
                         <Space direction="vertical">
-                            <Radio value='a'>无</Radio>
-                            <Radio value='b' >git</Radio>
+                            <Radio value={1}>无</Radio>
+                            <Radio value={2} >git</Radio>
                             {
-                                value==='b' ?
-                                    <div className={'task-config-hidden'}>
+                                value===2 ?
+                                    <>
                                         <Form.Item
                                             name="configureCodeSourceAddress"
                                             label="git地址"
@@ -77,22 +77,23 @@ class ConfigDetailsSourceCode extends Component{
                                         >
                                             <Input  />
                                         </Form.Item>
-                                        <Form.Item name="master" label="分支" defaultValue={'master'}>
+                                        <Form.Item name="configureBranch" label="分支" defaultValue={'master'}>
                                             <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
                                         </Form.Item>
-                                        <Form.Item>
+                                        <Form.Item >
                                             <Select
                                                 placeholder="无"
                                                 style={{ width: 300 }}
                                                 onChange={this.onChange}
                                                 onClick={this.onClick}
-                                                defaultValue={this.state.proofName}
+                                                defaultValue={localStorage.getItem('oneCodeProof')}
                                             >
                                                 {
-                                                    this.props.allProof.map(item=>{
+                                                    this.props.allGitProof && this.props.allGitProof.map(item=>{
+
                                                         return(
                                                             <Option key={item.proofId}>
-                                                                {item.proofName}
+                                                                { item.proofName+ "(" + item.proofUsername + ")"}
                                                             </Option>
                                                         )
                                                     })
@@ -103,7 +104,7 @@ class ConfigDetailsSourceCode extends Component{
                                                 添加
                                             </Button>
                                         </Form.Item>
-                                    </div>
+                                    </>
                                     :null
                             }
                             </Space>

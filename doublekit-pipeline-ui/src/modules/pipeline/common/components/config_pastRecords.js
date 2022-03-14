@@ -14,7 +14,7 @@ const PastRecordsTask=props=>{
     }
 
     return(
-        <div className='task-pastRecord'>
+        <div className='task-pastRecord task'>
             <h1>更改记录</h1>
             <div className='task-pastRecord-btn'>
                 <Button type='primary' onClick={()=>props.history.push('/home/task/config')}>

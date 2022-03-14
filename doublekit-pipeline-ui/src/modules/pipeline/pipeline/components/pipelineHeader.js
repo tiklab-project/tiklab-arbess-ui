@@ -8,14 +8,11 @@ const { Search } = Input;
 
 const PipelineHeader=props=>{
 
-    const {PIPELINE_STORE}=props
-    const {selectName}=PIPELINE_STORE
+    const {PipelineStore}=props
+    const {selectName}=PipelineStore
 
     const onSearch = values =>{
-        let param = {
-            pipelineName: values,
-        }
-        selectName(param).then(res=>{
+        selectName(values).then(res=>{
             if (res.data.length===0){
                 message.info('没有该流水线')
             }else {
@@ -48,4 +45,4 @@ const PipelineHeader=props=>{
         </>
     )
 }
-export default withRouter(inject('PIPELINE_STORE')(observer(PipelineHeader)))
+export default withRouter(inject('PipelineStore')(observer(PipelineHeader)))

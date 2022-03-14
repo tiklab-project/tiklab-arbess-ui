@@ -13,25 +13,23 @@ const PipelineDetailsAside=props=>{
     }
 
     return(
-        <div  className='task-left-nav'>
-            <Menu
-                style={{ width: 200 }}
-                selectedKeys={[path]}
-                mode="inline"
-            >
-                {
-                    taskRouters.map(item=>{
-                        return(
-                            <Menu.Item key={item.to} icon={item.icon}>
-                                <Link to={item.to}>
-                                    {item.title}
-                                </Link>
-                            </Menu.Item>
-                        )
-                    })
-                }
-            </Menu>
-        </div>
+        <Menu
+            style={{ width: 220 }}
+            selectedKeys={[path]}
+            mode="inline"
+        >
+            {
+                taskRouters  && taskRouters.map(item=>{
+                    return(
+                        <Menu.Item key={item.to} icon={item.icon}>
+                            <Link to={item.to}>
+                                {item.title}
+                            </Link>
+                        </Menu.Item>
+                    )
+                })
+            }
+        </Menu>
     )
 }
 

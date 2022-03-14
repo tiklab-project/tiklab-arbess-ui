@@ -4,9 +4,9 @@ import {observer,inject} from "mobx-react";
 
 const AssemblyTask=props=>{
 
-    const {PIPELINE_STORE}=props
+    const {PipelineStore}=props
 
-    const {deletePipeline,updatePipeline}=PIPELINE_STORE
+    const {deletePipeline,updatePipeline}=PipelineStore
 
     const [form]=Form.useForm()
 
@@ -18,12 +18,12 @@ const AssemblyTask=props=>{
     }
 
     const onFinish=(values)=>{
-        let params={
-            pipelineId:localStorage.getItem('pipelineId'),
+        const params={
+            pipelineId:pipelineId,
             pipelineName:values.pipelineName
         }
         updatePipeline(params).then(res=>{
-            if(res.data===null){
+            if(res.data==='0'){
                 message.info('名称已经存在')
             }else {
                 localStorage.setItem('pipelineName',values.pipelineName);
@@ -33,10 +33,13 @@ const AssemblyTask=props=>{
     }
 
     return(
-        <div className='task-assembly'>
+        <div className='task-assembly task'>
             <div className='task-assembly-top'>
-                <Form onFinish={onFinish} form={form} layout="inline">
-                    <Form.Item  label="重命名" name='pipelineName'>
+                <Form onFinish={onFinish} form={form} layout="inline"    autoComplete = "off">
+                    <Form.Item
+                        label="重命名"
+                        name='pipelineName'
+                    >
                         <Input />
                     </Form.Item>
                     <Form.Item>
@@ -62,4 +65,4 @@ const AssemblyTask=props=>{
         </div>
     )
 }
-export default inject('PIPELINE_STORE')(observer(AssemblyTask))
+export default inject('PipelineStore')(observer(AssemblyTask))

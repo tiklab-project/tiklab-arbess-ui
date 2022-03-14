@@ -1,4 +1,5 @@
 import {observable, action} from "mobx";
+import qs from "qs";
 
 import {
     SelectPipelineStatus,
@@ -7,8 +8,6 @@ import {
     DeletePipeline,
     UpdatePipeline
 } from "../api/pipeline";
-import qs from "qs";
-
 
 class PipelineStore{
     constructor(store) {
@@ -23,7 +22,7 @@ class PipelineStore{
         SelectPipelineStatus().then(res=>{
             this.pipelineList=res.data.data
             // localStorage.setItem('pipelineList', JSON.stringify(this.pipelineList))
-            console.log('所有流水线',res)
+            console.log('所有流水线', this.pipelineList)
         }).catch(error=>{
             console.log(error)
         })
@@ -37,26 +36,20 @@ class PipelineStore{
             pipelineType: values.pipelineType,
             pipelineCreateTime:values.pipelineCreateTime
         }
-        return new Promise((resolve, reject) => {
-            CreatePipeline(param).then(res=>{
-                this.pipelineId=res.data.data
-                localStorage.setItem('pipelineId', this.pipelineId)
-                console.log('创建流水线',res)
-                resolve(res.data)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
+        CreatePipeline(param).then(res=>{
+            this.pipelineId=res.data.data
+            localStorage.setItem('pipelineId', this.pipelineId)
+            console.log('创建流水线',res)
+        }).catch(error=>{
+            console.log(error)
         })
     }
 
     @action
     selectName=values=>{
-        let param = {
-            pipelineName: values.pipelineName,
-        }
+        const params = qs.stringify({'pipelineName': values})
         return new Promise((resolve, reject) => {
-            SelectName(param).then(res=>{
+            SelectName(params).then(res=>{
                 this.searchPipelineList=res.data.data
                 // localStorage.setItem('searchPipelineList',JSON.stringify(this.searchPipelineList))
                 console.log("搜索流水线",res)
@@ -69,9 +62,10 @@ class PipelineStore{
     }
 
     @action //删除流水线
-    deletePipeline=(values)=>{
+    deletePipeline=values=>{
         const params = qs.stringify({'pipelineId': values})
         DeletePipeline(params).then(res=>{
+            // this.selectPipelineStatus()
             console.log('删除流水线',res)
         }).catch(error=>{
             console.log(error)
@@ -80,7 +74,7 @@ class PipelineStore{
     }
 
     @action
-    updatePipeline=(values)=>{
+    updatePipeline=values=>{
         let param={
             pipelineId:values.pipelineId,
             pipelineName:values.pipelineName
