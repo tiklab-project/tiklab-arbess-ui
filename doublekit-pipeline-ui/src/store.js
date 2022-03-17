@@ -2,7 +2,7 @@ import PipelineStore from "./modules/pipeline/pipeline/store/pipelineStore";
 import ConfigStore from "./modules/config/store/configStore";
 import ProofStore from "./modules/config/store/proofStore";
 import StructureStore from "./modules/pipeline/common/store/structureStore";
-import ConfigCommonStore from "./modules/pipeline/common/store/configCommonStore";
+import GitAuthorizeStore from "./modules/pipeline/common/store/gitAuthorizeStore";
 
 class store{
     constructor() {
@@ -10,7 +10,7 @@ class store{
         this.ProofStore=new ProofStore(this)
         this.StructureStore=new StructureStore(this)
         this.ConfigStore=new ConfigStore(this)
-        this.ConfigCommonStore=new ConfigCommonStore(this)
+        this.GitAuthorizeStore=new GitAuthorizeStore(this)
     }
 }
 

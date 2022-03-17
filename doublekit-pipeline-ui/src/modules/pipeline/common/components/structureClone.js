@@ -16,7 +16,7 @@ const StructureClone = props =>{
         }else {
             if(logList.logCodeState===2){
                 return (
-                    <div className='task-structure-running'>
+                    <div className='structure-running'>
                         <Running/>
                     </div>
                 )
@@ -55,11 +55,11 @@ const StructureClone = props =>{
     }
 
     return(
-        <Card title="克隆" className='task-structure-card'>
-            <div className='task-structure-div'>
+        <Card title="克隆" className='structure-card'>
+            <div className='structure-div'>
                 {state()}
             </div>
-            <div className='task-structure-ul'>
+            <div className='structure-ul'>
                 <ul>
                     {time()}
                 </ul>

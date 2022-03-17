@@ -23,18 +23,15 @@
   }
   .btn-sticker-inner{
     position: fixed;
-    left: 330px;
+    left: 400px;
     bottom: 0;
     z-index: 50;
     height: 50px;
     line-height: 50px;
     text-align: center;
   }
-  &-hidden{
-    margin-top:15px;
-  }
   &-radio {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   //内容样式

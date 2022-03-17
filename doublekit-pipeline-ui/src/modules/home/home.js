@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd';
+import './home.scss'
 import {renderRoutes} from "react-router-config";
 import Heads from "./components/header";
 

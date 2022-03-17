@@ -31,13 +31,13 @@ const lis=[
 const Config_pastRecordsThis = props =>{
 
     return(
-        <div className='task-pastRecord-this' >
+        <div className='config_pastRecords-this' >
             {
                 lis && lis.map((item,index)=>{
                     return(
-                        <div key={item.id} className='task-pastRecord-compare'>
-                            <div className='task-pastRecord-left'>{item.title}</div>
-                            <div className='task-pastRecord-right '>{item.desc}</div>
+                        <div key={item.id} className='config_pastRecords-compare'>
+                            <div className='config_pastRecords-left'>{item.title}</div>
+                            <div className='config_pastRecords-right '>{item.desc}</div>
                         </div>
                     )
                 })

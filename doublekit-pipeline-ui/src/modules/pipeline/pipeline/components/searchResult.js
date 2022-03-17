@@ -13,7 +13,7 @@ const SearchResult = props => {
         selectName(match.params.searchresult)
     },[])
 
-    const  goPipelineTask= (text) =>{
+    const  goPipelineTask= text =>{
         localStorage.setItem('pipelineName',text.pipelineName)
         localStorage.setItem('pipelineId',text.pipelineId)
         props.history.push('/home/task/work')

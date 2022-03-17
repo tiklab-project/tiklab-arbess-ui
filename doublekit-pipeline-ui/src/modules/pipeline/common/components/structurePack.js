@@ -17,7 +17,7 @@ const StructurePack = props =>{
             //如果测试时间为10 --运行
             if(logList.logTestState===10 && logList.logPackState===0){
                 return (
-                    <div className='task-structure-running'>
+                    <div className='structure-running'>
                         <Running/>
                     </div>
                 )
@@ -60,11 +60,11 @@ const StructurePack = props =>{
     }
 
     return(
-        <Card title="构建" className='task-structure-card'>
-            <div className='task-structure-div'>
+        <Card title="构建" className='structure-card'>
+            <div className='structure-div'>
                 {state()}
             </div>
-            <div className='task-structure-ul'>
+            <div className='structure-ul'>
                 <ul>
                     {time()}
                 </ul>

@@ -7,7 +7,7 @@ const { TextArea } = Input;
 
 const Deploy = props =>{
 
-    const {createDeployProof,findAllDeployProof,findOneDeployProof,allDeployProof}=props
+    const {createProof,findOneDeployProof,findAllDeployProof,allDeployProofList}=props
 
     const [visible,setVisible]=useState(false)
 
@@ -19,7 +19,7 @@ const Deploy = props =>{
             proofPort:values.proofPort,
             proofDescribe:values.proofDescribe,
         }
-        createDeployProof(params)
+        createProof(params)
         setVisible(false)
     }
 
@@ -45,7 +45,7 @@ const Deploy = props =>{
                     style={{ width: 300 }}
                 >
                     {
-                        allDeployProof.map(item=>{
+                        allDeployProofList && allDeployProofList.map(item=>{
                             return(
                                 <Option key={item.proofId}>
                                     { item.proofName+ "(" + item.proofIp + ")"}

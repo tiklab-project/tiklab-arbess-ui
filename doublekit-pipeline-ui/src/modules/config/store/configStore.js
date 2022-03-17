@@ -2,9 +2,9 @@ import {observable, action} from "mobx";
 import qs from "qs";
 
 import {
+    CreatePipelineConfigure,
     SelectPipelineConfig,
     UpdatePipelineConfig,
-    CreatePipelineConfigure,
 } from "../api/config";
 
 class ConfigStore{
@@ -13,6 +13,8 @@ class ConfigStore{
     }
 
     @observable configureId=''
+    @observable gitProofId=''
+    @observable deployProofId=''
 
     @action
     createPipelineConfigure=values=>{
@@ -34,8 +36,7 @@ class ConfigStore{
             gitProofId: values.gitProofId,
         }
         CreatePipelineConfigure(params).then(res=>{
-            this.configureId=res.data.data
-            localStorage.setItem('configureId',this.configureId)
+            console.log("创造流水线配置",res)
         }).catch(error=>{
             console.log(error)
         })
@@ -48,7 +49,9 @@ class ConfigStore{
             SelectPipelineConfig(params).then(res=>{
                 console.log('查看流水线配置',res)
                 if(res.data.data){
-                    localStorage.setItem('configureId',res.data.data.configureId)
+                    this.configureId=res.data.data.configureId
+                    this.gitProofId=res.data.data.gitProofId
+                    this.deployProofId=res.data.data.deployProofId
                 }
                 resolve(res.data)
             }).catch(error=>{

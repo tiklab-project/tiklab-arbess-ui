@@ -14,24 +14,24 @@ const Test = props => {
     return(
         <div className='anchor-content'>
             <h1>单元测试</h1>
-            <Form.Item className='newDeployment-radio' name={'configureTestType'}>
+            <Form.Item className='newDeployment-radio' name='configureTestType'>
                 <Radio.Group  onChange={handlerRadio} value={radio}>
-                    <Space direction="vertical">
+                    <Space >
                         <Radio value={1}>无</Radio>
                         <Radio value={2} >单元测试</Radio>
-                        {
-                            radio === 2 ?
-                                <div className={'newDeployment-hidden'}>
-                                    <Form.Item
-                                        name="configureTestText"
-                                    >
-                                        <TextArea  autoSize/>
-                                    </Form.Item>
-                                </div>:null
-                        }
                     </Space>
                 </Radio.Group>
             </Form.Item>
+            {
+                radio === 2 ?
+                    <>
+                        <Form.Item
+                            name='configureTestText'
+                        >
+                            <TextArea  autoSize/>
+                        </Form.Item>
+                    </>:null
+            }
         </div>
     )
 }

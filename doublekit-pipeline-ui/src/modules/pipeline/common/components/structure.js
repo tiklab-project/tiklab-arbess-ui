@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import {Button} from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
+import './structure.scss'
 import StructureClone from "./structureClone";
 import StructureTest from "./structureTest";
 import StructurePack from "./structurePack";
@@ -48,8 +49,8 @@ const StructureTask = props => {
     }
 
     return (
-        <div className='task-structure task'>
-            <div className='task-structure-btn'>
+        <div className='structure task'>
+            <div className='structure-btn'>
                 <Button>
                     <PoweroffOutlined />停止
                 </Button>
@@ -62,9 +63,9 @@ const StructureTask = props => {
                 <StructureDeploy logList={logList} />
             </div>
 
-            <div className='task-structure-out'>
+            <div className='structure-out'>
                 <h2>输出</h2>
-                <div className='task-structure-outLog'  id='outLog'>
+                <div className='structure-outLog'  id='outLog'>
                     {logRunLog()}
                 </div>
             </div>

@@ -7,27 +7,19 @@ const Home=AsyncComponent(()=>import('./modules/home/home'))
 const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/containers/pipeline'))
-const New=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineAdd'))
+const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineAdd'))
 const Config=AsyncComponent(()=>import('./modules/config/containers/config'))
-const Task=AsyncComponent(()=>import('./modules/pipeline/common/containers/pipelineDetails'))
+const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/common/containers/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/searchResult'))
 
-//任务
-// 工作空间
-const WorkTask=AsyncComponent(()=>import('./modules/pipeline/common/components/workSpace'))
-//开始构建
-const StructureTask=AsyncComponent(()=>import('./modules/pipeline/common/components/structure'))
-//配置
-const ConfigDetailsTask=AsyncComponent(()=>import('./modules/pipeline/common/components/configDetails'))
-//构建历史
-const HistoryTask=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistory'))
-//流水线设置
-const AssemblyTask=AsyncComponent(()=>import('./modules/pipeline/common/components/assemblySetup'))
 
-//配置的过往记录
-const PastRecordsTask=AsyncComponent(()=>import('./modules/pipeline/common/components/config_pastRecords'))
-//构建历史的构建
-const BuildTask=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistoryDetails'))
+const WorkSpace=AsyncComponent(()=>import('./modules/pipeline/common/components/workSpace'))
+const Structure=AsyncComponent(()=>import('./modules/pipeline/common/components/structure'))
+const ConfigDetails=AsyncComponent(()=>import('./modules/pipeline/common/components/configDetails'))
+const StructureHistory=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistory'))
+const AssemblySetup=AsyncComponent(()=>import('./modules/pipeline/common/components/assemblySetup'))
+const ConfigPastRecords=AsyncComponent(()=>import('./modules/pipeline/common/components/config_pastRecords'))
+const StructureHistoryDetails=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistoryDetails'))
 
 export const routers=[
     {
@@ -40,13 +32,18 @@ export const routers=[
         component: Home,
         routes:[
             {
+                path: '/home',
+                exact:true,
+                render:()=>  <Redirect to={"/home/pipeline"}/>,
+            },
+            {
                 path:'/home/pipeline',
                 component:Pipeline,
                 exact: true,
             },
             {
                 path:'/home/new',
-                component: New,
+                component: PipelineAdd,
             },
             {
                 path:'/home/config',
@@ -58,7 +55,7 @@ export const routers=[
             },
             {
                 path:'/home/task',
-                component: Task,
+                component: PipelineDetails,
                 routes:[
                     {
                         path: '/home/task',
@@ -67,31 +64,31 @@ export const routers=[
                     },
                     {
                         path:'/home/task/work',
-                        component: WorkTask
+                        component: WorkSpace
                     },
                     {
                         path:"/home/task/structure",
-                        component: StructureTask
+                        component: Structure
                     },
                     {
                         path:'/home/task/config',
-                        component: ConfigDetailsTask,
+                        component: ConfigDetails,
                     },
                     {
                         path:'/home/task/build/:historyName',
-                        component:BuildTask
+                        component:StructureHistoryDetails
                     },
                     {
                         path:'/home/task/history',
-                        component: HistoryTask,
+                        component: StructureHistory,
                     },
                     {
                         path:'/home/task/assembly',
-                        component: AssemblyTask
+                        component: AssemblySetup
                     },
                     {
                         path:'/home/task/post',
-                        component:PastRecordsTask
+                        component:ConfigPastRecords
                     },
                 ]
             },
@@ -99,12 +96,13 @@ export const routers=[
                 path:'/home/system',
                 component:System,
                 exact: true,
-            }
+            },
         ]
     },
     {
         path:'/',
         component: Home,
         exact: true,
-    }
+    },
+
 ]

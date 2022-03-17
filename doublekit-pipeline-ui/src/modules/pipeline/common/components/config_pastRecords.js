@@ -1,11 +1,12 @@
 import React,{useState} from "react";
 import {Button,Card} from "antd";
 import {withRouter} from "react-router-dom";
+import './config_pastRecords.scss'
 import Config_pastRecordsThis from "./config_pastRecordsThis";
 import Config_pastRecordsLast from "./config_pastRecordsLast";
 import Config_pastRecordsScreenModal from "./config_pastRecordsScreenModal";
 
-const PastRecordsTask=props=>{
+const ConfigPastRecords=props=>{
 
     const [visible, setVisible] = useState(false)
 
@@ -14,9 +15,9 @@ const PastRecordsTask=props=>{
     }
 
     return(
-        <div className='task-pastRecord task'>
+        <div className='config_pastRecords task'>
             <h1>更改记录</h1>
-            <div className='task-pastRecord-btn'>
+            <div className='config_pastRecords-btn'>
                 <Button type='primary' onClick={()=>props.history.push('/home/task/config')}>
                     返回
                 </Button>
@@ -24,7 +25,7 @@ const PastRecordsTask=props=>{
                     筛选
                 </Button>
             </div>
-            <div className='task-pastRecord-h'>
+            <div className='config_pastRecords-h'>
                 <Card title={<h2>本次构建</h2>} extra={<h2>上次构建</h2>} >
                     <Config_pastRecordsThis/>
                     <Config_pastRecordsLast/>
@@ -38,4 +39,4 @@ const PastRecordsTask=props=>{
     )
 }
 
-export default withRouter(PastRecordsTask)
+export default withRouter(ConfigPastRecords)

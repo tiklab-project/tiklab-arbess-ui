@@ -17,7 +17,7 @@ const StructureDeploy = props =>{
             //如果构建状态为10--运行
             if(logList.logPackState===10 && logList.logDeployState===0){
                 return (
-                    <div className='task-structure-running'>
+                    <div className='structure-running'>
                         <Running/>
                     </div>
                 )
@@ -60,11 +60,11 @@ const StructureDeploy = props =>{
     }
 
     return(
-        <Card title="部署" className='task-structure-card'>
-            <div className='task-structure-div'>
+        <Card title="部署" className='structure-card'>
+            <div className='structure-div'>
                 {state()}
             </div>
-            <div className='task-structure-ul' >
+            <div className='structure-ul' >
                 <ul>
                     {time()}
                 </ul>

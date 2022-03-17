@@ -30,48 +30,48 @@ const StructureHistoryScreenModal=({visible,onCancel,onCreate})=>{
             <Form
                 form={form}
                 layout="vertical"
-                initialValues={{username:"a", mode:"a", code:"a", voucher:"a"}}
+                initialValues={{username:1, mode:1, code:1, voucher:1}}
             >
                 <Form.Item label="状态" name="status">
                     <Checkbox.Group style={{ width: '100%' ,marginBottom:-10}}>
                         <Row>
                             <Col span={6}>
-                                <Checkbox value="A">成功</Checkbox>
+                                <Checkbox value={1}>成功</Checkbox>
                             </Col>
                             <Col span={6}>
-                                <Checkbox value="B">停止</Checkbox>
+                                <Checkbox value={2}>终止</Checkbox>
                             </Col>
                             <Col span={6}>
-                                <Checkbox value="C">失败</Checkbox>
+                                <Checkbox value={3}>失败</Checkbox>
                             </Col>
                         </Row>
                     </Checkbox.Group>
                 </Form.Item>
                 <Form.Item name="time" label='时间'>
-                    <RangePicker />
+                    <RangePicker  />
                 </Form.Item>
                 <Form.Item name='username' label='执行人'>
                     <Select  >
-                        <Option value="a">admin</Option>
-                        <Option value="b">lucy</Option>
+                        <Option value={1}>admin</Option>
+                        <Option value={2}>lucy</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item name='mode' label='执行方式'>
                     <Select >
-                        <Option value="a">自动</Option>
-                        <Option value="b">手动</Option>
+                        <Option value={1}>自动</Option>
+                        <Option value={2}>手动</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item name='code' label='代码源'>
                     <Select >
-                        <Option value="a">git</Option>
-                        <Option value="b">SVN</Option>
+                        <Option value={1}>git</Option>
+                        <Option value={2}>SVN</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item label='凭证' name='voucher'>
                     <Select >
-                        <Option value="a">SSH</Option>
-                        <Option value="b">password</Option>
+                        <Option value={1}>SSH</Option>
+                        <Option value={1}>password</Option>
                     </Select>
                 </Form.Item>
             </Form>

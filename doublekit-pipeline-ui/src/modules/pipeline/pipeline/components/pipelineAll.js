@@ -1,19 +1,19 @@
 import React,{ useEffect,useState } from "react";
 import {Table,Tooltip } from "antd";
 import {withRouter} from "react-router-dom";
-import {observer,inject} from "mobx-react";
+import './pipelineAll.scss'
 import Running from "../../../../common/running/running";
-
+import {observer,inject} from "mobx-react";
 
 const PipelineAll= props=>{
 
     const {PipelineStore,StructureStore}=props
     const {selectPipelineStatus,pipelineList}=PipelineStore
-    const {pipelineStructure,selectStructureState}=StructureStore
 
     //初始化表格
     useEffect(()=>{
-        selectPipelineStatus()
+        const se = setTimeout(()=>selectPipelineStatus(),100)
+        return ()=> clearTimeout(se)
     },[])
 
     //收藏

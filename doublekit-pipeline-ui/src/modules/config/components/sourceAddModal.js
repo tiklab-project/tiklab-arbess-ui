@@ -1,30 +1,49 @@
-import React from "react";
+import React  from "react";
 import {Form, Select, Input, Modal} from "antd";
 
 const { Option } = Select;
 
-const SourceCodeAddModal=({visible, onCreate, onCancel,})=>{
+const SourceAddModal= props =>{
 
+    const { GitOrGitee,visible,setVisible ,createProof} = props
     const [form] = Form.useForm();
+
+    const onOk = () =>{
+        form.validateFields().then((values) => {
+            if( GitOrGitee === 'Git' ){
+                const params = {
+                    proofScope:1,
+                    proofType:values.proofType,
+                    proofName:values.proofName,
+                    proofUsername:values.proofUsername,
+                    proofPassword:values.proofPassword,
+                    proofDescribe:values.proofDescribe
+                }
+                createProof(params)
+            }else{
+                const params = {
+                    proofScope:3,
+                    proofType:values.proofType,
+                    proofName:values.proofName,
+                    proofUsername:values.proofUsername,
+                    proofPassword:values.proofPassword,
+                    proofDescribe:values.proofDescribe
+                }
+                createProof(params)
+            }
+        })
+        setVisible(false)
+    }
 
     return (
        <Modal
            visible={visible}
            closable={false}
+           form={form}
            okText="确认"
            cancelText="取消"
-           onCancel={onCancel}
-           onOk={() => {
-               form
-                   .validateFields()
-                   .then(values => {
-                       form.resetFields();
-                       onCreate(values);
-                   })
-                   .catch(info => {
-                       console.log('Validate Failed:', info);
-                   });
-           }}
+           onCancel={()=>setVisible(false)}
+           onOk={onOk}
        >
            <Form form={form} layout="vertical" name="userForm" initialValues={{proofType:"password"}}>
                <Form.Item label={'凭证名称'} name={'proofName'}>
@@ -57,4 +76,5 @@ const SourceCodeAddModal=({visible, onCreate, onCancel,})=>{
        </Modal>
     )
 }
-export default SourceCodeAddModal
+
+export default SourceAddModal

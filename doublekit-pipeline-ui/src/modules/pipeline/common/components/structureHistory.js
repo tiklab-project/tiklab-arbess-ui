@@ -1,10 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import {Button,  Table} from "antd";
 import {withRouter} from "react-router-dom";
+import './structureHistory.scss'
 import StructureHistoryScreenModal from "./structureHistoryScreenModal";
 import {observer,inject} from "mobx-react";
 
-const HistoryTask=props=>{
+const StructureHistory=props=>{
 
     const {StructureStore}=props
     const {selectHistoryDetails,buildHistoryList}=StructureStore
@@ -12,13 +13,12 @@ const HistoryTask=props=>{
     const pipelineId=localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-        const se=setTimeout(()=> selectHistoryDetails(pipelineId),100)
-        return () =>{
-            clearTimeout(se)
-        }
+        const se = setTimeout(()=>selectHistoryDetails(pipelineId),100)
+        return ()=> clearTimeout(se)
     },[])
 
     const [visible, setVisible] = useState(false);
+
     const onCreate = (values) => {
         console.log('Received values of form: ', values);
         setVisible(false);
@@ -46,7 +46,7 @@ const HistoryTask=props=>{
                         onClick={()=>
                             goBuildDetails(record)
                         }
-                        className='task-history-table'
+                        className='structure-history-table'
                     >
                         构建{text}
                     </span>
@@ -88,7 +88,7 @@ const HistoryTask=props=>{
                         onClick={()=>
                             goImplementorDetails(text,record)
                         }
-                        className='task-history-table'
+                        className='structure-history-table'
                     >
                         {text}
                     </span>
@@ -132,21 +132,19 @@ const HistoryTask=props=>{
     ]
 
     return(
-        <div className='task-history task'>
-            <div className='task-history-top'>
+        <div className='structure-history task'>
+            <div className='structure-history-top'>
                 <Button type='primary'  onClick={()=>{setVisible(true)}}>
                     筛选
                 </Button>
 
                 <StructureHistoryScreenModal
                     visible={visible}
-                    onCreate={()=>onCreate()}
-                    onCancel={() => {
-                        setVisible(false);
-                    }}
+                    onCreate={onCreate}
+                    onCancel={() => {setVisible(false);}}
                 />
             </div>
-            <div className='task-history-bottom'>
+            <div className='structure-history-bottom'>
                 <Table
                     rowKey={record => record.historyId}
                     columns={columns}
@@ -157,4 +155,4 @@ const HistoryTask=props=>{
     )
 }
 
-export default withRouter(inject('StructureStore')(observer(HistoryTask)))
+export default withRouter(inject('StructureStore')(observer(StructureHistory)))

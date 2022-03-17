@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{Fragment} from 'react'
 import { Button,Input,message,Breadcrumb} from "antd";
 import {withRouter} from "react-router-dom";
 import {PlusOutlined} from "@ant-design/icons";
@@ -16,13 +16,13 @@ const PipelineHeader=props=>{
             if (res.data.length===0){
                 message.info('没有该流水线')
             }else {
-                props.history.push('/home/searchresult')
+                props.history.push(`/home/searchresult/${values}`)
             }
         })
     }
 
     return(
-        <>
+        <Fragment>
             <div>
                 <div className='pipeline-top-l'>
                     <Breadcrumb separator=">">
@@ -42,7 +42,8 @@ const PipelineHeader=props=>{
             <div className='pipeline-top-s'>
                 <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 200 }} />
             </div>
-        </>
+        </Fragment>
     )
 }
+
 export default withRouter(inject('PipelineStore')(observer(PipelineHeader)))

@@ -1,0 +1,14 @@
+.structure-history{
+  &-top{
+    h1{
+      font-size: 30px;
+    }
+    Button{
+      float: right;
+    }
+  }
+  &-table{
+    cursor: pointer;
+    color: #1890ff;
+  }
+}

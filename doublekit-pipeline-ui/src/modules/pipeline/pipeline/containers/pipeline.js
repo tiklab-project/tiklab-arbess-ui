@@ -1,9 +1,10 @@
 import React  from "react";
-import PipelineHeader from "../components/pipelineHeader";
-import My from "../components/pipelineMy";
-import All from "../components/pipelineAll";
 import { Tabs} from 'antd';
 import {withRouter} from "react-router-dom";
+import './pipeline.scss'
+import PipelineHeader from "../components/pipelineHeader";
+import All from "../components/pipelineAll";
+import My from "../components/pipelineMy";
 
 const { TabPane } = Tabs;
 

@@ -1,21 +1,9 @@
 @import "~antd/dist/antd.css";
-
 @import "assets/font_icon/iconfont.css";
-
-@import "modules/home/home";
-
-@import "modules/login/login";
-
-//流水线
-@import "modules/pipeline/pipeline/containers/pipeline";
-
-@import "modules/pipeline/pipeline/components/pipelineAll";
-
-//任务
-@import "modules/pipeline/common/containers/pipelineDetails";
-
-//新建流水线
-@import "modules/pipeline/pipeline/components/pipelineAdd";
-
-//部署
-@import "modules/config/containers/config";
+.icon {
+  width: 30px;
+  height: 30px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}

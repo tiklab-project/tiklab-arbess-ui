@@ -12,6 +12,12 @@ const StructureHistoryDetailsCenter = props =>{
                     <use xlinkHref="#icon-chenggong-"></use>
                 </svg>
             )
+        }else if(historyLog.logCodeState===0){
+            return(
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-yizhongzhi"></use>
+                </svg>
+            )
         }else {
             return (
                 <svg className="icon" aria-hidden="true">
@@ -26,6 +32,12 @@ const StructureHistoryDetailsCenter = props =>{
             return (
                 <svg className="icon" aria-hidden="true">
                     <use xlinkHref="#icon-chenggong-"></use>
+                </svg>
+            )
+        }else if(historyLog.logTestState===0){
+            return(
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-yizhongzhi"></use>
                 </svg>
             )
         }else {
@@ -44,6 +56,12 @@ const StructureHistoryDetailsCenter = props =>{
                     <use xlinkHref="#icon-chenggong-"></use>
                 </svg>
             )
+        }else if(historyLog.logPackState===0){
+            return(
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-yizhongzhi"></use>
+                </svg>
+            )
         }else {
             return (
                 <svg className="icon" aria-hidden="true">
@@ -60,6 +78,12 @@ const StructureHistoryDetailsCenter = props =>{
                     <use xlinkHref="#icon-chenggong-"></use>
                 </svg>
             )
+        }else if(historyLog.logDeployState===0){
+            return(
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-yizhongzhi"></use>
+                </svg>
+            )
         }else {
             return (
                 <svg className="icon" aria-hidden="true">
@@ -71,45 +95,45 @@ const StructureHistoryDetailsCenter = props =>{
 
     return(
         <div>
-            <div className='task-build-center'>
-                <Card title='克隆'  className='task-build-card'>
-                    <div className='task-build-div'>
+            <div className='structureHistory-details-center'>
+                <Card title='克隆'  className='structureHistory-details-card'>
+                    <div className='structureHistory-details-div'>
                         {CodeState()}
                     </div>
-                    <div className='task-build-ul'>
+                    <div className='structureHistory-details-ul'>
                         <ul>
                             <li>克隆时间：{historyLog.logCodeTime}</li>
                         </ul>
                     </div>
                </Card>
 
-                <Card title='测试'  className='task-build-card'>
-                    <div className='task-build-div'>
+                <Card title='测试'  className='structureHistory-details-card'>
+                    <div className='structureHistory-details-div'>
                         {TestState()}
                     </div>
-                    <div className='task-build-ul'>
+                    <div className='structureHistory-details-ul'>
                         <ul>
                             <li>测试时间：{historyLog.logTestTime}</li>
                         </ul>
                     </div>
                 </Card>
 
-                <Card title='构建'  className='task-build-card'>
-                    <div className='task-build-div'>
+                <Card title='构建'  className='structureHistory-details-card'>
+                    <div className='structureHistory-details-div'>
                         {PackState()}
                     </div>
-                    <div className='task-build-ul'>
+                    <div className='structureHistory-details-ul'>
                         <ul>
                             <li>构建时间：{historyLog.logPackTime}</li>
                         </ul>
                     </div>
                </Card>
 
-                <Card title='部署'  className='task-build-card'>
-                    <div className='task-build-div'>
+                <Card title='部署'  className='structureHistory-details-card'>
+                    <div className='structureHistory-details-div'>
                         {DeployState()}
                     </div>
-                    <div className='task-build-ul'>
+                    <div className='structureHistory-details-ul'>
                         <ul>
                             <li>部署时间：{historyLog.logDeployTime}</li>
                         </ul>
@@ -117,9 +141,9 @@ const StructureHistoryDetailsCenter = props =>{
                </Card>
            </div>
 
-            <div className='task-build-out'>
+            <div className='structureHistory-details-out'>
                 <h1>控制台输出</h1>
-                <div className='task-build-log' >
+                <div className='structureHistory-details-log' >
                     {historyLog.logRunLog}
                 </div>
            </div>

@@ -16,7 +16,7 @@ const StructureTest = props =>{
         }else {
             if(logList.logCodeState===10 && logList.logTestState===0){
                 return (
-                    <div className='task-structure-running'>
+                    <div className='structure-running'>
                         <Running/>
                     </div>
                 )
@@ -55,11 +55,11 @@ const StructureTest = props =>{
     }
 
     return(
-        <Card title="测试" className='task-structure-card'>
-            <div className='task-structure-div'>
+        <Card title="测试" className='structure-card'>
+            <div className='structure-div'>
                 {state()}
             </div>
-            <div className='task-structure-ul'>
+            <div className='structure-ul'>
                 <ul>
                     {time()}
                 </ul>

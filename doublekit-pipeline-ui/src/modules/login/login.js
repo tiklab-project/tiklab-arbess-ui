@@ -1,5 +1,6 @@
 import React from 'react'
 import {Form, Input, Button, Card,} from 'antd';
+import './login.scss'
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 
 const Login=(props)=>{

@@ -7,7 +7,7 @@ import {
     SelectHistoryLog,
     SelectHistoryDetails,
     DeleteHistoryLog
-} from "../api/build";
+} from "../api/structure";
 
 class StructureStore {
     constructor(store) {
@@ -41,7 +41,6 @@ class StructureStore {
             })
         })
     }
-
 
     @action
     selectHistoryDetails = values =>{

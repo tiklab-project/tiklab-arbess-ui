@@ -7,7 +7,8 @@ const { TextArea } = Input;
 
 const ConfigDetailsDeploy = props =>{
 
-    const {createDeployProof,findAllDeployProof,findOneDeployProof,allDeployProof,deployProofName}=props
+    const {createProof,findAllDeployProof,findOneDeployProof,
+        allDeployProofList,oneDeployProof}=props
 
     const [visible,setVisible]=useState(false)
 
@@ -19,15 +20,16 @@ const ConfigDetailsDeploy = props =>{
             proofPort:values.proofPort,
             proofDescribe:values.proofDescribe,
         }
-        createDeployProof(params)
+        createProof(params)
         setVisible(false)
     }
 
-    const findAllDeploy = () =>{
+    const clickFindAllDeploy = () =>{
         findAllDeployProof()
     }
 
-    const deploySelect = value=>{
+    const changeDeploySelect = value =>{
+        console.log(value)
         findOneDeployProof(value)
         localStorage.setItem('deployProofId',value)
     }
@@ -35,18 +37,19 @@ const ConfigDetailsDeploy = props =>{
     return(
         <div className=' anchor-content'>
             <h2>部署</h2>
-            <Form.Item name={'configureTargetAddress'} label='请输入文件地址'>
+            <Form.Item name='configureTargetAddress' label='请输入文件地址'>
                 <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
             </Form.Item>
             <Form.Item  label='请选择Ip地址'>
                 <Select
-                    onChange={deploySelect}
-                    onClick={findAllDeploy}
+                    labelInValue
+                    onChange={changeDeploySelect}
+                    onClick={clickFindAllDeploy}
                     style={{ width: 300 }}
-                    defaultValue={localStorage.getItem('oneDeployProof')}
+                    defaultValue=  { oneDeployProof.proofName+ "(" + oneDeployProof.proofIp + ")"}
                 >
                     {
-                        allDeployProof && allDeployProof.map(item=>{
+                        allDeployProofList && allDeployProofList.map(item=>{
                             return(
                                 <Option key={item.proofId}>
                                     { item.proofName+ "(" + item.proofIp + ")"}
@@ -60,10 +63,10 @@ const ConfigDetailsDeploy = props =>{
                     添加
                 </Button>
             </Form.Item>
-            <Form.Item name={'configureDeployAddress'} label='部署位置'>
+            <Form.Item name='configureDeployAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
-            <Form.Item name={'configureShell'} label='shell命令'>
+            <Form.Item name='configureShell' label='shell命令'>
                 <TextArea autoSize />
             </Form.Item>
 

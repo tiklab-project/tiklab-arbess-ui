@@ -1,8 +1,9 @@
 import React,{useEffect} from "react";
 import { Layout } from 'antd';
+import {renderRoutes} from "react-router-config";
+import './pipelineDetails.scss'
 import PipelineDetailsBreadcrumb from "../components/pipelineDetailsBreadcrumb";
 import PipelineDetailsAside from "../components/pipelineDetailsAside";
-import {renderRoutes} from "react-router-config";
 
 const { Content, Sider } = Layout;
 
@@ -22,7 +23,7 @@ const PipelineDetails= props=>{
             <Sider>
                 <PipelineDetailsAside/>
             </Sider>
-            <Content className={'pipelineDetails'}>
+            <Content className='pipelineDetails'>
                 <PipelineDetailsBreadcrumb   {...props}/>
                 {renderRoutes(route.routes)}
             </Content>

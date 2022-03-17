@@ -1,54 +1,56 @@
 import React,{useEffect,useState} from 'react'
 import  {Button ,Form} from "antd";
+import  './configDetails.scss'
 import {withRouter} from "react-router-dom";
 import ConfigDetailsTop from "./configDetailsTop";
 import ConfigDetailsSourceCode from "./configDetailsSourceCode";
-import ConfigDetailsStructure from "./configDetailsStructure";
 import ConfigDetailsTest from "./configDetailsTest";
+import ConfigDetailsStructure from "./configDetailsStructure";
 import ConfigDetailsDeploy from "./configDetailsDeploy";
 import {inject, observer} from "mobx-react";
 import moment from "../../../../common/moment/moment";
 
-
+//滚动
 const handleScroll = () =>{
     //浏览器滚动的高度
     const scrollTop=document.body.scrollTop
 
-    const lis=document.getElementsByClassName('task-config-anchor-d')
+    const lis=document.getElementsByClassName('config-details-anchor-d')
     const a=document.getElementById('a').offsetTop-55
     const b=document.getElementById('b').offsetTop-55
     const c=document.getElementById('c').offsetTop-55
     const d=document.getElementById('d').offsetTop-55
 
     if(scrollTop > a && scrollTop < b){
-        lis.item(0).classList.add("task-config-anchor-active")
-        lis.item(1).classList.remove("task-config-anchor-active")
-        lis.item(2).classList.remove("task-config-anchor-active")
-        lis.item(3).classList.remove("task-config-anchor-active")
+        lis.item(0).classList.add("config-details-anchor-active")
+        lis.item(1).classList.remove("config-details-anchor-active")
+        lis.item(2).classList.remove("config-details-anchor-active")
+        lis.item(3).classList.remove("config-details-anchor-active")
     }
 
     if(scrollTop>=b && scrollTop<c){
-        lis.item(1).classList.add("task-config-anchor-active")
-        lis.item(0).classList.remove("task-config-anchor-active")
-        lis.item(2).classList.remove("task-config-anchor-active")
-        lis.item(3).classList.remove("task-config-anchor-active")
+        lis.item(1).classList.add("config-details-anchor-active")
+        lis.item(0).classList.remove("config-details-anchor-active")
+        lis.item(2).classList.remove("config-details-anchor-active")
+        lis.item(3).classList.remove("config-details-anchor-active")
     }
 
     if(scrollTop>c && scrollTop<d){
-        lis.item(2).classList.add("task-config-anchor-active")
-        lis.item(0).classList.remove("task-config-anchor-active")
-        lis.item(1).classList.remove("task-config-anchor-active")
-        lis.item(3).classList.remove("task-config-anchor-active")
+        lis.item(2).classList.add("config-details-anchor-active")
+        lis.item(0).classList.remove("config-details-anchor-active")
+        lis.item(1).classList.remove("config-details-anchor-active")
+        lis.item(3).classList.remove("config-details-anchor-active")
     }
     if(scrollTop>d){
-        lis.item(3).classList.add("task-config-anchor-active")
-        lis.item(0).classList.remove("task-config-anchor-active")
-        lis.item(1).classList.remove("task-config-anchor-active")
-        lis.item(2).classList.remove("task-config-anchor-active")
+        lis.item(3).classList.add("config-details-anchor-active")
+        lis.item(0).classList.remove("config-details-anchor-active")
+        lis.item(1).classList.remove("config-details-anchor-active")
+        lis.item(2).classList.remove("config-details-anchor-active")
     }
 
 }
 
+//锚点
 const scrollToAnchor = (anchorName) => {
     if (anchorName) {
         const scrollTop=document.body
@@ -59,15 +61,31 @@ const scrollToAnchor = (anchorName) => {
     }
 }
 
-const ConfigTask=props=>{
+//获取code
+const getUrlParam = name => {
+// 取得url中?后面的字符
+    const query = window.location.search.substring(1);
+// 把参数按&拆分成数组
+    const param_arr = query.split("&");
+    for (let i = 0; i < param_arr.length; i++) {
+        let pair = param_arr[i].split("=");
+        if (pair[0] === name) {
+            return pair[1];
+        }
+    }
+    return false;
+}
 
-    const {ConfigStore,ProofStore}=props
+const ConfigDetails = props =>{
+
+    const {ConfigStore,ProofStore,GitAuthorizeStore}=props
     const {selectPipelineConfig,updatePipelineConfig}=ConfigStore
+    const {createProof,findAllGitProof,findOneGitProof,oneGitProof,allGitProofList
+        ,findAllDeployProof,findOneDeployProof,oneDeployProof,allDeployProofList,
+        configureId} =ProofStore
+    const {url,code} =GitAuthorizeStore
 
-    const {
-        createGitProof,findAllGitProof,findOneCodeProof,allGitProof,gitProofId,oneCodeProof,
-        createDeployProof,findAllDeployProof,findOneDeployProof,allDeployProof,deployProofId,oneDeployProof
-    } =ProofStore
+    const codeValue = getUrlParam('code') //code新值
 
     const [form] = Form.useForm();
 
@@ -78,6 +96,7 @@ const ConfigTask=props=>{
 
     const pipelineId=localStorage.getItem('pipelineId')
 
+    //页面滚动加载
     useEffect(()=> {
         document.addEventListener('scroll', handleScroll);
         return () => {
@@ -85,11 +104,13 @@ const ConfigTask=props=>{
         };
     },[])
 
+    //form表单初始化
     useEffect(()=>{
         selectPipelineConfig(pipelineId).then(res=>{
             if ( !res.data ) {
                 return false
-            } else {
+            }
+            else {
                 if ( res.data.configureCodeSource){
                     setSourceValue(res.data.configureCodeSource)
                 }
@@ -99,16 +120,31 @@ const ConfigTask=props=>{
                 if (res.data.configureTestType){
                     setTest(res.data.configureTestType)
                 }
+                if(res.data.gitProofId){
+                    findOneGitProof(res.data.gitProofId)
+                }
+                if(res.data.deployProofId){
+                    findOneDeployProof(res.data.deployProofId)
+                }
+                form.setFieldsValue(res.data)
             }
-            form.setFieldsValue(res.data)
         })
-
         return ()=>{
-            localStorage.removeItem('configureId')
+            localStorage.removeItem('gitProofId')
+            localStorage.removeItem('deployProofId')
         }
     },[])
 
-    const onFinish =(values)=>{
+    //授权
+    useEffect(() => {
+        const se = setTimeout(()=>localStorage.removeItem('code'),500)
+        if (codeValue && localStorage.getItem('code')) {
+            code(codeValue)
+        }
+        return () => clearTimeout(se)
+    }, [codeValue])
+
+    const onFinish = values =>{
         const configure={
             configureCodeSource:values.configureCodeSource,
             configureCodeSourceAddress:values.configureCodeSourceAddress,
@@ -123,42 +159,30 @@ const ConfigTask=props=>{
             configureShell:values.configureShell,
             configureCreateTime:moment.moment,
             pipelineId: pipelineId,
+            configureId: configureId,
             deployProofId: localStorage.getItem('deployProofId'),
             gitProofId:localStorage.getItem('gitProofId'),
-            configureId: localStorage.getItem('configureId'),
         }
         updatePipelineConfig(configure)
         props.history.push('/home/task/work')
     }
 
     return(
-        <div className='task-config  task'>
+        <div className='config-details  task'>
             <div className={'hidden'} />
             <ConfigDetailsTop/>
-            <div className='task-config-offset'>
-                <div className='task-config-anchor'>
-                    <div
-                        onClick={()=>scrollToAnchor('a')}
-                        className={'task-config-anchor-d task-config-anchor-active'}
-                    >
+            <div className='config-details-offset'>
+                <div className='config-details-anchor'>
+                    <div onClick={()=>scrollToAnchor('a')} className='config-details-anchor-d config-details-anchor-active'>
                         源码管理
                     </div>
-                    <div
-                        onClick={()=>scrollToAnchor('b')}
-                        className={'task-config-anchor-d'}
-                    >
+                    <div onClick={()=>scrollToAnchor('b')} className='config-details-anchor-d'>
                         单元测试
                     </div>
-                    <div
-                        onClick={()=>scrollToAnchor('c')}
-                        className={'task-config-anchor-d'}
-                    >
+                    <div onClick={()=>scrollToAnchor('c')} className='config-details-anchor-d'>
                         构建
                     </div>
-                    <div
-                        onClick={()=>scrollToAnchor('d')}
-                        className={'task-config-anchor-d' }
-                    >
+                    <div onClick={()=>scrollToAnchor('d')} className='config-details-anchor-d'>
                         部署
                     </div>
                 </div>
@@ -168,18 +192,20 @@ const ConfigTask=props=>{
                     initialValues={{
                         "configureCodeStructure":1,
                         "configureCodeSource":1,
-                        "configureTestType":1
-                    }}
+                        "configureTestType":1,
+                       }}
                     layout="vertical"
                     autoComplete = "off"
                 >
                     <div id='a'>
                         <ConfigDetailsSourceCode
                             sourceValue={sourceValue}
-                            allGitProof={allGitProof}
-                            createGitProof={createGitProof}
-                            findOneCodeProof={findOneCodeProof}
+                            createProof={createProof}
                             findAllGitProof={findAllGitProof}
+                            allGitProofList={allGitProofList}
+                            findOneGitProof={findOneGitProof}
+                            oneGitProof={oneGitProof}
+                            url={url}
                         />
                     </div>
                     <div id='b'>
@@ -194,18 +220,19 @@ const ConfigTask=props=>{
                     </div>
                     <div id='d'>
                         <ConfigDetailsDeploy
-                            createDeployProof={createDeployProof}
-                            findOneDeployProof={findOneDeployProof}
+                            createProof={createProof}
                             findAllDeployProof={findAllDeployProof}
-                            allDeployProof={allDeployProof}
+                            allDeployProofList={allDeployProofList}
+                            findOneDeployProof={findOneDeployProof}
+                            oneDeployProof={oneDeployProof}
                         />
                     </div>
                     <Form.Item >
-                        <div className={'bottom-sticker-inner'} id={'bottom-sticker'}>
+                        <div className='bottom-sticker-inner' id='bottom-sticker'>
                             <Button htmlType='submit' type='primary' style={{marginRight:30}}>
                                 保存
                             </Button>
-                            <Button onClick={()=>props.history.push('/home/task/config')}>取消</Button>
+                            <Button>取消</Button>
                         </div>
                     </Form.Item>
                 </Form>
@@ -214,4 +241,5 @@ const ConfigTask=props=>{
     )
 }
 
-export default withRouter(inject('ConfigStore','ProofStore')(observer(ConfigTask)))
+
+export default withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore')(observer(ConfigDetails)))

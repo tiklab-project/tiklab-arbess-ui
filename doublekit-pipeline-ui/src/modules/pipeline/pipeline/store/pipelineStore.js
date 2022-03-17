@@ -30,7 +30,7 @@ class PipelineStore{
 
     @action
     createPipeline=values=>{
-        let param = {
+        const param = {
             pipelineName: values.pipelineName,
             pipelineCreateUser: values.pipelineCreateUser,
             pipelineType: values.pipelineType,
@@ -65,7 +65,7 @@ class PipelineStore{
     deletePipeline=values=>{
         const params = qs.stringify({'pipelineId': values})
         DeletePipeline(params).then(res=>{
-            // this.selectPipelineStatus()
+            this.selectPipelineStatus()
             console.log('删除流水线',res)
         }).catch(error=>{
             console.log(error)
@@ -75,7 +75,7 @@ class PipelineStore{
 
     @action
     updatePipeline=values=>{
-        let param={
+        const param={
             pipelineId:values.pipelineId,
             pipelineName:values.pipelineName
         }
@@ -89,7 +89,6 @@ class PipelineStore{
             })
         })
     }
-
 }
 
 export default PipelineStore

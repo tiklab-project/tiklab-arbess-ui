@@ -1,10 +1,11 @@
 import React,{useEffect} from 'react'
+import './structureHistoryDetails.scss'
 import StructureHistoryDetailsTop from "./structureHistoryDetailsTop";
 import StructureHistoryDetailsCenter from "./structureHistoryDetailsCenter";
 import {withRouter} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 
-const BuildTask = props =>{
+const StructureHistoryDetails = props =>{
 
     const {StructureStore}=props
     const {SelectHistoryLog,deleteHistoryLog,historyLog}=StructureStore
@@ -19,7 +20,7 @@ const BuildTask = props =>{
     },[])
 
     return(
-        <div className='task-build task'>
+        <div className='structureHistory-details task'>
             <StructureHistoryDetailsTop
                 {...props}
                 historyId={historyId}
@@ -32,4 +33,4 @@ const BuildTask = props =>{
     )
 }
 
-export default withRouter(inject('StructureStore')(observer(BuildTask)))
+export default withRouter(inject('StructureStore')(observer(StructureHistoryDetails)))

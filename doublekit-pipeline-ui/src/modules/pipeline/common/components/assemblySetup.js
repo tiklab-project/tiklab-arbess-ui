@@ -1,11 +1,11 @@
 import React,{useEffect} from 'react'
 import {Input, Form, Button, Popconfirm, message} from "antd";
+import './assemblySetup.scss'
 import {observer,inject} from "mobx-react";
 
-const AssemblyTask=props=>{
+const AssemblySetup=props=>{
 
     const {PipelineStore}=props
-
     const {deletePipeline,updatePipeline}=PipelineStore
 
     const [form]=Form.useForm()
@@ -33,8 +33,8 @@ const AssemblyTask=props=>{
     }
 
     return(
-        <div className='task-assembly task'>
-            <div className='task-assembly-top'>
+        <div className='assembly task'>
+            <div className='assembly-top'>
                 <Form onFinish={onFinish} form={form} layout="inline"    autoComplete = "off">
                     <Form.Item
                         label="重命名"
@@ -49,7 +49,7 @@ const AssemblyTask=props=>{
                     </Form.Item>
                 </Form>
             </div>
-            <div className='task-assembly-bottom'>
+            <div className='assembly-bottom'>
                 <Popconfirm
                     title="你确定删除吗"
                     onConfirm={onConfirm}
@@ -65,4 +65,4 @@ const AssemblyTask=props=>{
         </div>
     )
 }
-export default inject('PipelineStore')(observer(AssemblyTask))
+export default inject('PipelineStore')(observer(AssemblySetup))

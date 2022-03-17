@@ -11,9 +11,9 @@ const StructureHistoryDetailsTop = props =>{
         props.history.push('/home/task/history')
     }
     return(
-        <div className='task-build-top'>
+        <div className='structureHistory-details-top'>
             <h1>{props.match.params.historyName}</h1>
-            <div className='task-build-top-btn'>
+            <div className='structureHistory-details-top-btn'>
                 <Button type='primary' onClick={()=>props.history.push('/home/task/history')}>
                     返回
                 </Button>

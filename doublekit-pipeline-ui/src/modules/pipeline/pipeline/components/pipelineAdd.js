@@ -1,5 +1,6 @@
 import React, { useState,useEffect} from "react";
 import {Form, Input, Button} from "antd";
+import './pipelineAdd.scss'
 import {observer,inject} from "mobx-react";
 import moment from "../../../../common/moment/moment";
 

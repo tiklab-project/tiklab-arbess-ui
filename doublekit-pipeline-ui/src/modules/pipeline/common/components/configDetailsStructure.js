@@ -29,27 +29,37 @@ class ConfigDetailsStructure  extends Component{
         return(
             <div className=' anchor-content'>
                 <h2>构建</h2>
-                <Form.Item  >
-                   <Form.Item name={'configureCodeStructure'}>
-                       <Radio.Group  onChange={this.handlerRadio} value={value}>
-                           <Space direction="vertical">
-                               <Radio value={1}>无</Radio>
-                               <Radio value={2}>maven</Radio>
-                               {
-                                   value===2 ?
-                                       <>
-                                           <Form.Item name="configureStructureAddress" label="pom文件地址">
-                                               <Input />
-                                           </Form.Item>
-                                           <Form.Item name="configureStructureOrder" label="执行命令">
-                                               <TextArea  autoSize/>
-                                           </Form.Item>
-                                       </>:null
-                               }
-                           </Space>
-                       </Radio.Group>
-                   </Form.Item>
+                <Form.Item name='configureCodeStructure'>
+                    <Radio.Group  onChange={this.handlerRadio} value={value}>
+                        <Space>
+                            <Radio value={1}>无</Radio>
+                            <Radio value={2}>maven</Radio>
+                            <Radio value={3}>node</Radio>
+                        </Space>
+                    </Radio.Group>
                 </Form.Item>
+                {
+                    value===2 ?
+                        <>
+                            <Form.Item name="configureStructureAddress" label="文件地址">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item name="configureStructureOrder" label="执行命令">
+                                <TextArea  autoSize/>
+                            </Form.Item>
+                        </>:null
+                }
+                {
+                    value===3 ?
+                        <div className='radio-opt'>
+                            <Form.Item name="configureStructureAddress" label="文件地址">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item name="configureStructureOrder" label="执行命令">
+                                <TextArea  autoSize/>
+                            </Form.Item>
+                        </div>:null
+                }
             </div>
         )
     }
