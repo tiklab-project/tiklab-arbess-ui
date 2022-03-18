@@ -5,8 +5,6 @@ import {taskRouters} from "../containers/route";
 
 const PipelineDetailsBreadcrumb = props => {
 
-    const {location}=props
-
     return(
         <Breadcrumb className={'breadcrumb'}>
             <Breadcrumb.Item
@@ -20,17 +18,6 @@ const PipelineDetailsBreadcrumb = props => {
             >
                 {localStorage.getItem('pipelineName')}
             </Breadcrumb.Item>
-            {
-                taskRouters.map(item=>{
-                    if(item.to===location.pathname){
-                        return (
-                            <Breadcrumb.Item key={item.key} href={item.to}>
-                                {item.title}
-                            </Breadcrumb.Item>
-                        )
-                    }
-                })
-            }
         </Breadcrumb>
     )
 }

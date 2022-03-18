@@ -1,92 +1,79 @@
 import React, {useEffect, useState} from 'react'
-import {Breadcrumb, Button, Form} from "antd";
+import {Breadcrumb, Form} from "antd";
 import {withRouter} from "react-router-dom"
 import './config.scss'
+import Anchor from "../components/anchor";
 import SourceCode from "../components/SourceCode";
+import Test from "../components/test";
 import Structure from "../components/structure";
 import Deploy from "../components/deploy";
-import Test from "../components/test";
+import Btn from "../components/btn";
 import moment from "../../../common/moment/moment";
 import {inject, observer} from "mobx-react";
 
-const handleScroll = () => {
-    //浏览器滚动的高度
-    const scrollTop=document.body.scrollTop
-
-    //固定
-    const scrollA=document.getElementById('scrollA')
-    const scrollB=document.getElementById('scrollB')
-    if(scrollB && scrollTop >scrollB.offsetHeight){
-        scrollA.classList.add('newDeployment-anchor-fixed')
-    }else {
-        scrollA.classList.remove('newDeployment-anchor-fixed')
-    }
-
-    //滚动
-    const lis=document.getElementsByClassName('newDeployment-anchor-d')
-    const a=document.getElementById('a').offsetTop-55
-    const b=document.getElementById('b').offsetTop-55
-    const c=document.getElementById('c').offsetTop-55
-    const d=document.getElementById('d').offsetTop-55
-
-    if(scrollTop > a && scrollTop < b){
-        lis.item(0).classList.add("newDeployment-anchor-active")
-        lis.item(1).classList.remove("newDeployment-anchor-active")
-        lis.item(2).classList.remove("newDeployment-anchor-active")
-        lis.item(3).classList.remove("newDeployment-anchor-active")
-    }
-
-    if(scrollTop>=b && scrollTop<c){
-        lis.item(1).classList.add("newDeployment-anchor-active")
-        lis.item(0).classList.remove("newDeployment-anchor-active")
-        lis.item(2).classList.remove("newDeployment-anchor-active")
-        lis.item(3).classList.remove("newDeployment-anchor-active")
-    }
-
-    if(scrollTop>c && scrollTop<d){
-        lis.item(2).classList.add("newDeployment-anchor-active")
-        lis.item(0).classList.remove("newDeployment-anchor-active")
-        lis.item(1).classList.remove("newDeployment-anchor-active")
-        lis.item(3).classList.remove("newDeployment-anchor-active")
-    }
-    if(scrollTop>d){
-        lis.item(3).classList.add("newDeployment-anchor-active")
-        lis.item(0).classList.remove("newDeployment-anchor-active")
-        lis.item(1).classList.remove("newDeployment-anchor-active")
-        lis.item(2).classList.remove("newDeployment-anchor-active")
-    }
-}
-
-const scrollToAnchor = (anchorName) => {
-    if (anchorName) {
-        const scrollTop=document.body
-        const anchorElement = document.getElementById(anchorName)
-        if (anchorElement) {
-            scrollTop.scrollTop = anchorElement.offsetTop+55 ;
-        }
-    }
-}
 
 const Config= props=>{
 
-    const {ProofStore,ConfigStore}=props
+    const {ProofStore,ConfigStore,GitAuthorizeStore}=props
     const {createPipelineConfigure}=ConfigStore
     const {createProof,findAllGitProof,findOneGitProof,allGitProofList
         ,findAllDeployProof,findOneDeployProof,allDeployProofList} =ProofStore
+    const {url,code,getAllStorehouse,gitList} = GitAuthorizeStore
 
     useEffect(()=> {
         document.addEventListener('scroll', handleScroll);
         return () => {
             document.removeEventListener('scroll',handleScroll);
-        };
-    },[])
-
-    useEffect(()=>{
-        return ()=>{
             localStorage.removeItem('gitProofId')
             localStorage.removeItem('deployProofId')
-        }
+        };
     },[])
+    //锚点样式
+    const [anchor,setAnchor] = useState('a')
+    //滚动
+    const handleScroll = () => {
+        //浏览器滚动的高度
+        const scrollTop=document.body.scrollTop
+
+        //固定
+        const scrollA=document.getElementById('scrollA')
+        const scrollB=document.getElementById('scrollB')
+        if(scrollB && scrollTop >scrollB.offsetHeight){
+            scrollA.classList.add('config-anchor-fixed')
+        }else {
+            scrollA.classList.remove('config-anchor-fixed')
+        }
+
+        //滚动
+        const a=document.getElementById('a').offsetTop-55
+        const b=document.getElementById('b').offsetTop-55
+        const c=document.getElementById('c').offsetTop-55
+        const d=document.getElementById('d').offsetTop-55
+
+        if(scrollTop > a && scrollTop < b){
+            setAnchor('a')
+        }
+        if(scrollTop>=b && scrollTop<c){
+            setAnchor('b')
+        }
+        if(scrollTop>c && scrollTop<d){
+            setAnchor('c')
+        }
+        if(scrollTop>d){
+            setAnchor('d')
+        }
+    }
+    //锚点
+    const scrollToAnchor = (anchorName) => {
+        if (anchorName) {
+            setAnchor(anchorName)
+            const scrollTop=document.body
+            const anchorElement = document.getElementById(anchorName)
+            if (anchorElement) {
+                scrollTop.scrollTop = anchorElement.offsetTop+55 ;
+            }
+        }
+    }
 
     const onFinish=(values)=>{
         const configure={
@@ -111,41 +98,19 @@ const Config= props=>{
     }
 
     return (
-        <div className='newDeployment'>
-            <div className='newDeployment-breadcrumb' id={'scrollB'}>
+        <div className='config'>
+            <div className='config-breadcrumb' id='scrollB'>
                 <Breadcrumb separator=">">
                     <Breadcrumb.Item>流水线</Breadcrumb.Item>
                     <Breadcrumb.Item href="">{localStorage.getItem('pipelineName')}</Breadcrumb.Item>
                 </Breadcrumb>
             </div>
 
-            <div className='newDeployment-offset'>
-                <div className='newDeployment-anchor'  id={'scrollA'}>
-                    <div
-                        onClick={()=>scrollToAnchor('a')}
-                        className={'newDeployment-anchor-d newDeployment-anchor-active'}
-                    >
-                        源码管理
-                    </div>
-                    <div
-                        onClick={()=>scrollToAnchor('b')}
-                        className={'newDeployment-anchor-d'}
-                    >
-                        单元测试
-                    </div>
-                    <div
-                        onClick={()=>scrollToAnchor('c')}
-                        className={'newDeployment-anchor-d'}
-                    >
-                        构建
-                    </div>
-                    <div
-                        onClick={()=>scrollToAnchor('d ')}
-                        className={'newDeployment-anchor-d' }
-                    >
-                        部署
-                    </div>
-                </div>
+            <div className='config-offset'>
+                <Anchor
+                    scrollToAnchor={scrollToAnchor}
+                    anchor={anchor}
+                />
 
                 <Form
                     onFinish={onFinish}
@@ -160,36 +125,30 @@ const Config= props=>{
                     layout="vertical"
                     autoComplete = "off"
                 >
-                    <div id="a" >
-                        <SourceCode
-                            createProof={createProof}
-                            findAllGitProof={findAllGitProof}
-                            findOneGitProof={findOneGitProof}
-                            allGitProofList={allGitProofList}
-                        />
-                    </div>
-                    <div id="b"> <Test/></div>
-                    <div id="c"><Structure /></div>
-                    <div id="d">
-                        <Deploy
-                            createProof={createProof}
-                            findOneDeployProof={findOneDeployProof}
-                            findAllDeployProof={findAllDeployProof}
-                            allDeployProofList={allDeployProofList}
-                        />
-                    </div>
-                    <Form.Item>
-                      <div className='btn-sticker-inner'  id='bottom-sticker'>
-                          <Button htmlType='submit' type='primary' style={{marginLeft:30,marginRight:30}}>
-                              保存
-                          </Button>
-                          <Button onClick={()=>props.history.push('/home/task/config')}>取消</Button>
-                      </div>
-                    </Form.Item>
+                    <SourceCode
+                        createProof={createProof}
+                        findAllGitProof={findAllGitProof}
+                        findOneGitProof={findOneGitProof}
+                        allGitProofList={allGitProofList}
+                        url={url}
+                        code={code}
+                        getAllStorehouse={getAllStorehouse}
+                        gitList={gitList}
+
+                    />
+                    <Test/>
+                    <Structure />
+                    <Deploy
+                        createProof={createProof}
+                        findOneDeployProof={findOneDeployProof}
+                        findAllDeployProof={findAllDeployProof}
+                        allDeployProofList={allDeployProofList}
+                    />
+                    <Btn/>
                 </Form>
             </div>
         </div>
     )
 }
 
-export default withRouter(inject('ConfigStore','ProofStore')(observer(Config)))
+export default withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore')(observer(Config)))

@@ -65,7 +65,6 @@ class PipelineStore{
     deletePipeline=values=>{
         const params = qs.stringify({'pipelineId': values})
         DeletePipeline(params).then(res=>{
-            this.selectPipelineStatus()
             console.log('删除流水线',res)
         }).catch(error=>{
             console.log(error)

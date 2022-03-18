@@ -1,11 +1,10 @@
-.newDeployment{
+.config{
   width: 70%;
   min-width: 600px;
   margin:25px auto;
   position: relative;
   input{
-    width: 80vh;
-    min-width: 500px;
+    width: 500px;
   }
   textarea{
     width: 80vh;
@@ -35,6 +34,12 @@
   }
 
   //内容样式
+  &-link{
+    color: #1890ff;
+    cursor: pointer;
+    margin-top: 37px;
+    margin-left: 30px;
+  }
   &-breadcrumb{
     background-color: #f8f8f8;
     margin-top: -25px;

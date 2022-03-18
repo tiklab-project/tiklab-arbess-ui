@@ -3,34 +3,23 @@ import {Form, Select, Input, Modal} from "antd";
 
 const { Option } = Select;
 
-const SourceAddModal= props =>{
+const SourceCode_GitModal= props =>{
 
-    const { GitOrGitee,visible,setVisible ,createProof} = props
     const [form] = Form.useForm();
+
+    const {visible,setVisible ,createProof} = props
 
     const onOk = () =>{
         form.validateFields().then((values) => {
-            if( GitOrGitee === 'Git' ){
-                const params = {
-                    proofScope:1,
-                    proofType:values.proofType,
-                    proofName:values.proofName,
-                    proofUsername:values.proofUsername,
-                    proofPassword:values.proofPassword,
-                    proofDescribe:values.proofDescribe
-                }
-                createProof(params)
-            }else{
-                const params = {
-                    proofScope:3,
-                    proofType:values.proofType,
-                    proofName:values.proofName,
-                    proofUsername:values.proofUsername,
-                    proofPassword:values.proofPassword,
-                    proofDescribe:values.proofDescribe
-                }
-                createProof(params)
+            const params = {
+                proofScope:1,
+                proofType:values.proofType,
+                proofName:values.proofName,
+                proofUsername:values.proofUsername,
+                proofPassword:values.proofPassword,
+                proofDescribe:values.proofDescribe
             }
+            createProof(params)
         })
         setVisible(false)
     }
@@ -77,4 +66,4 @@ const SourceAddModal= props =>{
     )
 }
 
-export default SourceAddModal
+export default SourceCode_GitModal

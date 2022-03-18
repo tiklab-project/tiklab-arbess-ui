@@ -30,7 +30,7 @@ const Home=props=>{
                     routers={headerRoutes}
                 />
             </Header>
-            <Content  className={'home'}>
+            <Content  className='home'>
                 {renderRoutes(route.routes)}
             </Content>
         </Layout>

@@ -8,30 +8,30 @@ class ConfigDetailsTest extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            value:this.props.test
+            testRadio:this.props.testRadio
         }
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextProps.test !== this.props.test) {
-            this.setState({value:nextProps.test})
+        if (nextProps.testRadio !== this.props.testRadio) {
+            this.setState({testRadio:nextProps.testRadio})
             return true
         }
-        return nextState.test !== this.state.value;
+        return nextState.testRadio !== this.state.testRadio;
     }
 
     handlerRadio=(e)=>{
-        this.setState({value:e.target.value})
+        this.setState({testRadio:e.target.value})
     }
 
 
     render() {
-        const {value}=this.state
+        const {testRadio}=this.state
         return(
-            <div className=' anchor-content'>
+            <div className=' anchor-content' id='b'>
                 <h2>单元测试</h2>
                 <Form.Item   name='configureTestType'>
-                    <Radio.Group  onChange={this.handlerRadio} value={value}>
+                    <Radio.Group  onChange={this.handlerRadio} value={testRadio}>
                         <Space>
                             <Radio value={1}>无</Radio>
                             <Radio value={2} >单元测试</Radio>
@@ -39,7 +39,7 @@ class ConfigDetailsTest extends Component{
                     </Radio.Group>
                 </Form.Item>
                 {
-                    value === 2 ?
+                    testRadio === 2 ?
                         <>
                             <Form.Item name="configureTestText">
                                 <TextArea  autoSize  />

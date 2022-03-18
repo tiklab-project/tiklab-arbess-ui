@@ -31,7 +31,7 @@ class ProofStore{
             proofPort:values.proofPort,
         }
         CreateProof(param).then(res=>{
-            console.log("创建git凭证",res)
+            console.log("创建凭证",res)
         }).catch(error=>{
             console.log(error)
         })
@@ -63,7 +63,7 @@ class ProofStore{
     findAllGitProof = () =>{
         FindAllGitProof().then(res=>{
             this.allGitProofList=res.data.data
-            console.log("查看git凭证信息", this.allGitProofList)
+            console.log("allGitProofList", this.allGitProofList)
         }).catch(error=>{
             console.log(error)
         })

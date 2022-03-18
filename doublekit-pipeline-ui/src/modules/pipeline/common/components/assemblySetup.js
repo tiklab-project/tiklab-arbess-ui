@@ -35,7 +35,7 @@ const AssemblySetup=props=>{
     return(
         <div className='assembly task'>
             <div className='assembly-top'>
-                <Form onFinish={onFinish} form={form} layout="inline"    autoComplete = "off">
+                <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
                     <Form.Item
                         label="重命名"
                         name='pipelineName'

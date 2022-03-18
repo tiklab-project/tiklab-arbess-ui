@@ -12,8 +12,9 @@ const PipelineAll= props=>{
 
     //初始化表格
     useEffect(()=>{
-        const se = setTimeout(()=>selectPipelineStatus(),100)
-        return ()=> clearTimeout(se)
+        selectPipelineStatus()
+        // const se = setTimeout(()=>selectPipelineStatus(),100)
+        // return ()=> clearTimeout(se)
     },[])
 
     //收藏

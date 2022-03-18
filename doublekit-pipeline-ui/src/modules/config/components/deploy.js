@@ -11,18 +11,6 @@ const Deploy = props =>{
 
     const [visible,setVisible]=useState(false)
 
-    const onCreate  = values =>{
-        let params = {
-            proofScope:2,
-            proofUsername:values.proofUsername,
-            proofPassword:values.proofPassword,
-            proofPort:values.proofPort,
-            proofDescribe:values.proofDescribe,
-        }
-        createProof(params)
-        setVisible(false)
-    }
-
     const findAllDeploy = () =>{
         findAllDeployProof()
     }
@@ -33,9 +21,9 @@ const Deploy = props =>{
     }
 
     return(
-        <div className=' anchor-content'>
+        <div className=' anchor-content' id='d'>
             <h1>部署</h1>
-            <Form.Item name={'configureTargetAddress'} label='需要发送的文件地址'>
+            <Form.Item name='configureTargetAddress' label='需要发送的文件地址'>
                 <Input/>
             </Form.Item>
             <Form.Item  label='请选择Ip地址'>
@@ -59,19 +47,17 @@ const Deploy = props =>{
                     添加
                 </Button>
             </Form.Item>
-            <Form.Item name={'configureDeployAddress'} label='部署位置'>
+            <Form.Item name='configureDeployAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
-            <Form.Item name={'configureShell'} label='shell命令'>
+            <Form.Item name='configureShell' label='shell命令'>
                 <TextArea autoSize/>
             </Form.Item>
 
             <DeployAddModal
                 visible={visible}
-                onCreate={onCreate}
-                onCancel={()=>setVisible(false)}
-                okText="确认"
-                cancelText="取消"
+                setVisible={setVisible}
+                createProof={createProof}
             />
         </div>
     )

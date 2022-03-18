@@ -1,9 +1,24 @@
 import React from "react";
-import {Form, Select, Input, Modal} from "antd";
+import {Form, Input, Modal} from "antd";
 
-const DeployAddModal=({visible, onCreate, onCancel,})=>{
+const DeployAddModal= props =>{
 
+    const {visible,setVisible,createProof} = props
     const [form] = Form.useForm();
+
+    const onOk = () =>{
+        form.validateFields().then((values) => {
+            const params = {
+                proofScope:2,
+                proofUsername:values.proofUsername,
+                proofPassword:values.proofPassword,
+                proofPort:values.proofPort,
+                proofDescribe:values.proofDescribe,
+            }
+            createProof(params)
+        })
+        setVisible(false)
+    }
 
     return (
         <Modal
@@ -11,18 +26,8 @@ const DeployAddModal=({visible, onCreate, onCancel,})=>{
             closable={false}
             okText="确认"
             cancelText="取消"
-            onCancel={onCancel}
-            onOk={() => {
-                form
-                    .validateFields()
-                    .then(values => {
-                        form.resetFields();
-                        onCreate(values);
-                    })
-                    .catch(info => {
-                        console.log('Validate Failed:', info);
-                    });
-            }}
+            onCancel={()=>setVisible(false)}
+            onOk={onOk}
         >
             <Form form={form} layout="vertical" name="userForm" >
                 <Form.Item label={'凭证名称'} name={'proofName'}>

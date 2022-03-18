@@ -8,29 +8,29 @@ class ConfigDetailsStructure  extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            value:this.props.structure
+            structureRadio:this.props.structureRadio
         }
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextProps.structure !== this.props.structure) {
-            this.setState({value:nextProps.structure})
+        if (nextProps.structureRadio !== this.props.structureRadio) {
+            this.setState({structureRadio:nextProps.structureRadio})
             return true
         }
-        return nextState.structure !== this.state.value;
+        return nextState.structureRadio !== this.state.value;
     }
 
     handlerRadio=(e)=>{
-        this.setState({value:e.target.value})
+        this.setState({structureRadio:e.target.value})
     }
 
     render() {
-        const {value}=this.state
+        const {structureRadio}=this.state
         return(
-            <div className=' anchor-content'>
+            <div className=' anchor-content' id='c'>
                 <h2>构建</h2>
                 <Form.Item name='configureCodeStructure'>
-                    <Radio.Group  onChange={this.handlerRadio} value={value}>
+                    <Radio.Group  onChange={this.handlerRadio} value={structureRadio}>
                         <Space>
                             <Radio value={1}>无</Radio>
                             <Radio value={2}>maven</Radio>
@@ -39,7 +39,7 @@ class ConfigDetailsStructure  extends Component{
                     </Radio.Group>
                 </Form.Item>
                 {
-                    value===2 ?
+                    structureRadio===2 ||  structureRadio===3 ?
                         <>
                             <Form.Item name="configureStructureAddress" label="文件地址">
                                 <Input />
@@ -48,17 +48,6 @@ class ConfigDetailsStructure  extends Component{
                                 <TextArea  autoSize/>
                             </Form.Item>
                         </>:null
-                }
-                {
-                    value===3 ?
-                        <div className='radio-opt'>
-                            <Form.Item name="configureStructureAddress" label="文件地址">
-                                <Input />
-                            </Form.Item>
-                            <Form.Item name="configureStructureOrder" label="执行命令">
-                                <TextArea  autoSize/>
-                            </Form.Item>
-                        </div>:null
                 }
             </div>
         )

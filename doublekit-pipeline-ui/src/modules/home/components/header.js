@@ -38,7 +38,7 @@ const Head =props=>{
 
     return(
         <div className="header">
-            <div className={'header-logo'}>doublekit</div>
+            <div className='header-logo'>doublekit</div>
             <ul className="header-nav">
                 {renderRouter()}
             </ul>
@@ -47,7 +47,7 @@ const Head =props=>{
                 {/*<li className='header-content-right-search-wrap'>*/}
                 {/*    <Search placeholder="input search text" onSearch={onSearch} style={{ width: 300 ,height:40}} />*/}
                 {/*</li>*/}
-                <li  className={'header-link'}>
+                <li  className='header-link'>
                     <a href='#' >登录</a>
                 </li>
             </ul>

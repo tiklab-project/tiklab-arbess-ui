@@ -11,9 +11,9 @@ const Structure = props =>{
     }
 
     return(
-        <div className='anchor-content'>
+        <div className='anchor-content' id='c'>
             <h1>构建</h1>
-            <Form.Item name='configureCodeStructure' className='newDeployment-radio'>
+            <Form.Item name='configureCodeStructure' className='config-radio'>
                 <Radio.Group  onChange={handlerRadio} value={value}>
                     <Space >
                         <Radio value={1}>无</Radio>
@@ -23,7 +23,7 @@ const Structure = props =>{
                 </Radio.Group>
             </Form.Item>
             {
-                value===2 ?
+                value===2 || value===3 ?
                     <>
                         <Form.Item
                             name='configureStructureAddress'
@@ -33,17 +33,6 @@ const Structure = props =>{
                         </Form.Item>
                         <Form.Item name='configureStructureOrder' label='执行命令'>
                             <TextArea autoSize  />
-                        </Form.Item>
-                    </>:null
-            }
-            {
-                value===3 ?
-                    <>
-                        <Form.Item name='configureStructureAddress' label='文件地址'>
-                            <Input />
-                        </Form.Item>
-                        <Form.Item name='configureStructureOrder' label='执行命令'>
-                            <TextArea  autoSize/>
                         </Form.Item>
                     </>:null
             }
