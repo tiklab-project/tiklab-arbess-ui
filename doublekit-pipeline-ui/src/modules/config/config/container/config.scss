@@ -1,0 +1,63 @@
+.config{
+  width: 70%;
+  min-width: 600px;
+  margin:25px auto;
+  position: relative;
+  input{
+    width: 600px;
+  }
+  textarea{
+    width: 600px;
+  }
+  //共同样式
+  h1{
+    margin-bottom: 30px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-bottom: 1px solid  #EAEAEA;
+  }
+  .anchor-content{
+    margin:15px 30px 50px;
+  }
+  .btn-sticker-inner{
+    position: fixed;
+    left: 400px;
+    bottom: 0;
+    z-index: 50;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+  &-radio {
+    margin-bottom: 20px;
+  }
+
+  //内容样式
+  &-link{
+    color: #1890ff;
+    cursor: pointer;
+    margin-top: 37px;
+    margin-left: 30px;
+  }
+  &-breadcrumb{
+    background-color: #f8f8f8;
+    margin-top: -25px;
+    position: fixed;
+    z-index: 999;
+    width: 1200px;
+    div{
+      margin-left: 30px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+  &-offset{
+    border: 1px solid #cccccc;
+    position: absolute;
+    top: 80px;
+    margin-left: 30px;
+    width: 1118.5px;
+  }
+}

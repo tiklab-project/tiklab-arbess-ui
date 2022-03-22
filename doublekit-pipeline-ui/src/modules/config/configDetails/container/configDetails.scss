@@ -1,0 +1,49 @@
+.config-details{
+  &-post{
+    position: fixed;
+    z-index: 98;
+    margin-top: -15px;
+    width: 1000px;
+    &>button{
+      left: 913px;
+    }
+  }
+  &-offset{
+    width: 1000px;
+    position: relative;
+    top:20px;
+    border: 1px solid #EAEAEA;
+    border-radius: 3px;
+  }
+  &-link{
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  &-btn{
+    position: fixed;
+    left: 550px;
+    bottom: 20px;
+    z-index: 50;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+  form{
+    margin-top: 70px;
+    margin-left: 30px;
+  }
+  h2{
+    font-weight: bold;
+    border-bottom: 1px solid #e9e9e9;
+  }
+  input{
+    width: 600px;
+  }
+  textarea{
+    width: 600px;
+  }
+  .anchor-content{
+    clear: both;
+    margin-top: 10px;
+  }
+}

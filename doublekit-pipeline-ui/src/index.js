@@ -5,8 +5,6 @@ import './assets/font_icon/iconfont'
 import { Provider } from 'mobx-react';
 import store from "./store";
 import App from './App';
-import {routers} from './routes';
-// import 'default-passive-events'
 
 ReactDOM.render(
   <Provider {...store}>
@@ -16,8 +14,6 @@ ReactDOM.render(
 );
 
 if (module.hot) {
-  module.hot.accept('./routes', () => {
-    render(routers);
-  })
+  module.hot.accept()
 }
 

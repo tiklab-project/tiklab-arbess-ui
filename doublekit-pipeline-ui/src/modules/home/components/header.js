@@ -17,18 +17,19 @@ const Head =props=>{
         if (routers) {
             return (
                 <Fragment >
-                    <li key='home'
-                        onClick={ () => changeCurrentLink(routers[0])}
-                        className={currentLink === routers[0].to ? 'header-link-active header-link' : 'header-link'}
-                    >
-                        {routers[0].title}
-                    </li>
-                    <li key='system'
-                        onClick={ () => changeCurrentLink(routers[1])}
-                        className={currentLink === routers[1].to ? 'header-link-active header-link' : 'header-link'}
-                    >
-                        {routers[1].title}
-                    </li>
+                    {
+                        routers && routers.map(routers=>{
+                          return (
+                              <li
+                                  key={routers.key}
+                                  onClick={ () => changeCurrentLink(routers)}
+                                  className={currentLink === routers.to ? 'header-link-active header-link' : 'header-link'}
+                              >
+                                  {routers.title}
+                              </li>
+                          )
+                        })
+                    }
                 </Fragment>
             )
         }

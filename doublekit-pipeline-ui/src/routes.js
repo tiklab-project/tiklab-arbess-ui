@@ -6,20 +6,20 @@ const Login=AsyncComponent(()=>import('./modules/login/login'))
 const Home=AsyncComponent(()=>import('./modules/home/home'))
 const System=AsyncComponent(()=>import('./modules/system'))
 
-const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/containers/pipeline'))
-const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/pipelineAdd'))
-const Config=AsyncComponent(()=>import('./modules/config/containers/config'))
-const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/common/containers/pipelineDetails'))
-const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipeline/components/searchResult'))
+const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
+const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/common/pipelineAdd'))
+const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/container/config'))
+const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/pipelineDetails'))
+const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
 
 
-const WorkSpace=AsyncComponent(()=>import('./modules/pipeline/common/components/workSpace'))
-const Structure=AsyncComponent(()=>import('./modules/pipeline/common/components/structure'))
-const ConfigDetails=AsyncComponent(()=>import('./modules/pipeline/common/components/configDetails'))
-const StructureHistory=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistory'))
-const AssemblySetup=AsyncComponent(()=>import('./modules/pipeline/common/components/assemblySetup'))
-const ConfigPastRecords=AsyncComponent(()=>import('./modules/pipeline/common/components/config_pastRecords'))
-const StructureHistoryDetails=AsyncComponent(()=>import('./modules/pipeline/common/components/structureHistoryDetails'))
+const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
+const Structure=AsyncComponent(()=>import('./modules/structure/structure/containers/structure'))
+const ConfigDetails=AsyncComponent(()=>import('./modules/config/configDetails/container/configDetails'))
+const StructureHistory=AsyncComponent(()=>import('./modules/structure/structureHistory/structureHistory'))
+const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
+const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
+const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/structureHistoryDetails'))
 
 export const routers=[
     {
@@ -47,7 +47,7 @@ export const routers=[
             },
             {
                 path:'/home/config',
-                component:Config,
+                component:PipelineConfig,
             },
             {
                 path:'/home/searchresult/:searchresult',
@@ -84,7 +84,7 @@ export const routers=[
                     },
                     {
                         path:'/home/task/assembly',
-                        component: AssemblySetup
+                        component: PipelineDelRename
                     },
                     {
                         path:'/home/task/post',

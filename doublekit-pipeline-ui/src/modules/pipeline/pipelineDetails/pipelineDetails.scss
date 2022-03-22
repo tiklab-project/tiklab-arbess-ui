@@ -1,0 +1,34 @@
+.ant-layout-sider-children{
+  background-color: #ffffff;
+  position: fixed;
+  z-index: 99;
+  top:55px;
+}
+.ant-menu{
+  margin-top: 30px;
+}
+.pipelineDetails{
+  margin-left: 35px;
+  margin-top: 30px;
+}
+.breadcrumb{
+  font-size: 16px;
+  position: fixed;
+  min-width: 230px;
+  z-index: 100;
+}
+.task{
+  width: 75%;
+  min-width: 1000px;
+  margin:50px auto;
+}
+.hidden{
+  position: fixed;
+  margin-top: -85px;
+  height: 110px;
+  z-index: 98;
+  width: 120%;
+  background-color: #FFFFFF;
+  margin-left: -300px;
+}
+

@@ -1,15 +1,15 @@
 import PipelineStore from "./modules/pipeline/pipeline/store/pipelineStore";
-import ConfigStore from "./modules/config/store/configStore";
-import ProofStore from "./modules/config/store/proofStore";
-import StructureStore from "./modules/pipeline/common/store/structureStore";
-import GitAuthorizeStore from "./modules/pipeline/common/store/gitAuthorizeStore";
+import ConfigStore from "./modules/config/config/store/configStore";
+import StructureStore from "./modules/structure/structure/store/structureStore";
+import ProofStore from "./modules/config/configDetails/store/proofStore";
+import GitAuthorizeStore from "./modules/config/configDetails/store/gitAuthorizeStore";
 
 class store{
     constructor() {
         this.PipelineStore=new  PipelineStore(this)
-        this.ProofStore=new ProofStore(this)
-        this.StructureStore=new StructureStore(this)
         this.ConfigStore=new ConfigStore(this)
+        this.StructureStore=new StructureStore(this)
+        this.ProofStore=new ProofStore(this)
         this.GitAuthorizeStore=new GitAuthorizeStore(this)
     }
 }

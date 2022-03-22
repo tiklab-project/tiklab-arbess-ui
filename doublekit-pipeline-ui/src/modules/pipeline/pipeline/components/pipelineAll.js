@@ -12,9 +12,9 @@ const PipelineAll= props=>{
 
     //初始化表格
     useEffect(()=>{
-        selectPipelineStatus()
-        // const se = setTimeout(()=>selectPipelineStatus(),100)
-        // return ()=> clearTimeout(se)
+        // selectPipelineStatus()
+        const se = setTimeout(()=>selectPipelineStatus(),100)
+        return ()=> clearTimeout(se)
     },[])
 
     //收藏
@@ -32,7 +32,6 @@ const PipelineAll= props=>{
 
     //操作
     const [run,setRun]=useState()
-    let  interval=null
     const move = record =>{
         setRun(record.pipelineId)
     }

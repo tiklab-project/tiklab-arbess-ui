@@ -16,12 +16,12 @@ class PipelineStore{
     @observable pipelineList=[]
     @observable searchPipelineList = []
     @observable pipelineId=''
+    @observable configureId=''
 
     @action
     selectPipelineStatus=()=>{
         SelectPipelineStatus().then(res=>{
             this.pipelineList=res.data.data
-            // localStorage.setItem('pipelineList', JSON.stringify(this.pipelineList))
             console.log('所有流水线', this.pipelineList)
         }).catch(error=>{
             console.log(error)
@@ -37,8 +37,10 @@ class PipelineStore{
             pipelineCreateTime:values.pipelineCreateTime
         }
         CreatePipeline(param).then(res=>{
-            this.pipelineId=res.data.data
+            this.pipelineId=res.data.data.pipelineId
+            this.configureId=res.data.data.pipelineConfigureId
             localStorage.setItem('pipelineId', this.pipelineId)
+            localStorage.setItem('configureId', this.configureId)
             console.log('创建流水线',res)
         }).catch(error=>{
             console.log(error)
