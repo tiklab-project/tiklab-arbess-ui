@@ -1,9 +1,9 @@
-import React, { useState,useEffect} from 'react'
+import React, { useState } from 'react'
 import {Radio,  Form, Space} from "antd";
-import SourceCode_Git from "./SourceCode_GIt";
-import SourceCode_Gitee from "./SourceCode_GItee";
+import SourceCode_Git from "./configSourceCode_Git";
+import SourceCode_Gitee from "./configSourceCode_Gitee";
 
-const SourceCode = () => {
+const ConfigSourceCode = () => {
 
     const [sourceRadio,setSourceRadio]=useState(1)
 
@@ -14,10 +14,10 @@ const SourceCode = () => {
     return(
         <div className='anchor-content' id='a'>
             <h1>源码管理</h1>
-            <Form.Item className='config-radio' name='configureCodeSource'>
+            <Form.Item className='config-radio' name='codeType'>
                 <Radio.Group  onChange={handlerRadio} value={sourceRadio}>
                     <Space>
-                        <Radio value={1}>无</Radio>
+                        <Radio value={0}>无</Radio>
                         <Radio value={2} >通用Git</Radio>
                         <Radio value={3} >Gitee</Radio>
                     </Space>
@@ -35,4 +35,4 @@ const SourceCode = () => {
     )
 }
 
-export default SourceCode
+export default ConfigSourceCode

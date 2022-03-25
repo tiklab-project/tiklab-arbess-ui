@@ -8,7 +8,6 @@ const Conserve = () =>{
                 <Button htmlType='submit' type='primary' style={{marginRight:30}}>
                     保存
                 </Button>
-                <Button>取消</Button>
             </div>
         </Form.Item>
     )

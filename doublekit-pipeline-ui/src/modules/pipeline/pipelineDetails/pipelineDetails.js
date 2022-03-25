@@ -20,7 +20,7 @@ const PipelineDetails= props=>{
 
     return(
         <Layout>
-            <Sider>
+            <Sider >
                 <PipelineDetailsAside/>
             </Sider>
             <Content className='pipelineDetails'>

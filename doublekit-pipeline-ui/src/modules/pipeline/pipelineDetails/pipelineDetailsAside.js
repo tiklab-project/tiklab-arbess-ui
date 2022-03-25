@@ -14,7 +14,7 @@ const PipelineDetailsAside=props=>{
 
     return(
         <Menu
-            style={{ width: 220 }}
+            style={{ width: 200,height:'100%' }}
             selectedKeys={[path]}
             mode="inline"
         >

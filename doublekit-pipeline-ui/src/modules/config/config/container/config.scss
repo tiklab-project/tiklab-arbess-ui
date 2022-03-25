@@ -4,10 +4,11 @@
   margin:25px auto;
   position: relative;
   input{
-    width: 600px;
+    width: 500px;
   }
   textarea{
-    width: 600px;
+    width: 80vh;
+    min-width: 500px;
   }
   //共同样式
   h1{
@@ -34,9 +35,7 @@
 
   //内容样式
   &-link{
-    color: #1890ff;
-    cursor: pointer;
-    margin-top: 37px;
+    margin-top: 30px;
     margin-left: 30px;
   }
   &-breadcrumb{
@@ -60,4 +59,16 @@
     margin-left: 30px;
     width: 1118.5px;
   }
+  &-anchor{
+    width: 1118.5px;
+    background: #ccc;
+    height: 50px;
+    border-bottom:1px solid #cccccc ;
+    &-fixed{
+      position: fixed;
+      z-index:998;
+      top:99px
+    }
+  }
+
 }

@@ -20,13 +20,13 @@ const lis= [
 const PipelineAdd = props => {
 
     const {PipelineStore}=props
-    const {createPipeline,pipelineList,selectPipelineStatus}=PipelineStore
+    const {createPipeline,pipelineList,findAllPipelineStatus}=PipelineStore
 
     const [liStatus, setLiStatus] = useState(0)
 
     //获取所有pipelinList，然后对pipelineName进行校验
     useEffect(()=>{
-        selectPipelineStatus()
+        findAllPipelineStatus()
     },[])
 
     //点击类型选择

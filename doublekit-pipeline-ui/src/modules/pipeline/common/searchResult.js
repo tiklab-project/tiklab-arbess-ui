@@ -7,10 +7,10 @@ import './searchResult.scss'
 const SearchResult = props => {
 
     const {PipelineStore,match}=props
-    const {searchPipelineList,selectName}=PipelineStore
+    const {searchPipelineList,findOneName}=PipelineStore
 
     useEffect(()=>{
-        selectName(match.params.searchresult)
+        findOneName(match.params.searchresult)
     },[])
 
     const  goPipelineTask= text =>{

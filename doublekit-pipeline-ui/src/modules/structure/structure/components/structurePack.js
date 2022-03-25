@@ -10,7 +10,7 @@ const StructurePack = props =>{
         if(!logList){
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yunhang"></use>
+                    <use xlinkHref="#icon-yunhang"/>
                 </svg>
             )
         }else {
@@ -26,7 +26,7 @@ const StructurePack = props =>{
             else if(logList.logPackState){
                 return (
                     <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-chenggong-"></use>
+                        <use xlinkHref="#icon-chenggong-"/>
                     </svg>
                 )
             }
@@ -34,13 +34,13 @@ const StructurePack = props =>{
             else if(logList.logPackState===1){
                 return (
                     <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhangshibai1"></use>
+                        <use xlinkHref="#icon-yunhangshibai1"/>
                     </svg>
                 )
             }else {
                 return (
                     <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhang"></use>
+                        <use xlinkHref="#icon-yunhang"/>
                     </svg>
                 )
             }

@@ -3,7 +3,7 @@ import { Radio, Input, Form, Space} from "antd";
 
 const {TextArea} = Input
 
-const Test = props => {
+const ConfigTest = props => {
 
     const [radio,setRadio]=useState(1)
 
@@ -14,10 +14,10 @@ const Test = props => {
     return(
         <div className='anchor-content' id='b'>
             <h1>单元测试</h1>
-            <Form.Item className='config-radio' name='configureTestType'>
+            <Form.Item className='config-radio' name='testType'>
                 <Radio.Group  onChange={handlerRadio} value={radio}>
                     <Space >
-                        <Radio value={1}>无</Radio>
+                        <Radio value={0}>无</Radio>
                         <Radio value={2} >单元测试</Radio>
                     </Space>
                 </Radio.Group>
@@ -25,7 +25,7 @@ const Test = props => {
             {
                 radio === 2 ?
                     <Form.Item
-                        name='configureTestText'
+                        name='testOrder'
                     >
                         <TextArea  autoSize/>
                     </Form.Item>
@@ -35,4 +35,4 @@ const Test = props => {
     )
 }
 
-export default Test
+export default ConfigTest

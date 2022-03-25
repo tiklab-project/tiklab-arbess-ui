@@ -1,6 +1,5 @@
-import React from 'react'
-import {Input, Form, Button, Popconfirm, message} from "antd";
-import './pipelineDel-Rename.scss'
+import React, {useEffect, useState} from 'react'
+import {Input, Form, Button, Popconfirm} from "antd";
 import {observer,inject} from "mobx-react";
 
 /*
@@ -9,11 +8,17 @@ import {observer,inject} from "mobx-react";
 const PipelineDelRename= props=>{
 
     const {PipelineStore}=props
-    const {deletePipeline,updatePipeline}=PipelineStore
+    const {deletePipeline,updatePipeline,findAllPipelineStatus,pipelineList}=PipelineStore
 
     const [form]=Form.useForm()
+    const [, forceUpdate] = useState({})
 
     const pipelineId=localStorage.getItem('pipelineId')
+
+    useEffect(()=>{
+        findAllPipelineStatus()
+        forceUpdate({})
+    },[])
 
     const onConfirm=()=>{
         deletePipeline(pipelineId)
@@ -25,35 +30,57 @@ const PipelineDelRename= props=>{
             pipelineId:pipelineId,
             pipelineName:values.pipelineName
         }
-        updatePipeline(params).then(res=>{
-            if(res.data==='0'){
-                message.info('名称已经存在')
-            }else {
-                localStorage.setItem('pipelineName',values.pipelineName);
-                props.history.push('/home/task/work')
-            }
+        updatePipeline(params).then(()=>{
+            localStorage.setItem('pipelineName',values.pipelineName);
+            props.history.push('/home/task/work')
         })
     }
 
     return(
-        <div className='assembly task'>
-            <div className='assembly-top'>
-                <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
-                    <Form.Item
-                        label="重命名"
-                        name='pipelineName'
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button htmlType="submit">
+        <div className='task'>
+            <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
+                <Form.Item
+                    label="重命名"
+                    name='pipelineName'
+                    rules={[
+                        ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                                if(value){
+                                    let nameArray = []
+                                    if(pipelineList){
+                                        nameArray = pipelineList && pipelineList.map(item =>  item.pipelineName);
+                                    }
+                                    if (nameArray.includes(value)) {
+                                        return Promise.reject('名称已经存在');
+                                    }
+                                    return Promise.resolve()
+                                }else {
+                                    return Promise.reject()
+                                }
+                            },
+                        }),
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item shouldUpdate>
+                    {() => (
+                        <Button
+                            htmlType="submit"
+                            disabled={
+                                !form.isFieldsTouched(true) ||
+                                !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                            }
+                        >
                             确定
                         </Button>
-                    </Form.Item>
-                </Form>
-            </div>
-            <div className='assembly-bottom'>
+                    )}
+                </Form.Item>
+            </Form>
+
+            <div style={{marginTop:100}}>
                 <Popconfirm
+                    style={{marginTop:100}}
                     title="你确定删除吗"
                     onConfirm={onConfirm}
                     okText="确定"

@@ -9,19 +9,19 @@ const StructureHistoryDetailsCenter = props =>{
         if(historyLog.logCodeState===10){
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-chenggong-"></use>
+                    <use xlinkHref="#icon-chenggong-"/>
                 </svg>
             )
         }else if(historyLog.logCodeState===0){
             return(
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yizhongzhi"></use>
+                    <use xlinkHref="#icon-yizhongzhi"/>
                 </svg>
             )
         }else {
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yunhangshibai1"></use>
+                    <use xlinkHref="#icon-yunhangshibai1"/>
                 </svg>
             )
         }
@@ -31,19 +31,19 @@ const StructureHistoryDetailsCenter = props =>{
         if(historyLog.logTestState===10){
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-chenggong-"></use>
+                    <use xlinkHref="#icon-chenggong-"/>
                 </svg>
             )
         }else if(historyLog.logTestState===0){
             return(
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yizhongzhi"></use>
+                    <use xlinkHref="#icon-yizhongzhi"/>
                 </svg>
             )
         }else {
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yunhangshibai1"></use>
+                    <use xlinkHref="#icon-yunhangshibai1"/>
                 </svg>
             )
         }
@@ -53,19 +53,19 @@ const StructureHistoryDetailsCenter = props =>{
         if(historyLog.logPackState===10){
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-chenggong-"></use>
+                    <use xlinkHref="#icon-chenggong-"/>
                 </svg>
             )
         }else if(historyLog.logPackState===0){
             return(
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yizhongzhi"></use>
+                    <use xlinkHref="#icon-yizhongzhi"/>
                 </svg>
             )
         }else {
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yunhangshibai1"></use>
+                    <use xlinkHref="#icon-yunhangshibai1"/>
                 </svg>
             )
         }
@@ -75,19 +75,19 @@ const StructureHistoryDetailsCenter = props =>{
         if(historyLog.logDeployState===10){
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-chenggong-"></use>
+                    <use xlinkHref="#icon-chenggong-"/>
                 </svg>
             )
         }else if(historyLog.logDeployState===0){
             return(
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yizhongzhi"></use>
+                    <use xlinkHref="#icon-yizhongzhi"/>
                 </svg>
             )
         }else {
             return (
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yunhangshibai1"></use>
+                    <use xlinkHref="#icon-yunhangshibai1"/>
                 </svg>
             )
         }

@@ -9,7 +9,7 @@ export function  Url (data){
     })
 }
 
-//gitee授权Code
+//gitee授权--Code
 export function  Code (data){
     return serviceLoc.request({
         url:'/gitee/code',
@@ -18,7 +18,7 @@ export function  Code (data){
     })
 }
 
-//gitee仓库
+//gitee--仓库
 export function  GetAllStorehouse (data){
     return serviceLoc.request({
         url:'/gitee/getAllStorehouse',
@@ -27,7 +27,7 @@ export function  GetAllStorehouse (data){
     })
 }
 
-//gitee分支
+//gitee--分支
 export function  GetBranch (data){
     return serviceLoc.request({
         url:'/gitee/getBranch',
@@ -36,11 +36,12 @@ export function  GetBranch (data){
     })
 }
 
-//凭证Id
-export function  GetProof (data){
+//gitee--用户名
+export function  GetUserMessage (data){
     return serviceLoc.request({
-        url:'/gitee/getProof',
+        url:'/gitee/getUserMessage',
         method: 'post',
         data
     })
 }
+

@@ -62,13 +62,13 @@ const StructureHistory=props=>{
                 if(text===30){
                     return (
                         <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-chenggong-"></use>
+                            <use xlinkHref="#icon-chenggong-"/>
                         </svg>
                     )
                 }else if(text===1){
                     return(
                         <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-yunhangshibai1"></use>
+                            <use xlinkHref="#icon-yunhangshibai1"/>
                         </svg>
                     )
                 }
@@ -114,7 +114,10 @@ const StructureHistory=props=>{
                 if(text===2){
                     return <span>git</span>
 
-                }else {
+                }else if(text===3){
+                    return <span>gitee</span>
+                }
+                else {
                     return <span>无</span>
 
                 }

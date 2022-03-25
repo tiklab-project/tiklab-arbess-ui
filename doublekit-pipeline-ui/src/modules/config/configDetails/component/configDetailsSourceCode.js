@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Radio,  Form, Space } from "antd";
-import ConfigDetailsSourceCode_GIt from "./ConfigDetailsSourceCode_GIt";
-import COnfigDetailsSourceCode_GItee from "./configDetailsSourceCode_GItee"
+import ConfigDetailsSourceCode_Git from "./configDetailsSourceCode_Git";
+import ConfigDetailsSourceCode_Gitee from "./configDetailsSourceCode_Gitee"
 
 class ConfigDetailsSourceCode extends Component{
 
@@ -15,7 +15,7 @@ class ConfigDetailsSourceCode extends Component{
 
     //componentDidUpdate    会在1秒中后发生修改操作
     //shouldComponentUpdate     在组件被更新之前执行
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
+    shouldComponentUpdate(nextProps, nextState, nextContext){
         if (nextProps.sourceRadio !== this.props.sourceRadio) {
             this.setState({sourceRadio:nextProps.sourceRadio})
             return true
@@ -34,10 +34,10 @@ class ConfigDetailsSourceCode extends Component{
         return(
             <div className='anchor-content' id='a'>
                 <h2>源码管理</h2>
-                <Form.Item name='configureCodeSource'>
+                <Form.Item name='codeType'>
                     <Radio.Group  onChange={this.handlerRadio} value={sourceRadio}>
                         <Space>
-                            <Radio value={1}>无</Radio>
+                            <Radio value={0}>无</Radio>
                             <Radio value={2} >通用Git</Radio>
                             <Radio value={3} >Gitee</Radio>
                         </Space>
@@ -46,12 +46,13 @@ class ConfigDetailsSourceCode extends Component{
 
                 {
                     sourceRadio===2 ?
-                        <ConfigDetailsSourceCode_GIt/>
+                        <ConfigDetailsSourceCode_Git/>
                         :null
                 }
                 {
                     sourceRadio===3 ?
-                        <COnfigDetailsSourceCode_GItee/>
+                        <ConfigDetailsSourceCode_Gitee
+                            form={this.props.form}/>
                         :null
                 }
             </div>

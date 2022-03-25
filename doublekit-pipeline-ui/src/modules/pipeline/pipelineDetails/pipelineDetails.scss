@@ -1,21 +1,19 @@
 .ant-layout-sider-children{
-  background-color: #ffffff;
+  width: 150px;
   position: fixed;
   z-index: 99;
-  top:55px;
-}
-.ant-menu{
-  margin-top: 30px;
+  background-color: #ffffff;
 }
 .pipelineDetails{
-  margin-left: 35px;
-  margin-top: 30px;
+  background: #fff;
+  minHeight: 280px;
 }
 .breadcrumb{
   font-size: 16px;
   position: fixed;
   min-width: 230px;
   z-index: 100;
+  padding: 20px;
 }
 .task{
   width: 75%;

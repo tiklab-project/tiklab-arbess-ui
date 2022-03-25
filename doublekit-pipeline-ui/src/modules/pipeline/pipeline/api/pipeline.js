@@ -8,19 +8,11 @@ export function  CreatePipeline(data){
         data
     })
 }
-//创建流水线配置
-export function CreatePipelineConfigure(data){
-    return serviceLoc.request({
-        url:'/pipelineConfigure/createPipelineConfigure',
-        method:'post',
-        data
-    })
-}
 
 //查询所有
-export function SelectPipelineStatus(data) {
+export function FindAllPipelineStatus(data) {
     return serviceLoc.request({
-        url:'/pipeline/selectPipelineStatus',
+        url:'/pipeline/findAllPipelineStatus',
         method:'post',
         data
     })
@@ -28,9 +20,9 @@ export function SelectPipelineStatus(data) {
 
 
 //搜索流水线
-export function SelectName(data){
+export function FindOneName(data){
     return serviceLoc.request({
-        url:'/pipeline/selectName',
+        url:'/pipeline/findOneName',
         method:'post',
         data
     })

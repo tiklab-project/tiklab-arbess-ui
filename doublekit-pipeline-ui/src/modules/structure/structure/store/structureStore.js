@@ -18,7 +18,7 @@ class StructureStore {
     @observable buildHistoryList=[]
     @observable historyLog=''
 
-    @action //开始构建
+    @action
     pipelineStructure = async(values) =>{
         const formData = new FormData()
         formData.append("pipelineId", values)
@@ -27,7 +27,7 @@ class StructureStore {
         return data.data;
     }
 
-    @action //查询状态
+    @action
     selectStructureState = async (values) =>{
         const params = qs.stringify({pipelineId: values})
         return new Promise((resolve, reject) => {

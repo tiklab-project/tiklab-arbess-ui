@@ -7,52 +7,33 @@ import ConfigDetailsSourceCode from "../component/configDetailsSourceCode";
 import ConfigDetailsTest from "../component/configDetailsTest";
 import ConfigDetailsStructure from "../component/configDetailsStructure";
 import ConfigDetailsDeploy from "../component/configDetailsDeploy";
-import Anchor from "../../common/anchor";
-import Conserve from "../../common/conserve";
+import Anchor from "../../common/component/anchor";
+import Conserve from "../../common/component/conserve";
 import moment from "../../../../common/moment/moment";
+import {getUrlParam} from "../../common/component/getUrlParam";
 import {inject, observer} from "mobx-react";
-
-
-const getUrlParam = name => {
-    // 取得url中?后面的字符
-    const query = window.location.search.substring(1);
-    // 把参数按&拆分成数组
-    const param_arr = query.split("&");
-    for (let i = 0; i < param_arr.length; i++) {
-        let pair = param_arr[i].split("=");
-        if (pair[0] === name) {
-            return pair[1];
-        }
-    }
-    return false;
-}
 
 const ConfigDetails = props =>{
 
     const {ConfigStore,GitAuthorizeStore}=props
-    const {selectPipelineConfig,updatePipelineConfig,
-       configureId,deployProofList,gitProofList}=ConfigStore
+    const {findOnePipelineConfigure,updatePipelineConfig,
+            configureId,codeId,deployId,structureId,testId}=ConfigStore
     const {code} = GitAuthorizeStore
 
-    const [form] = Form.useForm();
+    const [form] = Form.useForm()
 
-    //初始化Radio单选框
-    const [sourceRadio,setSourceRadio]=useState(1)
-    const [testRadio,setTestRadio]=useState(1)
-    const [structureRadio,setStructureRadio]=useState(1)
-    //锚点样式
+    const [sourceRadio,setSourceRadio]=useState(0)
+    const [testRadio,setTestRadio]=useState(0)
+    const [structureRadio,setStructureRadio]=useState(0)
     const [anchor,setAnchor] = useState('a')
-
     const pipelineId=localStorage.getItem('pipelineId')
-
-    //Gitee--code
     const codeValue = getUrlParam('code')
 
     //Gitee授权
     useEffect(() => {
         const se = setTimeout(()=>localStorage.removeItem('code'),100)
         if (codeValue && localStorage.getItem('code')) {
-            code(codeValue).then(res=>{
+            code(codeValue).then(()=>{
                 window.close()
             })
         }
@@ -67,6 +48,60 @@ const ConfigDetails = props =>{
             localStorage.removeItem('gitProofId')
             localStorage.removeItem('deployProofId')
         };
+    },[])
+
+    //form表单初始化
+    useEffect(()=>{
+        findOnePipelineConfigure(pipelineId).then(res=>{
+            if ( !res.data ) {
+                return false
+            }
+            else {
+                const data = res.data
+
+                setSourceRadio(data.pipelineCode.codeType)
+                setStructureRadio(data.pipelineStructure.structureType)
+                setTestRadio(data.pipelineTest.testType)
+
+                switch (data.pipelineCode.codeType){
+                    case 2:
+                        form.setFieldsValue({
+                            gitAddress:data.pipelineCode.codeName,
+                            gitBranch:data.pipelineCode.codeBranch,
+                            gitPlace:data.pipelineCode.proofName,
+                         })
+                        break
+                    case 3:
+                        form.setFieldsValue({
+                            giteeAddress:data.pipelineCode.codeName,
+                            giteeBranch:data.pipelineCode.codeBranch,
+                        })
+                }
+
+                switch (data.pipelineStructure.structureType){
+                    case 2:
+                        form.setFieldsValue({
+                            mavenAddress:data.pipelineStructure.structureAddress,
+                            mavenOrder:data.pipelineStructure.structureOrder,
+                        })
+                        break
+                    case 3:
+                        form.setFieldsValue({
+                            nodeAddress:data.pipelineStructure.structureAddress,
+                            nodeOrder:data.pipelineStructure.structureAddress,
+                        })
+                }
+                form.setFieldsValue({
+                    testOrder:data.pipelineTest.testOrder,
+                    deployPlace:data.pipelineDeploy.proofName,
+                    ...data.pipelineCode,
+                    ...data.pipelineTest,
+                    ...data.pipelineStructure,
+                    ...data.pipelineDeploy,
+                })
+
+            }
+        })
     },[])
 
     //滚动
@@ -102,102 +137,74 @@ const ConfigDetails = props =>{
         }
     }
 
-    //form表单初始化
-    useEffect(()=>{
-        selectPipelineConfig(pipelineId).then(res=>{
-            if ( !res.data ) {
-                return false
-            }
-            else {
-                const data = res.data
-                setSourceRadio(data.configureCodeSource)
-                setStructureRadio(data.configureCodeStructure)
-                setTestRadio(data.configureTestType)
-                switch (data.configureCodeSource){
-                    case 2:
-                          form.setFieldsValue({
-                              gitAddress:data.configureCodeSourceAddress,
-                              gitBranch:data.configureBranch,
-                              gitOpt:gitProofList.proofName+ "(" + gitProofList.proofUsername + ")" && gitProofList
-                          })
-                        break
-                    case 3:
-                        form.setFieldsValue({
-                            giteeAddress:data.configureCodeSourceAddress,
-                            giteeBranch:data.configureBranch,
-                            SourceCode_Git:null,
-                        })
-                }
-
-                switch (data.configureCodeStructure){
-                    case 2:
-                        form.setFieldsValue({
-                            mavenAddress:data.configureStructureAddress,
-                            mavenOrder:data.configureStructureOrder,
-                        })
-                        break
-                    case 3:
-                        form.setFieldsValue({
-                            nodeAddress:data.configureStructureAddress,
-                            nodeOrder:data.configureStructureOrder,
-                        })
-                }
-                form.setFieldsValue({...res.data})
-            }
-        })
-    },[])
-
     const onFinish = values =>{
 
-        const CodeSourceRadioType = values => {
-            switch (values.configureCodeSource ) {
-                case 2:
-                    return {
-                        configureCodeSourceAddress: values.gitAddress,
-                        configureBranch: values.gitBranch
-                    }
-                case 3:
-                    return {
-                        configureCodeSourceAddress: values.giteeAddress,
-                        configureBranch: values.giteeBranch
-                    }
-            }
-        }
-        const StructureRadioType = values =>{
-             switch (values.configureCodeStructure) {
-                 case 2:
-                     return {
-                         configureStructureAddress: values.mavenAddress,
-                         configureStructureOrder:values.mavenOrder
-                     }
-                 case 3:
-                     return {
-                         configureStructureAddress: values.nodeAddress,
-                         configureStructureOrder:values.nodeOrder
-                     }
-             }
+        let CodeSourceRadioType,StructureRadioType={}
+
+        switch (values.codeType) {
+            case 2:
+                CodeSourceRadioType = {
+                    codeName:values.gitAddress,
+                    codeBranch: values.gitBranch,
+                    proofName:values.gitPlace,
+                }
+                break
+            case 3:
+                CodeSourceRadioType =  {
+                    codeName: values.giteeAddress,
+                    codeBranch: values.giteeBranch
+                }
         }
 
-        const CodeSource = CodeSourceRadioType(values)
-        const Structure = StructureRadioType(values)
+        switch (values.structureType) {
+            case 2:
+                StructureRadioType = {
+                    structureAddress: values.mavenAddress,
+                    structureOrder:values.mavenOrder
+                }
+                break
+            case 3:
+                StructureRadioType = {
+                    structureAddress: values.nodeAddress,
+                    structureOrder:values.nodeOrder
+                }
+        }
 
         const configure = {
-            configureCodeSource:values.configureCodeSource,
-            configureCodeSourceAddress:CodeSource && CodeSource.configureCodeSourceAddress,
-            configureBranch:CodeSource && CodeSource.configureBranch,
-            configureCodeStructure:values.configureCodeStructure,
-            configureStructureAddress:Structure && Structure.configureStructureAddress,
-            configureStructureOrder: Structure && Structure.configureStructureOrder,
-            configureTestType:values.configureTestType,
-            configureTestText:values.configureTestText,
-            configureTargetAddress: values.configureTargetAddress,
-            configureDeployAddress:values.configureDeployAddress,
-            configureShell:values.configureShell,
             configureCreateTime:moment.moment,
-            pipelineId: pipelineId,
             configureId: configureId,
-            deployProofId: localStorage.getItem('deployProofId'),
-            gitProofId:localStorage.getItem('gitProofId'),
+            pipeline:pipelineId,
+            pipelineCode:{
+                codeId:codeId,
+                codeType:values.codeType,
+                codeBranch:CodeSourceRadioType && CodeSourceRadioType.codeBranch
+                    ?  CodeSourceRadioType.codeBranch : ' ',
+                codeName:CodeSourceRadioType &&  CodeSourceRadioType.codeName
+                    ?  CodeSourceRadioType.codeName : ' ',
+                proofName:CodeSourceRadioType && CodeSourceRadioType.proofName
+                    ?  CodeSourceRadioType.proofName : '无',
+            },
+            pipelineTest:{
+                testId: testId,
+                testType:values.testType,
+                testOrder: values.testOrder ? values.testOrder : ' ',
+            },
+            pipelineStructure:{
+                structureId: structureId,
+                structureType: values.structureType,
+                structureAddress: StructureRadioType && StructureRadioType.structureAddress
+                    ?   StructureRadioType.structureAddress : ' ',
+                structureOrder:StructureRadioType && StructureRadioType.structureOrder
+                    ?   StructureRadioType.structureOrder : ' ',
+            },
+            pipelineDeploy:{
+                deployId: deployId ,
+                deployType:1,
+                deployAddress: values.deployAddress,
+                proofName: values.deployPlace ? values.deployPlace : "无" ,
+                deployShell: values.deployShell,
+                deployTargetAddress:values.deployTargetAddress,
+            },
         }
         updatePipelineConfig(configure)
         props.history.push('/home/task/work')
@@ -216,17 +223,20 @@ const ConfigDetails = props =>{
                     onFinish={onFinish}
                     form={form}
                     initialValues={{
-                        "configureCodeStructure":1,
-                        "configureCodeSource":1,
-                        "configureTestType":1,
+                        "structureType":0,
+                        "codeType":0,
+                        "testType":0,
+                        'giteeAddress':' '
                        }}
                     layout="vertical"
                     autoComplete = "off"
                 >
-                    <ConfigDetailsSourceCode  sourceRadio={sourceRadio}/>
+                    <ConfigDetailsSourceCode
+                        sourceRadio={sourceRadio}
+                        form={form}/>
                     <ConfigDetailsTest testRadio={testRadio}/>
                     <ConfigDetailsStructure structureRadio={structureRadio}/>
-                    <ConfigDetailsDeploy deployProofList={deployProofList}/>
+                    <ConfigDetailsDeploy/>
                     <Conserve/>
                 </Form>
             </div>

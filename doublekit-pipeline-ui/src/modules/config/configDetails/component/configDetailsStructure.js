@@ -29,10 +29,10 @@ class ConfigDetailsStructure  extends Component{
         return(
             <div className=' anchor-content' id='c'>
                 <h2>构建</h2>
-                <Form.Item name='configureCodeStructure'>
+                <Form.Item name='structureType'>
                     <Radio.Group  onChange={this.handlerRadio} value={structureRadio}>
                         <Space>
-                            <Radio value={1}>无</Radio>
+                            <Radio value={0}>无</Radio>
                             <Radio value={2}>maven</Radio>
                             <Radio value={3}>node</Radio>
                         </Space>

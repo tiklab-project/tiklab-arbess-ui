@@ -1,29 +1,22 @@
-import React, {useEffect, useState} from 'react'
-import {  Form, Row, Select,Button} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
-import SourceCode_GiteeModal from "../../common/SourceCode_GIteeModal";
+import React, { useState} from 'react'
+import {Button, Form, Row, Select} from "antd";
+import { PlusOutlined} from "@ant-design/icons";
+import SourceCode_GiteeModal from "../../common/component/SourceCode_GIteeModal";
 import {inject, observer} from "mobx-react";
 
 const {Option} =Select
 
-const configDetailsSourceCode_Gitee = props =>{
+const ConfigSourceCode_Gitee = props =>{
 
-    const {GitAuthorizeStore,ConfigStore}=props
-    const {url,getAllStorehouse,gitList,getBranch,branchList,getProof} = GitAuthorizeStore
-    const {configureId} = ConfigStore
+    const {GitAuthorizeStore,ProofStore}=props
+    const {url,getAllStorehouse,gitList,getBranch,branchList,getUserMessage} = GitAuthorizeStore
+    const {createProof} = ProofStore
 
     const [branch,setBranch]=useState(true)
     const [visible,setVisible]=useState(false)
 
-    useEffect(()=>{
+    const clickGitStoreHouse = () =>{
         getAllStorehouse()
-    },[])
-
-    const goUrl = () =>{
-        localStorage.setItem('code','code')
-        url().then(res=>{
-            window.open(res.data)
-        })
     }
 
     const changeGitStoreHouse = values =>{
@@ -31,20 +24,17 @@ const configDetailsSourceCode_Gitee = props =>{
         getBranch(values)
     }
 
-    const  changeBranch = values =>{
-        getProof(configureId)
-    }
-
     return(
         <div>
             <Row>
                 <Form.Item
-                    name='giteeAddress'
+                    name='configureCodeSourceAddress'
                     label="git地址"
                 >
                     <Select
                         placeholder="无"
                         style={{ width: 300 }}
+                        onClick={clickGitStoreHouse}
                         onChange={changeGitStoreHouse}
                     >
                         {
@@ -58,16 +48,15 @@ const configDetailsSourceCode_Gitee = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Button className='config-details-link' type="link" onClick={goUrl}>
+                <Button type='link' className='config-link' onClick={()=>setVisible(true)}>
                     <PlusOutlined />
                     新增代码库
                 </Button>
             </Row>
-            <Form.Item name="giteeBranch" label="分支">
+            <Form.Item name="configureBranch" label="分支">
                 <Select
                     style={{ width: 300 }}
                     disabled={branch}
-                    onChange={changeBranch}
                 >
                     {
                         branchList && branchList.map(item=>{
@@ -85,9 +74,11 @@ const configDetailsSourceCode_Gitee = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 url={url}
+                createProof={createProof}
+                getUserMessage={getUserMessage}
             />
         </div>
     )
 }
 
-export default inject('GitAuthorizeStore','ConfigStore')(observer(configDetailsSourceCode_Gitee))
+export default inject('GitAuthorizeStore','ProofStore')(observer(ConfigSourceCode_Gitee))

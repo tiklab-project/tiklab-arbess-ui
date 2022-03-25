@@ -4,7 +4,7 @@ import {Form, Input, Modal} from "antd";
 const DeployAddModal= props =>{
 
     const {visible,setVisible,createProof} = props
-    const [form] = Form.useForm();
+    const [form] = Form.useForm()
 
     const onOk = () =>{
         form.validateFields().then((values) => {
@@ -29,17 +29,17 @@ const DeployAddModal= props =>{
             onCancel={()=>setVisible(false)}
             onOk={onOk}
         >
-            <Form form={form} layout="vertical" name="userForm" >
-                <Form.Item label={'凭证名称'} name={'proofName'}>
+            <Form form={form} layout="vertical" name="userForm"   autoComplete = "off">
+                <Form.Item label='凭证名称' name='proofName'>
                     <Input placeholder='名称'/>
                 </Form.Item>
-                <Form.Item label='username' name={'proofUsername'}>
+                <Form.Item label='username' name='proofUsername'>
                     <Input placeholder='账号'/>
                 </Form.Item>
-                <Form.Item label={'password'} name={'proofPassword'}>
+                <Form.Item label='password' name='proofPassword'>
                     <Input.Password  placeholder='密码'/>
                 </Form.Item>
-                <Form.Item label='port' name={'proofPort'}>
+                <Form.Item label='port' name='proofPort'>
                    <Input  placeholder='端口号'/>
                 </Form.Item>
                 <Form.Item name='proofDescribe' label='描述'>

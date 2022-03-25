@@ -2,28 +2,15 @@ import React, {useEffect, useState} from 'react'
 import {Breadcrumb, Form} from "antd";
 import {withRouter} from "react-router-dom"
 import './config.scss'
-import Anchor from "../../common/anchor";
-import SourceCode from "../components/SourceCode";
-import Test from "../components/test";
-import Structure from "../components/structure";
-import Deploy from "../components/deploy";
-import Conserve from "../../common/conserve";
+import Anchor from "../../common/component/anchor";
+import ConfigSourceCode from "../components/configSourceCode";
+import ConfigTest from "../components/configTest";
+import ConfigStructure from "../components/configStructure";
+import ConfigDeploy from "../components/configDeploy";
+import Conserve from "../../common/component/conserve";
 import moment from "../../../../common/moment/moment";
+import {getUrlParam} from "../../common/component/getUrlParam";
 import {inject, observer} from "mobx-react";
-
-const getUrlParam = name => {
-    // 取得url中?后面的字符
-    const query = window.location.search.substring(1);
-    // 把参数按&拆分成数组
-    const param_arr = query.split("&");
-    for (let i = 0; i < param_arr.length; i++) {
-        let pair = param_arr[i].split("=");
-        if (pair[0] === name) {
-            return pair[1];
-        }
-    }
-    return false;
-}
 
 const Config = props=>{
 
@@ -50,9 +37,11 @@ const Config = props=>{
         document.addEventListener('scroll', handleScroll);
         return () => {
             document.removeEventListener('scroll',handleScroll);
-            localStorage.removeItem('gitProofId')
-            localStorage.removeItem('deployProofId')
             localStorage.removeItem('configureId')
+            localStorage.removeItem('codeId')
+            localStorage.removeItem('testId')
+            localStorage.removeItem('structureId')
+            localStorage.removeItem('deployId')
         };
     },[])
     //锚点样式
@@ -104,22 +93,35 @@ const Config = props=>{
 
     const onFinish=(values)=>{
         const configure={
-            configureBranch:values.configureBranch,
-            configureTargetAddress: values.configureTargetAddress,
-            configureCodeSource:values.configureCodeSource,
-            configureCodeSourceAddress:values.configureCodeSourceAddress,
-            configureTestType:values.configureTestType,
-            configureTestText:values.configureTestText,
-            configureCodeStructure:values.configureCodeStructure,
-            configureStructureAddress:values.configureStructureAddress,
-            configureStructureOrder:values.configureStructureOrder,
-            configureDeployAddress:values.configureDeployAddress,
-            configureShell:values.configureShell,
             configureCreateTime:moment.moment,
-            pipelineId:localStorage.getItem('pipelineId'),
-            deployProofId: localStorage.getItem('deployProofId'),
-            gitProofId: localStorage.getItem('gitProofId'),
-            configureId:localStorage.getItem('configureId')
+            configureId: localStorage.getItem('configureId'),
+            pipeline:localStorage.getItem('pipelineId'),
+            pipelineCode:{
+                codeBranch:values.codeBranch,
+                codeId:localStorage.getItem('codeId'),
+                codeName:values.codeName,
+                codeType:values.codeType,
+                proofName:values.gitPlace,
+            },
+            pipelineTest:{
+                testId: localStorage.getItem('testId'),
+                testOrder: values.testOrder,
+                testType:values.testType,
+            },
+            pipelineStructure:{
+                structureId: localStorage.getItem('structureId'),
+                structureAddress: values.structureAddress,
+                structureOrder: values.structureOrder,
+                structureType: values.structureType,
+            },
+            pipelineDeploy:{
+                deployId:  localStorage.getItem('deployId'),
+                deployAddress: values.deployAddress,
+                deployShell: values.deployShell,
+                deployTargetAddress:values.deployTargetAddress,
+                deployType:1,
+                proofName: values.deployPlace,
+            },
         }
         updatePipelineConfig(configure)
         props.history.push('/home/task/config')
@@ -142,20 +144,21 @@ const Config = props=>{
                 <Form
                     onFinish={onFinish}
                     initialValues={{
-                        "configureCodeStructure":1,
-                        "configureCodeSource":1,
-                        "configureTestType":1 ,
-                        "configureTestText": 'mvn -B test -Dmaven.test.failure.ignore=true\n' +
+                        "codeType":0,
+                        "testType":0,
+                        "structureType":0,
+                        "deployPlace":"无",
+                        "testOrder": 'mvn -B test -Dmaven.test.failure.ignore=true\n' +
                                              'mvn surefire-report:report-only\n' +
                                              'mvn site -DgenerateReports=false'
                     }}
                     layout="vertical"
                     autoComplete = "off"
                 >
-                    <SourceCode/>
-                    <Test/>
-                    <Structure />
-                    <Deploy
+                    <ConfigSourceCode/>
+                    <ConfigTest/>
+                    <ConfigStructure />
+                    <ConfigDeploy
                         createProof={createProof}
                         findOneDeployProof={findOneDeployProof}
                         findAllDeployProof={findAllDeployProof}

@@ -1,15 +1,14 @@
-import React, {useState} from 'react'
-import {Button, Form, Input, Select,Row,Col} from "antd";
-import SourceCode_GitModal from "../../common/sourceCode_GitModal";
+import React, {useState,Fragment} from 'react'
+import {Button, Form, Input, Select,Row} from "antd";
+import SourceCode_GitModal from "../../common/component/sourceCode_GitModal";
 import {inject, observer} from "mobx-react";
 
 const {Option} = Select
 
-const configDetailsSourceCode_Git = props =>{
+const ConfigDetailsSourceCode_Git = props =>{
 
-    const {ProofStore,ConfigStore}=props
+    const {ProofStore}=props
     const {createProof,findAllGitProof,findOneGitProof,allGitProofList} = ProofStore
-    const { gitProofList } = ConfigStore
 
     const [visible,setVisible]=useState(false)
 
@@ -19,11 +18,10 @@ const configDetailsSourceCode_Git = props =>{
 
     const changeGitSelect = value =>{
         findOneGitProof(value)
-        localStorage.setItem('gitProofId',value)
     }
 
     return(
-        <>
+        <Fragment>
             <Form.Item
                 name='gitAddress'
                 label="git地址"
@@ -43,24 +41,27 @@ const configDetailsSourceCode_Git = props =>{
                 <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <Row>
-                <Form.Item name='gitOpt'>
+                <Form.Item name='gitPlace'>
                     <Select
-                        placeholder="无"
                         style={{ width: 300 }}
                         onClick={clickFindAllGit}
                         onChange={changeGitSelect}
                     >
+                        <Option>
+                            无
+                        </Option>
                         {
                             allGitProofList && allGitProofList.map(item=>{
                                 return(
-                                    <Option key={item.proofId} value={item.proofId}>
-                                        { item.proofName+ "(" + item.proofUsername + ")"}
+                                    <Option key={item.proofId} value={item.proofName+ " (" + item.proofUsername + ")"}>
+                                        { item.proofName+ " (" + item.proofUsername + ")"}
                                     </Option>
                                 )
                             })
                         }
                     </Select>
                 </Form.Item>
+                &nbsp; &nbsp;
                 <Button onClick={()=> setVisible(true)}>
                     添加
                 </Button>
@@ -71,8 +72,8 @@ const configDetailsSourceCode_Git = props =>{
                 setVisible={setVisible}
                 createProof={createProof}
             />
-        </>
+        </Fragment>
     )
 }
 
-export default inject('ProofStore','ConfigStore')(observer(configDetailsSourceCode_Git))
+export default inject('ProofStore')(observer(ConfigDetailsSourceCode_Git))

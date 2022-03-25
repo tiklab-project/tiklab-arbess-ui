@@ -47,3 +47,14 @@
     margin-top: 10px;
   }
 }
+.config{
+  &-anchor{
+    position: fixed;
+    width: 1000px;
+    margin-bottom: 30px;
+    z-index: 98;
+    background: #ccc;
+    height: 50px;
+  }
+}
+

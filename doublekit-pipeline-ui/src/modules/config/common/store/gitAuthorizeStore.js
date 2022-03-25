@@ -6,7 +6,7 @@ import {
     Code,
     GetAllStorehouse,
     GetBranch,
-    GetProof,
+    GetUserMessage
 } from "../api/gitAuthorize";
 
 class GitAuthorizeStore{
@@ -32,7 +32,7 @@ class GitAuthorizeStore{
     }
 
     @action
-    getAllStorehouse = value =>{
+    getAllStorehouse = () =>{
         GetAllStorehouse().then(res=>{
             this.gitList =res.data.data
             console.log('getAllStorehouse',  this.gitList )
@@ -53,15 +53,9 @@ class GitAuthorizeStore{
     }
 
     @action
-    getProof = value =>{
-        const param = qs.stringify({configureId: value})
-        GetProof(param).then(res=>{
-            this.gitProofId=res.data.data
-            localStorage.setItem('gitProofId',this.gitProofId)
-            console.log(res)
-        }).catch(error=>{
-            console.log(error)
-        })
+    getUserMessage =async () =>{
+        const data = await GetUserMessage()
+        return data.data;
     }
 
 }

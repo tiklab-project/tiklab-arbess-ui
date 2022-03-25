@@ -1,39 +1,35 @@
-import React,{useState} from "react";
-import {Button, Form, Input, Select,Row} from "antd";
+import React ,{useState} from "react";
+import {Form, Input, Select, Button, Row} from "antd";
 import DeployAddModal from "../../common/component/deployAddModal";
-import {withRouter} from "react-router-dom";
-import {inject, observer} from "mobx-react";
 
 const {Option}=Select
 const { TextArea } = Input;
 
-const ConfigDetailsDeploy = props =>{
+const ConfigDeploy = props =>{
 
-    const {ProofStore} = props
-    const {createProof,findAllDeployProof,findOneDeployProof,
-        allDeployProofList}=ProofStore
+    const {createProof,findOneDeployProof,findAllDeployProof,allDeployProofList}=props
 
     const [visible,setVisible]=useState(false)
 
-    const clickFindAllDeploy = () =>{
+    const findAllDeploy = () =>{
         findAllDeployProof()
     }
 
-    const changeDeploySelect = value =>{
+    const deploySelect = value =>{
         findOneDeployProof(value)
     }
 
     return(
         <div className='anchor-content' id='d'>
-            <h2>部署</h2>
-            <Form.Item name='deployTargetAddress' label='请输入文件地址'>
-                <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
+            <h1>部署</h1>
+            <Form.Item name='deployTargetAddress' label='需要发送的文件地址'>
+                <Input/>
             </Form.Item>
             <Row>
-                <Form.Item name='deployPlace' label='请选择Ip地址'>
+                <Form.Item  name='deployPlace'  label='请选择Ip地址' >
                     <Select
-                        onChange={changeDeploySelect}
-                        onClick={clickFindAllDeploy}
+                        onChange={deploySelect}
+                        onClick={findAllDeploy}
                         style={{ width: 300 }}
                     >
                         <Option >
@@ -42,23 +38,24 @@ const ConfigDetailsDeploy = props =>{
                         {
                             allDeployProofList && allDeployProofList.map(item=>{
                                 return(
-                                    <Option key={item.proofId} value={ item.proofDescribe+ " (" + item.proofIp + ")"} >
-                                        { item.proofDescribe+ " (" + item.proofIp + ")"}
+                                    <Option key={item.proofId} value= { item.proofName+ "(" + item.proofIp + ")"}>
+                                        { item.proofName+ "(" + item.proofIp + ")"}
                                     </Option>
                                 )
                             })
                         }
                     </Select>
                 </Form.Item>
-                <Button onClick={()=>setVisible(true)} className='config-details-link'>
+                <Button onClick={()=>setVisible(true)} className='config-link'>
                     添加
                 </Button>
             </Row>
+
             <Form.Item name='deployAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
             <Form.Item name='deployShell' label='shell命令'>
-                <TextArea autoSize />
+                <TextArea autoSize/>
             </Form.Item>
 
             <DeployAddModal
@@ -70,4 +67,4 @@ const ConfigDetailsDeploy = props =>{
     )
 }
 
-export default withRouter(inject('ProofStore')(observer(ConfigDetailsDeploy)))
+export default ConfigDeploy

@@ -2,9 +2,9 @@ import {observable, action} from "mobx";
 import qs from "qs";
 
 import {
-    SelectPipelineStatus,
+    FindAllPipelineStatus,
     CreatePipeline,
-    SelectName,
+    FindOneName,
     DeletePipeline,
     UpdatePipeline
 } from "../api/pipeline";
@@ -17,10 +17,14 @@ class PipelineStore{
     @observable searchPipelineList = []
     @observable pipelineId=''
     @observable configureId=''
+    @observable codeId=''
+    @observable testId=''
+    @observable structureId=''
+    @observable deployId=''
 
     @action
-    selectPipelineStatus=()=>{
-        SelectPipelineStatus().then(res=>{
+    findAllPipelineStatus=()=>{
+        FindAllPipelineStatus().then(res=>{
             this.pipelineList=res.data.data
             console.log('所有流水线', this.pipelineList)
         }).catch(error=>{
@@ -37,10 +41,20 @@ class PipelineStore{
             pipelineCreateTime:values.pipelineCreateTime
         }
         CreatePipeline(param).then(res=>{
-            this.pipelineId=res.data.data.pipelineId
-            this.configureId=res.data.data.pipelineConfigureId
+            if(res.data.data){
+                this.pipelineId=res.data.data.pipelineId
+                this.configureId=res.data.data.configureId
+                this.codeId=res.data.data.codeId
+                this.testId=res.data.data.testId
+                this.structureId=res.data.data.structureId
+                this.deployId=res.data.data.deployId
+            }
             localStorage.setItem('pipelineId', this.pipelineId)
             localStorage.setItem('configureId', this.configureId)
+            localStorage.setItem('codeId', this.codeId)
+            localStorage.setItem('testId', this.testId)
+            localStorage.setItem('structureId', this.structureId)
+            localStorage.setItem('deployId', this.deployId)
             console.log('创建流水线',res)
         }).catch(error=>{
             console.log(error)
@@ -48,10 +62,10 @@ class PipelineStore{
     }
 
     @action
-    selectName=values=>{
+    findOneName=values=>{
         const params = qs.stringify({'pipelineName': values})
         return new Promise((resolve, reject) => {
-            SelectName(params).then(res=>{
+            FindOneName(params).then(res=>{
                 this.searchPipelineList=res.data.data
                 // localStorage.setItem('searchPipelineList',JSON.stringify(this.searchPipelineList))
                 console.log("搜索流水线",res)

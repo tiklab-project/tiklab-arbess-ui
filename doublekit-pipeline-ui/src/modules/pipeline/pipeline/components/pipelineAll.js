@@ -8,12 +8,12 @@ import {observer,inject} from "mobx-react";
 const PipelineAll= props=>{
 
     const {PipelineStore,StructureStore}=props
-    const {selectPipelineStatus,pipelineList}=PipelineStore
+    const {findAllPipelineStatus,pipelineList}=PipelineStore
 
     //初始化表格
     useEffect(()=>{
-        // selectPipelineStatus()
-        const se = setTimeout(()=>selectPipelineStatus(),100)
+        // findAllPipelineStatus()
+        const se = setTimeout(()=>findAllPipelineStatus(),100)
         return ()=> clearTimeout(se)
     },[])
 

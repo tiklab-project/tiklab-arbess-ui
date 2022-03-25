@@ -30,10 +30,10 @@ class ConfigDetailsTest extends Component{
         return(
             <div className=' anchor-content' id='b'>
                 <h2>单元测试</h2>
-                <Form.Item   name='configureTestType'>
+                <Form.Item   name='testType'>
                     <Radio.Group  onChange={this.handlerRadio} value={testRadio}>
                         <Space>
-                            <Radio value={1}>无</Radio>
+                            <Radio value={0}>无</Radio>
                             <Radio value={2} >单元测试</Radio>
                         </Space>
                     </Radio.Group>
@@ -41,7 +41,7 @@ class ConfigDetailsTest extends Component{
                 {
                     testRadio === 2 ?
                         <>
-                            <Form.Item name="configureTestText">
+                            <Form.Item name="testOrder">
                                 <TextArea  autoSize  />
                             </Form.Item>
                         </>:null

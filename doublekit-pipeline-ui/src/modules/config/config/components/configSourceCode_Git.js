@@ -1,11 +1,11 @@
 import React, {Fragment, useState} from 'react'
-import {Button, Form, Input, Select} from "antd";
-import SourceCode_GitModal from "../../common/sourceCode_GitModal";
+import {Button, Form, Input, Row, Select} from "antd";
+import SourceCode_GitModal from "../../common/component/sourceCode_GitModal";
 import {inject, observer} from "mobx-react";
 
 const {Option} = Select
 
-const SourceCode_Git = props =>{
+const ConfigSourceCode_Git = props =>{
 
     const {ProofStore}=props
     const {createProof,findAllGitProof,findOneGitProof,allGitProofList} = ProofStore
@@ -18,13 +18,12 @@ const SourceCode_Git = props =>{
 
     const changeGitSelect = value =>{
         findOneGitProof(value)
-        localStorage.setItem('gitProofId',value)
     }
 
     return(
         <Fragment>
             <Form.Item
-                name='configureCodeSourceAddress'
+                name='codeName'
                 label="git地址"
                 rules={[
                     {
@@ -36,34 +35,38 @@ const SourceCode_Git = props =>{
                 <Input  />
             </Form.Item>
             <Form.Item
-                name="configureBranch"
+                name="codeBranch"
                 label="分支"
-                defaultValue={'master'}
             >
                 <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
             </Form.Item>
-            <Form.Item>
-                <Select
-                    placeholder="无"
-                    style={{ width: 300 }}
-                    onClick={clickFindAllGit}
-                    onChange={changeGitSelect}
-                >
-                    {
-                        allGitProofList && allGitProofList.map(item=>{
-                            return(
-                                <Option key={item.proofId} value={item.proofId}>
-                                    { item.proofName+ "(" + item.proofUsername + ")"}
-                                </Option>
-                            )
-                        })
-                    }
-                </Select>
-                &nbsp;
+            <Row>
+                <Form.Item name='gitPlace'>
+                    <Select
+                        placeholder="无"
+                        style={{ width: 300 }}
+                        onClick={clickFindAllGit}
+                        onChange={changeGitSelect}
+                    >
+                        <Option>
+                            无
+                        </Option>
+                        {
+                            allGitProofList && allGitProofList.map(item=>{
+                                return(
+                                    <Option key={item.proofId} value={item.proofId}>
+                                        { item.proofName+ "(" + item.proofUsername + ")"}
+                                    </Option>
+                                )
+                            })
+                        }
+                    </Select>
+                </Form.Item>
+                &nbsp; &nbsp;
                 <Button onClick={()=> setVisible(true)}>
                     添加
                 </Button>
-            </Form.Item>
+            </Row>
 
             <SourceCode_GitModal
                 visible={visible}
@@ -74,4 +77,4 @@ const SourceCode_Git = props =>{
     )
 }
 
-export default inject('ProofStore')(observer(SourceCode_Git))
+export default inject('ProofStore')(observer(ConfigSourceCode_Git))

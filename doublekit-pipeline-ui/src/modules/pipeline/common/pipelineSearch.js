@@ -1,5 +1,5 @@
 import React,{Fragment} from 'react'
-import { Button,Input,message} from "antd";
+import { Button,Input} from "antd";
 import {withRouter} from "react-router-dom";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
@@ -9,10 +9,10 @@ const { Search } = Input;
 const PipelineSearch= props=>{
 
     const {PipelineStore}=props
-    const {selectName}=PipelineStore
+    const {findOneName}=PipelineStore
 
     const onSearch = values =>{
-        selectName(values).then(res=>{
+        findOneName(values).then(()=>{
             props.history.push(`/home/searchresult/${values}`)
         })
     }

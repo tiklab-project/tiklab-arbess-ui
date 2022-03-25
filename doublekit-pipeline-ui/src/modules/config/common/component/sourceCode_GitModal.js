@@ -34,7 +34,7 @@ const SourceCode_GitModal= props =>{
            onCancel={()=>setVisible(false)}
            onOk={onOk}
        >
-           <Form form={form} layout="vertical" name="userForm" initialValues={{proofType:"password"}}>
+           <Form form={form} layout="vertical" name="userForm"  autoComplete = "off" initialValues={{proofType:"password"}}>
                <Form.Item label='凭证名称' name='proofName'>
                    <Input placeholder='名称'/>
                </Form.Item>

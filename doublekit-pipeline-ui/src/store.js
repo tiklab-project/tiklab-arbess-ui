@@ -1,8 +1,8 @@
 import PipelineStore from "./modules/pipeline/pipeline/store/pipelineStore";
-import ConfigStore from "./modules/config/config/store/configStore";
+import ConfigStore from "./modules/config/common/store/configStore";
 import StructureStore from "./modules/structure/structure/store/structureStore";
-import ProofStore from "./modules/config/configDetails/store/proofStore";
-import GitAuthorizeStore from "./modules/config/configDetails/store/gitAuthorizeStore";
+import ProofStore from "./modules/config/common/store/proofStore";
+import GitAuthorizeStore from "./modules/config/common/store/gitAuthorizeStore";
 
 class store{
     constructor() {
