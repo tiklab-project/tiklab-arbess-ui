@@ -1,0 +1,93 @@
+.frame {
+    height: 100vh;
+    .frame-header{
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #cccccc;
+        position: fixed;
+        background-color: white;
+        z-index: 999;
+        width: 100%;
+        right: 0;
+        left:0;
+        &-logo{
+            height: 50px;
+            line-height: 50px;
+            width: 100px;
+            margin-right: 20px;
+            font-size: 1.5rem;
+            font-style: italic;
+            display: inline-block;
+        }
+        &-link{
+            display: flex;
+            flex-direction: row;
+            margin-left: 15px;
+            &-active{
+                color: #1890ff !important;
+            }
+            :nth-of-type(2n) {
+                padding: 0 20px;
+            }
+            div{
+                cursor: pointer;
+                color: gray;
+            }
+        }
+        &-right{
+            display: flex;
+            flex-direction: row;
+            justify-items: flex-end;
+            align-items: center;
+            height: 100%;
+            padding-left: 20px;
+            &-search-wrap{
+                position: relative;
+                width: 100%;
+            }
+            &-text{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                padding-right: 20px;
+                a{
+                    padding: 0 20px;
+                    //color: hsla(0,0%,100%,.65);
+                }
+                >span {
+                    cursor: pointer;
+                    padding: 0 20px;
+                    color: gray;
+                }
+                .badge{
+                    position: relative;
+                    .dot{
+                        width: 7px;
+                        height: 7px;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: -5px;
+                        right: 3px;
+                        background: red;
+                    }
+                }
+                .messageNum{
+                    font-size: 25px;
+                    color: blue;
+                }
+    
+            }
+        }
+        &-dropdown{
+            margin-left: 20px;
+        }
+    }
+    &-container{
+        width: 100%;
+        padding-top: 60px
+    }
+}
+
