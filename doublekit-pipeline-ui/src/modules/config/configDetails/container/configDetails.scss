@@ -1,4 +1,5 @@
 .config-details{
+
   &-post{
     position: fixed;
     z-index: 98;
@@ -57,4 +58,14 @@
     height: 50px;
   }
 }
+.hidden{
+  position: fixed;
+  margin-top: -85px;
+  height: 110px;
+  z-index: 98;
+  width: 120%;
+  background-color: #FFFFFF;
+  margin-left: -300px;
+}
+
 

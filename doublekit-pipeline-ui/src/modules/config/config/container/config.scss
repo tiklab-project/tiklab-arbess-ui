@@ -1,14 +1,13 @@
 .config{
   width: 70%;
   min-width: 600px;
-  margin:25px auto;
+  margin:auto;
   position: relative;
   input{
-    width: 500px;
+    width: 600px;
   }
   textarea{
-    width: 80vh;
-    min-width: 500px;
+    width: 600px;
   }
   //共同样式
   h1{
@@ -39,13 +38,15 @@
     margin-left: 30px;
   }
   &-breadcrumb{
-    background-color: #f8f8f8;
-    margin-top: -25px;
+    border-bottom: 1px solid  #EAEAEA;
+    background-color: white;
     position: fixed;
+    top: 51px;
+    left: 0;
     z-index: 999;
-    width: 1200px;
-    div{
-      margin-left: 30px;
+    width: 100%;
+    >div{
+      padding-left: 280px;
       height: 50px;
       line-height: 50px;
       font-size: 16px;
@@ -57,15 +58,16 @@
     position: absolute;
     top: 80px;
     margin-left: 30px;
-    width: 1118.5px;
+    width: 100%;
   }
   &-anchor{
-    width: 1118.5px;
+    width: 100%;
     background: #ccc;
     height: 50px;
     border-bottom:1px solid #cccccc ;
     &-fixed{
       position: fixed;
+      width: 70%;
       z-index:998;
       top:99px
     }

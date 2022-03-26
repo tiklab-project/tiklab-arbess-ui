@@ -20,12 +20,11 @@ const PipelineDetails= props=>{
 
     return(
         <Layout>
-            <Sider >
+            <Sider style={{backgroundColor:'#fff'}}>
                 <PipelineDetailsAside/>
             </Sider>
             <Content className='pipelineDetails'>
                 <PipelineDetailsBreadcrumb   {...props}/>
-                <div className='hidden' />
                 {renderRoutes(route.routes)}
             </Content>
         </Layout>

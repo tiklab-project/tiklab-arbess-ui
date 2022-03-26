@@ -1,7 +1,11 @@
 .new{
   width: 70%;
   height: 100%;
-  margin:25px auto;
+  margin:auto;
+  padding: 20px;
+  ul{
+    list-style: none;
+  }
   form{
     border: 1px solid #cccccc;
     border-radius: 3px 3px 0 0;

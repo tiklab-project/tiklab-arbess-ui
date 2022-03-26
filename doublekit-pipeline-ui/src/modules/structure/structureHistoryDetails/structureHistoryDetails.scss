@@ -1,43 +1,64 @@
 .structureHistory-details{
+  overflow-y: hidden;
   &-top{
-    margin-bottom: 5px;
-    h1{
-      float: left;
-      font-size: 30px;
-    }
+    position: fixed;
+    z-index: 90;
+    top: 55px;
+    text-align: right;
+    width: 90%;
+    background-color: white;
     &-btn{
-      float: right;
-      Button:last-child{
-        margin-left: 10px;
+      border-bottom: 1px solid #d9d9d9;
+      height: 50px;
+      margin-right: 70px;
+      padding-top: 18px;
+    }
+  }
+  &-log{
+    display: flex;
+    flex-direction: row;
+  }
+  &-center{
+    position: relative;
+    padding: 20px;
+    border-right: 1px solid #d9d9d9;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 88.5vh  ;
+    &-test{
+      margin-bottom: 20px;
+    }
+    &-cart{
+      margin-right: 25px;
+      margin-bottom: 25px;
+      width: 300px;
+      .cart{
+        &-top{
+
+        }
+        &-ins{}
+        &-center{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          &-item{
+            padding: 15px;
+          }
+          &-info{
+            color: red;
+            cursor: pointer;
+          }
+        }
+        &-bom{
+          cursor: pointer;
+        }
       }
     }
   }
-  &-center{
-    clear: both;
+  &-right{
+    //position: relative;
+    //padding: 0 15px;
+    //left: 400px;
   }
-  &-card{
-    float: left;
-    width: 200px;
-    margin: 15px;
-  }
-  &-div{
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    line-height: 50px;
-    text-align: center;
-    float: left;
-  }
-  &-ul{
-    float: right;
-  }
-  &-out{
-    overflow: hidden;
-    clear: both;
-  }
-  &-log{
-    overflow: auto;
-    height: 45vh;
-    white-space: pre-wrap;
-  }
+
 }

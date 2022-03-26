@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Input, Form, Button, Popconfirm} from "antd";
+import './pipelineDel-Rename.scss'
 import {observer,inject} from "mobx-react";
 
 /*
@@ -37,7 +38,7 @@ const PipelineDelRename= props=>{
     }
 
     return(
-        <div className='task'>
+        <div className='task del-rename'>
             <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
                 <Form.Item
                     label="重命名"

@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import './structureHistory.scss'
 import StructureHistoryScreenModal from "./structureHistoryScreenModal";
 import {observer,inject} from "mobx-react";
+import {SettingOutlined} from "@ant-design/icons";
 
 const StructureHistory=props=>{
 
@@ -107,32 +108,19 @@ const StructureHistory=props=>{
             key: 'implementTime',
         },
         {
-            title: '代码源',
-            dataIndex: 'codeSource',
-            key: 'codeSource',
-            render:(text,record)=>{
-                if(text===2){
-                    return <span>git</span>
-
-                }else if(text===3){
-                    return <span>gitee</span>
-                }
-                else {
-                    return <span>无</span>
-
-                }
+            title: <SettingOutlined />,
+            key: 'operation',
+            fixed: 'right',
+            width: 100,
+            render:(text, record) => {
+                return(
+                    <span>
+                        查看
+                    </span>
+                )
             }
         },
-        {
-            title: '凭证',
-            dataIndex: 'proof',
-            key: 'proof',
-        },
-        {
-            title: '分支',
-            dataIndex: 'branch',
-            key: 'branch',
-        },
+
     ]
 
     return(

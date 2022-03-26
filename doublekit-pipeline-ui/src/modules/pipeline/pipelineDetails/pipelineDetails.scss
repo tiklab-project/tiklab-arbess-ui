@@ -1,5 +1,4 @@
 .ant-layout-sider-children{
-  width: 150px;
   position: fixed;
   z-index: 99;
   background-color: #ffffff;
@@ -16,17 +15,8 @@
   padding: 20px;
 }
 .task{
-  width: 75%;
+  width: 90%;
   min-width: 1000px;
-  margin:50px auto;
-}
-.hidden{
-  position: fixed;
-  margin-top: -85px;
-  height: 110px;
-  z-index: 98;
-  width: 120%;
-  background-color: #FFFFFF;
-  margin-left: -300px;
+  margin-top: 50px;
 }
 

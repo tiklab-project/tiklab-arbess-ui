@@ -1,7 +1,8 @@
 import React,{useEffect} from 'react'
 import './structureHistoryDetails.scss'
 import StructureHistoryDetailsTop from "./structureHistoryDetailsTop";
-import StructureHistoryDetailsCenter from "./structureHistoryDetailsCenter";
+import StructureHistoryDetailsLeft from "./structureHistoryDetailsLeft";
+import StructureHistoryDetailsRight from "./structureHistoryDetailsRight";
 import {withRouter} from "react-router-dom";
 import {inject, observer} from "mobx-react";
 
@@ -12,24 +13,29 @@ const StructureHistoryDetails = props =>{
 
     const historyId=localStorage.getItem('historyId')
 
-    useEffect(()=>{
-        SelectHistoryLog(historyId)
-        return () =>{
-            localStorage.removeItem('historyId')
-        }
-    },[])
+    // useEffect(()=>{
+    //     SelectHistoryLog(historyId)
+    //     return () =>{
+    //         localStorage.removeItem('historyId')
+    //     }
+    // },[])
 
     return(
-        <div className='structureHistory-details task'>
-            <StructureHistoryDetailsTop
-                {...props}
-                historyId={historyId}
-                deleteHistoryLog={deleteHistoryLog}
-            />
-            <StructureHistoryDetailsCenter
-                historyLog={historyLog}
-            />
-        </div>
+       <div className='task structureHistory-details'>
+           <StructureHistoryDetailsTop
+               {...props}
+               historyId={historyId}
+               deleteHistoryLog={deleteHistoryLog}
+           />
+           <div className='structureHistory-details-log'>
+               <StructureHistoryDetailsLeft
+                   historyLog={historyLog}
+               />
+               <StructureHistoryDetailsRight
+                   historyLog={historyLog}
+               />
+           </div>
+       </div>
     )
 }
 

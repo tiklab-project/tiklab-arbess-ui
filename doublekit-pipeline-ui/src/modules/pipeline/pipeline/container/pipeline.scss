@@ -1,12 +1,11 @@
 .pipeline{
   width: 70%;
-  margin:-25px auto;
+  margin:auto;
+  overflow: hidden;
   &-top{
     width: 100%;
-    margin-bottom: 50px;
-    h2{
-      float: left;
-    }
+    margin-bottom: 20px;
+    margin-top: 10px;
     &-r{
       float: right;
     }
