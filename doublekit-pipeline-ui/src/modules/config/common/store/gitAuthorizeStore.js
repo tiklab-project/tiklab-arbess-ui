@@ -6,7 +6,8 @@ import {
     Code,
     GetAllStorehouse,
     GetBranch,
-    GetUserMessage
+    GetUserMessage,
+    GetProof,
 } from "../api/gitAuthorize";
 
 class GitAuthorizeStore{
@@ -17,6 +18,7 @@ class GitAuthorizeStore{
     @observable gitList = []
     @observable branchList = []
     @observable gitProofId = ''
+    @observable userMessage = ''
 
     @action
     url =async () =>{
@@ -56,6 +58,18 @@ class GitAuthorizeStore{
     getUserMessage =async () =>{
         const data = await GetUserMessage()
         return data.data;
+    }
+
+    @action
+    getGiteeProof = value =>{
+        const params = new FormData()
+        params.append("proofName", value.proofName)
+        params.append("configureId", value.configureId)
+        GetProof(params).then(res=>{
+            console.log('getGiteeProof',res  )
+        }).catch(error=>{
+            console.log(error)
+        })
     }
 
 }

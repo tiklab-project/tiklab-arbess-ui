@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card } from 'antd';
-import Running from "../../../../common/running/running";
+import { Card,Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const StructureDeploy = props =>{
 
@@ -14,16 +14,15 @@ const StructureDeploy = props =>{
                 </svg>
             )
         } else {
+            const deployLog=logList.deployLog
             //如果构建状态为10--运行
-            if(logList.logPackState===10 && logList.logDeployState===0){
+            if(logList.structureLog.structureRunStatus===10 && deployLog.deployRunStatus===0){
                 return (
-                    <div className='structure-running'>
-                        <Running/>
-                    </div>
+                    <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
                 )
             }
             //如果部署状态为10--成功
-            else if(logList.logDeployState===10){
+            else if(deployLog.deployRunStatus===10){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-chenggong-"/>
@@ -31,7 +30,7 @@ const StructureDeploy = props =>{
                 )
             }
             //如果部署状态为1--失败
-            else if(logList.logDeployState===1){
+            else if(deployLog.deployRunStatus===1){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-yunhangshibai1"/>
@@ -49,25 +48,23 @@ const StructureDeploy = props =>{
 
     const time = () => {
         if(!logList){
-            return (
-                <li>部署时间：0</li>
-            )
+            return 0
         }else {
-            return (
-                <li>部署时间：{logList.logDeployTime}</li>
-            )
+            return logList.deployLog.deployRunTime
         }
     }
 
     return(
-        <Card title="部署" className='structure-card'>
-            <div className='structure-div'>
-                {state()}
+        <Card className='structure-mid-cart'>
+            <div className='cart-top'>部署</div>
+            <div className='cart-center'>
+                <div className='cart-center-item'>
+                    <div>{state()}</div>
+                    <div>部署时间： {time()}</div>
+                </div>
             </div>
-            <div className='structure-ul' >
-                <ul>
-                    {time()}
-                </ul>
+            <div className='cart-bottom' >
+                日志
             </div>
         </Card>
     )

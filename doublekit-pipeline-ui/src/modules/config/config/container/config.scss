@@ -61,11 +61,8 @@
     width: 100%;
   }
   &-anchor{
-    width: 100%;
-    background: #ccc;
-    height: 50px;
-    border-bottom:1px solid #cccccc ;
     &-fixed{
+      min-width: 600px;
       position: fixed;
       width: 70%;
       z-index:998;

@@ -7,7 +7,7 @@ const ConfigDetailsTop = props=>{
     const [visible, setVisible] = useState(false);
 
     return(
-        <div className='config-details-post'>
+        <div className='config-details-post'  id='scrollB'>
             <Button  onClick={() => setVisible(true)}>过往记录</Button>
             <Modal
                 title="是否离开"

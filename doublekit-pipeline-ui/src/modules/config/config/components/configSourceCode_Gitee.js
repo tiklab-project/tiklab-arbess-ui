@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, {useEffect, useState,Fragment} from 'react'
 import {Button, Form, Row, Select} from "antd";
 import { PlusOutlined} from "@ant-design/icons";
 import SourceCode_GiteeModal from "../../common/component/SourceCode_GIteeModal";
@@ -8,12 +8,25 @@ const {Option} =Select
 
 const ConfigSourceCode_Gitee = props =>{
 
-    const {GitAuthorizeStore,ProofStore}=props
-    const {url,getAllStorehouse,gitList,getBranch,branchList,getUserMessage} = GitAuthorizeStore
-    const {createProof} = ProofStore
+    const {GitAuthorizeStore}=props
+    const {url,getAllStorehouse,gitList,getBranch,
+        branchList,getUserMessage,getGiteeProof} = GitAuthorizeStore
 
     const [branch,setBranch]=useState(true)
     const [visible,setVisible]=useState(false)
+    const [readOnly,setReadOnly] =useState(false)
+    const [proofUsername,setProofUsername] =useState('')
+    const configureId = localStorage.getItem('configureId')
+
+    useEffect(()=>{
+        getUserMessage().then(res=>{
+            console.log('getUserMessage',res)
+            if(res.data){
+                setReadOnly(true)
+                setProofUsername(res.data)
+            }
+        })
+    },[])
 
     const clickGitStoreHouse = () =>{
         getAllStorehouse()
@@ -25,10 +38,10 @@ const ConfigSourceCode_Gitee = props =>{
     }
 
     return(
-        <div>
+        <Fragment>
             <Row>
                 <Form.Item
-                    name='configureCodeSourceAddress'
+                    name='codeName'
                     label="git地址"
                 >
                     <Select
@@ -53,7 +66,7 @@ const ConfigSourceCode_Gitee = props =>{
                     新增代码库
                 </Button>
             </Row>
-            <Form.Item name="configureBranch" label="分支">
+            <Form.Item name="codeBranch" label="分支">
                 <Select
                     style={{ width: 300 }}
                     disabled={branch}
@@ -74,11 +87,13 @@ const ConfigSourceCode_Gitee = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 url={url}
-                createProof={createProof}
-                getUserMessage={getUserMessage}
+                readOnly={readOnly}
+                proofUsername={proofUsername}
+                getGiteeProof={getGiteeProof}
+                configureId={configureId}
             />
-        </div>
+        </Fragment>
     )
 }
 
-export default inject('GitAuthorizeStore','ProofStore')(observer(ConfigSourceCode_Gitee))
+export default inject('GitAuthorizeStore')(observer(ConfigSourceCode_Gitee))

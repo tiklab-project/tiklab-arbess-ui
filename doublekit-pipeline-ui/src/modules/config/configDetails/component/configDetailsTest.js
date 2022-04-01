@@ -51,4 +51,6 @@ class ConfigDetailsTest extends Component{
     }
 }
 
+
+
 export default ConfigDetailsTest

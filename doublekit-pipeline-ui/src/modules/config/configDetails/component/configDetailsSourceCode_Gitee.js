@@ -8,17 +8,30 @@ const {Option} =Select
 
 const ConfigDetailsSourceCode_Gitee = props =>{
 
-    const {GitAuthorizeStore,form,ProofStore}=props
-    const {url,getAllStorehouse,gitList,getBranch,branchList,getUserMessage} = GitAuthorizeStore
-    const {createProof} = ProofStore
+    const {GitAuthorizeStore,form,configureId}=props
+    const {url,getAllStorehouse,gitList,getBranch,branchList,
+        getUserMessage,getGiteeProof} = GitAuthorizeStore
     const { getFieldValue } = form
 
     const [branch,setBranch]=useState(true)
     const [visible,setVisible]=useState(false)
+    const [readOnly,setReadOnly] =useState(false)
+    const [proofUsername,setProofUsername] =useState('')
 
     useEffect(()=>{
+        getUserMessage().then(res=>{
+            console.log('getUserMessage',res)
+            if(res.data){
+                setReadOnly(true)
+                setProofUsername(res.data)
+            }
+        })
+    },[])
+
+    useEffect(()=>{
+        const ae = getFieldValue('giteeAddress')
         const se = setTimeout(()=>{
-            if(getFieldValue('giteeAddress')!==' '){
+            if(ae!==' ' || ae ===undefined || ae === null){
                 setBranch(false)
             }
         },10)
@@ -30,6 +43,7 @@ const ConfigDetailsSourceCode_Gitee = props =>{
     }
 
     const changeGitStoreHouse = values =>{
+        console.log(values)
         setBranch(false)
         getBranch(values)
     }
@@ -42,7 +56,6 @@ const ConfigDetailsSourceCode_Gitee = props =>{
                     label="git地址"
                 >
                     <Select
-                        id='StoreHouse'
                         style={{ width: 300 }}
                         onChange={changeGitStoreHouse}
                         onClick={clickGitStoreHouse}
@@ -84,11 +97,13 @@ const ConfigDetailsSourceCode_Gitee = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 url={url}
-                createProof={createProof}
-                getUserMessage={getUserMessage}
+                readOnly={readOnly}
+                proofUsername={proofUsername}
+                getGiteeProof={getGiteeProof}
+                configureId={configureId}
             />
         </Fragment>
     )
 }
 
-export default inject('GitAuthorizeStore','ProofStore')(observer(ConfigDetailsSourceCode_Gitee))
+export default inject('GitAuthorizeStore')(observer(ConfigDetailsSourceCode_Gitee))

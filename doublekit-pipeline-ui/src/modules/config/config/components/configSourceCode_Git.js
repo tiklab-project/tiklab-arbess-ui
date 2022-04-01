@@ -54,8 +54,8 @@ const ConfigSourceCode_Git = props =>{
                         {
                             allGitProofList && allGitProofList.map(item=>{
                                 return(
-                                    <Option key={item.proofId} value={item.proofId}>
-                                        { item.proofName+ "(" + item.proofUsername + ")"}
+                                    <Option key={item.proofId} value={ item.proofName+ " (" + item.proofUsername + ")"}>
+                                        { item.proofName+ " (" + item.proofUsername + ")"}
                                     </Option>
                                 )
                             })

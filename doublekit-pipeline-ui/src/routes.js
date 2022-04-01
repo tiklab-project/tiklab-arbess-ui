@@ -19,7 +19,7 @@ const ConfigDetails=AsyncComponent(()=>import('./modules/config/configDetails/co
 const StructureHistory=AsyncComponent(()=>import('./modules/structure/structureHistory/structureHistory'))
 const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
-const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/structureHistoryDetails'))
+const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/container/structureHistoryDetails'))
 
 export const routers=[
     {

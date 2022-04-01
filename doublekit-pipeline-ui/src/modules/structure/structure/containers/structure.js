@@ -11,16 +11,16 @@ import { inject, observer } from "mobx-react";
 const StructureTask = props => {
 
     const { StructureStore } = props
-    const { pipelineStructure, selectStructureState,logList } = StructureStore
+    const { pipelineStartStructure, findStructureState,logList } = StructureStore
 
     const pipelineId = localStorage.getItem('pipelineId')
 
     let interval=null
     useEffect(() => {
-        pipelineStructure(pipelineId).then(res => {
-            if (res.data==='1' || res.data === '100') {
+        pipelineStartStructure(pipelineId).then(res => {
+            if (res.data===1 || res.data === 100) {
                 interval = setInterval(() => {
-                    selectStructureState(pipelineId).then(res =>{
+                    findStructureState(pipelineId).then(res =>{
                         if(res.data.logRunStatus!==0){
                             clearInterval(interval)
                         }
@@ -50,22 +50,24 @@ const StructureTask = props => {
 
     return (
         <div className='structure task'>
-            <div className='structure-btn'>
-                <Button>
-                    <PoweroffOutlined />停止
-                </Button>
+            <div className='structure-Top'>
+               <div className='structure-Top-btn'>
+                   <Button>
+                       <PoweroffOutlined />停止
+                   </Button>
+               </div>
             </div>
 
-            <div style={{ float: "left", width: '100%' }}>
+            <div className='structure-mid'>
                 <StructureClone logList={logList} />
                 <StructureTest logList={logList} />
                 <StructurePack logList={logList} />
                 <StructureDeploy logList={logList} />
             </div>
 
-            <div className='structure-out'>
-                <h2>输出</h2>
-                <div className='structure-outLog'  id='outLog'>
+            <div className='structure-bottom'>
+                <h3>输出</h3>
+                <div className='structure-bottom-outLog'  id='outLog'>
                     {logRunLog()}
                 </div>
             </div>

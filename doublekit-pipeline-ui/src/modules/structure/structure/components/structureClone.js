@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card } from 'antd';
-import Running from "../../../../common/running/running";
+import { Card,Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const StructureClone = props =>{
 
@@ -14,19 +14,18 @@ const StructureClone = props =>{
                 </svg>
             )
         }else {
-            if(logList.logCodeState===2){
+            const codeLog=logList.codeLog
+            if(codeLog.codeRunStatus===2){
                 return (
-                    <div className='structure-running'>
-                        <Running/>
-                    </div>
+                    <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
                 )
-            }else if(logList.logCodeState===10){
+            }else if(codeLog.codeRunStatus===10){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-chenggong-"/>
                     </svg>
                 )
-            }else if(logList.logCodeState===1){
+            }else if(codeLog.codeRunStatus===1){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-yunhangshibai1"/>
@@ -44,25 +43,23 @@ const StructureClone = props =>{
 
     const time = () => {
         if(!logList){
-            return (
-                <li>克隆时间：0</li>
-            )
+            return 0
         }else {
-            return (
-                <li>克隆时间：{logList.logCodeTime}</li>
-            )
+            return logList.codeLog.codeRunTime
         }
     }
 
     return(
-        <Card title="克隆" className='structure-card'>
-            <div className='structure-div'>
-                {state()}
+        <Card className='structure-mid-cart'>
+            <div className='cart-top'>克隆</div>
+            <div className='cart-center'>
+                <div className='cart-center-item'>
+                    <div>{state()}</div>
+                    <div>克隆时间： {time()}</div>
+                </div>
             </div>
-            <div className='structure-ul'>
-                <ul>
-                    {time()}
-                </ul>
+            <div className='cart-bottom' >
+                日志
             </div>
         </Card>
     )

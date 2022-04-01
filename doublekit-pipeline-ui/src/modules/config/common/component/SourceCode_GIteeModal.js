@@ -1,4 +1,4 @@
-import React,{useState,useEffect } from 'react'
+import React from 'react'
 import {Form, Select, Input, Modal,Row,Button} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 
@@ -6,32 +6,17 @@ const { Option } = Select;
 
 const SourceCode_GiteeModal = props =>{
 
-    const {visible,setVisible,url,createProof,getUserMessage}=props
-    const [readOnly,setReadOnly] =useState(false)
+    const {visible,setVisible,url,getGiteeProof,configureId,
+        proofUsername,readOnly}=props
     const [form] = Form.useForm()
-
-    useEffect(()=>{
-        if(visible){
-            getUserMessage().then(res=>{
-                if(res.data){
-                    setReadOnly(true)
-                    form.setFieldsValue({
-                        proofUsername:res.data,
-                    })
-                }
-            })
-        }
-    },[visible])
 
     const onOk = () =>{
         form.validateFields().then((values) => {
             const params = {
-                proofScope:3,
-                proofType:'码云',
+                configureId:configureId,
                 proofName:values.proofName,
-                proofUsername:values.proofUsername,
             }
-            createProof(params)
+            getGiteeProof(params)
         })
         setVisible(false)
     }
@@ -57,7 +42,10 @@ const SourceCode_GiteeModal = props =>{
                 layout="vertical"
                 name="userForm"
                 autoComplete = "off"
-                initialValues={{'proofType':1}}
+                initialValues={{
+                    'proofType':1,
+                    "proofUsername":proofUsername ? proofUsername:' ',
+                }}
             >
                 <Form.Item label='连接类型' name='proofType'>
                     <Select  style={{ width: 120 }} disabled={true}>

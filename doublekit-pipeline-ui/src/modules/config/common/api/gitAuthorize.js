@@ -1,6 +1,6 @@
 import {serviceLoc} from "../../../../common/api/requset";
 
-//gitee授权地址
+//gitee授权--地址
 export function  Url (data){
     return serviceLoc.request({
         url:'/gitee/url',
@@ -44,4 +44,15 @@ export function  GetUserMessage (data){
         data
     })
 }
+
+//gitee--凭证
+export function  GetProof (data){
+    return serviceLoc.request({
+        url:'/gitee/getProof',
+        method: 'post',
+        data
+    })
+}
+
+
 

@@ -1,7 +1,8 @@
 .structure-history{
-  width: 70%;
+  width: 80%;
   height: 100%;
-  margin:auto;
+  min-width: 500px;
+  margin:50px auto;
   &-top{
     h1{
       font-size: 30px;

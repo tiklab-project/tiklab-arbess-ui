@@ -5,7 +5,7 @@ const {TextArea} = Input
 
 const ConfigTest = props => {
 
-    const [radio,setRadio]=useState(1)
+    const [radio,setRadio]=useState(0)
 
     const handlerRadio = e =>{
         setRadio(e.target.value)

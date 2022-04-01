@@ -1,10 +1,6 @@
-.structure{
+.structureHistory-details{
   overflow: hidden;
   padding: 20px;
-  min-width: 600px;
-  ul>li{
-    list-style: none;
-  }
   &-top{
     position: fixed;
     z-index: 90;
@@ -16,13 +12,16 @@
       text-align: right;
       padding-top: 18px;
       >button{
-        right: 20%;
+        right: 10%;
       }
     }
   }
-  &-mid{
+  &-center{
     display: flex;
     flex-direction: row;
+    &-test{
+      margin-bottom: 20px;
+    }
     &-cart{
       margin-right: 25px;
       margin-bottom: 25px;
@@ -45,23 +44,13 @@
         }
       }
     }
-  }
+  };
   &-bottom{
-    &-outLog{
-      white-space: pre-wrap;
-      height:50vh;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
     padding: 20px;
-  }
-  &-running{
-    position: absolute;
-    bottom: 100px;
-    height: 25px;
-    width: 25px;
-    left: 10px;
-
+    white-space: pre-wrap;
+    height:50vh;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
 }

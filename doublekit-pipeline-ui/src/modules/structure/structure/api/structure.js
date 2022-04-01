@@ -1,18 +1,18 @@
 import {serviceLoc} from "../../../../common/api/requset";
 
 //开始构建
-export function  PipelineStructure (data){
+export function  PipelineStartStructure (data){
     return serviceLoc.request({
-        url:'/pipelineLog/pipelineStructure',
+        url:'/pipelineExec/start',
         method: 'post',
         data
     })
 }
 
 //构建状态
-export function  SelectStructureState (data){
+export function  FindStructureState (data){
     return serviceLoc.request({
-        url:'/pipelineLog/selectStructureState',
+        url:'pipelineExec/findState',
         method:'post',
         data
     })
@@ -21,16 +21,16 @@ export function  SelectStructureState (data){
 //构建历史
 export function  SelectHistoryDetails (data){
     return serviceLoc.request({
-        url:'/pipelineHistory/selectHistoryDetails',
+        url:'/pipelineHistory/findAllHistory',
         method:'post',
         data
     })
 }
 
 //历史详情日志
-export function  SelectHistoryLog (data){
+export function  FindHistoryLog (data){
     return serviceLoc.request({
-        url:'/pipelineHistory/selectHistoryLog',
+        url:'/pipelineLog/findOneLog',
         method:'post',
         data
     })
@@ -39,7 +39,7 @@ export function  SelectHistoryLog (data){
 //删除构建历史
 export function  DeleteHistoryLog (data){
     return serviceLoc.request({
-        url:'/pipelineHistory/deleteHistoryLog',
+        url:'/pipelineHistory/deleteHistory',
         method:'post',
         data
     })

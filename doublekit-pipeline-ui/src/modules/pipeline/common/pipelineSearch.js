@@ -12,8 +12,9 @@ const PipelineSearch= props=>{
     const {findOneName}=PipelineStore
 
     const onSearch = values =>{
-        findOneName(values).then(()=>{
-            props.history.push(`/home/searchresult/${values}`)
+        findOneName(values).then(res=>{
+            console.log(res)
+            // props.history.push(`/home/searchresult/${values}`)
         })
     }
 

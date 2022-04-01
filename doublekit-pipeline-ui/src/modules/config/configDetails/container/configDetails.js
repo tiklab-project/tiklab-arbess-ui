@@ -12,19 +12,21 @@ import Conserve from "../../common/component/conserve";
 import moment from "../../../../common/moment/moment";
 import {getUrlParam} from "../../common/component/getUrlParam";
 import {inject, observer} from "mobx-react";
+import SourceCode_GiteeModal from "../../common/component/SourceCode_GIteeModal";
 
 const ConfigDetails = props =>{
 
     const {ConfigStore,GitAuthorizeStore}=props
     const {findOnePipelineConfigure,updatePipelineConfig,
             configureId,codeId,deployId,structureId,testId}=ConfigStore
-    const {code} = GitAuthorizeStore
+    const {code,getUserMessage} = GitAuthorizeStore
 
     const [form] = Form.useForm()
 
     const [sourceRadio,setSourceRadio]=useState(0)
     const [testRadio,setTestRadio]=useState(0)
     const [structureRadio,setStructureRadio]=useState(0)
+    const [deployRadio,setDeployRadio]=useState(0)
     const [anchor,setAnchor] = useState('a')
     const pipelineId=localStorage.getItem('pipelineId')
     const codeValue = getUrlParam('code')
@@ -62,6 +64,7 @@ const ConfigDetails = props =>{
                 setSourceRadio(data.pipelineCode.codeType)
                 setStructureRadio(data.pipelineStructure.structureType)
                 setTestRadio(data.pipelineTest.testType)
+                setDeployRadio(data.pipelineDeploy.deployType)
 
                 switch (data.pipelineCode.codeType){
                     case 2:
@@ -108,6 +111,15 @@ const ConfigDetails = props =>{
     const handleScroll = () =>{
         //浏览器滚动的高度
         const scrollTop=document.body.scrollTop
+        //固定
+        const scrollA=document.getElementById('scrollA')
+        const scrollB=document.getElementById('scrollB')
+        if(scrollB && scrollTop >scrollB.offsetHeight){
+            scrollA.classList.add('config-details-fixed')
+        }else {
+            scrollA.classList.remove('config-details-fixed')
+        }
+
         const a=document.getElementById('a').offsetTop-55
         const b=document.getElementById('b').offsetTop-55
         const c=document.getElementById('c').offsetTop-55
@@ -139,7 +151,7 @@ const ConfigDetails = props =>{
 
     const onFinish = values =>{
 
-        let CodeSourceRadioType,StructureRadioType={}
+        let CodeSourceRadioType,StructureRadioType,deployRadioType={}
 
         switch (values.codeType) {
             case 2:
@@ -170,50 +182,71 @@ const ConfigDetails = props =>{
                 }
         }
 
+        switch (values.deployType) {
+            case 2:
+                deployRadioType = {
+                    deployAddress: values.deployAddress,
+                    proofName: values.deployPlace,
+                    deployShell: values.deployShell,
+                    deployTargetAddress:values.deployTargetAddress,
+                }
+                break
+            case 3:
+                deployRadioType = {
+                    deployAddress: values.deployAddress,
+                    proofName: values.deployPlace,
+                    deployShell: values.deployShell,
+                    deployTargetAddress:values.deployTargetAddress,
+                }
+        }
+
         const configure = {
             configureCreateTime:moment.moment,
             configureId: configureId,
-            pipeline:pipelineId,
+            pipeline:{
+                pipelineId:pipelineId
+            },
             pipelineCode:{
                 codeId:codeId,
                 codeType:values.codeType,
                 codeBranch:CodeSourceRadioType && CodeSourceRadioType.codeBranch
-                    ?  CodeSourceRadioType.codeBranch : ' ',
+                    ?  CodeSourceRadioType.codeBranch : '',
                 codeName:CodeSourceRadioType &&  CodeSourceRadioType.codeName
-                    ?  CodeSourceRadioType.codeName : ' ',
+                    ?  CodeSourceRadioType.codeName : '',
                 proofName:CodeSourceRadioType && CodeSourceRadioType.proofName
                     ?  CodeSourceRadioType.proofName : '无',
             },
             pipelineTest:{
                 testId: testId,
                 testType:values.testType,
-                testOrder: values.testOrder ? values.testOrder : ' ',
+                testOrder: values.testOrder ? values.testOrder : '',
             },
             pipelineStructure:{
                 structureId: structureId,
                 structureType: values.structureType,
                 structureAddress: StructureRadioType && StructureRadioType.structureAddress
-                    ?   StructureRadioType.structureAddress : ' ',
+                    ?   StructureRadioType.structureAddress : '',
                 structureOrder:StructureRadioType && StructureRadioType.structureOrder
-                    ?   StructureRadioType.structureOrder : ' ',
+                    ?   StructureRadioType.structureOrder : '',
             },
             pipelineDeploy:{
                 deployId: deployId ,
-                deployType:1,
+                deployType:values.deployType,
                 deployAddress: values.deployAddress,
                 proofName: values.deployPlace ? values.deployPlace : "无" ,
                 deployShell: values.deployShell,
                 deployTargetAddress:values.deployTargetAddress,
             },
         }
+
         updatePipelineConfig(configure)
         props.history.push('/home/task/work')
     }
 
     return(
         <div className='config-details  task'>
-            <div className='hidden' />
-            <ConfigDetailsTop/>
+            <div className='hidden'/>
+            <ConfigDetailsTop />
             <div className='config-details-offset'>
                 <Anchor
                     scrollToAnchor={scrollToAnchor}
@@ -226,17 +259,28 @@ const ConfigDetails = props =>{
                         "structureType":0,
                         "codeType":0,
                         "testType":0,
+                        "deployType":0,
                         'giteeAddress':' '
                        }}
                     layout="vertical"
                     autoComplete = "off"
                 >
                     <ConfigDetailsSourceCode
+                        setSourceRadio={setSourceRadio}
                         sourceRadio={sourceRadio}
-                        form={form}/>
-                    <ConfigDetailsTest testRadio={testRadio}/>
-                    <ConfigDetailsStructure structureRadio={structureRadio}/>
-                    <ConfigDetailsDeploy/>
+                        form={form}
+                        configureId={configureId}
+                    />
+                    <ConfigDetailsTest
+                        testRadio={testRadio}/>
+                    <ConfigDetailsStructure
+                        structureRadio={structureRadio}
+                        setStructureRadio={setStructureRadio}
+                    />
+                    <ConfigDetailsDeploy
+                        deployRadio={deployRadio}
+                        setDeployRadio={setDeployRadio}
+                    />
                     <Conserve/>
                 </Form>
             </div>

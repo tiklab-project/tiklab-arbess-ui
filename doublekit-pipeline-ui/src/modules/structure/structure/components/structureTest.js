@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from 'antd';
-import Running from "../../../../common/running/running";
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const StructureTest = props =>{
 
@@ -14,19 +15,18 @@ const StructureTest = props =>{
                 </svg>
             )
         }else {
-            if(logList.logCodeState===10 && logList.logTestState===0){
+            const testLog=logList.testLog
+            if(logList.codeLog.codeRunStatus===10 && testLog.testRunStatus===0){
                 return (
-                    <div className='structure-running'>
-                        <Running/>
-                    </div>
+                    <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
                 )
-            }else if(logList.logTestState===10){
+            }else if(testLog.testRunStatus===10){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-chenggong-"/>
                     </svg>
                 )
-            }else if(logList.logTestState===1){
+            }else if(testLog.testRunStatus===1){
                 return (
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-yunhangshibai1"/>
@@ -44,25 +44,23 @@ const StructureTest = props =>{
 
     const time = () => {
         if(!logList){
-            return (
-                <li>测试时间：0</li>
-            )
+            return 0
         }else {
-            return (
-                <li>测试时间：{logList.logTestTime}</li>
-            )
+            return logList.testLog.testRunTime
         }
     }
 
     return(
-        <Card title="测试" className='structure-card'>
-            <div className='structure-div'>
-                {state()}
+        <Card className='structure-mid-cart'>
+            <div className='cart-top'>测试</div>
+            <div className='cart-center'>
+                <div className='cart-center-item'>
+                    <div>{state()}</div>
+                    <div>测试时间：{time()}</div>
+                </div>
             </div>
-            <div className='structure-ul'>
-                <ul>
-                    {time()}
-                </ul>
+            <div className='cart-bottom' >
+                日志
             </div>
         </Card>
     )

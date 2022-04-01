@@ -46,7 +46,7 @@ class ConfigStore{
             configureCreateTime:values.configureCreateTime,
             configureId: values.configureId,
             pipeline:{
-                pipelineId:values.pipeline
+                pipelineId:values.pipeline.pipelineId
             },
             pipelineCode:{
                 codeBranch:values.pipelineCode.codeBranch,
@@ -71,7 +71,7 @@ class ConfigStore{
                 deployId: values.pipelineDeploy.deployId,
                 deployShell: values.pipelineDeploy.deployShell,
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
-                deployType:1,
+                deployType:values.pipelineDeploy.deployType,
                 proofName: values.pipelineDeploy.proofName,
             },
         }

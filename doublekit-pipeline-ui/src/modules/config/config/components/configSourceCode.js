@@ -5,7 +5,7 @@ import SourceCode_Gitee from "./configSourceCode_Gitee";
 
 const ConfigSourceCode = () => {
 
-    const [sourceRadio,setSourceRadio]=useState(1)
+    const [sourceRadio,setSourceRadio]=useState(0)
 
     const handlerRadio = e =>{
         setSourceRadio(e.target.value)

@@ -1,5 +1,8 @@
 .config{
   &-anchor{
+    background: #ccc;
+    height: 50px;
+    border-bottom:1px solid #cccccc ;
     &-d{
       cursor: pointer;
       float: left;

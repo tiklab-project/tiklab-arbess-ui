@@ -28,8 +28,9 @@ const StructureHistory=props=>{
 
     //构建详情
     const goBuildDetails = record =>{
+        localStorage.setItem('logId',record.logId)
         localStorage.setItem('historyId',record.historyId)
-        props.history.push(`/home/task/build/${"构建"+record.historyNumber}`)
+        props.history.push(`/home/task/build/${"构建"+record.historyId}`)
     }
 
     //执行人详情
@@ -40,16 +41,11 @@ const StructureHistory=props=>{
     const columns = [
         {
             title: '构建',
-            dataIndex: 'historyNumber',
-            key: 'historyNumber',
+            dataIndex: 'historyId',
+            key: 'historyId',
             render:(text,record)=>{
                 return(
-                    <span
-                        onClick={()=>
-                            goBuildDetails(record)
-                        }
-                        className='structure-history-table'
-                    >
+                    <span>
                         构建{text}
                     </span>
                 )
@@ -57,8 +53,8 @@ const StructureHistory=props=>{
         },
         {
             title: '状态',
-            dataIndex: 'status',
-            key: 'status',
+            dataIndex: 'historyStatus',
+            key: 'historyStatus',
             render:(text,record)=>{
                 if(text===30){
                     return (
@@ -77,13 +73,13 @@ const StructureHistory=props=>{
         },
         {
             title: '构建时间',
-            dataIndex: 'createStructureTime',
-            key: 'createStructureTime',
+            dataIndex: 'historyCreateTime',
+            key: 'historyCreateTime',
         },
         {
             title: '执行人',
-            dataIndex: 'implementor',
-            key: 'implementor',
+            dataIndex: 'pipelineName',
+            key: 'pipelineName',
             render:(text, record) =>{
                 return(
                     <span
@@ -99,22 +95,34 @@ const StructureHistory=props=>{
         },
         {
             title: '执行方式',
-            dataIndex: 'structureWay',
-            key: 'structureWay',
+            dataIndex: 'historyWay',
+            key: 'historyWay',
+            render:text =>{
+               switch (text) {
+                   case 1:
+                       return <span>
+                                用户点击执行
+                              </span>
+               }
+            }
+
         },
         {
             title: '执行时间',
-            dataIndex: 'implementTime',
-            key: 'implementTime',
+            dataIndex: 'historyTime',
+            key: 'historyTime',
         },
         {
             title: <SettingOutlined />,
             key: 'operation',
-            fixed: 'right',
-            width: 100,
             render:(text, record) => {
                 return(
-                    <span>
+                    <span
+                        onClick={()=>
+                            goBuildDetails(record)
+                        }
+                        className='structure-history-table'
+                    >
                         查看
                     </span>
                 )

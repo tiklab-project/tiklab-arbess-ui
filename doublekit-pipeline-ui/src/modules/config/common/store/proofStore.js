@@ -42,7 +42,7 @@ class ProofStore{
         const params = qs.stringify({proofId: values})
         await FindOneProof(params).then(res=>{
             this.oneGitProof=res.data.data
-            console.log("获取Git某一凭证信息",this.oneGitProof)
+            console.log("获取Git某一凭证信息",res)
         }).catch(error=>{
             console.log(error)
         })
@@ -53,7 +53,7 @@ class ProofStore{
         const params = qs.stringify({proofId: values})
         await FindOneProof(params).then(res=>{
             this.oneDeployProof=res.data.data
-            console.log("获取部署某一凭证信息",this.oneDeployProof)
+            console.log("获取部署某一凭证信息",res)
         }).catch(error=>{
             console.log(error)
         })
@@ -63,7 +63,7 @@ class ProofStore{
     findAllGitProof = () =>{
         FindAllGitProof().then(res=>{
             this.allGitProofList=res.data.data
-            console.log("allGitProofList", this.allGitProofList)
+            console.log("allGitProofList", res)
         }).catch(error=>{
             console.log(error)
         })

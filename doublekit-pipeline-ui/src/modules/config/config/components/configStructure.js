@@ -4,7 +4,8 @@ import {Input, Form, Radio,Space} from "antd";
 const { TextArea } = Input;
 
 const ConfigStructure = props =>{
-    const [value,setValue]=useState(1)
+
+    const [value,setValue]=useState(0)
 
     const handlerRadio=(e)=>{
         setValue(e.target.value)

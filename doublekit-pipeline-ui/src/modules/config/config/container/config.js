@@ -95,7 +95,9 @@ const Config = props=>{
         const configure={
             configureCreateTime:moment.moment,
             configureId: localStorage.getItem('configureId'),
-            pipeline:localStorage.getItem('pipelineId'),
+            pipeline:{
+                pipelineId:localStorage.getItem('pipelineId')
+            },
             pipelineCode:{
                 codeBranch:values.codeBranch,
                 codeId:localStorage.getItem('codeId'),
@@ -119,10 +121,11 @@ const Config = props=>{
                 deployAddress: values.deployAddress,
                 deployShell: values.deployShell,
                 deployTargetAddress:values.deployTargetAddress,
-                deployType:1,
+                deployType:values.deployType,
                 proofName: values.deployPlace,
             },
         }
+        console.log(configure)
         updatePipelineConfig(configure)
         props.history.push('/home/task/config')
     }
@@ -147,6 +150,7 @@ const Config = props=>{
                         "codeType":0,
                         "testType":0,
                         "structureType":0,
+                        "deployType":0,
                         "deployPlace":"无",
                         "testOrder": 'mvn -B test -Dmaven.test.failure.ignore=true\n' +
                                              'mvn surefire-report:report-only\n' +
