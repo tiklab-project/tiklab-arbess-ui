@@ -2,6 +2,7 @@ import React from 'react'
 import { Radio,  Form, Space } from "antd";
 import ConfigDetailsSourceCode_Git from "./configDetailsSourceCode_Git";
 import ConfigDetailsSourceCode_Gitee from "./configDetailsSourceCode_Gitee"
+import ConfigDetailsSourceCode_Gitlab from "./configDetailsSourceCode_Gitlab";
 
 const ConfigDetailsSourceCode = props =>{
 
@@ -20,6 +21,7 @@ const ConfigDetailsSourceCode = props =>{
                         <Radio value={0}>无</Radio>
                         <Radio value={2} >通用Git</Radio>
                         <Radio value={3} >Gitee</Radio>
+                        <Radio value={4} >Gitlab</Radio>
                     </Space>
                 </Radio.Group>
             </Form.Item>
@@ -34,6 +36,11 @@ const ConfigDetailsSourceCode = props =>{
                         form={form}
                         configureId={configureId}
                     />
+                    :null
+            }
+            {
+                sourceRadio===4 ?
+                    <ConfigDetailsSourceCode_Gitlab/>
                     :null
             }
         </div>
