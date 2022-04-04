@@ -79,6 +79,13 @@ const ConfigDetails = props =>{
                             giteeAddress:data.pipelineCode.codeName,
                             giteeBranch:data.pipelineCode.codeBranch,
                         })
+                        break
+                    case 4:
+                        form.setFieldsValue({
+                            gitlabAddress: data.pipelineCode.codeName,
+                            gitlabBranch: data.pipelineCode.codeBranch,
+                            gitlabPlace: data.pipelineCode.proofName,
+                        })
                 }
 
                 switch (data.pipelineStructure.structureType){
@@ -165,6 +172,13 @@ const ConfigDetails = props =>{
                 CodeSourceRadioType =  {
                     codeName: values.giteeAddress,
                     codeBranch: values.giteeBranch
+                }
+                break
+            case 4:
+                CodeSourceRadioType = {
+                    codeName: values.gitlabAddress,
+                    codeBranch:values.gitlabBranch,
+                    proofName:values.gitlabPlace,
                 }
         }
 

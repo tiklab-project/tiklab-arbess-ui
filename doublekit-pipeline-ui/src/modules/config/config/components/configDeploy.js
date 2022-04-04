@@ -1,7 +1,7 @@
 import React ,{useState} from "react";
 import {Form,  Radio, Space} from "antd";
-import ConfigDeploy_docker from "./configDeploy_docker";
-import ConfigDeploy_linux from "./configDeploy_linux";
+// import ConfigDeploy_docker from "./configDeploy_docker";
+// import ConfigDeploy_linux from "./configDeploy_linux";
 import DeployAddModal from "../../common/component/deployAddModal";
 
 const ConfigDeploy = props =>{
@@ -28,26 +28,26 @@ const ConfigDeploy = props =>{
                     </Space>
                 </Radio.Group>
             </Form.Item>
-            {
-                deployRadio===2 ?
-                    <ConfigDeploy_linux
-                        findOneDeployProof={findOneDeployProof}
-                        findAllDeployProof={findAllDeployProof}
-                        allDeployProofList={allDeployProofList}
-                        setVisible={setVisible}
-                    />
-                    :null
-            }
-            {
-                deployRadio===3 ?
-                    <ConfigDeploy_docker
-                        setVisible={setVisible}
-                        findOneDeployProof={findOneDeployProof}
-                        findAllDeployProof={findAllDeployProof}
-                        allDeployProofList={allDeployProofList}
-                    />
-                    :null
-            }
+            {/*{*/}
+            {/*    deployRadio===2 ?*/}
+            {/*        // <ConfigDeploy_linux*/}
+            {/*        //     findOneDeployProof={findOneDeployProof}*/}
+            {/*        //     findAllDeployProof={findAllDeployProof}*/}
+            {/*        //     allDeployProofList={allDeployProofList}*/}
+            {/*        //     setVisible={setVisible}*/}
+            {/*        // />*/}
+            {/*        :null*/}
+            {/*}*/}
+            {/*{*/}
+            {/*    deployRadio===3 ?*/}
+            {/*        // <ConfigDeploy_docker*/}
+            {/*        //     setVisible={setVisible}*/}
+            {/*        //     findOneDeployProof={findOneDeployProof}*/}
+            {/*        //     findAllDeployProof={findAllDeployProof}*/}
+            {/*        //     allDeployProofList={allDeployProofList}*/}
+            {/*        // />*/}
+            {/*        :null*/}
+            {/*}*/}
             <DeployAddModal
                 visible={visible}
                 setVisible={setVisible}
