@@ -3,7 +3,7 @@ import {Form, Select,Input} from "antd";
 
 const {Option} = Select
 
-const ConfigEdtailsDeploy_docker = props=>{
+const ConfigDetailsDeploy_docker = props=>{
     return(
         <Fragment>
             <Form.Item
@@ -34,4 +34,4 @@ const ConfigEdtailsDeploy_docker = props=>{
     )
 }
 
-export default ConfigEdtailsDeploy_docker
+export default ConfigDetailsDeploy_docker
