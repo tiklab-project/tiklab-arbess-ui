@@ -21,11 +21,11 @@ const ConfigDetailsDeploy_linux = props =>{
 
     return(
         <Fragment>
-            <Form.Item name='deployTargetAddress' label='请输入文件地址'>
+            <Form.Item name='linuxTargetAddress' label='请输入文件地址'>
                 <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
             </Form.Item>
             <Row>
-                <Form.Item name='deployPlace' label='请选择Ip地址'>
+                <Form.Item name='linuxPlace' label='请选择Ip地址'>
                     <Select
                         onChange={changeDeploySelect}
                         onClick={clickFindAllDeploy}
@@ -49,10 +49,10 @@ const ConfigDetailsDeploy_linux = props =>{
                     添加
                 </Button>
             </Row>
-            <Form.Item name='deployAddress' label='部署位置'>
+            <Form.Item name='linuxAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
-            <Form.Item name='deployShell' label='shell命令'>
+            <Form.Item name='linuxShell' label='shell命令'>
                 <TextArea autoSize />
             </Form.Item>
             <DeployAddModal

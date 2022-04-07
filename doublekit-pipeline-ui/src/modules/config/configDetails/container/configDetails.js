@@ -101,6 +101,22 @@ const ConfigDetails = props =>{
                             nodeOrder:data.pipelineStructure.structureAddress,
                         })
                 }
+                switch (data.pipelineDeploy.deployType) {
+                    case 2:
+                        form.setFieldsValue({
+                            linuxTargetAddress:data.pipelineDeploy.deployTargetAddress,
+                            linuxPlace:data.pipelineDeploy.proofName,
+                            linuxAddress:data.pipelineDeploy.deployAddress,
+                            linuxShell:data.pipelineDeploy.deployShell
+                        })
+                        break
+                    case 3:
+                        form.setFieldsValue({
+                            dockerTargetAddress:data.pipelineDeploy.deployTargetAddress,
+                            dockerPlace:data.pipelineDeploy.proofName,
+                            dockerAddress:data.pipelineDeploy.deployAddress,
+                        })
+                }
                 form.setFieldsValue({
                     testOrder:data.pipelineTest.testOrder,
                     deployPlace:data.pipelineDeploy.proofName,
@@ -109,7 +125,6 @@ const ConfigDetails = props =>{
                     ...data.pipelineStructure,
                     ...data.pipelineDeploy,
                 })
-
             }
         })
     },[])
@@ -199,18 +214,17 @@ const ConfigDetails = props =>{
         switch (values.deployType) {
             case 2:
                 deployRadioType = {
-                    deployAddress: values.deployAddress,
-                    proofName: values.deployPlace,
-                    deployShell: values.deployShell,
-                    deployTargetAddress:values.deployTargetAddress,
+                    deployAddress: values.linuxAddress,
+                    proofName: values.linuxPlace,
+                    deployShell: values.linuxShell,
+                    deployTargetAddress:values.linuxTargetAddress,
                 }
                 break
             case 3:
                 deployRadioType = {
-                    deployAddress: values.deployAddress,
-                    proofName: values.deployPlace,
-                    deployShell: values.deployShell,
-                    deployTargetAddress:values.deployTargetAddress,
+                    deployAddress: values.dockerAddress,
+                    proofName: values.dockerPlace,
+                    deployTargetAddress:values.dockerTargetAddress,
                 }
         }
 
@@ -246,10 +260,13 @@ const ConfigDetails = props =>{
             pipelineDeploy:{
                 deployId: deployId ,
                 deployType:values.deployType,
-                deployAddress: values.deployAddress,
-                proofName: values.deployPlace ? values.deployPlace : "无" ,
+                deployAddress:deployRadioType && deployRadioType.deployAddress
+                    ? deployRadioType.deployAddress :'',
+                proofName: deployRadioType && deployRadioType.proofName
+                    ? deployRadioType.proofName :'',
                 deployShell: values.deployShell,
-                deployTargetAddress:values.deployTargetAddress,
+                deployTargetAddress:deployRadioType && deployRadioType.deployTargetAddress
+                    ? deployRadioType.deployTargetAddress :'',
             },
         }
 
