@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Button,Card} from "antd";
+import {Button,Card,Divider} from "antd";
 import {withRouter} from "react-router-dom";
 import './config_pastRecords.scss'
 import Config_pastRecordsThis from "../components/config_pastRecordsThis";
@@ -16,7 +16,7 @@ const ConfigPastRecords=props=>{
 
     return(
         <div className='config_pastRecords task'>
-            <h1>更改记录</h1>
+            <h2>更改记录</h2>
             <div className='config_pastRecords-btn'>
                 <Button type='primary' onClick={()=>props.history.push('/home/task/config')}>
                     返回
@@ -26,9 +26,11 @@ const ConfigPastRecords=props=>{
                 </Button>
             </div>
             <div className='config_pastRecords-h'>
-                <Card title={<h2>本次构建</h2>} extra={<h2>上次构建</h2>} >
-                    <Config_pastRecordsThis/>
-                    <Config_pastRecordsLast/>
+                <Card title={<h3>本次构建</h3>} extra={<h3>上次构建</h3>} >
+                    <div className='config_pastRecords-difference'>
+                        <Config_pastRecordsThis/>
+                        <Config_pastRecordsLast/>
+                    </div>
                 </Card>
             </div>
             <Config_pastRecordsScreenModal

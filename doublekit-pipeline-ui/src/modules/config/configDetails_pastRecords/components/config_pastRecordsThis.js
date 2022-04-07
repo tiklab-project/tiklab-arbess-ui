@@ -36,8 +36,8 @@ const Config_pastRecordsThis = props =>{
                 lis && lis.map((item,index)=>{
                     return(
                         <div key={item.id} className='config_pastRecords-compare'>
-                            <div className='config_pastRecords-left'>{item.title}</div>
-                            <div className='config_pastRecords-right '>{item.desc}</div>
+                            <div>{item.title}</div>
+                            <div>{item.desc}</div>
                         </div>
                     )
                 })

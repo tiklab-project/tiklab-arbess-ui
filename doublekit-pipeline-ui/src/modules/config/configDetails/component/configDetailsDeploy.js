@@ -11,6 +11,7 @@ const ConfigDetailsDeploy = props =>{
     const handlerRadio = e =>{
         setDeployRadio(e.target.value)
     }
+
     return(
         <div className='anchor-content' id='d'>
             <h2>部署</h2>

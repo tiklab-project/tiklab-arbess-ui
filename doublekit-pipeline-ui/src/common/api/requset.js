@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const BASE_URL='http://192.168.1.7:8080'
+const BASE_URL='http://192.168.10.100:8080'
 const serviceLoc = axios.create({
     baseURL:BASE_URL,
-    timeout: 50000
+    timeout: 5000
 });
 
 // 请求拦截

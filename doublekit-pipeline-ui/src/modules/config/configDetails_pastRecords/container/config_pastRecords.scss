@@ -1,43 +1,42 @@
 .config_pastRecords{
-  h1{
-    font-size: 30px;
-    float: left;
-  }
-  h2{
-    &:first-child{
-      margin-left: 10pc;
-    }
-    &:last-child{
-      margin-right: 10pc;
-    }
-  }
+  padding: 20px;
+  min-width: 800px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   &-btn{
-    float: right;
-    Button:last-child{
-      margin-left: 30px;
+    position: absolute;
+    right: 0;
+    button:last-child{
+      margin-left: 10px;
     }
   }
   &-h{
-    clear: both;
-    margin-bottom: 60px;
+    min-width: 800px;
+      h3 {
+        &:first-child {
+          margin-left: 10pc;
+        }
+
+        &:last-child {
+          margin-right: 10pc;
+        }
+      }
+  }
+  &-difference{
+    display: flex;
   }
   &-this{
-    float: left;
-    width: 45%;
+    flex-grow:1;
+    border-right: 1px solid #cccccc;
   }
   &-last{
-    float: right;
-    width:45%;
+    flex-grow:1;
   }
-  &-left{
-    float: left;
-    font-size: 16px;
-    padding: 10px;
-  }
-  &-right{
-    float: right;
-    clear: both;
-    padding: 10px;
-    margin-top: -45px;
+  &-compare{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
   }
 }

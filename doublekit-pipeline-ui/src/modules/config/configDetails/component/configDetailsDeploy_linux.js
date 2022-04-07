@@ -9,6 +9,7 @@ const { TextArea } = Input;
 const ConfigDetailsDeploy_linux = props =>{
     const {ProofStore}= props
     const {createProof,findAllDeployProof,findOneDeployProof,allDeployProofList} = ProofStore
+
     const [visible,setVisible]=useState(false)
 
     const clickFindAllDeploy = () =>{
@@ -18,6 +19,7 @@ const ConfigDetailsDeploy_linux = props =>{
     const changeDeploySelect = value =>{
         findOneDeployProof(value)
     }
+
 
     return(
         <Fragment>
@@ -53,7 +55,7 @@ const ConfigDetailsDeploy_linux = props =>{
                 <Input/>
             </Form.Item>
             <Form.Item name='linuxShell' label='shell命令'>
-                <TextArea autoSize />
+                <TextArea autoSize/>
             </Form.Item>
             <DeployAddModal
                 visible={visible}

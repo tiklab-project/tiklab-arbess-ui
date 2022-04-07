@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Breadcrumb, Form} from "antd";
-import {withRouter} from "react-router-dom"
+import {withRouter} from "react-router"
 import './config.scss'
 import Anchor from "../../common/component/anchor";
 import ConfigSourceCode from "../components/configSourceCode";

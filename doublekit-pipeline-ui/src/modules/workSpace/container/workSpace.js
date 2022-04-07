@@ -20,7 +20,7 @@ const recent=[
     }
 ]
 
-const WorkSpace=props=>{
+const WorkSpace = props =>{
 
     return(
         <div className='workSpace task'>

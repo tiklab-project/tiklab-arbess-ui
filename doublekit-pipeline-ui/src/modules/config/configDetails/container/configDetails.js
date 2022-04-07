@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { Form } from "antd";
-import {withRouter} from "react-router-dom";
+import {withRouter} from "react-router";
 import  './configDetails.scss'
 import ConfigDetailsTop from "../component/configDetailsTop";
 import ConfigDetailsSourceCode from "../component/configDetailsSourceCode";
@@ -12,7 +12,6 @@ import Conserve from "../../common/component/conserve";
 import moment from "../../../../common/moment/moment";
 import {getUrlParam} from "../../common/component/getUrlParam";
 import {inject, observer} from "mobx-react";
-import SourceCode_GiteeModal from "../../common/component/SourceCode_GIteeModal";
 
 const ConfigDetails = props =>{
 
@@ -101,6 +100,7 @@ const ConfigDetails = props =>{
                             nodeOrder:data.pipelineStructure.structureAddress,
                         })
                 }
+
                 switch (data.pipelineDeploy.deployType) {
                     case 2:
                         form.setFieldsValue({
@@ -264,12 +264,12 @@ const ConfigDetails = props =>{
                     ? deployRadioType.deployAddress :'',
                 proofName: deployRadioType && deployRadioType.proofName
                     ? deployRadioType.proofName :'',
-                deployShell: values.deployShell,
+                deployShell: deployRadioType && deployRadioType.deployShell
+                    ? deployRadioType.deployShell :'',
                 deployTargetAddress:deployRadioType && deployRadioType.deployTargetAddress
                     ? deployRadioType.deployTargetAddress :'',
             },
         }
-
         updatePipelineConfig(configure)
         props.history.push('/home/task/work')
     }
