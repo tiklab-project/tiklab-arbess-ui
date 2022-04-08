@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const BASE_URL='http://192.168.10.100:8080'
+
 const serviceLoc = axios.create({
     baseURL:BASE_URL,
-    timeout: 5000
+    timeout: 50000
 });
 
 // 请求拦截

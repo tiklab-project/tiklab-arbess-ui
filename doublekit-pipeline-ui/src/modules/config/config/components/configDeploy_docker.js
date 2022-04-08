@@ -15,6 +15,21 @@ const ConfigDeploy_docker = props =>{
     const deploySelect = value =>{
         findOneDeployProof(value)
     }
+
+    const validate = (rule,value) =>{
+        if (!value) {
+            return Promise.resolve();
+        } else if (value< 3000) {
+            return Promise.reject("最小3000");
+        } else if (value > 30000) {
+            return Promise.reject("最大30000");
+        } else if (!/^\d+$|^\d+[.]?\d+$/.test(value)) {
+            return Promise.reject("只能输入数字");
+        } else {
+            return Promise.resolve()
+        }
+    }
+
     return(
       <Fragment>
           <Form.Item name='deployTargetAddress' label='需要发送的文件地址'>
@@ -45,12 +60,32 @@ const ConfigDeploy_docker = props =>{
                   添加
               </Button>
           </Row>
-
+          <Form.Item
+              name='dockerPort'
+              label='启动端口'
+              style={{ display: 'inline-block'}}
+              rules={[
+                  {
+                      validator: validate,
+                  },
+              ]}
+          >
+              <Input style={{width:200}}/>
+          </Form.Item>
+          <Form.Item
+              name='mappingPort'
+              label='映射端口'
+              style={{ display: 'inline-block',  margin: '1px 3px' }}
+              rules={[
+                  {
+                      validator: validate,
+                  },
+              ]}
+          >
+              <Input style={{width:200}}/>
+          </Form.Item>
           <Form.Item name='deployAddress' label='部署位置'>
               <Input/>
-          </Form.Item>
-          <Form.Item name='deployShell' label='shell命令'>
-              <TextArea autoSize/>
           </Form.Item>
       </Fragment>
     )

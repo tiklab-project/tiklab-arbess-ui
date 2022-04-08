@@ -13,7 +13,9 @@ const StructureHistoryDetailsTop = props =>{
     return(
         <div className='structureHistory-details-top'>
             <div className='structureHistory-details-top-btn'>
-                <Button type='primary' onClick={()=>props.history.push('/home/task/history')}>
+                <Button type='primary'
+                        onClick={()=>props.history.push('/home/task/history')}
+                >
                     返回
                 </Button>
                 <Popconfirm

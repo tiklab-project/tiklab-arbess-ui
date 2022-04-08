@@ -3,7 +3,7 @@ import './structureHistoryDetails.scss'
 import StructureHistoryDetailsTop from "../components/structureHistoryDetailsTop";
 import StructureHistoryDetailsCenter from "../components/structureHistoryDetailsCenter";
 import StructureHistoryDetailsBottom from "../components/structureHistoryDetailsBottom";
-import {withRouter} from "react-router-dom";
+import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 
 const StructureHistoryDetails = props =>{
@@ -34,7 +34,6 @@ const StructureHistoryDetails = props =>{
            <StructureHistoryDetailsCenter
                {...props}
                historyLog={historyLog}
-               findHistoryLog={findHistoryLog}
            />
            <StructureHistoryDetailsBottom
                historyLog={historyLog}

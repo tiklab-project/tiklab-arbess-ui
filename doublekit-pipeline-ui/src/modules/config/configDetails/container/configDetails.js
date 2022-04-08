@@ -115,6 +115,8 @@ const ConfigDetails = props =>{
                             dockerTargetAddress:data.pipelineDeploy.deployTargetAddress,
                             dockerPlace:data.pipelineDeploy.proofName,
                             dockerAddress:data.pipelineDeploy.deployAddress,
+                            dockerBootPort:data.pipelineDeploy.dockerPort,
+                            dockerMappingPort:data.pipelineDeploy.mappingPort,
                         })
                 }
                 form.setFieldsValue({
@@ -268,6 +270,8 @@ const ConfigDetails = props =>{
                     ? deployRadioType.deployShell :'',
                 deployTargetAddress:deployRadioType && deployRadioType.deployTargetAddress
                     ? deployRadioType.deployTargetAddress :'',
+                dockerPort:values.dockerBootPort,
+                mappingPort:values.dockerMappingPort,
             },
         }
         updatePipelineConfig(configure)
@@ -291,19 +295,20 @@ const ConfigDetails = props =>{
                         "codeType":0,
                         "testType":0,
                         "deployType":0,
-                        'giteeAddress':' '
                        }}
                     layout="vertical"
                     autoComplete = "off"
                 >
                     <ConfigDetailsSourceCode
+                        {...props}
                         setSourceRadio={setSourceRadio}
                         sourceRadio={sourceRadio}
                         form={form}
                         configureId={configureId}
                     />
                     <ConfigDetailsTest
-                        testRadio={testRadio}/>
+                        testRadio={testRadio}
+                    />
                     <ConfigDetailsStructure
                         structureRadio={structureRadio}
                         setStructureRadio={setStructureRadio}

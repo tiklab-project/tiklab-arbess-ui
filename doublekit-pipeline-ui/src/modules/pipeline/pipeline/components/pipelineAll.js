@@ -62,7 +62,7 @@ const PipelineAll= props=>{
             title: '最近构建状态',
             dataIndex: 'structureStatus',
             key: 'structureStatus',
-            render:text=>{
+            render:text =>{
                 switch (text) {
                     case 30:
                         return  <Tooltip title="成功" className='all-icon'>

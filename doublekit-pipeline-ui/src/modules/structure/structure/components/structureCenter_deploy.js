@@ -1,47 +1,38 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Card,Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-const StructureDeploy = props =>{
+const StructureCenter_deploy = props =>{
 
     const {logList}=props
 
     const state = () =>{
         if(!logList){
-            return (
-                <svg className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-yunhang"/>
-                </svg>
-            )
+            return  <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-yunhang"/>
+                    </svg>
         } else {
             const deployLog=logList.deployLog
             //如果构建状态为10--运行
             if(logList.structureLog.structureRunStatus===10 && deployLog.deployRunStatus===0){
-                return (
-                    <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
-                )
+                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
             }
             //如果部署状态为10--成功
             else if(deployLog.deployRunStatus===10){
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-chenggong-"/>
-                    </svg>
-                )
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-chenggong-"/>
+                        </svg>
             }
             //如果部署状态为1--失败
             else if(deployLog.deployRunStatus===1){
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhangshibai1"/>
-                    </svg>
-                )
-            }else {
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhang"/>
-                    </svg>
-                )
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-yunhangshibai1"/>
+                        </svg>
+            }
+            else {
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-yunhang"/>
+                        </svg>
             }
         }
     }
@@ -70,4 +61,4 @@ const StructureDeploy = props =>{
     )
 }
 
-export default StructureDeploy
+export default StructureCenter_deploy

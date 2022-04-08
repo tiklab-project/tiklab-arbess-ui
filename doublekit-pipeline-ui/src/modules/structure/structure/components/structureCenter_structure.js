@@ -2,9 +2,11 @@ import React,{useState} from 'react'
 import { Card,Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-const StructurePack = props =>{
+const StructureCenter_structure = props =>{
 
     const {logList}=props
+    const [data,setData] =useState(0)
+    let se
 
     const state = () =>{
         if(!logList){
@@ -17,31 +19,27 @@ const StructurePack = props =>{
             const structureLog=logList.structureLog
             //如果测试时间为10 --运行
             if(logList.testLog.testRunStatus ===10 && structureLog.structureRunStatus===0){
-                return (
-                    <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
-                )
+                se = setTimeout(()=>setData(data+1),1000)
+                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
             }
             //如果构建状态为10--成功
             else if(structureLog.structureRunStatus){
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-chenggong-"/>
-                    </svg>
-                )
+                clearTimeout(se)
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-chenggong-"/>
+                        </svg>
             }
             //如果构建状态为1--失败
             else if(structureLog.structureRunStatus===1){
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhangshibai1"/>
-                    </svg>
-                )
+                clearTimeout(se)
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-yunhangshibai1"/>
+                        </svg>
             }else {
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhang"/>
-                    </svg>
-                )
+                clearTimeout(se)
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-yunhang"/>
+                        </svg>
             }
         }
     }
@@ -50,7 +48,7 @@ const StructurePack = props =>{
         if(!logList){
             return 0
         }else {
-            return logList.structureLog.structureRunTime
+            return data
         }
     }
 
@@ -70,4 +68,4 @@ const StructurePack = props =>{
     )
 }
 
-export default StructurePack
+export default StructureCenter_structure

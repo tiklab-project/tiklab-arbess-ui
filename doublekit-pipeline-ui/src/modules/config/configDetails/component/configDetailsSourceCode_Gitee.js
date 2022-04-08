@@ -29,11 +29,17 @@ const ConfigDetailsSourceCode_Gitee = props =>{
     },[])
 
     useEffect(()=>{
-        const ae = getFieldValue('giteeAddress')
         const se = setTimeout(()=>{
-            if(ae!==' ' || ae ===undefined || ae === null){
-                setBranch(false)
+            //1、如果等于空或者未定义禁用下拉框
+            setBranch(false)
+            if( getFieldValue('giteeAddress') === null || getFieldValue('giteeAddress') ===undefined || getFieldValue('giteeAddress') === ''){
+                setBranch(true)
             }
+            // 2、但是如果我这样写为啥不起作用
+            // if(getFieldValue('giteeAddress') !== null || getFieldValue('giteeAddress') !== undefined  || getFieldValue('giteeAddress') !== ''){
+            //     setBranch(false)
+            //     console.log("111")
+            // }
         },10)
         return ()=> clearTimeout(se)
     },[])

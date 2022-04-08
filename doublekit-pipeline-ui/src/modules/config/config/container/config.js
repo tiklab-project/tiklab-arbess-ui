@@ -123,9 +123,10 @@ const Config = props=>{
                 deployTargetAddress:values.deployTargetAddress,
                 deployType:values.deployType,
                 proofName: values.deployPlace,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
             },
         }
-        console.log(configure)
         updatePipelineConfig(configure)
         props.history.push('/home/task/config')
     }

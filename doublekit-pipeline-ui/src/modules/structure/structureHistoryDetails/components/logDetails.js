@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react'
+import React  from 'react'
 import { Drawer } from 'antd';
 
 const LogDetails = props =>{
@@ -9,36 +9,29 @@ const LogDetails = props =>{
        if(historyLog){
            switch (drawer) {
                case 'clone' :
-                   return <div style={{whiteSpace: 'pre-wrap'}}>
-                                {historyLog.codeLog && historyLog.codeLog.codeRunLog}
-                          </div>
-               case 'deploy' :
-                   return <div style={{whiteSpace: 'pre-wrap'}}>
-                              {historyLog.deployLog && historyLog.deployLog.deployRunLog}
-                          </div>
-               case 'structure' :
-                   return <div style={{whiteSpace: 'pre-wrap'}}>
-                              {historyLog.structureLog && historyLog.structureLog.structureRunLog}
-                          </div>
+                   return  historyLog.codeLog && historyLog.codeLog.codeRunLog ?
+                            historyLog.codeLog.codeRunLog : '没有数据'
                case 'test' :
-                   return <div style={{whiteSpace: 'pre-wrap'}}>
-                              {historyLog.testLog && historyLog.testLog.testRunLog}
-                          </div>
+                   return   historyLog.testLog && historyLog.testLog.testRunLog ?
+                            historyLog.testLog.testRunLog : '没有数据'
+               case 'structure' :
+                   return  historyLog.structureLog && historyLog.structureLog.structureRunLog ?
+                            historyLog.structureLog.structureRunLog : '没有数据'
+               case 'deploy' :
+                   return   historyLog.deployLog && historyLog.deployLog.deployRunLog ?
+                            historyLog.deployLog.deployRunLog : '没有数据'
            }
        }else {
-           return <div>
-                      没有数据
-                  </div>
+           return  '没有数据'
        }
     }
 
-
-
     return(
         <Drawer
-            placement="bottom"
+            placement='bottom'
             visible={visible}
             onClose={()=>setVisible(false)}
+            style={{whiteSpace: 'pre-wrap'}}
         >
             {logRun()}
         </Drawer>

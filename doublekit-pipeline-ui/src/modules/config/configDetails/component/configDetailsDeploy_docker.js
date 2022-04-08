@@ -19,6 +19,20 @@ const ConfigDetailsDeploy_docker = props=>{
         findOneDeployProof(value)
     }
 
+    const validate = (rule,value) =>{
+        if (!value) {
+            return Promise.resolve();
+        } else if (value< 3000) {
+            return Promise.reject("最小3000");
+        } else if (value > 30000) {
+            return Promise.reject("最大30000");
+        } else if (!/^\d+$|^\d+[.]?\d+$/.test(value)) {
+            return Promise.reject("只能输入数字");
+        } else {
+            return Promise.resolve(); //验证通过
+        }
+    }
+
     return(
         <Fragment>
             <Form.Item
@@ -52,6 +66,30 @@ const ConfigDetailsDeploy_docker = props=>{
                     添加
                 </Button>
             </Row>
+            <Form.Item
+                name='dockerBootPort'
+                label='启动端口'
+                style={{ display: 'inline-block'}}
+                rules={[
+                    {
+                        validator: validate,
+                    },
+                ]}
+            >
+                <Input style={{width:200}}/>
+            </Form.Item>
+            <Form.Item
+                name='dockerMappingPort'
+                label='映射端口'
+                style={{ display: 'inline-block',  margin: '1px 3px' }}
+                rules={[
+                    {
+                        validator: validate,
+                    },
+                ]}
+            >
+                <Input style={{width:200}}/>
+            </Form.Item>
             <Form.Item
                 name='dockerAddress'
                 label='部署位置'

@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Button,Card,Divider} from "antd";
+import {Button,Card} from "antd";
 import {withRouter} from "react-router-dom";
 import './config_pastRecords.scss'
 import Config_pastRecordsThis from "../components/config_pastRecordsThis";

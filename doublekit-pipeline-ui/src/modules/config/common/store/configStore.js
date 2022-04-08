@@ -73,6 +73,8 @@ class ConfigStore{
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
                 deployType:values.pipelineDeploy.deployType,
                 proofName: values.pipelineDeploy.proofName,
+                dockerPort:values.pipelineDeploy.dockerPort,
+                mappingPort:values.pipelineDeploy.mappingPort,
             },
         }
         UpdatePipelineConfig(params).then(res => {

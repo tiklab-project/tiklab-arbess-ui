@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import {Button,  Table} from "antd";
-import {withRouter} from "react-router-dom";
+import {withRouter} from "react-router";
 import './structureHistory.scss'
 import StructureHistoryScreenModal from "./structureHistoryScreenModal";
 import {observer,inject} from "mobx-react";
-import {SettingOutlined} from "@ant-design/icons";
+import {SettingOutlined,EyeOutlined} from "@ant-design/icons";
 
 const StructureHistory=props=>{
 
@@ -43,7 +43,7 @@ const StructureHistory=props=>{
             title: '构建',
             dataIndex: 'historyId',
             key: 'historyId',
-            render:(text,record)=>{
+            render:text =>{
                 return(
                     <span>
                         构建{text}
@@ -55,19 +55,20 @@ const StructureHistory=props=>{
             title: '状态',
             dataIndex: 'historyStatus',
             key: 'historyStatus',
-            render:(text,record)=>{
-                if(text===30){
-                    return (
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-chenggong-"/>
-                        </svg>
-                    )
-                }else if(text===1){
-                    return(
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-yunhangshibai1"/>
-                        </svg>
-                    )
+            render:text =>{
+                switch (text){
+                    case 0:
+                        return  <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-dengdai1"/>
+                                </svg>
+                    case 1:
+                        return  <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-yunhangshibai1"/>
+                                </svg>
+                    case 30:
+                        return  <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-chenggong-"/>
+                                </svg>
                 }
             }
         },

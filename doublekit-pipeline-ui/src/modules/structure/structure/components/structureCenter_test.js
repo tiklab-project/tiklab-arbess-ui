@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card } from 'antd';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-const StructureTest = props =>{
+const StructureCenter_test = props =>{
 
     const {logList}=props
 
@@ -16,28 +16,23 @@ const StructureTest = props =>{
             )
         }else {
             const testLog=logList.testLog
-            if(logList.codeLog.codeRunStatus===10 && testLog.testRunStatus===0){
-                return (
-                    <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
-                )
-            }else if(testLog.testRunStatus===10){
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-chenggong-"/>
-                    </svg>
-                )
-            }else if(testLog.testRunStatus===1){
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhangshibai1"/>
-                    </svg>
-                )
-            }else {
-                return (
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-yunhang"/>
-                    </svg>
-                )
+            if(logList.codeLog.codeRunStatus ===10 && testLog.testRunStatus===0){
+                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
+            }
+            else if(testLog.testRunStatus===10){
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-chenggong-"/>
+                        </svg>
+            }
+            else if(testLog.testRunStatus===1){
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-yunhangshibai1"/>
+                        </svg>
+            }
+            else {
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-yunhang"/>
+                        </svg>
             }
         }
     }
@@ -66,4 +61,4 @@ const StructureTest = props =>{
     )
 }
 
-export default StructureTest
+export default StructureCenter_test

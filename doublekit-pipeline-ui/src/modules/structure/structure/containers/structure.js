@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import {Button} from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
 import './structure.scss'
-import StructureClone from "../components/structureClone";
-import StructureTest from "../components/structureTest";
-import StructurePack from "../components/structurePack";
-import StructureDeploy from "../components/structureDeploy";
+import StructureCenter from "../components/structureCenter";
 import { inject, observer } from "mobx-react";
 
 const StructureTask = props => {
@@ -21,7 +18,7 @@ const StructureTask = props => {
             if (res.data===1 || res.data === 100) {
                 interval = setInterval(() => {
                     findStructureState(pipelineId).then(res =>{
-                        if(res.data.logRunStatus!==0){
+                        if(res.data && res.data.logRunStatus !== 0 ){
                             clearInterval(interval)
                         }
                     })
@@ -33,37 +30,25 @@ const StructureTask = props => {
 
     const logRunLog = () =>{
         if(logList) {
-            return (
-                <div  onLoad={onload()}>
-                    {logList.logRunLog}
-                </div>
-            )
-        }
-    }
-
-    const onload = () =>{
-        const outLog=document.getElementById('outLog')
-        if(outLog){
-            outLog.scrollTop = outLog.scrollHeight;
+            const outLog=document.getElementById('outLog')
+            outLog.scrollTop = outLog.scrollHeight
+            return logList.logRunLog
         }
     }
 
     return (
         <div className='structure task'>
             <div className='structure-Top'>
-               <div className='structure-Top-btn'>
-                   <Button>
-                       <PoweroffOutlined />停止
-                   </Button>
-               </div>
+                <div className='structure-Top-btn'>
+                    <Button>
+                        <PoweroffOutlined />停止
+                    </Button>
+                </div>
             </div>
 
-            <div className='structure-mid'>
-                <StructureClone logList={logList} />
-                <StructureTest logList={logList} />
-                <StructurePack logList={logList} />
-                <StructureDeploy logList={logList} />
-            </div>
+             <StructureCenter
+                logList={logList}
+            />
 
             <div className='structure-bottom'>
                 <h3>输出</h3>
