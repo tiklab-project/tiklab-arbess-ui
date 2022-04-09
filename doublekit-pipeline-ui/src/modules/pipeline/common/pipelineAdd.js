@@ -41,21 +41,30 @@ const PipelineAdd = props => {
             pipelineType:1,
             pipelineCreateTime:moment.moment
         }
-        createPipeline(aa)
-        localStorage.setItem('pipelineName',value.pipelineName)
-        props.history.push({pathname:'/home/config',value})
+        createPipeline(aa).then(res=>{
+            if(res.code=== 0 && res.data){
+                localStorage.setItem('pipelineId',res.data.pipelineId)
+                localStorage.setItem('configureId', res.data.configureId)
+                localStorage.setItem('codeId', res.data.codeId)
+                localStorage.setItem('testId', res.data.testId)
+                localStorage.setItem('structureId', res.data.structureId)
+                localStorage.setItem('deployId',res.data.deployId)
+                localStorage.setItem('pipelineName',value.pipelineName)
+                props.history.push({pathname:'/home/config',value})
+            }
+        })
     }
 
     return(
         <div className='new'>
-            <Form id='form' name="basic" onFinish={handSubmit} autoComplete = "off">
+            <Form id='form' name='basic' onFinish={handSubmit} autoComplete='off'>
                 <Form.Item
-                    label="流水线名称"
-                    name="pipelineName"
+                    label='流水线名称'
+                    name='pipelineName'
                     rules={[
                         {
                             required:true,
-                            message:""
+                            message:''
                         },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
@@ -79,15 +88,15 @@ const PipelineAdd = props => {
                     />
                 </Form.Item>
             </Form>
-            <div  className={'new-type'}>
-                <ul className={  "new-type-choose"}>
+            <div  className='new-type'>
+                <ul className='new-type-choose'>
                     {
                         lis.map((item,index) => {
                             return (
                                 <li
                                     key={item.id}
                                     onClick={()=> liStatusData(index) }
-                                    className={ liStatus === index ? "new-type-choose-c new-type-active":"new-type-choose-c "}
+                                    className={ liStatus === index ? 'new-type-choose-c new-type-active':'new-type-choose-c '}
                                 >
                                     <label>
                                         {item.title}
@@ -103,7 +112,7 @@ const PipelineAdd = props => {
             </div>
             <div className='new-btn'>
                 <span className='new-btn-span'>
-                    <Button htmlType="submit"  form="form" type='primary' >
+                    <Button htmlType='submit' form='form' type='primary' >
                         添加
                     </Button>
                 </span>

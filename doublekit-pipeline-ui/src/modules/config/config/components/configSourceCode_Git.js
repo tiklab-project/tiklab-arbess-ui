@@ -23,7 +23,7 @@ const ConfigSourceCode_Git = props =>{
     return(
         <Fragment>
             <Form.Item
-                name='codeName'
+                name='gitCodeName'
                 label="git地址"
                 rules={[
                     {
@@ -35,13 +35,13 @@ const ConfigSourceCode_Git = props =>{
                 <Input  />
             </Form.Item>
             <Form.Item
-                name="codeBranch"
+                name="gitBranch"
                 label="分支"
             >
                 <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <Row>
-                <Form.Item name='gitPlace'>
+                <Form.Item name='gitProofName'>
                     <Select
                         placeholder="无"
                         style={{ width: 300 }}

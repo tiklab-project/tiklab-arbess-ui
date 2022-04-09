@@ -35,10 +35,7 @@ const ConfigDetailsDeploy_docker = props=>{
 
     return(
         <Fragment>
-            <Form.Item
-                name='dockerTargetAddress'
-                label='请输入文件地址'
-            >
+            <Form.Item name='dockerTargetAddress' label='请输入文件地址'>
                 <Input/>
             </Form.Item>
             <Row>
@@ -90,12 +87,10 @@ const ConfigDetailsDeploy_docker = props=>{
             >
                 <Input style={{width:200}}/>
             </Form.Item>
-            <Form.Item
-                name='dockerAddress'
-                label='部署位置'
-            >
+            <Form.Item name='dockerAddress' label='部署位置'>
                <Input/>
             </Form.Item>
+
             <DeployAddModal
                 visible={visible}
                 setVisible={setVisible}

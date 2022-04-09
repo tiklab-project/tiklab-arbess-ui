@@ -1,26 +1,36 @@
 import React,{ useEffect,useState } from "react";
 import {Table,Tooltip } from "antd";
-import {withRouter} from "react-router-dom";
-import './pipelineAll.scss'
+import {withRouter} from "react-router";
 import Running from "../../../../common/running/running";
 import {observer,inject} from "mobx-react";
 
-const PipelineAll= props=>{
+const PipelineTabs_all= props=>{
 
     const {PipelineStore,StructureStore}=props
-    const {findAllPipelineStatus,pipelineList}=PipelineStore
+    const {findAllPipelineStatus,pipelineList,updatePipeline}=PipelineStore
 
     //初始化表格
     useEffect(()=>{
-        // findAllPipelineStatus()
-        const se = setTimeout(()=>findAllPipelineStatus(),100)
+        const se = setTimeout(()=> findAllPipelineStatus(),100)
         return ()=> clearTimeout(se)
     },[])
 
     //收藏
-    const [icoStatus, setIcoStatus] = useState(true)
-    const collectAction = (record) => {
-        setIcoStatus(!icoStatus)
+    let pipelineCollect
+    const collectAction = record => {
+        if(record.pipelineCollect===1){
+            pipelineCollect=0
+        }else {
+            pipelineCollect=1
+        }
+        const params={
+            pipelineId:record.pipelineId,
+            pipelineName:record.pipelineName,
+            pipelineCollect:pipelineCollect
+        }
+        updatePipeline(params).then(res=>{
+            findAllPipelineStatus()
+        })
     }
 
     //去详情页面
@@ -39,13 +49,13 @@ const PipelineAll= props=>{
     const columns = [
         {
             title: '收藏',
-            dataIndex: 'collection',
-            key:"collection",
-            render:(text ,record)=>{
+            dataIndex: 'pipelineCollect',
+            key:"pipelineCollect",
+            render:(text,record) =>{
                 return(
                     <span className='all-icon' onClick={() => collectAction(record)}>
                         {
-                            icoStatus  ?
+                            record.pipelineCollect === 0 ?
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-xingxing-kong"  />
                                 </svg>
@@ -145,4 +155,4 @@ const PipelineAll= props=>{
     )
 }
 
-export default withRouter(inject('PipelineStore','StructureStore')(observer(PipelineAll)));
+export default withRouter(inject('PipelineStore','StructureStore')(observer(PipelineTabs_all)));

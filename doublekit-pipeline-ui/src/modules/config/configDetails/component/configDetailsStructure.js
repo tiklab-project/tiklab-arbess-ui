@@ -1,4 +1,4 @@
-import React,{useCallback} from "react";
+import React from "react";
 import {Input, Form, Radio, Space} from "antd";
 
 const { TextArea } = Input;
@@ -6,13 +6,6 @@ const { TextArea } = Input;
 const ConfigDetailsStructure = props =>{
 
     const {structureRadio,setStructureRadio} = props
-
-    // const handlerRadio = useCallback(
-    //     e => (
-    //         setStructureRadio(e.target.value)
-    //     ),
-    //     [structureRadio]
-    // )
 
     const handlerRadio= e =>{
         setStructureRadio(e.target.value)

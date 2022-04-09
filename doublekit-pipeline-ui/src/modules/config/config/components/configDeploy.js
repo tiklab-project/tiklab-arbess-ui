@@ -12,6 +12,7 @@ const ConfigDeploy = props =>{
 
     const [visible,setVisible]=useState(false)
     const [deployRadio,setDeployRadio]=useState(0)
+
     const handlerRadio = e =>{
         setDeployRadio(e.target.value)
     }

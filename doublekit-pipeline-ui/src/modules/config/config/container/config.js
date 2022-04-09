@@ -32,7 +32,7 @@ const Config = props=>{
         }
         return () => clearTimeout(se)
     }, [])
-    //页面滚动加载
+
     useEffect(()=> {
         document.addEventListener('scroll', handleScroll);
         return () => {
@@ -42,8 +42,9 @@ const Config = props=>{
             localStorage.removeItem('testId')
             localStorage.removeItem('structureId')
             localStorage.removeItem('deployId')
-        };
+        }
     },[])
+
     //锚点样式
     const [anchor,setAnchor] = useState('a')
     //滚动
@@ -92,6 +93,47 @@ const Config = props=>{
     }
 
     const onFinish=(values)=>{
+        let CodeSourceRadioType,StructureRadioType,deployRadioType={ }
+
+        switch (values.codeType) {
+            case 2:
+                CodeSourceRadioType = {
+                    codeName:values.gitCodeName,
+                    codeBranch: values.gitBranch,
+                    proofName:values.gitProofName,
+                }
+                break
+            case 3:
+                CodeSourceRadioType =  {
+                    codeName: values.giteeCodeName,
+                    codeBranch: values.giteeBranch
+                }
+                break
+            case 4:
+                CodeSourceRadioType = {
+                    codeName: values.gitlabCodeName,
+                    codeBranch:values.gitlabBranch,
+                    proofName:values.gitlabProofName,
+                }
+        }
+
+        switch (values.deployType) {
+            case 2:
+                deployRadioType = {
+                    deployAddress: values.linuxAddress,
+                    proofName: values.linuxPlace,
+                    deployShell: values.linuxShell,
+                    deployTargetAddress:values.linuxTargetAddress,
+                }
+                break
+            case 3:
+                deployRadioType = {
+                    deployAddress: values.dockerAddress,
+                    proofName: values.dockerPlace,
+                    deployTargetAddress:values.dockerTargetAddress,
+                }
+        }
+
         const configure={
             configureCreateTime:moment.moment,
             configureId: localStorage.getItem('configureId'),
@@ -99,11 +141,14 @@ const Config = props=>{
                 pipelineId:localStorage.getItem('pipelineId')
             },
             pipelineCode:{
-                codeBranch:values.codeBranch,
                 codeId:localStorage.getItem('codeId'),
-                codeName:values.codeName,
                 codeType:values.codeType,
-                proofName:values.gitPlace,
+                codeBranch:CodeSourceRadioType && CodeSourceRadioType.codeBranch
+                    ?  CodeSourceRadioType.codeBranch : '',
+                codeName:CodeSourceRadioType &&  CodeSourceRadioType.codeName
+                    ?  CodeSourceRadioType.codeName : '',
+                proofName:CodeSourceRadioType && CodeSourceRadioType.proofName
+                    ?  CodeSourceRadioType.proofName : '无',
             },
             pipelineTest:{
                 testId: localStorage.getItem('testId'),
@@ -118,13 +163,17 @@ const Config = props=>{
             },
             pipelineDeploy:{
                 deployId:  localStorage.getItem('deployId'),
-                deployAddress: values.deployAddress,
-                deployShell: values.deployShell,
-                deployTargetAddress:values.deployTargetAddress,
                 deployType:values.deployType,
-                proofName: values.deployPlace,
-                dockerPort:values.dockerPort,
-                mappingPort:values.mappingPort,
+                deployAddress:deployRadioType && deployRadioType.deployAddress
+                    ? deployRadioType.deployAddress :'',
+                proofName: deployRadioType && deployRadioType.proofName
+                    ? deployRadioType.proofName :'',
+                deployShell: deployRadioType && deployRadioType.deployShell
+                    ? deployRadioType.deployShell :'',
+                deployTargetAddress:deployRadioType && deployRadioType.deployTargetAddress
+                    ? deployRadioType.deployTargetAddress :'',
+                dockerPort:values.dockerBootPort,
+                mappingPort:values.dockerMappingPort,
             },
         }
         updatePipelineConfig(configure)
@@ -136,7 +185,7 @@ const Config = props=>{
             <div className='config-breadcrumb' id='scrollB'>
                 <Breadcrumb separator=">">
                     <Breadcrumb.Item>流水线</Breadcrumb.Item>
-                    <Breadcrumb.Item href="">{localStorage.getItem('pipelineName')}</Breadcrumb.Item>
+                    <Breadcrumb.Item>{localStorage.getItem('pipelineName')}</Breadcrumb.Item>
                 </Breadcrumb>
             </div>
 

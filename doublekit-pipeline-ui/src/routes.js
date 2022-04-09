@@ -4,6 +4,7 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Login=AsyncComponent(()=>import('./modules/login/login'))
 const Home=AsyncComponent(()=>import('./modules/home/home'))
+const Index=AsyncComponent(()=>import('./modules/home/index'))
 const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
@@ -20,6 +21,8 @@ const StructureHistory=AsyncComponent(()=>import('./modules/structure/structureH
 const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
 const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/container/structureHistoryDetails'))
+
+const Practice = AsyncComponent(()=>import('./modules/practice/practice'))
 
 export const routers=[
     {
@@ -90,6 +93,10 @@ export const routers=[
                         path:'/home/task/post',
                         component:ConfigPastRecords
                     },
+                    {
+                        path:'/home/task/aa',
+                        component: Practice
+                    }
                 ]
             },
             {

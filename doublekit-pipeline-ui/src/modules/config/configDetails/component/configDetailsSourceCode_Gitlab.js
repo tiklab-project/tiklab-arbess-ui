@@ -23,7 +23,7 @@ const ConfigDetailsSourceCode_Gitlab = props =>{
     return(
         <Fragment>
             <Form.Item
-                name='gitlabAddress'
+                name='gitlabCodeName'
                 label="gitlab地址"
                 rules={[
                     {
@@ -41,7 +41,7 @@ const ConfigDetailsSourceCode_Gitlab = props =>{
                 <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <Row>
-                <Form.Item name='gitlabPlace'>
+                <Form.Item name='gitlabProofName'>
                     <Select
                         style={{ width: 300 }}
                         onClick={clickFindAllGit}

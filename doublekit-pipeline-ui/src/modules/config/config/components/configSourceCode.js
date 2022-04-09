@@ -15,7 +15,7 @@ const ConfigSourceCode = () => {
     return(
         <div className='anchor-content' id='a'>
             <h1>源码管理</h1>
-            <Form.Item className='config-radio' name='codeType'>
+            <Form.Item  name='codeType'>
                 <Radio.Group  onChange={handlerRadio} value={sourceRadio}>
                     <Space>
                         <Radio value={0}>无</Radio>

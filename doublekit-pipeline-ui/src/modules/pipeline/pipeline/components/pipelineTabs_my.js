@@ -2,7 +2,7 @@ import React from "react";
 import {Table} from "antd";
 import {withRouter} from "react-router-dom";
 
-const PipelineMy= props=> {
+const PipelineTabs_my= props=> {
     const dataSource = [
         {
             key:"1",
@@ -58,7 +58,6 @@ const PipelineMy= props=> {
     ];
     return(
         <Table
-            bordered
             columns={columns}
             dataSource={dataSource}
         />
@@ -66,4 +65,4 @@ const PipelineMy= props=> {
     )
 }
 
-export default withRouter(PipelineMy)
+export default withRouter(PipelineTabs_my)

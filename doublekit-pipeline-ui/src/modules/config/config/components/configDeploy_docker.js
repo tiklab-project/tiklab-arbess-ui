@@ -2,7 +2,6 @@ import React,{Fragment} from 'react'
 import {Button, Form, Input, Row, Select} from "antd";
 
 const {Option}=Select
-const { TextArea } = Input;
 
 const ConfigDeploy_docker = props =>{
 
@@ -32,11 +31,11 @@ const ConfigDeploy_docker = props =>{
 
     return(
       <Fragment>
-          <Form.Item name='deployTargetAddress' label='需要发送的文件地址'>
+          <Form.Item name='dockerTargetAddress' label='需要发送的文件地址'>
               <Input/>
           </Form.Item>
           <Row>
-              <Form.Item  name='deployPlace'  label='请选择Ip地址' >
+              <Form.Item  name='dockerPlace'  label='请选择Ip地址' >
                   <Select
                       onChange={deploySelect}
                       onClick={findAllDeploy}
@@ -61,7 +60,7 @@ const ConfigDeploy_docker = props =>{
               </Button>
           </Row>
           <Form.Item
-              name='dockerPort'
+              name='dockerBootPort'
               label='启动端口'
               style={{ display: 'inline-block'}}
               rules={[
@@ -73,7 +72,7 @@ const ConfigDeploy_docker = props =>{
               <Input style={{width:200}}/>
           </Form.Item>
           <Form.Item
-              name='mappingPort'
+              name='dockerMappingPort'
               label='映射端口'
               style={{ display: 'inline-block',  margin: '1px 3px' }}
               rules={[
@@ -84,9 +83,10 @@ const ConfigDeploy_docker = props =>{
           >
               <Input style={{width:200}}/>
           </Form.Item>
-          <Form.Item name='deployAddress' label='部署位置'>
+          <Form.Item name='dockerAddress' label='部署位置'>
               <Input/>
           </Form.Item>
+
       </Fragment>
     )
 }

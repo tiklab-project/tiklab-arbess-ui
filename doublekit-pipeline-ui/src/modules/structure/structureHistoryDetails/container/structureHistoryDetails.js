@@ -25,7 +25,7 @@ const StructureHistoryDetails = props =>{
     return(
        <div className='task structureHistory-details'>
            <div className='structureHistory-details-center-test'>
-               {props.match.params.historyName}
+               # {props.match.params.historyName}
            </div>
            <StructureHistoryDetailsTop
                historyId={historyId}

@@ -1,6 +1,6 @@
-import React,{Fragment} from 'react'
+import React from 'react'
 import { Button,Input} from "antd";
-import {withRouter} from "react-router-dom";
+import {withRouter} from "react-router";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
 
@@ -13,13 +13,12 @@ const PipelineSearch= props=>{
 
     const onSearch = values =>{
         findOneName(values).then(res=>{
-            console.log(res)
-            // props.history.push(`/home/searchresult/${values}`)
+            props.history.push(`/home/searchresult/${values}`)
         })
     }
 
     return(
-        <Fragment>
+        <div className='pipeline-top'>
             <span>流水线</span>
             <div className='pipeline-top-r'>
                <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
@@ -31,7 +30,7 @@ const PipelineSearch= props=>{
                    新建流水线
                </Button>
             </div>
-        </Fragment>
+        </div>
     )
 }
 

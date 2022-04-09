@@ -41,7 +41,6 @@ const ConfigDetails = props =>{
         return () => clearTimeout(se)
     }, [])
 
-    //页面滚动加载
     useEffect(()=> {
         document.addEventListener('scroll', handleScroll)
         return () => {
@@ -68,22 +67,22 @@ const ConfigDetails = props =>{
                 switch (data.pipelineCode.codeType){
                     case 2:
                         form.setFieldsValue({
-                            gitAddress:data.pipelineCode.codeName,
+                            gitCodeName:data.pipelineCode.codeName,
                             gitBranch:data.pipelineCode.codeBranch,
-                            gitPlace:data.pipelineCode.proofName,
+                            gitProofName:data.pipelineCode.proofName,
                          })
                         break
                     case 3:
                         form.setFieldsValue({
-                            giteeAddress:data.pipelineCode.codeName,
+                            giteeCodeName:data.pipelineCode.codeName,
                             giteeBranch:data.pipelineCode.codeBranch,
                         })
                         break
                     case 4:
                         form.setFieldsValue({
-                            gitlabAddress: data.pipelineCode.codeName,
+                            gitlabCodeName: data.pipelineCode.codeName,
                             gitlabBranch: data.pipelineCode.codeBranch,
-                            gitlabPlace: data.pipelineCode.proofName,
+                            gitlabProofName: data.pipelineCode.proofName,
                         })
                 }
 
@@ -180,22 +179,22 @@ const ConfigDetails = props =>{
         switch (values.codeType) {
             case 2:
                 CodeSourceRadioType = {
-                    codeName:values.gitAddress,
+                    codeName:values.gitCodeName,
                     codeBranch: values.gitBranch,
-                    proofName:values.gitPlace,
+                    proofName:values.gitProofName,
                 }
                 break
             case 3:
                 CodeSourceRadioType =  {
-                    codeName: values.giteeAddress,
+                    codeName: values.giteeCodeName,
                     codeBranch: values.giteeBranch
                 }
                 break
             case 4:
                 CodeSourceRadioType = {
-                    codeName: values.gitlabAddress,
+                    codeName: values.gitlabCodeName,
                     codeBranch:values.gitlabBranch,
-                    proofName:values.gitlabPlace,
+                    proofName:values.gitlabProofName,
                 }
         }
 
@@ -291,16 +290,15 @@ const ConfigDetails = props =>{
                     onFinish={onFinish}
                     form={form}
                     initialValues={{
-                        "structureType":0,
-                        "codeType":0,
-                        "testType":0,
-                        "deployType":0,
+                        'structureType':0,
+                        'codeType':0,
+                        'testType':0,
+                        'deployType':0,
                        }}
-                    layout="vertical"
-                    autoComplete = "off"
+                    layout='vertical'
+                    autoComplete='off'
                 >
                     <ConfigDetailsSourceCode
-                        {...props}
                         setSourceRadio={setSourceRadio}
                         sourceRadio={sourceRadio}
                         form={form}

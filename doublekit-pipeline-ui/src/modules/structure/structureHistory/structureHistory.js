@@ -21,7 +21,7 @@ const StructureHistory=props=>{
 
     const [visible, setVisible] = useState(false);
 
-    const onCreate = (values) => {
+    const onCreate = values => {
         console.log('Received values of form: ', values);
         setVisible(false);
     };
@@ -30,7 +30,7 @@ const StructureHistory=props=>{
     const goBuildDetails = record =>{
         localStorage.setItem('logId',record.logId)
         localStorage.setItem('historyId',record.historyId)
-        props.history.push(`/home/task/build/${"构建"+record.historyId}`)
+        props.history.push(`/home/task/build/${record.historyId}`)
     }
 
     //执行人详情
@@ -46,7 +46,7 @@ const StructureHistory=props=>{
             render:text =>{
                 return(
                     <span>
-                        构建{text}
+                        # {text}
                     </span>
                 )
             }
@@ -124,6 +124,7 @@ const StructureHistory=props=>{
                         }
                         className='structure-history-table'
                     >
+                        {/*<EyeOutlined/>*/}
                         查看
                     </span>
                 )

@@ -32,13 +32,12 @@ const ConfigDetailsSourceCode_Gitee = props =>{
         const se = setTimeout(()=>{
             //1、如果等于空或者未定义禁用下拉框
             setBranch(false)
-            if( getFieldValue('giteeAddress') === null || getFieldValue('giteeAddress') ===undefined || getFieldValue('giteeAddress') === ''){
+            if( getFieldValue('giteeCodeName') === null || getFieldValue('giteeCodeName') ===undefined || getFieldValue('giteeCodeName') === ''){
                 setBranch(true)
             }
             // 2、但是如果我这样写为啥不起作用
-            // if(getFieldValue('giteeAddress') !== null || getFieldValue('giteeAddress') !== undefined  || getFieldValue('giteeAddress') !== ''){
+            // if(getFieldValue('giteeCodeName') !== null || getFieldValue('giteeCodeName') !== undefined  || getFieldValue('giteeCodeName') !== ''){
             //     setBranch(false)
-            //     console.log("111")
             // }
         },10)
         return ()=> clearTimeout(se)
@@ -58,7 +57,7 @@ const ConfigDetailsSourceCode_Gitee = props =>{
         <Fragment>
             <Row>
                 <Form.Item
-                    name='giteeAddress'
+                    name='giteeCodeName'
                     label="git地址"
                 >
                     <Select
