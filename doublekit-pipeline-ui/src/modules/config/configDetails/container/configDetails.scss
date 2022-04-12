@@ -2,8 +2,8 @@
   margin: 50px auto;
   &-post{
     position: fixed;
-    z-index: 98;
-    margin-top: -15px;
+    z-index: 101;
+    margin-top: -27px;
     width: 70%;
     min-width: 600px;
     text-align: right
@@ -19,7 +19,7 @@
   &-fixed{
     position: fixed;
     z-index: 98;
-    top: 125px;
+    top: 113px;
     width: 70%;
     min-width: 600px;
   }

@@ -10,9 +10,12 @@
 .breadcrumb{
   font-size: 16px;
   position: fixed;
+  width: 100%;
   min-width: 230px;
   z-index: 100;
-  padding: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #cccccc;
 }
 .task{
   width: 90%;
