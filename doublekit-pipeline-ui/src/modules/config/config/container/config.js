@@ -93,46 +93,6 @@ const Config = props=>{
     }
 
     const onFinish=(values)=>{
-        let CodeSourceRadioType,StructureRadioType,deployRadioType={ }
-
-        switch (values.codeType) {
-            case 2:
-                CodeSourceRadioType = {
-                    codeName:values.gitCodeName,
-                    codeBranch: values.gitBranch,
-                    proofName:values.gitProofName,
-                }
-                break
-            case 3:
-                CodeSourceRadioType =  {
-                    codeName: values.giteeCodeName,
-                    codeBranch: values.giteeBranch
-                }
-                break
-            case 4:
-                CodeSourceRadioType = {
-                    codeName: values.gitlabCodeName,
-                    codeBranch:values.gitlabBranch,
-                    proofName:values.gitlabProofName,
-                }
-        }
-
-        switch (values.deployType) {
-            case 2:
-                deployRadioType = {
-                    deployAddress: values.linuxAddress,
-                    proofName: values.linuxPlace,
-                    deployShell: values.linuxShell,
-                    deployTargetAddress:values.linuxTargetAddress,
-                }
-                break
-            case 3:
-                deployRadioType = {
-                    deployAddress: values.dockerAddress,
-                    proofName: values.dockerPlace,
-                    deployTargetAddress:values.dockerTargetAddress,
-                }
-        }
 
         const configure={
             configureCreateTime:moment.moment,
@@ -143,12 +103,9 @@ const Config = props=>{
             pipelineCode:{
                 codeId:localStorage.getItem('codeId'),
                 codeType:values.codeType,
-                codeBranch:CodeSourceRadioType && CodeSourceRadioType.codeBranch
-                    ?  CodeSourceRadioType.codeBranch : '',
-                codeName:CodeSourceRadioType &&  CodeSourceRadioType.codeName
-                    ?  CodeSourceRadioType.codeName : '',
-                proofName:CodeSourceRadioType && CodeSourceRadioType.proofName
-                    ?  CodeSourceRadioType.proofName : '无',
+                codeBranch:values.codeBranch,
+                codeName:values.codeName ,
+                proofName:values.proofName,
             },
             pipelineTest:{
                 testId: localStorage.getItem('testId'),
@@ -164,16 +121,12 @@ const Config = props=>{
             pipelineDeploy:{
                 deployId:  localStorage.getItem('deployId'),
                 deployType:values.deployType,
-                deployAddress:deployRadioType && deployRadioType.deployAddress
-                    ? deployRadioType.deployAddress :'',
-                proofName: deployRadioType && deployRadioType.proofName
-                    ? deployRadioType.proofName :'',
-                deployShell: deployRadioType && deployRadioType.deployShell
-                    ? deployRadioType.deployShell :'',
-                deployTargetAddress:deployRadioType && deployRadioType.deployTargetAddress
-                    ? deployRadioType.deployTargetAddress :'',
-                dockerPort:values.dockerBootPort,
-                mappingPort:values.dockerMappingPort,
+                deployAddress:values.deployAddress,
+                proofName: values.proofName ,
+                deployShell: values.deployShell ,
+                deployTargetAddress:values.deployTargetAddress ,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
             },
         }
         updatePipelineConfig(configure)

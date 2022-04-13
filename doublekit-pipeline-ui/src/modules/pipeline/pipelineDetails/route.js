@@ -44,11 +44,5 @@ export const  taskRouters=[
         title: '流水线设置',
         icon:<SettingOutlined />,
         key:'6'
-    },
-    {
-        to:'/home/task/aa',
-        title: 'aa',
-        icon:<SettingOutlined />,
-        key:'7'
     }
 ]

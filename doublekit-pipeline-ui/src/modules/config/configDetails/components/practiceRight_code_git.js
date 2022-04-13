@@ -1,24 +1,12 @@
-import React, {useState,Fragment} from 'react'
-import {Button, Form, Input, Select,Row} from "antd";
+import React, {Fragment,useState} from "react";
+import {Button, Form, Input, Row, Select} from "antd";
 import SourceCode_GitModal from "../../common/component/sourceCode_GitModal";
-import {inject, observer} from "mobx-react";
 
 const {Option} = Select
 
-const ConfigDetailsSourceCode_Git = props =>{
-
-    const {ProofStore}=props
-    const {createProof,findAllGitProof,findOneGitProof,allGitProofList} = ProofStore
+const PracticeRight_code_git = props =>{
 
     const [visible,setVisible]=useState(false)
-
-    const clickFindAllGit = () =>{
-        findAllGitProof()
-    }
-
-    const changeGitSelect = value =>{
-        findOneGitProof(value)
-    }
 
     return(
         <Fragment>
@@ -44,21 +32,10 @@ const ConfigDetailsSourceCode_Git = props =>{
                 <Form.Item name='gitProofName'>
                     <Select
                         style={{ width: 300 }}
-                        onClick={clickFindAllGit}
-                        onChange={changeGitSelect}
                     >
                         <Option>
                             无
                         </Option>
-                        {
-                            allGitProofList && allGitProofList.map(item=>{
-                                return(
-                                    <Option key={item.proofId} value={item.proofName+ " (" + item.proofUsername + ")"}>
-                                        { item.proofName+ " (" + item.proofUsername + ")"}
-                                    </Option>
-                                )
-                            })
-                        }
                     </Select>
                 </Form.Item>
                 &nbsp; &nbsp;
@@ -70,10 +47,9 @@ const ConfigDetailsSourceCode_Git = props =>{
             <SourceCode_GitModal
                 visible={visible}
                 setVisible={setVisible}
-                createProof={createProof}
             />
         </Fragment>
     )
 }
 
-export default inject('ProofStore')(observer(ConfigDetailsSourceCode_Git))
+export default PracticeRight_code_git

@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from "react";
 import {Button, Form, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
-import SourceCode_GiteeModal from "../../config/common/component/SourceCode_GIteeModal";
+import SourceCode_GiteeModal from "../../common/component/SourceCode_GIteeModal";
 
 const {Option} =Select
 

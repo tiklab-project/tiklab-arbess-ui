@@ -1,6 +1,6 @@
 import React, {Fragment,useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
-import DeployAddModal from "../../config/common/component/deployAddModal";
+import DeployAddModal from "../../common/component/deployAddModal";
 
 const {Option}=Select
 const { TextArea } = Input;

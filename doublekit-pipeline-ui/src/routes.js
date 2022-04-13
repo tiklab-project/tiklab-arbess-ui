@@ -9,20 +9,18 @@ const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
 const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/common/pipelineAdd'))
-const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/container/config'))
+// const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/container/config'))
 const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
 
 
 const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
 const Structure=AsyncComponent(()=>import('./modules/structure/structure/containers/structure'))
-const ConfigDetails=AsyncComponent(()=>import('./modules/config/configDetails/container/configDetails'))
 const StructureHistory=AsyncComponent(()=>import('./modules/structure/structureHistory/structureHistory'))
 const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
 const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/container/structureHistoryDetails'))
-
-const Practice = AsyncComponent(()=>import('./modules/practice/practice'))
+const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/container/configDetails'))
 
 export const routers=[
     {
@@ -48,10 +46,10 @@ export const routers=[
                 path:'/home/new',
                 component: PipelineAdd,
             },
-            {
-                path:'/home/config',
-                component:PipelineConfig,
-            },
+            // {
+            //     path:'/home/config',
+            //     component:PipelineConfig,
+            // },
             {
                 path:'/home/searchresult/:searchresult',
                 component:SearchResult,
@@ -74,10 +72,6 @@ export const routers=[
                         component: Structure
                     },
                     {
-                        path:'/home/task/config',
-                        component: ConfigDetails,
-                    },
-                    {
                         path:'/home/task/build/:historyName',
                         component:StructureHistoryDetails
                     },
@@ -94,8 +88,8 @@ export const routers=[
                         component:ConfigPastRecords
                     },
                     {
-                        path:'/home/task/aa',
-                        component: Practice
+                        path:'/home/task/config',
+                        component: ConfigDetails
                     }
                 ]
             },

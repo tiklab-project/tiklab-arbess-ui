@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import {Radio,  Form, Space} from "antd";
 import ConfigSourceCode_Git from "./configSourceCode_Git";
 import ConfigSourceCode_Gitee from "./configSourceCode_Gitee";
-import ConfigDetailsSourceCode_Gitlab from "../../configDetails/component/configDetailsSourceCode_Gitlab";
-
+import ConfigSourceCode_Gitlab from "./configSourceCode_Gitlab";
 const ConfigSourceCode = () => {
 
     const [sourceRadio,setSourceRadio]=useState(0)
@@ -35,7 +34,7 @@ const ConfigSourceCode = () => {
             }
             {
                 sourceRadio === 4 ?
-                    <ConfigDetailsSourceCode_Gitlab/> :null
+                    <ConfigSourceCode_Gitlab/> :null
             }
         </div>
     )

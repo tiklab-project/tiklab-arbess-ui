@@ -41,7 +41,7 @@ const ConfigSourceCode_Gitee = props =>{
         <Fragment>
             <Row>
                 <Form.Item
-                    name='giteeCodeName'
+                    name='codeName'
                     label="git地址"
                 >
                     <Select
@@ -66,7 +66,7 @@ const ConfigSourceCode_Gitee = props =>{
                     新增代码库
                 </Button>
             </Row>
-            <Form.Item name="giteeBranch" label="分支">
+            <Form.Item name="codeBranch" label="分支">
                 <Select
                     style={{ width: 300 }}
                     disabled={branch}

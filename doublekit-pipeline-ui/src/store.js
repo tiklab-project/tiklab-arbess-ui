@@ -1,5 +1,6 @@
 import PipelineStore from "./modules/pipeline/pipeline/store/pipelineStore";
-import ConfigStore from "./modules/config/common/store/configStore";
+// import ConfigStore from "./modules/config/common/store/configStore";
+import ConfigStore from "./modules/config/configDetails/store/configStore";
 import StructureStore from "./modules/structure/common/store/structureStore";
 import ProofStore from "./modules/config/common/store/proofStore";
 import GitAuthorizeStore from "./modules/config/common/store/gitAuthorizeStore";
