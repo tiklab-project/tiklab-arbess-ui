@@ -1,20 +1,31 @@
 import React ,{useState,useEffect} from "react";
-import {Button, Form} from "antd";
+import {Button, Form, Input} from "antd";
 import PracticeRight_code from "./practiceRight_code";
 import PracticeRight_test from "./practiceRight_test";
 import PracticeRight_maven from "./practiceRight_maven";
 import PracticeRight_node from "./practiceRight_node";
 import PracticeRight_linux from "./practiceRight_linux";
 import PracticeRight_docker from "./practiceRight_docker";
-import {CloseOutlined} from "@ant-design/icons";
+import {CloseOutlined,EditOutlined} from "@ant-design/icons";
 
 const PracticeRight = props =>{
 
-    const {data,codeData,setNewStageVisible,setCodeVisible,setChangeSortVisible,setDrawer} = props
+    const {data,codeData,setNewStageVisible,setCodeVisible,setChangeSortVisible,setDrawer,
+    } = props
 
+    const [step,setStep] = useState(true)
 
     const changeConfigSorts = () => {
         setChangeSortVisible(true)
+    }
+
+    const changeStep = (group) =>{
+        console.log(group)
+        setStep(true)
+    }
+
+    const displayInput = (group,index) =>{
+        setStep(false)
     }
 
     const deletePart = (group,index) =>{
@@ -45,7 +56,20 @@ const PracticeRight = props =>{
         return  data && data.map((group,index)=>{
                     return(
                         <div className='config-details-wrapper' key={index}>
-                            <div className='config-details-Headline'>{group.title}</div>
+                            <div
+                                className='config-details-Headline'
+                            >
+                                {
+                                    step ?    <div style={{display:"inline"}}>{group.step}</div>
+                                        :    <Input
+                                                 style={{width:100}}
+                                             />
+                                }
+                                &nbsp; &nbsp;
+                                <span onClick={()=>displayInput(group,index)}>
+                                    <EditOutlined />
+                                </span>
+                            </div>
                             <div className='config-details-newStage'>
                                 <div className='desc'>
                                     <div className='desc-head'>{group.desc}</div>

@@ -1,4 +1,4 @@
-import React ,{useState } from "react";
+import React ,{useState,useEffect } from "react";
 import './practice.scss'
 import PracticeRight from "./components/practiceRight";
 import OptDrawer from "./drawer/optDrawer";
@@ -15,6 +15,9 @@ const Practice = () =>{
     const [codeData, setCodeData] = useState('' )
     const [drawerType,setDrawer] = useState('large')
 
+    useEffect(()=>{
+        return () =>localStorage.removeItem('data')
+    },[])
 
     return(
         <div className='config-details task '>
@@ -48,6 +51,7 @@ const Practice = () =>{
                 changeSortVisible={changeSortVisible}
                 setChangeSortVisible={setChangeSortVisible}
                 data={data}
+                setData={setData}
             />
 
             {/*<OptDrawer*/}

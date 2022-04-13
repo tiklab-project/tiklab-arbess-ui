@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Modal} from "antd";
 import './optModal.scss'
 
@@ -42,12 +42,16 @@ const OptModal = props =>{
 
     const {newStageVisible,setNewStageVisible,data,setData,drawerType} = props
 
+    useEffect(()=>{
+        localStorage.setItem('data',JSON.stringify(data))
+    },[data])
+
     const handleClick = (group,item,index)=>{
         console.log(group,item,index)
         const newData = [...data]
         if(drawerType==='large'){
             newData.push({
-                title:group.title,
+                step:group.title,
                 desc:item.tpl
             })
         }
