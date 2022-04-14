@@ -29,7 +29,10 @@ const PracticeRight_code_git = props =>{
                 <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <Row>
-                <Form.Item name='gitProofName'>
+                <Form.Item
+                    name='gitProofName'
+                    label="凭证"
+                >
                     <Select
                         style={{ width: 300 }}
                     >
@@ -38,8 +41,10 @@ const PracticeRight_code_git = props =>{
                         </Option>
                     </Select>
                 </Form.Item>
-                &nbsp; &nbsp;
-                <Button onClick={()=> setVisible(true)}>
+                <Button
+                    onClick={()=> setVisible(true)}
+                    className='config-details-link'
+                >
                     添加
                 </Button>
             </Row>

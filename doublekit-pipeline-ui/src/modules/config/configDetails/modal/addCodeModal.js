@@ -14,9 +14,14 @@ const lis=[
 
 const AddCodeModal = props =>{
 
-    const {codeData,setCodeData,codeVisible,setCodeVisible} = props
+    const {setCodeData,createCode,pipelineId,codeVisible,setCodeVisible} = props
 
-    const handleClick = item =>{
+    const handleClick = (item,index) =>{
+        const params = {
+            pipelineId:pipelineId,
+            taskType:index+1
+        }
+        createCode(params)
         console.log('item',item)
         if(item){
             setCodeData(item.desc)
@@ -34,7 +39,7 @@ const AddCodeModal = props =>{
             {
                 lis && lis.map((item,index)=>{
                     return   <div
-                                onClick={()=>handleClick(item)}
+                                onClick={()=>handleClick(item,index)}
                                 className='group-desc group-tpl'
                                 key={item.id}
                             >

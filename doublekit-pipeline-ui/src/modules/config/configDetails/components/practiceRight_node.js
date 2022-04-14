@@ -7,10 +7,10 @@ const PracticeRight_node = props =>{
 
     return(
         <Fragment>
-            <Form.Item name="mavenAddress" label="文件地址">
+            <Form.Item name="nodeAddress" label="文件地址">
                 <Input />
             </Form.Item>
-            <Form.Item name="mavenOrder" label="执行命令">
+            <Form.Item name="nodeOrder" label="执行命令">
                 <TextArea  autoSize/>
             </Form.Item>
         </Fragment>

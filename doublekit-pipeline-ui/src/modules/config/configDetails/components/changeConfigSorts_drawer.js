@@ -1,5 +1,6 @@
 import React ,{useState,useEffect} from "react";
 import {Button, Drawer,Tree} from "antd";
+import './changeConfigSorts_drawer.scss'
 import {CloseOutlined} from "@ant-design/icons";
 
 const ChangeConfigSorts_drawer = props =>{

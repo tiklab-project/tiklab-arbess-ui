@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState} from "react";
 import {Modal} from "antd";
 import './optModal.scss'
 
@@ -40,23 +40,83 @@ const lis=[
 
 const OptModal = props =>{
 
-    const {newStageVisible,setNewStageVisible,data,setData,drawerType} = props
-
-    useEffect(()=>{
-        localStorage.setItem('data',JSON.stringify(data))
-    },[data])
+    const {newStageVisible,setNewStageVisible,data,setData,
+        pipelineId,createTest,createStructure,createDeploy
+    } = props
 
     const handleClick = (group,item,index)=>{
-        console.log(group,item,index)
+        let paramsTest,paramsStructure,paramsDeploy = {}
         const newData = [...data]
-        if(drawerType==='large'){
-            newData.push({
-                step:group.title,
-                desc:item.tpl
+        if(group.title==='测试'){
+            switch (item.tpl){
+                case '单元测试':
+                    paramsTest = {
+                        pipelineId:pipelineId,
+                        taskType:11
+                    }
+            }
+            createTest(paramsTest).then(res=>{
+                console.log('测试',res)
+                newData.push({
+                    configureId:res.data,
+                    step:group.title,
+                    desc:item.tpl
+                })
+                setNewStageVisible(false)
             })
         }
+        if(group.title==='构建'){
+            switch (item.tpl) {
+                case 'maven':
+                    paramsStructure = {
+                        pipelineId:pipelineId,
+                        taskType:21
+                    }
+                    break
+                case 'node':
+                    paramsStructure = {
+                        pipelineId:pipelineId,
+                        taskType:22
+                    }
+            }
+            createStructure(paramsStructure).then(res=>{
+                console.log('构建',res)
+                newData.push({
+                    configureId:res.data,
+                    step:group.title,
+                    desc:item.tpl
+                })
+                setNewStageVisible(false)
+            })
+        }
+        if(group.title==='部署'){
+            switch (item.tpl) {
+                case 'linux':
+                    paramsDeploy = {
+                        pipelineId:pipelineId,
+                        taskType:31
+                    }
+                    break
+                case 'docker':
+                    paramsDeploy = {
+                        pipelineId:pipelineId,
+                        taskType:32
+                    }
+            }
+            createDeploy(paramsDeploy).then(res=>{
+                console.log('部署',res)
+                newData.push({
+                    configureId:res.data,
+                    step:group.title,
+                    desc:item.tpl
+                })
+                setNewStageVisible(false)
+            })
+        }
+
         setData(newData)
-        setNewStageVisible(false)
+
+        console.log('data',data)
     }
 
     const group = ( ) =>{
