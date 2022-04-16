@@ -43,12 +43,7 @@ const PipelineAdd = props => {
         }
         createPipeline(aa).then(res=>{
             if(res.code=== 0 && res.data){
-                localStorage.setItem('pipelineId',res.data.pipelineId)
-                localStorage.setItem('configureId', res.data.configureId)
-                localStorage.setItem('codeId', res.data.codeId)
-                localStorage.setItem('testId', res.data.testId)
-                localStorage.setItem('structureId', res.data.structureId)
-                localStorage.setItem('deployId',res.data.deployId)
+                localStorage.setItem('pipelineId',res.data)
                 localStorage.setItem('pipelineName',value.pipelineName)
                 props.history.push({pathname:'/home/config',value})
             }

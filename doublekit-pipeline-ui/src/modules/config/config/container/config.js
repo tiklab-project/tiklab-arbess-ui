@@ -1,43 +1,48 @@
-import React, {useEffect, useState} from 'react'
-import {Breadcrumb, Form} from "antd";
-import {withRouter} from "react-router"
-import './config.scss'
-import Anchor from "../../common/component/anchor";
-import ConfigSourceCode from "../components/configSourceCode";
-import ConfigTest from "../components/configTest";
-import ConfigStructure from "../components/configStructure";
-import ConfigDeploy from "../components/configDeploy";
-import Conserve from "../../common/component/conserve";
-import moment from "../../../../common/moment/moment";
-import {getUrlParam} from "../../common/component/getUrlParam";
+import React, {useState, useEffect, useRef} from "react";
+import '../../common/style/config.scss';
+import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
+import {Button, Form, Input} from "antd";
+import OptModal from "../modal/optModal";
+import AddCodeModal from "../modal/addCodeModal";
+import ChangeConfigSorts_drawer from "../components/changeConfigSorts_drawer";
+import ConfigTop from "../components/configTop";
+import Config_code from "../components/config_code";
+import Config_test from "../components/config_test";
+import Config_maven from "../components/config_maven";
+import Config_node from "../components/config_node";
+import Config_linux from "../components/config_linux";
+import Config_docker from "../components/config_docker";
+import moment from "../../../../common/moment/moment";
+import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 
-const Config = props=>{
+const Config = props =>{
 
-    const {ProofStore,ConfigStore,GitAuthorizeStore}=props
-    const {updatePipelineConfig}=ConfigStore
-    const {createProof,findAllDeployProof,findOneDeployProof,allDeployProofList,oneDeployProof} =ProofStore
-    const {code} = GitAuthorizeStore
+    const {ConfigStore} = props
+    const {createCode,createTest,createStructure,createDeploy,updateConfigure
+    } = ConfigStore
 
-    //Gitee--code
-    const codeValue = getUrlParam('code')
+    const [newStageVisible, setNewStageVisible] = useState(false)
+    const [codeVisible, setCodeVisible] = useState(false)
+    const [changeSortVisible, setChangeSortVisible] = useState(false)
+    const [data, setData] = useState([])
+    const [codeData, setCodeData] = useState('' )
+    const inputRef = useRef();
 
-    //Gitee授权
-    useEffect(() => {
-        const se = setTimeout(()=>localStorage.removeItem('code'),100)
-        if (codeValue && localStorage.getItem('code')) {
-            code(codeValue).then(res=>{
-                window.close()
-            })
+    const pipelineId = localStorage.getItem('pipelineId')
+    const codeId = localStorage.getItem('codeId')
+    const testId = localStorage.getItem('testId')
+    const structureId = localStorage.getItem('structureId')
+    const deployId = localStorage.getItem('deployId')
+
+    const [step,setStep] = useState('')
+    const [inputValue,setInputValue] = useState(  )
+
+    useEffect(()=>{
+        if(step!==''){
+            inputRef.current.focus()
         }
-        return () => clearTimeout(se)
-    }, [])
-
-    useEffect(()=> {
-        document.addEventListener('scroll', handleScroll);
-        return () => {
-            document.removeEventListener('scroll',handleScroll);
-            localStorage.removeItem('configureId')
+        return () =>{
             localStorage.removeItem('codeId')
             localStorage.removeItem('testId')
             localStorage.removeItem('structureId')
@@ -45,136 +50,274 @@ const Config = props=>{
         }
     },[])
 
-    //锚点样式
-    const [anchor,setAnchor] = useState('a')
-    //滚动
-    const handleScroll = () => {
-        //浏览器滚动的高度
-        const scrollTop=document.body.scrollTop
-
-        //固定
-        const scrollA=document.getElementById('scrollA')
-        const scrollB=document.getElementById('scrollB')
-        if(scrollB && scrollTop >scrollB.offsetHeight){
-            scrollA.classList.add('config-anchor-fixed')
-        }else {
-            scrollA.classList.remove('config-anchor-fixed')
-        }
-
-        //滚动
-        const a=document.getElementById('a').offsetTop-55
-        const b=document.getElementById('b').offsetTop-55
-        const c=document.getElementById('c').offsetTop-55
-        const d=document.getElementById('d').offsetTop-55
-
-        if(scrollTop > a && scrollTop < b){
-            setAnchor('a')
-        }
-        if(scrollTop>=b && scrollTop<c){
-            setAnchor('b')
-        }
-        if(scrollTop>c && scrollTop<d){
-            setAnchor('c')
-        }
-        if(scrollTop>d){
-            setAnchor('d')
-        }
+    const changeConfigSorts = () => {
+        setChangeSortVisible(true)
     }
-    //锚点
-    const scrollToAnchor = (anchorName) => {
-        if (anchorName) {
-            setAnchor(anchorName)
-            const scrollTop=document.body
-            const anchorElement = document.getElementById(anchorName)
-            if (anchorElement) {
-                scrollTop.scrollTop = anchorElement.offsetTop+55 ;
+
+    const displayInput = group =>{
+        // inputRef.current.focus({
+        //     cursor: 'end',
+        // });
+        setStep(group.dataId)
+    }
+
+    const changeInputValue = (e,index) =>{
+        setInputValue(e.target.value)
+        //深拷贝一次，可以让arr指向单独的内存空间
+        let arr = JSON.parse(JSON.stringify(data))
+        for(let i = 0 ;i<arr.length;i++){
+            if( i === index ) {
+                arr[i].title = e.target.value
+            }
+        }
+        setData(arr)
+    }
+
+    const hiddenInput = () =>{
+        setStep('')
+    }
+
+    const deletePart = (group,index) =>{
+
+    }
+
+    const inputContent = group =>{
+        if(group){
+            switch (group.desc){
+                case '单元测试':
+                    return <Config_test/>
+                case 'maven':
+                    return <Config_maven/>
+                case 'node':
+                    return <Config_node/>
+                case 'linux':
+                    return <Config_linux/>
+                case 'docker':
+                    return <Config_docker/>
             }
         }
     }
 
-    const onFinish=(values)=>{
+    const formFinish = value => {
 
-        const configure={
+        let codeList, testList,structureList,deployList={}
+
+        const dataArray = data && data.map((item) => item.desc)
+
+        switch (codeData.desc){
+            case '通用Git':
+                codeList = {
+                    codeType:1,
+                    codeBranch:value.gitBranch,
+                    codeName:value.gitCodeName,
+                }
+                break
+            case 'Gitee':{
+                codeList = {
+                    codeType:2,
+                    codeBranch:value.giteeBranch,
+                    codeName:value.giteeCodeName,
+                }
+            }
+        }
+
+        for (let i in dataArray){
+            switch (dataArray[i]){
+                case '单元测试':
+                    testList = {
+                        testType:11,
+                        testOrder : value.testOrder
+                    }
+                    break
+                case 'maven':
+                    structureList = {
+                        structureType:21,
+                        structureAddress:value.mavenAddress,
+                        structureOrder:value.mavenOrder
+                    }
+                    break
+                case 'node':
+                    structureList = {
+                        structureType:22,
+                        structureAddress:value.nodeAddress,
+                        structureOrder:value.nodeOrder
+                    }
+                    break
+                case 'linux':
+                    deployList = {
+                        deployType:31,
+                        deployAddress: value.linuxAddress,
+                        deployTargetAddress:value.linuxProofName,
+                        proofName: value.linuxPlace,
+                    }
+                    break
+                case 'docker':
+                    deployList = {
+                        deployType:32,
+                        deployAddress: value.linuxAddress,
+                        deployTargetAddress:value.dockerTargetAddress,
+                        proofName: value.dockerProofName,
+                    }
+            }
+        }
+
+        const configureList = {
             configureCreateTime:moment.moment,
-            configureId: localStorage.getItem('configureId'),
-            pipeline:{
-                pipelineId:localStorage.getItem('pipelineId')
-            },
+            pipelineId:pipelineId,
             pipelineCode:{
-                codeId:localStorage.getItem('codeId'),
-                codeType:values.codeType,
-                codeBranch:values.codeBranch,
-                codeName:values.codeName ,
-                proofName:values.proofName,
+                codeId:codeId,
+                codeType:codeList && codeList.codeType ,
+                codeBranch:codeList && codeList.codeBranch,
+                codeName:codeList && codeList.codeName,
+                proofName:value.gitProofName,
             },
             pipelineTest:{
-                testId: localStorage.getItem('testId'),
-                testOrder: values.testOrder,
-                testType:values.testType,
+                testId:testId,
+                testType:testList && testList.testType,
+                testOrder: testList && testList.testOrder,
             },
             pipelineStructure:{
-                structureId: localStorage.getItem('structureId'),
-                structureAddress: values.structureAddress,
-                structureOrder: values.structureOrder,
-                structureType: values.structureType,
+                structureId:structureId,
+                structureType:structureList && structureList.structureType,
+                structureAddress:structureList && structureList.structureAddress,
+                structureOrder:structureList && structureList.structureOrder,
             },
             pipelineDeploy:{
-                deployId:  localStorage.getItem('deployId'),
-                deployType:values.deployType,
-                deployAddress:values.deployAddress,
-                proofName: values.proofName ,
-                deployShell: values.deployShell ,
-                deployTargetAddress:values.deployTargetAddress ,
-                dockerPort:values.dockerPort,
-                mappingPort:values.mappingPort,
-            },
+                deployId:deployId,
+                deployType:deployList && deployList.deployType,
+                deployAddress: deployList && deployList.deployAddress,
+                deployTargetAddress: deployList && deployList.deployTargetAddress,
+                proofName: deployList && deployList.proofName,
+                deployShell:value.linuxShell,
+                dockerPort:value.dockerBootPort,
+                mappingPort:value.dockerMappingPort,
+            }
         }
-        updatePipelineConfig(configure)
+
+        console.log('configureList',configureList)
+        updateConfigure(configureList)
         props.history.push('/home/task/config')
     }
 
-    return (
-        <div className='config'>
-            <div className='config-breadcrumb' id='scrollB'>
-                <Breadcrumb separator=">">
-                    <Breadcrumb.Item>流水线</Breadcrumb.Item>
-                    <Breadcrumb.Item>{localStorage.getItem('pipelineName')}</Breadcrumb.Item>
-                </Breadcrumb>
+    const newStage = () =>{
+
+        console.log('data',data)
+
+        return  data && data.map((group,index)=>{
+            return(
+                <div className='config-details-wrapper' key={index}>
+                    <div
+                        className='config-details-Headline'
+                    >
+                        {
+                            step !== group.dataId ?
+                                <div style={{display:"inline"}}>
+                                    {group.title}
+                                </div>
+                                :
+                                <Input
+                                    type="text"
+                                    ref={inputRef}
+                                    onBlur={hiddenInput}
+                                    style={{width:100}}
+                                    defaultValue={group.title}
+                                    onChange={e=>changeInputValue(e,index)}
+                                />
+                        }
+                        &nbsp; &nbsp;
+                        <span onClick={()=> displayInput(group)}>
+                                    <EditOutlined />
+                                </span>
+                    </div>
+                    <div className='config-details-newStage'>
+                        <div className='desc'>
+                            <div className='desc-head'>{group.desc}</div>
+                            <div
+                                id='del'
+                                className='desc-delete'
+                                onClick={()=>deletePart(group,index)}
+                            >
+                                <CloseOutlined />
+                            </div>
+                        </div>
+                        <div className='desc-input'>
+                            { inputContent(group) }
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+    }
+
+    useEffect(()=>{
+        return () =>localStorage.removeItem('data')
+    },[])
+
+    return(
+        <div className='config-details '>
+            <ConfigTop/>
+            <div className='config-details-content'>
+                <div className='config-details-right'>
+                    <div className='config-details-right-all'>
+                        <div style={{textAlign:'right'}}>
+                            <Button onClick={changeConfigSorts}>更改配置顺序</Button>
+                        </div>
+                        <div>
+                            <Form
+                                layout='vertical'
+                                autoComplete = "off"
+                                onFinish={formFinish}
+                            >
+                                <Config_code
+                                    codeData={codeData}
+                                    setCodeVisible={setCodeVisible}
+                                />
+                                { newStage()}
+
+                                <div className='config-details-tail'>
+                                    <div className='config-details-Headline'>新阶段</div>
+                                    <div
+                                        className='config-details-handle'
+                                        onClick={()=> setNewStageVisible(true)}
+                                    >新任务</div>
+                                </div>
+                                <Form.Item style={{marginTop:20}}>
+                                    <Button htmlType="submit" type='primary'>保存</Button>
+                                </Form.Item>
+                            </Form>
+                        </div>
+
+                    </div>
+
+                    <OptModal
+                        data={data}
+                        setData={setData}
+                        newStageVisible={newStageVisible}
+                        setNewStageVisible={setNewStageVisible}
+                        pipelineId={pipelineId}
+                        createTest={createTest}
+                        createStructure={createStructure}
+                        createDeploy={createDeploy}
+                    />
+
+                    <AddCodeModal
+                        codeVisible={codeVisible}
+                        setCodeVisible={setCodeVisible}
+                        setCodeData={setCodeData}
+                        pipelineId={pipelineId}
+                        createCode={createCode}
+                    />
+
+                    <ChangeConfigSorts_drawer
+                        changeSortVisible={changeSortVisible}
+                        setChangeSortVisible={setChangeSortVisible}
+                        data={data}
+                        setData={setData}
+                    />
+                </div>
+
             </div>
 
-            <div className='config-offset'>
-                <Anchor
-                    scrollToAnchor={scrollToAnchor}
-                    anchor={anchor}
-                />
-                <Form
-                    onFinish={onFinish}
-                    initialValues={{
-                        "codeType":0,
-                        "testType":0,
-                        "structureType":0,
-                        "deployType":0,
-                        "deployPlace":"无",
-                        "testOrder": 'mvn -B test -Dmaven.test.failure.ignore=true\n' +
-                                             'mvn surefire-report:report-only\n' +
-                                             'mvn site -DgenerateReports=false'
-                    }}
-                    layout="vertical"
-                    autoComplete = "off"
-                >
-                    <ConfigSourceCode/>
-                    <ConfigTest/>
-                    <ConfigStructure />
-                    <ConfigDeploy
-                        createProof={createProof}
-                        findOneDeployProof={findOneDeployProof}
-                        findAllDeployProof={findAllDeployProof}
-                        allDeployProofList={allDeployProofList}
-                        oneDeployProof={oneDeployProof}
-                    />
-                    <Conserve/>
-                </Form>
-            </div>
         </div>
     )
 }

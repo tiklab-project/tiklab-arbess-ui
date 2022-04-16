@@ -4,7 +4,7 @@ import DeployAddModal from "../../common/component/deployAddModal";
 
 const {Option}=Select
 
-const PracticeRight_docker = props =>{
+const Config_docker = props =>{
 
     const [visible, setVisible] = useState(false)
 
@@ -28,7 +28,7 @@ const PracticeRight_docker = props =>{
                 <Input/>
             </Form.Item>
             <Row>
-                <Form.Item name='dockerPlace' label='请选择Ip地址'>
+                <Form.Item name='dockerProofName' label='请选择Ip地址'>
                     <Select style={{ width: 300 }}>
                         <Option >
                             无
@@ -79,4 +79,4 @@ const PracticeRight_docker = props =>{
     )
 }
 
-export default PracticeRight_docker
+export default Config_docker

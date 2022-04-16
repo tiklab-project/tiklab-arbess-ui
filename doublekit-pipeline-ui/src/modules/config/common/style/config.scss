@@ -3,6 +3,16 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  &-top{
+    position: fixed;
+    z-index: 99;
+    background: #ffffff;
+    border-bottom: 1px solid #cccccc;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    padding-left: 5vh
+  }
   &-content{
     display: flex;
     flex-direction: row;

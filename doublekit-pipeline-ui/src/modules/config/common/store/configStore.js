@@ -1,37 +1,29 @@
-import {observable, action} from "mobx";
-import qs from "qs";
+import {observable, action, values} from "mobx";
 
 import {
-    FindOnePipelineConfigure,
-    UpdatePipelineConfig,
-} from "../api/config";
+    CreateCode,
+    UpdateConfigure,
+    CreateTest,
+    CreateStructure,
+    CreateDeploy,
+    FindAllConfigure
+} from '../api/config'
 
 class ConfigStore{
     constructor(store) {
         this.store=store
     }
 
-    @observable configureId=''
-    @observable gitProofId=''
-    @observable deployProofId=''
-    @observable codeId=''
-    @observable deployId=''
-    @observable structureId=''
-    @observable testId=''
 
     @action
-    findOnePipelineConfigure=(values)=>{
-        const params = qs.stringify({pipelineId: values})
+    createCode = values =>{
+        const params = new FormData()
+        params.append('pipelineId', values.pipelineId)
+        params.append('taskType',values.taskType)
         return new Promise((resolve, reject) => {
-            FindOnePipelineConfigure(params).then(res=>{
-                console.log('查看流水线配置',res)
-                if(res.data.data){
-                    this.configureId=res.data.data.configureId
-                    this.codeId=res.data.data.pipelineCode.codeId
-                    this.deployId=res.data.data.pipelineDeploy.deployId
-                    this.structureId=res.data.data.pipelineStructure.structureId
-                    this.testId=res.data.data.pipelineTest.testId
-                }
+            CreateCode(params).then(res=>{
+                console.log('代码源',res)
+                localStorage.setItem('codeId',res.data.data)
                 resolve(res.data)
             }).catch(error=>{
                 console.log(error)
@@ -41,46 +33,111 @@ class ConfigStore{
     }
 
     @action
-    updatePipelineConfig = values => {
+    createTest = values =>{
+        const params = new FormData()
+        params.append('pipelineId', values.pipelineId)
+        params.append('taskType',values.taskType)
+        return new Promise((resolve, reject) => {
+            CreateTest(params).then(res=>{
+                console.log('测试',res)
+                localStorage.setItem('testId',res.data.data)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
+    }
+
+    @action
+    createStructure = values =>{
+        const params = new FormData()
+        params.append('pipelineId', values.pipelineId)
+        params.append('taskType',values.taskType)
+        return new Promise((resolve, reject) => {
+            CreateStructure(params).then(res=>{
+                console.log('构建',res)
+                localStorage.setItem('structureId',res.data.data)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
+    }
+
+    @action
+    createDeploy =async values =>{
+        const params = new FormData()
+        params.append('pipelineId', values.pipelineId)
+        params.append('taskType',values.taskType)
+        return new Promise((resolve, reject) => {
+            CreateDeploy(params).then(res=>{
+                console.log('部署',res)
+                localStorage.setItem('deployId',res.data.data)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
+    }
+
+    @action
+    updateConfigure = values =>{
         const params = {
             configureCreateTime:values.configureCreateTime,
-            configureId: values.configureId,
-            pipeline:{
-                pipelineId:values.pipeline.pipelineId
-            },
             pipelineCode:{
-                codeBranch:values.pipelineCode.codeBranch,
                 codeId:values.pipelineCode.codeId,
-                codeName:values.pipelineCode.codeName,
                 codeType:values.pipelineCode.codeType,
+                codeBranch:values.pipelineCode.codeBranch,
+                codeName:values.pipelineCode.codeName,
                 proofName:values.pipelineCode.proofName,
             },
             pipelineTest:{
-                testId: values.pipelineTest.testId,
-                testOrder: values.pipelineTest.testOrder,
+                testId:values.pipelineTest.testId,
                 testType:values.pipelineTest.testType,
+                testOrder:values.pipelineTest.testOrder,
             },
             pipelineStructure:{
+                structureId:values.pipelineStructure.structureId,
+                structureType:values.pipelineStructure.structureType,
                 structureAddress: values.pipelineStructure.structureAddress,
-                structureId: values.pipelineStructure.structureId,
                 structureOrder: values.pipelineStructure.structureOrder,
-                structureType: values.pipelineStructure.structureType,
             },
             pipelineDeploy:{
+                deployId:values.pipelineDeploy.deployId,
+                deployType:values.pipelineDeploy.deployType,
                 deployAddress: values.pipelineDeploy.deployAddress,
-                deployId: values.pipelineDeploy.deployId,
                 deployShell: values.pipelineDeploy.deployShell,
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
-                deployType:values.pipelineDeploy.deployType,
                 proofName: values.pipelineDeploy.proofName,
                 dockerPort:values.pipelineDeploy.dockerPort,
                 mappingPort:values.pipelineDeploy.mappingPort,
             },
         }
-        UpdatePipelineConfig(params).then(res => {
-            console.log('更改流水线配置', res)
-        }).catch(error => {
+        const param = new FormData()
+        param.append('pipelineId',values.pipelineId)
+        param.append('params',JSON.stringify(params))
+        UpdateConfigure(param).then(res=>{
+            console.log('更新流水线配置',res)
+        }).catch(error=>{
             console.log(error)
+        })
+    }
+
+    @action
+    findAllConfigure =async values =>{
+        const params = new FormData()
+        params.append('pipelineId', values.pipelineId)
+        return new Promise((resolve, reject) => {
+            FindAllConfigure(params).then(res=>{
+                console.log('查看所有配置',res)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
         })
     }
 

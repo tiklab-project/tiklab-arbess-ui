@@ -3,18 +3,18 @@ import {Form, Input} from "antd";
 
 const {TextArea} =Input
 
-const PracticeRight_node = props =>{
+const Config_maven = props =>{
 
     return(
         <Fragment>
-            <Form.Item name="nodeAddress" label="文件地址">
+            <Form.Item name="mavenAddress" label="文件地址">
                 <Input />
             </Form.Item>
-            <Form.Item name="nodeOrder" label="执行命令">
+            <Form.Item name="mavenOrder" label="执行命令">
                 <TextArea  autoSize/>
             </Form.Item>
         </Fragment>
     )
 }
 
-export default PracticeRight_node
+export default Config_maven

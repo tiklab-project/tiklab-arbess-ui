@@ -3,7 +3,7 @@ import {Form,Input} from "antd";
 
 const {TextArea} = Input
 
-const PracticeRight_test = props =>{
+const Config_test = props =>{
     return(
         <Form.Item name="testOrder">
             <TextArea  autoSize  />
@@ -11,4 +11,4 @@ const PracticeRight_test = props =>{
     )
 }
 
-export default PracticeRight_test
+export default Config_test

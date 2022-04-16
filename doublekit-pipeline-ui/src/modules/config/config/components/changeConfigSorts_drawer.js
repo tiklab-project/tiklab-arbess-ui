@@ -21,14 +21,10 @@ const ChangeConfigSorts_drawer = props =>{
                 desc:item.desc
             })
          })
-        console.log('nameArray',nameArray)
-        console.log('gData',gData)
         setGData(nameArray)
-        console.log('gData1',gData)
-
     },[data])
 
-    //改变顺序
+    //
     const onDrop = info => {
         console.log(info);
         const dropKey = info.node.key;

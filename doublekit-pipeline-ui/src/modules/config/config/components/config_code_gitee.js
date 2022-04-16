@@ -5,7 +5,7 @@ import SourceCode_GiteeModal from "../../common/component/SourceCode_GIteeModal"
 
 const {Option} =Select
 
-const PracticeRight_code_gitee = props =>{
+const Config_code_gitee = props =>{
 
     const [branch,setBranch]=useState(true)
     const [visible,setVisible]=useState(false)
@@ -51,4 +51,4 @@ const PracticeRight_code_gitee = props =>{
     )
 }
 
-export default PracticeRight_code_gitee
+export default Config_code_gitee

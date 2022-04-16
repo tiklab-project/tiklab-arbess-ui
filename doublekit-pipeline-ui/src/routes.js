@@ -9,7 +9,7 @@ const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
 const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/common/pipelineAdd'))
-// const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/container/config'))
+const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/container/config'))
 const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
 
@@ -46,10 +46,10 @@ export const routers=[
                 path:'/home/new',
                 component: PipelineAdd,
             },
-            // {
-            //     path:'/home/config',
-            //     component:PipelineConfig,
-            // },
+            {
+                path:'/home/config',
+                component:PipelineConfig,
+            },
             {
                 path:'/home/searchresult/:searchresult',
                 component:SearchResult,

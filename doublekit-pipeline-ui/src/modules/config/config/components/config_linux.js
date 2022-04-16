@@ -5,7 +5,7 @@ import DeployAddModal from "../../common/component/deployAddModal";
 const {Option}=Select
 const { TextArea } = Input;
 
-const PracticeRight_linux = props =>{
+const Config_linux = props =>{
 
     const [visible, setVisible] = useState(false)
 
@@ -15,7 +15,7 @@ const PracticeRight_linux = props =>{
                 <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
             </Form.Item>
             <Row>
-                <Form.Item name='linuxPlace' label='请选择Ip地址'>
+                <Form.Item name='linuxProofName' label='请选择Ip地址'>
                     <Select style={{width:300}}>
                         <Option >
                             无
@@ -43,5 +43,5 @@ const PracticeRight_linux = props =>{
     )
 }
 
-export default PracticeRight_linux
+export default Config_linux
 

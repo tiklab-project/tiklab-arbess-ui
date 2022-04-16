@@ -4,7 +4,7 @@ import SourceCode_GitModal from "../../common/component/sourceCode_GitModal";
 
 const {Option} = Select
 
-const PracticeRight_code_git = props =>{
+const ConfigDetails_code_git = props =>{
 
     const [visible,setVisible]=useState(false)
 
@@ -57,4 +57,4 @@ const PracticeRight_code_git = props =>{
     )
 }
 
-export default PracticeRight_code_git
+export default ConfigDetails_code_git

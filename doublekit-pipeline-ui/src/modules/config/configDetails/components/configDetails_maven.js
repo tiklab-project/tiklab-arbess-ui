@@ -3,7 +3,7 @@ import {Form, Input} from "antd";
 
 const {TextArea} =Input
 
-const PracticeRight_maven = props =>{
+const ConfigDetails_maven = props =>{
 
     return(
         <Fragment>
@@ -17,4 +17,4 @@ const PracticeRight_maven = props =>{
     )
 }
 
-export default PracticeRight_maven
+export default ConfigDetails_maven
