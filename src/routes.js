@@ -4,7 +4,7 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Login=AsyncComponent(()=>import('./modules/login/login'))
 const Home=AsyncComponent(()=>import('./modules/home/home'))
-const Index=AsyncComponent(()=>import('./modules/home/index'))
+const Index=AsyncComponent(()=>import('./modules/home'))
 const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
