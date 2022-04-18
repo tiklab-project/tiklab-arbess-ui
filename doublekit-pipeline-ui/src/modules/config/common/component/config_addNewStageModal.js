@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Modal,message} from "antd";
-import './optModal.scss'
+import './config_addNewStageModal.scss'
 
 const lis=[
     {
@@ -38,7 +38,7 @@ const lis=[
     }
 ]
 
-const OptModal = props =>{
+const Config_addNewStageModal = props =>{
 
     const {newStageVisible,setNewStageVisible,data,setData,
         pipelineId,createTest,createStructure,createDeploy
@@ -67,7 +67,6 @@ const OptModal = props =>{
                         }
                 }
                 createTest(paramsTest).then(res=>{
-                    console.log('测试',res)
                     newData.push({
                         dataId:res.data,
                         title:group.title,
@@ -92,7 +91,6 @@ const OptModal = props =>{
                         }
                 }
                 createStructure(paramsStructure).then(res=>{
-                    console.log('构建',res)
                     newData.push({
                         dataId:res.data,
                         title:group.title,
@@ -117,7 +115,6 @@ const OptModal = props =>{
                         }
                 }
                 createDeploy(paramsDeploy).then(res=>{
-                    console.log('部署',res)
                     newData.push({
                         dataId:res.data,
                         title:group.title,
@@ -173,4 +170,4 @@ const OptModal = props =>{
     )
 }
 
-export default OptModal
+export default Config_addNewStageModal

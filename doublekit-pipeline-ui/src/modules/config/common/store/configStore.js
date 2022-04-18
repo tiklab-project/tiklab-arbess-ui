@@ -6,14 +6,13 @@ import {
     CreateTest,
     CreateStructure,
     CreateDeploy,
-    FindAllConfigure
+    FindAllConfigure,
 } from '../api/config'
 
 class ConfigStore{
     constructor(store) {
         this.store=store
     }
-
 
     @action
     createCode = values =>{
@@ -67,7 +66,7 @@ class ConfigStore{
     }
 
     @action
-    createDeploy =async values =>{
+    createDeploy = values =>{
         const params = new FormData()
         params.append('pipelineId', values.pipelineId)
         params.append('taskType',values.taskType)
@@ -89,25 +88,25 @@ class ConfigStore{
             configureCreateTime:values.configureCreateTime,
             pipelineCode:{
                 codeId:values.pipelineCode.codeId,
-                codeType:values.pipelineCode.codeType,
+                type:values.pipelineCode.type,
                 codeBranch:values.pipelineCode.codeBranch,
                 codeName:values.pipelineCode.codeName,
                 proofName:values.pipelineCode.proofName,
             },
             pipelineTest:{
                 testId:values.pipelineTest.testId,
-                testType:values.pipelineTest.testType,
+                type:values.pipelineTest.type,
                 testOrder:values.pipelineTest.testOrder,
             },
             pipelineStructure:{
                 structureId:values.pipelineStructure.structureId,
-                structureType:values.pipelineStructure.structureType,
+                type:values.pipelineStructure.type,
                 structureAddress: values.pipelineStructure.structureAddress,
                 structureOrder: values.pipelineStructure.structureOrder,
             },
             pipelineDeploy:{
                 deployId:values.pipelineDeploy.deployId,
-                deployType:values.pipelineDeploy.deployType,
+                type:values.pipelineDeploy.type,
                 deployAddress: values.pipelineDeploy.deployAddress,
                 deployShell: values.pipelineDeploy.deployShell,
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
@@ -127,7 +126,7 @@ class ConfigStore{
     }
 
     @action
-    findAllConfigure =async values =>{
+    findAllConfigure = values =>{
         const params = new FormData()
         params.append('pipelineId', values.pipelineId)
         return new Promise((resolve, reject) => {

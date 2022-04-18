@@ -1,16 +1,12 @@
 import React, {Fragment, useState} from "react";
 import {Button, Form, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
-import SourceCode_GiteeModal from "../../common/component/SourceCode_GIteeModal";
 
 const {Option} =Select
 
 const Config_code_gitee = props =>{
 
-    const [branch,setBranch]=useState(true)
     const [visible,setVisible]=useState(false)
-    const [readOnly,setReadOnly] =useState(false)
-    const [proofUsername,setProofUsername] =useState('')
 
     return(
         <Fragment>
@@ -42,11 +38,6 @@ const Config_code_gitee = props =>{
                 </Select>
             </Form.Item>
 
-            <SourceCode_GiteeModal
-                visible={visible}
-                setVisible={setVisible}
-                proofUsername={proofUsername}
-            />
         </Fragment>
     )
 }

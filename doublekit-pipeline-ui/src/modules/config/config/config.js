@@ -1,25 +1,27 @@
 import React, {useState, useEffect, useRef} from "react";
-import '../../common/style/config.scss';
+import '../common/style/config.scss';
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {Button, Form, Input} from "antd";
-import OptModal from "../modal/optModal";
-import AddCodeModal from "../modal/addCodeModal";
-import ChangeConfigSorts_drawer from "../components/changeConfigSorts_drawer";
-import ConfigTop from "../components/configTop";
-import Config_code from "../components/config_code";
-import Config_test from "../components/config_test";
-import Config_maven from "../components/config_maven";
-import Config_node from "../components/config_node";
-import Config_linux from "../components/config_linux";
-import Config_docker from "../components/config_docker";
-import moment from "../../../../common/moment/moment";
+import Config_addNewStafeModal from "../common/component/config_addNewStageModal";
+import Config_addCodeModal from "../common/component/config_addCodeModal";
+import ChangeConfigSorts_drawer from "../common/component/changeConfigSorts_drawer";
+import ConfigTop from "./configTop";
+import Config_code from "../common/component/config_code";
+import Config_test from "../common/component/config_test";
+import Config_maven from "../common/component/config_maven";
+import Config_node from "../common/component/config_node";
+import Config_linux from "../common/component/config_linux";
+import Config_docker from "../common/component/config_docker";
+import Config_addNewStage from "../common/component/config_addNewStage";
+import Config_btnCover from "../common/component/config_btnCover";
+import moment from "../../../common/moment/moment";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 
 const Config = props =>{
 
     const {ConfigStore} = props
-    const {createCode,createTest,createStructure,createDeploy,updateConfigure
+    const {createCode,createTest,createStructure,createDeploy,updateConfigure,
     } = ConfigStore
 
     const [newStageVisible, setNewStageVisible] = useState(false)
@@ -78,7 +80,16 @@ const Config = props =>{
     }
 
     const deletePart = (group,index) =>{
-
+        const params ={
+            pipelineId:pipelineId,
+            taskId:group.dataId
+        }
+        for (let i = 0 ;i<data.length;i++){
+            if(data[i].dataId === group.dataId){
+                data.splice(i,1)
+            }
+            setData([...data])
+        }
     }
 
     const inputContent = group =>{
@@ -148,13 +159,13 @@ const Config = props =>{
                         deployType:31,
                         deployAddress: value.linuxAddress,
                         deployTargetAddress:value.linuxProofName,
-                        proofName: value.linuxPlace,
+                        proofName: value.linuxProofName,
                     }
                     break
                 case 'docker':
                     deployList = {
                         deployType:32,
-                        deployAddress: value.linuxAddress,
+                        deployAddress: value.dockerAddress,
                         deployTargetAddress:value.dockerTargetAddress,
                         proofName: value.dockerProofName,
                     }
@@ -166,31 +177,31 @@ const Config = props =>{
             pipelineId:pipelineId,
             pipelineCode:{
                 codeId:codeId,
-                codeType:codeList && codeList.codeType ,
+                type:codeList && codeList.codeType ,
                 codeBranch:codeList && codeList.codeBranch,
                 codeName:codeList && codeList.codeName,
                 proofName:value.gitProofName,
             },
             pipelineTest:{
                 testId:testId,
-                testType:testList && testList.testType,
+                type:testList && testList.testType,
                 testOrder: testList && testList.testOrder,
             },
             pipelineStructure:{
                 structureId:structureId,
-                structureType:structureList && structureList.structureType,
+                type:structureList && structureList.structureType,
                 structureAddress:structureList && structureList.structureAddress,
                 structureOrder:structureList && structureList.structureOrder,
             },
             pipelineDeploy:{
                 deployId:deployId,
-                deployType:deployList && deployList.deployType,
+                type:deployList && deployList.deployType,
                 deployAddress: deployList && deployList.deployAddress,
                 deployTargetAddress: deployList && deployList.deployTargetAddress,
                 proofName: deployList && deployList.proofName,
-                deployShell:value.linuxShell,
-                dockerPort:value.dockerBootPort,
-                mappingPort:value.dockerMappingPort,
+                deployShell:value.deployShell,
+                dockerPort:value.dockerPort,
+                mappingPort:value.mappingPort,
             }
         }
 
@@ -200,8 +211,6 @@ const Config = props =>{
     }
 
     const newStage = () =>{
-
-        console.log('data',data)
 
         return  data && data.map((group,index)=>{
             return(
@@ -270,26 +279,19 @@ const Config = props =>{
                             >
                                 <Config_code
                                     codeData={codeData}
+                                    setCodeData={setCodeData}
                                     setCodeVisible={setCodeVisible}
                                 />
                                 { newStage()}
-
-                                <div className='config-details-tail'>
-                                    <div className='config-details-Headline'>新阶段</div>
-                                    <div
-                                        className='config-details-handle'
-                                        onClick={()=> setNewStageVisible(true)}
-                                    >新任务</div>
-                                </div>
-                                <Form.Item style={{marginTop:20}}>
-                                    <Button htmlType="submit" type='primary'>保存</Button>
-                                </Form.Item>
+                                <Config_addNewStage
+                                    setNewStageVisible={setNewStageVisible}
+                                />
+                                <Config_btnCover/>
                             </Form>
                         </div>
-
                     </div>
 
-                    <OptModal
+                    <Config_addNewStafeModal
                         data={data}
                         setData={setData}
                         newStageVisible={newStageVisible}
@@ -300,7 +302,7 @@ const Config = props =>{
                         createDeploy={createDeploy}
                     />
 
-                    <AddCodeModal
+                    <Config_addCodeModal
                         codeVisible={codeVisible}
                         setCodeVisible={setCodeVisible}
                         setCodeData={setCodeData}

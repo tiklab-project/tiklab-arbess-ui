@@ -1,6 +1,5 @@
 import React, {Fragment, useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
-import DeployAddModal from "../../common/component/deployAddModal";
 
 const {Option}=Select
 
@@ -44,7 +43,7 @@ const Config_docker = props =>{
                 </Button>
             </Row>
             <Form.Item
-                name='dockerBootPort'
+                name='dockerPort'
                 label='启动端口'
                 style={{ display: 'inline-block'}}
                 rules={[
@@ -56,7 +55,7 @@ const Config_docker = props =>{
                 <Input style={{width:200}}/>
             </Form.Item>
             <Form.Item
-                name='dockerMappingPort'
+                name='mappingPort'
                 label='映射端口'
                 style={{ display: 'inline-block',  margin: '1px 3px' }}
                 rules={[
@@ -71,10 +70,6 @@ const Config_docker = props =>{
                 <Input/>
             </Form.Item>
 
-            <DeployAddModal
-                visible={visible}
-                setVisible={setVisible}
-            />
         </Fragment>
     )
 }

@@ -1,6 +1,5 @@
 import React, {Fragment,useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
-import DeployAddModal from "../../common/component/deployAddModal";
 
 const {Option}=Select
 const { TextArea } = Input;
@@ -32,13 +31,9 @@ const Config_linux = props =>{
             <Form.Item name='linuxAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
-            <Form.Item name='linuxShell' label='shell命令'>
+            <Form.Item name='deployShell' label='shell命令'>
                 <TextArea autoSize/>
             </Form.Item>
-            <DeployAddModal
-                visible={visible}
-                setVisible={setVisible}
-            />
         </Fragment>
     )
 }

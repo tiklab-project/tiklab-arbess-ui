@@ -12,7 +12,7 @@ const lis=[
     },
 ]
 
-const AddCodeModal = props =>{
+const Config_addCodeModal = props =>{
 
     const {setCodeData,createCode,pipelineId,codeVisible,setCodeVisible} = props
 
@@ -59,4 +59,4 @@ const AddCodeModal = props =>{
     )
 }
 
-export default AddCodeModal
+export default Config_addCodeModal

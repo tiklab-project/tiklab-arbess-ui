@@ -1,10 +1,9 @@
 import React, {Fragment,useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
-import SourceCode_GitModal from "../../common/component/sourceCode_GitModal";
 
 const {Option} = Select
 
-const ConfigDetails_code_git = props =>{
+const Config_code_git = props =>{
 
     const [visible,setVisible]=useState(false)
 
@@ -49,12 +48,9 @@ const ConfigDetails_code_git = props =>{
                 </Button>
             </Row>
 
-            <SourceCode_GitModal
-                visible={visible}
-                setVisible={setVisible}
-            />
+
         </Fragment>
     )
 }
 
-export default ConfigDetails_code_git
+export default Config_code_git

@@ -1,27 +1,26 @@
 import React, {useEffect} from "react";
-import ConfigDetails_code_git from "./configDetails_code_git";
-import ConfigDetails_code_gitee from "./configDetails_code_gitee";
+import Config_code_git from "./config_code_git";
+import Config_code_gitee from "./config_code_gitee";
 import {CloseOutlined} from "@ant-design/icons";
 
-const ConfigDetails_code = props =>{
+const Config_code = props =>{
 
-    const {setCodeVisible,codeData} = props
+    const {setCodeVisible,codeData,setCodeData} = props
 
     const addCode = () =>{
         setCodeVisible(true)
     }
 
     const deletePart = () =>{
-        console.log(codeData.codeId)
+        setCodeData('')
     }
-
     const inputCode = () =>{
         if(codeData){
             switch (codeData.desc){
                 case '通用Git' :
-                    return  <ConfigDetails_code_git/>
+                    return  <Config_code_git/>
                 case 'Gitee' :
-                    return <ConfigDetails_code_gitee/>
+                    return <Config_code_gitee/>
             }
         }
         return codeData
@@ -62,4 +61,4 @@ const ConfigDetails_code = props =>{
         </div>
     )
 }
-export default ConfigDetails_code
+export default Config_code

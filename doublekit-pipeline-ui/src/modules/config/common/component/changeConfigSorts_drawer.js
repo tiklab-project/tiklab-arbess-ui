@@ -5,12 +5,13 @@ import {CloseOutlined} from "@ant-design/icons";
 
 const ChangeConfigSorts_drawer = props =>{
 
-    const {changeSortVisible,setChangeSortVisible,data,setData} = props
+    const {changeSortVisible,setChangeSortVisible,data,setData,
+    } = props
 
 
-    const [gData,setGData] = useState([...data])
+    const [gData,setGData] = useState([])
 
-    let nameArray = []
+    const nameArray = []
     useEffect(()=>{
         data && data.map((item,index)=>{
             nameArray.push({
@@ -21,7 +22,8 @@ const ChangeConfigSorts_drawer = props =>{
                 desc:item.desc
             })
          })
-        setGData(nameArray)
+        setGData([...nameArray])
+
     },[data])
 
     //
