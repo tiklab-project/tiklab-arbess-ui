@@ -11,6 +11,7 @@ const PipelineTabs_all= props=>{
 
     //初始化表格
     useEffect(()=>{
+        // findAllPipelineStatus()
         const se = setTimeout(()=> findAllPipelineStatus(),100)
         return ()=> clearTimeout(se)
     },[])

@@ -4,7 +4,7 @@ import {withRouter} from "react-router";
 import './structureHistory.scss'
 import StructureHistoryScreenModal from "./structureHistoryScreenModal";
 import {observer,inject} from "mobx-react";
-import {SettingOutlined,EyeOutlined} from "@ant-design/icons";
+import {SettingOutlined} from "@ant-design/icons";
 
 const StructureHistory=props=>{
 
@@ -14,7 +14,6 @@ const StructureHistory=props=>{
     const pipelineId=localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-        // selectHistoryDetails(pipelineId)
         const se = setTimeout(()=>selectHistoryDetails(pipelineId),100)
         return ()=> clearTimeout(se)
     },[])
@@ -28,7 +27,6 @@ const StructureHistory=props=>{
 
     //构建详情
     const goBuildDetails = record =>{
-        localStorage.setItem('logId',record.logId)
         localStorage.setItem('historyId',record.historyId)
         props.history.push(`/home/task/build/${record.historyId}`)
     }
@@ -43,7 +41,7 @@ const StructureHistory=props=>{
             title: '构建',
             dataIndex: 'historyId',
             key: 'historyId',
-            render:text =>{
+            render:(text,record,index) =>{
                 return(
                     <span>
                         # {text}
@@ -53,8 +51,8 @@ const StructureHistory=props=>{
         },
         {
             title: '状态',
-            dataIndex: 'historyStatus',
-            key: 'historyStatus',
+            dataIndex: 'runStatus',
+            key: 'runStatus',
             render:text =>{
                 switch (text){
                     case 0:
@@ -74,13 +72,13 @@ const StructureHistory=props=>{
         },
         {
             title: '构建时间',
-            dataIndex: 'historyCreateTime',
-            key: 'historyCreateTime',
+            dataIndex: 'createTime',
+            key: 'createTime',
         },
         {
             title: '执行人',
-            dataIndex: 'pipelineName',
-            key: 'pipelineName',
+            dataIndex: 'execName',
+            key: 'execName',
             render:(text, record) =>{
                 return(
                     <span
@@ -96,22 +94,22 @@ const StructureHistory=props=>{
         },
         {
             title: '执行方式',
-            dataIndex: 'historyWay',
-            key: 'historyWay',
+            dataIndex: 'runWay',
+            key: 'runWay',
             render:text =>{
                switch (text) {
                    case 1:
-                       return <span>
-                                用户点击执行
-                              </span>
+                       return   <span>
+                                    用户点击执行
+                                </span>
                }
             }
 
         },
         {
             title: '执行时间',
-            dataIndex: 'historyTime',
-            key: 'historyTime',
+            dataIndex: 'execTime',
+            key: 'execTime',
         },
         {
             title: <SettingOutlined />,
@@ -124,7 +122,6 @@ const StructureHistory=props=>{
                         }
                         className='structure-history-table'
                     >
-                        {/*<EyeOutlined/>*/}
                         查看
                     </span>
                 )

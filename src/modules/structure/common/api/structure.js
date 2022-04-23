@@ -30,7 +30,7 @@ export function  SelectHistoryDetails (data){
 //历史详情日志
 export function  FindHistoryLog (data){
     return serviceLoc.request({
-        url:'/pipelineLog/findOneLog',
+        url:'/pipelineLog/findAllLog',
         method:'post',
         data
     })
@@ -40,6 +40,15 @@ export function  FindHistoryLog (data){
 export function  DeleteHistoryLog (data){
     return serviceLoc.request({
         url:'/pipelineHistory/deleteHistory',
+        method:'post',
+        data
+    })
+}
+
+//查看所有构建
+export function  FindAll(data){
+    return serviceLoc.request({
+        url:'/pipelineConfigure/findAll',
         method:'post',
         data
     })

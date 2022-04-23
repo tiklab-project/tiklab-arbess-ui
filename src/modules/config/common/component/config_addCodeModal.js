@@ -14,22 +14,17 @@ const lis=[
 
 const Config_addCodeModal = props =>{
 
-    const {setCodeData,createCode,pipelineId,codeVisible,setCodeVisible} = props
+    const {setCodeData,codeVisible,setCodeVisible,setIsPrompt} = props
 
     const handleClick = (item,index) =>{
         let newCode = { }
-        const params = {
-            pipelineId:pipelineId,
-            taskType:index+1
+        newCode = {
+            codeId:index,
+            desc:item.desc
         }
-        createCode(params).then(res=>{
-            newCode = {
-                codeId:res.data,
-                desc:item.desc,
-            }
-            setCodeData(newCode)
-            setCodeVisible(false)
-        })
+        setCodeData(newCode)
+        setCodeVisible(false)
+        setIsPrompt(true)
     }
 
     return(

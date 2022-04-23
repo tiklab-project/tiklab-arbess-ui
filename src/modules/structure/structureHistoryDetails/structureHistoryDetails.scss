@@ -3,11 +3,11 @@
   padding: 20px;
   &-top{
     position: fixed;
-    z-index: 90;
+    z-index:110;
     top: 55px;
-    width: 90%;
+    left: 500px;
+    width: 75%;
     background-color: white;
-    border-bottom: 1px solid #d9d9d9;
     &-btn{
       text-align: right;
       padding-top: 18px;
@@ -38,9 +38,13 @@
           }
         }
         &-bottom{
-          cursor: pointer;
-          color: #1890ff;
           text-align: right;
+          &-span{
+            display: inline-block;
+            cursor: pointer;
+            color: #1890ff;
+            width: 30px; 
+          }
         }
       }
     }

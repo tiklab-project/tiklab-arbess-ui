@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Modal,message} from "antd";
 import './config_addNewStageModal.scss'
 
@@ -40,95 +40,39 @@ const lis=[
 
 const Config_addNewStageModal = props =>{
 
-    const {newStageVisible,setNewStageVisible,data,setData,
-        pipelineId,createTest,createStructure,createDeploy
+    const {newStageVisible,setNewStageVisible,data,setData,setIsPrompt
     } = props
 
-    const handleClick = (group,item)=>{
-        let paramsTest,paramsStructure,paramsDeploy = {}
+    const handleClick = (group,item,index)=>{
         const newData = [...data]
-        const name = data && data.map(item => item.title);
-        if(name.includes(group.title)){
-            message.info({
-                content: '已经存在',
-                className: 'custom-class',
-                style: {
-                    marginTop: '9vh',
-                    marginLeft:'5vh'
-                },
-            });
-        }else {
-            if(group.title==='测试'){
-                switch (item.tpl){
-                    case '单元测试':
-                        paramsTest = {
-                            pipelineId:pipelineId,
-                            taskType:11
+        const name = data && data.map(item => item.desc);
+        const groupDesc = group.desc.map(item=>item.tpl)
+        for(let i =0;i<name.length;i++){
+            for(let j=0;j<groupDesc.length;j++){
+                if(name[i] == groupDesc[j]){
+                    message.info({
+                        content: '已经存在',
+                        className: 'custom-class',
+                        style: {
+                            marginTop: '9vh',
+                            marginLeft:'5vh'
                         }
+                    }) 
+                    return
                 }
-                createTest(paramsTest).then(res=>{
-                    newData.push({
-                        dataId:res.data,
-                        title:group.title,
-                        desc:item.tpl
-                    })
-                    setData(newData)
-                    setNewStageVisible(false)
-                })
             }
-            if(group.title==='构建'){
-                switch (item.tpl) {
-                    case 'maven':
-                        paramsStructure = {
-                            pipelineId:pipelineId,
-                            taskType:21
-                        }
-                        break
-                    case 'node':
-                        paramsStructure = {
-                            pipelineId:pipelineId,
-                            taskType:22
-                        }
-                }
-                createStructure(paramsStructure).then(res=>{
-                    newData.push({
-                        dataId:res.data,
-                        title:group.title,
-                        desc:item.tpl
-                    })
-                    setData(newData)
-                    setNewStageVisible(false)
-                })
-            }
-            if(group.title==='部署'){
-                switch (item.tpl) {
-                    case 'linux':
-                        paramsDeploy = {
-                            pipelineId:pipelineId,
-                            taskType:31
-                        }
-                        break
-                    case 'docker':
-                        paramsDeploy = {
-                            pipelineId:pipelineId,
-                            taskType:32
-                        }
-                }
-                createDeploy(paramsDeploy).then(res=>{
-                    newData.push({
-                        dataId:res.data,
-                        title:group.title,
-                        desc:item.tpl
-                    })
-                    setData(newData)
-                    setNewStageVisible(false)
-                })
-            }
-        }
+        } 
+        newData.push({
+            dataId:index,
+            title:group.title,
+            desc:item.tpl
+        })
+        setData(newData)
+        setIsPrompt(true)
+        setNewStageVisible(false) 
     }
 
     const group = ( ) =>{
-
         return lis && lis.map(group=>{
             return(
                 <div className='group' id={group.id} key={group.id}>
@@ -138,7 +82,7 @@ const Config_addNewStageModal = props =>{
                             group.desc &&  group.desc.map((item,index)=>{
                                 return(
                                     <div
-                                        onClick={()=>handleClick(group,item)}
+                                        onClick={()=>handleClick(group,item,index)}
                                         className='group-desc'
                                         key={item.tpl}
                                     >

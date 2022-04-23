@@ -6,10 +6,12 @@ import {
     FindStructureState,
     FindHistoryLog,
     SelectHistoryDetails,
-    DeleteHistoryLog
+    DeleteHistoryLog,
+    FindAll
 } from "../api/structure";
 
 class StructureStore {
+    
     constructor(store) {
         this.store=store
     }
@@ -17,6 +19,7 @@ class StructureStore {
     @observable buildHistoryList=[]
     @observable historyLog=''
     @observable logList=''
+    @observable structureStepList=[]
 
     @action
     pipelineStartStructure = async(values) =>{
@@ -46,9 +49,9 @@ class StructureStore {
 
     @action
     selectHistoryDetails = values =>{
-        const formData = new FormData()
-        formData.append("pipelineId", values)
-        SelectHistoryDetails(formData).then(res=>{
+        const params = new FormData()
+        params.append("pipelineId", values)
+        SelectHistoryDetails(params).then(res=>{
             this.buildHistoryList=res.data.data
             console.log("构建历史",res)
         }).catch(error=>{
@@ -58,7 +61,7 @@ class StructureStore {
 
     @action
     findHistoryLog = values =>{
-        const params = qs.stringify({logId: values})
+        const params = qs.stringify({historyId: values})
         FindHistoryLog(params).then(res=>{
             console.log("历史日志",res)
             this.historyLog=res.data.data
@@ -76,6 +79,19 @@ class StructureStore {
             console.log(error)
         })
     }
+
+    @action
+    findAll = values =>{
+        const params = new FormData()
+        params.append("pipelineId", values)
+        FindAll(params).then(res=>{
+            console.log("配置流程",res)
+            this.structureStepList=res.data.data
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
 
 }
 

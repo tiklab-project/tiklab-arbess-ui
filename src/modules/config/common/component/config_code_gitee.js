@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from "react";
 import {Button, Form, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
+import Config_code_giteeModal  from "./config_code_giteeModal";
 
 const {Option} =Select
 
@@ -37,7 +38,11 @@ const Config_code_gitee = props =>{
                     </Option>
                 </Select>
             </Form.Item>
-
+            
+            <Config_code_giteeModal
+                visible={visible}
+                setVisible={setVisible}
+            />
         </Fragment>
     )
 }

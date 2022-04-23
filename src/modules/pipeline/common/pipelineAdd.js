@@ -1,5 +1,5 @@
-import React, { useState,useEffect} from "react";
-import {Form, Input, Button} from "antd";
+import React, { useState,useEffect,useRef} from "react";
+import {Form, Input, Button, message} from "antd";
 import './pipelineAdd.scss'
 import {observer,inject} from "mobx-react";
 import moment from "../../../common/moment/moment";
@@ -22,11 +22,16 @@ const PipelineAdd = props => {
     const {PipelineStore}=props
     const {createPipeline,pipelineList,findAllPipelineStatus}=PipelineStore
 
+    const inputRef = useRef();
     const [liStatus, setLiStatus] = useState(0)
 
     //获取所有pipelinList，然后对pipelineName进行校验
     useEffect(()=>{
         findAllPipelineStatus()
+    },[])
+
+    useEffect(()=>{
+        inputRef.current.focus()
     },[])
 
     //点击类型选择
@@ -46,6 +51,8 @@ const PipelineAdd = props => {
                 localStorage.setItem('pipelineId',res.data)
                 localStorage.setItem('pipelineName',value.pipelineName)
                 props.history.push({pathname:'/home/config',value})
+            }else{
+                message.info('添加失败')
             }
         })
     }
@@ -80,6 +87,7 @@ const PipelineAdd = props => {
                 >
                     <Input
                         style={{width:400}}
+                        ref={inputRef}
                     />
                 </Form.Item>
             </Form>

@@ -8,7 +8,9 @@ const StructureHistoryDetailsBottom = props =>{
        <Fragment>
            <h3>日志</h3>
            <div className='structureHistory-details-bottom'>
-               {historyLog && historyLog.logRunLog}
+               {historyLog && historyLog.map(item=>{
+                   return item.runLog
+               })}
            </div>
        </Fragment>
     )

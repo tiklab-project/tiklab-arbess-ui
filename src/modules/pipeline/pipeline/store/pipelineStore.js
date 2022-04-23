@@ -10,9 +10,11 @@ import {
 } from "../api/pipeline";
 
 class PipelineStore{
+
     constructor(store) {
         this.store=store
     }
+    
     @observable pipelineList=[]
     @observable searchPipelineList = []
 

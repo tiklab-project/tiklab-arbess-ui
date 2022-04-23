@@ -18,15 +18,6 @@ export function  FindAllGitProof(data){
     })
 }
 
-//获取源码凭证名称
-export function  FindOneProof(data){
-    return serviceLoc.request({
-        url:'/proof/findOneProof',
-        method:'post',
-        data
-    })
-}
-
 //查看所有部署凭证信息
 export function  FindAllDeployProof(data){
     return serviceLoc.request({

@@ -8,7 +8,6 @@ const ChangeConfigSorts_drawer = props =>{
     const {changeSortVisible,setChangeSortVisible,data,setData,
     } = props
 
-
     const [gData,setGData] = useState([])
 
     const nameArray = []
@@ -26,7 +25,6 @@ const ChangeConfigSorts_drawer = props =>{
 
     },[data])
 
-    //
     const onDrop = info => {
         console.log(info);
         const dropKey = info.node.key;
@@ -42,7 +40,6 @@ const ChangeConfigSorts_drawer = props =>{
             }
         };
         const mData = [...gData];
-
         let dragObj;
         loop(mData, dragKey, (item, index, arr) => {
             arr.splice(index, 1);
@@ -60,7 +57,6 @@ const ChangeConfigSorts_drawer = props =>{
             ar.splice(i + 1, 0, dragObj);
         }
         setGData(mData)
-
         //如果改变控件，然后改变data
         let cData = []
         mData && mData.map(item=>{
@@ -71,7 +67,6 @@ const ChangeConfigSorts_drawer = props =>{
             })
         })
         setData(cData)
-
     }
 
     return (

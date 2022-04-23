@@ -13,13 +13,12 @@ const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/config')
 const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
 
-
 const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
-const Structure=AsyncComponent(()=>import('./modules/structure/structure/containers/structure'))
+const Structure=AsyncComponent(()=>import('./modules/structure/structure/structure'))
 const StructureHistory=AsyncComponent(()=>import('./modules/structure/structureHistory/structureHistory'))
 const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
-const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/container/structureHistoryDetails'))
+const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/structureHistoryDetails'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
 
 export const routers=[

@@ -3,9 +3,9 @@ import {Button, Form, Input, Row, Select} from "antd";
 
 const {Option}=Select
 
-const Config_docker = props =>{
+const Config_deploy_docker = props =>{
 
-    const [visible, setVisible] = useState(false)
+    const {setDeployVisible,findAllDeployProof,allDeployProofList} = props
 
     const validate = (rule,value) =>{
         if (!value) {
@@ -21,6 +21,14 @@ const Config_docker = props =>{
         }
     }
 
+    const clickFindAllDeploy = () =>{
+        findAllDeployProof()
+    }
+
+    const changeDeploySelect = value =>{
+        localStorage.setItem('deployProofId',value)
+    }
+
     return(
         <Fragment>
             <Form.Item name='dockerTargetAddress' label='请输入文件地址'>
@@ -28,15 +36,28 @@ const Config_docker = props =>{
             </Form.Item>
             <Row>
                 <Form.Item name='dockerProofName' label='请选择Ip地址'>
-                    <Select style={{ width: 300 }}>
+                    <Select 
+                        style={{ width: 300 }}
+                        onChange={changeDeploySelect}
+                        onClick={clickFindAllDeploy}
+                    >
                         <Option >
                             无
                         </Option>
+                        {
+                            allDeployProofList && allDeployProofList.map(item=>{
+                                return(
+                                    <Option key={item.proofId} value={item.proofId} >
+                                        { item.proofDescribe+ " (" + item.proofIp + ")"}
+                                    </Option>
+                                )
+                            })
+                        }
 
                     </Select>
                 </Form.Item>
                 <Button
-                    onClick={()=>setVisible(true)}
+                    onClick={()=>setDeployVisible(true)}
                     className='config-details-link'
                 >
                     添加
@@ -74,4 +95,4 @@ const Config_docker = props =>{
     )
 }
 
-export default Config_docker
+export default Config_deploy_docker

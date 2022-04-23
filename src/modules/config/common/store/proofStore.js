@@ -1,27 +1,23 @@
 import {observable, action} from "mobx";
-import qs from "qs";
 
 import {
     CreateProof,
     FindAllGitProof,
     FindAllDeployProof,
-    FindOneProof
 } from "../api/proof";
 
 class ProofStore{
+    
     constructor(store) {
         this.store=store
     }
-
-    @observable oneGitProof=''
-    @observable oneDeployProof=''
 
     @observable allGitProofList=[]
     @observable allDeployProofList=[]
 
     @action
-    createProof = values =>{
-        const param = {
+    createProof =async values =>{
+        const params = {
             proofScope:values.proofScope, //1或2
             proofType:values.proofType,
             proofName:values.proofName,
@@ -29,34 +25,10 @@ class ProofStore{
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe,
             proofPort:values.proofPort,
+            proofIp:values.proofIp,
         }
-        CreateProof(param).then(res=>{
-            console.log("创建凭证",res)
-        }).catch(error=>{
-            console.log(error)
-        })
-    }
-
-    @action
-    findOneGitProof =async  values =>{
-        const params = qs.stringify({proofId: values})
-        await FindOneProof(params).then(res=>{
-            this.oneGitProof=res.data.data
-            console.log("获取Git某一凭证信息",res)
-        }).catch(error=>{
-            console.log(error)
-        })
-    }
-
-    @action
-    findOneDeployProof = async values =>{
-        const params = qs.stringify({proofId: values})
-        await FindOneProof(params).then(res=>{
-            this.oneDeployProof=res.data.data
-            console.log("获取部署某一凭证信息",res)
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await CreateProof(params)
+        return data.data
     }
 
     @action

@@ -1,11 +1,22 @@
 import React, {Fragment,useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
+import Config_code_gitModal from "./config_code_gitModal";
 
 const {Option} = Select
 
 const Config_code_git = props =>{
 
+    const {createProof,findAllGitProof,allGitProofList} = props
+
     const [visible,setVisible]=useState(false)
+
+    const clickFindAllGit = () =>{
+        findAllGitProof()
+    }
+
+    const changeGitSelect = value =>{
+        localStorage.setItem('gitProofId',value)
+    }
 
     return(
         <Fragment>
@@ -34,10 +45,22 @@ const Config_code_git = props =>{
                 >
                     <Select
                         style={{ width: 300 }}
+                        onClick={clickFindAllGit}
+                        onChange={changeGitSelect}
                     >
                         <Option>
                             无
                         </Option>
+                        {
+                            allGitProofList && allGitProofList.map(item=>{
+                                return(
+                                    <Option key={item.proofId} >
+                                        { item.proofName+ "(" + item.proofUsername + ")"}
+                                    </Option>
+                                )
+                            })
+                        }
+
                     </Select>
                 </Form.Item>
                 <Button
@@ -47,7 +70,12 @@ const Config_code_git = props =>{
                     添加
                 </Button>
             </Row>
-
+            
+            <Config_code_gitModal
+                visible={visible}
+                setVisible={setVisible}
+                createProof={createProof}
+            />
 
         </Fragment>
     )

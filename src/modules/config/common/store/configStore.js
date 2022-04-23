@@ -1,127 +1,69 @@
 import {observable, action, values} from "mobx";
 
 import {
-    CreateCode,
     UpdateConfigure,
-    CreateTest,
-    CreateStructure,
-    CreateDeploy,
     FindAllConfigure,
 } from '../api/config'
 
 class ConfigStore{
+    
     constructor(store) {
         this.store=store
     }
 
     @action
-    createCode = values =>{
-        const params = new FormData()
-        params.append('pipelineId', values.pipelineId)
-        params.append('taskType',values.taskType)
-        return new Promise((resolve, reject) => {
-            CreateCode(params).then(res=>{
-                console.log('代码源',res)
-                localStorage.setItem('codeId',res.data.data)
-                resolve(res.data)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
-
-    @action
-    createTest = values =>{
-        const params = new FormData()
-        params.append('pipelineId', values.pipelineId)
-        params.append('taskType',values.taskType)
-        return new Promise((resolve, reject) => {
-            CreateTest(params).then(res=>{
-                console.log('测试',res)
-                localStorage.setItem('testId',res.data.data)
-                resolve(res.data)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
-
-    @action
-    createStructure = values =>{
-        const params = new FormData()
-        params.append('pipelineId', values.pipelineId)
-        params.append('taskType',values.taskType)
-        return new Promise((resolve, reject) => {
-            CreateStructure(params).then(res=>{
-                console.log('构建',res)
-                localStorage.setItem('structureId',res.data.data)
-                resolve(res.data)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
-
-    @action
-    createDeploy = values =>{
-        const params = new FormData()
-        params.append('pipelineId', values.pipelineId)
-        params.append('taskType',values.taskType)
-        return new Promise((resolve, reject) => {
-            CreateDeploy(params).then(res=>{
-                console.log('部署',res)
-                localStorage.setItem('deployId',res.data.data)
-                resolve(res.data)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
-
-    @action
     updateConfigure = values =>{
-        const params = {
+        const params ={
             configureCreateTime:values.configureCreateTime,
+            pipelineId:values.pipelineId,
             pipelineCode:{
                 codeId:values.pipelineCode.codeId,
+                sort:values.pipelineCode.sort,
                 type:values.pipelineCode.type,
                 codeBranch:values.pipelineCode.codeBranch,
                 codeName:values.pipelineCode.codeName,
-                proofName:values.pipelineCode.proofName,
+                proof:{
+                    proofId:values.pipelineCode.proof.proofId
+                }
             },
             pipelineTest:{
                 testId:values.pipelineTest.testId,
+                sort:values.pipelineTest.sort,
+                testAlias:values.pipelineTest.testAlias,
                 type:values.pipelineTest.type,
                 testOrder:values.pipelineTest.testOrder,
             },
             pipelineStructure:{
                 structureId:values.pipelineStructure.structureId,
+                sort:values.pipelineStructure.sort,
+                structureAlias:values.pipelineStructure.structureAlias,
                 type:values.pipelineStructure.type,
                 structureAddress: values.pipelineStructure.structureAddress,
                 structureOrder: values.pipelineStructure.structureOrder,
             },
             pipelineDeploy:{
                 deployId:values.pipelineDeploy.deployId,
+                sort:values.pipelineDeploy.sort,
+                deployAlias:values.pipelineDeploy.deployAlias,
                 type:values.pipelineDeploy.type,
                 deployAddress: values.pipelineDeploy.deployAddress,
                 deployShell: values.pipelineDeploy.deployShell,
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
-                proofName: values.pipelineDeploy.proofName,
                 dockerPort:values.pipelineDeploy.dockerPort,
                 mappingPort:values.pipelineDeploy.mappingPort,
+                proof:{
+                    proofId:values.pipelineDeploy.proof.proofId
+                }
             },
         }
-        const param = new FormData()
-        param.append('pipelineId',values.pipelineId)
-        param.append('params',JSON.stringify(params))
-        UpdateConfigure(param).then(res=>{
-            console.log('更新流水线配置',res)
-        }).catch(error=>{
-            console.log(error)
+        return new Promise((resolve, reject) => {
+            UpdateConfigure(params).then(res=>{
+                console.log('更新流水线配置',res)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
         })
     }
 
