@@ -2,8 +2,8 @@ import {observable, action} from "mobx";
 
 import {
     CreateProof,
-    FindAllGitProof,
-    FindAllDeployProof,
+    FindAllProof,
+    FindOneProof,
 } from "../api/proof";
 
 class ProofStore{
@@ -11,9 +11,6 @@ class ProofStore{
     constructor(store) {
         this.store=store
     }
-
-    @observable allGitProofList=[]
-    @observable allDeployProofList=[]
 
     @action
     createProof =async values =>{
@@ -32,24 +29,22 @@ class ProofStore{
     }
 
     @action
-    findAllGitProof = () =>{
-        FindAllGitProof().then(res=>{
-            this.allGitProofList=res.data.data
-            console.log("allGitProofList", res)
-        }).catch(error=>{
-            console.log(error)
-        })
+    findAllProof = async  value =>{
+        const param = new FormData()
+        param.append('type',value.type)
+        const data = await FindAllProof(param)
+        return data.data
     }
 
     @action
-    findAllDeployProof= () =>{
-        FindAllDeployProof().then(res=>{
-            this.allDeployProofList=res.data.data
-            console.log("查看所有部署凭证信息",this.allDeployProofList)
-        }).catch(error=>{
-            console.log(error)
-        })
+    findOneProof =async values=>{
+        const param = new FormData()
+        param.append('proofId',values.proofId)
+        const data = await FindOneProof(param)
+        return data.data
+
     }
+
 }
 
 export default ProofStore

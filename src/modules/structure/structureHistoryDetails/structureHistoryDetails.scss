@@ -1,6 +1,7 @@
 .structureHistory-details{
   overflow: hidden;
   padding: 20px;
+  margin: 46px auto;
   &-top{
     position: fixed;
     z-index:110;
@@ -10,7 +11,7 @@
     background-color: white;
     &-btn{
       text-align: right;
-      padding-top: 18px;
+      padding-top: 10px;
       >button{
         right: 10%;
       }
@@ -52,7 +53,7 @@
   &-bottom{
     padding: 20px;
     white-space: pre-wrap;
-    height:50vh;
+    height:60vh;
     overflow-y: auto;
     overflow-x: hidden;
   }

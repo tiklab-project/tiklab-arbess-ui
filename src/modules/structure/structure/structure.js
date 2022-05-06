@@ -2,18 +2,25 @@ import React, { useEffect} from 'react'
 import {Button} from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
 import './structure.scss'
-import StructureCenter from "./structureCenter";
+import StructureLeft from "./structureLeft";
+import StructureRight from "./structureRight";
 import { inject, observer } from "mobx-react";
 
 const Structure = props => {
 
     const { StructureStore } = props
-    const { pipelineStartStructure, findStructureState,logList,findAll ,structureStepList} = StructureStore
+    const { pipelineStartStructure, findStructureState,logList,findAll ,structureStepList,
+        selectHistoryDetails,buildHistoryList,
+    } = StructureStore
 
     const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
         findAll(pipelineId)
+    },[])
+
+    useEffect(()=>{
+        selectHistoryDetails(pipelineId)
     },[])
 
     let interval=null
@@ -44,26 +51,24 @@ const Structure = props => {
                             {logList.runLog}
                         </div>
                     </div>
-
         }
     }
 
     return (
         <div className='structure task'>
-            <div className='structure-Top'>
-                <div className='structure-Top-btn'>
-                    <Button>
-                        <PoweroffOutlined />停止
-                    </Button>
-                </div>
+
+            <div className='structure-content'>
+                <StructureLeft
+                    buildHistoryList={buildHistoryList}
+                />
+                <StructureRight
+                    logList={logList}
+                    structureStepList={structureStepList}
+                />
             </div>
 
-             <StructureCenter
-                logList={logList}
-                structureStepList={structureStepList}
-            />
-
             {logRunLog()}
+
         </div>
     )
 }

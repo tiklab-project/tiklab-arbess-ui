@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from 'antd';
 import './home.scss'
 import {renderRoutes} from "react-router-config";
-import Heads from "./components/header";
+import Heads from "./header";
 
 const { Header, Content } = Layout;
 

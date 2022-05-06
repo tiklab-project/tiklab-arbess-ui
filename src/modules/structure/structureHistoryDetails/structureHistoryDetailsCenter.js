@@ -9,6 +9,7 @@ const StructureHistoryDetailsCenter = props =>{
 
     const [visible,setVisible] = useState(false)
     const [drawer,setDrawer] = useState('')
+    const [taskAlias,setTaskAlias] = useState('')
 
     const state = item => {
         if(item){
@@ -44,8 +45,9 @@ const StructureHistoryDetailsCenter = props =>{
         }
     }
 
-    const log = runLog => {
-        setDrawer(runLog)
+    const log = item => {
+        setDrawer(item.runLog)
+        setTaskAlias(item.taskAlias)
         setVisible(true)
     }
 
@@ -66,7 +68,7 @@ const StructureHistoryDetailsCenter = props =>{
                                 </div>
                             </div>
                             <div className='cart-bottom' >
-                                <span className='cart-bottom-span' onClick={()=>log(item.runLog)}>
+                                <span className='cart-bottom-span' onClick={()=>log(item)}>
                                     日志
                                 </span>
                             </div>
@@ -79,6 +81,7 @@ const StructureHistoryDetailsCenter = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 drawer={drawer}
+                taskAlias={taskAlias}
             />
         </div>
     )

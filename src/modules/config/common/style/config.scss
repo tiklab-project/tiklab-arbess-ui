@@ -1,82 +1,146 @@
-
-.config-details{
-  width: 100%;
+.ant-drawer-content{
+  position: relative;
+  border-left: 1px solid #d9d9d9;
   height: 100%;
-  overflow: hidden;
-  &-top{
-    position: fixed;
-    z-index: 99;
-    background: #ffffff;
-    border-bottom: 1px solid #cccccc;
-    height: 40px;
-    line-height: 40px;
-    width: 100%;
-    padding-left: 5vh
-  }
-  &-content{
-    display: flex;
-    flex-direction: row;
-  }
-  &-right{
-    margin: 50px auto;
-    width: 80%;
-  }
+  z-index: 1000;
+  background: #fff;
   &-wrapper{
-    margin: 30px 0;
-  }
-  &-tail{
-    margin-top: 30px;
-  }
-  &-Headline{
-    margin-bottom: 30px;
-    border-bottom: 1px solid #cccccc;
-    font-size: 16px;
-  }
-  &-handle{
-    text-align: center;
-    height: 35px;
-    line-height: 35px;
-    width: 150px;
-    border: 1px solid #e3e8f0;
-    border-radius: 3px;
-    cursor: pointer;
-    &:hover{
-      color: #1890ff;
-      border: 1px solid #1890ff;
-    }
-  }
-  &-newStage{
-    border: 1px solid #cccccc;
-    padding: 20px;
-  }
-  &-link{
-    margin-top: 30px;
-    margin-left: 15px;
+    position: fixed;
+    height: 100%;
+    top: 56px;
+    background: #fff;
+    z-index: 100!important;
+    -webkit-transition: all .35s ease 0s!important;
+    transition: all .35s ease 0s!important;
   }
 }
-
-.desc{
+.ant-drawer-body{
+  padding: 0;
+}
+.menu-wrapper{
+  &-head{
+    height: 60px;
+    background: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 12px 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-weight: 700;
+  }
+  &-body{
+    .body{
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      height: calc(100vh - 115px);
+      overflow: hidden;
+    }
+  }
+}
+.body-menu{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  &-head{
-    padding-bottom: 15px;
-    font-weight: 500;
-  }
-
-  &-delete{
-    display: inline-block;
-    cursor: pointer;
-    &:hover{
-      color: #1890ff;
+  width: 100%;
+  &_bottom{
+    padding-left: 20px;
+    .gray{
+      background: #eaeaea;
     }
   }
-  &-input{
-    margin-left: 15px;
-    border-left: 1px dashed;
-    padding-left: 15px;
+  &_form{
+    margin-top: 35px;
+    height: 100%;
+    .config-details-link{
+      margin: 0 0 0 10px;
+    }
+  }
+  &_left{
+    max-height: 100%;
+    height: 100%;
+    width: 80px;
+    border-right: 1px solid #e5e5e5;
+    display: inline-block;
+    vertical-align: top;
+    .at-nav{
+      display: inline-block;
+      width: 100%;
+      padding-left: 30px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      &-item{
+        margin: 12px 0;
+        &:before{
+          width: 2px;
+          height: 32px;
+          -webkit-transition: all .4s cubic-bezier(.23,1,.32,1);
+          transition: all .4s cubic-bezier(.23,1,.32,1);
+          content: " ";
+          position: absolute;
+          z-index: 2;
+          left: 0;
+        }
+        &-main{
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          position: relative;
+          cursor: pointer;
+          text-overflow: ellipsis;
+          &:before{
+            position: absolute;
+            background-color: transparent;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            content: "";
+          }
+          .teamix-title{
+            font-weight: 700;
+          }
+        }
+      }
+      &-selected{
+        &:before{
+          background: #1b9aee;
+        }
+      }
+    }
+  }
+  &_right{
+    width: 100%;
+    overflow-y: auto;
+    display: inline-block;
+    padding: 14px 20px ;
   }
 }
+.body-taskForm{
+  padding: 20px;
+  width: 100%;
+  .config-details-link{
+    margin: 0 0 0 10px;
+  }
+  .taskForm-top{
+    margin-bottom: 30px;
+    &_title{
+      font-weight: 700;
+      text-indent: 2em;
+    }
+  }
+}
+//阶段选择
 .group{
   margin-bottom: 16px;
   &-title{
@@ -119,6 +183,7 @@
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
     -webkit-transition: -webkit-transform .218s ease-in;
     transition: -webkit-transform .218s ease-in;
@@ -134,3 +199,12 @@
     margin: 10px;
   }
 }
+//阶段删除
+.deleted{
+  cursor: pointer;
+  &:hover{
+    color: #ff0000;
+  }
+}
+
+

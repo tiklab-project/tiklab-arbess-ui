@@ -6,7 +6,6 @@ import {
     Code,
     GetAllStorehouse,
     GetBranch,
-    GetUserMessage,
     GetProof,
 } from "../api/gitAuthorize";
 
@@ -56,21 +55,12 @@ class GitAuthorizeStore{
     }
 
     @action
-    getUserMessage =async () =>{
-        const data = await GetUserMessage()
-        return data.data;
-    }
-
-    @action
-    getGiteeProof = value =>{
+    getGiteeProof =async value =>{
         const params = new FormData()
         params.append("proofName", value.proofName)
-        params.append("configureId", value.configureId)
-        GetProof(params).then(res=>{
-            console.log('getGiteeProof',res  )
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await GetProof(params)
+        return data.data;
+
     }
 
 }

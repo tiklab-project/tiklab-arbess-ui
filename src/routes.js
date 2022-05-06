@@ -4,13 +4,12 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Login=AsyncComponent(()=>import('./modules/login/login'))
 const Home=AsyncComponent(()=>import('./modules/home/home'))
-const Index=AsyncComponent(()=>import('./modules/home'))
 const System=AsyncComponent(()=>import('./modules/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
 const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/common/pipelineAdd'))
-const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/config'))
-const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/pipelineDetails'))
+const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/container/config'))
+const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/container/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
 
 const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
@@ -19,13 +18,12 @@ const StructureHistory=AsyncComponent(()=>import('./modules/structure/structureH
 const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
 const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/structureHistoryDetails'))
-const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
+const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/container/configDetails'))
 
 export const routers=[
     {
         path:'/login',
         component:Login,
-        exact: true,
     },
     {
         path:'/home',

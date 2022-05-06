@@ -1,0 +1,23 @@
+.ant-layout-sider-children{
+  position: fixed;
+  z-index: 99;
+  background-color: #ffffff;
+}
+.pipelineDetails{
+  background: #fff;
+  min-height: 280px;
+}
+.breadcrumb{
+  font-size: 16px;
+  position: fixed;
+  width: 100%;
+  min-width: 230px;
+  z-index: 100;
+  background-color: #ffffff;
+  border-bottom: 1px solid #cccccc;
+}
+.task{
+  width: 90%;
+  margin-top: 46px;
+}
+

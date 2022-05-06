@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "24942534",
+      "name": "切换列表",
+      "font_class": "qiehuanliebiao",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
       "icon_id": "8288999",
       "name": "加号",
       "font_class": "jiahao",

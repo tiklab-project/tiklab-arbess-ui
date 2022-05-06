@@ -1,0 +1,64 @@
+ul{
+    list-style: none;
+}
+.aside{
+    position: fixed;
+    background-color: #fff;
+    z-index: 888;
+    left: 0;
+    top: 55px;
+    border-right:1px solid #cccccc;
+    height: 100%;
+    .content{
+        width: 60px;
+        padding: 0;
+    }
+    &_content{
+        height: 60px;
+        width: 60px;
+        text-align: center;
+        margin-bottom: 8px;
+        cursor: pointer;
+        color: black;
+        &:hover{
+            color: #1890ff;
+        }
+    }
+    &_title{
+        margin-top: 5px;
+    }
+    &_link{
+        color: #1890ff;
+    }
+}
+.aisde_icon{
+    padding: 13px 0 5px
+}
+.opt{
+    width: 300px;
+    height: 200px;
+    background-color: #ffffff;
+    border: 1px solid #C4C4C4;
+    &-content{
+        height: 100%;
+        padding: 10px;
+        &-title{
+            font-weight: 700;
+            font-size: 16px;
+        }
+        &-group{
+            padding: 20px;
+            &_item{
+                margin-bottom: 10px;
+                cursor: pointer;
+                height: 30px;
+                padding-left: 20px;
+                line-height: 30px;
+                &:hover{
+                    border: 1px solid #ccc;
+                }
+
+            }
+        }
+    }
+}

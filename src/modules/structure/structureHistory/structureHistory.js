@@ -44,7 +44,7 @@ const StructureHistory=props=>{
             render:(text,record,index) =>{
                 return(
                     <span>
-                        # {text}
+                        # {index+1}
                     </span>
                 )
             }
@@ -104,7 +104,6 @@ const StructureHistory=props=>{
                                 </span>
                }
             }
-
         },
         {
             title: '执行时间',

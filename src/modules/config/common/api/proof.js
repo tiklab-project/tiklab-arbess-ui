@@ -9,23 +9,27 @@ export function CreateProof(data){
     })
 }
 
-//查看所有部署凭证信息
-export function  FindAllGitProof(data){
+//所有凭证
+export function  FindAllProof(data){
     return serviceLoc.request({
-        url:'/proof/findAllGitProof',
+        url:'/proof/findAllProof',
         method:'post',
         data
     })
 }
 
-//查看所有部署凭证信息
-export function  FindAllDeployProof(data){
+
+
+
+export function  FindOneProof(data){
     return serviceLoc.request({
-        url:'/proof/findAllDeployProof',
+        url:'/proof/findOneProof',
         method:'post',
         data
     })
 }
+
+
 
 
 

@@ -36,14 +36,6 @@ export function  GetBranch (data){
     })
 }
 
-//gitee--用户名
-export function  GetUserMessage (data){
-    return serviceLoc.request({
-        url:'/gitee/getUserMessage',
-        method: 'post',
-        data
-    })
-}
 
 //gitee--凭证
 export function  GetProof (data){

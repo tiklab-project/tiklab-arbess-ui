@@ -1,18 +1,31 @@
 import React  from 'react'
-import { Drawer } from 'antd';
+import { Drawer ,Button} from 'antd';
+import {CloseOutlined} from "@ant-design/icons";
+import './logDetails.scss'
 
 const LogDetails = props =>{
 
-    const {visible,setVisible,drawer} = props
+    const {visible,setVisible,drawer,taskAlias} = props
 
     return(
         <Drawer
-            placement='bottom'
+            placement='right'
             visible={visible}
             onClose={()=>setVisible(false)}
-            style={{whiteSpace: 'pre-wrap'}}
+            closable={false}
+            style={{whiteSpace: 'pre-wrap',marginTop:51}}
         >
-            {drawer}
+            <div className='wrapper-head'>
+                <div>{taskAlias}</div>
+                <div>
+                    <Button type='text' onClick={()=>setVisible(false)}>
+                        <CloseOutlined />
+                    </Button>
+                </div>
+            </div>
+            <div className='wrapper-body'>
+                {drawer}
+            </div>
         </Drawer>
    )
 }
