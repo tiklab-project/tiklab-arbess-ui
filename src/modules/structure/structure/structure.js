@@ -1,5 +1,5 @@
-import React, { useEffect} from 'react'
-import {Button} from "antd";
+import React, {Fragment, useEffect} from 'react'
+import {Button,Result} from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
 import './structure.scss'
 import StructureLeft from "./structureLeft";
@@ -25,17 +25,13 @@ const Structure = props => {
 
     let interval=null
     useEffect(() => {
-        // pipelineStartStructure(pipelineId).then(res => {
-        //     if (res.data===1 || res.data === 100) {
-        //         interval = setInterval(() => {
-        //             findStructureState(pipelineId).then(res =>{
-        //                 // if(res.data && res.data.logRunStatus !== 0 ){
-        //                 //     clearInterval(interval)
-        //                 // }
-        //             })
-        //         }, 500)
-        //     }
-        // })
+        interval = setInterval(() => {
+            findStructureState(pipelineId).then(res =>{
+                if(res.data && res.data.findState === 1 ){
+                    clearInterval(interval)
+                }
+            })
+        }, 500)
         return ()=> clearInterval(interval)
     }, [])
 
@@ -45,9 +41,9 @@ const Structure = props => {
             if(outLog){
                 outLog.scrollTop = outLog.scrollHeight
             }
-            return  <div className='structure-bottom'>
+            return  <div className='structure-content-bottom'>
                         <h3>输出</h3>
-                        <div className='structure-bottom-outLog'  id='outLog'>
+                        <div className='structure-content-bottom-outLog'  id='outLog'>
                             {logList.runLog}
                         </div>
                     </div>
@@ -56,18 +52,28 @@ const Structure = props => {
 
     return (
         <div className='structure task'>
+            {
+                structureStepList.length === 0 ?
+                    <div className='structure-noContent'>
+                        <Result
+                            title="当前没有任何数据"
+                        />
+                    </div>
+                    :
+                    <Fragment>
+                        <div className='structure-content'>
+                            <StructureLeft
+                                buildHistoryList={buildHistoryList}
+                            />
+                            <StructureRight
+                                logList={logList}
+                                structureStepList={structureStepList}
+                            />
+                        </div>
 
-            <div className='structure-content'>
-                <StructureLeft
-                    buildHistoryList={buildHistoryList}
-                />
-                <StructureRight
-                    logList={logList}
-                    structureStepList={structureStepList}
-                />
-            </div>
-
-            {logRunLog()}
+                        {logRunLog()}
+                    </Fragment>
+            }
 
         </div>
     )

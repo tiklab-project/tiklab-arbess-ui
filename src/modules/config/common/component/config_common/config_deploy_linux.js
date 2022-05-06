@@ -25,7 +25,7 @@ const Config_deploy_linux = props =>{
     }
 
     const changeDeploySelect = value =>{
-        localStorage.setItem('deployProofId',value)
+        localStorage.setItem('linuxProofId',value)
     }
 
     return(

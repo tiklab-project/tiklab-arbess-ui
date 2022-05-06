@@ -6,7 +6,8 @@ const {Option}=Select
 
 const Config_code_giteeModal = props =>{
 
-    const {visible,setVisible,url,getGiteeProof ,modalFormInvi,findAllProof}=props
+    const {visible,setVisible,url,codeTaken,
+        getGiteeProof , modalFormInvi,findAllProof}=props
     const [form] = Form.useForm()
 
     const [allGiteeProofList,setAllGiteeProofList] = useState([])
@@ -20,17 +21,21 @@ const Config_code_giteeModal = props =>{
 
     const onOk = () =>{
         form.validateFields().then((values) => {
-            const params = {
-                proofName:values.proofName,
-            }
-            getGiteeProof(params).then(res=>{
-                if(res.code===0){
-                    localStorage.setItem('gitProofId',res.data)
-                    setVisible(false)
-                }else {
-                    message.info('创建失败')
+            if(codeTaken){
+                const params = {
+                    proofName:values.proofName,
+                    accessToken:codeTaken.accessToken
                 }
-            })
+                getGiteeProof(params).then(res=>{
+                    console.log(res,'accessToken')
+                    if(res.code===0){
+                        localStorage.setItem('giteeProofId',res.data)
+                        setVisible(false)
+                    }else {
+                        message.info('创建失败')
+                    }
+                })
+            }
 
         })
     }
@@ -48,7 +53,8 @@ const Config_code_giteeModal = props =>{
     }
 
     const changeGiteeSelect = value =>{
-        localStorage.setItem('gitProofId',value)
+        // localStorage.setItem('gitProofId',value)
+        localStorage.setItem('giteeProofId',value)
     }
 
     const goUrl = () =>{

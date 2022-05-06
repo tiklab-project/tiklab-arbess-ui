@@ -11,12 +11,13 @@ import {getUrlParam} from '../../common/component/config_common/getUrlParam'
 
 const ConfigDetails = props =>{
 
-    const {ConfigStore,ProofStore,GitAuthorizeStore} = props
+    const {ConfigStore,ProofStore,GitAuthorizeStore,StructureStore} = props
 
     const {updateConfigure,findAllConfigure} = ConfigStore
     const {createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = ProofStore
     const {code} = GitAuthorizeStore
+    const {pipelineStartStructure,findStructureState} = StructureStore
 
     const [form] = Form.useForm();
     const [formInitialValues, setFormInitialValues] = useState({})
@@ -26,18 +27,19 @@ const ConfigDetails = props =>{
     const [isPrompt, setIsPrompt] = useState(false);
 
     const codeValue = getUrlParam('code')
-    const AccessToken = localStorage.getItem('AccessToken')
     const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-      return () =>{
-          localStorage.removeItem('gitProofId')
-          localStorage.removeItem('deployProofId')
-          localStorage.removeItem('codeId')
-          localStorage.removeItem('testId')
-          localStorage.removeItem('structureId')
-          localStorage.removeItem('deployId')
-      }
+        return () =>{
+            localStorage.removeItem('gitProofId')
+            localStorage.removeItem('giteeProofId')
+            localStorage.removeItem('dockerProofId')
+            localStorage.removeItem('linuxProofId')
+            localStorage.removeItem('codeId')
+            localStorage.removeItem('testId')
+            localStorage.removeItem('structureId')
+            localStorage.removeItem('deployId')
+        }
     },[])
 
     //Gitee授权
@@ -45,7 +47,7 @@ const ConfigDetails = props =>{
         const se = setTimeout(()=>localStorage.removeItem('code'),100)
         if (codeValue && localStorage.getItem('code')) {
             code(codeValue).then(res=>{
-                localStorage.setItem('AccessToken',res.data)
+                localStorage.setItem('AccessToken',JSON.stringify(res.data))
                 window.close()
             })
         }
@@ -60,114 +62,118 @@ const ConfigDetails = props =>{
         const newData = []
         findAllConfigure(param).then(res=>{
             const initialData = res.data
-            for (let i = 0;i<initialData.length;i++){
-                const j = initialData[i]
-                if(j.type===1){
-                    newCode = {
-                        codeId:j.codeId,
-                        title:'源码管理',
-                        desc: '通用Git'
+            if(initialData.length!==0){
+                for (let i = 0;i<initialData.length;i++){
+                    const j = initialData[i]
+                    if(j.type===1){
+                        newCode = {
+                            codeId:j.codeId,
+                            title:'源码管理',
+                            desc: '通用Git'
+                        }
+                        localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem('codeId',j.codeId)
+                        setCodeData(newCode)
+                        const formValue = {
+                            gitBranch:j.codeBranch,
+                            gitCodeName:j.codeName,
+                            gitProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
+                        }
+                        form.setFieldsValue(formValue)
+                        Object.assign(formInitialValues,formValue)
+                    }else if(j.type===2){
+                        newCode = {
+                            codeId:j.codeId,
+                            title:'源码管理',
+                            desc: 'Gitee'
+                        }
+                        localStorage.setItem('giteeProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem('codeId',j.codeId)
+                        const formValue = {
+                            giteeBranch:j.codeBranch,
+                            giteeCodeName:j.codeName,
+                        }
+                        setCodeData(newCode)
+                        form.setFieldsValue(formValue)
+                        Object.assign(formInitialValues,formValue)
                     }
-                    localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
-                    localStorage.setItem('codeId',j.codeId)
-                    setCodeData(newCode)
-                    const formValue = {
-                        gitBranch:j.codeBranch,
-                        gitCodeName:j.codeName,
-                        gitProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
+                    else if(j.type===11){
+                        newData.push({
+                            dataId:  j.testId,
+                            title:j.testAlias,
+                            desc: '单元测试'
+                        })
+                        localStorage.setItem('testId',j.testId)
+                        const formValue = {
+                            testOrder:j.testOrder
+                        }
+                        form.setFieldsValue(formValue)
+                        Object.assign(formInitialValues,formValue)
+                    } else if(j.type===21){
+                        newData.push({
+                            dataId: j.structureId,
+                            title: j.structureAlias,
+                            desc: 'maven'
+                        })
+                        localStorage.setItem('structureId',j.structureId)
+                        const formValue = {
+                            mavenAddress:j.structureAddress,
+                            mavenOrder:j.structureOrder
+                        }
+                        form.setFieldsValue(formValue)
+                        Object.assign(formInitialValues,formValue)
+                    } else if(j.type===22){
+                        newData.push({
+                            dataId: j.structureId,
+                            title: j.structureAlias,
+                            desc: 'node'
+                        })
+                        localStorage.setItem('structureId',j.structureId)
+                        const formValue = {
+                            nodeAddress:j.structureAddress,
+                            nodeOrder:j.structureOrder
+                        }
+                        form.setFieldsValue(formValue)
+                        Object.assign(formInitialValues,formValue)
+                    } else if(j.type===31){
+                        newData.push({
+                            dataId:  j.deployId,
+                            title: j.deployAlias,
+                            desc: 'linux'
+                        })
+                        localStorage.setItem('deployId',j.deployId)
+                        localStorage.setItem('linuxProofId',j.proof && j.proof.proofId)
+                        const formValue = {
+                            linuxAddress:j.deployAddress,
+                            linuxTargetAddress:j.deployTargetAddress,
+                            linuxProofName:j.proof && j.proof.proofDescribe+ "(" + j.proof.proofIp + ")" ,
+                        }
+                        form.setFieldsValue(formValue)
+                        Object.assign(formInitialValues,formValue)
+                    } else if(j.type===32){
+                        newData.push({
+                            dataId:j.deployId,
+                            title: j.deployAlias,
+                            desc: 'docker'
+                        })
+                        localStorage.setItem('deployId',j.deployId)
+                        localStorage.setItem('dockerProofId',j.proof && j.proof.proofId)
+                        const formValue = {
+                            dockerAddress:j.deployAddress,
+                            dockerTargetAddress:j.deployTargetAddress,
+                            dockerProofName:j.proof && j.proof.proofDescribe+ "(" +j.proof.proofIp + ")",
+                        }
+                        form.setFieldsValue(formValue)
+                        Object.assign(formInitialValues,formValue)
                     }
-                    form.setFieldsValue(formValue)
-                    Object.assign(formInitialValues,formValue)
-                }else if(j.type===2){
-                    newCode = {
-                        codeId:j.codeId,
-                        title:'源码管理',
-                        desc: 'Gitee'
-                    }
-                    localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
-                    localStorage.setItem('codeId',j.codeId)
-                    const formValue = {
-                        giteeBranch:j.codeBranch,
-                        giteeCodeName:j.codeName,
-                    }
-                    setCodeData(newCode)
-                    form.setFieldsValue(formValue)
-                    Object.assign(formInitialValues,formValue)
+                    setData([...newData])
+                    form.setFieldsValue({...j})
+                    setFormInitialValues({...formInitialValues})
                 }
-                else if(j.type===11){
-                    newData.push({
-                        dataId:  j.testId,
-                        title:j.testAlias,
-                        desc: '单元测试'
-                    })
-                    localStorage.setItem('testId',j.testId)
-                    const formValue = {
-                        testOrder:j.testOrder
-                    }
-                    form.setFieldsValue(formValue)
-                    Object.assign(formInitialValues,formValue)
-                } else if(j.type===21){
-                    newData.push({
-                        dataId: j.structureId,
-                        title: j.structureAlias,
-                        desc: 'maven'
-                    })
-                    localStorage.setItem('structureId',j.structureId)
-                    const formValue = {
-                        mavenAddress:j.structureAddress,
-                        mavenOrder:j.structureOrder
-                    }
-                    form.setFieldsValue(formValue)
-                    Object.assign(formInitialValues,formValue)
-                } else if(j.type===22){
-                    newData.push({
-                        dataId: j.structureId,
-                        title: j.structureAlias,
-                        desc: 'node'
-                    })
-                    localStorage.setItem('structureId',j.structureId)
-                    const formValue = {
-                        nodeAddress:j.structureAddress,
-                        nodeOrder:j.structureOrder
-                    }
-                    form.setFieldsValue(formValue)
-                    Object.assign(formInitialValues,formValue)
-                } else if(j.type===31){
-                    newData.push({
-                        dataId:  j.deployId,
-                        title: j.deployAlias,
-                        desc: 'linux'
-                    })
-                    localStorage.setItem('deployId',j.deployId)
-                    localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
-                    const formValue = {
-                        linuxAddress:j.deployAddress,
-                        linuxTargetAddress:j.deployTargetAddress,
-                        linuxProofName:j.proof && j.proof.proofDescribe+ "(" + j.proof.proofIp + ")" ,
-                    }
-                    form.setFieldsValue(formValue)
-                    Object.assign(formInitialValues,formValue)
-                } else if(j.type===32){
-                    newData.push({
-                        dataId:j.deployId,
-                        title: j.deployAlias,
-                        desc: 'docker'
-                    })
-                    localStorage.setItem('deployId',j.deployId)
-                    localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
-                    const formValue = {
-                        dockerAddress:j.deployAddress,
-                        dockerTargetAddress:j.deployTargetAddress,
-                        dockerProofName:j.proof && j.proof.proofDescribe+ "(" +j.proof.proofIp + ")",
-                    }
-                    form.setFieldsValue(formValue)
-                    Object.assign(formInitialValues,formValue)
-                }
-                setData([...newData])
-                form.setFieldsValue({...j})
-                setFormInitialValues({...formInitialValues})
+            } else{
+                setCodeData('')
+                setData([])
             }
-
         })
     },[pipelineId])
 
@@ -181,10 +187,13 @@ const ConfigDetails = props =>{
     }
 
     return (
-        <Fragment>
+        <Fragment >
             <Config_changeView
                 view={view}
                 setView={setView}
+                pipelineId={pipelineId}
+                pipelineStartStructure={pipelineStartStructure}
+                findStructureState={findStructureState}
             />
             {
                 view === 0 ? 
@@ -246,4 +255,4 @@ const ConfigDetails = props =>{
     )
 }
 
-export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore')(observer(ConfigDetails)))
+export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore','StructureStore')(observer(ConfigDetails)))

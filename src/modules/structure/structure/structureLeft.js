@@ -66,9 +66,9 @@ const StructureLeft = props =>{
     }
 
     return(
-        <div className='structure-left'>
+        <div className='structure-content-left'>
             <StructureLeft_dropdown/>
-            <div className='structure-left-history'>
+            <div className='structure-content-left-history'>
                 <div className='history-content'>
                     {
                         buildHistoryList && buildHistoryList.map((item,index)=>{

@@ -1,23 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 
 const PipelineDetails_leftOpt = props =>{
-    const {pipelineList,setVisible} = props
-    
+
+    const {pipelineList,setVisible,forceUpdate} = props
+
     const onClick = (e,item) => {
         e.preventDefault()
-        console.log(item)
         localStorage.setItem('pipelineName',item.pipelineName)
         localStorage.setItem('pipelineId',item.pipelineId)
+        forceUpdate({})
         setVisible(false)
     }
-    
+
     return(
         <div className='opt'>
             <div className='opt-content'>
                 <div className='opt-content-title'>流水线名称</div>
                 <div className='opt-content-group'>
                     {
-                        pipelineList && pipelineList.map((item,index)=>{
+                        pipelineList && pipelineList.map(item=>{
                             return(
                                 <div
                                     onClick={e =>{onClick(e,item)}}
@@ -25,6 +26,7 @@ const PipelineDetails_leftOpt = props =>{
                                     className='opt-content-group_item'
                                 >
                                     {item.pipelineName}
+
                                 </div>
                             )
                         })
@@ -34,5 +36,8 @@ const PipelineDetails_leftOpt = props =>{
         </div>
     )
 }
+
+
+
 
 export default PipelineDetails_leftOpt

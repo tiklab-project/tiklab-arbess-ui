@@ -9,7 +9,7 @@ import {observer,inject} from "mobx-react";
 const PipelineDelRename= props=>{
 
     const {PipelineStore}=props
-    const {deletePipeline,updatePipeline,findAllPipelineStatus,pipelineList}=PipelineStore
+    const {deletePipeline,updatePipeline,pipelineList}=PipelineStore
 
     const [form]=Form.useForm()
     const [, forceUpdate] = useState({})
@@ -17,7 +17,6 @@ const PipelineDelRename= props=>{
     const pipelineId=localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-        findAllPipelineStatus()
         forceUpdate({})
     },[])
 

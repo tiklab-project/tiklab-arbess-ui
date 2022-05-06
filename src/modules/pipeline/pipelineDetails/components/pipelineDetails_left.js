@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import {withRouter} from "react-router-dom";
 import './pipelineDetails_left.scss'
 import {
@@ -11,6 +11,7 @@ import {
 } from "@ant-design/icons";
 import {Dropdown} from 'antd'
 import PipelineDetails_leftOpt from "./pipelineDetails_leftOpt";
+import { findDOMNode } from "react-dom";
 
 const  taskRouters=[
     {
@@ -41,37 +42,49 @@ const  taskRouters=[
 
 const PipelineDetails_left = props =>{
 
-    const {pipelineList} = props
+    const {pipelineList,forceUpdate,visible,setVisible} = props
     const [nav,setNav] = useState(props.location.pathname)
-    const [visible,setVisible] = useState(false)
+    const inputRef = useRef();
+
     const changeNav = item=>{
         setNav(item.to)
         props.history.push(item.to)
     }
+    useEffect(()=>{
+        document.addEventListener('click',e=>show(e))
+        return () =>document.removeEventListener('click',e=>show(e))
+    },[])
+    const show = e =>{
+        const target = e.target
+        console.log( target,'target')
+        let result = findDOMNode(inputRef).contains(e.target)
+        console.log(result,'result')
+    }
 
     return(
-       <div className='aside'>
+         <div className='aside'>
             <ul  className='content'>
                 <li
+                    ref={inputRef}
+                    onClick = {()=>setVisible(!visible)}
                     className='aside_content'
                     style={{padding:10}}
-                    onClick={()=>{}}
                 >
                     <Dropdown overlay={
                         <PipelineDetails_leftOpt
                             pipelineList={pipelineList}
                             setVisible={setVisible}
+                            forceUpdate={forceUpdate}
                         />}
                         visible={visible}
+                        id='liOne'
                     >
                         <ClusterOutlined
-                            // onBlur = {()=>setVisible(false)}
-                            onClick = {()=>setVisible(!visible)}
+                            id='liIcon'
                             style={{fontSize:18,padding:10}}
                         />
                     </Dropdown>
                 </li>
-            
                 {
                     taskRouters && taskRouters.map(item=>{
                         return(
@@ -86,9 +99,8 @@ const PipelineDetails_left = props =>{
                         )
                     })
                 }
-        </ul>
-
-       </div>
+            </ul>
+        </div>
     )
 }
 

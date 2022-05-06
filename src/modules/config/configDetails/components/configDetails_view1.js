@@ -205,6 +205,7 @@ const ConfigDetails_view1 = props =>{
                     codeType:1,
                     codeBranch:value.gitBranch,
                     codeName:value.gitCodeName,
+                    proofId:localStorage.getItem('gitProofId'),
                 }
                 break
             case 'Gitee':{
@@ -212,6 +213,7 @@ const ConfigDetails_view1 = props =>{
                     codeType:2,
                     codeBranch:value.giteeBranch,
                     codeName:value.giteeCodeName,
+                    proofId:localStorage.getItem('giteeProofId'),
                 }
             }
         }
@@ -243,6 +245,7 @@ const ConfigDetails_view1 = props =>{
                         deployAddress: value.linuxAddress,
                         deployTargetAddress:value.linuxTargetAddress,
                         proofName: value.linuxProofName,
+                        proofId:localStorage.getItem('linuxProofId'),
                     }
                     break
                 case 'docker':
@@ -251,6 +254,7 @@ const ConfigDetails_view1 = props =>{
                         deployAddress: value.linuxAddress,
                         deployTargetAddress:value.dockerTargetAddress,
                         proofName: value.dockerProofName,
+                        proofId:localStorage.getItem('dockerProofId'),
                     }
             }
         }
@@ -265,7 +269,7 @@ const ConfigDetails_view1 = props =>{
                 codeBranch:codeList && codeList.codeBranch,
                 codeName:codeList && codeList.codeName,
                 proof:{
-                    proofId:localStorage.getItem('gitProofId'),
+                    proofId:codeList && codeList.proofId,
                 }
             },
             pipelineTest:{
@@ -294,7 +298,7 @@ const ConfigDetails_view1 = props =>{
                 dockerPort:value.dockerPort,
                 mappingPort:value.mappingPort,
                 proof:{
-                    proofId:localStorage.getItem('deployProofId'),
+                    proofId:deployList && deployList.proofId,
                 }
             }
         }

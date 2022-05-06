@@ -1,4 +1,4 @@
-import React,{Fragment, useEffect,useState} from "react";
+import React, {Fragment, useEffect, useMemo, useState} from "react";
 import { Layout } from 'antd';
 import {renderRoutes} from "react-router-config";
 import './pipelineDetails.scss'
@@ -9,16 +9,20 @@ import { inject,observer } from "mobx-react";
 
 const { Content, Sider } = Layout;
 
-const PipelineDetails= props=>{
+const PipelineDetails= (props)=>{
 
     const {route,PipelineStore}=props
     const {findAllPipelineStatus,pipelineList} = PipelineStore
 
+    const [visible,setVisible] = useState(false)
+    const [, forceUpdate] = useState({})
     const [opt,setOpt] = useState(false)
 
     useEffect(()=>{
         findAllPipelineStatus()
     },[])
+
+ 
 
     useEffect(()=>{
         return ()=>{
@@ -28,28 +32,35 @@ const PipelineDetails= props=>{
     },[])
 
     return(
-      <Fragment>
+        <Fragment>
             {
                 opt ? <Layout>
-                    <Sider style={{backgroundColor:'#fff',width:'60px'}}>
-                        <PipelineDetails_aside/>
-                    </Sider>
-                    <Content className='pipelineDetails'>
-                        <PipelineDetailsBreadcrumb   {...props}/>
-                        {renderRoutes(route.routes)}
-                    </Content>
-                </Layout> :
-                <Layout>
-                    <PipelineDetails_left 
-                        pipelineList={pipelineList}
-                    />
-                    <Content className='pipelineDetails' style={{marginLeft:60}}>
-                        <PipelineDetailsBreadcrumb   {...props} />
-                        {renderRoutes(route.routes)}
-                    </Content>
-                </Layout>
-        }
-      </Fragment>
+                        <Sider style={{backgroundColor:'#fff',width:'60px'}}>
+                            <PipelineDetails_aside/>
+                        </Sider>
+                        <Content className='pipelineDetails'>
+                            <PipelineDetailsBreadcrumb   {...props}/>
+                            {renderRoutes(route.routes)}
+                        </Content>
+                    </Layout> :
+                    <Layout>
+                        <PipelineDetails_left
+                            pipelineList={pipelineList}
+                            forceUpdate={forceUpdate}
+                            visible={visible}
+                            setVisible={setVisible}
+                        />
+                        <Content
+                            className='pipelineDetails'
+                            style={{marginLeft:60}}
+                            onClick={()=>setVisible(false)}
+                        >
+                            <PipelineDetailsBreadcrumb   {...props} />
+                            {renderRoutes(route.routes)}
+                        </Content>
+                    </Layout>
+            }
+        </Fragment>
     )
 }
 

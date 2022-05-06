@@ -3,16 +3,14 @@ import {Button, Form, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import Config_code_giteeModal from "./config_code_giteeModal";
 import {inject, observer} from "mobx-react";
-import GitAuthorizeStore from "../../store/gitAuthorizeStore";
-import ProofStore from "../../store/proofStore";
 
 const {Option} =Select
 
 const Config_code_gitee = props =>{
 
     const {GitAuthorizeStore,form,ProofStore,ConfigStore} = props
-    const {url,getAllStorehouse,gitList,getBranch,branchList,
-        getGiteeProof} = GitAuthorizeStore
+    const {url, getAllStorehouse, gitList,getBranch,branchList, getGiteeProof
+    } = GitAuthorizeStore
     const {findAllProof} = ProofStore
     const {findAllConfigure} = ConfigStore
 
@@ -21,6 +19,7 @@ const Config_code_gitee = props =>{
     const [branch,setBranch]=useState(true)
     const [modalFormInvi,setModalFormInvi] = useState('')
     const pipelineId = localStorage.getItem('pipelineId')
+    const codeTaken = JSON.parse(localStorage.getItem('AccessToken'))
 
     useEffect(()=>{
         const param = {
@@ -50,13 +49,22 @@ const Config_code_gitee = props =>{
 
 
     const clickGitStoreHouse = () =>{
-        getAllStorehouse()
+        if(codeTaken){
+            const param = {
+                accessToken:codeTaken.accessToken
+            }
+            getAllStorehouse(param)
+        }
     }
 
     const changeGitStoreHouse = values =>{
         console.log(values)
+        const params ={
+            projectName:values,
+            proofId:localStorage.getItem('giteeProofId')
+        }
         setBranch(false)
-        getBranch(values)
+        getBranch(params)
     }
 
     return(
@@ -83,7 +91,6 @@ const Config_code_gitee = props =>{
                                 )
                             })
                         }
-
                     </Select>
                 </Form.Item>
                 <Button
@@ -123,6 +130,7 @@ const Config_code_gitee = props =>{
                 url={url}
                 getGiteeProof={getGiteeProof}
                 modalFormInvi={modalFormInvi}
+                codeTaken={codeTaken}
             />
         </Fragment>
     )

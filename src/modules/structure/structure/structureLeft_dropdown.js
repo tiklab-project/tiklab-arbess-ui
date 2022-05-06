@@ -3,6 +3,7 @@ import { Menu, Dropdown, Space } from 'antd';
 import {DownOutlined} from "@ant-design/icons";
 
 const StructureLeft_dropdown = props =>{
+
     const menu = (
         <Menu>
             <Menu.Item key={1}>成功</Menu.Item>
@@ -24,7 +25,7 @@ const StructureLeft_dropdown = props =>{
     );
 
     return(
-        <Fragment>
+        <div className='structure-content-left-dropdown'>
             <Dropdown overlay={menu} trigger={['click']}>
                 <a onClick={(e) => e.preventDefault()}>
                     <Space>
@@ -49,8 +50,7 @@ const StructureLeft_dropdown = props =>{
                     </Space>
                 </a>
             </Dropdown>
-
-        </Fragment>
+        </div>
     )
 }
 

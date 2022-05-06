@@ -18,7 +18,17 @@ export function  Code (data){
     })
 }
 
-//gitee--仓库
+//gitee--创建凭证
+export function  GetProof (data){
+    return serviceLoc.request({
+        url:'/gitee/getProof',
+        method: 'post',
+        data
+    })
+}
+
+
+//gitee--获取所有仓库
 export function  GetAllStorehouse (data){
     return serviceLoc.request({
         url:'/gitee/getAllStorehouse',
@@ -36,15 +46,6 @@ export function  GetBranch (data){
     })
 }
 
-
-//gitee--凭证
-export function  GetProof (data){
-    return serviceLoc.request({
-        url:'/gitee/getProof',
-        method: 'post',
-        data
-    })
-}
 
 
 

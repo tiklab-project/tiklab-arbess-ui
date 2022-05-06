@@ -1,10 +1,17 @@
 import React from "react";
 import { Button } from "antd";
 import './config_changeView.scss'
+import {withRouter} from "react-router-dom";
 
 const Config_changeView = props =>{
 
-    const {view,setView} = props
+    const {view,setView,pipelineId,pipelineStartStructure,findStructureState} = props
+    
+    const run = () => {
+        pipelineStartStructure(pipelineId).then(res=>{
+            props.history.push('/home/task/structure')
+        })
+    }
 
     return (
         <div className='config_changeView'>
@@ -16,7 +23,14 @@ const Config_changeView = props =>{
                     >
                         保存
                     </Button>
-                    <Button type='primary'>保存并运行</Button>
+                    <Button
+                        type='primary'
+                        form='form'
+                        htmlType='submit'
+                        onClick = {()=>run()}
+                    >
+                        运行
+                    </Button>
                 </div>
                 <div
                     onClick={()=>setView(0)}
@@ -35,4 +49,4 @@ const Config_changeView = props =>{
     )
 }
 
-export default Config_changeView
+export default withRouter(Config_changeView)

@@ -1,11 +1,16 @@
 import React, {Fragment, useState} from "react";
 import {Card,Spin} from 'antd'
 import { LoadingOutlined } from '@ant-design/icons';
+import Structure_right_logDrawer from './Structure_right_logDrawer'
 
 const StructureRight = props =>{
 
     const {logList,structureStepList} = props
-    const [time,setTime] = useState(0)
+
+    
+    const [visible,setVisible] = useState(false)
+    const [drawer,setDrawer] = useState('')
+    const [taskAlias,setTaskAlias] = useState('')
 
     const type = item =>{
         if(item){
@@ -68,39 +73,49 @@ const StructureRight = props =>{
         }
     }
 
-    return(
-        <div className='structure-right'>
-            <div className='structure-right-mid'>
-                {
-                    structureStepList.length ===0 ? '没有'
-                        : <Fragment>
-                            {
-                                structureStepList.map((item,index)=>{
-                                    return(
-                                        <Card className='structure-right-mid-cart' key={index}>
-                                            <div className='cart-top'>
-                                                {item.taskAlias} --
-                                                <span style={{paddingLeft:5}}>{type(item)}</span>
-                                            </div>
-                                            <div className='cart-center'>
-                                                <div className='cart-center-item'>
-                                                    <div>{state(index+1)}</div>
-                                                    <div>时间:</div>
-                                                </div>
-                                            </div>
-                                            <div className='cart-bottom' >
-                                                <span className='cart-bottom-span' >
-                                                    日志
-                                                </span>
-                                            </div>
-                                        </Card>
-                                    )
-                                })
-                            }
-                        </Fragment>
-                }
+    const log = item => {
+        setDrawer(item.runLog)
+        setTaskAlias(item.taskAlias)
+        setVisible(true)
+    }
 
+    return(
+        <div className='structure-content-right'>
+            <div className='structure-content-right-mid'>
+                {
+                    structureStepList.map((item,index)=>{
+                        return(
+                            <Card className='structure-content-right-mid-cart' key={index}>
+                                <div className='cart-top'>
+                                    {item.taskAlias} --
+                                    <span style={{paddingLeft:5}}>{type(item)}</span>
+                                </div>
+                                <div className='cart-center'>
+                                    <div className='cart-center-item'>
+                                        <div>{state(index+1)}</div>
+                                        <div>时间:</div>
+                                    </div>
+                                </div>
+                                <div className='cart-bottom' >
+                                    <span
+                                        className='cart-bottom-span'
+                                        onClick={()=>log(item)
+                                    }>
+                                        日志
+                                    </span>
+                                </div>
+                            </Card>
+                        )
+                    })
+                }
             </div>
+
+            <Structure_right_logDrawer
+                visible={visible}
+                setVisible={setVisible}
+                drawer={drawer}
+                taskAlias={taskAlias}
+            />
         </div>
     )
 }

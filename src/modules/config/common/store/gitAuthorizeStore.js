@@ -34,8 +34,20 @@ class GitAuthorizeStore{
     }
 
     @action
-    getAllStorehouse = () =>{
-        GetAllStorehouse().then(res=>{
+    getGiteeProof =async value =>{
+        const params = new FormData()
+        params.append("proofName", value.proofName)
+        params.append("accessToken", value.accessToken)
+        const data = await GetProof(params)
+        return data.data;
+
+    }
+
+    @action
+    getAllStorehouse = value =>{
+        const param = new FormData()
+        param.append("accessToken", value.accessToken)
+        GetAllStorehouse(param).then(res=>{
             this.gitList =res.data.data
             console.log('getAllStorehouse',  this.gitList )
         }).catch(error=>{
@@ -45,8 +57,11 @@ class GitAuthorizeStore{
 
     @action
     getBranch = value =>{
-        const param = qs.stringify({projectName: value})
-        GetBranch(param).then(res=>{
+        // const param = qs.stringify({projectName: value})
+        const params = new FormData()
+        params.append('projectName',value.projectName)
+        params.append('proofId',value.proofId)
+        GetBranch(params).then(res=>{
             this.branchList =res.data.data
             console.log('branchList',  this.branchList )
         }).catch(error=>{
@@ -54,14 +69,6 @@ class GitAuthorizeStore{
         })
     }
 
-    @action
-    getGiteeProof =async value =>{
-        const params = new FormData()
-        params.append("proofName", value.proofName)
-        const data = await GetProof(params)
-        return data.data;
-
-    }
 
 }
 
