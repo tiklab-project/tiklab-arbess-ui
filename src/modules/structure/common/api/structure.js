@@ -9,6 +9,15 @@ export function  PipelineStartStructure (data){
     })
 }
 
+//判断当前流水线是否在构建
+export function  FindExecState (data){
+    return serviceLoc.request({
+        url:'/pipelineExec/findExecState',
+        method: 'post',
+        data
+    })
+}
+
 //构建状态
 export function  FindStructureState (data){
     return serviceLoc.request({

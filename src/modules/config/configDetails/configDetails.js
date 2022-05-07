@@ -1,13 +1,13 @@
 import React,{Fragment,useState,useEffect} from "react";
-import '../../common/style/config.scss'
-import ConfigDetails_view1 from "../components/configDetails_view1";
-import ConfigDetails_view2 from "../components/configDetails_view2";
-import Config_changeView from "./config_changeView";
+import '../common/style/config.scss'
+import Config_view1 from "../common/component/config_common/config_view1";
+import Config_view2 from "../common/component/config_common/config_view2";
+import Config_changeView from "../common/component/config_common/config_changeView";
 import {Form, Modal} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {Prompt} from "react-router-dom";
-import {getUrlParam} from '../../common/component/config_common/getUrlParam'
+import {getUrlParam} from '../common/component/config_form/getUrlParam'
 
 const ConfigDetails = props =>{
 
@@ -191,13 +191,14 @@ const ConfigDetails = props =>{
             <Config_changeView
                 view={view}
                 setView={setView}
+                setIsPrompt={setIsPrompt}
                 pipelineId={pipelineId}
                 pipelineStartStructure={pipelineStartStructure}
                 findStructureState={findStructureState}
             />
             {
                 view === 0 ? 
-                    <ConfigDetails_view1
+                    <Config_view1
                         formInitialValues={formInitialValues}
                         codeData={codeData}
                         setCodeData={setCodeData}
@@ -217,7 +218,7 @@ const ConfigDetails = props =>{
             }
             {
                 view === 1 ?
-                    <ConfigDetails_view2
+                    <Config_view2
                         formInitialValues={formInitialValues}
                         codeData={codeData}
                         setCodeData={setCodeData}

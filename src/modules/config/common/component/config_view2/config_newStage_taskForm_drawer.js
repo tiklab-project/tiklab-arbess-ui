@@ -1,11 +1,11 @@
 import React from "react";
 import {Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
-import Config_test_unit from "../config_common/config_test_unit";
-import Config_structure_maven from "../config_common/config_structure_maven";
-import Config_structure_node from "../config_common/config_structure_node";
-import Config_deploy_linux from "../config_common/config_deploy_linux";
-import Config_deploy_docker from "../config_common/config_deploy_docker";
+import Config_test_unit from "../config_form/config_test_unit";
+import Config_structure_maven from "../config_form/config_structure_maven";
+import Config_structure_node from "../config_form/config_structure_node";
+import Config_deploy_linux from "../config_form/config_deploy_linux";
+import Config_deploy_docker from "../config_form/config_deploy_docker";
 
 const Config_newStage_taskForm_drawer = props =>{
 

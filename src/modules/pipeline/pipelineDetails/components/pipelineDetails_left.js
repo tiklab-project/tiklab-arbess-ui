@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useRef } from "react";
+import React, { useState } from "react";
 import {withRouter} from "react-router-dom";
 import './pipelineDetails_left.scss'
 import {
@@ -11,7 +11,6 @@ import {
 } from "@ant-design/icons";
 import {Dropdown} from 'antd'
 import PipelineDetails_leftOpt from "./pipelineDetails_leftOpt";
-import { findDOMNode } from "react-dom";
 
 const  taskRouters=[
     {
@@ -44,29 +43,18 @@ const PipelineDetails_left = props =>{
 
     const {pipelineList,forceUpdate,visible,setVisible} = props
     const [nav,setNav] = useState(props.location.pathname)
-    const inputRef = useRef();
 
     const changeNav = item=>{
         setNav(item.to)
         props.history.push(item.to)
-    }
-    useEffect(()=>{
-        document.addEventListener('click',e=>show(e))
-        return () =>document.removeEventListener('click',e=>show(e))
-    },[])
-    const show = e =>{
-        const target = e.target
-        console.log( target,'target')
-        let result = findDOMNode(inputRef).contains(e.target)
-        console.log(result,'result')
     }
 
     return(
          <div className='aside'>
             <ul  className='content'>
                 <li
-                    ref={inputRef}
                     onClick = {()=>setVisible(!visible)}
+                    onBlur={()=>setVisible(false)}
                     className='aside_content'
                     style={{padding:10}}
                 >

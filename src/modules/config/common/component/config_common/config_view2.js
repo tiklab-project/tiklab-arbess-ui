@@ -1,19 +1,19 @@
 import React, {useState, useRef, Fragment,useEffect} from "react";
-import  '../../common/style/config_view2.scss'
-import Config_code from "../../common/component/config_view2/config_code";
-import Config_addNewStage from "../../common/component/config_view2/config_addNewStage";
-import Config_code_drawer from "../../common/component/config_view2/config_code_drawer";
-import Config_newStage_drawer from "../../common/component/config_view2/config_newStage_drawer";
-import Config_newStage_taskForm_drawer from "../../common/component/config_view2/config_newStage_taskForm_drawer";
-import Config_deploy_addProofModal from "../../common/component/config_common/config_deploy_addProofModal";
-import Config_code_details from "../../common/component/config_view2/config_code_details";
+import  '../../style/config_view2.scss'
+import Config_code from "../config_view2/config_code";
+import Config_addNewStage from "../config_view2/config_addNewStage";
+import Config_code_drawer from "../config_view2/config_code_drawer";
+import Config_newStage_drawer from "../config_view2/config_newStage_drawer";
+import Config_newStage_taskForm_drawer from "../config_view2/config_newStage_taskForm_drawer";
+import Config_deploy_addProofModal from "../config_form/config_deploy_addProofModal";
+import Config_code_details from "../config_view2/config_code_details";
 import {inject, observer} from "mobx-react";
 import {Form, Input, message} from "antd";
 import {EditOutlined} from "@ant-design/icons";
-import moment from "../../../../common/moment/moment";
+import moment from "../../../../../common/moment/moment";
 import {withRouter} from "react-router";
 
-const ConfigDetails_view2 = props =>{
+const Config_view2 = props =>{
 
     const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,updateConfigure,
         createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList,
@@ -118,7 +118,6 @@ const ConfigDetails_view2 = props =>{
         })
     }
 
-   
     const onFinish = value => {
 
         //排序
@@ -245,15 +244,16 @@ const ConfigDetails_view2 = props =>{
                 }
             }
         }
-        console.log('configureList',configureList)
+
         updateConfigure(configureList).then(res=>{
             if(res.code!==0){
                 message.info('配置失败')
             }
             setIsPrompt(false)
-            props.history.push('/home/task/work')
+            props.history.push('/home/task/structure')
         })
     }
+
     const onValuesChange = () =>{
         setIsPrompt(true)
     }
@@ -344,4 +344,4 @@ const ConfigDetails_view2 = props =>{
     )
 }
 
-export default withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore')(observer(ConfigDetails_view2)))
+export default withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore')(observer(Config_view2)))

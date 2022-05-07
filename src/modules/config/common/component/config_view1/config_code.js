@@ -1,7 +1,7 @@
 import React from "react";
-import Config_code_git from "../config_common/config_code_git";
-import Config_code_gitee from "../config_common/config_code_gitee";
-import Config_code_gitlab from "../config_common/config_code_gitlab";
+import Config_code_git from "../config_form/config_code_git";
+import Config_code_gitee from "../config_form/config_code_gitee";
+import Config_code_gitlab from "../config_form/config_code_gitlab";
 import {CloseOutlined} from "@ant-design/icons";
 
 const Config_code = props =>{

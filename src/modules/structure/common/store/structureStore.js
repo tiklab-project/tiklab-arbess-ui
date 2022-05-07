@@ -3,6 +3,7 @@ import qs from "qs";
 
 import {
     PipelineStartStructure,
+    FindExecState,
     FindStructureState,
     FindHistoryLog,
     SelectHistoryDetails,
@@ -16,17 +17,21 @@ class StructureStore {
         this.store=store
     }
 
-    @observable buildHistoryList=[]
-    @observable historyLog=''
     @observable logList=''
-    @observable structureStepList=[]
 
     @action
-    pipelineStartStructure = async(values) =>{
+    pipelineStartStructure = async values =>{
         const formData = new FormData()
         formData.append("pipelineId", values)
         const data = await PipelineStartStructure(formData);
-        console.log('开始构建',data)
+        return data.data;
+    }
+
+    @action
+    findExecState = async(values) =>{
+        const formData = new FormData()
+        formData.append("pipelineId", values)
+        const data = await FindExecState(formData);
         return data.data;
     }
 
@@ -38,7 +43,6 @@ class StructureStore {
                 if(res.data.data){
                     this.logList=res.data.data
                 }
-                console.log("查询状态",res)
                 resolve(res.data)
             }).catch(error=>{
                 console.log(error)
@@ -48,48 +52,37 @@ class StructureStore {
     }
 
     @action
-    selectHistoryDetails = values =>{
+    selectHistoryDetails =async values =>{
         const params = new FormData()
         params.append("pipelineId", values)
-        SelectHistoryDetails(params).then(res=>{
-            this.buildHistoryList=res.data.data
-            console.log("构建历史",res)
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await SelectHistoryDetails(params);
+        return data.data;
+
     }
 
     @action
-    findHistoryLog = values =>{
-        const params = qs.stringify({historyId: values})
-        FindHistoryLog(params).then(res=>{
-            console.log("历史日志",res)
-            this.historyLog=res.data.data
-        }).catch(error=>{
-            console.log(error)
-        })
+    findHistoryLog =async values =>{
+        const params = new FormData()
+        params.append("historyId", values)
+        const data = await FindHistoryLog(params);
+        return data.data;
     }
 
     @action
     deleteHistoryLog = values =>{
         const params = qs.stringify({historyId: values})
         DeleteHistoryLog(params).then(res=>{
-            console.log("删除构建历史",res)
         }).catch(error=>{
             console.log(error)
         })
     }
 
     @action
-    findAll = values =>{
+    findAll =async values =>{
         const params = new FormData()
         params.append("pipelineId", values)
-        FindAll(params).then(res=>{
-            console.log("配置流程",res)
-            this.structureStepList=res.data.data
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await FindAll(params);
+        return data.data;
     }
 
 

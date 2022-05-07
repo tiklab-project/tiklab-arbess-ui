@@ -1,7 +1,6 @@
 import React from "react";
 import { Breadcrumb } from 'antd';
 
-
 const ConfigTop = () =>{
 
     const  piplelineName = localStorage.getItem('pipelineName')
