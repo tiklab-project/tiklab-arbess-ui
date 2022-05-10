@@ -18,6 +18,7 @@
     max-height: calc(100vh - 56px);
     vertical-align: top;
     overflow-y: auto;
+    overflow-x: hidden;
     padding-top: 60px;
     &_head {
       font-size: 14px;

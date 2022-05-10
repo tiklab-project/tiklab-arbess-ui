@@ -16,7 +16,7 @@ import {withRouter} from "react-router";
 const Config_view2 = props =>{
 
     const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,
-        codeName,setCodeName,codeBranch,setCodeBranch,codeInitialValues,
+        codeName,setCodeName,codeBranch,setCodeBranch,
         updateConfigure, createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList,
     } = props
 
@@ -37,6 +37,15 @@ const Config_view2 = props =>{
             inputRef.current.focus()
         }
     },[step])
+
+    useEffect(()=>{
+        form.setFieldsValue({
+            gitCodeName:codeData && codeData.codeName,
+            gitBranch:codeData && codeData.codeBranch,
+            giteeCodeName:codeData && codeData.codeName,
+            giteeBranch:codeData && codeData.codeBranch
+        })
+    },[codeData])
 
     const displayInput = group =>{
         setStep(group)
@@ -299,13 +308,7 @@ const Config_view2 = props =>{
                autoComplete = "off"
                onFinish={onFinish}
                onValuesChange={onValuesChange}
-               initialValues={{
-                   formInitialValues,
-                   'gitCodeName':codeInitialValues.gitCodeName,
-                   'gitBranch':codeInitialValues.gitBranch,
-                   'giteeCodeName':codeInitialValues.giteeCodeName,
-                   'giteeBranch':codeInitialValues.giteeBranch,
-               }}
+               initialValues={{formInitialValues}}
            >
                <Config_code_drawer
                    setIsPrompt={setIsPrompt}
@@ -357,6 +360,7 @@ const Config_view2 = props =>{
                    setCodeDetailsDrawer={setCodeDetailsDrawer}
                    codeDetailsDrawer={codeDetailsDrawer}
                    form={form}
+                   codeName={codeName}
                    setCodeName={setCodeName}
                    setCodeBranch={setCodeBranch}
                />

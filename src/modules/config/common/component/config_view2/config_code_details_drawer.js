@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer, Button } from 'antd';
+import { Drawer } from 'antd';
 import {CloseOutlined, DeleteOutlined} from "@ant-design/icons";
 import Config_code_git from "../config_form/config_code_git";
 import Config_code_gitee from "../config_form/config_code_gitee";
@@ -12,7 +12,6 @@ const Config_code_details_drawer = props =>{
     } = props
 
     const deletePart = () =>{
-        console.log(codeData,'codeData')
         form.setFieldsValue({
             gitCodeName:null,
             gitBranch:null,
@@ -24,6 +23,8 @@ const Config_code_details_drawer = props =>{
         })
         setCodeData('')
         setCodeDetailsDrawer(false)
+        setCodeName('')
+        setCodeBranch('')
         setIsPrompt(true)
     }
 

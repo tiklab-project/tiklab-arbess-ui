@@ -20,7 +20,7 @@ import {withRouter} from "react-router";
 const Config_view1 = props =>{
 
     const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,
-        codeName,setCodeName,codeBranch,setCodeBranch,codeInitialValues,
+        codeName,setCodeName,codeBranch,setCodeBranch,
         updateConfigure, createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = props
 
@@ -38,6 +38,15 @@ const Config_view1 = props =>{
             inputRef.current.focus()
         }
     },[step])
+
+    useEffect(()=>{
+        form.setFieldsValue({
+            'gitCodeName':codeData.codeName,
+            'gitBranch':codeData.codeBranch,
+            'giteeCodeName':codeData.codeName,
+            'giteeBranch':codeData.codeBranch
+        })
+    },[codeData])
 
     const displayInput = group =>{
         setStep(group)
@@ -331,13 +340,7 @@ const Config_view1 = props =>{
                             autoComplete = "off"
                             onFinish={onFinish}
                             onValuesChange={onValuesChange}
-                            initialValues={{
-                                formInitialValues,
-                                'gitCodeName':codeInitialValues.codeName,
-                                'gitBranch':codeInitialValues.codeBranch,
-                                'giteeCodeName':codeInitialValues.codeName,
-                                'giteeBranch':codeInitialValues.codeBranch,
-                            }}
+                            initialValues={{formInitialValues}}
                         >
                             <Config_code
                                 codeData={codeData}

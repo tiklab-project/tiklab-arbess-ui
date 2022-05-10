@@ -1,0 +1,146 @@
+.structure{
+  margin: 46px auto;
+  .icon {
+    width: 20px !important;
+    height: 20px !important;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
+  &-content{
+    display: flex;
+    flex-direction: row;
+    &-left {
+      width: 350px;
+      height: calc(100vh - 140px);
+      background: #fff;
+      border-right: 1px solid #d9d9d9;
+      padding-top: 30px;
+      vertical-align: top;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      &-dropdown{
+        width: 500px;
+        min-width: 400px;
+      }
+      &-history{
+        overflow-y: auto;
+        height: 100%;
+        .history-content{
+          padding-right: 30px;
+          &-list{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin: 10px 0;
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+            .list{
+              &-title{
+                width: 85px;
+                &>span{
+                  color: #1890ff;
+                  font-weight: 500;
+                  font-size: 18px;
+                }
+              }
+              &-group{
+                flex-grow: 1;
+                &-item{
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  margin-bottom: 10px;
+                }
+              }
+              &-time{
+                margin-left: -3px;
+              }
+
+            }
+            &_active{
+              background: #eaeaea;
+            }
+          }
+        }
+      }
+      .ant-dropdown-trigger{
+        display: inline-block;
+        margin-right: 30px;
+      }
+    }
+    &-right{
+      flex-grow: 1;
+      height: calc(100vh - 120px);
+      padding: 20px 16px;
+      &-mid{
+        .mid_group{
+          display: flex;
+          flex-direction: column;
+          .ant-card-body {
+              padding: 20px;
+          }
+          &_top{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            &_tel{
+              .tel{
+                &_time{
+                  padding-right: 20px;
+                }
+              }
+            }
+          }
+          &_center{
+            display: flex;
+            flex-direction: row;
+            &-cart{
+              margin-right: 20px;
+              width:220px;
+              display: flex;
+              flex-direction: row;
+            .cart{
+              &-center{
+                &-item{
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  padding: 10px 0  ;
+                  >div{
+                    padding-left: 10px;
+                  }
+                }
+              }
+              &-bottom{
+                text-align: right;
+                &-span{
+                  display: inline-block;
+                  cursor: pointer;
+                  color: #1890ff;
+                  width: 30px;
+                }
+              }
+            }
+            }
+          }
+        }     
+      }
+    }
+    &-bottom{
+      &-outLog{
+        white-space: pre-wrap;
+        height:60vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      padding: 20px;
+    }
+  }
+  
+}

@@ -24,6 +24,8 @@ const Config_code = props =>{
             gitlabProofName:null,
         })
         setCodeData('')
+        setCodeName('')
+        setCodeBranch('')
         setIsPrompt(true)
     }
     

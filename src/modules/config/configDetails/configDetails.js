@@ -25,8 +25,6 @@ const ConfigDetails = props =>{
     const [codeData, setCodeData] = useState({})
     const [data,setData] = useState([])
     const [isPrompt, setIsPrompt] = useState(false);
-
-    const [codeInitialValues,setCodeInitialValues] = useState({})
     const [codeName,setCodeName] = useState('')
     const [codeBranch,setCodeBranch] = useState('')
 
@@ -48,7 +46,6 @@ const ConfigDetails = props =>{
 
     //Gitee授权
     useEffect(() => {
-        console.log(codeValue)
         const param = {
             code:codeValue
         }
@@ -65,28 +62,14 @@ const ConfigDetails = props =>{
 
 
     useEffect(()=>{
-        const newCode = {
-            codeName:codeName,
-            codeBranch:codeBranch
-        }
-        Object.assign(codeData,newCode)
-        setCodeData({...codeData})
-        let codeValue
         if(codeData){
-            switch (codeData.desc) {
-                case '通用Git':
-                    codeValue = {
-                        gitCodeName:codeData.codeName,
-                        gitBranch:codeData.codeBranch
-                    }
-                    setCodeInitialValues(codeValue)
-                    break
-                case 'Gitee':
-                    codeValue = {
-                        giteeCodeName:codeData.codeName,
-                        giteeBranch:codeData.codeBranch
-                    }
-                    setCodeInitialValues(codeValue)
+            if(codeData.desc){
+                const newCode = {
+                    codeName:codeName,
+                    codeBranch:codeBranch
+                }
+                Object.assign(codeData,newCode)
+                setCodeData({...codeData})
             }
         }
     },[codeName,codeBranch])
@@ -207,6 +190,7 @@ const ConfigDetails = props =>{
                     }
                     setData([...newData])
                     form.setFieldsValue({...j})
+                    form.setFieldsValue({...j})
                     setFormInitialValues({...formInitialValues})
                 }
             } else{
@@ -250,7 +234,6 @@ const ConfigDetails = props =>{
                         setCodeName={setCodeName}
                         codeBranch={codeBranch}
                         setCodeBranch={setCodeBranch}
-                        codeInitialValues={codeInitialValues}
                         updateConfigure={updateConfigure}
                         createProof={createProof}
                         findAllGitProof={findAllGitProof}
@@ -274,7 +257,6 @@ const ConfigDetails = props =>{
                         setCodeName={setCodeName}
                         codeBranch={codeBranch}
                         setCodeBranch={setCodeBranch}
-                        codeInitialValues={codeInitialValues}
                         updateConfigure={updateConfigure}
                         createProof={createProof}
                         findAllGitProof={findAllGitProof}
