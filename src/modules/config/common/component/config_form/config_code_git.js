@@ -7,7 +7,7 @@ const {Option} = Select
 
 const Config_code_git = props =>{
 
-    const {ProofStore}=props
+    const {ProofStore,setCodeName,setCodeBranch}=props
 
     const {createProof,findAllProof} = ProofStore
 
@@ -30,6 +30,14 @@ const Config_code_git = props =>{
         localStorage.setItem('gitProofId',value)
     }
 
+    const inputCodeNameValue = e =>{
+        setCodeName(e.target.value)
+    }
+
+    const inputCodeBranchValue = e =>{
+        setCodeBranch(e.target.value)
+    }
+
     return(
         <Fragment>
             <Form.Item
@@ -42,13 +50,17 @@ const Config_code_git = props =>{
                     }
                 ]}
             >
-                <Input  />
+                <Input  onChange={e=>inputCodeNameValue(e)}/>
             </Form.Item>
             <Form.Item
                 name="gitBranch"
                 label="分支"
             >
-                <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
+                <Input
+                    style={{ width: 300 }}
+                    placeholder="请输入分支，默认是master"
+                    onChange={e=>inputCodeBranchValue(e)}
+                />
             </Form.Item>
             <Row>
                 <Form.Item

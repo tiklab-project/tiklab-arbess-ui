@@ -4,10 +4,10 @@ import {message} from "antd";
 const Config_newStage_drawer_right = props =>{
 
     const {rightLis,onScroll,setNewStageDrawer,setTaskFormDrawer,setNewStage,
-        data,setData,setIsPrompt
+        data,setData,setIsPrompt,index
     } = props
 
-    const handleClick = (group,item,index) =>{
+    const handleClick = (group,item,i) =>{
         const newData = [...data]
         const name = data && data.map(item => item.desc);
         const groupDesc = group.desc.map(item=>item.tpl)
@@ -26,8 +26,8 @@ const Config_newStage_drawer_right = props =>{
                 }
             }
         }
-        newData.push({
-            dataId:index,
+        newData.splice(index,0,{
+            dataId:i,
             title:group.title,
             desc:item.tpl
         })

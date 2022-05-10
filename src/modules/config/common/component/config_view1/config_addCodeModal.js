@@ -18,15 +18,16 @@ const lis=[
 
 const Config_addCodeModal = props =>{
 
-    const {setCodeData,codeVisible,setCodeVisible,setIsPrompt} = props
+    const {setCodeData,codeVisible,setCodeVisible,setIsPrompt,codeName,codeBranch} = props
 
     const handleClick = (item,index) =>{
         let newCode = { }
         newCode = {
             codeId:index,
             title:'源码管理',
-            desc:item.desc
+            desc:item.desc,
         }
+        console.log(newCode)
         setCodeData(newCode)
         setCodeVisible(false)
         setIsPrompt(true)

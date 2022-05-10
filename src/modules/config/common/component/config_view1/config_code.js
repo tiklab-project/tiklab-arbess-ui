@@ -6,7 +6,7 @@ import {CloseOutlined} from "@ant-design/icons";
 
 const Config_code = props =>{
 
-    const {setCodeVisible,codeData,setCodeData,setIsPrompt,form} = props
+    const {setCodeVisible,codeData,setCodeData,setIsPrompt,form,setCodeName,setCodeBranch} = props
 
     const addCode = () =>{
         setCodeVisible(true)
@@ -31,10 +31,15 @@ const Config_code = props =>{
         if(codeData){
             switch (codeData.desc){
                 case '通用Git' :
-                    return  <Config_code_git/>
+                    return  <Config_code_git
+                                setCodeName={setCodeName}
+                                setCodeBranch={setCodeBranch}
+                            />
                 case 'Gitee' :
                     return <Config_code_gitee
                                 form={form}
+                                setCodeName={setCodeName}
+                                setCodeBranch={setCodeBranch}
                             />
                 case 'GitLab' :
                     return  <Config_code_gitlab/>

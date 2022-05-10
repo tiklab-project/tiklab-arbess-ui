@@ -58,7 +58,7 @@ const rightLis = [
 const Config_newStage_drawer = props =>{
 
     const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,
-        data,setData,setIsPrompt
+        data,setData,setIsPrompt,index
     } = props
 
     const [opt,setOpt] = useState(1)
@@ -119,6 +119,7 @@ const Config_newStage_drawer = props =>{
                                     data={data}
                                     setData={setData}
                                     setIsPrompt={setIsPrompt}
+                                    index={index}
                                 />
                             </div>
                         </div>

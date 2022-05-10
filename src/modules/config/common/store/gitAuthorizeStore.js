@@ -1,5 +1,5 @@
 import {observable,action} from "mobx";
-import qs from "qs";
+
 
 import {
     Url,
@@ -28,8 +28,9 @@ class GitAuthorizeStore{
 
     @action
     code =async value =>{
-        const param = qs.stringify({code: value})
-        const data = await Code(param);
+        const params = new FormData()
+        params.append("code", value.code)
+        const data = await Code(params);
         return data.data;
     }
 
@@ -57,7 +58,6 @@ class GitAuthorizeStore{
 
     @action
     getBranch = value =>{
-        // const param = qs.stringify({projectName: value})
         const params = new FormData()
         params.append('projectName',value.projectName)
         params.append('proofId',value.proofId)

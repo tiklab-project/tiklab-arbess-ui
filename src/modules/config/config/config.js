@@ -23,7 +23,7 @@ const Config = props =>{
     const [form] = Form.useForm();
     const [formInitialValues, setFormInitialValues] = useState({})
     const [view,setView] = useState(0)
-    const [codeData, setCodeData] = useState('')
+    const [codeData, setCodeData] = useState({})
     const [data,setData] = useState([])
     const [isPrompt, setIsPrompt] = useState(false);
 

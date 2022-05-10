@@ -23,6 +23,28 @@ const Config_code = props =>{
                 >
                     {codeData.desc}
                 </div>
+                {
+                    codeData.codeBranch === '' || codeData.codeBranch ===undefined
+                        || codeData.codeBranch === null
+                        ?
+                        null :
+                        <div className='configView2-sider_code_one_address'>
+                            <div className='branch-title'>
+                                {codeData.codeBranch}
+                            </div>
+                        </div>
+                }
+                {
+                    codeData.codeName === ''  || codeData.codeName ===undefined
+                        || codeData.codeName === null
+                        ?
+                        null :
+                        <div className='configView2-sider_code_one_branch '>
+                            <div className='branch-address'>
+                                {codeData.codeName}
+                            </div>
+                        </div>
+                }
             </div>
     }
 

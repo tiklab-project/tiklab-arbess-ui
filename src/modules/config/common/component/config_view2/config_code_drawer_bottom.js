@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Button } from "antd";
 import Config_code_git from "../config_form/config_code_git";
 import Config_code_gitee from "../config_form/config_code_gitee";
 import Config_code_gitlab from "../config_form/config_code_gitlab";
@@ -6,20 +7,34 @@ import Config_code_gitlab from "../config_form/config_code_gitlab";
 const Config_code_drawer_bottom = props =>{
 
     const {codeList,codeOpt,setCodeOpt,setCodeData,setCodeDrawer,setIsPrompt,form,
+        codeName,codeBranch,setCodeName,setCodeBranch,
         createProof,findAllGitProof,allGitProofList,
     } = props
+    const [codeId,setCodeId] = useState('')
+    const [desc,setDesc] = useState('通用Git')
+
+    let newCode = { }
 
     const handleClick = (item,index) =>{
-        let newCode = { }
-        newCode = {
-            codeId:index,
-            title:'源码管理',
-            desc:item.title
-        }
-        setCodeData(newCode)
+        setCodeId(index)
+        setDesc(item.title)
         setCodeOpt(index)
-        // setCodeDrawer(false)
-        setIsPrompt(true)
+    }
+
+    const codeBtn = () =>{
+        if(desc) {
+            newCode = {
+                codeId: codeId,
+                title: '源码管理',
+                desc: desc,
+                codeName: codeName,
+                codeBranch: codeBranch,
+            }
+            console.log(newCode)
+            setCodeData(newCode)
+            setCodeDrawer(false)
+            setIsPrompt(true)
+        }
     }
 
     return(
@@ -44,6 +59,8 @@ const Config_code_drawer_bottom = props =>{
                 {
                     codeOpt === 0 ?
                         <Config_code_git
+                            setCodeName={setCodeName}
+                            setCodeBranch={setCodeBranch}
                             createProof={createProof}
                             findAllGitProof={findAllGitProof}
                             allGitProofList={allGitProofList}
@@ -54,6 +71,8 @@ const Config_code_drawer_bottom = props =>{
                     codeOpt === 1 ?
                         <Config_code_gitee
                             form={form}
+                            setCodeName={setCodeName}
+                            setCodeBranch={setCodeBranch}
                         />
                         :null
                 }
@@ -66,6 +85,11 @@ const Config_code_drawer_bottom = props =>{
                         />
                         :null
                 }
+            </div>
+            <div style={{textAlign:'right'}}>
+                <Button onClick={()=>codeBtn()}>
+                    保存
+                </Button>
             </div>
         </div>
     )

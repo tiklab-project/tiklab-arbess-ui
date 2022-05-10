@@ -23,7 +23,6 @@ const PipelineDetails= (props)=>{
     },[])
 
  
-
     useEffect(()=>{
         return ()=>{
             localStorage.removeItem('pipelineName')

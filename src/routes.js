@@ -13,11 +13,9 @@ const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDeta
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
 
 const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
-const Structure=AsyncComponent(()=>import('./modules/structure/structure/container/structure'))
-const StructureHistory=AsyncComponent(()=>import('./modules/structure/structureHistory/structureHistory'))
+const Structure=AsyncComponent(()=>import('./modules/structure/container/structure'))
 const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
-const StructureHistoryDetails=AsyncComponent(()=>import('./modules/structure/structureHistoryDetails/structureHistoryDetails'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
 
 export const routers=[
@@ -67,14 +65,6 @@ export const routers=[
                     {
                         path:"/home/task/structure",
                         component: Structure
-                    },
-                    {
-                        path:'/home/task/build/:historyName',
-                        component:StructureHistoryDetails
-                    },
-                    {
-                        path:'/home/task/history',
-                        component: StructureHistory,
                     },
                     {
                         path:'/home/task/assembly',

@@ -10,7 +10,7 @@ import Config_deploy_docker from "../config_form/config_deploy_docker";
 const Config_newStage_taskForm_drawer = props =>{
 
     const {data,setData,setTaskFormDrawer,taskFormDrawer,newStage,setDeployVisible,
-        findAllDeployProof, allDeployProofList,setIsPrompt,form
+        findAllDeployProof, allDeployProofList,setIsPrompt,form,setCodeName,setCodeBranch
     } = props
 
     const showTask = () =>{
@@ -77,6 +77,8 @@ const Config_newStage_taskForm_drawer = props =>{
                 data.splice(i,1)
             }
             setData([...data])
+            setCodeName('')
+            setCodeBranch('')
             setTaskFormDrawer(false)
             setIsPrompt(true)
         }

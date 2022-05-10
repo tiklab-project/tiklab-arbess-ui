@@ -5,10 +5,10 @@ import Config_code_git from "../config_form/config_code_git";
 import Config_code_gitee from "../config_form/config_code_gitee";
 import Config_code_gitlab from "../config_form/config_code_gitlab";
 
-const Config_code_details = props =>{
+const Config_code_details_drawer = props =>{
 
     const {codeDetailsDrawer,setCodeDetailsDrawer,codeData,setCodeData,setIsPrompt,
-        form
+        form,setCodeName,setCodeBranch
     } = props
 
     const deletePart = () =>{
@@ -25,17 +25,21 @@ const Config_code_details = props =>{
         setCodeData('')
         setCodeDetailsDrawer(false)
         setIsPrompt(true)
-
     }
 
     const showCode = () =>{
         if(codeData){
             switch (codeData.desc){
                 case '通用Git' :
-                    return  <Config_code_git/>
+                    return  <Config_code_git
+                                setCodeName={setCodeName}
+                                setCodeBranch={setCodeBranch}
+                            />
                 case 'Gitee' :
                     return  <Config_code_gitee
                                 form={form}
+                                setCodeName={setCodeName}
+                                setCodeBranch={setCodeBranch}
                             />
                 case 'GitLab' :
                     return  <Config_code_gitlab/>
@@ -62,7 +66,11 @@ const Config_code_details = props =>{
                                <DeleteOutlined/>
                            </span>
                         </div>
-                        <div onClick={()=>setCodeDetailsDrawer(false)}><CloseOutlined /></div>
+                        <div
+                            onClick={()=>setCodeDetailsDrawer(false)}
+                        >
+                            <CloseOutlined />
+                        </div>
                     </div>
                     <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
                         <div className="body">
@@ -82,4 +90,4 @@ const Config_code_details = props =>{
     )
 }
 
-export default Config_code_details
+export default Config_code_details_drawer

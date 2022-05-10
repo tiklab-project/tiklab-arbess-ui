@@ -21,10 +21,14 @@ const ConfigDetails = props =>{
 
     const [form] = Form.useForm();
     const [formInitialValues, setFormInitialValues] = useState({})
-    const [view,setView] = useState(0)
-    const [codeData, setCodeData] = useState('')
+    const [view,setView] = useState(1)
+    const [codeData, setCodeData] = useState({})
     const [data,setData] = useState([])
     const [isPrompt, setIsPrompt] = useState(false);
+
+    const [codeInitialValues,setCodeInitialValues] = useState({})
+    const [codeName,setCodeName] = useState('')
+    const [codeBranch,setCodeBranch] = useState('')
 
     const codeValue = getUrlParam('code')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -44,15 +48,48 @@ const ConfigDetails = props =>{
 
     //Gitee授权
     useEffect(() => {
-        const se = setTimeout(()=>localStorage.removeItem('code'),100)
+        console.log(codeValue)
+        const param = {
+            code:codeValue
+        }
+        // const se = setTimeout(()=>localStorage.removeItem('code'),200)
         if (codeValue && localStorage.getItem('code')) {
-            code(codeValue).then(res=>{
+            code(param).then(res=>{
+                console.log(res,'res')
                 localStorage.setItem('AccessToken',JSON.stringify(res.data))
                 window.close()
             })
         }
-        return () => clearTimeout(se)
+        // return () => clearTimeout(se)
     }, [])
+
+
+    useEffect(()=>{
+        const newCode = {
+            codeName:codeName,
+            codeBranch:codeBranch
+        }
+        Object.assign(codeData,newCode)
+        setCodeData({...codeData})
+        let codeValue
+        if(codeData){
+            switch (codeData.desc) {
+                case '通用Git':
+                    codeValue = {
+                        gitCodeName:codeData.codeName,
+                        gitBranch:codeData.codeBranch
+                    }
+                    setCodeInitialValues(codeValue)
+                    break
+                case 'Gitee':
+                    codeValue = {
+                        giteeCodeName:codeData.codeName,
+                        giteeBranch:codeData.codeBranch
+                    }
+                    setCodeInitialValues(codeValue)
+            }
+        }
+    },[codeName,codeBranch])
 
     useEffect(()=>{
         const param = {
@@ -69,7 +106,9 @@ const ConfigDetails = props =>{
                         newCode = {
                             codeId:j.codeId,
                             title:'源码管理',
-                            desc: '通用Git'
+                            desc: '通用Git' ,
+                            codeName:j.codeName,
+                            codeBranch:j.codeBranch
                         }
                         localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
                         localStorage.setItem('codeId',j.codeId)
@@ -207,6 +246,11 @@ const ConfigDetails = props =>{
                         isPrompt={isPrompt}
                         setIsPrompt={setIsPrompt}
                         form={form}
+                        codeName={codeName}
+                        setCodeName={setCodeName}
+                        codeBranch={codeBranch}
+                        setCodeBranch={setCodeBranch}
+                        codeInitialValues={codeInitialValues}
                         updateConfigure={updateConfigure}
                         createProof={createProof}
                         findAllGitProof={findAllGitProof}
@@ -226,6 +270,11 @@ const ConfigDetails = props =>{
                         setData={setData}
                         setIsPrompt={setIsPrompt}
                         form={form}
+                        codeName={codeName}
+                        setCodeName={setCodeName}
+                        codeBranch={codeBranch}
+                        setCodeBranch={setCodeBranch}
+                        codeInitialValues={codeInitialValues}
                         updateConfigure={updateConfigure}
                         createProof={createProof}
                         findAllGitProof={findAllGitProof}

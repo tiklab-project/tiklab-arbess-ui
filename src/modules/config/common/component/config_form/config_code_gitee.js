@@ -8,7 +8,7 @@ const {Option} =Select
 
 const Config_code_gitee = props =>{
 
-    const {GitAuthorizeStore,form,ProofStore,ConfigStore} = props
+    const {GitAuthorizeStore,form,ProofStore,ConfigStore,setCodeName,setCodeBranch} = props
     const {url, getAllStorehouse, gitList,getBranch,branchList, getGiteeProof
     } = GitAuthorizeStore
     const {findAllProof} = ProofStore
@@ -65,6 +65,11 @@ const Config_code_gitee = props =>{
         }
         setBranch(false)
         getBranch(params)
+        setCodeName(values)
+    }
+
+    const inputCodeBranchValue = values =>{
+        setCodeBranch(values)
     }
 
     return(
@@ -106,6 +111,7 @@ const Config_code_gitee = props =>{
                 <Select
                     style={{ width: 300 }}
                     disabled={branch}
+                    onChange={()=>inputCodeBranchValue()}
                 >
                     <Option >
                        无
@@ -113,7 +119,7 @@ const Config_code_gitee = props =>{
                     {
                         branchList && branchList.map(item=>{
                             return (
-                                <Option key={item}>
+                                <Option key={item} value={item}>
                                     {item}
                                 </Option>
                             )

@@ -6,17 +6,18 @@ import Config_code_drawer from "../config_view2/config_code_drawer";
 import Config_newStage_drawer from "../config_view2/config_newStage_drawer";
 import Config_newStage_taskForm_drawer from "../config_view2/config_newStage_taskForm_drawer";
 import Config_deploy_addProofModal from "../config_form/config_deploy_addProofModal";
-import Config_code_details from "../config_view2/config_code_details";
+import Config_code_details_drawer from "../config_view2/config_code_details_drawer";
 import {inject, observer} from "mobx-react";
 import {Form, Input, message} from "antd";
-import {EditOutlined} from "@ant-design/icons";
+import {EditOutlined,PlusOutlined} from "@ant-design/icons";
 import moment from "../../../../../common/moment/moment";
 import {withRouter} from "react-router";
 
 const Config_view2 = props =>{
 
-    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,updateConfigure,
-        createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList,
+    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,
+        codeName,setCodeName,codeBranch,setCodeBranch,codeInitialValues,
+        updateConfigure, createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList,
     } = props
 
     const inputRef = useRef();
@@ -27,6 +28,7 @@ const Config_view2 = props =>{
     const [codeDetailsDrawer,setCodeDetailsDrawer] = useState(false)
     const [newStage,setNewStage] = useState('')
     const [step,setStep] = useState('')
+    const [index,setIndex] = useState('')
 
     const pipelineId = localStorage.getItem('pipelineId')
 
@@ -59,13 +61,26 @@ const Config_view2 = props =>{
         setNewStage(item.desc)
         setTaskFormDrawer(true)
     }
+    
+    const insertData = (item,index) => {
+        setNewStageDrawer(true)
+        setIndex(index)
+    }
 
     const newStageShow = () =>{
         return data && data.map((item,index)=>{
             return(
                     <Fragment key={index}>
                         <div className='group-flow'>
-                            <div className='group-flow_btn' />
+                            <div className='group-flow_btn' >
+                                <svg
+                                    className="icon group-flow_btn_i"
+                                    aria-hidden="true"
+                                    onClick={()=>insertData(item,index)}
+                                >
+                                    <use xlinkHref="#icon-zengjia"/>
+                                </svg>
+                            </div>
                         </div>
                         <div className='group-table'>
                             <div className='group-head'>
@@ -248,9 +263,8 @@ const Config_view2 = props =>{
         updateConfigure(configureList).then(res=>{
             if(res.code!==0){
                 message.info('配置失败')
-            }
+            }message.info('保存成功')
             setIsPrompt(false)
-            props.history.push('/home/task/structure')
         })
     }
 
@@ -285,7 +299,13 @@ const Config_view2 = props =>{
                autoComplete = "off"
                onFinish={onFinish}
                onValuesChange={onValuesChange}
-               initialValues={formInitialValues}
+               initialValues={{
+                   formInitialValues,
+                   'gitCodeName':codeInitialValues.gitCodeName,
+                   'gitBranch':codeInitialValues.gitBranch,
+                   'giteeCodeName':codeInitialValues.giteeCodeName,
+                   'giteeBranch':codeInitialValues.giteeBranch,
+               }}
            >
                <Config_code_drawer
                    setIsPrompt={setIsPrompt}
@@ -294,6 +314,10 @@ const Config_view2 = props =>{
                    setCodeData={setCodeData}
                    codeDrawer={codeDrawer}
                    setCodeDrawer={setCodeDrawer}
+                   codeBranch={codeBranch}
+                   setCodeBranch={setCodeBranch}
+                   codeName={codeName}
+                   setCodeName={setCodeName}
                    createProof={createProof}
                    findAllGitProof={findAllGitProof}
                    allGitProofList={allGitProofList}
@@ -308,6 +332,7 @@ const Config_view2 = props =>{
                    setNewStage={setNewStage}
                    data={data}
                    setData={setData}
+                   index={index}
                />
 
                <Config_newStage_taskForm_drawer
@@ -319,17 +344,21 @@ const Config_view2 = props =>{
                    taskFormDrawer={taskFormDrawer}
                    newStage={newStage}
                    setDeployVisible={setDeployVisible}
+                   setCodeName={setCodeName}
+                   setCodeBranch={setCodeBranch}
                    findAllDeployProof={findAllDeployProof}
                    allDeployProofList={allDeployProofList}
                />
 
-               <Config_code_details
+               <Config_code_details_drawer
                    setIsPrompt={setIsPrompt}
                    codeData={codeData}
                    setCodeData={setCodeData}
                    setCodeDetailsDrawer={setCodeDetailsDrawer}
                    codeDetailsDrawer={codeDetailsDrawer}
                    form={form}
+                   setCodeName={setCodeName}
+                   setCodeBranch={setCodeBranch}
                />
 
            </Form>
@@ -339,7 +368,6 @@ const Config_view2 = props =>{
                 setDeployVisible={setDeployVisible}
                 createProof={createProof}
             />
-
         </div>
     )
 }

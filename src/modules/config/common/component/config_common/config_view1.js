@@ -19,8 +19,9 @@ import {withRouter} from "react-router";
 
 const Config_view1 = props =>{
 
-    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,updateConfigure,
-        createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
+    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,
+        codeName,setCodeName,codeBranch,setCodeBranch,codeInitialValues,
+        updateConfigure, createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = props
 
     const inputRef = useRef();
@@ -306,9 +307,8 @@ const Config_view1 = props =>{
         updateConfigure(configureList).then(res=>{
             if(res.code!==0){
                 message.info('配置失败')
-            }
+            }message.info('保存成功')
             setIsPrompt(false)
-            props.history.push('/home/task/structure')
         })
     }
 
@@ -331,7 +331,13 @@ const Config_view1 = props =>{
                             autoComplete = "off"
                             onFinish={onFinish}
                             onValuesChange={onValuesChange}
-                            initialValues={formInitialValues}
+                            initialValues={{
+                                formInitialValues,
+                                'gitCodeName':codeInitialValues.codeName,
+                                'gitBranch':codeInitialValues.codeBranch,
+                                'giteeCodeName':codeInitialValues.codeName,
+                                'giteeBranch':codeInitialValues.codeBranch,
+                            }}
                         >
                             <Config_code
                                 codeData={codeData}
@@ -339,6 +345,8 @@ const Config_view1 = props =>{
                                 setCodeData={setCodeData}
                                 setCodeVisible={setCodeVisible}
                                 setIsPrompt={setIsPrompt}
+                                setCodeName={setCodeName}
+                                setCodeBranch={setCodeBranch}
                                 createProof={createProof}
                                 findAllGitProof={findAllGitProof}
                                 allGitProofList={allGitProofList}
@@ -360,6 +368,8 @@ const Config_view1 = props =>{
                     />
 
                     <Config_addCodeModal
+                        codeName={codeName}
+                        codeBranch={codeBranch}
                         codeVisible={codeVisible}
                         setCodeVisible={setCodeVisible}
                         setCodeData={setCodeData}
@@ -381,9 +391,7 @@ const Config_view1 = props =>{
                         createProof={createProof}
                     />
                 </div>
-
             </div>
-
         </div>
     )
 }

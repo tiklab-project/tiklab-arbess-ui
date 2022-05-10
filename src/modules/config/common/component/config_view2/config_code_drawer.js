@@ -20,7 +20,8 @@ const codeList = [
 
 const Config_code_drawer = props =>{
 
-    const {setCodeData,setCodeDrawer,codeDrawer,setIsPrompt,form,
+    const {setCodeData,setCodeDrawer,codeDrawer,setIsPrompt,form,codeBranch,codeName,
+        setCodeBranch,setCodeName,
         createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = props
 
@@ -33,6 +34,7 @@ const Config_code_drawer = props =>{
             onClose={()=>setCodeDrawer(false)}
             visible={codeDrawer}
             width={600}
+            mask={false}
         >
             <nav className="bm-item-list" style={{height:'100%'}}>
                 <div className="menu-wrapper visible">
@@ -51,6 +53,10 @@ const Config_code_drawer = props =>{
                                     setCodeOpt={setCodeOpt}
                                     setCodeData={setCodeData}
                                     setCodeDrawer={setCodeDrawer}
+                                    codeBranch={codeBranch}
+                                    setCodeBranch={setCodeBranch}
+                                    codeName={codeName}
+                                    setCodeName={setCodeName}
                                     createProof={createProof}
                                     findAllGitProof={findAllGitProof}
                                     allGitProofList={allGitProofList}
@@ -65,4 +71,5 @@ const Config_code_drawer = props =>{
         </Drawer>
     )
 }
+
 export default Config_code_drawer
