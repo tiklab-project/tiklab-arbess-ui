@@ -10,6 +10,7 @@ const Config_code_drawer_bottom = props =>{
         codeName,codeBranch,setCodeName,setCodeBranch,
         createProof,findAllGitProof,allGitProofList,
     } = props
+
     const [codeId,setCodeId] = useState('')
     const [desc,setDesc] = useState('通用Git')
 

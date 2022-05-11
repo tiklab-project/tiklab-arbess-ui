@@ -8,9 +8,9 @@ const Config_changeView = props =>{
     const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt} = props
     
     const run = () => {
+        setIsPrompt(false)
         pipelineStartStructure(pipelineId).then(res=>{
             props.history.push('/home/task/structure')
-            setIsPrompt(false)
         })
     }
 

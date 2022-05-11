@@ -2,18 +2,19 @@ import React, {useState,Fragment} from 'react'
 import {Button, Form, Input, Select,Row} from "antd";
 import Config_code_gitModal from "./config_code_gitModal";
 import {inject, observer} from "mobx-react";
+import {FindAllProof} from "../../api/proof";
 
 const {Option} = Select
 
 const Config_code_Gitlab = props =>{
 
     const {ProofStore}=props
-    const {createProof,findAllGitProof,findOneGitProof,allGitProofList} = ProofStore
+    const {createProof,findAllProof,findOneGitProof,allGitProofList} = ProofStore
 
     const [visible,setVisible]=useState(false)
 
     const clickFindAllGit = () =>{
-        findAllGitProof()
+        findAllProof(1)
     }
 
     const changeGitSelect = value =>{

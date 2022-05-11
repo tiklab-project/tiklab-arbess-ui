@@ -19,8 +19,6 @@ export function  FindAllProof(data){
 }
 
 
-
-
 export function  FindOneProof(data){
     return serviceLoc.request({
         url:'/proof/findOneProof',

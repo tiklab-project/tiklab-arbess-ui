@@ -1,7 +1,7 @@
 import React from "react";
 
 const StructureLeft_execute = props => {
-    const {leftExecute,setDetails,status,index,setIndex} = props
+    const {leftExecute,setDetails,status,setIndex,details} = props
 
     const state = () =>{
         if(leftExecute){
@@ -41,7 +41,7 @@ const StructureLeft_execute = props => {
     return(
         <div
             onClick={()=>changeMode()}
-            className={ index === -1 ?
+            className={ details === 0    ?
                 'history-content-list history-content-list_active'
                 :   'history-content-list'
             }

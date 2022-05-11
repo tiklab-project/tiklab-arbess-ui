@@ -20,6 +20,8 @@ const ConfigDetails = props =>{
     const {pipelineStartStructure,findStructureState} = StructureStore
 
     const [form] = Form.useForm();
+    const { getFieldValue } = form
+
     const [formInitialValues, setFormInitialValues] = useState({})
     const [view,setView] = useState(1)
     const [codeData, setCodeData] = useState({})
@@ -60,7 +62,6 @@ const ConfigDetails = props =>{
         // return () => clearTimeout(se)
     }, [])
 
-
     useEffect(()=>{
         if(codeData){
             if(codeData.desc){
@@ -72,6 +73,7 @@ const ConfigDetails = props =>{
                 setCodeData({...codeData})
             }
         }
+        return
     },[codeName,codeBranch])
 
     useEffect(()=>{
@@ -198,6 +200,7 @@ const ConfigDetails = props =>{
                 setData([])
             }
         })
+        return
     },[pipelineId])
 
     const confirmLeave = pathname =>{

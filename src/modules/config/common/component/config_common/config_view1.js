@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import '../../style/config_view1.scss';
-import {Button, Form, Input,message,Modal} from "antd";
+import {Button, Form, Input,message} from "antd";
 import Config_addNewStageModal from "../config_view1/config_addNewStageModal";
 import Config_addCodeModal from "../config_view1/config_addCodeModal";
 import ChangeConfigSorts_drawer from "../config_view1/changeConfigSorts_drawer";
@@ -41,10 +41,10 @@ const Config_view1 = props =>{
 
     useEffect(()=>{
         form.setFieldsValue({
-            'gitCodeName':codeData.codeName,
-            'gitBranch':codeData.codeBranch,
-            'giteeCodeName':codeData.codeName,
-            'giteeBranch':codeData.codeBranch
+            gitCodeName:codeData && codeData.codeName,
+            gitBranch:codeData && codeData.codeBranch,
+            giteeCodeName:codeData && codeData.codeName,
+            giteeBranch:codeData && codeData.codeBranch
         })
     },[codeData])
 

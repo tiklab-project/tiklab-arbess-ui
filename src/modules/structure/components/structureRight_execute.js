@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Button, Card, Popconfirm} from "antd";
+import React from "react";
+import {Card} from "antd";
 
 const StructureRight_execute = props => {
     const {rightExecute,logList,status,leftExecute,runTime} = props
@@ -71,8 +71,6 @@ const StructureRight_execute = props => {
             }
         }
     }
-    
-    
 
     return(
         <div className="mid_group">
@@ -87,19 +85,6 @@ const StructureRight_execute = props => {
                     <span className='tel_way'>
                         触发方式：{runWay()}
                     </span>
-                </div>
-                <div className="mid_group_top_del">
-                    <Popconfirm
-                        title="您确认删除吗?"
-                        onConfirm={confirm}
-                        okText="确认"
-                        cancelText="取消"
-                        placement="bottom"
-                    >
-                        <Button>
-                            删除
-                        </Button>
-                    </Popconfirm>
                 </div>
             </div>
             <div className="mid_group_center">

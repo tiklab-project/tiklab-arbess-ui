@@ -4,7 +4,7 @@ import StructureLeft_execute from "./structureLeft_execute";
 
 const StructureLeft = props =>{
 
-    const {findHistoryLog,leftData,leftExecute,setRightData,status,setDetails,
+    const {findHistoryLog,leftData,leftExecute,setRightData,status,details,setDetails,
         setModeData,setIndex,index,
     } = props
 
@@ -21,13 +21,12 @@ const StructureLeft = props =>{
     }
     
     const showHistory = (item,i)=> {
-        console.log(index+2)
+        setDetails(1)
         localStorage.setItem('historyId',item.historyId)
         findHistoryLog(item.historyId).then(res=>{
             console.log('构建历史详情',res)
-            setDetails(1)
-            setIndex(i+1)
             setModeData(item)
+            setIndex(i+1)
             setRightData(res.data)
         })
     }
@@ -40,9 +39,9 @@ const StructureLeft = props =>{
                     {   leftExecute === '' ? ' ' :
                             <StructureLeft_execute
                                 leftExecute={leftExecute}
+                                details={details}
                                 setDetails={setDetails}
                                 status={status}
-                                index={index}
                                 setIndex={setIndex}
                             />
                     }
@@ -52,7 +51,7 @@ const StructureLeft = props =>{
                             <div
                                 key={i}
                                 onClick={()=>showHistory(item,i)}
-                                className={index === i+1 ?
+                                className={index === i+1 && details === 1 ?
                                     'history-content-list history-content-list_active'
                                     :   'history-content-list'
                                 }
@@ -76,7 +75,6 @@ const StructureLeft = props =>{
                                     </div>
                                 </div>
                             </div>
-
                         )
                     })}
                 </div>

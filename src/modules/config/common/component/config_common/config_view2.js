@@ -1,5 +1,5 @@
 import React, {useState, useRef, Fragment,useEffect} from "react";
-import  '../../style/config_view2.scss'
+import  '../../style/config_view2.scss';
 import Config_code from "../config_view2/config_code";
 import Config_addNewStage from "../config_view2/config_addNewStage";
 import Config_code_drawer from "../config_view2/config_code_drawer";
@@ -9,7 +9,7 @@ import Config_deploy_addProofModal from "../config_form/config_deploy_addProofMo
 import Config_code_details_drawer from "../config_view2/config_code_details_drawer";
 import {inject, observer} from "mobx-react";
 import {Form, Input, message} from "antd";
-import {EditOutlined,PlusOutlined} from "@ant-design/icons";
+import {EditOutlined} from "@ant-design/icons";
 import moment from "../../../../../common/moment/moment";
 import {withRouter} from "react-router";
 

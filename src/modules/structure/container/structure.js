@@ -1,5 +1,5 @@
 import React, { useEffect,useState} from 'react'
-import { Spin} from "antd";
+import { Spin,Result} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 import './structure.scss'
 import StructureLeft from "../components/structureLeft";
@@ -34,20 +34,19 @@ const Structure = props => {
 
     let interval=null
     useEffect(() => {
-        console.log(index)
         findExecState(pipelineId).then(res=>{
             if(res.data === 1 ){
+                setIndex(0)
                 interval = setInterval(() => {
                     findStructureState(pipelineId).then(res =>{
-                        setIndex(0)
                         console.log('构建时候的状态',res)
-                        console.log(runTime,'执行时长')
                         if(res.data!==null){
                             setLeftExecute(res.data)
                             if(res.data.runStatus===1 || res.data.runStatus===30){
                                 setLeftExecute('')
                                 clearInterval(interval)
                                 setDetails(1)
+                                setIndex(1)
                             }
                         }else{
                             setLeftExecute('')
@@ -76,19 +75,25 @@ const Structure = props => {
         let right = []
         selectHistoryDetails(pipelineId).then(res=>{
             console.log('历史列表',res)
-            for (let i in res.data){
-                left.push(res.data[i])
-            }
-            setModeData(res.data && res.data[0])
-            setIndex(1)
-            localStorage.setItem('historyId', res.data && res.data[0].historyId)
-            findHistoryLog(res.data && res.data[0].historyId).then(res=>{
+            if(res.data.length!==0){
                 for (let i in res.data){
-                    right.push(res.data[i])
+                    left.push(res.data[i])
                 }
-                setLeftData([...left])
-                setRightData([...right])
-            })
+                setModeData(res.data && res.data[0])
+                setIndex(1)
+                localStorage.setItem('historyId', res.data && res.data[0].historyId)
+                findHistoryLog(res.data && res.data[0].historyId).then(res=>{
+                    for (let i in res.data){
+                        right.push(res.data[i])
+                    }
+                    setLeftData([...left])
+                    setRightData([...right])
+                })
+            }else {
+                setLeftData([])
+                setRightData([])
+            }
+
         })
     }
 
@@ -117,34 +122,42 @@ const Structure = props => {
 
     return (
         <div className='structure task' shouldupdate='true'>
-            <div className='structure-content'>
-                <StructureLeft
-                    details={details}
-                    setDetails={setDetails}
-                    leftExecute={leftExecute}
-                    leftData={leftData}
-                    setRightData={setRightData}
-                    status={status}
-                    setModeData={setModeData}
-                    index={index}
-                    setIndex={setIndex}
-                    findHistoryLog={findHistoryLog}
-                />
-                <StructureRight
-                    details={details}
-                    rightExecute={rightExecute}
-                    rightData={rightData}
-                    status={status}
-                    leftExecute={leftExecute}
-                    modeData={modeData}
-                    index={index}
-                    runTime={runTime}
-                    logList={logList}
-                    deleteHistoryLog={deleteHistoryLog}
-                    forceUpdate={forceUpdate}
-                    historyId={historyId}
-                />
-            </div>
+            {
+                leftExecute ==='' && leftData && leftData.length===0 ?
+                    <Result
+                        title="当前没有历史数据"
+                    />
+                    :
+                    <div className='structure-content'>
+                        <StructureLeft
+                            details={details}
+                            setDetails={setDetails}
+                            leftExecute={leftExecute}
+                            leftData={leftData}
+                            setRightData={setRightData}
+                            status={status}
+                            setModeData={setModeData}
+                            index={index}
+                            setIndex={setIndex}
+                            findHistoryLog={findHistoryLog}
+                        />
+                        <StructureRight
+                            details={details}
+                            rightExecute={rightExecute}
+                            rightData={rightData}
+                            status={status}
+                            leftExecute={leftExecute}
+                            modeData={modeData}
+                            index={index}
+                            runTime={runTime}
+                            logList={logList}
+                            deleteHistoryLog={deleteHistoryLog}
+                            forceUpdate={forceUpdate}
+                            historyId={historyId}
+                        />
+                    </div>
+            }
+
         </div>
     )
 }
