@@ -3,32 +3,31 @@ import '../common/style/config.scss'
 import Config_view1 from "../common/component/config_common/config_view1";
 import Config_view2 from "../common/component/config_common/config_view2";
 import Config_changeView from "../common/component/config_common/config_changeView";
-import {Form, Modal} from "antd";
+import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import {Prompt} from "react-router-dom";
 import {getUrlParam} from '../common/component/config_form/getUrlParam'
 
 const ConfigDetails = props =>{
 
-    const {ConfigStore,ProofStore,GitAuthorizeStore,StructureStore} = props
+    const {ConfigStore,ProofStore,GitAuthorizeStore,StructureStore,ConfigCommonStore} = props
 
     const {updateConfigure,findAllConfigure} = ConfigStore
     const {createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = ProofStore
     const {code} = GitAuthorizeStore
     const {pipelineStartStructure,findStructureState} = StructureStore
+    const {isPrompt,setIsPrompt,codeBlockContent,setCodeBlockContent,
+        codeName,setCodeName,codeBranch,setCodeBranch
+    } = ConfigCommonStore
 
     const [form] = Form.useForm();
-    const { getFieldValue } = form
 
     const [formInitialValues, setFormInitialValues] = useState({})
-    const [view,setView] = useState(1)
-    const [codeData, setCodeData] = useState({})
+    const [view,setView] = useState(0)
     const [data,setData] = useState([])
-    const [isPrompt, setIsPrompt] = useState(false);
-    const [codeName,setCodeName] = useState('')
-    const [codeBranch,setCodeBranch] = useState('')
+    const [codeData, setCodeData] = useState('')
+    const [newStageForm,setNewStageForm] = useState({})
 
     const codeValue = getUrlParam('code')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -43,6 +42,10 @@ const ConfigDetails = props =>{
             localStorage.removeItem('testId')
             localStorage.removeItem('structureId')
             localStorage.removeItem('deployId')
+            // setCodeName('')
+            // setCodeBranch('')
+            // setCodeData('')
+            // setData([])
         }
     },[])
 
@@ -73,7 +76,6 @@ const ConfigDetails = props =>{
                 setCodeData({...codeData})
             }
         }
-        return
     },[codeName,codeBranch])
 
     useEffect(()=>{
@@ -170,8 +172,9 @@ const ConfigDetails = props =>{
                         const formValue = {
                             linuxAddress:j.deployAddress,
                             linuxTargetAddress:j.deployTargetAddress,
-                            linuxProofName:j.proof && j.proof.proofDescribe+ "(" + j.proof.proofIp + ")" ,
+                            linuxProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofIp + ")" ,
                         }
+                        setCodeBlockContent(`${j.deployShell}`)
                         form.setFieldsValue(formValue)
                         Object.assign(formInitialValues,formValue)
                     } else if(j.type===32){
@@ -185,7 +188,7 @@ const ConfigDetails = props =>{
                         const formValue = {
                             dockerAddress:j.deployAddress,
                             dockerTargetAddress:j.deployTargetAddress,
-                            dockerProofName:j.proof && j.proof.proofDescribe+ "(" +j.proof.proofIp + ")",
+                            dockerProofName:j.proof && j.proof.proofName+ "(" +j.proof.proofIp + ")",
                         }
                         form.setFieldsValue(formValue)
                         Object.assign(formInitialValues,formValue)
@@ -198,19 +201,10 @@ const ConfigDetails = props =>{
             } else{
                 setCodeData('')
                 setData([])
+                form.resetFields();
             }
         })
-        return
     },[pipelineId])
-
-    const confirmLeave = pathname =>{
-        setIsPrompt(false)
-        if(pathname!=='/home/task/config'){
-            pathname && setTimeout(()=>{
-                props.history.push(pathname)
-            })
-        }
-    }
 
     return (
         <Fragment >
@@ -223,13 +217,16 @@ const ConfigDetails = props =>{
                 findStructureState={findStructureState}
             />
             {
-                view === 0 ? 
+                view === 0 ?
                     <Config_view1
+                        codeBlockContent={codeBlockContent}
                         formInitialValues={formInitialValues}
                         codeData={codeData}
                         setCodeData={setCodeData}
                         data={data}
                         setData={setData}
+                        newStageForm={newStageForm}
+                        setNewStageForm={setNewStageForm}
                         isPrompt={isPrompt}
                         setIsPrompt={setIsPrompt}
                         form={form}
@@ -244,10 +241,7 @@ const ConfigDetails = props =>{
                         findAllDeployProof={findAllDeployProof}
                         allDeployProofList={allDeployProofList}
                     />
-                    :null
-            }
-            {
-                view === 1 ?
+                    :
                     <Config_view2
                         formInitialValues={formInitialValues}
                         codeData={codeData}
@@ -260,6 +254,8 @@ const ConfigDetails = props =>{
                         setCodeName={setCodeName}
                         codeBranch={codeBranch}
                         setCodeBranch={setCodeBranch}
+                        newStageForm={newStageForm}
+                        setNewStageForm={setNewStageForm}
                         updateConfigure={updateConfigure}
                         createProof={createProof}
                         findAllGitProof={findAllGitProof}
@@ -267,27 +263,10 @@ const ConfigDetails = props =>{
                         findAllDeployProof={findAllDeployProof}
                         allDeployProofList={allDeployProofList}
                     />
-                    :null
             }
-
-            <Prompt
-                when={isPrompt}
-                message={location =>{
-                    if(!isPrompt){
-                        return true
-                    }
-                    Modal.confirm({
-                        title:'有编辑未保存，确定离开吗',
-                        okText:'离开',
-                        cancelText:'取消',
-                        onOk:()=>confirmLeave(location.pathname)
-                    })
-                    return false
-                }}
-            />
 
         </Fragment>
     )
 }
 
-export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore','StructureStore')(observer(ConfigDetails)))
+export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore','StructureStore','ConfigCommonStore')(observer(ConfigDetails)))

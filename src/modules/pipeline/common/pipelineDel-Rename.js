@@ -12,13 +12,8 @@ const PipelineDelRename= props=>{
     const {deletePipeline,updatePipeline,pipelineList}=PipelineStore
 
     const [form]=Form.useForm()
-    const [, forceUpdate] = useState({})
 
     const pipelineId=localStorage.getItem('pipelineId')
-
-    useEffect(()=>{
-        forceUpdate({})
-    },[])
 
     const onConfirm=()=>{
         deletePipeline(pipelineId)

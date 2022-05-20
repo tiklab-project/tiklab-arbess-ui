@@ -8,7 +8,8 @@ import {
     FindHistoryLog,
     SelectHistoryDetails,
     DeleteHistoryLog,
-    FindAll
+    FindAll,
+    KillInstance
 } from "../api/structure";
 
 class StructureStore {
@@ -27,6 +28,7 @@ class StructureStore {
         return data.data;
     }
 
+    // 判断当前流水线是否在构建
     @action
     findExecState = async(values) =>{
         const formData = new FormData()
@@ -35,6 +37,7 @@ class StructureStore {
         return data.data;
     }
 
+    //构建状态
     @action
     findStructureState = async (values) =>{
         const params = qs.stringify({pipelineId: values})
@@ -51,6 +54,7 @@ class StructureStore {
         })
     }
 
+    //构建历史
     @action
     selectHistoryDetails =async values =>{
         const params = new FormData()
@@ -60,6 +64,7 @@ class StructureStore {
 
     }
 
+    //历史详情日志
     @action
     findHistoryLog =async values =>{
         const params = new FormData()
@@ -68,6 +73,7 @@ class StructureStore {
         return data.data;
     }
 
+    //删除构建历史
     @action
     deleteHistoryLog = values =>{
         const params = qs.stringify({historyId: values})
@@ -78,14 +84,23 @@ class StructureStore {
         })
     }
 
+    //查看所有构建步骤
     @action
     findAll =async values =>{
-        const params = new FormData()
-        params.append("pipelineId", values)
-        const data = await FindAll(params);
+        const param = new FormData()
+        param.append("pipelineId", values)
+        const data = await FindAll(param);
         return data.data;
     }
 
+    //  停止构建
+    @action
+    killInstance = async values =>{
+        const param = new FormData()
+        param.append("pipelineId", values)
+        const data = await KillInstance(param)
+        return data.data
+    }
 
 }
 

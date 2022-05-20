@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import {Form, Select, Input, Modal, message} from "antd";
 
 const { Option } = Select;
@@ -19,6 +19,7 @@ const Config_code_gitModal= props =>{
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe
             }
+            console.log(params)
             createProof(params).then(res=>{
                 console.log('创建源码凭证',res)
                 if(res.code!==0){
@@ -39,12 +40,18 @@ const Config_code_gitModal= props =>{
            onCancel={()=>setVisible(false)}
            onOk={onOk}
        >
-           <Form form={form} layout="vertical" name="userForm"  autoComplete = "off" initialValues={{proofType:"password"}}>
+           <Form
+               form={form}
+               layout="vertical"
+               name="userForm"
+               autoComplete = "off"
+               initialValues={{proofType:"password"}}
+           >
                <Form.Item label='凭证名称' name='proofName'>
                    <Input placeholder='名称'/>
                </Form.Item>
                <Form.Item label='凭证类型' name='proofType' >
-                   <Select placeholder='选择类型' >
+                   <Select placeholder='选择类型'>
                        <Option value="SSH">SSH</Option>
                        <Option value="password">password</Option>
                    </Select>
@@ -59,16 +66,16 @@ const Config_code_gitModal= props =>{
                            <Form.Item name='proofPassword' label='password'>
                                <Input.Password placeholder='密码'/>
                            </Form.Item>
-                           <Form.Item name='proofDescribe' label='描述'>
-                               <Input.TextArea  placeholder='备注'/>
-                           </Form.Item>
                        </>
                        ):
-                       <Form.Item name='proofDescribe' label='描述'>
-                           <Input.TextArea  placeholder='备注'/>
+                       <Form.Item name='proofPassword' label='私钥'>
+                           <Input.TextArea  placeholder='私钥'/>
                        </Form.Item>
                    }
               </Form.Item>
+               <Form.Item name='proofDescribe' label='描述'>
+                   <Input.TextArea  placeholder='备注'/>
+               </Form.Item>
            </Form>
        </Modal>
     )

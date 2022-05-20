@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router-dom";
 import './pipelineDetails_left.scss'
 import {
@@ -41,11 +41,16 @@ const  taskRouters=[
 
 const PipelineDetails_left = props =>{
 
-    const {pipelineList,forceUpdate,visible,setVisible} = props
-    const [nav,setNav] = useState(props.location.pathname)
+    const {pipelineList,visible,setVisible,isPrompt,setIsPrompt,setPipeline} = props
+
+    const [nav,setNav] = useState('')
+    const path = props.location.pathname
+
+    useEffect(()=>{
+        setNav(path)
+    },[path])
 
     const changeNav = item=>{
-        setNav(item.to)
         props.history.push(item.to)
     }
 
@@ -62,7 +67,9 @@ const PipelineDetails_left = props =>{
                         <PipelineDetails_leftOpt
                             pipelineList={pipelineList}
                             setVisible={setVisible}
-                            forceUpdate={forceUpdate}
+                            isPrompt={isPrompt}
+                            setIsPrompt={setIsPrompt}
+                            setPipeline={setPipeline}
                         />}
                         visible={visible}
                         id='liOne'

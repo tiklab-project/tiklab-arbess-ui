@@ -1,4 +1,4 @@
-import React, {useState,Fragment} from 'react'
+import React, {useState,Fragment,useEffect} from 'react'
 import {Input} from "antd";
 import {withRouter} from "react-router-dom";
 
@@ -8,11 +8,18 @@ const Head =props=>{
 
     const {routers} = props;
 
-    const [currentLink, setCurrentLink] = useState(props.location.pathname);
+    const [currentLink, setCurrentLink] = useState('流水线');
+    const nav = localStorage.getItem('nav')
+
+    useEffect(()=>{
+        setCurrentLink(nav)
+    },[nav])
+
     const changeCurrentLink = item => {
-        setCurrentLink(item.to)
+        localStorage.setItem('nav',item.title)
         props.history.push(item.to)
     }
+
     const renderRouter = () => {
         if (routers) {
             return (
@@ -23,7 +30,7 @@ const Head =props=>{
                               <li
                                   key={routers.key}
                                   onClick={ () => changeCurrentLink(routers)}
-                                  className={currentLink === routers.to ? 'header-link-active header-link' : 'header-link'}
+                                  className={currentLink === routers.title ? 'header-link-active header-link' : 'header-link'}
                               >
                                   {routers.title}
                               </li>
@@ -44,7 +51,7 @@ const Head =props=>{
 
             <ul className="header-right header-nav">
                 <li  className='header-link'>
-                    <a href='/login' >登录</a>
+                    <a href='/#/login' >登录</a>
                 </li>
             </ul>
         </div>

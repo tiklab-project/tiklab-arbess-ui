@@ -1,9 +1,10 @@
-import React from "react";
-import {Card} from "antd";
+import React, {Fragment} from "react";
+import {Button, Card, Popconfirm} from "antd";
 
 const StructureRight_execute = props => {
-    const {rightExecute,logList,status,leftExecute,runTime} = props
-
+    const {rightExecute,logList,status,leftExecute,runTime,killInstance} = props
+    const pipelineId = localStorage.getItem('pipelineId')
+    
     const type = item =>{
         if(item){
             switch(item.taskType){
@@ -71,6 +72,47 @@ const StructureRight_execute = props => {
             }
         }
     }
+    
+    const cease = () => {
+        killInstance(pipelineId).then(res=>{
+            console.log('停止成功',res)
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
+    const executeDetails = () =>{
+        return(
+            <Fragment>
+                {
+                    rightExecute && rightExecute.map((item,index)=>{
+                        return(
+                            <Card className='mid_group_center-cart' key={index}>
+                                <div className='cart-top'>
+                                    {item.taskAlias} --
+                                    <span>{type(item)}</span>
+                                </div>
+                                <div className='cart-center'>
+                                    <div className='cart-center-item'>
+                                        <div>状态：{state(index+1)}</div>
+                                        <div>时间:</div>
+                                    </div>
+                                </div>
+                                <div className='cart-bottom' >
+                                <span
+                                    className='cart-bottom-span'
+                                    // onClick={()=>log(item)}
+                                >
+                                    日志
+                                </span>
+                                </div>
+                            </Card>
+                        )
+                    })
+                }
+            </Fragment>
+        )
+    }
 
     return(
         <div className="mid_group">
@@ -86,34 +128,14 @@ const StructureRight_execute = props => {
                         触发方式：{runWay()}
                     </span>
                 </div>
+                <div className="mid_group_top_del">
+                    <Button onClick = {()=>cease()}>
+                        停止
+                    </Button>
+                </div>
             </div>
             <div className="mid_group_center">
-            {
-               rightExecute && rightExecute.map((item,index)=>{
-                   return(           
-                        <Card className='mid_group_center-cart' key={index}>
-                            <div className='cart-top'>
-                                {item.taskAlias} --
-                                <span style={{paddingLeft:5}}>{type(item)}</span>
-                            </div>
-                            <div className='cart-center'>
-                                <div className='cart-center-item'>
-                                    <div>状态：{state(index+1)}</div>
-                                    <div>时间:</div>
-                                </div>
-                            </div>
-                            <div className='cart-bottom' >
-                                <span
-                                    className='cart-bottom-span'
-                                    // onClick={()=>log(item)}
-                                >
-                                    日志
-                                </span>
-                            </div>
-                        </Card>
-                   )
-               })
-            }
+                {executeDetails()}
             </div>
            { logRunLog() }
        </div>

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import StructureLeft_dropdown from "./structureLeft_dropdown";
 import StructureLeft_execute from "./structureLeft_execute";
 
@@ -30,23 +30,12 @@ const StructureLeft = props =>{
             setRightData(res.data)
         })
     }
-
-    return(
-        <div className='structure-content-left'>
-            <StructureLeft_dropdown/>
-            <div className='structure-content-left-history'>
-                <div className='history-content'>
-                    {   leftExecute === '' ? ' ' :
-                            <StructureLeft_execute
-                                leftExecute={leftExecute}
-                                details={details}
-                                setDetails={setDetails}
-                                status={status}
-                                setIndex={setIndex}
-                            />
-                    }
-                    {
-                        leftData && leftData.map((item,i)=>{
+    
+    const leftDetails = () => {
+        return(
+            <Fragment>
+                {
+                    leftData && leftData.map((item,i)=>{
                         return(
                             <div
                                 key={i}
@@ -57,9 +46,9 @@ const StructureLeft = props =>{
                                 }
                             >
                                 <div className='list-title'>
-                                        <span>
-                                           构建 {i+1}
-                                        </span>
+                                    <span>
+                                       构建 {i+1}
+                                    </span>
                                 </div>
                                 <div className='list-group'>
                                     <div className='list-group-item'>
@@ -75,8 +64,27 @@ const StructureLeft = props =>{
                                     </div>
                                 </div>
                             </div>
-                        )
-                    })}
+                        )})
+                }
+            </Fragment>
+        )
+    }
+
+    return(
+        <div className='structure-content-left'>
+            <StructureLeft_dropdown/>
+            <div className='structure-content-left-history'>
+                <div className='history-content'>
+                    {   leftExecute === '' ? ' ' :
+                        <StructureLeft_execute
+                            leftExecute={leftExecute}
+                            details={details}
+                            setDetails={setDetails}
+                            status={status}
+                            setIndex={setIndex}
+                        />
+                    }
+                    { leftDetails() }
                 </div>
             </div>
         </div>

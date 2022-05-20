@@ -1,5 +1,7 @@
 import React, {Fragment, useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
+import CodeMirror from '@uiw/react-codemirror';
+import {javascript} from "@codemirror/lang-javascript";
 import {inject, observer} from "mobx-react";
 
 const {Option}=Select
@@ -7,8 +9,9 @@ const { TextArea } = Input;
 
 const Config_deploy_linux = props =>{
   
-    const {setDeployVisible,ProofStore} = props
+    const {setDeployVisible,ProofStore,ConfigCommonStore} = props
     const {findAllProof} = ProofStore
+    const {codeBlockContent,setCodeBlockContent} = ConfigCommonStore
 
     const [allLinuxProofList,setAllLinuxProofList] = useState([])
 
@@ -50,7 +53,7 @@ const Config_deploy_linux = props =>{
                             allLinuxProofList && allLinuxProofList.map(item=>{
                                 return(
                                     <Option key={item.proofId} value={item.proofId} >
-                                        { item.proofDescribe+ " (" + item.proofIp + ")"}
+                                        { item.proofName+ " (" + item.proofIp + ")"}
                                     </Option>
                                 )
                             })
@@ -68,6 +71,14 @@ const Config_deploy_linux = props =>{
             <Form.Item name='linuxAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
+            {/*<CodeMirror*/}
+            {/*    value={codeBlockContent}*/}
+            {/*    style={{height:'auto'}}*/}
+            {/*    extensions={[javascript({ jsx: true })]}*/}
+            {/*    onChange={(value, viewUpdate) => {*/}
+            {/*        setCodeBlockContent(value)*/}
+            {/*    }}*/}
+            {/*/>*/}
             <Form.Item name='deployShell' label='shell命令'>
                 <TextArea autoSize/>
             </Form.Item>
@@ -75,6 +86,6 @@ const Config_deploy_linux = props =>{
     )
 }
 
-export default inject('ProofStore')(observer(Config_deploy_linux))
+export default inject('ProofStore','ConfigCommonStore')(observer(Config_deploy_linux))
 
 

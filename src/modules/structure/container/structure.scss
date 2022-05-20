@@ -105,28 +105,33 @@
               width:220px;
               display: flex;
               flex-direction: row;
-            .cart{
-              &-center{
-                &-item{
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: space-between;
-                  padding: 10px 0  ;
-                  >div{
-                    padding-left: 10px;
+              .cart{
+                &-top{
+                  &>span{
+                    padding-left:5px;
+                  }
+                }
+                &-center{
+                  &-item{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    padding: 10px 0  ;
+                    >div{
+                      padding-left: 10px;
+                    }
+                  }
+                }
+                &-bottom{
+                  text-align: right;
+                  &-span{
+                    display: inline-block;
+                    cursor: pointer;
+                    color: #1890ff;
+                    width: 30px;
                   }
                 }
               }
-              &-bottom{
-                text-align: right;
-                &-span{
-                  display: inline-block;
-                  cursor: pointer;
-                  color: #1890ff;
-                  width: 30px;
-                }
-              }
-            }
             }
           }
         }     
@@ -135,12 +140,11 @@
     &-bottom{
       &-outLog{
         white-space: pre-wrap;
-        height:60vh;
+        height:56vh;
         overflow-y: auto;
         overflow-x: hidden;
       }
       padding: 20px;
     }
   }
-  
 }

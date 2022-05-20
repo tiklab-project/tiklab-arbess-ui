@@ -33,15 +33,10 @@ const Config_code = props =>{
         if(codeData){
             switch (codeData.desc){
                 case '通用Git' :
-                    return  <Config_code_git
-                                setCodeName={setCodeName}
-                                setCodeBranch={setCodeBranch}
-                            />
+                    return  <Config_code_git/>
                 case 'Gitee' :
                     return <Config_code_gitee
                                 form={form}
-                                setCodeName={setCodeName}
-                                setCodeBranch={setCodeBranch}
                             />
                 case 'GitLab' :
                     return  <Config_code_gitlab/>

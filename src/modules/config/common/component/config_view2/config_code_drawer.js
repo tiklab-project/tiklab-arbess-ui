@@ -21,8 +21,6 @@ const codeList = [
 const Config_code_drawer = props =>{
 
     const {setCodeData,setCodeDrawer,codeDrawer,setIsPrompt,form,codeBranch,codeName,
-        setCodeBranch,setCodeName,
-        createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = props
 
     const [codeOpt,setCodeOpt]=useState(0)
@@ -54,14 +52,7 @@ const Config_code_drawer = props =>{
                                     setCodeData={setCodeData}
                                     setCodeDrawer={setCodeDrawer}
                                     codeBranch={codeBranch}
-                                    setCodeBranch={setCodeBranch}
                                     codeName={codeName}
-                                    setCodeName={setCodeName}
-                                    createProof={createProof}
-                                    findAllGitProof={findAllGitProof}
-                                    allGitProofList={allGitProofList}
-                                    findAllDeployProof={findAllDeployProof}
-                                    allDeployProofList={allDeployProofList}
                                 />
                             </div>
                         </div>

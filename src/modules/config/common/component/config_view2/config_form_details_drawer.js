@@ -6,11 +6,14 @@ import Config_structure_maven from "../config_form/config_structure_maven";
 import Config_structure_node from "../config_form/config_structure_node";
 import Config_deploy_linux from "../config_form/config_deploy_linux";
 import Config_deploy_docker from "../config_form/config_deploy_docker";
+import Config_code_git from "../config_form/config_code_git";
+import Config_code_gitee from "../config_form/config_code_gitee";
+import Config_code_gitlab from "../config_form/config_code_gitlab";
 
-const Config_newStage_taskForm_drawer = props =>{
+const Config_form_details_drawer = props =>{
 
-    const {data,setData,setTaskFormDrawer,taskFormDrawer,newStage,setDeployVisible,
-        findAllDeployProof, allDeployProofList,setIsPrompt,form,setCodeName,setCodeBranch
+    const {data,setData,setTaskFormDrawer,taskFormDrawer,newStage,setIsPrompt,
+        form,setCodeName,setCodeBranch,setCodeData
     } = props
 
     const showTask = () =>{
@@ -22,17 +25,15 @@ const Config_newStage_taskForm_drawer = props =>{
             case 'node':
                 return  <Config_structure_node/>
             case 'linux':
-                return  <Config_deploy_linux
-                            setDeployVisible={setDeployVisible}
-                            findAllDeployProof={findAllDeployProof}
-                            allDeployProofList={allDeployProofList}
-                        />
+                return  <Config_deploy_linux/>
             case 'docker':
-                return  <Config_deploy_docker
-                            setDeployVisible={setDeployVisible}
-                            findAllDeployProof={findAllDeployProof}
-                            allDeployProofList={allDeployProofList}
-                        />
+                return  <Config_deploy_docker/>
+            case '通用Git':
+                return  <Config_code_git/>
+            case 'Gitee':
+                return  <Config_code_gitee/>
+            case 'GitLab':
+                return  <Config_code_gitlab/>
         }
     }
 
@@ -71,6 +72,10 @@ const Config_newStage_taskForm_drawer = props =>{
                     mappingPort: null,
                     dockerAddress: null
                 })
+                break
+            default:
+                setCodeData('')
+
         }
         for (let i = 0 ;i<data.length;i++){
             if(data[i].desc === newStage){
@@ -79,10 +84,11 @@ const Config_newStage_taskForm_drawer = props =>{
             setData([...data])
             setCodeName('')
             setCodeBranch('')
-            setTaskFormDrawer(false)
-            setIsPrompt(true)
         }
+        setIsPrompt(true)
+        setTaskFormDrawer(false)
     }
+
     return(
         <Drawer
             closable={false}
@@ -123,4 +129,4 @@ const Config_newStage_taskForm_drawer = props =>{
     )
 }
 
-export default Config_newStage_taskForm_drawer
+export default Config_form_details_drawer

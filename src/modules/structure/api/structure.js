@@ -54,10 +54,19 @@ export function  DeleteHistoryLog (data){
     })
 }
 
-//查看所有构建
+//查看所有构建步骤
 export function  FindAll(data){
     return serviceLoc.request({
         url:'/pipelineConfigure/findAll',
+        method:'post',
+        data
+    })
+}
+
+//停止构建
+export function  KillInstance(data){
+    return serviceLoc.request({
+        url:'/pipelineExec/killInstance',
         method:'post',
         data
     })

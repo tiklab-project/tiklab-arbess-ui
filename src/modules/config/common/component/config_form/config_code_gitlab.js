@@ -2,23 +2,34 @@ import React, {useState,Fragment} from 'react'
 import {Button, Form, Input, Select,Row} from "antd";
 import Config_code_gitModal from "./config_code_gitModal";
 import {inject, observer} from "mobx-react";
-import {FindAllProof} from "../../api/proof";
 
 const {Option} = Select
 
 const Config_code_Gitlab = props =>{
 
     const {ProofStore}=props
-    const {createProof,findAllProof,findOneGitProof,allGitProofList} = ProofStore
+    const {createProof,findAllProof,findOneProof} = ProofStore
 
+    const [allGitProofList,setAllGitProofList] = useState([])
     const [visible,setVisible]=useState(false)
 
-    const clickFindAllGit = () =>{
-        findAllProof(1)
+    const clickFindAllGitlab = () =>{
+        const param = {
+            type :1
+        }
+        findAllProof(param).then(res=>{
+            console.log('git凭证',res)
+            setAllGitProofList(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
 
-    const changeGitSelect = value =>{
-        findOneGitProof(value)
+    const changeGitlabSelect = value =>{
+        const param = {
+            proofId:value
+        }
+        findOneProof(param)
     }
 
     return(
@@ -48,8 +59,8 @@ const Config_code_Gitlab = props =>{
                 >
                     <Select
                         style={{ width: 300 }}
-                        onClick={clickFindAllGit}
-                        onChange={changeGitSelect}
+                        onClick={clickFindAllGitlab}
+                        onChange={changeGitlabSelect}
                     >
                         <Option>
                             无

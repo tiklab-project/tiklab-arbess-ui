@@ -7,8 +7,7 @@ import Config_code_gitlab from "../config_form/config_code_gitlab";
 const Config_code_drawer_bottom = props =>{
 
     const {codeList,codeOpt,setCodeOpt,setCodeData,setCodeDrawer,setIsPrompt,form,
-        codeName,codeBranch,setCodeName,setCodeBranch,
-        createProof,findAllGitProof,allGitProofList,
+        codeName,codeBranch,
     } = props
 
     const [codeId,setCodeId] = useState('')
@@ -59,35 +58,23 @@ const Config_code_drawer_bottom = props =>{
             <div className='body-menu_form'>
                 {
                     codeOpt === 0 ?
-                        <Config_code_git
-                            setCodeName={setCodeName}
-                            setCodeBranch={setCodeBranch}
-                            createProof={createProof}
-                            findAllGitProof={findAllGitProof}
-                            allGitProofList={allGitProofList}
-                        />
+                        <Config_code_git/>
                         : null
                 }
                 {
                     codeOpt === 1 ?
                         <Config_code_gitee
                             form={form}
-                            setCodeName={setCodeName}
-                            setCodeBranch={setCodeBranch}
                         />
                         :null
                 }
                 {
                     codeOpt === 2 ?
-                        <Config_code_gitlab
-                            createProof={createProof}
-                            findAllGitProof={findAllGitProof}
-                            allGitProofList={allGitProofList}
-                        />
+                        <Config_code_gitlab/>
                         :null
                 }
             </div>
-            <div style={{textAlign:'right'}}>
+            <div>
                 <Button onClick={()=>codeBtn()}>
                     保存
                 </Button>

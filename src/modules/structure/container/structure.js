@@ -1,6 +1,6 @@
 import React, { useEffect,useState} from 'react'
 import { Spin,Result} from "antd";
-import {LoadingOutlined} from "@ant-design/icons";
+import {LoadingOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import './structure.scss'
 import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
@@ -10,7 +10,7 @@ const Structure = props => {
 
     const { StructureStore } = props
     const { findExecState, findStructureState,logList,findAll,selectHistoryDetails,
-        findHistoryLog,deleteHistoryLog,
+        findHistoryLog,deleteHistoryLog,killInstance
     } = StructureStore
 
     const [details,setDetails] = useState(0)
@@ -57,6 +57,7 @@ const Structure = props => {
                 }, 500)
                 data()
                 findAll(pipelineId).then(res=>{
+                    console.log('正在执行的详情',res)
                     setRightExecute(res.data)
                 })
             }else if(res.data=== 0){
@@ -83,6 +84,7 @@ const Structure = props => {
                 setIndex(1)
                 localStorage.setItem('historyId', res.data && res.data[0].historyId)
                 findHistoryLog(res.data && res.data[0].historyId).then(res=>{
+                    console.log('历史详情',res)
                     for (let i in res.data){
                         right.push(res.data[i])
                     }
@@ -93,30 +95,27 @@ const Structure = props => {
                 setLeftData([])
                 setRightData([])
             }
-
         })
     }
 
     const status = i =>{
         switch(i){
-            case 0 :{
+            case 0 :
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
-            }
-            case 1 :{
+            case 1 :
                 return  <svg className="icon" aria-hidden="true">
                             <use xlinkHref="#icon-chenggong-"/>
                         </svg>
-            }
-            case 2 :{
+            case 2 :
                 return  <svg className="icon" aria-hidden="true">
                             <use xlinkHref="#icon-yunhangshibai1"/>
                         </svg>
-            }
-            case 3:{
+            case 3:
                 return  <svg className="icon" aria-hidden="true">
                             <use xlinkHref="#icon-yunhang"/>
                         </svg>
-            }
+            case 4:
+                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
         }
     }
 
@@ -152,12 +151,12 @@ const Structure = props => {
                             runTime={runTime}
                             logList={logList}
                             deleteHistoryLog={deleteHistoryLog}
+                            killInstance={killInstance}
                             forceUpdate={forceUpdate}
                             historyId={historyId}
                         />
                     </div>
             }
-
         </div>
     )
 }

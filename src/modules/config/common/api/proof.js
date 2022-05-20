@@ -18,7 +18,7 @@ export function  FindAllProof(data){
     })
 }
 
-
+//某一凭证的详细信息
 export function  FindOneProof(data){
     return serviceLoc.request({
         url:'/proof/findOneProof',

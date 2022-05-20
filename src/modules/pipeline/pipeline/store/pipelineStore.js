@@ -18,6 +18,13 @@ class PipelineStore{
     @observable pipelineList=[]
     @observable searchPipelineList = []
 
+    @observable pipeline = {}
+
+    @action
+    setPipeline = value =>{
+        this.pipeline = value
+    }
+
     @action
     findAllPipelineStatus=()=>{
         FindAllPipelineStatus().then(res=>{

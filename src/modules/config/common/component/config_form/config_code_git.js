@@ -7,9 +7,9 @@ const {Option} = Select
 
 const Config_code_git = props =>{
 
-    const {ProofStore,setCodeName,setCodeBranch}=props
-
-    const {createProof,findAllProof} = ProofStore
+    const {ProofStore,ConfigCommonStore}=props
+    const {createProof,findAllProof,findOneProof} = ProofStore
+    const {setCodeName, setCodeBranch} = ConfigCommonStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
     const [visible,setVisible]=useState(false)
@@ -27,6 +27,10 @@ const Config_code_git = props =>{
     }
 
     const changeGitSelect = value =>{
+        const param = {
+            proofId:value
+        }
+        findOneProof(param)
         localStorage.setItem('gitProofId',value)
     }
 
@@ -104,4 +108,4 @@ const Config_code_git = props =>{
     )
 }
 
-export default inject('ProofStore')(observer(Config_code_git))
+export default inject('ProofStore','ConfigCommonStore')(observer(Config_code_git))

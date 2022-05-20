@@ -3,16 +3,18 @@ import {Button, Form, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import Config_code_giteeModal from "./config_code_giteeModal";
 import {inject, observer} from "mobx-react";
+import ConfigCommonStore from "../../store/configCommonStore";
 
 const {Option} =Select
 
 const Config_code_gitee = props =>{
 
-    const {GitAuthorizeStore,form,ProofStore,ConfigStore,setCodeName,setCodeBranch} = props
+    const {GitAuthorizeStore,form,ProofStore,ConfigStore,ConfigCommonStore} = props
     const {url, getAllStorehouse, gitList,getBranch,branchList, getGiteeProof
     } = GitAuthorizeStore
-    const {findAllProof} = ProofStore
+    const {findAllProof,findOneProof} = ProofStore
     const {findAllConfigure} = ConfigStore
+    const {setCodeName, setCodeBranch} = ConfigCommonStore
 
     const { getFieldValue } = form
     const [visible,setVisible]=useState(false)
@@ -63,8 +65,8 @@ const Config_code_gitee = props =>{
             projectName:values,
             proofId:localStorage.getItem('giteeProofId')
         }
-        setBranch(false)
         getBranch(params)
+        setBranch(false)
         setCodeName(values)
     }
 
@@ -142,4 +144,4 @@ const Config_code_gitee = props =>{
     )
 }
 
-export default inject('GitAuthorizeStore','ProofStore','ConfigStore')(observer(Config_code_gitee))
+export default inject('GitAuthorizeStore','ProofStore','ConfigStore','ConfigCommonStore')(observer(Config_code_gitee))

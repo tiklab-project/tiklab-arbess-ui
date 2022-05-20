@@ -19,8 +19,8 @@ import {withRouter} from "react-router";
 
 const Config_view1 = props =>{
 
-    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,
-        codeName,setCodeName,codeBranch,setCodeBranch,
+    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,codeBlockContent,
+        codeName,setCodeName,codeBranch,setCodeBranch,newStageForm,setNewStageForm,
         updateConfigure, createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = props
 
@@ -40,16 +40,11 @@ const Config_view1 = props =>{
     },[step])
 
     useEffect(()=>{
-        form.setFieldsValue({
-            gitCodeName:codeData && codeData.codeName,
-            gitBranch:codeData && codeData.codeBranch,
-            giteeCodeName:codeData && codeData.codeName,
-            giteeBranch:codeData && codeData.codeBranch
-        })
-    },[codeData])
+        form.setFieldsValue({...newStageForm})
+    },[newStageForm])
 
-    const displayInput = group =>{
-        setStep(group)
+    const displayInput = index =>{
+        setStep(index)
     }
 
     const hiddenInput = () =>{
@@ -183,7 +178,6 @@ const Config_view1 = props =>{
                 </div>
             )
         })
-
     }
 
     const onFinish = value => {
@@ -304,7 +298,8 @@ const Config_view1 = props =>{
                 type:deployList && deployList.deployType,
                 deployAddress: deployList && deployList.deployAddress,
                 deployTargetAddress: deployList && deployList.deployTargetAddress,
-                deployShell:value.deployShell,
+                // deployShell:value.deployShell,
+                deployShell:codeBlockContent,
                 dockerPort:value.dockerPort,
                 mappingPort:value.mappingPort,
                 proof:{
@@ -321,7 +316,9 @@ const Config_view1 = props =>{
         })
     }
 
-    const onValuesChange = () =>{
+    const onValuesChange = value =>{
+        Object.assign(newStageForm,value)
+        setNewStageForm({...newStageForm})
         setIsPrompt(true)
     }
 

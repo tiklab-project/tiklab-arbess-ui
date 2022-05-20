@@ -4,9 +4,8 @@ import Config_code from "../config_view2/config_code";
 import Config_addNewStage from "../config_view2/config_addNewStage";
 import Config_code_drawer from "../config_view2/config_code_drawer";
 import Config_newStage_drawer from "../config_view2/config_newStage_drawer";
-import Config_newStage_taskForm_drawer from "../config_view2/config_newStage_taskForm_drawer";
+import Config_form_details_drawer from "../config_view2/config_form_details_drawer";
 import Config_deploy_addProofModal from "../config_form/config_deploy_addProofModal";
-import Config_code_details_drawer from "../config_view2/config_code_details_drawer";
 import {inject, observer} from "mobx-react";
 import {Form, Input, message} from "antd";
 import {EditOutlined} from "@ant-design/icons";
@@ -16,16 +15,15 @@ import {withRouter} from "react-router";
 const Config_view2 = props =>{
 
     const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,
-        codeName,setCodeName,codeBranch,setCodeBranch,
-        updateConfigure, createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList,
+        codeName,setCodeName,codeBranch,setCodeBranch,newStageForm,setNewStageForm,
+        updateConfigure, createProof,
     } = props
 
     const inputRef = useRef();
-    const [codeDrawer,setCodeDrawer] = useState(false)
-    const [newStageDrawer,setNewStageDrawer] = useState(false)
-    const [taskFormDrawer,setTaskFormDrawer] = useState(false)
-    const [deployVisible,setDeployVisible] = useState(false)
-    const [codeDetailsDrawer,setCodeDetailsDrawer] = useState(false)
+    const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
+    const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
+    const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
+    const [deployVisible,setDeployVisible] = useState(false) // 部署凭证modal
     const [newStage,setNewStage] = useState('')
     const [step,setStep] = useState('')
     const [index,setIndex] = useState('')
@@ -39,13 +37,8 @@ const Config_view2 = props =>{
     },[step])
 
     useEffect(()=>{
-        form.setFieldsValue({
-            gitCodeName:codeData && codeData.codeName,
-            gitBranch:codeData && codeData.codeBranch,
-            giteeCodeName:codeData && codeData.codeName,
-            giteeBranch:codeData && codeData.codeBranch
-        })
-    },[codeData])
+        form.setFieldsValue({...newStageForm})
+    },[newStageForm])
 
     const displayInput = group =>{
         setStep(group)
@@ -278,6 +271,8 @@ const Config_view2 = props =>{
     }
 
     const onValuesChange = () =>{
+        Object.assign(newStageForm,value)
+        setNewStageForm({...newStageForm})
         setIsPrompt(true)
     }
 
@@ -287,7 +282,8 @@ const Config_view2 = props =>{
                <Config_code
                    codeData={codeData}
                    setCodeDrawer={setCodeDrawer}
-                   setCodeDetailsDrawer={setCodeDetailsDrawer}
+                   setNewStage={setNewStage}
+                   setTaskFormDrawer={setTaskFormDrawer}
                />
                <div className='configView2-main'>
                    <div className='configView2-main_container'>
@@ -318,12 +314,7 @@ const Config_view2 = props =>{
                    codeDrawer={codeDrawer}
                    setCodeDrawer={setCodeDrawer}
                    codeBranch={codeBranch}
-                   setCodeBranch={setCodeBranch}
                    codeName={codeName}
-                   setCodeName={setCodeName}
-                   createProof={createProof}
-                   findAllGitProof={findAllGitProof}
-                   allGitProofList={allGitProofList}
                />
 
                <Config_newStage_drawer
@@ -338,7 +329,7 @@ const Config_view2 = props =>{
                    index={index}
                />
 
-               <Config_newStage_taskForm_drawer
+               <Config_form_details_drawer
                    setIsPrompt={setIsPrompt}
                    data={data}
                    form={form}
@@ -349,20 +340,7 @@ const Config_view2 = props =>{
                    setDeployVisible={setDeployVisible}
                    setCodeName={setCodeName}
                    setCodeBranch={setCodeBranch}
-                   findAllDeployProof={findAllDeployProof}
-                   allDeployProofList={allDeployProofList}
-               />
-
-               <Config_code_details_drawer
-                   setIsPrompt={setIsPrompt}
-                   codeData={codeData}
                    setCodeData={setCodeData}
-                   setCodeDetailsDrawer={setCodeDetailsDrawer}
-                   codeDetailsDrawer={codeDetailsDrawer}
-                   form={form}
-                   codeName={codeName}
-                   setCodeName={setCodeName}
-                   setCodeBranch={setCodeBranch}
                />
 
            </Form>

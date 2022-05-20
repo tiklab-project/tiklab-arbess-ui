@@ -60,7 +60,7 @@ const Config_deploy_docker = props =>{
                             allDockerProofList && allDockerProofList.map(item=>{
                                 return(
                                     <Option key={item.proofId} value={item.proofId} >
-                                        { item.proofDescribe+ " (" + item.proofIp + ")"}
+                                        { item.proofName+ " (" + item.proofIp + ")"}
                                     </Option>
                                 )
                             })

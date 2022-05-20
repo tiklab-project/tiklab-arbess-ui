@@ -3,6 +3,7 @@ import ConfigStore from "./modules/config/common/store/configStore";
 import StructureStore from "./modules/structure/store/structureStore";
 import ProofStore from "./modules/config/common/store/proofStore";
 import GitAuthorizeStore from "./modules/config/common/store/gitAuthorizeStore";
+import ConfigCommonStore from "./modules/config/common/store/configCommonStore";
 
 class store{
     constructor() {
@@ -11,6 +12,7 @@ class store{
         this.StructureStore=new StructureStore(this)
         this.ProofStore=new ProofStore(this)
         this.GitAuthorizeStore=new GitAuthorizeStore(this)
+        this.ConfigCommonStore=new ConfigCommonStore(this)
     }
 }
 

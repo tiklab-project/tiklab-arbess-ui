@@ -1,5 +1,6 @@
 import React from "react";
-import {Modal , Form ,Input, message} from "antd";
+import {Modal, Form, Input, message, Select} from "antd";
+const { Option } = Select;
 
 const Config_deploy_addProofModal = props =>{
 
@@ -10,7 +11,7 @@ const Config_deploy_addProofModal = props =>{
         form.validateFields().then((values) => {
             const params = {
                 proofScope:2,
-                proofType:'password',
+                proofType:values.proofType,
                 proofName:values.proofName,
                 proofIp:values.proofIp,
                 proofPort:values.proofPort,
@@ -51,7 +52,13 @@ const Config_deploy_addProofModal = props =>{
             onCancel={()=>setDeployVisible(false)}
             onOk={onOk}
         >
-            <Form form={form} layout="vertical" name="userForm"  autoComplete = "off">
+            <Form
+                form={form}
+                layout="vertical"
+                name="userForm"
+                autoComplete = "off"
+                initialValues={{proofType:"password"}}
+            >
                 <Form.Item label='凭证名称' name='proofName'>
                     <Input placeholder='名称'/>
                 </Form.Item>
@@ -78,11 +85,28 @@ const Config_deploy_addProofModal = props =>{
                 >
                     <Input placeholder="输入端口号"/>
                 </Form.Item>
-                <Form.Item label='username' name='proofUsername'>
-                    <Input placeholder='账号'/>
+                <Form.Item label='凭证类型' name='proofType' >
+                    <Select placeholder='选择类型'>
+                        <Option value="SSH">SSH</Option>
+                        <Option value="password">password</Option>
+                    </Select>
                 </Form.Item>
-                <Form.Item label='password' name='proofPassword'>
-                    <Input.Password  placeholder='密码'/>
+                <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.proofType !== currentValues.proofType}>
+                    {({ getFieldValue })=>
+                        getFieldValue('proofType') === 'password' ? (
+                            <>
+                                <Form.Item label='username' name='proofUsername'>
+                                    <Input placeholder='账号'/>
+                                </Form.Item>
+                                <Form.Item label='password' name='proofPassword'>
+                                    <Input.Password  placeholder='密码'/>
+                                </Form.Item>
+                            </>
+                            ):
+                            <Form.Item name='proofPassword' label='私钥'>
+                                <Input.TextArea  placeholder='私钥'/>
+                            </Form.Item>
+                    }
                 </Form.Item>
                 <Form.Item name='proofDescribe' label='描述'>
                     <Input.TextArea  placeholder='备注'/>
@@ -90,7 +114,6 @@ const Config_deploy_addProofModal = props =>{
             </Form>
         </Modal>
     )
-
 }
 
 export default Config_deploy_addProofModal

@@ -2,10 +2,13 @@ import React from "react";
 
 const Config_code = props =>{
 
-    const {setCodeDrawer ,codeData,setCodeDetailsDrawer} = props
+    const {setCodeDrawer ,codeData,setNewStage,setTaskFormDrawer} = props
 
     const showDetailsDrawer = () => {
-        setCodeDetailsDrawer(true)
+        if(codeData){
+            setNewStage(codeData.desc)
+            setTaskFormDrawer(true)
+        }
     }
 
     const code = () => {

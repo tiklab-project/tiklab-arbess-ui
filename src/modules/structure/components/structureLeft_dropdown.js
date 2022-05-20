@@ -8,30 +8,27 @@ const StructureLeft_dropdown = props =>{
         {
             id:1,
             desc:'状态',
-            menu:(  <Menu>
+            menu:  <Menu>
                         <Menu.Item key={1}>成功</Menu.Item>
                         <Menu.Item key={2}>执行</Menu.Item>
                         <Menu.Item key={3}>失败</Menu.Item>
                     </Menu>
-            )
         },
         {
             id:2,
             desc:'执行人',
-            menu:(  <Menu>
+            menu:  <Menu>
                         <Menu.Item key={1}>admin</Menu.Item>
                         <Menu.Item key={2}>Lucy</Menu.Item>
                     </Menu>
-            )
         },
         {
             id:3,
             desc:'执行方式',
-            menu:(  <Menu>
-                    <Menu.Item key={1}>手动</Menu.Item>
-                    <Menu.Item key={2}>自动</Menu.Item>
+            menu:  <Menu>
+                        <Menu.Item key={1}>手动</Menu.Item>
+                        <Menu.Item key={2}>自动</Menu.Item>
                     </Menu>
-            )
         },
     ]
 

@@ -91,6 +91,7 @@ export const routers=[
         path:'/',
         component: Home,
         exact: true,
+        render:()=>  <Redirect to={"/home/pipeline"}/>,
     },
 
 ]

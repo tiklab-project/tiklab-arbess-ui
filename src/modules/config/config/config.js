@@ -7,25 +7,24 @@ import Config_changeView from "../common/component/config_common/config_changeVi
 import {Form, Modal} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import {Prompt} from "react-router-dom";
 import {getUrlParam} from '../common/component/config_form/getUrlParam'
 
 const Config = props =>{
 
-    const {ConfigStore,ProofStore,GitAuthorizeStore,StructureStore} = props
+    const {ConfigStore,ProofStore,GitAuthorizeStore,StructureStore,ConfigCommonStore} = props
 
-    const {updateConfigure,findAllConfigure} = ConfigStore
+    const {updateConfigure} = ConfigStore
     const {createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
     } = ProofStore
     const {code} = GitAuthorizeStore
     const {pipelineStartStructure,findStructureState} = StructureStore
+    const {isPrompt,setIsPrompt} = ConfigCommonStore
 
     const [form] = Form.useForm();
     const [formInitialValues, setFormInitialValues] = useState({})
     const [view,setView] = useState(0)
     const [codeData, setCodeData] = useState({})
     const [data,setData] = useState([])
-    const [isPrompt, setIsPrompt] = useState(false);
 
     const codeValue = getUrlParam('code')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -55,14 +54,6 @@ const Config = props =>{
         return () => clearTimeout(se)
     }, [])
 
-    const confirmLeave = pathname =>{
-        setIsPrompt(false)
-        if(pathname!=='/home/task/config'){
-            pathname && setTimeout(()=>{
-                props.history.push(pathname)
-            })
-        }
-    }
 
     return (
         <Fragment >
@@ -114,24 +105,8 @@ const Config = props =>{
                     :null
             }
 
-            <Prompt
-                when={isPrompt}
-                message={location =>{
-                    if(!isPrompt){
-                        return true
-                    }
-                    Modal.confirm({
-                        title:'有编辑未保存，确定离开吗',
-                        okText:'离开',
-                        cancelText:'取消',
-                        onOk:()=>confirmLeave(location.pathname)
-                    })
-                    return false
-                }}
-            />
-
         </Fragment>
     )
 }
 
-export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore','StructureStore')(observer(Config)))
+export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore','StructureStore','ConfigCommonStore')(observer(Config)))

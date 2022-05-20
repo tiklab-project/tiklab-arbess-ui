@@ -57,7 +57,7 @@ const rightLis = [
 
 const Config_newStage_drawer = props =>{
 
-    const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,
+    const {setNewStageDrawer,formDetailsDrawer,setTaskFormDrawer,setNewStage,
         data,setData,setIsPrompt,index
     } = props
 
@@ -93,7 +93,7 @@ const Config_newStage_drawer = props =>{
             closable={false}
             placement="right"
             onClose={()=>setNewStageDrawer(false)}
-            visible={newStageDrawer}
+            visible={formDetailsDrawer}
             width={600}
         >
             <nav className="bm-item-list" style={{height:'100%'}}>
@@ -126,7 +126,6 @@ const Config_newStage_drawer = props =>{
                     </div>
                 </div>
             </nav>
-
         </Drawer>
     )
 }

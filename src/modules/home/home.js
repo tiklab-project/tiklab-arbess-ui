@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
 import { Layout } from 'antd';
 import './home.scss'
 import {renderRoutes} from "react-router-config";
@@ -11,7 +11,7 @@ const Home=props=>{
         {
             to:'/home/pipeline',
             title: "流水线",
-            key:'pipeline'
+            key:'pipeline',
         },
         {
             to:'/home/system',

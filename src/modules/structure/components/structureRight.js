@@ -6,9 +6,8 @@ import StructureRight_execute from "./structureRight_execute";
 const StructureRight = props =>{
 
     const {logList,rightData,rightExecute,details,status,historyId,deleteHistoryLog,
-        forceUpdate, modeData,index,leftExecute,runTime
+        forceUpdate, modeData,index,leftExecute,runTime,killInstance
     } = props
-
     
     const [visible,setVisible] = useState(false)
     const [drawer,setDrawer] = useState('')
@@ -50,6 +49,8 @@ const StructureRight = props =>{
                 return status(1)
             case 30 :
                 return status(2)
+            default:
+                return status(4)
         }
     }
 
@@ -65,90 +66,92 @@ const StructureRight = props =>{
         forceUpdate({})
     }
 
+    const rightDetails = () =>{
+        return (
+            <Fragment>
+                {
+                    rightData && rightData.map((item,index)=>{
+                        return(
+                            <Card className='mid_group_center-cart' key={index}>
+                                <div className='cart-top'>
+                                    {item.taskAlias} --
+                                    <span >{type(item)}</span>
+                                </div>
+                                <div className='cart-center'>
+                                    <div className='cart-center-item'>
+                                        <div>状态：{state(item)}</div>
+                                        <div>时间：{item.execTime} </div>
+                                    </div>
+                                </div>
+                                <div className='cart-bottom' >
+                                                    <span
+                                                        className='cart-bottom-span'
+                                                        onClick={()=>log(item)}
+                                                    >
+                                                        日志
+                                                    </span>
+                                </div>
+                            </Card>
+                        )
+                    })
+                }
+            </Fragment>
+        )
+    }
+
     return(
         <div className='structure-content-right'>
             <div className='structure-content-right-mid'>
                 {
                     details === 0 ?
-                        <Fragment>
-                            <StructureRight_execute
-                                rightExecute={rightExecute}
-                                logList={logList}
-                                status={status}
-                                leftExecute={leftExecute}
-                                runTime={runTime}
-                            />
-                        </Fragment>
-                        :
-                        <Fragment>
-                            <div className="mid_group">
-                                <div className='mid_group_top'>
-                                    <div className='mid_group_top_tel'>
-                                                <span className='tel_time'>
-                                                    构建 {index}
-                                                </span>
-                                        <span className='tel_time'>
-                                                    执行时长：{modeData && modeData.execTime}
-                                                </span>
-                                        <span className='tel_way'>
-                                                    触发方式：{runWay()}
-                                                </span>
-                                    </div>
-                                    <div className="mid_group_top_del">
-                                        <Popconfirm
-                                            title="您确认删除吗?"
-                                            onConfirm={()=>confirm()}
-                                            okText="确认"
-                                            cancelText="取消"
-                                            placement="bottom"
-                                        >
-                                            <Button>
-                                                删除
-                                            </Button>
-                                        </Popconfirm>
-                                    </div>
-                                </div>
-
-                                <div className="mid_group_center">
-                                    {
-                                        rightData && rightData.map((item,index)=>{
-                                            return(
-                                                <Card className='mid_group_center-cart' key={index}>
-                                                    <div className='cart-top'>
-                                                        {item.taskAlias} --
-                                                        <span style={{paddingLeft:5}}>
-                                                                    {type(item)}
-                                                                </span>
-                                                    </div>
-                                                    <div className='cart-center'>
-                                                        <div className='cart-center-item'>
-                                                            <div>状态：{state(item)}</div>
-                                                            <div>时间：{item.execTime} </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className='cart-bottom' >
-                                                                <span
-                                                                    className='cart-bottom-span'
-                                                                    onClick={()=>log(item)}
-                                                                >
-                                                                    日志
-                                                                </span>
-                                                    </div>
-                                                </Card>
-                                            )
-                                        })
-                                    }
-                                </div>
-                                <div className='structure-content-bottom'>
-                                    <h3>输出</h3>
-                                    <div className='structure-content-bottom-outLog' >
-                                        {rightData && rightData.map(item=>{
-                                            return item.runLog
-                                        })}
-                                    </div>
-                                </div>
+                    <StructureRight_execute
+                        rightExecute={rightExecute}
+                        logList={logList}
+                        status={status}
+                        leftExecute={leftExecute}
+                        runTime={runTime}
+                        killInstance={killInstance}
+                    />
+                    :
+                    <div className="mid_group">
+                        <div className='mid_group_top'>
+                            <div className='mid_group_top_tel'>
+                                 <span className='tel_time'>
+                                     构建 {index}
+                                 </span>
+                                <span className='tel_time'>
+                                    执行时长：{modeData && modeData.execTime}
+                                 </span>
+                                <span className='tel_way'>
+                                     触发方式：{runWay()}
+                                 </span>
                             </div>
-                        </Fragment>
+                            <div className="mid_group_top_del">
+                                <Popconfirm
+                                    title="您确认删除吗?"
+                                    onConfirm={()=>confirm()}
+                                    okText="确认"
+                                    cancelText="取消"
+                                    placement="bottom"
+                                >
+                                    <Button>
+                                        删除
+                                    </Button>
+                                </Popconfirm>
+                            </div>
+                        </div>
+                        <div className="mid_group_center">
+                            {rightDetails()}
+                        </div>
+                        <div className='structure-content-bottom'>
+                            <h3>输出</h3>
+                            <div className='structure-content-bottom-outLog' >
+                                {rightData && rightData.map(item=>{
+                                    return item.runLog
+                                })}
+                            </div>
+                        </div>
+                    </div>
                 }
             </div>
 
