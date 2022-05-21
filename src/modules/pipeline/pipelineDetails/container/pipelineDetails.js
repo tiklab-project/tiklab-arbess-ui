@@ -3,7 +3,7 @@ import {Layout, Modal} from 'antd';
 import {renderRoutes} from "react-router-config";
 import './pipelineDetails.scss'
 import PipelineDetailsBreadcrumb from "../components/pipelineDetailsBreadcrumb";
-import PipelineDetails_left from "../components/pipelineDetails_left";
+import PipelineDetailsLeft from "../components/pipelineDetailsLeft";
 import { inject,observer } from "mobx-react";
 import {Prompt} from "react-router-dom";
 
@@ -49,7 +49,7 @@ const PipelineDetails= (props)=>{
     return(
         <Fragment>
             <Layout>
-                <PipelineDetails_left
+                <PipelineDetailsLeft
                     pipelineList={pipelineList}
                     visible={visible}
                     setVisible={setVisible}

@@ -1,22 +1,22 @@
 import React,{Fragment,useState,useEffect} from "react";
 import '../common/style/config.scss'
-import Config_view1 from "../common/component/config_common/config_view1";
-import Config_view2 from "../common/component/config_common/config_view2";
-import Config_changeView from "../common/component/config_common/config_changeView";
+import ConfigView1 from "../common/component/configCommon/configView1";
+import ConfigView2 from "../common/component/configCommon/configView2";
+import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import {getUrlParam} from '../common/component/config_form/getUrlParam'
+import {getUrlParam} from '../common/component/configCommon/getUrlParam'
 
 const ConfigDetails = props =>{
 
-    const {ConfigStore,ProofStore,GitAuthorizeStore,StructureStore,ConfigCommonStore} = props
+    const {ConfigStore,GitAuthorizeStore,StructureStore,ConfigCommonStore} = props
 
     const {updateConfigure,findAllConfigure} = ConfigStore
-    const {createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
-    } = ProofStore
+
     const {code} = GitAuthorizeStore
     const {pipelineStartStructure,findStructureState} = StructureStore
+
     const {isPrompt,setIsPrompt,codeBlockContent,setCodeBlockContent,
         codeName,setCodeName,codeBranch,setCodeBranch
     } = ConfigCommonStore
@@ -208,7 +208,7 @@ const ConfigDetails = props =>{
 
     return (
         <Fragment >
-            <Config_changeView
+            <ConfigChangeView
                 view={view}
                 setView={setView}
                 setIsPrompt={setIsPrompt}
@@ -218,7 +218,7 @@ const ConfigDetails = props =>{
             />
             {
                 view === 0 ?
-                    <Config_view1
+                    <ConfigView1
                         codeBlockContent={codeBlockContent}
                         formInitialValues={formInitialValues}
                         codeData={codeData}
@@ -235,14 +235,9 @@ const ConfigDetails = props =>{
                         codeBranch={codeBranch}
                         setCodeBranch={setCodeBranch}
                         updateConfigure={updateConfigure}
-                        createProof={createProof}
-                        findAllGitProof={findAllGitProof}
-                        allGitProofList={allGitProofList}
-                        findAllDeployProof={findAllDeployProof}
-                        allDeployProofList={allDeployProofList}
                     />
                     :
-                    <Config_view2
+                    <ConfigView2
                         formInitialValues={formInitialValues}
                         codeData={codeData}
                         setCodeData={setCodeData}
@@ -257,11 +252,6 @@ const ConfigDetails = props =>{
                         newStageForm={newStageForm}
                         setNewStageForm={setNewStageForm}
                         updateConfigure={updateConfigure}
-                        createProof={createProof}
-                        findAllGitProof={findAllGitProof}
-                        allGitProofList={allGitProofList}
-                        findAllDeployProof={findAllDeployProof}
-                        allDeployProofList={allDeployProofList}
                     />
             }
 

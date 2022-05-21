@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from "react";
 import {Button, Card,Popconfirm} from 'antd'
-import Structure_right_logDrawer from './Structure_right_logDrawer'
-import StructureRight_execute from "./structureRight_execute";
+import StructureRightLogDrawer from './structureRightLogDrawer'
+import StructureRightExecute from "./structureRightExecute";
 
 const StructureRight = props =>{
 
@@ -104,7 +104,7 @@ const StructureRight = props =>{
             <div className='structure-content-right-mid'>
                 {
                     details === 0 ?
-                    <StructureRight_execute
+                    <StructureRightExecute
                         rightExecute={rightExecute}
                         logList={logList}
                         status={status}
@@ -155,7 +155,7 @@ const StructureRight = props =>{
                 }
             </div>
 
-            <Structure_right_logDrawer
+            <StructureRightLogDrawer
                 visible={visible}
                 setVisible={setVisible}
                 drawer={drawer}

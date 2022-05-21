@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from "react";
-import StructureLeft_dropdown from "./structureLeft_dropdown";
-import StructureLeft_execute from "./structureLeft_execute";
+import StructureLeftDropdown from "./structureLeftDropdown";
+import StructureLeftExecute from "./structureLeftExecute";
 
 const StructureLeft = props =>{
 
@@ -72,11 +72,11 @@ const StructureLeft = props =>{
 
     return(
         <div className='structure-content-left'>
-            <StructureLeft_dropdown/>
+            <StructureLeftDropdown/>
             <div className='structure-content-left-history'>
                 <div className='history-content'>
                     {   leftExecute === '' ? ' ' :
-                        <StructureLeft_execute
+                        <StructureLeftExecute
                             leftExecute={leftExecute}
                             details={details}
                             setDetails={setDetails}

@@ -1,13 +1,13 @@
 import React,{Fragment,useState,useEffect} from "react";
 import '../common/style/config.scss';
 import ConfigTop from "./configTop";
-import Config_view1 from "../common/component/config_common/config_view1";
-import Config_view2 from "../common/component/config_common/config_view2";
-import Config_changeView from "../common/component/config_common/config_changeView";
+import Config_view1 from "../common/component/configCommon/config_view1";
+import Config_view2 from "../common/component/configCommon/config_view2";
+import Config_changeView from "../common/component/configCommon/config_changeView";
 import {Form, Modal} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import {getUrlParam} from '../common/component/config_form/getUrlParam'
+import {getUrlParam} from '../common/component/configCommon/getUrlParam'
 
 const Config = props =>{
 
@@ -28,6 +28,7 @@ const Config = props =>{
 
     const codeValue = getUrlParam('code')
     const pipelineId = localStorage.getItem('pipelineId')
+
 
     useEffect(()=>{
         return () =>{
