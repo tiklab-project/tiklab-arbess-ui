@@ -1,0 +1,71 @@
+.configView1{
+    width: 100%;
+    &-top{
+        position: fixed;
+        z-index: 99;
+        background: #ffffff;
+        border-bottom: 1px solid #cccccc;
+        height: 40px;
+        line-height: 40px;
+        width: 100%;
+        padding-left: 5vh
+    }
+    &-content{
+        display: flex;
+        flex-direction: row;
+        &-detail{
+            margin: 50px auto;
+            width: 80%;
+        }
+    }
+    &-wrapper{
+        margin: 30px 0;
+        &-Headline{
+            margin-bottom: 30px;
+            border-bottom: 1px solid #cccccc;
+            font-size: 16px;
+        }
+        &-handle{
+            text-align: center;
+            height: 35px;
+            line-height: 35px;
+            width: 150px;
+            border: 1px solid #e3e8f0;
+            border-radius: 3px;
+            cursor: pointer;
+            &:hover{
+                color: #1890ff;
+                border: 1px solid #1890ff;
+            }
+        }
+        &-newStage{
+            border: 1px solid #cccccc;
+            padding: 20px;
+            .desc{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                &-head{
+                    padding-bottom: 15px;
+                    font-weight: 500;
+                }
+                &-delete{
+                    display: inline-block;
+                    cursor: pointer;
+                    &:hover{
+                      color: #1890ff;
+                    }
+                }
+                &-input{
+                    margin-left: 15px;
+                    border-left: 1px dashed;
+                    padding-left: 15px;
+                }
+            }
+        }
+    }
+    .config-details-link{
+        margin-top: 30px;
+        margin-left: 15px;
+    }
+}

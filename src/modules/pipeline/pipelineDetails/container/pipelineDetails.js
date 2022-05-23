@@ -11,9 +11,9 @@ const { Content, Sider } = Layout;
 
 const PipelineDetails= (props)=>{
 
-    const {route,PipelineStore,ConfigCommonStore}=props
+    const {route,PipelineStore,ConfigDataStore}=props
     const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = PipelineStore
-    const {isPrompt,setIsPrompt} = ConfigCommonStore
+    const {isPrompt,setIsPrompt} = ConfigDataStore
 
     const [visible,setVisible] = useState(false)
 
@@ -87,6 +87,6 @@ const PipelineDetails= (props)=>{
     )
 }
 
-export default inject('PipelineStore','ConfigCommonStore')(observer(PipelineDetails))
+export default inject('PipelineStore','ConfigDataStore')(observer(PipelineDetails))
 
 

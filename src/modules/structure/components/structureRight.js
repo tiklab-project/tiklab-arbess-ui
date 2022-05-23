@@ -146,9 +146,7 @@ const StructureRight = props =>{
                         <div className='structure-content-bottom'>
                             <h3>输出</h3>
                             <div className='structure-content-bottom-outLog' >
-                                {rightData && rightData.map(item=>{
-                                    return item.runLog
-                                })}
+                                { modeData && modeData.runLog }
                             </div>
                         </div>
                     </div>

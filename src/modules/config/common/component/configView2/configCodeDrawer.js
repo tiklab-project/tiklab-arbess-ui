@@ -15,12 +15,16 @@ const codeList = [
     {
         id:3,
         title: 'GitLab'
+    },
+    {
+        id:4,
+        title: 'GitHub'
     }
 ]
 
 const ConfigCodeDrawer = props =>{
 
-    const {setCodeData,setCodeDrawer,codeDrawer,setIsPrompt,form,codeBranch,codeName,
+    const {setCodeData,setCodeDrawer,codeDrawer,setIsPrompt,codeBranch,codeName,
     } = props
 
     const [codeOpt,setCodeOpt]=useState(0)
@@ -44,7 +48,6 @@ const ConfigCodeDrawer = props =>{
                         <div className="body">
                             <div className="body-menu">
                                 <ConfigCodeDrawerBottom
-                                    form={form}
                                     setIsPrompt={setIsPrompt}
                                     codeList={codeList}
                                     codeOpt={codeOpt}

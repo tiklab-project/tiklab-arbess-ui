@@ -2,7 +2,12 @@ import React ,{Fragment} from "react";
 
 const ConfigAddNewStage = props =>{
 
-    const {setNewStageDrawer} = props
+    const {setNewStageDrawer,setIndex} = props
+
+    const newTask = () =>{
+        setNewStageDrawer(true)
+        setIndex('')
+    }
 
     return(
        <Fragment>
@@ -18,7 +23,7 @@ const ConfigAddNewStage = props =>{
                        <div className='newStages-task'>
                            <div className='newStages-job'>
                                <div className='newStages-job_text'
-                                    onClick={()=>setNewStageDrawer(true)}
+                                    onClick={()=>newTask()}
                                >
                                    新任务
                                </div>

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from "react";
-import '../../style/config_view1.scss';
+import '../../style/configView1.scss';
 import {Button, Form, Input,message} from "antd";
 import ConfigAddNewStageModal from "../configView1/configAddNewStageModal";
 import ConfigAddCodeModal from "../configView1/configAddCodeModal";
@@ -7,7 +7,6 @@ import ChangeConfigSortsDrawer from "../configView1/changeConfigSortsDrawer";
 import ConfigAddNewStage from "../configView1/configAddNewStage";
 import Config_code from "../configView1/config_code";
 import moment from "../../../../../common/moment/moment";
-import formResetFields from "../configForm/formResetFields";
 import formAll from "../configForm/formAll";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
@@ -15,9 +14,12 @@ import {withRouter} from "react-router";
 
 const ConfigView1 = props =>{
 
-    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,codeBlockContent,
-        codeName,setCodeName,codeBranch,setCodeBranch,newStageForm,setNewStageForm, updateConfigure,
-    } = props
+    const {form,del, updateConfigure,ConfigDataStore} = props
+
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,codeBlockContent,
+        setCodeBlockContent, formInitialValues,data,setData, codeData,setCodeData,
+        setFormInitialValues,
+    } = ConfigDataStore
 
     const inputRef = useRef();
     const [newStageVisible, setNewStageVisible] = useState(false)
@@ -34,8 +36,10 @@ const ConfigView1 = props =>{
     },[step])
 
     useEffect(()=>{
-        form.setFieldsValue(newStageForm)
-    },[newStageForm])
+        form.setFieldsValue({
+           ...formInitialValues
+        })
+    },[formInitialValues])
 
     const displayInput = index =>{
         setStep(index)
@@ -58,29 +62,14 @@ const ConfigView1 = props =>{
     }
 
     const deletePart = group =>{
-        switch (group.desc) {
-            case '单元测试' :
-                setNewStageForm({ ...formResetFields.unit})
-                break
-            case 'maven' :
-                setNewStageForm({...formResetFields.maven})
-                break
-            case 'node':
-                setNewStageForm({...formResetFields.node})
-                break
-            case 'linux':
-                setNewStageForm({...formResetFields.linux})
-                break
-            case 'docker':
-                setNewStageForm({...formResetFields.docker})
-        }
-
+        del(group.desc)
         for (let i = 0 ;i<data.length;i++){
             if(data[i].dataId === group.dataId){
                 data.splice(i,1)
             }
             setData([...data])
             setIsPrompt(true)
+            setCodeBlockContent('')
         }
     }
 
@@ -104,9 +93,9 @@ const ConfigView1 = props =>{
     const newStage = () =>{
         return   data && data.map((group,index)=>{
             return(
-                <div className='config-details-wrapper' key={index}>
+                <div className='configView1-wrapper' key={index}>
                     <div
-                        className='config-details-Headline'
+                        className='configView1-wrapper-Headline'
                     >
                         {
                             step !== index ?
@@ -129,7 +118,7 @@ const ConfigView1 = props =>{
                                 />
                         }
                     </div>
-                    <div className='config-details-newStage'>
+                    <div className='configView1-wrapper-newStage'>
                         <div className='desc'>
                             <div className='desc-head'>{group.desc}</div>
                             <div
@@ -267,8 +256,7 @@ const ConfigView1 = props =>{
                 type:deployList && deployList.deployType,
                 deployAddress: deployList && deployList.deployAddress,
                 deployTargetAddress: deployList && deployList.deployTargetAddress,
-                deployShell:value.deployShell,
-                // deployShell:codeBlockContent,
+                deployShell:codeBlockContent,
                 dockerPort:value.dockerPort,
                 mappingPort:value.mappingPort,
                 proof:{
@@ -277,6 +265,7 @@ const ConfigView1 = props =>{
             }
         }
 
+        console.log(configureList,'hhhhhh')
         updateConfigure(configureList).then(res=>{
             if(res.code!==0){
                 message.info('配置失败')
@@ -286,51 +275,47 @@ const ConfigView1 = props =>{
     }
 
     const onValuesChange = value =>{
-        Object.assign(newStageForm,value)
-        setNewStageForm({...newStageForm})
+        Object.assign(formInitialValues,value)
+        setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
     }
 
     return(
-        <div className='config-details task '>
-            <div className='config-details-content'>
-                <div className='config-details-right'>
-                    <div className='config-details-right-all'>
-                        <div style={{textAlign:'right'}}>
-                            <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
-                        </div>
-                        <Form
-                            id='form'
-                            form={form}
-                            layout='vertical'
-                            autoComplete = "off"
-                            onFinish={onFinish}
-                            onValuesChange={onValuesChange}
-                            initialValues={{formInitialValues}}
-                        >
-                            <Config_code
-                                codeData={codeData}
-                                form={form}
-                                setCodeData={setCodeData}
-                                setCodeVisible={setCodeVisible}
-                                setIsPrompt={setIsPrompt}
-                                setCodeName={setCodeName}
-                                setCodeBranch={setCodeBranch}
-                            />
-                            { newStage() }
-                            <ConfigAddNewStage
-                                setNewStageVisible={setNewStageVisible}
-                            />
-                        </Form>
-
+        <div className='configView1 task '>
+            <div className='configView1-content'>
+                <div className='configView1-content-detail'>
+                    <div style={{textAlign:'right'}}>
+                        <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
                     </div>
+                    <Form
+                        id='form'
+                        form={form}
+                        layout='vertical'
+                        autoComplete = "off"
+                        onFinish={onFinish}
+                        onValuesChange={onValuesChange}
+                    >
+                        <Config_code
+                            codeData={codeData}
+                            setFormInitialValues={setFormInitialValues}
+                            setCodeData={setCodeData}
+                            setCodeVisible={setCodeVisible}
+                            setIsPrompt={setIsPrompt}
+                            setCodeName={setCodeName}
+                            setCodeBranch={setCodeBranch}
+                        />
+                        { newStage() }
+                        <ConfigAddNewStage
+                            setNewStageVisible={setNewStageVisible}
+                        />
+                    </Form>
 
                     <ConfigAddNewStageModal
                         data={data}
                         setData={setData}
                         newStageVisible={newStageVisible}
                         setNewStageVisible={setNewStageVisible}
-                        setIsPrompt={setIsPrompt}               
+                        setIsPrompt={setIsPrompt}
                     />
 
                     <ConfigAddCodeModal
@@ -339,7 +324,7 @@ const ConfigView1 = props =>{
                         codeVisible={codeVisible}
                         setCodeVisible={setCodeVisible}
                         setCodeData={setCodeData}
-                        setIsPrompt={setIsPrompt}        
+                        setIsPrompt={setIsPrompt}
                     />
 
                     <ChangeConfigSortsDrawer
@@ -357,4 +342,4 @@ const ConfigView1 = props =>{
     )
 }
 
-export default withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore')(observer(ConfigView1)))
+export default withRouter(inject('ConfigDataStore')(observer(ConfigView1)))

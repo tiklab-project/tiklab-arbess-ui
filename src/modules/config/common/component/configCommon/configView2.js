@@ -1,5 +1,5 @@
 import React, {useState, useRef, Fragment,useEffect} from "react";
-import  '../../style/config_view2.scss';
+import  '../../style/configView2.scss';
 import ConfigCode from "../configView2/configCode";
 import ConfigAddNewStage from "../configView2/configAddNewStage";
 import ConfigCodeDrawer from "../configView2/configCodeDrawer";
@@ -13,10 +13,11 @@ import {withRouter} from "react-router";
 
 const ConfigView2 = props =>{
 
-    const {formInitialValues,codeData,setCodeData,data,setData,setIsPrompt,form,
-        codeName,setCodeName,codeBranch,setCodeBranch,newStageForm,setNewStageForm,
-        updateConfigure,
-    } = props
+    const {form, updateConfigure,ConfigDataStore,del} = props
+
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,
+        formInitialValues,data,setData, codeData,setCodeData,setFormInitialValues
+    } = ConfigDataStore
 
     const inputRef = useRef();
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
@@ -35,8 +36,10 @@ const ConfigView2 = props =>{
     },[step])
 
     useEffect(()=>{
-        form.setFieldsValue(newStageForm)
-    },[newStageForm])
+        form.setFieldsValue({
+            ...formInitialValues
+        })
+    },[formInitialValues])
 
     const displayInput = group =>{
         setStep(group)
@@ -269,8 +272,8 @@ const ConfigView2 = props =>{
     }
 
     const onValuesChange = value =>{
-        Object.assign(newStageForm,value)
-        setNewStageForm({...newStageForm})
+        Object.assign(formInitialValues,value)
+        setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
     }
 
@@ -288,6 +291,7 @@ const ConfigView2 = props =>{
                        <div className='configView2-main_group'>
                            { newStageShow() }
                            <ConfigAddNewStage
+                               setIndex = {setIndex}
                                setNewStageDrawer={setNewStageDrawer}
                            />
                        </div>
@@ -325,6 +329,7 @@ const ConfigView2 = props =>{
                    data={data}
                    setData={setData}
                    index={index}
+                   setIndex = {setIndex}
                />
 
                <ConfigFormDetailsDrawer
@@ -332,13 +337,14 @@ const ConfigView2 = props =>{
                    data={data}
                    form={form}
                    setData={setData}
+                   del={del}
                    setTaskFormDrawer={setTaskFormDrawer}
                    taskFormDrawer={taskFormDrawer}
                    newStage={newStage}
                    setCodeName={setCodeName}
                    setCodeBranch={setCodeBranch}
                    setCodeData={setCodeData}
-                   setNewStageForm = {setNewStageForm}
+                   setFormInitialValues={setFormInitialValues}
                />
 
            </Form>
@@ -347,4 +353,4 @@ const ConfigView2 = props =>{
     )
 }
 
-export default withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore')(observer(ConfigView2)))
+export default withRouter(inject('ConfigDataStore')(observer(ConfigView2)))

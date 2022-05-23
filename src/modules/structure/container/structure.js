@@ -8,18 +8,18 @@ import { inject, observer } from "mobx-react";
 
 const Structure = props => {
 
-    const { StructureStore } = props
+    const { StructureStore , StructureDataStore} = props
+
     const { findExecState, findStructureState,logList,findAll,selectHistoryDetails,
         findHistoryLog,deleteHistoryLog,killInstance
     } = StructureStore
 
+    const { leftExecute,setLeftExecute,leftData,setLeftData,rightExecute,setRightExecute,
+        rightData,setRightData,modeData,setModeData
+    } = StructureDataStore
+
+    const [, forceUpdate] = useState({})
     const [details,setDetails] = useState(0)
-    const [, forceUpdate] = useState({}) 
-    const [leftExecute,setLeftExecute] = useState('')   //左--正在构建
-    const [leftData,setLeftData] = useState([])     //左--历史构建列表
-    const [rightExecute,setRightExecute] = useState('')  //右--正在构建
-    const [rightData,setRightData] = useState([])   //右--历史构建列表的某一构建详情
-    const [modeData,setModeData] = useState('')
     const [index,setIndex] = useState(0)
     const [runTime,setRunTime] = useState(0)
 
@@ -161,4 +161,4 @@ const Structure = props => {
     )
 }
 
-export default inject('StructureStore')(observer(Structure))
+export default inject('StructureStore','StructureDataStore')(observer(Structure))

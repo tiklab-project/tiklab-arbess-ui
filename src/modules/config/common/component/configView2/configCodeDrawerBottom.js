@@ -6,7 +6,7 @@ import Config_code_gitlab from "../configForm/configCodeGitlab";
 
 const ConfigCodeDrawerBottom = props =>{
 
-    const {codeList,codeOpt,setCodeOpt,setCodeData,setCodeDrawer,setIsPrompt,form,
+    const {codeList,codeOpt,setCodeOpt,setCodeData,setCodeDrawer,setIsPrompt,
         codeName,codeBranch,
     } = props
 
@@ -62,9 +62,7 @@ const ConfigCodeDrawerBottom = props =>{
                 }
                 {
                     codeOpt === 1 ?
-                        <Config_code_gitee
-                            form={form}
-                        />
+                        <Config_code_gitee/>
                         :null
                 }
                 {

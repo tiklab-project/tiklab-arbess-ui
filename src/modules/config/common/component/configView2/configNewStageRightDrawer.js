@@ -26,11 +26,20 @@ const ConfigNewStageRightDrawer = props =>{
                 }
             }
         }
-        newData.splice(index,0,{
-            dataId:i,
-            title:group.title,
-            desc:item.tpl
-        })
+        if(index === ''){
+            newData.push({
+                dataId:i,
+                title:group.title,
+                desc:item.tpl
+            })
+        }else {
+            newData.splice(index,0,{
+                dataId:i,
+                title:group.title,
+                desc:item.tpl
+            })
+        }
+
         setData(newData)
         setNewStageDrawer(false)
         setTaskFormDrawer(true)

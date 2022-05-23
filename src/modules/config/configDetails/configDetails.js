@@ -7,28 +7,24 @@ import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam'
+import formResetFields from "../common/component/configForm/formResetFields";
 
 const ConfigDetails = props =>{
 
-    const {ConfigStore,GitAuthorizeStore,StructureStore,ConfigCommonStore} = props
+    const {ConfigStore,GitAuthorizeStore,StructureStore,ConfigDataStore} = props
 
     const {updateConfigure,findAllConfigure} = ConfigStore
 
     const {code} = GitAuthorizeStore
     const {pipelineStartStructure,findStructureState} = StructureStore
 
-    const {isPrompt,setIsPrompt,codeBlockContent,setCodeBlockContent,
-        codeName,setCodeName,codeBranch,setCodeBranch
-    } = ConfigCommonStore
+    const {setIsPrompt,codeName,codeBranch,setCodeBlockContent,
+        formInitialValues, setFormInitialValues,setData,codeData,setCodeData
+    } = ConfigDataStore
 
     const [form] = Form.useForm();
 
-    const [formInitialValues, setFormInitialValues] = useState({})
     const [view,setView] = useState(0)
-    const [data,setData] = useState([])
-    const [codeData, setCodeData] = useState('')
-    const [newStageForm,setNewStageForm] = useState({})
-
     const codeValue = getUrlParam('code')
     const pipelineId = localStorage.getItem('pipelineId')
 
@@ -205,6 +201,25 @@ const ConfigDetails = props =>{
             }
         })
     },[pipelineId])
+    
+    const del = i => {
+        switch (i) {
+            case '单元测试' :
+                setFormInitialValues({ ...formResetFields.unit})
+                break
+            case 'maven' :
+                setFormInitialValues({...formResetFields.maven})
+                break
+            case 'node':
+                setFormInitialValues({...formResetFields.node})
+                break
+            case 'linux':
+                setFormInitialValues({...formResetFields.linux})
+                break
+            case 'docker':
+                setFormInitialValues({...formResetFields.docker})
+        }
+    }
 
     return (
         <Fragment >
@@ -219,38 +234,14 @@ const ConfigDetails = props =>{
             {
                 view === 0 ?
                     <ConfigView1
-                        codeBlockContent={codeBlockContent}
-                        formInitialValues={formInitialValues}
-                        codeData={codeData}
-                        setCodeData={setCodeData}
-                        data={data}
-                        setData={setData}
-                        newStageForm={newStageForm}
-                        setNewStageForm={setNewStageForm}
-                        isPrompt={isPrompt}
-                        setIsPrompt={setIsPrompt}
                         form={form}
-                        codeName={codeName}
-                        setCodeName={setCodeName}
-                        codeBranch={codeBranch}
-                        setCodeBranch={setCodeBranch}
+                        del={del}
                         updateConfigure={updateConfigure}
                     />
                     :
                     <ConfigView2
-                        formInitialValues={formInitialValues}
-                        codeData={codeData}
-                        setCodeData={setCodeData}
-                        data={data}
-                        setData={setData}
-                        setIsPrompt={setIsPrompt}
                         form={form}
-                        codeName={codeName}
-                        setCodeName={setCodeName}
-                        codeBranch={codeBranch}
-                        setCodeBranch={setCodeBranch}
-                        newStageForm={newStageForm}
-                        setNewStageForm={setNewStageForm}
+                        del={del}
                         updateConfigure={updateConfigure}
                     />
             }
@@ -259,4 +250,6 @@ const ConfigDetails = props =>{
     )
 }
 
-export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore','StructureStore','ConfigCommonStore')(observer(ConfigDetails)))
+export default  withRouter(inject('ConfigStore', 'GitAuthorizeStore',
+                'StructureStore','ConfigDataStore')
+                (observer(ConfigDetails)))

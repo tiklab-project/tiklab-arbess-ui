@@ -1,19 +1,20 @@
-import React from "react";
-import ConfigCodeGitee from "../configForm/configCodeGitee";
+import React, {Fragment} from "react";
 import formResetFields from "../configForm/formResetFields";
 import formAll from "../configForm/formAll";
 import {CloseOutlined} from "@ant-design/icons";
 
 const Config_code = props =>{
 
-    const {setCodeVisible,codeData,setCodeData,setIsPrompt,form,setCodeName,setCodeBranch} = props
+    const {setCodeVisible,codeData,setCodeData,setIsPrompt,
+        setCodeName,setCodeBranch,setFormInitialValues
+    } = props
 
     const addCode = () =>{
         setCodeVisible(true)
     }
 
     const deletePart = () =>{
-        form.setFieldsValue({...formResetFields.git})
+        setFormInitialValues({...formResetFields.git})
         setCodeData('')
         setCodeName('')
         setCodeBranch('')
@@ -26,9 +27,7 @@ const Config_code = props =>{
                 case '通用Git' :
                     return  formAll.git
                 case 'Gitee' :
-                    return  <ConfigCodeGitee
-                                form={form}
-                            />
+                    return  formAll.gitee
                 case 'GitLab' :
                     return  formAll.gitlab
             }
@@ -39,13 +38,13 @@ const Config_code = props =>{
     const code = () => {
         return  codeData === '' ?
                     <div
-                        className='config-details-handle'
+                        className='configView1-wrapper-handle'
                         onClick={()=>addCode()}
                     >
                         添加代码源
                     </div> :
-                    <div className='config-details-wrapper' >
-                        <div className='config-details-newStage'>
+                    <div className='configView1-wrapper' >
+                        <div className='configView1-wrapper-newStage'>
                             <div className='desc'>
                                 <div className='desc-head'>{codeData.desc}</div>
                                 <div
@@ -64,10 +63,10 @@ const Config_code = props =>{
     }
 
     return(
-        <div className='config-details-req'>
-            <div className='config-details-Headline'>源码管理</div>
+        <Fragment>
+            <div className='configView1-wrapper-Headline'>源码管理</div>
             { code () }
-        </div>
+        </Fragment>
     )
 }
 

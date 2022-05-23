@@ -1,6 +1,5 @@
 import React ,{useState,useEffect} from "react";
 import {Button, Drawer,Tree} from "antd";
-import './changeConfigSortsDrawer.scss'
 import {CloseOutlined} from "@ant-design/icons";
 
 const ChangeConfigSortsDrawer = props =>{
@@ -34,7 +33,6 @@ const ChangeConfigSortsDrawer = props =>{
     },[data,codeData])
 
     const onDrop = info => {
-        console.log(info);
         const dropKey = info.node.key;
         const dragKey = info.dragNode.key;
         const dropPos = info.node.pos.split('-');
@@ -90,24 +88,35 @@ const ChangeConfigSortsDrawer = props =>{
             closable={false}
             onClose={()=>setChangeSortVisible(false)}
             visible={changeSortVisible}
+            bodyStyle={{padding:0}}
         >
-            <div className='opt_drawer-top'>
-                <div>更改配置顺序</div>
-                <div>
-                    <Button type="text" onClick={()=>setChangeSortVisible(false)}>
-                        <CloseOutlined />
-                    </Button>
+
+            <nav className="bm-item-list" style={{height:'100%'}}>
+                <div className="menu-wrapper">
+                    <div className="menu-wrapper-head">
+                        <div>更改配置顺序</div>
+                        <div>
+                            <Button type="text" onClick={()=>setChangeSortVisible(false)}>
+                                <CloseOutlined />
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="menu-wrapper-body" style={{padding:20}}>
+                        <div className="body">
+                            <div className="body-menu">
+                                <Tree
+                                    className="draggable-tree"
+                                    draggable
+                                    blockNode
+                                    onDrop={onDrop}
+                                    treeData={gData}
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div style={{padding:20}}>
-                <Tree
-                    className="draggable-tree"
-                    draggable
-                    blockNode
-                    onDrop={onDrop}
-                    treeData={gData}
-                />
-            </div>
+            </nav>
+
         </Drawer>
     )
 }

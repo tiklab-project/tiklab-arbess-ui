@@ -6,7 +6,7 @@ const ConfigTop = () =>{
     const  piplelineName = localStorage.getItem('pipelineName')
 
     return(
-        <Breadcrumb  className='config-details-top'>
+        <Breadcrumb  className='configView1-top'>
             <Breadcrumb.Item>流水线</Breadcrumb.Item>
             <Breadcrumb.Item>
                 {piplelineName}

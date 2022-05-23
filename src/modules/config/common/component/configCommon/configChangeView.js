@@ -17,7 +17,7 @@ const ConfigChangeView = props =>{
     return (
         <div className='config_changeView'>
             <div className='changeView'>
-                <div>
+                <div className='changeView-btn'>
                     <Button
                         form='form'
                         htmlType='submit'

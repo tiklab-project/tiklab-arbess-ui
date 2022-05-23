@@ -8,10 +8,10 @@ const ConfigAddNewStage = props =>{
 
     return(
        <Fragment>
-            <div className='config-details-tail'>
-                <div className='config-details-Headline'>新阶段</div>
+            <div className='configView1-wrapper'>
+                <div className='configView1-wrapper-Headline'>新阶段</div>
                 <div
-                    className='config-details-handle'
+                    className='configView1-wrapper-handle'
                     onClick={()=> setNewStageVisible(true)}
                 >
                     新任务

@@ -3,24 +3,22 @@ import {Button, Form, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import ConfigCodeGiteeModal from "./configCodeGiteeModal";
 import {inject, observer} from "mobx-react";
-import ConfigCommonStore from "../../store/configCommonStore";
 
 const {Option} =Select
 
 const ConfigCodeGitee = props =>{
 
-    const {GitAuthorizeStore,form,ProofStore,ConfigStore,ConfigCommonStore} = props
+    const {GitAuthorizeStore,ProofStore,ConfigStore,ConfigDataStore} = props
 
     const {url, getAllStorehouse, gitList,getBranch,branchList, getGiteeProof
     } = GitAuthorizeStore
-    const {findAllProof,findOneProof} = ProofStore
+    const {findAllProof} = ProofStore
     const {findAllConfigure} = ConfigStore
-    const {setCodeName, setCodeBranch} = ConfigCommonStore
+    const {setCodeName,setCodeBranch} = ConfigDataStore
 
-    const { getFieldValue } = form
     const [visible,setVisible]=useState(false)
-    const [branch,setBranch]=useState(true)
     const [modalFormInvi,setModalFormInvi] = useState('')
+    const [giteeProhibited,setGiteeProhibited] = useState(true)
     const pipelineId = localStorage.getItem('pipelineId')
     const codeTaken = JSON.parse(localStorage.getItem('AccessToken'))
 
@@ -29,27 +27,17 @@ const ConfigCodeGitee = props =>{
             pipelineId:pipelineId
         }
         findAllConfigure(param).then(res=>{
-            console.log(res,'findAllConfigure')
             const type = res.data
             for (let i in type){
                 if(type[i].type===2){
                     setModalFormInvi(type[i].proof)
+                    if(!type[i].codeName || type[i].codeName !== null ){
+                        setGiteeProhibited(false)
+                    }
                 }
             }
         })
     },[])
-
-
-    useEffect(()=>{
-        const se = setTimeout(()=>{
-            setBranch(false)
-            if( getFieldValue('giteeCodeName') === null || getFieldValue('giteeCodeName') ===undefined || getFieldValue('giteeCodeName') === ''){
-                setBranch(true)
-            }
-        },10)
-        return ()=> clearTimeout(se)
-    },[])
-
 
     const clickGitStoreHouse = () =>{
         if(codeTaken){
@@ -67,7 +55,7 @@ const ConfigCodeGitee = props =>{
             proofId:localStorage.getItem('giteeProofId')
         }
         getBranch(params)
-        setBranch(false)
+        setGiteeProhibited(false)
         setCodeName(values)
     }
 
@@ -113,7 +101,7 @@ const ConfigCodeGitee = props =>{
             <Form.Item name="giteeBranch" label="分支">
                 <Select
                     style={{ width: 300 }}
-                    disabled={branch}
+                    disabled={giteeProhibited}
                     onChange={()=>inputCodeBranchValue()}
                 >
                     <Option >
@@ -145,4 +133,6 @@ const ConfigCodeGitee = props =>{
     )
 }
 
-export default inject('GitAuthorizeStore','ProofStore','ConfigStore','ConfigCommonStore')(observer(ConfigCodeGitee))
+export default inject('GitAuthorizeStore','ProofStore',
+                'ConfigStore','ConfigDataStore')
+                 (observer(ConfigCodeGitee))

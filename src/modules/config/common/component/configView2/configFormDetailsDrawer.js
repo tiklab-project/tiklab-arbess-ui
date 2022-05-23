@@ -1,14 +1,12 @@
 import React from "react";
 import {Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
-import ConfigCodeGitee from "../configForm/configCodeGitee";
-import formResetFields from "../configForm/formResetFields";
 import formAll from "../configForm/formAll";
 
 const ConfigFormDetailsDrawer = props =>{
 
     const {data,setData,setTaskFormDrawer,taskFormDrawer,newStage,setIsPrompt,
-        form,setCodeName,setCodeBranch,setCodeData,setNewStageForm
+        setCodeName,setCodeBranch,setCodeData,del
     } = props
 
     const showTask = () =>{
@@ -26,35 +24,14 @@ const ConfigFormDetailsDrawer = props =>{
             case '通用Git':
                 return   formAll.git
             case 'Gitee':
-                return   <ConfigCodeGitee
-                            form={form}
-                         />
+                return   formAll.gitee
             case 'GitLab':
                 return   formAll.gitlab
         }
     }
 
     const deletePart = () => {
-        switch (newStage) {
-            case '单元测试' :
-                setNewStageForm({ ...formResetFields.unit})
-                break
-            case 'maven' :
-                setNewStageForm({...formResetFields.maven})
-                break
-            case 'node':
-                setNewStageForm({...formResetFields.node})
-                break
-            case 'linux':
-                setNewStageForm({...formResetFields.linux})
-                break
-            case 'docker':
-                setNewStageForm({...formResetFields.docker})
-                break
-            default:
-                setNewStageForm({...formResetFields.git})
-        }
-
+        del(newStage)
         for (let i = 0 ;i<data.length;i++){
             if(data[i].desc === newStage){
                 data.splice(i,1)

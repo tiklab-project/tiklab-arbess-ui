@@ -1,34 +1,31 @@
 import React,{Fragment,useState,useEffect} from "react";
 import '../common/style/config.scss';
-import ConfigTop from "./configTop";
-import Config_view1 from "../common/component/configCommon/config_view1";
-import Config_view2 from "../common/component/configCommon/config_view2";
-import Config_changeView from "../common/component/configCommon/config_changeView";
-import {Form, Modal} from "antd";
+import {Form} from "antd";
 import {withRouter} from "react-router";
-import {inject, observer} from "mobx-react";
+import ConfigTop from "./configTop";
+import ConfigView2 from "../common/component/configCommon/configView2";
+import ConfigView1 from "../common/component/configCommon/configView1";
+import formResetFields from "../common/component/configForm/formResetFields";
+import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam'
+import {inject, observer} from "mobx-react";
 
 const Config = props =>{
 
-    const {ConfigStore,ProofStore,GitAuthorizeStore,StructureStore,ConfigCommonStore} = props
+    const {ConfigStore,GitAuthorizeStore,StructureStore,ConfigDataStore} = props
 
     const {updateConfigure} = ConfigStore
-    const {createProof,findAllGitProof,allGitProofList,findAllDeployProof,allDeployProofList
-    } = ProofStore
     const {code} = GitAuthorizeStore
     const {pipelineStartStructure,findStructureState} = StructureStore
-    const {isPrompt,setIsPrompt} = ConfigCommonStore
+
+    const {setIsPrompt, codeName,codeBranch, setFormInitialValues,codeData,setCodeData
+    } = ConfigDataStore
 
     const [form] = Form.useForm();
-    const [formInitialValues, setFormInitialValues] = useState({})
-    const [view,setView] = useState(0)
-    const [codeData, setCodeData] = useState({})
-    const [data,setData] = useState([])
 
+    const [view,setView] = useState(0)
     const codeValue = getUrlParam('code')
     const pipelineId = localStorage.getItem('pipelineId')
-
 
     useEffect(()=>{
         return () =>{
@@ -55,59 +52,68 @@ const Config = props =>{
         return () => clearTimeout(se)
     }, [])
 
+    useEffect(()=>{
+        if(codeData){
+            if(codeData.desc){
+                const newCode = {
+                    codeName:codeName,
+                    codeBranch:codeBranch
+                }
+                Object.assign(codeData,newCode)
+                setCodeData({...codeData})
+            }
+        }
+    },[codeName,codeBranch])
+
+    const del = i => {
+        switch (i) {
+            case '单元测试' :
+                setFormInitialValues({ ...formResetFields.unit})
+                break
+            case 'maven' :
+                setFormInitialValues({...formResetFields.maven})
+                break
+            case 'node':
+                setFormInitialValues({...formResetFields.node})
+                break
+            case 'linux':
+                setFormInitialValues({...formResetFields.linux})
+                break
+            case 'docker':
+                setFormInitialValues({...formResetFields.docker})
+        }
+    }
+
 
     return (
         <Fragment >
             <ConfigTop/>
-            <Config_changeView
+            <ConfigChangeView
                 view={view}
                 setView={setView}
+                setIsPrompt={setIsPrompt}
                 pipelineId={pipelineId}
                 pipelineStartStructure={pipelineStartStructure}
                 findStructureState={findStructureState}
             />
             {
                 view === 0 ?
-                    <Config_view1
-                        formInitialValues={formInitialValues}
-                        codeData={codeData}
-                        setCodeData={setCodeData}
-                        data={data}
-                        setData={setData}
-                        isPrompt={isPrompt}
-                        setIsPrompt={setIsPrompt}
+                    <ConfigView1
                         form={form}
+                        del={del}
                         updateConfigure={updateConfigure}
-                        createProof={createProof}
-                        findAllGitProof={findAllGitProof}
-                        allGitProofList={allGitProofList}
-                        findAllDeployProof={findAllDeployProof}
-                        allDeployProofList={allDeployProofList}
                     />
-                    :null
-            }
-            {
-                view === 1 ?
-                    <Config_view2
-                        formInitialValues={formInitialValues}
-                        codeData={codeData}
-                        setCodeData={setCodeData}
-                        data={data}
-                        setData={setData}
-                        setIsPrompt={setIsPrompt}
+                    :
+                    <ConfigView2
                         form={form}
+                        del={del}
                         updateConfigure={updateConfigure}
-                        createProof={createProof}
-                        findAllGitProof={findAllGitProof}
-                        allGitProofList={allGitProofList}
-                        findAllDeployProof={findAllDeployProof}
-                        allDeployProofList={allDeployProofList}
                     />
-                    :null
             }
-
         </Fragment>
     )
 }
 
-export default  withRouter(inject('ConfigStore','ProofStore','GitAuthorizeStore','StructureStore','ConfigCommonStore')(observer(Config)))
+export default  withRouter(inject('ConfigStore','GitAuthorizeStore',
+                'StructureStore','ConfigCommonStore','ConfigDataStore')
+                (observer(Config)))

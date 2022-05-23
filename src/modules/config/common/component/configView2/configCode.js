@@ -14,7 +14,7 @@ const ConfigCode = props =>{
     const code = () => {
         return  codeData === '' ?
             <div
-                className='configView2-sider_addCode'
+                className='configView2-sider_code_add'
                 onClick={()=>setCodeDrawer(true)}
             >
                 添加代码源

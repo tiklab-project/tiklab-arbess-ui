@@ -1,18 +1,17 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
-import CodeMirror from '@uiw/react-codemirror';
-import {javascript} from "@codemirror/lang-javascript";
 import {inject, observer} from "mobx-react";
 import ConfigDeployAddProofModal from "./configDeployAddProofModal";
+import Mirror from "../../../../../common/codeMirror/codeMirror";
 
 const {Option}=Select
-const { TextArea } = Input;
 
 const ConfigDeployLinux = props =>{
   
-    const {ProofStore,ConfigCommonStore} = props
+    const {ProofStore,ConfigDataStore} = props
     const {createProof,findAllProof} = ProofStore
-    const {codeBlockContent,setCodeBlockContent} = ConfigCommonStore
+
+    const {codeBlockContent,setCodeBlockContent} = ConfigDataStore
 
     const [allLinuxProofList,setAllLinuxProofList] = useState([])
     const [deployVisible,setDeployVisible] = useState(false)
@@ -60,7 +59,6 @@ const ConfigDeployLinux = props =>{
                                 )
                             })
                         }
-
                     </Select>
                 </Form.Item>
                 <Button
@@ -73,16 +71,12 @@ const ConfigDeployLinux = props =>{
             <Form.Item name='linuxAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
-            {/*<CodeMirror*/}
-            {/*    value={codeBlockContent}*/}
-            {/*    style={{height:'auto'}}*/}
-            {/*    extensions={[javascript({ jsx: true })]}*/}
-            {/*    onChange={(value, viewUpdate) => {*/}
-            {/*        setCodeBlockContent(value)*/}
-            {/*    }}*/}
-            {/*/>*/}
             <Form.Item name='deployShell' label='shell命令'>
-                <TextArea autoSize/>
+                <Mirror
+                    autoSize
+                    codeBlockContent={codeBlockContent}
+                    setCodeBlockContent={setCodeBlockContent}
+                />
             </Form.Item>
             <ConfigDeployAddProofModal
                 deployVisible={deployVisible}
@@ -93,6 +87,6 @@ const ConfigDeployLinux = props =>{
     )
 }
 
-export default inject('ProofStore','ConfigCommonStore')(observer(ConfigDeployLinux))
+export default inject('ProofStore','ConfigDataStore')(observer(ConfigDeployLinux))
 
 

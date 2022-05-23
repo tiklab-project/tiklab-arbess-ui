@@ -7,9 +7,9 @@ const {Option} = Select
 
 const ConfigCodeGit = props =>{
 
-    const {ProofStore,ConfigCommonStore}=props
+    const {ProofStore,ConfigDataStore}=props
     const {createProof,findAllProof,findOneProof} = ProofStore
-    const {setCodeName, setCodeBranch} = ConfigCommonStore
+    const {setCodeName, setCodeBranch} = ConfigDataStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
     const [visible,setVisible]=useState(false)
@@ -97,7 +97,10 @@ const ConfigCodeGit = props =>{
                     添加
                 </Button>
             </Row>
-            
+
+            <div className='config-details-gitTest'>
+                <Button>测试</Button>
+            </div>
             <ConfigCodeGitModal
                 visible={visible}
                 setVisible={setVisible}
@@ -108,4 +111,4 @@ const ConfigCodeGit = props =>{
     )
 }
 
-export default inject('ProofStore','ConfigCommonStore')(observer(ConfigCodeGit))
+export default inject('ProofStore','ConfigDataStore')(observer(ConfigCodeGit))

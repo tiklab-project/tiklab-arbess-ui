@@ -1,7 +1,7 @@
 import React from "react";
 import { Drawer ,Button} from 'antd';
 import {CloseOutlined} from "@ant-design/icons";
-import './structure_right_logDrawer.scss'
+import './structureRightLogDrawer.scss'
 
 const StructureRightLogDrawer = props =>{
     const {visible,setVisible,drawer,taskAlias} = props
