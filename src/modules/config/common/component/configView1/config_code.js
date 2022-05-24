@@ -1,12 +1,11 @@
 import React, {Fragment} from "react";
-import formResetFields from "../configForm/formResetFields";
 import formAll from "../configForm/formAll";
 import {CloseOutlined} from "@ant-design/icons";
 
 const Config_code = props =>{
 
-    const {setCodeVisible,codeData,setCodeData,setIsPrompt,
-        setCodeName,setCodeBranch,setFormInitialValues
+    const {setCodeVisible,codeData,setCodeData,setIsPrompt, setCodeName,
+        setCodeBranch,formInitialValues,setFormInitialValues,git
     } = props
 
     const addCode = () =>{
@@ -14,7 +13,8 @@ const Config_code = props =>{
     }
 
     const deletePart = () =>{
-        setFormInitialValues({...formResetFields.git})
+        git()
+        setFormInitialValues({...formInitialValues})
         setCodeData('')
         setCodeName('')
         setCodeBranch('')
@@ -28,8 +28,10 @@ const Config_code = props =>{
                     return  formAll.git
                 case 'Gitee' :
                     return  formAll.gitee
-                case 'GitLab' :
+                case 'Gitlab' :
                     return  formAll.gitlab
+                case 'Github' :
+                    return formAll.github
             }
         }
         return codeData

@@ -25,8 +25,10 @@ const ConfigFormDetailsDrawer = props =>{
                 return   formAll.git
             case 'Gitee':
                 return   formAll.gitee
-            case 'GitLab':
+            case 'Gitlab':
                 return   formAll.gitlab
+            case 'Github' :
+                return formAll.github
         }
     }
 
@@ -37,11 +39,12 @@ const ConfigFormDetailsDrawer = props =>{
                 data.splice(i,1)
             }
             setData([...data])
-            setCodeName('')
-            setCodeBranch('')
         }
-        if(newStage === '通用Git' || newStage === 'Gitee'  || newStage=== 'GitLab'){
-            setCodeData('')
+        if(newStage === '通用Git' || newStage === 'Gitee'  ||
+            newStage=== 'Gitlab' || newStage === 'Github'){
+                setCodeData('')
+                setCodeName('')
+                setCodeBranch('')
         }
         setIsPrompt(true)
         setTaskFormDrawer(false)

@@ -3,16 +3,16 @@ import {Button, Form, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import ConfigCodeGiteeModal from "./configCodeGiteeModal";
 import {inject, observer} from "mobx-react";
+import GithubStore from "../../store/githubStore";
 
 const {Option} =Select
 
-const ConfigCodeGitee = props =>{
+const ConfigCodeGithub = props =>{
 
-    const {GiteeStore,ProofStore,ConfigStore,ConfigDataStore} = props
+    const {GithubStore,ProofStore,ConfigStore,ConfigDataStore} = props
 
-    const {url, getAllGiteeStorehouse, giteeList,getGiteeBranch,giteeBranchList,
-        getGiteeProof
-    } = GiteeStore
+    const {GetCode, GetAccessToken, getAllGithubStorehouse,getGithubBranch,
+    } = GithubStore
     const {findAllProof} = ProofStore
     const {findAllConfigure} = ConfigStore
     const {setCodeName,setCodeBranch} = ConfigDataStore
@@ -32,9 +32,8 @@ const ConfigCodeGitee = props =>{
             for (let i in type){
                 if(type[i].type===2){
                     setModalFormInvi(type[i].proof)
-                    console.log(type[i].codeName,'codeName')
-                    if(!type[i].codeName || type[i].codeName === null ){
-                        setGiteeProhibited(true)
+                    if(!type[i].codeName || type[i].codeName !== null ){
+                        setGiteeProhibited(false)
                     }
                 }
             }
@@ -42,23 +41,23 @@ const ConfigCodeGitee = props =>{
     },[])
 
     const clickGitStoreHouse = () =>{
-        if(codeTaken){
-            const param = {
-                accessToken:codeTaken.accessToken
-            }
-            getAllGiteeStorehouse(param)
-        }
+        // if(codeTaken){
+        //     const param = {
+        //         accessToken:codeTaken.accessToken
+        //     }
+        //     getAllStorehouse(param)
+        // }
     }
 
     const changeGitStoreHouse = values =>{
-        console.log(values)
-        const params ={
-            projectName:values,
-            proofId:localStorage.getItem('giteeProofId')
-        }
-        getGiteeBranch(params)
-        setGiteeProhibited(false)
-        setCodeName(values)
+        // console.log(values)
+        // const params ={
+        //     projectName:values,
+        //     proofId:localStorage.getItem('githubProofId')
+        // }
+        // getBranch(params)
+        // setGiteeProhibited(false)
+        // setCodeName(values)
     }
 
     const inputCodeBranchValue = values =>{
@@ -69,7 +68,7 @@ const ConfigCodeGitee = props =>{
         <Fragment>
             <Row>
                 <Form.Item
-                    name='giteeCodeName'
+                    name='codeName'
                     label="git地址"
                 >
                     <Select
@@ -80,15 +79,15 @@ const ConfigCodeGitee = props =>{
                         <Option >
                             无
                         </Option>
-                        {
-                            giteeList && giteeList.map(item=>{
-                                return (
-                                    <Option key={item}>
-                                        {item}
-                                    </Option>
-                                )
-                            })
-                        }
+                        {/*{*/}
+                        {/*    gitList && gitList.map(item=>{*/}
+                        {/*        return (*/}
+                        {/*            <Option key={item}>*/}
+                        {/*                {item}*/}
+                        {/*            </Option>*/}
+                        {/*        )*/}
+                        {/*    })*/}
+                        {/*}*/}
                     </Select>
                 </Form.Item>
                 <Button
@@ -100,34 +99,34 @@ const ConfigCodeGitee = props =>{
                     新增代码库
                 </Button>
             </Row>
-            <Form.Item name="giteeBranch" label="分支">
+            <Form.Item name="codeBranch" label="分支">
                 <Select
                     style={{ width: 300 }}
                     disabled={giteeProhibited}
                     onChange={()=>inputCodeBranchValue()}
                 >
                     <Option >
-                       无
+                        无
                     </Option>
-                    {
-                        giteeBranchList && giteeBranchList.map(item=>{
-                            return (
-                                <Option key={item} value={item}>
-                                    {item}
-                                </Option>
-                            )
-                        })
-                    }
+                    {/*{*/}
+                    {/*    branchList && branchList.map(item=>{*/}
+                    {/*        return (*/}
+                    {/*            <Option key={item} value={item}>*/}
+                    {/*                {item}*/}
+                    {/*            </Option>*/}
+                    {/*        )*/}
+                    {/*    })*/}
+                    {/*}*/}
 
                 </Select>
             </Form.Item>
-            
+
             <ConfigCodeGiteeModal
                 findAllProof={findAllProof}
                 visible={visible}
                 setVisible={setVisible}
-                url={url}
-                getGiteeProof={getGiteeProof}
+                url={GetCode}
+                // getGiteeProof={getGiteeProof}
                 modalFormInvi={modalFormInvi}
                 codeTaken={codeTaken}
             />
@@ -135,6 +134,6 @@ const ConfigCodeGitee = props =>{
     )
 }
 
-export default inject('GiteeStore','ProofStore',
-                'ConfigStore','ConfigDataStore')
-                 (observer(ConfigCodeGitee))
+export default inject('GithubStore','ProofStore',
+    'ConfigStore','ConfigDataStore')
+(observer(ConfigCodeGithub))

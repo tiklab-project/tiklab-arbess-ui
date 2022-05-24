@@ -27,10 +27,11 @@ const ConfigCodeGit = props =>{
     }
 
     const changeGitSelect = value =>{
-        const param = {
-            proofId:value
-        }
-        findOneProof(param)
+        console.log(value)
+        // const param = {
+        //     proofId:value
+        // }
+        // findOneProof(param)
         localStorage.setItem('gitProofId',value)
     }
 
@@ -45,7 +46,7 @@ const ConfigCodeGit = props =>{
     return(
         <Fragment>
             <Form.Item
-                name='gitCodeName'
+                name='codeName'
                 label="git地址"
                 rules={[
                     {
@@ -57,7 +58,7 @@ const ConfigCodeGit = props =>{
                 <Input  onChange={e=>inputCodeNameValue(e)}/>
             </Form.Item>
             <Form.Item
-                name="gitBranch"
+                name="codeBranch"
                 label="分支"
             >
                 <Input
@@ -68,7 +69,7 @@ const ConfigCodeGit = props =>{
             </Form.Item>
             <Row>
                 <Form.Item
-                    name='gitProofName'
+                    name='proofName'
                     label="凭证"
                 >
                     <Select
@@ -99,8 +100,9 @@ const ConfigCodeGit = props =>{
             </Row>
 
             <div className='config-details-gitTest'>
-                <Button>测试</Button>
+                <Button>测试连接</Button>
             </div>
+
             <ConfigCodeGitModal
                 visible={visible}
                 setVisible={setVisible}

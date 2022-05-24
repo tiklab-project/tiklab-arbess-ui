@@ -14,11 +14,11 @@ const codeList = [
     },
     {
         id:3,
-        title: 'GitLab'
+        title: 'Gitlab'
     },
     {
         id:4,
-        title: 'GitHub'
+        title: 'Github'
     }
 ]
 

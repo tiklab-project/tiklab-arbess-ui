@@ -8,6 +8,7 @@ const ConfigCodeGiteeModal = props =>{
 
     const {visible,setVisible,url,codeTaken,
         getGiteeProof , modalFormInvi,findAllProof}=props
+
     const [form] = Form.useForm()
 
     const [allGiteeProofList,setAllGiteeProofList] = useState([])
@@ -36,7 +37,6 @@ const ConfigCodeGiteeModal = props =>{
                     }
                 })
             }
-
         })
     }
 
@@ -53,7 +53,6 @@ const ConfigCodeGiteeModal = props =>{
     }
 
     const changeGiteeSelect = value =>{
-        // localStorage.setItem('gitProofId',value)
         localStorage.setItem('giteeProofId',value)
     }
 
@@ -91,7 +90,7 @@ const ConfigCodeGiteeModal = props =>{
                 <Form.Item
                     label='服务连接名'
                     name='proofName'
-                    rules={[{ required: true, message: '请输入' }]}
+                    // rules={[{ required: true, message: '请输入服务连接名' }]}
                 >
                     <Input/>
                 </Form.Item>
@@ -118,7 +117,8 @@ const ConfigCodeGiteeModal = props =>{
                     </Form.Item>
                     <Button
                         onClick={()=>goUrl()}
-                        className='config-details-link' type="link"
+                        style={{marginTop:30}}
+                        type="link"
                     >
                         <PlusOutlined/>
                         新建

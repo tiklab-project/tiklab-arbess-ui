@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "antd";
-import Config_code_git from "../configForm/configCodeGit";
-import Config_code_gitee from "../configForm/configCodeGitee";
-import Config_code_gitlab from "../configForm/configCodeGitlab";
+import formAll from "../configForm/formAll";
 
 const ConfigCodeDrawerBottom = props =>{
 
@@ -57,17 +55,22 @@ const ConfigCodeDrawerBottom = props =>{
             <div className='body-menu_form'>
                 {
                     codeOpt === 0 ?
-                        <Config_code_git/>
+                        formAll.git
                         : null
                 }
                 {
                     codeOpt === 1 ?
-                        <Config_code_gitee/>
+                        formAll.gitee
                         :null
                 }
                 {
                     codeOpt === 2 ?
-                        <Config_code_gitlab/>
+                        formAll.gitlab
+                        :null
+                }
+                {
+                    codeOpt === 3 ?
+                        formAll.github
                         :null
                 }
             </div>

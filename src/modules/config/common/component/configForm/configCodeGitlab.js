@@ -35,7 +35,7 @@ const ConfigCodeGitlab = props =>{
     return(
         <Fragment>
             <Form.Item
-                name='gitlabCodeName'
+                name='codeName'
                 label="gitlab地址"
                 rules={[
                     {
@@ -47,14 +47,14 @@ const ConfigCodeGitlab = props =>{
                 <Input  />
             </Form.Item>
             <Form.Item
-                name="gitlabBranch"
+                name="codeBranch"
                 label="分支"
             >
                 <Input  style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <Row>
                 <Form.Item
-                    name='gitlabProofName'
+                    name='proofName'
                     label='凭证'
                 >
                     <Select

@@ -1,18 +1,18 @@
 .search{
-  margin-left: 200px;
-  height: 85vh;
-  border-left: 1px solid #ccc;
-div{
-    padding: 30px;
-    ul li{
-      padding: 5px;
+    margin-left: 200px;
+    height: 85vh;
+    border-left: 1px solid #ccc;
+    div{
+        padding: 30px;
+        ul li{
+            padding: 5px;
+        }
     }
-  }
-  &-link{
-    cursor: pointer;
-    color: #1890ff;
-    &:hover{
-      text-decoration: underline;
+    &-link{
+        cursor: pointer;
+        color: #1890ff;
+        &:hover{
+            text-decoration: underline;
+        }
     }
-  }
 }

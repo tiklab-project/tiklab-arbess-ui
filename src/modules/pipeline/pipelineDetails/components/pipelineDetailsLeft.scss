@@ -23,16 +23,16 @@ ul{
         &:hover{
             color: #1890ff;
         }
-    }
-    &_title{
-        margin-top: 5px;
+        &_icon{
+            padding: 13px 0 5px
+        }
+        &_title{
+            margin-top: 5px;
+        }
     }
     &_link{
         color: #1890ff;
     }
-}
-.aisde_icon{
-    padding: 13px 0 5px
 }
 .opt{
     width: 300px;
@@ -61,3 +61,5 @@ ul{
         }
     }
 }
+
+

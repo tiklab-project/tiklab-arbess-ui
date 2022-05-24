@@ -34,12 +34,12 @@ const ConfigDeployLinux = props =>{
 
     return(
         <Fragment>
-            <Form.Item name='linuxTargetAddress' label='请输入文件地址'>
+            <Form.Item name='deployTargetAddress' label='请输入文件地址'>
                 <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
             </Form.Item>
             <Row>
                 <Form.Item
-                    name='linuxProofName'
+                    name='dockerProofName'
                     label='请选择Ip地址'
                 >
                     <Select 
@@ -68,7 +68,7 @@ const ConfigDeployLinux = props =>{
                     添加
                 </Button>
             </Row>
-            <Form.Item name='linuxAddress' label='部署位置'>
+            <Form.Item name='deployAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
             <Form.Item name='deployShell' label='shell命令'>

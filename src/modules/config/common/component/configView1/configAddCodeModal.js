@@ -12,11 +12,11 @@ const lis=[
     },
     {
         id:'c',
-        desc: 'GitLab'
+        desc: 'Gitlab'
     },
     {
         id:'d',
-        desc: 'GitHub'
+        desc: 'Github'
     }
 ]
 

@@ -1,24 +1,21 @@
 import {observable,action} from "mobx";
 
-
 import {
     Url,
     Code,
     GetAllStorehouse,
     GetBranch,
     GetProof,
-} from "../api/gitAuthorize";
+} from "../api/gitee";
 
-class GitAuthorizeStore{
+class GiteeStore {
     
     constructor(store) {
         this.store=store
     }
 
-    @observable gitList = []
-    @observable branchList = []
-    @observable gitProofId = ''
-    @observable userMessage = ''
+    @observable giteeList = []
+    @observable giteeBranchList = []
 
     //gitee授权--地址
     @action
@@ -49,12 +46,12 @@ class GitAuthorizeStore{
 
     //gitee--获取所有仓库
     @action
-    getAllStorehouse = value =>{
+    getAllGiteeStorehouse = value =>{
         const param = new FormData()
         param.append("accessToken", value.accessToken)
         GetAllStorehouse(param).then(res=>{
-            this.gitList =res.data.data
-            console.log('getAllStorehouse',  this.gitList )
+            this.giteeList =res.data.data
+            console.log('getAllStorehouse',  this.giteeList )
         }).catch(error=>{
             console.log(error)
         })
@@ -62,19 +59,18 @@ class GitAuthorizeStore{
 
     //gitee--分支
     @action
-    getBranch = value =>{
+    getGiteeBranch = value =>{
         const params = new FormData()
         params.append('projectName',value.projectName)
         params.append('proofId',value.proofId)
         GetBranch(params).then(res=>{
-            this.branchList =res.data.data
+            this.giteeBranchList =res.data.data
             console.log('giteeBranchList',  res )
         }).catch(error=>{
             console.log(error)
         })
     }
 
-
 }
 
-export default GitAuthorizeStore
+export default GiteeStore

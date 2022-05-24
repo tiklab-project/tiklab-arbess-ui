@@ -88,8 +88,8 @@ const PipelineDetailsLeft = props =>{
                                 key={item.key}
                                 onClick={()=>changeNav(item)}
                             >
-                                <div className='aisde_icon'>{item.icon}</div>
-                                <div className='aisde_title'>{item.title}</div>
+                                <div className='aside_content_icon'>{item.icon}</div>
+                                <div className='aside_content_title'>{item.title}</div>
                             </li>
                         )
                     })

@@ -12,6 +12,7 @@ const StructureRightLogDrawer = props =>{
             visible={visible}
             onClose={()=>setVisible(false)}
             closable={false}
+            width={600}
             style={{whiteSpace: 'pre-wrap',marginTop:51}}
         >
             <div className='wrapper-head'>

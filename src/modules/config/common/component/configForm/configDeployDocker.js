@@ -45,7 +45,7 @@ const ConfigDeployDocker = props =>{
 
     return(
         <Fragment>
-            <Form.Item name='dockerTargetAddress' label='请输入文件地址'>
+            <Form.Item name='deployTargetAddress' label='请输入文件地址'>
                 <Input/>
             </Form.Item>
             <Row>
@@ -67,7 +67,6 @@ const ConfigDeployDocker = props =>{
                                 )
                             })
                         }
-
                     </Select>
                 </Form.Item>
                 <Button
@@ -101,7 +100,7 @@ const ConfigDeployDocker = props =>{
             >
                 <Input style={{width:200}}/>
             </Form.Item>
-            <Form.Item name='dockerAddress' label='部署位置'>
+            <Form.Item name='deployAddress' label='部署位置'>
                 <Input/>
             </Form.Item>
             <ConfigDeployAddProofModal

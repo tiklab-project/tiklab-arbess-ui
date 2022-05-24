@@ -90,4 +90,5 @@ const PipelineDelRename= props=>{
         </div>
     )
 }
+
 export default inject('PipelineStore')(observer(PipelineDelRename))

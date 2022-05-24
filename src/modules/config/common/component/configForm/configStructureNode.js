@@ -7,10 +7,10 @@ const ConfigStructureNode = props =>{
 
     return(
         <Fragment>
-            <Form.Item name="nodeAddress" label="文件地址">
+            <Form.Item name="structureAddress" label="文件地址">
                 <Input />
             </Form.Item>
-            <Form.Item name="nodeOrder" label="执行命令">
+            <Form.Item name="structureOrder" label="执行命令">
                 <TextArea  autoSize/>
             </Form.Item>
         </Fragment>

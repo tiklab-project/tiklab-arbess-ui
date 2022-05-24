@@ -1,5 +1,5 @@
 import {UnControlled as CodeMirror} from 'react-codemirror2'
-import React, {useEffect, useRef} from "react";
+import React, {useRef} from "react";
 import 'codemirror/lib/codemirror.js';
 import 'codemirror/lib/codemirror.css';
 // 主题风格
@@ -44,17 +44,15 @@ const Mirror = props =>{
             ref={formRefs}
             options={{
                 mode: { name: 'shell', shell: true },//语言
-                // theme: 'blackboard',//主题
                 lineNumbers: false, // 是否显示行号
                 lineWrapping: true,//是否支持代码折叠
             }}
             onChange={() => {
-                setCodeBlockContent(formRefs.current.editor.getValue(),'hhh')
+                setCodeBlockContent(formRefs.current.editor.getValue())
             }}
         />
     )
 }
-
 
 export default Mirror
 

@@ -2,6 +2,7 @@ import React from "react";
 import ConfigCodeGit from './configCodeGit'
 import ConfigCodeGitee from "./configCodeGitee";
 import ConfigCodeGitlab from "./configCodeGitlab";
+import ConfigCodeGithub from "./configCodeGithub";
 import ConfigTestUnit from "./configTestUnit";
 import ConfigStructureMaven from "./configStructureMaven";
 import ConfigStructureNode from "./configStructureNode";
@@ -12,6 +13,7 @@ export default {
     git:<ConfigCodeGit/>,
     gitee:<ConfigCodeGitee/>,
     gitlab:<ConfigCodeGitlab/>,
+    github:<ConfigCodeGithub/>,
     unit:<ConfigTestUnit/>,
     maven:<ConfigStructureMaven/>,
     node:<ConfigStructureNode/>,

@@ -12,10 +12,10 @@ import {inject, observer} from "mobx-react";
 
 const Config = props =>{
 
-    const {ConfigStore,GitAuthorizeStore,StructureStore,ConfigDataStore} = props
+    const {ConfigStore,GiteeStore,StructureStore,ConfigDataStore} = props
 
     const {updateConfigure} = ConfigStore
-    const {code} = GitAuthorizeStore
+    const {code} = GiteeStore
     const {pipelineStartStructure,findStructureState} = StructureStore
 
     const {setIsPrompt, codeName,codeBranch, setFormInitialValues,codeData,setCodeData
@@ -114,6 +114,6 @@ const Config = props =>{
     )
 }
 
-export default  withRouter(inject('ConfigStore','GitAuthorizeStore',
+export default  withRouter(inject('ConfigStore','GiteeStore',
                 'StructureStore','ConfigCommonStore','ConfigDataStore')
                 (observer(Config)))

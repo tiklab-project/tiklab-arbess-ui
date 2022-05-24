@@ -14,11 +14,10 @@ import {withRouter} from "react-router";
 
 const ConfigView1 = props =>{
 
-    const {form,del, updateConfigure,ConfigDataStore} = props
+    const {form,del,git, updateConfigure,ConfigDataStore,} = props
 
     const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,codeBlockContent,
-        setCodeBlockContent, formInitialValues,data,setData, codeData,setCodeData,
-        setFormInitialValues,
+        data,setData, codeData,setCodeData,  formInitialValues,setFormInitialValues
     } = ConfigDataStore
 
     const inputRef = useRef();
@@ -69,7 +68,6 @@ const ConfigView1 = props =>{
             }
             setData([...data])
             setIsPrompt(true)
-            setCodeBlockContent('')
         }
     }
 
@@ -138,7 +136,7 @@ const ConfigView1 = props =>{
         })
     }
 
-    const onFinish = value => {
+    const onFinish = values => {
 
         //排序
         let testSort,structureSort, deploySort = 0
@@ -161,61 +159,62 @@ const ConfigView1 = props =>{
 
         let codeList, testList,structureList,deployList={}
         const dataArray = data && data.map((item) => item.desc)
+
         switch (codeData.desc){
             case '通用Git':
                 codeList = {
                     codeType:1,
-                    codeBranch:value.gitBranch,
-                    codeName:value.gitCodeName,
                     proofId:localStorage.getItem('gitProofId'),
                 }
                 break
             case 'Gitee':{
                 codeList = {
                     codeType:2,
-                    codeBranch:value.giteeBranch,
-                    codeName:value.giteeCodeName,
                     proofId:localStorage.getItem('giteeProofId'),
                 }
             }
+                break
+            case 'Gitlab':{
+                codeList = {
+                    codeType:3,
+                    proofId:localStorage.getItem('gitlabProofId'),
+                }
+            }
+                break
+            case 'Github':{
+                codeList = {
+                    codeType:4,
+                    proofId:localStorage.getItem('githubProofId'),
+                }
+            }
         }
+
         for (let i in dataArray){
             switch (dataArray[i]){
                 case '单元测试':
                     testList = {
                         testType:11,
-                        testOrder : value.testOrder
                     }
                     break
                 case 'maven':
                     structureList = {
                         structureType:21,
-                        structureAddress:value.mavenAddress,
-                        structureOrder:value.mavenOrder
                     }
                     break
                 case 'node':
                     structureList = {
                         structureType:22,
-                        structureAddress:value.nodeAddress,
-                        structureOrder:value.nodeOrder
                     }
                     break
                 case 'linux':
                     deployList = {
                         deployType:31,
-                        deployAddress: value.linuxAddress,
-                        deployTargetAddress:value.linuxTargetAddress,
-                        proofName: value.linuxProofName,
                         proofId:localStorage.getItem('linuxProofId'),
                     }
                     break
                 case 'docker':
                     deployList = {
                         deployType:32,
-                        deployAddress: value.linuxAddress,
-                        deployTargetAddress:value.dockerTargetAddress,
-                        proofName: value.dockerProofName,
                         proofId:localStorage.getItem('dockerProofId'),
                     }
             }
@@ -228,8 +227,8 @@ const ConfigView1 = props =>{
                 codeId:localStorage.getItem('codeId'),
                 sort:1,
                 type:codeList && codeList.codeType,
-                codeBranch:codeList && codeList.codeBranch,
-                codeName:codeList && codeList.codeName,
+                codeBranch:values.codeBranch,
+                codeName:values.codeName,
                 proof:{
                     proofId:codeList && codeList.proofId,
                 }
@@ -239,32 +238,31 @@ const ConfigView1 = props =>{
                 sort:testSort,
                 testAlias:testAlias,
                 type:testList && testList.testType,
-                testOrder: testList && testList.testOrder,
+                testOrder: values.testOrder,
             },
             pipelineStructure:{
                 structureId:localStorage.getItem('structureId'),
                 sort:structureSort,
                 structureAlias:structureAlias,
                 type:structureList && structureList.structureType,
-                structureAddress:structureList && structureList.structureAddress,
-                structureOrder:structureList && structureList.structureOrder,
+                structureAddress:values.structureAddress,
+                structureOrder:values.structureOrder,
             },
             pipelineDeploy:{
                 deployId:localStorage.getItem('deployId'),
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployList && deployList.deployType,
-                deployAddress: deployList && deployList.deployAddress,
-                deployTargetAddress: deployList && deployList.deployTargetAddress,
+                deployAddress: values.deployAddress,
+                deployTargetAddress: values.deployTargetAddress,
                 deployShell:codeBlockContent,
-                dockerPort:value.dockerPort,
-                mappingPort:value.mappingPort,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
                 proof:{
                     proofId:deployList && deployList.proofId,
                 }
             }
         }
-
         console.log(configureList,'hhhhhh')
         updateConfigure(configureList).then(res=>{
             if(res.code!==0){
@@ -303,6 +301,7 @@ const ConfigView1 = props =>{
                             setIsPrompt={setIsPrompt}
                             setCodeName={setCodeName}
                             setCodeBranch={setCodeBranch}
+                            git={git}
                         />
                         { newStage() }
                         <ConfigAddNewStage
