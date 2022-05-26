@@ -4,7 +4,7 @@ import {PlusOutlined} from "@ant-design/icons";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const { visible,setVisible,modalFormInvi,codeData,
+    const { visible,setVisible,formInitialValues,codeData,serviceName,
         url,getGiteeProof,giteeToken,getCode,getGithubProof,githubToken
     }=props
 
@@ -12,9 +12,9 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
     useEffect(()=>{
         form.setFieldsValue({
-            proofName:modalFormInvi && modalFormInvi.proofName,
+            proofName:formInitialValues && formInitialValues.proofDescribe,
         })
-    },[modalFormInvi])
+    },[formInitialValues])
 
     const onOk = () =>{
         form.validateFields().then((values) => {

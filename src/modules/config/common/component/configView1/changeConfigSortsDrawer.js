@@ -12,21 +12,52 @@ const ChangeConfigSortsDrawer = props =>{
     const nameArray = []
     
     useEffect(()=>{
+        let desc
         if(codeData!==''){
+            switch (codeData.codeType) {
+                case 1:
+                    desc = '通用Git'
+                    break
+                case 2:
+                    desc = 'Gitee'
+                    break
+                case 3:
+                    desc = 'Github'
+                    break
+                case 4:
+                    desc = 'Gitlab'
+            }
             nameArray.push({
                 key:0,
-                title: codeData.title + '--' +codeData.desc ,
+                title: '源码管理' + '--' + desc,
                 disabled: true,
                 step:'源码管理'
             })
         }     
         data && data.map((item,index)=>{
+            let tpl
+            switch (item.dataType) {
+                case 11:
+                    tpl = '单元测试'
+                    break
+                case 21:
+                    tpl = 'maven'
+                    break
+                case 22:
+                    tpl = 'node'
+                    break
+                case 31:
+                    tpl = 'linux'
+                    break
+                case 32:
+                    tpl = 'docker'
+            }
             nameArray.push({
                 key:index+1,
-                title:item.title + '--' + item.desc,
+                title:item.title + '--' + tpl,
                 dataId:item.dataId,
                 step:item.title,
-                desc:item.desc
+                dataType:item.dataType
             })
          })
         setGData([...nameArray])
@@ -71,7 +102,7 @@ const ChangeConfigSortsDrawer = props =>{
                 cData.push({
                     dataId:item.dataId,
                     title:item.step,
-                    desc:item.desc
+                    dataType:item.dataType
                 })
                 setData(cData)
                 setIsPrompt(true)
@@ -96,7 +127,9 @@ const ChangeConfigSortsDrawer = props =>{
                     <div className="menu-wrapper-head">
                         <div>更改配置顺序</div>
                         <div>
-                            <Button type="text" onClick={()=>setChangeSortVisible(false)}>
+                            <Button type="text"
+                                    onClick={()=>setChangeSortVisible(false)}
+                            >
                                 <CloseOutlined />
                             </Button>
                         </div>

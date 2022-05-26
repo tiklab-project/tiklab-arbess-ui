@@ -17,38 +17,23 @@ const ConfigCodeGiteeOrGithub = props =>{
     } = GiteeStore
 
     const {findAllProof} = ProofStore
-    const {findAllConfigure,testPass} = ConfigStore
-    const {setCodeName,setCodeBranch,codeData} = ConfigDataStore
+    const {testPass} = ConfigStore
+    const {setCodeName,setCodeBranch,codeData,formInitialValues} = ConfigDataStore
 
     const [visible,setVisible] = useState(false)
-    const [modalFormInvi,setModalFormInvi] = useState('') // form表单初始化
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
     const [allAuthorizeList,setAllAuthorizeList] = useState([]) // 服务授权
     const [storehouseList,setStorehouseList] = useState([]) // 仓库
     const [branchList,setBranchList] = useState([]) // 分支
     const [connection,setConnection] = useState('')
-    const pipelineId = localStorage.getItem('pipelineId')
     const githubToken = localStorage.getItem('githubToken')
     const giteeToken = JSON.parse(localStorage.getItem('giteeToken'))
     const gitProofId = localStorage.getItem('gitProofId')
 
     useEffect(()=>{
-        const param = {
-            pipelineId:pipelineId
+        if(codeData.codeName){
+            setProhibited(false)
         }
-        findAllConfigure(param).then(res=>{
-            const type = res.data
-            for (let i in type){
-                if(type[i].type===2 || type[i].type===3){
-                    setModalFormInvi(type[i].proof)
-                    if(!type[i].codeName || type[i].codeName !== null ){
-                        setProhibited(false)
-                    }
-                }
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
     },[])
 
     // 得到所有仓库
@@ -227,7 +212,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 findAllProof={findAllProof}
                 visible={visible}
                 setVisible={setVisible}
-                modalFormInvi={modalFormInvi}
+                formInitialValues={formInitialValues}
                 codeData={codeData}
                 getCode={getCode}
                 getGithubProof={getGithubProof}

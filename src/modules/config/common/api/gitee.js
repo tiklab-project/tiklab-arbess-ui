@@ -27,7 +27,6 @@ export function  GetProof (data){
     })
 }
 
-
 //gitee--获取所有仓库
 export function  GetAllStorehouse (data){
     return serviceLoc.request({

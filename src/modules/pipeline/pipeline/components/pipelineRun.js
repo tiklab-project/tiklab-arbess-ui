@@ -1,7 +1,7 @@
 import React from 'react'
-import './running.scss'
+import './pipelineRun.scss'
 
-const Running = () =>{
+const PipelineRun = () =>{
     return(
         <span className='loading' >
           ||
@@ -9,4 +9,4 @@ const Running = () =>{
     )
 }
 
-export default Running
+export default PipelineRun

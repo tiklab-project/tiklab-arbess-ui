@@ -9,22 +9,21 @@ const ConfigCodeDrawerBottom = props =>{
     } = props
 
     const [codeId,setCodeId] = useState('')
-    const [desc,setDesc] = useState('通用Git')
+    const [codeType,setCodeType] = useState(1)
 
     let newCode = { }
 
     const handleClick = (item,index) =>{
         setCodeId(index)
-        setDesc(item.title)
         setCodeOpt(index)
+        setCodeType(item.id)
     }
 
     const codeBtn = () =>{
-        if(desc) {
+        if(codeType) {
             newCode = {
                 codeId: codeId,
-                title: '源码管理',
-                desc: desc,
+                codeType:codeType,
                 codeName: codeName,
                 codeBranch: codeBranch,
             }
@@ -54,24 +53,10 @@ const ConfigCodeDrawerBottom = props =>{
             }
             <div className='body-menu_form'>
                 {
-                    codeOpt === 0 ?
-                        formAll.git
-                        : null
-                }
-                {
-                    codeOpt === 1 ?
-                        formAll.gitee
-                        :null
-                }
-                {
-                    codeOpt === 2 ?
-                        formAll.gitlab
-                        :null
-                }
-                {
-                    codeOpt === 3 ?
-                        formAll.github
-                        :null
+                    codeOpt === 0 || codeOpt === 2 ?
+                        formAll.gitOrGitlab
+                        :
+                        formAll.giteeOrGithub
                 }
             </div>
             <div>

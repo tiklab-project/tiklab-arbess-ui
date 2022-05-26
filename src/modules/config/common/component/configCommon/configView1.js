@@ -14,10 +14,10 @@ import {withRouter} from "react-router";
 
 const ConfigView1 = props =>{
 
-    const {form,del,git, updateConfigure,ConfigDataStore,} = props
+    const {form,del, updateConfigure,ConfigDataStore,configName,configForm} = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,codeBlockContent,
-        data,setData, codeData,setCodeData,  formInitialValues,setFormInitialValues
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData,
+        codeData,setCodeData, formInitialValues,setFormInitialValues
     } = ConfigDataStore
 
     const inputRef = useRef();
@@ -61,7 +61,7 @@ const ConfigView1 = props =>{
     }
 
     const deletePart = group =>{
-        del(group.desc)
+        del(group.dataType)
         for (let i = 0 ;i<data.length;i++){
             if(data[i].dataId === group.dataId){
                 data.splice(i,1)
@@ -72,68 +72,11 @@ const ConfigView1 = props =>{
     }
 
     const inputContent = group =>{
-        if(group){
-            switch (group.desc){
-                case '单元测试':
-                    return  formAll.unit
-                case 'maven':
-                    return  formAll.maven
-                case 'node':
-                    return formAll.node
-                case 'linux':
-                    return  formAll.linux
-                case 'docker':
-                    return  formAll.docker
-            }
-        }
+        return configForm(group.dataType)
     }
 
-    const newStage = () =>{
-        return   data && data.map((group,index)=>{
-            return(
-                <div className='configView1-wrapper' key={index}>
-                    <div
-                        className='configView1-wrapper-Headline'
-                    >
-                        {
-                            step !== index ?
-                                <div style={{display:"inline"}}>
-                                    {group.title}
-                                    &nbsp; &nbsp;
-                                    <span onClick={()=> displayInput(index)}
-                                          style={{cursor:'pointer'}}>
-                                        <EditOutlined />
-                                    </span>
-                                </div>
-                                :
-                                <Input
-                                    type="text"
-                                    ref={inputRef}
-                                    onBlur={hiddenInput}
-                                    style={{width:100}}
-                                    defaultValue={group.title}
-                                    onChange={e=>changeInputValue(e,index)}
-                                />
-                        }
-                    </div>
-                    <div className='configView1-wrapper-newStage'>
-                        <div className='desc'>
-                            <div className='desc-head'>{group.desc}</div>
-                            <div
-                                id='del'
-                                className='desc-delete'
-                                onClick={()=>deletePart(group)}
-                            >
-                                <CloseOutlined />
-                            </div>
-                        </div>
-                        <div className='desc-input'>
-                            { inputContent(group) }
-                        </div>
-                    </div>
-                </div>
-            )
-        })
+    const dataType = type =>{
+        return configName(type)
     }
 
     const onFinish = values => {
@@ -249,7 +192,7 @@ const ConfigView1 = props =>{
                 type:deployList && deployList.deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
-                deployShell:codeBlockContent,
+                deployShell:values.deployShell,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
                 proof:{
@@ -270,6 +213,54 @@ const ConfigView1 = props =>{
         Object.assign(formInitialValues,value)
         setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
+    }
+
+    const newStage = () =>{
+        return   data && data.map((group,index)=>{
+            return(
+                <div className='configView1-wrapper' key={index}>
+                    <div className='configView1-wrapper-Headline'>
+                        {
+                            step !== index ?
+                                <div style={{display:"inline"}}>
+                                    {group.title}
+                                    &nbsp; &nbsp;
+                                    <span onClick={()=> displayInput(index)}
+                                          style={{cursor:'pointer'}}>
+                                        <EditOutlined />
+                                    </span>
+                                </div>
+                                :
+                                <Input
+                                    type="text"
+                                    ref={inputRef}
+                                    onBlur={hiddenInput}
+                                    style={{width:100}}
+                                    defaultValue={group.title}
+                                    onChange={e=>changeInputValue(e,index)}
+                                />
+                        }
+                    </div>
+                    <div className='configView1-wrapper-newStage'>
+                        <div className='desc'>
+                            <div className='desc-head'>
+                                {dataType(group.dataType)}
+                            </div>
+                            <div
+                                id='del'
+                                className='desc-delete'
+                                onClick={()=>deletePart(group)}
+                            >
+                                <CloseOutlined />
+                            </div>
+                        </div>
+                        <div className='desc-input'>
+                            { inputContent(group) }
+                        </div>
+                    </div>
+                </div>
+            )
+        })
     }
 
     return(
@@ -296,7 +287,9 @@ const ConfigView1 = props =>{
                             setCodeName={setCodeName}
                             setCodeBranch={setCodeBranch}
                             formInitialValues={formInitialValues}
-                            git={git}
+                            del={del}
+                            configName={configName}
+                            configForm={configForm}
                         />
                         { newStage() }
                         <ConfigAddNewStage

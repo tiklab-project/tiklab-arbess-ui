@@ -13,11 +13,11 @@ const codeList = [
         title:'Gitee'
     },
     {
-        id:3,
+        id:4,
         title: 'Gitlab'
     },
     {
-        id:4,
+        id:3,
         title: 'Github'
     }
 ]

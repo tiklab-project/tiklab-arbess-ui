@@ -1,35 +1,19 @@
 import React from "react";
 import {Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
-import formAll from "../configForm/formAll";
 
 const ConfigFormDetailsDrawer = props =>{
 
     const {data,setData,setTaskFormDrawer,taskFormDrawer,newStage,setIsPrompt,
-        setCodeName,setCodeBranch,setCodeData,del
+        setCodeName,setCodeBranch,setCodeData,del,configName,configForm
     } = props
 
+    const codeDe = () =>{
+        return configName(newStage)
+    }
+
     const showTask = () =>{
-        switch (newStage){
-            case '单元测试':
-                return   formAll.unit
-            case 'maven':
-                return   formAll.maven
-            case 'node':
-                return   formAll.node
-            case 'linux':
-                return   formAll.linux
-            case 'docker':
-                return   formAll.docker
-            case '通用Git':
-                return   formAll.gitOrGitlab
-            case 'Gitee':
-                return   formAll.giteeOrGithub
-            case 'Gitlab':
-                return   formAll.gitOrGitlab
-            case 'Github' :
-                return formAll.giteeOrGithub
-        }
+        return configForm(newStage)
     }
 
     const deletePart = () => {
@@ -40,8 +24,8 @@ const ConfigFormDetailsDrawer = props =>{
             }
             setData([...data])
         }
-        if(newStage === '通用Git' || newStage === 'Gitee'  ||
-            newStage=== 'Gitlab' || newStage === 'Github'){
+        if(newStage === 1 || newStage === 2  ||
+            newStage=== 3 || newStage === 4 ){
                 setCodeData('')
                 setCodeName('')
                 setCodeBranch('')
@@ -76,10 +60,9 @@ const ConfigFormDetailsDrawer = props =>{
                             <div className='body-taskForm'>
                                 <div className='taskForm-top'>
                                     <div className='taskForm-top_title'>
-                                        {newStage}
+                                        {codeDe()}
                                     </div>
                                 </div>
-
                                 {showTask()}
                             </div>
                         </div>

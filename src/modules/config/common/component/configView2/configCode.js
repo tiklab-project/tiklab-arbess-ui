@@ -6,10 +6,27 @@ const ConfigCode = props =>{
 
     const showDetailsDrawer = () => {
         if(codeData){
-            setNewStage(codeData.desc)
+            setNewStage(codeData.codeType)
             setTaskFormDrawer(true)
         }
     }
+
+    const codeType = () =>{
+        if(codeData){
+            switch (codeData.codeType){
+                case 1:
+                    return '通用Git'
+                case 2:
+                    return 'Gitee'
+                case 3:
+                    return 'Github'
+                case 4:
+                    return 'Gitlab'
+            }
+        }
+        return codeData
+    }
+
 
     const code = () => {
         return  codeData === '' ?
@@ -24,7 +41,7 @@ const ConfigCode = props =>{
                     className='configView2-sider_code_one_name'
                     onClick={()=>showDetailsDrawer()}
                 >
-                    {codeData.desc}
+                    {codeType()}
                 </div>
                 {
                     codeData.codeName === ''  || codeData.codeName ===undefined
@@ -33,7 +50,7 @@ const ConfigCode = props =>{
                         null :
                         <div className='configView2-sider_code_one_branch '>
                             <div className='branch-address'>
-                               仓库 {codeData.codeName}
+                                {codeData.codeName}
                             </div>
                         </div>
                 }
@@ -44,7 +61,7 @@ const ConfigCode = props =>{
                         null :
                         <div className='configView2-sider_code_one_address'>
                             <div className='branch-title'>
-                                分支 {codeData.codeBranch}
+                                {codeData.codeBranch}
                             </div>
                         </div>
                 }

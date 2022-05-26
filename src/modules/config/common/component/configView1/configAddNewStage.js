@@ -15,7 +15,7 @@ const ConfigAddNewStage = props =>{
                     onClick={()=> setNewStageVisible(true)}
                 >
                     新任务
-                    </div>
+                </div>
             </div>
             <Form.Item style={{marginTop:20}}>
                 <Button htmlType="submit" type='primary'>保存</Button>

@@ -18,8 +18,8 @@ const StructureRight = props =>{
             switch (modeData.runWay) {
                 case 1:
                     return '手动'
-                case 2:
-                    return '自动'
+                default:
+                    return  '自动'
             }
         }
     }
@@ -84,12 +84,12 @@ const StructureRight = props =>{
                                     </div>
                                 </div>
                                 <div className='cart-bottom' >
-                                                    <span
-                                                        className='cart-bottom-span'
-                                                        onClick={()=>log(item)}
-                                                    >
-                                                        日志
-                                                    </span>
+                                    <span
+                                        className='cart-bottom-span'
+                                        onClick={()=>log(item)}
+                                    >
+                                        日志
+                                    </span>
                                 </div>
                             </Card>
                         )

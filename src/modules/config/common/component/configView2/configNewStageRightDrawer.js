@@ -9,7 +9,7 @@ const ConfigNewStageRightDrawer = props =>{
 
     const handleClick = (group,item,i) =>{
         const newData = [...data]
-        const name = data && data.map(item => item.desc);
+        const name = data && data.map(item => item.dataType);
         const groupDesc = group.desc.map(item=>item.tpl)
         for(let i =0;i<name.length;i++){
             for(let j=0;j<groupDesc.length;j++){
@@ -30,13 +30,13 @@ const ConfigNewStageRightDrawer = props =>{
             newData.push({
                 dataId:i,
                 title:group.title,
-                desc:item.tpl
+                dataType:item.tpl
             })
         }else {
             newData.splice(index,0,{
                 dataId:i,
                 title:group.title,
-                desc:item.tpl
+                dataType:item.tpl
             })
         }
 
@@ -66,7 +66,7 @@ const ConfigNewStageRightDrawer = props =>{
                                                 >
                                                     <div className='group-desc-tpl'>
                                                         <div className='tpl'>
-                                                            {item.tpl}
+                                                            {item.tel}
                                                         </div>
                                                     </div>
                                                 </div>

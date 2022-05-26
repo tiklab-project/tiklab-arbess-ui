@@ -62,13 +62,9 @@ const StructureRightExecute = props => {
         if(leftExecute){
             switch (leftExecute.runWay) {
                 case 1:
-                    return  <span>
-                                手动
-                            </span>
+                    return  '手动'
                 default:
-                    return  <span>
-                                自动
-                            </span>
+                    return  '自动'
             }
         }
     }

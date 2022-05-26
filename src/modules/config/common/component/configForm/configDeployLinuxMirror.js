@@ -29,18 +29,18 @@ import 'codemirror/addon/fold/foldgutter.js';
 import 'codemirror/addon/fold/brace-fold.js';
 import 'codemirror/addon/fold/comment-fold.js';
 
-import './codeMirror.scss'
+import './configDeployLinuxMirror.scss'
 
 
 const Mirror = props =>{
 
-    const {codeBlockContent,setCodeBlockContent,setIsPrompt} = props
+    const {formInitialValues,setFormInitialValues,setIsPrompt} = props
 
     const formRefs = useRef(null);
 
     return (
         <CodeMirror
-            value={codeBlockContent}//内容
+            value={formInitialValues}//内容
             ref={formRefs}
             options={{
                 mode: { name: 'shell', shell: true },//语言
@@ -48,8 +48,10 @@ const Mirror = props =>{
                 lineWrapping: true,//是否支持代码折叠
             }}
             onChange={() => {
-                setCodeBlockContent(formRefs.current.editor.getValue())
-                setIsPrompt(true)
+                setFormInitialValues({
+                    deployShell:formRefs.current.editor.getValue()
+                })
+                // setIsPrompt(true)
             }}
         />
     )

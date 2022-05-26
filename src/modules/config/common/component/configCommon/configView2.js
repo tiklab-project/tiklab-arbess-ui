@@ -13,10 +13,10 @@ import {withRouter} from "react-router";
 
 const ConfigView2 = props =>{
 
-    const {form, updateConfigure,ConfigDataStore,del,
+    const {form, updateConfigure,ConfigDataStore,del,configName,configForm
     } = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,codeBlockContent,
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,
         data,setData, codeData,setCodeData,  formInitialValues,setFormInitialValues
     } = ConfigDataStore
 
@@ -62,13 +62,28 @@ const ConfigView2 = props =>{
     }
 
     const showStage = item =>{
-        setNewStage(item.desc)
+        setNewStage(item.dataType)
         setTaskFormDrawer(true)
     }
     
     const insertData = (item,index) => {
         setNewStageDrawer(true)
         setIndex(index)
+    }
+
+    const dataType = type =>{
+        switch (type) {
+            case 11:
+                return '单元测试'
+            case 21:
+                return 'maven'
+            case 22:
+                return 'node'
+            case 31:
+                return 'linux'
+            case 32:
+                return 'docker'
+        }
     }
 
     const newStageShow = () =>{
@@ -124,7 +139,7 @@ const ConfigView2 = props =>{
                                                     className='newStages-job_text'
                                                     onClick={()=>showStage(item)}
                                                 >
-                                                    {item.desc}
+                                                    {dataType(item.dataType)}
                                                 </div>
                                             </div>
                                         </div>
@@ -165,30 +180,27 @@ const ConfigView2 = props =>{
             case '通用Git':
                 codeList = {
                     codeType:1,
-                    proofId:localStorage.getItem('gitProofId'),
                 }
                 break
             case 'Gitee':{
                 codeList = {
                     codeType:2,
-                    proofId:localStorage.getItem('giteeProofId'),
                 }
             }
                 break
             case 'Gitlab':{
                 codeList = {
-                    codeType:3,
-                    proofId:localStorage.getItem('gitlabProofId'),
+                    codeType:4,
                 }
             }
                 break
             case 'Github':{
                 codeList = {
-                    codeType:4,
-                    proofId:localStorage.getItem('githubProofId'),
+                    codeType:3,
                 }
             }
         }
+
         for (let i in dataArray){
             switch (dataArray[i]){
                 case '单元测试':
@@ -209,13 +221,11 @@ const ConfigView2 = props =>{
                 case 'linux':
                     deployList = {
                         deployType:31,
-                        proofId:localStorage.getItem('linuxProofId'),
                     }
                     break
                 case 'docker':
                     deployList = {
                         deployType:32,
-                        proofId:localStorage.getItem('dockerProofId'),
                     }
             }
         }
@@ -230,7 +240,7 @@ const ConfigView2 = props =>{
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
                 proof:{
-                    proofId:codeList && codeList.proofId,
+                    proofId:localStorage.getItem('gitProofId')
                 }
             },
             pipelineTest:{
@@ -255,11 +265,11 @@ const ConfigView2 = props =>{
                 type:deployList && deployList.deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
-                deployShell:codeBlockContent,
+                deployShell:values.deployShell,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
                 proof:{
-                    proofId:deployList && deployList.proofId,
+                    proofId:localStorage.getItem('deployProofId'),
                 }
             }
         }
@@ -346,6 +356,8 @@ const ConfigView2 = props =>{
                    setCodeBranch={setCodeBranch}
                    setCodeData={setCodeData}
                    setFormInitialValues={setFormInitialValues}
+                   configName={configName}
+                   configForm={configForm}
                />
 
            </Form>

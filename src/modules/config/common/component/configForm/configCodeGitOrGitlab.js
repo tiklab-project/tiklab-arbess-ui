@@ -101,7 +101,7 @@ const ConfigCodeGitOrGitlab = props =>{
             </Form.Item>
             <Row>
                 <Form.Item
-                    name='proofName'
+                    name='gitProofName'
                     label="凭证"
                 >
                     <Select

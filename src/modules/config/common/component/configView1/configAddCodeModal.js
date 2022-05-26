@@ -3,19 +3,19 @@ import {Modal} from "antd";
 
 const lis=[
     {
-        id:'a',
+        id:1,
         desc:'通用Git'
     },
     {
-        id:'b',
+        id:2,
         desc:'Gitee'
     },
     {
-        id:'c',
+        id:4,
         desc: 'Gitlab'
     },
     {
-        id:'d',
+        id:3,
         desc: 'Github'
     }
 ]
@@ -28,8 +28,9 @@ const ConfigAddCodeModal = props =>{
         let newCode
         newCode = {
             codeId:index,
-            title:'源码管理',
-            desc:item.desc,
+            codeType:item.id,
+            // title:'源码管理',
+            // desc:item.desc,
         }
         setCodeData(newCode)
         setCodeVisible(false)

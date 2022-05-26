@@ -1,7 +1,7 @@
 import React,{ useEffect,useState } from "react";
 import {Table,Tooltip } from "antd";
 import {withRouter} from "react-router";
-import Running from "../../../../common/running/running";
+import PipelineRun from "./pipelineRun";
 import {observer,inject} from "mobx-react";
 
 const PipelineTabs_all= props=>{
@@ -134,7 +134,7 @@ const PipelineTabs_all= props=>{
                     <span className=' all-icon' onClick={() => move(record,index)}>
                         {
                             run===record.pipelineId   ?
-                                <Running />
+                                <PipelineRun />
                                 :
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-yunhang1"  />

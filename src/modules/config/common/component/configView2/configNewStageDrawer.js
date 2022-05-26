@@ -25,7 +25,8 @@ const rightLis = [
         title:'测试',
         desc:[
             {
-                tpl:'单元测试'
+                tpl: 11,
+                tel:'单元测试',
             }
         ]
     },
@@ -34,10 +35,13 @@ const rightLis = [
         title: '构建',
         desc:[
             {
-                tpl: 'maven',
+
+                tpl: 21,
+                tel:'maven'
             },
             {
-                tpl: 'node',
+                tpl: 22,
+                tel:'node'
             }
         ]
     },
@@ -46,10 +50,12 @@ const rightLis = [
         title: '部署',
         desc:[
             {
-                tpl:'linux'
+                tpl:31 ,
+                tel:'linux'
             },
             {
-                tpl:'docker'
+                tpl:32 ,
+                tel:'docker'
             },
         ]
     }

@@ -1,11 +1,10 @@
 import React, {Fragment} from "react";
-import formAll from "../configForm/formAll";
 import {CloseOutlined} from "@ant-design/icons";
 
 const Config_code = props =>{
 
-    const {setCodeVisible,codeData,setCodeData,setIsPrompt, setCodeName,
-        setCodeBranch,formInitialValues,setFormInitialValues,git
+    const {setCodeVisible,codeData,setCodeData,setIsPrompt, setCodeName, setCodeBranch,del,
+        configName,configForm,
     } = props
 
     const addCode = () =>{
@@ -13,8 +12,7 @@ const Config_code = props =>{
     }
 
     const deletePart = () =>{
-        git()
-        setFormInitialValues({...formInitialValues})
+        del('git')
         setCodeData('')
         setCodeName('')
         setCodeBranch('')
@@ -22,19 +20,11 @@ const Config_code = props =>{
     }
     
     const inputCode = () =>{
-        if(codeData){
-            switch (codeData.desc){
-                case '通用Git' :
-                    return  formAll.gitOrGitlab
-                case 'Gitee' :
-                    return  formAll.giteeOrGithub
-                case 'Gitlab' :
-                    return formAll.gitOrGitlab
-                case 'Github' :
-                    return formAll.giteeOrGithub
-            }
-        }
-        return codeData
+        return configForm(codeData.codeType)
+    }
+
+    const codeType = () =>{
+        return configName(codeData.codeType)
     }
 
     const code = () => {
@@ -48,7 +38,9 @@ const Config_code = props =>{
                 <div className='configView1-wrapper' >
                     <div className='configView1-wrapper-newStage'>
                         <div className='desc'>
-                            <div className='desc-head'>{codeData.desc}</div>
+                            <div className='desc-head'>
+                                {codeType()}
+                            </div>
                             <div
                                 id='del'
                                 className='desc-delete'

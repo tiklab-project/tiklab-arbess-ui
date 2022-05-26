@@ -2,8 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
 import {inject, observer} from "mobx-react";
 import ConfigDeployAddProofModal from "./configDeployAddProofModal";
-import Mirror from "../../../../../common/codeMirror/codeMirror";
-
+import Mirror from "./configDeployLinuxMirror";
 const {Option}=Select
 
 const ConfigDeployLinux = props =>{
@@ -11,7 +10,7 @@ const ConfigDeployLinux = props =>{
     const {ProofStore,ConfigDataStore} = props
     const {createProof,findAllProof} = ProofStore
 
-    const {codeBlockContent,setCodeBlockContent,setIsPrompt} = ConfigDataStore
+    const {setIsPrompt,formInitialValues,setFormInitialValues} = ConfigDataStore
 
     const [allLinuxProofList,setAllLinuxProofList] = useState([])
     const [deployVisible,setDeployVisible] = useState(false)
@@ -74,8 +73,8 @@ const ConfigDeployLinux = props =>{
             <Form.Item name='deployShell' label='shell命令'>
                 <Mirror
                     autoSize
-                    codeBlockContent={codeBlockContent}
-                    setCodeBlockContent={setCodeBlockContent}
+                    formInitialValues={formInitialValues.deployShell}
+                    setFormInitialValues={setFormInitialValues}
                     setIsPrompt={setIsPrompt}
                 />
             </Form.Item>

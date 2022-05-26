@@ -4,35 +4,41 @@ import './configAddNewStageModal.scss'
 
 const lis=[
     {
-        id:'a',
+        id:1,
         title:'测试',
         desc:[
             {
-                tpl:'单元测试'
+                tpl: 11,
+                tel:'单元测试',
             }
         ]
     },
     {
-        id:'b',
+        id:2,
         title: '构建',
         desc:[
             {
-                tpl: 'maven',
+
+                tpl: 21,
+                tel:'maven'
             },
             {
-                tpl: 'node',
+                tpl: 22,
+                tel:'node'
             }
         ]
     },
     {
-        id:'c',
+        id:3,
         title: '部署',
         desc:[
             {
-                tpl:'linux'
+                tpl:31 ,
+                tel:'linux'
             },
             {
-                tpl:'docker'
+                tpl:32 ,
+                tel:'docker'
             },
         ]
     }
@@ -45,7 +51,7 @@ const ConfigAddNewStageModal = props =>{
 
     const handleClick = (group,item,index)=>{
         const newData = [...data]
-        const name = data && data.map(item => item.desc);
+        const name = data && data.map(item => item.dataType);
         const groupDesc = group.desc.map(item=>item.tpl)
         for(let i =0;i<name.length;i++){
             for(let j=0;j<groupDesc.length;j++){
@@ -65,7 +71,7 @@ const ConfigAddNewStageModal = props =>{
         newData.push({
             dataId:index,
             title:group.title,
-            desc:item.tpl
+            dataType:item.tpl
         })
         setData(newData)
         setIsPrompt(true)
@@ -88,7 +94,7 @@ const ConfigAddNewStageModal = props =>{
                                     >
                                         <div className='group-desc-tpl'>
                                             <div className='tpl'>
-                                                {item.tpl}
+                                                {item.tel}
                                             </div>
                                         </div>
                                     </div>
