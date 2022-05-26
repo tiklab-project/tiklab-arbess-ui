@@ -1,5 +1,5 @@
 import React ,{useState} from "react";
-import {Drawer} from "antd";
+import {Button, Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import ConfigNewStageLeftDrawer from './configNewStageLeftDrawer'
 import ConfigNewStageRightDrawer from "./configNewStageRightDrawer";
@@ -100,7 +100,11 @@ const ConfigNewStageDrawer = props =>{
                 <div className="menu-wrapper">
                     <div className="menu-wrapper-head">
                         <div className="menu-wrapper-head-title"> 选择任务组</div>
-                        <div onClick={()=>setNewStageDrawer(false)}><CloseOutlined /></div>
+                        <div>
+                            <Button type='text' onClick={()=>setNewStageDrawer(false)}>
+                                <CloseOutlined />
+                            </Button>
+                        </div>
                     </div>
                     <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
                         <div className="body">

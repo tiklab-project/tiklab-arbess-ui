@@ -1,29 +1,40 @@
-import React, {Fragment,useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Button, Form, Input, Row, Select} from "antd";
-import ConfigCodeGitModal from "./configCodeGitModal";
+import ConfigCodeGitOrGitlabModal from "./configCodeGitOrGitlabModal";
 import {inject, observer} from "mobx-react";
+import ConfigStore from "../../store/configStore";
 
 const {Option} = Select
 
-const ConfigCodeGit = props =>{
+const ConfigCodeGitOrGitlab = props =>{
 
-    const {ProofStore,ConfigDataStore}=props
+    const {ProofStore,ConfigDataStore,ConfigStore}=props
     const {createProof,findAllProof,findOneProof} = ProofStore
-    const {setCodeName, setCodeBranch} = ConfigDataStore
+    const {setCodeName, setCodeBranch,codeData} = ConfigDataStore
+    const {testPass} = ConfigStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
-    const [visible,setVisible]=useState(false)
+    const [visible,setVisible] = useState(false)
+    const [connection,setConnection] = useState('')
+    const gitProofId = localStorage.getItem('gitProofId')
 
     const clickFindAllGit = () =>{
-        const param = {
-            type :1
+        if(codeData.desc === '通用Git'){
+            findAllProof(1).then(res=>{
+                console.log('git凭证',res)
+                setAllGitProofList(res.data)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }else{
+            findAllProof(4).then(res=>{
+                console.log('git凭证',res)
+                setAllGitProofList(res.data)
+            }).catch(err=>{
+                console.log(err)
+            })
         }
-        findAllProof(param).then(res=>{
-            console.log('git凭证',res)
-            setAllGitProofList(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
+
     }
 
     const changeGitSelect = value =>{
@@ -41,6 +52,27 @@ const ConfigCodeGit = props =>{
 
     const inputCodeBranchValue = e =>{
         setCodeBranch(e.target.value)
+    }
+    
+    const newProof = () => {
+        setVisible(true)
+    }
+
+    const test = () =>{
+        const params = {
+            proofId:gitProofId,
+            url:codeData.codeName
+        }
+        if(codeData.desc==='通用Git'){
+            testPass(params).then(res=>{
+                console.log('res',res.data)
+                if(res.data === false){
+                    setConnection('fail')
+                }else {
+                    setConnection('success')
+                }
+            })
+        }
     }
 
     return(
@@ -92,7 +124,7 @@ const ConfigCodeGit = props =>{
                     </Select>
                 </Form.Item>
                 <Button
-                    onClick={()=> setVisible(true)}
+                    onClick={()=>newProof()}
                     className='config-details-link'
                 >
                     添加
@@ -100,17 +132,24 @@ const ConfigCodeGit = props =>{
             </Row>
 
             <div className='config-details-gitTest'>
-                <Button>测试连接</Button>
+                <Button onClick={()=>test()}>测试连接</Button>
+                {
+                    connection === 'fail' ? <span>失败</span> : null
+                }
+                {
+                    connection === 'success' ? <span>成功</span> : null
+                }
             </div>
 
-            <ConfigCodeGitModal
+            <ConfigCodeGitOrGitlabModal
                 visible={visible}
                 setVisible={setVisible}
                 createProof={createProof}
+                codeData={codeData}
             />
 
         </Fragment>
     )
 }
 
-export default inject('ProofStore','ConfigDataStore')(observer(ConfigCodeGit))
+export default inject('ProofStore','ConfigDataStore','ConfigStore')(observer(ConfigCodeGitOrGitlab))

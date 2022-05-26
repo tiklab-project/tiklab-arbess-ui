@@ -1,4 +1,4 @@
-import {action, observable} from "mobx";
+import {action, observable, values} from "mobx";
 
 class ConfigDataStore {
 

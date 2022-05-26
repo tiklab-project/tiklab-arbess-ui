@@ -31,7 +31,7 @@ class ProofStore{
     @action
     findAllProof = async  value =>{
         const param = new FormData()
-        param.append('type',value.type)
+        param.append('type',value)
         const data = await FindAllProof(param)
         return data.data
     }

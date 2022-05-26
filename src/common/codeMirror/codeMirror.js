@@ -34,7 +34,7 @@ import './codeMirror.scss'
 
 const Mirror = props =>{
 
-    const {codeBlockContent,setCodeBlockContent} = props
+    const {codeBlockContent,setCodeBlockContent,setIsPrompt} = props
 
     const formRefs = useRef(null);
 
@@ -49,6 +49,7 @@ const Mirror = props =>{
             }}
             onChange={() => {
                 setCodeBlockContent(formRefs.current.editor.getValue())
+                setIsPrompt(true)
             }}
         />
     )

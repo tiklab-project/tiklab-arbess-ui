@@ -22,13 +22,13 @@ const ConfigFormDetailsDrawer = props =>{
             case 'docker':
                 return   formAll.docker
             case '通用Git':
-                return   formAll.git
+                return   formAll.gitOrGitlab
             case 'Gitee':
-                return   formAll.gitee
+                return   formAll.giteeOrGithub
             case 'Gitlab':
-                return   formAll.gitlab
+                return   formAll.gitOrGitlab
             case 'Github' :
-                return formAll.github
+                return formAll.giteeOrGithub
         }
     }
 

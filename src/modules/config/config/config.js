@@ -5,7 +5,6 @@ import {withRouter} from "react-router";
 import ConfigTop from "./configTop";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigView1 from "../common/component/configCommon/configView1";
-import formResetFields from "../common/component/configForm/formResetFields";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam'
 import {inject, observer} from "mobx-react";
@@ -18,7 +17,7 @@ const Config = props =>{
     const {code} = GiteeStore
     const {pipelineStartStructure,findStructureState} = StructureStore
 
-    const {setIsPrompt, codeName,codeBranch, setFormInitialValues,codeData,setCodeData
+    const {setIsPrompt, codeName,codeBranch,codeData,setCodeData
     } = ConfigDataStore
 
     const [form] = Form.useForm();
@@ -30,13 +29,7 @@ const Config = props =>{
     useEffect(()=>{
         return () =>{
             localStorage.removeItem('gitProofId')
-            localStorage.removeItem('giteeProofId')
-            localStorage.removeItem('dockerProofId')
-            localStorage.removeItem('linuxProofId')
-            localStorage.removeItem('codeId')
-            localStorage.removeItem('testId')
-            localStorage.removeItem('structureId')
-            localStorage.removeItem('deployId')
+            localStorage.removeItem('deployProofId')
         }
     },[])
 
@@ -68,22 +61,26 @@ const Config = props =>{
     const del = i => {
         switch (i) {
             case '单元测试' :
-                setFormInitialValues({ ...formResetFields.unit})
+                test()
                 break
             case 'maven' :
-                setFormInitialValues({...formResetFields.maven})
+                structure()
                 break
             case 'node':
-                setFormInitialValues({...formResetFields.node})
+                structure()
                 break
             case 'linux':
-                setFormInitialValues({...formResetFields.linux})
+                deploy()
+                setCodeBlockContent('')
                 break
             case 'docker':
-                setFormInitialValues({...formResetFields.docker})
+                deploy()
+                break
+            default:
+                git()
         }
+        setFormInitialValues({...formInitialValues})
     }
-
 
     return (
         <Fragment >
@@ -114,6 +111,7 @@ const Config = props =>{
     )
 }
 
-export default  withRouter(inject('ConfigStore','GiteeStore',
-                'StructureStore','ConfigCommonStore','ConfigDataStore')
+
+export default  withRouter(inject('ConfigStore', 'GiteeStore',
+                    'StructureStore','ConfigDataStore','GithubStore')
                 (observer(Config)))

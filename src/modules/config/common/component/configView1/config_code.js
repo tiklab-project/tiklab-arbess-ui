@@ -25,13 +25,13 @@ const Config_code = props =>{
         if(codeData){
             switch (codeData.desc){
                 case '通用Git' :
-                    return  formAll.git
+                    return  formAll.gitOrGitlab
                 case 'Gitee' :
-                    return  formAll.gitee
+                    return  formAll.giteeOrGithub
                 case 'Gitlab' :
-                    return  formAll.gitlab
+                    return formAll.gitOrGitlab
                 case 'Github' :
-                    return formAll.github
+                    return formAll.giteeOrGithub
             }
         }
         return codeData
@@ -39,29 +39,29 @@ const Config_code = props =>{
 
     const code = () => {
         return  codeData === '' ?
-                    <div
-                        className='configView1-wrapper-handle'
-                        onClick={()=>addCode()}
-                    >
-                        添加代码源
-                    </div> :
-                    <div className='configView1-wrapper' >
-                        <div className='configView1-wrapper-newStage'>
-                            <div className='desc'>
-                                <div className='desc-head'>{codeData.desc}</div>
-                                <div
-                                    id='del'
-                                    className='desc-delete'
-                                    onClick={()=>deletePart()}
-                                >
-                                    <CloseOutlined />
-                                </div>
-                            </div>
-                            <div className='desc-input'>
-                                {inputCode()}
+                <div
+                    className='configView1-wrapper-handle'
+                    onClick={()=>addCode()}
+                >
+                    添加代码源
+                </div> :
+                <div className='configView1-wrapper' >
+                    <div className='configView1-wrapper-newStage'>
+                        <div className='desc'>
+                            <div className='desc-head'>{codeData.desc}</div>
+                            <div
+                                id='del'
+                                className='desc-delete'
+                                onClick={()=>deletePart()}
+                            >
+                                <CloseOutlined />
                             </div>
                         </div>
+                        <div className='desc-input'>
+                            {inputCode()}
+                        </div>
                     </div>
+                </div>
     }
 
     return(

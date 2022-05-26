@@ -164,27 +164,23 @@ const ConfigView1 = props =>{
             case '通用Git':
                 codeList = {
                     codeType:1,
-                    proofId:localStorage.getItem('gitProofId'),
                 }
                 break
             case 'Gitee':{
                 codeList = {
                     codeType:2,
-                    proofId:localStorage.getItem('giteeProofId'),
                 }
             }
                 break
             case 'Gitlab':{
                 codeList = {
-                    codeType:3,
-                    proofId:localStorage.getItem('gitlabProofId'),
+                    codeType:4,
                 }
             }
                 break
             case 'Github':{
                 codeList = {
-                    codeType:4,
-                    proofId:localStorage.getItem('githubProofId'),
+                    codeType:3,
                 }
             }
         }
@@ -209,13 +205,11 @@ const ConfigView1 = props =>{
                 case 'linux':
                     deployList = {
                         deployType:31,
-                        proofId:localStorage.getItem('linuxProofId'),
                     }
                     break
                 case 'docker':
                     deployList = {
                         deployType:32,
-                        proofId:localStorage.getItem('dockerProofId'),
                     }
             }
         }
@@ -230,7 +224,7 @@ const ConfigView1 = props =>{
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
                 proof:{
-                    proofId:codeList && codeList.proofId,
+                    proofId:localStorage.getItem('gitProofId')
                 }
             },
             pipelineTest:{
@@ -259,7 +253,7 @@ const ConfigView1 = props =>{
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
                 proof:{
-                    proofId:deployList && deployList.proofId,
+                    proofId:localStorage.getItem('deployProofId'),
                 }
             }
         }
@@ -301,6 +295,7 @@ const ConfigView1 = props =>{
                             setIsPrompt={setIsPrompt}
                             setCodeName={setCodeName}
                             setCodeBranch={setCodeBranch}
+                            formInitialValues={formInitialValues}
                             git={git}
                         />
                         { newStage() }

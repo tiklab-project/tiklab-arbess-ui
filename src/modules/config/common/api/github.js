@@ -19,6 +19,15 @@ export function  GetAccessToken (data){
 }
 
 
+//gitHub--创建凭证
+export function  GetProof (data){
+    return serviceLoc.request({
+        url:'/gitHub/getProof',
+        method: 'post',
+        data
+    })
+}
+
 //gitHub--获取所有仓库
 export function  GetAllStorehouse (data){
     return serviceLoc.request({

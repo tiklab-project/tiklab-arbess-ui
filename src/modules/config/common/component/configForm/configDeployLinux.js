@@ -11,7 +11,7 @@ const ConfigDeployLinux = props =>{
     const {ProofStore,ConfigDataStore} = props
     const {createProof,findAllProof} = ProofStore
 
-    const {codeBlockContent,setCodeBlockContent} = ConfigDataStore
+    const {codeBlockContent,setCodeBlockContent,setIsPrompt} = ConfigDataStore
 
     const [allLinuxProofList,setAllLinuxProofList] = useState([])
     const [deployVisible,setDeployVisible] = useState(false)
@@ -29,7 +29,7 @@ const ConfigDeployLinux = props =>{
     }
 
     const changeDeploySelect = value =>{
-        localStorage.setItem('linuxProofId',value)
+        localStorage.setItem('deployProofId',value)
     }
 
     return(
@@ -76,6 +76,7 @@ const ConfigDeployLinux = props =>{
                     autoSize
                     codeBlockContent={codeBlockContent}
                     setCodeBlockContent={setCodeBlockContent}
+                    setIsPrompt={setIsPrompt}
                 />
             </Form.Item>
             <ConfigDeployAddProofModal

@@ -3,31 +3,48 @@ import {Form, Select, Input, Modal, message} from "antd";
 
 const { Option } = Select;
 
-const ConfigCodeGitModal= props =>{
+const ConfigCodeGitOrGitlabModal= props =>{
+
+    const {visible,setVisible ,createProof,codeData} = props
 
     const [form] = Form.useForm();
 
-    const {visible,setVisible ,createProof} = props
-
     const onOk = () =>{
         form.validateFields().then((values) => {
-            const params = {
-                proofScope:1,
-                proofType:values.proofType,
-                proofName:values.proofName,
-                proofUsername:values.proofUsername,
-                proofPassword:values.proofPassword,
-                proofDescribe:values.proofDescribe
+            let params
+            if(codeData.desc === '通用Git' ){
+                params = {
+                    proofScope:1,
+                    proofType:values.proofType,
+                    proofName:values.proofName,
+                    proofUsername:values.proofUsername,
+                    proofPassword:values.proofPassword,
+                    proofDescribe:values.proofDescribe
+                }
+            }else {
+                params = {
+                    proofScope:4,
+                    proofType:values.proofType,
+                    proofName:values.proofName,
+                    proofUsername:values.proofUsername,
+                    proofPassword:values.proofPassword,
+                    proofDescribe:values.proofDescribe
+                }
+                createProof(params).then(res=>{
+                    console.log('创建源码凭证',res)
+                    if(res.code!==0){
+                        message.info('创建失败')
+                    }
+                })
             }
-            console.log(params)
             createProof(params).then(res=>{
                 console.log('创建源码凭证',res)
                 if(res.code!==0){
                     message.info('创建失败')
                 }
             })
+            setVisible(false)
         })
-        setVisible(false)
     }
 
     return (
@@ -81,4 +98,4 @@ const ConfigCodeGitModal= props =>{
     )
 }
 
-export default ConfigCodeGitModal
+export default ConfigCodeGitOrGitlabModal

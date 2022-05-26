@@ -1,5 +1,5 @@
 import React ,{useState} from "react";
-import { Drawer } from 'antd';
+import {Button, Drawer} from 'antd';
 import ConfigCodeDrawerBottom from "./configCodeDrawerBottom";
 import {CloseOutlined} from '@ant-design/icons'
 
@@ -42,7 +42,11 @@ const ConfigCodeDrawer = props =>{
                 <div className="menu-wrapper visible">
                     <div className="menu-wrapper-head">
                         <div className="menu-wrapper-head-title"> 选择代码源</div>
-                        <div onClick={()=>setCodeDrawer(false)}><CloseOutlined /></div>
+                        <div>
+                            <Button type='text' onClick={()=>setCodeDrawer(false)}>
+                                <CloseOutlined />
+                            </Button>
+                        </div>
                     </div>
                     <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
                         <div className="body">

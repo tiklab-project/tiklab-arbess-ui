@@ -1,6 +1,5 @@
 import {serviceLoc} from "../../../../common/api/requset";
 
-
 //更新流水线配置
 export function  UpdateConfigure (data){
     return serviceLoc.request({
@@ -9,8 +8,6 @@ export function  UpdateConfigure (data){
         data
     })
 }
-
-
 
 //查看所有配置
 export function  FindAllConfigure(data){
@@ -21,4 +18,11 @@ export function  FindAllConfigure(data){
     })
 }
 
-
+// 测试配置--源码地址
+export function  TestPass(data){
+    return serviceLoc.request({
+        url:'/pipelineExec/testPass',
+        method:'post',
+        data
+    })
+}

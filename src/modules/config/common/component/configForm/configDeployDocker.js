@@ -40,7 +40,7 @@ const ConfigDeployDocker = props =>{
     }
 
     const changeDeploySelect = value =>{
-        localStorage.setItem('dockerProofId',value)
+        localStorage.setItem('deployProofId',value)
     }
 
     return(

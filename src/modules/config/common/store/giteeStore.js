@@ -14,9 +14,6 @@ class GiteeStore {
         this.store=store
     }
 
-    @observable giteeList = []
-    @observable giteeBranchList = []
-
     //gitee授权--地址
     @action
     url =async () =>{
@@ -46,29 +43,21 @@ class GiteeStore {
 
     //gitee--获取所有仓库
     @action
-    getAllGiteeStorehouse = value =>{
+    getAllGiteeStorehouse =async value =>{
         const param = new FormData()
-        param.append("accessToken", value.accessToken)
-        GetAllStorehouse(param).then(res=>{
-            this.giteeList =res.data.data
-            console.log('getAllStorehouse',  this.giteeList )
-        }).catch(error=>{
-            console.log(error)
-        })
+        param.append("proofId", value)
+        const data =await GetAllStorehouse(param)
+        return data.data
     }
 
     //gitee--分支
     @action
-    getGiteeBranch = value =>{
+    getGiteeBranch =async value =>{
         const params = new FormData()
         params.append('projectName',value.projectName)
         params.append('proofId',value.proofId)
-        GetBranch(params).then(res=>{
-            this.giteeBranchList =res.data.data
-            console.log('giteeBranchList',  res )
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await GetBranch(params)
+        return data.data
     }
 
 }

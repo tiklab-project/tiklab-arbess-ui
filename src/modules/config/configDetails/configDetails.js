@@ -3,63 +3,75 @@ import '../common/style/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import {Form} from "antd";
+import {Form, message} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam'
 
 const ConfigDetails = props =>{
 
-    const {ConfigStore,GiteeStore,StructureStore,ConfigDataStore} = props
+    const {ConfigStore,GiteeStore,StructureStore,ConfigDataStore,GithubStore} = props
 
     const {updateConfigure,findAllConfigure} = ConfigStore
 
     const {code} = GiteeStore
+    const {getAccessToken} = GithubStore
     const {pipelineStartStructure,findStructureState} = StructureStore
 
     const {setIsPrompt,codeName,codeBranch,setCodeBlockContent,setData,
-        codeData,setCodeData,formInitialValues,setFormInitialValues
+        codeData,setCodeData,formInitialValues,setFormInitialValues,
     } = ConfigDataStore
 
     const [form] = Form.useForm();
 
     const [view,setView] = useState(0)
     const codeValue = getUrlParam('code')
+    const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
         return () =>{
             localStorage.removeItem('gitProofId')
-            localStorage.removeItem('giteeProofId')
-            localStorage.removeItem('gitlabProofId')
-            localStorage.removeItem('githubProofId')
-            localStorage.removeItem('dockerProofId')
-            localStorage.removeItem('linuxProofId')
+            localStorage.removeItem('deployProofId')
             localStorage.removeItem('codeId')
             localStorage.removeItem('testId')
             localStorage.removeItem('structureId')
             localStorage.removeItem('deployId')
-            // setCodeName('')
-            // setCodeBranch('')
-            // setCodeData('')
-            // setData([])
         }
     },[])
 
-    //Gitee授权
+    //Gitee和Github授权
     useEffect(() => {
         const param = {
             code:codeValue
         }
-        // const se = setTimeout(()=>localStorage.removeItem('code'),200)
-        if (codeValue && localStorage.getItem('code')) {
+        if (codeValue && localStorage.getItem('giteeCode')) {
             code(param).then(res=>{
-                console.log(res,'res')
-                localStorage.setItem('AccessToken',JSON.stringify(res.data))
+                console.log(res,'gitee授权')
+                localStorage.setItem('giteeToken',JSON.stringify(res.data))
+                localStorage.setItem('authorize','success')
+                localStorage.removeItem('giteeCode')
                 window.close()
             })
         }
-        // return () => clearTimeout(se)
+        if(codeValue && localStorage.getItem('githubCode')){
+            getAccessToken(param).then(res=>{
+                console.log(res,'res')
+                if(res.data === null ){
+                }else {
+                    localStorage.setItem('githubToken',res.data)
+                }
+                localStorage.removeItem('githubCode')
+                window.close()
+            })
+        }
+        if(codeError){
+            localStorage.removeItem('giteeCode')
+            localStorage.removeItem('githubCode')
+            localStorage.removeItem('giteeToken')
+            localStorage.removeItem('githubToken')
+            window.close()
+        }
     }, [])
 
     useEffect(()=>{
@@ -109,22 +121,10 @@ const ConfigDetails = props =>{
                             codeName:j.codeName,
                             codeBranch:j.codeBranch
                         }
-                        localStorage.setItem('giteeProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
                         localStorage.setItem('codeId',j.codeId)
                         setCodeData(newCode)
                     }else if(j.type===3){
-                        newCode = {
-                            codeId:j.codeId,
-                            title:'源码管理',
-                            desc: 'Gitlab',
-                            codeName:j.codeName,
-                            codeBranch:j.codeBranch
-                        }
-                        localStorage.setItem('gitlabProofId',j.proof && j.proof.proofId)
-                        localStorage.setItem('codeId',j.codeId)
-                        setCodeData(newCode)
-                    }
-                    else if(j.type===4){
                         newCode = {
                             codeId:j.codeId,
                             title:'源码管理',
@@ -132,11 +132,26 @@ const ConfigDetails = props =>{
                             codeName:j.codeName,
                             codeBranch:j.codeBranch
                         }
-                        localStorage.setItem('githubProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
                         localStorage.setItem('codeId',j.codeId)
                         setCodeData(newCode)
+                        const formValue = {
+                            gitProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
+                        }
+                        Object.assign(formInitialValues,formValue)
                     }
-                    else if(j.type===11){
+                    else if(j.type===4){
+                        newCode = {
+                            codeId:j.codeId,
+                            title:'源码管理',
+                            desc: 'Gitlab',
+                            codeName:j.codeName,
+                            codeBranch:j.codeBranch
+                        }
+                        localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem('codeId',j.codeId)
+                        setCodeData(newCode)
+                    } else if(j.type===11){
                         newData.push({
                             dataId:  j.testId,
                             title:j.testAlias,
@@ -164,7 +179,7 @@ const ConfigDetails = props =>{
                             desc: 'linux'
                         })
                         localStorage.setItem('deployId',j.deployId)
-                        localStorage.setItem('linuxProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
                         const formValue = {
                             dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofIp + ")" ,
                         }
@@ -177,7 +192,7 @@ const ConfigDetails = props =>{
                             desc: 'docker'
                         })
                         localStorage.setItem('deployId',j.deployId)
-                        localStorage.setItem('dockerProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
                         const formValue = {
                             dockerProofName:j.proof && j.proof.proofName+ "(" +j.proof.proofIp + ")",
                         }
@@ -200,6 +215,7 @@ const ConfigDetails = props =>{
         formInitialValues.codeName = null
         formInitialValues.codeBranch = null
         formInitialValues.proofName = null
+        formInitialValues.gitProofName = null
     }
 
     const test = () =>{
@@ -275,5 +291,5 @@ const ConfigDetails = props =>{
 }
 
 export default  withRouter(inject('ConfigStore', 'GiteeStore',
-                'StructureStore','ConfigDataStore')
+                'StructureStore','ConfigDataStore','GithubStore')
                 (observer(ConfigDetails)))
