@@ -9,11 +9,7 @@ import {
 } from "../api/github";
 
 
-class GithubStore {
-
-    constructor(store) {
-        this.store = store
-    }
+export class GithubStore {
 
     @action
     getCode = async () =>{
@@ -59,4 +55,4 @@ class GithubStore {
 
 }
 
-export default GithubStore
+export const GITHUB_STORE = 'githubStore'

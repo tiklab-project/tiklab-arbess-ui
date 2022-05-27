@@ -1,6 +1,6 @@
 import {action,observable} from "mobx";
 
-class StructureDataStore {
+export class StructureDataStore {
 
     @observable leftExecute = ''  //左--正在构建
     @observable leftData = []  //左--历史构建列表
@@ -33,9 +33,6 @@ class StructureDataStore {
         this.modeData = value
     }
 
-    constructor(store) {
-        this.store = store
-    }
 }
 
-export default StructureDataStore
+export const STRUCTUREDATA_STORE = 'structureDataStore'

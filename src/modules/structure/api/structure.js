@@ -54,7 +54,7 @@ export function  DeleteHistoryLog (data){
     })
 }
 
-//查看所有构建步骤
+//正在执行的详情
 export function  FindAll(data){
     return serviceLoc.request({
         url:'/pipelineConfigure/findAll',

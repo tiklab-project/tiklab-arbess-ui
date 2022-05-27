@@ -173,35 +173,35 @@
                             }
                         }
                     }
-                &_btn{
-                  position: relative;
-                  z-index: 1;
-                  cursor: pointer;
-                  color: #8c8c8c;
-                  height: 100%;
-                  &_i{
-                    position: absolute;
-                    top: 130px;
-                    margin-left: -15px;
-                    z-index: 2;
-                    color: #595959;
-                  }
-                  &:after{
-                    content: "";
-                    width: 80px;
-                    border-top: 1px solid #d9d9d9;
-                    position: absolute;
-                    top: 145px;
-                    margin-left: -40px
-                  }
-                  &:before{
-                    content: "";
-                    height: 100%;
-                    border-left: 1px solid #d9d9d9;
-                    position: absolute;
-                  }
+                    &_btn{
+                        position: relative;
+                        z-index: 1;
+                        cursor: pointer;
+                        color: #8c8c8c;
+                        height: 100%;
+                        &_i{
+                            position: absolute;
+                            top: 130px;
+                            margin-left: -15px;
+                            z-index: 2;
+                            color: #595959;
+                        }
+                        &:after{
+                            content: "";
+                            width: 80px;
+                            border-top: 1px solid #d9d9d9;
+                            position: absolute;
+                            top: 145px;
+                            margin-left: -40px
+                        }
+                        &:before{
+                            content: "";
+                            height: 100%;
+                            border-left: 1px solid #d9d9d9;
+                            position: absolute;
+                        }
+                    }
                 }
-              }
                 &-table{
                     padding-top: 60px;
                     display: inline-block;
@@ -228,6 +228,10 @@
                             display: -webkit-flex;
                             display: -ms-flexbox;
                             display: flex;
+                            &>span{
+                                cursor: pointer;
+                                padding-top: 5px;
+                            }
                         }
                     }
                 }
@@ -262,5 +266,4 @@
             }
         }
     }
-
 }

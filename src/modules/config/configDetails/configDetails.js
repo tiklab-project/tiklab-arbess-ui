@@ -11,17 +11,17 @@ import formAll from "../common/component/configForm/formAll";
 
 const ConfigDetails = props =>{
 
-    const {ConfigStore,GiteeStore,StructureStore,ConfigDataStore,GithubStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
 
-    const {updateConfigure,findAllConfigure} = ConfigStore
+    const {updateConfigure,findAllConfigure} = configStore
 
-    const {code} = GiteeStore
-    const {getAccessToken} = GithubStore
-    const {pipelineStartStructure,findStructureState} = StructureStore
+    const {code} = giteeStore
+    const {getAccessToken} = githubStore
+    const {pipelineStartStructure,findStructureState} = structureStore
 
     const {setIsPrompt,codeName,codeBranch,setData, codeData,setCodeData,formInitialValues,
-        setFormInitialValues,
-    } = ConfigDataStore
+        setFormInitialValues,setShellBlock,
+    } = configDataStore
 
     const [form] = Form.useForm();
     const [view,setView] = useState(0)
@@ -109,18 +109,23 @@ const ConfigDetails = props =>{
         }
     },[codeName,codeBranch])
 
+    // form表单初始化
     useEffect(()=>{
         const param = {
             pipelineId:pipelineId
         }
-        let newCode = {}
+        let newCode
         const newData = []
         findAllConfigure(param).then(res=>{
             const initialData = res.data
-            if(initialData.length!==0){
+            if(initialData.length === 0 ){
+                setCodeData('')
+                setData([])
+                form.resetFields()
+            }else {
                 for (let i = 0;i<initialData.length;i++){
                     const j = initialData[i]
-                    if(j.type === 1 || j.type === 2 || j.type === 3 || j.type === 4 ){
+                    if(j.type < 5){
                         newCode = {
                             codeId:j.codeId,
                             codeType:j.type,
@@ -132,23 +137,25 @@ const ConfigDetails = props =>{
                             proofDescribe:j.proof && j.proof.proofDescribe ,
                         }
                         Object.assign(formInitialValues,formValue)
-                        setCodeData(newCode)
                         localStorage.setItem('structureId',j.codeId)
                         localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
-                    } else if(j.type === 11){
+                    }
+                    if(j.type === 11){
                         newData.push({
                             dataId:  j.testId,
                             title:j.testAlias,
                             dataType:j.type,
                         })
                         localStorage.setItem('testId',j.testId)
-                    } else if(j.type === 21 || j.type === 22 ){
+                    }
+                    if(j.type === 21 || j.type === 22 ){
                         newData.push({
                             dataId: j.structureId,
                             title: j.structureAlias,
                             dataType:j.type,
                         })
-                    } else if(j.type ===31 || j.type ===32 ){
+                    }
+                    if(j.type ===31 || j.type ===32 ){
                         newData.push({
                             dataId:j.deployId,
                             title: j.deployAlias,
@@ -158,18 +165,16 @@ const ConfigDetails = props =>{
                             dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofIp + ")" ,
                         }
                         Object.assign(formInitialValues,formValue)
+                        setShellBlock(`${j.deployShell}`)
                         localStorage.setItem('deployId',j.deployId)
                         localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
                     }
                     setData([...newData])
+                    setCodeData(newCode)
                     form.setFieldsValue({...j})
                     Object.assign(formInitialValues,j)
                     setFormInitialValues({...formInitialValues})
                 }
-            } else{
-                setCodeData('')
-                setData([])
-                form.resetFields();
             }
         })
     },[pipelineId])
@@ -217,10 +222,10 @@ const ConfigDetails = props =>{
             case 'deploy':
                 formInitialValues.deployTargetAddress = null
                 formInitialValues.deployAddress = null
-                formInitialValues.deployShell = null
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
+                setShellBlock('')
         }
     }
 
@@ -300,11 +305,10 @@ const ConfigDetails = props =>{
                         updateConfigure={updateConfigure}
                     />
             }
-
         </div>
     )
 }
 
-export default  withRouter(inject('ConfigStore', 'GiteeStore',
-                    'StructureStore','ConfigDataStore','GithubStore')
+export default  withRouter(inject('configStore', 'giteeStore',
+                    'structureStore','configDataStore','githubStore')
                 (observer(ConfigDetails)))

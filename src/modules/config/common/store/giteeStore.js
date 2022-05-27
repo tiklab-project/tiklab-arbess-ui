@@ -8,11 +8,7 @@ import {
     GetProof,
 } from "../api/gitee";
 
-class GiteeStore {
-    
-    constructor(store) {
-        this.store=store
-    }
+export class GiteeStore {
 
     //gitee授权--地址
     @action
@@ -62,4 +58,4 @@ class GiteeStore {
 
 }
 
-export default GiteeStore
+export const GITEE_STORE = 'giteeStore'

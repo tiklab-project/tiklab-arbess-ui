@@ -7,8 +7,8 @@ const {Option}=Select
 
 const ConfigDeployDocker = props =>{
 
-    const {ProofStore} = props
-    const {createProof,findAllProof} = ProofStore
+    const {proofStore} = props
+    const {createProof,findAllProof} = proofStore
 
     const [allDockerProofList,setAllDockerProofList] = useState([])
     const [deployVisible,setDeployVisible] = useState(false)
@@ -69,10 +69,7 @@ const ConfigDeployDocker = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Button
-                    onClick={()=>setDeployVisible(true)}
-                    className='config-details-link'
-                >
+                <Button onClick={()=>setDeployVisible(true)} className='config-details-link'>
                     添加
                 </Button>
             </Row>
@@ -112,5 +109,5 @@ const ConfigDeployDocker = props =>{
     )
 }
 
-export default inject('ProofStore')(observer(ConfigDeployDocker))
+export default inject('proofStore')(observer(ConfigDeployDocker))
 

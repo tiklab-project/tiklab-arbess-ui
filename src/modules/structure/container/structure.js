@@ -8,19 +8,19 @@ import { inject, observer } from "mobx-react";
 
 const Structure = props => {
 
-    const { StructureStore , StructureDataStore} = props
+    const { structureStore , structureDataStore} = props
 
-    const { findExecState, findStructureState,logList,findAll,selectHistoryDetails,
+    const { findExecState, findStructureState,findAll,selectHistoryDetails,
         findHistoryLog,deleteHistoryLog,killInstance
-    } = StructureStore
+    } = structureStore
 
     const { leftExecute,setLeftExecute,leftData,setLeftData,rightExecute,setRightExecute,
         rightData,setRightData,modeData,setModeData
-    } = StructureDataStore
+    } = structureDataStore
 
     const [, forceUpdate] = useState({})
-    const [details,setDetails] = useState(0)
-    const [index,setIndex] = useState(0)
+    const [details,setDetails] = useState(0) // 组件显示 -- 历史构建 或者 正在构建
+    const [index,setIndex] = useState(0)  // 构建区分
     const [runTime,setRunTime] = useState(0)
 
     const pipelineId = localStorage.getItem('pipelineId')
@@ -116,6 +116,10 @@ const Structure = props => {
                         </svg>
             case 4:
                 return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
+            case 5:
+                return  <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-dengdai1"/>
+                        </svg>
         }
     }
 
@@ -123,9 +127,7 @@ const Structure = props => {
         <div className='structure task' shouldupdate='true'>
             {
                 leftExecute ==='' && leftData && leftData.length===0 ?
-                    <Result
-                        title="当前没有历史数据"
-                    />
+                    <Result title="当前没有历史数据"/>
                     :
                     <div className='structure-content'>
                         <StructureLeft
@@ -149,7 +151,6 @@ const Structure = props => {
                             modeData={modeData}
                             index={index}
                             runTime={runTime}
-                            logList={logList}
                             deleteHistoryLog={deleteHistoryLog}
                             killInstance={killInstance}
                             forceUpdate={forceUpdate}
@@ -161,4 +162,4 @@ const Structure = props => {
     )
 }
 
-export default inject('StructureStore','StructureDataStore')(observer(Structure))
+export default inject('structureStore','structureDataStore')(observer(Structure))

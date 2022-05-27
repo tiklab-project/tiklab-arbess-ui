@@ -8,8 +8,8 @@ const { Search } = Input;
 
 const PipelineSearch= props=>{
 
-    const {PipelineStore}=props
-    const {findOneName}=PipelineStore
+    const {pipelineStore}=props
+    const {findOneName}=pipelineStore
 
     const onSearch = values =>{
         findOneName(values).then(res=>{
@@ -21,17 +21,14 @@ const PipelineSearch= props=>{
         <div className='pipeline-top'>
             <span>流水线</span>
             <div className='pipeline-top-r'>
-               <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
-               <Button
-                   type='primary'
-                   onClick={()=>props.history.push('/home/new')}
-               >
-                   <PlusOutlined/>
-                   新建流水线
-               </Button>
+                <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
+                <Button type='primary' onClick={()=>props.history.push('/home/new')}>
+                    <PlusOutlined/>
+                    新建流水线
+                </Button>
             </div>
         </div>
     )
 }
 
-export default withRouter(inject('PipelineStore')(observer(PipelineSearch)))
+export default withRouter(inject('pipelineStore')(observer(PipelineSearch)))

@@ -16,9 +16,7 @@ const ConfigNewStageLeftDrawer = props =>{
                                 className={opt === index+1 ? 'at-nav-item at-nav-selected' : 'at-nav-item'}
                             >
                                 <div className="at-nav-item-main">
-                                    <div
-                                        className={opt === index+1 ? "teamix-title" : null}
-                                    >
+                                    <div className={opt === index+1 ? "teamix-title" : null}>
                                         {item.title}
                                     </div>
                                 </div>

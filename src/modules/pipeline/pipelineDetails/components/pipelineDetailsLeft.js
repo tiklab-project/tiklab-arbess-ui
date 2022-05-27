@@ -74,10 +74,7 @@ const PipelineDetailsLeft = props =>{
                         visible={visible}
                         id='liOne'
                     >
-                        <ClusterOutlined
-                            id='liIcon'
-                            style={{fontSize:18,padding:10}}
-                        />
+                        <ClusterOutlined id='liIcon' style={{fontSize:18,padding:10}}/>
                     </Dropdown>
                 </li>
                 {

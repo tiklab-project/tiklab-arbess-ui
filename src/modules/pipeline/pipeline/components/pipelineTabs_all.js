@@ -6,8 +6,8 @@ import {observer,inject} from "mobx-react";
 
 const PipelineTabs_all= props=>{
 
-    const {PipelineStore,StructureStore}=props
-    const {findAllPipelineStatus,pipelineList,updatePipeline}=PipelineStore
+    const {pipelineStore,structureStore}=props
+    const {findAllPipelineStatus,pipelineList,updatePipeline}=pipelineStore
 
     //初始化表格
     useEffect(()=>{
@@ -148,12 +148,12 @@ const PipelineTabs_all= props=>{
     ]
 
     return(
-            <Table
-                rowKey={record => record.pipelineId}
-                columns={columns}
-                dataSource={pipelineList}
-            />
+        <Table
+            rowKey={record => record.pipelineId}
+            columns={columns}
+            dataSource={pipelineList}
+        />
     )
 }
 
-export default withRouter(inject('PipelineStore','StructureStore')(observer(PipelineTabs_all)));
+export default withRouter(inject('pipelineStore','structureStore')(observer(PipelineTabs_all)));

@@ -7,19 +7,16 @@ const {Option}=Select
 
 const ConfigDeployLinux = props =>{
   
-    const {ProofStore,ConfigDataStore} = props
-    const {createProof,findAllProof} = ProofStore
+    const {proofStore,configDataStore} = props
+    const {createProof,findAllProof} = proofStore
 
-    const {setIsPrompt,formInitialValues,setFormInitialValues} = ConfigDataStore
+    const {setIsPrompt,shellBlock,setShellBlock} = configDataStore
 
     const [allLinuxProofList,setAllLinuxProofList] = useState([])
     const [deployVisible,setDeployVisible] = useState(false)
 
     const clickFindAllDeploy = () =>{
-        const param = {
-            type :2
-        }
-        findAllProof(param).then(res=>{
+        findAllProof(2).then(res=>{
             console.log('linux凭证',res)
             setAllLinuxProofList(res.data)
         }).catch(err=>{
@@ -37,10 +34,7 @@ const ConfigDeployLinux = props =>{
                 <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
             </Form.Item>
             <Row>
-                <Form.Item
-                    name='dockerProofName'
-                    label='请选择Ip地址'
-                >
+                <Form.Item name='dockerProofName' label='请选择Ip地址'>
                     <Select 
                         style={{width:300}}
                         onChange={changeDeploySelect}
@@ -73,8 +67,8 @@ const ConfigDeployLinux = props =>{
             <Form.Item name='deployShell' label='shell命令'>
                 <Mirror
                     autoSize
-                    formInitialValues={formInitialValues.deployShell}
-                    setFormInitialValues={setFormInitialValues}
+                    shellBlock={shellBlock}
+                    setShellBlock={setShellBlock}
                     setIsPrompt={setIsPrompt}
                 />
             </Form.Item>
@@ -87,6 +81,6 @@ const ConfigDeployLinux = props =>{
     )
 }
 
-export default inject('ProofStore','ConfigDataStore')(observer(ConfigDeployLinux))
+export default inject('proofStore','configDataStore')(observer(ConfigDeployLinux))
 
 

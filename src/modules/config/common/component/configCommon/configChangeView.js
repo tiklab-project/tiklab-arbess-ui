@@ -18,31 +18,17 @@ const ConfigChangeView = props =>{
         <div className='config_changeView'>
             <div className='changeView'>
                 <div className='changeView-btn'>
-                    <Button
-                        form='form'
-                        htmlType='submit'
-                    >
+                    <Button form='form' htmlType='submit'>
                         保存
                     </Button>
-                    <Button
-                        type='primary'
-                        form='form'
-                        htmlType='submit'
-                        onClick = {()=>run()}
-                    >
+                    <Button type='primary' form='form' htmlType='submit' onClick = {()=>run()}>
                         运行
                     </Button>
                 </div>
-                <div
-                    onClick={()=>setView(0)}
-                    className={view ===0 ? 'view view-link' : 'view' }
-                >
+                <div className={view ===0 ? 'view view-link' : 'view' } onClick={()=>setView(0)}>
                     表单视图
                 </div>
-                <div
-                    onClick={()=>setView(1)}
-                    className={view ===1 ? 'view view-link' : 'view' }
-                >
+                <div className={view ===1 ? 'view view-link' : 'view' } onClick={()=>setView(1)}>
                     图形化视图
                 </div>
             </div>

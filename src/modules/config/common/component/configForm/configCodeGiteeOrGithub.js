@@ -8,17 +8,17 @@ const {Option} =Select
 
 const ConfigCodeGiteeOrGithub = props =>{
 
-    const {GithubStore,ProofStore,ConfigStore,ConfigDataStore,GiteeStore} = props
+    const {githubStore,proofStore,configStore,configDataStore,giteeStore} = props
 
     const {getCode, getGithubProof,getAllGithubStorehouse,getGithubBranch,
-    } = GithubStore
+    } = githubStore
 
-    const {url, getAllGiteeStorehouse,getGiteeBranch, getGiteeProof
-    } = GiteeStore
+    const {url, getAllGiteeStorehouse,getGiteeBranch, getGiteeProof,
+    } = giteeStore
 
-    const {findAllProof} = ProofStore
-    const {testPass} = ConfigStore
-    const {setCodeName,setCodeBranch,codeData,formInitialValues} = ConfigDataStore
+    const {findAllProof} = proofStore
+    const {testPass} = configStore
+    const {setCodeName,setCodeBranch,codeData,formInitialValues} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -31,14 +31,14 @@ const ConfigCodeGiteeOrGithub = props =>{
     const gitProofId = localStorage.getItem('gitProofId')
 
     useEffect(()=>{
-        if(codeData.codeName){
+        if(codeData && codeData.codeName){
             setProhibited(false)
         }
     },[])
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
-        if(codeData.desc==='Gitee'){
+        if(codeData.codeType===2){
             getAllGiteeStorehouse(localStorage.getItem('gitProofId')).then(res=>{
                 setStorehouseList(res.data)
             }).catch(error=>{
@@ -59,20 +59,18 @@ const ConfigCodeGiteeOrGithub = props =>{
             projectName:values,
             proofId:localStorage.getItem('gitProofId')
         }
-        if(codeData.desc === 'Gitee'){
+        if(codeData.dataType === 2){
             getGiteeBranch(params).then(res=>{
                 setBranchList(res.data)
             }).catch(error=>{
                 console.log(error)
             })
-            console.log('Gitee')
         }else {
             getGithubBranch(params).then(res=>{
                 setBranchList(res.data)
             }).catch(error=>{
                 console.log(error)
             })
-            console.log('getGithubBranch')
         }
         setProhibited(false)
         setCodeName(values)
@@ -87,21 +85,12 @@ const ConfigCodeGiteeOrGithub = props =>{
     }
 
     const clickFindAllProof = () => {
-        if(codeData.desc === 'Gitee'){
-            findAllProof(2).then(res=>{
-                console.log('Gitee凭证',res)
-                setAllAuthorizeList(res.data)
-            }).catch(err=>{
-                console.log(err)
-            })
-        }else {
-            findAllProof(3).then(res=>{
-                console.log('Github凭证',res)
-                setAllAuthorizeList(res.data)
-            }).catch(err=>{
-                console.log(err)
-            })
-        }
+        findAllProof(codeData.codeType).then(res=>{
+            console.log('GiteeOrGithub凭证',res)
+            setAllAuthorizeList(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
 
     const changeProofSelect = value =>{
@@ -113,16 +102,14 @@ const ConfigCodeGiteeOrGithub = props =>{
             proofId:gitProofId,
             url:codeData.codeName
         }
-        if(codeData.desc==='Gitee'){
-            testPass(params).then(res=>{
-                console.log('res',res.data)
-                if(res.data === false){
-                    setConnection('fail')
-                }else {
-                    setConnection('success')
-                }
-            })
-        }
+        testPass(params).then(res=>{
+            console.log('res',res.data)
+            if(res.data === false){
+                setConnection('fail')
+            }else {
+                setConnection('success')
+            }
+        })
     }
 
     return(
@@ -145,19 +132,12 @@ const ConfigCodeGiteeOrGithub = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Button
-                    className='config-details-link'
-                    type="link"
-                    onClick={()=>newCode()}
-                >
+                <Button className='config-details-link' type="link" onClick={()=>newCode()}>
                     <PlusOutlined />
                     新增服务链接
                 </Button>
             </Row>
-            <Form.Item
-                name='codeName'
-                label="仓库"
-            >
+            <Form.Item name='codeName' label="仓库">
                 <Select
                     style={{ width: 300 }}
                     onChange={changeGitStoreHouse}
@@ -169,9 +149,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     {
                         storehouseList && storehouseList.map(item=>{
                             return (
-                                <Option key={item}>
-                                    {item}
-                                </Option>
+                                <Option key={item}> {item} </Option>
                             )
                         })
                     }
@@ -189,9 +167,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     {
                         branchList && branchList.map(item=>{
                             return (
-                                <Option key={item} value={item}>
-                                    {item}
-                                </Option>
+                                <Option key={item}> {item} </Option>
                             )
                         })
                     }
@@ -225,6 +201,6 @@ const ConfigCodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject('GithubStore','ProofStore',
-                    'ConfigStore','ConfigDataStore','GiteeStore')
+export default inject('githubStore','proofStore',
+                    'configStore','configDataStore','giteeStore')
                 (observer(ConfigCodeGiteeOrGithub))

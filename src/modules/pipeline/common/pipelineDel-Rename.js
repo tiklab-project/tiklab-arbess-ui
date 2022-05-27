@@ -8,8 +8,8 @@ import {observer,inject} from "mobx-react";
  */
 const PipelineDelRename= props=>{
 
-    const {PipelineStore}=props
-    const {deletePipeline,updatePipeline,pipelineList}=PipelineStore
+    const {pipelineStore}=props
+    const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
 
     const [form]=Form.useForm()
 
@@ -91,4 +91,4 @@ const PipelineDelRename= props=>{
     )
 }
 
-export default inject('PipelineStore')(observer(PipelineDelRename))
+export default inject('pipelineStore')(observer(PipelineDelRename))

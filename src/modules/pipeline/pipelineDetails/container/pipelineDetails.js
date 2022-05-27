@@ -11,9 +11,9 @@ const { Content, Sider } = Layout;
 
 const PipelineDetails= (props)=>{
 
-    const {route,PipelineStore,ConfigDataStore}=props
-    const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = PipelineStore
-    const {isPrompt,setIsPrompt} = ConfigDataStore
+    const {route,pipelineStore,configDataStore}=props
+    const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = pipelineStore
+    const {isPrompt,setIsPrompt} = configDataStore
 
     const [visible,setVisible] = useState(false)
 
@@ -82,11 +82,10 @@ const PipelineDetails= (props)=>{
                     return false
                 }}
             />
-
         </Fragment>
     )
 }
 
-export default inject('PipelineStore','ConfigDataStore')(observer(PipelineDetails))
+export default inject('pipelineStore','configDataStore')(observer(PipelineDetails))
 
 

@@ -4,8 +4,8 @@ import {PlusOutlined} from "@ant-design/icons";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const { visible,setVisible,formInitialValues,codeData,serviceName,
-        url,getGiteeProof,giteeToken,getCode,getGithubProof,githubToken
+    const { visible,setVisible,formInitialValues,codeData,url,getGiteeProof,giteeToken,getCode,
+        getGithubProof,githubToken
     }=props
 
     const [form] = Form.useForm()
@@ -104,11 +104,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     >
                        <Input/>
                     </Form.Item>
-                    <Button
-                        onClick={()=>goUrl()}
-                        style={{marginTop:30}}
-                        type="link"
-                    >
+                    <Button onClick={()=>goUrl()} style={{marginTop:30}} type="link">
                         <PlusOutlined/>
                         新建
                     </Button>

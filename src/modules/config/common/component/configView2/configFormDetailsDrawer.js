@@ -19,16 +19,15 @@ const ConfigFormDetailsDrawer = props =>{
     const deletePart = () => {
         del(newStage)
         for (let i = 0 ;i<data.length;i++){
-            if(data[i].desc === newStage){
+            if(data[i].dataType === newStage){
                 data.splice(i,1)
             }
             setData([...data])
         }
-        if(newStage === 1 || newStage === 2  ||
-            newStage=== 3 || newStage === 4 ){
-                setCodeData('')
-                setCodeName('')
-                setCodeBranch('')
+        if(newStage === 1 || newStage === 2  || newStage=== 3 || newStage === 4 ){
+            setCodeData('')
+            setCodeName('')
+            setCodeBranch('')
         }
         setIsPrompt(true)
         setTaskFormDrawer(false)
@@ -47,9 +46,7 @@ const ConfigFormDetailsDrawer = props =>{
                     <div className="menu-wrapper-head">
                         <div className="menu-wrapper-head-title">
                             编辑 &nbsp; &nbsp;
-                           <span className='deleted'
-                               onClick={()=>deletePart()}
-                           >
+                           <span className='deleted' onClick={()=>deletePart()}>
                                <DeleteOutlined/>
                            </span>
                         </div>
@@ -59,9 +56,7 @@ const ConfigFormDetailsDrawer = props =>{
                         <div className="body">
                             <div className='body-taskForm'>
                                 <div className='taskForm-top'>
-                                    <div className='taskForm-top_title'>
-                                        {codeDe()}
-                                    </div>
+                                    <div className='taskForm-top_title'>{codeDe()}</div>
                                 </div>
                                 {showTask()}
                             </div>

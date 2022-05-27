@@ -6,8 +6,8 @@ import './searchResult.scss'
 
 const SearchResult = props => {
 
-    const {PipelineStore,match}=props
-    const {searchPipelineList,findOneName}=PipelineStore
+    const {pipelineStore,match}=props
+    const {searchPipelineList,findOneName}=pipelineStore
 
     useEffect(()=>{
         findOneName(match.params.searchresult)
@@ -21,10 +21,10 @@ const SearchResult = props => {
 
     return(
         <div className='search'>
-           <div>
-               <h1 >查找的流水线</h1>
-               <ul >
-                   {
+            <div>
+                <h1 >查找的流水线</h1>
+                <ul >
+                    {
                        searchPipelineList  && searchPipelineList.map((item,index)=>{
                            return(
                                <li key={item.pipelineId} >
@@ -33,11 +33,11 @@ const SearchResult = props => {
                                </li>
                            )
                        })
-                   }
+                    }
                </ul>
            </div>
         </div>
     )
 }
 
-export default withRouter(inject('PipelineStore')(observer(SearchResult)))
+export default withRouter(inject('pipelineStore')(observer(SearchResult)))

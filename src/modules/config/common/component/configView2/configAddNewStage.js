@@ -22,9 +22,7 @@ const ConfigAddNewStage = props =>{
                    <div className='newStages-content'  >
                        <div className='newStages-task'>
                            <div className='newStages-job'>
-                               <div className='newStages-job_text'
-                                    onClick={()=>newTask()}
-                               >
+                               <div className='newStages-job_text' onClick={()=>newTask()}>
                                    新任务
                                </div>
                            </div>

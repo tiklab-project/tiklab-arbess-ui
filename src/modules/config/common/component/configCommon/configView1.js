@@ -5,20 +5,19 @@ import ConfigAddNewStageModal from "../configView1/configAddNewStageModal";
 import ConfigAddCodeModal from "../configView1/configAddCodeModal";
 import ChangeConfigSortsDrawer from "../configView1/changeConfigSortsDrawer";
 import ConfigAddNewStage from "../configView1/configAddNewStage";
-import Config_code from "../configView1/config_code";
+import ConfigCode from "../configView1/configCode";
 import moment from "../../../../../common/moment/moment";
-import formAll from "../configForm/formAll";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
 import {withRouter} from "react-router";
 
 const ConfigView1 = props =>{
 
-    const {form,del, updateConfigure,ConfigDataStore,configName,configForm} = props
+    const {form,del, updateConfigure,configDataStore,configName,configForm} = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData,
-        codeData,setCodeData, formInitialValues,setFormInitialValues
-    } = ConfigDataStore
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData, codeData,setCodeData,
+        formInitialValues,setFormInitialValues
+    } = configDataStore
 
     const inputRef = useRef();
     const [newStageVisible, setNewStageVisible] = useState(false)
@@ -35,9 +34,7 @@ const ConfigView1 = props =>{
     },[step])
 
     useEffect(()=>{
-        form.setFieldsValue({
-           ...formInitialValues
-        })
+        form.setFieldsValue({...formInitialValues})
     },[formInitialValues])
 
     const displayInput = index =>{
@@ -83,79 +80,28 @@ const ConfigView1 = props =>{
 
         //排序
         let testSort,structureSort, deploySort = 0
-        //更改步骤名
+        //配置别名
         let testAlias,structureAlias,deployAlias
+        //配置类型
+        let testType,structureType,deployType
+
         data && data.map((item,index)=>{
-            if(item.desc==='单元测试'){
+            if(item.dataType === 11){
                 testSort = index + 2
                 testAlias = item.title
+                testType = item.dataType
             }
-            if(item.desc==='maven' || item.desc ==='node'){
+            if(item.dataType === 21 || item.dataType === 22){
                 structureSort = index + 2
                 structureAlias = item.title
+                structureType = item.dataType
             }
-            if(item.desc==='linux' || item.desc === 'docker'){
+            if(item.dataType === 31 || item.dataType === 32){
                 deploySort = index + 2
                 deployAlias = item.title
+                deployType = item.dataType
             }
         })
-
-        let codeList, testList,structureList,deployList={}
-        const dataArray = data && data.map((item) => item.desc)
-
-        switch (codeData.desc){
-            case '通用Git':
-                codeList = {
-                    codeType:1,
-                }
-                break
-            case 'Gitee':{
-                codeList = {
-                    codeType:2,
-                }
-            }
-                break
-            case 'Gitlab':{
-                codeList = {
-                    codeType:4,
-                }
-            }
-                break
-            case 'Github':{
-                codeList = {
-                    codeType:3,
-                }
-            }
-        }
-
-        for (let i in dataArray){
-            switch (dataArray[i]){
-                case '单元测试':
-                    testList = {
-                        testType:11,
-                    }
-                    break
-                case 'maven':
-                    structureList = {
-                        structureType:21,
-                    }
-                    break
-                case 'node':
-                    structureList = {
-                        structureType:22,
-                    }
-                    break
-                case 'linux':
-                    deployList = {
-                        deployType:31,
-                    }
-                    break
-                case 'docker':
-                    deployList = {
-                        deployType:32,
-                    }
-            }
-        }
 
         const configureList = {
             configureCreateTime:moment.moment,
@@ -163,7 +109,7 @@ const ConfigView1 = props =>{
             pipelineCode:{
                 codeId:localStorage.getItem('codeId'),
                 sort:1,
-                type:codeList && codeList.codeType,
+                type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
                 proof:{
@@ -174,14 +120,14 @@ const ConfigView1 = props =>{
                 testId:localStorage.getItem('testId'),
                 sort:testSort,
                 testAlias:testAlias,
-                type:testList && testList.testType,
+                type:testType,
                 testOrder: values.testOrder,
             },
             pipelineStructure:{
                 structureId:localStorage.getItem('structureId'),
                 sort:structureSort,
                 structureAlias:structureAlias,
-                type:structureList && structureList.structureType,
+                type:structureType,
                 structureAddress:values.structureAddress,
                 structureOrder:values.structureOrder,
             },
@@ -189,7 +135,7 @@ const ConfigView1 = props =>{
                 deployId:localStorage.getItem('deployId'),
                 sort:deploySort,
                 deployAlias:deployAlias,
-                type:deployList && deployList.deployType,
+                type:deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
                 deployShell:values.deployShell,
@@ -200,7 +146,6 @@ const ConfigView1 = props =>{
                 }
             }
         }
-        console.log(configureList,'hhhhhh')
         updateConfigure(configureList).then(res=>{
             if(res.code!==0){
                 message.info('配置失败')
@@ -225,8 +170,7 @@ const ConfigView1 = props =>{
                                 <div style={{display:"inline"}}>
                                     {group.title}
                                     &nbsp; &nbsp;
-                                    <span onClick={()=> displayInput(index)}
-                                          style={{cursor:'pointer'}}>
+                                    <span onClick={()=> displayInput(index)} style={{cursor:'pointer'}}>
                                         <EditOutlined />
                                     </span>
                                 </div>
@@ -243,20 +187,12 @@ const ConfigView1 = props =>{
                     </div>
                     <div className='configView1-wrapper-newStage'>
                         <div className='desc'>
-                            <div className='desc-head'>
-                                {dataType(group.dataType)}
-                            </div>
-                            <div
-                                id='del'
-                                className='desc-delete'
-                                onClick={()=>deletePart(group)}
-                            >
+                            <div className='desc-head'> {dataType(group.dataType)} </div>
+                            <div className='desc-delete' onClick={()=>deletePart(group)}>
                                 <CloseOutlined />
                             </div>
                         </div>
-                        <div className='desc-input'>
-                            { inputContent(group) }
-                        </div>
+                        <div className='desc-input'> { inputContent(group) }</div>
                     </div>
                 </div>
             )
@@ -278,7 +214,7 @@ const ConfigView1 = props =>{
                         onFinish={onFinish}
                         onValuesChange={onValuesChange}
                     >
-                        <Config_code
+                        <ConfigCode
                             codeData={codeData}
                             setFormInitialValues={setFormInitialValues}
                             setCodeData={setCodeData}
@@ -292,9 +228,7 @@ const ConfigView1 = props =>{
                             configForm={configForm}
                         />
                         { newStage() }
-                        <ConfigAddNewStage
-                            setNewStageVisible={setNewStageVisible}
-                        />
+                        <ConfigAddNewStage setNewStageVisible={setNewStageVisible}/>
                     </Form>
 
                     <ConfigAddNewStageModal
@@ -322,11 +256,10 @@ const ConfigView1 = props =>{
                         codeData={codeData}
                         setIsPrompt={setIsPrompt}
                     />
-
                 </div>
             </div>
         </div>
     )
 }
 
-export default withRouter(inject('ConfigDataStore')(observer(ConfigView1)))
+export default withRouter(inject('configDataStore')(observer(ConfigView1)))

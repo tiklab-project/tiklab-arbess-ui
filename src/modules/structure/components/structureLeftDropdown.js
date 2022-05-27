@@ -37,14 +37,8 @@ const StructureLeftDropdown = props =>{
             {
                 lis.map(item=>{
                     return (
-                        <Dropdown
-                            key={item.id}
-                            overlay={item.menu}
-                            trigger={['click']}
-                        >
-                            <a onClick={(e) =>
-                                e.preventDefault()}
-                            >
+                        <Dropdown key={item.id} overlay={item.menu} trigger={['click']}>
+                            <a onClick={(e) => e.preventDefault()}>
                                 <Space>
                                     {item.desc}
                                     <DownOutlined />

@@ -12,14 +12,9 @@ import {
     KillInstance
 } from "../api/structure";
 
-class StructureStore {
-    
-    constructor(store) {
-        this.store=store
-    }
+export class StructureStore {
 
-    @observable logList=''
-
+    // 开始构建
     @action
     pipelineStartStructure = async values =>{
         const formData = new FormData()
@@ -40,18 +35,9 @@ class StructureStore {
     //构建状态
     @action
     findStructureState = async (values) =>{
-        const params = qs.stringify({pipelineId: values})
-        return new Promise((resolve, reject) => {
-            FindStructureState(params).then(res=>{
-                if(res.data.data){
-                    this.logList=res.data.data
-                }
-                resolve(res.data)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+        const param = qs.stringify({pipelineId: values})
+        const data = await FindStructureState(param)
+        return data.data
     }
 
     //构建历史
@@ -84,7 +70,7 @@ class StructureStore {
         })
     }
 
-    //查看所有构建步骤
+    //正在执行的详情
     @action
     findAll =async values =>{
         const param = new FormData()
@@ -104,4 +90,4 @@ class StructureStore {
 
 }
 
-export default StructureStore
+export const STRUCTURE_STORE = 'structureStore'

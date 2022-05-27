@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment} from "react";
 import StructureLeftDropdown from "./structureLeftDropdown";
 import StructureLeftExecute from "./structureLeftExecute";
 
@@ -13,7 +13,6 @@ const StructureLeft = props =>{
             switch (item.runStatus) {
                 case 1:
                     return status(2)
-    
                 case 30:
                     return  status(1)
             }
@@ -45,23 +44,13 @@ const StructureLeft = props =>{
                                     :   'history-content-list'
                                 }
                             >
-                                <div className='list-title'>
-                                    <span>
-                                       构建 {i+1}
-                                    </span>
-                                </div>
+                                <div className='list-title'> 构建 {i+1}</div>
                                 <div className='list-group'>
                                     <div className='list-group-item'>
-                                        <div className='list-state'>
-                                            <span>状态 : {sta(item)}</span>
-                                        </div>
-                                        <div className='list-one'>
-                                            <span>执行人 : {item.execName}</span>
-                                        </div>
+                                        <div className='list-state'>状态 : {sta(item)}</div>
+                                        <div className='list-one'>执行人 : {item.execName}</div>
                                     </div>
-                                    <div className='list-time'>
-                                        <span>执行时间 : {item.createTime}</span>
-                                    </div>
+                                    <div className='list-time'>执行时间 : {item.createTime}</div>
                                 </div>
                             </div>
                         )})

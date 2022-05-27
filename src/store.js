@@ -1,23 +1,28 @@
-import PipelineStore from "./modules/pipeline/pipeline/store/pipelineStore";
-import ConfigStore from "./modules/config/common/store/configStore";
-import StructureStore from "./modules/structure/store/structureStore";
-import ProofStore from "./modules/config/common/store/proofStore";
-import GiteeStore from "./modules/config/common/store/giteeStore";
-import ConfigDataStore from "./modules/config/common/store/configDataStore";
-import StructureDataStore from "./modules/structure/store/structureDataStore";
-import GithubStore from "./modules/config/common/store/githubStore";
+import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/pipeline/store/pipelineStore";
+import {STRUCTURE_STORE,StructureStore} from "./modules/structure/store/structureStore";
+import {STRUCTUREDATA_STORE,StructureDataStore} from "./modules/structure/store/structureDataStore";
+import {CONFIG_STORE,ConfigStore} from "./modules/config/common/store/configStore";
+import {CONFIGDATA_STORE,ConfigDataStore} from "./modules/config/common/store/configDataStore";
+import {GITEE_STORE,GiteeStore} from "./modules/config/common/store/giteeStore";
+import {GITHUB_STORE,GithubStore} from "./modules/config/common/store/githubStore";
+import {PROOF_STORE,ProofStore} from "./modules/config/common/store/proofStore";
 
-class store{
-    constructor() {
-        this.PipelineStore=new  PipelineStore(this)
-        this.ConfigStore=new ConfigStore(this)
-        this.StructureStore=new StructureStore(this)
-        this.ProofStore=new ProofStore(this)
-        this.GiteeStore=new GiteeStore(this)
-        this.ConfigDataStore=new ConfigDataStore(this)
-        this.StructureDataStore=new StructureDataStore(this)
-        this.GithubStore=new GithubStore(this)
+function createStores() {
+    return{
+        [PIPELINE_STORE]:new PipelineStore(),
+        [STRUCTURE_STORE]:new StructureStore(),
+        [STRUCTUREDATA_STORE]:new StructureDataStore(),
+        [CONFIG_STORE]:new ConfigStore(),
+        [CONFIGDATA_STORE]:new ConfigDataStore(),
+        [GITEE_STORE]:new GiteeStore(),
+        [GITEE_STORE]:new GiteeStore(),
+        [GITHUB_STORE]:new GithubStore(),
+        [PROOF_STORE]:new ProofStore(),
     }
 }
 
-export default new store()
+const store = createStores();
+
+export {
+    store
+}

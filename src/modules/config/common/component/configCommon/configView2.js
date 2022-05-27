@@ -13,21 +13,20 @@ import {withRouter} from "react-router";
 
 const ConfigView2 = props =>{
 
-    const {form, updateConfigure,ConfigDataStore,del,configName,configForm
+    const {form, updateConfigure,configDataStore,del,configName,configForm
     } = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,
-        data,setData, codeData,setCodeData,  formInitialValues,setFormInitialValues
-    } = ConfigDataStore
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch, data,setData,
+        codeData,setCodeData,  formInitialValues,setFormInitialValues
+    } = configDataStore
 
     const inputRef = useRef();
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
+    const [index,setIndex] = useState('')  // 配置的插入
     const [newStage,setNewStage] = useState('')
     const [step,setStep] = useState('')
-    const [index,setIndex] = useState('')
-
     const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
@@ -56,6 +55,7 @@ const ConfigView2 = props =>{
         for(let i = 0 ;i<arr.length;i++){
             if( i === index ) {
                 arr[i].title = e.target.value
+                setIsPrompt(true)
             }
         }
         setData([...arr])
@@ -72,18 +72,91 @@ const ConfigView2 = props =>{
     }
 
     const dataType = type =>{
-        switch (type) {
-            case 11:
-                return '单元测试'
-            case 21:
-                return 'maven'
-            case 22:
-                return 'node'
-            case 31:
-                return 'linux'
-            case 32:
-                return 'docker'
+        return configName(type)
+    }
+
+    const onFinish = values => {
+
+        //排序
+        let testSort,structureSort, deploySort = 0
+        //配置别名
+        let testAlias,structureAlias,deployAlias
+        //配置类型
+        let testType,structureType,deployType
+
+        data && data.map((item,index)=>{
+            if(item.dataType === 11){
+                testSort = index + 2
+                testAlias = item.title
+                testType = item.dataType
+            }
+            if(item.dataType === 21 || item.dataType === 22){
+                structureSort = index + 2
+                structureAlias = item.title
+                structureType = item.dataType
+            }
+            if(item.dataType === 31 || item.dataType === 32){
+                deploySort = index + 2
+                deployAlias = item.title
+                deployType = item.dataType
+            }
+        })
+
+        const configureList = {
+            configureCreateTime:moment.moment,
+            pipelineId:pipelineId,
+            pipelineCode:{
+                codeId:localStorage.getItem('codeId'),
+                sort:1,
+                type:codeData && codeData.codeType,
+                codeBranch:values.codeBranch,
+                codeName:values.codeName,
+                proof:{
+                    proofId:localStorage.getItem('gitProofId')
+                }
+            },
+            pipelineTest:{
+                testId:localStorage.getItem('testId'),
+                sort:testSort,
+                testAlias:testAlias,
+                type:testType,
+                testOrder: values.testOrder,
+            },
+            pipelineStructure:{
+                structureId:localStorage.getItem('structureId'),
+                sort:structureSort,
+                structureAlias:structureAlias,
+                type:structureType,
+                structureAddress:values.structureAddress,
+                structureOrder:values.structureOrder,
+            },
+            pipelineDeploy:{
+                deployId:localStorage.getItem('deployId'),
+                sort:deploySort,
+                deployAlias:deployAlias,
+                type:deployType,
+                deployAddress: values.deployAddress,
+                deployTargetAddress: values.deployTargetAddress,
+                deployShell:values.deployShell,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
+                proof:{
+                    proofId:localStorage.getItem('deployProofId'),
+                }
+            }
         }
+        updateConfigure(configureList).then(res=>{
+            if(res.code!==0){
+                message.info('配置失败')
+            }message.info('保存成功')
+            setIsPrompt(false)
+        })
+    }
+
+    const onValuesChange = value =>{
+        Object.assign(formInitialValues,value)
+        setFormInitialValues({...formInitialValues})
+        setIsPrompt(true)
     }
 
     const newStageShow = () =>{
@@ -110,10 +183,7 @@ const ConfigView2 = props =>{
                                                 <Fragment>
                                                     {item.title}
                                                     &nbsp; &nbsp;
-                                                    <span
-                                                        onClick={()=> displayInput(index)}
-                                                        style={{cursor:'pointer',paddingTop:5}}
-                                                    >
+                                                    <span onClick={()=> displayInput(index)} >
                                                         <EditOutlined />
                                                     </span>
                                                 </Fragment>
@@ -135,10 +205,7 @@ const ConfigView2 = props =>{
                                     <div className='newStages-content'  >
                                         <div className='newStages-task'>
                                             <div className='newStages-job'>
-                                                <div
-                                                    className='newStages-job_text'
-                                                    onClick={()=>showStage(item)}
-                                                >
+                                                <div className='newStages-job_text' onClick={()=>showStage(item)}>
                                                     {dataType(item.dataType)}
                                                 </div>
                                             </div>
@@ -152,142 +219,6 @@ const ConfigView2 = props =>{
         })
     }
 
-    const onFinish = values => {
-
-        //排序
-        let testSort,structureSort, deploySort = 0
-        //更改步骤名
-        let testAlias,structureAlias,deployAlias
-        data && data.map((item,index)=>{
-            if(item.desc==='单元测试'){
-                testSort = index + 2
-                testAlias = item.title
-            }
-            if(item.desc==='maven' || item.desc ==='node'){
-                structureSort = index + 2
-                structureAlias = item.title
-            }
-            if(item.desc==='linux' || item.desc === 'docker'){
-                deploySort = index + 2
-                deployAlias = item.title
-            }
-        })
-
-        let codeList, testList,structureList,deployList={}
-        const dataArray = data && data.map((item) => item.desc)
-
-        switch (codeData.desc){
-            case '通用Git':
-                codeList = {
-                    codeType:1,
-                }
-                break
-            case 'Gitee':{
-                codeList = {
-                    codeType:2,
-                }
-            }
-                break
-            case 'Gitlab':{
-                codeList = {
-                    codeType:4,
-                }
-            }
-                break
-            case 'Github':{
-                codeList = {
-                    codeType:3,
-                }
-            }
-        }
-
-        for (let i in dataArray){
-            switch (dataArray[i]){
-                case '单元测试':
-                    testList = {
-                        testType:11,
-                    }
-                    break
-                case 'maven':
-                    structureList = {
-                        structureType:21,
-                    }
-                    break
-                case 'node':
-                    structureList = {
-                        structureType:22,
-                    }
-                    break
-                case 'linux':
-                    deployList = {
-                        deployType:31,
-                    }
-                    break
-                case 'docker':
-                    deployList = {
-                        deployType:32,
-                    }
-            }
-        }
-
-        const configureList = {
-            configureCreateTime:moment.moment,
-            pipelineId:pipelineId,
-            pipelineCode:{
-                codeId:localStorage.getItem('codeId'),
-                sort:1,
-                type:codeList && codeList.codeType,
-                codeBranch:values.codeBranch,
-                codeName:values.codeName,
-                proof:{
-                    proofId:localStorage.getItem('gitProofId')
-                }
-            },
-            pipelineTest:{
-                testId:localStorage.getItem('testId'),
-                sort:testSort,
-                testAlias:testAlias,
-                type:testList && testList.testType,
-                testOrder: values.testOrder,
-            },
-            pipelineStructure:{
-                structureId:localStorage.getItem('structureId'),
-                sort:structureSort,
-                structureAlias:structureAlias,
-                type:structureList && structureList.structureType,
-                structureAddress:values.structureAddress,
-                structureOrder:values.structureOrder,
-            },
-            pipelineDeploy:{
-                deployId:localStorage.getItem('deployId'),
-                sort:deploySort,
-                deployAlias:deployAlias,
-                type:deployList && deployList.deployType,
-                deployAddress: values.deployAddress,
-                deployTargetAddress: values.deployTargetAddress,
-                deployShell:values.deployShell,
-                dockerPort:values.dockerPort,
-                mappingPort:values.mappingPort,
-                proof:{
-                    proofId:localStorage.getItem('deployProofId'),
-                }
-            }
-        }
-        console.log(configureList,'hhhhhh')
-        updateConfigure(configureList).then(res=>{
-            if(res.code!==0){
-                message.info('配置失败')
-            }message.info('保存成功')
-            setIsPrompt(false)
-        })
-    }
-
-    const onValuesChange = value =>{
-        Object.assign(formInitialValues,value)
-        setFormInitialValues({...formInitialValues})
-        setIsPrompt(true)
-    }
-
     return (
         <div className='configView2'>
            <div className='configView2-content'>
@@ -296,13 +227,14 @@ const ConfigView2 = props =>{
                    setCodeDrawer={setCodeDrawer}
                    setNewStage={setNewStage}
                    setTaskFormDrawer={setTaskFormDrawer}
+                   configName={configName}
                />
                <div className='configView2-main'>
                    <div className='configView2-main_container'>
                        <div className='configView2-main_group'>
                            { newStageShow() }
                            <ConfigAddNewStage
-                               setIndex = {setIndex}
+                               setIndex={setIndex}
                                setNewStageDrawer={setNewStageDrawer}
                            />
                        </div>
@@ -340,7 +272,7 @@ const ConfigView2 = props =>{
                    data={data}
                    setData={setData}
                    index={index}
-                   setIndex = {setIndex}
+                   setIndex={setIndex}
                />
 
                <ConfigFormDetailsDrawer
@@ -366,4 +298,4 @@ const ConfigView2 = props =>{
     )
 }
 
-export default withRouter(inject('ConfigDataStore')(observer(ConfigView2)))
+export default withRouter(inject('configDataStore')(observer(ConfigView2)))

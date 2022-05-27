@@ -6,11 +6,7 @@ import {
     FindOneProof,
 } from "../api/proof";
 
-class ProofStore{
-    
-    constructor(store) {
-        this.store=store
-    }
+export class ProofStore{
 
     @action
     createProof =async values =>{
@@ -42,9 +38,8 @@ class ProofStore{
         param.append('proofId',values.proofId)
         const data = await FindOneProof(param)
         return data.data
-
     }
 
 }
 
-export default ProofStore
+export const PROOF_STORE = 'proofStore'

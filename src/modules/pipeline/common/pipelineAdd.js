@@ -19,8 +19,8 @@ const lis= [
 
 const PipelineAdd = props => {
 
-    const {PipelineStore}=props
-    const {createPipeline,pipelineList,findAllPipelineStatus}=PipelineStore
+    const {pipelineStore}=props
+    const {createPipeline,pipelineList,findAllPipelineStatus}=pipelineStore
 
     const inputRef = useRef();
     const [liStatus, setLiStatus] = useState(0)
@@ -85,10 +85,7 @@ const PipelineAdd = props => {
                         }),
                     ]}
                 >
-                    <Input
-                        style={{width:400}}
-                        ref={inputRef}
-                    />
+                    <Input style={{width:400}} ref={inputRef}/>
                 </Form.Item>
             </Form>
             <div  className='new-type'>
@@ -101,12 +98,8 @@ const PipelineAdd = props => {
                                     onClick={()=> liStatusData(index) }
                                     className={ liStatus === index ? 'new-type-choose-c new-type-active':'new-type-choose-c '}
                                 >
-                                    <label>
-                                        {item.title}
-                                    </label>
-                                    <div>
-                                        {item.desc}
-                                    </div>
+                                    <label>{item.title}</label>
+                                    <div>{item.desc}</div>
                                 </li>
                             )
                         })
@@ -124,4 +117,4 @@ const PipelineAdd = props => {
     )
 }
 
-export default inject('PipelineStore')(observer(PipelineAdd))
+export default inject('pipelineStore')(observer(PipelineAdd))

@@ -11,9 +11,7 @@ const StructureLeftExecute = props => {
                 case 30 :
                     return  status(1)
                 default :
-                    return  <svg className="icon" aria-hidden="true">
-                                <use xlinkHref="#icon-dengdai1"/>
-                            </svg>
+                    return  status(5)
             }
         }
     }
@@ -22,13 +20,9 @@ const StructureLeftExecute = props => {
         if(leftExecute){
             switch (leftExecute.runWay) {
                 case 1:
-                    return  <span>
-                                用户点击执行
-                            </span>
+                    return  '用户点击执行'
                 default:
-                    return  <span>
-                                自动
-                            </span>
+                    return  '自动'
             }
         }
     }
@@ -46,23 +40,15 @@ const StructureLeftExecute = props => {
                 :   'history-content-list'
             }
         >
-            <div className='list-title'>
-                <span>
-                   构建 0
-                </span>
-            </div>
+            <div className='list-title'> 构建 0 </div>
             <div className='list-group'>
                 <div className='list-group-item'>
-                    <div className='list-state'>
-                        <span>状态 : {state()}</span>
-                    </div>
+                    <div className='list-state'>状态 : {state()}</div>
                     <div className='list-one'>
-                        <span>执行人 : {leftExecute && leftExecute.execName}</span>
+                        执行人 : {leftExecute && leftExecute.execName}
                     </div>
                 </div>
-                <div className='list-time'>
-                    <span>执行方式 : {runWay()}</span>
-                </div>
+                <div className='list-time'> 执行方式 : {runWay()} </div>
             </div>
         </div>
     )

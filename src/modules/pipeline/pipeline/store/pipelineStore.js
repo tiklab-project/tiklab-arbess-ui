@@ -9,11 +9,7 @@ import {
     UpdatePipeline
 } from "../api/pipeline";
 
-class PipelineStore{
-
-    constructor(store) {
-        this.store=store
-    }
+export class PipelineStore{
     
     @observable pipelineList=[]
     @observable searchPipelineList = []
@@ -97,6 +93,7 @@ class PipelineStore{
             })
         })
     }
+
 }
 
-export default PipelineStore
+export const PIPELINE_STORE = 'pipelineStore'

@@ -6,11 +6,7 @@ import {
     TestPass,
 } from '../api/config'
 
-class ConfigStore{
-    
-    constructor(store) {
-        this.store=store
-    }
+export class ConfigStore{
 
     @action
     updateConfigure = values =>{
@@ -101,4 +97,4 @@ class ConfigStore{
 
 }
 
-export default ConfigStore
+export const CONFIG_STORE = 'configStore'

@@ -29,8 +29,6 @@ const ConfigAddCodeModal = props =>{
         newCode = {
             codeId:index,
             codeType:item.id,
-            // title:'源码管理',
-            // desc:item.desc,
         }
         setCodeData(newCode)
         setCodeVisible(false)
@@ -52,9 +50,7 @@ const ConfigAddCodeModal = props =>{
                                 key={item.id}
                             >
                                 <div className='group-desc-tpl'>
-                                    <div className='tpl'>
-                                        {item.desc}
-                                    </div>
+                                    <div className='tpl'>{item.desc}</div>
                                 </div>
                             </div>
                 })

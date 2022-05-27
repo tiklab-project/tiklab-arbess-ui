@@ -1,17 +1,16 @@
-import React, {Fragment, useEffect, useState} from "react";
-import {Button, Form, Input, Row, Select} from "antd";
+import React, {Fragment, useState} from "react";
+import {Button, Form, Input, Row, Select,message} from "antd";
 import ConfigCodeGitOrGitlabModal from "./configCodeGitOrGitlabModal";
 import {inject, observer} from "mobx-react";
-import ConfigStore from "../../store/configStore";
 
 const {Option} = Select
 
 const ConfigCodeGitOrGitlab = props =>{
 
-    const {ProofStore,ConfigDataStore,ConfigStore}=props
-    const {createProof,findAllProof,findOneProof} = ProofStore
-    const {setCodeName, setCodeBranch,codeData} = ConfigDataStore
-    const {testPass} = ConfigStore
+    const {proofStore,configDataStore,configStore}=props
+    const {createProof,findAllProof} = proofStore
+    const {setCodeName, setCodeBranch,codeData} = configDataStore
+    const {testPass} = configStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
     const [visible,setVisible] = useState(false)
@@ -19,30 +18,16 @@ const ConfigCodeGitOrGitlab = props =>{
     const gitProofId = localStorage.getItem('gitProofId')
 
     const clickFindAllGit = () =>{
-        if(codeData.desc === '通用Git'){
-            findAllProof(1).then(res=>{
-                console.log('git凭证',res)
-                setAllGitProofList(res.data)
-            }).catch(err=>{
-                console.log(err)
-            })
-        }else{
-            findAllProof(4).then(res=>{
-                console.log('git凭证',res)
-                setAllGitProofList(res.data)
-            }).catch(err=>{
-                console.log(err)
-            })
-        }
-
+        findAllProof(codeData.codeType).then(res=>{
+            console.log('gitOrGitlab凭证',res)
+            setAllGitProofList(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
 
     const changeGitSelect = value =>{
         console.log(value)
-        // const param = {
-        //     proofId:value
-        // }
-        // findOneProof(param)
         localStorage.setItem('gitProofId',value)
     }
 
@@ -63,16 +48,16 @@ const ConfigCodeGitOrGitlab = props =>{
             proofId:gitProofId,
             url:codeData.codeName
         }
-        if(codeData.desc==='通用Git'){
-            testPass(params).then(res=>{
-                console.log('res',res.data)
-                if(res.data === false){
-                    setConnection('fail')
-                }else {
-                    setConnection('success')
-                }
-            })
-        }
+        testPass(params).then(res=>{
+            console.log('res',res.data)
+            if(res.data === true){
+                message.success('连接成功')
+                setConnection('success')
+            }else {
+                message.info('连接失败')
+                setConnection('fail')
+            }
+        })
     }
 
     return(
@@ -89,10 +74,7 @@ const ConfigCodeGitOrGitlab = props =>{
             >
                 <Input  onChange={e=>inputCodeNameValue(e)}/>
             </Form.Item>
-            <Form.Item
-                name="codeBranch"
-                label="分支"
-            >
+            <Form.Item name="codeBranch" label="分支">
                 <Input
                     style={{ width: 300 }}
                     placeholder="请输入分支，默认是master"
@@ -100,10 +82,7 @@ const ConfigCodeGitOrGitlab = props =>{
                 />
             </Form.Item>
             <Row>
-                <Form.Item
-                    name='gitProofName'
-                    label="凭证"
-                >
+                <Form.Item name='gitProofName' label="凭证">
                     <Select
                         style={{ width: 300 }}
                         onClick={clickFindAllGit}
@@ -123,10 +102,7 @@ const ConfigCodeGitOrGitlab = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Button
-                    onClick={()=>newProof()}
-                    className='config-details-link'
-                >
+                <Button onClick={()=>newProof()} className='config-details-link'>
                     添加
                 </Button>
             </Row>
@@ -152,4 +128,4 @@ const ConfigCodeGitOrGitlab = props =>{
     )
 }
 
-export default inject('ProofStore','ConfigDataStore','ConfigStore')(observer(ConfigCodeGitOrGitlab))
+export default inject('proofStore','configDataStore','configStore')(observer(ConfigCodeGitOrGitlab))

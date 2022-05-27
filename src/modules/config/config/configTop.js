@@ -3,14 +3,12 @@ import { Breadcrumb } from 'antd';
 
 const ConfigTop = () =>{
 
-    const  piplelineName = localStorage.getItem('pipelineName')
+    const  pipelineName = localStorage.getItem('pipelineName')
 
     return(
         <Breadcrumb  className='configView1-top'>
             <Breadcrumb.Item>流水线</Breadcrumb.Item>
-            <Breadcrumb.Item>
-                {piplelineName}
-            </Breadcrumb.Item>
+            <Breadcrumb.Item>{pipelineName}</Breadcrumb.Item>
         </Breadcrumb>
     )
 }

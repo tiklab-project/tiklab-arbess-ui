@@ -5,7 +5,7 @@ import StructureRightExecute from "./structureRightExecute";
 
 const StructureRight = props =>{
 
-    const {logList,rightData,rightExecute,details,status,historyId,deleteHistoryLog,
+    const {rightData,rightExecute,details,status,historyId,deleteHistoryLog,
         forceUpdate, modeData,index,leftExecute,runTime,killInstance
     } = props
     
@@ -74,8 +74,7 @@ const StructureRight = props =>{
                         return(
                             <Card className='mid_group_center-cart' key={index}>
                                 <div className='cart-top'>
-                                    {item.taskAlias} --
-                                    <span >{type(item)}</span>
+                                    {item.taskAlias} -- {type(item)}
                                 </div>
                                 <div className='cart-center'>
                                     <div className='cart-center-item'>
@@ -84,10 +83,7 @@ const StructureRight = props =>{
                                     </div>
                                 </div>
                                 <div className='cart-bottom' >
-                                    <span
-                                        className='cart-bottom-span'
-                                        onClick={()=>log(item)}
-                                    >
+                                    <span className='cart-bottom-span' onClick={()=>log(item)}>
                                         日志
                                     </span>
                                 </div>
@@ -106,7 +102,6 @@ const StructureRight = props =>{
                     details === 0 ?
                     <StructureRightExecute
                         rightExecute={rightExecute}
-                        logList={logList}
                         status={status}
                         leftExecute={leftExecute}
                         runTime={runTime}
@@ -116,15 +111,9 @@ const StructureRight = props =>{
                     <div className="mid_group">
                         <div className='mid_group_top'>
                             <div className='mid_group_top_tel'>
-                                 <span className='tel_time'>
-                                     构建 {index}
-                                 </span>
-                                <span className='tel_time'>
-                                    执行时长：{modeData && modeData.execTime}
-                                 </span>
-                                <span className='tel_way'>
-                                     触发方式：{runWay()}
-                                 </span>
+                                <span className='tel_time'>构建 {index}</span>
+                                <span className='tel_time'>执行时长：{modeData && modeData.execTime}</span>
+                                <span className='tel_way'>触发方式：{runWay()}</span>
                             </div>
                             <div className="mid_group_top_del">
                                 <Popconfirm

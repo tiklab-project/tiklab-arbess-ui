@@ -1,5 +1,5 @@
-import {UnControlled as CodeMirror} from 'react-codemirror2'
 import React, {useRef} from "react";
+import {UnControlled as CodeMirror} from 'react-codemirror2'
 import 'codemirror/lib/codemirror.js';
 import 'codemirror/lib/codemirror.css';
 // 主题风格
@@ -34,13 +34,13 @@ import './configDeployLinuxMirror.scss'
 
 const Mirror = props =>{
 
-    const {formInitialValues,setFormInitialValues,setIsPrompt} = props
+    const {shellBlock,setShellBlock,setIsPrompt} = props
 
     const formRefs = useRef(null);
 
     return (
         <CodeMirror
-            value={formInitialValues}//内容
+            value={shellBlock}//内容
             ref={formRefs}
             options={{
                 mode: { name: 'shell', shell: true },//语言
@@ -48,10 +48,8 @@ const Mirror = props =>{
                 lineWrapping: true,//是否支持代码折叠
             }}
             onChange={() => {
-                setFormInitialValues({
-                    deployShell:formRefs.current.editor.getValue()
-                })
-                // setIsPrompt(true)
+                setShellBlock(formRefs.current.editor.getValue())
+                setIsPrompt(true)
             }}
         />
     )

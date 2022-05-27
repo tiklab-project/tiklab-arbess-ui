@@ -25,10 +25,7 @@ const Home=props=>{
     return(
         <Layout>
             <Header >
-                <Heads
-                    {...props}
-                    routers={headerRoutes}
-                />
+                <Heads {...props} routers={headerRoutes}/>
             </Header>
             <Content  className='home'>
                 {renderRoutes(route.routes)}

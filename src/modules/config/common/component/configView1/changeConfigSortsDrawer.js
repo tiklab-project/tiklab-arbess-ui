@@ -13,7 +13,7 @@ const ChangeConfigSortsDrawer = props =>{
     
     useEffect(()=>{
         let desc
-        if(codeData!==''){
+        if(codeData){
             switch (codeData.codeType) {
                 case 1:
                     desc = '通用Git'
@@ -127,9 +127,7 @@ const ChangeConfigSortsDrawer = props =>{
                     <div className="menu-wrapper-head">
                         <div>更改配置顺序</div>
                         <div>
-                            <Button type="text"
-                                    onClick={()=>setChangeSortVisible(false)}
-                            >
+                            <Button type="text" onClick={()=>setChangeSortVisible(false)}>
                                 <CloseOutlined />
                             </Button>
                         </div>

@@ -1,42 +1,42 @@
 .new{
-  width: 70%;
-  height: 100%;
-  margin:auto;
-  padding: 20px;
-  ul{
-    list-style: none;
-  }
-  form{
-    border: 1px solid #cccccc;
-    border-radius: 3px 3px 0 0;
-    background-color:  #eaeff2;
-    &>div{
-      margin:20px 30px;
+    width: 70%;
+    height: 100%;
+    margin:auto;
+    padding: 20px;
+    ul{
+        list-style: none;
     }
-  }
-  &-type{
-    width: 100%;
-    border: 1px solid #cccccc;
-    border-radius:0 0 3px 3px ;
-    background-color: #F5F5F5;
-    &-choose{
-      &-c{
-        margin: 10px;
-        padding: 15px;
-        cursor: pointer;
-        &:hover {
-          background-color: #ffffff;
-          border-radius: 3px;
+    form{
+        border: 1px solid #cccccc;
+        border-radius: 3px 3px 0 0;
+        background-color:  #eaeff2;
+        &>div{
+            margin:20px 30px;
         }
-        label{
-          font-weight: bold;
-          font-size: 18px;
+    }
+    &-type{
+        width: 100%;
+        border: 1px solid #cccccc;
+        border-radius:0 0 3px 3px ;
+        background-color: #F5F5F5;
+        &-choose{
+            &-c{
+                margin: 10px;
+                padding: 15px;
+                cursor: pointer;
+                &:hover {
+                    background-color: #ffffff;
+                    border-radius: 3px;
+                }
+                label{
+                    font-weight: bold;
+                    font-size: 18px;
+                }
+            }
         }
-      }
+        &-active{
+            background-color: #ffffff;
+            border-radius: 3px;
+        }
     }
-    &-active{
-      background-color: #ffffff;
-      border-radius: 3px;
-    }
-  }
 }

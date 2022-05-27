@@ -82,7 +82,7 @@ const ConfigAddNewStageModal = props =>{
         return lis && lis.map(group=>{
             return(
                 <div className='group' id={group.id} key={group.id}>
-                    <div className='group-title'>{group.title}</div>
+                    <div className='group-title'> {group.title} </div>
                     <div className='group-content'>
                         {
                             group.desc &&  group.desc.map((item,index)=>{
@@ -93,9 +93,7 @@ const ConfigAddNewStageModal = props =>{
                                         key={item.tpl}
                                     >
                                         <div className='group-desc-tpl'>
-                                            <div className='tpl'>
-                                                {item.tel}
-                                            </div>
+                                            <div className='tpl'> {item.tel} </div>
                                         </div>
                                     </div>
                                 )

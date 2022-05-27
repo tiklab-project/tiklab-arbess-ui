@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Button } from "antd";
 import formAll from "../configForm/formAll";
 
@@ -44,9 +44,7 @@ const ConfigCodeDrawerBottom = props =>{
                                 style={{width:170}}
                             >
                                 <div className='group-desc-tpl'>
-                                    <div className='tpl'>
-                                        {item.title}
-                                    </div>
+                                    <div className='tpl'> {item.title} </div>
                                 </div>
                             </div>
                 })
@@ -54,9 +52,7 @@ const ConfigCodeDrawerBottom = props =>{
             <div className='body-menu_form'>
                 {
                     codeOpt === 0 || codeOpt === 2 ?
-                        formAll.gitOrGitlab
-                        :
-                        formAll.giteeOrGithub
+                        formAll.gitOrGitlab : formAll.giteeOrGithub
                 }
             </div>
             <div>
