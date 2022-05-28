@@ -13,43 +13,42 @@ import {withRouter} from "react-router";
 
 const ConfigView1 = props =>{
 
-    const {form,del, updateConfigure,configDataStore,configName,configForm} = props
+    const {form,del, updateConfigure,configDataStore,configName,configForm,
+    } = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData, codeData,setCodeData,
-        formInitialValues,setFormInitialValues
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData,codeData,setCodeData,
+        formInitialValues,setFormInitialValues,isAlias,setIsAlias,shellBlock
     } = configDataStore
 
     const inputRef = useRef();
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
-    const [step,setStep] = useState('')
-
     const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-        if (step!==''){
+        if (isAlias!==''){
             inputRef.current.focus()
         }
-    },[step])
+    },[isAlias])
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues])
 
     const displayInput = index =>{
-        setStep(index)
+        setIsAlias(index)
     }
 
     const hiddenInput = () =>{
-        setStep('')
+        setIsAlias('')
     }
 
     const changeInputValue = (e,index) =>{
         //深拷贝一次，可以让arr指向单独的内存空间
         let arr = JSON.parse(JSON.stringify(data))
         for(let i = 0 ;i<arr.length;i++){
-            if( i === index ) {
+            if( i === index && e.target.value) {
                 arr[i].title = e.target.value
                 setIsPrompt(true)
             }
@@ -138,7 +137,7 @@ const ConfigView1 = props =>{
                 type:deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
-                deployShell:values.deployShell,
+                deployShell:shellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
                 proof:{
@@ -166,7 +165,7 @@ const ConfigView1 = props =>{
                 <div className='configView1-wrapper' key={index}>
                     <div className='configView1-wrapper-Headline'>
                         {
-                            step !== index ?
+                            isAlias !== index ?
                                 <div style={{display:"inline"}}>
                                     {group.title}
                                     &nbsp; &nbsp;
@@ -238,7 +237,6 @@ const ConfigView1 = props =>{
                         setNewStageVisible={setNewStageVisible}
                         setIsPrompt={setIsPrompt}
                     />
-
                     <ConfigAddCodeModal
                         codeName={codeName}
                         codeBranch={codeBranch}
@@ -247,7 +245,6 @@ const ConfigView1 = props =>{
                         setCodeData={setCodeData}
                         setIsPrompt={setIsPrompt}
                     />
-
                     <ChangeConfigSortsDrawer
                         changeSortVisible={changeSortVisible}
                         setChangeSortVisible={setChangeSortVisible}

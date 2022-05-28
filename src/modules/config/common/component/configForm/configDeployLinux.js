@@ -40,9 +40,7 @@ const ConfigDeployLinux = props =>{
                         onChange={changeDeploySelect}
                         onClick={clickFindAllDeploy}
                     >
-                        <Option >
-                            无
-                        </Option>
+                        <Option >无</Option>
                         {
                             allLinuxProofList && allLinuxProofList.map(item=>{
                                 return(
@@ -54,10 +52,7 @@ const ConfigDeployLinux = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Button
-                    className='config-details-link'
-                    onClick={()=>setDeployVisible(true)}
-                >
+                <Button className='config-details-link' onClick={()=>setDeployVisible(true)}>
                     添加
                 </Button>
             </Row>
@@ -67,7 +62,7 @@ const ConfigDeployLinux = props =>{
             <Form.Item name='deployShell' label='shell命令'>
                 <Mirror
                     autoSize
-                    shellBlock={shellBlock}
+                    shellBlock={shellBlock && shellBlock}
                     setShellBlock={setShellBlock}
                     setIsPrompt={setIsPrompt}
                 />

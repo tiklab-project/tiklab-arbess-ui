@@ -44,18 +44,19 @@ const ConfigAddCodeModal = props =>{
         >
             {
                 lis && lis.map((item,index)=>{
-                    return   <div
-                                onClick={()=>handleClick(item,index)}
-                                className='group-desc group-tpl'
-                                key={item.id}
-                            >
-                                <div className='group-desc-tpl'>
-                                    <div className='tpl'>{item.desc}</div>
-                                </div>
+                    return(
+                        <div
+                            onClick={()=>handleClick(item,index)}
+                            className='group-desc group-tpl'
+                            key={item.id}
+                        >
+                            <div className='group-desc-tpl'>
+                                <div className='tpl'>{item.desc}</div>
                             </div>
+                        </div>
+                    )
                 })
             }
-
         </Modal>
     )
 }

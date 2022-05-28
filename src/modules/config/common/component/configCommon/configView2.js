@@ -16,8 +16,8 @@ const ConfigView2 = props =>{
     const {form, updateConfigure,configDataStore,del,configName,configForm
     } = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch, data,setData,
-        codeData,setCodeData,  formInitialValues,setFormInitialValues
+    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData,codeData,setCodeData,
+        formInitialValues,setFormInitialValues,isAlias,setIsAlias,shellBlock
     } = configDataStore
 
     const inputRef = useRef();
@@ -26,14 +26,13 @@ const ConfigView2 = props =>{
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
     const [index,setIndex] = useState('')  // 配置的插入
     const [newStage,setNewStage] = useState('')
-    const [step,setStep] = useState('')
     const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-        if (step!==''){
+        if (isAlias!==''){
             inputRef.current.focus()
         }
-    },[step])
+    },[isAlias])
 
     useEffect(()=>{
         form.setFieldsValue({
@@ -41,19 +40,19 @@ const ConfigView2 = props =>{
         })
     },[formInitialValues])
 
-    const displayInput = group =>{
-        setStep(group)
+    const displayInput = index =>{
+        setIsAlias(index)
     }
 
     const hiddenInput = () =>{
-        setStep('')
+        setIsAlias('')
     }
 
     const changeInputValue = (e,index) =>{
         //深拷贝一次，可以让arr指向单独的内存空间
         let arr = JSON.parse(JSON.stringify(data))
         for(let i = 0 ;i<arr.length;i++){
-            if( i === index ) {
+            if( i === index  && e.target.value) {
                 arr[i].title = e.target.value
                 setIsPrompt(true)
             }
@@ -137,7 +136,7 @@ const ConfigView2 = props =>{
                 type:deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
-                deployShell:values.deployShell,
+                deployShell:shellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
                 proof:{
@@ -162,59 +161,59 @@ const ConfigView2 = props =>{
     const newStageShow = () =>{
         return data && data.map((item,index)=>{
             return(
-                    <Fragment key={index}>
-                        <div className='group-flow'>
-                            <div className='group-flow_btn' >
-                                <svg
-                                    className="icon group-flow_btn_i"
-                                    aria-hidden="true"
-                                    onClick={()=>insertData(item,index)}
-                                >
-                                    <use xlinkHref="#icon-zengjia"/>
-                                </svg>
-                            </div>
+                <Fragment key={index}>
+                    <div className='group-flow'>
+                        <div className='group-flow_btn' >
+                            <svg
+                                className="icon group-flow_btn_i"
+                                aria-hidden="true"
+                                onClick={()=>insertData(item,index)}
+                            >
+                                <use xlinkHref="#icon-zengjia"/>
+                            </svg>
                         </div>
-                        <div className='group-table'>
-                            <div className='group-head'>
-                                <div className='name'>
-                                    <div  className='label'>
-                                        {
-                                            step !== index ?
-                                                <Fragment>
-                                                    {item.title}
-                                                    &nbsp; &nbsp;
-                                                    <span onClick={()=> displayInput(index)} >
-                                                        <EditOutlined />
-                                                    </span>
-                                                </Fragment>
-                                                :
-                                                <Input
-                                                    type="text"
-                                                    ref={inputRef}
-                                                    onBlur={hiddenInput}
-                                                    style={{width:100}}
-                                                    defaultValue={item.title}
-                                                    onChange={e=>changeInputValue(e,index)}
-                                                />
-                                        }
-                                    </div>
+                    </div>
+                    <div className='group-table'>
+                        <div className='group-head'>
+                            <div className='name'>
+                                <div  className='label'>
+                                    {
+                                        isAlias !== index ?
+                                            <Fragment>
+                                                {item.title}
+                                                &nbsp; &nbsp;
+                                                <span onClick={()=> displayInput(index)} >
+                                                    <EditOutlined />
+                                                </span>
+                                            </Fragment>
+                                            :
+                                            <Input
+                                                type="text"
+                                                ref={inputRef}
+                                                onBlur={hiddenInput}
+                                                style={{width:100}}
+                                                defaultValue={item.title}
+                                                onChange={e=>changeInputValue(e,index)}
+                                            />
+                                    }
                                 </div>
                             </div>
-                            <div className='newStages'>
-                                <div className='newStages-step'>
-                                    <div className='newStages-content'  >
-                                        <div className='newStages-task'>
-                                            <div className='newStages-job'>
-                                                <div className='newStages-job_text' onClick={()=>showStage(item)}>
-                                                    {dataType(item.dataType)}
-                                                </div>
+                        </div>
+                        <div className='newStages'>
+                            <div className='newStages-step'>
+                                <div className='newStages-content'  >
+                                    <div className='newStages-task'>
+                                        <div className='newStages-job'>
+                                            <div className='newStages-job_text' onClick={()=>showStage(item)}>
+                                                {dataType(item.dataType)}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </Fragment>
+                    </div>
+                </Fragment>
             )
         })
     }
@@ -249,7 +248,6 @@ const ConfigView2 = props =>{
                autoComplete = "off"
                onFinish={onFinish}
                onValuesChange={onValuesChange}
-               initialValues={{formInitialValues}}
            >
                <ConfigCodeDrawer
                    setIsPrompt={setIsPrompt}
@@ -261,7 +259,6 @@ const ConfigView2 = props =>{
                    codeBranch={codeBranch}
                    codeName={codeName}
                />
-
                <ConfigNewStageDrawer
                    setIsPrompt={setIsPrompt}
                    newStageDrawer={newStageDrawer}
@@ -274,7 +271,6 @@ const ConfigView2 = props =>{
                    index={index}
                    setIndex={setIndex}
                />
-
                <ConfigFormDetailsDrawer
                    setIsPrompt={setIsPrompt}
                    data={data}
@@ -291,9 +287,7 @@ const ConfigView2 = props =>{
                    configName={configName}
                    configForm={configForm}
                />
-
            </Form>
-
         </div>
     )
 }

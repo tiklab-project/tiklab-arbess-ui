@@ -2,7 +2,8 @@ import React, {Fragment} from "react";
 import {Button, Card} from "antd";
 
 const StructureRightExecute = props => {
-    const {rightExecute,status,leftExecute,runTime,killInstance} = props
+
+    const {status,leftExecute,runTime,killInstance,rightData} = props
     const pipelineId = localStorage.getItem('pipelineId')
     
     const type = item =>{
@@ -12,6 +13,10 @@ const StructureRightExecute = props => {
                     return '通用Git'
                 case 2:
                     return 'Gitee'
+                case 3:
+                    return 'Github'
+                case 4:
+                    return 'Gitlab'
                 case 11:
                     return '单元测试'
                 case 21:
@@ -81,7 +86,7 @@ const StructureRightExecute = props => {
         return(
             <Fragment>
                 {
-                    rightExecute && rightExecute.map((item,index)=>{
+                    rightData && rightData.map((item,index)=>{
                         return(
                             <Card className='mid_group_center-cart' key={index}>
                                 <div className='cart-top'>
@@ -90,7 +95,7 @@ const StructureRightExecute = props => {
                                 <div className='cart-center'>
                                     <div className='cart-center-item'>
                                         <div>状态：{state(index+1)}</div>
-                                        <div>时间:</div>
+                                        <div>时间: </div>
                                     </div>
                                 </div>
                                 <div className='cart-bottom' >
@@ -115,7 +120,7 @@ const StructureRightExecute = props => {
                     <span className='tel_way'>触发方式：{runWay()}</span>
                 </div>
                 <div className="mid_group_top_del">
-                    <Button onClick={()=>cease()}>停止</Button>
+                    <Button onClick={()=>cease()}> 停止 </Button>
                 </div>
             </div>
             <div className="mid_group_center">

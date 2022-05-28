@@ -9,6 +9,7 @@ export class ConfigDataStore {
     @observable codeName = '' // 源码管理git地址
     @observable codeBranch = '' // 源码管理git分支
     @observable shellBlock = '' // linux部署--shell命令
+    @observable isAlias = '' // 更改别名--显示对应文本框
 
     @action
     setIsPrompt = value => {
@@ -43,6 +44,11 @@ export class ConfigDataStore {
     @action
     setShellBlock = value =>{
         this.shellBlock = value
+    }
+
+    @action
+    setIsAlias = value =>{
+        this.isAlias = value
     }
 
 }

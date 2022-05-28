@@ -15,7 +15,6 @@ function createStores() {
         [CONFIG_STORE]:new ConfigStore(),
         [CONFIGDATA_STORE]:new ConfigDataStore(),
         [GITEE_STORE]:new GiteeStore(),
-        [GITEE_STORE]:new GiteeStore(),
         [GITHUB_STORE]:new GithubStore(),
         [PROOF_STORE]:new ProofStore(),
     }

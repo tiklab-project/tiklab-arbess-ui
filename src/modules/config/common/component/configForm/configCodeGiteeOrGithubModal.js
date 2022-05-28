@@ -18,7 +18,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
     const onOk = () =>{
         form.validateFields().then((values) => {
-            if(codeData.desc==='Gitee'){
+            if(codeData.dataType === 2 ){
                 const params = {
                     proofName:values.proofName,
                     accessToken:giteeToken && giteeToken.accessToken

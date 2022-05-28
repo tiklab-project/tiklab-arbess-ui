@@ -17,25 +17,26 @@ const ConfigCode = props =>{
 
 
     const code = () => {
+        console.log(codeData)
         return  codeData ?
             <div className='configView2-sider_code_one'>
                 <div className='configView2-sider_code_one_name' onClick={()=>showDetailsDrawer()}>
                     {codeType()}
                 </div>
                 {
-                    codeData.codeBranch ?
-                        <div className='configView2-sider_code_one_address'>
-                            <div className='branch-title'>
-                                {codeData.codeBranch}
+                    codeData.codeName ?
+                        <div className='configView2-sider_code_one_branch '>
+                            <div className='branch-address'>
+                                {codeData.codeName}
                             </div>
                         </div>
                         : null
                 }
                 {
-                    codeData.codeName ?
-                        <div className='configView2-sider_code_one_branch '>
-                            <div className='branch-address'>
-                                {codeData.codeName}
+                    codeData.codeBranch ?
+                        <div className='configView2-sider_code_one_address'>
+                            <div className='branch-title'>
+                                {codeData.codeBranch}
                             </div>
                         </div>
                         : null

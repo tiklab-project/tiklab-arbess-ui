@@ -4,8 +4,7 @@ export class StructureDataStore {
 
     @observable leftExecute = ''  //左--正在构建
     @observable leftData = []  //左--历史构建列表
-    @observable rightExecute = []  //右--正在构建
-    @observable rightData = []  //右--历史构建列表的构建详情步骤
+    @observable rightData = []  //右--数据
     @observable modeData = []  //历史列表的里面的内容
 
     @action
@@ -16,11 +15,6 @@ export class StructureDataStore {
     @action
     setLeftData = value =>{
         this.leftData = value
-    }
-
-    @action
-    setRightExecute = value =>{
-        this.rightExecute = value
     }
 
     @action

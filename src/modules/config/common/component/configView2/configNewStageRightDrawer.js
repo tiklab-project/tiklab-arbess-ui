@@ -39,7 +39,6 @@ const ConfigNewStageRightDrawer = props =>{
                 dataType:item.tpl
             })
         }
-
         setData(newData)
         setNewStageDrawer(false)
         setTaskFormDrawer(true)

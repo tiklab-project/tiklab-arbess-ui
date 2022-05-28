@@ -143,9 +143,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     onChange={changeGitStoreHouse}
                     onClick={clickGitStoreHouse}
                 >
-                    <Option >
-                        无
-                    </Option>
+                    <Option >无</Option>
                     {
                         storehouseList && storehouseList.map(item=>{
                             return (
@@ -161,9 +159,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     disabled={prohibited}
                     onChange={()=>inputCodeBranchValue()}
                 >
-                    <Option >
-                        无
-                    </Option>
+                    <Option >无</Option>
                     {
                         branchList && branchList.map(item=>{
                             return (

@@ -10,6 +10,7 @@ const ConfigChangeView = props =>{
     const run = () => {
         setIsPrompt(false)
         pipelineStartStructure(pipelineId).then(res=>{
+            console.log(res)
             props.history.push('/home/task/structure')
         })
     }

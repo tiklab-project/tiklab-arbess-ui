@@ -55,9 +55,7 @@ const ConfigDeployDocker = props =>{
                         onChange={changeDeploySelect}
                         onClick={clickFindAllDeploy}
                     >
-                        <Option >
-                            无
-                        </Option>
+                        <Option >无</Option>
                         {
                             allDockerProofList && allDockerProofList.map(item=>{
                                 return(

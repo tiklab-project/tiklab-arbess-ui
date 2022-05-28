@@ -44,7 +44,6 @@ const ConfigCode = props =>{
             <div className='configView1-wrapper-handle' onClick={()=>addCode()}>
                 添加代码源
             </div>
-
     }
 
     return(

@@ -19,8 +19,8 @@ const ConfigDetails = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,codeBranch,setData, codeData,setCodeData,formInitialValues,
-        setFormInitialValues,setShellBlock,
+    const {setIsPrompt,codeName,setCodeName,codeBranch,setData, codeData,setCodeData,
+        formInitialValues, setFormInitialValues,setShellBlock,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -111,12 +111,9 @@ const ConfigDetails = props =>{
 
     // form表单初始化
     useEffect(()=>{
-        const param = {
-            pipelineId:pipelineId
-        }
         let newCode
         const newData = []
-        findAllConfigure(param).then(res=>{
+        findAllConfigure(pipelineId).then(res=>{
             const initialData = res.data
             if(initialData.length === 0 ){
                 setCodeData('')
@@ -137,10 +134,11 @@ const ConfigDetails = props =>{
                             proofDescribe:j.proof && j.proof.proofDescribe ,
                         }
                         Object.assign(formInitialValues,formValue)
-                        localStorage.setItem('structureId',j.codeId)
+                        setCodeName(j.codeName)
+                        localStorage.setItem('codeId',j.codeId)
                         localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
                     }
-                    if(j.type === 11){
+                    else if(j.type === 11){
                         newData.push({
                             dataId:  j.testId,
                             title:j.testAlias,
@@ -148,14 +146,15 @@ const ConfigDetails = props =>{
                         })
                         localStorage.setItem('testId',j.testId)
                     }
-                    if(j.type === 21 || j.type === 22 ){
+                    else if(j.type === 21 || j.type === 22 ){
                         newData.push({
                             dataId: j.structureId,
                             title: j.structureAlias,
                             dataType:j.type,
                         })
+                        localStorage.setItem('structureId',j.structureId)
                     }
-                    if(j.type ===31 || j.type ===32 ){
+                    else if(j.type ===31 || j.type ===32 ){
                         newData.push({
                             dataId:j.deployId,
                             title: j.deployAlias,

@@ -10,18 +10,17 @@ const Structure = props => {
 
     const { structureStore , structureDataStore} = props
 
-    const { findExecState, findStructureState,findAll,selectHistoryDetails,
-        findHistoryLog,deleteHistoryLog,killInstance
+    const { findExecState, findStructureState,findAll,selectHistoryDetails,findHistoryLog,
+        deleteHistoryLog,killInstance
     } = structureStore
 
-    const { leftExecute,setLeftExecute,leftData,setLeftData,rightExecute,setRightExecute,
-        rightData,setRightData,modeData,setModeData
+    const { leftExecute,setLeftExecute,leftData,setLeftData, rightData,setRightData,modeData,
+        setModeData
     } = structureDataStore
 
     const [, forceUpdate] = useState({})
     const [details,setDetails] = useState(0) // 组件显示 -- 历史构建 或者 正在构建
     const [index,setIndex] = useState(0)  // 构建区分
-    const [runTime,setRunTime] = useState(0)
 
     const pipelineId = localStorage.getItem('pipelineId')
     const historyId = localStorage.getItem('historyId')
@@ -58,7 +57,7 @@ const Structure = props => {
                 data()
                 findAll(pipelineId).then(res=>{
                     console.log('正在执行的详情',res)
-                    setRightExecute(res.data)
+                    setRightData(res.data)
                 })
             }else if(res.data=== 0){
                 data()
@@ -144,13 +143,11 @@ const Structure = props => {
                         />
                         <StructureRight
                             details={details}
-                            rightExecute={rightExecute}
                             rightData={rightData}
                             status={status}
                             leftExecute={leftExecute}
                             modeData={modeData}
                             index={index}
-                            runTime={runTime}
                             deleteHistoryLog={deleteHistoryLog}
                             killInstance={killInstance}
                             forceUpdate={forceUpdate}

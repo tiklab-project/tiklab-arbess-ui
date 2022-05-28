@@ -58,7 +58,6 @@ const ConfigAddNewStageModal = props =>{
                 if(name[i] === groupDesc[j]){
                     message.info({
                         content: '已经存在',
-                        className: 'custom-class',
                         style: {
                             marginTop: '9vh',
                             marginLeft:'5vh'
@@ -78,33 +77,6 @@ const ConfigAddNewStageModal = props =>{
         setNewStageVisible(false) 
     }
 
-    const group = ( ) =>{
-        return lis && lis.map(group=>{
-            return(
-                <div className='group' id={group.id} key={group.id}>
-                    <div className='group-title'> {group.title} </div>
-                    <div className='group-content'>
-                        {
-                            group.desc &&  group.desc.map((item,index)=>{
-                                return(
-                                    <div
-                                        onClick={()=>handleClick(group,item,index)}
-                                        className='group-desc'
-                                        key={item.tpl}
-                                    >
-                                        <div className='group-desc-tpl'>
-                                            <div className='tpl'> {item.tel} </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-            )
-        })
-    }
-
     return(
         <Modal
             visible={newStageVisible}
@@ -113,7 +85,32 @@ const ConfigAddNewStageModal = props =>{
             getContainer={false}
             title='选择任务组'
         >
-            {group()}
+            {
+                lis && lis.map(group=>{
+                    return(
+                        <div className='group' id={group.id} key={group.id}>
+                            <div className='group-title'> {group.title} </div>
+                            <div className='group-content'>
+                                {
+                                    group.desc &&  group.desc.map((item,index)=>{
+                                        return(
+                                            <div
+                                                onClick={()=>handleClick(group,item,index)}
+                                                className='group-desc'
+                                                key={item.tpl}
+                                            >
+                                                <div className='group-desc-tpl'>
+                                                    <div className='tpl'> {item.tel} </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    )
+                })
+            }
         </Modal>
     )
 }

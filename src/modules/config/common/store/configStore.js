@@ -66,10 +66,10 @@ export class ConfigStore{
 
     @action
     findAllConfigure = values =>{
-        const params = new FormData()
-        params.append('pipelineId', values.pipelineId)
+        const param = new FormData()
+        param.append('pipelineId', values)
         return new Promise((resolve, reject) => {
-            FindAllConfigure(params).then(res=>{
+            FindAllConfigure(param).then(res=>{
                 console.log('查看所有配置',res)
                 resolve(res.data)
             }).catch(error=>{

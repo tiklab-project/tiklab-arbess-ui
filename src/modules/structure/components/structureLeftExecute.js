@@ -16,17 +16,6 @@ const StructureLeftExecute = props => {
         }
     }
 
-    const runWay = () => {
-        if(leftExecute){
-            switch (leftExecute.runWay) {
-                case 1:
-                    return  '用户点击执行'
-                default:
-                    return  '自动'
-            }
-        }
-    }
-
     const changeMode = () => {
         setIndex(-1)
         setDetails(0)
@@ -37,7 +26,7 @@ const StructureLeftExecute = props => {
             onClick={()=>changeMode()}
             className={ details === 0    ?
                 'history-content-list history-content-list_active'
-                :   'history-content-list'
+                : 'history-content-list'
             }
         >
             <div className='list-title'> 构建 0 </div>
@@ -48,7 +37,9 @@ const StructureLeftExecute = props => {
                         执行人 : {leftExecute && leftExecute.execName}
                     </div>
                 </div>
-                <div className='list-time'> 执行方式 : {runWay()} </div>
+                <div className='list-time'>
+                    执行方式 : {leftExecute && leftExecute.createTime}
+                </div>
             </div>
         </div>
     )

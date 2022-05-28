@@ -18,30 +18,35 @@
 }
 .ant-drawer-body{
     padding: 0;
+    .wrapper-head{
+        height: 45px;
+        background: #fff;
+        border-bottom: 1px solid #d9d9d9;
+        padding: 12px 20px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-weight: 700;
+    }
+    .wrapper-body{
+        height: calc(100vh - 115px);
+        overflow-y: auto;
+        padding: 20px;
+        &-title{
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+    }
 }
-.wrapper-head{
-    height: 60px;
-    background: #fff;
-    border-bottom: 1px solid #d9d9d9;
-    padding: 12px 20px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    font-weight: 700;
-}
-.wrapper-body{
-    height: calc(100vh - 115px);
-    overflow-y: auto;
-    padding: 20px;
-}
+
 
 

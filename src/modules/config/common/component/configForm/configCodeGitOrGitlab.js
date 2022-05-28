@@ -9,12 +9,11 @@ const ConfigCodeGitOrGitlab = props =>{
 
     const {proofStore,configDataStore,configStore}=props
     const {createProof,findAllProof} = proofStore
-    const {setCodeName, setCodeBranch,codeData} = configDataStore
+    const {codeName,setCodeName, setCodeBranch,codeData} = configDataStore
     const {testPass} = configStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
     const [visible,setVisible] = useState(false)
-    const [connection,setConnection] = useState('')
     const gitProofId = localStorage.getItem('gitProofId')
 
     const clickFindAllGit = () =>{
@@ -46,16 +45,26 @@ const ConfigCodeGitOrGitlab = props =>{
     const test = () =>{
         const params = {
             proofId:gitProofId,
-            url:codeData.codeName
+            url:codeName
         }
         testPass(params).then(res=>{
             console.log('res',res.data)
             if(res.data === true){
-                message.success('连接成功')
-                setConnection('success')
+                message.success({
+                    content: '连接成功',
+                    style: {
+                        marginTop: '9vh',
+                        marginLeft:'5vh'
+                    }
+                })
             }else {
-                message.info('连接失败')
-                setConnection('fail')
+                message.error({
+                    content: '连接失败',
+                    style: {
+                        marginTop: '9vh',
+                        marginLeft:'5vh'
+                    }
+                })
             }
         })
     }
@@ -88,9 +97,7 @@ const ConfigCodeGitOrGitlab = props =>{
                         onClick={clickFindAllGit}
                         onChange={changeGitSelect}
                     >
-                        <Option>
-                            无
-                        </Option>
+                        <Option>无</Option>
                         {
                             allGitProofList && allGitProofList.map(item=>{
                                 return(
@@ -109,12 +116,6 @@ const ConfigCodeGitOrGitlab = props =>{
 
             <div className='config-details-gitTest'>
                 <Button onClick={()=>test()}>测试连接</Button>
-                {
-                    connection === 'fail' ? <span>失败</span> : null
-                }
-                {
-                    connection === 'success' ? <span>成功</span> : null
-                }
             </div>
 
             <ConfigCodeGitOrGitlabModal

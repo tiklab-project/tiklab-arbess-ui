@@ -4,7 +4,8 @@ import {CloseOutlined} from "@ant-design/icons";
 import './structureRightLogDrawer.scss'
 
 const StructureRightLogDrawer = props =>{
-    const {visible,setVisible,drawer,taskAlias} = props
+
+    const {visible,setVisible,drawerContent,configName} = props
 
     return(
         <Drawer
@@ -16,7 +17,7 @@ const StructureRightLogDrawer = props =>{
             style={{whiteSpace: 'pre-wrap',marginTop:51}}
         >
             <div className='wrapper-head'>
-                <div>{taskAlias}</div>
+                <div>{drawerContent && drawerContent.taskAlias}</div>
                 <div>
                     <Button type='text' onClick={()=>setVisible(false)}>
                         <CloseOutlined />
@@ -24,7 +25,8 @@ const StructureRightLogDrawer = props =>{
                 </div>
             </div>
             <div className='wrapper-body'>
-                {drawer}
+                <div className='wrapper-body-title'>{configName(drawerContent.taskType)} :</div>
+                <div>  {drawerContent && drawerContent.runLog} </div>
             </div>
         </Drawer>
     )

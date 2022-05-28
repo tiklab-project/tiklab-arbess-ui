@@ -64,7 +64,7 @@ const StructureLeft = props =>{
             <StructureLeftDropdown/>
             <div className='structure-content-left-history'>
                 <div className='history-content'>
-                    {   leftExecute === '' ? ' ' :
+                    {   leftExecute === '' ? null:
                         <StructureLeftExecute
                             leftExecute={leftExecute}
                             details={details}
