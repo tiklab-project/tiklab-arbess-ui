@@ -16,8 +16,8 @@ const ConfigView1 = props =>{
     const {form,del, updateConfigure,configDataStore,configName,configForm,
     } = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData,codeData,setCodeData,
-        formInitialValues,setFormInitialValues,isAlias,setIsAlias,shellBlock
+    const {setIsPrompt, codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,
+        setFormInitialValues,isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,
     } = configDataStore
 
     const inputRef = useRef();
@@ -63,12 +63,11 @@ const ConfigView1 = props =>{
                 data.splice(i,1)
             }
             setData([...data])
-            setIsPrompt(true)
         }
     }
 
-    const inputContent = group =>{
-        return configForm(group.dataType)
+    const inputContent = type =>{
+        return configForm(type)
     }
 
     const dataType = type =>{
@@ -120,7 +119,7 @@ const ConfigView1 = props =>{
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
-                testOrder: values.testOrder,
+                testOrder: unitShellBlock,
             },
             pipelineStructure:{
                 structureId:localStorage.getItem('structureId'),
@@ -128,7 +127,7 @@ const ConfigView1 = props =>{
                 structureAlias:structureAlias,
                 type:structureType,
                 structureAddress:values.structureAddress,
-                structureOrder:values.structureOrder,
+                structureOrder:mavenShellBlock,
             },
             pipelineDeploy:{
                 deployId:localStorage.getItem('deployId'),
@@ -137,7 +136,7 @@ const ConfigView1 = props =>{
                 type:deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
-                deployShell:shellBlock,
+                deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
                 proof:{
@@ -191,7 +190,7 @@ const ConfigView1 = props =>{
                                 <CloseOutlined />
                             </div>
                         </div>
-                        <div className='desc-input'> { inputContent(group) }</div>
+                        <div className='desc-input'> { inputContent(group.dataType) }</div>
                     </div>
                 </div>
             )
@@ -215,13 +214,7 @@ const ConfigView1 = props =>{
                     >
                         <ConfigCode
                             codeData={codeData}
-                            setFormInitialValues={setFormInitialValues}
-                            setCodeData={setCodeData}
                             setCodeVisible={setCodeVisible}
-                            setIsPrompt={setIsPrompt}
-                            setCodeName={setCodeName}
-                            setCodeBranch={setCodeBranch}
-                            formInitialValues={formInitialValues}
                             del={del}
                             configName={configName}
                             configForm={configForm}

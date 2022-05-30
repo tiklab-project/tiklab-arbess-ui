@@ -1,8 +1,8 @@
 import React ,{useState} from "react";
 import {Button, Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import ConfigNewStageLeftDrawer from './configNewStageLeftDrawer'
-import ConfigNewStageRightDrawer from "./configNewStageRightDrawer";
+import ConfigAddNewStageLeftDrawer from './configAddNewStageLeftDrawer'
+import ConfigAddNewStageRightDrawer from "./configAddNewStageRightDrawer";
 
 const leftLis = [
     {
@@ -61,7 +61,7 @@ const rightLis = [
     }
 ]
 
-const ConfigNewStageDrawer = props =>{
+const ConfigAddNewStageDrawer = props =>{
 
     const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,
         data,setData,setIsPrompt,index
@@ -115,12 +115,12 @@ const ConfigNewStageDrawer = props =>{
                     <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
                         <div className="body">
                             <div className="body-menu">
-                                <ConfigNewStageLeftDrawer
+                                <ConfigAddNewStageLeftDrawer
                                     leftLis={leftLis}
                                     opt={opt}
                                     changeAnchor={changeAnchor}
                                 />
-                                <ConfigNewStageRightDrawer
+                                <ConfigAddNewStageRightDrawer
                                     rightLis={rightLis}
                                     onScroll={onScroll}
                                     setNewStageDrawer={setNewStageDrawer}
@@ -140,4 +140,4 @@ const ConfigNewStageDrawer = props =>{
     )
 }
 
-export default ConfigNewStageDrawer
+export default ConfigAddNewStageDrawer

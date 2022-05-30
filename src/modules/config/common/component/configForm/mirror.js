@@ -29,7 +29,7 @@ import 'codemirror/addon/fold/foldgutter.js';
 import 'codemirror/addon/fold/brace-fold.js';
 import 'codemirror/addon/fold/comment-fold.js';
 
-import './configDeployLinuxMirror.scss'
+import './mirror.scss'
 
 
 const Mirror = props =>{

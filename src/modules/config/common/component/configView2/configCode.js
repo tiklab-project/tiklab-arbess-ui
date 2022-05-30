@@ -17,7 +17,6 @@ const ConfigCode = props =>{
 
 
     const code = () => {
-        console.log(codeData)
         return  codeData ?
             <div className='configView2-sider_code_one'>
                 <div className='configView2-sider_code_one_name' onClick={()=>showDetailsDrawer()}>

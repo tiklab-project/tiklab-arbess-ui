@@ -1,7 +1,7 @@
 import React from "react";
 import {message} from "antd";
 
-const ConfigNewStageRightDrawer = props =>{
+const ConfigAddNewStageRightDrawer = props =>{
 
     const {rightLis,onScroll,setNewStageDrawer,setTaskFormDrawer,setNewStage,
         data,setData,setIsPrompt,index
@@ -80,4 +80,4 @@ const ConfigNewStageRightDrawer = props =>{
     )
 }
 
-export default ConfigNewStageRightDrawer
+export default ConfigAddNewStageRightDrawer

@@ -2,8 +2,8 @@ import React, {useState, useRef, Fragment,useEffect} from "react";
 import  '../../style/configView2.scss';
 import ConfigCode from "../configView2/configCode";
 import ConfigAddNewStage from "../configView2/configAddNewStage";
-import ConfigCodeDrawer from "../configView2/configCodeDrawer";
-import ConfigNewStageDrawer from "../configView2/configNewStageDrawer";
+import ConfigAddCodeDrawer from "../configView2/configAddCodeDrawer";
+import ConfigAddNewStageDrawer from "../configView2/configAddNewStageDrawer";
 import ConfigFormDetailsDrawer from "../configView2/configFormDetailsDrawer";
 import {inject, observer} from "mobx-react";
 import {Form, Input, message} from "antd";
@@ -17,14 +17,15 @@ const ConfigView2 = props =>{
     } = props
 
     const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData,codeData,setCodeData,
-        formInitialValues,setFormInitialValues,isAlias,setIsAlias,shellBlock
+        formInitialValues,setFormInitialValues,isAlias,setIsAlias,codeType,setCodeType,
+        linuxShellBlock,unitShellBlock,mavenShellBlock,
     } = configDataStore
 
     const inputRef = useRef();
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
-    const [index,setIndex] = useState('')  // 配置的插入
+    const [index,setIndex] = useState('')  // 配置位置的插入
     const [newStage,setNewStage] = useState('')
     const pipelineId = localStorage.getItem('pipelineId')
 
@@ -119,7 +120,7 @@ const ConfigView2 = props =>{
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
-                testOrder: values.testOrder,
+                testOrder:unitShellBlock,
             },
             pipelineStructure:{
                 structureId:localStorage.getItem('structureId'),
@@ -127,7 +128,7 @@ const ConfigView2 = props =>{
                 structureAlias:structureAlias,
                 type:structureType,
                 structureAddress:values.structureAddress,
-                structureOrder:values.structureOrder,
+                structureOrder:mavenShellBlock,
             },
             pipelineDeploy:{
                 deployId:localStorage.getItem('deployId'),
@@ -136,7 +137,7 @@ const ConfigView2 = props =>{
                 type:deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
-                deployShell:shellBlock,
+                deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
                 proof:{
@@ -220,73 +221,68 @@ const ConfigView2 = props =>{
 
     return (
         <div className='configView2'>
-           <div className='configView2-content'>
-               <ConfigCode
-                   codeData={codeData}
-                   setCodeDrawer={setCodeDrawer}
-                   setNewStage={setNewStage}
-                   setTaskFormDrawer={setTaskFormDrawer}
-                   configName={configName}
-               />
-               <div className='configView2-main'>
-                   <div className='configView2-main_container'>
-                       <div className='configView2-main_group'>
-                           { newStageShow() }
-                           <ConfigAddNewStage
-                               setIndex={setIndex}
-                               setNewStageDrawer={setNewStageDrawer}
-                           />
-                       </div>
-                   </div>
-               </div>
-           </div>
+            <div className='configView2-content'>
+                <ConfigCode
+                    codeData={codeData}
+                    setCodeDrawer={setCodeDrawer}
+                    setNewStage={setNewStage}
+                    setTaskFormDrawer={setTaskFormDrawer}
+                    configName={configName}
+                />
+                <div className='configView2-main'>
+                    <div className='configView2-main_container'>
+                        <div className='configView2-main_group'>
+                            { newStageShow() }
+                            <ConfigAddNewStage
+                                setIndex={setIndex}
+                                setNewStageDrawer={setNewStageDrawer}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-           <Form
-               id='form'
-               form={form}
-               layout='vertical'
-               autoComplete = "off"
-               onFinish={onFinish}
-               onValuesChange={onValuesChange}
-           >
-               <ConfigCodeDrawer
-                   setIsPrompt={setIsPrompt}
-                   codeData={codeData}
-                   form={form}
-                   setCodeData={setCodeData}
-                   codeDrawer={codeDrawer}
-                   setCodeDrawer={setCodeDrawer}
-                   codeBranch={codeBranch}
-                   codeName={codeName}
-               />
-               <ConfigNewStageDrawer
-                   setIsPrompt={setIsPrompt}
-                   newStageDrawer={newStageDrawer}
-                   setNewStageDrawer={setNewStageDrawer}
-                   taskFormDrawer={taskFormDrawer}
-                   setTaskFormDrawer={setTaskFormDrawer}
-                   setNewStage={setNewStage}
-                   data={data}
-                   setData={setData}
-                   index={index}
-                   setIndex={setIndex}
-               />
-               <ConfigFormDetailsDrawer
-                   setIsPrompt={setIsPrompt}
-                   data={data}
-                   form={form}
-                   setData={setData}
-                   del={del}
-                   setTaskFormDrawer={setTaskFormDrawer}
-                   taskFormDrawer={taskFormDrawer}
-                   newStage={newStage}
-                   setCodeName={setCodeName}
-                   setCodeBranch={setCodeBranch}
-                   setCodeData={setCodeData}
-                   setFormInitialValues={setFormInitialValues}
-                   configName={configName}
-                   configForm={configForm}
-               />
+            <Form
+                id='form'
+                form={form}
+                layout='vertical'
+                autoComplete = "off"
+                onFinish={onFinish}
+                onValuesChange={onValuesChange}
+            >
+                <ConfigAddCodeDrawer
+                    setIsPrompt={setIsPrompt}
+                    codeData={codeData}
+                    setCodeData={setCodeData}
+                    codeDrawer={codeDrawer}
+                    setCodeDrawer={setCodeDrawer}
+                    codeBranch={codeBranch}
+                    codeName={codeName}
+                    codeType={codeType}
+                    setCodeType={setCodeType}
+                />
+                <ConfigAddNewStageDrawer
+                    setIsPrompt={setIsPrompt}
+                    newStageDrawer={newStageDrawer}
+                    setNewStageDrawer={setNewStageDrawer}
+                    taskFormDrawer={taskFormDrawer}
+                    setTaskFormDrawer={setTaskFormDrawer}
+                    setNewStage={setNewStage}
+                    data={data}
+                    setData={setData}
+                    index={index}
+                    setIndex={setIndex}
+                />
+                <ConfigFormDetailsDrawer
+                    data={data}
+                    setData={setData}
+                    taskFormDrawer={taskFormDrawer}
+                    setTaskFormDrawer={setTaskFormDrawer}
+                    newStage={newStage}
+                    del={del}
+                    configName={configName}
+                    configForm={configForm}
+                />
            </Form>
         </div>
     )

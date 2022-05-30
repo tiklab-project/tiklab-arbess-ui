@@ -25,8 +25,8 @@ const StructureRightLogDrawer = props =>{
                 </div>
             </div>
             <div className='wrapper-body'>
-                <div className='wrapper-body-title'>{configName(drawerContent.taskType)} :</div>
-                <div>  {drawerContent && drawerContent.runLog} </div>
+                <div className='wrapper-body-title'>{configName(drawerContent && drawerContent.taskType)} :</div>
+                <div> {drawerContent && drawerContent.runLog} </div>
             </div>
         </Drawer>
     )

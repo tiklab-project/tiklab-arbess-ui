@@ -25,7 +25,7 @@ export class StructureStore {
 
     // 判断当前流水线是否在构建
     @action
-    findExecState = async(values) =>{
+    findExecState = async values =>{
         const formData = new FormData()
         formData.append("pipelineId", values)
         const data = await FindExecState(formData);
@@ -34,7 +34,7 @@ export class StructureStore {
 
     //构建状态
     @action
-    findStructureState = async (values) =>{
+    findStructureState = async values=>{
         const param = qs.stringify({pipelineId: values})
         const data = await FindStructureState(param)
         return data.data

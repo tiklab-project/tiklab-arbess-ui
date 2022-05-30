@@ -1,6 +1,6 @@
 import React from "react";
 
-const ConfigNewStageLeftDrawer = props =>{
+const ConfigAddNewStageLeftDrawer = props =>{
 
     const {leftLis,opt,changeAnchor} = props
 
@@ -29,4 +29,4 @@ const ConfigNewStageLeftDrawer = props =>{
     )
 }
 
-export default ConfigNewStageLeftDrawer
+export default ConfigAddNewStageLeftDrawer

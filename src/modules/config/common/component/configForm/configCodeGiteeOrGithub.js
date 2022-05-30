@@ -9,23 +9,17 @@ const {Option} =Select
 const ConfigCodeGiteeOrGithub = props =>{
 
     const {githubStore,proofStore,configStore,configDataStore,giteeStore} = props
-
-    const {getCode, getGithubProof,getAllGithubStorehouse,getGithubBranch,
-    } = githubStore
-
-    const {url, getAllGiteeStorehouse,getGiteeBranch, getGiteeProof,
-    } = giteeStore
-
+    const {getCode, getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
+    const {url, getAllGiteeStorehouse,getGiteeBranch, getGiteeProof} = giteeStore
     const {findAllProof} = proofStore
     const {testPass} = configStore
-    const {setCodeName,setCodeBranch,codeData,formInitialValues} = configDataStore
+    const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
     const [allAuthorizeList,setAllAuthorizeList] = useState([]) // 服务授权
     const [storehouseList,setStorehouseList] = useState([]) // 仓库
     const [branchList,setBranchList] = useState([]) // 分支
-    const [connection,setConnection] = useState('')
     const githubToken = localStorage.getItem('githubToken')
     const giteeToken = JSON.parse(localStorage.getItem('giteeToken'))
     const gitProofId = localStorage.getItem('gitProofId')
@@ -85,7 +79,7 @@ const ConfigCodeGiteeOrGithub = props =>{
     }
 
     const clickFindAllProof = () => {
-        findAllProof(codeData.codeType).then(res=>{
+        findAllProof( codeData.codeType || codeType).then(res=>{
             console.log('GiteeOrGithub凭证',res)
             setAllAuthorizeList(res.data)
         }).catch(err=>{
@@ -93,8 +87,8 @@ const ConfigCodeGiteeOrGithub = props =>{
         })
     }
 
-    const changeProofSelect = value =>{
-        localStorage.setItem('gitProofId',value)
+    const changeProofSelect = (value,e) =>{
+        localStorage.setItem('gitProofId',e.key)
     }
 
     const test = () =>{
@@ -104,10 +98,22 @@ const ConfigCodeGiteeOrGithub = props =>{
         }
         testPass(params).then(res=>{
             console.log('res',res.data)
-            if(res.data === false){
-                setConnection('fail')
+            if(res.data === true){
+                message.success({
+                    content: '连接成功',
+                    style: {
+                        marginTop: '9vh',
+                        marginLeft:'5vh'
+                    }
+                })
             }else {
-                setConnection('success')
+                message.error({
+                    content: '连接失败',
+                    style: {
+                        marginTop: '9vh',
+                        marginLeft:'5vh'
+                    }
+                })
             }
         })
     }
@@ -118,13 +124,13 @@ const ConfigCodeGiteeOrGithub = props =>{
                 <Form.Item label='服务授权/证书' name='gitProofName' >
                     <Select
                         style={{ width: 300 }}
-                        onChange={changeProofSelect}
+                        onChange={(value,e)=>changeProofSelect(value,e)}
                         onClick={clickFindAllProof}
                     >
                         {
                             allAuthorizeList && allAuthorizeList.map(item=>{
                                 return(
-                                    <Option key={item.proofId} value={item.proofId} >
+                                    <Option key={item.proofId} value={item.proofDescribe+" (" +item.proofUsername+")"}>
                                         { item.proofDescribe+ " (" + item.proofUsername + ")"}
                                     </Option>
                                 )
@@ -143,7 +149,6 @@ const ConfigCodeGiteeOrGithub = props =>{
                     onChange={changeGitStoreHouse}
                     onClick={clickGitStoreHouse}
                 >
-                    <Option >无</Option>
                     {
                         storehouseList && storehouseList.map(item=>{
                             return (
@@ -159,7 +164,6 @@ const ConfigCodeGiteeOrGithub = props =>{
                     disabled={prohibited}
                     onChange={()=>inputCodeBranchValue()}
                 >
-                    <Option >无</Option>
                     {
                         branchList && branchList.map(item=>{
                             return (
@@ -172,12 +176,6 @@ const ConfigCodeGiteeOrGithub = props =>{
 
             <div className='config-details-gitTest'>
                 <Button onClick={()=>test()}>测试连接</Button>
-                {
-                    connection === 'fail' ? <span>失败</span> : null
-                }
-                {
-                    connection === 'success' ? <span>成功</span> : null
-                }
             </div>
 
             <ConfigCodeGiteeOrGithubModal

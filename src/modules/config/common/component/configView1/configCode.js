@@ -3,20 +3,14 @@ import {CloseOutlined} from "@ant-design/icons";
 
 const ConfigCode = props =>{
 
-    const {setCodeVisible,codeData,setCodeData,setIsPrompt, setCodeName, setCodeBranch,del,
-        configName,configForm,
-    } = props
+    const {setCodeVisible,codeData,del,configName,configForm,} = props
 
     const addCode = () =>{
         setCodeVisible(true)
     }
 
     const deletePart = () =>{
-        del('git')
-        setCodeData('')
-        setCodeName('')
-        setCodeBranch('')
-        setIsPrompt(true)
+        del(1)
     }
     
     const inputCode = () =>{

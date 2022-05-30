@@ -9,7 +9,7 @@ const ConfigCodeGitOrGitlab = props =>{
 
     const {proofStore,configDataStore,configStore}=props
     const {createProof,findAllProof} = proofStore
-    const {codeName,setCodeName, setCodeBranch,codeData} = configDataStore
+    const {codeName,setCodeName, setCodeBranch,codeData,codeType} = configDataStore
     const {testPass} = configStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
@@ -17,7 +17,7 @@ const ConfigCodeGitOrGitlab = props =>{
     const gitProofId = localStorage.getItem('gitProofId')
 
     const clickFindAllGit = () =>{
-        findAllProof(codeData.codeType).then(res=>{
+        findAllProof(codeData.codeType || codeType).then(res=>{
             console.log('gitOrGitlab凭证',res)
             setAllGitProofList(res.data)
         }).catch(err=>{
@@ -25,9 +25,8 @@ const ConfigCodeGitOrGitlab = props =>{
         })
     }
 
-    const changeGitSelect = value =>{
-        console.log(value)
-        localStorage.setItem('gitProofId',value)
+    const changeGitSelect = (value,e) =>{
+        localStorage.setItem('gitProofId',e.key)
     }
 
     const inputCodeNameValue = e =>{
@@ -48,7 +47,6 @@ const ConfigCodeGitOrGitlab = props =>{
             url:codeName
         }
         testPass(params).then(res=>{
-            console.log('res',res.data)
             if(res.data === true){
                 message.success({
                     content: '连接成功',
@@ -76,6 +74,10 @@ const ConfigCodeGitOrGitlab = props =>{
                 label="git地址"
                 rules={[
                     {
+                        required:true,
+                        message:'请输入git地址'
+                    },
+                    {
                         pattern: /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/,
                         message:'请输入正确的git地址'
                     }
@@ -95,13 +97,12 @@ const ConfigCodeGitOrGitlab = props =>{
                     <Select
                         style={{ width: 300 }}
                         onClick={clickFindAllGit}
-                        onChange={changeGitSelect}
+                        onChange={(value,e)=>changeGitSelect(value,e)}
                     >
-                        <Option>无</Option>
                         {
                             allGitProofList && allGitProofList.map(item=>{
                                 return(
-                                    <Option key={item.proofId} >
+                                    <Option key={item.proofId} value={item.proofName+ "(" + item.proofUsername + ")"}>
                                         { item.proofName+ "(" + item.proofUsername + ")"}
                                     </Option>
                                 )

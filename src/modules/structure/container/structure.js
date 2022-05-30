@@ -15,12 +15,12 @@ const Structure = props => {
     } = structureStore
 
     const { leftExecute,setLeftExecute,leftData,setLeftData, rightData,setRightData,modeData,
-        setModeData
+        setModeData,
     } = structureDataStore
 
-    const [, forceUpdate] = useState({})
+    const [, forceUpdate] = useState({})  // 刷新组件
     const [details,setDetails] = useState(0) // 组件显示 -- 历史构建 或者 正在构建
-    const [index,setIndex] = useState(0)  // 构建区分
+    const [index,setIndex] = useState(0)  // 构建区分显示 -- 构建1 、2、……
 
     const pipelineId = localStorage.getItem('pipelineId')
     const historyId = localStorage.getItem('historyId')

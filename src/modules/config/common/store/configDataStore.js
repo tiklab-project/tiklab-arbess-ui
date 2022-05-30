@@ -8,8 +8,12 @@ export class ConfigDataStore {
     @observable codeData = '' // 源码管理需要渲染的值
     @observable codeName = '' // 源码管理git地址
     @observable codeBranch = '' // 源码管理git分支
-    @observable shellBlock = '' // linux部署--shell命令
     @observable isAlias = '' // 更改别名--显示对应文本框
+    @observable codeType = 1 // 源码管理类型
+    @observable linuxShellBlock = ''
+    @observable unitShellBlock = ''
+    @observable mavenShellBlock = ''
+
 
     @action
     setIsPrompt = value => {
@@ -42,13 +46,28 @@ export class ConfigDataStore {
     }
 
     @action
-    setShellBlock = value =>{
-        this.shellBlock = value
+    setIsAlias = value =>{
+        this.isAlias = value
     }
 
     @action
-    setIsAlias = value =>{
-        this.isAlias = value
+    setCodeType = value =>{
+        this.codeType = value
+    }
+
+    @action
+    setLinuxShellBlock = value =>{
+        this.linuxShellBlock = value
+    }
+
+    @action
+    setUnitShellBlock = value =>{
+        this.unitShellBlock = value
+    }
+
+    @action
+    setMavenShellBlock = value =>{
+        this.mavenShellBlock = value
     }
 
 }

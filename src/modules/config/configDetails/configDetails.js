@@ -1,9 +1,9 @@
-import React,{Fragment,useState,useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import '../common/style/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import {Form, message} from "antd";
+import {Form, Modal} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam'
@@ -19,8 +19,9 @@ const ConfigDetails = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,setCodeName,codeBranch,setData, codeData,setCodeData,
-        formInitialValues, setFormInitialValues,setShellBlock,
+    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,setData,codeData,
+        setCodeData, formInitialValues, setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock, setMavenShellBlock,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -98,7 +99,7 @@ const ConfigDetails = props =>{
 
     useEffect(()=>{
         if(codeData){
-            if(codeData.desc){
+            if(codeData.codeType){
                 const newCode = {
                     codeName:codeName,
                     codeBranch:codeBranch
@@ -118,6 +119,7 @@ const ConfigDetails = props =>{
             if(initialData.length === 0 ){
                 setCodeData('')
                 setData([])
+                setFormInitialValues({})
                 form.resetFields()
             }else {
                 for (let i = 0;i<initialData.length;i++){
@@ -135,6 +137,7 @@ const ConfigDetails = props =>{
                         }
                         Object.assign(formInitialValues,formValue)
                         setCodeName(j.codeName)
+                        setCodeBranch(j.codeBranch)
                         localStorage.setItem('codeId',j.codeId)
                         localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
                     }
@@ -145,6 +148,7 @@ const ConfigDetails = props =>{
                             dataType:j.type,
                         })
                         localStorage.setItem('testId',j.testId)
+                        setUnitShellBlock(`${j.testOrder}`)
                     }
                     else if(j.type === 21 || j.type === 22 ){
                         newData.push({
@@ -153,6 +157,7 @@ const ConfigDetails = props =>{
                             dataType:j.type,
                         })
                         localStorage.setItem('structureId',j.structureId)
+                        setMavenShellBlock(`${j.structureOrder}`)
                     }
                     else if(j.type ===31 || j.type ===32 ){
                         newData.push({
@@ -164,7 +169,7 @@ const ConfigDetails = props =>{
                             dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofIp + ")" ,
                         }
                         Object.assign(formInitialValues,formValue)
-                        setShellBlock(`${j.deployShell}`)
+                        setLinuxShellBlock(`${j.deployShell}`)
                         localStorage.setItem('deployId',j.deployId)
                         localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
                     }
@@ -200,6 +205,7 @@ const ConfigDetails = props =>{
                 delDetail('git')
         }
         setFormInitialValues({...formInitialValues})
+        setIsPrompt(true)
     }
 
     // 统一form表单里面需要删除的值
@@ -210,13 +216,18 @@ const ConfigDetails = props =>{
                 formInitialValues.codeBranch = null
                 formInitialValues.proofDescribe = null
                 formInitialValues.gitProofName = null
+                setCodeData('')
+                setCodeName('')
+                setCodeBranch('')
                 break
             case 'test':
                 formInitialValues.testOrder = null
+                setUnitShellBlock('')
                 break
             case 'structure':
                 formInitialValues.structureAddress = null
                 formInitialValues.structureOrder = null
+                setMavenShellBlock('')
                 break
             case 'deploy':
                 formInitialValues.deployTargetAddress = null
@@ -224,7 +235,7 @@ const ConfigDetails = props =>{
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
-                setShellBlock('')
+                setLinuxShellBlock('')
         }
     }
 
@@ -266,9 +277,9 @@ const ConfigDetails = props =>{
             case 11:
                 return formAll.unit
             case 21:
-                return formAll.maven
+                return formAll.mavenOrNode
             case 22:
-                return formAll.node
+                return formAll.mavenOrNode
             case 31:
                 return formAll.linux
             case 32:

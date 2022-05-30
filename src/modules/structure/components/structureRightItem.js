@@ -24,17 +24,16 @@ const StructureRightItem = props =>{
 
     const state = item =>{
         switch(item.runState){
+            case 1:
+                return status(2)
             case 10:
                 return status(1)
-            case 30 :
-                return status(2)
             default:
                 return status(4)
         }
     }
 
     const log = item => {
-        console.log(item)
         setDrawerContent(item)
         setVisible(true)
     }

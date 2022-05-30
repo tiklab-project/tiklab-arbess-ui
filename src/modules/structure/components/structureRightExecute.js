@@ -3,32 +3,11 @@ import {Button, Card} from "antd";
 
 const StructureRightExecute = props => {
 
-    const {status,leftExecute,runTime,killInstance,rightData} = props
+    const {status,leftExecute,runTime,killInstance,rightData,configName} = props
     const pipelineId = localStorage.getItem('pipelineId')
-    
+
     const type = item =>{
-        if(item){
-            switch(item.taskType){
-                case 1:
-                    return '通用Git'
-                case 2:
-                    return 'Gitee'
-                case 3:
-                    return 'Github'
-                case 4:
-                    return 'Gitlab'
-                case 11:
-                    return '单元测试'
-                case 21:
-                    return 'maven'
-                case 22:
-                    return 'node'
-                case 31:
-                    return 'linux'
-                case 32:
-                    return 'docker'
-            }
-        }
+        return configName(item.taskType)
     }
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
@@ -124,7 +103,7 @@ const StructureRightExecute = props => {
                 </div>
             </div>
             <div className="mid_group_center">
-                {executeDetails()}
+                { executeDetails() }
             </div>
            { logRunLog() }
        </div>

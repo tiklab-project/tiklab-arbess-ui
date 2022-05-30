@@ -2,35 +2,33 @@ import React, {  useState } from "react";
 import { Button } from "antd";
 import formAll from "../configForm/formAll";
 
-const ConfigCodeDrawerBottom = props =>{
+const ConfigAddCodeDrawerBottom = props =>{
 
     const {codeList,codeOpt,setCodeOpt,setCodeData,setCodeDrawer,setIsPrompt,
-        codeName,codeBranch,
+        codeName,codeBranch,codeType,setCodeType,
     } = props
 
     const [codeId,setCodeId] = useState('')
-    const [codeType,setCodeType] = useState(1)
 
     let newCode = { }
 
     const handleClick = (item,index) =>{
+        console.log(codeType)
         setCodeId(index)
         setCodeOpt(index)
         setCodeType(item.id)
     }
 
     const codeBtn = () =>{
-        if(codeType) {
-            newCode = {
-                codeId: codeId,
-                codeType:codeType,
-                codeName: codeName,
-                codeBranch: codeBranch,
-            }
-            setCodeData(newCode)
-            setCodeDrawer(false)
-            setIsPrompt(true)
+        newCode = {
+            codeId: codeId,
+            codeType:codeType,
+            codeName: codeName,
+            codeBranch: codeBranch,
         }
+        setCodeData(newCode)
+        setCodeDrawer(false)
+        setIsPrompt(true)
     }
 
     return(
@@ -64,4 +62,4 @@ const ConfigCodeDrawerBottom = props =>{
     )
 }
 
-export default ConfigCodeDrawerBottom
+export default ConfigAddCodeDrawerBottom

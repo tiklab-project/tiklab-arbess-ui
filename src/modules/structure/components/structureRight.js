@@ -45,6 +45,7 @@ const StructureRight = props =>{
                             status={status}
                             leftExecute={leftExecute}
                             killInstance={killInstance}
+                            configName={configName}
                         />
                         :
                         <StructureRightItem

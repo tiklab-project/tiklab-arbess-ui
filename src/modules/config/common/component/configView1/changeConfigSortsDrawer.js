@@ -121,7 +121,6 @@ const ChangeConfigSortsDrawer = props =>{
             visible={changeSortVisible}
             bodyStyle={{padding:0}}
         >
-
             <nav className="bm-item-list" style={{height:'100%'}}>
                 <div className="menu-wrapper">
                     <div className="menu-wrapper-head">
@@ -147,7 +146,6 @@ const ChangeConfigSortsDrawer = props =>{
                     </div>
                 </div>
             </nav>
-
         </Drawer>
     )
 }

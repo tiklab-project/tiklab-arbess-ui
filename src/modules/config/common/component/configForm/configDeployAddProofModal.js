@@ -10,7 +10,7 @@ const ConfigDeployAddProofModal = props =>{
     const onOk = () =>{
         form.validateFields().then((values) => {
             const params = {
-                proofScope:2,
+                proofScope:31,
                 proofType:values.proofType,
                 proofName:values.proofName,
                 proofIp:values.proofIp,
@@ -24,6 +24,8 @@ const ConfigDeployAddProofModal = props =>{
                 if(res.code!==0){
                     message.info('创建失败')
                 }
+            }).catch(error=>{
+                console.log(error)
             })
         })
         setDeployVisible(false)
@@ -59,7 +61,11 @@ const ConfigDeployAddProofModal = props =>{
                 autoComplete = "off"
                 initialValues={{proofType:"password"}}
             >
-                <Form.Item label='凭证名称' name='proofName'>
+                <Form.Item
+                    label='凭证名称'
+                    name='proofName'
+                    rules={[{required:true, message:'请输入凭证名称'}]}
+                >
                     <Input placeholder='名称'/>
                 </Form.Item>
                 <Form.Item

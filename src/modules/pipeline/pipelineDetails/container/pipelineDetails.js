@@ -7,7 +7,7 @@ import PipelineDetailsLeft from "../components/pipelineDetailsLeft";
 import { inject,observer } from "mobx-react";
 import {Prompt} from "react-router-dom";
 
-const { Content, Sider } = Layout;
+const { Content } = Layout;
 
 const PipelineDetails= (props)=>{
 

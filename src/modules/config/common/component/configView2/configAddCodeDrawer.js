@@ -1,6 +1,6 @@
 import React ,{useState} from "react";
 import {Button, Drawer} from 'antd';
-import ConfigCodeDrawerBottom from "./configCodeDrawerBottom";
+import ConfigAddCodeDrawerBottom from "./configAddCodeDrawerBottom";
 import {CloseOutlined} from '@ant-design/icons'
 
 const codeList = [
@@ -22,9 +22,9 @@ const codeList = [
     }
 ]
 
-const ConfigCodeDrawer = props =>{
+const ConfigAddCodeDrawer = props =>{
 
-    const {setCodeData,setCodeDrawer,codeDrawer,setIsPrompt,codeBranch,codeName,
+    const {setCodeData,codeDrawer,setCodeDrawer,setIsPrompt,codeBranch,codeName, codeType,setCodeType,
     } = props
 
     const [codeOpt,setCodeOpt]=useState(0)
@@ -51,7 +51,7 @@ const ConfigCodeDrawer = props =>{
                     <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
                         <div className="body">
                             <div className="body-menu">
-                                <ConfigCodeDrawerBottom
+                                <ConfigAddCodeDrawerBottom
                                     setIsPrompt={setIsPrompt}
                                     codeList={codeList}
                                     codeOpt={codeOpt}
@@ -60,6 +60,8 @@ const ConfigCodeDrawer = props =>{
                                     setCodeDrawer={setCodeDrawer}
                                     codeBranch={codeBranch}
                                     codeName={codeName}
+                                    codeType={codeType}
+                                    setCodeType={setCodeType}
                                 />
                             </div>
                         </div>
@@ -70,4 +72,4 @@ const ConfigCodeDrawer = props =>{
     )
 }
 
-export default ConfigCodeDrawer
+export default ConfigAddCodeDrawer

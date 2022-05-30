@@ -18,8 +18,9 @@ const Config = props =>{
     const {code} = giteeStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,codeBranch, codeData,setCodeData,formInitialValues,
-        setFormInitialValues,setShellBlock,
+    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,codeData,
+        setCodeData, formInitialValues, setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock, setMavenShellBlock,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -82,6 +83,7 @@ const Config = props =>{
                 delDetail('git')
         }
         setFormInitialValues({...formInitialValues})
+        setIsPrompt(true)
     }
 
     // 统一form表单里面需要删除的值
@@ -92,13 +94,18 @@ const Config = props =>{
                 formInitialValues.codeBranch = null
                 formInitialValues.proofDescribe = null
                 formInitialValues.gitProofName = null
+                setCodeData('')
+                setCodeName('')
+                setCodeBranch('')
                 break
             case 'test':
                 formInitialValues.testOrder = null
+                setUnitShellBlock('')
                 break
             case 'structure':
                 formInitialValues.structureAddress = null
                 formInitialValues.structureOrder = null
+                setMavenShellBlock('')
                 break
             case 'deploy':
                 formInitialValues.deployTargetAddress = null
@@ -106,7 +113,7 @@ const Config = props =>{
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
-                setShellBlock('')
+                setLinuxShellBlock('')
         }
     }
 
@@ -148,15 +155,16 @@ const Config = props =>{
             case 11:
                 return formAll.unit
             case 21:
-                return formAll.maven
+                return formAll.mavenOrNode
             case 22:
-                return formAll.node
+                return formAll.mavenOrNode
             case 31:
                 return formAll.linux
             case 32:
                 return formAll.docker
         }
     }
+
 
     return (
         <Fragment >

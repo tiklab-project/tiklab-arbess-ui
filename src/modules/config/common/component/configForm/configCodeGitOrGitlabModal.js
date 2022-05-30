@@ -58,7 +58,11 @@ const ConfigCodeGitOrGitlabModal= props =>{
                autoComplete = "off"
                initialValues={{proofType:"password"}}
            >
-               <Form.Item label='凭证名称' name='proofName'>
+               <Form.Item
+                   label='凭证名称'
+                   name='proofName'
+                   rules={[{required:true, message:'请输入文件地址'}]}
+               >
                    <Input placeholder='名称'/>
                </Form.Item>
                <Form.Item label='凭证类型' name='proofType' >
