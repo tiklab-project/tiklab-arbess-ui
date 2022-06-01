@@ -1,0 +1,57 @@
+@import "_color";
+
+.ant-drawer{
+    &-content{
+        position: relative;
+        border-left: 1px solid $gray-100;
+        height: 100%;
+        z-index: 1000;
+        background: $white;
+        &-wrapper{
+            position: fixed;
+            height: 100%;
+            top: 56px;
+            background: $white;
+            z-index: 100!important;
+            -webkit-transition: all .35s ease 0s!important;
+            transition: all .35s ease 0s!important;
+        }
+    }
+    &-body{
+        padding: 0;
+        .wrapper{
+            &-head{
+                height: 45px;
+                background: #fff;
+                border-bottom: 1px solid #d9d9d9;
+                padding: 12px 20px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: justify;
+                -webkit-justify-content: space-between;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                font-weight: 700;
+            }
+            &-body{
+                height: calc(100vh - 115px);
+                overflow-y: auto;
+                padding: 0;
+            }
+        }
+    }
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
