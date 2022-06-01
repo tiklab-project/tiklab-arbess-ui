@@ -121,31 +121,25 @@ const ChangeConfigSortsDrawer = props =>{
             visible={changeSortVisible}
             bodyStyle={{padding:0}}
         >
-            <nav className="bm-item-list" style={{height:'100%'}}>
-                <div className="menu-wrapper">
-                    <div className="menu-wrapper-head">
-                        <div>更改配置顺序</div>
-                        <div>
-                            <Button type="text" onClick={()=>setChangeSortVisible(false)}>
-                                <CloseOutlined />
-                            </Button>
-                        </div>
-                    </div>
-                    <div className="menu-wrapper-body" style={{padding:20}}>
-                        <div className="body">
-                            <div className="body-menu">
-                                <Tree
-                                    className="draggable-tree"
-                                    draggable
-                                    blockNode
-                                    onDrop={onDrop}
-                                    treeData={gData}
-                                />
-                            </div>
-                        </div>
+            <div className="wrapper">
+                <div className="wrapper-head">
+                    <div>更改配置顺序</div>
+                    <div>
+                        <Button type="text" onClick={()=>setChangeSortVisible(false)}>
+                            <CloseOutlined />
+                        </Button>
                     </div>
                 </div>
-            </nav>
+                <div className="wrapper-body" style={{padding:20}}>
+                    <Tree
+                        className="draggable-tree"
+                        draggable
+                        blockNode
+                        onDrop={onDrop}
+                        treeData={gData}
+                    />
+                </div>
+            </div>
         </Drawer>
     )
 }

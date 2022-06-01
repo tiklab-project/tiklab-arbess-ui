@@ -12,7 +12,6 @@ const ConfigTestUnit = props =>{
     return(
         <Form.Item name="testOrder">
             <Mirror
-                autoSize
                 shellBlock={unitShellBlock}
                 setShellBlock={setUnitShellBlock}
                 setIsPrompt={setIsPrompt}

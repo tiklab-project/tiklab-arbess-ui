@@ -1,59 +1,34 @@
-import React from 'react'
-import {withRouter} from "react-router-dom";
+import React ,{useState,useEffect} from 'react'
+import {withRouter} from "react-router";
 import './workSpace.scss'
-
-const nods=[
-    {
-        desc:"文件一"
-    },
-    {
-        desc:"文件二"
-    }
-]
-
-const recent=[
-    {
-        desc:"2021"
-    },
-    {
-        desc:"2022"
-    }
-]
+import {inject,observer} from "mobx-react";
+import WorkSpaceNod from "../components/workSpaceNod";
+import WorkSpaceRecord from "../components/workSpaceRecord";
 
 const WorkSpace = props =>{
 
+    const {workSpaceStore} = props
+    const {getSubmitMassage} = workSpaceStore
+    const [recordList,setRecordList] = useState([])
+    const pipelineId = localStorage.getItem('pipelineId')
+
+    useEffect(()=>{
+        getSubmitMassage(pipelineId).then(res=>{
+            console.log(res,'近期提交记录')
+            setRecordList(res.data)
+        }).catch(error=>{
+            console.log(error)
+        })
+    },[pipelineId])
+
     return(
         <div className='workSpace task'>
-            <div className='workSpace-top'>
-                <h1 className='workSpace-top-h1'>节点master上的工作空间</h1>
-                <ul>
-                    {
-                        nods && nods.map(item=>{
-                            return(
-                                <li key={item.desc}>
-                                    {item.desc}
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-            </div>
-            <div className='workSpace-bottom'>
-                <h1 className='workSpace-top-h1'>近期构建历史</h1>
-                <ul>
-                    {
-                        recent && recent.map(item=>{
-                            return(
-                                <li key={item.desc} >
-                                    {item.desc}
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-            </div>
+            <WorkSpaceNod/>
+            <WorkSpaceRecord
+                recordList={recordList}
+            />
         </div>
     )
 }
 
-export default withRouter(WorkSpace)
+export default withRouter(inject('workSpaceStore')(observer(WorkSpace)))

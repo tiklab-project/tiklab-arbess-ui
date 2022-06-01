@@ -119,8 +119,8 @@ const ConfigDetails = props =>{
             if(initialData.length === 0 ){
                 setCodeData('')
                 setData([])
-                setFormInitialValues({})
                 form.resetFields()
+                setFormInitialValues({})
             }else {
                 for (let i = 0;i<initialData.length;i++){
                     const j = initialData[i]
@@ -159,7 +159,7 @@ const ConfigDetails = props =>{
                         localStorage.setItem('structureId',j.structureId)
                         setMavenShellBlock(`${j.structureOrder}`)
                     }
-                    else if(j.type ===31 || j.type ===32 ){
+                    else if(j.type === 31 || j.type === 32 ){
                         newData.push({
                             dataId:j.deployId,
                             title: j.deployAlias,

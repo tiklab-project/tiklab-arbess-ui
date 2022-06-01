@@ -59,7 +59,7 @@ const ConfigView1 = props =>{
     const deletePart = group =>{
         del(group.dataType)
         for (let i = 0 ;i<data.length;i++){
-            if(data[i].dataId === group.dataId){
+            if(data[i].dataType === group.dataType){
                 data.splice(i,1)
             }
             setData([...data])

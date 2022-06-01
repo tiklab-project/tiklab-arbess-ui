@@ -63,8 +63,8 @@ const rightLis = [
 
 const ConfigAddNewStageDrawer = props =>{
 
-    const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,
-        data,setData,setIsPrompt,index
+    const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,data,setData,
+        setIsPrompt,index
     } = props
 
     const [opt,setOpt] = useState(1)
@@ -102,40 +102,38 @@ const ConfigAddNewStageDrawer = props =>{
             visible={newStageDrawer}
             width={600}
         >
-            <nav className="bm-item-list" style={{height:'100%'}}>
-                <div className="menu-wrapper">
-                    <div className="menu-wrapper-head">
-                        <div className="menu-wrapper-head-title"> 选择任务组</div>
-                        <div>
-                            <Button type='text' onClick={()=>setNewStageDrawer(false)}>
-                                <CloseOutlined />
-                            </Button>
-                        </div>
+            <div className="wrapper">
+                <div className="wrapper-head">
+                    <div className="wrapper-head-title"> 选择任务组</div>
+                    <div>
+                        <Button type='text' onClick={()=>setNewStageDrawer(false)}>
+                            <CloseOutlined />
+                        </Button>
                     </div>
-                    <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
-                        <div className="body">
-                            <div className="body-menu">
-                                <ConfigAddNewStageLeftDrawer
-                                    leftLis={leftLis}
-                                    opt={opt}
-                                    changeAnchor={changeAnchor}
-                                />
-                                <ConfigAddNewStageRightDrawer
-                                    rightLis={rightLis}
-                                    onScroll={onScroll}
-                                    setNewStageDrawer={setNewStageDrawer}
-                                    setTaskFormDrawer={setTaskFormDrawer}
-                                    setNewStage={setNewStage}
-                                    data={data}
-                                    setData={setData}
-                                    setIsPrompt={setIsPrompt}
-                                    index={index}
-                                />
-                            </div>
+                </div>
+                <div className="wrapper-body" id="pipeline-menu-wrapper-body" >
+                    <div className="body">
+                        <div className="body-menu">
+                            <ConfigAddNewStageLeftDrawer
+                                leftLis={leftLis}
+                                opt={opt}
+                                changeAnchor={changeAnchor}
+                            />
+                            <ConfigAddNewStageRightDrawer
+                                rightLis={rightLis}
+                                onScroll={onScroll}
+                                setNewStageDrawer={setNewStageDrawer}
+                                setTaskFormDrawer={setTaskFormDrawer}
+                                setNewStage={setNewStage}
+                                data={data}
+                                setData={setData}
+                                setIsPrompt={setIsPrompt}
+                                index={index}
+                            />
                         </div>
                     </div>
                 </div>
-            </nav>
+            </div>
         </Drawer>
     )
 }

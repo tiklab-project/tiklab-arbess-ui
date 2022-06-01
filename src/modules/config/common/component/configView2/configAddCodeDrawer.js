@@ -36,38 +36,35 @@ const ConfigAddCodeDrawer = props =>{
             onClose={()=>setCodeDrawer(false)}
             visible={codeDrawer}
             width={600}
-            mask={false}
         >
-            <nav className="bm-item-list" style={{height:'100%'}}>
-                <div className="menu-wrapper visible">
-                    <div className="menu-wrapper-head">
-                        <div className="menu-wrapper-head-title"> 选择代码源</div>
-                        <div>
-                            <Button type='text' onClick={()=>setCodeDrawer(false)}>
-                                <CloseOutlined />
-                            </Button>
-                        </div>
+            <div className="wrapper">
+                <div className="wrapper-head">
+                    <div className="wrapper-head-title"> 选择代码源</div>
+                    <div>
+                        <Button type='text' onClick={()=>setCodeDrawer(false)}>
+                            <CloseOutlined />
+                        </Button>
                     </div>
-                    <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
-                        <div className="body">
-                            <div className="body-menu">
-                                <ConfigAddCodeDrawerBottom
-                                    setIsPrompt={setIsPrompt}
-                                    codeList={codeList}
-                                    codeOpt={codeOpt}
-                                    setCodeOpt={setCodeOpt}
-                                    setCodeData={setCodeData}
-                                    setCodeDrawer={setCodeDrawer}
-                                    codeBranch={codeBranch}
-                                    codeName={codeName}
-                                    codeType={codeType}
-                                    setCodeType={setCodeType}
-                                />
-                            </div>
+                </div>
+                <div className="wrapper-body" id="pipeline-menu-wrapper-body">
+                    <div className="body">
+                        <div className="body-menu">
+                            <ConfigAddCodeDrawerBottom
+                                setIsPrompt={setIsPrompt}
+                                codeList={codeList}
+                                codeOpt={codeOpt}
+                                setCodeOpt={setCodeOpt}
+                                setCodeData={setCodeData}
+                                setCodeDrawer={setCodeDrawer}
+                                codeBranch={codeBranch}
+                                codeName={codeName}
+                                codeType={codeType}
+                                setCodeType={setCodeType}
+                            />
                         </div>
                     </div>
                 </div>
-            </nav>
+            </div>
         </Drawer>
     )
 }

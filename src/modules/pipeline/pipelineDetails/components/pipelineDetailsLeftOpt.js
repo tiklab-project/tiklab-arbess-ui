@@ -9,7 +9,7 @@ const PipelineDetailsLeftOpt = props =>{
     const onClick = (e,item) => {
         e.preventDefault()
         if(pipelineName!==item.pipelineName){
-            if(!isPrompt){
+            if(!isPrompt){ // 如果为false，直接改变pipelineName和pipelineId
                 localStorage.setItem('pipelineName',item.pipelineName)
                 localStorage.setItem('pipelineId',item.pipelineId)
             }else {

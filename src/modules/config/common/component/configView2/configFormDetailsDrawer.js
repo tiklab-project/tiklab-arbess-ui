@@ -33,33 +33,31 @@ const ConfigFormDetailsDrawer = props =>{
             visible={taskFormDrawer}
             width={600}
         >
-            <nav className="bm-item-list" style={{height:'100%'}}>
-                <div className="menu-wrapper">
-                    <div className="menu-wrapper-head">
-                        <div className="menu-wrapper-head-title">
-                            编辑 &nbsp; &nbsp;
-                           <span className='deleted' onClick={()=>deletePart()}>
+            <div className="wrapper">
+                <div className="wrapper-head">
+                    <div className="wrapper-head-title">
+                        编辑 &nbsp; &nbsp;
+                        <span className='deleted' onClick={()=>deletePart()}>
                                <DeleteOutlined/>
                            </span>
-                        </div>
-                        <div>
-                            <Button type='text' onClick={()=>setTaskFormDrawer(false)}>
-                                <CloseOutlined />
-                            </Button>
-                        </div>
                     </div>
-                    <div className="menu-wrapper-body" id="pipeline-menu-wrapper-body" style={{padding:0}}>
-                        <div className="body">
-                            <div className='body-taskForm'>
-                                <div className='taskForm-top'>
-                                    <div className='taskForm-top_title'>{codeDe()}</div>
-                                </div>
-                                <div> {showTask()} </div>
+                    <div>
+                        <Button type='text' onClick={()=>setTaskFormDrawer(false)}>
+                            <CloseOutlined />
+                        </Button>
+                    </div>
+                </div>
+                <div className="wrapper-body" id="pipeline-menu-wrapper-body" >
+                    <div className="body">
+                        <div className='body-taskForm'>
+                            <div className='taskForm-top'>
+                                <div className='taskForm-top_title'>{codeDe()}</div>
                             </div>
+                            <div> {showTask()} </div>
                         </div>
                     </div>
                 </div>
-            </nav>
+            </div>
         </Drawer>
     )
 }

@@ -6,6 +6,7 @@ import {CONFIGDATA_STORE,ConfigDataStore} from "./modules/config/common/store/co
 import {GITEE_STORE,GiteeStore} from "./modules/config/common/store/giteeStore";
 import {GITHUB_STORE,GithubStore} from "./modules/config/common/store/githubStore";
 import {PROOF_STORE,ProofStore} from "./modules/config/common/store/proofStore";
+import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/workSpace/store/workSpaceStore";
 
 function createStores() {
     return{
@@ -17,6 +18,7 @@ function createStores() {
         [GITEE_STORE]:new GiteeStore(),
         [GITHUB_STORE]:new GithubStore(),
         [PROOF_STORE]:new ProofStore(),
+        [WORKSPACE_STORE]:new WorkSpaceStore(),
     }
 }
 

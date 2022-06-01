@@ -6,8 +6,9 @@ import {observer,inject} from "mobx-react";
 
 const PipelineTabs_all= props=>{
 
-    const {pipelineStore,structureStore}=props
+    const {pipelineStore,structureDataStore,structureStore}=props
     const {findAllPipelineStatus,pipelineList,updatePipeline}=pipelineStore
+    const {pipelineStartStructure,killInstance}=structureStore
 
     //初始化表格
     useEffect(()=>{
@@ -41,11 +42,19 @@ const PipelineTabs_all= props=>{
         props.history.push('/home/task/work')
     }
 
-    //操作
-    const [run,setRun]=useState()
-    const move = record =>{
-        setRun(record.pipelineId)
+    const [run,setRun] = useState('')
+    const work = record =>{
+        pipelineStartStructure(record.pipelineId).then(res=>{
+            setRun(record.pipelineId)
+        })
     }
+
+    const stop = record =>{
+        killInstance(record.pipelineId).then(res=>{
+            setRun('')
+        })
+    }
+
 
     const columns = [
         {
@@ -131,12 +140,12 @@ const PipelineTabs_all= props=>{
             key:"action",
             render:(text ,record,index)=>{
                 return(
-                    <span className=' all-icon' onClick={() => move(record,index)}>
+                    <span className=' all-icon' >
                         {
-                            run===record.pipelineId   ?
-                                <PipelineRun />
+                            run === record.pipelineId ?
+                                <PipelineRun onClick={() => stop(record,index)}/>
                                 :
-                                <svg className="icon" aria-hidden="true" >
+                                <svg className="icon" aria-hidden="true"  onClick={() =>work(record,index)}>
                                     <use xlinkHref="#icon-yunhang1"  />
                                 </svg>
 
@@ -156,4 +165,4 @@ const PipelineTabs_all= props=>{
     )
 }
 
-export default withRouter(inject('pipelineStore','structureStore')(observer(PipelineTabs_all)));
+export default withRouter(inject('pipelineStore','structureDataStore','structureStore')(observer(PipelineTabs_all)));

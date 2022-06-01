@@ -13,7 +13,6 @@ const ConfigAddCodeDrawerBottom = props =>{
     let newCode = { }
 
     const handleClick = (item,index) =>{
-        console.log(codeType)
         setCodeId(index)
         setCodeOpt(index)
         setCodeType(item.id)

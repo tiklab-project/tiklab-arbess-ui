@@ -1,9 +1,3 @@
 @import "~antd/dist/antd.css";
 @import "assets/font_icon/iconfont.css";
-.icon {
-  width: 30px;
-  height: 30px;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
+@import "common/styles/_index.scss";

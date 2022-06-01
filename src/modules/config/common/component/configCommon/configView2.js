@@ -16,9 +16,9 @@ const ConfigView2 = props =>{
     const {form, updateConfigure,configDataStore,del,configName,configForm
     } = props
 
-    const {setIsPrompt, codeName,setCodeName,codeBranch,setCodeBranch,data,setData,codeData,setCodeData,
-        formInitialValues,setFormInitialValues,isAlias,setIsAlias,codeType,setCodeType,
-        linuxShellBlock,unitShellBlock,mavenShellBlock,
+    const {setIsPrompt, codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,
+        setFormInitialValues,isAlias,setIsAlias,codeType,setCodeType,linuxShellBlock,unitShellBlock,
+        mavenShellBlock,
     } = configDataStore
 
     const inputRef = useRef();

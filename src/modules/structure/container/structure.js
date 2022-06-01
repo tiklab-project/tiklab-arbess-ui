@@ -34,6 +34,7 @@ const Structure = props => {
     let interval=null
     useEffect(() => {
         findExecState(pipelineId).then(res=>{
+            console.log(res,'是否在构建中')
             if(res.data === 1 ){
                 setIndex(0)
                 interval = setInterval(() => {
@@ -42,15 +43,10 @@ const Structure = props => {
                         if(res.data!==null){
                             setLeftExecute(res.data)
                             if(res.data.runStatus===1 || res.data.runStatus===30){
-                                setLeftExecute('')
-                                clearInterval(interval)
-                                setDetails(1)
-                                setIndex(1)
+                                stop()
                             }
                         }else{
-                            setLeftExecute('')
-                            setDetails(1)
-                            clearInterval(interval)
+                            stop()
                         }
                     })
                 }, 500)
@@ -95,6 +91,12 @@ const Structure = props => {
                 setRightData([])
             }
         })
+    }
+
+    const stop = () =>{
+        setLeftExecute('')
+        setDetails(1)
+        clearInterval(interval)
     }
 
     const status = i =>{

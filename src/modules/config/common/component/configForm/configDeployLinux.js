@@ -68,7 +68,6 @@ const ConfigDeployLinux = props =>{
             </Form.Item>
             <Form.Item name='deployShell' label='shell命令'>
                 <Mirror
-                    autoSize
                     shellBlock={linuxShellBlock}
                     setShellBlock={setLinuxShellBlock}
                     setIsPrompt={setIsPrompt}

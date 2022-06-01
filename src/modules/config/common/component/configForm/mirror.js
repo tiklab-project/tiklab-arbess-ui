@@ -36,19 +36,21 @@ const Mirror = props =>{
 
     const {shellBlock,setShellBlock,setIsPrompt} = props
 
-    const formRefs = useRef(null);
+    const mirrorRefs = useRef(null);
 
     return (
         <CodeMirror
             value={shellBlock}//内容
-            ref={formRefs}
+            ref={mirrorRefs}
             options={{
                 mode: { name: 'shell', shell: true },//语言
                 lineNumbers: false, // 是否显示行号
                 lineWrapping: true,//是否支持代码折叠
             }}
             onChange={() => {
-                setShellBlock(formRefs.current.editor.getValue())
+                setShellBlock(mirrorRefs.current.editor.getValue())
+            }}
+            onBlur={()=>{
                 setIsPrompt(true)
             }}
         />

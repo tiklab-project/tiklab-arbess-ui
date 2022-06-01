@@ -15,7 +15,6 @@ const ConfigStructureMavenOrNode = props =>{
             </Form.Item>
             <Form.Item name="structureOrder" label="执行命令">
                 <Mirror
-                    autoSize
                     shellBlock={mavenShellBlock}
                     setShellBlock={setMavenShellBlock}
                     setIsPrompt={setIsPrompt}

@@ -24,8 +24,8 @@ const ConfigCode = props =>{
                 </div>
                 {
                     codeData.codeName ?
-                        <div className='configView2-sider_code_one_branch '>
-                            <div className='branch-address'>
+                        <div className='configView2-sider_code_one_address'>
+                            <div className='branch-title'>
                                 {codeData.codeName}
                             </div>
                         </div>
@@ -33,8 +33,8 @@ const ConfigCode = props =>{
                 }
                 {
                     codeData.codeBranch ?
-                        <div className='configView2-sider_code_one_address'>
-                            <div className='branch-title'>
+                        <div className='configView2-sider_code_one_branch '>
+                            <div className='branch-address'>
                                 {codeData.codeBranch}
                             </div>
                         </div>
