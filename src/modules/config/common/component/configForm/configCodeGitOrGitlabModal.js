@@ -5,14 +5,14 @@ const { Option } = Select;
 
 const ConfigCodeGitOrGitlabModal= props =>{
 
-    const {visible,setVisible ,createProof,codeData} = props
+    const {visible,setVisible ,createProof,codeData,codeType} = props
 
     const [form] = Form.useForm();
 
     const onOk = () =>{
         form.validateFields().then((values) => {
             let params
-            if(codeData.codeType === 1 ){
+            if(codeData && codeData.dataType === 1 || codeType  === 1){
                 params = {
                     proofScope:1,
                     proofType:values.proofType,

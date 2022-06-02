@@ -22,7 +22,7 @@ const lis=[
 
 const ConfigAddCodeModal = props =>{
 
-    const {setCodeData,codeVisible,setCodeVisible,setIsPrompt} = props
+    const {setCodeData,codeVisible,setCodeVisible,setIsPrompt,setCodeType} = props
 
     const handleClick = (item,index) =>{
         let newCode
@@ -31,6 +31,7 @@ const ConfigAddCodeModal = props =>{
             codeType:item.id,
         }
         setCodeData(newCode)
+        setCodeType(item.id)
         setCodeVisible(false)
         setIsPrompt(true)
     }

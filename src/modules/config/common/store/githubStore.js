@@ -20,7 +20,7 @@ export class GithubStore {
     @action
     getAccessToken = async value =>{
         const params = new FormData()
-        params.append("code", value.code)
+        params.append("code", value)
         const data = await GetAccessToken(params)
         return data.data
     }

@@ -3,7 +3,7 @@ import '../common/style/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import {Form, Modal} from "antd";
+import {Form, message, Modal} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam'
@@ -21,7 +21,7 @@ const ConfigDetails = props =>{
 
     const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,setData,codeData,
         setCodeData, formInitialValues, setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock, setMavenShellBlock,
+        setUnitShellBlock, setMavenShellBlock,setCodeType,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -29,7 +29,6 @@ const ConfigDetails = props =>{
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
-    const isCode = localStorage.getItem('codeValue')
 
     useEffect(()=>{
         return () =>{
@@ -44,58 +43,58 @@ const ConfigDetails = props =>{
 
     //Gitee和Github授权
     useEffect(() => {
-        const param = {
-            code:isCode
-        }
         if(codeValue){
-            localStorage.setItem('codeValue',codeValue)
-            window.close()
-        }
-        if (isCode && localStorage.getItem('giteeCode')) {
-            code(param).then(res=>{
-                console.log(res,'gitee授权')
-                localStorage.setItem('giteeToken',JSON.stringify(res.data))
-                localStorage.removeItem('giteeCode')
-                localStorage.removeItem('codeValue')
-                window.close()
-            })
-        }
-        if(isCode && localStorage.getItem('githubCode')){
-            getAccessToken(param).then(res=>{
-                console.log(res,'res')
-                if(res.data === null ){
-                }else {
-                    localStorage.setItem('githubToken',res.data)
-                }
-                localStorage.removeItem('githubCode')
-                localStorage.removeItem('codeValue')
-            })
+            if(localStorage.getItem('giteeCode')){
+                code(codeValue).then(res=>{
+                    if(res.data){
+                        localStorage.setItem('giteeToken',JSON.stringify(res.data))
+                        tips(1)
+                    }else{
+                        tips(2)
+                    }
+                    console.log(res,'gitee授权')
+                    localStorage.removeItem('giteeCode')
+                })
+            }else if(localStorage.getItem('githubCode')){
+                getAccessToken(codeValue).then(res=>{
+                    console.log(res,'github')
+                    if(res.data === null ){
+                        tips(2)
+                    }else {
+                        tips(2)
+                        localStorage.setItem('githubToken',res.data)
+                    }
+                    localStorage.removeItem('githubCode')
+                    localStorage.removeItem('codeValue')
+                })
+            }
         }
         if(codeError){
-            localStorage.removeItem('giteeCode')
-            localStorage.removeItem('githubCode')
-            localStorage.removeItem('giteeToken')
-            localStorage.removeItem('githubToken')
-            window.close()
+            tips(2)
         }
-    }, [codeValue,isCode])
+    }, [])
 
-    // useEffect(()=>{
-    //     const param = {
-    //         code:isCode
-    //     }
-    //     console.log('isCode',isCode)
-    //     if(isCode){
-    //         forceUpdate({})
-    //         code(param).then(res=>{
-    //             console.log(res,'gitee授权')
-    //             localStorage.setItem('giteeToken',JSON.stringify(res.data))
-    //             localStorage.removeItem('giteeCode')
-    //             // window.close()
-    //             localStorage.removeItem('codeValue')
-    //         })
-    //     }
-    // },[codeValue,isCode])
+    const tips = i =>{
+        switch (i){
+            case 1:
+                message.success({
+                    content: '授权成功',
+                    style: {
+                        marginTop: '9vh',
+                        marginLeft:'5vh'
+                    }
+                })
+                break
+            case 2:
+                message.error({
+                    content: '授权失败',
+                    style: {
+                        marginTop: '9vh',
+                        marginLeft:'5vh'
+                    }
+                })
+        }
+    }
 
     useEffect(()=>{
         if(codeData){
@@ -138,6 +137,7 @@ const ConfigDetails = props =>{
                         Object.assign(formInitialValues,formValue)
                         setCodeName(j.codeName)
                         setCodeBranch(j.codeBranch)
+                        setCodeType(j.type)
                         localStorage.setItem('codeId',j.codeId)
                         localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
                     }
@@ -271,7 +271,7 @@ const ConfigDetails = props =>{
             case 2:
                 return formAll.giteeOrGithub
             case 3:
-                return formAll.gitOrGitlab
+                return formAll.giteeOrGithub
             case 4:
                 return formAll.gitOrGitlab
             case 11:

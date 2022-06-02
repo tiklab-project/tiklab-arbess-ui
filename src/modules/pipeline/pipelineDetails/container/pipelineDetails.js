@@ -16,8 +16,6 @@ const PipelineDetails= (props)=>{
     const {isPrompt,setIsPrompt} = configDataStore
     const pipelineName = localStorage.getItem('pipelineName')
     const pipelineId = localStorage.getItem('pipelineId')
-
-
     const [visible,setVisible] = useState(false)
 
     useEffect(()=>{

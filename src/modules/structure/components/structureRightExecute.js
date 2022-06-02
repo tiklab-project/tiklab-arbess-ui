@@ -3,7 +3,7 @@ import {Button, Card} from "antd";
 
 const StructureRightExecute = props => {
 
-    const {status,leftExecute,runTime,killInstance,rightData,configName} = props
+    const {status,leftExecute,runTime,killInstance,rightExecute,configName} = props
     const pipelineId = localStorage.getItem('pipelineId')
 
     const type = item =>{
@@ -65,7 +65,7 @@ const StructureRightExecute = props => {
         return(
             <Fragment>
                 {
-                    rightData && rightData.map((item,index)=>{
+                    rightExecute && rightExecute.map((item,index)=>{
                         return(
                             <Card className='mid_group_center-cart' key={index}>
                                 <div className='cart-top'>

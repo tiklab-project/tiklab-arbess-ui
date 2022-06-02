@@ -21,7 +21,7 @@ export class GiteeStore {
     @action
     code =async value =>{
         const params = new FormData()
-        params.append("code", value.code)
+        params.append("code", value)
         const data = await Code(params);
         return data.data;
     }

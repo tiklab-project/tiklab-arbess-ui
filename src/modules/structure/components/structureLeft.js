@@ -14,7 +14,9 @@ const StructureLeft = props =>{
                 case 1:
                     return status(2)
                 case 30:
-                    return  status(1)
+                    return status(1)
+                default:
+                    return status(4)
             }
         }
     }

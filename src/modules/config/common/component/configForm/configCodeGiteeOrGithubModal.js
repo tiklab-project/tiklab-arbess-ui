@@ -4,8 +4,8 @@ import {PlusOutlined} from "@ant-design/icons";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const { visible,setVisible,formInitialValues,codeData,url,getGiteeProof,giteeToken,getCode,
-        getGithubProof,githubToken
+    const { visible,setVisible,formInitialValues,codeType,codeData,url,getGiteeProof,
+        giteeToken, getCode, getGithubProof,githubToken
     }=props
 
     const [form] = Form.useForm()
@@ -18,7 +18,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
     const onOk = () =>{
         form.validateFields().then((values) => {
-            if(codeData.dataType === 2 ){
+            if(codeData && codeData.dataType === 2 || codeType  === 2){
                 const params = {
                     proofName:values.proofName,
                     accessToken:giteeToken && giteeToken.accessToken
@@ -55,9 +55,10 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
 
     const goUrl = () =>{
-        if(codeData.desc==='Gitee' ){
+        if(codeData && codeData.dataType === 2 || codeType  === 2){
             localStorage.setItem('giteeCode','giteeCode')
             url().then(res=>{
+                // window.location.href=res.data
                 window.open(res.data)
             }).catch(error=>{
                 console.log(error)
@@ -65,7 +66,8 @@ const ConfigCodeGiteeOrGithubModal = props =>{
         }else {
             localStorage.setItem('githubCode','githubCode')
             getCode().then(res=>{
-                window.open(res.data)
+                window.location.href=res.data
+                // window.open(res.data)
             }).catch(error=>{
                 console.log(error)
             })

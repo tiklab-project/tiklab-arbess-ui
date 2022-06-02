@@ -79,7 +79,7 @@ const ConfigCodeGiteeOrGithub = props =>{
     }
 
     const clickFindAllProof = () => {
-        findAllProof( codeData.codeType || codeType).then(res=>{
+        findAllProof(codeData && codeData.dataType || codeType  ).then(res=>{
             console.log('GiteeOrGithub凭证',res)
             setAllAuthorizeList(res.data)
         }).catch(err=>{
@@ -183,6 +183,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 formInitialValues={formInitialValues}
+                codeType={codeType}
                 codeData={codeData}
                 getCode={getCode}
                 getGithubProof={getGithubProof}

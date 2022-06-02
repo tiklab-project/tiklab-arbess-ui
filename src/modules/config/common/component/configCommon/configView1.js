@@ -18,6 +18,7 @@ const ConfigView1 = props =>{
 
     const {setIsPrompt, codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,
         setFormInitialValues,isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,
+        setCodeType,
     } = configDataStore
 
     const inputRef = useRef();
@@ -237,6 +238,7 @@ const ConfigView1 = props =>{
                         setCodeVisible={setCodeVisible}
                         setCodeData={setCodeData}
                         setIsPrompt={setIsPrompt}
+                        setCodeType={setCodeType}
                     />
                     <ChangeConfigSortsDrawer
                         changeSortVisible={changeSortVisible}

@@ -15,7 +15,7 @@ const Structure = props => {
     } = structureStore
 
     const { leftExecute,setLeftExecute,leftData,setLeftData, rightData,setRightData,modeData,
-        setModeData,
+        setModeData,rightExecute,setRightExecute,
     } = structureDataStore
 
     const [, forceUpdate] = useState({})  // 刷新组件
@@ -50,20 +50,18 @@ const Structure = props => {
                         }
                     })
                 }, 500)
-                data()
                 findAll(pipelineId).then(res=>{
-                    console.log('正在执行的详情',res)
-                    setRightData(res.data)
+                    console.log('正在执行的详情',res.data)
+                    setRightExecute(res.data)
                 })
+                data()
             }else if(res.data=== 0){
                 data()
                 setIndex(1)
                 setDetails(1)
             }
         })
-        return ()=> {
-            clearInterval(interval)
-        }
+        return ()=> clearInterval(interval)
     }, [pipelineId,historyId,details])
 
     const data = () => {
@@ -86,7 +84,7 @@ const Structure = props => {
                     setLeftData([...left])
                     setRightData([...right])
                 })
-            }else {
+            }else{
                 setLeftData([])
                 setRightData([])
             }
@@ -146,6 +144,7 @@ const Structure = props => {
                         <StructureRight
                             details={details}
                             rightData={rightData}
+                            rightExecute={rightExecute}
                             status={status}
                             leftExecute={leftExecute}
                             modeData={modeData}
