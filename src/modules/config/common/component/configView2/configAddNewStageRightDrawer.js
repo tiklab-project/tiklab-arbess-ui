@@ -64,7 +64,7 @@ const ConfigAddNewStageRightDrawer = props =>{
                                                     onClick={()=>handleClick(group,item,groupIndex)}
                                                 >
                                                     <div className='group-desc-tpl'>
-                                                        <div className='tpl'>{item.tel}</div>
+                                                        <div className='group-tpl'>{item.tel}</div>
                                                     </div>
                                                 </div>
                                             )

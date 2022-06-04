@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Form, Input, message, Select} from "antd";
+import {Modal, Form, Input, message, Select, Button} from "antd";
 const { Option } = Select;
 
 const ConfigDeployAddProofModal = props =>{
@@ -19,16 +19,9 @@ const ConfigDeployAddProofModal = props =>{
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe,
             }
-            createProof(params).then(res=>{
-                console.log('创建部署凭证',res)
-                if(res.code!==0){
-                    message.info('创建失败')
-                }
-            }).catch(error=>{
-                console.log(error)
-            })
+            createProof(params)
+            setDeployVisible(false)
         })
-        setDeployVisible(false)
     }
 
     const validate = (rule,value) =>{
@@ -118,6 +111,7 @@ const ConfigDeployAddProofModal = props =>{
                     <Input.TextArea  placeholder='备注'/>
                 </Form.Item>
             </Form>
+            <Button>连接测试</Button>
         </Modal>
     )
 }

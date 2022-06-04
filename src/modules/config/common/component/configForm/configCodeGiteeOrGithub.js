@@ -8,11 +8,10 @@ const {Option} =Select
 
 const ConfigCodeGiteeOrGithub = props =>{
 
-    const {githubStore,proofStore,configStore,configDataStore,giteeStore} = props
+    const {githubStore,proofStore,configDataStore,giteeStore} = props
     const {getCode, getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url, getAllGiteeStorehouse,getGiteeBranch, getGiteeProof} = giteeStore
     const {findAllProof} = proofStore
-    const {testPass} = configStore
     const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType} = configDataStore
 
     const [visible,setVisible] = useState(false)
@@ -32,14 +31,14 @@ const ConfigCodeGiteeOrGithub = props =>{
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
-        if(codeData.codeType===2){
-            getAllGiteeStorehouse(localStorage.getItem('gitProofId')).then(res=>{
+        if(codeType  === 2){
+            getAllGiteeStorehouse(gitProofId).then(res=>{
                 setStorehouseList(res.data)
             }).catch(error=>{
                 console.log(error)
             })
         }else {
-            getAllGithubStorehouse(localStorage.getItem('gitProofId')).then(res=>{
+            getAllGithubStorehouse(gitProofId).then(res=>{
                 setStorehouseList(res.data)
             }).catch(error=>{
                 console.log(error)
@@ -53,7 +52,7 @@ const ConfigCodeGiteeOrGithub = props =>{
             projectName:values,
             proofId:localStorage.getItem('gitProofId')
         }
-        if(codeData.dataType === 2){
+        if(codeType  === 2){
             getGiteeBranch(params).then(res=>{
                 setBranchList(res.data)
             }).catch(error=>{
@@ -79,7 +78,7 @@ const ConfigCodeGiteeOrGithub = props =>{
     }
 
     const clickFindAllProof = () => {
-        findAllProof(codeData && codeData.dataType || codeType  ).then(res=>{
+        findAllProof(codeType).then(res=>{
             console.log('GiteeOrGithub凭证',res)
             setAllAuthorizeList(res.data)
         }).catch(err=>{
@@ -91,32 +90,6 @@ const ConfigCodeGiteeOrGithub = props =>{
         localStorage.setItem('gitProofId',e.key)
     }
 
-    const test = () =>{
-        const params = {
-            proofId:gitProofId,
-            url:codeData.codeName
-        }
-        testPass(params).then(res=>{
-            console.log('res',res.data)
-            if(res.data === true){
-                message.success({
-                    content: '连接成功',
-                    style: {
-                        marginTop: '9vh',
-                        marginLeft:'5vh'
-                    }
-                })
-            }else {
-                message.error({
-                    content: '连接失败',
-                    style: {
-                        marginTop: '9vh',
-                        marginLeft:'5vh'
-                    }
-                })
-            }
-        })
-    }
 
     return(
         <Fragment>
@@ -174,17 +147,12 @@ const ConfigCodeGiteeOrGithub = props =>{
                 </Select>
             </Form.Item>
 
-            <div className='config-details-gitTest'>
-                <Button onClick={()=>test()}>测试连接</Button>
-            </div>
-
             <ConfigCodeGiteeOrGithubModal
                 findAllProof={findAllProof}
                 visible={visible}
                 setVisible={setVisible}
                 formInitialValues={formInitialValues}
                 codeType={codeType}
-                codeData={codeData}
                 getCode={getCode}
                 getGithubProof={getGithubProof}
                 githubToken={githubToken}

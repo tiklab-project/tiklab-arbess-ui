@@ -1,22 +1,39 @@
 import React from "react";
 import {Modal} from "antd";
+import ConfigCodeOrNewStage from "./configCodeOrNewStage";
 
 const lis=[
     {
         id:1,
-        desc:'通用Git'
+        title:'Git',
+        desc:[
+            {
+                type:1,
+                tel:'通用Git'
+            },
+            {
+                type:2,
+                tel:'Gitee'
+            },
+            {
+                type:4,
+                tel: 'Gitlab'
+            },
+            {
+                type:3,
+                tel: 'Github'
+            }
+        ]
     },
     {
         id:2,
-        desc:'Gitee'
-    },
-    {
-        id:4,
-        desc: 'Gitlab'
-    },
-    {
-        id:3,
-        desc: 'Github'
+        title:'SVN',
+        desc: [
+            {
+                type:5,
+                tel:'SVN'
+            }
+        ]
     }
 ]
 
@@ -24,14 +41,14 @@ const ConfigAddCodeModal = props =>{
 
     const {setCodeData,codeVisible,setCodeVisible,setIsPrompt,setCodeType} = props
 
-    const handleClick = (item,index) =>{
+    const handleClick = (group,item,index) =>{
         let newCode
         newCode = {
             codeId:index,
-            codeType:item.id,
+            codeType:item.type,
         }
         setCodeData(newCode)
-        setCodeType(item.id)
+        setCodeType(item.type)
         setCodeVisible(false)
         setIsPrompt(true)
     }
@@ -43,21 +60,10 @@ const ConfigAddCodeModal = props =>{
             footer={[]}
             title='选择代码源'
         >
-            {
-                lis && lis.map((item,index)=>{
-                    return(
-                        <div
-                            onClick={()=>handleClick(item,index)}
-                            className='group-desc group-tpl'
-                            key={item.id}
-                        >
-                            <div className='group-desc-tpl'>
-                                <div className='tpl'>{item.desc}</div>
-                            </div>
-                        </div>
-                    )
-                })
-            }
+            <ConfigCodeOrNewStage
+                lis={lis}
+                handleClick={handleClick}
+            />
         </Modal>
     )
 }

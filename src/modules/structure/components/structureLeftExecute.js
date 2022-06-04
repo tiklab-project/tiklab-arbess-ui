@@ -17,7 +17,7 @@ const StructureLeftExecute = props => {
     }
 
     const changeMode = () => {
-        setIndex(-1)
+        setIndex(0)
         setDetails(0)
     }
 

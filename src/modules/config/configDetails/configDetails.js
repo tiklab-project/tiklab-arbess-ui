@@ -123,7 +123,7 @@ const ConfigDetails = props =>{
             }else {
                 for (let i = 0;i<initialData.length;i++){
                     const j = initialData[i]
-                    if(j.type < 5){
+                    if(j.type < 6){
                         newCode = {
                             codeId:j.codeId,
                             codeType:j.type,
@@ -250,6 +250,8 @@ const ConfigDetails = props =>{
                 return 'Github'
             case 4:
                 return 'Gitlab'
+            case 5:
+                return 'SVN'
             case 11:
                 return '单元测试'
             case 21:
@@ -274,6 +276,8 @@ const ConfigDetails = props =>{
                 return formAll.giteeOrGithub
             case 4:
                 return formAll.gitOrGitlab
+            case 5:
+                return formAll.svn
             case 11:
                 return formAll.unit
             case 21:

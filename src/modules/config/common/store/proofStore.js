@@ -20,8 +20,11 @@ export class ProofStore{
             proofPort:values.proofPort,
             proofIp:values.proofIp,
         }
-        const data = await CreateProof(params)
-        return data.data
+        CreateProof(params).then(res=>{
+            console.log('创建部署凭证',res)
+        }).catch(error=>{
+            console.log(error)
+        })
     }
 
     @action

@@ -17,7 +17,6 @@ const Structure=AsyncComponent(()=>import('./modules/structure/container/structu
 const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pipelineDel-Rename'))
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
-// const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/try'))
 
 export const routers=[
     {

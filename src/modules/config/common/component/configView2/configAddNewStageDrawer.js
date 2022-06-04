@@ -102,16 +102,16 @@ const ConfigAddNewStageDrawer = props =>{
             visible={newStageDrawer}
             width={600}
         >
-            <div className="wrapper">
-                <div className="wrapper-head">
-                    <div className="wrapper-head-title"> 选择任务组</div>
+            <div className='wrapper'>
+                <div className='wrapper-head'>
+                    <div className='wrapper-head-title'> 选择任务组</div>
                     <div>
                         <Button type='text' onClick={()=>setNewStageDrawer(false)}>
                             <CloseOutlined />
                         </Button>
                     </div>
                 </div>
-                <div className="wrapper-body" id="pipeline-menu-wrapper-body" >
+                <div className='wrapper-body'>
                     <div className="body">
                         <div className="body-menu">
                             <ConfigAddNewStageLeftDrawer

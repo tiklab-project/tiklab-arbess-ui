@@ -1,5 +1,6 @@
 import React from "react";
 import {Modal,message} from "antd";
+import ConfigCodeOrNewStage from "./configCodeOrNewStage";
 import './configAddNewStageModal.scss'
 
 const lis=[
@@ -8,7 +9,7 @@ const lis=[
         title:'测试',
         desc:[
             {
-                tpl: 11,
+                type: 11,
                 tel:'单元测试',
             }
         ]
@@ -19,11 +20,11 @@ const lis=[
         desc:[
             {
 
-                tpl: 21,
+                type: 21,
                 tel:'maven'
             },
             {
-                tpl: 22,
+                type: 22,
                 tel:'node'
             }
         ]
@@ -33,11 +34,11 @@ const lis=[
         title: '部署',
         desc:[
             {
-                tpl:31 ,
+                type:31 ,
                 tel:'linux'
             },
             {
-                tpl:32 ,
+                type:32 ,
                 tel:'docker'
             },
         ]
@@ -46,13 +47,12 @@ const lis=[
 
 const ConfigAddNewStageModal = props =>{
 
-    const {newStageVisible,setNewStageVisible,data,setData,setIsPrompt
-    } = props
+    const {newStageVisible,setNewStageVisible,data,setData,setIsPrompt} = props
 
     const handleClick = (group,item,index)=>{
         const newData = [...data]
         const name = data && data.map(item => item.dataType);
-        const groupDesc = group.desc.map(item=>item.tpl)
+        const groupDesc = group.desc.map(item=>item.type)
         for(let i =0;i<name.length;i++){
             for(let j=0;j<groupDesc.length;j++){
                 if(name[i] === groupDesc[j]){
@@ -70,7 +70,7 @@ const ConfigAddNewStageModal = props =>{
         newData.push({
             dataId:index,
             title:group.title,
-            dataType:item.tpl
+            dataType:item.type
         })
         setData(newData)
         setIsPrompt(true)
@@ -85,32 +85,10 @@ const ConfigAddNewStageModal = props =>{
             getContainer={false}
             title='选择任务组'
         >
-            {
-                lis && lis.map(group=>{
-                    return(
-                        <div className='group' id={group.id} key={group.id}>
-                            <div className='group-title'> {group.title} </div>
-                            <div className='group-content'>
-                                {
-                                    group.desc &&  group.desc.map((item,index)=>{
-                                        return(
-                                            <div
-                                                onClick={()=>handleClick(group,item,index)}
-                                                className='group-desc'
-                                                key={item.tpl}
-                                            >
-                                                <div className='group-desc-tpl'>
-                                                    <div className='tpl'> {item.tel} </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>
-                    )
-                })
-            }
+            <ConfigCodeOrNewStage
+                lis={lis}
+                handleClick={handleClick}
+            />
         </Modal>
     )
 }

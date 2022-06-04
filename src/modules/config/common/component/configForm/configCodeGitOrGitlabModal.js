@@ -12,7 +12,7 @@ const ConfigCodeGitOrGitlabModal= props =>{
     const onOk = () =>{
         form.validateFields().then((values) => {
             let params
-            if(codeData && codeData.dataType === 1 || codeType  === 1){
+            if(codeType === 1){
                 params = {
                     proofScope:1,
                     proofType:values.proofType,
@@ -21,7 +21,7 @@ const ConfigCodeGitOrGitlabModal= props =>{
                     proofPassword:values.proofPassword,
                     proofDescribe:values.proofDescribe
                 }
-            }else if(codeData.codeType === 4 ){
+            }else{
                 params = {
                     proofScope:4,
                     proofType:values.proofType,
@@ -31,12 +31,7 @@ const ConfigCodeGitOrGitlabModal= props =>{
                     proofDescribe:values.proofDescribe
                 }
             }
-            createProof(params).then(res=>{
-                console.log('创建源码凭证',res)
-                if(res.code!==0){
-                    message.info('创建失败')
-                }
-            })
+            createProof(params)
             setVisible(false)
         })
     }

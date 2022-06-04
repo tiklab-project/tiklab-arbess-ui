@@ -282,17 +282,14 @@
             display: -webkit-flex;
             display: -ms-flexbox;
             display: flex;
-            height: calc(100vh - 155px);
+            height: calc(100vh - 115px);
             overflow: hidden;
             &-menu{
                 display: flex;
                 flex-direction: row;
                 width: 100%;
-                &_bottom{
-                    padding-left: 20px;
-                    .gray{
-                        background: #eaeaea;
-                    }
+                .gray{
+                    background: #eaeaea;
                 }
                 &_form{
                     margin-top: 35px;

@@ -28,10 +28,7 @@ const ConfigDeployDocker = props =>{
     }
 
     const clickFindAllDeploy = () =>{
-        const param = {
-            type :2
-        }
-        findAllProof(param).then(res=>{
+        findAllProof(32).then(res=>{
             console.log('docker凭证',res)
             setAllDockerProofList(res.data)
         }).catch(err=>{

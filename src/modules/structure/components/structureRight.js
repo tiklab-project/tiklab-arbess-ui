@@ -35,6 +35,15 @@ const StructureRight = props =>{
         }
     }
 
+    const runWay = i => {
+        switch (i) {
+            case 1:
+                return '手动'
+            default:
+                return  '自动'
+        }
+    }
+
     return(
         <div className='structure-content-right'>
             <div className='structure-content-right-mid'>
@@ -44,9 +53,11 @@ const StructureRight = props =>{
                             rightExecute={rightExecute}
                             rightData={rightData}
                             status={status}
+                            index={index}
                             leftExecute={leftExecute}
                             killInstance={killInstance}
                             configName={configName}
+                            runWay={runWay}
                         />
                         :
                         <StructureRightItem
@@ -60,6 +71,7 @@ const StructureRight = props =>{
                             historyId={historyId}
                             deleteHistoryLog={deleteHistoryLog}
                             configName={configName}
+                            runWay={runWay}
                         />
                 }
             </div>

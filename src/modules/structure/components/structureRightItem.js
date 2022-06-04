@@ -4,18 +4,11 @@ import {Button, Card, Popconfirm} from "antd";
 const StructureRightItem = props =>{
 
     const {rightData,status,historyId,deleteHistoryLog,forceUpdate, modeData,index,
-        setVisible,setDrawerContent,configName,
+        setVisible,setDrawerContent,configName,runWay,
     } = props
 
-    const runWay = () => {
-        if(modeData){
-            switch (modeData.runWay) {
-                case 1:
-                    return '手动'
-                default:
-                    return  '自动'
-            }
-        }
+    const triggerMode = () => {
+        return runWay (modeData.runWay)
     }
 
     const type = item =>{
@@ -52,7 +45,7 @@ const StructureRightItem = props =>{
                         return(
                             <Card className='mid_group_center-cart' key={index}>
                                 <div className='cart-top'>
-                                    {item.taskAlias} -- {type(item)}
+                                    {item.taskAlias} -- { type(item) }
                                 </div>
                                 <div className='cart-center'>
                                     <div className='cart-center-item'>
@@ -79,7 +72,7 @@ const StructureRightItem = props =>{
                 <div className='mid_group_top_tel'>
                     <span className='tel_time'>构建 {index}</span>
                     <span className='tel_time'>执行时长：{modeData && modeData.execTime}</span>
-                    <span className='tel_way'>触发方式：{runWay()}</span>
+                    <span className='tel_way'>触发方式：{triggerMode()}</span>
                 </div>
                 <div className="mid_group_top_del">
                     <Popconfirm

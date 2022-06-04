@@ -17,7 +17,7 @@ const ConfigCodeGitOrGitlab = props =>{
     const gitProofId = localStorage.getItem('gitProofId')
 
     const clickFindAllGit = () =>{
-        findAllProof(codeData && codeData.codeType || codeType).then(res=>{
+        findAllProof(codeType).then(res=>{
             console.log('gitOrGitlab凭证',res)
             setAllGitProofList(res.data)
         }).catch(err=>{
@@ -42,29 +42,25 @@ const ConfigCodeGitOrGitlab = props =>{
     }
 
     const test = () =>{
-        const params = {
-            proofId:gitProofId,
-            url:codeName
-        }
-        testPass(params).then(res=>{
-            if(res.data === true){
-                message.success({
-                    content: '连接成功',
-                    style: {
-                        marginTop: '9vh',
-                        marginLeft:'5vh'
-                    }
-                })
-            }else {
-                message.error({
-                    content: '连接失败',
-                    style: {
-                        marginTop: '9vh',
-                        marginLeft:'5vh'
-                    }
-                })
+        if(codeName){
+            const params = {
+                proofId:gitProofId,
+                url:codeName
             }
-        })
+            testPass(params).then(res=>{
+                if(res.data === true){
+                    message.success({
+                        content: '连接成功',
+                        className:'message',
+                    })
+                }else {
+                    message.error({
+                        content:'连接失败',
+                        className:'message',
+                    })
+                }
+            })
+        }
     }
 
     return(

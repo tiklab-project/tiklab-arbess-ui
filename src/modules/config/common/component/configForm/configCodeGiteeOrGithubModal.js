@@ -4,7 +4,7 @@ import {PlusOutlined} from "@ant-design/icons";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const { visible,setVisible,formInitialValues,codeType,codeData,url,getGiteeProof,
+    const { visible,setVisible,formInitialValues,codeType,url,getGiteeProof,
         giteeToken, getCode, getGithubProof,githubToken
     }=props
 
@@ -18,7 +18,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
     const onOk = () =>{
         form.validateFields().then((values) => {
-            if(codeData && codeData.dataType === 2 || codeType  === 2){
+            if(codeType  === 2){
                 const params = {
                     proofName:values.proofName,
                     accessToken:giteeToken && giteeToken.accessToken
@@ -28,7 +28,13 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     if(res.code===0){
                         localStorage.setItem('gitProofId',res.data)
                     }else {
-                        message.info('创建失败')
+                        message.error({
+                            content: '连接失败',
+                            style: {
+                                marginTop: '9vh',
+                                marginLeft:'5vh'
+                            }
+                        })
                     }
                 }).catch(error=>{
                     console.log(error)
@@ -43,7 +49,13 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     if(res.code===0){
                         localStorage.setItem('gitProofId',res.data)
                     }else {
-                        message.info('创建失败')
+                        message.error({
+                            content: '连接失败',
+                            style: {
+                                marginTop: '9vh',
+                                marginLeft:'5vh'
+                            }
+                        })
                     }
                 }).catch(error=>{
                     console.log(error)
@@ -58,7 +70,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
         if(codeData && codeData.dataType === 2 || codeType  === 2){
             localStorage.setItem('giteeCode','giteeCode')
             url().then(res=>{
-                // window.location.href=res.data
+                window.location.href=res.data
                 window.open(res.data)
             }).catch(error=>{
                 console.log(error)
@@ -67,7 +79,6 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             localStorage.setItem('githubCode','githubCode')
             getCode().then(res=>{
                 window.location.href=res.data
-                // window.open(res.data)
             }).catch(error=>{
                 console.log(error)
             })

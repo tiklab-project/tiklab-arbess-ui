@@ -1,24 +1,17 @@
 import React ,{useState} from "react";
 import {Button, Drawer} from 'antd';
-import ConfigAddCodeDrawerBottom from "./configAddCodeDrawerBottom";
+import ConfigAddCodeLeftDrawer from "./configAddCodeLeftDrawer";
+import ConfigAddCodeRightDrawer from "./configAddCodeRightDrawer";
 import {CloseOutlined} from '@ant-design/icons'
 
-const codeList = [
+const leftLis = [
     {
         id:1,
-        title:'通用Git'
+        title:'Git'
     },
     {
         id:2,
-        title:'Gitee'
-    },
-    {
-        id:4,
-        title: 'Gitlab'
-    },
-    {
-        id:3,
-        title: 'Github'
+        title: 'SVN'
     }
 ]
 
@@ -27,6 +20,7 @@ const ConfigAddCodeDrawer = props =>{
     const {setCodeData,codeDrawer,setCodeDrawer,setIsPrompt,codeBranch,codeName, codeType,setCodeType,
     } = props
 
+    const [opt,setOpt] = useState(1)
     const [codeOpt,setCodeOpt]=useState(0)
 
     return(
@@ -35,7 +29,7 @@ const ConfigAddCodeDrawer = props =>{
             placement="right"
             onClose={()=>setCodeDrawer(false)}
             visible={codeDrawer}
-            width={600}
+            width={700}
         >
             <div className="wrapper">
                 <div className="wrapper-head">
@@ -49,9 +43,14 @@ const ConfigAddCodeDrawer = props =>{
                 <div className="wrapper-body" id="pipeline-menu-wrapper-body">
                     <div className="body">
                         <div className="body-menu">
-                            <ConfigAddCodeDrawerBottom
+                            <ConfigAddCodeLeftDrawer
+                                leftLis={leftLis}
+                                opt={opt}
+                                setOpt={setOpt}
+                            />
+                            <ConfigAddCodeRightDrawer
                                 setIsPrompt={setIsPrompt}
-                                codeList={codeList}
+                                opt={opt}
                                 codeOpt={codeOpt}
                                 setCodeOpt={setCodeOpt}
                                 setCodeData={setCodeData}

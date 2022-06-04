@@ -26,7 +26,7 @@ const ConfigCode = props =>{
             <div className='configView1-wrapper' >
                 <div className='configView1-wrapper-newStage'>
                     <div className='desc'>
-                        <div className='desc-head'> {codeType()} </div>
+                        <div className='desc-head'> { codeType() } </div>
                         <div className='desc-delete' onClick={()=>deletePart()}>
                             <CloseOutlined />
                         </div>

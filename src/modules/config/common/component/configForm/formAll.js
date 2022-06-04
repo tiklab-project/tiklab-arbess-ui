@@ -5,6 +5,7 @@ import ConfigTestUnit from "./configTestUnit";
 import ConfigStructureMaven from "./configStructureMavenOrNode";
 import ConfigDeployLinux from "./configDeployLinux";
 import ConfigDeployDocker from "./configDeployDocker";
+import ConfigCodeSvn from "./configCodeSvn";
 
 export default {
     gitOrGitlab:<ConfigCodeGitOrGitlab/>,
@@ -13,4 +14,5 @@ export default {
     mavenOrNode:<ConfigStructureMaven/>,
     linux:<ConfigDeployLinux/>,
     docker:<ConfigDeployDocker/>,
+    svn:<ConfigCodeSvn/>
 }
