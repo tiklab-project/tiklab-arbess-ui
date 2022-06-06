@@ -18,11 +18,22 @@ export function  FindAllConfigure(data){
     })
 }
 
-// 测试配置--源码地址
+// 测试配置--源码管理
 export function  TestPass(data){
     return serviceLoc.request({
-        url:'/pipelineExec/testPass',
+        url:'/pipelineCode/testPass',
         method:'post',
         data
     })
 }
+
+// 测试配置--部署
+export function  DeployTestPass(data){
+    return serviceLoc.request({
+        url:'/pipelineDeploy/testPass',
+        method:'post',
+        data
+    })
+}
+
+

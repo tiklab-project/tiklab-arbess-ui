@@ -7,10 +7,10 @@ const {Option}=Select
 
 const ConfigDeployLinux = props =>{
   
-    const {proofStore,configDataStore} = props
+    const {proofStore,configDataStore,configStore} = props
     const {createProof,findAllProof} = proofStore
-
     const {setIsPrompt,linuxShellBlock,setLinuxShellBlock} = configDataStore
+    const {deployTestPass} = configStore
 
     const [allLinuxProofList,setAllLinuxProofList] = useState([])
     const [deployVisible,setDeployVisible] = useState(false)
@@ -77,11 +77,13 @@ const ConfigDeployLinux = props =>{
                 deployVisible={deployVisible}
                 setDeployVisible={setDeployVisible}
                 createProof={createProof}
+                deployTestPass={deployTestPass}
             />
         </Fragment>
     )
 }
 
-export default inject('proofStore','configDataStore')(observer(ConfigDeployLinux))
+export default inject('proofStore','configDataStore','configStore')
+(observer(ConfigDeployLinux))
 
 

@@ -11,7 +11,7 @@ export class ProofStore{
     @action
     createProof =async values =>{
         const params = {
-            proofScope:values.proofScope, //1或2
+            proofScope:values.proofScope,
             proofType:values.proofType,
             proofName:values.proofName,
             proofUsername:values.proofUsername,

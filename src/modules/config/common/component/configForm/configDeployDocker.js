@@ -7,8 +7,9 @@ const {Option}=Select
 
 const ConfigDeployDocker = props =>{
 
-    const {proofStore} = props
+    const {proofStore,configStore} = props
     const {createProof,findAllProof} = proofStore
+    const {deployTestPass} = configStore
 
     const [allDockerProofList,setAllDockerProofList] = useState([])
     const [deployVisible,setDeployVisible] = useState(false)
@@ -100,14 +101,17 @@ const ConfigDeployDocker = props =>{
             >
                 <Input/>
             </Form.Item>
+
             <ConfigDeployAddProofModal
                 deployVisible={deployVisible}
                 setDeployVisible={setDeployVisible}
                 createProof={createProof}
+                deployTestPass={deployTestPass}
             />
         </Fragment>
     )
 }
 
-export default inject('proofStore')(observer(ConfigDeployDocker))
+export default inject('proofStore','configStore')
+                (observer(ConfigDeployDocker))
 

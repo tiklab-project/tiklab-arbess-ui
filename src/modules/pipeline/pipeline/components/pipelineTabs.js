@@ -12,10 +12,10 @@ const { TabPane } = Tabs;
 
 const PipelineTabs = props =>{
 
-    const {pipelineStore,structureDataStore,structureStore}=props
+    const {pipelineStore,structureStore}=props
 
     const {findAllPipelineStatus,pipelineList,updatePipeline}=pipelineStore
-    const {pipelineStartStructure,killInstance,findStructureState}=structureStore
+    const {pipelineStartStructure,killInstance}=structureStore
 
     useEffect(()=>{
             findAllPipelineStatus()
@@ -176,6 +176,4 @@ const PipelineTabs = props =>{
     )
 }
 
-export default withRouter(inject('pipelineStore','structureDataStore',
-                    'structureStore')
-                (observer(PipelineTabs)))
+export default withRouter(inject('pipelineStore', 'structureStore')(observer(PipelineTabs)))

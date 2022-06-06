@@ -1,7 +1,5 @@
-import React,{ useEffect,useState } from "react";
-import {Table,Tooltip } from "antd";
-import {withRouter} from "react-router";
-import {observer,inject} from "mobx-react";
+import React from "react";
+import {Table } from "antd";
 
 const PipelineTabs_all= props=>{
 
@@ -18,6 +16,4 @@ const PipelineTabs_all= props=>{
     )
 }
 
-export default withRouter(inject('pipelineStore','structureDataStore',
-                'structureStore')
-                (observer(PipelineTabs_all)));
+export default PipelineTabs_all;

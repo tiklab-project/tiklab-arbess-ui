@@ -3,9 +3,7 @@ import {Button, Card} from "antd";
 
 const StructureRightExecute = props => {
 
-    const {status,leftExecute,killInstance,rightExecute,configName,
-        runWay,index
-    } = props
+    const {status,leftExecute,killInstance,rightExecute,configName,runWay,index} = props
     const pipelineId = localStorage.getItem('pipelineId')
 
     const type = item =>{
@@ -89,7 +87,7 @@ const StructureRightExecute = props => {
         <div className="mid_group">
             <div className='mid_group_top'>
                 <div className='mid_group_top_tel'>
-                    <span className='tel_time'>构建 index</span>
+                    <span className='tel_time'>构建 {index}</span>
                     <span className='tel_time'>执行时长： </span>
                     <span className='tel_way'>触发方式：{triggerMode()}</span>
                 </div>

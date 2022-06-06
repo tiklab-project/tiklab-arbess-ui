@@ -1,9 +1,10 @@
-import {observable, action} from "mobx";
+import {observable, action, values} from "mobx";
 
 import {
     UpdateConfigure,
     FindAllConfigure,
     TestPass,
+    DeployTestPass,
 } from '../api/config'
 
 export class ConfigStore{
@@ -87,6 +88,19 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             TestPass(params).then(res=>{
                 console.log('测试配置',res)
+                resolve(res.data)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
+    }
+
+    @action
+    deployTestPass = values =>{
+        return new Promise((resolve, reject) => {
+            DeployTestPass(values).then(res=>{
+                console.log('测试部署',res)
                 resolve(res.data)
             }).catch(error=>{
                 console.log(error)

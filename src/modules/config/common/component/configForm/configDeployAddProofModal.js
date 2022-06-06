@@ -4,7 +4,7 @@ const { Option } = Select;
 
 const ConfigDeployAddProofModal = props =>{
 
-    const {deployVisible,setDeployVisible,createProof} = props
+    const {deployVisible,setDeployVisible,createProof,deployTestPass} = props
     const [form] = Form.useForm()
 
     const onOk = () =>{
@@ -21,6 +21,16 @@ const ConfigDeployAddProofModal = props =>{
             }
             createProof(params)
             setDeployVisible(false)
+        })
+    }
+
+    const onFinish = values => {
+        deployTestPass(values).then(res=>{
+            if(res.data === true){
+                message.success({content: '连接成功', className:'message'})
+            }else {
+                message.error({content:'连接失败', className:'message'})
+            }
         })
     }
 
@@ -52,6 +62,7 @@ const ConfigDeployAddProofModal = props =>{
                 layout="vertical"
                 name="userForm"
                 autoComplete = "off"
+                onFinish={onFinish}
                 initialValues={{proofType:"password"}}
             >
                 <Form.Item
@@ -110,8 +121,10 @@ const ConfigDeployAddProofModal = props =>{
                 <Form.Item name='proofDescribe' label='描述'>
                     <Input.TextArea  placeholder='备注'/>
                 </Form.Item>
+                <Form.Item >
+                    <Button htmlType='submit'>连接测试</Button>
+                </Form.Item>
             </Form>
-            <Button>连接测试</Button>
         </Modal>
     )
 }

@@ -6,11 +6,11 @@ import PipelineTabs from "../components/pipelineTabs";
 
 const Pipeline = props =>{
 
-
     return(
         <div className='pipeline' shouldupdate='true' >
             <PipelineSearch />
             <PipelineTabs/>
+
         </div>
     )
 }

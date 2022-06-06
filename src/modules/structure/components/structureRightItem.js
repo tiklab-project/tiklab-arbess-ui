@@ -3,8 +3,8 @@ import {Button, Card, Popconfirm} from "antd";
 
 const StructureRightItem = props =>{
 
-    const {rightData,status,historyId,deleteHistoryLog,forceUpdate, modeData,index,
-        setVisible,setDrawerContent,configName,runWay,
+    const {rightData,status,historyId,deleteHistoryLog,forceUpdate, modeData,index,setVisible,
+        setDrawerContent,configName,runWay,
     } = props
 
     const triggerMode = () => {

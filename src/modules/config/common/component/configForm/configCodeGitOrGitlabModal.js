@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const ConfigCodeGitOrGitlabModal= props =>{
 
-    const {visible,setVisible ,createProof,codeData,codeType} = props
+    const {visible,setVisible ,createProof,codeType} = props
 
     const [form] = Form.useForm();
 

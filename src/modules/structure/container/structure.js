@@ -75,7 +75,6 @@ const Structure = props => {
                     left.push(res.data[i])
                 }
                 setModeData(res.data && res.data[0])
-                setIndex(1)
                 localStorage.setItem('historyId',res.data && res.data[0].historyId)
                 findHistoryLog(res.data && res.data[0].historyId).then(res=>{
                     console.log('历史详情',res)

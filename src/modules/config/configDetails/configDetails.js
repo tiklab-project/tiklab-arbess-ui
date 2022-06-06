@@ -59,13 +59,12 @@ const ConfigDetails = props =>{
                 getAccessToken(codeValue).then(res=>{
                     console.log(res,'github')
                     if(res.data === null ){
-                        tips(2)
+                        tips(1)
                     }else {
                         tips(2)
                         localStorage.setItem('githubToken',res.data)
                     }
                     localStorage.removeItem('githubCode')
-                    localStorage.removeItem('codeValue')
                 })
             }
         }
@@ -77,22 +76,10 @@ const ConfigDetails = props =>{
     const tips = i =>{
         switch (i){
             case 1:
-                message.success({
-                    content: '授权成功',
-                    style: {
-                        marginTop: '9vh',
-                        marginLeft:'5vh'
-                    }
-                })
+                message.success({content: '授权成功', className:'message'})
                 break
             case 2:
-                message.error({
-                    content: '授权失败',
-                    style: {
-                        marginTop: '9vh',
-                        marginLeft:'5vh'
-                    }
-                })
+                message.error({content:'授权失败', className:'message'})
         }
     }
 

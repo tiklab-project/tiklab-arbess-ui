@@ -1,6 +1,7 @@
 import React from "react";
 
 const StructureLeftExecute = props => {
+
     const {leftExecute,setDetails,status,setIndex,details} = props
 
     const state = () =>{

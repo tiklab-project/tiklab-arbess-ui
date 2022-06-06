@@ -47,10 +47,8 @@ const Mirror = props =>{
                 lineNumbers: false, // 是否显示行号
                 lineWrapping: true,//是否支持代码折叠
             }}
-            onChange={() => {
-                setShellBlock(mirrorRefs.current.editor.getValue())
-            }}
             onBlur={()=>{
+                setShellBlock(mirrorRefs.current.editor.getValue())
                 setIsPrompt(true)
             }}
         />

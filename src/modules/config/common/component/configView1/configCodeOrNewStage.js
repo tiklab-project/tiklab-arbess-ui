@@ -1,6 +1,7 @@
 import React,{Fragment} from "react";
 
 const ConfigCodeOrNewStage = props =>{
+
     const {lis,handleClick} = props
 
     return(

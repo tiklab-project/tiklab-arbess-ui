@@ -4,8 +4,8 @@ import {PlusOutlined} from "@ant-design/icons";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const { visible,setVisible,formInitialValues,codeType,url,getGiteeProof,
-        giteeToken, getCode, getGithubProof,githubToken
+    const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,giteeToken,
+        getCode,getGithubProof,githubToken
     }=props
 
     const [form] = Form.useForm()
@@ -28,13 +28,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     if(res.code===0){
                         localStorage.setItem('gitProofId',res.data)
                     }else {
-                        message.error({
-                            content: '连接失败',
-                            style: {
-                                marginTop: '9vh',
-                                marginLeft:'5vh'
-                            }
-                        })
+                        message.error({content:'创建失败', className:'message'})
                     }
                 }).catch(error=>{
                     console.log(error)
@@ -49,13 +43,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     if(res.code===0){
                         localStorage.setItem('gitProofId',res.data)
                     }else {
-                        message.error({
-                            content: '连接失败',
-                            style: {
-                                marginTop: '9vh',
-                                marginLeft:'5vh'
-                            }
-                        })
+                        message.error({content:'创建失败', className:'message'})
                     }
                 }).catch(error=>{
                     console.log(error)
@@ -67,7 +55,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
 
     const goUrl = () =>{
-        if(codeData && codeData.dataType === 2 || codeType  === 2){
+        if(codeType  === 2){
             localStorage.setItem('giteeCode','giteeCode')
             url().then(res=>{
                 window.location.href=res.data

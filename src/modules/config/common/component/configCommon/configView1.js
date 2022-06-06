@@ -13,8 +13,7 @@ import {withRouter} from "react-router";
 
 const ConfigView1 = props =>{
 
-    const {form,del, updateConfigure,configDataStore,configName,configForm,
-    } = props
+    const {form,del, updateConfigure,configDataStore,configName,configForm} = props
 
     const {setIsPrompt, codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,
         setFormInitialValues,isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,
@@ -147,8 +146,14 @@ const ConfigView1 = props =>{
         }
         updateConfigure(configureList).then(res=>{
             if(res.code!==0){
-                message.info('配置失败')
-            }message.info('保存成功')
+                message.error({
+                    content: '保存失败',
+                    className:'message',
+                })
+            }message.success({
+                content: '保存成功',
+                className:'message',
+            })
             setIsPrompt(false)
         })
     }

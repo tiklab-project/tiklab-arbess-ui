@@ -4,13 +4,11 @@ import {CloseOutlined} from "@ant-design/icons";
 
 const ChangeConfigSortsDrawer = props =>{
 
-    const {changeSortVisible,setChangeSortVisible,data,setData,codeData,setIsPrompt
-    } = props
+    const {changeSortVisible,setChangeSortVisible,data,setData,codeData,setIsPrompt} = props
 
     const [gData,setGData] = useState([])
 
     const nameArray = []
-    
     useEffect(()=>{
         let desc
         if(codeData){
@@ -30,7 +28,7 @@ const ChangeConfigSortsDrawer = props =>{
             nameArray.push({
                 key:0,
                 title: '源码管理' + '--' + desc,
-                disabled: true,
+                // disabled: true,
                 step:'源码管理'
             })
         }     
@@ -64,6 +62,7 @@ const ChangeConfigSortsDrawer = props =>{
     },[data,codeData])
 
     const onDrop = info => {
+
         const dropKey = info.node.key;
         const dragKey = info.dragNode.key;
         const dropPos = info.node.pos.split('-');

@@ -9,7 +9,7 @@ const ConfigCodeGitOrGitlab = props =>{
 
     const {proofStore,configDataStore,configStore}=props
     const {createProof,findAllProof} = proofStore
-    const {codeName,setCodeName, setCodeBranch,codeData,codeType} = configDataStore
+    const {codeName,setCodeName, setCodeBranch,codeType} = configDataStore
     const {testPass} = configStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
@@ -36,10 +36,6 @@ const ConfigCodeGitOrGitlab = props =>{
     const inputCodeBranchValue = e =>{
         setCodeBranch(e.target.value)
     }
-    
-    const newProof = () => {
-        setVisible(true)
-    }
 
     const test = () =>{
         if(codeName){
@@ -49,15 +45,9 @@ const ConfigCodeGitOrGitlab = props =>{
             }
             testPass(params).then(res=>{
                 if(res.data === true){
-                    message.success({
-                        content: '连接成功',
-                        className:'message',
-                    })
+                    message.success({content: '连接成功', className:'message'})
                 }else {
-                    message.error({
-                        content:'连接失败',
-                        className:'message',
-                    })
+                    message.error({content:'连接失败', className:'message'})
                 }
             })
         }
@@ -106,20 +96,19 @@ const ConfigCodeGitOrGitlab = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Button onClick={()=>newProof()} className='config-details-link'>
+                <Button onClick={()=>setVisible(true)} className='config-details-link'>
                     添加
                 </Button>
             </Row>
 
             <div className='config-details-gitTest'>
-                <Button onClick={()=>test()}>测试连接</Button>
+                <Button onClick={()=>test()}>连接测试</Button>
             </div>
 
             <ConfigCodeGitOrGitlabModal
                 visible={visible}
                 setVisible={setVisible}
                 createProof={createProof}
-                codeData={codeData}
                 codeType={codeType}
             />
 
