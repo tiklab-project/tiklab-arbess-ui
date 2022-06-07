@@ -17,9 +17,7 @@ const ConfigAddCodeRightSvnDrawer = props =>{
                 </div>
             </div>
 
-            <div className='body-menu_form'>
-                { formAll.svn }
-            </div>
+            <div className='body-menu_form'> { formAll.svn } </div>
         </Fragment>
     )
 }

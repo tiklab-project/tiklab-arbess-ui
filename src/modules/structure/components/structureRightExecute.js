@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment} from "react";
 import {Button, Card} from "antd";
 
 const StructureRightExecute = props => {
@@ -71,7 +71,7 @@ const StructureRightExecute = props => {
                                     </div>
                                 </div>
                                 <div className='cart-bottom' >
-                                    <span className='cart-bottom-span' >
+                                    <span className='cart-bottom-span'>
                                         日志
                                     </span>
                                 </div>

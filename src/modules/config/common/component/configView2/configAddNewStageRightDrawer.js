@@ -3,9 +3,7 @@ import {message} from "antd";
 
 const ConfigAddNewStageRightDrawer = props =>{
 
-    const {rightLis,onScroll,setNewStageDrawer,setTaskFormDrawer,setNewStage,
-        data,setData,setIsPrompt,index
-    } = props
+    const {rightLis,onScroll,setNewStageDrawer,setTaskFormDrawer,setNewStage,data,setData,setIsPrompt,index} = props
 
     const handleClick = (group,item,i) =>{
         const newData = [...data]

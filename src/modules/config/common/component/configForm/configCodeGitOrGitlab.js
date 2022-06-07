@@ -10,7 +10,7 @@ const ConfigCodeGitOrGitlab = props =>{
     const {proofStore,configDataStore,configStore}=props
     const {createProof,findAllProof} = proofStore
     const {codeName,setCodeName, setCodeBranch,codeType} = configDataStore
-    const {testPass} = configStore
+    const {codeTestPass} = configStore
 
     const [allGitProofList,setAllGitProofList] = useState([])
     const [visible,setVisible] = useState(false)
@@ -43,7 +43,7 @@ const ConfigCodeGitOrGitlab = props =>{
                 proofId:gitProofId,
                 url:codeName
             }
-            testPass(params).then(res=>{
+            codeTestPass(params).then(res=>{
                 if(res.data === true){
                     message.success({content: '连接成功', className:'message'})
                 }else {

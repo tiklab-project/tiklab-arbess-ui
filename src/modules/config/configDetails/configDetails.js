@@ -19,9 +19,8 @@ const ConfigDetails = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,setData,codeData,
-        setCodeData, formInitialValues, setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock, setMavenShellBlock,setCodeType,
+    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,setData,codeData,setCodeData,formInitialValues,
+        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,setCodeType,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -45,6 +44,7 @@ const ConfigDetails = props =>{
     useEffect(() => {
         if(codeValue){
             if(localStorage.getItem('giteeCode')){
+                localStorage.removeItem('githubToken')
                 code(codeValue).then(res=>{
                     if(res.data){
                         localStorage.setItem('giteeToken',JSON.stringify(res.data))
@@ -56,6 +56,7 @@ const ConfigDetails = props =>{
                     localStorage.removeItem('giteeCode')
                 })
             }else if(localStorage.getItem('githubCode')){
+                localStorage.removeItem('giteeToken')
                 getAccessToken(codeValue).then(res=>{
                     console.log(res,'github')
                     if(res.data === null ){
@@ -119,7 +120,7 @@ const ConfigDetails = props =>{
                         }
                         const formValue = {
                             gitProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
-                            proofDescribe:j.proof && j.proof.proofDescribe ,
+                            proofName:j.proof && j.proof.proofName ,
                         }
                         Object.assign(formInitialValues,formValue)
                         setCodeName(j.codeName)
@@ -201,7 +202,7 @@ const ConfigDetails = props =>{
             case 'git':
                 formInitialValues.codeName = null
                 formInitialValues.codeBranch = null
-                formInitialValues.proofDescribe = null
+                formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
                 setCodeName('')

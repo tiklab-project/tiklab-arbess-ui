@@ -9,3 +9,12 @@ export function  GetSubmitMassage (data){
         data
     })
 }
+
+//查询近期构建记录
+export function  FileTree (data){
+    return serviceLoc.request({
+        url:'/pipelineExec/fileTree',
+        method: 'post',
+        data
+    })
+}

@@ -8,22 +8,37 @@ import WorkSpaceRecord from "../components/workSpaceRecord";
 const WorkSpace = props =>{
 
     const {workSpaceStore} = props
-    const {getSubmitMassage} = workSpaceStore
-    const [recordList,setRecordList] = useState([])
+    const {getSubmitMassage,fileTree,recordList} = workSpaceStore
     const pipelineId = localStorage.getItem('pipelineId')
+    const [fileList,setFileList] = useState([])
+    const [initial,setInitial] = useState(false)
+    const [catalogue,setCatalogue] = useState([]) // 目录
 
     useEffect(()=>{
-        getSubmitMassage(pipelineId).then(res=>{
-            console.log(res,'近期提交记录')
-            setRecordList(res.data)
+        getSubmitMassage(pipelineId)
+        setCatalogue([])
+    },[pipelineId])
+
+    useEffect(()=>{
+        fileTree(pipelineId).then(res=>{
+            setFileList(res.data)
         }).catch(error=>{
             console.log(error)
         })
-    },[pipelineId])
+    },[initial,pipelineId])
+
+
 
     return(
         <div className='workSpace task'>
-            <WorkSpaceNod/>
+            <WorkSpaceNod
+                fileList={fileList}
+                setFileList={setFileList}
+                initial={initial}
+                setInitial={setInitial}
+                catalogue={catalogue}
+                setCatalogue={setCatalogue}
+            />
             <WorkSpaceRecord
                 recordList={recordList}
             />

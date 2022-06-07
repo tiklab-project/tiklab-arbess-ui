@@ -8,17 +8,18 @@ import { inject, observer } from "mobx-react";
 
 const Structure = props => {
 
-    const { structureStore , structureDataStore} = props
+    const { structureStore } = props
 
-    const { findExecState, findStructureState,findAll,selectHistoryDetails,findHistoryLog,
-        deleteHistoryLog,killInstance
+    const { findExecState, findStructureState,findAll,selectHistoryDetails,findHistoryLog,deleteHistoryLog,
+        killInstance,findLikeHistory
     } = structureStore
 
-    const { leftExecute,setLeftExecute,leftData,setLeftData, rightData,setRightData,modeData,
-        setModeData,rightExecute,setRightExecute,
-    } = structureDataStore
-
     const [, forceUpdate] = useState({})  // 刷新组件
+    const [leftData,setLeftData] = useState([])     // 左侧 -- 旧历史列表
+    const [leftExecute,setLeftExecute] = useState('')   // 左侧 -- 正在构建
+    const [rightData,setRightData] = useState([])   // 右侧 -- 历史构建详情
+    const [rightExecute,setRightExecute] = useState([])     // 右侧 -- 正在构建详情
+    const [modeData,setModeData] = useState([])     // 历史列表的内容
     const [details,setDetails] = useState(0) // 组件显示 -- 历史构建 或者 正在构建
     const [index,setIndex] = useState(0)  // 构建区分显示 -- 构建1 、2、……
 
@@ -134,12 +135,14 @@ const Structure = props => {
                             setDetails={setDetails}
                             leftExecute={leftExecute}
                             leftData={leftData}
+                            setLeftData={setLeftData}
                             setRightData={setRightData}
                             status={status}
                             setModeData={setModeData}
                             index={index}
                             setIndex={setIndex}
                             findHistoryLog={findHistoryLog}
+                            findLikeHistory={findLikeHistory}
                         />
                         <StructureRight
                             details={details}
@@ -160,4 +163,4 @@ const Structure = props => {
     )
 }
 
-export default inject('structureStore','structureDataStore')(observer(Structure))
+export default inject('structureStore')(observer(Structure))

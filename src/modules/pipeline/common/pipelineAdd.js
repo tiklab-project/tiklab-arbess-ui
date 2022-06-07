@@ -40,19 +40,19 @@ const PipelineAdd = props => {
     }
 
     const handSubmit = value => {
-        const aa={
+        const params={
             pipelineName:value.pipelineName,
             pipelineCreateUser:'admin',
             pipelineType:1,
             pipelineCreateTime:moment.moment
         }
-        createPipeline(aa).then(res=>{
+        createPipeline(params).then(res=>{
             if(res.code=== 0 && res.data){
                 localStorage.setItem('pipelineId',res.data)
                 localStorage.setItem('pipelineName',value.pipelineName)
                 props.history.push({pathname:'/home/config',value})
             }else{
-                message.info('添加失败')
+                message.error({content:'添加失败', className:'message'})
             }
         })
     }
@@ -64,10 +64,7 @@ const PipelineAdd = props => {
                     label='流水线名称'
                     name='pipelineName'
                     rules={[
-                        {
-                            required:true,
-                            message:''
-                        },
+                        {required:true, message:''},
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
                                 if (!value) {

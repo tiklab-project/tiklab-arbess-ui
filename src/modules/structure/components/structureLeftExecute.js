@@ -25,7 +25,7 @@ const StructureLeftExecute = props => {
     return(
         <div
             onClick={()=>changeMode()}
-            className={ details === 0    ?
+            className={ details === 0  ?
                 'history-content-list history-content-list_active'
                 : 'history-content-list'
             }

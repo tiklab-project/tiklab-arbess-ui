@@ -4,8 +4,8 @@ import ConfigAddCodeRightSvnDrawer from "./configAddCodeRightSvnDrawer";
 import {Button} from "antd";
 
 const ConfigAddCodeRightDrawer = props =>{
-    const {opt,setIsPrompt, codeOpt,setCodeOpt,setCodeData,setCodeDrawer,codeName,
-        codeBranch, codeType,setCodeType
+
+    const {opt,setIsPrompt, codeOpt,setCodeOpt,setCodeData,setCodeDrawer,codeName,codeBranch,codeType,setCodeType
     } = props
 
     const [codeId,setCodeId] = useState('')

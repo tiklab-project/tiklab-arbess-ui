@@ -1,53 +1,100 @@
 import React from "react";
-import { Menu, Dropdown, Space } from 'antd';
-import {DownOutlined} from "@ant-design/icons";
+import { Select  } from 'antd';
+
+const { Option } = Select;
+
+const lis = [
+    {
+        id:1,
+        opt: [
+            {   type:0,
+                tpl:'状态',
+            },
+            {
+                type:1,
+                tpl:'失败',
+            },
+            {
+                type:20,
+                tpl:'停止',
+            },
+            {
+                type:30,
+                tpl:'成功',
+            },
+        ]
+    },
+    {
+        id:2,
+        opt: [
+            {   type:0,
+                tpl:'执行人',
+            },
+            {
+                type:1,
+                tpl:'admin',
+            },
+        ]
+    },
+    {
+        id:3,
+        opt:[
+            {   type:0,
+                tpl:'执行方式',
+            },
+            {
+                type:1,
+                tpl:'手动',
+            },
+            {
+                type:2,
+                tpl:'自动',
+            },
+
+        ]
+    },
+]
 
 const StructureLeftDropdown = props =>{
 
-    const lis = [
-        {
-            id:1,
-            desc:'状态',
-            menu:  <Menu>
-                        <Menu.Item key={1}>成功</Menu.Item>
-                        <Menu.Item key={2}>执行</Menu.Item>
-                        <Menu.Item key={3}>失败</Menu.Item>
-                    </Menu>
-        },
-        {
-            id:2,
-            desc:'执行人',
-            menu:  <Menu>
-                        <Menu.Item key={1}>admin</Menu.Item>
-                        <Menu.Item key={2}>Lucy</Menu.Item>
-                    </Menu>
-        },
-        {
-            id:3,
-            desc:'执行方式',
-            menu:  <Menu>
-                        <Menu.Item key={1}>手动</Menu.Item>
-                        <Menu.Item key={2}>自动</Menu.Item>
-                    </Menu>
-        },
-    ]
+    const {findLikeHistory,setLeftData} = props
+
+    const changeOpt = (value,e,group)  => {
+        console.log(e.key,value,group)
+    }
 
     return(
         <div className='structure-content-left-dropdown'>
-            {
-                lis.map(item=>{
-                    return (
-                        <Dropdown key={item.id} overlay={item.menu} trigger={['click']}>
-                            <a onClick={(e) => e.preventDefault()}>
-                                <Space>
-                                    {item.desc}
-                                    <DownOutlined />
-                                </Space>
-                            </a>
-                        </Dropdown>
-                    )
-                })
-            }
+            <div className='dropdown'>
+                {
+                    lis.map((group,index)=>{
+                        return (
+                            <Select
+                                bordered={false}
+                                key={index}
+                                style={{width:100}}
+                                defaultValue={group.opt[0].tpl}
+                                onChange={(value,e)=>changeOpt(value,e,group)}
+                            >
+                                {
+                                    group.opt.map(item=>{
+                                        return(
+                                            <Option
+                                                key={ item.type }
+                                                value= {item.tpl}
+                                                // onCli
+                                            >
+                                                {item.tpl}
+                                            </Option>
+                                        )
+
+                                    })
+                                }
+                            </Select>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

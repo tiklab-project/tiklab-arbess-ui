@@ -1,26 +1,17 @@
 .pipeline{
-  width: 70%;
-  margin:auto;
-  overflow: hidden;
-  &-top{
-    width: 100%;
-    margin-bottom: 20px;
-    margin-top: 10px;
-    &-r{
-      float: right;
+    width: 70%;
+    margin:auto;
+    overflow: hidden;
+    &-top{
+        width: 100%;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        &-r{
+            float: right;
+        }
     }
-  }
-  &-tabs{
-    clear: both;
-  }
-}
-.pipeline-addTabs {
-  position: relative;
-  left: 153px;
-  top: 33px;
-  cursor: pointer;
-  z-index: 100;
-  color: #1890ff;
-  font-size: 16px;
+    &-tabs{
+        clear: both;
+    }
 }
 

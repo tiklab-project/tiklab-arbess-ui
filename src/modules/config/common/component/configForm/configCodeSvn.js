@@ -40,13 +40,13 @@ const ConfigCodeSvn = props =>{
                 proofId:gitProofId,
                 url:codeName
             }
-            testPass(params).then(res=>{
-                if(res.data === true){
-                    message.success({content: '连接成功', className:'message'})
-                }else {
-                    message.error({content:'连接失败', className:'message'})
-                }
-            })
+            // testPass(params).then(res=>{
+            //     if(res.data === true){
+            //         message.success({content: '连接成功', className:'message'})
+            //     }else {
+            //         message.error({content:'连接失败', className:'message'})
+            //     }
+            // })
         }
     }
 
@@ -85,7 +85,7 @@ const ConfigCodeSvn = props =>{
             </Row>
 
             <div className='config-details-gitTest'>
-                <Button onClick={()=>test()}>测试连接</Button>
+                <Button onClick={()=>test()}>连接测试</Button>
             </div>
 
             <ConfigCodeGitOrGitlabModal

@@ -5,8 +5,8 @@ import StructureRightItem from "./structureRightItem";
 
 const StructureRight = props =>{
 
-    const {rightData,details,status,historyId,deleteHistoryLog,forceUpdate,modeData,index,
-        leftExecute,killInstance,rightExecute
+    const {rightData,details,status,historyId,deleteHistoryLog,forceUpdate,modeData,index,leftExecute,killInstance,
+        rightExecute
     } = props
     
     const [visible,setVisible] = useState(false)
@@ -55,6 +55,8 @@ const StructureRight = props =>{
                             status={status}
                             index={index}
                             leftExecute={leftExecute}
+                            setDrawerContent={setDrawerContent}
+                            setVisible={setVisible}
                             killInstance={killInstance}
                             configName={configName}
                             runWay={runWay}

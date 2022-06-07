@@ -5,11 +5,12 @@ import {
     PipelineStartStructure,
     FindExecState,
     FindStructureState,
+    KillInstance,
     FindHistoryLog,
+    FindAll,
     SelectHistoryDetails,
     DeleteHistoryLog,
-    FindAll,
-    KillInstance
+    FindLikeHistory,
 } from "../api/structure";
 
 export class StructureStore {
@@ -40,15 +41,15 @@ export class StructureStore {
         return data.data
     }
 
-    //构建历史
+    //  停止构建
     @action
-    selectHistoryDetails =async values =>{
-        const params = new FormData()
-        params.append("pipelineId", values)
-        const data = await SelectHistoryDetails(params);
-        return data.data;
-
+    killInstance = async values =>{
+        const param = new FormData()
+        param.append("pipelineId", values)
+        const data = await KillInstance(param)
+        return data.data
     }
+
 
     //历史详情日志
     @action
@@ -57,6 +58,25 @@ export class StructureStore {
         params.append("historyId", values)
         const data = await FindHistoryLog(params);
         return data.data;
+    }
+
+    //正在执行的详情
+    @action
+    findAll =async values =>{
+        const param = new FormData()
+        param.append("pipelineId", values)
+        const data = await FindAll(param);
+        return data.data;
+    }
+
+    //构建历史
+    @action
+    selectHistoryDetails =async values =>{
+        const params = new FormData()
+        params.append("pipelineId", values)
+        const data = await SelectHistoryDetails(params);
+        return data.data;
+
     }
 
     //删除构建历史
@@ -70,21 +90,14 @@ export class StructureStore {
         })
     }
 
-    //正在执行的详情
     @action
-    findAll =async values =>{
-        const param = new FormData()
-        param.append("pipelineId", values)
-        const data = await FindAll(param);
-        return data.data;
-    }
-
-    //  停止构建
-    @action
-    killInstance = async values =>{
-        const param = new FormData()
-        param.append("pipelineId", values)
-        const data = await KillInstance(param)
+    findLikeHistory = async values=>{
+        const params = new FormData()
+        params.append('pipelineId',values.pipelineId)
+        params.append('state',values.state)
+        params.append('name',values.name)
+        params.append('type',values.type)
+        const data =await  FindLikeHistory(params)
         return data.data
     }
 

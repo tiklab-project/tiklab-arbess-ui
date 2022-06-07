@@ -19,7 +19,7 @@ export function  FindAllConfigure(data){
 }
 
 // 测试配置--源码管理
-export function  TestPass(data){
+export function  CodeTestPass(data){
     return serviceLoc.request({
         url:'/pipelineCode/testPass',
         method:'post',

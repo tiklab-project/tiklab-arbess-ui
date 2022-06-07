@@ -9,21 +9,51 @@
         font-size: 30px;
         font-weight: bold;
     }
-    &-bottom{
-        &-group{
-            overflow-x: hidden;
-            .group{
-                &_item{
-                    &_dayTime{
-                        font-size: 30px;
-                        color: #1890ff;
-                    }
-                    &_commit{
-                        display: flex;
-                        flex-direction: row;
-                        &_btn{
-                            margin-top: -4px;
+    &-top{
+        margin-bottom: 10px;
+        &-nod{
+            .nod_item{
+                &_tree{
+                    color: #1890ff;
+                    font-size: 16px;
+                    &_name{
+                        cursor: pointer;
+                        &:hover{
+                            text-decoration: underline;
                         }
+                    }
+                    .icon{
+                        width: 20px !important;
+                        height: 20px !important;
+                    }
+                }
+            }
+        }
+        &-catalogue{
+            margin-bottom: 10px;
+            .catalogue_item{
+                &_breadcrumb{
+                    cursor: pointer;
+                    font-size: 18px;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    &-bottom{
+        &-record{
+            .record_item{
+                &_dayTime{
+                    font-size: 30px;
+                    color: #1890ff;
+                }
+                &_commit{
+                    display: flex;
+                    flex-direction: row;
+                    &_btn{
+                        margin-top: -4px;
                     }
                 }
             }

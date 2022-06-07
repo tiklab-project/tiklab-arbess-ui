@@ -29,7 +29,9 @@ const SearchResult = props => {
                            return(
                                <li key={item.pipelineId} >
                                    <span> {index+1}、</span>
-                                   <span className={'search-link'} onClick={()=> goPipelineTask(item)}>{item.pipelineName}</span>
+                                   <span className={'search-link'} onClick={()=> goPipelineTask(item)}>
+                                       {item.pipelineName}
+                                   </span>
                                </li>
                            )
                        })

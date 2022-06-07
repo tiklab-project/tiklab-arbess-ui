@@ -28,7 +28,7 @@ const ChangeConfigSortsDrawer = props =>{
             nameArray.push({
                 key:0,
                 title: '源码管理' + '--' + desc,
-                // disabled: true,
+                disable: true,
                 step:'源码管理'
             })
         }     
@@ -62,7 +62,6 @@ const ChangeConfigSortsDrawer = props =>{
     },[data,codeData])
 
     const onDrop = info => {
-
         const dropKey = info.node.key;
         const dragKey = info.dragNode.key;
         const dropPos = info.node.pos.split('-');

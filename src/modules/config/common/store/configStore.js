@@ -1,9 +1,9 @@
-import {observable, action, values} from "mobx";
+import {observable, action} from "mobx";
 
 import {
     UpdateConfigure,
     FindAllConfigure,
-    TestPass,
+    CodeTestPass,
     DeployTestPass,
 } from '../api/config'
 
@@ -81,12 +81,12 @@ export class ConfigStore{
     }
 
     @action
-    testPass = values =>{
+    codeTestPass = values =>{
         const params = new FormData()
         params.append('proofId', values.proofId)
         params.append('url', values.url)
         return new Promise((resolve, reject) => {
-            TestPass(params).then(res=>{
+            CodeTestPass(params).then(res=>{
                 console.log('测试配置',res)
                 resolve(res.data)
             }).catch(error=>{

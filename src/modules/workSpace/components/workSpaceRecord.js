@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {useState} from "react";
 import {Button} from "antd";
 import WorkSpaceRecordDrawer from "./workSpaceRecordDrawer";
 
@@ -16,36 +16,34 @@ const WorkSpaceRecord = props =>{
     return(
         <div className='workSpace-bottom'>
             <h1 className='workSpace-h1'>近期提交记录</h1>
-            <ul className='workSpace-bottom-group'>
-                {
-                    recordList && recordList.map((group,groupIndex)=>{
-                        return(
-                            <li key={groupIndex}>
-                                <div className='group_item_dayTime'>{group[0].dayTime}</div>
-                                {
-                                    group && group.map((item,index)=>{
-                                        return(
-                                            <div key={item.commitId} className='group_item_commit'>
-                                                <div className='group_item_commit_commitMassage'>
-                                                    {index+1}、{item.commitMassage} --
-                                                </div>
-                                                <div className='group_item_commit_commitName'>
-                                                    {item.commitName} /
-                                                </div>
-                                                <div className='group_item_commit_btn'>
-                                                    <Button type= 'link' onClick={()=>details(item)}>
-                                                        详情
-                                                    </Button>
-                                                </div>
+            {
+                recordList && recordList.map((group,groupIndex)=>{
+                    return(
+                        <div key={groupIndex} className='workSpace-bottom-record'>
+                            <div className='record_item_dayTime'>{group[0].dayTime}</div>
+                            {
+                                group && group.map((item,index)=>{
+                                    return(
+                                        <div key={item.commitId} className='record_item_commit'>
+                                            <div className='record_item_commit_commitMassage'>
+                                                {index+1}、{item.commitMassage} --
                                             </div>
-                                        )
-                                    })
-                                }
-                            </li>
-                        )
-                    })
-                }
-            </ul>
+                                            <div className='record_item_commit_commitName'>
+                                                {item.commitName} /
+                                            </div>
+                                            <div className='record_item_commit_btn'>
+                                                <Button type= 'link' onClick={()=>details(item)}>
+                                                    详情
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    )
+                })
+            }
             <WorkSpaceRecordDrawer
                 detailsDrawer={detailsDrawer}
                 setDetailsDrawer={setDetailsDrawer}

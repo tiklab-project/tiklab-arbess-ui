@@ -4,8 +4,8 @@ import StructureLeftExecute from "./structureLeftExecute";
 
 const StructureLeft = props =>{
 
-    const {findHistoryLog,leftData,leftExecute,setRightData,status,details,setDetails,
-        setModeData,setIndex,index,
+    const {findHistoryLog,leftData,leftExecute,setRightData,status,details,setDetails,setModeData,setIndex,index,
+        findLikeHistory,setLeftData,
     } = props
 
     const sta = item =>{
@@ -63,7 +63,10 @@ const StructureLeft = props =>{
 
     return(
         <div className='structure-content-left'>
-            <StructureLeftDropdown/>
+            <StructureLeftDropdown
+                findLikeHistory={findLikeHistory}
+                setLeftData={setLeftData}
+            />
             <div className='structure-content-left-history'>
                 <div className='history-content'>
                     {   leftExecute === '' ? null:

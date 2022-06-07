@@ -63,9 +63,7 @@ const rightLis = [
 
 const ConfigAddNewStageDrawer = props =>{
 
-    const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,data,setData,
-        setIsPrompt,index
-    } = props
+    const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,data,setData,setIsPrompt,index} = props
 
     const [opt,setOpt] = useState(1)
 

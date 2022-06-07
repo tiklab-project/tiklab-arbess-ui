@@ -13,11 +13,10 @@ import {withRouter} from "react-router";
 
 const ConfigView1 = props =>{
 
-    const {form,del, updateConfigure,configDataStore,configName,configForm} = props
+    const {form,del,updateConfigure,configDataStore,configName,configForm} = props
 
-    const {setIsPrompt, codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,
-        setFormInitialValues,isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,
-        setCodeType,
+    const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
+        isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,setCodeType,
     } = configDataStore
 
     const inputRef = useRef();
@@ -150,10 +149,12 @@ const ConfigView1 = props =>{
                     content: '保存失败',
                     className:'message',
                 })
-            }message.success({
-                content: '保存成功',
-                className:'message',
-            })
+            }else {
+                message.success({
+                    content: '保存成功',
+                    className:'message',
+                })
+            }
             setIsPrompt(false)
         })
     }
@@ -167,7 +168,7 @@ const ConfigView1 = props =>{
     const newStage = () =>{
         return   data && data.map((group,index)=>{
             return(
-                <div className='configView1-wrapper' key={index}>
+                <div className='configView1-wrapper' key={index} >
                     <div className='configView1-wrapper-Headline'>
                         {
                             isAlias !== index ?

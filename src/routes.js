@@ -77,7 +77,7 @@ export const routers=[
                     {
                         path:'/home/task/config',
                         component: ConfigDetails
-                    }
+                    },
                 ]
             },
             {

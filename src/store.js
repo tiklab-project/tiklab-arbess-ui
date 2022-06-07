@@ -1,6 +1,5 @@
 import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/pipeline/store/pipelineStore";
 import {STRUCTURE_STORE,StructureStore} from "./modules/structure/store/structureStore";
-import {STRUCTUREDATA_STORE,StructureDataStore} from "./modules/structure/store/structureDataStore";
 import {CONFIG_STORE,ConfigStore} from "./modules/config/common/store/configStore";
 import {CONFIGDATA_STORE,ConfigDataStore} from "./modules/config/common/store/configDataStore";
 import {GITEE_STORE,GiteeStore} from "./modules/config/common/store/giteeStore";
@@ -12,7 +11,6 @@ function createStores() {
     return{
         [PIPELINE_STORE]:new PipelineStore(),
         [STRUCTURE_STORE]:new StructureStore(),
-        [STRUCTUREDATA_STORE]:new StructureDataStore(),
         [CONFIG_STORE]:new ConfigStore(),
         [CONFIGDATA_STORE]:new ConfigDataStore(),
         [GITEE_STORE]:new GiteeStore(),

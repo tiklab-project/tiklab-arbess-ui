@@ -9,8 +9,8 @@ const {Option} =Select
 const ConfigCodeGiteeOrGithub = props =>{
 
     const {githubStore,proofStore,configDataStore,giteeStore} = props
-    const {getCode, getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
-    const {url, getAllGiteeStorehouse,getGiteeBranch, getGiteeProof} = giteeStore
+    const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
+    const {url,getAllGiteeStorehouse,getGiteeBranch, getGiteeProof} = giteeStore
     const {findAllProof} = proofStore
     const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType} = configDataStore
 
@@ -52,7 +52,7 @@ const ConfigCodeGiteeOrGithub = props =>{
             projectName:values,
             proofId:localStorage.getItem('gitProofId')
         }
-        if(codeType  === 2){
+        if(codeType === 2){
             getGiteeBranch(params).then(res=>{
                 setBranchList(res.data)
             }).catch(error=>{
@@ -103,8 +103,8 @@ const ConfigCodeGiteeOrGithub = props =>{
                         {
                             allAuthorizeList && allAuthorizeList.map(item=>{
                                 return(
-                                    <Option key={item.proofId} value={item.proofDescribe+" (" +item.proofUsername+")"}>
-                                        { item.proofDescribe+ " (" + item.proofUsername + ")"}
+                                    <Option key={item.proofId} value={item.proofName+" (" +item.proofUsername+")"}>
+                                        { item.proofName+ " (" + item.proofUsername + ")"}
                                     </Option>
                                 )
                             })

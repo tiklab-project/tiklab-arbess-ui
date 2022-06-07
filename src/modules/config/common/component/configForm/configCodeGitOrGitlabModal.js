@@ -1,12 +1,11 @@
 import React from "react";
-import {Form, Select, Input, Modal, message} from "antd";
+import {Form, Select, Input, Modal} from "antd";
 
 const { Option } = Select;
 
 const ConfigCodeGitOrGitlabModal= props =>{
 
     const {visible,setVisible ,createProof,codeType} = props
-
     const [form] = Form.useForm();
 
     const onOk = () =>{

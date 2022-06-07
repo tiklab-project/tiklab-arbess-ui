@@ -18,9 +18,8 @@ const Config = props =>{
     const {code} = giteeStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,codeData,
-        setCodeData, formInitialValues, setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock, setMavenShellBlock,
+    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,codeData,setCodeData,formInitialValues,
+        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,
     } = configDataStore
 
     const [form] = Form.useForm();

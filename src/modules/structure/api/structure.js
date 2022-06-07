@@ -27,10 +27,10 @@ export function  FindStructureState (data){
     })
 }
 
-//构建历史
-export function  SelectHistoryDetails (data){
+//停止构建
+export function  KillInstance(data){
     return serviceLoc.request({
-        url:'/pipelineHistory/findAllHistory',
+        url:'/pipelineExec/killInstance',
         method:'post',
         data
     })
@@ -45,14 +45,6 @@ export function  FindHistoryLog (data){
     })
 }
 
-//删除构建历史
-export function  DeleteHistoryLog (data){
-    return serviceLoc.request({
-        url:'/pipelineHistory/deleteHistory',
-        method:'post',
-        data
-    })
-}
 
 //正在执行的详情
 export function  FindAll(data){
@@ -63,10 +55,29 @@ export function  FindAll(data){
     })
 }
 
-//停止构建
-export function  KillInstance(data){
+//构建历史
+export function  SelectHistoryDetails (data){
     return serviceLoc.request({
-        url:'/pipelineExec/killInstance',
+        url:'/pipelineHistory/findAllHistory',
+        method:'post',
+        data
+    })
+}
+
+//删除构建历史
+export function  DeleteHistoryLog (data){
+    return serviceLoc.request({
+        url:'/pipelineHistory/deleteHistory',
+        method:'post',
+        data
+    })
+}
+
+
+// 查询构建列表
+export function  FindLikeHistory(data){
+    return serviceLoc.request({
+        url:'/pipelineHistory/findLikeHistory',
         method:'post',
         data
     })

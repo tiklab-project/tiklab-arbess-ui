@@ -4,15 +4,15 @@ import {PlusOutlined} from "@ant-design/icons";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,giteeToken,
-        getCode,getGithubProof,githubToken
+    const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,giteeToken,getCode,getGithubProof,
+        githubToken
     }=props
 
     const [form] = Form.useForm()
 
     useEffect(()=>{
         form.setFieldsValue({
-            proofName:formInitialValues && formInitialValues.proofDescribe,
+            proofName:formInitialValues && formInitialValues.proofName,
         })
     },[formInitialValues])
 
@@ -52,7 +52,6 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             setVisible(false)
         })
     }
-
 
     const goUrl = () =>{
         if(codeType  === 2){
@@ -101,7 +100,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     <Form.Item
                         label='服务连接名'
                         name='proofName'
-                        // rules={[{ required: true, message: '请输入服务连接名' }]}
+                        rules={[{ required: true, message: '请输入服务连接名' }]}
                     >
                        <Input/>
                     </Form.Item>

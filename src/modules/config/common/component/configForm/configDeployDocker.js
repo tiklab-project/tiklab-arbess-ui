@@ -88,7 +88,7 @@ const ConfigDeployDocker = props =>{
                 label='映射端口'
                 style={{ display: 'inline-block',  margin: '1px 3px' }}
                 rules={[
-                    {required:true, message:'请输入启动端口'},
+                    {required:true, message:'请输入映射端口'},
                     {validator: validate}
                 ]}
             >
