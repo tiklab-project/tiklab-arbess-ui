@@ -3,12 +3,13 @@ import {Button, Card, Popconfirm} from "antd";
 
 const StructureRightItem = props =>{
 
-    const {rightData,status,historyId,deleteHistoryLog,forceUpdate, modeData,index,setVisible,setDrawerContent,
-        configName,runWay,
+    const {rightData,status,deleteHistoryLog,modeData,index,setVisible,setDrawerContent,configName,runWay,
+        freshen,setFreshen
     } = props
 
+    const historyId = localStorage.getItem('historyId')
     const triggerMode = () => {
-        return runWay (modeData.runWay)
+        return runWay (modeData && modeData.runWay)
     }
 
     const type = item =>{
@@ -27,15 +28,13 @@ const StructureRightItem = props =>{
     }
 
     const log = item => {
-        console.log(item)
         setDrawerContent(item)
         setVisible(true)
     }
 
     const confirm = () =>{
         deleteHistoryLog(historyId)
-        localStorage.removeItem('historyId')
-        forceUpdate({})
+        setFreshen(!freshen)
     }
 
     const rightDetails = () =>{

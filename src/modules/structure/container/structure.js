@@ -8,46 +8,36 @@ import { inject, observer } from "mobx-react";
 
 const Structure = props => {
 
-    const { structureStore } = props
+    const {structureStore} = props
 
-    const { findExecState, findStructureState,findAll,selectHistoryDetails,findHistoryLog,deleteHistoryLog,
+    const {findExecState,findStructureState,findAll,selectHistoryDetails,findHistoryLog,deleteHistoryLog,
         killInstance,findLikeHistory
     } = structureStore
 
-    const [, forceUpdate] = useState({})  // 刷新组件
     const [leftData,setLeftData] = useState([])     // 左侧 -- 旧历史列表
     const [leftExecute,setLeftExecute] = useState('')   // 左侧 -- 正在构建
     const [rightData,setRightData] = useState([])   // 右侧 -- 历史构建详情
     const [rightExecute,setRightExecute] = useState([])     // 右侧 -- 正在构建详情
     const [modeData,setModeData] = useState([])     // 历史列表的内容
-    const [details,setDetails] = useState(0) // 组件显示 -- 历史构建 或者 正在构建
     const [index,setIndex] = useState(0)  // 构建区分显示 -- 构建1 、2、……
-
+    const [freshen,setFreshen] = useState(false)  // 删除刷新组件
     const pipelineId = localStorage.getItem('pipelineId')
-    const historyId = localStorage.getItem('historyId')
-
-    useEffect(()=>{
-        return ()=>{
-            localStorage.removeItem('historyId')
-        }
-    },[])
 
     let interval=null
     useEffect(() => {
         findExecState(pipelineId).then(res=>{
-            console.log(res,'是否在构建中')
             if(res.data === 1 ){
-                setIndex(0)
                 interval = setInterval(() => {
                     findStructureState(pipelineId).then(res =>{
-                        console.log('构建时候的状态',res)
                         if(res.data!==null){
                             setLeftExecute(res.data)
                             if(res.data.runStatus===1 || res.data.runStatus===30){
-                                stop()
+                                setLeftExecute('')
+                                clearInterval(interval)
                             }
                         }else{
-                            stop()
+                            setLeftExecute('')
+                            clearInterval(interval)
                         }
                     })
                 }, 500)
@@ -58,13 +48,13 @@ const Structure = props => {
                 data()
             }else if(res.data=== 0){
                 data()
-                stop()
+                setLeftExecute('')
+                clearInterval(interval)
                 setIndex(1)
-                setDetails(1)
             }
         })
         return ()=> clearInterval(interval)
-    }, [pipelineId,historyId,details])
+    }, [pipelineId,freshen])
 
     const data = () => {
         let left = []
@@ -92,12 +82,6 @@ const Structure = props => {
         })
     }
 
-    const stop = () =>{
-        setLeftExecute('')
-        setDetails(1)
-        clearInterval(interval)
-    }
-
     const status = i =>{
         switch(i){
             case 0 :
@@ -123,16 +107,16 @@ const Structure = props => {
         }
     }
 
+
+
     return (
-        <div className='structure task' shouldupdate='true'>
+        <div className='structure' shouldupdate='true'>
             {
-                leftExecute ==='' && leftData && leftData.length===0 ?
+                leftExecute ==='' && leftData && leftData.length === 0 ?
                     <Result title="当前没有历史数据"/>
                     :
                     <div className='structure-content'>
                         <StructureLeft
-                            details={details}
-                            setDetails={setDetails}
                             leftExecute={leftExecute}
                             leftData={leftData}
                             setLeftData={setLeftData}
@@ -145,7 +129,10 @@ const Structure = props => {
                             findLikeHistory={findLikeHistory}
                         />
                         <StructureRight
-                            details={details}
+                            freshen={freshen}
+                            setFreshen={setFreshen}
+                            leftData={leftData}
+                            setLeftData={setLeftData}
                             rightData={rightData}
                             rightExecute={rightExecute}
                             status={status}
@@ -154,8 +141,6 @@ const Structure = props => {
                             index={index}
                             deleteHistoryLog={deleteHistoryLog}
                             killInstance={killInstance}
-                            forceUpdate={forceUpdate}
-                            historyId={historyId}
                         />
                     </div>
             }

@@ -14,7 +14,6 @@ const ConfigCodeGitOrGitlab = props =>{
 
     const [allGitProofList,setAllGitProofList] = useState([])
     const [visible,setVisible] = useState(false)
-    const gitProofId = localStorage.getItem('gitProofId')
 
     const clickFindAllGit = () =>{
         findAllProof(codeType).then(res=>{
@@ -40,7 +39,7 @@ const ConfigCodeGitOrGitlab = props =>{
     const test = () =>{
         if(codeName){
             const params = {
-                proofId:gitProofId,
+                proofId:localStorage.getItem('gitProofId'),
                 url:codeName
             }
             codeTestPass(params).then(res=>{

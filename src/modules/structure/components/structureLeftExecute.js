@@ -2,7 +2,7 @@ import React from "react";
 
 const StructureLeftExecute = props => {
 
-    const {leftExecute,setDetails,status,setIndex,details} = props
+    const {leftExecute,status,setIndex,index} = props
 
     const state = () =>{
         if(leftExecute){
@@ -17,15 +17,10 @@ const StructureLeftExecute = props => {
         }
     }
 
-    const changeMode = () => {
-        setIndex(0)
-        setDetails(0)
-    }
-
     return(
         <div
-            onClick={()=>changeMode()}
-            className={ details === 0  ?
+            onClick={()=>setIndex(0)}
+            className={ index === 0  ?
                 'history-content-list history-content-list_active'
                 : 'history-content-list'
             }

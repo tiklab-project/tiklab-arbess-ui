@@ -4,7 +4,7 @@ import StructureLeftExecute from "./structureLeftExecute";
 
 const StructureLeft = props =>{
 
-    const {findHistoryLog,leftData,leftExecute,setRightData,status,details,setDetails,setModeData,setIndex,index,
+    const {findHistoryLog,leftData,leftExecute,setRightData,status,setModeData,setIndex,index,
         findLikeHistory,setLeftData,
     } = props
 
@@ -22,7 +22,6 @@ const StructureLeft = props =>{
     }
     
     const showHistory = (item,i)=> {
-        setDetails(1)
         localStorage.setItem('historyId',item.historyId)
         findHistoryLog(item.historyId).then(res=>{
             console.log('构建历史详情',res)
@@ -41,7 +40,7 @@ const StructureLeft = props =>{
                             <div
                                 key={i}
                                 onClick={()=>showHistory(item,i)}
-                                className={index === i+1 && details === 1 ?
+                                className={index === i+1  ?
                                     'history-content-list history-content-list_active'
                                     :   'history-content-list'
                                 }
@@ -66,15 +65,17 @@ const StructureLeft = props =>{
             <StructureLeftDropdown
                 findLikeHistory={findLikeHistory}
                 setLeftData={setLeftData}
+                setModeData={setModeData}
+                setRightData={setRightData}
+                findHistoryLog={findHistoryLog}
             />
             <div className='structure-content-left-history'>
                 <div className='history-content'>
                     {   leftExecute === '' ? null:
                         <StructureLeftExecute
                             leftExecute={leftExecute}
-                            details={details}
-                            setDetails={setDetails}
                             status={status}
+                            index={index}
                             setIndex={setIndex}
                         />
                     }

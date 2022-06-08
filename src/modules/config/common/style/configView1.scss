@@ -1,5 +1,5 @@
 .configView1{
-    width: 100%;
+
     &-top{
         position: fixed;
         z-index: 99;
@@ -14,8 +14,8 @@
         display: flex;
         flex-direction: row;
         &-detail{
-            margin: 50px auto;
-            width: 80%;
+            margin: 55px auto;
+            width: 95%;
         }
     }
     &-wrapper{
@@ -24,6 +24,7 @@
             margin-bottom: 30px;
             border-bottom: 1px solid #cccccc;
             font-size: 16px;
+            font-weight: 700;
         }
         &-handle{
             text-align: center;

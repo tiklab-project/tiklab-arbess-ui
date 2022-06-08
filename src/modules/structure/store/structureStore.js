@@ -81,9 +81,11 @@ export class StructureStore {
 
     //删除构建历史
     @action
-    deleteHistoryLog = values =>{
-        const params = qs.stringify({historyId: values})
-        DeleteHistoryLog(params).then(res=>{
+    deleteHistoryLog =async values =>{
+        const param = qs.stringify({historyId: values})
+        // const data =await DeleteHistoryLog(param)
+        // return data.data
+        DeleteHistoryLog(param).then(res=>{
             console.log('删除',res)
         }).catch(error=>{
             console.log(error)
@@ -92,11 +94,12 @@ export class StructureStore {
 
     @action
     findLikeHistory = async values=>{
-        const params = new FormData()
-        params.append('pipelineId',values.pipelineId)
-        params.append('state',values.state)
-        params.append('name',values.name)
-        params.append('type',values.type)
+        const params ={
+            pipelineId:values.pipelineId,
+            state:values.state,
+            name:values.name,
+            type:values.type,
+        }
         const data =await  FindLikeHistory(params)
         return data.data
     }

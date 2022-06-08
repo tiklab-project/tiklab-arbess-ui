@@ -1,12 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button} from "antd";
-import WorkSpaceRecordDrawer from "./workSpaceRecordDrawer";
 
 const WorkSpaceRecord = props =>{
 
-    const {recordList} = props
-    const [detailsDrawer,setDetailsDrawer] = useState(false)
-    const [drawerContent,setDrawerContent] = useState([])
+    const {recordList,setDetailsDrawer,setDrawerContent} = props
 
     const details = item => {
         setDrawerContent(item)
@@ -44,11 +41,6 @@ const WorkSpaceRecord = props =>{
                     )
                 })
             }
-            <WorkSpaceRecordDrawer
-                detailsDrawer={detailsDrawer}
-                setDetailsDrawer={setDetailsDrawer}
-                drawerContent={drawerContent}
-            />
         </div>
     )
 }

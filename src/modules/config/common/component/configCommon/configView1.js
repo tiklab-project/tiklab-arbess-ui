@@ -205,7 +205,7 @@ const ConfigView1 = props =>{
     }
 
     return(
-        <div className='configView1 task '>
+        <div className='configView1 '>
             <div className='configView1-content'>
                 <div className='configView1-content-detail'>
                     <div style={{textAlign:'right'}}>

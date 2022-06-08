@@ -3,7 +3,7 @@ import { Drawer ,Button} from 'antd';
 import {CloseOutlined} from "@ant-design/icons";
 import '../../structure/components/structureRightLogDrawer.scss'
 
-const WorkSpaceRecordDrawer = props =>{
+const WorkSpaceDrawer = props =>{
 
     const {detailsDrawer,setDetailsDrawer,drawerContent} = props
 
@@ -16,7 +16,7 @@ const WorkSpaceRecordDrawer = props =>{
             width={700}
         >
             <div className='wrapper-head'>
-                <div>详情</div>
+                <div>{ drawerContent.title ? drawerContent.title :drawerContent.commitTime }</div>
                 <div>
                     <Button type='text' onClick={()=>setDetailsDrawer(false)}>
                         <CloseOutlined />
@@ -25,17 +25,14 @@ const WorkSpaceRecordDrawer = props =>{
             </div>
             <div className='wrapper-body'>
                 <div className='log'>
-                    <div className='log-title'>{drawerContent.commitTime}</div>
                     <div className='log-content'>
-                        {
-                            drawerContent.commitFile && drawerContent.commitFile.map((item,index)=>{
-                                return(
-                                    <div key={index}>
-                                        {index}、{item}
-                                    </div>
-                                )
-                            })
-                        }
+                        {drawerContent.commitFile && drawerContent.commitFile.map((item, index) => {
+                            return(
+                                <div key={index}>
+                                    {drawerContent.title ? null : `${index}、`}{item}
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
@@ -43,4 +40,4 @@ const WorkSpaceRecordDrawer = props =>{
     )
 }
 
-export default WorkSpaceRecordDrawer
+export default WorkSpaceDrawer

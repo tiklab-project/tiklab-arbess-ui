@@ -5,8 +5,7 @@ import StructureRightItem from "./structureRightItem";
 
 const StructureRight = props =>{
 
-    const {rightData,details,status,historyId,deleteHistoryLog,forceUpdate,modeData,index,leftExecute,killInstance,
-        rightExecute
+    const {rightData,status,deleteHistoryLog,modeData,index,leftExecute,killInstance,rightExecute,freshen,setFreshen
     } = props
     
     const [visible,setVisible] = useState(false)
@@ -48,8 +47,10 @@ const StructureRight = props =>{
         <div className='structure-content-right'>
             <div className='structure-content-right-mid'>
                 {
-                    details === 0 ?
+                    index === 0 ?
                         <StructureRightExecute
+                            freshen={freshen}
+                            setFreshen={setFreshen}
                             rightExecute={rightExecute}
                             rightData={rightData}
                             status={status}
@@ -63,14 +64,14 @@ const StructureRight = props =>{
                         />
                         :
                         <StructureRightItem
+                            freshen={freshen}
+                            setFreshen={setFreshen}
                             rightData={rightData}
                             status={status}
-                            forceUpdate={forceUpdate}
                             modeData={modeData}
                             index={index}
                             setVisible={setVisible}
                             setDrawerContent={setDrawerContent}
-                            historyId={historyId}
                             deleteHistoryLog={deleteHistoryLog}
                             configName={configName}
                             runWay={runWay}

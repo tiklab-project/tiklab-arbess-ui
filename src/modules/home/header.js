@@ -1,6 +1,7 @@
 import React, {useState,Fragment,useEffect} from 'react'
 import {Input} from "antd";
 import {withRouter} from "react-router-dom";
+import logo from '../../assets/images/logo.png'
 
 const { Search } = Input;
 
@@ -44,7 +45,9 @@ const Head =props=>{
 
     return(
         <div className="header">
-            <div className='header-logo'>doublekit</div>
+            <div className='header-logo'>
+                <img src={logo} alt={'logo'} />
+            </div>
             <ul className="header-nav">
                 {renderRouter()}
             </ul>

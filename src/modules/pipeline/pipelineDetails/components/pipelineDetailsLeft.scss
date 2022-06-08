@@ -14,24 +14,19 @@ ul{
         padding: 0;
     }
     &_content{
-        height: 60px;
-        width: 60px;
+        height: 50px;
         text-align: center;
-        margin-bottom: 8px;
         cursor: pointer;
-        color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px;
         &:hover{
-            color: #1890ff;
-        }
-        &_icon{
-            padding: 13px 0 5px
-        }
-        &_title{
-            margin-top: 5px;
+            background: #eaeaea;
         }
     }
     &_link{
-        color: #1890ff;
+        background: #eaeaea;
     }
 }
 .opt{

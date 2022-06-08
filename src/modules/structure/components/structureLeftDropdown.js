@@ -1,99 +1,145 @@
-import React from "react";
+import React ,{useState} from "react";
 import { Select  } from 'antd';
 
 const { Option } = Select;
 
-const lis = [
-    {
-        id:1,
-        opt: [
-            {   type:0,
-                tpl:'状态',
-            },
-            {
-                type:1,
-                tpl:'失败',
-            },
-            {
-                type:20,
-                tpl:'停止',
-            },
-            {
-                type:30,
-                tpl:'成功',
-            },
-        ]
-    },
-    {
-        id:2,
-        opt: [
-            {   type:0,
-                tpl:'执行人',
-            },
-            {
-                type:1,
-                tpl:'admin',
-            },
-        ]
-    },
-    {
-        id:3,
-        opt:[
-            {   type:0,
-                tpl:'执行方式',
-            },
-            {
-                type:1,
-                tpl:'手动',
-            },
-            {
-                type:2,
-                tpl:'自动',
-            },
-
-        ]
-    },
-]
-
 const StructureLeftDropdown = props =>{
 
-    const {findLikeHistory,setLeftData} = props
+    const {findLikeHistory,setLeftData,setModeData,setRightData,findHistoryLog} = props
+    const pipelineId = localStorage.getItem('pipelineId')
+    const [state,setState] = useState(0)
+    const [enforcer,setEnforcer] = useState(null)
+    const [mode,setMode] = useState(0)
 
-    const changeOpt = (value,e,group)  => {
-        console.log(e.key,value,group)
+    let params = null
+    const change = () =>{
+        findLikeHistory(params).then(res=>{
+            if(res.data.length!==0){
+                setModeData(res.data && res.data[0])
+                localStorage.setItem('historyId',res.data && res.data[0].historyId)
+                findHistoryLog(res.data && res.data[0].historyId).then(response=>{
+                    console.log('历史详情',res)
+                    setLeftData([...res.data])
+                    setRightData([...response.data])
+                })
+            }else{
+                setLeftData([])
+                setRightData([])
+            }
+        }).catch(error=>{
+            console.log(error)
+        })
     }
+
+    const changeState = (value,e) =>{
+        setState(e.key)
+        params = {
+            pipelineId:pipelineId,
+            state:e.key,
+            name:enforcer,
+            type:mode,
+        }
+        change()
+    }
+
+    const changeEnforcer = (value,e) =>{
+        setEnforcer(value)
+        if(value==='全部'){
+            value=null
+        }
+        params = {
+            pipelineId:pipelineId,
+            state:state,
+            name:value,
+            type:mode,
+        }
+        change()
+    }
+
+    const changeMode = (value,e) =>{
+        setMode(e.key)
+        params = {
+            pipelineId:pipelineId,
+            state:state,
+            name:enforcer,
+            type:e.key,
+        }
+        change()
+    }
+
+    //状态
+    const stateList = [
+        {   type:0,
+            tpl:'全部',
+        },
+        {
+            type:1,
+            tpl:'失败',
+        },
+        {
+            type:20,
+            tpl:'停止',
+        },
+        {
+            type:30,
+            tpl:'成功',
+        },
+    ]
+    //执行人
+    const enforcerList = [
+        {   type:0,
+            tpl:'全部',
+        },
+        {
+            type:1,
+            tpl:'admin',
+        },
+    ]
+    //执行方式
+    const modeList = [
+        {   type:0,
+            tpl:'全部',
+        },
+        {
+            type:1,
+            tpl:'手动',
+        },
+        {
+            type:2,
+            tpl:'自动',
+        },
+    ]
 
     return(
         <div className='structure-content-left-dropdown'>
             <div className='dropdown'>
-                {
-                    lis.map((group,index)=>{
-                        return (
-                            <Select
-                                bordered={false}
-                                key={index}
-                                style={{width:100}}
-                                defaultValue={group.opt[0].tpl}
-                                onChange={(value,e)=>changeOpt(value,e,group)}
-                            >
-                                {
-                                    group.opt.map(item=>{
-                                        return(
-                                            <Option
-                                                key={ item.type }
-                                                value= {item.tpl}
-                                                // onCli
-                                            >
-                                                {item.tpl}
-                                            </Option>
-                                        )
-
-                                    })
-                                }
-                            </Select>
-                        )
-                    })
-                }
+                <Select  bordered={false} style={{width:100}} defaultValue='状态'
+                         onChange={(value,e)=>changeState(value,e)}
+                >
+                    {
+                        stateList.map(item=>{
+                            return <Option key={ item.type } value= {item.tpl}>{item.tpl}</Option>
+                        })
+                    }
+                </Select>
+                <Select  bordered={false} style={{width:100}} defaultValue='执行人'
+                         onChange={(value,e)=>changeEnforcer(value,e)}
+                >
+                    {
+                        enforcerList.map(item=>{
+                            return <Option key={ item.type } value= {item.tpl}>{item.tpl}</Option>
+                        })
+                    }
+                </Select>
+                <Select  bordered={false} style={{width:100}} defaultValue='执行方式'
+                         onChange={(value,e)=>changeMode(value,e)}
+                >
+                    {
+                        modeList.map(item=>{
+                            return <Option key={ item.type } value= {item.tpl}>{item.tpl}</Option>
+                        })
+                    }
+                </Select>
             </div>
         </div>
     )

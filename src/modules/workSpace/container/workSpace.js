@@ -4,15 +4,18 @@ import './workSpace.scss'
 import {inject,observer} from "mobx-react";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
+import WorkSpaceDrawer from "../components/workSpaceDrawer";
 
 const WorkSpace = props =>{
 
     const {workSpaceStore} = props
-    const {getSubmitMassage,fileTree,recordList} = workSpaceStore
+    const {getSubmitMassage,fileTree,recordList,readFile} = workSpaceStore
     const pipelineId = localStorage.getItem('pipelineId')
     const [fileList,setFileList] = useState([])
     const [initial,setInitial] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
+    const [detailsDrawer,setDetailsDrawer] = useState(false)
+    const [drawerContent,setDrawerContent] = useState('')
 
     useEffect(()=>{
         getSubmitMassage(pipelineId)
@@ -30,7 +33,7 @@ const WorkSpace = props =>{
 
 
     return(
-        <div className='workSpace task'>
+        <div className='workSpace'>
             <WorkSpaceNod
                 fileList={fileList}
                 setFileList={setFileList}
@@ -38,9 +41,19 @@ const WorkSpace = props =>{
                 setInitial={setInitial}
                 catalogue={catalogue}
                 setCatalogue={setCatalogue}
+                readFile={readFile}
+                setDetailsDrawer={setDetailsDrawer}
+                setDrawerContent={setDrawerContent}
             />
             <WorkSpaceRecord
                 recordList={recordList}
+                setDetailsDrawer={setDetailsDrawer}
+                setDrawerContent={setDrawerContent}
+            />
+            <WorkSpaceDrawer
+                detailsDrawer={detailsDrawer}
+                setDetailsDrawer={setDetailsDrawer}
+                drawerContent={drawerContent}
             />
         </div>
     )

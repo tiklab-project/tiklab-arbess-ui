@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Breadcrumb} from "antd";
 
 const WorkSpaceNod = props =>{
 
-    const {fileList,setFileList,setInitial,initial,catalogue,setCatalogue} = props
+    const {fileList,setFileList,setInitial,initial,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent
+    } = props
     const pipelineName = localStorage.getItem('pipelineName')
 
     const renderType = treeType => {
@@ -36,6 +37,13 @@ const WorkSpaceNod = props =>{
         setCatalogue([...catalogue,...level])
     }
 
+    const textDetails = group => {
+        readFile(group.treePath).then(res=>{
+            setDrawerContent({title:group.treeName,commitFile:res.data})
+            setDetailsDrawer(true)
+        })
+    }
+
     const setBreadcrumb = () =>{
         setCatalogue([])
         setInitial(!initial)
@@ -60,7 +68,12 @@ const WorkSpaceNod = props =>{
             if(group.treeType === 1 ){
                 return  <div className='nod_item_tree' key={index}>
                             <span>{renderType(group.treeType)}</span>
-                            <span>{group.treeName}</span>
+                            <span
+                                className='nod_item_tree_name'
+                                onClick={()=>textDetails(group)}
+                            >
+                                {group.treeName}
+                            </span>
                         </div>
             }else {
                 return   <div className='nod_item_tree' key={index}>
@@ -95,6 +108,7 @@ const WorkSpaceNod = props =>{
             <div className='workSpace-top-nod'>
                 {renderFileList(fileList)}
             </div>
+
         </div>
     )
 }

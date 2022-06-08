@@ -10,10 +10,19 @@ export function  GetSubmitMassage (data){
     })
 }
 
-//查询近期构建记录
+//节点master上的工作空间
 export function  FileTree (data){
     return serviceLoc.request({
         url:'/pipelineExec/fileTree',
+        method: 'post',
+        data
+    })
+}
+
+//节点master上的工作空间文件详情
+export function  ReadFile (data){
+    return serviceLoc.request({
+        url:'/pipelineExec/readFile',
         method: 'post',
         data
     })

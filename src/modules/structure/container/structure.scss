@@ -1,11 +1,9 @@
 .structure{
     margin: 46px auto;
+    width: 95%;
     .icon {
         width: 20px !important;
         height: 20px !important;
-        vertical-align: -0.15em;
-        fill: currentColor;
-        overflow: hidden;
     }
     &-content{
         display: flex;
@@ -13,10 +11,9 @@
         &-left {
             width: 350px;
             min-width: 350px;
-            height: calc(100vh - 140px);
             background: #fff;
             border-right: 1px solid #d9d9d9;
-            padding-top: 30px;
+            padding-top: 15px;
             vertical-align: top;
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;
@@ -31,10 +28,10 @@
                 }
             }
             &-history{
-                overflow-y: auto;
-                height: 100%;
                 .history-content{
-                    padding-right: 30px;
+                    padding-right: 15px;
+                    overflow-y: auto;
+                    height: 83vh;
                     &-list{
                         display: flex;
                         flex-direction: row;
@@ -80,7 +77,7 @@
         &-right{
             flex-grow: 1;
             height: calc(100vh - 120px);
-            padding: 20px 16px;
+            padding: 15px;
             &-mid{
                 .mid_group{
                     display: flex;
@@ -144,7 +141,7 @@
         &-bottom{
             &-outLog{
               white-space: pre-wrap;
-              height:56vh;
+              height:59vh;
               overflow-y: auto;
               overflow-x: hidden;
             }

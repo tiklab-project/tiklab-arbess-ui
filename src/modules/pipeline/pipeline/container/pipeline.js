@@ -10,7 +10,6 @@ const Pipeline = props =>{
         <div className='pipeline' shouldupdate='true' >
             <PipelineSearch />
             <PipelineTabs/>
-
         </div>
     )
 }
