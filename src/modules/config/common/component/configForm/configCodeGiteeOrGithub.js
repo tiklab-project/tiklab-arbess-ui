@@ -11,8 +11,8 @@ const ConfigCodeGiteeOrGithub = props =>{
     const {githubStore,proofStore,configDataStore,giteeStore} = props
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch, getGiteeProof} = giteeStore
-    const {findAllProof} = proofStore
-    const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType} = configDataStore
+    const {findAllProof,getState} = proofStore
+    const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType,} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -28,6 +28,29 @@ const ConfigCodeGiteeOrGithub = props =>{
             setProhibited(false)
         }
     },[])
+
+    let time = null
+    useEffect(()=>{
+        const params = {
+            code:null,
+            state:0,
+        }
+        if(visible){
+            time = setInterval(()=>{
+                getState(params).then(res=>{
+                    console.log('getState',res)
+                    if(res.data === 1){
+                        message.success({content:'授权成功', className:'message'})
+                    }else if(res.data === 2){
+                        message.error({content:'拒绝授权或者授权失败', className:'message'})
+                    }
+                })
+            },2000)
+        }
+        if(!visible){
+            clearInterval(time)
+        }
+    },[visible])
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
@@ -73,7 +96,18 @@ const ConfigCodeGiteeOrGithub = props =>{
         setCodeBranch(values)
     }
 
+
     const newCode = () => {
+        // time = setInterval(()=>{
+        //     getState(isCodeValue).then(res=>{
+        //         console.log('getState',res)
+        //         if(res.data === 1){
+        //             clearInterval(time)
+        //             message.success({content: '授权成功', className:'message'})
+        //
+        //         }
+        //     })
+        // },1000)
         setVisible(true)
     }
 

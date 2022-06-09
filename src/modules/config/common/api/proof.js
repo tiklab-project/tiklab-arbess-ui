@@ -27,6 +27,14 @@ export function  FindOneProof(data){
     })
 }
 
+//
+export function  GetState(data){
+    return serviceLoc.request({
+        url:'/gitee/getState',
+        method:'post',
+        data
+    })
+}
 
 
 

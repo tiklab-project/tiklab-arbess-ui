@@ -70,7 +70,6 @@ export class ConfigDataStore {
         this.mavenShellBlock = value
     }
 
-
 }
 
 export const CONFIGDATA_STORE = 'configDataStore'

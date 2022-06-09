@@ -83,13 +83,8 @@ export class StructureStore {
     @action
     deleteHistoryLog =async values =>{
         const param = qs.stringify({historyId: values})
-        // const data =await DeleteHistoryLog(param)
-        // return data.data
-        DeleteHistoryLog(param).then(res=>{
-            console.log('删除',res)
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data =await DeleteHistoryLog(param)
+        return data.data
     }
 
     @action

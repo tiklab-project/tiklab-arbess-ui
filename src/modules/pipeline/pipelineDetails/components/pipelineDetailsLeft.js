@@ -58,7 +58,7 @@ const PipelineDetailsLeft = props =>{
          <div className='aside'>
             <ul  className='content'>
                 <li
-                    onClick = {()=>setVisible(!visible)}
+                    onClick={()=>setVisible(!visible)}
                     onBlur={()=>setVisible(false)}
                     className='aside_content'
                     style={{padding:10}}

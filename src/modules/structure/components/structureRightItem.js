@@ -1,13 +1,12 @@
-import React ,{Fragment} from "react";
+import React from "react";
 import {Button, Card, Popconfirm} from "antd";
 
 const StructureRightItem = props =>{
 
     const {rightData,status,deleteHistoryLog,modeData,index,setVisible,setDrawerContent,configName,runWay,
-        freshen,setFreshen
+        freshen,setFreshen,historyId,
     } = props
 
-    const historyId = localStorage.getItem('historyId')
     const triggerMode = () => {
         return runWay (modeData && modeData.runWay)
     }
@@ -33,37 +32,34 @@ const StructureRightItem = props =>{
     }
 
     const confirm = () =>{
-        deleteHistoryLog(historyId)
-        setFreshen(!freshen)
+        deleteHistoryLog(historyId).then(()=>{
+            setFreshen(!freshen)
+        }).catch(error=>{
+            console.log(error)
+        })
     }
 
     const rightDetails = () =>{
-        return (
-            <Fragment>
-                {
-                    rightData && rightData.map((item,index)=>{
-                        return(
-                            <Card className='mid_group_center-cart' key={index}>
-                                <div className='cart-top'>
-                                    {item.taskAlias} -- { type(item) }
-                                </div>
-                                <div className='cart-center'>
-                                    <div className='cart-center-item'>
-                                        <div>状态：{state(item)}</div>
-                                        <div>时间：{item.execTime} </div>
-                                    </div>
-                                </div>
-                                <div className='cart-bottom' >
-                                    <span className='cart-bottom-span' onClick={()=>log(item)}>
-                                        日志
-                                    </span>
-                                </div>
-                            </Card>
-                        )
-                    })
-                }
-            </Fragment>
-        )
+        return  rightData && rightData.map((item,index)=>{
+            return(
+                <Card className='mid_group_center-cart' key={index}>
+                    <div className='cart-top'>
+                        {item.taskAlias} -- { type(item) }
+                    </div>
+                    <div className='cart-center'>
+                        <div className='cart-center-item'>
+                            <div>状态：{state(item)}</div>
+                            <div>时间：{item.execTime} </div>
+                        </div>
+                    </div>
+                    <div className='cart-bottom' >
+                        <span className='cart-bottom-span' onClick={()=>log(item)}>
+                            日志
+                        </span>
+                    </div>
+                </Card>
+            )
+        })
     }
 
     return (
@@ -86,9 +82,7 @@ const StructureRightItem = props =>{
                     </Popconfirm>
                 </div>
             </div>
-            <div className="mid_group_center">
-                {rightDetails()}
-            </div>
+            <div className="mid_group_center"> {rightDetails()} </div>
             <div className='structure-content-bottom'>
                 <h3>输出</h3>
                 <div className='structure-content-bottom-outLog' >

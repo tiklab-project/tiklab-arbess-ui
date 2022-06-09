@@ -1,14 +1,17 @@
 import React, {useEffect} from "react";
 import { Modal,Form,Input,Select ,Row,Button,message} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
+import {getUrlParam} from "../configCommon/getUrlParam";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
     const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,giteeToken,getCode,getGithubProof,
-        githubToken
+        githubToken,
     }=props
 
     const [form] = Form.useForm()
+    const codeValue = getUrlParam('code')
+    const codeError = getUrlParam('error')
 
     useEffect(()=>{
         form.setFieldsValue({
@@ -53,11 +56,20 @@ const ConfigCodeGiteeOrGithubModal = props =>{
         })
     }
 
+    useEffect(()=>{
+        if(codeValue){
+            localStorage.setItem('codeValue',codeValue)
+            // window.close()
+        }if(codeError){
+            localStorage.setItem('codeError','111')
+            // window.close()
+        }
+    },[])
+
     const goUrl = () =>{
         if(codeType  === 2){
             localStorage.setItem('giteeCode','giteeCode')
             url().then(res=>{
-                window.location.href=res.data
                 window.open(res.data)
             }).catch(error=>{
                 console.log(error)

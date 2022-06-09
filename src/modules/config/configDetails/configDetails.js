@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, {useState, useEffect, useReducer, useMemo} from "react";
 import '../common/style/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
@@ -11,11 +11,11 @@ import formAll from "../common/component/configForm/formAll";
 
 const ConfigDetails = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore,proofStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
-
     const {code} = giteeStore
+    const {findAllProof,getState} = proofStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
@@ -25,6 +25,7 @@ const ConfigDetails = props =>{
 
     const [form] = Form.useForm();
     const [view,setView] = useState(0)
+
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -38,51 +39,40 @@ const ConfigDetails = props =>{
             localStorage.removeItem('structureId')
             localStorage.removeItem('deployId')
         }
-    },[])
+    },[pipelineId])
 
     //Gitee和Github授权
     useEffect(() => {
         if(codeValue){
+            const params = {
+                code:codeValue,
+                state:1,
+            }
             if(localStorage.getItem('giteeCode')){
-                localStorage.removeItem('githubToken')
                 code(codeValue).then(res=>{
-                    if(res.data){
-                        localStorage.setItem('giteeToken',JSON.stringify(res.data))
-                        tips(1)
-                    }else{
-                        tips(2)
-                    }
-                    console.log(res,'gitee授权')
+                    localStorage.setItem('giteeToken',JSON.stringify(res.data))
                     localStorage.removeItem('giteeCode')
+                    getState(params)
+                    window.close()
                 })
             }else if(localStorage.getItem('githubCode')){
-                localStorage.removeItem('giteeToken')
                 getAccessToken(codeValue).then(res=>{
-                    console.log(res,'github')
-                    if(res.data === null ){
-                        tips(1)
-                    }else {
-                        tips(2)
-                        localStorage.setItem('githubToken',res.data)
-                    }
+                    localStorage.setItem('githubToken',res.data)
                     localStorage.removeItem('githubCode')
+                    window.close()
                 })
             }
         }
         if(codeError){
-            tips(2)
+            localStorage.setItem('codeValue',codeError)
+            const params = {
+                code:codeError,
+                state:1,
+            }
+            getState(params)
+            window.close()
         }
-    }, [])
-
-    const tips = i =>{
-        switch (i){
-            case 1:
-                message.success({content: '授权成功', className:'message'})
-                break
-            case 2:
-                message.error({content:'授权失败', className:'message'})
-        }
-    }
+    }, [codeValue])
 
     useEffect(()=>{
         if(codeData){
@@ -312,5 +302,5 @@ const ConfigDetails = props =>{
 }
 
 export default  withRouter(inject('configStore', 'giteeStore',
-                    'structureStore','configDataStore','githubStore')
-                (observer(ConfigDetails)))
+                'structureStore','configDataStore','githubStore','proofStore')
+            (observer(ConfigDetails)))

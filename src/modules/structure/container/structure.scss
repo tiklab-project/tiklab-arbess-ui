@@ -12,7 +12,6 @@
             width: 350px;
             min-width: 350px;
             background: #fff;
-            border-right: 1px solid #d9d9d9;
             padding-top: 15px;
             vertical-align: top;
             -webkit-box-orient: vertical;
@@ -31,7 +30,7 @@
                 .history-content{
                     padding-right: 15px;
                     overflow-y: auto;
-                    height: 83vh;
+                    height: 80vh;
                     &-list{
                         display: flex;
                         flex-direction: row;
@@ -76,8 +75,9 @@
         }
         &-right{
             flex-grow: 1;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 118px);;
             padding: 15px;
+            border-left: 1px solid #d9d9d9;
             &-mid{
                 .mid_group{
                     display: flex;
@@ -141,11 +141,16 @@
         &-bottom{
             &-outLog{
               white-space: pre-wrap;
-              height:59vh;
+              height:60vh;
               overflow-y: auto;
               overflow-x: hidden;
             }
             padding: 20px;
+        }
+        &-null{
+            display: flex;
+            margin: 50px auto;
+            width: 36%;
         }
     }
 }

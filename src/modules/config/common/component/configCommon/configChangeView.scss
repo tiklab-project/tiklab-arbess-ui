@@ -1,28 +1,35 @@
 .config_changeView{
     position: fixed;
     z-index: 900;
-    top: 60px;
-    right: 5%;
+    top: 62px;
+    right: 2.5%;
     min-width: 500px;
     .changeView{
         display: flex;
-        flex-direction: row;
         justify-content: right;
         &-btn{
             &>button{
-                &:first-child{
-                    margin-right: 20px;
+                &:last-child{
+                    margin: 0 15px;
                 }
             }
         }
-        .view{
-            cursor: pointer;
-            height: 30px;
-            line-height: 30px;
-            width: 80px;
-            text-align: center;
-            &-link{
-                color: #1890ff;
+        &-view{
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            .view{
+                cursor: pointer;
+                height: 31px;
+                line-height: 31px;
+                width: 80px;
+                text-align: center;
+                display: inline-block;
+                &:first-child{
+                    border-right: 1px solid #ccc;
+                }
+                &-link{
+                    color: #1890ff;
+                }
             }
         }
     }

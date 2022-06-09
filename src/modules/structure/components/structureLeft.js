@@ -1,12 +1,9 @@
 import React, {Fragment} from "react";
-import StructureLeftDropdown from "./structureLeftDropdown";
 import StructureLeftExecute from "./structureLeftExecute";
 
 const StructureLeft = props =>{
 
-    const {findHistoryLog,leftData,leftExecute,setRightData,status,setModeData,setIndex,index,
-        findLikeHistory,setLeftData,
-    } = props
+    const {findHistoryLog,leftData,leftExecute,setRightData,status,setModeData,setIndex,index,setHistoryId} = props
 
     const sta = item =>{
         if(leftData){
@@ -22,7 +19,7 @@ const StructureLeft = props =>{
     }
     
     const showHistory = (item,i)=> {
-        localStorage.setItem('historyId',item.historyId)
+        setHistoryId(item.historyId)
         findHistoryLog(item.historyId).then(res=>{
             console.log('构建历史详情',res)
             setModeData(item)
@@ -61,26 +58,17 @@ const StructureLeft = props =>{
     }
 
     return(
-        <div className='structure-content-left'>
-            <StructureLeftDropdown
-                findLikeHistory={findLikeHistory}
-                setLeftData={setLeftData}
-                setModeData={setModeData}
-                setRightData={setRightData}
-                findHistoryLog={findHistoryLog}
-            />
-            <div className='structure-content-left-history'>
-                <div className='history-content'>
-                    {   leftExecute === '' ? null:
-                        <StructureLeftExecute
-                            leftExecute={leftExecute}
-                            status={status}
-                            index={index}
-                            setIndex={setIndex}
-                        />
-                    }
-                    { leftDetails() }
-                </div>
+        <div className='structure-content-left-history'>
+            <div className='history-content'>
+                {   leftExecute === '' ? null:
+                    <StructureLeftExecute
+                        leftExecute={leftExecute}
+                        status={status}
+                        index={index}
+                        setIndex={setIndex}
+                    />
+                }
+                { leftDetails() }
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findLikeHistory,setLeftData,setModeData,setRightData,findHistoryLog} = props
+    const {findLikeHistory,setLeftData,setModeData,index,setIndex,setHistoryId,setRightData,findHistoryLog} = props
     const pipelineId = localStorage.getItem('pipelineId')
     const [state,setState] = useState(0)
     const [enforcer,setEnforcer] = useState(null)
@@ -14,15 +14,18 @@ const StructureLeftDropdown = props =>{
     let params = null
     const change = () =>{
         findLikeHistory(params).then(res=>{
-            if(res.data.length!==0){
+            const data = res.data
+            if(data.length !== 0){
                 setModeData(res.data && res.data[0])
-                localStorage.setItem('historyId',res.data && res.data[0].historyId)
+                setHistoryId('historyId',res.data && res.data[0].historyId)
                 findHistoryLog(res.data && res.data[0].historyId).then(response=>{
-                    console.log('历史详情',res)
-                    setLeftData([...res.data])
-                    setRightData([...response.data])
+                    setLeftData([...data])
+                    if(index!==0){
+                        setRightData([...response.data])
+                        setIndex(1)
+                    }
                 })
-            }else{
+            } else {
                 setLeftData([])
                 setRightData([])
             }
@@ -43,10 +46,10 @@ const StructureLeftDropdown = props =>{
     }
 
     const changeEnforcer = (value,e) =>{
-        setEnforcer(value)
         if(value==='全部'){
             value=null
         }
+        setEnforcer(value)
         params = {
             pipelineId:pipelineId,
             state:state,
