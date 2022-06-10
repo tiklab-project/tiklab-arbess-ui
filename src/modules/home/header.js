@@ -1,5 +1,6 @@
 import React, {useState,Fragment,useEffect} from 'react'
 import {Input} from "antd";
+import {useTranslation} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import logo from '../../assets/images/logo.png'
 
@@ -11,6 +12,8 @@ const Head =props=>{
 
     const [currentLink, setCurrentLink] = useState('流水线');
     const nav = localStorage.getItem('nav')
+    const { i18n } = useTranslation();
+    const [lan, setLan] = useState(i18n.language);
 
     useEffect(()=>{
         setCurrentLink(nav)
@@ -31,7 +34,7 @@ const Head =props=>{
                               <li
                                   key={routers.key}
                                   onClick={ () => changeCurrentLink(routers)}
-                                  className={currentLink === routers.title ? 'header-link-active header-link' : 'header-link'}
+                                  className={currentLink === routers.title ? 'headers-link-active headers-link' : 'headers-link'}
                               >
                                   {routers.title}
                               </li>
@@ -44,17 +47,17 @@ const Head =props=>{
     }
 
     return(
-        <div className="header">
-            <div className='header-logo'>
+        <div className="headers">
+            <div className='headers-logo'>
                 <img src={logo} alt={'logo'} />
             </div>
-            <ul className="header-nav">
+            <ul className="headers-nav">
                 {renderRouter()}
             </ul>
 
-            <ul className="header-right header-nav">
-                <li  className='header-link'>
-                    <a href='/#/login' >登录</a>
+            <ul className="headers-right header-nav">
+                <li  className='headers-link'>
+                    <span onClick={()=>props.history.push('/login')}>登录</span>
                 </li>
             </ul>
         </div>

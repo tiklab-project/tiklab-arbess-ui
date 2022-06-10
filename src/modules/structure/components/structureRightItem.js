@@ -1,28 +1,21 @@
 import React from "react";
 import {Button, Card, Popconfirm} from "antd";
+import ConfigName from "../../config/common/component/configCommon/configName";
 
 const StructureRightItem = props =>{
 
-    const {rightData,status,deleteHistoryLog,modeData,index,setVisible,setDrawerContent,configName,runWay,
-        freshen,setFreshen,historyId,
+    const {rightData,status,deleteHistoryLog,modeData,index,setVisible,setDrawerContent,runWay,historyId,
+        freshen,setFreshen,
     } = props
-
-    const triggerMode = () => {
-        return runWay (modeData && modeData.runWay)
-    }
-
-    const type = item =>{
-        return configName(item.taskType)
-    }
 
     const state = item =>{
         switch(item.runState){
             case 1:
-                return status(2)
+                return status(2) //失败
             case 10:
-                return status(1)
+                return status(1) //成功
             default:
-                return status(4)
+                return status(4) //被迫停止
         }
     }
 
@@ -44,7 +37,8 @@ const StructureRightItem = props =>{
             return(
                 <Card className='mid_group_center-cart' key={index}>
                     <div className='cart-top'>
-                        {item.taskAlias} -- { type(item) }
+                        {item.taskAlias} --
+                        <ConfigName type={item.taskType}/>
                     </div>
                     <div className='cart-center'>
                         <div className='cart-center-item'>
@@ -68,7 +62,7 @@ const StructureRightItem = props =>{
                 <div className='mid_group_top_tel'>
                     <span className='tel_time'>构建 {index}</span>
                     <span className='tel_time'>执行时长：{modeData && modeData.execTime}</span>
-                    <span className='tel_way'>触发方式：{triggerMode()}</span>
+                    <span className='tel_way'>触发方式：{ runWay (modeData && modeData.runWay) }</span>
                 </div>
                 <div className="mid_group_top_del">
                     <Popconfirm

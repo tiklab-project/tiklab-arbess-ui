@@ -16,7 +16,7 @@ export class WorkSpaceStore{
         param.append('pipelineId',value)
         GetSubmitMassage(param).then(res=>{
             console.log('近期提交记录',res)
-            this.recordList = res.data.data
+            this.recordList = res.data
         }).catch(error=>{
             console.log(error)
         })
@@ -27,7 +27,7 @@ export class WorkSpaceStore{
         const param = new FormData()
         param.append('pipelineId',value)
         const data = await FileTree(param)
-        return data.data
+        return data
     }
 
     @action
@@ -35,7 +35,7 @@ export class WorkSpaceStore{
         const param = new FormData()
         param.append('path',value)
         const data = await ReadFile(param)
-        return data.data
+        return data
     }
 
 }

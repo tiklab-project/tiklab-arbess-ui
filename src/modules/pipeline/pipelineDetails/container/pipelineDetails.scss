@@ -1,7 +1,7 @@
 .ant-layout-sider-children{
     position: fixed;
     z-index: 99;
-    background-color: #ffffff;
+    background-color: #fff;
 }
 .pipelineDetails{
     background: #fff;
@@ -12,9 +12,11 @@
     font-size: 16px;
     position: fixed;
     width: 100%;
-    min-width: 230px;
     z-index: 100;
-    background-color: #ffffff;
-  border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #ccc;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 50px;
+    background: #fff;
 }
 

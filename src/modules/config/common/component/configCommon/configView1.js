@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from "react";
-import '../../style/configView1.scss';
+import React, {useState, useEffect,useRef} from "react";
+import './configView1.scss';
 import {Button, Form, Input,message} from "antd";
 import ConfigAddNewStageModal from "../configView1/configAddNewStageModal";
 import ConfigAddCodeModal from "../configView1/configAddCodeModal";
@@ -10,10 +10,12 @@ import moment from "../../../../../common/moment/moment";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
 import {withRouter} from "react-router";
+import ConfigForm from "./configForm";
+import ConfigName from "./configName";
 
 const ConfigView1 = props =>{
 
-    const {form,del,updateConfigure,configDataStore,configName,configForm} = props
+    const {form,del,updateConfigure,configDataStore} = props
 
     const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,setCodeType,
@@ -63,14 +65,6 @@ const ConfigView1 = props =>{
             }
             setData([...data])
         }
-    }
-
-    const inputContent = type =>{
-        return configForm(type)
-    }
-
-    const dataType = type =>{
-        return configName(type)
     }
 
     const onFinish = values => {
@@ -192,12 +186,16 @@ const ConfigView1 = props =>{
                     </div>
                     <div className='configView1-wrapper-newStage'>
                         <div className='desc'>
-                            <div className='desc-head'> {dataType(group.dataType)} </div>
+                            <div className='desc-head'>
+                                <ConfigName type={group.dataType}/>
+                            </div>
                             <div className='desc-delete' onClick={()=>deletePart(group)}>
                                 <CloseOutlined />
                             </div>
                         </div>
-                        <div className='desc-input'> { inputContent(group.dataType) }</div>
+                        <div className='desc-input'>
+                            <ConfigForm type={group.dataType}/>
+                        </div>
                     </div>
                 </div>
             )
@@ -207,54 +205,50 @@ const ConfigView1 = props =>{
     return(
         <div className='configView1 '>
             <div className='configView1-content'>
-                <div className='configView1-content-detail'>
-                    <div style={{textAlign:'right'}}>
-                        <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
-                    </div>
-                    <Form
-                        id='form'
-                        form={form}
-                        layout='vertical'
-                        autoComplete = "off"
-                        onFinish={onFinish}
-                        onValuesChange={onValuesChange}
-                    >
-                        <ConfigCode
-                            codeData={codeData}
-                            setCodeVisible={setCodeVisible}
-                            del={del}
-                            configName={configName}
-                            configForm={configForm}
-                        />
-                        { newStage() }
-                        <ConfigAddNewStage setNewStageVisible={setNewStageVisible}/>
-                    </Form>
-
-                    <ConfigAddNewStageModal
-                        data={data}
-                        setData={setData}
-                        newStageVisible={newStageVisible}
-                        setNewStageVisible={setNewStageVisible}
-                        setIsPrompt={setIsPrompt}
-                    />
-                    <ConfigAddCodeModal
-                        codeName={codeName}
-                        codeBranch={codeBranch}
-                        codeVisible={codeVisible}
-                        setCodeVisible={setCodeVisible}
-                        setCodeData={setCodeData}
-                        setIsPrompt={setIsPrompt}
-                        setCodeType={setCodeType}
-                    />
-                    <ChangeConfigSortsDrawer
-                        changeSortVisible={changeSortVisible}
-                        setChangeSortVisible={setChangeSortVisible}
-                        data={data}
-                        setData={setData}
-                        codeData={codeData}
-                        setIsPrompt={setIsPrompt}
-                    />
+                <div style={{textAlign:'right'}}>
+                    <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
                 </div>
+                <Form
+                    id='form'
+                    form={form}
+                    layout='vertical'
+                    autoComplete = "off"
+                    onFinish={onFinish}
+                    onValuesChange={onValuesChange}
+                >
+                    <ConfigCode
+                        codeData={codeData}
+                        setCodeVisible={setCodeVisible}
+                        del={del}
+                    />
+                    { newStage() }
+                    <ConfigAddNewStage setNewStageVisible={setNewStageVisible}/>
+                </Form>
+
+                <ConfigAddNewStageModal
+                    data={data}
+                    setData={setData}
+                    newStageVisible={newStageVisible}
+                    setNewStageVisible={setNewStageVisible}
+                    setIsPrompt={setIsPrompt}
+                />
+                <ConfigAddCodeModal
+                    codeName={codeName}
+                    codeBranch={codeBranch}
+                    codeVisible={codeVisible}
+                    setCodeVisible={setCodeVisible}
+                    setCodeData={setCodeData}
+                    setIsPrompt={setIsPrompt}
+                    setCodeType={setCodeType}
+                />
+                <ChangeConfigSortsDrawer
+                    changeSortVisible={changeSortVisible}
+                    setChangeSortVisible={setChangeSortVisible}
+                    data={data}
+                    setData={setData}
+                    codeData={codeData}
+                    setIsPrompt={setIsPrompt}
+                />
             </div>
         </div>
     )

@@ -4,7 +4,7 @@ import './home.scss'
 import {renderRoutes} from "react-router-config";
 import Heads from "./header";
 
-const { Header, Content } = Layout;
+const { Header, Content ,Footer} = Layout;
 
 const Home=props=>{
     const headerRoutes=[

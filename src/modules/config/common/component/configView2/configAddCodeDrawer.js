@@ -18,7 +18,6 @@ const leftLis = [
 const ConfigAddCodeDrawer = props =>{
 
     const {setCodeData,codeDrawer,setCodeDrawer,setIsPrompt,codeBranch,codeName,codeType,setCodeType} = props
-
     const [opt,setOpt] = useState(1)
     const [codeOpt,setCodeOpt]=useState(0)
 

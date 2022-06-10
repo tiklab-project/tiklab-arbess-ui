@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import formAll from "../configForm/formAll";
+import ConfigForm from "../configCommon/configForm";
 
 const ConfigAddCodeRightSvnDrawer = props =>{
 
@@ -16,8 +16,9 @@ const ConfigAddCodeRightSvnDrawer = props =>{
                     <div className='group-tpl'> SVN </div>
                 </div>
             </div>
-
-            <div className='body-menu_form'> { formAll.svn } </div>
+            <div className='body-menu_form'>
+                <ConfigForm type={5}/>
+            </div>
         </Fragment>
     )
 }

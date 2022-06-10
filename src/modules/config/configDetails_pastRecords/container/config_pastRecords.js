@@ -10,7 +10,7 @@ const ConfigPastRecords=props=>{
 
     const [visible, setVisible] = useState(false)
 
-    const onCreate = values => {
+    const onCreate = () => {
         setVisible(false)
     }
 

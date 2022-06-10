@@ -4,7 +4,7 @@ import './pipelineDel-Rename.scss'
 import {observer,inject} from "mobx-react";
 
 /*
- *流水线设置
+ * 流水线设置
  */
 const PipelineDelRename= props=>{
 
@@ -12,7 +12,6 @@ const PipelineDelRename= props=>{
     const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
 
     const [form]=Form.useForm()
-
     const pipelineId=localStorage.getItem('pipelineId')
 
     const onConfirm=()=>{

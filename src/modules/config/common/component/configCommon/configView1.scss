@@ -1,22 +1,8 @@
 .configView1{
-
-    &-top{
-        position: fixed;
-        z-index: 99;
-        background: #ffffff;
-        border-bottom: 1px solid #cccccc;
-        height: 40px;
-        line-height: 40px;
-        width: 100%;
-        padding-left: 5vh
-    }
+    margin: 55px auto;
+    width: 95%;
     &-content{
-        display: flex;
-        flex-direction: row;
-        &-detail{
-            margin: 55px auto;
-            width: 95%;
-        }
+        padding: 15px;
     }
     &-wrapper{
         margin: 30px 0;

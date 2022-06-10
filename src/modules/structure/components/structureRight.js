@@ -6,34 +6,10 @@ import StructureRightItem from "./structureRightItem";
 const StructureRight = props =>{
 
     const {rightData,status,deleteHistoryLog,modeData,index,leftExecute,killInstance,rightExecute,freshen,setFreshen,
-        historyId,
-    } = props
+        historyId } = props
     
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState('')
-
-    const configName = i =>{
-        switch (i) {
-            case 1:
-                return '通用Git'
-            case 2:
-                return 'Gitee'
-            case 3:
-                return 'Github'
-            case 4:
-                return 'Gitlab'
-            case 11:
-                return '单元测试'
-            case 21:
-                return 'maven'
-            case 22:
-                return 'node'
-            case 31:
-                return 'linux'
-            case 32:
-                return 'docker'
-        }
-    }
 
     const runWay = i => {
         switch (i) {
@@ -60,7 +36,6 @@ const StructureRight = props =>{
                             setDrawerContent={setDrawerContent}
                             setVisible={setVisible}
                             killInstance={killInstance}
-                            configName={configName}
                             runWay={runWay}
                         />
                         :
@@ -75,7 +50,6 @@ const StructureRight = props =>{
                             setVisible={setVisible}
                             setDrawerContent={setDrawerContent}
                             deleteHistoryLog={deleteHistoryLog}
-                            configName={configName}
                             runWay={runWay}
                         />
                 }
@@ -85,7 +59,6 @@ const StructureRight = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 drawerContent={drawerContent}
-                configName={configName}
             />
 
         </div>

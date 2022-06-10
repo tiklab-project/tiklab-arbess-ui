@@ -8,6 +8,7 @@ const PipelineTabs_all= props=>{
     return(
        <div shouldupdate='true'>
            <Table
+               bordered
                rowKey={rowKey}
                columns={columns}
                dataSource={pipelineList}

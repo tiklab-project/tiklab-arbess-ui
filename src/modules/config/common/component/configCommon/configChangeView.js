@@ -27,10 +27,14 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className='changeView-view'>
-                    <div className={view ===0 ? 'view view-link' : 'view' } onClick={()=>setView(0)}>
+                    <div className={view ===0 ? 'view view-link' : 'view' }
+                         onClick={()=>setView(0)}
+                    >
                         表单视图
                     </div>
-                    <div className={view ===1 ? 'view view-link' : 'view' } onClick={()=>setView(1)}>
+                    <div className={view ===1 ? 'view view-link' : 'view' }
+                         onClick={()=>setView(1)}
+                    >
                         图形化视图
                     </div>
                 </div>

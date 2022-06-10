@@ -21,9 +21,6 @@ const userProduction = true;
 let fetchMethod = "post"
 fetchMethod = JSON.stringify(fetchMethod);
 
-let env = "prod";
-env = JSON.stringify(env)
-
 const appKey = JSON.stringify('');
 const appSecret = JSON.stringify('');
 const version = JSON.stringify('');
@@ -35,7 +32,6 @@ module.exports = {
     plugin_base_url,
     pluginAddressUrl,
     fetchMethod,
-    env,
     appKey,
     appSecret,
     version,

@@ -24,11 +24,14 @@ const ChangeConfigSortsDrawer = props =>{
                     break
                 case 4:
                     desc = 'Gitlab'
+                    break
+                case 5:
+                    desc = 'SVN'
             }
             nameArray.push({
                 key:0,
                 title: '源码管理' + '--' + desc,
-                disable: true,
+                disabled: true,
                 step:'源码管理'
             })
         }     

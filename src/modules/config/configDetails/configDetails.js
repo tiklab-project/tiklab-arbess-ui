@@ -1,13 +1,12 @@
-import React, {useState, useEffect, useReducer, useMemo} from "react";
-import '../common/style/config.scss'
+import React, {useState, useEffect, Fragment} from "react";
+import '../common/component/configCommon/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import {Form, message, Modal} from "antd";
+import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam'
-import formAll from "../common/component/configForm/formAll";
 
 const ConfigDetails = props =>{
 
@@ -15,7 +14,7 @@ const ConfigDetails = props =>{
 
     const {updateConfigure,findAllConfigure} = configStore
     const {code} = giteeStore
-    const {findAllProof,getState} = proofStore
+    const {getState} = proofStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
@@ -25,7 +24,6 @@ const ConfigDetails = props =>{
 
     const [form] = Form.useForm();
     const [view,setView] = useState(0)
-
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -52,6 +50,7 @@ const ConfigDetails = props =>{
                 code(codeValue).then(res=>{
                     localStorage.setItem('giteeToken',JSON.stringify(res.data))
                     localStorage.removeItem('giteeCode')
+                    localStorage.removeItem('githubToken')
                     getState(params)
                     window.close()
                 })
@@ -59,12 +58,13 @@ const ConfigDetails = props =>{
                 getAccessToken(codeValue).then(res=>{
                     localStorage.setItem('githubToken',res.data)
                     localStorage.removeItem('githubCode')
+                    localStorage.removeItem('giteeToken')
+                    getState(params)
                     window.close()
                 })
             }
         }
         if(codeError){
-            localStorage.setItem('codeValue',codeError)
             const params = {
                 code:codeError,
                 state:1,
@@ -217,60 +217,8 @@ const ConfigDetails = props =>{
         }
     }
 
-    // 配置名称
-    const configName = i =>{
-        switch (i) {
-            case 1:
-                return '通用Git'
-            case 2:
-                return 'Gitee'
-            case 3:
-                return 'Github'
-            case 4:
-                return 'Gitlab'
-            case 5:
-                return 'SVN'
-            case 11:
-                return '单元测试'
-            case 21:
-                return 'maven'
-            case 22:
-                return 'node'
-            case 31:
-                return 'linux'
-            case 32:
-                return 'docker'
-        }
-    }
-
-    // 按需配置表单
-    const configForm = i => {
-        switch (i){
-            case 1:
-                return formAll.gitOrGitlab
-            case 2:
-                return formAll.giteeOrGithub
-            case 3:
-                return formAll.giteeOrGithub
-            case 4:
-                return formAll.gitOrGitlab
-            case 5:
-                return formAll.svn
-            case 11:
-                return formAll.unit
-            case 21:
-                return formAll.mavenOrNode
-            case 22:
-                return formAll.mavenOrNode
-            case 31:
-                return formAll.linux
-            case 32:
-                return formAll.docker
-        }
-    }
-
     return (
-        <div shouldupdate='true'>
+        <Fragment>
             <ConfigChangeView
                 view={view}
                 setView={setView}
@@ -284,20 +232,16 @@ const ConfigDetails = props =>{
                     <ConfigView1
                         form={form}
                         del={del}
-                        configName={configName}
-                        configForm={configForm}
                         updateConfigure={updateConfigure}
                     />
                     :
                     <ConfigView2
                         form={form}
                         del={del}
-                        configName={configName}
-                        configForm={configForm}
                         updateConfigure={updateConfigure}
                     />
             }
-        </div>
+        </Fragment>
     )
 }
 

@@ -1,41 +1,31 @@
 import React, {Fragment} from "react";
 import {CloseOutlined} from "@ant-design/icons";
+import ConfigName from "../configCommon/configName";
+import ConfigForm from "../configCommon/configForm";
 
 const ConfigCode = props =>{
 
-    const {setCodeVisible,codeData,del,configName,configForm,} = props
-
-    const addCode = () =>{
-        setCodeVisible(true)
-    }
-
-    const deletePart = () =>{
-        del(1)
-    }
-    
-    const inputCode = () =>{
-        return configForm(codeData.codeType)
-    }
-
-    const codeType = () =>{
-        return configName(codeData.codeType)
-    }
+    const {setCodeVisible,codeData,del} = props
 
     const code = () => {
         return  codeData ?
             <div className='configView1-wrapper'>
                 <div className='configView1-wrapper-newStage'>
                     <div className='desc'>
-                        <div className='desc-head'> { codeType() } </div>
-                        <div className='desc-delete' onClick={()=>deletePart()}>
+                        <div className='desc-head'>
+                            <ConfigName type={codeData.codeType}/>
+                        </div>
+                        <div className='desc-delete' onClick={()=> del(1) }>
                             <CloseOutlined />
                         </div>
                     </div>
-                    <div className='desc-input'> {inputCode()} </div>
+                    <div className='desc-input'>
+                        <ConfigForm type={codeData.codeType}/>
+                    </div>
                 </div>
             </div>
             :
-            <div className='configView1-wrapper-handle' onClick={()=>addCode()}>
+            <div className='configView1-wrapper-handle' onClick={()=>setCodeVisible(true)}>
                 添加代码源
             </div>
     }

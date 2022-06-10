@@ -33,7 +33,7 @@ export class ProofStore{
         const param = new FormData()
         param.append('type',value)
         const data = await FindAllProof(param)
-        return data.data
+        return data
     }
 
     @action
@@ -41,7 +41,7 @@ export class ProofStore{
         const param = new FormData()
         param.append('proofId',values.proofId)
         const data = await FindOneProof(param)
-        return data.data
+        return data
     }
 
     @action
@@ -50,7 +50,7 @@ export class ProofStore{
         params.append('code',value.code)
         params.append('state',value.state)
         const data = await GetState(params)
-        return data.data
+        return data
     }
 
 }

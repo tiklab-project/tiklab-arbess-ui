@@ -2,10 +2,11 @@ import React from "react";
 import { Drawer ,Button} from 'antd';
 import {CloseOutlined} from "@ant-design/icons";
 import './structureRightLogDrawer.scss'
+import ConfigName from "../../config/common/component/configCommon/configName";
 
 const StructureRightLogDrawer = props =>{
 
-    const {visible,setVisible,drawerContent,configName} = props
+    const {visible,setVisible,drawerContent} = props
 
     return(
         <Drawer
@@ -26,7 +27,9 @@ const StructureRightLogDrawer = props =>{
                 </div>
                 <div className='wrapper-body'>
                     <div className='log'>
-                        <div className='log-title'>{configName(drawerContent && drawerContent.taskType)} :</div>
+                        <div className='log-title'>
+                            <ConfigName type={drawerContent.taskType}/>
+                            :</div>
                         <div className='log-content'> {drawerContent && drawerContent.runLog} </div>
                     </div>
                  </div>

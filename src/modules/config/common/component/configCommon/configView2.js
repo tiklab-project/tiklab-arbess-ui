@@ -1,5 +1,5 @@
-import React, {useState, useRef, Fragment,useEffect} from "react";
-import  '../../style/configView2.scss';
+import React, {Fragment,useState,useRef,useEffect} from "react";
+import  './configView2.scss';
 import ConfigCode from "../configView2/configCode";
 import ConfigAddNewStage from "../configView2/configAddNewStage";
 import ConfigAddCodeDrawer from "../configView2/configAddCodeDrawer";
@@ -10,10 +10,11 @@ import {Form, Input, message} from "antd";
 import {EditOutlined} from "@ant-design/icons";
 import moment from "../../../../../common/moment/moment";
 import {withRouter} from "react-router";
+import ConfigName from "./configName";
 
 const ConfigView2 = props =>{
 
-    const {form, updateConfigure,configDataStore,del,configName,configForm} = props
+    const {form, updateConfigure,configDataStore,del} = props
 
     const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,codeType,setCodeType,linuxShellBlock,unitShellBlock,mavenShellBlock,
@@ -67,10 +68,6 @@ const ConfigView2 = props =>{
     const insertData = (item,index) => {
         setNewStageDrawer(true)
         setIndex(index)
-    }
-
-    const dataType = type =>{
-        return configName(type)
     }
 
     const onFinish = values => {
@@ -204,7 +201,7 @@ const ConfigView2 = props =>{
                                     <div className='newStages-task'>
                                         <div className='newStages-job'>
                                             <div className='newStages-job_text' onClick={()=>showStage(item)}>
-                                                {dataType(item.dataType)}
+                                                <ConfigName type={item.dataType}/>
                                             </div>
                                         </div>
                                     </div>
@@ -225,7 +222,6 @@ const ConfigView2 = props =>{
                     setCodeDrawer={setCodeDrawer}
                     setNewStage={setNewStage}
                     setTaskFormDrawer={setTaskFormDrawer}
-                    configName={configName}
                 />
                 <div className='configView2-main'>
                     <div className='configView2-main_container'>
@@ -278,8 +274,6 @@ const ConfigView2 = props =>{
                     setTaskFormDrawer={setTaskFormDrawer}
                     newStage={newStage}
                     del={del}
-                    configName={configName}
-                    configForm={configForm}
                 />
            </Form>
         </div>

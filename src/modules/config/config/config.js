@@ -1,31 +1,33 @@
 import React,{Fragment,useState,useEffect} from "react";
-import '../common/style/config.scss';
+import '../common/component/configCommon/config.scss';
+import './config.scss';
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import ConfigTop from "./configTop";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import {getUrlParam} from '../common/component/configCommon/getUrlParam'
+import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 import {inject, observer} from "mobx-react";
-import formAll from "../common/component/configForm/formAll";
 
 const Config = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore,proofStore} = props
 
     const {updateConfigure} = configStore
     const {code} = giteeStore
+    const {getState} = proofStore
+    const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,codeData,setCodeData,formInitialValues,
-        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,
+    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,setData,codeData,setCodeData,formInitialValues,
+        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,setCodeType,
     } = configDataStore
 
     const [form] = Form.useForm();
-
     const [view,setView] = useState(0)
     const codeValue = getUrlParam('code')
+    const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
@@ -35,21 +37,44 @@ const Config = props =>{
         }
     },[])
 
-    //Gitee授权
+    //Gitee和Github授权
     useEffect(() => {
-        const se = setTimeout(()=>localStorage.removeItem('code'),100)
-        if (codeValue && localStorage.getItem('code')) {
-            code(codeValue).then(res=>{
-                localStorage.setItem('AccessToken',JSON.stringify(res.data))
-                window.close()
-            })
+        if(codeValue){
+            const params = {
+                code:codeValue,
+                state:1,
+            }
+            if(localStorage.getItem('giteeCode')){
+                code(codeValue).then(res=>{
+                    localStorage.setItem('giteeToken',JSON.stringify(res.data))
+                    localStorage.removeItem('giteeCode')
+                    localStorage.removeItem('githubToken')
+                    getState(params)
+                    window.close()
+                })
+            }else if(localStorage.getItem('githubCode')){
+                getAccessToken(codeValue).then(res=>{
+                    localStorage.setItem('githubToken',res.data)
+                    localStorage.removeItem('githubCode')
+                    localStorage.removeItem('giteeToken')
+                    getState(params)
+                    window.close()
+                })
+            }
         }
-        return () => clearTimeout(se)
-    }, [])
+        if(codeError){
+            const params = {
+                code:codeError,
+                state:1,
+            }
+            getState(params)
+            window.close()
+        }
+    }, [codeValue])
 
     useEffect(()=>{
         if(codeData){
-            if(codeData.desc){
+            if(codeData.codeType){
                 const newCode = {
                     codeName:codeName,
                     codeBranch:codeBranch
@@ -91,7 +116,7 @@ const Config = props =>{
             case 'git':
                 formInitialValues.codeName = null
                 formInitialValues.codeBranch = null
-                formInitialValues.proofDescribe = null
+                formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
                 setCodeName('')
@@ -116,55 +141,6 @@ const Config = props =>{
         }
     }
 
-    // 配置名称
-    const configName = i =>{
-        switch (i) {
-            case 1:
-                return '通用Git'
-            case 2:
-                return 'Gitee'
-            case 3:
-                return 'Github'
-            case 4:
-                return 'Gitlab'
-            case 11:
-                return '单元测试'
-            case 21:
-                return 'maven'
-            case 22:
-                return 'node'
-            case 31:
-                return 'linux'
-            case 32:
-                return 'docker'
-        }
-    }
-
-    // 按需配置表单
-    const configForm = i => {
-        switch (i){
-            case 1:
-                return formAll.gitOrGitlab
-            case 2:
-                return formAll.giteeOrGithub
-            case 3:
-                return formAll.gitOrGitlab
-            case 4:
-                return formAll.gitOrGitlab
-            case 11:
-                return formAll.unit
-            case 21:
-                return formAll.mavenOrNode
-            case 22:
-                return formAll.mavenOrNode
-            case 31:
-                return formAll.linux
-            case 32:
-                return formAll.docker
-        }
-    }
-
-
     return (
         <Fragment >
             <ConfigTop/>
@@ -181,16 +157,12 @@ const Config = props =>{
                     <ConfigView1
                         form={form}
                         del={del}
-                        configName={configName}
-                        configForm={configForm}
                         updateConfigure={updateConfigure}
                     />
                     :
                     <ConfigView2
                         form={form}
                         del={del}
-                        configName={configName}
-                        configForm={configForm}
                         updateConfigure={updateConfigure}
                     />
             }
@@ -200,5 +172,5 @@ const Config = props =>{
 
 
 export default  withRouter(inject('configStore', 'giteeStore',
-                    'structureStore','configDataStore','githubStore')
+                'structureStore','configDataStore','githubStore','proofStore')
                 (observer(Config)))

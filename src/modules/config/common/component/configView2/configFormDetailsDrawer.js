@@ -1,18 +1,12 @@
 import React from "react";
 import {Button, Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
+import ConfigName from "../configCommon/configName";
+import ConfigForm from "../configCommon/configForm";
 
 const ConfigFormDetailsDrawer = props =>{
 
-    const {data,setData,taskFormDrawer,setTaskFormDrawer,newStage,del,configName,configForm} = props
-
-    const codeDe = () =>{
-        return configName(newStage)
-    }
-
-    const showTask = () =>{
-        return configForm(newStage)
-    }
+    const {data,setData,taskFormDrawer,setTaskFormDrawer,newStage,del} = props
 
     const deletePart = () => {
         del(newStage)
@@ -47,13 +41,17 @@ const ConfigFormDetailsDrawer = props =>{
                         </Button>
                     </div>
                 </div>
-                <div className="wrapper-body" id="pipeline-menu-wrapper-body" >
+                <div className="wrapper-body">
                     <div className="body">
                         <div className='body-taskForm'>
                             <div className='taskForm-top'>
-                                <div className='taskForm-top_title'>{codeDe()}</div>
+                                <div className='taskForm-top_title'>
+                                    <ConfigName type={newStage}/>
+                                </div>
                             </div>
-                            <div> {showTask()} </div>
+                            <div>
+                                <ConfigForm type={newStage}/>
+                            </div>
                         </div>
                     </div>
                 </div>

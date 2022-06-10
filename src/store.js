@@ -1,3 +1,5 @@
+import {PluginStore,PLUGIN_STORE} from "doublekit-plugin-ui";
+import {EAM_STORE,EamStore} from 'doublekit-eam-ui';
 import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/pipeline/store/pipelineStore";
 import {STRUCTURE_STORE,StructureStore} from "./modules/structure/store/structureStore";
 import {CONFIG_STORE,ConfigStore} from "./modules/config/common/store/configStore";
@@ -17,6 +19,8 @@ function createStores() {
         [GITHUB_STORE]:new GithubStore(),
         [PROOF_STORE]:new ProofStore(),
         [WORKSPACE_STORE]:new WorkSpaceStore(),
+        [PLUGIN_STORE]: new PluginStore(),
+        [EAM_STORE]: new EamStore(),
     }
 }
 

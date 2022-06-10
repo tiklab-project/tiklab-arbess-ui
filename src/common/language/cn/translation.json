@@ -1,0 +1,22 @@
+{
+    "home": "首页",
+    "org_center": "组织中心",
+    "sys" : "系统管理",
+    "login": "登录",
+    "help": "帮助",
+    "line_photo": "路线图",
+    "work": "事项",
+    "demand": "需求",
+    "task": "任务",
+    "defect": "缺陷",
+    "sprint": "迭代",
+    "version": "版本",
+    "module": "模块",
+    "plan": "计划",
+    "user": "成员",
+    "privilege": "权限",
+    "statistic": "统计",
+    "survey": "概况",
+    "epic": "史诗",
+    "milestone": "里程碑"
+}

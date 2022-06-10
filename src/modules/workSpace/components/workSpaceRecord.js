@@ -1,5 +1,7 @@
 import React from "react";
 import {Button} from "antd";
+import {inject, observer} from 'mobx-react'
+import {UserList, USER_STORE} from 'doublekit-user-ui'
 
 const WorkSpaceRecord = props =>{
 
@@ -12,7 +14,8 @@ const WorkSpaceRecord = props =>{
 
     return(
         <div className='workSpace-bottom'>
-            <h1 className='workSpace-h1'>近期提交记录</h1>
+
+            <h1>近期提交记录</h1>
             {
                 recordList && recordList.map((group,groupIndex)=>{
                     return(
@@ -41,8 +44,10 @@ const WorkSpaceRecord = props =>{
                     )
                 })
             }
+            <div className='workSpace-null'/>
         </div>
     )
 }
 
-export default WorkSpaceRecord
+export default inject(USER_STORE)(observer(WorkSpaceRecord))
+

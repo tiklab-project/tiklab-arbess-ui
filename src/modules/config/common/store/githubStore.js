@@ -22,7 +22,7 @@ export class GithubStore {
         const params = new FormData()
         params.append("code", value)
         const data = await GetAccessToken(params)
-        return data.data
+        return data
     }
 
     @action
@@ -31,8 +31,7 @@ export class GithubStore {
         params.append("proofName", value.proofName)
         params.append("accessToken", value.accessToken)
         const data = await GetProof(params)
-        return data.data;
-
+        return data
     }
 
     @action
@@ -40,8 +39,7 @@ export class GithubStore {
         const param = new FormData()
         param.append("proofId", value)
         const data =await GetAllStorehouse(param)
-        return data.data
-
+        return data
     }
 
     @action
@@ -50,7 +48,7 @@ export class GithubStore {
         params.append('projectName',value.projectName)
         params.append('proofId',value.proofId)
         const data = await GetBranch(params)
-        return data.data
+        return data
     }
 
 }

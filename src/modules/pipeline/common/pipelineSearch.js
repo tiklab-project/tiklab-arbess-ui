@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button,Input} from "antd";
+import {Button,Input} from "antd";
 import {withRouter} from "react-router";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
@@ -12,7 +12,7 @@ const PipelineSearch= props=>{
     const {findOneName}=pipelineStore
 
     const onSearch = values =>{
-        findOneName(values).then(res=>{
+        findOneName(values).then(() =>{
             props.history.push(`/home/searchresult/${values}`)
         })
     }
@@ -22,8 +22,7 @@ const PipelineSearch= props=>{
             <div className='pipeline-top-r'>
                 <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
                 <Button type='primary' onClick={()=>props.history.push('/home/new')}>
-                    <PlusOutlined/>
-                    新建流水线
+                    <PlusOutlined/> 新建流水线
                 </Button>
             </div>
         </div>

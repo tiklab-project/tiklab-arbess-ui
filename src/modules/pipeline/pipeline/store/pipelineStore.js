@@ -24,7 +24,7 @@ export class PipelineStore{
     @action
     findAllPipelineStatus=()=>{
         FindAllPipelineStatus().then(res=>{
-            this.pipelineList=res.data.data
+            this.pipelineList=res.data
             console.log('所有流水线', res)
         }).catch(error=>{
             console.log(error)
@@ -42,7 +42,7 @@ export class PipelineStore{
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
                 console.log('创建流水线',res)
-                resolve(res.data)
+                resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()
@@ -55,9 +55,9 @@ export class PipelineStore{
         const params = qs.stringify({'pipelineName': values})
         return new Promise((resolve, reject) => {
             FindOneName(params).then(res=>{
-                this.searchPipelineList=res.data.data
+                this.searchPipelineList=res.data
                 console.log("搜索流水线",res)
-                resolve(res.data)
+                resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()

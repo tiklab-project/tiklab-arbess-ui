@@ -1,8 +1,9 @@
 import React from "react";
+import ConfigName from "../configCommon/configName";
 
 const ConfigCode = props =>{
 
-    const {setCodeDrawer ,codeData,setNewStage,setTaskFormDrawer,configName} = props
+    const {setCodeDrawer ,codeData,setNewStage,setTaskFormDrawer} = props
 
     const showDetailsDrawer = () => {
         if(codeData){
@@ -11,32 +12,23 @@ const ConfigCode = props =>{
         }
     }
 
-    const codeType = () =>{
-        return configName(codeData.codeType)
-    }
-
-
     const code = () => {
         return  codeData ?
             <div className='configView2-sider_code_one'>
                 <div className='configView2-sider_code_one_name' onClick={()=>showDetailsDrawer()}>
-                    {codeType()}
+                    <ConfigName type={codeData.codeType}/>
                 </div>
                 {
                     codeData.codeName ?
                         <div className='configView2-sider_code_one_address'>
-                            <div className='branch-title'>
-                                {codeData.codeName}
-                            </div>
+                            <div className='branch-title'> {codeData.codeName} </div>
                         </div>
                         : null
                 }
                 {
                     codeData.codeBranch ?
                         <div className='configView2-sider_code_one_branch '>
-                            <div className='branch-address'>
-                                {codeData.codeBranch}
-                            </div>
+                            <div className='branch-address'> {codeData.codeBranch} </div>
                         </div>
                         : null
                 }

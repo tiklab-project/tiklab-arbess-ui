@@ -4,10 +4,6 @@ const ConfigAddCodeLeftDrawer = props =>{
 
     const {leftLis,opt,setOpt} = props
 
-    const changeAnchor = item =>{
-        setOpt(item)
-    }
-
     return(
         <div className="body-menu_left">
             <ul className="at-nav">
@@ -16,7 +12,7 @@ const ConfigAddCodeLeftDrawer = props =>{
                         return(
                             <li
                                 key={item.id}
-                                onClick={()=>changeAnchor(index+1)}
+                                onClick={ ()=>setOpt(item) }
                                 className={opt === index+1 ? 'at-nav-item at-nav-selected' : 'at-nav-item'}
                             >
                                 <div className="at-nav-item-main">

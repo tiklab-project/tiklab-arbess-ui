@@ -1,15 +1,11 @@
-import React, {Fragment,useState} from "react";
+import React from "react";
 import {Button, Card} from "antd";
+import ConfigName from "../../config/common/component/configCommon/configName";
 
 const StructureRightExecute = props => {
 
-    const {status,leftExecute,killInstance,rightExecute,configName,runWay,index,
-        freshen,setFreshen} = props
+    const {status,leftExecute,killInstance,rightExecute,runWay,index,freshen,setFreshen} = props
     const pipelineId = localStorage.getItem('pipelineId')
-
-    const type = item =>{
-        return configName(item.taskType)
-    }
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
     const state = index =>{
@@ -17,13 +13,13 @@ const StructureRightExecute = props => {
             const i = leftExecute.sort;
             const j = leftExecute.status;
             if(i > j && index === i ){
-                return  status(0)
+                return  status(0)  // 运行
             }else if (index < i ){
-                return  status(1)
+                return  status(1)  //成功
             }else if(i<j){
-                return  status(2)
+                return  status(2)  //失败
             }else if(index > i){
-                return  status(3)
+                return  status(3)  //运行--等待运行
             }
         }
     }
@@ -42,10 +38,6 @@ const StructureRightExecute = props => {
             }
         }
     }
-
-    const triggerMode = () => {
-        return runWay (leftExecute.runWay)
-    }
     
     const cease = () => {
         killInstance(pipelineId).then(res=>{
@@ -61,12 +53,13 @@ const StructureRightExecute = props => {
             return(
                 <Card className='mid_group_center-cart' key={index}>
                     <div className='cart-top'>
-                        {item.taskAlias} -- {type(item)}
+                        {item.taskAlias} --
+                        <ConfigName type={item.taskType}/>
                     </div>
                     <div className='cart-center'>
                         <div className='cart-center-item'>
-                            <div>状态：{state(index+1)}</div>
-                            <div >时间：{times(index)}</div>
+                            <div>状态：{ state(index+1) }</div>
+                            <div >时间：{ times(index) }</div>
                         </div>
                     </div>
                     <div className='cart-bottom' >
@@ -86,11 +79,11 @@ const StructureRightExecute = props => {
                 outLog.scrollTop = outLog.scrollHeight
             }
             return  <div className='structure-content-bottom'>
-                <h3>输出</h3>
-                <div className='structure-content-bottom-outLog'  id='outLog'>
-                    {leftExecute.runLog}
-                </div>
-            </div>
+                        <h3>输出</h3>
+                        <div className='structure-content-bottom-outLog'  id='outLog'>
+                            {leftExecute.runLog}
+                        </div>
+                    </div>
         }
     }
 
@@ -100,15 +93,13 @@ const StructureRightExecute = props => {
                 <div className='mid_group_top_tel'>
                     <span className='tel_time'>构建 {index}</span>
                     <span className='tel_time'>执行时长：{leftExecute && leftExecute.allTime} </span>
-                    <span className='tel_way'>触发方式：{triggerMode()}</span>
+                    <span className='tel_way'>触发方式：{ runWay (leftExecute && leftExecute.runWay) } </span>
                 </div>
                 <div className="mid_group_top_del">
                     <Button onClick={()=>cease()}> 停止 </Button>
                 </div>
             </div>
-            <div className="mid_group_center">
-                { executeDetails() }
-            </div>
+            <div className="mid_group_center"> { executeDetails() } </div>
            { logRunLog() }
        </div>
     )

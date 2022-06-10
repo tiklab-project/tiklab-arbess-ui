@@ -57,7 +57,7 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             UpdateConfigure(params).then(res=>{
                 console.log('更新流水线配置',res)
-                resolve(res.data)
+                resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()
@@ -72,7 +72,7 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             FindAllConfigure(param).then(res=>{
                 console.log('查看所有配置',res)
-                resolve(res.data)
+                resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()
@@ -88,7 +88,7 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             CodeTestPass(params).then(res=>{
                 console.log('测试配置',res)
-                resolve(res.data)
+                resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()
@@ -101,7 +101,7 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             DeployTestPass(values).then(res=>{
                 console.log('测试部署',res)
-                resolve(res.data)
+                resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()

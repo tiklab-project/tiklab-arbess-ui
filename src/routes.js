@@ -18,7 +18,7 @@ const PipelineDelRename=AsyncComponent(()=>import('./modules/pipeline/common/pip
 const ConfigPastRecords=AsyncComponent(()=>import('./modules/config/configDetails_pastRecords/container/config_pastRecords'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
 
-export const routers=[
+const routers=[
     {
         path:'/login',
         component:Login,
@@ -93,5 +93,6 @@ export const routers=[
         exact: true,
         render:()=>  <Redirect to={"/home/pipeline"}/>,
     },
-
 ]
+
+export default routers

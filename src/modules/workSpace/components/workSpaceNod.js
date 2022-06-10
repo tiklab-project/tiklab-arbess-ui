@@ -93,7 +93,7 @@ const WorkSpaceNod = props =>{
 
     return(
         <div className='workSpace-top'>
-            <h1 className='workSpace-h1'>节点master上的工作空间</h1>
+            <h1>节点master上的工作空间</h1>
             <div className='workSpace-top-catalogue'>
                 <Breadcrumb>
                     <Breadcrumb.Item

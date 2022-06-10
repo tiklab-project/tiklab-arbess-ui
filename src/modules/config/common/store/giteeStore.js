@@ -23,7 +23,7 @@ export class GiteeStore {
         const params = new FormData()
         params.append("code", value)
         const data = await Code(params);
-        return data.data;
+        return data;
     }
 
     //gitee--创建凭证
@@ -33,7 +33,7 @@ export class GiteeStore {
         params.append("proofName", value.proofName)
         params.append("accessToken", value.accessToken)
         const data = await GetProof(params)
-        return data.data;
+        return data;
 
     }
 
@@ -43,7 +43,7 @@ export class GiteeStore {
         const param = new FormData()
         param.append("proofId", value)
         const data =await GetAllStorehouse(param)
-        return data.data
+        return data
     }
 
     //gitee--分支
@@ -53,7 +53,7 @@ export class GiteeStore {
         params.append('projectName',value.projectName)
         params.append('proofId',value.proofId)
         const data = await GetBranch(params)
-        return data.data
+        return data
     }
 
 }

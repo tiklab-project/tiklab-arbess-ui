@@ -1,19 +1,19 @@
-import React, {Fragment} from "react";
+import React from "react";
 import StructureLeftExecute from "./structureLeftExecute";
 
 const StructureLeft = props =>{
 
-    const {findHistoryLog,leftData,leftExecute,setRightData,status,setModeData,setIndex,index,setHistoryId} = props
+    const {findHistoryLog,leftData,leftExecute,setRightData,status,setModeData,setIndex,index,setHistoryId}=props
 
     const sta = item =>{
         if(leftData){
             switch (item.runStatus) {
                 case 1:
-                    return status(2)
+                    return status(2) // 失败
                 case 30:
-                    return status(1)
+                    return status(1) // 成功
                 default:
-                    return status(4)
+                    return status(4) // 被迫停止
             }
         }
     }
@@ -29,32 +29,26 @@ const StructureLeft = props =>{
     }
     
     const leftDetails = () => {
-        return(
-            <Fragment>
-                {
-                    leftData && leftData.map((item,i)=>{
-                        return(
-                            <div
-                                key={i}
-                                onClick={()=>showHistory(item,i)}
-                                className={index === i+1  ?
-                                    'history-content-list history-content-list_active'
-                                    :   'history-content-list'
-                                }
-                            >
-                                <div className='list-title'> 构建 {i+1}</div>
-                                <div className='list-group'>
-                                    <div className='list-group-item'>
-                                        <div className='list-state'>状态 : {sta(item)}</div>
-                                        <div className='list-one'>执行人 : {item.execName}</div>
-                                    </div>
-                                    <div className='list-time'>执行时间 : {item.createTime}</div>
-                                </div>
-                            </div>
-                        )})
-                }
-            </Fragment>
-        )
+        return leftData && leftData.map((item,i)=>{
+            return(
+                <div
+                    key={i}
+                    onClick={()=>showHistory(item,i)}
+                    className={index === i+1  ?
+                        'history-content-list history-content-list_active'
+                        :   'history-content-list'
+                    }
+                >
+                    <div className='list-title'> 构建 {i+1}</div>
+                    <div className='list-group'>
+                        <div className='list-group-item'>
+                            <div className='list-state'>状态 : {sta(item)}</div>
+                            <div className='list-one'>执行人 : {item.execName}</div>
+                        </div>
+                        <div className='list-time'>执行时间 : {item.createTime}</div>
+                    </div>
+                </div>
+            )})
     }
 
     return(

@@ -29,14 +29,14 @@ const ConfigCodeGiteeOrGithub = props =>{
         }
     },[])
 
-    let time = null
+    let interval = null
     useEffect(()=>{
         const params = {
             code:null,
             state:0,
         }
         if(visible){
-            time = setInterval(()=>{
+            interval = setInterval(()=>{
                 getState(params).then(res=>{
                     console.log('getState',res)
                     if(res.data === 1){
@@ -46,10 +46,8 @@ const ConfigCodeGiteeOrGithub = props =>{
                     }
                 })
             },2000)
-        }
-        if(!visible){
-            clearInterval(time)
-        }
+        }else { clearInterval(interval) }
+        return ()=> clearInterval(interval)
     },[visible])
 
     // 得到所有仓库
@@ -96,21 +94,6 @@ const ConfigCodeGiteeOrGithub = props =>{
         setCodeBranch(values)
     }
 
-
-    const newCode = () => {
-        // time = setInterval(()=>{
-        //     getState(isCodeValue).then(res=>{
-        //         console.log('getState',res)
-        //         if(res.data === 1){
-        //             clearInterval(time)
-        //             message.success({content: '授权成功', className:'message'})
-        //
-        //         }
-        //     })
-        // },1000)
-        setVisible(true)
-    }
-
     const clickFindAllProof = () => {
         findAllProof(codeType).then(res=>{
             console.log('GiteeOrGithub凭证',res)
@@ -123,7 +106,6 @@ const ConfigCodeGiteeOrGithub = props =>{
     const changeProofSelect = (value,e) =>{
         localStorage.setItem('gitProofId',e.key)
     }
-
 
     return(
         <Fragment>
@@ -145,7 +127,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Button className='config-details-link' type="link" onClick={()=>newCode()}>
+                <Button className='config-details-link' type="link" onClick={()=> setVisible(true)}>
                     <PlusOutlined />
                     新增服务链接
                 </Button>
@@ -198,6 +180,6 @@ const ConfigCodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject('githubStore','proofStore',
-                    'configStore','configDataStore','giteeStore')
+export default inject('githubStore','proofStore','configStore',
+                'configDataStore','giteeStore')
                 (observer(ConfigCodeGiteeOrGithub))

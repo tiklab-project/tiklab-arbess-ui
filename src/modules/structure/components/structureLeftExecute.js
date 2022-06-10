@@ -8,11 +8,11 @@ const StructureLeftExecute = props => {
         if(leftExecute){
             switch(leftExecute.runStatus){
                 case 1:
-                    return  status(2)
+                    return  status(2) //失败
                 case 30 :
-                    return  status(1)
+                    return  status(1) //成功
                 default :
-                    return  status(5)
+                    return  status(5) //运行过程
             }
         }
     }

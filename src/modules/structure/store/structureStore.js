@@ -21,7 +21,7 @@ export class StructureStore {
         const formData = new FormData()
         formData.append("pipelineId", values)
         const data = await PipelineStartStructure(formData);
-        return data.data;
+        return data;
     }
 
     // 判断当前流水线是否在构建
@@ -30,7 +30,7 @@ export class StructureStore {
         const formData = new FormData()
         formData.append("pipelineId", values)
         const data = await FindExecState(formData);
-        return data.data;
+        return data;
     }
 
     //构建状态
@@ -38,7 +38,7 @@ export class StructureStore {
     findStructureState = async values=>{
         const param = qs.stringify({pipelineId: values})
         const data = await FindStructureState(param)
-        return data.data
+        return data
     }
 
     //  停止构建
@@ -47,7 +47,7 @@ export class StructureStore {
         const param = new FormData()
         param.append("pipelineId", values)
         const data = await KillInstance(param)
-        return data.data
+        return data
     }
 
 
@@ -57,7 +57,7 @@ export class StructureStore {
         const params = new FormData()
         params.append("historyId", values)
         const data = await FindHistoryLog(params);
-        return data.data;
+        return data
     }
 
     //正在执行的详情
@@ -66,7 +66,7 @@ export class StructureStore {
         const param = new FormData()
         param.append("pipelineId", values)
         const data = await FindAll(param);
-        return data.data;
+        return data
     }
 
     //构建历史
@@ -75,7 +75,7 @@ export class StructureStore {
         const params = new FormData()
         params.append("pipelineId", values)
         const data = await SelectHistoryDetails(params);
-        return data.data;
+        return data
 
     }
 
@@ -84,7 +84,7 @@ export class StructureStore {
     deleteHistoryLog =async values =>{
         const param = qs.stringify({historyId: values})
         const data =await DeleteHistoryLog(param)
-        return data.data
+        return data
     }
 
     @action
@@ -96,7 +96,7 @@ export class StructureStore {
             type:values.type,
         }
         const data =await  FindLikeHistory(params)
-        return data.data
+        return data
     }
 
 }

@@ -1,6 +1,6 @@
 .configView2{
-    margin-top: 46px;
-    height: calc(100% - 46px);
+    margin-top: 40px;
+    height: calc(100% - 40px);
     &-content{
         display: -webkit-box;
         display: -webkit-flex;
@@ -9,7 +9,7 @@
         flex-direction: row;
         height: 100%;
         margin: auto;
-        width: 80%;
+        width: 95%;
     }
     &-sider {
         display: inline-block;
@@ -265,113 +265,5 @@
                 }
             }
         }
-    }
-}
-.wrapper{
-    &-head{
-        .deleted{
-            cursor: pointer;
-            &:hover{
-                color: #ff0000;
-            }
-        }
-    }
-    &-body{
-        .body{
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            height: calc(100vh - 115px);
-            overflow: hidden;
-            &-menu{
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-                .gray{
-                    background: #eaeaea;
-                }
-                &_form{
-                    margin-top: 35px;
-                }
-                &_left{
-                    max-height: 100%;
-                    height: 100%;
-                    width: 80px;
-                    border-right: 1px solid #e5e5e5;
-                    display: inline-block;
-                    vertical-align: top;
-                    .at-nav{
-                        display: inline-block;
-                        width: 100%;
-                        padding-left: 30px;
-                        -webkit-user-select: none;
-                        -moz-user-select: none;
-                        -ms-user-select: none;
-                        user-select: none;
-                        &-item{
-                            margin: 12px 0;
-                            &:before{
-                                width: 2px;
-                                height: 32px;
-                                -webkit-transition: all .4s cubic-bezier(.23,1,.32,1);
-                                transition: all .4s cubic-bezier(.23,1,.32,1);
-                                content: " ";
-                                position: absolute;
-                                z-index: 2;
-                                left: 0;
-                            }
-                            &-main{
-                                -webkit-box-sizing: border-box;
-                                box-sizing: border-box;
-                                position: relative;
-                                cursor: pointer;
-                                text-overflow: ellipsis;
-                                &:before{
-                                    position: absolute;
-                                    background-color: transparent;
-                                    top: 0;
-                                    left: 0;
-                                    bottom: 0;
-                                    right: 0;
-                                    content: "";
-                                }
-                                .teamix-title{
-                                    font-weight: 700;
-                                }
-                            }
-                        }
-                        &-selected{
-                            &:before{
-                                background: #1b9aee;
-                            }
-                        }
-                    }
-                }
-                &_right{
-                    width: 100%;
-                    overflow-y: auto;
-                    display: inline-block;
-                    padding: 14px 20px ;
-                }
-            }
-            &-taskForm{
-                padding: 20px;
-                width: 100%;
-                .taskForm-top{
-                    margin-bottom: 30px;
-                    &_title{
-                        font-weight: 700;
-                        text-indent: 2em;
-                    }
-                }
-            }
-        }
-    }
-    .config-details-link{
-        margin-left: 15px;
-    }
-    .config-details-gitTest{
-        text-align: right;
     }
 }

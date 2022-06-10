@@ -10,12 +10,13 @@ const WorkSpace = props =>{
 
     const {workSpaceStore} = props
     const {getSubmitMassage,fileTree,recordList,readFile} = workSpaceStore
-    const pipelineId = localStorage.getItem('pipelineId')
+
     const [fileList,setFileList] = useState([])
     const [initial,setInitial] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
     const [detailsDrawer,setDetailsDrawer] = useState(false)
     const [drawerContent,setDrawerContent] = useState('')
+    const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
         getSubmitMassage(pipelineId)

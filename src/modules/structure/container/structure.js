@@ -85,6 +85,7 @@ const Structure = props => {
             case 0 :
                 //运行
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
+
             case 1 :
                 //成功
                 return  <svg className="icon" aria-hidden="true">
