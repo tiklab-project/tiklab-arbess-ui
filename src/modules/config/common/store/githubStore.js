@@ -1,28 +1,20 @@
-import {observable,action} from "mobx";
+import {action} from "mobx";
 
-import {
-    GetCode,
-    GetAccessToken,
-    GetProof,
-    GetAllStorehouse,
-    GetBranch,
-} from "../api/github";
+import {GetAccessToken, GetAllStorehouse, GetBranch, GetCode, GetProof,} from "../api/github";
 
 
 export class GithubStore {
 
     @action
     getCode = async () =>{
-        const data = await GetCode()
-        return data.data
+        return await GetCode()
     }
 
     @action
     getAccessToken = async value =>{
         const params = new FormData()
         params.append("code", value)
-        const data = await GetAccessToken(params)
-        return data
+        return await GetAccessToken(params)
     }
 
     @action
@@ -30,16 +22,14 @@ export class GithubStore {
         const params = new FormData()
         params.append("proofName", value.proofName)
         params.append("accessToken", value.accessToken)
-        const data = await GetProof(params)
-        return data
+        return await GetProof(params)
     }
 
     @action
     getAllGithubStorehouse = async value =>{
         const param = new FormData()
         param.append("proofId", value)
-        const data =await GetAllStorehouse(param)
-        return data
+        return await GetAllStorehouse(param)
     }
 
     @action
@@ -47,8 +37,7 @@ export class GithubStore {
         const params = new FormData()
         params.append('projectName',value.projectName)
         params.append('proofId',value.proofId)
-        const data = await GetBranch(params)
-        return data
+        return await GetBranch(params)
     }
 
 }

@@ -1,11 +1,6 @@
-import {observable, action} from "mobx";
+import {action} from "mobx";
 
-import {
-    CreateProof,
-    FindAllProof,
-    FindOneProof,
-    GetState,
-} from "../api/proof";
+import {CreateProof, FindAllProof, FindOneProof, GetState,} from "../api/proof";
 
 export class ProofStore{
 
@@ -32,16 +27,14 @@ export class ProofStore{
     findAllProof = async  value =>{
         const param = new FormData()
         param.append('type',value)
-        const data = await FindAllProof(param)
-        return data
+        return await FindAllProof(param)
     }
 
     @action
     findOneProof =async values=>{
         const param = new FormData()
         param.append('proofId',values.proofId)
-        const data = await FindOneProof(param)
-        return data
+        return await FindOneProof(param)
     }
 
     @action
@@ -49,8 +42,7 @@ export class ProofStore{
         const params = new FormData()
         params.append('code',value.code)
         params.append('state',value.state)
-        const data = await GetState(params)
-        return data
+        return await GetState(params)
     }
 
 }

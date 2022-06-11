@@ -3,6 +3,7 @@ import '../common/component/configCommon/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
+import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
@@ -23,7 +24,7 @@ const ConfigDetails = props =>{
     } = configDataStore
 
     const [form] = Form.useForm();
-    const [view,setView] = useState(0)
+    const [view,setView] = useState(1)
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -144,7 +145,7 @@ const ConfigDetails = props =>{
                             dataType:j.type,
                         })
                         const formValue = {
-                            dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofIp + ")" ,
+                            dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
                         }
                         Object.assign(formInitialValues,formValue)
                         setLinuxShellBlock(`${j.deployShell}`)
@@ -210,6 +211,8 @@ const ConfigDetails = props =>{
             case 'deploy':
                 formInitialValues.deployTargetAddress = null
                 formInitialValues.deployAddress = null
+                formInitialValues.ip = null
+                formInitialValues.port = null
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
@@ -219,6 +222,7 @@ const ConfigDetails = props =>{
 
     return (
         <Fragment>
+            <PipelineDetailsBreadcrumb/>
             <ConfigChangeView
                 view={view}
                 setView={setView}

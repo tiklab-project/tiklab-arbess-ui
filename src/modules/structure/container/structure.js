@@ -1,11 +1,12 @@
-import React, { useEffect,useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import { Spin,Result} from "antd";
-import {LoadingOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
+import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import './structure.scss'
 import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
 import { inject, observer } from "mobx-react";
 import StructureLeftDropdown from "../components/structureLeftDropdown";
+import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
 
 const Structure = props => {
 
@@ -23,6 +24,7 @@ const Structure = props => {
     const [index,setIndex] = useState(0)  // 构建区分显示 -- 构建1 、2、……
     const [freshen,setFreshen] = useState(false)  // 删除刷新组件
     const [isData,setIsData] = useState(true)  // 是否有构建过的数据
+    const [isState,setIsState] = useState('')
     const [historyId,setHistoryId] = useState('')
     const pipelineId = localStorage.getItem('pipelineId')
 
@@ -69,7 +71,6 @@ const Structure = props => {
             }else{
                 setLeftData([])
                 setRightData([])
-                setIsData(false)
             }
         })
     }
@@ -93,9 +94,7 @@ const Structure = props => {
                         </svg>
             case 2 :
                 //失败
-                return  <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-yunhangshibai1"/>
-                        </svg>
+                return  <CloseCircleOutlined style = {{fontSize:16,color:'red'}}/>
             case 3:
                 //运行--等待运行
                 return  <svg className="icon" aria-hidden="true">
@@ -112,62 +111,79 @@ const Structure = props => {
         }
     }
 
-    return (
-        <div className='structure'>
-            {
-                isData ?
-                    <div className='structure-content'>
-                       <div className='structure-content-left'>
-                           <StructureLeftDropdown
-                               index={index}
-                               setLeftData={setLeftData}
-                               setModeData={setModeData}
-                               setIndex={setIndex}
-                               setHistoryId={setHistoryId}
-                               setRightData={setRightData}
-                               findLikeHistory={findLikeHistory}
-                               findHistoryLog={findHistoryLog}
-                           />
-                           <StructureLeft
-                               findHistoryLog={findHistoryLog}
-                               leftData={leftData}
-                               leftExecute={leftExecute}
-                               setRightData={setRightData}
-                               status={status}
-                               setModeData={setModeData}
-                               index={index}
-                               setIndex={setIndex}
-                               setHistoryId={setHistoryId}
-                           />
-                       </div>
-                        {
-                            rightExecute.length===0 &&  rightData.length===0 ?
-                                <div className='structure-content-null'>
-                                    <Result title="没有数据"/>
-                                </div>
-                                :
-                                <StructureRight
-                                    freshen={freshen}
-                                    setFreshen={setFreshen}
-                                    leftData={leftData}
-                                    setLeftData={setLeftData}
-                                    rightData={rightData}
-                                    rightExecute={rightExecute}
-                                    status={status}
-                                    leftExecute={leftExecute}
-                                    modeData={modeData}
-                                    index={index}
-                                    historyId={historyId}
-                                    deleteHistoryLog={deleteHistoryLog}
-                                    killInstance={killInstance}
-                                />
-                        }
+    const style = {
+        'position': 'fixed',
+        'marginLeft':'350px',
+        'height':'50px',
+        'lineHeight':'50px',
+        'zIndex': 99,
+        'borderBottom':' 1px solid #ccc',
+        'width':'100%',
+        'paddingLeft':'16px',
+        'fontWeight': 700,
+    }
 
-                    </div>
-                    :
-                    <Result title="当前没有历史数据"/>
-            }
-        </div>
+    return (
+        <Fragment>
+            <PipelineDetailsBreadcrumb style={style}/>
+            <div className='structure'>
+                {
+                    isData ?
+                        <div className='structure-content'>
+                            <div className='structure-content-left'>
+                                <StructureLeftDropdown
+                                    setIsState={setIsState}
+                                    index={index}
+                                    setLeftData={setLeftData}
+                                    setModeData={setModeData}
+                                    setIndex={setIndex}
+                                    setHistoryId={setHistoryId}
+                                    setRightData={setRightData}
+                                    findLikeHistory={findLikeHistory}
+                                    findHistoryLog={findHistoryLog}
+                                />
+                                <StructureLeft
+                                    findHistoryLog={findHistoryLog}
+                                    leftData={leftData}
+                                    leftExecute={leftExecute}
+                                    setRightData={setRightData}
+                                    status={status}
+                                    setModeData={setModeData}
+                                    index={index}
+                                    setIndex={setIndex}
+                                    setHistoryId={setHistoryId}
+                                />
+                            </div>
+                            {
+                                leftExecute === ''  &&  leftData.length === 0 ?
+                                    <div className='structure-content-null'>
+                                        <Result title={`没有${isState}的数据`}/>
+                                    </div>
+                                    :
+                                    <StructureRight
+                                        freshen={freshen}
+                                        setFreshen={setFreshen}
+                                        leftData={leftData}
+                                        setLeftData={setLeftData}
+                                        rightData={rightData}
+                                        rightExecute={rightExecute}
+                                        status={status}
+                                        leftExecute={leftExecute}
+                                        modeData={modeData}
+                                        index={index}
+                                        historyId={historyId}
+                                        deleteHistoryLog={deleteHistoryLog}
+                                        killInstance={killInstance}
+                                    />
+                            }
+
+                        </div>
+                        :
+                        <Result title="当前没有历史数据"/>
+                }
+            </div>
+        </Fragment>
+
     )
 }
 

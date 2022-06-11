@@ -1,10 +1,11 @@
 import React from "react";
 
-const System = props =>{
+const System = () =>{
     return(
         <div>
-            system
+
         </div>
     )
 }
+
 export default System

@@ -1,10 +1,10 @@
 import React from "react";
-import {Modal, Form, Input, message, Select, Button} from "antd";
+import {Modal, Form, Input, Select, Button} from "antd";
 const { Option } = Select;
 
 const ConfigDeployAddProofModal = props =>{
 
-    const {deployVisible,setDeployVisible,createProof,deployTestPass} = props
+    const {deployVisible,setDeployVisible,createProof} = props
     const [form] = Form.useForm()
 
     const onOk = () =>{
@@ -13,8 +13,6 @@ const ConfigDeployAddProofModal = props =>{
                 proofScope:31,
                 proofType:values.proofType,
                 proofName:values.proofName,
-                proofIp:values.proofIp,
-                proofPort:values.proofPort,
                 proofUsername:values.proofUsername,
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe,
@@ -22,30 +20,6 @@ const ConfigDeployAddProofModal = props =>{
             createProof(params)
             setDeployVisible(false)
         })
-    }
-
-    const onFinish = values => {
-        deployTestPass(values).then(res=>{
-            if(res.data === true){
-                message.success({content: '连接成功', className:'message'})
-            }else {
-                message.error({content:'连接失败', className:'message'})
-            }
-        })
-    }
-
-    const validate = (rule,value) =>{
-        if (!value) {
-            return Promise.resolve();
-        } else if (value< 1) {
-            return Promise.reject("最小1");
-        } else if (value > 10000) {
-            return Promise.reject("最大10000");
-        } else if (!/^\d+$|^\d+[.]?\d+$/.test(value)) {
-            return Promise.reject("只能输入数字");
-        } else {
-            return Promise.resolve(); //验证通过
-        }
     }
 
     return (
@@ -62,7 +36,6 @@ const ConfigDeployAddProofModal = props =>{
                 layout="vertical"
                 name="userForm"
                 autoComplete = "off"
-                onFinish={onFinish}
                 initialValues={{proofType:"password"}}
             >
                 <Form.Item
@@ -71,29 +44,6 @@ const ConfigDeployAddProofModal = props =>{
                     rules={[{required:true, message:'请输入凭证名称'}]}
                 >
                     <Input placeholder='名称'/>
-                </Form.Item>
-                <Form.Item
-                    label='Ip地址'
-                    name='proofIp'
-                    rules={[
-                        {
-                            pattern:/((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/,
-                            message:'请输入正确的Ip地址'
-                        }                        
-                    ]}
-                >
-                   <Input  placeholder='输入IpV4地址'/>
-                </Form.Item>
-                <Form.Item
-                    label='端口号'
-                    name='proofPort'
-                    rules={[
-                        {
-                            validator: validate,
-                        },
-                    ]}
-                >
-                    <Input placeholder="输入端口号"/>
                 </Form.Item>
                 <Form.Item label='凭证类型' name='proofType' >
                     <Select placeholder='选择类型'>

@@ -3,8 +3,9 @@ import { Breadcrumb } from 'antd';
 import {withRouter} from "react-router-dom";
 
 const PipelineDetailsBreadcrumb = props => {
+    const {style} = props
     return(
-        <Breadcrumb className='breadcrumb' separator=">">
+        <Breadcrumb style={style} separator=">" className = 'breadcrumb'>
             <Breadcrumb.Item style={{ cursor: "pointer" }} onClick={()=>props.history.push('/home/pipeline')}>
                 流水线
             </Breadcrumb.Item>

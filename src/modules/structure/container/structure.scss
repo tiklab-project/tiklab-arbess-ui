@@ -1,6 +1,6 @@
 .structure{
-    margin: 46px auto;
-    width: 95%;
+    height: 100%;
+    overflow-y: hidden;
     .icon {
         width: 20px !important;
         height: 20px !important;
@@ -8,40 +8,46 @@
     &-content{
         display: flex;
         flex-direction: row;
+        height: 100%;
         &-left {
+            height: 100%;
             width: 350px;
             min-width: 350px;
             background: #fff;
-            padding-top: 15px;
+            padding: 15px;
+            position: fixed;
+            z-index: 20;
             vertical-align: top;
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
+            border-right: 1px solid #ccc;
             &-dropdown{
-                width: 350px;
+                width: 327px;
+                margin-bottom: 20px;
                 .dropdown{
                     display: flex;
                     flex-direction: row;
                 }
             }
             &-history{
+                height: calc(100% - 28px);
                 .history-content{
-                    padding-right: 15px;
                     overflow-y: auto;
-                    height: 80vh;
+                    height: 100%;
                     &-list{
                         display: flex;
                         flex-direction: row;
                         width: 100%;
-                        margin: 10px 0;
                         border-bottom: 1px solid #ccc;
                         padding: 10px;
                         cursor: pointer;
                         .list{
                             &-title{
                                 width: 85px;
+                                font-weight: 600;
                                 &>span{
                                     color: #1890ff;
                                     font-weight: 500;
@@ -75,15 +81,19 @@
         }
         &-right{
             flex-grow: 1;
-            height: calc(100vh - 118px);;
-            padding: 15px;
-            border-left: 1px solid #d9d9d9;
+            height: 100%;
+            padding: 65px 15px;
+            margin-left: 350px;
             &-mid{
                 .mid_group{
                     display: flex;
                     flex-direction: column;
                     .ant-card-body {
-                        padding: 20px;
+                        padding: 15px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
                     }
                     &_top{
                         display: flex;
@@ -91,6 +101,7 @@
                         justify-content: space-between;
                         margin-bottom: 20px;
                         &_tel{
+                            font-size: 17px;
                             .tel{
                                 &_time{
                                     padding-right: 20px;
@@ -103,15 +114,11 @@
                         flex-direction: row;
                         &-cart{
                             margin-right: 20px;
-                            width:220px;
+                            width:260px;
+                            height: 150px;
                             display: flex;
                             flex-direction: row;
                             .cart{
-                                &-top{
-                                    &>span{
-                                      padding-left:5px;
-                                    }
-                                }
                                 &-center{
                                     &-item{
                                         display: flex;
@@ -139,13 +146,24 @@
             }
         }
         &-bottom{
-            &-outLog{
-              white-space: pre-wrap;
-              height:60vh;
-              overflow-y: auto;
-              overflow-x: hidden;
+            margin-top: 30px;
+            &-title{
+                font-size: 20px;
+                font-weight: 600;
             }
-            padding: 20px;
+            &-outLog{
+                white-space: pre-wrap;
+                height: 61vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                background: #222;
+                color: #fff;
+                padding: 10px 10px 20px;
+                h3{
+                    color: #ffffff;
+                    font-size: 20px;
+                }
+            }
         }
         &-null{
             display: flex;
@@ -153,4 +171,7 @@
             width: 36%;
         }
     }
+}
+.red{
+    border-top: 3px solid red;
 }

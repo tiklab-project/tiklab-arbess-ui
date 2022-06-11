@@ -62,7 +62,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
         }else {
             localStorage.setItem('githubCode','githubCode')
             getCode().then(res=>{
-                window.location.href=res.data
+                window.open(res.data)
             }).catch(error=>{
                 console.log(error)
             })

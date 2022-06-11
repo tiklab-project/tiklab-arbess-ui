@@ -12,6 +12,7 @@ import {inject, observer} from "mobx-react";
 import {withRouter} from "react-router";
 import ConfigForm from "./configForm";
 import ConfigName from "./configName";
+import {float} from "mockjs/src/mock/random/basic";
 
 const ConfigView1 = props =>{
 
@@ -129,6 +130,8 @@ const ConfigView1 = props =>{
                 type:deployType,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
+                ip:values.ip,
+                port:parseInt(values.port),
                 deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,

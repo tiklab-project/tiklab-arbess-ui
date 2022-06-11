@@ -1,0 +1,9 @@
+.pipelineSys{
+    height: 100%;
+    padding: 75px 0 0 30px;
+    &-content{
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+    }
+}

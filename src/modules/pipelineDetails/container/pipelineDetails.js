@@ -69,7 +69,6 @@ const PipelineDetails= (props)=>{
                 className='pipelineDetails'
                 onClick={()=>setVisible(false)}
             >
-                <PipelineDetailsBreadcrumb   {...props} />
                 {renderRoutes(route.routes)}
             </Content>
             <Prompt

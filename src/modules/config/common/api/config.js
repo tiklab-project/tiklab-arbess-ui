@@ -18,19 +18,10 @@ export function  FindAllConfigure(data){
     })
 }
 
-// 测试配置--源码管理
+// 测试配置
 export function  CodeTestPass(data){
     return serviceLoc.request({
-        url:'/pipelineCode/testPass',
-        method:'post',
-        data
-    })
-}
-
-// 测试配置--部署
-export function  DeployTestPass(data){
-    return serviceLoc.request({
-        url:'/pipelineDeploy/testPass',
+        url:'/codeCheck/checkAuth',
         method:'post',
         data
     })

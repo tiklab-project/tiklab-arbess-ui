@@ -7,7 +7,7 @@ import ConfigAddNewStageDrawer from "../configView2/configAddNewStageDrawer";
 import ConfigFormDetailsDrawer from "../configView2/configFormDetailsDrawer";
 import {inject, observer} from "mobx-react";
 import {Form, Input, message} from "antd";
-import {EditOutlined} from "@ant-design/icons";
+import {EditOutlined,PlusCircleOutlined} from "@ant-design/icons";
 import moment from "../../../../../common/moment/moment";
 import {withRouter} from "react-router";
 import ConfigName from "./configName";
@@ -130,6 +130,8 @@ const ConfigView2 = props =>{
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
+                ip:values.ip,
+                port:values.port,
                 deployAddress: values.deployAddress,
                 deployTargetAddress: values.deployTargetAddress,
                 deployShell:linuxShellBlock,
@@ -165,7 +167,7 @@ const ConfigView2 = props =>{
                                 aria-hidden="true"
                                 onClick={()=>insertData(item,index)}
                             >
-                                <use xlinkHref="#icon-zengjia"/>
+                                <use xlinkHref="#icon-tianjia"/>
                             </svg>
                         </div>
                     </div>

@@ -1,16 +1,16 @@
-import {observable, action} from "mobx";
+import {action} from "mobx";
 import qs from "qs";
 
 import {
-    PipelineStartStructure,
+    DeleteHistoryLog,
+    FindAll,
     FindExecState,
+    FindHistoryLog,
+    FindLikeHistory,
     FindStructureState,
     KillInstance,
-    FindHistoryLog,
-    FindAll,
+    PipelineStartStructure,
     SelectHistoryDetails,
-    DeleteHistoryLog,
-    FindLikeHistory,
 } from "../api/structure";
 
 export class StructureStore {
@@ -18,27 +18,25 @@ export class StructureStore {
     // 开始构建
     @action
     pipelineStartStructure = async values =>{
-        const formData = new FormData()
-        formData.append("pipelineId", values)
-        const data = await PipelineStartStructure(formData);
-        return data;
+        const param = new FormData()
+        param.append("pipelineId", values)
+        return await PipelineStartStructure(param);
     }
 
     // 判断当前流水线是否在构建
     @action
     findExecState = async values =>{
-        const formData = new FormData()
-        formData.append("pipelineId", values)
-        const data = await FindExecState(formData);
-        return data;
+        const param = new FormData()
+        param.append("pipelineId", values)
+        return await FindExecState(param);
     }
 
     //构建状态
     @action
     findStructureState = async values=>{
-        const param = qs.stringify({pipelineId: values})
-        const data = await FindStructureState(param)
-        return data
+        const param = new FormData()
+        param.append("pipelineId", values)
+        return await FindStructureState(param)
     }
 
     //  停止构建
@@ -46,8 +44,7 @@ export class StructureStore {
     killInstance = async values =>{
         const param = new FormData()
         param.append("pipelineId", values)
-        const data = await KillInstance(param)
-        return data
+        return await KillInstance(param)
     }
 
 
@@ -56,8 +53,7 @@ export class StructureStore {
     findHistoryLog =async values =>{
         const params = new FormData()
         params.append("historyId", values)
-        const data = await FindHistoryLog(params);
-        return data
+        return await FindHistoryLog(params)
     }
 
     //正在执行的详情
@@ -65,26 +61,24 @@ export class StructureStore {
     findAll =async values =>{
         const param = new FormData()
         param.append("pipelineId", values)
-        const data = await FindAll(param);
-        return data
+        return await FindAll(param)
     }
 
     //构建历史
     @action
     selectHistoryDetails =async values =>{
-        const params = new FormData()
-        params.append("pipelineId", values)
-        const data = await SelectHistoryDetails(params);
-        return data
+        const param = new FormData()
+        param.append("pipelineId", values)
+        return await SelectHistoryDetails(param)
 
     }
 
     //删除构建历史
     @action
     deleteHistoryLog =async values =>{
-        const param = qs.stringify({historyId: values})
-        const data =await DeleteHistoryLog(param)
-        return data
+        const param = new FormData()
+        param.append("historyId", values)
+        return await DeleteHistoryLog(param)
     }
 
     @action
@@ -95,8 +89,7 @@ export class StructureStore {
             name:values.name,
             type:values.type,
         }
-        const data =await  FindLikeHistory(params)
-        return data
+        return await FindLikeHistory(params)
     }
 
 }

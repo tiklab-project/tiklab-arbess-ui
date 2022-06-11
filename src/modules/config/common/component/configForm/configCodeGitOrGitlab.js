@@ -16,7 +16,7 @@ const ConfigCodeGitOrGitlab = props =>{
     const [visible,setVisible] = useState(false)
 
     const clickFindAllGit = () =>{
-        findAllProof(codeType).then(res=>{
+        findAllProof(1).then(res=>{
             console.log('gitOrGitlab凭证',res)
             setAllGitProofList(res.data)
         }).catch(err=>{
@@ -40,7 +40,8 @@ const ConfigCodeGitOrGitlab = props =>{
         if(codeName){
             const params = {
                 proofId:localStorage.getItem('gitProofId'),
-                url:codeName
+                url:codeName,
+                port:0,
             }
             codeTestPass(params).then(res=>{
                 if(res.data === true){

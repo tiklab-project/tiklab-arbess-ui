@@ -4,7 +4,6 @@ import {
     UpdateConfigure,
     FindAllConfigure,
     CodeTestPass,
-    DeployTestPass,
 } from '../api/config'
 
 export class ConfigStore{
@@ -44,6 +43,8 @@ export class ConfigStore{
                 sort:values.pipelineDeploy.sort,
                 deployAlias:values.pipelineDeploy.deployAlias,
                 type:values.pipelineDeploy.type,
+                ip:values.pipelineDeploy.ip,
+                port:values.pipelineDeploy.port,
                 deployAddress: values.pipelineDeploy.deployAddress,
                 deployShell: values.pipelineDeploy.deployShell,
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
@@ -85,6 +86,7 @@ export class ConfigStore{
         const params = new FormData()
         params.append('proofId', values.proofId)
         params.append('url', values.url)
+        params.append('port', values.port)
         return new Promise((resolve, reject) => {
             CodeTestPass(params).then(res=>{
                 console.log('测试配置',res)
@@ -96,18 +98,6 @@ export class ConfigStore{
         })
     }
 
-    @action
-    deployTestPass = values =>{
-        return new Promise((resolve, reject) => {
-            DeployTestPass(values).then(res=>{
-                console.log('测试部署',res)
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
 
 }
 

@@ -11,7 +11,7 @@ const ConfigCodeSvn = props =>{
 
     const {createProof,findAllProof} = proofStore
     const {codeName,setCodeName,codeType} = configDataStore
-    const {testPass} = configStore
+    const {codeTestPass} = configStore
 
     const [visible,setVisible] = useState(false)
     const [allSvnProofList,setAllSvnProofList] = useState([])
@@ -38,15 +38,16 @@ const ConfigCodeSvn = props =>{
         if(codeName){
             const params = {
                 proofId:gitProofId,
-                url:codeName
+                url:codeName,
+                port:0
             }
-            // testPass(params).then(res=>{
-            //     if(res.data === true){
-            //         message.success({content: '连接成功', className:'message'})
-            //     }else {
-            //         message.error({content:'连接失败', className:'message'})
-            //     }
-            // })
+            codeTestPass(params).then(res=>{
+                if(res.data === true){
+                    message.success({content: '连接成功', className:'message'})
+                }else {
+                    message.error({content:'连接失败', className:'message'})
+                }
+            })
         }
     }
 

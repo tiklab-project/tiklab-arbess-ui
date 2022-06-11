@@ -1,15 +1,16 @@
-import React ,{useState,useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import {withRouter} from "react-router";
 import './workSpace.scss'
 import {inject,observer} from "mobx-react";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
 import WorkSpaceDrawer from "../components/workSpaceDrawer";
+import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
 
 const WorkSpace = props =>{
 
     const {workSpaceStore} = props
-    const {getSubmitMassage,fileTree,recordList,readFile} = workSpaceStore
+    const {getSubmitMassage,fileTree,readFile,recordList} = workSpaceStore
 
     const [fileList,setFileList] = useState([])
     const [initial,setInitial] = useState(false)
@@ -34,29 +35,33 @@ const WorkSpace = props =>{
 
 
     return(
-        <div className='workSpace'>
-            <WorkSpaceNod
-                fileList={fileList}
-                setFileList={setFileList}
-                initial={initial}
-                setInitial={setInitial}
-                catalogue={catalogue}
-                setCatalogue={setCatalogue}
-                readFile={readFile}
-                setDetailsDrawer={setDetailsDrawer}
-                setDrawerContent={setDrawerContent}
-            />
-            <WorkSpaceRecord
-                recordList={recordList}
-                setDetailsDrawer={setDetailsDrawer}
-                setDrawerContent={setDrawerContent}
-            />
-            <WorkSpaceDrawer
-                detailsDrawer={detailsDrawer}
-                setDetailsDrawer={setDetailsDrawer}
-                drawerContent={drawerContent}
-            />
-        </div>
+        <Fragment>
+            <PipelineDetailsBreadcrumb/>
+            <div className='workSpace'>
+                <WorkSpaceNod
+                    fileList={fileList}
+                    setFileList={setFileList}
+                    initial={initial}
+                    setInitial={setInitial}
+                    catalogue={catalogue}
+                    setCatalogue={setCatalogue}
+                    readFile={readFile}
+                    setDetailsDrawer={setDetailsDrawer}
+                    setDrawerContent={setDrawerContent}
+                />
+                <WorkSpaceRecord
+                    recordList={recordList}
+                    setDetailsDrawer={setDetailsDrawer}
+                    setDrawerContent={setDrawerContent}
+                />
+                <WorkSpaceDrawer
+                    detailsDrawer={detailsDrawer}
+                    setDetailsDrawer={setDetailsDrawer}
+                    drawerContent={drawerContent}
+                />
+            </div>
+        </Fragment>
+
     )
 }
 

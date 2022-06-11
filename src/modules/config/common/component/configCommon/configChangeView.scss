@@ -1,7 +1,7 @@
 .config_changeView{
     position: fixed;
     z-index: 101;
-    top: 58px;
+    top: 64px;
     right: 2.5%;
     min-width: 500px;
     .changeView{
@@ -10,7 +10,7 @@
         &-btn{
             &>button{
                 &:last-child{
-                    margin: 0 15px;
+                    margin: 0 30px;
                 }
             }
         }

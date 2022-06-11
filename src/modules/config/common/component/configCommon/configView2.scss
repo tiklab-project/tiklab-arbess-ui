@@ -1,6 +1,7 @@
 .configView2{
-    margin-top: 40px;
-    height: calc(100% - 40px);
+    padding-top: 40px;
+    height: 100%;
+    overflow-y: hidden;
     &-content{
         display: -webkit-box;
         display: -webkit-flex;
@@ -21,8 +22,8 @@
         overflow-x: hidden;
         padding-top: 60px;
         &_head {
-            font-size: 14px;
-            color: #8c8c8c;
+            font-size: 16px;
+            font-weight: 700;
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
@@ -220,8 +221,8 @@
                     padding: 0 20px;
                     margin-bottom: 38px;
                     .name{
-                        color: #8c8c8c;
                         height: 20px;
+                        font-weight: 700;
                         .label{
                             max-width: 300px;
                             display: -webkit-box;

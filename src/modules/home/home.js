@@ -1,13 +1,14 @@
-import React,{ useEffect } from 'react'
-import { Layout } from 'antd';
-import './home.scss'
+import React  from 'react'
+import './home.scss';
 import {renderRoutes} from "react-router-config";
 import Heads from "./header";
 
-const { Header, Content ,Footer} = Layout;
-
 const Home=props=>{
     const headerRoutes=[
+        {
+            title: "首页",
+            key:'homePage',
+        },
         {
             to:'/home/pipeline',
             title: "流水线",
@@ -22,15 +23,14 @@ const Home=props=>{
 
     const {route}=props
 
+
     return(
-        <Layout>
-            <Header >
-                <Heads {...props} routers={headerRoutes}/>
-            </Header>
-            <Content  className='home'>
+        <div className="frame">
+            <Heads {...props} routers={headerRoutes} />
+            <div className='frame-content'>
                 {renderRoutes(route.routes)}
-            </Content>
-        </Layout>
+            </div>
+        </div>
     )
 }
 export default Home

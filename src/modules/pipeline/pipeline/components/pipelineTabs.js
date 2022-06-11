@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Tabs, Tooltip} from "antd";
 import './pipelineTabs.scss'
 import PipelineTabs_all from "./pipelineTabs_all";
@@ -6,7 +6,7 @@ import PipelineTabs_my from "./pipelineTabs_my";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import PipelineRun from "./pipelineRun";
-import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {ExclamationCircleOutlined,CloseCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 
@@ -95,15 +95,11 @@ const PipelineTabs = props =>{
                                 </Tooltip>
                     case 1:
                         return <Tooltip title="失败" className='all-icon'>
-                                    <svg className="icon" aria-hidden="true" >
-                                        <use xlinkHref="#icon-yunhangshibai1"  />
-                                    </svg>
+                                    <CloseCircleOutlined style = {{fontSize:25,color:'red'}}/>
                                 </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建" className='all-icon'>
-                                    <svg className="icon" aria-hidden="true" >
-                                        <use xlinkHref="#icon-yunhang"  />
-                                    </svg>
+                                    <PlayCircleOutlined style = {{fontSize:25}}/>
                                 </Tooltip>
                     default:
                         return  <Tooltip title="停止" className='all-icon'>
@@ -148,8 +144,8 @@ const PipelineTabs = props =>{
                     <span className=' all-icon' onClick={() =>work(record,index)}>
                         {
                             record.pipelineState === 0 ?
-                                <svg className="icon" aria-hidden="true"  >
-                                    <use xlinkHref="#icon-yunhang1"  />
+                                <svg className="icon" aria-hidden="true" >
+                                    <use xlinkHref="#icon-yunhang"  />
                                 </svg>
                                 :
                                 <PipelineRun />

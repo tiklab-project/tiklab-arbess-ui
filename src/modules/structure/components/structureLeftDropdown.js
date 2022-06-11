@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findLikeHistory,setLeftData,setModeData,index,setIndex,setHistoryId,setRightData,findHistoryLog} = props
+    const {findLikeHistory,setIsState,setLeftData,setModeData,index,setIndex,setHistoryId,setRightData,findHistoryLog} = props
     const pipelineId = localStorage.getItem('pipelineId')
     const [state,setState] = useState(0)
     const [enforcer,setEnforcer] = useState(null)
@@ -15,6 +15,7 @@ const StructureLeftDropdown = props =>{
     const change = () =>{
         findLikeHistory(params).then(res=>{
             const data = res.data
+            console.log(res)
             if(data.length !== 0){
                 setModeData(res.data && res.data[0])
                 setHistoryId('historyId',res.data && res.data[0].historyId)
@@ -27,7 +28,10 @@ const StructureLeftDropdown = props =>{
                 })
             } else {
                 setLeftData([])
-                setRightData([])
+                if(index!==0){
+                    setRightData([])
+                    setIndex(1)
+                }
             }
         }).catch(error=>{
             console.log(error)
@@ -43,6 +47,7 @@ const StructureLeftDropdown = props =>{
             type:mode,
         }
         change()
+        setIsState(value)
     }
 
     const changeEnforcer = (value,e) =>{
@@ -116,7 +121,7 @@ const StructureLeftDropdown = props =>{
     return(
         <div className='structure-content-left-dropdown'>
             <div className='dropdown'>
-                <Select  bordered={false} style={{width:100}} defaultValue='状态'
+                <Select  style={{width:110,marginRight:10}} defaultValue='状态'
                          onChange={(value,e)=>changeState(value,e)}
                 >
                     {
@@ -125,7 +130,7 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  bordered={false} style={{width:100}} defaultValue='执行人'
+                <Select  style={{width:110,marginRight:10}}  defaultValue='执行人'
                          onChange={(value,e)=>changeEnforcer(value,e)}
                 >
                     {
@@ -134,7 +139,7 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  bordered={false} style={{width:100}} defaultValue='执行方式'
+                <Select  style={{width:110,marginRight:10}}  defaultValue='执行方式'
                          onChange={(value,e)=>changeMode(value,e)}
                 >
                     {

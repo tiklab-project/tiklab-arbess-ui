@@ -26,16 +26,14 @@ export class WorkSpaceStore{
     fileTree = async value =>{
         const param = new FormData()
         param.append('pipelineId',value)
-        const data = await FileTree(param)
-        return data
+        return await FileTree(param)
     }
 
     @action
     readFile = async value =>{
         const param = new FormData()
         param.append('path',value)
-        const data = await ReadFile(param)
-        return data
+        return await ReadFile(param)
     }
 
 }

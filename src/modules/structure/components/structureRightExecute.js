@@ -53,8 +53,9 @@ const StructureRightExecute = props => {
             return(
                 <Card className='mid_group_center-cart' key={index}>
                     <div className='cart-top'>
-                        {item.taskAlias} --
-                        <ConfigName type={item.taskType}/>
+                        <span className='cart-top-taskAlias'>{item.taskAlias}</span>
+                        <span> -- </span>
+                        <span className='cart-top-configName'>  <ConfigName type={item.taskType}/> </span>
                     </div>
                     <div className='cart-center'>
                         <div className='cart-center-item'>
@@ -79,7 +80,7 @@ const StructureRightExecute = props => {
                 outLog.scrollTop = outLog.scrollHeight
             }
             return  <div className='structure-content-bottom'>
-                        <h3>输出</h3>
+                        <div className='structure-content-bottom-title'>输出</div>
                         <div className='structure-content-bottom-outLog'  id='outLog'>
                             {leftExecute.runLog}
                         </div>

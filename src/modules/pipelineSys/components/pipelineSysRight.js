@@ -1,18 +1,10 @@
-import React, {useEffect, useState} from 'react'
-import {Input, Form, Button, Popconfirm} from "antd";
-import './pipelineDel-Rename.scss'
-import {observer,inject} from "mobx-react";
+import React, {Fragment} from "react";
+import {Button, Form, Input, Popconfirm} from "antd";
 
-/*
- * 流水线设置
- */
-const PipelineDelRename= props=>{
+const PipelineSysRight = props =>{
 
-    const {pipelineStore}=props
-    const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
-
+    const {deletePipeline,updatePipeline,pipelineId,pipelineList} = props
     const [form]=Form.useForm()
-    const pipelineId=localStorage.getItem('pipelineId')
 
     const onConfirm=()=>{
         deletePipeline(pipelineId)
@@ -30,8 +22,9 @@ const PipelineDelRename= props=>{
         })
     }
 
+
     return(
-        <div className='task del-rename'>
+        <div>
             <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
                 <Form.Item
                     label="重命名"
@@ -90,4 +83,4 @@ const PipelineDelRename= props=>{
     )
 }
 
-export default inject('pipelineStore')(observer(PipelineDelRename))
+export default PipelineSysRight

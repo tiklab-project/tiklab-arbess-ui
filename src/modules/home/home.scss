@@ -1,59 +1,71 @@
-* {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    text-decoration: none;
-}
-body,html,#root{
-    height: 100%;
-    width: 100%;
-}
-
-.ant-layout{
-    height: 100%;
+.frame{
+    height: 100vh;
     &-header{
-        width: 100%;
-        z-index: 9999;
-        height: 55px;
-        line-height: 55px;
+        display: flex;
+        align-items: center;
+        background-color: #222222;
+        color: #fff;
         position: fixed;
-        .headers{
-            display: flex;
-            min-width: 800px;
-            &-logo{
-                height: 55px;
-                width: 100px;
-                margin-right: 20px;
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                }
-            }
-            &-link{
-                padding: 0 0.5125rem;
-                color: #fff;
-                font-size: 1rem;
-                cursor: pointer;
-                &-active{
-                    color: #1890ff !important;
-                }
-            }
-            &-nav {
-                display: flex;
-                justify-content: center;
+        width: 100%;
+        min-width: 600px;
+        height: 55px;
+        z-index: 999;
+        &-logo{
+            height: 50px;
+            width: 100px;
+            img{
+                width: 100%;
                 height: 100%;
+                object-fit: contain;
             }
-            &-right {
-                margin-left: auto;
+        }
+        &-right{
+            display: flex;
+            flex-direction: row;
+            justify-items: flex-end;
+            align-items: center;
+            height: 100%;
+            padding-left: 20px;
+            &-text{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                padding-right: 20px;
+            }
+        }
+        &-dropdown{
+            margin: 0 20px;
+            & > span{
+                cursor: pointer;
+            }
+        }
+        .headers{
+            &-link{
+                display: flex;
+                flex-direction: row;
+                margin-left: 15px;
+                &> div{
+                    cursor: pointer;
+                    margin-right: 10px;
+                    height: 30px;
+                    line-height: 30px;
+                    border-radius: 6px;
+                    padding: 0 10px;
+                }
+            }
+            &-active{
+                color: #444444 !important;
+                background-color: #fff;
             }
         }
     }
-    .home{
-        width: 100%;
-        min-width: 800px;
-        height: 100%;
-        margin: 55px auto 0;
-        background-color: white;
+    &-content{
+        padding-top: 55px;
+        .ant-layout{
+            height:calc(100vh - 55px);
+        }
     }
 }
