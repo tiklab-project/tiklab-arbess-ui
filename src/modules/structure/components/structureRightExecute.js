@@ -47,11 +47,25 @@ const StructureRightExecute = props => {
             console.log(error)
         })
     }
+    
+    const style = index => {
+        if(leftExecute){
+            const i = leftExecute.sort;
+            const j = leftExecute.status;
+            if(i > j && index === i ){
+                return  'item-100'  // 运行
+            }else if (index < i ){
+                return  'item-10'  //成功
+            }else if(index > i){
+                return  'item-all'  //运行--等待运行
+            }
+        }
+    }
 
     const executeDetails = () =>{
         return rightExecute && rightExecute.map((item,index)=>{
             return(
-                <Card className='mid_group_center-cart' key={index}>
+                <Card className={`mid_group_center-cart ${style(index+1)}`} key={index}>
                     <div className='cart-top'>
                         <span className='cart-top-taskAlias'>{item.taskAlias}</span>
                         <span> -- </span>
@@ -81,7 +95,7 @@ const StructureRightExecute = props => {
             }
             return  <div className='structure-content-bottom'>
                         <div className='structure-content-bottom-title'>输出</div>
-                        <div className='structure-content-bottom-outLog'  id='outLog'>
+                        <div className='structure-content-bottom-outLog' id='outLog'>
                             {leftExecute.runLog}
                         </div>
                     </div>
@@ -92,7 +106,7 @@ const StructureRightExecute = props => {
         <div className="mid_group">
             <div className='mid_group_top'>
                 <div className='mid_group_top_tel'>
-                    <span className='tel_time'>构建 {index}</span>
+                    <span className='tel_time'>运行中</span>
                     <span className='tel_time'>执行时长：{leftExecute && leftExecute.allTime} </span>
                     <span className='tel_way'>触发方式：{ runWay (leftExecute && leftExecute.runWay) } </span>
                 </div>

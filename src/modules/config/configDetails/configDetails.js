@@ -220,9 +220,13 @@ const ConfigDetails = props =>{
         }
     }
 
+    const style = {
+        'position':'fixed',
+    }
+
     return (
         <Fragment>
-            <PipelineDetailsBreadcrumb/>
+            <PipelineDetailsBreadcrumb style={style}/>
             <ConfigChangeView
                 view={view}
                 setView={setView}
@@ -232,7 +236,7 @@ const ConfigDetails = props =>{
                 findStructureState={findStructureState}
             />
             {
-                view === 0 ?
+                view === 1 ?
                     <ConfigView1
                         form={form}
                         del={del}

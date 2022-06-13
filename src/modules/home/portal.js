@@ -1,21 +1,22 @@
 import React  from 'react'
-import './home.scss';
+import './header.scss';
 import {renderRoutes} from "react-router-config";
 import Heads from "./header";
 
-const Home=props=>{
+const Portal= props=>{
     const headerRoutes=[
         {
+            to:'/index/home',
             title: "首页",
             key:'homePage',
         },
         {
-            to:'/home/pipeline',
+            to:'/index/pipeline',
             title: "流水线",
             key:'pipeline',
         },
         {
-            to:'/home/system',
+            to:'/index/system',
             title:'系统设置',
             key:'system'
         }
@@ -33,4 +34,4 @@ const Home=props=>{
         </div>
     )
 }
-export default Home
+export default Portal

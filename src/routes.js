@@ -3,7 +3,12 @@ import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Login=AsyncComponent(()=>import('./modules/login/login'))
-const Home=AsyncComponent(()=>import('./modules/home/home'))
+const Index=AsyncComponent(()=>import('./modules/home/portal'))
+
+/*
+    首页
+ */
+const HomePage=AsyncComponent(()=>import('./modules/homePage/container/homePage'))
 
 const System=AsyncComponent(()=>import('./modules/system/container/system'))
 
@@ -26,60 +31,65 @@ const routers=[
         component:Login,
     },
     {
-        path:'/home',
-        component: Home,
+        path:'/index',
+        component: Index,
         routes:[
             {
-                path: '/home',
+                path: '/index',
                 exact:true,
-                render:()=>  <Redirect to={"/home/pipeline"}/>,
+                render:()=>  <Redirect to={"/index/home"}/>,
             },
             {
-                path:'/home/pipeline',
+                path: '/index/home',
+                component: HomePage,
+                exact:true,
+            },
+            {
+                path:'/index/pipeline',
                 component:Pipeline,
                 exact: true,
             },
             {
-                path:'/home/new',
+                path:'/index/new',
                 component: PipelineAdd,
             },
             {
-                path:'/home/config',
+                path:'/index/config',
                 component:PipelineConfig,
             },
             {
-                path:'/home/searchresult/:searchresult',
+                path:'/index/searchresult/:searchresult',
                 component:SearchResult,
             },
             {
-                path:'/home/task',
+                path:'/index/task',
                 component: PipelineDetails,
                 routes:[
                     {
-                        path: '/home/task',
+                        path: '/index/task',
                         exact:true,
-                        render:()=>  <Redirect to={"/home/task/work"}/>,
+                        render:()=>  <Redirect to={"/index/task/work"}/>,
                     },
                     {
-                        path:'/home/task/work',
+                        path:'/index/task/work',
                         component: WorkSpace
                     },
                     {
-                        path:"/home/task/structure",
+                        path:"/index/task/structure",
                         component: Structure
                     },
                     {
-                        path:'/home/task/assembly',
+                        path:'/index/task/assembly',
                         component: PipelineSys
                     },
                     {
-                        path:'/home/task/config',
+                        path:'/index/task/config',
                         component: ConfigDetails
                     },
                 ]
             },
             {
-                path:'/home/system',
+                path:'/index/system',
                 component:System,
                 exact: true,
             },
@@ -87,9 +97,9 @@ const routers=[
     },
     {
         path:'/',
-        component: Home,
+        component: Index,
         exact: true,
-        render:()=>  <Redirect to={"/home/pipeline"}/>,
+        render:()=>  <Redirect to={"/index/home"}/>,
     },
 ]
 

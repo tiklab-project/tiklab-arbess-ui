@@ -44,7 +44,7 @@ const ConfigDeployLinux = props =>{
 
     const test = () => {
         const params = {
-            proofId:localStorage.getItem('gitProofId'),
+            proofId:localStorage.getItem('deployProofId'),
             url:formInitialValues && formInitialValues.ip,
             port:formInitialValues && formInitialValues.port,
         }

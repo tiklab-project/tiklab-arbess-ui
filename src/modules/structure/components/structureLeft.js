@@ -19,7 +19,6 @@ const StructureLeft = props =>{
     }
     
     const showHistory = (item,i)=> {
-        setHistoryId(item.historyId)
         findHistoryLog(item.historyId).then(res=>{
             console.log('构建历史详情',res)
             setModeData(item)
@@ -34,12 +33,12 @@ const StructureLeft = props =>{
                 <div
                     key={i}
                     onClick={()=>showHistory(item,i)}
-                    className={index === i+1  ?
+                    className={index=== i+1 ?
                         'history-content-list history-content-list_active'
                         :   'history-content-list'
                     }
                 >
-                    <div className='list-title'> 构建 {i+1}</div>
+                    <div className='list-title'> # {item.findNumber}</div>
                     <div className='list-group'>
                         <div className='list-group-item'>
                             <div className='list-state'>状态 : {sta(item)}</div>

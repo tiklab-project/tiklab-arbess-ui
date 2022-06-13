@@ -32,11 +32,13 @@ const WorkSpace = props =>{
         })
     },[initial,pipelineId])
 
-
+    const style = {
+        'position':'fixed',
+    }
 
     return(
         <Fragment>
-            <PipelineDetailsBreadcrumb/>
+            <PipelineDetailsBreadcrumb style={style}/>
             <div className='workSpace'>
                 <WorkSpaceNod
                     fileList={fileList}

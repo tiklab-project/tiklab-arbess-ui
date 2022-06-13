@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {Button, Form, Input, Popconfirm} from "antd";
 
 const PipelineSysRight = props =>{
@@ -22,9 +22,8 @@ const PipelineSysRight = props =>{
         })
     }
 
-
     return(
-        <div>
+        <div className='pipelineSys-content-right-mid'>
             <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
                 <Form.Item
                     label="重命名"

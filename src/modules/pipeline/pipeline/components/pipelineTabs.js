@@ -43,7 +43,7 @@ const PipelineTabs = props =>{
     const goPipelineTask=(text,record)=>{
         localStorage.setItem('pipelineName',text)
         localStorage.setItem('pipelineId',record.pipelineId)
-        props.history.push('/home/task/work')
+        props.history.push('/index/task/work')
     }
 
     const work = record =>{
@@ -158,7 +158,7 @@ const PipelineTabs = props =>{
 
     return(
         <Tabs className='pipeline-tabs'>
-            <TabPane tab="所有视图" key="1">
+            <TabPane tab="全部" key="1">
                 <PipelineTabs_all
                     pipelineList={pipelineList}
                     columns={columns}

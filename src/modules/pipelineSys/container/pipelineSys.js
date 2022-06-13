@@ -14,21 +14,25 @@ const PipelineSys= props=>{
     const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
     const pipelineId=localStorage.getItem('pipelineId')
 
+    const style = {
+        'paddingLeft':'16px',
+    }
+
     return(
-        <Fragment>
-            <PipelineDetailsBreadcrumb/>
-            <div className='pipelineSys'>
-               <div className='pipelineSys-content'>
-                   <PipelineSysLeft/>
-                   <PipelineSysRight
-                       pipelineId={pipelineId}
-                       deletePipeline={deletePipeline}
-                       updatePipeline={updatePipeline}
-                       pipelineList={pipelineList}
-                   />
-               </div>
+        <div className='pipelineSys'>
+            <div className='pipelineSys-content'>
+                <PipelineSysLeft/>
+                <div className='pipelineSys-content-right'>
+                    <PipelineDetailsBreadcrumb style={style}/>
+                    <PipelineSysRight
+                        pipelineId={pipelineId}
+                        deletePipeline={deletePipeline}
+                        updatePipeline={updatePipeline}
+                        pipelineList={pipelineList}
+                    />
+                </div>
             </div>
-        </Fragment>
+        </div>
     )
 }
 

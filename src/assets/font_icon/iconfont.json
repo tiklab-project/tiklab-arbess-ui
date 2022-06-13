@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18267926",
+      "name": "接口配置",
+      "font_class": "jiekoupeizhi",
+      "unicode": "e990",
+      "unicode_decimal": 59792
+    },
+    {
+      "icon_id": "5168123",
+      "name": "历史技师",
+      "font_class": "lishijishi",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "7872212",
+      "name": "工作台",
+      "font_class": "gongzuotai",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "6306120",
+      "name": "没有相关",
+      "font_class": "meiyouxiangguan",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "3816323",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e713",
+      "unicode_decimal": 59155
+    },
+    {
+      "icon_id": "20384567",
+      "name": "配置",
+      "font_class": "peizhi",
+      "unicode": "ecbd",
+      "unicode_decimal": 60605
+    },
+    {
+      "icon_id": "24473104",
+      "name": "筛选",
+      "font_class": "shaixuan",
+      "unicode": "fca9",
+      "unicode_decimal": 64681
+    },
+    {
       "icon_id": "5961323",
       "name": "运行",
       "font_class": "yunhang",

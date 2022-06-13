@@ -1,40 +1,32 @@
 import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router-dom";
 import './pipelineDetailsLeft.scss'
-import {
-    ClockCircleOutlined,
-    DiffOutlined,
-    ClusterOutlined,
-    PlayCircleOutlined,
-    SettingOutlined,
-    ToolOutlined
-} from "@ant-design/icons";
 import {Dropdown} from 'antd'
 import PipelineDetailsLeftOpt from "./pipelineDetailsLeftOpt";
 
 const  taskRouters=[
     {
-        to:'/home/task/work',
+        to:'/index/task/work',
         title:'工作空间',
-        icon:<DiffOutlined />,
+        icon:'#icon-gongzuotai',
         key:'2'
     },
     {
-        to:'/home/task/config',
+        to:'/index/task/config',
         title: '配置',
-        icon: <ToolOutlined />,
+        icon: '#icon-jiekoupeizhi',
         key:'3'
     },
     {
-        to:"/home/task/structure",
+        to:"/index/task/structure",
         title: '历史',
-        icon:<ClockCircleOutlined />,
+        icon:'#icon-lishijishi',
         key:'4'
     },
     {
-        to:'/home/task/assembly',
+        to:'/index/task/assembly',
         title: '设置',
-        icon:<SettingOutlined />,
+        icon:'#icon-shezhi',
         key:'5'
     }
 ]
@@ -74,7 +66,9 @@ const PipelineDetailsLeft = props =>{
                         visible={visible}
                         id='liOne'
                     >
-                        <ClusterOutlined id='liIcon' style={{fontSize:18,padding:10}}/>
+                        <svg  className='icon' aria-hidden="true">
+                            <use xlinkHref='#icon-shaixuan'/>
+                        </svg>
                     </Dropdown>
                 </li>
                 {
@@ -85,7 +79,11 @@ const PipelineDetailsLeft = props =>{
                                 key={item.key}
                                 onClick={()=>changeNav(item)}
                             >
-                                <div className='aside_content_icon'>{item.icon}</div>
+                                <div className='aside_content_icon'>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref= {item.icon}/>
+                                    </svg>
+                                </div>
                                 <div className='aside_content_title'>{item.title}</div>
                             </li>
                         )

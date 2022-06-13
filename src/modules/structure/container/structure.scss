@@ -14,8 +14,6 @@
             width: 350px;
             min-width: 350px;
             background: #fff;
-            padding: 15px;
-            position: fixed;
             z-index: 20;
             vertical-align: top;
             -webkit-box-orient: vertical;
@@ -25,18 +23,19 @@
             flex-direction: column;
             border-right: 1px solid #ccc;
             &-dropdown{
-                width: 327px;
+                width: 100%;
                 margin-bottom: 20px;
+                padding: 15px 15px 0 15px;
                 .dropdown{
                     display: flex;
                     flex-direction: row;
                 }
             }
             &-history{
-                height: calc(100% - 28px);
+                height: calc(100% - 60px);
+                padding: 0 15px 15px 15px;
+                overflow: auto;
                 .history-content{
-                    overflow-y: auto;
-                    height: 100%;
                     &-list{
                         display: flex;
                         flex-direction: row;
@@ -46,13 +45,10 @@
                         cursor: pointer;
                         .list{
                             &-title{
-                                width: 85px;
+                                color: #1890ff;
+                                width: 60px;
                                 font-weight: 600;
-                                &>span{
-                                    color: #1890ff;
-                                    font-weight: 500;
-                                    font-size: 18px;
-                                }
+                                font-size: 17px;
                             }
                             &-group{
                                 flex-grow: 1;
@@ -82,9 +78,8 @@
         &-right{
             flex-grow: 1;
             height: 100%;
-            padding: 65px 15px;
-            margin-left: 350px;
             &-mid{
+                padding:15px;
                 .mid_group{
                     display: flex;
                     flex-direction: column;
@@ -95,6 +90,23 @@
                         flex-direction: column;
                         justify-content: space-between;
                     }
+                    .item{
+                        &-0{
+                            border-top: 3px solid #444444!important;
+                        }
+                        &-1{
+                            border-top: 3px solid #ff0000!important;
+                        }
+                        &-10{
+                            border-top: 3px solid #5d70ea!important;
+                        }
+                        &-100{
+                            border-top: 3px solid #43a890 !important;
+                        }
+                        &-all{
+                            border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
+                        }
+                    }
                     &_top{
                         display: flex;
                         flex-direction: row;
@@ -103,8 +115,14 @@
                         &_tel{
                             font-size: 17px;
                             .tel{
-                                &_time{
+                                &_title{
                                     padding-right: 20px;
+                                    color: #1890ff;
+                                    width: 60px;
+                                    font-weight: 600;
+                                }
+                                &_time{
+                                    padding-right: 10px;
                                 }
                             }
                         }
@@ -156,7 +174,7 @@
                 height: 61vh;
                 overflow-y: auto;
                 overflow-x: hidden;
-                background: #222;
+                background: #2F2F2F;
                 color: #fff;
                 padding: 10px 10px 20px;
                 h3{
@@ -165,13 +183,28 @@
                 }
             }
         }
-        &-null{
-            display: flex;
-            margin: 50px auto;
-            width: 36%;
+        &-empty{
+            .null{
+                position: relative;
+            }
+            .empty{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                position: relative;
+                &-group{
+                    position: absolute;
+                    bottom: 30px;
+                    &_title{
+                        padding-bottom: 10px;
+                        font-size: 16px;
+                    }
+                    &_extra{
+                        padding-left: 18px;
+                    }
+                }
+            }
         }
     }
-}
-.red{
-    border-top: 3px solid red;
 }

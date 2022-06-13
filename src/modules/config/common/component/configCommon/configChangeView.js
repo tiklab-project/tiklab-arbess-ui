@@ -6,14 +6,27 @@ import {withRouter} from "react-router-dom";
 const ConfigChangeView = props =>{
 
     const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt} = props
-    
+
     const run = () => {
         setIsPrompt(false)
         pipelineStartStructure(pipelineId).then(res=>{
             console.log(res)
-            props.history.push('/home/task/structure')
+            props.history.push('/index/task/structure')
+        }).catch(error=>{
+            console.log(error)
         })
     }
+
+    const viewList = [
+        {
+            id:1,
+            title:'表单视图'
+        },
+        {
+            id:2,
+            title:'图形化视图'
+        }
+    ]
 
     return (
         <div className='config_changeView'>
@@ -27,16 +40,17 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className='changeView-view'>
-                    <div className={view ===0 ? 'view view-link' : 'view' }
-                         onClick={()=>setView(0)}
-                    >
-                        表单视图
-                    </div>
-                    <div className={view ===1 ? 'view view-link' : 'view' }
-                         onClick={()=>setView(1)}
-                    >
-                        图形化视图
-                    </div>
+                    {
+                        viewList.map(item=>{
+                            return  <div className={view === item.id ? 'view view-link' : 'view' }
+                                         onClick={()=>setView(item.id)}
+                                         key={item.id}
+                                    >
+                                        {item.title}
+                                    </div>
+                        })
+                    }
+
                 </div>
             </div>
         </div>

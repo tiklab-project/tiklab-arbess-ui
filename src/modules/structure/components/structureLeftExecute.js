@@ -25,7 +25,7 @@ const StructureLeftExecute = props => {
                 : 'history-content-list'
             }
         >
-            <div className='list-title'> 构建 0 </div>
+            <div className='list-title'> 运行中 </div>
             <div className='list-group'>
                 <div className='list-group-item'>
                     <div className='list-state'>状态 : {state()}</div>

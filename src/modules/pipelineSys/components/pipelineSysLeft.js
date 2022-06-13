@@ -1,13 +1,11 @@
-import React, {Fragment} from "react";
+import React from "react";
 
 const PipelineSysLeft = props =>{
 
-
-
     return(
-        <Fragment>
+        <div className='pipelineSys-content-left'>
 
-        </Fragment>
+        </div>
     )
 }
 

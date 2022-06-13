@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findLikeHistory,setIsState,setLeftData,setModeData,index,setIndex,setHistoryId,setRightData,findHistoryLog} = props
+    const {findLikeHistory,setLeftData,setModeData,index,setIndex,setRightData,findHistoryLog} = props
     const pipelineId = localStorage.getItem('pipelineId')
     const [state,setState] = useState(0)
     const [enforcer,setEnforcer] = useState(null)
@@ -18,7 +18,6 @@ const StructureLeftDropdown = props =>{
             console.log(res)
             if(data.length !== 0){
                 setModeData(res.data && res.data[0])
-                setHistoryId('historyId',res.data && res.data[0].historyId)
                 findHistoryLog(res.data && res.data[0].historyId).then(response=>{
                     setLeftData([...data])
                     if(index!==0){
@@ -47,7 +46,6 @@ const StructureLeftDropdown = props =>{
             type:mode,
         }
         change()
-        setIsState(value)
     }
 
     const changeEnforcer = (value,e) =>{

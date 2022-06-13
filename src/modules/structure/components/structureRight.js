@@ -5,8 +5,7 @@ import StructureRightItem from "./structureRightItem";
 
 const StructureRight = props =>{
 
-    const {rightData,status,deleteHistoryLog,modeData,index,leftExecute,killInstance,rightExecute,freshen,setFreshen,
-        historyId } = props
+    const {rightData,status,deleteHistoryLog,modeData,index,setIndex,leftExecute,killInstance,rightExecute,freshen,setFreshen} = props
     
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState('')
@@ -21,46 +20,42 @@ const StructureRight = props =>{
     }
 
     return(
-        <div className='structure-content-right'>
-            <div className='structure-content-right-mid'>
-                {
-                    index === 0 ?
-                        <StructureRightExecute
-                            freshen={freshen}
-                            setFreshen={setFreshen}
-                            rightExecute={rightExecute}
-                            rightData={rightData}
-                            status={status}
-                            index={index}
-                            leftExecute={leftExecute}
-                            setDrawerContent={setDrawerContent}
-                            setVisible={setVisible}
-                            killInstance={killInstance}
-                            runWay={runWay}
-                        />
-                        :
-                        <StructureRightItem
-                            freshen={freshen}
-                            setFreshen={setFreshen}
-                            rightData={rightData}
-                            status={status}
-                            modeData={modeData}
-                            index={index}
-                            historyId={historyId}
-                            setVisible={setVisible}
-                            setDrawerContent={setDrawerContent}
-                            deleteHistoryLog={deleteHistoryLog}
-                            runWay={runWay}
-                        />
-                }
-            </div>
-
+        <div className='structure-content-right-mid'>
+            {
+                index === 0 ?
+                    <StructureRightExecute
+                        freshen={freshen}
+                        setFreshen={setFreshen}
+                        rightExecute={rightExecute}
+                        rightData={rightData}
+                        status={status}
+                        index={index}
+                        leftExecute={leftExecute}
+                        setDrawerContent={setDrawerContent}
+                        setVisible={setVisible}
+                        killInstance={killInstance}
+                        runWay={runWay}
+                    />
+                    :
+                    <StructureRightItem
+                        freshen={freshen}
+                        setFreshen={setFreshen}
+                        rightData={rightData}
+                        status={status}
+                        modeData={modeData}
+                        index={index}
+                        setIndex={setIndex}
+                        setVisible={setVisible}
+                        setDrawerContent={setDrawerContent}
+                        deleteHistoryLog={deleteHistoryLog}
+                        runWay={runWay}
+                    />
+            }
             <StructureRightLogDrawer
                 visible={visible}
                 setVisible={setVisible}
                 drawerContent={drawerContent}
             />
-
         </div>
     )
 }

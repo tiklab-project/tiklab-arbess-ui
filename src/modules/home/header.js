@@ -4,7 +4,6 @@ import {useTranslation} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import logo from '../../assets/images/logo.png';
 import portrait from '../../assets/images/portrait.jpg';
-import { MessageOutlined } from '@ant-design/icons';
 
 const Head =props=>{
 
@@ -12,7 +11,7 @@ const Head =props=>{
 
     const { i18n } = useTranslation();
     const [lan, setLan] = useState(i18n.language);
-    const [currentLink, setCurrentLink] = useState('流水线');
+    const [currentLink, setCurrentLink] = useState('首页');
     const nav = localStorage.getItem('nav')
 
 
@@ -83,7 +82,7 @@ const Head =props=>{
                             <Button>{lan}</Button>
                         </Dropdown>
                         <div/>
-                        <Dropdown overlay={groupMenu} placement="bottom">
+                        <Dropdown overlay={groupMenu} placement="bottom" >
                             <Avatar src={portrait} />
                         </Dropdown>
                     </div>

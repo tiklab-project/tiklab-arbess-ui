@@ -1,5 +1,5 @@
-import React, {Fragment, useEffect, useState} from 'react'
-import { Spin,Result} from "antd";
+import React, { useEffect, useState} from 'react'
+import { Spin,Result,Button} from "antd";
 import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import './structure.scss'
 import StructureLeft from "../components/structureLeft";
@@ -7,13 +7,14 @@ import StructureRight from "../components/structureRight";
 import { inject, observer } from "mobx-react";
 import StructureLeftDropdown from "../components/structureLeftDropdown";
 import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
+import empty from '../../../assets/images/empty.jpg'
 
 const Structure = props => {
 
     const {structureStore} = props
 
     const {findExecState,findStructureState,findAll,selectHistoryDetails,findHistoryLog,deleteHistoryLog,
-        killInstance,findLikeHistory
+        killInstance,findLikeHistory,pipelineStartStructure
     } = structureStore
 
     const [leftData,setLeftData] = useState([])     // 左侧 -- 旧历史列表
@@ -23,9 +24,7 @@ const Structure = props => {
     const [modeData,setModeData] = useState('')     // 历史列表的内容
     const [index,setIndex] = useState(0)  // 构建区分显示 -- 构建1 、2、……
     const [freshen,setFreshen] = useState(false)  // 删除刷新组件
-    const [isData,setIsData] = useState(true)  // 是否有构建过的数据
-    const [isState,setIsState] = useState('')
-    const [historyId,setHistoryId] = useState('')
+    const [isData,setIsData] = useState(false)  // 是否有构建过的数据
     const pipelineId = localStorage.getItem('pipelineId')
 
     let interval=null
@@ -34,9 +33,9 @@ const Structure = props => {
             if(res.data === 1 ){
                 interval = setInterval(() => {
                     findStructureState(pipelineId).then(res =>{
-                        console.log(res,'findStructureState')
                         if(res.data!==null){
                             setLeftExecute(res.data)
+                            setIsData(true)
                             if(res.data.runStatus===1 || res.data.runStatus===30){ stop() }
                         }else{ stop() }
                     })
@@ -46,10 +45,10 @@ const Structure = props => {
                     setRightExecute(res.data)
                 })
                 data()
-            }else if(res.data=== 0){
+            }
+            else if(res.data=== 0){
                 data()
                 setLeftExecute('')
-                clearInterval(interval)
                 setIndex(1)
             }
         })
@@ -61,7 +60,6 @@ const Structure = props => {
             console.log('历史列表',res)
             if(res.data.length!==0){
                 setModeData(res.data && res.data[0])
-                setHistoryId(res.data && res.data[0].historyId)
                 findHistoryLog(res.data && res.data[0].historyId).then(response=>{
                     console.log('历史详情',response)
                     setLeftData([...res.data])
@@ -71,6 +69,9 @@ const Structure = props => {
             }else{
                 setLeftData([])
                 setRightData([])
+                if(leftExecute===''){
+                    setIsData(false)
+                }
             }
         })
     }
@@ -94,7 +95,7 @@ const Structure = props => {
                         </svg>
             case 2 :
                 //失败
-                return  <CloseCircleOutlined style = {{fontSize:16,color:'red'}}/>
+                return  <CloseCircleOutlined style = {{fontSize:17,color:'red'}}/>
             case 3:
                 //运行--等待运行
                 return  <svg className="icon" aria-hidden="true">
@@ -102,7 +103,7 @@ const Structure = props => {
                         </svg>
             case 4:
                 //被迫停止
-                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
+                return  <ExclamationCircleOutlined style = {{fontSize:17}}/>
             case 5:
                 //运行过程
                 return  <svg className="icon" aria-hidden="true">
@@ -110,54 +111,57 @@ const Structure = props => {
                         </svg>
         }
     }
+    
+    const working = () => {
+        pipelineStartStructure(pipelineId).then(()=>{
+            setTimeout(()=>setFreshen(!freshen),500)
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
 
     const style = {
-        'position': 'fixed',
-        'marginLeft':'350px',
-        'height':'50px',
-        'lineHeight':'50px',
-        'zIndex': 99,
-        'borderBottom':' 1px solid #ccc',
-        'width':'100%',
         'paddingLeft':'16px',
-        'fontWeight': 700,
     }
 
     return (
-        <Fragment>
-            <PipelineDetailsBreadcrumb style={style}/>
-            <div className='structure'>
-                {
-                    isData ?
-                        <div className='structure-content'>
-                            <div className='structure-content-left'>
-                                <StructureLeftDropdown
-                                    setIsState={setIsState}
-                                    index={index}
-                                    setLeftData={setLeftData}
-                                    setModeData={setModeData}
-                                    setIndex={setIndex}
-                                    setHistoryId={setHistoryId}
-                                    setRightData={setRightData}
-                                    findLikeHistory={findLikeHistory}
-                                    findHistoryLog={findHistoryLog}
-                                />
-                                <StructureLeft
-                                    findHistoryLog={findHistoryLog}
-                                    leftData={leftData}
-                                    leftExecute={leftExecute}
-                                    setRightData={setRightData}
-                                    status={status}
-                                    setModeData={setModeData}
-                                    index={index}
-                                    setIndex={setIndex}
-                                    setHistoryId={setHistoryId}
-                                />
-                            </div>
+        <div className='structure'>
+            {
+                // 没有正在构建和历史记录为null（非查询状态）
+                isData ?
+                    <div className='structure-content'>
+                        <div className='structure-content-left'>
+                            <StructureLeftDropdown
+                                index={index}
+                                setLeftData={setLeftData}
+                                setModeData={setModeData}
+                                setIndex={setIndex}
+                                setRightData={setRightData}
+                                findLikeHistory={findLikeHistory}
+                                findHistoryLog={findHistoryLog}
+                            />
+                            <StructureLeft
+                                findHistoryLog={findHistoryLog}
+                                leftData={leftData}
+                                leftExecute={leftExecute}
+                                setRightData={setRightData}
+                                status={status}
+                                setModeData={setModeData}
+                                index={index}
+                                setIndex={setIndex}
+                            />
+                        </div>
+                        <div className='structure-content-right'>
+                            <PipelineDetailsBreadcrumb style={style}/>
                             {
                                 leftExecute === ''  &&  leftData.length === 0 ?
-                                    <div className='structure-content-null'>
-                                        <Result title={`没有${isState}的数据`}/>
+                                    <div className='structure-content-empty'>
+                                        <div className='empty null'>
+                                            <img src={empty} alt='logo' />
+                                            <div className="empty-group">
+                                                <div className="empty-group_title">没有查询到数据</div>
+                                            </div>
+                                        </div>
                                     </div>
                                     :
                                     <StructureRight
@@ -171,19 +175,30 @@ const Structure = props => {
                                         leftExecute={leftExecute}
                                         modeData={modeData}
                                         index={index}
-                                        historyId={historyId}
+                                        setIndex={setIndex}
                                         deleteHistoryLog={deleteHistoryLog}
                                         killInstance={killInstance}
                                     />
                             }
-
                         </div>
-                        :
-                        <Result title="当前没有历史数据"/>
-                }
-            </div>
-        </Fragment>
-
+                    </div>
+                    :
+                    <div className='structure-content-empty'>
+                        <PipelineDetailsBreadcrumb/>
+                        <div className='empty null'>
+                            <img src={empty} alt='logo' />
+                            <div className="empty-group">
+                                <div className="empty-group_title">当前流水线尚未运行</div>
+                                <div className="empty-group_extra">
+                                    <Button type="primary" onClick={working}>
+                                        立即运行
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
     )
 }
 

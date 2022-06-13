@@ -4,9 +4,7 @@ import ConfigName from "../../config/common/component/configCommon/configName";
 
 const StructureRightItem = props =>{
 
-    const {rightData,status,deleteHistoryLog,modeData,index,setVisible,setDrawerContent,runWay,historyId,
-        freshen,setFreshen,
-    } = props
+    const {rightData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,runWay,freshen,setFreshen} = props
 
     const state = item =>{
         switch(item.runState){
@@ -25,8 +23,9 @@ const StructureRightItem = props =>{
     }
 
     const confirm = () =>{
-        deleteHistoryLog(historyId).then(()=>{
+        deleteHistoryLog(modeData &&modeData.historyId).then(()=>{
             setFreshen(!freshen)
+            if(index!==0){ setIndex(0) }
         }).catch(error=>{
             console.log(error)
         })
@@ -35,11 +34,13 @@ const StructureRightItem = props =>{
     const rightDetails = () =>{
         return  rightData && rightData.map((item,index)=>{
             return(
-                <Card className='mid_group_center-cart' key={index}  >
+                <Card  className={`mid_group_center-cart  item-${item.runState}`}  key={index}>
                     <div className='cart-top'>
                         <span className='cart-top-taskAlias'>{item.taskAlias}</span>
                         <span> -- </span>
-                        <span className='cart-top-configName'>  <ConfigName type={item.taskType}/> </span>
+                        <span className='cart-top-configName'>
+                            <ConfigName type={item.taskType}/>
+                        </span>
                     </div>
                     <div className='cart-center'>
                         <div className='cart-center-item'>
@@ -61,7 +62,7 @@ const StructureRightItem = props =>{
         <div className="mid_group">
             <div className='mid_group_top'>
                 <div className='mid_group_top_tel'>
-                    <span className='tel_time'>构建 {index}</span>
+                    <span className='tel_title '># {modeData && modeData.findNumber}</span>
                     <span className='tel_time'>执行时长：{modeData && modeData.execTime}</span>
                     <span className='tel_way'>触发方式：{ runWay (modeData && modeData.runWay) }</span>
                 </div>
