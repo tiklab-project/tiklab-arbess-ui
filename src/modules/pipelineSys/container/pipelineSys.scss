@@ -64,12 +64,21 @@
     &-proof{
         padding: 10px 20px 0 ;
         &-content{
-            .ant-card-body{
-                min-width: 400px;
-            }
             &-btn{
                 text-align: right;
                 padding-bottom: 5px;
+            }
+            &-action{
+                .action-{
+                    cursor: pointer;
+                }
+                .edit{
+                    padding-right: 10px;
+                    color:#1800ff;
+                }
+                .del{
+                    color: #ff0000;
+                }
             }
         }
     }

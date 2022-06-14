@@ -47,9 +47,9 @@ const PipelineSysProof = props =>{
             key:'action',
             render:(text,record,index)=>{
                 return(
-                    <span>
-                        <span>编辑</span>
-                        <span>删除</span>
+                    <span className='pipelineSys-proof-content-action'>
+                        <span className='action- edit'>编辑</span>
+                        <span className='action- del'>删除</span>
                     </span>
                 )
             }
@@ -61,7 +61,6 @@ const PipelineSysProof = props =>{
     const breadcrumb = {
         'paddingLeft':'16px',
     }
-
     return(
        <Fragment>
            <PipelineDetailsBreadcrumb style={breadcrumb}/>
