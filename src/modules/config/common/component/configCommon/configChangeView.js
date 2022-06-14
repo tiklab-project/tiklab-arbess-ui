@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import './configChangeView.scss'
+import './configChangeView.scss';
 import {withRouter} from "react-router-dom";
 
 const ConfigChangeView = props =>{

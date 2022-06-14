@@ -7,14 +7,14 @@ import ConfigAddNewStageDrawer from "../configView2/configAddNewStageDrawer";
 import ConfigFormDetailsDrawer from "../configView2/configFormDetailsDrawer";
 import {inject, observer} from "mobx-react";
 import {Form, Input, message} from "antd";
-import {EditOutlined,PlusCircleOutlined} from "@ant-design/icons";
+import {EditOutlined} from "@ant-design/icons";
 import moment from "../../../../../common/moment/moment";
 import {withRouter} from "react-router";
 import ConfigName from "./configName";
 
 const ConfigView2 = props =>{
 
-    const {form, updateConfigure,configDataStore,del} = props
+    const {form, updateConfigure,configDataStore,del,Salta} = props
 
     const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,codeType,setCodeType,linuxShellBlock,unitShellBlock,mavenShellBlock,
@@ -143,6 +143,9 @@ const ConfigView2 = props =>{
             }
         }
         updateConfigure(configureList).then(res=>{
+            if(Salta){
+                props.history.push('/index/task/config')
+            }
             if(res.code!==0){
                 message.error({content:'配置失败', className:'message',})
             }message.success({content: '配置成功', className:'message',})
@@ -167,7 +170,8 @@ const ConfigView2 = props =>{
                                 aria-hidden="true"
                                 onClick={()=>insertData(item,index)}
                             >
-                                <use xlinkHref="#icon-tianjia"/>
+                                {/*<use xlinkHref="#icon-tianjia"/>*/}
+                                <use xlinkHref="#icon-zengjia"/>
                             </svg>
                         </div>
                     </div>
@@ -224,6 +228,7 @@ const ConfigView2 = props =>{
                     setCodeDrawer={setCodeDrawer}
                     setNewStage={setNewStage}
                     setTaskFormDrawer={setTaskFormDrawer}
+                    formInitialValues={formInitialValues}
                 />
                 <div className='configView2-main'>
                     <div className='configView2-main_container'>

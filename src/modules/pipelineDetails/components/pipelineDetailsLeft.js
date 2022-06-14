@@ -1,46 +1,50 @@
 import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router-dom";
-import './pipelineDetailsLeft.scss'
-import {Dropdown} from 'antd'
+import './pipelineDetailsLeft.scss';
+import {Dropdown} from 'antd';
 import PipelineDetailsLeftOpt from "./pipelineDetailsLeftOpt";
-
-const  taskRouters=[
-    {
-        to:'/index/task/work',
-        title:'工作空间',
-        icon:'#icon-gongzuotai',
-        key:'2'
-    },
-    {
-        to:'/index/task/config',
-        title: '配置',
-        icon: '#icon-jiekoupeizhi',
-        key:'3'
-    },
-    {
-        to:"/index/task/structure",
-        title: '历史',
-        icon:'#icon-lishijishi',
-        key:'4'
-    },
-    {
-        to:'/index/task/assembly',
-        title: '设置',
-        icon:'#icon-shezhi',
-        key:'5'
-    }
-]
 
 const PipelineDetailsLeft = props =>{
 
-    const {pipelineList,visible,setVisible,isPrompt,setIsPrompt,setPipeline} = props
+    const {pipelineList,visible,setVisible,isPrompt,setPipeline} = props
 
     const [nav,setNav] = useState('')
-    const path = props.location.pathname
+    let path = props.location.pathname
 
     useEffect(()=>{
+        if (path.indexOf('/index/task/assembly') === 0) {
+            path='/index/task/assembly'
+        }
         setNav(path)
     },[path])
+
+
+    const  taskRouters=[
+        {
+            to:'/index/task/work',
+            title:'工作空间',
+            icon:'#icon-gongzuotongji',
+            key:'2'
+        },
+        {
+            to:'/index/task/config',
+            title: '配置',
+            icon: '#icon-jiekoupeizhi',
+            key:'3'
+        },
+        {
+            to:'/index/task/structure',
+            title: '历史',
+            icon:'#icon-lishijishi',
+            key:'4'
+        },
+        {
+            to:'/index/task/assembly',
+            title: '设置',
+            icon:'#icon-shezhi',
+            key:'5'
+        }
+    ]
 
     const changeNav = item=>{
         props.history.push(item.to)
@@ -57,17 +61,16 @@ const PipelineDetailsLeft = props =>{
                 >
                     <Dropdown overlay={
                         <PipelineDetailsLeftOpt
+                            {...props}
                             pipelineList={pipelineList}
                             setVisible={setVisible}
                             isPrompt={isPrompt}
-                            setIsPrompt={setIsPrompt}
                             setPipeline={setPipeline}
                         />}
                         visible={visible}
-                        id='liOne'
                     >
                         <svg  className='icon' aria-hidden="true">
-                            <use xlinkHref='#icon-shaixuan'/>
+                            <use xlinkHref='#icon-shaixuan1'/>
                         </svg>
                     </Dropdown>
                 </li>

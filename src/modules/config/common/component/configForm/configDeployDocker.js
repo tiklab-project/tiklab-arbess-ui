@@ -1,20 +1,12 @@
-import React, {Fragment, useState} from "react";
-import {Button, Form, Input, message, Row, Select} from "antd";
-import {inject, observer} from "mobx-react";
-import ConfigDeployAddProofModal from "./configDeployAddProofModal";
-
-const {Option}=Select
+import React, {Fragment} from "react";
+import { Form, Input, Row} from "antd";
+import AddProofButton from "../../../../proof/component/addProofButton";
+import FindAllProof from "../../../../proof/component/findAllProof";
+import FormTest from "./formTest";
 
 const ConfigDeployDocker = props =>{
 
-    const {proofStore,configStore,configDataStore} = props
-    const {createProof,findAllProof} = proofStore
-    const {codeTestPass} = configStore
-    const {formInitialValues} = configDataStore
-
-    const [allDockerProofList,setAllDockerProofList] = useState([])
-    const [deployVisible,setDeployVisible] = useState(false)
-
+    const deployProofId = localStorage.getItem('deployProofId')
 
     const proofPort = (rule,value) =>{
         if (!value) {
@@ -42,34 +34,6 @@ const ConfigDeployDocker = props =>{
         } else {
             return Promise.resolve(); //验证通过
         }
-    }
-
-    const clickFindAllDeploy = () =>{
-        findAllProof(32).then(res=>{
-            console.log('docker凭证',res)
-            setAllDockerProofList(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-
-    const changeDeploySelect = (value,e) =>{
-        localStorage.setItem('deployProofId',e.key)
-    }
-
-    const test = () => {
-        const params = {
-            proofId:localStorage.getItem('deployProofId'),
-            url:formInitialValues && formInitialValues.ip,
-            port:formInitialValues && formInitialValues.port,
-        }
-        codeTestPass(params).then(res=>{
-            if(res.data === true){
-                message.success({content: '连接成功', className:'message'})
-            }else {
-                message.error({content:'连接失败', className:'message'})
-            }
-        })
     }
 
     return(
@@ -104,26 +68,8 @@ const ConfigDeployDocker = props =>{
                 <Input placeholder="输入端口号"  style={{width:150}}/>
             </Form.Item>
             <Row>
-                <Form.Item name='dockerProofName' label='凭证'>
-                    <Select 
-                        style={{ width: 300 }}
-                        onChange={(value,e)=>changeDeploySelect(value,e)}
-                        onClick={clickFindAllDeploy}
-                    >
-                        {
-                            allDockerProofList && allDockerProofList.map(item=>{
-                                return(
-                                    <Option key={item.proofId} value={item.proofName+ " (" + item.proofUsername + ")"} >
-                                        { item.proofName+ " (" + item.proofUsername + ")"}
-                                    </Option>
-                                )
-                            })
-                        }
-                    </Select>
-                </Form.Item>
-                <Button onClick={()=>setDeployVisible(true)} className='config-details-link'>
-                    添加
-                </Button>
+                <FindAllProof type={32}/>
+                <AddProofButton codeType={32}/>
             </Row>
             <Form.Item
                 name='dockerPort'
@@ -147,6 +93,7 @@ const ConfigDeployDocker = props =>{
             >
                 <Input style={{width:200}}/>
             </Form.Item>
+
             <Form.Item
                 name='deployAddress'
                 label='部署位置'
@@ -154,18 +101,11 @@ const ConfigDeployDocker = props =>{
             >
                 <Input/>
             </Form.Item>
-            <div className='config-details-gitTest'>
-                <Button onClick={()=>test()}>连接测试</Button>
-            </div>
-            <ConfigDeployAddProofModal
-                deployVisible={deployVisible}
-                setDeployVisible={setDeployVisible}
-                createProof={createProof}
-            />
+
+            <FormTest proofId={deployProofId}/>
         </Fragment>
     )
 }
 
-export default inject('proofStore','configStore','configDataStore')
-                (observer(ConfigDeployDocker))
+export default ConfigDeployDocker
 

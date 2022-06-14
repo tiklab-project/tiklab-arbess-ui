@@ -1,19 +1,18 @@
-import React, {Fragment, useState} from "react";
-import {Button, Form, Input, message, Row, Select} from "antd";
+import React, {Fragment} from "react";
+import { Form, Input, Row} from "antd";
 import {inject, observer} from "mobx-react";
-import ConfigDeployAddProofModal from "./configDeployAddProofModal";
 import Mirror from "./mirror";
-const {Option}=Select
+import AddProofButton from "../../../../proof/component/addProofButton";
+import FormTest from "./formTest";
+import FindAllProof from "../../../../proof/component/findAllProof";
+
 
 const ConfigDeployLinux = props =>{
   
-    const {proofStore,configDataStore,configStore} = props
-    const {createProof,findAllProof} = proofStore
-    const {setIsPrompt,linuxShellBlock,setLinuxShellBlock,formInitialValues} = configDataStore
-    const {codeTestPass} = configStore
+    const {configDataStore} = props
+    const {setIsPrompt,linuxShellBlock,setLinuxShellBlock} = configDataStore
 
-    const [allLinuxProofList,setAllLinuxProofList] = useState([])
-    const [deployVisible,setDeployVisible] = useState(false)
+    const deployProofId = localStorage.getItem('deployProofId')
 
     const validate = (rule,value) =>{
         if (!value) {
@@ -27,34 +26,6 @@ const ConfigDeployLinux = props =>{
         } else {
             return Promise.resolve(); //验证通过
         }
-    }
-
-    const clickFindAllDeploy = () =>{
-        findAllProof(31).then(res=>{
-            console.log('linux凭证',res)
-            setAllLinuxProofList(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-
-    const changeDeploySelect = (value,e) =>{
-        localStorage.setItem('deployProofId',e.key)
-    }
-
-    const test = () => {
-        const params = {
-            proofId:localStorage.getItem('deployProofId'),
-            url:formInitialValues && formInitialValues.ip,
-            port:formInitialValues && formInitialValues.port,
-        }
-        codeTestPass(params).then(res=>{
-            if(res.data === true){
-                message.success({content: '连接成功', className:'message'})
-            }else {
-                message.error({content:'连接失败', className:'message'})
-            }
-        })
     }
 
     return(
@@ -89,26 +60,8 @@ const ConfigDeployLinux = props =>{
                 <Input placeholder="输入端口号"  style={{width:150}}/>
             </Form.Item>
             <Row>
-                <Form.Item name='dockerProofName' label='凭证'>
-                    <Select
-                        style={{width:300}}
-                        onChange={(value,e)=>changeDeploySelect(value,e)}
-                        onClick={clickFindAllDeploy}
-                    >
-                        {
-                            allLinuxProofList && allLinuxProofList.map(item=>{
-                                return(
-                                    <Option key={item.proofId} value={ item.proofName+ " (" + item.proofUsername + ")"}>
-                                        { item.proofName+ " (" + item.proofUsername + ")"}
-                                    </Option>
-                                )
-                            })
-                        }
-                    </Select>
-                </Form.Item>
-                <Button className='config-details-link' onClick={()=>setDeployVisible(true)}>
-                    添加
-                </Button>
+                <FindAllProof type={31}/>
+                <AddProofButton codeType={31}/>
             </Row>
             <Form.Item
                 name='deployAddress'
@@ -124,21 +77,11 @@ const ConfigDeployLinux = props =>{
                     setIsPrompt={setIsPrompt}
                 />
             </Form.Item>
-
-            <div className='config-details-gitTest'>
-                <Button onClick={()=>test()}>连接测试</Button>
-            </div>
-
-            <ConfigDeployAddProofModal
-                deployVisible={deployVisible}
-                setDeployVisible={setDeployVisible}
-                createProof={createProof}
-            />
+            <FormTest proofId={deployProofId}/>
         </Fragment>
     )
 }
 
-export default inject('proofStore','configDataStore','configStore')
-(observer(ConfigDeployLinux))
+export default inject('configDataStore')(observer(ConfigDeployLinux))
 
 

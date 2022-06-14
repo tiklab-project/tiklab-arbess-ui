@@ -90,6 +90,9 @@
                         flex-direction: column;
                         justify-content: space-between;
                     }
+                     .ant-card-bordered{
+                         border: 1px solid #cccccc;
+                     }
                     .item{
                         &-0{
                             border-top: 3px solid #444444!important;
@@ -98,7 +101,7 @@
                             border-top: 3px solid #ff0000!important;
                         }
                         &-10{
-                            border-top: 3px solid #5d70ea!important;
+                            border-top: 3px solid #1890ff!important;
                         }
                         &-100{
                             border-top: 3px solid #43a890 !important;
@@ -111,7 +114,6 @@
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
-                        margin-bottom: 20px;
                         &_tel{
                             font-size: 17px;
                             .tel{
@@ -130,6 +132,7 @@
                     &_center{
                         display: flex;
                         flex-direction: row;
+                        margin: 20px 0;
                         &-cart{
                             margin-right: 20px;
                             width:260px;
@@ -164,14 +167,13 @@
             }
         }
         &-bottom{
-            margin-top: 30px;
             &-title{
                 font-size: 20px;
                 font-weight: 600;
             }
             &-outLog{
                 white-space: pre-wrap;
-                height: 61vh;
+                height: 60vh;
                 overflow-y: auto;
                 overflow-x: hidden;
                 background: #2F2F2F;
@@ -196,12 +198,13 @@
                 &-group{
                     position: absolute;
                     bottom: 30px;
+                    text-align: center;
                     &_title{
                         padding-bottom: 10px;
                         font-size: 16px;
                     }
                     &_extra{
-                        padding-left: 18px;
+                        //padding-left: 18px;
                     }
                 }
             }

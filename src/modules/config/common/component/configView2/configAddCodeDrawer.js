@@ -2,7 +2,7 @@ import React ,{useState} from "react";
 import {Button, Drawer} from 'antd';
 import ConfigAddCodeLeftDrawer from "./configAddCodeLeftDrawer";
 import ConfigAddCodeRightDrawer from "./configAddCodeRightDrawer";
-import {CloseOutlined} from '@ant-design/icons'
+import {CloseOutlined} from '@ant-design/icons';
 
 const leftLis = [
     {

@@ -1,13 +1,13 @@
 import React, { useEffect, useState} from 'react'
-import { Spin,Result,Button} from "antd";
+import { Spin,Button} from "antd";
 import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
-import './structure.scss'
+import './structure.scss';
 import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
 import { inject, observer } from "mobx-react";
 import StructureLeftDropdown from "../components/structureLeftDropdown";
 import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
-import empty from '../../../assets/images/empty.jpg'
+import empty from '../../../assets/images/empty.jpg';
 
 const Structure = props => {
 

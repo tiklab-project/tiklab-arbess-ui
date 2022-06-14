@@ -1,7 +1,7 @@
 import React from "react";
 import { Drawer ,Button} from 'antd';
 import {CloseOutlined} from "@ant-design/icons";
-import '../../structure/components/structureRightLogDrawer.scss'
+import '../../structure/components/structureRightLogDrawer.scss';
 
 const WorkSpaceDrawer = props =>{
 

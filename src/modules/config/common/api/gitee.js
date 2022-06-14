@@ -45,6 +45,13 @@ export function  GetBranch (data){
     })
 }
 
+export function  GetState(data){
+    return serviceLoc.request({
+        url:'/gitee/getState',
+        method:'post',
+        data
+    })
+}
 
 
 

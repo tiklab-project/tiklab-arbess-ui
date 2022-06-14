@@ -1,6 +1,6 @@
 import React from 'react';
-import { Login, EAM_STORE } from 'doublekit-eam-ui'
-import {inject, observer} from 'mobx-react'
+import { Login, EAM_STORE } from 'doublekit-eam-ui';
+import {inject, observer} from 'mobx-react';
 
 const LoginContent = (props)=> {
 

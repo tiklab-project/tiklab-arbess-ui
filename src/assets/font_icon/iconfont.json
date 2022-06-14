@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7408314",
+      "name": "管理",
+      "font_class": "guanli",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "22325355",
+      "name": "分类管理",
+      "font_class": "fenleiguanli",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "4066480",
+      "name": "工作统计",
+      "font_class": "gongzuotongji",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "7145700",
+      "name": "筛选",
+      "font_class": "shaixuan1",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
       "icon_id": "18267926",
       "name": "接口配置",
       "font_class": "jiekoupeizhi",
@@ -20,13 +48,6 @@
       "unicode_decimal": 58901
     },
     {
-      "icon_id": "7872212",
-      "name": "工作台",
-      "font_class": "gongzuotai",
-      "unicode": "e62b",
-      "unicode_decimal": 58923
-    },
-    {
       "icon_id": "6306120",
       "name": "没有相关",
       "font_class": "meiyouxiangguan",
@@ -39,20 +60,6 @@
       "font_class": "shezhi",
       "unicode": "e713",
       "unicode_decimal": 59155
-    },
-    {
-      "icon_id": "20384567",
-      "name": "配置",
-      "font_class": "peizhi",
-      "unicode": "ecbd",
-      "unicode_decimal": 60605
-    },
-    {
-      "icon_id": "24473104",
-      "name": "筛选",
-      "font_class": "shaixuan",
-      "unicode": "fca9",
-      "unicode_decimal": 64681
     },
     {
       "icon_id": "5961323",

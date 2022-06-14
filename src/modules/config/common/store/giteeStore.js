@@ -6,6 +6,7 @@ import {
     GetBranch,
     GetProof,
     Url,
+    GetState,
 } from "../api/gitee";
 
 export class GiteeStore {
@@ -49,6 +50,14 @@ export class GiteeStore {
         params.append('projectName',value.projectName)
         params.append('proofId',value.proofId)
         return await GetBranch(params)
+    }
+
+    @action
+    getState = async value=>{
+        const params = new FormData()
+        params.append('code',value.code)
+        params.append('state',value.state)
+        return await GetState(params)
     }
 
 }

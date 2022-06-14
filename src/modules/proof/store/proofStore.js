@@ -1,8 +1,21 @@
-import {action} from "mobx";
+import {action, observable} from "mobx";
 
-import {CreateProof, FindAllProof, FindOneProof, GetState,} from "../api/proof";
+import {
+    CreateProof,
+    FindAllProof,
+    FindOneProof,
+    FindPipelineProof,
+} from "../api/proof";
 
 export class ProofStore{
+
+    @observable proofScope = ''
+    @observable pipelineProofList = []
+
+    @action
+    setProofScope = value =>{
+        this.proofScope = value
+    }
 
     @action
     createProof =async values =>{
@@ -13,6 +26,8 @@ export class ProofStore{
             proofUsername:values.proofUsername,
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe,
+            type:values.type,
+            pipelineId:values.pipelineId,
             proofPort:values.proofPort,
             proofIp:values.proofIp,
         }
@@ -38,12 +53,17 @@ export class ProofStore{
     }
 
     @action
-    getState = async value=>{
-        const params = new FormData()
-        params.append('code',value.code)
-        params.append('state',value.state)
-        return await GetState(params)
+    findPipelineProof =async value =>{
+        const param = new FormData()
+        param.append('pipelineId',value)
+        FindPipelineProof(param).then(res=>{
+            console.log(res)
+            this.pipelineProofList = res.data
+        }).catch(error=>{
+            console.log(error)
+        })
     }
+
 
 }
 

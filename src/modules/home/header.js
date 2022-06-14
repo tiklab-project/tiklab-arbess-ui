@@ -1,5 +1,5 @@
-import React, {useState,useEffect} from 'react'
-import {Row,Col,Avatar,Button,Dropdown,Image,Menu} from 'antd';
+import React, {useState,useEffect} from 'react';
+import {Row,Col,Avatar,Button,Dropdown,Menu} from 'antd';
 import {useTranslation} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import logo from '../../assets/images/logo.png';
@@ -10,14 +10,16 @@ const Head =props=>{
     const {routers,languageSelectData=[]} = props;
 
     const { i18n } = useTranslation();
+    let path = props.location.pathname
     const [lan, setLan] = useState(i18n.language);
-    const [currentLink, setCurrentLink] = useState('首页');
-    const nav = localStorage.getItem('nav')
-
+    const [currentLink, setCurrentLink] = useState(path);
 
     useEffect(()=>{
-        setCurrentLink(nav)
-    },[nav])
+        if (path.indexOf('/index/task') === 0) {
+            path='/index/pipeline'
+        }
+        setCurrentLink(path)
+    },[path])
 
     const onClickLan = ({ key }) => {
         i18n.changeLanguage(languageSelectData[key].value)
@@ -36,7 +38,6 @@ const Head =props=>{
 
 
     const changeCurrentLink = item => {
-        localStorage.setItem('nav',item.title)
         props.history.push(item.to)
     }
 
@@ -47,7 +48,7 @@ const Head =props=>{
                     <div
                         key={routers.key}
                         onClick={ () => changeCurrentLink(routers)}
-                        className={currentLink === routers.title ? 'headers-active ' : null}
+                        className={currentLink === routers.to ? 'headers-active ' : null}
                     >
                         {routers.title}
                     </div>

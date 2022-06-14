@@ -1,5 +1,4 @@
 import {observable, action} from "mobx";
-import qs from "qs";
 
 import {
     FindAllPipelineStatus,
@@ -22,8 +21,10 @@ export class PipelineStore{
     }
 
     @action
-    findAllPipelineStatus=()=>{
-        FindAllPipelineStatus().then(res=>{
+    findAllPipelineStatus = value =>{
+        const param = new FormData()
+        param.append('userId',value)
+        FindAllPipelineStatus(param).then(res=>{
             this.pipelineList=res.data
             console.log('所有流水线', res)
         }).catch(error=>{
@@ -34,6 +35,7 @@ export class PipelineStore{
     @action
     createPipeline=values=>{
         const params = {
+            userId:values.userId,
             pipelineName: values.pipelineName,
             pipelineCreateUser: values.pipelineCreateUser,
             pipelineType: values.pipelineType,
@@ -51,10 +53,11 @@ export class PipelineStore{
     }
 
     @action
-    findOneName=values=>{
-        const params = qs.stringify({'pipelineName': values})
+    findOneName=value=>{
+        const param = new FormData()
+        param.append('pipelineName',value)
         return new Promise((resolve, reject) => {
-            FindOneName(params).then(res=>{
+            FindOneName(param).then(res=>{
                 this.searchPipelineList=res.data
                 console.log("搜索流水线",res)
                 resolve(res)
@@ -66,14 +69,14 @@ export class PipelineStore{
     }
 
     @action //删除流水线
-    deletePipeline=values=>{
-        const params = qs.stringify({'pipelineId': values})
-        DeletePipeline(params).then(res=>{
+    deletePipeline= value =>{
+        const param = new FormData()
+        param.append('pipelineId',value)
+        DeletePipeline(param).then(res=>{
             console.log('删除流水线',res)
         }).catch(error=>{
             console.log(error)
         })
-
     }
 
     @action

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {withRouter} from "react-router-dom";
-import './pipeline.scss'
+import './pipeline.scss';
 import PipelineSearch from "../../common/pipelineSearch";
 import PipelineTabs from "../components/pipelineTabs";
 

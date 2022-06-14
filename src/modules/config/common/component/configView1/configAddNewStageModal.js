@@ -1,7 +1,7 @@
 import React from "react";
 import {Modal,message} from "antd";
 import ConfigCodeOrNewStage from "./configCodeOrNewStage";
-import './configAddNewStageModal.scss'
+import './configAddNewStageModal.scss';
 
 const lis=[
     {

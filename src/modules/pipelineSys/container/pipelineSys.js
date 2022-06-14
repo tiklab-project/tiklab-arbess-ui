@@ -1,19 +1,14 @@
-import React, {Fragment} from 'react'
+import React  from 'react'
 import './pipelineSys.scss'
 import {observer,inject} from "mobx-react";
-import PipelineSysLeft from "../components/pipelineSysLeft";
-import PipelineSysRight from "../components/pipelineSysRight";
+import {renderRoutes} from "react-router-config";
+import PipelineSysLeftNav from "../components/pipelineSysLeftNav";
 import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
+import {withRouter} from "react-router";
 
-/*
- * 流水线设置
- */
 const PipelineSys= props=>{
 
-    const {pipelineStore}=props
-    const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
-    const pipelineId=localStorage.getItem('pipelineId')
-
+    const {route}=props
     const style = {
         'paddingLeft':'16px',
     }
@@ -21,19 +16,14 @@ const PipelineSys= props=>{
     return(
         <div className='pipelineSys'>
             <div className='pipelineSys-content'>
-                <PipelineSysLeft/>
+                <PipelineSysLeftNav {...props}/>
                 <div className='pipelineSys-content-right'>
-                    <PipelineDetailsBreadcrumb style={style}/>
-                    <PipelineSysRight
-                        pipelineId={pipelineId}
-                        deletePipeline={deletePipeline}
-                        updatePipeline={updatePipeline}
-                        pipelineList={pipelineList}
-                    />
+                    {/*<PipelineDetailsBreadcrumb style={style}/>*/}
+                    {renderRoutes(route.routes)}
                 </div>
             </div>
         </div>
     )
 }
 
-export default inject('pipelineStore')(observer(PipelineSys))
+export default withRouter(inject('pipelineStore')(observer(PipelineSys)))

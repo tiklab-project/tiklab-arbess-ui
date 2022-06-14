@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 
 const PipelineDetailsLeftOpt = props =>{
 
-    const {pipelineList,isPrompt,setVisible,setPipeline,setIsPrompt} = props
+    const {pipelineList,isPrompt,setVisible,setPipeline} = props
     const pipelineName = localStorage.getItem('pipelineName')
 
     const onClick = (e,item) => {

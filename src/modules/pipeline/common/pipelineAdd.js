@@ -1,8 +1,9 @@
 import React, { useState,useEffect,useRef} from "react";
 import {Form, Input, Button, message} from "antd";
-import './pipelineAdd.scss'
+import './pipelineAdd.scss';
 import {observer,inject} from "mobx-react";
 import moment from "../../../common/moment/moment";
+import {getUser} from "doublekit-core-ui";
 
 const lis= [
     {
@@ -42,7 +43,8 @@ const PipelineAdd = props => {
     const handSubmit = value => {
         const params={
             pipelineName:value.pipelineName,
-            pipelineCreateUser:'admin',
+            userId:getUser().userId,
+            pipelineCreateUser:getUser().name,
             pipelineType:1,
             pipelineCreateTime:moment.moment
         }
@@ -50,7 +52,7 @@ const PipelineAdd = props => {
             if(res.code=== 0 && res.data){
                 localStorage.setItem('pipelineId',res.data)
                 localStorage.setItem('pipelineName',value.pipelineName)
-                props.history.push({pathname:'/home/config',value})
+                props.history.push({pathname:'/index/config',value})
             }else{
                 message.error({content:'添加失败', className:'message'})
             }

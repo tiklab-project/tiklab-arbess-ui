@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Fragment} from 'react'
 import {withRouter} from "react-router";
-import './workSpace.scss'
+import './workSpace.scss';
 import {inject,observer} from "mobx-react";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";

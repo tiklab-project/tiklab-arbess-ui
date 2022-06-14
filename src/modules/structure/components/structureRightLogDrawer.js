@@ -1,7 +1,7 @@
 import React from "react";
 import { Drawer ,Button} from 'antd';
 import {CloseOutlined} from "@ant-design/icons";
-import './structureRightLogDrawer.scss'
+import './structureRightLogDrawer.scss';
 import ConfigName from "../../config/common/component/configCommon/configName";
 
 const StructureRightLogDrawer = props =>{

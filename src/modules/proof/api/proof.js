@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/api/requset";
+import {serviceLoc} from "../../../common/api/requset";
 
 //创建凭证
 export function CreateProof(data){
@@ -27,10 +27,10 @@ export function  FindOneProof(data){
     })
 }
 
-//
-export function  GetState(data){
+//所有凭证
+export function  FindPipelineProof(data){
     return serviceLoc.request({
-        url:'/gitee/getState',
+        url:'/proof/findPipelineProof',
         method:'post',
         data
     })

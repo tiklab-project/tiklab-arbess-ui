@@ -1,7 +1,5 @@
 import React from "react";
 import {Button} from "antd";
-import {inject, observer} from 'mobx-react'
-import {UserList, USER_STORE} from 'doublekit-user-ui'
 
 const WorkSpaceRecord = props =>{
 
@@ -49,5 +47,5 @@ const WorkSpaceRecord = props =>{
     )
 }
 
-export default inject(USER_STORE)(observer(WorkSpaceRecord))
+export default WorkSpaceRecord
 

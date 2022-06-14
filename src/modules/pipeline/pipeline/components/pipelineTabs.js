@@ -1,12 +1,13 @@
 import React, {useEffect} from "react";
 import {Tabs, Tooltip} from "antd";
-import './pipelineTabs.scss'
+import './pipelineTabs.scss';
 import PipelineTabs_all from "./pipelineTabs_all";
 import PipelineTabs_my from "./pipelineTabs_my";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import PipelineRun from "./pipelineRun";
-import {ExclamationCircleOutlined,CloseCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
+import {ExclamationCircleOutlined,CloseCircleOutlined,PlayCircleOutlined,CheckCircleOutlined} from "@ant-design/icons";
+import {getUser} from 'doublekit-core-ui';
 
 const { TabPane } = Tabs;
 
@@ -18,7 +19,7 @@ const PipelineTabs = props =>{
     const {pipelineStartStructure,killInstance}=structureStore
 
     useEffect(()=>{
-            findAllPipelineStatus()
+            findAllPipelineStatus(getUser().userId)
     },[])
     //收藏
     let pipelineCollect
@@ -33,9 +34,8 @@ const PipelineTabs = props =>{
             pipelineName:record.pipelineName,
             pipelineCollect:pipelineCollect
         }
-        updatePipeline(params).then(res=>{
-            findAllPipelineStatus()
-
+        updatePipeline(params).then(()=>{
+            findAllPipelineStatus(getUser().userId)
         })
     }
 
@@ -48,13 +48,12 @@ const PipelineTabs = props =>{
 
     const work = record =>{
         if(record.pipelineState === 0){
-            pipelineStartStructure(record.pipelineId).then(res=>{
-                console.log(res)
-                setTimeout(()=>findAllPipelineStatus(),500)
+            pipelineStartStructure(record.pipelineId).then(()=>{
+                setTimeout(()=>findAllPipelineStatus(getUser().userId),500)
             })
         }else {
-            killInstance(record.pipelineId).then(res=>{
-                findAllPipelineStatus()
+            killInstance(record.pipelineId).then(()=>{
+                findAllPipelineStatus(getUser().userId)
             })
         }
     }
@@ -89,13 +88,11 @@ const PipelineTabs = props =>{
                 switch (text) {
                     case 30:
                         return  <Tooltip title="成功" className='all-icon'>
-                                    <svg className="icon" aria-hidden="true" >
-                                        <use xlinkHref="#icon-chenggong-"  />
-                                    </svg>
+                                    <CheckCircleOutlined style = {{fontSize:25,color:'#1890ff'}}/>
                                 </Tooltip>
                     case 1:
                         return <Tooltip title="失败" className='all-icon'>
-                                    <CloseCircleOutlined style = {{fontSize:25,color:'red'}}/>
+                                    <CloseCircleOutlined style = {{fontSize:25,color:'#ff0000'}}/>
                                 </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建" className='all-icon'>

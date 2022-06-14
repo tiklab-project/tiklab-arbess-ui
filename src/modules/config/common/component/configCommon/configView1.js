@@ -12,11 +12,10 @@ import {inject, observer} from "mobx-react";
 import {withRouter} from "react-router";
 import ConfigForm from "./configForm";
 import ConfigName from "./configName";
-import {float} from "mockjs/src/mock/random/basic";
 
 const ConfigView1 = props =>{
 
-    const {form,del,updateConfigure,configDataStore} = props
+    const {form,del,updateConfigure,configDataStore,Salta} = props
 
     const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,setCodeType,
@@ -141,17 +140,12 @@ const ConfigView1 = props =>{
             }
         }
         updateConfigure(configureList).then(res=>{
-            if(res.code!==0){
-                message.error({
-                    content: '保存失败',
-                    className:'message',
-                })
-            }else {
-                message.success({
-                    content: '保存成功',
-                    className:'message',
-                })
+            if(Salta){
+                props.history.push('/index/task/config')
             }
+            if(res.code!==0){
+                message.error({content:'配置失败', className:'message',})
+            }message.success({content: '配置成功', className:'message',})
             setIsPrompt(false)
         })
     }

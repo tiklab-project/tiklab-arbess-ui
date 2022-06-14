@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import StructureRightLogDrawer from './structureRightLogDrawer'
+import StructureRightLogDrawer from './structureRightLogDrawer';
 import StructureRightExecute from "./structureRightExecute";
 import StructureRightItem from "./structureRightItem";
 

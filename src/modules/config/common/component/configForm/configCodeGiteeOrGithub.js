@@ -10,9 +10,9 @@ const ConfigCodeGiteeOrGithub = props =>{
 
     const {githubStore,proofStore,configDataStore,giteeStore} = props
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
-    const {url,getAllGiteeStorehouse,getGiteeBranch, getGiteeProof} = giteeStore
-    const {findAllProof,getState} = proofStore
-    const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType,} = configDataStore
+    const {url,getAllGiteeStorehouse,getGiteeBranch, getGiteeProof,getState} = giteeStore
+    const {findAllProof} = proofStore
+    const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止

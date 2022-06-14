@@ -12,16 +12,15 @@ import {inject, observer} from "mobx-react";
 
 const Config = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore,proofStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
 
     const {updateConfigure} = configStore
-    const {code} = giteeStore
-    const {getState} = proofStore
+    const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,setData,codeData,setCodeData,formInitialValues,
-        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,setCodeType,
+    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,codeData,setCodeData,formInitialValues,
+        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -158,12 +157,14 @@ const Config = props =>{
                         form={form}
                         del={del}
                         updateConfigure={updateConfigure}
+                        Salta={'Salta'}
                     />
                     :
                     <ConfigView2
                         form={form}
                         del={del}
                         updateConfigure={updateConfigure}
+                        Salta={'Salta'}
                     />
             }
         </Fragment>
@@ -172,5 +173,5 @@ const Config = props =>{
 
 
 export default  withRouter(inject('configStore', 'giteeStore',
-                'structureStore','configDataStore','githubStore','proofStore')
+                'structureStore','configDataStore','githubStore')
                 (observer(Config)))

@@ -1,8 +1,8 @@
 import React ,{useEffect} from 'react'
-import './pipelineSearch'
+import './pipelineSearch';
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import './searchResult.scss'
+import './searchResult.scss';
 
 const SearchResult = props => {
 

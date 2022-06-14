@@ -7,15 +7,14 @@ import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipeline
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import {getUrlParam} from '../common/component/configCommon/getUrlParam'
+import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 
 const ConfigDetails = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore,proofStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
-    const {code} = giteeStore
-    const {getState} = proofStore
+    const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
@@ -254,5 +253,5 @@ const ConfigDetails = props =>{
 }
 
 export default  withRouter(inject('configStore', 'giteeStore',
-                'structureStore','configDataStore','githubStore','proofStore')
+                'structureStore','configDataStore','githubStore')
             (observer(ConfigDetails)))

@@ -3,7 +3,7 @@ import ConfigName from "../configCommon/configName";
 
 const ConfigCode = props =>{
 
-    const {setCodeDrawer ,codeData,setNewStage,setTaskFormDrawer} = props
+    const {setCodeDrawer ,codeData,setNewStage,setTaskFormDrawer,formInitialValues} = props
 
     const showDetailsDrawer = () => {
         if(codeData){
@@ -19,16 +19,18 @@ const ConfigCode = props =>{
                     <ConfigName type={codeData.codeType}/>
                 </div>
                 {
-                    codeData.codeName ?
+                    // codeData.codeName ?
+                    formInitialValues.codeName ?
                         <div className='configView2-sider_code_one_address'>
-                            <div className='branch-title'> {codeData.codeName} </div>
+                            <div className='branch-title'> {formInitialValues.codeName} </div>
                         </div>
                         : null
                 }
                 {
-                    codeData.codeBranch ?
+                    // codeData.codeBranch ?
+                    formInitialValues.codeBranch ?
                         <div className='configView2-sider_code_one_branch '>
-                            <div className='branch-address'> {codeData.codeBranch} </div>
+                            <div className='branch-address'> {formInitialValues.codeBranch} </div>
                         </div>
                         : null
                 }

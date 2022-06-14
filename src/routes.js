@@ -5,25 +5,28 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 const Login=AsyncComponent(()=>import('./modules/login/login'))
 const Index=AsyncComponent(()=>import('./modules/home/portal'))
 
-/*
-    首页
- */
+/* 首页 */
 const HomePage=AsyncComponent(()=>import('./modules/homePage/container/homePage'))
-
-const System=AsyncComponent(()=>import('./modules/system/container/system'))
 
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
 const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/common/pipelineAdd'))
 const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/config'))
 const PipelineDetails=AsyncComponent(()=>import('./modules/pipelineDetails/container/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
-/*
-    流水线详情
- */
+
+/*  流水线详情 */
 const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
 const Structure=AsyncComponent(()=>import('./modules/structure/container/structure'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
 const PipelineSys=AsyncComponent(()=>import('./modules/pipelineSys/container/pipelineSys'))
+/*  流水线详情 -- 设置 */
+const PipelineSysReDel=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysReDel'))
+const PipelineSysRole=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysRole'))
+const PipelineSysProof=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysProof'))
+const PipelineSysMembro=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysMembro'))
+
+/* 系统设置 */
+const System=AsyncComponent(()=>import('./modules/system/container/system'))
 
 const routers=[
     {
@@ -58,6 +61,11 @@ const routers=[
                 component:PipelineConfig,
             },
             {
+                path:'/index/system',
+                component:System,
+                exact: true,
+            },
+            {
                 path:'/index/searchresult/:searchresult',
                 component:SearchResult,
             },
@@ -80,7 +88,30 @@ const routers=[
                     },
                     {
                         path:'/index/task/assembly',
-                        component: PipelineSys
+                        component: PipelineSys,
+                        routes:[
+                            {
+                                path: '/index/task/assembly',
+                                exact:true,
+                                render:()=>  <Redirect to={"/index/task/assembly/role"}/>,
+                            },
+                            {
+                                path:'/index/task/assembly/proof',
+                                component:PipelineSysProof
+                            },
+                            {
+                                path:'/index/task/assembly/role',
+                                component: PipelineSysRole
+                            },
+                            {
+                                path:'/index/task/assembly/other',
+                                component: PipelineSysReDel
+                            },
+                            {
+                                path:'/index/task/assembly/membro',
+                                component: PipelineSysMembro
+                            }
+                        ]
                     },
                     {
                         path:'/index/task/config',
@@ -88,18 +119,13 @@ const routers=[
                     },
                 ]
             },
-            {
-                path:'/index/system',
-                component:System,
-                exact: true,
-            },
         ]
     },
     {
         path:'/',
         component: Index,
         exact: true,
-        render:()=>  <Redirect to={"/index/home"}/>,
+        render:()=>  <Redirect to='/index/home'/>,
     },
 ]
 

@@ -1,34 +1,43 @@
 import React from "react";
-import {Modal, Form, Input, Select, Button} from "antd";
+import {Modal, Form, Input, Select} from "antd";
 const { Option } = Select;
 
-const ConfigDeployAddProofModal = props =>{
+const AddProofModal = props =>{
 
-    const {deployVisible,setDeployVisible,createProof} = props
+    const {visible,setVisible,createProof,proofScope} = props
     const [form] = Form.useForm()
+    const pipelineId = localStorage.getItem('pipelineId')
 
     const onOk = () =>{
         form.validateFields().then((values) => {
+            let id;
+            if(values.type===1){
+                id=null
+            }else {
+                id=pipelineId
+            }
             const params = {
-                proofScope:31,
+                type:values.type,
+                proofScope:proofScope,
                 proofType:values.proofType,
                 proofName:values.proofName,
                 proofUsername:values.proofUsername,
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe,
+                pipelineId:id,
             }
             createProof(params)
-            setDeployVisible(false)
+            setVisible(false)
         })
     }
 
     return (
         <Modal
-            visible={deployVisible}
+            visible={visible}
             closable={false}
             okText="确认"
             cancelText="取消"
-            onCancel={()=>setDeployVisible(false)}
+            onCancel={()=>setVisible(false)}
             onOk={onOk}
         >
             <Form
@@ -36,8 +45,18 @@ const ConfigDeployAddProofModal = props =>{
                 layout="vertical"
                 name="userForm"
                 autoComplete = "off"
-                initialValues={{proofType:"password"}}
+                initialValues={{proofType:"password",type:1}}
             >
+                <Form.Item
+                    label='凭证作用域'
+                    name='type'
+                    rules={[{required:true, message:'请选择凭证'}]}
+                >
+                    <Select >
+                        <Option value={1}>全局凭证</Option>
+                        <Option value={2}>项目凭证</Option>
+                    </Select>
+                </Form.Item>
                 <Form.Item
                     label='凭证名称'
                     name='proofName'
@@ -54,14 +73,14 @@ const ConfigDeployAddProofModal = props =>{
                 <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.proofType !== currentValues.proofType}>
                     {({ getFieldValue })=>
                         getFieldValue('proofType') === 'password' ? (
-                            <>
-                                <Form.Item label='username' name='proofUsername'>
-                                    <Input placeholder='账号'/>
-                                </Form.Item>
-                                <Form.Item label='password' name='proofPassword'>
-                                    <Input.Password  placeholder='密码'/>
-                                </Form.Item>
-                            </>
+                                <>
+                                    <Form.Item label='username' name='proofUsername'>
+                                        <Input placeholder='账号'/>
+                                    </Form.Item>
+                                    <Form.Item label='password' name='proofPassword'>
+                                        <Input.Password  placeholder='密码'/>
+                                    </Form.Item>
+                                </>
                             ):
                             <Form.Item name='proofPassword' label='私钥'>
                                 <Input.TextArea  placeholder='私钥'/>
@@ -71,12 +90,9 @@ const ConfigDeployAddProofModal = props =>{
                 <Form.Item name='proofDescribe' label='描述'>
                     <Input.TextArea  placeholder='备注'/>
                 </Form.Item>
-                <Form.Item >
-                    <Button htmlType='submit'>连接测试</Button>
-                </Form.Item>
             </Form>
         </Modal>
     )
 }
 
-export default ConfigDeployAddProofModal
+export default AddProofModal

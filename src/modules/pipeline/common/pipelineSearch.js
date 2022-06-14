@@ -13,7 +13,7 @@ const PipelineSearch= props=>{
 
     const onSearch = values =>{
         findOneName(values).then(() =>{
-            props.history.push(`/home/searchresult/${values}`)
+            props.history.push(`/index/searchresult/${values}`)
         })
     }
 
@@ -21,7 +21,7 @@ const PipelineSearch= props=>{
         <div className='pipeline-top'>
             <div className='pipeline-top-r'>
                 <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
-                <Button type='primary' onClick={()=>props.history.push('/home/new')}>
+                <Button type='primary' onClick={()=>props.history.push('/index/new')}>
                     <PlusOutlined/> 新建流水线
                 </Button>
             </div>

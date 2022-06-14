@@ -1,7 +1,7 @@
 import React ,{useState} from "react";
 import {Button, Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import ConfigAddNewStageLeftDrawer from './configAddNewStageLeftDrawer'
+import ConfigAddNewStageLeftDrawer from './configAddNewStageLeftDrawer';
 import ConfigAddNewStageRightDrawer from "./configAddNewStageRightDrawer";
 
 const leftLis = [
