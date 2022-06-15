@@ -1,8 +1,8 @@
 import React,{Fragment} from "react";
 import { Form, Input, Row} from "antd";
-import AddProofButton from "../../../../proof/addProofButton";
+import AddProofButton from "../../../../proof/components/addProofButton";
 import {inject, observer} from "mobx-react";
-import FindAllProof from "../../../../proof/findAllProof";
+import FindAllProof from "../../../../proof/components/findAllProof";
 import FormTest from "./formTest";
 
 const ConfigCodeSvn = props =>{

@@ -1,6 +1,6 @@
 import React from "react";
 import {Modal, Form, Input, Select} from "antd";
-import moment from "../../common/moment/moment";
+import moment from "../../../common/moment/moment";
 const { Option } = Select;
 
 const AddProofModal = props =>{

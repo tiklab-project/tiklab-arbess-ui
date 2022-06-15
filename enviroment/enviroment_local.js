@@ -26,7 +26,7 @@ const appSecret = JSON.stringify('');
 const version = JSON.stringify('');
 const client = JSON.stringify('');
 
-module.exports = {
+const webpackGlobal = {
     base_url,
     userProduction,
     plugin_base_url,
@@ -37,3 +37,4 @@ module.exports = {
     version,
     client,
 }
+module.exports = {webpackGlobal}

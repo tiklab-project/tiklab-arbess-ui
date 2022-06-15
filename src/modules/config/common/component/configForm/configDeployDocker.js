@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import { Form, Input, Row} from "antd";
-import AddProofButton from "../../../../proof/addProofButton";
-import FindAllProof from "../../../../proof/findAllProof";
+import AddProofButton from "../../../../proof/components/addProofButton";
+import FindAllProof from "../../../../proof/components/findAllProof";
 import FormTest from "./formTest";
 
 const ConfigDeployDocker = props =>{

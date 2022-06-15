@@ -16,7 +16,6 @@ const App = (props) => {
     useEffect(() => {
         if (isInitLoadPlugin) {
             setLoading(true)
-            console.log(resources)
             loadLanguage(i18n, resources, languages, fetchMethod, 'zh').then(res => {
                 const resources2 = {
                     zh:res.zh || {translation:{}}
