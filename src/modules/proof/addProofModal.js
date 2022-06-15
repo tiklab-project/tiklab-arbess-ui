@@ -1,20 +1,21 @@
 import React from "react";
 import {Modal, Form, Input, Select} from "antd";
+import moment from "../../common/moment/moment";
 const { Option } = Select;
 
 const AddProofModal = props =>{
 
     const {visible,setVisible,createProof,proofScope} = props
     const [form] = Form.useForm()
-    const pipelineId = localStorage.getItem('pipelineId')
 
     const onOk = () =>{
         form.validateFields().then((values) => {
             let id;
+            console.log(values.type)
             if(values.type===1){
                 id=null
             }else {
-                id=pipelineId
+                id=localStorage.getItem('pipelineId')
             }
             const params = {
                 type:values.type,
@@ -24,7 +25,10 @@ const AddProofModal = props =>{
                 proofUsername:values.proofUsername,
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe,
-                pipelineId:id,
+                pipeline:{
+                    pipelineId:id,
+                },
+                proofCreateTime:moment.moment,
             }
             createProof(params)
             setVisible(false)

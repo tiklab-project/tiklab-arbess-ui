@@ -1,7 +1,8 @@
 import React  from "react";
 import {withRouter} from "react-router-dom";
+import './pipelineDetailsAsideOpt.scss'
 
-const PipelineDetailsLeftOpt = props =>{
+const PipelineDetailsAsideOpt = props =>{
 
     const {pipelineList,isPrompt,setVisible,setPipeline} = props
     const pipelineName = localStorage.getItem('pipelineName')
@@ -44,4 +45,4 @@ const PipelineDetailsLeftOpt = props =>{
     )
 }
 
-export default withRouter(PipelineDetailsLeftOpt)
+export default withRouter(PipelineDetailsAsideOpt)

@@ -27,9 +27,12 @@ export class ProofStore{
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe,
             type:values.type,
-            pipelineId:values.pipelineId,
+            pipeline:{
+                pipelineId: values.pipeline
+            },
             proofPort:values.proofPort,
             proofIp:values.proofIp,
+            proofCreateTime:values.proofCreateTime,
         }
         CreateProof(params).then(res=>{
             console.log('创建部署凭证',res)

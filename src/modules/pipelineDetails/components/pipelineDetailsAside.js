@@ -1,83 +1,81 @@
-import React from "react";
-import { Menu } from 'antd';
-import {Link,withRouter} from "react-router-dom";
-import './pipelineDetailsAside.scss'
-import {
-    ClockCircleOutlined,
-    DiffOutlined,
-    LeftOutlined,
-    PlayCircleOutlined,
-    SettingOutlined,
-    ToolOutlined
-} from "@ant-design/icons";
+import React, {useEffect, useState} from "react";
+import {withRouter} from "react-router-dom";
+import {Dropdown} from 'antd';
+import PipelineDetailsAsideOpt from "./pipelineDetailsAsideOpt";
+import FirstMenu from "../../asideMenu/firstMenu";
 
-const  taskRouters=[
-    {
-        to:'/home/pipeline',
-        title:'返回流水线',
-        icon:<LeftOutlined />,
-        key:'1'
-    },
-    {
-        to:'/home/task/work',
-        title:'工作空间',
-        icon:<DiffOutlined />,
-        key:'2'
-    },
-    {
-        to:"/home/task/structure",
-        title: '开始构建',
-        icon:<PlayCircleOutlined />,
-        key:'3'
-    },
-    {
-        to:'/home/task/config',
-        title: '配置',
-        icon: <ToolOutlined />,
-        key:'4'
-    },
-    {
-        to:'/home/task/history',
-        title:'构建历史',
-        icon:<ClockCircleOutlined />,
-        key:'5'
-    },
-    {
-        to:'/home/task/assembly',
-        title: '流水线设置',
-        icon:<SettingOutlined />,
-        key:'6'
-    }
-]
+const PipelineDetailsAside = props =>{
+
+    const {pipelineList,visible,setVisible,isPrompt,setPipeline} = props
+
+    const [nav,setNav] = useState('')
+    let path = props.location.pathname
+
+    useEffect(()=>{
+        if (path.indexOf('/index/task/assembly') === 0) {
+            path='/index/task/assembly'
+        }
+        setNav(path)
+    },[path])
 
 
-const PipelineDetailsAside= props=>{
-
-    let path=props.location.pathname
-    if(path==='/home/task/build'){
-        path='/home/task/history'
-    }else if(path==='/home/task/post'){
-        path='/home/task/config'
-    }
+    const  taskRouters=[
+        {
+            to:'/index/task/work',
+            title:'工作空间',
+            icon:'#icon-gongzuotongji',
+            key:'2'
+        },
+        {
+            to:'/index/task/config',
+            title: '配置',
+            icon: '#icon-jiekoupeizhi',
+            key:'3'
+        },
+        {
+            to:'/index/task/structure',
+            title: '历史',
+            icon:'#icon-lishijishi',
+            key:'4'
+        },
+        {
+            to:'/index/task/assembly',
+            title: '设置',
+            icon:'#icon-shezhi',
+            key:'5'
+        }
+    ]
 
     return(
-        <Menu
-            style={{ width: 200,height:'100%' }}
-            selectedKeys={[path]}
-            mode="inline"
-        >
-            {
-                taskRouters  && taskRouters.map(item=>{
-                    return(
-                        <Menu.Item key={item.to} icon={item.icon}>
-                            <Link to={item.to}>
-                                {item.title}
-                            </Link>
-                        </Menu.Item>
-                    )
-                })
-            }
-        </Menu>
+         <div className='aside'>
+            <ul  className='content'>
+                <li
+                    onClick={()=>setVisible(!visible)}
+                    onBlur={()=>setVisible(false)}
+                    className='aside_content aside_dropdown'
+                    style={{padding:10}}
+                >
+                    <Dropdown overlay={
+                        <PipelineDetailsAsideOpt
+                            {...props}
+                            pipelineList={pipelineList}
+                            setVisible={setVisible}
+                            isPrompt={isPrompt}
+                            setPipeline={setPipeline}
+                        />}
+                        visible={visible}
+                    >
+                        <svg  className='icon' aria-hidden="true">
+                            <use xlinkHref='#icon-shaixuan1'/>
+                        </svg>
+                    </Dropdown>
+                </li>
+                <FirstMenu
+                    nav={nav}
+                    routers={taskRouters}
+                />
+            </ul>
+        </div>
     )
 }
 

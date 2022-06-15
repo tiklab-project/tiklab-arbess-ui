@@ -4,46 +4,6 @@
         display: flex;
         flex-direction: row;
         height: 100%;
-        &-left{
-            height: 100%;
-            width: 200px;
-            min-width: 200px;
-            background: #f8f8f8;
-            z-index: 20;
-            vertical-align: top;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            border-right: 1px solid #ccc;
-            .left{
-                &-content{
-                    padding-top: 15px;
-                    .icon{
-                        width: 25px;
-                        height: 25px;
-                    }
-                    &-nav{
-                        height: 50px;
-                        display: flex;
-                        padding: 15px;
-                        line-height: 50px;
-                        align-items: center;
-                        margin-bottom: 7px;
-                        cursor: pointer;
-                        &-icon{
-                            padding-right: 5px;
-                        }
-                    }
-                    &-link{
-                        background: #f2f2f2;
-                        border-right: 3px solid #1890ff;
-                    }
-                }
-            }
-
-        }
         &-right{
             flex-grow: 1;
             height: 100%;
@@ -54,6 +14,10 @@
         height: calc(100% - 50px);
         .privilege-domain-user{
             overflow: hidden;
+        }
+        .orga-breadcrumb{
+            padding-left: 16px;
+            font-weight: 700;
         }
     }
     /*  删除以及重命名  */
@@ -80,6 +44,15 @@
                     color: #ff0000;
                 }
             }
+        }
+    }
+    /*  角色管理  */
+    &-role{
+        .privilege-breadcrumb{
+            padding-left: 16px;
+            margin: 16px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #ccc
         }
     }
 }

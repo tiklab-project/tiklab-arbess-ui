@@ -221,6 +221,8 @@ const ConfigDetails = props =>{
 
     const style = {
         'position':'fixed',
+        'top':'55px',
+        'paddingTop':'20px'
     }
 
     return (

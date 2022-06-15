@@ -1,0 +1,28 @@
+.opt{
+    width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #C4C4C4;
+    &-content{
+        height: 100%;
+        padding: 10px;
+        &-title{
+            font-weight: 700;
+            font-size: 16px;
+        }
+        &-group{
+            padding: 20px;
+            &_item{
+                margin-bottom: 10px;
+                cursor: pointer;
+                height: 30px;
+                padding-left: 20px;
+                line-height: 30px;
+                &:hover{
+                    border: 1px solid #ccc;
+                }
+            }
+        }
+    }
+}
+
+

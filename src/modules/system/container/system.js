@@ -9,11 +9,9 @@ const System = props =>{
 
     return(
         <div className='system'>
+            <SystemAside/>
             <div className='system-content'>
-                <SystemAside/>
-                <div>
-                    {renderRoutes(route.routes)}
-                </div>
+                {renderRoutes(route.routes)}
             </div>
         </div>
     )

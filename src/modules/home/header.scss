@@ -65,8 +65,6 @@
     }
     &-content{
         padding-top: 55px;
-        .ant-layout{
-            height:calc(100vh - 55px);
-        }
+        height: 100%;
     }
 }

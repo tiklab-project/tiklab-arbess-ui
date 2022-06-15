@@ -1,13 +1,11 @@
-import React, { useEffect, useState} from "react";
-import {Layout, Modal} from 'antd';
+import React, {Fragment, useEffect, useState} from "react";
+import { Modal} from 'antd';
 import {renderRoutes} from "react-router-config";
 import './pipelineDetails.scss';
-import PipelineDetailsLeft from "../components/pipelineDetailsLeft";
+import PipelineDetailsAside from "../components/pipelineDetailsAside";
 import { inject,observer } from "mobx-react";
 import {Prompt} from "react-router-dom";
 import {getUser} from 'doublekit-core-ui';
-
-const { Content } = Layout;
 
 const PipelineDetails= (props)=>{
 
@@ -56,8 +54,8 @@ const PipelineDetails= (props)=>{
     }
 
     return(
-        <Layout>
-            <PipelineDetailsLeft
+        <Fragment>
+            <PipelineDetailsAside
                 {...props}
                 pipelineList={pipelineList}
                 visible={visible}
@@ -66,12 +64,9 @@ const PipelineDetails= (props)=>{
                 setPipeline={setPipeline}
                 setIsPrompt={setIsPrompt}
             />
-            <Content
-                className='pipelineDetails'
-                onClick={()=>setVisible(false)}
-            >
+            <div className='pipelineDetails' onClick={()=>setVisible(false)}>
                 {renderRoutes(route.routes)}
-            </Content>
+            </div>
             <Prompt
                 when={isPrompt}
                 message={location =>{
@@ -88,7 +83,7 @@ const PipelineDetails= (props)=>{
                     return false
                 }}
             />
-        </Layout>
+        </Fragment>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Form, Input, Row,} from "antd";
-import AddProofButton from "../../../../proof/component/addProofButton";
-import FindAllProof from "../../../../proof/component/findAllProof";
+import AddProofButton from "../../../../proof/addProofButton";
+import FindAllProof from "../../../../proof/findAllProof";
 import FormTest from "./formTest";
 import {inject, observer} from "mobx-react";
 

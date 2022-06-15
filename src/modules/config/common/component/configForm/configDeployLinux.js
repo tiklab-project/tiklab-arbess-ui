@@ -2,9 +2,9 @@ import React, {Fragment} from "react";
 import { Form, Input, Row} from "antd";
 import {inject, observer} from "mobx-react";
 import Mirror from "./mirror";
-import AddProofButton from "../../../../proof/component/addProofButton";
+import AddProofButton from "../../../../proof/addProofButton";
 import FormTest from "./formTest";
-import FindAllProof from "../../../../proof/component/findAllProof";
+import FindAllProof from "../../../../proof/findAllProof";
 
 
 const ConfigDeployLinux = props =>{

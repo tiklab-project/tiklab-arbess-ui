@@ -1,13 +1,11 @@
-import React, {useEffect} from "react";
-import './pipelineSysRole.scss';
+import React from "react";
 import {inject,observer} from "mobx-react";
-import {PRIVILEGE_SYSTEM_STORE,ProjectRoleList,FeatureList ,RoleList} from 'doublekit-privilege-ui'
+import {PRIVILEGE_SYSTEM_STORE,ProjectRoleList} from 'doublekit-privilege-ui'
 
 const PipelineSysRole = props =>{
 
     return(
-        <div>
-            {/*<FeatureList/>*/}
+        <div className='pipelineSys-role'>
             <ProjectRoleList/>
         </div>
     )

@@ -18,6 +18,9 @@ const Head =props=>{
         if (path.indexOf('/index/task') === 0) {
             path='/index/pipeline'
         }
+        if(path.indexOf('/index/system') === 0){
+            path='/index/system'
+        }
         setCurrentLink(path)
     },[path])
 

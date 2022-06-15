@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {inject,observer} from "mobx-react";
 import { Table} from "antd";
-import AddProofButton from "../../proof/component/addProofButton";
+import AddProofButton from "../../proof/addProofButton";
 import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
 
 const PipelineSysProof = props =>{
@@ -58,12 +58,9 @@ const PipelineSysProof = props =>{
 
     const style = 'primary'
 
-    const breadcrumb = {
-        'paddingLeft':'16px',
-    }
     return(
        <Fragment>
-           <PipelineDetailsBreadcrumb style={breadcrumb}/>
+           <PipelineDetailsBreadcrumb />
            <div className='pipelineSys-proof'>
                <div className='pipelineSys-proof-content'>
                    <div className='pipelineSys-proof-content-btn'>

@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import { Modal,Form,Input,Select ,Row,Button,message} from "antd";
+import moment from "../../../../../common/moment/moment";
 import {PlusOutlined} from "@ant-design/icons";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
@@ -19,7 +20,8 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             if(codeType  === 2){
                 const params = {
                     proofName:values.proofName,
-                    accessToken:giteeToken && giteeToken.accessToken
+                    accessToken:giteeToken && giteeToken.accessToken,
+                    proofCreateTime:moment.moment,
                 }
                 getGiteeProof(params).then(res=>{
                     console.log(res,'accessToken')
@@ -34,7 +36,8 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             }else{
                 const params = {
                     proofName:values.proofName,
-                    accessToken:githubToken
+                    accessToken:githubToken,
+                    proofCreateTime:moment.moment,
                 }
                 getGithubProof(params).then(res=>{
                     console.log(res,'accessToken')
