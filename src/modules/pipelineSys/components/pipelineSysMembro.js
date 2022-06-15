@@ -5,14 +5,7 @@ const PipelineSysMembro = props =>{
 
     const pipelineId = localStorage.getItem('pipelineId')
 
-    return(
-        <div className='pipelineSys-membro'>
-            <DomainUserList
-                {...props}
-                domainId={pipelineId}
-            />
-        </div>
-    )
+    return <DomainUserList {...props} domainId={pipelineId}/>
 }
 
 export default PipelineSysMembro

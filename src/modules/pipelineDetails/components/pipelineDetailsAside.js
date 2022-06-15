@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router-dom";
 import {Dropdown} from 'antd';
 import PipelineDetailsAsideOpt from "./pipelineDetailsAsideOpt";
-import FirstMenu from "../../asideMenu/firstMenu";
 
 const PipelineDetailsAside = props =>{
 
@@ -18,33 +17,36 @@ const PipelineDetailsAside = props =>{
         setNav(path)
     },[path])
 
-
     const  taskRouters=[
         {
             to:'/index/task/work',
             title:'工作空间',
             icon:'#icon-gongzuotongji',
-            key:'2'
+            key:'2',
         },
         {
             to:'/index/task/config',
             title: '配置',
             icon: '#icon-jiekoupeizhi',
-            key:'3'
+            key:'3',
         },
         {
             to:'/index/task/structure',
             title: '历史',
             icon:'#icon-lishijishi',
-            key:'4'
+            key:'4',
         },
         {
             to:'/index/task/assembly',
             title: '设置',
             icon:'#icon-shezhi',
-            key:'5'
+            key:'5',
         }
     ]
+
+    const changeNav = item=>{
+        props.history.push(item.to)
+    }
 
     return(
          <div className='aside'>
@@ -70,10 +72,24 @@ const PipelineDetailsAside = props =>{
                         </svg>
                     </Dropdown>
                 </li>
-                <FirstMenu
-                    nav={nav}
-                    routers={taskRouters}
-                />
+                {
+                    taskRouters && taskRouters.map(item=>{
+                        return(
+                            <li
+                                key={item.key}
+                                className={nav===item.to ? 'aside_content aside_link' : 'aside_content'}
+                                onClick={()=>changeNav(item)}
+                            >
+                                <div className='aside_content_icon'>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref= {item.icon}/>
+                                    </svg>
+                                </div>
+                                <div className='aside_content_title'>{item.title}</div>
+                            </li>
+                        )
+                    })
+                }
             </ul>
         </div>
     )
