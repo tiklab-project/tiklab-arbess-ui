@@ -28,7 +28,7 @@ const PipelineSysRole=AsyncComponent(()=>import('./modules/pipelineSys/component
 const PipelineSysDomain=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysDomain'))
 
 /* 系统设置 */
-const System=AsyncComponent(()=>import('./modules/system/container/system'))
+const System=AsyncComponent(()=>import('./modules/system/system'))
 
 /*  系统设置列表  */
 const UserCenter=AsyncComponent(()=>import('./modules/userCenter/container/userCenter'))
@@ -42,8 +42,18 @@ const UserCenterList=AsyncComponent(()=>import('./modules/userCenter/components/
 const UserCenterView=AsyncComponent(()=>import('./modules/userCenter/components/userCenterView'))
 
 /*  系统设置列表 -- 插件库  */
+const PlugDeploy=AsyncComponent(()=>import('./modules/plug/components/plugDeploy'))
+const PlugUpdate=AsyncComponent(()=>import('./modules/plug/components/plugUpdate'))
+const PlugAll=AsyncComponent(()=>import('./modules/plug/components/plugAll'))
+
 /*  系统设置列表 -- 安全设置  */
+const SecurePowerRole=AsyncComponent(()=>import('./modules/secure/components/securePowerRole'))
+const SecurePowerDomain=AsyncComponent(()=>import('./modules/secure/components/securePowerDomain'))
+const SecureProof=AsyncComponent(()=>import('./modules/secure/components/secureProof'))
+
 /*  系统设置列表 -- 其他  */
+const SystemMoreInfo=AsyncComponent(()=>import('./modules/systemMore/components/systemMoreInfo'))
+const SystemMoreLog=AsyncComponent(()=>import('./modules/systemMore/components/systemMoreLog'))
 
 const routers=[
     {
@@ -95,6 +105,11 @@ const routers=[
                         component: UserCenter,
                         routes:[
                             {
+                                path: '/index/system/user',
+                                exact:true,
+                                render:()=>  <Redirect to={"/index/system/user/base"}/>,
+                            },
+                            {
                                 path:'/index/system/user/base',
                                 component: UserCenterBase
                             },
@@ -110,15 +125,68 @@ const routers=[
                     },
                     {
                         path:"/index/system/plugin",
-                        component: Plug
+                        component: Plug,
+                        routes:[
+                            {
+                                path: '/index/system/plugin',
+                                exact:true,
+                                render:()=> <Redirect to={"/index/system/plugin/depot"}/>,
+                            },
+                            {
+                                path:'/index/system/plugin/depot',
+                                component: PlugAll
+                            },
+                            {
+                                path:'/index/system/plugin/update',
+                                component: PlugUpdate
+                            },
+                            {
+                                path:'/index/system/plugin/deploy',
+                                component: PlugDeploy
+                            }
+                        ]
                     },
                     {
                         path:"/index/system/secure",
-                        component: Secure
+                        component: Secure,
+                        routes:[
+                            {
+                                path: '/index/system/secure',
+                                exact:true,
+                                render:()=>  <Redirect to={"/index/system/secure/powerDomain"}/>,
+                            },
+                            {
+                                path:'/index/system/secure/powerDomain',
+                                component: SecurePowerDomain,
+                            },
+                            {
+                                path:'/index/system/secure/powerRole',
+                                component: SecurePowerRole,
+                            },
+                            {
+                                path:'/index/system/secure/proof',
+                                component: SecureProof,
+                            }
+                        ]
                     },
                     {
                         path:"/index/system/other",
-                        component: SystemMore
+                        component: SystemMore,
+                        routes:[
+                            {
+                                path: '/index/system/other',
+                                exact:true,
+                                render:()=>  <Redirect to={"/index/system/other/info"}/>,
+                            },
+                            {
+                                path:'/index/system/other/info',
+                                component: SystemMoreInfo,
+                            },
+                            {
+                                path:'/index/system/other/log',
+                                component: SystemMoreLog,
+                            }
+                        ]
                     }
                 ]
             },

@@ -36,6 +36,33 @@ export function  FindPipelineProof(data){
     })
 }
 
+//所有凭证
+export function  FindAll(data){
+    return serviceLoc.request({
+        url:'/proof/findAll',
+        method:'post',
+        data
+    })
+}
+
+//更新凭证
+export function  UpdateProof(data){
+    return serviceLoc.request({
+        url:'/proof/updateProof',
+        method:'post',
+        data
+    })
+}
+
+//删除凭证
+export function  DeleteProof(data){
+    return serviceLoc.request({
+        url:'/proof/deleteProof',
+        method:'post',
+        data
+    })
+}
+
 
 
 
