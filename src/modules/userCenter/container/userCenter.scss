@@ -1,0 +1,22 @@
+.userCenter{
+    flex-grow: 1;
+    height: 100%;
+    &-base{
+        padding:0 20px 20px;
+        &-content{
+            margin-top: 20px;
+            height: calc(100% - 83px);
+            background: #f8f8f8;
+            border: 1px solid #cccccc;
+            &_name,&_email,&_phone{
+                padding: 20px 0 0 20px;
+                &>span{
+                    padding-right: 20px;
+                }
+            }
+        }
+    }
+    &-view{
+        padding:0 20px 20px;
+    }
+}

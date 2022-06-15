@@ -1,7 +1,7 @@
 import React from "react";
 import {renderRoutes} from "react-router-config";
 import './system.scss';
-import SystemAside from "../components/systemAside";
+import SystemAside from "./systemAside";
 
 const System = props =>{
 

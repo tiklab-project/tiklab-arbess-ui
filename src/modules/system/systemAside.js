@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {withRouter} from "react-router-dom";
-import FirstMenu from "../../asideMenu/firstMenu";
+import FirstMenu from "../asideMenu/firstMenu";
 
 const SystemAside = props =>{
 
@@ -29,24 +29,28 @@ const SystemAside = props =>{
             to:'/index/system/user',
             title:'用户中心',
             icon:'#icon-gongzuotongji',
+            enCode:'1',
         },
         {
             key:2,
             to:'/index/system/plugin',
             title:'插件库',
             icon:'#icon-gongzuotongji',
+            enCode:'2',
         },
         {
             key:3,
             to:'/index/system/secure',
             title:'安全设置',
             icon:'#icon-gongzuotongji',
+            enCode:'3',
         },
         {
             key:4,
             to:'/index/system/other',
             title:'其他',
             icon:'#icon-gongzuotongji',
+            enCode:'4',
         },
     ]
 

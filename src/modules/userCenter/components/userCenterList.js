@@ -1,11 +1,8 @@
 import React from "react";
+import {UserList} from 'doublekit-user-ui'
 
 const UserCenterList = props =>{
-    return(
-        <div>
-            UserCenterList
-        </div>
-    )
+    return <UserList/>
 }
 
 export default UserCenterList

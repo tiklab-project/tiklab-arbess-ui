@@ -1,4 +1,4 @@
-import {PluginStore,PLUGIN_STORE} from "doublekit-plugin-ui";
+import {PLUGIN_STORE,PluginStore} from "doublekit-plugin-ui";
 import {EAM_STORE,EamStore} from 'doublekit-eam-ui';
 import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/pipeline/store/pipelineStore";
 import {STRUCTURE_STORE,StructureStore} from "./modules/structure/store/structureStore";

@@ -1,79 +1,54 @@
-/*
- * @Descripttion: 
- * @version: 1.0.0
- * @Author: 袁婕轩
- * @Date: 2020-12-18 16:04:03
- * @LastEditors: 袁婕轩
- * @LastEditTime: 2021-12-31 09:49:07
- */
-
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
+const webpack = require("webpack");
 const path = require('path');
-const baseWebpackConfig = require('./webpack.base');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const TerserPlugin  = require('terser-webpack-plugin');
-const PORT = 3004;
+const {merge} =require("webpack-merge")
+const baseWebpackConfig = require("./webpack.base");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const customEnv = process.env.CUSTOM_ENV;
+const {webpackGlobal} = require('./enviroment/enviroment_' + customEnv)
 
-module.exports = merge(baseWebpackConfig, {
-    devtool: 'source-map',
-    mode:'development',
-    entry: [
-        'react-hot-loader/patch',
-        `webpack-dev-server/client?http://127.0.0.1:${PORT}/`,
-        path.resolve(__dirname, './src/index.js')
-    ],
-    optimization:{
-        namedModules: true,
-        namedChunks: true,
-        runtimeChunk: {
-            name: 'runtime'
-        },
-        minimize: false,
-        minimizer: [new TerserPlugin()],
-        splitChunks:
-            {
-                name: false,
-                chunks: 'all',
-                // minportal: 1,
-                minChunks: 1,
-                cacheGroups:
-                    {
-                        default: false,
-                        vendors:
-                            {
-                                name: 'common',
-                                chunks: 'all',
-                                minChunks: 2,
-                                test: /node_modules/
-                            },
-                        styles:
-                            {
-                                name: 'common',
-                                chunks: 'all',
-                                minChunks: 2,
-                                test: /\.(css|less|scss|stylus)$/,
-                                enforce: true,
-                                priority: 50
-                            }
-                    }
+module.exports = merge(baseWebpackConfig,{
+    // 指定构建环境
+    mode:"development",
+    output:{
+        path: path.resolve(__dirname, './dist'),
+        filename: 'assets/js/[name].[hash].js',
+        chunkFilename:'[name][chunkhash].js',
+        publicPath: '/',
+    },
+    devtool: 'cheap-module-eval-source-map',
+    // 插件
+    plugins:[
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            title:'流水线',
+            template: path.resolve(__dirname, './public/index.template.html'),
+            hash: false,
+            filename: 'index.html',
+            inject: 'body',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeAttributeQuotes: true
             }
-    },
-
+        }),
+        new webpack.DefinePlugin({ENV:JSON.stringify(customEnv), ...webpackGlobal}),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css',
+            ignoreOrder: true
+        }),
+        new CssMinimizerPlugin(),
+    ],
+    // 开发环境本地启动的服务配置
     devServer: {
-        contentBase: path.join(__dirname, 'plugin'), //开发服务运行时的文件根目录
-        port:PORT,
+        contentBase: path.join(__dirname, './dist'),
+        hot:true,
+        compress:true,
+        port:3004,
+        host: '0.0.0.0',
         historyApiFallback: true,
-        inline: true,
-        hot: true,
-        host: '192.168.10.23',
-        hotOnly:true,
-        stats: {
-            children: false,
-        },
-        disableHostCheck:true,
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-    ]
+        disableHostCheck: true,
+    }
 });
+

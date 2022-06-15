@@ -1,34 +1,51 @@
-
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');//压缩css
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const DIST_PATH = path.resolve(__dirname, 'dist');
-const envData_dev = require(`./enviroment/enviroment_${process.env.API_ENV}`);
 
+const isDevelopment = process.env.NODE_ENV === 'development';
 
-const threadLoader = require('thread-loader');
-const jsWorkerPool = {
-    // options
+const sassModuleRegex = /\.module\.(scss|sass)$/;
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+const sassRegex = /\.(scss|sass)$/;
+const getStyleLoaders = (cssOptions, preProcessor) => {
+    const loaders = [
+        isDevelopment && 'style-loader',
+        !isDevelopment && {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+                publicPath: '../',
+            },
+        },
+        {
+            loader: 'css-loader',
+            options: cssOptions,
+        },
+        {
+            loader: 'postcss-loader',
+            options: {
+                sourceMap: !isDevelopment ,
+            },
+        },
+    ].filter(Boolean);
 
-    // 产生的 worker 的数量，默认是 (cpu 核心数 - 1)
-    // 当 require('os').cpus() 是 undefined 时，则为 1
-    workers: 5,
-    poolTimeout: 2000
+    if (preProcessor) {
+        // 默认配置
+        let loaderOptions = {
+            sourceMap: true,
+        };
+        loaders.push(
+            {
+                loader: preProcessor,
+                options: loaderOptions,
+            },
+        );
+    }
+    return loaders;
 };
 
-const cssWorkerPool = {
-// 一个 worker 进程中并行执行工作的数量
-// 默认为 20
-    workerParallelJobs: 2,
-    poolTimeout: 2000
-};
-threadLoader.warmup(jsWorkerPool, ['babel-loader']);
-threadLoader.warmup(cssWorkerPool, ['css-loader', 'postcss-loader',"sass-loader",'sass-resources-loader']);
+
 module.exports = {
     output: {
         filename: 'js/[name].[hash:8].js',
@@ -40,52 +57,67 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
-            react: path.resolve('./node_modules/react')
+            '@src': path.join(__dirname, './src'),
+            '@stores': path.join(__dirname, './src/stores'),
+            '@utils': path.join(__dirname, './src/utils'),
+            '@service': path.join(__dirname, './src/service'),
         },
+
     },
-    target: "web",
+
     module:{
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                use: [
-                    {
-                        loader: 'thread-loader',
-                        options: jsWorkerPool
-                    },
-                    {
-                        loader: 'babel-loader'
-                    }
-                ],
+                use: [{
+                    // loader: "happypack/loader?id=portal"
+                    loader: 'babel-loader'
+                }],
                 exclude: /node_modules/
             },
             {
-                test: /\.(sc|sa|c)ss$/,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
+                test: cssRegex,
+                exclude: cssModuleRegex,
+                use: getStyleLoaders({
+                    importLoaders: 1,
+                    sourceMap: !isDevelopment ,
+                }),
+                sideEffects: true,
+            },
+            {
+                test: cssModuleRegex,
+                use: getStyleLoaders({
+                    importLoaders: 1,
+                    sourceMap: !isDevelopment ,
+                    modules: {
+                        localIdentName: '[local]--[hash:base64:5]',
                     },
+                }),
+            },
+            {
+                test: sassRegex,
+                exclude: sassModuleRegex,
+                use: getStyleLoaders(
                     {
-                        loader: 'thread-loader',
-                        options: cssWorkerPool
+                        importLoaders: 3,
+                        sourceMap: !isDevelopment ,
                     },
-
+                    'sass-loader',
+                ),
+                sideEffects: true,
+            },
+            {
+                test: sassModuleRegex,
+                use: getStyleLoaders(
                     {
-                        loader: "css-loader",
+                        importLoaders: 3,
+                        sourceMap: !isDevelopment ,
+                        modules: {
+                            localIdentName: '[local]--[hash:base64:5]',
+                        },
                     },
-                    {
-                        loader: "postcss-loader",
-                    },
-                    {
-                        loader: "sass-loader",
-                    },
-                    {
-                        loader: 'sass-resources-loader',
-                        options: {
-                            resources: './src/index.scss'
-                        }
-                    }
-                ]
+                    'sass-loader',
+                ),
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)/,
@@ -102,7 +134,6 @@ module.exports = {
             },
             {
                 test: /\.(eot|woff2?|ttf|svg)$/,
-                exclude: /node_modules/,
                 use: [
                     {
                         loader: 'url-loader',
@@ -113,30 +144,10 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            alwaysWriteToDisk: true,
-            title:'流水线',
-            template: path.resolve(__dirname, './public/index.template.html'),
-            hash: false,
-            filename: 'index.html',
-            inject: 'body',
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true,
-                removeAttributeQuotes: true
-            }
-        }),
-        new webpack.DefinePlugin(envData_dev),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].css',
-            // chunkFilename: 'css/[id].css',
-            ignoreOrder: true
-        }),
-        new CssMinimizerPlugin(),
     ]
 };
+
