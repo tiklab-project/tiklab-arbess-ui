@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Button, Form, Input, Popconfirm} from "antd";
 import {inject, observer} from "mobx-react";
-import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
+import PipelineDetailsBreadcrumb from "../../pipeline/pipelineDetails/components/pipelineDetailsBreadcrumb";
 
 const PipelineSysReDel = props =>{
 

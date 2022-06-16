@@ -3,17 +3,6 @@ import {PRIVILEGE_SYSTEM_STORE,FeatureList,PrivilegeProjectButton} from "doublek
 import {inject, observer} from "mobx-react";
 
 const SecurePowerDomain = props =>{
-    // return (
-    //     <PrivilegeProjectButton code={'WorkDelete'} disabled={"hidden"} domainId={projectId}>
-    //         <div className="work-botton botton-background delete"
-    //              onClick={deleteWork}
-    //         >
-    //             <svg className="icon" aria-hidden="true">
-    //                 <use xlinkHref="#iconshanchu2"></use>
-    //             </svg>
-    //         </div>
-    //     </PrivilegeProjectButton>
-    // )
     return <FeatureList {...props}/>
 }
 

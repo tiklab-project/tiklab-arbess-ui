@@ -14,7 +14,6 @@ const Secure = props =>{
             icon: <svg className="icon" aria-hidden="true">
                     <use xlinkHref='#icon-fenleiguanli'/>
                   </svg>,
-            enCode:'31',
             children:[
                 {
                     label:'功能设置',
@@ -26,7 +25,7 @@ const Secure = props =>{
                 {
                     label:'角色设置',
                     key:'/index/system/secure/powerRole',
-                    icon: <svg className="icon" aria-hidden="true">
+                    icon:   <svg className="icon" aria-hidden="true">
                                 <use xlinkHref='#icon-fenleiguanli'/>
                             </svg>,
                 }
@@ -38,13 +37,12 @@ const Secure = props =>{
             icon: <svg className="icon" aria-hidden="true">
                     <use xlinkHref='#icon-fenleiguanli'/>
                 </svg>,
-            enCode:'32',
         },
     ]
 
     return(
         <Fragment>
-            <SecondarySubMenu secureRouter={router} type={'secure'}/>
+            <SecondarySubMenu secureRouter={router} type={'secure'} {...props}/>
             <div className='secure'>
                 {renderRoutes(route.routes)}
             </div>

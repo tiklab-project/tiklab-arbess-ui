@@ -164,7 +164,6 @@ const ConfigCodeGiteeOrGithub = props =>{
             </Form.Item>
 
             <ConfigCodeGiteeOrGithubModal
-                findAllProof={findAllProof}
                 visible={visible}
                 setVisible={setVisible}
                 formInitialValues={formInitialValues}

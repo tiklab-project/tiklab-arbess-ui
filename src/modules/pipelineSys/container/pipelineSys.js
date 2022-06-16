@@ -14,24 +14,23 @@ const PipelineSys= props=>{
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
-            // enCode:'541',
+            enCode:'1',
             children:[
                 {
                     key:'/index/task/assembly/domain',
-                    label:'功能设置',
-                    enCode:'11',
+                    label:'功能管理',
                     icon:   <svg className="icon" aria-hidden="true">
                                 <use xlinkHref='#icon-fenleiguanli'/>
                             </svg>,
-                    // enCode:'5412'
+                    enCode:'11'
                 },
                 {
                     key:'/index/task/assembly/role',
-                    label:'角色设置',
+                    label:'角色管理',
                     icon:   <svg className="icon" aria-hidden="true">
                                 <use xlinkHref='#icon-fenleiguanli'/>
                             </svg>,
-                    // enCode:'5411'
+                    enCode:'12'
                 }
             ]
         },
@@ -41,15 +40,15 @@ const PipelineSys= props=>{
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
-            // enCode:'542',
+            enCode:'2',
         },
         {
-            label:'凭证设置',
             key:'/index/task/assembly/proof',
+            label:'凭证设置',
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
-            // enCode:'543',
+            enCode:'3',
         },
         {
             key:'/index/task/assembly/other',
@@ -57,14 +56,14 @@ const PipelineSys= props=>{
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
-            // enCode:'544',
+            enCode:'4',
         },
     ]
 
     return(
         <div className='pipelineSys'>
             <div className='pipelineSys-content'>
-                <SecondarySubMenu pipelineSysRouter={router} type={'sys'}/>
+                <SecondarySubMenu pipelineSysRouter={router} type={'sys'} {...props}/>
                 <div className='pipelineSys-content-right'>
                     {renderRoutes(route.routes)}
                 </div>

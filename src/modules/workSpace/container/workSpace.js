@@ -5,7 +5,8 @@ import {inject,observer} from "mobx-react";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
 import WorkSpaceDrawer from "../components/workSpaceDrawer";
-import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
+import PipelineDetailsBreadcrumb from "../../pipeline/pipelineDetails/components/pipelineDetailsBreadcrumb";
+import {getUser} from "doublekit-core-ui";
 
 const WorkSpace = props =>{
 
@@ -25,7 +26,11 @@ const WorkSpace = props =>{
     },[pipelineId])
 
     useEffect(()=>{
-        fileTree(pipelineId).then(res=>{
+        const params = {
+            pipelineId:pipelineId,
+            userId:getUser().userId
+        }
+        fileTree(params).then(res=>{
             setFileList(res.data)
         }).catch(error=>{
             console.log(error)

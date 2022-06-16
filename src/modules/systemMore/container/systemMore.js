@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useState} from "react";
 import {renderRoutes} from "react-router-config";
 import SecondaryMenu from "../../asideMenu/secondaryMenu";
+import './systemMore.scss';
 
 const SystemMore = props =>{
     const {route}=props

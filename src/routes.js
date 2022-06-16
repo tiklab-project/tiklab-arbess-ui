@@ -10,16 +10,20 @@ const HomePage=AsyncComponent(()=>import('./modules/homePage/container/homePage'
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
-const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/common/pipelineAdd'))
+const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/pipelineAdd/pipelineAdd'))
 const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/config'))
-const PipelineDetails=AsyncComponent(()=>import('./modules/pipelineDetails/container/pipelineDetails'))
-const SearchResult=AsyncComponent(()=>import('./modules/pipeline/common/searchResult'))
+const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/container/pipelineDetails'))
+const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipelineSearch/searchResult'))
+
+/* 流水线 -- 收藏 */
+const PipelineCollect=AsyncComponent(()=>import('./modules/pipeline/pipelineCollect/container/pipelineCollect'))
 
 /*  流水线详情 */
 const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
 const Structure=AsyncComponent(()=>import('./modules/structure/container/structure'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
 const PipelineSys=AsyncComponent(()=>import('./modules/pipelineSys/container/pipelineSys'))
+
 /*  流水线详情 -- 设置 */
 const PipelineSysReDel=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysReDel'))
 const PipelineSysProof=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysProof'))
@@ -82,6 +86,10 @@ const routers=[
             {
                 path:'/index/new',
                 component: PipelineAdd,
+            },
+            {
+                path:'/index/collect',
+                component: PipelineCollect,
             },
             {
                 path:'/index/config',
@@ -214,7 +222,7 @@ const routers=[
                             {
                                 path: '/index/task/assembly',
                                 exact:true,
-                                render:()=>  <Redirect to={"/index/task/assembly/domain"}/>,
+                                render:()=>  <Redirect to={"/index/task/assembly/role"}/>,
                             },
                             {
                                 path:'/index/task/assembly/proof',

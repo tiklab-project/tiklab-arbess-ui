@@ -1,5 +1,6 @@
 import React from "react";
 import {getUser} from "doublekit-core-ui";
+import {Descriptions} from "antd";
 import SystemBreadcrumb from "../../system/systemBreadcrumb";
 
 const UserCenterBase = props =>{
@@ -10,18 +11,11 @@ const UserCenterBase = props =>{
                 secondItem={'基本信息'}
             />
             <div className='userCenter-base-content'>
-                <div className='userCenter-base-content_name'>
-                    <span>用户名</span>
-                    <span>{getUser().name}</span>
-                </div>
-                <div className='userCenter-base-content_email'>
-                    <span>邮箱</span>
-                    <span>{getUser().email}</span>
-                </div>
-                <div className='userCenter-base-content_phone'>
-                    <span>联系方式</span>
-                    <span>{getUser().phone}</span>
-                </div>
+                <Descriptions column={1} bordered>
+                    <Descriptions.Item label="用户名">{getUser().name}</Descriptions.Item>
+                    <Descriptions.Item label="邮箱">{getUser().email}</Descriptions.Item>
+                    <Descriptions.Item label="联系方式">{getUser().phone}</Descriptions.Item>
+                </Descriptions>
             </div>
         </div>
     )

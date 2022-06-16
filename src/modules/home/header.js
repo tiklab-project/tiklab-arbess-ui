@@ -21,6 +21,9 @@ const Head =props=>{
         if(path.indexOf('/index/system') === 0){
             path='/index/system'
         }
+        if(path === '/index/collect' || path === '/index/view'){
+            path= '/index/pipeline'
+        }
         setCurrentLink(path)
     },[path])
 

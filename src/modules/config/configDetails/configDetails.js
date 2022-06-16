@@ -3,7 +3,7 @@ import '../common/component/configCommon/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
+import PipelineDetailsBreadcrumb from "../../pipeline/pipelineDetails/components/pipelineDetailsBreadcrumb";
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";

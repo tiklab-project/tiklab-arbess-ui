@@ -25,7 +25,8 @@ export class WorkSpaceStore{
     @action
     fileTree = async value =>{
         const param = new FormData()
-        param.append('pipelineId',value)
+        param.append('pipelineId',value.pipelineId)
+        param.append('userId',value.userId)
         return await FileTree(param)
     }
 

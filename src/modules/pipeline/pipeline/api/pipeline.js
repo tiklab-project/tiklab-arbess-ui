@@ -12,7 +12,7 @@ export function  CreatePipeline(data){
 //查询所有
 export function FindAllPipelineStatus(data) {
     return serviceLoc.request({
-        url:'/pipeline/findAllPipelineStatus',
+        url:'/pipelineHome/findUserPipeline',
         method:'post',
         data
     })

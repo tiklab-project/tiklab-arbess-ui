@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
-import PipelineDetailsBreadcrumb from "../../pipelineDetails/components/pipelineDetailsBreadcrumb";
+import PipelineDetailsBreadcrumb from "../../pipeline/pipelineDetails/components/pipelineDetailsBreadcrumb";
 import Proof from "../../proof/container/proof";
 
 const PipelineSysProof = props =>{
@@ -13,7 +13,7 @@ const PipelineSysProof = props =>{
 
     useEffect(()=>{
         findPipelineProof(pipelineId)
-    },[fresh])
+    },[fresh,pipelineId])
 
     return(
        <Fragment>
