@@ -1,0 +1,20 @@
+.pipelineCollect{
+    width: 90%;
+    min-width: 600px;
+    margin: auto;
+    padding-top: 30px;
+    &-title{
+        font-size: 18px;
+        font-weight: 600;
+        padding-bottom: 20px;
+    }
+    .all{
+        &-columns{
+            color: #1890ff;
+        }
+        &-icon{
+            cursor: pointer;
+        }
+    }
+
+}
