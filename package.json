@@ -85,6 +85,8 @@
         "doublekit-plugin-ui": "^1.0.0",
         "doublekit-privilege-ui": "^1.0.0",
         "doublekit-user-ui": "^1.0.0",
+        "echarts": "^5.3.3",
+        "echarts-for-react": "^3.0.2",
         "i18next": "^19.8.4",
         "i18next-browser-languagedetector": "^6.0.1",
         "json-server": "^0.16.3",
