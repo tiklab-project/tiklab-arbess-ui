@@ -9,6 +9,7 @@ import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 import {inject, observer} from "mobx-react";
+import {getUser} from "doublekit-core-ui";
 
 const Config = props =>{
 
@@ -24,6 +25,7 @@ const Config = props =>{
     } = configDataStore
 
     const [form] = Form.useForm();
+    const userId = getUser().userId
     const [view,setView] = useState(1)
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
@@ -151,6 +153,7 @@ const Config = props =>{
         <Fragment >
             <PipelineDetailsBreadcrumb style={style}/>
             <ConfigChangeView
+                userId={userId}
                 view={view}
                 setView={setView}
                 setIsPrompt={setIsPrompt}
@@ -161,6 +164,7 @@ const Config = props =>{
             {
                 view === 1 ?
                     <ConfigView1
+                        userId={userId}
                         form={form}
                         del={del}
                         updateConfigure={updateConfigure}
@@ -168,6 +172,7 @@ const Config = props =>{
                     />
                     :
                     <ConfigView2
+                        userId={userId}
                         form={form}
                         del={del}
                         updateConfigure={updateConfigure}

@@ -8,6 +8,7 @@ import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam';
+import {getUser} from "doublekit-core-ui";
 
 const ConfigDetails = props =>{
 
@@ -23,6 +24,7 @@ const ConfigDetails = props =>{
     } = configDataStore
 
     const [form] = Form.useForm();
+    const userId = getUser().userId
     const [view,setView] = useState(1)
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
@@ -232,22 +234,26 @@ const ConfigDetails = props =>{
         <Fragment>
             <PipelineDetailsBreadcrumb style={style}/>
             <ConfigChangeView
+                userId={userId}
                 view={view}
                 setView={setView}
                 setIsPrompt={setIsPrompt}
                 pipelineId={pipelineId}
                 pipelineStartStructure={pipelineStartStructure}
                 findStructureState={findStructureState}
+
             />
             {
                 view === 1 ?
                     <ConfigView1
+                        userId={userId}
                         form={form}
                         del={del}
                         updateConfigure={updateConfigure}
                     />
                     :
                     <ConfigView2
+                        userId={userId}
                         form={form}
                         del={del}
                         updateConfigure={updateConfigure}

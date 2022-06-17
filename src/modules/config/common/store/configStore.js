@@ -11,6 +11,7 @@ export class ConfigStore{
     @action
     updateConfigure = values =>{
         const params ={
+            userId:values.userId,
             configureCreateTime:values.configureCreateTime,
             pipelineId:values.pipelineId,
             pipelineCode:{

@@ -15,7 +15,7 @@ import ConfigName from "./configName";
 
 const ConfigView1 = props =>{
 
-    const {form,del,updateConfigure,configDataStore,Salta} = props
+    const {form,del,updateConfigure,configDataStore,Salta,userId} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,setCodeType,
@@ -95,6 +95,7 @@ const ConfigView1 = props =>{
         })
 
         const configureList = {
+            userId:userId,
             configureCreateTime:moment.moment,
             pipelineId:pipelineId,
             pipelineCode:{

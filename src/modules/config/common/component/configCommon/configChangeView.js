@@ -5,11 +5,15 @@ import {withRouter} from "react-router-dom";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt} = props
+    const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt,userId} = props
 
     const run = () => {
         setIsPrompt(false)
-        pipelineStartStructure(pipelineId).then(res=>{
+        const params = {
+            userId:userId,
+            pipelineId:pipelineId
+        }
+        pipelineStartStructure(params).then(res=>{
             console.log(res)
             props.history.push('/index/task/structure')
         }).catch(error=>{

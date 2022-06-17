@@ -18,9 +18,10 @@ export class StructureStore {
     // 开始构建
     @action
     pipelineStartStructure = async values =>{
-        const param = new FormData()
-        param.append("pipelineId", values)
-        return await PipelineStartStructure(param);
+        const params = new FormData()
+        params.append("pipelineId", values.pipelineId)
+        params.append("userId", values.userId)
+        return await PipelineStartStructure(params);
     }
 
     // 判断当前流水线是否在构建

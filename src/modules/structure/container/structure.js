@@ -8,6 +8,7 @@ import { inject, observer } from "mobx-react";
 import StructureLeftDropdown from "../components/structureLeftDropdown";
 import PipelineDetailsBreadcrumb from "../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
 import empty from '../../../assets/images/empty.jpg';
+import {getUser} from "doublekit-core-ui";
 
 const Structure = props => {
 
@@ -113,7 +114,11 @@ const Structure = props => {
     }
     
     const working = () => {
-        pipelineStartStructure(pipelineId).then(()=>{
+        const params = {
+            userId:getUser().userId,
+            pipelineId:pipelineId
+        }
+        pipelineStartStructure(params).then(()=>{
             setTimeout(()=>setFreshen(!freshen),500)
         }).catch(error=>{
             console.log(error)
