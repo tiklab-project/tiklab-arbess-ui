@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Button, Form, Input, Popconfirm} from "antd";
 import {inject, observer} from "mobx-react";
-import PipelineDetailsBreadcrumb from "../../pipeline/pipelineDetails/components/pipelineDetailsBreadcrumb";
+import PipelineDetailsBreadcrumb from "../../pipelineBreadcrumb/pipelineBreadcrumb";
 
 const PipelineSysReDel = props =>{
 
@@ -11,8 +11,11 @@ const PipelineSysReDel = props =>{
     const pipelineId=localStorage.getItem('pipelineId')
 
     const onConfirm=()=>{
-        deletePipeline(pipelineId)
-        props.history.push('/index/pipeline')
+        deletePipeline(pipelineId).then(()=>{
+            props.history.push('/index/pipeline')
+        }).catch(error=>{
+            console.log(error)
+        })
     }
 
     const onFinish=(values)=>{
@@ -23,6 +26,8 @@ const PipelineSysReDel = props =>{
         updatePipeline(params).then(()=>{
             localStorage.setItem('pipelineName',values.pipelineName);
             props.history.push('/index/task/work')
+        }).catch(error=>{
+            console.log(error)
         })
     }
 

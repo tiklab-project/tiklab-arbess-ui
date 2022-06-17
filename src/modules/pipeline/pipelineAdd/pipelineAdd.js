@@ -42,9 +42,8 @@ const PipelineAdd = props => {
 
     const handSubmit = value => {
         const params={
-            pipelineName:value.pipelineName,
             userId:getUser().userId,
-            pipelineCreateUser:getUser().name,
+            pipelineName:value.pipelineName,
             pipelineType:1,
             pipelineCreateTime:moment.moment
         }

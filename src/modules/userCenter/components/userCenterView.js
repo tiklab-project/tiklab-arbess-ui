@@ -2,7 +2,7 @@ import React ,{useState} from "react";
 import SystemBreadcrumb from "../../system/systemBreadcrumb";
 import {Table,Button} from "antd";
 import {withRouter} from "react-router-dom";
-import View from "../../view/container/view";
+import View from "../../view/view";
 
 const UserCenterView = props =>{
 

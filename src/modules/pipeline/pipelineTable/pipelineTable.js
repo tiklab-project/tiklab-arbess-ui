@@ -10,6 +10,7 @@ import PipelineRun from "./pipelineRun";
 import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
+import './pipelineTable.scss';
 
 const PipelineTable = props =>{
 
@@ -81,20 +82,20 @@ const PipelineTable = props =>{
                 switch (text) {
                     case 30:
                         return  <Tooltip title="成功" className='all-icon'>
-                            <CheckCircleOutlined style = {{fontSize:25,color:'#1890ff'}}/>
-                        </Tooltip>
+                                    <CheckCircleOutlined style = {{fontSize:25,color:'#1890ff'}}/>
+                                </Tooltip>
                     case 1:
                         return <Tooltip title="失败" className='all-icon'>
-                            <CloseCircleOutlined style = {{fontSize:25,color:'#ff0000'}}/>
-                        </Tooltip>
+                                    <CloseCircleOutlined style = {{fontSize:25,color:'#ff0000'}}/>
+                                </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建" className='all-icon'>
-                            <PlayCircleOutlined style = {{fontSize:25}}/>
-                        </Tooltip>
+                                    <PlayCircleOutlined style = {{fontSize:25}}/>
+                                </Tooltip>
                     default:
                         return  <Tooltip title="停止" className='all-icon'>
-                            <ExclamationCircleOutlined style = {{fontSize:25}}/>
-                        </Tooltip>
+                                    <ExclamationCircleOutlined style = {{fontSize:25}}/>
+                                </Tooltip>
                 }
             }
         },
@@ -151,7 +152,16 @@ const PipelineTable = props =>{
                 rowKey={record => record.pipelineId}
                 columns={columns}
                 dataSource={list}
-                // locale={{emptyText:'没有数据'}}
+                locale={{emptyText:
+                    <div>
+                        <svg className="icon" aria-hidden="true" >
+                            <use xlinkHref="#icon-meiyouxiangguan"/>
+                        </svg>
+                        <div>
+                            没有数据
+                        </div>
+                    </div>
+                }}
             />
 }
 

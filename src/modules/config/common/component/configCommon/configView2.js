@@ -14,7 +14,7 @@ import ConfigName from "./configName";
 
 const ConfigView2 = props =>{
 
-    const {form, updateConfigure,configDataStore,del,Salta} = props
+    const {form, updateConfigure,configDataStore,del,Salta,view2} = props
 
     const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,codeType,setCodeType,linuxShellBlock,unitShellBlock,mavenShellBlock,
@@ -221,7 +221,7 @@ const ConfigView2 = props =>{
     }
 
     return (
-        <div className='configView2'>
+        <div className='configView2' style={view2}>
             <div className='configView2-content'>
                 <ConfigCode
                     codeData={codeData}

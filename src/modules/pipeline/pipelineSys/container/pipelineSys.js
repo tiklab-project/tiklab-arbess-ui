@@ -1,7 +1,6 @@
 import React from 'react'
 import './pipelineSys.scss'
-import {renderRoutes} from "react-router-config";
-import SecondarySubMenu from "../../asideMenu/secondarySubMenu";
+import SecondarySubMenuRender from "../../../menu/renderMenu/secondarySubMenuRender";
 
 const PipelineSys= props=>{
 
@@ -60,16 +59,13 @@ const PipelineSys= props=>{
         },
     ]
 
-    return(
-        <div className='pipelineSys'>
-            <div className='pipelineSys-content'>
-                <SecondarySubMenu pipelineSysRouter={router} type={'sys'} {...props}/>
-                <div className='pipelineSys-content-right'>
-                    {renderRoutes(route.routes)}
-                </div>
-            </div>
-        </div>
-    )
+    return <SecondarySubMenuRender
+                {...props}
+                pipelineSysRouter={router}
+                type={'sys'}
+                route={route}
+                className={'pipelineSys'}
+            />
 }
 
 export default PipelineSys

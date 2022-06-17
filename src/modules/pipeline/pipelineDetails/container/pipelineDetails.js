@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import { Modal} from 'antd';
 import {renderRoutes} from "react-router-config";
 import './pipelineDetails.scss';
-import '../../../asideMenu/firstMenu.scss';
+import '../../../menu/asideMenu/firstMenu.scss';
 import PipelineDetailsAside from "../components/pipelineDetailsAside";
 import { inject,observer } from "mobx-react";
 import {Prompt} from "react-router-dom";
@@ -55,7 +55,7 @@ const PipelineDetails= (props)=>{
     }
 
     return(
-        <Fragment>
+        <div className='pipelineDetails'>
             <PipelineDetailsAside
                 {...props}
                 pipelineList={pipelineList}
@@ -65,7 +65,7 @@ const PipelineDetails= (props)=>{
                 setPipeline={setPipeline}
                 setIsPrompt={setIsPrompt}
             />
-            <div className='pipelineDetails' onClick={()=>setVisible(false)}>
+            <div className='pipelineDetails-content' onClick={()=>setVisible(false)}>
                 {renderRoutes(route.routes)}
             </div>
             <Prompt
@@ -84,7 +84,7 @@ const PipelineDetails= (props)=>{
                     return false
                 }}
             />
-        </Fragment>
+        </div>
     )
 }
 

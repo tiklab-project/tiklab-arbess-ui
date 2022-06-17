@@ -1,7 +1,6 @@
-import React, {Fragment} from "react";
-import {renderRoutes} from "react-router-config";
+import React from "react";
 import './secure.scss'
-import SecondarySubMenu from "../../asideMenu/secondarySubMenu";
+import SecondarySubMenuRender from "../../menu/renderMenu/secondarySubMenuRender";
 
 const Secure = props =>{
 
@@ -11,9 +10,9 @@ const Secure = props =>{
         {
             key:'1',
             label:'权限设置',
-            icon: <svg className="icon" aria-hidden="true">
-                    <use xlinkHref='#icon-fenleiguanli'/>
-                  </svg>,
+            icon:    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref='#icon-fenleiguanli'/>
+                     </svg>,
             children:[
                 {
                     label:'功能设置',
@@ -34,20 +33,21 @@ const Secure = props =>{
         {
             label:'凭证设置',
             key:'/index/system/secure/proof',
-            icon: <svg className="icon" aria-hidden="true">
-                    <use xlinkHref='#icon-fenleiguanli'/>
-                </svg>,
+            icon:   <svg className="icon" aria-hidden="true">
+                        <use xlinkHref='#icon-fenleiguanli'/>
+                    </svg>,
+
+
         },
     ]
 
-    return(
-        <Fragment>
-            <SecondarySubMenu secureRouter={router} type={'secure'} {...props}/>
-            <div className='secure'>
-                {renderRoutes(route.routes)}
-            </div>
-        </Fragment>
-    )
+    return  <SecondarySubMenuRender
+                {...props}
+                secureRouter={router}
+                type={'secure'}
+                route={route}
+                className={'secure'}
+            />
 }
 
 export default Secure

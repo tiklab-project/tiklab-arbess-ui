@@ -1,14 +1,5 @@
 .pipelineSys{
-    height: 100%;
-    &-content{
-        display: flex;
-        flex-direction: row;
-        height: 100%;
-        &-right{
-            flex-grow: 1;
-            height: 100%;
-        }
-    }
+    flex-grow: 1;
     /*  成员设置  */
     &-membro{
         height: calc(100% - 50px);

@@ -22,14 +22,14 @@ const PipelineCollect=AsyncComponent(()=>import('./modules/pipeline/pipelineColl
 const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
 const Structure=AsyncComponent(()=>import('./modules/structure/container/structure'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
-const PipelineSys=AsyncComponent(()=>import('./modules/pipelineSys/container/pipelineSys'))
+const PipelineSys=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/container/pipelineSys'))
 
 /*  流水线详情 -- 设置 */
-const PipelineSysReDel=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysReDel'))
-const PipelineSysProof=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysProof'))
-const PipelineSysMembro=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysMembro'))
-const PipelineSysRole=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysRole'))
-const PipelineSysDomain=AsyncComponent(()=>import('./modules/pipelineSys/components/pipelineSysDomain'))
+const PipelineSysReDel=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysReDel'))
+const PipelineSysProof=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysProof'))
+const PipelineSysMembro=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysMembro'))
+const PipelineSysRole=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysRole'))
+const PipelineSysDomain=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysDomain'))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import('./modules/system/system'))

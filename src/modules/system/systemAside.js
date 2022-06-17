@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {withRouter} from "react-router-dom";
-import FirstMenu from "../asideMenu/firstMenu";
+import FirstMenu from "../menu/asideMenu/firstMenu";
 
 const SystemAside = props =>{
 

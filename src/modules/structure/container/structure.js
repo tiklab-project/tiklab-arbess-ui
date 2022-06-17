@@ -6,7 +6,7 @@ import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
 import { inject, observer } from "mobx-react";
 import StructureLeftDropdown from "../components/structureLeftDropdown";
-import PipelineDetailsBreadcrumb from "../../pipeline/pipelineDetails/components/pipelineDetailsBreadcrumb";
+import PipelineDetailsBreadcrumb from "../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
 import empty from '../../../assets/images/empty.jpg';
 
 const Structure = props => {

@@ -2,21 +2,20 @@ import React, {Fragment, useState,useEffect} from "react";
 import {Button, Form, message, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import ConfigCodeGiteeOrGithubModal from "./configCodeGiteeOrGithubModal";
+import FindAllProof from "../../../../proof/components/findAllProof";
 import {inject, observer} from "mobx-react";
 
 const {Option} =Select
 
 const ConfigCodeGiteeOrGithub = props =>{
 
-    const {githubStore,proofStore,configDataStore,giteeStore} = props
+    const {githubStore,configDataStore,giteeStore} = props
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch, getGiteeProof,getState} = giteeStore
-    const {findAllProof} = proofStore
     const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
-    const [allAuthorizeList,setAllAuthorizeList] = useState([]) // 服务授权
     const [storehouseList,setStorehouseList] = useState([]) // 仓库
     const [branchList,setBranchList] = useState([]) // 分支
     const githubToken = localStorage.getItem('githubToken')
@@ -94,39 +93,10 @@ const ConfigCodeGiteeOrGithub = props =>{
         setCodeBranch(values)
     }
 
-    const clickFindAllProof = () => {
-        findAllProof(codeType).then(res=>{
-            console.log('GiteeOrGithub凭证',res)
-            setAllAuthorizeList(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-
-    const changeProofSelect = (value,e) =>{
-        localStorage.setItem('gitProofId',e.key)
-    }
-
     return(
         <Fragment>
             <Row>
-                <Form.Item label='服务授权/证书' name='gitProofName' >
-                    <Select
-                        style={{ width: 300 }}
-                        onChange={(value,e)=>changeProofSelect(value,e)}
-                        onClick={clickFindAllProof}
-                    >
-                        {
-                            allAuthorizeList && allAuthorizeList.map(item=>{
-                                return(
-                                    <Option key={item.proofId} value={item.proofName+" (" +item.proofUsername+")"}>
-                                        { item.proofName+ " (" + item.proofUsername + ")"}
-                                    </Option>
-                                )
-                            })
-                        }
-                    </Select>
-                </Form.Item>
+                <FindAllProof  type={codeType} {...props}/>
                 <Button className='config-details-link' type="link" onClick={()=> setVisible(true)}>
                     <PlusOutlined />
                     新增服务链接
@@ -179,6 +149,6 @@ const ConfigCodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject('githubStore','proofStore','configStore',
+export default inject('githubStore','configStore',
                 'configDataStore','giteeStore')
                 (observer(ConfigCodeGiteeOrGithub))

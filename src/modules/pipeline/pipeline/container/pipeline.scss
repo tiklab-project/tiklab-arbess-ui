@@ -4,13 +4,31 @@
     margin: auto;
     &-top{
         width: 100%;
-        padding-top: 10px;
+        padding: 10px 0;
         &-r{
             float: right;
         }
     }
     &-tabs{
         clear: both;
+        &-type{
+            padding: 15px 0;
+            &-group{
+                display: flex;
+                font-size: 16px;
+            }
+            &-link{
+                margin-right: 15px;
+                cursor: pointer;
+                &:hover{
+                    font-weight: 600;
+                }
+            }
+            &-active{
+                font-weight: 600;
+                border-bottom: 3px solid #189
+            }
+        }
     }
 }
 

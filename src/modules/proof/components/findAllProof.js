@@ -20,7 +20,7 @@ const FindAllProof = props =>{
     }
 
     const changeGitSelect = (value,e) =>{
-        if(type === 1){
+        if(type < 6){
             localStorage.setItem('gitProofId',e.key)
         }else {
             localStorage.setItem('deployProofId',e.key)

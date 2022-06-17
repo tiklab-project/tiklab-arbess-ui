@@ -1,6 +1,6 @@
-import React, {Fragment, useEffect, useState} from "react";
-import {renderRoutes} from "react-router-config";
-import SecondaryMenu from "../../asideMenu/secondaryMenu";
+import React, { useEffect, useState} from "react";
+import './plug.scss';
+import SecondarySubMenuRender from "../../menu/renderMenu/secondarySubMenuRender";
 
 const Plug = props =>{
 
@@ -36,14 +36,13 @@ const Plug = props =>{
         setNav(path)
     },[path])
 
-    return(
-        <Fragment>
-            <SecondaryMenu router={router} nav={nav}/>
-            <div className='secure'>
-                {renderRoutes(route.routes)}
-            </div>
-        </Fragment>
-    )
+    return  <SecondarySubMenuRender
+                {...props}
+                className={'plug'}
+                router={router}
+                route={route}
+                nav={nav}
+            />
 }
 
 export default Plug

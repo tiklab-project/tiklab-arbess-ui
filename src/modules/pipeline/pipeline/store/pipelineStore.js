@@ -37,7 +37,6 @@ export class PipelineStore{
         const params = {
             userId:values.userId,
             pipelineName: values.pipelineName,
-            pipelineCreateUser: values.pipelineCreateUser,
             pipelineType: values.pipelineType,
             pipelineCreateTime:values.pipelineCreateTime
         }
@@ -69,27 +68,30 @@ export class PipelineStore{
     }
 
     @action //删除流水线
-    deletePipeline= value =>{
+    deletePipeline=async value =>{
         const param = new FormData()
         param.append('pipelineId',value)
-        DeletePipeline(param).then(res=>{
-            console.log('删除流水线',res)
-        }).catch(error=>{
-            console.log(error)
+        return new Promise((resolve, reject) => {
+            DeletePipeline(param).then(res=>{
+                console.log('删除流水线',res)
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
         })
     }
 
-    @action
+    @action //重命名流水线
     updatePipeline=values=>{
         const params={
             pipelineId:values.pipelineId,
             pipelineName:values.pipelineName,
-            pipelineCollect:values.pipelineCollect
         }
         return new Promise((resolve, reject) => {
             UpdatePipeline(params).then(res=>{
                 console.log('重命名',res)
-                resolve(res.data)
+                resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()

@@ -4,9 +4,7 @@ import './system.scss';
 import SystemAside from "./systemAside";
 
 const System = props =>{
-
     const {route}=props
-
     return(
         <div className='system'>
             <SystemAside/>

@@ -1,8 +1,9 @@
 import React from "react";
 import { Breadcrumb } from 'antd';
 import {withRouter} from "react-router-dom";
+import './pipelineBredcrumb.scss';
 
-const PipelineDetailsBreadcrumb = props => {
+const PipelineBreadcrumb = props => {
     const {style} = props
     return(
         <Breadcrumb style={style} separator=">" className = 'breadcrumb'>
@@ -16,4 +17,4 @@ const PipelineDetailsBreadcrumb = props => {
     )
 }
 
-export default withRouter(PipelineDetailsBreadcrumb)
+export default withRouter(PipelineBreadcrumb)

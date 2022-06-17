@@ -3,7 +3,7 @@ import '../common/component/configCommon/config.scss';
 import './config.scss';
 import {Form} from "antd";
 import {withRouter} from "react-router";
-import ConfigTop from "./configTop";
+import PipelineDetailsBreadcrumb from "../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
@@ -24,7 +24,7 @@ const Config = props =>{
     } = configDataStore
 
     const [form] = Form.useForm();
-    const [view,setView] = useState(0)
+    const [view,setView] = useState(1)
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -140,9 +140,15 @@ const Config = props =>{
         }
     }
 
+    const style = {
+        'position':'fixed',
+        'top':'55px',
+        'paddingTop':'20px'
+    }
+
     return (
         <Fragment >
-            <ConfigTop/>
+            <PipelineDetailsBreadcrumb style={style}/>
             <ConfigChangeView
                 view={view}
                 setView={setView}
@@ -152,7 +158,7 @@ const Config = props =>{
                 findStructureState={findStructureState}
             />
             {
-                view === 0 ?
+                view === 1 ?
                     <ConfigView1
                         form={form}
                         del={del}

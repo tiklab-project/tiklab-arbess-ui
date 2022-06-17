@@ -9,7 +9,6 @@ const {SubMenu} = Menu
 const SecondarySubMenu = props =>{
 
     const { pipelineSysRouter,type,secureRouter } = props
-    const pipelineId = localStorage.getItem('pipelineId')
     const path=props.location.pathname
 
     const getPipelineSysRouter = pipelineSysRouter => {

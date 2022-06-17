@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
-import PipelineDetailsBreadcrumb from "../../pipeline/pipelineDetails/components/pipelineDetailsBreadcrumb";
-import Proof from "../../proof/container/proof";
+import PipelineDetailsBreadcrumb from "../../pipelineBreadcrumb/pipelineBreadcrumb";
+import Proof from "../../../proof/container/proof";
 
 const PipelineSysProof = props =>{
 

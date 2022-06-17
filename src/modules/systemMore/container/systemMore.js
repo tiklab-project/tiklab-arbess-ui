@@ -1,7 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {renderRoutes} from "react-router-config";
-import SecondaryMenu from "../../asideMenu/secondaryMenu";
 import './systemMore.scss';
+import SecondaryMenuRender from "../../menu/renderMenu/secondaryMenuRender";
 
 const SystemMore = props =>{
     const {route}=props
@@ -29,14 +28,13 @@ const SystemMore = props =>{
         setNav(path)
     },[path])
 
-    return(
-        <Fragment>
-            <SecondaryMenu {...props} router={router} nav={nav}/>
-            <div className='systemMore'>
-                {renderRoutes(route.routes)}
-            </div>
-        </Fragment>
-    )
+    return  <SecondaryMenuRender
+                {...props}
+                className={'systemMore'}
+                router={router}
+                route={route}
+                nav={nav}
+            />
 }
 
 export default SystemMore

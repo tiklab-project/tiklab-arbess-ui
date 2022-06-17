@@ -1,7 +1,6 @@
-import React, {Fragment, useEffect, useState} from "react";
-import {renderRoutes} from "react-router-config";
+import React, {useEffect, useState} from "react";
 import './userCenter.scss'
-import SecondaryMenu from "../../asideMenu/secondaryMenu";
+import SecondaryMenuRender from "../../menu/renderMenu/secondaryMenuRender";
 
 const UserCenter = props =>{
     const {route}=props
@@ -36,14 +35,13 @@ const UserCenter = props =>{
         },
     ]
 
-    return(
-        <Fragment>
-            <SecondaryMenu {...props} router={router} nav={nav}/>
-            <div className='userCenter'>
-                {renderRoutes(route.routes)}
-            </div>
-        </Fragment>
-    )
+    return  <SecondaryMenuRender
+                {...props}
+                className={'userCenter'}
+                router={router}
+                route={route}
+                nav={nav}
+            />
 }
 
 export default UserCenter
