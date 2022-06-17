@@ -1,6 +1,8 @@
-import React from 'react'
-import './pipelineSys.scss'
-import SecondarySubMenuRender from "../../../menu/renderMenu/secondarySubMenuRender";
+import React  from 'react'
+import './pipelineSys.scss';
+import PipelineSysLeftNav from "../components/pipelineSysLeftNav";
+import {renderRoutes} from "react-router-config";
+import {withRouter} from "react-router-dom";
 
 const PipelineSys= props=>{
 
@@ -9,7 +11,7 @@ const PipelineSys= props=>{
     const router = [
         {
             key:'1',
-            label:'角色设置',
+            label:'权限管理',
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
@@ -35,7 +37,7 @@ const PipelineSys= props=>{
         },
         {
             key:'/index/task/assembly/membro',
-            label:'成员设置',
+            label:'项目成员',
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
@@ -43,7 +45,7 @@ const PipelineSys= props=>{
         },
         {
             key:'/index/task/assembly/proof',
-            label:'凭证设置',
+            label:'凭证管理',
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
@@ -51,7 +53,7 @@ const PipelineSys= props=>{
         },
         {
             key:'/index/task/assembly/other',
-            label:'其他设置',
+            label:'其他管理',
             icon:   <svg className="icon" aria-hidden="true">
                         <use xlinkHref='#icon-fenleiguanli'/>
                     </svg>,
@@ -59,13 +61,16 @@ const PipelineSys= props=>{
         },
     ]
 
-    return <SecondarySubMenuRender
-                {...props}
-                pipelineSysRouter={router}
-                type={'sys'}
-                route={route}
-                className={'pipelineSys'}
-            />
+    return (
+        <div className='pipelineSys'>
+            <div className='pipelineSys-left'>
+                <PipelineSysLeftNav {...props} router={router}/>
+            </div>
+            <div className='pipelineSys-content'>
+                {renderRoutes(route.routes)}
+            </div>
+        </div>
+    )
 }
 
-export default PipelineSys
+export default withRouter(PipelineSys)

@@ -1,11 +1,11 @@
 import React,{useState} from "react";
-import ConfigAddCodeLeftGitDrawer from "./configAddCodeRightGitDrawer";
+import ConfigAddCodeRightGitDrawer from "./configAddCodeRightGitDrawer";
 import ConfigAddCodeRightSvnDrawer from "./configAddCodeRightSvnDrawer";
 import {Button} from "antd";
 
 const ConfigAddCodeRightDrawer = props =>{
 
-    const {opt,setIsPrompt, codeOpt,setCodeOpt,setCodeData,setCodeDrawer,codeName,codeBranch,codeType,setCodeType
+    const {opt,setIsPrompt, codeOpt,setCodeOpt,setCodeData,setCodeDrawer,codeType,setCodeType,formInitialValues
     } = props
 
     const [codeId,setCodeId] = useState('')
@@ -21,8 +21,8 @@ const ConfigAddCodeRightDrawer = props =>{
         newCode = {
             codeId: codeId,
             codeType:codeType,
-            codeName: codeName,
-            codeBranch: codeBranch,
+            codeName: formInitialValues && formInitialValues.codeName,
+            codeBranch: formInitialValues && formInitialValues.codeBranch,
         }
         setCodeData(newCode)
         setCodeDrawer(false)
@@ -33,7 +33,7 @@ const ConfigAddCodeRightDrawer = props =>{
         <div className='body-menu_right'>
             {
                 opt  === 1 ?
-                    <ConfigAddCodeLeftGitDrawer
+                    <ConfigAddCodeRightGitDrawer
                         codeOpt={codeOpt}
                         handleClick={handleClick}
                     />

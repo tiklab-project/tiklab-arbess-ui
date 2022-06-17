@@ -12,7 +12,7 @@ const ConfigAddCodeLeftDrawer = props =>{
                         return(
                             <li
                                 key={item.id}
-                                onClick={ ()=>setOpt(item) }
+                                onClick={ ()=>setOpt(index+1) }
                                 className={opt === index+1 ? 'at-nav-item at-nav-selected' : 'at-nav-item'}
                             >
                                 <div className="at-nav-item-main">

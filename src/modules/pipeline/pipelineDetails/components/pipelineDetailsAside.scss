@@ -1,0 +1,42 @@
+.aside{
+    position: fixed;
+    background-color: #fff;
+    z-index: 888;
+    left: 0;
+    top: 55px;
+    border-right:1px solid #cccccc;
+    height: 100%;
+    .content{
+      width: 65px;
+      padding: 10px 0 0;
+    }
+    &_content{
+        height: 55px;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px;
+        .icon{
+            width: 20px;
+            height: 20px ;
+        }
+    }
+    &_dropdown{
+        height: 55px;
+        display: flex;
+        line-height: 55px;
+        width: 100%;
+        align-items: center;
+        padding: 0 20px;
+        .icon{
+          width: 25px;
+          height: 25px ;
+        }
+    }
+    &_active{
+        background: #e6f7ff;
+        border-right: 3px solid #1890ff;
+    }
+}

@@ -19,8 +19,8 @@ const Config = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,codeData,setCodeData,formInitialValues,
-        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,
+    const {setIsPrompt,codeData,setCodeData,formInitialValues,setData,setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock,setMavenShellBlock,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -33,6 +33,9 @@ const Config = props =>{
         return () =>{
             localStorage.removeItem('gitProofId')
             localStorage.removeItem('deployProofId')
+            setCodeData('')
+            setData([])
+            setFormInitialValues('')
         }
     },[])
 
@@ -75,14 +78,14 @@ const Config = props =>{
         if(codeData){
             if(codeData.codeType){
                 const newCode = {
-                    codeName:codeName,
-                    codeBranch:codeBranch
+                    codeName:formInitialValues && formInitialValues.codeName,
+                    codeBranch:formInitialValues && formInitialValues.codeBranch
                 }
                 Object.assign(codeData,newCode)
                 setCodeData({...codeData})
             }
         }
-    },[codeName,codeBranch])
+    },[formInitialValues])
 
     // 按需清空表单的值
     const del = i => {
@@ -118,8 +121,6 @@ const Config = props =>{
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
-                setCodeName('')
-                setCodeBranch('')
                 break
             case 'test':
                 formInitialValues.testOrder = null

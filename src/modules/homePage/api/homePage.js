@@ -7,3 +7,11 @@ export function  FindAllOpen (data){
         data
     })
 }
+
+export function  RunState (data){
+    return serviceLoc.request({
+        url:'/pipelineHome/runState',
+        method:'post',
+        data
+    })
+}

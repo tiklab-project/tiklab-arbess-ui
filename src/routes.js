@@ -32,32 +32,18 @@ const PipelineSysRole=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/
 const PipelineSysDomain=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysDomain'))
 
 /* 系统设置 */
-const System=AsyncComponent(()=>import('./modules/system/system'))
+const System=AsyncComponent(()=>import('./modules/system/system/system'))
 
-/*  系统设置列表  */
-const UserCenter=AsyncComponent(()=>import('./modules/userCenter/container/userCenter'))
-const Plug=AsyncComponent(()=>import('./modules/plug/container/plug'))
-const Secure=AsyncComponent(()=>import('./modules/secure/container/secure'))
-const SystemMore=AsyncComponent(()=>import('./modules/systemMore/container/systemMore'))
-
-/*  系统设置列表 -- 用户中心  */
-const UserCenterBase=AsyncComponent(()=>import('./modules/userCenter/components/userCenterBase'))
-const UserCenterList=AsyncComponent(()=>import('./modules/userCenter/components/userCenterList'))
-const UserCenterView=AsyncComponent(()=>import('./modules/userCenter/components/userCenterView'))
-
-/*  系统设置列表 -- 插件库  */
-const PlugDeploy=AsyncComponent(()=>import('./modules/plug/components/plugDeploy'))
-const PlugUpdate=AsyncComponent(()=>import('./modules/plug/components/plugUpdate'))
-const PlugAll=AsyncComponent(()=>import('./modules/plug/components/plugAll'))
-
-/*  系统设置列表 -- 安全设置  */
-const SecurePowerRole=AsyncComponent(()=>import('./modules/secure/components/securePowerRole'))
-const SecurePowerDomain=AsyncComponent(()=>import('./modules/secure/components/securePowerDomain'))
-const SecureProof=AsyncComponent(()=>import('./modules/secure/components/secureProof'))
-
-/*  系统设置列表 -- 其他  */
-const SystemMoreInfo=AsyncComponent(()=>import('./modules/systemMore/components/systemMoreInfo'))
-const SystemMoreLog=AsyncComponent(()=>import('./modules/systemMore/components/systemMoreLog'))
+/* 系统设置 -- 列表 */
+const UserBase=AsyncComponent(()=>import('./modules/system/user/userBase'))
+const UserList=AsyncComponent(()=>import('./modules/system/user/userList'))
+const PlugAll=AsyncComponent(()=>import('./modules/system/plug/plugAll'))
+const PlugUpdate=AsyncComponent(()=>import('./modules/system/plug/plugUpdate'))
+const OverallProof=AsyncComponent(()=>import('./modules/system/proof/overallProof'))
+const Info=AsyncComponent(()=>import('./modules/info/info'))
+const Log=AsyncComponent(()=>import('./modules/log/log'))
+const Domain=AsyncComponent(()=>import('./modules/system/power/domain'))
+const Role=AsyncComponent(()=>import('./modules/system/power/role'))
 
 const routers=[
     {
@@ -92,111 +78,12 @@ const routers=[
                 component: PipelineCollect,
             },
             {
-                path:'/index/config',
+                path:'/index/config/:pipelineName',
                 component:PipelineConfig,
             },
             {
                 path:'/index/searchresult/:searchresult',
                 component:SearchResult,
-            },
-            {
-                path:'/index/system',
-                component:System,
-                routes:[
-                    {
-                        path: '/index/system',
-                        exact:true,
-                        render:()=>  <Redirect to={"/index/system/user/base"}/>,
-                    },
-                    {
-                        path:'/index/system/user',
-                        component: UserCenter,
-                        routes:[
-                            {
-                                path: '/index/system/user',
-                                exact:true,
-                                render:()=>  <Redirect to={"/index/system/user/base"}/>,
-                            },
-                            {
-                                path:'/index/system/user/base',
-                                component: UserCenterBase
-                            },
-                            {
-                                path:'/index/system/user/list',
-                                component: UserCenterList
-                            },
-                            {
-                                path:'/index/system/user/view',
-                                component: UserCenterView
-                            }
-                        ]
-                    },
-                    {
-                        path:"/index/system/plugin",
-                        component: Plug,
-                        routes:[
-                            {
-                                path: '/index/system/plugin',
-                                exact:true,
-                                render:()=> <Redirect to={"/index/system/plugin/depot"}/>,
-                            },
-                            {
-                                path:'/index/system/plugin/depot',
-                                component: PlugAll
-                            },
-                            {
-                                path:'/index/system/plugin/update',
-                                component: PlugUpdate
-                            },
-                            {
-                                path:'/index/system/plugin/deploy',
-                                component: PlugDeploy
-                            }
-                        ]
-                    },
-                    {
-                        path:"/index/system/secure",
-                        component: Secure,
-                        routes:[
-                            {
-                                path: '/index/system/secure',
-                                exact:true,
-                                render:()=>  <Redirect to={"/index/system/secure/powerDomain"}/>,
-                            },
-                            {
-                                path:'/index/system/secure/powerDomain',
-                                component: SecurePowerDomain,
-                            },
-                            {
-                                path:'/index/system/secure/powerRole',
-                                component: SecurePowerRole,
-                            },
-                            {
-                                path:'/index/system/secure/proof',
-                                component: SecureProof,
-                            }
-                        ]
-                    },
-                    {
-                        path:"/index/system/other",
-                        component: SystemMore,
-                        routes:[
-                            {
-                                path: '/index/system/other',
-                                exact:true,
-                                render:()=>  <Redirect to={"/index/system/other/info"}/>,
-                            },
-                            {
-                                path:'/index/system/other/info',
-                                component: SystemMoreInfo,
-                            },
-                            {
-                                path:'/index/system/other/log',
-                                component: SystemMoreLog,
-                            }
-                        ]
-                    }
-                ]
             },
             {
                 path:'/index/task',
@@ -249,6 +136,53 @@ const routers=[
                     {
                         path:'/index/task/config',
                         component: ConfigDetails
+                    },
+                ]
+            },
+            {
+                path:'/index/system',
+                component:System,
+                routes:[
+                    {
+                        path: '/index/system',
+                        exact:true,
+                        render:()=>  <Redirect to={"/index/system/user/base"}/>,
+                    },
+                    {
+                        path: '/index/system/user/base',
+                        component: UserBase,
+                    },
+                    {
+                        path: '/index/system/user/list',
+                        component: UserList,
+                    },
+                    {
+                        path: '/index/system/plugin/all',
+                        component: PlugAll,
+                    },
+                    {
+                        path: '/index/system/plugin/update',
+                        component: PlugUpdate,
+                    },
+                    {
+                        path: '/index/system/power/role',
+                        component: Role,
+                    },
+                    {
+                        path: '/index/system/power/domain',
+                        component: Domain,
+                    },
+                    {
+                        path: '/index/system/proof',
+                        component: OverallProof,
+                    },
+                    {
+                        path:'/index/system/log',
+                        component: Log,
+                    },
+                    {
+                        path:'/index/system/info',
+                        component: Info,
                     },
                 ]
             },

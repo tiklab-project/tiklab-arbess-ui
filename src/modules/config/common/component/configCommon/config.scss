@@ -57,7 +57,6 @@
         margin: 10px;
     }
 }
-
 .wrapper{
     &-head{
         .deleted{
@@ -164,5 +163,8 @@
     }
     .config-details-gitTest{
         text-align: right;
+    }
+    ul li{
+        list-style: none;
     }
 }

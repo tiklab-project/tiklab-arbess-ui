@@ -8,17 +8,9 @@ import {inject, observer} from "mobx-react";
 const ConfigCodeGitOrGitlab = props =>{
 
     const {configDataStore}=props
-    const {setCodeName, setCodeBranch,codeType} = configDataStore
+    const {codeType} = configDataStore
 
     const gitProofId =localStorage.getItem('gitProofId')
-
-    const inputCodeNameValue = e =>{
-        setCodeName(e.target.value)
-    }
-
-    const inputCodeBranchValue = e =>{
-        setCodeBranch(e.target.value)
-    }
     
     return(
         <Fragment>
@@ -36,13 +28,12 @@ const ConfigCodeGitOrGitlab = props =>{
                     }
                 ]}
             >
-                <Input  onChange={e=>inputCodeNameValue(e)}/>
+                <Input />
             </Form.Item>
             <Form.Item name="codeBranch" label="分支">
                 <Input
                     style={{ width: 300 }}
                     placeholder="请输入分支，默认是master"
-                    onChange={e=>inputCodeBranchValue(e)}
                 />
             </Form.Item>
             <Row>

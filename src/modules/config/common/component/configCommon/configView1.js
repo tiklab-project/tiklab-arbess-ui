@@ -17,7 +17,7 @@ const ConfigView1 = props =>{
 
     const {form,del,updateConfigure,configDataStore,Salta} = props
 
-    const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
+    const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,linuxShellBlock,unitShellBlock,mavenShellBlock,setCodeType,
     } = configDataStore
 
@@ -230,8 +230,6 @@ const ConfigView1 = props =>{
                     setIsPrompt={setIsPrompt}
                 />
                 <ConfigAddCodeModal
-                    codeName={codeName}
-                    codeBranch={codeBranch}
                     codeVisible={codeVisible}
                     setCodeVisible={setCodeVisible}
                     setCodeData={setCodeData}

@@ -12,7 +12,7 @@ const ConfigCodeGiteeOrGithub = props =>{
     const {githubStore,configDataStore,giteeStore} = props
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch, getGiteeProof,getState} = giteeStore
-    const {setCodeName,setCodeBranch,codeData,formInitialValues,codeType} = configDataStore
+    const {codeData,formInitialValues,codeType} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -86,11 +86,6 @@ const ConfigCodeGiteeOrGithub = props =>{
             })
         }
         setProhibited(false)
-        setCodeName(values)
-    }
-
-    const inputCodeBranchValue = values =>{
-        setCodeBranch(values)
     }
 
     return(
@@ -118,11 +113,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 </Select>
             </Form.Item>
             <Form.Item name="codeBranch" label="分支">
-                <Select
-                    style={{ width: 300 }}
-                    disabled={prohibited}
-                    onChange={()=>inputCodeBranchValue()}
-                >
+                <Select style={{ width: 300 }} disabled={prohibited}>
                     {
                         branchList && branchList.map(item=>{
                             return (

@@ -16,7 +16,7 @@ const ConfigView2 = props =>{
 
     const {form, updateConfigure,configDataStore,del,Salta,view2} = props
 
-    const {setIsPrompt,codeName,codeBranch,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
+    const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isAlias,setIsAlias,codeType,setCodeType,linuxShellBlock,unitShellBlock,mavenShellBlock,
     } = configDataStore
 
@@ -228,7 +228,6 @@ const ConfigView2 = props =>{
                     setCodeDrawer={setCodeDrawer}
                     setNewStage={setNewStage}
                     setTaskFormDrawer={setTaskFormDrawer}
-                    formInitialValues={formInitialValues}
                 />
                 <div className='configView2-main'>
                     <div className='configView2-main_container'>
@@ -257,10 +256,9 @@ const ConfigView2 = props =>{
                     setCodeData={setCodeData}
                     codeDrawer={codeDrawer}
                     setCodeDrawer={setCodeDrawer}
-                    codeBranch={codeBranch}
-                    codeName={codeName}
                     codeType={codeType}
                     setCodeType={setCodeType}
+                    formInitialValues={formInitialValues}
                 />
                 <ConfigAddNewStageDrawer
                     setIsPrompt={setIsPrompt}

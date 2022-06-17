@@ -14,11 +14,18 @@ const Head = props =>{
         },
         {
             id:3,
-            title: '用户中心'
+            title: '用户中心',
+            to:'/index/system/user/base',
         },
         {
             id:4,
-            title: '权限中心'
+            title: '权限管理',
+            to:'/index/system/power/role',
+        },
+        {
+            id:5,
+            title: '凭证管理',
+            to:'/index/system/proof',
         }
     ]
     return(

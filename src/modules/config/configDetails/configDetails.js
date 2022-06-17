@@ -18,8 +18,8 @@ const ConfigDetails = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure,findStructureState} = structureStore
 
-    const {setIsPrompt,codeName,setCodeName,codeBranch,setCodeBranch,setData,codeData,setCodeData,formInitialValues,
-        setFormInitialValues,setLinuxShellBlock,setUnitShellBlock,setMavenShellBlock,setCodeType,
+    const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock,setMavenShellBlock,setCodeType,
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -36,6 +36,9 @@ const ConfigDetails = props =>{
             localStorage.removeItem('testId')
             localStorage.removeItem('structureId')
             localStorage.removeItem('deployId')
+            setCodeData('')
+            setData([])
+            setFormInitialValues('')
         }
     },[pipelineId])
 
@@ -78,14 +81,14 @@ const ConfigDetails = props =>{
         if(codeData){
             if(codeData.codeType){
                 const newCode = {
-                    codeName:codeName,
-                    codeBranch:codeBranch
+                    codeName:formInitialValues && formInitialValues.codeName,
+                    codeBranch:formInitialValues && formInitialValues.codeBranch
                 }
                 Object.assign(codeData,newCode)
                 setCodeData({...codeData})
             }
         }
-    },[codeName,codeBranch])
+    },[formInitialValues])
 
     // form表单初始化
     useEffect(()=>{
@@ -113,8 +116,6 @@ const ConfigDetails = props =>{
                             proofName:j.proof && j.proof.proofName ,
                         }
                         Object.assign(formInitialValues,formValue)
-                        setCodeName(j.codeName)
-                        setCodeBranch(j.codeBranch)
                         setCodeType(j.type)
                         localStorage.setItem('codeId',j.codeId)
                         localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
@@ -195,8 +196,6 @@ const ConfigDetails = props =>{
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
-                setCodeName('')
-                setCodeBranch('')
                 break
             case 'test':
                 formInitialValues.testOrder = null

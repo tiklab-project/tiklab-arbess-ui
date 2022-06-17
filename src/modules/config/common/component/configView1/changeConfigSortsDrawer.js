@@ -120,7 +120,6 @@ const ChangeConfigSortsDrawer = props =>{
             closable={false}
             onClose={()=>setChangeSortVisible(false)}
             visible={changeSortVisible}
-            bodyStyle={{padding:0}}
         >
             <div className="wrapper">
                 <div className="wrapper-head">

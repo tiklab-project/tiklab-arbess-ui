@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import './proof.scss';
-import {Button, Popconfirm, Table} from "antd";
+import { Popconfirm, Table} from "antd";
 import {inject,observer} from "mobx-react";
 import AddProofButton from "../components/addProofButton";
 import UpdateProof from "../components/updateProof";
@@ -71,8 +71,8 @@ const Proof = props =>{
             key:'action',
             render:(text,record)=>{
                 return(
-                    <span className='pipelineSys-proof-content-action'>
-                        <span className='action- edit'
+                    <span className='proof-content-action'>
+                        <span className='edit'
                               onClick={()=>edit(text,record)}
                         >
                             编辑
@@ -84,7 +84,7 @@ const Proof = props =>{
                              okText="确定"
                              cancelText="取消"
                          >
-                             <span className='action- del'>
+                             <span className='del'>
                                  删除
                              </span>
                          </Popconfirm>
@@ -95,6 +95,7 @@ const Proof = props =>{
     ]
 
     const style = 'primary'
+
     return(
         <div className='proof'>
             <div className='proof-content'>

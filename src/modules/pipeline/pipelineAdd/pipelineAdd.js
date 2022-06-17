@@ -51,7 +51,8 @@ const PipelineAdd = props => {
             if(res.code=== 0 && res.data){
                 localStorage.setItem('pipelineId',res.data)
                 localStorage.setItem('pipelineName',value.pipelineName)
-                props.history.push({pathname:'/index/config',value})
+                props.history.push(`/index/config/${value.pipelineName}`)
+                // props.history.push({pathname:'/index/config',value})
             }else{
                 message.error({content:'添加失败', className:'message'})
             }

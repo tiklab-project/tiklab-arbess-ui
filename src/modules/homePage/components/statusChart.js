@@ -1,42 +1,83 @@
-import React from "react";
-import ReactEcharts from 'echarts-for-react'
+import React, {useEffect, useState} from "react";
+import ReactEcharts from 'echarts-for-react';
+import {inject,observer} from "mobx-react";
+import {getUser} from "doublekit-core-ui";
 
 const StatusChart = props =>{
 
-    const getOption = () => {
-        return {
-            title: {
-                text: '近期构建状态',
+    const {homePageStore} = props
+    const {runState} = homePageStore
+    const [xData,setXData] = useState([])
+    const [successData,setSuccessData] = useState([])
+    const [failData,setFailData] = useState([])
+    const [stopData,setStopData] = useState([])
 
+    useEffect(()=>{
+        const x = []
+        const success = []
+        const fail = []
+        const stop = []
+        runState(getUser().userId).then(res=>{
+            console.log(res.data)
+            for (let i = 0;i<res.data.length;i++){
+                x.push(res.data[i].time)
+                success.push(res.data[i].successNumber)
+                fail.push(res.data[i].errorNumber)
+                stop.push(res.data[i].removeNumber)
+            }
+            setXData([...x])
+            setSuccessData([...success])
+            setFailData([...fail])
+            setStopData([...stop])
+        })
+    },[])
+
+
+    const getOption = {
+        title: {
+            text: '近期构建状态',
+        },
+        color: [ "#1890ff", "#e5323e",'#222222'],
+        tooltip: {},
+        xAxis: {
+            data: xData
+        },
+        yAxis: {
+            name: '单位：次',
+        },
+        legend: {
+            data: ['成功', '失败','停止'],
+            show: true,
+            // 图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。
+            selectedMode: true,
+            top: 0,
+            width: '80%',
+            right: 0,
+        },
+        series: [
+            {
+                name: '成功',
+                type: 'bar',
+                seriesLayoutBy: "column",
+                data: successData
             },
-            color: [ "#1890ff", "#e5323e"],
-            tooltip: {},
-            legend: {
-                data: ['成功', '失败']
+            {
+                name: '失败',
+                type: 'bar',
+                data: failData
             },
-            xAxis: {
-                data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋"]
-            },
-            yAxis: {},
-            series: [
-                {
-                    name: '成功',
-                    type: 'bar',
-                    data: [1,2,3,4,6]
-                },
-                {
-                    name: '失败',
-                    type: 'bar',
-                    data: [1,2,3,4,6]
-                }]
-        }
+            {
+                name: '停止',
+                type: 'bar',
+                data: stopData
+            }]
     }
 
     return(
         <div className='homePage-content-statusChart'>
-            <ReactEcharts option={getOption()}/>
+            <ReactEcharts option={getOption}/>
         </div>
     )
 }
 
-export default StatusChart
+export default inject('homePageStore')(observer(StatusChart))

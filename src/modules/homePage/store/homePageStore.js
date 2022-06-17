@@ -1,6 +1,7 @@
 import {observable,action} from "mobx";
 import {
-    FindAllOpen
+    FindAllOpen,
+    RunState,
 } from "../api/homePage";
 
 
@@ -18,6 +19,16 @@ export class HomePageStore{
         }).catch(error=>{
             console.log(error)
         })
+    }
+    @action
+    runState = async value =>{
+        const param = new FormData()
+        param.append('userId',value)
+        return await RunState(param)
+        // RunState(param).then(res=>{
+        //     console.log(res)
+        //     this.runStateList = res.data
+        // })
     }
 
 }

@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router-dom";
+import './pipelineDetailsAside.scss';
 import {Dropdown} from 'antd';
 import PipelineDetailsAsideOpt from "./pipelineDetailsAsideOpt";
+
 
 const PipelineDetailsAside = props =>{
 
@@ -77,7 +79,7 @@ const PipelineDetailsAside = props =>{
                         return(
                             <li
                                 key={item.key}
-                                className={nav===item.to ? 'aside_content aside_link' : 'aside_content'}
+                                className={nav===item.to ? 'aside_content aside_active' : 'aside_content'}
                                 onClick={()=>changeNav(item)}
                             >
                                 <div className='aside_content_icon'>

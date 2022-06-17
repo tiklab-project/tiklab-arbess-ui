@@ -9,7 +9,7 @@
         padding: 20px;
         .head{
             &-group{
-                width: 400px;
+                width: 380px;
                 min-width: 100px;
                 line-height: 100px;
                 height: 100px;
@@ -40,13 +40,6 @@
             min-height: 100px;
             -webkit-flex-shrink: 0;
             flex-shrink: 0;
-            &-top{
-                display: flex;
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                justify-content: space-between;
-            }
         }
         &-right{
             width: calc(34% - 7px);
@@ -65,7 +58,7 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 3px 8px 0 #cccccc;
-            width: calc(50% - 7px);
+            margin-bottom: 16px;
             .pipelineNear{
                 &-title{
                     padding-bottom: 15px;
@@ -88,40 +81,12 @@
             }
         }
         &-dynamic{
-            width: calc(50% - 7px);
             flex-shrink: 0;
             border: 1px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 3px 8px 0 #cccccc;
             padding: 20px;
             .dynamic{
-                &-top{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    padding-bottom: 10px;
-                    &-title{
-                        font-size: 18px;
-                        font-weight: 600;
-                    }
-                }
-                &-bottom{
-                    &-listHeader{
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    }
-                }
-            }
-        }
-        &-agencyMatters{
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 3px 8px 0 #cccccc;
-            .agencyMatters{
                 &-top{
                     display: flex;
                     flex-direction: row;

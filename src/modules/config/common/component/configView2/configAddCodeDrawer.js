@@ -17,7 +17,7 @@ const leftLis = [
 
 const ConfigAddCodeDrawer = props =>{
 
-    const {setCodeData,codeDrawer,setCodeDrawer,setIsPrompt,codeBranch,codeName,codeType,setCodeType} = props
+    const {setCodeData,codeDrawer,setCodeDrawer,setIsPrompt,codeType,setCodeType,formInitialValues} = props
     const [opt,setOpt] = useState(1)
     const [codeOpt,setCodeOpt]=useState(0)
 
@@ -53,10 +53,9 @@ const ConfigAddCodeDrawer = props =>{
                                 setCodeOpt={setCodeOpt}
                                 setCodeData={setCodeData}
                                 setCodeDrawer={setCodeDrawer}
-                                codeBranch={codeBranch}
-                                codeName={codeName}
                                 codeType={codeType}
                                 setCodeType={setCodeType}
+                                formInitialValues={formInitialValues}
                             />
                         </div>
                     </div>

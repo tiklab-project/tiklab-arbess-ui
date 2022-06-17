@@ -6,15 +6,14 @@
             padding-bottom: 5px;
         }
         &-action{
-            .action-{
+            .del{
+                color:#ff0000;
                 cursor: pointer;
             }
             .edit{
                 padding-right: 10px;
-                color:#1800ff;
-            }
-            .del{
-                color: #ff0000;
+                color: #1890ff;
+                cursor: pointer;
             }
         }
     }

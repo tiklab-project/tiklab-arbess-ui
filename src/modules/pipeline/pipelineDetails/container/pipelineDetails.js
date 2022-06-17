@@ -1,8 +1,7 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import { Modal} from 'antd';
 import {renderRoutes} from "react-router-config";
 import './pipelineDetails.scss';
-import '../../../menu/asideMenu/firstMenu.scss';
 import PipelineDetailsAside from "../components/pipelineDetailsAside";
 import { inject,observer } from "mobx-react";
 import {Prompt} from "react-router-dom";

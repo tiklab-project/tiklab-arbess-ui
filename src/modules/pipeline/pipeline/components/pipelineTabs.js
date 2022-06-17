@@ -51,9 +51,9 @@ const PipelineTabs = props =>{
                             )
                         })
                     }
-                    <div className='pipeline-tabs-type-link' onClick={()=>setVisible(true)}>
-                        新建视图
-                    </div>
+                    {/*<div className='pipeline-tabs-type-link' onClick={()=>setVisible(true)}>*/}
+                    {/*    新建视图*/}
+                    {/*</div>*/}
                 </div>
             </div>
             <PipelineTable
