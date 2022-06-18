@@ -3,6 +3,7 @@ import {inject,observer} from "mobx-react";
 import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import Proof from "../../proof/container/proof";
 
+// 项目凭证
 const ProjectSetProof = props =>{
 
     const {proofStore} = props

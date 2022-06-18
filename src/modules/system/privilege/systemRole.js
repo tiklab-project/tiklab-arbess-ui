@@ -1,9 +1,9 @@
 import React from "react";
-import {PRIVILEGE_SYSTEM_STORE,RoleList} from 'doublekit-privilege-ui'
-import {inject, observer} from "mobx-react";
+import {RoleList} from 'doublekit-privilege-ui'
 
+// 系统角色管理
 const SystemRole = props =>{
     return <RoleList {...props}/>
 }
 
-export default inject(PRIVILEGE_SYSTEM_STORE)(observer(SystemRole))
+export default SystemRole

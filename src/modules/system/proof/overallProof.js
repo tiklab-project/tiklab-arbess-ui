@@ -4,6 +4,7 @@ import {getUser} from "doublekit-core-ui";
 import Proof from "../../proof/container/proof";
 import SystemBreadcrumb from "../breadcrumb/systemBreadcrumb";
 
+// 系统凭证
 const OverallProof = props =>{
 
     const {proofStore} = props
