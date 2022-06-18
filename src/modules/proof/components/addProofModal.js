@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const AddProofModal = props =>{
 
-    const {visible,setVisible,createProof,proofScope} = props
+    const {visible,setVisible,createProof,proofScope,userId,fresh,setFresh} = props
     const [form] = Form.useForm()
 
     const onOk = () =>{
@@ -18,6 +18,8 @@ const AddProofModal = props =>{
                 id=localStorage.getItem('pipelineId')
             }
             const params = {
+                pipeline:{ pipelineId:id },
+                user:{id:userId},
                 type:values.type,
                 proofScope:proofScope,
                 proofType:values.proofType,
@@ -25,12 +27,13 @@ const AddProofModal = props =>{
                 proofUsername:values.proofUsername,
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe,
-                pipeline:{
-                    pipelineId:id,
-                },
                 proofCreateTime:moment.moment,
             }
-            createProof(params)
+            createProof(params).then(()=>{
+                setFresh(!fresh)
+            }).catch(error=>{
+                console.log(error)
+            })
             setVisible(false)
         })
     }

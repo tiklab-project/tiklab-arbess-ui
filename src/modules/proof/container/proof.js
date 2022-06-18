@@ -7,8 +7,8 @@ import UpdateProof from "../components/updateProof";
 
 const Proof = props =>{
 
-    const {proofList,proofStore,setFresh,fresh} = props
-    const {updateProof,deleteProof} = proofStore
+    const {proofList,proofStore} = props
+    const {updateProof,deleteProof,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState('')
     const [visible,setVisible] = useState(false)

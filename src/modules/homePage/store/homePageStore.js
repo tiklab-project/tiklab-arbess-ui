@@ -34,7 +34,9 @@ export class HomePageStore{
         param.append('userId',value)
         FindAllAction(param).then(res=>{
             console.log('动态',res)
-            this.dynamicList = res.data
+            if(res.code === 0 ){
+                this.dynamicList = res.data
+            }
         }).catch(error=>{
             console.log(error)
         })

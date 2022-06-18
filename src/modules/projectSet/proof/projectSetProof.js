@@ -1,15 +1,13 @@
-import React, {Fragment, useEffect,useState} from "react";
+import React, {Fragment, useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import PipelineDetailsBreadcrumb from "../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
+import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import Proof from "../../proof/container/proof";
 
 const ProjectSetProof = props =>{
 
     const {proofStore} = props
-    const {findPipelineProof,pipelineProofList} = proofStore
-
+    const {findPipelineProof,pipelineProofList,fresh} = proofStore
     const pipelineId = localStorage.getItem('pipelineId')
-    const [fresh,setFresh] = useState(false)
 
     useEffect(()=>{
         findPipelineProof(pipelineId)
@@ -17,8 +15,8 @@ const ProjectSetProof = props =>{
 
     return(
        <Fragment>
-           <PipelineDetailsBreadcrumb />
-           <Proof proofList={pipelineProofList} fresh={fresh} setFresh={setFresh}/>
+           <ProjectBreadcrumb />
+           <Proof proofList={pipelineProofList}/>
        </Fragment>
     )
 }

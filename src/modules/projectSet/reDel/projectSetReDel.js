@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Button, Form, Input, Popconfirm} from "antd";
 import {inject, observer} from "mobx-react";
-import PipelineDetailsBreadcrumb from "../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
+import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import {getUser} from "doublekit-core-ui";
 
 const ProjectSetReDel = props =>{
@@ -9,10 +9,15 @@ const ProjectSetReDel = props =>{
     const {pipelineStore} = props
     const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
     const [form]=Form.useForm()
+    const userId=getUser().userId
     const pipelineId=localStorage.getItem('pipelineId')
 
     const onConfirm=()=>{
-        deletePipeline(pipelineId).then(()=>{
+        const params = {
+            userId:userId,
+            pipelineId:pipelineId
+        }
+        deletePipeline(params).then(()=>{
             props.history.push('/index/pipeline')
         }).catch(error=>{
             console.log(error)
@@ -22,7 +27,7 @@ const ProjectSetReDel = props =>{
     const onFinish=(values)=>{
         const params={
             user:{
-                id:getUser().userId,
+                id:userId,
             },
             pipelineId:pipelineId,
             pipelineName:values.pipelineName
@@ -43,7 +48,7 @@ const ProjectSetReDel = props =>{
 
     return(
        <Fragment>
-           <PipelineDetailsBreadcrumb style={breadcrumb}/>
+           <ProjectBreadcrumb style={breadcrumb}/>
            <div className='pipelineSys-reDel'>
                <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
                    <Form.Item

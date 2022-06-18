@@ -3,11 +3,14 @@ import {Button} from "antd";
 import './addProofModal'
 import AddProofModal from "./addProofModal";
 import {inject, observer} from "mobx-react";
+import {getUser} from "doublekit-core-ui";
 
 const AddProofButton = props =>{
 
     const {codeType,proofStore,style} = props
-    const {createProof,proofScope,setProofScope} = proofStore
+    const {createProof,proofScope,setProofScope,fresh,setFresh} = proofStore
+
+    const userId = getUser().userId
     const [visible,setVisible] = useState(false)
 
     const addProofVisible = () => {
@@ -37,6 +40,9 @@ const AddProofButton = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 createProof={createProof}
+                userId={userId}
+                fresh={fresh}
+                setFresh={setFresh}
             />
         </Fragment>
     )

@@ -4,8 +4,7 @@ import {inject, observer} from "mobx-react";
 import PipelineTable from "../../pipelineTable/pipelineTable";
 import View from "../../../view/view";
 import {getUser} from 'doublekit-core-ui';
-import {PlusOutlined} from '@ant-design/icons'
-import {Button} from "antd";
+
 
 const PipelineTabs = props =>{
 

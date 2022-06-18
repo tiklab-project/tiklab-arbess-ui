@@ -140,6 +140,5 @@ const ConfigCodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject('githubStore','configStore',
-                'configDataStore','giteeStore')
+export default inject('githubStore','configStore','configDataStore','giteeStore')
                 (observer(ConfigCodeGiteeOrGithub))

@@ -23,7 +23,7 @@ const ConfigCodeSvn = props =>{
                 <Input />
             </Form.Item>
             <Row>
-                <FindAllProof type={1}/>
+                <FindAllProof type={5}/>
                 <AddProofButton codeType={codeType}/>
             </Row>
 

@@ -6,7 +6,7 @@ import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
 import { inject, observer } from "mobx-react";
 import StructureLeftDropdown from "../components/structureLeftDropdown";
-import PipelineDetailsBreadcrumb from "../../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
+import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
 import empty from '../../../../assets/images/empty.jpg';
 import {getUser} from "doublekit-core-ui";
 
@@ -157,7 +157,7 @@ const Structure = props => {
                             />
                         </div>
                         <div className='structure-content-right'>
-                            <PipelineDetailsBreadcrumb style={style}/>
+                            <ProjectBreadcrumb style={style}/>
                             {
                                 leftExecute === ''  &&  leftData.length === 0 ?
                                     <div className='structure-content-empty'>
@@ -189,7 +189,7 @@ const Structure = props => {
                     </div>
                     :
                     <div className='structure-content-empty'>
-                        <PipelineDetailsBreadcrumb/>
+                        <ProjectBreadcrumb/>
                         <div className='empty null'>
                             <img src={empty} alt='logo' />
                             <div className="empty-group">

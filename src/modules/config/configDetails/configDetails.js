@@ -3,7 +3,7 @@ import '../common/component/configCommon/config.scss'
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import PipelineDetailsBreadcrumb from "../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
+import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
@@ -156,7 +156,6 @@ const ConfigDetails = props =>{
                     }
                     setData([...newData])
                     setCodeData(newCode)
-                    form.setFieldsValue({...j})
                     Object.assign(formInitialValues,j)
                     setFormInitialValues({...formInitialValues})
                 }
@@ -232,7 +231,7 @@ const ConfigDetails = props =>{
 
     return (
         <Fragment>
-            <PipelineDetailsBreadcrumb style={style}/>
+            <ProjectBreadcrumb style={style}/>
             <ConfigChangeView
                 userId={userId}
                 view={view}

@@ -36,7 +36,7 @@ export class PipelineStore{
     createPipeline=values=>{
         const params = {
             user: {
-                userId:values.user.userId,
+                id:values.user.id,
             },
             pipelineName: values.pipelineName,
             pipelineType: values.pipelineType,
@@ -72,7 +72,8 @@ export class PipelineStore{
     @action //删除流水线
     deletePipeline=async value =>{
         const param = new FormData()
-        param.append('pipelineId',value)
+        param.append('pipelineId',value.pipelineId)
+        param.append('userId',value.userId)
         return new Promise((resolve, reject) => {
             DeletePipeline(param).then(res=>{
                 console.log('删除流水线',res)

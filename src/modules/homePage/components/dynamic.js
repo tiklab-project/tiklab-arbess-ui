@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from "react";
-import {Button, List} from "antd";
+import {List} from "antd";
 
 const Dynamic = props =>{
 
@@ -7,18 +7,8 @@ const Dynamic = props =>{
 
     useEffect(()=>{
         findAllAction(userId)
+        return
     },[])
-
-    const data = [
-        {
-            key:'1',
-            proofCreateTime:'重新执行'
-        },
-        {
-            key:'2',
-            proofCreateTime:'重新执行'
-        }
-    ]
 
     const goUser = item => {
         props.history.push('/index/system/base')
@@ -49,7 +39,7 @@ const Dynamic = props =>{
                                 </span>
                                 {item.massage}
                                 <span className='name' onClick={()=>goPipeline(item.pipeline)}>
-                                    {item.pipeline.pipelineName}
+                                    {item.pipeline && item.pipeline.pipelineName}
                                 </span>
                                 {item.news}
                             </div>

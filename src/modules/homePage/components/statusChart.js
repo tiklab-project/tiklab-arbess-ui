@@ -26,6 +26,7 @@ const StatusChart = props =>{
             setFailData([...fail])
             setStopData([...stop])
         })
+        return
     },[])
 
 

@@ -15,6 +15,13 @@ export class ProofStore{
     @observable proofScope = ''
     @observable pipelineProofList = []
     @observable systemProofList = []
+    @observable fresh = false
+
+
+    @action
+    setFresh = value =>{
+        this.fresh = value
+    }
 
     @action
     setProofScope = value =>{
@@ -24,6 +31,8 @@ export class ProofStore{
     @action
     createProof =async values =>{
         const params = {
+            user:{id:values.user.id},
+            pipeline:{pipelineId: values.pipeline.pipelineId},
             proofScope:values.proofScope,
             proofType:values.proofType,
             proofName:values.proofName,
@@ -31,18 +40,11 @@ export class ProofStore{
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe,
             type:values.type,
-            pipeline:{
-                pipelineId: values.pipeline
-            },
             proofPort:values.proofPort,
             proofIp:values.proofIp,
             proofCreateTime:values.proofCreateTime,
         }
-        CreateProof(params).then(res=>{
-            console.log('创建部署凭证',res)
-        }).catch(error=>{
-            console.log(error)
-        })
+        return await CreateProof(params)
     }
 
     @action

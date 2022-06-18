@@ -3,7 +3,7 @@ import '../common/component/configCommon/config.scss';
 import './config.scss';
 import {Form} from "antd";
 import {withRouter} from "react-router";
-import PipelineDetailsBreadcrumb from "../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
+import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import ConfigView2 from "../common/component/configCommon/configView2";
 import ConfigView1 from "../common/component/configCommon/configView1";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
@@ -151,7 +151,7 @@ const Config = props =>{
 
     return (
         <Fragment >
-            <PipelineDetailsBreadcrumb style={style}/>
+            <ProjectBreadcrumb style={style}/>
             <ConfigChangeView
                 userId={userId}
                 view={view}

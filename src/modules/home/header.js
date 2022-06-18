@@ -22,7 +22,7 @@ const Head =props=>{
         if(path.indexOf('/index/system') === 0){
             path='/index/system'
         }
-        if(path === '/index/collect' || path === '/index/new' || path === '/index/config' ){
+        if(path === '/index/collect' || path === '/index/new' || path.indexOf('/index/config')===0 ){
             path= '/index/pipeline'
         }
         setCurrentLink(path)

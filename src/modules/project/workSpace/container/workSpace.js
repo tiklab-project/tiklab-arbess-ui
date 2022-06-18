@@ -5,7 +5,7 @@ import {inject,observer} from "mobx-react";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
 import WorkSpaceDrawer from "../components/workSpaceDrawer";
-import PipelineDetailsBreadcrumb from "../../../pipeline/pipelineBreadcrumb/pipelineBreadcrumb";
+import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
 import {getUser} from "doublekit-core-ui";
 
 const WorkSpace = props =>{
@@ -43,7 +43,7 @@ const WorkSpace = props =>{
 
     return(
         <Fragment>
-            <PipelineDetailsBreadcrumb style={style}/>
+            <ProjectBreadcrumb style={style}/>
             <div className='workSpace'>
                 <WorkSpaceNod
                     fileList={fileList}
@@ -68,7 +68,6 @@ const WorkSpace = props =>{
                 />
             </div>
         </Fragment>
-
     )
 }
 

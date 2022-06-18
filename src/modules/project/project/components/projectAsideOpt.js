@@ -4,7 +4,7 @@ import './projectAsideOpt.scss'
 
 const ProjectAsideOpt = props =>{
 
-    const {pipelineList,isPrompt,setVisible,setPipeline} = props
+    const {pipelineList,isPrompt,setVisible,setPipeline,setFormInitialValues} = props
     const pipelineName = localStorage.getItem('pipelineName')
 
     const onClick = (e,item) => {

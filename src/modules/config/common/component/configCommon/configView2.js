@@ -35,10 +35,8 @@ const ConfigView2 = props =>{
     },[isAlias])
 
     useEffect(()=>{
-        form.setFieldsValue({
-            ...formInitialValues
-        })
-    },[formInitialValues])
+        form.setFieldsValue({...formInitialValues})
+    },[formInitialValues,pipelineId])
 
     const displayInput = index =>{
         setIsAlias(index)

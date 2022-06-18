@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Form, Select} from "antd";
 
@@ -28,7 +28,7 @@ const FindAllProof = props =>{
     }
 
     return(
-        <Form.Item name='gitProofName' label="凭证">
+        <Form.Item name={type < 6 ? 'gitProofName' : 'dockerProofName'} label="凭证">
             <Select
                 style={{ width: 300 }}
                 onClick={clickFindAllGit}

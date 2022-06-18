@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect,Fragment} from "react";
 
 const PipelineNear = props =>{
 
@@ -6,6 +6,7 @@ const PipelineNear = props =>{
 
     useEffect(()=>{
         findAllOpen(userId)
+        return
     },[])
 
     const click = item => {
@@ -19,16 +20,26 @@ const PipelineNear = props =>{
             <div className='pipelineNear-title'>最近打开的流水线</div>
             <div className='pipelineNear-active'>
                 {
-                    pipelineNearList && pipelineNearList.map((item,index)=>{
-                        return(
-                            <div key={item.id} className='pipelineNear-active-group'>
-                                <div className='pipelineNear-active-group-desc'>
-                                    <span>{index+1}、</span>
-                                    <span  onClick={()=>click(item)} className='name'>{item.pipelineName}</span>
-                                </div>
+                    pipelineNearList && pipelineNearList.length === 0 ?
+                        <Fragment>
+                            <svg className="icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-meiyouxiangguan"/>
+                            </svg>
+                            <div>
+                                没有数据
                             </div>
-                        )
-                    })
+                        </Fragment>
+                        :
+                        pipelineNearList && pipelineNearList.map((item,index)=>{
+                            return(
+                                <div key={item.id} className='pipelineNear-active-group'>
+                                    <div className='pipelineNear-active-group-desc'>
+                                        <span>{index+1}、</span>
+                                        <span  onClick={()=>click(item)} className='name'>{item.pipelineName}</span>
+                                    </div>
+                                </div>
+                            )
+                        })
                 }
             </div>
         </div>
