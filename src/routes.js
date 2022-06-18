@@ -12,38 +12,42 @@ const HomePage=AsyncComponent(()=>import('./modules/homePage/container/homePage'
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
 const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/pipelineAdd/pipelineAdd'))
 const PipelineConfig=AsyncComponent(()=>import('./modules/config/config/config'))
-const PipelineDetails=AsyncComponent(()=>import('./modules/pipeline/pipelineDetails/container/pipelineDetails'))
 const SearchResult=AsyncComponent(()=>import('./modules/pipeline/pipelineSearch/searchResult'))
 
 /* 流水线 -- 收藏 */
 const PipelineCollect=AsyncComponent(()=>import('./modules/pipeline/pipelineCollect/container/pipelineCollect'))
 
+const Project=AsyncComponent(()=>import('./modules/project/project/container/project'))
+
 /*  流水线详情 */
-const WorkSpace=AsyncComponent(()=>import('./modules/workSpace/container/workSpace'))
-const Structure=AsyncComponent(()=>import('./modules/structure/container/structure'))
+const WorkSpace=AsyncComponent(()=>import('./modules/project/workSpace/container/workSpace'))
+const Structure=AsyncComponent(()=>import('./modules/project/structure/container/structure'))
 const ConfigDetails = AsyncComponent(()=>import('./modules/config/configDetails/configDetails'))
-const PipelineSys=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/container/pipelineSys'))
+const ProjectSet=AsyncComponent(()=>import('./modules/projectSet/projectSet/projectSet'))
 
 /*  流水线详情 -- 设置 */
-const PipelineSysReDel=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysReDel'))
-const PipelineSysProof=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysProof'))
-const PipelineSysMembro=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysMembro'))
-const PipelineSysRole=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysRole'))
-const PipelineSysDomain=AsyncComponent(()=>import('./modules/pipeline/pipelineSys/components/pipelineSysDomain'))
+const ProjectSetReDel=AsyncComponent(()=>import('./modules/projectSet/reDel/projectSetReDel'))
+const ProjectSetProof=AsyncComponent(()=>import('./modules/projectSet/proof/projectSetProof'))
+const ProjectSetUser=AsyncComponent(()=>import('./modules/projectSet/projectSetUser/projectSetUser'))
+const ProjectSetRole=AsyncComponent(()=>import('./modules/projectSet/privilege/projectSetRole'))
+const ProjectSetFeature=AsyncComponent(()=>import('./modules/projectSet/privilege/projectSetFeature'))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import('./modules/system/system/system'))
 
 /* 系统设置 -- 列表 */
-const UserBase=AsyncComponent(()=>import('./modules/system/user/userBase'))
-const UserList=AsyncComponent(()=>import('./modules/system/user/userList'))
+const UserBase=AsyncComponent(()=>import('./modules/system/user/base'))
+const UserList=AsyncComponent(()=>import('./modules/system/user/list'))
+const UserDirectory=AsyncComponent(()=>import('./modules/system/user/directory'))
+const Organ=AsyncComponent(()=>import('./modules/system/user/organ'))
 const PlugAll=AsyncComponent(()=>import('./modules/system/plug/plugAll'))
 const PlugUpdate=AsyncComponent(()=>import('./modules/system/plug/plugUpdate'))
 const OverallProof=AsyncComponent(()=>import('./modules/system/proof/overallProof'))
-const Info=AsyncComponent(()=>import('./modules/info/info'))
-const Log=AsyncComponent(()=>import('./modules/log/log'))
-const Domain=AsyncComponent(()=>import('./modules/system/power/domain'))
-const Role=AsyncComponent(()=>import('./modules/system/power/role'))
+const Info=AsyncComponent(()=>import('./modules/system/info/info'))
+const Log=AsyncComponent(()=>import('./modules/system/log/log'))
+const SystemFeature=AsyncComponent(()=>import('./modules/system/privilege/systemFeature'))
+const SystemRole=AsyncComponent(()=>import('./modules/system/privilege/systemRole'))
+
 
 const routers=[
     {
@@ -87,7 +91,7 @@ const routers=[
             },
             {
                 path:'/index/task',
-                component: PipelineDetails,
+                component: Project,
                 routes:[
                     {
                         path: '/index/task',
@@ -104,32 +108,32 @@ const routers=[
                     },
                     {
                         path:'/index/task/assembly',
-                        component: PipelineSys,
+                        component: ProjectSet,
                         routes:[
                             {
                                 path: '/index/task/assembly',
                                 exact:true,
-                                render:()=>  <Redirect to={"/index/task/assembly/role"}/>,
+                                render:()=>  <Redirect to={"/index/task/assembly/user"}/>,
                             },
                             {
                                 path:'/index/task/assembly/proof',
-                                component:PipelineSysProof
+                                component:ProjectSetProof
                             },
                             {
                                 path:'/index/task/assembly/role',
-                                component: PipelineSysRole
+                                component: ProjectSetRole
                             },
                             {
-                                path:'/index/task/assembly/domain',
-                                component: PipelineSysDomain
+                                path:'/index/task/assembly/feature',
+                                component: ProjectSetFeature
                             },
                             {
-                                path:'/index/task/assembly/other',
-                                component: PipelineSysReDel
+                                path:'/index/task/assembly/redel',
+                                component: ProjectSetReDel
                             },
                             {
-                                path:'/index/task/assembly/membro',
-                                component: PipelineSysMembro
+                                path:'/index/task/assembly/user',
+                                component: ProjectSetUser
                             }
                         ]
                     },
@@ -146,15 +150,23 @@ const routers=[
                     {
                         path: '/index/system',
                         exact:true,
-                        render:()=>  <Redirect to={"/index/system/user/base"}/>,
+                        render:()=>  <Redirect to={"/index/system/base"}/>,
                     },
                     {
-                        path: '/index/system/user/base',
+                        path: '/index/system/base',
                         component: UserBase,
                     },
                     {
-                        path: '/index/system/user/list',
+                        path: '/index/system/directory',
+                        component: UserDirectory,
+                    },
+                    {
+                        path: '/index/system/list',
                         component: UserList,
+                    },
+                    {
+                        path: '/index/system/organ',
+                        component: Organ,
                     },
                     {
                         path: '/index/system/plugin/all',
@@ -166,11 +178,11 @@ const routers=[
                     },
                     {
                         path: '/index/system/power/role',
-                        component: Role,
+                        component: SystemRole,
                     },
                     {
-                        path: '/index/system/power/domain',
-                        component: Domain,
+                        path: '/index/system/power/feature',
+                        component: SystemFeature,
                     },
                     {
                         path: '/index/system/proof',

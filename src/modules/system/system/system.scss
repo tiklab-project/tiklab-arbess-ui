@@ -1,12 +1,12 @@
 .system{
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    &-left{
-        width: 200px;
+    &-aside{
+        position: fixed;
+        z-index: 99;
+        height: 100%;
     }
     &-content{
-        flex-grow: 1;
+        margin-left: 182px;
+        height: 100%;
         padding: 15px;
     }
     .left{

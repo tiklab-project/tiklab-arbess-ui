@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from "react";
 import ReactEcharts from 'echarts-for-react';
-import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
 
 const StatusChart = props =>{
 
-    const {homePageStore} = props
-    const {runState} = homePageStore
+    const {runState,userId} = props
     const [xData,setXData] = useState([])
     const [successData,setSuccessData] = useState([])
     const [failData,setFailData] = useState([])
@@ -17,8 +14,7 @@ const StatusChart = props =>{
         const success = []
         const fail = []
         const stop = []
-        runState(getUser().userId).then(res=>{
-            console.log(res.data)
+        runState(userId).then(res=>{
             for (let i = 0;i<res.data.length;i++){
                 x.push(res.data[i].time)
                 success.push(res.data[i].successNumber)
@@ -80,4 +76,4 @@ const StatusChart = props =>{
     )
 }
 
-export default inject('homePageStore')(observer(StatusChart))
+export default StatusChart

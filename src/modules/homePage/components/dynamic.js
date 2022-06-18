@@ -1,7 +1,13 @@
-import React from "react";
+import React, {Fragment, useEffect} from "react";
 import {Button, List} from "antd";
 
 const Dynamic = props =>{
+
+    const {userId,findAllAction,dynamicList} = props
+
+    useEffect(()=>{
+        findAllAction(userId)
+    },[])
 
     const data = [
         {
@@ -14,6 +20,16 @@ const Dynamic = props =>{
         }
     ]
 
+    const goUser = item => {
+        props.history.push('/index/system/base')
+    }
+    
+    const goPipeline = item =>{
+        localStorage.setItem('pipelineName',item.pipelineName)
+        localStorage.setItem('pipelineId',item.pipelineId)
+        props.history.push('/index/task/work')
+    }
+
     return(
         <div className='homePage-content-dynamic'>
             <div className='dynamic-top'>
@@ -23,12 +39,33 @@ const Dynamic = props =>{
                 <List
                     size="large"
                     bordered
-                    dataSource={data}
-                    renderItem={(item,index) => <List.Item >
+                    dataSource={dynamicList}
+                    renderItem={(item,index) => <List.Item>
                         <div  className='dynamic-bottom-listHeader'>
-                            <div>{index+1}、{item.proofCreateTime}</div>
+                            <div>{index+1}、
+                                用户
+                                <span className='name' onClick={()=>goUser(item.user)}>
+                                   {item.user.name}
+                                </span>
+                                {item.massage}
+                                <span className='name' onClick={()=>goPipeline(item.pipeline)}>
+                                    {item.pipeline.pipelineName}
+                                </span>
+                                {item.news}
+                            </div>
+                            <div>{item.createTime}</div>
                         </div>
                     </List.Item>}
+                    locale={{emptyText:
+                            <Fragment>
+                                <svg className="icon" aria-hidden="true" >
+                                    <use xlinkHref="#icon-meiyouxiangguan"/>
+                                </svg>
+                                <div>
+                                    没有数据
+                                </div>
+                            </Fragment>
+                    }}
                 />
             </div>
         </div>

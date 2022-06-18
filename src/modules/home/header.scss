@@ -26,6 +26,10 @@
             align-items: center;
             height: 100%;
             padding-left: 20px;
+            &-search-wrap{
+                position: relative;
+                width: 100%;
+            }
             &-text{
                 display: flex;
                 flex-direction: row;

@@ -35,7 +35,9 @@ export class PipelineStore{
     @action
     createPipeline=values=>{
         const params = {
-            userId:values.userId,
+            user: {
+                userId:values.user.userId,
+            },
             pipelineName: values.pipelineName,
             pipelineType: values.pipelineType,
             pipelineCreateTime:values.pipelineCreateTime
@@ -87,6 +89,9 @@ export class PipelineStore{
         const params={
             pipelineId:values.pipelineId,
             pipelineName:values.pipelineName,
+            user:{
+                id: values.user.id
+            }
         }
         return new Promise((resolve, reject) => {
             UpdatePipeline(params).then(res=>{

@@ -9,24 +9,54 @@ const System = props =>{
     const {route}=props
     const router = [
         {
-            key:1,
+            key:'/index/system/base',
             label:'用户管理',
             icon:'#icon-gongzuotongji',
-            enCode:'1',
+            enCode:'11',
+        },
+        {
+            key:'/index/system/list',
+            label:'用户列表',
+            icon:'#icon-gongzuotongji',
+            enCode:'12',
+        },
+        {
+            key:'/index/system/directory',
+            label:'用户目录',
+            icon:'#icon-gongzuotongji',
+            enCode:'12',
+        },
+        {
+            key:'/index/system/organ',
+            label:'组织管理',
+            icon:'#icon-gongzuotongji',
+            enCode:'12',
+        },
+        {
+            key:1,
+            label:'权限管理',
+            icon:'#icon-gongzuotongji',
+            enCode:'3',
             children:[
                 {
-                    key:'/index/system/user/base',
-                    label:'基本信息',
+                    key:'/index/system/power/role',
+                    label:'角色管理',
                     icon:'#icon-gongzuotongji',
-                    enCode:'11',
+                    enCode:'31',
                 },
                 {
-                    key:'/index/system/user/list',
-                    label:'用户列表',
+                    key:'/index/system/power/feature',
+                    label:'功能管理',
                     icon:'#icon-gongzuotongji',
-                    enCode:'12',
+                    enCode:'32',
                 }
             ]
+        },
+        {
+            key:'/index/system/proof',
+            label:'凭证设置',
+            icon:'#icon-gongzuotongji',
+            enCode:'4',
         },
         {
             key:2,
@@ -47,32 +77,6 @@ const System = props =>{
                     enCode:'22',
                 }
             ]
-        },
-        {
-            key:3,
-            label:'权限管理',
-            icon:'#icon-gongzuotongji',
-            enCode:'3',
-            children:[
-                {
-                    key:'/index/system/power/role',
-                    label:'角色管理',
-                    icon:'#icon-gongzuotongji',
-                    enCode:'31',
-                },
-                {
-                    key:'/index/system/power/domain',
-                    label:'功能管理',
-                    icon:'#icon-gongzuotongji',
-                    enCode:'32',
-                }
-            ]
-        },
-        {
-            key:'/index/system/proof',
-            label:'凭证设置',
-            icon:'#icon-gongzuotongji',
-            enCode:'4',
         },
         {
             key:'/index/system/info',

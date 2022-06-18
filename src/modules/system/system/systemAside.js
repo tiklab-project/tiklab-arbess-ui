@@ -53,8 +53,8 @@ const SystemAside = props =>{
         <Menu
             style={{height:'100%'}}
             mode={'inline'}
-            defaultOpenKeys={['1','3']}
-            defaultSelectedKeys={['/index/system/user/base']}
+            defaultOpenKeys={['1','2']}
+            defaultSelectedKeys={['/index/system/base']}
             selectedKeys={[path]}
         >
             { getSystemRouter(router) }

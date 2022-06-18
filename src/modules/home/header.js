@@ -1,10 +1,11 @@
 import React, {useState,useEffect} from 'react';
-import {Row,Col,Avatar,Button,Dropdown,Menu} from 'antd';
+import {Row,Col,Avatar,Button,Dropdown,Menu,Input} from 'antd';
 import {useTranslation} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import logo from '../../assets/images/logo.png';
 import portrait from '../../assets/images/portrait.jpg';
 
+const  {Search} = Input
 const Head =props=>{
 
     const {routers,languageSelectData=[]} = props;
@@ -72,6 +73,7 @@ const Head =props=>{
             <Menu.Item key='1' onClick={logout}>退出</Menu.Item>
         </Menu>
     )
+
     return(
         <Row className="frame-header">
             <Col span={12}>
@@ -84,6 +86,9 @@ const Head =props=>{
             </Col>
             <Col span={12}>
                 <div className='frame-header-right'>
+                    <div className='frame-header-right-search-wrap'>
+                        {/*<Search />*/}
+                    </div>
                     <div className='frame-header-right-text'>
                         <Dropdown overlay={menu} className='frame-header-dropdown'>
                             <Button>{lan}</Button>

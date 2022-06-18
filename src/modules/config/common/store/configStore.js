@@ -11,18 +11,16 @@ export class ConfigStore{
     @action
     updateConfigure = values =>{
         const params ={
-            userId:values.userId,
             configureCreateTime:values.configureCreateTime,
-            pipelineId:values.pipelineId,
+            user:{ id:values.user.id },
+            pipeline:{ pipelineId:values.pipeline.pipelineId },
             pipelineCode:{
                 codeId:values.pipelineCode.codeId,
                 sort:values.pipelineCode.sort,
                 type:values.pipelineCode.type,
                 codeBranch:values.pipelineCode.codeBranch,
                 codeName:values.pipelineCode.codeName,
-                proof:{
-                    proofId:values.pipelineCode.proof.proofId
-                }
+                proof:{ proofId:values.pipelineCode.proof.proofId }
             },
             pipelineTest:{
                 testId:values.pipelineTest.testId,
@@ -51,9 +49,7 @@ export class ConfigStore{
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
                 dockerPort:values.pipelineDeploy.dockerPort,
                 mappingPort:values.pipelineDeploy.mappingPort,
-                proof:{
-                    proofId:values.pipelineDeploy.proof.proofId
-                }
+                proof:{ proofId:values.pipelineDeploy.proof.proofId }
             },
         }
         return new Promise((resolve, reject) => {
@@ -98,7 +94,6 @@ export class ConfigStore{
             })
         })
     }
-
 
 }
 

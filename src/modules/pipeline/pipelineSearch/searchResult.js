@@ -16,7 +16,7 @@ const SearchResult = props => {
     const  goPipelineTask= record =>{
         localStorage.setItem('pipelineName',record.pipelineName)
         localStorage.setItem('pipelineId',record.pipelineId)
-        props.history.push('/home/task/work')
+        props.history.push('/index/task/work')
     }
 
     return(

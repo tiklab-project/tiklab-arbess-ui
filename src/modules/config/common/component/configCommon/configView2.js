@@ -98,18 +98,16 @@ const ConfigView2 = props =>{
         })
 
         const configureList = {
-            userId:userId,
             configureCreateTime:moment.moment,
-            pipelineId:pipelineId,
+            user:{id:userId,},
+            pipeline:{pipelineId:pipelineId},
             pipelineCode:{
                 codeId:localStorage.getItem('codeId'),
                 sort:1,
                 type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
-                proof:{
-                    proofId:localStorage.getItem('gitProofId')
-                }
+                proof:{proofId:localStorage.getItem('gitProofId')}
             },
             pipelineTest:{
                 testId:localStorage.getItem('testId'),
@@ -138,9 +136,7 @@ const ConfigView2 = props =>{
                 deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
-                proof:{
-                    proofId:localStorage.getItem('deployProofId'),
-                }
+                proof:{ proofId:localStorage.getItem('deployProofId') }
             }
         }
         updateConfigure(configureList).then(res=>{

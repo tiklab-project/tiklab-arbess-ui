@@ -1,14 +1,11 @@
 import React, {useEffect} from "react";
-import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
 
 const PipelineNear = props =>{
 
-    const {homePageStore} = props
-    const {findAllOpen,pipelineNearList} = homePageStore
+    const {findAllOpen,pipelineNearList,userId} = props
 
     useEffect(()=>{
-        findAllOpen(getUser().userId)
+        findAllOpen(userId)
     },[])
 
     const click = item => {
@@ -38,4 +35,4 @@ const PipelineNear = props =>{
     )
 }
 
-export default inject('homePageStore')(observer(PipelineNear))
+export default PipelineNear

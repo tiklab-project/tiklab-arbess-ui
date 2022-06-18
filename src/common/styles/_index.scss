@@ -1,6 +1,10 @@
 @import "_color";
 @import "_normalize";
 
+ul li{
+    list-style: none;
+}
+
 .ant-drawer{
     &-content{
         position: relative;
