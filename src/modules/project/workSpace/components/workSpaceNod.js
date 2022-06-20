@@ -20,6 +20,7 @@ const WorkSpaceNod = props =>{
         }
     }
 
+    // 改变目录
     const level = []
     const changeCatalogue = group => {
         setFileList(group.fileTree)
@@ -48,7 +49,8 @@ const WorkSpaceNod = props =>{
         setCatalogue([])
         setInitial(!initial)
     }
-    
+
+    // 渲染目录
     const renderCatalogue = catalogue => {
         return catalogue && catalogue.map((group,index)=>{
             return   <Breadcrumb.Item
@@ -58,7 +60,6 @@ const WorkSpaceNod = props =>{
                      >
                         {group.treeName}
                      </Breadcrumb.Item>
-
         })
     }
 
@@ -96,11 +97,10 @@ const WorkSpaceNod = props =>{
             <h1>节点master上的工作空间</h1>
             <div className='workSpace-top-catalogue'>
                 <Breadcrumb>
-                    <Breadcrumb.Item
-                        className = 'catalogue_item_breadcrumb'
-                        onClick={()=>setBreadcrumb()}
+                    <Breadcrumb.Item className = 'catalogue_item_breadcrumb'
+                                     onClick={()=>setBreadcrumb()}
                     >
-                        {renderType(2)}{pipelineName}
+                        <span>{renderType(2)}{pipelineName}</span>
                     </Breadcrumb.Item>
                     {renderCatalogue(catalogue)}
                 </Breadcrumb>

@@ -4,10 +4,9 @@ import './projectAside.scss';
 import {Dropdown} from 'antd';
 import ProjectAsideOpt from "./projectAsideOpt";
 
-
 const ProjectAside = props =>{
 
-    const {pipelineList,visible,setVisible,isPrompt,setPipeline,setFormInitialValues} = props
+    const {pipelineList,visible,setVisible,isPrompt,setPipeline} = props
 
     const [nav,setNav] = useState('')
     let path = props.location.pathname
@@ -66,7 +65,6 @@ const ProjectAside = props =>{
                             setVisible={setVisible}
                             isPrompt={isPrompt}
                             setPipeline={setPipeline}
-                            setFormInitialValues={setFormInitialValues}
                         />}
                         visible={visible}
                     >

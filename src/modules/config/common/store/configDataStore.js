@@ -12,6 +12,7 @@ export class ConfigDataStore {
     @observable unitShellBlock = ''
     @observable mavenShellBlock = ''
 
+
     @action
     setIsPrompt = value => {
         this.isPrompt = value;
@@ -19,7 +20,7 @@ export class ConfigDataStore {
 
     @action
     setFormInitialValues = value =>{
-        this.formInitialValues = value
+        this.formInitialValues = Object(value)
     }
 
     @action

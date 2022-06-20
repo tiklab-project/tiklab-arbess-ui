@@ -9,7 +9,6 @@ const ConfigCodeSvn = props =>{
 
     const {configDataStore}=props
     const {codeType} = configDataStore
-    const gitProofId = localStorage.getItem('gitProofId')
 
     return(
         <Fragment>
@@ -26,9 +25,7 @@ const ConfigCodeSvn = props =>{
                 <FindAllProof type={5}/>
                 <AddProofButton codeType={codeType}/>
             </Row>
-
-            <FormTest proofId={gitProofId} type={'code'}/>
-
+            <FormTest type={'code'}/>
         </Fragment>
     )
 }

@@ -6,10 +6,10 @@ const SystemBreadcrumb = props =>{
     return(
         <div className='breadcrumb'>
             <Breadcrumb separator=">">
-                <Breadcrumb.Item style={{ cursor: "pointer" }} >
+                <Breadcrumb.Item >
                     {firstItem}
                 </Breadcrumb.Item>
-                <Breadcrumb.Item style={{ cursor: "pointer" }}>
+                <Breadcrumb.Item >
                     {secondItem}
                 </Breadcrumb.Item>
             </Breadcrumb>

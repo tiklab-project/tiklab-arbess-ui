@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Table, Tooltip} from "antd";
 import {
     CheckCircleOutlined,
@@ -19,11 +19,13 @@ const PipelineTable = props =>{
     const {pipelineStartStructure,killInstance}=structureStore
     const {updateFollow} = pipelineCollectStore
 
+    const userId = getUser().userId
+
     //收藏
     const collectAction = record => {
         const params = {
             pipeline:record.pipelineId,
-            userId:getUser().userId
+            userId:userId
         }
         updateFollow(params).then(res=>{
             console.log('取消收藏',res)
@@ -41,12 +43,19 @@ const PipelineTable = props =>{
     }
 
     const work = record =>{
+        const params = {
+            userId:userId,
+            pipelineId:record.pipelineId
+        }
         if(record.pipelineState === 0){
-            pipelineStartStructure(record.pipelineId).then(()=>{
-                setFresh(!fresh)
+            pipelineStartStructure(params).then(res=>{
+                if(res.data === 1){
+                    // setFresh(!fresh)
+                    setTimeout(()=>setFresh(!fresh),1000)
+                }
             })
         }else {
-            killInstance(record.pipelineId).then(()=>{
+            killInstance(params).then(()=>{
                 setFresh(!fresh)
             })
         }
@@ -105,11 +114,8 @@ const PipelineTable = props =>{
             key: 'pipelineName',
             render:(text,record)=>{
                 return(
-                    <span
-                        onClick={()=>
-                            goPipelineTask(text,record)
-                        }
-                        className='all-columns all-icon'
+                    <span onClick={()=>goPipelineTask(text,record)}
+                          className='all-columns all-icon'
                     >
                         {text}
                     </span>
@@ -139,7 +145,7 @@ const PipelineTable = props =>{
                                     <use xlinkHref="#icon-yunhang"  />
                                 </svg>
                                 :
-                                <PipelineRun />
+                                <PipelineRun/>
                         }
                     </span>
                 )
@@ -152,15 +158,14 @@ const PipelineTable = props =>{
                 rowKey={record => record.pipelineId}
                 columns={columns}
                 dataSource={list}
+                pagination={{ pageSize: 12}}
                 locale={{emptyText:
-                    <div>
+                    <Fragment>
                         <svg className="icon" aria-hidden="true" >
                             <use xlinkHref="#icon-meiyouxiangguan"/>
                         </svg>
-                        <div>
-                            没有数据
-                        </div>
-                    </div>
+                        <div>没有数据</div>
+                    </Fragment>
                 }}
             />
 }

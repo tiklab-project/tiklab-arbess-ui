@@ -1,8 +1,13 @@
-import React from "react";
+import React,{Fragment} from "react";
 import {renderRoutes} from "react-router-config";
 import './system.scss';
 import SystemAside from "./systemAside";
 import {withRouter} from "react-router-dom";
+import OrgaAside from "../../view/orgaAside";
+import { Layout  } from 'antd';
+import '../../view/orga.scss'
+
+const { Sider,Content } = Layout;
 
 const System = props =>{
 
@@ -39,16 +44,16 @@ const System = props =>{
             enCode:'3',
             children:[
                 {
-                    key:'/index/system/power/role',
-                    label:'角色管理',
-                    icon:'#icon-gongzuotongji',
-                    enCode:'31',
-                },
-                {
                     key:'/index/system/power/feature',
                     label:'功能管理',
                     icon:'#icon-gongzuotongji',
                     enCode:'32',
+                },
+                {
+                    key:'/index/system/power/role',
+                    label:'角色管理',
+                    icon:'#icon-gongzuotongji',
+                    enCode:'31',
                 }
             ]
         },
@@ -101,6 +106,17 @@ const System = props =>{
                 {renderRoutes(route.routes)}
             </div>
         </div>
+        // <Fragment>
+        //     <Layout className="orga">
+        //         <Sider width={200} className="site-layout-background">
+        //             <OrgaAside></OrgaAside>
+        //         </Sider>
+        //
+        //         <Content className="orga-background">
+        //             {renderRoutes(route.routes)}
+        //         </Content>
+        //     </Layout>
+        // </Fragment>
     )
 }
 

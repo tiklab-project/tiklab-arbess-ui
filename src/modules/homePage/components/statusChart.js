@@ -15,18 +15,25 @@ const StatusChart = props =>{
         const fail = []
         const stop = []
         runState(userId).then(res=>{
-            for (let i = 0;i<res.data.length;i++){
-                x.push(res.data[i].time)
-                success.push(res.data[i].successNumber)
-                fail.push(res.data[i].errorNumber)
-                stop.push(res.data[i].removeNumber)
-            }
-            setXData([...x])
-            setSuccessData([...success])
-            setFailData([...fail])
-            setStopData([...stop])
+           if( res.data && res.code === 0 ){
+               for (let i = 0;i<res.data.length;i++){
+                   x.push(res.data[i].time)
+                   success.push(res.data[i].successNumber)
+                   fail.push(res.data[i].errorNumber)
+                   stop.push(res.data[i].removeNumber)
+               }
+               setXData([...x])
+               setSuccessData([...success])
+               setFailData([...fail])
+               setStopData([...stop])
+           }
         })
-        return
+        return ()=>{
+            setXData([])
+            setSuccessData([])
+            setFailData([])
+            setStopData([])
+        }
     },[])
 
 
@@ -56,18 +63,18 @@ const StatusChart = props =>{
                 name: '成功',
                 type: 'bar',
                 seriesLayoutBy: "column",
-                data: successData
+                data: successData,
             },
             {
                 name: '失败',
                 type: 'bar',
-                data: failData
+                data: failData,
             },
             {
                 name: '停止',
                 type: 'bar',
-                data: stopData
-            }]
+                data: stopData,
+            }],
     }
 
     return(

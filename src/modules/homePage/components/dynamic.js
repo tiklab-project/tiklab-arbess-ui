@@ -7,7 +7,6 @@ const Dynamic = props =>{
 
     useEffect(()=>{
         findAllAction(userId)
-        return
     },[])
 
     const goUser = item => {
@@ -35,7 +34,7 @@ const Dynamic = props =>{
                             <div>{index+1}、
                                 用户
                                 <span className='name' onClick={()=>goUser(item.user)}>
-                                   {item.user.name}
+                                   {item.user && item.user.name}
                                 </span>
                                 {item.massage}
                                 <span className='name' onClick={()=>goPipeline(item.pipeline)}>
@@ -47,14 +46,12 @@ const Dynamic = props =>{
                         </div>
                     </List.Item>}
                     locale={{emptyText:
-                            <Fragment>
-                                <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-meiyouxiangguan"/>
-                                </svg>
-                                <div>
-                                    没有数据
-                                </div>
-                            </Fragment>
+                        <Fragment>
+                            <svg className="icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-meiyouxiangguan"/>
+                            </svg>
+                            <div>没有数据</div>
+                        </Fragment>
                     }}
                 />
             </div>

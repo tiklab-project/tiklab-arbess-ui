@@ -25,7 +25,7 @@ const Structure = props => {
     const [modeData,setModeData] = useState('')     // 历史列表的内容
     const [index,setIndex] = useState(0)  // 构建区分显示 -- 构建1 、2、……
     const [freshen,setFreshen] = useState(false)  // 删除刷新组件
-    const [isData,setIsData] = useState(false)  // 是否有构建过的数据
+    const [isData,setIsData] = useState(true)  // 是否有构建过的数据
     const pipelineId = localStorage.getItem('pipelineId')
 
     let interval=null
@@ -36,7 +36,6 @@ const Structure = props => {
                     findStructureState(pipelineId).then(res =>{
                         if(res.data!==null){
                             setLeftExecute(res.data)
-                            setIsData(true)
                             if(res.data.runStatus===1 || res.data.runStatus===30){ stop() }
                         }else{ stop() }
                     })
@@ -65,7 +64,6 @@ const Structure = props => {
                     console.log('历史详情',response)
                     setLeftData([...res.data])
                     setRightData([...response.data])
-                    setIsData(true)
                 })
             }else{
                 setLeftData([])
@@ -88,7 +86,6 @@ const Structure = props => {
             case 0 :
                 //运行
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
-
             case 1 :
                 //成功
                 return  <svg className="icon" aria-hidden="true">
@@ -164,7 +161,9 @@ const Structure = props => {
                                         <div className='empty null'>
                                             <img src={empty} alt='logo' />
                                             <div className="empty-group">
-                                                <div className="empty-group_title">没有查询到数据</div>
+                                                <div className="empty-group_title">
+                                                    没有查询到数据
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

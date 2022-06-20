@@ -11,8 +11,8 @@ import {inject,observer} from "mobx-react";
 const HomePage = props =>{
 
     const {homePageStore} = props
-    const userId = getUser().userId
     const {findAllOpen,pipelineNearList,runState,findAllAction,dynamicList} = homePageStore
+    const userId = getUser().userId
 
     return(
         <div className='homePage'>
@@ -20,6 +20,7 @@ const HomePage = props =>{
             <div className='homePage-content'>
                 <div className='homePage-content-left'>
                     <PipelineNear
+                        {...props}
                         userId={userId}
                         findAllOpen={findAllOpen}
                         pipelineNearList={pipelineNearList}

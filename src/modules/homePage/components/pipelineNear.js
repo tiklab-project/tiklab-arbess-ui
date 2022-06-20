@@ -1,4 +1,4 @@
-import React, {useEffect,Fragment} from "react";
+import React, {useEffect} from "react";
 
 const PipelineNear = props =>{
 
@@ -6,7 +6,6 @@ const PipelineNear = props =>{
 
     useEffect(()=>{
         findAllOpen(userId)
-        return
     },[])
 
     const click = item => {
@@ -21,14 +20,12 @@ const PipelineNear = props =>{
             <div className='pipelineNear-active'>
                 {
                     pipelineNearList && pipelineNearList.length === 0 ?
-                        <Fragment>
+                        <div className='pipelineNear-active-null'>
                             <svg className="icon" aria-hidden="true" >
                                 <use xlinkHref="#icon-meiyouxiangguan"/>
                             </svg>
-                            <div>
-                                没有数据
-                            </div>
-                        </Fragment>
+                            <div>没有数据</div>
+                        </div>
                         :
                         pipelineNearList && pipelineNearList.map((item,index)=>{
                             return(

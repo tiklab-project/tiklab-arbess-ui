@@ -1,5 +1,4 @@
 import {action} from "mobx";
-import qs from "qs";
 
 import {
     DeleteHistoryLog,
@@ -43,9 +42,10 @@ export class StructureStore {
     //  停止构建
     @action
     killInstance = async values =>{
-        const param = new FormData()
-        param.append("pipelineId", values)
-        return await KillInstance(param)
+        const params = new FormData()
+        params.append("pipelineId", values.pipelineId)
+        params.append("userId", values.userId)
+        return await KillInstance(params)
     }
 
 

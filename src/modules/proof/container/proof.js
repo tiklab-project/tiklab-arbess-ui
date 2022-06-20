@@ -41,14 +41,14 @@ const Proof = props =>{
             }
         },
         {
-            title:'类型',
-            dataIndex:'proofType',
-            key:'proofType'
-        },
-        {
             title:'名称',
             dataIndex:'proofName',
             key:'proofName'
+        },
+        {
+            title:'类型',
+            dataIndex:'proofType',
+            key:'proofType'
         },
         {
             title:'拥有者',
@@ -95,6 +95,10 @@ const Proof = props =>{
     ]
 
     const style = 'primary'
+    
+    const onChange = item => {
+        console.log(item)
+    }
 
     return(
         <div className='proof'>
@@ -108,6 +112,7 @@ const Proof = props =>{
                     columns={columns}
                     dataSource={proofList}
                     pagination={{ pageSize: 12}}
+                    // onChange = {onChange}
                 />
             </div>
             <UpdateProof

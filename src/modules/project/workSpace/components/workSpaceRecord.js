@@ -12,7 +12,6 @@ const WorkSpaceRecord = props =>{
 
     return(
         <div className='workSpace-bottom'>
-
             <h1>近期提交记录</h1>
             {
                 recordList && recordList.map((group,groupIndex)=>{

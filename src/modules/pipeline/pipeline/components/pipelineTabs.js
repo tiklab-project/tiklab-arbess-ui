@@ -16,7 +16,7 @@ const PipelineTabs = props =>{
     const [visible,setVisible] = useState(false)
 
     useEffect(()=>{
-            findAllPipelineStatus(getUser().userId)
+        findAllPipelineStatus(getUser().userId)
     },[fresh])
 
     const lis = [

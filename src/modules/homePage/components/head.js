@@ -15,12 +15,12 @@ const Head = props =>{
         {
             id:3,
             title: '用户中心',
-            to:'/index/system/user/base',
+            to:'/index/system/base',
         },
         {
             id:4,
             title: '权限管理',
-            to:'/index/system/power/role',
+            to:'/index/system/power/feature',
         },
         {
             id:5,

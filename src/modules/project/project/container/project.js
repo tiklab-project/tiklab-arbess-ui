@@ -11,7 +11,7 @@ const Project= (props)=>{
 
     const {route,pipelineStore,configDataStore}=props
     const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = pipelineStore
-    const {isPrompt,setIsPrompt,setFormInitialValues} = configDataStore
+    const {isPrompt,setIsPrompt} = configDataStore
     const [visible,setVisible] = useState(false)
     const pipelineName = localStorage.getItem('pipelineName')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -41,7 +41,6 @@ const Project= (props)=>{
     const confirmLeave = pathname =>{
         if(pathname!=='/home/task/config'){
             pathname && setTimeout(()=>{
-                setFormInitialValues({})
                 props.history.push(pathname)
             })
         }
@@ -64,7 +63,6 @@ const Project= (props)=>{
                 isPrompt={isPrompt}
                 setPipeline={setPipeline}
                 setIsPrompt={setIsPrompt}
-                setFormInitialValues={setFormInitialValues}
             />
             <div className='pipelineDetails-content' onClick={()=>setVisible(false)}>
                 {renderRoutes(route.routes)}

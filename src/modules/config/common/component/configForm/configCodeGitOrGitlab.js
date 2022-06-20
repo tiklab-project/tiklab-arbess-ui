@@ -10,8 +10,6 @@ const ConfigCodeGitOrGitlab = props =>{
     const {configDataStore}=props
     const {codeType} = configDataStore
 
-    const gitProofId =localStorage.getItem('gitProofId')
-    
     return(
         <Fragment>
             <Form.Item
@@ -40,7 +38,7 @@ const ConfigCodeGitOrGitlab = props =>{
                 <FindAllProof type={1}/>
                 <AddProofButton codeType={codeType}/>
             </Row>
-            <FormTest proofId={gitProofId} type={'code'}/>
+            <FormTest  type={'code'}/>
         </Fragment>
     )
 }

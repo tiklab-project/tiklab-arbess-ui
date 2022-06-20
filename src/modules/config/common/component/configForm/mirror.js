@@ -31,7 +31,6 @@ import 'codemirror/addon/fold/comment-fold.js';
 
 import './mirror.scss'
 
-
 const Mirror = props =>{
 
     const {shellBlock,setShellBlock,setIsPrompt} = props

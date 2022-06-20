@@ -5,7 +5,6 @@ import {
     FindAllAction
 } from "../api/homePage";
 
-
 export class HomePageStore{
 
     @observable pipelineNearList = []
@@ -16,7 +15,9 @@ export class HomePageStore{
         const param = new FormData()
         param.append('userId',value)
         FindAllOpen(param).then(res=>{
-            this.pipelineNearList = res.data
+            if(res.code === 0 && res.data ){
+                this.pipelineNearList = res.data
+            }
         }).catch(error=>{
             console.log(error)
         })
@@ -34,13 +35,12 @@ export class HomePageStore{
         param.append('userId',value)
         FindAllAction(param).then(res=>{
             console.log('动态',res)
-            if(res.code === 0 ){
+            if(res.code === 0 && res.data ){
                 this.dynamicList = res.data
             }
         }).catch(error=>{
             console.log(error)
         })
-        return await FindAllAction(param)
     }
 
 }

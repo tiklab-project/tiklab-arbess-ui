@@ -4,17 +4,19 @@ import {inject,observer} from "mobx-react";
 
 const FormTest = props =>{
 
-    const {configDataStore,configStore,proofId,type} = props
+    const {configDataStore,configStore,type} = props
     const {formInitialValues} = configDataStore
     const {codeTestPass} = configStore
 
     const test = () =>{
         if(formInitialValues){
-            let port,url
+            let port,url,proofId
             if(type){
+                proofId = localStorage.getItem('gitProofId')
                 port = 0
                 url = formInitialValues && formInitialValues.codeName
             }else {
+                proofId = localStorage.getItem('deployProofId')
                 port = formInitialValues && formInitialValues.port
                 url = formInitialValues && formInitialValues.ip
             }

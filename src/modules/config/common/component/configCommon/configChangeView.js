@@ -13,12 +13,16 @@ const ConfigChangeView = props =>{
             userId:userId,
             pipelineId:pipelineId
         }
-        pipelineStartStructure(params).then(res=>{
-            console.log(res)
-            props.history.push('/index/task/structure')
-        }).catch(error=>{
-            console.log(error)
-        })
+        setTimeout(()=>{
+            pipelineStartStructure(params).then(res=>{
+                console.log(res)
+                if(res.code === 0){
+                    props.history.push('/index/task/structure')
+                }
+            }).catch(error=>{
+                console.log(error)
+            })
+        },1000)
     }
 
     const viewList = [
@@ -36,10 +40,8 @@ const ConfigChangeView = props =>{
         <div className='config_changeView'>
             <div className='changeView'>
                 <div className='changeView-btn'>
-                    <Button form='form' htmlType='submit'>
-                        保存
-                    </Button>
-                    <Button type='primary' form='form' htmlType='submit' onClick = {()=>run()}>
+                    <Button form='form' htmlType='submit'> 保存 </Button>
+                    <Button form='form' type='primary' htmlType='submit' onClick = {()=>run()}>
                         运行
                     </Button>
                 </div>
@@ -54,7 +56,6 @@ const ConfigChangeView = props =>{
                                     </div>
                         })
                     }
-
                 </div>
             </div>
         </div>

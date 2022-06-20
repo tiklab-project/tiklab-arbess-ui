@@ -6,8 +6,6 @@ import FormTest from "./formTest";
 
 const ConfigDeployDocker = props =>{
 
-    const deployProofId = localStorage.getItem('deployProofId')
-
     const proofPort = (rule,value) =>{
         if (!value) {
             return Promise.resolve();
@@ -101,8 +99,7 @@ const ConfigDeployDocker = props =>{
             >
                 <Input/>
             </Form.Item>
-
-            <FormTest proofId={deployProofId}/>
+            <FormTest />
         </Fragment>
     )
 }

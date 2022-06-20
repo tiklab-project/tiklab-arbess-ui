@@ -77,7 +77,7 @@ const ConfigDeployLinux = props =>{
                     setIsPrompt={setIsPrompt}
                 />
             </Form.Item>
-            <FormTest proofId={deployProofId}/>
+            <FormTest />
         </Fragment>
     )
 }

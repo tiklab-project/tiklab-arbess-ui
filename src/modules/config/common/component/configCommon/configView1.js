@@ -34,7 +34,7 @@ const ConfigView1 = props =>{
     },[isAlias])
 
     useEffect(()=>{
-        form.setFieldsValue(formInitialValues)
+        form.setFieldsValue({...formInitialValues})
     },[formInitialValues,pipelineId])
 
     const displayInput = index =>{
@@ -145,6 +145,7 @@ const ConfigView1 = props =>{
             }message.success({content: '配置成功', className:'message',})
             setIsPrompt(false)
         })
+
     }
 
     const onValuesChange = value =>{
