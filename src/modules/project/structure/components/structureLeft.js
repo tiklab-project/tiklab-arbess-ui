@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,Fragment} from "react";
 import StructureLeftExecute from "./structureLeftExecute";
 import {List} from "antd";
 import StructureLeftDropdown from "./structureLeftDropdown";
@@ -6,13 +6,12 @@ import StructureLeftDropdown from "./structureLeftDropdown";
 const StructureLeft = props =>{
 
     const {findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
-        pipelineId,userId
+        pipelineId
     }=props
 
     const [state,setState] = useState(0)  // 状态
     const [enforcer,setEnforcer] = useState(null)   //执行人
     const [mode,setMode] = useState(0)   //执行方式
-    const [changePage,setChangePage] = useState(1)
 
     const sta = item =>{
         if(leftPageList){
@@ -35,46 +34,17 @@ const StructureLeft = props =>{
     }
 
     const onChangePage = pagination => {
-        // let setUserId
-        // if(state === 0 && enforcer === null && mode ===0){
-        //     setUserId = userId
-        // }else { setUserId = null }
-        // const params = {
-        //     pipelineId:pipelineId,
-        //     pageParam: {
-        //         pageSize: 10,
-        //         currentPage:pagination
-        //     },
-        //     userId:setUserId,
-        //     state:state,
-        //     name:enforcer,
-        //     type:mode
-        // }
-        let params
-        if(state === 0 && (enforcer == null || enforcer === '全部') && mode === 0){
-            params = {
-                userId:userId,
-                pipelineId:pipelineId,
-                pageParam: {
-                    pageSize: 10,
-                    currentPage:pagination
-                },
-            }
-        }else {
-            params = {
-                userId:null,
-                pipelineId:pipelineId,
-                pageParam: {
-                    pageSize: 10,
-                    currentPage:pagination
-                },
-                state:state,
-                name:enforcer,
-                type:mode
-            }
+        const params = {
+            pipelineId:pipelineId,
+            pageParam: {
+                pageSize: 10,
+                currentPage:pagination
+            },
+            state:state,
+            name:enforcer,
+            type:mode
         }
         findPageHistory(params)
-        setChangePage(pagination)
     }
 
     return(
@@ -87,7 +57,6 @@ const StructureLeft = props =>{
                 setEnforcer={setEnforcer}
                 mode={mode}
                 setMode={setMode}
-                changePage={changePage}
             />
             <div className='structure-content-left-history'>
                 <div className='history-content'>
@@ -102,11 +71,20 @@ const StructureLeft = props =>{
                     <List
                         itemLayout="vertical"
                         size="large"
+                        locale={{emptyText:
+                                <Fragment>
+                                    <svg className="icon" aria-hidden="true" >
+                                        <use xlinkHref="#icon-meiyouxiangguan"/>
+                                    </svg>
+                                    <div>没有数据</div>
+                                </Fragment>
+                        }}
                         pagination={{
                             onChange: (page) => {
                                 onChangePage(page);
                             },
-                            ...page
+                            ...page,
+                            hideOnSinglePage:true
                         }}
                         dataSource={leftPageList}
                         renderItem={(item,i) => (

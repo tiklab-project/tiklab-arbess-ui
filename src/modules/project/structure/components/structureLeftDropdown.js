@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode,changePage} = props
+    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode} = props
     const pipelineId = localStorage.getItem('pipelineId')
 
     let params = null
@@ -16,14 +16,13 @@ const StructureLeftDropdown = props =>{
     const changeState = (value,e) =>{
         setState(parseInt(e.key))
         params = {
-            userId:null,
             pipelineId:pipelineId,
             state:e.key,
             name:enforcer,
             type:mode,
             pageParam: {
                 pageSize: 10,
-                currentPage: changePage
+                currentPage: 1
             }
         }
         change()
@@ -35,14 +34,13 @@ const StructureLeftDropdown = props =>{
         }
         setEnforcer(value)
         params = {
-            userId:null,
             pipelineId:pipelineId,
             state:state,
             name:value,
             type:mode,
             pageParam: {
                 pageSize: 10,
-                currentPage: changePage
+                currentPage: 1
             }
         }
         change()
@@ -51,14 +49,13 @@ const StructureLeftDropdown = props =>{
     const changeMode = (value,e) =>{
         setMode(parseInt(e.key))
         params = {
-            userId:null,
             pipelineId:pipelineId,
             state:state,
             name:enforcer,
             type:e.key,
             pageParam: {
                 pageSize: 10,
-                currentPage:changePage
+                currentPage:1
             }
         }
         change()

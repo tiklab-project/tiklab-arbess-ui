@@ -92,7 +92,6 @@ export class StructureStore {
         param.append("pipelineId", values)
         FindAll(param).then(res=>{
             this.rightExecuteData = res.data
-            this.isData = true
         }).catch(error=>{
             console.log(error)
         })
@@ -114,12 +113,18 @@ export class StructureStore {
         }
         FindPageHistory(params).then(res=>{
             console.log('所有历史',res)
-            if(res.code === 0 && res.data.dataList.length > 0){
-                this.leftPageList = res.data.dataList
-                this.page.total = res.data.totalRecord;
-                this.modeData =  res.data.dataList && res.data.dataList[0]
-                this.findHistoryLog( res.data.dataList && res.data.dataList[0].historyId)
-                this.isData = true
+            if(res.code === 0 ){
+                if(res.data.dataList.length === 0){
+                    this.leftPageList = []
+                    this.page = {}
+                }else {
+                    this.leftPageList = res.data.dataList
+                    this.page.total = res.data.totalRecord
+                    this.page.defaultCurrent = 1
+                    this.modeData =  res.data.dataList && res.data.dataList[0]
+                    this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
+                    this.isData = true
+                }
             }
         }).catch(error=>{
             console.log(error)
@@ -154,6 +159,7 @@ export class StructureStore {
         param.append("historyId", values)
         return await DeleteHistoryLog(param)
     }
+
 }
 
 export const STRUCTURE_STORE = 'structureStore'

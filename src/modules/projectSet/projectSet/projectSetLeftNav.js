@@ -11,12 +11,6 @@ const ProjectSetLeftNav= props =>  {
 
     useEffect(()=>{
         setSelectKey(path)
-        if(path === '/index/task/assembly/feature' ){
-            setExpandedTree([path,'1'])
-        }
-        if(path === 'index/task/assembly/role'){
-            setExpandedTree([path,'2'])
-        }
     },[path])
 
     const router = [

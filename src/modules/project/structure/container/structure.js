@@ -40,8 +40,7 @@ const Structure = props => {
                 }, 1000)
                 findAll(pipelineId)
                 findPage()
-            }
-            else if(res.data=== 0){
+            }else if(res.data=== 0){
                 findPage()
                 setExecState('')
             }
@@ -52,11 +51,13 @@ const Structure = props => {
     const findPage = () =>{
         const params = {
             pipelineId:pipelineId,
-            userId:userId,
             pageParam: {
                 pageSize: 10,
                 currentPage: 1
-            }
+            },
+            state:0,
+            name:null,
+            type:0
         }
         findPageHistory(params)
     }
@@ -120,7 +121,6 @@ const Structure = props => {
                     <div className='structure-content'>
                         <StructureLeft
                             page={page}
-                            userId={userId}
                             pipelineId={pipelineId}
                             leftPageList={leftPageList}
                             execState={execState}
