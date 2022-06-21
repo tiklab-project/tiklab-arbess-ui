@@ -5,28 +5,24 @@ import './structure.scss';
 import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
 import { inject, observer } from "mobx-react";
-import StructureLeftDropdown from "../components/structureLeftDropdown";
 import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
 import empty from '../../../../assets/images/empty.jpg';
 import {getUser} from "doublekit-core-ui";
 
+// 项目构建
 const Structure = props => {
 
     const {structureStore} = props
 
-    const {findExecState,findStructureState,findAll,selectHistoryDetails,findHistoryLog,deleteHistoryLog,
-        killInstance,findLikeHistory,pipelineStartStructure
+    const {findExecState,findStructureState,findAll,findPageHistory,findHistoryLog,deleteHistoryLog,
+        killInstance,pipelineStartStructure,leftPageList,rightFlowData,
+        modeData,setModeData,index,setIndex,page,rightExecuteData,isData
     } = structureStore
 
-    const [leftData,setLeftData] = useState([])     // 左侧 -- 旧历史列表
-    const [leftExecute,setLeftExecute] = useState('')   // 左侧 -- 正在构建
-    const [rightData,setRightData] = useState([])   // 右侧 -- 历史构建详情
-    const [rightExecute,setRightExecute] = useState([])     // 右侧 -- 正在构建详情
-    const [modeData,setModeData] = useState('')     // 历史列表的内容
-    const [index,setIndex] = useState(0)  // 构建区分显示 -- 构建1 、2、……
-    const [freshen,setFreshen] = useState(false)  // 删除刷新组件
-    const [isData,setIsData] = useState(true)  // 是否有构建过的数据
+    const [execState,setExecState] = useState('')   // 左侧 -- 正在构建
+    const [freshen,setFreshen] = useState(false)  // 根据情况刷新页面
     const pipelineId = localStorage.getItem('pipelineId')
+    const userId = getUser().userId
 
     let interval=null
     useEffect(() => {
@@ -35,49 +31,39 @@ const Structure = props => {
                 interval = setInterval(() => {
                     findStructureState(pipelineId).then(res =>{
                         if(res.data!==null){
-                            setLeftExecute(res.data)
-                            if(res.data.runStatus===1 || res.data.runStatus===30){ stop() }
+                            setExecState(res.data)
+                            if(res.data.runStatus===1 || res.data.runStatus===30){
+                                stop()
+                            }
                         }else{ stop() }
                     })
                 }, 1000)
-                findAll(pipelineId).then(res=>{
-                    console.log('正在执行的详情',res.data)
-                    setRightExecute(res.data)
-                })
-                data()
+                findAll(pipelineId)
+                findPage()
             }
             else if(res.data=== 0){
-                data()
-                setLeftExecute('')
-                setIndex(1)
+                findPage()
+                setExecState('')
             }
         })
         return ()=> clearInterval(interval)
     }, [pipelineId,freshen])
 
-    const data = () => {
-        selectHistoryDetails(pipelineId).then(res=>{
-            console.log('历史列表',res)
-            if(res.data.length!==0){
-                setModeData(res.data && res.data[0])
-                findHistoryLog(res.data && res.data[0].historyId).then(response=>{
-                    console.log('历史详情',response)
-                    setLeftData([...res.data])
-                    setRightData([...response.data])
-                })
-            }else{
-                setLeftData([])
-                setRightData([])
-                if(leftExecute===''){
-                    setIsData(false)
-                }
+    const findPage = () =>{
+        const params = {
+            pipelineId:pipelineId,
+            userId:userId,
+            pageParam: {
+                pageSize: 10,
+                currentPage: 1
             }
-        })
+        }
+        findPageHistory(params)
     }
-    
+
     const stop = () => {
+        setExecState('')
         setFreshen(!freshen)
-        setLeftExecute('')
         clearInterval(interval)
     }
 
@@ -112,7 +98,7 @@ const Structure = props => {
     
     const working = () => {
         const params = {
-            userId:getUser().userId,
+            userId:userId,
             pipelineId:pipelineId
         }
         pipelineStartStructure(params).then(()=>{
@@ -132,31 +118,23 @@ const Structure = props => {
                 // 没有正在构建和历史记录为null（非查询状态）
                 isData ?
                     <div className='structure-content'>
-                        <div className='structure-content-left'>
-                            <StructureLeftDropdown
-                                index={index}
-                                setLeftData={setLeftData}
-                                setModeData={setModeData}
-                                setIndex={setIndex}
-                                setRightData={setRightData}
-                                findLikeHistory={findLikeHistory}
-                                findHistoryLog={findHistoryLog}
-                            />
-                            <StructureLeft
-                                findHistoryLog={findHistoryLog}
-                                leftData={leftData}
-                                leftExecute={leftExecute}
-                                setRightData={setRightData}
-                                status={status}
-                                setModeData={setModeData}
-                                index={index}
-                                setIndex={setIndex}
-                            />
-                        </div>
+                        <StructureLeft
+                            page={page}
+                            userId={userId}
+                            pipelineId={pipelineId}
+                            leftPageList={leftPageList}
+                            execState={execState}
+                            status={status}
+                            setModeData={setModeData}
+                            index={index}
+                            setIndex={setIndex}
+                            findPageHistory={findPageHistory}
+                            findHistoryLog={findHistoryLog}
+                        />
                         <div className='structure-content-right'>
                             <ProjectBreadcrumb style={style}/>
                             {
-                                leftExecute === ''  &&  leftData.length === 0 ?
+                                execState === ''  && leftPageList && leftPageList.length === 0 ?
                                     <div className='structure-content-empty'>
                                         <div className='empty null'>
                                             <img src={empty} alt='logo' />
@@ -171,12 +149,10 @@ const Structure = props => {
                                     <StructureRight
                                         freshen={freshen}
                                         setFreshen={setFreshen}
-                                        leftData={leftData}
-                                        setLeftData={setLeftData}
-                                        rightData={rightData}
-                                        rightExecute={rightExecute}
+                                        rightFlowData={rightFlowData}
+                                        rightExecuteData={rightExecuteData}
                                         status={status}
-                                        leftExecute={leftExecute}
+                                        execState={execState}
                                         modeData={modeData}
                                         index={index}
                                         setIndex={setIndex}

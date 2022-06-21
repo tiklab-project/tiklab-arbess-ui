@@ -2,11 +2,11 @@ import React from "react";
 
 const StructureLeftExecute = props => {
 
-    const {leftExecute,status,setIndex,index} = props
+    const {execState,status,setIndex,index} = props
 
     const state = () =>{
-        if(leftExecute){
-            switch(leftExecute.runStatus){
+        if(execState){
+            switch(execState.runStatus){
                 case 1:
                     return  status(2) //失败
                 case 30 :
@@ -30,11 +30,11 @@ const StructureLeftExecute = props => {
                 <div className='list-group-item'>
                     <div className='list-state'>状态 : {state()}</div>
                     <div className='list-one'>
-                        执行人 : {leftExecute && leftExecute.execName}
+                        执行人 : {execState && execState.execName}
                     </div>
                 </div>
                 <div className='list-time'>
-                    执行方式 : {leftExecute && leftExecute.createTime}
+                    执行方式 : {execState && execState.createTime}
                 </div>
             </div>
         </div>

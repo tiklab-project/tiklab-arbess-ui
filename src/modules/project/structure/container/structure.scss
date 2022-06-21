@@ -37,6 +37,9 @@
                 padding: 0 15px 15px 15px;
                 overflow: auto;
                 .history-content{
+                    .ant-list-lg ,.ant-list-item{
+                        padding:0;
+                    }
                     &-list{
                         display: flex;
                         flex-direction: row;

@@ -4,7 +4,7 @@ import ConfigName from "../../../config/common/component/configCommon/configName
 
 const StructureRightItem = props =>{
 
-    const {rightData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,runWay,freshen,setFreshen} = props
+    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,runWay,freshen,setFreshen} = props
 
     const state = item =>{
         switch(item.runState){
@@ -32,7 +32,7 @@ const StructureRightItem = props =>{
     }
 
     const rightDetails = () =>{
-        return  rightData && rightData.map((item,index)=>{
+        return  rightFlowData && rightFlowData.map((item,index)=>{
             return(
                 <Card  className={`mid_group_center-cart  item-${item.runState}`}  key={index}>
                     <div className='cart-top'>
@@ -81,7 +81,7 @@ const StructureRightItem = props =>{
             <div className="mid_group_center"> {rightDetails()} </div>
             <div className='structure-content-bottom'>
                 <div className='structure-content-bottom-title'>输出</div>
-                <div className='structure-content-bottom-outLog' >
+                <div className='structure-content-bottom-outLog'>
                     { modeData && modeData.runLog }
                 </div>
             </div>

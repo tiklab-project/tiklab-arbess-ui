@@ -1,53 +1,64 @@
-.pipelineSys{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-
-    &-content{
-      flex-grow: 1;
+.orga {
+    height: 100%;
+    .orga-background {
+        background-color: #fff;
+        margin-left: 10px;
+        padding: 10px
     }
-    /*  成员设置  */
-    .left{
+    .orga-col {
+        background-color: #fff;
+        padding: 20px;
+    }
+    .orga-aside {
         height: 100%;
-        width: 200px;
-        min-width: 200px;
-        background: #f8f8f8;
-        z-index: 20;
-        vertical-align: top;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        border-right: 1px solid #ccc;
-        &-content{
-            padding-top: 15px;
-            .icon{
-              width: 25px;
-              height: 25px;
-            }
-            &-nav{
-                display: flex;
-                padding: 15px;
-                &-icon{
-                    padding-right: 5px;
-                }
-            }
-            &-active{
-                border-right: 3px solid #1890ff;
-                background: #e6f7ff;
-            }
-            .ant-menu{
-                background: #f8f8f8;
+        background-color: #F7F8FA;
+        padding-top: 20px;
+        ul,li {
+            list-style: none;
+        }
+        .orga-aside-hidden {
+            display: none;
+        }
+        .orga-aside-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 20px;
+            cursor: pointer;
+
+
+        }
+        .orga-aside-li {
+            line-height: 40px;
+        }
+        .orga-aside-ul {
+            padding: 0;
+        }
+        .orga-aside-second:hover {
+            span {
+                color: #0053ca;
             }
         }
+        .orga-aside-first:hover{
+            .orga-aside-title {
+                color: #0053ca;
+            }
+        }
+        .orga-aside-select {
+            border-right: 3px solid #1890ff;
+            background: #e6f7ff;
+        }
     }
-    &-membro{
-        height: calc(100% - 50px);
+    .icon{
+        width: 25px;
+        height: 25px;
+        padding-right: 5px;
     }
-        /*  删除以及重命名  */
-    &-reDel{
-        padding: 20px 0 0 20px;
-    }
-
+}
+.ant-modal-close-x{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 }

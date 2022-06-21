@@ -5,45 +5,26 @@ const { Option } = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findLikeHistory,setLeftData,setModeData,index,setIndex,setRightData,findHistoryLog} = props
+    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode,changePage} = props
     const pipelineId = localStorage.getItem('pipelineId')
-    const [state,setState] = useState(0)
-    const [enforcer,setEnforcer] = useState(null)
-    const [mode,setMode] = useState(0)
 
     let params = null
     const change = () =>{
-        findLikeHistory(params).then(res=>{
-            const data = res.data
-            console.log(res)
-            if(data.length !== 0){
-                setModeData(res.data && res.data[0])
-                findHistoryLog(res.data && res.data[0].historyId).then(response=>{
-                    setLeftData([...data])
-                    if(index!==0){
-                        setRightData([...response.data])
-                        setIndex(1)
-                    }
-                })
-            } else {
-                setLeftData([])
-                if(index!==0){
-                    setRightData([])
-                    setIndex(1)
-                }
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        findPageHistory(params)
     }
 
     const changeState = (value,e) =>{
-        setState(e.key)
+        setState(parseInt(e.key))
         params = {
+            userId:null,
             pipelineId:pipelineId,
             state:e.key,
             name:enforcer,
             type:mode,
+            pageParam: {
+                pageSize: 10,
+                currentPage: changePage
+            }
         }
         change()
     }
@@ -54,21 +35,31 @@ const StructureLeftDropdown = props =>{
         }
         setEnforcer(value)
         params = {
+            userId:null,
             pipelineId:pipelineId,
             state:state,
             name:value,
             type:mode,
+            pageParam: {
+                pageSize: 10,
+                currentPage: changePage
+            }
         }
         change()
     }
 
     const changeMode = (value,e) =>{
-        setMode(e.key)
+        setMode(parseInt(e.key))
         params = {
+            userId:null,
             pipelineId:pipelineId,
             state:state,
             name:enforcer,
             type:e.key,
+            pageParam: {
+                pageSize: 10,
+                currentPage:changePage
+            }
         }
         change()
     }

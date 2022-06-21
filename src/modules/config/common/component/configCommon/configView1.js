@@ -145,7 +145,6 @@ const ConfigView1 = props =>{
             }message.success({content: '配置成功', className:'message',})
             setIsPrompt(false)
         })
-
     }
 
     const onValuesChange = value =>{

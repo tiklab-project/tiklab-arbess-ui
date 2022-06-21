@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Table, Tooltip} from "antd";
+import {message, Table, Tooltip} from "antd";
 import {
     CheckCircleOutlined,
     CloseCircleOutlined,
@@ -18,7 +18,6 @@ const PipelineTable = props =>{
 
     const {pipelineStartStructure,killInstance}=structureStore
     const {updateFollow} = pipelineCollectStore
-
     const userId = getUser().userId
 
     //收藏
@@ -29,6 +28,12 @@ const PipelineTable = props =>{
         }
         updateFollow(params).then(res=>{
             console.log('取消收藏',res)
+            if(res.data !== '1'){
+                message.info({content:'收藏成功', className:'message',})
+            }
+            if(res.data === '1'){
+                message.info({content:'取消收藏', className:'message',})
+            }
             setFresh(!fresh)
         }).catch(error=>{
             console.log(error)
@@ -52,6 +57,7 @@ const PipelineTable = props =>{
                 if(res.data === 1){
                     // setFresh(!fresh)
                     setTimeout(()=>setFresh(!fresh),1000)
+                    message.info({content:'开始运行', className:'message',})
                 }
             })
         }else {

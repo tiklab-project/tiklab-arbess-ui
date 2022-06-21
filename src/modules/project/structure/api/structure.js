@@ -56,9 +56,9 @@ export function  FindAll(data){
 }
 
 //构建历史
-export function  SelectHistoryDetails (data){
+export function  FindPageHistory (data){
     return serviceLoc.request({
-        url:'/pipelineHistory/findAllHistory',
+        url:'/pipelineHistory/findPageHistory',
         method:'post',
         data
     })
@@ -72,7 +72,6 @@ export function  DeleteHistoryLog (data){
         data
     })
 }
-
 
 // 查询构建列表
 export function  FindLikeHistory(data){

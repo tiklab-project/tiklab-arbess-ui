@@ -41,7 +41,6 @@ const UserList=AsyncComponent(()=>import('./modules/system/user/list'))
 const UserDirectory=AsyncComponent(()=>import('./modules/system/user/directory'))
 const Organ=AsyncComponent(()=>import('./modules/system/user/organ'))
 const PlugAll=AsyncComponent(()=>import('./modules/system/plug/plugAll'))
-const PlugUpdate=AsyncComponent(()=>import('./modules/system/plug/plugUpdate'))
 const OverallProof=AsyncComponent(()=>import('./modules/system/proof/overallProof'))
 const Info=AsyncComponent(()=>import('./modules/system/info/info'))
 const Log=AsyncComponent(()=>import('./modules/system/log/log'))
@@ -150,7 +149,7 @@ const routers=[
                     {
                         path: '/index/system',
                         exact:true,
-                        render:()=>  <Redirect to={"/index/system/base"}/>,
+                        render:()=> <Redirect to={"/index/system/base"}/>,
                     },
                     {
                         path: '/index/system/base',
@@ -169,12 +168,8 @@ const routers=[
                         component: Organ,
                     },
                     {
-                        path: '/index/system/plugin/all',
+                        path: '/index/system/plugin',
                         component: PlugAll,
-                    },
-                    {
-                        path: '/index/system/plugin/update',
-                        component: PlugUpdate,
                     },
                     {
                         path: '/index/system/power/role',

@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from "react";
-import {List} from "antd";
+import {Button, List} from "antd";
 
 const Dynamic = props =>{
 
@@ -23,6 +23,7 @@ const Dynamic = props =>{
         <div className='homePage-content-dynamic'>
             <div className='dynamic-top'>
                 <div className='dynamic-top-title'>动态</div>
+                <div><Button>更多</Button></div>
             </div>
             <div className='dynamic-bottom'>
                 <List

@@ -15,18 +15,18 @@ const StatusChart = props =>{
         const fail = []
         const stop = []
         runState(userId).then(res=>{
-           if( res.data && res.code === 0 ){
-               for (let i = 0;i<res.data.length;i++){
-                   x.push(res.data[i].time)
-                   success.push(res.data[i].successNumber)
-                   fail.push(res.data[i].errorNumber)
-                   stop.push(res.data[i].removeNumber)
-               }
-               setXData([...x])
-               setSuccessData([...success])
-               setFailData([...fail])
-               setStopData([...stop])
-           }
+            if( res.data && res.code === 0 ){
+                for (let i = 0;i<res.data.length;i++){
+                    x.push(res.data[i].time)
+                    success.push(res.data[i].successNumber)
+                    fail.push(res.data[i].errorNumber)
+                    stop.push(res.data[i].removeNumber)
+                }
+                setXData([...x])
+                setSuccessData([...success])
+                setFailData([...fail])
+                setStopData([...stop])
+            }
         })
         return ()=>{
             setXData([])

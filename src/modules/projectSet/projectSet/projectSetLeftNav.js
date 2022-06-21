@@ -1,59 +1,143 @@
-import React from "react";
-import {Menu} from "antd";
+import React, {Fragment, useEffect, useState} from 'react';
+import { DownOutlined,UpOutlined} from '@ant-design/icons';
 import {PrivilegeButton} from "doublekit-privilege-ui";
 
-const {SubMenu} = Menu
-const ProjectSetLeftNav = props =>{
+const ProjectSetLeftNav= props =>  {
 
-    const {router} = props
-    const path=props.location.pathname
+    let path = props.location.pathname
 
-    const getPipelineSysRouter = router => {
-        return router.map(item=>{
-            if(!item.children){
-                return(
-                    <Menu.Item  onClick={()=>onclick(item)}  key={item.key}>
-                        <div className='left-content-nav'>
-                            <div className='left-content-nav-icon'>
-                                {item.icon}
-                            </div>
-                            <div className='left-content-nav-title'>{item.label}</div>
-                        </div>
-                    </Menu.Item>
-                )
-            }else {
-                return (
-                    <SubMenu
-                        key={item.key}
-                        title={
-                            <div className='left-content-nav'>
-                                <div className='left-content-nav-icon'>
-                                    {item.icon}
-                                </div>
-                                <div className='left-content-nav-title'>{item.label}</div>
-                            </div>}
-                    >
-                        {getPipelineSysRouter(item.children)}
-                    </SubMenu>
-                )
-            }
-        })
+    const [selectKey,setSelectKey] = useState(path)
+    const [expandedTree, setExpandedTree] = useState(['/index/task/assembly/feature'])   // 树的展开与闭合
+
+    useEffect(()=>{
+        setSelectKey(path)
+        if(path === '/index/task/assembly/feature' ){
+            setExpandedTree([path,'1'])
+        }
+        if(path === 'index/task/assembly/role'){
+            setExpandedTree([path,'2'])
+        }
+    },[path])
+
+    const router = [
+        {
+            key:'/index/task/assembly/user',
+            label:'项目成员',
+            icon:'icon-gongzuotongji',
+            enCode:'1',
+        },
+        {
+            key:'1',
+            label:'权限管理',
+            icon:'icon-gongzuotongji',
+            enCode:'1',
+            children:[
+                {
+                    key:'/index/task/assembly/feature',
+                    label:'功能管理',
+                    icon:'icon-gongzuotongji',
+                    enCode:'1',
+                },
+                {
+                    key:'/index/task/assembly/role',
+                    label:'角色管理',
+                    icon:'icon-gongzuotongji',
+                    enCode:'1',
+                }
+            ]
+        },
+        {
+            key:'/index/task/assembly/proof',
+            label:'凭证管理',
+            icon:'icon-gongzuotongji',
+            // enCode:'3',
+        },
+        {
+            key:'/index/task/assembly/redel',
+            label:'其他管理',
+            icon:'icon-gongzuotongji',
+            // enCode:'3',
+        },
+    ]
+
+    const select = key =>{
+        props.history.push(key)
     }
 
-    const onclick = e => {
-        props.history.push(e.key)
+    const renderMenu = (data,deep)=> {
+        return (
+            <li
+                style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
+                className={`orga-aside-li orga-aside-second ${data.key=== selectKey ? "orga-aside-select" : ""}`}
+                onClick={()=>select(data.key)}
+                key={data.key}
+            >
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref={`#${data.icon}`} />
+                </svg>
+                <span>{data.label}</span>
+            </li>
+        )
     }
 
-    return(
-        <Menu
-            style={{height:'100%',background:'#f8f8f8',paddingTop:20}}
-            mode={'inline'}
-            defaultOpenKeys={['/index/task/assembly/user','1']}
-            defaultSelectedKeys={['/index/task/assembly/user']}
-            selectedKeys={[path]}
-        >
-            { getPipelineSysRouter(router) }
-        </Menu>
+    const isExpandedTree = key => {
+        return expandedTree.some(item => item ===key)
+    }
+
+    const setOpenOrClose = key => {
+        if (isExpandedTree(key)) {
+            setExpandedTree(expandedTree.filter(item => item !== key))
+        } else {
+            setExpandedTree(expandedTree.concat(key))
+        }
+    }
+
+    const renderSubMenu = (item,deep)=> {
+        return (
+            <li key={item.key} title={item.label} className="orga-aside-li">
+                <div className="orga-aside-item orga-aside-first"  style={{paddingLeft: `${deep * 20 + 20}`}} onClick={() => setOpenOrClose(item.key)}>
+                    <span to={item.key} style={{color: "$blue-main"}}>
+                         <svg className="icon" aria-hidden="true">
+                            <use xlinkHref={`#${item.icon}`} />
+                        </svg>
+                        <span className="orga-aside-title">{item.label}</span>
+                    </span>
+                    <div className="orga-aside-item-icon">
+                        {
+                            item.children ?
+                                (isExpandedTree(item.key)?
+                                        <DownOutlined style={{fontSize: "10px"}}/> :
+                                        <UpOutlined style={{fontSize: "10px"}}/>
+                                ): ""
+                        }
+                    </div>
+                </div>
+                <ul title={item.label} className={`orga-aside-ul ${isExpandedTree(item.key) ? null: 'orga-aside-hidden'}`}>
+                    {
+                        item.children && item.children.map(item =>{
+                            const deepnew = deep +1
+                            return item.children && item.children.length?
+                                renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
+                        })
+                    }
+                </ul>
+            </li>
+        )
+    }
+
+    return (
+        <Fragment>
+            <div className="orga-aside">
+                <ul style={{padding: 0}} key="0">
+                    {
+                        router && router.map(firstItem => {
+                            return firstItem.children && firstItem.children.length > 0 ?
+                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                        })
+                    }
+                </ul>
+            </div>
+        </Fragment>
     )
 }
 
