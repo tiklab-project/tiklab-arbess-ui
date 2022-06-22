@@ -111,7 +111,6 @@ const ChangeConfigSortsDrawer = props =>{
                 setIsPrompt(false)
             }
         })
-
     }
 
     return (

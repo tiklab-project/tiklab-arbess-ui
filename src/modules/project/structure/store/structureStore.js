@@ -117,7 +117,7 @@ export class StructureStore {
                 if(res.data.dataList.length === 0){
                     this.leftPageList = []
                     this.page = {}
-                }else {
+                } else {
                     this.leftPageList = res.data.dataList
                     this.page.total = res.data.totalRecord
                     this.page.defaultCurrent = 1

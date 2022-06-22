@@ -5,7 +5,7 @@ import {withRouter} from "react-router-dom";
 const ProjectBreadcrumb = props => {
     const {style} = props
     return(
-        <div className='breadcrumb' style={style} >
+        <div style={style} >
             <Breadcrumb separator=">">
                 <Breadcrumb.Item style={{ cursor: "pointer" }} onClick={()=>props.history.push('/index/pipeline')}>
                     流水线

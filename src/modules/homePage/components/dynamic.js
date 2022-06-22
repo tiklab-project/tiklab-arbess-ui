@@ -3,13 +3,16 @@ import {Button, List} from "antd";
 
 const Dynamic = props =>{
 
-    const {userId,findAllAction,dynamicList} = props
+    const {userId,findUserAction,dynamicList} = props
 
     useEffect(()=>{
-        findAllAction(userId)
+        const param = {
+            userId:userId
+        }
+        findUserAction(param)
     },[])
 
-    const goUser = item => {
+    const goUser = () => {
         props.history.push('/index/system/base')
     }
     

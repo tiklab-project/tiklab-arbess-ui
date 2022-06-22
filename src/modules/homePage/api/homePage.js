@@ -19,10 +19,19 @@ export function  RunState (data){
 }
 
 // 动态
-export function  FindAllAction (data){
+export function  FindUserAction (data){
     return serviceLoc.request({
         url:'/pipelineHome/findAllAction',
         method:'post',
         data
     })
 }
+
+// 所有动态
+// export function  FindUserAction (data){
+//     return serviceLoc.request({
+//         url:'/pipelineHome/findUserAction',
+//         method:'post',
+//         data
+//     })
+// }

@@ -25,11 +25,11 @@ const StructureRightLogDrawer = props =>{
                         </Button>
                     </div>
                 </div>
+                <div className='wrapper-title'>
+                    <ConfigName type={drawerContent.taskType}/>:
+                </div>
                 <div className='wrapper-body'>
                     <div className='log'>
-                        <div className='log-title'>
-                            <ConfigName type={drawerContent.taskType}/>
-                            :</div>
                         <div className='log-content'> {drawerContent && drawerContent.runLog} </div>
                     </div>
                  </div>

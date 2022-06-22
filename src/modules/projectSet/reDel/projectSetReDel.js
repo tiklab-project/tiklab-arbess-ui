@@ -60,7 +60,7 @@ const ProjectSetReDel = props =>{
                                    if(value){
                                        let nameArray = []
                                        if(pipelineList){
-                                           nameArray = pipelineList && pipelineList.map(item =>  item.pipelineName);
+                                           nameArray=pipelineList && pipelineList.map(item=>item.pipelineName);
                                        }
                                        if (nameArray.includes(value)) {
                                            return Promise.reject('名称已经存在');

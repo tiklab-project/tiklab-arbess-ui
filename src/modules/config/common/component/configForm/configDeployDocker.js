@@ -53,7 +53,7 @@ const ConfigDeployDocker = props =>{
                         message:'请输入正确的Ip地址'
                     }
                 ]}
-                style={{ display: 'inline-block',  margin: '3px 3px' }}
+                style={{display: 'inline-block'}}
             >
                 <Input  placeholder='输入IpV4地址' style={{width:200}}/>
             </Form.Item>
@@ -61,7 +61,7 @@ const ConfigDeployDocker = props =>{
                 label='端口号'
                 name='port'
                 rules={[{validator: proofPort},{required:true, message:'请输入端口号'}]}
-                style={{ display: 'inline-block',  margin: '3px 3px' }}
+                style={{display:'inline-block',margin:'1px 3px'}}
             >
                 <Input placeholder="输入端口号"  style={{width:150}}/>
             </Form.Item>
@@ -99,6 +99,7 @@ const ConfigDeployDocker = props =>{
             >
                 <Input/>
             </Form.Item>
+
             <FormTest />
         </Fragment>
     )

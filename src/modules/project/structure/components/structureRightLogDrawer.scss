@@ -1,11 +1,11 @@
 .wrapper{
+    &-title{
+        font-weight: 700;
+        padding: 15px;
+    }
     &-body{
         .log{
             padding: 20px;
-            &-title{
-                font-weight: 700;
-                margin-bottom: 15px;
-            }
             &-content{
                 white-space: pre-wrap;
             }

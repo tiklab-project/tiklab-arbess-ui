@@ -2,7 +2,7 @@ import {observable,action} from "mobx";
 import {
     FindAllOpen,
     RunState,
-    FindAllAction
+    FindUserAction
 } from "../api/homePage";
 
 export class HomePageStore{
@@ -22,6 +22,7 @@ export class HomePageStore{
             console.log(error)
         })
     }
+
     @action
     runState = async value =>{
         const param = new FormData()
@@ -30,10 +31,13 @@ export class HomePageStore{
     }
 
     @action
-    findAllAction = async value =>{
+    findUserAction = async value =>{
+        // const param = {
+        //     userId:value.userId
+        // }
         const param = new FormData()
-        param.append('userId',value)
-        FindAllAction(param).then(res=>{
+        param.append('userId',value.userId)
+        FindUserAction(param).then(res=>{
             console.log('动态',res)
             if(res.code === 0 && res.data ){
                 this.dynamicList = res.data

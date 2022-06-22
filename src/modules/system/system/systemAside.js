@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { DownOutlined,UpOutlined} from '@ant-design/icons';
 import {PrivilegeButton} from "doublekit-privilege-ui";
 
@@ -10,13 +10,13 @@ const SystemAside= props =>  {
 
     useEffect(()=>{
         setSelectKey(path)
-        if(path === '/index/system/power/feature' ){
+    },[path])
+
+    useEffect(()=>{
+        if(path === '/index/system/power/feature' || path ==='/index/system/power/role'){
             setExpandedTree([path,'1'])
         }
-        if(path ==='/index/system/power/role'){
-            setExpandedTree([path,'2'])
-        }
-    },[path])
+    },[])
 
     const router = [
         {
@@ -53,13 +53,13 @@ const SystemAside= props =>  {
                     key:'/index/system/power/feature',
                     label:'功能管理',
                     icon:'icon-gongzuotongji',
-                    enCode:'E1',
+                    enCode:'E',
                 },
                 {
                     key:'/index/system/power/role',
                     label:'角色管理',
                     icon:'icon-gongzuotongji',
-                    enCode:'E2',
+                    enCode:'E',
                 }
             ]
         },
@@ -127,8 +127,12 @@ const SystemAside= props =>  {
         return (
             <PrivilegeButton  key={item.key} code={item.enCode}>
                 <li key={item.code} title={item.label} className="orga-aside-li">
-                    <div className="orga-aside-item orga-aside-first"  style={{paddingLeft: `${deep * 20 + 20}`}} onClick={() => setOpenOrClose(item.key)}>
-                    <span to={item.key} style={{color: "$blue-main"}}>
+                    <div
+                        className="orga-aside-item orga-aside-first"
+                        style={{paddingLeft: `${deep * 20 + 20}`}}
+                        onClick={() => setOpenOrClose(item.key)}
+                    >
+                    <span style={{color: "$blue-main"}}>
                         <svg className="icon" aria-hidden="true">
                             <use xlinkHref={`#${item.icon}`} />
                         </svg>
@@ -144,7 +148,11 @@ const SystemAside= props =>  {
                             }
                         </div>
                     </div>
-                    <ul title={item.label} className={`orga-aside-ul ${isExpandedTree(item.key) ? null: 'orga-aside-hidden'}`}>
+                    <ul
+                        title={item.label}
+                        className={`orga-aside-ul ${isExpandedTree(item.key) 
+                            ? null: 'orga-aside-hidden'}`}
+                    >
                         {
                             item.children && item.children.map(item =>{
                                 const deepnew = deep +1
@@ -159,18 +167,16 @@ const SystemAside= props =>  {
     }
 
     return (
-        <Fragment>
-            <div className="orga-aside">
-                <ul style={{padding: 0}} key="0">
-                    {
-                        router && router.map(firstItem => {
-                            return firstItem.children && firstItem.children.length > 0 ?
-                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                        })
-                    }
-                </ul>
-            </div>
-        </Fragment>
+        <div className="orga-aside">
+            <ul style={{padding: 0}} key="0">
+                {
+                    router && router.map(firstItem => {
+                        return firstItem.children && firstItem.children.length > 0 ?
+                            renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                    })
+                }
+            </ul>
+        </div>
     )
 }
 

@@ -11,7 +11,7 @@ import {inject,observer} from "mobx-react";
 const HomePage = props =>{
 
     const {homePageStore} = props
-    const {findAllOpen,pipelineNearList,runState,findAllAction,dynamicList} = homePageStore
+    const {findAllOpen,pipelineNearList,runState,findUserAction,dynamicList} = homePageStore
     const userId = getUser().userId
 
     return(
@@ -28,7 +28,7 @@ const HomePage = props =>{
                     <Dynamic
                         {...props}
                         userId={userId}
-                        findAllAction={findAllAction}
+                        findUserAction={findUserAction}
                         dynamicList={dynamicList}
                     />
                 </div>

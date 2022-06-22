@@ -95,10 +95,6 @@ const Proof = props =>{
     ]
 
     const style = 'primary'
-    
-    const onChange = item => {
-        console.log(item)
-    }
 
     return(
         <div className='proof'>
@@ -112,7 +108,6 @@ const Proof = props =>{
                     columns={columns}
                     dataSource={proofList}
                     pagination={{ pageSize: 12}}
-                    // onChange = {onChange}
                 />
             </div>
             <UpdateProof

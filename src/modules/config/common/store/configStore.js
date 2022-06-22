@@ -80,10 +80,12 @@ export class ConfigStore{
 
     @action
     codeTestPass = values =>{
-        const params = new FormData()
-        params.append('proofId', values.proofId)
-        params.append('url', values.url)
-        params.append('port', values.port)
+        const params = {
+            proofId:values.proofId,
+            url:values.url,
+            port:values.port,
+            type:values.type,
+        }
         return new Promise((resolve, reject) => {
             CodeTestPass(params).then(res=>{
                 console.log('测试配置',res)

@@ -12,20 +12,14 @@ const ConfigCodeSvn = props =>{
 
     return(
         <Fragment>
-            <Form.Item
-                name='codeName'
-                label="svn地址"
-                rules={[
-                    {required:true, message:'请输入svn地址'},
-                ]}
-            >
+            <Form.Item name='codeName' label="svn地址" rules={[{required:true, message:'请输入svn地址'},]}>
                 <Input />
             </Form.Item>
             <Row>
                 <FindAllProof type={5}/>
                 <AddProofButton codeType={codeType}/>
             </Row>
-            <FormTest type={'code'}/>
+            <FormTest git={'code'}/>
         </Fragment>
     )
 }

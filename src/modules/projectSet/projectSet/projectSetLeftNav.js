@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { DownOutlined,UpOutlined} from '@ant-design/icons';
 import {PrivilegeButton} from "doublekit-privilege-ui";
 
@@ -12,6 +12,12 @@ const ProjectSetLeftNav= props =>  {
     useEffect(()=>{
         setSelectKey(path)
     },[path])
+
+    useEffect(()=>{
+        if(path === '/index/task/assembly/feature' || path ==='/index/task/assembly/role'){
+            setExpandedTree([path,'1'])
+        }
+    },[])
 
     const router = [
         {
@@ -89,8 +95,12 @@ const ProjectSetLeftNav= props =>  {
     const renderSubMenu = (item,deep)=> {
         return (
             <li key={item.key} title={item.label} className="orga-aside-li">
-                <div className="orga-aside-item orga-aside-first"  style={{paddingLeft: `${deep * 20 + 20}`}} onClick={() => setOpenOrClose(item.key)}>
-                    <span to={item.key} style={{color: "$blue-main"}}>
+                <div
+                    className="orga-aside-item orga-aside-first"
+                    style={{paddingLeft: `${deep * 20 + 20}`}}
+                    onClick={() => setOpenOrClose(item.key)}
+                >
+                    <span style={{color: "$blue-main"}}>
                          <svg className="icon" aria-hidden="true">
                             <use xlinkHref={`#${item.icon}`} />
                         </svg>
@@ -106,7 +116,11 @@ const ProjectSetLeftNav= props =>  {
                         }
                     </div>
                 </div>
-                <ul title={item.label} className={`orga-aside-ul ${isExpandedTree(item.key) ? null: 'orga-aside-hidden'}`}>
+                <ul
+                    title={item.label}
+                    className={`orga-aside-ul ${isExpandedTree(item.key) 
+                        ? null: 'orga-aside-hidden'}`}
+                >
                     {
                         item.children && item.children.map(item =>{
                             const deepnew = deep +1
@@ -120,18 +134,16 @@ const ProjectSetLeftNav= props =>  {
     }
 
     return (
-        <Fragment>
-            <div className="orga-aside">
-                <ul style={{padding: 0}} key="0">
-                    {
-                        router && router.map(firstItem => {
-                            return firstItem.children && firstItem.children.length > 0 ?
-                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                        })
-                    }
-                </ul>
-            </div>
-        </Fragment>
+        <div className="orga-aside">
+            <ul style={{padding: 0}} key="0">
+                {
+                    router && router.map(firstItem => {
+                        return firstItem.children && firstItem.children.length > 0 ?
+                            renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                    })
+                }
+            </ul>
+        </div>
     )
 }
 

@@ -17,7 +17,7 @@ const ConfigDetails = props =>{
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
-    const {pipelineStartStructure,findStructureState} = structureStore
+    const {pipelineStartStructure} = structureStore
 
     const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,
@@ -38,9 +38,6 @@ const ConfigDetails = props =>{
             localStorage.removeItem('testId')
             localStorage.removeItem('structureId')
             localStorage.removeItem('deployId')
-            setCodeData('')
-            setData([])
-            setFormInitialValues('')
         }
     },[pipelineId])
 
@@ -197,6 +194,7 @@ const ConfigDetails = props =>{
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
+                setCodeType('')
                 break
             case 'test':
                 formInitialValues.testOrder = null
@@ -220,9 +218,7 @@ const ConfigDetails = props =>{
     }
 
     const style = {
-        'position':'fixed',
-        'top':'55px',
-        'paddingTop':'20px'
+
     }
 
     const view2 = {
@@ -231,17 +227,19 @@ const ConfigDetails = props =>{
 
     return (
         <Fragment>
-            <ProjectBreadcrumb style={style}/>
-            <ConfigChangeView
-                userId={userId}
-                view={view}
-                setView={setView}
-                setIsPrompt={setIsPrompt}
-                pipelineId={pipelineId}
-                pipelineStartStructure={pipelineStartStructure}
-                findStructureState={findStructureState}
-
-            />
+            <div className='config-top '>
+               <div className='config-top-content'>
+                   <ProjectBreadcrumb style={style}/>
+                   <ConfigChangeView
+                       userId={userId}
+                       view={view}
+                       setView={setView}
+                       setIsPrompt={setIsPrompt}
+                       pipelineId={pipelineId}
+                       pipelineStartStructure={pipelineStartStructure}
+                   />
+               </div>
+            </div>
             {
                 view === 1 ?
                     <ConfigView1

@@ -144,23 +144,24 @@ const Config = props =>{
     }
 
     const style = {
-        'position':'fixed',
-        'top':'55px',
-        'paddingTop':'20px'
+
     }
 
     return (
         <Fragment >
-            <ProjectBreadcrumb style={style}/>
-            <ConfigChangeView
-                userId={userId}
-                view={view}
-                setView={setView}
-                setIsPrompt={setIsPrompt}
-                pipelineId={pipelineId}
-                pipelineStartStructure={pipelineStartStructure}
-                findStructureState={findStructureState}
-            />
+            <div className='config-top '>
+                <div className='config-top-content'>
+                    <ProjectBreadcrumb style={style}/>
+                    <ConfigChangeView
+                        userId={userId}
+                        view={view}
+                        setView={setView}
+                        setIsPrompt={setIsPrompt}
+                        pipelineId={pipelineId}
+                        pipelineStartStructure={pipelineStartStructure}
+                    />
+                </div>
+            </div>
             {
                 view === 1 ?
                     <ConfigView1

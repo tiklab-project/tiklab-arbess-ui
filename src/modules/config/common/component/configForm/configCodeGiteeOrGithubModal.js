@@ -25,7 +25,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                 }
                 getGiteeProof(params).then(res=>{
                     console.log(res,'accessToken')
-                    if(res.code===0){
+                    if(res.code === 0){
                         localStorage.setItem('gitProofId',res.data)
                     }else {
                         message.error({content:'创建失败', className:'message'})

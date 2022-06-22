@@ -28,7 +28,7 @@ const FindAllProof = props =>{
     }
 
     return(
-        <Form.Item name={type < 6 ? 'gitProofName' : 'dockerProofName'} label="凭证">
+        <Form.Item name={type < 6 ? 'gitProofName' : 'dockerProofName'}  label="凭证">
             <Select
                 style={{ width: 300 }}
                 onClick={clickFindAllGit}

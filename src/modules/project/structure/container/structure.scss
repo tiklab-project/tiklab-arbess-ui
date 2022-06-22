@@ -1,7 +1,6 @@
 .structure{
     height: 100%;
     overflow-y: hidden;
-    flex-grow: 1;
     .icon {
         width: 20px !important;
         height: 20px !important;
@@ -25,8 +24,7 @@
             border-right: 1px solid #ccc;
             &-dropdown{
                 width: 100%;
-                margin-bottom: 20px;
-                padding: 15px 15px 0 15px;
+                padding: 15px;
                 .dropdown{
                     display: flex;
                     flex-direction: row;
@@ -83,7 +81,7 @@
             flex-grow: 1;
             height: 100%;
             &-mid{
-                padding:15px;
+                padding: 0 15px 15px;
                 .mid_group{
                     display: flex;
                     flex-direction: column;
@@ -136,7 +134,7 @@
                     &_center{
                         display: flex;
                         flex-direction: row;
-                        margin: 20px 0;
+                        padding: 20px 0;
                         &-cart{
                             margin-right: 20px;
                             width:260px;

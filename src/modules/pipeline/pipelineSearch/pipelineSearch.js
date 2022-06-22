@@ -3,6 +3,7 @@ import {Button,Input} from "antd";
 import {withRouter} from "react-router";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
+import {getUser} from "doublekit-core-ui";
 
 const { Search } = Input;
 
@@ -11,10 +12,8 @@ const PipelineSearch= props=>{
     const {pipelineStore}=props
     const {findOneName}=pipelineStore
 
-    const onSearch = values =>{
-        findOneName(values).then(() =>{
-            props.history.push(`/index/searchresult/${values}`)
-        })
+    const onSearch = value =>{
+        props.history.push(`/index/searchresult/${value}`)
     }
 
     return(

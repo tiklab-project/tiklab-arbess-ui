@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from "react";
 import { Modal} from 'antd';
 import {renderRoutes} from "react-router-config";
-import './project.scss';
 import ProjectAside from "../components/projectAside";
 import { inject,observer } from "mobx-react";
 import {Prompt} from "react-router-dom";
@@ -54,7 +53,7 @@ const Project= (props)=>{
     }
 
     return(
-        <div className='pipelineDetails'>
+        <div className='project'>
             <ProjectAside
                 {...props}
                 pipelineList={pipelineList}
@@ -64,7 +63,11 @@ const Project= (props)=>{
                 setPipeline={setPipeline}
                 setIsPrompt={setIsPrompt}
             />
-            <div className='pipelineDetails-content' onClick={()=>setVisible(false)}>
+            <div
+                className='project-content'
+                onClick={()=>setVisible(false)}
+                style={{marginLeft:65}}
+            >
                 {renderRoutes(route.routes)}
             </div>
             <Prompt

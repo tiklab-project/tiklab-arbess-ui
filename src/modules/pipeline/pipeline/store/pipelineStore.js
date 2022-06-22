@@ -33,7 +33,7 @@ export class PipelineStore{
     }
 
     @action
-    createPipeline=values=>{
+    createPipeline = values =>{
         const params = {
             user: {
                 id:values.user.id,
@@ -54,11 +54,12 @@ export class PipelineStore{
     }
 
     @action
-    findOneName=value=>{
-        const param = new FormData()
-        param.append('pipelineName',value)
+    findOneName = values =>{
+        const params = new FormData()
+        params.append('pipelineName',values.pipelineName)
+        params.append('userId',values.userId)
         return new Promise((resolve, reject) => {
-            FindOneName(param).then(res=>{
+            FindOneName(params).then(res=>{
                 this.searchPipelineList=res.data
                 console.log("搜索流水线",res)
                 resolve(res)
@@ -70,7 +71,7 @@ export class PipelineStore{
     }
 
     @action //删除流水线
-    deletePipeline=async value =>{
+    deletePipeline = async value =>{
         const param = new FormData()
         param.append('pipelineId',value.pipelineId)
         param.append('userId',value.userId)
@@ -86,7 +87,7 @@ export class PipelineStore{
     }
 
     @action //重命名流水线
-    updatePipeline=values=>{
+    updatePipeline = values =>{
         const params={
             pipelineId:values.pipelineId,
             pipelineName:values.pipelineName,

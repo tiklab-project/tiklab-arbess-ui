@@ -12,7 +12,7 @@ ul li{
     background: #fff;
     font-weight: 700;
     padding: 16px 0 4px 16px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $gray-600;
     margin-bottom: 16px;
 }
 
@@ -38,8 +38,8 @@ ul li{
         .wrapper{
             &-head{
                 height: 48px;
-                background: #fff;
-                border-bottom: 1px solid #d9d9d9;
+                background:$white;
+                border-bottom: 1px solid $gray-500;
                 padding: 12px 20px;
                 display: -webkit-box;
                 display: -webkit-flex;

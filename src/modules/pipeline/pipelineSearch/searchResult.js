@@ -1,8 +1,8 @@
 import React ,{useEffect} from 'react'
-import './pipelineSearch';
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import './searchResult.scss';
+import {getUser} from "doublekit-core-ui";
 
 const SearchResult = props => {
 
@@ -10,7 +10,11 @@ const SearchResult = props => {
     const {searchPipelineList,findOneName}=pipelineStore
 
     useEffect(()=>{
-        findOneName(match.params.searchresult)
+        const params = {
+            userId : getUser().userId,
+            pipelineName:match.params.searchresult
+        }
+        findOneName(params)
     },[])
 
     const  goPipelineTask= record =>{

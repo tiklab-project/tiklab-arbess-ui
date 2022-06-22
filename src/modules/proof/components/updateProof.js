@@ -41,12 +41,7 @@ const UpdateProof = props =>{
             onCancel={()=>setVisible(false)}
             onOk={onOk}
         >
-            <Form
-                form={form}
-                layout="vertical"
-                name="userForm"
-                autoComplete = "off"
-            >
+            <Form form={form} layout="vertical" name="userForm" autoComplete="off">
                 <Form.Item
                     label='凭证作用域'
                     name='type'

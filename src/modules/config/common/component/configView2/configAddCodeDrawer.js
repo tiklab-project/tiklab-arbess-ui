@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Drawer} from 'antd';
 import ConfigAddCodeLeftDrawer from "./configAddCodeLeftDrawer";
 import ConfigAddCodeRightDrawer from "./configAddCodeRightDrawer";
@@ -20,6 +20,14 @@ const ConfigAddCodeDrawer = props =>{
     const {setCodeData,codeDrawer,setCodeDrawer,setIsPrompt,codeType,setCodeType,formInitialValues} = props
     const [opt,setOpt] = useState(1)
     const [codeOpt,setCodeOpt]=useState(0)
+
+    useEffect(()=>{
+        if(codeDrawer){
+            if(!codeType){
+                setCodeType(1)
+            }
+        }
+    },[codeDrawer])
 
     return(
         <Drawer
@@ -45,6 +53,7 @@ const ConfigAddCodeDrawer = props =>{
                                 leftLis={leftLis}
                                 opt={opt}
                                 setOpt={setOpt}
+                                setCodeType={setCodeType}
                             />
                             <ConfigAddCodeRightDrawer
                                 setIsPrompt={setIsPrompt}
