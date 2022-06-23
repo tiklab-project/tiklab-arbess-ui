@@ -13,17 +13,17 @@ const App = (props) => {
     const {i18n, t} = useTranslation();
     const [resourcesLanguage, setResources] = useState({});
     useVersion();
-    useEffect(() => {
-        if (isInitLoadPlugin) {
-            setLoading(true)
-            loadLanguage(i18n, resources, languages, fetchMethod, 'zh').then(res => {
-                const resources2 = {
-                    zh:res.zh || {translation:{}}
-                }
-                setResources(resources2)
-            })
-        }
-    }, [isInitLoadPlugin]);
+    // useEffect(() => {
+    //     if (isInitLoadPlugin) {
+    //         setLoading(true)
+    //         loadLanguage(i18n, resources, languages, fetchMethod, 'zh').then(res => {
+    //             const resources2 = {
+    //                 zh:res.zh || {translation:{}}
+    //             }
+    //             setResources(resources2)
+    //         })
+    //     }
+    // }, [isInitLoadPlugin]);
 
     Object.keys(resourcesLanguage).map(key => {
         i18n.addResourceBundle(key,'translation', resourcesLanguage[key].translation, true,true)

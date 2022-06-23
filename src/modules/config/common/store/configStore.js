@@ -3,7 +3,6 @@ import {observable, action} from "mobx";
 import {
     UpdateConfigure,
     FindAllConfigure,
-    CodeTestPass,
 } from '../api/config'
 
 export class ConfigStore{
@@ -70,25 +69,6 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             FindAllConfigure(param).then(res=>{
                 console.log('查看所有配置',res)
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
-
-    @action
-    codeTestPass = values =>{
-        const params = {
-            proofId:values.proofId,
-            url:values.url,
-            port:values.port,
-            type:values.type,
-        }
-        return new Promise((resolve, reject) => {
-            CodeTestPass(params).then(res=>{
-                console.log('测试配置',res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

@@ -1,23 +1,22 @@
 import React, {Fragment,useState,useRef,useEffect} from "react";
-import  './configView2.scss';
-import ConfigCode from "../configView2/configCode";
-import ConfigAddNewStage from "../configView2/configAddNewStage";
-import ConfigAddCodeDrawer from "../configView2/configAddCodeDrawer";
-import ConfigAddNewStageDrawer from "../configView2/configAddNewStageDrawer";
-import ConfigFormDetailsDrawer from "../configView2/configFormDetailsDrawer";
+import  './guiView.scss';
+import ConfigCode from "../guiView/configCode";
+import ConfigAddNewStage from "../guiView/configAddNewStage";
+import ConfigAddCodeDrawer from "../guiView/configAddCodeDrawer";
+import ConfigAddNewStageDrawer from "../guiView/configAddNewStageDrawer";
+import ConfigFormDetailsDrawer from "../guiView/configFormDetailsDrawer";
 import {inject, observer} from "mobx-react";
-import {Form, Input, message} from "antd";
+import {Form, Input} from "antd";
 import {EditOutlined} from "@ant-design/icons";
-import moment from "../../../../../common/moment/moment";
 import {withRouter} from "react-router";
 import ConfigName from "./configName";
 
-const ConfigView2 = props =>{
+const GuiView = props =>{
 
-    const {form, updateConfigure,configDataStore,del,Salta,view2,userId} = props
+    const {form,configDataStore,del,onFinish} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isAlias,setIsAlias,codeType,setCodeType,linuxShellBlock,unitShellBlock,mavenShellBlock,
+        isAlias,setIsAlias,codeType,setCodeType,
     } = configDataStore
 
     const inputRef = useRef();
@@ -66,86 +65,6 @@ const ConfigView2 = props =>{
     const insertData = (item,index) => {
         setNewStageDrawer(true)
         setIndex(index)
-    }
-
-    const onFinish = values => {
-
-        //排序
-        let testSort,structureSort, deploySort = 0
-        //配置别名
-        let testAlias,structureAlias,deployAlias
-        //配置类型
-        let testType,structureType,deployType
-
-        data && data.map((item,index)=>{
-            if(item.dataType === 11){
-                testSort = index + 2
-                testAlias = item.title
-                testType = item.dataType
-            }
-            if(item.dataType === 21 || item.dataType === 22){
-                structureSort = index + 2
-                structureAlias = item.title
-                structureType = item.dataType
-            }
-            if(item.dataType === 31 || item.dataType === 32){
-                deploySort = index + 2
-                deployAlias = item.title
-                deployType = item.dataType
-            }
-        })
-
-        const configureList = {
-            configureCreateTime:moment.moment,
-            user:{id:userId,},
-            pipeline:{pipelineId:pipelineId},
-            pipelineCode:{
-                codeId:localStorage.getItem('codeId'),
-                sort:1,
-                type:codeData && codeData.codeType,
-                codeBranch:values.codeBranch,
-                codeName:values.codeName,
-                proof:{proofId:localStorage.getItem('gitProofId')}
-            },
-            pipelineTest:{
-                testId:localStorage.getItem('testId'),
-                sort:testSort,
-                testAlias:testAlias,
-                type:testType,
-                testOrder:unitShellBlock,
-            },
-            pipelineStructure:{
-                structureId:localStorage.getItem('structureId'),
-                sort:structureSort,
-                structureAlias:structureAlias,
-                type:structureType,
-                structureAddress:values.structureAddress,
-                structureOrder:mavenShellBlock,
-            },
-            pipelineDeploy:{
-                deployId:localStorage.getItem('deployId'),
-                sort:deploySort,
-                deployAlias:deployAlias,
-                type:deployType,
-                ip:values.ip,
-                port:values.port,
-                deployAddress: values.deployAddress,
-                deployTargetAddress: values.deployTargetAddress,
-                deployShell:linuxShellBlock,
-                dockerPort:values.dockerPort,
-                mappingPort:values.mappingPort,
-                proof:{ proofId:localStorage.getItem('deployProofId') }
-            }
-        }
-        updateConfigure(configureList).then(res=>{
-            if(Salta){
-                props.history.push('/index/task/config')
-            }
-            if(res.code!==0){
-                message.error({content:'配置失败', className:'message',})
-            }message.success({content: '配置成功', className:'message',})
-            setIsPrompt(false)
-        })
     }
 
     const onValuesChange = value =>{
@@ -216,7 +135,7 @@ const ConfigView2 = props =>{
     }
 
     return (
-        <div className='configView2' style={view2}>
+        <div className='configView2'>
             <div className='configView2-content'>
                 <ConfigCode
                     codeData={codeData}
@@ -280,4 +199,4 @@ const ConfigView2 = props =>{
     )
 }
 
-export default withRouter(inject('configDataStore')(observer(ConfigView2)))
+export default withRouter(inject('configDataStore')(observer(GuiView)))

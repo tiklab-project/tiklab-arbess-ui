@@ -4,9 +4,8 @@ import {inject,observer} from "mobx-react";
 
 const FormTest = props =>{
 
-    const {configDataStore,configStore,git} = props
-    const {formInitialValues,codeType} = configDataStore
-    const {codeTestPass} = configStore
+    const {configDataStore,git} = props
+    const {formInitialValues,codeType,codeTestPass} = configDataStore
 
     const test = () =>{
         if(formInitialValues){
@@ -47,4 +46,4 @@ const FormTest = props =>{
             </div>
 }
 
-export default inject('configStore','configDataStore')(observer(FormTest))
+export default inject('configDataStore')(observer(FormTest))

@@ -45,6 +45,7 @@ export function  GetBranch (data){
     })
 }
 
+// 监听授权状态
 export function  GetState(data){
     return serviceLoc.request({
         url:'/gitee/getState',

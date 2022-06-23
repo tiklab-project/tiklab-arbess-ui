@@ -1,14 +1,16 @@
 import React, {useState, useEffect, Fragment} from "react";
+import {PluginComponent, PLUGIN_STORE} from 'doublekit-plugin-ui'
 import '../common/component/configCommon/config.scss'
-import ConfigView1 from "../common/component/configCommon/configView1";
-import ConfigView2 from "../common/component/configCommon/configView2";
+import FormView from "../common/component/configCommon/formView";
+import GuiView from "../common/component/configCommon/guiView";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
-import {Form} from "antd";
+import {Form, message} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 import {getUser} from "doublekit-core-ui";
+import moment from "../../../common/moment/moment";
 
 const ConfigDetails = props =>{
 
@@ -19,8 +21,8 @@ const ConfigDetails = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure} = structureStore
 
-    const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType,
+    const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock,setMavenShellBlock,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -217,19 +219,88 @@ const ConfigDetails = props =>{
         }
     }
 
-    const style = {
+    const onFinish = values => {
 
-    }
+        //排序
+        let testSort,structureSort, deploySort = 0
+        //配置别名
+        let testAlias,structureAlias,deployAlias
+        //配置类型
+        let testType,structureType,deployType
 
-    const view2 = {
-        'flexGrow':'1'
+        data && data.map((item,index)=>{
+            if(item.dataType === 11){
+                testSort = index + 2
+                testAlias = item.title
+                testType = item.dataType
+            }
+            if(item.dataType === 21 || item.dataType === 22){
+                structureSort = index + 2
+                structureAlias = item.title
+                structureType = item.dataType
+            }
+            if(item.dataType === 31 || item.dataType === 32){
+                deploySort = index + 2
+                deployAlias = item.title
+                deployType = item.dataType
+            }
+        })
+
+        const configureList = {
+            configureCreateTime:moment.moment,
+            user:{id:userId,},
+            pipeline:{pipelineId:pipelineId},
+            pipelineCode:{
+                codeId:localStorage.getItem('codeId'),
+                sort:1,
+                type:codeData && codeData.codeType,
+                codeBranch:values.codeBranch,
+                codeName:values.codeName,
+                proof:{proofId:localStorage.getItem('gitProofId')}
+            },
+            pipelineTest:{
+                testId:localStorage.getItem('testId'),
+                sort:testSort,
+                testAlias:testAlias,
+                type:testType,
+                testOrder:unitShellBlock,
+            },
+            pipelineStructure:{
+                structureId:localStorage.getItem('structureId'),
+                sort:structureSort,
+                structureAlias:structureAlias,
+                type:structureType,
+                structureAddress:values.structureAddress,
+                structureOrder:mavenShellBlock,
+            },
+            pipelineDeploy:{
+                deployId:localStorage.getItem('deployId'),
+                sort:deploySort,
+                deployAlias:deployAlias,
+                type:deployType,
+                ip:values.ip,
+                port:values.port,
+                deployAddress: values.deployAddress,
+                deployTargetAddress: values.deployTargetAddress,
+                deployShell:linuxShellBlock,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
+                proof:{ proofId:localStorage.getItem('deployProofId') }
+            }
+        }
+        updateConfigure(configureList).then(res=>{
+            if(res.code!==0){
+                message.error({content:'配置失败', className:'message',})
+            }message.success({content: '配置成功', className:'message',})
+            setIsPrompt(false)
+        })
     }
 
     return (
         <Fragment>
             <div className='config-top '>
                <div className='config-top-content'>
-                   <ProjectBreadcrumb style={style}/>
+                   <ProjectBreadcrumb config={'config'}/>
                    <ConfigChangeView
                        userId={userId}
                        view={view}
@@ -242,25 +313,31 @@ const ConfigDetails = props =>{
             </div>
             {
                 view === 1 ?
-                    <ConfigView1
-                        userId={userId}
+                    <FormView
                         form={form}
                         del={del}
-                        updateConfigure={updateConfigure}
+                        onFinish={onFinish}
                     />
                     :
-                    <ConfigView2
-                        userId={userId}
-                        form={form}
-                        del={del}
-                        updateConfigure={updateConfigure}
-                        view2={view2}
+                    <PluginComponent
+                        point='gui'
+                        {...props}
+                        pluginsStore={props.pluginsStore}
+                        extraProps={{
+                            configDataStore,
+                            del,
+                            form,
+                            giteeStore,
+                            githubStore,
+                            onFinish,
+                            proofStore:props.proofStore
+                        }}
                     />
             }
         </Fragment>
     )
 }
 
-export default  withRouter(inject('configStore', 'giteeStore',
-                'structureStore','configDataStore','githubStore')
-            (observer(ConfigDetails)))
+export default  withRouter(inject('configStore','giteeStore','structureStore',
+                'configDataStore','githubStore',PLUGIN_STORE,'proofStore')
+                (observer(ConfigDetails)))

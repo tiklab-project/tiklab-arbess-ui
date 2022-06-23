@@ -1,11 +1,11 @@
 .config_changeView{
+     padding-right: 18px;
     .changeView{
         display: flex;
-        justify-content: right;
         &-btn{
             &>button{
                 &:last-child{
-                    margin: 0 30px;
+                    margin: 0 15px;
                 }
             }
         }

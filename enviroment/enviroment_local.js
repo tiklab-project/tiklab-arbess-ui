@@ -11,12 +11,12 @@ const base_url = JSON.stringify(api);
 
 
 const url = "http://127.0.0.1:3004";
-const plugin_base_url = JSON.stringify(url);
+const plugin_base_url = JSON.stringify(api);
 
-let pluginAddressUrl = `${url}/config.json`;
+let pluginAddressUrl = `/pluginConfig/getPluginConfig`;
 pluginAddressUrl = JSON.stringify(pluginAddressUrl);
 
-let fetchMethod = "get"
+let fetchMethod = "post"
 fetchMethod = JSON.stringify(fetchMethod);
 // 判断是否是用户环境， 如果是用户环境收到切换为true， 如果是内部公司手动切换为false
 const userProduction = true;

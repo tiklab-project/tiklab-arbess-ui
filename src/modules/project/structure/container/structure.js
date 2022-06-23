@@ -109,9 +109,6 @@ const Structure = props => {
         })
     }
 
-    const style = {
-        'paddingLeft':'16px',
-    }
 
     return (
         <div className='structure'>
@@ -132,7 +129,7 @@ const Structure = props => {
                             findHistoryLog={findHistoryLog}
                         />
                         <div className='structure-content-right'>
-                            <ProjectBreadcrumb style={style}/>
+                            <ProjectBreadcrumb/>
                             {
                                 execState === ''  && leftPageList && leftPageList.length === 0 ?
                                     <div className='structure-content-empty'>
@@ -164,7 +161,7 @@ const Structure = props => {
                     </div>
                     :
                     <div className='structure-content-empty'>
-                        <ProjectBreadcrumb/>
+                        <ProjectBreadcrumb />
                         <div className='empty null'>
                             <img src={empty} alt='logo' />
                             <div className="empty-group">

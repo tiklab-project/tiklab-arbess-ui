@@ -1,15 +1,15 @@
 import React,{Fragment,useState,useEffect} from "react";
 import '../common/component/configCommon/config.scss';
-import './config.scss';
-import {Form} from "antd";
+import {Form, message} from "antd";
 import {withRouter} from "react-router";
 import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
-import ConfigView2 from "../common/component/configCommon/configView2";
-import ConfigView1 from "../common/component/configCommon/configView1";
+import FormView from "../common/component/configCommon/formView";
+import GuiView from "../common/component/configCommon/guiView";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 import {inject, observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
+import moment from "../../../common/moment/moment";
 
 const Config = props =>{
 
@@ -18,10 +18,10 @@ const Config = props =>{
     const {updateConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
-    const {pipelineStartStructure,findStructureState} = structureStore
+    const {pipelineStartStructure} = structureStore
 
     const {setIsPrompt,codeData,setCodeData,formInitialValues,setData,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,
+        setUnitShellBlock,setMavenShellBlock,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
     } = configDataStore
 
     const [form] = Form.useForm();
@@ -123,6 +123,7 @@ const Config = props =>{
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
+                setCodeType('')
                 break
             case 'test':
                 formInitialValues.testOrder = null
@@ -143,15 +144,92 @@ const Config = props =>{
         }
     }
 
-    const style = {
+    // 提交
+    const onFinish = values => {
 
+        //排序
+        let testSort,structureSort, deploySort = 0
+        //配置别名
+        let testAlias,structureAlias,deployAlias
+        //配置类型
+        let testType,structureType,deployType
+
+        data && data.map((item,index)=>{
+            if(item.dataType === 11){
+                testSort = index + 2
+                testAlias = item.title
+                testType = item.dataType
+            }
+            if(item.dataType === 21 || item.dataType === 22){
+                structureSort = index + 2
+                structureAlias = item.title
+                structureType = item.dataType
+            }
+            if(item.dataType === 31 || item.dataType === 32){
+                deploySort = index + 2
+                deployAlias = item.title
+                deployType = item.dataType
+            }
+        })
+
+        const configureList = {
+            configureCreateTime:moment.moment,
+            user:{id:userId,},
+            pipeline:{pipelineId:pipelineId},
+            pipelineCode:{
+                codeId:localStorage.getItem('codeId'),
+                sort:1,
+                type:codeData && codeData.codeType,
+                codeBranch:values.codeBranch,
+                codeName:values.codeName,
+                proof:{proofId:localStorage.getItem('gitProofId')}
+            },
+            pipelineTest:{
+                testId:localStorage.getItem('testId'),
+                sort:testSort,
+                testAlias:testAlias,
+                type:testType,
+                testOrder:unitShellBlock,
+            },
+            pipelineStructure:{
+                structureId:localStorage.getItem('structureId'),
+                sort:structureSort,
+                structureAlias:structureAlias,
+                type:structureType,
+                structureAddress:values.structureAddress,
+                structureOrder:mavenShellBlock,
+            },
+            pipelineDeploy:{
+                deployId:localStorage.getItem('deployId'),
+                sort:deploySort,
+                deployAlias:deployAlias,
+                type:deployType,
+                ip:values.ip,
+                port:values.port,
+                deployAddress: values.deployAddress,
+                deployTargetAddress: values.deployTargetAddress,
+                deployShell:linuxShellBlock,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
+                proof:{ proofId:localStorage.getItem('deployProofId') }
+            }
+        }
+        updateConfigure(configureList).then(res=>{
+            if(res.code!==0){
+                message.error({content:'配置失败', className:'message',})
+            }else {
+                message.success({content: '配置成功', className:'message',})
+                props.history.push('/index/task/config')
+            }
+            setIsPrompt(false)
+        })
     }
 
     return (
-        <Fragment >
-            <div className='config-top '>
+        <Fragment>
+            <div className='config-top' style={{width:'100%'}}>
                 <div className='config-top-content'>
-                    <ProjectBreadcrumb style={style}/>
+                    <ProjectBreadcrumb config={'config'}/>
                     <ConfigChangeView
                         userId={userId}
                         view={view}
@@ -164,20 +242,16 @@ const Config = props =>{
             </div>
             {
                 view === 1 ?
-                    <ConfigView1
-                        userId={userId}
+                    <FormView
                         form={form}
                         del={del}
-                        updateConfigure={updateConfigure}
-                        Salta={'Salta'}
+                        onFinish={onFinish}
                     />
                     :
-                    <ConfigView2
-                        userId={userId}
+                    <GuiView
                         form={form}
                         del={del}
-                        updateConfigure={updateConfigure}
-                        Salta={'Salta'}
+                        onFinish={onFinish}
                     />
             }
         </Fragment>

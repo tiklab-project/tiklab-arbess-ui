@@ -42,14 +42,10 @@ const ProjectSetReDel = props =>{
         })
     }
 
-    const breadcrumb = {
-        'paddingLeft':'16px',
-    }
-
     return(
        <Fragment>
-           <ProjectBreadcrumb style={breadcrumb}/>
-           <div className='pipelineSys-reDel'>
+           <ProjectBreadcrumb/>
+           <div className='pipelineSys-reDel' style={{padding:20}}>
                <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
                    <Form.Item
                        label="重命名"
@@ -89,7 +85,6 @@ const ProjectSetReDel = props =>{
                        )}
                    </Form.Item>
                </Form>
-
                <div style={{marginTop:100}}>
                    <Popconfirm
                        style={{marginTop:100}}

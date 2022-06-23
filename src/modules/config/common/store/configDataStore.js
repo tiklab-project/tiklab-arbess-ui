@@ -1,4 +1,5 @@
 import {action, observable} from "mobx";
+import {CodeTestPass} from "../api/config";
 
 export class ConfigDataStore {
 
@@ -11,7 +12,6 @@ export class ConfigDataStore {
     @observable linuxShellBlock = ''
     @observable unitShellBlock = ''
     @observable mavenShellBlock = ''
-
 
     @action
     setIsPrompt = value => {
@@ -56,6 +56,25 @@ export class ConfigDataStore {
     @action
     setMavenShellBlock = value =>{
         this.mavenShellBlock = value
+    }
+
+    @action
+    codeTestPass = values =>{
+        const params = {
+            proofId:values.proofId,
+            url:values.url,
+            port:values.port,
+            type:values.type,
+        }
+        return new Promise((resolve, reject) => {
+            CodeTestPass(params).then(res=>{
+                console.log('测试配置',res)
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
     }
 
 }
