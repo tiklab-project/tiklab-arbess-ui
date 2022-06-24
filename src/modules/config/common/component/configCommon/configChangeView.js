@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Button } from "antd";
 import './configChangeView.scss';
 import {withRouter} from "react-router-dom";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt,userId} = props
+    const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt,userId,isBtn} = props
 
     const run = () => {
         setIsPrompt(false)
@@ -45,18 +45,22 @@ const ConfigChangeView = props =>{
                         运行
                     </Button>
                 </div>
-                <div className='changeView-view'>
-                    {
-                        viewList.map(item=>{
-                            return  <div className={view === item.id ? 'view view-link' : 'view' }
-                                         onClick={()=>setView(item.id)}
-                                         key={item.id}
-                                    >
-                                        {item.title}
-                                    </div>
-                        })
-                    }
-                </div>
+                {
+                    isBtn ?
+                        <div className='changeView-view'>
+                            {
+                                viewList.map(item=>{
+                                    return  <div className={view === item.id ? 'view view-link' : 'view' }
+                                                 onClick={()=>setView(item.id)}
+                                                 key={item.id}
+                                            >
+                                                {item.title}
+                                            </div>
+                                })
+                            }
+                        </div>
+                        :null
+                }
             </div>
         </div>
     )

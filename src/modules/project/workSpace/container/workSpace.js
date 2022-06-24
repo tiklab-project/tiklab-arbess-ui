@@ -14,7 +14,7 @@ const WorkSpace = props =>{
     const {getSubmitMassage,fileTree,readFile,recordList} = workSpaceStore
 
     const [fileList,setFileList] = useState([])
-    const [initial,setInitial] = useState(false)
+    const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
     const [detailsDrawer,setDetailsDrawer] = useState(false)
     const [drawerContent,setDrawerContent] = useState('')
@@ -35,7 +35,7 @@ const WorkSpace = props =>{
         }).catch(error=>{
             console.log(error)
         })
-    },[initial,pipelineId])
+    },[fresh,pipelineId])
 
     const style = {
         'position':'fixed',
@@ -48,8 +48,8 @@ const WorkSpace = props =>{
                 <WorkSpaceNod
                     fileList={fileList}
                     setFileList={setFileList}
-                    initial={initial}
-                    setInitial={setInitial}
+                    fresh={fresh}
+                    setFresh={setFresh}
                     catalogue={catalogue}
                     setCatalogue={setCatalogue}
                     readFile={readFile}

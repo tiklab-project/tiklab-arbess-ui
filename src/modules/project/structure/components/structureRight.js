@@ -5,7 +5,8 @@ import StructureRightItem from "./structureRightItem";
 
 const StructureRight = props =>{
 
-    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,execState,killInstance,rightExecuteData,freshen,setFreshen} = props
+    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,execState,killInstance,rightExecuteData,
+        freshen,setFreshen} = props
     
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState('')

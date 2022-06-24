@@ -17,31 +17,29 @@ const FormView = props =>{
     const {form,del,configDataStore,onFinish} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isAlias,setIsAlias,setCodeType,
-    } = configDataStore
+        isFormAlias,setIsFormAlias,setCodeType} = configDataStore
 
     const inputRef = useRef();
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
-    const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-        if (isAlias!==''){
+        if (isFormAlias!==''){
             inputRef.current.focus()
         }
-    },[isAlias])
+    },[isFormAlias])
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
-    },[formInitialValues,pipelineId])
+    },[formInitialValues])
 
     const displayInput = index =>{
-        setIsAlias(index)
+        setIsFormAlias(index)
     }
 
     const hiddenInput = () =>{
-        setIsAlias('')
+        setIsFormAlias('')
     }
 
     const changeInputValue = (e,index) =>{
@@ -72,21 +70,13 @@ const FormView = props =>{
         setIsPrompt(true)
     }
 
-    const newStage = () =>{
+    const newStage = data =>{
         return   data && data.map((group,index)=>{
             return(
                 <div className='configView1-wrapper' key={index} >
                     <div className='configView1-wrapper-Headline'>
                         {
-                            isAlias !== index ?
-                                <div style={{display:"inline"}}>
-                                    {group.title}
-                                    &nbsp; &nbsp;
-                                    <span onClick={()=> displayInput(index)} style={{cursor:'pointer'}}>
-                                        <EditOutlined />
-                                    </span>
-                                </div>
-                                :
+                            isFormAlias === index ?
                                 <Input
                                     type="text"
                                     ref={inputRef}
@@ -95,6 +85,14 @@ const FormView = props =>{
                                     defaultValue={group.title}
                                     onChange={e=>changeInputValue(e,index)}
                                 />
+                                :
+                                <div style={{display:"inline"}}>
+                                    {group.title}
+                                    &nbsp; &nbsp;
+                                    <span onClick={()=> displayInput(index)} style={{cursor:'pointer'}}>
+                                        <EditOutlined />
+                                    </span>
+                                </div>
                         }
                     </div>
                     <div className='configView1-wrapper-newStage'>
@@ -134,7 +132,7 @@ const FormView = props =>{
                         setCodeVisible={setCodeVisible}
                         del={del}
                     />
-                    { newStage() }
+                    { newStage(data) }
                     <ConfigAddNewStage setNewStageVisible={setNewStageVisible}/>
                 </Form>
 

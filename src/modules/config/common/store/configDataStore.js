@@ -7,7 +7,8 @@ export class ConfigDataStore {
     @observable formInitialValues = {} //表单初始化
     @observable data = [] // 新阶段、新任务需要渲染的值
     @observable codeData = '' // 源码管理需要渲染的值
-    @observable isAlias = '' // 更改别名--显示对应文本框
+    @observable isFormAlias = '' // 更改别名--表单
+    @observable isGuiAlias = '' // 更改别名--图形
     @observable codeType = 1 // 源码管理类型
     @observable linuxShellBlock = ''
     @observable unitShellBlock = ''
@@ -34,8 +35,13 @@ export class ConfigDataStore {
     }
 
     @action
-    setIsAlias = value =>{
-        this.isAlias = value
+    setIsFormAlias = value =>{
+        this.isFormAlias = value
+    }
+
+    @action
+    setIsGuiAlias = value =>{
+        this.isGuiAlias = value
     }
 
     @action

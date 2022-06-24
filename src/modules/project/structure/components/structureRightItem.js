@@ -4,7 +4,8 @@ import ConfigName from "../../../config/common/component/configCommon/configName
 
 const StructureRightItem = props =>{
 
-    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,runWay,freshen,setFreshen} = props
+    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,runWay,
+        freshen,setFreshen} = props
 
     const state = item =>{
         switch(item.runState){

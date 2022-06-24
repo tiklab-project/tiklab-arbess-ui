@@ -4,7 +4,7 @@ import './pipelineRun.scss'
 const PipelineRun = () =>{
     return(
         <span className='loading' >
-             ||
+            ||
         </span>
     )
 }

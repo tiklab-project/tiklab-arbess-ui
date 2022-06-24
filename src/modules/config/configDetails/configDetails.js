@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Fragment} from "react";
-import {PluginComponent, PLUGIN_STORE} from 'doublekit-plugin-ui'
+import {PLUGIN_STORE, PluginComponent} from 'doublekit-plugin-ui'
 import '../common/component/configCommon/config.scss'
 import FormView from "../common/component/configCommon/formView";
 import GuiView from "../common/component/configCommon/guiView";
@@ -14,7 +14,7 @@ import moment from "../../../common/moment/moment";
 
 const ConfigDetails = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore,pluginsStore,proofStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
@@ -25,12 +25,21 @@ const ConfigDetails = props =>{
         setUnitShellBlock,setMavenShellBlock,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
     } = configDataStore
 
-    const [form] = Form.useForm();
-    const userId = getUser().userId
+    const [form] = Form.useForm()
     const [view,setView] = useState(1)
+    const [isBtn,setIsBtn] = useState(false)
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
+    const userId = getUser().userId
+
+    useEffect(()=>{
+        pluginsStore.plugins && pluginsStore.plugins.map(item=>{
+            if(item.id === 'gui'){
+                setIsBtn(true)
+            }else setIsBtn(false)
+        })
+    },[pipelineId])
 
     useEffect(()=>{
         return () =>{
@@ -102,6 +111,9 @@ const ConfigDetails = props =>{
                 setData([])
                 form.resetFields()
                 setFormInitialValues({})
+                setUnitShellBlock('')
+                setMavenShellBlock('')
+                setLinuxShellBlock('')
             }else {
                 for (let i = 0;i<initialData.length;i++){
                     const j = initialData[i]
@@ -128,7 +140,6 @@ const ConfigDetails = props =>{
                             dataType:j.type,
                         })
                         localStorage.setItem('testId',j.testId)
-                        setUnitShellBlock(`${j.testOrder}`)
                     }
                     else if(j.type === 21 || j.type === 22 ){
                         newData.push({
@@ -137,7 +148,6 @@ const ConfigDetails = props =>{
                             dataType:j.type,
                         })
                         localStorage.setItem('structureId',j.structureId)
-                        setMavenShellBlock(`${j.structureOrder}`)
                     }
                     else if(j.type === 31 || j.type === 32 ){
                         newData.push({
@@ -149,12 +159,14 @@ const ConfigDetails = props =>{
                             dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
                         }
                         Object.assign(formInitialValues,formValue)
-                        setLinuxShellBlock(`${j.deployShell}`)
                         localStorage.setItem('deployId',j.deployId)
                         localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
                     }
                     setData([...newData])
                     setCodeData(newCode)
+                    setUnitShellBlock(`${j.testOrder ? j.testOrder :''}`)
+                    setMavenShellBlock(`${j.structureOrder ? j.structureOrder : ''}`)
+                    setLinuxShellBlock(`${j.deployShell ? j.deployShell : ''}`)
                     Object.assign(formInitialValues,j)
                     setFormInitialValues({...formInitialValues})
                 }
@@ -222,11 +234,18 @@ const ConfigDetails = props =>{
     const onFinish = values => {
 
         //排序
-        let testSort,structureSort, deploySort = 0
+        let codeSort, testSort,structureSort, deploySort = 0
         //配置别名
         let testAlias,structureAlias,deployAlias
         //配置类型
         let testType,structureType,deployType
+
+        switch (codeData){
+            case '':
+                codeSort = 0
+                break
+            default:codeSort = 1
+        }
 
         data && data.map((item,index)=>{
             if(item.dataType === 11){
@@ -252,7 +271,7 @@ const ConfigDetails = props =>{
             pipeline:{pipelineId:pipelineId},
             pipelineCode:{
                 codeId:localStorage.getItem('codeId'),
-                sort:1,
+                sort:codeSort,
                 type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
@@ -308,6 +327,7 @@ const ConfigDetails = props =>{
                        setIsPrompt={setIsPrompt}
                        pipelineId={pipelineId}
                        pipelineStartStructure={pipelineStartStructure}
+                       isBtn={isBtn}
                    />
                </div>
             </div>
@@ -319,20 +339,31 @@ const ConfigDetails = props =>{
                         onFinish={onFinish}
                     />
                     :
-                    <PluginComponent
-                        point='gui'
-                        {...props}
-                        pluginsStore={props.pluginsStore}
-                        extraProps={{
-                            configDataStore,
-                            del,
-                            form,
-                            giteeStore,
-                            githubStore,
-                            onFinish,
-                            proofStore:props.proofStore
-                        }}
-                    />
+                    // <GuiView
+                    //     form={form}
+                    //     del={del}
+                    //     onFinish={onFinish}
+                    // />
+                    <Fragment>
+                        {
+                            isBtn ?
+                                <PluginComponent
+                                    point='gui'
+                                    {...props}
+                                    pluginsStore={pluginsStore}
+                                    extraProps={{
+                                        configDataStore,
+                                        del,
+                                        form,
+                                        giteeStore,
+                                        githubStore,
+                                        onFinish,
+                                        proofStore,
+                                    }}
+                                />
+                                : null
+                        }
+                    </Fragment>
             }
         </Fragment>
     )

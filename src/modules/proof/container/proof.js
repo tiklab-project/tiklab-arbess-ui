@@ -107,7 +107,7 @@ const Proof = props =>{
                     rowKey={record => record.proofId}
                     columns={columns}
                     dataSource={proofList}
-                    pagination={{ pageSize: 12}}
+                    pagination={{ pageSize: 12, hideOnSinglePage:true}}
                 />
             </div>
             <UpdateProof

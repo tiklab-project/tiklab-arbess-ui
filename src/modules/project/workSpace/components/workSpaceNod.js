@@ -1,9 +1,10 @@
 import React from "react";
 import {Breadcrumb} from "antd";
 
+// 节点
 const WorkSpaceNod = props =>{
 
-    const {fileList,setFileList,setInitial,initial,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent
+    const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent
     } = props
     const pipelineName = localStorage.getItem('pipelineName')
 
@@ -32,12 +33,14 @@ const WorkSpaceNod = props =>{
         setCatalogue([...catalogue])
     }
 
+    // 文件节点和目录
     const goDetails = group => {
         setFileList(group.fileTree)
         level.push(group)
         setCatalogue([...catalogue,...level])
     }
 
+    // 节点文件下文本详情
     const textDetails = group => {
         readFile(group.treePath).then(res=>{
             setDrawerContent({title:group.treeName,commitFile:res.data})
@@ -47,7 +50,7 @@ const WorkSpaceNod = props =>{
 
     const setBreadcrumb = () =>{
         setCatalogue([])
-        setInitial(!initial)
+        setFresh(!fresh)
     }
 
     // 渲染目录
@@ -88,7 +91,6 @@ const WorkSpaceNod = props =>{
                             {renderFileList(fileList.fileTree)}
                         </div>
             }
-
         })
     }
 

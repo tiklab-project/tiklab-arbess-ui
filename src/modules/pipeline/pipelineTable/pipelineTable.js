@@ -164,7 +164,7 @@ const PipelineTable = props =>{
                 rowKey={record => record.pipelineId}
                 columns={columns}
                 dataSource={list}
-                pagination={{ pageSize: 12}}
+                pagination={{ pageSize: 12, hideOnSinglePage:true}}
                 locale={{emptyText:
                     <Fragment>
                         <svg className="icon" aria-hidden="true" >

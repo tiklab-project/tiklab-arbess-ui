@@ -10,10 +10,11 @@ import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 import {inject, observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
 import moment from "../../../common/moment/moment";
+import {PLUGIN_STORE, PluginComponent} from "doublekit-plugin-ui";
 
 const Config = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore,proofStore} = props
 
     const {updateConfigure} = configStore
     const {code,getState} = giteeStore
@@ -24,9 +25,10 @@ const Config = props =>{
         setUnitShellBlock,setMavenShellBlock,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
     } = configDataStore
 
-    const [form] = Form.useForm();
+    const [form] = Form.useForm()
     const userId = getUser().userId
     const [view,setView] = useState(1)
+    const [isBtn,setIsBtn] = useState(false)
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -39,6 +41,14 @@ const Config = props =>{
             setData([])
             setFormInitialValues('')
         }
+    },[])
+
+    useEffect(()=>{
+        pluginsStore.plugins && pluginsStore.plugins.map(item=>{
+            if(item.id === 'gui'){
+                setIsBtn(true)
+            }else setIsBtn(false)
+        })
     },[])
 
     //Gitee和Github授权
@@ -227,7 +237,7 @@ const Config = props =>{
 
     return (
         <Fragment>
-            <div className='config-top' style={{width:'100%'}}>
+            <div className='config-top '>
                 <div className='config-top-content'>
                     <ProjectBreadcrumb config={'config'}/>
                     <ConfigChangeView
@@ -237,9 +247,11 @@ const Config = props =>{
                         setIsPrompt={setIsPrompt}
                         pipelineId={pipelineId}
                         pipelineStartStructure={pipelineStartStructure}
+                        isBtn={isBtn}
                     />
                 </div>
             </div>
+
             {
                 view === 1 ?
                     <FormView
@@ -248,17 +260,33 @@ const Config = props =>{
                         onFinish={onFinish}
                     />
                     :
-                    <GuiView
-                        form={form}
-                        del={del}
-                        onFinish={onFinish}
-                    />
+                    <Fragment>
+                        {
+                            isBtn ?
+                                <PluginComponent
+                                    point='gui'
+                                    {...props}
+                                    pluginsStore={pluginsStore}
+                                    extraProps={{
+                                        configDataStore,
+                                        del,
+                                        form,
+                                        giteeStore,
+                                        githubStore,
+                                        onFinish,
+                                        proofStore
+                                    }}
+                                />
+                                : null
+                        }
+                    </Fragment>
+
             }
         </Fragment>
     )
 }
 
 
-export default  withRouter(inject('configStore', 'giteeStore',
-                'structureStore','configDataStore','githubStore')
+export default  withRouter(inject('configStore', 'giteeStore','structureStore',
+                'configDataStore','githubStore',PLUGIN_STORE,'proofStore')
                 (observer(Config)))

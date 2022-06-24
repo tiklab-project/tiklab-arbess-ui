@@ -6,8 +6,7 @@ import StructureLeftDropdown from "./structureLeftDropdown";
 const StructureLeft = props =>{
 
     const {findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
-        pipelineId
-    }=props
+        pipelineId }=props
 
     const [state,setState] = useState(0)  // 状态
     const [enforcer,setEnforcer] = useState(null)   //执行人

@@ -16,8 +16,7 @@ const GuiView = props =>{
     const {form,configDataStore,del,onFinish} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isAlias,setIsAlias,codeType,setCodeType,
-    } = configDataStore
+        isAlias,setIsAlias,codeType,setCodeType} = configDataStore
 
     const inputRef = useRef();
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
@@ -25,17 +24,16 @@ const GuiView = props =>{
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
     const [index,setIndex] = useState('')  // 配置位置的插入
     const [newStage,setNewStage] = useState('')
-    const pipelineId = localStorage.getItem('pipelineId')
 
     useEffect(()=>{
-        if (isAlias!==''){
+        if (isAlias !==''){
             inputRef.current.focus()
         }
     },[isAlias])
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
-    },[formInitialValues,pipelineId])
+    },[formInitialValues])
 
     const displayInput = index =>{
         setIsAlias(index)
@@ -94,15 +92,7 @@ const GuiView = props =>{
                             <div className='name'>
                                 <div  className='label'>
                                     {
-                                        isAlias !== index ?
-                                            <Fragment>
-                                                {item.title}
-                                                &nbsp; &nbsp;
-                                                <span onClick={()=> displayInput(index)} >
-                                                    <EditOutlined />
-                                                </span>
-                                            </Fragment>
-                                            :
+                                        isAlias === index ?
                                             <Input
                                                 type="text"
                                                 ref={inputRef}
@@ -111,6 +101,14 @@ const GuiView = props =>{
                                                 defaultValue={item.title}
                                                 onChange={e=>changeInputValue(e,index)}
                                             />
+                                            :
+                                        <Fragment>
+                                            {item.title}
+                                            &nbsp; &nbsp;
+                                            <span onClick={()=> displayInput(index)} >
+                                                <EditOutlined />
+                                            </span>
+                                        </Fragment>
                                     }
                                 </div>
                             </div>
