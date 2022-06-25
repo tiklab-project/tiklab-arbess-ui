@@ -34,7 +34,7 @@ import './mirror.scss'
 const Mirror = props =>{
 
     const {shellBlock,setShellBlock,setIsPrompt} = props
-    const mirrorRefs = useRef(null);
+    const mirrorRefs = useRef(null)
 
     return (
         <CodeMirror

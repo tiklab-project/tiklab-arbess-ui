@@ -6,7 +6,6 @@ import AddProofButton from "../../../../proof/components/addProofButton";
 import FormTest from "./formTest";
 import FindAllProof from "../../../../proof/components/findAllProof";
 
-
 const ConfigDeployLinux = props =>{
   
     const {configDataStore} = props
@@ -58,8 +57,8 @@ const ConfigDeployLinux = props =>{
                 <Input placeholder="输入端口号"  style={{width:150}}/>
             </Form.Item>
             <Row>
-                <FindAllProof type={31}  />
-                <AddProofButton codeType={31}/>
+                <FindAllProof type={31}/>
+                <AddProofButton type={5}/>
             </Row>
             <Form.Item
                 name='deployAddress'

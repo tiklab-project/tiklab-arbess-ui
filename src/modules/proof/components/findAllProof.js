@@ -1,22 +1,29 @@
-import React, { useState} from "react";
+import React from "react";
 import {inject,observer} from "mobx-react";
 import {Form, Select} from "antd";
+import {getUser} from "doublekit-core-ui";
 
 const {Option} = Select
 
 const FindAllProof = props =>{
 
     const {proofStore,type}=props
-    const {findAllProof} = proofStore
-    const [allGitProofList,setAllGitProofList] = useState([])
+    const {findPipelineProof,pipelineProofList} = proofStore
+    const pipelineId = localStorage.getItem('pipelineId')
 
     const clickFindAllGit = () =>{
-        findAllProof(type).then(res=>{
-            console.log('gitOrGitlab凭证',res)
-            setAllGitProofList(res.data)
-        }).catch(err=>{
-            console.log(err)
-        })
+        let proofScope
+        if(type < 6){
+            proofScope = 1
+        }else{
+            proofScope = 5
+        }
+        const params ={
+            pipelineId:pipelineId,
+            type:proofScope,
+            userId:getUser().userId
+        }
+        findPipelineProof(params)
     }
 
     const changeGitSelect = (value,e) =>{
@@ -35,7 +42,7 @@ const FindAllProof = props =>{
                 onChange={(value,e)=>changeGitSelect(value,e)}
             >
                 {
-                    allGitProofList && allGitProofList.map(item=>{
+                    pipelineProofList && pipelineProofList.map(item=>{
                         return(
                             <Option key={item.proofId} value={item.proofName+ "(" + item.proofUsername + ")"}>
                                 { item.proofName+ "(" + item.proofUsername + ")"}

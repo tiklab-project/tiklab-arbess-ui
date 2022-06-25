@@ -1,6 +1,6 @@
 import React, {useState, useEffect,useRef} from "react";
 import  './formView.scss';
-import {Button, Form, Input} from "antd";
+import {Button, Form, Input, message} from "antd";
 import ConfigAddNewStageModal from "../formView/configAddNewStageModal";
 import ConfigAddCodeModal from "../formView/configAddCodeModal";
 import ChangeConfigSortsDrawer from "../formView/changeConfigSortsDrawer";
@@ -11,18 +11,23 @@ import {inject, observer} from "mobx-react";
 import {withRouter} from "react-router";
 import ConfigForm from "./configForm";
 import ConfigName from "./configName";
+import moment from "../../../../../common/moment/moment";
+import {getUser} from "doublekit-core-ui";
 
 const FormView = props =>{
 
-    const {form,del,configDataStore,onFinish} = props
+    const {form,del,configDataStore,updateConfigure} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isFormAlias,setIsFormAlias,setCodeType} = configDataStore
+        isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
+    } = configDataStore
 
     const inputRef = useRef();
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
+    const pipelineId = localStorage.getItem('pipelineId')
+    const userId = getUser().userId
 
     useEffect(()=>{
         if (isFormAlias!==''){
@@ -62,6 +67,92 @@ const FormView = props =>{
             }
             setData([...data])
         }
+    }
+
+    const onFinish = values => {
+        //排序
+        let codeSort, testSort,structureSort, deploySort = 0
+        //配置别名
+        let testAlias,structureAlias,deployAlias
+        //配置类型
+        let testType,structureType,deployType
+
+        switch (codeData){
+            case '':
+                codeSort = 0
+                break
+            default:codeSort = 1
+        }
+
+        data && data.map((item,index)=>{
+            if(item.dataType === 11){
+                testSort = index + 2
+                testAlias = item.title
+                testType = item.dataType
+            }
+            if(item.dataType === 21 || item.dataType === 22){
+                structureSort = index + 2
+                structureAlias = item.title
+                structureType = item.dataType
+            }
+            if(item.dataType === 31 || item.dataType === 32){
+                deploySort = index + 2
+                deployAlias = item.title
+                deployType = item.dataType
+            }
+        })
+
+        const configureList = {
+            configureCreateTime:moment.moment,
+            user:{id:userId,},
+            pipeline:{pipelineId:pipelineId},
+            pipelineCode:{
+                codeId:localStorage.getItem('codeId'),
+                sort:codeSort,
+                type:codeData && codeData.codeType,
+                codeBranch:values.codeBranch,
+                codeName:values.codeName,
+                proof:{proofId:localStorage.getItem('gitProofId')}
+            },
+            pipelineTest:{
+                testId:localStorage.getItem('testId'),
+                sort:testSort,
+                testAlias:testAlias,
+                type:testType,
+                testOrder:unitShellBlock,
+            },
+            pipelineStructure:{
+                structureId:localStorage.getItem('structureId'),
+                sort:structureSort,
+                structureAlias:structureAlias,
+                type:structureType,
+                structureAddress:values.structureAddress,
+                structureOrder:mavenShellBlock,
+            },
+            pipelineDeploy:{
+                deployId:localStorage.getItem('deployId'),
+                sort:deploySort,
+                deployAlias:deployAlias,
+                type:deployType,
+                ip:values.ip,
+                port:values.port,
+                deployAddress: values.deployAddress,
+                deployTargetAddress: values.deployTargetAddress,
+                deployShell:linuxShellBlock,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
+                proof:{ proofId:localStorage.getItem('deployProofId') }
+            }
+        }
+        console.log(configureList)
+        updateConfigure(configureList).then(res=>{
+            if(res.code!==0){
+                message.error({content:'配置失败', className:'message',})
+            }else {
+                message.success({content: '配置成功', className:'message',})
+            }
+            setIsPrompt(false)
+        })
     }
 
     const onValuesChange = value =>{

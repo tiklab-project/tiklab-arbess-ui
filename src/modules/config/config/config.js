@@ -14,7 +14,7 @@ import {PLUGIN_STORE, PluginComponent} from "doublekit-plugin-ui";
 
 const Config = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore,proofStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore,pluginsStore} = props
 
     const {updateConfigure} = configStore
     const {code,getState} = giteeStore
@@ -154,87 +154,6 @@ const Config = props =>{
         }
     }
 
-    // 提交
-    const onFinish = values => {
-
-        //排序
-        let testSort,structureSort, deploySort = 0
-        //配置别名
-        let testAlias,structureAlias,deployAlias
-        //配置类型
-        let testType,structureType,deployType
-
-        data && data.map((item,index)=>{
-            if(item.dataType === 11){
-                testSort = index + 2
-                testAlias = item.title
-                testType = item.dataType
-            }
-            if(item.dataType === 21 || item.dataType === 22){
-                structureSort = index + 2
-                structureAlias = item.title
-                structureType = item.dataType
-            }
-            if(item.dataType === 31 || item.dataType === 32){
-                deploySort = index + 2
-                deployAlias = item.title
-                deployType = item.dataType
-            }
-        })
-
-        const configureList = {
-            configureCreateTime:moment.moment,
-            user:{id:userId,},
-            pipeline:{pipelineId:pipelineId},
-            pipelineCode:{
-                codeId:localStorage.getItem('codeId'),
-                sort:1,
-                type:codeData && codeData.codeType,
-                codeBranch:values.codeBranch,
-                codeName:values.codeName,
-                proof:{proofId:localStorage.getItem('gitProofId')}
-            },
-            pipelineTest:{
-                testId:localStorage.getItem('testId'),
-                sort:testSort,
-                testAlias:testAlias,
-                type:testType,
-                testOrder:unitShellBlock,
-            },
-            pipelineStructure:{
-                structureId:localStorage.getItem('structureId'),
-                sort:structureSort,
-                structureAlias:structureAlias,
-                type:structureType,
-                structureAddress:values.structureAddress,
-                structureOrder:mavenShellBlock,
-            },
-            pipelineDeploy:{
-                deployId:localStorage.getItem('deployId'),
-                sort:deploySort,
-                deployAlias:deployAlias,
-                type:deployType,
-                ip:values.ip,
-                port:values.port,
-                deployAddress: values.deployAddress,
-                deployTargetAddress: values.deployTargetAddress,
-                deployShell:linuxShellBlock,
-                dockerPort:values.dockerPort,
-                mappingPort:values.mappingPort,
-                proof:{ proofId:localStorage.getItem('deployProofId') }
-            }
-        }
-        updateConfigure(configureList).then(res=>{
-            if(res.code!==0){
-                message.error({content:'配置失败', className:'message',})
-            }else {
-                message.success({content: '配置成功', className:'message',})
-                props.history.push('/index/task/config')
-            }
-            setIsPrompt(false)
-        })
-    }
-
     return (
         <Fragment>
             <div className='config-top '>
@@ -257,7 +176,6 @@ const Config = props =>{
                     <FormView
                         form={form}
                         del={del}
-                        onFinish={onFinish}
                     />
                     :
                     <Fragment>
@@ -271,10 +189,7 @@ const Config = props =>{
                                         configDataStore,
                                         del,
                                         form,
-                                        giteeStore,
-                                        githubStore,
-                                        onFinish,
-                                        proofStore
+                                        configStore,
                                     }}
                                 />
                                 : null
@@ -288,5 +203,5 @@ const Config = props =>{
 
 
 export default  withRouter(inject('configStore', 'giteeStore','structureStore',
-                'configDataStore','githubStore',PLUGIN_STORE,'proofStore')
+                'configDataStore','githubStore',PLUGIN_STORE)
                 (observer(Config)))

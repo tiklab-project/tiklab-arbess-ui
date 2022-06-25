@@ -96,19 +96,19 @@ const PipelineTable = props =>{
             render:text =>{
                 switch (text) {
                     case 30:
-                        return  <Tooltip title="成功" className='all-icon'>
+                        return  <Tooltip title="成功" placement="rightTop" className='all-icon'>
                                     <CheckCircleOutlined style = {{fontSize:25,color:'#1890ff'}}/>
                                 </Tooltip>
                     case 1:
-                        return <Tooltip title="失败" className='all-icon'>
+                        return <Tooltip title="失败" placement="rightTop" className='all-icon'>
                                     <CloseCircleOutlined style = {{fontSize:25,color:'#ff0000'}}/>
                                 </Tooltip>
                     case 0:
-                        return  <Tooltip title="待构建" className='all-icon'>
+                        return  <Tooltip title="待构建" placement="rightTop" className='all-icon'>
                                     <PlayCircleOutlined style = {{fontSize:25}}/>
                                 </Tooltip>
                     default:
-                        return  <Tooltip title="停止" className='all-icon'>
+                        return  <Tooltip title="停止" placement="rightTop" className='all-icon'>
                                     <ExclamationCircleOutlined style = {{fontSize:25}}/>
                                 </Tooltip>
                 }

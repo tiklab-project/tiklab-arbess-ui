@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/api/requset";
+import {serviceLoc} from "../../../../common/utils/requset";
 
 
 //查询近期构建记录

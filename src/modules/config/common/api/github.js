@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/api/requset";
+import {serviceLoc} from "../../../../common/utils/requset";
 
 //gitHub--地址
 export function  GetCode (data){

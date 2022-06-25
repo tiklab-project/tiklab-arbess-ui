@@ -31,13 +31,15 @@ const FormTest = props =>{
                 port:port,
                 type:type
             }
-            codeTestPass(params).then(res=>{
-                if(res.data === true){
-                    message.success({content: '连接成功', className:'message'})
-                }else {
-                    message.error({content:'连接失败', className:'message'})
-                }
-            })
+            if(url){
+                codeTestPass(params).then(res=>{
+                    if(res.data === true){
+                        message.success({content: '连接成功', className:'message'})
+                    }else {
+                        message.error({content:'连接失败', className:'message'})
+                    }
+                })
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/api/requset";
+import {serviceLoc} from "../../../../common/utils/requset";
 
 //gitee授权--地址
 export function  Url (data){

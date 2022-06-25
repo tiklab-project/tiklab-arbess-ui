@@ -5,17 +5,21 @@ const { Option } = Select;
 
 const AddProofModal = props =>{
 
-    const {visible,setVisible,createProof,proofScope,userId,fresh,setFresh} = props
+    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type} = props
     const [form] = Form.useForm()
 
     const onOk = () =>{
         form.validateFields().then((values) => {
-            let id;
-            console.log(values.type)
+            let id,proofScope;
             if(values.type===1){
                 id=null
             }else {
                 id=localStorage.getItem('pipelineId')
+            }
+            if(isAuthority){
+                proofScope = values.proofScope
+            }else {
+                proofScope=type
             }
             const params = {
                 pipeline:{ pipelineId:id },
@@ -52,18 +56,24 @@ const AddProofModal = props =>{
                 layout="vertical"
                 name="userForm"
                 autoComplete = "off"
-                initialValues={{proofType:"password",type:1}}
+                initialValues={{proofType:"password",type:1,proofScope:1}}
             >
-                <Form.Item
-                    label='凭证作用域'
-                    name='type'
-                    rules={[{required:true, message:'请选择凭证'}]}
-                >
+                <Form.Item label='凭证级别' name='type'>
                     <Select >
                         <Option value={1}>全局凭证</Option>
                         <Option value={2}>项目凭证</Option>
                     </Select>
                 </Form.Item>
+                {
+                    isAuthority ?
+                        <Form.Item label='凭证作用域' name='proofScope'>
+                            <Select>
+                                <Option value={1}>源码凭证</Option>
+                                <Option value={5}>部署凭证</Option>
+                            </Select>
+                        </Form.Item>
+                        :null
+                }
                 <Form.Item
                     label='凭证名称'
                     name='proofName'

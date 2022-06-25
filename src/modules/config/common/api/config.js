@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/api/requset";
+import {serviceLoc} from "../../../../common/utils/requset";
 
 //更新流水线配置
 export function  UpdateConfigure (data){

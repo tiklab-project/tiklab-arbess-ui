@@ -15,8 +15,16 @@ const UpdateProof = props =>{
 
     const onOk = () =>{
         form.validateFields().then((values) => {
+            let id;
+            if(values.type===1){
+                id=null
+            }else {
+                id=localStorage.getItem('pipelineId')
+            }
             const params = {
+                pipeline:{ pipelineId:id },
                 proofId:formValue.proofId,
+                proofScope:values.proofScope,
                 proofType:values.proofType,
                 proofName:values.proofName,
                 proofUsername:values.proofUsername,
@@ -50,6 +58,12 @@ const UpdateProof = props =>{
                     <Select >
                         <Option value={1}>全局凭证</Option>
                         <Option value={2}>项目凭证</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item label='凭证作用域' name='proofScope'>
+                    <Select>
+                        <Option value={1}>源码凭证</Option>
+                        <Option value={5}>部署凭证</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item

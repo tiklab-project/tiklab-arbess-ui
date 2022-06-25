@@ -68,7 +68,7 @@
                         width: 21px;
                         height: calc(100% + 30px);
                         position: absolute;
-                        top: 20px;
+                        top: 40px;
                         border-left: 1px solid #d9d9d9;
                         border-bottom: 1px solid #d9d9d9;
                         border-right-color: #d9d9d9;
@@ -104,14 +104,14 @@
                     &-title{
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        white-space: nowrap;
                         position: absolute;
                         top: 60px;
                         left: 22px;
+                        white-space: pre-wrap;
                     }
                     &-address{
                         position: absolute;
-                        top: 90px;
+                        top: 110px;
                         left: 22px;
                     }
                 }

@@ -2,7 +2,6 @@ import {action, observable} from "mobx";
 
 import {
     CreateProof,
-    FindAllProof,
     FindOneProof,
     FindPipelineProof,
     FindAll,
@@ -16,7 +15,6 @@ export class ProofStore{
     @observable pipelineProofList = []
     @observable systemProofList = []
     @observable fresh = false
-
 
     @action
     setFresh = value =>{
@@ -48,13 +46,6 @@ export class ProofStore{
     }
 
     @action
-    findAllProof = async  value =>{
-        const param = new FormData()
-        param.append('type',value)
-        return await FindAllProof(param)
-    }
-
-    @action
     findOneProof =async values=>{
         const param = new FormData()
         param.append('proofId',values.proofId)
@@ -62,10 +53,13 @@ export class ProofStore{
     }
 
     @action
-    findPipelineProof =async value =>{
-        const param = new FormData()
-        param.append('pipelineId',value)
-        FindPipelineProof(param).then(res=>{
+    findPipelineProof =async values =>{
+        const params = {
+            pipelineId:values.pipelineId,
+            type:values.type,
+            userId:values.userId,
+        }
+        FindPipelineProof(params).then(res=>{
             console.log(res)
             this.pipelineProofList = res.data
         }).catch(error=>{
@@ -88,8 +82,10 @@ export class ProofStore{
     @action
     updateProof =async values =>{
         const params = {
+            pipeline:{pipelineId: values.pipeline.pipelineId},
             proofId:values.proofId,
             proofType:values.proofType,
+            proofScope:values.proofScope,
             proofName:values.proofName,
             proofUsername:values.proofUsername,
             proofPassword:values.proofPassword,

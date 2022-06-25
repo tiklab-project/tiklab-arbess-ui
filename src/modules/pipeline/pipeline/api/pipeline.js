@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/api/requset";
+import {serviceLoc} from "../../../../common/utils/requset";
 
 //新建流水线
 export function  CreatePipeline(data){

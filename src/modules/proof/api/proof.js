@@ -1,18 +1,9 @@
-import {serviceLoc} from "../../../common/api/requset";
+import {serviceLoc} from "../../../common/utils/requset";
 
 //创建凭证
 export function CreateProof(data){
     return serviceLoc.request({
         url:'/proof/createProof',
-        method:'post',
-        data
-    })
-}
-
-//所有凭证
-export function  FindAllProof(data){
-    return serviceLoc.request({
-        url:'/proof/findAllProof',
         method:'post',
         data
     })
@@ -27,7 +18,7 @@ export function  FindOneProof(data){
     })
 }
 
-//所有凭证
+//凭证
 export function  FindPipelineProof(data){
     return serviceLoc.request({
         url:'/proof/findPipelineProof',

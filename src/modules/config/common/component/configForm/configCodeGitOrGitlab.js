@@ -32,8 +32,8 @@ const ConfigCodeGitOrGitlab = props =>{
                 <Input style={{ width: 300 }} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <Row>
-                <FindAllProof type={1}/>
-                <AddProofButton codeType={codeType}/>
+                <FindAllProof type={codeType}/>
+                <AddProofButton type={1}/>
             </Row>
 
             <FormTest  git={'code'}/>

@@ -1,4 +1,4 @@
-import React, {Fragment,useState} from "react";
+import React, {Fragment,useState,useEffect} from "react";
 import {Button} from "antd";
 import './addProofModal'
 import AddProofModal from "./addProofModal";
@@ -7,26 +7,20 @@ import {getUser} from "doublekit-core-ui";
 
 const AddProofButton = props =>{
 
-    const {codeType,proofStore,style} = props
-    const {createProof,proofScope,setProofScope,fresh,setFresh} = proofStore
+    const {proofStore,style,type} = props
+    const {createProof,fresh,setFresh} = proofStore
 
     const userId = getUser().userId
     const [visible,setVisible] = useState(false)
+    const [isAuthority,setIsAuthority] = useState(false)
+
+    useEffect(()=>{
+        if(style){
+            setIsAuthority(true)
+        }
+    },[])
 
     const addProofVisible = () => {
-        switch (codeType){
-            case 1:
-                setProofScope(1)
-                break
-            case 4:
-                setProofScope(4)
-                break
-            case 31:
-                setProofScope(31)
-                break
-            case 32:
-                setProofScope(32)
-        }
         setVisible(true)
     }
 
@@ -36,17 +30,19 @@ const AddProofButton = props =>{
                 添加
             </Button>
             <AddProofModal
-                proofScope={proofScope}
                 visible={visible}
                 setVisible={setVisible}
                 createProof={createProof}
                 userId={userId}
                 fresh={fresh}
                 setFresh={setFresh}
+                isAuthority={isAuthority}
+                type={type}
             />
         </Fragment>
     )
 
 }
+
 
 export default inject('proofStore')(observer(AddProofButton))

@@ -2,7 +2,6 @@ import {action} from "mobx";
 
 import {GetAccessToken, GetAllStorehouse, GetBranch, GetCode, GetProof,} from "../api/github";
 
-
 export class GithubStore {
 
     @action

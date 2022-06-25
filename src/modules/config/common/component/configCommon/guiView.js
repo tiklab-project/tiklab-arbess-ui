@@ -16,7 +16,7 @@ const GuiView = props =>{
     const {form,configDataStore,del,onFinish} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isAlias,setIsAlias,codeType,setCodeType} = configDataStore
+        isGuiAlias,setIsGuiAlias,codeType,setCodeType} = configDataStore
 
     const inputRef = useRef();
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
@@ -26,21 +26,21 @@ const GuiView = props =>{
     const [newStage,setNewStage] = useState('')
 
     useEffect(()=>{
-        if (isAlias !==''){
+        if (isGuiAlias !==''){
             inputRef.current.focus()
         }
-    },[isAlias])
+    },[isGuiAlias])
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues])
 
     const displayInput = index =>{
-        setIsAlias(index)
+        setIsGuiAlias(index)
     }
 
     const hiddenInput = () =>{
-        setIsAlias('')
+        setIsGuiAlias('')
     }
 
     const changeInputValue = (e,index) =>{
@@ -92,7 +92,7 @@ const GuiView = props =>{
                             <div className='name'>
                                 <div  className='label'>
                                     {
-                                        isAlias === index ?
+                                        isGuiAlias === index ?
                                             <Input
                                                 type="text"
                                                 ref={inputRef}

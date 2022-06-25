@@ -10,20 +10,18 @@ import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 import {getUser} from "doublekit-core-ui";
-import moment from "../../../common/moment/moment";
 
 const ConfigDetails = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore,pluginsStore,proofStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore,pluginsStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure} = structureStore
 
-    const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
-    } = configDataStore
+    const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock,setMavenShellBlock,setCodeType} = configDataStore
 
     const [form] = Form.useForm()
     const [view,setView] = useState(1)
@@ -140,6 +138,7 @@ const ConfigDetails = props =>{
                             dataType:j.type,
                         })
                         localStorage.setItem('testId',j.testId)
+                        setUnitShellBlock(`${j.testOrder ? j.testOrder :''}`)
                     }
                     else if(j.type === 21 || j.type === 22 ){
                         newData.push({
@@ -148,6 +147,7 @@ const ConfigDetails = props =>{
                             dataType:j.type,
                         })
                         localStorage.setItem('structureId',j.structureId)
+                        setMavenShellBlock(`${j.structureOrder ? j.structureOrder : ''}`)
                     }
                     else if(j.type === 31 || j.type === 32 ){
                         newData.push({
@@ -161,12 +161,11 @@ const ConfigDetails = props =>{
                         Object.assign(formInitialValues,formValue)
                         localStorage.setItem('deployId',j.deployId)
                         localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
+                        setLinuxShellBlock(`${j.deployShell ? j.deployShell : ''}`)
+
                     }
                     setData([...newData])
                     setCodeData(newCode)
-                    setUnitShellBlock(`${j.testOrder ? j.testOrder :''}`)
-                    setMavenShellBlock(`${j.structureOrder ? j.structureOrder : ''}`)
-                    setLinuxShellBlock(`${j.deployShell ? j.deployShell : ''}`)
                     Object.assign(formInitialValues,j)
                     setFormInitialValues({...formInitialValues})
                 }
@@ -208,7 +207,7 @@ const ConfigDetails = props =>{
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
-                setCodeType('')
+                setCodeType(1)
                 break
             case 'test':
                 formInitialValues.testOrder = null
@@ -229,90 +228,6 @@ const ConfigDetails = props =>{
                 formInitialValues.mappingPort = null
                 setLinuxShellBlock('')
         }
-    }
-
-    const onFinish = values => {
-
-        //排序
-        let codeSort, testSort,structureSort, deploySort = 0
-        //配置别名
-        let testAlias,structureAlias,deployAlias
-        //配置类型
-        let testType,structureType,deployType
-
-        switch (codeData){
-            case '':
-                codeSort = 0
-                break
-            default:codeSort = 1
-        }
-
-        data && data.map((item,index)=>{
-            if(item.dataType === 11){
-                testSort = index + 2
-                testAlias = item.title
-                testType = item.dataType
-            }
-            if(item.dataType === 21 || item.dataType === 22){
-                structureSort = index + 2
-                structureAlias = item.title
-                structureType = item.dataType
-            }
-            if(item.dataType === 31 || item.dataType === 32){
-                deploySort = index + 2
-                deployAlias = item.title
-                deployType = item.dataType
-            }
-        })
-
-        const configureList = {
-            configureCreateTime:moment.moment,
-            user:{id:userId,},
-            pipeline:{pipelineId:pipelineId},
-            pipelineCode:{
-                codeId:localStorage.getItem('codeId'),
-                sort:codeSort,
-                type:codeData && codeData.codeType,
-                codeBranch:values.codeBranch,
-                codeName:values.codeName,
-                proof:{proofId:localStorage.getItem('gitProofId')}
-            },
-            pipelineTest:{
-                testId:localStorage.getItem('testId'),
-                sort:testSort,
-                testAlias:testAlias,
-                type:testType,
-                testOrder:unitShellBlock,
-            },
-            pipelineStructure:{
-                structureId:localStorage.getItem('structureId'),
-                sort:structureSort,
-                structureAlias:structureAlias,
-                type:structureType,
-                structureAddress:values.structureAddress,
-                structureOrder:mavenShellBlock,
-            },
-            pipelineDeploy:{
-                deployId:localStorage.getItem('deployId'),
-                sort:deploySort,
-                deployAlias:deployAlias,
-                type:deployType,
-                ip:values.ip,
-                port:values.port,
-                deployAddress: values.deployAddress,
-                deployTargetAddress: values.deployTargetAddress,
-                deployShell:linuxShellBlock,
-                dockerPort:values.dockerPort,
-                mappingPort:values.mappingPort,
-                proof:{ proofId:localStorage.getItem('deployProofId') }
-            }
-        }
-        updateConfigure(configureList).then(res=>{
-            if(res.code!==0){
-                message.error({content:'配置失败', className:'message',})
-            }message.success({content: '配置成功', className:'message',})
-            setIsPrompt(false)
-        })
     }
 
     return (
@@ -336,7 +251,7 @@ const ConfigDetails = props =>{
                     <FormView
                         form={form}
                         del={del}
-                        onFinish={onFinish}
+                        updateConfigure={updateConfigure}
                     />
                     :
                     // <GuiView
@@ -353,12 +268,9 @@ const ConfigDetails = props =>{
                                     pluginsStore={pluginsStore}
                                     extraProps={{
                                         configDataStore,
-                                        del,
+                                        configStore,
                                         form,
-                                        giteeStore,
-                                        githubStore,
-                                        onFinish,
-                                        proofStore,
+                                        del
                                     }}
                                 />
                                 : null
@@ -370,5 +282,5 @@ const ConfigDetails = props =>{
 }
 
 export default  withRouter(inject('configStore','giteeStore','structureStore',
-                'configDataStore','githubStore',PLUGIN_STORE,'proofStore')
+                'configDataStore','githubStore',PLUGIN_STORE)
                 (observer(ConfigDetails)))

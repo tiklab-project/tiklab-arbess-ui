@@ -91,7 +91,7 @@ const ConfigCodeGiteeOrGithub = props =>{
     return(
         <Fragment>
             <Row>
-                <FindAllProof  type={codeType} {...props}/>
+                <FindAllProof type={codeType} {...props}/>
                 <Button className='config-details-link' type="link" onClick={()=> setVisible(true)}>
                     <PlusOutlined />
                     新增服务链接

@@ -67,7 +67,7 @@ const ConfigDeployDocker = props =>{
             </Form.Item>
             <Row>
                 <FindAllProof type={32}/>
-                <AddProofButton codeType={32}/>
+                <AddProofButton type={5}/>
             </Row>
             <Form.Item
                 name='dockerPort'
