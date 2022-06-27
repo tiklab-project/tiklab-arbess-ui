@@ -3,10 +3,11 @@ import {getUser} from "doublekit-core-ui";
 import {Descriptions} from "antd";
 import SystemBreadcrumb from "../breadcrumb/systemBreadcrumb";
 
+// 用户基础信息
 const Base = props =>{
     return(
         <div className='userCenter-base'>
-            <SystemBreadcrumb firstItem={'用户中心'} secondItem={'基本信息'}/>
+            <SystemBreadcrumb firstItem={'用户管理'} secondItem={'基本信息'}/>
             <div className='userCenter-base-content'>
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="用户名">{getUser().name}</Descriptions.Item>

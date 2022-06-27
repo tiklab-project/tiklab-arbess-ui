@@ -67,7 +67,7 @@ const StructureRightExecute = props => {
         }
     }
 
-    const executeDetails = () =>{
+    const executeDetails = rightExecuteData =>{
         return rightExecuteData && rightExecuteData.map((item,index)=>{
             return(
                 <Card className={`mid_group_center-cart ${style(index+1)}`} key={index}>
@@ -125,7 +125,7 @@ const StructureRightExecute = props => {
                     <Button onClick={()=>cease()}> 停止 </Button>
                 </div>
             </div>
-            <div className="mid_group_center"> { executeDetails() } </div>
+            <div className="mid_group_center"> { executeDetails(rightExecuteData) } </div>
            { logRunLog() }
        </div>
     )

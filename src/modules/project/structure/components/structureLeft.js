@@ -88,12 +88,11 @@ const StructureLeft = props =>{
                         dataSource={leftPageList}
                         renderItem={(item,i) => (
                             <List.Item key={i}>
-                                <div
-                                    onClick={()=>showHistory(item,i)}
-                                    className={index=== i+1 ?
+                                <div onClick={()=>showHistory(item,i)}
+                                     className={index=== i+1 ?
                                         'history-content-list history-content-list_active'
                                         :  'history-content-list'
-                                    }
+                                     }
                                 >
                                     <div className='list-title'> # {item.findNumber}</div>
                                     <div className='list-group'>

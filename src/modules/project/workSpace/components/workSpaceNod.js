@@ -71,10 +71,9 @@ const WorkSpaceNod = props =>{
         return fileList && fileList.map((group,index)=>{
             if(group.treeType === 1 ){
                 return  <div className='nod_item_tree' key={index}>
-                            <span>{renderType(group.treeType)}</span>
-                            <span
-                                className='nod_item_tree_name'
-                                onClick={()=>textDetails(group)}
+                            <span> {renderType(group.treeType)} </span>
+                            <span className='nod_item_tree_name'
+                                  onClick={()=>textDetails(group)}
                             >
                                 {group.treeName}
                             </span>
@@ -82,9 +81,8 @@ const WorkSpaceNod = props =>{
             }else {
                 return   <div className='nod_item_tree' key={index}>
                             <span>{renderType(group.treeType)}</span>
-                            <span
-                                className='nod_item_tree_name'
-                                onClick={()=>{goDetails(group)}}
+                            <span className='nod_item_tree_name'
+                                  onClick={()=>{goDetails(group)}}
                             >
                                 {group.treeName}
                             </span>
@@ -99,10 +97,11 @@ const WorkSpaceNod = props =>{
             <h1>节点master上的工作空间</h1>
             <div className='workSpace-top-catalogue'>
                 <Breadcrumb>
-                    <Breadcrumb.Item className = 'catalogue_item_breadcrumb'
-                                     onClick={()=>setBreadcrumb()}
+                    <Breadcrumb.Item
+                        className = 'catalogue_item_breadcrumb'
+                        onClick={()=>setBreadcrumb()}
                     >
-                        <span>{renderType(2)}{pipelineName}</span>
+                        <span> {renderType(2)}{pipelineName} </span>
                     </Breadcrumb.Item>
                     {renderCatalogue(catalogue)}
                 </Breadcrumb>
@@ -110,7 +109,6 @@ const WorkSpaceNod = props =>{
             <div className='workSpace-top-nod'>
                 {renderFileList(fileList)}
             </div>
-
         </div>
     )
 }

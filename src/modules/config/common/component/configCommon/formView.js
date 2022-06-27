@@ -1,12 +1,12 @@
 import React, {useState, useEffect,useRef} from "react";
 import  './formView.scss';
 import {Button, Form, Input, message} from "antd";
+import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 import ConfigAddNewStageModal from "../formView/configAddNewStageModal";
 import ConfigAddCodeModal from "../formView/configAddCodeModal";
 import ChangeConfigSortsDrawer from "../formView/changeConfigSortsDrawer";
 import ConfigAddNewStage from "../formView/configAddNewStage";
 import ConfigCode from "../formView/configCode";
-import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
 import {withRouter} from "react-router";
 import ConfigForm from "./configForm";
@@ -16,13 +16,13 @@ import {getUser} from "doublekit-core-ui";
 
 const FormView = props =>{
 
-    const {form,del,configDataStore,updateConfigure} = props
+    const {form,del,configDataStore,updateConfigure,jumpOrNot} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
     } = configDataStore
 
-    const inputRef = useRef();
+    const inputRef = useRef()
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
@@ -144,8 +144,10 @@ const FormView = props =>{
                 proof:{ proofId:localStorage.getItem('deployProofId') }
             }
         }
-        console.log(configureList)
         updateConfigure(configureList).then(res=>{
+            if(jumpOrNot){
+                props.history.push('/index/task/config')
+            }
             if(res.code!==0){
                 message.error({content:'配置失败', className:'message',})
             }else {
@@ -168,13 +170,12 @@ const FormView = props =>{
                     <div className='configView1-wrapper-Headline'>
                         {
                             isFormAlias === index ?
-                                <Input
-                                    type="text"
-                                    ref={inputRef}
-                                    onBlur={hiddenInput}
-                                    style={{width:100}}
-                                    defaultValue={group.title}
-                                    onChange={e=>changeInputValue(e,index)}
+                                <Input type="text"
+                                       ref={inputRef}
+                                       onBlur={hiddenInput}
+                                       style={{width:100}}
+                                       defaultValue={group.title}
+                                       onChange={e=>changeInputValue(e,index)}
                                 />
                                 :
                                 <div style={{display:"inline"}}>

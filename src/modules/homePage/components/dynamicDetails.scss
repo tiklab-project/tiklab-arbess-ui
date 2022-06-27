@@ -1,0 +1,15 @@
+.dynamicDetails{
+    &-bottom{
+        &-listHeader{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .name{
+                color: #1890ff;
+                cursor: pointer;
+                padding: 0 5px;
+            }
+        }
+    }
+}

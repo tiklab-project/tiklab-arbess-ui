@@ -9,7 +9,7 @@ export function  CreatePipeline(data){
     })
 }
 
-//查询所有
+//获取所有流水线
 export function FindAllPipelineStatus(data) {
     return serviceLoc.request({
         url:'/pipelineHome/findUserPipeline',
@@ -19,7 +19,7 @@ export function FindAllPipelineStatus(data) {
 }
 
 
-//搜索流水线
+//模糊搜索流水线
 export function FindOneName(data){
     return serviceLoc.request({
         url:'/pipeline/findOneName',

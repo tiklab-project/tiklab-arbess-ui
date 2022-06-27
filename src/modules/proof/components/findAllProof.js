@@ -36,10 +36,9 @@ const FindAllProof = props =>{
 
     return(
         <Form.Item name={type < 6 ? 'gitProofName' : 'dockerProofName'}  label="凭证">
-            <Select
-                style={{ width: 300 }}
-                onClick={clickFindAllGit}
-                onChange={(value,e)=>changeGitSelect(value,e)}
+            <Select style={{ width: 300 }}
+                    onClick={clickFindAllGit}
+                    onChange={(value,e)=>changeGitSelect(value,e)}
             >
                 {
                     pipelineProofList && pipelineProofList.map(item=>{

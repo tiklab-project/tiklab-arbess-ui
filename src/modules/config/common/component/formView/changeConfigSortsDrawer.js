@@ -13,20 +13,15 @@ const ChangeConfigSortsDrawer = props =>{
         let desc
         if(codeData){
             switch (codeData.codeType) {
-                case 1:
-                    desc = '通用Git'
+                case 1:desc = '通用Git'
                     break
-                case 2:
-                    desc = 'Gitee'
+                case 2:desc = 'Gitee'
                     break
-                case 3:
-                    desc = 'Github'
+                case 3:desc = 'Github'
                     break
-                case 4:
-                    desc = 'Gitlab'
+                case 4:desc = 'Gitlab'
                     break
-                case 5:
-                    desc = 'SVN'
+                case 5:desc = 'SVN'
             }
             nameArray.push({
                 key:0,
@@ -38,20 +33,15 @@ const ChangeConfigSortsDrawer = props =>{
         data && data.map((item,index)=>{
             let tpl
             switch (item.dataType) {
-                case 11:
-                    tpl = '单元测试'
+                case 11:tpl = '单元测试'
                     break
-                case 21:
-                    tpl = 'maven'
+                case 21:tpl = 'maven'
                     break
-                case 22:
-                    tpl = 'node'
+                case 22:tpl = 'node'
                     break
-                case 31:
-                    tpl = 'linux'
+                case 31:tpl = 'linux'
                     break
-                case 32:
-                    tpl = 'docker'
+                case 32:tpl = 'docker'
             }
             nameArray.push({
                 key:index+1,
@@ -130,12 +120,11 @@ const ChangeConfigSortsDrawer = props =>{
                     </div>
                 </div>
                 <div className="wrapper-body" style={{padding:20}}>
-                    <Tree
-                        className="draggable-tree"
-                        draggable
-                        blockNode
-                        onDrop={onDrop}
-                        treeData={gData}
+                    <Tree className="draggable-tree"
+                          draggable // 是否可拖拽
+                          blockNode  // 是否占据一行
+                          onDrop={onDrop}
+                          treeData={gData}
                     />
                 </div>
             </div>

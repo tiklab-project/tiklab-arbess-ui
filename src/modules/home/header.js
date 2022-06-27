@@ -10,12 +10,15 @@ const Head =props=>{
 
     const {routers,languageSelectData=[]} = props;
 
-    const { i18n } = useTranslation();
     let path = props.location.pathname
-    const [lan, setLan] = useState(i18n.language);
-    const [currentLink, setCurrentLink] = useState(path);
+    const { i18n } = useTranslation()
+    const [lan, setLan] = useState(i18n.language)
+    const [currentLink, setCurrentLink] = useState(path)
 
     useEffect(()=>{
+        if(path === '/index/dynamic'){
+            path='/index/home'
+        }
         if (path.indexOf('/index/task') === 0) {
             path='/index/pipeline'
         }
@@ -53,10 +56,9 @@ const Head =props=>{
         if (routers) {
             return routers && routers.map(routers=>{
                 return (
-                    <div
-                        key={routers.key}
-                        onClick={ () => changeCurrentLink(routers)}
-                        className={currentLink === routers.to ? 'headers-active ' : null}
+                    <div key={routers.key}
+                         onClick={ () => changeCurrentLink(routers)}
+                         className={currentLink === routers.to ? 'headers-active ' : null}
                     >
                         {routers.title}
                     </div>
@@ -95,7 +97,7 @@ const Head =props=>{
                             <Button>{lan}</Button>
                         </Dropdown>
                         <div/>
-                        <Dropdown overlay={groupMenu} placement="bottom" >
+                        <Dropdown overlay={groupMenu} placement="bottom" style={{'cursor':'pointer'}}>
                             <Avatar src={portrait} />
                         </Dropdown>
                     </div>

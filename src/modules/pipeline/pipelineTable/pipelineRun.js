@@ -1,5 +1,5 @@
-import React from 'react'
-import './pipelineRun.scss'
+import React from 'react';
+import './pipelineRun.scss';
 
 const PipelineRun = () =>{
     return(

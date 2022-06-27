@@ -1,6 +1,6 @@
 import React  from "react";
 import {withRouter} from "react-router-dom";
-import './projectAsideOpt.scss'
+import './projectAsideOpt.scss';
 
 const ProjectAsideOpt = props =>{
 
@@ -29,10 +29,9 @@ const ProjectAsideOpt = props =>{
                     {
                         pipelineList && pipelineList.map(item=>{
                             return(
-                                <div
-                                    onClick={e =>{onClick(e,item)}}
-                                    key={item.pipelineId}
-                                    className='opt-content-group_item'
+                                <div onClick={e =>{onClick(e,item)}}
+                                     key={item.pipelineId}
+                                     className='opt-content-group_item'
                                 >
                                     {item.pipelineName}
                                 </div>

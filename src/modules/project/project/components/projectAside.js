@@ -52,8 +52,7 @@ const ProjectAside = props =>{
     return(
          <div className='aside'>
             <ul  className='content'>
-                <li
-                    onClick={()=>setVisible(!visible)}
+                <li onClick={()=>setVisible(!visible)}
                     onBlur={()=>setVisible(false)}
                     className='aside_content aside_dropdown'
                     style={{padding:10}}
@@ -76,8 +75,7 @@ const ProjectAside = props =>{
                 {
                     taskRouters && taskRouters.map(item=>{
                         return(
-                            <li
-                                key={item.key}
+                            <li key={item.key}
                                 className={nav===item.to ? 'aside_content aside_active' : 'aside_content'}
                                 onClick={()=>changeNav(item)}
                             >

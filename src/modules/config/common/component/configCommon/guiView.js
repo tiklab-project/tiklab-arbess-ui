@@ -6,24 +6,29 @@ import ConfigAddCodeDrawer from "../guiView/configAddCodeDrawer";
 import ConfigAddNewStageDrawer from "../guiView/configAddNewStageDrawer";
 import ConfigFormDetailsDrawer from "../guiView/configFormDetailsDrawer";
 import {inject, observer} from "mobx-react";
-import {Form, Input} from "antd";
+import {Form, Input, message} from "antd";
 import {EditOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import ConfigName from "./configName";
+import moment from "../../../../../common/moment/moment";
+import {getUser} from "doublekit-core-ui";
 
 const GuiView = props =>{
 
-    const {form,configDataStore,del,onFinish} = props
+    const {form,configDataStore,del,updateConfigure,jumpOrNot} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isGuiAlias,setIsGuiAlias,codeType,setCodeType} = configDataStore
+        isGuiAlias,setIsGuiAlias,codeType,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
+    } = configDataStore
 
-    const inputRef = useRef();
+    const inputRef = useRef()
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
     const [index,setIndex] = useState('')  // 配置位置的插入
     const [newStage,setNewStage] = useState('')
+    const pipelineId = localStorage.getItem('pipelineId')
+    const userId = getUser().userId
 
     useEffect(()=>{
         if (isGuiAlias !==''){
@@ -65,22 +70,109 @@ const GuiView = props =>{
         setIndex(index)
     }
 
+    const onFinish = values => {
+        //排序
+        let codeSort, testSort,structureSort, deploySort = 0
+        //配置别名
+        let testAlias,structureAlias,deployAlias
+        //配置类型
+        let testType,structureType,deployType
+
+        switch (codeData){
+            case '':
+                codeSort = 0
+                break
+            default:codeSort = 1
+        }
+
+        data && data.map((item,index)=>{
+            if(item.dataType === 11){
+                testSort = index + 2
+                testAlias = item.title
+                testType = item.dataType
+            }
+            if(item.dataType === 21 || item.dataType === 22){
+                structureSort = index + 2
+                structureAlias = item.title
+                structureType = item.dataType
+            }
+            if(item.dataType === 31 || item.dataType === 32){
+                deploySort = index + 2
+                deployAlias = item.title
+                deployType = item.dataType
+            }
+        })
+
+        const configureList = {
+            configureCreateTime:moment.moment,
+            user:{id:userId,},
+            pipeline:{pipelineId:pipelineId},
+            pipelineCode:{
+                codeId:localStorage.getItem('codeId'),
+                sort:codeSort,
+                type:codeData && codeData.codeType,
+                codeBranch:values.codeBranch,
+                codeName:values.codeName,
+                proof:{proofId:localStorage.getItem('gitProofId')}
+            },
+            pipelineTest:{
+                testId:localStorage.getItem('testId'),
+                sort:testSort,
+                testAlias:testAlias,
+                type:testType,
+                testOrder:unitShellBlock,
+            },
+            pipelineStructure:{
+                structureId:localStorage.getItem('structureId'),
+                sort:structureSort,
+                structureAlias:structureAlias,
+                type:structureType,
+                structureAddress:values.structureAddress,
+                structureOrder:mavenShellBlock,
+            },
+            pipelineDeploy:{
+                deployId:localStorage.getItem('deployId'),
+                sort:deploySort,
+                deployAlias:deployAlias,
+                type:deployType,
+                ip:values.ip,
+                port:values.port,
+                deployAddress: values.deployAddress,
+                deployTargetAddress: values.deployTargetAddress,
+                deployShell:linuxShellBlock,
+                dockerPort:values.dockerPort,
+                mappingPort:values.mappingPort,
+                proof:{ proofId:localStorage.getItem('deployProofId') }
+            }
+        }
+        updateConfigure(configureList).then(res=>{
+            if(jumpOrNot){
+                props.history.push('/index/task/config')
+            }
+            if(res.code!==0){
+                message.error({content:'配置失败', className:'message',})
+            }else {
+                message.success({content: '配置成功', className:'message',})
+            }
+            setIsPrompt(false)
+        })
+    }
+
     const onValuesChange = value =>{
         Object.assign(formInitialValues,value)
         setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
     }
 
-    const newStageShow = () =>{
+    const newStageShow = data =>{
         return data && data.map((item,index)=>{
             return(
                 <Fragment key={index}>
                     <div className='group-flow'>
                         <div className='group-flow_btn' >
-                            <svg
-                                className="icon group-flow_btn_i"
-                                aria-hidden="true"
-                                onClick={()=>insertData(item,index)}
+                            <svg className="icon group-flow_btn_i"
+                                 aria-hidden="true"
+                                 onClick={()=>insertData(item,index)}
                             >
                                 {/*<use xlinkHref="#icon-tianjia"/>*/}
                                 <use xlinkHref="#icon-zengjia"/>
@@ -93,13 +185,12 @@ const GuiView = props =>{
                                 <div  className='label'>
                                     {
                                         isGuiAlias === index ?
-                                            <Input
-                                                type="text"
-                                                ref={inputRef}
-                                                onBlur={hiddenInput}
-                                                style={{width:100}}
-                                                defaultValue={item.title}
-                                                onChange={e=>changeInputValue(e,index)}
+                                            <Input type="text"
+                                                   ref={inputRef}
+                                                   onBlur={hiddenInput}
+                                                   style={{width:100}}
+                                                   defaultValue={item.title}
+                                                   onChange={e=>changeInputValue(e,index)}
                                             />
                                             :
                                         <Fragment>
@@ -144,7 +235,7 @@ const GuiView = props =>{
                 <div className='configView2-main'>
                     <div className='configView2-main_container'>
                         <div className='configView2-main_group'>
-                            { newStageShow() }
+                            { newStageShow(data) }
                             <ConfigAddNewStage
                                 setIndex={setIndex}
                                 setNewStageDrawer={setNewStageDrawer}

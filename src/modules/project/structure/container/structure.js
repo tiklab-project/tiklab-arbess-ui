@@ -109,7 +109,6 @@ const Structure = props => {
         })
     }
 
-
     return (
         <div className='structure'>
             {

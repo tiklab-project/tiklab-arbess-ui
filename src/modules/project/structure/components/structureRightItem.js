@@ -32,7 +32,7 @@ const StructureRightItem = props =>{
         })
     }
 
-    const rightDetails = () =>{
+    const rightDetails = rightFlowData =>{
         return  rightFlowData && rightFlowData.map((item,index)=>{
             return(
                 <Card  className={`mid_group_center-cart  item-${item.runState}`}  key={index}>
@@ -79,7 +79,7 @@ const StructureRightItem = props =>{
                     </Popconfirm>
                 </div>
             </div>
-            <div className="mid_group_center"> {rightDetails()} </div>
+            <div className="mid_group_center"> {rightDetails(rightFlowData)} </div>
             <div className='structure-content-bottom'>
                 <div className='structure-content-bottom-title'>输出</div>
                 <div className='structure-content-bottom-outLog'>

@@ -87,9 +87,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                 layout="vertical"
                 name="userForm"
                 autoComplete = "off"
-                initialValues={{
-                    'proofType':1,
-                }}
+                initialValues={{'proofType':1}}
             >
                 <Form.Item label='连接类型' name='proofType'>
                     <Select  style={{ width: 120 }} disabled={true}>

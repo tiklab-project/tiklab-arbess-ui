@@ -9,6 +9,11 @@ export class HomePageStore{
 
     @observable pipelineNearList = []
     @observable dynamicList = []
+    @observable page = {
+        defaultCurrent: 1,
+        pageSize: "15",
+        total: "1"
+    }
 
     @action
     findAllOpen = async value =>{
@@ -31,16 +36,17 @@ export class HomePageStore{
     }
 
     @action
-    findUserAction = async value =>{
-        // const param = {
-        //     userId:value.userId
-        // }
-        const param = new FormData()
-        param.append('userId',value.userId)
-        FindUserAction(param).then(res=>{
+    findUserAction = async values =>{
+        const params = {
+            userId:values.userId,
+            page:values.page,
+            pageSize:values.pageSize,
+        }
+        FindUserAction(params).then(res=>{
             console.log('动态',res)
             if(res.code === 0 && res.data ){
-                this.dynamicList = res.data
+                this.dynamicList = res.data.dataList
+                this.page.total = res.data.listSize
             }
         }).catch(error=>{
             console.log(error)

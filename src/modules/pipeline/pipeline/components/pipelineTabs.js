@@ -5,7 +5,6 @@ import PipelineTable from "../../pipelineTable/pipelineTable";
 import View from "../../../view/view";
 import {getUser} from 'doublekit-core-ui';
 
-
 const PipelineTabs = props =>{
 
     const {pipelineStore}=props
@@ -24,10 +23,10 @@ const PipelineTabs = props =>{
             id:1,
             title:'所有'
         },
-        {
-            id:2,
-            title:'我的'
-        }
+        // {
+        //     id:2,
+        //     title:'我的'
+        // }
     ]
 
     const onclick = item => {
@@ -42,7 +41,8 @@ const PipelineTabs = props =>{
                         lis.map(item=>{
                             return(
                                 <div key={item.id}
-                                     className={type === item.id ? 'pipeline-tabs-type-active pipeline-tabs-type-link' : 'pipeline-tabs-type-link'}
+                                     className={type === item.id ?
+                                     'pipeline-tabs-type-active pipeline-tabs-type-link' : 'pipeline-tabs-type-link'}
                                      onClick={()=>onclick(item)}
                                 >
                                     {item.title}

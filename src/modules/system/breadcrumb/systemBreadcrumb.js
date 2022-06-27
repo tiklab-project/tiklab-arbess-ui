@@ -6,12 +6,10 @@ const SystemBreadcrumb = props =>{
     return(
         <div className='breadcrumb'>
             <Breadcrumb separator=">">
-                <Breadcrumb.Item >
-                    {firstItem}
-                </Breadcrumb.Item>
-                <Breadcrumb.Item >
-                    {secondItem}
-                </Breadcrumb.Item>
+                <Breadcrumb.Item> {firstItem} </Breadcrumb.Item>
+                {
+                    secondItem ? <Breadcrumb.Item> {secondItem} </Breadcrumb.Item> :null
+                }
             </Breadcrumb>
         </div>
     )

@@ -8,6 +8,9 @@ const Index=AsyncComponent(()=>import('./modules/home/portal'))
 /* 首页 */
 const HomePage=AsyncComponent(()=>import('./modules/homePage/container/homePage'))
 
+/* 动态详情 */
+const DynamicDetails=AsyncComponent(()=>import('./modules/homePage/components/dynamicDetails'))
+
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import('./modules/pipeline/pipeline/container/pipeline'))
 const PipelineAdd=AsyncComponent(()=>import('./modules/pipeline/pipelineAdd/pipelineAdd'))
@@ -68,6 +71,11 @@ const routers=[
                 exact:true,
             },
             {
+                path: '/index/dynamic',
+                component: DynamicDetails,
+                exact:true,
+            },
+            {
                 path:'/index/pipeline',
                 component:Pipeline,
                 exact: true,
@@ -75,18 +83,22 @@ const routers=[
             {
                 path:'/index/new',
                 component: PipelineAdd,
+                exact:true,
             },
             {
                 path:'/index/collect',
                 component: PipelineCollect,
+                exact:true,
             },
             {
                 path:'/index/config/:pipelineName',
                 component:PipelineConfig,
+                exact:true,
             },
             {
                 path:'/index/searchresult/:searchresult',
                 component:SearchResult,
+                exact:true,
             },
             {
                 path:'/index/task',

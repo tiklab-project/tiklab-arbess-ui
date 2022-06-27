@@ -5,7 +5,7 @@ import FormView from "../common/component/configCommon/formView";
 import GuiView from "../common/component/configCommon/guiView";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
-import {Form, message} from "antd";
+import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import {getUrlParam} from '../common/component/configCommon/getUrlParam';
@@ -31,6 +31,7 @@ const ConfigDetails = props =>{
     const pipelineId = localStorage.getItem('pipelineId')
     const userId = getUser().userId
 
+    // 是否有图形化插件
     useEffect(()=>{
         pluginsStore.plugins && pluginsStore.plugins.map(item=>{
             if(item.id === 'gui'){
@@ -84,6 +85,7 @@ const ConfigDetails = props =>{
             window.close()
         }
     }, [codeValue])
+
 
     useEffect(()=>{
         if(codeData){
@@ -176,23 +178,17 @@ const ConfigDetails = props =>{
     // 按需清空表单的值
     const del = i => {
         switch (i) {
-            case 11 :
-                delDetail('test')
+            case 11 :delDetail('test')
                 break
-            case 21 :
-                delDetail('structure')
+            case 21 :delDetail('structure')
                 break
-            case 22:
-                delDetail('structure')
+            case 22:delDetail('structure')
                 break
-            case 31:
-                delDetail('deploy')
+            case 31:delDetail('deploy')
                 break
-            case 32:
-                delDetail('deploy')
+            case 32:delDetail('deploy')
                 break
-            default:
-                delDetail('git')
+            default:delDetail('git')
         }
         setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
@@ -249,16 +245,11 @@ const ConfigDetails = props =>{
             {
                 view === 1 ?
                     <FormView
-                        form={form}
                         del={del}
+                        form={form}
                         updateConfigure={updateConfigure}
                     />
                     :
-                    // <GuiView
-                    //     form={form}
-                    //     del={del}
-                    //     onFinish={onFinish}
-                    // />
                     <Fragment>
                         {
                             isBtn ?

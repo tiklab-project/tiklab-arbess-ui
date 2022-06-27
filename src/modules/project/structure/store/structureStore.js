@@ -120,7 +120,6 @@ export class StructureStore {
                 } else {
                     this.leftPageList = res.data.dataList
                     this.page.total = res.data.totalRecord
-                    this.page.defaultCurrent = 1
                     this.modeData =  res.data.dataList && res.data.dataList[0]
                     this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
                     this.isData = true

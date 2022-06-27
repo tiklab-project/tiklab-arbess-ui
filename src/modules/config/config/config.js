@@ -1,6 +1,6 @@
 import React,{Fragment,useState,useEffect} from "react";
 import '../common/component/configCommon/config.scss';
-import {Form, message} from "antd";
+import {Form} from "antd";
 import {withRouter} from "react-router";
 import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import FormView from "../common/component/configCommon/formView";
@@ -9,7 +9,6 @@ import ConfigChangeView from "../common/component/configCommon/configChangeView"
 import {getUrlParam} from '../common/component/configCommon/getUrlParam';
 import {inject, observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
-import moment from "../../../common/moment/moment";
 import {PLUGIN_STORE, PluginComponent} from "doublekit-plugin-ui";
 
 const Config = props =>{
@@ -22,13 +21,14 @@ const Config = props =>{
     const {pipelineStartStructure} = structureStore
 
     const {setIsPrompt,codeData,setCodeData,formInitialValues,setData,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
+        setUnitShellBlock,setMavenShellBlock,setCodeType
     } = configDataStore
 
     const [form] = Form.useForm()
     const userId = getUser().userId
     const [view,setView] = useState(1)
     const [isBtn,setIsBtn] = useState(false)
+    const [jumpOrNot,] = useState(true)
     const codeValue = getUrlParam('code')
     const codeError = getUrlParam('error')
     const pipelineId = localStorage.getItem('pipelineId')
@@ -102,23 +102,17 @@ const Config = props =>{
     // 按需清空表单的值
     const del = i => {
         switch (i) {
-            case 11 :
-                delDetail('test')
+            case 11 :delDetail('test')
                 break
-            case 21 :
-                delDetail('structure')
+            case 21 :delDetail('structure')
                 break
-            case 22:
-                delDetail('structure')
+            case 22:delDetail('structure')
                 break
-            case 31:
-                delDetail('deploy')
+            case 31:delDetail('deploy')
                 break
-            case 32:
-                delDetail('deploy')
+            case 32:delDetail('deploy')
                 break
-            default:
-                delDetail('git')
+            default:delDetail('git')
         }
         setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
@@ -133,7 +127,7 @@ const Config = props =>{
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
                 setCodeData('')
-                setCodeType('')
+                setCodeType(1)
                 break
             case 'test':
                 formInitialValues.testOrder = null
@@ -170,12 +164,13 @@ const Config = props =>{
                     />
                 </div>
             </div>
-
             {
                 view === 1 ?
                     <FormView
-                        form={form}
                         del={del}
+                        form={form}
+                        jumpOrNot={jumpOrNot}
+                        updateConfigure={updateConfigure}
                     />
                     :
                     <Fragment>
@@ -187,9 +182,10 @@ const Config = props =>{
                                     pluginsStore={pluginsStore}
                                     extraProps={{
                                         configDataStore,
-                                        del,
-                                        form,
                                         configStore,
+                                        jumpOrNot,
+                                        form,
+                                        del,
                                     }}
                                 />
                                 : null

@@ -4,6 +4,8 @@ import {renderRoutes} from "react-router-config";
 import Heads from "./header";
 
 const Portal= props=>{
+
+    const {route}=props
     const headerRoutes=[
         {
             to:'/index/home',
@@ -21,9 +23,6 @@ const Portal= props=>{
             key:'system'
         }
     ]
-
-    const {route}=props
-
 
     return(
         <div className="frame">

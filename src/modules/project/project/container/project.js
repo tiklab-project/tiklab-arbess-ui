@@ -63,10 +63,9 @@ const Project= (props)=>{
                 setPipeline={setPipeline}
                 setIsPrompt={setIsPrompt}
             />
-            <div
-                className='project-content'
-                onClick={()=>setVisible(false)}
-                style={{marginLeft:65}}
+            <div className='project-content'
+                 onClick={()=>setVisible(false)}
+                 style={{marginLeft:65}}
             >
                 {renderRoutes(route.routes)}
             </div>

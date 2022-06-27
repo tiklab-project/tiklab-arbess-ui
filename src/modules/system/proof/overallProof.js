@@ -16,7 +16,7 @@ const OverallProof = props =>{
 
     return(
         <Fragment>
-            <SystemBreadcrumb firstItem={'安全设置'} secondItem={'凭证设置'}/>
+            <SystemBreadcrumb firstItem={'凭证管理'}/>
             <Proof proofList={systemProofList} />
         </Fragment>
     )

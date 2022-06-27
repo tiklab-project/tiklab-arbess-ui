@@ -22,69 +22,69 @@ const SystemAside= props =>  {
         {
             key:'/index/system/base',
             label:'用户管理',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'A',
         },
         {
             key:'/index/system/list',
             label:'用户列表',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'B',
         },
         {
             key:'/index/system/directory',
             label:'用户目录',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'C',
         },
         {
             key:'/index/system/organ',
             label:'组织管理',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'D',
         },
         {
-            key:1,
+            key:'1',
             label:'权限管理',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'E',
             children:[
                 {
                     key:'/index/system/power/feature',
                     label:'功能管理',
-                    icon:'icon-gongzuotongji',
+                    icon:'#icon-gongzuotongji',
                     enCode:'E',
                 },
                 {
                     key:'/index/system/power/role',
                     label:'角色管理',
-                    icon:'icon-gongzuotongji',
+                    icon:'#icon-gongzuotongji',
                     enCode:'E',
                 }
             ]
         },
         {
             key:'/index/system/proof',
-            label:'凭证设置',
-            icon:'icon-gongzuotongji',
+            label:'凭证管理',
+            icon:'#icon-gongzuotongji',
             enCode:'F',
         },
         {
             key:'/index/system/plugin',
             label:'插件管理',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'G',
         },
         {
             key:'/index/system/info',
             label:'系统信息',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'H',
         },
         {
             key:'/index/system/log',
             label:'系统日志',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'J',
         },
     ]
@@ -103,7 +103,7 @@ const SystemAside= props =>  {
                     key={data.code}
                 >
                     <svg className="icon" aria-hidden="true">
-                        <use xlinkHref={`#${data.icon}`} />
+                        <use xlinkHref={data.icon} />
                     </svg>
                     <span>{data.label}</span>
                 </li>
@@ -127,14 +127,13 @@ const SystemAside= props =>  {
         return (
             <PrivilegeButton  key={item.key} code={item.enCode}>
                 <li key={item.code} title={item.label} className="orga-aside-li">
-                    <div
-                        className="orga-aside-item orga-aside-first"
-                        style={{paddingLeft: `${deep * 20 + 20}`}}
-                        onClick={() => setOpenOrClose(item.key)}
+                    <div className="orga-aside-item orga-aside-first"
+                         style={{paddingLeft: `${deep * 20 + 20}`}}
+                         onClick={() => setOpenOrClose(item.key)}
                     >
                     <span style={{color: "$blue-main"}}>
                         <svg className="icon" aria-hidden="true">
-                            <use xlinkHref={`#${item.icon}`} />
+                            <use xlinkHref={item.icon} />
                         </svg>
                         <span className="orga-aside-title">{item.label}</span>
                     </span>
@@ -148,10 +147,8 @@ const SystemAside= props =>  {
                             }
                         </div>
                     </div>
-                    <ul
-                        title={item.label}
-                        className={`orga-aside-ul ${isExpandedTree(item.key) 
-                            ? null: 'orga-aside-hidden'}`}
+                    <ul title={item.label}
+                        className={`orga-aside-ul ${isExpandedTree(item.key) ? null: 'orga-aside-hidden'}`}
                     >
                         {
                             item.children && item.children.map(item =>{

@@ -51,12 +51,11 @@ const AddProofModal = props =>{
             onCancel={()=>setVisible(false)}
             onOk={onOk}
         >
-            <Form
-                form={form}
-                layout="vertical"
-                name="userForm"
-                autoComplete = "off"
-                initialValues={{proofType:"password",type:1,proofScope:1}}
+            <Form form={form}
+                  layout="vertical"
+                  name="userForm"
+                  autoComplete = "off"
+                  initialValues={{proofType:"password",type:1,proofScope:1}}
             >
                 <Form.Item label='凭证级别' name='type'>
                     <Select >

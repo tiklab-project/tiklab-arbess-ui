@@ -1,23 +1,41 @@
-import React, {Fragment, useEffect} from "react";
-import {Button, List} from "antd";
+import React, {useEffect, Fragment, useState} from "react";
+import {inject,observer} from "mobx-react";
+import {withRouter} from "react-router";
+import {getUser} from "doublekit-core-ui";
+import {List,ConfigProvider} from "antd";
+import './dynamicDetails.scss';
+import zhCN from 'antd/es/locale/zh_CN';
 
-const Dynamic = props =>{
+const DynamicDetails = props =>{
 
-    const {userId,findUserAction,dynamicList} = props
+    const {homePageStore} = props
+    const {findUserAction,dynamicList,page} = homePageStore
+    const [pageNumber,setPageNumber] = useState(1)
+    const userId = getUser().userId
 
     useEffect(()=>{
         const params = {
             userId:userId,
             page:1,
-            pageSize:10,
+            pageSize:15,
         }
         findUserAction(params)
     },[])
 
+    const onChangePage = page =>{
+        const params = {
+            userId:userId,
+            page:page,
+            pageSize:15,
+        }
+        setPageNumber(page)
+        findUserAction(params)
+    }
+
     const goUser = () => {
         props.history.push('/index/system')
     }
-    
+
     const goPipeline = item =>{
         localStorage.setItem('pipelineName',item.pipelineName)
         localStorage.setItem('pipelineId',item.pipelineId)
@@ -25,23 +43,20 @@ const Dynamic = props =>{
     }
 
     return(
-        <div className='homePage-content-dynamic'>
-            <div className='dynamic-top'>
-                <div className='dynamic-top-title'>近期动态</div>
-                <div>
-                    {
-                        dynamicList && dynamicList.length === 0 ?
-                            null :
-                            <Button onClick={()=>props.history.push('/index/dynamic')}>
-                                更多
-                            </Button>
-                    }
-                </div>
-            </div>
-            <div className='dynamic-bottom'>
+        <div className='dynamicDetails'>
+            <ConfigProvider locale={zhCN}>
                 <List
                     size="large"
                     bordered
+                    pagination={{
+                        ...page,
+                        onChange: (page) => {
+                            onChangePage(page);
+                        },
+                        hideOnSinglePage:true,  //只有一页时是否隐藏分页器
+                        showQuickJumper:true,   //是否可以快速跳转至某页
+                        showSizeChanger:false, //是否展示 pageSize 切换器
+                    }}
                     locale={{emptyText:
                             <Fragment>
                                 <svg className="icon" aria-hidden="true" >
@@ -52,9 +67,9 @@ const Dynamic = props =>{
                     }}
                     dataSource={dynamicList}
                     renderItem={(item,index) => <List.Item>
-                        <div  className='dynamic-bottom-listHeader'>
+                        <div  className='dynamicDetails-bottom-listHeader'>
                             <div>
-                                <span>{index+1}、用户</span>
+                                <span>{(index+1)+(pageNumber-1)*15}、用户</span>
                                 <span className='name' onClick={()=>goUser(item.user)}>
                                    {item.user && item.user.name}
                                 </span>
@@ -68,9 +83,9 @@ const Dynamic = props =>{
                         </div>
                     </List.Item>}
                 />
-            </div>
+            </ConfigProvider>
         </div>
     )
 }
 
-export default Dynamic
+export default withRouter(inject('homePageStore')(observer(DynamicDetails)))

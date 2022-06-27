@@ -1,5 +1,11 @@
 import React,{Fragment} from "react";
-import formAll from "../configForm/formAll";
+import ConfigCodeSvn from "../configForm/configCodeSvn";
+import ConfigCodeGitOrGitlab from '../configForm/configCodeGitOrGitlab'
+import ConfigCodeGiteeOrGithub from "../configForm/configCodeGiteeOrGithub";
+import ConfigTestUnit from "../configForm/configTestUnit";
+import ConfigStructureMaven from "../configForm/configStructureMavenOrNode";
+import ConfigDeployLinux from "../configForm/configDeployLinux";
+import ConfigDeployDocker from "../configForm/configDeployDocker";
 
 const ConfigForm = props =>{
     const {type} = props
@@ -9,25 +15,25 @@ const ConfigForm = props =>{
                 (()=>{
                     switch (type){
                         case 1:
-                            return formAll.gitOrGitlab
+                            return <ConfigCodeGitOrGitlab/>
                         case 2:
-                            return formAll.giteeOrGithub
+                            return <ConfigCodeGiteeOrGithub/>
                         case 3:
-                            return formAll.giteeOrGithub
+                            return <ConfigCodeGiteeOrGithub/>
                         case 4:
-                            return formAll.gitOrGitlab
+                            return <ConfigCodeGitOrGitlab/>
                         case 5:
-                            return formAll.svn
+                            return <ConfigCodeSvn/>
                         case 11:
-                            return formAll.unit
+                            return <ConfigTestUnit/>
                         case 21:
-                            return formAll.mavenOrNode
+                            return <ConfigStructureMaven/>
                         case 22:
-                            return formAll.mavenOrNode
+                            return <ConfigStructureMaven/>
                         case 31:
-                            return formAll.linux
+                            return <ConfigDeployLinux/>
                         case 32:
-                            return formAll.docker
+                            return <ConfigDeployDocker/>
                     }
                 })()
             }

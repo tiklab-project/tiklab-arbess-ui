@@ -60,10 +60,7 @@ const ConfigAddCodeModal = props =>{
             footer={[]}
             title='选择代码源'
         >
-            <ConfigCodeOrNewStage
-                lis={lis}
-                handleClick={handleClick}
-            />
+            <ConfigCodeOrNewStage lis={lis} handleClick={handleClick}/>
         </Modal>
     )
 }

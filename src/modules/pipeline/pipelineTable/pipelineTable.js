@@ -29,11 +29,8 @@ const PipelineTable = props =>{
         updateFollow(params).then(res=>{
             console.log('取消收藏',res)
             if(res.data !== '1'){
-                message.info({content:'收藏成功', className:'message',})
-            }
-            if(res.data === '1'){
-                message.info({content:'取消收藏', className:'message',})
-            }
+                message.info({content:'收藏成功', className:'message'})
+            } message.info({content:'取消收藏', className:'message'})
             setFresh(!fresh)
         }).catch(error=>{
             console.log(error)
@@ -164,7 +161,7 @@ const PipelineTable = props =>{
                 rowKey={record => record.pipelineId}
                 columns={columns}
                 dataSource={list}
-                pagination={{ pageSize: 12, hideOnSinglePage:true}}
+                pagination={{  hideOnSinglePage:true}}
                 locale={{emptyText:
                     <Fragment>
                         <svg className="icon" aria-hidden="true" >

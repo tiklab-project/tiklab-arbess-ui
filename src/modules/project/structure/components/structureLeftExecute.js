@@ -18,12 +18,11 @@ const StructureLeftExecute = props => {
     }
 
     return(
-        <div
-            onClick={()=>setIndex(0)}
-            className={ index === 0  ?
+        <div onClick={()=>setIndex(0)}
+             className={ index === 0  ?
                 'history-content-list history-content-list_active'
                 : 'history-content-list'
-            }
+             }
         >
             <div className='list-title'> 运行中 </div>
             <div className='list-group'>

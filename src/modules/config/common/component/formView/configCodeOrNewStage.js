@@ -12,10 +12,9 @@ const ConfigCodeOrNewStage = props =>{
                     {
                         group.desc.map((item,index)=>{
                             return(
-                                <div
-                                    onClick={()=>handleClick(group,item,index)}
-                                    className='group-desc'
-                                    key={item.type}
+                                <div onClick={()=>handleClick(group,item,index)}
+                                     className='group-desc'
+                                     key={item.type}
                                 >
                                     <div className='group-desc-tpl'>
                                         <div className='group-tpl'> {item.tel} </div>

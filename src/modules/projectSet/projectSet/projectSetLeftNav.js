@@ -23,25 +23,25 @@ const ProjectSetLeftNav= props =>  {
         {
             key:'/index/task/assembly/user',
             label:'项目成员',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'1',
         },
         {
             key:'1',
             label:'权限管理',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             enCode:'1',
             children:[
                 {
                     key:'/index/task/assembly/feature',
                     label:'功能管理',
-                    icon:'icon-gongzuotongji',
+                    icon:'#icon-gongzuotongji',
                     enCode:'1',
                 },
                 {
                     key:'/index/task/assembly/role',
                     label:'角色管理',
-                    icon:'icon-gongzuotongji',
+                    icon:'#icon-gongzuotongji',
                     enCode:'1',
                 }
             ]
@@ -49,13 +49,13 @@ const ProjectSetLeftNav= props =>  {
         {
             key:'/index/task/assembly/proof',
             label:'凭证管理',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             // enCode:'3',
         },
         {
             key:'/index/task/assembly/redel',
             label:'其他管理',
-            icon:'icon-gongzuotongji',
+            icon:'#icon-gongzuotongji',
             // enCode:'3',
         },
     ]
@@ -73,7 +73,7 @@ const ProjectSetLeftNav= props =>  {
                 key={data.key}
             >
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref={`#${data.icon}`} />
+                    <use xlinkHref={data.icon} />
                 </svg>
                 <span>{data.label}</span>
             </li>
@@ -95,14 +95,13 @@ const ProjectSetLeftNav= props =>  {
     const renderSubMenu = (item,deep)=> {
         return (
             <li key={item.key} title={item.label} className="orga-aside-li">
-                <div
-                    className="orga-aside-item orga-aside-first"
-                    style={{paddingLeft: `${deep * 20 + 20}`}}
-                    onClick={() => setOpenOrClose(item.key)}
+                <div className="orga-aside-item orga-aside-first"
+                     style={{paddingLeft: `${deep * 20 + 20}`}}
+                     onClick={() => setOpenOrClose(item.key)}
                 >
                     <span style={{color: "$blue-main"}}>
                          <svg className="icon" aria-hidden="true">
-                            <use xlinkHref={`#${item.icon}`} />
+                            <use xlinkHref={item.icon} />
                         </svg>
                         <span className="orga-aside-title">{item.label}</span>
                     </span>
@@ -116,10 +115,8 @@ const ProjectSetLeftNav= props =>  {
                         }
                     </div>
                 </div>
-                <ul
-                    title={item.label}
-                    className={`orga-aside-ul ${isExpandedTree(item.key) 
-                        ? null: 'orga-aside-hidden'}`}
+                <ul title={item.label}
+                    className={`orga-aside-ul ${isExpandedTree(item.key) ? null: 'orga-aside-hidden'}`}
                 >
                     {
                         item.children && item.children.map(item =>{

@@ -41,7 +41,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     if(res.data === 1){
                         message.success({content:'授权成功', className:'message'})
                     }else if(res.data === 2){
-                        message.error({content:'拒绝授权或者授权失败', className:'message'})
+                        message.error({content:'拒绝授权或授权失败', className:'message'})
                     }
                 })
             },2000)
@@ -98,16 +98,13 @@ const ConfigCodeGiteeOrGithub = props =>{
                 </Button>
             </Row>
             <Form.Item name='codeName' label="仓库">
-                <Select
-                    style={{ width: 300 }}
-                    onChange={changeGitStoreHouse}
-                    onClick={clickGitStoreHouse}
+                <Select style={{ width: 300 }}
+                        onChange={changeGitStoreHouse}
+                        onClick={clickGitStoreHouse}
                 >
                     {
                         storehouseList && storehouseList.map(item=>{
-                            return (
-                                <Option key={item}> {item} </Option>
-                            )
+                            return <Option key={item}> {item} </Option>
                         })
                     }
                 </Select>
@@ -116,9 +113,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 <Select style={{ width: 300 }} disabled={prohibited}>
                     {
                         branchList && branchList.map(item=>{
-                            return (
-                                <Option key={item}> {item} </Option>
-                            )
+                            return  <Option key={item}> {item} </Option>
                         })
                     }
                 </Select>
