@@ -13,13 +13,13 @@ const ConfigCodeGitOrGitlab = props =>{
     return(
         <Fragment>
             <Form.Item
-                name='codeName'
+                name="codeName"
                 label="git地址"
                 rules={[
-                    {required:true, message:'请输入git地址'},
+                    {required:true, message:"请输入git地址"},
                     {
                         pattern: /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/,
-                        message:'请输入正确的git地址'
+                        message:"请输入正确的git地址"
                     }
                 ]}
             >
@@ -32,10 +32,9 @@ const ConfigCodeGitOrGitlab = props =>{
                 <FindAllProof type={codeType}/>
                 <AddProofButton type={1}/>
             </Row>
-
-            <FormTest  git={'code'}/>
+            <FormTest  git={"code"}/>
         </Fragment>
     )
 }
 
-export default inject('configDataStore')(observer(ConfigCodeGitOrGitlab))
+export default inject("configDataStore")(observer(ConfigCodeGitOrGitlab))

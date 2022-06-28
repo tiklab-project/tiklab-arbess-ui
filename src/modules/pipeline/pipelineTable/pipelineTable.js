@@ -26,15 +26,31 @@ const PipelineTable = props =>{
             pipeline:record.pipelineId,
             userId:userId
         }
-        updateFollow(params).then(res=>{
-            console.log('取消收藏',res)
-            if(res.data !== '1'){
-                message.info({content:'收藏成功', className:'message'})
-            } message.info({content:'取消收藏', className:'message'})
-            setFresh(!fresh)
-        }).catch(error=>{
-            console.log(error)
-        })
+        if(record.pipelineCollect===0){
+            updateFollow(params).then(res=>{
+                console.log('收藏',res)
+                if(res.data === '1'){
+                    message.info({content:'收藏成功', className:'message'})
+                }else{
+                    message.info({content:'收藏失败', className:'message'})
+                }
+                setFresh(!fresh)
+            }).catch(error=>{
+                console.log(error)
+            })
+        } else {
+            updateFollow(params).then(res=>{
+                console.log('收藏',res)
+                if(res.data === '1'){
+                    message.info({content:'取消成功', className:'message'})
+                }else{
+                    message.info({content:'取消失败', className:'message'})
+                }
+                setFresh(!fresh)
+            }).catch(error=>{
+                console.log(error)
+            })
+        }
     }
 
     //去详情页面
@@ -52,9 +68,7 @@ const PipelineTable = props =>{
         if(record.pipelineState === 0){
             pipelineStartStructure(params).then(res=>{
                 if(res.data === 1){
-                    // setFresh(!fresh)
                     setTimeout(()=>setFresh(!fresh),1000)
-                    message.info({content:'开始运行', className:'message',})
                 }
             })
         }else {

@@ -1,12 +1,11 @@
 import React, {useEffect} from "react";
 import { Modal,Form,Input,Select ,Row,Button,message} from "antd";
-import moment from "../../../../../common/moment/moment";
 import {PlusOutlined} from "@ant-design/icons";
+import {getUser} from "doublekit-core-ui";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,giteeToken,getCode,getGithubProof,
-        githubToken }=props
+    const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,getCode,getGithubProof}=props
     const [form] = Form.useForm()
 
     useEffect(()=>{
@@ -20,15 +19,19 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             if(codeType  === 2){
                 const params = {
                     proofName:values.proofName,
-                    accessToken:giteeToken && giteeToken.accessToken,
-                    proofCreateTime:moment.moment,
+                    proofPassword:JSON.parse(localStorage.getItem("giteeToken")).accessToken,
+                    proofDescribe:"gitee授权登录",
+                    user:{id:getUser().userId},
+                    type:1,
+                    proofScope:codeType,
+                    proofType:"password"
                 }
                 getGiteeProof(params).then(res=>{
-                    console.log(res,'accessToken')
+                    console.log(res,"gitee授权登录")
                     if(res.code === 0){
-                        localStorage.setItem('gitProofId',res.data)
+                        localStorage.setItem("gitProofId",res.data)
                     }else {
-                        message.error({content:'创建失败', className:'message'})
+                        message.error({content:"创建失败", className:"message"})
                     }
                 }).catch(error=>{
                     console.log(error)
@@ -36,15 +39,19 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             }else{
                 const params = {
                     proofName:values.proofName,
-                    accessToken:githubToken,
-                    proofCreateTime:moment.moment,
+                    proofPassword:localStorage.getItem("githubToken"),
+                    proofDescribe:"github授权登录",
+                    user:{id:getUser().userId},
+                    type:1,
+                    proofScope:codeType,
+                    proofType:"password"
                 }
                 getGithubProof(params).then(res=>{
-                    console.log(res,'accessToken')
+                    console.log(res,"github授权登录")
                     if(res.code===0){
-                        localStorage.setItem('gitProofId',res.data)
+                        localStorage.setItem("gitProofId",res.data)
                     }else {
-                        message.error({content:'创建失败', className:'message'})
+                        message.error({content:"创建失败", className:"message"})
                     }
                 }).catch(error=>{
                     console.log(error)
@@ -55,15 +62,15 @@ const ConfigCodeGiteeOrGithubModal = props =>{
     }
 
     const goUrl = () =>{
-        if(codeType  === 2){
-            localStorage.setItem('giteeCode','giteeCode')
+        if(codeType === 2){
+            localStorage.setItem("giteeCode","giteeCode")
             url().then(res=>{
                 window.open(res.data)
             }).catch(error=>{
                 console.log(error)
             })
         }else {
-            localStorage.setItem('githubCode','githubCode')
+            localStorage.setItem("githubCode","githubCode")
             getCode().then(res=>{
                 window.open(res.data)
             }).catch(error=>{
@@ -87,18 +94,18 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                 layout="vertical"
                 name="userForm"
                 autoComplete = "off"
-                initialValues={{'proofType':1}}
+                initialValues={{"proofType":1}}
             >
-                <Form.Item label='连接类型' name='proofType'>
+                <Form.Item label="连接类型" name="proofType">
                     <Select  style={{ width: 120 }} disabled={true}>
                         <Select.Option value={1}>码云</Select.Option>
                     </Select>
                 </Form.Item>
                 <Row>
                     <Form.Item
-                        label='服务连接名'
-                        name='proofName'
-                        rules={[{ required: true, message: '请输入服务连接名' }]}
+                        label="服务连接名"
+                        name="proofName"
+                        rules={[{ required: true, message: "请输入服务连接名" }]}
                     >
                        <Input/>
                     </Form.Item>

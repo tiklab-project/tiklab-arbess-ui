@@ -24,4 +24,4 @@ const ConfigStructureMavenOrNode = props =>{
     )
 }
 
-export default inject('configDataStore')(observer(ConfigStructureMavenOrNode))
+export default inject("configDataStore")(observer(ConfigStructureMavenOrNode))

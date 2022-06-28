@@ -3,6 +3,7 @@ import {  privilege_cn } from 'doublekit-privilege-ui';
 import { message_cn } from 'doublekit-message-ui';
 import { orga_cn } from 'doublekit-user-ui';
 import zhCnTrans from "./cn/translation.json";
+
 const resources= {
     zh:{
         translation:{...zhCnTrans,...orga_cn,...eam_cn,...privilege_cn,...message_cn},

@@ -21,10 +21,9 @@ const ConfigAddCodeLeftDrawer = props =>{
                 {
                     leftLis && leftLis.map((item,index)=>{
                         return(
-                            <li
-                                key={item.id}
+                            <li key={item.id}
                                 onClick={ ()=>onClick(index+1) }
-                                className={opt === index+1 ? 'at-nav-item at-nav-selected' : 'at-nav-item'}
+                                className={opt === index+1 ? "at-nav-item at-nav-selected" : "at-nav-item"}
                             >
                                 <div className="at-nav-item-main">
                                     <div className={opt === index+1 ? "teamix-title" : null}>

@@ -4,7 +4,7 @@ import {Form, Input, Modal, Select} from "antd";
 const {Option} = Select
 
 const UpdateProof = props =>{
-    const {visible,setVisible,formValue,updateProof,setFresh,fresh} = props
+    const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart} = props
     const [form] = Form.useForm()
 
     useEffect(()=>{
@@ -50,21 +50,25 @@ const UpdateProof = props =>{
             onOk={onOk}
         >
             <Form form={form} layout="vertical" name="userForm" autoComplete="off">
-                <Form.Item
-                    label='凭证作用域'
-                    name='type'
-                    rules={[{required:true, message:'请选择凭证'}]}
-                >
+                <Form.Item label='凭证级别' name='type'>
                     <Select >
                         <Option value={1}>全局凭证</Option>
                         <Option value={2}>项目凭证</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item label='凭证作用域' name='proofScope'>
-                    <Select>
-                        <Option value={1}>源码凭证</Option>
-                        <Option value={5}>部署凭证</Option>
-                    </Select>
+                    {
+                        displayPart ?
+                            <Select disabled={displayPart}>
+                                <Option value={2}>Gitee凭证</Option>
+                                <Option value={3}>Github凭证</Option>
+                            </Select>
+                            :
+                            <Select>
+                                <Option value={1}>源码凭证</Option>
+                                <Option value={5}>部署凭证</Option>
+                            </Select>
+                    }
                 </Form.Item>
                 <Form.Item
                     label='凭证名称'
@@ -74,7 +78,7 @@ const UpdateProof = props =>{
                     <Input placeholder='名称'/>
                 </Form.Item>
                 <Form.Item label='凭证类型' name='proofType' >
-                    <Select placeholder='选择类型'>
+                    <Select placeholder='选择类型' disabled={displayPart}>
                         <Option value="SSH">SSH</Option>
                         <Option value="password">password</Option>
                     </Select>
@@ -83,21 +87,21 @@ const UpdateProof = props =>{
                     {({ getFieldValue })=>
                         getFieldValue('proofType') === 'password' ? (
                                 <>
-                                    <Form.Item label='username' name='proofUsername'>
-                                        <Input placeholder='账号'/>
+                                    <Form.Item label='username' name='proofUsername' >
+                                        <Input disabled={displayPart}/>
                                     </Form.Item>
                                     <Form.Item label='password' name='proofPassword'>
-                                        <Input.Password  placeholder='密码'/>
+                                        <Input.Password disabled={displayPart}/>
                                     </Form.Item>
                                 </>
                             ):
                             <Form.Item name='proofPassword' label='私钥'>
-                                <Input.TextArea  placeholder='私钥'/>
+                                <Input.TextArea  disabled={displayPart}/>
                             </Form.Item>
                     }
                 </Form.Item>
                 <Form.Item name='proofDescribe' label='描述'>
-                    <Input.TextArea  placeholder='备注'/>
+                    <Input.TextArea />
                 </Form.Item>
             </Form>
         </Modal>

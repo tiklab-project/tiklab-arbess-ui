@@ -1,7 +1,7 @@
 import React ,{useState} from "react";
 import {Button, Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import ConfigAddNewStageLeftDrawer from './configAddNewStageLeftDrawer';
+import ConfigAddNewStageLeftDrawer from "./configAddNewStageLeftDrawer";
 import ConfigAddNewStageRightDrawer from "./configAddNewStageRightDrawer";
 
 const leftLis = [
@@ -64,11 +64,10 @@ const rightLis = [
 const ConfigAddNewStageDrawer = props =>{
 
     const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,data,setData,setIsPrompt,index} = props
-
     const [opt,setOpt] = useState(1)
 
     const changeAnchor = anchorName =>{
-        const scrollTop=document.getElementById('tpl-list-task')
+        const scrollTop=document.getElementById("tpl-list-task")
         if (anchorName) {
             const anchorElement = document.getElementById(anchorName)
             if (anchorElement) {
@@ -79,7 +78,7 @@ const ConfigAddNewStageDrawer = props =>{
     }
 
     const onScroll = () =>{
-        const scrollTop=document.getElementById('tpl-list-task').scrollTop
+        const scrollTop=document.getElementById("tpl-list-task").scrollTop
         const rightIndex = rightLis.map((item,index)=>index+1)
         for(let x = 1;x <= rightIndex.length;x++){
             const iId = document.getElementById(x) //当前id
@@ -100,16 +99,16 @@ const ConfigAddNewStageDrawer = props =>{
             visible={newStageDrawer}
             width={600}
         >
-            <div className='wrapper'>
-                <div className='wrapper-head'>
-                    <div className='wrapper-head-title'> 选择任务组</div>
+            <div className="wrapper">
+                <div className="wrapper-head">
+                    <div className="wrapper-head-title"> 选择任务组</div>
                     <div>
-                        <Button type='text' onClick={()=>setNewStageDrawer(false)}>
+                        <Button type="text" onClick={()=>setNewStageDrawer(false)}>
                             <CloseOutlined />
                         </Button>
                     </div>
                 </div>
-                <div className='wrapper-body'>
+                <div className="wrapper-body">
                     <div className="body">
                         <div className="body-menu">
                             <ConfigAddNewStageLeftDrawer

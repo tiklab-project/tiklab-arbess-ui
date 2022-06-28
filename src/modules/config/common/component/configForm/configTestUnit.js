@@ -19,4 +19,4 @@ const ConfigTestUnit = props =>{
     )
 }
 
-export default inject('configDataStore')(observer(ConfigTestUnit))
+export default inject("configDataStore")(observer(ConfigTestUnit))

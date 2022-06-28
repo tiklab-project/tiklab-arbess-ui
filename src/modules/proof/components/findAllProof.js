@@ -9,14 +9,16 @@ const FindAllProof = props =>{
 
     const {proofStore,type}=props
     const {findPipelineProof,pipelineProofList} = proofStore
-    const pipelineId = localStorage.getItem('pipelineId')
+    const pipelineId = localStorage.getItem("pipelineId")
 
     const clickFindAllGit = () =>{
         let proofScope
-        if(type < 6){
-            proofScope = 1
-        }else{
+        if(type === 2 || type === 3 ){
+            proofScope = type
+        }else if(type > 6){
             proofScope = 5
+        }else {
+            proofScope = 1
         }
         const params ={
             pipelineId:pipelineId,
@@ -28,14 +30,14 @@ const FindAllProof = props =>{
 
     const changeGitSelect = (value,e) =>{
         if(type < 6){
-            localStorage.setItem('gitProofId',e.key)
+            localStorage.setItem("gitProofId",e.key)
         }else {
-            localStorage.setItem('deployProofId',e.key)
+            localStorage.setItem("deployProofId",e.key)
         }
     }
 
     return(
-        <Form.Item name={type < 6 ? 'gitProofName' : 'dockerProofName'}  label="凭证">
+        <Form.Item name={type < 6 ? "gitProofName" : "dockerProofName"}  label="凭证">
             <Select style={{ width: 300 }}
                     onClick={clickFindAllGit}
                     onChange={(value,e)=>changeGitSelect(value,e)}
@@ -54,4 +56,4 @@ const FindAllProof = props =>{
     )
 }
 
-export default inject('proofStore')(observer(FindAllProof))
+export default inject("proofStore")(observer(FindAllProof))

@@ -3,8 +3,8 @@ import {serviceLoc} from "../../../../common/utils/requset";
 //gitHub--地址
 export function  GetCode (data){
     return serviceLoc.request({
-        url:'/gitHub/getCode',
-        method:'post',
+        url:"/gitHub/getCode",
+        method:"post",
         data
     })
 }
@@ -12,8 +12,8 @@ export function  GetCode (data){
 //gitHub授权--Code
 export function  GetAccessToken (data){
     return serviceLoc.request({
-        url:'/gitHub/getAccessToken',
-        method:'post',
+        url:"/gitHub/getAccessToken",
+        method:"post",
         data
     })
 }
@@ -22,8 +22,8 @@ export function  GetAccessToken (data){
 //gitHub--创建凭证
 export function  GetProof (data){
     return serviceLoc.request({
-        url:'/gitHub/getProof',
-        method: 'post',
+        url:"/gitHub/getProof",
+        method: "post",
         data
     })
 }
@@ -31,8 +31,8 @@ export function  GetProof (data){
 //gitHub--获取所有仓库
 export function  GetAllStorehouse (data){
     return serviceLoc.request({
-        url:'/gitHub/getAllStorehouse',
-        method:'post',
+        url:"/gitHub/getAllStorehouse",
+        method:"post",
         data
     })
 }
@@ -40,8 +40,8 @@ export function  GetAllStorehouse (data){
 //gitHub--分支
 export function  GetBranch (data){
     return serviceLoc.request({
-        url:'/gitHub/getBranch',
-        method:'post',
+        url:"/gitHub/getBranch",
+        method:"post",
         data
     })
 }

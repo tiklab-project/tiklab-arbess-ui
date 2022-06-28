@@ -18,7 +18,7 @@ export class HomePageStore{
     @action
     findAllOpen = async value =>{
         const param = new FormData()
-        param.append('userId',value)
+        param.append("userId",value)
         FindAllOpen(param).then(res=>{
             if(res.code === 0 && res.data ){
                 this.pipelineNearList = res.data
@@ -31,7 +31,7 @@ export class HomePageStore{
     @action
     runState = async value =>{
         const param = new FormData()
-        param.append('userId',value)
+        param.append("userId",value)
         return await RunState(param)
     }
 
@@ -43,7 +43,7 @@ export class HomePageStore{
             pageSize:values.pageSize,
         }
         FindUserAction(params).then(res=>{
-            console.log('动态',res)
+            console.log("动态",res)
             if(res.code === 0 && res.data ){
                 this.dynamicList = res.data.dataList
                 this.page.total = res.data.listSize
@@ -55,4 +55,4 @@ export class HomePageStore{
 
 }
 
-export const HOMEPAGE_STORE = 'homePageStore'
+export const HOMEPAGE_STORE = "homePageStore"

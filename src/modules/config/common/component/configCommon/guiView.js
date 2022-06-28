@@ -1,5 +1,5 @@
 import React, {Fragment,useState,useRef,useEffect} from "react";
-import  './guiView.scss';
+import  "./guiView.scss";
 import ConfigCode from "../guiView/configCode";
 import ConfigAddNewStage from "../guiView/configAddNewStage";
 import ConfigAddCodeDrawer from "../guiView/configAddCodeDrawer";
@@ -31,7 +31,7 @@ const GuiView = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        if (isGuiAlias !==''){
+        if (isGuiAlias !==""){
             inputRef.current.focus()
         }
     },[isGuiAlias])
@@ -45,7 +45,7 @@ const GuiView = props =>{
     }
 
     const hiddenInput = () =>{
-        setIsGuiAlias('')
+        setIsGuiAlias("")
     }
 
     const changeInputValue = (e,index) =>{
@@ -108,22 +108,22 @@ const GuiView = props =>{
             user:{id:userId,},
             pipeline:{pipelineId:pipelineId},
             pipelineCode:{
-                codeId:localStorage.getItem('codeId'),
+                codeId:localStorage.getItem("codeId"),
                 sort:codeSort,
                 type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
-                proof:{proofId:localStorage.getItem('gitProofId')}
+                proof:{proofId:localStorage.getItem("gitProofId")}
             },
             pipelineTest:{
-                testId:localStorage.getItem('testId'),
+                testId:localStorage.getItem("testId"),
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
                 testOrder:unitShellBlock,
             },
             pipelineStructure:{
-                structureId:localStorage.getItem('structureId'),
+                structureId:localStorage.getItem("structureId"),
                 sort:structureSort,
                 structureAlias:structureAlias,
                 type:structureType,
@@ -131,7 +131,7 @@ const GuiView = props =>{
                 structureOrder:mavenShellBlock,
             },
             pipelineDeploy:{
-                deployId:localStorage.getItem('deployId'),
+                deployId:localStorage.getItem("deployId"),
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
@@ -142,17 +142,17 @@ const GuiView = props =>{
                 deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
-                proof:{ proofId:localStorage.getItem('deployProofId') }
+                proof:{ proofId:localStorage.getItem("deployProofId") }
             }
         }
         updateConfigure(configureList).then(res=>{
             if(jumpOrNot){
-                props.history.push('/index/task/config')
+                props.history.push("/index/task/config")
             }
             if(res.code!==0){
-                message.error({content:'配置失败', className:'message',})
+                message.error({content:"配置失败", className:"message"})
             }else {
-                message.success({content: '配置成功', className:'message',})
+                message.success({content: '配置成功', className:"message"})
             }
             setIsPrompt(false)
         })
@@ -168,8 +168,8 @@ const GuiView = props =>{
         return data && data.map((item,index)=>{
             return(
                 <Fragment key={index}>
-                    <div className='group-flow'>
-                        <div className='group-flow_btn' >
+                    <div className="group-flow">
+                        <div className="group-flow_btn" >
                             <svg className="icon group-flow_btn_i"
                                  aria-hidden="true"
                                  onClick={()=>insertData(item,index)}
@@ -179,10 +179,10 @@ const GuiView = props =>{
                             </svg>
                         </div>
                     </div>
-                    <div className='group-table'>
-                        <div className='group-head'>
-                            <div className='name'>
-                                <div  className='label'>
+                    <div className="group-table">
+                        <div className="group-head">
+                            <div className="name">
+                                <div  className="label">
                                     {
                                         isGuiAlias === index ?
                                             <Input type="text"
@@ -204,9 +204,9 @@ const GuiView = props =>{
                                 </div>
                             </div>
                         </div>
-                        <div className='newStages'>
-                            <div className='newStages-step'>
-                                <div className='newStages-content'  >
+                        <div className="newStages">
+                            <div className="newStages-step">
+                                <div className="newStages-content"  >
                                     <div className='newStages-task'>
                                         <div className='newStages-job'>
                                             <div className='newStages-job_text' onClick={()=>showStage(item)}>

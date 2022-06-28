@@ -56,10 +56,9 @@ const ConfigAddNewStageRightDrawer = props =>{
                                     {
                                         group.desc &&  group.desc.map((item,index)=>{
                                             return(
-                                                <div
-                                                    key={index}
-                                                    className='group-desc'
-                                                    onClick={()=>handleClick(group,item,groupIndex)}
+                                                <div key={index}
+                                                     className='group-desc'
+                                                     onClick={()=>handleClick(group,item,groupIndex)}
                                                 >
                                                     <div className='group-desc-tpl'>
                                                         <div className='group-tpl'>{item.tel}</div>

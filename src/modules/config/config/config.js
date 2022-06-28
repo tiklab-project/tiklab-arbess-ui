@@ -1,15 +1,14 @@
 import React,{Fragment,useState,useEffect} from "react";
-import '../common/component/configCommon/config.scss';
+import "../common/component/configCommon/config.scss";
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import FormView from "../common/component/configCommon/formView";
-import GuiView from "../common/component/configCommon/guiView";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import {getUrlParam} from '../common/component/configCommon/getUrlParam';
+import {getUrlParam} from "../common/component/configCommon/getUrlParam";
 import {inject, observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
-import {PLUGIN_STORE, PluginComponent} from "doublekit-plugin-ui";
+import {useSelector, RemoteUmdComponent} from "doublekit-plugin-ui";
 
 const Config = props =>{
 
@@ -25,18 +24,19 @@ const Config = props =>{
     } = configDataStore
 
     const [form] = Form.useForm()
-    const userId = getUser().userId
+    const PluginStore = useSelector(state =>state.pluginStore)
     const [view,setView] = useState(1)
     const [isBtn,setIsBtn] = useState(false)
     const [jumpOrNot,] = useState(true)
-    const codeValue = getUrlParam('code')
-    const codeError = getUrlParam('error')
-    const pipelineId = localStorage.getItem('pipelineId')
+    const codeValue = getUrlParam("code")
+    const codeError = getUrlParam("error")
+    const pipelineId = localStorage.getItem("pipelineId")
+    const userId = getUser().userId
 
     useEffect(()=>{
         return () =>{
-            localStorage.removeItem('gitProofId')
-            localStorage.removeItem('deployProofId')
+            localStorage.removeItem("gitProofId")
+            localStorage.removeItem("deployProofId")
             setCodeData('')
             setData([])
             setFormInitialValues('')
@@ -44,8 +44,8 @@ const Config = props =>{
     },[])
 
     useEffect(()=>{
-        pluginsStore.plugins && pluginsStore.plugins.map(item=>{
-            if(item.id === 'gui'){
+        PluginStore.map(item=>{
+            if(item.id === "gui"){
                 setIsBtn(true)
             }else setIsBtn(false)
         })
@@ -58,19 +58,19 @@ const Config = props =>{
                 code:codeValue,
                 state:1,
             }
-            if(localStorage.getItem('giteeCode')){
+            if(localStorage.getItem("giteeCode")){
                 code(codeValue).then(res=>{
-                    localStorage.setItem('giteeToken',JSON.stringify(res.data))
-                    localStorage.removeItem('giteeCode')
-                    localStorage.removeItem('githubToken')
+                    localStorage.setItem("giteeToken",JSON.stringify(res.data))
+                    localStorage.removeItem("giteeCode")
+                    localStorage.removeItem("githubToken")
                     getState(params)
                     window.close()
                 })
-            }else if(localStorage.getItem('githubCode')){
+            }else if(localStorage.getItem("githubCode")){
                 getAccessToken(codeValue).then(res=>{
-                    localStorage.setItem('githubToken',res.data)
-                    localStorage.removeItem('githubCode')
-                    localStorage.removeItem('giteeToken')
+                    localStorage.setItem("githubToken",res.data)
+                    localStorage.removeItem("githubCode")
+                    localStorage.removeItem("giteeToken")
                     getState(params)
                     window.close()
                 })
@@ -102,17 +102,17 @@ const Config = props =>{
     // 按需清空表单的值
     const del = i => {
         switch (i) {
-            case 11 :delDetail('test')
+            case 11 :delDetail("test")
                 break
-            case 21 :delDetail('structure')
+            case 21 :delDetail("structure")
                 break
-            case 22:delDetail('structure')
+            case 22 :delDetail("structure")
                 break
-            case 31:delDetail('deploy')
+            case 31 :delDetail("deploy")
                 break
-            case 32:delDetail('deploy')
+            case 32 :delDetail("deploy")
                 break
-            default:delDetail('git')
+            default:delDetail("git")
         }
         setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
@@ -121,38 +121,38 @@ const Config = props =>{
     // 统一form表单里面需要删除的值
     const delDetail = i =>{
         switch (i) {
-            case 'git':
+            case "git":
                 formInitialValues.codeName = null
                 formInitialValues.codeBranch = null
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
-                setCodeData('')
+                setCodeData("")
                 setCodeType(1)
                 break
-            case 'test':
+            case "test":
                 formInitialValues.testOrder = null
-                setUnitShellBlock('')
+                setUnitShellBlock("")
                 break
-            case 'structure':
+            case "structure":
                 formInitialValues.structureAddress = null
                 formInitialValues.structureOrder = null
-                setMavenShellBlock('')
+                setMavenShellBlock("")
                 break
-            case 'deploy':
+            case "deploy":
                 formInitialValues.deployTargetAddress = null
                 formInitialValues.deployAddress = null
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
-                setLinuxShellBlock('')
+                setLinuxShellBlock("")
         }
     }
 
     return (
         <Fragment>
-            <div className='config-top '>
-                <div className='config-top-content'>
-                    <ProjectBreadcrumb config={'config'}/>
+            <div className="config-top">
+                <div className="config-top-content">
+                    <ProjectBreadcrumb config={"config"}/>
                     <ConfigChangeView
                         userId={userId}
                         view={view}
@@ -176,16 +176,14 @@ const Config = props =>{
                     <Fragment>
                         {
                             isBtn ?
-                                <PluginComponent
-                                    point='gui'
-                                    {...props}
-                                    pluginsStore={pluginsStore}
+                                <RemoteUmdComponent
+                                    point={"gui"}
+                                    pluginStore={PluginStore}
                                     extraProps={{
                                         configDataStore,
                                         configStore,
-                                        jumpOrNot,
                                         form,
-                                        del,
+                                        del
                                     }}
                                 />
                                 : null
@@ -198,6 +196,5 @@ const Config = props =>{
 }
 
 
-export default  withRouter(inject('configStore', 'giteeStore','structureStore',
-                'configDataStore','githubStore',PLUGIN_STORE)
-                (observer(Config)))
+export default  withRouter(inject("configStore", "giteeStore","structureStore",
+                "configDataStore","githubStore")(observer(Config)))

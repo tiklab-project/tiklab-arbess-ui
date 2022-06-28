@@ -9,30 +9,30 @@ const ConfigCode = props =>{
 
     const code = () => {
         return  codeData ?
-            <div className='configView1-wrapper'>
-                <div className='configView1-wrapper-newStage'>
-                    <div className='desc'>
-                        <div className='desc-head'>
+            <div className="configView1-wrapper">
+                <div className="configView1-wrapper-newStage">
+                    <div className="desc">
+                        <div className="desc-head">
                             <ConfigName type={codeData.codeType}/>
                         </div>
-                        <div className='desc-delete' onClick={()=> del(1) }>
+                        <div className="desc-delete" onClick={()=>del(1)}>
                             <CloseOutlined />
                         </div>
                     </div>
-                    <div className='desc-input'>
+                    <div className="desc-input">
                         <ConfigForm type={codeData.codeType}/>
                     </div>
                 </div>
             </div>
             :
-            <div className='configView1-wrapper-handle' onClick={()=>setCodeVisible(true)}>
+            <div className="configView1-wrapper-handle" onClick={()=>setCodeVisible(true)}>
                 添加代码源
             </div>
     }
 
     return(
         <Fragment>
-            <div className='configView1-wrapper-Headline'>源码管理</div>
+            <div className="configView1-wrapper-Headline">源码管理</div>
             { code () }
         </Fragment>
     )

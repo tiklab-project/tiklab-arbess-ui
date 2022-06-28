@@ -7,8 +7,9 @@ const ProjectBreadcrumb = props => {
     return(
         <div style={style} className={config ? 'config-top-breadcrumb': 'breadcrumb'}>
             <Breadcrumb separator=">">
-                <Breadcrumb.Item style={{ cursor: "pointer" }}
-                                 onClick={()=>props.history.push('/index/pipeline')}
+                <Breadcrumb.Item
+                    style={{ cursor: "pointer" }}
+                    onClick={()=>props.history.push('/index/pipeline')}
                 >
                     流水线
                 </Breadcrumb.Item>

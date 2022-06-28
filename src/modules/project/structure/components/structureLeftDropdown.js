@@ -1,12 +1,12 @@
-import React ,{useState} from "react";
-import { Select  } from 'antd';
+import React from "react";
+import { Select  } from "antd";
 
 const { Option } = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode} = props
-    const pipelineId = localStorage.getItem('pipelineId')
+    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList} = props
+    const pipelineId = localStorage.getItem("pipelineId")
 
     let params = null
     const change = () =>{
@@ -18,7 +18,7 @@ const StructureLeftDropdown = props =>{
         params = {
             pipelineId:pipelineId,
             state:e.key,
-            name:enforcer,
+            userId:enforcer,
             type:mode,
             pageParam: {
                 pageSize: 10,
@@ -29,14 +29,14 @@ const StructureLeftDropdown = props =>{
     }
 
     const changeEnforcer = (value,e) =>{
-        if(value==='全部'){
-            value=null
+        if(e.key==="全部"){
+            e.key=null
         }
-        setEnforcer(value)
+        setEnforcer(e.key)
         params = {
             pipelineId:pipelineId,
             state:state,
-            name:value,
+            userId:e.key,
             type:mode,
             pageParam: {
                 pageSize: 10,
@@ -51,7 +51,7 @@ const StructureLeftDropdown = props =>{
         params = {
             pipelineId:pipelineId,
             state:state,
-            name:enforcer,
+            userId:enforcer,
             type:e.key,
             pageParam: {
                 pageSize: 10,
@@ -64,50 +64,41 @@ const StructureLeftDropdown = props =>{
     //状态
     const stateList = [
         {   type:0,
-            tpl:'全部',
+            tpl:"全部",
         },
         {
             type:1,
-            tpl:'失败',
+            tpl:"失败",
         },
         {
             type:20,
-            tpl:'停止',
+            tpl:"停止",
         },
         {
             type:30,
-            tpl:'成功',
+            tpl:"成功",
         },
     ]
-    //执行人
-    const enforcerList = [
-        {   type:0,
-            tpl:'全部',
-        },
-        {
-            type:1,
-            tpl:'admin',
-        },
-    ]
+
     //执行方式
     const modeList = [
         {   type:0,
-            tpl:'全部',
+            tpl:"全部",
         },
         {
             type:1,
-            tpl:'手动',
+            tpl:"手动",
         },
         {
             type:2,
-            tpl:'自动',
+            tpl:"自动",
         },
     ]
 
     return(
-        <div className='structure-content-left-dropdown'>
-            <div className='dropdown'>
-                <Select  style={{width:110,marginRight:10}} defaultValue='状态'
+        <div className="structure-content-left-dropdown">
+            <div className="dropdown">
+                <Select  style={{width:110,marginRight:10}} defaultValue="状态"
                          onChange={(value,e)=>changeState(value,e)}
                 >
                     {
@@ -116,16 +107,17 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  style={{width:110,marginRight:10}}  defaultValue='执行人'
+                <Select  style={{width:110,marginRight:10}}  defaultValue="执行人"
                          onChange={(value,e)=>changeEnforcer(value,e)}
                 >
+                    <Option key={"全部"} value={"全部"}>全部</Option>
                     {
-                        enforcerList.map(item=>{
-                            return <Option key={ item.type } value= {item.tpl}>{item.tpl}</Option>
+                        pipelineUserList && pipelineUserList.map(item=>{
+                            return <Option key={ item.user.id } value= {item.user.name}>{item.user && item.user.name}</Option>
                         })
                     }
                 </Select>
-                <Select  style={{width:110,marginRight:10}}  defaultValue='执行方式'
+                <Select  style={{width:110,marginRight:10}}  defaultValue="执行方式"
                          onChange={(value,e)=>changeMode(value,e)}
                 >
                     {

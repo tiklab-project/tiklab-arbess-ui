@@ -1,5 +1,5 @@
 import {PLUGIN_STORE,PluginStore} from "doublekit-plugin-ui";
-import {EAM_STORE,EamStore} from 'doublekit-eam-ui';
+import {EAM_STORE,EamStore} from "doublekit-eam-ui";
 import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/pipeline/store/pipelineStore";
 import {STRUCTURE_STORE,StructureStore} from "./modules/project/structure/store/structureStore";
 import {CONFIG_STORE,ConfigStore} from "./modules/config/common/store/configStore";

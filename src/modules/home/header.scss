@@ -40,11 +40,20 @@
                 padding-right: 20px;
             }
         }
-        &-dropdown{
-            margin: 0 20px;
-            & > span{
-                cursor: pointer;
+        &-user{
+            display: inline-flex;
+            align-items: center;
+            .user{
+                &-name{
+                    cursor: pointer;
+                }
+                &-avatar{
+                    padding-left: 15px;
+                }
             }
+        }
+        &-language,  &-user{
+            margin: 0 10px 0 0;
         }
         .headers{
             &-link{

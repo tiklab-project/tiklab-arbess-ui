@@ -4,7 +4,7 @@ import {Breadcrumb} from "antd";
 const SystemBreadcrumb = props =>{
     const {firstItem,secondItem} = props
     return(
-        <div className='breadcrumb'>
+        <div className="breadcrumb">
             <Breadcrumb separator=">">
                 <Breadcrumb.Item> {firstItem} </Breadcrumb.Item>
                 {

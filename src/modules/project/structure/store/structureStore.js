@@ -9,6 +9,7 @@ import {
     KillInstance,
     PipelineStartStructure,
     FindPageHistory,
+    FindPipelineUser,
 } from "../api/structure";
 
 export class StructureStore {
@@ -16,6 +17,7 @@ export class StructureStore {
     @observable leftPageList = []
     @observable rightFlowData = []
     @observable rightExecuteData = []
+    @observable pipelineUserList = []
     @observable modeData = {}
     @observable index = 0 // 构建区分显示 -- 构建1 、2、……
     @observable page = {
@@ -108,11 +110,10 @@ export class StructureStore {
                 currentPage: values.pageParam.currentPage,
             },
             state:values.state,
-            name:values.name,
             type:values.type,
         }
         FindPageHistory(params).then(res=>{
-            console.log('所有历史',res)
+            console.log("所有历史",res)
             if(res.code === 0 ){
                 if(res.data.dataList.length === 0){
                     this.leftPageList = []
@@ -159,6 +160,20 @@ export class StructureStore {
         return await DeleteHistoryLog(param)
     }
 
+    @action
+    findPipelineUser =async value =>{
+        const param = new FormData()
+        param.append("pipelineId", value)
+        FindPipelineUser(param).then(res=>{
+            console.log("执行人",res)
+            if(res.code === 0 && res.data){
+                this.pipelineUserList = res.data
+            }
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
 }
 
-export const STRUCTURE_STORE = 'structureStore'
+export const STRUCTURE_STORE = "structureStore"

@@ -67,7 +67,7 @@ const Project= (props)=>{
                  onClick={()=>setVisible(false)}
                  style={{marginLeft:65}}
             >
-                {renderRoutes(route.routes)}
+                { renderRoutes(route.routes) }
             </div>
             <Prompt
                 when={isPrompt}

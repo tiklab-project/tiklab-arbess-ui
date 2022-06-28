@@ -37,31 +37,31 @@ const ConfigDeployDocker = props =>{
     return(
         <Fragment>
             <Form.Item
-                name='deployTargetAddress'
-                label='请输入文件地址'
-                rules={[{required:true, message:'请输入文件地址'}]}
+                name="deployTargetAddress"
+                label="请输入文件地址"
+                rules={[{required:true, message:"请输入文件地址"}]}
             >
                 <Input/>
             </Form.Item>
             <Form.Item
-                label='Ip地址'
-                name='ip'
+                label="Ip地址"
+                name="ip"
                 rules={[
-                    {required:true, message:'请输入IpV4地址'},
+                    {required:true, message:"请输入IpV4地址"},
                     {
                         pattern:/((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/,
-                        message:'请输入正确的Ip地址'
+                        message:"请输入正确的Ip地址"
                     }
                 ]}
-                style={{display: 'inline-block'}}
+                style={{display: "inline-block"}}
             >
-                <Input  placeholder='输入IpV4地址' style={{width:200}}/>
+                <Input  placeholder="输入IpV4地址" style={{width:200}}/>
             </Form.Item>
             <Form.Item
-                label='端口号'
-                name='port'
-                rules={[{validator: proofPort},{required:true, message:'请输入端口号'}]}
-                style={{display:'inline-block',margin:'1px 3px'}}
+                label="端口号"
+                name="port"
+                rules={[{validator: proofPort},{required:true, message:"请输入端口号"}]}
+                style={{display:"inline-block",margin:"1px 3px"}}
             >
                 <Input placeholder="输入端口号"  style={{width:150}}/>
             </Form.Item>
@@ -70,22 +70,22 @@ const ConfigDeployDocker = props =>{
                 <AddProofButton type={5}/>
             </Row>
             <Form.Item
-                name='dockerPort'
-                label='启动端口'
-                style={{ display: 'inline-block'}}
+                name="dockerPort"
+                label="启动端口"
+                style={{ display: "inline-block"}}
                 rules={[
-                    {required:true, message:'请输入启动端口'},
+                    {required:true, message:"请输入启动端口"},
                     {validator: validate}
                 ]}
             >
                 <Input style={{width:200}}/>
             </Form.Item>
             <Form.Item
-                name='mappingPort'
-                label='映射端口'
-                style={{ display: 'inline-block',  margin: '1px 3px' }}
+                name="mappingPort"
+                label="映射端口"
+                style={{ display: "inline-block",  margin: "1px 3px" }}
                 rules={[
-                    {required:true, message:'请输入映射端口'},
+                    {required:true, message:"请输入映射端口"},
                     {validator: validate}
                 ]}
             >
@@ -93,9 +93,9 @@ const ConfigDeployDocker = props =>{
             </Form.Item>
 
             <Form.Item
-                name='deployAddress'
-                label='部署位置'
-                rules={[{required:true, message:'请输入部署位置'}]}
+                name="deployAddress"
+                label="部署位置"
+                rules={[{required:true, message:"请输入部署位置"}]}
             >
                 <Input/>
             </Form.Item>

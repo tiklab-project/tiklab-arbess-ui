@@ -27,12 +27,17 @@ export class GiteeStore {
 
     //gitee--创建凭证
     @action
-    getGiteeProof =async value =>{
-        const params = new FormData()
-        params.append("proofName", value.proofName)
-        params.append("accessToken", value.accessToken)
+    getGiteeProof =async values =>{
+        const params = {
+            proofName:values.proofName,
+            proofPassword:values.proofPassword,
+            proofDescribe:values.proofDescribe,
+            user:{id:values.user.id},
+            type:values.type,
+            proofScope:values.proofScope,
+            proofType:values.proofType ,
+        }
         return await GetProof(params);
-
     }
 
     //gitee--获取所有仓库
@@ -47,19 +52,19 @@ export class GiteeStore {
     @action
     getGiteeBranch =async value =>{
         const params = new FormData()
-        params.append('projectName',value.projectName)
-        params.append('proofId',value.proofId)
+        params.append("projectName",value.projectName)
+        params.append("proofId",value.proofId)
         return await GetBranch(params)
     }
 
     @action
     getState = async value=>{
         const params = new FormData()
-        params.append('code',value.code)
-        params.append('state',value.state)
+        params.append("code",value.code)
+        params.append("state",value.state)
         return await GetState(params)
     }
 
 }
 
-export const GITEE_STORE = 'giteeStore'
+export const GITEE_STORE = "giteeStore"

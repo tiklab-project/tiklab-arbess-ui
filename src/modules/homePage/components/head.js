@@ -5,7 +5,7 @@ const Head = props =>{
         {
             id:1,
             title:'我的收藏',
-            to:'/index/collect',
+            to:"/index/collect",
         },
         {
             id:2,

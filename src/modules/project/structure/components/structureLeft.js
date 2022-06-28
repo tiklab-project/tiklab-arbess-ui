@@ -6,7 +6,7 @@ import StructureLeftDropdown from "./structureLeftDropdown";
 const StructureLeft = props =>{
 
     const {findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
-        pipelineId }=props
+        pipelineId,pipelineUserList }=props
 
     const [state,setState] = useState(0)  // 状态
     const [enforcer,setEnforcer] = useState(null)   //执行人
@@ -56,9 +56,10 @@ const StructureLeft = props =>{
                 setEnforcer={setEnforcer}
                 mode={mode}
                 setMode={setMode}
+                pipelineUserList={pipelineUserList}
             />
-            <div className='structure-content-left-history'>
-                <div className='history-content'>
+            <div className="structure-content-left-history">
+                <div className="history-content">
                     {   execState === '' ? null:
                         <StructureLeftExecute
                             execState={execState}
@@ -79,10 +80,8 @@ const StructureLeft = props =>{
                                 </Fragment>
                         }}
                         pagination={{
-                            onChange: (page) => {
-                                onChangePage(page);
-                            },
                             ...page,
+                            onChange: (page) => {onChangePage(page);},
                             hideOnSinglePage:true
                         }}
                         dataSource={leftPageList}
@@ -90,21 +89,21 @@ const StructureLeft = props =>{
                             <List.Item key={i}>
                                 <div onClick={()=>showHistory(item,i)}
                                      className={index=== i+1 ?
-                                        'history-content-list history-content-list_active'
-                                        :  'history-content-list'
+                                        "history-content-list history-content-list_active"
+                                        :  "history-content-list"
                                      }
                                 >
-                                    <div className='list-title'> # {item.findNumber}</div>
-                                    <div className='list-group'>
-                                        <div className='list-group-item'>
-                                            <div className='list-state'>
+                                    <div className="list-title"> # {item.findNumber}</div>
+                                    <div className="list-group">
+                                        <div className="list-group-item">
+                                            <div className="list-state">
                                                 状态 : {sta(item)}
                                             </div>
-                                            <div className='list-one'>
+                                            <div className="list-one">
                                                 执行人 : {item.user && item.user.name}
                                             </div>
                                         </div>
-                                        <div className='list-time'>
+                                        <div className="list-time">
                                             执行时间 : {item.createTime}
                                         </div>
                                     </div>

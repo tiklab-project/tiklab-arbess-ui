@@ -1,5 +1,5 @@
 import React, {useState, useEffect,useRef} from "react";
-import  './formView.scss';
+import  "./formView.scss";
 import {Button, Form, Input, message} from "antd";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons";
 import ConfigAddNewStageModal from "../formView/configAddNewStageModal";
@@ -26,11 +26,11 @@ const FormView = props =>{
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
-    const pipelineId = localStorage.getItem('pipelineId')
+    const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
     useEffect(()=>{
-        if (isFormAlias!==''){
+        if (isFormAlias!==""){
             inputRef.current.focus()
         }
     },[isFormAlias])
@@ -44,7 +44,7 @@ const FormView = props =>{
     }
 
     const hiddenInput = () =>{
-        setIsFormAlias('')
+        setIsFormAlias("")
     }
 
     const changeInputValue = (e,index) =>{
@@ -78,7 +78,7 @@ const FormView = props =>{
         let testType,structureType,deployType
 
         switch (codeData){
-            case '':
+            case "":
                 codeSort = 0
                 break
             default:codeSort = 1
@@ -107,22 +107,22 @@ const FormView = props =>{
             user:{id:userId,},
             pipeline:{pipelineId:pipelineId},
             pipelineCode:{
-                codeId:localStorage.getItem('codeId'),
+                codeId:localStorage.getItem("codeId"),
                 sort:codeSort,
                 type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
-                proof:{proofId:localStorage.getItem('gitProofId')}
+                proof:{proofId:localStorage.getItem("gitProofId")}
             },
             pipelineTest:{
-                testId:localStorage.getItem('testId'),
+                testId:localStorage.getItem("testId"),
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
                 testOrder:unitShellBlock,
             },
             pipelineStructure:{
-                structureId:localStorage.getItem('structureId'),
+                structureId:localStorage.getItem("structureId"),
                 sort:structureSort,
                 structureAlias:structureAlias,
                 type:structureType,
@@ -130,7 +130,7 @@ const FormView = props =>{
                 structureOrder:mavenShellBlock,
             },
             pipelineDeploy:{
-                deployId:localStorage.getItem('deployId'),
+                deployId:localStorage.getItem("deployId"),
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
@@ -141,17 +141,17 @@ const FormView = props =>{
                 deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
-                proof:{ proofId:localStorage.getItem('deployProofId') }
+                proof:{ proofId:localStorage.getItem("deployProofId") }
             }
         }
         updateConfigure(configureList).then(res=>{
             if(jumpOrNot){
-                props.history.push('/index/task/config')
+                props.history.push("/index/task/config")
             }
             if(res.code!==0){
-                message.error({content:'配置失败', className:'message',})
+                message.error({content:"配置失败", className:"message"})
             }else {
-                message.success({content: '配置成功', className:'message',})
+                message.success({content: "配置成功", className:"message"})
             }
             setIsPrompt(false)
         })
@@ -166,8 +166,8 @@ const FormView = props =>{
     const newStage = data =>{
         return   data && data.map((group,index)=>{
             return(
-                <div className='configView1-wrapper' key={index} >
-                    <div className='configView1-wrapper-Headline'>
+                <div className="configView1-wrapper" key={index} >
+                    <div className="configView1-wrapper-Headline">
                         {
                             isFormAlias === index ?
                                 <Input type="text"
@@ -187,16 +187,16 @@ const FormView = props =>{
                                 </div>
                         }
                     </div>
-                    <div className='configView1-wrapper-newStage'>
-                        <div className='desc'>
-                            <div className='desc-head'>
+                    <div className="configView1-wrapper-newStage">
+                        <div className="desc">
+                            <div className="desc-head">
                                 <ConfigName type={group.dataType}/>
                             </div>
-                            <div className='desc-delete' onClick={()=>deletePart(group)}>
+                            <div className="desc-delete" onClick={()=>deletePart(group)}>
                                 <CloseOutlined />
                             </div>
                         </div>
-                        <div className='desc-input'>
+                        <div className="desc-input">
                             <ConfigForm type={group.dataType}/>
                         </div>
                     </div>
@@ -206,15 +206,15 @@ const FormView = props =>{
     }
 
     return(
-        <div className='configView1 '>
-            <div className='configView1-content'>
-                <div style={{textAlign:'right'}}>
+        <div className="configView1">
+            <div className="configView1-content">
+                <div style={{textAlign:"right"}}>
                     <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
                 </div>
                 <Form
-                    id='form'
+                    id="form"
                     form={form}
-                    layout='vertical'
+                    layout="vertical"
                     autoComplete = "off"
                     onFinish={onFinish}
                     onValuesChange={onValuesChange}
@@ -255,4 +255,4 @@ const FormView = props =>{
     )
 }
 
-export default withRouter(inject('configDataStore')(observer(FormView)))
+export default withRouter(inject("configDataStore")(observer(FormView)))

@@ -3,8 +3,8 @@ import {serviceLoc} from "../../../../common/utils/requset";
 //更新流水线配置
 export function  UpdateConfigure (data){
     return serviceLoc.request({
-        url:'/pipelineConfigure/updateConfigure',
-        method:'post',
+        url:"/pipelineConfigure/updateConfigure",
+        method:"post",
         data
     })
 }
@@ -12,8 +12,8 @@ export function  UpdateConfigure (data){
 //查看所有配置
 export function  FindAllConfigure(data){
     return serviceLoc.request({
-        url:'/pipelineConfigure/findAllConfigure',
-        method:'post',
+        url:"/pipelineConfigure/findAllConfigure",
+        method:"post",
         data
     })
 }
@@ -21,8 +21,8 @@ export function  FindAllConfigure(data){
 // 测试配置
 export function  CodeTestPass(data){
     return serviceLoc.request({
-        url:'/codeCheck/checkAuth',
-        method:'post',
+        url:"/codeCheck/checkAuth",
+        method:"post",
         data
     })
 }

@@ -12,8 +12,14 @@ const Proof = props =>{
 
     const [formValue,setFormValue] = useState('')
     const [visible,setVisible] = useState(false)
+    const [displayPart,setDisplayPart] = useState(false)
 
     const edit = (text,record) => {
+        if(record.proofScope === 2 || record.proofScope === 3){
+            setDisplayPart(true)
+        }else {
+            setDisplayPart(false)
+        }
         setFormValue(record)
         setVisible(true)
     }
@@ -117,6 +123,7 @@ const Proof = props =>{
                 updateProof={updateProof}
                 setFresh={setFresh}
                 fresh={fresh}
+                displayPart={displayPart}
             />
         </div>
     )

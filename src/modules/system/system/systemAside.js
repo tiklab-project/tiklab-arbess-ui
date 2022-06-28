@@ -6,86 +6,86 @@ const SystemAside= props =>  {
 
     const path = props.location.pathname
     const [selectKey,setSelectKey] = useState(path)
-    const [expandedTree, setExpandedTree] = useState(['/index/system/power/feature'])  // 树的展开与闭合
+    const [expandedTree, setExpandedTree] = useState(["/index/system/power/feature"])  // 树的展开与闭合
 
     useEffect(()=>{
         setSelectKey(path)
     },[path])
 
     useEffect(()=>{
-        if(path === '/index/system/power/feature' || path ==='/index/system/power/role'){
-            setExpandedTree([path,'1'])
+        if(path === "/index/system/power/feature" || path ==="/index/system/power/role"){
+            setExpandedTree([path,"1"])
         }
     },[])
 
     const router = [
         {
-            key:'/index/system/base',
-            label:'用户管理',
-            icon:'#icon-gongzuotongji',
-            enCode:'A',
+            key:"/index/system/base",
+            label:"用户管理",
+            icon:"#icon-gongzuotongji",
+            enCode:"A",
         },
         {
-            key:'/index/system/list',
-            label:'用户列表',
-            icon:'#icon-gongzuotongji',
-            enCode:'B',
+            key:"/index/system/list",
+            label:"用户列表",
+            icon:"#icon-gongzuotongji",
+            enCode:"B",
         },
         {
-            key:'/index/system/directory',
-            label:'用户目录',
-            icon:'#icon-gongzuotongji',
-            enCode:'C',
+            key:"/index/system/directory",
+            label:"用户目录",
+            icon:"#icon-gongzuotongji",
+            enCode:"C",
         },
         {
-            key:'/index/system/organ',
-            label:'组织管理',
-            icon:'#icon-gongzuotongji',
-            enCode:'D',
+            key:"/index/system/organ",
+            label:"组织管理",
+            icon:"#icon-gongzuotongji",
+            enCode:"D",
         },
         {
-            key:'1',
-            label:'权限管理',
-            icon:'#icon-gongzuotongji',
-            enCode:'E',
+            key:"1",
+            label:"权限管理",
+            icon:"#icon-gongzuotongji",
+            enCode:"E",
             children:[
                 {
-                    key:'/index/system/power/feature',
-                    label:'功能管理',
-                    icon:'#icon-gongzuotongji',
-                    enCode:'E',
+                    key:"/index/system/power/feature",
+                    label:"功能管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"E",
                 },
                 {
-                    key:'/index/system/power/role',
-                    label:'角色管理',
-                    icon:'#icon-gongzuotongji',
-                    enCode:'E',
+                    key:"/index/system/power/role",
+                    label:"角色管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"E",
                 }
             ]
         },
         {
-            key:'/index/system/proof',
-            label:'凭证管理',
-            icon:'#icon-gongzuotongji',
+            key:"/index/system/proof",
+            label:"凭证管理",
+            icon:"#icon-gongzuotongji",
             enCode:'F',
         },
         {
-            key:'/index/system/plugin',
-            label:'插件管理',
+            key:"/index/system/plugin",
+            label:"插件管理",
             icon:'#icon-gongzuotongji',
             enCode:'G',
         },
         {
-            key:'/index/system/info',
-            label:'系统信息',
-            icon:'#icon-gongzuotongji',
-            enCode:'H',
+            key:"/index/system/info",
+            label:"系统信息",
+            icon:"#icon-gongzuotongji",
+            enCode:"H",
         },
         {
-            key:'/index/system/log',
-            label:'系统日志',
-            icon:'#icon-gongzuotongji',
-            enCode:'J',
+            key:"/index/system/log",
+            label:"系统日志",
+            icon:"#icon-gongzuotongji",
+            enCode:"J",
         },
     ]
 
@@ -96,8 +96,7 @@ const SystemAside= props =>  {
     const renderMenu = (data,deep)=> {
         return (
             <PrivilegeButton key={data.key} code={data.enCode}>
-                <li
-                    style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
+                <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
                     className={`orga-aside-li orga-aside-second ${data.key=== selectKey ? "orga-aside-select" : ""}`}
                     onClick={()=>select(data.key)}
                     key={data.code}
@@ -148,7 +147,7 @@ const SystemAside= props =>  {
                         </div>
                     </div>
                     <ul title={item.label}
-                        className={`orga-aside-ul ${isExpandedTree(item.key) ? null: 'orga-aside-hidden'}`}
+                        className={`orga-aside-ul ${isExpandedTree(item.key) ? null: "orga-aside-hidden"}`}
                     >
                         {
                             item.children && item.children.map(item =>{

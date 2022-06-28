@@ -28,31 +28,31 @@ const ConfigDeployLinux = props =>{
     return(
         <Fragment>
             <Form.Item
-                name='deployTargetAddress'
-                label='请输入文件地址'
-                rules={[{required:true,message:'请输入文件地址'}]}
+                name="deployTargetAddress"
+                label="请输入文件地址"
+                rules={[{required:true,message:"请输入文件地址"}]}
             >
                 <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
             </Form.Item>
             <Form.Item
-                label='Ip地址'
-                name='ip'
+                label="Ip地址"
+                name="ip"
                 rules={[
-                    {required:true, message:'输入IpV4地址'},
+                    {required:true, message:"输入IpV4地址"},
                     {
                         pattern:/((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/,
-                        message:'请输入正确的IpV4地址'
+                        message:"请输入正确的IpV4地址"
                     },
                 ]}
-                style={{display:'inline-block'}}
+                style={{display:"inline-block"}}
             >
-                <Input placeholder='输入IpV4地址' style={{width:200}}/>
+                <Input placeholder="输入IpV4地址" style={{width:200}}/>
             </Form.Item>
             <Form.Item
-                label='端口号'
-                name='port'
-                rules={[{validator: validate},{required:true, message:'请输入端口号'}]}
-                style={{display:'inline-block', margin: '1px 3px'}}
+                label="端口号"
+                name="port"
+                rules={[{validator: validate},{required:true, message:"请输入端口号"}]}
+                style={{display:"inline-block", margin: "1px 3px"}}
             >
                 <Input placeholder="输入端口号"  style={{width:150}}/>
             </Form.Item>
@@ -61,13 +61,13 @@ const ConfigDeployLinux = props =>{
                 <AddProofButton type={5}/>
             </Row>
             <Form.Item
-                name='deployAddress'
-                label='部署位置'
-                rules={[{required:true, message:'请输入部署位置'}]}
+                name="deployAddress"
+                label="部署位置"
+                rules={[{required:true, message:"请输入部署位置"}]}
             >
                 <Input/>
             </Form.Item>
-            <Form.Item name='deployShell' label='shell命令'>
+            <Form.Item name="deployShell" label="shell命令">
                 <Mirror
                     shellBlock={linuxShellBlock}
                     setShellBlock={setLinuxShellBlock}
@@ -80,6 +80,6 @@ const ConfigDeployLinux = props =>{
     )
 }
 
-export default inject('configDataStore')(observer(ConfigDeployLinux))
+export default inject("configDataStore")(observer(ConfigDeployLinux))
 
 

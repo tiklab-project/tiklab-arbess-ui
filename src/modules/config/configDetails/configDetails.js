@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Fragment} from "react";
-import {PLUGIN_STORE, PluginComponent} from 'doublekit-plugin-ui'
-import '../common/component/configCommon/config.scss'
+import {useSelector, RemoteUmdComponent} from "doublekit-plugin-ui";
+import "../common/component/configCommon/config.scss";
 import FormView from "../common/component/configCommon/formView";
 import GuiView from "../common/component/configCommon/guiView";
 import ConfigChangeView from "../common/component/configCommon/configChangeView";
@@ -8,46 +8,46 @@ import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import {Form} from "antd";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import {getUrlParam} from '../common/component/configCommon/getUrlParam';
+import {getUrlParam} from "../common/component/configCommon/getUrlParam";
 import {getUser} from "doublekit-core-ui";
 
 const ConfigDetails = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore,pluginsStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure} = structureStore
-
     const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType} = configDataStore
 
     const [form] = Form.useForm()
-    const [view,setView] = useState(1)
+    const PluginStore = useSelector(state =>state.pluginStore)
+    const [view,setView] = useState(2)
     const [isBtn,setIsBtn] = useState(false)
-    const codeValue = getUrlParam('code')
-    const codeError = getUrlParam('error')
-    const pipelineId = localStorage.getItem('pipelineId')
+    const codeValue = getUrlParam("code")
+    const codeError = getUrlParam("error")
+    const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
     // 是否有图形化插件
     useEffect(()=>{
-        pluginsStore.plugins && pluginsStore.plugins.map(item=>{
-            if(item.id === 'gui'){
+         PluginStore.map(item=>{
+            if(item.id === "gui"){
                 setIsBtn(true)
             }else setIsBtn(false)
         })
-    },[pipelineId])
+    },[])
 
     useEffect(()=>{
         return () =>{
-            localStorage.removeItem('gitProofId')
-            localStorage.removeItem('deployProofId')
-            localStorage.removeItem('codeId')
-            localStorage.removeItem('testId')
-            localStorage.removeItem('structureId')
-            localStorage.removeItem('deployId')
+            localStorage.removeItem("gitProofId")
+            localStorage.removeItem("deployProofId")
+            localStorage.removeItem("codeId")
+            localStorage.removeItem("testId")
+            localStorage.removeItem("structureId")
+            localStorage.removeItem("deployId")
         }
     },[pipelineId])
 
@@ -58,19 +58,19 @@ const ConfigDetails = props =>{
                 code:codeValue,
                 state:1,
             }
-            if(localStorage.getItem('giteeCode')){
+            if(localStorage.getItem("giteeCode")){
                 code(codeValue).then(res=>{
-                    localStorage.setItem('giteeToken',JSON.stringify(res.data))
-                    localStorage.removeItem('giteeCode')
-                    localStorage.removeItem('githubToken')
+                    localStorage.setItem("giteeToken",JSON.stringify(res.data))
+                    localStorage.removeItem("giteeCode")
+                    localStorage.removeItem("githubToken")
                     getState(params)
                     window.close()
                 })
-            }else if(localStorage.getItem('githubCode')){
+            }else if(localStorage.getItem("githubCode")){
                 getAccessToken(codeValue).then(res=>{
-                    localStorage.setItem('githubToken',res.data)
-                    localStorage.removeItem('githubCode')
-                    localStorage.removeItem('giteeToken')
+                    localStorage.setItem("githubToken",res.data)
+                    localStorage.removeItem("githubCode")
+                    localStorage.removeItem("giteeToken")
                     getState(params)
                     window.close()
                 })
@@ -85,7 +85,6 @@ const ConfigDetails = props =>{
             window.close()
         }
     }, [codeValue])
-
 
     useEffect(()=>{
         if(codeData){
@@ -107,13 +106,13 @@ const ConfigDetails = props =>{
         findAllConfigure(pipelineId).then(res=>{
             const initialData = res.data
             if(initialData.length === 0 ){
-                setCodeData('')
+                setCodeData("")
                 setData([])
                 form.resetFields()
                 setFormInitialValues({})
-                setUnitShellBlock('')
-                setMavenShellBlock('')
-                setLinuxShellBlock('')
+                setUnitShellBlock("")
+                setMavenShellBlock("")
+                setLinuxShellBlock("")
             }else {
                 for (let i = 0;i<initialData.length;i++){
                     const j = initialData[i]
@@ -130,8 +129,8 @@ const ConfigDetails = props =>{
                         }
                         Object.assign(formInitialValues,formValue)
                         setCodeType(j.type)
-                        localStorage.setItem('codeId',j.codeId)
-                        localStorage.setItem('gitProofId',j.proof && j.proof.proofId)
+                        localStorage.setItem("codeId",j.codeId)
+                        localStorage.setItem("gitProofId",j.proof && j.proof.proofId)
                     }
                     else if(j.type === 11){
                         newData.push({
@@ -139,8 +138,8 @@ const ConfigDetails = props =>{
                             title:j.testAlias,
                             dataType:j.type,
                         })
-                        localStorage.setItem('testId',j.testId)
-                        setUnitShellBlock(`${j.testOrder ? j.testOrder :''}`)
+                        localStorage.setItem("testId",j.testId)
+                        setUnitShellBlock(`${j.testOrder ? j.testOrder :""}`)
                     }
                     else if(j.type === 21 || j.type === 22 ){
                         newData.push({
@@ -148,8 +147,8 @@ const ConfigDetails = props =>{
                             title: j.structureAlias,
                             dataType:j.type,
                         })
-                        localStorage.setItem('structureId',j.structureId)
-                        setMavenShellBlock(`${j.structureOrder ? j.structureOrder : ''}`)
+                        localStorage.setItem("structureId",j.structureId)
+                        setMavenShellBlock(`${j.structureOrder ? j.structureOrder : ""}`)
                     }
                     else if(j.type === 31 || j.type === 32 ){
                         newData.push({
@@ -161,9 +160,9 @@ const ConfigDetails = props =>{
                             dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
                         }
                         Object.assign(formInitialValues,formValue)
-                        localStorage.setItem('deployId',j.deployId)
-                        localStorage.setItem('deployProofId',j.proof && j.proof.proofId)
-                        setLinuxShellBlock(`${j.deployShell ? j.deployShell : ''}`)
+                        localStorage.setItem("deployId",j.deployId)
+                        localStorage.setItem("deployProofId",j.proof && j.proof.proofId)
+                        setLinuxShellBlock(`${j.deployShell ? j.deployShell : ""}`)
 
                     }
                     setData([...newData])
@@ -178,17 +177,17 @@ const ConfigDetails = props =>{
     // 按需清空表单的值
     const del = i => {
         switch (i) {
-            case 11 :delDetail('test')
+            case 11 :delDetail("test")
                 break
-            case 21 :delDetail('structure')
+            case 21 :delDetail("structure")
                 break
-            case 22:delDetail('structure')
+            case 22:delDetail("structure")
                 break
-            case 31:delDetail('deploy')
+            case 31:delDetail("deploy")
                 break
-            case 32:delDetail('deploy')
+            case 32:delDetail("deploy")
                 break
-            default:delDetail('git')
+            default:delDetail("git")
         }
         setFormInitialValues({...formInitialValues})
         setIsPrompt(true)
@@ -197,24 +196,24 @@ const ConfigDetails = props =>{
     // 统一form表单里面需要删除的值
     const delDetail = i =>{
         switch (i) {
-            case 'git':
+            case "git":
                 formInitialValues.codeName = null
                 formInitialValues.codeBranch = null
                 formInitialValues.proofName = null
                 formInitialValues.gitProofName = null
-                setCodeData('')
+                setCodeData("")
                 setCodeType(1)
                 break
-            case 'test':
+            case "test":
                 formInitialValues.testOrder = null
-                setUnitShellBlock('')
+                setUnitShellBlock("")
                 break
-            case 'structure':
+            case "structure":
                 formInitialValues.structureAddress = null
                 formInitialValues.structureOrder = null
-                setMavenShellBlock('')
+                setMavenShellBlock("")
                 break
-            case 'deploy':
+            case "deploy":
                 formInitialValues.deployTargetAddress = null
                 formInitialValues.deployAddress = null
                 formInitialValues.ip = null
@@ -222,15 +221,15 @@ const ConfigDetails = props =>{
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
-                setLinuxShellBlock('')
+                setLinuxShellBlock("")
         }
     }
 
     return (
         <Fragment>
-            <div className='config-top '>
-               <div className='config-top-content'>
-                   <ProjectBreadcrumb config={'config'}/>
+            <div className="config-top">
+               <div className="config-top-content">
+                   <ProjectBreadcrumb config={"config"}/>
                    <ConfigChangeView
                        userId={userId}
                        view={view}
@@ -253,10 +252,9 @@ const ConfigDetails = props =>{
                     <Fragment>
                         {
                             isBtn ?
-                                <PluginComponent
-                                    point='gui'
-                                    {...props}
-                                    pluginsStore={pluginsStore}
+                                <RemoteUmdComponent
+                                    point={"gui"}
+                                    pluginStore={PluginStore}
                                     extraProps={{
                                         configDataStore,
                                         configStore,
@@ -272,6 +270,5 @@ const ConfigDetails = props =>{
     )
 }
 
-export default  withRouter(inject('configStore','giteeStore','structureStore',
-                'configDataStore','githubStore',PLUGIN_STORE)
-                (observer(ConfigDetails)))
+export default  withRouter(inject("configStore","giteeStore","structureStore",
+                "configDataStore","githubStore")(observer(ConfigDetails)))
