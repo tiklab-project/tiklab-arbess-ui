@@ -14,35 +14,35 @@ const ConfigCode = props =>{
 
     const code = () => {
         return  codeData ?
-            <div className='configView2-sider_code_one'>
-                <div className='configView2-sider_code_one_name' onClick={()=>showDetailsDrawer()}>
+            <div className="configView2-sider_code_one">
+                <div className="configView2-sider_code_one_name" onClick={()=>showDetailsDrawer()}>
                     <ConfigName type={codeData.codeType}/>
                 </div>
                 {
                     codeData.codeName ?
-                        <div className='configView2-sider_code_one_address'>
-                            <div className='branch-title'> {codeData.codeName} </div>
+                        <div className="configView2-sider_code_one_address">
+                            <div className="branch-title"> {codeData.codeName} </div>
                         </div>
                         : null
                 }
                 {
                     codeData.codeBranch ?
-                        <div className='configView2-sider_code_one_branch '>
-                            <div className='branch-address'> {codeData.codeBranch} </div>
+                        <div className="configView2-sider_code_one_branch ">
+                            <div className="branch-address"> {codeData.codeBranch} </div>
                         </div>
                         : null
                 }
             </div>
             :
-            <div className='configView2-sider_code_add' onClick={()=>setCodeDrawer(true)}>
+            <div className="configView2-sider_code_add" onClick={()=>setCodeDrawer(true)}>
                 添加代码源
             </div>
     }
 
     return(
-        <div className='configView2-sider'>
-            <div className='configView2-sider_head'> 源码管理 </div>
-            <div className='configView2-sider_code'> { code() } </div>
+        <div className="configView2-sider">
+            <div className="configView2-sider_head"> 源码管理 </div>
+            <div className="configView2-sider_code"> { code() } </div>
         </div>
     )
 }

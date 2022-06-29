@@ -23,10 +23,10 @@ export class PipelineStore{
     @action
     findAllPipelineStatus = value =>{
         const param = new FormData()
-        param.append('userId',value)
+        param.append("userId",value)
         FindAllPipelineStatus(param).then(res=>{
             this.pipelineList=res.data
-            console.log('所有流水线', res)
+            console.log("所有流水线", res)
         }).catch(error=>{
             console.log(error)
         })
@@ -44,7 +44,7 @@ export class PipelineStore{
         }
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
-                console.log('创建流水线',res)
+                console.log("创建流水线",res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -56,8 +56,8 @@ export class PipelineStore{
     @action
     findOneName = values =>{
         const params = new FormData()
-        params.append('pipelineName',values.pipelineName)
-        params.append('userId',values.userId)
+        params.append("pipelineName",values.pipelineName)
+        params.append("userId",values.userId)
         return new Promise((resolve, reject) => {
             FindOneName(params).then(res=>{
                 this.searchPipelineList=res.data
@@ -73,11 +73,11 @@ export class PipelineStore{
     @action //删除流水线
     deletePipeline = async value =>{
         const param = new FormData()
-        param.append('pipelineId',value.pipelineId)
-        param.append('userId',value.userId)
+        param.append("pipelineId",value.pipelineId)
+        param.append("userId",value.userId)
         return new Promise((resolve, reject) => {
             DeletePipeline(param).then(res=>{
-                console.log('删除流水线',res)
+                console.log("删除流水线",res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -97,7 +97,7 @@ export class PipelineStore{
         }
         return new Promise((resolve, reject) => {
             UpdatePipeline(params).then(res=>{
-                console.log('重命名',res)
+                console.log("重命名",res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -108,4 +108,4 @@ export class PipelineStore{
 
 }
 
-export const PIPELINE_STORE = 'pipelineStore'
+export const PIPELINE_STORE = "pipelineStore"

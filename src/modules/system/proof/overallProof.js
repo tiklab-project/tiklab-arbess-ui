@@ -8,16 +8,21 @@ import SystemBreadcrumb from "../breadcrumb/systemBreadcrumb";
 const OverallProof = props =>{
 
     const {proofStore} = props
-    const {findPipelineProof,pipelineProofList,fresh} = proofStore
+    const {findPipelineProof,proofList,fresh} = proofStore
 
     useEffect(()=>{
-        findPipelineProof(getUser().userId)
+        const param = {
+            userId:getUser().userId,
+            pipelineId:null,
+            type:0
+        }
+        findPipelineProof(param)
     },[fresh])
 
     return(
         <Fragment>
             <SystemBreadcrumb firstItem={"凭证管理"}/>
-            <Proof proofList={pipelineProofList} />
+            <Proof proofList={proofList}/>
         </Fragment>
     )
 }

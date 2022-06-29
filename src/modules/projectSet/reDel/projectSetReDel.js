@@ -10,7 +10,7 @@ const ProjectSetReDel = props =>{
     const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
     const [form]=Form.useForm()
     const userId=getUser().userId
-    const pipelineId=localStorage.getItem('pipelineId')
+    const pipelineId=localStorage.getItem("pipelineId")
 
     const onConfirm=()=>{
         const params = {
@@ -18,7 +18,7 @@ const ProjectSetReDel = props =>{
             pipelineId:pipelineId
         }
         deletePipeline(params).then(()=>{
-            props.history.push('/index/pipeline')
+            props.history.push("/index/pipeline")
         }).catch(error=>{
             console.log(error)
         })
@@ -34,8 +34,8 @@ const ProjectSetReDel = props =>{
         }
         updatePipeline(params).then(res=>{
             if(res.code === 0){
-                localStorage.setItem('pipelineName',values.pipelineName);
-                props.history.push('/index/task/work')
+                localStorage.setItem("pipelineName",values.pipelineName);
+                props.history.push("/index/task/work")
             }
         }).catch(error=>{
             console.log(error)
@@ -45,11 +45,11 @@ const ProjectSetReDel = props =>{
     return(
        <Fragment>
            <ProjectBreadcrumb/>
-           <div className='pipelineSys-reDel' style={{padding:20}}>
+           <div className="pipelineSys-reDel" style={{padding:20}}>
                <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
                    <Form.Item
                        label="重命名"
-                       name='pipelineName'
+                       name="pipelineName"
                        rules={[
                            ({ getFieldValue }) => ({
                                validator(rule, value) {
@@ -59,7 +59,7 @@ const ProjectSetReDel = props =>{
                                            nameArray=pipelineList && pipelineList.map(item=>item.pipelineName);
                                        }
                                        if (nameArray.includes(value)) {
-                                           return Promise.reject('名称已经存在');
+                                           return Promise.reject("名称已经存在");
                                        }
                                        return Promise.resolve()
                                    }else {
@@ -104,4 +104,4 @@ const ProjectSetReDel = props =>{
     )
 }
 
-export default inject('pipelineStore')(observer(ProjectSetReDel))
+export default inject("pipelineStore")(observer(ProjectSetReDel))

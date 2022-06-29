@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import './proof.scss';
+import "./proof.scss";
 import { Popconfirm, Table} from "antd";
 import {inject,observer} from "mobx-react";
 import AddProofButton from "../components/addProofButton";
@@ -10,7 +10,7 @@ const Proof = props =>{
     const {proofList,proofStore} = props
     const {updateProof,deleteProof,setFresh,fresh} = proofStore
 
-    const [formValue,setFormValue] = useState('')
+    const [formValue,setFormValue] = useState("")
     const [visible,setVisible] = useState(false)
     const [displayPart,setDisplayPart] = useState(false)
 
@@ -34,51 +34,51 @@ const Proof = props =>{
 
     const columns = [
         {
-            title:'作用域',
-            dataIndex:'type',
-            key:'type',
+            title:"作用域",
+            dataIndex:"type",
+            key:"type",
             render:text => {
                 switch (text) {
                     case 1:
-                        return '全局凭证'
+                        return "全局凭证"
                     default:
-                        return '项目凭证'
+                        return "项目凭证"
                 }
             }
         },
         {
-            title:'名称',
-            dataIndex:'proofName',
-            key:'proofName'
+            title:"名称",
+            dataIndex:"proofName",
+            key:"proofName"
         },
         {
-            title:'类型',
-            dataIndex:'proofType',
-            key:'proofType'
+            title   :"类型",
+            dataIndex:"proofType",
+            key:"proofType"
         },
         {
-            title:'拥有者',
-            dataIndex:'username',
-            key:'username',
+            title:"拥有者",
+            dataIndex:"username",
+            key:"username",
         },
         {
-            title:'创建时间',
-            dataIndex:'proofCreateTime',
-            key:'proofCreateTime'
+            title:"创建时间",
+            dataIndex:"proofCreateTime",
+            key:"proofCreateTime"
         },
         {
-            title:'备注',
-            dataIndex:'proofDescribe',
-            key:'proofDescribe'
+            title:"备注",
+            dataIndex:"proofDescribe",
+            key:"proofDescribe"
         },
         {
-            title:'操作',
-            dataIndex:'action',
-            key:'action',
+            title:"操作",
+            dataIndex:"action",
+            key:"action",
             render:(text,record)=>{
                 return(
-                    <span className='proof-content-action'>
-                        <span className='edit'
+                    <span className="proof-content-action">
+                        <span className="edit"
                               onClick={()=>edit(text,record)}
                         >
                             编辑
@@ -90,7 +90,7 @@ const Proof = props =>{
                              okText="确定"
                              cancelText="取消"
                          >
-                             <span className='del'>
+                             <span className="del">
                                  删除
                              </span>
                          </Popconfirm>
@@ -100,13 +100,15 @@ const Proof = props =>{
         }
     ]
 
-    const style = 'primary'
+    const style = "primary"
 
     return(
-        <div className='proof'>
-            <div className='proof-content'>
-                <div className='proof-content-btn'>
-                    <AddProofButton style={style}/>
+        <div className="proof">
+            <div className="proof-content">
+                <div className="proof-content-btn">
+                    <AddProofButton
+                        style={style}
+                    />
                 </div>
                 <Table
                     bordered
@@ -129,4 +131,4 @@ const Proof = props =>{
     )
 }
 
-export default inject('proofStore')(observer(Proof))
+export default inject("proofStore")(observer(Proof))

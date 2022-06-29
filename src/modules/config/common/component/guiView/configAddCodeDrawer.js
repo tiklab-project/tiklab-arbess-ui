@@ -1,17 +1,17 @@
 import React, {useState} from "react";
-import {Button, Drawer} from 'antd';
+import {Button, Drawer} from "antd";
 import ConfigAddCodeLeftDrawer from "./configAddCodeLeftDrawer";
 import ConfigAddCodeRightDrawer from "./configAddCodeRightDrawer";
-import {CloseOutlined} from '@ant-design/icons';
+import {CloseOutlined} from "@ant-design/icons";
 
 const leftLis = [
     {
         id:1,
-        title:'Git'
+        title:"Git"
     },
     {
         id:2,
-        title: 'SVN'
+        title: "SVN"
     }
 ]
 
@@ -33,7 +33,7 @@ const ConfigAddCodeDrawer = props =>{
                 <div className="wrapper-head">
                     <div className="wrapper-head-title"> 选择代码源</div>
                     <div>
-                        <Button type='text' onClick={()=>setCodeDrawer(false)}>
+                        <Button type="text" onClick={()=>setCodeDrawer(false)}>
                             <CloseOutlined />
                         </Button>
                     </div>

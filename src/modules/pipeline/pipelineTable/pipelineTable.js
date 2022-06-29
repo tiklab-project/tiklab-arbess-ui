@@ -10,7 +10,7 @@ import PipelineRun from "./pipelineRun";
 import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
-import './pipelineTable.scss';
+import "./pipelineTable.scss";
 
 const PipelineTable = props =>{
 
@@ -26,38 +26,29 @@ const PipelineTable = props =>{
             pipeline:record.pipelineId,
             userId:userId
         }
-        if(record.pipelineCollect===0){
-            updateFollow(params).then(res=>{
-                console.log('收藏',res)
-                if(res.data === '1'){
-                    message.info({content:'收藏成功', className:'message'})
+        updateFollow(params).then(res=>{
+            if(record.pipelineCollect===0){
+                if(res.data === "1"){
+                    message.info({content:"收藏成功", className:"message"})
                 }else{
-                    message.info({content:'收藏失败', className:'message'})
+                    message.info({content:"收藏失败", className:"message"})
                 }
-                setFresh(!fresh)
-            }).catch(error=>{
-                console.log(error)
-            })
-        } else {
-            updateFollow(params).then(res=>{
-                console.log('收藏',res)
-                if(res.data === '1'){
-                    message.info({content:'取消成功', className:'message'})
+            }else {
+                if(res.data === "1"){
+                    message.info({content:"取消成功", className:"message"})
                 }else{
-                    message.info({content:'取消失败', className:'message'})
+                    message.info({content:"取消失败", className:"message"})
                 }
-                setFresh(!fresh)
-            }).catch(error=>{
-                console.log(error)
-            })
-        }
+            }
+            setFresh(!fresh)
+        })
     }
 
     //去详情页面
     const goPipelineTask=(text,record)=>{
-        localStorage.setItem('pipelineName',text)
-        localStorage.setItem('pipelineId',record.pipelineId)
-        props.history.push('/index/task/work')
+        localStorage.setItem("pipelineName",text)
+        localStorage.setItem("pipelineId",record.pipelineId)
+        props.history.push("/index/task/work")
     }
 
     const work = record =>{
@@ -80,12 +71,12 @@ const PipelineTable = props =>{
 
     const columns = [
         {
-            title: '收藏',
-            dataIndex: 'pipelineCollect',
+            title: "收藏",
+            dataIndex: "pipelineCollect",
             key:"pipelineCollect",
             render:(text,record) =>{
                 return(
-                    <span className='all-icon' onClick={() => collectAction(record)}>
+                    <span className="all-icon" onClick={() => collectAction(record)}>
                         {
                             record.pipelineCollect === 0 ?
                                 <svg className="icon" aria-hidden="true" >
@@ -101,38 +92,38 @@ const PipelineTable = props =>{
             }
         },
         {
-            title: '最近构建状态',
-            dataIndex: 'structureStatus',
-            key: 'structureStatus',
+            title: "最近构建状态",
+            dataIndex: "structureStatus",
+            key: "structureStatus",
             render:text =>{
                 switch (text) {
                     case 30:
-                        return  <Tooltip title="成功" placement="rightTop" className='all-icon'>
-                                    <CheckCircleOutlined style = {{fontSize:25,color:'#1890ff'}}/>
+                        return  <Tooltip title="成功" placement="rightTop" className="all-icon">
+                                    <CheckCircleOutlined style = {{fontSize:25,color:"#1890ff"}}/>
                                 </Tooltip>
                     case 1:
-                        return <Tooltip title="失败" placement="rightTop" className='all-icon'>
-                                    <CloseCircleOutlined style = {{fontSize:25,color:'#ff0000'}}/>
+                        return <Tooltip title="失败" placement="rightTop" className="all-icon">
+                                    <CloseCircleOutlined style = {{fontSize:25,color:"#ff0000"}}/>
                                 </Tooltip>
                     case 0:
-                        return  <Tooltip title="待构建" placement="rightTop" className='all-icon'>
+                        return  <Tooltip title="待构建" placement="rightTop" className="all-icon">
                                     <PlayCircleOutlined style = {{fontSize:25}}/>
                                 </Tooltip>
                     default:
-                        return  <Tooltip title="停止" placement="rightTop" className='all-icon'>
+                        return  <Tooltip title="停止" placement="rightTop" className="all-icon">
                                     <ExclamationCircleOutlined style = {{fontSize:25}}/>
                                 </Tooltip>
                 }
             }
         },
         {
-            title: '任务名',
-            dataIndex: 'pipelineName',
-            key: 'pipelineName',
+            title: "任务名",
+            dataIndex: "pipelineName",
+            key: "pipelineName",
             render:(text,record)=>{
                 return(
                     <span onClick={()=>goPipelineTask(text,record)}
-                          className='all-columns all-icon'
+                          className="all-columns all-icon"
                     >
                         {text}
                     </span>
@@ -140,22 +131,22 @@ const PipelineTable = props =>{
             }
         },
         {
-            title: '上次构建时间',
-            dataIndex: 'lastStructureTime',
-            key: 'lastStructureTime',
+            title: "上次构建时间",
+            dataIndex: "lastStructureTime",
+            key: "lastStructureTime",
         },
         {
-            title: '上次成功时间',
-            dataIndex: 'lastSuccessTime',
-            key: 'lastSuccessTime',
+            title: "上次成功时间",
+            dataIndex: "lastSuccessTime",
+            key: "lastSuccessTime",
         },
         {
-            title: '操作',
-            dataIndex: 'action',
+            title: "操作",
+            dataIndex: "action",
             key:"action",
             render:(text ,record,index)=>{
                 return(
-                    <span className=' all-icon' onClick={() =>work(record,index)}>
+                    <span className=" all-icon" onClick={() =>work(record,index)}>
                         {
                             record.pipelineState === 0 ?
                                 <svg className="icon" aria-hidden="true" >
@@ -187,4 +178,4 @@ const PipelineTable = props =>{
             />
 }
 
-export default withRouter(inject('structureStore','pipelineCollectStore')(observer(PipelineTable)))
+export default withRouter(inject("structureStore","pipelineCollectStore")(observer(PipelineTable)))

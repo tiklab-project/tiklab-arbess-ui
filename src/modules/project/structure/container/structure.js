@@ -84,7 +84,7 @@ const Structure = props => {
                         </svg>
             case 2 :
                 //失败
-                return  <CloseCircleOutlined style = {{fontSize:17,color:'red'}}/>
+                return  <CloseCircleOutlined style = {{fontSize:17,color:"red"}}/>
             case 3:
                 //运行--等待运行
                 return  <svg className="icon" aria-hidden="true">
@@ -101,7 +101,7 @@ const Structure = props => {
         }
     }
     
-    const working = () => {
+    const runImmediately = () => {
         const params = {
             userId:userId,
             pipelineId:pipelineId
@@ -171,7 +171,7 @@ const Structure = props => {
                             <div className="empty-group">
                                 <div className="empty-group_title">当前流水线尚未运行</div>
                                 <div className="empty-group_extra">
-                                    <Button type="primary" onClick={working}>
+                                    <Button type="primary" onClick={()=>runImmediately()}>
                                         立即运行
                                     </Button>
                                 </div>

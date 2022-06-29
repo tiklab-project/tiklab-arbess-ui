@@ -3,8 +3,8 @@ import {serviceLoc} from "../../../../common/utils/requset";
 //新建流水线
 export function  CreatePipeline(data){
     return serviceLoc.request({
-        url:'/pipeline/createPipeline',
-        method:'post',
+        url:"/pipeline/createPipeline",
+        method:"post",
         data
     })
 }
@@ -12,8 +12,8 @@ export function  CreatePipeline(data){
 //获取所有流水线
 export function FindAllPipelineStatus(data) {
     return serviceLoc.request({
-        url:'/pipelineHome/findUserPipeline',
-        method:'post',
+        url:"/pipelineHome/findUserPipeline",
+        method:"post",
         data
     })
 }
@@ -22,8 +22,8 @@ export function FindAllPipelineStatus(data) {
 //模糊搜索流水线
 export function FindOneName(data){
     return serviceLoc.request({
-        url:'/pipeline/findOneName',
-        method:'post',
+        url:"/pipeline/findOneName",
+        method:"post",
         data
     })
 }
@@ -31,8 +31,8 @@ export function FindOneName(data){
 //删除流水线
 export function  DeletePipeline (data){
     return serviceLoc.request({
-        url:'/pipeline/deletePipeline',
-        method:'post',
+        url:"/pipeline/deletePipeline",
+        method:"post",
         data
     })
 }
@@ -40,8 +40,8 @@ export function  DeletePipeline (data){
 //重命名流水线
 export function UpdatePipeline(data){
     return serviceLoc.request({
-        url:'/pipeline/updatePipeline',
-        method:'post',
+        url:"/pipeline/updatePipeline",
+        method:"post",
         data
     })
 }

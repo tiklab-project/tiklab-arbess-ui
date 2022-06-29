@@ -1,7 +1,7 @@
 import {Axios as serviceLoc} from "doublekit-core-ui";
 import axios from "axios";
 
-const BASE_URL = 'http://192.168.10.100:8080'
+const BASE_URL = "http://192.168.10.100:8080"
 const service = axios.create({
     baseURL: BASE_URL,
     timeout: 5000

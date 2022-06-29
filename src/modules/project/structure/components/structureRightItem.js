@@ -36,21 +36,21 @@ const StructureRightItem = props =>{
         return  rightFlowData && rightFlowData.map((item,index)=>{
             return(
                 <Card  className={`mid_group_center-cart  item-${item.runState}`}  key={index}>
-                    <div className='cart-top'>
-                        <span className='cart-top-taskAlias'>{item.taskAlias}</span>
+                    <div className="cart-top">
+                        <span className="cart-top-taskAlias">{item.taskAlias}</span>
                         <span> -- </span>
-                        <span className='cart-top-configName'>
+                        <span className="cart-top-configName">
                             <ConfigName type={item.taskType}/>
                         </span>
                     </div>
-                    <div className='cart-center'>
-                        <div className='cart-center-item'>
+                    <div className="cart-center">
+                        <div className="cart-center-item">
                             <div>状态：{state(item)}</div>
                             <div>时间：{item.execTime} </div>
                         </div>
                     </div>
-                    <div className='cart-bottom' >
-                        <span className='cart-bottom-span' onClick={()=>log(item)}>
+                    <div className="cart-bottom" >
+                        <span className="cart-bottom-span" onClick={()=>log(item)}>
                             日志
                         </span>
                     </div>
@@ -61,11 +61,11 @@ const StructureRightItem = props =>{
 
     return (
         <div className="mid_group">
-            <div className='mid_group_top'>
-                <div className='mid_group_top_tel'>
-                    <span className='tel_title '># {modeData && modeData.findNumber}</span>
-                    <span className='tel_time'>执行时长：{modeData && modeData.execTime}</span>
-                    <span className='tel_way'>触发方式：{ runWay (modeData && modeData.runWay) }</span>
+            <div className="mid_group_top">
+                <div className="mid_group_top_tel">
+                    <span className="tel_title "># {modeData && modeData.findNumber}</span>
+                    <span className="tel_time">执行时长：{modeData && modeData.execTime}</span>
+                    <span className="tel_way">触发方式：{ runWay (modeData && modeData.runWay) }</span>
                 </div>
                 <div className="mid_group_top_del">
                     <Popconfirm
@@ -80,9 +80,9 @@ const StructureRightItem = props =>{
                 </div>
             </div>
             <div className="mid_group_center"> {rightDetails(rightFlowData)} </div>
-            <div className='structure-content-bottom'>
-                <div className='structure-content-bottom-title'>输出</div>
-                <div className='structure-content-bottom-outLog'>
+            <div className="structure-content-bottom">
+                <div className="structure-content-bottom-title">输出</div>
+                <div className="structure-content-bottom-outLog">
                     { modeData && modeData.runLog }
                 </div>
             </div>

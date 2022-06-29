@@ -1,7 +1,7 @@
 import React ,{useEffect,useState} from "react";
 import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
-import './pipelineCollect.scss';
+import "./pipelineCollect.scss";
 import PipelineTable from "../../pipelineTable/pipelineTable";
 
 const PipelineCollect = props =>{
@@ -16,8 +16,8 @@ const PipelineCollect = props =>{
     },[fresh])
 
     return(
-        <div className='pipelineCollect'>
-            <div className='pipelineCollect-title'>我的收藏</div>
+        <div className="pipelineCollect">
+            <div className="pipelineCollect-title">我的收藏</div>
             <PipelineTable
                 list={followList}
                 fresh={fresh}
@@ -27,4 +27,4 @@ const PipelineCollect = props =>{
     )
 }
 
-export default inject('pipelineCollectStore')(observer(PipelineCollect))
+export default inject("pipelineCollectStore")(observer(PipelineCollect))

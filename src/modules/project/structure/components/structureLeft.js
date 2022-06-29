@@ -47,7 +47,7 @@ const StructureLeft = props =>{
     }
 
     return(
-        <div className='structure-content-left'>
+        <div className="structure-content-left">
             <StructureLeftDropdown
                 findPageHistory={findPageHistory}
                 state={state}
@@ -60,7 +60,7 @@ const StructureLeft = props =>{
             />
             <div className="structure-content-left-history">
                 <div className="history-content">
-                    {   execState === '' ? null:
+                    {   execState === "" ? null:
                         <StructureLeftExecute
                             execState={execState}
                             status={status}

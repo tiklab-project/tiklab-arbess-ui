@@ -37,7 +37,7 @@ const FormView = props =>{
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
-    },[formInitialValues])
+    },[formInitialValues,pipelineId])
 
     const displayInput = index =>{
         setIsFormAlias(index)
@@ -181,7 +181,7 @@ const FormView = props =>{
                                 <div style={{display:"inline"}}>
                                     {group.title}
                                     &nbsp; &nbsp;
-                                    <span onClick={()=> displayInput(index)} style={{cursor:'pointer'}}>
+                                    <span onClick={()=> displayInput(index)} style={{cursor:"pointer"}}>
                                         <EditOutlined />
                                     </span>
                                 </div>

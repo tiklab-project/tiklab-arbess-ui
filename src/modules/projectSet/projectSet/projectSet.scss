@@ -1,25 +1,25 @@
-.orga {
+.projectSet {
     height: 100%;
-    .orga-background {
+    &-background {
         background-color: #fff;
         margin-left: 10px;
         padding: 10px
     }
-    .orga-col {
+    .projectSet-col {
         background-color: #fff;
         padding: 20px;
     }
-    .orga-aside {
+    &-aside {
         height: 100%;
         background-color: #F7F8FA;
         padding-top: 20px;
         ul,li {
             list-style: none;
         }
-        .orga-aside-hidden {
+        &-hidden {
             display: none;
         }
-        .orga-aside-item {
+        &-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -28,25 +28,25 @@
             padding: 0 20px;
             cursor: pointer;
         }
-        .orga-aside-li {
-            line-height: 40px;
-        }
-        .orga-aside-ul {
+        &-ul {
             padding: 0;
         }
-        .orga-aside-second:hover {
-            span {
+        &-li {
+            line-height: 40px;
+        }
+        &-first:hover{
+            .projectSet-aside-title {
                 color: #0053ca;
             }
         }
-        .orga-aside-first:hover{
-            .orga-aside-title {
-                color: #0053ca;
-            }
-        }
-        .orga-aside-select {
+        &-select {
             border-right: 3px solid #1890ff;
             background: #e6f7ff;
+            &:hover{
+                span {
+                    color: #0053ca;
+                }
+            }
         }
     }
     .icon{
@@ -54,9 +54,4 @@
         height: 25px;
         padding-right: 5px;
     }
-}
-.ant-modal-close-x{
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
 }

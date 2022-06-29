@@ -6,7 +6,7 @@
  * @LastEditors: 袁婕轩
  * @LastEditTime: 2021-12-20 10:57:28
  */
-const api =  'http://192.168.10.100:8080';
+const api =  "http://192.168.10.100:8080";
 const base_url = JSON.stringify(api);
 
 
@@ -21,10 +21,10 @@ fetchMethod = JSON.stringify(fetchMethod);
 // 判断是否是用户环境， 如果是用户环境收到切换为true， 如果是内部公司手动切换为false
 const userProduction = true;
 
-const appKey = JSON.stringify('');
-const appSecret = JSON.stringify('');
-const version = JSON.stringify('');
-const client = JSON.stringify('');
+const appKey = JSON.stringify("");
+const appSecret = JSON.stringify("");
+const version = JSON.stringify("");
+const client = JSON.stringify("");
 
 const webpackGlobal = {
     base_url,

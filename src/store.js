@@ -10,6 +10,7 @@ import {PROOF_STORE,ProofStore} from "./modules/proof/store/proofStore";
 import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/workSpaceStore";
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/homePage/store/homePageStore";
 import {PIPELINECOLLECT_STORE,PipelineCollectStore} from "./modules/pipeline/pipelineCollect/store/pipelineCollectStore";
+import {LOGINFO_STORE,LogInfoStore} from "./modules/system/logInfo/store/logInfoStore";
 
 function createStores() {
     return{
@@ -23,6 +24,7 @@ function createStores() {
         [WORKSPACE_STORE]:new WorkSpaceStore(),
         [HOMEPAGE_STORE]:new HomePageStore(),
         [PIPELINECOLLECT_STORE]:new PipelineCollectStore(),
+        [LOGINFO_STORE]:new LogInfoStore(),
         [PLUGIN_STORE]: new PluginStore(),
         [EAM_STORE]: new EamStore(),
     }

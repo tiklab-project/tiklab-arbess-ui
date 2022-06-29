@@ -23,8 +23,8 @@ const ConfigDetails = props =>{
         setUnitShellBlock,setMavenShellBlock,setCodeType} = configDataStore
 
     const [form] = Form.useForm()
-    const PluginStore = useSelector(state =>state.pluginStore)
-    const [view,setView] = useState(2)
+    const pluginStore = useSelector(state =>state.pluginStore)
+    const [view,setView] = useState(1)
     const [isBtn,setIsBtn] = useState(false)
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
@@ -33,7 +33,7 @@ const ConfigDetails = props =>{
 
     // 是否有图形化插件
     useEffect(()=>{
-         PluginStore.map(item=>{
+        pluginStore.map(item=>{
             if(item.id === "gui"){
                 setIsBtn(true)
             }else setIsBtn(false)
@@ -163,7 +163,6 @@ const ConfigDetails = props =>{
                         localStorage.setItem("deployId",j.deployId)
                         localStorage.setItem("deployProofId",j.proof && j.proof.proofId)
                         setLinuxShellBlock(`${j.deployShell ? j.deployShell : ""}`)
-
                     }
                     setData([...newData])
                     setCodeData(newCode)
@@ -254,7 +253,7 @@ const ConfigDetails = props =>{
                             isBtn ?
                                 <RemoteUmdComponent
                                     point={"gui"}
-                                    pluginStore={PluginStore}
+                                    pluginStore={pluginStore}
                                     extraProps={{
                                         configDataStore,
                                         configStore,

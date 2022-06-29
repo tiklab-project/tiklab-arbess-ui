@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {Button,Input} from "antd";
 import {withRouter} from "react-router";
 import {PlusOutlined} from "@ant-design/icons";
@@ -17,10 +17,10 @@ const PipelineSearch= props=>{
     }
 
     return(
-        <div className='pipeline-top'>
-            <div className='pipeline-top-r'>
+        <div className="pipeline-top">
+            <div className="pipeline-top-r">
                 <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
-                <Button type='primary' onClick={()=>props.history.push('/index/new')}>
+                <Button type="primary" onClick={()=>props.history.push("/index/new")}>
                     <PlusOutlined/> 新建流水线
                 </Button>
             </div>
@@ -28,4 +28,4 @@ const PipelineSearch= props=>{
     )
 }
 
-export default withRouter(inject('pipelineStore')(observer(PipelineSearch)))
+export default withRouter(inject("pipelineStore")(observer(PipelineSearch)))

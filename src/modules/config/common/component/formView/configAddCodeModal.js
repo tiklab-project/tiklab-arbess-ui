@@ -5,33 +5,33 @@ import ConfigCodeOrNewStage from "./configCodeOrNewStage";
 const lis=[
     {
         id:1,
-        title:'Git',
+        title:"Git",
         desc:[
             {
                 type:1,
-                tel:'通用Git'
+                tel:"通用Git"
             },
             {
                 type:2,
-                tel:'Gitee'
+                tel:"Gitee"
             },
             {
                 type:4,
-                tel: 'Gitlab'
+                tel: "Gitlab"
             },
             {
                 type:3,
-                tel: 'Github'
+                tel: "Github"
             }
         ]
     },
     {
         id:2,
-        title:'SVN',
+        title:"SVN",
         desc: [
             {
                 type:5,
-                tel:'SVN'
+                tel:"SVN"
             }
         ]
     }
@@ -58,7 +58,7 @@ const ConfigAddCodeModal = props =>{
             visible={codeVisible}
             onCancel={()=>setCodeVisible(false)}
             footer={[]}
-            title='选择代码源'
+            title="选择代码源"
         >
             <ConfigCodeOrNewStage lis={lis} handleClick={handleClick}/>
         </Modal>

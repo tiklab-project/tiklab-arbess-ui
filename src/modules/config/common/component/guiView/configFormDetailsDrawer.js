@@ -31,21 +31,21 @@ const ConfigFormDetailsDrawer = props =>{
                 <div className="wrapper-head">
                     <div className="wrapper-head-title">
                         编辑 &nbsp; &nbsp;
-                        <span className='deleted' onClick={()=>deletePart()}>
-                               <DeleteOutlined/>
-                           </span>
+                        <span className="deleted" onClick={()=>deletePart()}>
+                            <DeleteOutlined/>
+                        </span>
                     </div>
                     <div>
-                        <Button type='text' onClick={()=>setTaskFormDrawer(false)}>
+                        <Button type="text" onClick={()=>setTaskFormDrawer(false)}>
                             <CloseOutlined />
                         </Button>
                     </div>
                 </div>
                 <div className="wrapper-body">
                     <div className="body">
-                        <div className='body-taskForm'>
-                            <div className='taskForm-top'>
-                                <div className='taskForm-top_title'>
+                        <div className="body-taskForm">
+                            <div className="taskForm-top">
+                                <div className="taskForm-top_title">
                                     <ConfigName type={newStage}/>
                                 </div>
                             </div>

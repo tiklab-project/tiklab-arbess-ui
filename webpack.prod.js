@@ -1,31 +1,29 @@
-
-
-const { merge } = require('webpack-merge');
-const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
-const optimizeCss = require('optimize-css-assets-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const { merge } = require("webpack-merge");
+const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
+const optimizeCss = require("optimize-css-assets-webpack-plugin");
+const ProgressBarPlugin = require("progress-bar-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-const baseWebpackConfig = require('./webpack.base');
+const baseWebpackConfig = require("./webpack.base");
 const webpack = require("webpack");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const customEnv = process.env.CUSTOM_ENV;
-const {webpackGlobal} = require('./enviroment/enviroment_' + customEnv)
+const {webpackGlobal} = require("./enviroment/enviroment_" + customEnv)
 
 
 module.exports = merge(baseWebpackConfig, {
-    mode: 'production',
+    mode: "production",
     entry: [
-        path.resolve(__dirname, './src/index.js')
+        path.resolve(__dirname, "./src/index.js")
     ],
     plugins: [
         new optimizeCss({
             assetNameRegExp: /\.css$/g,
-            cssProcessor: require('cssnano'),
+            cssProcessor: require("cssnano"),
             cssProcessorOptions: {
                 safe: true,
                 discardComments: {
@@ -36,11 +34,11 @@ module.exports = merge(baseWebpackConfig, {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
-            title:'流水线',
-            template: path.resolve(__dirname, './public/index.template.html'),
+            title:"流水线",
+            template: path.resolve(__dirname, "./public/index.template.html"),
             hash: false,
-            filename: 'index.html',
-            inject: 'body',
+            filename: "index.html",
+            inject: "body",
             minify: {
                 collapseWhitespace: true,
                 removeComments: true,
@@ -50,7 +48,7 @@ module.exports = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({ENV:JSON.stringify(customEnv), ...webpackGlobal}),
 
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[contenthash:8].css',
+            filename: "css/[name].[contenthash:8].css",
             ignoreOrder: true
         }),
         new CssMinimizerPlugin(),
@@ -66,13 +64,13 @@ module.exports = merge(baseWebpackConfig, {
             minChunks: 1,
             maxAsyncRequests: 5,
             maxInitialRequests:5,
-            automaticNameDelimiter: '--', // 分包打包生成文件的名称的连接符
+            automaticNameDelimiter: "--", // 分包打包生成文件的名称的连接符
             name:true,
             cacheGroups: { //  cacheGroups 缓存组，如：将某个特定的库打包
                 /* 抽离node_modules下的第三方库 可视需要打开会生成两个文件  vender: node-module下的文件*/
                 vendor: {
-                    chunks:'all',
-                    name:'vender',
+                    chunks:"all",
+                    name:"vender",
                     test: (module, chunks) => {
                         if (/node_modules/.test(module.context)) {
                             return true
@@ -84,7 +82,7 @@ module.exports = merge(baseWebpackConfig, {
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */
                 commons: {
-                    name: 'commons',
+                    name: "commons",
                     test: function (module, chunks) {
                         if (
                             /src\/components\//.test(module.context) ||
@@ -96,7 +94,7 @@ module.exports = merge(baseWebpackConfig, {
                             return true
                         }
                     },
-                    chunks: 'all',
+                    chunks: "all",
                     minChunks: 2, //  提取公共部分最少的文件数
                     // minportal: 0 // 提取公共部分最小的大小
                     // enforce: true

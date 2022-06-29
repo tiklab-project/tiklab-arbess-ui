@@ -43,10 +43,10 @@ const StructureRightExecute = props => {
     const cease = () => {
         const params = {
             userId:getUser().userId,
-            pipelineId:localStorage.getItem('pipelineId')
+            pipelineId:localStorage.getItem("pipelineId")
         }
         killInstance(params).then(res=>{
-            console.log('停止成功',res)
+            console.log("停止成功",res)
             setFreshen(!freshen)
         }).catch(error=>{
             console.log(error)
@@ -58,11 +58,11 @@ const StructureRightExecute = props => {
             const i = execState.sort;
             const j = execState.status;
             if(i > j && index === i ){
-                return  'item-100'  // 运行
+                return  "item-100"  // 运行
             }else if (index < i ){
-                return  'item-10'  //成功
+                return  "item-10"  //成功
             }else if(index > i){
-                return  'item-all'  //运行--等待运行
+                return  "item-all"  //运行--等待运行
             }
         }
     }
@@ -71,21 +71,21 @@ const StructureRightExecute = props => {
         return rightExecuteData && rightExecuteData.map((item,index)=>{
             return(
                 <Card className={`mid_group_center-cart ${style(index+1)}`} key={index}>
-                    <div className='cart-top'>
-                        <span className='cart-top-taskAlias'>{item.taskAlias}</span>
+                    <div className="cart-top">
+                        <span className="cart-top-taskAlias">{item.taskAlias}</span>
                         <span> -- </span>
-                        <span className='cart-top-configName'>
+                        <span className="cart-top-configName">
                             <ConfigName type={item.taskType}/>
                         </span>
                     </div>
-                    <div className='cart-center'>
-                        <div className='cart-center-item'>
+                    <div className="cart-center">
+                        <div className="cart-center-item">
                             <div>状态：{ state(index+1) }</div>
                             <div >时间：{ times(index) }</div>
                         </div>
                     </div>
-                    <div className='cart-bottom' >
-                        <span className='cart-bottom-span'>
+                    <div className="cart-bottom" >
+                        <span className="cart-bottom-span">
                             日志
                         </span>
                     </div>
@@ -100,13 +100,13 @@ const StructureRightExecute = props => {
 
     const logRunLog = () =>{
         if(execState) {
-            const outLog=document.getElementById('outLog')
+            const outLog=document.getElementById("outLog")
             if(outLog && isActiveSlide){
                 outLog.scrollTop = outLog.scrollHeight
             }
-            return  <div className='structure-content-bottom' onWheel={onWheel}>
-                        <div className='structure-content-bottom-title'>输出</div>
-                        <div className='structure-content-bottom-outLog' id='outLog'>
+            return  <div className="structure-content-bottom" onWheel={onWheel}>
+                        <div className="structure-content-bottom-title">输出</div>
+                        <div className="structure-content-bottom-outLog" id="outLog">
                             {execState.runLog}
                         </div>
                     </div>
@@ -115,11 +115,11 @@ const StructureRightExecute = props => {
 
     return(
         <div className="mid_group">
-            <div className='mid_group_top'>
-                <div className='mid_group_top_tel'>
-                    <span className='tel_time'>运行中</span>
-                    <span className='tel_time'>执行时长：{execState && execState.allTime} </span>
-                    <span className='tel_way'>触发方式：{ runWay (execState && execState.runWay) } </span>
+            <div className="mid_group_top">
+                <div className="mid_group_top_tel">
+                    <span className="tel_time">运行中</span>
+                    <span className="tel_time">执行时长：{execState && execState.allTime} </span>
+                    <span className="tel_way">触发方式：{ runWay (execState && execState.runWay) } </span>
                 </div>
                 <div className="mid_group_top_del">
                     <Button onClick={()=>cease()}> 停止 </Button>

@@ -12,19 +12,19 @@ import {useSelector, RemoteUmdComponent} from "doublekit-plugin-ui";
 
 const Config = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore,pluginsStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
 
     const {updateConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure} = structureStore
 
-    const {setIsPrompt,codeData,setCodeData,formInitialValues,setData,setFormInitialValues,setLinuxShellBlock,
+    const {setIsPrompt,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType
     } = configDataStore
 
     const [form] = Form.useForm()
-    const PluginStore = useSelector(state =>state.pluginStore)
+    const pluginStore = useSelector(state =>state.pluginStore)
     const [view,setView] = useState(1)
     const [isBtn,setIsBtn] = useState(false)
     const [jumpOrNot,] = useState(true)
@@ -37,14 +37,11 @@ const Config = props =>{
         return () =>{
             localStorage.removeItem("gitProofId")
             localStorage.removeItem("deployProofId")
-            setCodeData('')
-            setData([])
-            setFormInitialValues('')
         }
     },[])
 
     useEffect(()=>{
-        PluginStore.map(item=>{
+        pluginStore.map(item=>{
             if(item.id === "gui"){
                 setIsBtn(true)
             }else setIsBtn(false)
@@ -178,7 +175,7 @@ const Config = props =>{
                             isBtn ?
                                 <RemoteUmdComponent
                                     point={"gui"}
-                                    pluginStore={PluginStore}
+                                    pluginStore={pluginStore}
                                     extraProps={{
                                         configDataStore,
                                         configStore,

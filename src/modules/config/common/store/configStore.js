@@ -3,7 +3,7 @@ import {observable, action} from "mobx";
 import {
     UpdateConfigure,
     FindAllConfigure,
-} from '../api/config'
+} from "../api/config"
 
 export class ConfigStore{
 
@@ -53,7 +53,7 @@ export class ConfigStore{
         }
         return new Promise((resolve, reject) => {
             UpdateConfigure(params).then(res=>{
-                console.log('更新流水线配置',res)
+                console.log("更新流水线配置",res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -65,10 +65,10 @@ export class ConfigStore{
     @action
     findAllConfigure = values =>{
         const param = new FormData()
-        param.append('pipelineId', values)
+        param.append("pipelineId", values)
         return new Promise((resolve, reject) => {
             FindAllConfigure(param).then(res=>{
-                console.log('查看所有配置',res)
+                console.log("查看所有配置",res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -79,4 +79,4 @@ export class ConfigStore{
 
 }
 
-export const CONFIG_STORE = 'configStore'
+export const CONFIG_STORE = "configStore"

@@ -1,7 +1,9 @@
-import React  from "react";
+import React ,{useEffect} from "react";
 import "./header.scss";
 import {renderRoutes} from "react-router-config";
 import Heads from "./header";
+import {privilegeStores} from "doublekit-privilege-ui";
+import {getUser} from "doublekit-core-ui";
 
 const Portal= props=>{
 
@@ -20,9 +22,14 @@ const Portal= props=>{
         {
             key:"system",
             to:"/index/system",
-            title:'系统设置',
+            title:"系统设置",
         }
     ]
+
+    // 导航控制
+    useEffect(()=>{
+        privilegeStores.systemRoleStore.getSystemPermissions(getUser().userId)
+    },[])
 
     return(
         <div className="frame">

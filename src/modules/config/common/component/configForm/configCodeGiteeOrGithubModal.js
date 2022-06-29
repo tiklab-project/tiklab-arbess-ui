@@ -16,16 +16,17 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
     const onOk = () =>{
         form.validateFields().then((values) => {
+            const params = {
+                proofName:values.proofName,
+                proofPassword:JSON.parse(localStorage.getItem("giteeToken"))
+                         && JSON.parse(localStorage.getItem("giteeToken")).accessToken,
+                proofDescribe:"gitee授权登录",
+                user:{id:getUser().userId},
+                type:1,
+                proofScope:codeType,
+                proofType:"password"
+            }
             if(codeType  === 2){
-                const params = {
-                    proofName:values.proofName,
-                    proofPassword:JSON.parse(localStorage.getItem("giteeToken")).accessToken,
-                    proofDescribe:"gitee授权登录",
-                    user:{id:getUser().userId},
-                    type:1,
-                    proofScope:codeType,
-                    proofType:"password"
-                }
                 getGiteeProof(params).then(res=>{
                     console.log(res,"gitee授权登录")
                     if(res.code === 0){
@@ -33,19 +34,10 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     }else {
                         message.error({content:"创建失败", className:"message"})
                     }
-                }).catch(error=>{
-                    console.log(error)
                 })
             }else{
-                const params = {
-                    proofName:values.proofName,
-                    proofPassword:localStorage.getItem("githubToken"),
-                    proofDescribe:"github授权登录",
-                    user:{id:getUser().userId},
-                    type:1,
-                    proofScope:codeType,
-                    proofType:"password"
-                }
+                params.proofPassword = localStorage.getItem("githubToken")
+                params.proofDescribe = "github授权登录"
                 getGithubProof(params).then(res=>{
                     console.log(res,"github授权登录")
                     if(res.code===0){
@@ -53,8 +45,6 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                     }else {
                         message.error({content:"创建失败", className:"message"})
                     }
-                }).catch(error=>{
-                    console.log(error)
                 })
             }
             setVisible(false)

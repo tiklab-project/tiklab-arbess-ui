@@ -1,6 +1,6 @@
 import React, { useState,useEffect,useRef} from "react";
 import {Form, Input, Button, message} from "antd";
-import './pipelineAdd.scss';
+import "./pipelineAdd.scss";
 import {observer,inject} from "mobx-react";
 import moment from "../../../common/moment/moment";
 import {getUser} from "doublekit-core-ui";
@@ -51,34 +51,34 @@ const PipelineAdd = props => {
         }
         createPipeline(params).then(res=>{
             if(res.code=== 0 && res.data){
-                localStorage.setItem('pipelineId',res.data)
-                localStorage.setItem('pipelineName',value.pipelineName)
+                localStorage.setItem("pipelineId",res.data)
+                localStorage.setItem("pipelineName",value.pipelineName)
                 props.history.push(`/index/config/${value.pipelineName}`)
             }else{
-                message.error({content:'添加失败', className:'message'})
+                message.error({content:"添加失败", className:"message"})
             }
         })
     }
 
     return(
-        <div className='new'>
-            <Form id='form' name='basic' onFinish={handSubmit} autoComplete='off'>
+        <div className="new">
+            <Form id="form" name="basic" onFinish={handSubmit} autoComplete="off">
                 <Form.Item
-                    label='流水线名称'
-                    name='pipelineName'
+                    label="流水线名称"
+                    name="pipelineName"
                     rules={[
-                        {required:true, message:''},
+                        {required:true, message:""},
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
                                 if (!value) {
-                                    return Promise.reject('请输入名称')
+                                    return Promise.reject("请输入名称")
                                 }
                                 let nameArray = []
                                 if(pipelineList){
                                     nameArray = pipelineList && pipelineList.map(item =>  item.pipelineName);
                                 }
                                 if (nameArray.includes(value)) {
-                                    return Promise.reject('名称已经存在');
+                                    return Promise.reject("名称已经存在");
                                 }
                                 return Promise.resolve()
                             },
@@ -88,15 +88,15 @@ const PipelineAdd = props => {
                     <Input style={{width:400}} ref={inputRef}/>
                 </Form.Item>
             </Form>
-            <div  className='new-type'>
-                <ul className='new-type-choose'>
+            <div  className="new-type">
+                <ul className="new-type-choose">
                     {
                         lis.map((item,index) => {
                             return (
                                 <li
                                     key={item.id}
                                     onClick={()=> liStatusData(index) }
-                                    className={ liStatus === index ? 'new-type-choose-c new-type-active':'new-type-choose-c '}
+                                    className={ liStatus === index ? "new-type-choose-c new-type-active":"new-type-choose-c "}
                                 >
                                     <label>{item.title}</label>
                                     <div>{item.desc}</div>
@@ -106,9 +106,9 @@ const PipelineAdd = props => {
                     }
                 </ul>
             </div>
-            <div className='new-btn'>
-                <span className='new-btn-span'>
-                    <Button htmlType='submit' form='form' type='primary' >
+            <div className="new-btn">
+                <span className="new-btn-span">
+                    <Button htmlType="submit" form="form" type="primary" >
                         添加
                     </Button>
                 </span>
@@ -117,4 +117,4 @@ const PipelineAdd = props => {
     )
 }
 
-export default inject('pipelineStore')(observer(PipelineAdd))
+export default inject("pipelineStore")(observer(PipelineAdd))

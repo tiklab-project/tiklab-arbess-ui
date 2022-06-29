@@ -14,10 +14,10 @@ const AddProofModal = props =>{
             if(values.type===1){
                 id=null
             }else {
-                id=localStorage.getItem('pipelineId')
+                id=localStorage.getItem("pipelineId")
             }
             if(isAuthority){
-                proofScope = values.proofScope
+                proofScope=values.proofScope
             }else {
                 proofScope=type
             }
@@ -57,7 +57,7 @@ const AddProofModal = props =>{
                   autoComplete = "off"
                   initialValues={{proofType:"password",type:1,proofScope:1}}
             >
-                <Form.Item label='凭证级别' name='type'>
+                <Form.Item label="凭证级别" name="type">
                     <Select >
                         <Option value={1}>全局凭证</Option>
                         <Option value={2}>项目凭证</Option>
@@ -65,7 +65,7 @@ const AddProofModal = props =>{
                 </Form.Item>
                 {
                     isAuthority ?
-                        <Form.Item label='凭证作用域' name='proofScope'>
+                        <Form.Item label="凭证作用域" name="proofScope">
                             <Select>
                                 <Option value={1}>源码凭证</Option>
                                 <Option value={5}>部署凭证</Option>
@@ -74,37 +74,37 @@ const AddProofModal = props =>{
                         :null
                 }
                 <Form.Item
-                    label='凭证名称'
-                    name='proofName'
-                    rules={[{required:true, message:'请输入凭证名称'}]}
+                    label="凭证名称"
+                    name="proofName"
+                    rules={[{required:true, message:"请输入凭证名称"}]}
                 >
-                    <Input placeholder='名称'/>
+                    <Input placeholder="名称"/>
                 </Form.Item>
-                <Form.Item label='凭证类型' name='proofType' >
-                    <Select placeholder='选择类型'>
+                <Form.Item label="凭证类型" name="proofType" >
+                    <Select placeholder="选择类型">
                         <Option value="SSH">SSH</Option>
                         <Option value="password">password</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.proofType !== currentValues.proofType}>
                     {({ getFieldValue })=>
-                        getFieldValue('proofType') === 'password' ? (
+                        getFieldValue("proofType") === "password" ? (
                                 <>
-                                    <Form.Item label='username' name='proofUsername'>
-                                        <Input placeholder='账号'/>
+                                    <Form.Item label="username" name="proofUsername">
+                                        <Input placeholder="账号"/>
                                     </Form.Item>
-                                    <Form.Item label='password' name='proofPassword'>
-                                        <Input.Password  placeholder='密码'/>
+                                    <Form.Item label="password" name="proofPassword">
+                                        <Input.Password  placeholder="密码"/>
                                     </Form.Item>
                                 </>
                             ):
-                            <Form.Item name='proofPassword' label='私钥'>
-                                <Input.TextArea  placeholder='私钥'/>
+                            <Form.Item name="proofPassword" label="私钥">
+                                <Input.TextArea  placeholder="私钥"/>
                             </Form.Item>
                     }
                 </Form.Item>
-                <Form.Item name='proofDescribe' label='描述'>
-                    <Input.TextArea  placeholder='备注'/>
+                <Form.Item name="proofDescribe" label="描述">
+                    <Input.TextArea  placeholder="备注"/>
                 </Form.Item>
             </Form>
         </Modal>

@@ -1,6 +1,6 @@
 import React, {Fragment,useState,useEffect} from "react";
 import {Button} from "antd";
-import './addProofModal'
+import "./addProofModal";
 import AddProofModal from "./addProofModal";
 import {inject, observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
@@ -26,7 +26,7 @@ const AddProofButton = props =>{
 
     return (
         <Fragment>
-            <Button className='config-details-link' type={style} onClick={()=>addProofVisible()}>
+            <Button className="config-details-link" type={style} onClick={()=>addProofVisible()}>
                 添加
             </Button>
             <AddProofModal
@@ -45,4 +45,4 @@ const AddProofButton = props =>{
 }
 
 
-export default inject('proofStore')(observer(AddProofButton))
+export default inject("proofStore")(observer(AddProofButton))

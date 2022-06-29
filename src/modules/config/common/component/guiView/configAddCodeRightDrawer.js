@@ -9,7 +9,7 @@ const ConfigAddCodeRightDrawer = props =>{
         formInitialValues
     } = props
 
-    const [codeId,setCodeId] = useState('')
+    const [codeId,setCodeId] = useState("")
 
     const handleClick = (item,index) =>{
         setCodeId(index)
@@ -31,7 +31,7 @@ const ConfigAddCodeRightDrawer = props =>{
     }
 
     return(
-        <div className='body-menu_right'>
+        <div className="body-menu_right">
             {
                 opt  === 1 ?
                     <ConfigAddCodeRightGitDrawer

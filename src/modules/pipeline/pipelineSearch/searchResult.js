@@ -1,7 +1,7 @@
-import React ,{useEffect} from 'react'
+import React ,{useEffect} from "react"
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
-import './searchResult.scss';
+import "./searchResult.scss";
 import {getUser} from "doublekit-core-ui";
 
 const SearchResult = props => {
@@ -18,13 +18,13 @@ const SearchResult = props => {
     },[])
 
     const  goPipelineTask= record =>{
-        localStorage.setItem('pipelineName',record.pipelineName)
-        localStorage.setItem('pipelineId',record.pipelineId)
-        props.history.push('/index/task/work')
+        localStorage.setItem("pipelineName",record.pipelineName)
+        localStorage.setItem("pipelineId",record.pipelineId)
+        props.history.push("/index/task/work")
     }
 
     return(
-        <div className='search'>
+        <div className="search">
             <div>
                 <h1 >查找的流水线</h1>
                 <ul >
@@ -33,7 +33,7 @@ const SearchResult = props => {
                            return(
                                <li key={item.pipelineId} >
                                    <span> {index+1}、</span>
-                                   <span className={'search-link'} onClick={()=> goPipelineTask(item)}>
+                                   <span className={"search-link"} onClick={()=> goPipelineTask(item)}>
                                        {item.pipelineName}
                                    </span>
                                </li>
@@ -46,4 +46,4 @@ const SearchResult = props => {
     )
 }
 
-export default withRouter(inject('pipelineStore')(observer(SearchResult)))
+export default withRouter(inject("pipelineStore")(observer(SearchResult)))

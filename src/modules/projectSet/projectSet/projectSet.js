@@ -1,5 +1,5 @@
-import React  from 'react'
-import './projectSet.scss';
+import React  from "react";
+import "./projectSet.scss";
 import ProjectSetLeftNav from "./projectSetLeftNav";
 import {renderRoutes} from "react-router-config";
 import {withRouter} from "react-router-dom";
@@ -10,11 +10,11 @@ const { Sider,Content } = Layout
 const ProjectSet= props=>{
     const {route}=props
     return (
-        <Layout className="orga">
-            <Sider width={180} className="site-layout-background">
+        <Layout className="projectSet">
+            <Sider width={180}>
                 <ProjectSetLeftNav {...props} />
             </Sider>
-            <Content className="orga-background">
+            <Content className="projectSet-background">
                 {renderRoutes(route.routes)}
             </Content>
         </Layout>

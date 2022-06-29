@@ -6,7 +6,7 @@
  * @LastEditors: 袁婕轩
  * @LastEditTime: 2022-01-20 13:23:49
  */
-const api =  '/';
+const api =  "/";
 const base_url = JSON.stringify(api);
 
 const url = "/";
@@ -21,10 +21,10 @@ const userProduction = true;
 let fetchMethod = "post"
 fetchMethod = JSON.stringify(fetchMethod);
 
-const appKey = JSON.stringify('');
-const appSecret = JSON.stringify('');
-const version = JSON.stringify('');
-const client = JSON.stringify('');
+const appKey = JSON.stringify("");
+const appSecret = JSON.stringify("");
+const version = JSON.stringify("");
+const client = JSON.stringify("");
 
 const webpackGlobal = {
     base_url,

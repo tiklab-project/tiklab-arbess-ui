@@ -5,7 +5,7 @@ import ConfigCodeGitOrGitlab from "../configForm/configCodeGitOrGitlab";
 const codeList=[
     {
         type:1,
-        title:'通用Git'
+        title:"通用Git"
     },
     {
         type:2,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react';
-import { DownOutlined,UpOutlined} from '@ant-design/icons';
+import React, { useEffect, useState} from "react";
+import { DownOutlined,UpOutlined} from "@ant-design/icons";
 import {PrivilegeButton} from "doublekit-privilege-ui";
 
 const SystemAside= props =>  {
@@ -38,7 +38,7 @@ const SystemAside= props =>  {
             enCode:"C",
         },
         {
-            key:"/index/system/organ",
+            key:"/index/system/systemn",
             label:"组织管理",
             icon:"#icon-gongzuotongji",
             enCode:"D",
@@ -67,13 +67,13 @@ const SystemAside= props =>  {
             key:"/index/system/proof",
             label:"凭证管理",
             icon:"#icon-gongzuotongji",
-            enCode:'F',
+            enCode:"F",
         },
         {
             key:"/index/system/plugin",
             label:"插件管理",
-            icon:'#icon-gongzuotongji',
-            enCode:'G',
+            icon:"#icon-gongzuotongji",
+            enCode:"G",
         },
         {
             key:"/index/system/info",
@@ -97,7 +97,7 @@ const SystemAside= props =>  {
         return (
             <PrivilegeButton key={data.key} code={data.enCode}>
                 <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
-                    className={`orga-aside-li orga-aside-second ${data.key=== selectKey ? "orga-aside-select" : ""}`}
+                    className={`system-aside-li system-aside-second ${data.key=== selectKey ? "system-aside-select" : ""}`}
                     onClick={()=>select(data.key)}
                     key={data.code}
                 >
@@ -125,18 +125,18 @@ const SystemAside= props =>  {
     const renderSubMenu = (item,deep)=> {
         return (
             <PrivilegeButton  key={item.key} code={item.enCode}>
-                <li key={item.code} title={item.label} className="orga-aside-li">
-                    <div className="orga-aside-item orga-aside-first"
+                <li key={item.code} title={item.label} className="system-aside-li">
+                    <div className="system-aside-item system-aside-first"
                          style={{paddingLeft: `${deep * 20 + 20}`}}
                          onClick={() => setOpenOrClose(item.key)}
                     >
-                    <span style={{color: "$blue-main"}}>
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref={item.icon} />
-                        </svg>
-                        <span className="orga-aside-title">{item.label}</span>
-                    </span>
-                        <div className="orga-aside-item-icon">
+                        <span style={{color: "$blue-main"}}>
+                            <svg className="icon" aria-hidden="true">
+                                <use xlinkHref={item.icon} />
+                            </svg>
+                            <span className="system-aside-title">{item.label}</span>
+                        </span>
+                        <div className="system-aside-item-icon">
                             {
                                 item.children ?
                                     (isExpandedTree(item.key)?
@@ -147,7 +147,7 @@ const SystemAside= props =>  {
                         </div>
                     </div>
                     <ul title={item.label}
-                        className={`orga-aside-ul ${isExpandedTree(item.key) ? null: "orga-aside-hidden"}`}
+                        className={`system-aside-ul ${isExpandedTree(item.key) ? null: "system-aside-hidden"}`}
                     >
                         {
                             item.children && item.children.map(item =>{
@@ -163,7 +163,7 @@ const SystemAside= props =>  {
     }
 
     return (
-        <div className="orga-aside">
+        <div className="system-aside">
             <ul style={{padding: 0}} key="0">
                 {
                     router && router.map(firstItem => {

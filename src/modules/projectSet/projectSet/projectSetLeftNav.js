@@ -1,62 +1,61 @@
-import React, { useEffect, useState} from 'react';
-import { DownOutlined,UpOutlined} from '@ant-design/icons';
-import {PrivilegeButton} from "doublekit-privilege-ui";
+import React, { useEffect, useState} from "react";
+import { DownOutlined,UpOutlined} from "@ant-design/icons";
 
 const ProjectSetLeftNav= props =>  {
 
     let path = props.location.pathname
 
     const [selectKey,setSelectKey] = useState(path)
-    const [expandedTree, setExpandedTree] = useState(['/index/task/assembly/feature'])   // 树的展开与闭合
+    const [expandedTree, setExpandedTree] = useState(["/index/task/assembly/feature"])   // 树的展开与闭合
 
     useEffect(()=>{
         setSelectKey(path)
     },[path])
 
     useEffect(()=>{
-        if(path === '/index/task/assembly/feature' || path ==='/index/task/assembly/role'){
-            setExpandedTree([path,'1'])
+        if(path === "/index/task/assembly/feature" || path ==="/index/task/assembly/role"){
+            setExpandedTree([path,"1"])
         }
     },[])
 
     const router = [
         {
-            key:'/index/task/assembly/user',
-            label:'项目成员',
-            icon:'#icon-gongzuotongji',
-            enCode:'1',
+            key:"/index/task/assembly/user",
+            label:"项目成员",
+            icon:"#icon-gongzuotongji",
+            enCode:"1",
         },
         {
-            key:'1',
-            label:'权限管理',
-            icon:'#icon-gongzuotongji',
-            enCode:'1',
+            key:"1",
+            label:"权限管理",
+            icon:"#icon-gongzuotongji",
+            enCode:"1",
             children:[
                 {
-                    key:'/index/task/assembly/feature',
-                    label:'功能管理',
-                    icon:'#icon-gongzuotongji',
-                    enCode:'1',
+                    key:"/index/task/assembly/feature",
+                    label:"功能管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"1",
                 },
                 {
-                    key:'/index/task/assembly/role',
-                    label:'角色管理',
-                    icon:'#icon-gongzuotongji',
-                    enCode:'1',
+                    key:"/index/task/assembly/role",
+                    label:"角色管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"1",
                 }
             ]
         },
         {
-            key:'/index/task/assembly/proof',
-            label:'凭证管理',
-            icon:'#icon-gongzuotongji',
-            // enCode:'3',
+            key:"/index/task/assembly/proof",
+            label:"凭证管理",
+            icon:"#icon-gongzuotongji",
+            // enCode:"3",
         },
         {
-            key:'/index/task/assembly/redel',
-            label:'其他管理',
-            icon:'#icon-gongzuotongji',
-            // enCode:'3',
+            key:"/index/task/assembly/redel",
+            label:"其他管理",
+            icon:"#icon-gongzuotongji",
+            // enCode:"3",
         },
     ]
 
@@ -66,9 +65,8 @@ const ProjectSetLeftNav= props =>  {
 
     const renderMenu = (data,deep)=> {
         return (
-            <li
-                style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
-                className={`orga-aside-li orga-aside-second ${data.key=== selectKey ? "orga-aside-select" : ""}`}
+            <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
+                className={`projectSet-aside-li projectSet-aside-second ${data.key=== selectKey ? "projectSet-aside-select" : ""}`}
                 onClick={()=>select(data.key)}
                 key={data.key}
             >
@@ -94,8 +92,8 @@ const ProjectSetLeftNav= props =>  {
 
     const renderSubMenu = (item,deep)=> {
         return (
-            <li key={item.key} title={item.label} className="orga-aside-li">
-                <div className="orga-aside-item orga-aside-first"
+            <li key={item.key} title={item.label} className="projectSet-aside-li">
+                <div className="projectSet-aside-item projectSet-aside-first"
                      style={{paddingLeft: `${deep * 20 + 20}`}}
                      onClick={() => setOpenOrClose(item.key)}
                 >
@@ -103,9 +101,9 @@ const ProjectSetLeftNav= props =>  {
                          <svg className="icon" aria-hidden="true">
                             <use xlinkHref={item.icon} />
                         </svg>
-                        <span className="orga-aside-title">{item.label}</span>
+                        <span className="projectSet-aside-title">{item.label}</span>
                     </span>
-                    <div className="orga-aside-item-icon">
+                    <div className="projectSet-aside-item-icon">
                         {
                             item.children ?
                                 (isExpandedTree(item.key)?
@@ -116,7 +114,7 @@ const ProjectSetLeftNav= props =>  {
                     </div>
                 </div>
                 <ul title={item.label}
-                    className={`orga-aside-ul ${isExpandedTree(item.key) ? null: 'orga-aside-hidden'}`}
+                    className={`projectSet-aside-ul ${isExpandedTree(item.key) ? null: "projectSet-aside-hidden"}`}
                 >
                     {
                         item.children && item.children.map(item =>{
@@ -131,7 +129,7 @@ const ProjectSetLeftNav= props =>  {
     }
 
     return (
-        <div className="orga-aside">
+        <div className="projectSet-aside">
             <ul style={{padding: 0}} key="0">
                 {
                     router && router.map(firstItem => {

@@ -11,10 +11,10 @@ export class PipelineCollectStore{
     @action
     findAllFollow = value =>{
         const param = new FormData()
-        param.append('userId',value)
+        param.append("userId",value)
         FindAllFollow(param).then(res=>{
             this.followList=res.data
-            console.log('查找我的收藏', res)
+            console.log("查找我的收藏", res)
         }).catch(error=>{
             console.log(error)
         })
@@ -33,4 +33,4 @@ export class PipelineCollectStore{
 
 }
 
-export const PIPELINECOLLECT_STORE = 'pipelineCollectStore'
+export const PIPELINECOLLECT_STORE = "pipelineCollectStore"

@@ -7,55 +7,55 @@ import ConfigAddNewStageRightDrawer from "./configAddNewStageRightDrawer";
 const leftLis = [
     {
         id:1,
-        title:'测试'
+        title:"测试"
     },
     {
         id:2,
-        title:'构建'
+        title:"构建"
     },
     {
         id:3,
-        title:'部署'
+        title:"部署"
     }
 ]
 
 const rightLis = [
     {
         id:1,
-        title:'测试',
+        title:"测试",
         desc:[
             {
                 tpl: 11,
-                tel:'单元测试',
+                tel:"单元测试",
             }
         ]
     },
     {
         id:2,
-        title: '构建',
+        title: "构建",
         desc:[
             {
 
                 tpl: 21,
-                tel:'maven'
+                tel:"maven"
             },
             {
                 tpl: 22,
-                tel:'node'
+                tel:"node"
             }
         ]
     },
     {
         id:3,
-        title: '部署',
+        title: "部署",
         desc:[
             {
                 tpl:31 ,
-                tel:'linux'
+                tel:"linux"
             },
             {
                 tpl:32 ,
-                tel:'docker'
+                tel:"docker"
             },
         ]
     }

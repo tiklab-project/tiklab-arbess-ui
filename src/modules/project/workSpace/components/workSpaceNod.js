@@ -6,7 +6,7 @@ const WorkSpaceNod = props =>{
 
     const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent
     } = props
-    const pipelineName = localStorage.getItem('pipelineName')
+    const pipelineName = localStorage.getItem("pipelineName")
 
     const renderType = treeType => {
         switch (treeType){
@@ -58,7 +58,7 @@ const WorkSpaceNod = props =>{
         return catalogue && catalogue.map((group,index)=>{
             return   <Breadcrumb.Item
                             key={index}
-                            className = 'catalogue_item_breadcrumb'
+                            className = "catalogue_item_breadcrumb"
                             onClick={()=>changeCatalogue(group)}
                      >
                         {group.treeName}
@@ -70,18 +70,18 @@ const WorkSpaceNod = props =>{
     const renderFileList = fileList => {
         return fileList && fileList.map((group,index)=>{
             if(group.treeType === 1 ){
-                return  <div className='nod_item_tree' key={index}>
+                return  <div className="nod_item_tree" key={index}>
                             <span> {renderType(group.treeType)} </span>
-                            <span className='nod_item_tree_name'
+                            <span className="nod_item_tree_name"
                                   onClick={()=>textDetails(group)}
                             >
                                 {group.treeName}
                             </span>
                         </div>
             }else {
-                return   <div className='nod_item_tree' key={index}>
+                return   <div className="nod_item_tree" key={index}>
                             <span>{renderType(group.treeType)}</span>
-                            <span className='nod_item_tree_name'
+                            <span className="nod_item_tree_name"
                                   onClick={()=>{goDetails(group)}}
                             >
                                 {group.treeName}
@@ -93,12 +93,12 @@ const WorkSpaceNod = props =>{
     }
 
     return(
-        <div className='workSpace-top'>
+        <div className="workSpace-top">
             <h1>节点master上的工作空间</h1>
-            <div className='workSpace-top-catalogue'>
+            <div className="workSpace-top-catalogue">
                 <Breadcrumb>
                     <Breadcrumb.Item
-                        className = 'catalogue_item_breadcrumb'
+                        className = "catalogue_item_breadcrumb"
                         onClick={()=>setBreadcrumb()}
                     >
                         <span> {renderType(2)}{pipelineName} </span>
@@ -106,7 +106,7 @@ const WorkSpaceNod = props =>{
                     {renderCatalogue(catalogue)}
                 </Breadcrumb>
             </div>
-            <div className='workSpace-top-nod'>
+            <div className="workSpace-top-nod">
                 {renderFileList(fileList)}
             </div>
         </div>

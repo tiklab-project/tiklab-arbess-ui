@@ -1,6 +1,6 @@
-import React, {useState, useEffect, Fragment} from 'react'
+import React, {useState, useEffect, Fragment} from "react"
 import {withRouter} from "react-router";
-import './workSpace.scss';
+import "./workSpace.scss";
 import {inject,observer} from "mobx-react";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
@@ -17,8 +17,8 @@ const WorkSpace = props =>{
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
     const [detailsDrawer,setDetailsDrawer] = useState(false)
-    const [drawerContent,setDrawerContent] = useState('')
-    const pipelineId = localStorage.getItem('pipelineId')
+    const [drawerContent,setDrawerContent] = useState("")
+    const pipelineId = localStorage.getItem("pipelineId")
 
     useEffect(()=>{
         getSubmitMassage(pipelineId)
@@ -38,13 +38,13 @@ const WorkSpace = props =>{
     },[fresh,pipelineId])
 
     const style = {
-        'position':'fixed',
+        "position":"fixed",
     }
 
     return(
         <Fragment>
             <ProjectBreadcrumb style={style}/>
-            <div className='workSpace'>
+            <div className="workSpace">
                 <WorkSpaceNod
                     fileList={fileList}
                     setFileList={setFileList}
@@ -71,4 +71,4 @@ const WorkSpace = props =>{
     )
 }
 
-export default withRouter(inject('workSpaceStore')(observer(WorkSpace)))
+export default withRouter(inject("workSpaceStore")(observer(WorkSpace)))

@@ -6,13 +6,13 @@ export class ConfigDataStore {
     @observable isPrompt = false; // 编辑页面离开是否提示
     @observable formInitialValues = {} //表单初始化
     @observable data = [] // 新阶段、新任务需要渲染的值
-    @observable codeData = '' // 源码管理需要渲染的值
-    @observable isFormAlias = '' // 更改别名--表单
-    @observable isGuiAlias = '' // 更改别名--图形
+    @observable codeData = "" // 源码管理需要渲染的值
+    @observable isFormAlias = "" // 更改别名--表单
+    @observable isGuiAlias = "" // 更改别名--图形
     @observable codeType = 1 // 源码管理类型
-    @observable linuxShellBlock = ''
-    @observable unitShellBlock = ''
-    @observable mavenShellBlock = ''
+    @observable linuxShellBlock = ""
+    @observable unitShellBlock = ""
+    @observable mavenShellBlock = ""
 
     @action
     setIsPrompt = value => {
@@ -74,7 +74,7 @@ export class ConfigDataStore {
         }
         return new Promise((resolve, reject) => {
             CodeTestPass(params).then(res=>{
-                console.log('测试配置',res)
+                console.log("测试配置",res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -85,4 +85,4 @@ export class ConfigDataStore {
 
 }
 
-export const CONFIGDATA_STORE = 'configDataStore'
+export const CONFIGDATA_STORE = "configDataStore"

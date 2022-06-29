@@ -25,9 +25,9 @@ const GuiView = props =>{
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
-    const [index,setIndex] = useState('')  // 配置位置的插入
-    const [newStage,setNewStage] = useState('')
-    const pipelineId = localStorage.getItem('pipelineId')
+    const [index,setIndex] = useState("")  // 配置位置的插入
+    const [newStage,setNewStage] = useState("")
+    const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -79,7 +79,7 @@ const GuiView = props =>{
         let testType,structureType,deployType
 
         switch (codeData){
-            case '':
+            case "":
                 codeSort = 0
                 break
             default:codeSort = 1
@@ -152,7 +152,7 @@ const GuiView = props =>{
             if(res.code!==0){
                 message.error({content:"配置失败", className:"message"})
             }else {
-                message.success({content: '配置成功', className:"message"})
+                message.success({content: "配置成功", className:"message"})
             }
             setIsPrompt(false)
         })
@@ -207,9 +207,9 @@ const GuiView = props =>{
                         <div className="newStages">
                             <div className="newStages-step">
                                 <div className="newStages-content"  >
-                                    <div className='newStages-task'>
-                                        <div className='newStages-job'>
-                                            <div className='newStages-job_text' onClick={()=>showStage(item)}>
+                                    <div className="newStages-task">
+                                        <div className="newStages-job">
+                                            <div className="newStages-job_text" onClick={()=>showStage(item)}>
                                                 <ConfigName type={item.dataType}/>
                                             </div>
                                         </div>
@@ -224,17 +224,17 @@ const GuiView = props =>{
     }
 
     return (
-        <div className='configView2'>
-            <div className='configView2-content'>
+        <div className="configView2">
+            <div className="configView2-content">
                 <ConfigCode
                     codeData={codeData}
                     setCodeDrawer={setCodeDrawer}
                     setNewStage={setNewStage}
                     setTaskFormDrawer={setTaskFormDrawer}
                 />
-                <div className='configView2-main'>
-                    <div className='configView2-main_container'>
-                        <div className='configView2-main_group'>
+                <div className="configView2-main">
+                    <div className="configView2-main_container">
+                        <div className="configView2-main_group">
                             { newStageShow(data) }
                             <ConfigAddNewStage
                                 setIndex={setIndex}
@@ -246,9 +246,9 @@ const GuiView = props =>{
             </div>
 
             <Form
-                id='form'
+                id="form"
                 form={form}
-                layout='vertical'
+                layout="vertical"
                 autoComplete = "off"
                 onFinish={onFinish}
                 onValuesChange={onValuesChange}
@@ -288,4 +288,4 @@ const GuiView = props =>{
     )
 }
 
-export default withRouter(inject('configDataStore')(observer(GuiView)))
+export default withRouter(inject("configDataStore")(observer(GuiView)))

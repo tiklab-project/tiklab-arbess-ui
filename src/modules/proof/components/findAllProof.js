@@ -2,13 +2,12 @@ import React from "react";
 import {inject,observer} from "mobx-react";
 import {Form, Select} from "antd";
 import {getUser} from "doublekit-core-ui";
-
 const {Option} = Select
 
 const FindAllProof = props =>{
 
     const {proofStore,type}=props
-    const {findPipelineProof,pipelineProofList} = proofStore
+    const {findPipelineProof,proofList} = proofStore
     const pipelineId = localStorage.getItem("pipelineId")
 
     const clickFindAllGit = () =>{
@@ -43,7 +42,7 @@ const FindAllProof = props =>{
                     onChange={(value,e)=>changeGitSelect(value,e)}
             >
                 {
-                    pipelineProofList && pipelineProofList.map(item=>{
+                    proofList && proofList.map(item=>{
                         return(
                             <Option key={item.proofId} value={item.proofName+ "(" + item.proofUsername + ")"}>
                                 { item.proofName+ "(" + item.proofUsername + ")"}

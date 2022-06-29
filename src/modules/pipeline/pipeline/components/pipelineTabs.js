@@ -3,7 +3,7 @@ import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import PipelineTable from "../../pipelineTable/pipelineTable";
 import View from "../../../view/view";
-import {getUser} from 'doublekit-core-ui';
+import {getUser} from "doublekit-core-ui";
 
 const PipelineTabs = props =>{
 
@@ -21,11 +21,11 @@ const PipelineTabs = props =>{
     const lis = [
         {
             id:1,
-            title:'所有'
+            title:"所有"
         },
         // {
         //     id:2,
-        //     title:'我的'
+        //     title:"我的"
         // }
     ]
 
@@ -34,15 +34,15 @@ const PipelineTabs = props =>{
     }
 
     return(
-        <div className='pipeline-tabs'>
-            <div className='pipeline-tabs-type'>
-                <div className='pipeline-tabs-type-group'>
+        <div className="pipeline-tabs">
+            <div className="pipeline-tabs-type">
+                <div className="pipeline-tabs-type-group">
                     {
                         lis.map(item=>{
                             return(
                                 <div key={item.id}
                                      className={type === item.id ?
-                                     'pipeline-tabs-type-active pipeline-tabs-type-link' : 'pipeline-tabs-type-link'}
+                                     "pipeline-tabs-type-active pipeline-tabs-type-link" : "pipeline-tabs-type-link"}
                                      onClick={()=>onclick(item)}
                                 >
                                     {item.title}
@@ -50,7 +50,7 @@ const PipelineTabs = props =>{
                             )
                         })
                     }
-                    {/*<div className='pipeline-tabs-type-link' onClick={()=>setVisible(true)}>*/}
+                    {/*<div className="pipeline-tabs-type-link" onClick={()=>setVisible(true)}>*/}
                     {/*    新建视图*/}
                     {/*</div>*/}
                 </div>
@@ -68,4 +68,4 @@ const PipelineTabs = props =>{
     )
 }
 
-export default withRouter(inject('pipelineStore')(observer(PipelineTabs)))
+export default withRouter(inject("pipelineStore")(observer(PipelineTabs)))

@@ -13,9 +13,9 @@ export class WorkSpaceStore{
     @action
     getSubmitMassage = async value =>{
         const param = new FormData()
-        param.append('pipelineId',value)
+        param.append("pipelineId",value)
         GetSubmitMassage(param).then(res=>{
-            console.log('近期提交记录',res)
+            console.log("近期提交记录",res)
             this.recordList = res.data
         }).catch(error=>{
             console.log(error)
@@ -25,18 +25,18 @@ export class WorkSpaceStore{
     @action
     fileTree = async value =>{
         const param = new FormData()
-        param.append('pipelineId',value.pipelineId)
-        param.append('userId',value.userId)
+        param.append("pipelineId",value.pipelineId)
+        param.append("userId",value.userId)
         return await FileTree(param)
     }
 
     @action
     readFile = async value =>{
         const param = new FormData()
-        param.append('path',value)
+        param.append("path",value)
         return await ReadFile(param)
     }
 
 }
 
-export const WORKSPACE_STORE = 'workSpaceStore'
+export const WORKSPACE_STORE = "workSpaceStore"

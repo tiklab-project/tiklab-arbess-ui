@@ -6,7 +6,7 @@
  * @LastEditors: 袁婕轩
  * @LastEditTime: 2021-11-01 15:44:08
  */
-const api =  'http://192.168.10.100:8080';
+const api =  "http://192.168.10.100:8080";
 const base_url = JSON.stringify(api);
 
 const url = "http://127.0.0.1:3004";
@@ -23,10 +23,10 @@ fetchMethod = JSON.stringify(fetchMethod);
 let env = "dev";
 env = JSON.stringify(env)
 
-const appKey = JSON.stringify('');
-const appSecret = JSON.stringify('');
-const version = JSON.stringify('');
-const client = JSON.stringify('');
+const appKey = JSON.stringify("");
+const appSecret = JSON.stringify("");
+const version = JSON.stringify("");
+const client = JSON.stringify("");
 
 const webpackGlobal = {
     base_url,

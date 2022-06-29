@@ -4,26 +4,18 @@ import {
     CreateProof,
     FindOneProof,
     FindPipelineProof,
-    FindAll,
     UpdateProof,
     DeleteProof,
 } from "../api/proof";
 
 export class ProofStore{
 
-    @observable proofScope = ''
-    @observable pipelineProofList = []
-    @observable systemProofList = []
+    @observable proofList = []
     @observable fresh = false
 
     @action
     setFresh = value =>{
         this.fresh = value
-    }
-
-    @action
-    setProofScope = value =>{
-        this.proofScope = value
     }
 
     @action
@@ -48,7 +40,7 @@ export class ProofStore{
     @action
     findOneProof =async values=>{
         const param = new FormData()
-        param.append('proofId',values.proofId)
+        param.append("proofId",values.proofId)
         return await FindOneProof(param)
     }
 
@@ -61,19 +53,7 @@ export class ProofStore{
         }
         FindPipelineProof(params).then(res=>{
             console.log(res)
-            this.pipelineProofList = res.data
-        }).catch(error=>{
-            console.log(error)
-        })
-    }
-
-    @action
-    findAll =async value =>{
-        const param = new FormData()
-        param.append('userId',value)
-        FindAll(param).then(res=>{
-            console.log(res)
-            this.systemProofList = res.data
+            this.proofList = res.data
         }).catch(error=>{
             console.log(error)
         })
@@ -98,10 +78,10 @@ export class ProofStore{
     @action
     deleteProof =async value =>{
         const param = new FormData()
-        param.append('proofId',value)
+        param.append("proofId",value)
         return await DeleteProof(param)
     }
 
 }
 
-export const PROOF_STORE = 'proofStore'
+export const PROOF_STORE = "proofStore"

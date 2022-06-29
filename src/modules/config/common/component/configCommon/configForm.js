@@ -1,6 +1,6 @@
 import React,{Fragment} from "react";
 import ConfigCodeSvn from "../configForm/configCodeSvn";
-import ConfigCodeGitOrGitlab from '../configForm/configCodeGitOrGitlab'
+import ConfigCodeGitOrGitlab from "../configForm/configCodeGitOrGitlab"
 import ConfigCodeGiteeOrGithub from "../configForm/configCodeGiteeOrGithub";
 import ConfigTestUnit from "../configForm/configTestUnit";
 import ConfigStructureMaven from "../configForm/configStructureMavenOrNode";

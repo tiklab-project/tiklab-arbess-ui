@@ -8,8 +8,8 @@ import {getUser} from "doublekit-core-ui";
 const ProjectSetProof = props =>{
 
     const {proofStore} = props
-    const {findPipelineProof,pipelineProofList,fresh} = proofStore
-    const pipelineId = localStorage.getItem('pipelineId')
+    const {findPipelineProof,proofList,fresh} = proofStore
+    const pipelineId = localStorage.getItem("pipelineId")
 
     useEffect(()=>{
         const params ={
@@ -23,9 +23,9 @@ const ProjectSetProof = props =>{
     return(
        <Fragment>
            <ProjectBreadcrumb />
-           <Proof proofList={pipelineProofList}/>
+           <Proof proofList={proofList}/>
        </Fragment>
     )
 }
 
-export default inject('proofStore')(observer(ProjectSetProof))
+export default inject("proofStore")(observer(ProjectSetProof))

@@ -1,18 +1,18 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
-//查找我的收藏
-export function  FindAllFollow(data){
+//系统信息
+export function GetSystemMassage(data){
     return serviceLoc.request({
-        url:"/pipelineHome/findAllFollow",
+        url:"/systemMassage/getSystemMassage",
         method:"post",
         data
     })
 }
 
-//收藏
-export function  UpdateFollow(data){
+//系统日志
+export function GetSystemLog(data){
     return serviceLoc.request({
-        url:"/pipelineHome/updateFollow",
+        url:"/systemMassage/getSystemLog",
         method:"post",
         data
     })
