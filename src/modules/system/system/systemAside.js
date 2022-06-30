@@ -38,7 +38,7 @@ const SystemAside= props =>  {
             enCode:"C",
         },
         {
-            key:"/index/system/systemn",
+            key:"/index/system/org",
             label:"组织管理",
             icon:"#icon-gongzuotongji",
             enCode:"D",

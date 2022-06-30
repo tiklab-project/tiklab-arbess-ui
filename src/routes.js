@@ -42,7 +42,7 @@ const System=AsyncComponent(()=>import("./modules/system/system/system"))
 const UserBase=AsyncComponent(()=>import("./modules/system/user/base"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
-const Organ=AsyncComponent(()=>import("./modules/system/user/organ"))
+const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const PlugAll=AsyncComponent(()=>import("./modules/system/plug/plugAll"))
 const OverallProof=AsyncComponent(()=>import("./modules/system/proof/overallProof"))
 const Info=AsyncComponent(()=>import("./modules/system/logInfo/info/info"))
@@ -176,8 +176,8 @@ const routers=[
                         component: UserList,
                     },
                     {
-                        path: "/index/system/organ",
-                        component: Organ,
+                        path: "/index/system/org",
+                        component: Org,
                     },
                     {
                         path: "/index/system/plugin",

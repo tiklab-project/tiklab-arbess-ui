@@ -1,5 +1,4 @@
 import React  from "react";
-import {withRouter} from "react-router-dom";
 import "./projectAsideOpt.scss";
 
 const ProjectAsideOpt = props =>{
@@ -44,4 +43,4 @@ const ProjectAsideOpt = props =>{
     )
 }
 
-export default withRouter(ProjectAsideOpt)
+export default ProjectAsideOpt

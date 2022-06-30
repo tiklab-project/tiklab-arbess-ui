@@ -5,12 +5,13 @@ import ProjectAside from "../components/projectAside";
 import { inject,observer } from "mobx-react";
 import {Prompt} from "react-router-dom";
 import {getUser} from "doublekit-core-ui";
+import {withRouter} from "react-router";
 
 const Project= (props)=>{
 
     const {route,pipelineStore,configDataStore}=props
     const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = pipelineStore
-    const {isPrompt,setIsPrompt} = configDataStore
+    const {isPrompt,setIsPrompt,setFormInitialValues,formInitialValues,setUnitShellBlock} = configDataStore
     const [visible,setVisible] = useState(false)
     const pipelineName = localStorage.getItem("pipelineName")
     const pipelineId = localStorage.getItem("pipelineId")
@@ -89,6 +90,6 @@ const Project= (props)=>{
     )
 }
 
-export default inject("pipelineStore","configDataStore")(observer(Project))
+export default withRouter(inject("pipelineStore","configDataStore")(observer(Project)))
 
 

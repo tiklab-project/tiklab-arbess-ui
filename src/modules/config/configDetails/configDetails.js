@@ -113,7 +113,9 @@ const ConfigDetails = props =>{
                 setUnitShellBlock("")
                 setMavenShellBlock("")
                 setLinuxShellBlock("")
-            }else {
+            }
+            else {
+                renderForm(initialData)
                 for (let i = 0;i<initialData.length;i++){
                     const j = initialData[i]
                     if(j.type < 6){
@@ -173,12 +175,56 @@ const ConfigDetails = props =>{
         })
     },[pipelineId])
 
+    const lists = [1,2,3,4,5,11,21,22,31,32]
+    const renderForm = initialData =>{
+        for(let i = 0;i<initialData.length;i++){
+            if(initialData[i].type <10){
+                lists.splice(0,5)
+            }
+            if(initialData[i].type >10 && initialData[i].type <20){
+                lists.map((item,index)=>{
+                    if(item > 10 && item <20){
+                        lists.splice(index,1)
+                    }
+                })
+            }
+            if(initialData[i].type >20 && initialData[i].type <30){
+                lists.map((item,index)=>{
+                    if(item > 20 && item <30){
+                        lists.splice(index,2)
+                    }
+                })
+            }
+            if(initialData[i].type >30 && initialData[i].type <40){
+                lists.map((item,index)=>{
+                    if(item > 30 && item <40){
+                        lists.splice(index,2)
+                    }
+                })
+            }
+        }
+        return lists.map(item=>{
+            if(item < 6){
+                del(1,"111")
+            }
+            else if(item === 11){
+                del(11,"111")
+            }
+            else if(item === 21 || item === 22 ){
+                del(21,"111")
+            }
+            else if(item === 31 || item === 32 ){
+                del(31,"111")
+            }
+        })
+    }
+
     // 按需清空表单的值
-    const del = i => {
+    const del = (i,j) => {
         switch (i) {
-            case 11 :delDetail("test")
+            case 11:delDetail("test")
                 break
-            case 21 :delDetail("structure")
+            case 21:delDetail("structure")
                 break
             case 22:delDetail("structure")
                 break
@@ -189,7 +235,9 @@ const ConfigDetails = props =>{
             default:delDetail("git")
         }
         setFormInitialValues({...formInitialValues})
-        setIsPrompt(true)
+        if(!j){
+            setIsPrompt(true)
+        }
     }
 
     // 统一form表单里面需要删除的值

@@ -37,7 +37,7 @@ const FormView = props =>{
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
-    },[formInitialValues,pipelineId])
+    },[formInitialValues])
 
     const displayInput = index =>{
         setIsFormAlias(index)

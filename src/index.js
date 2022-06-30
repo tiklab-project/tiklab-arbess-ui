@@ -6,13 +6,13 @@ import "./assets/font_icon/iconfont";
 import "./common/language/i18n";
 import routers from "./routes";
 import resources from "./common/language/resources";
-import { Provider } from "mobx-react";
 import {store} from "./store";
 import {orgStores} from "doublekit-user-ui";
 import {privilegeStores} from "doublekit-privilege-ui";
 import {initFetch, createContainer} from "doublekit-plugin-ui";
 import {observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
+import { Provider } from "mobx-react";
 
 const Index = observer(() => {
 

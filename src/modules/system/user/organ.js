@@ -1,9 +1,0 @@
-import React from "react";
-import {OrgList} from 'doublekit-user-ui'
-
-// 组织管理
-const Organ = props=>{
-    return <OrgList {...props}/>
-}
-
-export default Organ

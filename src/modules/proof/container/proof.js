@@ -106,9 +106,7 @@ const Proof = props =>{
         <div className="proof">
             <div className="proof-content">
                 <div className="proof-content-btn">
-                    <AddProofButton
-                        style={style}
-                    />
+                    <AddProofButton style={style}/>
                 </div>
                 <Table
                     bordered

@@ -24,42 +24,30 @@ const ConfigChangeView = props =>{
         },1000)
     }
 
-    const viewList = [
-        {
-            id:1,
-            title:"表单视图"
-        },
-        {
-            id:2,
-            title:"图形化视图"
-        }
-    ]
-
     return (
         <div className="config_changeView">
             <div className="changeView">
                 <div className="changeView-btn">
-                    <Button form="form" htmlType="submit"> 保存 </Button>
-                    <Button form="form" type="primary" htmlType="submit" onClick = {()=>run()}>
+                    <Button form="form" htmlType="submit">保存</Button>
+                    <Button form="form" type="primary" htmlType="submit" onClick={()=>run()}>
                         运行
                     </Button>
                 </div>
-                {
-                    isBtn ?
-                        <div className="changeView-view">
-                            {
-                                viewList.map(item=>{
-                                    return  <div className={view === item.id ? "view view-link" : "view" }
-                                                 onClick={()=>setView(item.id)}
-                                                 key={item.id}
-                                            >
-                                                {item.title}
-                                            </div>
-                                })
-                            }
-                        </div>
-                        :null
-                }
+                <div className="changeView-view">
+                    <div onClick={()=>setView(1)} className={view===1 ? "view view-link" : "view"} >
+                        表单视图
+                    </div>
+                    {
+                        isBtn ?
+                            <div className={view===2 ?  "view view-link" : "view" } onClick={()=>setView(2)}>
+                                图形化视图
+                            </div>
+                            :
+                            <div className = "view view-ban">
+                                图形化视图
+                            </div>
+                    }
+                </div>
             </div>
         </div>
     )

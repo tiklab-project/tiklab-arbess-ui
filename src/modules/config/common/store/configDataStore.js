@@ -21,7 +21,7 @@ export class ConfigDataStore {
 
     @action
     setFormInitialValues = value =>{
-        this.formInitialValues = Object(value)
+        this.formInitialValues = value
     }
 
     @action

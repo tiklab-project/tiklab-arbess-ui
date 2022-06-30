@@ -22,8 +22,14 @@
                 &:first-child{
                     border-right: 1px solid #ccc;
                 }
+                &:last-child{
+                    margin: 0 6px;
+                }
                 &-link{
                     color: #1890ff;
+                }
+                &-ban{
+                    color: #C4C4C4;
                 }
             }
         }
