@@ -45,7 +45,7 @@ const ConfigCodeGiteeOrGithub = props =>{
             },2000)
         }else { clearInterval(interval) }
         return ()=> clearInterval(interval)
-    },[visible])
+    },[])
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{

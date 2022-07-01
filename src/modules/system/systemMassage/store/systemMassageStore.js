@@ -3,10 +3,10 @@ import {observable,action} from "mobx";
 import {
     GetSystemMassage,
     GetSystemLog
-} from "../api/logInfo";
+} from "../api/systemMassage";
 
 
-export class LogInfoStore{
+export class SystemMassageStore {
 
     @observable infoList = ""
     @observable logList = []
@@ -37,5 +37,5 @@ export class LogInfoStore{
 
 }
 
-export const LOGINFO_STORE = "logInfoStore"
+export const SYSTEMMASSAGE_STORE = "systemMassageStore"
 

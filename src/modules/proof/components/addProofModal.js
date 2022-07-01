@@ -90,10 +90,10 @@ const AddProofModal = props =>{
                     {({ getFieldValue })=>
                         getFieldValue("proofType") === "password" ? (
                                 <>
-                                    <Form.Item label="username" name="proofUsername">
+                                    <Form.Item label="用户名" name="proofUsername">
                                         <Input placeholder="账号"/>
                                     </Form.Item>
-                                    <Form.Item label="password" name="proofPassword">
+                                    <Form.Item label="密码" name="proofPassword">
                                         <Input.Password  placeholder="密码"/>
                                     </Form.Item>
                                 </>

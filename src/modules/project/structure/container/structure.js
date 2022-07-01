@@ -28,28 +28,37 @@ const Structure = props => {
         findPipelineUser(pipelineId)
     },[pipelineId])
 
-    let interval=null
+    let interval,socket=null
     useEffect(() => {
-        findExecState(pipelineId).then(res=>{
-            if(res.data === 1 ){
-                interval = setInterval(() => {
-                    findStructureState(pipelineId).then(res =>{
-                        if(res.data!==null){
-                            setExecState(res.data)
-                            if(res.data.runStatus===1 || res.data.runStatus===30){
-                                stop()
-                            }
-                        }else{ stop() }
-                    })
-                }, 1000)
-                findAll(pipelineId)
-                findPage()
-            }else if(res.data=== 0){
-                findPage()
-                setExecState("")
-            }
-        })
-        return ()=> clearInterval(interval)
+        socket = new WebSocket("ws://192.168.10.100:8080/start")
+        socket.onopen = () =>{
+            findExecState(pipelineId).then(res=>{
+                if(res.data === 1 ){
+                    interval = setInterval(()=>socket.send(pipelineId),1000)
+                    socket.onmessage = res =>{
+                        if(res.data){
+                            const data = JSON.parse(res.data)
+                            if( data.data === 0 ){
+                                clearInterval(interval)
+                                socket.close()
+                                setExecState("")
+                                setFreshen(!freshen)
+                            } setExecState(data.data)
+                        }
+                    }
+                    findAll(pipelineId)
+                    findPage()
+                }else if(res.data=== 0){
+                    findPage()
+                    setExecState("")
+                    socket.close()
+                }
+            })
+        }
+        return ()=> {
+            clearInterval(interval)
+            socket.close()
+        }
     }, [pipelineId,freshen])
 
     const findPage = () =>{
@@ -65,6 +74,30 @@ const Structure = props => {
         }
         findPageHistory(params)
     }
+
+    // let interval=null
+    // useEffect(() => {
+    //     findExecState(pipelineId).then(res=>{
+    //         if(res.data === 1 ){
+    //             interval = setInterval(() => {
+    //                 findStructureState(pipelineId).then(res =>{
+    //                     if(res.data!==null){
+    //                         setExecState(res.data)
+    //                         if(res.data.runStatus===1 || res.data.runStatus===30){
+    //                             stop()
+    //                         }
+    //                     }else{ stop() }
+    //                 })
+    //             }, 1000)
+    //             findAll(pipelineId)
+    //             findPage()
+    //         }else if(res.data=== 0){
+    //             findPage()
+    //             setExecState("")
+    //         }
+    //     })
+    //     return ()=> clearInterval(interval)
+    // }, [pipelineId,freshen])
 
     const stop = () => {
         setExecState("")

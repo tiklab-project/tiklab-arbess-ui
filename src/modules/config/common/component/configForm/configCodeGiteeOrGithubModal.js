@@ -29,26 +29,26 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             if(codeType  === 2){
                 getGiteeProof(params).then(res=>{
                     console.log(res,"gitee授权登录")
-                    if(res.code === 0){
-                        localStorage.setItem("gitProofId",res.data)
-                    }else {
-                        message.error({content:"创建失败", className:"message"})
-                    }
+                    saveProof(res)
                 })
             }else{
                 params.proofPassword = localStorage.getItem("githubToken")
                 params.proofDescribe = "github授权登录"
                 getGithubProof(params).then(res=>{
                     console.log(res,"github授权登录")
-                    if(res.code===0){
-                        localStorage.setItem("gitProofId",res.data)
-                    }else {
-                        message.error({content:"创建失败", className:"message"})
-                    }
+                    saveProof(res)
                 })
             }
             setVisible(false)
         })
+    }
+
+    const saveProof = res =>{
+        if(res.code === 0){
+            localStorage.setItem("gitProofId",res.data)
+        }else {
+            message.error({content:"创建失败", className:"message"})
+        }
     }
 
     const goUrl = () =>{

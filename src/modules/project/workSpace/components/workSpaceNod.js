@@ -1,5 +1,6 @@
 import React from "react";
 import {Breadcrumb} from "antd";
+import empty from "../../../../assets/images/empty.jpg";
 
 // 节点
 const WorkSpaceNod = props =>{
@@ -33,14 +34,14 @@ const WorkSpaceNod = props =>{
         setCatalogue([...catalogue])
     }
 
-    // 文件节点和目录
+    // 节点文件和目录
     const goDetails = group => {
         setFileList(group.fileTree)
         level.push(group)
         setCatalogue([...catalogue,...level])
     }
 
-    // 节点文件下文本详情
+    // 节点文本详情
     const textDetails = group => {
         readFile(group.treePath).then(res=>{
             setDrawerContent({title:group.treeName,commitFile:res.data})
@@ -48,6 +49,7 @@ const WorkSpaceNod = props =>{
         })
     }
 
+    // 重新渲染节点
     const setBreadcrumb = () =>{
         setCatalogue([])
         setFresh(!fresh)
@@ -57,9 +59,9 @@ const WorkSpaceNod = props =>{
     const renderCatalogue = catalogue => {
         return catalogue && catalogue.map((group,index)=>{
             return   <Breadcrumb.Item
-                            key={index}
-                            className = "catalogue_item_breadcrumb"
-                            onClick={()=>changeCatalogue(group)}
+                         key={index}
+                         className = "catalogue_item_breadcrumb"
+                         onClick={()=>changeCatalogue(group)}
                      >
                         {group.treeName}
                      </Breadcrumb.Item>
@@ -86,7 +88,7 @@ const WorkSpaceNod = props =>{
                             >
                                 {group.treeName}
                             </span>
-                            {renderFileList(fileList.fileTree)}
+                            { renderFileList(fileList.fileTree) }
                         </div>
             }
         })
@@ -95,17 +97,26 @@ const WorkSpaceNod = props =>{
     return(
         <div className="workSpace-top">
             <h1>节点master上的工作空间</h1>
-            <div className="workSpace-top-catalogue">
-                <Breadcrumb>
-                    <Breadcrumb.Item
-                        className = "catalogue_item_breadcrumb"
-                        onClick={()=>setBreadcrumb()}
-                    >
-                        <span> {renderType(2)}{pipelineName} </span>
-                    </Breadcrumb.Item>
-                    {renderCatalogue(catalogue)}
-                </Breadcrumb>
-            </div>
+            {
+                fileList && fileList.length === 0 ?
+                    <div className="structure-content-empty">
+                        <div className="empty null">
+                            <img src={empty} alt="logo" />
+                        </div>
+                    </div>
+                    :
+                    <div className="workSpace-top-catalogue">
+                        <Breadcrumb>
+                            <Breadcrumb.Item
+                                className = "catalogue_item_breadcrumb"
+                                onClick={()=>setBreadcrumb()}
+                            >
+                                <span> {renderType(2)}{pipelineName} </span>
+                            </Breadcrumb.Item>
+                            {renderCatalogue(catalogue)}
+                        </Breadcrumb>
+                    </div>
+            }
             <div className="workSpace-top-nod">
                 {renderFileList(fileList)}
             </div>

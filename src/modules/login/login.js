@@ -1,6 +1,5 @@
 import React from "react";
 import { Login, EAM_STORE } from "doublekit-eam-ui";
-import {inject, observer} from "mobx-react";
 
 const LoginContent = props => {
 
@@ -15,4 +14,4 @@ const LoginContent = props => {
 
 }
 
-export default inject(EAM_STORE)(observer(LoginContent)) ;
+export default LoginContent

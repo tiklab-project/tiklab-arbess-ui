@@ -76,7 +76,7 @@ const PipelineTable = props =>{
             key:"pipelineCollect",
             render:(text,record) =>{
                 return(
-                    <span className="all-icon" onClick={() => collectAction(record)}>
+                    <span className="all-icon" onClick={()=>collectAction(record)}>
                         {
                             record.pipelineCollect === 0 ?
                                 <svg className="icon" aria-hidden="true" >
@@ -166,7 +166,7 @@ const PipelineTable = props =>{
                 rowKey={record => record.pipelineId}
                 columns={columns}
                 dataSource={list}
-                pagination={{  hideOnSinglePage:true}}
+                pagination={{hideOnSinglePage:true}}
                 locale={{emptyText:
                     <Fragment>
                         <svg className="icon" aria-hidden="true" >

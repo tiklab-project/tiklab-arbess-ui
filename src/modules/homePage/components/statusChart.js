@@ -10,22 +10,9 @@ const StatusChart = props =>{
     const [stopData,setStopData] = useState([])
 
     useEffect(()=>{
-        const x = []
-        const success = []
-        const fail = []
-        const stop = []
         runState(userId).then(res=>{
-            if( res.data && res.code === 0 ){
-                for (let i = 0;i<res.data.length;i++){
-                    x.push(res.data[i].time)
-                    success.push(res.data[i].successNumber)
-                    fail.push(res.data[i].errorNumber)
-                    stop.push(res.data[i].removeNumber)
-                }
-                setXData([...x])
-                setSuccessData([...success])
-                setFailData([...fail])
-                setStopData([...stop])
+            if(res.code === 0 && res.data){
+                renderChart(res.data)
             }
         })
         return ()=>{
@@ -35,6 +22,23 @@ const StatusChart = props =>{
             setStopData([])
         }
     },[])
+    
+    const renderChart = data => {
+        const x = []
+        const success = []
+        const fail = []
+        const stop = []
+        for (let i = 0;i < data.length;i++){
+            x.push(data[i].time)
+            success.push(data[i].successNumber)
+            fail.push(data[i].errorNumber)
+            stop.push(data[i].removeNumber)
+        }
+        setXData([...x])
+        setSuccessData([...success])
+        setFailData([...fail])
+        setStopData([...stop])
+    }
 
 
     const getOption = {

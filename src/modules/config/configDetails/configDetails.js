@@ -31,15 +31,6 @@ const ConfigDetails = props =>{
     const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
-    // 是否有图形化插件
-    useEffect(()=>{
-        pluginStore.map(item=>{
-            if(item.id === "gui"){
-                setIsBtn(true)
-            }else setIsBtn(false)
-        })
-    },[])
-
     useEffect(()=>{
         return () =>{
             localStorage.removeItem("gitProofId")
@@ -51,7 +42,16 @@ const ConfigDetails = props =>{
         }
     },[pipelineId])
 
-    //Gitee和Github授权
+    // 是否有图形化插件
+    useEffect(()=>{
+        pluginStore.map(item=>{
+            if(item.id === "gui"){
+                setIsBtn(true)
+            }else setIsBtn(false)
+        })
+    },[])
+
+    // Gitee和Github授权
     useEffect(() => {
         if(codeValue){
             const params = {
@@ -60,7 +60,7 @@ const ConfigDetails = props =>{
             }
             if(localStorage.getItem("giteeCode")){
                 code(codeValue).then(res=>{
-                    localStorage.setItem("giteeToken",JSON.stringify(res.data))
+                    localStorage.setItem("giteeToken",typeSON.stringify(res.data))
                     localStorage.removeItem("giteeCode")
                     localStorage.removeItem("githubToken")
                     getState(params)
@@ -99,10 +99,10 @@ const ConfigDetails = props =>{
         }
     },[formInitialValues])
 
-    // form表单初始化
+    const lists = [1,2,3,4,5,11,21,22,31,32]
+    // 表单初始化
+    const newData = []
     useEffect(()=>{
-        let newCode
-        const newData = []
         findAllConfigure(pipelineId).then(res=>{
             const initialData = res.data
             if(initialData.length === 0 ){
@@ -115,112 +115,100 @@ const ConfigDetails = props =>{
                 setLinuxShellBlock("")
             }
             else {
-                renderForm(initialData)
-                for (let i = 0;i<initialData.length;i++){
-                    const j = initialData[i]
-                    if(j.type < 6){
-                        newCode = {
-                            codeId:j.codeId,
-                            codeType:j.type,
-                            codeName:j.codeName,
-                            codeBranch:j.codeBranch,
-                        }
-                        const formValue = {
-                            gitProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
-                            proofName:j.proof && j.proof.proofName ,
-                        }
-                        Object.assign(formInitialValues,formValue)
-                        setCodeType(j.type)
-                        localStorage.setItem("codeId",j.codeId)
-                        localStorage.setItem("gitProofId",j.proof && j.proof.proofId)
-                    }
-                    else if(j.type === 11){
-                        newData.push({
-                            dataId:  j.testId,
-                            title:j.testAlias,
-                            dataType:j.type,
-                        })
-                        localStorage.setItem("testId",j.testId)
-                        setUnitShellBlock(`${j.testOrder ? j.testOrder :""}`)
-                    }
-                    else if(j.type === 21 || j.type === 22 ){
-                        newData.push({
-                            dataId: j.structureId,
-                            title: j.structureAlias,
-                            dataType:j.type,
-                        })
-                        localStorage.setItem("structureId",j.structureId)
-                        setMavenShellBlock(`${j.structureOrder ? j.structureOrder : ""}`)
-                    }
-                    else if(j.type === 31 || j.type === 32 ){
-                        newData.push({
-                            dataId:j.deployId,
-                            title: j.deployAlias,
-                            dataType:j.type,
-                        })
-                        const formValue = {
-                            dockerProofName:j.proof && j.proof.proofName+ "(" + j.proof.proofUsername + ")" ,
-                        }
-                        Object.assign(formInitialValues,formValue)
-                        localStorage.setItem("deployId",j.deployId)
-                        localStorage.setItem("deployProofId",j.proof && j.proof.proofId)
-                        setLinuxShellBlock(`${j.deployShell ? j.deployShell : ""}`)
-                    }
-                    setData([...newData])
-                    setCodeData(newCode)
-                    Object.assign(formInitialValues,j)
-                    setFormInitialValues({...formInitialValues})
-                }
+                nonForm(initialData)
+                renderFormData(initialData)
             }
         })
     },[pipelineId])
 
-    const lists = [1,2,3,4,5,11,21,22,31,32]
-    const renderForm = initialData =>{
-        for(let i = 0;i<initialData.length;i++){
-            if(initialData[i].type <10){
-                lists.splice(0,5)
-            }
-            if(initialData[i].type >10 && initialData[i].type <20){
-                lists.map((item,index)=>{
-                    if(item > 10 && item <20){
-                        lists.splice(index,1)
-                    }
-                })
-            }
-            if(initialData[i].type >20 && initialData[i].type <30){
-                lists.map((item,index)=>{
-                    if(item > 20 && item <30){
-                        lists.splice(index,2)
-                    }
-                })
-            }
-            if(initialData[i].type >30 && initialData[i].type <40){
-                lists.map((item,index)=>{
-                    if(item > 30 && item <40){
-                        lists.splice(index,2)
-                    }
-                })
+    // pipeline切换form数据渲染问题
+    const nonForm = initialData =>{
+        for (let i=0; i<initialData.length;i++){
+            for (let type=0; type<lists.length;type++) {
+                if ((parseInt(initialData[i].type/10))*10<lists[type] && lists[type]<(parseInt(initialData[i].type/10)+1)*10 ) {
+                    lists.splice(type, 1)
+                    type--
+                }
             }
         }
-        return lists.map(item=>{
-            if(item < 6){
-                del(1,"111")
+        return lists.map(item=>{del(item,"111")})
+    }
+    
+    const renderFormData = initialData => {
+        for (let i = 0;i<initialData.length;i++){
+            const data = initialData[i]
+            if(data.type < 6){
+                renderCodeData(data)
             }
-            else if(item === 11){
-                del(11,"111")
+            else if(data.type > 10 && data.type < 20){
+                renderTestData(data)
             }
-            else if(item === 21 || item === 22 ){
-                del(21,"111")
+            else if(data.type > 20 && data.type < 30 ){
+                renderStructure(data)
             }
-            else if(item === 31 || item === 32 ){
-                del(31,"111")
+            else if(data.type > 20 || data.type < 40 ){
+                renderDeploy(data)
             }
+            setData([...newData])
+            Object.assign(formInitialValues,data)
+            setFormInitialValues({...formInitialValues})
+        }
+    }
+
+    const renderCodeData = data => {
+        let newCode = {
+            codeId:data.codeId,
+            codeType:data.type,
+            codeName:data.codeName,
+            codeBranch:data.codeBranch,
+        }
+        const formValue = {
+            gitProofName:data.proof && data.proof.proofName+ "(" + data.proof.proofUsername + ")" ,
+            proofName:data.proof && data.proof.proofName ,
+        }
+        Object.assign(formInitialValues,formValue)
+        localStorage.setItem("codeId",data.codeId)
+        localStorage.setItem("gitProofId",data.proof && data.proof.proofId)
+        setCodeData(newCode)
+    }
+
+    const renderTestData = data =>{
+        newData.push({
+            dataId:data.testId,
+            title:data.testAlias,
+            dataType:data.type,
         })
+        localStorage.setItem("testId",data.testId)
+        setUnitShellBlock(`${data.testOrder ? data.testOrder :""}`)
+    }
+    
+    const renderStructure = data => {
+        newData.push({
+            dataId: data.structureId,
+            title: data.structureAlias,
+            dataType:data.type,
+        })
+        localStorage.setItem("structureId",data.structureId)
+        setMavenShellBlock(`${data.structureOrder ? data.structureOrder : ""}`)
+    }
+    
+    const renderDeploy = data => {
+        newData.push({
+            dataId:data.deployId,
+            title: data.deployAlias,
+            dataType:data.type,
+        })
+        const formValue = {
+            dockerProofName:data.proof && data.proof.proofName+ "(" + data.proof.proofUsername + ")" ,
+        }
+        Object.assign(formInitialValues,formValue)
+        localStorage.setItem("deployId",data.deployId)
+        localStorage.setItem("deployProofId",data.proof && data.proof.proofId)
+        setLinuxShellBlock(`${type.deployShell ? data.deployShell : ""}`)
     }
 
     // 按需清空表单的值
-    const del = (i,j) => {
+    const del = (i,type) => {
         switch (i) {
             case 11:delDetail("test")
                 break
@@ -235,7 +223,7 @@ const ConfigDetails = props =>{
             default:delDetail("git")
         }
         setFormInitialValues({...formInitialValues})
-        if(!j){
+        if(!type){
             setIsPrompt(true)
         }
     }
@@ -297,6 +285,11 @@ const ConfigDetails = props =>{
                     />
                     :
                     <Fragment>
+                        {/*<GuiView*/}
+                        {/*    del={del}*/}
+                        {/*    form={form}*/}
+                        {/*    updateConfigure={updateConfigure}*/}
+                        {/*/>*/}
                         {
                             isBtn ?
                                 <RemoteUmdComponent

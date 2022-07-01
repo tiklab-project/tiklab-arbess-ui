@@ -43,10 +43,10 @@ const UserBase=AsyncComponent(()=>import("./modules/system/user/base"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
-const PlugAll=AsyncComponent(()=>import("./modules/system/plug/plugAll"))
+const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
 const OverallProof=AsyncComponent(()=>import("./modules/system/proof/overallProof"))
-const Info=AsyncComponent(()=>import("./modules/system/logInfo/info/info"))
-const Log=AsyncComponent(()=>import("./modules/system/logInfo/log/log"))
+const Info=AsyncComponent(()=>import("./modules/system/systemMassage/info/info"))
+const Log=AsyncComponent(()=>import("./modules/system/systemMassage/log/log"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 
@@ -180,8 +180,8 @@ const routers=[
                         component: Org,
                     },
                     {
-                        path: "/index/system/plugin",
-                        component: PlugAll,
+                        path: "/index/system/plug",
+                        component: Plug,
                     },
                     {
                         path: "/index/system/power/role",

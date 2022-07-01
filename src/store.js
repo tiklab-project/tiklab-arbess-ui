@@ -10,7 +10,7 @@ import {PROOF_STORE,ProofStore} from "./modules/proof/store/proofStore";
 import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/workSpaceStore";
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/homePage/store/homePageStore";
 import {PIPELINECOLLECT_STORE,PipelineCollectStore} from "./modules/pipeline/pipelineCollect/store/pipelineCollectStore";
-import {LOGINFO_STORE,LogInfoStore} from "./modules/system/logInfo/store/logInfoStore";
+import {SYSTEMMASSAGE_STORE,SystemMassageStore} from "./modules/system/systemMassage/store/systemMassageStore";
 
 function createStores() {
     return{
@@ -24,7 +24,7 @@ function createStores() {
         [WORKSPACE_STORE]:new WorkSpaceStore(),
         [HOMEPAGE_STORE]:new HomePageStore(),
         [PIPELINECOLLECT_STORE]:new PipelineCollectStore(),
-        [LOGINFO_STORE]:new LogInfoStore(),
+        [SYSTEMMASSAGE_STORE]:new SystemMassageStore(),
         [PLUGIN_STORE]: new PluginStore(),
         [EAM_STORE]: new EamStore(),
     }

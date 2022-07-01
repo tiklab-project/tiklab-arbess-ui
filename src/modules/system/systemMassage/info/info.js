@@ -3,10 +3,11 @@ import SystemBreadcrumb from "../../breadcrumb/systemBreadcrumb";
 import {inject,observer} from "mobx-react";
 import {Descriptions} from "antd";
 
+// 系统信息
 const Info = props =>{
 
-    const {logInfoStore} = props
-    const {getSystemMessage,infoList} = logInfoStore
+    const {systemMassageStore} = props
+    const {getSystemMessage,infoList} = systemMassageStore
 
     useEffect(()=>{
         getSystemMessage()
@@ -29,4 +30,4 @@ const Info = props =>{
     )
 }
 
-export default inject('logInfoStore')(observer(Info))
+export default inject("systemMassageStore")(observer(Info))

@@ -1,0 +1,13 @@
+.log{
+    &-content{
+        color: #fff;
+        background: #2f2f2f;
+        height: calc(100% - 67px);
+        overflow: auto;
+        padding: 0 20px;
+        white-space: pre-wrap;
+        &-item{
+            padding: 5px 0;
+        }
+    }
+}

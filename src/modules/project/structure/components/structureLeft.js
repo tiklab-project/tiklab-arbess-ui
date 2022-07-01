@@ -82,7 +82,8 @@ const StructureLeft = props =>{
                         pagination={{
                             ...page,
                             onChange: (page) => {onChangePage(page);},
-                            hideOnSinglePage:true
+                            hideOnSinglePage:true,
+                            showSizeChanger:false,
                         }}
                         dataSource={leftPageList}
                         renderItem={(item,i) => (

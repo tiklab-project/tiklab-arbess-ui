@@ -1,8 +1,8 @@
 import React from "react";
 import {PluginList} from 'doublekit-plugin-ui'
 
-const PlugAll = props =>{
+const Plug = props =>{
     return <PluginList {...props}/>
 }
 
-export default PlugAll
+export default Plug
