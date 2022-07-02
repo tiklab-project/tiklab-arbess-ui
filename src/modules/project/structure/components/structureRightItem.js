@@ -23,7 +23,7 @@ const StructureRightItem = props =>{
         setVisible(true)
     }
 
-    const confirm = () =>{
+    const del = modeData =>{
         deleteHistoryLog(modeData &&modeData.historyId).then(()=>{
             setFreshen(!freshen)
             if(index!==0){ setIndex(0) }
@@ -70,7 +70,7 @@ const StructureRightItem = props =>{
                 <div className="mid_group_top_del">
                     <Popconfirm
                         title="您确认删除吗?"
-                        onConfirm={()=>confirm()}
+                        onConfirm={()=>del(modeData)}
                         okText="确认"
                         cancelText="取消"
                         placement="bottom"
@@ -79,7 +79,7 @@ const StructureRightItem = props =>{
                     </Popconfirm>
                 </div>
             </div>
-            <div className="mid_group_center"> {rightDetails(rightFlowData)} </div>
+            <div className="mid_group_center"> { rightDetails(rightFlowData) } </div>
             <div className="structure-content-bottom">
                 <div className="structure-content-bottom-title">输出</div>
                 <div className="structure-content-bottom-outLog">

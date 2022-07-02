@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Breadcrumb} from "antd";
 import empty from "../../../../assets/images/empty.jpg";
 
@@ -99,11 +99,11 @@ const WorkSpaceNod = props =>{
             <h1>节点master上的工作空间</h1>
             {
                 fileList && fileList.length === 0 ?
-                    <div className="structure-content-empty">
-                        <div className="empty null">
-                            <img src={empty} alt="logo" />
-                        </div>
-                    </div>
+                    <Fragment>
+                        <svg className="icon" aria-hidden="true" >
+                            <use xlinkHref="#icon-meiyouxiangguan"/>
+                        </svg>
+                    </Fragment>
                     :
                     <div className="workSpace-top-catalogue">
                         <Breadcrumb>

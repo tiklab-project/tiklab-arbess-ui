@@ -15,12 +15,6 @@ const StatusChart = props =>{
                 renderChart(res.data)
             }
         })
-        return ()=>{
-            setXData([])
-            setSuccessData([])
-            setFailData([])
-            setStopData([])
-        }
     },[])
     
     const renderChart = data => {
@@ -39,7 +33,6 @@ const StatusChart = props =>{
         setFailData([...fail])
         setStopData([...stop])
     }
-
 
     const getOption = {
         title: {

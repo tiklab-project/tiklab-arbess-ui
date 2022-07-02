@@ -11,7 +11,7 @@ const SearchResult = props => {
 
     useEffect(()=>{
         const params = {
-            userId : getUser().userId,
+            userId: getUser().userId,
             pipelineName:match.params.searchresult
         }
         findOneName(params)

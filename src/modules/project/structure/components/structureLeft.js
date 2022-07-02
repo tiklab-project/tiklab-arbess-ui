@@ -26,6 +26,7 @@ const StructureLeft = props =>{
     }
     
     const showHistory = (item,i)=> {
+        console.log(item)
         findHistoryLog(item.historyId).then(()=>{
             setModeData(item)
             setIndex(i+1)

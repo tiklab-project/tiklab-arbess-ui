@@ -11,8 +11,8 @@ const StructureRightExecute = props => {
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
     const state = index =>{
         if(execState){
-            const i = execState.sort;
-            const j = execState.status;
+            const i = execState.sort
+            const j = execState.status
             if(i > j && index === i ){
                 return  status(0)  // 运行
             }else if (index < i ){
@@ -55,8 +55,8 @@ const StructureRightExecute = props => {
     
     const style = index => {
         if(execState){
-            const i = execState.sort;
-            const j = execState.status;
+            const i = execState.sort
+            const j = execState.status
             if(i > j && index === i ){
                 return  "item-100"  // 运行
             }else if (index < i ){
@@ -94,6 +94,7 @@ const StructureRightExecute = props => {
         })
     }
 
+    // 关闭滚动条一直在下面
     const onWheel = () =>{
         setIsActiveSlide(false)
     }

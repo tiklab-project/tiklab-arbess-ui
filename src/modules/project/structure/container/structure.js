@@ -35,24 +35,13 @@ const Structure = props => {
             findExecState(pipelineId).then(res=>{
                 if(res.data === 1 ){
                     interval = setInterval(()=>socket.send(pipelineId),1000)
-                    socket.onmessage = res =>{
-                        if(res.data){
-                            const data = JSON.parse(res.data)
-                            if( data.data === 0 ){
-                                clearInterval(interval)
-                                socket.close()
-                                setExecState("")
-                                setFreshen(!freshen)
-                            } setExecState(data.data)
-                        }
-                    }
-                    findAll(pipelineId)
-                    findPage()
+                    socket.onmessage = response => renderExec(response)
+                    findAll(pipelineId) // 构建状态
                 }else if(res.data=== 0){
-                    findPage()
                     setExecState("")
                     socket.close()
                 }
+                findPage() // 历史列表
             })
         }
         return ()=> {
@@ -60,6 +49,18 @@ const Structure = props => {
             socket.close()
         }
     }, [pipelineId,freshen])
+    
+    const renderExec = response => {
+        if(response.data){
+            const data = JSON.parse(response.data)
+            if( data.data === 0 ){
+                clearInterval(interval)
+                socket.close()
+                setExecState("")
+                setFreshen(!freshen)
+            } setExecState(data.data)
+        }
+    }
 
     const findPage = () =>{
         const params = {
@@ -98,12 +99,11 @@ const Structure = props => {
     //     })
     //     return ()=> clearInterval(interval)
     // }, [pipelineId,freshen])
-
-    const stop = () => {
-        setExecState("")
-        setFreshen(!freshen)
-        clearInterval(interval)
-    }
+    // const stop = () => {
+    //     setExecState("")
+    //     setFreshen(!freshen)
+    //     clearInterval(interval)
+    // }
 
     const status = i =>{
         switch(i){
