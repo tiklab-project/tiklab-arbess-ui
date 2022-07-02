@@ -26,10 +26,6 @@
             align-items: center;
             height: 100%;
             padding-left: 20px;
-            &-search-wrap{
-                position: relative;
-                width: 100%;
-            }
             &-text{
                 display: flex;
                 flex-direction: row;
@@ -39,21 +35,25 @@
                 width: 100%;
                 padding-right: 20px;
             }
+            &-search-wrap{
+                position: relative;
+                width: 100%;
+            }
+        }
+        &-language,&-user,&-status{
+            margin: 0 10px;
         }
         &-user{
             display: inline-flex;
             align-items: center;
-            .user{
-                &-name{
-                    cursor: pointer;
-                }
-                &-avatar{
-                    padding-left: 15px;
-                }
-            }
         }
-        &-language,  &-user{
-            margin: 0 10px 0 0;
+        &-status{
+            height: 30px;
+            width: 30px;
+            &>img{
+                width: 100%;
+                height: 100%;
+            }
         }
         .headers{
             &-link{

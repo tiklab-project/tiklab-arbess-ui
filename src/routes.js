@@ -114,6 +114,10 @@ const routers=[
                         component: WorkSpace
                     },
                     {
+                        path:"/index/task/config",
+                        component: ConfigDetails
+                    },
+                    {
                         path:"/index/task/structure",
                         component: Structure
                     },
@@ -147,10 +151,6 @@ const routers=[
                                 component: ProjectSetUser
                             }
                         ]
-                    },
-                    {
-                        path:"/index/task/config",
-                        component: ConfigDetails
                     },
                 ]
             },

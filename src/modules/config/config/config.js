@@ -12,7 +12,7 @@ import {useSelector, RemoteUmdComponent} from "doublekit-plugin-ui";
 
 const Config = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
+    const {configStore,giteeStore,structureStore,configDataStore,githubStore,match} = props
 
     const {updateConfigure} = configStore
     const {code,getState} = giteeStore
@@ -27,7 +27,7 @@ const Config = props =>{
     const pluginStore = useSelector(state =>state.pluginStore)
     const [view,setView] = useState(1)
     const [isBtn,setIsBtn] = useState(false)
-    const [jumpOrNot,] = useState(true)
+    const jumpOrNot = match.params.pipelineName
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
     const pipelineId = localStorage.getItem("pipelineId")
@@ -97,22 +97,25 @@ const Config = props =>{
     },[formInitialValues])
 
     // 按需清空表单的值
-    const del = i => {
+    const del = (i,type) => {
         switch (i) {
-            case 11 :delDetail("test")
+            case 11:
+                delDetail("test")
                 break
-            case 21 :delDetail("structure")
+            case 21:
+            case 22:
+                delDetail("structure")
                 break
-            case 22 :delDetail("structure")
-                break
-            case 31 :delDetail("deploy")
-                break
-            case 32 :delDetail("deploy")
+            case 31:
+            case 32:
+                delDetail("deploy")
                 break
             default:delDetail("git")
         }
         setFormInitialValues({...formInitialValues})
-        setIsPrompt(true)
+        if(!type){
+            setIsPrompt(true)
+        }
     }
 
     // 统一form表单里面需要删除的值

@@ -3,7 +3,7 @@ import "./projectAsideOpt.scss";
 
 const ProjectAsideOpt = props =>{
 
-    const {pipelineList,isPrompt,setVisible,setPipeline} = props
+    let {pipelineList,isPrompt,setVisible,setPipeline} = props
     const pipelineName = localStorage.getItem("pipelineName")
 
     const onClick = (e,item) => {
@@ -14,7 +14,7 @@ const ProjectAsideOpt = props =>{
                 localStorage.setItem("pipelineId",item.pipelineId)
             }else {
                 setPipeline(item)
-                props.history.push("/home/task/config")
+                props.history.push(`/home/task/${item.pipelineName}/config`)
             }
         }
         setVisible(false)

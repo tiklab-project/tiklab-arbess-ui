@@ -11,7 +11,7 @@ const Project= (props)=>{
 
     const {route,pipelineStore,configDataStore}=props
     const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = pipelineStore
-    const {isPrompt,setIsPrompt,setFormInitialValues,formInitialValues,setUnitShellBlock} = configDataStore
+    const {isPrompt,setIsPrompt} = configDataStore
     const [visible,setVisible] = useState(false)
     const pipelineName = localStorage.getItem("pipelineName")
     const pipelineId = localStorage.getItem("pipelineId")

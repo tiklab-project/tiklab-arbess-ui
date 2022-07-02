@@ -15,13 +15,11 @@ const ConfigForm = props =>{
                 (()=>{
                     switch (type){
                         case 1:
-                            return <ConfigCodeGitOrGitlab/>
-                        case 2:
-                            return <ConfigCodeGiteeOrGithub/>
-                        case 3:
-                            return <ConfigCodeGiteeOrGithub/>
                         case 4:
                             return <ConfigCodeGitOrGitlab/>
+                        case 2:
+                        case 3:
+                            return <ConfigCodeGiteeOrGithub/>
                         case 5:
                             return <ConfigCodeSvn/>
                         case 11:

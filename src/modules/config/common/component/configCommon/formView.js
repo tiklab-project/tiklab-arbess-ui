@@ -39,14 +39,17 @@ const FormView = props =>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues])
 
+    // 显示文本框
     const displayInput = index =>{
         setIsFormAlias(index)
     }
 
+    // 隐藏文本框
     const hiddenInput = () =>{
         setIsFormAlias("")
     }
 
+    // 改变title
     const changeInputValue = (e,index) =>{
         //深拷贝一次，可以让arr指向单独的内存空间
         let arr = JSON.parse(JSON.stringify(data))
@@ -59,6 +62,7 @@ const FormView = props =>{
         setData([...arr])
     }
 
+    // 删除部分构建配置
     const deletePart = group =>{
         del(group.dataType)
         for (let i = 0 ;i<data.length;i++){

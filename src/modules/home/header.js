@@ -1,10 +1,12 @@
 import React, {useState,useEffect} from "react";
 import {Row,Col,Avatar,Dropdown,Menu,Input,Space} from "antd";
 import {withRouter} from "react-router-dom";
+import { getVersionInfo, getUser } from 'doublekit-core-ui';
 import logo from "../../assets/images/logo.png";
 import portrait from "../../assets/images/portrait.jpg";
-import {getUser} from "doublekit-core-ui";
-import { GlobalOutlined,DownOutlined } from "@ant-design/icons";
+import vipOne from "../../assets/images/vip-one.png";
+import vipTwo from "../../assets/images/vip-two.png";
+import {GlobalOutlined,LogoutOutlined} from "@ant-design/icons";
 
 const  {Search} = Input
 
@@ -14,6 +16,8 @@ const Head =props=>{
 
     let path = props.location.pathname
     const [currentLink, setCurrentLink] = useState(path)
+    const isEE = getVersionInfo().release;
+    const eeText = isEE === 2 ? vipTwo : vipOne
 
     useEffect(()=>{
         if(path === "/index/dynamic"){
@@ -68,7 +72,14 @@ const Head =props=>{
     const outMenu = (
         <Menu
             items={[
-                {key:"0",label:<div onClick={logout}>退出</div>}
+                {key:"0",label:<div>{getUser().name}</div>},
+                {key:"1",label:
+                        <div onClick={logout}>
+                            退出 &nbsp;
+                            <svg className="icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-tuichu"/>
+                            </svg>
+                        </div>}
             ]}
         />
     )
@@ -85,28 +96,23 @@ const Head =props=>{
             </Col>
             <Col span={12}>
                 <div className="frame-header-right">
-                    <div className="frame-header-right-search-wrap">
-                        {/*<Search />*/}
-                    </div>
                     <div className="frame-header-right-text">
                         <div className="frame-header-language">
                             <Dropdown overlay={languageMenu} placement="bottom">
                                 <Space>
-                                   <GlobalOutlined style={{fontSize:20,cursor:"pointer"}}/>
+                                    <GlobalOutlined style={{fontSize:23,cursor:"pointer"}}/>
                                 </Space>
                             </Dropdown>
                         </div>
                         <div className="frame-header-user">
-                            <span className="user-name">
-                                <Dropdown overlay={outMenu} placement="bottom">
-                                    <Space>
-                                        {getUser().name}<DownOutlined />
-                                    </Space>
-                                </Dropdown>
-                            </span>
-                            <span className="user-avatar">
-                                 <Avatar src={portrait} />
-                            </span>
+                            <Dropdown overlay={outMenu} placement="bottom">
+                                <Space>
+                                    <Avatar src={portrait} style={{cursor:"pointer"}}/>
+                                </Space>
+                            </Dropdown>
+                        </div>
+                        <div className="frame-header-status">
+                            <img src={eeText} alt="" width = "20px" height= "20px" />
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,12 @@ const ChangeConfigSortsDrawer = props =>{
 
     const nameArray = []
     useEffect(()=>{
+        codeTitle(codeData)
+        dataTile(data)
+        setGData([...nameArray])
+    },[data,codeData])
+    
+    const codeTitle = codeData => {
         let desc
         if(codeData){
             switch (codeData.codeType) {
@@ -29,7 +35,10 @@ const ChangeConfigSortsDrawer = props =>{
                 disabled: true,
                 step:"源码管理"
             })
-        }     
+        }
+    }
+    
+    const dataTile = data => {
         data && data.map((item,index)=>{
             let tpl
             switch (item.dataType) {
@@ -50,9 +59,8 @@ const ChangeConfigSortsDrawer = props =>{
                 step:item.title,
                 dataType:item.dataType
             })
-         })
-        setGData([...nameArray])
-    },[data,codeData])
+        })
+    }
 
     const onDrop = info => {
         const dropKey = info.node.key;

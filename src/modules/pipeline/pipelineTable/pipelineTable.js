@@ -28,20 +28,20 @@ const PipelineTable = props =>{
         }
         updateFollow(params).then(res=>{
             if(record.pipelineCollect===0){
-                if(res.data === "1"){
-                    message.info({content:"收藏成功", className:"message"})
-                }else{
-                    message.info({content:"收藏失败", className:"message"})
-                }
+                collectMessage(res,"收藏")
             }else {
-                if(res.data === "1"){
-                    message.info({content:"取消成功", className:"message"})
-                }else{
-                    message.info({content:"取消失败", className:"message"})
-                }
+                collectMessage(res,"取消")
             }
             setFresh(!fresh)
         })
+    }
+
+    const collectMessage = (res,info) =>{
+        if(res.data === "1"){
+            message.info({content: `${info}成功`, className:"message"})
+        }else {
+            message.info({content: `${info}失败`, className:"message"})
+        }
     }
 
     //去详情页面

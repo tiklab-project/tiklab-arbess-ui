@@ -40,7 +40,7 @@ const ConfigDetails = props =>{
             localStorage.removeItem("structureId")
             localStorage.removeItem("deployId")
         }
-    },[pipelineId])
+    },[])
 
     // 是否有图形化插件
     useEffect(()=>{
@@ -124,16 +124,18 @@ const ConfigDetails = props =>{
     // pipeline切换form数据渲染问题
     const nonForm = initialData =>{
         for (let i=0; i<initialData.length;i++){
-            for (let type=0; type<lists.length;type++) {
-                if ((parseInt(initialData[i].type/10))*10<lists[type] && lists[type]<(parseInt(initialData[i].type/10)+1)*10 ) {
-                    lists.splice(type, 1)
-                    type--
+            for (let j=0; j<lists.length;j++) {
+                const type = parseInt(initialData[i].type/10)
+                if (type*10 < lists[j] && lists[j]< (type+1) *10) {
+                    lists.splice(j, 1)
+                    j--
                 }
             }
         }
         return lists.map(item=>{del(item,"111")})
     }
-    
+
+    // 表单数据渲染
     const renderFormData = initialData => {
         for (let i = 0;i<initialData.length;i++){
             const data = initialData[i]
@@ -146,7 +148,7 @@ const ConfigDetails = props =>{
             else if(data.type > 20 && data.type < 30 ){
                 renderStructure(data)
             }
-            else if(data.type > 20 || data.type < 40 ){
+            else if(data.type > 30 || data.type < 40 ){
                 renderDeploy(data)
             }
             setData([...newData])
@@ -204,23 +206,25 @@ const ConfigDetails = props =>{
         Object.assign(formInitialValues,formValue)
         localStorage.setItem("deployId",data.deployId)
         localStorage.setItem("deployProofId",data.proof && data.proof.proofId)
-        setLinuxShellBlock(`${type.deployShell ? data.deployShell : ""}`)
+        setLinuxShellBlock(`${data.deployShell ? data.deployShell : ""}`)
     }
 
     // 按需清空表单的值
     const del = (i,type) => {
         switch (i) {
-            case 11:delDetail("test")
+            case 11:
+                delDetail("test")
                 break
-            case 21:delDetail("structure")
+            case 21:
+            case 22:
+                delDetail("structure")
                 break
-            case 22:delDetail("structure")
+            case 31:
+            case 32:
+                delDetail("deploy")
                 break
-            case 31:delDetail("deploy")
-                break
-            case 32:delDetail("deploy")
-                break
-            default:delDetail("git")
+            default:
+                delDetail("git")
         }
         setFormInitialValues({...formInitialValues})
         if(!type){

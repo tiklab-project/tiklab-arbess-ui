@@ -1,10 +1,31 @@
 {
   "id": "3197798",
-  "name": "pipeline",
+  "name": "pip",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "445237",
+      "name": "退出",
+      "font_class": "tuichu",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "1799681",
+      "name": "空内容",
+      "font_class": "kongneirong",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "4437602",
+      "name": "退出",
+      "font_class": "tuichu1",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
     {
       "icon_id": "7408314",
       "name": "管理",
