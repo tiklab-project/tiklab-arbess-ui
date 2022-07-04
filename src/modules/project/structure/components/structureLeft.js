@@ -1,11 +1,11 @@
 import React,{useState,Fragment} from "react";
 import StructureLeftExecute from "./structureLeftExecute";
-import StructureLeftDropdown from "./structureLeftDropdown";
 import {List} from "antd";
+import StructureLeftDropdown from "./structureLeftDropdown";
 
 const StructureLeft = props =>{
 
-    const { findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
+    const {findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
         pipelineId,pipelineUserList }=props
 
     const [state,setState] = useState(0)  // 状态
