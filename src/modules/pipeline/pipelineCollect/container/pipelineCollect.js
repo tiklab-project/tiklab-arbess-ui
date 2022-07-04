@@ -1,7 +1,7 @@
 import React ,{useEffect,useState} from "react";
+import "./pipelineCollect.scss";
 import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
-import "./pipelineCollect.scss";
 import PipelineTable from "../../pipelineTable/pipelineTable";
 
 const PipelineCollect = props =>{

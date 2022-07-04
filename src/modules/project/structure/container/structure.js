@@ -1,12 +1,12 @@
 import React, { useEffect, useState} from "react";
-import { Spin,Button} from "antd";
-import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
+import { Spin } from "antd";
 import "./structure.scss";
+import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
+import StructureEmpty from "../components/structureEmpty";
 import { inject, observer } from "mobx-react";
 import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
-import empty from "../../../../assets/images/empty.jpg";
 import {getUser} from "doublekit-core-ui";
 
 // 项目构建
@@ -49,7 +49,7 @@ const Structure = props => {
             socket.close()
         }
     }, [pipelineId,freshen])
-    
+
     const renderExec = response => {
         if(response.data){
             const data = JSON.parse(response.data)
@@ -169,16 +169,7 @@ const Structure = props => {
                             <ProjectBreadcrumb/>
                             {
                                 execState === ""  && leftPageList && leftPageList.length === 0 ?
-                                    <div className="structure-content-empty">
-                                        <div className="empty null">
-                                            <img src={empty} alt="logo" />
-                                            <div className="empty-group">
-                                                <div className="empty-group_title">
-                                                    没有查询到数据
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <StructureEmpty/>
                                     :
                                     <StructureRight
                                         freshen={freshen}
@@ -197,20 +188,7 @@ const Structure = props => {
                         </div>
                     </div>
                     :
-                    <div className="structure-content-empty">
-                        <ProjectBreadcrumb />
-                        <div className="empty null">
-                            <img src={empty} alt="logo" />
-                            <div className="empty-group">
-                                <div className="empty-group_title">当前流水线尚未运行</div>
-                                <div className="empty-group_extra">
-                                    <Button type="primary" onClick={()=>runImmediately()}>
-                                        立即运行
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <StructureEmpty runImmediately={runImmediately}/>
             }
         </div>
     )

@@ -1,6 +1,5 @@
 import React, {Fragment} from "react";
 import {Breadcrumb} from "antd";
-import empty from "../../../../assets/images/empty.jpg";
 
 // 节点
 const WorkSpaceNod = props =>{
@@ -98,7 +97,7 @@ const WorkSpaceNod = props =>{
         <div className="workSpace-top">
             <h1>节点master上的工作空间</h1>
             {
-                fileList && fileList.length === 0 ?
+                fileList && fileList.length === 0 ||fileList === null ?
                     <Fragment>
                         <svg className="icon" aria-hidden="true" >
                             <use xlinkHref="#icon-meiyouxiangguan"/>

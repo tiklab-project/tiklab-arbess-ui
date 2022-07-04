@@ -19,7 +19,7 @@ const FormView = props =>{
     const {form,del,configDataStore,updateConfigure,jumpOrNot} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
+        isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
     } = configDataStore
 
     const inputRef = useRef()

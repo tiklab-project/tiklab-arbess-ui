@@ -75,9 +75,9 @@ const Head =props=>{
                 {key:"0",label:<div>{getUser().name}</div>},
                 {key:"1",label:
                         <div onClick={logout}>
-                            退出 &nbsp;
-                            <svg className="icon" aria-hidden="true" >
-                                <use xlinkHref="#icon-tuichu"/>
+                            退出
+                            <svg className="icon" aria-hidden="true" style={{width:20,height:20}}>
+                                <use xlinkHref="#icon-tuichu1"/>
                             </svg>
                         </div>}
             ]}

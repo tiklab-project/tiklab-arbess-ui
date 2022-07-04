@@ -28,6 +28,7 @@ const Head = props =>{
             to:"/index/system/proof",
         }
     ]
+
     return(
         <div className="homePage-head">
             {

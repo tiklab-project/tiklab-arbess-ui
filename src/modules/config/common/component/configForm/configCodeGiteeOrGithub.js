@@ -24,7 +24,7 @@ const ConfigCodeGiteeOrGithub = props =>{
         if(codeData && codeData.codeName){
             setProhibited(false)
         }
-    },[])
+    },[codeData])
 
     let interval = null
     useEffect(()=>{

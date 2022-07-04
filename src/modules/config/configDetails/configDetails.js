@@ -171,6 +171,7 @@ const ConfigDetails = props =>{
         Object.assign(formInitialValues,formValue)
         localStorage.setItem("codeId",data.codeId)
         localStorage.setItem("gitProofId",data.proof && data.proof.proofId)
+        setCodeType(data.type)
         setCodeData(newCode)
     }
 

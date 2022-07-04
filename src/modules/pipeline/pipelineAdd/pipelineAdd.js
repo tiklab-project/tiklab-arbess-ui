@@ -1,9 +1,9 @@
 import React, { useState,useEffect,useRef} from "react";
-import {Form, Input, Button, message} from "antd";
 import "./pipelineAdd.scss";
 import {observer,inject} from "mobx-react";
 import moment from "../../../common/moment/moment";
 import {getUser} from "doublekit-core-ui";
+import {Form, Input, Button, message} from "antd";
 
 const lis= [
     {
@@ -93,8 +93,7 @@ const PipelineAdd = props => {
                     {
                         lis.map((item,index) => {
                             return (
-                                <li
-                                    key={item.id}
+                                <li key={item.id}
                                     onClick={()=> liStatusData(index) }
                                     className={ liStatus === index ? "new-type-choose-c new-type-active":"new-type-choose-c "}
                                 >

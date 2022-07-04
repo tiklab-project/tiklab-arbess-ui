@@ -19,13 +19,13 @@ export class StructureStore {
     @observable rightExecuteData = []
     @observable pipelineUserList = []
     @observable modeData = {}
-    @observable index = 0 // 构建区分显示 -- 构建1 、2、……
+    @observable index = 0  // 构建区分显示 -- 构建1 、2、……
     @observable page = {
         defaultCurrent: 1,
         pageSize: "10",
         total: "1"
     }
-    @observable isData = false // 构建任意情况是否有数据
+    @observable isData = false  // 构建任意情况是否有数据
 
     @action
     setModeData = value =>{
@@ -56,10 +56,8 @@ export class StructureStore {
                 if(res.code === 0){
                     if(res.data === 1){
                         this.index = 0
-                        this.isData = true
                     }else {
                         this.index = 1
-                        this.isData = false
                     }
                 }
                 resolve(res)
@@ -94,6 +92,7 @@ export class StructureStore {
         param.append("pipelineId", values)
         FindAll(param).then(res=>{
             this.rightExecuteData = res.data
+            this.isData = true
         }).catch(error=>{
             console.log(error)
         })

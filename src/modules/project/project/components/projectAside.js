@@ -48,47 +48,38 @@ const ProjectAside = props =>{
         props.history.push(item.to)
         setVisible(false)
     }
+    
+    const renderTaskRouter = taskRouters => {
+        return taskRouters && taskRouters.map(item=>{
+            return(
+                <li key={item.key}
+                    className={nav===item.to ? "aside_content aside_active" : "aside_content"}
+                    onClick={()=>changeNav(item)}
+                >
+                    <div className="aside_content_icon">
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref= {item.icon}/>
+                        </svg>
+                    </div>
+                    <div className="aside_content_title">{item.title}</div>
+                </li>
+            )
+        })
+    }
 
     return(
          <div className="aside">
             <ul  className="content">
-                <li onClick={()=>setVisible(!visible)}
-                    onBlur={()=>setVisible(false)}
-                    className="aside_content aside_dropdown"
-                    style={{padding:10}}
-                >
-                    <Dropdown overlay={
-                        <ProjectAsideOpt
-                            {...props}
-                            pipelineList={pipelineList}
-                            setVisible={setVisible}
-                            isPrompt={isPrompt}
-                            setPipeline={setPipeline}
-                        />}
-                        visible={visible}
-                    >
-                        <svg  className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-shaixuan1"/>
-                        </svg>
-                    </Dropdown>
-                </li>
-                {
-                    taskRouters && taskRouters.map(item=>{
-                        return(
-                            <li key={item.key}
-                                className={nav===item.to ? "aside_content aside_active" : "aside_content"}
-                                onClick={()=>changeNav(item)}
-                            >
-                                <div className="aside_content_icon">
-                                    <svg className="icon" aria-hidden="true">
-                                        <use xlinkHref= {item.icon}/>
-                                    </svg>
-                                </div>
-                                <div className="aside_content_title">{item.title}</div>
-                            </li>
-                        )
-                    })
-                }
+                <ProjectAsideOpt
+                    {...props}
+                    setPipeline={setPipeline}
+                    pipelineList={pipelineList}
+                    visible={visible}
+                    setVisible={setVisible}
+                    isPrompt={isPrompt}
+                />
+
+                { renderTaskRouter(taskRouters) }
             </ul>
         </div>
     )
