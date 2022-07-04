@@ -1,7 +1,7 @@
 import React,{useState,Fragment} from "react";
 import StructureLeftExecute from "./structureLeftExecute";
-import {List} from "antd";
 import StructureLeftDropdown from "./structureLeftDropdown";
+import {List} from "antd";
 
 const StructureLeft = props =>{
 
@@ -98,7 +98,7 @@ const StructureLeft = props =>{
                                     <div className="list-group">
                                         <div className="list-group-item">
                                             <div className="list-state">
-                                                状态 : {sta(item)}
+                                                状态 : { sta(item) }
                                             </div>
                                             <div className="list-one">
                                                 执行人 : {item.user && item.user.name}
