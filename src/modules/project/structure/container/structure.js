@@ -16,7 +16,8 @@ const Structure = props => {
 
     const {findExecState,findStructureState,findAll,findPageHistory,findHistoryLog,deleteHistoryLog,
         killInstance,pipelineStartStructure,leftPageList,rightFlowData,modeData,setModeData,
-        index,setIndex,page,rightExecuteData,isData,findPipelineUser,pipelineUserList
+        index,setIndex,page,rightExecuteData,isData,findPipelineUser,pipelineUserList,
+        setIsData
     } = structureStore
 
     const [execState,setExecState] = useState("")   // 左侧 -- 正在构建
@@ -72,7 +73,13 @@ const Structure = props => {
             userId:null,
             type:0
         }
-        findPageHistory(params)
+        findPageHistory(params).then(res=>{
+            if(res.code === 0 ){
+                if(res.data.dataList.length === 0){
+                    setIsData(false)
+                }
+            }
+        })
     }
 
     let interval=null

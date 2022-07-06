@@ -37,6 +37,11 @@ export class StructureStore {
         this.index = value
     }
 
+    @action
+    setIsData = value =>{
+        this.isData = value
+    }
+
     // 开始构建
     @action
     pipelineStartStructure = async values =>{

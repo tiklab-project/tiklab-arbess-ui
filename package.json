@@ -1,7 +1,7 @@
 {
-    "name": "doublekit-wiki-ce-ui",
+    "name": "doublekit-pipeline-ui",
     "version": "1.0.0",
-    "description": "doublekit wiki",
+    "description": "doublekit pipeline",
     "main": "es/dist.js",
     "files": [
         "es"
@@ -16,7 +16,7 @@
     "author": "",
     "license": "ISC",
     "publishConfig": {
-        "registry": "http://118.178.122.35:8081/repository/npm-hosted/"
+        "registry": "http://172.12.1.11:8081/repository/npm-hosted"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.1",
