@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { Select  } from "antd";
 
 const { Option } = Select;
@@ -98,7 +98,7 @@ const StructureLeftDropdown = props =>{
     return(
         <div className="structure-content-left-dropdown">
             <div className="dropdown">
-                <Select  style={{width:110,marginRight:10}} defaultValue="状态"
+                <Select  style={{width:110,marginRight:10}} defaultValue={"状态"}
                          onChange={(value,e)=>changeState(value,e)}
                 >
                     {
@@ -107,7 +107,7 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  style={{width:110,marginRight:10}}  defaultValue="执行人"
+                <Select  style={{width:110,marginRight:10}}  defaultValue={"执行人"}
                          onChange={(value,e)=>changeEnforcer(value,e)}
                 >
                     <Option key={"全部"} value={"全部"}>全部</Option>
@@ -117,7 +117,7 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  style={{width:110,marginRight:10}}  defaultValue="执行方式"
+                <Select  style={{width:110,marginRight:10}}  defaultValue={"执行方式"}
                          onChange={(value,e)=>changeMode(value,e)}
                 >
                     {

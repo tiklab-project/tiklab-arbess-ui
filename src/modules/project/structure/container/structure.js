@@ -28,39 +28,38 @@ const Structure = props => {
         findPipelineUser(pipelineId)
     },[pipelineId])
 
-    let interval,socket=null
-    useEffect(() => {
-        socket = new WebSocket("ws://192.168.10.100:8080/start")
-        socket.onopen = () =>{
-            findExecState(pipelineId).then(res=>{
-                if(res.data === 1 ){
-                    interval = setInterval(()=>socket.send(pipelineId),1000)
-                    socket.onmessage = response => renderExec(response)
-                    findAll(pipelineId) // 构建状态
-                }else if(res.data=== 0){
-                    setExecState("")
-                    socket.close()
-                }
-                findPage() // 历史列表
-            })
-        }
-        return ()=> {
-            clearInterval(interval)
-            socket.close()
-        }
-    }, [pipelineId,freshen])
-
-    const renderExec = response => {
-        if(response.data){
-            const data = JSON.parse(response.data)
-            if( data.data === 0 ){
-                clearInterval(interval)
-                socket.close()
-                setExecState("")
-                setFreshen(!freshen)
-            } setExecState(data.data)
-        }
-    }
+    // let interval,socket=null
+    // useEffect(() => {
+    //     socket = new WebSocket("ws://192.168.10.101:8080/start")
+    //     socket.onopen = () =>{
+    //         findExecState(pipelineId).then(res=>{
+    //             if(res.data === 1 ){
+    //                 interval = setInterval(()=>socket.send(pipelineId),1000)
+    //                 socket.onmessage = response => renderExec(response)
+    //                 findAll(pipelineId) // 构建状态
+    //             }else if(res.data=== 0){
+    //                 setExecState("")
+    //                 socket.close()
+    //             }
+    //             findPage() // 历史列表
+    //         })
+    //     }
+    //     return ()=> {
+    //         clearInterval(interval)
+    //         socket.close()
+    //     }
+    // }, [pipelineId,freshen])
+    // const renderExec = response => {
+    //     if(response.data){
+    //         const data = JSON.parse(response.data)
+    //         if( data.data === 0 ){
+    //             clearInterval(interval)
+    //             socket.close()
+    //             setExecState("")
+    //             setFreshen(!freshen)
+    //         } setExecState(data.data)
+    //     }
+    // }
 
     const findPage = () =>{
         const params = {
@@ -76,34 +75,34 @@ const Structure = props => {
         findPageHistory(params)
     }
 
-    // let interval=null
-    // useEffect(() => {
-    //     findExecState(pipelineId).then(res=>{
-    //         if(res.data === 1 ){
-    //             interval = setInterval(() => {
-    //                 findStructureState(pipelineId).then(res =>{
-    //                     if(res.data!==null){
-    //                         setExecState(res.data)
-    //                         if(res.data.runStatus===1 || res.data.runStatus===30){
-    //                             stop()
-    //                         }
-    //                     }else{ stop() }
-    //                 })
-    //             }, 1000)
-    //             findAll(pipelineId)
-    //             findPage()
-    //         }else if(res.data=== 0){
-    //             findPage()
-    //             setExecState("")
-    //         }
-    //     })
-    //     return ()=> clearInterval(interval)
-    // }, [pipelineId,freshen])
-    // const stop = () => {
-    //     setExecState("")
-    //     setFreshen(!freshen)
-    //     clearInterval(interval)
-    // }
+    let interval=null
+    useEffect(() => {
+        findExecState(pipelineId).then(res=>{
+            if(res.data === 1 ){
+                interval = setInterval(() => {
+                    findStructureState(pipelineId).then(res =>{
+                        if(res.data!==null){
+                            setExecState(res.data)
+                            if(res.data.runStatus===1 || res.data.runStatus===30){
+                                stop()
+                            }
+                        }else{ stop() }
+                    })
+                }, 1000)
+                findAll(pipelineId)
+                findPage()
+            }else if(res.data=== 0){
+                findPage()
+                setExecState("")
+            }
+        })
+        return ()=> clearInterval(interval)
+    }, [pipelineId,freshen])
+    const stop = () => {
+        setExecState("")
+        setFreshen(!freshen)
+        clearInterval(interval)
+    }
 
     const status = i =>{
         switch(i){
@@ -133,6 +132,7 @@ const Structure = props => {
                         </svg>
         }
     }
+    
     
     const runImmediately = () => {
         const params = {

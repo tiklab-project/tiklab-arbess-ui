@@ -6,7 +6,7 @@
  * @LastEditors: 袁婕轩
  * @LastEditTime: 2021-12-20 10:57:28
  */
-const api =  "http://192.168.10.100:8080";
+const api =  "http://192.168.10.101:8080";
 const base_url = JSON.stringify(api);
 
 

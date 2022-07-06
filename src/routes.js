@@ -195,10 +195,10 @@ const routers=[
                         path: "/index/system/proof",
                         component: OverallProof,
                     },
-                    {
-                        path:"/index/system/log",
-                        component: Log,
-                    },
+                    // {
+                    //     path:"/index/system/log",
+                    //     component: Log,
+                    // },
                     {
                         path:"/index/system/info",
                         component: Info,

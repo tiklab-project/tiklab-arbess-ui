@@ -81,12 +81,12 @@ const SystemAside= props =>  {
             icon:"#icon-gongzuotongji",
             enCode:"H",
         },
-        {
-            key:"/index/system/log",
-            label:"系统日志",
-            icon:"#icon-gongzuotongji",
-            enCode:"J",
-        },
+        // {
+        //     key:"/index/system/log",
+        //     label:"系统日志",
+        //     icon:"#icon-gongzuotongji",
+        //     enCode:"J",
+        // },
     ]
 
     const select = key =>{

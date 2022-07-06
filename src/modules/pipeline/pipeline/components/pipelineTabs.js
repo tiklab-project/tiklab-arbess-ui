@@ -2,31 +2,35 @@ import React, {useEffect,useState} from "react";
 import {withRouter} from "react-router";
 import {inject, observer} from "mobx-react";
 import PipelineTable from "../../pipelineTable/pipelineTable";
-import View from "../../../view/view";
 import {getUser} from "doublekit-core-ui";
 
 const PipelineTabs = props =>{
 
-    const {pipelineStore}=props
+    const {pipelineStore,pipelineCollectStore}=props
 
     const {findAllPipelineStatus,pipelineList}=pipelineStore
+    const {findAllFollow,followList} = pipelineCollectStore
     const [fresh,setFresh] = useState(false)
     const [type,setType] = useState(1)
     const [visible,setVisible] = useState(false)
 
     useEffect(()=>{
-        findAllPipelineStatus(getUser().userId)
-    },[fresh])
+        if(type===1){
+            findAllPipelineStatus(getUser().userId)
+        }else{
+            findAllFollow(getUser().userId)
+        }
+    },[fresh,type])
 
     const lis = [
         {
             id:1,
             title:"所有"
         },
-        // {
-        //     id:2,
-        //     title:"我的"
-        // }
+        {
+            id:2,
+            title:"收藏"
+        }
     ]
 
     const onclick = item => {
@@ -50,22 +54,15 @@ const PipelineTabs = props =>{
                             )
                         })
                     }
-                    {/*<div className="pipeline-tabs-type-link" onClick={()=>setVisible(true)}>*/}
-                    {/*    新建视图*/}
-                    {/*</div>*/}
                 </div>
             </div>
             <PipelineTable
-                list={pipelineList}
+                list={type === 1 ? pipelineList : followList}
                 fresh={fresh}
                 setFresh={setFresh}
-            />
-            <View
-                visible={visible}
-                setVisible={setVisible}
             />
         </div>
     )
 }
 
-export default withRouter(inject("pipelineStore")(observer(PipelineTabs)))
+export default withRouter(inject("pipelineStore","pipelineCollectStore")(observer(PipelineTabs)))

@@ -1,4 +1,14 @@
 .dynamicDetails{
+    &-top{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        &-title{
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
     &-bottom{
         &-listHeader{
             width: 100%;

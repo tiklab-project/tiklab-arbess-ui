@@ -5,8 +5,8 @@ import {List} from "antd";
 
 const StructureLeft = props =>{
 
-    const {findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
-        pipelineId,pipelineUserList }=props
+    const { findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
+        pipelineId,pipelineUserList,setIsData }=props
 
     const [state,setState] = useState(0)  // 状态
     const [enforcer,setEnforcer] = useState(null)   //执行人
@@ -33,6 +33,7 @@ const StructureLeft = props =>{
     }
 
     const onChangePage = pagination => {
+        setIsData(true)
         const params = {
             pipelineId:pipelineId,
             pageParam: {

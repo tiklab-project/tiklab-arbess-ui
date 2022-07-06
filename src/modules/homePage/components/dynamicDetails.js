@@ -2,7 +2,7 @@ import React, {useEffect, Fragment, useState} from "react";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 import {getUser} from "doublekit-core-ui";
-import {List,ConfigProvider} from "antd";
+import {List,ConfigProvider,Button} from "antd";
 import "./dynamicDetails.scss";
 import zhCN from "antd/es/locale/zh_CN";
 
@@ -48,6 +48,14 @@ const DynamicDetails = props =>{
 
     return(
         <div className="dynamicDetails">
+            <div className="dynamicDetails-top">
+                <div className="dynamicDetails-top-title">全部动态</div>
+                <div>
+                    <Button onClick={()=>props.history.push("/index/home")}>
+                        返回
+                    </Button>
+                </div>
+            </div>
             <ConfigProvider locale={zhCN}>
                 <List
                     size="large"

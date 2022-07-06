@@ -111,23 +111,28 @@ export class StructureStore {
             state:values.state,
             type:values.type,
         }
-        FindPageHistory(params).then(res=>{
-            console.log("所有历史",res)
-            if(res.code === 0 ){
-                if(res.data.dataList.length === 0){
-                    this.leftPageList = []
-                    this.page = {}
-                } else {
-                    this.leftPageList = res.data.dataList
-                    this.page.total = res.data.totalRecord
-                    this.modeData =  res.data.dataList && res.data.dataList[0]
-                    this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
-                    this.isData = true
+        return new Promise((resolve, reject)=>{
+            FindPageHistory(params).then(res=>{
+                console.log("所有历史",res)
+                if(res.code === 0 ){
+                    if(res.data.dataList.length === 0){
+                        this.leftPageList = []
+                        this.page = {}
+                    } else {
+                        this.leftPageList = res.data.dataList
+                        this.page.total = res.data.totalRecord
+                        this.modeData =  res.data.dataList && res.data.dataList[0]
+                        this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
+                        this.isData = true
+                    }
                 }
-            }
-        }).catch(error=>{
-            console.log(error)
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject(res)
+            })
         })
+    
     }
 
     //历史详情日志
