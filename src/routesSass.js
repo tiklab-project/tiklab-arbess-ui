@@ -3,6 +3,7 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 import {Redirect} from "react-router-dom";
 
 import { Logout } from "doublekit-eam-ui";
+import {FeatureList,RoleList,ProjectFeatureList,ProjectRoleList} from "doublekit-privilege-ui";
 
 const Index=AsyncComponent(()=>import("./modules/home/portal"))
 
@@ -47,10 +48,8 @@ const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
 const OverallProof=AsyncComponent(()=>import("./modules/system/proof/overallProof"))
 const Info=AsyncComponent(()=>import("./modules/system/systemMassage/info/info"))
-const Log=AsyncComponent(()=>import("./modules/system/systemMassage/log/log"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
-
 
 const routers=[
     {
@@ -196,10 +195,6 @@ const routers=[
                         path: "/index/system/proof",
                         component: OverallProof,
                     },
-                    // {
-                    //     path:"/index/system/log",
-                    //     component: Log,
-                    // },
                     {
                         path:"/index/system/info",
                         component: Info,
