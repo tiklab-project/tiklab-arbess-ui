@@ -1,12 +1,4 @@
-/*
- * @Descripttion: 
- * @version: 1.0.0
- * @Author: 袁婕轩
- * @Date: 2021-04-19 15:32:55
- * @LastEditors: 袁婕轩
- * @LastEditTime: 2021-11-01 15:44:08
- */
-const api =  "http://192.168.10.101:8080";
+const api =  "http://192.168.10.100:8080";
 const base_url = JSON.stringify(api);
 
 const url = "http://127.0.0.1:3004";

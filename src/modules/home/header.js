@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import {Row,Col,Avatar,Dropdown,Menu,Input,Space} from "antd";
+import {Row,Col,Avatar,Dropdown,Input,Space,Menu} from "antd";
 import {withRouter} from "react-router-dom";
 import { getVersionInfo, getUser } from 'doublekit-core-ui';
 import logo from "../../assets/images/logo.png";
@@ -10,32 +10,28 @@ import {GlobalOutlined,LogoutOutlined} from "@ant-design/icons";
 
 const  {Search} = Input
 
-const Head =props=>{
+const Head = props =>{
 
     const {routers} = props;
 
     let path = props.location.pathname
-    const [currentLink, setCurrentLink] = useState(path)
     const isEE = getVersionInfo().release;
+    const [currentLink, setCurrentLink] = useState(path)
     const eeText = isEE === 2 ? vipTwo : vipOne
 
     useEffect(()=>{
         if(path === "/index/dynamic"){
             path="/index/home"
         }
-        if (path.indexOf("/index/task") === 0) {
-            path="/index/pipeline"
-        }
         if(path.indexOf("/index/system") === 0){
             path="/index/system"
         }
-        if(path === "/index/collect" || path === "/index/new" ||
-        path.indexOf("/index/config") ===0 || path.indexOf("/index/searchresult")===0 ) {
+        if( path.indexOf("/index/task") === 0 || path === "/index/collect" || path === "/index/new" ||
+            path.indexOf("/index/config") === 0 || path.indexOf("/index/searchresult")=== 0 ) {
             path= "/index/pipeline"
         }
         setCurrentLink(path)
     },[path])
-
 
     const changeCurrentLink = item => {
         props.history.push(item.to)
@@ -61,17 +57,15 @@ const Head =props=>{
     }
 
     const languageMenu = (
-        <Menu
-            items={[
-                {key: "0", label: <div>中文</div>,},
-                {key: "1", label: <div>英文</div>,}
-            ]}
+        <Menu items={[
+                  {key: "0", label: <div>中文</div>,},
+                  {key: "1", label: <div>英文</div>,}
+              ]}
         />
     )
 
     const outMenu = (
-        <Menu
-            items={[
+        <Menu items={[
                 {key:"0",label:<div>{getUser().name}</div>},
                 {key:"1",label:
                         <div onClick={logout}>
@@ -80,7 +74,7 @@ const Head =props=>{
                                 <use xlinkHref="#icon-tuichu1"/>
                             </svg>
                         </div>}
-            ]}
+             ]}
         />
     )
 

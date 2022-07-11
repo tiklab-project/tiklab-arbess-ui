@@ -12,13 +12,13 @@ const PipelineTabs = props =>{
     const {findAllFollow,followList} = pipelineCollectStore
     const [fresh,setFresh] = useState(false)
     const [type,setType] = useState(1)
-    const [visible,setVisible] = useState(false)
+    const userId = getUser().userId
 
     useEffect(()=>{
         if(type===1){
-            findAllPipelineStatus(getUser().userId)
+            findAllPipelineStatus(userId)
         }else{
-            findAllFollow(getUser().userId)
+            findAllFollow(userId)
         }
     },[fresh,type])
 
@@ -43,15 +43,13 @@ const PipelineTabs = props =>{
                 <div className="pipeline-tabs-type-group">
                     {
                         lis.map(item=>{
-                            return(
-                                <div key={item.id}
-                                     className={type === item.id ?
-                                     "pipeline-tabs-type-active pipeline-tabs-type-link" : "pipeline-tabs-type-link"}
-                                     onClick={()=>onclick(item)}
-                                >
-                                    {item.title}
-                                </div>
-                            )
+                            return <div key={item.id}
+                                       className={type === item.id ?
+                                       "pipeline-tabs-type-active pipeline-tabs-type-link" : "pipeline-tabs-type-link"}
+                                       onClick={()=>onclick(item)}
+                                    >
+                                        {item.title}
+                                    </div>
                         })
                     }
                 </div>

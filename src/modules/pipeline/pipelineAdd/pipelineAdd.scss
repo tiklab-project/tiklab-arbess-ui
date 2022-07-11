@@ -20,23 +20,36 @@
         border-radius:0 0 3px 3px ;
         background-color: #F5F5F5;
         &-choose{
-            &-c{
-                margin: 10px;
-                padding: 15px;
-                cursor: pointer;
-                &:hover {
+            padding-left: 15px;
+            .choose{
+                &-item{
+                    margin: 10px 15px 10px 0;
+                    padding: 15px 15px 15px 0;
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    &:hover {
+                        background-color: #ffffff;
+                        border-radius: 3px;
+                    }
+                    &-icon{
+                        padding: 0 15px ;
+                        .icon{
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+                    label{
+                        font-weight: bold;
+                        font-size: 18px;
+                    }
+                }
+                &-active{
                     background-color: #ffffff;
                     border-radius: 3px;
                 }
-                label{
-                    font-weight: bold;
-                    font-size: 18px;
-                }
             }
-        }
-        &-active{
-            background-color: #ffffff;
-            border-radius: 3px;
         }
     }
 }

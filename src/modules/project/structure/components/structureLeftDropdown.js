@@ -5,7 +5,7 @@ const { Option } = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList} = props
+    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList,setPageCurrent} = props
 
     const [statusValue,setStatus] = useState("")
     const [userValue,setUserValue] = useState("")
@@ -20,6 +20,7 @@ const StructureLeftDropdown = props =>{
 
     let params = null
     const change = () =>{
+        setPageCurrent(1)
         findPageHistory(params)
     }
 

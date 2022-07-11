@@ -101,6 +101,11 @@ const routers=[
                 exact:true,
             },
             {
+                path:"/index/searchresult",
+                component:SearchResult,
+                exact:true,
+            },
+            {
                 path:"/index/task",
                 component: Project,
                 routes:[

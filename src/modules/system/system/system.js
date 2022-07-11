@@ -1,9 +1,9 @@
 import React from "react";
-import {renderRoutes} from "react-router-config";
 import "./system.scss";
 import SystemAside from "./systemAside";
 import {withRouter} from "react-router-dom";
-import { Layout  } from "antd";
+import {renderRoutes} from "react-router-config";
+import {Layout} from "antd";
 
 const { Sider,Content } = Layout;
 

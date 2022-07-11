@@ -101,6 +101,11 @@ const routers=[
                 exact:true,
             },
             {
+                path:"/index/searchresult",
+                component:SearchResult,
+                exact:true,
+            },
+            {
                 path:"/index/task",
                 component: Project,
                 routes:[
@@ -212,7 +217,7 @@ const routers=[
         component: Index,
         exact: true,
         render:()=>  <Redirect to="/index/home"/>,
-    },
+    }
 ]
 
 export default routers

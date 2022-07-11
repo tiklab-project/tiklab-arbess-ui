@@ -125,16 +125,16 @@ export class StructureStore {
                         this.page = {}
                     } else {
                         this.leftPageList = res.data.dataList
-                        this.page.total = res.data.totalRecord
                         this.modeData =  res.data.dataList && res.data.dataList[0]
                         this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
+                        this.page.total = res.data.totalRecord
                         this.isData = true
                     }
                 }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
-                reject(res)
+                reject()
             })
         })
     

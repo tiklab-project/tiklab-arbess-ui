@@ -1,17 +1,8 @@
 import React from "react";
-import { Login, EAM_STORE } from "doublekit-eam-ui";
+import {Login} from "doublekit-eam-ui";
 
 const LoginContent = props => {
-
-    return(
-        <Login
-            {...props}
-            loginGoRouter="/"
-            fetchMethod={fetchMethod}
-            languageUrl={pluginAddressUrl}
-        />
-    )
-
+    return  <Login {...props} loginGoRouter="/"/>
 }
 
 export default LoginContent

@@ -12,7 +12,7 @@ const SearchResult = props => {
     useEffect(()=>{
         const params = {
             userId: getUser().userId,
-            pipelineName:match.params.searchresult
+            pipelineName:match.params.searchresult,
         }
         findOneName(params)
     },[])
@@ -24,21 +24,24 @@ const SearchResult = props => {
     }
 
     return(
-        <div className="search">
+        <div className="pipeline-search">
             <div>
                 <h1 >查找的流水线</h1>
-                <ul >
+                <ul>
                     {
-                       searchPipelineList  && searchPipelineList.map((item,index)=>{
-                           return(
-                               <li key={item.pipelineId} >
-                                   <span> {index+1}、</span>
-                                   <span className={"search-link"} onClick={()=> goPipelineTask(item)}>
-                                       {item.pipelineName}
-                                   </span>
-                               </li>
-                           )
-                       })
+                        searchPipelineList.length === 0 ?
+                            <li>
+                                没有查询到
+                            </li>
+                            :
+                            searchPipelineList  && searchPipelineList.map((item,index)=>{
+                                return  <li key={item.pipelineId} >
+                                            <span> {index+1}、</span>
+                                            <span className={"pipeline-search-link"} onClick={()=> goPipelineTask(item)}>
+                                                   {item.pipelineName}
+                                               </span>
+                                        </li>
+                            })
                     }
                </ul>
            </div>

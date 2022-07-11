@@ -6,7 +6,7 @@ import StructureRightItem from "./structureRightItem";
 const StructureRight = props =>{
 
     const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,execState,killInstance,rightExecuteData,
-        freshen,setFreshen} = props
+        freshen,setFreshen,setPageCurrent} = props
     
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState("")
@@ -33,6 +33,7 @@ const StructureRight = props =>{
                         setVisible={setVisible}
                         killInstance={killInstance}
                         runWay={runWay}
+                        setPageCurrent={setPageCurrent}
                     />
                     :
                     <StructureRightItem
@@ -47,6 +48,7 @@ const StructureRight = props =>{
                         setDrawerContent={setDrawerContent}
                         deleteHistoryLog={deleteHistoryLog}
                         runWay={runWay}
+                        setPageCurrent={setPageCurrent}
                     />
             }
             <StructureRightLogDrawer

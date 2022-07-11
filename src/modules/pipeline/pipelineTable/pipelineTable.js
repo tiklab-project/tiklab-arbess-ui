@@ -1,11 +1,6 @@
 import React, {Fragment} from "react";
 import {message, Table, Tooltip} from "antd";
-import {
-    CheckCircleOutlined,
-    CloseCircleOutlined,
-    ExclamationCircleOutlined,
-    PlayCircleOutlined
-} from "@ant-design/icons";
+import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
 import PipelineRun from "./pipelineRun";
 import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
@@ -46,8 +41,8 @@ const PipelineTable = props =>{
 
     //去详情页面
     const goPipelineTask=(text,record)=>{
-        localStorage.setItem("pipelineName",text)
         localStorage.setItem("pipelineId",record.pipelineId)
+        localStorage.setItem("pipelineName",record.pipelineName)
         props.history.push(`/index/task/work`)
     }
 
@@ -59,6 +54,7 @@ const PipelineTable = props =>{
         if(record.pipelineState === 0){
             pipelineStartStructure(params).then(res=>{
                 if(res.data === 1){
+                    // setFresh(!fresh)
                     setTimeout(()=>setFresh(!fresh),1000)
                 }
             })

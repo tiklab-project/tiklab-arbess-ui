@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import {Button} from "antd";
 import "./configChangeView.scss";
 import {withRouter} from "react-router-dom";
 

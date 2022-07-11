@@ -99,7 +99,7 @@ const SystemAside= props =>  {
                 <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
                     className={`system-aside-li system-aside-second ${data.key=== selectKey ? "system-aside-select" : ""}`}
                     onClick={()=>select(data.key)}
-                    key={data.code}
+                    key={data.key}
                 >
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref={data.icon} />
@@ -108,18 +108,6 @@ const SystemAside= props =>  {
                 </li>
             </PrivilegeButton>
         )
-    }
-
-    const isExpandedTree = key => {
-        return expandedTree.some(item => item ===key)
-    }
-
-    const setOpenOrClose = key => {
-        if (isExpandedTree(key)) {
-            setExpandedTree(expandedTree.filter(item => item !== key))
-        } else {
-            setExpandedTree(expandedTree.concat(key))
-        }
     }
 
     const renderSubMenu = (item,deep)=> {
@@ -160,6 +148,18 @@ const SystemAside= props =>  {
                 </li>
             </PrivilegeButton>
         )
+    }
+
+    const isExpandedTree = key => {
+        return expandedTree.some(item => item ===key)
+    }
+
+    const setOpenOrClose = key => {
+        if (isExpandedTree(key)) {
+            setExpandedTree(expandedTree.filter(item => item !== key))
+        } else {
+            setExpandedTree(expandedTree.concat(key))
+        }
     }
 
     return (

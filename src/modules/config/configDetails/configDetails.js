@@ -60,7 +60,7 @@ const ConfigDetails = props =>{
             }
             if(localStorage.getItem("giteeCode")){
                 code(codeValue).then(res=>{
-                    localStorage.setItem("giteeToken",typeSON.stringify(res.data))
+                    localStorage.setItem("giteeToken",JSON.stringify(res.data))
                     localStorage.removeItem("giteeCode")
                     localStorage.removeItem("githubToken")
                     getState(params)

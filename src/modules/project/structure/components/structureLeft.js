@@ -1,16 +1,15 @@
-import React,{useState,Fragment} from "react";
+import React,{Fragment} from "react";
 import StructureLeftExecute from "./structureLeftExecute";
 import StructureLeftDropdown from "./structureLeftDropdown";
+import {inject,observer} from "mobx-react";
 import {List} from "antd";
 
 const StructureLeft = props =>{
 
-    const { findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
-        pipelineId,pipelineUserList,setIsData}=props
+    const {findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
+        pipelineId,pipelineUserList,structureListStore}=props
 
-    const [state,setState] = useState(0)  // 状态
-    const [enforcer,setEnforcer] = useState(null)   //执行人
-    const [mode,setMode] = useState(0)   //执行方式
+    const {pageCurrent,setPageCurrent,state,setState,enforcer,setEnforcer,mode,setMode} = structureListStore
 
     const sta = item =>{
         if(leftPageList){
@@ -33,7 +32,7 @@ const StructureLeft = props =>{
     }
 
     const onChangePage = pagination => {
-        setIsData(true)
+        setPageCurrent(pagination)
         const params = {
             pipelineId:pipelineId,
             pageParam: {
@@ -57,6 +56,7 @@ const StructureLeft = props =>{
                 setEnforcer={setEnforcer}
                 mode={mode}
                 setMode={setMode}
+                setPageCurrent={setPageCurrent}
                 pipelineUserList={pipelineUserList}
             />
             <div className="structure-content-left-history">
@@ -85,6 +85,7 @@ const StructureLeft = props =>{
                             onChange: (page) => {onChangePage(page);},
                             hideOnSinglePage:true,
                             showSizeChanger:false,
+                            current:pageCurrent,
                         }}
                         dataSource={leftPageList}
                         renderItem={(item,i) => (
@@ -99,7 +100,7 @@ const StructureLeft = props =>{
                                     <div className="list-group">
                                         <div className="list-group-item">
                                             <div className="list-state">
-                                                状态 : { sta(item) }
+                                                状态 : {sta(item)}
                                             </div>
                                             <div className="list-one">
                                                 执行人 : {item.user && item.user.name}
@@ -119,4 +120,4 @@ const StructureLeft = props =>{
     )
 }
 
-export default StructureLeft
+export default inject("structureListStore")(observer(StructureLeft))

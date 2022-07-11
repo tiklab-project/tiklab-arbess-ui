@@ -1,9 +1,9 @@
 import React ,{useEffect} from "react";
 import "./header.scss";
-import {renderRoutes} from "react-router-config";
 import Heads from "./header";
 import {privilegeStores} from "doublekit-privilege-ui";
 import {getUser} from "doublekit-core-ui";
+import {renderRoutes} from "react-router-config";
 
 const Portal= props=>{
 
@@ -40,4 +40,5 @@ const Portal= props=>{
         </div>
     )
 }
+
 export default Portal

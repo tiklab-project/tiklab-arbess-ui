@@ -1,12 +1,12 @@
-import React ,{useEffect} from "react";
-import "./homePage.scss";
+import React,{useEffect} from "react";
+import "../components/homePage.scss";
 import Heads from "../components/head";
 import PipelineNear from "../components/pipelineNear";
 import StatusChart from "../components/statusChart";
 import Dynamic from "../components/dynamic";
 import {withRouter} from "react-router";
-import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
+import {getUser} from "doublekit-core-ui";
 
 const HomePage = props =>{
 

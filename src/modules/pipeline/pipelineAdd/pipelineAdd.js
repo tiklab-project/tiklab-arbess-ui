@@ -14,7 +14,7 @@ const lis= [
     {
         id: "1",
         title: "构建一个maven项目",
-        desc: "构建一个maven项目."
+        desc: "构建一个maven项目。"
     }
 ]
 
@@ -23,12 +23,13 @@ const PipelineAdd = props => {
     const {pipelineStore}=props
     const {createPipeline,pipelineList,findAllPipelineStatus}=pipelineStore
 
-    const inputRef = useRef();
-    const [liStatus, setLiStatus] = useState(0)
+    const inputRef = useRef()
+    const [liStatus,setLiStatus] = useState(0)
+    const userId = getUser().userId
 
     //获取所有pipelinList，然后对pipelineName进行校验
     useEffect(()=>{
-        findAllPipelineStatus()
+        findAllPipelineStatus(userId)
     },[])
 
     useEffect(()=>{
@@ -43,7 +44,7 @@ const PipelineAdd = props => {
     const handSubmit = value => {
         const params={
             user:{
-                id:getUser().userId,
+                id:userId,
             },
             pipelineName:value.pipelineName,
             pipelineType:1,
@@ -95,10 +96,17 @@ const PipelineAdd = props => {
                             return (
                                 <li key={item.id}
                                     onClick={()=> liStatusData(index) }
-                                    className={ liStatus === index ? "new-type-choose-c new-type-active":"new-type-choose-c "}
+                                    className={ liStatus === index ? "choose-item choose-active":"choose-item"}
                                 >
-                                    <label>{item.title}</label>
-                                    <div>{item.desc}</div>
+                                    <div className="choose-item-icon">
+                                        <svg className="icon" aria-hidden="true">
+                                            <use xlinkHref="#icon-lishijishi"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <label>{item.title}</label>
+                                        <div>{item.desc}</div>
+                                    </div>
                                 </li>
                             )
                         })

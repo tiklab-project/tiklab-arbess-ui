@@ -3,7 +3,6 @@ import {Button,Input} from "antd";
 import {withRouter} from "react-router";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject, observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
 
 const { Search } = Input;
 

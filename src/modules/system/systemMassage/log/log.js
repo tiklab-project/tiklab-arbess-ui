@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import SystemBreadcrumb from "../../breadcrumb/systemBreadcrumb";
-import {inject, observer} from "mobx-react";
+import {inject,observer} from "mobx-react";
 import "./log.scss";
 
 // 系统日志

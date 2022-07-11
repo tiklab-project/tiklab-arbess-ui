@@ -5,7 +5,7 @@ import {getUser} from "doublekit-core-ui";
 
 const StructureRightExecute = props => {
 
-    const {status,execState,killInstance,rightExecuteData,runWay,freshen,setFreshen} = props
+    const {status,execState,killInstance,rightExecuteData,runWay,freshen,setFreshen,setPageCurrent} = props
     const [isActiveSlide,setIsActiveSlide] = useState(true)
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
@@ -47,6 +47,7 @@ const StructureRightExecute = props => {
         }
         killInstance(params).then(res=>{
             console.log("停止成功",res)
+            setPageCurrent(1)
             setFreshen(!freshen)
         }).catch(error=>{
             console.log(error)
@@ -64,6 +65,26 @@ const StructureRightExecute = props => {
             }else if(index > i){
                 return  "item-all"  //运行--等待运行
             }
+        }
+    }
+
+    // 关闭滚动条一直在下面
+    const onWheel = () =>{
+        setIsActiveSlide(false)
+    }
+
+    const logRunLog = () =>{
+        if(execState) {
+            const outLog=document.getElementById("outLog")
+            if(outLog && isActiveSlide){
+                outLog.scrollTop = outLog.scrollHeight
+            }
+            return  <div className="structure-content-bottom" onWheel={onWheel}>
+                        <div className="structure-content-bottom-title">输出</div>
+                        <div className="structure-content-bottom-outLog" id="outLog">
+                            {execState.runLog}
+                        </div>
+                    </div>
         }
     }
 
@@ -92,26 +113,6 @@ const StructureRightExecute = props => {
                 </Card>
             )
         })
-    }
-
-    // 关闭滚动条一直在下面
-    const onWheel = () =>{
-        setIsActiveSlide(false)
-    }
-
-    const logRunLog = () =>{
-        if(execState) {
-            const outLog=document.getElementById("outLog")
-            if(outLog && isActiveSlide){
-                outLog.scrollTop = outLog.scrollHeight
-            }
-            return  <div className="structure-content-bottom" onWheel={onWheel}>
-                        <div className="structure-content-bottom-title">输出</div>
-                        <div className="structure-content-bottom-outLog" id="outLog">
-                            {execState.runLog}
-                        </div>
-                    </div>
-        }
     }
 
     return(

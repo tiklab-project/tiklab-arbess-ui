@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import "./proof.scss";
+import "../components/proof.scss";
 import { Popconfirm, Table} from "antd";
 import {inject,observer} from "mobx-react";
 import AddProofButton from "../components/addProofButton";

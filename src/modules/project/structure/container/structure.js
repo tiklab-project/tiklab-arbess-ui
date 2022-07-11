@@ -1,26 +1,26 @@
-import React, { useEffect, useState} from "react";
-import { Spin } from "antd";
-import "./structure.scss";
+import React,{useEffect,useState} from "react";
+import {Spin} from "antd";
+import "../components/structure.scss";
 import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import StructureLeft from "../components/structureLeft";
+import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
 import StructureRight from "../components/structureRight";
 import StructureEmpty from "../components/structureEmpty";
-import { inject, observer } from "mobx-react";
-import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
+import {inject,observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
 
 // 项目构建
 const Structure = props => {
 
-    const {structureStore} = props
+    const {structureStore,structureListStore} = props
 
     const {findExecState,findStructureState,findAll,findPageHistory,findHistoryLog,deleteHistoryLog,
         killInstance,pipelineStartStructure,leftPageList,rightFlowData,modeData,setModeData,
-        index,setIndex,page,rightExecuteData,isData,findPipelineUser,pipelineUserList,
-        setIsData
+        index,setIndex,page,rightExecuteData,isData,findPipelineUser,pipelineUserList,setIsData
     } = structureStore
+    const {state,enforcer,mode,setPageCurrent} = structureListStore
 
-    const [execState,setExecState] = useState("")   // 左侧 -- 正在构建
+    const [execState,setExecState] = useState("")   //左侧 -- 正在构建
     const [freshen,setFreshen] = useState(false)  // 根据情况刷新页面
     const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
@@ -69,9 +69,9 @@ const Structure = props => {
                 pageSize: 10,
                 currentPage: 1
             },
-            state:0,
-            userId:null,
-            type:0
+            state:state,
+            userId:enforcer,
+            type:mode
         }
         findPageHistory(params).then(res=>{
             if(res.code === 0 ){
@@ -105,6 +105,7 @@ const Structure = props => {
         })
         return ()=> clearInterval(interval)
     }, [pipelineId,freshen])
+
     const stop = () => {
         setExecState("")
         setFreshen(!freshen)
@@ -139,7 +140,6 @@ const Structure = props => {
                         </svg>
         }
     }
-    
     
     const runImmediately = () => {
         const params = {
@@ -188,6 +188,7 @@ const Structure = props => {
                                         modeData={modeData}
                                         index={index}
                                         setIndex={setIndex}
+                                        setPageCurrent={setPageCurrent}
                                         deleteHistoryLog={deleteHistoryLog}
                                         killInstance={killInstance}
                                     />
@@ -201,4 +202,4 @@ const Structure = props => {
     )
 }
 
-export default inject("structureStore")(observer(Structure))
+export default inject("structureStore","structureListStore")(observer(Structure))

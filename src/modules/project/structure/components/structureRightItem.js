@@ -5,7 +5,7 @@ import ConfigName from "../../../config/common/component/configCommon/configName
 const StructureRightItem = props =>{
 
     const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,runWay,
-        freshen,setFreshen} = props
+        freshen,setFreshen,setPageCurrent} = props
 
     const state = item =>{
         switch(item.runState){
@@ -26,6 +26,7 @@ const StructureRightItem = props =>{
     const del = modeData =>{
         deleteHistoryLog(modeData &&modeData.historyId).then(()=>{
             setFreshen(!freshen)
+            setPageCurrent(1)
             if(index!==0){ setIndex(0) }
         }).catch(error=>{
             console.log(error)
