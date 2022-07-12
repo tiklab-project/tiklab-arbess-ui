@@ -1,7 +1,7 @@
-import React ,{useEffect} from "react"
-import {withRouter} from "react-router";
-import {inject, observer} from "mobx-react";
+import React,{useEffect} from "react";
 import "./searchResult.scss";
+import {withRouter} from "react-router";
+import {inject,observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
 
 const SearchResult = props => {
@@ -37,9 +37,9 @@ const SearchResult = props => {
                             searchPipelineList  && searchPipelineList.map((item,index)=>{
                                 return  <li key={item.pipelineId} >
                                             <span> {index+1}、</span>
-                                            <span className={"pipeline-search-link"} onClick={()=> goPipelineTask(item)}>
-                                                   {item.pipelineName}
-                                               </span>
+                                            <span className={"pipeline-search-link"} onClick={()=>goPipelineTask(item)}>
+                                                {item.pipelineName}
+                                            </span>
                                         </li>
                             })
                     }

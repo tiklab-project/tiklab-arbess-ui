@@ -1,12 +1,12 @@
-import React, {useState,useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import {Row,Col,Avatar,Dropdown,Input,Space,Menu} from "antd";
 import {withRouter} from "react-router-dom";
-import { getVersionInfo, getUser } from 'doublekit-core-ui';
+import {getVersionInfo,getUser} from 'doublekit-core-ui';
 import logo from "../../assets/images/logo.png";
 import portrait from "../../assets/images/portrait.jpg";
 import vipOne from "../../assets/images/vip-one.png";
 import vipTwo from "../../assets/images/vip-two.png";
-import {GlobalOutlined,LogoutOutlined} from "@ant-design/icons";
+import {GlobalOutlined} from "@ant-design/icons";
 
 const  {Search} = Input
 
@@ -16,7 +16,7 @@ const Head = props =>{
 
     let path = props.location.pathname
     const isEE = getVersionInfo().release;
-    const [currentLink, setCurrentLink] = useState(path)
+    const [currentLink,setCurrentLink] = useState(path)
     const eeText = isEE === 2 ? vipTwo : vipOne
 
     useEffect(()=>{

@@ -1,18 +1,18 @@
-import React, {useState, useEffect,useRef} from "react";
+import React,{useState,useEffect,useRef} from "react";
 import  "./formView.scss";
-import {Button, Form, Input, message} from "antd";
+import {Button,Form,Input,message} from "antd";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons";
+import {getUser} from "doublekit-core-ui";
+import moment from "../../../../../common/moment/moment";
 import ConfigAddNewStageModal from "../formView/configAddNewStageModal";
 import ConfigAddCodeModal from "../formView/configAddCodeModal";
 import ChangeConfigSortsDrawer from "../formView/changeConfigSortsDrawer";
 import ConfigAddNewStage from "../formView/configAddNewStage";
 import ConfigCode from "../formView/configCode";
-import {inject, observer} from "mobx-react";
-import {withRouter} from "react-router";
 import ConfigForm from "./configForm";
 import ConfigName from "./configName";
-import moment from "../../../../../common/moment/moment";
-import {getUser} from "doublekit-core-ui";
+import {inject,observer} from "mobx-react";
+import {withRouter} from "react-router";
 
 const FormView = props =>{
 
@@ -149,6 +149,7 @@ const FormView = props =>{
             }
         }
         updateConfigure(configureList).then(res=>{
+            setIsPrompt(false)
             if(jumpOrNot){
                 props.history.push("/index/task/config")
             }
@@ -157,7 +158,6 @@ const FormView = props =>{
             }else {
                 message.success({content: "配置成功", className:"message"})
             }
-            setIsPrompt(false)
         })
     }
 

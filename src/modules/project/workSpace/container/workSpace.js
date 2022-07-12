@@ -1,11 +1,11 @@
-import React, {useState, useEffect, Fragment} from "react"
-import {withRouter} from "react-router";
+import React,{useState,useEffect,Fragment} from "react";
 import "../components/workSpace.scss";
+import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
 import WorkSpaceDrawer from "../components/workSpaceDrawer";
-import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
+import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import {getUser} from "doublekit-core-ui";
 
 const WorkSpace = props =>{
@@ -43,7 +43,7 @@ const WorkSpace = props =>{
 
     return(
         <Fragment>
-            <ProjectBreadcrumb style={style}/>
+            <BreadcrumbContent style={style} type={"project"}/>
             <div className="workSpace">
                 <WorkSpaceNod
                     fileList={fileList}

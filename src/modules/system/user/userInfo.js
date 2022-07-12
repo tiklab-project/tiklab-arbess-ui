@@ -1,13 +1,13 @@
 import React from "react";
 import {getUser} from "doublekit-core-ui";
 import {Descriptions} from "antd";
-import SystemBreadcrumb from "../breadcrumb/systemBreadcrumb";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 
 // 用户基础信息
-const Base = props =>{
+const UserInfo = props =>{
     return(
         <div className="userCenter-base">
-            <SystemBreadcrumb firstItem={"用户管理"} secondItem={"基本信息"}/>
+            <BreadcrumbContent firstItem={"用户管理"} secondItem={"基本信息"} type={"system"}/>
             <div className="userCenter-base-content">
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="用户名">{getUser().name}</Descriptions.Item>
@@ -19,4 +19,4 @@ const Base = props =>{
     )
 }
 
-export default Base
+export default UserInfo

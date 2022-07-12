@@ -1,11 +1,10 @@
-import React, {Fragment, useEffect} from "react";
+import React, {useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
 import Proof from "../../proof/container/proof";
-import SystemBreadcrumb from "../breadcrumb/systemBreadcrumb";
 
 // 系统凭证
-const OverallProof = props =>{
+const SystemProof = props =>{
 
     const {proofStore} = props
     const {findPipelineProof,proofList,fresh} = proofStore
@@ -19,12 +18,7 @@ const OverallProof = props =>{
         findPipelineProof(param)
     },[fresh])
 
-    return(
-        <Fragment>
-            <SystemBreadcrumb firstItem={"凭证管理"}/>
-            <Proof proofList={proofList}/>
-        </Fragment>
-    )
+    return <Proof proofList={proofList} firstItem={"凭证管理"} type={"system"}/>
 }
 
-export default inject("proofStore")(observer(OverallProof))
+export default inject("proofStore")(observer(SystemProof))

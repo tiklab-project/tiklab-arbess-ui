@@ -1,10 +1,10 @@
-import React, {Fragment} from "react";
-import {message, Table, Tooltip} from "antd";
-import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
-import PipelineRun from "./pipelineRun";
+import React,{Fragment} from "react";
+import {message,Table,Tooltip} from "antd";
+import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
+import PipelineRun from "./pipelineRun";
 import "./pipelineTable.scss";
 
 const PipelineTable = props =>{
@@ -41,9 +41,9 @@ const PipelineTable = props =>{
 
     //去详情页面
     const goPipelineTask=(text,record)=>{
+        props.history.push("/index/task/work")
+        localStorage.setItem("pipelineName",text)
         localStorage.setItem("pipelineId",record.pipelineId)
-        localStorage.setItem("pipelineName",record.pipelineName)
-        props.history.push(`/index/task/work`)
     }
 
     const work = record =>{
@@ -103,9 +103,11 @@ const PipelineTable = props =>{
                                 </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建" placement="rightTop" className="all-icon">
-                                    <PlayCircleOutlined style = {{fontSize:25}}/>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref="#icon-dengdai1"/>
+                                    </svg>
                                 </Tooltip>
-                    default:
+                    case 20:
                         return  <Tooltip title="停止" placement="rightTop" className="all-icon">
                                     <ExclamationCircleOutlined style = {{fontSize:25}}/>
                                 </Tooltip>

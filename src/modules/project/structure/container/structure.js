@@ -1,13 +1,13 @@
 import React,{useEffect,useState} from "react";
-import {Spin} from "antd";
 import "../components/structure.scss";
+import {getUser} from "doublekit-core-ui";
+import {Spin} from "antd";
 import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import StructureLeft from "../components/structureLeft";
-import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
+import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import StructureRight from "../components/structureRight";
 import StructureEmpty from "../components/structureEmpty";
 import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
 
 // 项目构建
 const Structure = props => {
@@ -50,6 +50,7 @@ const Structure = props => {
     //         socket.close()
     //     }
     // }, [pipelineId,freshen])
+
     // const renderExec = response => {
     //     if(response.data){
     //         const data = JSON.parse(response.data)
@@ -87,21 +88,22 @@ const Structure = props => {
         findExecState(pipelineId).then(res=>{
             if(res.data === 1 ){
                 interval = setInterval(() => {
-                    findStructureState(pipelineId).then(res =>{
-                        if(res.data!==null){
+                    findStructureState(pipelineId).then(res=>{
+                        if(res.data === null){
+                            stop()
+                        } else {
                             setExecState(res.data)
-                            if(res.data.runStatus===1 || res.data.runStatus===30){
+                            if( res.data.runStatus===1 || res.data.runStatus===30){
                                 stop()
                             }
-                        }else{ stop() }
+                        }
                     })
                 }, 1000)
                 findAll(pipelineId)
-                findPage()
             }else if(res.data=== 0){
-                findPage()
                 setExecState("")
             }
+            findPage()
         })
         return ()=> clearInterval(interval)
     }, [pipelineId,freshen])
@@ -173,7 +175,7 @@ const Structure = props => {
                             pipelineUserList={pipelineUserList}
                         />
                         <div className="structure-content-right">
-                            <ProjectBreadcrumb/>
+                            <BreadcrumbContent type={"project"}/>
                             {
                                 execState === ""  && leftPageList && leftPageList.length === 0 ?
                                     <StructureEmpty/>

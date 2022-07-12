@@ -26,30 +26,29 @@ const Project=AsyncComponent(()=>import("./modules/project/project/container/pro
 const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))
 const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
 const ConfigDetails = AsyncComponent(()=>import("./modules/config/configDetails/configDetails"))
-const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/projectSet/projectSet"))
+const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
 const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/projectSetUser/projectSetUser"))
+const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
 const ProjectSetRole=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetRole"))
 const ProjectSetFeature=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetFeature"))
 
 /* 系统设置 */
-const System=AsyncComponent(()=>import("./modules/system/system/system"))
+const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-const UserBase=AsyncComponent(()=>import("./modules/system/user/base"))
+const UserInfo=AsyncComponent(()=>import("./modules/system/user/userInfo"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
-const OverallProof=AsyncComponent(()=>import("./modules/system/proof/overallProof"))
-const Info=AsyncComponent(()=>import("./modules/system/systemMassage/info/info"))
-const Log=AsyncComponent(()=>import("./modules/system/systemMassage/log/log"))
+const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
+const Info=AsyncComponent(()=>import("./modules/system/message/info/info"))
+const Log=AsyncComponent(()=>import("./modules/system/message/log/log"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
-
 
 const routers=[
     {
@@ -63,7 +62,7 @@ const routers=[
             {
                 path: "/index",
                 exact:true,
-                render:()=>  <Redirect to={"/index/home"}/>,
+                render:()=><Redirect to={"/index/home"}/>,
             },
             {
                 path: "/index/home",
@@ -91,7 +90,7 @@ const routers=[
                 exact:true,
             },
             {
-                path:"/index/config/:pipelineName",
+                path:"/index/config/:newConfig",
                 component:PipelineConfig,
                 exact:true,
             },
@@ -112,7 +111,7 @@ const routers=[
                     {
                         path: "/index/task",
                         exact:true,
-                        render:()=>  <Redirect to={"/index/task/work"}/>,
+                        render:()=><Redirect to={"/index/task/work"}/>,
                     },
                     {
                         path:"/index/task/work",
@@ -133,7 +132,7 @@ const routers=[
                             {
                                 path: "/index/task/assembly",
                                 exact:true,
-                                render:()=>  <Redirect to={"/index/task/assembly/user"}/>,
+                                render:()=><Redirect to={"/index/task/assembly/user"}/>,
                             },
                             {
                                 path:"/index/task/assembly/proof",
@@ -166,11 +165,11 @@ const routers=[
                     {
                         path: "/index/system",
                         exact:true,
-                        render:()=> <Redirect to={"/index/system/base"}/>,
+                        render:()=><Redirect to={"/index/system/base"}/>,
                     },
                     {
                         path: "/index/system/base",
-                        component: UserBase,
+                        component: UserInfo,
                     },
                     {
                         path: "/index/system/directory",
@@ -198,7 +197,7 @@ const routers=[
                     },
                     {
                         path: "/index/system/proof",
-                        component: OverallProof,
+                        component: SystemProof,
                     },
                     // {
                     //     path:"/index/system/log",
@@ -216,7 +215,7 @@ const routers=[
         path:"/",
         component: Index,
         exact: true,
-        render:()=>  <Redirect to="/index/home"/>,
+        render:()=><Redirect to="/index/home"/>,
     }
 ]
 

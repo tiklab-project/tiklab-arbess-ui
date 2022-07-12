@@ -1,43 +1,52 @@
 import React,{Fragment,useState,useEffect} from "react";
 import "../common/component/configCommon/config.scss";
-import {Form} from "antd";
 import {withRouter} from "react-router";
-import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
-import FormView from "../common/component/configCommon/formView";
-import ConfigChangeView from "../common/component/configCommon/configChangeView";
 import {getUrlParam} from "../common/component/configCommon/getUrlParam";
-import {inject, observer} from "mobx-react";
+import {inject,observer} from "mobx-react";
+import ConfigTop from "../common/component/configCommon/configTop";
+import PromptContent from "../../../common/prompt/prompt";
+import FormView from "../common/component/configCommon/formView";
+import {Form} from "antd";
 import {getUser} from "doublekit-core-ui";
-import {useSelector, RemoteUmdComponent} from "doublekit-plugin-ui";
+import {useSelector,RemoteUmdComponent} from "doublekit-plugin-ui";
 
 const Config = props =>{
 
     const {configStore,giteeStore,structureStore,configDataStore,githubStore,match} = props
 
-    const {updateConfigure} = configStore
+    const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
     const {pipelineStartStructure} = structureStore
-
-    const {setIsPrompt,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType
-    } = configDataStore
+    const {isPrompt,setIsPrompt,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock,setMavenShellBlock,setCodeType,setData} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
     const [view,setView] = useState(1)
     const [isBtn,setIsBtn] = useState(false)
-    const jumpOrNot = match.params.pipelineName
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
     const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
+    const jumpOrNot = match.params.newConfig
 
     useEffect(()=>{
         return () =>{
             localStorage.removeItem("gitProofId")
             localStorage.removeItem("deployProofId")
         }
+    },[])
+
+    useEffect(()=>{
+        findAllConfigure(pipelineId).then(()=>{
+            setCodeData("")
+            setData([])
+            setFormInitialValues({})
+            setUnitShellBlock("")
+            setMavenShellBlock("")
+            setLinuxShellBlock("")
+        })
     },[])
 
     useEffect(()=>{
@@ -97,7 +106,7 @@ const Config = props =>{
     },[formInitialValues])
 
     // 按需清空表单的值
-    const del = (i,type) => {
+    const del = (i) => {
         switch (i) {
             case 11:
                 delDetail("test")
@@ -113,9 +122,7 @@ const Config = props =>{
             default:delDetail("git")
         }
         setFormInitialValues({...formInitialValues})
-        if(!type){
-            setIsPrompt(true)
-        }
+        setIsPrompt(true)
     }
 
     // 统一form表单里面需要删除的值
@@ -148,49 +155,61 @@ const Config = props =>{
         }
     }
 
+    const confirmLeave = pathname =>{
+        if(pathname.indexOf("/index/config") !== 0 ){
+            pathname && setTimeout(()=>{
+                props.history.push(pathname)
+            })
+        }
+        setIsPrompt(false)
+    }
+
     return (
         <Fragment>
-            <div className="config-top">
-                <div className="config-top-content">
-                    <ProjectBreadcrumb config={"config"}/>
-                    <ConfigChangeView
-                        userId={userId}
-                        view={view}
-                        setView={setView}
-                        setIsPrompt={setIsPrompt}
-                        pipelineId={pipelineId}
-                        pipelineStartStructure={pipelineStartStructure}
-                        isBtn={isBtn}
-                    />
-                </div>
+            <div className="config-top config-top-width">
+                <ConfigTop
+                    userId={userId}
+                    view={view}
+                    setView={setView}
+                    setIsPrompt={setIsPrompt}
+                    pipelineId={pipelineId}
+                    pipelineStartStructure={pipelineStartStructure}
+                    isBtn={isBtn}
+                />
             </div>
-            {
-                view === 1 ?
-                    <FormView
-                        del={del}
-                        form={form}
-                        jumpOrNot={jumpOrNot}
-                        updateConfigure={updateConfigure}
-                    />
-                    :
-                    <Fragment>
-                        {
-                            isBtn ?
-                                <RemoteUmdComponent
-                                    point={"gui"}
-                                    pluginStore={pluginStore}
-                                    extraProps={{
-                                        configDataStore,
-                                        configStore,
-                                        form,
-                                        del
-                                    }}
-                                />
-                                : null
-                        }
-                    </Fragment>
-
-            }
+            <Fragment>
+                {
+                    view === 1 ?
+                        <FormView
+                            del={del}
+                            form={form}
+                            jumpOrNot={jumpOrNot}
+                            updateConfigure={updateConfigure}
+                        />
+                        :
+                        <Fragment>
+                            {
+                                isBtn ?
+                                    <RemoteUmdComponent
+                                        point={"gui"}
+                                        pluginStore={pluginStore}
+                                        extraProps={{
+                                            configDataStore,
+                                            configStore,
+                                            jumpOrNot,
+                                            form,
+                                            del
+                                        }}
+                                    />
+                                    : null
+                            }
+                        </Fragment>
+                }
+            </Fragment>
+            <PromptContent
+                isPrompt={isPrompt}
+                confirmLeave={confirmLeave}
+            />
         </Fragment>
     )
 }

@@ -1,17 +1,18 @@
-import React, { useEffect, useState} from "react";
-import { Modal} from "antd";
-import {renderRoutes} from "react-router-config";
+import React,{useEffect,useState} from "react";
 import ProjectAside from "../components/projectAside";
-import { inject,observer } from "mobx-react";
-import {Prompt} from "react-router-dom";
-import {getUser} from "doublekit-core-ui";
+import PromptContent from "../../../../common/prompt/prompt";
+import {renderRoutes} from "react-router-config";
+import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
+import {getUser} from "doublekit-core-ui";
 
 const Project= (props)=>{
 
     const {route,pipelineStore,configDataStore}=props
+
     const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = pipelineStore
     const {isPrompt,setIsPrompt} = configDataStore
+
     const [visible,setVisible] = useState(false)
     const pipelineName = localStorage.getItem("pipelineName")
     const pipelineId = localStorage.getItem("pipelineId")
@@ -70,21 +71,10 @@ const Project= (props)=>{
             >
                 { renderRoutes(route.routes) }
             </div>
-            <Prompt
-                when={isPrompt}
-                message={location =>{
-                    if(!isPrompt){
-                        return true
-                    }
-                    Modal.confirm({
-                        title:"有编辑未保存，确定离开吗",
-                        okText:"离开",
-                        cancelText:"取消",
-                        onOk:()=>confirmLeave(location.pathname),
-                        onCancel:()=>confirmStay()
-                    })
-                    return false
-                }}
+            <PromptContent
+                isPrompt={isPrompt}
+                confirmLeave={confirmLeave}
+                confirmStay={confirmStay}
             />
         </div>
     )

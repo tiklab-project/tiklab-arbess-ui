@@ -18,7 +18,6 @@ export function FindAllPipelineStatus(data) {
     })
 }
 
-
 //模糊搜索流水线
 export function FindOneName(data){
     return serviceLoc.request({

@@ -1,13 +1,13 @@
 import React,{useEffect} from "react";
-import SystemBreadcrumb from "../../breadcrumb/systemBreadcrumb";
 import {inject,observer} from "mobx-react";
 import {Descriptions} from "antd";
+import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 
 // 系统信息
 const Info = props =>{
 
-    const {systemMassageStore} = props
-    const {getSystemMessage,infoList} = systemMassageStore
+    const {messageStore} = props
+    const {getSystemMessage,infoList} = messageStore
 
     useEffect(()=>{
         getSystemMessage()
@@ -15,7 +15,7 @@ const Info = props =>{
 
     return(
         <div className="systemMore-info">
-            <SystemBreadcrumb firstItem={"系统信息"}/>
+            <BreadcrumbContent firstItem={"系统信息"} type={"system"}/>
             <div  className="systemMore-info-content">
                 <Descriptions column={1} bordered>
                     <Descriptions.Item  label="系统版本">{infoList && infoList.osName}</Descriptions.Item>
@@ -30,4 +30,4 @@ const Info = props =>{
     )
 }
 
-export default inject("systemMassageStore")(observer(Info))
+export default inject("messageStore")(observer(Info))

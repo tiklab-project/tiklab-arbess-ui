@@ -1,11 +1,3 @@
-/*
- * @Descripttion: 
- * @version: 1.0.0
- * @Author: 袁婕轩
- * @Date: 2021-04-19 15:58:49
- * @LastEditors: 袁婕轩
- * @LastEditTime: 2022-01-20 13:23:49
- */
 const api =  "/";
 const base_url = JSON.stringify(api);
 

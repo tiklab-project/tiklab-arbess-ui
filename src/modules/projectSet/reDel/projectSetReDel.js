@@ -1,34 +1,41 @@
-import React, {Fragment} from "react";
-import {Button, Form, Input, Popconfirm} from "antd";
-import {inject, observer} from "mobx-react";
-import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
+import React,{Fragment,useState} from "react";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import {Button,Form,Input,message,Popconfirm,Spin} from "antd";
+import {LoadingOutlined} from "@ant-design/icons";
 import {getUser} from "doublekit-core-ui";
+import {inject,observer} from "mobx-react";
 
 const ProjectSetReDel = props =>{
 
     const {pipelineStore} = props
     const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
-    const [form]=Form.useForm()
-    const userId=getUser().userId
-    const pipelineId=localStorage.getItem("pipelineId")
 
-    const onConfirm=()=>{
+    const [form]=Form.useForm()
+    const [processVisible,setProcessVisible] = useState(false)
+    const userId = getUser().userId
+    const pipelineId = localStorage.getItem("pipelineId")
+
+    const del = () =>{
+        setProcessVisible(true)
         const params = {
             userId:userId,
             pipelineId:pipelineId
         }
-        deletePipeline(params).then(()=>{
+        deletePipeline(params).then(res=>{
+            if(res.code === 0 && res.data === 1){
+                message.info({content: "删除成功", className: "message"})
+            }else {
+                message.error({content:"删除失败", className:"message"})
+            }
             props.history.push("/index/pipeline")
         }).catch(error=>{
             console.log(error)
         })
     }
 
-    const onFinish=(values)=>{
+    const re = values =>{
         const params={
-            user:{
-                id:userId,
-            },
+            user:{id:userId},
             pipelineId:pipelineId,
             pipelineName:values.pipelineName
         }
@@ -44,9 +51,9 @@ const ProjectSetReDel = props =>{
 
     return(
        <Fragment>
-           <ProjectBreadcrumb/>
+           <BreadcrumbContent type={"project"}/>
            <div className="pipelineSys-reDel" style={{padding:20}}>
-               <Form onFinish={onFinish} form={form} layout="inline" autoComplete = "off">
+               <Form onFinish={re} form={form} layout="inline" autoComplete = "off">
                    <Form.Item
                        label="重命名"
                        name="pipelineName"
@@ -89,15 +96,18 @@ const ProjectSetReDel = props =>{
                    <Popconfirm
                        style={{marginTop:100}}
                        title="你确定删除吗"
-                       onConfirm={onConfirm}
+                       onConfirm={del}
                        okText="确定"
                        cancelText="取消"
                    >
-                       <Button type="primary" >
-                           删除流水线
-                       </Button>
+                       <Button type="primary" >删除流水线</Button>
                    </Popconfirm>
-
+                   &nbsp;
+                   {
+                       processVisible ?
+                           <Spin indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />} />
+                           :null
+                   }
                </div>
            </div>
        </Fragment>

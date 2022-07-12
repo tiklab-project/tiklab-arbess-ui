@@ -1,8 +1,7 @@
-import React, {Fragment, useEffect} from "react";
+import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
-import Proof from "../../proof/container/proof";
 import {getUser} from "doublekit-core-ui";
+import Proof from "../../proof/container/proof";
 
 // 项目凭证
 const ProjectSetProof = props =>{
@@ -14,18 +13,13 @@ const ProjectSetProof = props =>{
     useEffect(()=>{
         const params ={
             pipelineId:pipelineId,
+            userId:getUser().userId,
             type:0,
-            userId:getUser().userId
         }
         findPipelineProof(params)
     },[fresh,pipelineId])
 
-    return(
-       <Fragment>
-           <ProjectBreadcrumb />
-           <Proof proofList={proofList}/>
-       </Fragment>
-    )
+    return <Proof proofList={proofList} type={"project"}/>
 }
 
 export default inject("proofStore")(observer(ProjectSetProof))

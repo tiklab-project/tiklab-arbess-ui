@@ -9,6 +9,9 @@
         padding: 10px 0 4px 16px;
         font-size: 16px;
         min-width: 500px;
+        &-width{
+            width:100% !important;
+        }
         &-content{
             display: flex;
             flex-direction: row;

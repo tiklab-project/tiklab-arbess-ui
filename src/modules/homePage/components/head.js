@@ -26,7 +26,7 @@ const Head = props =>{
             id:5,
             title: "凭证管理",
             to:"/index/system/proof",
-        }
+        },
     ]
 
     return(

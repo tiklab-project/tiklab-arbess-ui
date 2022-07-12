@@ -1,15 +1,13 @@
-import React, {useState, useEffect, Fragment} from "react";
-import {useSelector, RemoteUmdComponent} from "doublekit-plugin-ui";
+import React,{useState,useEffect,Fragment} from "react";
 import "../common/component/configCommon/config.scss";
-import FormView from "../common/component/configCommon/formView";
-import GuiView from "../common/component/configCommon/guiView";
-import ConfigChangeView from "../common/component/configCommon/configChangeView";
-import ProjectBreadcrumb from "../../project/breadcrumb/projectBreadcrumb";
 import {Form} from "antd";
-import {withRouter} from "react-router";
-import {inject, observer} from "mobx-react";
-import {getUrlParam} from "../common/component/configCommon/getUrlParam";
 import {getUser} from "doublekit-core-ui";
+import {useSelector,RemoteUmdComponent} from "doublekit-plugin-ui";
+import FormView from "../common/component/configCommon/formView";
+import ConfigTop from "../common/component/configCommon/configTop";
+import {withRouter} from "react-router";
+import {inject,observer} from "mobx-react";
+import {getUrlParam} from "../common/component/configCommon/getUrlParam";
 
 const ConfigDetails = props =>{
 
@@ -268,49 +266,43 @@ const ConfigDetails = props =>{
     return (
         <Fragment>
             <div className="config-top">
-               <div className="config-top-content">
-                   <ProjectBreadcrumb config={"config"}/>
-                   <ConfigChangeView
-                       userId={userId}
-                       view={view}
-                       setView={setView}
-                       setIsPrompt={setIsPrompt}
-                       pipelineId={pipelineId}
-                       pipelineStartStructure={pipelineStartStructure}
-                       isBtn={isBtn}
-                   />
-               </div>
+                <ConfigTop
+                    userId={userId}
+                    view={view}
+                    setView={setView}
+                    setIsPrompt={setIsPrompt}
+                    pipelineId={pipelineId}
+                    pipelineStartStructure={pipelineStartStructure}
+                    isBtn={isBtn}
+                />
             </div>
-            {
-                view === 1 ?
-                    <FormView
-                        del={del}
-                        form={form}
-                        updateConfigure={updateConfigure}
-                    />
-                    :
-                    <Fragment>
-                        {/*<GuiView*/}
-                        {/*    del={del}*/}
-                        {/*    form={form}*/}
-                        {/*    updateConfigure={updateConfigure}*/}
-                        {/*/>*/}
-                        {
-                            isBtn ?
-                                <RemoteUmdComponent
-                                    point={"gui"}
-                                    pluginStore={pluginStore}
-                                    extraProps={{
-                                        configDataStore,
-                                        configStore,
-                                        form,
-                                        del
-                                    }}
-                                />
-                                : null
-                        }
-                    </Fragment>
-            }
+            <Fragment>
+                {
+                    view === 1 ?
+                        <FormView
+                            del={del}
+                            form={form}
+                            updateConfigure={updateConfigure}
+                        />
+                        :
+                        <Fragment>
+                            {
+                                isBtn ?
+                                    <RemoteUmdComponent
+                                        point={"gui"}
+                                        pluginStore={pluginStore}
+                                        extraProps={{
+                                            configDataStore,
+                                            configStore,
+                                            form,
+                                            del
+                                        }}
+                                    />
+                                    : null
+                            }
+                        </Fragment>
+                }
+            </Fragment>
         </Fragment>
     )
 }

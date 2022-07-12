@@ -1,5 +1,5 @@
 import React from "react";
-import { DomainUserList } from "doublekit-user-ui";
+import {DomainUserList} from "doublekit-user-ui";
 
 // 项目成员
 const ProjectSetUser = props =>{

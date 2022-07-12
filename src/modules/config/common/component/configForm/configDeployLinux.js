@@ -1,10 +1,10 @@
-import React, {Fragment} from "react";
-import { Form, Input, Row} from "antd";
-import {inject, observer} from "mobx-react";
+import React,{Fragment} from "react";
+import {Form,Input,Row} from "antd";
+import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
+import FindAllProof from "../../../../proof/components/findAllProof";
 import AddProofButton from "../../../../proof/components/addProofButton";
 import FormTest from "./formTest";
-import FindAllProof from "../../../../proof/components/findAllProof";
 
 const ConfigDeployLinux = props =>{
   
@@ -59,6 +59,7 @@ const ConfigDeployLinux = props =>{
             <Row>
                 <FindAllProof type={31}/>
                 <AddProofButton type={5}/>
+                <FormTest />
             </Row>
             <Form.Item
                 name="deployAddress"
@@ -74,8 +75,6 @@ const ConfigDeployLinux = props =>{
                     setIsPrompt={setIsPrompt}
                 />
             </Form.Item>
-
-            <FormTest />
         </Fragment>
     )
 }

@@ -5,7 +5,7 @@ export class StructureListStore{
     @observable state = 0  //状态
     @observable enforcer = null //执行人
     @observable mode = 0  //执行方式
-    @observable pageCurrent = 1 // 筛选时，设置当前页数
+    @observable pageCurrent = 1 // 筛选时，设置当前页数初始化
 
     @action
     setState = value =>{

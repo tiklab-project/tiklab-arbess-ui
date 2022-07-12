@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, message} from "antd";
+import {Button,message} from "antd";
 import {inject,observer} from "mobx-react";
 
 const FormTest = props =>{
@@ -43,7 +43,7 @@ const FormTest = props =>{
         }
     }
 
-    return  <div className="config-details-gitTest">
+    return  <div className="config-details-gitTest config-details-link">
                 <Button onClick={()=>test()}>连接测试</Button>
             </div>
 }

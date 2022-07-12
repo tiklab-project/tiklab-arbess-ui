@@ -25,7 +25,7 @@ export class StructureStore {
         pageSize: "10",
         total: "1"
     }
-    @observable isData = false  // 构建任意情况是否有数据
+    @observable isData = false  // 构建情况是否有数据
 
     @action
     setModeData = value =>{
@@ -137,7 +137,6 @@ export class StructureStore {
                 reject()
             })
         })
-    
     }
 
     //历史详情日志

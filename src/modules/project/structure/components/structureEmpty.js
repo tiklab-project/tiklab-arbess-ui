@@ -1,13 +1,13 @@
 import React from "react";
-import ProjectBreadcrumb from "../../breadcrumb/projectBreadcrumb";
-import empty from "../../../../assets/images/empty.jpg";
 import {Button} from "antd";
+import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import empty from "../../../../assets/images/empty.jpg";
 
 const StructureEmpty = props =>{
     const {runImmediately} = props
     return(
         <div className="structure-content-empty">
-            { runImmediately ? <ProjectBreadcrumb /> : null }
+            { runImmediately ? <BreadcrumbContent type={"project"}/> : null }
             <div className="empty null">
                 <img src={empty} alt="logo" />
                 {

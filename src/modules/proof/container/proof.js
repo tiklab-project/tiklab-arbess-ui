@@ -1,13 +1,14 @@
-import React,{useState} from "react";
+import React, {Fragment, useState} from "react";
 import "../components/proof.scss";
-import { Popconfirm, Table} from "antd";
-import {inject,observer} from "mobx-react";
-import AddProofButton from "../components/addProofButton";
 import UpdateProof from "../components/updateProof";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import AddProofButton from "../components/addProofButton";
+import {Popconfirm,Table} from "antd";
+import {inject,observer} from "mobx-react";
 
 const Proof = props =>{
 
-    const {proofList,proofStore} = props
+    const {proofList,proofStore,firstItem,type} = props
     const {updateProof,deleteProof,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState("")
@@ -103,29 +104,32 @@ const Proof = props =>{
     const style = "primary"
 
     return(
-        <div className="proof">
-            <div className="proof-content">
-                <div className="proof-content-btn">
-                    <AddProofButton style={style}/>
+        <Fragment>
+            <BreadcrumbContent firstItem={firstItem} type={type}/>
+            <div className="proof">
+                <div className="proof-content">
+                    <div className="proof-content-btn">
+                        <AddProofButton style={style}/>
+                    </div>
+                    <Table
+                        bordered
+                        rowKey={record => record.proofId}
+                        columns={columns}
+                        dataSource={proofList}
+                        pagination={{ pageSize: 12, hideOnSinglePage:true}}
+                    />
                 </div>
-                <Table
-                    bordered
-                    rowKey={record => record.proofId}
-                    columns={columns}
-                    dataSource={proofList}
-                    pagination={{ pageSize: 12, hideOnSinglePage:true}}
+                <UpdateProof
+                    visible={visible}
+                    setVisible={setVisible}
+                    formValue={formValue}
+                    updateProof={updateProof}
+                    setFresh={setFresh}
+                    fresh={fresh}
+                    displayPart={displayPart}
                 />
             </div>
-            <UpdateProof
-                visible={visible}
-                setVisible={setVisible}
-                formValue={formValue}
-                updateProof={updateProof}
-                setFresh={setFresh}
-                fresh={fresh}
-                displayPart={displayPart}
-            />
-        </div>
+        </Fragment>
     )
 }
 

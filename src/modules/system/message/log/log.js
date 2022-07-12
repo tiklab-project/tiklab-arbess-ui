@@ -1,13 +1,13 @@
 import React,{useEffect} from "react";
-import SystemBreadcrumb from "../../breadcrumb/systemBreadcrumb";
-import {inject,observer} from "mobx-react";
 import "./log.scss";
+import {inject,observer} from "mobx-react";
+import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 
 // 系统日志
 const Log = props =>{
 
-    const {systemMassageStore} = props
-    const {getSystemLog,logList} = systemMassageStore
+    const {messageStore} = props
+    const {getSystemLog,logList} = messageStore
 
     useEffect(()=>{
         getSystemLog()
@@ -22,7 +22,7 @@ const Log = props =>{
     return(
         <div className="log">
             <div className="log-head">
-                <SystemBreadcrumb firstItem={"系统日志"}/>
+                <BreadcrumbContent firstItem={"系统日志"} type={"system"}/>
             </div>
             <div className="log-content">
                 { renderLog(logList) }
@@ -31,4 +31,4 @@ const Log = props =>{
     )
 }
 
-export default inject("systemMassageStore")(observer(Log))
+export default inject("messageStore")(observer(Log))

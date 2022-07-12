@@ -41,8 +41,6 @@ const AddProofButton = props =>{
             />
         </Fragment>
     )
-
 }
-
 
 export default inject("proofStore")(observer(AddProofButton))

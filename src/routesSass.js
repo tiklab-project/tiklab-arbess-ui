@@ -2,7 +2,7 @@ import React from "react";
 import AsyncComponent from "./common/lazy/SyncComponent";
 import {Redirect} from "react-router-dom";
 
-import { Logout } from "doublekit-eam-ui";
+import {Logout} from "doublekit-eam-ui";
 import {FeatureList,RoleList,ProjectFeatureList,ProjectRoleList} from "doublekit-privilege-ui";
 
 const Index=AsyncComponent(()=>import("./modules/home/portal"))
@@ -28,26 +28,26 @@ const Project=AsyncComponent(()=>import("./modules/project/project/container/pro
 const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))
 const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
 const ConfigDetails = AsyncComponent(()=>import("./modules/config/configDetails/configDetails"))
-const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/projectSet/projectSet"))
+const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
 const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/projectSetUser/projectSetUser"))
+const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
 const ProjectSetRole=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetRole"))
 const ProjectSetFeature=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetFeature"))
 
 /* 系统设置 */
-const System=AsyncComponent(()=>import("./modules/system/system/system"))
+const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-const UserBase=AsyncComponent(()=>import("./modules/system/user/base"))
+const UserInfo=AsyncComponent(()=>import("./modules/system/user/userInfo"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
-const OverallProof=AsyncComponent(()=>import("./modules/system/proof/overallProof"))
-const Info=AsyncComponent(()=>import("./modules/system/systemMassage/info/info"))
+const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
+const Info=AsyncComponent(()=>import("./modules/system/message/info/info"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 
@@ -170,7 +170,7 @@ const routers=[
                     },
                     {
                         path: "/index/system/base",
-                        component: UserBase,
+                        component: UserInfo,
                     },
                     {
                         path: "/index/system/directory",
@@ -198,7 +198,7 @@ const routers=[
                     },
                     {
                         path: "/index/system/proof",
-                        component: OverallProof,
+                        component: SystemProof,
                     },
                     {
                         path:"/index/system/info",

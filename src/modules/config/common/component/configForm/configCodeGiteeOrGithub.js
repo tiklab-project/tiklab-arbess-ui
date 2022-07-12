@@ -1,15 +1,16 @@
-import React, {Fragment, useState,useEffect} from "react";
+import React,{Fragment,useState,useEffect} from "react";
 import {Button, Form, message, Row, Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
-import ConfigCodeGiteeOrGithubModal from "./configCodeGiteeOrGithubModal";
 import FindAllProof from "../../../../proof/components/findAllProof";
-import {inject, observer} from "mobx-react";
+import ConfigCodeGiteeOrGithubModal from "./configCodeGiteeOrGithubModal";
+import {inject,observer} from "mobx-react";
 
 const {Option} =Select
 
 const ConfigCodeGiteeOrGithub = props =>{
 
     const {githubStore,configDataStore,giteeStore} = props
+
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
     const {codeData,formInitialValues,codeType} = configDataStore
