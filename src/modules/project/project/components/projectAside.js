@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
-import {Dropdown} from "antd";
 import ProjectAsideOpt from "./projectAsideOpt";
 
 const ProjectAside = props =>{
 
-    const {pipelineList,visible,setVisible,isPrompt,setPipeline} = props
-
-    const [nav,setNav] = useState("")
+    const {visible,setVisible,isPrompt} = props
     let path = props.location.pathname
+    const [nav,setNav] = useState("")
 
     useEffect(()=>{
         if (path.indexOf("/index/task/assembly") === 0) {
@@ -72,13 +70,10 @@ const ProjectAside = props =>{
             <ul  className="content">
                 <ProjectAsideOpt
                     {...props}
-                    setPipeline={setPipeline}
-                    pipelineList={pipelineList}
+                    isPrompt={isPrompt}
                     visible={visible}
                     setVisible={setVisible}
-                    isPrompt={isPrompt}
                 />
-
                 { renderTaskRouter(taskRouters) }
             </ul>
         </div>

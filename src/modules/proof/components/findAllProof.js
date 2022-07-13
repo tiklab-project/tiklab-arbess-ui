@@ -1,6 +1,6 @@
 import React from "react";
 import {inject,observer} from "mobx-react";
-import {Form, Select} from "antd";
+import {Form,Select} from "antd";
 import {getUser} from "doublekit-core-ui";
 const {Option} = Select
 

@@ -1,8 +1,8 @@
-import React, {useEffect,useState} from "react";
+import React,{useEffect,useState} from "react";
 import {withRouter} from "react-router";
-import {inject, observer} from "mobx-react";
-import PipelineTable from "../../pipelineTable/pipelineTable";
+import {inject,observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
+import PipelineTable from "../../pipelineTable/pipelineTable";
 
 const PipelineTabs = props =>{
 
@@ -10,6 +10,7 @@ const PipelineTabs = props =>{
 
     const {findAllPipelineStatus,pipelineList}=pipelineStore
     const {findAllFollow,followList} = pipelineCollectStore
+
     const [fresh,setFresh] = useState(false)
     const [type,setType] = useState(1)
     const userId = getUser().userId

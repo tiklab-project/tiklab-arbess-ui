@@ -58,12 +58,9 @@ const Project= (props)=>{
         <div className="project">
             <ProjectAside
                 {...props}
-                pipelineList={pipelineList}
+                isPrompt={isPrompt}
                 visible={visible}
                 setVisible={setVisible}
-                isPrompt={isPrompt}
-                setPipeline={setPipeline}
-                setIsPrompt={setIsPrompt}
             />
             <div className="project-content"
                  onClick={()=>setVisible(false)}

@@ -1,8 +1,8 @@
-import React, {Fragment,useState,useEffect} from "react";
-import {Button} from "antd";
+import React,{Fragment,useState,useEffect} from "react";
 import "./addProofModal";
 import AddProofModal from "./addProofModal";
-import {inject, observer} from "mobx-react";
+import {inject,observer} from "mobx-react";
+import {Button} from "antd";
 import {getUser} from "doublekit-core-ui";
 
 const AddProofButton = props =>{

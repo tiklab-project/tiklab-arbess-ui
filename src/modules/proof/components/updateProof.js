@@ -4,6 +4,7 @@ import {Form,Input,Modal,Select} from "antd";
 const {Option} = Select
 
 const UpdateProof = props =>{
+
     const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart} = props
     const [form] = Form.useForm()
 

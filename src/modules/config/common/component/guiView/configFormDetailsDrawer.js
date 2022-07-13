@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Drawer} from "antd";
+import {Button,Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
 import ConfigName from "../configCommon/configName";
 import ConfigForm from "../configCommon/configForm";

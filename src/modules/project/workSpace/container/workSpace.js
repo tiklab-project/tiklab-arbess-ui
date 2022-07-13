@@ -11,30 +11,28 @@ import {getUser} from "doublekit-core-ui";
 const WorkSpace = props =>{
 
     const {workSpaceStore} = props
-    const {getSubmitMassage,fileTree,readFile,recordList} = workSpaceStore
+    const {getSubmitMassage,fileTree,readFile,recordList,fileList,setFileList} = workSpaceStore
 
-    const [fileList,setFileList] = useState([])
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
     const [detailsDrawer,setDetailsDrawer] = useState(false)
     const [drawerContent,setDrawerContent] = useState("")
     const pipelineId = localStorage.getItem("pipelineId")
+    const userId = getUser().userId
 
+    // 近期提交记录
     useEffect(()=>{
         getSubmitMassage(pipelineId)
         setCatalogue([])
     },[pipelineId])
 
+    // 节点空间
     useEffect(()=>{
         const params = {
             pipelineId:pipelineId,
-            userId:getUser().userId
+            userId:userId
         }
-        fileTree(params).then(res=>{
-            setFileList(res.data)
-        }).catch(error=>{
-            console.log(error)
-        })
+        fileTree(params)
     },[fresh,pipelineId])
 
     const style = {

@@ -66,6 +66,9 @@
                     font-weight: 600;
                 }
                 &-active{
+                    .ant-list-sm,.ant-list-item{
+                        padding: 2px;
+                    }
                     &-group{
                         &-desc{
                             cursor: pointer;

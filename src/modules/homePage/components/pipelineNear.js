@@ -1,10 +1,11 @@
-import React from "react";
+import React, {Fragment} from "react";
+import {List} from "antd";
 
 const PipelineNear = props =>{
 
     const {pipelineNearList} = props
 
-    const click = item => {
+    const goPipeline = item => {
         localStorage.setItem("pipelineName",item.pipelineName)
         localStorage.setItem("pipelineId",item.pipelineId)
         props.history.push("/index/task")
@@ -14,28 +15,28 @@ const PipelineNear = props =>{
         <div className="homePage-content-pipelineNear">
             <div className="pipelineNear-title">最近打开的流水线</div>
             <div className="pipelineNear-active">
-                {
-                    pipelineNearList && pipelineNearList.length === 0 ?
-                        <div className="pipelineNear-active-null">
-                            <svg className="icon" aria-hidden="true" >
-                                <use xlinkHref="#icon-meiyouxiangguan"/>
-                            </svg>
-                            <div>没有数据</div>
+                <List
+                    size="small"
+                    locale={{emptyText:
+                            <Fragment>
+                                <svg className="icon" aria-hidden="true" >
+                                    <use xlinkHref="#icon-meiyouxiangguan"/>
+                                </svg>
+                                <div>没有数据</div>
+                            </Fragment>
+                    }}
+                    dataSource={pipelineNearList}
+                    renderItem={(item,index)=><List.Item>
+                        <div key={item.pipelineId} className="pipelineNear-active-group">
+                            <div className="pipelineNear-active-group-desc">
+                                <span>{index+1}、</span>
+                                <span  onClick={()=>goPipeline(item)} className="name">
+                                    {item.pipelineName}
+                                </span>
+                            </div>
                         </div>
-                        :
-                        pipelineNearList && pipelineNearList.map((item,index)=>{
-                            return(
-                                <div key={item.pipelineId} className="pipelineNear-active-group">
-                                    <div className="pipelineNear-active-group-desc">
-                                        <span>{index+1}、</span>
-                                        <span  onClick={()=>click(item)} className="name">
-                                            {item.pipelineName}
-                                        </span>
-                                    </div>
-                                </div>
-                            )
-                        })
-                }
+                    </List.Item>}
+                />
             </div>
         </div>
     )

@@ -1,9 +1,9 @@
-import React, {Fragment} from "react";
-import {Form, Input, Row,} from "antd";
+import React,{Fragment} from "react";
 import AddProofButton from "../../../../proof/components/addProofButton";
 import FindAllProof from "../../../../proof/components/findAllProof";
 import FormTest from "./formTest";
-import {inject, observer} from "mobx-react";
+import {Form,Input,Row} from "antd";
+import {inject,observer} from "mobx-react";
 
 const ConfigCodeGitOrGitlab = props =>{
 

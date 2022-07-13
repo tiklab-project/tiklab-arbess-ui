@@ -1,10 +1,10 @@
-import React, {useEffect, Fragment, useState} from "react";
-import {inject,observer} from "mobx-react";
-import {withRouter} from "react-router";
-import {getUser} from "doublekit-core-ui";
-import {List,ConfigProvider,Button} from "antd";
+import React,{Fragment,useEffect,useState} from "react";
 import "./dynamicDetails.scss";
 import zhCN from "antd/es/locale/zh_CN";
+import {getUser} from "doublekit-core-ui";
+import {List,ConfigProvider,Button} from "antd";
+import {inject,observer} from "mobx-react";
+import {withRouter} from "react-router";
 
 const DynamicDetails = props =>{
 
@@ -47,9 +47,9 @@ const DynamicDetails = props =>{
     }
 
     return(
-        <div className="dynamicDetails">
-            <div className="dynamicDetails-top">
-                <div className="dynamicDetails-top-title">全部动态</div>
+        <div className="dynamic">
+            <div className="dynamic-top">
+                <div className="dynamic-top-title">全部动态</div>
                 <div>
                     <Button onClick={()=>props.history.push("/index/home")}>
                         返回
@@ -63,9 +63,9 @@ const DynamicDetails = props =>{
                     pagination={{
                         ...page,
                         onChange:(page) => {onChangePage(page)},
-                        hideOnSinglePage:true,  //只有一页时是否隐藏分页器
-                        showQuickJumper:true,   //是否可以快速跳转至某页
-                        showSizeChanger:false, //是否展示 pageSize 切换器
+                        hideOnSinglePage:true,
+                        showQuickJumper:true,
+                        showSizeChanger:false,
                     }}
                     locale={{emptyText:
                             <Fragment>
@@ -77,7 +77,7 @@ const DynamicDetails = props =>{
                     }}
                     dataSource={dynamicList}
                     renderItem={(item,index) => <List.Item>
-                        <div  className="dynamicDetails-bottom-listHeader">
+                        <div  className="dynamic-bottom-listHeader">
                             <div>
                                 <span>{(index+1)+(pageNumber-1)*15}、用户</span>
                                 <span className="name" onClick={()=>goUser(item.user)}>

@@ -8,7 +8,8 @@ import PromptContent from "../../../common/prompt/prompt";
 import FormView from "../common/component/configCommon/formView";
 import {Form} from "antd";
 import {getUser} from "doublekit-core-ui";
-import {useSelector,RemoteUmdComponent} from "doublekit-plugin-ui";
+import {RemoteUmdComponent} from "doublekit-plugin-ui";
+import {useSelector} from "doublekit-plugin-ui/es/_utils";
 
 const Config = props =>{
 

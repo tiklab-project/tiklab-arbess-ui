@@ -1,5 +1,5 @@
-import React, {Fragment} from "react";
-import { Form, Input, Row} from "antd";
+import React,{Fragment} from "react";
+import {Form,Input,Row} from "antd";
 import AddProofButton from "../../../../proof/components/addProofButton";
 import FindAllProof from "../../../../proof/components/findAllProof";
 import FormTest from "./formTest";
@@ -47,7 +47,7 @@ const ConfigDeployDocker = props =>{
                 label="Ip地址"
                 name="ip"
                 rules={[
-                    {required:true, message:"请输入IpV4地址"},
+                    {required:true, message:"请输入Ip地址"},
                     {
                         pattern:/((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/,
                         message:"请输入正确的Ip地址"
@@ -55,7 +55,7 @@ const ConfigDeployDocker = props =>{
                 ]}
                 style={{display: "inline-block"}}
             >
-                <Input  placeholder="输入IpV4地址" style={{width:200}}/>
+                <Input  placeholder="输入Ip地址" style={{width:200}}/>
             </Form.Item>
             <Form.Item
                 label="端口号"

@@ -6,8 +6,7 @@ import {Button} from "antd";
 const ConfigAddCodeRightDrawer = props =>{
 
     const {opt,setIsPrompt, codeOpt,setCodeOpt,setCodeData,setCodeDrawer,codeType,setCodeType,
-        formInitialValues
-    } = props
+        formInitialValues} = props
 
     const [codeId,setCodeId] = useState("")
 

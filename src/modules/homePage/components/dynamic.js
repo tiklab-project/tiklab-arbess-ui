@@ -1,5 +1,5 @@
-import React, {Fragment} from "react";
-import {Button, List} from "antd";
+import React,{Fragment} from "react";
+import {Button,List} from "antd";
 
 const Dynamic = props =>{
 
@@ -25,8 +25,7 @@ const Dynamic = props =>{
                 <div className="dynamic-top-title">近期动态</div>
                 <div>
                     {
-                        dynamicList && dynamicList.length === 0
-                        ? null:
+                        dynamicList && dynamicList.length === 0 ? null:
                         <Button onClick={()=>props.history.push("/index/dynamic")}>
                             更多
                         </Button>

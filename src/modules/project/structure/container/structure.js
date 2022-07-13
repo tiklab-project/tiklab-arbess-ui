@@ -87,26 +87,28 @@ const Structure = props => {
     useEffect(() => {
         findExecState(pipelineId).then(res=>{
             if(res.data === 1 ){
-                interval = setInterval(() => {
-                    findStructureState(pipelineId).then(res=>{
-                        if(res.data === null){
-                            stop()
-                        } else {
-                            setExecState(res.data)
-                            if( res.data.runStatus===1 || res.data.runStatus===30){
-                                stop()
-                            }
-                        }
-                    })
+                interval = setInterval(()=>{
+                    findStructureState(pipelineId).then(res=>{ renderExec(res.data) })
                 }, 1000)
                 findAll(pipelineId)
             }else if(res.data=== 0){
                 setExecState("")
             }
-            findPage()
+            findPage() // 历史列表
         })
         return ()=> clearInterval(interval)
     }, [pipelineId,freshen])
+    
+    const renderExec = data => {
+        if(data===null){
+            stop()
+        }else{
+            setExecState(data)
+            if(data.runStatus===1 || data.runStatus===30){
+                stop()
+            }
+        }
+    }
 
     const stop = () => {
         setExecState("")

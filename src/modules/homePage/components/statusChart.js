@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React,{useEffect,useState} from "react";
 import ReactEcharts from "echarts-for-react";
 
 const StatusChart = props =>{

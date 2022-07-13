@@ -1,4 +1,4 @@
-import React, {  Fragment } from "react";
+import React,{Fragment} from "react";
 import ConfigCodeGiteeOrGithub from "../configForm/configCodeGiteeOrGithub";
 import ConfigCodeGitOrGitlab from "../configForm/configCodeGitOrGitlab";
 

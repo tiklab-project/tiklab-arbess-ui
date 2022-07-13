@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer ,Button} from "antd";
+import {Drawer,Button} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import "../../structure/components/structureRightLogDrawer.scss";
 
@@ -29,7 +29,7 @@ const WorkSpaceDrawer = props =>{
                         {drawerContent.commitFile && drawerContent.commitFile.map((item, index) => {
                             return(
                                 <div key={index}>
-                                    {drawerContent.title ? null : `${index}、`}{item}
+                                    {drawerContent.title ? null : `${index+1}、`}{item}
                                 </div>
                             )
                         })}

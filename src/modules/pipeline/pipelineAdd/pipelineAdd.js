@@ -1,9 +1,9 @@
-import React, { useState,useEffect,useRef} from "react";
+import React,{useState,useEffect,useRef} from "react";
 import "./pipelineAdd.scss";
-import {observer,inject} from "mobx-react";
 import moment from "../../../common/moment/moment";
 import {getUser} from "doublekit-core-ui";
-import {Form, Input, Button, message} from "antd";
+import {Form,Input,Button,message} from "antd";
+import {observer,inject} from "mobx-react";
 
 const lis= [
     {

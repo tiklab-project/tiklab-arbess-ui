@@ -1,18 +1,22 @@
-import React from "react";
-import {Button} from "antd";
+import React,{useState} from "react";
 import "./configChangeView.scss";
+import {Button,Spin} from "antd";
+import {LoadingOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 
 const ConfigChangeView = props =>{
 
     const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt,userId,isBtn} = props
 
+    const [processVisible,setProcessVisible] = useState(false)
+
     const run = () => {
-        setIsPrompt(false)
         const params = {
             userId:userId,
             pipelineId:pipelineId
         }
+        setIsPrompt(false)
+        setProcessVisible(true)
         setTimeout(()=>{
             pipelineStartStructure(params).then(res=>{
                 if(res.code === 0){
@@ -30,7 +34,7 @@ const ConfigChangeView = props =>{
                 <div className="changeView-btn">
                     <Button form="form" htmlType="submit">保存</Button>
                     <Button form="form" type="primary" htmlType="submit" onClick={()=>run()}>
-                        运行
+                        {processVisible ? <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} /> :"运行"}
                     </Button>
                 </div>
                 <div className="changeView-view">

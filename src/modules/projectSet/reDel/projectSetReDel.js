@@ -33,11 +33,11 @@ const ProjectSetReDel = props =>{
         })
     }
 
-    const re = values =>{
+    const re = value =>{
         const params={
             user:{id:userId},
             pipelineId:pipelineId,
-            pipelineName:values.pipelineName
+            pipelineName:value.pipelineName
         }
         updatePipeline(params).then(res=>{
             if(res.code === 0){
@@ -50,67 +50,67 @@ const ProjectSetReDel = props =>{
     }
 
     return(
-       <Fragment>
-           <BreadcrumbContent type={"project"}/>
-           <div className="pipelineSys-reDel" style={{padding:20}}>
-               <Form onFinish={re} form={form} layout="inline" autoComplete = "off">
-                   <Form.Item
-                       label="重命名"
-                       name="pipelineName"
-                       rules={[
-                           ({ getFieldValue }) => ({
-                               validator(rule, value) {
-                                   if(value){
-                                       let nameArray = []
-                                       if(pipelineList){
-                                           nameArray=pipelineList && pipelineList.map(item=>item.pipelineName);
-                                       }
-                                       if (nameArray.includes(value)) {
-                                           return Promise.reject("名称已经存在");
-                                       }
-                                       return Promise.resolve()
-                                   }else {
-                                       return Promise.reject()
-                                   }
-                               },
-                           }),
-                       ]}
-                   >
-                       <Input />
-                   </Form.Item>
-                   <Form.Item shouldUpdate>
-                       {() => (
-                           <Button
-                               htmlType="submit"
-                               disabled={
-                                   !form.isFieldsTouched(true) ||
-                                   !!form.getFieldsError().filter(({ errors }) => errors.length).length
-                               }
-                           >
-                               确定
-                           </Button>
-                       )}
-                   </Form.Item>
-               </Form>
-               <div style={{marginTop:100}}>
-                   <Popconfirm
-                       style={{marginTop:100}}
-                       title="你确定删除吗"
-                       onConfirm={del}
-                       okText="确定"
-                       cancelText="取消"
-                   >
-                       <Button type="primary" >删除流水线</Button>
-                   </Popconfirm>
-                   &nbsp;
-                   {
-                       processVisible ?
-                           <Spin indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />} />
-                           :null
-                   }
+        <Fragment>
+            <BreadcrumbContent type={"project"}/>
+            <div className="pipelineSys-reDel" style={{padding:20}}>
+                <Form onFinish={re} form={form} layout="inline" autoComplete = "off">
+                    <Form.Item
+                        label="重命名"
+                        name="pipelineName"
+                        rules={[
+                            ({ getFieldValue }) => ({
+                                validator(rule, value) {
+                                    if(value){
+                                        let nameArray = []
+                                        if(pipelineList){
+                                            nameArray=pipelineList && pipelineList.map(item=>item.pipelineName);
+                                        }
+                                        if (nameArray.includes(value)) {
+                                            return Promise.reject("名称已经存在");
+                                        }
+                                        return Promise.resolve()
+                                    }else {
+                                        return Promise.reject()
+                                    }
+                                },
+                            }),
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item shouldUpdate>
+                        {() => (
+                            <Button
+                                htmlType="submit"
+                                disabled={
+                                    !form.isFieldsTouched(true) ||
+                                    !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                                }
+                            >
+                                确定
+                            </Button>
+                        )}
+                    </Form.Item>
+                </Form>
+                <div style={{marginTop:100}}>
+                    <Popconfirm
+                        style={{marginTop:100}}
+                        onConfirm={del}
+                        title="你确定删除吗"
+                        okText="确定"
+                        cancelText="取消"
+                    >
+                        <Button type="primary" >删除流水线</Button>
+                    </Popconfirm>
+                    &nbsp;
+                    {
+                        processVisible ?
+                            <Spin indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />} />
+                            :null
+                    }
                </div>
            </div>
-       </Fragment>
+        </Fragment>
     )
 }
 

@@ -9,7 +9,7 @@ import resources from "./common/language/resources";
 import {store} from "./store";
 import {orgStores} from "doublekit-user-ui";
 import {privilegeStores} from "doublekit-privilege-ui";
-import {initFetch,createContainer} from "doublekit-plugin-ui";
+import {initFetch,createContainer} from "doublekit-plugin-ui/es/_utils";
 import {observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 import {Provider} from "mobx-react";

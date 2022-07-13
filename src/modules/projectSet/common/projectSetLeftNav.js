@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from "react";
-import { DownOutlined,UpOutlined} from "@ant-design/icons";
+import React,{useEffect,useState} from "react";
+import {DownOutlined,UpOutlined} from "@ant-design/icons";
 
 const ProjectSetLeftNav= props =>  {
 

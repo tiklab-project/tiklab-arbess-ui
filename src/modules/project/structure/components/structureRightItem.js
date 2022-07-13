@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Card, Popconfirm} from "antd";
+import {Button,Card,Popconfirm} from "antd";
 import ConfigName from "../../../config/common/component/configCommon/configName";
 
 const StructureRightItem = props =>{

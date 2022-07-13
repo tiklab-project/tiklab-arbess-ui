@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Button, Drawer} from "antd";
+import React,{useState} from "react";
+import {Button,Drawer} from "antd";
+import {CloseOutlined} from "@ant-design/icons";
 import ConfigAddCodeLeftDrawer from "./configAddCodeLeftDrawer";
 import ConfigAddCodeRightDrawer from "./configAddCodeRightDrawer";
-import {CloseOutlined} from "@ant-design/icons";
 
 const leftLis = [
     {

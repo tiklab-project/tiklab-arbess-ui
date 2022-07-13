@@ -1,6 +1,5 @@
-import React ,{Fragment}from "react";
-import {Button, Form} from "antd";
-
+import React,{Fragment}from "react";
+import {Button,Form} from "antd";
 
 const ConfigAddNewStage = props =>{
 

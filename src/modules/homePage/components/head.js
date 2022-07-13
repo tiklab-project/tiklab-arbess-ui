@@ -32,7 +32,7 @@ const Head = props =>{
     return(
         <div className="homePage-head">
             {
-                lis.map(item=>{
+                lis && lis.map(item=>{
                     return(
                         <div key={item.id} className="head-group" onClick={()=>props.history.push(item.to)}>
                             <div className="head-group-wrap">

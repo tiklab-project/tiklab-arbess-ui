@@ -1,10 +1,10 @@
 import React,{Fragment} from "react";
-import {Form,Input,Row} from "antd";
-import {inject,observer} from "mobx-react";
-import Mirror from "./mirror";
 import FindAllProof from "../../../../proof/components/findAllProof";
 import AddProofButton from "../../../../proof/components/addProofButton";
 import FormTest from "./formTest";
+import {Form,Input,Row} from "antd";
+import {inject,observer} from "mobx-react";
+import Mirror from "./mirror";
 
 const ConfigDeployLinux = props =>{
   
@@ -32,21 +32,24 @@ const ConfigDeployLinux = props =>{
                 label="请输入文件地址"
                 rules={[{required:true,message:"请输入文件地址"}]}
             >
-                <Input  placeholder="请输入需要发送的文件模块名以及文件后缀名"/>
+                <Input
+                    addonBefore={"linux"}
+                    placeholder="请输入需要发送的文件模块名以及文件后缀名"
+                />
             </Form.Item>
             <Form.Item
                 label="Ip地址"
                 name="ip"
                 rules={[
-                    {required:true, message:"输入IpV4地址"},
+                    {required:true, message:"输入Ip地址"},
                     {
                         pattern:/((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/,
-                        message:"请输入正确的IpV4地址"
+                        message:"请输入正确的Ip地址"
                     },
                 ]}
                 style={{display:"inline-block"}}
             >
-                <Input placeholder="输入IpV4地址" style={{width:200}}/>
+                <Input placeholder="输入Ip地址" style={{width:200}}/>
             </Form.Item>
             <Form.Item
                 label="端口号"
@@ -68,7 +71,7 @@ const ConfigDeployLinux = props =>{
             >
                 <Input/>
             </Form.Item>
-            <Form.Item name="deployShell" label="shell命令">
+            <Form.Item name="deployShell" label="启动命令">
                 <Mirror
                     shellBlock={linuxShellBlock}
                     setShellBlock={setLinuxShellBlock}

@@ -1,15 +1,23 @@
-import React  from "react";
+import React from "react";
 import "./projectAsideOpt.scss";
 import {Dropdown} from "antd";
+import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
 
-    let {pipelineList,isPrompt,visible,setVisible,setPipeline} = props
+    const {visible,setVisible,isPrompt,pipelineStore,structureListStore} = props
+
+    const {pipelineList,setPipeline} = pipelineStore
+    const {setState,setEnforcer,setMode} = structureListStore
+
     const pipelineName = localStorage.getItem("pipelineName")
 
-    const onClick = (e,item) => {
+    const changePipeline = (e,item) => {
         e.preventDefault()
         if(pipelineName!==item.pipelineName){
+            setState(0)
+            setEnforcer(null)
+            setMode(0)
             if(!isPrompt){ // 如果为false，直接改变pipelineName和pipelineId
                 localStorage.setItem("pipelineName",item.pipelineName)
                 localStorage.setItem("pipelineId",item.pipelineId)
@@ -29,7 +37,7 @@ const ProjectAsideOpt = props =>{
                     {
                         pipelineList && pipelineList.map(item=>{
                             return(
-                                <div onClick={e =>{onClick(e,item)}}
+                                <div onClick={e=>{changePipeline(e,item)}}
                                      key={item.pipelineId}
                                      className="opt-content-group_item"
                                 >
@@ -58,4 +66,4 @@ const ProjectAsideOpt = props =>{
     )
 }
 
-export default ProjectAsideOpt
+export default inject("structureListStore","pipelineStore")(observer(ProjectAsideOpt))

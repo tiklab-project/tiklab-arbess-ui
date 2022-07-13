@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from "react";
 import {Row,Col,Avatar,Dropdown,Input,Space,Menu} from "antd";
+import {getVersionInfo,getUser} from "doublekit-core-ui";
+import {GlobalOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
-import {getVersionInfo,getUser} from 'doublekit-core-ui';
 import logo from "../../assets/images/logo.png";
 import portrait from "../../assets/images/portrait.jpg";
 import vipOne from "../../assets/images/vip-one.png";
 import vipTwo from "../../assets/images/vip-two.png";
-import {GlobalOutlined} from "@ant-design/icons";
 
 const  {Search} = Input
 

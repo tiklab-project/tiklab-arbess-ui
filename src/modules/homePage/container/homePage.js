@@ -34,15 +34,8 @@ const HomePage = props =>{
             <Heads {...props}/>
             <div className="homePage-content">
                 <div className="homePage-content-left">
-                    <PipelineNear
-                        {...props}
-                        pipelineNearList={pipelineNearList}
-                    />
-                    <Dynamic
-                        {...props}
-                        userId={userId}
-                        dynamicList={dynamicList}
-                    />
+                    <PipelineNear {...props} pipelineNearList={pipelineNearList}/>
+                    <Dynamic {...props} userId={userId} dynamicList={dynamicList}/>
                 </div>
                 <div className="homePage-content-right">
                     <StatusChart userId={userId} runState={runState}/>

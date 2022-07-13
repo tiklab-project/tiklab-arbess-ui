@@ -1,5 +1,5 @@
 import React,{Fragment} from "react";
-import {Form, Input} from "antd";
+import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
 
@@ -11,7 +11,10 @@ const ConfigStructureMavenOrNode = props =>{
     return(
         <Fragment>
             <Form.Item name="structureAddress" label="文件地址">
-                <Input />
+                <Input
+                    addonBefore={"linux"}
+                    placeholder={`"\/\" 代表当前源的根目录`}
+                />
             </Form.Item>
             <Form.Item name="structureOrder" label="执行命令">
                 <Mirror

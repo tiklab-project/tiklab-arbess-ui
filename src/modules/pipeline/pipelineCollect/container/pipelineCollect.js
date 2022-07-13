@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react";
 import "./pipelineCollect.scss";
+import PipelineTable from "../../pipelineTable/pipelineTable";
 import {getUser} from "doublekit-core-ui";
 import {inject,observer} from "mobx-react";
-import PipelineTable from "../../pipelineTable/pipelineTable";
 
 const PipelineCollect = props =>{
 
@@ -10,9 +10,10 @@ const PipelineCollect = props =>{
     const {findAllFollow,followList} = pipelineCollectStore
 
     const [fresh,setFresh] = useState(false)
+    const userId = getUser().userId
 
     useEffect(()=>{
-        findAllFollow(getUser().userId)
+        findAllFollow(userId)
     },[fresh])
 
     return(

@@ -53,9 +53,9 @@ export class StructureStore {
 
     // 判断当前流水线是否在构建
     @action
-    findExecState = async values =>{
+    findExecState = async value =>{
         const param = new FormData()
-        param.append("pipelineId", values)
+        param.append("pipelineId", value)
         return new Promise((resolve, reject) => {
             FindExecState(param).then(res=>{
                 if(res.code === 0){
@@ -75,9 +75,9 @@ export class StructureStore {
 
     //构建状态
     @action
-    findStructureState = async values=>{
+    findStructureState = async value =>{
         const param = new FormData()
-        param.append("pipelineId", values)
+        param.append("pipelineId", value)
         return await FindStructureState(param)
     }
 
@@ -92,9 +92,9 @@ export class StructureStore {
 
     //正在执行的详情
     @action
-    findAll =async values =>{
+    findAll =async value =>{
         const param = new FormData()
-        param.append("pipelineId", values)
+        param.append("pipelineId", value)
         FindAll(param).then(res=>{
             this.rightExecuteData = res.data
             this.isData = true
@@ -125,8 +125,8 @@ export class StructureStore {
                         this.page = {}
                     } else {
                         this.leftPageList = res.data.dataList
-                        this.modeData =  res.data.dataList && res.data.dataList[0]
                         this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
+                        this.modeData =  res.data.dataList && res.data.dataList[0]
                         this.page.total = res.data.totalRecord
                         this.isData = true
                     }
@@ -141,11 +141,11 @@ export class StructureStore {
 
     //历史详情日志
     @action
-    findHistoryLog =async values =>{
-        const params = new FormData()
-        params.append("historyId", values)
+    findHistoryLog =async value =>{
+        const param = new FormData()
+        param.append("historyId", value)
         return new Promise((resolve, reject) => {
-            FindHistoryLog(params).then(res=>{
+            FindHistoryLog(param).then(res=>{
                 if(res.code === 0){
                     if( this.index!==0 ){
                         this.rightFlowData = res.data
@@ -162,9 +162,9 @@ export class StructureStore {
 
     //删除构建历史
     @action
-    deleteHistoryLog =async values =>{
+    deleteHistoryLog =async value =>{
         const param = new FormData()
-        param.append("historyId", values)
+        param.append("historyId", value)
         return await DeleteHistoryLog(param)
     }
 

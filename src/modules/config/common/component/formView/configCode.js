@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React,{Fragment} from "react";
 import {CloseOutlined} from "@ant-design/icons";
 import ConfigName from "../configCommon/configName";
 import ConfigForm from "../configCommon/configForm";

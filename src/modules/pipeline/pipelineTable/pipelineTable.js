@@ -1,4 +1,4 @@
-import React,{Fragment} from "react";
+import React,{Fragment,useState} from "react";
 import {message,Table,Tooltip} from "antd";
 import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {getUser} from "doublekit-core-ui";
@@ -13,6 +13,7 @@ const PipelineTable = props =>{
 
     const {pipelineStartStructure,killInstance}=structureStore
     const {updateFollow} = pipelineCollectStore
+
     const userId = getUser().userId
 
     //收藏

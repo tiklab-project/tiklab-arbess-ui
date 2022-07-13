@@ -1,7 +1,7 @@
 import React,{useState} from "react";
-import {Button, Card} from "antd";
-import ConfigName from "../../../config/common/component/configCommon/configName";
+import {Button,Card} from "antd";
 import {getUser} from "doublekit-core-ui";
+import ConfigName from "../../../config/common/component/configCommon/configName";
 
 const StructureRightExecute = props => {
 

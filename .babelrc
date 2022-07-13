@@ -12,6 +12,11 @@
             "libraryDirectory": "es",
             "style": "css"
         }],
+        ["import", {
+            "libraryName": "doublekit-plugin-ui",
+            "libraryDirectory": "es",
+            "style": true
+        },"doublekit-plugin-ui"],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],

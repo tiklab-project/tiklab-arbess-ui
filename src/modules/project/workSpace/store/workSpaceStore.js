@@ -9,6 +9,12 @@ import {
 export class WorkSpaceStore{
 
     @observable recordList = []
+    @observable fileList = []
+
+    @action
+    setFileList = value =>{
+        this.fileList = value
+    }
 
     @action
     getSubmitMassage = async value =>{
@@ -16,7 +22,9 @@ export class WorkSpaceStore{
         param.append("pipelineId",value)
         GetSubmitMassage(param).then(res=>{
             console.log("近期提交记录",res)
-            this.recordList = res.data
+            if(res.code === 0){
+                this.recordList = res.data
+            }
         }).catch(error=>{
             console.log(error)
         })
@@ -24,10 +32,16 @@ export class WorkSpaceStore{
 
     @action
     fileTree = async value =>{
-        const param = new FormData()
-        param.append("pipelineId",value.pipelineId)
-        param.append("userId",value.userId)
-        return await FileTree(param)
+        const params = new FormData()
+        params.append("pipelineId",value.pipelineId)
+        params.append("userId",value.userId)
+        FileTree(params).then(res=>{
+            if(res.code === 0){
+                this.fileList = res.data
+            }
+        }).catch(error=>{
+            console.log(error)
+        })
     }
 
     @action
