@@ -48,6 +48,8 @@ export class ConfigStore{
                 deployTargetAddress:values.pipelineDeploy.deployTargetAddress,
                 dockerPort:values.pipelineDeploy.dockerPort,
                 mappingPort:values.pipelineDeploy.mappingPort,
+                startType:values.pipelineDeploy.startType,
+                startAddress:values.pipelineDeploy.startAddress,
                 proof:{ proofId:values.pipelineDeploy.proof.proofId }
             },
         }

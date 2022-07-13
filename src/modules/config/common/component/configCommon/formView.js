@@ -89,17 +89,17 @@ const FormView = props =>{
         }
 
         data && data.map((item,index)=>{
-            if(item.dataType === 11){
+            if(item.dataType > 10 && item < 20 ){
                 testSort = index + 2
                 testAlias = item.title
                 testType = item.dataType
             }
-            if(item.dataType === 21 || item.dataType === 22){
+            if(item.dataType > 20 && item.dataType < 30){
                 structureSort = index + 2
                 structureAlias = item.title
                 structureType = item.dataType
             }
-            if(item.dataType === 31 || item.dataType === 32){
+            if(item.dataType > 30 && item.dataType < 40){
                 deploySort = index + 2
                 deployAlias = item.title
                 deployType = item.dataType
@@ -145,6 +145,8 @@ const FormView = props =>{
                 deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
+                startType:values.startType,
+                startAddress:values.startAddress,
                 proof:{ proofId:localStorage.getItem("deployProofId") }
             }
         }
@@ -219,7 +221,7 @@ const FormView = props =>{
                     id="form"
                     form={form}
                     layout="vertical"
-                    autoComplete = "off"
+                    autoComplete="off"
                     onFinish={onFinish}
                     onValuesChange={onValuesChange}
                 >

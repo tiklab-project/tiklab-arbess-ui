@@ -41,6 +41,10 @@ const lis=[
                 type:32 ,
                 tel:"docker"
             },
+            {
+              type: 33,
+              tel: "shell"
+            },
         ]
     }
 ]

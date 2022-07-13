@@ -152,6 +152,8 @@ const Config = props =>{
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
+                formInitialValues.startType = null
+                formInitialValues.startAddress = null
                 setLinuxShellBlock("")
         }
     }

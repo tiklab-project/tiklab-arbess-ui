@@ -27,6 +27,8 @@ const ConfigName = props =>{
                             return "linux"
                         case 32:
                             return "docker"
+                        case 33:
+                            return "Shell"
                     }
                 })()
             }

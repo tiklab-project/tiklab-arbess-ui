@@ -2,7 +2,7 @@ import React,{Fragment} from "react";
 import FindAllProof from "../../../../proof/components/findAllProof";
 import AddProofButton from "../../../../proof/components/addProofButton";
 import FormTest from "./formTest";
-import {Form,Input,Row} from "antd";
+import {Form,Input,Row,Select} from "antd";
 import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
 
@@ -70,6 +70,26 @@ const ConfigDeployLinux = props =>{
                 rules={[{required:true, message:"请输入部署位置"}]}
             >
                 <Input/>
+            </Form.Item>
+            <Form.Item
+                name="startType"
+                label="启动文件类型"
+                rules={[{required:true,message:"请选择启动文件地址"}]}
+            >
+                <Select style={{ width: 200 }}>
+                    <Select.Option value={1}>Jar包</Select.Option>
+                    <Select.Option value={2}>Shell脚本</Select.Option>
+                </Select>
+            </Form.Item>
+            <Form.Item
+                name="startAddress"
+                label="启动文件地址"
+                rules={[{required:true,message:"请输入文件地址"}]}
+            >
+                <Input
+                    addonBefore={"linux"}
+                    placeholder="请输入需要发送的文件模块名以及文件后缀名"
+                />
             </Form.Item>
             <Form.Item name="deployShell" label="启动命令">
                 <Mirror
