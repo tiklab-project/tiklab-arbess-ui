@@ -35,15 +35,11 @@ const lis=[
         desc:[
             {
                 type:31 ,
-                tel:"linux"
+                tel:"虚拟机"
             },
             {
                 type:32 ,
                 tel:"docker"
-            },
-            {
-              type: 33,
-              tel: "shell"
             },
         ]
     }

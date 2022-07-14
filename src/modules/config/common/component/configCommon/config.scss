@@ -4,11 +4,12 @@
         position: fixed;
         z-index: 88;
         background: #fff;
-        width: calc(100% - 65px);
+        width: calc(100% - 96px);
         border-bottom: 1px solid #ccc;
         padding: 10px 0 4px 16px;
         font-size: 16px;
         min-width: 500px;
+        margin-left: 15px;
         &-width{
             width:100% !important;
         }
@@ -79,6 +80,16 @@
     }
     &-type{
         margin: 10px;
+    }
+}
+.deployTargetAddress{
+    position: relative;
+    top: -21px;
+    left: 10px;
+    font-size: 13px;
+    font-weight: 300;
+    &-null{
+        color: red;
     }
 }
 

@@ -4,8 +4,9 @@ import {inject,observer} from "mobx-react";
 
 const FormTest = props =>{
 
-    const {configDataStore,git} = props
-    const {formInitialValues,codeType,codeTestPass} = configDataStore
+    const {configDataStore,configItemStore,git} = props
+    const {formInitialValues,codeType} = configDataStore
+    const {codeTestPass} = configItemStore
 
     const test = () =>{
         if(formInitialValues){
@@ -33,11 +34,13 @@ const FormTest = props =>{
             }
             if(url){
                 codeTestPass(params).then(res=>{
-                    if(res.data === true){
+                    if(res.data === true && res.code === 0){
                         message.success({content:"连接成功", className:"message"})
                     }else {
                         message.error({content:"连接失败", className:"message"})
                     }
+                }).catch(error=>{
+                    console.log(error)
                 })
             }
         }
@@ -48,4 +51,4 @@ const FormTest = props =>{
             </div>
 }
 
-export default inject("configDataStore")(observer(FormTest))
+export default inject("configDataStore","configItemStore")(observer(FormTest))

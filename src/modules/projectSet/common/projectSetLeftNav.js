@@ -26,24 +26,10 @@ const ProjectSetLeftNav= props =>  {
             enCode:"1",
         },
         {
-            key:"1",
-            label:"权限管理",
+            key:"/index/task/assembly/role",
+            label:"角色管理",
             icon:"#icon-gongzuotongji",
             enCode:"1",
-            children:[
-                {
-                    key:"/index/task/assembly/feature",
-                    label:"功能管理",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"1",
-                },
-                {
-                    key:"/index/task/assembly/role",
-                    label:"角色管理",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"1",
-                }
-            ]
         },
         {
             key:"/index/task/assembly/proof",

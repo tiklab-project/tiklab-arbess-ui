@@ -32,8 +32,6 @@ const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectS
 const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
 const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
-const ProjectSetRole=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetRole"))
-const ProjectSetFeature=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetFeature"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
@@ -46,9 +44,10 @@ const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 const Info=AsyncComponent(()=>import("./modules/system/message/info/info"))
-const Log=AsyncComponent(()=>import("./modules/system/message/log/log"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
+const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
+const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 
 const routers=[
     {
@@ -140,11 +139,7 @@ const routers=[
                             },
                             {
                                 path:"/index/task/assembly/role",
-                                component: ProjectSetRole
-                            },
-                            {
-                                path:"/index/task/assembly/feature",
-                                component: ProjectSetFeature
+                                component: ProjectRole
                             },
                             {
                                 path:"/index/task/assembly/redel",
@@ -196,13 +191,17 @@ const routers=[
                         component: SystemFeature,
                     },
                     {
+                        path: "/index/system/project/role",
+                        component: ProjectRole,
+                    },
+                    {
+                        path: "/index/system/project/feature",
+                        component: ProjectFeature,
+                    },
+                    {
                         path: "/index/system/proof",
                         component: SystemProof,
                     },
-                    // {
-                    //     path:"/index/system/log",
-                    //     component: Log,
-                    // },
                     {
                         path:"/index/system/info",
                         component: Info,

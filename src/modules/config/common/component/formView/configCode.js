@@ -10,18 +10,19 @@ const ConfigCode = props =>{
     const code = () => {
         return  codeData ?
             <div className="configView1-wrapper">
-                <div className="configView1-wrapper-newStage">
+                <div className="configView1-wrapper-Headline">
                     <div className="desc">
-                        <div className="desc-head">
-                            <ConfigName type={codeData.codeType}/>
-                        </div>
-                        <div className="desc-delete" onClick={()=>del(1)}>
-                            <CloseOutlined />
-                        </div>
+                        源码管理
                     </div>
-                    <div className="desc-input">
-                        <ConfigForm type={codeData.codeType}/>
+                    <div className="desc-delete" onClick={()=>del(1)}>
+                        <CloseOutlined />
                     </div>
+                </div>
+                <div className="desc-name">
+                    <ConfigName type={codeData.codeType}/>
+                </div>
+                <div className="configView1-wrapper-newStage">
+                    <ConfigForm type={codeData.codeType}/>
                 </div>
             </div>
             :
@@ -30,12 +31,7 @@ const ConfigCode = props =>{
             </div>
     }
 
-    return(
-        <Fragment>
-            <div className="configView1-wrapper-Headline">源码管理</div>
-            { code () }
-        </Fragment>
-    )
+    return code()
 }
 
 export default ConfigCode

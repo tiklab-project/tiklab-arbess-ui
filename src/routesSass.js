@@ -34,8 +34,8 @@ const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectS
 const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
 const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
-const ProjectSetRole=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetRole"))
-const ProjectSetFeature=AsyncComponent(()=>import("./modules/projectSet/privilege/projectSetFeature"))
+const ProjectSetRole=AsyncComponent(()=>import("./modules/system/privilege/projectSetRole"))
+const ProjectSetFeature=AsyncComponent(()=>import("./modules/system/privilege/projectSetFeature"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))

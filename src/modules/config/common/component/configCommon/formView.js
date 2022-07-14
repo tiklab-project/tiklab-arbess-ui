@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from "react";
 import  "./formView.scss";
 import {Button,Form,Input,message} from "antd";
-import {CloseOutlined, EditOutlined} from "@ant-design/icons";
+import {CloseOutlined,EditOutlined} from "@ant-design/icons";
 import {getUser} from "doublekit-core-ui";
 import moment from "../../../../../common/moment/moment";
 import ConfigAddNewStageModal from "../formView/configAddNewStageModal";
@@ -145,8 +145,9 @@ const FormView = props =>{
                 deployShell:linuxShellBlock,
                 dockerPort:values.dockerPort,
                 mappingPort:values.mappingPort,
-                startType:values.startType,
                 startAddress:values.startAddress,
+                startType:values.startType,
+                startOrder:values.startOrder,
                 proof:{ proofId:localStorage.getItem("deployProofId") }
             }
         }
@@ -174,37 +175,34 @@ const FormView = props =>{
             return(
                 <div className="configView1-wrapper" key={index} >
                     <div className="configView1-wrapper-Headline">
-                        {
-                            isFormAlias === index ?
-                                <Input type="text"
-                                       ref={inputRef}
-                                       onBlur={hiddenInput}
-                                       style={{width:100}}
-                                       defaultValue={group.title}
-                                       onChange={e=>changeInputValue(e,index)}
-                                />
-                                :
-                                <div style={{display:"inline"}}>
-                                    {group.title}
-                                    &nbsp; &nbsp;
-                                    <span onClick={()=> displayInput(index)} style={{cursor:"pointer"}}>
-                                        <EditOutlined />
-                                    </span>
-                                </div>
-                        }
+                        <div className="desc">
+                            {
+                                isFormAlias === index ?
+                                    <Input type="text"
+                                           ref={inputRef}
+                                           onBlur={hiddenInput}
+                                           style={{width:100}}
+                                           defaultValue={group.title}
+                                           onChange={e=>changeInputValue(e,index)}
+                                    />
+                                    :
+                                    <>
+                                        <span className="desc-title">{group.title}</span>
+                                        <span onClick={()=> displayInput(index)}>
+                                            <EditOutlined />
+                                        </span>
+                                    </>
+                            }
+                        </div>
+                        <div className="desc-delete" onClick={()=>deletePart(group)}>
+                            <CloseOutlined />
+                        </div>
+                    </div>
+                    <div className="desc-name">
+                        <ConfigName type={group.dataType}/>
                     </div>
                     <div className="configView1-wrapper-newStage">
-                        <div className="desc">
-                            <div className="desc-head">
-                                <ConfigName type={group.dataType}/>
-                            </div>
-                            <div className="desc-delete" onClick={()=>deletePart(group)}>
-                                <CloseOutlined />
-                            </div>
-                        </div>
-                        <div className="desc-input">
-                            <ConfigForm type={group.dataType}/>
-                        </div>
+                        <ConfigForm type={group.dataType} del={del}/>
                     </div>
                 </div>
             )
@@ -214,16 +212,16 @@ const FormView = props =>{
     return(
         <div className="configView1">
             <div className="configView1-content">
-                <div style={{textAlign:"right"}}>
+                <div className="configView1-content-changSort">
                     <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
                 </div>
                 <Form
                     id="form"
                     form={form}
-                    layout="vertical"
                     autoComplete="off"
                     onFinish={onFinish}
                     onValuesChange={onValuesChange}
+                    initialValues={{startType:1}}
                 >
                     <ConfigCode
                         codeData={codeData}

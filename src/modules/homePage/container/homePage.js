@@ -14,18 +14,15 @@ const HomePage = props =>{
     const {findAllOpen,pipelineNearList,runState,findUserAction,dynamicList} = homePageStore
     const userId = getUser().userId
 
-    // 最近动态
     useEffect(()=>{
         const params = {
             userId:userId,
             page:1,
             pageSize:10,
         }
+        // 最近动态
         findUserAction(params)
-    },[])
-
-    // 最近打开的流水线
-    useEffect(()=>{
+        // 最近打开的流水线
         findAllOpen(userId)
     },[])
 

@@ -6,13 +6,12 @@ import Mirror from "./mirror";
 const ConfigDeployShell = props =>{
 
     const {configDataStore} = props
-
-    const {shellBlock,setLinuxShellBlock,setIsPrompt} = configDataStore
+    const {linuxShellBlock,setLinuxShellBlock,setIsPrompt} = configDataStore
 
     return(
-        <Form.Item name="deployShell" label="Shell命令">
+        <Form.Item name="deployShell" label="Shell命令" className="noRequired">
             <Mirror
-                shellBlock={shellBlock}
+                shellBlock={linuxShellBlock}
                 setShellBlock={setLinuxShellBlock}
                 setIsPrompt={setIsPrompt}
             />

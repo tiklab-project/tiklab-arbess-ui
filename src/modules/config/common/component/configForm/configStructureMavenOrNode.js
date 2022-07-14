@@ -5,18 +5,29 @@ import Mirror from "./mirror";
 
 const ConfigStructureMavenOrNode = props =>{
 
-    const {configDataStore} = props
+    const {configDataStore,configItemStore} = props
+
     const {setIsPrompt,mavenShellBlock,setMavenShellBlock} = configDataStore
+    const {profileAddress} = configItemStore
+    const pipelineName = localStorage.getItem("pipelineName")
 
     return(
         <Fragment>
-            <Form.Item name="structureAddress" label="文件地址">
+            <Form.Item
+                name="structureAddress"
+                label="文件地址"
+                rules={[{required:true, message:"请输入文件地址"}]}
+            >
                 <Input
-                    addonBefore={"linux"}
+                    addonBefore={profileAddress+pipelineName}
                     placeholder={`"\/\" 代表当前源的根目录`}
                 />
             </Form.Item>
-            <Form.Item name="structureOrder" label="执行命令">
+            <Form.Item
+                name="structureOrder"
+                label="执行命令"
+                rules={[{required:true, message:"请输入执行命令"}]}
+            >
                 <Mirror
                     shellBlock={mavenShellBlock}
                     setShellBlock={setMavenShellBlock}
@@ -27,4 +38,4 @@ const ConfigStructureMavenOrNode = props =>{
     )
 }
 
-export default inject("configDataStore")(observer(ConfigStructureMavenOrNode))
+export default inject("configDataStore","configItemStore")(observer(ConfigStructureMavenOrNode))

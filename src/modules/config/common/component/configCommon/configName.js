@@ -24,11 +24,9 @@ const ConfigName = props =>{
                         case 22:
                             return "node"
                         case 31:
-                            return "linux"
+                            return "虚拟机"
                         case 32:
                             return "docker"
-                        case 33:
-                            return "Shell"
                     }
                 })()
             }

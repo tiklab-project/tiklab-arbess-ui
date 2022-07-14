@@ -17,6 +17,16 @@
             "libraryDirectory": "es",
             "style": true
         },"doublekit-plugin-ui"],
+        ["import", {
+            "libraryName": "doublekit-user-ui",
+            "libraryDirectory": "es",
+            "style": true
+        },"doublekit-user-ui"],
+        ["import", {
+            "libraryName": "doublekit-privilege-ui",
+            "libraryDirectory": "es",
+            "style": true
+        },"doublekit-privilege-ui"],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],

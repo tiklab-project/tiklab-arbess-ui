@@ -1,13 +1,16 @@
 import React ,{useEffect} from "react";
 import "./header.scss";
 import Heads from "./header";
-import {privilegeStores} from "doublekit-privilege-ui";
+import {privilegeStores} from "doublekit-privilege-ui/es/store";
 import {getUser} from "doublekit-core-ui";
 import {renderRoutes} from "react-router-config";
+import {inject,observer} from "mobx-react";
 
 const Portal= props=>{
 
-    const {route}=props
+    const {route,configItemStore}=props
+    const {fileAddress} = configItemStore
+
     const headerRoutes=[
         {
             key:"homePage",
@@ -25,10 +28,11 @@ const Portal= props=>{
             title:"系统设置",
         }
     ]
-
-    // 导航控制
     useEffect(()=>{
+        // 导航控制
         privilegeStores.systemRoleStore.getSystemPermissions(getUser().userId)
+        // 全局配置文件地址(默认值)
+        fileAddress()
     },[])
 
     return(
@@ -41,4 +45,4 @@ const Portal= props=>{
     )
 }
 
-export default Portal
+export default inject("configItemStore")(observer(Portal))

@@ -223,7 +223,6 @@ const ConfigDetails = props =>{
                 break
             case 31:
             case 32:
-            case 33:
                 delDetail("deploy")
                 break
             default:
@@ -263,8 +262,9 @@ const ConfigDetails = props =>{
                 formInitialValues.dockerProofName = null
                 formInitialValues.dockerPort = null
                 formInitialValues.mappingPort = null
-                formInitialValues.startType = null
+                formInitialValues.startOrder = null
                 formInitialValues.startAddress = null
+                formInitialValues.startType = null
                 setLinuxShellBlock("")
         }
     }

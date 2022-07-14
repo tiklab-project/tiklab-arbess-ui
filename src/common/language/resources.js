@@ -1,7 +1,7 @@
-import { eam_cn} from "doublekit-eam-ui";
-import {  privilege_cn } from "doublekit-privilege-ui";
-import { message_cn } from "doublekit-message-ui";
-import { orga_cn } from "doublekit-user-ui";
+import {eam_cn} from "doublekit-eam-ui";
+import {message_cn} from "doublekit-message-ui";
+import {privilege_cn} from "doublekit-privilege-ui/es/_utils";
+import {orga_cn} from "doublekit-user-ui/es/_utils";
 import zhCnTrans from "./cn/translation.json";
 
 const resources= {

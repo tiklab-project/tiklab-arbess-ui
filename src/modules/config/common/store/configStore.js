@@ -50,6 +50,7 @@ export class ConfigStore{
                 mappingPort:values.pipelineDeploy.mappingPort,
                 startType:values.pipelineDeploy.startType,
                 startAddress:values.pipelineDeploy.startAddress,
+                startOrder:values.pipelineDeploy.startOrder,
                 proof:{ proofId:values.pipelineDeploy.proof.proofId }
             },
         }

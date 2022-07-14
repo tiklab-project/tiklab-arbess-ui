@@ -1,5 +1,5 @@
 import React,{Fragment,useState,useEffect} from "react";
-import {Button, Form, message, Row, Select} from "antd";
+import {Button,Form,message,Row,Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import FindAllProof from "../../../../proof/components/findAllProof";
 import ConfigCodeGiteeOrGithubModal from "./configCodeGiteeOrGithubModal";
@@ -34,19 +34,18 @@ const ConfigCodeGiteeOrGithub = props =>{
             state:0,
         }
         if(visible){
-            interval = setInterval(()=>{
-                getState(params).then(res=>{
-                    console.log("getState",res)
-                    if(res.data === 1){
-                        message.success({content:"授权成功", className:"message"})
-                    }else if(res.data === 2){
-                        message.error({content:"拒绝授权或授权失败", className:"message"})
-                    }
-                })
-            },2000)
-        }else { clearInterval(interval) }
+            interval = setInterval(()=>getState(params).then(res=>warn(res.data)),2000)
+        }else clearInterval(interval)
         return ()=> clearInterval(interval)
     },[])
+    
+    const warn = data => {
+        if(data === 1){
+            message.success({content:"授权成功", className:"message"})
+        }else if(data === 2){
+            message.error({content:"拒绝授权或授权失败", className:"message"})
+        }
+    }
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
@@ -96,11 +95,8 @@ const ConfigCodeGiteeOrGithub = props =>{
                     新增服务链接
                 </Button>
             </Row>
-            <Form.Item name="codeName" label="仓库">
-                <Select style={{ width: 300 }}
-                        onChange={changeGitStoreHouse}
-                        onClick={clickGitStoreHouse}
-                >
+            <Form.Item label="仓库" name="codeName" rules={[{required:true, message:"请选择仓库"}]}>
+                <Select style={{ width: 300 }} onChange={changeGitStoreHouse} onClick={clickGitStoreHouse}>
                     {
                         storehouseList && storehouseList.map(item=>{
                             return <Option key={item}> {item} </Option>
@@ -108,7 +104,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     }
                 </Select>
             </Form.Item>
-            <Form.Item name="codeBranch" label="分支">
+            <Form.Item label="分支" name="codeBranch" className="noRequired">
                 <Select style={{ width: 300 }} disabled={prohibited}>
                     {
                         branchList && branchList.map(item=>{

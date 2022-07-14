@@ -18,13 +18,6 @@ export function  FindAllConfigure(data){
     })
 }
 
-// 测试配置
-export function  CodeTestPass(data){
-    return serviceLoc.request({
-        url:"/codeCheck/checkAuth",
-        method:"post",
-        data
-    })
-}
+
 
 

@@ -4,12 +4,10 @@ import ConfigCodeGitOrGitlab from "../configForm/configCodeGitOrGitlab"
 import ConfigCodeGiteeOrGithub from "../configForm/configCodeGiteeOrGithub";
 import ConfigTestUnit from "../configForm/configTestUnit";
 import ConfigStructureMaven from "../configForm/configStructureMavenOrNode";
-import ConfigDeployLinux from "../configForm/configDeployLinux";
-import ConfigDeployShell from "../configForm/configDeployShell";
-import ConfigDeployDocker from "../configForm/configDeployDocker";
+import ConfigDeployType from "../configForm/configDeployType";
 
 const ConfigForm = props =>{
-    const {type} = props
+    const {type,del} = props
     return(
         <Fragment>
             {
@@ -30,11 +28,8 @@ const ConfigForm = props =>{
                         case 22:
                             return <ConfigStructureMaven/>
                         case 31:
-                            return <ConfigDeployLinux/>
                         case 32:
-                            return <ConfigDeployDocker/>
-                        case 33:
-                            return <ConfigDeployShell/>
+                            return <ConfigDeployType type={type} del={del}/>
                     }
                 })()
             }
