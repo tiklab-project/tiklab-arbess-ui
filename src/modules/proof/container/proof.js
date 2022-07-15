@@ -79,9 +79,7 @@ const Proof = props =>{
             render:(text,record)=>{
                 return(
                     <span className="proof-content-action">
-                        <span className="edit"
-                              onClick={()=>edit(text,record)}
-                        >
+                        <span className="edit" onClick={()=>edit(text,record)}>
                             编辑
                         </span>
                          <Popconfirm
@@ -91,9 +89,7 @@ const Proof = props =>{
                              okText="确定"
                              cancelText="取消"
                          >
-                             <span className="del">
-                                 删除
-                             </span>
+                             <span className="del">删除</span>
                          </Popconfirm>
                     </span>
                 )

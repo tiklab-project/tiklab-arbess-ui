@@ -2,9 +2,7 @@ import React from "react";
 import AsyncComponent from "./common/lazy/SyncComponent";
 import {Redirect} from "react-router-dom";
 
-import {Logout} from "doublekit-eam-ui";
-import {FeatureList,RoleList,ProjectFeatureList,ProjectRoleList} from "doublekit-privilege-ui";
-
+const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 const Index=AsyncComponent(()=>import("./modules/home/portal"))
 
 /* 首页 */

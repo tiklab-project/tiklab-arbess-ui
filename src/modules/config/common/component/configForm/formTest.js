@@ -22,8 +22,8 @@ const FormTest = props =>{
                 url = formInitialValues && formInitialValues.codeName
             } else {
                 proofId = localStorage.getItem("deployProofId")
-                port = formInitialValues && formInitialValues.port
-                url = formInitialValues && formInitialValues.ip
+                port = formInitialValues && formInitialValues.sshPort
+                url = formInitialValues && formInitialValues.sshIp
                 type = 2
             }
             const params = {

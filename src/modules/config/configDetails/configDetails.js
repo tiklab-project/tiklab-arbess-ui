@@ -19,7 +19,7 @@ const ConfigDetails = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure} = structureStore
     const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType} = configDataStore
+        setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
@@ -208,7 +208,8 @@ const ConfigDetails = props =>{
         Object.assign(formInitialValues,formValue)
         localStorage.setItem("deployId",data.deployId)
         localStorage.setItem("deployProofId",data.proof && data.proof.proofId)
-        setLinuxShellBlock(`${data.deployShell ? data.deployShell : ""}`)
+        setLinuxShellBlock(`${data.startShell ? data.startShell : ""}`)
+        setOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
     }
 
     // 按需清空表单的值
@@ -255,17 +256,17 @@ const ConfigDetails = props =>{
                 setMavenShellBlock("")
                 break
             case "deploy":
-                formInitialValues.deployTargetAddress = null
+                formInitialValues.sshPort = null
                 formInitialValues.deployAddress = null
-                formInitialValues.ip = null
-                formInitialValues.port = null
+                formInitialValues.sshIp = null
+                formInitialValues.sourceAddress = null
                 formInitialValues.dockerProofName = null
-                formInitialValues.dockerPort = null
+                formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
-                formInitialValues.startOrder = null
-                formInitialValues.startAddress = null
-                formInitialValues.startType = null
+                formInitialValues.startAddress = ""
+                formInitialValues.deployOrder = ""
                 setLinuxShellBlock("")
+                setOrderShellBlock("")
         }
     }
 

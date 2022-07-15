@@ -19,7 +19,8 @@ const FormView = props =>{
     const {form,del,configDataStore,updateConfigure,jumpOrNot} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock
+        isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
+        orderShellBlock,
     } = configDataStore
 
     const inputRef = useRef()
@@ -138,16 +139,16 @@ const FormView = props =>{
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
-                ip:values.ip,
-                port:values.port,
+                sshIp:values.sshIp,
+                sshPort:values.sshPort,
                 deployAddress: values.deployAddress,
-                deployTargetAddress: values.deployTargetAddress,
-                deployShell:linuxShellBlock,
-                dockerPort:values.dockerPort,
+                sourceAddress: values.sourceAddress,
+                startShell:linuxShellBlock,
+                startPort:values.startPort,
                 mappingPort:values.mappingPort,
                 startAddress:values.startAddress,
-                startType:values.startType,
-                startOrder:values.startOrder,
+                deployType:values.deployType,
+                deployOrder:orderShellBlock,
                 proof:{ proofId:localStorage.getItem("deployProofId") }
             }
         }
@@ -221,7 +222,7 @@ const FormView = props =>{
                     autoComplete="off"
                     onFinish={onFinish}
                     onValuesChange={onValuesChange}
-                    initialValues={{startType:1}}
+                    initialValues={{deployType:1}}
                 >
                     <ConfigCode
                         codeData={codeData}

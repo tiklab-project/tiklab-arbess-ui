@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import "./configChangeView.scss";
-import {Button,Spin} from "antd";
+import {Button,message,Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 
@@ -15,12 +15,16 @@ const ConfigChangeView = props =>{
             userId:userId,
             pipelineId:pipelineId
         }
-        setIsPrompt(false)
         setProcessVisible(true)
+        setIsPrompt(false)
         setTimeout(()=>{
             pipelineStartStructure(params).then(res=>{
-                if(res.code === 0){
+                console.log("运行",res)
+                if(res.code === 0 && res.data === 1){
                     props.history.push("/index/task/structure")
+                }else {
+                    setProcessVisible(false)
+                    message.error({content:"运行失败", className:"message"})
                 }
             }).catch(error=>{
                 console.log(error)
@@ -38,16 +42,20 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className="changeView-view">
-                    <div onClick={()=>setView(1)} className={view===1 ? "view view-link" : "view"} >
-                        表单视图
+                    <div onClick={()=>setView(1)} className={view===1 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}>
+                        <div className="changeView-view-item" >
+                            表单视图
+                        </div>
                     </div>
                     {
                         isBtn ?
-                            <div className={view===2 ?  "view view-link" : "view" } onClick={()=>setView(2)}>
-                                图形化视图
+                            <div onClick={()=>setView(2)} className={view===2 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}>
+                                <div className="changeView-view-item">
+                                    图形化视图
+                                </div>
                             </div>
                             :
-                            <div className = "view view-ban">
+                            <div className = "changeView-view-li changeView-view-ban">
                                 图形化视图
                             </div>
                     }

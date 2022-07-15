@@ -103,7 +103,7 @@ const PipelineAdd = props => {
                                             <use xlinkHref="#icon-lishijishi"/>
                                         </svg>
                                     </div>
-                                    <div>
+                                    <div className="choose-item-options">
                                         <label>{item.title}</label>
                                         <div>{item.desc}</div>
                                     </div>

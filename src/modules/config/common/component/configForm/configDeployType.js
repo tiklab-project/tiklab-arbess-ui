@@ -9,21 +9,21 @@ const ConfigDeployType = props =>{
 
     const {type,del} = props
 
-    const changeStartType = () => {
+    const changeDeployTypeType = () => {
         del(type)
     }
 
     return(
         <Fragment>
-            <Form.Item name="startType" label="部署类型" className="noRequired">
-                <Select onChange={()=>changeStartType()}>
+            <Form.Item name="deployType" label="部署类型" className="noRequired">
+                <Select onChange={()=>changeDeployTypeType()}>
                     <Select.Option value={0}>结构化部署</Select.Option>
                     <Select.Option value={1}>自定义部署</Select.Option>
                 </Select>
             </Form.Item>
-            <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.startType !== currentValues.startType}>
+            <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.deployType !== currentValues.deployType}>
                 {({ getFieldValue })=>
-                    getFieldValue("startType") === 0 ? (
+                    getFieldValue("deployType") === 0 ? (
                         <Fragment>
                             <ConfigDeploy/>
                             {type === 31 ? <ConfigDeployLinux/> : <ConfigDeployDocker/>}

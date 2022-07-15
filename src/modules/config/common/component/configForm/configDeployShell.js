@@ -9,7 +9,7 @@ const ConfigDeployShell = props =>{
     const {linuxShellBlock,setLinuxShellBlock,setIsPrompt} = configDataStore
 
     return(
-        <Form.Item name="deployShell" label="Shell命令" className="noRequired">
+        <Form.Item name="startShell" label="Shell命令" className="noRequired">
             <Mirror
                 shellBlock={linuxShellBlock}
                 setShellBlock={setLinuxShellBlock}

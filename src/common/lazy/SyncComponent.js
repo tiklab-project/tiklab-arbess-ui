@@ -1,5 +1,4 @@
-
-import React, {Component} from "react";
+import React,{Component} from "react";
 
 export default function AsyncComponent (importComponent) {
     class LazyComponent extends Component{

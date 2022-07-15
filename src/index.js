@@ -7,7 +7,7 @@ import "./common/language/i18n";
 import routers from "./routes";
 import resources from "./common/language/resources";
 import {store} from "./store";
-import {orgStores} from "doublekit-user-ui/lib/store";
+import {orgStores} from "doublekit-user-ui/es/store";
 import {privilegeStores} from "doublekit-privilege-ui/es/store";
 import {initFetch,createContainer} from "doublekit-plugin-ui/es/_utils";
 import {observer} from "mobx-react";

@@ -147,13 +147,15 @@ const Config = props =>{
                 setMavenShellBlock("")
                 break
             case "deploy":
-                formInitialValues.deployTargetAddress = null
+                formInitialValues.sshPort = null
                 formInitialValues.deployAddress = null
+                formInitialValues.sshIp = null
+                formInitialValues.sourceAddress = null
                 formInitialValues.dockerProofName = null
-                formInitialValues.dockerPort = null
+                formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
-                formInitialValues.startType = null
-                formInitialValues.startAddress = null
+                formInitialValues.startAddress = ""
+                formInitialValues.deployOrder = ""
                 setLinuxShellBlock("")
         }
     }

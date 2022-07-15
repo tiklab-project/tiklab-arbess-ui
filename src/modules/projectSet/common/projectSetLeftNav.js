@@ -1,5 +1,8 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
+import {PrivilegeButton} from "doublekit-privilege-ui";
+import {SYSTEM_ROLE_STORE} from "doublekit-privilege-ui/lib/store";
+import {inject,observer} from "mobx-react";
 
 const ProjectSetLeftNav= props =>  {
 
@@ -12,36 +15,31 @@ const ProjectSetLeftNav= props =>  {
         setSelectKey(path)
     },[path])
 
-    useEffect(()=>{
-        if(path === "/index/task/assembly/feature" || path ==="/index/task/assembly/role"){
-            setExpandedTree([path,"1"])
-        }
-    },[])
 
     const router = [
         {
             key:"/index/task/assembly/user",
             label:"项目成员",
             icon:"#icon-gongzuotongji",
-            enCode:"1",
+            enCode:"DD1",
         },
         {
             key:"/index/task/assembly/role",
             label:"角色管理",
             icon:"#icon-gongzuotongji",
-            enCode:"1",
+            enCode:"DD2",
         },
         {
             key:"/index/task/assembly/proof",
             label:"凭证管理",
             icon:"#icon-gongzuotongji",
-            // enCode:"3",
+            enCode:"DD3",
         },
         {
             key:"/index/task/assembly/redel",
             label:"其他管理",
             icon:"#icon-gongzuotongji",
-            // enCode:"3",
+            enCode:"DD4",
         },
     ]
 
@@ -51,16 +49,18 @@ const ProjectSetLeftNav= props =>  {
 
     const renderMenu = (data,deep)=> {
         return (
-            <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
-                className={`projectSet-aside-li projectSet-aside-second ${data.key=== selectKey ? "projectSet-aside-select" : ""}`}
-                onClick={()=>select(data.key)}
-                key={data.key}
-            >
-                <svg className="icon" aria-hidden="true">
-                    <use xlinkHref={data.icon} />
-                </svg>
-                <span>{data.label}</span>
-            </li>
+           <PrivilegeButton key={data.key} code={data.enCode} {...props}>
+               <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
+                   className={`projectSet-aside-li projectSet-aside-second ${data.key=== selectKey ? "projectSet-aside-select" : ""}`}
+                   onClick={()=>select(data.key)}
+                   key={data.key}
+               >
+                   <svg className="icon" aria-hidden="true">
+                       <use xlinkHref={data.icon} />
+                   </svg>
+                   <span>{data.label}</span>
+               </li>
+           </PrivilegeButton>
         )
     }
 
@@ -128,4 +128,4 @@ const ProjectSetLeftNav= props =>  {
     )
 }
 
-export default ProjectSetLeftNav
+export default inject(SYSTEM_ROLE_STORE)(observer(ProjectSetLeftNav))

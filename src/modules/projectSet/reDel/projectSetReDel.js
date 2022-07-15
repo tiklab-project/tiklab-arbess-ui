@@ -41,7 +41,7 @@ const ProjectSetReDel = props =>{
         }
         updatePipeline(params).then(res=>{
             if(res.code === 0){
-                localStorage.setItem("pipelineName",values.pipelineName);
+                localStorage.setItem("pipelineName",value.pipelineName);
                 props.history.push("/index/task/work")
             }
         }).catch(error=>{

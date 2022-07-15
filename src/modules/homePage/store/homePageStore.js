@@ -44,7 +44,6 @@ export class HomePageStore{
             pageSize:values.pageSize,
         }
         FindUserAction(params).then(res=>{
-            console.log("动态",res)
             if(res.code === 0 && res.data ){
                 this.dynamicList = res.data.dataList
                 this.page.total = res.data.listSize

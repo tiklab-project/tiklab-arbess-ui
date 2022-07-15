@@ -1,6 +1,9 @@
 import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import ProjectAsideOpt from "./projectAsideOpt";
+import {PrivilegeButton} from "doublekit-privilege-ui";
+import {SYSTEM_ROLE_STORE} from "doublekit-privilege-ui/lib/store";
+import {inject,observer} from "mobx-react";
 
 const ProjectAside = props =>{
 
@@ -21,24 +24,28 @@ const ProjectAside = props =>{
             title:"工作空间",
             icon:"#icon-gongzuotongji",
             key:"2",
+            enCode:"AA"
         },
         {
             to:"/index/task/config",
             title: "配置",
             icon: "#icon-jiekoupeizhi",
             key:"3",
+            enCode:"BB"
         },
         {
             to:"/index/task/structure",
             title: "历史",
             icon:"#icon-lishijishi",
             key:"4",
+            enCode:"CC"
         },
         {
             to:"/index/task/assembly",
             title: "设置",
             icon:"#icon-shezhi",
             key:"5",
+            enCode:"DD"
         }
     ]
 
@@ -50,17 +57,19 @@ const ProjectAside = props =>{
     const renderTaskRouter = taskRouters => {
         return taskRouters && taskRouters.map(item=>{
             return(
-                <li key={item.key}
-                    className={nav===item.to ? "aside_content aside_active" : "aside_content"}
-                    onClick={()=>changeNav(item)}
-                >
-                    <div className="aside_content_icon">
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref= {item.icon}/>
-                        </svg>
-                    </div>
-                    <div className="aside_content_title">{item.title}</div>
-                </li>
+                <PrivilegeButton code={item.enCode} key={item.key} {...props}>
+                    <li key={item.key}
+                        className={nav===item.to ? "aside_content aside_active" : "aside_content"}
+                        onClick={()=>changeNav(item)}
+                    >
+                        <div className="aside_content_icon">
+                            <svg className="icon" aria-hidden="true">
+                                <use xlinkHref= {item.icon}/>
+                            </svg>
+                        </div>
+                        <div className="aside_content_title">{item.title}</div>
+                    </li>
+                </PrivilegeButton>
             )
         })
     }
@@ -80,4 +89,4 @@ const ProjectAside = props =>{
     )
 }
 
-export default ProjectAside
+export default inject(SYSTEM_ROLE_STORE)(observer(ProjectAside))

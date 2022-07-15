@@ -14,8 +14,8 @@ const ConfigCodeSvn = props =>{
             <Row>
                 <FindAllProof type={5}/>
                 <AddProofButton type={1}/>
+                <FormTest git={"code"}/>
             </Row>
-            <FormTest git={"code"}/>
         </Fragment>
     )
 }

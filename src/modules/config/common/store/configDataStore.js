@@ -12,6 +12,7 @@ export class ConfigDataStore {
     @observable linuxShellBlock = ""
     @observable unitShellBlock = ""
     @observable mavenShellBlock = ""
+    @observable orderShellBlock = ""
 
     @action
     setIsPrompt = value => {
@@ -61,6 +62,11 @@ export class ConfigDataStore {
     @action
     setMavenShellBlock = value =>{
         this.mavenShellBlock = value
+    }
+
+    @action
+    setOrderShellBlock = value =>{
+        this.orderShellBlock = value
     }
 
 

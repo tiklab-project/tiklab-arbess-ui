@@ -20,7 +20,13 @@ const ConfigDeployDocker = props =>{
     return(
         <Fragment>
             <Form.Item
-                name="dockerPort"
+                className="noRequired"
+                name="startAddress"
+                label="Dockerfile文件地址">
+                <Input addonBefore={"/"} placeholder=" / 代表部署位置"/>
+            </Form.Item>
+            <Form.Item
+                name="startPort"
                 label="启动端口"
                 rules={[
                     {required:true, message:"请输入启动端口"},

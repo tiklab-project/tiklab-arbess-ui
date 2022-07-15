@@ -26,7 +26,19 @@ const ConfigStructureMavenOrNode = props =>{
             <Form.Item
                 name="structureOrder"
                 label="执行命令"
-                rules={[{required:true, message:"请输入执行命令"}]}
+                className="noRequired"
+                rules={[
+                    // {required:true, message:"请输入执行命令"},
+                    // ({ getFieldValue }) => ({
+                    //     validator(rule, value) {
+                    //         if (!value) {
+                    //             return Promise.reject("请输入执行命令")
+                    //         }
+                    //         if(mavenShellBlock){
+                    //             return Promise.resolve()                            }
+                    //         },
+                    // }),
+                ]}
             >
                 <Mirror
                     shellBlock={mavenShellBlock}
