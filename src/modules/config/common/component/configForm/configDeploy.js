@@ -19,7 +19,7 @@ const ConfigDeploy = props =>{
 
     useEffect(()=>{
         const params = {
-            pipelineName :pipelineName,
+            pipelineName:pipelineName,
             regex:formInitialValues.sourceAddress
         }
         if(formInitialValues.sourceAddress){
@@ -51,7 +51,7 @@ const ConfigDeploy = props =>{
     const validate = (rule,value) =>{
         if (!value) {
             return Promise.resolve();
-        } else if (value< 1) {
+        } else if (value < 1) {
             return Promise.reject("最小3000");
         } else if (value > 10000) {
             return Promise.reject("最大30000");
@@ -74,7 +74,7 @@ const ConfigDeploy = props =>{
                     placeholder="请输入该文件的唯一标识，如:Jar,zip等（支持正则表达式）"
                 />
             </Form.Item>
-            {renderMessageInfo(messageInfo)}
+            { renderMessageInfo(messageInfo) }
             <Form.Item
                 label="Ip地址"
                 name="sshIp"
@@ -98,7 +98,7 @@ const ConfigDeploy = props =>{
             <Row>
                 <FindAllProof type={31}/>
                 <AddProofButton type={5}/>
-                <FormTest/>
+                <FormTest test={"Ip地址"}/>
             </Row>
             <Form.Item
                 name="deployAddress"

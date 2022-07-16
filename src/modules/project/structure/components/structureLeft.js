@@ -25,9 +25,9 @@ const StructureLeft = props =>{
     }
     
     const showHistory = (item,i)=> {
+        setIndex(i+1)
         findHistoryLog(item.historyId).then(()=>{
             setModeData(item)
-            setIndex(i+1)
         })
     }
 
@@ -82,7 +82,7 @@ const StructureLeft = props =>{
                         }}
                         pagination={{
                             ...page,
-                            onChange: (page) => {onChangePage(page);},
+                            onChange:(page)=>{onChangePage(page)},
                             hideOnSinglePage:true,
                             showSizeChanger:false,
                             current:pageCurrent,

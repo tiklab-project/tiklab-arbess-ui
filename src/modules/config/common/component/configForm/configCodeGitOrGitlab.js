@@ -31,7 +31,7 @@ const ConfigCodeGitOrGitlab = props =>{
             <Row>
                 <FindAllProof type={codeType}/>
                 <AddProofButton type={1}/>
-                <FormTest git={"code"}/>
+                <FormTest test={"源码地址"}/>
             </Row>
         </Fragment>
     )

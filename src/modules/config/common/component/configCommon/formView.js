@@ -172,41 +172,39 @@ const FormView = props =>{
     }
 
     const newStage = data =>{
-        return   data && data.map((group,index)=>{
-            return(
-                <div className="configView1-wrapper" key={index} >
-                    <div className="configView1-wrapper-Headline">
-                        <div className="desc">
-                            {
-                                isFormAlias === index ?
-                                    <Input type="text"
-                                           ref={inputRef}
-                                           onBlur={hiddenInput}
-                                           style={{width:100}}
-                                           defaultValue={group.title}
-                                           onChange={e=>changeInputValue(e,index)}
-                                    />
-                                    :
-                                    <>
-                                        <span className="desc-title">{group.title}</span>
-                                        <span onClick={()=> displayInput(index)}>
-                                            <EditOutlined />
-                                        </span>
-                                    </>
-                            }
+        return data && data.map((group,index)=>{
+            return  <div className="configView1-wrapper" key={index} >
+                        <div className="configView1-wrapper-Headline">
+                            <div className="desc">
+                                {
+                                    isFormAlias === index ?
+                                        <Input type="text"
+                                               ref={inputRef}
+                                               onBlur={hiddenInput}
+                                               style={{width:100}}
+                                               defaultValue={group.title}
+                                               onChange={e=>changeInputValue(e,index)}
+                                        />
+                                        :
+                                        <>
+                                            <span className="desc-title">{group.title}</span>
+                                            <span onClick={()=> displayInput(index)}>
+                                                <EditOutlined />
+                                            </span>
+                                        </>
+                                }
+                            </div>
+                            <div className="desc-delete" onClick={()=>deletePart(group)}>
+                                <CloseOutlined />
+                            </div>
                         </div>
-                        <div className="desc-delete" onClick={()=>deletePart(group)}>
-                            <CloseOutlined />
+                        <div className="desc-name">
+                            <ConfigName type={group.dataType}/>
+                        </div>
+                        <div className="configView1-wrapper-newStage">
+                            <ConfigForm type={group.dataType} del={del}/>
                         </div>
                     </div>
-                    <div className="desc-name">
-                        <ConfigName type={group.dataType}/>
-                    </div>
-                    <div className="configView1-wrapper-newStage">
-                        <ConfigForm type={group.dataType} del={del}/>
-                    </div>
-                </div>
-            )
         })
     }
 

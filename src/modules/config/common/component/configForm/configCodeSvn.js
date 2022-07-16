@@ -14,9 +14,10 @@ const ConfigCodeSvn = props =>{
             <Row>
                 <FindAllProof type={5}/>
                 <AddProofButton type={1}/>
-                <FormTest git={"code"}/>
+                <FormTest test={"源码地址"}/>
             </Row>
         </Fragment>
     )
 }
+
 export default ConfigCodeSvn

@@ -82,7 +82,7 @@ const ConfigAddNewStageDrawer = props =>{
         const rightIndex = rightLis.map((item,index)=>index+1)
         for(let x = 1;x <= rightIndex.length;x++){
             const iId = document.getElementById(x) //当前id
-            const lastId = document.getElementById(x-1) //上一个id
+            const lastId = document.getElementById(x).previousSibling //上一个id
             const iTop =iId &&  iId.offsetTop
             const lastTop =lastId && lastId.offsetTop
             if(scrollTop > lastTop && scrollTop < iTop ){

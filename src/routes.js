@@ -20,7 +20,7 @@ const SearchResult=AsyncComponent(()=>import("./modules/pipeline/pipelineSearch/
 /* 流水线 -- 收藏 */
 const PipelineCollect=AsyncComponent(()=>import("./modules/pipeline/pipelineCollect/container/pipelineCollect"))
 
-const Project=AsyncComponent(()=>import("./modules/project/project/container/project"))
+const Project=AsyncComponent(()=>import("./modules/project/common/container/project"))
 
 /*  流水线详情 */
 const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))

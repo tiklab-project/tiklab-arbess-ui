@@ -5,6 +5,7 @@ import {getUser} from "doublekit-core-ui";
 import {RemoteUmdComponent} from "doublekit-plugin-ui";
 import {useSelector} from "doublekit-plugin-ui/es/_utils";
 import FormView from "../common/component/configCommon/formView";
+import GuiView from "../common/component/configCommon/guiView";
 import ConfigTop from "../common/component/configCommon/configTop";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";

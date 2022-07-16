@@ -43,9 +43,7 @@ const PipelineAdd = props => {
 
     const handSubmit = value => {
         const params={
-            user:{
-                id:userId,
-            },
+            user:{id:userId},
             pipelineName:value.pipelineName,
             pipelineType:1,
             pipelineCreateTime:moment.moment
@@ -69,6 +67,10 @@ const PipelineAdd = props => {
                     name="pipelineName"
                     rules={[
                         {required:true, message:""},
+                        {
+                            pattern: /^[\s\u4e00-\u9fa5a-z0-9_-]{0,}$/,
+                            message: "流水线名称不能包含非法字符，如&,%，&，#……等",
+                        },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
                                 if (!value) {
@@ -76,7 +78,7 @@ const PipelineAdd = props => {
                                 }
                                 let nameArray = []
                                 if(pipelineList){
-                                    nameArray = pipelineList && pipelineList.map(item =>  item.pipelineName);
+                                    nameArray = pipelineList && pipelineList.map(item=>item.pipelineName);
                                 }
                                 if (nameArray.includes(value)) {
                                     return Promise.reject("名称已经存在");

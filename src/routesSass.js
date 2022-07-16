@@ -20,7 +20,7 @@ const SearchResult=AsyncComponent(()=>import("./modules/pipeline/pipelineSearch/
 /* 流水线 -- 收藏 */
 const PipelineCollect=AsyncComponent(()=>import("./modules/pipeline/pipelineCollect/container/pipelineCollect"))
 
-const Project=AsyncComponent(()=>import("./modules/project/project/container/project"))
+const Project=AsyncComponent(()=>import("./modules/project/common/container/project"))
 
 /*  流水线详情 */
 const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))
@@ -32,8 +32,6 @@ const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectS
 const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
 const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
-const ProjectSetRole=AsyncComponent(()=>import("./modules/system/privilege/projectSetRole"))
-const ProjectSetFeature=AsyncComponent(()=>import("./modules/system/privilege/projectSetFeature"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
@@ -48,6 +46,8 @@ const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"
 const Info=AsyncComponent(()=>import("./modules/system/message/info/info"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
+const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
+const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 
 const routers=[
     {
@@ -61,7 +61,7 @@ const routers=[
             {
                 path: "/index",
                 exact:true,
-                render:()=>  <Redirect to={"/index/home"}/>,
+                render:()=><Redirect to={"/index/home"}/>,
             },
             {
                 path: "/index/home",
@@ -131,7 +131,7 @@ const routers=[
                             {
                                 path: "/index/task/assembly",
                                 exact:true,
-                                render:()=>  <Redirect to={"/index/task/assembly/user"}/>,
+                                render:()=><Redirect to={"/index/task/assembly/user"}/>,
                             },
                             {
                                 path:"/index/task/assembly/proof",
@@ -139,11 +139,7 @@ const routers=[
                             },
                             {
                                 path:"/index/task/assembly/role",
-                                component: ProjectSetRole
-                            },
-                            {
-                                path:"/index/task/assembly/feature",
-                                component: ProjectSetFeature
+                                component: ProjectRole
                             },
                             {
                                 path:"/index/task/assembly/redel",
@@ -164,7 +160,7 @@ const routers=[
                     {
                         path: "/index/system",
                         exact:true,
-                        render:()=> <Redirect to={"/index/system/base"}/>,
+                        render:()=><Redirect to={"/index/system/base"}/>,
                     },
                     {
                         path: "/index/system/base",
@@ -195,6 +191,14 @@ const routers=[
                         component: SystemFeature,
                     },
                     {
+                        path: "/index/system/project/role",
+                        component: ProjectRole,
+                    },
+                    {
+                        path: "/index/system/project/feature",
+                        component: ProjectFeature,
+                    },
+                    {
                         path: "/index/system/proof",
                         component: SystemProof,
                     },
@@ -209,7 +213,7 @@ const routers=[
     {
         path:"/",
         exact: true,
-        render:()=>  <Redirect to="/index/home"/>,
+        render:()=><Redirect to="/index/home"/>,
     },
 ]
 

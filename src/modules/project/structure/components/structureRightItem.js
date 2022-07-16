@@ -32,11 +32,15 @@ const StructureRightItem = props =>{
             console.log(error)
         })
     }
+    
+    const style = runState => {
+        return `item-${runState}`
+    }
 
     const rightDetails = rightFlowData =>{
         return  rightFlowData && rightFlowData.map((item,index)=>{
             return(
-                <Card  className={`mid_group_center-cart  item-${item.runState}`}  key={index}>
+                <Card  className={`mid_group_center-cart ${style(item.runState)}`}  key={index}>
                     <div className="cart-top">
                         <span className="cart-top-taskAlias">{item.taskAlias}</span>
                         <span> -- </span>
@@ -66,12 +70,12 @@ const StructureRightItem = props =>{
                 <div className="mid_group_top_tel">
                     <span className="tel_title "># {modeData && modeData.findNumber}</span>
                     <span className="tel_time">执行时长：{modeData && modeData.execTime}</span>
-                    <span className="tel_way">触发方式：{ runWay (modeData && modeData.runWay) }</span>
+                    <span className="tel_way">触发方式：{runWay (modeData && modeData.runWay)}</span>
                 </div>
                 <div className="mid_group_top_del">
                     <Popconfirm
-                        title="您确认删除吗?"
                         onConfirm={()=>del(modeData)}
+                        title="您确认删除吗?"
                         okText="确认"
                         cancelText="取消"
                         placement="bottom"
@@ -80,11 +84,11 @@ const StructureRightItem = props =>{
                     </Popconfirm>
                 </div>
             </div>
-            <div className="mid_group_center"> { rightDetails(rightFlowData) } </div>
+            <div className="mid_group_center"> {rightDetails(rightFlowData)} </div>
             <div className="structure-content-bottom">
                 <div className="structure-content-bottom-title">输出</div>
                 <div className="structure-content-bottom-outLog">
-                    { modeData && modeData.runLog }
+                    {modeData && modeData.runLog}
                 </div>
             </div>
         </div>

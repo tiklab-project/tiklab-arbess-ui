@@ -26,6 +26,7 @@ const Structure = props => {
     const userId = getUser().userId
 
     useEffect(()=>{
+        setPageCurrent(1)
         findPipelineUser(pipelineId)
     },[pipelineId])
 
@@ -93,6 +94,7 @@ const Structure = props => {
                 findAll(pipelineId)
             }else if(res.data=== 0){
                 setExecState("")
+                setIndex(1)
             }
             findPage() // 历史列表
         })

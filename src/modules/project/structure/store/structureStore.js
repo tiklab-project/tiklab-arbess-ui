@@ -147,9 +147,8 @@ export class StructureStore {
         return new Promise((resolve, reject) => {
             FindHistoryLog(param).then(res=>{
                 if(res.code === 0){
-                    if( this.index!==0 ){
+                    if(this.index!==0){
                         this.rightFlowData = res.data
-                        this.index=1
                     }
                 }
                 resolve(res)

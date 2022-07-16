@@ -1,4 +1,4 @@
-import {EAM_STORE,EamStore} from "doublekit-eam-ui";
+import {EAM_STORE,EamStore} from "doublekit-eam-ui/es/store";
 import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/pipeline/store/pipelineStore";
 import {STRUCTURE_STORE,StructureStore} from "./modules/project/structure/store/structureStore";
 import {STRUCTURELIST_STORE,StructureListStore} from "./modules/project/structure/store/structureListStore";

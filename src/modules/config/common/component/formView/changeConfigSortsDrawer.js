@@ -48,7 +48,7 @@ const ChangeConfigSortsDrawer = props =>{
                     break
                 case 22:tpl = "node"
                     break
-                case 31:tpl = "linux"
+                case 31:tpl = "虚拟机"
                     break
                 case 32:tpl = "docker"
             }
