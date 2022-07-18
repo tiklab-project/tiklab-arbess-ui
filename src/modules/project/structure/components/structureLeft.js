@@ -43,7 +43,11 @@ const StructureLeft = props =>{
             name:enforcer,
             type:mode
         }
-        findPageHistory(params)
+        findPageHistory(params).then(()=>{
+            if(index!==0){
+                setIndex(1)
+            }
+        })
     }
 
     return(

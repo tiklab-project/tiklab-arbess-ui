@@ -87,18 +87,18 @@ const Structure = props => {
     let interval=null
     useEffect(() => {
         findExecState(pipelineId).then(res=>{
-            if(res.data === 1 ){
-                interval = setInterval(()=>{
+            if(res.data===1){
+                interval=setInterval(()=>{
                     findStructureState(pipelineId).then(res=>{ renderExec(res.data) })
                 }, 1000)
                 findAll(pipelineId)
-            }else if(res.data=== 0){
+            }else if(res.data===0){
                 setExecState("")
                 setIndex(1)
             }
             findPage() // 历史列表
         })
-        return ()=> clearInterval(interval)
+        return ()=>clearInterval(interval)
     }, [pipelineId,freshen])
     
     const renderExec = data => {

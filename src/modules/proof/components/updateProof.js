@@ -1,12 +1,14 @@
-import React,{useEffect} from "react";
-import {Form,Input,Modal,Select} from "antd";
+import React,{useEffect,useState} from "react";
+import {Modal,Form,Input,Select,Checkbox,Row,Col} from "antd";
 
 const {Option} = Select
 
 const UpdateProof = props =>{
 
-    const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart} = props
+    const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart,pipelineList} = props
+
     const [form] = Form.useForm()
+    const [isShowPipeline,setIsShowPipeline] = useState(1)
 
     useEffect(()=>{
         if(visible){
@@ -18,12 +20,12 @@ const UpdateProof = props =>{
         form.validateFields().then((values) => {
             let id;
             if(values.type===1){
-                id=null
+                id = null
             }else {
-                id=localStorage.getItem("pipelineId")
+                id = localStorage.getItem("pipelineId")
             }
             const params = {
-                pipeline:{ pipelineId:id },
+                pipeline:{pipelineId:id},
                 proofId:formValue.proofId,
                 proofScope:values.proofScope,
                 proofType:values.proofType,
@@ -41,6 +43,11 @@ const UpdateProof = props =>{
             setVisible(false)
         })
     }
+
+    const opt = value => {
+        setIsShowPipeline(value)
+    }
+
     return(
         <Modal
             visible={visible}
@@ -49,14 +56,37 @@ const UpdateProof = props =>{
             cancelText="取消"
             onCancel={()=>setVisible(false)}
             onOk={onOk}
+            bodyStyle={{maxHeight:700,"overflow": "auto"}}
         >
             <Form form={form} layout="vertical" name="userForm" autoComplete="off">
                 <Form.Item label="凭证级别" name="type">
-                    <Select >
+                    <Select onChange={opt}>
                         <Option value={1}>全局凭证</Option>
                         <Option value={2}>项目凭证</Option>
                     </Select>
                 </Form.Item>
+                {
+                    pipelineList  && isShowPipeline === 2 ?
+                        <Form.Item
+                            label="项目作用域"
+                            // name="proofList"
+                            className="proofModal-showPipeline"
+                        >
+                            <Checkbox.Group>
+                                {
+                                    pipelineList && pipelineList.map(item=>{
+                                        return <Row key={item.pipelineId}>
+                                                    <Col>
+                                                        <Checkbox value={item.pipelineId}>
+                                                            {item.pipelineName}
+                                                        </Checkbox>
+                                                    </Col>
+                                                </Row>
+                                    })
+                                }
+                            </Checkbox.Group>
+                        </Form.Item> :null
+                }
                 <Form.Item label="凭证作用域" name="proofScope">
                     {
                         displayPart ?
@@ -88,10 +118,10 @@ const UpdateProof = props =>{
                     {({ getFieldValue })=>
                         getFieldValue("proofType") === "password" ? (
                                 <>
-                                    <Form.Item label="username" name="proofUsername" >
+                                    <Form.Item label="用户名" name="proofUsername" >
                                         <Input disabled={displayPart}/>
                                     </Form.Item>
-                                    <Form.Item label="password" name="proofPassword">
+                                    <Form.Item label="密码" name="proofPassword">
                                         <Input.Password disabled={displayPart}/>
                                     </Form.Item>
                                 </>

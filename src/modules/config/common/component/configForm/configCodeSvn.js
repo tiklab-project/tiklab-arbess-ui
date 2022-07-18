@@ -1,8 +1,6 @@
 import React,{Fragment} from "react";
-import {Form,Input,Row} from "antd";
-import AddProofButton from "../../../../proof/components/addProofButton";
-import FindAllProof from "../../../../proof/components/findAllProof";
-import FormTest from "./formTest";
+import {Form,Input} from "antd";
+import ConfigProof from "./configProof";
 
 const ConfigCodeSvn = props =>{
 
@@ -11,11 +9,11 @@ const ConfigCodeSvn = props =>{
             <Form.Item name="codeName" label="svn地址" rules={[{required:true, message:"请输入svn地址"}]}>
                 <Input />
             </Form.Item>
-            <Row>
-                <FindAllProof type={5}/>
-                <AddProofButton type={1}/>
-                <FormTest test={"源码地址"}/>
-            </Row>
+            <ConfigProof
+                allProofType={5}
+                proofBtnType={1}
+                testType={"源码地址"}
+            />
         </Fragment>
     )
 }

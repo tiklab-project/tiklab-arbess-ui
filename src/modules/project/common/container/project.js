@@ -16,9 +16,10 @@ const Project= (props)=>{
     const [visible,setVisible] = useState(false)
     const pipelineName = localStorage.getItem("pipelineName")
     const pipelineId = localStorage.getItem("pipelineId")
+    const userId = getUser().userId
 
     useEffect(()=>{
-        findAllPipelineStatus(getUser().userId)
+        findAllPipelineStatus(userId)
     },[])
 
     useEffect(()=>{

@@ -1,4 +1,4 @@
-import {action, observable} from "mobx";
+import {action,observable} from "mobx";
 
 import {
     CreateProof,
@@ -33,6 +33,7 @@ export class ProofStore{
             proofPort:values.proofPort,
             proofIp:values.proofIp,
             proofCreateTime:values.proofCreateTime,
+            // proofList:values.proofList
         }
         return await CreateProof(params)
     }
@@ -46,11 +47,9 @@ export class ProofStore{
 
     @action
     findPipelineProof =async values =>{
-        const params = {
-            pipelineId:values.pipelineId,
-            type:values.type,
-            userId:values.userId,
-        }
+        const params = new FormData()
+        params.append("pipelineId",values.pipelineId)
+        params.append("type",values.type)
         FindPipelineProof(params).then(res=>{
             console.log(res)
             this.proofList = res.data

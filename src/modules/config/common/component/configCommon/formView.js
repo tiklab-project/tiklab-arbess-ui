@@ -218,6 +218,7 @@ const FormView = props =>{
                     id="form"
                     form={form}
                     autoComplete="off"
+                    scrollToFirstError={true}
                     onFinish={onFinish}
                     onValuesChange={onValuesChange}
                     initialValues={{deployType:1}}

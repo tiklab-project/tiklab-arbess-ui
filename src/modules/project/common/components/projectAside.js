@@ -2,8 +2,6 @@ import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import ProjectAsideOpt from "./projectAsideOpt";
 import {PrivilegeButton} from "doublekit-privilege-ui";
-import {SYSTEM_ROLE_STORE} from "doublekit-privilege-ui/lib/store";
-import {inject,observer} from "mobx-react";
 
 const ProjectAside = props =>{
 
@@ -89,4 +87,4 @@ const ProjectAside = props =>{
     )
 }
 
-export default inject(SYSTEM_ROLE_STORE)(observer(ProjectAside))
+export default ProjectAside

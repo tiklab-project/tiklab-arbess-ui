@@ -1,28 +1,32 @@
-import React from "react";
+import React,{useState} from "react";
+import "./addProofModal.scss";
 import moment from "../../../common/moment/moment";
-import {Modal,Form,Input,Select} from "antd";
-const { Option } = Select;
+import {Modal,Form,Input,Select,Checkbox,Row,Col} from "antd";
+
+const {Option} = Select;
 
 const AddProofModal = props =>{
 
-    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type} = props
+    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type,pipelineList} = props
+
     const [form] = Form.useForm()
+    const [isShowPipeline,setIsShowPipeline] = useState(1)
 
     const onOk = () =>{
         form.validateFields().then((values) => {
             let id,proofScope;
             if(values.type===1){
-                id=null
+                id = null
             }else {
-                id=localStorage.getItem("pipelineId")
+                id = localStorage.getItem("pipelineId")
             }
             if(isAuthority){
-                proofScope=values.proofScope
+                proofScope = values.proofScope
             }else {
-                proofScope=type
+                proofScope = type
             }
             const params = {
-                pipeline:{ pipelineId:id },
+                pipeline:{pipelineId:id},
                 user:{id:userId},
                 type:values.type,
                 proofScope:proofScope,
@@ -42,6 +46,10 @@ const AddProofModal = props =>{
         })
     }
 
+    const opt = value => {
+        setIsShowPipeline(value)
+    }
+
     return (
         <Modal
             visible={visible}
@@ -50,6 +58,7 @@ const AddProofModal = props =>{
             cancelText="取消"
             onCancel={()=>setVisible(false)}
             onOk={onOk}
+            bodyStyle={{maxHeight:700,"overflow":"auto"}}
         >
             <Form form={form}
                   layout="vertical"
@@ -58,20 +67,42 @@ const AddProofModal = props =>{
                   initialValues={{proofType:"password",type:1,proofScope:1}}
             >
                 <Form.Item label="凭证级别" name="type">
-                    <Select >
+                    <Select onChange={opt}>
                         <Option value={1}>全局凭证</Option>
                         <Option value={2}>项目凭证</Option>
                     </Select>
                 </Form.Item>
                 {
+                    pipelineList  && isShowPipeline === 2 ?
+                    <Form.Item
+                        label="项目作用域"
+                        // name="proofList"
+                        className="proofModal-showPipeline"
+                    >
+                        <Checkbox.Group>
+                        {
+                            pipelineList && pipelineList.map(item=>{
+                                return  <Row key={item.pipelineId}>
+                                            <Col>
+                                                <Checkbox value={item.pipelineId}>
+                                                    {item.pipelineName}
+                                                </Checkbox>
+                                            </Col>
+                                        </Row>
+                            })
+                        }
+                        </Checkbox.Group>
+                    </Form.Item> :null
+                }
+                {
                     isAuthority ?
-                        <Form.Item label="凭证作用域" name="proofScope">
-                            <Select>
-                                <Option value={1}>源码凭证</Option>
-                                <Option value={5}>部署凭证</Option>
-                            </Select>
-                        </Form.Item>
-                        :null
+                    <Form.Item label="凭证作用域" name="proofScope">
+                        <Select>
+                            <Option value={1}>源码凭证</Option>
+                            <Option value={5}>部署凭证</Option>
+                        </Select>
+                    </Form.Item>
+                    :null
                 }
                 <Form.Item
                     label="凭证名称"
@@ -89,14 +120,14 @@ const AddProofModal = props =>{
                 <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.proofType !== currentValues.proofType}>
                     {({ getFieldValue })=>
                         getFieldValue("proofType") === "password" ? (
-                                <>
-                                    <Form.Item label="用户名" name="proofUsername">
-                                        <Input placeholder="账号"/>
-                                    </Form.Item>
-                                    <Form.Item label="密码" name="proofPassword">
-                                        <Input.Password  placeholder="密码"/>
-                                    </Form.Item>
-                                </>
+                            <>
+                                <Form.Item label="用户名" name="proofUsername">
+                                    <Input placeholder="账号"/>
+                                </Form.Item>
+                                <Form.Item label="密码" name="proofPassword">
+                                    <Input.Password  placeholder="密码"/>
+                                </Form.Item>
+                            </>
                             ):
                             <Form.Item name="proofPassword" label="私钥">
                                 <Input.TextArea  placeholder="私钥"/>

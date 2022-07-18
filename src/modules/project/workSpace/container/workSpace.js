@@ -37,7 +37,7 @@ const WorkSpace = props =>{
 
     const style = {
         "position":"fixed",
-        "width":"90%",
+        "width":"93%",
         "marginLeft":"15px"
     }
 

@@ -1,10 +1,8 @@
 import React,{Fragment,useEffect,useState} from "react";
-import {Form,Input,Row} from "antd";
-import FindAllProof from "../../../../proof/components/findAllProof";
-import AddProofButton from "../../../../proof/components/addProofButton";
-import FormTest from "./formTest";
+import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
+import ConfigProof from "./configProof";
 
 const ConfigDeploy = props =>{
 
@@ -95,11 +93,11 @@ const ConfigDeploy = props =>{
             >
                 <Input placeholder="输入端口号"/>
             </Form.Item>
-            <Row>
-                <FindAllProof type={31}/>
-                <AddProofButton type={5}/>
-                <FormTest test={"Ip地址"}/>
-            </Row>
+            <ConfigProof
+                allProofType={31}
+                proofBtnType={5}
+                testType={"Ip地址"}
+            />
             <Form.Item
                 name="deployAddress"
                 label="部署位置"

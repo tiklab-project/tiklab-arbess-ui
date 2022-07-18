@@ -9,9 +9,9 @@
         padding: 10px 0 4px 16px;
         font-size: 16px;
         min-width: 500px;
-        margin-left: 15px;
+        margin:0 15px;
         &-width{
-            width:100% !important;
+            width:98% !important;
         }
         &-content{
             display: flex;
@@ -19,7 +19,7 @@
             justify-content: space-between;
         }
         &-breadcrumb{
-            padding-top: 10px;
+            padding-top: 12px;
             font-weight: 700;
         }
     }
@@ -85,7 +85,7 @@
 .deployTargetAddress{
     position: relative;
     top: -21px;
-    left: 10px;
+    left: 120px;
     font-size: 13px;
     font-weight: 300;
     &-null{

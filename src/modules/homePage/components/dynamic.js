@@ -24,12 +24,9 @@ const Dynamic = props =>{
             <div className="dynamic-top">
                 <div className="dynamic-top-title">近期动态</div>
                 <div>
-                    {
-                        dynamicList && dynamicList.length === 0 ? null:
-                        <Button onClick={()=>props.history.push("/index/dynamic")}>
-                            更多
-                        </Button>
-                    }
+                    <Button onClick={()=>props.history.push("/index/dynamic")}>
+                        更多
+                    </Button>
                 </div>
             </div>
             <div className="dynamic-bottom">

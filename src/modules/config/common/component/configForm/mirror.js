@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React,{useRef} from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
@@ -48,6 +48,9 @@ const Mirror = props =>{
             onBlur={()=>{
                 setShellBlock(mirrorRefs.current.editor.getValue())
                 setIsPrompt(true)
+            }}
+            onChange={()=>{
+                setShellBlock(mirrorRefs.current.editor.getValue())
             }}
         />
     )

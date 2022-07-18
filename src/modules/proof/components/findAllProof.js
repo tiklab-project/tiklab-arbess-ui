@@ -1,7 +1,7 @@
 import React from "react";
 import {inject,observer} from "mobx-react";
 import {Form,Select} from "antd";
-import {getUser} from "doublekit-core-ui";
+
 const {Option} = Select
 
 const FindAllProof = props =>{
@@ -22,7 +22,6 @@ const FindAllProof = props =>{
         const params ={
             pipelineId:pipelineId,
             type:proofScope,
-            userId:getUser().userId
         }
         findPipelineProof(params)
     }

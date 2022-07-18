@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "doublekit-core-ui";
 import Proof from "../../proof/container/proof";
@@ -6,19 +6,29 @@ import Proof from "../../proof/container/proof";
 // 系统凭证
 const SystemProof = props =>{
 
-    const {proofStore} = props
+    const {proofStore,pipelineStore} = props
     const {findPipelineProof,proofList,fresh} = proofStore
+    const {findAllPipelineStatus,pipelineList} = pipelineStore
+    const userId = getUser().userId
 
     useEffect(()=>{
         const param = {
-            userId:getUser().userId,
-            pipelineId:null,
+            pipelineId:"",
             type:0
         }
         findPipelineProof(param)
     },[fresh])
 
-    return <Proof proofList={proofList} firstItem={"凭证管理"} type={"system"}/>
+    useEffect(()=>{
+        findAllPipelineStatus(userId)
+    },[])
+
+    return  <Proof
+                proofList={proofList}
+                firstItem={"凭证管理"}
+                type={"system"}
+                pipelineList={pipelineList}
+            />
 }
 
-export default inject("proofStore")(observer(SystemProof))
+export default inject("proofStore","pipelineStore")(observer(SystemProof))

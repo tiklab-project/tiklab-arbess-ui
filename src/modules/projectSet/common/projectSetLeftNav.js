@@ -1,8 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {PrivilegeButton} from "doublekit-privilege-ui";
-import {SYSTEM_ROLE_STORE} from "doublekit-privilege-ui/lib/store";
-import {inject,observer} from "mobx-react";
 
 const ProjectSetLeftNav= props =>  {
 
@@ -128,4 +126,4 @@ const ProjectSetLeftNav= props =>  {
     )
 }
 
-export default inject(SYSTEM_ROLE_STORE)(observer(ProjectSetLeftNav))
+export default ProjectSetLeftNav

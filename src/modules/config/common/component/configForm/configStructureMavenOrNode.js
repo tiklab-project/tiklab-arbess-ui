@@ -1,12 +1,13 @@
-import React,{Fragment} from "react";
+import React, {Fragment, useState} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
 
+const {TextArea} = Input;
+
 const ConfigStructureMavenOrNode = props =>{
 
     const {configDataStore,configItemStore} = props
-
     const {setIsPrompt,mavenShellBlock,setMavenShellBlock} = configDataStore
     const {profileAddress} = configItemStore
     const pipelineName = localStorage.getItem("pipelineName")

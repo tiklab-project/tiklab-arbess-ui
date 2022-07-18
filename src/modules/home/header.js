@@ -20,14 +20,10 @@ const Head = props =>{
     const eeText = isEE === 2 ? vipTwo : vipOne
 
     useEffect(()=>{
-        if(path === "/index/dynamic"){
-            path="/index/home"
-        }
         if(path.indexOf("/index/system") === 0){
             path="/index/system"
         }
-        if( path.indexOf("/index/task") === 0 || path === "/index/collect" || path === "/index/new" ||
-            path.indexOf("/index/config") === 0 || path.indexOf("/index/searchresult")=== 0 ) {
+        if( path.indexOf("/index/task") === 0 || path === "/index/new" || path.indexOf("/index/config") === 0 || path.indexOf("/index/searchresult")=== 0 ) {
             path= "/index/pipeline"
         }
         setCurrentLink(path)

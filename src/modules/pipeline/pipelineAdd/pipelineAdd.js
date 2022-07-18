@@ -49,7 +49,7 @@ const PipelineAdd = props => {
             pipelineCreateTime:moment.moment
         }
         createPipeline(params).then(res=>{
-            if(res.code=== 0 && res.data){
+            if(res.code === 0 && res.data){
                 localStorage.setItem("pipelineId",res.data)
                 localStorage.setItem("pipelineName",value.pipelineName)
                 props.history.push(`/index/config/${value.pipelineName}`)

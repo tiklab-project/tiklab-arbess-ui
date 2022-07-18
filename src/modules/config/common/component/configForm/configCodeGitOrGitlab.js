@@ -1,9 +1,7 @@
 import React,{Fragment} from "react";
-import AddProofButton from "../../../../proof/components/addProofButton";
-import FindAllProof from "../../../../proof/components/findAllProof";
-import FormTest from "./formTest";
-import {Form,Input,Row} from "antd";
+import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
+import ConfigProof from "./configProof";
 
 const ConfigCodeGitOrGitlab = props =>{
 
@@ -28,11 +26,11 @@ const ConfigCodeGitOrGitlab = props =>{
             <Form.Item name="codeBranch" label="分支" className="noRequired">
                 <Input style={{width:300}} placeholder="请输入分支，默认是master"/>
             </Form.Item>
-            <Row>
-                <FindAllProof type={codeType}/>
-                <AddProofButton type={1}/>
-                <FormTest test={"源码地址"}/>
-            </Row>
+            <ConfigProof
+                allProofType={codeType}
+                proofBtnType={1}
+                testType={"源码地址"}
+            />
         </Fragment>
     )
 }

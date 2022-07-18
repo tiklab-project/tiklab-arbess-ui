@@ -7,7 +7,7 @@ import {getUser} from "doublekit-core-ui";
 
 const AddProofButton = props =>{
 
-    const {proofStore,style,type} = props
+    const {proofStore,style,type,pipelineList} = props
     const {createProof,fresh,setFresh} = proofStore
 
     const userId = getUser().userId
@@ -38,6 +38,7 @@ const AddProofButton = props =>{
                 setFresh={setFresh}
                 isAuthority={isAuthority}
                 type={type}
+                pipelineList={pipelineList}
             />
         </Fragment>
     )

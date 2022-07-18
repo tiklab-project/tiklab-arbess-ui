@@ -8,7 +8,7 @@ import {inject,observer} from "mobx-react";
 
 const Proof = props =>{
 
-    const {proofList,proofStore,firstItem,type} = props
+    const {proofList,proofStore,firstItem,type,pipelineList} = props
     const {updateProof,deleteProof,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState("")
@@ -58,11 +58,6 @@ const Proof = props =>{
             key:"proofType"
         },
         {
-            title:"拥有者",
-            dataIndex:"username",
-            key:"username",
-        },
-        {
             title:"创建时间",
             dataIndex:"proofCreateTime",
             key:"proofCreateTime"
@@ -105,7 +100,10 @@ const Proof = props =>{
             <div className="proof">
                 <div className="proof-content">
                     <div className="proof-content-btn">
-                        <AddProofButton style={style}/>
+                        <AddProofButton
+                            style={style}
+                            pipelineList={pipelineList}
+                        />
                     </div>
                     <Table
                         bordered
@@ -123,6 +121,7 @@ const Proof = props =>{
                     setFresh={setFresh}
                     fresh={fresh}
                     displayPart={displayPart}
+                    pipelineList={pipelineList}
                 />
             </div>
         </Fragment>

@@ -1,6 +1,5 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
 import Proof from "../../proof/container/proof";
 
 // 项目凭证
@@ -13,7 +12,6 @@ const ProjectSetProof = props =>{
     useEffect(()=>{
         const params ={
             pipelineId:pipelineId,
-            userId:getUser().userId,
             type:0,
         }
         findPipelineProof(params)
