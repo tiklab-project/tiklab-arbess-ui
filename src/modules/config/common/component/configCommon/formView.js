@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useRef} from "react";
 import  "./formView.scss";
-import {Button,Form,Input,message} from "antd";
+import {Button,Form,Input,message,Popconfirm} from "antd";
 import {CloseOutlined,EditOutlined} from "@ant-design/icons";
 import {getUser} from "doublekit-core-ui";
 import moment from "../../../../../common/moment/moment";
@@ -149,7 +149,7 @@ const FormView = props =>{
                 startAddress:values.startAddress,
                 deployType:values.deployType,
                 deployOrder:orderShellBlock,
-                proof:{ proofId:localStorage.getItem("deployProofId") }
+                proof:{proofId:localStorage.getItem("deployProofId")}
             }
         }
         updateConfigure(configureList).then(res=>{
@@ -158,9 +158,9 @@ const FormView = props =>{
                 props.history.push("/index/task/config")
             }
             if(res.code!==0){
-                message.error({content:"配置失败", className:"message"})
+                message.error({content:"配置失败",className:"message"})
             }else {
-                message.success({content: "配置成功", className:"message"})
+                message.success({content:"配置成功",className:"message"})
             }
         })
     }
@@ -194,8 +194,15 @@ const FormView = props =>{
                                         </>
                                 }
                             </div>
-                            <div className="desc-delete" onClick={()=>deletePart(group)}>
-                                <CloseOutlined />
+                            <div className="desc-delete">
+                                <Popconfirm
+                                    title="当前项数据会被清空"
+                                    onConfirm={()=>deletePart(group)}
+                                    okText="确定"
+                                    cancelText="取消"
+                                >
+                                    <CloseOutlined />
+                                </Popconfirm>
                             </div>
                         </div>
                         <div className="desc-name">

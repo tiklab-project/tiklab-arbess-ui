@@ -1,6 +1,7 @@
 import React from "react";
 import {inject,observer} from "mobx-react";
 import {Form,Select} from "antd";
+import {getUser} from "doublekit-core-ui";
 
 const {Option} = Select
 
@@ -9,6 +10,7 @@ const FindAllProof = props =>{
     const {proofStore,type}=props
     const {findPipelineProof,proofList} = proofStore
     const pipelineId = localStorage.getItem("pipelineId")
+    const userId = getUser().userId
 
     const clickFindAllGit = () =>{
         let proofScope
@@ -22,6 +24,7 @@ const FindAllProof = props =>{
         const params ={
             pipelineId:pipelineId,
             type:proofScope,
+            userId:userId
         }
         findPipelineProof(params)
     }

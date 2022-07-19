@@ -24,9 +24,7 @@ export class PipelineCollectStore{
     @action
     updateFollow =async value =>{
         const params = {
-            pipeline:{
-                pipelineId:value.pipeline
-            },
+            pipeline:{pipelineId:value.pipeline},
             userId:value.userId
         }
         return await UpdateFollow(params)

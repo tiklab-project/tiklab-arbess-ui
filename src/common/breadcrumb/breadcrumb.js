@@ -17,7 +17,7 @@ const BreadcrumbContent = props =>{
                                     流水线
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item style={{ cursor: "pointer" }}>
-                                    { localStorage.getItem("pipelineName") }
+                                    {localStorage.getItem("pipelineName")}
                                 </Breadcrumb.Item>
                             </Breadcrumb>
                         </div>

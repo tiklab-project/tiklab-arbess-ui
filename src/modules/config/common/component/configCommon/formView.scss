@@ -52,5 +52,19 @@
     .config-details-gitTest{
         text-align: right;
     }
-
+    .required{
+        position: relative;
+        top: 20px;
+        .icon{
+            width: 8px;
+            height: 8px;
+            color: red;
+        }
+        &-self{
+            padding-left: 10px;
+        }
+    }
+    .noRequired{
+        padding-left: 10px;
+    }
 }

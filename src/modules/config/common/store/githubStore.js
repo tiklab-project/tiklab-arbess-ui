@@ -31,7 +31,7 @@ export class GithubStore {
             user:{id:values.user.id},
             type:values.type,
             proofScope:values.proofScope,
-            proofType:values.proofType ,
+            proofType:values.proofType,
         }
         return await GetProof(params)
     }

@@ -22,7 +22,7 @@ export class GiteeStore {
     code =async value =>{
         const params = new FormData()
         params.append("code", value)
-        return await Code(params);
+        return await Code(params)
     }
 
     //gitee--创建凭证
@@ -35,9 +35,9 @@ export class GiteeStore {
             user:{id:values.user.id},
             type:values.type,
             proofScope:values.proofScope,
-            proofType:values.proofType ,
+            proofType:values.proofType,
         }
-        return await GetProof(params);
+        return await GetProof(params)
     }
 
     //gitee--获取所有仓库

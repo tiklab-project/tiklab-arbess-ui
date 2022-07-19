@@ -1,4 +1,5 @@
-import React,{Fragment} from "react";
+import React from "react";
+import {Popconfirm} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import ConfigName from "../configCommon/configName";
 import ConfigForm from "../configCommon/configForm";
@@ -14,8 +15,15 @@ const ConfigCode = props =>{
                     <div className="desc">
                         源码管理
                     </div>
-                    <div className="desc-delete" onClick={()=>del(1)}>
-                        <CloseOutlined />
+                    <div className="desc-delete">
+                        <Popconfirm
+                            title="当前项数据会被清空"
+                            onConfirm={()=>del(1)}
+                            okText="确定"
+                            cancelText="取消"
+                        >
+                            <CloseOutlined />
+                        </Popconfirm>
                     </div>
                 </div>
                 <div className="desc-name">

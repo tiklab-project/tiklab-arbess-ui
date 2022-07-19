@@ -14,7 +14,8 @@ const SystemProof = props =>{
     useEffect(()=>{
         const param = {
             pipelineId:"",
-            type:0
+            type:0,
+            userId:userId
         }
         findPipelineProof(param)
     },[fresh])

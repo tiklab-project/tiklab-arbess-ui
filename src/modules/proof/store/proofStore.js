@@ -33,7 +33,7 @@ export class ProofStore{
             proofPort:values.proofPort,
             proofIp:values.proofIp,
             proofCreateTime:values.proofCreateTime,
-            // proofList:values.proofList
+            proofList:values.proofList
         }
         return await CreateProof(params)
     }
@@ -49,6 +49,7 @@ export class ProofStore{
     findPipelineProof =async values =>{
         const params = new FormData()
         params.append("pipelineId",values.pipelineId)
+        params.append("userId",values.userId)
         params.append("type",values.type)
         FindPipelineProof(params).then(res=>{
             console.log(res)
@@ -70,6 +71,7 @@ export class ProofStore{
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe,
             type:values.type,
+            proofList:values.proofList
         }
         return await UpdateProof(params)
     }

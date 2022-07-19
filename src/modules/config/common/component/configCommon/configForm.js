@@ -3,7 +3,7 @@ import ConfigCodeSvn from "../configForm/configCodeSvn";
 import ConfigCodeGitOrGitlab from "../configForm/configCodeGitOrGitlab"
 import ConfigCodeGiteeOrGithub from "../configForm/configCodeGiteeOrGithub";
 import ConfigTestUnit from "../configForm/configTestUnit";
-import ConfigStructureMaven from "../configForm/configStructureMavenOrNode";
+import ConfigStructureMavenOrNode from "../configForm/configStructureMavenOrNode";
 import ConfigDeployType from "../configForm/configDeployType";
 
 const ConfigForm = props =>{
@@ -24,9 +24,8 @@ const ConfigForm = props =>{
                         case 11:
                             return <ConfigTestUnit/>
                         case 21:
-                            return <ConfigStructureMaven/>
                         case 22:
-                            return <ConfigStructureMaven/>
+                            return <ConfigStructureMavenOrNode/>
                         case 31:
                         case 32:
                             return <ConfigDeployType type={type} del={del}/>

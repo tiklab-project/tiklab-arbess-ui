@@ -12,7 +12,6 @@ export class PipelineStore{
     
     @observable pipelineList=[]
     @observable searchPipelineList = []
-
     @observable pipeline = {}
 
     @action

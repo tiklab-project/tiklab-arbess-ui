@@ -36,6 +36,7 @@ const AddProofModal = props =>{
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe,
                 proofCreateTime:moment.moment,
+                proofList:values.proofList
             }
             createProof(params).then(()=>{
                 setFresh(!fresh)
@@ -73,11 +74,12 @@ const AddProofModal = props =>{
                     </Select>
                 </Form.Item>
                 {
-                    pipelineList  && isShowPipeline === 2 ?
+                    isShowPipeline === 2 ?
                     <Form.Item
                         label="项目作用域"
-                        // name="proofList"
+                        name="proofList"
                         className="proofModal-showPipeline"
+                        rules={[{required:true, message:"请选择项目作用域"}]}
                     >
                         <Checkbox.Group>
                         {

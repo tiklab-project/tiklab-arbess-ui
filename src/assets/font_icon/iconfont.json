@@ -6,18 +6,25 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1133262",
+      "name": "星号",
+      "font_class": "xinghao",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "18368079",
+      "name": "星号",
+      "font_class": "xinghao1",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
       "icon_id": "689212",
       "name": "表单 页面",
       "font_class": "biaodanyemian",
       "unicode": "e7cc",
       "unicode_decimal": 59340
-    },
-    {
-      "icon_id": "12225043",
-      "name": "必选",
-      "font_class": "bixuan",
-      "unicode": "e611",
-      "unicode_decimal": 58897
     },
     {
       "icon_id": "16930084",
