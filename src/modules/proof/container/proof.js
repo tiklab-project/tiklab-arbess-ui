@@ -1,4 +1,4 @@
-import React,{Fragment,useState} from "react";
+import React,{useState} from "react";
 import "../components/proof.scss";
 import {Popconfirm,Table} from "antd";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
@@ -97,35 +97,33 @@ const Proof = props =>{
     const style = "primary"
 
     return(
-        <Fragment>
+        <div className="proof">
             <BreadcrumbContent firstItem={firstItem} type={type}/>
-            <div className="proof">
-                <div className="proof-content">
-                    <div className="proof-content-btn">
-                        <AddProofButton style={style} pipelineList={pipelineList}/>
-                    </div>
-                    <Table
-                        bordered
-                        rowKey={record=>record.proofId}
-                        columns={columns}
-                        dataSource={proofList}
-                        pagination={{pageSize: 12,hideOnSinglePage:true}}
-                    />
+            <div className="proof-content">
+                <div className="proof-content-btn">
+                    <AddProofButton style={style} pipelineList={pipelineList}/>
                 </div>
-                <UpdateProof
-                    visible={visible}
-                    setVisible={setVisible}
-                    formValue={formValue}
-                    updateProof={updateProof}
-                    setFresh={setFresh}
-                    fresh={fresh}
-                    displayPart={displayPart}
-                    pipelineList={pipelineList}
-                    isShowPipeline={isShowPipeline}
-                    setIsShowPipeline={setIsShowPipeline}
+                <Table
+                    bordered
+                    rowKey={record=>record.proofId}
+                    columns={columns}
+                    dataSource={proofList}
+                    pagination={{pageSize:12,hideOnSinglePage:true}}
                 />
             </div>
-        </Fragment>
+            <UpdateProof
+                visible={visible}
+                setVisible={setVisible}
+                formValue={formValue}
+                updateProof={updateProof}
+                setFresh={setFresh}
+                fresh={fresh}
+                displayPart={displayPart}
+                pipelineList={pipelineList}
+                isShowPipeline={isShowPipeline}
+                setIsShowPipeline={setIsShowPipeline}
+            />
+        </div>
     )
 }
 

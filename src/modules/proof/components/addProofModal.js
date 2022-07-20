@@ -74,7 +74,7 @@ const AddProofModal = props =>{
                     </Select>
                 </Form.Item>
                 {
-                    isShowPipeline === 2 ?
+                    pipelineList && isShowPipeline === 2 ?
                     <Form.Item
                         label="项目作用域"
                         name="proofList"

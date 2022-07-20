@@ -10,11 +10,9 @@ const ConfigCode = props =>{
 
     const code = () => {
         return  codeData ?
-            <div className="configView1-wrapper">
-                <div className="configView1-wrapper-Headline">
-                    <div className="desc">
-                        源码管理
-                    </div>
+            <div className="formView-wrapper">
+                <div className="formView-wrapper-Headline">
+                    <div className="desc">源码管理</div>
                     <div className="desc-delete">
                         <Popconfirm
                             title="当前项数据会被清空"
@@ -29,12 +27,12 @@ const ConfigCode = props =>{
                 <div className="desc-name">
                     <ConfigName type={codeData.codeType}/>
                 </div>
-                <div className="configView1-wrapper-newStage">
+                <div className="formView-wrapper-newStage">
                     <ConfigForm type={codeData.codeType}/>
                 </div>
             </div>
             :
-            <div className="configView1-wrapper-handle" onClick={()=>setCodeVisible(true)}>
+            <div className="formView-wrapper-handle" onClick={()=>setCodeVisible(true)}>
                 添加代码源
             </div>
     }

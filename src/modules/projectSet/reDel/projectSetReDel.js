@@ -50,9 +50,9 @@ const ProjectSetReDel = props =>{
     }
 
     return(
-        <Fragment>
+        <div className="pipelineSys-reDel">
             <BreadcrumbContent type={"project"}/>
-            <div className="pipelineSys-reDel" style={{padding:20}}>
+            <div className="pipelineSys-reDel-content" style={{padding:"8px 8px 0"}}>
                 <Form onFinish={re} form={form} layout="inline" autoComplete = "off">
                     <Form.Item
                         label="重命名"
@@ -108,9 +108,9 @@ const ProjectSetReDel = props =>{
                             <Spin indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />} />
                             :null
                     }
-               </div>
-           </div>
-        </Fragment>
+                </div>
+            </div>
+        </div>
     )
 }
 

@@ -6,8 +6,9 @@ import Proof from "../../proof/container/proof";
 // 项目凭证
 const ProjectSetProof = props =>{
 
-    const {proofStore} = props
+    const {proofStore,pipelineStore} = props
     const {findPipelineProof,proofList,fresh} = proofStore
+    const {pipelineList} = pipelineStore
     const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
@@ -20,7 +21,11 @@ const ProjectSetProof = props =>{
         findPipelineProof(params)
     },[fresh,pipelineId])
 
-    return <Proof proofList={proofList} type={"project"}/>
+    return  <Proof
+                proofList={proofList}
+                type={"project"}
+                pipelineList={pipelineList}
+            />
 }
 
-export default inject("proofStore")(observer(ProjectSetProof))
+export default inject("proofStore","pipelineStore")(observer(ProjectSetProof))

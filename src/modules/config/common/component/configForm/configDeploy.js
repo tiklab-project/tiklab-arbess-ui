@@ -16,19 +16,19 @@ const ConfigDeploy = props =>{
     const pipelineId = localStorage.getItem("pipelineId")
 
     useEffect(()=>{
+        return ()=>{
+            setMessageInfo("")
+        }
+    },[pipelineId])
+
+    useEffect(()=>{
         const params = {
             pipelineName:pipelineName,
             regex:formInitialValues.sourceAddress
         }
         if(formInitialValues.sourceAddress){
             getFile(params).then(res=>{
-                if(res.code === 0 ){
-                    if(res.data ===null){
-                        setMessageInfo("null")
-                    }else {
-                        setMessageInfo("匹配到文件"+res.data)
-                    }
-                }
+                addMessageInfo(res)
             }).catch(error=>{
                 console.log(error)
             })
@@ -36,6 +36,16 @@ const ConfigDeploy = props =>{
             setMessageInfo("")
         }
     },[formInitialValues.sourceAddress,pipelineId])
+    
+    const addMessageInfo = data => {
+        if(data.code === 0 ){
+            if(data.data === null){
+                setMessageInfo("null")
+            }else {
+                setMessageInfo("匹配到文件"+data.data)
+            }
+        }
+    }
 
     const renderMessageInfo = messageInfo => {
         switch (messageInfo) {

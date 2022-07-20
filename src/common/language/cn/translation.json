@@ -7,5 +7,8 @@
     "help": "帮助",
     "task": "任务",
     "user": "成员",
-    "privilege": "权限"
+    "privilege": "权限",
+    "config": "配置",
+    "history": "历史",
+    "work": "工作空间"
 }

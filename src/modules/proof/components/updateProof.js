@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import {Modal,Form,Input,Select,Checkbox,Row,Col} from "antd";
 
 const {Option} = Select
@@ -13,7 +13,7 @@ const UpdateProof = props =>{
         if(visible){
             form.setFieldsValue(formValue)
         }
-    },[formValue])
+    },[visible])
 
     const onOk = () =>  {
         form.validateFields().then((values) => {
@@ -66,7 +66,7 @@ const UpdateProof = props =>{
                     </Select>
                 </Form.Item>
                 {
-                    isShowPipeline === 2 ?
+                    isShowPipeline === 2?
                         <Form.Item
                             label="项目作用域"
                             name="proofList"

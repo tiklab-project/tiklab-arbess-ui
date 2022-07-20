@@ -14,14 +14,13 @@ import ConfigName from "./configName";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 
-const FormView = props =>{
+const formView = props =>{
 
     const {form,del,configDataStore,updateConfigure,jumpOrNot} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
-        orderShellBlock,
-    } = configDataStore
+        orderShellBlock} = configDataStore
 
     const inputRef = useRef()
     const [newStageVisible, setNewStageVisible] = useState(false)
@@ -109,7 +108,7 @@ const FormView = props =>{
 
         const configureList = {
             configureCreateTime:moment.moment,
-            user:{id:userId,},
+            user:{id:userId},
             pipeline:{pipelineId:pipelineId},
             pipelineCode:{
                 codeId:localStorage.getItem("codeId"),
@@ -173,8 +172,8 @@ const FormView = props =>{
 
     const newStage = data =>{
         return data && data.map((group,index)=>{
-            return  <div className="configView1-wrapper" key={index} >
-                        <div className="configView1-wrapper-Headline">
+            return  <div className="formView-wrapper" key={index} >
+                        <div className="formView-wrapper-Headline">
                             <div className="desc">
                                 {
                                     isFormAlias === index ?
@@ -208,7 +207,7 @@ const FormView = props =>{
                         <div className="desc-name">
                             <ConfigName type={group.dataType}/>
                         </div>
-                        <div className="configView1-wrapper-newStage">
+                        <div className="formView-wrapper-newStage">
                             <ConfigForm type={group.dataType} del={del}/>
                         </div>
                     </div>
@@ -216,9 +215,9 @@ const FormView = props =>{
     }
 
     return(
-        <div className="configView1">
-            <div className="configView1-content">
-                <div className="configView1-content-changSort">
+        <div className="formView">
+            <div className="formView-content">
+                <div className="formView-content-changSort">
                     <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
                 </div>
                 <Form
@@ -266,4 +265,4 @@ const FormView = props =>{
     )
 }
 
-export default withRouter(inject("configDataStore")(observer(FormView)))
+export default withRouter(inject("configDataStore")(observer(formView)))

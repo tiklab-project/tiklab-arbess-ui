@@ -145,8 +145,8 @@ const SystemAside= props =>  {
                             {
                                 item.children ?
                                     (isExpandedTree(item.key)?
-                                            <DownOutlined style={{fontSize: "10px"}}/> :
-                                            <UpOutlined style={{fontSize: "10px"}}/>
+                                        <DownOutlined style={{fontSize: "10px"}}/> :
+                                        <UpOutlined style={{fontSize: "10px"}}/>
                                     ): ""
                             }
                         </div>

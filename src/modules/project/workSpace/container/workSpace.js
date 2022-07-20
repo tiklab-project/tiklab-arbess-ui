@@ -38,13 +38,12 @@ const WorkSpace = props =>{
     const style = {
         "position":"fixed",
         "width":"92%",
-        "marginLeft":"15px"
     }
 
     return(
-        <Fragment>
+        <div className="workSpace">
             <BreadcrumbContent style={style} type={"project"}/>
-            <div className="workSpace">
+            <div className="workSpace-content">
                 <WorkSpaceNod
                     fileList={fileList}
                     setFileList={setFileList}
@@ -67,7 +66,7 @@ const WorkSpace = props =>{
                     drawerContent={drawerContent}
                 />
             </div>
-        </Fragment>
+        </div>
     )
 }
 

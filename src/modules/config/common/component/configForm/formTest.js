@@ -46,7 +46,9 @@ const FormTest = props =>{
         }else{
             if(data.data === true && data.code === 0){
                 message.success({content:"连接成功", className:"message"})
-            } message.error({content:"连接失败", className:"message"})
+            }else {
+                message.error({content:"连接失败", className:"message"})
+            }
         }
     }
 

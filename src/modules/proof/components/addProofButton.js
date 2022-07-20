@@ -38,6 +38,7 @@ const AddProofButton = props =>{
                 setFresh={setFresh}
                 isAuthority={isAuthority}
                 type={type}
+                style={style}
                 pipelineList={pipelineList}
             />
         </Fragment>

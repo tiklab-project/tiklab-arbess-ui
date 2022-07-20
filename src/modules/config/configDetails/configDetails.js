@@ -39,8 +39,10 @@ const ConfigDetails = props =>{
             localStorage.removeItem("testId")
             localStorage.removeItem("structureId")
             localStorage.removeItem("deployId")
+            form.resetFields()
+            setFormInitialValues({})
         }
-    },[])
+    },[pipelineId])
 
     // 是否有图形化插件
     useEffect(()=>{
@@ -97,7 +99,7 @@ const ConfigDetails = props =>{
                 setCodeData({...codeData})
             }
         }
-    },[formInitialValues])
+    },[formInitialValues,pipelineId])
 
     const lists = [1,2,3,4,5,11,21,22,31,32]
     // 表单初始化
@@ -114,6 +116,7 @@ const ConfigDetails = props =>{
                     setUnitShellBlock("")
                     setMavenShellBlock("")
                     setLinuxShellBlock("")
+                    setOrderShellBlock("")
                 }
                 else {
                     nonForm(initialData)

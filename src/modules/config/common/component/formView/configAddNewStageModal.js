@@ -41,6 +41,10 @@ const lis=[
                 type:32 ,
                 tel:"docker"
             },
+            {
+                type:33,
+                tel:"本机"
+            }
         ]
     }
 ]
@@ -57,7 +61,7 @@ const ConfigAddNewStageModal = props =>{
             for(let j=0;j<groupDesc.length;j++){
                 if(name[i] === groupDesc[j]){
                     message.info({
-                        content: "已经存在",
+                        content: `${group.title}已经存在`,
                         style: {
                             marginTop: "9vh",
                             marginLeft:"5vh"

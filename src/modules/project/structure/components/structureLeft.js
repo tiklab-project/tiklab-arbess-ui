@@ -58,6 +58,8 @@ const StructureLeft = props =>{
                 setState={setState}
                 enforcer={enforcer}
                 setEnforcer={setEnforcer}
+                index={index}
+                setIndex={setIndex}
                 mode={mode}
                 setMode={setMode}
                 setPageCurrent={setPageCurrent}

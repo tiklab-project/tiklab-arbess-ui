@@ -65,7 +65,7 @@ const Project= (props)=>{
             />
             <div className="project-content"
                  onClick={()=>setVisible(false)}
-                 style={{marginLeft:65}}
+                 style={{marginLeft:65,padding:"0 10px"}}
             >
                 { renderRoutes(route.routes) }
             </div>

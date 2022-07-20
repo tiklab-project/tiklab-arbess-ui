@@ -1,13 +1,16 @@
 .workSpace{
-    padding: 50px 0 0 20px;
+    padding:10px 10px 0;
     ul li{
         list-style: none;
         margin: 10px 0;
     }
-    &-top{
+    &-content{
+        padding-top: 50px;
+    }
+    &-nod{
         margin-bottom: 10px;
-        &-nod{
-            .nod_item{
+        &-file{
+            .file_item{
                 &_tree{
                     color: #1890ff;
                     font-size: 16px;

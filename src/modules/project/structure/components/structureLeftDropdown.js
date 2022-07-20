@@ -1,11 +1,12 @@
 import React,{useEffect,useState} from "react";
 import {Select} from "antd";
 
-const { Option } = Select;
+const {Option} = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findPageHistory,state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList,setPageCurrent} = props
+    const {findPageHistory,state,setState,enforcer,setEnforcer,index,setIndex,mode,setMode,
+        pipelineUserList,setPageCurrent} = props
 
     const [statusValue,setStatus] = useState("")
     const [userValue,setUserValue] = useState("")
@@ -21,7 +22,11 @@ const StructureLeftDropdown = props =>{
     let params = null
     const change = () =>{
         setPageCurrent(1)
-        findPageHistory(params)
+        findPageHistory(params).then(()=>{
+            if(index!==0){
+                setIndex(1)
+            }
+        })
     }
 
     const changeState = (value,e) =>{
