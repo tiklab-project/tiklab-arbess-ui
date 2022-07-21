@@ -17,19 +17,17 @@ const ConfigChangeView = props =>{
         }
         setProcessVisible(true)
         setIsPrompt(false)
-        setTimeout(()=>{
-            pipelineStartStructure(params).then(res=>{
-                console.log("运行",res)
-                if(res.code === 0 && res.data === 1){
-                    props.history.push("/index/task/structure")
-                }else {
-                    setProcessVisible(false)
-                    message.error({content:"运行失败", className:"message"})
-                }
-            }).catch(error=>{
-                console.log(error)
-            })
-        },1000)
+        pipelineStartStructure(params).then(res=>{
+            console.log("运行",res)
+            if(res.code === 0 && res.data === 1){
+                props.history.push("/index/task/structure")
+            }else {
+                setProcessVisible(false)
+                message.error({content:"运行失败", className:"message"})
+            }
+        }).catch(error=>{
+            console.log(error)
+        })
     }
 
     return (

@@ -6,10 +6,10 @@ import {List} from "antd";
 
 const StructureLeft = props =>{
 
-    const {findHistoryLog,leftPageList,execState,status,setModeData,setIndex,index,page,findPageHistory,
-        pipelineId,pipelineUserList,structureListStore}=props
+    const {execState,status,pipelineId,structureStore,structureListStore}=props
 
-    const {pageCurrent,setPageCurrent,state,setState,enforcer,setEnforcer,mode,setMode} = structureListStore
+    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,pipelineUserList} = structureStore
+    const {pageCurrent,setPageCurrent,state,setState,enforcer,setEnforcer,mode,setMode,drop} = structureListStore
 
     const sta = item =>{
         if(leftPageList){
@@ -32,7 +32,6 @@ const StructureLeft = props =>{
     }
 
     const onChangePage = pagination => {
-        setPageCurrent(pagination)
         const params = {
             pipelineId:pipelineId,
             pageParam: {
@@ -43,9 +42,18 @@ const StructureLeft = props =>{
             name:enforcer,
             type:mode
         }
+        change(params,pagination)
+    }
+
+    const change = (params,page) =>{
+        setPageCurrent(page)
         findPageHistory(params).then(()=>{
             if(index!==0){
-                setIndex(1)
+                if(execState){
+                    setIndex(0)
+                }else{
+                    setIndex(1)
+                }
             }
         })
     }
@@ -53,17 +61,15 @@ const StructureLeft = props =>{
     return(
         <div className="structure-content-left">
             <StructureLeftDropdown
-                findPageHistory={findPageHistory}
                 state={state}
                 setState={setState}
                 enforcer={enforcer}
                 setEnforcer={setEnforcer}
-                index={index}
-                setIndex={setIndex}
                 mode={mode}
                 setMode={setMode}
-                setPageCurrent={setPageCurrent}
                 pipelineUserList={pipelineUserList}
+                change={change}
+                drop={drop}
             />
             <div className="structure-content-left-history">
                 <div className="history-content">
@@ -126,4 +132,4 @@ const StructureLeft = props =>{
     )
 }
 
-export default inject("structureListStore")(observer(StructureLeft))
+export default inject("structureStore","structureListStore")(observer(StructureLeft))

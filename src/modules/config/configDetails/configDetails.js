@@ -283,37 +283,35 @@ const ConfigDetails = props =>{
                     setView={setView}
                     setIsPrompt={setIsPrompt}
                     pipelineId={pipelineId}
-                    pipelineStartStructure={pipelineStartStructure}
                     isBtn={isBtn}
+                    pipelineStartStructure={pipelineStartStructure}
                 />
             </div>
-            <Fragment>
-                {
-                    view === 1 ?
-                        <FormView
-                            del={del}
-                            form={form}
-                            updateConfigure={updateConfigure}
-                        />
-                        :
-                        <Fragment>
-                            {
-                                isBtn ?
-                                    <RemoteUmdComponent
-                                        point={"gui"}
-                                        pluginStore={pluginStore}
-                                        extraProps={{
-                                            configDataStore,
-                                            configStore,
-                                            form,
-                                            del
-                                        }}
-                                    />
-                                    : null
-                            }
-                        </Fragment>
-                }
-            </Fragment>
+            {
+                view === 1 ?
+                    <FormView
+                        del={del}
+                        form={form}
+                        updateConfigure={updateConfigure}
+                    />
+                    :
+                    <Fragment>
+                        {
+                            isBtn ?
+                                <RemoteUmdComponent
+                                    point={"gui"}
+                                    pluginStore={pluginStore}
+                                    extraProps={{
+                                        configDataStore,
+                                        configStore,
+                                        form,
+                                        del
+                                    }}
+                                />
+                                : null
+                        }
+                    </Fragment>
+            }
         </Fragment>
     )
 }

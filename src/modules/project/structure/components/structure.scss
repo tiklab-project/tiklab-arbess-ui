@@ -84,6 +84,7 @@
             overflow: auto;
             &-mid{
                 padding: 0 15px 15px;
+                min-width: 400px;
                 .mid_group{
                     display: flex;
                     flex-direction: column;

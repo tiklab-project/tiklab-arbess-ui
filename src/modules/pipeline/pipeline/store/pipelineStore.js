@@ -24,7 +24,9 @@ export class PipelineStore{
         const param = new FormData()
         param.append("userId",value)
         FindAllPipelineStatus(param).then(res=>{
-            this.pipelineList=res.data
+            if(res.code === 0 ){
+                this.pipelineList=res.data
+            }
             console.log("所有流水线", res)
         }).catch(error=>{
             console.log(error)

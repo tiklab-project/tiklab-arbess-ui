@@ -173,44 +173,42 @@ const Config = props =>{
         <Fragment>
             <div className="config-top config-top-width">
                 <ConfigTop
-                    userId={userId}
                     view={view}
                     setView={setView}
                     setIsPrompt={setIsPrompt}
                     pipelineId={pipelineId}
-                    pipelineStartStructure={pipelineStartStructure}
+                    userId={userId}
                     isBtn={isBtn}
+                    pipelineStartStructure={pipelineStartStructure}
                 />
             </div>
-            <Fragment>
-                {
-                    view === 1 ?
-                        <FormView
-                            del={del}
-                            form={form}
-                            jumpOrNot={jumpOrNot}
-                            updateConfigure={updateConfigure}
-                        />
-                        :
-                        <Fragment>
-                            {
-                                isBtn ?
-                                    <RemoteUmdComponent
-                                        point={"gui"}
-                                        pluginStore={pluginStore}
-                                        extraProps={{
-                                            configDataStore,
-                                            configStore,
-                                            jumpOrNot,
-                                            form,
-                                            del
-                                        }}
-                                    />
-                                    : null
-                            }
-                        </Fragment>
-                }
-            </Fragment>
+            {
+                view === 1 ?
+                    <FormView
+                        del={del}
+                        form={form}
+                        jumpOrNot={jumpOrNot}
+                        updateConfigure={updateConfigure}
+                    />
+                    :
+                    <Fragment>
+                        {
+                            isBtn ?
+                                <RemoteUmdComponent
+                                    point={"gui"}
+                                    pluginStore={pluginStore}
+                                    extraProps={{
+                                        configDataStore,
+                                        configStore,
+                                        jumpOrNot,
+                                        form,
+                                        del
+                                    }}
+                                />
+                                : null
+                        }
+                    </Fragment>
+            }
             <PromptContent
                 isPrompt={isPrompt}
                 confirmLeave={confirmLeave}

@@ -14,14 +14,13 @@ const Structure = props => {
 
     const {structureStore,structureListStore} = props
 
-    const {findExecState,findStructureState,findAll,findPageHistory,findHistoryLog,deleteHistoryLog,
-        killInstance,pipelineStartStructure,leftPageList,rightFlowData,modeData,setModeData,
-        index,setIndex,page,rightExecuteData,isData,findPipelineUser,pipelineUserList,setIsData
+    const {findExecState,findStructureState,findAll,findPageHistory,deleteHistoryLog,
+        killInstance,pipelineStartStructure,leftPageList,rightFlowData,modeData,
+        index,setIndex,rightExecuteData,isData,findPipelineUser,setIsData,
     } = structureStore
-    const {state,enforcer,mode,setPageCurrent} = structureListStore
+    const {state,enforcer,mode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
 
     const [execState,setExecState] = useState("")   //左侧 -- 正在构建
-    const [freshen,setFreshen] = useState(false)  // 根据情况刷新页面
     const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
@@ -43,7 +42,7 @@ const Structure = props => {
     //                 setExecState("")
     //                 socket.close()
     //             }
-    //             findPage() // 历史列表
+    //             changPage() // 历史列表
     //         })
     //     }
     //     return ()=> {
@@ -71,13 +70,34 @@ const Structure = props => {
                 pageSize: 10,
                 currentPage: 1
             },
+            state:0,
+            userId:null,
+            type:0
+        }
+        findPageHistory(params).then(res=>{
+            if(res.code === 0 && res.data.dataList.length === 0){
+                setIsData(false)
+            }
+        })
+    }
+
+    const changPage = () =>{
+        const params = {
+            pipelineId:pipelineId,
+            pageParam: {
+                pageSize: 10,
+                currentPage: 1
+            },
             state:state,
             userId:enforcer,
             type:mode
         }
         findPageHistory(params).then(res=>{
-            if(res.code === 0 ){
-                if(res.data.dataList.length === 0){
+            if(res.code === 0 && res.data.dataList.length === 0){
+                if(state !==0 || enforcer !==null || mode !==0){
+                    setDrop(!drop)
+                    findPage()
+                } else {
                     setIsData(false)
                 }
             }
@@ -96,11 +116,11 @@ const Structure = props => {
                 setExecState("")
                 setIndex(1)
             }
-            findPage() // 历史列表
+            changPage() // 历史列表
         })
         return ()=>clearInterval(interval)
     }, [pipelineId,freshen])
-    
+
     const renderExec = data => {
         if(data===null){
             stop()
@@ -113,7 +133,6 @@ const Structure = props => {
     }
 
     const stop = () => {
-        setExecState("")
         setFreshen(!freshen)
         clearInterval(interval)
     }
@@ -166,17 +185,9 @@ const Structure = props => {
                 isData ?
                     <div className="structure-content">
                         <StructureLeft
-                            page={page}
                             pipelineId={pipelineId}
-                            leftPageList={leftPageList}
                             execState={execState}
                             status={status}
-                            setModeData={setModeData}
-                            index={index}
-                            setIndex={setIndex}
-                            findPageHistory={findPageHistory}
-                            findHistoryLog={findHistoryLog}
-                            pipelineUserList={pipelineUserList}
                         />
                         <div className="structure-content-right">
                             <BreadcrumbContent type={"project"}/>

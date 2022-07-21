@@ -17,6 +17,10 @@
             border-radius: 4px;
             display: inline-block;
             position: relative;
+            &-li{
+                height: 32px;
+                display: inline-block;
+            }
             &-item{
                 padding: 8px 10px;
                 cursor: pointer;
@@ -33,10 +37,8 @@
             &-ban{
                 color: #C4C4C4;
                 height: 30px;
-            }
-            &-li{
-                height: 32px;
-                display: inline-block;
+                margin-top: -3px;
+                padding: 8px 10px;
             }
         }
     }

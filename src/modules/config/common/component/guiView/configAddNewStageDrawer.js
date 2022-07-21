@@ -51,7 +51,7 @@ const rightLis = [
         desc:[
             {
                 tpl:31 ,
-                tel:"linux"
+                tel:"虚拟机"
             },
             {
                 tpl:32 ,

@@ -139,6 +139,9 @@ export class StructureStore {
         })
     }
 
+    // @action
+    // pageHistory =
+
     //历史详情日志
     @action
     findHistoryLog =async value =>{

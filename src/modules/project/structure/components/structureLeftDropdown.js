@@ -5,34 +5,23 @@ const {Option} = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {findPageHistory,state,setState,enforcer,setEnforcer,index,setIndex,mode,setMode,
-        pipelineUserList,setPageCurrent} = props
+    const {state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList,change,drop} = props
 
-    const [statusValue,setStatus] = useState("")
+    const [statusValue,setStatusValue] = useState("")
     const [userValue,setUserValue] = useState("")
     const [modeValue,setModeValue] = useState("")
     const pipelineId = localStorage.getItem("pipelineId")
 
     useEffect(()=>{
-        setStatus("状态")
+        setStatusValue("状态")
         setUserValue("执行人")
         setModeValue("执行方式")
-    },[pipelineId])
-
-    let params = null
-    const change = () =>{
-        setPageCurrent(1)
-        findPageHistory(params).then(()=>{
-            if(index!==0){
-                setIndex(1)
-            }
-        })
-    }
+    },[pipelineId,drop])
 
     const changeState = (value,e) =>{
-        setStatus(value)
+        setStatusValue(value)
         setState(parseInt(e.key))
-        params = {
+        const params = {
             pipelineId:pipelineId,
             state:e.key,
             userId:enforcer,
@@ -42,7 +31,7 @@ const StructureLeftDropdown = props =>{
                 currentPage: 1
             }
         }
-        change()
+        change(params,1)
     }
 
     const changeEnforcer = (value,e) =>{
@@ -51,7 +40,7 @@ const StructureLeftDropdown = props =>{
         }
         setUserValue(value)
         setEnforcer(e.key)
-        params = {
+        const params = {
             pipelineId:pipelineId,
             state:state,
             userId:e.key,
@@ -61,13 +50,13 @@ const StructureLeftDropdown = props =>{
                 currentPage: 1
             }
         }
-        change()
+        change(params,1)
     }
 
     const changeMode = (value,e) =>{
         setModeValue(value)
         setMode(parseInt(e.key))
-        params = {
+        const params = {
             pipelineId:pipelineId,
             state:state,
             userId:enforcer,
@@ -77,7 +66,7 @@ const StructureLeftDropdown = props =>{
                 currentPage:1
             }
         }
-        change()
+        change(params,1)
     }
 
     //状态
@@ -134,7 +123,7 @@ const StructureLeftDropdown = props =>{
                     <Option key={"全部"} value={"全部"}>全部</Option>
                     {
                         pipelineUserList && pipelineUserList.map(item=>{
-                            return <Option key={ item.user.id } value= {item.user.name}>{item.user && item.user.name}</Option>
+                            return <Option key={item.user.id} value= {item.user.name}>{item.user && item.user.name}</Option>
                         })
                     }
                 </Select>

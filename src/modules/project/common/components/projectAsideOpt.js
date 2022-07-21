@@ -15,10 +15,10 @@ const ProjectAsideOpt = props =>{
     const changePipeline = (e,item) => {
         e.preventDefault()
         if(pipelineName!==item.pipelineName){
-            setState(0)
-            setEnforcer(null)
-            setMode(0)
             if(!isPrompt){ // 如果为false，直接改变pipelineName和pipelineId
+                setState(0)
+                setEnforcer(null)
+                setMode(0)
                 localStorage.setItem("pipelineName",item.pipelineName)
                 localStorage.setItem("pipelineId",item.pipelineId)
             }else {

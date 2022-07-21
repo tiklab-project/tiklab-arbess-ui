@@ -13,7 +13,7 @@ const ConfigAddNewStageRightDrawer = props =>{
             for(let j=0;j<groupDesc.length;j++){
                 if(name[i] === groupDesc[j]){
                     message.info({
-                        content: "已经存在",
+                        content: `${group.title}已经存在`,
                         className: "custom-class",
                         style: {
                             marginTop: "9vh",
