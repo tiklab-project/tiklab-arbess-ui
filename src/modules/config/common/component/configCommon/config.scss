@@ -70,6 +70,10 @@
         -webkit-transition: -webkit-transform .218s ease-in;
         transition: -webkit-transform .218s ease-in;
         transition: transform .218s ease-in,-webkit-transform .218s ease-in;
+        &:hover{
+            cursor:pointer;
+            transform:translate(0,-5px)
+        }
         &-tpl{
             display: inline-block;
             vertical-align: top;

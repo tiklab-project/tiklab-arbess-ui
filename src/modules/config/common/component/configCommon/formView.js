@@ -20,7 +20,7 @@ const formView = props =>{
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
-        orderShellBlock} = configDataStore
+        orderShellBlock,shellBlock} = configDataStore
 
     const inputRef = useRef()
     const [newStageVisible, setNewStageVisible] = useState(false)
@@ -37,7 +37,7 @@ const formView = props =>{
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
-    },[formInitialValues])
+    },[formInitialValues,pipelineId])
 
     // 显示文本框
     const displayInput = index =>{
@@ -138,16 +138,16 @@ const formView = props =>{
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
-                sshIp:values.sshIp,
-                sshPort:values.sshPort,
-                deployAddress: values.deployAddress,
-                sourceAddress: values.sourceAddress,
-                startShell:linuxShellBlock,
-                startPort:values.startPort,
-                mappingPort:values.mappingPort,
-                startAddress:values.startAddress,
                 deployType:values.deployType,
-                deployOrder:orderShellBlock,
+                sshIp:values.deployType === 0 ? values.sshIp :null,
+                sshPort:values.deployType === 0 ? values.sshPort :null,
+                deployAddress:values.deployType === 0 ? values.deployAddress :null,
+                sourceAddress:values.deployType === 0 ? values.sourceAddress:null,
+                startShell:values.deployType === 0 ? linuxShellBlock:shellBlock,
+                startPort:values.deployType === 0 ? values.startPort:null,
+                mappingPort:values.deployType === 0 ?values.mappingPort:null,
+                startAddress:values.deployType === 0 ? values.startAddress :null,
+                deployOrder:values.deployType === 0 ? orderShellBlock :null,
                 proof:{proofId:localStorage.getItem("deployProofId")}
             }
         }
@@ -208,7 +208,7 @@ const formView = props =>{
                             <ConfigName type={group.dataType}/>
                         </div>
                         <div className="formView-wrapper-newStage">
-                            <ConfigForm type={group.dataType} del={del}/>
+                            <ConfigForm type={group.dataType}/>
                         </div>
                     </div>
         })

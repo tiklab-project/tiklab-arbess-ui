@@ -20,7 +20,7 @@ const Structure = props => {
     } = structureStore
     const {state,enforcer,mode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
 
-    const [execState,setExecState] = useState("")   //左侧 -- 正在构建
+    const [execState,setExecState] = useState("") //左侧 -- 正在构建
     const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
@@ -93,7 +93,7 @@ const Structure = props => {
             type:mode
         }
         findPageHistory(params).then(res=>{
-            if(res.code === 0 && res.data.dataList.length === 0){
+            if(res.code===0 && res.data.dataList.length===0){
                 if(state !==0 || enforcer !==null || mode !==0){
                     setDrop(!drop)
                     findPage()

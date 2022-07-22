@@ -9,10 +9,11 @@ export class ConfigDataStore {
     @observable isFormAlias = "" // 更改别名--表单
     @observable isGuiAlias = "" // 更改别名--图形
     @observable codeType = 1 // 源码管理类型
-    @observable linuxShellBlock = ""
+    @observable linuxShellBlock = "" // 结构化启动命令
+    @observable shellBlock = ""  // 自定义启动命令
     @observable unitShellBlock = ""
     @observable mavenShellBlock = ""
-    @observable orderShellBlock = ""
+    @observable orderShellBlock = ""  // 部署文件命令
 
     @action
     setIsPrompt = value => {
@@ -55,6 +56,11 @@ export class ConfigDataStore {
     }
 
     @action
+    setShellBlock = value =>{
+        this.shellBlock = value
+    }
+
+    @action
     setUnitShellBlock = value =>{
         this.unitShellBlock = value
     }
@@ -68,7 +74,6 @@ export class ConfigDataStore {
     setOrderShellBlock = value =>{
         this.orderShellBlock = value
     }
-
 
 }
 

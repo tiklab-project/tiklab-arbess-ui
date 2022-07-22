@@ -7,7 +7,7 @@ import ConfigStructureMavenOrNode from "../configForm/configStructureMavenOrNode
 import ConfigDeployType from "../configForm/configDeployType";
 
 const ConfigForm = props =>{
-    const {type,del} = props
+    const {type} = props
     return(
         <Fragment>
             {
@@ -28,7 +28,7 @@ const ConfigForm = props =>{
                             return <ConfigStructureMavenOrNode/>
                         case 31:
                         case 32:
-                            return <ConfigDeployType type={type} del={del}/>
+                            return <ConfigDeployType type={type}/>
                     }
                 })()
             }

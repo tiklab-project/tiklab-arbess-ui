@@ -20,7 +20,7 @@ const ConfigDetails = props =>{
     const {getAccessToken} = githubStore
     const {pipelineStartStructure} = structureStore
     const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock} = configDataStore
+        setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock,setShellBlock} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
@@ -39,8 +39,6 @@ const ConfigDetails = props =>{
             localStorage.removeItem("testId")
             localStorage.removeItem("structureId")
             localStorage.removeItem("deployId")
-            form.resetFields()
-            setFormInitialValues({})
         }
     },[pipelineId])
 
@@ -212,8 +210,12 @@ const ConfigDetails = props =>{
         Object.assign(formInitialValues,formValue)
         localStorage.setItem("deployId",data.deployId)
         localStorage.setItem("deployProofId",data.proof && data.proof.proofId)
-        setLinuxShellBlock(`${data.startShell ? data.startShell : ""}`)
         setOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
+        if(data.deployType===0){
+            setLinuxShellBlock(`${data.startShell ? data.startShell : ""}`)
+        }else {
+            setShellBlock(`${data.startShell ? data.startShell : ""}`)
+        }
     }
 
     // 按需清空表单的值
@@ -271,6 +273,7 @@ const ConfigDetails = props =>{
                 formInitialValues.deployOrder = ""
                 setLinuxShellBlock("")
                 setOrderShellBlock("")
+                setShellBlock("")
         }
     }
 

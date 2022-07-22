@@ -5,7 +5,9 @@ import FormTest from "./formTest";
 import {Row} from "antd";
 
 const ConfigProof = props =>{
+
     const {allProofType,proofBtnType,testType} = props
+
     return (
         <Row>
             <FindAllProof type={allProofType}/>

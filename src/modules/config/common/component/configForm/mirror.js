@@ -49,9 +49,6 @@ const Mirror = props =>{
                 setShellBlock(mirrorRefs.current.editor.getValue())
                 setIsPrompt(true)
             }}
-            onChange={()=>{
-                setShellBlock(mirrorRefs.current.editor.getValue())
-            }}
         />
     )
 }

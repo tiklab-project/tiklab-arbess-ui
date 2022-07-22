@@ -7,16 +7,12 @@ import ConfigDeployDocker from "./configDeployDocker";
 
 const ConfigDeployType = props =>{
 
-    const {type,del} = props
-
-    const changeDeployTypeType = () => {
-        del(type)
-    }
+    const {type} = props
 
     return(
         <Fragment>
             <Form.Item name="deployType" label="部署类型" className="noRequired">
-                <Select onChange={()=>changeDeployTypeType()}>
+                <Select>
                     <Select.Option value={0}>结构化部署</Select.Option>
                     <Select.Option value={1}>自定义部署</Select.Option>
                 </Select>

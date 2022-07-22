@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import "../components/proof.scss";
 import {Popconfirm,Table} from "antd";
-import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import AddProofButton from "../components/addProofButton";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import UpdateProof from "../components/updateProof";
 import {inject,observer} from "mobx-react";
 
@@ -115,13 +115,13 @@ const Proof = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 formValue={formValue}
-                updateProof={updateProof}
-                setFresh={setFresh}
                 fresh={fresh}
+                setFresh={setFresh}
                 displayPart={displayPart}
                 pipelineList={pipelineList}
                 isShowPipeline={isShowPipeline}
                 setIsShowPipeline={setIsShowPipeline}
+                updateProof={updateProof}
             />
         </div>
     )

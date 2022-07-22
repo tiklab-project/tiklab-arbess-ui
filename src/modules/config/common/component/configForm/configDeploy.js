@@ -60,8 +60,8 @@ const ConfigDeploy = props =>{
         if (!value) {
             return Promise.resolve();
         } else if (value < 1) {
-            return Promise.reject("最小3000");
-        } else if (value > 10000) {
+            return Promise.reject("最小1");
+        } else if (value > 30000) {
             return Promise.reject("最大30000");
         } else if (!/^\d+$|^\d+[.]?\d+$/.test(value)) {
             return Promise.reject("只能输入数字");
