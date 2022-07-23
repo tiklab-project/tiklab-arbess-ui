@@ -1,4 +1,5 @@
 import React from "react";
+import "./breadcrumb.scss";
 import {Breadcrumb} from "antd";
 
 // 面包屑

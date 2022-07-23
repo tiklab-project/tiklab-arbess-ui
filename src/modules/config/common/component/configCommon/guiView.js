@@ -1,17 +1,17 @@
-import React, {Fragment,useState,useRef,useEffect} from "react";
+import React,{Fragment,useState,useRef,useEffect} from "react";
 import  "./guiView.scss";
+import ConfigName from "./configName";
 import ConfigCode from "../guiView/configCode";
 import ConfigAddNewStage from "../guiView/configAddNewStage";
 import ConfigAddCodeDrawer from "../guiView/configAddCodeDrawer";
 import ConfigAddNewStageDrawer from "../guiView/configAddNewStageDrawer";
 import ConfigFormDetailsDrawer from "../guiView/configFormDetailsDrawer";
 import {inject, observer} from "mobx-react";
-import {Form, Input, message} from "antd";
-import {EditOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
-import ConfigName from "./configName";
-import moment from "../../../../../common/moment/moment";
+import {Form,Input,message} from "antd";
+import {EditOutlined} from "@ant-design/icons";
 import {getUser} from "doublekit-core-ui";
+import moment from "../../../../../common/moment/moment";
 
 const GuiView = props =>{
 
@@ -19,7 +19,7 @@ const GuiView = props =>{
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isGuiAlias,setIsGuiAlias,codeType,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
-    } = configDataStore
+        shellBlock,orderShellBlock} = configDataStore
 
     const inputRef = useRef()
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
@@ -86,17 +86,17 @@ const GuiView = props =>{
         }
 
         data && data.map((item,index)=>{
-            if(item.dataType === 11){
+            if(item.dataType > 10 && item < 20 ){
                 testSort = index + 2
                 testAlias = item.title
                 testType = item.dataType
             }
-            if(item.dataType === 21 || item.dataType === 22){
+            if(item.dataType > 20 && item.dataType < 30){
                 structureSort = index + 2
                 structureAlias = item.title
                 structureType = item.dataType
             }
-            if(item.dataType === 31 || item.dataType === 32){
+            if(item.dataType > 30 && item.dataType < 40){
                 deploySort = index + 2
                 deployAlias = item.title
                 deployType = item.dataType
@@ -105,7 +105,7 @@ const GuiView = props =>{
 
         const configureList = {
             configureCreateTime:moment.moment,
-            user:{id:userId,},
+            user:{id:userId},
             pipeline:{pipelineId:pipelineId},
             pipelineCode:{
                 codeId:localStorage.getItem("codeId"),
@@ -135,26 +135,29 @@ const GuiView = props =>{
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
-                ip:values.ip,
-                port:values.port,
-                deployAddress: values.deployAddress,
-                deployTargetAddress: values.deployTargetAddress,
-                deployShell:linuxShellBlock,
-                dockerPort:values.dockerPort,
-                mappingPort:values.mappingPort,
-                proof:{ proofId:localStorage.getItem("deployProofId") }
+                deployType:values.deployType,
+                sshIp:values.deployType === 0 ? values.sshIp :null,
+                sshPort:values.deployType === 0 ? values.sshPort :null,
+                deployAddress:values.deployType === 0 ? values.deployAddress :null,
+                sourceAddress:values.deployType === 0 ? values.sourceAddress:null,
+                startShell:values.deployType === 0 ? linuxShellBlock:shellBlock,
+                startPort:values.deployType === 0 ? values.startPort:null,
+                mappingPort:values.deployType === 0 ?values.mappingPort:null,
+                startAddress:values.deployType === 0 ? values.startAddress :null,
+                deployOrder:values.deployType === 0 ? orderShellBlock :null,
+                proof:{proofId:localStorage.getItem("deployProofId")}
             }
         }
         updateConfigure(configureList).then(res=>{
+            setIsPrompt(false)
             if(jumpOrNot){
                 props.history.push("/index/task/config")
             }
             if(res.code!==0){
-                message.error({content:"配置失败", className:"message"})
+                message.error({content:"配置失败",className:"message"})
             }else {
-                message.success({content: "配置成功", className:"message"})
+                message.success({content:"配置成功",className:"message"})
             }
-            setIsPrompt(false)
         })
     }
 
@@ -224,17 +227,17 @@ const GuiView = props =>{
     }
 
     return (
-        <div className="configView2">
-            <div className="configView2-content">
+        <div className="guiView">
+            <div className="guiView-content">
                 <ConfigCode
                     codeData={codeData}
                     setCodeDrawer={setCodeDrawer}
                     setNewStage={setNewStage}
                     setTaskFormDrawer={setTaskFormDrawer}
                 />
-                <div className="configView2-main">
-                    <div className="configView2-main_container">
-                        <div className="configView2-main_group">
+                <div className="guiView-main">
+                    <div className="guiView-main_container">
+                        <div className="guiView-main_group">
                             { newStageShow(data) }
                             <ConfigAddNewStage
                                 setIndex={setIndex}

@@ -1,5 +1,4 @@
 import React,{useState,useEffect,Fragment} from "react";
-import "../common/component/configCommon/config.scss";
 import {Form} from "antd";
 import {getUser} from "doublekit-core-ui";
 import {RemoteUmdComponent} from "doublekit-plugin-ui";
@@ -299,11 +298,17 @@ const ConfigDetails = props =>{
                     />
                     :
                     <Fragment>
+                        {/*<GuiView*/}
+                        {/*    del={del}*/}
+                        {/*    form={form}*/}
+                        {/*    updateConfigure={updateConfigure}*/}
+                        {/*/>*/}
                         {
                             isBtn ?
                                 <RemoteUmdComponent
                                     point={"gui"}
                                     pluginStore={pluginStore}
+                                    isModalType={true}
                                     extraProps={{
                                         configDataStore,
                                         configStore,

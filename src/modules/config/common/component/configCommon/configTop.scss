@@ -1,0 +1,24 @@
+.config{
+    &-top{
+        position: fixed;
+        z-index: 88;
+        background: #fff;
+        width: calc(100% - 96px);
+        border-bottom: 1px solid #ccc;
+        padding: 8px 0 4px 16px;
+        font-size: 16px;
+        min-width: 500px;
+        &-width{
+            width:98% !important;
+        }
+        &-content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        &-breadcrumb{
+            padding-top: 12px;
+            font-weight: 700;
+        }
+    }
+}

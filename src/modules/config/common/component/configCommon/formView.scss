@@ -52,6 +52,68 @@
     .config-details-gitTest{
         text-align: right;
     }
+    .group{
+        margin-bottom: 16px;
+        &-title{
+            color: #8c8c8c;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        &-content{
+            margin-bottom: 8px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            width: 440px;
+            &:after{
+                content: "";
+                width: 214px;
+                height: 0;
+                background: transparent;
+                opacity: 0;
+            }
+        }
+        &-desc{
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            width: 214px;
+            height: 80px;
+            display: -webkit-inline-flex;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            -webkit-transition: -webkit-transform .218s ease-in;
+            transition: -webkit-transform .218s ease-in;
+            transition: transform .218s ease-in,-webkit-transform .218s ease-in;
+            &:hover{
+                cursor:pointer;
+                transform:translate(0,-5px)
+            }
+            &-tpl{
+                display: inline-block;
+                vertical-align: top;
+                width: calc(100% - 100px);
+                margin-left: 12px;
+            }
+        }
+        &-type{
+            margin: 10px;
+        }
+    }
     .required{
         position: relative;
         top: 20px;
@@ -66,5 +128,14 @@
     }
     .noRequired{
         padding-left: 10px;
+    }
+    .deployTargetAddress{
+        position: relative;
+        top: -21px;
+        font-size: 13px;
+        font-weight: 300;
+        &-null{
+            color: red;
+        }
     }
 }

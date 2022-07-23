@@ -1,4 +1,5 @@
 import React from "react";
+import "./configTop.scss";
 import BreadcrumbContent from "../../../../../common/breadcrumb/breadcrumb";
 import ConfigChangeView from "./configChangeView";
 

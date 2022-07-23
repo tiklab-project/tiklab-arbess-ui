@@ -1,5 +1,4 @@
 import React,{Fragment,useState,useEffect} from "react";
-import "../common/component/configCommon/config.scss";
 import {withRouter} from "react-router";
 import {getUrlParam} from "../common/component/configCommon/getUrlParam";
 import {inject,observer} from "mobx-react";
