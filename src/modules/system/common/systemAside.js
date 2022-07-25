@@ -133,7 +133,7 @@ const SystemAside= props =>  {
                 <li key={item.code} title={item.label} className="system-aside-li">
                     <div className="system-aside-item system-aside-first"
                          style={{paddingLeft: `${deep * 20 + 20}`}}
-                         onClick={() => setOpenOrClose(item.key)}
+                         onClick={()=>setOpenOrClose(item.key)}
                     >
                         <span style={{color: "$blue-main"}}>
                             <svg className="icon" aria-hidden="true">

@@ -8,19 +8,28 @@ import {getUser} from "doublekit-core-ui";
 
 const Project= (props)=>{
 
-    const {route,pipelineStore,configDataStore}=props
+    const {route,pipelineStore,configDataStore,match}=props
 
-    const {findAllPipelineStatus,pipelineList,pipeline,setPipeline} = pipelineStore
+    const {findAllPipelineStatus,pipelineList,pipeline,setPipeline,lastPath,setLastPath} = pipelineStore
     const {isPrompt,setIsPrompt} = configDataStore
 
     const [visible,setVisible] = useState(false)
-    const pipelineName = localStorage.getItem("pipelineName")
+    const pipelineName = match.params.pipelineName
     const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
     useEffect(()=>{
         findAllPipelineStatus(userId)
     },[])
+
+    // useEffect(()=>{
+    //     pipelineList && pipelineList.map(item=>{
+    //         if(item.pipelineName === pipelineName){
+    //             console.log(item.pipelineId)
+    //         }
+    //     })
+    // },[pipelineName])
+
 
     useEffect(()=>{
         if(pipeline !== undefined ){
@@ -41,7 +50,7 @@ const Project= (props)=>{
     },[])
 
     const confirmLeave = pathname =>{
-        if(pathname!=="/home/task/config"){
+        if(pathname!==`/home/task/${pipelineName}/config`){
             pathname && setTimeout(()=>{
                 props.history.push(pathname)
             })
@@ -62,6 +71,9 @@ const Project= (props)=>{
                 isPrompt={isPrompt}
                 visible={visible}
                 setVisible={setVisible}
+                lastPath={lastPath}
+                setLastPath={setLastPath}
+                pipelineName={pipelineName}
             />
             <div className="project-content"
                  onClick={()=>setVisible(false)}

@@ -1,4 +1,4 @@
-import React,{useState,useEffect,Fragment} from "react";
+import React,{useState,useEffect} from "react";
 import "../components/workSpace.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -35,14 +35,11 @@ const WorkSpace = props =>{
         fileTree(params)
     },[fresh,pipelineId])
 
-    const style = {
-        "position":"fixed",
-        "width":"92%",
-    }
-
     return(
         <div className="workSpace">
-            <BreadcrumbContent style={style} type={"project"}/>
+            <div className="workSpace-top">
+                <BreadcrumbContent type={"project"} config={"config"}/>
+            </div>
             <div className="workSpace-content">
                 <WorkSpaceNod
                     fileList={fileList}

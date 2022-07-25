@@ -14,7 +14,7 @@ const WorkSpaceRecord = props =>{
     const renderRecordList = recordList => {
         return recordList && recordList.map((group,groupIndex)=>{
             return(
-                <div key={groupIndex} className="workSpace-bottom-record">
+                <div key={groupIndex} className="workSpace-content-record-item">
                     <div className="record_item_dayTime">{group[0].dayTime}</div>
                     {
                         group && group.map((item,index)=>{
@@ -41,10 +41,10 @@ const WorkSpaceRecord = props =>{
     }
 
     return(
-        <div className="workSpace-bottom">
+        <div className="workSpace-content-record">
             <h1>近期提交记录</h1>
-            {renderRecordList(recordList)}
-            <div className="workSpace-null"/>
+            { renderRecordList(recordList) }
+            <div className="workSpace-content-null"/>
         </div>
     )
 }

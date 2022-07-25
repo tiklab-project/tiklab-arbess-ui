@@ -1,10 +1,14 @@
 .breadcrumb{
-  font-size: 16px;
-  width: 100%;
-  z-index: 100;
-  background: #fff;
-  font-weight: 700;
-  padding: 8px 0 4px 16px;
-  border-bottom: 1px solid #C4C4C4;
-  margin-bottom: 16px;
+    font-size: 16px;
+    width: 100%;
+    z-index: 100;
+    background: #fff;
+    font-weight: 700;
+    padding: 8px 0 4px 16px;
+    border-bottom: 1px solid #C4C4C4;
+    margin-bottom: 16px;
+    &-topOver{
+        padding-top: 12px;
+        font-weight: 700;
+    }
 }

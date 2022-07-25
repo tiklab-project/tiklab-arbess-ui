@@ -13,10 +13,16 @@ export class PipelineStore{
     @observable pipelineList=[]
     @observable searchPipelineList = []
     @observable pipeline = {}
+    @observable lastPath = ""
 
     @action
     setPipeline = value =>{
         this.pipeline = value
+    }
+
+    @action
+    setLastPath = value =>{
+        this.lastPath = value
     }
 
     @action

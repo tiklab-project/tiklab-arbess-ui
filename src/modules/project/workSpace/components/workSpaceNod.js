@@ -4,8 +4,7 @@ import {Breadcrumb} from "antd";
 // 节点
 const WorkSpaceNod = props =>{
 
-    const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent
-    } = props
+    const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent} = props
     const pipelineName = localStorage.getItem("pipelineName")
 
     const renderType = treeType => {
@@ -67,54 +66,35 @@ const WorkSpaceNod = props =>{
         })
     }
 
-    // 递归
+    // 渲染文件
     const renderFileList = fileList => {
         return fileList && fileList.map((group,index)=>{
-            if(group.treeType === 1 ){
-                return  <div className="file_item_tree" key={index}>
-                            <span> {renderType(group.treeType)} </span>
-                            <span className="file_item_tree_name"
-                                  onClick={()=>textDetails(group)}
-                            >
-                                {group.treeName}
-                            </span>
-                        </div>
-            }else{
-                return  <div className="file_item_tree" key={index}>
-                            <span>{renderType(group.treeType)}</span>
-                            <span className="file_item_tree_name"
-                                  onClick={()=>{goDetails(group)}}
-                            >
-                                {group.treeName}
-                            </span>
-                            { renderFileList(fileList.fileTree) }
-                        </div>
-            }
+            return  <div className="file_item_tree" key={index}>
+                        <span>{renderType(group.treeType)} </span>
+                        <span className="file_item_tree_name"
+                              onClick={()=>group.treeType===1 ? textDetails(group) :goDetails(group)}
+                        >
+                            {group.treeName}
+                        </span>
+                    </div>
         })
     }
 
     return(
-        <div className="workSpace-nod">
+        <div className="workSpace-content-nod">
             <h1>节点master上的工作空间</h1>
-            {
-                fileList && fileList.length === 0 ||fileList === null ?
-                    <svg className="icon" aria-hidden="true" >
-                        <use xlinkHref="#icon-meiyouxiangguan"/>
-                    </svg>
-                    :
-                    <div className="workSpace-nod-catalogue">
-                        <Breadcrumb>
-                            <Breadcrumb.Item
-                                className = "catalogue_item_breadcrumb"
-                                onClick={()=>setBreadcrumb()}
-                            >
-                                <span> {renderType(2)}{pipelineName} </span>
-                            </Breadcrumb.Item>
-                            {renderCatalogue(catalogue)}
-                        </Breadcrumb>
-                    </div>
-            }
-            <div className="workSpace-nod-file">
+            <div className="workSpace-content-nod-catalogue">
+                <Breadcrumb>
+                    <Breadcrumb.Item
+                        className = "catalogue_item_breadcrumb"
+                        onClick={()=>setBreadcrumb()}
+                    >
+                        <span>{renderType(2)}{pipelineName}</span>
+                    </Breadcrumb.Item>
+                    {renderCatalogue(catalogue)}
+                </Breadcrumb>
+            </div>
+            <div className="workSpace-content-nod-file">
                 {renderFileList(fileList)}
             </div>
         </div>

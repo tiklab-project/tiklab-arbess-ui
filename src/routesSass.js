@@ -108,11 +108,6 @@ const routers=[
                 component: Project,
                 routes:[
                     {
-                        path: "/index/task",
-                        exact:true,
-                        render:()=>  <Redirect to={"/index/task/work"}/>,
-                    },
-                    {
                         path:"/index/task/work",
                         component: WorkSpace
                     },
@@ -128,11 +123,6 @@ const routers=[
                         path:"/index/task/assembly",
                         component: ProjectSet,
                         routes:[
-                            {
-                                path: "/index/task/assembly",
-                                exact:true,
-                                render:()=><Redirect to={"/index/task/assembly/user"}/>,
-                            },
                             {
                                 path:"/index/task/assembly/proof",
                                 component:ProjectSetProof
@@ -157,11 +147,6 @@ const routers=[
                 path:"/index/system",
                 component:System,
                 routes:[
-                    {
-                        path: "/index/system",
-                        exact:true,
-                        render:()=><Redirect to={"/index/system/base"}/>,
-                    },
                     {
                         path: "/index/system/base",
                         component: UserInfo,
@@ -213,7 +198,7 @@ const routers=[
     {
         path:"/",
         exact: true,
-        render:()=><Redirect to="/index/home"/>,
+        render:()=><Redirect to="/index"/>,
     },
 ]
 

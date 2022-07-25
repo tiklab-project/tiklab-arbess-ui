@@ -1,19 +1,20 @@
 import React from "react";
 import "./breadcrumb.scss";
 import {Breadcrumb} from "antd";
+import {withRouter} from "react-router-dom";
 
 // 面包屑
 const BreadcrumbContent = props =>{
 
-    const {style,config,type,firstItem,secondItem} = props
+    const {config,type,firstItem,secondItem,match} = props
     const renderBreadcrumb = type => {
         switch (type) {
             case "project":
-                return  <div style={style} className={config ? "config-top-breadcrumb": "breadcrumb"}>
+                return  <div className={config ? "breadcrumb-topOver": "breadcrumb"}>
                             <Breadcrumb separator=">">
                                 <Breadcrumb.Item>流水线</Breadcrumb.Item>
                                 <Breadcrumb.Item>
-                                    {localStorage.getItem("pipelineName")}
+                                    {match.params.pipelineName}
                                 </Breadcrumb.Item>
                             </Breadcrumb>
                         </div>
@@ -31,4 +32,4 @@ const BreadcrumbContent = props =>{
 
 }
 
-export default BreadcrumbContent
+export default withRouter(BreadcrumbContent)

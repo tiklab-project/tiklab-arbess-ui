@@ -8,17 +8,10 @@
         padding: 8px 0 4px 16px;
         font-size: 16px;
         min-width: 500px;
-        &-width{
-            width:98% !important;
-        }
         &-content{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-        }
-        &-breadcrumb{
-            padding-top: 12px;
-            font-weight: 700;
         }
     }
 }

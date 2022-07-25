@@ -5,9 +5,9 @@ import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
 
-    const {visible,setVisible,isPrompt,pipelineStore,structureListStore} = props
+    const {visible,setVisible,isPrompt,pipelineStore,structureListStore,path} = props
 
-    const {pipelineList,setPipeline} = pipelineStore
+    const {pipelineList,setPipeline,lastPath} = pipelineStore
     const {setState,setEnforcer,setMode} = structureListStore
 
     const pipelineName = localStorage.getItem("pipelineName")
@@ -21,9 +21,14 @@ const ProjectAsideOpt = props =>{
                 setMode(0)
                 localStorage.setItem("pipelineName",item.pipelineName)
                 localStorage.setItem("pipelineId",item.pipelineId)
+                if (path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
+                    props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
+                }else {
+                    props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
+                }
             }else {
                 setPipeline(item)
-                props.history.push(`/home/task/config`)
+                props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
             }
         }
         setVisible(false)

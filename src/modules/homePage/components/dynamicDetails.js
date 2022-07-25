@@ -43,7 +43,7 @@ const DynamicDetails = props =>{
     const goPipeline = item =>{
         localStorage.setItem("pipelineName",item.pipelineName)
         localStorage.setItem("pipelineId",item.pipelineId)
-        props.history.push("/index/task")
+        props.history.push(`/index/task/${item.pipelineName}/work`)
     }
 
     return(

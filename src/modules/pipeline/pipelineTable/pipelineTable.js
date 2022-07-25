@@ -1,4 +1,4 @@
-import React,{Fragment,useState} from "react";
+import React,{Fragment} from "react";
 import {message,Table,Tooltip} from "antd";
 import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {getUser} from "doublekit-core-ui";
@@ -42,7 +42,7 @@ const PipelineTable = props =>{
 
     //去详情页面
     const goPipelineTask=(text,record)=>{
-        props.history.push("/index/task/work")
+        props.history.push(`/index/task/${text}/work`)
         localStorage.setItem("pipelineName",text)
         localStorage.setItem("pipelineId",record.pipelineId)
     }

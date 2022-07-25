@@ -5,41 +5,43 @@ import {PrivilegeButton} from "doublekit-privilege-ui";
 
 const ProjectAside = props =>{
 
-    const {visible,setVisible,isPrompt} = props
+    const {visible,setVisible,isPrompt,pipelineName,setLastPath} = props
+
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
     useEffect(()=>{
-        if (path.indexOf("/index/task/assembly") === 0) {
-            path="/index/task/assembly"
+        if (path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
+            path=`/index/task/${pipelineName}/assembly`
         }
+        setLastPath(path.substring(path.lastIndexOf('/') + 1))
         setNav(path)
     },[path])
 
     const  taskRouters=[
         {
-            to:"/index/task/work",
+            to:`/index/task/${pipelineName}/work`,
             title:"工作空间",
             icon:"#icon-gongzuotongji",
             key:"2",
             enCode:"AA"
         },
         {
-            to:"/index/task/config",
+            to:`/index/task/${pipelineName}/config`,
             title: "配置",
             icon: "#icon-jiekoupeizhi",
             key:"3",
             enCode:"BB"
         },
         {
-            to:"/index/task/structure",
+            to:`/index/task/${pipelineName}/structure`,
             title: "历史",
             icon:"#icon-lishijishi",
             key:"4",
             enCode:"CC"
         },
         {
-            to:"/index/task/assembly",
+            to:`/index/task/${pipelineName}/assembly`,
             title: "设置",
             icon:"#icon-shezhi",
             key:"5",
@@ -80,6 +82,7 @@ const ProjectAside = props =>{
                     isPrompt={isPrompt}
                     visible={visible}
                     setVisible={setVisible}
+                    path={path}
                 />
                 { renderTaskRouter(taskRouters) }
             </ul>
