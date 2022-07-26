@@ -1,4 +1,4 @@
-import React,{Fragment,useState} from "react";
+import React,{useState} from "react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import {Button,Form,Input,message,Popconfirm,Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
@@ -8,12 +8,11 @@ import {inject,observer} from "mobx-react";
 const ProjectSetReDel = props =>{
 
     const {pipelineStore} = props
-    const {deletePipeline,updatePipeline,pipelineList}=pipelineStore
+    const {deletePipeline,updatePipeline,pipelineList,pipelineId}=pipelineStore
 
     const [form]=Form.useForm()
     const [processVisible,setProcessVisible] = useState(false)
     const userId = getUser().userId
-    const pipelineId = localStorage.getItem("pipelineId")
 
     const del = () =>{
         setProcessVisible(true)
@@ -41,8 +40,7 @@ const ProjectSetReDel = props =>{
         }
         updatePipeline(params).then(res=>{
             if(res.code === 0){
-                localStorage.setItem("pipelineName",value.pipelineName);
-                props.history.push("/index/task/work")
+                props.history.push(`/index/task/${value.pipelineName}/work`)
             }
         }).catch(error=>{
             console.log(error)

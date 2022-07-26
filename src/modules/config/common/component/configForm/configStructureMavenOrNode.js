@@ -5,10 +5,11 @@ import Mirror from "./mirror";
 
 const ConfigStructureMavenOrNode = props =>{
 
-    const {configDataStore,configItemStore} = props
+    const {configDataStore,configItemStore,pipelineStore} = props
+
     const {setIsPrompt,mavenShellBlock,setMavenShellBlock} = configDataStore
     const {profileAddress} = configItemStore
-    const pipelineName = localStorage.getItem("pipelineName")
+    const {pipelineName} = pipelineStore
 
     return(
         <Fragment>
@@ -53,4 +54,4 @@ const ConfigStructureMavenOrNode = props =>{
     )
 }
 
-export default inject("configDataStore","configItemStore")(observer(ConfigStructureMavenOrNode))
+export default inject("configDataStore","configItemStore","pipelineStore")(observer(ConfigStructureMavenOrNode))

@@ -7,7 +7,7 @@ const {Option} = Select;
 
 const AddProofModal = props =>{
 
-    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type,pipelineList} = props
+    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type,pipelineList,pipelineId} = props
 
     const [form] = Form.useForm()
     const [isShowPipeline,setIsShowPipeline] = useState(1)
@@ -18,7 +18,7 @@ const AddProofModal = props =>{
             if(values.type===1){
                 id = null
             }else {
-                id = localStorage.getItem("pipelineId")
+                id = pipelineId
             }
             if(isAuthority){
                 proofScope = values.proofScope

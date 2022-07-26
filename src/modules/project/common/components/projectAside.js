@@ -5,7 +5,7 @@ import {PrivilegeButton} from "doublekit-privilege-ui";
 
 const ProjectAside = props =>{
 
-    const {visible,setVisible,isPrompt,pipelineName,setLastPath} = props
+    const {visible,setVisible,pipelineName,setLastPath} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
@@ -79,7 +79,6 @@ const ProjectAside = props =>{
             <ul  className="content">
                 <ProjectAsideOpt
                     {...props}
-                    isPrompt={isPrompt}
                     visible={visible}
                     setVisible={setVisible}
                     path={path}

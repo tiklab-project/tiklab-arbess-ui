@@ -5,7 +5,8 @@ const {Option} = Select
 
 const UpdateProof = props =>{
 
-    const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart,pipelineList,isShowPipeline,setIsShowPipeline} = props
+    const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart,pipelineList,
+        pipelineId,isShowPipeline,setIsShowPipeline} = props
 
     const [form] = Form.useForm()
 
@@ -17,11 +18,11 @@ const UpdateProof = props =>{
 
     const onOk = () =>  {
         form.validateFields().then((values) => {
-            let id;
+            let id
             if(values.type===1){
                 id = null
             }else {
-                id = localStorage.getItem("pipelineId")
+                id = pipelineId
             }
             const params = {
                 pipeline:{pipelineId:id},

@@ -4,7 +4,7 @@ import {Modal} from "antd";
 
 // 离开编辑页面全局提示
 const PromptContent = props =>{
-    const {isPrompt,confirmLeave,confirmStay} = props
+    const {isPrompt,confirmLeave} = props
     return <Prompt
         when={isPrompt}
         message={location =>{
@@ -16,7 +16,6 @@ const PromptContent = props =>{
                 okText:"离开",
                 cancelText:"取消",
                 onOk:()=>confirmLeave(location.pathname),
-                onCancel:()=>confirmStay ? confirmStay() : null
             })
             return false
         }}

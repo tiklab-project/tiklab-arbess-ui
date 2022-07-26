@@ -4,7 +4,7 @@ import BreadcrumbContent from "../../../../../common/breadcrumb/breadcrumb";
 import ConfigChangeView from "./configChangeView";
 
 const ConfigTop = props =>{
-    const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt,userId,isBtn} = props
+    const {view,setView,pipelineId,pipelineName,pipelineStartStructure,setIsPrompt,userId,isBtn} = props
     return(
         <div className="config-top-content">
             <BreadcrumbContent config={"config"} type={"project"}/>
@@ -14,6 +14,7 @@ const ConfigTop = props =>{
                 setView={setView}
                 setIsPrompt={setIsPrompt}
                 pipelineId={pipelineId}
+                pipelineName={pipelineName}
                 pipelineStartStructure={pipelineStartStructure}
                 isBtn={isBtn}
             />

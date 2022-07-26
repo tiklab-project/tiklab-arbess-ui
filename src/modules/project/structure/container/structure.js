@@ -12,16 +12,15 @@ import {inject,observer} from "mobx-react";
 // 项目构建
 const Structure = props => {
 
-    const {structureStore,structureListStore} = props
+    const {structureStore,structureListStore,pipelineStore} = props
 
-    const {findExecState,findStructureState,findAll,findPageHistory,deleteHistoryLog,
-        killInstance,pipelineStartStructure,leftPageList,rightFlowData,modeData,
-        index,setIndex,rightExecuteData,isData,findPipelineUser,setIsData,
+    const {findExecState,findStructureState,findAll,findPageHistory,pipelineStartStructure,
+        leftPageList,setIndex,isData,findPipelineUser,setIsData
     } = structureStore
     const {state,enforcer,mode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
+    const {pipelineId} = pipelineStore
 
     const [execState,setExecState] = useState("") //左侧 -- 正在构建
-    const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -198,16 +197,10 @@ const Structure = props => {
                                     <StructureRight
                                         freshen={freshen}
                                         setFreshen={setFreshen}
-                                        rightFlowData={rightFlowData}
-                                        rightExecuteData={rightExecuteData}
                                         status={status}
                                         execState={execState}
-                                        modeData={modeData}
-                                        index={index}
-                                        setIndex={setIndex}
                                         setPageCurrent={setPageCurrent}
-                                        deleteHistoryLog={deleteHistoryLog}
-                                        killInstance={killInstance}
+                                        pipelineId={pipelineId}
                                     />
                             }
                         </div>
@@ -219,4 +212,4 @@ const Structure = props => {
     )
 }
 
-export default inject("structureStore","structureListStore")(observer(Structure))
+export default inject("structureStore","structureListStore","pipelineStore")(observer(Structure))

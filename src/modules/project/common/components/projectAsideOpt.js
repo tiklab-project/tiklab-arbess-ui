@@ -5,29 +5,22 @@ import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
 
-    const {visible,setVisible,isPrompt,pipelineStore,structureListStore,path} = props
+    const {visible,setVisible,pipelineStore,structureListStore,path} = props
 
-    const {pipelineList,setPipeline,lastPath} = pipelineStore
+    const {pipelineName,pipelineList,lastPath} = pipelineStore
     const {setState,setEnforcer,setMode} = structureListStore
-
-    const pipelineName = localStorage.getItem("pipelineName")
 
     const changePipeline = (e,item) => {
         e.preventDefault()
         if(pipelineName!==item.pipelineName){
-            if(!isPrompt){ // 如果为false，直接改变pipelineName和pipelineId
-                setState(0)
-                setEnforcer(null)
-                setMode(0)
-                localStorage.setItem("pipelineName",item.pipelineName)
-                localStorage.setItem("pipelineId",item.pipelineId)
-                if (path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
-                    props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
-                }else {
-                    props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
-                }
+            setState(0)
+            setEnforcer(null)
+            setMode(0)
+            if(path === `/index/task/${pipelineName}/assembly`){
+                props.history.push(`/index/task/${item.pipelineName}/assembly`)
+            }else if (path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
+                props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
             }else {
-                setPipeline(item)
                 props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
             }
         }

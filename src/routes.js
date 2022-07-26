@@ -89,7 +89,7 @@ const routers=[
                 exact:true,
             },
             {
-                path:"/index/config/:newConfig",
+                path:"/index/config/:pipelineName",
                 component:PipelineConfig,
                 exact:true,
             },

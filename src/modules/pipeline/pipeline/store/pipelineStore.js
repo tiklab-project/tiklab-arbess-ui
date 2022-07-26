@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import {observable,action} from "mobx";
 
 import {
     FindAllPipelineStatus,
@@ -12,13 +12,9 @@ export class PipelineStore{
     
     @observable pipelineList=[]
     @observable searchPipelineList = []
-    @observable pipeline = {}
     @observable lastPath = ""
-
-    @action
-    setPipeline = value =>{
-        this.pipeline = value
-    }
+    @observable pipelineId = ""
+    @observable pipelineName = ""
 
     @action
     setLastPath = value =>{
@@ -26,17 +22,32 @@ export class PipelineStore{
     }
 
     @action
+    setPipelineId = value =>{
+        this.pipelineId = value
+    }
+
+    @action
+    setPipelineName = value =>{
+        this.pipelineName = value
+    }
+
+    @action
     findAllPipelineStatus = value =>{
         const param = new FormData()
         param.append("userId",value)
-        FindAllPipelineStatus(param).then(res=>{
-            if(res.code === 0 ){
-                this.pipelineList=res.data
-            }
-            console.log("所有流水线", res)
-        }).catch(error=>{
-            console.log(error)
+        return new Promise((resolve, reject) => {
+            FindAllPipelineStatus(param).then(res=>{
+                if(res.code === 0 ){
+                    this.pipelineList=res.data
+                }
+                resolve(res)
+                console.log("所有流水线", res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
         })
+
     }
 
     @action

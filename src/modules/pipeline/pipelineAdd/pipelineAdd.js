@@ -50,8 +50,6 @@ const PipelineAdd = props => {
         }
         createPipeline(params).then(res=>{
             if(res.code === 0 && res.data){
-                localStorage.setItem("pipelineId",res.data)
-                localStorage.setItem("pipelineName",value.pipelineName)
                 props.history.push(`/index/config/${value.pipelineName}`)
             }else{
                 message.error({content:"添加失败", className:"message"})
@@ -97,7 +95,7 @@ const PipelineAdd = props => {
                         lis.map((item,index) => {
                             return (
                                 <li key={item.id}
-                                    onClick={()=> liStatusData(index) }
+                                    onClick={()=>liStatusData(index)}
                                     className={ liStatus === index ? "choose-item choose-active":"choose-item"}
                                 >
                                     <div className="choose-item-icon">

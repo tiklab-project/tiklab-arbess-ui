@@ -41,10 +41,8 @@ const PipelineTable = props =>{
     }
 
     //去详情页面
-    const goPipelineTask=(text,record)=>{
+    const goPipelineTask= text =>{
         props.history.push(`/index/task/${text}/work`)
-        localStorage.setItem("pipelineName",text)
-        localStorage.setItem("pipelineId",record.pipelineId)
     }
 
     const work = record =>{

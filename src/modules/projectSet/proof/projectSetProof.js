@@ -8,8 +8,7 @@ const ProjectSetProof = props =>{
 
     const {proofStore,pipelineStore} = props
     const {findPipelineProof,proofList,fresh} = proofStore
-    const {pipelineList} = pipelineStore
-    const pipelineId = localStorage.getItem("pipelineId")
+    const {pipelineList,pipelineId} = pipelineStore
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -22,9 +21,10 @@ const ProjectSetProof = props =>{
     },[fresh,pipelineId])
 
     return  <Proof
-                proofList={proofList}
                 type={"project"}
+                proofList={proofList}
                 pipelineList={pipelineList}
+                pipelineId={pipelineId}
             />
 }
 

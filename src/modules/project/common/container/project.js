@@ -10,43 +10,29 @@ const Project= (props)=>{
 
     const {route,pipelineStore,configDataStore,match}=props
 
-    const {findAllPipelineStatus,pipelineList,pipeline,setPipeline,lastPath,setLastPath} = pipelineStore
+    const {findAllPipelineStatus,lastPath,setLastPath,setPipelineId,setPipelineName} = pipelineStore
     const {isPrompt,setIsPrompt} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const pipelineName = match.params.pipelineName
-    const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
     useEffect(()=>{
-        findAllPipelineStatus(userId)
-    },[])
-
-    // useEffect(()=>{
-    //     pipelineList && pipelineList.map(item=>{
-    //         if(item.pipelineName === pipelineName){
-    //             console.log(item.pipelineId)
-    //         }
-    //     })
-    // },[pipelineName])
-
-
-    useEffect(()=>{
-        if(pipeline !== undefined ){
-            pipelineList && pipelineList.map(item=>{
-                if(pipeline.pipelineId === item.pipelineId){
-                    localStorage.setItem("pipelineName",pipeline.pipelineName)
-                    localStorage.setItem("pipelineId",pipeline.pipelineId)
-                }
-            })
-        }
-    },[pipeline])
+        setPipelineName(pipelineName)
+        findAllPipelineStatus(userId).then(res=>{
+            const data = res.data
+            if(res.code===0 && data){
+                data && data.map(item=>{
+                    if(item.pipelineName === pipelineName){
+                        setPipelineId(item.pipelineId)
+                    }
+                })
+            }
+        })
+    },[pipelineName])
 
     useEffect(()=>{
-        return ()=>{
-            localStorage.removeItem("pipelineName")
-            localStorage.removeItem("pipelineId")
-        }
+        return ()=>setPipelineId("")
     },[])
 
     const confirmLeave = pathname =>{
@@ -58,17 +44,10 @@ const Project= (props)=>{
         setIsPrompt(false)
     }
 
-    const confirmStay = () => {
-        setPipeline()
-        localStorage.setItem("pipelineName",pipelineName)
-        localStorage.setItem("pipelineId",pipelineId)
-    }
-
     return(
         <div className="project">
             <ProjectAside
                 {...props}
-                isPrompt={isPrompt}
                 visible={visible}
                 setVisible={setVisible}
                 lastPath={lastPath}
@@ -84,7 +63,6 @@ const Project= (props)=>{
             <PromptContent
                 isPrompt={isPrompt}
                 confirmLeave={confirmLeave}
-                confirmStay={confirmStay}
             />
         </div>
     )

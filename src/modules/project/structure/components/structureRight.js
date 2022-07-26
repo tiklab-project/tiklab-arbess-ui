@@ -2,12 +2,16 @@ import React,{useState} from "react";
 import StructureRightLogDrawer from "./structureRightLogDrawer";
 import StructureRightExecute from "./structureRightExecute";
 import StructureRightItem from "./structureRightItem";
+import {inject,observer} from "mobx-react";
 
 const StructureRight = props =>{
 
-    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,execState,killInstance,rightExecuteData,
-        freshen,setFreshen,setPageCurrent} = props
-    
+    const {structureStore,status,execState,freshen,setFreshen,setPageCurrent,
+        pipelineId} = props
+
+    const {deleteHistoryLog, killInstance,rightFlowData,modeData,index,setIndex,
+        rightExecuteData} = structureStore
+
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState("")
 
@@ -34,6 +38,7 @@ const StructureRight = props =>{
                         killInstance={killInstance}
                         runWay={runWay}
                         setPageCurrent={setPageCurrent}
+                        pipelineId={pipelineId}
                     />
                     :
                     <StructureRightItem
@@ -60,4 +65,4 @@ const StructureRight = props =>{
     )
 }
 
-export default StructureRight
+export default inject("structureStore")(observer(StructureRight))

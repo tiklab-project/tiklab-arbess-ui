@@ -132,4 +132,7 @@ const StructureLeft = props =>{
     )
 }
 
-export default inject("structureStore","structureListStore")(observer(StructureLeft))
+export default
+
+
+inject("structureStore","structureListStore")(observer(StructureLeft))

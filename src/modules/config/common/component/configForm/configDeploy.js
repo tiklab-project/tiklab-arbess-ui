@@ -6,14 +6,13 @@ import ConfigProof from "./configProof";
 
 const ConfigDeploy = props =>{
 
-    const {configItemStore,configDataStore} = props
+    const {configItemStore,configDataStore,pipelineStore} = props
 
     const {formInitialValues,setIsPrompt,orderShellBlock,setOrderShellBlock} = configDataStore
     const {getFile,profileAddress} = configItemStore
+    const {pipelineId,pipelineName} = pipelineStore
 
     const [messageInfo,setMessageInfo] = useState("")
-    const pipelineName = localStorage.getItem("pipelineName")
-    const pipelineId = localStorage.getItem("pipelineId")
 
     useEffect(()=>{
         return ()=>{
@@ -130,4 +129,4 @@ const ConfigDeploy = props =>{
     )
 }
 
-export default inject("configItemStore","configDataStore")(observer(ConfigDeploy))
+export default inject("configItemStore","configDataStore","pipelineStore")(observer(ConfigDeploy))

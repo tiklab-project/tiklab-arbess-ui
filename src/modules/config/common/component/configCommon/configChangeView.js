@@ -2,12 +2,14 @@ import React,{useState} from "react";
 import "./configChangeView.scss";
 import {Button,message,Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
-import {withRouter} from "react-router-dom";
+import {withRouter} from "react-router";
+import {inject,observer} from "mobx-react";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,pipelineStartStructure,setIsPrompt,userId,isBtn} = props
+    const {view,setView,pipelineId,structureStore,setIsPrompt,userId,isBtn,pipelineName} = props
 
+    const {pipelineStartStructure} = structureStore
     const [processVisible,setProcessVisible] = useState(false)
 
     const run = () => {
@@ -20,7 +22,7 @@ const ConfigChangeView = props =>{
         pipelineStartStructure(params).then(res=>{
             console.log("运行",res)
             if(res.code === 0 && res.data === 1){
-                props.history.push("/index/task/structure")
+                props.history.push(`/index/task/${pipelineName}/structure`)
             }else {
                 setProcessVisible(false)
                 message.error({content:"运行失败", className:"message"})
@@ -35,7 +37,7 @@ const ConfigChangeView = props =>{
             <div className="changeView">
                 <div className="changeView-btn">
                     <Button form="form" htmlType="submit">保存</Button>
-                    <Button form="form" type="primary" htmlType="submit" onClick={()=>run()}>
+                    <Button form="form"  htmlType="submit" type="primary" onClick={()=>run()}>
                         {processVisible ? <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} /> :"运行"}
                     </Button>
                 </div>
@@ -63,4 +65,4 @@ const ConfigChangeView = props =>{
     )
 }
 
-export default withRouter(ConfigChangeView)
+export default withRouter(inject("structureStore")(observer(ConfigChangeView)))

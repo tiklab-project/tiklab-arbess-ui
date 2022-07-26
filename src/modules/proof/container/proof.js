@@ -8,7 +8,7 @@ import {inject,observer} from "mobx-react";
 
 const Proof = props =>{
 
-    const {proofList,proofStore,firstItem,type,pipelineList} = props
+    const {proofList,proofStore,firstItem,type,pipelineList,pipelineId} = props
     const {updateProof,deleteProof,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState("")
@@ -122,6 +122,7 @@ const Proof = props =>{
                 isShowPipeline={isShowPipeline}
                 setIsShowPipeline={setIsShowPipeline}
                 updateProof={updateProof}
+                pipelineId={pipelineId}
             />
         </div>
     )

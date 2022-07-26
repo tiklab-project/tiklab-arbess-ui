@@ -7,9 +7,9 @@ const {Option} = Select
 
 const FindAllProof = props =>{
 
-    const {proofStore,type}=props
+    const {proofStore,type,pipelineStore}=props
     const {findPipelineProof,proofList} = proofStore
-    const pipelineId = localStorage.getItem("pipelineId")
+    const {pipelineId} = pipelineStore
     const userId = getUser().userId
 
     const clickFindAllGit = () =>{
@@ -64,4 +64,4 @@ const FindAllProof = props =>{
 
 }
 
-export default inject("proofStore")(observer(FindAllProof))
+export default inject("proofStore","pipelineStore")(observer(FindAllProof))

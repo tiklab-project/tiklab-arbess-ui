@@ -1,10 +1,10 @@
-import React,{useState,useEffect,Fragment} from "react";
-import {Form} from "antd";
+import React,{Fragment,useState,useEffect} from "react";
+import {Form,message} from "antd";
 import {getUser} from "doublekit-core-ui";
 import {RemoteUmdComponent} from "doublekit-plugin-ui";
 import {useSelector} from "doublekit-plugin-ui/es/_utils";
+import moment from "../../../common/moment/moment";
 import FormView from "../common/component/configCommon/formView";
-import GuiView from "../common/component/configCommon/guiView";
 import ConfigTop from "../common/component/configCommon/configTop";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -12,14 +12,17 @@ import {getUrlParam} from "../common/component/configCommon/getUrlParam";
 
 const ConfigDetails = props =>{
 
-    const {configStore,giteeStore,structureStore,configDataStore,githubStore} = props
+    const {configStore,giteeStore,configDataStore,githubStore,pipelineStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
-    const {pipelineStartStructure} = structureStore
-    const {setIsPrompt,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock,setShellBlock} = configDataStore
+    const {pipelineId,pipelineName} = pipelineStore
+
+    const {setIsPrompt,setData,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock,setShellBlock,
+        mavenShellBlock,linuxShellBlock,shellBlock,
+        orderShellBlock,unitShellBlock} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
@@ -27,7 +30,6 @@ const ConfigDetails = props =>{
     const [isBtn,setIsBtn] = useState(false)
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
-    const pipelineId = localStorage.getItem("pipelineId")
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -276,6 +278,95 @@ const ConfigDetails = props =>{
         }
     }
 
+    const onFinish = values => {
+        //排序
+        let codeSort, testSort,structureSort, deploySort = 0
+        //配置别名
+        let testAlias,structureAlias,deployAlias
+        //配置类型
+        let testType,structureType,deployType
+
+        switch (codeData){
+            case "":
+                codeSort = 0
+                break
+            default:codeSort = 1
+        }
+
+        data && data.map((item,index)=>{
+            if(item.dataType > 10 && item.dataType < 20 ){
+                testSort = index + 2
+                testAlias = item.title
+                testType = item.dataType
+            }
+            if(item.dataType > 20 && item.dataType < 30){
+                structureSort = index + 2
+                structureAlias = item.title
+                structureType = item.dataType
+            }
+            if(item.dataType > 30 && item.dataType < 40){
+                deploySort = index + 2
+                deployAlias = item.title
+                deployType = item.dataType
+            }
+        })
+
+        const configureList = {
+            configureCreateTime:moment.moment,
+            user:{id:userId},
+            pipeline:{pipelineId:pipelineId},
+            pipelineCode:{
+                codeId:localStorage.getItem("codeId"),
+                sort:codeSort,
+                type:codeData && codeData.codeType,
+                codeBranch:values.codeBranch,
+                codeName:values.codeName,
+                proof:{proofId:localStorage.getItem("gitProofId")}
+            },
+            pipelineTest:{
+                testId:localStorage.getItem("testId"),
+                sort:testSort,
+                testAlias:testAlias,
+                type:testType,
+                testOrder:unitShellBlock,
+            },
+            pipelineStructure:{
+                structureId:localStorage.getItem("structureId"),
+                sort:structureSort,
+                structureAlias:structureAlias,
+                type:structureType,
+                structureAddress:values.structureAddress,
+                structureOrder:mavenShellBlock,
+            },
+            pipelineDeploy:{
+                deployId:localStorage.getItem("deployId"),
+                sort:deploySort,
+                deployAlias:deployAlias,
+                type:deployType,
+                deployType:values.deployType,
+                sshIp:values.deployType === 0 ? values.sshIp :null,
+                sshPort:values.deployType === 0 ? values.sshPort :null,
+                deployAddress:values.deployType === 0 ? values.deployAddress :null,
+                sourceAddress:values.deployType === 0 ? values.sourceAddress:null,
+                startShell:values.deployType === 0 ? linuxShellBlock:shellBlock,
+                startPort:values.deployType === 0 ? values.startPort:null,
+                mappingPort:values.deployType === 0 ?values.mappingPort:null,
+                startAddress:values.deployType === 0 ? values.startAddress :null,
+                deployOrder:values.deployType === 0 ? orderShellBlock :null,
+                proof:{proofId:localStorage.getItem("deployProofId")}
+            }
+        }
+
+        updateConfigure(configureList).then(res=>{
+            setIsPrompt(false)
+            if(res.code!==0){
+                message.error({content:"配置失败",className:"message"})
+            }else {
+                message.success({content:"配置成功",className:"message"})
+            }
+        })
+    }
+
     return (
         <Fragment>
             <div className="config-top">
@@ -285,8 +376,8 @@ const ConfigDetails = props =>{
                     setView={setView}
                     setIsPrompt={setIsPrompt}
                     pipelineId={pipelineId}
+                    pipelineName={pipelineName}
                     isBtn={isBtn}
-                    pipelineStartStructure={pipelineStartStructure}
                 />
             </div>
             {
@@ -294,35 +385,25 @@ const ConfigDetails = props =>{
                     <FormView
                         del={del}
                         form={form}
-                        updateConfigure={updateConfigure}
+                        onFinish={onFinish}
                     />
                     :
-                    <Fragment>
-                        {/*<GuiView*/}
-                        {/*    del={del}*/}
-                        {/*    form={form}*/}
-                        {/*    updateConfigure={updateConfigure}*/}
-                        {/*/>*/}
-                        {
-                            isBtn ?
-                                <RemoteUmdComponent
-                                    point={"gui"}
-                                    pluginStore={pluginStore}
-                                    isModalType={true}
-                                    extraProps={{
-                                        configDataStore,
-                                        configStore,
-                                        form,
-                                        del
-                                    }}
-                                />
-                                : null
-                        }
-                    </Fragment>
+                    <RemoteUmdComponent
+                        point={"gui"}
+                        pluginStore={pluginStore}
+                        isModalType={true}
+                        extraProps={{
+                            pipelineStore,
+                            configDataStore,
+                            form,
+                            onFinish,
+                            del
+                        }}
+                    />
             }
         </Fragment>
     )
 }
 
 export default  withRouter(inject("configStore","giteeStore","structureStore",
-                "configDataStore","githubStore")(observer(ConfigDetails)))
+                "configDataStore","githubStore","pipelineStore")(observer(ConfigDetails)))

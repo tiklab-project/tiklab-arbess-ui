@@ -104,39 +104,39 @@ const routers=[
                 exact:true,
             },
             {
-                path:"/index/task",
+                path:"/index/task/:pipelineName",
                 component: Project,
                 routes:[
                     {
-                        path:"/index/task/work",
+                        path:"/index/task/:pipelineName/work",
                         component: WorkSpace
                     },
                     {
-                        path:"/index/task/config",
+                        path:"/index/task/:pipelineName/config",
                         component: ConfigDetails
                     },
                     {
-                        path:"/index/task/structure",
+                        path:"/index/task/:pipelineName/structure",
                         component: Structure
                     },
                     {
-                        path:"/index/task/assembly",
+                        path:"/index/task/:pipelineName/assembly",
                         component: ProjectSet,
                         routes:[
                             {
-                                path:"/index/task/assembly/proof",
+                                path:"/index/task/:pipelineName/assembly/proof",
                                 component:ProjectSetProof
                             },
                             {
-                                path:"/index/task/assembly/role",
+                                path:"/index/task/:pipelineName/assembly/role",
                                 component: ProjectRole
                             },
                             {
-                                path:"/index/task/assembly/redel",
+                                path:"/index/task/:pipelineName/assembly/redel",
                                 component: ProjectSetReDel
                             },
                             {
-                                path:"/index/task/assembly/user",
+                                path:"/index/task/:pipelineName/assembly/user",
                                 component: ProjectSetUser
                             }
                         ]

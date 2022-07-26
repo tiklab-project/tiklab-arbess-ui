@@ -7,8 +7,9 @@ import {getUser} from "doublekit-core-ui";
 
 const AddProofButton = props =>{
 
-    const {proofStore,style,type,pipelineList} = props
+    const {proofStore,pipelineStore,type,style,pipelineList} = props
     const {createProof,fresh,setFresh} = proofStore
+    const {pipelineId} = pipelineStore
 
     const userId = getUser().userId
     const [visible,setVisible] = useState(false)
@@ -40,9 +41,10 @@ const AddProofButton = props =>{
                 type={type}
                 style={style}
                 pipelineList={pipelineList}
+                pipelineId={pipelineId}
             />
         </Fragment>
     )
 }
 
-export default inject("proofStore")(observer(AddProofButton))
+export default inject("proofStore","pipelineStore")(observer(AddProofButton))

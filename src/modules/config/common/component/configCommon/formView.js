@@ -1,9 +1,7 @@
 import React,{useState,useEffect,useRef} from "react";
 import  "./formView.scss";
-import {Button,Form,Input,message,Popconfirm} from "antd";
+import {Button,Form,Input,Popconfirm} from "antd";
 import {CloseOutlined,EditOutlined} from "@ant-design/icons";
-import {getUser} from "doublekit-core-ui";
-import moment from "../../../../../common/moment/moment";
 import ConfigAddNewStageModal from "../formView/configAddNewStageModal";
 import ConfigAddCodeModal from "../formView/configAddCodeModal";
 import ChangeConfigSortsDrawer from "../formView/changeConfigSortsDrawer";
@@ -16,18 +14,16 @@ import {withRouter} from "react-router";
 
 const formView = props =>{
 
-    const {form,del,configDataStore,updateConfigure,jumpOrNot} = props
+    const {form,del,configDataStore,pipelineStore,onFinish} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isFormAlias,setIsFormAlias,setCodeType,mavenShellBlock,linuxShellBlock,unitShellBlock,
-        orderShellBlock,shellBlock} = configDataStore
+        isFormAlias,setIsFormAlias,setCodeType} = configDataStore
+    const {pipelineId} = pipelineStore
 
     const inputRef = useRef()
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
-    const pipelineId = localStorage.getItem("pipelineId")
-    const userId = getUser().userId
 
     useEffect(()=>{
         if (isFormAlias!==""){
@@ -71,97 +67,6 @@ const formView = props =>{
             }
             setData([...data])
         }
-    }
-
-    const onFinish = values => {
-        //排序
-        let codeSort, testSort,structureSort, deploySort = 0
-        //配置别名
-        let testAlias,structureAlias,deployAlias
-        //配置类型
-        let testType,structureType,deployType
-
-        switch (codeData){
-            case "":
-                codeSort = 0
-                break
-            default:codeSort = 1
-        }
-
-        data && data.map((item,index)=>{
-            if(item.dataType > 10 && item < 20 ){
-                testSort = index + 2
-                testAlias = item.title
-                testType = item.dataType
-            }
-            if(item.dataType > 20 && item.dataType < 30){
-                structureSort = index + 2
-                structureAlias = item.title
-                structureType = item.dataType
-            }
-            if(item.dataType > 30 && item.dataType < 40){
-                deploySort = index + 2
-                deployAlias = item.title
-                deployType = item.dataType
-            }
-        })
-
-        const configureList = {
-            configureCreateTime:moment.moment,
-            user:{id:userId},
-            pipeline:{pipelineId:pipelineId},
-            pipelineCode:{
-                codeId:localStorage.getItem("codeId"),
-                sort:codeSort,
-                type:codeData && codeData.codeType,
-                codeBranch:values.codeBranch,
-                codeName:values.codeName,
-                proof:{proofId:localStorage.getItem("gitProofId")}
-            },
-            pipelineTest:{
-                testId:localStorage.getItem("testId"),
-                sort:testSort,
-                testAlias:testAlias,
-                type:testType,
-                testOrder:unitShellBlock,
-            },
-            pipelineStructure:{
-                structureId:localStorage.getItem("structureId"),
-                sort:structureSort,
-                structureAlias:structureAlias,
-                type:structureType,
-                structureAddress:values.structureAddress,
-                structureOrder:mavenShellBlock,
-            },
-            pipelineDeploy:{
-                deployId:localStorage.getItem("deployId"),
-                sort:deploySort,
-                deployAlias:deployAlias,
-                type:deployType,
-                deployType:values.deployType,
-                sshIp:values.deployType === 0 ? values.sshIp :null,
-                sshPort:values.deployType === 0 ? values.sshPort :null,
-                deployAddress:values.deployType === 0 ? values.deployAddress :null,
-                sourceAddress:values.deployType === 0 ? values.sourceAddress:null,
-                startShell:values.deployType === 0 ? linuxShellBlock:shellBlock,
-                startPort:values.deployType === 0 ? values.startPort:null,
-                mappingPort:values.deployType === 0 ?values.mappingPort:null,
-                startAddress:values.deployType === 0 ? values.startAddress :null,
-                deployOrder:values.deployType === 0 ? orderShellBlock :null,
-                proof:{proofId:localStorage.getItem("deployProofId")}
-            }
-        }
-        updateConfigure(configureList).then(res=>{
-            setIsPrompt(false)
-            if(jumpOrNot){
-                props.history.push("/index/task/config")
-            }
-            if(res.code!==0){
-                message.error({content:"配置失败",className:"message"})
-            }else {
-                message.success({content:"配置成功",className:"message"})
-            }
-        })
     }
 
     const onValuesChange = value =>{
@@ -265,4 +170,4 @@ const formView = props =>{
     )
 }
 
-export default withRouter(inject("configDataStore")(observer(formView)))
+export default withRouter(inject("configDataStore","pipelineStore")(observer(formView)))
