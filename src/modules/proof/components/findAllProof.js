@@ -52,8 +52,8 @@ const FindAllProof = props =>{
                 {
                     proofList && proofList.map(item=>{
                         return(
-                            <Option key={item.proofId} value={item.proofName+ "(" + item.proofUsername + ")"}>
-                                { item.proofName+ "(" + item.proofUsername + ")"}
+                            <Option key={item.proofId} value={item.proofName+ "(" + item.proofType + ")"}>
+                                { item.proofName+ "(" + item.proofType + ")"}
                             </Option>
                         )
                     })

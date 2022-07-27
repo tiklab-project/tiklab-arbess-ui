@@ -1,6 +1,6 @@
 import React,{Fragment,useState,useEffect} from "react";
 import {withRouter} from "react-router";
-import {getUrlParam} from "../common/component/configCommon/getUrlParam";
+import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
 import {inject,observer} from "mobx-react";
 import ConfigTop from "../common/component/configCommon/configTop";
 import PromptContent from "../../../common/prompt/prompt";
@@ -20,8 +20,10 @@ const Config = props =>{
     const {getAccessToken} = githubStore
     const {setPipelineId,pipelineId,findAllPipelineStatus} = pipelineStore
 
-    const {isPrompt,setIsPrompt,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
-        setUnitShellBlock,setMavenShellBlock,setCodeType,setData} = configDataStore
+    const {isPrompt,setIsPrompt,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
+        setUnitShellBlock,setMavenShellBlock,setCodeType,setData,unitShellBlock,mavenShellBlock,
+        linuxShellBlock,shellBlock,orderShellBlock
+    } = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
@@ -49,8 +51,6 @@ const Config = props =>{
         return () =>{
             localStorage.removeItem("gitProofId")
             localStorage.removeItem("deployProofId")
-            localStorage.removeItem("pipelineId")
-            localStorage.removeItem("pipelineName")
         }
     },[])
 
@@ -58,7 +58,6 @@ const Config = props =>{
         findAllConfigure("").then(()=>{
             setCodeData("")
             setData([])
-            setFormInitialValues({})
             setUnitShellBlock("")
             setMavenShellBlock("")
             setLinuxShellBlock("")
@@ -297,6 +296,7 @@ const Config = props =>{
                     :
                     <Fragment>
                         <RemoteUmdComponent
+                            {...props}
                             point={"gui"}
                             pluginStore={pluginStore}
                             isModalType={true}

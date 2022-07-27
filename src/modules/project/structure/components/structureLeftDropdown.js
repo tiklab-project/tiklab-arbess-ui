@@ -5,12 +5,11 @@ const {Option} = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList,change,drop} = props
+    const {state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList,change,drop,pipelineId} = props
 
     const [statusValue,setStatusValue] = useState("")
     const [userValue,setUserValue] = useState("")
     const [modeValue,setModeValue] = useState("")
-    const pipelineId = localStorage.getItem("pipelineId")
 
     useEffect(()=>{
         setStatusValue("状态")
@@ -23,7 +22,7 @@ const StructureLeftDropdown = props =>{
         setState(parseInt(e.key))
         const params = {
             pipelineId:pipelineId,
-            state:e.key,
+            state:parseInt(e.key),
             userId:enforcer,
             type:mode,
             pageParam: {

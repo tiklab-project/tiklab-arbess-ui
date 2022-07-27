@@ -23,8 +23,10 @@ const WorkSpace = props =>{
 
     // 近期提交记录
     useEffect(()=>{
-        getSubmitMassage(pipelineId)
-        setCatalogue([])
+        if(pipelineId){
+            getSubmitMassage(pipelineId)
+            setCatalogue([])
+        }
     },[pipelineId])
 
     // 节点空间
@@ -33,7 +35,9 @@ const WorkSpace = props =>{
             pipelineId:pipelineId,
             userId:userId
         }
-        fileTree(params)
+        if(pipelineId){
+            fileTree(params)
+        }
     },[fresh,pipelineId])
 
     return(

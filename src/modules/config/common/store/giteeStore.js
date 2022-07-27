@@ -13,8 +13,10 @@ export class GiteeStore {
 
     //gitee授权--地址
     @action
-    url =async () =>{
-        return await Url()
+    url =async value =>{
+        const param = new FormData()
+        param.append("callbackUri",value)
+        return await Url(param)
     }
 
     //gitee授权--Code

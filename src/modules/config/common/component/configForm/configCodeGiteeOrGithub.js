@@ -37,7 +37,7 @@ const ConfigCodeGiteeOrGithub = props =>{
             interval = setInterval(()=>getState(params).then(res=>warn(res.data)),2000)
         }else clearInterval(interval)
         return ()=> clearInterval(interval)
-    },[])
+    },[visible])
     
     const warn = data => {
         if(data === 1){
@@ -90,7 +90,7 @@ const ConfigCodeGiteeOrGithub = props =>{
         <Fragment>
             <Row>
                 <FindAllProof type={codeType} {...props}/>
-                <Button className="config-details-link" type="link" onClick={()=> setVisible(true)}>
+                <Button className="config-details-link" type="link" onClick={()=>setVisible(true)}>
                     <PlusOutlined />
                     新增服务链接
                 </Button>

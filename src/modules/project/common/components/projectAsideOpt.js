@@ -16,9 +16,9 @@ const ProjectAsideOpt = props =>{
             setState(0)
             setEnforcer(null)
             setMode(0)
-            if(path === `/index/task/${pipelineName}/assembly`){
+            if(path===`/index/task/${pipelineName}/assembly`){
                 props.history.push(`/index/task/${item.pipelineName}/assembly`)
-            }else if (path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
+            }else if(path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
                 props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
             }else {
                 props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)

@@ -12,7 +12,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
         form.setFieldsValue({
             proofName:formInitialValues && formInitialValues.proofName,
         })
-    },[formInitialValues])
+    },[formInitialValues,visible])
 
     const onOk = () =>{
         form.validateFields().then((values) => {

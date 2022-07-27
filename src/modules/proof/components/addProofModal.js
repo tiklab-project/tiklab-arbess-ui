@@ -12,39 +12,37 @@ const AddProofModal = props =>{
     const [form] = Form.useForm()
     const [isShowPipeline,setIsShowPipeline] = useState(1)
 
-    const onOk = () =>{
-        form.validateFields().then((values) => {
-            let id,proofScope;
-            if(values.type===1){
-                id = null
-            }else {
-                id = pipelineId
-            }
-            if(isAuthority){
-                proofScope = values.proofScope
-            }else {
-                proofScope = type
-            }
-            const params = {
-                pipeline:{pipelineId:id},
-                user:{id:userId},
-                type:values.type,
-                proofScope:proofScope,
-                proofType:values.proofType,
-                proofName:values.proofName,
-                proofUsername:values.proofUsername,
-                proofPassword:values.proofPassword,
-                proofDescribe:values.proofDescribe,
-                proofCreateTime:moment.moment,
-                proofList:values.proofList
-            }
-            createProof(params).then(()=>{
-                setFresh(!fresh)
-            }).catch(error=>{
-                console.log(error)
-            })
-            setVisible(false)
+    const onOk = values =>{
+        let id,proofScope;
+        if(values.type===1){
+            id = null
+        }else {
+            id = pipelineId
+        }
+        if(isAuthority){
+            proofScope = values.proofScope
+        }else {
+            proofScope = type
+        }
+        const params = {
+            pipeline:{pipelineId:id},
+            user:{id:userId},
+            type:values.type,
+            proofScope:proofScope,
+            proofType:values.proofType,
+            proofName:values.proofName,
+            proofUsername:values.proofUsername,
+            proofPassword:values.proofPassword,
+            proofDescribe:values.proofDescribe,
+            proofCreateTime:moment.moment,
+            proofList:values.proofList
+        }
+        createProof(params).then(()=>{
+            setFresh(!fresh)
+        }).catch(error=>{
+            console.log(error)
         })
+        setVisible(false)
     }
 
     const opt = value => {
@@ -58,7 +56,14 @@ const AddProofModal = props =>{
             okText="确认"
             cancelText="取消"
             onCancel={()=>setVisible(false)}
-            onOk={onOk}
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then((values) => {
+                        form.resetFields()
+                        onOk(values)
+                    })
+            }}
             bodyStyle={{maxHeight:700,"overflow":"auto"}}
         >
             <Form form={form}

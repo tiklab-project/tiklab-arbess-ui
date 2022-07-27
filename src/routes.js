@@ -115,6 +115,14 @@ const routers=[
                         path:"/index/task/:pipelineName/config",
                         component: ConfigDetails
                     },
+                    // {
+                    //     path:"/index/task/config",
+                    //     component: ConfigDetails
+                    // },
+                    {
+                        path:"/index/task/config",
+                        component: ConfigDetails
+                    },
                     {
                         path:"/index/task/:pipelineName/structure",
                         component: Structure

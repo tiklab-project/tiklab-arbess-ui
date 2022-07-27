@@ -24,8 +24,10 @@ const Structure = props => {
     const userId = getUser().userId
 
     useEffect(()=>{
-        setPageCurrent(1)
-        findPipelineUser(pipelineId)
+        if(pipelineId){
+            setPageCurrent(1)
+            findPipelineUser(pipelineId)
+        }
     },[pipelineId])
 
     // let interval,socket=null
@@ -96,7 +98,7 @@ const Structure = props => {
                 if(state !==0 || enforcer !==null || mode !==0){
                     setDrop(!drop)
                     findPage()
-                } else {
+                }else{
                     setIsData(false)
                 }
             }
@@ -105,18 +107,20 @@ const Structure = props => {
 
     let interval=null
     useEffect(() => {
-        findExecState(pipelineId).then(res=>{
-            if(res.data===1){
-                interval=setInterval(()=>{
-                    findStructureState(pipelineId).then(res=>{ renderExec(res.data) })
-                }, 1000)
-                findAll(pipelineId)
-            }else if(res.data===0){
-                setExecState("")
-                setIndex(1)
-            }
-            changPage() // 历史列表
-        })
+        if(pipelineId){
+            findExecState(pipelineId).then(res=>{
+                if(res.data===1){
+                    interval=setInterval(()=>{
+                        findStructureState(pipelineId).then(res=>{ renderExec(res.data) })
+                    }, 1000)
+                    findAll(pipelineId)
+                }else if(res.data===0){
+                    setExecState("")
+                    setIndex(1)
+                }
+                changPage() // 历史列表
+            })
+        }
         return ()=>clearInterval(interval)
     }, [pipelineId,freshen])
 

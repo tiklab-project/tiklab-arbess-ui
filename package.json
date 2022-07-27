@@ -138,10 +138,6 @@
         "react-router": "^5.2.0",
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
-        "react-sortable-hoc": "^1.11.0",
-        "slate": "^0.72.3",
-        "slate-history": "^0.65.3",
-        "slate-react": "^0.65.3",
-        "wangeditor": "^4.7.6"
+        "react-sortable-hoc": "^1.11.0"
     }
 }

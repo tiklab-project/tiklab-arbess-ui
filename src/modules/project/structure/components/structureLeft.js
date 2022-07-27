@@ -70,6 +70,7 @@ const StructureLeft = props =>{
                 pipelineUserList={pipelineUserList}
                 change={change}
                 drop={drop}
+                pipelineId={pipelineId}
             />
             <div className="structure-content-left-history">
                 <div className="history-content">

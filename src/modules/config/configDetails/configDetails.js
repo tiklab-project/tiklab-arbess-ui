@@ -8,7 +8,7 @@ import FormView from "../common/component/configCommon/formView";
 import ConfigTop from "../common/component/configCommon/configTop";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import {getUrlParam} from "../common/component/configCommon/getUrlParam";
+import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
 
 const ConfigDetails = props =>{
 
@@ -40,6 +40,7 @@ const ConfigDetails = props =>{
             localStorage.removeItem("testId")
             localStorage.removeItem("structureId")
             localStorage.removeItem("deployId")
+            setFormInitialValues({})
         }
     },[pipelineId])
 
@@ -104,25 +105,27 @@ const ConfigDetails = props =>{
     // 表单初始化
     const newData = []
     useEffect(()=>{
-        findAllConfigure(pipelineId).then(res=>{
-            const initialData = res.data
-            if(res.code===0){
-                if(initialData.length === 0 ){
-                    setCodeData("")
-                    setData([])
-                    form.resetFields()
-                    setFormInitialValues({})
-                    setUnitShellBlock("")
-                    setMavenShellBlock("")
-                    setLinuxShellBlock("")
-                    setOrderShellBlock("")
+        if(pipelineId){
+            findAllConfigure(pipelineId).then(res=>{
+                const initialData = res.data
+                if(res.code===0){
+                    if(initialData.length === 0 ){
+                        setCodeData("")
+                        setData([])
+                        form.resetFields()
+                        setFormInitialValues({})
+                        setUnitShellBlock("")
+                        setMavenShellBlock("")
+                        setLinuxShellBlock("")
+                        setOrderShellBlock("")
+                    }
+                    else {
+                        // nonForm(initialData)
+                        renderFormData(initialData)
+                    }
                 }
-                else {
-                    nonForm(initialData)
-                    renderFormData(initialData)
-                }
-            }
-        })
+            })
+        }
     },[pipelineId])
 
     // pipeline切换form数据渲染问题
@@ -169,7 +172,7 @@ const ConfigDetails = props =>{
             codeBranch:data.codeBranch,
         }
         const formValue = {
-            gitProofName:data.proof && data.proof.proofName+ "(" + data.proof.proofUsername + ")" ,
+            gitProofName:data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")" ,
             proofName:data.proof && data.proof.proofName ,
         }
         Object.assign(formInitialValues,formValue)
@@ -206,7 +209,7 @@ const ConfigDetails = props =>{
             dataType:data.type,
         })
         const formValue = {
-            dockerProofName:data.proof && data.proof.proofName+ "(" + data.proof.proofUsername + ")" ,
+            dockerProofName:data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")" ,
         }
         Object.assign(formInitialValues,formValue)
         localStorage.setItem("deployId",data.deployId)
@@ -389,6 +392,7 @@ const ConfigDetails = props =>{
                     />
                     :
                     <RemoteUmdComponent
+                        {...props}
                         point={"gui"}
                         pluginStore={pluginStore}
                         isModalType={true}
