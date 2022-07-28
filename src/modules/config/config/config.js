@@ -22,7 +22,7 @@ const Config = props =>{
 
     const {isPrompt,setIsPrompt,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,setData,unitShellBlock,mavenShellBlock,
-        linuxShellBlock,shellBlock,orderShellBlock
+        linuxShellBlock,shellBlock,orderShellBlock,setOrderShellBlock
     } = configDataStore
 
     const [form] = Form.useForm()
@@ -58,9 +58,12 @@ const Config = props =>{
         findAllConfigure("").then(()=>{
             setCodeData("")
             setData([])
+            setFormInitialValues({})
+            form.resetFields()
             setUnitShellBlock("")
             setMavenShellBlock("")
             setLinuxShellBlock("")
+            setOrderShellBlock("")
         })
     },[])
 

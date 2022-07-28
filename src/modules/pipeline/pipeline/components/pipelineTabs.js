@@ -24,14 +24,8 @@ const PipelineTabs = props =>{
     },[fresh,type])
 
     const lis = [
-        {
-            id:1,
-            title:"所有"
-        },
-        {
-            id:2,
-            title:"收藏"
-        }
+        {id:1, title:"所有"},
+        {id:2, title:"收藏"}
     ]
 
     const onclick = item => {

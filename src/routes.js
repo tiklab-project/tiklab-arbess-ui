@@ -85,7 +85,7 @@ const routers=[
             },
             {
                 path:"/index/collect",
-                component: PipelineCollect,
+                component:PipelineCollect,
                 exact:true,
             },
             {
@@ -115,10 +115,6 @@ const routers=[
                         path:"/index/task/:pipelineName/config",
                         component: ConfigDetails
                     },
-                    // {
-                    //     path:"/index/task/config",
-                    //     component: ConfigDetails
-                    // },
                     {
                         path:"/index/task/config",
                         component: ConfigDetails

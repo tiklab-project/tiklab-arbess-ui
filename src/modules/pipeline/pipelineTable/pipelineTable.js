@@ -34,9 +34,9 @@ const PipelineTable = props =>{
 
     const collectMessage = (res,info) =>{
         if(res.data === "1"){
-            message.info({content: `${info}成功`, className:"message"})
+            message.info({content: `${info}成功`,duration:0.5,className:"message"})
         }else {
-            message.info({content: `${info}失败`, className:"message"})
+            message.info({content: `${info}失败`,duration:0.5,className:"message"})
         }
     }
 

@@ -18,7 +18,7 @@ const ConfigCodeGitOrGitlab = props =>{
                     {
                         pattern: /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/,
                         message:"请输入正确的git地址"
-                    }
+                    },
                 ]}
             >
                 <Input />

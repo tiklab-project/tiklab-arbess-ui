@@ -56,62 +56,68 @@ const PipelineAdd = props => {
             }
         })
     }
+    
+    const renderLis = lis => {
+        return lis.map((item,index) => {
+            return (
+                <div key={item.id}
+                     onClick={()=>liStatusData(index)}
+                     className={liStatus === index ? "choose-item choose-active":"choose-item"}
+                >
+                    <div className="choose-item-icon">
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-lishijishi"/>
+                        </svg>
+                    </div>
+                    <div className="choose-item-options">
+                        <label>{item.title}</label>
+                        <div>{item.desc}</div>
+                    </div>
+                </div>
+            )
+        })
+    }
 
     return(
         <div className="new">
-            <Form id="form" name="basic" onFinish={handSubmit} autoComplete="off">
-                <Form.Item
-                    label="流水线名称"
-                    name="pipelineName"
-                    rules={[
-                        {required:true, message:""},
-                        {
-                            pattern: /^[\s\u4e00-\u9fa5a-z0-9_-]{0,}$/,
-                            message: "流水线名称不能包含非法字符，如&,%，&，#……等",
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(rule, value) {
-                                if (!value) {
-                                    return Promise.reject("请输入名称")
-                                }
-                                let nameArray = []
-                                if(pipelineList){
-                                    nameArray = pipelineList && pipelineList.map(item=>item.pipelineName);
-                                }
-                                if (nameArray.includes(value)) {
-                                    return Promise.reject("名称已经存在");
-                                }
-                                return Promise.resolve()
-                            },
-                        }),
-                    ]}
-                >
-                    <Input style={{width:400}} ref={inputRef}/>
-                </Form.Item>
-            </Form>
-            <div  className="new-type">
-                <ul className="new-type-choose">
-                    {
-                        lis.map((item,index) => {
-                            return (
-                                <li key={item.id}
-                                    onClick={()=>liStatusData(index)}
-                                    className={ liStatus === index ? "choose-item choose-active":"choose-item"}
-                                >
-                                    <div className="choose-item-icon">
-                                        <svg className="icon" aria-hidden="true">
-                                            <use xlinkHref="#icon-lishijishi"/>
-                                        </svg>
-                                    </div>
-                                    <div className="choose-item-options">
-                                        <label>{item.title}</label>
-                                        <div>{item.desc}</div>
-                                    </div>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+            <div className="new-lump">
+                <div className="new-lump-form">
+                    <Form id="form" name="basic" onFinish={handSubmit} autoComplete="off">
+                        <Form.Item
+                            label="流水线名称"
+                            name="pipelineName"
+                            rules={[
+                                {required:true,message:""},
+                                {
+                                    pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
+                                    message: "流水线名称不能包含非法字符，如&,%，&，#……等",
+                                },
+                                ({ getFieldValue }) => ({
+                                    validator(rule, value) {
+                                        if (!value) {
+                                            return Promise.reject("请输入名称")
+                                        }
+                                        let nameArray = []
+                                        if(pipelineList){
+                                            nameArray = pipelineList && pipelineList.map(item=>item.pipelineName);
+                                        }
+                                        if (nameArray.includes(value)) {
+                                            return Promise.reject("名称已经存在");
+                                        }
+                                        return Promise.resolve()
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input style={{width:400}} ref={inputRef}/>
+                        </Form.Item>
+                    </Form>
+                </div>
+                <div  className="new-lump-type">
+                    <div className="new-lump-type-choose">
+                        {renderLis(lis)}
+                    </div>
+                </div>
             </div>
             <div className="new-btn">
                 <span className="new-btn-span">

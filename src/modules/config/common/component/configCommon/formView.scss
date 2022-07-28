@@ -1,9 +1,9 @@
 .formView{
     padding-top: 55px;
-    margin: auto;
-    width: 98%;
+    overflow: auto;
     &-content{
         padding: 15px;
+        overflow: hidden;
         &-changSort{
             text-align: right;
             padding-bottom: 10px;

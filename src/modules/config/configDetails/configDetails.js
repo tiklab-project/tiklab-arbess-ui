@@ -40,7 +40,6 @@ const ConfigDetails = props =>{
             localStorage.removeItem("testId")
             localStorage.removeItem("structureId")
             localStorage.removeItem("deployId")
-            setFormInitialValues({})
         }
     },[pipelineId])
 
@@ -120,7 +119,7 @@ const ConfigDetails = props =>{
                         setOrderShellBlock("")
                     }
                     else {
-                        // nonForm(initialData)
+                        nonForm(initialData)
                         renderFormData(initialData)
                     }
                 }

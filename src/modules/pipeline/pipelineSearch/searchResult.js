@@ -17,10 +17,8 @@ const SearchResult = props => {
         findOneName(params)
     },[])
 
-    const  goPipelineTask= record =>{
-        localStorage.setItem("pipelineName",record.pipelineName)
-        localStorage.setItem("pipelineId",record.pipelineId)
-        props.history.push("/index/task/work")
+    const goPipelineTask= item =>{
+        props.history.push(`/index/task/${item.pipelineName}/work`)
     }
 
     return(
@@ -37,7 +35,7 @@ const SearchResult = props => {
                             searchPipelineList  && searchPipelineList.map((item,index)=>{
                                 return  <li key={item.pipelineId} >
                                             <span> {index+1}、</span>
-                                            <span className={"pipeline-search-link"} onClick={()=>goPipelineTask(item)}>
+                                            <span className="pipeline-search-link" onClick={()=>goPipelineTask(item)}>
                                                 {item.pipelineName}
                                             </span>
                                         </li>

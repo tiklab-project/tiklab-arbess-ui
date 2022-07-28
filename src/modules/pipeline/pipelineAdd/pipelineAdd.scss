@@ -3,53 +3,59 @@
     height: 100%;
     margin:auto;
     padding: 20px;
-    ul{
+    ul,li{
         list-style: none;
     }
-    form{
+    &-lump{
         border: 1px solid #cccccc;
-        border-radius: 3px 3px 0 0;
-        background-color:  #eaeff2;
-        &>div{
-            margin:20px 30px;
+        border-radius: 3px;
+        &-form{
+            background: #eaeff2;
+            padding: 15px 0 15px 15px;
+            border-bottom: 1px solid #cccccc;
+            .ant-form-item{
+                margin: 0;
+            }
         }
-    }
-    &-type{
-        width: 100%;
-        border: 1px solid #cccccc;
-        border-radius:0 0 3px 3px ;
-        background-color: #F5F5F5;
-        &-choose{
-            padding-left: 15px;
-            .choose{
-                &-item{
-                    margin: 10px 15px 10px 0;
-                    padding: 5px 5px 5px 0;
-                    cursor: pointer;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    &:hover {
+        &-type{
+            width: 100%;
+            border-radius:0 0 3px 3px ;
+            background-color: #F5F5F5;
+            &-choose{
+                padding: 10px;
+                .choose{
+                    &-item{
+                        margin: 5px 0;
+                        padding: 10px 5px 10px 0;
+                        cursor: pointer;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        &:hover {
+                            background-color: #ffffff;
+                            border-radius: 3px;
+                        }
+                        &-icon{
+                            padding: 0 15px ;
+                            .icon{
+                                width: 40px;
+                                height: 40px;
+                            }
+                        }
+                        label{
+                            font-weight: bold;
+                            font-size: 18px;
+                        }
+                    }
+                    &-active{
                         background-color: #ffffff;
                         border-radius: 3px;
                     }
-                    &-icon{
-                        padding: 0 15px ;
-                        .icon{
-                            width: 40px;
-                            height: 40px;
-                        }
-                    }
-                    label{
-                        font-weight: bold;
-                        font-size: 18px;
-                    }
-                }
-                &-active{
-                    background-color: #ffffff;
-                    border-radius: 3px;
                 }
             }
         }
+    }
+    &-btn{
+        padding-top: 10px;
     }
 }

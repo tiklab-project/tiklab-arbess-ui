@@ -10,9 +10,8 @@ import {store} from "./store";
 import {orgStores} from "doublekit-user-ui/es/store";
 import {privilegeStores} from "doublekit-privilege-ui/es/store";
 import {initFetch,createContainer} from "doublekit-plugin-ui/es/_utils";
-import {observer} from "mobx-react";
+import {observer,Provider} from "mobx-react";
 import {renderRoutes} from "react-router-config";
-import {Provider} from "mobx-react";
 
 const Index = observer(() => {
 

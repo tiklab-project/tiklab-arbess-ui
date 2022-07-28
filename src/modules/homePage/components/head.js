@@ -1,6 +1,7 @@
 import React from "react";
 
 const Head = props =>{
+    
     const lis = [
         {
             id:1,
@@ -29,19 +30,22 @@ const Head = props =>{
         },
     ]
 
+    
+    const renderLis = lis => {
+        return lis && lis.map(item=>{
+            return(
+                <div key={item.id} className="head-group" onClick={()=>props.history.push(item.to)}>
+                    <div className="head-group-wrap">
+                        <div className="head-group-wrap-title">{item.title}</div>
+                    </div>
+                </div>
+            )
+        })
+    }
+
     return(
         <div className="homePage-head">
-            {
-                lis && lis.map(item=>{
-                    return(
-                        <div key={item.id} className="head-group" onClick={()=>props.history.push(item.to)}>
-                            <div className="head-group-wrap">
-                                <div className="head-group-wrap-title">{item.title}</div>
-                            </div>
-                        </div>
-                    )
-                })
-            }
+            {renderLis(lis)}
         </div>
     )
 }

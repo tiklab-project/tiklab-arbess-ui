@@ -48,7 +48,7 @@ const SystemAside= props =>  {
         },
         {
             key:"1",
-            label:"系统权限中心",
+            label:"系统权限",
             icon:"#icon-gongzuotongji",
             enCode:"E",
             children:[
@@ -56,19 +56,19 @@ const SystemAside= props =>  {
                     key:"/index/system/power/feature",
                     label:"系统功能",
                     icon:"#icon-gongzuotongji",
-                    enCode:"E",
+                    enCode:"E1",
                 },
                 {
                     key:"/index/system/power/role",
                     label:"系统角色",
                     icon:"#icon-gongzuotongji",
-                    enCode:"E",
+                    enCode:"E2",
                 }
             ]
         },
         {
             key:"2",
-            label:"项目权限中心",
+            label:"项目权限",
             icon:"#icon-gongzuotongji",
             enCode:"I",
             children:[
@@ -76,13 +76,13 @@ const SystemAside= props =>  {
                     key:"/index/system/project/feature",
                     label:"项目功能",
                     icon:"#icon-gongzuotongji",
-                    enCode:"I",
+                    enCode:"I1",
                 },
                 {
                     key:"/index/system/project/role",
                     label:"项目角色",
                     icon:"#icon-gongzuotongji",
-                    enCode:"I",
+                    enCode:"I2",
                 }
             ]
         },

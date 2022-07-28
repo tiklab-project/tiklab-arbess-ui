@@ -25,7 +25,7 @@ const ConfigDeploy = props =>{
             pipelineName:pipelineName,
             regex:formInitialValues.sourceAddress
         }
-        if(formInitialValues.sourceAddress){
+        if(formInitialValues.sourceAddress && pipelineId){
             getFile(params).then(res=>{
                 addMessageInfo(res)
             }).catch(error=>{
