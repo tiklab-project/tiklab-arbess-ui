@@ -1,7 +1,7 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
 //新建流水线
-export function  CreateMatFlow(data){
+export function CreateMatFlow(data){
     return serviceLoc.request({
         url:"/matFlow/createMatFlow",
         method:"post",
@@ -28,7 +28,7 @@ export function FindOneName(data){
 }
 
 //删除流水线
-export function  DeleteMatFlow (data){
+export function DeleteMatFlow (data){
     return serviceLoc.request({
         url:"/matFlow/deleteMatFlow",
         method:"post",
