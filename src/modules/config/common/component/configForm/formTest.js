@@ -5,7 +5,7 @@ import {inject,observer} from "mobx-react";
 const FormTest = props =>{
 
     const {configDataStore,configItemStore,test} = props
-    const {formInitialValues,codeType} = configDataStore
+    const {formInitialValues,codeType,gitProofId,deployProofId} = configDataStore
     const {codeTestPass} = configItemStore
 
     const testing = () =>{
@@ -16,11 +16,11 @@ const FormTest = props =>{
             } else {
                 type = 0
             }
-            proofId = localStorage.getItem("gitProofId")
+            proofId = gitProofId
             port = 0
             url = formInitialValues && formInitialValues.codeName
         } else {
-            proofId = localStorage.getItem("deployProofId")
+            proofId = deployProofId
             port = formInitialValues && formInitialValues.sshPort
             url = formInitialValues && formInitialValues.sshIp
             type = 2

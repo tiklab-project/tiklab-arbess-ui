@@ -88,7 +88,7 @@ const WorkSpaceNod = props =>{
                         className = "catalogue_item_breadcrumb"
                         onClick={()=>setBreadcrumb()}
                     >
-                        <span>{renderType(2)}{match.params.pipelineName}</span>
+                        <span>{renderType(2)}{match.params.matFlowName}</span>
                     </Breadcrumb.Item>
                     {renderCatalogue(catalogue)}
                 </Breadcrumb>

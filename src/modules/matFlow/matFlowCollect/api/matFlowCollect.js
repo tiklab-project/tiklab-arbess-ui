@@ -3,7 +3,7 @@ import {serviceLoc} from "../../../../common/utils/requset";
 //查找我的收藏
 export function  FindAllFollow(data){
     return serviceLoc.request({
-        url:"/pipelineHome/findAllFollow",
+        url:"/matFlowHome/findAllFollow",
         method:"post",
         data
     })
@@ -12,7 +12,7 @@ export function  FindAllFollow(data){
 //收藏
 export function  UpdateFollow(data){
     return serviceLoc.request({
-        url:"/pipelineHome/updateFollow",
+        url:"/matFlowHome/updateFollow",
         method:"post",
         data
     })

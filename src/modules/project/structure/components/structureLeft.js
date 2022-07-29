@@ -6,9 +6,9 @@ import {List} from "antd";
 
 const StructureLeft = props =>{
 
-    const {execState,status,pipelineId,structureStore,structureListStore}=props
+    const {execState,status,matFlowId,structureStore,structureListStore}=props
 
-    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,pipelineUserList} = structureStore
+    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,matFlowUserList} = structureStore
     const {pageCurrent,setPageCurrent,state,setState,enforcer,setEnforcer,mode,setMode,drop} = structureListStore
 
     const sta = item =>{
@@ -33,7 +33,7 @@ const StructureLeft = props =>{
 
     const onChangePage = pagination => {
         const params = {
-            pipelineId:pipelineId,
+            matFlowId:matFlowId,
             pageParam: {
                 pageSize: 10,
                 currentPage:pagination
@@ -67,10 +67,10 @@ const StructureLeft = props =>{
                 setEnforcer={setEnforcer}
                 mode={mode}
                 setMode={setMode}
-                pipelineUserList={pipelineUserList}
+                matFlowUserList={matFlowUserList}
                 change={change}
                 drop={drop}
-                pipelineId={pipelineId}
+                matFlowId={matFlowId}
             />
             <div className="structure-content-left-history">
                 <div className="history-content">

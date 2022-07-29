@@ -7,22 +7,22 @@ import {inject,observer} from "mobx-react";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,structureStore,setIsPrompt,userId,isBtn,pipelineName} = props
+    const {view,setView,matFlowId,structureStore,setIsPrompt,userId,isBtn,matFlowName} = props
 
-    const {pipelineStartStructure} = structureStore
+    const {matFlowStartStructure} = structureStore
     const [processVisible,setProcessVisible] = useState(false)
 
     const run = () => {
         const params = {
             userId:userId,
-            pipelineId:pipelineId
+            matFlowId:matFlowId
         }
         setProcessVisible(true)
         setIsPrompt(false)
-        pipelineStartStructure(params).then(res=>{
+        matFlowStartStructure(params).then(res=>{
             console.log("运行",res)
             if(res.code === 0 && res.data === 1){
-                props.history.push(`/index/task/${pipelineName}/structure`)
+                props.history.push(`/index/task/${matFlowName}/structure`)
             }else {
                 setProcessVisible(false)
                 message.error({content:"运行失败", className:"message"})

@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import "../components/structure.scss";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import {Spin} from "antd";
 import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import StructureLeft from "../components/structureLeft";
@@ -12,33 +12,33 @@ import {inject,observer} from "mobx-react";
 // 项目构建
 const Structure = props => {
 
-    const {structureStore,structureListStore,pipelineStore} = props
+    const {structureStore,structureListStore,matFlowStore} = props
 
-    const {findExecState,findStructureState,findAll,findPageHistory,pipelineStartStructure,
-        leftPageList,setIndex,isData,findPipelineUser,setIsData
+    const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure,
+        leftPageList,setIndex,isData,findMatFlowUser,setIsData
     } = structureStore
     const {state,enforcer,mode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
-    const {pipelineId} = pipelineStore
+    const {matFlowId} = matFlowStore
 
     const [execState,setExecState] = useState("") //左侧 -- 正在构建
     const userId = getUser().userId
 
     useEffect(()=>{
-        if(pipelineId){
+        if(matFlowId){
             setPageCurrent(1)
-            findPipelineUser(pipelineId)
+            findMatFlowUser(matFlowId)
         }
-    },[pipelineId])
+    },[matFlowId])
 
     // let interval,socket=null
     // useEffect(() => {
     //     socket = new WebSocket("ws://192.168.10.101:8080/start")
     //     socket.onopen = () =>{
-    //         findExecState(pipelineId).then(res=>{
+    //         findExecState(matFlowId).then(res=>{
     //             if(res.data === 1 ){
-    //                 interval = setInterval(()=>socket.send(pipelineId),1000)
+    //                 interval = setInterval(()=>socket.send(matFlowId),1000)
     //                 socket.onmessage = response => renderExec(response)
-    //                 findAll(pipelineId) // 构建状态
+    //                 findAll(matFlowId) // 构建状态
     //             }else if(res.data=== 0){
     //                 setExecState("")
     //                 socket.close()
@@ -50,7 +50,7 @@ const Structure = props => {
     //         clearInterval(interval)
     //         socket.close()
     //     }
-    // }, [pipelineId,freshen])
+    // }, [matFlowId,freshen])
 
     // const renderExec = response => {
     //     if(response.data){
@@ -66,7 +66,7 @@ const Structure = props => {
 
     const findPage = () =>{
         const params = {
-            pipelineId:pipelineId,
+            matFlowId:matFlowId,
             pageParam: {
                 pageSize: 10,
                 currentPage: 1
@@ -84,7 +84,7 @@ const Structure = props => {
 
     const changPage = () =>{
         const params = {
-            pipelineId:pipelineId,
+            matFlowId:matFlowId,
             pageParam: {
                 pageSize: 10,
                 currentPage: 1
@@ -107,13 +107,13 @@ const Structure = props => {
 
     let interval=null
     useEffect(() => {
-        if(pipelineId){
-            findExecState(pipelineId).then(res=>{
+        if(matFlowId){
+            findExecState(matFlowId).then(res=>{
                 if(res.data===1){
                     interval=setInterval(()=>{
-                        findStructureState(pipelineId).then(res=>{ renderExec(res.data) })
+                        findStructureState(matFlowId).then(res=>{ renderExec(res.data) })
                     }, 1000)
-                    findAll(pipelineId)
+                    findAll(matFlowId)
                 }else if(res.data===0){
                     setExecState("")
                     setIndex(1)
@@ -122,7 +122,7 @@ const Structure = props => {
             })
         }
         return ()=>clearInterval(interval)
-    }, [pipelineId,freshen])
+    }, [matFlowId,freshen])
 
     const renderExec = data => {
         if(data===null){
@@ -172,9 +172,9 @@ const Structure = props => {
     const runImmediately = () => {
         const params = {
             userId:userId,
-            pipelineId:pipelineId
+            matFlowId:matFlowId
         }
-        pipelineStartStructure(params).then(()=>{
+        matFlowStartStructure(params).then(()=>{
             setTimeout(()=>setFreshen(!freshen),500)
         }).catch(error=>{
             console.log(error)
@@ -188,7 +188,7 @@ const Structure = props => {
                 isData ?
                     <div className="structure-content">
                         <StructureLeft
-                            pipelineId={pipelineId}
+                            matFlowId={matFlowId}
                             execState={execState}
                             status={status}
                         />
@@ -204,7 +204,7 @@ const Structure = props => {
                                         status={status}
                                         execState={execState}
                                         setPageCurrent={setPageCurrent}
-                                        pipelineId={pipelineId}
+                                        matFlowId={matFlowId}
                                     />
                             }
                         </div>
@@ -216,4 +216,4 @@ const Structure = props => {
     )
 }
 
-export default inject("structureStore","structureListStore","pipelineStore")(observer(Structure))
+export default inject("structureStore","structureListStore","matFlowStore")(observer(Structure))

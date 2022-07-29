@@ -1,5 +1,5 @@
 import React from "react";
-import {Directory} from "doublekit-user-ui";
+import {Directory} from "tiklab-user-ui";
 
 // 用户目录管理
 const UserDirectory = props =>{

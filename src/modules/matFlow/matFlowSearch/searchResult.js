@@ -2,41 +2,41 @@ import React,{useEffect} from "react";
 import "./searchResult.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 
 const SearchResult = props => {
 
-    const {pipelineStore,match}=props
-    const {searchPipelineList,findOneName}=pipelineStore
+    const {matFlowStore,match}=props
+    const {searchMatFlowList,findOneName}=matFlowStore
 
     useEffect(()=>{
         const params = {
             userId: getUser().userId,
-            pipelineName:match.params.searchresult,
+            matFlowName:match.params.searchresult,
         }
         findOneName(params)
     },[])
 
-    const goPipelineTask= item =>{
-        props.history.push(`/index/task/${item.pipelineName}/work`)
+    const goMatFlowTask= item =>{
+        props.history.push(`/index/task/${item.matFlowName}/work`)
     }
 
     return(
-        <div className="pipeline-search">
+        <div className="matFlow-search">
             <div>
                 <h1 >查找的流水线</h1>
                 <ul>
                     {
-                        searchPipelineList.length === 0 ?
+                        searchMatFlowList.length === 0 ?
                             <li>
                                 没有查询到
                             </li>
                             :
-                            searchPipelineList  && searchPipelineList.map((item,index)=>{
-                                return  <li key={item.pipelineId} >
+                            searchMatFlowList  && searchMatFlowList.map((item,index)=>{
+                                return  <li key={item.matFlowId} >
                                             <span> {index+1}、</span>
-                                            <span className="pipeline-search-link" onClick={()=>goPipelineTask(item)}>
-                                                {item.pipelineName}
+                                            <span className="matFlow-search-link" onClick={()=>goMatFlowTask(item)}>
+                                                {item.matFlowName}
                                             </span>
                                         </li>
                             })
@@ -47,4 +47,4 @@ const SearchResult = props => {
     )
 }
 
-export default withRouter(inject("pipelineStore")(observer(SearchResult)))
+export default withRouter(inject("matFlowStore")(observer(SearchResult)))

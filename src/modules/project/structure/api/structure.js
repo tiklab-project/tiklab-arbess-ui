@@ -1,9 +1,9 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
 //开始构建
-export function  PipelineStartStructure (data){
+export function  MatFlowStartStructure (data){
     return serviceLoc.request({
-        url:"/pipelineExec/start",
+        url:"/matFlowExec/start",
         method: "post",
         data
     })
@@ -12,7 +12,7 @@ export function  PipelineStartStructure (data){
 //判断当前流水线是否在构建
 export function  FindExecState (data){
     return serviceLoc.request({
-        url:"/pipelineExec/findExecState",
+        url:"/matFlowExec/findExecState",
         method: "post",
         data
     })
@@ -21,7 +21,7 @@ export function  FindExecState (data){
 //构建状态
 export function  FindStructureState (data){
     return serviceLoc.request({
-        url:"pipelineExec/findState",
+        url:"/matFlowExec/findState",
         method:"post",
         data
     })
@@ -30,7 +30,7 @@ export function  FindStructureState (data){
 //停止构建
 export function  KillInstance(data){
     return serviceLoc.request({
-        url:"/pipelineExec/killInstance",
+        url:"/matFlowExec/killInstance",
         method:"post",
         data
     })
@@ -39,7 +39,7 @@ export function  KillInstance(data){
 //历史详情日志
 export function  FindHistoryLog (data){
     return serviceLoc.request({
-        url:"/pipelineLog/findAllLog",
+        url:"/matFlowLog/findAllLog",
         method:"post",
         data
     })
@@ -49,7 +49,7 @@ export function  FindHistoryLog (data){
 //正在执行的详情
 export function  FindAll(data){
     return serviceLoc.request({
-        url:"/pipelineConfigure/findAll",
+        url:"/matFlowConfigure/findAll",
         method:"post",
         data
     })
@@ -58,7 +58,7 @@ export function  FindAll(data){
 //构建历史
 export function  FindPageHistory (data){
     return serviceLoc.request({
-        url:"/pipelineHistory/findPageHistory",
+        url:"/matFlowHistory/findPageHistory",
         method:"post",
         data
     })
@@ -67,16 +67,16 @@ export function  FindPageHistory (data){
 //删除构建历史
 export function  DeleteHistoryLog (data){
     return serviceLoc.request({
-        url:"/pipelineHistory/deleteHistory",
+        url:"/matFlowHistory/deleteHistory",
         method:"post",
         data
     })
 }
 
 // 查询构建用户
-export function  FindPipelineUser(data){
+export function  FindMatFlowUser(data){
     return serviceLoc.request({
-        url:"/pipeline/findPipelineUser",
+        url:"/matFlow/findMatFlowUser",
         method:"post",
         data
     })

@@ -1,12 +1,12 @@
 import React from "react";
-import {DomainUserList} from "doublekit-user-ui";
+import {DomainUserList} from "tiklab-user-ui";
 import {inject,observer} from "mobx-react";
 
 // 项目成员
 const ProjectSetUser = props =>{
-    const {pipelineStore} = props
-    const {pipelineId} = pipelineStore
-    return <DomainUserList {...props} domainId={pipelineId}/>
+    const {matFlowStore} = props
+    const {matFlowId} = matFlowStore
+    return <DomainUserList {...props} domainId={matFlowId}/>
 }
 
-export default inject("pipelineStore")(observer(ProjectSetUser))
+export default inject("matFlowStore")(observer(ProjectSetUser))

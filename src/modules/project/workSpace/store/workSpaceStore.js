@@ -19,7 +19,7 @@ export class WorkSpaceStore{
     @action
     getSubmitMassage = async value =>{
         const param = new FormData()
-        param.append("pipelineId",value)
+        param.append("matFlowId",value)
         GetSubmitMassage(param).then(res=>{
             console.log("近期提交记录",res)
             if(res.code === 0){
@@ -33,7 +33,7 @@ export class WorkSpaceStore{
     @action
     fileTree = async value =>{
         const params = new FormData()
-        params.append("pipelineId",value.pipelineId)
+        params.append("matFlowId",value.matFlowId)
         params.append("userId",value.userId)
         FileTree(params).then(res=>{
             if(res.code === 0){

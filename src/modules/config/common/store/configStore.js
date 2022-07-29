@@ -12,46 +12,46 @@ export class ConfigStore{
         const params ={
             configureCreateTime:values.configureCreateTime,
             user:{ id:values.user.id },
-            pipeline:{ pipelineId:values.pipeline.pipelineId },
-            pipelineCode:{
-                codeId:values.pipelineCode.codeId,
-                sort:values.pipelineCode.sort,
-                type:values.pipelineCode.type,
-                codeBranch:values.pipelineCode.codeBranch,
-                codeName:values.pipelineCode.codeName,
-                proof:{ proofId:values.pipelineCode.proof.proofId }
+            matFlow:{ matFlowId:values.matFlow.matFlowId },
+            matFlowCode:{
+                codeId:values.matFlowCode.codeId,
+                sort:values.matFlowCode.sort,
+                type:values.matFlowCode.type,
+                codeBranch:values.matFlowCode.codeBranch,
+                codeName:values.matFlowCode.codeName,
+                proof:{ proofId:values.matFlowCode.proof.proofId }
             },
-            pipelineTest:{
-                testId:values.pipelineTest.testId,
-                sort:values.pipelineTest.sort,
-                testAlias:values.pipelineTest.testAlias,
-                type:values.pipelineTest.type,
-                testOrder:values.pipelineTest.testOrder,
+            matFlowTest:{
+                testId:values.matFlowTest.testId,
+                sort:values.matFlowTest.sort,
+                testAlias:values.matFlowTest.testAlias,
+                type:values.matFlowTest.type,
+                testOrder:values.matFlowTest.testOrder,
             },
-            pipelineStructure:{
-                structureId:values.pipelineStructure.structureId,
-                sort:values.pipelineStructure.sort,
-                structureAlias:values.pipelineStructure.structureAlias,
-                type:values.pipelineStructure.type,
-                structureAddress: values.pipelineStructure.structureAddress,
-                structureOrder: values.pipelineStructure.structureOrder,
+            matFlowStructure:{
+                structureId:values.matFlowStructure.structureId,
+                sort:values.matFlowStructure.sort,
+                structureAlias:values.matFlowStructure.structureAlias,
+                type:values.matFlowStructure.type,
+                structureAddress: values.matFlowStructure.structureAddress,
+                structureOrder: values.matFlowStructure.structureOrder,
             },
-            pipelineDeploy:{
-                deployId:values.pipelineDeploy.deployId,
-                sort:values.pipelineDeploy.sort,
-                deployAlias:values.pipelineDeploy.deployAlias,
-                type:values.pipelineDeploy.type,
-                sshIp:values.pipelineDeploy.sshIp,
-                sshPort:values.pipelineDeploy.sshPort,
-                deployAddress: values.pipelineDeploy.deployAddress,
-                startShell: values.pipelineDeploy.startShell,
-                sourceAddress:values.pipelineDeploy.sourceAddress,
-                startPort:values.pipelineDeploy.startPort,
-                mappingPort:values.pipelineDeploy.mappingPort,
-                deployType:values.pipelineDeploy.deployType,
-                startAddress:values.pipelineDeploy.startAddress,
-                deployOrder:values.pipelineDeploy.deployOrder,
-                proof:{ proofId:values.pipelineDeploy.proof.proofId }
+            matFlowDeploy:{
+                deployId:values.matFlowDeploy.deployId,
+                sort:values.matFlowDeploy.sort,
+                deployAlias:values.matFlowDeploy.deployAlias,
+                type:values.matFlowDeploy.type,
+                sshIp:values.matFlowDeploy.sshIp,
+                sshPort:values.matFlowDeploy.sshPort,
+                deployAddress: values.matFlowDeploy.deployAddress,
+                startShell: values.matFlowDeploy.startShell,
+                sourceAddress:values.matFlowDeploy.sourceAddress,
+                startPort:values.matFlowDeploy.startPort,
+                mappingPort:values.matFlowDeploy.mappingPort,
+                deployType:values.matFlowDeploy.deployType,
+                startAddress:values.matFlowDeploy.startAddress,
+                deployOrder:values.matFlowDeploy.deployOrder,
+                proof:{ proofId:values.matFlowDeploy.proof.proofId }
             },
         }
         return new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ export class ConfigStore{
     @action
     findAllConfigure = values =>{
         const param = new FormData()
-        param.append("pipelineId", values)
+        param.append("matFlowId", values)
         return new Promise((resolve, reject) => {
             FindAllConfigure(param).then(res=>{
                 console.log("查看所有配置",res)

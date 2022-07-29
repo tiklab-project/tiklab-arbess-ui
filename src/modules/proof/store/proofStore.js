@@ -3,7 +3,7 @@ import {action,observable} from "mobx";
 import {
     CreateProof,
     FindOneProof,
-    FindPipelineProof,
+    FindMatFlowProof,
     UpdateProof,
     DeleteProof,
 } from "../api/proof";
@@ -22,7 +22,7 @@ export class ProofStore{
     createProof =async values =>{
         const params = {
             user:{id:values.user.id},
-            pipeline:{pipelineId: values.pipeline.pipelineId},
+            matFlow:{matFlowId: values.matFlow.matFlowId},
             proofScope:values.proofScope,
             proofType:values.proofType,
             proofName:values.proofName,
@@ -46,12 +46,12 @@ export class ProofStore{
     }
 
     @action
-    findPipelineProof =async values =>{
+    findMatFlowProof =async values =>{
         const params = new FormData()
-        params.append("pipelineId",values.pipelineId)
+        params.append("matFlowId",values.matFlowId)
         params.append("userId",values.userId)
         params.append("type",values.type)
-        FindPipelineProof(params).then(res=>{
+        FindMatFlowProof(params).then(res=>{
             console.log(res)
             this.proofList = res.data
         }).catch(error=>{
@@ -62,7 +62,7 @@ export class ProofStore{
     @action
     updateProof =async values =>{
         const params = {
-            pipeline:{pipelineId: values.pipeline.pipelineId},
+            matFlow:{matFlowId: values.matFlow.matFlowId},
             proofId:values.proofId,
             proofType:values.proofType,
             proofScope:values.proofScope,

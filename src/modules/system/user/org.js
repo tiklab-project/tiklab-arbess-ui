@@ -1,5 +1,5 @@
 import React from "react";
-import {OrgaList} from "doublekit-user-ui";
+import {OrgaList} from "tiklab-user-ui";
 
 // 组织管理
 const Org = props=>{

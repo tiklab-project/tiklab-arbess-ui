@@ -1,7 +1,7 @@
 import React,{Fragment,useEffect,useState} from "react";
 import "./dynamicDetails.scss";
 import zhCN from "antd/es/locale/zh_CN";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import {List,ConfigProvider,Button} from "antd";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
@@ -40,8 +40,8 @@ const DynamicDetails = props =>{
         }
     }
 
-    const goPipeline = item =>{
-        props.history.push(`/index/task/${item.pipelineName}/work`)
+    const goMatFlow = item =>{
+        props.history.push(`/index/task/${item.matFlowName}/work`)
     }
 
     return(
@@ -82,8 +82,8 @@ const DynamicDetails = props =>{
                                    {item.user && item.user.name}
                                 </span>
                                 <span>{item.massage}</span>
-                                <span className="name" onClick={()=>goPipeline(item.pipeline)}>
-                                    {item.pipeline && item.pipeline.pipelineName}
+                                <span className="name" onClick={()=>goMatFlow(item.matFlow)}>
+                                    {item.matFlow && item.matFlow.matFlowName}
                                 </span>
                                 <span>{item.news}</span>
                             </div>

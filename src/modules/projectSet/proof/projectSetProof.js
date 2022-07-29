@@ -1,31 +1,31 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import Proof from "../../proof/container/proof";
 
 // 项目凭证
 const ProjectSetProof = props =>{
 
-    const {proofStore,pipelineStore} = props
-    const {findPipelineProof,proofList,fresh} = proofStore
-    const {pipelineList,pipelineId} = pipelineStore
+    const {proofStore,matFlowStore} = props
+    const {findMatFlowProof,proofList,fresh} = proofStore
+    const {matFlowList,matFlowId} = matFlowStore
     const userId = getUser().userId
 
     useEffect(()=>{
         const params ={
-            pipelineId:pipelineId,
+            matFlowId:matFlowId,
             type:0,
             userId:userId,
         }
-        findPipelineProof(params)
-    },[fresh,pipelineId])
+        findMatFlowProof(params)
+    },[fresh,matFlowId])
 
     return  <Proof
                 type={"project"}
                 proofList={proofList}
-                pipelineList={pipelineList}
-                pipelineId={pipelineId}
+                matFlowList={matFlowList}
+                matFlowId={matFlowId}
             />
 }
 
-export default inject("proofStore","pipelineStore")(observer(ProjectSetProof))
+export default inject("proofStore","matFlowStore")(observer(ProjectSetProof))

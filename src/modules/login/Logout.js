@@ -1,5 +1,5 @@
 import React from "react";
-import {Logout} from "doublekit-eam-ui";
+import {Logout} from "tiklab-eam-ui";
 
 const LogoutContent = props =>{
     return <Logout {...props}/>

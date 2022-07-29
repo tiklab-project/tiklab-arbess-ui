@@ -8,13 +8,13 @@ import {inject,observer} from "mobx-react";
 
 const Proof = props =>{
 
-    const {proofList,proofStore,firstItem,type,pipelineList,pipelineId} = props
+    const {proofList,proofStore,firstItem,type,matFlowList,matFlowId} = props
     const {updateProof,deleteProof,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState("")
     const [visible,setVisible] = useState(false)
     const [displayPart,setDisplayPart] = useState(false)
-    const [isShowPipeline,setIsShowPipeline] = useState(1)
+    const [isShowMatFlow,setIsShowMatFlow] = useState(1)
 
     const edit = (text,record) => {
         if(record.proofScope===2 || record.proofScope===3){
@@ -23,7 +23,7 @@ const Proof = props =>{
             setDisplayPart(false)
         }
         setFormValue(record)
-        setIsShowPipeline(record.type)
+        setIsShowMatFlow(record.type)
         setVisible(true)
     }
 
@@ -101,7 +101,7 @@ const Proof = props =>{
             <BreadcrumbContent firstItem={firstItem} type={type}/>
             <div className="proof-content">
                 <div className="proof-content-btn">
-                    <AddProofButton style={style} pipelineList={pipelineList}/>
+                    <AddProofButton style={style} matFlowList={matFlowList}/>
                 </div>
                 <Table
                     bordered
@@ -118,11 +118,11 @@ const Proof = props =>{
                 fresh={fresh}
                 setFresh={setFresh}
                 displayPart={displayPart}
-                pipelineList={pipelineList}
-                isShowPipeline={isShowPipeline}
-                setIsShowPipeline={setIsShowPipeline}
+                matFlowList={matFlowList}
+                isShowMatFlow={isShowMatFlow}
+                setIsShowMatFlow={setIsShowMatFlow}
                 updateProof={updateProof}
-                pipelineId={pipelineId}
+                matFlowId={matFlowId}
             />
         </div>
     )

@@ -1,8 +1,8 @@
 import React,{Fragment,useState,useEffect} from "react";
 import {Form,message} from "antd";
-import {getUser} from "doublekit-core-ui";
-import {RemoteUmdComponent} from "doublekit-plugin-ui";
-import {useSelector} from "doublekit-plugin-ui/es/_utils";
+import {getUser} from "tiklab-core-ui";
+import {RemoteUmdComponent} from "tiklab-plugin-ui";
+import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import moment from "../../../common/moment/moment";
 import FormView from "../common/component/configCommon/formView";
 import ConfigTop from "../common/component/configCommon/configTop";
@@ -12,12 +12,12 @@ import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
 
 const ConfigDetails = props =>{
 
-    const {configStore,giteeStore,configDataStore,githubStore,pipelineStore} = props
+    const {configStore,giteeStore,configDataStore,githubStore,matFlowStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
-    const {pipelineId,pipelineName} = pipelineStore
+    const {matFlowId,matFlowName} = matFlowStore
 
     const {setIsPrompt,setData,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock,setShellBlock,
@@ -37,7 +37,7 @@ const ConfigDetails = props =>{
             localStorage.removeItem("gitProofId")
             localStorage.removeItem("deployProofId")
         }
-    },[pipelineId])
+    },[matFlowId])
 
     // 是否有图形化插件
     useEffect(()=>{
@@ -94,14 +94,14 @@ const ConfigDetails = props =>{
                 setCodeData({...codeData})
             }
         }
-    },[formInitialValues,pipelineId])
+    },[formInitialValues,matFlowId])
 
     const lists = [1,2,3,4,5,11,21,22,31,32]
     // 表单初始化
     const newData = []
     useEffect(()=>{
-        if(pipelineId){
-            findAllConfigure(pipelineId).then(res=>{
+        if(matFlowId){
+            findAllConfigure(matFlowId).then(res=>{
                 const initialData = res.data
                 if(res.code===0){
                     if(initialData.length === 0 ){
@@ -123,9 +123,9 @@ const ConfigDetails = props =>{
                 }
             })
         }
-    },[pipelineId])
+    },[matFlowId])
 
-    // pipeline切换form数据渲染问题
+    // matFlow切换form数据渲染问题
     const nonForm = initialData =>{
         for (let i=0; i<initialData.length;i++){
             for (let j=0; j<lists.length;j++) {
@@ -310,8 +310,8 @@ const ConfigDetails = props =>{
         const configureList = {
             configureCreateTime:moment.moment,
             user:{id:userId},
-            pipeline:{pipelineId:pipelineId},
-            pipelineCode:{
+            matFlow:{matFlowId:matFlowId},
+            matFlowCode:{
                 codeId:formInitialValues && formInitialValues.codeId,
                 sort:codeSort,
                 type:codeData && codeData.codeType,
@@ -319,14 +319,14 @@ const ConfigDetails = props =>{
                 codeName:values.codeName,
                 proof:{proofId:gitProofId}
             },
-            pipelineTest:{
+            matFlowTest:{
                 testId:formInitialValues && formInitialValues.testId,
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
                 testOrder:unitShellBlock,
             },
-            pipelineStructure:{
+            matFlowStructure:{
                 structureId:formInitialValues && formInitialValues.structureId,
                 sort:structureSort,
                 structureAlias:structureAlias,
@@ -334,7 +334,7 @@ const ConfigDetails = props =>{
                 structureAddress:values.structureAddress,
                 structureOrder:mavenShellBlock,
             },
-            pipelineDeploy:{
+            matFlowDeploy:{
                 deployId:formInitialValues && formInitialValues.deployId,
                 sort:deploySort,
                 deployAlias:deployAlias,
@@ -370,8 +370,8 @@ const ConfigDetails = props =>{
                     view={view}
                     setView={setView}
                     setIsPrompt={setIsPrompt}
-                    pipelineId={pipelineId}
-                    pipelineName={pipelineName}
+                    matFlowId={matFlowId}
+                    matFlowName={matFlowName}
                     isBtn={isBtn}
                 />
             </div>
@@ -389,7 +389,7 @@ const ConfigDetails = props =>{
                         pluginStore={pluginStore}
                         isModalType={true}
                         extraProps={{
-                            pipelineStore,
+                            matFlowStore,
                             configDataStore,
                             form,
                             onFinish,
@@ -402,4 +402,4 @@ const ConfigDetails = props =>{
 }
 
 export default  withRouter(inject("configStore","giteeStore","structureStore",
-                "configDataStore","githubStore","pipelineStore")(observer(ConfigDetails)))
+                "configDataStore","githubStore","matFlowStore")(observer(ConfigDetails)))

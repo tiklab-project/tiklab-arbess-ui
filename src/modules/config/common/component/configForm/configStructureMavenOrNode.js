@@ -5,11 +5,11 @@ import Mirror from "./mirror";
 
 const ConfigStructureMavenOrNode = props =>{
 
-    const {configDataStore,configItemStore,pipelineStore} = props
+    const {configDataStore,configItemStore,matFlowStore} = props
 
     const {setIsPrompt,mavenShellBlock,setMavenShellBlock} = configDataStore
     const {profileAddress} = configItemStore
-    const {pipelineName} = pipelineStore
+    const {matFlowName} = matFlowStore
 
     return(
         <Fragment>
@@ -19,7 +19,7 @@ const ConfigStructureMavenOrNode = props =>{
                 rules={[{required:true,message:"请输入文件地址"}]}
             >
                 <Input
-                    addonBefore={profileAddress+pipelineName}
+                    addonBefore={profileAddress+matFlowName}
                     placeholder={`"\/\" 代表当前源的根目录`}
                 />
             </Form.Item>
@@ -54,4 +54,4 @@ const ConfigStructureMavenOrNode = props =>{
     )
 }
 
-export default inject("configDataStore","configItemStore","pipelineStore")(observer(ConfigStructureMavenOrNode))
+export default inject("configDataStore","configItemStore","matFlowStore")(observer(ConfigStructureMavenOrNode))

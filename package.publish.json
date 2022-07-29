@@ -1,5 +1,5 @@
 {
-    "name": "doublekit-pipeline-ui",
+    "name": "tiklab-matflow-ui",
     "version": "1.0.0",
     "description": "门户模块",
     "main": "dist.js",

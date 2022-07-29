@@ -1,29 +1,29 @@
 import React,{Fragment} from "react";
 import {message,Table,Tooltip} from "antd";
 import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
-import PipelineRun from "./pipelineRun";
-import "./pipelineTable.scss";
+import MatFlowRun from "./matFlowRun";
+import "./matFlowTable.scss";
 
-const PipelineTable = props =>{
+const MatFlowTable = props =>{
 
-    const {structureStore,pipelineCollectStore,list,fresh,setFresh}=props
+    const {structureStore,matFlowCollectStore,list,fresh,setFresh}=props
 
-    const {pipelineStartStructure,killInstance}=structureStore
-    const {updateFollow} = pipelineCollectStore
+    const {matFlowStartStructure,killInstance}=structureStore
+    const {updateFollow} = matFlowCollectStore
 
     const userId = getUser().userId
 
     //收藏
     const collectAction = record => {
         const params = {
-            pipeline:record.pipelineId,
+            matFlow:record.matFlowId,
             userId:userId
         }
         updateFollow(params).then(res=>{
-            if(record.pipelineCollect===0){
+            if(record.matFlowCollect===0){
                 collectMessage(res,"收藏")
             }else {
                 collectMessage(res,"取消")
@@ -41,17 +41,17 @@ const PipelineTable = props =>{
     }
 
     //去详情页面
-    const goPipelineTask= text =>{
+    const goMatFlowTask= text =>{
         props.history.push(`/index/task/${text}/work`)
     }
 
     const work = record =>{
         const params = {
             userId:userId,
-            pipelineId:record.pipelineId
+            matFlowId:record.matFlowId
         }
-        if(record.pipelineState === 0){
-            pipelineStartStructure(params).then(res=>{
+        if(record.matFlowState === 0){
+            matFlowStartStructure(params).then(res=>{
                 if(res.data === 1){
                     // setFresh(!fresh)
                     setTimeout(()=>setFresh(!fresh),1000)
@@ -67,13 +67,13 @@ const PipelineTable = props =>{
     const columns = [
         {
             title: "收藏",
-            dataIndex: "pipelineCollect",
-            key:"pipelineCollect",
+            dataIndex: "matFlowCollect",
+            key:"matFlowCollect",
             render:(text,record) =>{
                 return(
                     <span className="all-icon" onClick={()=>collectAction(record)}>
                         {
-                            record.pipelineCollect === 0 ?
+                            record.matFlowCollect === 0 ?
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-xingxing-kong"  />
                                 </svg>
@@ -115,11 +115,11 @@ const PipelineTable = props =>{
         },
         {
             title: "任务名",
-            dataIndex: "pipelineName",
-            key: "pipelineName",
+            dataIndex: "matFlowName",
+            key: "matFlowName",
             render:(text,record)=>{
                 return(
-                    <span onClick={()=>goPipelineTask(text,record)}
+                    <span onClick={()=>goMatFlowTask(text,record)}
                           className="all-columns all-icon"
                     >
                         {text}
@@ -145,12 +145,12 @@ const PipelineTable = props =>{
                 return(
                     <span className=" all-icon" onClick={() =>work(record,index)}>
                         {
-                            record.pipelineState === 0 ?
+                            record.matFlowState === 0 ?
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-yunhang"  />
                                 </svg>
                                 :
-                                <PipelineRun/>
+                                <MatFlowRun/>
                         }
                     </span>
                 )
@@ -160,7 +160,7 @@ const PipelineTable = props =>{
 
     return  <Table
                 bordered
-                rowKey={record => record.pipelineId}
+                rowKey={record => record.matFlowId}
                 columns={columns}
                 dataSource={list}
                 pagination={{hideOnSinglePage:true}}
@@ -175,4 +175,4 @@ const PipelineTable = props =>{
             />
 }
 
-export default withRouter(inject("structureStore","pipelineCollectStore")(observer(PipelineTable)))
+export default withRouter(inject("structureStore","matFlowCollectStore")(observer(MatFlowTable)))

@@ -6,14 +6,14 @@ import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
 import WorkSpaceDrawer from "../components/workSpaceDrawer";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 
 const WorkSpace = props =>{
 
-    const {workSpaceStore,pipelineStore} = props
+    const {workSpaceStore,matFlowStore} = props
 
     const {getSubmitMassage,fileTree,readFile,recordList,fileList,setFileList} = workSpaceStore
-    const {pipelineId} = pipelineStore
+    const {matFlowId} = matFlowStore
 
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
@@ -23,22 +23,22 @@ const WorkSpace = props =>{
 
     // 近期提交记录
     useEffect(()=>{
-        if(pipelineId){
-            getSubmitMassage(pipelineId)
+        if(matFlowId){
+            getSubmitMassage(matFlowId)
             setCatalogue([])
         }
-    },[pipelineId])
+    },[matFlowId])
 
     // 节点空间
     useEffect(()=>{
         const params = {
-            pipelineId:pipelineId,
+            matFlowId:matFlowId,
             userId:userId
         }
-        if(pipelineId){
+        if(matFlowId){
             fileTree(params)
         }
-    },[fresh,pipelineId])
+    },[fresh,matFlowId])
 
     return(
         <div className="workSpace">
@@ -73,4 +73,4 @@ const WorkSpace = props =>{
     )
 }
 
-export default withRouter(inject("workSpaceStore","pipelineStore")(observer(WorkSpace)))
+export default withRouter(inject("workSpaceStore","matFlowStore")(observer(WorkSpace)))

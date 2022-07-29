@@ -1,11 +1,11 @@
 import React,{useState} from "react";
 import {Button,Card} from "antd";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import ConfigName from "../../../config/common/component/configCommon/configName";
 
 const StructureRightExecute = props => {
 
-    const {status,execState,killInstance,rightExecuteData,runWay,freshen,setFreshen,setPageCurrent,pipelineId} = props
+    const {status,execState,killInstance,rightExecuteData,runWay,freshen,setFreshen,setPageCurrent,matFlowId} = props
     const [isActiveSlide,setIsActiveSlide] = useState(true) // 日志打印滚动条状态
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
@@ -39,7 +39,7 @@ const StructureRightExecute = props => {
     const cease = () => {
         const params = {
             userId:getUser().userId,
-            pipelineId:pipelineId
+            matFlowId:matFlowId
         }
         killInstance(params).then(res=>{
             console.log("停止成功",res)

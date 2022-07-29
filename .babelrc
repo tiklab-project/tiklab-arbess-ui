@@ -13,25 +13,25 @@
             "style": "css"
         }],
         ["import", {
-            "libraryName": "doublekit-plugin-ui",
+            "libraryName": "tiklab-plugin-ui",
             "libraryDirectory": "es",
             "style": true
-        },"doublekit-plugin-ui"],
+        },"tiklab-plugin-ui"],
         ["import", {
-            "libraryName": "doublekit-user-ui",
+            "libraryName": "tiklab-user-ui",
             "libraryDirectory": "es",
             "style": true
-        },"doublekit-user-ui"],
+        },"tiklab-user-ui"],
         ["import", {
-            "libraryName": "doublekit-privilege-ui",
+            "libraryName": "tiklab-privilege-ui",
             "libraryDirectory": "es",
             "style": true
-        },"doublekit-privilege-ui"],
+        },"tiklab-privilege-ui"],
         ["import", {
-            "libraryName": "doublekit-eam-ui",
+            "libraryName": "tiklab-eam-ui",
             "libraryDirectory": "es",
             "style": true
-        },"doublekit-eam-ui"],
+        },"tiklab-eam-ui"],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],

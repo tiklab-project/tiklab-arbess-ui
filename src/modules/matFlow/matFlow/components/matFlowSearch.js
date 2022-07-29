@@ -6,18 +6,18 @@ import {inject,observer} from "mobx-react";
 
 const { Search } = Input;
 
-const PipelineSearch= props=>{
+const MatFlowSearch= props=>{
 
-    const {pipelineStore}=props
-    const {findOneName}=pipelineStore
+    const {matFlowStore}=props
+    const {findOneName}=matFlowStore
 
     const onSearch = value =>{
         props.history.push(`/index/searchresult/${value}`)
     }
 
     return(
-        <div className="pipeline-top">
-            <div className="pipeline-top-r">
+        <div className="matFlow-top">
+            <div className="matFlow-top-r">
                 <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
                 <Button type="primary" onClick={()=>props.history.push("/index/new")}>
                     <PlusOutlined/> 新建流水线
@@ -27,4 +27,4 @@ const PipelineSearch= props=>{
     )
 }
 
-export default withRouter(inject("pipelineStore")(observer(PipelineSearch)))
+export default withRouter(inject("matFlowStore")(observer(MatFlowSearch)))

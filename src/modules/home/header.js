@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Row,Col,Avatar,Dropdown,Input,Space,Menu} from "antd";
-import {getVersionInfo,getUser} from "doublekit-core-ui";
+import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {GlobalOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 import logo from "../../assets/images/logo.png";
@@ -24,7 +24,7 @@ const Head = props =>{
             path="/index/system"
         }
         if( path.indexOf("/index/task") === 0 || path === "/index/new" || path.indexOf("/index/config") === 0 || path.indexOf("/index/searchresult")=== 0 ) {
-            path= "/index/pipeline"
+            path= "/index/matFlow"
         }
         setCurrentLink(path)
     },[path])

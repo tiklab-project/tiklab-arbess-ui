@@ -3,9 +3,9 @@ import {observable,action} from "mobx";
 import {
     FindAllFollow,
     UpdateFollow,
-} from "../api/pipelineCollect";
+} from "../api/matFlowCollect";
 
-export class PipelineCollectStore{
+export class MatFlowCollectStore{
 
     @observable followList = []
 
@@ -24,7 +24,7 @@ export class PipelineCollectStore{
     @action
     updateFollow =async value =>{
         const params = {
-            pipeline:{pipelineId:value.pipeline},
+            matFlow:{matFlowId:value.matFlow},
             userId:value.userId
         }
         return await UpdateFollow(params)
@@ -32,4 +32,4 @@ export class PipelineCollectStore{
 
 }
 
-export const PIPELINECOLLECT_STORE = "pipelineCollectStore"
+export const MATFLOWCOLLECT_STORE = "matFlowCollectStore"

@@ -12,13 +12,13 @@ const HomePage=AsyncComponent(()=>import("./modules/homePage/container/homePage"
 const DynamicDetails=AsyncComponent(()=>import("./modules/homePage/components/dynamicDetails"))
 
 /*  流水线 */
-const Pipeline=AsyncComponent(()=>import("./modules/pipeline/pipeline/container/pipeline"))
-const PipelineAdd=AsyncComponent(()=>import("./modules/pipeline/pipelineAdd/pipelineAdd"))
-const PipelineConfig=AsyncComponent(()=>import("./modules/config/config/config"))
-const SearchResult=AsyncComponent(()=>import("./modules/pipeline/pipelineSearch/searchResult"))
+const MatFlow=AsyncComponent(()=>import("./modules/matFlow/matFlow/container/matFlow"))
+const MatFlowAdd=AsyncComponent(()=>import("./modules/matFlow/matFlowAdd/matFlowAdd"))
+const MatFlowConfig=AsyncComponent(()=>import("./modules/config/config/config"))
+const SearchResult=AsyncComponent(()=>import("./modules/matFlow/matFlowSearch/searchResult"))
 
 /* 流水线 -- 收藏 */
-const PipelineCollect=AsyncComponent(()=>import("./modules/pipeline/pipelineCollect/container/pipelineCollect"))
+const MatFlowCollect=AsyncComponent(()=>import("./modules/matFlow/matFlowCollect/container/matFlowCollect"))
 
 const Project=AsyncComponent(()=>import("./modules/project/common/container/project"))
 
@@ -74,23 +74,23 @@ const routers=[
                 exact:true,
             },
             {
-                path:"/index/pipeline",
-                component:Pipeline,
+                path:"/index/matFlow",
+                component:MatFlow,
                 exact: true,
             },
             {
                 path:"/index/new",
-                component: PipelineAdd,
+                component: MatFlowAdd,
                 exact:true,
             },
             {
                 path:"/index/collect",
-                component: PipelineCollect,
+                component: MatFlowCollect,
                 exact:true,
             },
             {
-                path:"/index/config/:pipelineName",
-                component:PipelineConfig,
+                path:"/index/config/:matFlowName",
+                component:MatFlowConfig,
                 exact:true,
             },
             {
@@ -104,15 +104,15 @@ const routers=[
                 exact:true,
             },
             {
-                path:"/index/task/:pipelineName",
+                path:"/index/task/:matFlowName",
                 component: Project,
                 routes:[
                     {
-                        path:"/index/task/:pipelineName/work",
+                        path:"/index/task/:matFlowName/work",
                         component: WorkSpace
                     },
                     {
-                        path:"/index/task/:pipelineName/config",
+                        path:"/index/task/:matFlowName/config",
                         component: ConfigDetails
                     },
                     {
@@ -120,27 +120,27 @@ const routers=[
                         component: ConfigDetails
                     },
                     {
-                        path:"/index/task/:pipelineName/structure",
+                        path:"/index/task/:matFlowName/structure",
                         component: Structure
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly",
+                        path:"/index/task/:matFlowName/assembly",
                         component: ProjectSet,
                         routes:[
                             {
-                                path:"/index/task/:pipelineName/assembly/proof",
+                                path:"/index/task/:matFlowName/assembly/proof",
                                 component:ProjectSetProof
                             },
                             {
-                                path:"/index/task/:pipelineName/assembly/role",
+                                path:"/index/task/:matFlowName/assembly/role",
                                 component: ProjectRole
                             },
                             {
-                                path:"/index/task/:pipelineName/assembly/redel",
+                                path:"/index/task/:matFlowName/assembly/redel",
                                 component: ProjectSetReDel
                             },
                             {
-                                path:"/index/task/:pipelineName/assembly/user",
+                                path:"/index/task/:matFlowName/assembly/user",
                                 component: ProjectSetUser
                             }
                         ]

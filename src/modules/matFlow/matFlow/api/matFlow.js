@@ -1,18 +1,18 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
 //新建流水线
-export function  CreatePipeline(data){
+export function  CreateMatFlow(data){
     return serviceLoc.request({
-        url:"/pipeline/createPipeline",
+        url:"/matFlow/createMatFlow",
         method:"post",
         data
     })
 }
 
 //获取所有流水线
-export function FindAllPipelineStatus(data) {
+export function FindAllMatFlowStatus(data) {
     return serviceLoc.request({
-        url:"/pipelineHome/findUserPipeline",
+        url:"/matFlowHome/findUserMatFlow",
         method:"post",
         data
     })
@@ -21,25 +21,25 @@ export function FindAllPipelineStatus(data) {
 //模糊搜索流水线
 export function FindOneName(data){
     return serviceLoc.request({
-        url:"/pipeline/findOneName",
+        url:"/matFlow/findOneName",
         method:"post",
         data
     })
 }
 
 //删除流水线
-export function  DeletePipeline (data){
+export function  DeleteMatFlow (data){
     return serviceLoc.request({
-        url:"/pipeline/deletePipeline",
+        url:"/matFlow/deleteMatFlow",
         method:"post",
         data
     })
 }
 
 //重命名流水线
-export function UpdatePipeline(data){
+export function UpdateMatFlow(data){
     return serviceLoc.request({
-        url:"/pipeline/updatePipeline",
+        url:"/matFlow/updateMatFlow",
         method:"post",
         data
     })

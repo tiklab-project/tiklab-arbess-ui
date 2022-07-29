@@ -1,5 +1,5 @@
 import React from "react";
-import {SystemFeatureList} from "doublekit-privilege-ui";
+import {SystemFeatureList} from "tiklab-privilege-ui";
 
 // 系统功能管理
 const SystemFeature = props =>{

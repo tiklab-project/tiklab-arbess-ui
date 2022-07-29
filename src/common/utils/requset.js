@@ -1,4 +1,4 @@
-import {Axios as serviceLoc} from "doublekit-core-ui";
+import {Axios as serviceLoc} from "tiklab-core-ui";
 import axios from "axios";
 
 const BASE_URL = "http://192.168.10.100:8080"

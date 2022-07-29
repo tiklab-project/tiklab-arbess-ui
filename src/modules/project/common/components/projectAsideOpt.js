@@ -5,22 +5,22 @@ import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
 
-    const {pipelineStore,structureListStore,path} = props
+    const {matFlowStore,structureListStore,path} = props
 
-    const {pipelineName,pipelineList,lastPath} = pipelineStore
+    const {matFlowName,matFlowList,lastPath} = matFlowStore
     const {setState,setEnforcer,setMode} = structureListStore
 
-    const changePipeline = item => {
-        if(pipelineName!==item.pipelineName){
+    const changeMatFlow = item => {
+        if(matFlowName!==item.matFlowName){
             setState(0)
             setEnforcer(null)
             setMode(0)
-            if(path===`/index/task/${pipelineName}/assembly`){
-                props.history.push(`/index/task/${item.pipelineName}/assembly`)
-            }else if(path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
-                props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
+            if(path===`/index/task/${matFlowName}/assembly`){
+                props.history.push(`/index/task/${item.matFlowName}/assembly`)
+            }else if(path.indexOf(`/index/task/${matFlowName}/assembly`) === 0) {
+                props.history.push(`/index/task/${item.matFlowName}/assembly/${lastPath}`)
             }else {
-                props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
+                props.history.push(`/index/task/${item.matFlowName}/${lastPath}`)
             }
         }
     }
@@ -32,13 +32,13 @@ const ProjectAsideOpt = props =>{
                 <div className="opt-content-group">
                     <Menu>
                         {
-                            pipelineList && pipelineList.map(item=>{
+                            matFlowList && matFlowList.map(item=>{
                                 return(
-                                    <Menu.Item onClick={()=>{changePipeline(item)}}
-                                         key={item.pipelineId}
+                                    <Menu.Item onClick={()=>{changeMatFlow(item)}}
+                                         key={item.matFlowId}
                                          className="opt-content-group_item"
                                     >
-                                        {item.pipelineName}
+                                        {item.matFlowName}
                                     </Menu.Item>
                                 )
                             })
@@ -63,4 +63,4 @@ const ProjectAsideOpt = props =>{
     )
 }
 
-export default inject("structureListStore","pipelineStore")(observer(ProjectAsideOpt))
+export default inject("structureListStore","matFlowStore")(observer(ProjectAsideOpt))

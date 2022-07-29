@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
-import {PrivilegeButton} from "doublekit-privilege-ui";
+import {PrivilegeButton} from "tiklab-privilege-ui";
 
 const SystemAside= props =>  {
 

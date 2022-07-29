@@ -7,9 +7,9 @@ import {
     FindHistoryLog,
     FindStructureState,
     KillInstance,
-    PipelineStartStructure,
+    MatFlowStartStructure,
     FindPageHistory,
-    FindPipelineUser,
+    FindMatFlowUser,
 } from "../api/structure";
 
 export class StructureStore {
@@ -17,7 +17,7 @@ export class StructureStore {
     @observable leftPageList = []
     @observable rightFlowData = []
     @observable rightExecuteData = []
-    @observable pipelineUserList = []
+    @observable matFlowUserList = []
     @observable modeData = {}
     @observable index = 0  // 构建区分显示 -- 构建1 、2、……
     @observable page = {
@@ -44,18 +44,18 @@ export class StructureStore {
 
     // 开始构建
     @action
-    pipelineStartStructure = async values =>{
+    matFlowStartStructure = async values =>{
         const params = new FormData()
-        params.append("pipelineId", values.pipelineId)
+        params.append("matFlowId", values.matFlowId)
         params.append("userId", values.userId)
-        return await PipelineStartStructure(params);
+        return await MatFlowStartStructure(params);
     }
 
     // 判断当前流水线是否在构建
     @action
     findExecState = async value =>{
         const param = new FormData()
-        param.append("pipelineId", value)
+        param.append("matFlowId", value)
         return new Promise((resolve, reject) => {
             FindExecState(param).then(res=>{
                 if(res.code === 0){
@@ -77,7 +77,7 @@ export class StructureStore {
     @action
     findStructureState = async value =>{
         const param = new FormData()
-        param.append("pipelineId", value)
+        param.append("matFlowId", value)
         return await FindStructureState(param)
     }
 
@@ -85,7 +85,7 @@ export class StructureStore {
     @action
     killInstance = async values =>{
         const params = new FormData()
-        params.append("pipelineId", values.pipelineId)
+        params.append("matFlowId", values.matFlowId)
         params.append("userId", values.userId)
         return await KillInstance(params)
     }
@@ -94,7 +94,7 @@ export class StructureStore {
     @action
     findAll =async value =>{
         const param = new FormData()
-        param.append("pipelineId", value)
+        param.append("matFlowId", value)
         FindAll(param).then(res=>{
             this.rightExecuteData = res.data
             this.isData = true
@@ -108,7 +108,7 @@ export class StructureStore {
     findPageHistory =async values =>{
         const params = {
             userId: values.userId,
-            pipelineId: values.pipelineId,
+            matFlowId: values.matFlowId,
             pageParam: {
                 pageSize: 10,
                 currentPage: values.pageParam.currentPage,
@@ -168,13 +168,13 @@ export class StructureStore {
     }
 
     @action
-    findPipelineUser =async value =>{
+    findMatFlowUser =async value =>{
         const param = new FormData()
-        param.append("pipelineId", value)
-        FindPipelineUser(param).then(res=>{
+        param.append("matFlowId", value)
+        FindMatFlowUser(param).then(res=>{
             console.log("执行人",res)
             if(res.code === 0 && res.data){
-                this.pipelineUserList = res.data
+                this.matFlowUserList = res.data
             }
         }).catch(error=>{
             console.log(error)

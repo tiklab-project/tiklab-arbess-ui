@@ -3,7 +3,7 @@ import {serviceLoc} from "../../../common/utils/requset";
 // 最近打开的流水线
 export function  FindAllOpen (data){
     return serviceLoc.request({
-        url:"/pipelineHome/findAllOpen",
+        url:"/matFlowHome/findAllOpen",
         method:"post",
         data
     })
@@ -12,7 +12,7 @@ export function  FindAllOpen (data){
 // 近期构建状态
 export function  RunState (data){
     return serviceLoc.request({
-        url:"/pipelineHome/runState",
+        url:"/matFlowHome/runState",
         method:"post",
         data
     })
@@ -21,7 +21,7 @@ export function  RunState (data){
 // 所有动态
 export function  FindUserAction (data){
     return serviceLoc.request({
-        url:"/pipelineHome/findUserAction",
+        url:"/matFlowHome/findUserAction",
         method:"post",
         data
     })

@@ -1,8 +1,8 @@
 import React ,{useEffect} from "react";
 import "./header.scss";
 import Heads from "./header";
-import {privilegeStores} from "doublekit-privilege-ui/es/store";
-import {getUser} from "doublekit-core-ui";
+import {privilegeStores} from "tiklab-privilege-ui/es/store";
+import {getUser} from "tiklab-core-ui";
 import {renderRoutes} from "react-router-config";
 import {inject,observer} from "mobx-react";
 
@@ -18,8 +18,8 @@ const Portal= props=>{
             title: "首页",
         },
         {
-            key:"pipeline",
-            to:"/index/pipeline",
+            key:"matFlow",
+            to:"/index/matFlow",
             title: "流水线",
         },
         {

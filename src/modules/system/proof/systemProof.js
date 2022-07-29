@@ -1,35 +1,35 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import Proof from "../../proof/container/proof";
 
 // 系统凭证
 const SystemProof = props =>{
 
-    const {proofStore,pipelineStore} = props
-    const {findPipelineProof,proofList,fresh} = proofStore
-    const {findAllPipelineStatus,pipelineList} = pipelineStore
+    const {proofStore,matFlowStore} = props
+    const {findMatFlowProof,proofList,fresh} = proofStore
+    const {findAllMatFlowStatus,matFlowList} = matFlowStore
     const userId = getUser().userId
 
     useEffect(()=>{
         const param = {
-            pipelineId:"",
+            matFlowId:"",
             type:0,
             userId:userId
         }
-        findPipelineProof(param)
+        findMatFlowProof(param)
     },[fresh])
 
     useEffect(()=>{
-        findAllPipelineStatus(userId)
+        findAllMatFlowStatus(userId)
     },[])
 
     return  <Proof
                 proofList={proofList}
                 firstItem={"凭证管理"}
                 type={"system"}
-                pipelineList={pipelineList}
+                matFlowList={matFlowList}
             />
 }
 
-export default inject("proofStore","pipelineStore")(observer(SystemProof))
+export default inject("proofStore","matFlowStore")(observer(SystemProof))

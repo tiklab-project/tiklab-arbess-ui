@@ -27,7 +27,7 @@ const GuiView = props =>{
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
     const [index,setIndex] = useState("")  // 配置位置的插入
     const [newStage,setNewStage] = useState("")
-    const pipelineId = localStorage.getItem("pipelineId")
+    const matFlowId = localStorage.getItem("matFlowId")
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -106,8 +106,8 @@ const GuiView = props =>{
         const configureList = {
             configureCreateTime:moment.moment,
             user:{id:userId},
-            pipeline:{pipelineId:pipelineId},
-            pipelineCode:{
+            matFlow:{matFlowId:matFlowId},
+            matFlowCode:{
                 codeId:localStorage.getItem("codeId"),
                 sort:codeSort,
                 type:codeData && codeData.codeType,
@@ -115,14 +115,14 @@ const GuiView = props =>{
                 codeName:values.codeName,
                 proof:{proofId:localStorage.getItem("gitProofId")}
             },
-            pipelineTest:{
+            matFlowTest:{
                 testId:localStorage.getItem("testId"),
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
                 testOrder:unitShellBlock,
             },
-            pipelineStructure:{
+            matFlowStructure:{
                 structureId:localStorage.getItem("structureId"),
                 sort:structureSort,
                 structureAlias:structureAlias,
@@ -130,7 +130,7 @@ const GuiView = props =>{
                 structureAddress:values.structureAddress,
                 structureOrder:mavenShellBlock,
             },
-            pipelineDeploy:{
+            matFlowDeploy:{
                 deployId:localStorage.getItem("deployId"),
                 sort:deploySort,
                 deployAlias:deployAlias,

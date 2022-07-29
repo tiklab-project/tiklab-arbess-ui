@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from "react";
-import "./pipelineAdd.scss";
+import "./matFlowAdd.scss";
 import moment from "../../../common/moment/moment";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import {Form,Input,Button,message} from "antd";
 import {observer,inject} from "mobx-react";
 
@@ -18,18 +18,18 @@ const lis= [
     }
 ]
 
-const PipelineAdd = props => {
+const MatFlowAdd = props => {
 
-    const {pipelineStore}=props
-    const {createPipeline,pipelineList,findAllPipelineStatus}=pipelineStore
+    const {matFlowStore}=props
+    const {createMatFlow,matFlowList,findAllMatFlowStatus}=matFlowStore
 
     const inputRef = useRef()
     const [liStatus,setLiStatus] = useState(0)
     const userId = getUser().userId
 
-    //获取所有pipelinList，然后对pipelineName进行校验
+    //获取所有pipelinList，然后对matFlowName进行校验
     useEffect(()=>{
-        findAllPipelineStatus(userId)
+        findAllMatFlowStatus(userId)
     },[])
 
     useEffect(()=>{
@@ -44,13 +44,13 @@ const PipelineAdd = props => {
     const handSubmit = value => {
         const params={
             user:{id:userId},
-            pipelineName:value.pipelineName,
-            pipelineType:1,
-            pipelineCreateTime:moment.moment
+            matFlowName:value.matFlowName,
+            matFlowType:1,
+            matFlowCreateTime:moment.moment
         }
-        createPipeline(params).then(res=>{
+        createMatFlow(params).then(res=>{
             if(res.code === 0 && res.data){
-                props.history.push(`/index/config/${value.pipelineName}`)
+                props.history.push(`/index/config/${value.matFlowName}`)
             }else{
                 message.error({content:"添加失败", className:"message"})
             }
@@ -85,7 +85,7 @@ const PipelineAdd = props => {
                     <Form id="form" name="basic" onFinish={handSubmit} autoComplete="off">
                         <Form.Item
                             label="流水线名称"
-                            name="pipelineName"
+                            name="matFlowName"
                             rules={[
                                 {required:true,message:""},
                                 {
@@ -98,8 +98,8 @@ const PipelineAdd = props => {
                                             return Promise.reject("请输入名称")
                                         }
                                         let nameArray = []
-                                        if(pipelineList){
-                                            nameArray = pipelineList && pipelineList.map(item=>item.pipelineName);
+                                        if(matFlowList){
+                                            nameArray = matFlowList && matFlowList.map(item=>item.matFlowName);
                                         }
                                         if (nameArray.includes(value)) {
                                             return Promise.reject("名称已经存在");
@@ -130,4 +130,4 @@ const PipelineAdd = props => {
     )
 }
 
-export default inject("pipelineStore")(observer(PipelineAdd))
+export default inject("matFlowStore")(observer(MatFlowAdd))

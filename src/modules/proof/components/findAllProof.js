@@ -1,16 +1,16 @@
 import React from "react";
 import {inject,observer} from "mobx-react";
 import {Form,Select} from "antd";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 
 const {Option} = Select
 
 const FindAllProof = props =>{
 
-    const {proofStore,type,pipelineStore,configDataStore}=props
+    const {proofStore,type,matFlowStore,configDataStore}=props
 
-    const {findPipelineProof,proofList} = proofStore
-    const {pipelineId} = pipelineStore
+    const {findMatFlowProof,proofList} = proofStore
+    const {matFlowId} = matFlowStore
     const {setGitProofId,setDeployProofId} = configDataStore
 
     const userId = getUser().userId
@@ -25,11 +25,11 @@ const FindAllProof = props =>{
             proofScope = 1
         }
         const params ={
-            pipelineId:pipelineId,
+            matFlowId:matFlowId,
             type:proofScope,
             userId:userId
         }
-        findPipelineProof(params)
+        findMatFlowProof(params)
     }
 
     const changeGitSelect = (value,e) =>{
@@ -67,4 +67,4 @@ const FindAllProof = props =>{
 
 }
 
-export default inject("proofStore","pipelineStore","configDataStore")(observer(FindAllProof))
+export default inject("proofStore","matFlowStore","configDataStore")(observer(FindAllProof))

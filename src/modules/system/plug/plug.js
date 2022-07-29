@@ -1,5 +1,5 @@
 import React from "react";
-import {PluginList} from "doublekit-plugin-ui";
+import {PluginList} from "tiklab-plugin-ui";
 
 const Plug = props =>{
     return <PluginList {...props}/>

@@ -1,9 +1,9 @@
-import {store as pipelineStore} from "./module/store";
+import {store as matFlowStore} from "./module/store";
 import resources from "./module/common/language/resources";
-import pipelineSassRoutes from "./module/routesSass";
+import matFlowSassRoutes from "./module/routesSass";
 
 export {
-    pipelineSassRoutes,
-    pipelineStore,
+    matFlowSassRoutes,
+    matFlowStore,
     resources,
 }

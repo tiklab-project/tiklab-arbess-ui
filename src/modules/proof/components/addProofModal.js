@@ -7,17 +7,17 @@ const {Option} = Select;
 
 const AddProofModal = props =>{
 
-    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type,pipelineList,pipelineId} = props
+    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type,matFlowList,matFlowId} = props
 
     const [form] = Form.useForm()
-    const [isShowPipeline,setIsShowPipeline] = useState(1)
+    const [isShowMatFlow,setIsShowMatFlow] = useState(1)
 
     const onOk = values =>{
         let id,proofScope;
         if(values.type===1){
             id = null
         }else {
-            id = pipelineId
+            id = matFlowId
         }
         if(isAuthority){
             proofScope = values.proofScope
@@ -25,7 +25,7 @@ const AddProofModal = props =>{
             proofScope = type
         }
         const params = {
-            pipeline:{pipelineId:id},
+            matFlow:{matFlowId:id},
             user:{id:userId},
             type:values.type,
             proofScope:proofScope,
@@ -46,7 +46,7 @@ const AddProofModal = props =>{
     }
 
     const opt = value => {
-        setIsShowPipeline(value)
+        setIsShowMatFlow(value)
     }
 
     return (
@@ -79,20 +79,20 @@ const AddProofModal = props =>{
                     </Select>
                 </Form.Item>
                 {
-                    pipelineList && isShowPipeline === 2 ?
+                    matFlowList && isShowMatFlow === 2 ?
                     <Form.Item
                         label="项目作用域"
                         name="proofList"
-                        className="proofModal-showPipeline"
+                        className="proofModal-showMatFlow"
                         rules={[{required:true, message:"请选择项目作用域"}]}
                     >
                         <Checkbox.Group>
                         {
-                            pipelineList && pipelineList.map(item=>{
-                                return  <Row key={item.pipelineId}>
+                            matFlowList && matFlowList.map(item=>{
+                                return  <Row key={item.matFlowId}>
                                             <Col>
-                                                <Checkbox value={item.pipelineId}>
-                                                    {item.pipelineName}
+                                                <Checkbox value={item.matFlowId}>
+                                                    {item.matFlowName}
                                                 </Checkbox>
                                             </Col>
                                         </Row>

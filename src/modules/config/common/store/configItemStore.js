@@ -35,7 +35,7 @@ export class ConfigItemStore {
     @action
     getFile = async values =>{
         const params = new FormData()
-        params.append("pipelineName",values.pipelineName)
+        params.append("matFlowName",values.matFlowName)
         params.append("regex",values.regex)
         return await GetFile(params)
     }

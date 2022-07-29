@@ -1,18 +1,18 @@
 import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import ProjectAsideOpt from "./projectAsideOpt";
-import {PrivilegeButton} from "doublekit-privilege-ui";
+import {PrivilegeButton} from "tiklab-privilege-ui";
 
 const ProjectAside = props =>{
 
-    const {pipelineName,setLastPath} = props
+    const {matFlowName,setLastPath} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
     useEffect(()=>{
-        if (path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
-            path=`/index/task/${pipelineName}/assembly`
+        if (path.indexOf(`/index/task/${matFlowName}/assembly`) === 0) {
+            path=`/index/task/${matFlowName}/assembly`
         }
         setLastPath(path.substring(path.lastIndexOf('/') + 1))
         setNav(path)
@@ -20,28 +20,28 @@ const ProjectAside = props =>{
 
     const  taskRouters=[
         {
-            to:`/index/task/${pipelineName}/work`,
+            to:`/index/task/${matFlowName}/work`,
             title:"工作空间",
             icon:"#icon-gongzuotongji",
             key:"2",
             enCode:"AA"
         },
         {
-            to:`/index/task/${pipelineName}/config`,
+            to:`/index/task/${matFlowName}/config`,
             title: "配置",
             icon: "#icon-jiekoupeizhi",
             key:"3",
             enCode:"BB"
         },
         {
-            to:`/index/task/${pipelineName}/structure`,
+            to:`/index/task/${matFlowName}/structure`,
             title: "历史",
             icon:"#icon-lishijishi",
             key:"4",
             enCode:"CC"
         },
         {
-            to:`/index/task/${pipelineName}/assembly`,
+            to:`/index/task/${matFlowName}/assembly`,
             title: "设置",
             icon:"#icon-shezhi",
             key:"5",

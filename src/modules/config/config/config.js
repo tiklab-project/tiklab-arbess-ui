@@ -6,19 +6,19 @@ import ConfigTop from "../common/component/configCommon/configTop";
 import PromptContent from "../../../common/prompt/prompt";
 import FormView from "../common/component/configCommon/formView";
 import {Form, message} from "antd";
-import {getUser} from "doublekit-core-ui";
-import {RemoteUmdComponent} from "doublekit-plugin-ui";
-import {useSelector} from "doublekit-plugin-ui/es/_utils";
+import {getUser} from "tiklab-core-ui";
+import {RemoteUmdComponent} from "tiklab-plugin-ui";
+import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import moment from "../../../common/moment/moment";
 
 const Config = props =>{
 
-    const {configStore,giteeStore,configDataStore,githubStore,match,pipelineStore} = props
+    const {configStore,giteeStore,configDataStore,githubStore,match,matFlowStore} = props
 
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
-    const {setPipelineId,pipelineId,findAllPipelineStatus} = pipelineStore
+    const {setMatFlowId,matFlowId,findAllMatFlowStatus} = matFlowStore
 
     const {isPrompt,setIsPrompt,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,setData,unitShellBlock,mavenShellBlock,
@@ -32,26 +32,19 @@ const Config = props =>{
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
     const userId = getUser().userId
-    const jumpOrNot = match.params.pipelineName
+    const jumpOrNot = match.params.matFlowName
 
     useEffect(()=>{
-        findAllPipelineStatus(userId).then(res=>{
+        findAllMatFlowStatus(userId).then(res=>{
             const data = res.data
             if(res.code===0 && data){
                 data && data.map(item=>{
-                    if(item.pipelineName === jumpOrNot){
-                        setPipelineId(item.pipelineId)
+                    if(item.matFlowName === jumpOrNot){
+                        setMatFlowId(item.matFlowId)
                     }
                 })
             }
         })
-    },[])
-
-    useEffect(()=>{
-        return () =>{
-            localStorage.removeItem("gitProofId")
-            localStorage.removeItem("deployProofId")
-        }
     },[])
 
     useEffect(()=>{
@@ -64,6 +57,8 @@ const Config = props =>{
             setMavenShellBlock("")
             setLinuxShellBlock("")
             setOrderShellBlock("")
+            setDeployProofId("")
+            setGitProofId("")
         })
     },[])
 
@@ -222,23 +217,23 @@ const Config = props =>{
         const configureList = {
             configureCreateTime:moment.moment,
             user:{id:userId},
-            pipeline:{pipelineId:pipelineId},
-            pipelineCode:{
+            matFlow:{matFlowId:matFlowId},
+            matFlowCode:{
                 codeId:null,
                 sort:codeSort,
                 type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
-                proof:{proofId:localStorage.getItem("gitProofId")}
+                proof:{proofId:gitProofId}
             },
-            pipelineTest:{
+            matFlowTest:{
                 testId:null,
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
                 testOrder:unitShellBlock,
             },
-            pipelineStructure:{
+            matFlowStructure:{
                 structureId:null,
                 sort:structureSort,
                 structureAlias:structureAlias,
@@ -246,7 +241,7 @@ const Config = props =>{
                 structureAddress:values.structureAddress,
                 structureOrder:mavenShellBlock,
             },
-            pipelineDeploy:{
+            matFlowDeploy:{
                 deployId:null,
                 sort:deploySort,
                 deployAlias:deployAlias,
@@ -261,7 +256,7 @@ const Config = props =>{
                 mappingPort:values.deployType === 0 ?values.mappingPort:null,
                 startAddress:values.deployType === 0 ? values.startAddress :null,
                 deployOrder:values.deployType === 0 ? orderShellBlock :null,
-                proof:{proofId:localStorage.getItem("deployProofId")}
+                proof:{proofId:deployProofId}
             }
         }
 
@@ -283,8 +278,8 @@ const Config = props =>{
                     view={view}
                     setView={setView}
                     setIsPrompt={setIsPrompt}
-                    pipelineId={pipelineId}
-                    pipelineName={jumpOrNot}
+                    matFlowId={matFlowId}
+                    matFlowName={jumpOrNot}
                     userId={userId}
                     isBtn={isBtn}
                 />
@@ -304,7 +299,7 @@ const Config = props =>{
                             pluginStore={pluginStore}
                             isModalType={true}
                             extraProps={{
-                                pipelineStore,
+                                matFlowStore,
                                 configDataStore,
                                 onFinish,
                                 form,
@@ -323,4 +318,4 @@ const Config = props =>{
 
 
 export default  withRouter(inject("configStore", "giteeStore","configDataStore",
-                "githubStore","pipelineStore")(observer(Config)))
+                "githubStore","matFlowStore")(observer(Config)))

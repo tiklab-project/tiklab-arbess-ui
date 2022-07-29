@@ -6,11 +6,11 @@ import ConfigProof from "./configProof";
 
 const ConfigDeploy = props =>{
 
-    const {configItemStore,configDataStore,pipelineStore} = props
+    const {configItemStore,configDataStore,matFlowStore} = props
 
     const {formInitialValues,setIsPrompt,orderShellBlock,setOrderShellBlock} = configDataStore
     const {getFile,profileAddress} = configItemStore
-    const {pipelineId,pipelineName} = pipelineStore
+    const {matFlowId,matFlowName} = matFlowStore
 
     const [messageInfo,setMessageInfo] = useState("")
 
@@ -18,14 +18,14 @@ const ConfigDeploy = props =>{
         return ()=>{
             setMessageInfo("")
         }
-    },[pipelineId])
+    },[matFlowId])
 
     useEffect(()=>{
         const params = {
-            pipelineName:pipelineName,
+            matFlowName:matFlowName,
             regex:formInitialValues.sourceAddress
         }
-        if(formInitialValues.sourceAddress && pipelineId){
+        if(formInitialValues.sourceAddress && matFlowId){
             getFile(params).then(res=>{
                 addMessageInfo(res)
             }).catch(error=>{
@@ -34,7 +34,7 @@ const ConfigDeploy = props =>{
         }else{
             setMessageInfo("")
         }
-    },[formInitialValues.sourceAddress,pipelineId])
+    },[formInitialValues.sourceAddress,matFlowId])
     
     const addMessageInfo = data => {
         if(data.code === 0 ){
@@ -77,7 +77,7 @@ const ConfigDeploy = props =>{
                 rules={[{required:true,message:"请输入应用源文件地址"}]}
             >
                 <Input
-                    addonBefore={profileAddress+pipelineName}
+                    addonBefore={profileAddress+matFlowName}
                     placeholder="请输入该文件的唯一标识，如:Jar,zip等（支持正则表达式）"
                 />
             </Form.Item>
@@ -129,4 +129,4 @@ const ConfigDeploy = props =>{
     )
 }
 
-export default inject("configItemStore","configDataStore","pipelineStore")(observer(ConfigDeploy))
+export default inject("configItemStore","configDataStore","matFlowStore")(observer(ConfigDeploy))

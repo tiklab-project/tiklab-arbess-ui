@@ -13,13 +13,12 @@ const ConfigCodeGiteeOrGithub = props =>{
 
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
-    const {codeData,formInitialValues,codeType} = configDataStore
+    const {codeData,formInitialValues,codeType,gitProofId} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
     const [storehouseList,setStorehouseList] = useState([]) // 仓库
     const [branchList,setBranchList] = useState([]) // 分支
-    const gitProofId = localStorage.getItem("gitProofId")
 
     useEffect(()=>{
         if(codeData && codeData.codeName){
@@ -68,7 +67,7 @@ const ConfigCodeGiteeOrGithub = props =>{
     const changeGitStoreHouse = values =>{
         const params ={
             projectName:values,
-            proofId:localStorage.getItem("gitProofId")
+            proofId:gitProofId
         }
         if(codeType === 2){
             getGiteeBranch(params).then(res=>{

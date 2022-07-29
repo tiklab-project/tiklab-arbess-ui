@@ -1,15 +1,15 @@
 import React,{useEffect,useState} from "react";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import {getUser} from "doublekit-core-ui";
-import PipelineTable from "../../pipelineTable/pipelineTable";
+import {getUser} from "tiklab-core-ui";
+import MatFlowTable from "../../matFlowTable/matFlowTable";
 
-const PipelineTabs = props =>{
+const MatFlowTabs = props =>{
 
-    const {pipelineStore,pipelineCollectStore}=props
+    const {matFlowStore,matFlowCollectStore}=props
 
-    const {findAllPipelineStatus,pipelineList}=pipelineStore
-    const {findAllFollow,followList} = pipelineCollectStore
+    const {findAllMatFlowStatus,matFlowList}=matFlowStore
+    const {findAllFollow,followList} = matFlowCollectStore
 
     const [fresh,setFresh] = useState(false)
     const [type,setType] = useState(1)
@@ -17,7 +17,7 @@ const PipelineTabs = props =>{
 
     useEffect(()=>{
         if(type===1){
-            findAllPipelineStatus(userId)
+            findAllMatFlowStatus(userId)
         }else{
             findAllFollow(userId)
         }
@@ -33,14 +33,14 @@ const PipelineTabs = props =>{
     }
 
     return(
-        <div className="pipeline-tabs">
-            <div className="pipeline-tabs-type">
-                <div className="pipeline-tabs-type-group">
+        <div className="matFlow-tabs">
+            <div className="matFlow-tabs-type">
+                <div className="matFlow-tabs-type-group">
                     {
                         lis.map(item=>{
                             return <div key={item.id}
                                        className={type === item.id ?
-                                       "pipeline-tabs-type-active pipeline-tabs-type-link" : "pipeline-tabs-type-link"}
+                                       "matFlow-tabs-type-active matFlow-tabs-type-link" : "matFlow-tabs-type-link"}
                                        onClick={()=>onclick(item)}
                                     >
                                         {item.title}
@@ -49,8 +49,8 @@ const PipelineTabs = props =>{
                     }
                 </div>
             </div>
-            <PipelineTable
-                list={type === 1 ? pipelineList : followList}
+            <MatFlowTable
+                list={type === 1 ? matFlowList : followList}
                 fresh={fresh}
                 setFresh={setFresh}
             />
@@ -58,4 +58,4 @@ const PipelineTabs = props =>{
     )
 }
 
-export default withRouter(inject("pipelineStore","pipelineCollectStore")(observer(PipelineTabs)))
+export default withRouter(inject("matFlowStore","matFlowCollectStore")(observer(MatFlowTabs)))

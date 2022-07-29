@@ -12,7 +12,7 @@ export function  CodeTestPass(data){
 // 配置文件地址
 export function  FileAddress(data){
     return serviceLoc.request({
-        url:"/pipelineCommon/fileAddress",
+        url:"/matFlowCommon/fileAddress",
         method:"post",
         data
     })
@@ -21,7 +21,7 @@ export function  FileAddress(data){
 // linux应用源文件地址
 export function  GetFile(data){
     return serviceLoc.request({
-        url:"/pipelineCommon/getFile",
+        url:"/matFlowCommon/getFile",
         method:"post",
         data
     })

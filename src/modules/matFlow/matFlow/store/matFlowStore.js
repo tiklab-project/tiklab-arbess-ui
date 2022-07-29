@@ -1,20 +1,20 @@
 import {observable,action} from "mobx";
 
 import {
-    FindAllPipelineStatus,
-    CreatePipeline,
+    FindAllMatFlowStatus,
+    CreateMatFlow,
     FindOneName,
-    DeletePipeline,
-    UpdatePipeline
-} from "../api/pipeline";
+    DeleteMatFlow,
+    UpdateMatFlow
+} from "../api/matFlow";
 
-export class PipelineStore{
+export class MatFlowStore {
     
-    @observable pipelineList=[]
-    @observable searchPipelineList = []
+    @observable matFlowList=[]
+    @observable searchMatFlowList = []
     @observable lastPath = ""
-    @observable pipelineId = ""
-    @observable pipelineName = ""
+    @observable matFlowId = ""
+    @observable matFlowName = ""
 
     @action
     setLastPath = value =>{
@@ -22,23 +22,23 @@ export class PipelineStore{
     }
 
     @action
-    setPipelineId = value =>{
-        this.pipelineId = value
+    setMatFlowId = value =>{
+        this.matFlowId = value
     }
 
     @action
-    setPipelineName = value =>{
-        this.pipelineName = value
+    setMatFlowName = value =>{
+        this.matFlowName = value
     }
 
     @action
-    findAllPipelineStatus = value =>{
+    findAllMatFlowStatus = value =>{
         const param = new FormData()
         param.append("userId",value)
         return new Promise((resolve, reject) => {
-            FindAllPipelineStatus(param).then(res=>{
+            FindAllMatFlowStatus(param).then(res=>{
                 if(res.code === 0 ){
-                    this.pipelineList=res.data
+                    this.matFlowList=res.data
                 }
                 resolve(res)
                 console.log("所有流水线", res)
@@ -51,17 +51,17 @@ export class PipelineStore{
     }
 
     @action
-    createPipeline = values =>{
+    createMatFlow = values =>{
         const params = {
             user: {
                 id:values.user.id,
             },
-            pipelineName: values.pipelineName,
-            pipelineType: values.pipelineType,
-            pipelineCreateTime:values.pipelineCreateTime
+            matFlowName: values.matFlowName,
+            matFlowType: values.matFlowType,
+            matFlowCreateTime:values.matFlowCreateTime
         }
         return new Promise((resolve, reject) => {
-            CreatePipeline(params).then(res=>{
+            CreateMatFlow(params).then(res=>{
                 console.log("创建流水线",res)
                 resolve(res)
             }).catch(error=>{
@@ -74,11 +74,11 @@ export class PipelineStore{
     @action
     findOneName = values =>{
         const params = new FormData()
-        params.append("pipelineName",values.pipelineName)
+        params.append("matFlowName",values.matFlowName)
         params.append("userId",values.userId)
         return new Promise((resolve, reject) => {
             FindOneName(params).then(res=>{
-                this.searchPipelineList=res.data
+                this.searchMatFlowList=res.data
                 console.log("搜索流水线",res)
                 resolve(res)
             }).catch(error=>{
@@ -89,12 +89,12 @@ export class PipelineStore{
     }
 
     @action //删除流水线
-    deletePipeline = async value =>{
+    deleteMatFlow = async value =>{
         const param = new FormData()
-        param.append("pipelineId",value.pipelineId)
+        param.append("matFlowId",value.matFlowId)
         param.append("userId",value.userId)
         return new Promise((resolve, reject) => {
-            DeletePipeline(param).then(res=>{
+            DeleteMatFlow(param).then(res=>{
                 console.log("删除流水线",res)
                 resolve(res)
             }).catch(error=>{
@@ -105,16 +105,16 @@ export class PipelineStore{
     }
 
     @action //重命名流水线
-    updatePipeline = values =>{
+    updateMatFlow = values =>{
         const params={
-            pipelineId:values.pipelineId,
-            pipelineName:values.pipelineName,
+            matFlowId:values.matFlowId,
+            matFlowName:values.matFlowName,
             user:{
                 id: values.user.id
             }
         }
         return new Promise((resolve, reject) => {
-            UpdatePipeline(params).then(res=>{
+            UpdateMatFlow(params).then(res=>{
                 console.log("重命名",res)
                 resolve(res)
             }).catch(error=>{
@@ -126,4 +126,4 @@ export class PipelineStore{
 
 }
 
-export const PIPELINE_STORE = "pipelineStore"
+export const MATFLOW_STORE = "matFlowStore"

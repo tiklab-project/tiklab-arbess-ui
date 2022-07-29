@@ -2,13 +2,13 @@ import React,{useState} from "react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import {Button,Form,Input,message,Popconfirm,Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 
 const ProjectSetReDel = props =>{
 
-    const {pipelineStore} = props
-    const {deletePipeline,updatePipeline,pipelineList,pipelineId}=pipelineStore
+    const {matFlowStore} = props
+    const {deleteMatFlow,updateMatFlow,matFlowList,matFlowId}=matFlowStore
 
     const [form]=Form.useForm()
     const [processVisible,setProcessVisible] = useState(false)
@@ -18,15 +18,15 @@ const ProjectSetReDel = props =>{
         setProcessVisible(true)
         const params = {
             userId:userId,
-            pipelineId:pipelineId
+            matFlowId:matFlowId
         }
-        deletePipeline(params).then(res=>{
+        deleteMatFlow(params).then(res=>{
             if(res.code === 0 && res.data === 1){
                 message.info({content: "删除成功", className: "message"})
             }else {
                 message.error({content:"删除失败", className:"message"})
             }
-            props.history.push("/index/pipeline")
+            props.history.push("/index/matFlow")
         }).catch(error=>{
             console.log(error)
         })
@@ -35,12 +35,12 @@ const ProjectSetReDel = props =>{
     const re = value =>{
         const params={
             user:{id:userId},
-            pipelineId:pipelineId,
-            pipelineName:value.pipelineName
+            matFlowId:matFlowId,
+            matFlowName:value.matFlowName
         }
-        updatePipeline(params).then(res=>{
+        updateMatFlow(params).then(res=>{
             if(res.code === 0){
-                props.history.push(`/index/task/${value.pipelineName}/work`)
+                props.history.push(`/index/task/${value.matFlowName}/work`)
             }
         }).catch(error=>{
             console.log(error)
@@ -48,20 +48,20 @@ const ProjectSetReDel = props =>{
     }
 
     return(
-        <div className="pipelineSys-reDel">
+        <div className="matFlowSys-reDel">
             <BreadcrumbContent type={"project"}/>
-            <div className="pipelineSys-reDel-content" style={{padding:"8px 8px 0"}}>
-                <Form onFinish={re} form={form} layout="inline" autoComplete = "off">
+            <div className="matFlowSys-reDel-content" style={{padding:"8px 8px 0"}}>
+                <Form onFinish={re} form={form} layout="inline" autoComplete="off">
                     <Form.Item
                         label="重命名"
-                        name="pipelineName"
+                        name="matFlowName"
                         rules={[
                             ({ getFieldValue }) => ({
                                 validator(rule, value) {
                                     if(value){
                                         let nameArray = []
-                                        if(pipelineList){
-                                            nameArray=pipelineList && pipelineList.map(item=>item.pipelineName);
+                                        if(matFlowList){
+                                            nameArray=matFlowList && matFlowList.map(item=>item.matFlowName);
                                         }
                                         if (nameArray.includes(value)) {
                                             return Promise.reject("名称已经存在");
@@ -112,4 +112,4 @@ const ProjectSetReDel = props =>{
     )
 }
 
-export default inject("pipelineStore")(observer(ProjectSetReDel))
+export default inject("matFlowStore")(observer(ProjectSetReDel))

@@ -7,9 +7,9 @@ import "./common/language/i18n";
 import routers from "./routes";
 import resources from "./common/language/resources";
 import {store} from "./store";
-import {orgStores} from "doublekit-user-ui/es/store";
-import {privilegeStores} from "doublekit-privilege-ui/es/store";
-import {initFetch,createContainer} from "doublekit-plugin-ui/es/_utils";
+import {orgStores} from "tiklab-user-ui/es/store";
+import {privilegeStores} from "tiklab-privilege-ui/es/store";
+import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
 import {observer,Provider} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 

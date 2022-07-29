@@ -1,5 +1,5 @@
-import {EAM_STORE,EamStore} from "doublekit-eam-ui/es/store";
-import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/pipeline/store/pipelineStore";
+import {EAM_STORE,EamStore} from "tiklab-eam-ui/es/store";
+import {MATFLOW_STORE,MatFlowStore} from "./modules/matFlow/matFlow/store/matFlowStore";
 import {STRUCTURE_STORE,StructureStore} from "./modules/project/structure/store/structureStore";
 import {STRUCTURELIST_STORE,StructureListStore} from "./modules/project/structure/store/structureListStore";
 import {CONFIG_STORE,ConfigStore} from "./modules/config/common/store/configStore";
@@ -10,13 +10,13 @@ import {GITHUB_STORE,GithubStore} from "./modules/config/common/store/githubStor
 import {PROOF_STORE,ProofStore} from "./modules/proof/store/proofStore";
 import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/workSpaceStore";
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/homePage/store/homePageStore";
-import {PIPELINECOLLECT_STORE,PipelineCollectStore} from "./modules/pipeline/pipelineCollect/store/pipelineCollectStore";
+import {MATFLOWCOLLECT_STORE,MatFlowCollectStore} from "./modules/matFlow/matFlowCollect/store/matFlowCollectStore";
 import {MESSAGE_STORE,MessageStore} from "./modules/system/message/store/messageStore";
 import {createContext} from "react";
 
 function createStores() {
     return{
-        [PIPELINE_STORE]:new PipelineStore(),
+        [MATFLOW_STORE]:new MatFlowStore(),
         [STRUCTURE_STORE]:new StructureStore(),
         [STRUCTURELIST_STORE]:new StructureListStore(),
         [CONFIG_STORE]:new ConfigStore(),
@@ -27,7 +27,7 @@ function createStores() {
         [PROOF_STORE]:new ProofStore(),
         [WORKSPACE_STORE]:new WorkSpaceStore(),
         [HOMEPAGE_STORE]:new HomePageStore(),
-        [PIPELINECOLLECT_STORE]:new PipelineCollectStore(),
+        [MATFLOWCOLLECT_STORE]:new MatFlowCollectStore(),
         [MESSAGE_STORE]:new MessageStore(),
         [EAM_STORE]:new EamStore(),
     }

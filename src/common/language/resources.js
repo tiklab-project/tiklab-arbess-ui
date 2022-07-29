@@ -1,6 +1,6 @@
-import {eam_cn} from "doublekit-eam-ui/es/_utils";
-import {privilege_cn} from "doublekit-privilege-ui/es/_utils";
-import {orga_cn} from "doublekit-user-ui/es/_utils";
+import {eam_cn} from "tiklab-eam-ui/es/_utils";
+import {privilege_cn} from "tiklab-privilege-ui/es/_utils";
+import {orga_cn} from "tiklab-user-ui/es/_utils";
 import zhCnTrans from "./cn/translation.json";
 
 const resources= {

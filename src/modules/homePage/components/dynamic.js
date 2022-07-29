@@ -13,8 +13,8 @@ const Dynamic = props =>{
         }
     }
     
-    const goPipeline = item =>{
-        props.history.push(`/index/task/${item.pipelineName}/work`)
+    const goMatFlow = item =>{
+        props.history.push(`/index/task/${item.matFlowName}/work`)
     }
 
     return(
@@ -48,8 +48,8 @@ const Dynamic = props =>{
                                    {item.user && item.user.name}
                                 </span>
                                 <span>{item.massage}</span>
-                                <span className="name" onClick={()=>goPipeline(item.pipeline)}>
-                                    {item.pipeline && item.pipeline.pipelineName}
+                                <span className="name" onClick={()=>goMatFlow(item.matFlow)}>
+                                    {item.matFlow && item.matFlow.matFlowName}
                                 </span>
                                 <span>{item.news}</span>
                             </div>

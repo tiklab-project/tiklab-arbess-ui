@@ -1,18 +1,18 @@
-import React, {Fragment} from "react";
+import React,{Fragment} from "react";
 import {List} from "antd";
 
-const PipelineNear = props =>{
+const MatFlowNear = props =>{
 
-    const {pipelineNearList} = props
+    const {matFlowNearList} = props
 
-    const goPipeline = item => {
-        props.history.push(`/index/task/${item.pipelineName}/work`)
+    const goMatFlow = item => {
+        props.history.push(`/index/task/${item.matFlowName}/work`)
     }
 
     return(
-        <div className="homePage-content-pipelineNear">
-            <div className="pipelineNear-title">最近打开的流水线</div>
-            <div className="pipelineNear-active">
+        <div className="homePage-content-matFlowNear">
+            <div className="matFlowNear-title">最近打开的流水线</div>
+            <div className="matFlowNear-active">
                 <List
                     size="small"
                     locale={{emptyText:
@@ -23,13 +23,13 @@ const PipelineNear = props =>{
                                 <div>没有数据</div>
                             </Fragment>
                     }}
-                    dataSource={pipelineNearList}
+                    dataSource={matFlowNearList}
                     renderItem={(item,index)=><List.Item>
-                        <div key={item.pipelineId} className="pipelineNear-active-group">
-                            <div className="pipelineNear-active-group-desc">
+                        <div key={item.matFlowId} className="matFlowNear-active-group">
+                            <div className="matFlowNear-active-group-desc">
                                 <span>{index+1}、</span>
-                                <span  onClick={()=>goPipeline(item)} className="name">
-                                    {item.pipelineName}
+                                <span  onClick={()=>goMatFlow(item)} className="name">
+                                    {item.matFlowName}
                                 </span>
                             </div>
                         </div>
@@ -40,4 +40,4 @@ const PipelineNear = props =>{
     )
 }
 
-export default PipelineNear
+export default MatFlowNear

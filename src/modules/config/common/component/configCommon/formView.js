@@ -14,11 +14,11 @@ import {withRouter} from "react-router";
 
 const formView = props =>{
 
-    const {form,del,configDataStore,pipelineStore,onFinish} = props
+    const {form,del,configDataStore,matFlowStore,onFinish} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isFormAlias,setIsFormAlias,setCodeType} = configDataStore
-    const {pipelineId} = pipelineStore
+    const {matFlowId} = matFlowStore
 
     const inputRef = useRef()
     const [newStageVisible, setNewStageVisible] = useState(false)
@@ -33,7 +33,7 @@ const formView = props =>{
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
-    },[formInitialValues,pipelineId])
+    },[formInitialValues,matFlowId])
 
     // 显示文本框
     const displayInput = index =>{
@@ -170,4 +170,4 @@ const formView = props =>{
     )
 }
 
-export default withRouter(inject("configDataStore","pipelineStore")(observer(formView)))
+export default withRouter(inject("configDataStore","matFlowStore")(observer(formView)))

@@ -1,16 +1,16 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
-import {PrivilegeButton} from "doublekit-privilege-ui";
+import {PrivilegeButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 
 const ProjectSetLeftNav= props =>  {
 
-    const {match,pipelineStore} = props
+    const {match,matFlowStore} = props
 
-    const {setLastPath} = pipelineStore
+    const {setLastPath} = matFlowStore
 
     let path = props.location.pathname
-    const pipelineName = match.params.pipelineName
+    const matFlowName = match.params.matFlowName
     const [selectKey,setSelectKey] = useState(path)
     const [expandedTree, setExpandedTree] = useState(["/index/task/assembly/feature"])   // 树的展开与闭合
 
@@ -24,25 +24,25 @@ const ProjectSetLeftNav= props =>  {
 
     const router = [
         {
-            key:`/index/task/${pipelineName}/assembly/user`,
+            key:`/index/task/${matFlowName}/assembly/user`,
             label:"项目成员",
             icon:"#icon-gongzuotongji",
             enCode:"DD1",
         },
         {
-            key:`/index/task/${pipelineName}/assembly/role`,
+            key:`/index/task/${matFlowName}/assembly/role`,
             label:"角色管理",
             icon:"#icon-gongzuotongji",
             enCode:"DD2",
         },
         {
-            key:`/index/task/${pipelineName}/assembly/proof`,
+            key:`/index/task/${matFlowName}/assembly/proof`,
             label:"凭证管理",
             icon:"#icon-gongzuotongji",
             enCode:"DD3",
         },
         {
-            key:`/index/task/${pipelineName}/assembly/redel`,
+            key:`/index/task/${matFlowName}/assembly/redel`,
             label:"其他管理",
             icon:"#icon-gongzuotongji",
             enCode:"DD4",
@@ -134,4 +134,4 @@ const ProjectSetLeftNav= props =>  {
     )
 }
 
-export default inject("pipelineStore")(observer(ProjectSetLeftNav))
+export default inject("matFlowStore")(observer(ProjectSetLeftNav))

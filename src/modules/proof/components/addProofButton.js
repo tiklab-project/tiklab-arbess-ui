@@ -3,13 +3,13 @@ import "./addProofModal";
 import AddProofModal from "./addProofModal";
 import {inject,observer} from "mobx-react";
 import {Button} from "antd";
-import {getUser} from "doublekit-core-ui";
+import {getUser} from "tiklab-core-ui";
 
 const AddProofButton = props =>{
 
-    const {proofStore,pipelineStore,type,style,pipelineList} = props
+    const {proofStore,matFlowStore,type,style,matFlowList} = props
     const {createProof,fresh,setFresh} = proofStore
-    const {pipelineId} = pipelineStore
+    const {matFlowId} = matFlowStore
 
     const userId = getUser().userId
     const [visible,setVisible] = useState(false)
@@ -40,11 +40,11 @@ const AddProofButton = props =>{
                 isAuthority={isAuthority}
                 type={type}
                 style={style}
-                pipelineList={pipelineList}
-                pipelineId={pipelineId}
+                matFlowList={matFlowList}
+                matFlowId={matFlowId}
             />
         </Fragment>
     )
 }
 
-export default inject("proofStore","pipelineStore")(observer(AddProofButton))
+export default inject("proofStore","matFlowStore")(observer(AddProofButton))
