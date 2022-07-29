@@ -7,9 +7,12 @@ const {Option} = Select
 
 const FindAllProof = props =>{
 
-    const {proofStore,type,pipelineStore}=props
+    const {proofStore,type,pipelineStore,configDataStore}=props
+
     const {findPipelineProof,proofList} = proofStore
     const {pipelineId} = pipelineStore
+    const {setGitProofId,setDeployProofId} = configDataStore
+
     const userId = getUser().userId
 
     const clickFindAllGit = () =>{
@@ -31,9 +34,9 @@ const FindAllProof = props =>{
 
     const changeGitSelect = (value,e) =>{
         if(type < 6){
-            localStorage.setItem("gitProofId",e.key)
+            setGitProofId(e.key)
         }else {
-            localStorage.setItem("deployProofId",e.key)
+            setDeployProofId(e.key)
         }
     }
 
@@ -64,4 +67,4 @@ const FindAllProof = props =>{
 
 }
 
-export default inject("proofStore","pipelineStore")(observer(FindAllProof))
+export default inject("proofStore","pipelineStore","configDataStore")(observer(FindAllProof))

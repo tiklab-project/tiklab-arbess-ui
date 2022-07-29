@@ -21,8 +21,8 @@ const ConfigDetails = props =>{
 
     const {setIsPrompt,setData,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock,setShellBlock,
-        mavenShellBlock,linuxShellBlock,shellBlock,
-        orderShellBlock,unitShellBlock} = configDataStore
+        mavenShellBlock,linuxShellBlock,shellBlock,deployProofId,setDeployProofId,
+        gitProofId,setGitProofId, orderShellBlock,unitShellBlock} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
@@ -36,10 +36,6 @@ const ConfigDetails = props =>{
         return () =>{
             localStorage.removeItem("gitProofId")
             localStorage.removeItem("deployProofId")
-            localStorage.removeItem("codeId")
-            localStorage.removeItem("testId")
-            localStorage.removeItem("structureId")
-            localStorage.removeItem("deployId")
         }
     },[pipelineId])
 
@@ -117,6 +113,8 @@ const ConfigDetails = props =>{
                         setMavenShellBlock("")
                         setLinuxShellBlock("")
                         setOrderShellBlock("")
+                        setGitProofId("")
+                        setDeployProofId("")
                     }
                     else {
                         nonForm(initialData)
@@ -175,8 +173,7 @@ const ConfigDetails = props =>{
             proofName:data.proof && data.proof.proofName ,
         }
         Object.assign(formInitialValues,formValue)
-        localStorage.setItem("codeId",data.codeId)
-        localStorage.setItem("gitProofId",data.proof && data.proof.proofId)
+        setGitProofId(data.proof && data.proof.proofId)
         setCodeType(data.type)
         setCodeData(newCode)
     }
@@ -187,7 +184,6 @@ const ConfigDetails = props =>{
             title:data.testAlias,
             dataType:data.type,
         })
-        localStorage.setItem("testId",data.testId)
         setUnitShellBlock(`${data.testOrder ? data.testOrder :""}`)
     }
     
@@ -197,7 +193,6 @@ const ConfigDetails = props =>{
             title: data.structureAlias,
             dataType:data.type,
         })
-        localStorage.setItem("structureId",data.structureId)
         setMavenShellBlock(`${data.structureOrder ? data.structureOrder : ""}`)
     }
     
@@ -211,8 +206,7 @@ const ConfigDetails = props =>{
             dockerProofName:data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")" ,
         }
         Object.assign(formInitialValues,formValue)
-        localStorage.setItem("deployId",data.deployId)
-        localStorage.setItem("deployProofId",data.proof && data.proof.proofId)
+        setDeployProofId(data.proof && data.proof.proofId)
         setOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
         if(data.deployType===0){
             setLinuxShellBlock(`${data.startShell ? data.startShell : ""}`)
@@ -318,22 +312,22 @@ const ConfigDetails = props =>{
             user:{id:userId},
             pipeline:{pipelineId:pipelineId},
             pipelineCode:{
-                codeId:localStorage.getItem("codeId"),
+                codeId:formInitialValues && formInitialValues.codeId,
                 sort:codeSort,
                 type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
                 codeName:values.codeName,
-                proof:{proofId:localStorage.getItem("gitProofId")}
+                proof:{proofId:gitProofId}
             },
             pipelineTest:{
-                testId:localStorage.getItem("testId"),
+                testId:formInitialValues && formInitialValues.testId,
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
                 testOrder:unitShellBlock,
             },
             pipelineStructure:{
-                structureId:localStorage.getItem("structureId"),
+                structureId:formInitialValues && formInitialValues.structureId,
                 sort:structureSort,
                 structureAlias:structureAlias,
                 type:structureType,
@@ -341,7 +335,7 @@ const ConfigDetails = props =>{
                 structureOrder:mavenShellBlock,
             },
             pipelineDeploy:{
-                deployId:localStorage.getItem("deployId"),
+                deployId:formInitialValues && formInitialValues.deployId,
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
@@ -355,10 +349,9 @@ const ConfigDetails = props =>{
                 mappingPort:values.deployType === 0 ?values.mappingPort:null,
                 startAddress:values.deployType === 0 ? values.startAddress :null,
                 deployOrder:values.deployType === 0 ? orderShellBlock :null,
-                proof:{proofId:localStorage.getItem("deployProofId")}
+                proof:{proofId:deployProofId}
             }
         }
-
         updateConfigure(configureList).then(res=>{
             setIsPrompt(false)
             if(res.code!==0){

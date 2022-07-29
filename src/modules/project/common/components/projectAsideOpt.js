@@ -1,17 +1,16 @@
 import React from "react";
 import "./projectAsideOpt.scss";
-import {Dropdown} from "antd";
+import {Dropdown,Menu} from "antd";
 import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
 
-    const {visible,setVisible,pipelineStore,structureListStore,path} = props
+    const {pipelineStore,structureListStore,path} = props
 
     const {pipelineName,pipelineList,lastPath} = pipelineStore
     const {setState,setEnforcer,setMode} = structureListStore
 
-    const changePipeline = (e,item) => {
-        e.preventDefault()
+    const changePipeline = item => {
         if(pipelineName!==item.pipelineName){
             setState(0)
             setEnforcer(null)
@@ -24,7 +23,6 @@ const ProjectAsideOpt = props =>{
                 props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
             }
         }
-        setVisible(false)
     }
 
     const menu = (
@@ -32,30 +30,31 @@ const ProjectAsideOpt = props =>{
             <div className="opt-content">
                 <div className="opt-content-title">流水线名称</div>
                 <div className="opt-content-group">
-                    {
-                        pipelineList && pipelineList.map(item=>{
-                            return(
-                                <div onClick={e=>{changePipeline(e,item)}}
-                                     key={item.pipelineId}
-                                     className="opt-content-group_item"
-                                >
-                                    {item.pipelineName}
-                                </div>
-                            )
-                        })
-                    }
+                    <Menu>
+                        {
+                            pipelineList && pipelineList.map(item=>{
+                                return(
+                                    <Menu.Item onClick={()=>{changePipeline(item)}}
+                                         key={item.pipelineId}
+                                         className="opt-content-group_item"
+                                    >
+                                        {item.pipelineName}
+                                    </Menu.Item>
+                                )
+                            })
+                        }
+                     </Menu>
                 </div>
             </div>
         </div>
     )
 
     return(
-        <li onClick={()=>setVisible(!visible)}
-            onBlur={()=>setVisible(false)}
-            className="aside_content aside_dropdown"
+        <li className="aside_content aside_dropdown"
             style={{padding:10}}
+            onClick={(e) => e.preventDefault()}
         >
-            <Dropdown overlay={menu} visible={visible}>
+            <Dropdown overlay={menu} trigger={["click"]}>
                 <svg  className="icon" aria-hidden="true">
                     <use xlinkHref="#icon-shaixuan1"/>
                 </svg>

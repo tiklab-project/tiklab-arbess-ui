@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import ProjectAside from "../components/projectAside";
 import PromptContent from "../../../../common/prompt/prompt";
 import {renderRoutes} from "react-router-config";
@@ -13,7 +13,6 @@ const Project= (props)=>{
     const {findAllPipelineStatus,lastPath,setLastPath,setPipelineId,setPipelineName} = pipelineStore
     const {isPrompt,setIsPrompt} = configDataStore
 
-    const [visible,setVisible] = useState(false)
     const pipelineName = match.params.pipelineName
     const userId = getUser().userId
 
@@ -48,17 +47,12 @@ const Project= (props)=>{
         <div className="project">
             <ProjectAside
                 {...props}
-                visible={visible}
-                setVisible={setVisible}
                 lastPath={lastPath}
                 setLastPath={setLastPath}
                 pipelineName={pipelineName}
             />
-            <div className="project-content"
-                 onClick={()=>setVisible(false)}
-                 style={{marginLeft:65,padding:"0 10px"}}
-            >
-                { renderRoutes(route.routes) }
+            <div className="project-content" style={{marginLeft:65,padding:"0 10px"}}>
+                {renderRoutes(route.routes)}
             </div>
             <PromptContent
                 isPrompt={isPrompt}

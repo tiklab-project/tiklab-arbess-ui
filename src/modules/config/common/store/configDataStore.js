@@ -14,6 +14,8 @@ export class ConfigDataStore {
     @observable unitShellBlock = ""
     @observable mavenShellBlock = ""
     @observable orderShellBlock = ""  // 部署文件命令
+    @observable gitProofId = ""
+    @observable deployProofId = ""
 
     @action
     setIsPrompt = value => {
@@ -73,6 +75,16 @@ export class ConfigDataStore {
     @action
     setOrderShellBlock = value =>{
         this.orderShellBlock = value
+    }
+
+    @action
+    setGitProofId = value =>{
+        this.gitProofId = value
+    }
+
+    @action
+    setDeployProofId = value =>{
+        this.deployProofId = value
     }
 
 }

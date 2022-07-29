@@ -22,8 +22,8 @@ const Config = props =>{
 
     const {isPrompt,setIsPrompt,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,setData,unitShellBlock,mavenShellBlock,
-        linuxShellBlock,shellBlock,orderShellBlock,setOrderShellBlock
-    } = configDataStore
+        linuxShellBlock,shellBlock,orderShellBlock,setOrderShellBlock,
+        deployProofId,setDeployProofId, gitProofId,setGitProofId} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
@@ -224,7 +224,7 @@ const Config = props =>{
             user:{id:userId},
             pipeline:{pipelineId:pipelineId},
             pipelineCode:{
-                codeId:localStorage.getItem("codeId"),
+                codeId:null,
                 sort:codeSort,
                 type:codeData && codeData.codeType,
                 codeBranch:values.codeBranch,
@@ -232,14 +232,14 @@ const Config = props =>{
                 proof:{proofId:localStorage.getItem("gitProofId")}
             },
             pipelineTest:{
-                testId:localStorage.getItem("testId"),
+                testId:null,
                 sort:testSort,
                 testAlias:testAlias,
                 type:testType,
                 testOrder:unitShellBlock,
             },
             pipelineStructure:{
-                structureId:localStorage.getItem("structureId"),
+                structureId:null,
                 sort:structureSort,
                 structureAlias:structureAlias,
                 type:structureType,
@@ -247,7 +247,7 @@ const Config = props =>{
                 structureOrder:mavenShellBlock,
             },
             pipelineDeploy:{
-                deployId:localStorage.getItem("deployId"),
+                deployId:null,
                 sort:deploySort,
                 deployAlias:deployAlias,
                 type:deployType,
