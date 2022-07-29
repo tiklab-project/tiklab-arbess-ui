@@ -1,7 +1,7 @@
 {
-    "name": "doublekit-pipeline-ui",
+    "name": "tiklab-matflow-ui",
     "version": "1.0.0",
-    "description": "doublekit pipeline",
+    "description": "tiklab matflow",
     "main": "es/dist.js",
     "files": [
         "es"

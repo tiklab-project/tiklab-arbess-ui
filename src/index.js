@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import ReactDOM from "react-dom";
 import {HashRouter} from "react-router-dom";
 import "./index.scss";

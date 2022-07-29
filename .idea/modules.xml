@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/doublekit-pipeline-ui.iml" filepath="$PROJECT_DIR$/.idea/doublekit-pipeline-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tiklab-matflow-ui.iml" filepath="$PROJECT_DIR$/.idea/tiklab-matflow-ui.iml" />
     </modules>
   </component>
 </project>
