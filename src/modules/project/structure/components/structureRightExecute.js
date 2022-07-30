@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Button,Card} from "antd";
+import {Button,Card,Spin} from "antd";
 import {getUser} from "tiklab-core-ui";
 import ConfigName from "../../../config/common/component/configCommon/configName";
 
@@ -80,6 +80,7 @@ const StructureRightExecute = props => {
                         <div className="structure-content-bottom-outLog" id="outLog">
                             {execState.runLog}
                         </div>
+                        <div><Spin /></div>
                     </div>
         }
     }

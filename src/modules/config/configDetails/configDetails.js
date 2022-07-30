@@ -32,13 +32,6 @@ const ConfigDetails = props =>{
     const codeError = getUrlParam("error")
     const userId = getUser().userId
 
-    useEffect(()=>{
-        return () =>{
-            localStorage.removeItem("gitProofId")
-            localStorage.removeItem("deployProofId")
-        }
-    },[matFlowId])
-
     // 是否有图形化插件
     useEffect(()=>{
         pluginStore.map(item=>{
@@ -248,6 +241,7 @@ const ConfigDetails = props =>{
                 formInitialValues.gitProofName = null
                 setCodeData("")
                 setCodeType(1)
+                setGitProofId("")
                 break
             case "test":
                 formInitialValues.testOrder = null
@@ -271,6 +265,7 @@ const ConfigDetails = props =>{
                 setLinuxShellBlock("")
                 setOrderShellBlock("")
                 setShellBlock("")
+                setDeployProofId("")
         }
     }
 
@@ -310,7 +305,7 @@ const ConfigDetails = props =>{
         const configureList = {
             configureCreateTime:moment.moment,
             user:{id:userId},
-            matFlow:{matFlowId:matFlowId},
+            matFlow:{matflowId:matFlowId},
             matFlowCode:{
                 codeId:formInitialValues && formInitialValues.codeId,
                 sort:codeSort,
@@ -383,19 +378,25 @@ const ConfigDetails = props =>{
                         onFinish={onFinish}
                     />
                     :
-                    <RemoteUmdComponent
-                        {...props}
-                        point={"gui"}
-                        pluginStore={pluginStore}
-                        isModalType={true}
-                        extraProps={{
-                            matFlowStore,
-                            configDataStore,
-                            form,
-                            onFinish,
-                            del
-                        }}
-                    />
+                    <Fragment>
+                        {
+                            isBtn ?
+                                <RemoteUmdComponent
+                                    {...props}
+                                    point={"gui"}
+                                    pluginStore={pluginStore}
+                                    isModalType={true}
+                                    extraProps={{
+                                        matFlowStore,
+                                        configDataStore,
+                                        form,
+                                        onFinish,
+                                        del
+                                    }}
+                                />
+                                :null
+                        }
+                    </Fragment>
             }
         </Fragment>
     )

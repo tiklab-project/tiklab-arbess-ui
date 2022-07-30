@@ -14,7 +14,7 @@ const BreadcrumbContent = props =>{
                             <Breadcrumb separator=">">
                                 <Breadcrumb.Item>流水线</Breadcrumb.Item>
                                 <Breadcrumb.Item>
-                                    {match.params.pipelineName}
+                                    {match.params.matFlowName}
                                 </Breadcrumb.Item>
                             </Breadcrumb>
                         </div>

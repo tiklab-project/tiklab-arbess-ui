@@ -19,9 +19,9 @@ export function FindAllMatFlowStatus(data) {
 }
 
 //模糊搜索流水线
-export function FindOneName(data){
+export function FindLike(data){
     return serviceLoc.request({
-        url:"/matFlow/findOneName",
+        url:"/matFlow/findLike",
         method:"post",
         data
     })

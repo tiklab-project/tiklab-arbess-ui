@@ -22,7 +22,6 @@ export class ProofStore{
     createProof =async values =>{
         const params = {
             user:{id:values.user.id},
-            matFlow:{matFlowId: values.matFlow.matFlowId},
             proofScope:values.proofScope,
             proofType:values.proofType,
             proofName:values.proofName,
@@ -30,8 +29,6 @@ export class ProofStore{
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe,
             type:values.type,
-            proofPort:values.proofPort,
-            proofIp:values.proofIp,
             proofCreateTime:values.proofCreateTime,
             proofList:values.proofList
         }
@@ -53,7 +50,9 @@ export class ProofStore{
         params.append("type",values.type)
         FindMatFlowProof(params).then(res=>{
             console.log(res)
-            this.proofList = res.data
+            if(res.code===0 && res.data){
+                this.proofList = res.data
+            }
         }).catch(error=>{
             console.log(error)
         })
@@ -62,7 +61,7 @@ export class ProofStore{
     @action
     updateProof =async values =>{
         const params = {
-            matFlow:{matFlowId: values.matFlow.matFlowId},
+            matFlow:{matflowId: values.matFlow.matflowId},
             proofId:values.proofId,
             proofType:values.proofType,
             proofScope:values.proofScope,

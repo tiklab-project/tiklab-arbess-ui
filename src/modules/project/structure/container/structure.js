@@ -15,12 +15,11 @@ const Structure = props => {
     const {structureStore,structureListStore,matFlowStore} = props
 
     const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure,
-        leftPageList,setIndex,isData,findMatFlowUser,setIsData
+        leftPageList,isData,findMatFlowUser,setIsData,execState
     } = structureStore
     const {state,enforcer,mode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
     const {matFlowId} = matFlowStore
 
-    const [execState,setExecState] = useState("") //左侧 -- 正在构建
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -66,7 +65,7 @@ const Structure = props => {
 
     const findPage = () =>{
         const params = {
-            matFlowId:matFlowId,
+            matflowId:matFlowId,
             pageParam: {
                 pageSize: 10,
                 currentPage: 1
@@ -84,7 +83,7 @@ const Structure = props => {
 
     const changPage = () =>{
         const params = {
-            matFlowId:matFlowId,
+            matflowId:matFlowId,
             pageParam: {
                 pageSize: 10,
                 currentPage: 1
@@ -94,7 +93,7 @@ const Structure = props => {
             type:mode
         }
         findPageHistory(params).then(res=>{
-            if(res.code===0 && res.data.dataList.length===0){
+            if(res.code===0 && res.data && res.data.dataList.length===0){
                 if(state !==0 || enforcer !==null || mode !==0){
                     setDrop(!drop)
                     findPage()
@@ -111,12 +110,13 @@ const Structure = props => {
             findExecState(matFlowId).then(res=>{
                 if(res.data===1){
                     interval=setInterval(()=>{
-                        findStructureState(matFlowId).then(res=>{ renderExec(res.data) })
+                        findStructureState(matFlowId).then(res=>{
+                            if(res.code===0){
+                                renderExec(res.data)
+                            }
+                        })
                     }, 1000)
                     findAll(matFlowId)
-                }else if(res.data===0){
-                    setExecState("")
-                    setIndex(1)
                 }
                 changPage() // 历史列表
             })
@@ -125,19 +125,10 @@ const Structure = props => {
     }, [matFlowId,freshen])
 
     const renderExec = data => {
-        if(data===null){
-            stop()
-        }else{
-            setExecState(data)
-            if(data.runStatus===1 || data.runStatus===30){
-                stop()
-            }
+        if(data===null || data.runStatus===1 || data.runStatus===30){
+            setFreshen(!freshen)
+            clearInterval(interval)
         }
-    }
-
-    const stop = () => {
-        setFreshen(!freshen)
-        clearInterval(interval)
     }
 
     const status = i =>{
@@ -189,7 +180,6 @@ const Structure = props => {
                     <div className="structure-content">
                         <StructureLeft
                             matFlowId={matFlowId}
-                            execState={execState}
                             status={status}
                         />
                         <div className="structure-content-right">
@@ -202,7 +192,6 @@ const Structure = props => {
                                         freshen={freshen}
                                         setFreshen={setFreshen}
                                         status={status}
-                                        execState={execState}
                                         setPageCurrent={setPageCurrent}
                                         matFlowId={matFlowId}
                                     />

@@ -1,4 +1,4 @@
-import React ,{useEffect} from "react";
+import React,{useEffect} from "react";
 import "./header.scss";
 import Heads from "./header";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";

@@ -28,7 +28,7 @@ const MatFlowNear = props =>{
                         <div key={item.matFlowId} className="matFlowNear-active-group">
                             <div className="matFlowNear-active-group-desc">
                                 <span>{index+1}、</span>
-                                <span  onClick={()=>goMatFlow(item)} className="name">
+                                <span onClick={()=>goMatFlow(item)} className="name">
                                     {item.matFlowName}
                                 </span>
                             </div>

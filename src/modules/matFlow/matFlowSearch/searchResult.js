@@ -7,18 +7,18 @@ import {getUser} from "tiklab-core-ui";
 const SearchResult = props => {
 
     const {matFlowStore,match}=props
-    const {searchMatFlowList,findOneName}=matFlowStore
+    const {searchMatFlowList,findLike}=matFlowStore
 
     useEffect(()=>{
         const params = {
             userId: getUser().userId,
             matFlowName:match.params.searchresult,
         }
-        findOneName(params)
+        findLike(params)
     },[])
 
     const goMatFlowTask= item =>{
-        props.history.push(`/index/task/${item.matFlowName}/work`)
+        props.history.push(`/index/task/${item.matflowName}/work`)
     }
 
     return(
@@ -33,10 +33,10 @@ const SearchResult = props => {
                             </li>
                             :
                             searchMatFlowList  && searchMatFlowList.map((item,index)=>{
-                                return  <li key={item.matFlowId} >
+                                return  <li key={item.matflowId} >
                                             <span> {index+1}、</span>
                                             <span className="matFlow-search-link" onClick={()=>goMatFlowTask(item)}>
-                                                {item.matFlowName}
+                                                {item.matflowName}
                                             </span>
                                         </li>
                             })

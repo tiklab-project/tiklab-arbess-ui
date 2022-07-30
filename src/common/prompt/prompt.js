@@ -1,6 +1,6 @@
 import React from "react";
-import {Prompt} from "react-router-dom";
 import {Modal} from "antd";
+import {Prompt} from "react-router-dom";
 
 // 离开编辑页面全局提示
 const PromptContent = props =>{

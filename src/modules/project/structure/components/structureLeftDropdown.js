@@ -21,7 +21,7 @@ const StructureLeftDropdown = props =>{
         setStatusValue(value)
         setState(parseInt(e.key))
         const params = {
-            matFlowId:matFlowId,
+            matflowId:matFlowId,
             state:parseInt(e.key),
             userId:enforcer,
             type:mode,
@@ -40,7 +40,7 @@ const StructureLeftDropdown = props =>{
         setUserValue(value)
         setEnforcer(e.key)
         const params = {
-            matFlowId:matFlowId,
+            matflowId:matFlowId,
             state:state,
             userId:e.key,
             type:mode,
@@ -56,7 +56,7 @@ const StructureLeftDropdown = props =>{
         setModeValue(value)
         setMode(parseInt(e.key))
         const params = {
-            matFlowId:matFlowId,
+            matflowId:matFlowId,
             state:state,
             userId:enforcer,
             type:e.key,

@@ -15,6 +15,7 @@ import {
 export class StructureStore {
 
     @observable leftPageList = []
+    @observable execState = ""
     @observable rightFlowData = []
     @observable rightExecuteData = []
     @observable matFlowUserList = []
@@ -58,11 +59,12 @@ export class StructureStore {
         param.append("matFlowId", value)
         return new Promise((resolve, reject) => {
             FindExecState(param).then(res=>{
-                if(res.code === 0){
-                    if(res.data === 1){
+                if(res.code===0){
+                    if(res.data===1){
                         this.index = 0
                     }else {
                         this.index = 1
+                        this.execState = ""
                     }
                 }
                 resolve(res)
@@ -78,7 +80,17 @@ export class StructureStore {
     findStructureState = async value =>{
         const param = new FormData()
         param.append("matFlowId", value)
-        return await FindStructureState(param)
+        return new Promise((resolve, reject) => {
+            FindStructureState(param).then(res=>{
+                if(res.code===0 && res.data){
+                    this.execState = res.data
+                }
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
     }
 
     //停止构建
@@ -96,8 +108,10 @@ export class StructureStore {
         const param = new FormData()
         param.append("matFlowId", value)
         FindAll(param).then(res=>{
-            this.rightExecuteData = res.data
-            this.isData = true
+            if(res.code===0){
+                this.rightExecuteData = res.data
+                this.isData = true
+            }
         }).catch(error=>{
             console.log(error)
         })
@@ -108,7 +122,7 @@ export class StructureStore {
     findPageHistory =async values =>{
         const params = {
             userId: values.userId,
-            matFlowId: values.matFlowId,
+            matflowId: values.matflowId,
             pageParam: {
                 pageSize: 10,
                 currentPage: values.pageParam.currentPage,
@@ -119,11 +133,11 @@ export class StructureStore {
         return new Promise((resolve, reject)=>{
             FindPageHistory(params).then(res=>{
                 console.log("所有历史",res)
-                if(res.code === 0 ){
-                    if(res.data.dataList.length === 0){
+                if(res.code===0 && res.data){
+                    if(res.data.dataList.length===0){
                         this.leftPageList = []
                         this.page = {}
-                    } else {
+                    }else{
                         this.leftPageList = res.data.dataList
                         this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
                         this.modeData =  res.data.dataList && res.data.dataList[0]

@@ -9,7 +9,7 @@ const { Search } = Input;
 const MatFlowSearch= props=>{
 
     const {matFlowStore}=props
-    const {findOneName}=matFlowStore
+    const {findLike}=matFlowStore
 
     const onSearch = value =>{
         props.history.push(`/index/searchresult/${value}`)

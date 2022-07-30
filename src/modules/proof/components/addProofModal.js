@@ -13,11 +13,11 @@ const AddProofModal = props =>{
     const [isShowMatFlow,setIsShowMatFlow] = useState(1)
 
     const onOk = values =>{
-        let id,proofScope;
-        if(values.type===1){
-            id = null
+        let proofScope,proofList;
+        if(matFlowList){
+            proofList = values.proofList
         }else {
-            id = matFlowId
+            proofList = [`${matFlowId}`]
         }
         if(isAuthority){
             proofScope = values.proofScope
@@ -25,7 +25,6 @@ const AddProofModal = props =>{
             proofScope = type
         }
         const params = {
-            matFlow:{matFlowId:id},
             user:{id:userId},
             type:values.type,
             proofScope:proofScope,
@@ -35,7 +34,7 @@ const AddProofModal = props =>{
             proofPassword:values.proofPassword,
             proofDescribe:values.proofDescribe,
             proofCreateTime:moment.moment,
-            proofList:values.proofList
+            proofList:proofList
         }
         createProof(params).then(()=>{
             setFresh(!fresh)

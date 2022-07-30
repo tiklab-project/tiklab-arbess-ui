@@ -35,8 +35,8 @@ const ProjectSetReDel = props =>{
     const re = value =>{
         const params={
             user:{id:userId},
-            matFlowId:matFlowId,
-            matFlowName:value.matFlowName
+            matflowId:matFlowId,
+            matflowName:value.matFlowName
         }
         updateMatFlow(params).then(res=>{
             if(res.code === 0){

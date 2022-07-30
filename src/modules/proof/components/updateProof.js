@@ -25,7 +25,7 @@ const UpdateProof = props =>{
                 id = matFlowId
             }
             const params = {
-                matFlow:{matFlowId:id},
+                matFlow:{matflowId:id},
                 proofId:formValue.proofId,
                 proofScope:values.proofScope,
                 proofType:values.proofType,

@@ -6,11 +6,11 @@ import {inject,observer} from "mobx-react";
 
 const StructureRight = props =>{
 
-    const {structureStore,status,execState,freshen,setFreshen,setPageCurrent,
+    const {structureStore,status,freshen,setFreshen,setPageCurrent,
         matFlowId} = props
 
     const {deleteHistoryLog, killInstance,rightFlowData,modeData,index,setIndex,
-        rightExecuteData} = structureStore
+        rightExecuteData,execState} = structureStore
 
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState("")

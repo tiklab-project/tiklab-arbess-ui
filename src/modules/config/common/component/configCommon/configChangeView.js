@@ -7,7 +7,8 @@ import {inject,observer} from "mobx-react";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,matFlowId,structureStore,setIsPrompt,userId,isBtn,matFlowName} = props
+    const {view,setView,matFlowId,structureStore,setIsPrompt,userId,isBtn,matFlowName,
+        setRunOrSave} = props
 
     const {matFlowStartStructure} = structureStore
     const [processVisible,setProcessVisible] = useState(false)
@@ -19,10 +20,12 @@ const ConfigChangeView = props =>{
         }
         setProcessVisible(true)
         setIsPrompt(false)
+        if(setRunOrSave){
+            setRunOrSave(false)
+        }
         matFlowStartStructure(params).then(res=>{
-            console.log("运行",res)
             if(res.code === 0 && res.data === 1){
-                props.history.push(`/index/task/${matFlowName}/structure`)
+                setTimeout(()=>props.history.push(`/index/task/${matFlowName}/structure`),500)
             }else {
                 setProcessVisible(false)
                 message.error({content:"运行失败", className:"message"})
@@ -37,7 +40,7 @@ const ConfigChangeView = props =>{
             <div className="changeView">
                 <div className="changeView-btn">
                     <Button form="form" htmlType="submit">保存</Button>
-                    <Button form="form"  htmlType="submit" type="primary" onClick={()=>run()}>
+                    <Button form="form" htmlType="submit" type="primary" onClick={()=>run()}>
                         {processVisible ? <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} /> :"运行"}
                     </Button>
                 </div>

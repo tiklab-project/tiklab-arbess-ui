@@ -44,9 +44,9 @@ const MatFlowAdd = props => {
     const handSubmit = value => {
         const params={
             user:{id:userId},
-            matFlowName:value.matFlowName,
-            matFlowType:1,
-            matFlowCreateTime:moment.moment
+            matflowName:value.matFlowName,
+            matflowType:1,
+            matflowCreateTime:moment.moment
         }
         createMatFlow(params).then(res=>{
             if(res.code === 0 && res.data){

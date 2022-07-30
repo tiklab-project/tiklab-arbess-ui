@@ -39,7 +39,7 @@ const MatFlowTabs = props =>{
                     {
                         lis.map(item=>{
                             return <div key={item.id}
-                                       className={type === item.id ?
+                                       className={type===item.id ?
                                        "matFlow-tabs-type-active matFlow-tabs-type-link" : "matFlow-tabs-type-link"}
                                        onClick={()=>onclick(item)}
                                     >

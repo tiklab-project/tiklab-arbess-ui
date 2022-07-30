@@ -3,7 +3,7 @@ import {observable,action} from "mobx";
 import {
     FindAllMatFlowStatus,
     CreateMatFlow,
-    FindOneName,
+    FindLike,
     DeleteMatFlow,
     UpdateMatFlow
 } from "../api/matFlow";
@@ -37,7 +37,7 @@ export class MatFlowStore {
         param.append("userId",value)
         return new Promise((resolve, reject) => {
             FindAllMatFlowStatus(param).then(res=>{
-                if(res.code === 0 ){
+                if(res.code === 0 && res.data){
                     this.matFlowList=res.data
                 }
                 resolve(res)
@@ -53,12 +53,10 @@ export class MatFlowStore {
     @action
     createMatFlow = values =>{
         const params = {
-            user: {
-                id:values.user.id,
-            },
-            matFlowName: values.matFlowName,
-            matFlowType: values.matFlowType,
-            matFlowCreateTime:values.matFlowCreateTime
+            user: {id:values.user.id,},
+            matflowName: values.matflowName,
+            matflowType: values.matflowType,
+            matflowCreateTime:values.matflowCreateTime
         }
         return new Promise((resolve, reject) => {
             CreateMatFlow(params).then(res=>{
@@ -72,13 +70,15 @@ export class MatFlowStore {
     }
 
     @action
-    findOneName = values =>{
+    findLike = values =>{
         const params = new FormData()
         params.append("matFlowName",values.matFlowName)
         params.append("userId",values.userId)
         return new Promise((resolve, reject) => {
-            FindOneName(params).then(res=>{
-                this.searchMatFlowList=res.data
+            FindLike(params).then(res=>{
+                if(res.code === 0 && res.data){
+                    this.searchMatFlowList=res.data
+                }
                 console.log("搜索流水线",res)
                 resolve(res)
             }).catch(error=>{
@@ -107,11 +107,9 @@ export class MatFlowStore {
     @action //重命名流水线
     updateMatFlow = values =>{
         const params={
-            matFlowId:values.matFlowId,
-            matFlowName:values.matFlowName,
-            user:{
-                id: values.user.id
-            }
+            matflowId:values.matflowId,
+            matflowName:values.matflowName,
+            user:{id:values.user.id}
         }
         return new Promise((resolve, reject) => {
             UpdateMatFlow(params).then(res=>{

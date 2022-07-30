@@ -12,6 +12,7 @@
             "libraryDirectory": "es",
             "style": "css"
         }],
+
         ["import", {
             "libraryName": "tiklab-plugin-ui",
             "libraryDirectory": "es",
@@ -27,6 +28,7 @@
             "libraryDirectory": "es",
             "style": true
         },"tiklab-privilege-ui"],
+
         ["import", {
             "libraryName": "tiklab-eam-ui",
             "libraryDirectory": "es",

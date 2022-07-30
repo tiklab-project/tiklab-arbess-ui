@@ -18,23 +18,25 @@ const Config = props =>{
     const {updateConfigure,findAllConfigure} = configStore
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
-    const {setMatFlowId,matFlowId,findAllMatFlowStatus} = matFlowStore
+    const {setMatFlowName,setMatFlowId,matFlowId,findAllMatFlowStatus} = matFlowStore
 
     const {isPrompt,setIsPrompt,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,setData,unitShellBlock,mavenShellBlock,
-        linuxShellBlock,shellBlock,orderShellBlock,setOrderShellBlock,
+        linuxShellBlock,shellBlock,orderShellBlock,setOrderShellBlock,setShellBlock,
         deployProofId,setDeployProofId, gitProofId,setGitProofId} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
     const [view,setView] = useState(1)
     const [isBtn,setIsBtn] = useState(false)
+    const [runOrSave,setRunOrSave] = useState(true)
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
     const userId = getUser().userId
     const jumpOrNot = match.params.matFlowName
 
     useEffect(()=>{
+        setMatFlowName(jumpOrNot)
         findAllMatFlowStatus(userId).then(res=>{
             const data = res.data
             if(res.code===0 && data){
@@ -148,6 +150,7 @@ const Config = props =>{
                 formInitialValues.gitProofName = null
                 setCodeData("")
                 setCodeType(1)
+                setGitProofId("")
                 break
             case "test":
                 formInitialValues.testOrder = null
@@ -169,6 +172,9 @@ const Config = props =>{
                 formInitialValues.startAddress = ""
                 formInitialValues.deployOrder = ""
                 setLinuxShellBlock("")
+                setOrderShellBlock("")
+                setShellBlock("")
+                setDeployProofId("")
         }
     }
 
@@ -217,7 +223,7 @@ const Config = props =>{
         const configureList = {
             configureCreateTime:moment.moment,
             user:{id:userId},
-            matFlow:{matFlowId:matFlowId},
+            matFlow:{matflowId:matFlowId},
             matFlowCode:{
                 codeId:null,
                 sort:codeSort,
@@ -262,11 +268,13 @@ const Config = props =>{
 
         updateConfigure(configureList).then(res=>{
             setIsPrompt(false)
-            props.history.push(`/index/task/${jumpOrNot}/config`)
-            if(res.code!==0){
-                message.error({content:"配置失败",className:"message"})
-            }else {
+            if(runOrSave){
+                props.history.push(`/index/task/${jumpOrNot}/config`)
+            }
+            if(res.code===0){
                 message.success({content:"配置成功",className:"message"})
+            }else {
+                message.error({content:"配置失败",className:"message"})
             }
         })
     }
@@ -282,6 +290,7 @@ const Config = props =>{
                     matFlowName={jumpOrNot}
                     userId={userId}
                     isBtn={isBtn}
+                    setRunOrSave={setRunOrSave}
                 />
             </div>
             {
@@ -293,19 +302,23 @@ const Config = props =>{
                     />
                     :
                     <Fragment>
-                        <RemoteUmdComponent
-                            {...props}
-                            point={"gui"}
-                            pluginStore={pluginStore}
-                            isModalType={true}
-                            extraProps={{
-                                matFlowStore,
-                                configDataStore,
-                                onFinish,
-                                form,
-                                del
-                            }}
-                        />
+                        {
+                            isBtn ?
+                                <RemoteUmdComponent
+                                    {...props}
+                                    point={"gui"}
+                                    pluginStore={pluginStore}
+                                    isModalType={true}
+                                    extraProps={{
+                                        matFlowStore,
+                                        configDataStore,
+                                        form,
+                                        onFinish,
+                                        del
+                                    }}
+                                />
+                                :null
+                        }
                     </Fragment>
             }
             <PromptContent

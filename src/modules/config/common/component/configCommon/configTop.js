@@ -4,7 +4,9 @@ import BreadcrumbContent from "../../../../../common/breadcrumb/breadcrumb";
 import ConfigChangeView from "./configChangeView";
 
 const ConfigTop = props =>{
-    const {view,setView,matFlowId,matFlowName,matFlowStartStructure,setIsPrompt,userId,isBtn} = props
+
+    const {view,setView,matFlowId,matFlowName,setIsPrompt,userId,isBtn,setRunOrSave} = props
+
     return(
         <div className="config-top-content">
             <BreadcrumbContent config={"config"} type={"project"}/>
@@ -15,8 +17,8 @@ const ConfigTop = props =>{
                 setIsPrompt={setIsPrompt}
                 matFlowId={matFlowId}
                 matFlowName={matFlowName}
-                matFlowStartStructure={matFlowStartStructure}
                 isBtn={isBtn}
+                setRunOrSave={setRunOrSave}
             />
         </div>
     )

@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import {observable,action} from "mobx";
 
 import {
     UpdateConfigure,
@@ -12,7 +12,7 @@ export class ConfigStore{
         const params ={
             configureCreateTime:values.configureCreateTime,
             user:{ id:values.user.id },
-            matFlow:{ matFlowId:values.matFlow.matFlowId },
+            matFlow:{ matflowId:values.matFlow.matflowId },
             matFlowCode:{
                 codeId:values.matFlowCode.codeId,
                 sort:values.matFlowCode.sort,

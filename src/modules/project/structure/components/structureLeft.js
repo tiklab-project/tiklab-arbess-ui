@@ -6,9 +6,10 @@ import {List} from "antd";
 
 const StructureLeft = props =>{
 
-    const {execState,status,matFlowId,structureStore,structureListStore}=props
+    const {status,matFlowId,structureStore,structureListStore}=props
 
-    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,matFlowUserList} = structureStore
+    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,matFlowUserList,
+        execState} = structureStore
     const {pageCurrent,setPageCurrent,state,setState,enforcer,setEnforcer,mode,setMode,drop} = structureListStore
 
     const sta = item =>{
@@ -33,7 +34,7 @@ const StructureLeft = props =>{
 
     const onChangePage = pagination => {
         const params = {
-            matFlowId:matFlowId,
+            matflowId:matFlowId,
             pageParam: {
                 pageSize: 10,
                 currentPage:pagination

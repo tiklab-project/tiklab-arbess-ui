@@ -19,7 +19,7 @@ const MatFlowTable = props =>{
     //收藏
     const collectAction = record => {
         const params = {
-            matFlow:record.matFlowId,
+            matFlow:{matflowId:record.matFlowId},
             userId:userId
         }
         updateFollow(params).then(res=>{

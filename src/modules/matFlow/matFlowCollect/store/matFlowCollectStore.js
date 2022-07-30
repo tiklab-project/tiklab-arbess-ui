@@ -14,7 +14,9 @@ export class MatFlowCollectStore{
         const param = new FormData()
         param.append("userId",value)
         FindAllFollow(param).then(res=>{
-            this.followList=res.data
+            if(res.code===0){
+                this.followList=res.data
+            }
             console.log("查找我的收藏", res)
         }).catch(error=>{
             console.log(error)
@@ -24,7 +26,7 @@ export class MatFlowCollectStore{
     @action
     updateFollow =async value =>{
         const params = {
-            matFlow:{matFlowId:value.matFlow},
+            matFlow:{matflowId:value.matFlow.matflowId},
             userId:value.userId
         }
         return await UpdateFollow(params)
