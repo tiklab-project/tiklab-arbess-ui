@@ -1,13 +1,9 @@
-import React,{useEffect,useState} from "react";
-import ReactEcharts from "echarts-for-react";
+import React,{useEffect} from "react";
+import echarts from "../../../common/echarts/echarts";
 
 const StatusChart = props =>{
 
     const {runState,userId} = props
-    const [xData,setXData] = useState([])
-    const [successData,setSuccessData] = useState([])
-    const [failData,setFailData] = useState([])
-    const [stopData,setStopData] = useState([])
 
     useEffect(()=>{
         runState(userId).then(res=>{
@@ -28,55 +24,61 @@ const StatusChart = props =>{
             fail.push(data[i].errorNumber)
             stop.push(data[i].removeNumber)
         }
-        setXData([...x])
-        setSuccessData([...success])
-        setFailData([...fail])
-        setStopData([...stop])
+        burnDownChart(x,success,fail,stop)
     }
 
-    const getOption = {
-        title: {
-            text: "近期构建状态",
-        },
-        color: [ "#1890ff", "#e5323e","#222222"],
-        tooltip: {},
-        xAxis: {
-            data: xData
-        },
-        yAxis: {
-            name: "单位：次",
-        },
-        legend: {
-            data: ["成功", "失败","停止"],
-            show: true,
-            // 图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。
-            selectedMode: true,
-            top: 0,
-            width: "80%",
-            right: 0,
-        },
-        series: [
-            {
-                name: "成功",
-                type: "bar",
-                seriesLayoutBy: "column",
-                data: successData,
+    const burnDownChart = (timerXaixs, successYaixs, failsYaxis,stopYaxis) => {
+        const burnDown = echarts.init(document.getElementById("burn-down"))
+        let option;
+        option = {
+            title: {
+                text: "近期构建状态",
             },
-            {
-                name: "失败",
-                type: "bar",
-                data: failData,
+            color: [ "#1890ff", "#e5323e","#222222"],
+            xAxis: {
+                data: timerXaixs,
             },
-            {
-                name: "停止",
-                type: "bar",
-                data: stopData,
-            }],
+            yAxis: {
+                name: "单位：次",
+            },
+            // tooltip:{},
+            legend: {
+                data: ["成功", "失败","停止"],
+                show: true,
+                // 图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。
+                selectedMode: true,
+                top: 0,
+                width: "80%",
+                right: 0,
+            },
+            series: [
+                {
+                    name: "成功",
+                    type: "bar",
+                    seriesLayoutBy: "column",
+                    data: successYaixs,
+                },
+                {
+                    name: "失败",
+                    type: "bar",
+                    data: failsYaxis,
+                },
+                {
+                    name: "停止",
+                    type: "bar",
+                    data: stopYaxis,
+                }],
+        };
+        burnDown.setOption(option)
+        // 折线图随窗口大小改变
+        window.onresize = function () {
+            burnDown.resize();
+        }
     }
 
-    return(
+    return (
         <div className="homePage-content-statusChart">
-            <ReactEcharts option={getOption}/>
+            <div className="statusChart" id="burn-down" />
         </div>
     )
 }

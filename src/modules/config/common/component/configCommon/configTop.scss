@@ -3,11 +3,12 @@
         position: fixed;
         z-index: 88;
         background: #fff;
-        width: calc(100% - 96px);
+        width: calc(100% - 100px);
         border-bottom: 1px solid #ccc;
         padding: 8px 0 4px 16px;
         font-size: 16px;
         min-width: 500px;
+        margin-left: 10px;
         &-width{
             width: 98% !important;
             margin-left: 10px;

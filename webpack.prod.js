@@ -7,13 +7,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-
 const baseWebpackConfig = require("./webpack.base");
 const webpack = require("webpack");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const customEnv = process.env.CUSTOM_ENV;
 const {webpackGlobal} = require("./enviroment/enviroment_" + customEnv)
-
 
 module.exports = merge(baseWebpackConfig, {
     mode: "production",
@@ -63,34 +61,113 @@ module.exports = merge(baseWebpackConfig, {
             minSize: 30000,
             minChunks: 1,
             maxAsyncRequests: 5,
-            maxInitialRequests:5,
+            maxInitialRequests:1,
             automaticNameDelimiter: "--", // 分包打包生成文件的名称的连接符
-            name:true,
+            name:false,
             cacheGroups: { //  cacheGroups 缓存组，如：将某个特定的库打包
-                /* 抽离node_modules下的第三方库 可视需要打开会生成两个文件  vender: node-module下的文件*/
-                vendor: {
-                    chunks:"all",
-                    name:"vender",
-                    test: (module, chunks) => {
-                        if (/node_modules/.test(module.context)) {
-                            return true
-                        }
-                    },
-                    minChunks: 2,//  提取公共部分最少的文件数
+                antIcon: {
+                    name: "chunk-antIcon",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]@ant-design[\\/]/,
+                    priority: 90,
+                    reuseExistingChunk: true
+                },
+                tiklabPluginUI: {
+                    name: "chunk-tiklab-plugin-ui",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]tiklab-plugin-ui[\\/]/,
+                    priority: 50,
+                    reuseExistingChunk: true
+                },
+                tiklabUserUI: {
+                    name: "chunk-tiklab-user-ui",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]tiklab-user-ui[\\/]/,
+                    priority: 50,
+                    reuseExistingChunk: true
+                },
+                tiklabCoreUI: {
+                    name: "chunk-tiklab-core-ui",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]tiklab-core-ui[\\/]/,
+                    priority: 50,
+                    reuseExistingChunk: true
+                },
+                tiklabEamUI: {
+                    name: "chunk-tiklab-eam-ui",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]tiklab-eam-ui[\\/]/,
+                    priority: 50,
+                    reuseExistingChunk: true
+                },
+                tiklabPrivilegeUI: {
+                    name: "chunk-tiklab-privilege-ui",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]tiklab-privilege-ui[\\/]/,
+                    priority: 70,
+                    reuseExistingChunk: true
+                },
+                mobx: {
+                    name: "chunk-mobx",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]mobx[\\/]/,
+                    priority: 80,
+                    reuseExistingChunk: true
+                },
+                mobxReact: {
+                    name: "chunk-mobx-react",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]mobx-react[\\/]/,
+                    priority: 80,
+                    reuseExistingChunk: true
+                },
+                reactDom: {
+                    name: "chunk-react-dom",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]react-dom[\\/]/,
+                    priority: 30,
+                    reuseExistingChunk: true
+                },
+                echarts: {
+                    name: "chunk-echarts",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]echarts[\\/]/,
+                    priority: 80,
+                    reuseExistingChunk: true
+                },
+                codemirror: {
+                    name: "chunk-codemirror",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]codemirror[\\/]/,
+                    priority: 50,
+                    reuseExistingChunk: true
+                },
+                moment: {
+                    name: "chunk-moment",
+                    chunks: "all",
+                    test: /[\\/]node_modules[\\/]moment[\\/]/,
+                    priority: 50,
+                    reuseExistingChunk: true
+                },
+                antdUI: {
+                    name: "chunk-antdUI",
+                    chunks: "async",
+                    test: /[\\/]node_modules[\\/]antd[\\/]/,
                     priority: 10,
-                    enforce: true
+                    reuseExistingChunk: true
+                },
+                icon: {
+                    name: "chunk-icon",
+                    chunks: "all",
+                    test: /[\\/]src[\\/]font-icon[\\/]/,
+                    priority: 90,
+                    reuseExistingChunk: true
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */
                 commons: {
                     name: "commons",
                     test: function (module, chunks) {
-                        if (
-                            /src\/components\//.test(module.context) ||
-                            /src\/util\//.test(module.context) ||
-                            /react/.test(module.context) ||
-                            /react-dom/.test(module.context) ||
-                            /redux/.test(module.context)
-                        ) {
+                        if (/react/.test(module.context)) {
                             return true
                         }
                     },

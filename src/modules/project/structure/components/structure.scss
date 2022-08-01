@@ -32,7 +32,7 @@
             }
             &-history{
                 height: calc(100% - 60px);
-                padding: 0 15px 15px 15px;
+                padding-left: 2px;
                 overflow: auto;
                 .history-content{
                     .ant-list-lg ,.ant-list-item{
@@ -42,8 +42,7 @@
                         display: flex;
                         flex-direction: row;
                         width: 100%;
-                        border-bottom: 1px solid #ccc;
-                        padding: 10px;
+                        padding: 10px 10px 10px 20px;
                         cursor: pointer;
                         .list{
                             &-title{
@@ -64,10 +63,10 @@
                             &-time{
                                 margin-left: -3px;
                             }
-
                         }
                         &_active{
-                            background: #eaeaea;
+                            background: #e3e8f0;
+                            border-left: 3px solid #1890ff
                         }
                     }
                 }
@@ -80,7 +79,7 @@
         &-right{
             flex-grow: 1;
             height: 100%;
-            padding: 10px 0 0 10px;
+            padding: 10px 10px 0 ;
             overflow: auto;
             &-mid{
                 padding: 0 15px 15px;
@@ -178,7 +177,7 @@
             }
             &-outLog{
                 white-space: pre-wrap;
-                height: 60vh;
+                height: 58vh;
                 overflow-y: auto;
                 overflow-x: hidden;
                 background: #2F2F2F;

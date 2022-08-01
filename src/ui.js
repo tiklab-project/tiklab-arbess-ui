@@ -1,9 +1,7 @@
-import {store as matFlowStore} from "./module/store";
-import resources from "./module/common/language/resources";
-import matFlowSassRoutes from "./module/routesSass";
+import {store as matFlowStore} from "./store";
+import routesSaas  from "./routesSass";
 
 export {
-    matFlowSassRoutes,
+    routesSaas ,
     matFlowStore,
-    resources,
 }

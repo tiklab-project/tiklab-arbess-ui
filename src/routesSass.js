@@ -49,7 +49,7 @@ const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRol
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 
-const routers=[
+const routesSaas =[
     {
         path:"/logout",
         component:Logout,
@@ -206,4 +206,4 @@ const routers=[
     },
 ]
 
-export default routers
+export default routesSaas

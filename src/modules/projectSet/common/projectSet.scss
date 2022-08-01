@@ -13,11 +13,9 @@
         height: 100%;
         background-color: #F7F8FA;
         padding-top: 20px;
+        padding-left: 3px;
         ul,li {
             list-style: none;
-        }
-        &-hidden {
-            display: none;
         }
         &-item {
             display: flex;
@@ -34,18 +32,17 @@
         &-li {
             line-height: 40px;
         }
-        &-first:hover{
-            .projectSet-aside-title {
-                color: #0053ca;
-            }
-        }
         &-select {
-            border-right: 3px solid #1890ff;
-            background: #e6f7ff;
-            &:hover{
-                span {
-                    color: #0053ca;
-                }
+            background: #e3e8f0;
+            &:before{
+                width: 2px;
+                height: 40px;
+                transition: all .4s cubic-bezier(.23,1,.32,1);
+                content: " ";
+                position: absolute;
+                z-index: 2;
+                left: 3px;
+                background: #1890ff
             }
         }
     }

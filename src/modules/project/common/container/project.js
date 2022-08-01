@@ -51,7 +51,7 @@ const Project= (props)=>{
                 setLastPath={setLastPath}
                 matFlowName={matFlowName}
             />
-            <div className="project-content" style={{marginLeft:65,padding:"0 10px"}}>
+            <div className="project-content" style={{marginLeft:80}}>
                 {renderRoutes(route.routes)}
             </div>
             <PromptContent

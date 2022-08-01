@@ -15,11 +15,10 @@
             padding: 0 2px;
             background-color:#eaeaea;
             border-radius: 4px;
-            display: inline-block;
-            position: relative;
+            display: flex;
             &-li{
                 height: 32px;
-                display: inline-block;
+                margin-top: 2px;
             }
             &-item{
                 padding: 8px 10px;

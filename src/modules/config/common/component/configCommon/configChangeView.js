@@ -18,14 +18,17 @@ const ConfigChangeView = props =>{
             userId:userId,
             matFlowId:matFlowId
         }
+        // 改变按钮
         setProcessVisible(true)
+        // 离开编辑页面关闭提示
         setIsPrompt(false)
+        // 关闭新建配置跳转
         if(setRunOrSave){
             setRunOrSave(false)
         }
         matFlowStartStructure(params).then(res=>{
             if(res.code === 0 && res.data === 1){
-                setTimeout(()=>props.history.push(`/index/task/${matFlowName}/structure`),500)
+                props.history.push(`/index/task/${matFlowName}/structure`)
             }else {
                 setProcessVisible(false)
                 message.error({content:"运行失败", className:"message"})

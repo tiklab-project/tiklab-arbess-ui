@@ -105,7 +105,7 @@ const StructureLeftDropdown = props =>{
     return(
         <div className="structure-content-left-dropdown">
             <div className="dropdown">
-                <Select  style={{width:110,marginRight:10}}
+                <Select  style={{width:135,marginRight:10}}
                          value={statusValue}
                          onChange={(value,e)=>changeState(value,e)}
                 >
@@ -115,7 +115,7 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  style={{width:110,marginRight:10}} 
+                <Select  style={{width:140,marginRight:10}}
                          value={userValue}
                          onChange={(value,e)=>changeEnforcer(value,e)}
                 >
@@ -126,7 +126,7 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  style={{width:110,marginRight:10}}  
+                <Select  style={{width:135,marginRight:10}}
                          value={modeValue} 
                          onChange={(value,e)=>changeMode(value,e)}
                 >

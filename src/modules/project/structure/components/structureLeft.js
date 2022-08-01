@@ -105,9 +105,8 @@ const StructureLeft = props =>{
                         renderItem={(item,i) => (
                             <List.Item key={i}>
                                 <div onClick={()=>showHistory(item,i)}
-                                     className={index=== i+1 ?
-                                        "history-content-list history-content-list_active"
-                                        :  "history-content-list"
+                                     className={`history-content-list
+                                               ${index=== i+1 ? "history-content-list_active":null }`
                                      }
                                 >
                                     <div className="list-title"> # {item.findNumber}</div>

@@ -38,11 +38,6 @@
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],
         "@babel/plugin-syntax-dynamic-import",
-        ["@babel/plugin-transform-runtime",
-            {
-                "regenerator": true
-            }
-        ],
         "react-hot-loader/babel"
     ]
 }
