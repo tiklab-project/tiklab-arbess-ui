@@ -15,9 +15,9 @@ const Head = props =>{
     const {routers} = props;
 
     let path = props.location.pathname
-    const isEE = getVersionInfo().release;
-    const [currentLink,setCurrentLink] = useState(path)
+    const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
+    const [currentLink,setCurrentLink] = useState(path)
 
     useEffect(()=>{
         if(path.indexOf("/index/system") === 0){

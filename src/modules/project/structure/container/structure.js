@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import "../components/structure.scss";
 import {getUser} from "tiklab-core-ui";
 import {Spin} from "antd";

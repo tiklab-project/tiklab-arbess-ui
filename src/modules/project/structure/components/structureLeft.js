@@ -1,8 +1,9 @@
-import React,{Fragment} from "react";
+import React from "react";
 import StructureLeftExecute from "./structureLeftExecute";
 import StructureLeftDropdown from "./structureLeftDropdown";
+import StructureEmpty from "./structureEmpty";
 import {inject,observer} from "mobx-react";
-import {List} from "antd";
+import {List,Empty} from "antd";
 
 const StructureLeft = props =>{
 
@@ -83,57 +84,50 @@ const StructureLeft = props =>{
                             setIndex={setIndex}
                         />
                     }
-                    <List
-                        itemLayout="vertical"
-                        size="large"
-                        locale={{emptyText:
-                                <Fragment>
-                                    <svg className="icon" aria-hidden="true" >
-                                        <use xlinkHref="#icon-meiyouxiangguan"/>
-                                    </svg>
-                                    <div>没有数据</div>
-                                </Fragment>
-                        }}
-                        pagination={{
-                            ...page,
-                            onChange:(page)=>{onChangePage(page)},
-                            hideOnSinglePage:true,
-                            showSizeChanger:false,
-                            current:pageCurrent,
-                        }}
-                        dataSource={leftPageList}
-                        renderItem={(item,i) => (
-                            <List.Item key={i}>
-                                <div onClick={()=>showHistory(item,i)}
-                                     className={`history-content-list
-                                               ${index=== i+1 ? "history-content-list_active":null }`
-                                     }
-                                >
-                                    <div className="list-title"> # {item.findNumber}</div>
-                                    <div className="list-group">
-                                        <div className="list-group-item">
-                                            <div className="list-state">
-                                                状态 : {sta(item)}
-                                            </div>
-                                            <div className="list-one">
-                                                执行人 : {item.user && item.user.name}
+                    {
+                        execState === ""  && leftPageList && leftPageList.length === 0 ?
+                            <StructureEmpty/>
+                            :
+                            <List
+                                itemLayout="vertical"
+                                size="large"
+                                pagination={{
+                                    ...page,
+                                    onChange:(page)=>{onChangePage(page)},
+                                    hideOnSinglePage:true,
+                                    showSizeChanger:false,
+                                    current:pageCurrent,
+                                }}
+                                dataSource={leftPageList}
+                                renderItem={(item,i) => (
+                                    <List.Item key={i}>
+                                        <div onClick={()=>showHistory(item,i)}
+                                             className={`history-content-list
+                                               ${index=== i+1 ? "history-content-list_active":null }`}
+                                        >
+                                            <div className="list-title"> # {item.findNumber}</div>
+                                            <div className="list-group">
+                                                <div className="list-group-item">
+                                                    <div className="list-state">
+                                                        状态 : {sta(item)}
+                                                    </div>
+                                                    <div className="list-one">
+                                                        执行人 : {item.user && item.user.name}
+                                                    </div>
+                                                </div>
+                                                <div className="list-time">
+                                                    执行时间 : {item.createTime}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="list-time">
-                                            执行时间 : {item.createTime}
-                                        </div>
-                                    </div>
-                                </div>
-                            </List.Item>
-                        )}
-                    />
+                                    </List.Item>
+                                )}
+                            />
+                    }
                 </div>
             </div>
         </div>
     )
 }
 
-export default
-
-
-inject("structureStore","structureListStore")(observer(StructureLeft))
+export default inject("structureStore","structureListStore")(observer(StructureLeft))

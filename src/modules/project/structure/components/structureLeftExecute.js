@@ -19,9 +19,8 @@ const StructureLeftExecute = props => {
 
     return(
         <div onClick={()=>setIndex(0)}
-             className={ `history-content-list ${index === 0  ?
-                 "history-content-list_active": null}`
-             }
+             className={`history-content-list 
+             ${index===0 ? "history-content-list_active": null}`}
         >
             <div className="list-title"> 运行中 </div>
             <div className="list-group">

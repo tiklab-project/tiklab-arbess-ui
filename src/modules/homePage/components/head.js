@@ -3,6 +3,7 @@ import {PrivilegeButton} from "tiklab-privilege-ui";
 
 const Head = props =>{
 
+    // 不受控制
     const stableList = [
         {
             id:1,
@@ -16,6 +17,7 @@ const Head = props =>{
         },
     ]
 
+    // 受控制
     const inStableLis = [
         {
             id:3,
