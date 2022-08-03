@@ -1,4 +1,4 @@
-import React,{Fragment,useState,useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import "./addProofModal";
 import AddProofModal from "./addProofModal";
 import {inject,observer} from "mobx-react";
@@ -26,8 +26,8 @@ const AddProofButton = props =>{
     }
 
     return (
-        <Fragment>
-            <Button className="config-details-link" type={style} onClick={()=>addProofVisible()}>
+        <div className="config-details-link">
+            <Button type={style} onClick={()=>addProofVisible()}>
                 添加
             </Button>
             <AddProofModal
@@ -43,7 +43,7 @@ const AddProofButton = props =>{
                 matFlowList={matFlowList}
                 matFlowId={matFlowId}
             />
-        </Fragment>
+        </div>
     )
 }
 

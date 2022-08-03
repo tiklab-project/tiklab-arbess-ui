@@ -14,10 +14,9 @@ const Structure = props => {
 
     const {structureStore,structureListStore,matFlowStore} = props
 
-    const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure,
-        leftPageList,isData,findMatFlowUser,setIsData,execState
-    } = structureStore
-    const {state,enforcer,mode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
+    const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure, leftPageList,isData,
+        findMatFlowUser,setIsData,execState} = structureStore
+    const {state,setState,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
     const {matFlowId} = matFlowStore
 
     const userId = getUser().userId
@@ -25,6 +24,9 @@ const Structure = props => {
     useEffect(()=>{
         if(matFlowId){
             setPageCurrent(1)
+            setMode(0)
+            setState(0)
+            setEnforcer(null)
             findMatFlowUser(matFlowId)
         }
     },[matFlowId])
@@ -94,7 +96,7 @@ const Structure = props => {
         }
         findPageHistory(params).then(res=>{
             if(res.code===0 && res.data && res.data.dataList.length===0){
-                if(state !==0 || enforcer !==null || mode !==0){
+                if(state!==0 || enforcer!==null || mode!==0){
                     setDrop(!drop)
                     findPage()
                 }else{
@@ -109,13 +111,10 @@ const Structure = props => {
         if(matFlowId){
             findExecState(matFlowId).then(res=>{
                 if(res.data===1){
-                    interval=setInterval(()=>{
+                    interval=setInterval(()=>
                         findStructureState(matFlowId).then(res=>{
-                            if(res.code===0){
-                                renderExec(res.data)
-                            }
-                        })
-                    }, 1000)
+                            if(res.code===0){renderExec(res.data)}
+                        }), 1000)
                     findAll(matFlowId)
                 }
                 changPage() // 历史列表

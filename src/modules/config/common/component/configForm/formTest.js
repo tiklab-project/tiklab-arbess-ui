@@ -53,7 +53,7 @@ const FormTest = props =>{
     }
 
 
-    return  <div className="config-details-gitTest config-details-link">
+    return  <div className="config-details-link">
                 <Button onClick={()=>testing()}>连接测试</Button>
             </div>
 }

@@ -18,19 +18,20 @@ const StructureRightLogDrawer = props =>{
         >
             <div className="wrapper">
                 <div className="wrapper-head">
-                    <div>{drawerContent && drawerContent.taskAlias}</div>
+                    <div>
+                        {drawerContent && drawerContent.taskAlias}
+                        &nbsp;--&nbsp;
+                        <ConfigName type={drawerContent.taskType}/>
+                    </div>
                     <div>
                         <Button type="text" onClick={()=>setVisible(false)}>
                             <CloseOutlined />
                         </Button>
                     </div>
                 </div>
-                <div className="wrapper-title">
-                    <ConfigName type={drawerContent.taskType}/>:
-                </div>
                 <div className="wrapper-body">
                     <div className="log">
-                        <div className="log-content"> {drawerContent && drawerContent.runLog} </div>
+                        <div className="log-content">{drawerContent && drawerContent.runLog}</div>
                     </div>
                  </div>
             </div>

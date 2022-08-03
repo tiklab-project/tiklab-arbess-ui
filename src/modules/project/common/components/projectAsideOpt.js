@@ -51,16 +51,16 @@ const ProjectAsideOpt = props =>{
     )
 
     return(
-        <li className="aside_content aside_dropdown"
-            style={{padding:10}}
-            onClick={(e) => e.preventDefault()}
-        >
-            <Dropdown overlay={menu} trigger={["click"]}>
-                <svg  className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-shaixuan1"/>
-                </svg>
-            </Dropdown>
-        </li>
+        <Dropdown overlay={menu} trigger={["click"]}>
+            <li className="aside_content aside_dropdown"
+                style={{padding:10}}
+                onClick={(e) => e.preventDefault()}
+            >
+                    <svg  className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-shaixuan1"/>
+                    </svg>
+            </li>
+        </Dropdown>
     )
 }
 

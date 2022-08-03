@@ -3,7 +3,7 @@ import StructureLeftExecute from "./structureLeftExecute";
 import StructureLeftDropdown from "./structureLeftDropdown";
 import StructureEmpty from "./structureEmpty";
 import {inject,observer} from "mobx-react";
-import {List,Empty} from "antd";
+import {List} from "antd";
 
 const StructureLeft = props =>{
 
@@ -76,14 +76,12 @@ const StructureLeft = props =>{
             />
             <div className="structure-content-left-history">
                 <div className="history-content">
-                    {   execState === "" ? null:
-                        <StructureLeftExecute
-                            execState={execState}
-                            status={status}
-                            index={index}
-                            setIndex={setIndex}
-                        />
-                    }
+                    <StructureLeftExecute
+                        execState={execState}
+                        status={status}
+                        index={index}
+                        setIndex={setIndex}
+                    />
                     {
                         execState === ""  && leftPageList && leftPageList.length === 0 ?
                             <StructureEmpty/>
@@ -103,7 +101,7 @@ const StructureLeft = props =>{
                                     <List.Item key={i}>
                                         <div onClick={()=>showHistory(item,i)}
                                              className={`history-content-list
-                                               ${index=== i+1 ? "history-content-list_active":null }`}
+                                             ${index===i+1 ? "history-content-list_active":null }`}
                                         >
                                             <div className="list-title"> # {item.findNumber}</div>
                                             <div className="list-group">

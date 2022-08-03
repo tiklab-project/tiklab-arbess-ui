@@ -16,7 +16,7 @@ const WorkSpaceDrawer = props =>{
             width={700}
         >
             <div className="wrapper-head">
-                <div>{drawerContent.title ? drawerContent.title :drawerContent.commitTime}</div>
+                <div>{drawerContent.title ? drawerContent.title:drawerContent.commitTime}</div>
                 <div>
                     <Button type="text" onClick={()=>setDetailsDrawer(false)}>
                         <CloseOutlined />
@@ -24,14 +24,10 @@ const WorkSpaceDrawer = props =>{
                 </div>
             </div>
             <div className="wrapper-body">
-                <div className="log" style={{paddingTop:20}}>
+                <div className="log">
                     <div className="log-content">
-                        {drawerContent.commitFile && drawerContent.commitFile.map((item, index) => {
-                            return(
-                                <div key={index}>
-                                    {drawerContent.title ? null : `${index+1}、`}{item}
-                                </div>
-                            )
+                        {drawerContent.commitFile && drawerContent.commitFile.map((item,index)=>{
+                            return <div key={index}>{drawerContent.title ? null : `${index+1}、`}{item}</div>
                         })}
                     </div>
                 </div>

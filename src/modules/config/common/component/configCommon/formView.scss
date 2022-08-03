@@ -1,6 +1,5 @@
 .formView{
     padding: 55px 10px 0;
-    overflow: auto;
     &-content{
         padding: 15px;
         overflow: hidden;
@@ -45,11 +44,5 @@
                 padding: 15px 0;
             }
         }
-    }
-    .config-details-link{
-        margin-left: 15px;
-    }
-    .config-details-gitTest{
-        text-align: right;
     }
 }
