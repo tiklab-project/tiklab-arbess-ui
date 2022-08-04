@@ -41,10 +41,10 @@ const lis=[
                 type:32 ,
                 tel:"docker"
             },
-            {
-                type:33,
-                tel:"本机"
-            }
+            // {
+            //     type:33,
+            //     tel:"本机"
+            // }
         ]
     }
 ]

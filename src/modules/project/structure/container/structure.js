@@ -100,7 +100,9 @@ const Structure = props => {
                     setDrop(!drop)
                     findPage()
                 }else{
-                    setIsData(false)
+                    if(execState===""){
+                        setIsData(false)
+                    }else setIsData(true)
                 }
             }
         })

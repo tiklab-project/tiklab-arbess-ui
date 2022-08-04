@@ -21,7 +21,7 @@ export class WorkSpaceStore{
         const param = new FormData()
         param.append("matFlowId",value)
         GetSubmitMassage(param).then(res=>{
-            console.log("近期提交记录",res)
+            console.log( res)
             if(res.code === 0){
                 this.recordList = res.data
             }

@@ -23,10 +23,10 @@ export class ConfigItemStore {
     @action
     fileAddress = () =>{
         FileAddress().then(res=>{
+            console.log(res)
             if(res.code===0 && res.data){
                 this.profileAddress = res.data
             }
-            console.log("配置文件地址",res.data)
         }).catch(error=>{
             console.log(error)
         })

@@ -14,10 +14,10 @@ export class MatFlowCollectStore{
         const param = new FormData()
         param.append("userId",value)
         FindAllFollow(param).then(res=>{
+            console.log( res)
             if(res.code===0){
                 this.followList=res.data
             }
-            console.log("查找我的收藏", res)
         }).catch(error=>{
             console.log(error)
         })

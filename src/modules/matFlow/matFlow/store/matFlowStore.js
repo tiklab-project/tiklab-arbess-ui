@@ -37,11 +37,11 @@ export class MatFlowStore {
         param.append("userId",value)
         return new Promise((resolve, reject) => {
             FindAllMatFlowStatus(param).then(res=>{
+                console.log( res)
                 if(res.code === 0 && res.data){
                     this.matFlowList=res.data
                 }
                 resolve(res)
-                console.log("所有流水线", res)
             }).catch(error=>{
                 console.log(error)
                 reject()
@@ -60,7 +60,7 @@ export class MatFlowStore {
         }
         return new Promise((resolve, reject) => {
             CreateMatFlow(params).then(res=>{
-                console.log("创建流水线",res)
+                console.log( res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -76,10 +76,10 @@ export class MatFlowStore {
         params.append("userId",values.userId)
         return new Promise((resolve, reject) => {
             FindLike(params).then(res=>{
+                console.log( res)
                 if(res.code === 0 && res.data){
                     this.searchMatFlowList=res.data
                 }
-                console.log("搜索流水线",res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -95,7 +95,7 @@ export class MatFlowStore {
         param.append("userId",value.userId)
         return new Promise((resolve, reject) => {
             DeleteMatFlow(param).then(res=>{
-                console.log("删除流水线",res)
+                console.log(res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -113,7 +113,7 @@ export class MatFlowStore {
         }
         return new Promise((resolve, reject) => {
             UpdateMatFlow(params).then(res=>{
-                console.log("重命名",res)
+                console.log( res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

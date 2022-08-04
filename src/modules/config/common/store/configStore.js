@@ -56,7 +56,7 @@ export class ConfigStore{
         }
         return new Promise((resolve, reject) => {
             UpdateConfigure(params).then(res=>{
-                console.log("更新流水线配置",res)
+                console.log(res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -71,7 +71,7 @@ export class ConfigStore{
         param.append("matFlowId", values)
         return new Promise((resolve, reject) => {
             FindAllConfigure(param).then(res=>{
-                console.log("查看所有配置",res)
+                console.log(res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

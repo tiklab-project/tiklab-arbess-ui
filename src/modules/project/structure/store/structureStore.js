@@ -132,7 +132,7 @@ export class StructureStore {
         }
         return new Promise((resolve, reject)=>{
             FindPageHistory(params).then(res=>{
-                console.log("所有历史",res)
+                console.log( res)
                 if(res.code===0 && res.data){
                     if(res.data.dataList.length===0){
                         this.leftPageList = []
@@ -186,7 +186,7 @@ export class StructureStore {
         const param = new FormData()
         param.append("matFlowId", value)
         FindMatFlowUser(param).then(res=>{
-            console.log("执行人",res)
+            console.log( res)
             if(res.code === 0 && res.data){
                 this.matFlowUserList = res.data
             }
