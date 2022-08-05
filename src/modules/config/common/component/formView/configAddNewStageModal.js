@@ -91,6 +91,7 @@ const ConfigAddNewStageModal = props =>{
             <ConfigCodeOrNewStage
                 lis={lis}
                 handleClick={handleClick}
+                setVisible={setNewStageVisible}
             />
         </Modal>
     )

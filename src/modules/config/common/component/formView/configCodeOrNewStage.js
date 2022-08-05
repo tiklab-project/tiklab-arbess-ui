@@ -1,10 +1,11 @@
 import React,{Fragment} from "react";
-import {CloseOutlined} from "@ant-design/icons";
 import "./configCodeOrNewStage.scss";
+import {CloseOutlined} from "@ant-design/icons";
+import {Button} from "antd";
 
 const ConfigCodeOrNewStage = props =>{
 
-    const {lis,handleClick} = props
+    const {lis,handleClick,setVisible} = props
 
     const renderLis = lis =>{
         return lis && lis.map(group=>{
@@ -36,7 +37,11 @@ const ConfigCodeOrNewStage = props =>{
         <Fragment>
             <div className="taskGroup">
                 <div>选择任务组</div>
-                <div><CloseOutlined/></div>
+                <div>
+                    <Button onClick={()=>setVisible(false)} type="text">
+                        <CloseOutlined/>
+                    </Button>
+                </div>
             </div>
             {renderLis(lis)}
         </Fragment>
