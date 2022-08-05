@@ -9,7 +9,7 @@ import {GITEE_STORE,GiteeStore} from "./modules/config/common/store/giteeStore";
 import {GITHUB_STORE,GithubStore} from "./modules/config/common/store/githubStore";
 import {PROOF_STORE,ProofStore} from "./modules/proof/store/proofStore";
 import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/workSpaceStore";
-import {HOMEPAGE_STORE,HomePageStore} from "./modules/homePage/store/homePageStore";
+import {HOMEPAGE_STORE,HomePageStore} from "./modules/home/store/homePageStore";
 import {MATFLOWCOLLECT_STORE,MatFlowCollectStore} from "./modules/matFlow/matFlowCollect/store/matFlowCollectStore";
 import {MESSAGE_STORE,MessageStore} from "./modules/system/message/store/messageStore";
 import {createContext} from "react";

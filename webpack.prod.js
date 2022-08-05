@@ -32,7 +32,7 @@ module.exports = merge(baseWebpackConfig, {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
-            title:"流水线",
+            title:"matFlow",
             template: path.resolve(__dirname, "./public/index.template.html"),
             hash: false,
             filename: "index.html",
@@ -184,7 +184,7 @@ module.exports = merge(baseWebpackConfig, {
                 parallel: true,
                 terserOptions: {
                     compress: {
-                        drop_console: false,
+                        drop_console: true,
                         drop_debugger: true // 去除console.log 和debuger
                     },
                 }

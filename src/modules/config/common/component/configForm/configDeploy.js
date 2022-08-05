@@ -9,7 +9,7 @@ const ConfigDeploy = props =>{
     const {configItemStore,configDataStore,matFlowStore} = props
 
     const {formInitialValues,setIsPrompt,orderShellBlock,setOrderShellBlock} = configDataStore
-    const {getFile,profileAddress} = configItemStore
+    const {fileAddress,getFile,profileAddress} = configItemStore
     const {matFlowId,matFlowName} = matFlowStore
 
     const [messageInfo,setMessageInfo] = useState("")
@@ -19,6 +19,10 @@ const ConfigDeploy = props =>{
             setMessageInfo("")
         }
     },[matFlowId])
+
+    useEffect(()=>{
+        fileAddress()
+    },[])
 
     useEffect(()=>{
         const params = {

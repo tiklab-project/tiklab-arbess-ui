@@ -1,15 +1,13 @@
 import React,{useEffect} from "react";
-import "./header.scss";
-import Heads from "./header";
+import "../components/header.scss";
+import Heads from "../components/header";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {getUser} from "tiklab-core-ui";
 import {renderRoutes} from "react-router-config";
-import {inject,observer} from "mobx-react";
 
 const Portal= props=>{
 
-    const {route,configItemStore}=props
-    const {fileAddress} = configItemStore
+    const {route}=props
 
     const headerRoutes=[
         {
@@ -28,16 +26,15 @@ const Portal= props=>{
             title:"系统设置",
         }
     ]
+
     useEffect(()=>{
         // 导航控制
         privilegeStores.systemRoleStore.getSystemPermissions(getUser().userId)
-        // 全局配置文件地址(默认值)
-        fileAddress()
     },[])
 
     return(
         <div className="frame">
-            <Heads {...props} routers={headerRoutes} />
+            <Heads {...props} routers={headerRoutes}/>
             <div className="frame-content">
                 {renderRoutes(route.routes)}
             </div>
@@ -45,4 +42,4 @@ const Portal= props=>{
     )
 }
 
-export default inject("configItemStore")(observer(Portal))
+export default Portal

@@ -1,4 +1,4 @@
-import React,{Fragment,} from "react";
+import React,{Fragment} from "react";
 import {Form,Select} from "antd";
 import ConfigDeployShell from "./configDeployShell";
 import ConfigDeployLinux from "./configDeployLinux";

@@ -3,10 +3,10 @@ import {Row,Col,Avatar,Dropdown,Input,Space,Menu} from "antd";
 import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {GlobalOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
-import logo from "../../assets/images/logo.png";
-import portrait from "../../assets/images/portrait.jpg";
-import vipOne from "../../assets/images/vip-one.png";
-import vipTwo from "../../assets/images/vip-two.png";
+import logo from "../../../assets/images/logo.png";
+import portrait from "../../../assets/images/portrait.jpg";
+import vipOne from "../../../assets/images/vip-one.png";
+import vipTwo from "../../../assets/images/vip-two.png";
 
 const  {Search} = Input
 

@@ -58,7 +58,8 @@ const ConfigAddCodeModal = props =>{
             visible={codeVisible}
             onCancel={()=>setCodeVisible(false)}
             footer={[]}
-            title="选择代码源"
+            closable={false}
+            // title="选择任务组"
         >
             <ConfigCodeOrNewStage lis={lis} handleClick={handleClick}/>
         </Modal>

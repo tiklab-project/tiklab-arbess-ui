@@ -1,10 +1,10 @@
 import React,{Fragment} from "react";
-import ConfigCodeSvn from "../configForm/configCodeSvn";
 import ConfigCodeGitOrGitlab from "../configForm/configCodeGitOrGitlab"
 import ConfigCodeGiteeOrGithub from "../configForm/configCodeGiteeOrGithub";
 import ConfigTestUnit from "../configForm/configTestUnit";
 import ConfigStructureMavenOrNode from "../configForm/configStructureMavenOrNode";
 import ConfigDeployType from "../configForm/configDeployType";
+import ConfigCodeSvn from "../configForm/configCodeSvn";
 
 const ConfigForm = props =>{
     const {type} = props

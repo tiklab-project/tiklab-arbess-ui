@@ -5,7 +5,7 @@ import {inject,observer} from "mobx-react";
 import ConfigTop from "../common/component/configCommon/configTop";
 import PromptContent from "../../../common/prompt/prompt";
 import FormView from "../common/component/configCommon/formView";
-import {Form, message} from "antd";
+import {Form,message} from "antd";
 import {getUser} from "tiklab-core-ui";
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";

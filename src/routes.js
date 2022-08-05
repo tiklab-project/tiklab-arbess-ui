@@ -3,13 +3,13 @@ import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
-const Index=AsyncComponent(()=>import("./modules/home/portal"))
+const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
 
 /* 首页 */
-const HomePage=AsyncComponent(()=>import("./modules/homePage/container/homePage"))
+const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
 
 /* 动态详情 */
-const DynamicDetails=AsyncComponent(()=>import("./modules/homePage/components/dynamicDetails"))
+const DynamicDetails=AsyncComponent(()=>import("./modules/home/components/dynamicDetails"))
 
 /*  流水线 */
 const MatFlow=AsyncComponent(()=>import("./modules/matFlow/matFlow/container/matFlow"))

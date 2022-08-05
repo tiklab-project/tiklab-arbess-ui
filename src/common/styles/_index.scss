@@ -26,7 +26,7 @@ ul li{
         padding: 0!important;
         .wrapper{
             &-head{
-                height: 43px;
+                height: 46px;
                 background:$white;
                 border-bottom: 1px solid $gray-500;
                 padding: 12px;
@@ -47,6 +47,7 @@ ul li{
             &-body{
                 height: calc(100vh - 115px);
                 overflow-y: auto;
+                overflow-x: hidden;
                 padding: 0;
             }
         }
