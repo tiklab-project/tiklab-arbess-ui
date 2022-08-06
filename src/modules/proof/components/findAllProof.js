@@ -1,4 +1,5 @@
 import React from "react";
+import {inject,observer} from "mobx-react";
 import {Form,Select} from "antd";
 import {getUser} from "tiklab-core-ui";
 
@@ -66,4 +67,4 @@ const FindAllProof = props =>{
 
 }
 
-export default FindAllProof
+export default inject("proofStore","matFlowStore","configDataStore")(observer(FindAllProof))

@@ -1,5 +1,6 @@
 import React from "react";
 import {Button,message} from "antd";
+import {inject,observer} from "mobx-react";
 
 const FormTest = props =>{
 
@@ -57,4 +58,4 @@ const FormTest = props =>{
             </div>
 }
 
-export default FormTest
+export default inject("configDataStore","configItemStore")(observer(FormTest))
