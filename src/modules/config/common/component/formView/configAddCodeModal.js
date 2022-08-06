@@ -1,5 +1,4 @@
 import React from "react";
-import {Modal} from "antd";
 import ConfigCodeOrNewStage from "./configCodeOrNewStage";
 
 const lis=[
@@ -53,20 +52,12 @@ const ConfigAddCodeModal = props =>{
         setIsPrompt(true)
     }
 
-    return(
-        <Modal
-            visible={codeVisible}
-            onCancel={()=>setCodeVisible(false)}
-            footer={[]}
-            closable={false}
-        >
-            <ConfigCodeOrNewStage
+    return  <ConfigCodeOrNewStage
                 lis={lis}
                 handleClick={handleClick}
+                visible={codeVisible}
                 setVisible={setCodeVisible}
             />
-        </Modal>
-    )
 }
 
 export default ConfigAddCodeModal

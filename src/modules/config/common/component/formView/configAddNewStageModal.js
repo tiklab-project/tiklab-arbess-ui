@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal,message} from "antd";
+import {message} from "antd";
 import ConfigCodeOrNewStage from "./configCodeOrNewStage";
 
 const lis=[
@@ -80,21 +80,12 @@ const ConfigAddNewStageModal = props =>{
         setNewStageVisible(false) 
     }
 
-    return(
-        <Modal
-            visible={newStageVisible}
-            onCancel={()=>setNewStageVisible(false)}
-            footer={[]}
-            closable={false}
-            // title="选择任务组"
-        >
-            <ConfigCodeOrNewStage
-                lis={lis}
-                handleClick={handleClick}
-                setVisible={setNewStageVisible}
+    return   <ConfigCodeOrNewStage
+                 lis={lis}
+                 handleClick={handleClick}
+                 visible={newStageVisible}
+                 setVisible={setNewStageVisible}
             />
-        </Modal>
-    )
 }
 
 export default ConfigAddNewStageModal
