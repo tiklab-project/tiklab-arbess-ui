@@ -123,6 +123,7 @@ const Proof = props =>{
                 setIsShowMatFlow={setIsShowMatFlow}
                 updateProof={updateProof}
                 matFlowId={matFlowId}
+                type={type}
             />
         </div>
     )

@@ -69,7 +69,7 @@ module.exports = merge(baseWebpackConfig, {
                     name: "chunk-antIcon",
                     chunks: "all",
                     test: /[\\/]node_modules[\\/]@ant-design[\\/]/,
-                    priority: 90,
+                    priority: 10,
                     reuseExistingChunk: true
                 },
                 tiklabPluginUI: {
@@ -121,18 +121,11 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 80,
                     reuseExistingChunk: true
                 },
-                reactDom: {
-                    name: "chunk-react-dom",
-                    chunks: "all",
-                    test: /[\\/]node_modules[\\/]react-dom[\\/]/,
-                    priority: 30,
-                    reuseExistingChunk: true
-                },
                 echarts: {
                     name: "chunk-echarts",
                     chunks: "all",
                     test: /[\\/]node_modules[\\/]echarts[\\/]/,
-                    priority: 80,
+                    priority: 50,
                     reuseExistingChunk: true
                 },
                 codemirror: {
@@ -153,21 +146,27 @@ module.exports = merge(baseWebpackConfig, {
                     name: "chunk-antdUI",
                     chunks: "async",
                     test: /[\\/]node_modules[\\/]antd[\\/]/,
-                    priority: 10,
+                    priority: 50,
                     reuseExistingChunk: true
                 },
                 icon: {
                     name: "chunk-icon",
                     chunks: "all",
                     test: /[\\/]src[\\/]font-icon[\\/]/,
-                    priority: 90,
+                    priority: 10,
                     reuseExistingChunk: true
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */
                 commons: {
                     name: "commons",
                     test: function (module, chunks) {
-                        if (/react/.test(module.context)) {
+                        if (
+                            /src\/components\//.test(module.context) ||
+                            /src\/util\//.test(module.context) ||
+                            /react/.test(module.context) ||
+                            /react-dom/.test(module.context) ||
+                            /redux/.test(module.context)
+                        ) {
                             return true
                         }
                     },

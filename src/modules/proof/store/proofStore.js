@@ -61,7 +61,6 @@ export class ProofStore{
     @action
     updateProof =async values =>{
         const params = {
-            matFlow:{matflowId: values.matFlow.matflowId},
             proofId:values.proofId,
             proofType:values.proofType,
             proofScope:values.proofScope,

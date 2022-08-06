@@ -1,8 +1,8 @@
 import React,{Fragment,useEffect,useState} from "react";
+import ConfigProof from "./configProof";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
-import ConfigProof from "./configProof";
 
 const ConfigDeploy = props =>{
 

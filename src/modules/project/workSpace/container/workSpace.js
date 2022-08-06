@@ -13,7 +13,7 @@ const WorkSpace = props =>{
     const {workSpaceStore,matFlowStore} = props
 
     const {getSubmitMassage,fileTree,readFile,recordList,fileList,setFileList} = workSpaceStore
-    const {matFlowId} = matFlowStore
+    const {matFlowId,matFlowName} = matFlowStore
 
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
@@ -47,7 +47,7 @@ const WorkSpace = props =>{
             </div>
             <div className="workSpace-content">
                 <WorkSpaceNod
-                    {...props}
+                    matFlowName={matFlowName}
                     fileList={fileList}
                     setFileList={setFileList}
                     fresh={fresh}

@@ -6,7 +6,7 @@ const {Option} = Select
 const UpdateProof = props =>{
 
     const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart,matFlowList,
-        matFlowId,isShowMatFlow,setIsShowMatFlow} = props
+        matFlowId,isShowMatFlow,setIsShowMatFlow,type} = props
 
     const [form] = Form.useForm()
 
@@ -18,14 +18,13 @@ const UpdateProof = props =>{
 
     const onOk = () =>  {
         form.validateFields().then((values) => {
-            let id
-            if(values.type===1){
-                id = null
-            }else {
-                id = matFlowId
+            let proofList
+            if(type === "project"){
+                proofList = [`${matFlowId}`]
+            } else {
+                proofList = values.proofList
             }
             const params = {
-                matFlow:{matflowId:id},
                 proofId:formValue.proofId,
                 proofScope:values.proofScope,
                 proofType:values.proofType,
@@ -34,7 +33,7 @@ const UpdateProof = props =>{
                 proofPassword:values.proofPassword,
                 proofDescribe:values.proofDescribe,
                 type:values.type,
-                proofList:values.proofList
+                proofList:proofList
             }
             updateProof(params).then(()=>{
                 setFresh(!fresh)
@@ -67,12 +66,12 @@ const UpdateProof = props =>{
                     </Select>
                 </Form.Item>
                 {
-                    isShowMatFlow === 2?
+                    isShowMatFlow === 2 && type === "system"?
                         <Form.Item
                             label="项目作用域"
                             name="proofList"
                             className="proofModal-showMatFlow"
-                            rules={[{required:true, message:"请选择项目作用域"}]}
+                            rules={[{required:true,message:"请选择项目作用域"}]}
                         >
                             <Checkbox.Group>
                                 {

@@ -4,7 +4,7 @@ import {Breadcrumb} from "antd";
 // 节点
 const WorkSpaceNod = props =>{
 
-    const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent,match} = props
+    const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent,matFlowName} = props
 
     const renderType = treeType => {
         switch (treeType){
@@ -88,7 +88,7 @@ const WorkSpaceNod = props =>{
                         className = "catalogue_item_breadcrumb"
                         onClick={()=>setBreadcrumb()}
                     >
-                        <span>{renderType(2)}{match.params.matFlowName}</span>
+                        <span>{renderType(2)}{matFlowName}</span>
                     </Breadcrumb.Item>
                     {renderCatalogue(catalogue)}
                 </Breadcrumb>

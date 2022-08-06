@@ -23,26 +23,10 @@ const ConfigStructureMavenOrNode = props =>{
                     placeholder={`"\/\" 代表当前源的根目录`}
                 />
             </Form.Item>
-            {/*<div className="required">*/}
-            {/*    <svg className="icon" aria-hidden="true">*/}
-            {/*        <use xlinkHref="#icon-xinghao1"/>*/}
-            {/*    </svg>*/}
-            {/*</div>*/}
             <Form.Item
                 name="structureOrder"
                 label="执行命令"
                 className="required-self"
-                rules={[
-                    // ({ getFieldValue }) => ({
-                    //     validator(rule, value) {
-                    //         if(mavenShellBlock) {
-                    //             return Promise.resolve();
-                    //         }else {
-                    //             return Promise.reject("请输入执行命令");
-                    //         }
-                    //     },
-                    // }),
-                ]}
             >
                 <Mirror
                     shellBlock={mavenShellBlock}

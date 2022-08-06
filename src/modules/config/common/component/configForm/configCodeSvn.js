@@ -10,7 +10,7 @@ const ConfigCodeSvn = props =>{
                 name="codeName"
                 label="svn地址"
                 rules={[
-                    {required:true, message:"请输入svn地址"},
+                    {required:true,message:"请输入svn地址"},
                     {
                         pattern: /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/,
                         message:"请输入正确的git地址"
