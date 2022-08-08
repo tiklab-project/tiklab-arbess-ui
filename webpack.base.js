@@ -1,6 +1,5 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 const DIST_PATH = path.resolve(__dirname, "dist");
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -44,7 +43,6 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
     }
     return loaders;
 };
-
 
 module.exports = {
     output: {

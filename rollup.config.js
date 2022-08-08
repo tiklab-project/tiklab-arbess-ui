@@ -34,9 +34,9 @@
      return fileNames;
  }
  const globals = {
-     react: "React",
+     "react": "React",
      "react-dom": "ReactDOM",
-     antd:"antd",
+     "antd":"antd",
      "react-i18next":"reactI18next",
      "tiklab-core-ui":"tiklabCoreUi",
      "@ant-design/icons":"icons",

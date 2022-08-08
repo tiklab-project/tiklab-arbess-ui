@@ -1,8 +1,8 @@
 import React from "react";
+import {Row} from "antd";
 import FindAllProof from "../../../../proof/components/findAllProof";
 import AddProofButton from "../../../../proof/components/addProofButton";
 import FormTest from "./formTest";
-import {Row} from "antd";
 
 const ConfigProof = props =>{
 

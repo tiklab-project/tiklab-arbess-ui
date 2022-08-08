@@ -6,7 +6,7 @@ const {Option} = Select
 const UpdateProof = props =>{
 
     const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart,matFlowList,
-        matFlowId,isShowMatFlow,setIsShowMatFlow,type} = props
+        matFlowId,isShowMatFlow,setIsShowMatFlow} = props
 
     const [form] = Form.useForm()
 
@@ -19,7 +19,7 @@ const UpdateProof = props =>{
     const onOk = () =>  {
         form.validateFields().then((values) => {
             let proofList
-            if(type === "project"){
+            if(matFlowId){
                 proofList = [`${matFlowId}`]
             } else {
                 proofList = values.proofList
@@ -66,7 +66,7 @@ const UpdateProof = props =>{
                     </Select>
                 </Form.Item>
                 {
-                    isShowMatFlow === 2 && type === "system"?
+                    isShowMatFlow === 2 && matFlowList?
                         <Form.Item
                             label="项目作用域"
                             name="proofList"

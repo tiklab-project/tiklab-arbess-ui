@@ -8,8 +8,8 @@ import {inject,observer} from "mobx-react";
 
 const Proof = props =>{
 
-    const {proofList,proofStore,firstItem,type,matFlowList,matFlowId} = props
-    const {updateProof,deleteProof,setFresh,fresh} = proofStore
+    const {proofStore,matFlowList,matFlowId} = props
+    const {updateProof,deleteProof,proofList,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState("")
     const [visible,setVisible] = useState(false)
@@ -98,7 +98,7 @@ const Proof = props =>{
 
     return(
         <div className="proof">
-            <BreadcrumbContent firstItem={firstItem} type={type}/>
+            <BreadcrumbContent firstItem={"凭证管理"}/>
             <div className="proof-content">
                 <div className="proof-content-btn">
                     <AddProofButton style={style} matFlowList={matFlowList}/>
@@ -123,7 +123,6 @@ const Proof = props =>{
                 setIsShowMatFlow={setIsShowMatFlow}
                 updateProof={updateProof}
                 matFlowId={matFlowId}
-                type={type}
             />
         </div>
     )

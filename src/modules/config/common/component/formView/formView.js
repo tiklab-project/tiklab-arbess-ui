@@ -2,23 +2,22 @@ import React,{useState,useEffect,useRef} from "react";
 import  "./formView.scss";
 import {Button,Form,Input,Popconfirm} from "antd";
 import {CloseOutlined,EditOutlined} from "@ant-design/icons";
-import ConfigAddNewStageModal from "../formView/configAddNewStageModal";
-import ConfigAddCodeModal from "../formView/configAddCodeModal";
-import ChangeConfigSortsDrawer from "../formView/changeConfigSortsDrawer";
-import ConfigAddNewStage from "../formView/configAddNewStage";
-import ConfigCode from "../formView/configCode";
-import ConfigForm from "./configForm";
-import ConfigName from "./configName";
+import ConfigAddNewStageModal from "./configAddNewStageModal";
+import ConfigAddCodeModal from "./configAddCodeModal";
+import ChangeConfigSortsDrawer from "./changeConfigSortsDrawer";
+import ConfigAddNewStage from "./configAddNewStage";
+import ConfigCode from "./configCode";
+import ConfigForm from "../configCommon/configForm";
+import ConfigName from "../configCommon/configName";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 
 const formView = props =>{
 
-    const {form,del,configDataStore,matFlowStore,onFinish} = props
+    const {form,del,configDataStore,onFinish,matFlowId} = props
 
     const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
         isFormAlias,setIsFormAlias,setCodeType} = configDataStore
-    const {matFlowId} = matFlowStore
 
     const inputRef = useRef()
     const [newStageVisible, setNewStageVisible] = useState(false)
@@ -170,4 +169,4 @@ const formView = props =>{
     )
 }
 
-export default withRouter(inject("configDataStore","matFlowStore")(observer(formView)))
+export default withRouter(inject("configDataStore")(observer(formView)))

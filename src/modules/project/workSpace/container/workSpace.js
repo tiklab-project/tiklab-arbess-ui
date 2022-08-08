@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from "react";
-import "../components/workSpace.scss";
+import {getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
+import "../components/workSpace.scss";
 import WorkSpaceNod from "../components/workSpaceNod";
 import WorkSpaceRecord from "../components/workSpaceRecord";
 import WorkSpaceDrawer from "../components/workSpaceDrawer";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import {getUser} from "tiklab-core-ui";
 
 const WorkSpace = props =>{
 
@@ -43,7 +43,11 @@ const WorkSpace = props =>{
     return(
         <div className="workSpace">
             <div className="workSpace-top">
-                <BreadcrumbContent type={"project"} config={"config"}/>
+                <BreadcrumbContent
+                    config={"config"}
+                    firstItem={"流水线"}
+                    secondItem={"工作空间"}
+                />
             </div>
             <div className="workSpace-content">
                 <WorkSpaceNod

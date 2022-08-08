@@ -1,17 +1,20 @@
 import React,{useState,useEffect} from "react";
 import ReactDOM from "react-dom";
 import {HashRouter} from "react-router-dom";
-import "./index.scss";
-import "./assets/font_icon/iconfont";
-import "./common/language/i18n";
-import routers from "./routes";
-import resources from "./common/language/resources";
-import {store} from "./store";
+import enableAxiosCE from 'tiklab-enable-axios-ce'
 import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
 import {observer,Provider} from "mobx-react";
+import routers from "./routes";
+import resources from "./common/language/resources";
+import {store} from "./store";
 import {renderRoutes} from "react-router-config";
+import "./index.scss";
+import "./assets/font_icon/iconfont";
+import "./common/language/i18n";
+
+enableAxiosCE()
 
 const Index = observer(() => {
 
@@ -41,7 +44,7 @@ const Index = observer(() => {
         <PluginContainer.Provider initialState={initPluginData}>
             <Provider {...allStore}>
                 <HashRouter >
-                    { renderRoutes(initPluginData.routes) }
+                    {renderRoutes(initPluginData.routes)}
                 </HashRouter>
             </Provider>
         </PluginContainer.Provider>

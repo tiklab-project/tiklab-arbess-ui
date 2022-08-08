@@ -7,7 +7,7 @@ import Proof from "../../proof/container/proof";
 const SystemProof = props =>{
 
     const {proofStore,matFlowStore} = props
-    const {findMatFlowProof,proofList,fresh} = proofStore
+    const {findMatFlowProof,fresh} = proofStore
     const {findAllMatFlowStatus,matFlowList} = matFlowStore
     const userId = getUser().userId
 
@@ -24,12 +24,7 @@ const SystemProof = props =>{
         findAllMatFlowStatus(userId)
     },[])
 
-    return  <Proof
-                proofList={proofList}
-                firstItem={"凭证管理"}
-                type={"system"}
-                matFlowList={matFlowList}
-            />
+    return  <Proof matFlowList={matFlowList}/>
 }
 
 export default inject("proofStore","matFlowStore")(observer(SystemProof))

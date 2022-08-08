@@ -1,14 +1,13 @@
 import React,{Fragment,useState,useEffect} from "react";
 import {Form,message} from "antd";
 import {getUser} from "tiklab-core-ui";
-import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import moment from "../../../common/moment/moment";
-import FormView from "../common/component/configCommon/formView";
 import ConfigTop from "../common/component/configCommon/configTop";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
+import ConfigView from "../common/component/configCommon/configView";
 
 const ConfigDetails = props =>{
 
@@ -22,7 +21,7 @@ const ConfigDetails = props =>{
     const {setIsPrompt,setData,data,codeData,setCodeData,formInitialValues,setFormInitialValues,setLinuxShellBlock,
         setUnitShellBlock,setMavenShellBlock,setCodeType,setOrderShellBlock,setShellBlock,
         mavenShellBlock,linuxShellBlock,shellBlock,deployProofId,setDeployProofId,
-        gitProofId,setGitProofId, orderShellBlock,unitShellBlock} = configDataStore
+        gitProofId,setGitProofId,orderShellBlock,unitShellBlock} = configDataStore
 
     const [form] = Form.useForm()
     const pluginStore = useSelector(state =>state.pluginStore)
@@ -370,34 +369,16 @@ const ConfigDetails = props =>{
                     isBtn={isBtn}
                 />
             </div>
-            {
-                view === 1 ?
-                    <FormView
-                        del={del}
-                        form={form}
-                        onFinish={onFinish}
-                    />
-                    :
-                    <Fragment>
-                        {
-                            isBtn ?
-                                <RemoteUmdComponent
-                                    {...props}
-                                    point={"gui"}
-                                    pluginStore={pluginStore}
-                                    isModalType={true}
-                                    extraProps={{
-                                        matFlowStore,
-                                        configDataStore,
-                                        form,
-                                        onFinish,
-                                        del
-                                    }}
-                                />
-                                :null
-                        }
-                    </Fragment>
-            }
+            <ConfigView
+                del={del}
+                view={view}
+                isBtn={isBtn}
+                form={form}
+                onFinish={onFinish}
+                pluginStore={pluginStore}
+                matFlowStore={matFlowStore}
+                configDataStore={configDataStore}
+            />
         </Fragment>
     )
 }

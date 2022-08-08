@@ -27,13 +27,9 @@ const MatFlowAdd = props => {
     const [liStatus,setLiStatus] = useState(0)
     const userId = getUser().userId
 
-    //获取所有pipelinList，然后对matFlowName进行校验
-    useEffect(()=>{
-        findAllMatFlowStatus(userId)
-    },[])
-
     useEffect(()=>{
         inputRef.current.focus()
+        findAllMatFlowStatus(userId)
     },[])
 
     //点击类型选择

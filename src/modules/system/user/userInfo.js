@@ -7,7 +7,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 const UserInfo = props =>{
     return(
         <div className="userCenter-base">
-            <BreadcrumbContent firstItem={"用户管理"} secondItem={"基本信息"} type={"system"}/>
+            <BreadcrumbContent firstItem={"用户管理"} secondItem={"基本信息"}/>
             <div className="userCenter-base-content">
                 <Descriptions column={1} bordered>
                     <Descriptions.Item label="用户名">{getUser().name}</Descriptions.Item>

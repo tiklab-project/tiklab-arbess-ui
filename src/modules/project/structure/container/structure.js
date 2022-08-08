@@ -1,12 +1,12 @@
-import React,{useEffect} from "react";
-import "../components/structure.scss";
+import React,{useEffect,useState} from "react";
 import {getUser} from "tiklab-core-ui";
 import {Spin} from "antd";
 import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import StructureLeft from "../components/structureLeft";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import StructureRight from "../components/structureRight";
+import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import StructureEmpty from "../components/structureEmpty";
+import "../components/structure.scss";
 import {inject,observer} from "mobx-react";
 
 // 项目构建
@@ -14,12 +14,13 @@ const Structure = props => {
 
     const {structureStore,structureListStore,matFlowStore} = props
 
-    const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure, leftPageList,isData,
+    const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure,leftPageList,isData,
         findMatFlowUser,setIsData,execState} = structureStore
     const {state,setState,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
     const {matFlowId} = matFlowStore
-
     const userId = getUser().userId
+
+    const [runImState,setRunImState] = useState(false)
 
     useEffect(()=>{
         if(matFlowId){
@@ -166,8 +167,10 @@ const Structure = props => {
             userId:userId,
             matFlowId:matFlowId
         }
+        setRunImState(true)
+        setTimeout(()=>setFreshen(!freshen),1000)
         matFlowStartStructure(params).then(()=>{
-            setTimeout(()=>setFreshen(!freshen),500)
+            // setTimeout(()=>setFreshen(!freshen),500)
         }).catch(error=>{
             console.log(error)
         })
@@ -184,7 +187,7 @@ const Structure = props => {
                             status={status}
                         />
                         <div className="structure-content-right">
-                            <BreadcrumbContent type={"project"}/>
+                            <BreadcrumbContent firstItem={"流水线"} secondItem={"历史"}/>
                             {
                                 execState === ""  && leftPageList && leftPageList.length === 0 ?
                                     <StructureEmpty/>
@@ -200,7 +203,10 @@ const Structure = props => {
                         </div>
                     </div>
                     :
-                    <StructureEmpty runImmediately={runImmediately}/>
+                    <StructureEmpty
+                        runImmediately={runImmediately}
+                        runImState={runImState}
+                    />
             }
         </div>
     )

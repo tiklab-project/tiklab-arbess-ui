@@ -49,7 +49,7 @@ const ProjectSetReDel = props =>{
 
     return(
         <div className="matFlowSys-reDel">
-            <BreadcrumbContent type={"project"}/>
+            <BreadcrumbContent firstItem={"其他管理"}/>
             <div className="matFlowSys-reDel-content" style={{padding:"8px 8px 0"}}>
                 <Form onFinish={re} form={form} layout="inline" autoComplete="off">
                     <Form.Item

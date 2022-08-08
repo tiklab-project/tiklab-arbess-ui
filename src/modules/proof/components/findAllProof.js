@@ -1,7 +1,7 @@
 import React from "react";
+import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {Form,Select} from "antd";
-import {getUser} from "tiklab-core-ui";
 
 const {Option} = Select
 

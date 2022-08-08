@@ -4,7 +4,9 @@ import {Prompt} from "react-router-dom";
 
 // 离开编辑页面全局提示
 const PromptContent = props =>{
+
     const {isPrompt,confirmLeave} = props
+
     return <Prompt
         when={isPrompt}
         message={location =>{

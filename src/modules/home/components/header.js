@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Row,Col,Avatar,Dropdown,Input,Space,Menu} from "antd";
+import {Row,Col,Avatar,Dropdown,Space,Menu} from "antd";
 import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {GlobalOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
@@ -8,11 +8,9 @@ import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
 import vipTwo from "../../../assets/images/vip-two.png";
 
-const  {Search} = Input
-
 const Head = props =>{
 
-    const {routers} = props;
+    const {routers,AppConfigComponent} = props
 
     let path = props.location.pathname
     const isEE = getVersionInfo().release
@@ -23,7 +21,7 @@ const Head = props =>{
         if(path.indexOf("/index/system") === 0){
             path="/index/system"
         }
-        if( path.indexOf("/index/task") === 0 || path === "/index/new" || path.indexOf("/index/config") === 0 || path.indexOf("/index/searchresult")=== 0 ) {
+        if( path.indexOf("/index/task") === 0) {
             path= "/index/matFlow"
         }
         setCurrentLink(path)
@@ -78,6 +76,7 @@ const Head = props =>{
         <Row className="frame-header">
             <Col span={12}>
                 <div className="frame-header-right">
+                    {AppConfigComponent}
                     <div className="frame-header-logo">
                         <img src={logo} alt="logo" />
                     </div>

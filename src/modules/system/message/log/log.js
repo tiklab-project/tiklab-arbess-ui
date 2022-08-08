@@ -22,7 +22,7 @@ const Log = props =>{
     return(
         <div className="log">
             <div className="log-head">
-                <BreadcrumbContent firstItem={"系统日志"} type={"system"}/>
+                <BreadcrumbContent firstItem={"系统日志"}/>
             </div>
             <div className="log-content">
                 { renderLog(logList) }

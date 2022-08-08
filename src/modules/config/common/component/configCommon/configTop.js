@@ -9,7 +9,7 @@ const ConfigTop = props =>{
 
     return(
         <div className="config-top-content">
-            <BreadcrumbContent config={"config"} type={"project"}/>
+            <BreadcrumbContent config={"config"} firstItem={"流水线"} secondItem={"配置"}/>
             <ConfigChangeView
                 userId={userId}
                 view={view}

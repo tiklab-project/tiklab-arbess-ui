@@ -7,8 +7,8 @@ import Proof from "../../proof/container/proof";
 const ProjectSetProof = props =>{
 
     const {proofStore,matFlowStore} = props
-    const {findMatFlowProof,proofList,fresh} = proofStore
-    const {matFlowList,matFlowId} = matFlowStore
+    const {findMatFlowProof,fresh} = proofStore
+    const {matFlowId} = matFlowStore
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -20,12 +20,8 @@ const ProjectSetProof = props =>{
         findMatFlowProof(params)
     },[fresh,matFlowId])
 
-    return  <Proof
-                type={"project"}
-                proofList={proofList}
-                matFlowList={matFlowList}
-                matFlowId={matFlowId}
-            />
+    return  <Proof matFlowId={matFlowId}/>
+
 }
 
 export default inject("proofStore","matFlowStore")(observer(ProjectSetProof))

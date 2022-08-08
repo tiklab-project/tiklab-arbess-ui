@@ -51,7 +51,7 @@ const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/proje
 
 const routers=[
     {
-        path:"/login",
+        path:"/logout",
         component:Login,
     },
     {

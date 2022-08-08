@@ -1,15 +1,14 @@
 import React,{Fragment,useState,useEffect} from "react";
 import {withRouter} from "react-router";
-import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
+import {getUser} from "tiklab-core-ui";
+import {useSelector} from "tiklab-plugin-ui/es/_utils";
+import moment from "../../../common/moment/moment";
 import {inject,observer} from "mobx-react";
 import ConfigTop from "../common/component/configCommon/configTop";
 import PromptContent from "../../../common/prompt/prompt";
-import FormView from "../common/component/configCommon/formView";
 import {Form,message} from "antd";
-import {getUser} from "tiklab-core-ui";
-import {RemoteUmdComponent} from "tiklab-plugin-ui";
-import {useSelector} from "tiklab-plugin-ui/es/_utils";
-import moment from "../../../common/moment/moment";
+import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
+import ConfigView from "../common/component/configCommon/configView";
 
 const Config = props =>{
 
@@ -37,6 +36,7 @@ const Config = props =>{
 
     useEffect(()=>{
         setMatFlowName(jumpOrNot)
+        // 设置流水线id
         findAllMatFlowStatus(userId).then(res=>{
             const data = res.data
             if(res.code===0 && data){
@@ -47,9 +47,7 @@ const Config = props =>{
                 })
             }
         })
-    },[])
-
-    useEffect(()=>{
+        // 查看流水线配置
         findAllConfigure("").then(()=>{
             setCodeData("")
             setData([])
@@ -62,9 +60,7 @@ const Config = props =>{
             setDeployProofId("")
             setGitProofId("")
         })
-    },[])
-
-    useEffect(()=>{
+        // 是否存在插件
         pluginStore.map(item=>{
             if(item.id === "gui"){
                 setIsBtn(true)
@@ -265,7 +261,6 @@ const Config = props =>{
                 proof:{proofId:deployProofId}
             }
         }
-
         updateConfigure(configureList).then(res=>{
             setIsPrompt(false)
             if(runOrSave){
@@ -293,34 +288,16 @@ const Config = props =>{
                     setRunOrSave={setRunOrSave}
                 />
             </div>
-            {
-                view === 1 ?
-                    <FormView
-                        del={del}
-                        form={form}
-                        onFinish={onFinish}
-                    />
-                    :
-                    <Fragment>
-                        {
-                            isBtn ?
-                                <RemoteUmdComponent
-                                    {...props}
-                                    point={"gui"}
-                                    pluginStore={pluginStore}
-                                    isModalType={true}
-                                    extraProps={{
-                                        matFlowStore,
-                                        configDataStore,
-                                        form,
-                                        onFinish,
-                                        del
-                                    }}
-                                />
-                                :null
-                        }
-                    </Fragment>
-            }
+            <ConfigView
+                del={del}
+                view={view}
+                isBtn={isBtn}
+                form={form}
+                onFinish={onFinish}
+                matFlowStore={matFlowStore}
+                pluginStore={pluginStore}
+                configDataStore={configDataStore}
+            />
             <PromptContent
                 isPrompt={isPrompt}
                 confirmLeave={confirmLeave}
