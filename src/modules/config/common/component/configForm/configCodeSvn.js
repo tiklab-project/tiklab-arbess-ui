@@ -17,7 +17,7 @@ const ConfigCodeSvn = props =>{
                     }
                 ]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
             <ConfigProof
                 allProofType={5}

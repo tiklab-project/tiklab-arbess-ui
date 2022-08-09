@@ -51,7 +51,7 @@ const ProjectAsideOpt = props =>{
     )
 
     return(
-        <Dropdown overlay={menu} trigger={["click"]}>
+        <Dropdown overlay={menu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
             <li className="aside_content aside_dropdown"
                 style={{padding:10}}
                 onClick={(e) => e.preventDefault()}

@@ -42,16 +42,17 @@ const DynamicDetails = props =>{
                 dynamicTitle={"全部动态"}
                 dynamicClick={"返回"}
             />
-            <ConfigProvider locale={zhCN}>
-                <Pagination
-                    {...page}
-                    hideOnSinglePage={true}
-                    showQuickJumper={true}
-                    showSizeChanger={false}
-                    onChange={onChangePage}
-                    className="dynamic-bottom-pagination"
-                />
-            </ConfigProvider>
+            <div className="dynamic-bottom-pagination">
+                <ConfigProvider locale={zhCN}>
+                    <Pagination
+                        {...page}
+                        hideOnSinglePage={true}
+                        showQuickJumper={true}
+                        showSizeChanger={false}
+                        onChange={onChangePage}
+                    />
+                </ConfigProvider>
+            </div>
         </>
     )
 }

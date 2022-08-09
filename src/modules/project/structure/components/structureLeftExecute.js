@@ -22,7 +22,7 @@ const StructureLeftExecute = props => {
             return null
         }else {
             return  <div onClick={()=>setIndex(0)}
-                         className={`history-content-list
+                         className={`history-content-list-ul
                          ${index===0 ? "history-content-list_active": null}`}
                     >
                         <div className="list-title"> 运行中 </div>

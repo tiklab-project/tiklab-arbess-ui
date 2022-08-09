@@ -24,14 +24,10 @@ const SearchResult = props => {
     return(
         <div className="matFlow-search">
             <div>
-                <h1 >查找的流水线</h1>
+                <h1>查找的流水线</h1>
                 <ul>
                     {
-                        searchMatFlowList.length === 0 ?
-                            <li>
-                                没有查询到
-                            </li>
-                            :
+                        searchMatFlowList && searchMatFlowList.length > 0 ?
                             searchMatFlowList  && searchMatFlowList.map((item,index)=>{
                                 return  <li key={item.matflowId} >
                                             <span> {index+1}、</span>
@@ -40,6 +36,8 @@ const SearchResult = props => {
                                             </span>
                                         </li>
                             })
+                            :
+                            <li>没有查询到</li>
                     }
                </ul>
            </div>

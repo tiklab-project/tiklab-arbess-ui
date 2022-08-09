@@ -54,9 +54,6 @@ const HomePage = props =>{
         const burnDown = echarts.init(document.getElementById("burn-down"))
         let option;
         option = {
-            title: {
-                text: "近期构建状态",
-            },
             color: [ "#1890ff", "#e5323e","#222222"],
             xAxis: {
                 data: timerXaixs,

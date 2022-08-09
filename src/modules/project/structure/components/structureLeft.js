@@ -3,7 +3,8 @@ import StructureLeftExecute from "./structureLeftExecute";
 import StructureLeftDropdown from "./structureLeftDropdown";
 import StructureEmpty from "./structureEmpty";
 import {inject,observer} from "mobx-react";
-import {List} from "antd";
+import {ConfigProvider,Pagination} from "antd";
+import zhCN from "antd/es/locale/zh_CN";
 
 const StructureLeft = props =>{
 
@@ -76,51 +77,56 @@ const StructureLeft = props =>{
             />
             <div className="structure-content-left-history">
                 <div className="history-content">
-                    <StructureLeftExecute
-                        execState={execState}
-                        status={status}
-                        index={index}
-                        setIndex={setIndex}
-                    />
                     {
-                        execState === ""  && leftPageList && leftPageList.length === 0 ?
-                            <StructureEmpty/>
-                            :
-                            <List
-                                itemLayout="vertical"
-                                size="large"
-                                pagination={{
-                                    ...page,
-                                    onChange:(page)=>{onChangePage(page)},
-                                    hideOnSinglePage:true,
-                                    showSizeChanger:false,
-                                    current:pageCurrent,
-                                }}
-                                dataSource={leftPageList}
-                                renderItem={(item,i) => (
-                                    <List.Item key={i}>
-                                        <div onClick={()=>showHistory(item,i)}
-                                             className={`history-content-list
-                                             ${index===i+1 ? "history-content-list_active":null }`}
-                                        >
-                                            <div className="list-title"> # {item.findNumber}</div>
-                                            <div className="list-group">
-                                                <div className="list-group-item">
-                                                    <div className="list-state">
-                                                        状态 : {sta(item)}
+                        execState || leftPageList && leftPageList.length > 0 ?
+                            <>
+                                <div className="history-content-list">
+                                    <StructureLeftExecute
+                                        execState={execState}
+                                        status={status}
+                                        index={index}
+                                        setIndex={setIndex}
+                                    />
+                                    {
+                                        leftPageList && leftPageList.map((item,i)=>{
+                                            return <div onClick={()=>showHistory(item,i)}
+                                                        className={`history-content-list-ul
+                                                        ${index===i+1 ? "history-content-list_active":""}`}
+                                                        key={i}
+                                                    >
+                                                <div className="list-title"> # {item.findNumber}</div>
+                                                <div className="list-group">
+                                                    <div className="list-group-item">
+                                                        <div className="list-state">
+                                                            状态 : {sta(item)}
+                                                        </div>
+                                                        <div className="list-one">
+                                                            执行人 : {item.user && item.user.name}
+                                                        </div>
                                                     </div>
-                                                    <div className="list-one">
-                                                        执行人 : {item.user && item.user.name}
+                                                    <div className="list-time">
+                                                        执行时间 : {item.createTime}
                                                     </div>
-                                                </div>
-                                                <div className="list-time">
-                                                    执行时间 : {item.createTime}
                                                 </div>
                                             </div>
-                                        </div>
-                                    </List.Item>
-                                )}
-                            />
+                                        })
+                                    }
+                                </div>
+                                <div className="history-content-page">
+                                    <ConfigProvider locale={zhCN}>
+                                        <Pagination
+                                            {...page}
+                                            simple
+                                            current={pageCurrent}
+                                            showQuickJumper={true}
+                                            showSizeChanger={false}
+                                            onChange={onChangePage}
+                                        />
+                                    </ConfigProvider>
+                                </div>
+                            </>
+                            :
+                            <StructureEmpty/>
                     }
                 </div>
             </div>

@@ -1,5 +1,4 @@
-import React from "react";
-import {Breadcrumb} from "antd";
+import React,{Fragment} from "react";
 
 // 节点
 const WorkSpaceNod = props =>{
@@ -55,13 +54,14 @@ const WorkSpaceNod = props =>{
     // 渲染目录
     const renderCatalogue = catalogue => {
         return catalogue && catalogue.map((group,index)=>{
-            return   <Breadcrumb.Item
-                         key={index}
-                         className="catalogue_item_breadcrumb"
-                         onClick={()=>changeCatalogue(group)}
-                     >
-                        {group.treeName}
-                     </Breadcrumb.Item>
+            return   <Fragment  key={index}>
+                        <span> > </span>
+                        <span className="catalogue_item_breadcrumb"
+                              onClick={()=>changeCatalogue(group)}
+                        >
+                            {group.treeName}
+                        </span>
+                     </Fragment>
         })
     }
 
@@ -83,15 +83,12 @@ const WorkSpaceNod = props =>{
         <div className="workSpace-content-nod">
             <h1>节点master上的工作空间</h1>
             <div className="workSpace-content-nod-catalogue">
-                <Breadcrumb>
-                    <Breadcrumb.Item
-                        className = "catalogue_item_breadcrumb"
-                        onClick={()=>setBreadcrumb()}
-                    >
+                <span className = "catalogue_item_breadcrumb"
+                      onClick={()=>setBreadcrumb()}
+                >
                         <span>{renderType(2)}{matFlowName}</span>
-                    </Breadcrumb.Item>
-                    {renderCatalogue(catalogue)}
-                </Breadcrumb>
+                    </span>
+                {renderCatalogue(catalogue)}
             </div>
             <div className="workSpace-content-nod-file">
                 {renderFileList(fileList)}

@@ -1,5 +1,5 @@
 import React from "react";
-import {Button,Card,Popconfirm} from "antd";
+import {Button,Popconfirm} from "antd";
 import ConfigName from "../../../config/common/component/configCommon/configName";
 
 const StructureRightItem = props =>{
@@ -40,7 +40,7 @@ const StructureRightItem = props =>{
     const rightDetails = rightFlowData =>{
         return  rightFlowData && rightFlowData.map((item,index)=>{
             return(
-                <Card  className={`mid_group_center-cart ${style(item.runState)}`}  key={index}>
+                <div className={`mid_group_center-cart ${style(item.runState)}`}  key={index}>
                     <div className="cart-top">
                         <span className="cart-top-taskAlias">{item.taskAlias}</span>
                         <span> -- </span>
@@ -59,7 +59,7 @@ const StructureRightItem = props =>{
                             日志
                         </span>
                     </div>
-                </Card>
+                </div>
             )
         })
     }

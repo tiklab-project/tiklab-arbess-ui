@@ -18,7 +18,7 @@ const MatFlowConfig=AsyncComponent(()=>import("./modules/config/config/config"))
 const SearchResult=AsyncComponent(()=>import("./modules/matFlow/matFlowSearch/searchResult"))
 
 /* 流水线 -- 收藏 */
-const MatFlowCollect=AsyncComponent(()=>import("./modules/matFlow/matFlowCollect/container/matFlowCollect"))
+const MatFlowCollect=AsyncComponent(()=>import("./modules/matFlow/matFlow/components/matFlowCollect"))
 
 const Project=AsyncComponent(()=>import("./modules/project/common/container/project"))
 

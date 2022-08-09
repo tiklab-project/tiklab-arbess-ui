@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,Fragment} from "react";
 import "../components/proof.scss";
 import {Popconfirm,Table} from "antd";
 import AddProofButton from "../components/addProofButton";
@@ -108,7 +108,15 @@ const Proof = props =>{
                     rowKey={record=>record.proofId}
                     columns={columns}
                     dataSource={proofList}
-                    pagination={{pageSize:12,hideOnSinglePage:true}}
+                    pagination={{hideOnSinglePage:true}}
+                    locale={{emptyText:
+                            <Fragment>
+                                <svg className="icon" aria-hidden="true" >
+                                    <use xlinkHref="#icon-meiyouxiangguan"/>
+                                </svg>
+                                <div>没有数据</div>
+                            </Fragment>
+                    }}
                 />
             </div>
             <UpdateProof

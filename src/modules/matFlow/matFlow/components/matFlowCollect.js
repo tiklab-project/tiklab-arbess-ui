@@ -1,13 +1,13 @@
 import React,{useEffect,useState} from "react";
 import "./matFlowCollect.scss";
-import MatFlowTable from "../../matFlowTable/matFlowTable";
+import MatFlowTable from "./matFlowTable";
 import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 
 const MatFlowCollect = props =>{
 
-    const {matFlowCollectStore} = props
-    const {findAllFollow,followList} = matFlowCollectStore
+    const {matFlowStore} = props
+    const {findAllFollow,followList} = matFlowStore
 
     const [fresh,setFresh] = useState(false)
     const userId = getUser().userId
@@ -28,4 +28,4 @@ const MatFlowCollect = props =>{
     )
 }
 
-export default inject("matFlowCollectStore")(observer(MatFlowCollect))
+export default inject("matFlowStore")(observer(MatFlowCollect))

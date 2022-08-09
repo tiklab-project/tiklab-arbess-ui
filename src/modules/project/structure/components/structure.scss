@@ -35,49 +35,46 @@
                 padding-left: 2px;
                 overflow: auto;
                 .history-content{
-                    .ant-list-lg ,.ant-list-item{
-                        padding:0;
-                    }
                     &-list{
-                        display: flex;
-                        flex-direction: row;
-                        width: 100%;
-                        padding: 10px 10px 10px 20px;
-                        cursor: pointer;
-                        .list{
-                            &-title{
-                                color: #1890ff;
-                                width: 60px;
-                                font-weight: 600;
-                                font-size: 17px;
+                        height: calc(100% - 60px);
+                        &-ul{
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                            padding: 10px 10px 10px 20px;
+                            cursor: pointer;
+                            &:hover{
+                                background: #f0f0f0;
                             }
-                            &-group{
-                                flex-grow: 1;
-                                &-item{
-                                    display: flex;
-                                    flex-direction: row;
-                                    justify-content: space-between;
-                                    margin-bottom: 10px;
+                            .list{
+                                &-title{
+                                    color: #1890ff;
+                                    width: 60px;
+                                    font-weight: 600;
+                                    font-size: 17px;
                                 }
-                            }
-                            &-time{
-                                //margin-left: -3px;
+                                &-group{
+                                    flex-grow: 1;
+                                    &-item{
+                                        display: flex;
+                                        flex-direction: row;
+                                        justify-content: space-between;
+                                        margin-bottom: 10px;
+                                    }
+                                }
                             }
                         }
                         &_active{
                             background: #e3e8f0;
-                            &:before{
-                                width: 3px;
-                                height: 75px;
-                                transition: all .4s cubic-bezier(.23,1,.32,1);
-                                content: " ";
-                                position: absolute;
-                                z-index: 2;
-                                left: 1px;
-                                margin-top: -10px;
-                                background: #1890ff;
-                            }
+                            border-left: 3px solid #1890ff
                         }
+                    }
+                    &-page{
+                        width: 100%;
+                        text-align: center;
+                        padding-top: 10px;
+                        height: 45px;
+                        border-top: 1px solid #f0f0f0;
                     }
                 }
             }
@@ -97,16 +94,6 @@
                 .mid_group{
                     display: flex;
                     flex-direction: column;
-                    .ant-card-body {
-                        padding: 15px;
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                    }
-                     .ant-card-bordered{
-                         border: 1px solid #cccccc;
-                     }
                     .item{
                         &-0{
                             border-top: 3px solid #444444!important;
@@ -149,10 +136,10 @@
                         padding: 20px 0;
                         &-cart{
                             margin-right: 20px;
-                            width:260px;
-                            height: 150px;
-                            display: flex;
-                            flex-direction: row;
+                            padding: 10px;
+                            width: 260px;
+                            height: 136px;
+                            border: 1px solid #f0f0f0;
                             .cart{
                                 &-center{
                                     &-item{
@@ -193,10 +180,9 @@
                 background: #2F2F2F;
                 color: #fff;
                 padding: 10px 10px 20px;
-                h3{
-                    color: #ffffff;
-                    font-size: 20px;
-                }
+            }
+            &-runLog{
+                position: relative;
             }
         }
         &-empty{

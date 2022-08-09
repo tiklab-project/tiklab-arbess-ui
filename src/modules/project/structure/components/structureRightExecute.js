@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Button,Card,Spin} from "antd";
+import {Button} from "antd";
 import {getUser} from "tiklab-core-ui";
 import ConfigName from "../../../config/common/component/configCommon/configName";
 
@@ -80,7 +80,7 @@ const StructureRightExecute = props => {
                         <div className="structure-content-bottom-outLog" id="outLog">
                             {execState.runLog}
                         </div>
-                        <div><Spin /></div>
+                        <div className="structure-content-bottom-runLog">{status(0)}</div>
                     </div>
         }
     }
@@ -88,7 +88,7 @@ const StructureRightExecute = props => {
     const executeDetails = rightExecuteData =>{
         return rightExecuteData && rightExecuteData.map((item,index)=>{
             return(
-                <Card className={`mid_group_center-cart ${style(index+1)}`} key={index}>
+                <div className={`mid_group_center-cart ${style(index+1)}`} key={index}>
                     <div className="cart-top">
                         <span className="cart-top-taskAlias">{item.taskAlias}</span>
                         <span> -- </span>
@@ -107,7 +107,7 @@ const StructureRightExecute = props => {
                             日志
                         </span>
                     </div>
-                </Card>
+                </div>
             )
         })
     }

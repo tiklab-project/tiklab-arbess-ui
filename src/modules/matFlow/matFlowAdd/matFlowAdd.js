@@ -1,9 +1,9 @@
 import React,{useState,useEffect,useRef} from "react";
-import "./matFlowAdd.scss";
 import moment from "../../../common/moment/moment";
 import {getUser} from "tiklab-core-ui";
 import {Form,Input,Button,message} from "antd";
 import {observer,inject} from "mobx-react";
+import "./matFlowAdd.scss";
 
 const lis= [
     {

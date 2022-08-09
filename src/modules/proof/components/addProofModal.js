@@ -83,7 +83,7 @@ const AddProofModal = props =>{
                         label="项目作用域"
                         name="proofList"
                         className="proofModal-showMatFlow"
-                        rules={[{required:true, message:"请选择项目作用域"}]}
+                        rules={[{required:true,message:"请选择项目作用域"}]}
                     >
                         <Checkbox.Group>
                         {
@@ -118,7 +118,7 @@ const AddProofModal = props =>{
                     <Input placeholder="名称"/>
                 </Form.Item>
                 <Form.Item label="凭证类型" name="proofType" >
-                    <Select placeholder="选择类型">
+                    <Select placeholder="选择类型" >
                         <Option value="SSH">SSH</Option>
                         <Option value="password">password</Option>
                     </Select>

@@ -4,15 +4,13 @@ import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from 
 import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
-import MatFlowRun from "./matFlowRun";
-import "./matFlowTable.scss";
+import Running from "./running";
 
 const MatFlowTable = props =>{
 
-    const {structureStore,matFlowCollectStore,list,fresh,setFresh}=props
+    const {structureStore,list,fresh,setFresh}=props
 
-    const {matFlowStartStructure,killInstance}=structureStore
-    const {updateFollow} = matFlowCollectStore
+    const {matFlowStartStructure,killInstance,updateFollow}=structureStore
 
     const userId = getUser().userId
 
@@ -121,6 +119,7 @@ const MatFlowTable = props =>{
                 return(
                     <span onClick={()=>goMatFlowTask(text,record)}
                           className="all-columns all-icon"
+                          style={{color:"#1890ff",cursor:"pointer"}}
                     >
                         {text}
                     </span>
@@ -143,14 +142,14 @@ const MatFlowTable = props =>{
             key:"action",
             render:(text ,record,index)=>{
                 return(
-                    <span className=" all-icon" onClick={() =>work(record,index)}>
+                    <span style={{cursor:"pointer"}} onClick={() =>work(record,index)}>
                         {
                             record.matFlowState === 0 ?
                                 <svg className="icon" aria-hidden="true" >
                                     <use xlinkHref="#icon-yunhang"  />
                                 </svg>
                                 :
-                                <MatFlowRun/>
+                                <Running isExist={true}/>
                         }
                     </span>
                 )
@@ -175,4 +174,4 @@ const MatFlowTable = props =>{
             />
 }
 
-export default withRouter(inject("structureStore","matFlowCollectStore")(observer(MatFlowTable)))
+export default withRouter(inject("structureStore")(observer(MatFlowTable)))

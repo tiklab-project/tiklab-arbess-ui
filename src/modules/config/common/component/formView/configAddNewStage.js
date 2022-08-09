@@ -1,5 +1,5 @@
 import React,{Fragment}from "react";
-import {Button,Form} from "antd";
+import {Button} from "antd";
 
 const ConfigAddNewStage = props =>{
 
@@ -15,9 +15,9 @@ const ConfigAddNewStage = props =>{
             >
                 新任务
             </div>
-            <Form.Item style={{marginTop:20}}>
-                <Button htmlType="submit" type="primary">保存</Button>
-            </Form.Item>
+            <div style={{marginTop:20}}>
+                <Button form="form" htmlType="submit">保存</Button>
+            </div>
         </Fragment>
     )
 }

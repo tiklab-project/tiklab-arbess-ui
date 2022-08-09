@@ -1,8 +1,8 @@
 import React from "react";
-import "./matFlowRun.scss";
+import "./running.scss";
 
-const MatFlowRun = () =>{
+const Running = props =>{
     return <span className="loading"> || </span>
 }
 
-export default MatFlowRun
+export default Running

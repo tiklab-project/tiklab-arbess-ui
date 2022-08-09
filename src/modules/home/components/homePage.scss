@@ -86,14 +86,18 @@
                 }
             }
         }
-        .statusChart-box{
-            display: flex;
+        .statusChart{
             border-radius: 8px;
             padding: 20px;
             border: 1px solid #cccccc;
             box-shadow: 0 3px 8px 0 #cccccc;
             height: 500px;
-            .statusChart{
+            &-title{
+                padding-bottom: 15px;
+                font-size: 18px;
+                font-weight: 600;
+            }
+            &-box{
                 width: calc(100% - 20px);
                 height: calc(100% - 20px);
             }

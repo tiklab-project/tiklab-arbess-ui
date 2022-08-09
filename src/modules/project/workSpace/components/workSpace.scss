@@ -1,9 +1,5 @@
 .workSpace{
     padding: 0 10px;
-    ul li{
-        list-style: none;
-        margin: 10px 0;
-    }
     &-top{
         position: fixed;
         z-index: 88;
@@ -60,10 +56,9 @@
                         color: #1890ff;
                     }
                     &_commit{
-                        display: flex;
-                        flex-direction: row;
-                        &_btn{
-                            margin-top: -4px;
+                        .btn{
+                            color: #1890ff;
+                            cursor: pointer;
                         }
                     }
                 }

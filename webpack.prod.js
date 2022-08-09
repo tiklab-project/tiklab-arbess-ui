@@ -19,6 +19,7 @@ module.exports = merge(baseWebpackConfig, {
     entry: [
         path.resolve(__dirname, "./src/index.js")
     ],
+    devtool: 'inline-source-map',
     plugins: [
         new optimizeCss({
             assetNameRegExp: /\.css$/g,
@@ -45,6 +46,13 @@ module.exports = merge(baseWebpackConfig, {
             }
         }),
         new webpack.DefinePlugin({ENV:JSON.stringify(customEnv), ...webpackGlobal}),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].[contenthash:8].css",
+            ignoreOrder: true
+        }),
+        new CssMinimizerPlugin(),
+        new ProgressBarPlugin(),
+        new BundleAnalyzerPlugin(),
         new CompressionPlugin({
             filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
             algorithm: "gzip", // 算法
@@ -52,13 +60,10 @@ module.exports = merge(baseWebpackConfig, {
             threshold: 10240, // 只处理比这个值大的资源。按字节计算
             minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
         }),
-        new MiniCssExtractPlugin({
-            filename: "css/[name].[contenthash:8].css",
-            ignoreOrder: true
-        }),
-        new CssMinimizerPlugin(),
-        new ProgressBarPlugin(),
-        new BundleAnalyzerPlugin()
+        new webpack.ContextReplacementPlugin(
+            /moment[/\\]locale$/,
+            /zh-cn|es|zh-tw|ja/,
+        ),
     ],
     optimization: {
         minimize: true,
@@ -93,13 +98,6 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 50,
                     reuseExistingChunk: true
                 },
-                tiklabCoreUI: {
-                    name: "chunk-tiklab-core-ui",
-                    chunks: "all",
-                    test: /[\\/]node_modules[\\/]tiklab-core-ui[\\/]/,
-                    priority: 50,
-                    reuseExistingChunk: true
-                },
                 tiklabEamUI: {
                     name: "chunk-tiklab-eam-ui",
                     chunks: "all",
@@ -114,20 +112,6 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 70,
                     reuseExistingChunk: true
                 },
-                mobx: {
-                    name: "chunk-mobx",
-                    chunks: "all",
-                    test: /[\\/]node_modules[\\/]mobx[\\/]/,
-                    priority: 80,
-                    reuseExistingChunk: true
-                },
-                mobxReact: {
-                    name: "chunk-mobx-react",
-                    chunks: "all",
-                    test: /[\\/]node_modules[\\/]mobx-react[\\/]/,
-                    priority: 80,
-                    reuseExistingChunk: true
-                },
                 echarts: {
                     name: "chunk-echarts",
                     chunks: "all",
@@ -139,13 +123,6 @@ module.exports = merge(baseWebpackConfig, {
                     name: "chunk-codemirror",
                     chunks: "all",
                     test: /[\\/]node_modules[\\/]codemirror[\\/]/,
-                    priority: 50,
-                    reuseExistingChunk: true
-                },
-                reactCodemirror2: {
-                    name: "chunk-react-codemirror2",
-                    chunks: "all",
-                    test: /[\\/]node_modules[\\/]react-codemirror2[\\/]/,
                     priority: 50,
                     reuseExistingChunk: true
                 },

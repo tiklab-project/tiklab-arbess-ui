@@ -1,13 +1,31 @@
 import React,{Fragment} from "react";
-import {Form,Select} from "antd";
-import ConfigDeployShell from "./configDeployShell";
-import ConfigDeployLinux from "./configDeployLinux";
+import {Form,Input,Select} from "antd";
 import ConfigDeploy from "./configDeploy";
-import ConfigDeployDocker from "./configDeployDocker";
+import Mirror from "./mirror";
+import {inject,observer} from "mobx-react";
 
 const ConfigDeployType = props =>{
 
     const {type} = props
+
+    const {configDataStore} = props
+    const {linuxShellBlock,setLinuxShellBlock,shellBlock,setShellBlock,setIsPrompt} = configDataStore
+
+
+
+    const validate = (rule,value) =>{
+        if (!value) {
+            return Promise.resolve()
+        } else if (value< 3000) {
+            return Promise.reject("最小3000")
+        } else if (value > 30000) {
+            return Promise.reject("最大30000")
+        } else if (!/^\d+$|^\d+[.]?\d+$/.test(value)) {
+            return Promise.reject("只能输入数字")
+        } else {
+            return Promise.resolve() //验证通过
+        }
+    }
 
     return(
         <Fragment>
@@ -22,12 +40,64 @@ const ConfigDeployType = props =>{
                     getFieldValue("deployType") === 0 ? (
                         <Fragment>
                             <ConfigDeploy/>
-                            {type === 31 ? <ConfigDeployLinux/> : <ConfigDeployDocker/>}
-                        </Fragment>) : <ConfigDeployShell/>
+                            {type === 31 ?
+                                <>
+                                    <Form.Item
+                                        className="noRequired"
+                                        name="startAddress"
+                                        label="启动文件地址">
+                                        <Input addonBefore={"/"} placeholder=" / 启动文件地址"/>
+                                    </Form.Item>
+                                    <Form.Item name="startShell" label="启动命令" className="noRequired">
+                                        <Mirror
+                                            shellBlock={linuxShellBlock}
+                                            setShellBlock={setLinuxShellBlock}
+                                            setIsPrompt={setIsPrompt}
+                                        />
+                                    </Form.Item>
+                                </>
+                                :
+                                <>
+                                    <Form.Item
+                                        className="noRequired"
+                                        name="startAddress"
+                                        label="dockerfile文件地址">
+                                        <Input addonBefore={"/"} placeholder=" / 代表部署位置"/>
+                                    </Form.Item>
+                                    <Form.Item
+                                        name="startPort"
+                                        label="启动端口"
+                                        rules={[
+                                            {required:true, message:"请输入启动端口"},
+                                            {validator: validate}
+                                        ]}
+                                    >
+                                        <Input/>
+                                    </Form.Item>
+                                    <Form.Item
+                                        name="mappingPort"
+                                        label="映射端口"
+                                        rules={[
+                                            {required:true, message:"请输入映射端口"},
+                                            {validator: validate}
+                                        ]}
+                                    >
+                                        <Input/>
+                                    </Form.Item>
+                                </>
+                            }
+                        </Fragment>) :
+                        <Form.Item name="startShell" label="Shell命令" className="noRequired">
+                            <Mirror
+                                shellBlock={shellBlock}
+                                setShellBlock={setShellBlock}
+                                setIsPrompt={setIsPrompt}
+                            />
+                        </Form.Item>
                 }
             </Form.Item>
         </Fragment>
     )
 }
 
-export default ConfigDeployType
+export default inject("configDataStore")(observer(ConfigDeployType))
