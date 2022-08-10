@@ -1,18 +1,15 @@
 import React,{Fragment} from "react";
 import {message,Table,Tooltip} from "antd";
 import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
-import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 import Running from "./running";
 
 const MatFlowTable = props =>{
 
-    const {structureStore,list,fresh,setFresh}=props
+    const {structureStore,list,fresh,setFresh,updateFollow,userId}=props
 
-    const {matFlowStartStructure,killInstance,updateFollow}=structureStore
-
-    const userId = getUser().userId
+    const {matFlowStartStructure,killInstance}=structureStore
 
     //收藏
     const collectAction = record => {
@@ -69,7 +66,7 @@ const MatFlowTable = props =>{
             key:"matFlowCollect",
             render:(text,record) =>{
                 return(
-                    <span className="all-icon" onClick={()=>collectAction(record)}>
+                    <span style={{cursor:"pointer"}} onClick={()=>collectAction(record)}>
                         {
                             record.matFlowCollect === 0 ?
                                 <svg className="icon" aria-hidden="true" >
@@ -118,7 +115,6 @@ const MatFlowTable = props =>{
             render:(text,record)=>{
                 return(
                     <span onClick={()=>goMatFlowTask(text,record)}
-                          className="all-columns all-icon"
                           style={{color:"#1890ff",cursor:"pointer"}}
                     >
                         {text}
@@ -140,9 +136,9 @@ const MatFlowTable = props =>{
             title: "操作",
             dataIndex: "action",
             key:"action",
-            render:(text ,record,index)=>{
+            render:(text,record)=>{
                 return(
-                    <span style={{cursor:"pointer"}} onClick={() =>work(record,index)}>
+                    <span style={{cursor:"pointer"}} onClick={() =>work(record)}>
                         {
                             record.matFlowState === 0 ?
                                 <svg className="icon" aria-hidden="true" >

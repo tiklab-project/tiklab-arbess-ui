@@ -4,7 +4,7 @@ import {Descriptions} from "antd";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 
 // 系统信息
-const Info = props =>{
+const Message = props =>{
 
     const {messageStore} = props
     const {getSystemMessage,infoList} = messageStore
@@ -30,4 +30,4 @@ const Info = props =>{
     )
 }
 
-export default inject("messageStore")(observer(Info))
+export default inject("messageStore")(observer(Message))

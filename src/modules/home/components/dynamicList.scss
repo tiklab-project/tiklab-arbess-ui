@@ -15,6 +15,19 @@
           font-size: 18px;
           font-weight: 600;
         }
+        &-ac{
+            width: 80px;
+            line-height: 30px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+            &:hover{
+                border: 1px solid #1890ff;
+                color: #1890ff;
+            }
+        }
     }
     &-list{
         &-listHeader{

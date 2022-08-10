@@ -1,6 +1,6 @@
 import React from "react";
 
-const Chart = () =>{
+const Chart = props =>{
     return <div className="homePage-content-right">
         <div className="statusChart">
             <div className="statusChart-title">近期构建状态</div>

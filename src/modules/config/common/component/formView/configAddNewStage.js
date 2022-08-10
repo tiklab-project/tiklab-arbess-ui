@@ -16,7 +16,7 @@ const ConfigAddNewStage = props =>{
                 新任务
             </div>
             <div style={{marginTop:20}}>
-                <Button form="form" htmlType="submit">保存</Button>
+                <Button form="form" htmlType="submit" type="primary">保存</Button>
             </div>
         </Fragment>
     )

@@ -26,7 +26,7 @@ const ConfigStructureMavenOrNode = props =>{
             <Form.Item
                 name="structureOrder"
                 label="执行命令"
-                className="required-self"
+                className="noRequired"
             >
                 <Mirror
                     shellBlock={mavenShellBlock}

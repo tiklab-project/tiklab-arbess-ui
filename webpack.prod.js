@@ -137,14 +137,14 @@ module.exports = merge(baseWebpackConfig, {
                     name: "chunk-antdUI",
                     chunks: "async",
                     test: /[\\/]node_modules[\\/]antd[\\/]/,
-                    priority: 90,
+                    priority: 10,
                     reuseExistingChunk: true
                 },
                 icon: {
                     name: "chunk-icon",
                     chunks: "all",
                     test: /[\\/]src[\\/]font-icon[\\/]/,
-                    priority: 10,
+                    priority: 90,
                     reuseExistingChunk: true
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */
@@ -165,7 +165,7 @@ module.exports = merge(baseWebpackConfig, {
                     minChunks: 2, //  提取公共部分最少的文件数
                     // minportal: 0 // 提取公共部分最小的大小
                     // enforce: true
-                }
+                },
             }
         },
         minimizer: [

@@ -1,20 +1,17 @@
 import React,{useState,useEffect} from "react";
 import {Row,Col,Avatar,Dropdown,Space,Menu} from "antd";
-import {getVersionInfo,getUser} from "tiklab-core-ui";
+import {getUser} from "tiklab-core-ui";
 import {GlobalOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
-import vipTwo from "../../../assets/images/vip-two.png";
 
 const Head = props =>{
 
-    const {routers,AppConfigComponent} = props
+    const {AppConfigComponent} = props
 
     let path = props.location.pathname
-    const isEE = getVersionInfo().release
-    const eeText = isEE === 2 ? vipTwo : vipOne
     const [currentLink,setCurrentLink] = useState(path)
 
     useEffect(()=>{
@@ -27,23 +24,39 @@ const Head = props =>{
         setCurrentLink(path)
     },[path])
 
+    const routers=[
+        {
+            key:"homePage",
+            to:"/index/home",
+            title: "首页",
+        },
+        {
+            key:"matFlow",
+            to:"/index/matFlow",
+            title: "流水线",
+        },
+        {
+            key:"system",
+            to:"/index/system",
+            title:"系统设置",
+        }
+    ]
+
     const changeCurrentLink = item => {
         props.history.push(item.to)
     }
 
-    const renderRouter = () => {
-        if (routers) {
-            return routers && routers.map(routers=>{
-                return (
-                    <div key={routers.key}
-                         onClick={ () => changeCurrentLink(routers)}
-                         className={currentLink === routers.to ? "headers-active" : null}
-                    >
-                        {routers.title}
-                    </div>
-                )
-            })
-        }
+    const renderRouter = routers => {
+        return routers && routers.map(routers=>{
+            return (
+                <div key={routers.key}
+                     onClick={ () => changeCurrentLink(routers)}
+                     className={currentLink === routers.to ? "headers-active" : null}
+                >
+                    {routers.title}
+                </div>
+            )
+        })
     }
 
     const logout = () => {
@@ -80,7 +93,7 @@ const Head = props =>{
                     <div className="frame-header-logo">
                         <img src={logo} alt="logo" />
                     </div>
-                    <div className="headers-link">{ renderRouter() }</div>
+                    <div className="headers-link">{ renderRouter(routers) }</div>
                 </div>
             </Col>
             <Col span={12}>
@@ -101,7 +114,7 @@ const Head = props =>{
                             </Dropdown>
                         </div>
                         <div className="frame-header-status">
-                            <img src={eeText} alt="" width = "20px" height= "20px" />
+                            <img src={vipOne} alt="" width = "20px" height= "20px" />
                         </div>
                     </div>
                 </div>

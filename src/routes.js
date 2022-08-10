@@ -43,7 +43,7 @@ const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory")
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
-const Info=AsyncComponent(()=>import("./modules/system/message/info/info"))
+const Info=AsyncComponent(()=>import("./modules/system/message/message/message"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
@@ -192,7 +192,7 @@ const routers=[
                         component: SystemProof,
                     },
                     {
-                        path:"/index/system/info",
+                        path:"/index/system/message",
                         component: Info,
                     },
                 ]

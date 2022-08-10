@@ -1,7 +1,6 @@
 import React from "react";
 import "./dynamicList.scss";
 import EmptyText from "./emptyText";
-import {Button} from "antd";
 
 const DynamicList = props =>{
 
@@ -31,13 +30,13 @@ const DynamicList = props =>{
     }
 
     return(
-        <div className={ `dynamic ${dynamicClick ==="更多" ? "dynamic-shadow" : ""}`}>
+        <div className={`dynamic ${dynamicClick ==="更多" ? "dynamic-shadow" : ""}`}>
             <div className="dynamic-top">
                 <div className="dynamic-top-title">{dynamicTitle}</div>
-                <div>
-                    <Button onClick={()=>dynamic(dynamicClick)}>
+                <div className="dynamic-top-ac">
+                    <div onClick={()=>dynamic(dynamicClick)}>
                         {dynamicClick}
-                    </Button>
+                    </div>
                 </div>
             </div>
             <div className="dynamic-list">

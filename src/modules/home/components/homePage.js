@@ -2,7 +2,6 @@ import React,{useEffect} from "react";
 import echarts from "../../../common/echarts/echarts";
 import {getUser} from "tiklab-core-ui";
 import DynamicList from "./dynamicList";
-import Chart from "./chart";
 import MatFlowNear from "./matFlowNear";
 import QuickIn from "./quickIn";
 import "./homePage.scss";
@@ -110,7 +109,12 @@ const HomePage = props =>{
                         dynamicClick={"更多"}
                     />
                 </div>
-                <Chart/>
+                <div className="homePage-content-right">
+                    <div className="statusChart">
+                        <div className="statusChart-title">近期构建状态</div>
+                        <div className="statusChart-box" id="burn-down"/>
+                    </div>
+                </div>
             </div>
         </div>
     )

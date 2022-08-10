@@ -7,7 +7,7 @@ import {inject,observer} from "mobx-react";
 const MatFlowCollect = props =>{
 
     const {matFlowStore} = props
-    const {findAllFollow,followList} = matFlowStore
+    const {findAllFollow,followList,updateFollow} = matFlowStore
 
     const [fresh,setFresh] = useState(false)
     const userId = getUser().userId
@@ -23,6 +23,8 @@ const MatFlowCollect = props =>{
                 list={followList}
                 fresh={fresh}
                 setFresh={setFresh}
+                userId={userId}
+                updateFollow={updateFollow}
             />
         </div>
     )

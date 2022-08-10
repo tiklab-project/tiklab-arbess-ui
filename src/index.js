@@ -5,6 +5,7 @@ import enableAxiosCE from 'tiklab-enable-axios-ce'
 import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
+import {getUser} from "tiklab-core-ui";
 import {observer,Provider} from "mobx-react";
 import routers from "./routes";
 import resources from "./common/language/resources";
@@ -18,7 +19,8 @@ enableAxiosCE()
 
 const Index = observer(() => {
 
-    const [initPluginData, setPluginData] = useState({
+    const [visible,setVisible] = useState(true);
+    const [initPluginData,setPluginData] = useState({
         languages: resources,
         routes: routers,
         pluginStore: [],
@@ -34,11 +36,19 @@ const Index = observer(() => {
         ...store
     }
 
+    const userInfo = getUser()
+    if (userInfo && userInfo.userId) {
+        allStore.systemRoleStore.getSystemPermissions(userInfo.userId)
+    }
+
     useEffect(() => {
         initFetch("post", routers, resources).then(res => {
             setPluginData(res)
+            setVisible(false)
         })
     }, [])
+
+    if (visible) return <div>加载。。。</div>
 
     return (
         <PluginContainer.Provider initialState={initPluginData}>

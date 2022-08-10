@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from "react";
 import {Button,Input} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
+import {getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "../components/matFlow.scss";
-import {getUser} from "tiklab-core-ui";
 import MatFlowTable from "../components/matFlowTable";
 
 const { Search } = Input
@@ -13,7 +13,7 @@ const MatFlow = props =>{
 
     const {matFlowStore}=props
 
-    const {findAllMatFlowStatus,matFlowList,findAllFollow,followList}=matFlowStore
+    const {findAllMatFlowStatus,matFlowList,findAllFollow,followList,updateFollow}=matFlowStore
 
     const [fresh,setFresh] = useState(false)
     const [type,setType] = useState(1)
@@ -57,9 +57,9 @@ const MatFlow = props =>{
                             lis.map(item=>{
                                 return <div key={item.id}
                                             className={`matFlow-tabs-type-link 
-                                        ${type===item.id ? "matFlow-tabs-type-active" : null}`}
+                                            ${type===item.id ? "matFlow-tabs-type-active" : ""}`}
                                             onClick={()=>onclick(item)}
-                                >
+                                        >
                                     {item.title}
                                 </div>
                             })
@@ -70,6 +70,8 @@ const MatFlow = props =>{
                     list={type === 1 ? matFlowList : followList}
                     fresh={fresh}
                     setFresh={setFresh}
+                    userId={userId}
+                    updateFollow={updateFollow}
                 />
             </div>
         </div>

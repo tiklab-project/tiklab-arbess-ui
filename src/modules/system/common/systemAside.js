@@ -99,7 +99,7 @@ const SystemAside= props =>  {
             enCode:"G",
         },
         {
-            key:"/index/system/info",
+            key:"/index/system/message",
             label:"系统信息",
             icon:"#icon-gongzuotongji",
             enCode:"H",
