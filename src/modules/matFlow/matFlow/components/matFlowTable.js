@@ -1,15 +1,26 @@
-import React,{Fragment} from "react";
+import React,{Fragment,useEffect} from "react";
 import {message,Table,Tooltip} from "antd";
+import {getUser} from "tiklab-core-ui";
 import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import {withRouter} from "react-router";
 import Running from "./running";
 
 const MatFlowTable = props =>{
 
-    const {structureStore,list,fresh,setFresh,updateFollow,userId}=props
+    const {structureStore,type,matFlowStore}=props
 
     const {matFlowStartStructure,killInstance}=structureStore
+    const {findAllMatFlowStatus,findAllFollow,matFlowList,updateFollow,fresh,setFresh} = matFlowStore
+
+    const userId = getUser().userId
+
+    useEffect(()=>{
+        if(type===1){
+            findAllMatFlowStatus(userId)
+        }else{
+            findAllFollow(userId)
+        }
+    },[fresh,type])
 
     //收藏
     const collectAction = record => {
@@ -157,7 +168,7 @@ const MatFlowTable = props =>{
                 bordered
                 rowKey={record => record.matFlowId}
                 columns={columns}
-                dataSource={list}
+                dataSource={matFlowList}
                 pagination={{hideOnSinglePage:true}}
                 locale={{emptyText:
                     <Fragment>
@@ -170,4 +181,4 @@ const MatFlowTable = props =>{
             />
 }
 
-export default withRouter(inject("structureStore")(observer(MatFlowTable)))
+export default inject("structureStore","matFlowStore")(observer(MatFlowTable))

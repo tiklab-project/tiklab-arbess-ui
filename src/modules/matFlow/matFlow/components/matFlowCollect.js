@@ -1,33 +1,16 @@
-import React,{useEffect,useState} from "react";
+import React from "react";
 import "./matFlowCollect.scss";
+import {withRouter} from "react-router";
 import MatFlowTable from "./matFlowTable";
-import {getUser} from "tiklab-core-ui";
-import {inject,observer} from "mobx-react";
 
 const MatFlowCollect = props =>{
-
-    const {matFlowStore} = props
-    const {findAllFollow,followList,updateFollow} = matFlowStore
-
-    const [fresh,setFresh] = useState(false)
-    const userId = getUser().userId
-
-    useEffect(()=>{
-        findAllFollow(userId)
-    },[fresh])
 
     return(
         <div className="matFlowCollect">
             <div className="matFlowCollect-title">我的收藏</div>
-            <MatFlowTable
-                list={followList}
-                fresh={fresh}
-                setFresh={setFresh}
-                userId={userId}
-                updateFollow={updateFollow}
-            />
+            <MatFlowTable {...props} type={2}/>
         </div>
     )
 }
 
-export default inject("matFlowStore")(observer(MatFlowCollect))
+export default withRouter(MatFlowCollect)

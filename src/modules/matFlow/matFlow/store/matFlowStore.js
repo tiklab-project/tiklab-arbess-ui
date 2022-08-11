@@ -18,7 +18,7 @@ export class MatFlowStore {
     @observable lastPath = ""
     @observable matFlowId = ""
     @observable matFlowName = ""
-    @observable followList = []
+    @observable fresh = false
 
     @action
     setLastPath = value =>{
@@ -33,6 +33,11 @@ export class MatFlowStore {
     @action
     setMatFlowName = value =>{
         this.matFlowName = value
+    }
+
+    @action
+    setFresh = value =>{
+        this.fresh = value
     }
 
     @action
@@ -133,7 +138,7 @@ export class MatFlowStore {
         FindAllFollow(param).then(res=>{
             console.log( res)
             if(res.code===0){
-                this.followList=res.data
+                this.matFlowList=res.data
             }
         }).catch(error=>{
             console.log(error)

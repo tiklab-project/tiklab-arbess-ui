@@ -15,10 +15,10 @@ const Head = props =>{
     const [currentLink,setCurrentLink] = useState(path)
 
     useEffect(()=>{
-        if(path.indexOf("/index/system") === 0){
+        if(path.indexOf("/index/system")===0){
             path="/index/system"
         }
-        if( path.indexOf("/index/task") === 0) {
+        if(path.indexOf("/index/task")===0) {
             path= "/index/matFlow"
         }
         setCurrentLink(path)
@@ -60,7 +60,7 @@ const Head = props =>{
     }
 
     const logout = () => {
-        props.history.push("/login")
+        props.history.push("/logout")
     }
 
     const languageMenu = (

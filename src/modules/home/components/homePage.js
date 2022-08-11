@@ -91,7 +91,7 @@ const HomePage = props =>{
         burnDown.setOption(option)
         // 折线图随窗口大小改变
         window.onresize = function () {
-            burnDown.resize();
+            burnDown.resize()
         }
     }
 

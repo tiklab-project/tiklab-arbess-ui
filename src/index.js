@@ -5,7 +5,7 @@ import enableAxiosCE from 'tiklab-enable-axios-ce'
 import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
-import {getUser} from "tiklab-core-ui";
+// import {getUser} from "tiklab-core-ui";
 import {observer,Provider} from "mobx-react";
 import routers from "./routes";
 import resources from "./common/language/resources";
@@ -36,13 +36,13 @@ const Index = observer(() => {
         ...store
     }
 
-    const userInfo = getUser()
-    if (userInfo && userInfo.userId) {
-        allStore.systemRoleStore.getSystemPermissions(userInfo.userId)
-    }
+    // const userInfo = getUser()
+    // if (userInfo && userInfo.userId) {
+    //     allStore.systemRoleStore.getSystemPermissions(userInfo.userId)
+    // }
 
     useEffect(() => {
-        initFetch("post", routers, resources).then(res => {
+        initFetch("post",routers, resources).then(res => {
             setPluginData(res)
             setVisible(false)
         })

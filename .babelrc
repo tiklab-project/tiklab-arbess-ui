@@ -12,7 +12,6 @@
             "libraryDirectory": "es",
             "style": "css"
         }],
-
         ["import", {
             "libraryName": "tiklab-plugin-ui",
             "libraryDirectory": "es",
@@ -28,7 +27,6 @@
             "libraryDirectory": "es",
             "style": true
         },"tiklab-privilege-ui"],
-
         ["import", {
             "libraryName": "tiklab-eam-ui",
             "libraryDirectory": "es",
@@ -38,6 +36,7 @@
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],
         "@babel/plugin-syntax-dynamic-import",
-        "react-hot-loader/babel"
+        "react-hot-loader/babel",
+        "equire"
     ]
 }

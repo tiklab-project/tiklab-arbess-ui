@@ -1,9 +1,7 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import {Button,Input} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
-import {getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
-import {inject,observer} from "mobx-react";
 import "../components/matFlow.scss";
 import MatFlowTable from "../components/matFlowTable";
 
@@ -11,21 +9,7 @@ const { Search } = Input
 
 const MatFlow = props =>{
 
-    const {matFlowStore}=props
-
-    const {findAllMatFlowStatus,matFlowList,findAllFollow,followList,updateFollow}=matFlowStore
-
-    const [fresh,setFresh] = useState(false)
     const [type,setType] = useState(1)
-    const userId = getUser().userId
-
-    useEffect(()=>{
-        if(type===1){
-            findAllMatFlowStatus(userId)
-        }else{
-            findAllFollow(userId)
-        }
-    },[fresh,type])
 
     const onSearch = value =>{
         props.history.push(`/index/searchresult/${value}`)
@@ -66,16 +50,10 @@ const MatFlow = props =>{
                         }
                     </div>
                 </div>
-                <MatFlowTable
-                    list={type === 1 ? matFlowList : followList}
-                    fresh={fresh}
-                    setFresh={setFresh}
-                    userId={userId}
-                    updateFollow={updateFollow}
-                />
+                <MatFlowTable {...props} type={type}/>
             </div>
         </div>
     )
 }
 
-export default withRouter(inject("matFlowStore")(observer(MatFlow)))
+export default withRouter(MatFlow)

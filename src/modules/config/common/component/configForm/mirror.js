@@ -5,8 +5,8 @@ import "codemirror/lib/codemirror.css";
 // 设置代码语言模式（比如JS，SQL，python，java等）
 import "codemirror/mode/shell/shell.js";
 // 代码模式，clike是包含java,c++等模式的
-import "codemirror/mode/clike/clike";
-import "codemirror/mode/css/css";
+// import "codemirror/mode/clike/clike";
+// import "codemirror/mode/css/css";
 
 import "./mirror.scss";
 
