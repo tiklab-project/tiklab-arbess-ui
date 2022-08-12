@@ -45,7 +45,7 @@ const WorkSpace = props =>{
             <div className="workSpace-top">
                 <BreadcrumbContent
                     config={"config"}
-                    firstItem={"流水线"}
+                    firstItem={matFlowName}
                     secondItem={"工作空间"}
                 />
             </div>

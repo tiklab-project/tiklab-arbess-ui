@@ -9,7 +9,7 @@ const ConfigTop = props =>{
 
     return(
         <div className="config-top-content">
-            <BreadcrumbContent config={"config"} firstItem={"流水线"} secondItem={"配置"}/>
+            <BreadcrumbContent config={"config"} firstItem={matFlowName} secondItem={"配置"}/>
             <ConfigChangeView
                 userId={userId}
                 view={view}

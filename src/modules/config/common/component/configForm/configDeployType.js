@@ -75,6 +75,20 @@ const ConfigDeployType = props =>{
         }
     }
 
+    const portValidator = (rule,value) =>{
+        if (!value) {
+            return Promise.resolve()
+        } else if (value< 1) {
+            return Promise.reject("最小3000")
+        } else if (value > 30000) {
+            return Promise.reject("最大30000")
+        } else if (!/^\d+$|^\d+[.]?\d+$/.test(value)) {
+            return Promise.reject("只能输入数字")
+        } else {
+            return Promise.resolve() //验证通过
+        }
+    }
+
     return(
         <Fragment>
             <Form.Item name="deployType" label="部署类型" className="noRequired">
@@ -115,7 +129,7 @@ const ConfigDeployType = props =>{
                                 <Form.Item
                                     label="端口号"
                                     name="sshPort"
-                                    rules={[{validator:validate},{required:true,message:"请输入端口号"}]}
+                                    rules={[{validator:portValidator},{required:true,message:"请输入端口号"}]}
                                 >
                                     <Input placeholder="输入端口号"/>
                                 </Form.Item>

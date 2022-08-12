@@ -1,14 +1,15 @@
-import React,{useState,Fragment} from "react";
+import React,{useState} from "react";
 import "../components/proof.scss";
-import {Popconfirm,Table} from "antd";
+import {Popconfirm} from "antd";
 import AddProofButton from "../components/addProofButton";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import UpdateProof from "../components/updateProof";
 import {inject,observer} from "mobx-react";
+import Tables from "../../../common/tables/tables";
 
 const Proof = props =>{
 
-    const {proofStore,matFlowList,matFlowId} = props
+    const {proofStore,matFlowList,matFlowId,matFlowName} = props
     const {updateProof,deleteProof,proofList,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState("")
@@ -98,25 +99,20 @@ const Proof = props =>{
 
     return(
         <div className="proof">
-            <BreadcrumbContent firstItem={"凭证管理"}/>
+            {
+                matFlowName ?
+                    <BreadcrumbContent firstItem={matFlowName} secondItem={"凭证设置"}/>
+                    :
+                    <BreadcrumbContent firstItem={"凭证设置"}/>
+            }
             <div className="proof-content">
                 <div className="proof-content-btn">
                     <AddProofButton style={style} matFlowList={matFlowList}/>
                 </div>
-                <Table
-                    bordered
-                    rowKey={record=>record.proofId}
+                <Tables
                     columns={columns}
                     dataSource={proofList}
-                    pagination={{hideOnSinglePage:true}}
-                    locale={{emptyText:
-                            <Fragment>
-                                <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-meiyouxiangguan"/>
-                                </svg>
-                                <div>没有数据</div>
-                            </Fragment>
-                    }}
+                    rowKey={record=>record.proofId}
                 />
             </div>
             <UpdateProof

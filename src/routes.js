@@ -4,6 +4,7 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
+const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
@@ -51,8 +52,12 @@ const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/proje
 
 const routers=[
     {
-        path:"/logout",
+        path:"/login",
         component:Login,
+    },
+    {
+        path:"/logout",
+        component:Logout,
     },
     {
         path:"/index",

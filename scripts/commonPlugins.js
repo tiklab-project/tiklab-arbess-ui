@@ -6,7 +6,7 @@ import babel from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace'
 // 将非ES6语法的包转为ES6可用
 import commonjs from '@rollup/plugin-commonjs';
-
+// 用于处理css
 import postcss from "rollup-plugin-postcss";
 // 可以将.json文件转为es6模块供rollup处理
 import json from '@rollup/plugin-json';

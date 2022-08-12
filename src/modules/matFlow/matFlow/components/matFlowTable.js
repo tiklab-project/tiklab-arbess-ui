@@ -1,9 +1,10 @@
-import React,{Fragment,useEffect} from "react";
-import {message,Table,Tooltip} from "antd";
+import React,{useEffect} from "react";
+import {message,Tooltip} from "antd";
 import {getUser} from "tiklab-core-ui";
 import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
+import Tables from "../../../../common/tables/tables"
 
 const MatFlowTable = props =>{
 
@@ -15,6 +16,7 @@ const MatFlowTable = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
+        // const params = null
         if(type===1){
             findAllMatFlowStatus(userId)
         }else{
@@ -156,7 +158,7 @@ const MatFlowTable = props =>{
                                     <use xlinkHref="#icon-yunhang"  />
                                 </svg>
                                 :
-                                <Running isExist={true}/>
+                                <Running/>
                         }
                     </span>
                 )
@@ -164,20 +166,10 @@ const MatFlowTable = props =>{
         },
     ]
 
-    return  <Table
-                bordered
-                rowKey={record => record.matFlowId}
+    return  <Tables
                 columns={columns}
                 dataSource={matFlowList}
-                pagination={{hideOnSinglePage:true}}
-                locale={{emptyText:
-                    <Fragment>
-                        <svg className="icon" aria-hidden="true" >
-                            <use xlinkHref="#icon-meiyouxiangguan"/>
-                        </svg>
-                        <div>没有数据</div>
-                    </Fragment>
-                }}
+                rowKey={record=>record.matFlowId}
             />
 }
 

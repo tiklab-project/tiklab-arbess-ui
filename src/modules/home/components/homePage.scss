@@ -1,12 +1,12 @@
 .homePage{
+    padding: 20px;
     &-head{
-        height: 150px;
+        height: 130px;
         display: flex;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         justify-content:left;
-        padding: 20px;
         .head{
             &-group{
                 width: 380px;
@@ -27,7 +27,6 @@
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
-        padding: 0 24px 24px;
         &-left{
             width: calc(66% - 7px);
             min-width: 260px;

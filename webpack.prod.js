@@ -1,5 +1,5 @@
 const { merge } = require("webpack-merge");
-const ProgressBarPlugin = require("progress-bar-webpack-plugin")
+const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const baseWebpackConfig = require("./webpack.base");

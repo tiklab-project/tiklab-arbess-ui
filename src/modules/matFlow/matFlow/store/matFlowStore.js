@@ -46,7 +46,7 @@ export class MatFlowStore {
         param.append("userId",value)
         return new Promise((resolve, reject) => {
             FindAllMatFlowStatus(param).then(res=>{
-                console.log( res)
+                console.log(res)
                 if(res.code === 0 && res.data){
                     this.matFlowList=res.data
                 }
@@ -69,7 +69,7 @@ export class MatFlowStore {
         }
         return new Promise((resolve, reject) => {
             CreateMatFlow(params).then(res=>{
-                console.log( res)
+                console.log(res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -85,7 +85,7 @@ export class MatFlowStore {
         params.append("userId",values.userId)
         return new Promise((resolve, reject) => {
             FindLike(params).then(res=>{
-                console.log( res)
+                console.log(res)
                 if(res.code === 0 && res.data){
                     this.searchMatFlowList=res.data
                 }
@@ -136,7 +136,7 @@ export class MatFlowStore {
         const param = new FormData()
         param.append("userId",value)
         FindAllFollow(param).then(res=>{
-            console.log( res)
+            console.log(res)
             if(res.code===0){
                 this.matFlowList=res.data
             }

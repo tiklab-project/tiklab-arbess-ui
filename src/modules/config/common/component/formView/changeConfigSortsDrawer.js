@@ -117,9 +117,11 @@ const ChangeConfigSortsDrawer = props =>{
             closable={false}
             onClose={()=>setChangeSortVisible(false)}
             visible={changeSortVisible}
+            contentWrapperStyle={{marginTop:55}}
+            bodyStyle={{padding:0}}
         >
-            <div className="wrapper">
-                <div className="wrapper-head">
+            <div className="drawers">
+                <div className="drawers-head">
                     <div>更改配置顺序</div>
                     <div>
                         <Button type="text" onClick={()=>setChangeSortVisible(false)}>
@@ -127,7 +129,7 @@ const ChangeConfigSortsDrawer = props =>{
                         </Button>
                     </div>
                 </div>
-                <div className="wrapper-body" style={{padding:20}}>
+                <div className="drawers-body" style={{padding:20}}>
                     <Tree className="draggable-tree"
                           draggable // 是否可拖拽
                           blockNode  // 是否占据一行

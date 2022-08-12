@@ -17,7 +17,7 @@ const Structure = props => {
     const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure,leftPageList,isData,
         findMatFlowUser,setIsData,execState} = structureStore
     const {state,setState,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
-    const {matFlowId} = matFlowStore
+    const {matFlowId,matFlowName} = matFlowStore
     const userId = getUser().userId
 
     const [runImState,setRunImState] = useState(false)
@@ -187,7 +187,7 @@ const Structure = props => {
                             status={status}
                         />
                         <div className="structure-content-right">
-                            <BreadcrumbContent firstItem={"流水线"} secondItem={"历史"}/>
+                            <BreadcrumbContent firstItem={matFlowName} secondItem={"历史"}/>
                             {
                                 execState === ""  && leftPageList && leftPageList.length === 0 ?
                                     <StructureEmpty/>
@@ -206,6 +206,7 @@ const Structure = props => {
                     <StructureEmpty
                         runImmediately={runImmediately}
                         runImState={runImState}
+                        matFlowName={matFlowName}
                     />
             }
         </div>

@@ -8,7 +8,7 @@ import {inject,observer} from "mobx-react";
 const ProjectSetReDel = props =>{
 
     const {matFlowStore} = props
-    const {deleteMatFlow,updateMatFlow,matFlowList,matFlowId}=matFlowStore
+    const {deleteMatFlow,updateMatFlow,matFlowList,matFlowId,matFlowName}=matFlowStore
 
     const [form]=Form.useForm()
     const [processVisible,setProcessVisible] = useState(false)
@@ -49,7 +49,7 @@ const ProjectSetReDel = props =>{
 
     return(
         <div className="matFlowSys-reDel">
-            <BreadcrumbContent firstItem={"其他管理"}/>
+            <BreadcrumbContent firstItem={matFlowName} secondItem={"其他管理"}/>
             <div className="matFlowSys-reDel-content" style={{padding:"8px 8px 0"}}>
                 <Form onFinish={re} form={form} layout="inline" autoComplete="off">
                     <Form.Item

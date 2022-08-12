@@ -14,10 +14,11 @@ const StructureRightLogDrawer = props =>{
             visible={visible}
             onClose={()=>setVisible(false)}
             closable={false}
-            width={600}
+            contentWrapperStyle={{width:600,marginTop:55}}
+            bodyStyle={{padding:0}}
         >
-            <div className="wrapper">
-                <div className="wrapper-head">
+            <div className="drawers">
+                <div className="drawers-head">
                     <div>
                         {drawerContent && drawerContent.taskAlias}
                         &nbsp;--&nbsp;
@@ -29,9 +30,11 @@ const StructureRightLogDrawer = props =>{
                         </Button>
                     </div>
                 </div>
-                <div className="wrapper-body">
+                <div className="drawers-body">
                     <div className="log">
-                        <div className="log-content">{drawerContent && drawerContent.runLog}</div>
+                        <div className="log-content">
+                            {drawerContent && drawerContent.runLog}
+                        </div>
                     </div>
                  </div>
             </div>

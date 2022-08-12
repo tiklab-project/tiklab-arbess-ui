@@ -13,22 +13,25 @@ const WorkSpaceDrawer = props =>{
             visible={detailsDrawer}
             onClose={()=>setDetailsDrawer(false)}
             closable={false}
-            width={700}
+            contentWrapperStyle={{width:600,marginTop:55}}
+            bodyStyle={{padding:0}}
         >
-            <div className="wrapper-head">
-                <div>{drawerContent.title ? drawerContent.title:drawerContent.commitTime}</div>
-                <div>
-                    <Button type="text" onClick={()=>setDetailsDrawer(false)}>
-                        <CloseOutlined />
-                    </Button>
+            <div className="drawers">
+                <div className="drawers-head">
+                    <div>{drawerContent.title ? drawerContent.title:drawerContent.commitTime}</div>
+                    <div>
+                        <Button type="text" onClick={()=>setDetailsDrawer(false)}>
+                            <CloseOutlined />
+                        </Button>
+                    </div>
                 </div>
-            </div>
-            <div className="wrapper-body">
-                <div className="log">
-                    <div className="log-content">
-                        {drawerContent.commitFile && drawerContent.commitFile.map((item,index)=>{
-                            return <div key={index}>{drawerContent.title ? null : `${index+1}、`}{item}</div>
-                        })}
+                <div className="drawers-body">
+                    <div className="log">
+                        <div className="log-content">
+                            {drawerContent.commitFile && drawerContent.commitFile.map((item,index)=>{
+                                return <div key={index}>{drawerContent.title ? null : `${index+1}、`}{item}</div>
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>
