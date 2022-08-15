@@ -22,7 +22,7 @@ module.exports = merge(baseWebpackConfig,{
     plugins:[
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
-            title:"流水线",
+            title:"matflow",
             template: path.resolve(__dirname, "./public/index.template.html"),
             hash: false,
             filename: "index.html",

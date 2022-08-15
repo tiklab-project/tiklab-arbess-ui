@@ -4,7 +4,7 @@ import Mirror from "./mirror";
 import {inject,observer} from "mobx-react";
 import ConfigProof from "./configProof";
 
-const ConfigDeployType = props =>{
+const ConfigDeploy = props =>{
 
     const {type} = props
 
@@ -43,21 +43,8 @@ const ConfigDeployType = props =>{
     },[formInitialValues.sourceAddress,matFlowId])
 
     const addMessageInfo = data => {
-        if(data.code === 0 ){
-            if(data.data === null){
-                setMessageInfo("null")
-            }else {
-                setMessageInfo("匹配到文件"+data.data)
-            }
-        }
-    }
-
-    const renderMessageInfo = messageInfo => {
-        switch (messageInfo) {
-            case "null":
-                return <div className="deployTargetAddress deployTargetAddress-null">无法匹配到文件或者匹配多个文件</div>
-            default:
-                return <div className="deployTargetAddress deployTargetAddress-exist">{messageInfo}</div>
+        if(data.code === 0 && data.data){
+            setMessageInfo("匹配到文件"+data.data)
         }
     }
 
@@ -112,7 +99,7 @@ const ConfigDeployType = props =>{
                                         placeholder="请输入该文件的唯一标识，如:Jar,zip等（支持正则表达式）"
                                     />
                                 </Form.Item>
-                                { renderMessageInfo(messageInfo) }
+                                <div className="deployTargetAddress">{messageInfo}</div>
                                 <Form.Item
                                     label="Ip地址"
                                     name="sshIp"
@@ -217,4 +204,4 @@ const ConfigDeployType = props =>{
     )
 }
 
-export default inject("configItemStore","configDataStore","matFlowStore")(observer(ConfigDeployType))
+export default inject("configItemStore","configDataStore","matFlowStore")(observer(ConfigDeploy))

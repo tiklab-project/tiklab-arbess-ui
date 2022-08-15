@@ -48,6 +48,7 @@ const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/system
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
+const LicenceContent=AsyncComponent(()=>import("./modules/system/licence/licence"))
 
 const routesSaas =[
     {
@@ -194,6 +195,10 @@ const routesSaas =[
                     {
                         path:"/index/system/message",
                         component: Info,
+                    },
+                    {
+                        path:"/index/system/licence",
+                        component: LicenceContent,
                     },
                 ]
             },

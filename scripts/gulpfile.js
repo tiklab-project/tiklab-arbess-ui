@@ -17,7 +17,7 @@ const distDir = resolve("../dist");
 const libDir = resolve("../lib");
 const esDir = resolve("../es");
 const scssDir = resolve("../src/**/*.scss");
-const indexJsDir = resolve("../src/**/style/index.js");
+const indexJsDir = resolve("../src/**/style/erer.js");
 
 // 复制 postcss 文件到 lib es 文件夹下
 gulp.task("copy-postcss", () => {
@@ -28,7 +28,7 @@ gulp.task("copy-postcss", () => {
         .pipe(gulp.dest(libDir))
         .pipe(gulp.dest(esDir));
 });
-// 根据 index.js 创建一个全新的 css.js 供按需加载 styel:'css' 使用
+// 根据 erer.js 创建一个全新的 css.js 供按需加载 styel:'css' 使用
 gulp.task("replace-indexjs", () => {
     return gulp
         .src(indexJsDir)

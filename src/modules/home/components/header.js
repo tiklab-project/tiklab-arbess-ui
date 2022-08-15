@@ -1,18 +1,23 @@
 import React,{useState,useEffect} from "react";
 import {Row,Col,Avatar,Dropdown,Space,Menu} from "antd";
-import {getUser} from "tiklab-core-ui";
+import { useTranslation } from "react-i18next";
+import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
+import vipTwo from "../../../assets/images/vip-two.png";
 
 const Head = props =>{
 
     const {AppConfigComponent} = props
 
     let path = props.location.pathname
+    const {i18n} = useTranslation()
     const [currentLink,setCurrentLink] = useState(path)
+    const isEE = getVersionInfo().release
+    const eeText = isEE === 2 ? vipTwo : vipOne;
 
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){
@@ -50,7 +55,7 @@ const Head = props =>{
         return routers && routers.map(routers=>{
             return (
                 <div key={routers.key}
-                     onClick={ () => changeCurrentLink(routers)}
+                     onClick={()=>changeCurrentLink(routers)}
                      className={currentLink === routers.to ? "headers-active" : null}
                 >
                     {routers.title}
@@ -59,30 +64,25 @@ const Head = props =>{
         })
     }
 
-    const logout = () => {
-        props.history.push("/logout")
-    }
-
     const languageMenu = (
-        <Menu items={[
-                  {key: "0", label: <div>中文</div>,},
-                  {key: "1", label: <div>英文</div>,}
-              ]}
-        />
+        <Menu>
+            <Menu.Item key="0">中文</Menu.Item>
+            <Menu.Item key="1">英文</Menu.Item>
+        </Menu>
     )
 
     const outMenu = (
-        <Menu items={[
-                {key:"0",label:<div>{getUser().name}</div>},
-                {key:"1",label:
-                        <div onClick={logout}>
-                            退出
-                            <svg className="icon" aria-hidden="true" style={{width:20,height:20}}>
-                                <use xlinkHref="#icon-tuichu1"/>
-                            </svg>
-                        </div>}
-             ]}
-        />
+        <Menu>
+            <Menu.Item key="0" onClick={()=>props.history.push("/index/system/base")}>
+                {getUser().name}
+            </Menu.Item>
+            <Menu.Item key="1" onClick={()=>props.history.push("/logout")}>
+                退出
+                <svg className="icon" aria-hidden="true" style={{width:20,height:20}}>
+                    <use xlinkHref="#icon-tuichu1"/>
+                </svg>
+            </Menu.Item>
+        </Menu>
     )
 
     return(
@@ -100,21 +100,21 @@ const Head = props =>{
                 <div className="frame-header-right">
                     <div className="frame-header-right-text">
                         <div className="frame-header-language">
-                            <Dropdown overlay={languageMenu} placement="bottom">
+                            <Dropdown overlay={languageMenu}>
                                 <Space>
                                     <GlobalOutlined style={{fontSize:23,cursor:"pointer"}}/>
                                 </Space>
                             </Dropdown>
                         </div>
                         <div className="frame-header-user">
-                            <Dropdown overlay={outMenu} placement="bottom">
+                            <Dropdown overlay={outMenu}>
                                 <Space>
                                     <Avatar src={portrait} style={{cursor:"pointer"}}/>
                                 </Space>
                             </Dropdown>
                         </div>
                         <div className="frame-header-status">
-                            <img src={vipOne} alt="" width = "20px" height= "20px" />
+                            <img src={eeText} alt="" width = "20px" height= "20px" />
                         </div>
                     </div>
                 </div>

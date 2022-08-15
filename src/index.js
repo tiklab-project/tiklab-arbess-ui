@@ -1,12 +1,15 @@
 import React,{useState,useEffect} from "react";
 import ReactDOM from "react-dom";
 import {HashRouter} from "react-router-dom";
-import enableAxiosCE from 'tiklab-enable-axios-ce'
+import enableAxiosCE from "tiklab-enable-axios-ce";
+import {useVersion} from "tiklab-eam-ui/es/_utils";
 import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
+import {ConfigProvider} from "antd";
 // import {getUser} from "tiklab-core-ui";
 import {observer,Provider} from "mobx-react";
+import {useTranslation} from "react-i18next";
 import routers from "./routes";
 import resources from "./common/language/resources";
 import {store} from "./store";
@@ -18,6 +21,8 @@ import "./common/language/i18n";
 enableAxiosCE()
 
 const Index = observer(() => {
+
+    const {i18n} = useTranslation()
 
     const [visible,setVisible] = useState(true);
     const [initPluginData,setPluginData] = useState({
@@ -41,8 +46,9 @@ const Index = observer(() => {
     //     allStore.systemRoleStore.getSystemPermissions(userInfo.userId)
     // }
 
+    useVersion("matflow")
     useEffect(() => {
-        initFetch("post",routers, resources).then(res => {
+        initFetch("post",routers,resources,i18n).then(res => {
             setPluginData(res)
             setVisible(false)
         })
@@ -52,11 +58,13 @@ const Index = observer(() => {
 
     return (
         <PluginContainer.Provider initialState={initPluginData}>
-            <Provider {...allStore}>
-                <HashRouter >
-                    {renderRoutes(initPluginData.routes)}
-                </HashRouter>
-            </Provider>
+            {/*<ConfigProvider>*/}
+                <Provider {...allStore}>
+                    <HashRouter >
+                        {renderRoutes(initPluginData.routes)}
+                    </HashRouter>
+                </Provider>
+            {/*</ConfigProvider>*/}
         </PluginContainer.Provider>
     )
 })

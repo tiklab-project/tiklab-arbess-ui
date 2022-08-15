@@ -41,6 +41,12 @@ const SystemAside= props =>  {
             enCode:"C",
         },
         {
+            key:"/index/system/licence",
+            label:"licence管理",
+            icon:"#icon-gongzuotongji",
+            enCode:"J",
+        },
+        {
             key:"/index/system/org",
             label:"组织管理",
             icon:"#icon-gongzuotongji",

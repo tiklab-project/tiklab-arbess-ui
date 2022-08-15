@@ -1,8 +1,15 @@
 {
     "home": "HOME",
+    "matflow": "MAT FLOW",
     "org_center": "ORG CENTER",
     "sys" : "SYSTEM",
     "login": "LOGIN",
     "help": "Help",
-    "line_photo": "line_photo"
+    "task": "task",
+    "user": "user",
+    "line_photo": "line_photo",
+    "history": "history",
+    "work": "work_space",
+    "dynamic": "dynamic",
+    "proof": "proof"
 }

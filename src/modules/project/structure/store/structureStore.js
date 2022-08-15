@@ -186,7 +186,7 @@ export class StructureStore {
         const param = new FormData()
         param.append("matFlowId", value)
         FindMatFlowUser(param).then(res=>{
-            console.log( res)
+            console.log(res)
             if(res.code === 0 && res.data){
                 this.matFlowUserList = res.data
             }
