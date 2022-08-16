@@ -7,12 +7,7 @@ const DynamicList = props =>{
     const {dynamicList,pageNumber,dynamicTitle,dynamicClick} = props
 
     const goUser = item => {
-        props.history.push("/index/system/base")
-        // if(item.id === userId){
-        //     props.history.push("/index/system/base")
-        // }else {
-        //     props.history.push("/index/system/list")
-        // }
+        props.history.push("/index/system/list")
     }
 
     const goMatFlow = matFlowName => {

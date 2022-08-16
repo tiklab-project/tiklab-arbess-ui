@@ -23,12 +23,6 @@ const SystemAside= props =>  {
 
     const router = [
         {
-            key:"/index/system/base",
-            label:"用户管理",
-            icon:"#icon-gongzuotongji",
-            enCode:"A",
-        },
-        {
             key:"/index/system/list",
             label:"用户列表",
             icon:"#icon-gongzuotongji",
@@ -39,12 +33,6 @@ const SystemAside= props =>  {
             label:"用户目录",
             icon:"#icon-gongzuotongji",
             enCode:"C",
-        },
-        {
-            key:"/index/system/licence",
-            label:"licence管理",
-            icon:"#icon-gongzuotongji",
-            enCode:"J",
         },
         {
             key:"/index/system/org",

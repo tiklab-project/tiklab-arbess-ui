@@ -2,11 +2,11 @@ import React,{Fragment,useState,useEffect} from "react";
 import {withRouter} from "react-router";
 import {getUser} from "tiklab-core-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
+import {Form,message} from "antd";
 import moment from "../../../common/moment/moment";
 import {inject,observer} from "mobx-react";
 import ConfigTop from "../common/component/configCommon/configTop";
 import PromptContent from "../../../common/prompt/prompt";
-import {Form,message} from "antd";
 import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
 import ConfigView from "../common/component/configCommon/configView";
 
@@ -35,6 +35,7 @@ const Config = props =>{
     const jumpOrNot = match.params.matFlowName
 
     useEffect(()=>{
+        // 流水线name
         setMatFlowName(jumpOrNot)
         // 设置流水线id
         findAllMatFlowStatus(userId).then(res=>{

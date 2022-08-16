@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
-import {Row,Col,Avatar,Dropdown,Space,Menu} from "antd";
-import { useTranslation } from "react-i18next";
+import {Avatar,Dropdown,Space,Menu} from "antd";
+import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
@@ -17,7 +17,7 @@ const Head = props =>{
     const {i18n} = useTranslation()
     const [currentLink,setCurrentLink] = useState(path)
     const isEE = getVersionInfo().release
-    const eeText = isEE === 2 ? vipTwo : vipOne;
+    const eeText = isEE === 2 ? vipTwo : vipOne
 
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){
@@ -73,7 +73,7 @@ const Head = props =>{
 
     const outMenu = (
         <Menu>
-            <Menu.Item key="0" onClick={()=>props.history.push("/index/system/base")}>
+            <Menu.Item key="0">
                 {getUser().name}
             </Menu.Item>
             <Menu.Item key="1" onClick={()=>props.history.push("/logout")}>
@@ -86,40 +86,36 @@ const Head = props =>{
     )
 
     return(
-        <Row className="frame-header">
-            <Col span={12}>
-                <div className="frame-header-right">
-                    {AppConfigComponent}
-                    <div className="frame-header-logo">
-                        <img src={logo} alt="logo" />
-                    </div>
-                    <div className="headers-link">{ renderRouter(routers) }</div>
+        <div className="frame-header">
+            <div className="frame-header-right">
+                {AppConfigComponent}
+                <div className="frame-header-logo">
+                    <img src={logo} alt="logo" />
                 </div>
-            </Col>
-            <Col span={12}>
-                <div className="frame-header-right">
-                    <div className="frame-header-right-text">
-                        <div className="frame-header-language">
-                            <Dropdown overlay={languageMenu}>
-                                <Space>
-                                    <GlobalOutlined style={{fontSize:23,cursor:"pointer"}}/>
-                                </Space>
-                            </Dropdown>
-                        </div>
-                        <div className="frame-header-user">
-                            <Dropdown overlay={outMenu}>
-                                <Space>
-                                    <Avatar src={portrait} style={{cursor:"pointer"}}/>
-                                </Space>
-                            </Dropdown>
-                        </div>
-                        <div className="frame-header-status">
-                            <img src={eeText} alt="" width = "20px" height= "20px" />
-                        </div>
+                <div className="headers-link">{ renderRouter(routers) }</div>
+            </div>
+            <div className="frame-header-right">
+                <div className="frame-header-right-text">
+                    <div className="frame-header-language">
+                        <Dropdown overlay={languageMenu}>
+                            <Space>
+                                <GlobalOutlined style={{fontSize:23,cursor:"pointer"}}/>
+                            </Space>
+                        </Dropdown>
+                    </div>
+                    <div className="frame-header-user">
+                        <Dropdown overlay={outMenu}>
+                            <Space>
+                                <Avatar src={portrait} style={{cursor:"pointer"}}/>
+                            </Space>
+                        </Dropdown>
+                    </div>
+                    <div className="frame-header-status">
+                        <img src={eeText} alt="" width = "20px" height= "20px" />
                     </div>
                 </div>
-            </Col>
-        </Row>
+            </div>
+        </div>
     )
 }
 

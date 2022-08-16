@@ -2,8 +2,10 @@ import React from "react";
 import AsyncComponent from "./common/lazy/SyncComponent";
 import {Redirect} from "react-router-dom";
 
-const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
+
+const Login=AsyncComponent(()=>import("./modules/login/login"))
+const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
@@ -37,7 +39,6 @@ const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/pro
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-const UserInfo=AsyncComponent(()=>import("./modules/system/user/userInfo"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
@@ -48,9 +49,12 @@ const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/system
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
-const LicenceContent=AsyncComponent(()=>import("./modules/system/licence/licence"))
 
 const routesSaas =[
+    {
+        path:"/login",
+        component:Login,
+    },
     {
         path:"/logout",
         component:Logout,
@@ -153,10 +157,6 @@ const routesSaas =[
                 component:System,
                 routes:[
                     {
-                        path: "/index/system/base",
-                        component: UserInfo,
-                    },
-                    {
                         path: "/index/system/directory",
                         component: UserDirectory,
                     },
@@ -195,10 +195,6 @@ const routesSaas =[
                     {
                         path:"/index/system/message",
                         component: Info,
-                    },
-                    {
-                        path:"/index/system/licence",
-                        component: LicenceContent,
                     },
                 ]
             },

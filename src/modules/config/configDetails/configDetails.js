@@ -38,7 +38,7 @@ const ConfigDetails = props =>{
                 setIsBtn(true)
             }else setIsBtn(false)
         })
-    },[])
+    },[view])
 
     // Gitee和Github授权
     useEffect(() => {
@@ -55,7 +55,8 @@ const ConfigDetails = props =>{
                     getState(params)
                     window.close()
                 })
-            }else if(localStorage.getItem("githubCode")){
+            }
+            else if(localStorage.getItem("githubCode")){
                 getAccessToken(codeValue).then(res=>{
                     localStorage.setItem("githubToken",res.data)
                     localStorage.removeItem("githubCode")
