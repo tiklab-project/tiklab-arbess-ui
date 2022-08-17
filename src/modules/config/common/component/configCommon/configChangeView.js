@@ -1,14 +1,14 @@
 import React,{useState} from "react";
 import {Button,message,Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
+import {getVersionInfo} from "tiklab-core-ui";
 import "./configChangeView.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 
-
 const ConfigChangeView = props =>{
 
-    const {view,setView,matFlowId,structureStore,setIsPrompt,userId,isBtn,matFlowName,
+    const {view,setView,matFlowId,structureStore,setIsPrompt,userId,matFlowName,
         setRunOrSave} = props
 
     const {matFlowStartStructure} = structureStore
@@ -27,11 +27,11 @@ const ConfigChangeView = props =>{
         if(setRunOrSave){
             setRunOrSave(false)
         }
-        setTimeout(()=> props.history.push(`/index/task/${matFlowName}/structure`),1000)
+        // setTimeout(()=> props.history.push(`/index/task/${matFlowName}/structure`),1000)
         matFlowStartStructure(params).then(res=>{
             if(res.code === 0 && res.data === 1){
                 if(res.data===1){
-                // props.history.push(`/index/task/${matFlowName}/structure`)
+                props.history.push(`/index/task/${matFlowName}/structure`)
                 }else{
                     setProcessVisible(false)
                     message.error({content:"项目正在运行", className:"message"})
@@ -52,14 +52,18 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className="changeView-view">
-                    <div onClick={()=>setView(1)} className={view===1 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}>
+                    <div className={view===1 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}
+                         onClick={()=>setView(1)}
+                    >
                         <div className="changeView-view-item" >
                             表单视图
                         </div>
                     </div>
                     {
-                        isBtn ?
-                            <div onClick={()=>setView(2)} className={view===2 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}>
+                        !getVersionInfo().expired ?
+                            <div className={view===2 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}
+                                 onClick={()=>setView(2)}
+                            >
                                 <div className="changeView-view-item">
                                     图形化视图
                                 </div>

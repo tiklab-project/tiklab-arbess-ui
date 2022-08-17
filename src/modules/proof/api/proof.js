@@ -21,7 +21,7 @@ export function  FindOneProof(data){
 //凭证
 export function  FindMatFlowProof(data){
     return serviceLoc.request({
-        url:"/proof/findMatFlowProof",
+        url:"/matFlowHome/findMatFlowProof",
         method:"post",
         data
     })

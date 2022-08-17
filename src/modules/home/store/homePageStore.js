@@ -21,7 +21,7 @@ export class HomePageStore{
         const param = new FormData()
         param.append("userId",value)
         FindAllOpen(param).then(res=>{
-            if(res.code === 0 && res.data ){
+            if(res.code===0 && res.data){
                 this.matFlowNearList = res.data
             }
         }).catch(error=>{
@@ -44,7 +44,7 @@ export class HomePageStore{
             pageSize:values.pageSize,
         }
         FindUserAction(params).then(res=>{
-            if(res.code === 0 && res.data ){
+            if(res.code===0 && res.data){
                 this.dynamicList = res.data.dataList
                 this.page.total = res.data.listSize
             }

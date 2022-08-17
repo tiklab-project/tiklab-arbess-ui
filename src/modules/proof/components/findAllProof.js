@@ -64,7 +64,6 @@ const FindAllProof = props =>{
             </Select>
         </Form.Item>
     )
-
 }
 
 export default inject("proofStore","matFlowStore","configDataStore")(observer(FindAllProof))

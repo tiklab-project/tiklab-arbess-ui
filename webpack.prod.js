@@ -52,14 +52,14 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new CssMinimizerPlugin(),
         new ProgressBarPlugin(),
-        new BundleAnalyzerPlugin(),
-        new CompressionPlugin({
-            filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
-            algorithm: "gzip", // 算法
-            test: new RegExp("\\.(js|css|sass|scss)$"), // 压缩 js 与 css
-            threshold: 10240, // 只处理比这个值大的资源。按字节计算
-            minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
-        }),
+        // new BundleAnalyzerPlugin(),
+        // new CompressionPlugin({
+        //     filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
+        //     algorithm: "gzip", // 算法
+        //     test: new RegExp("\\.(js|css|sass|scss)$"), // 压缩 js 与 css
+        //     threshold: 10240, // 只处理比这个值大的资源。按字节计算
+        //     minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
+        // }),
         new webpack.ContextReplacementPlugin(
             /moment[/\\]locale$/,
             /zh-cn|es|zh-tw|ja/,
@@ -73,78 +73,92 @@ module.exports = merge(baseWebpackConfig, {
             minSize: 30000, ////默认值，超过30K才独立分包
             minChunks: 1,
             maxAsyncRequests: 5,
-            maxInitialRequests:1,
+            maxInitialRequests: 1,
             automaticNameDelimiter: "--", // 分包打包生成文件的名称的连接符
             name:false,
             cacheGroups: { //  cacheGroups 缓存组，如：将某个特定的库打包
+                lodash: {
+                    name: "chunk-lodash",
+                    chunks:"all",
+                    test: /lodash/,
+                    priority: 40,
+                    reuseExistingChunk: true
+                },
                 antIcon: {
                     name: "chunk-antIcon",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]@ant-design[\\/]/,
-                    priority: 10,
+                    test: /@ant-design/,
+                    priority: 60,
                     reuseExistingChunk: true //遇到重复包直接引用，不重新打包
                 },
                 tiklabPluginUI: {
                     name: "chunk-tiklab-plugin-ui",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]tiklab-plugin-ui[\\/]/,
-                    priority: 50,
+                    test: /tiklab-plugin-ui/,
+                    priority: 60,
                     reuseExistingChunk: true
                 },
                 tiklabUserUI: {
                     name: "chunk-tiklab-user-ui",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]tiklab-user-ui[\\/]/,
-                    priority: 50,
+                    test: /tiklab-user-ui/,
+                    priority: 60,
                     reuseExistingChunk: true
                 },
                 tiklabEamUI: {
                     name: "chunk-tiklab-eam-ui",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]tiklab-eam-ui[\\/]/,
-                    priority: 50,
+                    test: /tiklab-eam-ui/,
+                    priority: 60,
                     reuseExistingChunk: true
                 },
                 tiklabPrivilegeUI: {
                     name: "chunk-tiklab-privilege-ui",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]tiklab-privilege-ui[\\/]/,
+                    test: /tiklab-privilege-ui/,
                     priority: 70,
                     reuseExistingChunk: true
                 },
                 echarts: {
                     name: "chunk-echarts",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]echarts[\\/]/,
-                    priority: 50,
+                    test: /echarts/,
+                    priority: 60,
                     reuseExistingChunk: true
                 },
                 codemirror: {
                     name: "chunk-codemirror",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]codemirror[\\/]/,
-                    priority: 50,
+                    test: /codemirror/,
+                    priority: 70,
                     reuseExistingChunk: true
                 },
                 moment: {
                     name: "chunk-moment",
                     chunks: "all",
-                    test: /[\\/]node_modules[\\/]moment[\\/]/,
-                    priority: 50,
+                    test: /moment/,
+                    priority: 70,
                     reuseExistingChunk: true
                 },
                 antdUI: {
                     name: "chunk-antdUI",
                     chunks: "async",
-                    test: /[\\/]node_modules[\\/]antd[\\/]/,
-                    priority: 10,
+                    test: /antd/,
+                    priority: 80,
                     reuseExistingChunk: true
                 },
                 icon: {
                     name: "chunk-icon",
                     chunks: "all",
-                    test: /[\\/]src[\\/]font-icon[\\/]/,
-                    priority: 90,
+                    test: /font-icon/,
+                    priority: 60,
+                    reuseExistingChunk: true
+                },
+                rcomponent: {
+                    name: "chunk-rcomponent",
+                    chunks: "all",
+                    test: /rc-[a-zA-Z]/,
+                    priority: 80,
                     reuseExistingChunk: true
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */

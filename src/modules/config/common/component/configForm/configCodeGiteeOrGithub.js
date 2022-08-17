@@ -50,13 +50,17 @@ const ConfigCodeGiteeOrGithub = props =>{
     const clickGitStoreHouse = () =>{
         if(codeType  === 2){
             getAllGiteeStorehouse(gitProofId).then(res=>{
-                setStorehouseList(res.data)
+                if(res.code===0 && res.data){
+                    setStorehouseList(res.data)
+                }
             }).catch(error=>{
                 console.log(error)
             })
         }else {
             getAllGithubStorehouse(gitProofId).then(res=>{
-                setStorehouseList(res.data)
+                if(res.code===0 && res.data){
+                    setStorehouseList(res.data)
+                }
             }).catch(error=>{
                 console.log(error)
             })
@@ -71,13 +75,17 @@ const ConfigCodeGiteeOrGithub = props =>{
         }
         if(codeType === 2){
             getGiteeBranch(params).then(res=>{
-                setBranchList(res.data)
+                if(res.code===0 && res.data){
+                    setBranchList(res.data)
+                }
             }).catch(error=>{
                 console.log(error)
             })
         }else {
             getGithubBranch(params).then(res=>{
-                setBranchList(res.data)
+                if(res.code===0 && res.data){
+                    setBranchList(res.data)
+                }
             }).catch(error=>{
                 console.log(error)
             })
@@ -98,7 +106,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 <Select style={{ width: 300 }} onChange={changeGitStoreHouse} onClick={clickGitStoreHouse}>
                     {
                         storehouseList && storehouseList.map(item=>{
-                            return <Option key={item}> {item} </Option>
+                            return <Option key={item} value={item}> {item} </Option>
                         })
                     }
                 </Select>
@@ -107,7 +115,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 <Select style={{ width: 300 }} disabled={prohibited}>
                     {
                         branchList && branchList.map(item=>{
-                            return  <Option key={item}> {item} </Option>
+                            return  <Option key={item} value={item}> {item} </Option>
                         })
                     }
                 </Select>

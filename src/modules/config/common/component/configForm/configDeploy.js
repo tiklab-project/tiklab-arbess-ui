@@ -43,7 +43,7 @@ const ConfigDeploy = props =>{
     },[formInitialValues.sourceAddress,matFlowId])
 
     const addMessageInfo = data => {
-        if(data.code === 0 && data.data){
+        if(data.code===0 && data.data){
             setMessageInfo("匹配到文件"+data.data)
         }
     }

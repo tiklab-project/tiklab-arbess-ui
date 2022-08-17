@@ -19,7 +19,6 @@ import "./assets/font_icon/iconfont";
 import "./common/language/i18n";
 
 enableAxiosCE()
-
 const Index = observer(() => {
 
     const {i18n} = useTranslation()

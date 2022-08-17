@@ -1,6 +1,6 @@
 import React from "react";
 import "./projectAsideOpt.scss";
-import {Dropdown,Menu} from "antd";
+import {Dropdown} from "antd";
 import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
@@ -30,21 +30,19 @@ const ProjectAsideOpt = props =>{
             <div className="opt-content">
                 <div className="opt-content-title">流水线名称</div>
                 <div className="opt-content-group">
-                    <Menu>
-                        {
-                            matFlowList && matFlowList.map(item=>{
-                                return(
-                                    <Menu.Item
-                                        onClick={()=>{changeMatFlow(item)}}
-                                        key={item.matFlowId}
-                                        className="opt-content-group_item"
-                                    >
-                                        {item.matFlowName}
-                                    </Menu.Item>
-                                )
-                            })
-                        }
-                     </Menu>
+                    {
+                        matFlowList && matFlowList.map(item=>{
+                            return(
+                                <div
+                                    onClick={()=>{changeMatFlow(item)}}
+                                    key={item.matFlowId}
+                                    className="opt-content-group_item"
+                                >
+                                    {item.matFlowName}
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
         </div>

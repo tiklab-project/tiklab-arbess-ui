@@ -1,7 +1,6 @@
 import React,{Fragment,useState,useEffect} from "react";
 import {withRouter} from "react-router";
 import {getUser} from "tiklab-core-ui";
-import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {Form,message} from "antd";
 import moment from "../../../common/moment/moment";
 import {inject,observer} from "mobx-react";
@@ -25,9 +24,7 @@ const Config = props =>{
         deployProofId,setDeployProofId, gitProofId,setGitProofId} = configDataStore
 
     const [form] = Form.useForm()
-    const pluginStore = useSelector(state =>state.pluginStore)
     const [view,setView] = useState(1)
-    const [isBtn,setIsBtn] = useState(false)
     const [runOrSave,setRunOrSave] = useState(true)
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
@@ -60,12 +57,6 @@ const Config = props =>{
             setOrderShellBlock("")
             setDeployProofId("")
             setGitProofId("")
-        })
-        // 是否存在插件
-        pluginStore.map(item=>{
-            if(item.id === "gui"){
-                setIsBtn(true)
-            }else setIsBtn(false)
         })
     },[])
 
@@ -285,18 +276,15 @@ const Config = props =>{
                     matFlowId={matFlowId}
                     matFlowName={jumpOrNot}
                     userId={userId}
-                    isBtn={isBtn}
                     setRunOrSave={setRunOrSave}
                 />
             </div>
             <ConfigView
                 del={del}
                 view={view}
-                isBtn={isBtn}
                 form={form}
                 onFinish={onFinish}
                 matFlowStore={matFlowStore}
-                pluginStore={pluginStore}
                 configDataStore={configDataStore}
             />
             <PromptContent

@@ -24,6 +24,7 @@ const DynamicDetails = props =>{
     },[])
 
     const onChangePage = page =>{
+        console.log(page)
         const params = {
             userId:userId,
             page:page,
@@ -34,7 +35,7 @@ const DynamicDetails = props =>{
     }
 
     return(
-        <>
+        <div className="dynamic-details">
             <DynamicList
                 {...props}
                 pageNumber={pageNumber}
@@ -42,7 +43,7 @@ const DynamicDetails = props =>{
                 dynamicTitle={"全部动态"}
                 dynamicClick={"返回"}
             />
-            <div className="dynamic-bottom-pagination">
+            <div className="dynamic-pagination">
                 <ConfigProvider locale={zhCN}>
                     <Pagination
                         {...page}
@@ -53,7 +54,7 @@ const DynamicDetails = props =>{
                     />
                 </ConfigProvider>
             </div>
-        </>
+        </div>
     )
 }
 

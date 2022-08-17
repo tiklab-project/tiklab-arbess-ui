@@ -24,7 +24,7 @@ const MatFlowAdd = props => {
     const {createMatFlow,matFlowList,findAllMatFlowStatus}=matFlowStore
 
     const inputRef = useRef()
-    const [liStatus,setLiStatus] = useState(0)
+    const [liStatus,setLiStatus] = useState(1)
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -45,7 +45,7 @@ const MatFlowAdd = props => {
             matflowCreateTime:moment.moment
         }
         createMatFlow(params).then(res=>{
-            if(res.code === 0 && res.data){
+            if(res.code===0 && res.data){
                 props.history.push(`/index/config/${value.matFlowName}`)
             }else{
                 message.error({content:"添加失败", className:"message"})
@@ -57,8 +57,8 @@ const MatFlowAdd = props => {
         return lis.map((item,index) => {
             return (
                 <div key={item.id}
-                     onClick={()=>liStatusData(index)}
-                     className={liStatus === index ? "choose-item choose-active":"choose-item"}
+                     onClick={()=>liStatusData(index+1)}
+                     className={liStatus === index+1 ? "choose-item choose-active":"choose-item"}
                 >
                     <div className="choose-item-icon">
                         <svg className="icon" aria-hidden="true">

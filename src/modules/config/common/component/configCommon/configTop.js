@@ -5,7 +5,7 @@ import ConfigChangeView from "./configChangeView";
 
 const ConfigTop = props =>{
 
-    const {view,setView,matFlowId,matFlowName,setIsPrompt,userId,isBtn,setRunOrSave} = props
+    const {view,setView,matFlowId,matFlowName,setIsPrompt,userId,setRunOrSave} = props
 
     return(
         <div className="config-top-content">
@@ -17,7 +17,6 @@ const ConfigTop = props =>{
                 setIsPrompt={setIsPrompt}
                 matFlowId={matFlowId}
                 matFlowName={matFlowName}
-                isBtn={isBtn}
                 setRunOrSave={setRunOrSave}
             />
         </div>

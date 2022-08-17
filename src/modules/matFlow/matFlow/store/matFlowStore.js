@@ -47,7 +47,7 @@ export class MatFlowStore {
         return new Promise((resolve, reject) => {
             FindAllMatFlowStatus(param).then(res=>{
                 console.log(res)
-                if(res.code === 0 && res.data){
+                if(res.code===0 && res.data){
                     this.matFlowList=res.data
                 }
                 resolve(res)
@@ -86,7 +86,7 @@ export class MatFlowStore {
         return new Promise((resolve, reject) => {
             FindLike(params).then(res=>{
                 console.log(res)
-                if(res.code === 0 && res.data){
+                if(res.code===0 && res.data){
                     this.searchMatFlowList=res.data
                 }
                 resolve(res)

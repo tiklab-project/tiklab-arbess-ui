@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Empty, Spin} from "antd";
+import {Button,Empty,Spin} from "antd";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import {LoadingOutlined} from "@ant-design/icons";
 

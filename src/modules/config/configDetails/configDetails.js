@@ -1,7 +1,6 @@
 import React,{Fragment,useState,useEffect} from "react";
 import {Form,message} from "antd";
 import {getUser} from "tiklab-core-ui";
-import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import moment from "../../../common/moment/moment";
 import ConfigTop from "../common/component/configCommon/configTop";
 import {withRouter} from "react-router";
@@ -24,21 +23,10 @@ const ConfigDetails = props =>{
         gitProofId,setGitProofId,orderShellBlock,unitShellBlock} = configDataStore
 
     const [form] = Form.useForm()
-    const pluginStore = useSelector(state =>state.pluginStore)
     const [view,setView] = useState(1)
-    const [isBtn,setIsBtn] = useState(false)
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
     const userId = getUser().userId
-
-    // 是否有图形化插件
-    useEffect(()=>{
-        pluginStore.map(item=>{
-            if(item.id === "gui"){
-                setIsBtn(true)
-            }else setIsBtn(false)
-        })
-    },[view])
 
     // Gitee和Github授权
     useEffect(() => {
@@ -367,16 +355,13 @@ const ConfigDetails = props =>{
                     setIsPrompt={setIsPrompt}
                     matFlowId={matFlowId}
                     matFlowName={matFlowName}
-                    isBtn={isBtn}
                 />
             </div>
             <ConfigView
                 del={del}
                 view={view}
-                isBtn={isBtn}
                 form={form}
                 onFinish={onFinish}
-                pluginStore={pluginStore}
                 matFlowStore={matFlowStore}
                 configDataStore={configDataStore}
             />
