@@ -10,7 +10,8 @@
         border: 1px solid #cccccc;
         border-radius: 3px;
         &-form{
-            background: #eaeff2;
+            background: #CCDDFF;
+            //background: #eaeff2;
             padding: 15px 0 15px 15px;
             border-bottom: 1px solid #cccccc;
             .ant-form-item{
@@ -26,7 +27,7 @@
                 .choose{
                     &-item{
                         margin: 5px 0;
-                        padding: 10px 5px 10px 0;
+                        padding: 10px 0;
                         cursor: pointer;
                         display: flex;
                         flex-direction: row;
@@ -36,7 +37,7 @@
                             border-radius: 3px;
                         }
                         &-icon{
-                            padding: 0 15px ;
+                            padding: 0 10px ;
                             .icon{
                                 width: 40px;
                                 height: 40px;

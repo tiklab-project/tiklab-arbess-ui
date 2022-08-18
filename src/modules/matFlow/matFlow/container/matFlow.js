@@ -28,7 +28,7 @@ const MatFlow = props =>{
         <div className="matFlow">
             <div className="matFlow-top">
                 <div className="matFlow-top-r">
-                    <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 240,marginRight:10 }} />
+                    <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 280,marginRight:10 }} />
                     <Button type="primary" onClick={()=>props.history.push("/index/new")}>
                         <PlusOutlined/> 新建流水线
                     </Button>

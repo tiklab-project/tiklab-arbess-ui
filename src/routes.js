@@ -39,16 +39,25 @@ const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/pro
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
+
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
-const Info=AsyncComponent(()=>import("./modules/system/message/message/message"))
+
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
+
+const Message=AsyncComponent(()=>import("./modules/system/message/message/message"))
+const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/message/userMessage"))
+const MessageManagement=AsyncComponent(()=>import("./modules/system/message/message/messageManagement"))
+const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/message/messageTemplate"))
+const MessageType=AsyncComponent(()=>import("./modules/system/message/message/messageType"))
+const MessageSendType=AsyncComponent(()=>import("./modules/system/message/message/messageSendType"))
+
 
 const routers=[
     {
@@ -107,6 +116,10 @@ const routers=[
                 path:"/index/searchresult",
                 component:SearchResult,
                 exact:true,
+            },
+            {
+                path:"/index/userMessageContent",
+                component: UserMessageContent,
             },
             {
                 path:"/index/task/:matFlowName",
@@ -173,11 +186,11 @@ const routers=[
                         component: Plug,
                     },
                     {
-                        path: "/index/system/power/role",
+                        path: "/index/system/syr/role",
                         component: SystemRole,
                     },
                     {
-                        path: "/index/system/power/feature",
+                        path: "/index/system/syr/feature",
                         component: SystemFeature,
                     },
                     {
@@ -194,7 +207,23 @@ const routers=[
                     },
                     {
                         path:"/index/system/message",
-                        component: Info,
+                        component: Message,
+                    },
+                    {
+                        path:"/index/system/mes/management",
+                        component: MessageManagement,
+                    },
+                    {
+                        path:"/index/system/mes/template",
+                        component: MessageTemplate,
+                    },
+                    {
+                        path:"/index/system/mes/type",
+                        component: MessageType,
+                    },
+                    {
+                        path:"/index/system/mes/sendType",
+                        component: MessageSendType,
                     },
                 ]
             },

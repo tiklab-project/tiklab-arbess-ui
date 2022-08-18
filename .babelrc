@@ -37,6 +37,11 @@
             "libraryDirectory": "es",
             "style": true
         }, "tiklab-licence-ui"],
+        ["import", {
+            "libraryName": "tiklab-message-ui",
+            "libraryDirectory": "es",
+            "style": true
+        }, "tiklab-message-ui"],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],

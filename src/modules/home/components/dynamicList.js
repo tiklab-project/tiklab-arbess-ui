@@ -6,7 +6,7 @@ const DynamicList = props =>{
 
     const {dynamicList,pageNumber,dynamicTitle,dynamicClick} = props
 
-    const goUser = item => {
+    const goUser = () => {
         props.history.push("/index/system/list")
     }
 
@@ -38,14 +38,15 @@ const DynamicList = props =>{
                 {
                     dynamicList && dynamicList.length  > 0 ?
                         dynamicList.map((item,index)=> {
-                            return <div className="dynamic-list-listHeader" key={index}>
-                                <div>
-                                    <span>{(index+1)+(pageNumber-1)*15}、用户</span>
-                                    <span className="name" onClick={()=>goUser(item.user)}>
+                            return <div className="dynamic-list-item" key={index}>
+                                <div className="dynamic-item">
+                                    <div className="dynamic-item-title">
+                                        <span>{(index+1)+(pageNumber-1)*15}、用户</span>
+                                        <span className="dynamic-item-name" onClick={()=>goUser()}>
                                         {item.user && item.user.name}
                                     </span>
                                     <span>{item.massage}</span>
-                                    <span className="name"
+                                    <span className="dynamic-item-name"
                                           onClick={() => goMatFlow(item.matFlow && item.matFlow.matflowName)}
                                     >
                                         {item.matFlow && item.matFlow.matflowName}
@@ -54,6 +55,7 @@ const DynamicList = props =>{
                                 </div>
                                 <div>{item.createTime}</div>
                             </div>
+                        </div>
                         })
                         :
                         <EmptyText/>

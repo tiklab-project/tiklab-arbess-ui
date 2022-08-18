@@ -10,12 +10,12 @@ const MatFlowNear = props =>{
 
     return <div className="matFlowNear">
         <div className="matFlowNear-title">最近打开的流水线</div>
-        <div className="matFlowNear-active">
+        <div className="matFlowNear-list">
             {
                 matFlowNearList && matFlowNearList.length>0 ?
                     matFlowNearList.map((item,index)=>{
-                        return  <div key={item.matFlowId} className="matFlowNear-active-group">
-                            <div className="matFlowNear-active-group-desc">
+                        return  <div key={item.matFlowId} className="matFlowNear-list-item">
+                            <div className="matFlowNear-list-item-desc">
                                 <span>{index+1}、</span>
                                 <span onClick={()=>goMatFlow(item.matFlowName)} className="name">
                                     {item.matFlowName}

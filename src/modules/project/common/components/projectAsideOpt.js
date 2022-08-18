@@ -38,7 +38,9 @@ const ProjectAsideOpt = props =>{
                                     key={item.matFlowId}
                                     className="opt-content-group_item"
                                 >
-                                    {item.matFlowName}
+                                    <span>
+                                        {item.matFlowName}
+                                    </span>
                                 </div>
                             )
                         })

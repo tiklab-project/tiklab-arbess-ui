@@ -90,8 +90,7 @@ const StructureLeft = props =>{
                                     {
                                         leftPageList && leftPageList.map((item,i)=>{
                                             return <div onClick={()=>showHistory(item,i)}
-                                                        className={`history-content-list-ul
-                                                        ${index===i+1 ? "history-content-list_active":""}`}
+                                                        className={`history-content-list-ul ${index===i+1 ? "history-content-list_active":""}`}
                                                         key={i}
                                                     >
                                                 <div className="list-title"> # {item.findNumber}</div>

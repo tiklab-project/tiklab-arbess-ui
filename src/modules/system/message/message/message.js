@@ -3,7 +3,9 @@ import {inject,observer} from "mobx-react";
 import {Descriptions} from "antd";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 
-// 系统信息
+/*
+    系统信息
+ */
 const Message = props =>{
 
     const {messageStore} = props

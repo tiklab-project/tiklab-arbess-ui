@@ -24,7 +24,6 @@ const DynamicDetails = props =>{
     },[])
 
     const onChangePage = page =>{
-        console.log(page)
         const params = {
             userId:userId,
             page:page,

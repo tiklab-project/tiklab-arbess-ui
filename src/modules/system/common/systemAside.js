@@ -13,11 +13,14 @@ const SystemAside= props =>  {
     },[path])
 
     useEffect(()=>{
-        if(path.indexOf("/index/system/power")===0){
+        if(path.indexOf("/index/system/syr")===0){
             setExpandedTree([path,"1"])
         }
         if(path.indexOf("/index/system/project")===0){
             setExpandedTree([path,"2"])
+        }
+        if(path.indexOf("/index/system/mes")===0){
+            setExpandedTree([path,"3"])
         }
     },[])
 
@@ -47,13 +50,13 @@ const SystemAside= props =>  {
             enCode:"E",
             children:[
                 {
-                    key:"/index/system/power/feature",
+                    key:"/index/system/syr/feature",
                     label:"系统功能",
                     icon:"#icon-gongzuotongji",
                     enCode:"E1",
                 },
                 {
-                    key:"/index/system/power/role",
+                    key:"/index/system/syr/role",
                     label:"系统角色",
                     icon:"#icon-gongzuotongji",
                     enCode:"E2",
@@ -75,6 +78,38 @@ const SystemAside= props =>  {
                 {
                     key:"/index/system/project/role",
                     label:"项目角色",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"I2",
+                }
+            ]
+        },
+        {
+            key:"3",
+            label:"消息中心",
+            icon:"#icon-gongzuotongji",
+            enCode:"I",
+            children:[
+                {
+                    key:"/index/system/mes/management",
+                    label:"消息管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"I2",
+                },
+                {
+                    key:"/index/system/mes/template",
+                    label:"消息模板管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"I2",
+                },
+                {
+                    key:"/index/system/mes/type",
+                    label:"消息类型管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"I2",
+                },
+                {
+                    key:"/index/system/mes/sendType",
+                    label:"消息发送方式",
                     icon:"#icon-gongzuotongji",
                     enCode:"I2",
                 }

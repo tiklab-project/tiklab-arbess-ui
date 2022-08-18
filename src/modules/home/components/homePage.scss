@@ -63,11 +63,8 @@
                 font-size: 18px;
                 font-weight: 600;
             }
-            &-active{
-                .ant-list-sm,.ant-list-item{
-                    padding: 2px;
-                }
-                &-group{
+            &-list{
+                &-item{
                     &-desc{
                         cursor: pointer;
                         font-size: 16px;

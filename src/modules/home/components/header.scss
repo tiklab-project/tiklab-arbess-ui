@@ -41,7 +41,11 @@
                 width: 100%;
             }
         }
-        &-language,&-user,&-status{
+        &-icon{
+            font-size: 23px;
+            cursor: pointer;
+        }
+        &-language,&-user,&-status,&-message{
             margin: 0 10px;
         }
         &-user{

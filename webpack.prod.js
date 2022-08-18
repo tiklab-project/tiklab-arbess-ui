@@ -62,7 +62,7 @@ module.exports = merge(baseWebpackConfig, {
         // }),
         new webpack.ContextReplacementPlugin(
             /moment[/\\]locale$/,
-            /zh-cn|es|zh-tw|ja/,
+            /zh-cn|es|zh-tw/,
         ),
     ],
     optimization: {
@@ -117,6 +117,13 @@ module.exports = merge(baseWebpackConfig, {
                     chunks: "all",
                     test: /tiklab-privilege-ui/,
                     priority: 70,
+                    reuseExistingChunk: true
+                },
+                tiklabMessageUI: {
+                    name: "chunk-tiklab-message-ui",
+                    chunks: "all",
+                    test: /tiklab-message-ui/,
+                    priority: 60,
                     reuseExistingChunk: true
                 },
                 echarts: {

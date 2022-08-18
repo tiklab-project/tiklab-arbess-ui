@@ -33,18 +33,19 @@
             &-history{
                 height: calc(100% - 60px);
                 padding-left: 2px;
-                overflow: auto;
                 .history-content{
                     &-list{
                         height: calc(100% - 60px);
+                        overflow: auto;
                         &-ul{
                             display: flex;
                             flex-direction: row;
                             width: 100%;
                             padding: 10px 10px 10px 20px;
                             cursor: pointer;
+                            margin: 3px 0;
                             &:hover{
-                                background: #f0f0f0;
+                                background: #e3e8f0;
                             }
                             .list{
                                 &-title{
@@ -134,6 +135,7 @@
                         display: flex;
                         flex-direction: row;
                         padding: 20px 0;
+                        min-width: 490px;
                         &-cart{
                             margin-right: 20px;
                             padding: 10px;

@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {Avatar,Dropdown,Space,Menu} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
-import {GlobalOutlined} from "@ant-design/icons";
+import {GlobalOutlined,MessageOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
 import portrait from "../../../assets/images/portrait.jpg";
@@ -14,8 +14,8 @@ const Head = props =>{
     const {AppConfigComponent} = props
 
     let path = props.location.pathname
-    const {i18n} = useTranslation()
     const [currentLink,setCurrentLink] = useState(path)
+    const {i18n} = useTranslation()
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
 
@@ -56,7 +56,7 @@ const Head = props =>{
             return (
                 <div key={routers.key}
                      onClick={()=>changeCurrentLink(routers)}
-                     className={currentLink === routers.to ? "headers-active" : null}
+                     className={currentLink===routers.to ? "headers-active" : null}
                 >
                     {routers.title}
                 </div>
@@ -85,6 +85,10 @@ const Head = props =>{
         </Menu>
     )
 
+    const goUserMessageContent = () =>{
+        props.history.push("/index/userMessageContent")
+    }
+
     return(
         <div className="frame-header">
             <div className="frame-header-right">
@@ -96,18 +100,20 @@ const Head = props =>{
             </div>
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
+                    <div className="frame-header-message">
+                        <MessageOutlined
+                            onClick={()=>goUserMessageContent()}
+                            className="frame-header-icon"
+                        />
+                    </div>
                     <div className="frame-header-language">
                         <Dropdown overlay={languageMenu}>
-                            <Space>
-                                <GlobalOutlined style={{fontSize:23,cursor:"pointer"}}/>
-                            </Space>
+                            <GlobalOutlined className="frame-header-icon"/>
                         </Dropdown>
                     </div>
                     <div className="frame-header-user">
                         <Dropdown overlay={outMenu}>
-                            <Space>
-                                <Avatar src={portrait} style={{cursor:"pointer"}}/>
-                            </Space>
+                            <Avatar src={portrait} style={{cursor:"pointer"}}/>
                         </Dropdown>
                     </div>
                     <div className="frame-header-status">

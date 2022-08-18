@@ -13,7 +13,7 @@ const AddProofButton = props =>{
 
     const userId = getUser().userId
     const [visible,setVisible] = useState(false)
-    const [isAuthority,setIsAuthority] = useState(false) // 项目和系统凭证是否显示凭证作用域
+    const [isAuthority,setIsAuthority] = useState(false) // 是否显示凭证作用域
 
     useEffect(()=>{
         if(style){

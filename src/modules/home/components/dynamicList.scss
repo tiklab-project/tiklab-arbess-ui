@@ -17,8 +17,8 @@
         }
         &-ac{
             width: 80px;
-            line-height: 30px;
-            height: 30px;
+            line-height: 32px;
+            height: 32px;
             text-align: center;
             border: 1px solid #ccc;
             border-radius: 3px;
@@ -30,19 +30,32 @@
         }
     }
     &-list{
-        &-listHeader{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px;
+        &-item{
+            padding: 10px;
             border: 1px solid #f4f4f4;
-            .name{
-              color: #1890ff;
-              cursor: pointer;
-              padding: 0 5px;
-                &:hover{
-                    text-decoration: underline;
+            .dynamic-item{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                line-height: 30px;
+                height: 30px;
+                &-title{
+                    display: flex;
+                }
+                &-name{
+                    color: #1890ff;
+                    cursor: pointer;
+                    padding: 0 5px;
+                    height: 30px;
+                    line-height: 30px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    display: inline-block;
+                    overflow: hidden;
+                    max-width: 80px;
+                    &:hover{
+                        text-decoration: underline;
+                    }
                 }
             }
         }

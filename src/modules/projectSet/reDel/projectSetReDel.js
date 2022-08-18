@@ -61,7 +61,7 @@ const ProjectSetReDel = props =>{
                                     if(value){
                                         let nameArray = []
                                         if(matFlowList){
-                                            nameArray=matFlowList && matFlowList.map(item=>item.matFlowName);
+                                            nameArray=matFlowList && matFlowList.map(item=>item.matFlowName)
                                         }
                                         if (nameArray.includes(value)) {
                                             return Promise.reject("名称已经存在");
@@ -74,7 +74,7 @@ const ProjectSetReDel = props =>{
                             }),
                         ]}
                     >
-                        <Input />
+                        <Input allowClear/>
                     </Form.Item>
                     <Form.Item shouldUpdate>
                         {() => (
