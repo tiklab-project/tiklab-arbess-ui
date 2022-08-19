@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Avatar,Dropdown,Space,Menu} from "antd";
+import {Avatar,Dropdown,Menu} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined,MessageOutlined} from "@ant-design/icons";
@@ -18,7 +18,11 @@ const Head = props =>{
     const {i18n} = useTranslation()
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
+    const isLocal = JSON.parse(localStorage.getItem("authConfig")).authType
+    const isUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
+    const local = isLocal === "local"
 
+    console.log(local)
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){
             path="/index/system"
@@ -67,16 +71,24 @@ const Head = props =>{
     const languageMenu = (
         <Menu>
             <Menu.Item key="0">中文</Menu.Item>
-            <Menu.Item key="1">英文</Menu.Item>
+            {/*<Menu.Item key="1">英文</Menu.Item>*/}
         </Menu>
     )
+    
+    const goOut = () => {
+        // props.history.push("/logout")
+        if(local){
+            location.href = location.origin + "/eas#/logout"
+        }
+        else location.href = isUrl + `/#/logout?redirect=${location.href}`
+    }
 
     const outMenu = (
         <Menu>
             <Menu.Item key="0">
                 {getUser().name}
             </Menu.Item>
-            <Menu.Item key="1" onClick={()=>props.history.push("/logout")}>
+            <Menu.Item key="1" onClick={()=>goOut()}>
                 退出
                 <svg className="icon" aria-hidden="true" style={{width:20,height:20}}>
                     <use xlinkHref="#icon-tuichu1"/>
@@ -112,7 +124,7 @@ const Head = props =>{
                         </Dropdown>
                     </div>
                     <div className="frame-header-user">
-                        <Dropdown overlay={outMenu}>
+                        <Dropdown overlay={outMenu} >
                             <Avatar src={portrait} style={{cursor:"pointer"}}/>
                         </Dropdown>
                     </div>

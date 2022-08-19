@@ -60,14 +60,14 @@ const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messag
 
 
 const routers=[
-    {
-        path:"/login",
-        component:Login,
-    },
-    {
-        path:"/logout",
-        component:Logout,
-    },
+    // {
+    //     path:"/login",
+    //     component:Login,
+    // },
+    // {
+    //     path:"/logout",
+    //     component:Logout,
+    // },
     {
         path:"/index",
         component: Index,

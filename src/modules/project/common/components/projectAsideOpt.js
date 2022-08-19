@@ -7,7 +7,7 @@ const ProjectAsideOpt = props =>{
 
     const {matFlowStore,structureListStore,path} = props
 
-    const {matFlowName,matFlowList,lastPath} = matFlowStore
+    const {matFlowName,matFlowList,lastPath,matFlowId} = matFlowStore
     const {setState,setEnforcer,setMode} = structureListStore
 
     const changeMatFlow = item => {
@@ -36,7 +36,7 @@ const ProjectAsideOpt = props =>{
                                 <div
                                     onClick={()=>{changeMatFlow(item)}}
                                     key={item.matFlowId}
-                                    className="opt-content-group_item"
+                                    className={`opt-content-group_item ${item.matFlowId===matFlowId ? "opt-content-active" : ""}`}
                                 >
                                     <span>
                                         {item.matFlowName}
@@ -54,7 +54,7 @@ const ProjectAsideOpt = props =>{
         <Dropdown overlay={menu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
             <li className="aside_content aside_dropdown"
                 style={{padding:10}}
-                onClick={(e) => e.preventDefault()}
+                onClick={(e)=>e.preventDefault()}
             >
                     <svg  className="icon" aria-hidden="true">
                         <use xlinkHref="#icon-shaixuan1"/>

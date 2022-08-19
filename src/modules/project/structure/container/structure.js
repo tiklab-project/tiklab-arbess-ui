@@ -78,7 +78,7 @@ const Structure = props => {
             type:0
         }
         findPageHistory(params).then(res=>{
-            if(res.code === 0 && res.data.dataList.length === 0){
+            if(res.code===0 && res.data.dataList.length===0){
                 setIsData(false)
             }
         })

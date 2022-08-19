@@ -58,7 +58,7 @@ const MatFlowAdd = props => {
             return (
                 <div key={item.id}
                      onClick={()=>liStatusData(index+1)}
-                     className={liStatus === index+1 ? "choose-item choose-active":"choose-item"}
+                     className={`choose-item ${liStatus===index+1 ? "choose-active":""}`}
                 >
                     <div className="choose-item-icon">
                         <svg className="icon" aria-hidden="true">

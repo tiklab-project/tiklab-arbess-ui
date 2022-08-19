@@ -32,7 +32,6 @@ const WorkSpaceRecord = props =>{
                             })
                         }
                     </div>
-
         })
     }
 

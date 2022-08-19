@@ -52,7 +52,7 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new CssMinimizerPlugin(),
         new ProgressBarPlugin(),
-        // new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin(),
         // new CompressionPlugin({
         //     filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
         //     algorithm: "gzip", // 算法
@@ -88,7 +88,7 @@ module.exports = merge(baseWebpackConfig, {
                     name: "chunk-antIcon",
                     chunks: "all",
                     test: /@ant-design/,
-                    priority: 60,
+                    priority: 65,
                     reuseExistingChunk: true //遇到重复包直接引用，不重新打包
                 },
                 tiklabPluginUI: {
@@ -98,18 +98,18 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 60,
                     reuseExistingChunk: true
                 },
-                tiklabUserUI: {
-                    name: "chunk-tiklab-user-ui",
-                    chunks: "all",
-                    test: /tiklab-user-ui/,
-                    priority: 60,
-                    reuseExistingChunk: true
-                },
                 tiklabEamUI: {
                     name: "chunk-tiklab-eam-ui",
                     chunks: "all",
                     test: /tiklab-eam-ui/,
                     priority: 60,
+                    reuseExistingChunk: true
+                },
+                tiklabUserUI: {
+                    name: "chunk-tiklab-user-ui",
+                    chunks: "all",
+                    test: /tiklab-user-ui/,
+                    priority: 65,
                     reuseExistingChunk: true
                 },
                 tiklabPrivilegeUI: {
@@ -123,7 +123,7 @@ module.exports = merge(baseWebpackConfig, {
                     name: "chunk-tiklab-message-ui",
                     chunks: "all",
                     test: /tiklab-message-ui/,
-                    priority: 60,
+                    priority: 70,
                     reuseExistingChunk: true
                 },
                 echarts: {
@@ -157,8 +157,8 @@ module.exports = merge(baseWebpackConfig, {
                 icon: {
                     name: "chunk-icon",
                     chunks: "all",
-                    test: /font-icon/,
-                    priority: 60,
+                    test: /[\\/]src[\\/]font_icon[\\/]/,
+                    priority: 90,
                     reuseExistingChunk: true
                 },
                 rcomponent: {

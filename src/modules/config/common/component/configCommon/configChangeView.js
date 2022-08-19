@@ -27,9 +27,9 @@ const ConfigChangeView = props =>{
         if(setRunOrSave){
             setRunOrSave(false)
         }
-        setTimeout(()=> props.history.push(`/index/task/${matFlowName}/structure`),1000)
+        setTimeout(()=>props.history.push(`/index/task/${matFlowName}/structure`),1000)
         matFlowStartStructure(params).then(res=>{
-            if(res.code === 0 && res.data === 1){
+            if(res.code===0 && res.data===1){
                 if(res.data===1){
                 // props.history.push(`/index/task/${matFlowName}/structure`)
                 }else{

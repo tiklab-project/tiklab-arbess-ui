@@ -49,7 +49,7 @@ const HomePage = props =>{
         burnDownChart(x,success,fail,stop)
     }
 
-    const burnDownChart = (timerXaixs, successYaixs, failsYaxis,stopYaxis) => {
+    const burnDownChart = (timerXaixs,successYaixs, failsYaxis,stopYaxis) => {
         const burnDown = echarts.init(document.getElementById("burn-down"))
         let option;
         option = {

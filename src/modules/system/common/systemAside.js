@@ -6,7 +6,7 @@ const SystemAside= props =>  {
 
     const path = props.location.pathname
     const [selectKey,setSelectKey] = useState(path)
-    const [expandedTree, setExpandedTree] = useState(["/index/system/power/feature"])  // 树的展开与闭合
+    const [expandedTree,setExpandedTree] = useState(["/index/system/syr/feature"])  // 树的展开与闭合
 
     useEffect(()=>{
         setSelectKey(path)
