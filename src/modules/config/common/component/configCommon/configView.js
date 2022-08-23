@@ -1,4 +1,4 @@
-import React,{Fragment} from "react";
+import React,{Fragment,useEffect} from "react";
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
@@ -8,7 +8,16 @@ const ConfigView = props =>{
 
     const {view,del,onFinish,form,matFlowStore,configDataStore} = props
     const {matFlowId} = matFlowStore
+    const {isPlugin,setIsPlugin} = configDataStore
     const pluginStore = useSelector(state =>state.pluginStore)
+
+    useEffect(()=>{
+        pluginStore && pluginStore.map(item=>{
+            if(item.id==="gui"){
+                setIsPlugin(true)
+            }
+        })
+    },[])
 
     return view === 1 ?
         <FormView
@@ -20,7 +29,7 @@ const ConfigView = props =>{
         :
         <Fragment>
             {
-                !getVersionInfo().expired ?
+                !getVersionInfo().expired && isPlugin?
                     <RemoteUmdComponent
                         {...props}
                         point={"gui"}

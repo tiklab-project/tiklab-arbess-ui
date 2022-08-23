@@ -22,7 +22,6 @@ const Head = props =>{
     const isUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
     const local = isLocal === "local"
 
-    console.log(local)
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){
             path="/index/system"
@@ -76,11 +75,11 @@ const Head = props =>{
     )
     
     const goOut = () => {
-        // props.history.push("/logout")
-        if(local){
-            location.href = location.origin + "/eas#/logout"
-        }
-        else location.href = isUrl + `/#/logout?redirect=${location.href}`
+        props.history.push("/logout")
+        // if(local){
+        //     location.href = location.origin + "/eas#/logout"
+        // }
+        // else location.href = isUrl + `/#/logout?redirect=${location.href}`
     }
 
     const outMenu = (

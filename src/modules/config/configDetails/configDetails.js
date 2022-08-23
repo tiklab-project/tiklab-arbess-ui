@@ -352,7 +352,6 @@ const ConfigDetails = props =>{
                     userId={userId}
                     view={view}
                     setView={setView}
-                    setIsPrompt={setIsPrompt}
                     matFlowId={matFlowId}
                     matFlowName={matFlowName}
                 />

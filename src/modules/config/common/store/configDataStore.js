@@ -16,10 +16,16 @@ export class ConfigDataStore {
     @observable orderShellBlock = ""  // 部署文件命令
     @observable gitProofId = ""
     @observable deployProofId = ""
+    @observable isPlugin = false
+
+    @action
+    setIsPlugin = value =>{
+        this.isPlugin = value
+    }
 
     @action
     setIsPrompt = value => {
-        this.isPrompt = value;
+        this.isPrompt = value
     }
 
     @action

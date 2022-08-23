@@ -272,7 +272,6 @@ const Config = props =>{
                 <ConfigTop
                     view={view}
                     setView={setView}
-                    setIsPrompt={setIsPrompt}
                     matFlowId={matFlowId}
                     matFlowName={jumpOrNot}
                     userId={userId}

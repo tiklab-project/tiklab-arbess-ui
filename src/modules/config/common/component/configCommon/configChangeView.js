@@ -8,10 +8,11 @@ import {inject,observer} from "mobx-react";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,matFlowId,structureStore,setIsPrompt,userId,matFlowName,
-        setRunOrSave} = props
+    const {view,setView,matFlowId,structureStore,userId,matFlowName,
+        setRunOrSave,configDataStore} = props
 
     const {matFlowStartStructure} = structureStore
+    const {isPlugin,setIsPrompt} = configDataStore
     const [processVisible,setProcessVisible] = useState(false)
 
     const run = () => {
@@ -60,7 +61,7 @@ const ConfigChangeView = props =>{
                         </div>
                     </div>
                     {
-                        !getVersionInfo().expired ?
+                        !getVersionInfo().expired && isPlugin ?
                             <div className={view===2 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}
                                  onClick={()=>setView(2)}
                             >
@@ -79,4 +80,4 @@ const ConfigChangeView = props =>{
     )
 }
 
-export default withRouter(inject("structureStore")(observer(ConfigChangeView)))
+export default withRouter(inject("structureStore","configDataStore")(observer(ConfigChangeView)))
