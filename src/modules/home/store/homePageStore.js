@@ -15,6 +15,7 @@ export class HomePageStore{
         pageSize: "15",
         total: "1"
     }
+    @observable privilegeBtn = [] // 路由控制显示
 
     @action
     findAllOpen = async value =>{

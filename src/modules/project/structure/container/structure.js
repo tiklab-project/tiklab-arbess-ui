@@ -123,7 +123,6 @@ const Structure = props => {
                 changPage() // 历史列表
             })
         }
-        return ()=>clearInterval(interval)
     }, [matFlowId,freshen])
 
     const renderExec = data => {
@@ -162,20 +161,32 @@ const Structure = props => {
         }
     }
     
+    let timeout = null
     const runImmediately = () => {
         const params = {
             userId:userId,
             matFlowId:matFlowId
         }
         setRunImState(true)
-        setTimeout(()=>setFreshen(!freshen),1000)
-        matFlowStartStructure(params).then(()=>{
+        timeout = setTimeout(()=>setFreshen(!freshen),1000)
+        matFlowStartStructure(params).then(res=>{
             // setTimeout(()=>setFreshen(!freshen),500)
+            if(res.code===0 && res.data===1){
+                timeout = setTimeout(()=>setRunImState(false),500)
+            }
         }).catch(error=>{
             console.log(error)
         })
     }
 
+    // 销毁定时器
+    useEffect(()=>{
+        return ()=>{
+            clearTimeout(timeout)
+            clearInterval(interval)
+        }
+    },[matFlowId,freshen])
+    
     return (
         <div className="structure">
             {

@@ -42,12 +42,14 @@ const DynamicList = props =>{
                                 <div className="dynamic-item">
                                     <div className="dynamic-item-title">
                                         <span>{(index+1)+(pageNumber-1)*15}、用户</span>
-                                        <span className="dynamic-item-name" onClick={()=>goUser()}>
+                                        <span
+                                            // className="dynamic-item-name" onClick={()=>goUser()}
+                                        >
                                         {item.user && item.user.name}
                                     </span>
                                     <span>{item.massage}</span>
                                     <span className="dynamic-item-name"
-                                          onClick={() => goMatFlow(item.matFlow && item.matFlow.matflowName)}
+                                          onClick={()=>goMatFlow(item.matFlow && item.matFlow.matflowName)}
                                     >
                                         {item.matFlow && item.matFlow.matflowName}
                                     </span>

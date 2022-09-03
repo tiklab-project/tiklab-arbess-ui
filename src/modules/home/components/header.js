@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import {Avatar,Dropdown,Menu} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
+import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {GlobalOutlined,MessageOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router-dom";
 import logo from "../../../assets/images/logo.png";
@@ -21,6 +22,11 @@ const Head = props =>{
     const isLocal = JSON.parse(localStorage.getItem("authConfig")).authType
     const isUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
     const local = isLocal === "local"
+    
+    useEffect(()=>{
+        // 路由控制
+        privilegeStores.systemRoleStore.getSystemPermissions(getUser().userId)
+    },[])
 
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){

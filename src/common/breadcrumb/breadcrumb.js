@@ -8,7 +8,7 @@ const BreadcrumbContent = props =>{
 
     return  <div className={config ? "breadcrumb-topOver": "breadcrumb"}>
                 <span className={secondItem ? "breadcrumb-span":""}>{firstItem}</span>
-                {secondItem ? <span>&nbsp; > &nbsp;{secondItem}</span>:null}
+                {secondItem ? <span>&nbsp; &gt; &nbsp;{secondItem}</span>:null}
             </div>
 
 }

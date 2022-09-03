@@ -1,8 +1,9 @@
-import React from "react";
-import {Button,message,Row} from "antd";
+import React,{useState} from "react";
+import {Button,message,Row,Spin} from "antd";
 import FindAllProof from "../../../../proof/components/findAllProof";
 import AddProofButton from "../../../../proof/components/addProofButton";
 import {inject,observer} from "mobx-react";
+import {LoadingOutlined} from "@ant-design/icons";
 
 const ConfigProof = props =>{
 
@@ -10,6 +11,8 @@ const ConfigProof = props =>{
 
     const {formInitialValues,codeType,gitProofId,deployProofId} = configDataStore
     const {codeTestPass} = configItemStore
+
+    const [testStatus,setTestStatus] = useState(false)
 
     const testing = () =>{
         let port,url,proofId,type
@@ -35,6 +38,7 @@ const ConfigProof = props =>{
             type:type
         }
         if(url){
+            setTestStatus(true)
             codeTestPass(params).then(res=>{
                 testReminder(res)
             }).catch(error=>{
@@ -52,6 +56,7 @@ const ConfigProof = props =>{
             }else {
                 message.error({content:"连接失败", className:"message"})
             }
+            setTestStatus(false)
         }
     }
 
@@ -60,7 +65,14 @@ const ConfigProof = props =>{
             <FindAllProof type={allProofType}/>
             <AddProofButton type={proofBtnType}/>
             <div className="config-details-link">
-                <Button onClick={()=>testing()}>连接测试</Button>
+                {
+                    testStatus ?
+                        <Button>
+                            <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
+                        </Button>
+                        :
+                        <Button onClick={()=>testing()}>连接测试</Button>
+                }
             </div>
         </Row>
     )

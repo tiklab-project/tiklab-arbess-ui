@@ -58,12 +58,13 @@ const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messag
 const MessageType=AsyncComponent(()=>import("./modules/system/message/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/message/messageSendType"))
 
+const Envi=AsyncComponent(()=>import("./modules/system/message/message/envi"))
 
 const routers=[
-    {
-        path:"/login",
-        component:Login,
-    },
+    // {
+    //     path:"/login",
+    //     component:Login,
+    // },
     {
         path:"/logout",
         component:Logout,
@@ -224,6 +225,10 @@ const routers=[
                     {
                         path:"/index/system/mes/sendType",
                         component: MessageSendType,
+                    },
+                    {
+                        path:"/index/system/mes/envi",
+                        component: Envi,
                     },
                 ]
             },
