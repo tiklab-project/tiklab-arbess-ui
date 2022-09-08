@@ -2,10 +2,9 @@ import React,{useState,useEffect} from "react";
 import {Avatar,Dropdown,Menu} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
-import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {GlobalOutlined,MessageOutlined} from "@ant-design/icons";
-import {withRouter} from "react-router-dom";
-import logo from "../../../assets/images/logo.png";
+import {withRouter} from "react-router";
+import logo from "../../../assets/images/matflow/资源 10.png";
 import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
 import vipTwo from "../../../assets/images/vip-two.png";
@@ -22,11 +21,6 @@ const Head = props =>{
     const isLocal = JSON.parse(localStorage.getItem("authConfig")).authType
     const isUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
     const local = isLocal === "local"
-    
-    useEffect(()=>{
-        // 路由控制
-        privilegeStores.systemRoleStore.getSystemPermissions(getUser().userId)
-    },[])
 
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){
@@ -81,7 +75,13 @@ const Head = props =>{
     )
     
     const goOut = () => {
-        props.history.push("/logout")
+        props.history.push({
+            pathname: "/logout",
+            state:{
+                preRoute: props.location.pathname
+            }
+        })
+
         // if(local){
         //     location.href = location.origin + "/eas#/logout"
         // }
@@ -109,10 +109,11 @@ const Head = props =>{
     return(
         <div className="frame-header">
             <div className="frame-header-right">
-                {AppConfigComponent}
+                {/*{AppConfigComponent}*/}
                 <div className="frame-header-logo">
                     <img src={logo} alt="logo" />
                 </div>
+                {/*<div className="frame-name">matflow</div>*/}
                 <div className="headers-link">{ renderRouter(routers) }</div>
             </div>
             <div className="frame-header-right">
@@ -129,7 +130,7 @@ const Head = props =>{
                         </Dropdown>
                     </div>
                     <div className="frame-header-user">
-                        <Dropdown overlay={outMenu} >
+                        <Dropdown overlay={outMenu}>
                             <Avatar src={portrait} style={{cursor:"pointer"}}/>
                         </Dropdown>
                     </div>

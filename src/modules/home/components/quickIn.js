@@ -1,6 +1,7 @@
 import React from "react";
 import {PrivilegeButton} from "tiklab-privilege-ui";
 
+// 快捷（头）
 const QuickIn = props =>{
 
     // 不受控制

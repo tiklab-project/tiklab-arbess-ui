@@ -106,7 +106,7 @@ const HomePage = props =>{
                         pageNumber={1}
                         dynamicList={dynamicList}
                         dynamicTitle={"近期动态"}
-                        dynamicClick={"更多"}
+                        dynamicClickText={"更多"}
                     />
                 </div>
                 <div className="homePage-content-right">

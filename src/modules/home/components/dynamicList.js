@@ -4,7 +4,7 @@ import EmptyText from "./emptyText";
 
 const DynamicList = props =>{
 
-    const {dynamicList,pageNumber,dynamicTitle,dynamicClick} = props
+    const {dynamicList,pageNumber,dynamicTitle,dynamicClickText} = props
 
     const goUser = () => {
         props.history.push("/index/system/list")
@@ -14,8 +14,8 @@ const DynamicList = props =>{
         props.history.push(`/index/task/${matFlowName}/work`)
     }
 
-    const dynamic = dynamicClick =>{
-        switch (dynamicClick) {
+    const dynamic = dynamicClickText =>{
+        switch (dynamicClickText) {
             case "返回":
                 props.history.push("/index")
                 break
@@ -25,12 +25,12 @@ const DynamicList = props =>{
     }
 
     return(
-        <div className={`dynamic ${dynamicClick ==="更多" ? "dynamic-shadow" : ""}`}>
+        <div className={`dynamic ${dynamicClickText==="更多" ? "dynamic-shadow" : ""}`}>
             <div className="dynamic-top">
                 <div className="dynamic-top-title">{dynamicTitle}</div>
                 <div className="dynamic-top-ac">
-                    <div onClick={()=>dynamic(dynamicClick)}>
-                        {dynamicClick}
+                    <div onClick={()=>dynamic(dynamicClickText)}>
+                        {dynamicClickText}
                     </div>
                 </div>
             </div>

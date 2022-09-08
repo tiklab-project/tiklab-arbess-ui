@@ -40,7 +40,7 @@ const DynamicDetails = props =>{
                 pageNumber={pageNumber}
                 dynamicList={dynamicList}
                 dynamicTitle={"全部动态"}
-                dynamicClick={"返回"}
+                dynamicClickText={"返回"}
             />
             <div className="dynamic-pagination">
                 <ConfigProvider locale={zhCN}>

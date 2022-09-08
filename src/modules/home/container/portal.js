@@ -26,10 +26,12 @@ const Portal= props=>{
     )
 }
 
-const IndexHoc = verifyUserHoc(Portal,"matflow")
+const IndexHoc = verifyUserHoc(Portal)
 function mapStateToProps(state) {
     return {
         pluginStore: state.pluginStore
     }
 }
 export default connect(mapStateToProps)(IndexHoc)
+
+// export default Portal

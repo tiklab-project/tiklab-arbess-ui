@@ -200,9 +200,7 @@ const Structure = props => {
                         <div className="structure-content-right">
                             <BreadcrumbContent firstItem={matFlowName} secondItem={"历史"}/>
                             {
-                                execState === ""  && leftPageList && leftPageList.length === 0 ?
-                                    <StructureEmpty/>
-                                    :
+                                execState !== ""  || leftPageList && leftPageList.length > 0 ?
                                     <StructureRight
                                         freshen={freshen}
                                         setFreshen={setFreshen}
@@ -210,6 +208,8 @@ const Structure = props => {
                                         setPageCurrent={setPageCurrent}
                                         matFlowId={matFlowId}
                                     />
+                                    :
+                                    <StructureEmpty/>
                             }
                         </div>
                     </div>

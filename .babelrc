@@ -33,11 +33,6 @@
             "style": true
         },"tiklab-eam-ui"],
         ["import", {
-            "libraryName": "tiklab-licence-ui",
-            "libraryDirectory": "es",
-            "style": true
-        }, "tiklab-licence-ui"],
-        ["import", {
             "libraryName": "tiklab-message-ui",
             "libraryDirectory": "es",
             "style": true
