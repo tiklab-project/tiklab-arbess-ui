@@ -54,7 +54,7 @@ const ConfigAddNewStageModal = props =>{
 
     const handleClick = (group,item,index)=>{
         const newData = [...data]
-        const name = data && data.map(item => item.dataType);
+        const name = data && data.map(item => item.dataType)
         const groupDesc = group.desc.map(item=>item.type)
         for(let i =0;i<name.length;i++){
             for(let j=0;j<groupDesc.length;j++){

@@ -52,7 +52,7 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new CssMinimizerPlugin(),
         new ProgressBarPlugin(),
-        new BundleAnalyzerPlugin(),
+        // new BundleAnalyzerPlugin(),
         // new CompressionPlugin({
         //     filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
         //     algorithm: "gzip", // 算法
@@ -72,8 +72,8 @@ module.exports = merge(baseWebpackConfig, {
             chunks: "all",
             minSize: 30000, ////默认值，超过30K才独立分包
             minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 1,
+            maxAsyncRequests: 7,
+            maxInitialRequests: 5,
             automaticNameDelimiter: "--", // 分包打包生成文件的名称的连接符
             name:false,
             cacheGroups: { //  cacheGroups 缓存组，如：将某个特定的库打包

@@ -227,7 +227,7 @@ const routers=[
                         component: MessageSendType,
                     },
                     {
-                        path:"/index/system/mes/envi",
+                        path:"/index/system/envi",
                         component: Envi,
                     },
                 ]

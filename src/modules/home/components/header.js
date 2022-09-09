@@ -6,6 +6,7 @@ import {GlobalOutlined,MessageOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import logo from "../../../assets/images/matflow/资源 10.png";
 import portrait from "../../../assets/images/portrait.jpg";
+// import portrait from "../../../assets/images/matflow/matflow9.gif";
 import vipOne from "../../../assets/images/vip-one.png";
 import vipTwo from "../../../assets/images/vip-two.png";
 
@@ -113,7 +114,6 @@ const Head = props =>{
                 <div className="frame-header-logo">
                     <img src={logo} alt="logo" />
                 </div>
-                {/*<div className="frame-name">matflow</div>*/}
                 <div className="headers-link">{ renderRouter(routers) }</div>
             </div>
             <div className="frame-header-right">

@@ -57,10 +57,10 @@ const MessageType=AsyncComponent(()=>import("./modules/system/message/message/me
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/message/messageSendType"))
 
 const routesSaas =[
-    {
-        path:"/login",
-        component:Login,
-    },
+    // {
+    //     path:"/login",
+    //     component:Login,
+    // },
     {
         path:"/logout",
         component:Logout,

@@ -133,12 +133,12 @@ const SystemAside= props =>  {
             icon:"#icon-gongzuotongji",
             enCode:"H",
         },
-        {
-            key:"/index/system/envi",
-            label:"环境配置",
-            icon:"#icon-gongzuotongji",
-            enCode:"H",
-        },
+        // {
+        //     key:"/index/system/envi",
+        //     label:"环境配置",
+        //     icon:"#icon-gongzuotongji",
+        //     enCode:"H",
+        // },
     ]
 
     const select = key =>{

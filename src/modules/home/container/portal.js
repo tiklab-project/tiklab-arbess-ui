@@ -33,5 +33,3 @@ function mapStateToProps(state) {
     }
 }
 export default connect(mapStateToProps)(IndexHoc)
-
-// export default Portal

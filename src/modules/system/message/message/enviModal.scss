@@ -1,0 +1,31 @@
+.enviModal{
+    border: 1px solid #C4C4C4;
+    &-content{
+        padding: 10px;
+        &-title{
+            font-weight: 700;
+            font-size: 16px;
+        }
+        &-group{
+            max-height: 500px;
+            overflow: auto;
+            padding: 10px;
+            &_item{
+                margin-bottom: 5px;
+                cursor: pointer;
+                height: 30px;
+                padding-left: 20px;
+                line-height: 30px;
+
+                &:hover{
+                    background: #e3e8f0;
+                }
+          }
+      }
+      &-active{
+          background: #e3e8f0;
+      }
+    }
+}
+
+
