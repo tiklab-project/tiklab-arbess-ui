@@ -6,10 +6,10 @@ import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 /*
     系统信息
  */
-const Message = props =>{
+const Info = props =>{
 
-    const {messageStore} = props
-    const {getSystemMessage,infoList} = messageStore
+    const {settingStore} = props
+    const {getSystemMessage,infoList} = settingStore
 
     useEffect(()=>{
         getSystemMessage()
@@ -32,4 +32,4 @@ const Message = props =>{
     )
 }
 
-export default inject("messageStore")(observer(Message))
+export default inject("settingStore")(observer(Info))

@@ -59,13 +59,7 @@ const ConfigAddNewStageModal = props =>{
         for(let i =0;i<name.length;i++){
             for(let j=0;j<groupDesc.length;j++){
                 if(name[i] === groupDesc[j]){
-                    message.info({
-                        content: `${group.title}已经存在`,
-                        style: {
-                            marginTop: "9vh",
-                            marginLeft:"5vh"
-                        }
-                    }) 
+                    message.info({content:`${group.title}已经存在`,className:"message"})
                     return
                 }
             }

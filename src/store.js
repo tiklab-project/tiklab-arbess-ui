@@ -10,7 +10,7 @@ import {GITHUB_STORE,GithubStore} from "./modules/config/common/store/githubStor
 import {PROOF_STORE,ProofStore} from "./modules/proof/store/proofStore";
 import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/workSpaceStore";
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/home/store/homePageStore";
-import {MESSAGE_STORE,MessageStore} from "./modules/system/message/store/messageStore";
+import {SETTING_STORE,SettingStore} from "./modules/system/setting/store/settingStore";
 import {createContext} from "react";
 
 function createStores() {
@@ -26,7 +26,7 @@ function createStores() {
         [PROOF_STORE]:new ProofStore(),
         [WORKSPACE_STORE]:new WorkSpaceStore(),
         [HOMEPAGE_STORE]:new HomePageStore(),
-        [MESSAGE_STORE]:new MessageStore(),
+        [SETTING_STORE]:new SettingStore(),
         [EAM_STORE]:new EamStore(),
     }
 }

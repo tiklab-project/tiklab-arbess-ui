@@ -49,12 +49,14 @@ const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRol
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 
-const Message=AsyncComponent(()=>import("./modules/system/message/message/message"))
-const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/message/userMessage"))
-const MessageManagement=AsyncComponent(()=>import("./modules/system/message/message/messageManagement"))
-const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/message/messageTemplate"))
-const MessageType=AsyncComponent(()=>import("./modules/system/message/message/messageType"))
-const MessageSendType=AsyncComponent(()=>import("./modules/system/message/message/messageSendType"))
+const Info=AsyncComponent(()=>import("./modules/system/setting/components/info"))
+const Envi=AsyncComponent(()=>import("./modules/system/setting/components/envi"))
+
+const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/userMessage"))
+const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
+const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messageTemplate"))
+const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
+const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 
 const routesSaas =[
     // {
@@ -204,7 +206,11 @@ const routesSaas =[
                     },
                     {
                         path:"/index/system/message",
-                        component: Message,
+                        component: Info,
+                    },
+                    {
+                        path:"/index/system/envi",
+                        component: Envi,
                     },
                     {
                         path:"/index/system/mes/management",

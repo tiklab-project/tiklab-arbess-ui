@@ -110,7 +110,7 @@ const Head = props =>{
     return(
         <div className="frame-header">
             <div className="frame-header-right">
-                {/*{AppConfigComponent}*/}
+                {AppConfigComponent}
                 <div className="frame-header-logo">
                     <img src={logo} alt="logo" />
                 </div>

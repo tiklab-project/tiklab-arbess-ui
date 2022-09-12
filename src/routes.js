@@ -51,14 +51,14 @@ const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRol
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 
-const Message=AsyncComponent(()=>import("./modules/system/message/message/message"))
-const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/message/userMessage"))
-const MessageManagement=AsyncComponent(()=>import("./modules/system/message/message/messageManagement"))
-const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/message/messageTemplate"))
-const MessageType=AsyncComponent(()=>import("./modules/system/message/message/messageType"))
-const MessageSendType=AsyncComponent(()=>import("./modules/system/message/message/messageSendType"))
+const Envi=AsyncComponent(()=>import("./modules/system/setting/components/envi"))
+const Info=AsyncComponent(()=>import("./modules/system/setting/components/info"))
 
-const Envi=AsyncComponent(()=>import("./modules/system/message/message/envi"))
+const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/userMessage"))
+const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
+const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messageTemplate"))
+const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
+const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 
 const routers=[
     // {
@@ -207,8 +207,12 @@ const routers=[
                         component: SystemProof,
                     },
                     {
-                        path:"/index/system/message",
-                        component: Message,
+                        path:"/index/system/info",
+                        component: Info,
+                    },
+                    {
+                        path:"/index/system/envi",
+                        component: Envi,
                     },
                     {
                         path:"/index/system/mes/management",
@@ -225,10 +229,6 @@ const routers=[
                     {
                         path:"/index/system/mes/sendType",
                         component: MessageSendType,
-                    },
-                    {
-                        path:"/index/system/envi",
-                        component: Envi,
                     },
                 ]
             },

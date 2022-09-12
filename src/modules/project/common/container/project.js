@@ -21,6 +21,16 @@ const Project= (props)=>{
         findAllMatFlowStatus(userId).then(res=>{
             const data = res.data
             if(res.code===0 && data){
+                // // 如果不存在就重定向404
+                // if(!isMatFlow(data)){
+                //     props.history.push("/index/home")
+                // }else {
+                //     data && data.map(item=>{
+                //         if(item.matFlowName === matFlowName){
+                //             setMatFlowId(item.matFlowId)
+                //         }
+                //     })
+                // }
                 data && data.map(item=>{
                     if(item.matFlowName === matFlowName){
                         setMatFlowId(item.matFlowId)
@@ -29,6 +39,10 @@ const Project= (props)=>{
             }
         })
     },[matFlowName])
+
+    const isMatFlow = data => {
+        return data && data.some(item=>item.matFlowName === matFlowName)
+    }
 
     useEffect(()=>{
         return ()=>setMatFlowId("")

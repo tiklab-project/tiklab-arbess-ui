@@ -128,17 +128,17 @@ const SystemAside= props =>  {
             enCode:"G",
         },
         {
-            key:"/index/system/message",
+            key:"/index/system/info",
             label:"系统信息",
             icon:"#icon-gongzuotongji",
             enCode:"H",
         },
-        // {
-        //     key:"/index/system/envi",
-        //     label:"环境配置",
-        //     icon:"#icon-gongzuotongji",
-        //     enCode:"H",
-        // },
+        {
+            key:"/index/system/envi",
+            label:"环境配置",
+            icon:"#icon-gongzuotongji",
+            enCode:"H",
+        },
     ]
 
     const select = key =>{
