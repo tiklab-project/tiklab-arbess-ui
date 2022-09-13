@@ -40,7 +40,9 @@ const WorkSpaceNod = props =>{
     // 节点文本详情
     const textDetails = group => {
         readFile(group.treePath).then(res=>{
-            setDrawerContent({title:group.treeName,commitFile:res.data})
+            if(res.code===0){
+                setDrawerContent({title:group.treeName,commitFile:res.data})
+            }
             setDetailsDrawer(true)
         })
     }
@@ -54,14 +56,14 @@ const WorkSpaceNod = props =>{
     // 渲染目录
     const renderCatalogue = catalogue => {
         return catalogue && catalogue.map((group,index)=>{
-            return   <Fragment  key={index}>
+            return  <Fragment key={index}>
                         <span> > </span>
                         <span className="catalogue_item_breadcrumb"
                               onClick={()=>changeCatalogue(group)}
                         >
                             {group.treeName}
                         </span>
-                     </Fragment>
+                    </Fragment>
         })
     }
 

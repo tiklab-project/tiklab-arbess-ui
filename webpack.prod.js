@@ -157,8 +157,8 @@ module.exports = merge(baseWebpackConfig, {
                 icon: {
                     name: "chunk-icon",
                     chunks: "all",
-                    test: /[\\/]src[\\/]font_icon[\\/]/,
-                    priority: 90,
+                    test: /font_icon/,
+                    priority: 80,
                     reuseExistingChunk: true
                 },
                 rcomponent: {

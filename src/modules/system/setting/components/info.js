@@ -16,9 +16,9 @@ const Info = props =>{
     },[])
 
     return(
-        <div className="systemMore-info">
+        <div className="info">
             <BreadcrumbContent firstItem={"系统信息"} />
-            <div  className="systemMore-info-content">
+            <div  className="info-content">
                 <Descriptions column={1} bordered>
                     <Descriptions.Item  label="系统版本">{infoList && infoList.osName}</Descriptions.Item>
                     <Descriptions.Item  label="用户名">{infoList && infoList.userName}</Descriptions.Item>

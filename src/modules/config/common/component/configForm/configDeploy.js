@@ -84,7 +84,7 @@ const ConfigDeploy = props =>{
                     <Select.Option value={1}>自定义部署</Select.Option>
                 </Select>
             </Form.Item>
-            <Form.Item shouldUpdate={(prevValues, currentValues) => prevValues.deployType !== currentValues.deployType}>
+            <Form.Item shouldUpdate={(prevValues,currentValues)=>prevValues.deployType!==currentValues.deployType}>
                 {({ getFieldValue })=>
                     getFieldValue("deployType") === 0 ? (
                         <Fragment>

@@ -5,10 +5,10 @@ import {inject,observer} from "mobx-react";
 import EnviModal from "./enviModal";
 import "./envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import ConfigName from "../../../config/common/component/configCommon/configName";
+import ConfigName from "../../../../common/configName/configName";
 
 /*
-    环境配置
+    系统环境配置
  */
 const Envi = props =>{
 
@@ -62,12 +62,7 @@ const Envi = props =>{
     }
     
     const pathTitle = pathType => {
-        switch (pathType) {
-            case 1:  return "Git"
-            case 5:  return "SVN"
-            case 21: return "node"
-            case 22: return "maven"
-        }
+        return <ConfigName type={pathType}/>
     }
 
     const renderEnviData = enviData => {

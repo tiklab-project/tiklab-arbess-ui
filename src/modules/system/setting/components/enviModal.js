@@ -1,17 +1,20 @@
 import React from "react";
-import {message,Modal} from "antd";
+import {Modal} from "antd";
 
 const lis = [
     {
         pathId:"1",
         pathType:1,
-    },{
+    },
+    {
         pathId:"5",
         pathType:5,
-    },{
+    },
+    {
         pathId:"22",
         pathType:22,
-    },{
+    },
+    {
         pathId:"21",
         pathType:21,
     },

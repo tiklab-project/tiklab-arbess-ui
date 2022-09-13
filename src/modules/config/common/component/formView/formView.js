@@ -8,7 +8,7 @@ import ChangeConfigSortsDrawer from "./changeConfigSortsDrawer";
 import ConfigAddNewStage from "./configAddNewStage";
 import ConfigCode from "./configCode";
 import ConfigForm from "../configCommon/configForm";
-import ConfigName from "../configCommon/configName";
+import ConfigName from "../../../../../common/configName/configName";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 

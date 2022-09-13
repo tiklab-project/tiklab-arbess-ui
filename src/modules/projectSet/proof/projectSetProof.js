@@ -3,7 +3,6 @@ import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Proof from "../../proof/container/proof";
 
-// 项目凭证
 const ProjectSetProof = props =>{
 
     const {proofStore,matFlowStore} = props

@@ -1,8 +1,7 @@
 import React from "react";
-import "./structureRightLogDrawer.scss";
 import {Drawer,Button} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import ConfigName from "../../../config/common/component/configCommon/configName";
+import ConfigName from "../../../../common/configName/configName";
 
 const StructureRightLogDrawer = props =>{
 
@@ -31,8 +30,8 @@ const StructureRightLogDrawer = props =>{
                     </div>
                 </div>
                 <div className="drawers-body">
-                    <div className="log">
-                        <div className="log-content">
+                    <div className="log" style={{padding:20}}>
+                        <div className="log-content" style={{whiteSpace:"pre-wrap"}}>
                             {drawerContent && drawerContent.runLog}
                         </div>
                     </div>

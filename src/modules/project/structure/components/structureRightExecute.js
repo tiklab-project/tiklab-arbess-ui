@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Button} from "antd";
 import {getUser} from "tiklab-core-ui";
-import ConfigName from "../../../config/common/component/configCommon/configName";
+import ConfigName from "../../../../common/configName/configName";
 
 const StructureRightExecute = props => {
 

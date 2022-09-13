@@ -43,9 +43,9 @@ const QuickIn = props =>{
     const renderStableList = lis => {
         return lis && lis.map(item=>{
             return(
-                <div key={item.id} className="head-group" onClick={()=>props.history.push(item.to)}>
-                    <div className="head-group-wrap">
-                        <div className="head-group-wrap-title">{item.title}</div>
+                <div key={item.id} className="quickIn-group" onClick={()=>props.history.push(item.to)}>
+                    <div className="quickIn-group-wrap">
+                        <div className="quickIn-group-wrap-title">{item.title}</div>
                     </div>
                 </div>
             )
@@ -56,9 +56,9 @@ const QuickIn = props =>{
         return lis && lis.map(item=>{
             return(
                 <PrivilegeButton key={item.id} code={item.enCode} {...props}>
-                    <div key={item.id} className="head-group" onClick={()=>props.history.push(item.to)}>
-                        <div className="head-group-wrap">
-                            <div className="head-group-wrap-title">{item.title}</div>
+                    <div key={item.id} className="quickIn-group" onClick={()=>props.history.push(item.to)}>
+                        <div className="quickIn-group-wrap">
+                            <div className="quickIn-group-wrap-title">{item.title}</div>
                         </div>
                     </div>
                 </PrivilegeButton>
@@ -66,7 +66,7 @@ const QuickIn = props =>{
         })
     }
 
-    return  <div className="homePage-head">
+    return  <div className="quickIn">
                 {renderStableList(stableList)}
                 {renderInStableList(inStableLis)}
             </div>

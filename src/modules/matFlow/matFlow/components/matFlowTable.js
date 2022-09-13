@@ -4,7 +4,7 @@ import {getUser} from "tiklab-core-ui";
 import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
-import Tables from "../../../../common/tables/tables"
+import Tables from "../../../../common/tables/tables";
 
 const MatFlowTable = props =>{
 
@@ -16,7 +16,6 @@ const MatFlowTable = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        // const params = null
         if(type===1){
             findAllMatFlowStatus(userId)
         }else{
@@ -42,9 +41,9 @@ const MatFlowTable = props =>{
 
     const collectMessage = (res,info) =>{
         if(res.data === "1"){
-            message.info({content: `${info}成功`,duration:0.5,className:"message"})
+            message.info({content:`${info}成功`,duration:0.5,className:"message"})
         }else {
-            message.info({content: `${info}失败`,duration:0.5,className:"message"})
+            message.info({content:`${info}失败`,duration:0.5,className:"message"})
         }
     }
 

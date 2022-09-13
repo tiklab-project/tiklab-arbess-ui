@@ -1,3 +1,4 @@
+
 export const getUrlParam = name => {
     // 取得url中?后面的字符
     const query = window.location.search.substring(1);

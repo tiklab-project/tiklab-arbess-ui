@@ -122,7 +122,7 @@ const SystemAside= props =>  {
             enCode:"F",
         },
         {
-            key:"/index/system/plug",
+            key:"/index/system/plugin",
             label:"插件管理",
             icon:"#icon-gongzuotongji",
             enCode:"G",

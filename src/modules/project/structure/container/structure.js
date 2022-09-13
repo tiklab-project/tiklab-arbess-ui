@@ -9,7 +9,6 @@ import StructureEmpty from "../components/structureEmpty";
 import "../components/structure.scss";
 import {inject,observer} from "mobx-react";
 
-// 项目构建
 const Structure = props => {
 
     const {structureStore,structureListStore,matFlowStore} = props
@@ -66,6 +65,7 @@ const Structure = props => {
     //     }
     // }
 
+    // 查找所有构建历史
     const findPage = () =>{
         const params = {
             matflowId:matFlowId,

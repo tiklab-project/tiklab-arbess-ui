@@ -33,10 +33,9 @@ const ProjectAsideOpt = props =>{
                     {
                         matFlowList && matFlowList.map(item=>{
                             return(
-                                <div
-                                    onClick={()=>{changeMatFlow(item)}}
-                                    key={item.matFlowId}
-                                    className={`opt-content-group_item ${item.matFlowId===matFlowId ? "opt-content-active" : ""}`}
+                                <div onClick={()=>{changeMatFlow(item)}}
+                                     key={item.matFlowId}
+                                     className={`opt-content-group_item ${item.matFlowId===matFlowId ? "opt-content-active" : ""}`}
                                 >
                                     <span>
                                         {item.matFlowName}

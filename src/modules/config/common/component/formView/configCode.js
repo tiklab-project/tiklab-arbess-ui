@@ -1,7 +1,7 @@
 import React from "react";
 import {Popconfirm} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import ConfigName from "../configCommon/configName";
+import ConfigName from "../../../../../common/configName/configName";
 import ConfigForm from "../configCommon/configForm";
 
 const ConfigCode = props =>{

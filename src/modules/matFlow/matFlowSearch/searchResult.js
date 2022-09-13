@@ -28,7 +28,7 @@ const SearchResult = props => {
                 <ul>
                     {
                         searchMatFlowList && searchMatFlowList.length > 0 ?
-                            searchMatFlowList  && searchMatFlowList.map((item,index)=>{
+                            searchMatFlowList.map((item,index)=>{
                                 return  <li key={item.matflowId} >
                                             <span>{index+1}、</span>
                                             <span className="matFlow-search-link" onClick={()=>goMatFlowTask(item)}>

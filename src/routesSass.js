@@ -42,7 +42,7 @@ const System=AsyncComponent(()=>import("./modules/system/common/system"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
-const Plug=AsyncComponent(()=>import("./modules/system/plug/plug"))
+const Plugin=AsyncComponent(()=>import("./modules/system/plugIn/plugin"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
@@ -181,8 +181,8 @@ const routesSaas =[
                         component: Org,
                     },
                     {
-                        path: "/index/system/plug",
-                        component: Plug,
+                        path: "/index/system/plugin",
+                        component: Plugin,
                     },
                     {
                         path: "/index/system/syr/role",

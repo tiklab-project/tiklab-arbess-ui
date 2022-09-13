@@ -57,7 +57,7 @@ const ProjectSetLeftNav= props =>  {
         return router.map(data=>{
             return  <PrivilegeButton key={data.key} code={data.enCode} {...props}>
                 <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
-                    className={`projectSet-aside-li projectSet-aside-second ${data.key=== selectKey ? "projectSet-aside-select" : ""}`}
+                    className={`projectSet-aside-li projectSet-aside-second ${data.key===selectKey ? "projectSet-aside-select" : ""}`}
                     onClick={()=>select(data.key)}
                     key={data.key}
                 >
