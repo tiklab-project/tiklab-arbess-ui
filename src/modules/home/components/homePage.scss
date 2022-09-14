@@ -1,5 +1,25 @@
 .homePage{
     padding: 20px;
+    .quickIn{
+        height: 130px;
+        display: flex;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        justify-content:left;
+        &-group{
+            width: 380px;
+            min-width: 100px;
+            line-height: 100px;
+            height: 100px;
+            text-align: center;
+            border: 1px solid #cccccc;
+            margin-right: 10px;
+            box-shadow: 3px 3px 8px 3px #5d70ea;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    }
     &-content{
         display: -webkit-box;
         display: -webkit-flex;
@@ -29,28 +49,6 @@
             min-height: 100px;
             -webkit-flex-shrink: 0;
             flex-shrink: 0;
-        }
-        .quickIn{
-            height: 130px;
-            display: flex;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            justify-content:left;
-            &-head{
-                &-group{
-                    width: 380px;
-                    min-width: 100px;
-                    line-height: 100px;
-                    height: 100px;
-                    text-align: center;
-                    border: 1px solid #cccccc;
-                    margin-right: 10px;
-                    box-shadow: 3px 3px 8px 3px #5d70ea;
-                    border-radius: 8px;
-                    cursor: pointer;
-                }
-            }
         }
         .matFlowNear{
             border: 1px solid #ccc;

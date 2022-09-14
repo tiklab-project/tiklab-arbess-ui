@@ -65,24 +65,21 @@ const Structure = props => {
     //     }
     // }
 
-    // 查找所有构建历史
-    const findPage = () =>{
-        const params = {
-            matflowId:matFlowId,
-            pageParam: {
-                pageSize: 10,
-                currentPage: 1
-            },
-            state:0,
-            userId:null,
-            type:0
+    let interval=null
+    useEffect(() => {
+        if(matFlowId){
+            findExecState(matFlowId).then(res=>{
+                if(res.data===1){
+                    interval=setInterval(()=>
+                        findStructureState(matFlowId).then(res=>{
+                            if(res.code===0){renderExec(res.data)}
+                        }), 1000)
+                    findAll(matFlowId)
+                }
+                changPage() // 历史列表
+            })
         }
-        findPageHistory(params).then(res=>{
-            if(res.code===0 && res.data.dataList.length===0){
-                setIsData(false)
-            }
-        })
-    }
+    }, [matFlowId,freshen])
 
     const changPage = () =>{
         const params = {
@@ -109,21 +106,24 @@ const Structure = props => {
         })
     }
 
-    let interval=null
-    useEffect(() => {
-        if(matFlowId){
-            findExecState(matFlowId).then(res=>{
-                if(res.data===1){
-                    interval=setInterval(()=>
-                        findStructureState(matFlowId).then(res=>{
-                            if(res.code===0){renderExec(res.data)}
-                        }), 1000)
-                    findAll(matFlowId)
-                }
-                changPage() // 历史列表
-            })
+    // 查找所有构建历史
+    const findPage = () =>{
+        const params = {
+            matflowId:matFlowId,
+            pageParam: {
+                pageSize: 10,
+                currentPage: 1
+            },
+            state:0,
+            userId:null,
+            type:0
         }
-    }, [matFlowId,freshen])
+        findPageHistory(params).then(res=>{
+            if(res.code===0 && res.data.dataList.length===0){
+                setIsData(false)
+            }
+        })
+    }
 
     const renderExec = data => {
         if(data===null || data.runStatus===1 || data.runStatus===30){

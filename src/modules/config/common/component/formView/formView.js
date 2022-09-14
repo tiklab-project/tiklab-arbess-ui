@@ -104,7 +104,7 @@ const formView = props =>{
                                     okText="确定"
                                     cancelText="取消"
                                 >
-                                    <CloseOutlined />
+                                    <Button type="text"><CloseOutlined/></Button>
                                 </Popconfirm>
                             </div>
                         </div>

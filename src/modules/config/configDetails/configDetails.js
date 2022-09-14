@@ -27,6 +27,11 @@ const ConfigDetails = props =>{
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
     const userId = getUser().userId
+    const configView = localStorage.getItem("view")
+
+    useEffect(()=>{
+        setView(configView)
+    },[])
 
     // Gitee和Github授权
     useEffect(() => {

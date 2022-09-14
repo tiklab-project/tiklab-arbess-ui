@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from "react";
 import {Avatar,Dropdown,Menu} from "antd";
+import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined,MessageOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import logo from "../../../assets/images/matflow/资源 10.png";
 import portrait from "../../../assets/images/portrait.jpg";
-// import portrait from "../../../assets/images/matflow/matflow9.gif";
 import vipOne from "../../../assets/images/vip-one.png";
 import vipTwo from "../../../assets/images/vip-two.png";
 
@@ -19,9 +19,6 @@ const Head = props =>{
     const {i18n} = useTranslation()
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
-    const isLocal = JSON.parse(localStorage.getItem("authConfig")).authType
-    const isUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
-    const local = isLocal === "local"
 
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){
@@ -32,6 +29,10 @@ const Head = props =>{
         }
         setCurrentLink(path)
     },[path])
+
+    useEffect(()=>{
+        privilegeStores.systemRoleStore.getSystemPermissions(getUser().userId)
+    },[])
 
     const routers=[
         {
@@ -57,14 +58,12 @@ const Head = props =>{
 
     const renderRouter = routers => {
         return routers && routers.map(routers=>{
-            return (
-                <div key={routers.key}
-                     onClick={()=>changeCurrentLink(routers)}
-                     className={currentLink===routers.to ? "headers-active" : null}
-                >
-                    {routers.title}
-                </div>
-            )
+            return  <div key={routers.key}
+                         onClick={()=>changeCurrentLink(routers)}
+                         className={currentLink===routers.to ? "headers-active" : null}
+                    >
+                        {routers.title}
+                    </div>
         })
     }
 
@@ -78,17 +77,12 @@ const Head = props =>{
     const goOut = () => {
         props.history.push({
             pathname: "/logout",
-            state:{
-                preRoute: props.location.pathname
-            }
+            state: window.location.href
         })
 
-        // if(local){
-        //     location.href = location.origin + "/eas#/logout"
-        // }
-        // else location.href = isUrl + `/#/logout?redirect=${location.href}`
     }
 
+    // u退出菜单
     const outMenu = (
         <Menu>
             <Menu.Item key="0">

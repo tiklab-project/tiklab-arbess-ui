@@ -43,7 +43,7 @@ const System=AsyncComponent(()=>import("./modules/system/common/system"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
-const Plugin=AsyncComponent(()=>import("./modules/system/plugIn/plugin"))
+const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
@@ -110,11 +110,6 @@ const routers=[
             },
             {
                 path:"/index/searchresult/:searchresult",
-                component:SearchResult,
-                exact:true,
-            },
-            {
-                path:"/index/searchresult",
                 component:SearchResult,
                 exact:true,
             },
@@ -239,7 +234,7 @@ const routers=[
         component: Index,
         exact: true,
         render:()=><Redirect to="/index"/>,
-    }
+    },
 ]
 
 export default routers

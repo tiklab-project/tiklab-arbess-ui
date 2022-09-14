@@ -5,7 +5,6 @@ import {inject,observer} from "mobx-react";
 import EnviModal from "./enviModal";
 import "./envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import ConfigName from "../../../../common/configName/configName";
 
 /*
     系统环境配置
@@ -62,50 +61,54 @@ const Envi = props =>{
     }
     
     const pathTitle = pathType => {
-        return <ConfigName type={pathType}/>
+        switch (pathType) {
+            case 1:  return "Git"
+            case 5:  return "SVN"
+            case 21: return "maven"
+            case 22: return "node"
+        }
     }
 
+    // 渲染环境配置
     const renderEnviData = enviData => {
         return enviData && enviData.map(item=>{
-            return(
-                <div key={item.pathType} className="envi-item">
-                    <div className="envi-item-Headline">
-                        <div className="envi-item-title">
-                            {pathTitle(item.pathType)}
+            return  <div key={item.pathType} className="envi-item">
+                        <div className="envi-item-Headline">
+                            <div className="envi-item-title">
+                                {pathTitle(item.pathType)}
+                            </div>
+                            <div className="envi-item-delete">
+                                <Popconfirm
+                                    title="当前项数据会被清空"
+                                    onConfirm={()=>deletePart(item)}
+                                    okText="确定"
+                                    cancelText="取消"
+                                >
+                                    <Button type="text"><CloseOutlined/></Button>
+                                </Popconfirm>
+                            </div>
                         </div>
-                        <div className="envi-item-delete">
-                            <Popconfirm
-                                title="当前项数据会被清空"
-                                onConfirm={()=>deletePart(item)}
-                                okText="确定"
-                                cancelText="取消"
+                        <Form autoComplete="off"
+                              onFinish={values=>onFinish(values,item)}
+                              initialValues={{...item}}
+                        >
+                            <Form.Item label="名称" name="pathName"
+                                       rules={[{required:true,message:`请输入${pathTitle(item.pathType)}名称`}]}
                             >
-                                <CloseOutlined/>
-                            </Popconfirm>
-                        </div>
+                                <Input/>
+                            </Form.Item>
+                            <Form.Item label="地址" name="pathAddress"
+                                       rules={[{required:true,message:`请输入${pathTitle(item.pathType)}地址`}]}
+                            >
+                                <Input/>
+                            </Form.Item>
+                            <Form.Item style={{textAlign:"right"}}>
+                                <Button htmlType="submit">
+                                    保存
+                                </Button>
+                            </Form.Item>
+                        </Form>
                     </div>
-                    <Form autoComplete="off"
-                          onFinish={values=>onFinish(values,item)}
-                          initialValues={{...item}}
-                    >
-                        <Form.Item label="名称" name="pathName"
-                                   rules={[{required:true,message:`请输入${pathTitle(item.pathType)}名称`}]}
-                        >
-                            <Input/>
-                        </Form.Item>
-                        <Form.Item label="地址" name="pathAddress"
-                                   rules={[{required:true,message:`请输入${pathTitle(item.pathType)}地址`}]}
-                        >
-                            <Input/>
-                        </Form.Item>
-                        <Form.Item style={{textAlign:"right"}}>
-                            <Button htmlType="submit">
-                                保存
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </div>
-            )
         })
     }
     

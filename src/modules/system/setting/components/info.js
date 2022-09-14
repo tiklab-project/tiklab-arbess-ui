@@ -2,6 +2,7 @@ import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Descriptions} from "antd";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import "./info.scss";
 
 /*
     系统信息
