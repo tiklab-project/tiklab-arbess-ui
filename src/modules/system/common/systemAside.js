@@ -25,24 +25,6 @@ const SystemAside= props =>  {
     },[])
 
     const router = [
-        // {
-        //     key:"/index/system/list",
-        //     label:"用户列表",
-        //     icon:"#icon-gongzuotongji",
-        //     enCode:"B",
-        // },
-        // {
-        //     key:"/index/system/directory",
-        //     label:"用户目录",
-        //     icon:"#icon-gongzuotongji",
-        //     enCode:"C",
-        // },
-        // {
-        //     key:"/index/system/org",
-        //     label:"组织管理",
-        //     icon:"#icon-gongzuotongji",
-        //     enCode:"D",
-        // },
         {
             key:"1",
             label:"系统权限",
@@ -53,7 +35,7 @@ const SystemAside= props =>  {
                     key:"/index/system/syr/feature",
                     label:"系统功能",
                     icon:"#icon-gongzuotongji",
-                    enCode:"E2",
+                    enCode:"E1",
                 },
                 {
                     key:"/index/system/syr/role",
@@ -83,38 +65,6 @@ const SystemAside= props =>  {
                 }
             ]
         },
-        // {
-        //     key:"3",
-        //     label:"消息中心",
-        //     icon:"#icon-gongzuotongji",
-        //     enCode:"I",
-        //     children:[
-        //         {
-        //             key:"/index/system/mes/management",
-        //             label:"消息管理",
-        //             icon:"#icon-gongzuotongji",
-        //             enCode:"I2",
-        //         },
-        //         {
-        //             key:"/index/system/mes/template",
-        //             label:"消息模板管理",
-        //             icon:"#icon-gongzuotongji",
-        //             enCode:"I2",
-        //         },
-        //         {
-        //             key:"/index/system/mes/type",
-        //             label:"消息类型管理",
-        //             icon:"#icon-gongzuotongji",
-        //             enCode:"I2",
-        //         },
-        //         {
-        //             key:"/index/system/mes/sendType",
-        //             label:"消息发送方式",
-        //             icon:"#icon-gongzuotongji",
-        //             enCode:"I2",
-        //         }
-        //     ]
-        // },
         {
             key:"/index/system/proof",
             label:"凭证管理",
@@ -137,7 +87,7 @@ const SystemAside= props =>  {
             key:"/index/system/envi",
             label:"环境配置",
             icon:"#icon-gongzuotongji",
-            enCode:"H",
+            enCode:"J",
         },
     ]
 
@@ -148,7 +98,7 @@ const SystemAside= props =>  {
     const renderMenu = (data,deep)=> {
         return (
             <PrivilegeButton key={data.key} code={data.enCode} {...props}>
-                <li style={{cursor: "pointer",paddingLeft: `${deep * 20 + 20}`}}
+                <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
                     className={`system-aside-li system-aside-second ${data.key=== selectKey ? "system-aside-select" : ""}`}
                     onClick={()=>select(data.key)}
                     key={data.key}
@@ -165,7 +115,7 @@ const SystemAside= props =>  {
     const renderSubMenu = (item,deep)=> {
         return (
             <PrivilegeButton key={item.key} code={item.enCode} {...props}>
-                <li key={item.code} title={item.label} className="system-aside-li">
+                <li key={item.code} className="system-aside-li">
                     <div className="system-aside-item system-aside-first"
                          style={{paddingLeft: `${deep * 20 + 20}`}}
                          onClick={()=>setOpenOrClose(item.key)}
@@ -186,9 +136,7 @@ const SystemAside= props =>  {
                             }
                         </div>
                     </div>
-                    <ul title={item.label}
-                        className={`system-aside-ul ${isExpandedTree(item.key) ? null: "system-aside-hidden"}`}
-                    >
+                    <ul className={`system-aside-ul ${isExpandedTree(item.key) ? null: "system-aside-hidden"}`}>
                         {
                             item.children && item.children.map(item =>{
                                 const deepnew = deep +1

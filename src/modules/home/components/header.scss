@@ -13,8 +13,8 @@
         z-index: 999;
         &-logo{
             height: 50px;
-            //width: 100px;
             width: 150px;
+            margin: 0 30px 0 15px;
             img{
                 width: 100%;
                 height: 100%;
@@ -42,12 +42,12 @@
                 width: 100%;
             }
         }
+        &-language,&-user,&-status,&-message,&-set {
+            margin: 0 10px;
+        }
         &-icon{
             font-size: 23px;
             cursor: pointer;
-        }
-        &-language,&-user,&-status,&-message{
-            margin: 0 10px;
         }
         &-user{
             display: inline-flex;
@@ -65,7 +65,6 @@
             &-link{
                 display: flex;
                 flex-direction: row;
-                margin-left: 25px;
                 flex-shrink: 0;
                 & > div{
                     cursor: pointer;

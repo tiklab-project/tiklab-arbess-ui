@@ -8,8 +8,7 @@ import {inject,observer} from "mobx-react";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,matFlowId,structureStore,userId,matFlowName,
-        setRunOrSave,configDataStore} = props
+    const {view,setView,matFlowId,structureStore,userId,matFlowName,setRunOrSave,configDataStore} = props
 
     const {matFlowStartStructure} = structureStore
     const {isPlugin,setIsPrompt} = configDataStore
@@ -43,6 +42,10 @@ const ConfigChangeView = props =>{
         })
     }
 
+    const change = type => {
+        localStorage.setItem("configView",type)
+    }
+
     return (
         <div className="config_changeView">
             <div className="changeView">
@@ -53,7 +56,7 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className="changeView-view">
-                    <div className={view===1 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}
+                    <div className={`changeView-view-li ${view===1 ? "changeView-view-inner":""}`}
                          onClick={()=>setView(1)}
                     >
                         <div className="changeView-view-item" >
@@ -62,7 +65,7 @@ const ConfigChangeView = props =>{
                     </div>
                     {
                         !getVersionInfo().expired && isPlugin ?
-                            <div className={view===2 ? "changeView-view-li changeView-view-inner" : "changeView-view-li"}
+                            <div className={`changeView-view-li ${view===2 ? "changeView-view-inner":""}`}
                                  onClick={()=>setView(2)}
                             >
                                 <div className="changeView-view-item">
@@ -70,7 +73,7 @@ const ConfigChangeView = props =>{
                                 </div>
                             </div>
                             :
-                            <div className = "changeView-view-li changeView-view-ban">
+                            <div className="changeView-view-li changeView-view-ban">
                                 图形化视图
                             </div>
                     }

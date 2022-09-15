@@ -166,18 +166,6 @@ const routers=[
                 component:System,
                 routes:[
                     {
-                        path: "/index/system/directory",
-                        component: UserDirectory,
-                    },
-                    {
-                        path: "/index/system/list",
-                        component: UserList,
-                    },
-                    {
-                        path: "/index/system/org",
-                        component: Org,
-                    },
-                    {
                         path: "/index/system/plugin",
                         component: Plugin,
                     },
@@ -209,22 +197,34 @@ const routers=[
                         path:"/index/system/envi",
                         component: Envi,
                     },
-                    {
-                        path:"/index/system/mes/management",
-                        component: MessageManagement,
-                    },
-                    {
-                        path:"/index/system/mes/template",
-                        component: MessageTemplate,
-                    },
-                    {
-                        path:"/index/system/mes/type",
-                        component: MessageType,
-                    },
-                    {
-                        path:"/index/system/mes/sendType",
-                        component: MessageSendType,
-                    },
+                    // {
+                    //     path: "/index/system/directory",
+                    //     component: UserDirectory,
+                    // },
+                    // {
+                    //     path: "/index/system/list",
+                    //     component: UserList,
+                    // },
+                    // {
+                    //     path: "/index/system/org",
+                    //     component: Org,
+                    // },
+                    // {
+                    //     path:"/index/system/mes/management",
+                    //     component: MessageManagement,
+                    // },
+                    // {
+                    //     path:"/index/system/mes/template",
+                    //     component: MessageTemplate,
+                    // },
+                    // {
+                    //     path:"/index/system/mes/type",
+                    //     component: MessageType,
+                    // },
+                    // {
+                    //     path:"/index/system/mes/sendType",
+                    //     component: MessageSendType,
+                    // },
                 ]
             },
         ]

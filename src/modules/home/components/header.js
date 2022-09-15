@@ -3,9 +3,9 @@ import {Avatar,Dropdown,Menu} from "antd";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
-import {GlobalOutlined,MessageOutlined} from "@ant-design/icons";
+import {GlobalOutlined,MessageOutlined,SettingOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
-import logo from "../../../assets/images/matflow/资源 10.png";
+import logo from "../../../assets/images/logo.png";
 import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
 import vipTwo from "../../../assets/images/vip-two.png";
@@ -45,11 +45,6 @@ const Head = props =>{
             to:"/index/matFlow",
             title: "流水线",
         },
-        {
-            key:"system",
-            to:"/index/system",
-            title:"系统设置",
-        }
     ]
 
     const changeCurrentLink = item => {
@@ -73,16 +68,14 @@ const Head = props =>{
             {/*<Menu.Item key="1">英文</Menu.Item>*/}
         </Menu>
     )
-    
+
     const goOut = () => {
         props.history.push({
             pathname: "/logout",
             state: window.location.href
         })
-
     }
-
-    // u退出菜单
+    
     const outMenu = (
         <Menu>
             <Menu.Item key="0">
@@ -94,6 +87,13 @@ const Head = props =>{
                     <use xlinkHref="#icon-tuichu1"/>
                 </svg>
             </Menu.Item>
+        </Menu>
+    )
+    
+    const setMenu = (
+        <Menu>
+            <Menu.Item> <a href={"/eas.html#/orga/dashbord"}>账号与成员</a></Menu.Item>
+            <Menu.Item onClick={()=>props.history.push("/index/system")}>系统设置</Menu.Item>
         </Menu>
     )
 
@@ -121,6 +121,11 @@ const Head = props =>{
                     <div className="frame-header-language">
                         <Dropdown overlay={languageMenu}>
                             <GlobalOutlined className="frame-header-icon"/>
+                        </Dropdown>
+                    </div>
+                    <div className="frame-header-set">
+                        <Dropdown overlay={setMenu}>
+                            <SettingOutlined className="frame-header-icon"/>
                         </Dropdown>
                     </div>
                     <div className="frame-header-user">

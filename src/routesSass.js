@@ -164,18 +164,6 @@ const routesSaas =[
                 component:System,
                 routes:[
                     {
-                        path: "/index/system/directory",
-                        component: UserDirectory,
-                    },
-                    {
-                        path: "/index/system/list",
-                        component: UserList,
-                    },
-                    {
-                        path: "/index/system/org",
-                        component: Org,
-                    },
-                    {
                         path: "/index/system/plugin",
                         component: Plugin,
                     },
@@ -207,6 +195,18 @@ const routesSaas =[
                         path:"/index/system/envi",
                         component: Envi,
                     },
+                    // {
+                    //     path: "/index/system/directory",
+                    //     component: UserDirectory,
+                    // },
+                    // {
+                    //     path: "/index/system/list",
+                    //     component: UserList,
+                    // },
+                    // {
+                    //     path: "/index/system/org",
+                    //     component: Org,
+                    // },
                     {
                         path:"/index/system/mes/management",
                         component: MessageManagement,
