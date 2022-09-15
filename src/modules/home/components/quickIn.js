@@ -7,14 +7,19 @@ const QuickIn = props =>{
     // 不受控制
     const stableList = [
         {
+            id:0,
+            title: "我的流水线",
+            to:"/index/matFlow",
+        },
+        {
             id:1,
             title:"我的收藏",
             to:"/index/collect",
         },
         {
-            id:2,
-            title: "我的流水线",
-            to:"/index/matFlow",
+            id:3,
+            title:"新建流水线",
+            to:"/index/new"
         },
     ]
 
@@ -22,21 +27,21 @@ const QuickIn = props =>{
     const inStableLis = [
         {
             id:3,
-            title: "用户中心",
-            to:"/index/system/base",
-            enCode:"A",
-        },
-        {
-            id:4,
             title: "权限管理",
             to:"/index/system/syr/role",
             enCode:"E2",
         },
         {
-            id:5,
+            id:4,
             title: "凭证管理",
             to:"/index/system/proof",
             enCode:"F",
+        },
+        {
+            id:5,
+            title: "环境配置",
+            to:"/index/system/envi",
+            enCode:"J",
         },
     ]
 

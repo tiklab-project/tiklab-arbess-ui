@@ -21,7 +21,7 @@
         "build:cjs": "rimraf lib && cross-env NODE_ENV=production BABEL_ENV=cjs rollup -c",
         "build:umd": "rimraf dist && cross-env BABEL_ENV=umd rollup -c"
     },
-    "keywords": [],
+    "keywords": ["tiklab-matflow"],
     "author": "",
     "license": "ISC",
     "publishConfig": {

@@ -63,7 +63,7 @@ const ProjectAside = props =>{
                     >
                         <div className="aside_content_icon">
                             <svg className="icon" aria-hidden="true">
-                                <use xlinkHref= {item.icon}/>
+                                <use xlinkHref = {item.icon}/>
                             </svg>
                         </div>
                         <div className="aside_content_title">{item.title}</div>

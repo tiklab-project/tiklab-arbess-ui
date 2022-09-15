@@ -19,6 +19,7 @@ const Head = props =>{
     const {i18n} = useTranslation()
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
+    const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
 
     useEffect(()=>{
         if(path.indexOf("/index/system")===0){
@@ -92,7 +93,7 @@ const Head = props =>{
     
     const setMenu = (
         <Menu>
-            <Menu.Item> <a href={"/eas.html#/orga/dashbord"}>账号与成员</a></Menu.Item>
+            <Menu.Item><a href={authUrl+"#/orga/dashbord"}>账号与成员</a></Menu.Item>
             <Menu.Item onClick={()=>props.history.push("/index/system")}>系统设置</Menu.Item>
         </Menu>
     )

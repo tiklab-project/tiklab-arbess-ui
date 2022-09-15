@@ -60,6 +60,8 @@ const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messag
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 
+const NotFound=AsyncComponent(()=>import("./modules/home/components/notFound"))
+
 const routers=[
     // {
     //     path:"/login",
@@ -159,6 +161,10 @@ const routers=[
                             }
                         ]
                     },
+                    // {
+                    //     path:"/index/task/*",
+                    //     render:()=><Redirect to="/index/404"/>
+                    // }
                 ]
             },
             {
@@ -198,6 +204,10 @@ const routers=[
                         component: Envi,
                     },
                     // {
+                    //     path:"/index/system/*",
+                    //     render:()=><Redirect to="/index/404"/>
+                    // },
+                    // {
                     //     path: "/index/system/directory",
                     //     component: UserDirectory,
                     // },
@@ -227,6 +237,14 @@ const routers=[
                     // },
                 ]
             },
+            // {
+            //     path:"/index/404",
+            //     component: NotFound,
+            // },
+            // {
+            //     path:"/index/*",
+            //     render:()=><Redirect to="/index/404"/>
+            // },
         ]
     },
     {
@@ -235,6 +253,10 @@ const routers=[
         exact: true,
         render:()=><Redirect to="/index"/>,
     },
+    // {
+    //     path:"*",
+    //     render:()=><Redirect to="/index/404"/>
+    // },
 ]
 
 export default routers
