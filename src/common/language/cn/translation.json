@@ -1,19 +1,10 @@
 {
-    "home": "首页",
-    "matflow": "流水线",
-    "org_center": "组织中心",
+    "首页": "首页",
+    "流水线": "流水线",
     "sys" : "系统设置",
-    "login": "登录",
-    "help": "帮助",
-    "task": "任务",
-    "user": "成员",
-    "privilege": "权限",
-    "config": "配置",
-    "history": "历史",
-    "work": "工作空间",
-    "dynamic": "动态",
-    "proof": "凭证",
     "my": "我的",
     "collection": "收藏",
-    "User center": "用户中心"
+    "add": "新建",
+    "proof": "凭证",
+    "environment": "环境"
 }

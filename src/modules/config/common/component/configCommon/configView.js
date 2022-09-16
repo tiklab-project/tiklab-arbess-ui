@@ -19,7 +19,7 @@ const ConfigView = props =>{
         })
     },[])
 
-    return view===1 ?
+    return view==="forms" ?
         <FormView
             del={del}
             form={form}

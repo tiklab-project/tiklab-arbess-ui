@@ -23,7 +23,8 @@ const ConfigDetails = props =>{
         gitProofId,setGitProofId,orderShellBlock,unitShellBlock} = configDataStore
 
     const [form] = Form.useForm()
-    const [view,setView] = useState(1)
+    const [view,setView] = useState("forms")
+    const [visible,setVisible] = useState(false)
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
     const userId = getUser().userId
@@ -31,6 +32,7 @@ const ConfigDetails = props =>{
     // Gitee和Github授权
     useEffect(() => {
         if(codeValue){
+            setVisible(true)
             const params = {
                 code:codeValue,
                 state:1,
@@ -39,8 +41,6 @@ const ConfigDetails = props =>{
                 code(codeValue).then(res=>{
                     localStorage.setItem("giteeToken",JSON.stringify(res.data))
                     localStorage.removeItem("giteeCode")
-                    localStorage.removeItem("githubToken")
-                    getState(params)
                     window.close()
                 })
             }
@@ -48,13 +48,14 @@ const ConfigDetails = props =>{
                 getAccessToken(codeValue).then(res=>{
                     localStorage.setItem("githubToken",res.data)
                     localStorage.removeItem("githubCode")
-                    localStorage.removeItem("giteeToken")
-                    getState(params)
                     window.close()
                 })
             }
+            getState(params)
         }
         if(codeError){
+            setVisible(true)
+
             const params = {
                 code:codeError,
                 state:1,
@@ -62,7 +63,7 @@ const ConfigDetails = props =>{
             getState(params)
             window.close()
         }
-    }, [codeValue])
+    }, [])
 
     useEffect(()=>{
         if(codeData){
@@ -111,7 +112,7 @@ const ConfigDetails = props =>{
         for (let i=0; i<initialData.length;i++){
             for (let j=0; j<lists.length;j++) {
                 const type = parseInt(initialData[i].type/10)
-                if (type*10 < lists[j] && lists[j]< (type+1) *10) {
+                if (type*10 < lists[j] && (type+1) *10 > lists[j]) {
                     lists.splice(j, 1)
                     j--
                 }
@@ -196,51 +197,21 @@ const ConfigDetails = props =>{
         }
     }
 
-    // 按需清空表单的值
+    // 统一form表单里面需要删除的值
     const del = (i,type) => {
         switch (i) {
             case 11:
-                delDetail("test")
-                break
-            case 21:
-            case 22:
-                delDetail("structure")
-                break
-            case 31:
-            case 32:
-                delDetail("deploy")
-                break
-            default:
-                delDetail("git")
-        }
-        setFormInitialValues({...formInitialValues})
-        if(!type){
-            setIsPrompt(true)
-        }
-    }
-
-    // 统一form表单里面需要删除的值
-    const delDetail = i =>{
-        switch (i) {
-            case "git":
-                formInitialValues.codeName = null
-                formInitialValues.codeBranch = null
-                formInitialValues.proofName = null
-                formInitialValues.gitProofName = null
-                setCodeData("")
-                setCodeType(1)
-                setGitProofId("")
-                break
-            case "test":
                 formInitialValues.testOrder = null
                 setUnitShellBlock("")
                 break
-            case "structure":
+            case 21:
+            case 22:
                 formInitialValues.structureAddress = null
                 formInitialValues.structureOrder = null
                 setMavenShellBlock("")
                 break
-            case "deploy":
+            case 31:
+            case 32:
                 formInitialValues.sshPort = null
                 formInitialValues.deployAddress = null
                 formInitialValues.sshIp = null
@@ -254,6 +225,19 @@ const ConfigDetails = props =>{
                 setOrderShellBlock("")
                 setShellBlock("")
                 setDeployProofId("")
+                break
+            default:
+                formInitialValues.codeName = null
+                formInitialValues.codeBranch = null
+                formInitialValues.proofName = null
+                formInitialValues.gitProofName = null
+                setCodeData("")
+                setCodeType(1)
+                setGitProofId("")
+        }
+        setFormInitialValues({...formInitialValues})
+        if(!type){
+            setIsPrompt(true)
         }
     }
 
@@ -344,6 +328,8 @@ const ConfigDetails = props =>{
             }
         })
     }
+
+    if(visible){return  null}
 
     return (
         <Fragment>

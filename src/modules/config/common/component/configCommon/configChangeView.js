@@ -1,10 +1,10 @@
-import React,{useState} from "react";
+import React,{useEffect,useState} from "react";
 import {Button,message,Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 import {getVersionInfo} from "tiklab-core-ui";
-import "./configChangeView.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
+import "./configChangeView.scss";
 
 const ConfigChangeView = props =>{
 
@@ -13,6 +13,13 @@ const ConfigChangeView = props =>{
     const {matFlowStartStructure} = structureStore
     const {isPlugin,setIsPrompt} = configDataStore
     const [processVisible,setProcessVisible] = useState(false)
+    const configView = localStorage.getItem("configView")
+
+    useEffect(()=>{
+        if(configView){
+            setView(configView)
+        }
+    },[configView])
 
     const run = () => {
         const params = {
@@ -42,7 +49,8 @@ const ConfigChangeView = props =>{
         })
     }
 
-    const change = type => {
+    const changeView = type => {
+        setView(type)
         localStorage.setItem("configView",type)
     }
 
@@ -56,8 +64,8 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className="changeView-view">
-                    <div className={`changeView-view-li ${view===1 ? "changeView-view-inner":""}`}
-                         onClick={()=>setView(1)}
+                    <div className={`changeView-view-li ${view==="forms" ? "changeView-view-inner":""}`}
+                         onClick={()=>changeView("forms")}
                     >
                         <div className="changeView-view-item" >
                             表单视图
@@ -65,8 +73,8 @@ const ConfigChangeView = props =>{
                     </div>
                     {
                         !getVersionInfo().expired && isPlugin ?
-                            <div className={`changeView-view-li ${view===2 ? "changeView-view-inner":""}`}
-                                 onClick={()=>setView(2)}
+                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}
+                                 onClick={()=>changeView("gui")}
                             >
                                 <div className="changeView-view-item">
                                     图形化视图

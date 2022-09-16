@@ -5,7 +5,7 @@ import {getUser} from "tiklab-core-ui";
 
 const ConfigCodeGiteeOrGithubModal = props =>{
 
-    const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,getCode,getGithubProof}=props
+    const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,getCode,getGithubProof,setGitProofId}=props
     const [form] = Form.useForm()
 
     useEffect(()=>{
@@ -45,7 +45,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
 
     const saveProof = res =>{
         if(res.code === 0){
-            localStorage.setItem("gitProofId",res.data)
+            setGitProofId(res.data)
         }else {
             message.error({content:"创建失败", className:"message"})
         }

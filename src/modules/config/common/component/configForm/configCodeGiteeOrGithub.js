@@ -13,7 +13,7 @@ const ConfigCodeGiteeOrGithub = props =>{
 
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
-    const {codeData,formInitialValues,codeType,gitProofId} = configDataStore
+    const {codeData,formInitialValues,codeType,gitProofId,setGitProofId} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -33,7 +33,7 @@ const ConfigCodeGiteeOrGithub = props =>{
             state:0,
         }
         if(visible){
-            interval = setInterval(()=>getState(params).then(res=>warn(res.data)),2000)
+            interval = setInterval(()=>getState(params).then(res=>warn(res.data)),1000)
         }else clearInterval(interval)
         return ()=> clearInterval(interval)
     },[visible])
@@ -48,7 +48,7 @@ const ConfigCodeGiteeOrGithub = props =>{
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
-        if(codeType  === 2){
+        if(codeType === 2){
             getAllGiteeStorehouse(gitProofId).then(res=>{
                 if(res.code===0 && res.data){
                     setStorehouseList(res.data)
@@ -130,6 +130,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 getGithubProof={getGithubProof}
                 url={url}
                 getGiteeProof={getGiteeProof}
+                setGitProofId={setGitProofId}
             />
         </Fragment>
     )

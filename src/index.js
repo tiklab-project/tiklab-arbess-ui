@@ -7,7 +7,6 @@ import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {messageModuleStores} from "tiklab-message-ui/es/store"
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
-import {ConfigProvider} from "antd";
 import {getUser} from "tiklab-core-ui";
 import {observer,Provider} from "mobx-react";
 import {useTranslation} from "react-i18next";
@@ -62,13 +61,11 @@ const Index = observer(() => {
 
     return (
         <PluginContainer.Provider initialState={initPluginData}>
-            {/*<ConfigProvider>*/}
-                <Provider {...allStore}>
-                    <HashRouter >
-                        {renderRoutes(initPluginData.routes)}
-                    </HashRouter>
-                </Provider>
-            {/*</ConfigProvider>*/}
+            <Provider {...allStore}>
+                <HashRouter >
+                    {renderRoutes(initPluginData.routes)}
+                </HashRouter>
+            </Provider>
         </PluginContainer.Provider>
     )
 })

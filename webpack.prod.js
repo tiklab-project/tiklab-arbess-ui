@@ -11,7 +11,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPl
 const webpack = require("webpack");
 const customEnv = process.env.CUSTOM_ENV;
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
-const {webpackGlobal} = require("./enviroment/enviroment_" + customEnv);
+const {webpackGlobal} = require("./environment/environment_" + customEnv);
 const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = merge(baseWebpackConfig, {

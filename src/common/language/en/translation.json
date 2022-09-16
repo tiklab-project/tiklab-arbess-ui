@@ -1,18 +1,11 @@
 {
-    "home": "home",
-    "matflow": "matflow",
-    "org_center": "org_center",
+    "首页": "home",
+    "流水线": "matflow",
     "sys" : "sys",
-    "login": "login",
-    "help": "Help",
-    "task": "task",
-    "user": "user",
-    "line_photo": "line_photo",
-    "history": "history",
-    "work": "work_space",
-    "dynamic": "dynamic",
-    "proof": "proof",
-    "collection": "collection",
     "my": "my",
-    "User center": "User center"
+    "collection": "collection",
+    "add": "add",
+    "proof": "proof",
+    "environment": "enviroment"
+
 }

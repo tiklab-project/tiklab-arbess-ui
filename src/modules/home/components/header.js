@@ -16,6 +16,7 @@ const Head = props =>{
 
     let path = props.location.pathname
     const [currentLink,setCurrentLink] = useState(path)
+
     const {i18n} = useTranslation()
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
@@ -65,8 +66,8 @@ const Head = props =>{
 
     const languageMenu = (
         <Menu>
-            <Menu.Item key="0">中文</Menu.Item>
-            {/*<Menu.Item key="1">英文</Menu.Item>*/}
+            <Menu.Item key="0" >中文</Menu.Item>
+            {/*<Menu.Item key="1" onClick={()=>changeLanguage("en")}>英文</Menu.Item>*/}
         </Menu>
     )
 
@@ -93,7 +94,12 @@ const Head = props =>{
     
     const setMenu = (
         <Menu>
-            <Menu.Item><a href={authUrl+"#/orga/dashbord"}>账号与成员</a></Menu.Item>
+            <Menu.Item
+                // onClick={()=>window.open(authUrl+"#/orga/dashbord")}
+            >
+                <a href={authUrl+"#/orga/dashbord"}>账号与成员</a>
+                {/*账号与成员*/}
+            </Menu.Item>
             <Menu.Item onClick={()=>props.history.push("/index/system")}>系统设置</Menu.Item>
         </Menu>
     )
@@ -109,7 +115,9 @@ const Head = props =>{
                 <div className="frame-header-logo">
                     <img src={logo} alt="logo" />
                 </div>
-                <div className="headers-link">{ renderRouter(routers) }</div>
+                <div className="headers-link">
+                    {renderRouter(routers)}
+                </div>
             </div>
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
