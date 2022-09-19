@@ -21,7 +21,7 @@ export function  RunState (data){
 // 所有动态
 export function  FindUserAction (data){
     return serviceLoc.request({
-        url:"/matFlowHome/findUserAction",
+        url:"/matFlowHome/findUserActivity",
         method:"post",
         data
     })
