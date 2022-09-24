@@ -10,27 +10,27 @@ export function GetSystemMassage(data){
 }
 
 //删除环境配置
-export function DeleteMatFlowPath(data){
+export function DeleteMatFlowScm(data){
     return serviceLoc.request({
-        url:"/path/deleteMatFlowPath",
+        url:"/scm/deleteMatFlowScm",
         method:"post",
         data
     })
 }
 
 //更新环境配置
-export function UpdateMatFlowPath(data){
+export function UpdateMatFlowScm(data){
     return serviceLoc.request({
-        url:"/path/updateMatFlowPath",
+        url:"/scm/updateMatFlowScm",
         method:"post",
         data
     })
 }
 
 //查找环境配置
-export function FindAllMatFlowPath(data){
+export function FindAllMatFlowScm(data){
     return serviceLoc.request({
-        url:"/path/findAllMatFlowPath",
+        url:"/scm/findAllMatFlowScm",
         method:"post",
         data
     })

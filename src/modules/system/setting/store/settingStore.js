@@ -2,9 +2,9 @@ import {observable,action} from "mobx";
 
 import {
     GetSystemMassage,
-    DeleteMatFlowPath,
-    UpdateMatFlowPath,
-    FindAllMatFlowPath,
+    DeleteMatFlowScm,
+    UpdateMatFlowScm,
+    FindAllMatFlowScm,
 } from "../api/setting";
 
 export class SettingStore {
@@ -25,26 +25,26 @@ export class SettingStore {
     }
 
     @action
-    findAllMatFlowPath = async () =>{
-        return await FindAllMatFlowPath()
+    findAllMatFlowScm = async () =>{
+        return await FindAllMatFlowScm()
     }
 
     @action
-    deleteMatFlowPath = async value=>{
+    deleteMatFlowScm = async value=>{
         const param = new FormData()
-        param.append("pathId",value)
-        return await DeleteMatFlowPath(param)
+        param.append("ScmId",value)
+        return await DeleteMatFlowScm(param)
     }
 
     @action
-    updateMatFlowPath = async values=>{
+    updateMatFlowScm = async values=>{
         const params = {
-            pathId:values.pathId,
-            pathType:values.pathType,
-            pathName:values.pathName,
-            pathAddress:values.pathAddress,
+            ScmId:values.ScmId,
+            ScmType:values.ScmType,
+            ScmName:values.ScmName,
+            ScmAddress:values.ScmAddress,
         }
-        return await UpdateMatFlowPath(params)
+        return await UpdateMatFlowScm(params)
     }
 
 }

@@ -13,14 +13,14 @@ const Envi = props =>{
 
     const {settingStore} = props
 
-    const {findAllMatFlowPath,deleteMatFlowPath,updateMatFlowPath} = settingStore
+    const {findAllMatFlowScm,deleteMatFlowScm,updateMatFlowScm} = settingStore
 
     const [visible,setVisible] = useState(false)
     const [enviData,setEnviData] = useState([])
 
     // 初始化
     useEffect(()=>{
-        findAllMatFlowPath().then(res=>{
+        findAllMatFlowScm().then(res=>{
             if(res.code===0 && res.data){
                 setEnviData(res.data)
             }
@@ -29,10 +29,10 @@ const Envi = props =>{
 
     // 删除配置
     const deletePart = item => {
-        deleteMatFlowPath(item.pathId).then(res=>{
+        deleteMatFlowScm(item.scmId).then(res=>{
             if(res.code===0){
                 for(let i=0 ;i<enviData.length;i++){
-                    if(enviData[i].pathType===item.pathType){
+                    if(enviData[i].scmType===item.scmType){
                         enviData.splice(i,1)
                     }
                     setEnviData([...enviData])
@@ -46,12 +46,12 @@ const Envi = props =>{
     // 保存以及更新
     const onFinish = (values,item)=> {
         const params = {
-            pathId:item.pathId,
-            pathType:item.pathType,
-            pathName:values.pathName,
-            pathAddress:values.pathAddress,
+            scmId:item.scmId,
+            scmType:item.scmType,
+            scmName:values.scmName,
+            scmAddress:values.scmAddress,
         }
-        updateMatFlowPath(params).then(res=>{
+        updateMatFlowScm(params).then(res=>{
             if(res.code===0){
                 message.success({content:"保存成功",className:"message"})
             }
@@ -59,9 +59,9 @@ const Envi = props =>{
             console.log(error)
         })
     }
-    
-    const pathTitle = pathType => {
-        switch (pathType) {
+
+    const scmTitle = ScmType => {
+        switch (ScmType) {
             case 1:  return "Git"
             case 5:  return "SVN"
             case 21: return "maven"
@@ -72,10 +72,10 @@ const Envi = props =>{
     // 渲染环境配置
     const renderEnviData = enviData => {
         return enviData && enviData.map(item=>{
-            return  <div key={item.pathType} className="envi-item">
+            return  <div key={item.scmType} className="envi-item">
                         <div className="envi-item-Headline">
                             <div className="envi-item-title">
-                                {pathTitle(item.pathType)}
+                                {scmTitle(item.scmType)}
                             </div>
                             <div className="envi-item-delete">
                                 <Popconfirm
@@ -92,13 +92,13 @@ const Envi = props =>{
                               onFinish={values=>onFinish(values,item)}
                               initialValues={{...item}}
                         >
-                            <Form.Item label="名称" name="pathName"
-                                       rules={[{required:true,message:`请输入${pathTitle(item.pathType)}名称`}]}
+                            <Form.Item label="名称" name="scmName"
+                                       rules={[{required:true,message:`请输入${scmTitle(item.scmType)}名称`}]}
                             >
                                 <Input/>
                             </Form.Item>
-                            <Form.Item label="地址" name="pathAddress"
-                                       rules={[{required:true,message:`请输入${pathTitle(item.pathType)}地址`}]}
+                            <Form.Item label="地址" name="scmAddress"
+                                       rules={[{required:true,message:`请输入${scmTitle(item.scmType)}地址`}]}
                             >
                                 <Input/>
                             </Form.Item>
@@ -111,7 +111,7 @@ const Envi = props =>{
                     </div>
         })
     }
-    
+
     return <div className="envi">
         <BreadcrumbContent firstItem={"环境配置"} />
         <div className="envi-content">
@@ -124,7 +124,7 @@ const Envi = props =>{
                 setVisible={setVisible}
                 enviData={enviData}
                 setEnviData={setEnviData}
-                pathTitle={pathTitle}
+                scmTitle={scmTitle}
             />
         </div>
     </div>

@@ -35,13 +35,13 @@
         &-select {
             background: #e3e8f0;
             &:before{
-                width: 2px;
+                width: 3px;
                 height: 40px;
                 transition: all .4s cubic-bezier(.23,1,.32,1);
                 content: " ";
                 position: absolute;
                 z-index: 2;
-                left: 3px;
+                left: 2px;
                 background: #1890ff
             }
         }

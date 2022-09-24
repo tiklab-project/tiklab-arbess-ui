@@ -89,6 +89,30 @@ const SystemAside= props =>  {
             icon:"#icon-gongzuotongji",
             enCode:"J",
         },
+        {
+            key:"/index/system/taskList",
+            label:"待办事项",
+            icon:"#icon-gongzuotongji",
+            enCode:"J",
+        },
+        {
+            key:"/index/system/myTodoTask",
+            label:"我的待办事项 ",
+            icon:"#icon-gongzuotongji",
+            enCode:"F",
+        },
+        {
+            key:"/index/system/logList",
+            label:"日志记录",
+            icon:"#icon-gongzuotongji",
+            enCode:"G",
+        },
+        {
+            key:"/index/system/myLogList",
+            label:"我的日志",
+            icon:"#icon-gongzuotongji",
+            enCode:"H",
+        },
     ]
 
     const select = key =>{

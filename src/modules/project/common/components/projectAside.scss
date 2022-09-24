@@ -39,7 +39,7 @@
     &_active{
         background: #e3e8f0;
         &:before{
-            width: 3px;
+            width: 4px;
             height: 53px;
             transition: all .4s cubic-bezier(.23,1,.32,1);
             content: " ";

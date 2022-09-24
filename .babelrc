@@ -37,6 +37,16 @@
             "libraryDirectory": "es",
             "style": true
         }, "tiklab-message-ui"],
+        ["import", {
+            "libraryName": "tiklab-todotask-ui",
+            "libraryDirectory": "es",
+            "style": true
+        }, "tiklab-todotask-ui"],
+        ["import", {
+            "libraryName": "tiklab-oplog-ui",
+            "libraryDirectory": "es",
+            "style": true
+        }, "tiklab-oplog-ui"],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],

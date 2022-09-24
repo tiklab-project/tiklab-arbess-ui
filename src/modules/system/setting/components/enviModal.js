@@ -3,26 +3,26 @@ import {Modal} from "antd";
 
 const lis = [
     {
-        pathId:"1",
-        pathType:1,
+        scmId:"1",
+        scmType:1,
     },
     {
-        pathId:"5",
-        pathType:5,
+        scmId:"5",
+        scmType:5,
     },
     {
-        pathId:"22",
-        pathType:22,
+        scmId:"22",
+        scmType:22,
     },
     {
-        pathId:"21",
-        pathType:21,
+        scmId:"21",
+        scmType:21,
     },
 ]
 
 const EnviModal = props =>{
 
-    const {visible,setVisible,enviData,setEnviData,pathTitle} = props
+    const {visible,setVisible,enviData,setEnviData,scmTitle} = props
 
     const handleClick = item =>{
         const newData = [...enviData]
@@ -32,21 +32,21 @@ const EnviModal = props =>{
     }
 
     // 环境配置是否已经存在
-    const isGray = pathType => {
-        return enviData.some(item=>item.pathType===pathType)
+    const isGray = scmType => {
+        return enviData.some(item=>item.scmType===scmType)
     }
     
     const renderLis = lis => {
         return lis.map(item=>{
             return  <div
-                        onClick={()=>isGray(item.pathType) ? null:handleClick(item)}
-                        key={item.pathType}
-                        className={`enviModal-group_list enviModal-item ${isGray(item.pathType) ? "isGray" :"notGray"}`}
+                        onClick={()=>isGray(item.scmType) ? null:handleClick(item)}
+                        key={item.scmType}
+                        className={`enviModal-group_list enviModal-item ${isGray(item.scmType) ? "isGray" :"notGray"}`}
                     >
                         <div>
-                            {pathTitle(item.pathType)}
+                            {scmTitle(item.scmType)}
                         </div>
-                        {isGray(item.pathType) ? <div>已存在</div>:null}
+                        {isGray(item.scmType) ? <div>已存在</div>:null}
                     </div>
         })
     }

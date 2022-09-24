@@ -60,6 +60,13 @@ const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messag
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 
+const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
+const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
+
+const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
+const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
+
+
 const NotFound=AsyncComponent(()=>import("./modules/home/components/notFound"))
 
 const routers=[
@@ -202,6 +209,22 @@ const routers=[
                     {
                         path:"/index/system/envi",
                         component: Envi,
+                    },
+                    {
+                        path: "/index/system/taskList",
+                        component: TaskList,
+                    },
+                    {
+                        path: "/index/system/myTodoTask",
+                        component: MyTodoTask,
+                    },
+                    {
+                        path:"/index/system/logList",
+                        component: LogList,
+                    },
+                    {
+                        path:"/index/system/myLogList",
+                        component: MyLogList,
                     },
                     // {
                     //     path:"/index/system/*",
