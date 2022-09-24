@@ -21,7 +21,9 @@
         "build:cjs": "rimraf lib && cross-env NODE_ENV=production BABEL_ENV=cjs rollup -c",
         "build:umd": "rimraf dist && cross-env BABEL_ENV=umd rollup -c"
     },
-    "keywords": ["tiklab-matflow"],
+    "keywords": [
+        "tiklab-matflow"
+    ],
     "author": "",
     "license": "ISC",
     "publishConfig": {
@@ -167,8 +169,10 @@
         "tiklab-eam-ui": "^1.0.0",
         "tiklab-enable-axios-ce": "^1.0.0",
         "tiklab-message-ui": "^1.0.0",
+        "tiklab-oplog-ui": "^1.0.0",
         "tiklab-plugin-ui": "^1.0.0",
         "tiklab-privilege-ui": "^1.0.0",
+        "tiklab-todotask-ui": "^1.0.0",
         "tiklab-user-ui": "^1.0.0"
     }
 }
