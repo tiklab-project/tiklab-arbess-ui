@@ -1,6 +1,7 @@
 import React from "react";
 import "./projectAsideOpt.scss";
 import {Dropdown} from "antd";
+import {CaretDownOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
@@ -51,13 +52,14 @@ const ProjectAsideOpt = props =>{
 
     return(
         <Dropdown overlay={menu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
-            <li className="aside_content aside_dropdown"
+            <li className="aside_content aside_dropdown aside_opt"
                 style={{padding:10}}
                 onClick={(e)=>e.preventDefault()}
             >
-                    <svg  className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-shaixuan1"/>
-                    </svg>
+                <svg  className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-shaixuan1"/>
+                </svg>
+                <CaretDownOutlined className="dropdowns_icon"/>
             </li>
         </Dropdown>
     )

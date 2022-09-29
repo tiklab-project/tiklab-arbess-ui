@@ -35,13 +35,11 @@ export class WorkSpaceStore{
         const params = new FormData()
         params.append("matFlowId",value.matFlowId)
         params.append("userId",value.userId)
-        FileTree(params).then(res=>{
-            if(res.code === 0){
-                this.fileList = res.data
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await FileTree(params)
+        if(data.code===0){
+            this.fileList = data.data
+        }
+        return data
     }
 
     @action

@@ -32,4 +32,5 @@ function mapStateToProps(state) {
         pluginStore: state.pluginStore
     }
 }
+
 export default connect(mapStateToProps)(IndexHoc)

@@ -1,8 +1,9 @@
 import React from "react";
-import {PrivilegeButton} from "tiklab-privilege-ui";
 
 // 快捷（头）
 const QuickIn = props =>{
+
+    const {matFlowList,followList} = props
 
     // 不受控制
     const stableList = [
@@ -10,38 +11,13 @@ const QuickIn = props =>{
             id:0,
             title: "我的流水线",
             to:"/index/matFlow",
+            list:matFlowList
         },
         {
             id:1,
             title:"我的收藏",
             to:"/index/collect",
-        },
-        {
-            id:3,
-            title:"新建流水线",
-            to:"/index/new"
-        },
-    ]
-
-    // 受控制
-    const inStableLis = [
-        {
-            id:3,
-            title: "权限管理",
-            to:"/index/system/syr/role",
-            enCode:"E2",
-        },
-        {
-            id:4,
-            title: "凭证管理",
-            to:"/index/system/proof",
-            enCode:"F",
-        },
-        {
-            id:5,
-            title: "环境配置",
-            to:"/index/system/envi",
-            enCode:"J",
+            list: followList
         },
     ]
 
@@ -51,29 +27,19 @@ const QuickIn = props =>{
                 <div key={item.id} className="quickIn-group" onClick={()=>props.history.push(item.to)}>
                     <div className="quickIn-group-wrap">
                         <div className="quickIn-group-wrap-title">{item.title}</div>
+                        <div className="quickIn-group-wrap-number">
+                            {
+                                item.list && item.list.length > 0 ? item.list.length :0
+                            }
+                        </div>
                     </div>
                 </div>
             )
         })
     }
 
-    const renderInStableList = lis => {
-        return lis && lis.map(item=>{
-            return(
-                <PrivilegeButton key={item.id} code={item.enCode} {...props}>
-                    <div key={item.id} className="quickIn-group" onClick={()=>props.history.push(item.to)}>
-                        <div className="quickIn-group-wrap">
-                            <div className="quickIn-group-wrap-title">{item.title}</div>
-                        </div>
-                    </div>
-                </PrivilegeButton>
-            )
-        })
-    }
-
     return  <div className="quickIn">
                 {renderStableList(stableList)}
-                {renderInStableList(inStableLis)}
             </div>
 }
 

@@ -2,6 +2,7 @@ import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import ProjectAsideOpt from "./projectAsideOpt";
 import {PrivilegeButton} from "tiklab-privilege-ui";
+import {Dropdown} from "antd";
 
 const ProjectAside = props =>{
 
@@ -21,7 +22,7 @@ const ProjectAside = props =>{
     const  taskRouters=[
         {
             to:`/index/task/${matFlowName}/work`,
-            title:"工作空间",
+            title:"概况",
             icon:"#icon-gongzuotongji",
             key:"2",
             enCode:"AA"
@@ -40,17 +41,33 @@ const ProjectAside = props =>{
             key:"4",
             enCode:"CC"
         },
+    ]
+
+    const router = [
         {
-            to:`/index/task/${matFlowName}/assembly`,
-            title: "设置",
-            icon:"#icon-shezhi",
-            key:"5",
-            enCode:"DD"
-        }
+            key:`/index/task/${matFlowName}/assembly/user`,
+            label:"项目成员",
+            enCode:"DD1",
+        },
+        {
+            key:`/index/task/${matFlowName}/assembly/role`,
+            label:"角色管理",
+            enCode:"DD2",
+        },
+        {
+            key:`/index/task/${matFlowName}/assembly/proof`,
+            label:"凭证管理",
+            enCode:"DD3",
+        },
+        {
+            key:`/index/task/${matFlowName}/assembly/redel`,
+            label:"其他管理",
+            enCode:"DD4",
+        },
     ]
 
     const changeNav = item=>{
-        props.history.push(item.to)
+        props.history.push(item)
     }
     
     const renderTaskRouter = taskRouters => {
@@ -59,7 +76,7 @@ const ProjectAside = props =>{
                 <PrivilegeButton code={item.enCode} key={item.key} {...props}>
                     <li key={item.key}
                         className={nav===item.to ? "aside_content aside_active" : "aside_content"}
-                        onClick={()=>changeNav(item)}
+                        onClick={()=>changeNav(item.to)}
                     >
                         <div className="aside_content_icon">
                             <svg className="icon" aria-hidden="true">
@@ -73,11 +90,50 @@ const ProjectAside = props =>{
         })
     }
 
+    const renderMenu = router => {
+        return router.map(data=>{
+            return  <PrivilegeButton key={data.key} code={data.enCode} {...props}>
+                <div
+                    className="projectSetMenu-li"
+                    onClick={()=>changeNav(data.key)}
+                    key={data.key}
+                >
+                    <span>{data.label}</span>
+                </div>
+            </PrivilegeButton>
+        })
+    }
+
+    const menu = (
+        <div className="projectSetMenu">
+            <div className="projectSetMenu-ul">
+                {renderMenu(router)}
+            </div>
+        </div>
+    )
+
     return(
          <div className="aside">
             <ul  className="content">
                 <ProjectAsideOpt{...props} path={path}/>
                 { renderTaskRouter(taskRouters) }
+                <PrivilegeButton code={"DD"} {...props}>
+                    <Dropdown overlay={menu}>
+                        <li
+                            onClick={(e)=>e.preventDefault()}
+                            className={path.indexOf(`/index/task/${matFlowName}/assembly`) === 0 ? "aside_content aside_active" : "aside_content"}
+                        >
+                            <div className="aside_content_icon">
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-shezhi"/>
+                                </svg>
+                            </div>
+                            <div className="aside_content_title">
+                                设置
+                            </div>
+                        </li>
+                     </Dropdown>
+                </PrivilegeButton>
             </ul>
         </div>
     )

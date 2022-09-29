@@ -1,6 +1,6 @@
 {
-    "首页": "home",
-    "流水线": "matflow",
+    "home": "home",
+    "pipeline": "pipeline",
     "sys" : "sys",
     "my": "my",
     "collection": "collection",

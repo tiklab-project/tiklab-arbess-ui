@@ -11,6 +11,6 @@ echarts.use([
     BarChart,
     CanvasRenderer,
     LegendComponent,
-]);
+])
 
-export default echarts;
+export default echarts

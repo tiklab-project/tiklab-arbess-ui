@@ -23,7 +23,7 @@ const ConfigCodeGitOrGitlab = props =>{
             >
                 <Input />
             </Form.Item>
-            <Form.Item name="codeBranch" label="分支" className="noRequired">
+            <Form.Item name="codeBranch" label="分支">
                 <Input style={{width:300}} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <ConfigProof

@@ -15,7 +15,6 @@ const DynamicDetails=AsyncComponent(()=>import("./modules/home/components/dynami
 
 /*  流水线 */
 const MatFlow=AsyncComponent(()=>import("./modules/matFlow/matFlow/container/matFlow"))
-const MatFlowAdd=AsyncComponent(()=>import("./modules/matFlow/matFlowAdd/matFlowAdd"))
 const MatFlowConfig=AsyncComponent(()=>import("./modules/config/config/config"))
 const SearchResult=AsyncComponent(()=>import("./modules/matFlow/matFlowSearch/searchResult"))
 
@@ -62,6 +61,7 @@ const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messag
 
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
 const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
+const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
 
 const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
 const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
@@ -103,11 +103,6 @@ const routers=[
                 exact: true,
             },
             {
-                path:"/index/new",
-                component: MatFlowAdd,
-                exact:true,
-            },
-            {
                 path:"/index/collect",
                 component:MatFlowCollect,
                 exact:true,
@@ -147,27 +142,43 @@ const routers=[
                         component: Structure
                     },
                     {
-                        path:"/index/task/:matFlowName/assembly",
-                        component: ProjectSet,
-                        routes:[
-                            {
-                                path:"/index/task/:matFlowName/assembly/proof",
-                                component:ProjectSetProof
-                            },
-                            {
-                                path:"/index/task/:matFlowName/assembly/role",
-                                component: ProjectRole
-                            },
-                            {
-                                path:"/index/task/:matFlowName/assembly/redel",
-                                component: ProjectSetReDel
-                            },
-                            {
-                                path:"/index/task/:matFlowName/assembly/user",
-                                component: ProjectSetUser
-                            }
-                        ]
+                        path:"/index/task/:matFlowName/assembly/proof",
+                        component:ProjectSetProof
                     },
+                    {
+                        path:"/index/task/:matFlowName/assembly/role",
+                        component: ProjectRole
+                    },
+                    {
+                        path:"/index/task/:matFlowName/assembly/redel",
+                        component: ProjectSetReDel
+                    },
+                    {
+                        path:"/index/task/:matFlowName/assembly/user",
+                        component: ProjectSetUser
+                    }
+                    // {
+                    //     path:"/index/task/:matFlowName/assembly",
+                    //     component: ProjectSet,
+                    //     routes:[
+                    //         {
+                    //             path:"/index/task/:matFlowName/assembly/proof",
+                    //             component:ProjectSetProof
+                    //         },
+                    //         {
+                    //             path:"/index/task/:matFlowName/assembly/role",
+                    //             component: ProjectRole
+                    //         },
+                    //         {
+                    //             path:"/index/task/:matFlowName/assembly/redel",
+                    //             component: ProjectSetReDel
+                    //         },
+                    //         {
+                    //             path:"/index/task/:matFlowName/assembly/user",
+                    //             component: ProjectSetUser
+                    //         }
+                    //     ]
+                    // },
                     // {
                     //     path:"/index/task/*",
                     //     render:()=><Redirect to="/index/404"/>
@@ -211,7 +222,7 @@ const routers=[
                         component: Envi,
                     },
                     {
-                        path: "/index/system/taskList",
+                        path: "/index/system/task",
                         component: TaskList,
                     },
                     {
@@ -219,12 +230,16 @@ const routers=[
                         component: MyTodoTask,
                     },
                     {
-                        path:"/index/system/logList",
+                        path:"/index/system/log",
                         component: LogList,
                     },
                     {
-                        path:"/index/system/myLogList",
+                        path:"/index/system/myLog",
                         component: MyLogList,
+                    },
+                    {
+                        path:"/index/system/logTemplate",
+                        component: LogTemplateList,
                     },
                     // {
                     //     path:"/index/system/*",

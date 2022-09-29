@@ -132,11 +132,7 @@ const ConfigDeploy = props =>{
                                 >
                                     <Input addonBefore={"/"} placeholder="请输入部署位置"/>
                                 </Form.Item>
-                                <Form.Item
-                                    className="noRequired"
-                                    name="deployOrder"
-                                    label="部署文件命令"
-                                >
+                                <Form.Item name="deployOrder" label="部署文件命令">
                                     <Mirror
                                         shellBlock={orderShellBlock}
                                         setShellBlock={setOrderShellBlock}
@@ -146,10 +142,7 @@ const ConfigDeploy = props =>{
                             </>
                             {type === 31 ?
                                 <>
-                                    <Form.Item
-                                        className="noRequired"
-                                        name="startAddress"
-                                        label="启动文件地址">
+                                    <Form.Item name="startAddress" label="启动文件地址">
                                         <Input addonBefore={"/"} placeholder=" / 启动文件地址"/>
                                     </Form.Item>
                                     <Form.Item name="startShell" label="启动命令" className="noRequired">
@@ -162,10 +155,7 @@ const ConfigDeploy = props =>{
                                 </>
                                 :
                                 <>
-                                    <Form.Item
-                                        className="noRequired"
-                                        name="startAddress"
-                                        label="dockerfile文件地址">
+                                    <Form.Item name="startAddress" label="dockerfile文件地址">
                                         <Input addonBefore={"/"} placeholder=" / 代表部署位置"/>
                                     </Form.Item>
                                     <Form.Item
@@ -191,7 +181,7 @@ const ConfigDeploy = props =>{
                                 </>
                             }
                         </Fragment>) :
-                        <Form.Item name="startShell" label="Shell命令" className="noRequired">
+                        <Form.Item name="startShell" label="Shell命令">
                             <Mirror
                                 shellBlock={shellBlock}
                                 setShellBlock={setShellBlock}

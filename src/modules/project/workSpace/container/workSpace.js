@@ -18,6 +18,7 @@ const WorkSpace = props =>{
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
     const [detailsDrawer,setDetailsDrawer] = useState(false)
+    const [fileListVisible,setFileListVisible] = useState(true)
     const [drawerContent,setDrawerContent] = useState("")
     const userId = getUser().userId
 
@@ -36,13 +37,19 @@ const WorkSpace = props =>{
             userId:userId
         }
         if(matFlowId){
-            fileTree(params)
+            fileTree(params).then(res=>{
+                if(res.code===0){
+                    if(res.data){
+                        setFileListVisible(true)
+                    }else setFileListVisible(false)
+                }
+            })
         }
     },[fresh,matFlowId])
 
     return(
-        <div className="workSpace">
-            <div className="workSpace-top">
+        <div className="workSpace home-limited">
+            <div className="workSpace-top home-limited">
                 <BreadcrumbContent
                     config={"config"}
                     firstItem={matFlowName}
@@ -51,6 +58,7 @@ const WorkSpace = props =>{
             </div>
             <div className="workSpace-content">
                 <WorkSpaceNod
+                    fileListVisible={fileListVisible}
                     matFlowName={matFlowName}
                     fileList={fileList}
                     setFileList={setFileList}

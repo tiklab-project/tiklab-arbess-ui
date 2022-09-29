@@ -3,7 +3,8 @@ import React,{Fragment} from "react";
 // 节点
 const WorkSpaceNod = props =>{
 
-    const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent,matFlowName} = props
+    const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent,
+        fileListVisible,matFlowName} = props
 
     const renderType = treeType => {
         switch (treeType){
@@ -83,18 +84,33 @@ const WorkSpaceNod = props =>{
 
     return(
         <div className="workSpace-content-nod">
-            <h1>节点master上的工作空间</h1>
-            <div className="workSpace-content-nod-catalogue">
-                <span className = "catalogue_item_breadcrumb"
-                      onClick={()=>setBreadcrumb()}
-                >
-                        <span>{renderType(2)}{matFlowName}</span>
-                    </span>
-                {renderCatalogue(catalogue)}
+            <div className="workSpace-title">源文件</div>
+            <div className="workSpace-text">
+                {
+                    fileListVisible  ?
+                        <>
+                            <div className="workSpace-content-nod-catalogue">
+                                <span className = "catalogue_item_breadcrumb"
+                                      onClick={()=>setBreadcrumb()}
+                                >
+                                    <span> > </span>
+                                    <span>{matFlowName}</span>
+                                </span>
+                                {renderCatalogue(catalogue)}
+                            </div>
+                            <div className="workSpace-content-nod-file">
+                                {renderFileList(fileList)}
+                            </div>
+                        </> :
+                        <div className="workSpace-list-null">
+                            <svg className="icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-meiyouxiangguan"/>
+                            </svg>
+                            <div>文件走丢了</div>
+                        </div>
+                }
             </div>
-            <div className="workSpace-content-nod-file">
-                {renderFileList(fileList)}
-            </div>
+
         </div>
     )
 }

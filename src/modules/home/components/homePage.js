@@ -10,8 +10,10 @@ import {inject,observer} from "mobx-react";
 
 const HomePage = props =>{
 
-    const {homePageStore} = props
+    const {homePageStore,matFlowStore} = props
     const {findAllOpen,matFlowNearList,runState,findUserAction,dynamicList} = homePageStore
+    const {findAllFollow,findAllMatFlowStatus,matFlowList,followList} = matFlowStore
+
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -20,6 +22,11 @@ const HomePage = props =>{
             page:1,
             pageSize:10,
         }
+
+        // 所有流水线
+        findAllMatFlowStatus(userId)
+        // 我收藏的流水线
+        findAllFollow(userId)
 
         // 最近动态
         findUserAction(params)
@@ -51,7 +58,7 @@ const HomePage = props =>{
 
     const burnDownChart = (timerXaixs,successYaixs, failsYaxis,stopYaxis) => {
         const burnDown = echarts.init(document.getElementById("burn-down"))
-        let option;
+        let option
         option = {
             color: [ "#1890ff", "#e5323e","#222222"],
             xAxis: {
@@ -59,6 +66,9 @@ const HomePage = props =>{
             },
             yAxis: {
                 name: "单位：次",
+                type: "value",
+                interval:1, // 步长
+                min:0, // 起始
             },
             // tooltip:{},
             legend: {
@@ -96,8 +106,12 @@ const HomePage = props =>{
     }
 
     return(
-        <div className="homePage">
-            <QuickIn {...props}/>
+        <div className="homePage home-limited">
+            <QuickIn
+                {...props}
+                matFlowList={matFlowList}
+                followList={followList}
+            />
             <div className="homePage-content">
                 <div className="homePage-content-left">
                     <MatFlowNear {...props} matFlowNearList={matFlowNearList}/>
@@ -120,4 +134,4 @@ const HomePage = props =>{
     )
 }
 
-export default withRouter(inject("homePageStore")(observer(HomePage)))
+export default withRouter(inject("homePageStore","matFlowStore")(observer(HomePage)))

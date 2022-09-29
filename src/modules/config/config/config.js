@@ -133,8 +133,8 @@ const Config = props =>{
                 break
             case 21:
             case 22:
-                formInitialValues.structureAddress = null
-                formInitialValues.structureOrder = null
+                formInitialValues.buildAddress = null
+                formInitialValues.buildOrder = null
                 setMavenShellBlock("")
                 break
             case 31:
@@ -177,11 +177,11 @@ const Config = props =>{
 
     const onFinish = values => {
         //排序
-        let codeSort, testSort,structureSort, deploySort = 0
+        let codeSort, testSort,buildSort, deploySort = 0
         //配置别名
-        let testAlias,structureAlias,deployAlias
+        let testAlias,buildAlias,deployAlias
         //配置类型
-        let testType,structureType,deployType
+        let testType,buildType,deployType
 
         switch (codeData){
             case "":
@@ -197,9 +197,9 @@ const Config = props =>{
                 testType = item.dataType
             }
             if(item.dataType > 20 && item.dataType < 30){
-                structureSort = index + 2
-                structureAlias = item.title
-                structureType = item.dataType
+                buildSort = index + 2
+                buildAlias = item.title
+                buildType = item.dataType
             }
             if(item.dataType > 30 && item.dataType < 40){
                 deploySort = index + 2
@@ -227,13 +227,13 @@ const Config = props =>{
                 type:testType,
                 testOrder:unitShellBlock,
             },
-            matFlowStructure:{
-                structureId:null,
-                sort:structureSort,
-                structureAlias:structureAlias,
-                type:structureType,
-                structureAddress:values.structureAddress,
-                structureOrder:mavenShellBlock,
+            matFlowBuild:{
+                buildId:null,
+                sort:buildSort,
+                buildAlias:buildAlias,
+                type:buildType,
+                buildAddress:values.buildAddress,
+                buildOrder:mavenShellBlock,
             },
             matFlowDeploy:{
                 deployId:null,
@@ -267,8 +267,8 @@ const Config = props =>{
     }
 
     return (
-        <Fragment>
-            <div className="config-top config-top-width">
+        <div className="home-limited">
+            <div className="config-top home-limited">
                 <ConfigTop
                     view={view}
                     setView={setView}
@@ -290,7 +290,7 @@ const Config = props =>{
                 isPrompt={isPrompt}
                 confirmLeave={confirmLeave}
             />
-        </Fragment>
+        </div>
     )
 }
 

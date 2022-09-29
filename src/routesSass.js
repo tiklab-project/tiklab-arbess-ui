@@ -15,7 +15,6 @@ const DynamicDetails=AsyncComponent(()=>import("./modules/home/components/dynami
 
 /*  流水线 */
 const MatFlow=AsyncComponent(()=>import("./modules/matFlow/matFlow/container/matFlow"))
-const MatFlowAdd=AsyncComponent(()=>import("./modules/matFlow/matFlowAdd/matFlowAdd"))
 const MatFlowConfig=AsyncComponent(()=>import("./modules/config/config/config"))
 const SearchResult=AsyncComponent(()=>import("./modules/matFlow/matFlowSearch/searchResult"))
 
@@ -90,11 +89,6 @@ const routesSaas =[
                 path:"/index/matFlow",
                 component:MatFlow,
                 exact: true,
-            },
-            {
-                path:"/index/new",
-                component: MatFlowAdd,
-                exact:true,
             },
             {
                 path:"/index/collect",

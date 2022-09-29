@@ -37,9 +37,20 @@ const WorkSpaceRecord = props =>{
 
     return(
         <div className="workSpace-content-record">
-            <h1>近期提交记录</h1>
-            { renderRecordList(recordList) }
-            <div className="workSpace-content-null"/>
+            <div className="workSpace-title">提交记录</div>
+            <div className="workSpace-text">
+                {
+                    recordList && recordList.length > 0 ?
+                        renderRecordList(recordList):
+                        <div className="workSpace-list-null">
+                            <svg className="icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-meiyouxiangguan"/>
+                            </svg>
+                            <div>没有提交记录</div>
+                        </div>
+                }
+                <div className="workSpace-content-null"/>
+            </div>
         </div>
     )
 }

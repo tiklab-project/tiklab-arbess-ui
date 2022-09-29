@@ -1,27 +1,27 @@
-import React,{useEffect} from "react";
-import {message,Tooltip} from "antd";
+import React,{useState} from "react";
+import {message,Tooltip,Dropdown,Modal} from "antd";
 import {getUser} from "tiklab-core-ui";
-import {CheckCircleOutlined,CloseCircleOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
+import {
+    CheckCircleOutlined, CloseCircleOutlined,DeleteOutlined,EditOutlined,
+    ExclamationCircleOutlined, EllipsisOutlined, PlayCircleOutlined
+} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
 import Tables from "../../../../common/tables/tables";
+import "./matFlowTable.scss";
+import MatFlowRenameModal from "./matFlowRenameModal";
 
 const MatFlowTable = props =>{
 
     const {structureStore,type,matFlowStore}=props
 
     const {matFlowStartStructure,killInstance}=structureStore
-    const {findAllMatFlowStatus,findAllFollow,matFlowList,updateFollow,fresh,setFresh} = matFlowStore
+    const {matFlowList,followList,updateFollow,updateMatFlow,fresh,setFresh,deleteMatFlow} = matFlowStore
+
+    const [renameVisible,setRenameVisible] = useState(false)
+    const [matFlowId,setMatFlowId] = useState("")
 
     const userId = getUser().userId
-
-    useEffect(()=>{
-        if(type===1){
-            findAllMatFlowStatus(userId)
-        }else{
-            findAllFollow(userId)
-        }
-    },[fresh,type])
 
     //收藏
     const collectAction = record => {
@@ -71,24 +71,50 @@ const MatFlowTable = props =>{
         }
     }
 
+    const renameOrDel = (record,type) =>{
+        if(type === "rename"){
+            setRenameVisible(true)
+            setMatFlowId(record.matFlowId)
+        }else {
+            Modal.confirm({
+                title: "删除",
+                icon: <ExclamationCircleOutlined />,
+                content: "删除后数据无法恢复",
+                onOk:()=>del(record),
+                okText: "确认",
+                cancelText: "取消",
+            });
+        }
+    }
+    
+    const del = record => {
+        const params = {
+            userId:userId,
+            matFlowId:record.matFlowId
+        }
+        deleteMatFlow(params).then(res=>{
+            if(res.code === 0 && res.data === 1){
+                message.info({content: "删除成功", className: "message"})
+            }else {
+                message.error({content:"删除失败", className:"message"})
+            }
+            setFresh(!fresh)
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
     const columns = [
         {
-            title: "收藏",
-            dataIndex: "matFlowCollect",
-            key:"matFlowCollect",
-            render:(text,record) =>{
+            title: "流水线名称",
+            dataIndex: "matFlowName",
+            key: "matFlowName",
+            render:(text,record)=>{
                 return(
-                    <span style={{cursor:"pointer"}} onClick={()=>collectAction(record)}>
-                        {
-                            record.matFlowCollect === 0 ?
-                                <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-xingxing-kong"  />
-                                </svg>
-                                :
-                                <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-xingxing1"  />
-                                </svg>
-                        }
+                    <span onClick={()=>goMatFlowTask(text,record)}
+                          style={{color:"#1890ff",cursor:"pointer"}}
+                    >
+                        {text}
                     </span>
                 )
             }
@@ -121,26 +147,17 @@ const MatFlowTable = props =>{
             }
         },
         {
-            title: "任务名",
-            dataIndex: "matFlowName",
-            key: "matFlowName",
-            render:(text,record)=>{
-                return(
-                    <span onClick={()=>goMatFlowTask(text,record)}
-                          style={{color:"#1890ff",cursor:"pointer"}}
-                    >
-                        {text}
-                    </span>
-                )
-            }
-        },
-        {
-            title: "上次构建时间",
+            title: "最近构建时间",
             dataIndex: "lastStructureTime",
             key: "lastStructureTime",
         },
         {
-            title: "上次成功时间",
+            title: "最近成功时间",
+            dataIndex: "lastSuccessTime",
+            key: "lastSuccessTime",
+        },
+        {
+            title: "创建时间",
             dataIndex: "lastSuccessTime",
             key: "lastSuccessTime",
         },
@@ -150,26 +167,72 @@ const MatFlowTable = props =>{
             key:"action",
             render:(text,record)=>{
                 return(
-                    <span style={{cursor:"pointer"}} onClick={() =>work(record)}>
-                        {
-                            record.matFlowState === 0 ?
-                                <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-yunhang"  />
-                                </svg>
-                                :
-                                <Running/>
-                        }
-                    </span>
+                    <>
+                        <Tooltip title="运行" >
+                            <span className="matflowTable-state" onClick={() =>work(record)}>
+                            {
+                                record.matFlowState === 0 ?
+                                    <PlayCircleOutlined className="actions-se"/>
+                                    :
+                                    <Running/>
+                            }
+                            </span>
+                        </Tooltip>
+                        <Tooltip title="收藏">
+                            <span className="matflowTable-collect actives" onClick={()=>collectAction(record)}>
+                            {
+                                record.matFlowCollect === 0 ?
+                                    <svg className="icon" aria-hidden="true" >
+                                        <use xlinkHref="#icon-xingxing-kong"  />
+                                    </svg>
+                                    :
+                                    <svg className="icon" aria-hidden="true" >
+                                        <use xlinkHref="#icon-xingxing1"  />
+                                    </svg>
+                            }
+                            </span>
+                        </Tooltip>
+                        <Dropdown trigger={["click"]}
+                            overlay={
+                                <div className="matflowTable-actions-menu">
+                                    <div className="actions-menu-content">
+                                        <div className="matflowTable-actions" onClick={()=>renameOrDel(record,"rename")}>
+                                            <EditOutlined/> &nbsp;重命名
+                                        </div>
+                                        <div className="matflowTable-actions-del" onClick={()=>renameOrDel(record,"del")}>
+                                            <DeleteOutlined/> &nbsp;删除
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        >
+                            <span className="matflowTable-actions">
+                                <EllipsisOutlined className="actions-se"/>
+                            </span>
+                        </Dropdown>
+                    </>
                 )
             }
         },
     ]
 
-    return  <Tables
-                columns={columns}
-                dataSource={matFlowList}
-                rowKey={record=>record.matFlowId}
-            />
+    return  <>
+                <Tables
+                    columns={columns}
+                    dataSource={type===1 ? matFlowList:followList}
+                    rowKey={record=>record.matFlowId}
+                />
+                <MatFlowRenameModal
+                    fresh={fresh}
+                    setFresh={setFresh}
+                    userId={userId}
+                    matFlowId={matFlowId}
+                    matFlowList={matFlowList}
+                    renameVisible={renameVisible}
+                    setRenameVisible={setRenameVisible}
+                    updateMatFlow={updateMatFlow}
+                />
+            </>
 }
 
-export default inject("structureStore","matFlowStore")(observer(MatFlowTable))
+export default inject("structureStore")(observer(MatFlowTable))

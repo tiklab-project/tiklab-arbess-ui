@@ -1,6 +1,6 @@
 import React  from "react";
 import "./projectSet.scss";
-import ProjectSetLeftNav from "./projectSetLeftNav";
+import ProjectSetLeftNav from "../../project/common/components/projectSetLeftNav";
 import {renderRoutes} from "react-router-config";
 import {withRouter} from "react-router-dom";
 import {Layout} from "antd";

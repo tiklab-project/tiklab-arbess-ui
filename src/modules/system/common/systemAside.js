@@ -90,7 +90,7 @@ const SystemAside= props =>  {
             enCode:"J",
         },
         {
-            key:"/index/system/taskList",
+            key:"/index/system/task",
             label:"待办事项",
             icon:"#icon-gongzuotongji",
             enCode:"J",
@@ -102,14 +102,20 @@ const SystemAside= props =>  {
             enCode:"F",
         },
         {
-            key:"/index/system/logList",
+            key:"/index/system/log",
             label:"日志记录",
             icon:"#icon-gongzuotongji",
             enCode:"G",
         },
         {
-            key:"/index/system/myLogList",
+            key:"/index/system/myLog",
             label:"我的日志",
+            icon:"#icon-gongzuotongji",
+            enCode:"H",
+        },
+        {
+            key:"/index/system/logTemplate",
+            label:"日志模板",
             icon:"#icon-gongzuotongji",
             enCode:"H",
         },

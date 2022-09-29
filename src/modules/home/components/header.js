@@ -5,8 +5,8 @@ import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined,MessageOutlined,SettingOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
-import logo from "../../../assets/images/logo.png";
-// import logo from "../../../assets/images/all/logo_m.png";
+import logo from "../../../assets/images/all/matflow.png"
+// import logo from "../../../assets/images/logo_m.png";
 import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
 import vipTwo from "../../../assets/images/vip-two.png";
@@ -17,8 +17,9 @@ const Head = props =>{
 
     let path = props.location.pathname
     const [currentLink,setCurrentLink] = useState(path)
+    const userId = getUser().userId
 
-    const {i18n} = useTranslation()
+    const {i18n,t} = useTranslation()
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
     const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
@@ -34,19 +35,20 @@ const Head = props =>{
     },[path])
 
     useEffect(()=>{
-        privilegeStores.systemRoleStore.getSystemPermissions(getUser().userId)
+        // 路由菜单控制
+        privilegeStores.systemRoleStore.getSystemPermissions(userId)
     },[])
 
     const routers=[
         {
             key:"homePage",
             to:"/index/home",
-            title: "首页",
+            title: "home",
         },
         {
             key:"matFlow",
             to:"/index/matFlow",
-            title: "流水线",
+            title: "pipeline",
         },
     ]
 
@@ -60,15 +62,19 @@ const Head = props =>{
                          onClick={()=>changeCurrentLink(routers)}
                          className={currentLink===routers.to ? "headers-active" : null}
                     >
-                        {routers.title}
+                        {t(routers.title)}
                     </div>
         })
     }
 
+    const changeLan = type =>{
+        i18n.changeLanguage(type)
+    }
+    
     const languageMenu = (
         <Menu>
-            <Menu.Item key="0" >中文</Menu.Item>
-            {/*<Menu.Item key="1" onClick={()=>changeLanguage("en")}>英文</Menu.Item>*/}
+            <Menu.Item key="0" onClick={()=>changeLan("zh")}>中文</Menu.Item>
+            <Menu.Item key="1" onClick={()=>changeLan("en")}>英文</Menu.Item>
         </Menu>
     )
 

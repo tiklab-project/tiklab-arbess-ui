@@ -1,34 +1,47 @@
-.matFlow{
-    width: 90%;
+.matflow {
     min-width: 600px;
-    margin: auto;
+    padding: 10px;
+    &-flex{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     &-top{
-        width: 100%;
-        padding: 10px 0;
-        &-r{
-            float: right;
+        &-title{
+            font-size: 1.25em;
+            font-weight: 600;
+            color: #2e2e2e;
         }
     }
-    &-tabs{
-        clear: both;
-        &-type{
-            padding: 15px 0;
-            &-group{
-                display: flex;
-                font-size: 16px;
-                border-bottom: 1px solid #f4f4f4;
-            }
-            &-link{
-                margin-right: 15px;
-                cursor: pointer;
-                &:hover{
-                    font-weight: 600;
-                }
-            }
-            &-active{
+    &-length{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 50px;
+        background: #f2f2f2;
+        text-align: center;
+    }
+    &-type{
+        margin: 16px 0;
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid #f4f4f4;
+        &-group{
+            display: flex;
+            font-size: 16px;
+        }
+        &-link{
+            margin-right: 20px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            &:hover{
                 font-weight: 600;
-                border-bottom: 3px solid #189
             }
+        }
+        &-active{
+            font-weight: 600;
+            border-bottom: 3px solid #189
         }
     }
 }

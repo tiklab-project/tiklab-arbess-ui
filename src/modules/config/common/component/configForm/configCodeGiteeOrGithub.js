@@ -111,7 +111,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     }
                 </Select>
             </Form.Item>
-            <Form.Item label="分支" name="codeBranch" className="noRequired">
+            <Form.Item label="分支" name="codeBranch">
                 <Select style={{ width: 300 }} disabled={prohibited}>
                     {
                         branchList && branchList.map(item=>{

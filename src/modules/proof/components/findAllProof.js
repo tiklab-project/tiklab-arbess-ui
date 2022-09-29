@@ -45,7 +45,6 @@ const FindAllProof = props =>{
             label="凭证"
             name={type < 6 ? "gitProofName" : "dockerProofName"}
             rules={type === 2 || type === 3 ? [{required:true, message:"请选择凭证"}] : null}
-            className={type === 2 || type ===3 ? null : "noRequired"}
         >
             <Select style={{ width: 300 }}
                     onClick={clickFindAllGit}

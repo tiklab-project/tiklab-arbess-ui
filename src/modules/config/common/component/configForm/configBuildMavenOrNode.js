@@ -3,7 +3,7 @@ import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
 
-const ConfigStructureMavenOrNode = props =>{
+const ConfigBuildMavenOrNode = props =>{
 
     const {configDataStore,configItemStore,matFlowStore} = props
 
@@ -14,7 +14,7 @@ const ConfigStructureMavenOrNode = props =>{
     return(
         <Fragment>
             <Form.Item
-                name="structureAddress"
+                name="buildAddress"
                 label="文件地址"
                 rules={[{required:true,message:"请输入文件地址"}]}
             >
@@ -24,9 +24,8 @@ const ConfigStructureMavenOrNode = props =>{
                 />
             </Form.Item>
             <Form.Item
-                name="structureOrder"
+                name="buildOrder"
                 label="执行命令"
-                className="noRequired"
             >
                 <Mirror
                     shellBlock={mavenShellBlock}
@@ -38,4 +37,4 @@ const ConfigStructureMavenOrNode = props =>{
     )
 }
 
-export default inject("configDataStore","configItemStore","matFlowStore")(observer(ConfigStructureMavenOrNode))
+export default inject("configDataStore","configItemStore","matFlowStore")(observer(ConfigBuildMavenOrNode))

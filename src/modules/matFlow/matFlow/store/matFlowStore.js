@@ -12,8 +12,9 @@ import {
 
 
 export class MatFlowStore {
-    
+
     @observable matFlowList=[]
+    @observable followList=[]
     @observable searchMatFlowList = []
     @observable lastPath = ""
     @observable matFlowId = ""
@@ -138,7 +139,7 @@ export class MatFlowStore {
         FindAllFollow(param).then(res=>{
             console.log(res)
             if(res.code===0){
-                this.matFlowList=res.data
+                this.followList=res.data
             }
         }).catch(error=>{
             console.log(error)

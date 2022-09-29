@@ -9,10 +9,6 @@
         font-size: 16px;
         min-width: 500px;
         margin-left: 10px;
-        &-width{
-            width: 98% !important;
-            margin-left: 10px;
-        }
         &-content{
             display: flex;
             flex-direction: row;
@@ -82,10 +78,6 @@
     &-type{
         margin: 10px;
     }
-}
-
-.noRequired{
-    padding-left: 10px !important;
 }
 
 .deployTargetAddress{

@@ -1,14 +1,14 @@
 .homePage{
     padding: 20px;
+    width: 100%;
     .quickIn{
         height: 130px;
         display: flex;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
-        justify-content:left;
         &-group{
-            width: 380px;
+            width: 300px;
             min-width: 100px;
             line-height: 100px;
             height: 100px;
@@ -18,6 +18,21 @@
             box-shadow: 3px 3px 8px 3px #5d70ea;
             border-radius: 8px;
             cursor: pointer;
+            &-wrap{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &-title{
+                    font-weight: 600;
+                }
+                &-number{
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    background: #f2f2f2;
+                    border-radius: 50px;
+                }
+            }
         }
     }
     &-content{
@@ -26,7 +41,7 @@
         display: -ms-flexbox;
         display: flex;
         &-left{
-            width: calc(66% - 7px);
+            width: calc(60% - 7px);
             min-width: 300px;
             margin-right: 16px;
             -webkit-box-orient: vertical;
@@ -39,7 +54,7 @@
             flex-shrink: 0;
         }
         &-right{
-            width: calc(34% - 7px);
+            width: calc(40% - 7px);
             min-width: 390px;
             -webkit-box-orient: vertical;
             -webkit-box-direction: normal;

@@ -4,7 +4,7 @@
     z-index: 888;
     left: 0;
     top: 55px;
-    border-right:1px solid #cccccc;
+    box-shadow: 3px 0 8px 3px #f2f2f2;
     height: 100%;
     .content{
         width: 80px;
@@ -36,6 +36,15 @@
             height: 25px;
         }
     }
+    &_opt{
+        .icon{
+            width: 25px;
+            height: 25px;
+        }
+        .dropdowns_icon{
+            font-size: 12px !important;
+        }
+    }
     &_active{
         background: #e3e8f0;
         &:before{
@@ -48,5 +57,19 @@
             left: 1px;
             background: #1890ff
         }
+    }
+}
+
+.projectSetMenu{
+    background: #fff;
+    margin-left: 80px;
+    margin-top: -60px;
+    width: 150px;
+    padding: 10px;
+    box-shadow: 3px 0 8px 3px #f2f2f2;
+    &-li{
+        margin: 5px;
+        padding: 5px;
+        cursor: pointer;
     }
 }

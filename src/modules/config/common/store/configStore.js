@@ -28,13 +28,13 @@ export class ConfigStore{
                 type:values.matFlowTest.type,
                 testOrder:values.matFlowTest.testOrder,
             },
-            matFlowStructure:{
-                structureId:values.matFlowStructure.structureId,
-                sort:values.matFlowStructure.sort,
-                structureAlias:values.matFlowStructure.structureAlias,
-                type:values.matFlowStructure.type,
-                structureAddress: values.matFlowStructure.structureAddress,
-                structureOrder: values.matFlowStructure.structureOrder,
+            matFlowBuild:{
+                buildId:values.matFlowBuild.buildId,
+                sort:values.matFlowBuild.sort,
+                buildAlias:values.matFlowBuild.buildAlias,
+                type:values.matFlowBuild.type,
+                buildAddress: values.matFlowBuild.buildAddress,
+                buildOrder: values.matFlowBuild.buildOrder,
             },
             matFlowDeploy:{
                 deployId:values.matFlowDeploy.deployId,

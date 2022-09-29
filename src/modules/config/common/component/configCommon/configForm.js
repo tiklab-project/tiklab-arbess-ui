@@ -2,7 +2,7 @@ import React,{Fragment} from "react";
 import ConfigCodeGitOrGitlab from "../configForm/configCodeGitOrGitlab"
 import ConfigCodeGiteeOrGithub from "../configForm/configCodeGiteeOrGithub";
 import ConfigTestUnit from "../configForm/configTestUnit";
-import ConfigStructureMavenOrNode from "../configForm/configStructureMavenOrNode";
+import ConfigBuildMavenOrNode from "../configForm/configBuildMavenOrNode";
 import ConfigDeploy from "../configForm/configDeploy";
 import ConfigCodeSvn from "../configForm/configCodeSvn";
 
@@ -25,7 +25,7 @@ const ConfigForm = props =>{
                             return <ConfigTestUnit/>
                         case 21:
                         case 22:
-                            return <ConfigStructureMavenOrNode/>
+                            return <ConfigBuildMavenOrNode/>
                         case 31:
                         case 32:
                             return <ConfigDeploy type={type}/>
