@@ -13,14 +13,14 @@ const Envi = props =>{
 
     const {settingStore} = props
 
-    const {findAllMatFlowScm,deleteMatFlowScm,updateMatFlowScm} = settingStore
+    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm} = settingStore
 
     const [visible,setVisible] = useState(false)
     const [enviData,setEnviData] = useState([])
 
     // 初始化
     useEffect(()=>{
-        findAllMatFlowScm().then(res=>{
+        findAllPipelineScm().then(res=>{
             if(res.code===0 && res.data){
                 setEnviData(res.data)
             }
@@ -29,7 +29,7 @@ const Envi = props =>{
 
     // 删除配置
     const deletePart = item => {
-        deleteMatFlowScm(item.scmId).then(res=>{
+        deletePipelineScm(item.scmId).then(res=>{
             if(res.code===0){
                 for(let i=0 ;i<enviData.length;i++){
                     if(enviData[i].scmType===item.scmType){
@@ -51,7 +51,7 @@ const Envi = props =>{
             scmName:values.scmName,
             scmAddress:values.scmAddress,
         }
-        updateMatFlowScm(params).then(res=>{
+        updatePipelineScm(params).then(res=>{
             if(res.code===0){
                 message.success({content:"保存成功",className:"message"})
             }
@@ -112,7 +112,7 @@ const Envi = props =>{
         })
     }
 
-    return <div className="envi">
+    return <div className="envi home-limited">
         <BreadcrumbContent firstItem={"环境配置"} />
         <div className="envi-content">
             <Button onClick={()=>setVisible(true)}>添加配置</Button>

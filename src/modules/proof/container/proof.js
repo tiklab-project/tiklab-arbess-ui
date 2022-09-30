@@ -9,13 +9,13 @@ import Tables from "../../../common/tables/tables";
 
 const Proof = props =>{
 
-    const {proofStore,matFlowList,matFlowId,matFlowName} = props
+    const {proofStore,pipelineList,pipelineId,pipelineName} = props
     const {updateProof,deleteProof,proofList,setFresh,fresh} = proofStore
 
     const [formValue,setFormValue] = useState("")
     const [visible,setVisible] = useState(false)
     const [displayPart,setDisplayPart] = useState(false)
-    const [isShowMatFlow,setIsShowMatFlow] = useState(1)
+    const [isShowPipeline,setIsShowPipeline] = useState(1)
 
     const edit = (text,record) => {
         if(record.proofScope===2 || record.proofScope===3){
@@ -24,7 +24,7 @@ const Proof = props =>{
             setDisplayPart(false)
         }
         setFormValue(record)
-        setIsShowMatFlow(record.type)
+        setIsShowPipeline(record.type)
         setVisible(true)
     }
 
@@ -98,16 +98,16 @@ const Proof = props =>{
     const style = "primary"
 
     return(
-        <div className="proof">
+        <div className="proof home-limited">
             {
-                matFlowName ?
-                    <BreadcrumbContent firstItem={matFlowName} secondItem={"凭证设置"}/>
+                pipelineName ?
+                    <BreadcrumbContent firstItem={pipelineName} secondItem={"凭证设置"}/>
                     :
                     <BreadcrumbContent firstItem={"凭证设置"}/>
             }
             <div className="proof-content">
                 <div className="proof-content-btn">
-                    <AddProofButton style={style} matFlowList={matFlowList}/>
+                    <AddProofButton style={style} pipelineList={pipelineList}/>
                 </div>
                 <Tables
                     columns={columns}
@@ -122,11 +122,11 @@ const Proof = props =>{
                 fresh={fresh}
                 setFresh={setFresh}
                 displayPart={displayPart}
-                matFlowList={matFlowList}
-                isShowMatFlow={isShowMatFlow}
-                setIsShowMatFlow={setIsShowMatFlow}
+                pipelineList={pipelineList}
+                isShowPipeline={isShowPipeline}
+                setIsShowPipeline={setIsShowPipeline}
                 updateProof={updateProof}
-                matFlowId={matFlowId}
+                pipelineId={pipelineId}
             />
         </div>
     )

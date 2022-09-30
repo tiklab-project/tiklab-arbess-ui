@@ -1,15 +1,15 @@
-import {store as matFlowStore} from "./store";
+import {store as pipelineStore} from "./store";
 import routesSaas  from "./routesSass";
 
 export {
     routesSaas ,
-    matFlowStore,
+    pipelineStore,
 }
 
-// import {store as matFlowStore} from "./module/store";
+// import {store as pipelineStore} from "./module/store";
 // import routesSaas  from "./module/routesSass";
 //
 // export {
 //     routesSaas ,
-//     matFlowStore,
+//     pipelineStore,
 // }

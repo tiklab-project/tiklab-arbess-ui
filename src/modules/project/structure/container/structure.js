@@ -11,35 +11,35 @@ import {inject,observer} from "mobx-react";
 
 const Structure = props => {
 
-    const {structureStore,structureListStore,matFlowStore} = props
+    const {structureStore,structureListStore,pipelineStore} = props
 
-    const {findExecState,findStructureState,findAll,findPageHistory,matFlowStartStructure,leftPageList,isData,
-        findMatFlowUser,setIsData,execState} = structureStore
+    const {findExecState,findStructureState,findAll,findPageHistory,pipelineStartStructure,leftPageList,isData,
+        findPipelineUser,setIsData,execState} = structureStore
     const {state,setState,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
-    const {matFlowId,matFlowName} = matFlowStore
+    const {pipelineId,pipelineName} = pipelineStore
     const userId = getUser().userId
 
     const [runImState,setRunImState] = useState(false)
 
     useEffect(()=>{
-        if(matFlowId){
+        if(pipelineId){
             setPageCurrent(1)
             setMode(0)
             setState(0)
             setEnforcer(null)
-            findMatFlowUser(matFlowId)
+            findPipelineUser(pipelineId)
         }
-    },[matFlowId])
+    },[pipelineId])
 
     // let interval,socket=null
     // useEffect(() => {
     //     socket = new WebSocket("ws://192.168.10.101:8080/start")
     //     socket.onopen = () =>{
-    //         findExecState(matFlowId).then(res=>{
+    //         findExecState(pipelineId).then(res=>{
     //             if(res.data === 1 ){
-    //                 interval = setInterval(()=>socket.send(matFlowId),1000)
+    //                 interval = setInterval(()=>socket.send(pipelineId),1000)
     //                 socket.onmessage = response => renderExec(response)
-    //                 findAll(matFlowId) // 构建状态
+    //                 findAll(pipelineId) // 构建状态
     //             }else if(res.data=== 0){
     //                 setExecState("")
     //                 socket.close()
@@ -51,7 +51,7 @@ const Structure = props => {
     //         clearInterval(interval)
     //         socket.close()
     //     }
-    // }, [matFlowId,freshen])
+    // }, [pipelineId,freshen])
 
     // const renderExec = response => {
     //     if(response.data){
@@ -67,23 +67,23 @@ const Structure = props => {
 
     let interval=null
     useEffect(() => {
-        if(matFlowId){
-            findExecState(matFlowId).then(res=>{
+        if(pipelineId){
+            findExecState(pipelineId).then(res=>{
                 if(res.data===1){
                     interval=setInterval(()=>
-                        findStructureState(matFlowId).then(res=>{
+                        findStructureState(pipelineId).then(res=>{
                             if(res.code===0){renderExec(res.data)}
                         }), 1000)
-                    findAll(matFlowId)
+                    findAll(pipelineId)
                 }
                 changPage() // 历史列表
             })
         }
-    }, [matFlowId,freshen])
+    }, [pipelineId,freshen])
 
     const changPage = () =>{
         const params = {
-            matflowId:matFlowId,
+            pipelineId:pipelineId,
             pageParam: {
                 pageSize: 10,
                 currentPage: 1
@@ -109,7 +109,7 @@ const Structure = props => {
     // 查找所有构建历史
     const findPage = () =>{
         const params = {
-            matflowId:matFlowId,
+            pipelineId:pipelineId,
             pageParam: {
                 pageSize: 10,
                 currentPage: 1
@@ -165,11 +165,11 @@ const Structure = props => {
     const runImmediately = () => {
         const params = {
             userId:userId,
-            matFlowId:matFlowId
+            pipelineId:pipelineId
         }
         setRunImState(true)
         timeout = setTimeout(()=>setFreshen(!freshen),1000)
-        matFlowStartStructure(params).then(res=>{
+        pipelineStartStructure(params).then(res=>{
             // setTimeout(()=>setFreshen(!freshen),500)
             if(res.code===0 && res.data===1){
                 timeout = setTimeout(()=>setRunImState(false),500)
@@ -185,7 +185,7 @@ const Structure = props => {
             clearTimeout(timeout)
             clearInterval(interval)
         }
-    },[matFlowId,freshen])
+    },[pipelineId,freshen])
     
     return (
         <div className="structure">
@@ -194,11 +194,11 @@ const Structure = props => {
                 isData ?
                     <div className="structure-content">
                         <StructureLeft
-                            matFlowId={matFlowId}
+                            pipelineId={pipelineId}
                             status={status}
                         />
                         <div className="structure-content-right">
-                            <BreadcrumbContent firstItem={matFlowName} secondItem={"历史"}/>
+                            <BreadcrumbContent firstItem={pipelineName} secondItem={"历史"}/>
                             {
                                 execState !== ""  || leftPageList && leftPageList.length > 0 ?
                                     <StructureRight
@@ -206,7 +206,7 @@ const Structure = props => {
                                         setFreshen={setFreshen}
                                         status={status}
                                         setPageCurrent={setPageCurrent}
-                                        matFlowId={matFlowId}
+                                        pipelineId={pipelineId}
                                     />
                                     :
                                     <StructureEmpty/>
@@ -217,11 +217,11 @@ const Structure = props => {
                     <StructureEmpty
                         runImmediately={runImmediately}
                         runImState={runImState}
-                        matFlowName={matFlowName}
+                        pipelineName={pipelineName}
                     />
             }
         </div>
     )
 }
 
-export default inject("structureStore","structureListStore","matFlowStore")(observer(Structure))
+export default inject("structureStore","structureListStore","pipelineStore")(observer(Structure))

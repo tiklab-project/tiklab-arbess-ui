@@ -5,7 +5,7 @@ import ConfigName from "../../../../common/configName/configName";
 
 const StructureRightExecute = props => {
 
-    const {status,execState,killInstance,rightExecuteData,runWay,freshen,setFreshen,setPageCurrent,matFlowId} = props
+    const {status,execState,killInstance,rightExecuteData,runWay,freshen,setFreshen,setPageCurrent,pipelineId} = props
     const [isActiveSlide,setIsActiveSlide] = useState(true) // 日志打印滚动条状态
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
@@ -39,7 +39,7 @@ const StructureRightExecute = props => {
     const cease = () => {
         const params = {
             userId:getUser().userId,
-            matFlowId:matFlowId
+            pipelineId:pipelineId
         }
         killInstance(params).then(res=>{
             console.log("停止成功",res)

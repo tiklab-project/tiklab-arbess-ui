@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined,MessageOutlined,SettingOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
-import logo from "../../../assets/images/all/matflow.png"
+import logo from "../../../assets/images/all/pipeline.png"
 // import logo from "../../../assets/images/logo_m.png";
 import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
@@ -29,7 +29,7 @@ const Head = props =>{
             path="/index/system"
         }
         if(path.indexOf("/index/task")===0) {
-            path= "/index/matFlow"
+            path= "/index/pipeline"
         }
         setCurrentLink(path)
     },[path])
@@ -46,8 +46,8 @@ const Head = props =>{
             title: "home",
         },
         {
-            key:"matFlow",
-            to:"/index/matFlow",
+            key:"pipeline",
+            to:"/index/pipeline",
             title: "pipeline",
         },
     ]

@@ -4,13 +4,13 @@ import {LoadingOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 
 const StructureEmpty = props =>{
-    const {runImmediately,runImState,matFlowName} = props
+    const {runImmediately,runImState,pipelineName} = props
     return(
         <div className="structure-content-empty">
             {
                 runImmediately ?
-                    <>
-                        <BreadcrumbContent firstItem={matFlowName} secondItem={"历史"}/>
+                    <div className="home-limited">
+                        <BreadcrumbContent firstItem={pipelineName} secondItem={"历史"}/>
                         <div className="empty-group">
                             <Empty
                                 image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
@@ -24,7 +24,7 @@ const StructureEmpty = props =>{
                                 }
                             </Empty>
                         </div>
-                    </>
+                    </div>
                     :
                     <div className="empty-group">
                         <Empty

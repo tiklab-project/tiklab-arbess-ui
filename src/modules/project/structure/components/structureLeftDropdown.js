@@ -5,7 +5,7 @@ const {Option} = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {state,setState,enforcer,setEnforcer,mode,setMode,matFlowUserList,change,drop,matFlowId} = props
+    const {state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList,change,drop,pipelineId} = props
 
     const [statusValue,setStatusValue] = useState("")
     const [userValue,setUserValue] = useState("")
@@ -15,13 +15,13 @@ const StructureLeftDropdown = props =>{
         setStatusValue("状态")
         setUserValue("执行人")
         setModeValue("执行方式")
-    },[matFlowId,drop])
+    },[pipelineId,drop])
 
     const changeState = (value,e) =>{
         setStatusValue(value)
         setState(parseInt(e.key))
         const params = {
-            matflowId:matFlowId,
+            pipelineId:pipelineId,
             state:parseInt(e.key),
             userId:enforcer,
             type:mode,
@@ -40,7 +40,7 @@ const StructureLeftDropdown = props =>{
         setUserValue(value)
         setEnforcer(e.key)
         const params = {
-            matflowId:matFlowId,
+            pipelineId:pipelineId,
             state:state,
             userId:e.key,
             type:mode,
@@ -56,7 +56,7 @@ const StructureLeftDropdown = props =>{
         setModeValue(value)
         setMode(parseInt(e.key))
         const params = {
-            matflowId:matFlowId,
+            pipelineId:pipelineId,
             state:state,
             userId:enforcer,
             type:e.key,
@@ -121,7 +121,7 @@ const StructureLeftDropdown = props =>{
                 >
                     <Option key={"全部"} value={"全部"}>全部</Option>
                     {
-                        matFlowUserList && matFlowUserList.map(item=>{
+                        pipelineUserList && pipelineUserList.map(item=>{
                             return <Option key={item.user.id} value= {item.user.name}>{item.user && item.user.name}</Option>
                         })
                     }

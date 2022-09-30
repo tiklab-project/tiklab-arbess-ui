@@ -1,27 +1,27 @@
 import React from "react";
 import "./projectAsideOpt.scss";
 import {Dropdown} from "antd";
-import {CaretDownOutlined} from "@ant-design/icons";
+import {CaretDownOutlined,SettingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 
 const ProjectAsideOpt = props =>{
 
-    const {matFlowStore,structureListStore,path} = props
+    const {pipelineStore,structureListStore,path} = props
 
-    const {matFlowName,matFlowList,lastPath,matFlowId} = matFlowStore
+    const {pipelineName,pipelineList,lastPath,pipelineId} = pipelineStore
     const {setState,setEnforcer,setMode} = structureListStore
 
-    const changeMatFlow = item => {
-        if(matFlowName!==item.matFlowName){
+    const changePipeline = item => {
+        if(pipelineName!==item.pipelineName){
             setState(0)
             setEnforcer(null)
             setMode(0)
-            if(path===`/index/task/${matFlowName}/assembly`){
-                props.history.push(`/index/task/${item.matFlowName}/assembly`)
-            }else if(path.indexOf(`/index/task/${matFlowName}/assembly`) === 0) {
-                props.history.push(`/index/task/${item.matFlowName}/assembly/${lastPath}`)
+            if(path===`/index/task/${pipelineName}/assembly`){
+                props.history.push(`/index/task/${item.pipelineName}/assembly`)
+            }else if(path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
+                props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
             }else {
-                props.history.push(`/index/task/${item.matFlowName}/${lastPath}`)
+                props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
             }
         }
     }
@@ -32,14 +32,17 @@ const ProjectAsideOpt = props =>{
                 <div className="opt-content-title">流水线名称</div>
                 <div className="opt-content-group">
                     {
-                        matFlowList && matFlowList.map(item=>{
+                        pipelineList && pipelineList.map(item=>{
                             return(
-                                <div onClick={()=>{changeMatFlow(item)}}
-                                     key={item.matFlowId}
-                                     className={`opt-content-group_item ${item.matFlowId===matFlowId ? "opt-content-active" : ""}`}
+                                <div onClick={()=>{changePipeline(item)}}
+                                     key={item.pipelineId}
+                                     className={`opt-content-group_item ${item.pipelineId===pipelineId ? "opt-content-active" : ""}`}
                                 >
-                                    <span>
-                                        {item.matFlowName}
+                                    <span className="opt-content-group-icon">
+                                        <SettingOutlined/>
+                                    </span>
+                                    <span className="opt-content-group-name">
+                                        {item.pipelineName}
                                     </span>
                                 </div>
                             )
@@ -53,16 +56,17 @@ const ProjectAsideOpt = props =>{
     return(
         <Dropdown overlay={menu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
             <li className="aside_content aside_dropdown aside_opt"
-                style={{padding:10}}
                 onClick={(e)=>e.preventDefault()}
             >
-                <svg  className="icon" aria-hidden="true">
-                    <use xlinkHref="#icon-shaixuan1"/>
-                </svg>
+                <span>
+                    <svg  className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-shaixuan1"/>
+                    </svg>
+                </span>
                 <CaretDownOutlined className="dropdowns_icon"/>
             </li>
         </Dropdown>
     )
 }
 
-export default inject("structureListStore","matFlowStore")(observer(ProjectAsideOpt))
+export default inject("structureListStore","pipelineStore")(observer(ProjectAsideOpt))

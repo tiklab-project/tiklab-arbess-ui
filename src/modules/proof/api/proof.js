@@ -19,9 +19,9 @@ export function  FindOneProof(data){
 }
 
 //凭证
-export function  FindMatFlowProof(data){
+export function  FindPipelineProof(data){
     return serviceLoc.request({
-        url:"/matFlowHome/findMatFlowProof",
+        url:"/proof/findPipelineProof",
         method:"post",
         data
     })

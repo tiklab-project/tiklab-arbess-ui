@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import echarts from "../../../common/echarts/echarts";
 import {getUser} from "tiklab-core-ui";
 import DynamicList from "./dynamicList";
-import MatFlowNear from "./matFlowNear";
+import PipelineNear from "./pipelineNear";
 import QuickIn from "./quickIn";
 import "./homePage.scss";
 import {withRouter} from "react-router";
@@ -10,9 +10,9 @@ import {inject,observer} from "mobx-react";
 
 const HomePage = props =>{
 
-    const {homePageStore,matFlowStore} = props
-    const {findAllOpen,matFlowNearList,runState,findUserAction,dynamicList} = homePageStore
-    const {findAllFollow,findAllMatFlowStatus,matFlowList,followList} = matFlowStore
+    const {homePageStore,pipelineStore} = props
+    const {findAllOpen,pipelineNearList,runState,findUserAction,dynamicList} = homePageStore
+    const {findAllFollow,findAllPipelineStatus,pipelineList,followList} = pipelineStore
 
     const userId = getUser().userId
 
@@ -24,7 +24,7 @@ const HomePage = props =>{
         }
 
         // 所有流水线
-        findAllMatFlowStatus(userId)
+        findAllPipelineStatus(userId)
         // 我收藏的流水线
         findAllFollow(userId)
 
@@ -68,7 +68,7 @@ const HomePage = props =>{
                 name: "单位：次",
                 type: "value",
                 interval:1, // 步长
-                min:0, // 起始
+                min:1, // 起始
             },
             // tooltip:{},
             legend: {
@@ -109,12 +109,12 @@ const HomePage = props =>{
         <div className="homePage home-limited">
             <QuickIn
                 {...props}
-                matFlowList={matFlowList}
+                pipelineList={pipelineList}
                 followList={followList}
             />
             <div className="homePage-content">
                 <div className="homePage-content-left">
-                    <MatFlowNear {...props} matFlowNearList={matFlowNearList}/>
+                    <PipelineNear {...props} pipelineNearList={pipelineNearList}/>
                     <DynamicList
                         {...props}
                         pageNumber={1}
@@ -134,4 +134,4 @@ const HomePage = props =>{
     )
 }
 
-export default withRouter(inject("homePageStore","matFlowStore")(observer(HomePage)))
+export default withRouter(inject("homePageStore","pipelineStore")(observer(HomePage)))

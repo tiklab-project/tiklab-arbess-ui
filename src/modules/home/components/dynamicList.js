@@ -6,8 +6,8 @@ const DynamicList = props =>{
 
     const {dynamicList,pageNumber,dynamicTitle,dynamicClickText} = props
 
-    const goMatFlow = matFlowName => {
-        props.history.push(`/index/task/${matFlowName}/work`)
+    const goPipeline = pipelineName => {
+        props.history.push(`/index/task/${pipelineName}/work`)
     }
 
     const dynamic = dynamicClickText =>{
@@ -41,9 +41,9 @@ const DynamicList = props =>{
                                         <span>{item.user && item.user.name}</span>
                                         <span>{item.massage}</span>
                                         <span className="dynamic-item-name"
-                                              onClick={()=>goMatFlow(item.matFlow && item.matFlow.matflowName)}
+                                              onClick={()=>goPipeline(item.pipeline && item.pipeline.pipelineName)}
                                         >
-                                            {item.matFlow && item.matFlow.matflowName}
+                                            {item.pipeline && item.pipeline.pipelineName}
                                         </span>
                                         <span>{item.news}</span>
                                     </div>

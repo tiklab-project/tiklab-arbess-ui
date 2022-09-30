@@ -8,7 +8,7 @@ import {
 
 export class HomePageStore{
 
-    @observable matFlowNearList = []
+    @observable pipelineNearList = []
     @observable dynamicList = []
     @observable page = {
         defaultCurrent: 1,
@@ -22,7 +22,7 @@ export class HomePageStore{
         param.append("userId",value)
         FindAllOpen(param).then(res=>{
             if(res.code===0 && res.data){
-                this.matFlowNearList = res.data
+                this.pipelineNearList = res.data
             }
         }).catch(error=>{
             console.log(error)

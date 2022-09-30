@@ -7,9 +7,9 @@ import {getUser} from "tiklab-core-ui";
 
 const AddProofButton = props =>{
 
-    const {proofStore,matFlowStore,type,style,matFlowList} = props
+    const {proofStore,pipelineStore,type,style,pipelineList} = props
     const {createProof,fresh,setFresh} = proofStore
-    const {matFlowId} = matFlowStore
+    const {pipelineId} = pipelineStore
 
     const userId = getUser().userId
     const [visible,setVisible] = useState(false)
@@ -40,11 +40,11 @@ const AddProofButton = props =>{
                 isAuthority={isAuthority}
                 type={type}
                 style={style}
-                matFlowList={matFlowList}
-                matFlowId={matFlowId}
+                pipelineList={pipelineList}
+                pipelineId={pipelineId}
             />
         </div>
     )
 }
 
-export default inject("proofStore","matFlowStore")(observer(AddProofButton))
+export default inject("proofStore","pipelineStore")(observer(AddProofButton))

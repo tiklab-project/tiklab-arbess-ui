@@ -7,11 +7,11 @@ const {Option} = Select
 
 const FindAllProof = props =>{
 
-    const {proofStore,type,matFlowStore,configDataStore}=props
+    const {proofStore,type,pipelineStore,configDataStore}=props
 
-    const {findMatFlowProof,proofList} = proofStore
-    const {matFlowId} = matFlowStore
-    const {setGitProofId,setDeployProofId} = configDataStore
+    const {findPipelineProof,proofList} = proofStore
+    const {pipelineId} = pipelineStore
+    const {setGitProofId,setDeployProofId,codeType} = configDataStore
 
     const userId = getUser().userId
 
@@ -25,11 +25,11 @@ const FindAllProof = props =>{
             proofScope = 1
         }
         const params ={
-            matFlowId:matFlowId,
+            pipelineId:pipelineId,
             type:proofScope,
             userId:userId
         }
-        findMatFlowProof(params)
+        findPipelineProof(params)
     }
 
     const changeGitSelect = (value,e) =>{
@@ -40,10 +40,22 @@ const FindAllProof = props =>{
         }
     }
 
+    const isName = type =>{
+        switch (type) {
+            case 1:return "gitCodeProofName"
+            case 2:return "giteeCodeProofName"
+            case 3:return "gitlabCodeProofName"
+            case 4:return "githubCodeProofName"
+            case 5:return "svnCodeProofName"
+            case 31:return "virProofName"
+            case 32:return "dockerProofName"
+        }
+    }
+
     return(
         <Form.Item
             label="凭证"
-            name={type < 6 ? "gitProofName" : "dockerProofName"}
+            name={isName(codeType)}
             rules={type === 2 || type === 3 ? [{required:true, message:"请选择凭证"}] : null}
         >
             <Select style={{ width: 300 }}
@@ -65,4 +77,4 @@ const FindAllProof = props =>{
     )
 }
 
-export default inject("proofStore","matFlowStore","configDataStore")(observer(FindAllProof))
+export default inject("proofStore","pipelineStore","configDataStore")(observer(FindAllProof))

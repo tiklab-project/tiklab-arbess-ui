@@ -6,26 +6,26 @@ import Proof from "../../proof/container/proof";
 // 系统凭证
 const SystemProof = props =>{
 
-    const {proofStore,matFlowStore} = props
-    const {findMatFlowProof,fresh} = proofStore
-    const {findAllMatFlowStatus,matFlowList} = matFlowStore
+    const {proofStore,pipelineStore} = props
+    const {findPipelineProof,fresh} = proofStore
+    const {findAllPipelineStatus,pipelineList} = pipelineStore
     const userId = getUser().userId
 
     useEffect(()=>{
         const param = {
-            matFlowId:"",
+            pipelineId:"",
             type:0,
             userId:userId
         }
-        findMatFlowProof(param)
+        findPipelineProof(param)
     },[fresh])
 
     useEffect(()=>{
         // 所有流水线
-        findAllMatFlowStatus(userId)
+        findAllPipelineStatus(userId)
     },[])
 
-    return  <Proof matFlowList={matFlowList}/>
+    return  <Proof pipelineList={pipelineList}/>
 }
 
-export default inject("proofStore","matFlowStore")(observer(SystemProof))
+export default inject("proofStore","pipelineStore")(observer(SystemProof))

@@ -19,7 +19,7 @@ export class WorkSpaceStore{
     @action
     getSubmitMassage = async value =>{
         const param = new FormData()
-        param.append("matFlowId",value)
+        param.append("pipelineId",value)
         GetSubmitMassage(param).then(res=>{
             console.log( res)
             if(res.code === 0){
@@ -33,7 +33,7 @@ export class WorkSpaceStore{
     @action
     fileTree = async value =>{
         const params = new FormData()
-        params.append("matFlowId",value.matFlowId)
+        params.append("pipelineId",value.pipelineId)
         params.append("userId",value.userId)
         const data = await FileTree(params)
         if(data.code===0){

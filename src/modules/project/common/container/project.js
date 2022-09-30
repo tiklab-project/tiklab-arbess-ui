@@ -8,48 +8,48 @@ import {getUser} from "tiklab-core-ui";
 
 const Project= (props)=>{
 
-    const {route,matFlowStore,configDataStore,match}=props
+    const {route,pipelineStore,configDataStore,match}=props
 
-    const {findAllMatFlowStatus,lastPath,setLastPath,setMatFlowId,setMatFlowName} = matFlowStore
+    const {findAllPipelineStatus,lastPath,setLastPath,setPipelineId,setPipelineName} = pipelineStore
     const {isPrompt,setIsPrompt} = configDataStore
 
-    const matFlowName = match.params.matFlowName
+    const pipelineName = match.params.pipelineName
     const userId = getUser().userId
 
     useEffect(()=>{
-        setMatFlowName(matFlowName)
-        findAllMatFlowStatus(userId).then(res=>{
+        setPipelineName(pipelineName)
+        findAllPipelineStatus(userId).then(res=>{
             const data = res.data
             if(res.code===0 && data){
                 // // 如果不存在就重定向404
-                // if(!isMatFlow(data)){
+                // if(!isPipeline(data)){
                 //     props.history.push("/index/404")
                 // }else {
                 //     data && data.map(item=>{
-                //         if(item.matFlowName === matFlowName){
-                //             setMatFlowId(item.matFlowId)
+                //         if(item.pipelineName === pipelineName){
+                //             setPipelineId(item.pipelineId)
                 //         }
                 //     })
                 // }
                 data && data.map(item=>{
-                    if(item.matFlowName === matFlowName){
-                        setMatFlowId(item.matFlowId)
+                    if(item.pipelineName === pipelineName){
+                        setPipelineId(item.pipelineId)
                     }
                 })
             }
         })
-    },[matFlowName])
+    },[pipelineName])
 
-    const isMatFlow = data => {
-        return data && data.some(item=>item.matFlowName === matFlowName)
+    const isPipeline = data => {
+        return data && data.some(item=>item.pipelineName === pipelineName)
     }
 
     useEffect(()=>{
-        return ()=>setMatFlowId("")
+        return ()=>setPipelineId("")
     },[])
 
     const confirmLeave = pathname =>{
-        if(pathname!==`/home/task/${matFlowName}/config`){
+        if(pathname!==`/home/task/${pipelineName}/config`){
             pathname && setTimeout(()=>{
                 props.history.push(pathname)
             })
@@ -63,7 +63,7 @@ const Project= (props)=>{
                 {...props}
                 lastPath={lastPath}
                 setLastPath={setLastPath}
-                matFlowName={matFlowName}
+                pipelineName={pipelineName}
             />
             <div className="project-content" style={{marginLeft:80}}>
                 {renderRoutes(route.routes)}
@@ -76,6 +76,6 @@ const Project= (props)=>{
     )
 }
 
-export default withRouter(inject("matFlowStore","configDataStore")(observer(Project)))
+export default withRouter(inject("pipelineStore","configDataStore")(observer(Project)))
 
 

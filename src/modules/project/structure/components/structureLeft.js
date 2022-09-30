@@ -8,9 +8,9 @@ import zhCN from "antd/es/locale/zh_CN";
 
 const StructureLeft = props =>{
 
-    const {status,matFlowId,structureStore,structureListStore}=props
+    const {status,pipelineId,structureStore,structureListStore}=props
 
-    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,matFlowUserList,
+    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,pipelineUserList,
         execState} = structureStore
     const {pageCurrent,setPageCurrent,state,setState,enforcer,setEnforcer,mode,setMode,drop} = structureListStore
 
@@ -36,7 +36,7 @@ const StructureLeft = props =>{
 
     const onChangePage = pagination => {
         const params = {
-            matflowId:matFlowId,
+            pipelineId:pipelineId,
             pageParam: {
                 pageSize: 10,
                 currentPage:pagination
@@ -94,10 +94,10 @@ const StructureLeft = props =>{
                 setEnforcer={setEnforcer}
                 mode={mode}
                 setMode={setMode}
-                matFlowUserList={matFlowUserList}
+                pipelineUserList={pipelineUserList}
                 change={change}
                 drop={drop}
-                matFlowId={matFlowId}
+                pipelineId={pipelineId}
             />
             <div className="structure-content-left-history">
                 <div className="history-content">

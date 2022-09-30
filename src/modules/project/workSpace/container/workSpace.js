@@ -10,33 +10,33 @@ import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 
 const WorkSpace = props =>{
 
-    const {workSpaceStore,matFlowStore} = props
+    const {workSpaceStore,pipelineStore} = props
 
     const {getSubmitMassage,fileTree,readFile,recordList,fileList,setFileList} = workSpaceStore
-    const {matFlowId,matFlowName} = matFlowStore
+    const {pipelineId,pipelineName} = pipelineStore
 
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
     const [detailsDrawer,setDetailsDrawer] = useState(false)
-    const [fileListVisible,setFileListVisible] = useState(true)
+    const [fileListVisible,setFileListVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState("")
     const userId = getUser().userId
 
     // 近期提交记录
     useEffect(()=>{
-        if(matFlowId){
-            getSubmitMassage(matFlowId)
+        if(pipelineId){
+            getSubmitMassage(pipelineId)
             setCatalogue([])
         }
-    },[matFlowId])
+    },[pipelineId])
 
     // 节点空间
     useEffect(()=>{
         const params = {
-            matFlowId:matFlowId,
+            pipelineId:pipelineId,
             userId:userId
         }
-        if(matFlowId){
+        if(pipelineId){
             fileTree(params).then(res=>{
                 if(res.code===0){
                     if(res.data){
@@ -45,21 +45,21 @@ const WorkSpace = props =>{
                 }
             })
         }
-    },[fresh,matFlowId])
+    },[fresh,pipelineId])
 
     return(
         <div className="workSpace home-limited">
             <div className="workSpace-top home-limited">
                 <BreadcrumbContent
                     config={"config"}
-                    firstItem={matFlowName}
+                    firstItem={pipelineName}
                     secondItem={"工作空间"}
                 />
             </div>
             <div className="workSpace-content">
                 <WorkSpaceNod
                     fileListVisible={fileListVisible}
-                    matFlowName={matFlowName}
+                    pipelineName={pipelineName}
                     fileList={fileList}
                     setFileList={setFileList}
                     fresh={fresh}
@@ -85,4 +85,4 @@ const WorkSpace = props =>{
     )
 }
 
-export default withRouter(inject("workSpaceStore","matFlowStore")(observer(WorkSpace)))
+export default withRouter(inject("workSpaceStore","pipelineStore")(observer(WorkSpace)))

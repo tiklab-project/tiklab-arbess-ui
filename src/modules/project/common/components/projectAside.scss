@@ -15,7 +15,6 @@
         text-align: center;
         cursor: pointer;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         margin-bottom: 10px;
         padding: 5px 0;
@@ -24,17 +23,18 @@
             height: 20px ;
         }
     }
+    &_item{
+        flex-direction: column;
+        &:hover{
+            background: #e3e8f0;
+        }
+    }
     &_dropdown{
         height: 55px;
-        display: flex;
         line-height: 55px;
         width: 100%;
         align-items: center;
         padding: 0 20px;
-        .icon{
-            width: 25px;
-            height: 25px;
-        }
     }
     &_opt{
         .icon{
@@ -61,10 +61,11 @@
 }
 
 .projectSetMenu{
+    position: absolute;
     background: #fff;
     margin-left: 80px;
     margin-top: -60px;
-    width: 150px;
+    width: 120px;
     padding: 10px;
     box-shadow: 3px 0 8px 3px #f2f2f2;
     &-li{

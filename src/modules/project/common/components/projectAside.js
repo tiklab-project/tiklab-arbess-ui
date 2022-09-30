@@ -6,36 +6,33 @@ import {Dropdown} from "antd";
 
 const ProjectAside = props =>{
 
-    const {matFlowName,setLastPath} = props
+    const {pipelineName,setLastPath} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
     useEffect(()=>{
-        if (path.indexOf(`/index/task/${matFlowName}/assembly`) === 0) {
-            path=`/index/task/${matFlowName}/assembly`
-        }
         setLastPath(path.substring(path.lastIndexOf('/') + 1))
         setNav(path)
     },[path])
 
-    const  taskRouters=[
+    const  firstRouters=[
         {
-            to:`/index/task/${matFlowName}/work`,
+            to:`/index/task/${pipelineName}/work`,
             title:"概况",
             icon:"#icon-gongzuotongji",
             key:"2",
             enCode:"AA"
         },
         {
-            to:`/index/task/${matFlowName}/config`,
+            to:`/index/task/${pipelineName}/config`,
             title: "配置",
             icon: "#icon-jiekoupeizhi",
             key:"3",
             enCode:"BB"
         },
         {
-            to:`/index/task/${matFlowName}/structure`,
+            to:`/index/task/${pipelineName}/structure`,
             title: "历史",
             icon:"#icon-lishijishi",
             key:"4",
@@ -43,24 +40,24 @@ const ProjectAside = props =>{
         },
     ]
 
-    const router = [
+    const secondRouter = [
         {
-            key:`/index/task/${matFlowName}/assembly/user`,
+            key:`/index/task/${pipelineName}/assembly/user`,
             label:"项目成员",
             enCode:"DD1",
         },
         {
-            key:`/index/task/${matFlowName}/assembly/role`,
+            key:`/index/task/${pipelineName}/assembly/role`,
             label:"角色管理",
             enCode:"DD2",
         },
         {
-            key:`/index/task/${matFlowName}/assembly/proof`,
+            key:`/index/task/${pipelineName}/assembly/proof`,
             label:"凭证管理",
             enCode:"DD3",
         },
         {
-            key:`/index/task/${matFlowName}/assembly/redel`,
+            key:`/index/task/${pipelineName}/assembly/redel`,
             label:"其他管理",
             enCode:"DD4",
         },
@@ -75,7 +72,7 @@ const ProjectAside = props =>{
             return(
                 <PrivilegeButton code={item.enCode} key={item.key} {...props}>
                     <li key={item.key}
-                        className={nav===item.to ? "aside_content aside_active" : "aside_content"}
+                        className={`aside_content aside_item ${nav===item.to ? "aside_active": ""}`}
                         onClick={()=>changeNav(item.to)}
                     >
                         <div className="aside_content_icon">
@@ -93,21 +90,21 @@ const ProjectAside = props =>{
     const renderMenu = router => {
         return router.map(data=>{
             return  <PrivilegeButton key={data.key} code={data.enCode} {...props}>
-                <div
-                    className="projectSetMenu-li"
-                    onClick={()=>changeNav(data.key)}
-                    key={data.key}
-                >
-                    <span>{data.label}</span>
-                </div>
-            </PrivilegeButton>
+                        <div
+                            className="projectSetMenu-li"
+                            onClick={()=>changeNav(data.key)}
+                            key={data.key}
+                        >
+                            <span>{data.label}</span>
+                        </div>
+                    </PrivilegeButton>
         })
     }
 
     const menu = (
         <div className="projectSetMenu">
             <div className="projectSetMenu-ul">
-                {renderMenu(router)}
+                {renderMenu(secondRouter)}
             </div>
         </div>
     )
@@ -116,12 +113,12 @@ const ProjectAside = props =>{
          <div className="aside">
             <ul  className="content">
                 <ProjectAsideOpt{...props} path={path}/>
-                { renderTaskRouter(taskRouters) }
+                { renderTaskRouter(firstRouters) }
                 <PrivilegeButton code={"DD"} {...props}>
                     <Dropdown overlay={menu}>
                         <li
                             onClick={(e)=>e.preventDefault()}
-                            className={path.indexOf(`/index/task/${matFlowName}/assembly`) === 0 ? "aside_content aside_active" : "aside_content"}
+                            className={`aside_content aside_item ${path.indexOf(`/index/task/${pipelineName}/assembly`) === 0 ? "aside_active": ""}`}
                         >
                             <div className="aside_content_icon">
                                 <svg className="icon" aria-hidden="true">

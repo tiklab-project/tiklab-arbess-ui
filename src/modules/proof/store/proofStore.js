@@ -3,7 +3,7 @@ import {action,observable} from "mobx";
 import {
     CreateProof,
     FindOneProof,
-    FindMatFlowProof,
+    FindPipelineProof,
     UpdateProof,
     DeleteProof,
 } from "../api/proof";
@@ -43,12 +43,12 @@ export class ProofStore{
     }
 
     @action
-    findMatFlowProof =async values =>{
+    findPipelineProof =async values =>{
         const params = new FormData()
-        params.append("matFlowId",values.matFlowId)
+        params.append("pipelineId",values.pipelineId)
         params.append("userId",values.userId)
         params.append("type",values.type)
-        FindMatFlowProof(params).then(res=>{
+        FindPipelineProof(params).then(res=>{
             console.log(res)
             if(res.code===0 && res.data){
                 this.proofList = res.data

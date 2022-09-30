@@ -6,7 +6,7 @@ import {inject,observer} from "mobx-react";
 
 const StructureRight = props =>{
 
-    const {structureStore,status,freshen,setFreshen,setPageCurrent,matFlowId} = props
+    const {structureStore,status,freshen,setFreshen,setPageCurrent,pipelineId} = props
 
     const {deleteHistoryLog, killInstance,rightFlowData,modeData,index,setIndex,
         rightExecuteData,execState} = structureStore
@@ -37,7 +37,7 @@ const StructureRight = props =>{
                         killInstance={killInstance}
                         runWay={runWay}
                         setPageCurrent={setPageCurrent}
-                        matFlowId={matFlowId}
+                        pipelineId={pipelineId}
                     />
                     :
                     <StructureRightItem

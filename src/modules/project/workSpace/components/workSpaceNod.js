@@ -4,7 +4,7 @@ import React,{Fragment} from "react";
 const WorkSpaceNod = props =>{
 
     const {fileList,setFileList,setFresh,fresh,catalogue,setCatalogue,readFile,setDetailsDrawer,setDrawerContent,
-        fileListVisible,matFlowName} = props
+        fileListVisible,pipelineName} = props
 
     const renderType = treeType => {
         switch (treeType){
@@ -94,7 +94,7 @@ const WorkSpaceNod = props =>{
                                       onClick={()=>setBreadcrumb()}
                                 >
                                     <span> > </span>
-                                    <span>{matFlowName}</span>
+                                    <span>{pipelineName}</span>
                                 </span>
                                 {renderCatalogue(catalogue)}
                             </div>

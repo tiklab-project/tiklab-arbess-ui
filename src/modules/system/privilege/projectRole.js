@@ -5,7 +5,7 @@ import {ProjectRoleList} from "tiklab-privilege-ui";
     项目角色管理
  */
 const ProjectRole = props =>{
-    return <ProjectRoleList {...props} bgroup={"matflow"}/>
+    return <ProjectRoleList {...props} bgroup={"pipeline"}/>
 }
 
 export default ProjectRole

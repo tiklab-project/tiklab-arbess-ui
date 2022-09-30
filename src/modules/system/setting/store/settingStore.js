@@ -2,9 +2,9 @@ import {observable,action} from "mobx";
 
 import {
     GetSystemMassage,
-    DeleteMatFlowScm,
-    UpdateMatFlowScm,
-    FindAllMatFlowScm,
+    DeletePipelineScm,
+    UpdatePipelineScm,
+    FindAllPipelineScm,
 } from "../api/setting";
 
 export class SettingStore {
@@ -25,26 +25,26 @@ export class SettingStore {
     }
 
     @action
-    findAllMatFlowScm = async () =>{
-        return await FindAllMatFlowScm()
+    findAllPipelineScm = async () =>{
+        return await FindAllPipelineScm()
     }
 
     @action
-    deleteMatFlowScm = async value=>{
+    deletePipelineScm = async value=>{
         const param = new FormData()
         param.append("ScmId",value)
-        return await DeleteMatFlowScm(param)
+        return await DeletePipelineScm(param)
     }
 
     @action
-    updateMatFlowScm = async values=>{
+    updatePipelineScm = async values=>{
         const params = {
             ScmId:values.ScmId,
             ScmType:values.ScmType,
             ScmName:values.ScmName,
             ScmAddress:values.ScmAddress,
         }
-        return await UpdateMatFlowScm(params)
+        return await UpdatePipelineScm(params)
     }
 
 }
