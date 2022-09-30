@@ -1,8 +1,8 @@
 import React from "react";
-import {Tabs} from "antd";
+import {Select} from "antd";
 import {inject,observer} from "mobx-react";
 
-const {Option} = Tabs
+const {Option} = Select
 
 const gitList=[
     {id:1,tel:"通用Git"},
