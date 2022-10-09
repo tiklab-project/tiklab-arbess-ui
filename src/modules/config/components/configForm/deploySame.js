@@ -75,8 +75,8 @@ const DeploySame = props =>{
                 name={deployType+"deployOrder"}
                 label="部署文件命令">
                 <Mirror
-                    shellBlock={deployType===31?virOrderShellBlock:docOrderShellBlock}
-                    setShellBlock={deployType===31?setVirOrderShellBlock:setDocOrderShellBlock}
+                    shellBlock={deployType==31?virOrderShellBlock:docOrderShellBlock}
+                    setShellBlock={deployType==31?setVirOrderShellBlock:setDocOrderShellBlock}
                     setIsPrompt={setIsPrompt}
                 />
             </Form.Item>

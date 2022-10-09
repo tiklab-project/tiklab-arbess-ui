@@ -104,6 +104,7 @@ const ConfigView = props =>{
             }
             else if(data.type > 30 || data.type < 40 ){
                 renderDeploy(data)
+                deployShellBlock(data)
                 setDeployType(data.type)
             }
             setData([...newData])
@@ -178,7 +179,6 @@ const ConfigView = props =>{
             mappingPort:data.mappingPort,
             deployId:data.deployId
         }
-        deployShellBlock(data)
         Object.assign(formInitialValues,DeployFormValue)
         setDeployProofId(data.proof && data.proof.proofId)
     }

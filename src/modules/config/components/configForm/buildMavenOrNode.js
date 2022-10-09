@@ -28,8 +28,8 @@ const BuildMavenOrNode = props =>{
                 label="执行命令"
             >
                 <Mirror
-                    shellBlock={buildType===21?mavenShellBlock:nodeShellBlock}
-                    setShellBlock={buildType===21?setMavenShellBlock:setNodeShellBlock}
+                    shellBlock={buildType==21?mavenShellBlock:nodeShellBlock}
+                    setShellBlock={buildType==21?setMavenShellBlock:setNodeShellBlock}
                     setIsPrompt={setIsPrompt}
                 />
             </Form.Item>

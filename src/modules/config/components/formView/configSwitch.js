@@ -33,27 +33,27 @@ const ConfigSwitch = props =>{
     }
 
     const changBuild = value => {
-        // let arr = JSON.parse(JSON.stringify(data))
-        // for(let i = 0 ;i<arr.length;i++){
-        //     if( arr[i].dataType === 21 || arr[i].dataType === 22) {
-        //         arr[i].dataType = value
-        //         setIsPrompt(true)
-        //     }
-        // }
         setBuildType(value)
-        // setData([...arr])
+        let arr = JSON.parse(JSON.stringify(data))
+        for(let i = 0 ;i<arr.length;i++){
+            if( arr[i].dataType === 21 || arr[i].dataType === 22) {
+                arr[i].dataType = value
+                setIsPrompt(true)
+            }
+        }
+        setData([...arr])
     }
 
     const changDeploy = value => {
-        // let arr = JSON.parse(JSON.stringify(data))
-        // for(let i = 0 ;i<arr.length;i++){
-        //     if( arr[i].dataType === 31 || arr[i].dataType === 32) {
-        //         arr[i].dataType = value
-        //         setIsPrompt(true)
-        //     }
-        // }
         setDeployType(value)
-        // setData([...arr])
+        let arr = JSON.parse(JSON.stringify(data))
+        for(let i = 0 ;i<arr.length;i++){
+            if( arr[i].dataType === 31 || arr[i].dataType === 32) {
+                arr[i].dataType = value
+                setIsPrompt(true)
+            }
+        }
+        setData([...arr])
     }
 
     return(
@@ -87,9 +87,7 @@ const ConfigSwitch = props =>{
                         return   <Tabs onChange={changGit} defaultActiveKey={type}>
                                     {
                                         gitList.map(item=>{
-                                            return  <TabPane tab={item.tel} key={item.id}>
-                                                        <Forms type={item.id}/>
-                                                    </TabPane>
+                                            return  <TabPane tab={item.tel} key={item.id}><Forms type={item.id}/></TabPane>
                                         })
                                     }
                                 </Tabs>

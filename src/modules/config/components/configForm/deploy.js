@@ -75,7 +75,8 @@ const Deploy = props =>{
                                 messageInfo={messageInfo}
                                 pipelineName={pipelineName}
                             />
-                            {deployType === 31 ?
+                            {
+                                deployType==31 ?
                                 <DeployVir 
                                     {...props}
                                     configDataStore={configDataStore}
@@ -84,10 +85,10 @@ const Deploy = props =>{
                                 <DeployDocker deployType={deployType}/>
                             }
                         </>) :
-                        <Form.Item name="startShell" label="Shell命令">
+                        <Form.Item name={deployType+"startShell"} label="Shell命令">
                             <Mirror
-                                shellBlock={deployType===31?virStartShellBlock:docStartShellBlock}
-                                setShellBlock={deployType===31?setVirStartShellBlock:setDocStartShellBlock}
+                                shellBlock={deployType==31?virStartShellBlock:docStartShellBlock}
+                                setShellBlock={deployType==31?setVirStartShellBlock:setDocStartShellBlock}
                                 setIsPrompt={setIsPrompt}
                             />
                         </Form.Item>

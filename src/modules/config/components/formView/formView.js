@@ -58,6 +58,7 @@ const formView = props =>{
     }
 
     const newStage = data =>{
+
         return data && data.map((group,index)=>{
             return  <div className="formView-wrapper" key={index} >
                         <div className="formView-wrapper-Headline">

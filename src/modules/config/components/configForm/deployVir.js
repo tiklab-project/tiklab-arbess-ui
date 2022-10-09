@@ -13,7 +13,7 @@ const DeployVir = props =>{
             <Form.Item name={deployType+"startAddress"} label="启动文件地址">
                 <Input addonBefore={"/"} placeholder=" / 启动文件地址"/>
             </Form.Item>
-            <Form.Item name="startShell" label="启动命令" className="noRequired">
+            <Form.Item name={deployType+"startShell"} label="启动命令" className="noRequired">
                 <Mirror
                     shellBlock={virShellBlock}
                     setShellBlock={setVirShellBlock}
