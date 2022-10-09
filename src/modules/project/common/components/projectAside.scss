@@ -60,6 +60,45 @@
     }
 }
 
+.opt{
+    width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #C4C4C4;
+    &-content{
+        height: 100%;
+        padding: 10px;
+        &-title{
+            font-weight: 700;
+            font-size: 16px;
+        }
+        &-group{
+            max-height: 500px;
+            overflow: auto;
+            padding: 10px;
+            &_item{
+                margin-bottom: 5px;
+                cursor: pointer;
+                height: 30px;
+                padding-left: 20px;
+                line-height: 30px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                max-width: 260px;
+                &:hover{
+                    background: #e3e8f0;
+                }
+            }
+            &-icon{
+                padding-right: 10px;
+            }
+        }
+        &-active{
+            background: #e3e8f0;
+        }
+    }
+}
+
 .projectSetMenu{
     position: absolute;
     background: #fff;
@@ -69,8 +108,13 @@
     padding: 10px;
     box-shadow: 3px 0 8px 3px #f2f2f2;
     &-li{
-        margin: 5px;
         padding: 5px;
         cursor: pointer;
+        &-icon{
+            padding-right: 5px;
+        }
+        &:hover{
+            background-color: #e3e8f0;
+        }
     }
 }

@@ -1,64 +1,34 @@
-import React,{useState,useEffect,useRef} from "react";
+import React,{useState,useEffect} from "react";
 import  "./formView.scss";
-import {Button,Form,Input,Popconfirm} from "antd";
-import {CloseOutlined,EditOutlined} from "@ant-design/icons";
-import ConfigAddNewStageModal from "./configAddNewStageModal";
-import ConfigAddCodeModal from "./configAddCodeModal";
-import ChangeConfigSortsDrawer from "./changeConfigSortsDrawer";
+import {Button,Form,Popconfirm} from "antd";
+import {DeleteOutlined} from "@ant-design/icons";
+import ChangeConfigSortsModal from "./changeConfigSortsModal";
 import ConfigAddNewStage from "./configAddNewStage";
 import ConfigCode from "./configCode";
-import ConfigForm from "../configForm";
-import ConfigName from "../../../../common/configName/configName";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
+import ConfigSwitch from "./configSwitch";
+import Forms from "../configForm/forms";
 
 const formView = props =>{
 
     const {form,del,configDataStore,onFinish,pipelineId} = props
 
-    const {setIsPrompt,data,setData,codeData,setCodeData,formInitialValues,setFormInitialValues,
-        isFormAlias,setIsFormAlias,setCodeType} = configDataStore
+    const {setIsPrompt,data,setData,formInitialValues,setFormInitialValues,setCodeType,codeType,
+        setBuildType,setDeployType,deployType
+    } = configDataStore
 
-    const inputRef = useRef()
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
 
     useEffect(()=>{
-        if (isFormAlias!==""){
-            inputRef.current.focus()
-        }
-    },[isFormAlias])
-
-    useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues,pipelineId])
 
-    // 显示文本框
-    const displayInput = index =>{
-        setIsFormAlias(index)
-    }
-
-    // 隐藏文本框
-    const hiddenInput = () =>{
-        setIsFormAlias("")
-    }
-
-    // 改变title
-    const changeInputValue = (e,index) =>{
-        //深拷贝一次，可以让arr指向单独的内存空间
-        let arr = JSON.parse(JSON.stringify(data))
-        for(let i = 0 ;i<arr.length;i++){
-            if( i === index && e.target.value) {
-                arr[i].title = e.target.value
-                setIsPrompt(true)
-            }
-        }
-        setData([...arr])
-    }
-
     // 删除部分构建配置
     const deletePart = group =>{
+        console.log(group)
         del(group.dataType)
         for (let i = 0 ;i<data.length;i++){
             if(data[i].dataType === group.dataType){
@@ -74,45 +44,41 @@ const formView = props =>{
         setIsPrompt(true)
     }
 
+    const renderTitle = dataType =>{
+        switch (parseInt(dataType)) {
+            case 11:
+                return "测试"
+            case 21:
+            case 22:
+                return "构建"
+            case 31:
+            case 32:
+                return "部署"
+        }
+    }
+
     const newStage = data =>{
         return data && data.map((group,index)=>{
             return  <div className="formView-wrapper" key={index} >
                         <div className="formView-wrapper-Headline">
                             <div className="desc">
-                                {
-                                    isFormAlias === index ?
-                                        <Input type="text"
-                                               ref={inputRef}
-                                               onBlur={hiddenInput}
-                                               style={{width:100}}
-                                               defaultValue={group.title}
-                                               onChange={e=>changeInputValue(e,index)}
-                                        />
-                                        :
-                                        <>
-                                            <span className="desc-title">{group.title}</span>
-                                            <span onClick={()=> displayInput(index)}>
-                                                <EditOutlined />
-                                            </span>
-                                        </>
-                                }
-                            </div>
-                            <div className="desc-delete">
-                                <Popconfirm
-                                    title="当前项数据会被清空"
-                                    onConfirm={()=>deletePart(group)}
-                                    okText="确定"
-                                    cancelText="取消"
-                                >
-                                    <Button type="text"><CloseOutlined/></Button>
-                                </Popconfirm>
+                                 <span className="desc-title">
+                                        {renderTitle(group.dataType)}
+                                    </span>
+                                <span className="desc-delete">
+                                    <Popconfirm
+                                        title="当前项的所有数据会被清空"
+                                        onConfirm={()=>deletePart(group)}
+                                        okText="确定"
+                                        cancelText="取消"
+                                    >
+                                        <DeleteOutlined />
+                                    </Popconfirm>
+                                </span>
                             </div>
                         </div>
                         <div className="desc-name">
-                            <ConfigName type={group.dataType}/>
-                        </div>
-                        <div className="formView-wrapper-newStage">
-                            <ConfigForm type={group.dataType}/>
+                            <ConfigSwitch type={group.dataType}/>
                         </div>
                     </div>
         })
@@ -131,39 +97,45 @@ const formView = props =>{
                     scrollToFirstError={true}
                     onFinish={onFinish}
                     onValuesChange={onValuesChange}
-                    initialValues={{deployType:1}}
+                    initialValues={{[deployType+"deployType"]:1}}
                 >
                     <ConfigCode
-                        codeData={codeData}
+                        codeType={codeType}
                         setCodeVisible={setCodeVisible}
+                        setCodeType={setCodeType}
+                        codeVisible={codeVisible}
+                        setIsPrompt={setIsPrompt}
                         del={del}
                     />
                     { newStage(data) }
-                    <ConfigAddNewStage setNewStageVisible={setNewStageVisible}/>
+                    {
+                        data && data.length < 3 ?
+                            <ConfigAddNewStage
+                                data={data}
+                                setData={setData}
+                                newStageVisible={newStageVisible}
+                                setNewStageVisible={setNewStageVisible}
+                                setIsPrompt={setIsPrompt}
+                                setBuildType={setBuildType}
+                                setDeployType={setDeployType}
+                            />
+                            :null
+                    }
+
+                    <div style={{marginTop:20}}>
+                        <Button form="form" htmlType="submit" type="primary">保存</Button>
+                    </div>
                 </Form>
 
-                <ConfigAddNewStageModal
-                    data={data}
-                    setData={setData}
-                    newStageVisible={newStageVisible}
-                    setNewStageVisible={setNewStageVisible}
-                    setIsPrompt={setIsPrompt}
-                />
-                <ConfigAddCodeModal
-                    codeVisible={codeVisible}
-                    setCodeVisible={setCodeVisible}
-                    setCodeData={setCodeData}
-                    setIsPrompt={setIsPrompt}
-                    setCodeType={setCodeType}
-                />
-                <ChangeConfigSortsDrawer
+                <ChangeConfigSortsModal
                     changeSortVisible={changeSortVisible}
                     setChangeSortVisible={setChangeSortVisible}
                     data={data}
                     setData={setData}
-                    codeData={codeData}
+                    codeType={codeType}
                     setIsPrompt={setIsPrompt}
                 />
+
             </div>
         </div>
     )

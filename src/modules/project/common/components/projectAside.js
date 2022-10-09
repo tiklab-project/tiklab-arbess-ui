@@ -1,22 +1,27 @@
 import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
-import ProjectAsideOpt from "./projectAsideOpt";
 import {PrivilegeButton} from "tiklab-privilege-ui";
 import {Dropdown} from "antd";
+import {CaretDownOutlined,SettingOutlined} from "@ant-design/icons";
+import {inject,observer} from "mobx-react";
 
 const ProjectAside = props =>{
 
-    const {pipelineName,setLastPath} = props
+    const {pipelineStore,structureListStore} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
+
+    const {lastPath,setLastPath,pipelineName,pipelineList,pipelineId} = pipelineStore
+    const {setState,setEnforcer,setMode} = structureListStore
 
     useEffect(()=>{
         setLastPath(path.substring(path.lastIndexOf('/') + 1))
         setNav(path)
     },[path])
 
-    const  firstRouters=[
+    // 侧边第一栏导航
+    const firstRouters=[
         {
             to:`/index/task/${pipelineName}/work`,
             title:"概况",
@@ -40,6 +45,7 @@ const ProjectAside = props =>{
         },
     ]
 
+    // 侧边流水线设置的第二级导航
     const secondRouter = [
         {
             key:`/index/task/${pipelineName}/assembly/user`,
@@ -66,6 +72,22 @@ const ProjectAside = props =>{
     const changeNav = item=>{
         props.history.push(item)
     }
+
+    // 切换流水线的路由跳转
+    const changePipeline = item => {
+        if(pipelineName!==item.pipelineName){
+            setState(0)
+            setEnforcer(null)
+            setMode(0)
+            if(path===`/index/task/${pipelineName}/assembly`){
+                props.history.push(`/index/task/${item.pipelineName}/assembly`)
+            }else if(path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
+                props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
+            }else {
+                props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
+            }
+        }
+    }
     
     const renderTaskRouter = taskRouters => {
         return taskRouters && taskRouters.map(item=>{
@@ -87,6 +109,33 @@ const ProjectAside = props =>{
         })
     }
 
+    const changPipelineMenu = (
+        <div className="opt">
+            <div className="opt-content">
+                <div className="opt-content-title">流水线名称</div>
+                <div className="opt-content-group">
+                    {
+                        pipelineList && pipelineList.map(item=>{
+                            return(
+                                <div onClick={()=>{changePipeline(item)}}
+                                     key={item.pipelineId}
+                                     className={`opt-content-group_item ${item.pipelineId===pipelineId ? "opt-content-active" : ""}`}
+                                >
+                                    <span className="opt-content-group-icon">
+                                        <SettingOutlined/>
+                                    </span>
+                                    <span className="opt-content-group-name">
+                                        {item.pipelineName}
+                                    </span>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        </div>
+    )
+
     const renderMenu = router => {
         return router.map(data=>{
             return  <PrivilegeButton key={data.key} code={data.enCode} {...props}>
@@ -95,13 +144,18 @@ const ProjectAside = props =>{
                             onClick={()=>changeNav(data.key)}
                             key={data.key}
                         >
-                            <span>{data.label}</span>
+                            <span className="projectSetMenu-li-icon">
+                                <SettingOutlined/>
+                            </span>
+                            <span className="projectSetMenu-li-name">
+                                {data.label}
+                            </span>
                         </div>
                     </PrivilegeButton>
         })
     }
 
-    const menu = (
+    const secondMenu = (
         <div className="projectSetMenu">
             <div className="projectSetMenu-ul">
                 {renderMenu(secondRouter)}
@@ -112,10 +166,21 @@ const ProjectAside = props =>{
     return(
          <div className="aside">
             <ul  className="content">
-                <ProjectAsideOpt{...props} path={path}/>
+                <Dropdown overlay={changPipelineMenu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
+                    <li className="aside_content aside_dropdown aside_opt"
+                        onClick={(e)=>e.preventDefault()}
+                    >
+                        <span>
+                            <svg  className="icon" aria-hidden="true">
+                                <use xlinkHref="#icon-shaixuan1"/>
+                            </svg>
+                        </span>
+                        <CaretDownOutlined className="dropdowns_icon"/>
+                    </li>
+                </Dropdown>
                 { renderTaskRouter(firstRouters) }
                 <PrivilegeButton code={"DD"} {...props}>
-                    <Dropdown overlay={menu}>
+                    <Dropdown overlay={secondMenu} trigger={["click"]}>
                         <li
                             onClick={(e)=>e.preventDefault()}
                             className={`aside_content aside_item ${path.indexOf(`/index/task/${pipelineName}/assembly`) === 0 ? "aside_active": ""}`}
@@ -136,4 +201,4 @@ const ProjectAside = props =>{
     )
 }
 
-export default ProjectAside
+export default inject("structureListStore")(observer(ProjectAside))

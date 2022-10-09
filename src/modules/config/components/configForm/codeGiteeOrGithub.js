@@ -2,12 +2,12 @@ import React,{Fragment,useState,useEffect} from "react";
 import {Button,Form,message,Row,Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import FindAllProof from "../../../proof/components/findAllProof";
-import ConfigCodeGiteeOrGithubModal from "./configCodeGiteeOrGithubModal";
 import {inject,observer} from "mobx-react";
+import CodeGiteeOrGithubModal from "./codeGIteeOrGIthubModal";
 
 const {Option} =Select
 
-const ConfigCodeGiteeOrGithub = props =>{
+const CodeGiteeOrGithub = props =>{
 
     const {githubStore,configDataStore,giteeStore} = props
 
@@ -93,6 +93,25 @@ const ConfigCodeGiteeOrGithub = props =>{
         setProhibited(false)
     }
 
+    const name = codeType =>{
+        switch (codeType){
+            case 1:
+                return "giteeCodeName"
+            case 4:
+                return "githubCodeName"
+        }
+    }
+
+    const branch = codeType =>{
+        switch (codeType){
+            case 1:
+                return "giteeCodeBranch"
+            case 4:
+                return "githubCodeBranch"
+        }
+    }
+
+
     return(
         <Fragment>
             <Row>
@@ -102,7 +121,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     新增服务链接
                 </Button>
             </Row>
-            <Form.Item label="仓库" name="codeName" rules={[{required:true, message:"请选择仓库"}]}>
+            <Form.Item label="仓库" name={codeType+"codeName"} rules={[{required:true, message:"请选择仓库"}]}>
                 <Select style={{ width: 300 }} onChange={changeGitStoreHouse} onClick={clickGitStoreHouse}>
                     {
                         storehouseList && storehouseList.map(item=>{
@@ -111,7 +130,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                     }
                 </Select>
             </Form.Item>
-            <Form.Item label="分支" name="codeBranch">
+            <Form.Item label="分支"  name={codeType+"codeBranch"}>
                 <Select style={{ width: 300 }} disabled={prohibited}>
                     {
                         branchList && branchList.map(item=>{
@@ -121,7 +140,7 @@ const ConfigCodeGiteeOrGithub = props =>{
                 </Select>
             </Form.Item>
 
-            <ConfigCodeGiteeOrGithubModal
+            <CodeGiteeOrGithubModal
                 visible={visible}
                 setVisible={setVisible}
                 formInitialValues={formInitialValues}
@@ -137,4 +156,4 @@ const ConfigCodeGiteeOrGithub = props =>{
 }
 
 export default inject("githubStore","configStore","configDataStore","giteeStore")
-                (observer(ConfigCodeGiteeOrGithub))
+                (observer(CodeGiteeOrGithub))

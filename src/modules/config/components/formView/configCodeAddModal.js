@@ -36,17 +36,11 @@ const lis=[
     }
 ]
 
-const ConfigAddCodeModal = props =>{
+const ConfigCodeAddModal = props =>{
 
-    const {setCodeData,codeVisible,setCodeVisible,setIsPrompt,setCodeType} = props
+    const {codeVisible,setCodeVisible,setIsPrompt,setCodeType} = props
 
     const handleClick = (group,item,index) =>{
-        let newCode
-        newCode = {
-            codeId:index,
-            codeType:item.type,
-        }
-        setCodeData(newCode)
         setCodeType(item.type)
         setCodeVisible(false)
         setIsPrompt(true)
@@ -60,4 +54,4 @@ const ConfigAddCodeModal = props =>{
             />
 }
 
-export default ConfigAddCodeModal
+export default ConfigCodeAddModal

@@ -3,10 +3,6 @@
     &-content{
         padding: 15px;
         overflow: hidden;
-        &-changSort{
-            text-align: right;
-            padding-bottom: 10px;
-        }
         .ant-form{
             .ant-input{
                 max-width: 500px !important;
@@ -19,9 +15,14 @@
                 text-align: left;
             }
         }
+        .code-handle{
+            margin-bottom: 25px;
+        }
+        &-changSort{
+            padding-bottom: 25px;
+        }
     }
     &-wrapper{
-        margin: 30px 0;
         &-Headline{
             display: flex;
             justify-content: space-between;
@@ -45,9 +46,30 @@
             &-title{
                 padding-right: 5px;
             }
+            &-delete{
+                &:hover{
+                    color: #ff0000;
+                }
+            }
             &-name{
-                font-weight: 500;
                 padding: 15px 0;
+            }
+        }
+    }
+}
+
+.changeSorts-tree{
+    .ant-tree{
+        .ant-tree-list{
+            .ant-tree-node-content-wrapper{
+                height: 30px;
+                line-height: 30px;
+                &:hover{
+                    background: #e3e8f0;
+                }
+            }
+            .ant-tree-node-selected{
+                background: #e3e8f0;
             }
         }
     }

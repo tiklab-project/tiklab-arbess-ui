@@ -5,6 +5,8 @@ import {MessageType} from "tiklab-message-ui";
     消息类型管理
  */
 const MessageTypeContent = props => {
-    return <MessageType {...props} bgroup={"pipeline"}/>
+
+    return <MessageType {...props} bgroup={"matflow"}/>
+
 }
 export default MessageTypeContent

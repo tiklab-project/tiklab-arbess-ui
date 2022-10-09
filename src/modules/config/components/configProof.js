@@ -1,16 +1,16 @@
 import React,{useState} from "react";
 import {Button,message,Row,Spin} from "antd";
-import FindAllProof from "../../../proof/components/findAllProof";
-import AddProofButton from "../../../proof/components/addProofButton";
 import {inject,observer} from "mobx-react";
 import {LoadingOutlined} from "@ant-design/icons";
+import FindAllProof from "../../proof/components/findAllProof";
+import AddProofButton from "../../proof/components/addProofButton";
 
 const ConfigProof = props =>{
 
-    const {allProofType,proofBtnType,testType,configDataStore,configItemStore} = props
+    const {allProofType,proofBtnType,testType,configDataStore,configStore} = props
 
-    const {formInitialValues,codeType,gitProofId,deployProofId} = configDataStore
-    const {codeTestPass} = configItemStore
+    const {formInitialValues,codeType,gitProofId,deployProofId,deployType} = configDataStore
+    const {codeTestPass} = configStore
 
     const [testStatus,setTestStatus] = useState(false)
 
@@ -24,11 +24,11 @@ const ConfigProof = props =>{
             }
             proofId = gitProofId
             port = 0
-            url = formInitialValues && formInitialValues.codeName
+            url = formInitialValues && formInitialValues[deployType+"codeName"]
         } else {
             proofId = deployProofId
-            port = formInitialValues && formInitialValues.sshPort
-            url = formInitialValues && formInitialValues.sshIp
+            port = formInitialValues && formInitialValues[deployType+"sshPort"]
+            url = formInitialValues && formInitialValues[deployType+"sshIp"]
             type = 2
         }
         const params = {
@@ -78,4 +78,4 @@ const ConfigProof = props =>{
     )
 }
 
-export default inject("configDataStore","configItemStore")(observer(ConfigProof))
+export default inject("configDataStore","configStore")(observer(ConfigProof))

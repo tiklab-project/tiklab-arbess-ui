@@ -127,7 +127,7 @@ const StructureLeft = props =>{
                                 </div>
                             </>
                             :
-                            <StructureEmpty/>
+                            <StructureEmpty isData={true}/>
                     }
                 </div>
             </div>

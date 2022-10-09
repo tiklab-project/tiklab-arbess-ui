@@ -11,7 +11,7 @@ const FindAllProof = props =>{
 
     const {findPipelineProof,proofList} = proofStore
     const {pipelineId} = pipelineStore
-    const {setGitProofId,setDeployProofId,codeType} = configDataStore
+    const {setGitProofId,setDeployProofId} = configDataStore
 
     const userId = getUser().userId
 
@@ -40,22 +40,12 @@ const FindAllProof = props =>{
         }
     }
 
-    const isName = type =>{
-        switch (type) {
-            case 1:return "gitCodeProofName"
-            case 2:return "giteeCodeProofName"
-            case 3:return "gitlabCodeProofName"
-            case 4:return "githubCodeProofName"
-            case 5:return "svnCodeProofName"
-            case 31:return "virProofName"
-            case 32:return "dockerProofName"
-        }
-    }
+
 
     return(
         <Form.Item
             label="凭证"
-            name={isName(codeType)}
+            name={type+"proofName"}
             rules={type === 2 || type === 3 ? [{required:true, message:"请选择凭证"}] : null}
         >
             <Select style={{ width: 300 }}

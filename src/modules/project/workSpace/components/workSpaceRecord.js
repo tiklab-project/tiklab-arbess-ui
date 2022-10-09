@@ -42,12 +42,9 @@ const WorkSpaceRecord = props =>{
                 {
                     recordList && recordList.length > 0 ?
                         renderRecordList(recordList):
-                        <div className="workSpace-list-null">
-                            <svg className="icon" aria-hidden="true" >
-                                <use xlinkHref="#icon-meiyouxiangguan"/>
-                            </svg>
-                            <div>没有提交记录</div>
-                        </div>
+                        <svg className="icon" aria-hidden="true" >
+                            <use xlinkHref="#icon-meiyouxiangguan"/>
+                        </svg>
                 }
                 <div className="workSpace-content-null"/>
             </div>

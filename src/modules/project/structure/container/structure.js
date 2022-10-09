@@ -189,37 +189,31 @@ const Structure = props => {
     
     return (
         <div className="structure">
-            {
-                // 没有正在构建和历史记录为null（非查询状态）
-                isData ?
-                    <div className="structure-content">
-                        <StructureLeft
-                            pipelineId={pipelineId}
-                            status={status}
-                        />
-                        <div className="structure-content-right">
-                            <BreadcrumbContent firstItem={pipelineName} secondItem={"历史"}/>
-                            {
-                                execState !== ""  || leftPageList && leftPageList.length > 0 ?
-                                    <StructureRight
-                                        freshen={freshen}
-                                        setFreshen={setFreshen}
-                                        status={status}
-                                        setPageCurrent={setPageCurrent}
-                                        pipelineId={pipelineId}
-                                    />
-                                    :
-                                    <StructureEmpty/>
-                            }
-                        </div>
-                    </div>
-                    :
-                    <StructureEmpty
-                        runImmediately={runImmediately}
-                        runImState={runImState}
-                        pipelineName={pipelineName}
-                    />
-            }
+            <div className="structure-content">
+                <StructureLeft
+                    pipelineId={pipelineId}
+                    status={status}
+                />
+                <div className="structure-content-right">
+                    <BreadcrumbContent firstItem={pipelineName} secondItem={"历史"}/>
+                    {
+                        execState !== ""  || leftPageList && leftPageList.length > 0 ?
+                            <StructureRight
+                                freshen={freshen}
+                                setFreshen={setFreshen}
+                                status={status}
+                                setPageCurrent={setPageCurrent}
+                                pipelineId={pipelineId}
+                            />
+                            :
+                            <StructureEmpty
+                                runImmediately={runImmediately}
+                                isData={isData}
+                                runImState={runImState}
+                            />
+                    }
+                </div>
+            </div>
         </div>
     )
 }

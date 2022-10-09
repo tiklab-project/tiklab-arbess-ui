@@ -1,13 +1,15 @@
-import React,{Fragment} from "react";
+import React from "react";
 import {Form,Input} from "antd";
-import ConfigProof from "./configProof";
+import ConfigProof from "../configProof";
 
-const ConfigCodeSvn = props =>{
+const CodeSvn = props =>{
+
+    const {codeType} = props
 
     return(
-        <Fragment>
+        <>
             <Form.Item
-                name="codeName"
+                name={codeType+"codeName"}
                 label="svn地址"
                 rules={[
                     {required:true,message:"请输入svn地址"},
@@ -24,8 +26,8 @@ const ConfigCodeSvn = props =>{
                 proofBtnType={1}
                 testType={"源码地址"}
             />
-        </Fragment>
+        </>
     )
 }
 
-export default ConfigCodeSvn
+export default CodeSvn

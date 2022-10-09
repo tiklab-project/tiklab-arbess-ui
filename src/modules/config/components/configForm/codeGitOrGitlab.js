@@ -1,34 +1,16 @@
 import React,{Fragment} from "react";
 import {Form,Input} from "antd";
-import ConfigProof from "../../components/configForm/configProof";
+import ConfigProof from "../configProof";
 import {inject,observer} from "mobx-react";
 
 const CodeGitOrGitlab = props =>{
+
     const {configDataStore}=props
     const {codeType} = configDataStore
 
-    const name = codeType =>{
-        switch (codeType){
-            case 1:
-                return "gitCodeName"
-            case 4:
-                return "gitlabCodeName"
-        }
-    }
-
-    const branch = codeType =>{
-        switch (codeType){
-            case 1:
-                return "gitCodeBranch"
-            case 4:
-                return "gitlabCodeBranch"
-        }
-    }
-
-
     return(
         <Fragment>
-            <Form.Item name={name(codeType)} label="git地址"
+            <Form.Item name={codeType+"codeName"} label="git地址"
                 rules={[
                     {required:true, message:"请输入git地址"},
                     {
@@ -39,7 +21,7 @@ const CodeGitOrGitlab = props =>{
             >
                 <Input />
             </Form.Item>
-            <Form.Item name={branch(codeType)} label="分支">
+            <Form.Item name={codeType+"codeBranch"} label="分支">
                 <Input style={{width:300}} placeholder="请输入分支，默认是master"/>
             </Form.Item>
             <ConfigProof

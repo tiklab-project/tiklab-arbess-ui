@@ -25,7 +25,7 @@ const Project=AsyncComponent(()=>import("./modules/project/common/container/proj
 /*  流水线详情 */
 const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))
 const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
-const ConfigDetails = AsyncComponent(()=>import("./modules/config/container/configDetails"))
+const Config = AsyncComponent(()=>import("./modules/config/container/config"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSetReDel=AsyncComponent(()=>import("./modules/project/reDel/projectSetReDel"))
@@ -124,11 +124,11 @@ const routers=[
                     },
                     {
                         path:"/index/task/:pipelineName/config",
-                        component: ConfigDetails
+                        component: Config
                     },
                     {
                         path:"/index/task/config",
-                        component: ConfigDetails
+                        component: Config
                     },
                     {
                         path:"/index/task/:pipelineName/structure",

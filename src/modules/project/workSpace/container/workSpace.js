@@ -18,7 +18,7 @@ const WorkSpace = props =>{
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
     const [detailsDrawer,setDetailsDrawer] = useState(false)
-    const [fileListVisible,setFileListVisible] = useState(false)
+    const [isFileList,setIsFileList] = useState(false) // 源文件初始是否有数据
     const [drawerContent,setDrawerContent] = useState("")
     const userId = getUser().userId
 
@@ -40,8 +40,8 @@ const WorkSpace = props =>{
             fileTree(params).then(res=>{
                 if(res.code===0){
                     if(res.data){
-                        setFileListVisible(true)
-                    }else setFileListVisible(false)
+                        setIsFileList(true)
+                    }else setIsFileList(false)
                 }
             })
         }
@@ -58,7 +58,7 @@ const WorkSpace = props =>{
             </div>
             <div className="workSpace-content">
                 <WorkSpaceNod
-                    fileListVisible={fileListVisible}
+                    isFileList={isFileList}
                     pipelineName={pipelineName}
                     fileList={fileList}
                     setFileList={setFileList}

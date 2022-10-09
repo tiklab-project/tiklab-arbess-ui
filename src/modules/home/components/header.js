@@ -6,7 +6,6 @@ import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined,MessageOutlined,SettingOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import logo from "../../../assets/images/all/pipeline.png"
-// import logo from "../../../assets/images/logo_m.png";
 import portrait from "../../../assets/images/portrait.jpg";
 import vipOne from "../../../assets/images/vip-one.png";
 import vipTwo from "../../../assets/images/vip-two.png";
@@ -25,12 +24,6 @@ const Head = props =>{
     const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
 
     useEffect(()=>{
-        if(path.indexOf("/index/system")===0){
-            path="/index/system"
-        }
-        if(path.indexOf("/index/task")===0) {
-            path= "/index/pipeline"
-        }
         setCurrentLink(path)
     },[path])
 

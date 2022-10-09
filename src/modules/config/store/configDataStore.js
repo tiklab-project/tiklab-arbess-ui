@@ -2,22 +2,26 @@ import {action, observable} from "mobx";
 
 export class ConfigDataStore {
 
-    @observable isPrompt = false; // 编辑页面离开是否提示
+    @observable isPrompt = false // 编辑页面离开是否提示
+    @observable isPlugin = false // 是否存在插件
     @observable formInitialValues = {} //表单初始化
     @observable data = [] // 新阶段、新任务需要渲染的值
     @observable isGuiAlias = "" // 更改别名--图形
     @observable codeType = "" // 源码管理类型
+    @observable buildType = "" 
+    @observable deployType = ""
+    @observable gitProofId = ""
+    @observable deployProofId = ""
     @observable unitShellBlock = ""
     @observable mavenShellBlock = ""
     @observable nodeShellBlock = ""
-    @observable gitProofId = ""
-    @observable deployProofId = ""
-    @observable isPlugin = false // 是否存在插件
-    @observable isMavenOrNode = ""
-    @observable isVirOrDocker = ""
-    @observable orderShellBlock = ""
-    @observable shellBlock = ""
-    @observable linuxShellBlock = ""
+    @observable virShellBlock = ""
+
+    @observable virStartShellBlock = ""
+    @observable docStartShellBlock = ""
+
+    @observable virOrderShellBlock = ""
+    @observable docOrderShellBlock = ""
 
     @action
     setIsPlugin = value =>{
@@ -30,13 +34,18 @@ export class ConfigDataStore {
     }
 
     @action
-    setIsMavenOrNode = value => {
-        this.isMavenOrNode = value
+    setCodeType = value =>{
+        this.codeType = value
     }
 
     @action
-    setIsVirOrDocker = value => {
-        this.isVirOrDocker = value
+    setBuildType = value => {
+        this.buildType = value
+    }
+
+    @action
+    setDeployType = value => {
+        this.deployType = value
     }
 
     @action
@@ -55,21 +64,6 @@ export class ConfigDataStore {
     }
 
     @action
-    setCodeType = value =>{
-        this.codeType = value
-    }
-
-    @action
-    setLinuxShellBlock = value =>{
-        this.linuxShellBlock = value
-    }
-
-    @action
-    setShellBlock = value =>{
-        this.shellBlock = value
-    }
-
-    @action
     setUnitShellBlock = value =>{
         this.unitShellBlock = value
     }
@@ -85,8 +79,28 @@ export class ConfigDataStore {
     }
 
     @action
-    setOrderShellBlock = value =>{
-        this.orderShellBlock = value
+    setVirShellBlock = value =>{
+        this.virShellBlock = value
+    }
+
+    @action
+    setVirStartShellBlock = value =>{
+        this.virStartShellBlock = value
+    }
+
+    @action
+    setDocStartShellBlock = value =>{
+        this.docStartShellBlock = value
+    }
+
+    @action
+    setVirOrderShellBlock = value =>{
+        this.virOrderShellBlock = value
+    }
+
+    @action
+    setDocOrderShellBlock = value =>{
+        this.docOrderShellBlock = value
     }
 
     @action

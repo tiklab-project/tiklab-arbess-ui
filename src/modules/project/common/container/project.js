@@ -10,7 +10,7 @@ const Project= (props)=>{
 
     const {route,pipelineStore,configDataStore,match}=props
 
-    const {findAllPipelineStatus,lastPath,setLastPath,setPipelineId,setPipelineName} = pipelineStore
+    const {findAllPipelineStatus,setPipelineId,setPipelineName} = pipelineStore
     const {isPrompt,setIsPrompt} = configDataStore
 
     const pipelineName = match.params.pipelineName
@@ -61,9 +61,7 @@ const Project= (props)=>{
         <div className="project">
             <ProjectAside
                 {...props}
-                lastPath={lastPath}
-                setLastPath={setLastPath}
-                pipelineName={pipelineName}
+                pipelineStore={pipelineStore}
             />
             <div className="project-content" style={{marginLeft:80}}>
                 {renderRoutes(route.routes)}

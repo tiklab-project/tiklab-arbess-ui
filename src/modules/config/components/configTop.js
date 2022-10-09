@@ -5,7 +5,7 @@ import ConfigChangeView from "./configChangeView";
 
 const ConfigTop = props =>{
 
-    const {view,setView,pipelineId,pipelineName,userId,setRunOrSave} = props
+    const {view,setView,pipelineId,pipelineName,userId} = props
 
     return(
         <div className="config-top-content">
@@ -16,7 +16,6 @@ const ConfigTop = props =>{
                 setView={setView}
                 pipelineId={pipelineId}
                 pipelineName={pipelineName}
-                setRunOrSave={setRunOrSave}
             />
         </div>
     )

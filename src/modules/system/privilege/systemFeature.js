@@ -5,7 +5,9 @@ import {SystemFeatureList} from "tiklab-privilege-ui";
     系统功能管理
  */
 const SystemFeature = props =>{
-    return <SystemFeatureList {...props} bgroup={"pipeline"}/>
+
+    return <SystemFeatureList {...props} bgroup={"matflow"}/>
+    
 }
 
 export default SystemFeature

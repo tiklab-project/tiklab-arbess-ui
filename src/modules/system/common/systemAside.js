@@ -12,17 +12,17 @@ const SystemAside= props =>  {
         setSelectKey(path)
     },[path])
 
-    useEffect(()=>{
-        if(path.indexOf("/index/system/syr")===0){
-            setExpandedTree([path,"1"])
-        }
-        if(path.indexOf("/index/system/project")===0){
-            setExpandedTree([path,"2"])
-        }
-        if(path.indexOf("/index/system/mes")===0){
-            setExpandedTree([path,"3"])
-        }
-    },[])
+    // useEffect(()=>{
+    //     if(path.indexOf("/index/system/syr")===0){
+    //         setExpandedTree([path,"1"])
+    //     }
+    //     if(path.indexOf("/index/system/project")===0){
+    //         setExpandedTree([path,"2"])
+    //     }
+    //     if(path.indexOf("/index/system/mes")===0){
+    //         setExpandedTree([path,"3"])
+    //     }
+    // },[])
 
     const router = [
         {
@@ -90,34 +90,50 @@ const SystemAside= props =>  {
             enCode:"J",
         },
         {
-            key:"/index/system/task",
+            key:"3",
             label:"待办事项",
             icon:"#icon-gongzuotongji",
-            enCode:"J",
+            enCode:"I",
+            children: [
+                {
+                    key:"/index/system/task",
+                    label:"待办事项",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"J",
+                },
+                {
+                    key:"/index/system/myTodoTask",
+                    label:"我的待办事项 ",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"F",
+                }
+            ]
         },
         {
-            key:"/index/system/myTodoTask",
-            label:"我的待办事项 ",
+            key:"4",
+            label:"系统日志",
             icon:"#icon-gongzuotongji",
-            enCode:"F",
-        },
-        {
-            key:"/index/system/log",
-            label:"日志记录",
-            icon:"#icon-gongzuotongji",
-            enCode:"G",
-        },
-        {
-            key:"/index/system/myLog",
-            label:"我的日志",
-            icon:"#icon-gongzuotongji",
-            enCode:"H",
-        },
-        {
-            key:"/index/system/logTemplate",
-            label:"日志模板",
-            icon:"#icon-gongzuotongji",
-            enCode:"H",
+            enCode:"I",
+            children: [
+                {
+                    key:"/index/system/log",
+                    label:"日志记录",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"G",
+                },
+                {
+                    key:"/index/system/myLog",
+                    label:"我的日志",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"H",
+                },
+                {
+                    key:"/index/system/logTemplate",
+                    label:"日志模板",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"H",
+                }
+            ]
         },
     ]
 

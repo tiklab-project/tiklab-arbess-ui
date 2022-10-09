@@ -3,58 +3,19 @@ import {observable,action} from "mobx";
 import {
     UpdateConfigure,
     FindAllConfigure,
+    CodeTestPass,
+    FileAddress,
+    GetFile,
 } from "../api/config"
 
 export class ConfigStore{
 
+    @observable profileAddress = ""
+
     @action
     updateConfigure = values =>{
-        const params ={
-            pipelineCode:{
-                codeId:values.pipelineCode.codeId,
-                sort:values.pipelineCode.sort,
-                type:values.pipelineCode.type,
-                codeBranch:values.pipelineCode.codeBranch,
-                codeName:values.pipelineCode.codeName,
-                proof:{ proofId:values.pipelineCode.proof.proofId },
-                pipeline:{pipelineId:values.pipelineCode.pipeline.pipelineId },
-            },
-            pipelineTest:{
-                testId:values.pipelineTest.testId,
-                sort:values.pipelineTest.sort,
-                type:values.pipelineTest.type,
-                testOrder:values.pipelineTest.testOrder,
-                pipeline:{pipelineId:values.pipelineTest.pipeline.pipelineId },
-            },
-            pipelineBuild:{
-                buildId:values.pipelineBuild.buildId,
-                sort:values.pipelineBuild.sort,
-                type:values.pipelineBuild.type,
-                buildAddress: values.pipelineBuild.buildAddress,
-                buildOrder: values.pipelineBuild.buildOrder,
-                pipeline:{pipelineId:values.pipelineBuild.pipeline.pipelineId },
-            },
-            pipelineDeploy:{
-                deployId:values.pipelineDeploy.deployId,
-                sort:values.pipelineDeploy.sort,
-                type:values.pipelineDeploy.type,
-                sshIp:values.pipelineDeploy.sshIp,
-                sshPort:values.pipelineDeploy.sshPort,
-                deployAddress: values.pipelineDeploy.deployAddress,
-                startShell: values.pipelineDeploy.startShell,
-                sourceAddress:values.pipelineDeploy.sourceAddress,
-                startPort:values.pipelineDeploy.startPort,
-                mappingPort:values.pipelineDeploy.mappingPort,
-                deployType:values.pipelineDeploy.deployType,
-                startAddress:values.pipelineDeploy.startAddress,
-                deployOrder:values.pipelineDeploy.deployOrder,
-                proof:{ proofId:values.pipelineDeploy.proof.proofId },
-                pipeline:{pipelineId:values.pipelineDeploy.pipeline.pipelineId },
-
-            },
-        }
         return new Promise((resolve, reject) => {
-            UpdateConfigure(params).then(res=>{
+            UpdateConfigure(values).then(res=>{
                 console.log(res)
                 resolve(res)
             }).catch(error=>{
@@ -79,6 +40,37 @@ export class ConfigStore{
         })
     }
 
+    @action
+    codeTestPass =async values =>{
+        const params = {
+            proofId:values.proofId,
+            url:values.url,
+            port:values.port,
+            type:values.type,
+        }
+        return await CodeTestPass(params)
+    }
+
+    @action
+    fileAddress = () =>{
+        FileAddress().then(res=>{
+            console.log(res)
+            if(res.code===0 && res.data){
+                this.profileAddress = res.data
+            }
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
+    @action
+    getFile = async values =>{
+        const params = new FormData()
+        params.append("pipelineName",values.pipelineName)
+        params.append("regex",values.regex)
+        return await GetFile(params)
+    }
+    
 }
 
 export const CONFIG_STORE = "configStore"

@@ -3,7 +3,7 @@ import {Modal,Form,Input,Select,Row,Button,message} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
 
-const ConfigCodeGiteeOrGithubModal = props =>{
+const CodeGiteeOrGithubModal = props =>{
 
     const {visible,setVisible,formInitialValues,codeType,url,getGiteeProof,getCode,getGithubProof,setGitProofId}=props
     const [form] = Form.useForm()
@@ -19,7 +19,7 @@ const ConfigCodeGiteeOrGithubModal = props =>{
             const params = {
                 proofName:values.proofName,
                 proofPassword:JSON.parse(localStorage.getItem("giteeToken"))
-                         && JSON.parse(localStorage.getItem("giteeToken")).accessToken,
+                    && JSON.parse(localStorage.getItem("giteeToken")).accessToken,
                 proofDescribe:"gitee授权登录",
                 user:{id:getUser().userId},
                 type:1,
@@ -97,16 +97,16 @@ const ConfigCodeGiteeOrGithubModal = props =>{
                         name="proofName"
                         rules={[{ required: true, message: "请输入服务连接名" }]}
                     >
-                       <Input/>
+                        <Input/>
                     </Form.Item>
                     <Button onClick={()=>goUrl()} style={{marginTop:30}} type="link">
                         <PlusOutlined/>
                         新建
                     </Button>
-               </Row>
+                </Row>
             </Form>
         </Modal>
     )
 }
 
-export default ConfigCodeGiteeOrGithubModal
+export default CodeGiteeOrGithubModal

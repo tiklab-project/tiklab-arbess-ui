@@ -7,6 +7,7 @@ import BuildMavenOrNode from "./buildMavenOrNode";
 import Deploy from "./deploy";
 
 const Forms = props =>{
+    
     const {type} = props
 
     return (
@@ -16,12 +17,12 @@ const Forms = props =>{
                     switch (type){
                         case 1:
                         case 4:
-                            return <CodeGitOrGitlab/>
+                            return <CodeGitOrGitlab type={type}/>
                         case 2:
                         case 3:
-                            return <CodeGiteeOrGithub/>
+                            return <CodeGiteeOrGithub type={type}/>
                         case 5:
-                            return <CodeSvn/>
+                            return <CodeSvn codeType={type}/>
                         case 11:
                             return <TestUnit/>
                         case 21:
@@ -29,7 +30,7 @@ const Forms = props =>{
                             return <BuildMavenOrNode/>
                         case 31:
                         case 32:
-                            return <Deploy type={type}/>
+                            return <Deploy/>
                     }
                 })()
             }

@@ -50,7 +50,7 @@ const lis=[
 
 const ConfigAddNewStageModal = props =>{
 
-    const {newStageVisible,setNewStageVisible,data,setData,setIsPrompt} = props
+    const {newStageVisible,setNewStageVisible,data,setData,setIsPrompt,setBuildType,setDeployType} = props
 
     const handleClick = (group,item,index)=>{
         const newData = [...data]
@@ -64,6 +64,12 @@ const ConfigAddNewStageModal = props =>{
                 }
             }
         } 
+        if(group.id===2){
+            setBuildType(item.type)
+        }
+        else if(group.id===3){
+            setDeployType(item.type)
+        }
         newData.push({
             dataId:index,
             title:group.title,

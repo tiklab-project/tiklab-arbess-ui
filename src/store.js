@@ -4,7 +4,6 @@ import {STRUCTURE_STORE,StructureStore} from "./modules/project/structure/store/
 import {STRUCTURELIST_STORE,StructureListStore} from "./modules/project/structure/store/structureListStore";
 import {CONFIG_STORE,ConfigStore} from "./modules/config/store/configStore";
 import {CONFIGDATA_STORE,ConfigDataStore} from "./modules/config/store/configDataStore";
-import {CONFIGITEM_STORE,ConfigItemStore} from "./modules/config/store/configItemStore";
 import {GITEE_STORE,GiteeStore} from "./modules/config/store/giteeStore";
 import {GITHUB_STORE,GithubStore} from "./modules/config/store/githubStore";
 import {PROOF_STORE,ProofStore} from "./modules/proof/store/proofStore";
@@ -20,7 +19,6 @@ function createStores() {
         [STRUCTURELIST_STORE]:new StructureListStore(),
         [CONFIG_STORE]:new ConfigStore(),
         [CONFIGDATA_STORE]:new ConfigDataStore(),
-        [CONFIGITEM_STORE]:new ConfigItemStore(),
         [GITEE_STORE]:new GiteeStore(),
         [GITHUB_STORE]:new GithubStore(),
         [PROOF_STORE]:new ProofStore(),

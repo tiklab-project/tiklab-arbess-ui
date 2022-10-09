@@ -8,7 +8,7 @@ import "./configChangeView.scss";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,structureStore,userId,pipelineName,setRunOrSave,configDataStore} = props
+    const {view,setView,pipelineId,structureStore,userId,pipelineName,configDataStore} = props
 
     const {pipelineStartStructure} = structureStore
     const {isPlugin,setIsPrompt} = configDataStore
@@ -30,10 +30,6 @@ const ConfigChangeView = props =>{
         setProcessVisible(true)
         // 离开编辑页面关闭提示
         setIsPrompt(false)
-        // 关闭新建配置跳转
-        if(setRunOrSave){
-            setRunOrSave(false)
-        }
         setTimeout(()=>props.history.push(`/index/task/${pipelineName}/structure`),1000)
         pipelineStartStructure(params).then(res=>{
             if(res.code===0 && res.data===1){

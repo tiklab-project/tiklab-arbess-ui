@@ -3,7 +3,7 @@ import {Form} from "antd";
 import {inject,observer} from "mobx-react";
 import Mirror from "./mirror";
 
-const ConfigTestUnit = props =>{
+const TestUnit = props =>{
 
     const {configDataStore} = props
     const {setIsPrompt,unitShellBlock,setUnitShellBlock} = configDataStore
@@ -19,4 +19,4 @@ const ConfigTestUnit = props =>{
     )
 }
 
-export default inject("configDataStore")(observer(ConfigTestUnit))
+export default inject("configDataStore")(observer(TestUnit))

@@ -1,43 +1,58 @@
 import React from "react";
-import {Button,Popconfirm} from "antd";
-import {CloseOutlined} from "@ant-design/icons";
-import ConfigName from "../../../../common/configName/configName";
-import ConfigForm from "../configForm";
+import {Popconfirm} from "antd";
+import {DeleteOutlined} from "@ant-design/icons";
+import ConfigSwitch from "./configSwitch";
+import ConfigCodeAddModal from "./configCodeAddModal";
 
 const ConfigCode = props =>{
 
-    const {setCodeVisible,codeData,del} = props
+    const {setIsPrompt,codeVisible,setCodeVisible,codeType,setCodeType,del} = props
 
-    const code = () => {
-        return  codeData ?
+    const delCode = () =>{
+        del(codeType)
+        setCodeType("")
+    }
+
+    const code = codeType => {
+        return  codeType ==="" ?
+            <div className="formView-wrapper-handle code-handle" onClick={()=>setCodeVisible(true)}>
+                添加代码源
+            </div>
+            :
             <div className="formView-wrapper">
                 <div className="formView-wrapper-Headline">
-                    <div className="desc">源码管理</div>
-                    <div className="desc-delete">
-                        <Popconfirm
-                            title="当前项数据会被清空"
-                            onConfirm={()=>del(1)}
-                            okText="确定"
-                            cancelText="取消"
-                        >
-                            <Button type="text"><CloseOutlined/></Button>
-                        </Popconfirm>
+                    <div className="desc">
+                        <span className="desc-title">
+                            源码管理
+                        </span>
+                        <span className="desc-delete">
+                            <Popconfirm
+                                title="当前项的所有数据会被清空"
+                                onConfirm={()=>delCode()}
+                                okText="确定"
+                                cancelText="取消"
+                            >
+                                <DeleteOutlined />
+                            </Popconfirm>
+                        </span>
                     </div>
                 </div>
                 <div className="desc-name">
-                    <ConfigName type={codeData.codeType}/>
+                    <ConfigSwitch type={codeType}/>
                 </div>
-                <div className="formView-wrapper-newStage">
-                    <ConfigForm type={codeData.codeType}/>
-                </div>
-            </div>
-            :
-            <div className="formView-wrapper-handle" onClick={()=>setCodeVisible(true)}>
-                添加代码源
             </div>
     }
 
-    return code()
+    return <>
+        { code(codeType) }
+
+        <ConfigCodeAddModal
+            codeVisible={codeVisible}
+            setCodeVisible={setCodeVisible}
+            setIsPrompt={setIsPrompt}
+            setCodeType={setCodeType}
+        />
+    </>
 }
 
 export default ConfigCode

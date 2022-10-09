@@ -43,7 +43,7 @@ const ConfigCodeOrNewStage = props =>{
             closable={false}
         >
             <div className="taskGroup" style={style}>
-                <div>选择任务组</div>
+                <div style={{fontWeight:600}}>选择任务组</div>
                 <div>
                     <Button onClick={()=>setVisible(false)} type="text">
                         <CloseOutlined/>
