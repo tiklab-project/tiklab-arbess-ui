@@ -8,6 +8,11 @@
             color: #1890ff;
         }
     }
+    &-state{
+        &-running{
+            padding: 10px;
+        }
+    }
     &-collect{
         margin: 0 10px;
         cursor: pointer;
@@ -21,6 +26,11 @@
         }
     }
     &-actions{
+        &-all{
+            display: flex;
+            justify-content: left;
+            flex-direction: row;
+        }
         &-menu{
           background: #f2f2f2;
           width: 100px;

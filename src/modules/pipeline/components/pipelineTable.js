@@ -121,8 +121,8 @@ const PipelineTable = props =>{
         },
         {
             title: "最近构建状态",
-            dataIndex: "structureStatus",
-            key: "structureStatus",
+            dataIndex: "buildStatus",
+            key: "buildStatus",
             render:text =>{
                 switch (text) {
                     case 30:
@@ -148,8 +148,8 @@ const PipelineTable = props =>{
         },
         {
             title: "最近构建时间",
-            dataIndex: "lastStructureTime",
-            key: "lastStructureTime",
+            dataIndex: "lastBuildTime",
+            key: "lastBuildTime",
         },
         {
             title: "最近成功时间",
@@ -158,8 +158,8 @@ const PipelineTable = props =>{
         },
         {
             title: "创建时间",
-            dataIndex: "lastSuccessTime",
-            key: "lastSuccessTime",
+            dataIndex: "createTime",
+            key: "createTime",
         },
         {
             title: "操作",
@@ -174,7 +174,9 @@ const PipelineTable = props =>{
                                 record.pipelineState === 0 ?
                                     <PlayCircleOutlined className="actions-se"/>
                                     :
-                                    <Running/>
+                                    <span className="pipelineTable-state-running">
+                                        <Running/>
+                                    </span>
                             }
                             </span>
                         </Tooltip>

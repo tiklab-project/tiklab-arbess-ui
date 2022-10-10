@@ -16,6 +16,7 @@ const Envi = props =>{
     const {findAllPipelineScm,deletePipelineScm,updatePipelineScm} = settingStore
 
     const [visible,setVisible] = useState(false)
+    const [fresh,setFresh] = useState(false)
     const [enviData,setEnviData] = useState([])
 
     // 初始化
@@ -25,18 +26,13 @@ const Envi = props =>{
                 setEnviData(res.data)
             }
         })
-    },[])
+    },[fresh])
 
     // 删除配置
     const deletePart = item => {
         deletePipelineScm(item.scmId).then(res=>{
             if(res.code===0){
-                for(let i=0 ;i<enviData.length;i++){
-                    if(enviData[i].scmType===item.scmType){
-                        enviData.splice(i,1)
-                    }
-                    setEnviData([...enviData])
-                }
+                setFresh(!fresh)
             }
         }).catch(error=>{
             console.log(error)

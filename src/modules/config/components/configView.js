@@ -5,6 +5,7 @@ import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "./formView/formView";
+import pipeline from "../../pipeline/container/pipeline";
 
 const ConfigView = props =>{
 
@@ -217,6 +218,7 @@ const ConfigView = props =>{
         })    
 
         const configureList = {
+            pipelineId:pipelineId,
             pipelineCode:{
                 codeId:formInitialValues && formInitialValues.codeId,
                 sort:codeType===""?0:1,
@@ -257,7 +259,7 @@ const ConfigView = props =>{
                 mappingPort:deployType===32?values.mappingPort:"",
                 deployOrder:deployType===32?docOrderShellBlock:virOrderShellBlock,
                 startShell:deployType===32?docStartShellBlock:values[deployType+"deployType"]===1?virStartShellBlock:virShellBlock
-            }
+            },
         }
         updateConfigure(configureList).then(res=>{
             setIsPrompt(false)
@@ -277,19 +279,19 @@ const ConfigView = props =>{
                 break
             case 21:
             case 22:
-                formInitialValues[buildType+"buildAddress"] = null
+                formInitialValues[(21&&22)+"buildAddress"] = null
                 setMavenShellBlock("")
                 setNodeShellBlock("")
                 break
             case 31:
             case 32:
-                formInitialValues[deployType+"proofName"] = null
-                formInitialValues[deployType+"sourceAddress"] = null
-                formInitialValues[deployType+"sshIp"] = null
-                formInitialValues[deployType+"sshPort"] = null
-                formInitialValues[deployType+"deployAddress"] = null
-                formInitialValues[deployType+"deployOrder"] = null
-                formInitialValues[deployType+"startAddress"] = null
+                formInitialValues[(31&&32)+"proofName"] = null
+                formInitialValues[(31&&32)+"sourceAddress"] = null
+                formInitialValues[31&&32+"sshIp"] = null
+                formInitialValues[(31&&32)+"sshPort"] = null
+                formInitialValues[(31&&32)+"deployAddress"] = null
+                formInitialValues[(31&&32)+"deployOrder"] = null
+                formInitialValues[(31&&32)+"startAddress"] = null
                 formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
                 setDeployProofId("")
@@ -300,9 +302,9 @@ const ConfigView = props =>{
                 setDocStartShellBlock("")
                 break
             default:
-                formInitialValues[codeType+"codeName"] = null
-                formInitialValues[codeType+"codeBranch"] = null
-                formInitialValues[codeType+"proofName"] = null
+                formInitialValues[(1&&2&&3&&4&&5)+"codeName"] = null
+                formInitialValues[(1&&2&&3&&4&&5)+"codeBranch"] = null
+                formInitialValues[(1&&2&&3&&4&&5)+"proofName"] = null
                 formInitialValues.proofName = null           
                 setCodeType("")
                 setGitProofId("")

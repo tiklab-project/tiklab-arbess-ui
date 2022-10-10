@@ -17,23 +17,25 @@ const ChangeConfigSortsModal = props =>{
     
     const codeTitle = codeType => {
         let desc
-        switch (codeType) {
-            case 1:desc = "通用Git"
-                break
-            case 2:desc = "Gitee"
-                break
-            case 3:desc = "Github"
-                break
-            case 4:desc = "Gitlab"
-                break
-            case 5:desc = "SVN"
+        if(codeType){
+            switch (codeType) {
+                case 1:desc = "通用Git"
+                    break
+                case 2:desc = "Gitee"
+                    break
+                case 3:desc = "Github"
+                    break
+                case 4:desc = "Gitlab"
+                    break
+                case 5:desc = "SVN"
+            }
+            nameArray.push({
+                key:0,
+                title: "源码管理" + "--" + desc,
+                disabled: true,
+                step:"源码管理"
+            })
         }
-        nameArray.push({
-            key:0,
-            title: "源码管理" + "--" + desc,
-            disabled: true,
-            step:"源码管理"
-        })
     }
     
     const dataTile = data => {

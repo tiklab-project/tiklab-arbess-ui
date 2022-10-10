@@ -57,8 +57,8 @@ const ConfigDetails = props =>{
     if(visible){return  null}
 
     return (
-        <div className="home-limited">
-            <div className="config-top home-limited">
+        <div className="home-limited config">
+            <div className="config-top top-limited">
                 <ConfigTop
                     userId={userId}
                     view={view}

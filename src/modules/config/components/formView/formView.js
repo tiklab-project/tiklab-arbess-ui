@@ -8,7 +8,6 @@ import ConfigCode from "./configCode";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 import ConfigSwitch from "./configSwitch";
-import Forms from "../configForm/forms";
 
 const formView = props =>{
 
@@ -28,7 +27,6 @@ const formView = props =>{
 
     // 删除部分构建配置
     const deletePart = group =>{
-        console.log(group)
         del(group.dataType)
         for (let i = 0 ;i<data.length;i++){
             if(data[i].dataType === group.dataType){
@@ -58,7 +56,6 @@ const formView = props =>{
     }
 
     const newStage = data =>{
-
         return data && data.map((group,index)=>{
             return  <div className="formView-wrapper" key={index} >
                         <div className="formView-wrapper-Headline">

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import {PrivilegeButton} from "tiklab-privilege-ui";
 import {Dropdown} from "antd";
-import {CaretDownOutlined,SettingOutlined} from "@ant-design/icons";
+import {CaretDownOutlined,SettingOutlined,TagOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 
 const ProjectAside = props =>{
@@ -122,7 +122,7 @@ const ProjectAside = props =>{
                                      className={`opt-content-group_item ${item.pipelineId===pipelineId ? "opt-content-active" : ""}`}
                                 >
                                     <span className="opt-content-group-icon">
-                                        <SettingOutlined/>
+                                        <TagOutlined />
                                     </span>
                                     <span className="opt-content-group-name">
                                         {item.pipelineName}
@@ -180,7 +180,7 @@ const ProjectAside = props =>{
                 </Dropdown>
                 { renderTaskRouter(firstRouters) }
                 <PrivilegeButton code={"DD"} {...props}>
-                    <Dropdown overlay={secondMenu} trigger={["click"]}>
+                    <Dropdown overlay={secondMenu}>
                         <li
                             onClick={(e)=>e.preventDefault()}
                             className={`aside_content aside_item ${path.indexOf(`/index/task/${pipelineName}/assembly`) === 0 ? "aside_active": ""}`}

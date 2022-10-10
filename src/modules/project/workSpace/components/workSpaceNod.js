@@ -83,7 +83,7 @@ const WorkSpaceNod = props =>{
     }
 
     return(
-        <div className="workSpace-content-nod">
+        <div className="workSpace-content-nod workSpace-div">
             <div className="workSpace-title">源文件</div>
             <div className="workSpace-text">
                 <div className="workSpace-content-nod-catalogue">
@@ -100,11 +100,12 @@ const WorkSpaceNod = props =>{
                         isFileList ?
                             renderFileList(fileList)
                             :
-                            <svg className="icon" aria-hidden="true" >
-                                <use xlinkHref="#icon-meiyouxiangguan"/>
-                            </svg>
+                            <div className="workSpace-content-icon">
+                                <svg className="icon" aria-hidden="true" >
+                                    <use xlinkHref="#icon-meiyouxiangguan"/>
+                                </svg>
+                            </div>
                     }
-                    {/*{renderFileList(fileList)}*/}
                 </div>
             </div>
 

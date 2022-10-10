@@ -7,6 +7,7 @@
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
+        justify-content: space-between;
         &-group{
             width: 300px;
             min-width: 100px;
@@ -15,7 +16,8 @@
             text-align: center;
             border: 1px solid #cccccc;
             margin-right: 10px;
-            box-shadow: 3px 3px 8px 3px #5d70ea;
+            box-shadow: 3px 3px 8px 3px #ccc;
+            //box-shadow: 3px 3px 8px 3px #5d70ea;
             border-radius: 8px;
             cursor: pointer;
             &-wrap{

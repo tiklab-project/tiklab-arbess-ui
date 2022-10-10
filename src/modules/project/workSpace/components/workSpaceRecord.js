@@ -36,15 +36,17 @@ const WorkSpaceRecord = props =>{
     }
 
     return(
-        <div className="workSpace-content-record">
+        <div className="workSpace-content-record workSpace-div">
             <div className="workSpace-title">提交记录</div>
             <div className="workSpace-text">
                 {
                     recordList && recordList.length > 0 ?
                         renderRecordList(recordList):
-                        <svg className="icon" aria-hidden="true" >
-                            <use xlinkHref="#icon-meiyouxiangguan"/>
-                        </svg>
+                        <div className="workSpace-content-icon">
+                            <svg className="icon" aria-hidden="true" >
+                                <use xlinkHref="#icon-meiyouxiangguan"/>
+                            </svg>
+                        </div>
                 }
                 <div className="workSpace-content-null"/>
             </div>

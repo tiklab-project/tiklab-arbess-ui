@@ -1,4 +1,10 @@
 .config{
+    border: 1px solid #ccc;
+    height: 100vh;
+    .top-limited{
+        max-width: 1278px;
+        margin: auto;
+    }
     &-top{
         position: fixed;
         z-index: 88;

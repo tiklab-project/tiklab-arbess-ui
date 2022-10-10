@@ -32,17 +32,17 @@ export class SettingStore {
     @action
     deletePipelineScm = async value=>{
         const param = new FormData()
-        param.append("ScmId",value)
+        param.append("scmId",value)
         return await DeletePipelineScm(param)
     }
 
     @action
     updatePipelineScm = async values=>{
         const params = {
-            ScmId:values.ScmId,
-            ScmType:values.ScmType,
-            ScmName:values.ScmName,
-            ScmAddress:values.ScmAddress,
+            scmId:values.scmId,
+            scmType:values.scmType,
+            scmName:values.scmName,
+            scmAddress:values.scmAddress,
         }
         return await UpdatePipelineScm(params)
     }

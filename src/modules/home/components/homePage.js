@@ -107,13 +107,18 @@ const HomePage = props =>{
 
     return(
         <div className="homePage home-limited">
-            <QuickIn
-                {...props}
-                pipelineList={pipelineList}
-                followList={followList}
-            />
+            {/*<QuickIn*/}
+            {/*    {...props}*/}
+            {/*    pipelineList={pipelineList}*/}
+            {/*    followList={followList}*/}
+            {/*/>*/}
             <div className="homePage-content">
                 <div className="homePage-content-left">
+                    <QuickIn
+                        {...props}
+                        pipelineList={pipelineList}
+                        followList={followList}
+                    />
                     <PipelineNear {...props} pipelineNearList={pipelineNearList}/>
                     <DynamicList
                         {...props}

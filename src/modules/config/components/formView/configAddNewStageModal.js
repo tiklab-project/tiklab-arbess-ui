@@ -72,7 +72,6 @@ const ConfigAddNewStageModal = props =>{
         }
         newData.push({
             dataId:index,
-            title:group.title,
             dataType:item.type
         })
         setData(newData)

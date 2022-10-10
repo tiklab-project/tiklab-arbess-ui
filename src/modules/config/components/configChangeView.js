@@ -16,9 +16,7 @@ const ConfigChangeView = props =>{
     const configView = localStorage.getItem("configView")
 
     useEffect(()=>{
-        if(configView){
-            setView(configView)
-        }
+        if(configView){setView(configView)}
     },[configView])
 
     const run = () => {
