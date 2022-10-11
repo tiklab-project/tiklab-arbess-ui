@@ -13,9 +13,9 @@ import {
 
 export class PipelineStore {
 
-    @observable pipelineList=[]
-    @observable followList=[]
-    @observable searchPipelineList = []
+    @observable pipelineList = []
+    @observable pipelineLength = ""
+    @observable followLength = ""
     @observable lastPath = ""
     @observable pipelineId = ""
     @observable pipelineName = ""
@@ -50,6 +50,7 @@ export class PipelineStore {
                 console.log(res)
                 if(res.code===0 && res.data){
                     this.pipelineList=res.data
+                    this.pipelineLength=res.data && res.data.length
                 }
                 resolve(res)
             }).catch(error=>{
@@ -88,7 +89,7 @@ export class PipelineStore {
             FindLike(params).then(res=>{
                 console.log(res)
                 if(res.code===0 && res.data){
-                    this.searchPipelineList=res.data
+                    this.pipelineList=res.data
                 }
                 resolve(res)
             }).catch(error=>{
@@ -139,7 +140,8 @@ export class PipelineStore {
         FindAllFollow(param).then(res=>{
             console.log(res)
             if(res.code===0){
-                this.followList=res.data
+                this.pipelineList=res.data
+                this.followLength=res.data && res.data.length
             }
         }).catch(error=>{
             console.log(error)

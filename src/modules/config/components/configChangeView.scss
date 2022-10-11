@@ -2,7 +2,7 @@
      padding-right: 15px;
     .changeView{
         display: flex;
-        &-btn{
+        &-btn,&-changeSort{
             margin-top: 2px;
             &>button{
                 &:last-child{
@@ -38,6 +38,23 @@
                 height: 30px;
                 margin-top: -3px;
                 padding: 8px 10px;
+            }
+        }
+    }
+}
+
+.changeSorts-tree{
+    .ant-tree{
+        .ant-tree-list{
+            .ant-tree-node-content-wrapper{
+                height: 30px;
+                line-height: 30px;
+                &:hover{
+                    background: #e3e8f0;
+                }
+            }
+            .ant-tree-node-selected{
+                background: #e3e8f0;
             }
         }
     }

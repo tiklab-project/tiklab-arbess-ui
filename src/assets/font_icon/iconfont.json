@@ -6,67 +6,116 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "1133262",
-      "name": "星号",
-      "font_class": "xinghao",
-      "unicode": "e64c",
-      "unicode_decimal": 58956
+      "icon_id": "703294",
+      "name": "panorama-vertical",
+      "font_class": "panoramavertical",
+      "unicode": "e9ce",
+      "unicode_decimal": 59854
     },
     {
-      "icon_id": "18368079",
-      "name": "星号",
-      "font_class": "xinghao1",
-      "unicode": "e68b",
-      "unicode_decimal": 59019
+      "icon_id": "742135",
+      "name": "虚拟机",
+      "font_class": "xuniji",
+      "unicode": "ea6b",
+      "unicode_decimal": 60011
     },
     {
-      "icon_id": "689212",
-      "name": "表单 页面",
-      "font_class": "biaodanyemian",
-      "unicode": "e7cc",
-      "unicode_decimal": 59340
+      "icon_id": "3876424",
+      "name": "docker",
+      "font_class": "docker",
+      "unicode": "e659",
+      "unicode_decimal": 58969
     },
     {
-      "icon_id": "16930084",
-      "name": "列表表单",
-      "font_class": "liebiaobiaodan",
-      "unicode": "e616",
-      "unicode_decimal": 58902
+      "icon_id": "13303942",
+      "name": "nodejs",
+      "font_class": "nodejs",
+      "unicode": "e683",
+      "unicode_decimal": 59011
     },
     {
-      "icon_id": "445237",
-      "name": "退出",
-      "font_class": "tuichu",
-      "unicode": "e67b",
-      "unicode_decimal": 59003
+      "icon_id": "16204159",
+      "name": "测试",
+      "font_class": "ceshi",
+      "unicode": "ea26",
+      "unicode_decimal": 59942
     },
     {
-      "icon_id": "1799681",
-      "name": "空内容",
-      "font_class": "kongneirong",
-      "unicode": "e660",
-      "unicode_decimal": 58976
+      "icon_id": "8225386",
+      "name": "系统权限",
+      "font_class": "xitongquanxian",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
     },
     {
-      "icon_id": "4437602",
-      "name": "退出",
-      "font_class": "tuichu1",
-      "unicode": "e614",
-      "unicode_decimal": 58900
+      "icon_id": "14473529",
+      "name": "权限",
+      "font_class": "quanxian",
+      "unicode": "e667",
+      "unicode_decimal": 58983
     },
     {
-      "icon_id": "7408314",
-      "name": "管理",
-      "font_class": "guanli",
-      "unicode": "e63d",
-      "unicode_decimal": 58941
+      "icon_id": "18533070",
+      "name": "权限",
+      "font_class": "quanxian1",
+      "unicode": "e606",
+      "unicode_decimal": 58886
     },
     {
-      "icon_id": "22325355",
-      "name": "分类管理",
-      "font_class": "fenleiguanli",
-      "unicode": "e60f",
-      "unicode_decimal": 58895
+      "icon_id": "128958",
+      "name": "git",
+      "font_class": "git",
+      "unicode": "e799",
+      "unicode_decimal": 59289
+    },
+    {
+      "icon_id": "7239764",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e732",
+      "unicode_decimal": 59186
+    },
+    {
+      "icon_id": "9053598",
+      "name": "gitlab-fill",
+      "font_class": "gitlab-fill",
+      "unicode": "e768",
+      "unicode_decimal": 59240
+    },
+    {
+      "icon_id": "11983543",
+      "name": "github",
+      "font_class": "github1",
+      "unicode": "ea0b",
+      "unicode_decimal": 59915
+    },
+    {
+      "icon_id": "13303504",
+      "name": "gitlab",
+      "font_class": "gitlab",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "13743932",
+      "name": "gitee-fill-round",
+      "font_class": "gitee-fill-round",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "25512454",
+      "name": "-_ssh",
+      "font_class": "-_ssh",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "26267572",
+      "name": "gitee",
+      "font_class": "gitee",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
     },
     {
       "icon_id": "4066480",
@@ -186,13 +235,6 @@
       "font_class": "xingxing-kong",
       "unicode": "e649",
       "unicode_decimal": 58953
-    },
-    {
-      "icon_id": "23652374",
-      "name": "运行失败",
-      "font_class": "yunhangshibai3",
-      "unicode": "e690",
-      "unicode_decimal": 59024
     }
   ]
 }

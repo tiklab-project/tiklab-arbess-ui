@@ -26,7 +26,7 @@ const AddProofButton = props =>{
     }
 
     return (
-        <div className="config-details-link">
+        <>
             <Button type={style} onClick={()=>addProofVisible()}>
                 添加
             </Button>
@@ -43,7 +43,7 @@ const AddProofButton = props =>{
                 pipelineList={pipelineList}
                 pipelineId={pipelineId}
             />
-        </div>
+        </>
     )
 }
 

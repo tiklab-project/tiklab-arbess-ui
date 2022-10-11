@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3197798 */
-  src: url('iconfont.woff2?t=1658209166583') format('woff2'),
-       url('iconfont.woff?t=1658209166583') format('woff'),
-       url('iconfont.ttf?t=1658209166583') format('truetype');
+  src: url('iconfont.woff2?t=1665478907383') format('woff2'),
+       url('iconfont.woff?t=1665478907383') format('woff'),
+       url('iconfont.ttf?t=1665478907383') format('truetype');
 }
 
 .iconfont {
@@ -13,40 +13,68 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-xinghao:before {
-  content: "\e64c";
+.icon-panoramavertical:before {
+  content: "\e9ce";
 }
 
-.icon-xinghao1:before {
-  content: "\e68b";
+.icon-xuniji:before {
+  content: "\ea6b";
 }
 
-.icon-biaodanyemian:before {
-  content: "\e7cc";
+.icon-docker:before {
+  content: "\e659";
 }
 
-.icon-liebiaobiaodan:before {
-  content: "\e616";
+.icon-nodejs:before {
+  content: "\e683";
 }
 
-.icon-tuichu:before {
-  content: "\e67b";
+.icon-ceshi:before {
+  content: "\ea26";
 }
 
-.icon-kongneirong:before {
-  content: "\e660";
+.icon-xitongquanxian:before {
+  content: "\e61d";
 }
 
-.icon-tuichu1:before {
-  content: "\e614";
+.icon-quanxian:before {
+  content: "\e667";
 }
 
-.icon-guanli:before {
-  content: "\e63d";
+.icon-quanxian1:before {
+  content: "\e606";
 }
 
-.icon-fenleiguanli:before {
-  content: "\e60f";
+.icon-git:before {
+  content: "\e799";
+}
+
+.icon-github:before {
+  content: "\e732";
+}
+
+.icon-gitlab-fill:before {
+  content: "\e768";
+}
+
+.icon-github1:before {
+  content: "\ea0b";
+}
+
+.icon-gitlab:before {
+  content: "\e65c";
+}
+
+.icon-gitee-fill-round:before {
+  content: "\e686";
+}
+
+.icon--_ssh:before {
+  content: "\e636";
+}
+
+.icon-gitee:before {
+  content: "\e60c";
 }
 
 .icon-gongzuotongji:before {
@@ -115,9 +143,5 @@
 
 .icon-xingxing-kong:before {
   content: "\e649";
-}
-
-.icon-yunhangshibai3:before {
-  content: "\e690";
 }
 

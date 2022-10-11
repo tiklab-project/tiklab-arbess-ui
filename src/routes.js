@@ -15,10 +15,6 @@ const DynamicDetails=AsyncComponent(()=>import("./modules/home/components/dynami
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
-const SearchResult=AsyncComponent(()=>import("./modules/pipeline/components/searchResult"))
-
-/* 流水线 -- 收藏 */
-const PipelineCollect=AsyncComponent(()=>import("./modules/pipeline/components/pipelineCollect"))
 
 const Project=AsyncComponent(()=>import("./modules/project/common/container/project"))
 
@@ -101,17 +97,7 @@ const routers=[
                 exact: true,
             },
             {
-                path:"/index/collect",
-                component:PipelineCollect,
-                exact:true,
-            },
-            {
-                path:"/index/searchresult/:searchresult",
-                component:SearchResult,
-                exact:true,
-            },
-            {
-                path:"/index/userMessageContent",
+                path:"/index/userMessage",
                 component: UserMessageContent,
             },
             {

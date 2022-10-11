@@ -53,7 +53,7 @@ const WorkSpace = props =>{
                 <BreadcrumbContent
                     config={"config"}
                     firstItem={pipelineName}
-                    secondItem={"工作空间"}
+                    secondItem={"概况"}
                 />
             </div>
             <div className="workSpace-content">

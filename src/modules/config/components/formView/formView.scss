@@ -43,34 +43,17 @@
                 border: 1px solid #1890ff;
             }
         }
+        &-forms{
+
+        }
         .desc{
             &-title{
-                padding-right: 5px;
+                padding-left: 5px;
             }
             &-delete{
                 &:hover{
                     color: #ff0000;
                 }
-            }
-            &-name{
-                padding: 15px 0;
-            }
-        }
-    }
-}
-
-.changeSorts-tree{
-    .ant-tree{
-        .ant-tree-list{
-            .ant-tree-node-content-wrapper{
-                height: 30px;
-                line-height: 30px;
-                &:hover{
-                    background: #e3e8f0;
-                }
-            }
-            .ant-tree-node-selected{
-                background: #e3e8f0;
             }
         }
     }

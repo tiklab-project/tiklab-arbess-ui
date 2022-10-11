@@ -12,7 +12,7 @@ const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
     const {findAllOpen,pipelineNearList,runState,findUserAction,dynamicList} = homePageStore
-    const {findAllFollow,findAllPipelineStatus,pipelineList,followList} = pipelineStore
+    const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength} = pipelineStore
 
     const userId = getUser().userId
 
@@ -116,8 +116,8 @@ const HomePage = props =>{
                 <div className="homePage-content-left">
                     <QuickIn
                         {...props}
-                        pipelineList={pipelineList}
-                        followList={followList}
+                        pipelineLength={pipelineLength}
+                        followLength={followLength}
                     />
                     <PipelineNear {...props} pipelineNearList={pipelineNearList}/>
                     <DynamicList

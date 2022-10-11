@@ -1,11 +1,11 @@
 import React,{useState} from "react";
 import "../components/proof.scss";
-import {Popconfirm} from "antd";
-import AddProofButton from "../components/addProofButton";
+import {Popconfirm,Input,Row,Col,Select} from "antd";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import UpdateProof from "../components/updateProof";
 import {inject,observer} from "mobx-react";
 import Tables from "../../../common/tables/tables";
+import ProofSwitch from "../components/proofSwitch";
 
 const Proof = props =>{
 
@@ -78,7 +78,7 @@ const Proof = props =>{
                 return(
                     <span className="proof-content-action">
                         <span className="edit" onClick={()=>edit(text,record)}>
-                            编辑
+                            修改
                         </span>
                          <Popconfirm
                              style={{marginTop:100}}
@@ -95,7 +95,9 @@ const Proof = props =>{
         }
     ]
 
-    const style = "primary"
+    const inputChangeValue = value =>{
+        // console.log(value)
+    }
 
     return(
         <div className="proof home-limited">
@@ -106,9 +108,9 @@ const Proof = props =>{
                     <BreadcrumbContent firstItem={"凭证设置"}/>
             }
             <div className="proof-content">
-                <div className="proof-content-btn">
-                    <AddProofButton style={style} pipelineList={pipelineList}/>
-                </div>
+                <ProofSwitch
+                    pipelineList={pipelineList}
+                />
                 <Tables
                     columns={columns}
                     dataSource={proofList}

@@ -13,10 +13,10 @@ import PipelineRenameModal from "./pipelineRenameModal";
 
 const PipelineTable = props =>{
 
-    const {structureStore,type,pipelineStore}=props
+    const {structureStore,pipelineStore}=props
 
     const {pipelineStartStructure,killInstance}=structureStore
-    const {pipelineList,followList,updateFollow,updatePipeline,fresh,setFresh,deletePipeline} = pipelineStore
+    const {pipelineList,updateFollow,updatePipeline,fresh,setFresh,deletePipeline} = pipelineStore
 
     const [renameVisible,setRenameVisible] = useState(false)
     const [pipelineId,setPipelineId] = useState("")
@@ -221,7 +221,7 @@ const PipelineTable = props =>{
     return  <>
                 <Tables
                     columns={columns}
-                    dataSource={type===1 ? pipelineList:followList}
+                    dataSource={pipelineList}
                     rowKey={record=>record.pipelineId}
                 />
                 <PipelineRenameModal

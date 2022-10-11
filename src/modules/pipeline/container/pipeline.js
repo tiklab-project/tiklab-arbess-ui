@@ -14,14 +14,19 @@ const Pipeline = props =>{
 
     const {pipelineStore} = props
 
-    const {pipelineList,followList,fresh,findAllPipelineStatus,findAllFollow,createPipeline} = pipelineStore
+    const {pipelineList,fresh,findAllPipelineStatus,findAllFollow,createPipeline,findLike
+    } = pipelineStore
 
     const [type,setType] = useState(1)
     const [addPipelineVisible,setAddPipelineVisible] = useState(false)
     const userId = getUser().userId
 
-    const onSearch = value =>{
-        props.history.push(`/index/searchresult/${value}`)
+    const onChangeSearch = e =>{
+        const params = {
+            userId: getUser().userId,
+            pipelineName:e.target.value,
+        }
+        findLike(params)
     }
 
     useEffect(()=>{
@@ -37,12 +42,10 @@ const Pipeline = props =>{
         {
             id:1,
             title:"所有",
-            list:pipelineList,
         },
         {
             id:2,
             title:"收藏",
-            list: followList,
         }
     ]
 
@@ -74,7 +77,12 @@ const Pipeline = props =>{
                     }
                 </div>
                 <div className="pipeline-type-input">
-                    <Search placeholder="请输入流水线"  onSearch={onSearch} style={{ width: 280 }} />
+                    <Search
+                        placeholder="请输入流水线"
+                        // onChange={onChangeSearch}
+                        onSearch={onChangeSearch}
+                        style={{ width: 280 }}
+                    />
                 </div>
             </div>
             <PipelineTable

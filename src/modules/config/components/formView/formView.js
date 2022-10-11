@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from "react";
 import  "./formView.scss";
-import {Button,Form,Popconfirm} from "antd";
+import {Form,Popconfirm} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
-import ChangeConfigSortsModal from "./changeConfigSortsModal";
 import ConfigAddNewStage from "./configAddNewStage";
 import ConfigCode from "./configCode";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 import ConfigSwitch from "./configSwitch";
+import Forms from "../configForm/forms";
 
 const formView = props =>{
 
@@ -19,7 +19,6 @@ const formView = props =>{
 
     const [newStageVisible, setNewStageVisible] = useState(false)
     const [codeVisible, setCodeVisible] = useState(false)
-    const [changeSortVisible, setChangeSortVisible] = useState(false)
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
@@ -60,9 +59,6 @@ const formView = props =>{
             return  <div className="formView-wrapper" key={index} >
                         <div className="formView-wrapper-Headline">
                             <div className="desc">
-                                 <span className="desc-title">
-                                        {renderTitle(group.dataType)}
-                                    </span>
                                 <span className="desc-delete">
                                     <Popconfirm
                                         title="当前项的所有数据会被清空"
@@ -73,10 +69,14 @@ const formView = props =>{
                                         <DeleteOutlined />
                                     </Popconfirm>
                                 </span>
+                                <span className="desc-title">
+                                    {renderTitle(group.dataType)}
+                                </span>
                             </div>
                         </div>
-                        <div className="desc-name">
-                            <ConfigSwitch type={group.dataType}/>
+                        <ConfigSwitch type={group.dataType}/>
+                        <div className="formView-wrapper-forms">
+                            <Forms type={group.dataType}/>
                         </div>
                     </div>
         })
@@ -85,9 +85,6 @@ const formView = props =>{
     return(
         <div className="formView">
             <div className="formView-content">
-                <div className="formView-content-changSort">
-                    <Button onClick={()=>setChangeSortVisible(true)}>更改配置顺序</Button>
-                </div>
                 <Form
                     id="form"
                     form={form}
@@ -99,9 +96,9 @@ const formView = props =>{
                 >
                     <ConfigCode
                         codeType={codeType}
-                        setCodeVisible={setCodeVisible}
                         setCodeType={setCodeType}
                         codeVisible={codeVisible}
+                        setCodeVisible={setCodeVisible}
                         setIsPrompt={setIsPrompt}
                         del={del}
                     />
@@ -119,21 +116,7 @@ const formView = props =>{
                             />
                             :null
                     }
-
-                    <div style={{marginTop:20}}>
-                        <Button form="form" htmlType="submit" type="primary">保存</Button>
-                    </div>
                 </Form>
-
-                <ChangeConfigSortsModal
-                    changeSortVisible={changeSortVisible}
-                    setChangeSortVisible={setChangeSortVisible}
-                    data={data}
-                    setData={setData}
-                    codeType={codeType}
-                    setIsPrompt={setIsPrompt}
-                />
-
             </div>
         </div>
     )

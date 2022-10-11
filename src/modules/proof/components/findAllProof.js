@@ -1,7 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
-import {Form,Select} from "antd";
+import {Form,Select,Divider} from "antd";
+import AddProofButton from "./addProofButton";
 
 const {Option} = Select
 
@@ -12,6 +13,8 @@ const FindAllProof = props =>{
     const {findPipelineProof,proofList} = proofStore
     const {pipelineId} = pipelineStore
     const {setGitProofId,setDeployProofId} = configDataStore
+
+    const [open, setOpen] = useState(false)
 
     const userId = getUser().userId
 
@@ -30,6 +33,23 @@ const FindAllProof = props =>{
             userId:userId
         }
         findPipelineProof(params)
+    }
+
+    const selectDropdownRender = (menu,type) => {
+        if(type===2||type===3){
+            return null
+        }else {
+            return <>
+                <Divider style={{ margin: '4px 0' }} />
+                <div
+                    style={{ padding:"4px 8px",cursor: "pointer",textAlign:"right" }}
+                    onClick={() => {
+                        setOpen(false)
+                    }}                            >
+                    <AddProofButton type={type}/>
+                </div>
+            </>
+        }
     }
 
     const changeGitSelect = (value,e) =>{
@@ -52,6 +72,14 @@ const FindAllProof = props =>{
                     onClick={clickFindAllGit}
                     onChange={(value,e)=>changeGitSelect(value,e)}
                     placeholder="请选择凭证"
+                    open={open}
+                    onDropdownVisibleChange={(visible) => setOpen(visible)}
+                    dropdownRender={menu=> (
+                        <>
+                            {menu}
+                            {selectDropdownRender(menu,type)}
+                        </>
+                    )}
             >
                 {
                     proofList && proofList.map(item=>{

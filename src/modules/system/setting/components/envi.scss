@@ -2,50 +2,24 @@
     &-content{
         width: 95%;
         margin: auto;
-    }
-    &-item{
-        margin: 20px 0;
-        &-Headline{
+        &-action{
+            .del{
+                color:#ff0000;
+                cursor: pointer;
+            }
+            .edit{
+                padding-right: 10px;
+                color: #1890ff;
+                cursor: pointer;
+            }
+        }
+        &-switch{
+            padding-bottom: 15px;
+        }
+        &-btn{
             display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #cccccc;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 15px;
+            justify-content: flex-end;
         }
     }
 }
 
-.enviModal{
-    border: 1px solid #C4C4C4;
-    &-title{
-        font-weight: 700;
-        font-size: 16px;
-        padding: 5px 0 0 5px;
-    }
-    &-group{
-        max-height: 500px;
-        overflow: auto;
-        padding: 10px;
-        &_list{
-            margin-bottom: 5px;
-            height: 40px;
-            line-height: 40px;
-            padding: 0 20px;
-        }
-    }
-    &-item{
-        display: flex;
-        justify-content: space-between;
-    }
-    .isGray{
-        background: #f4f4f4;
-    }
-    .notGray{
-        cursor: pointer;
-        &:hover{
-            background: #e3e8f0;
-        }
-    }
-
-}

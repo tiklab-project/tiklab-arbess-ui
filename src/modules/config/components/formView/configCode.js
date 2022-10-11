@@ -2,6 +2,7 @@ import React from "react";
 import {Popconfirm} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import ConfigSwitch from "./configSwitch";
+import Forms from "../configForm/forms"
 import ConfigCodeAddModal from "./configCodeAddModal";
 
 const ConfigCode = props =>{
@@ -13,6 +14,31 @@ const ConfigCode = props =>{
         setCodeType("")
     }
 
+    const changeGit = item =>{
+        setCodeType(item.id)
+    }
+
+    const renderGitList = gitList =>{
+        return gitList.map(item=>{
+            return(
+                <div className={`configCode-gitList-item ${codeType==item.id?"configCode-gitList-selected":""}`}
+                     onClick={()=>changeGit(item)}
+                     key={item.id}
+                >
+                    <span className="configCode-gitList-item-icon">
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref={`#icon-${item.icon}`} />
+                        </svg>
+                    </span>
+                    <span className="configCode-gitList-item-title">
+                        {item.title}
+                    </span>
+                </div>
+            )
+        })
+    }
+
+
     const code = codeType => {
         return  codeType ==="" ?
             <div className="formView-wrapper-handle code-handle" onClick={()=>setCodeVisible(true)}>
@@ -22,9 +48,6 @@ const ConfigCode = props =>{
             <div className="formView-wrapper">
                 <div className="formView-wrapper-Headline">
                     <div className="desc">
-                        <span className="desc-title">
-                            源码管理
-                        </span>
                         <span className="desc-delete">
                             <Popconfirm
                                 title="当前项的所有数据会被清空"
@@ -35,10 +58,14 @@ const ConfigCode = props =>{
                                 <DeleteOutlined />
                             </Popconfirm>
                         </span>
+                        <span className="desc-title">
+                            源码管理
+                        </span>
                     </div>
                 </div>
-                <div className="desc-name">
-                    <ConfigSwitch type={codeType}/>
+                <ConfigSwitch type={codeType}/>
+                <div className="formView-wrapper-forms">
+                    <Forms type={codeType}/>
                 </div>
             </div>
     }

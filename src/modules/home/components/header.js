@@ -3,7 +3,7 @@ import {Avatar,Dropdown,Menu} from "antd";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
-import {GlobalOutlined,MessageOutlined,SettingOutlined} from "@ant-design/icons";
+import {GlobalOutlined,MessageOutlined,SettingOutlined,LogoutOutlined,UserOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import logo from "../../../assets/images/all/pipeline.png"
 import portrait from "../../../assets/images/portrait.jpg";
@@ -80,32 +80,30 @@ const Head = props =>{
     
     const outMenu = (
         <Menu>
-            <Menu.Item key="0">
-                {getUser().name}
-            </Menu.Item>
             <Menu.Item key="1" onClick={()=>goOut()}>
+                <LogoutOutlined />
                 退出
-                <svg className="icon" aria-hidden="true" style={{width:20,height:20}}>
-                    <use xlinkHref="#icon-tuichu1"/>
-                </svg>
             </Menu.Item>
         </Menu>
     )
-    
+
     const setMenu = (
         <Menu>
-            <Menu.Item
-                // onClick={()=>window.open(authUrl+"#/orga/dashbord")}
-            >
-                <a href={authUrl+"#/orga/dashbord"}>账号与成员</a>
-                {/*账号与成员*/}
+            <Menu.Item>
+                <a href={authUrl+"#/orga/dashbord"}>
+                    <UserOutlined />
+                    账号与成员
+                </a>
             </Menu.Item>
-            <Menu.Item onClick={()=>props.history.push("/index/system")}>系统设置</Menu.Item>
+            <Menu.Item onClick={()=>props.history.push("/index/system")}>
+                <SettingOutlined/>
+                系统设置
+            </Menu.Item>
         </Menu>
     )
 
     const goUserMessageContent = () =>{
-        props.history.push("/index/userMessageContent")
+        props.history.push("/index/userMessage")
     }
 
     return(

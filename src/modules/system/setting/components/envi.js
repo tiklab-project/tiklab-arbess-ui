@@ -1,10 +1,11 @@
 import React,{useState,useEffect} from "react";
-import {Button,Form,Input,Popconfirm,message} from "antd";
-import {CloseOutlined} from "@ant-design/icons";
+import {Button,Popconfirm,Row,Col} from "antd";
 import {inject,observer} from "mobx-react";
 import EnviModal from "./enviModal";
 import "./envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import Tables from "../../../../common/tables/tables";
+import EnviSwitch from "./enviSwitch";
 
 /*
     系统环境配置
@@ -18,6 +19,7 @@ const Envi = props =>{
     const [visible,setVisible] = useState(false)
     const [fresh,setFresh] = useState(false)
     const [enviData,setEnviData] = useState([])
+    const [formValue,setFormValue] = useState("")
 
     // 初始化
     useEffect(()=>{
@@ -28,9 +30,14 @@ const Envi = props =>{
         })
     },[fresh])
 
+    const add = () =>{
+        setFormValue("")
+        setVisible(true)
+    }
+
     // 删除配置
-    const deletePart = item => {
-        deletePipelineScm(item.scmId).then(res=>{
+    const deletePart = (text,record) => {
+        deletePipelineScm(record.scmId).then(res=>{
             if(res.code===0){
                 setFresh(!fresh)
             }
@@ -39,22 +46,52 @@ const Envi = props =>{
         })
     }
 
-    // 保存以及更新
-    const onFinish = (values,item)=> {
-        const params = {
-            scmId:item.scmId,
-            scmType:item.scmType,
-            scmName:values.scmName,
-            scmAddress:values.scmAddress,
-        }
-        updatePipelineScm(params).then(res=>{
-            if(res.code===0){
-                message.success({content:"保存成功",className:"message"})
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+    const edit = (text,record) => {
+        setFormValue(record)
+        setVisible(true)
     }
+
+    const columns = [
+        {
+            title:"类型",
+            dataIndex:"scmType",
+            key:"scmType",
+            render:text => scmTitle(text)
+        },
+        {
+            title:"名称",
+            dataIndex:"scmName",
+            key:"scmName"
+        },
+        {
+            title:"地址",
+            dataIndex:"scmAddress",
+            key:"scmAddress"
+        },
+        {
+            title:  "操作",
+            dataIndex:"action",
+            key:"action",
+            render:(text,record)=>{
+                return(
+                    <span className="envi-content-action">
+                        <span className="edit" onClick={()=>edit(text,record)}>
+                            修改
+                        </span>
+                         <Popconfirm
+                             style={{marginTop:100}}
+                             title="你确定删除吗"
+                             onConfirm={()=>deletePart(text,record)}
+                             okText="确定"
+                             cancelText="取消"
+                         >
+                             <span className="del">删除</span>
+                         </Popconfirm>
+                    </span>
+                )
+            }
+        }
+    ]
 
     const scmTitle = ScmType => {
         switch (ScmType) {
@@ -65,62 +102,29 @@ const Envi = props =>{
         }
     }
 
-    // 渲染环境配置
-    const renderEnviData = enviData => {
-        return enviData && enviData.map(item=>{
-            return  <div key={item.scmType} className="envi-item">
-                        <div className="envi-item-Headline">
-                            <div className="envi-item-title">
-                                {scmTitle(item.scmType)}
-                            </div>
-                            <div className="envi-item-delete">
-                                <Popconfirm
-                                    title="当前项数据会被清空"
-                                    onConfirm={()=>deletePart(item)}
-                                    okText="确定"
-                                    cancelText="取消"
-                                >
-                                    <Button type="text"><CloseOutlined/></Button>
-                                </Popconfirm>
-                            </div>
-                        </div>
-                        <Form autoComplete="off"
-                              onFinish={values=>onFinish(values,item)}
-                              initialValues={{...item}}
-                        >
-                            <Form.Item label="名称" name="scmName"
-                                       rules={[{required:true,message:`请输入${scmTitle(item.scmType)}名称`}]}
-                            >
-                                <Input/>
-                            </Form.Item>
-                            <Form.Item label="地址" name="scmAddress"
-                                       rules={[{required:true,message:`请输入${scmTitle(item.scmType)}地址`}]}
-                            >
-                                <Input/>
-                            </Form.Item>
-                            <Form.Item style={{textAlign:"right"}}>
-                                <Button htmlType="submit">
-                                    保存
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </div>
-        })
-    }
-
     return <div className="envi home-limited">
         <BreadcrumbContent firstItem={"环境配置"} />
         <div className="envi-content">
-            <Button onClick={()=>setVisible(true)}>添加配置</Button>
 
-            {renderEnviData(enviData)}
+            <EnviSwitch
+                add={add}
+            />
+
+            <Tables
+                columns={columns}
+                dataSource={enviData}
+                rowKey={record=>record.scmId}
+            />
 
             <EnviModal
                 visible={visible}
                 setVisible={setVisible}
                 enviData={enviData}
-                setEnviData={setEnviData}
                 scmTitle={scmTitle}
+                updatePipelineScm={updatePipelineScm}
+                formValue={formValue}
+                fresh={fresh}
+                setFresh={setFresh}
             />
         </div>
     </div>

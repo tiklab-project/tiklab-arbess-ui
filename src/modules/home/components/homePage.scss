@@ -2,7 +2,7 @@
     padding: 20px;
     width: 100%;
     .quickIn{
-        height: 130px;
+        height: 120px;
         display: flex;
         display: -webkit-box;
         display: -webkit-flex;
@@ -16,8 +16,6 @@
             text-align: center;
             border: 1px solid #cccccc;
             margin-right: 10px;
-            box-shadow: 3px 3px 8px 3px #ccc;
-            //box-shadow: 3px 3px 8px 3px #5d70ea;
             border-radius: 8px;
             cursor: pointer;
             &-wrap{
@@ -52,6 +50,7 @@
             -ms-flex-direction: column;
             flex-direction: column;
             min-height: 100px;
+            max-height: 500px;
             -webkit-flex-shrink: 0;
             flex-shrink: 0;
         }
@@ -63,7 +62,7 @@
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
-            min-height: 100px;
+            min-height: 500px;
             -webkit-flex-shrink: 0;
             flex-shrink: 0;
         }
@@ -71,9 +70,9 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 3px 8px 0 #cccccc;
             margin-bottom: 16px;
-            &-title{
+            min-height: 170px;
+            &-title {
                 padding-bottom: 15px;
                 font-size: 18px;
                 font-weight: 600;
@@ -101,7 +100,6 @@
             border-radius: 8px;
             padding: 20px;
             border: 1px solid #cccccc;
-            box-shadow: 0 3px 8px 0 #cccccc;
             height: 500px;
             &-title{
                 padding-bottom: 15px;

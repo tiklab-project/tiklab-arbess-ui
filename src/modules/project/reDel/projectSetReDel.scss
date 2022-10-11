@@ -1,0 +1,24 @@
+.pipelineReDel{
+    padding: 10px;
+    &-content{
+        &-div{
+            //display: flex;
+            //display: -webkit-box;
+            //display: -webkit-flex;
+            //display: -ms-flexbox;
+            min-height: 150px;
+        }
+        &-rename{
+            border-bottom: 1px solid #cccccc;
+        }
+        &-del{
+            margin-top: 15px;
+        }
+        &-title{
+            font-size: 16px;
+            font-weight: 600;
+            width: 150px;
+            height: 50px;
+        }
+    }
+}

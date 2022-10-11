@@ -1,10 +1,10 @@
 .dynamic{
     padding: 20px;
+    min-height: 200px;
     &-shadow{
         flex-shrink: 0;
         border: 1px solid #ccc;
         border-radius: 8px;
-        box-shadow: 0 3px 8px 0 #cccccc;
     }
     &-top{
         display: flex;

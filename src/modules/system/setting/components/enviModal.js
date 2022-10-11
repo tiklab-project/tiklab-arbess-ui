@@ -1,5 +1,5 @@
-import React from "react";
-import {Modal} from "antd";
+import React, {useEffect, useState} from "react";
+import {Modal, Form, Select, Input, Button, message} from "antd";
 
 const lis = [
     {
@@ -22,48 +22,91 @@ const lis = [
 
 const EnviModal = props =>{
 
-    const {visible,setVisible,enviData,setEnviData,scmTitle} = props
+    const {visible,setVisible,enviData,scmTitle,updatePipelineScm,formValue,fresh,setFresh} = props
 
-    const handleClick = item =>{
-        const newData = [...enviData]
-        newData.push(item)
-        setEnviData(newData)
-        setVisible(false)
+    const [form] = Form.useForm()
+    const [scmType,setScmType] = useState(1)
+
+    useEffect(()=>{
+        if(visible){
+            if(formValue){
+                form.setFieldsValue(formValue)
+            }else form.resetFields()
+        }
+    },[visible])
+
+    const opt = value => {
+        setScmType(value)
     }
 
     // 环境配置是否已经存在
     const isGray = scmType => {
         return enviData.some(item=>item.scmType===scmType)
     }
-    
-    const renderLis = lis => {
-        return lis.map(item=>{
-            return  <div
-                        onClick={()=>isGray(item.scmType) ? null:handleClick(item)}
-                        key={item.scmType}
-                        className={`enviModal-group_list enviModal-item ${isGray(item.scmType) ? "isGray" :"notGray"}`}
-                    >
-                        <div>
-                            {scmTitle(item.scmType)}
-                        </div>
-                        {isGray(item.scmType) ? <div>已存在</div>:null}
-                    </div>
+
+    const onOk = values =>{
+        const params = {
+            scmId:formValue && formValue.scmId,
+            scmType:values.scmType,
+            scmName:values.scmName,
+            scmAddress:values.scmAddress,
+        }
+        updatePipelineScm(params).then(res=>{
+            if(res.code===0){
+                message.success({content:"保存成功",className:"message"})
+                setFresh(!fresh)
+            }
+        }).catch(error=>{
+            console.log(error)
         })
+        setVisible(false)
     }
 
     return(
         <Modal
             visible={visible}
             onCancel={()=>setVisible(false)}
-            footer={[]}
             closable={false}
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then((values) => {
+                        form.resetFields()
+                        onOk(values)
+                    })
+            }}
         >
-            <div className="enviModal">
-                <div className="enviModal-title">配置任务组</div>
-                <div className="enviModal-group">
-                    {renderLis(lis)}
-                </div>
-            </div>
+            <Form
+                form={form}
+                layout="vertical"
+                name="userForm"
+                autoComplete = "off"
+            >
+                <Form.Item name="scmType" label="环境配置类型"
+                           rules={[{required:true,message:`请选择环境配置类型`}]}
+                >
+                    <Select onChange={opt}>
+                        {
+                            lis.map(item=>{
+                                return <Select.Option value={item.scmType} key={item.scmType}  disabled={isGray(item.scmType)}>
+                                    {scmTitle(item.scmType)}
+                                </Select.Option>
+                            })
+                        }
+                    </Select>
+                </Form.Item>
+                <Form.Item label="名称" name="scmName"
+                           rules={[{required:true,message:`请输入${scmTitle(scmType)}名称`}]}
+                >
+                    <Input/>
+                </Form.Item>
+                <Form.Item label="地址" name="scmAddress"
+                           rules={[{required:true,message:`请输入${scmTitle(scmType)}地址`}]}
+                >
+                    <Input/>
+                </Form.Item>
+            </Form>
+
         </Modal>
     )
 }

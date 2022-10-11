@@ -63,7 +63,6 @@ const ConfigProof = props =>{
     return (
         <Row>
             <FindAllProof type={allProofType}/>
-            <AddProofButton type={proofBtnType}/>
             <div className="config-details-link">
                 {
                     testStatus ?

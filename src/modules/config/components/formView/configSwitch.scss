@@ -1,0 +1,46 @@
+.configCode{
+   &-gitList{
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      height: auto;
+      padding-top: 15px;
+      &-item{
+         border: 1px solid #e5e5e5;
+         border-radius: 4px;
+         width: 101px;
+         height: 50px;
+         display: -webkit-inline-flex;
+         display: -ms-inline-flexbox;
+         display: inline-flex;
+         -webkit-box-orient: vertical;
+         -webkit-box-direction: normal;
+         -webkit-box-align: center;
+         -webkit-align-items: center;
+         -ms-flex-align: center;
+         align-items: center;
+         justify-content: center;
+         //-webkit-flex-direction: column;
+         //-ms-flex-direction: column;
+         //flex-direction: column;
+         margin-bottom: 12px;
+         cursor: pointer;
+         overflow: hidden;
+         margin-right: 12px;
+         &-icon{
+            padding-right: 5px;
+            .icon{
+               width: 20px;
+               height: 20px;
+            }
+         }
+      }
+      &-selected{
+         border-color: #1890ff;
+      }
+   }
+}

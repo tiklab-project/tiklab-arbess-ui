@@ -5,14 +5,16 @@ import {getVersionInfo} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "./configChangeView.scss";
+import ChangeConfigSortsModal from "./changeConfigSortsModal";
 
 const ConfigChangeView = props =>{
 
     const {view,setView,pipelineId,structureStore,userId,pipelineName,configDataStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {isPlugin,setIsPrompt} = configDataStore
+    const {isPlugin,setIsPrompt,data,setData,codeType,} = configDataStore
     const [processVisible,setProcessVisible] = useState(false)
+    const [changeSortVisible, setChangeSortVisible] = useState(false)
     const configView = localStorage.getItem("configView")
 
     useEffect(()=>{
@@ -51,6 +53,11 @@ const ConfigChangeView = props =>{
     return (
         <div className="config_changeView">
             <div className="changeView">
+                <div className="changeView-changeSort">
+                    <Button onClick={()=>setChangeSortVisible(true)}>
+                        更改配置顺序
+                    </Button>
+                </div>
                 <div className="changeView-btn">
                     <Button form="form" htmlType="submit">保存</Button>
                     <Button form="form" htmlType="submit" type="primary" onClick={()=>run()}>
@@ -81,6 +88,16 @@ const ConfigChangeView = props =>{
                     }
                 </div>
             </div>
+
+            <ChangeConfigSortsModal
+                changeSortVisible={changeSortVisible}
+                setChangeSortVisible={setChangeSortVisible}
+                data={data}
+                setData={setData}
+                codeType={codeType}
+                setIsPrompt={setIsPrompt}
+            />
+
         </div>
     )
 }

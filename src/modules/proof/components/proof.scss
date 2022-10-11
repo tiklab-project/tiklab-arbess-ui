@@ -1,9 +1,12 @@
 .proof{
     padding: 10px;
     &-content{
+        &-switch{
+            padding-bottom: 15px;
+        }
         &-btn{
-            text-align: right;
-            padding-bottom: 5px;
+            display: flex;
+            justify-content: flex-end;
         }
         &-action{
             .del{
