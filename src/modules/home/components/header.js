@@ -74,7 +74,6 @@ const Head = props =>{
     const goOut = () => {
         props.history.push({
             pathname: "/logout",
-            state: window.location.href
         })
     }
     

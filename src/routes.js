@@ -64,10 +64,10 @@ const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
 const NotFound=AsyncComponent(()=>import("./modules/home/components/notFound"))
 
 const routers=[
-    // {
-    //     path:"/login",
-    //     component:Login,
-    // },
+    {
+        path:"/login",
+        component:Login,
+    },
     {
         path:"/logout",
         component:Logout,

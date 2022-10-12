@@ -1,10 +1,11 @@
 import React from "react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import {Button,Form,Input,message,Modal} from "antd";
+import {Button,Form,message,Modal} from "antd";
 import {ExclamationCircleOutlined,DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import "./projectSetReDel.scss";
+import ProjectRename from "./projectRename";
 
 const ProjectSetReDel = props =>{
 
@@ -63,45 +64,11 @@ const ProjectSetReDel = props =>{
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-content-rename pipelineReDel-content-div">
                     <div className="pipelineReDel-content-title">修改流水线名称</div>
-                    <Form onFinish={re} form={form} layout="inline" autoComplete="off">
-                        <Form.Item
-                            label="重命名"
-                            name="pipelineName"
-                            rules={[
-                                ({ getFieldValue }) => ({
-                                    validator(rule, value) {
-                                        if(value){
-                                            let nameArray = []
-                                            if(pipelineList){
-                                                nameArray=pipelineList && pipelineList.map(item=>item.pipelineName)
-                                            }
-                                            if (nameArray.includes(value)) {
-                                                return Promise.reject("名称已经存在");
-                                            }
-                                            return Promise.resolve()
-                                        }else {
-                                            return Promise.reject()
-                                        }
-                                    },
-                                }),
-                            ]}
-                        >
-                            <Input allowClear/>
-                        </Form.Item>
-                        <Form.Item shouldUpdate>
-                            {() => (
-                                <Button
-                                    htmlType="submit"
-                                    disabled={
-                                        !form.isFieldsTouched(true) ||
-                                        !!form.getFieldsError().filter(({ errors }) => errors.length).length
-                                    }
-                                >
-                                    确定
-                                </Button>
-                            )}
-                        </Form.Item>
-                    </Form>
+                    <ProjectRename
+                        form={form}
+                        re={re}
+                        pipelineList={pipelineList}
+                    />
                 </div>
                 <div className="pipelineReDel-content-del pipelineReDel-content-div">
                     <div className="pipelineReDel-content-title">删除流水线</div>

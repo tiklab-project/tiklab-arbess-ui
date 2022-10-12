@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Modal, Form, Select, Input, Button, message} from "antd";
+import ModalTitle from "../../../../common/modalTitle/modalTitle";
 
 const lis = [
     {
@@ -76,6 +77,10 @@ const EnviModal = props =>{
                     })
             }}
         >
+            <ModalTitle
+                setVisible={setVisible}
+                title={formValue===""?"添加环境配置":"修改环境配置"}
+            />
             <Form
                 form={form}
                 layout="vertical"

@@ -5,7 +5,6 @@ import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "./formView/formView";
-import pipeline from "../../pipeline/container/pipeline";
 
 const ConfigView = props =>{
 
@@ -336,7 +335,8 @@ const ConfigView = props =>{
                             configDataStore,
                             form,
                             onFinish,
-                            del
+                            del,
+                            formInitialValues,
                         }}
                     />
                     :null

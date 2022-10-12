@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Button,Modal,Tree} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 const ChangeConfigSortsModal = props =>{
 
@@ -120,13 +121,6 @@ const ChangeConfigSortsModal = props =>{
         })
     }
 
-    const style = {
-        display:"flex",
-        justifyContent:"space-between",
-        marginBottom:10,
-        borderBottom:"1px solid #ccc"
-    }
-
     return (
         <Modal
             closable={false}
@@ -134,14 +128,10 @@ const ChangeConfigSortsModal = props =>{
             visible={changeSortVisible}
             footer={null}
         >
-            <div className="taskGroup" style={style}>
-                <div style={{fontWeight:600}}>更改配置顺序</div>
-                <div>
-                    <Button type="text" onClick={()=>setChangeSortVisible(false)}>
-                        <CloseOutlined />
-                    </Button>
-                </div>
-            </div>
+            <ModalTitle
+                setVisible={setChangeSortVisible}
+                title={"更改配置顺序"}
+            />
             <div className="changeSorts-tree">
                 <Tree
                       draggable // 是否可拖拽

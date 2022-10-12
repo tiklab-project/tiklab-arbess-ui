@@ -1,7 +1,7 @@
 import React,{useState} from "react";
-import "./addProofModal.scss";
 import moment from "../../../common/moment/moment";
 import {Modal,Form,Input,Select,Checkbox,Row,Col} from "antd";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 const {Option} = Select;
 
@@ -63,8 +63,12 @@ const AddProofModal = props =>{
                         onOk(values)
                     })
             }}
-            bodyStyle={{maxHeight:700,"overflow":"auto"}}
+            bodyStyle={{maxHeight:750,"overflow":"auto"}}
         >
+            <ModalTitle
+                title={"添加凭证"}
+                setVisible={setVisible}
+            />
             <Form form={form}
                   layout="vertical"
                   name="userForm"
@@ -82,10 +86,9 @@ const AddProofModal = props =>{
                     <Form.Item
                         label="项目作用域"
                         name="proofList"
-                        className="proofModal-showPipeline"
                         rules={[{required:true,message:"请选择项目作用域"}]}
                     >
-                        <Checkbox.Group>
+                        <Checkbox.Group style={{overflow:"auto",maxHeight:300}}>
                         {
                             pipelineList && pipelineList.map(item=>{
                                 return  <Row key={item.pipelineId}>

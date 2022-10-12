@@ -26,7 +26,7 @@ const ProofSwitch = props =>{
             <Col span={6}>
                 <Input
                     placeholder={"名称"}
-                    style={{width:350}}
+                    style={{maxWidth:350}}
                 />
             </Col>
             <Col span={6}>

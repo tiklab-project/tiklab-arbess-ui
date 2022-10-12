@@ -15,10 +15,14 @@
         z-index: 88;
         background: #fff;
         width: calc(100% - 100px);
-        border-bottom: 1px solid #ccc;
+        //border-bottom: 1px solid #ccc;
         padding: 8px 0 4px 16px;
         font-size: 16px;
         min-width: 500px;
+    }
+    &-top-limited{
+        max-width: 1278px;
+        margin: auto;
     }
     &-content{
         padding: 60px 0 0 15px;

@@ -10,14 +10,12 @@ const { Sider,Content } = Layout;
 const System = props =>{
     const {route}=props
     return(
-        <Layout className="system">
-            <Sider style={{position:"fixed",height:"100%",zIndex:99}} width={180}>
-                <SystemAside {...props} />
-            </Sider>
-            <Content className="system-background">
+        <div className="system">
+            <SystemAside {...props} />
+            <div className="system-background" style={{marginLeft:200}}>
                 {renderRoutes(route.routes)}
-            </Content>
-        </Layout>
+            </div>
+        </div>
     )
 }
 

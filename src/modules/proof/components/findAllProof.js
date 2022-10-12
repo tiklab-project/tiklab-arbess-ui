@@ -42,11 +42,11 @@ const FindAllProof = props =>{
             return <>
                 <Divider style={{ margin: '4px 0' }} />
                 <div
-                    style={{ padding:"4px 8px",cursor: "pointer",textAlign:"right" }}
+                    style={{ padding:"4px 8px",cursor: "pointer"}}
                     onClick={() => {
                         setOpen(false)
                     }}                            >
-                    <AddProofButton type={type}/>
+                    <AddProofButton type={type} isBtn={"none"}/>
                 </div>
             </>
         }

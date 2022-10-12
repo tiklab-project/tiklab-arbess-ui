@@ -20,6 +20,12 @@ export class PipelineStore {
     @observable pipelineId = ""
     @observable pipelineName = ""
     @observable fresh = false
+    @observable listType = 1
+
+    @action
+    setListType = value =>{
+        this.listType = value
+    }
 
     @action
     setLastPath = value =>{

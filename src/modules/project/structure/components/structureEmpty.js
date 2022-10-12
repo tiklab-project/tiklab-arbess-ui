@@ -15,20 +15,18 @@ const StructureEmpty = props =>{
                         />
                     </div>
                     :
-                    <div className="home-limited">
-                        <div className="empty-group">
-                            <Empty
-                                image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-                                description="当前流水线尚未运行"
-                            >
-                                {
-                                    runImState ?
-                                        <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
-                                        :
-                                        <Button type="primary" onClick={()=>runImmediately()}>立即运行</Button>
-                                }
-                            </Empty>
-                        </div>
+                    <div className="empty-group">
+                        <Empty
+                            image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                            description="当前流水线尚未运行"
+                        >
+                            {
+                                runImState ?
+                                    <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
+                                    :
+                                    <Button type="primary" onClick={()=>runImmediately()}>立即运行</Button>
+                            }
+                        </Empty>
                     </div>
 
             }

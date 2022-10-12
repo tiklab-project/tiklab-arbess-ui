@@ -19,7 +19,7 @@ const PipelineTable = props =>{
     const {pipelineList,updateFollow,updatePipeline,fresh,setFresh,deletePipeline} = pipelineStore
 
     const [renameVisible,setRenameVisible] = useState(false)
-    const [pipelineId,setPipelineId] = useState("")
+    const [pipeline,setPipeline] = useState("")
 
     const userId = getUser().userId
 
@@ -74,7 +74,7 @@ const PipelineTable = props =>{
     const renameOrDel = (record,type) =>{
         if(type === "rename"){
             setRenameVisible(true)
-            setPipelineId(record.pipelineId)
+            setPipeline(record)
         }else {
             Modal.confirm({
                 title: "删除",
@@ -228,7 +228,7 @@ const PipelineTable = props =>{
                     fresh={fresh}
                     setFresh={setFresh}
                     userId={userId}
-                    pipelineId={pipelineId}
+                    pipeline={pipeline}
                     pipelineList={pipelineList}
                     renameVisible={renameVisible}
                     setRenameVisible={setRenameVisible}

@@ -36,23 +36,22 @@ const ConfigSwitch = props =>{
         }
         else if(type > 20 && type < 30){
             setBuildType(type)
-            for(let i = 0 ;i<arr.length;i++){
-                if( arr[i].dataType === 21 || arr[i].dataType === 22) {
-                    arr[i].dataType = type
-                }
-            }
-            setData([...arr])
-
+            changDataType(type,20,30)
         }
         else if(type > 30 && type < 40){
             setDeployType(type)
-            for(let i = 0 ;i<arr.length;i++){
-                if( arr[i].dataType === 31 || arr[i].dataType === 32) {
-                    arr[i].dataType = type
-                }
-            }
-            setData([...arr])
+            changDataType(type,30,40)
         }
+    }
+
+    const changDataType = (type,min,max) =>{
+        let arr = JSON.parse(JSON.stringify(data))
+        for(let i = 0 ;i<arr.length;i++){
+            if( arr[i].dataType > min && arr[i].dataType  < max) {
+                arr[i].dataType = type
+            }
+        }
+        setData([...arr])
     }
 
     const renderList = (list,type) =>{

@@ -2,7 +2,6 @@ import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Descriptions} from "antd";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import "./info.scss";
 
 /*
     系统信息
@@ -17,7 +16,7 @@ const Info = props =>{
     },[])
 
     return(
-        <div className="info home-limited">
+        <div className="info home-limited" style={{padding:"10px"}}>
             <BreadcrumbContent firstItem={"系统信息"} />
             <div  className="info-content">
                 <Descriptions column={1} bordered>

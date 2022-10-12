@@ -1,6 +1,7 @@
 import React from "react";
 import {CloseOutlined} from "@ant-design/icons";
 import {Button,Modal} from "antd";
+import ModalTitle from "../../../../common/modalTitle/modalTitle";
 
 const ConfigCodeOrNewStage = props =>{
 
@@ -28,13 +29,6 @@ const ConfigCodeOrNewStage = props =>{
         })
     }
 
-    const style = {
-        display:"flex",
-        justifyContent:"space-between",
-        marginBottom:10,
-        borderBottom:"1px solid #ccc"
-    }
-
     return(
         <Modal
             visible={visible}
@@ -42,14 +36,10 @@ const ConfigCodeOrNewStage = props =>{
             footer={[]}
             closable={false}
         >
-            <div className="taskGroup" style={style}>
-                <div style={{fontWeight:600}}>选择任务组</div>
-                <div>
-                    <Button onClick={()=>setVisible(false)} type="text">
-                        <CloseOutlined/>
-                    </Button>
-                </div>
-            </div>
+            <ModalTitle
+                setVisible={setVisible}
+                title={"选择任务组"}
+            />
             {renderLis(lis)}
         </Modal>
     )

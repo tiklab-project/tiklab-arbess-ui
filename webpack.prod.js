@@ -196,8 +196,8 @@ module.exports = merge(baseWebpackConfig, {
                 terserOptions: {
                     compress: {
                         // 去除console.log ,debugger
-                        drop_console: true,
-                        drop_debugger: true,
+                        drop_console: false,
+                        drop_debugger: false,
                     },
                 }
             })

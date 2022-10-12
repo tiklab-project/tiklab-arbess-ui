@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import  "./formView.scss";
 import {Form,Popconfirm} from "antd";
-import {DeleteOutlined} from "@ant-design/icons";
+import {CloseOutlined} from "@ant-design/icons";
 import ConfigAddNewStage from "./configAddNewStage";
 import ConfigCode from "./configCode";
 import {inject,observer} from "mobx-react";
@@ -41,17 +41,30 @@ const formView = props =>{
         setIsPrompt(true)
     }
 
-    const renderTitle = dataType =>{
+    const title = dataType =>{
         switch (parseInt(dataType)) {
             case 11:
-                return "测试"
+                return renderTitle("ceshi1","测试")
             case 21:
             case 22:
-                return "构建"
+                return renderTitle("goujiangongju","构建")
             case 31:
             case 32:
-                return "部署"
+                return renderTitle("bushubanben","部署")
         }
+    }
+
+    const renderTitle = (icon,title) =>{
+        return  <>
+                    <span className="desc-icon">
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref={`#icon-${icon}`} />
+                        </svg>
+                    </span>
+                    <span className="desc-title">
+                        {title}
+                    </span>
+                </>
     }
 
     const newStage = data =>{
@@ -59,6 +72,9 @@ const formView = props =>{
             return  <div className="formView-wrapper" key={index} >
                         <div className="formView-wrapper-Headline">
                             <div className="desc">
+                                {title(group.dataType)}
+                            </div>
+                            <div className="formView-del">
                                 <span className="desc-delete">
                                     <Popconfirm
                                         title="当前项的所有数据会被清空"
@@ -66,11 +82,8 @@ const formView = props =>{
                                         okText="确定"
                                         cancelText="取消"
                                     >
-                                        <DeleteOutlined />
+                                        <CloseOutlined />
                                     </Popconfirm>
-                                </span>
-                                <span className="desc-title">
-                                    {renderTitle(group.dataType)}
                                 </span>
                             </div>
                         </div>

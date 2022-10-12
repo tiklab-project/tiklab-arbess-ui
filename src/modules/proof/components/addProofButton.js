@@ -4,10 +4,11 @@ import AddProofModal from "./addProofModal";
 import {inject,observer} from "mobx-react";
 import {Button} from "antd";
 import {getUser} from "tiklab-core-ui";
+import {PlusOutlined} from "@ant-design/icons";
 
 const AddProofButton = props =>{
 
-    const {proofStore,pipelineStore,type,style,pipelineList} = props
+    const {proofStore,pipelineStore,type,style,pipelineList,isBtn} = props
     const {createProof,fresh,setFresh} = proofStore
     const {pipelineId} = pipelineStore
 
@@ -25,11 +26,22 @@ const AddProofButton = props =>{
         setVisible(true)
     }
 
+    const noBtn = {
+        // paddingLeft:10
+    }
+
     return (
         <>
-            <Button type={style} onClick={()=>addProofVisible()}>
-                添加
-            </Button>
+            {
+                isBtn ?
+                    <div style={noBtn} onClick={()=>addProofVisible()}>
+                        <PlusOutlined />&nbsp;&nbsp;添加
+                    </div>
+                    :
+                    <Button type={style} onClick={()=>addProofVisible()}>
+                        添加
+                    </Button>
+            }
             <AddProofModal
                 visible={visible}
                 setVisible={setVisible}

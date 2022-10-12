@@ -1,6 +1,5 @@
 .formView{
     padding: 55px 10px 0;
-    //border: 1px solid #ccc;
     &-content{
         padding: 15px;
         overflow: hidden;
@@ -14,6 +13,21 @@
             .ant-form-item-label{
                 min-width: 120px;
                 text-align: left;
+                &>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+                    display: none;
+                }
+                &>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):after {
+                    display: inline-block;
+                    margin-right: 4px;
+                    color: #ff4d4f;
+                    font-size: 14px;
+                    font-family: SimSun,sans-serif;
+                    line-height: 1;
+                    content: "*";
+                }
+                &>label:after {
+                    display: none;
+                }
             }
         }
         .code-handle{
@@ -27,8 +41,12 @@
         &-Headline{
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 16px;
             font-weight: 700;
+            background: #f2f2f2;
+            height: 50px;
+            padding: 0 15px;
         }
         &-handle{
             text-align: center;
@@ -47,8 +65,16 @@
 
         }
         .desc{
+            &-icon{
+                display: inline-block;
+                padding-top: 2px;
+                .icon{
+                    width: 21px;
+                    height: 21px;
+                }
+            }
             &-title{
-                padding-left: 5px;
+                padding-left: 8px;
             }
             &-delete{
                 &:hover{

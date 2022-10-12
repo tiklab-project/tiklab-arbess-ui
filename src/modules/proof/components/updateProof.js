@@ -1,5 +1,6 @@
 import React,{useEffect} from "react";
 import {Modal,Form,Input,Select,Checkbox,Row,Col} from "antd";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 const {Option} = Select
 
@@ -56,8 +57,12 @@ const UpdateProof = props =>{
             cancelText="取消"
             onCancel={()=>setVisible(false)}
             onOk={onOk}
-            bodyStyle={{maxHeight:700,"overflow": "auto"}}
+            bodyStyle={{maxHeight:750,"overflow": "auto"}}
         >
+            <ModalTitle
+                setVisible={setVisible}
+                title={"修改凭证"}
+            />
             <Form form={form} layout="vertical" name="userForm" autoComplete="off">
                 <Form.Item label="凭证级别" name="type">
                     <Select onChange={opt}>

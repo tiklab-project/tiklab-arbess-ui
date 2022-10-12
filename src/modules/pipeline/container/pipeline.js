@@ -8,16 +8,14 @@ import PipelineTable from "../components/pipelineTable";
 import PipelineAddModal from "../components/pipelineAddModal";
 import {inject,observer} from "mobx-react";
 
-const { Search } = Input
-
 const Pipeline = props =>{
 
     const {pipelineStore} = props
 
-    const {pipelineList,fresh,findAllPipelineStatus,findAllFollow,createPipeline,findLike
+    const {pipelineList,fresh,findAllPipelineStatus,findAllFollow,createPipeline,findLike,
+        listType,setListType
     } = pipelineStore
 
-    const [type,setType] = useState(1)
     const [addPipelineVisible,setAddPipelineVisible] = useState(false)
     const userId = getUser().userId
 
@@ -30,13 +28,13 @@ const Pipeline = props =>{
     }
 
     useEffect(()=>{
-        if(type===1){
+        if(listType===1){
             // 所有流水线
             findAllPipelineStatus(userId)
         }else {
             findAllFollow(userId)
         }
-    },[fresh,type])
+    },[fresh,listType])
 
     const lis = [
         {
@@ -50,7 +48,7 @@ const Pipeline = props =>{
     ]
 
     const onclick = item => {
-        setType(item.id)
+        setListType(item.id)
     }
 
     return(
@@ -68,7 +66,7 @@ const Pipeline = props =>{
                     {
                         lis.map(item=>{
                             return <div key={item.id}
-                                        className={`pipeline-type-link ${type===item.id ? "pipeline-type-active" : ""}`}
+                                        className={`pipeline-type-link ${listType===item.id ? "pipeline-type-active" : ""}`}
                                         onClick={()=>onclick(item)}
                                     >
                                         <span>{item.title}</span>
@@ -77,17 +75,16 @@ const Pipeline = props =>{
                     }
                 </div>
                 <div className="pipeline-type-input">
-                    <Search
+                    <Input
                         placeholder="请输入流水线"
                         // onChange={onChangeSearch}
-                        onSearch={onChangeSearch}
+                        onPressEnter={onChangeSearch}
                         style={{ width: 280 }}
                     />
                 </div>
             </div>
             <PipelineTable
                 {...props}
-                type={type}
                 pipelineStore={pipelineStore}
             />
 

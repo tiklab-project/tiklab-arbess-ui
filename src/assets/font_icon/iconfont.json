@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2552778",
+      "name": "测试",
+      "font_class": "ceshi1",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "15203366",
+      "name": "构建工具",
+      "font_class": "goujiangongju",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "19585503",
+      "name": "溯源码标签",
+      "font_class": "suyuanmabiaoqian",
+      "unicode": "e99d",
+      "unicode_decimal": 59805
+    },
+    {
+      "icon_id": "20313950",
+      "name": "部署版本",
+      "font_class": "bushubanben",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
       "icon_id": "703294",
       "name": "panorama-vertical",
       "font_class": "panoramavertical",

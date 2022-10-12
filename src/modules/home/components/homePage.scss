@@ -2,7 +2,7 @@
     padding: 20px;
     width: 100%;
     .quickIn{
-        height: 120px;
+        height: 115px;
         display: flex;
         display: -webkit-box;
         display: -webkit-flex;
@@ -15,7 +15,7 @@
             height: 100px;
             text-align: center;
             border: 1px solid #cccccc;
-            margin-right: 10px;
+            //margin-right: 10px;
             border-radius: 8px;
             cursor: pointer;
             &-wrap{
@@ -70,7 +70,7 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             padding: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 15px;
             min-height: 170px;
             &-title {
                 padding-bottom: 15px;

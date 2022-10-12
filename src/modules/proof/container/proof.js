@@ -105,7 +105,7 @@ const Proof = props =>{
                 pipelineName ?
                     <BreadcrumbContent firstItem={pipelineName} secondItem={"凭证设置"}/>
                     :
-                    <BreadcrumbContent firstItem={"凭证设置"}/>
+                    <BreadcrumbContent firstItem={"凭证管理"}/>
             }
             <div className="proof-content">
                 <ProofSwitch
