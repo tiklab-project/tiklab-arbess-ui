@@ -9,6 +9,11 @@
       flex-wrap: wrap;
       height: auto;
       padding-top: 15px;
+      &-title{
+         min-width: 120px;
+         height: 40px;
+         line-height: 40px;
+      }
       &-item{
          border: 1px solid #e5e5e5;
          border-radius: 4px;

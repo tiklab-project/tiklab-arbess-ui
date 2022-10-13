@@ -8,19 +8,23 @@ const lis=[
         desc:[
             {
                 type:1,
-                tel:"通用Git"
+                tel:"通用Git",
+                icon:"git"
             },
             {
                 type:2,
-                tel:"Gitee"
+                tel:"Gitee",
+                icon:"gitee"
             },
             {
                 type:4,
-                tel: "Gitlab"
+                tel: "Gitlab",
+                icon:"gitlab"
             },
             {
                 type:3,
-                tel: "Github"
+                tel: "Github",
+                icon:"github"
             }
         ]
     },
@@ -30,7 +34,8 @@ const lis=[
         desc: [
             {
                 type:5,
-                tel:"SVN"
+                tel:"SVN",
+                icon:"-_ssh"
             }
         ]
     }

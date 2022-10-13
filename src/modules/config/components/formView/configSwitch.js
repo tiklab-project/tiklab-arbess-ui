@@ -79,16 +79,28 @@ const ConfigSwitch = props =>{
             {
                 (()=>{
                     if(type===11){
-                        return  renderList(testList,type)
+                        return <>
+                            <div className="configCode-gitList-title">测试类型</div>
+                            { renderList(testList,type)}
+                        </>
                     }
                     else if(type > 20 && type < 30){
-                        return  renderList(buildList,type)
+                        return  <>
+                            <div className="configCode-gitList-title">构建类型</div>
+                            {renderList(buildList,type)}
+                        </>
                     }
                     else if(type > 30 && type < 40){
-                        return  renderList(deployList,type)
+                        return  <>
+                            <div className="configCode-gitList-title">部署类型</div>
+                            {renderList(deployList,type)}
+                        </>
                     }
                     else {
-                        return   renderList(gitList,type)
+                        return  <>
+                            <div className="configCode-gitList-title">源码类型</div>
+                            { renderList(gitList,type)}
+                        </>
                     }
                 })()
             }

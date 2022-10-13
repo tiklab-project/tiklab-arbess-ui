@@ -1,10 +1,12 @@
 import React,{Fragment,useEffect} from "react";
 import {Form,message} from "antd";
+import {toJS} from 'mobx'
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "./formView/formView";
+import Gui from "../../gui/container/gui"
 
 const ConfigView = props =>{
 
@@ -325,20 +327,27 @@ const ConfigView = props =>{
         <Fragment>
             {
                 !getVersionInfo().expired && isPlugin?
-                    <RemoteUmdComponent
+                    <Gui
                         {...props}
-                        point={"gui"}
                         pluginStore={pluginStore}
-                        isModalType={true}
-                        extraProps={{
-                            pipelineStore,
-                            configDataStore,
-                            form,
-                            onFinish,
-                            del,
-                            formInitialValues,
-                        }}
+                        form={form}
+                        onFinish={onFinish}
+                        del={del}
                     />
+                    // <RemoteUmdComponent
+                    //     {...props}
+                    //     point={"gui"}
+                    //     pluginStore={pluginStore}
+                    //     isModalType={true}
+                    //     extraProps={{
+                    //         pipelineStore,
+                    //         configDataStore:toJS(configDataStore),
+                    //         form,
+                    //         onFinish,
+                    //         del,
+                    //         formInitialValues:toJS(formInitialValues),
+                    //     }}
+                    // />
                     :null
             }
         </Fragment>

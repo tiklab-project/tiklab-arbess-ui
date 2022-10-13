@@ -10,6 +10,7 @@ const lis=[
             {
                 type: 11,
                 tel:"单元测试",
+                icon:"ceshi"
             }
         ]
     },
@@ -20,11 +21,13 @@ const lis=[
             {
 
                 type: 21,
-                tel:"maven"
+                tel:"maven",
+                icon:"quanxian"
             },
             {
                 type: 22,
-                tel:"node"
+                tel:"node",
+                icon:"nodejs"
             }
         ]
     },
@@ -34,11 +37,13 @@ const lis=[
         desc:[
             {
                 type:31 ,
-                tel:"虚拟机"
+                tel:"虚拟机",
+                icon:"xuniji"
             },
             {
                 type:32 ,
-                tel:"docker"
+                tel:"docker",
+                icon:"docker"
             },
             // {
             //     type:33,
