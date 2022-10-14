@@ -20,6 +20,21 @@ const ConfigFormDetailsDrawer = props =>{
         setTaskFormDrawer(false)
     }
 
+    const renderIcon = newStage =>{
+        switch (newStage) {
+            case 1:return "git"
+            case 2:return "gitee"
+            case 3:return "github"
+            case 4:return "gitlab"
+            case 5:return "-_ssh"
+            case 11:return "ceshi"
+            case 21:return "quanxian"
+            case 22:return "nodejs"
+            case 31:return "xuniji"
+            case 32:return "docker"
+        }
+    }
+
     return(
         <Drawer
             placement="right"
@@ -55,10 +70,15 @@ const ConfigFormDetailsDrawer = props =>{
                         <div className="body-taskForm">
                             <div className="taskForm-top">
                                 <div className="taskForm-top_title">
-                                    <ConfigName type={newStage}/>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref={`#icon-${renderIcon(newStage)}`} />
+                                    </svg>
+                                   <span style={{paddingLeft:10}}>
+                                        <ConfigName type={newStage}/>
+                                   </span>
                                 </div>
                             </div>
-                            <div>
+                            <div className="taskForm-forms">
                                 <Forms type={newStage}/>
                             </div>
                         </div>

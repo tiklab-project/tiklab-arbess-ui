@@ -6,25 +6,26 @@
         .ant-form{
             .ant-input{
                 max-width: 500px !important;
+                &:hover{
+                    background: #f2f2f2;
+                }
             }
             .ant-select{
                 max-width: 500px !important;
+                &:hover{
+                    background: #f2f2f2;
+                }
+            }
+            .ant-input-group{
+                cursor: pointer;
+                width:500px ;
+            }
+            .ant-input-group-addon{
+                border: none;
             }
             .ant-form-item-label{
-                min-width: 120px;
+                min-width: 130px;
                 text-align: left;
-                &>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
-                    display: none;
-                }
-                &>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):after {
-                    display: inline-block;
-                    margin-right: 4px;
-                    color: #ff4d4f;
-                    font-size: 14px;
-                    font-family: SimSun,sans-serif;
-                    line-height: 1;
-                    content: "*";
-                }
                 &>label:after {
                     display: none;
                 }
@@ -60,9 +61,6 @@
                 color: #1890ff;
                 border: 1px solid #1890ff;
             }
-        }
-        &-forms{
-
         }
         .desc{
             &-icon{

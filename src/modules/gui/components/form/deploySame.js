@@ -62,7 +62,6 @@ const DeploySame = props =>{
             <ConfigProof
                 {...props}
                 allProofType={deployType}
-                proofBtnType={5}
                 testType={"Ip地址"}
                 configDataStore={configDataStore}
             />

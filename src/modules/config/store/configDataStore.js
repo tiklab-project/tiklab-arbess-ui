@@ -6,22 +6,26 @@ export class ConfigDataStore {
     @observable isPlugin = false // 是否存在插件
     @observable formInitialValues = {} //表单初始化
     @observable data = [] // 新阶段、新任务需要渲染的值
-    @observable isGuiAlias = "" // 更改别名--图形
     @observable codeType = "" // 源码管理类型
     @observable buildType = "" 
     @observable deployType = ""
     @observable gitProofId = ""
     @observable deployProofId = ""
     @observable unitShellBlock = ""
-    @observable mavenShellBlock = ""
-    @observable nodeShellBlock = ""
+
+    // @observable mavenShellBlock = ""
+    // @observable nodeShellBlock = ""
+    @observable buildShellBlock = ""
+
     @observable virShellBlock = ""
 
-    @observable virStartShellBlock = ""
-    @observable docStartShellBlock = ""
+    // @observable virStartShellBlock = ""
+    // @observable docStartShellBlock = ""
+    @observable deployShellBlock = ""
 
-    @observable virOrderShellBlock = ""
-    @observable docOrderShellBlock = ""
+    // @observable virOrderShellBlock = ""
+    // @observable docOrderShellBlock = ""
+    @observable deployOrderShellBlock = ""
 
     @action
     setIsPlugin = value =>{
@@ -59,24 +63,24 @@ export class ConfigDataStore {
     }
 
     @action
-    setIsGuiAlias = value =>{
-        this.isGuiAlias = value
-    }
-
-    @action
     setUnitShellBlock = value =>{
         this.unitShellBlock = value
     }
 
     @action
-    setMavenShellBlock = value =>{
-        this.mavenShellBlock = value
+    setBuildShellBlock = value =>{
+        this.buildShellBlock = value
     }
 
-    @action
-    setNodeShellBlock = value =>{
-        this.nodeShellBlock = value
-    }
+    // @action
+    // setMavenShellBlock = value =>{
+    //     this.mavenShellBlock = value
+    // }
+    //
+    // @action
+    // setNodeShellBlock = value =>{
+    //     this.nodeShellBlock = value
+    // }
 
     @action
     setVirShellBlock = value =>{
@@ -84,24 +88,34 @@ export class ConfigDataStore {
     }
 
     @action
-    setVirStartShellBlock = value =>{
-        this.virStartShellBlock = value
+    setDeployShellBlock = value =>{
+        this.deployShellBlock = value
     }
 
     @action
-    setDocStartShellBlock = value =>{
-        this.docStartShellBlock = value
+    setDeployOrderShellBlock = value =>{
+        this.deployOrderShellBlock = value
     }
 
-    @action
-    setVirOrderShellBlock = value =>{
-        this.virOrderShellBlock = value
-    }
-
-    @action
-    setDocOrderShellBlock = value =>{
-        this.docOrderShellBlock = value
-    }
+    // @action
+    // setVirStartShellBlock = value =>{
+    //     this.virStartShellBlock = value
+    // }
+    //
+    // @action
+    // setDocStartShellBlock = value =>{
+    //     this.docStartShellBlock = value
+    // }
+    //
+    // @action
+    // setVirOrderShellBlock = value =>{
+    //     this.virOrderShellBlock = value
+    // }
+    //
+    // @action
+    // setDocOrderShellBlock = value =>{
+    //     this.docOrderShellBlock = value
+    // }
 
     @action
     setGitProofId = value =>{

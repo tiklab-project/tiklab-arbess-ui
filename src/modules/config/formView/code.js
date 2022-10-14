@@ -1,15 +1,35 @@
-import React from "react";
-import {Popconfirm} from "antd";
-import {CloseOutlined} from "@ant-design/icons";
-import ConfigSwitch from "./configSwitch";
-import Forms from "../configForm/forms"
-import ConfigCodeAddModal from "./configCodeAddModal";
+import React,{useState} from "react";
+import {Modal} from "antd";
+import {CloseOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
+import Switch from "./switch";
+import Forms from "./forms"
+import CodeAddModal from "./codeAddModal";
 
-const ConfigCode = props =>{
+const Code = props =>{
 
-    const {setIsPrompt,codeVisible,setCodeVisible,codeType,setCodeType,del} = props
+    const {codeType,setCodeType,del,pipelineId,updateConfigure} = props
 
-    const delCode = () =>{
+    const [codeVisible, setCodeVisible] = useState(false)
+
+    // 切换类型
+    const changeType = codeType =>{
+        Modal.confirm({
+            title: "删除",
+            icon: <ExclamationCircleOutlined />,
+            content: "删除后数据无法恢复",
+            onOk:()=>delCode(codeType),
+            okText: "确认",
+            cancelText: "取消",
+        });
+    }
+
+    const delCode = codeType =>{
+        const params = {
+            pipelineId,
+            type:codeType,
+            message:"delete"
+        }
+        updateConfigure(params)
         del(codeType)
         setCodeType("")
     }
@@ -34,18 +54,11 @@ const ConfigCode = props =>{
                     </div>
                     <div className="formView-del">
                         <span className="desc-delete">
-                        <Popconfirm
-                            title="当前项的所有数据会被清空"
-                            onConfirm={()=>delCode()}
-                            okText="确定"
-                            cancelText="取消"
-                        >
-                            <CloseOutlined />
-                        </Popconfirm>
+                            <CloseOutlined onClick={()=>changeType(codeType)}/>
                         </span>
                     </div>
                 </div>
-                <ConfigSwitch type={codeType}/>
+                <Switch type={codeType} del={del}/>
                 <div className="formView-wrapper-forms">
                     <Forms type={codeType}/>
                 </div>
@@ -55,13 +68,14 @@ const ConfigCode = props =>{
     return <>
         { code(codeType) }
 
-        <ConfigCodeAddModal
+        <CodeAddModal
             codeVisible={codeVisible}
             setCodeVisible={setCodeVisible}
-            setIsPrompt={setIsPrompt}
             setCodeType={setCodeType}
+            pipelineId={pipelineId}
+            updateConfigure={updateConfigure}
         />
     </>
 }
 
-export default ConfigCode
+export default Code

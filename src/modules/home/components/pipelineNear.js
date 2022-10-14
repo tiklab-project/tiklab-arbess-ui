@@ -5,8 +5,8 @@ import EmptyText from "./emptyText";
 const PipelineNear = props =>{
     const {pipelineNearList} = props
 
-    const goPipeline = pipelineName => {
-        props.history.push(`/index/task/${pipelineName}/work`)
+    const goPipeline = pipelineId => {
+        props.history.push(`/index/task/${pipelineId}/work`)
     }
 
     return <div className="pipelineNear">
@@ -18,7 +18,7 @@ const PipelineNear = props =>{
                         return  <div key={item.pipelineId} className="pipelineNear-list-item">
                             <div className="pipelineNear-list-item-desc">
                                 <span>{index+1}、</span>
-                                <span onClick={()=>goPipeline(item.pipelineName)} className="name">
+                                <span onClick={()=>goPipeline(item.pipelineId)} className="name">
                                     {item.pipelineName}
                                  </span>
                             </div>

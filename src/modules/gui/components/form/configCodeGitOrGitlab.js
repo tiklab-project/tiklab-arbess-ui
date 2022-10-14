@@ -28,7 +28,6 @@ const ConfigCodeGitOrGitlab = props =>{
             <ConfigProof
                 {...props}
                 allProofType={codeType}
-                proofBtnType={1}
                 testType={"源码地址"}
                 configDataStore={configDataStore}
             />

@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Form,Select} from "antd";
-import Mirror from "./mirror";
+import Mirror from "../mirror";
 import {inject,observer} from "mobx-react";
 import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
@@ -10,11 +10,9 @@ const Deploy = props =>{
 
     const {configStore,configDataStore,pipelineStore} = props
 
-    const {formInitialValues,setIsPrompt,deployType,
-        virStartShellBlock,setVirStartShellBlock,docStartShellBlock,setDocStartShellBlock,
-    } = configDataStore
+    const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = configDataStore
 
-    const {fileAddress,getFile,profileAddress} = configStore
+    const {fileAddress,getFile,profileAddress,updateConfigure} = configStore
     const {pipelineId,pipelineName} = pipelineStore
 
     const [messageInfo,setMessageInfo] = useState("")
@@ -52,21 +50,32 @@ const Deploy = props =>{
             }else setMessageInfo("")
         }
     }
+    
+    const changDeployType = value => {
+        const params = {
+            pipelineId,
+            type:deployType,
+            pipelineTest: {deployType:value},
+            pipelineCode:{deployType:value},
+            pipelineBuild:{deployType:value},
+            pipelineDeploy:{deployType:value}
+        }
+        updateConfigure(params)
+    }
 
     return(
         <>
-            <Form.Item name={deployType+"deployType"} label="部署类型" className="noRequired">
-                <Select>
+            <Form.Item name={"deployType"} label="部署类型" className="noRequired">
+                <Select bordered={false} onChange={changDeployType}>
                     <Select.Option value={0}>结构化部署</Select.Option>
                     <Select.Option value={1}>自定义部署</Select.Option>
                 </Select>
             </Form.Item>
             <Form.Item
-                shouldUpdate={(prevValues,currentValues)=>
-                prevValues[deployType+"deployType"]!==currentValues[deployType+"deployType"]}
+                shouldUpdate={(prevValues,currentValues)=> prevValues.deployType!==currentValues.deployType}
             >
                 {({ getFieldValue })=>
-                    getFieldValue(deployType+"deployType") === 0 ? (
+                    getFieldValue("deployType") === 0 ? (
                         <>
                             <DeploySame
                                 {...props}
@@ -74,22 +83,28 @@ const Deploy = props =>{
                                 profileAddress={profileAddress}
                                 messageInfo={messageInfo}
                                 pipelineName={pipelineName}
+                                pipelineStore={pipelineStore}
+                                configStore={configStore}
                             />
                             {
                                 deployType==31 ?
                                 <DeployVir 
                                     {...props}
                                     configDataStore={configDataStore}
+                                    configStore={configStore}
                                 />
                                 :
                                 <DeployDocker deployType={deployType}/>
                             }
                         </>) :
-                        <Form.Item name={deployType+"startShell"} label="Shell命令">
+                        <Form.Item name={"startShell"} label="Shell命令">
                             <Mirror
-                                shellBlock={deployType==31?virStartShellBlock:docStartShellBlock}
-                                setShellBlock={deployType==31?setVirStartShellBlock:setDocStartShellBlock}
-                                setIsPrompt={setIsPrompt}
+                                pipelineStore={pipelineStore}
+                                name={"startShell"}
+                                type={deployType}
+                                shellBlock={deployShellBlock}
+                                setShellBlock={setDeployShellBlock}
+                                configStore={configStore}
                             />
                         </Form.Item>
                 }

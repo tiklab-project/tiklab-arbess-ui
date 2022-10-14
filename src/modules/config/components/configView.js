@@ -1,29 +1,26 @@
 import React,{Fragment,useEffect} from "react";
-import {Form,message} from "antd";
+import {Form} from "antd";
 import {toJS} from 'mobx'
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
-import FormView from "./formView/formView";
+import FormView from "../formView/formView";
 import Gui from "../../gui/container/gui"
 
 const ConfigView = props =>{
 
-    const {view,pipelineId,configDataStore,configStore,pipelineStore} = props
+    const {view,configDataStore,configStore,pipelineStore} = props
 
+    const {findAllConfigure} = configStore
 
-    const {updateConfigure,findAllConfigure} = configStore
-
-    const {isPlugin,setIsPlugin,setIsPrompt,setData,data,formInitialValues,setFormInitialValues,
-        codeType,setCodeType,buildType,setBuildType,deployType,setDeployType,
-        gitProofId,setGitProofId,deployProofId,setDeployProofId,
-        unitShellBlock,setUnitShellBlock,
-        mavenShellBlock,setMavenShellBlock,nodeShellBlock,setNodeShellBlock,
-        virShellBlock,setVirShellBlock,
-        virOrderShellBlock,setVirOrderShellBlock,docOrderShellBlock,setDocOrderShellBlock,
-        virStartShellBlock,setVirStartShellBlock,docStartShellBlock,setDocStartShellBlock
+    const {isPlugin,setIsPlugin,setData,formInitialValues,setFormInitialValues,
+        setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
+        setUnitShellBlock,setBuildShellBlock,
+        setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
+
+    const {pipelineId} = pipelineStore
 
     const pluginStore = useSelector(state =>state.pluginStore)
 
@@ -65,12 +62,10 @@ const ConfigView = props =>{
         form.resetFields()
         setFormInitialValues({})
         setUnitShellBlock("")
-        setMavenShellBlock("")
-        setDocOrderShellBlock("")
-        setDocStartShellBlock("")
-        setVirOrderShellBlock("")
-        setVirStartShellBlock("")
         setVirShellBlock("")
+        setDeployOrderShellBlock("")
+        setDeployShellBlock("")
+        setBuildShellBlock("")
         setGitProofId("")
         setDeployProofId("")
     }
@@ -86,7 +81,7 @@ const ConfigView = props =>{
                 }
             }
         }
-        return lists.map(item=>{del(item,"111")})
+        return lists.map(item=>del(item))
     }
 
     // 表单数据渲染
@@ -106,23 +101,20 @@ const ConfigView = props =>{
             }
             else if(data.type > 30 || data.type < 40 ){
                 renderDeploy(data)
-                deployShellBlock(data)
+                deploy(data)
                 setDeployType(data.type)
             }
             setData([...newData])
+            Object.assign(formInitialValues, initialData[i])
             setFormInitialValues({...formInitialValues})
         }
     }
 
     // 源码管理
     const renderCodeData = data => {
-        const codeTypeProofName=data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")"
         const codeFormValue = {
-            [data.type+"codeName"]:data.codeName,
-            [data.type+"codeBranch"]:data.codeBranch,
-            [data.type+"proofName"]:data.proof.proofName?codeTypeProofName:null,
+            gitProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
             proofName:data.proof && data.proof.proofName ,
-            codeId:data.codeId,
         }
         Object.assign(formInitialValues,codeFormValue)
         setGitProofId(data.proof && data.proof.proofId)
@@ -134,10 +126,6 @@ const ConfigView = props =>{
             dataId:data.testId,
             dataType:data.type,
         })
-        const testFOrmValue = {
-            testId: data.testId
-        }
-        Object.assign(formInitialValues,testFOrmValue)
         setUnitShellBlock(`${data.testOrder ? data.testOrder :""}`)
     }
     
@@ -147,18 +135,7 @@ const ConfigView = props =>{
             dataId: data.buildId,
             dataType:data.type,
         })
-        const buildFormValue = {
-            [data.type+"buildAddress"] :data.buildAddress,
-            buildId:data.buildId
-        }
-        switch (data.type){
-            case 21:
-                setMavenShellBlock(`${data.buildOrder ? data.buildOrder : ""}`)
-                break
-            case 22:
-                setNodeShellBlock(`${data.buildOrder ? data.buildOrder : ""}`)
-        }
-        Object.assign(formInitialValues,buildFormValue)
+        setBuildShellBlock(`${data.buildOrder ? data.buildOrder : ""}`)
     }
     
     // 部署
@@ -167,187 +144,89 @@ const ConfigView = props =>{
             dataId:data.deployId,
             dataType:data.type,
         })
-        const deployTypeProofName=data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")"
         const DeployFormValue={
-            [data.type+"deployType"]:data.deployType, 
-            [data.type+"proofName"]:data.proof.proofName?deployTypeProofName:null ,
-            [data.type+"sourceAddress"]:data.sourceAddress,
-            [data.type+"sshIp"]:data.sshIp,
-            [data.type+"sshPort"]:data.sshPort,
-            [data.type+"deployAddress"]:data.deployAddress,
-            [data.type+"deployOrder"]:data.deployOrder,    
-            [data.type+"startAddress"]:data.startAddress, 
-            startPort:data.startPort,
-            mappingPort:data.mappingPort,
-            deployId:data.deployId
+            deployProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
         }
         Object.assign(formInitialValues,DeployFormValue)
         setDeployProofId(data.proof && data.proof.proofId)
     }
 
     // 部署mirror
-    const deployShellBlock = data =>{
-        if(data.type===31){
-            if(data.deployType===0){
-                setVirOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
-                setVirShellBlock(`${data.startShell ? data.startShell : ""}`)
-            }
-            else setVirStartShellBlock(`${data.startShell ? data.startShell : ""}`)
+    const deploy =  data =>{
+        if(data.deployType===0){
+            setDeployOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
+            setVirShellBlock(`${data.startShell ? data.startShell : ""}`)
         }
-        if(data.type===32){
-            if(data.deployType===0){
-                setDocOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
-            }
-            else setDocStartShellBlock(`${data.startShell ? data.startShell : ""}`)
-        }
-    }
-
-    const onFinish = values => {
-        //排序
-        let testSort,buildSort, deploySort = 0
-
-        data && data.map((item,index)=>{
-            if(item.dataType > 10 && item.dataType < 20 ){
-                testSort = index + 2
-            }
-            if(item.dataType > 20 && item.dataType < 30){
-                buildSort = index + 2
-            }
-            if(item.dataType > 30 && item.dataType < 40){
-                deploySort = index + 2
-            }
-        })    
-
-        const configureList = {
-            pipelineId:pipelineId,
-            pipelineCode:{
-                codeId:formInitialValues && formInitialValues.codeId,
-                sort:codeType===""?0:1,
-                type:codeType,
-                codeName:values[codeType+"codeName"],
-                codeBranch:values[codeType+"codeBranch"],
-                proof:{proofId:gitProofId},
-                pipeline:{pipelineId:pipelineId},
-            },
-            pipelineTest:{
-                testId:formInitialValues && formInitialValues.testId,
-                sort:testSort,
-                type:11,
-                testOrder:unitShellBlock,
-                pipeline:{pipelineId:pipelineId},
-            },
-            pipelineBuild:{
-                buildId:formInitialValues && formInitialValues.buildId,
-                sort:buildSort,
-                type:buildType,
-                buildAddress:values[buildType+"buildAddress"],
-                buildOrder:buildType===21?mavenShellBlock:nodeShellBlock,
-                pipeline:{pipelineId:pipelineId},
-            },
-            pipelineDeploy:{
-                deployId:formInitialValues && formInitialValues.deployId,
-                sort:deploySort,
-                type:deployType,
-                proof:{proofId:deployProofId},
-                pipeline:{pipelineId:pipelineId},
-                deployType:values[deployType+"deployType"],
-                sourceAddress:values[deployType+"sourceAddress"],
-                sshIp:values[deployType+"sshIp"],
-                sshPort:values[deployType+"sshPort"],
-                deployAddress:values[deployType+"deployAddress"],
-                startAddress:values[deployType+"startAddress"],
-                startPort:deployType===32?values.startPort:"",
-                mappingPort:deployType===32?values.mappingPort:"",
-                deployOrder:deployType===32?docOrderShellBlock:virOrderShellBlock,
-                startShell:deployType===32?docStartShellBlock:values[deployType+"deployType"]===1?virStartShellBlock:virShellBlock
-            },
-        }
-        updateConfigure(configureList).then(res=>{
-            setIsPrompt(false)
-            if(res.code!==0){
-                message.error({content:"配置失败",className:"message"})
-            }else {
-                message.success({content:"配置成功",className:"message"})
-            }
-        })
+        else setDeployShellBlock(`${data.startShell ? data.startShell : ""}`)
     }
 
     // 统一form表单里面需要删除的值
-    const del = (i,type) => {
+    const del = i => {
         switch (i) {
             case 11:
                 setUnitShellBlock("")
                 break
             case 21:
             case 22:
-                formInitialValues[(21&&22)+"buildAddress"] = null
-                setMavenShellBlock("")
-                setNodeShellBlock("")
+                formInitialValues.buildAddress = null
+                setBuildShellBlock("")
                 break
             case 31:
             case 32:
-                formInitialValues[(31&&32)+"proofName"] = null
-                formInitialValues[(31&&32)+"sourceAddress"] = null
-                formInitialValues[31&&32+"sshIp"] = null
-                formInitialValues[(31&&32)+"sshPort"] = null
-                formInitialValues[(31&&32)+"deployAddress"] = null
-                formInitialValues[(31&&32)+"deployOrder"] = null
-                formInitialValues[(31&&32)+"startAddress"] = null
+                formInitialValues.proofName = null
+                formInitialValues.sourceAddress = null
+                formInitialValues.sshIp = null
+                formInitialValues.sshPort = null
+                formInitialValues.deployAddress = null
+                formInitialValues.deployOrder = null
+                formInitialValues.startAddress = null
                 formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
                 setDeployProofId("")
-                setVirOrderShellBlock("")
                 setVirShellBlock("")
-                setVirStartShellBlock("")
-                setDocOrderShellBlock("")
-                setDocStartShellBlock("")
+                setDeployShellBlock("")
+                setDeployOrderShellBlock("")
                 break
             default:
-                formInitialValues[(1&&2&&3&&4&&5)+"codeName"] = null
-                formInitialValues[(1&&2&&3&&4&&5)+"codeBranch"] = null
-                formInitialValues[(1&&2&&3&&4&&5)+"proofName"] = null
+                formInitialValues.codeName = null
+                formInitialValues.codeBranch = null
+                formInitialValues.proofName = null
                 formInitialValues.proofName = null           
                 setCodeType("")
                 setGitProofId("")
         }
         setFormInitialValues({...formInitialValues})
-        if(!type){
-            setIsPrompt(true)
-        }
     }
 
     return view==="forms" ?
         <FormView
             del={del}
             form={form}
-            onFinish={onFinish}
             pipelineId={pipelineId}
         />
         :
         <Fragment>
             {
                 !getVersionInfo().expired && isPlugin?
-                    <Gui
-                        {...props}
-                        pluginStore={pluginStore}
-                        form={form}
-                        onFinish={onFinish}
-                        del={del}
-                    />
-                    // <RemoteUmdComponent
+                    // <Gui
                     //     {...props}
-                    //     point={"gui"}
                     //     pluginStore={pluginStore}
-                    //     isModalType={true}
-                    //     extraProps={{
-                    //         pipelineStore,
-                    //         configDataStore:toJS(configDataStore),
-                    //         form,
-                    //         onFinish,
-                    //         del,
-                    //         formInitialValues:toJS(formInitialValues),
-                    //     }}
+                    //     form={form}
+                    //     onFinish={onFinish}
+                    //     del={del}
                     // />
+                    <RemoteUmdComponent
+                        {...props}
+                        point={"gui"}
+                        pluginStore={pluginStore}
+                        isModalType={true}
+                        extraProps={{
+                            pipelineStore:toJS(pipelineStore),
+                            configDataStore:toJS(configDataStore),
+                            form,
+                            del,
+                        }}
+                    />
                     :null
             }
         </Fragment>

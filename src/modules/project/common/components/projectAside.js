@@ -23,21 +23,21 @@ const ProjectAside = props =>{
     // 侧边第一栏导航
     const firstRouters=[
         {
-            to:`/index/task/${pipelineName}/work`,
+            to:`/index/task/${pipelineId}/work`,
             title:"概况",
             icon:"#icon-gongzuotongji",
             key:"2",
             enCode:"AA"
         },
         {
-            to:`/index/task/${pipelineName}/config`,
+            to:`/index/task/${pipelineId}/config`,
             title: "配置",
             icon: "#icon-jiekoupeizhi",
             key:"3",
             enCode:"BB"
         },
         {
-            to:`/index/task/${pipelineName}/structure`,
+            to:`/index/task/${pipelineId}/structure`,
             title: "历史",
             icon:"#icon-lishijishi",
             key:"4",
@@ -48,22 +48,22 @@ const ProjectAside = props =>{
     // 侧边流水线设置的第二级导航
     const secondRouter = [
         {
-            key:`/index/task/${pipelineName}/assembly/user`,
+            key:`/index/task/${pipelineId}/assembly/user`,
             label:"项目成员",
             enCode:"DD1",
         },
         {
-            key:`/index/task/${pipelineName}/assembly/role`,
+            key:`/index/task/${pipelineId}/assembly/role`,
             label:"角色管理",
             enCode:"DD2",
         },
         {
-            key:`/index/task/${pipelineName}/assembly/proof`,
+            key:`/index/task/${pipelineId}/assembly/proof`,
             label:"凭证管理",
             enCode:"DD3",
         },
         {
-            key:`/index/task/${pipelineName}/assembly/redel`,
+            key:`/index/task/${pipelineId}/assembly/redel`,
             label:"其他管理",
             enCode:"DD4",
         },
@@ -80,11 +80,11 @@ const ProjectAside = props =>{
             setEnforcer(null)
             setMode(0)
             if(path===`/index/task/${pipelineName}/assembly`){
-                props.history.push(`/index/task/${item.pipelineName}/assembly`)
-            }else if(path.indexOf(`/index/task/${pipelineName}/assembly`) === 0) {
-                props.history.push(`/index/task/${item.pipelineName}/assembly/${lastPath}`)
+                props.history.push(`/index/task/${item.pipelineId}/assembly`)
+            }else if(path.indexOf(`/index/task/${pipelineId}/assembly`) === 0) {
+                props.history.push(`/index/task/${item.pipelineId}/assembly/${lastPath}`)
             }else {
-                props.history.push(`/index/task/${item.pipelineName}/${lastPath}`)
+                props.history.push(`/index/task/${item.pipelineId}/${lastPath}`)
             }
         }
     }

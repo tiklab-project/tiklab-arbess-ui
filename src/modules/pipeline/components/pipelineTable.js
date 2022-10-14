@@ -48,8 +48,8 @@ const PipelineTable = props =>{
     }
 
     //去详情页面
-    const goPipelineTask= text =>{
-        props.history.push(`/index/task/${text}/work`)
+    const goPipelineTask= (text,record) =>{
+        props.history.push(`/index/task/${record.pipelineId}/work`)
     }
 
     const work = record =>{

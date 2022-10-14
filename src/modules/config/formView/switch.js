@@ -1,6 +1,8 @@
 import React from "react";
 import {inject,observer} from "mobx-react";
-import "./configSwitch.scss";
+import "./switch.scss";
+import {Modal} from "antd";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const gitList=[
     {id:1,title:"通用Git",icon:"git"} ,
@@ -24,13 +26,33 @@ const deployList=[
     {id:32,title:"docker",icon:"docker"},
 ]
 
-const ConfigSwitch = props =>{
+const Switch = props =>{
 
-    const {type,configDataStore} = props
+    const {type,configDataStore,configStore,pipelineStore,del} = props
     const {setCodeType,data,setData,setBuildType,setDeployType} = configDataStore
+    const {updateConfigure} = configStore
+    const {pipelineId} = pipelineStore
 
+    // 切换类型
     const changeType = type =>{
-        let arr = JSON.parse(JSON.stringify(data))
+        Modal.confirm({
+            title: "删除",
+            icon: <ExclamationCircleOutlined />,
+            content: "删除后数据无法恢复",
+            onOk:()=>chang(type),
+            okText: "确认",
+            cancelText: "取消",
+        });
+    }
+
+    const chang = type =>{
+        del(type)
+        const params = {
+            pipelineId,
+            type,
+            message:"update"
+        }
+        updateConfigure(params)
         if( type > 0 && type < 6) {
             setCodeType(type)
         }
@@ -108,4 +130,4 @@ const ConfigSwitch = props =>{
     )
 }
 
-export default inject("configDataStore")(observer(ConfigSwitch))
+export default inject("configDataStore","configStore","pipelineStore")(observer(Switch))

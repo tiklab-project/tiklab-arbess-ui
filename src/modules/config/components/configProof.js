@@ -1,15 +1,14 @@
 import React,{useState} from "react";
-import {Button,message,Row,Spin} from "antd";
+import {message,Spin} from "antd";
 import {inject,observer} from "mobx-react";
-import {LoadingOutlined} from "@ant-design/icons";
+import {LoadingOutlined,ApiOutlined} from "@ant-design/icons";
 import FindAllProof from "../../proof/components/findAllProof";
-import AddProofButton from "../../proof/components/addProofButton";
 
 const ConfigProof = props =>{
 
-    const {allProofType,proofBtnType,testType,configDataStore,configStore} = props
+    const {allProofType,testType,configDataStore,configStore} = props
 
-    const {formInitialValues,codeType,gitProofId,deployProofId,deployType} = configDataStore
+    const {formInitialValues,codeType,gitProofId,deployProofId} = configDataStore
     const {codeTestPass} = configStore
 
     const [testStatus,setTestStatus] = useState(false)
@@ -24,11 +23,11 @@ const ConfigProof = props =>{
             }
             proofId = gitProofId
             port = 0
-            url = formInitialValues && formInitialValues[deployType+"codeName"]
+            url = formInitialValues && formInitialValues.codeName
         } else {
             proofId = deployProofId
-            port = formInitialValues && formInitialValues[deployType+"sshPort"]
-            url = formInitialValues && formInitialValues[deployType+"sshIp"]
+            port = formInitialValues && formInitialValues.sshPort
+            url = formInitialValues && formInitialValues.sshIp
             type = 2
         }
         const params = {
@@ -60,20 +59,27 @@ const ConfigProof = props =>{
         }
     }
 
+    const style={
+        display:"flex",
+    }
+
     return (
-        <Row>
+        <div style={style}>
             <FindAllProof type={allProofType}/>
             <div className="config-details-link">
                 {
                     testStatus ?
-                        <Button>
+                        <div>
                             <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
-                        </Button>
+                        </div>
                         :
-                        <Button onClick={()=>testing()}>连接测试</Button>
+                        <div style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>testing()}>
+                            <ApiOutlined />
+                            连接测试
+                        </div>
                 }
             </div>
-        </Row>
+        </div>
     )
 }
 

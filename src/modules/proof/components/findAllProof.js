@@ -61,14 +61,22 @@ const FindAllProof = props =>{
     }
 
 
+    const style1 = {
+        width:420
+    }
+
+    const style2 = {
+        width:373
+    }
 
     return(
         <Form.Item
             label="凭证"
-            name={type+"proofName"}
+            name={type < 6 ? "gitProofName" : "deployProofName"}
             rules={type === 2 || type === 3 ? [{required:true, message:"请选择凭证"}] : null}
         >
-            <Select style={{ width: 300 }}
+            <Select
+                    style={type === 2 || type === 3 ? style2:style1}
                     onClick={clickFindAllGit}
                     onChange={(value,e)=>changeGitSelect(value,e)}
                     placeholder="请选择凭证"
@@ -80,6 +88,7 @@ const FindAllProof = props =>{
                             {selectDropdownRender(menu,type)}
                         </>
                     )}
+                    bordered={false}
             >
                 {
                     proofList && proofList.map(item=>{

@@ -5,7 +5,7 @@ import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 const ChangeConfigSortsModal = props =>{
 
-    const {changeSortVisible,setChangeSortVisible,data,setData,codeType,setIsPrompt} = props
+    const {changeSortVisible,setChangeSortVisible,data,setData,codeType} = props
 
     const [gData,setGData] = useState([])
 
@@ -114,9 +114,6 @@ const ChangeConfigSortsModal = props =>{
                     dataType:item.dataType
                 })
                 setData(cData)
-                setIsPrompt(true)
-            }else {
-                setIsPrompt(false)
             }
         })
     }

@@ -1,0 +1,10 @@
+.react-codemirror2{
+    width:500px ;
+    border-color:#ffffff !important;
+}
+.CodeMirror{
+    height: 100%;
+    &:hover{
+        background: #f2f2f2 !important;
+    }
+}

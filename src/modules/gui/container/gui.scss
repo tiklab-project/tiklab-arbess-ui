@@ -386,7 +386,22 @@
                     margin-bottom: 30px;
                     &_title{
                         font-weight: 700;
-                        text-indent: 2em;
+                        .icon{
+                            width: 20px;
+                            height: 20px    ;
+                        }
+                    }
+                }
+                .taskForm-forms {
+                    .ant-input{
+                        max-width: 500px !important;
+                    }
+                    .ant-select{
+                        max-width: 500px !important;
+                    }
+                    .ant-form-item-label {
+                        min-width: 120px;
+                        text-align: left;
                     }
                 }
             }

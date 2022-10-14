@@ -1,5 +1,4 @@
 .frame{
-    height: 100%;
     &-header{
         display: flex;
         align-items: center;
@@ -83,7 +82,5 @@
     }
     &-content{
         padding-top: 55px;
-        min-height: 100%;
-        background: #f4f4f4;
     }
 }

@@ -1,10 +1,77 @@
 import React,{useEffect,useRef,useState} from "react";
-import {Form,Input,message,Modal,Select} from "antd";
+import {Form,Input,message,Modal,Select,Row,Col} from "antd";
 import moment from "../../../common/moment/moment";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
-import PipelineAddTemplate from "./pipelineAddTemplate";
+import PipelineAddModalRight from "./pipelineAddModalRight";
+import PipelineAddModalLeft from "./pipelineAddModalLeft";
 
-const {Option} = Select
+// 左侧锚点
+const leftLis = [
+    {
+        id:1,
+        title:"快速选择"
+    },
+    {
+        id:2,
+        title:"Java"
+    },
+    {
+        id:3,
+        title:"Node"
+    },
+]
+// 右侧lis渲染
+const rightLis = [
+    {
+        id:2,
+        type:2,
+        title:"Java",
+        desc:"Linux",
+        first:"构建",
+        second:"部署",
+    },
+    {
+        id:3,
+        type:2,
+        title:"Java",
+        desc: "docker",
+        first:"构建",
+        second:"部署",
+    },
+    {
+        id:4,
+        type:2,
+        title:"Java",
+        desc: "Linux",
+        zreo: "测试",
+        first:"构建",
+        second:"部署",
+    },
+    {
+        id:5,
+        type:2,
+        title:"Java",
+        desc: "docker",
+        zreo: "测试",
+        first:"构建",
+        second:"部署",
+    },
+    {
+        id:6,
+        title:"Nodejs",
+        desc: "Linux",
+        first:"构建",
+        second:"部署",
+    },
+    {
+        id:7,
+        type:3,
+        title:"Nodejs",
+        desc: "Linux",
+        first:"构建",
+        second:"部署",
+    },
+]
 
 const PipelineAddModal = props =>{
 
@@ -13,9 +80,12 @@ const PipelineAddModal = props =>{
     const [form] = Form.useForm()
     const [templateType,setTemplateType] = useState(1)
 
+
     useEffect(()=>{
         if(addPipelineVisible){
+            // 文本框聚焦
             inputRef.current.focus()
+            // 表单清空
             form.resetFields()
         }
     },[addPipelineVisible])
@@ -29,11 +99,37 @@ const PipelineAddModal = props =>{
         }
         createPipeline(params).then(res=>{
             if(res.code===0 && res.data){
-                props.history.push(`/index/task/${value.pipelineName}/config`)
+                props.history.push(`/index/task/${res.data}/config`)
             }else{
                 message.error({content:"添加失败", className:"message"})
             }
         })
+    }
+
+    const [type,setType] = useState(1)
+
+    const changeAnchor = anchorName =>{
+        const scrollTop=document.getElementById("pipelineAddModalRight")
+        if (anchorName) {
+            const anchorElement = document.getElementById(anchorName)
+            if (anchorElement) {
+                scrollTop.scrollTop = anchorElement.offsetTop
+                setType(anchorName)
+            }
+        }
+    }
+
+    const onScroll = () =>{
+        const scrollTop=document.getElementById("pipelineAddModalRight").scrollTop
+        for(let x = 1;x <=3;x++){
+            const iId = document.getElementById(x) //当前id
+            const lastId = document.getElementById(x).previousSibling //上一个id
+            const iTop =iId &&  iId.offsetTop
+            const lastTop =lastId && lastId.offsetTop
+            if(scrollTop > lastTop && scrollTop < iTop ){
+                setType(x)
+            }
+        }
     }
 
     return(
@@ -51,60 +147,35 @@ const PipelineAddModal = props =>{
             }}
             okText="确认"
             cancelText="取消"
+            width={800}
         >
             <div className="new">
                 <ModalTitle
                     setVisible={setAddPipelineVisible}
                     title={"创建流水线"}
                 />
-                <Form
-                    id="form"
-                    name="basic"
-                    autoComplete="off"
-                    form={form}
-                    initialValues={{pipelineType:1}}
-                    labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 24 }}
-                    layout={"vertical"}
-                >
-                    <Form.Item
-                        label="流水线名称"
-                        name="pipelineName"
-                        rules={[
-                            {required:true,message:""},
-                            {
-                                pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
-                                message: "流水线名称不能包含非法字符，如&,%，&，#……等",
-                            },
-                            ({ getFieldValue }) => ({
-                                validator(rule, value) {
-                                    if (!value) {
-                                        return Promise.reject("请输入名称")
-                                    }
-                                    let nameArray = []
-                                    if(pipelineList){
-                                        nameArray = pipelineList && pipelineList.map(item=>item.pipelineName);
-                                    }
-                                    if (nameArray.includes(value)) {
-                                        return Promise.reject("名称已经存在");
-                                    }
-                                    return Promise.resolve()
-                                },
-                            }),
-                        ]}
-                    >
-                        <Input ref={inputRef}/>
-                    </Form.Item>
-                    {/*<Form.Item name="pipelineType" label="流水线类型">*/}
-                    {/*    <Select>*/}
-                    {/*        <Option value={1}>流水线</Option>*/}
-                    {/*    </Select>*/}
-                    {/*</Form.Item>*/}
-                </Form>
-                <PipelineAddTemplate
-                    templateType={templateType}
-                    setTemplateType={setTemplateType}
-                />
+                <Row>
+                    <Col span={4}>
+                        <PipelineAddModalLeft
+                            lis={leftLis}
+                            type={type}
+                            changeAnchor={changeAnchor}
+                        />
+                    </Col>
+                    <Col span={20}>
+                        <PipelineAddModalRight
+                            form={form}
+                            inputRef={inputRef}
+                            lis={rightLis}
+                            onScroll={onScroll}
+                            pipelineList={pipelineList}
+                            templateType={templateType}
+                            setTemplateType={setTemplateType}
+                        />
+                    </Col>
+
+
+                </Row>
             </div>
         </Modal>
     )

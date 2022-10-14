@@ -1,10 +1,11 @@
 import React from "react";
-import ConfigCodeOrNewStage from "./configCodeOrNewStage";
+import CodeOrNewStage from "./codeOrNewStage";
 
 const lis=[
     {
         id:1,
         title:"Git",
+        icon:"suyuanmabiaoqian",
         desc:[
             {
                 type:1,
@@ -31,6 +32,7 @@ const lis=[
     {
         id:2,
         title:"SVN",
+        icon:"-_ssh",
         desc: [
             {
                 type:5,
@@ -41,17 +43,22 @@ const lis=[
     }
 ]
 
-const ConfigCodeAddModal = props =>{
+const CodeAddModal = props =>{
 
-    const {codeVisible,setCodeVisible,setIsPrompt,setCodeType} = props
+    const {codeVisible,setCodeVisible,setCodeType,pipelineId,updateConfigure} = props
 
     const handleClick = (group,item,index) =>{
+        const params = {
+            pipelineId:pipelineId,
+            type:item.type,
+            message:"create"
+        }
+        updateConfigure(params)
         setCodeType(item.type)
         setCodeVisible(false)
-        setIsPrompt(true)
     }
 
-    return  <ConfigCodeOrNewStage
+    return  <CodeOrNewStage
                 lis={lis}
                 handleClick={handleClick}
                 visible={codeVisible}
@@ -59,4 +66,4 @@ const ConfigCodeAddModal = props =>{
             />
 }
 
-export default ConfigCodeAddModal
+export default CodeAddModal

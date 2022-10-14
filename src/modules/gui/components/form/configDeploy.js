@@ -17,7 +17,7 @@ const ConfigDeploy = props =>{
     const {getFile,fileAddress,profileAddress} = configItemStore
 
     const [messageInfo,setMessageInfo] = useState("")
-    const {setIsPrompt,deployType,
+    const {setIsPrompt,deployType,formInitialValues,
         virStartShellBlock,setVirStartShellBlock,docStartShellBlock,setDocStartShellBlock,
     } = configDataStore
 
@@ -34,21 +34,30 @@ const ConfigDeploy = props =>{
         fileAddress()
     },[])
 
-    // useEffect(()=>{
-    //     const params = {
-    //         pipelineName:pipelineName,
-    //         regex:formInitialValues[deployType+"sourceAddress"]
-    //     }
-    //     if(formInitialValues && formInitialValues[deployType+"sourceAddress"] && pipelineId){
-    //         getFile(params).then(res=>{
-    //             addMessageInfo(res)
-    //         }).catch(error=>{
-    //             console.log(error)
-    //         })
-    //     }else{
-    //         setMessageInfo("")
-    //     }
-    // },[formInitialValues[deployType+"sourceAddress"],pipelineId])
+    useEffect(()=>{
+        const params = {
+            pipelineName:pipelineName,
+            regex:formInitialValues[deployType+"sourceAddress"]
+        }
+        console.log(formInitialValues,'formInitialValues')
+        if(formInitialValues && formInitialValues[deployType+"sourceAddress"] && pipelineId){
+            getFile(params).then(res=>{
+                addMessageInfo(res)
+            }).catch(error=>{
+                console.log(error)
+            })
+        }else{
+            setMessageInfo("")
+        }
+    },[formInitialValues[deployType+"sourceAddress"],pipelineId])
+
+    const addMessageInfo = data => {
+        if(data.code===0){
+            if(data.data){
+                setMessageInfo("匹配到文件"+data.data)
+            }else setMessageInfo("")
+        }
+    }
 
 
     return(
@@ -77,6 +86,7 @@ const ConfigDeploy = props =>{
                                     <DeployVir
                                         {...props}
                                         configDataStore={configDataStore}
+                                        pipelineId={pipelineId}
                                     />
                                     :
                                     <DeployDocker deployType={deployType}/>

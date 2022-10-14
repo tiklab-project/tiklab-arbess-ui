@@ -101,15 +101,15 @@ const routers=[
                 component: UserMessageContent,
             },
             {
-                path:"/index/task/:pipelineName",
+                path:"/index/task/:pipelineId",
                 component: Project,
                 routes:[
                     {
-                        path:"/index/task/:pipelineName/work",
+                        path:"/index/task/:pipelineId/work",
                         component: WorkSpace
                     },
                     {
-                        path:"/index/task/:pipelineName/config",
+                        path:"/index/task/:pipelineId/config",
                         component: Config
                     },
                     {
@@ -117,23 +117,23 @@ const routers=[
                         component: Config
                     },
                     {
-                        path:"/index/task/:pipelineName/structure",
+                        path:"/index/task/:pipelineId/structure",
                         component: Structure
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/proof",
+                        path:"/index/task/:pipelineId/assembly/proof",
                         component:ProjectSetProof
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/role",
+                        path:"/index/task/:pipelineId/assembly/role",
                         component: ProjectRole
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/redel",
+                        path:"/index/task/:pipelineId/assembly/redel",
                         component: ProjectSetReDel
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/user",
+                        path:"/index/task/:pipelineId/assembly/user",
                         component: ProjectSetUser
                     }
                 ]

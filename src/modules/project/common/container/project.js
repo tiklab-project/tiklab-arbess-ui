@@ -1,6 +1,5 @@
 import React,{useEffect} from "react";
 import ProjectAside from "../components/projectAside";
-import PromptContent from "../../../../common/prompt/prompt";
 import {renderRoutes} from "react-router-config";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
@@ -8,16 +7,15 @@ import {getUser} from "tiklab-core-ui";
 
 const Project= (props)=>{
 
-    const {route,pipelineStore,configDataStore,match}=props
+    const {route,pipelineStore,match}=props
 
     const {findAllPipelineStatus,setPipelineId,setPipelineName} = pipelineStore
-    const {isPrompt,setIsPrompt} = configDataStore
 
-    const pipelineName = match.params.pipelineName
+    const pipelineId = match.params.pipelineId
     const userId = getUser().userId
 
     useEffect(()=>{
-        setPipelineName(pipelineName)
+        setPipelineId(pipelineId)
         findAllPipelineStatus(userId).then(res=>{
             const data = res.data
             if(res.code===0 && data){
@@ -26,19 +24,19 @@ const Project= (props)=>{
                 //     props.history.push("/index/404")
                 // }else {
                 //     data && data.map(item=>{
-                //         if(item.pipelineName === pipelineName){
-                //             setPipelineId(item.pipelineId)
+                //         if(item.pipelineId === pipelineId){
+                //             setPipelineName(item.pipelineId)
                 //         }
                 //     })
                 // }
                 data && data.map(item=>{
-                    if(item.pipelineName === pipelineName){
-                        setPipelineId(item.pipelineId)
+                    if(item.pipelineId === pipelineId){
+                        setPipelineName(item.pipelineName)
                     }
                 })
             }
         })
-    },[pipelineName])
+    },[pipelineId])
 
     const isPipeline = data => {
         return data && data.some(item=>item.pipelineName === pipelineName)
@@ -48,14 +46,6 @@ const Project= (props)=>{
         return ()=>setPipelineId("")
     },[])
 
-    const confirmLeave = pathname =>{
-        if(pathname!==`/home/task/${pipelineName}/config`){
-            pathname && setTimeout(()=>{
-                props.history.push(pathname)
-            })
-        }
-        setIsPrompt(false)
-    }
 
     return(
         <div className="project">
@@ -63,17 +53,15 @@ const Project= (props)=>{
                 {...props}
                 pipelineStore={pipelineStore}
             />
-            <div className="project-content" style={{marginLeft:80}}>
+            <div className="project-content"
+                 style={{marginLeft:80}}
+            >
                 {renderRoutes(route.routes)}
             </div>
-            <PromptContent
-                isPrompt={isPrompt}
-                confirmLeave={confirmLeave}
-            />
         </div>
     )
 }
 
-export default withRouter(inject("pipelineStore","configDataStore")(observer(Project)))
+export default withRouter(inject("pipelineStore")(observer(Project)))
 
 

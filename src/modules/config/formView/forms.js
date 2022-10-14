@@ -1,10 +1,10 @@
 import React from "react";
-import CodeGitOrGitlab from "./codeGitOrGitlab";
-import CodeGiteeOrGithub from "./codeGiteeOrGithub";
-import CodeSvn from "./codeSvn";
-import TestUnit from "./testUnit";
-import BuildMavenOrNode from "./buildMavenOrNode";
-import Deploy from "./deploy";
+import CodeGitOrGitlab from "../configType/code/codeGitOrGitlab";
+import CodeGiteeOrGithub from "../configType/code/codeGiteeOrGithub";
+import CodeSvn from "../configType/code/codeSvn";
+import TestUnit from "../configType/test/testUnit";
+import BuildMavenOrNode from "../configType/build/buildMavenOrNode";
+import Deploy from "../configType/deploy/deploy";
 
 const Forms = props =>{
     
@@ -13,16 +13,16 @@ const Forms = props =>{
     return (
         <>
             {
-              (()=>{
+                (()=>{
                     switch (type){
                         case 1:
                         case 4:
-                            return <CodeGitOrGitlab type={type}/>
+                            return <CodeGitOrGitlab/>
                         case 2:
                         case 3:
-                            return <CodeGiteeOrGithub type={type}/>
+                            return <CodeGiteeOrGithub/>
                         case 5:
-                            return <CodeSvn codeType={type}/>
+                            return <CodeSvn/>
                         case 11:
                             return <TestUnit/>
                         case 21:
@@ -31,7 +31,7 @@ const Forms = props =>{
                         case 31:
                         case 32:
                             return <Deploy/>
-                    }
+                     }
                 })()
             }
         </>

@@ -1,11 +1,10 @@
 import React,{useState,useEffect} from "react";
-import {getUser} from "tiklab-core-ui";
 import ConfigTop from "../components/configTop";
 import {inject,observer} from "mobx-react";
 import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
 import ConfigView from "../components/configView";
 
-const ConfigDetails = props =>{
+const Config = props =>{
 
     const {giteeStore,githubStore,pipelineStore} = props
 
@@ -17,7 +16,6 @@ const ConfigDetails = props =>{
     const [view,setView] = useState("forms")
     const codeValue = getUrlParam("code")
     const codeError = getUrlParam("error")
-    const userId = getUser().userId
 
     // Gitee和Github授权
     useEffect(() => {
@@ -58,21 +56,15 @@ const ConfigDetails = props =>{
 
     return (
         <div className="home-limited config">
-            <div className="config-top top-limited">
-                <ConfigTop
-                    userId={userId}
-                    view={view}
-                    setView={setView}
-                    pipelineId={pipelineId}
-                    pipelineName={pipelineName}
-                />
-            </div>
-            <ConfigView
+            <ConfigTop
                 view={view}
+                setView={setView}
                 pipelineId={pipelineId}
+                pipelineName={pipelineName}
             />
+            <ConfigView view={view}/>
         </div>
     )
 }
 
-export default inject("giteeStore","githubStore","pipelineStore")(observer(ConfigDetails))
+export default inject("giteeStore","githubStore","pipelineStore")(observer(Config))

@@ -1,6 +1,6 @@
 import React from "react";
 import {message} from "antd";
-import ConfigCodeOrNewStage from "./configCodeOrNewStage";
+import CodeOrNewStage from "./codeOrNewStage";
 
 const lis=[
     {
@@ -53,9 +53,9 @@ const lis=[
     }
 ]
 
-const ConfigAddNewStageModal = props =>{
+const NewStageAddModal = props =>{
 
-    const {newStageVisible,setNewStageVisible,data,setData,setIsPrompt,setBuildType,setDeployType} = props
+    const {pipelineId,updateConfigure,newStageVisible,setNewStageVisible,data,setData,setBuildType,setDeployType} = props
 
     const handleClick = (group,item,index)=>{
         const newData = [...data]
@@ -79,12 +79,17 @@ const ConfigAddNewStageModal = props =>{
             dataId:index,
             dataType:item.type
         })
+        const params = {
+            pipelineId:pipelineId,
+            type:item.type,
+            message:"create"
+        }
+        updateConfigure(params)
         setData(newData)
-        setIsPrompt(true)
-        setNewStageVisible(false) 
+        setNewStageVisible(false)
     }
 
-    return   <ConfigCodeOrNewStage
+    return   <CodeOrNewStage
                  lis={lis}
                  handleClick={handleClick}
                  visible={newStageVisible}
@@ -92,4 +97,4 @@ const ConfigAddNewStageModal = props =>{
             />
 }
 
-export default ConfigAddNewStageModal
+export default NewStageAddModal

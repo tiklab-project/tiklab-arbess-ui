@@ -1,4 +1,4 @@
-import React,{Fragment,useState,useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import {Button,Form,message,Row,Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import FindAllProof from "../../../proof/components/findAllProof";
@@ -13,7 +13,7 @@ const CodeGiteeOrGithub = props =>{
 
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
-    const {codeData,formInitialValues,codeType,gitProofId,setGitProofId} = configDataStore
+    const {formInitialValues,codeType,gitProofId,setGitProofId} = configDataStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -21,11 +21,12 @@ const CodeGiteeOrGithub = props =>{
     const [branchList,setBranchList] = useState([]) // 分支
 
     useEffect(()=>{
-        if(codeData && codeData.codeName){
+        if(formInitialValues && formInitialValues.codeName){
             setProhibited(false)
         }
-    },[codeData])
+    },[formInitialValues])
 
+    // 授权过程--失败或成功提示
     let interval = null
     useEffect(()=>{
         const params = {
@@ -93,27 +94,8 @@ const CodeGiteeOrGithub = props =>{
         setProhibited(false)
     }
 
-    const name = codeType =>{
-        switch (codeType){
-            case 1:
-                return "giteeCodeName"
-            case 4:
-                return "githubCodeName"
-        }
-    }
-
-    const branch = codeType =>{
-        switch (codeType){
-            case 1:
-                return "giteeCodeBranch"
-            case 4:
-                return "githubCodeBranch"
-        }
-    }
-
-
     return(
-        <Fragment>
+        <>
             <Row>
                 <FindAllProof type={codeType} {...props}/>
                 <Button className="config-details-link" type="link" onClick={()=>setVisible(true)}>
@@ -121,8 +103,17 @@ const CodeGiteeOrGithub = props =>{
                     新增服务链接
                 </Button>
             </Row>
-            <Form.Item label="仓库" name={codeType+"codeName"} rules={[{required:true, message:"请选择仓库"}]}>
-                <Select style={{ width: 300 }} onChange={changeGitStoreHouse} onClick={clickGitStoreHouse}>
+            <Form.Item
+                label="仓库"
+                name={"codeName"}
+                rules={[{required:true, message:"请选择仓库"}]}
+            >
+                <Select
+                    onChange={changeGitStoreHouse}
+                    onClick={clickGitStoreHouse}
+                    bordered={false}
+                    placeholder="请选择仓库"
+                >
                     {
                         storehouseList && storehouseList.map(item=>{
                             return <Option key={item} value={item}> {item} </Option>
@@ -130,8 +121,12 @@ const CodeGiteeOrGithub = props =>{
                     }
                 </Select>
             </Form.Item>
-            <Form.Item label="分支"  name={codeType+"codeBranch"}>
-                <Select style={{ width: 300 }} disabled={prohibited}>
+            <Form.Item label="分支"  name={"codeBranch"}>
+                <Select
+                    disabled={prohibited}
+                    bordered={false}
+                    placeholder="请选择分支"
+                >
                     {
                         branchList && branchList.map(item=>{
                             return  <Option key={item} value={item}> {item} </Option>
@@ -151,7 +146,7 @@ const CodeGiteeOrGithub = props =>{
                 getGiteeProof={getGiteeProof}
                 setGitProofId={setGitProofId}
             />
-        </Fragment>
+        </>
     )
 }
 

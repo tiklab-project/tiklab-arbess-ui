@@ -1,5 +1,4 @@
 .structure{
-    height: 100%;
     overflow-y: hidden;
     background: #ffffff;
     margin-left: 10px;
@@ -10,7 +9,7 @@
     &-content{
         display: flex;
         flex-direction: row;
-        height: 100%;
+        height: calc(100% - 55px);
         &-left {
             height: 100%;
             width: 350px;

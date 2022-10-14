@@ -26,7 +26,6 @@ const ConfigCodeSvn = props =>{
             <ConfigProof
                 {...props}
                 allProofType={5}
-                proofBtnType={1}
                 testType={"源码地址"}
                 configDataStore={configDataStore}
             />

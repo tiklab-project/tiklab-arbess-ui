@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Button,message,Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
-import {getVersionInfo} from "tiklab-core-ui";
+import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "./configChangeView.scss";
@@ -9,13 +9,15 @@ import ChangeConfigSortsModal from "./changeConfigSortsModal";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,structureStore,userId,pipelineName,configDataStore} = props
+    const {view,setView,pipelineId,structureStore,pipelineName,configDataStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {isPlugin,setIsPrompt,data,setData,codeType,} = configDataStore
+    const {isPlugin,data,setData,codeType} = configDataStore
     const [processVisible,setProcessVisible] = useState(false)
     const [changeSortVisible, setChangeSortVisible] = useState(false)
+
     const configView = localStorage.getItem("configView")
+    const userId = getUser().userId
 
     useEffect(()=>{
         if(configView){setView(configView)}
@@ -28,8 +30,6 @@ const ConfigChangeView = props =>{
         }
         // 改变按钮
         setProcessVisible(true)
-        // 离开编辑页面关闭提示
-        setIsPrompt(false)
         setTimeout(()=>props.history.push(`/index/task/${pipelineName}/structure`),1000)
         pipelineStartStructure(params).then(res=>{
             if(res.code===0 && res.data===1){
@@ -59,8 +59,7 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className="changeView-btn">
-                    <Button form="form" htmlType="submit">保存</Button>
-                    <Button form="form" htmlType="submit" type="primary" onClick={()=>run()}>
+                    <Button type="primary" onClick={()=>run()}>
                         {processVisible ? <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} /> :"运行"}
                     </Button>
                 </div>
@@ -95,7 +94,6 @@ const ConfigChangeView = props =>{
                 data={data}
                 setData={setData}
                 codeType={codeType}
-                setIsPrompt={setIsPrompt}
             />
 
         </div>

@@ -7,7 +7,7 @@ import ConfigAddNewStageRightDrawer from "./configAddNewStageRightDrawer";
 const leftLis = [
     {
         id:1,
-        title:"测试"
+        title:"测试",
     },
     {
         id:2,
@@ -27,6 +27,7 @@ const rightLis = [
             {
                 tpl: 11,
                 tel:"单元测试",
+                icon:"ceshi"
             }
         ]
     },
@@ -37,11 +38,13 @@ const rightLis = [
             {
 
                 tpl: 21,
-                tel:"maven"
+                tel:"maven",
+                icon:"quanxian"
             },
             {
                 tpl: 22,
-                tel:"node"
+                tel:"node",
+                icon:"nodejs"
             }
         ]
     },

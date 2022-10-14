@@ -5,18 +5,19 @@ import ConfigChangeView from "./configChangeView";
 
 const ConfigTop = props =>{
 
-    const {view,setView,pipelineId,pipelineName,userId} = props
+    const {view,setView,pipelineId,pipelineName} = props
 
     return(
-        <div className="config-top-content">
-            <BreadcrumbContent config={"config"} firstItem={pipelineName} secondItem={"配置"}/>
-            <ConfigChangeView
-                userId={userId}
-                view={view}
-                setView={setView}
-                pipelineId={pipelineId}
-                pipelineName={pipelineName}
-            />
+        <div className="config-top top-limited">
+            <div className="config-top-content">
+                <BreadcrumbContent config={"config"} firstItem={pipelineName} secondItem={"配置"}/>
+                <ConfigChangeView
+                    view={view}
+                    setView={setView}
+                    pipelineId={pipelineId}
+                    pipelineName={pipelineName}
+                />
+            </div>
         </div>
     )
 }

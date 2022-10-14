@@ -1,4 +1,5 @@
 import React,{Fragment,useState,useEffect} from "react";
+import {toJS} from 'mobx'
 import "./gui.scss";
 // import {enableAxiosPlugin} from "tiklab-enable-axios-plugin";
 import ConfigCode from "../components/common/configCode";
@@ -75,7 +76,7 @@ const Gui = props =>{
     }
 
     const newStageShow = data =>{
-        console.log(data)
+        console.log(toJS(data))
         return data && data.map((item,index)=>{
             return(
                 <Fragment key={index}>

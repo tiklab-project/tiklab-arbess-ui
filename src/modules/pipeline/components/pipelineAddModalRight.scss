@@ -1,0 +1,82 @@
+.pipelineAddModalRight{
+    &-title{
+        padding-bottom: 10px;
+        text-align: right;
+    }
+    &-ul{
+        max-height: 500px;
+        overflow: auto;
+    }
+    &-li{
+        height: 90px;
+        &:not(:last-child){
+            margin-bottom: 15px;
+        }
+        &-header{
+            padding: 5px 0 5px 30px;
+            display: flex;
+            .li-header{
+                &-title{
+                    font-weight: 600;
+                    font-size: 16px
+                }
+                &-name{
+                    padding-left: 5px;
+                }
+            }
+        }
+        &-content{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            .li-step {
+                height: 40px;
+                line-height: 40px;
+                border-radius: 34px;
+                background: #fff;
+                width: 100px;
+                text-align: center;
+                margin-top: 5px;
+                position: relative;
+                margin-left: 30px;
+                .icon {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                &-name {
+                    padding-left: 5px;
+                }
+            }
+            .li-after{
+                &:after{
+                    content: "";
+                    width: 47px;
+                    border-top: 1px solid #626262;
+                    position: absolute;
+                    top: 20px;
+                    left: 100px;
+                }
+            }
+        }
+    }
+    &-same{
+        width:100%;
+        border-radius: 4px;
+        background: #e2f7ff;
+        display: inline-block;
+        cursor: pointer;
+    }
+    &-self{
+        height: 50px;
+        .li-self{
+            font-size: 16px;
+            text-align: center;
+            padding-top: 13px;
+        }
+    }
+    &-selected{
+        border: 1px solid #13659b;
+        //background: #c6e4ef;
+    }
+}
