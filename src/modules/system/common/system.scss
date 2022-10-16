@@ -1,5 +1,4 @@
 .system {
-    height: 100%;
     &-aside {
         position: fixed;
         background-color: #f8f8f8;
@@ -9,6 +8,17 @@
         top: 55px;
         height: 100%;
         width: 200px;
+        &-sys{
+            width: 100%;
+            text-align: center;
+            padding-top: 10px;
+            height: 45px;
+            border-top: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+        &-top{
+            height: calc(100% - 120px);
+        }
         ul,li {
             list-style: none;
         }

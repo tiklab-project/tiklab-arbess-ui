@@ -22,6 +22,7 @@ const Head = props =>{
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
     const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
+    const authType = JSON.parse(localStorage.getItem("authConfig")).authType
 
     useEffect(()=>{
         setCurrentLink(path)
@@ -43,6 +44,11 @@ const Head = props =>{
             to:"/index/pipeline",
             title: "pipeline",
         },
+        {
+            key:"zz",
+            to:'/index/widget',
+            title: "widget"
+        }
     ]
 
     const changeCurrentLink = item => {
@@ -86,20 +92,38 @@ const Head = props =>{
         </Menu>
     )
 
-    const setMenu = (
-        <Menu>
-            <Menu.Item>
-                <a href={authUrl+"#/orga/dashbord"}>
-                    <UserOutlined />
-                    账号与成员
-                </a>
-            </Menu.Item>
-            <Menu.Item onClick={()=>props.history.push("/index/system")}>
-                <SettingOutlined/>
-                系统设置
-            </Menu.Item>
-        </Menu>
-    )
+    
+    const setMenu = () => {
+        let url
+        if(authType){
+            url= authUrl+"#/orga/dashbord"
+        }else {
+            url="/index/orga"
+        }
+        return(
+            <Menu>
+                    <Menu.Item>
+                        {
+                            authType?
+                                <a style={{"color":"black"}} href={url}>
+                                    <UserOutlined />
+                                    账号与成员
+                                </a>
+                                :
+                                <span onClick={()=>props.history.push(url)}>
+                                    <UserOutlined />
+                                    账号与成员
+                                </span>
+                        }
+
+                    </Menu.Item>
+                    <Menu.Item onClick={()=>props.history.push("/index/system")}>
+                        <SettingOutlined/>
+                        系统设置
+                    </Menu.Item>
+                </Menu>
+        )
+    }
 
     const goUserMessageContent = () =>{
         props.history.push("/index/userMessage")

@@ -2,7 +2,7 @@ import {action,observable} from "mobx";
 
 import {
     CreateProof,
-    FindpipelineProof,
+    FindPipelineProof,
 } from "../api/proof";
 
 export class ProofStore{
@@ -28,12 +28,12 @@ export class ProofStore{
     }
 
     @action
-    findpipelineProof =async values =>{
+    findPipelineProof =async values =>{
         const params = new FormData()
         params.append("pipelineId",values.pipelineId)
         params.append("userId",values.userId)
         params.append("type",values.type)
-        FindpipelineProof(params).then(res=>{
+        FindPipelineProof(params).then(res=>{
             console.log(res)
             if(res.code===0){
                 this.pipelineProofList = res.data

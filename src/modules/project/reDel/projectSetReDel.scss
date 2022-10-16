@@ -1,12 +1,12 @@
 .pipelineReDel{
     padding: 10px;
+    margin: auto;
+    max-width: 1150px;
+    min-height: calc(100vh - 55px);
+    max-height: fit-content;
+    background: #fff;
     &-content{
-
         &-div{
-            //display: flex;
-            //display: -webkit-box;
-            //display: -webkit-flex;
-            //display: -ms-flexbox;
             min-height: 150px;
         }
         &-rename{

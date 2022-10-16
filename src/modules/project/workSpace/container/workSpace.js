@@ -48,7 +48,7 @@ const WorkSpace = props =>{
     },[fresh,pipelineId])
 
     return(
-        <div className="workSpace home-limited">
+        <div className="workSpace">
             <div className="workSpace-top workSpace-top-limited">
                 <BreadcrumbContent
                     config={"config"}

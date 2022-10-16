@@ -210,7 +210,7 @@ const SystemAside= props =>  {
 
     return (
         <div className="system-aside">
-            <ul style={{padding: 0}} key="0">
+            <ul style={{padding: 0}} key="0" className="system-aside-top">
                 {
                     router && router.map(firstItem => {
                         return firstItem.children && firstItem.children.length > 0 ?
@@ -218,6 +218,9 @@ const SystemAside= props =>  {
                     })
                 }
             </ul>
+            <div className="system-aside-sys" onClick={()=>props.history.push("/index/orga")}>
+                组织管理
+            </div>
         </div>
     )
 }

@@ -10,9 +10,9 @@ export function CreateProof(data){
 }
 
 //凭证
-export function  FindpipelineProof(data){
+export function  FindPipelineProof(data){
     return serviceLoc.request({
-        url:"/proof/findpipelineProof",
+        url:"/proof/findPipelineProof",
         method:"post",
         data
     })

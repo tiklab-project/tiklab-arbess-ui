@@ -173,6 +173,7 @@
         "tiklab-plugin-ui": "^1.0.0",
         "tiklab-privilege-ui": "^1.0.0",
         "tiklab-todotask-ui": "^1.0.0",
-        "tiklab-user-ui": "^1.0.0"
+        "tiklab-user-ui": "^1.0.0",
+        "tiklab-widget-ui": "^1.0.0"
     }
 }

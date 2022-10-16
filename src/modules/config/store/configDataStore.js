@@ -1,4 +1,4 @@
-import {action, observable} from "mobx";
+import {action,observable} from "mobx";
 
 export class ConfigDataStore {
 
@@ -13,18 +13,12 @@ export class ConfigDataStore {
     @observable deployProofId = ""
     @observable unitShellBlock = ""
 
-    // @observable mavenShellBlock = ""
-    // @observable nodeShellBlock = ""
     @observable buildShellBlock = ""
 
     @observable virShellBlock = ""
 
-    // @observable virStartShellBlock = ""
-    // @observable docStartShellBlock = ""
     @observable deployShellBlock = ""
 
-    // @observable virOrderShellBlock = ""
-    // @observable docOrderShellBlock = ""
     @observable deployOrderShellBlock = ""
 
     @action
@@ -72,16 +66,6 @@ export class ConfigDataStore {
         this.buildShellBlock = value
     }
 
-    // @action
-    // setMavenShellBlock = value =>{
-    //     this.mavenShellBlock = value
-    // }
-    //
-    // @action
-    // setNodeShellBlock = value =>{
-    //     this.nodeShellBlock = value
-    // }
-
     @action
     setVirShellBlock = value =>{
         this.virShellBlock = value
@@ -96,26 +80,6 @@ export class ConfigDataStore {
     setDeployOrderShellBlock = value =>{
         this.deployOrderShellBlock = value
     }
-
-    // @action
-    // setVirStartShellBlock = value =>{
-    //     this.virStartShellBlock = value
-    // }
-    //
-    // @action
-    // setDocStartShellBlock = value =>{
-    //     this.docStartShellBlock = value
-    // }
-    //
-    // @action
-    // setVirOrderShellBlock = value =>{
-    //     this.virOrderShellBlock = value
-    // }
-    //
-    // @action
-    // setDocOrderShellBlock = value =>{
-    //     this.docOrderShellBlock = value
-    // }
 
     @action
     setGitProofId = value =>{

@@ -118,7 +118,7 @@ module.exports = {
                 ),
             },
             {
-                test: /\.(png|jpg|jpeg|gif|svg)/,
+                test: /\.(png|jpg|jpeg|gif)/,
                 // exclude: /node_modules/,
                 use: {
                     loader: "url-loader",
@@ -131,7 +131,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(eot|woff2?|ttf|svg)$/,
+                test: /\.(eot|woff2?|ttf)$/,
                 use: [
                     {
                         loader: "url-loader",
@@ -142,6 +142,17 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(svg)/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        outputPath: "images/",
+                        name: "[name].[ext]", // 图片输出的路径
+                        limit: 8*1024,
+                    }
+                }
             },
         ]
     },

@@ -59,7 +59,7 @@ const ProjectSetReDel = props =>{
     }
 
     return(
-        <div className="pipelineReDel home-limited">
+        <div className="pipelineReDel">
             <BreadcrumbContent firstItem={pipelineName} secondItem={"设置"}/>
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-content-rename pipelineReDel-content-div">

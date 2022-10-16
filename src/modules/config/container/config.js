@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
-import ConfigTop from "../components/configTop";
+import ConfigTop from "../components/common/configTop";
 import {inject,observer} from "mobx-react";
 import {getUrlParam} from "../../../common/getUrlParam/getUrlParam";
-import ConfigView from "../components/configView";
+import ConfigView from "../components/common/configView";
 
 const Config = props =>{
 
@@ -55,7 +55,7 @@ const Config = props =>{
     if(visible){return  null}
 
     return (
-        <div className="home-limited config">
+        <div className="config">
             <ConfigTop
                 view={view}
                 setView={setView}

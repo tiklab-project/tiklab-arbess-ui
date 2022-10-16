@@ -47,6 +47,11 @@
             "libraryDirectory": "es",
             "style": true
         }, "tiklab-oplog-ui"],
+        ["import", {
+            "libraryName": "tiklab-widget-ui",
+            "libraryDirectory": "es",
+            "style": true
+        }, "tiklab-widget-ui"],
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],
         ["dynamic-import-webpack"],

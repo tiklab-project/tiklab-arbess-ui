@@ -7,6 +7,8 @@ const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 
+const Widget=AsyncComponent(()=>import("./modules/wiget/wiget"))
+
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
 
@@ -28,14 +30,20 @@ const ProjectSetReDel=AsyncComponent(()=>import("./modules/project/reDel/project
 const ProjectSetProof=AsyncComponent(()=>import("./modules/project/proof/projectSetProof"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/project/members/projectSetUser"))
 
+/* 账号与成员 */
+
+const Orga=AsyncComponent(()=>import("./modules/orga/common/orga"))
+
+const UserList=AsyncComponent(()=>import("./modules/orga/user/list"))
+const UserDirectory=AsyncComponent(()=>import("./modules/orga/user/directory"))
+const Org=AsyncComponent(()=>import("./modules/orga/user/org"))
+
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
 
-const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
-const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
-const Org=AsyncComponent(()=>import("./modules/system/user/org"))
+
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 
@@ -84,6 +92,11 @@ const routers=[
             {
                 path: "/index/home",
                 component: HomePage,
+                exact:true,
+            },
+            {
+                path: "/index/widget",
+                component: Widget,
                 exact:true,
             },
             {
@@ -136,6 +149,24 @@ const routers=[
                         path:"/index/task/:pipelineId/assembly/user",
                         component: ProjectSetUser
                     }
+                ]
+            },
+            {
+                path:"/index/orga",
+                component: Orga,
+                routes:[
+                    {
+                        path: "/index/orga/dashbord",
+                        component: Org,
+                    },
+                    {
+                        path: "/index/orga/directory",
+                        component: UserDirectory,
+                    },
+                    {
+                        path: "/index/orga/list",
+                        component: UserList,
+                    },
                 ]
             },
             {
@@ -197,18 +228,6 @@ const routers=[
                     // {
                     //     path:"/index/system/*",
                     //     render:()=><Redirect to="/index/404"/>
-                    // },
-                    // {
-                    //     path: "/index/system/directory",
-                    //     component: UserDirectory,
-                    // },
-                    // {
-                    //     path: "/index/system/list",
-                    //     component: UserList,
-                    // },
-                    // {
-                    //     path: "/index/system/org",
-                    //     component: Org,
                     // },
                     // {
                     //     path:"/index/system/mes/management",

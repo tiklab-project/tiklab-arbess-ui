@@ -32,9 +32,9 @@ const ProjectSetUser=AsyncComponent(()=>import("./modules/project/members/projec
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
-const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
-const Org=AsyncComponent(()=>import("./modules/system/user/org"))
+const UserList=AsyncComponent(()=>import("./modules/orga/user/list"))
+const UserDirectory=AsyncComponent(()=>import("./modules/orga/user/directory"))
+const Org=AsyncComponent(()=>import("./modules/orga/user/org"))
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))

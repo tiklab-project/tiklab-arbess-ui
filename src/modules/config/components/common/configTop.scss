@@ -1,0 +1,26 @@
+.config{
+    margin: auto;
+    max-width: 1150px;
+    min-height: calc(100vh - 55px);
+    max-height: fit-content;
+    background: #fff;
+    .top-limited{
+        max-width: 1150px;
+        margin: auto;
+    }
+    &-top{
+        position: fixed;
+        z-index: 88;
+        background: #fff;
+        width: calc(100% - 100px);
+        padding: 8px 15px 4px;
+        font-size: 16px;
+        min-width: 700px;
+        &-content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}

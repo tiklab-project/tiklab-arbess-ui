@@ -1,11 +1,12 @@
 .frame{
+    height: 100vh;
+    overflow: hidden;
     &-header{
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: #5d70ea;
         color: #fff;
-        position: fixed;
         width: 100%;
         min-width: 600px;
         height: 55px;
@@ -81,6 +82,8 @@
         }
     }
     &-content{
-        padding-top: 55px;
+        height: calc(100vh - 50px);
+        overflow: auto;
+        background: #f7f8fa;
     }
 }

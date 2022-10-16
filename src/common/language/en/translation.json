@@ -6,6 +6,7 @@
     "collection": "collection",
     "add": "add",
     "proof": "proof",
-    "environment": "enviroment"
+    "environment": "enviroment",
+    "widget":"widget"
 
 }
