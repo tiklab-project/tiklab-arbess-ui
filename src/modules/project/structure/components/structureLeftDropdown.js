@@ -17,6 +17,7 @@ const StructureLeftDropdown = props =>{
         setModeValue("执行方式")
     },[pipelineId,drop])
 
+    // 切换状态
     const changeState = (value,e) =>{
         setStatusValue(value)
         setState(parseInt(e.key))
@@ -33,6 +34,7 @@ const StructureLeftDropdown = props =>{
         change(params,1)
     }
 
+    // 切换执行人
     const changeEnforcer = (value,e) =>{
         if(e.key==="全部"){
             e.key=null
@@ -52,6 +54,7 @@ const StructureLeftDropdown = props =>{
         change(params,1)
     }
 
+    // 切换方式
     const changeMode = (value,e) =>{
         setModeValue(value)
         setMode(parseInt(e.key))

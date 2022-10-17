@@ -40,7 +40,7 @@ const ConfigView = props =>{
             findAllConfigure(pipelineId).then(res=>{
                 const initialData = res.data
                 if(res.code===0){
-                    if(initialData.length === 0 ){
+                    if(initialData === null || initialData.length===0){
                         nonData()
                     }
                     else {

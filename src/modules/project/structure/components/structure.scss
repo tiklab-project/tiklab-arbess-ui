@@ -1,7 +1,6 @@
 .structure{
     overflow-y: hidden;
     background: #ffffff;
-    margin-left: 10px;
     .icon {
         width: 20px !important;
         height: 20px !important;
@@ -133,16 +132,16 @@
                         }
                     }
                     &_center{
-                        display: flex;
-                        flex-direction: row;
-                        padding: 20px 0;
-                        min-width: 490px;
                         &-cart{
-                            margin-right: 20px;
+                            margin: 20px 0;
                             padding: 10px;
                             width: 260px;
                             height: 136px;
                             border: 1px solid #f0f0f0;
+                            display: inline-block;
+                            &:not(:last-child){
+                                margin-right: 20px;
+                            }
                             .cart{
                                 &-center{
                                     &-item{

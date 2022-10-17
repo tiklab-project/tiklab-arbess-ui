@@ -1,4 +1,4 @@
-.breadcrumb{
+.breadcrumbContent{
     width: 100%;
     z-index: 100;
     background: #fff;
@@ -6,17 +6,6 @@
     font-weight: 600;
     padding: 12px 0 4px;
     margin-bottom: 15px;
-
-    //padding: 8px 0 4px 16px;
-    //border-bottom: 1px solid #C4C4C4;
-    //margin-bottom: 16px;
-    &-topOver{
-        padding-top: 12px;
-        font-weight: 600;
-        font-size: 16px;
-        margin-bottom: 15px;
-
-    }
     &-span{
         color: rgba(0,0,0,.45);
     }

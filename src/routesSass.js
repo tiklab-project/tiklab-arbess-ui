@@ -28,13 +28,17 @@ const ProjectSetReDel=AsyncComponent(()=>import("./modules/project/reDel/project
 const ProjectSetProof=AsyncComponent(()=>import("./modules/project/proof/projectSetProof"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/project/members/projectSetUser"))
 
+/* 账号与成员 */
+const Orga=AsyncComponent(()=>import("./modules/orga/common/orga"))
+
+const UserList=AsyncComponent(()=>import("./modules/orga/user/list"))
+const UserDirectory=AsyncComponent(()=>import("./modules/orga/user/directory"))
+const Org=AsyncComponent(()=>import("./modules/orga/user/org"))
+
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-const UserList=AsyncComponent(()=>import("./modules/orga/user/list"))
-const UserDirectory=AsyncComponent(()=>import("./modules/orga/user/directory"))
-const Org=AsyncComponent(()=>import("./modules/orga/user/org"))
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
@@ -52,10 +56,10 @@ const MessageType=AsyncComponent(()=>import("./modules/system/message/messageTyp
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 
 const routesSaas =[
-    // {
-    //     path:"/login",
-    //     component:Login,
-    // },
+    {
+        path:"/login",
+        component:Login,
+    },
     {
         path:"/logout",
         component:Logout,
@@ -89,15 +93,15 @@ const routesSaas =[
                 component: UserMessageContent,
             },
             {
-                path:"/index/task/:pipelineName",
+                path:"/index/task/:pipelineId",
                 component: Project,
                 routes:[
                     {
-                        path:"/index/task/:pipelineName/work",
+                        path:"/index/task/:pipelineId/work",
                         component: WorkSpace
                     },
                     {
-                        path:"/index/task/:pipelineName/config",
+                        path:"/index/task/:pipelineId/config",
                         component: Config
                     },
                     {
@@ -105,25 +109,43 @@ const routesSaas =[
                         component: Config
                     },
                     {
-                        path:"/index/task/:pipelineName/structure",
+                        path:"/index/task/:pipelineId/structure",
                         component: Structure
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/proof",
+                        path:"/index/task/:pipelineId/assembly/proof",
                         component:ProjectSetProof
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/role",
+                        path:"/index/task/:pipelineId/assembly/role",
                         component: ProjectRole
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/redel",
+                        path:"/index/task/:pipelineId/assembly/redel",
                         component: ProjectSetReDel
                     },
                     {
-                        path:"/index/task/:pipelineName/assembly/user",
+                        path:"/index/task/:pipelineId/assembly/user",
                         component: ProjectSetUser
                     }
+                ]
+            },
+            {
+                path:"/index/orga",
+                component: Orga,
+                routes:[
+                    {
+                        path: "/index/orga/dashbord",
+                        component: Org,
+                    },
+                    {
+                        path: "/index/orga/directory",
+                        component: UserDirectory,
+                    },
+                    {
+                        path: "/index/orga/list",
+                        component: UserList,
+                    },
                 ]
             },
             {
@@ -155,7 +177,7 @@ const routesSaas =[
                         component: SystemProof,
                     },
                     {
-                        path:"/index/system/message",
+                        path:"/index/system/info",
                         component: Info,
                     },
                     {

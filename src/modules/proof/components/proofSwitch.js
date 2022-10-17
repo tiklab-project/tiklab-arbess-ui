@@ -20,7 +20,7 @@ const ProofSwitch = props =>{
                 <Select style={{width:150}} placeholder={"类型"}>
                     <Select.Option value={1}>全部</Select.Option>
                     <Select.Option value={2}>password</Select.Option>
-                    <Select.Option value={2}>ssh</Select.Option>
+                    <Select.Option value={3}>ssh</Select.Option>
                 </Select>
             </Col>
             <Col span={6}>

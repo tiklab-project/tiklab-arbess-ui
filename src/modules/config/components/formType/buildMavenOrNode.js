@@ -34,7 +34,7 @@ const BuildMavenOrNode = props =>{
                     configStore={configStore}
                     shellBlock={buildShellBlock}
                     setShellBlock={setBuildShellBlock}
-
+                    placeholder={"请输入执行命令"}
                 />
             </Form.Item>
         </>

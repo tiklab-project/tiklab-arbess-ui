@@ -4,9 +4,7 @@
         &-btn,&-changeSort{
             margin-top: 2px;
             &>button{
-                &:last-child{
-                    margin: 0 15px;
-                }
+                margin-right: 15px;
             }
         }
         &-view{

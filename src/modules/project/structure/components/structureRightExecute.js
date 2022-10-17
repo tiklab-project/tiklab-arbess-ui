@@ -1,11 +1,11 @@
-import React,{useState} from "react";
-import {Button} from "antd";
+import React,{useState,Fragment} from "react";
 import {getUser} from "tiklab-core-ui";
-import ConfigName from "../../../../common/configName/configName";
+import StructureRightCart from "./structureRightCart";
+import StructureRightCue from "./structureRightCue";
 
 const StructureRightExecute = props => {
 
-    const {status,execState,killInstance,rightExecuteData,runWay,freshen,setFreshen,setPageCurrent,pipelineId} = props
+    const {status,execState,killInstance,rightExecuteData,freshen,setFreshen,setPageCurrent,pipelineId} = props
     const [isActiveSlide,setIsActiveSlide] = useState(true) // 日志打印滚动条状态
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
@@ -42,7 +42,6 @@ const StructureRightExecute = props => {
             pipelineId:pipelineId
         }
         killInstance(params).then(res=>{
-            console.log("停止成功",res)
             setPageCurrent(1)
             setFreshen(!freshen)
         }).catch(error=>{
@@ -69,6 +68,24 @@ const StructureRightExecute = props => {
         setIsActiveSlide(false)
     }
 
+    const executeDetails = rightExecuteData =>{
+        return <div className="mid_group_center">
+            {
+                rightExecuteData && rightExecuteData.map((item,index)=>{
+                    return  <Fragment key={index}>
+                                <StructureRightCart
+                                    item={item}
+                                    style={style(index+1)}
+                                    state={state(index)}
+                                    time={times(index)}
+                                    log={null}
+                                />
+                            </Fragment>
+                })
+            }
+        </div>
+    }
+
     const logRunLog = () =>{
         if(execState) {
             const outLog=document.getElementById("outLog")
@@ -76,55 +93,25 @@ const StructureRightExecute = props => {
                 outLog.scrollTop = outLog.scrollHeight
             }
             return  <div className="structure-content-bottom" onWheel={onWheel}>
-                        <div className="structure-content-bottom-title">输出</div>
-                        <div className="structure-content-bottom-outLog" id="outLog">
-                            {execState.runLog}
-                        </div>
-                        <div className="structure-content-bottom-runLog">{status(0)}</div>
-                    </div>
-        }
-    }
-
-    const executeDetails = rightExecuteData =>{
-        return rightExecuteData && rightExecuteData.map((item,index)=>{
-            return(
-                <div className={`mid_group_center-cart ${style(index+1)}`} key={index}>
-                    <div className="cart-top">
-                        <span className="cart-top-taskAlias">{item.taskAlias}</span>
-                        <span> -- </span>
-                        <span className="cart-top-configName">
-                            <ConfigName type={item.taskType}/>
-                        </span>
-                    </div>
-                    <div className="cart-center">
-                        <div className="cart-center-item">
-                            <div>状态：{state(index+1)}</div>
-                            <div >时间：{times(index)}</div>
-                        </div>
-                    </div>
-                    <div className="cart-bottom" >
-                        <span className="cart-bottom-span">
-                            日志
-                        </span>
-                    </div>
+                <div className="structure-content-bottom-title">输出</div>
+                <div className="structure-content-bottom-outLog" id="outLog">
+                    {execState.runLog}
                 </div>
-            )
-        })
+                <div className="structure-content-bottom-runLog">{status(0)}</div>
+            </div>
+        }
     }
 
     return(
         <div className="mid_group">
-            <div className="mid_group_top">
-                <div className="mid_group_top_tel">
-                    <span className="tel_time">运行中</span>
-                    <span className="tel_time">执行时长：{execState && execState.allTime} </span>
-                    <span className="tel_way">触发方式：{runWay (execState && execState.runWay)} </span>
-                </div>
-                <div className="mid_group_top_del">
-                    <Button onClick={()=>cease()}> 停止 </Button>
-                </div>
-            </div>
-            <div className="mid_group_center"> {executeDetails(rightExecuteData)} </div>
+            <StructureRightCue
+                way={execState && execState.runWay}
+                time={execState && execState.allTime}
+                title={"运行中"}
+                action={cease}
+                actionTitle={"停止"}
+            />
+            {executeDetails(rightExecuteData)}
             {logRunLog()}
        </div>
     )

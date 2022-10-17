@@ -70,14 +70,14 @@ const Proof = props =>{
     return (
         <div style={style}>
             <ProofAll type={allProofType}/>
-            <div className="config-details-link">
+            <div>
                 {
                     testStatus ?
                         <div>
                             <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
                         </div>
                         :
-                        <div style={{color:"#1890ff",cursor:"pointer"}} onClick={()=>testing()}>
+                        <div style={{color:"#1890ff",cursor:"pointer",padding:"5px 0 0 5px"}} onClick={()=>testing()}>
                             <ApiOutlined />
                             连接测试
                         </div>

@@ -5,6 +5,7 @@ import StructureEmpty from "./structureEmpty";
 import {inject,observer} from "mobx-react";
 import {ConfigProvider,Pagination} from "antd";
 import zhCN from "antd/es/locale/zh_CN";
+import StructureLeftList from "./structureLeftList";
 
 const StructureLeft = props =>{
 
@@ -63,31 +64,23 @@ const StructureLeft = props =>{
     
     const renderLeftPageList = leftPageList => {
         return leftPageList.map((item,i)=>{
-            return  <div onClick={()=>showHistory(item,i)}
-                         className={`history-content-list-ul ${index===i+1 ? "history-content-list_active":""}`}
-                         key={i}
-                    >
-                        <div className="list-title"> # {item.findNumber}</div>
-                        <div className="list-group">
-                            <div className="list-group-item">
-                                <div className="list-state">
-                                    状态 : {sta(item)}
-                                </div>
-                                <div className="list-one">
-                                    执行人 : {item.user && item.user.name}
-                                </div>
-                            </div>
-                            <div className="list-time">
-                                执行时间 : {item.createTime}
-                            </div>
-                        </div>
-                    </div>
+            return  <StructureLeftList
+                        key={i}
+                        onClick={()=>showHistory(item,i)}
+                        state={sta(item)}
+                        index={index}
+                        type={i+1}
+                        name={item.user && item.user.name}
+                        createTime={item.createTime}
+                        title={`# ${item.findNumber}`}
+                    />
         })
     }
 
     return(
         <div className="structure-content-left">
             <StructureLeftDropdown
+                {...props}
                 state={state}
                 setState={setState}
                 enforcer={enforcer}

@@ -21,6 +21,7 @@ const TestUnit = props =>{
                 configStore={configStore}
                 shellBlock={unitShellBlock}
                 setShellBlock={setUnitShellBlock}
+                placeholder={"请输入测试命令"}
             />
         </Form.Item>
     )

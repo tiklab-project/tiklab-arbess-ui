@@ -51,7 +51,6 @@ const WorkSpace = props =>{
         <div className="workSpace">
             <div className="workSpace-top workSpace-top-limited">
                 <BreadcrumbContent
-                    config={"config"}
                     firstItem={pipelineName}
                     secondItem={"概况"}
                 />

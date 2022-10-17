@@ -9,7 +9,7 @@ const Code = props =>{
 
     const {codeType,setCodeType,del,pipelineId,updateConfigure} = props
 
-    const [codeVisible, setCodeVisible] = useState(false)
+    const [codeVisible,setCodeVisible] = useState(false)
 
     // 切换类型
     const changeType = codeType =>{
@@ -36,9 +36,14 @@ const Code = props =>{
 
     const code = codeType => {
         return  codeType ==="" ?
-            <div className="formView-wrapper-handle code-handle" onClick={()=>setCodeVisible(true)}>
-                添加代码源
-            </div>
+            <>
+                <div className="formView-wrapper">
+                    <div className="formView-wrapper-Headline code-handle">代码源</div>
+                </div>
+                <div className="formView-wrapper-handle code-handle" onClick={()=>setCodeVisible(true)}>
+                    添加代码源
+                </div>
+            </>
             :
             <div className="formView-wrapper">
                 <div className="formView-wrapper-Headline">

@@ -44,11 +44,11 @@ const Head = props =>{
             to:"/index/pipeline",
             title: "pipeline",
         },
-        {
-            key:"zz",
-            to:'/index/widget',
-            title: "widget"
-        }
+        // {
+        //     key:"widget",
+        //     to:'/index/widget',
+        //     title: "widget"
+        // }
     ]
 
     const changeCurrentLink = item => {
@@ -80,6 +80,9 @@ const Head = props =>{
     const goOut = () => {
         props.history.push({
             pathname: "/logout",
+            state:{
+                preRoute: props.location.pathname
+            }
         })
     }
     
@@ -96,24 +99,24 @@ const Head = props =>{
     const setMenu = () => {
         let url
         if(authType){
-            url= authUrl+"#/orga/dashbord"
-        }else {
             url="/index/orga"
+        }else {
+            url= authUrl+"#/orga/dashbord"
         }
         return(
             <Menu>
                     <Menu.Item>
                         {
                             authType?
-                                <a style={{"color":"black"}} href={url}>
-                                    <UserOutlined />
-                                    账号与成员
-                                </a>
-                                :
                                 <span onClick={()=>props.history.push(url)}>
                                     <UserOutlined />
                                     账号与成员
                                 </span>
+                                :
+                                <a style={{"color":"black"}} href={url}>
+                                    <UserOutlined />
+                                    账号与成员
+                                </a>
                         }
 
                     </Menu.Item>

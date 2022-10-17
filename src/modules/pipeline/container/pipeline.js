@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React,{useEffect,useState} from "react";
 import {getUser} from "tiklab-core-ui";
-import {Button,Input} from "antd";
+import {Button,Input,message} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import "../components/pipeline.scss";
 import PipelineTable from "../components/pipelineTable";
 import PipelineAddModal from "../components/pipelineAddModal";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import {inject,observer} from "mobx-react";
 
 const Pipeline = props =>{
@@ -24,7 +25,11 @@ const Pipeline = props =>{
             userId: getUser().userId,
             pipelineName:e.target.value,
         }
-        findLike(params)
+        findLike(params).then(res=>{
+            if(res.data===null){
+                message.info("暂无数据")
+            }
+        })
     }
 
     useEffect(()=>{
@@ -51,10 +56,21 @@ const Pipeline = props =>{
         setListType(item.id)
     }
 
+    const renderLis = lis => {
+        return lis.map(item=>{
+            return <div key={item.id}
+                        className={`pipeline-type-link ${listType===item.id ? "pipeline-type-active" : ""}`}
+                        onClick={()=>onclick(item)}
+                    >
+                        <span>{item.title}</span>
+                    </div>
+        })
+    }
+    
     return(
         <div className="pipeline home-limited">
             <div className="pipeline-top pipeline-flex">
-                <div className="pipeline-top-title">流水线</div>
+                <BreadcrumbContent firstItem={"流水线"}/>
                 <div className="pipeline-top-r">
                     <Button type="primary" onClick={()=>setAddPipelineVisible(true)}>
                         <PlusOutlined/> 新建流水线
@@ -63,26 +79,18 @@ const Pipeline = props =>{
             </div>
             <div className="pipeline-type pipeline-flex">
                 <div className="pipeline-type-group ">
-                    {
-                        lis.map(item=>{
-                            return <div key={item.id}
-                                        className={`pipeline-type-link ${listType===item.id ? "pipeline-type-active" : ""}`}
-                                        onClick={()=>onclick(item)}
-                                    >
-                                        <span>{item.title}</span>
-                                    </div>
-                        })
-                    }
+                    {renderLis(lis)}
                 </div>
                 <div className="pipeline-type-input">
                     <Input
                         placeholder="请输入流水线"
-                        // onChange={onChangeSearch}
-                        onPressEnter={onChangeSearch}
+                        onChange={onChangeSearch}
+                        // onPressEnter={onChangeSearch}
                         style={{ width: 280 }}
                     />
                 </div>
             </div>
+            
             <PipelineTable
                 {...props}
                 pipelineStore={pipelineStore}

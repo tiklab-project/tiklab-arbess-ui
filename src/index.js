@@ -7,7 +7,6 @@ import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {messageModuleStores} from "tiklab-message-ui/es/store"
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
-import {getUser} from "tiklab-core-ui";
 import {observer,Provider} from "mobx-react";
 import {useTranslation} from "react-i18next";
 import routers from "./routes";
@@ -40,14 +39,6 @@ const Index = observer(() => {
         ...orgStores,
         ...store
     }
-
-    const userId = getUser() && getUser().userId
-
-    // useEffect(()=>{
-    //     if(userId){
-    //         privilegeStores.systemRoleStore.getSystemPermissions(userId)
-    //     }
-    // },[userId])
 
     useAccountConfig()
     useEffect(() => {

@@ -11,7 +11,6 @@ const NewStage = props =>{
 
     const [newStageVisible, setNewStageVisible] = useState(false)
 
-    // 切换类型
     const changeType = group =>{
         Modal.confirm({
             title: "删除",

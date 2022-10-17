@@ -1,25 +1,44 @@
 .pipelineReDel{
     padding: 10px;
     margin: auto;
-    max-width: 1150px;
+    max-width: 900px;
     min-height: calc(100vh - 55px);
     max-height: fit-content;
     background: #fff;
-    &-content{
-        &-div{
-            min-height: 150px;
+    &-ul{
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+    }
+    &-li{
+        &:not(:last-child){
+            border-bottom: 1px solid #e7dede;
         }
-        &-rename{
-            border-bottom: 1px solid #cccccc;
+        &-top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            cursor: pointer;
+            &:hover{
+                background: #f4f4f4;
+            }
         }
-        &-del{
-            margin-top: 15px;
+        &-bottom{
+            height: 45px;
+            line-height: 45px;
+            padding-left: 45px;
+            margin-top: 10px;
+        }
+        &-none{
+            display: none;
         }
         &-title{
             font-size: 16px;
-            font-weight: 600;
-            width: 150px;
-            height: 50px;
+            &-name{
+                padding-left: 10px;
+            }
         }
     }
 }
+
+

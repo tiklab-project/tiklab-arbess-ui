@@ -94,7 +94,7 @@ export class PipelineStore {
         return new Promise((resolve, reject) => {
             FindLike(params).then(res=>{
                 console.log(res)
-                if(res.code===0 && res.data){
+                if(res.code===0){
                     this.pipelineList=res.data
                 }
                 resolve(res)

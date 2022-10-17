@@ -1,9 +1,9 @@
-import React,{Fragment} from "react";
+import React from "react";
 
 const ConfigName = props =>{
     const {type} = props
     return (
-        <Fragment>
+        <>
             {
                 (()=>{
                     switch (type){
@@ -30,7 +30,7 @@ const ConfigName = props =>{
                     }
                 })()
             }
-        </Fragment>
+        </>
     )
 }
 

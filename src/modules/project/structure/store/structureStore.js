@@ -2,7 +2,7 @@ import {action,observable} from "mobx";
 
 import {
     DeleteHistoryLog,
-    FindAll,
+    FindAllPipelineConfig,
     FindExecState,
     FindHistoryLog,
     FindStructureState,
@@ -104,10 +104,10 @@ export class StructureStore {
 
     //正在执行的详情
     @action
-    findAll =async value =>{
+    findAllPipelineConfig =async value =>{
         const param = new FormData()
         param.append("pipelineId", value)
-        FindAll(param).then(res=>{
+        FindAllPipelineConfig(param).then(res=>{
             if(res.code===0){
                 this.rightExecuteData = res.data
                 this.isData = true

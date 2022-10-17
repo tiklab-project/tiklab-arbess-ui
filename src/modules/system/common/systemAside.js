@@ -78,12 +78,6 @@ const SystemAside= props =>  {
             enCode:"G",
         },
         {
-            key:"/index/system/info",
-            label:"系统信息",
-            icon:"#icon-gongzuotongji",
-            enCode:"H",
-        },
-        {
             key:"/index/system/envi",
             label:"环境配置",
             icon:"#icon-gongzuotongji",
@@ -134,6 +128,12 @@ const SystemAside= props =>  {
                     enCode:"H",
                 }
             ]
+        },
+        {
+            key:"/index/system/info",
+            label:"系统信息",
+            icon:"#icon-gongzuotongji",
+            enCode:"H",
         },
     ]
 
@@ -210,7 +210,7 @@ const SystemAside= props =>  {
 
     return (
         <div className="system-aside">
-            <ul style={{padding: 0}} key="0" className="system-aside-top">
+            <ul style={{padding: "10px 0 0"}} key="0" className="system-aside-top">
                 {
                     router && router.map(firstItem => {
                         return firstItem.children && firstItem.children.length > 0 ?

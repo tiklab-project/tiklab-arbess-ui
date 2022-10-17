@@ -1,12 +1,15 @@
-import React from "react";
-import {Button,Popconfirm} from "antd";
-import ConfigName from "../../../../common/configName/configName";
+import React,{Fragment} from "react";
+import {Modal} from "antd";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
+import StructureRightCart from "./structureRightCart";
+import StructureRightCue from "./structureRightCue";
 
 const StructureRightItem = props =>{
 
-    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,runWay,
+    const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,
         freshen,setFreshen,setPageCurrent} = props
 
+    // 状态
     const state = item =>{
         switch(item.runState){
             case 1:
@@ -18,12 +21,26 @@ const StructureRightItem = props =>{
         }
     }
 
+    // 日志详情
     const log = item => {
         setDrawerContent(item)
         setVisible(true)
     }
 
-    const del = modeData =>{
+    // 删除提示
+    const del = () =>{
+        Modal.confirm({
+            title: "删除",
+            icon: <ExclamationCircleOutlined />,
+            content: "删除后数据无法恢复",
+            onOk:()=>delHistory(modeData),
+            okText: "确认",
+            cancelText: "取消",
+        })
+    }
+
+    // 确认删除
+    const delHistory = modeData =>{
         deleteHistoryLog(modeData &&modeData.historyId).then(()=>{
             setFreshen(!freshen)
             setPageCurrent(1)
@@ -32,65 +49,55 @@ const StructureRightItem = props =>{
             console.log(error)
         })
     }
-    
+
+    // 样式
     const style = runState => {
         return `item-${runState}`
     }
 
+
+    // cart
     const rightDetails = rightFlowData =>{
-        return  rightFlowData && rightFlowData.map((item,index)=>{
-            return(
-                <div className={`mid_group_center-cart ${style(item.runState)}`}  key={index}>
-                    <div className="cart-top">
-                        <span className="cart-top-taskAlias">{item.taskAlias}</span>
-                        <span> -- </span>
-                        <span className="cart-top-configName">
-                            <ConfigName type={item.taskType}/>
-                        </span>
-                    </div>
-                    <div className="cart-center">
-                        <div className="cart-center-item">
-                            <div>状态：{state(item)}</div>
-                            <div>时间：{item.execTime} </div>
+        return <div className="mid_group_center">
+            {
+                rightFlowData && rightFlowData.map((item,index)=>{
+                    return  <Fragment key={index}>
+                                <StructureRightCart
+                                    item={item}
+                                    style={style(item.runState)}
+                                    state={state(item)}
+                                    time={item.execTime}
+                                    log={log}
+                                />
+                            </Fragment>
+                })
+            }
+        </div>
+    }
+
+    // 日志
+    const logRunLog = () =>{
+        if(modeData){
+            return   <div className="structure-content-bottom">
+                        <div className="structure-content-bottom-title">输出</div>
+                        <div className="structure-content-bottom-outLog">
+                            {modeData && modeData.runLog}
                         </div>
                     </div>
-                    <div className="cart-bottom" >
-                        <span className="cart-bottom-span" onClick={()=>log(item)}>
-                            日志
-                        </span>
-                    </div>
-                </div>
-            )
-        })
+        }
     }
 
     return (
         <div className="mid_group">
-            <div className="mid_group_top">
-                <div className="mid_group_top_tel">
-                    <span className="tel_title "># {modeData && modeData.findNumber}</span>
-                    <span className="tel_time">执行时长：{modeData && modeData.execTime}</span>
-                    <span className="tel_way">触发方式：{runWay (modeData && modeData.runWay)}</span>
-                </div>
-                <div className="mid_group_top_del">
-                    <Popconfirm
-                        onConfirm={()=>del(modeData)}
-                        title="您确认删除吗?"
-                        okText="确认"
-                        cancelText="取消"
-                        placement="bottom"
-                    >
-                        <Button>删除</Button>
-                    </Popconfirm>
-                </div>
-            </div>
-            <div className="mid_group_center"> {rightDetails(rightFlowData)} </div>
-            <div className="structure-content-bottom">
-                <div className="structure-content-bottom-title">输出</div>
-                <div className="structure-content-bottom-outLog">
-                    {modeData && modeData.runLog}
-                </div>
-            </div>
+            <StructureRightCue
+                way={modeData && modeData.runWay}
+                time={modeData && modeData.execTime}
+                title={`# ${modeData && modeData.findNumber}`}
+                action={del}
+                actionTitle={"删除"}
+            />
+            {rightDetails(rightFlowData)}
+            {logRunLog()}
         </div>
     )
 }

@@ -144,7 +144,6 @@ const CodeGiteeOrGithub = props =>{
                 <Select
                     onChange={changeGitStoreHouse}
                     onClick={clickGitStoreHouse}
-                    bordered={false}
                     placeholder="请选择仓库"
                 >
                     {
@@ -160,7 +159,6 @@ const CodeGiteeOrGithub = props =>{
             >
                 <Select
                     disabled={prohibited}
-                    bordered={false}
                     placeholder="请选择分支"
                     onClick={clickBranch}
                     onChange={changeBranch}

@@ -54,7 +54,7 @@ const OrgaAside= props =>  {
 
     return (
         <div className="orga-aside">
-            <ul style={{padding: 0}} key="0" className="orga-aside-top">
+            <ul style={{padding: "10px 0 0"}} key="0" className="orga-aside-top">
                 {
                     router && router.map(firstItem => renderMenu(firstItem,0))
                 }

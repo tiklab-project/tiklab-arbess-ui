@@ -7,6 +7,7 @@ import "codemirror/mode/shell/shell.js";
 // 代码模式，clike是包含java,c++等模式的
 // import "codemirror/mode/clike/clike";
 // import "codemirror/mode/css/css";
+import "codemirror/addon/display/placeholder.js";
 
 import {Form} from "antd";
 
@@ -14,7 +15,7 @@ import "./mirror.scss";
 
 const MirrorContent = props =>{
 
-    const {shellBlock,setShellBlock,type,name,pipelineStore,configStore} = props
+    const {shellBlock,setShellBlock,type,name,pipelineStore,configStore,placeholder} = props
     const mirrorRefs = useRef(null)
 
     const {pipelineId} = pipelineStore
@@ -42,6 +43,7 @@ const MirrorContent = props =>{
         options={{
             mode: {name:"shell",shell: true },//语言
             lineNumbers: false, // 是否显示行号
+            // placeholder: placeholder
         }}
         onBlur={()=>onBlur()}
     />

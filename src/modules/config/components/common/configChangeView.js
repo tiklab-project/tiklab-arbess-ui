@@ -9,7 +9,7 @@ import ChangeConfigSortsModal from "./changeConfigSortsModal";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,pipelineName,structureStore,configDataStore,configStore} = props
+    const {view,setView,pipelineId,structureStore,configDataStore,configStore} = props
 
     const {pipelineStartStructure} = structureStore
     const {isPlugin,data,setData,codeType} = configDataStore

@@ -106,6 +106,7 @@ const Deploy = props =>{
                                 shellBlock={deployShellBlock}
                                 setShellBlock={setDeployShellBlock}
                                 configStore={configStore}
+                                placeholder={"请输入Shell命令"}
                             />
                         </Form.Item>
                 }

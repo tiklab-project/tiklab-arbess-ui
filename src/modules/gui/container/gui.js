@@ -20,7 +20,7 @@ const Gui = props =>{
         } = configDataStore
 
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
-    const [newStage,setNewStage] = useState("")
+    const [newStage,setNewStage] = useState("") // 表单详情显示
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})

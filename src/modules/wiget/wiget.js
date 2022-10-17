@@ -1,17 +1,11 @@
- import React, {Component} from 'react';
+ import React from 'react';
 import {WidgetWork} from "tiklab-widget-ui";
 
 
-class WorkBench extends Component{
+const WorkBench = props =>{
 
-    render() {
-        return(
-            <div>
-                <WidgetWork bgroup={'matflow'}/>
-            </div>
+    return <WidgetWork {...props} bgroup={'matflow'}/>
 
-        )
-    }
 }
 
 export default WorkBench

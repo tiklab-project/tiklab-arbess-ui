@@ -13,7 +13,7 @@ const Structure = props => {
 
     const {structureStore,structureListStore,pipelineStore} = props
 
-    const {findExecState,findStructureState,findAll,findPageHistory,pipelineStartStructure,leftPageList,isData,
+    const {findExecState,findStructureState,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,isData,
         findPipelineUser,setIsData,execState} = structureStore
     const {state,setState,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
     const {pipelineId,pipelineName} = pipelineStore
@@ -74,7 +74,7 @@ const Structure = props => {
                         findStructureState(pipelineId).then(res=>{
                             if(res.code===0){renderExec(res.data)}
                         }), 1000)
-                    findAll(pipelineId)
+                    findAllPipelineConfig(pipelineId)
                 }
                 changPage() // 历史列表
             })

@@ -7,6 +7,7 @@ const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 
+/* 工作台 */
 const Widget=AsyncComponent(()=>import("./modules/wiget/wiget"))
 
 /* 首页 */
@@ -31,7 +32,6 @@ const ProjectSetProof=AsyncComponent(()=>import("./modules/project/proof/project
 const ProjectSetUser=AsyncComponent(()=>import("./modules/project/members/projectSetUser"))
 
 /* 账号与成员 */
-
 const Orga=AsyncComponent(()=>import("./modules/orga/common/orga"))
 
 const UserList=AsyncComponent(()=>import("./modules/orga/user/list"))
@@ -94,11 +94,11 @@ const routers=[
                 component: HomePage,
                 exact:true,
             },
-            {
-                path: "/index/widget",
-                component: Widget,
-                exact:true,
-            },
+            // {
+            //     path: "/index/widget",
+            //     component: Widget,
+            //     exact:true,
+            // },
             {
                 path: "/index/dynamic",
                 component: DynamicDetails,

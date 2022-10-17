@@ -1,4 +1,5 @@
 import React from "react";
+import StructureLeftList from "./structureLeftList";
 
 const StructureLeftExecute = props => {
 
@@ -17,28 +18,23 @@ const StructureLeftExecute = props => {
         }
     }
 
+    const click = () => {
+        setIndex(0)
+    }
+    
     const renderExecState = execState =>{
-        if(execState === ""){
-            return null
-        }else {
-            return  <div onClick={()=>setIndex(0)}
-                         className={`history-content-list-ul
-                         ${index===0 ? "history-content-list_active": null}`}
-                    >
-                        <div className="list-title"> 运行中 </div>
-                        <div className="list-group">
-                            <div className="list-group-item">
-                                <div className="list-state">状态 : {state()}</div>
-                                <div className="list-one">
-                                    执行人 : {execState && execState.execName}
-                                </div>
-                            </div>
-                            <div className="list-time">
-                                执行方式 : {execState && execState.createTime}
-                            </div>
-                        </div>
-                    </div>
-        }
+        return execState===""?
+            null
+            :
+            <StructureLeftList
+                onClick={click}
+                index={index}
+                name={execState && execState.execName}
+                state={state()}
+                type={0}
+                createTime={execState && execState.createTime}
+                title={`运行中`}
+            />
     }
 
     return renderExecState(execState)

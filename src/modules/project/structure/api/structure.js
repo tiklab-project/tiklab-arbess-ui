@@ -47,9 +47,9 @@ export function  FindHistoryLog (data){
 
 
 //正在执行的详情
-export function  FindAll(data){
+export function  FindAllPipelineConfig(data){
     return serviceLoc.request({
-        url:"/pipelineConfigure/findAll",
+        url:"/pipelineConfig/findAllPipelineConfig",
         method:"post",
         data
     })
