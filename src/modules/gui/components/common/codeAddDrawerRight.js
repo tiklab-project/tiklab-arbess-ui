@@ -8,15 +8,16 @@ import {Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const CodeAddDrawerRight = props =>{
-    const {opt,del} = props
+    const {opt} = props
 
     const context = useContext(TestContext)
+
     const {codeType,setCodeType} = context.configDataStore
+    const del = context.del
     const pipelineId = context.pipelineId
     const {updateConfigure} = ConfigStore
 
     const handleClick = type =>{
-        setCodeType(type)
         if(codeType===""){
             send(type,"create")
         }else {
@@ -42,6 +43,7 @@ const CodeAddDrawerRight = props =>{
             taskType:type,
             message:message
         }
+        setCodeType(type)
         updateConfigure(params)
     }
 

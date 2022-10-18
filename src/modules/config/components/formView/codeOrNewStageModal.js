@@ -1,9 +1,9 @@
 import React from "react";
 import {Modal} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
-import "./codeOrNewStage.scss";
+import "./codeOrNewStageModal.scss";
 
-const CodeOrNewStage = props =>{
+const CodeOrNewStageModal = props =>{
 
     const {lis,handleClick,setVisible,visible} = props
 
@@ -63,4 +63,4 @@ const CodeOrNewStage = props =>{
     )
 }
 
-export default CodeOrNewStage
+export default CodeOrNewStageModal

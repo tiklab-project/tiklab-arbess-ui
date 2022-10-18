@@ -50,6 +50,7 @@ const NewStage = props =>{
                 </>
     }
 
+    // data渲染
     const newStageShow = data =>{
         return data && data.map((item,index)=>{
             return(
@@ -90,10 +91,12 @@ const NewStage = props =>{
             )
         })
     }
-    
+
+    // data是否为最长度
     const isAddNewStage = data => {
         return data && data.length > 2 ?
-            null :
+            null
+             :
             <>
                 <div className="group-flow">
                     <div className="group-flow_btn" />

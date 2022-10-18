@@ -1,72 +1,56 @@
 import React,{useState,useEffect} from "react";
 import {Modal,Tree} from "antd";
+import {SwapOutlined} from "@ant-design/icons";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 
 const ChangeConfigSortsModal = props =>{
 
-    const {changeSortVisible,setChangeSortVisible,data,setData,codeType,updateConfigure,pipelineId} = props
+    const {changeSortVisible,setChangeSortVisible,data,setData,updateConfigure,pipelineId} = props
 
     const [gData,setGData] = useState([])
 
     const nameArray = []
     useEffect(()=>{
-        codeTitle(codeType)
         dataTile(data)
         setGData([...nameArray])
-    },[data,codeType])
-    
-    const codeTitle = codeType => {
-        let desc
-        if(codeType){
-            switch (codeType) {
-                case 1:desc = "通用Git"
-                    break
-                case 2:desc = "Gitee"
-                    break
-                case 3:desc = "Github"
-                    break
-                case 4:desc = "Gitlab"
-                    break
-                case 5:desc = "SVN"
-            }
-            nameArray.push({
-                key:0,
-                title: "源码管理" + "--" + desc,
-                disabled: true,
-                step:"源码管理"
-            })
-        }
-    }
+    },[data])
     
     const dataTile = data => {
         data && data.map((item,index)=>{
-            let tpl,title
+            let tpl,title,icon
             switch (item.dataType) {
                 case 11:
                     tpl = "单元测试"
                     title = "测试"
+                    icon="ceshi1"
                     break
                 case 21:
                     tpl = "maven"
                     title = "构建"
+                    icon="goujiangongju"
                     break
                 case 22:
                     tpl = "node"
                     title = "构建"
+                    icon="goujiangongju"
                     break
                 case 31:
                     tpl = "虚拟机"
                     title = "部署"
+                    icon="bushubanben"
                     break
                 case 32:
                     tpl = "docker"
                     title = "部署"
+                    icon="bushubanben"
             }
             nameArray.push({
                 key:index+1,
                 title:title + "--" + tpl,
+                icon:<svg className="icon" aria-hidden="true">
+                        <use xlinkHref={`#icon-${icon}`} />
+                    </svg>,
                 dataId:item.dataId,
-                step:title,
                 dataType:item.dataType
             })
         })
@@ -142,6 +126,7 @@ const ChangeConfigSortsModal = props =>{
             />
             <div className="changeSorts-tree">
                 <Tree
+                      showIcon
                       draggable // 是否可拖拽
                       blockNode  // 是否占据一行
                       onDrop={onDrop}

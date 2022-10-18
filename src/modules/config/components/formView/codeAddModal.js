@@ -1,5 +1,5 @@
 import React from "react";
-import CodeOrNewStage from "./codeOrNewStage";
+import CodeOrNewStageModal from "./codeOrNewStageModal";
 
 const lis=[
     {
@@ -58,7 +58,7 @@ const CodeAddModal = props =>{
         setCodeVisible(false)
     }
 
-    return  <CodeOrNewStage
+    return  <CodeOrNewStageModal
                 lis={lis}
                 handleClick={handleClick}
                 visible={codeVisible}

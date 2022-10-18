@@ -30,7 +30,7 @@ const Head = props =>{
 
     useEffect(()=>{
         // 路由菜单控制
-        privilegeStores.systemRoleStore.getSystemPermissions(userId)
+        privilegeStores.systemRoleStore.getSystemPermissions(userId,"matflow")
     },[])
 
     const routers=[
@@ -44,11 +44,6 @@ const Head = props =>{
             to:"/index/pipeline",
             title: "pipeline",
         },
-        // {
-        //     key:"widget",
-        //     to:'/index/widget',
-        //     title: "widget"
-        // }
     ]
 
     const changeCurrentLink = item => {

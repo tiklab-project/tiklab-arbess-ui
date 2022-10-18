@@ -12,37 +12,19 @@
     }
     &_content{
         height: 55px;
-        text-align: center;
         cursor: pointer;
         display: flex;
         justify-content: center;
-        margin-bottom: 10px;
+        align-items: center;
         padding: 5px 0;
-        .icon{
-            width: 20px;
-            height: 20px ;
+        &:not(:last-child){
+            margin-bottom: 5px;
         }
     }
     &_item{
         flex-direction: column;
         &:hover{
             background: #e3e8f0;
-        }
-    }
-    &_dropdown{
-        height: 55px;
-        line-height: 55px;
-        width: 100%;
-        align-items: center;
-        padding: 0 20px;
-    }
-    &_opt{
-        .icon{
-            width: 25px;
-            height: 25px;
-        }
-        .dropdowns_icon{
-            font-size: 12px !important;
         }
     }
     &_active{
@@ -103,7 +85,7 @@
     position: absolute;
     background: #fff;
     margin-left: 80px;
-    margin-top: -60px;
+    margin-top: -58px;
     width: 120px;
     padding: 10px;
     box-shadow: 3px 0 8px 3px #f2f2f2;

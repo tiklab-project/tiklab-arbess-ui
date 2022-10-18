@@ -79,20 +79,48 @@ const ProjectAside = props =>{
             setState(0)
             setEnforcer(null)
             setMode(0)
-            if(path===`/index/task/${pipelineName}/assembly`){
-                props.history.push(`/index/task/${item.pipelineId}/assembly`)
-            }else if(path.indexOf(`/index/task/${pipelineId}/assembly`) === 0) {
+            if(path.indexOf(`/index/task/${pipelineId}/assembly`) === 0) {
                 props.history.push(`/index/task/${item.pipelineId}/assembly/${lastPath}`)
             }else {
                 props.history.push(`/index/task/${item.pipelineId}/${lastPath}`)
             }
         }
     }
-    
-    const renderTaskRouter = taskRouters => {
-        return taskRouters && taskRouters.map(item=>{
-            return(
-                <PrivilegeButton code={item.enCode} key={item.key} {...props}>
+
+    // 切换项目菜单列表
+    const pipelineMenu = item =>{
+        return  <div onClick={()=>{changePipeline(item)}}
+                     key={item.pipelineId}
+                     className={`opt-content-group_item ${item.pipelineId===pipelineId?"opt-content-active":""}`}
+                >
+                    <span className="opt-content-group-icon">
+                        <TagOutlined />
+                    </span>
+                    <span className="opt-content-group-name">
+                        {item.pipelineName}
+                    </span>
+                </div>
+    }
+
+    // 切换项目菜单
+    const changPipelineMenu = (
+        <div className="opt">
+            <div className="opt-content">
+                <div className="opt-content-title">流水线名称</div>
+                <div className="opt-content-group">
+                    {
+                        pipelineList && pipelineList.map(item=>{
+                            return pipelineMenu(item)
+                        })
+                    }
+                </div>
+            </div>
+        </div>
+    )
+
+    // 渲染左侧一级菜单
+    const renderTaskRouter = item => {
+        return   <PrivilegeButton code={item.enCode} key={item.key} {...props}>
                     <li key={item.key}
                         className={`aside_content aside_item ${nav===item.to ? "aside_active": ""}`}
                         onClick={()=>changeNav(item.to)}
@@ -105,60 +133,35 @@ const ProjectAside = props =>{
                         <div className="aside_content_title">{item.title}</div>
                     </li>
                 </PrivilegeButton>
-            )
-        })
     }
 
-    const changPipelineMenu = (
-        <div className="opt">
-            <div className="opt-content">
-                <div className="opt-content-title">流水线名称</div>
-                <div className="opt-content-group">
-                    {
-                        pipelineList && pipelineList.map(item=>{
-                            return(
-                                <div onClick={()=>{changePipeline(item)}}
-                                     key={item.pipelineId}
-                                     className={`opt-content-group_item ${item.pipelineId===pipelineId ? "opt-content-active" : ""}`}
-                                >
-                                    <span className="opt-content-group-icon">
-                                        <TagOutlined />
-                                    </span>
-                                    <span className="opt-content-group-name">
-                                        {item.pipelineName}
-                                    </span>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-            </div>
-        </div>
-    )
-
-    const renderMenu = router => {
-        return router.map(data=>{
-            return  <PrivilegeButton key={data.key} code={data.enCode} {...props}>
-                        <div
-                            className="projectSetMenu-li"
-                            onClick={()=>changeNav(data.key)}
-                            key={data.key}
-                        >
-                            <span className="projectSetMenu-li-icon">
-                                <SettingOutlined/>
-                            </span>
-                            <span className="projectSetMenu-li-name">
-                                {data.label}
-                            </span>
-                        </div>
-                    </PrivilegeButton>
-        })
+    // 渲染左侧弹出形式的二级菜单详情
+    const renderSettingMenu = item => {
+        return   <PrivilegeButton key={item.key} code={item.enCode} {...props}>
+                    <div
+                        className="projectSetMenu-li"
+                        onClick={()=>changeNav(item.key)}
+                        key={item.key}
+                    >
+                         <span className="projectSetMenu-li-icon">
+                             <SettingOutlined/>
+                         </span>
+                         <span className="projectSetMenu-li-name">
+                             {item.label}
+                         </span>
+                    </div>
+                </PrivilegeButton>
     }
 
-    const secondMenu = (
+    // 左侧弹出形式的二级菜单
+    const settingMenu = (
         <div className="projectSetMenu">
             <div className="projectSetMenu-ul">
-                {renderMenu(secondRouter)}
+                {
+                    secondRouter && secondRouter.map(item=>{
+                        return renderSettingMenu(item)
+                    })
+                }
             </div>
         </div>
     )
@@ -166,8 +169,9 @@ const ProjectAside = props =>{
     return(
          <div className="aside">
             <ul  className="content">
+
                 <Dropdown overlay={changPipelineMenu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
-                    <li className="aside_content aside_dropdown aside_opt"
+                    <li className="aside_content"
                         onClick={(e)=>e.preventDefault()}
                     >
                         <span>
@@ -178,12 +182,18 @@ const ProjectAside = props =>{
                         <CaretDownOutlined className="dropdowns_icon"/>
                     </li>
                 </Dropdown>
-                { renderTaskRouter(firstRouters) }
+
+                {
+                    firstRouters.map(item=>{
+                        return renderTaskRouter(item)
+                    })
+                }
+
                 <PrivilegeButton code={"DD"} {...props}>
-                    <Dropdown overlay={secondMenu}>
+                    <Dropdown overlay={settingMenu}>
                         <li
                             onClick={(e)=>e.preventDefault()}
-                            className={`aside_content aside_item ${path.indexOf(`/index/task/${pipelineName}/assembly`) === 0 ? "aside_active": ""}`}
+                            className={`aside_content aside_item ${path.indexOf(`/index/task/${pipelineId}/assembly`) === 0 ? "aside_active": ""}`}
                         >
                             <div className="aside_content_icon">
                                 <svg className="icon" aria-hidden="true">

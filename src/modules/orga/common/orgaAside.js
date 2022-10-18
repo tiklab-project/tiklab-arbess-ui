@@ -59,9 +59,6 @@ const OrgaAside= props =>  {
                     router && router.map(firstItem => renderMenu(firstItem,0))
                 }
             </ul>
-            <div className="orga-aside-sys" onClick={()=>props.history.push("/index/system")}>
-                系统设置
-            </div>
         </div>
     )
 }

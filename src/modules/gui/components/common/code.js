@@ -4,7 +4,7 @@ import CodeAddDrawer from "./codeAddDrawer";
 
 const Code = props =>{
 
-    const {formInitialValues,setNewStage,codeType,setTaskFormDrawer,del} = props
+    const {formInitialValues,setNewStage,codeType,setTaskFormDrawer} = props
 
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
 
@@ -57,7 +57,6 @@ const Code = props =>{
             </div>
             <CodeAddDrawer
                 {...props}
-                del={del}
                 codeDrawer={codeDrawer}
                 setCodeDrawer={setCodeDrawer}
                 setTaskFormDrawer={setTaskFormDrawer}

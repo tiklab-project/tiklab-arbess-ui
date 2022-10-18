@@ -1,9 +1,10 @@
-import React,{useEffect,useRef,useState} from "react";
-import {Form,Input,message,Modal,Select,Row,Col} from "antd";
+import React,{useEffect,useState} from "react";
+import {Form,message,Modal,Row,Col} from "antd";
 import moment from "../../../common/moment/moment";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import PipelineAddModalRight from "./pipelineAddModalRight";
 import PipelineAddModalLeft from "./pipelineAddModalLeft";
+import "./pipelineAddModal.scss";
 
 // 左侧锚点
 const leftLis = [
@@ -17,7 +18,7 @@ const leftLis = [
     },
     {
         id:3,
-        title:"Node"
+        title:"Node.js"
     },
 ]
 // 右侧lis渲染
@@ -58,7 +59,8 @@ const rightLis = [
     },
     {
         id:6,
-        title:"Nodejs",
+        type:3,
+        title:"Node.js",
         desc: "Linux",
         first:"构建",
         second:"部署",
@@ -66,7 +68,7 @@ const rightLis = [
     {
         id:7,
         type:3,
-        title:"Nodejs",
+        title:"Node.js",
         desc: "Linux",
         first:"构建",
         second:"部署",
@@ -76,15 +78,13 @@ const rightLis = [
 const PipelineAddModal = props =>{
 
     const {addPipelineVisible,setAddPipelineVisible,pipelineList,userId,createPipeline} = props
-    const inputRef = useRef()
+
     const [form] = Form.useForm()
     const [templateType,setTemplateType] = useState(1)
 
 
     useEffect(()=>{
         if(addPipelineVisible){
-            // 文本框聚焦
-            inputRef.current.focus()
             // 表单清空
             form.resetFields()
         }
@@ -149,7 +149,7 @@ const PipelineAddModal = props =>{
             cancelText="取消"
             width={800}
         >
-            <div className="new">
+            <div className="pipelineAddModal">
                 <ModalTitle
                     setVisible={setAddPipelineVisible}
                     title={"创建流水线"}
@@ -165,7 +165,6 @@ const PipelineAddModal = props =>{
                     <Col span={20}>
                         <PipelineAddModalRight
                             form={form}
-                            inputRef={inputRef}
                             lis={rightLis}
                             onScroll={onScroll}
                             pipelineList={pipelineList}
@@ -173,7 +172,6 @@ const PipelineAddModal = props =>{
                             setTemplateType={setTemplateType}
                         />
                     </Col>
-
 
                 </Row>
             </div>

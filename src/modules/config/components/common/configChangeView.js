@@ -5,18 +5,18 @@ import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "./configChangeView.scss";
-import ChangeConfigSortsModal from "./changeConfigSortsModal";
+import NewStageAddModal from "../formView/newStageAddModal";
 
 const ConfigChangeView = props =>{
 
     const {view,setView,pipelineId,structureStore,configDataStore,configStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {isPlugin,data,setData,codeType} = configDataStore
+    const {isPlugin,data,setData,setBuildType,setDeployType} = configDataStore
     const {updateConfigure} = configStore
 
     const [processVisible,setProcessVisible] = useState(false)
-    const [changeSortVisible, setChangeSortVisible] = useState(false)
+    const [newStageVisible,setNewStageVisible] = useState(false)
 
     const configView = localStorage.getItem("configView")
     const userId = getUser().userId
@@ -36,7 +36,7 @@ const ConfigChangeView = props =>{
         pipelineStartStructure(params).then(res=>{
             if(res.code===0 && res.data===1){
                 if(res.data===1){
-                // props.history.push(`/index/task/${pipelineName}/structure`)
+                // props.history.push(`/index/task/${pipelineId}/structure`)
                 }else{
                     setProcessVisible(false)
                     message.error({content:"项目正在运行", className:"message"})
@@ -55,9 +55,9 @@ const ConfigChangeView = props =>{
     return (
         <div className="config_changeView">
             <div className="changeView">
-                <div className="changeView-changeSort">
-                    <Button onClick={()=>setChangeSortVisible(true)}>
-                        更改配置顺序
+                <div className="changeView-newStage">
+                    <Button onClick={()=>setNewStageVisible(true)}>
+                        新阶段
                     </Button>
                 </div>
                 <div className="changeView-btn">
@@ -73,40 +73,40 @@ const ConfigChangeView = props =>{
                             表单视图
                         </div>
                     </div>
-                    {/*<div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}*/}
-                    {/*     onClick={()=>changeView("gui")}*/}
-                    {/*>*/}
-                    {/*    <div className="changeView-view-item">*/}
-                    {/*        图形化视图*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {
-                        !getVersionInfo().expired && isPlugin ?
-                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}
-                                 onClick={()=>changeView("gui")}
-                            >
-                                <div className="changeView-view-item">
-                                    图形化视图
-                                </div>
-                            </div>
-                            :
-                            <div className="changeView-view-li changeView-view-ban">
-                                图形化视图
-                            </div>
-                    }
+                    <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}
+                         onClick={()=>changeView("gui")}
+                    >
+                        <div className="changeView-view-item">
+                            图形化视图
+                        </div>
+                    </div>
+                    {/*{*/}
+                    {/*    !getVersionInfo().expired && isPlugin ?*/}
+                    {/*        <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}*/}
+                    {/*             onClick={()=>changeView("gui")}*/}
+                    {/*        >*/}
+                    {/*            <div className="changeView-view-item">*/}
+                    {/*                图形化视图*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*        :*/}
+                    {/*        <div className="changeView-view-li changeView-view-ban">*/}
+                    {/*            图形化视图*/}
+                    {/*        </div>*/}
+                    {/*}*/}
                 </div>
             </div>
 
-            <ChangeConfigSortsModal
-                changeSortVisible={changeSortVisible}
-                setChangeSortVisible={setChangeSortVisible}
+            <NewStageAddModal
                 data={data}
                 setData={setData}
-                codeType={codeType}
+                newStageVisible={newStageVisible}
+                setNewStageVisible={setNewStageVisible}
+                setBuildType={setBuildType}
+                setDeployType={setDeployType}
                 updateConfigure={updateConfigure}
                 pipelineId={pipelineId}
             />
-
         </div>
     )
 }

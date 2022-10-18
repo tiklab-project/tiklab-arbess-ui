@@ -11,7 +11,7 @@ const Tables = props =>{
         pagination={{hideOnSinglePage:true,pageSize:10}}
         locale={{emptyText:
                 <Fragment>
-                    <svg className="icon" aria-hidden="true" >
+                    <svg className="icon" aria-hidden="true" style={{width:50,height:50}}>
                         <use xlinkHref="#icon-meiyouxiangguan"/>
                     </svg>
                     <div>没有数据</div>

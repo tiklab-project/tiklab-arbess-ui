@@ -1,8 +1,6 @@
 .envi{
     padding: 10px;
     &-content{
-        width: 95%;
-        margin: auto;
         &-action{
             .del{
                 color:#ff0000;
@@ -16,6 +14,17 @@
         }
         &-switch{
             padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &-left{
+                .switch-left{
+                    display: inline-block;
+                    &:not(:last-child){
+                        padding-right: 20px;
+                    }
+                }
+            }
         }
         &-btn{
             display: flex;

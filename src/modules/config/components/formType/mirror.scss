@@ -1,13 +1,12 @@
-.react-codemirror2{
-    width:500px ;
-    border-color:#ffffff !important;
-}
-.CodeMirror{
-    height: 100%;
-    &:hover{
-        background: #f2f2f2 !important;
+.formViewCodeMirror{
+    .react-codemirror2{
+        width:500px ;
+        border-color:#ffffff !important;
     }
-    .CodeMirror-code{
-        //color: #f8f8f8;
+    .CodeMirror{
+        height: 100%;
+        &:hover{
+            background: #f2f2f2 !important;
+        }
     }
 }

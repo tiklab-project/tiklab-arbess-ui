@@ -10,8 +10,7 @@ const formView = props =>{
 
     const {form,del,configDataStore,pipelineId,configStore} = props
 
-    const {data,setData,formInitialValues,setCodeType,codeType,
-        setBuildType,setDeployType,} = configDataStore
+    const {data,setData,formInitialValues,setCodeType,codeType} = configDataStore
 
     const {updateConfigure} = configStore
 
@@ -32,20 +31,22 @@ const formView = props =>{
                     initialValues={{deployType:1}}
                 >
                     <Code
+                        {...props}
+                        del={del}
+                        data={data}
+                        setData={setData}
                         codeType={codeType}
                         setCodeType={setCodeType}
-                        del={del}
                         pipelineId={pipelineId}
                         updateConfigure={updateConfigure}
                     />
                     <NewStage
+                        {...props}
                         del={del}
                         data={data}
                         setData={setData}
-                        setBuildType={setBuildType}
-                        setDeployType={setDeployType}
-                        updateConfigure={updateConfigure}
                         pipelineId={pipelineId}
+                        updateConfigure={updateConfigure}
                     />
                 </Form>
             </div>

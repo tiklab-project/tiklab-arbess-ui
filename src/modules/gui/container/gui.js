@@ -16,8 +16,7 @@ const Gui = props =>{
     const {pipelineStore,configDataStore,form,del} = props
 
     const {pipelineId,pipelineName} = pipelineStore
-    const {formInitialValues,data,setData,codeType,setCodeType,setDeployType,setBuildType,
-        } = configDataStore
+    const {formInitialValues,data,codeType,setCodeType} = configDataStore
 
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
     const [newStage,setNewStage] = useState("") // 表单详情显示
@@ -27,7 +26,7 @@ const Gui = props =>{
     },[formInitialValues,pipelineId])
 
     return (
-        <TestContext.Provider value={{pipelineId,pipelineName,configDataStore}}>
+        <TestContext.Provider value={{pipelineId,pipelineName,configDataStore,del}}>
             <div className="guiView">
                 <Form
                     id="form"
@@ -38,7 +37,6 @@ const Gui = props =>{
                 >
                     <div className="guiView-content">
                         <Code
-                            del={del}
                             setNewStage={setNewStage}
                             setTaskFormDrawer={setTaskFormDrawer}
                             codeType={codeType}
@@ -49,11 +47,7 @@ const Gui = props =>{
                             <div className="guiView-main_container">
                                 <div className="guiView-main_group">
                                     <NewStage
-                                        del={del}
                                         data={data}
-                                        setData={setData}
-                                        setDeployType={setDeployType}
-                                        setBuildType={setBuildType}
                                         setTaskFormDrawer={setTaskFormDrawer}
                                         setNewStage={setNewStage}
                                     />
@@ -62,7 +56,6 @@ const Gui = props =>{
                         </div>
 
                         <FormDetailsDrawer
-                            del={del}
                             taskFormDrawer={taskFormDrawer}
                             setTaskFormDrawer={setTaskFormDrawer}
                             newStage={newStage}

@@ -39,7 +39,7 @@ const Mirror = props =>{
         updateConfigure(params)
     }
 
-    return (
+    return <div className="guiViewCodeMirror">
         <CodeMirror
             value={shellBlock}//内容
             ref={mirrorRefs}
@@ -50,7 +50,8 @@ const Mirror = props =>{
             }}
             onBlur={()=>onBlur()}
         />
-    )
+    </div>
+
 }
 
 export default observer(Mirror)

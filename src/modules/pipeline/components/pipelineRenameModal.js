@@ -30,16 +30,19 @@ const PipelineRenameModal = props =>{
         setRenameVisible(false)
     }
 
-    const style={
-        "textAlign":"right"
-    }
-
     return(
         <Modal
             visible={renameVisible}
             closable={false}
             onCancel={()=>setRenameVisible(false)}
-            footer = {null}
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then((values) => {
+                        form.resetFields()
+                        re(values)
+                    })
+            }}
             okText="确认"
             cancelText="取消"
         >
@@ -47,13 +50,10 @@ const PipelineRenameModal = props =>{
                 setVisible={setRenameVisible}
                 title={"修改流水线名称"}
             />
-
             <ProjectRename
-                style={style}
-                setVisible={setRenameVisible}
                 pipelineList={pipelineList}
                 form={form}
-                re={re}
+                layout={"inline"}
             />
         </Modal>
     )

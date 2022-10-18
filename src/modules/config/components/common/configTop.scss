@@ -15,12 +15,37 @@
         width: 100%;
         padding: 8px 15px 4px;
         font-size: 16px;
-        min-width: 700px;
+        min-width: 510px;
         &-content{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+        }
+    }
+}
+.changeSorts-tree{
+    .ant-tree{
+        .ant-tree-list{
+            .ant-tree-node-content-wrapper{
+                height: 30px;
+                line-height: 30px;
+                display: flex;
+                align-items: center;
+                padding-left: 10px;
+                &:hover{
+                    background: #e3e8f0;
+                }
+            }
+            .ant-tree-switcher{
+                width: 0;
+            }
+            .ant-tree-node-selected{
+                background: #e3e8f0;
+            }
+            .ant-tree-title{
+                padding-left: 5px;
+            }
         }
     }
 }

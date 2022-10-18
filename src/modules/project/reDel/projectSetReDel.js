@@ -10,7 +10,8 @@ import ProjectRename from "./projectRename";
 const ProjectSetReDel = props =>{
 
     const {pipelineStore} = props
-    const {deletePipeline,updatePipeline,pipelineList,pipelineId,pipelineName}=pipelineStore
+
+    const {deletePipeline,updatePipeline,pipelineList,pipelineId,pipelineName,setPipelineName}=pipelineStore
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
 
@@ -43,6 +44,7 @@ const ProjectSetReDel = props =>{
         }
         updatePipeline(params).then(res=>{
             if(res.code === 0){
+                setPipelineName(value.pipelineName)
                 props.history.push(`/index/task/${pipelineId}/work`)
             }
         }).catch(error=>{
@@ -70,6 +72,7 @@ const ProjectSetReDel = props =>{
                         form={form}
                         re={re}
                         pipelineList={pipelineList}
+                        layout={"inline"}
                     />
         },
         {
@@ -134,23 +137,6 @@ const ProjectSetReDel = props =>{
                     }
                 </div>
             </div>
-            {/*<div className="pipelineReDel-content">*/}
-            {/*    <div className="pipelineReDel-content-rename pipelineReDel-content-div">*/}
-            {/*        <div className="pipelineReDel-content-title">修改流水线名称</div>*/}
-            {/*        <ProjectRename*/}
-            {/*            form={form}*/}
-            {/*            re={re}*/}
-            {/*            pipelineList={pipelineList}*/}
-            {/*        />*/}
-            {/*    </div>*/}
-            {/*    <div className="pipelineReDel-content-del pipelineReDel-content-div">*/}
-            {/*        <div className="pipelineReDel-content-title">删除流水线</div>*/}
-            {/*        <Button type="primary" onClick={onConfirm}>*/}
-            {/*            <DeleteOutlined/> 删除*/}
-            {/*        </Button>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
         </div>
     )
 }

@@ -25,7 +25,7 @@ const NewStageAddDrawerRight = props =>{
                         content: `${group.title}已经存在`,
                         className: "custom-class",
                         style: {
-                            marginTop: "9vh",
+                            marginTop: "5vh",
                             marginLeft:"5vh"
                         }
                     })
@@ -79,7 +79,7 @@ const NewStageAddDrawerRight = props =>{
                                                      onClick={()=>handleClick(group,item,groupIndex)}
                                                 >
                                                     <div className="group-desc-tpl">
-                                                        <div className="group-tpl">{item.tel}</div>
+                                                        <div className="group-tpl">{item.title}</div>
                                                     </div>
                                                 </div>
                                             )

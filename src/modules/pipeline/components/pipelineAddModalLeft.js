@@ -1,5 +1,4 @@
-import React,{useState} from "react";
-import "./pipelineAddModalLeft.scss";
+import React from "react";
 
 const PipelineAddModalLeft = props =>{
 
@@ -19,7 +18,7 @@ const PipelineAddModalLeft = props =>{
     }
 
     return(
-        <div  className="pipelineAddModalLeft">
+        <div className="pipelineAddModalLeft">
             {renderLis(lis)}
         </div>
     )

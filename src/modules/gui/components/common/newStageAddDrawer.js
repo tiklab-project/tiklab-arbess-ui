@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Button,Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import NewStageAddDrawerLeft from "./newStageAddDrawerLeft";
+import AddDrawerLeft from "./addDrawerLeft";
 import NewStageAddDrawerRight from "./newStageAddDrawerRight";
 
 const leftLis = [
@@ -26,7 +26,7 @@ const rightLis = [
         desc:[
             {
                 type: 11,
-                tel:"单元测试",
+                title:"单元测试",
                 icon:"ceshi"
             }
         ]
@@ -38,12 +38,12 @@ const rightLis = [
             {
 
                 type: 21,
-                tel:"maven",
+                title:"maven",
                 icon:"quanxian"
             },
             {
                 type: 22,
-                tel:"node",
+                title:"node",
                 icon:"nodejs"
             }
         ]
@@ -54,11 +54,11 @@ const rightLis = [
         desc:[
             {
                 type:31 ,
-                tel:"虚拟机"
+                title:"虚拟机"
             },
             {
                 type:32 ,
-                tel:"docker"
+                title:"docker"
             },
         ]
     }
@@ -116,10 +116,10 @@ const NewStageAddDrawer = props =>{
                 <div className="wrapper-body">
                     <div className="body">
                         <div className="body-menu">
-                            <NewStageAddDrawerLeft
+                            <AddDrawerLeft
                                 leftLis={leftLis}
                                 opt={opt}
-                                changeAnchor={changeAnchor}
+                                onClick={changeAnchor}
                             />
                             <NewStageAddDrawerRight
                                 rightLis={rightLis}

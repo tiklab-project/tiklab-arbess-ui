@@ -37,16 +37,18 @@ const MirrorContent = props =>{
         updateConfigure(params)
     }
 
-    return  <CodeMirror
-        value={shellBlock}//内容
-        ref={mirrorRefs}
-        options={{
-            mode: {name:"shell",shell: true },//语言
-            lineNumbers: false, // 是否显示行号
-            // placeholder: placeholder
-        }}
-        onBlur={()=>onBlur()}
-    />
+    return  <div className="formViewCodeMirror">
+        <CodeMirror
+            value={shellBlock}//内容
+            ref={mirrorRefs}
+            options={{
+                mode: {name:"shell",shell: true },//语言
+                lineNumbers: false, // 是否显示行号
+                // placeholder: placeholder
+            }}
+            onBlur={()=>onBlur()}
+        />
+    </div>
 }
 
 export default MirrorContent

@@ -1,10 +1,6 @@
 .structure{
     overflow-y: hidden;
     background: #ffffff;
-    .icon {
-        width: 20px !important;
-        height: 20px !important;
-    }
     &-content{
         display: flex;
         flex-direction: row;

@@ -6,7 +6,7 @@ import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
-// import Gui from "../../../gui/container/gui";
+import Gui from "../../../gui/container/gui";
 
 const ConfigView = props =>{
 
@@ -206,29 +206,29 @@ const ConfigView = props =>{
         />
         :
         <>
-            {/*<Gui*/}
-            {/*    {...props}*/}
-            {/*    form={form}*/}
-            {/*    del={del}*/}
-            {/*    configDataStore={configDataStore}*/}
-            {/*    pipelineStore={pipelineStore}*/}
-            {/*/>*/}
-            {
-                !getVersionInfo().expired && isPlugin?
-                    <RemoteUmdComponent
-                        {...props}
-                        point={"gui"}
-                        pluginStore={pluginStore}
-                        isModalType={true}
-                        extraProps={{
-                            pipelineStore:toJS(pipelineStore),
-                            configDataStore:toJS(configDataStore),
-                            form,
-                            del,
-                        }}
-                    />
-                    :null
-            }
+            <Gui
+                {...props}
+                form={form}
+                del={del}
+                configDataStore={configDataStore}
+                pipelineStore={pipelineStore}
+            />
+            {/*{*/}
+            {/*    !getVersionInfo().expired && isPlugin?*/}
+            {/*        <RemoteUmdComponent*/}
+            {/*            {...props}*/}
+            {/*            point={"gui"}*/}
+            {/*            pluginStore={pluginStore}*/}
+            {/*            isModalType={true}*/}
+            {/*            extraProps={{*/}
+            {/*                pipelineStore:toJS(pipelineStore),*/}
+            {/*                configDataStore:toJS(configDataStore),*/}
+            {/*                form,*/}
+            {/*                del,*/}
+            {/*            }}*/}
+            {/*        />*/}
+            {/*        :null*/}
+            {/*}*/}
         </>
 }
 

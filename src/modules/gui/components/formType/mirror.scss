@@ -1,9 +1,9 @@
-.react-codemirror2{
-    width:460px ;
-}
-.CodeMirror{
-    height: 100%;
-    &:hover{
-        background: #f2f2f2 !important;
+.guiViewCodeMirror{
+    .react-codemirror2{
+        width:460px ;
+        border: 1px solid #cccccc !important;
+    }
+    .CodeMirror{
+        height: 100%;
     }
 }

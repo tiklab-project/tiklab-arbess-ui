@@ -29,19 +29,12 @@
          -ms-flex-align: center;
          align-items: center;
          justify-content: center;
-         //-webkit-flex-direction: column;
-         //-ms-flex-direction: column;
-         //flex-direction: column;
          margin-bottom: 12px;
          cursor: pointer;
          overflow: hidden;
          margin-right: 12px;
          &-icon{
             padding-right: 5px;
-            .icon{
-               width: 20px;
-               height: 20px;
-            }
          }
       }
       &-selected{

@@ -3,11 +3,12 @@ import {getUser} from "tiklab-core-ui";
 import {Button,Input,message} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
+import {inject,observer} from "mobx-react";
 import "../components/pipeline.scss";
 import PipelineTable from "../components/pipelineTable";
 import PipelineAddModal from "../components/pipelineAddModal";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import {inject,observer} from "mobx-react";
+
 
 const Pipeline = props =>{
 
@@ -25,11 +26,7 @@ const Pipeline = props =>{
             userId: getUser().userId,
             pipelineName:e.target.value,
         }
-        findLike(params).then(res=>{
-            if(res.data===null){
-                message.info("暂无数据")
-            }
-        })
+        findLike(params)
     }
 
     useEffect(()=>{
@@ -66,7 +63,6 @@ const Pipeline = props =>{
                     </div>
         })
     }
-    
     return(
         <div className="pipeline home-limited">
             <div className="pipeline-top pipeline-flex">
@@ -95,7 +91,6 @@ const Pipeline = props =>{
                 {...props}
                 pipelineStore={pipelineStore}
             />
-
             <PipelineAddModal
                 {...props}
                 userId={userId}

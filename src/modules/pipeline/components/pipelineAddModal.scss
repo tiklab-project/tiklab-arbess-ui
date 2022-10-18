@@ -1,0 +1,91 @@
+.pipelineAddModal{
+    .pipelineAddModalLeft{
+        margin-right: 15px;
+        &-title {
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            padding-left: 10px;
+            font-size: 16px;
+            &:not(:last-child){
+                margin-bottom: 5px;
+            }
+        }
+        &-setected{
+            background: #f4f4f4;
+        }
+    }
+  .pipelineAddModalRight{
+      &-title{
+          padding-bottom: 10px;
+          text-align: right;
+      }
+      &-ul{
+          max-height: 500px;
+          overflow: auto;
+      }
+      &-li{
+          width:100%;
+          border-radius: 4px;
+          background: #e2f7ff;
+          display: inline-block;
+          cursor: pointer;
+          padding-bottom: 10px;
+          &:not(:last-child){
+              margin-bottom: 15px;
+          }
+          &-header{
+              padding: 5px 0 5px 30px;
+              display: flex;
+              .li-header{
+                  &-title{
+                      font-weight: 600;
+                      font-size: 16px
+                  }
+                  &-name{
+                      padding-left: 5px;
+                  }
+              }
+          }
+          &-content{
+              display: flex;
+              justify-content: left;
+              align-items: center;
+              .li-step {
+                  height: 40px;
+                  line-height: 40px;
+                  border-radius: 34px;
+                  background: #fff;
+                  width: 100px;
+                  text-align: center;
+                  margin-top: 5px;
+                  position: relative;
+                  margin-left: 30px;
+                  .icon {
+                    width: 20px;
+                    height: 20px;
+                  }
+                  &:not(:last-child){
+                      &:after{
+                          content: "";
+                          width: 47px;
+                          border-top: 1px solid #626262;
+                          position: absolute;
+                          top: 20px;
+                          left: 100px;
+                      }
+                  }
+              }
+          }
+          .li-self{
+              font-size: 16px;
+              text-align: center;
+              padding-top: 10px;
+          }
+      }
+      &-selected{
+          border: 1px solid #13659b;
+          //background: #c6e4ef;
+        }
+    }
+}

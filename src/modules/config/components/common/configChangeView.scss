@@ -1,7 +1,7 @@
 .config_changeView{
     .changeView{
         display: flex;
-        &-btn,&-changeSort{
+        &-btn,&-newStage{
             margin-top: 2px;
             &>button{
                 margin-right: 15px;
@@ -41,19 +41,3 @@
     }
 }
 
-.changeSorts-tree{
-    .ant-tree{
-        .ant-tree-list{
-            .ant-tree-node-content-wrapper{
-                height: 30px;
-                line-height: 30px;
-                &:hover{
-                    background: #e3e8f0;
-                }
-            }
-            .ant-tree-node-selected{
-                background: #e3e8f0;
-            }
-        }
-    }
-}

@@ -9,11 +9,12 @@ import TestContext from "./testContext";
 
 const FormDetailsDrawer = props =>{
 
-    const {taskFormDrawer,setTaskFormDrawer,newStage,del} = props
+    const {taskFormDrawer,setTaskFormDrawer,newStage} = props
     const {updateConfigure} = ConfigStore
 
     const context = useContext(TestContext)
     const {data,setData} = context.configDataStore
+    const del = context.del
     const pipelineId = context.pipelineId
 
     const deletePart = newStage => {
@@ -29,12 +30,12 @@ const FormDetailsDrawer = props =>{
     }
     
     const delPart = newStage => {
-        del(newStage)
         const params = {
             pipelineId,
             taskType:newStage,
             message:"delete"
         }
+        del(newStage)
         updateConfigure(params)
         for (let i = 0 ;i<data.length;i++){
             if(data[i].dataType === newStage){

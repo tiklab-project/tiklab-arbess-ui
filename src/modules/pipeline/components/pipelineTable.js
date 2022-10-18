@@ -126,21 +126,21 @@ const PipelineTable = props =>{
             render:text =>{
                 switch (text) {
                     case 30:
-                        return  <Tooltip title="成功" placement="rightTop" className="all-icon">
+                        return  <Tooltip title="成功">
                                     <CheckCircleOutlined style = {{fontSize:25,color:"#1890ff"}}/>
                                 </Tooltip>
                     case 1:
-                        return <Tooltip title="失败" placement="rightTop" className="all-icon">
+                        return <Tooltip title="失败">
                                     <CloseCircleOutlined style = {{fontSize:25,color:"#ff0000"}}/>
                                 </Tooltip>
                     case 0:
-                        return  <Tooltip title="待构建" placement="rightTop" className="all-icon">
+                        return  <Tooltip title="待构建">
                                     <svg className="icon" aria-hidden="true">
                                         <use xlinkHref="#icon-dengdai1"/>
                                     </svg>
                                 </Tooltip>
                     case 20:
-                        return  <Tooltip title="停止" placement="rightTop" className="all-icon">
+                        return  <Tooltip title="停止">
                                     <ExclamationCircleOutlined style = {{fontSize:25}}/>
                                 </Tooltip>
                 }
@@ -195,19 +195,19 @@ const PipelineTable = props =>{
                             </span>
                         </Tooltip>
                         <Dropdown trigger={["click"]}
-                            overlay={
-                                <div className="pipelineTable-actions-menu">
-                                    <div className="actions-menu-content">
-                                        <div className="pipelineTable-actions" onClick={()=>renameOrDel(record,"rename")}>
-                                            <EditOutlined/> &nbsp;重命名
-                                        </div>
-                                        <div className="pipelineTable-actions-del" onClick={()=>renameOrDel(record,"del")}>
-                                            <DeleteOutlined/> &nbsp;删除
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        >
+                                  overlay={
+                                      <div className="pipelineTable-actions-menu">
+                                          <div className="actions-menu-content">
+                                              <div className="pipelineTable-actions" onClick={()=>renameOrDel(record,"rename")}>
+                                                  <EditOutlined/> &nbsp;重命名
+                                              </div>
+                                              <div className="pipelineTable-actions-del" onClick={()=>renameOrDel(record,"del")}>
+                                                  <DeleteOutlined/> &nbsp;删除
+                                              </div>
+                                          </div>
+                                      </div>
+                                  }
+                            >
                             <span className="pipelineTable-actions">
                                 <EllipsisOutlined className="actions-se"/>
                             </span>

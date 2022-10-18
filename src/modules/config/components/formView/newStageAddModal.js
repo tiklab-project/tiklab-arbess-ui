@@ -1,6 +1,6 @@
 import React from "react";
 import {message} from "antd";
-import CodeOrNewStage from "./codeOrNewStage";
+import CodeOrNewStageModal from "./codeOrNewStageModal";
 
 const lis=[
     {
@@ -89,7 +89,7 @@ const NewStageAddModal = props =>{
         setNewStageVisible(false)
     }
 
-    return   <CodeOrNewStage
+    return   <CodeOrNewStageModal
                  lis={lis}
                  handleClick={handleClick}
                  visible={newStageVisible}

@@ -95,10 +95,6 @@ const Proof = props =>{
         }
     ]
 
-    const inputChangeValue = value =>{
-        // console.log(value)
-    }
-
     return(
         <div className="proof home-limited">
             {

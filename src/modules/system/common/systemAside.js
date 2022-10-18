@@ -218,9 +218,6 @@ const SystemAside= props =>  {
                     })
                 }
             </ul>
-            <div className="system-aside-sys" onClick={()=>props.history.push("/index/orga")}>
-                组织管理
-            </div>
         </div>
     )
 }
