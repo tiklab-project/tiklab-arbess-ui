@@ -2,16 +2,13 @@ import React from "react";
 import AsyncComponent from "./common/lazy/SyncComponent";
 import {Redirect} from "react-router-dom";
 
-const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
+const Index=AsyncComponent(()=>import("./modules/portal/portal"))
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
-
-/* 动态详情 */
-const DynamicDetails=AsyncComponent(()=>import("./modules/home/components/dynamicDetails"))
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
@@ -55,6 +52,14 @@ const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messag
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 
+const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
+const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
+const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
+
+const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
+const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
+
+
 const routesSaas =[
     {
         path:"/login",
@@ -76,11 +81,6 @@ const routesSaas =[
             {
                 path: "/index/home",
                 component: HomePage,
-                exact:true,
-            },
-            {
-                path: "/index/dynamic",
-                component: DynamicDetails,
                 exact:true,
             },
             {
@@ -184,18 +184,6 @@ const routesSaas =[
                         path:"/index/system/envi",
                         component: Envi,
                     },
-                    // {
-                    //     path: "/index/system/directory",
-                    //     component: UserDirectory,
-                    // },
-                    // {
-                    //     path: "/index/system/list",
-                    //     component: UserList,
-                    // },
-                    // {
-                    //     path: "/index/system/org",
-                    //     component: Org,
-                    // },
                     {
                         path:"/index/system/mes/management",
                         component: MessageManagement,
@@ -211,6 +199,26 @@ const routesSaas =[
                     {
                         path:"/index/system/mes/sendType",
                         component: MessageSendType,
+                    },
+                    {
+                        path: "/index/system/task",
+                        component: TaskList,
+                    },
+                    {
+                        path: "/index/system/myTodoTask",
+                        component: MyTodoTask,
+                    },
+                    {
+                        path:"/index/system/log",
+                        component: LogList,
+                    },
+                    {
+                        path:"/index/system/myLog",
+                        component: MyLogList,
+                    },
+                    {
+                        path:"/index/system/logTemplate",
+                        component: LogTemplateList,
                     },
                 ]
             },

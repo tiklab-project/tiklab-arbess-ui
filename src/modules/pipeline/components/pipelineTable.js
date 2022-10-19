@@ -3,7 +3,7 @@ import {message,Tooltip,Dropdown,Modal} from "antd";
 import {getUser} from "tiklab-core-ui";
 import {
     CheckCircleOutlined, CloseCircleOutlined,DeleteOutlined,EditOutlined,
-    ExclamationCircleOutlined, EllipsisOutlined, PlayCircleOutlined
+    ExclamationCircleOutlined, EllipsisOutlined, PlayCircleOutlined,ProjectOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
@@ -114,6 +114,7 @@ const PipelineTable = props =>{
                     <span onClick={()=>goPipelineTask(text,record)}
                           style={{color:"#1890ff",cursor:"pointer"}}
                     >
+                        <ProjectOutlined />
                         {text}
                     </span>
                 )

@@ -24,7 +24,7 @@ const Inputs = props =>{
         const obj = {}
         obj[name] = e.target.value
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:mode,
             pipelineTest:obj,
             pipelineCode:obj,
@@ -32,7 +32,11 @@ const Inputs = props =>{
             pipelineDeploy:obj,
             message:"update"
         }
-        updateConfigure(params)
+        updateConfigure(params).then(res=>{
+            if(res.code===50001){
+                message.info(res.msg)
+            }
+        })
     }
 
     return (

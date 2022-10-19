@@ -8,9 +8,11 @@ import {withRouter} from "react-router";
 
 const formView = props =>{
 
-    const {form,del,configDataStore,pipelineId,configStore} = props
+    const {del,configDataStore,pipelineId,configStore} = props
 
-    const {data,setData,formInitialValues,setCodeType,codeType} = configDataStore
+    const [form] = Form.useForm()
+
+    const {data,setData,formInitialValues,codeType} = configDataStore
 
     const {updateConfigure} = configStore
 
@@ -36,7 +38,6 @@ const formView = props =>{
                         data={data}
                         setData={setData}
                         codeType={codeType}
-                        setCodeType={setCodeType}
                         pipelineId={pipelineId}
                         updateConfigure={updateConfigure}
                     />

@@ -5,10 +5,10 @@ import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {GlobalOutlined,MessageOutlined,SettingOutlined,LogoutOutlined,UserOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
-import logo from "../../../assets/images/all/pipeline.png"
-import portrait from "../../../assets/images/portrait.jpg";
-import vipOne from "../../../assets/images/vip-one.png";
-import vipTwo from "../../../assets/images/vip-two.png";
+import logo from "../../assets/images/all/pipeline.png"
+import portrait from "../../assets/images/portrait.jpg";
+import vipOne from "../../assets/images/vip-one.png";
+import vipTwo from "../../assets/images/vip-two.png";
 
 const Head = props =>{
 

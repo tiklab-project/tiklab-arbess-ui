@@ -1,4 +1,5 @@
 import React from "react";
+import EmptyText from "../../../../common/emptyText/emptyText";
 
 // 近期提交记录
 const WorkSpaceRecord = props =>{
@@ -41,12 +42,9 @@ const WorkSpaceRecord = props =>{
             <div className="workSpace-text">
                 {
                     recordList && recordList.length > 0 ?
-                        renderRecordList(recordList):
-                        <div className="workSpace-content-icon">
-                            <svg className="icon" aria-hidden="true" >
-                                <use xlinkHref="#icon-meiyouxiangguan"/>
-                            </svg>
-                        </div>
+                        renderRecordList(recordList)
+                        :
+                        <EmptyText/>
                 }
                 <div className="workSpace-content-null"/>
             </div>

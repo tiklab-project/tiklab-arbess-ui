@@ -1,8 +1,8 @@
 import React from "react";
-import EmptyText from "./emptyText";
 
-// 最近打开的流水线
+// 最近访问的流水线
 const PipelineNear = props =>{
+
     const {pipelineNearList} = props
 
     const goPipeline = pipelineId => {
@@ -10,24 +10,31 @@ const PipelineNear = props =>{
     }
 
     return <div className="pipelineNear">
-        <div className="pipelineNear-title">最近打开的流水线</div>
-        <div className="pipelineNear-list">
+        <div className="pipelineNear-title">最近访问的流水线</div>
+        <div className="pipelineNear-bottom">
             {
-                pipelineNearList && pipelineNearList.length>0 ?
-                    pipelineNearList.map((item,index)=>{
-                        return  <div key={item.pipelineId} className="pipelineNear-list-item">
-                            <div className="pipelineNear-list-item-desc">
-                                <span>{index+1}、</span>
-                                <span onClick={()=>goPipeline(item.pipelineId)} className="name">
+                pipelineNearList && pipelineNearList.map(item=>{
+                    return(
+                        <div
+                            onClick={()=>goPipeline(item.pipelineId)}
+                            className="pipelineNear-bottom-list"
+                            key={item.pipelineId}
+                        >
+                            <div className="pipelineNear-item">
+                                <div>
+                                        <span className="pipelineNear-item-icon">
+                                            U
+                                        </span>
                                     {item.pipelineName}
-                                 </span>
+                                </div>
+                                <div>{item.pipeline.pipelineCreateTime}</div>
                             </div>
                         </div>
-                    })
-                    :
-                    <EmptyText/>
+                    )
+                })
             }
         </div>
+
     </div>
 }
 

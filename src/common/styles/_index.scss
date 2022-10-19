@@ -50,6 +50,7 @@ ul li{
 .home-limited{
     margin: auto;
     max-width: 1280px;
-    height: 100%;
+    min-height: calc(100vh - 55px);
+    max-height: fit-content;
     background: #fff;
 }

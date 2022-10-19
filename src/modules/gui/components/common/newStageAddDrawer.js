@@ -66,7 +66,7 @@ const rightLis = [
 
 const NewStageAddDrawer = props =>{
 
-    const {setNewStageDrawer,newStageDrawer,setTaskFormDrawer,setNewStage,index} = props
+    const {setNewStageDrawer,newStageDrawer,index} = props
 
     const [opt,setOpt] = useState(1)
 
@@ -125,8 +125,6 @@ const NewStageAddDrawer = props =>{
                                 rightLis={rightLis}
                                 onScroll={onScroll}
                                 setNewStageDrawer={setNewStageDrawer}
-                                setTaskFormDrawer={setTaskFormDrawer}
-                                setNewStage={setNewStage}
                                 index={index}
                             />
                         </div>

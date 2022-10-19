@@ -4,14 +4,13 @@ import NewStageAddDrawer from "./newStageAddDrawer";
 
 const NewStage = props =>{
 
-    const {data,setTaskFormDrawer,setNewStage} = props
+    const {data,setTaskFormDrawer,setNewStage,index,setIndex} = props
 
-    const [index,setIndex] = useState("")  // 配置位置的插入
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
 
     const newTask = () =>{
         setNewStageDrawer(true)
-        setIndex("")
+        setIndex(data && data.length)
     }
 
     const showStage = item =>{
@@ -78,7 +77,9 @@ const NewStage = props =>{
                                 <div className="newStages-content"  >
                                     <div className="newStages-task">
                                         <div className="newStages-job">
-                                            <div className="newStages-job_text" onClick={()=>showStage(item)}>
+                                            <div className="newStages-job_text"
+                                                 onClick={()=>showStage(item)}
+                                            >
                                                 <NameType type={item.dataType}/>
                                             </div>
                                         </div>
@@ -127,8 +128,6 @@ const NewStage = props =>{
            <NewStageAddDrawer
                newStageDrawer={newStageDrawer}
                setNewStageDrawer={setNewStageDrawer}
-               setTaskFormDrawer={setTaskFormDrawer}
-               setNewStage={setNewStage}
                index={index}
                setIndex={setIndex}
            />

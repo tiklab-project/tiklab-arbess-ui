@@ -4,7 +4,7 @@ import Headline from "./headline";
 
 const Code = props =>{
 
-    const {data,setData,codeType,setCodeType,del,pipelineId,updateConfigure} = props
+    const {data,setData,codeType,del,pipelineId,updateConfigure} = props
 
     const [codeVisible,setCodeVisible] = useState(false)
 
@@ -45,9 +45,6 @@ const Code = props =>{
         <CodeAddModal
             codeVisible={codeVisible}
             setCodeVisible={setCodeVisible}
-            setCodeType={setCodeType}
-            pipelineId={pipelineId}
-            updateConfigure={updateConfigure}
         />
     </>
 }

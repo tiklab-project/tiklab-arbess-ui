@@ -9,11 +9,9 @@ import NewStageAddModal from "../formView/newStageAddModal";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,structureStore,configDataStore,configStore} = props
+    const {view,setView,pipelineId,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {isPlugin,data,setData,setBuildType,setDeployType} = configDataStore
-    const {updateConfigure} = configStore
 
     const [processVisible,setProcessVisible] = useState(false)
     const [newStageVisible,setNewStageVisible] = useState(false)
@@ -98,17 +96,11 @@ const ConfigChangeView = props =>{
             </div>
 
             <NewStageAddModal
-                data={data}
-                setData={setData}
                 newStageVisible={newStageVisible}
                 setNewStageVisible={setNewStageVisible}
-                setBuildType={setBuildType}
-                setDeployType={setDeployType}
-                updateConfigure={updateConfigure}
-                pipelineId={pipelineId}
             />
         </div>
     )
 }
 
-export default withRouter(inject("structureStore","configDataStore","configStore")(observer(ConfigChangeView)))
+export default withRouter(inject("structureStore")(observer(ConfigChangeView)))

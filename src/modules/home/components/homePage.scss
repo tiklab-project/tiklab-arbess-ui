@@ -1,109 +1,219 @@
 .homePage{
     padding: 20px;
     width: 100%;
-    .quickIn{
-        height: 115px;
-        display: flex;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        justify-content: space-between;
-        &-group{
-            width: 300px;
-            min-width: 100px;
-            line-height: 100px;
-            height: 100px;
-            text-align: center;
-            border: 1px solid #cccccc;
-            //margin-right: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            &-wrap{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                &-title{
-                    font-weight: 600;
-                }
-                &-number{
-                    width: 30px;
-                    height: 30px;
-                    line-height: 30px;
-                    background: #f2f2f2;
-                    border-radius: 50px;
-                }
-            }
-        }
-    }
     &-content{
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         &-left{
-            width: calc(60% - 7px);
-            min-width: 300px;
-            margin-right: 16px;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            min-height: 100px;
-            max-height: 500px;
-            -webkit-flex-shrink: 0;
-            flex-shrink: 0;
+            flex: 1;
+            &:not(:last-child){
+                margin-right: 15px;
+            }
         }
-        &-right{
-            width: calc(40% - 7px);
-            min-width: 390px;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            min-height: 500px;
-            -webkit-flex-shrink: 0;
-            flex-shrink: 0;
+        .quickIn{
+            height: 80px;
+            display: flex;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            &-group{
+                width: 300px;
+                min-width: 100px;
+                line-height: 80px;
+                height: 80px;
+                text-align: center;
+                border: 1px solid #cccccc;
+                border-radius: 8px;
+                cursor: pointer;
+                &:not(:last-child){
+                    margin-right: 16px;
+                }
+                &-wrap{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    &-title{
+                        font-size: 16px;
+                        font-weight: 600;
+                        padding-right: 5px;
+                        .quickIn-group-icon{
+                            .icon{
+                                width: 30px;
+                                height: 30px;
+                                vertical-align: -0.55rem;
+                            }
+                        }
+                    }
+                    &-number{
+                        width: 20px;
+                        height: 20px;
+                        line-height: 20px;
+                        background: #f2f2f2;
+                        border-radius: 50px;
+                        font-weight: 500;
+                        font-size: 16px;
+                    }
+                }
+            }
         }
         .pipelineNear{
             border: 1px solid #ccc;
             border-radius: 8px;
-            padding: 20px;
+            padding: 10px;
             margin-bottom: 15px;
-            min-height: 170px;
+            height: 180px;
             &-title {
                 padding-bottom: 15px;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 600;
             }
-            &-list{
-                &-item{
-                    &-desc{
-                        cursor: pointer;
-                        font-size: 16px;
-                        color: #1890ff;
-                        .name{
-                            &:hover{
-                                text-decoration: underline;
-                            }
+            &-bottom{
+                &-list{
+                    padding: 8px;
+                    cursor: pointer;
+                    &:not(:last-child){
+                        border-bottom: 1px solid #f8f8f8;
+                    }
+                    &:hover{
+                        background: #f8f8f8;
+                    }
+                    .pipelineNear-item{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        &-icon{
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            line-height: 20px;
+                            border-radius: 50px;
+                            background: #6da5f7;
+                            margin-right: 8px;
+                            text-align: center
                         }
                     }
                 }
-                &-null{
-                    text-align: center;
-                    color: rgba(0,0,0,.25)
+            }
+        }
+        .agency{
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            height: 210px;
+            &-top{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                align-items: center;
+                &-title{
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                &-ac{
+                    border-radius: 3px;
+                    cursor: pointer;
+                    color: #0053ca;
+                    font-weight: 600;
+                }
+            }
+        }
+        .dynamic{
+            padding: 10px;
+            height: 395px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            &-top{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                &-title{
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                &-ac{
+                    border-radius: 3px;
+                    cursor: pointer;
+                    color: #0053ca;
+                    font-weight: 600;
+                }
+            }
+            &-bottom{
+                .dynamic-item{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 55px;
+                    &-left{
+                        display: flex;
+                        align-items: center;
+                    }
+                    &-icon{
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        line-height: 30px;
+                        border-radius: 50px;
+                        background: #6da5f7;
+                        margin-right: 8px;
+                        padding-top: 5px;
+                        text-align: center
+                    }
+                    &-userName{
+                        font-weight: 500;
+                    }
+                    &-message{
+                        color: #695c5c;
+                    }
+                    .pipelineName{
+                        font-weight: 500;
+                        padding: 0 5px;
+                    }
+                    &-pipelineName{
+                        font-weight: 500;
+                        color: #1890ff;
+                    }
+                }
+            }
+        }
+        .tidings{
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            height: 395px;
+            &-top{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                align-items: center;
+                &-title{
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+                &-ac{
+                    border-radius: 3px;
+                    cursor: pointer;
+                    color: #0053ca;
+                    font-weight: 600;
                 }
             }
         }
         .statusChart{
             border-radius: 8px;
-            padding: 20px;
+            padding: 10px;
             border: 1px solid #cccccc;
             height: 500px;
+            margin-bottom: 15px;
             &-title{
                 padding-bottom: 15px;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 600;
             }
             &-box{

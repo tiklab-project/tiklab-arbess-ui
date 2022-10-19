@@ -1,7 +1,7 @@
 import React from "react";
 import {inject,observer} from "mobx-react";
 import "./switch.scss";
-import {Modal} from "antd";
+import {Modal,message} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const gitList=[
@@ -48,12 +48,22 @@ const Switch = props =>{
     const chang = type =>{
         del(type)
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:type,
-            message:"update"
+            message:"updateType"
         }
-        updateConfigure(params)
-        if( type > 0 && type < 6) {
+        updateConfigure(params).then(res=>{
+            if(res.code===50001){
+                message.info(res.msg)
+            }
+            if(res.code===0){
+                setType(type)
+            }
+        })
+    }
+
+    const setType = type =>{
+        if(type > 0 && type < 6) {
             setCodeType(type)
         }
         else if(type > 20 && type < 30){

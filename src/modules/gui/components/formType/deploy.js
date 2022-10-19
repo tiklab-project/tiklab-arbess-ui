@@ -11,11 +11,11 @@ import ConfigStore from "../../store/ConfigStore";
 const Deploy = props =>{
 
     const context = useContext(TestContext)
-    const {fileAddress,getFile,profileAddress,updateConfigure} = ConfigStore
+    const {fileAddress,getFile,profileAddress} = ConfigStore
 
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = context.configDataStore
-    const pipelineId = context.pipelineId
-    const pipelineName = context.pipelineName
+    const {pipelineId, pipelineName} = context.pipelineStore
+    const valueChange = context.valueChange
 
     const [messageInfo,setMessageInfo] = useState("")
 
@@ -52,24 +52,11 @@ const Deploy = props =>{
             }else setMessageInfo("")
         }
     }
-    
-    const changDeployType = value => {
-        const params = {
-            pipelineId,
-            taskType:deployType,
-            pipelineTest: {deployType:value},
-            pipelineCode:{deployType:value},
-            pipelineBuild:{deployType:value},
-            pipelineDeploy:{deployType:value},
-            message:"update"
-        }
-        updateConfigure(params)
-    }
 
     return(
         <>
             <Form.Item name={"deployType"} label="部署类型" className="noRequired">
-                <Select onChange={changDeployType}>
+                <Select onChange={(e)=>valueChange(e,"deployType",deployType)}>
                     <Select.Option value={0}>结构化部署</Select.Option>
                     <Select.Option value={1}>自定义部署</Select.Option>
                 </Select>

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Modal,Tree} from "antd";
-import {SwapOutlined} from "@ant-design/icons";
+import {Modal,Tree,message} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 
 const ChangeConfigSortsModal = props =>{
@@ -87,29 +86,26 @@ const ChangeConfigSortsModal = props =>{
             ar.splice(i + 1, 0, dragObj);
         }
         setGData(mData)
+        updateConfig(mData,dragKey+1,dropKey+1)
+    }
 
+    const updateConfig = (mData,sort,taskSort) =>{
         const params = {
             message:"order",
-            pipelineId,
-            sort:dragKey+1,
-            taskSort:dropKey+1,
+            pipeline:{pipelineId},
+            sort:sort,
+            taskSort:taskSort,
             taskType:1,
         }
         updateConfigure(params).then(res=>{
             //如果改变控件，然后改变data
             if(res.code===0){
-                let cData = []
-                mData && mData.map(item=>{
-                    if(item.step!=="源码管理"){
-                        cData.push({
-                            dataId:item.dataId,
-                            dataType:item.dataType
-                        })
-                        setData(cData)
-                    }
-                })
-                setChangeSortVisible(false)
+                setData([...mData])
             }
+            if(res.code===50001){
+                message.info(res.msg)
+            }
+            setChangeSortVisible(false)
         })
     }
 

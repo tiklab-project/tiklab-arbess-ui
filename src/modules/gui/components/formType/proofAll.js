@@ -18,10 +18,9 @@ const ProofAll = props =>{
 
     const {createProof,findPipelineProof,pipelineProofList} = proofStore
     const {updateConfigure} = ConfigStore
-
-
     const {setGitProofId,setDeployProofId} = context.configDataStore
-    const pipelineId = context.pipelineId
+    const {pipelineId} = context.pipelineStore
+    const valueChange = context.valueChange
     const userId = getUser().userId
 
     const [visible,setVisible] = useState(false)
@@ -79,16 +78,17 @@ const ProofAll = props =>{
         }else {
             setDeployProofId(e.key)
         }
-        const params = {
-            pipelineId,
-            taskType:type,
-            pipelineTest: {proof:{proofName:e.key}},
-            pipelineCode: {proof:{proofName:e.key}},
-            pipelineBuild: {proof:{proofName:e.key}},
-            pipelineDeploy: {proof:{proofName:e.key}},
-            message:"update"
-        }
-        updateConfigure(params)
+        valueChange(e.key,"proofName",type)
+        // const params = {
+        //     pipelineId,
+        //     taskType:type,
+        //     pipelineTest: {proof:{proofId:e.key}},
+        //     pipelineCode: {proof:{proofId:e.key}},
+        //     pipelineBuild: {proof:{proofId:e.key}},
+        //     pipelineDeploy: {proof:{proofId:e.key}},
+        //     message:"update"
+        // }
+        // updateConfigure(params)
     }
 
     const style1 = {

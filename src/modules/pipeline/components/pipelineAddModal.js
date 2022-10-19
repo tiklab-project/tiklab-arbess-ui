@@ -1,100 +1,28 @@
-import React,{useEffect,useState} from "react";
-import {Form,message,Modal,Row,Col} from "antd";
-import moment from "../../../common/moment/moment";
-import ModalTitle from "../../../common/modalTitle/modalTitle";
-import PipelineAddModalRight from "./pipelineAddModalRight";
-import PipelineAddModalLeft from "./pipelineAddModalLeft";
+import React,{useState} from "react";
+import {Form,Modal,Button,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
+import PipelineAddModalType from "./pipelineAddModalType";
+import ProjectRename from "../../project/reDel/projectRename";
+import moment from "../../../common/moment/moment";
 
-// 左侧锚点
-const leftLis = [
-    {
-        id:1,
-        title:"快速选择"
-    },
-    {
-        id:2,
-        title:"Java"
-    },
-    {
-        id:3,
-        title:"Node.js"
-    },
-]
-// 右侧lis渲染
-const rightLis = [
-    {
-        id:2,
-        type:2,
-        title:"Java",
-        desc:"Linux",
-        first:"构建",
-        second:"部署",
-    },
-    {
-        id:3,
-        type:2,
-        title:"Java",
-        desc: "docker",
-        first:"构建",
-        second:"部署",
-    },
-    {
-        id:4,
-        type:2,
-        title:"Java",
-        desc: "Linux",
-        zreo: "测试",
-        first:"构建",
-        second:"部署",
-    },
-    {
-        id:5,
-        type:2,
-        title:"Java",
-        desc: "docker",
-        zreo: "测试",
-        first:"构建",
-        second:"部署",
-    },
-    {
-        id:6,
-        type:3,
-        title:"Node.js",
-        desc: "Linux",
-        first:"构建",
-        second:"部署",
-    },
-    {
-        id:7,
-        type:3,
-        title:"Node.js",
-        desc: "Linux",
-        first:"构建",
-        second:"部署",
-    },
-]
+const {Step} = Steps
 
 const PipelineAddModal = props =>{
 
-    const {addPipelineVisible,setAddPipelineVisible,pipelineList,userId,createPipeline} = props
+    const {addPipelineVisible,setAddPipelineVisible,userId,createPipeline,pipelineList} = props
+
+    const [templateType,setTemplateType] = useState(1)
+    const [current,setCurrent] = useState(0)
 
     const [form] = Form.useForm()
-    const [templateType,setTemplateType] = useState(1)
 
-
-    useEffect(()=>{
-        if(addPipelineVisible){
-            // 表单清空
-            form.resetFields()
-        }
-    },[addPipelineVisible])
-    
     const onOk = value => {
         const params={
             user:{id:userId},
+            pipelineType:templateType,
             pipelineName:value.pipelineName,
-            pipelineType:1,
+            pipelinePower:value.pipelinePower,
             pipelineCreateTime:moment.moment
         }
         createPipeline(params).then(res=>{
@@ -103,81 +31,88 @@ const PipelineAddModal = props =>{
             }else{
                 message.error({content:"添加失败", className:"message"})
             }
+            form.resetFields()
         })
     }
 
-    const [type,setType] = useState(1)
-
-    const changeAnchor = anchorName =>{
-        const scrollTop=document.getElementById("pipelineAddModalRight")
-        if (anchorName) {
-            const anchorElement = document.getElementById(anchorName)
-            if (anchorElement) {
-                scrollTop.scrollTop = anchorElement.offsetTop
-                setType(anchorName)
-            }
+    const steps = [
+        {
+            title: "选择模板",
+            content: <PipelineAddModalType
+                        pipelineList={pipelineList}
+                        templateType={templateType}
+                        setTemplateType={setTemplateType}
+                        form={form}
+                     />
+        },
+        {
+            title: "基本信息",
+            content: <ProjectRename
+                        form={form}
+                        pipelineList={pipelineList}
+                        layout={"vertical"}
+                    />
         }
-    }
+    ]
 
-    const onScroll = () =>{
-        const scrollTop=document.getElementById("pipelineAddModalRight").scrollTop
-        for(let x = 1;x <=3;x++){
-            const iId = document.getElementById(x) //当前id
-            const lastId = document.getElementById(x).previousSibling //上一个id
-            const iTop =iId &&  iId.offsetTop
-            const lastTop =lastId && lastId.offsetTop
-            if(scrollTop > lastTop && scrollTop < iTop ){
-                setType(x)
-            }
-        }
-    }
+    // 表单底部内容
+    const modalFooter = (
+        <div className="steps-action">
+            {current === 0 && (
+                <Button onClick={()=>setAddPipelineVisible(false)}>
+                    取消
+                </Button>
+            )}
+            {current > 0 && (
+                <Button  onClick={()=>setCurrent(current - 1)}>
+                    上一步
+                </Button>
+            )}
+            {current < steps.length - 1 && (
+                <Button type="primary" onClick={()=>setCurrent(current + 1)}>
+                    下一步
+                </Button>
+            )}
+            {current === steps.length - 1 && (
+                <Button type="primary"
+                        onClick={() => {
+                            form
+                                .validateFields()
+                                .then((values) => {
+                                    onOk(values)
+                                })
+                        }}
+                >
+                    确认
+                </Button>
+            )}
+        </div>
+    )
 
     return(
         <Modal
             visible={addPipelineVisible}
             closable={false}
             onCancel={()=>setAddPipelineVisible(false)}
-            onOk={() => {
-                form
-                    .validateFields()
-                    .then((values) => {
-                        form.resetFields()
-                        onOk(values)
-                    })
-            }}
             okText="确认"
             cancelText="取消"
             width={800}
+            footer={modalFooter}
         >
             <div className="pipelineAddModal">
                 <ModalTitle
                     setVisible={setAddPipelineVisible}
                     title={"创建流水线"}
                 />
-                <Row>
-                    <Col span={4}>
-                        <PipelineAddModalLeft
-                            lis={leftLis}
-                            type={type}
-                            changeAnchor={changeAnchor}
-                        />
-                    </Col>
-                    <Col span={20}>
-                        <PipelineAddModalRight
-                            form={form}
-                            lis={rightLis}
-                            onScroll={onScroll}
-                            pipelineList={pipelineList}
-                            templateType={templateType}
-                            setTemplateType={setTemplateType}
-                        />
-                    </Col>
-
-                </Row>
+                <Steps current={current}>
+                    {steps.map(item => (
+                        <Step key={item.title} title={item.title} />
+                    ))}
+                </Steps>
+                <div className="steps-content">{steps[current].content}</div>
             </div>
         </Modal>
     )
 }
-
 
 export default PipelineAddModal

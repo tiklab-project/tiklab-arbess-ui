@@ -9,7 +9,7 @@ import "codemirror/mode/shell/shell.js";
 // import "codemirror/mode/css/css";
 import "codemirror/addon/display/placeholder.js";
 
-import {Form} from "antd";
+import {message} from "antd";
 
 import "./mirror.scss";
 
@@ -26,7 +26,7 @@ const MirrorContent = props =>{
         obj[name] = mirrorRefs.current.editor.getValue()
         setShellBlock(mirrorRefs.current.editor.getValue())
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:type,
             pipelineTest: obj,
             pipelineCode:obj,
@@ -34,7 +34,11 @@ const MirrorContent = props =>{
             pipelineDeploy:obj,
             message:"update"
         }
-        updateConfigure(params)
+        updateConfigure(params).then(res=>{
+            if(res.code===50001){
+                message.info(res.msg)
+            }
+        })
     }
 
     return  <div className="formViewCodeMirror">

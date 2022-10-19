@@ -1,28 +1,8 @@
 .pipelineAddModal{
-    .pipelineAddModalLeft{
-        margin-right: 15px;
-        &-title {
-            height: 40px;
-            line-height: 40px;
-            cursor: pointer;
-            padding-left: 10px;
-            font-size: 16px;
-            &:not(:last-child){
-                margin-bottom: 5px;
-            }
-        }
-        &-setected{
-            background: #f4f4f4;
-        }
-    }
-  .pipelineAddModalRight{
+    .pipelineAddModalType{
       &-title{
           padding-bottom: 10px;
           text-align: right;
-      }
-      &-ul{
-          max-height: 500px;
-          overflow: auto;
       }
       &-li{
           width:100%;
@@ -85,7 +65,22 @@
       }
       &-selected{
           border: 1px solid #13659b;
-          //background: #c6e4ef;
         }
+    }
+    .steps-content {
+        margin-top: 16px;
+        padding: 10px;
+        background-color: #fafafa;
+        border: 1px dashed #e9e9e9;
+        border-radius: 2px;
+        height: 500px;
+        max-height: 500px;
+        overflow: auto
+    }
+    .steps-action {
+        margin-top: 24px;
+    }
+    .ant-steps-item-icon{
+        padding-top: 7px;
     }
 }

@@ -19,9 +19,9 @@ export function  RunState (data){
 }
 
 // 所有动态
-export function  FindUserAction (data){
+export function  FindLog (data){
     return serviceLoc.request({
-        url:"/pipelineHome/findUserActivity",
+        url:"/pipelineWorkSpace/findLog",
         method:"post",
         data
     })

@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3727835",
+      "name": "星星",
+      "font_class": "icon-test",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "25687575",
+      "name": "任务",
+      "font_class": "renwu",
+      "unicode": "ff84",
+      "unicode_decimal": 65412
+    },
+    {
       "icon_id": "2552778",
       "name": "测试",
       "font_class": "ceshi1",

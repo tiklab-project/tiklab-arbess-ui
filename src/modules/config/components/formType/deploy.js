@@ -53,7 +53,7 @@ const Deploy = props =>{
     
     const changDeployType = value => {
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:deployType,
             pipelineTest: {deployType:value},
             pipelineCode:{deployType:value},

@@ -20,7 +20,7 @@ const CodeGiteeOrGithub = props =>{
     const context = useContext(TestContext)
 
     const {formInitialValues,codeType,gitProofId,setGitProofId,setFormInitialValues} = context.configDataStore
-    const pipelineId = context.pipelineId
+    const {pipelineId} = context.pipelineStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止

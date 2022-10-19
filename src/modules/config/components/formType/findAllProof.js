@@ -60,8 +60,8 @@ const FindAllProof = props =>{
             setDeployProofId(e.key)
         }
         const params = {
-            pipelineId,
             taskType:type,
+            pipeline:{pipelineId},
             pipelineTest: {proof:{proofId:e.key}},
             pipelineCode: {proof:{proofId:e.key}},
             pipelineBuild: {proof:{proofId:e.key}},

@@ -72,6 +72,7 @@ export class PipelineStore {
         const params = {
             user: {id:values.user.id,},
             pipelineName: values.pipelineName,
+            pipelinePower: values.pipelinePower,
             pipelineType: values.pipelineType,
             pipelineCreateTime:values.pipelineCreateTime
         }

@@ -12,13 +12,13 @@ const codeList=[
         title:"Gitee"
     },
     {
+        type:3,
+        title: "Github"
+    },
+    {
         type:4,
         title: "Gitlab"
     },
-    {
-        type:3,
-        title: "Github"
-    }
 ]
 
 const CodeAddDrawerRightGit = props =>{

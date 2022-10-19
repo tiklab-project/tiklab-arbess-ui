@@ -1,51 +1,12 @@
-import React,{useContext} from "react";
-import {Button,Drawer,Modal} from "antd";
-import {CloseOutlined,DeleteOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
+import React from "react";
+import {Button,Drawer} from "antd";
+import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
 import Forms from "../formType/forms";
 import NameType from "./nameType";
-import {observer} from "mobx-react";
-import ConfigStore from "../../store/configStore";
-import TestContext from "./testContext";
 
 const FormDetailsDrawer = props =>{
 
-    const {taskFormDrawer,setTaskFormDrawer,newStage} = props
-    const {updateConfigure} = ConfigStore
-
-    const context = useContext(TestContext)
-    const {data,setData} = context.configDataStore
-    const del = context.del
-    const pipelineId = context.pipelineId
-
-    const deletePart = newStage => {
-        Modal.confirm({
-            title: "删除",
-            icon: <ExclamationCircleOutlined />,
-            content: "删除后数据无法恢复",
-            onOk:()=>delPart(newStage),
-            okText: "确认",
-            cancelText: "取消",
-        });
-
-    }
-    
-    const delPart = newStage => {
-        const params = {
-            pipelineId,
-            taskType:newStage,
-            message:"delete"
-        }
-        del(newStage)
-        updateConfigure(params)
-        for (let i = 0 ;i<data.length;i++){
-            if(data[i].dataType === newStage){
-                data.splice(i,1)
-            }
-            setData([...data])
-        }
-        setTaskFormDrawer(false)
-    }
-    
+    const {taskFormDrawer,setTaskFormDrawer,newStage,deletePart} = props
 
     const renderIcon = newStage =>{
         switch (newStage) {
@@ -104,4 +65,4 @@ const FormDetailsDrawer = props =>{
     )
 }
 
-export default observer(FormDetailsDrawer)
+export default FormDetailsDrawer

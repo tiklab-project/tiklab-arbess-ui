@@ -1,6 +1,6 @@
 import React from "react";
 import {DeleteOutlined,ExclamationCircleOutlined,SwapOutlined} from "@ant-design/icons";
-import {Modal} from "antd";
+import {Modal,message} from "antd";
 import Switch from "./switch";
 import Forms from "../formType/forms";
 
@@ -21,17 +21,22 @@ const Headline = props =>{
     
     const confirm = type => {
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:type,
             message:"delete"
         }
-        del(type)
         updateConfigure(params).then(res=>{
-            for (let i = 0 ;i<data.length;i++){
-                if(data[i].dataType === type){
-                    data.splice(i,1)
+            if(res.code===0){
+                del(type)
+                for (let i = 0 ;i<data.length;i++){
+                    if(data[i].dataType === type){
+                        data.splice(i,1)
+                    }
+                    setData([...data])
                 }
-                setData([...data])
+            }
+            if(res.code===50001){
+                message.info(res.msg)
             }
         })
     }

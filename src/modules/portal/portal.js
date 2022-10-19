@@ -2,8 +2,8 @@ import React from "react";
 import {verifyUserHoc,useWorkAppConfig} from "tiklab-eam-ui";
 import {connect} from "tiklab-plugin-ui/es/_utils";
 import {renderRoutes} from "react-router-config";
-import "../components/header.scss";
-import Heads from "../components/header";
+import "./header.scss";
+import Heads from "./header";
 
 const Portal= props=>{
 

@@ -1,4 +1,5 @@
 import React,{Fragment} from "react";
+import EmptyText from "../../../../common/emptyText/emptyText";
 
 // 节点
 const WorkSpaceNod = props =>{
@@ -100,11 +101,7 @@ const WorkSpaceNod = props =>{
                         isFileList ?
                             renderFileList(fileList)
                             :
-                            <div className="workSpace-content-icon">
-                                <svg className="icon" aria-hidden="true" >
-                                    <use xlinkHref="#icon-meiyouxiangguan"/>
-                                </svg>
-                            </div>
+                            <EmptyText/>
                     }
                 </div>
             </div>

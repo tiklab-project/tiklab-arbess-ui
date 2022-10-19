@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {getUser} from "tiklab-core-ui";
-import {Button,Input,message} from "antd";
+import {Button,Input} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";

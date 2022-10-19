@@ -12,7 +12,7 @@ const BuildMavenOrNode = props =>{
 
     const {profileAddress} = ConfigStore
     const {buildShellBlock,setBuildShellBlock,buildType} = context.configDataStore
-    const pipelineName = context.pipelineName
+    const {pipelineName} = context.pipelineStore
 
     return(
         <>

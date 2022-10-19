@@ -4,6 +4,8 @@ import {getUser} from "tiklab-core-ui";
 import DynamicList from "./dynamicList";
 import PipelineNear from "./pipelineNear";
 import QuickIn from "./quickIn";
+import Agency from "./agency";
+import Tidings from "./tidings";
 import "./homePage.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -11,7 +13,7 @@ import {inject,observer} from "mobx-react";
 const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
-    const {findAllOpen,pipelineNearList,runState,findUserAction,dynamicList} = homePageStore
+    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList} = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
@@ -29,7 +31,7 @@ const HomePage = props =>{
         findAllFollow(userId)
 
         // 最近动态
-        findUserAction(params)
+        findLog(params)
 
         // 最近打开的流水线
         findAllOpen(userId)
@@ -107,11 +109,6 @@ const HomePage = props =>{
 
     return(
         <div className="homePage home-limited">
-            {/*<QuickIn*/}
-            {/*    {...props}*/}
-            {/*    pipelineList={pipelineList}*/}
-            {/*    followList={followList}*/}
-            {/*/>*/}
             <div className="homePage-content">
                 <div className="homePage-content-left">
                     <QuickIn
@@ -120,20 +117,25 @@ const HomePage = props =>{
                         pipelineLength={pipelineLength}
                         followLength={followLength}
                     />
-                    <PipelineNear {...props} pipelineNearList={pipelineNearList}/>
+                    <PipelineNear
+                        {...props}
+                        pipelineNearList={pipelineNearList}
+                    />
+                    <Agency
+                        {...props}
+                    />
                     <DynamicList
                         {...props}
-                        pageNumber={1}
                         dynamicList={dynamicList}
-                        dynamicTitle={"近期动态"}
-                        dynamicClickText={"更多"}
                     />
                 </div>
-                <div className="homePage-content-right">
+                <div className="homePage-content-left">
                     <div className="statusChart">
                         <div className="statusChart-title">近期构建状态</div>
                         <div className="statusChart-box" id="burn-down"/>
                     </div>
+                    <Tidings
+                    />
                 </div>
             </div>
         </div>

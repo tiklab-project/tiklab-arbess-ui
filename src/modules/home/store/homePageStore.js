@@ -3,7 +3,7 @@ import {observable,action} from "mobx";
 import {
     FindAllOpen,
     RunState,
-    FindUserAction
+    FindLog
 } from "../api/homePage";
 
 export class HomePageStore{
@@ -37,15 +37,15 @@ export class HomePageStore{
     }
 
     @action
-    findUserAction = async values =>{
+    findLog = async values =>{
         const params = {
             userId:values.userId,
             page:values.page,
             pageSize:values.pageSize,
         }
-        FindUserAction(params).then(res=>{
+        FindLog(params).then(res=>{
             if(res.code===0 && res.data){
-                this.dynamicList = res.data.dataList
+                this.dynamicList = res.data
                 this.page.total = res.data.listSize
             }
         }).catch(error=>{

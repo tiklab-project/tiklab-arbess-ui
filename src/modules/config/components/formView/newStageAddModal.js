@@ -4,7 +4,7 @@ import CodeOrNewStageModal from "./codeOrNewStageModal";
 
 const lis=[
     {
-        id:1,
+        id:2,
         title:"测试",
         desc:[
             {
@@ -15,7 +15,7 @@ const lis=[
         ]
     },
     {
-        id:2,
+        id:3,
         title: "构建",
         desc:[
             {
@@ -32,7 +32,7 @@ const lis=[
         ]
     },
     {
-        id:3,
+        id:4,
         title: "部署",
         desc:[
             {
@@ -45,53 +45,16 @@ const lis=[
                 tel:"docker",
                 icon:"docker"
             },
-            // {
-            //     type:33,
-            //     tel:"本机"
-            // }
         ]
     }
 ]
 
 const NewStageAddModal = props =>{
 
-    const {pipelineId,updateConfigure,newStageVisible,setNewStageVisible,data,setData,setBuildType,setDeployType} = props
-
-    const handleClick = (group,item,index)=>{
-        const newData = [...data]
-        const name = data && data.map(item => item.dataType)
-        const groupDesc = group.desc.map(item=>item.type)
-        for(let i =0;i<name.length;i++){
-            for(let j=0;j<groupDesc.length;j++){
-                if(name[i] === groupDesc[j]){
-                    message.info({content:`${group.title}已经存在`,className:"message"})
-                    return
-                }
-            }
-        } 
-        if(group.id===2){
-            setBuildType(item.type)
-        }
-        else if(group.id===3){
-            setDeployType(item.type)
-        }
-        newData.push({
-            dataId:index,
-            dataType:item.type
-        })
-        const params = {
-            pipelineId:pipelineId,
-            taskType:item.type,
-            message:"create"
-        }
-        updateConfigure(params)
-        setData(newData)
-        setNewStageVisible(false)
-    }
+    const {newStageVisible,setNewStageVisible} = props
 
     return   <CodeOrNewStageModal
                  lis={lis}
-                 handleClick={handleClick}
                  visible={newStageVisible}
                  setVisible={setNewStageVisible}
             />

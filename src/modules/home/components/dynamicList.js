@@ -1,60 +1,80 @@
 import React from "react";
-import "./dynamicList.scss";
-import EmptyText from "./emptyText";
+import {UserOutlined} from "@ant-design/icons";
 
 const DynamicList = props =>{
 
-    const {dynamicList,pageNumber,dynamicTitle,dynamicClickText} = props
+    const {dynamicList} = props
 
-    const goPipeline = pipelineId => {
-        props.history.push(`/index/task/${pipelineId}/work`)
+    const goPipeline = item => {
+        props.history.push(`/index/task/${item.pipelineId}/config`)
     }
 
-    const dynamic = dynamicClickText =>{
-        switch (dynamicClickText) {
-            case "返回":
-                props.history.push("/index")
-                break
-            case "更多":
-                props.history.push("/index/dynamic")
+    const dynamic = () =>{
+        props.history.push("/index/system/myLog")
+    }
+    
+    const renderType = type => {
+        switch (type) {
+            case "delete":
+                return "删除"
+            case "update":
+                return "更新"
+            case "create":
+                return "创建"
         }
     }
 
     return(
-        <div className={`dynamic ${dynamicClickText==="更多" ? "dynamic-shadow" : ""}`}>
+        <div className={"dynamic"}>
             <div className="dynamic-top">
-                <div className="dynamic-top-title">{dynamicTitle}</div>
+                <div className="dynamic-top-title">
+                    近期动态
+                </div>
                 <div className="dynamic-top-ac">
-                    <div onClick={()=>dynamic(dynamicClickText)}>
-                        {dynamicClickText}
-                    </div>
+                    <span onClick={()=>dynamic()}>
+                        更多...
+                    </span>
                 </div>
             </div>
-            <div className="dynamic-list">
+            <div className="dynamic-bottom">
                 {
-                    dynamicList && dynamicList.length  > 0 ?
-                        dynamicList.map((item,index)=> {
-                            return <div className="dynamic-list-item" key={index}>
-                                <div className="dynamic-item">
-                                    <div className="dynamic-item-title">
-                                        <span>{(index+1)+(pageNumber-1)*15}、用户</span>
-                                        <span>{item.user && item.user.name}</span>
-                                        <span>{item.massage}</span>
-                                        <span className="dynamic-item-name"
-                                              onClick={()=>goPipeline(item.pipeline && item.pipeline.pipelineId)}
-                                        >
-                                            {item.pipeline && item.pipeline.pipelineName}
-                                        </span>
-                                        <span>{item.news}</span>
+                    dynamicList && dynamicList.map((item,index)=>{
+                        return(
+                            <div className="dynamic-item" key={index}>
+                                <div className="dynamic-item-left">
+                                    <div className="dynamic-item-icon">
+                                        <UserOutlined/>
                                     </div>
-                                    <div>{item.createTime}</div>
+                                    <div>
+                                        <div className="dynamic-item-userName">
+                                            {item.userName}
+                                        </div>
+                                        <div className="dynamic-item-message">
+                                            <span>{renderType(item.type)}了流水线</span>
+                                            {
+                                                item.templateType === "pipeline" && item.type === "delete" ?
+                                                <span className="pipelineName">
+                                                    {item.pipelineName}
+                                                </span>
+                                                    :
+                                                <span
+                                                    className={"pipelineName dynamic-item-pipelineName"}
+                                                    onClick={()=>goPipeline(item)}
+                                                >
+                                                    {item.pipelineName}
+                                                </span>
+                                            }
+                                            <span>{item.message}</span>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div>{item.createTime}</div>
                             </div>
-                            })
-                            :
-                            <EmptyText/>
+                        )
+                    })
                 }
             </div>
+
         </div>
     )
 }

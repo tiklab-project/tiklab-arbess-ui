@@ -1,5 +1,6 @@
-import React,{Fragment} from "react";
+import React from "react";
 import {Table} from "antd";
+import EmptyText from "../emptyText/emptyText";
 
 const Tables = props =>{
     const {columns,dataSource,rowKey} = props
@@ -9,14 +10,7 @@ const Tables = props =>{
         columns={columns}
         dataSource={dataSource}
         pagination={{hideOnSinglePage:true,pageSize:10}}
-        locale={{emptyText:
-                <Fragment>
-                    <svg className="icon" aria-hidden="true" style={{width:50,height:50}}>
-                        <use xlinkHref="#icon-meiyouxiangguan"/>
-                    </svg>
-                    <div>没有数据</div>
-                </Fragment>
-        }}
+        locale={{emptyText: <EmptyText/>}}
     />
 }
 

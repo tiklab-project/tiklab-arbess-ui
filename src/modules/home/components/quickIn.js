@@ -10,11 +10,13 @@ const QuickIn = props =>{
         {
             id:1,
             title: "我的流水线",
+            icon:"#icon-icon-test",
             listLength:pipelineLength
         },
         {
             id:2,
             title:"我的收藏",
+            icon:"#icon-renwu",
             listLength: followLength
         },
     ]
@@ -27,9 +29,20 @@ const QuickIn = props =>{
     const renderStableList = lis => {
         return lis && lis.map(item=>{
             return(
-                <div key={item.id} className="quickIn-group" onClick={()=>goPipeline(item.id)}>
+                <div
+                    key={item.id}
+                    className="quickIn-group"
+                    onClick={()=>goPipeline(item.id)}
+                >
                     <div className="quickIn-group-wrap">
-                        <div className="quickIn-group-wrap-title">{item.title}</div>
+                        <div className="quickIn-group-wrap-title">
+                            <span className="quickIn-group-icon">
+                                <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref={`${item.icon}`}/>
+                                </svg>
+                            </span>
+                            <span>{item.title}</span>
+                        </div>
                         <div className="quickIn-group-wrap-number">
                             {item.listLength}
                         </div>

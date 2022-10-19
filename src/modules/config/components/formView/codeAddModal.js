@@ -30,7 +30,7 @@ const lis=[
         ]
     },
     {
-        id:2,
+        id:1,
         title:"SVN",
         icon:"-_ssh",
         desc: [
@@ -45,22 +45,10 @@ const lis=[
 
 const CodeAddModal = props =>{
 
-    const {codeVisible,setCodeVisible,setCodeType,pipelineId,updateConfigure} = props
-
-    const handleClick = (group,item,index) =>{
-        const params = {
-            pipelineId:pipelineId,
-            taskType:item.type,
-            message:"create"
-        }
-        updateConfigure(params)
-        setCodeType(item.type)
-        setCodeVisible(false)
-    }
+    const {codeVisible,setCodeVisible} = props
 
     return  <CodeOrNewStageModal
                 lis={lis}
-                handleClick={handleClick}
                 visible={codeVisible}
                 setVisible={setCodeVisible}
             />

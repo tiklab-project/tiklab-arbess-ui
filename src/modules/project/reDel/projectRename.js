@@ -1,5 +1,5 @@
 import React from "react";
-import {Button,Form,Input} from "antd";
+import {Button,Form,Input,Radio} from "antd";
 
 const ProjectRename = props =>{
 
@@ -9,15 +9,20 @@ const ProjectRename = props =>{
         "width":416
     }
 
+    const init = {
+        pipelinePower:2
+    }
+
     return(
         <Form
             form={form}
             onFinish={re}
             autoComplete="off"
             layout={layout}
+            initialValues={layout==="vertical"?init:null}
         >
             <Form.Item
-                label={layout==="vertical"?"名称":"重命名"}
+                label={layout==="vertical"?"流水线名称":"重命名"}
                 name="pipelineName"
                 rules={[
                     {required:true,message:""},
@@ -44,6 +49,20 @@ const ProjectRename = props =>{
             >
                 <Input allowClear style={layout==="inline" ? style1:null}/>
             </Form.Item>
+            {
+                layout === "vertical" ?
+                    <Form.Item
+                        label={"流水线权限"}
+                        name={"pipelinePower"}
+                    >
+                        <Radio.Group>
+                            <Radio value={2}>私有</Radio>
+                            <Radio value={1}>全局</Radio>
+                            {/*<Radio value={2}>私有</Radio>*/}
+                        </Radio.Group>
+                    </Form.Item>
+                    :null
+            }
             {
                 re ?
                     <Form.Item>

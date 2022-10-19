@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
+const Index=AsyncComponent(()=>import("./modules/portal/portal"))
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
@@ -12,9 +12,6 @@ const Widget=AsyncComponent(()=>import("./modules/wiget/wiget"))
 
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
-
-/* 动态详情 */
-const DynamicDetails=AsyncComponent(()=>import("./modules/home/components/dynamicDetails"))
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
@@ -99,11 +96,6 @@ const routers=[
             //     component: Widget,
             //     exact:true,
             // },
-            {
-                path: "/index/dynamic",
-                component: DynamicDetails,
-                exact:true,
-            },
             {
                 path:"/index/pipeline",
                 component:Pipeline,

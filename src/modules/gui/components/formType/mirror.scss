@@ -1,7 +1,10 @@
 .guiViewCodeMirror{
     .react-codemirror2{
         width:460px ;
-        border: 1px solid #cccccc !important;
+        border: 1px solid #cccccc;
+        &:hover{
+            border-color: #1890ff;
+        }
     }
     .CodeMirror{
         height: 100%;

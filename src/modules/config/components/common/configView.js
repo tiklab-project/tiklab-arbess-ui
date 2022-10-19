@@ -1,5 +1,4 @@
-import React,{Fragment,useEffect} from "react";
-import {Form} from "antd";
+import React,{useEffect} from "react";
 import {toJS} from 'mobx'
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
@@ -23,8 +22,6 @@ const ConfigView = props =>{
     const {pipelineId} = pipelineStore
 
     const pluginStore = useSelector(state =>state.pluginStore)
-
-    const [form] = Form.useForm()
 
     useEffect(()=>{
         pluginStore && pluginStore.map(item=>{
@@ -59,7 +56,6 @@ const ConfigView = props =>{
     const nonData = ()=>{
         setCodeType("")
         setData([])
-        form.resetFields()
         setFormInitialValues({})
         setUnitShellBlock("")
         setVirShellBlock("")
@@ -170,6 +166,7 @@ const ConfigView = props =>{
             case 22:
                 formInitialValues.buildAddress = null
                 setBuildShellBlock("")
+                setBuildType("")
                 break
             case 31:
             case 32:
@@ -182,6 +179,7 @@ const ConfigView = props =>{
                 formInitialValues.startAddress = null
                 formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
+                setDeployType("")
                 setDeployProofId("")
                 setVirShellBlock("")
                 setDeployShellBlock("")
@@ -201,14 +199,12 @@ const ConfigView = props =>{
     return view==="forms" ?
         <FormView
             del={del}
-            form={form}
             pipelineId={pipelineId}
         />
         :
         <>
             <Gui
                 {...props}
-                form={form}
                 del={del}
                 configDataStore={configDataStore}
                 pipelineStore={pipelineStore}
@@ -223,7 +219,6 @@ const ConfigView = props =>{
             {/*            extraProps={{*/}
             {/*                pipelineStore:toJS(pipelineStore),*/}
             {/*                configDataStore:toJS(configDataStore),*/}
-            {/*                form,*/}
             {/*                del,*/}
             {/*            }}*/}
             {/*        />*/}

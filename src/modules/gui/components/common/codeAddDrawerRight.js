@@ -2,7 +2,6 @@ import React,{useContext} from "react";
 import CodeAddDrawerRightGit from "./codeAddDrawerRightGit";
 import CodeAddDrawerRightSvn from "./codeAddDrawerRightSvn";
 import TestContext from "./testContext";
-import ConfigStore from "../../store/configStore";
 import {observer} from "mobx-react";
 import {Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
@@ -13,13 +12,14 @@ const CodeAddDrawerRight = props =>{
     const context = useContext(TestContext)
 
     const {codeType,setCodeType} = context.configDataStore
+    const changType = context.changType
+    const addConfig = context.addConfig
     const del = context.del
-    const pipelineId = context.pipelineId
-    const {updateConfigure} = ConfigStore
 
     const handleClick = type =>{
         if(codeType===""){
-            send(type,"create")
+            setCodeType(type)
+            addConfig(type)
         }else {
             Modal.confirm({
                 title: "切换",
@@ -34,19 +34,8 @@ const CodeAddDrawerRight = props =>{
 
     const chang = type =>{
         del(type)
-        send(type,"update")
+        changType(type)
     }
-
-    const send = (type,message) =>{
-        const params = {
-            pipelineId,
-            taskType:type,
-            message:message
-        }
-        setCodeType(type)
-        updateConfigure(params)
-    }
-
 
     return(
         <div className="body-menu_right">

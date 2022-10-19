@@ -183,6 +183,10 @@
                         cursor: pointer;
                         color: #8c8c8c;
                         height: 100%;
+                        .icon{
+                            width: 30px;
+                            height: 30px;
+                        }
                         &_i{
                             position: absolute;
                             top: 104px;
