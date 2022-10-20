@@ -1,10 +1,13 @@
 import React from "react";
 import Proof from "./proof";
 import Inputs from "./inputs";
+import {inject,observer} from "mobx-react";
 
 const CodeSvn = props =>{
 
-    const {codeType} = props
+    const {configDataStore} = props
+
+    const {codeType} = configDataStore
 
     return(
         <>
@@ -18,9 +21,10 @@ const CodeSvn = props =>{
             <Proof
                 allProofType={5}
                 testType={"源码地址"}
+                type={1}
             />
         </>
     )
 }
 
-export default CodeSvn
+export default inject("configDataStore")(observer(CodeSvn))

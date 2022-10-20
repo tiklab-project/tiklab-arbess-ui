@@ -6,9 +6,9 @@ import Inputs from "./inputs";
 
 const DeployVir = props =>{
 
-    const {configDataStore} = props
+    const {configdatastore} = props
 
-    const {virShellBlock,deployType,setVirShellBlock} = configDataStore
+    const {virShellBlock,deployType,setVirShellBlock} = configdatastore
     
     return(
         <>
@@ -18,7 +18,7 @@ const DeployVir = props =>{
                 label={"启动文件地址"}
                 name={"startAddress"}
                 mode={deployType}
-                addonBefore={"/"}
+                addonbefore={"/"}
             />
             <Form.Item name={"startShell"} label="启动命令" >
                 <Mirror

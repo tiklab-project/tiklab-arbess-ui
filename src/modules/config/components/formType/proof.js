@@ -6,21 +6,16 @@ import FindAllProof from "./findAllProof";
 
 const Proof = props =>{
 
-    const {allProofType,testType,configDataStore,configStore} = props
+    const {allProofType,testType,configDataStore,configStore,type} = props
 
-    const {formInitialValues,codeType,gitProofId,deployProofId} = configDataStore
+    const {formInitialValues,gitProofId,deployProofId} = configDataStore
     const {codeTestPass} = configStore
 
     const [testStatus,setTestStatus] = useState(false)
 
     const testing = () =>{
-        let port,url,proofId,type
+        let port,url,proofId
         if(testType === "源码地址"){
-            if(codeType === 5){
-                type = 1
-            } else {
-                type = 0
-            }
             proofId = gitProofId
             port = 0
             url = formInitialValues && formInitialValues.codeName
@@ -28,7 +23,6 @@ const Proof = props =>{
             proofId = deployProofId
             port = formInitialValues && formInitialValues.sshPort
             url = formInitialValues && formInitialValues.sshIp
-            type = 2
         }
         const params = {
             proofId:proofId,
@@ -43,7 +37,7 @@ const Proof = props =>{
             }).catch(error=>{
                 console.log(error)
             })
-        } else {testReminder(testType,"info")}
+        } else { testReminder(testType,"info") }
     }
 
     const testReminder = (data,info) => {
@@ -73,7 +67,9 @@ const Proof = props =>{
                             <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
                         </div>
                         :
-                        <div style={{color:"#1890ff",cursor:"pointer",padding:"5px 0 0 5px"}} onClick={()=>testing()}>
+                        <div style={{color:"#1890ff",cursor:"pointer",padding:"5px 0 0 5px"}}
+                             onClick={()=>testing()}
+                        >
                             <ApiOutlined />
                             连接测试
                         </div>

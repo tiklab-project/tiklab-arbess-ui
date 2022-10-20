@@ -53,7 +53,6 @@ export class PipelineStore {
         param.append("userId",value)
         return new Promise((resolve, reject) => {
             FindAllPipelineStatus(param).then(res=>{
-                console.log(res)
                 if(res.code===0 && res.data){
                     this.pipelineList=res.data
                     this.pipelineLength=res.data && res.data.length
@@ -78,7 +77,6 @@ export class PipelineStore {
         }
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
-                console.log(res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -94,7 +92,6 @@ export class PipelineStore {
         params.append("userId",values.userId)
         return new Promise((resolve, reject) => {
             FindLike(params).then(res=>{
-                console.log(res)
                 if(res.code===0){
                     this.pipelineList=res.data
                 }
@@ -113,7 +110,6 @@ export class PipelineStore {
         param.append("userId",value.userId)
         return new Promise((resolve, reject) => {
             DeletePipeline(param).then(res=>{
-                console.log(res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -145,7 +141,6 @@ export class PipelineStore {
         const param = new FormData()
         param.append("userId",value)
         FindAllFollow(param).then(res=>{
-            console.log(res)
             if(res.code===0){
                 this.pipelineList=res.data
                 this.followLength=res.data && res.data.length

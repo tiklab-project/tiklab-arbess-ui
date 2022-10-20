@@ -10,13 +10,13 @@ const QuickIn = props =>{
         {
             id:1,
             title: "我的流水线",
-            icon:"#icon-icon-test",
+            icon:"#icon-renwu",
             listLength:pipelineLength
         },
         {
             id:2,
             title:"我的收藏",
-            icon:"#icon-renwu",
+            icon:"#icon-icon-test",
             listLength: followLength
         },
     ]

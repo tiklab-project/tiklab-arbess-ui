@@ -136,7 +136,7 @@ const PipelineTable = props =>{
                                 </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建">
-                                    <svg className="icon" aria-hidden="true">
+                                    <svg className="icon" aria-hidden="true" style={{height:30,width:30}}>
                                         <use xlinkHref="#icon-dengdai1"/>
                                     </svg>
                                 </Tooltip>

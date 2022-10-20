@@ -100,6 +100,12 @@ const SystemAside= props =>  {
                     label:"我的待办事项 ",
                     icon:"#icon-gongzuotongji",
                     enCode:"F",
+                },
+                {
+                    key:"/index/system/todoTemp",
+                    label:"代办模板 ",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"F",
                 }
             ]
         },
@@ -111,7 +117,7 @@ const SystemAside= props =>  {
             children: [
                 {
                     key:"/index/system/log",
-                    label:"日志记录",
+                    label:"日志列表",
                     icon:"#icon-gongzuotongji",
                     enCode:"G",
                 },
@@ -127,6 +133,38 @@ const SystemAside= props =>  {
                     icon:"#icon-gongzuotongji",
                     enCode:"H",
                 }
+            ]
+        },
+        {
+            key:"5",
+            label: "消息中心",
+            icon:"#icon-gongzuotongji",
+            enCode: "I",
+            children: [
+                {
+                    key:"/index/system/mes/management",
+                    label:"消息管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"J",
+                },
+                {
+                    key:"/index/system/mes/type",
+                    label:"消息类型管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"J",
+                },
+                {
+                    key:"/index/system/mes/sendType",
+                    label:"消息发送方式",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"J",
+                },
+                {
+                    key:"/index/system/mes/template",
+                    label:"消息模板管理",
+                    icon:"#icon-gongzuotongji",
+                    enCode:"J",
+                },
             ]
         },
         {

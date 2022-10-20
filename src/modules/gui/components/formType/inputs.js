@@ -5,7 +5,7 @@ import TestContext from "../common/testContext";
 
 const Inputs = props =>{
 
-    const {placeholder,mode,label,name,addonBefore} = props
+    const {placeholder,mode,label,name,addonbefore} = props
 
     const context = useContext(TestContext)
 
@@ -25,6 +25,7 @@ const Inputs = props =>{
 
     return (
         <Form.Item
+            {...props}
             name={name}
             label={label}
         >
@@ -32,7 +33,7 @@ const Inputs = props =>{
                 placeholder={placeholder}
                 onChange={name==="codeName" || name==="codeBranch" ? onchange:null}
                 onBlur={(e)=>valueChange(e.target.value,name,mode)}
-                addonBefore={addonBefore?addonBefore:null}
+                addonBefore={addonbefore?addonbefore:null}
             />
         </Form.Item>
     )

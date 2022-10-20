@@ -27,6 +27,7 @@ const CodeGitOrGitlab = props =>{
             <Proof
                 allProofType={codeType}
                 testType={"源码地址"}
+                type={0}
             />
         </>
     )

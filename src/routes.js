@@ -11,7 +11,7 @@ const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 const Widget=AsyncComponent(()=>import("./modules/wiget/wiget"))
 
 /* 首页 */
-const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
+const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
@@ -64,6 +64,8 @@ const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTempl
 
 const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
 const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
+const TodoTemp=AsyncComponent(()=>import("./modules/system/todotask/todoTemp"))
+
 
 
 const NotFound=AsyncComponent(()=>import("./modules/home/components/notFound"))
@@ -206,6 +208,10 @@ const routers=[
                         component: MyTodoTask,
                     },
                     {
+                        path: "/index/system/todoTemp",
+                        component: TodoTemp,
+                    },
+                    {
                         path:"/index/system/log",
                         component: LogList,
                     },
@@ -221,22 +227,22 @@ const routers=[
                     //     path:"/index/system/*",
                     //     render:()=><Redirect to="/index/404"/>
                     // },
-                    // {
-                    //     path:"/index/system/mes/management",
-                    //     component: MessageManagement,
-                    // },
-                    // {
-                    //     path:"/index/system/mes/template",
-                    //     component: MessageTemplate,
-                    // },
-                    // {
-                    //     path:"/index/system/mes/type",
-                    //     component: MessageType,
-                    // },
-                    // {
-                    //     path:"/index/system/mes/sendType",
-                    //     component: MessageSendType,
-                    // },
+                    {
+                        path:"/index/system/mes/management",
+                        component: MessageManagement,
+                    },
+                    {
+                        path:"/index/system/mes/template",
+                        component: MessageTemplate,
+                    },
+                    {
+                        path:"/index/system/mes/type",
+                        component: MessageType,
+                    },
+                    {
+                        path:"/index/system/mes/sendType",
+                        component: MessageSendType,
+                    },
                 ]
             },
             // {

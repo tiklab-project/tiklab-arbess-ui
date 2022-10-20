@@ -6,9 +6,9 @@ import Proof from "./proof";
 
 const DeploySame = props =>{
 
-    const {configDataStore,profileAddress,messageInfo,pipelineName} = props
+    const {configdatastore,profileaddress,messageinfo} = props
 
-    const {deployType,deployOrderShellBlock,setDeployOrderShellBlock} = configDataStore
+    const {deployType,deployOrderShellBlock,setDeployOrderShellBlock} = configdatastore
 
     return (
         <>
@@ -18,9 +18,9 @@ const DeploySame = props =>{
                 label={"应用源文件地址"}
                 name={"sourceAddress"}
                 mode={deployType}
-                addonBefore={profileAddress+pipelineName}
+                addonbefore={profileaddress}
             />
-            <div className="deployTargetAddress">{messageInfo}</div>
+            <div className="deployTargetAddress">{messageinfo}</div>
             <Inputs
                 {...props}
                 placeholder={"输入Ip地址"}
@@ -47,7 +47,7 @@ const DeploySame = props =>{
                 label={"部署位置"}
                 name={"deployAddress"}
                 mode={deployType}
-                addonBefore={"/"}
+                addonbefore={"/"}
             />
 
             <Form.Item

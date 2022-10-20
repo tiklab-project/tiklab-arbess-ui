@@ -59,7 +59,7 @@ const ConfigChangeView = props =>{
                     </Button>
                 </div>
                 <div className="changeView-btn">
-                    <Button type="primary" onClick={()=>run()}>
+                    <Button type="primary" form="form" onClick={()=>run()}>
                         {processVisible ? <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} /> :"运行"}
                     </Button>
                 </div>

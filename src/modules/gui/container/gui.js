@@ -33,7 +33,7 @@ const Gui = props =>{
     // 添加
     const addConfig = taskType => {
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:taskType,
             message:"create"
         }
@@ -43,7 +43,7 @@ const Gui = props =>{
     // 切换
     const changType = type =>{
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:type,
             message:"updateType",
         }
@@ -55,7 +55,7 @@ const Gui = props =>{
         const obj = {}
         obj[name] = value
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:mode,
             pipelineTest:obj,
             pipelineCode:obj,
@@ -80,7 +80,7 @@ const Gui = props =>{
 
     const delPart = newStage => {
         const params = {
-            pipelineId,
+            pipeline:{pipelineId},
             taskType:newStage,
             message:"delete"
         }

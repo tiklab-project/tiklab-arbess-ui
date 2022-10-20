@@ -1,5 +1,5 @@
-import React from "react";
-import {Modal} from "antd";
+import React,{useState} from "react";
+import {Modal,message} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 import "./codeOrNewStageModal.scss";
 import {inject,observer} from "mobx-react";
@@ -11,6 +11,7 @@ const CodeOrNewStageModal = props =>{
     const {setCodeType,setBuildType,setDeployType,data,setData} = configDataStore
     const {updateConfigure} = configStore
     const {pipelineId} = pipelineStore
+
 
     const handleClick = (group,item,index) =>{
         const params = {

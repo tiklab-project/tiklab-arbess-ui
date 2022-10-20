@@ -9,7 +9,11 @@
                 &:hover{
                     background: #f2f2f2;
                 }
+                &-error{
+                    border: 1px solid #ff0000;
+                }
             }
+
             .ant-select{
                 max-width: 500px !important;
                 &:hover{
@@ -26,8 +30,21 @@
             .ant-form-item-label{
                 min-width: 130px;
                 text-align: left;
-                &>label:after {
+                .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
                     display: none;
+                }
+                &>label:after {
+                    //display: none;
+                }
+                .ant-form-item-required:not(.ant-form-item-required-mark-optional):after{
+                    color: #ff4d4f;
+                    font-size: 14px;
+                    font-family: SimSun,sans-serif;
+                    line-height: 1;
+                    content: "*";
+                    position: relative;
+                    top: -0.5px;
+                    margin: 0 8px 0 2px;
                 }
             }
         }

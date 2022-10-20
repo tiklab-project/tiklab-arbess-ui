@@ -26,3 +26,12 @@ export function  FindLog (data){
         data
     })
 }
+
+// 我的代办
+export function  FindTask (data){
+    return serviceLoc.request({
+        url:"/pipelineWorkSpace/findTask",
+        method:"post",
+        data
+    })
+}

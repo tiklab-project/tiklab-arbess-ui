@@ -29,7 +29,7 @@ const deployList=[
 const Switch = props =>{
 
     const {type,configDataStore,configStore,pipelineStore,del} = props
-    const {setCodeType,data,setData,setBuildType,setDeployType} = configDataStore
+    const {setCodeType,data,setData,setBuildType,setDeployType,codeType} = configDataStore
     const {updateConfigure} = configStore
     const {pipelineId} = pipelineStore
 
@@ -46,7 +46,6 @@ const Switch = props =>{
     }
 
     const chang = type =>{
-        del(type)
         const params = {
             pipeline:{pipelineId},
             taskType:type,
@@ -57,13 +56,14 @@ const Switch = props =>{
                 message.info(res.msg)
             }
             if(res.code===0){
+                del(type)
                 setType(type)
             }
         })
     }
 
     const setType = type =>{
-        if(type > 0 && type < 6) {
+        if(type > 0 && type < 10) {
             setCodeType(type)
         }
         else if(type > 20 && type < 30){
@@ -89,7 +89,7 @@ const Switch = props =>{
     const renderList = (list,type) =>{
         return list.map(item=>{
             return(
-                <div className={`configCode-gitList-item ${type==item.id?"configCode-gitList-selected":""}`}
+                <div className={`configCode-gitList-item ${type===item.id?"configCode-gitList-selected":""}`}
                      onClick={()=>changeType(item.id)}
                      key={item.id}
                 >
@@ -110,6 +110,12 @@ const Switch = props =>{
         <div className="configCode-gitList">
             {
                 (()=>{
+                    if(type > 0 &&type < 10){
+                        return  <>
+                                    <div className="configCode-gitList-title">源码类型</div>
+                                    { renderList(gitList,type)}
+                                </>
+                    }
                     if(type===11){
                         return  <>
                                     <div className="configCode-gitList-title">测试类型</div>
@@ -128,12 +134,7 @@ const Switch = props =>{
                                     {renderList(deployList,type)}
                                 </>
                     }
-                    else {
-                        return  <>
-                                    <div className="configCode-gitList-title">源码类型</div>
-                                    { renderList(gitList,type)}
-                                </>
-                    }
+
                 })()
             }
         </div>

@@ -3,7 +3,8 @@ import {observable,action} from "mobx";
 import {
     FindAllOpen,
     RunState,
-    FindLog
+    FindLog,
+    FindTask
 } from "../api/homePage";
 
 export class HomePageStore{
@@ -51,6 +52,14 @@ export class HomePageStore{
         }).catch(error=>{
             console.log(error)
         })
+    }
+
+    @action
+    findTask = async value =>{
+        const param = new FormData()
+        param.append("userId",value)
+        return await FindTask(param)
+
     }
 
 }

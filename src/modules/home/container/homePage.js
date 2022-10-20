@@ -1,19 +1,19 @@
 import React,{useEffect} from "react";
 import echarts from "../../../common/echarts/echarts";
 import {getUser} from "tiklab-core-ui";
-import DynamicList from "./dynamicList";
-import PipelineNear from "./pipelineNear";
-import QuickIn from "./quickIn";
-import Agency from "./agency";
-import Tidings from "./tidings";
-import "./homePage.scss";
+import DynamicList from "../components/dynamicList";
+import PipelineNear from "../components/pipelineNear";
+import QuickIn from "../components/quickIn";
+import Agency from "../components/agency";
+import Tidings from "../components/tidings";
+import "../components/homePage.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 
 const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
-    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList} = homePageStore
+    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList,findTask} = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
@@ -35,6 +35,11 @@ const HomePage = props =>{
 
         // 最近打开的流水线
         findAllOpen(userId)
+
+        // 我的代办
+        findTask(userId).then(res=>{
+            console.log(res)
+        })
 
         // 折线图，近期构建状态
         runState(userId).then(res=>{

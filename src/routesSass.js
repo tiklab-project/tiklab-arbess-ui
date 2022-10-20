@@ -8,7 +8,7 @@ const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 
 /* 首页 */
-const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
+const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))

@@ -39,6 +39,7 @@ const DeploySame = props =>{
             <Proof
                 allProofType={deployType}
                 testType={"Ip地址"}
+                type={2}
             />
 
             <Inputs

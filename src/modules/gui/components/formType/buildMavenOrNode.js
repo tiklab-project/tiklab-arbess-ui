@@ -22,7 +22,7 @@ const BuildMavenOrNode = props =>{
                 label={"文件地址"}
                 name={"buildAddress"}
                 mode={buildType}
-                addonBefore={profileAddress+pipelineName}
+                addonbefore={profileAddress+pipelineName}
             />
 
             <Form.Item

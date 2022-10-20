@@ -69,16 +69,15 @@ const Deploy = props =>{
                         <>
                             <DeploySame
                                 {...props}
-                                profileAddress={profileAddress}
-                                messageInfo={messageInfo}
-                                pipelineName={pipelineName}
-                                configDataStore={context.configDataStore}
+                                profileaddress={profileAddress+pipelineName}
+                                messageinfo={messageInfo}
+                                configdatastore={context.configDataStore}
                             />
                             {
                                 deployType==31 ?
                                 <DeployVir
                                     {...props}
-                                    configDataStore={context.configDataStore}
+                                    configdatastore={context.configDataStore}
                                 />
                                 :
                                 <DeployDocker

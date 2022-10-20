@@ -22,10 +22,12 @@ const PipelineNear = props =>{
                         >
                             <div className="pipelineNear-item">
                                 <div>
-                                        <span className="pipelineNear-item-icon">
-                                            U
-                                        </span>
-                                    {item.pipelineName}
+                                    <span className="pipelineNear-item-icon">
+                                        U
+                                    </span>
+                                    <span className="pipelineNear-item-pipelineName">
+                                        {item.pipelineName}
+                                    </span>
                                 </div>
                                 <div>{item.pipeline.pipelineCreateTime}</div>
                             </div>
