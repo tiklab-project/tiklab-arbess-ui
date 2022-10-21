@@ -39,14 +39,12 @@ const PipelineAddModal = props =>{
         {
             title: "选择模板",
             content: <PipelineAddModalType
-                        pipelineList={pipelineList}
                         templateType={templateType}
                         setTemplateType={setTemplateType}
-                        form={form}
                      />
         },
         {
-            title: "基本信息",
+            title: "完善信息",
             content: <ProjectRename
                         form={form}
                         pipelineList={pipelineList}

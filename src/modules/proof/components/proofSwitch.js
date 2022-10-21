@@ -10,14 +10,14 @@ const ProofSwitch = props =>{
         <div className="proof-content-switch">
             <div className="proof-content-switch-left">
                 <div className="switch-left">
-                    <Select style={{width:150}} placeholder={"创建人"}>
-                        <Select.Option value={1}>全部</Select.Option>
+                    <Select style={{width:150}} defaultValue={1}>
+                        <Select.Option value={1}>所有创建人</Select.Option>
                         <Select.Option value={2}>我创建的</Select.Option>
                     </Select>
                 </div>
                 <div className="switch-left">
-                    <Select style={{width:150}} placeholder={"类型"}>
-                        <Select.Option value={1}>全部</Select.Option>
+                    <Select style={{width:150}} defaultValue={1}>
+                        <Select.Option value={1}>所有类型</Select.Option>
                         <Select.Option value={2}>password</Select.Option>
                         <Select.Option value={3}>ssh</Select.Option>
                     </Select>

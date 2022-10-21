@@ -1,6 +1,10 @@
 .pipeline {
     min-width: 600px;
     padding: 10px;
+    margin: auto;
+    max-width: 1280px;
+    min-height: calc(100vh - 55px);
+    max-height: fit-content;
     &-flex{
         display: flex;
         justify-content: space-between;
@@ -34,7 +38,7 @@
         &-link{
             margin-right: 20px;
             cursor: pointer;
-            font-size: 1.05rem;
+            font-size: 15px;
             &:hover{
                 font-weight: 600;
             }

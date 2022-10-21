@@ -62,10 +62,7 @@ const FindAllProof = props =>{
         const params = {
             taskType:type,
             pipeline:{pipelineId},
-            pipelineTest: {proof:{proofId:e.key}},
-            pipelineCode: {proof:{proofId:e.key}},
-            pipelineBuild: {proof:{proofId:e.key}},
-            pipelineDeploy: {proof:{proofId:e.key}},
+            values:{proof:{proofId:e.key}},
             message:"update"
         }
         updateConfigure(params)

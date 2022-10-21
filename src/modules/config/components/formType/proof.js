@@ -9,7 +9,7 @@ const Proof = props =>{
     const {allProofType,testType,configDataStore,configStore,type} = props
 
     const {formInitialValues,gitProofId,deployProofId} = configDataStore
-    const {codeTestPass} = configStore
+    const {codeTestPass,isAddType} = configStore
 
     const [testStatus,setTestStatus] = useState(false)
 

@@ -3,9 +3,11 @@ import {Avatar,Dropdown,Menu} from "antd";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
-import {GlobalOutlined,MessageOutlined,SettingOutlined,LogoutOutlined,UserOutlined} from "@ant-design/icons";
+import {GlobalOutlined,MessageOutlined,SettingOutlined,LogoutOutlined,
+    UserOutlined,BellOutlined
+} from "@ant-design/icons";
 import {withRouter} from "react-router";
-import logo from "../../assets/images/all/pipeline.png"
+import logo from "../../assets/images/all/matflow.png"
 import portrait from "../../assets/images/portrait.jpg";
 import vipOne from "../../assets/images/vip-one.png";
 import vipTwo from "../../assets/images/vip-two.png";
@@ -122,6 +124,14 @@ const Head = props =>{
                 </Menu>
         )
     }
+    
+    const messageMenu = (
+        <Menu>
+            <Menu.Item key="1" onClick={()=>goUserMessageContent()}>
+                <BellOutlined />我的信息
+            </Menu.Item>
+        </Menu>
+    )
 
     const goUserMessageContent = () =>{
         props.history.push("/index/userMessage")
@@ -141,9 +151,12 @@ const Head = props =>{
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
                     <div className="frame-header-message">
+                        {/*<Dropdown overlay={messageMenu}>*/}
+                        {/*    <MessageOutlined className="frame-header-icon"/>*/}
+                        {/*</Dropdown>*/}
                         <MessageOutlined
-                            onClick={()=>goUserMessageContent()}
                             className="frame-header-icon"
+                            onClick={()=>goUserMessageContent()}
                         />
                     </div>
                     <div className="frame-header-language">

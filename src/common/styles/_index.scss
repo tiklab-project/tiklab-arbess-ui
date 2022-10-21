@@ -9,7 +9,6 @@ ul li{
     &-head{
         height: 50px;
         background:$white;
-        border-bottom: 1px solid $gray-500;
         padding: 12px;
         display: -webkit-box;
         display: -webkit-flex;
@@ -50,7 +49,7 @@ ul li{
 .home-limited{
     margin: auto;
     max-width: 1280px;
-    min-height: calc(100vh - 55px);
-    max-height: fit-content;
-    background: #fff;
+    //min-height: calc(100vh - 55px);
+    //max-height: fit-content;
+    //background: #ffffff;
 }

@@ -1,12 +1,22 @@
 .formViewCodeMirror{
+    width: 500px;
     .react-codemirror2{
-        width:500px ;
-        border-color:#ffffff !important;
+        width:100%;
+        border-color:#ffffff;
     }
     .CodeMirror{
         height: 100%;
         &:hover{
-            background: #f2f2f2 !important;
+            background: #f2f2f2;
         }
+    }
+}
+.codeNewStage{
+    .react-codemirror2{
+        width:100%;
+        border:1px solid #cccccc;
+    }
+    .CodeMirror{
+        height: 100%;
     }
 }

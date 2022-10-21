@@ -7,9 +7,8 @@ const Inputs = props =>{
     const {placeholder,mode,label,name,addonBefore,configStore,pipelineStore,configDataStore} = props
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure} = configStore
+    const {updateConfigure,isAddType} = configStore
     const {setFormInitialValues,codeType} = configDataStore
-    const [warnContent,setWornContent] = useState("")
 
     const onchange = e  => {
         switch (name){
@@ -48,24 +47,11 @@ const Inputs = props =>{
         const params = {
             pipeline:{pipelineId},
             taskType:mode,
-            pipelineTest:obj,
-            pipelineCode:obj,
-            pipelineBuild:obj,
-            pipelineDeploy:obj,
+            values:obj,
             message:"update"
         }
-        if(validation(codeType,name,e.target.value)){
-            updateConfigure(params).then(res=>{
-                // if(res.code===50001){
-                //     message.info(res.msg)
-                // }else if(res.code===50002){
-                //     setWornContent(res.msg)
-                // }
-                setWornContent(res.code)
-                // else {
-                //     id.classList.add("ant-input-error")
-                // }
-            })
+        if(validation(codeType,name,e.target.value) && isAddType){
+            updateConfigure(params)
         }
     }
 
@@ -74,22 +60,27 @@ const Inputs = props =>{
         switch (name) {
             case "codeName":
                 if(codeType===5){
-                    rule =  [{
-                                pattern: validCodeSvn,
-                                message:"请输入正确的svn地址"
-                            }]
+                    rule =  [
+                                {required:true, message: "请输入svn地址"},
+                                {pattern: validCodeSvn, message:"请输入正确的svn地址"}
+                            ]
                 }else if(codeType===1 || codeType===4){
-                    rule =  [{
-                                pattern: validCodeGit,
-                                message:"请输入正确的git地址"
-                            }]
+                    rule =  [
+                                {required:true, message: "请输入git地址"},
+                                {pattern: validCodeGit, message:"请输入正确的git地址"}
+                            ]
+                }
+                else{
+                    rule =  [
+                                {required:true, message: "请选择git地址"}
+                            ]
                 }
                 break;
             case "sshIp":
-                rule =  [{
-                            pattern:validDeploySshIp,
-                            message:"请输入正确的Ip地址"
-                        }]
+                rule =  [
+                            {required:true, message: "请输入Ip地址"},
+                            {pattern:validDeploySshIp, message:"请输入正确的Ip地址"}
+                        ]
                 break;
 
         }

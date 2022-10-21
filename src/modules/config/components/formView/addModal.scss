@@ -1,0 +1,127 @@
+.codeOrNewStage{
+    margin-top: 16px;
+    border-radius: 2px;
+    &-form{
+        height: 600px;
+        max-height: 600px;
+        overflow: auto;
+        &-item{
+            border: 1px solid #1890ff;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 40px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            overflow: hidden;
+            margin-right: 12px;
+            &-icon{
+                padding-right: 5px;
+            }
+        }
+    }
+    &-stepOne{
+        border: 1px solid #e9e9e9;
+        &-left{
+            border-right: 1px solid #e9e9e9;
+            .modalLeft{
+                padding: 10px;
+                .item{
+                    padding: 5px;
+                    &-title{
+                        cursor: pointer;
+                        &:not(:last-child){
+                            margin-bottom: 10px;
+                        }
+                    }
+                    &-select{
+                        background: #f4f4f4;
+                        border-radius: 4px;
+                    }
+                }
+            }
+        }
+        &-right{
+            .modalRight{
+                padding: 20px;
+                height: 600px;
+                overflow: auto;
+            }
+            .group{
+                margin-bottom: 16px;
+                &-title{
+                    color: #8c8c8c;
+                    font-size: 14px;
+                    margin-bottom: 12px;
+                }
+                &-content{
+                    margin-bottom: 8px;
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: justify;
+                    -webkit-justify-content: space-between;
+                    -ms-flex-pack: justify;
+                    justify-content: space-between;
+                    -webkit-flex-wrap: wrap;
+                    -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                    width: 440px;
+                    &:after{
+                        content: "";
+                        width: 214px;
+                        height: 0;
+                        background: transparent;
+                        opacity: 0;
+                    }
+                }
+                &-desc{
+                    border: 1px solid #e5e5e5;
+                    border-radius: 4px;
+                    margin-bottom: 12px;
+                    width: 214px;
+                    height: 80px;
+                    display: -webkit-inline-flex;
+                    display: -ms-inline-flexbox;
+                    display: inline-flex;
+                    -webkit-box-align: center;
+                    -webkit-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    -webkit-transition: -webkit-transform .218s ease-in;
+                    transition: -webkit-transform .218s ease-in;
+                    transition: transform .218s ease-in,-webkit-transform .218s ease-in;
+                    &-tpl{
+                        display: inline-block;
+                        vertical-align: top;
+                        width: calc(100% - 100px);
+                        margin-left: 12px;
+                    }
+                }
+                &-select{
+                    border-color: #1890ff;
+                }
+                &-type{
+                    margin: 10px;
+                }
+                .icon{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    .ant-form{
+        .ant-input{
+            border: 1px solid #cccccc;
+        }
+        .ant-select{
+            border: 1px solid #cccccc;
+        }
+    }
+}

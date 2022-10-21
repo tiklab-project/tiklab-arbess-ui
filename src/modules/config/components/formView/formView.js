@@ -12,14 +12,18 @@ const formView = props =>{
 
     const [form] = Form.useForm()
 
-    const {data,setData,formInitialValues,codeType} = configDataStore
+    const {data,setData,codeType,formInitialValues,setFormInitialValues} = configDataStore
 
-    const {updateConfigure} = configStore
+    const {updateConfigure,isAddType} = configStore
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues,pipelineId])
 
+    const onValuesChange = value =>{
+        Object.assign(formInitialValues,value)
+        setFormInitialValues({...formInitialValues})
+    }
 
     return(
         <div className="formView">
@@ -29,6 +33,7 @@ const formView = props =>{
                     form={form}
                     autoComplete="off"
                     scrollToFirstError={true}
+                    onValuesChange={onValuesChange}
                     validateTrigger={["onBlur"]}
                     initialValues={{deployType:1}}
                 >
@@ -37,6 +42,7 @@ const formView = props =>{
                         del={del}
                         data={data}
                         setData={setData}
+                        isAddType={isAddType}
                         codeType={codeType}
                         pipelineId={pipelineId}
                         updateConfigure={updateConfigure}

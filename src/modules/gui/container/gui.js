@@ -17,7 +17,7 @@ const Gui = props =>{
     const {pipelineStore,configDataStore,del} = props
 
     const {pipelineId} = pipelineStore
-    const {formInitialValues,data,codeType,setCodeType,setData} = configDataStore
+    const {formInitialValues,setFormInitialValues,data,codeType,setCodeType,setData} = configDataStore
     const {updateConfigure} = ConfigStore
 
     const [form] = Form.useForm()
@@ -29,6 +29,26 @@ const Gui = props =>{
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues,pipelineId])
+
+    const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
+    const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
+    const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
+
+    const validation = (codeType,name,value) =>{
+        switch (name) {
+            case "codeName":
+                if(codeType===5){
+                    return validCodeSvn.test(value)
+                }else if(codeType===1||codeType===4){
+                    return validCodeGit.test(value)
+                }
+                break
+            case "sshIp":
+                return validDeploySshIp.test(value)
+            default:
+                return true
+        }
+    }
 
     // 添加
     const addConfig = taskType => {
@@ -63,7 +83,9 @@ const Gui = props =>{
             pipelineDeploy:obj,
             message:"update"
         }
-        updateConfig(params,"update")
+        if(validation(codeType,name,value)){
+            updateConfig(params,"update")
+        }
     }
 
     // 删除
@@ -125,6 +147,11 @@ const Gui = props =>{
         setData([...newData])
     }
 
+    const onValuesChange = value =>{
+        Object.assign(formInitialValues,value)
+        setFormInitialValues({...formInitialValues})
+    }
+
     return (
         <TestContext.Provider
             value={{pipelineStore,configDataStore,del,valueChange,changType,addConfig}}
@@ -135,6 +162,7 @@ const Gui = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
+                    onValuesChange={onValuesChange}
                     initialValues={{deployType:1}}
                 >
                     <div className="guiView-content">

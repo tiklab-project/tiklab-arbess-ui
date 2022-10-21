@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import Headline from "./headline";
-import ChangeConfigSortsModal from "../common/changeConfigSortsModal";
+import ChangeSortsModal from "./changeSortsModal";
 
 const NewStage = props =>{
 
@@ -28,7 +28,7 @@ const NewStage = props =>{
                 return newStage(item)
             })}
 
-            <ChangeConfigSortsModal
+            <ChangeSortsModal
                 changeSortVisible={changeSortVisible}
                 setChangeSortVisible={setChangeSortVisible}
                 data={data}

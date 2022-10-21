@@ -64,7 +64,7 @@ const Pipeline = props =>{
         })
     }
     return(
-        <div className="pipeline home-limited">
+        <div className="pipeline">
             <div className="pipeline-top pipeline-flex">
                 <BreadcrumbContent firstItem={"流水线"}/>
                 <div className="pipeline-top-r">
@@ -79,7 +79,7 @@ const Pipeline = props =>{
                 </div>
                 <div className="pipeline-type-input">
                     <Input
-                        placeholder="请输入流水线"
+                        placeholder="流水线名称"
                         onChange={onChangeSearch}
                         // onPressEnter={onChangeSearch}
                         style={{ width: 280 }}

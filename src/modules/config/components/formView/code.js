@@ -25,9 +25,7 @@ const Code = props =>{
     )
 
     const code = codeType => {
-        return  codeType === "" ?
-            codeNull
-            :
+        return  codeType !== "" ?
             <Headline
                 {...props}
                 type={codeType}
@@ -37,6 +35,8 @@ const Code = props =>{
                 setData={setData}
                 pipelineId={pipelineId}
             />
+            :
+            codeNull
     }
 
     return <>

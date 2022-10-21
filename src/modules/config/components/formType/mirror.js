@@ -19,29 +19,26 @@ const MirrorContent = props =>{
     const mirrorRefs = useRef(null)
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure} = configStore
+    const {updateConfigure,isAddType} = configStore
 
     const onBlur = () =>{
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
-        setShellBlock(mirrorRefs.current.editor.getValue())
         const params = {
             pipeline:{pipelineId},
             taskType:type,
-            pipelineTest: obj,
-            pipelineCode:obj,
-            pipelineBuild:obj,
-            pipelineDeploy:obj,
+            values:obj,
             message:"update"
         }
-        updateConfigure(params).then(res=>{
+        isAddType && setShellBlock(mirrorRefs.current.editor.getValue())
+        isAddType && updateConfigure(params).then(res=>{
             if(res.code===50001){
                 message.info(res.msg)
             }
         })
     }
 
-    return  <div className="formViewCodeMirror">
+    return  <div className={`${isAddType?"formViewCodeMirror":"codeNewStage"}`}>
         <CodeMirror
             value={shellBlock}//内容
             ref={mirrorRefs}

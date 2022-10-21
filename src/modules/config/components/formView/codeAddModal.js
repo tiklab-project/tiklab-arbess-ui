@@ -1,5 +1,5 @@
-import React from "react";
-import CodeOrNewStageModal from "./codeOrNewStageModal";
+import React,{useState} from "react";
+import AddModal from "./addModal";
 
 const lis=[
     {
@@ -18,19 +18,19 @@ const lis=[
                 icon:"gitee"
             },
             {
-                type:4,
-                tel: "Gitlab",
-                icon:"gitlab"
-            },
-            {
                 type:3,
                 tel: "Github",
                 icon:"github"
+            },
+            {
+                type:4,
+                tel: "Gitlab",
+                icon:"gitlab"
             }
         ]
     },
     {
-        id:1,
+        id:2,
         title:"SVN",
         icon:"-_ssh",
         desc: [
@@ -46,11 +46,14 @@ const lis=[
 const CodeAddModal = props =>{
 
     const {codeVisible,setCodeVisible} = props
+    const [codeInitType,setCodeInitType] = useState(1)
 
-    return  <CodeOrNewStageModal
+    return  <AddModal
                 lis={lis}
                 visible={codeVisible}
                 setVisible={setCodeVisible}
+                initType={codeInitType}
+                setInitType={setCodeInitType}
             />
 }
 

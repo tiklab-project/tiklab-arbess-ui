@@ -9,8 +9,8 @@ const EnviSwitch = props =>{
         <div className="envi-content-switch">
             <div className="envi-content-switch-left">
                 <div className="switch-left">
-                    <Select style={{width:150}} placeholder={"类型"}>
-                        <Select.Option value={0}>全部</Select.Option>
+                    <Select style={{width:150}} defaultValue={0}>
+                        <Select.Option value={0}>所有类型</Select.Option>
                         <Select.Option value={1}>Git</Select.Option>
                         <Select.Option value={5}>SVN</Select.Option>
                         <Select.Option value={22}>maven</Select.Option>

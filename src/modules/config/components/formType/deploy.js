@@ -12,7 +12,7 @@ const Deploy = props =>{
 
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = configDataStore
 
-    const {fileAddress,getFile,profileAddress,updateConfigure} = configStore
+    const {fileAddress,getFile,profileAddress,updateConfigure,isAddType} = configStore
     const {pipelineId,pipelineName} = pipelineStore
 
     const [messageInfo,setMessageInfo] = useState("")
@@ -55,13 +55,10 @@ const Deploy = props =>{
         const params = {
             pipeline:{pipelineId},
             taskType:deployType,
-            pipelineTest: {deployType:value},
-            pipelineCode:{deployType:value},
-            pipelineBuild:{deployType:value},
-            pipelineDeploy:{deployType:value},
+            values:{deployType:value},
             message:"update"
         }
-        updateConfigure(params)
+        isAddType && updateConfigure(params)
     }
 
     return(

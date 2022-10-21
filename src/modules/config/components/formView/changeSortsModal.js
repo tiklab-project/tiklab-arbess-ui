@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {Modal,Tree,message} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 
-const ChangeConfigSortsModal = props =>{
+const ChangeSortsModal = props =>{
 
     const {changeSortVisible,setChangeSortVisible,data,setData,updateConfigure,pipelineId} = props
 
@@ -133,4 +133,4 @@ const ChangeConfigSortsModal = props =>{
     )
 }
 
-export default ChangeConfigSortsModal
+export default ChangeSortsModal

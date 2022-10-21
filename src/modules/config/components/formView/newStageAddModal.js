@@ -1,10 +1,9 @@
-import React from "react";
-import {message} from "antd";
-import CodeOrNewStageModal from "./codeOrNewStageModal";
+import React,{useState} from "react";
+import AddModal from "./addModal";
 
 const lis=[
     {
-        id:2,
+        id:1,
         title:"测试",
         desc:[
             {
@@ -15,7 +14,7 @@ const lis=[
         ]
     },
     {
-        id:3,
+        id:2,
         title: "构建",
         desc:[
             {
@@ -32,7 +31,7 @@ const lis=[
         ]
     },
     {
-        id:4,
+        id:3,
         title: "部署",
         desc:[
             {
@@ -52,11 +51,14 @@ const lis=[
 const NewStageAddModal = props =>{
 
     const {newStageVisible,setNewStageVisible} = props
+    const [newStageInitType,setNewStageInitType] = useState(11)
 
-    return   <CodeOrNewStageModal
+    return   <AddModal
                  lis={lis}
                  visible={newStageVisible}
                  setVisible={setNewStageVisible}
+                 initType={newStageInitType}
+                 setInitType={setNewStageInitType}
             />
 }
 

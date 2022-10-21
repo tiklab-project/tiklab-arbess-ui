@@ -1,3 +1,6 @@
+$blue-main: #1890ff;
+$gray-main:#cccccc;
+
 .frame{
     height: 100vh;
     overflow: hidden;
@@ -5,15 +8,14 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: #5d70ea;
-        color: #fff;
         width: 100%;
         min-width: 600px;
         height: 55px;
         z-index: 999;
+        border-bottom: 1px solid $gray-main;
         &-logo{
             height: 50px;
-            width: 140px;
+            width: 130px;
             margin: 0 30px 0 0;
             img{
                 width: 100%;
@@ -69,21 +71,24 @@
                 & > div{
                     cursor: pointer;
                     margin-right: 10px;
-                    height: 30px;
-                    line-height: 30px;
-                    border-radius: 6px;
+                    height: 55px;
+                    line-height: 55px;
                     padding: 0 10px;
+                    &:hover{
+                        color: $blue-main;
+                    }
                 }
+
             }
             &-active{
-                color: #444444 !important;
-                background-color: #fff;
+                color: $blue-main;
+                border-bottom: 1px solid $blue-main;
             }
         }
     }
     &-content{
         height: calc(100vh - 50px);
         overflow: auto;
-        background: #f7f8fa;
+        //background: #f7f8fa;
     }
 }

@@ -11,6 +11,7 @@ export class HomePageStore{
 
     @observable pipelineNearList = []
     @observable dynamicList = []
+    @observable taskList = []
     @observable page = {
         defaultCurrent: 1,
         pageSize: "15",
@@ -58,7 +59,11 @@ export class HomePageStore{
     findTask = async value =>{
         const param = new FormData()
         param.append("userId",value)
-        return await FindTask(param)
+        FindTask(param).then(res=>{
+            if(res.code===0&&res.data){
+                this.taskList=res.data
+            }
+        })
 
     }
 

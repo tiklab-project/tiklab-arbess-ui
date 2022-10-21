@@ -95,7 +95,7 @@ const Headline = props =>{
                         </span>
                     </div>
                 </div>
-                <Switch type={type} del={del}/>
+                <Switch type={type}/>
                 <div className="formView-wrapper-forms">
                     <Forms type={type}/>
                 </div>

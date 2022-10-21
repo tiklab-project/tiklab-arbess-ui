@@ -11,6 +11,12 @@ import {
 export class ConfigStore{
 
     @observable profileAddress = ""
+    @observable isAddType = true // ture单个表单能更改，false单个表单不能更改
+
+    @action
+    setIsAddType = value =>{
+        this.isAddType = value
+    }
 
     @action
     updateConfigure = values =>{

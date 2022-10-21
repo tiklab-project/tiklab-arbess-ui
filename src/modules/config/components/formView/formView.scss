@@ -1,7 +1,7 @@
 .formView{
     padding: 55px 10px 0;
     &-content{
-        padding: 15px;
+        padding-top: 15px;
         overflow: hidden;
         .ant-form{
             .ant-input{
@@ -30,11 +30,11 @@
             .ant-form-item-label{
                 min-width: 130px;
                 text-align: left;
-                .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
+                &>label:after {
                     display: none;
                 }
-                &>label:after {
-                    //display: none;
+                .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
+                    display: none;
                 }
                 .ant-form-item-required:not(.ant-form-item-required-mark-optional):after{
                     color: #ff4d4f;

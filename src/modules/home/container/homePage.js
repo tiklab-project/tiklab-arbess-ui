@@ -13,7 +13,7 @@ import {inject,observer} from "mobx-react";
 const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
-    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList,findTask} = homePageStore
+    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList,findTask,taskList} = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
@@ -37,9 +37,7 @@ const HomePage = props =>{
         findAllOpen(userId)
 
         // 我的代办
-        findTask(userId).then(res=>{
-            console.log(res)
-        })
+        findTask(userId)
 
         // 折线图，近期构建状态
         runState(userId).then(res=>{
@@ -113,7 +111,7 @@ const HomePage = props =>{
     }
 
     return(
-        <div className="homePage home-limited">
+        <div className="homePage">
             <div className="homePage-content">
                 <div className="homePage-content-left">
                     <QuickIn
@@ -128,6 +126,7 @@ const HomePage = props =>{
                     />
                     <Agency
                         {...props}
+                        taskList={taskList}
                     />
                     <DynamicList
                         {...props}

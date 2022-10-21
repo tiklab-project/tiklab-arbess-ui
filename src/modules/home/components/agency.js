@@ -1,6 +1,10 @@
 import React from "react";
+import {ShareAltOutlined} from "@ant-design/icons";
 
 const Agency = props =>{
+
+    const {taskList} = props
+
     return(
         <div className="agency">
             <div className="agency-top">
@@ -12,8 +16,16 @@ const Agency = props =>{
                     更多...
                 </div>
             </div>
-            <div>
+            <div className="agency-bottom">
+                {
+                    taskList && taskList.map((item,index)=>{
+                        return(
+                            <div key={index}>
 
+                            </div>
+                        )
+                    })
+                }
             </div>
         </div>
     )

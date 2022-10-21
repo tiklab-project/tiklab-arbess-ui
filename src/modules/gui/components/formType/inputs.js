@@ -9,8 +9,12 @@ const Inputs = props =>{
 
     const context = useContext(TestContext)
 
-    const {setFormInitialValues} = context.configDataStore
+    const {setFormInitialValues,codeType} = context.configDataStore
     const valueChange = context.valueChange
+
+    const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
+    const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
+    const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
 
     const onchange = e  => {
         switch (name){
@@ -22,12 +26,40 @@ const Inputs = props =>{
         }
     }
 
+    const rules = () =>{
+        let rule
+        switch (name) {
+            case "codeName":
+                if(codeType===5){
+                    rule =  [{
+                        pattern: validCodeSvn,
+                        message:"请输入正确的svn地址"
+                    }]
+                }else if(codeType===1 || codeType===4){
+                    rule =  [{
+                        pattern: validCodeGit,
+                        message:"请输入正确的git地址"
+                    }]
+                }
+                break;
+            case "sshIp":
+                rule =  [{
+                    pattern:validDeploySshIp,
+                    message:"请输入正确的Ip地址"
+                }]
+                break;
+
+        }
+        return rule
+    }
 
     return (
         <Form.Item
             {...props}
             name={name}
             label={label}
+            rules={rules()}
+            validateTrigger="onChange"
         >
             <Input
                 placeholder={placeholder}

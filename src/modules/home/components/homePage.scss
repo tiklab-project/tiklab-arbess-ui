@@ -1,11 +1,17 @@
 .homePage{
-    padding: 20px;
     width: 100%;
+    background: #f7f8fa;
+
     &-content{
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
+        margin: auto;
+        max-width: 1280px;
+        min-height: calc(100vh - 55px);
+        max-height: fit-content;
+        padding-top: 15px;
         &-left{
             flex: 1;
             &:not(:last-child){
@@ -26,8 +32,8 @@
                 line-height: 80px;
                 height: 80px;
                 text-align: center;
-                border: 1px solid #cccccc;
                 border-radius: 8px;
+                background: #fff;
                 cursor: pointer;
                 &:not(:last-child){
                     margin-right: 16px;
@@ -61,11 +67,11 @@
             }
         }
         .pipelineNear{
-            border: 1px solid #ccc;
             border-radius: 8px;
             padding: 10px;
             margin-bottom: 15px;
             height: 180px;
+            background: #fff;
             &-title {
                 padding-bottom: 15px;
                 font-size: 16px;
@@ -104,7 +110,7 @@
             }
         }
         .agency{
-            border: 1px solid #ccc;
+            background: #fff;
             border-radius: 8px;
             padding: 10px;
             margin-bottom: 15px;
@@ -128,9 +134,9 @@
             }
         }
         .dynamic{
+            background: #fff;
             padding: 10px;
             height: 395px;
-            border: 1px solid #ccc;
             border-radius: 8px;
             &-top{
                 display: flex;
@@ -188,7 +194,7 @@
             }
         }
         .tidings{
-            border: 1px solid #ccc;
+            background: #fff;
             border-radius: 8px;
             padding: 10px;
             height: 395px;
@@ -211,9 +217,9 @@
             }
         }
         .statusChart{
+            background: #fff;
             border-radius: 8px;
             padding: 10px;
-            border: 1px solid #cccccc;
             height: 500px;
             margin-bottom: 15px;
             &-title{
