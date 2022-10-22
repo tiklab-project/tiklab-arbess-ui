@@ -84,12 +84,23 @@ const Head = props =>{
     }
     
     const outMenu = (
-        <Menu>
-            <Menu.Item key="1" onClick={()=>goOut()}>
-                <LogoutOutlined />
-                退出
-            </Menu.Item>
-        </Menu>
+        <div className="header-outMenu">
+           <div className="header-outMenu-content">
+               <div className="header-outMenu-top">
+                   <Avatar src={portrait} style={{cursor:"pointer"}}/>
+                   <span className="top-user">{getUser().name}</span>
+               </div>
+               <div
+                   onClick={()=>goOut()}
+                   className="header-outMenu-out"
+               >
+                   <LogoutOutlined />
+                   <span className="bottom-out">
+                       退出
+                   </span>
+               </div>
+           </div>
+        </div>
     )
 
     

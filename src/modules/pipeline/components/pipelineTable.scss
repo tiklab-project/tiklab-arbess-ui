@@ -4,13 +4,14 @@
         .actions-se{
           font-size: 23px;
         }
-        &:hover{
-            color: #1890ff;
-        }
     }
     &-state{
+        cursor: pointer;
         &-running{
             padding: 10px;
+        }
+        &:hover{
+            color: #1890ff;
         }
     }
     &-collect{
@@ -26,19 +27,31 @@
         }
     }
     &-actions{
+        cursor: pointer;
         &-all{
             display: flex;
             justify-content: left;
             flex-direction: row;
         }
         &-menu{
-          background: #f2f2f2;
-          width: 100px;
-          height: 80px;
-          padding: 10px;
-          border-radius: 3px;
+            background: #fff;
+            width: 160px;
+            height: 85px;
+            padding: 10px;
+            border-radius: 3px;
+            border: 1px solid #cccccc;
+            .actions-menu{
+                &-content{
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover{
+                        background: #f4f4f4;
+                        border-radius: 4px;
+                    }
+                }
+            }
         }
-        &-del{
+        .actions-del{
             margin-top:10px;
             cursor: pointer;
             &:hover{

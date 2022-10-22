@@ -29,10 +29,9 @@ const QuickIn = props =>{
     const renderStableList = lis => {
         return lis && lis.map(item=>{
             return(
-                <div
-                    key={item.id}
-                    className="quickIn-group"
-                    onClick={()=>goPipeline(item.id)}
+                <div key={item.id}
+                     className="quickIn-group"
+                     onClick={()=>goPipeline(item.id)}
                 >
                     <div className="quickIn-group-wrap">
                         <div className="quickIn-group-wrap-title">

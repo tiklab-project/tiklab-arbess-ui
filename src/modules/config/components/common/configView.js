@@ -13,7 +13,7 @@ const ConfigView = props =>{
 
     const {findAllConfigure} = configStore
 
-    const {isPlugin,setIsPlugin,setData,formInitialValues,setFormInitialValues,
+    const {isPlugin,setIsPlugin,setIsCode,setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
         setUnitShellBlock,setBuildShellBlock,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
@@ -56,6 +56,7 @@ const ConfigView = props =>{
     const nonData = ()=>{
         setCodeType("")
         setData([])
+        setIsCode(false)
         setFormInitialValues({})
         setUnitShellBlock("")
         setVirShellBlock("")
@@ -86,6 +87,7 @@ const ConfigView = props =>{
             const data = initialData[i]
             if(data.type < 6){
                 renderCodeData(data)
+                setIsCode(true)
                 setCodeType(data.type)
             }
             else if(data.type > 10 && data.type < 20){
@@ -156,6 +158,7 @@ const ConfigView = props =>{
         else setDeployShellBlock(`${data.startShell ? data.startShell : ""}`)
     }
 
+
     // 统一form表单里面需要删除的值
     const del = i => {
         switch (i) {
@@ -189,7 +192,8 @@ const ConfigView = props =>{
                 formInitialValues.codeName = null
                 formInitialValues.codeBranch = null
                 formInitialValues.gitproofName = null
-                formInitialValues.proofName = null           
+                formInitialValues.proofName = null
+                setIsCode(false)
                 setCodeType("")
                 setGitProofId("")
         }

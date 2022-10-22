@@ -12,7 +12,7 @@ const formView = props =>{
 
     const [form] = Form.useForm()
 
-    const {data,setData,codeType,formInitialValues,setFormInitialValues} = configDataStore
+    const {data,setData,isCode,codeType,formInitialValues,setFormInitialValues} = configDataStore
 
     const {updateConfigure,isAddType} = configStore
 
@@ -42,6 +42,7 @@ const formView = props =>{
                         del={del}
                         data={data}
                         setData={setData}
+                        iscode={isCode}
                         isAddType={isAddType}
                         codeType={codeType}
                         pipelineId={pipelineId}

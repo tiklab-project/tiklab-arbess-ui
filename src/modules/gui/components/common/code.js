@@ -4,7 +4,7 @@ import CodeAddDrawer from "./codeAddDrawer";
 
 const Code = props =>{
 
-    const {formInitialValues,setNewStage,codeType,setTaskFormDrawer} = props
+    const {formInitialValues,setNewStage,codeType,setTaskFormDrawer,isCode} = props
 
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
 
@@ -21,7 +21,7 @@ const Code = props =>{
 
     const code = () => {
 
-        return  codeType === "" ?
+        return  codeType === "" || !isCode?
             <div className="guiView-sider_code_add" onClick={()=>addCode()}>
                 添加代码源
             </div>
@@ -56,10 +56,8 @@ const Code = props =>{
                 <span style={{paddingLeft:10}}>源码管理</span>
             </div>
             <CodeAddDrawer
-                {...props}
                 codeDrawer={codeDrawer}
                 setCodeDrawer={setCodeDrawer}
-                setTaskFormDrawer={setTaskFormDrawer}
             />
             <div className="guiView-sider_code"> { code() } </div>
         </div>

@@ -2,10 +2,12 @@ import {action,observable} from "mobx";
 
 export class ConfigDataStore {
 
-    @observable isPrompt = false // 编辑页面离开是否提示
     @observable isPlugin = false // 是否存在插件
+    @observable isCode = false // 是否有源码管理
+
     @observable formInitialValues = {} //表单初始化
     @observable data = [] // 新阶段、新任务需要渲染的值
+
     @observable codeType = "" // 源码管理类型
     @observable buildType = "" 
     @observable deployType = ""
@@ -27,8 +29,8 @@ export class ConfigDataStore {
     }
 
     @action
-    setIsPrompt = value => {
-        this.isPrompt = value
+    setIsCode = value =>{
+        this.isCode = value
     }
 
     @action

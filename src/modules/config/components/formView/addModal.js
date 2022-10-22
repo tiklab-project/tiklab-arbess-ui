@@ -10,10 +10,11 @@ const AddModal = props =>{
 
     const {initType,setInitType,lis,configDataStore,configStore,pipelineStore,setVisible,visible} = props
 
-    const {setCodeType,setBuildType,setDeployType,data,setData,unitShellBlock,
-        formInitialValues,setFormInitialValues,
+    const {setCodeType,setBuildType,setDeployType,data,setData,setIsCode,
+        formInitialValues,setFormInitialValues,unitShellBlock,
         deployShellBlock,deployOrderShellBlock,virShellBlock,buildShellBlock,
     } = configDataStore
+
     const {updateConfigure,setIsAddType} = configStore
     const {pipelineId} = pipelineStore
     const [form] = Form.useForm()
@@ -32,44 +33,41 @@ const AddModal = props =>{
         }
     },[visible])
     
+    const hit = (initType,values) => {
+        if( initType>10 && initType<20 && values.testOrder===undefined){
+            values.testOrder=unitShellBlock
+            setIsCode(true)
+        }
+        else if(initType>20 && initType<30 && values.buildOrder===undefined){
+            values.buildOrder=buildShellBlock
+        }
+        else if(initType>30 && initType<40 && values.deployType){
+            switch (values.deployType) {
+                case 1:
+                    values.startShell=virShellBlock
+                    values.deployOrder=deployOrderShellBlock
+                    break
+                case 0:
+                    values.startShell=deployShellBlock
+            }
+        }
+    }
+    
     // 保存
     const onOk = values => {
-
-        // if(values.deployType===1){
-        //     values={
-        //         [values.startShell]:virShellBlock,
-        //         [values.deployOrder]:deployOrderShellBlock
-        //     }
-        // }
-        // if(values.deployType===0){
-        //     values={
-        //         [values.startShell]:deployShellBlock,
-        //     }
-        // }
-        // if(values.buildOrder){
-        //     values={
-        //         [values.buildOrder]:buildShellBlock,
-        //     }
-        // }
-        // if(values.testOrder){
-        //     values={
-        //         [values.testOrder]:unitShellBlock,
-        //     }
-        // }
+        hit(initType,values)
         const params = {
             pipeline:{pipelineId},
             message:"create",
             taskType:initType,
             values,
         }
-        add(initType)
         updateConfigure(params,values).then(res=>{
             if(res.code===0){
-                add(initType)
                 addData(initType,values)
             }
         })
-        // setVisible(false)
+        setVisible(false)
     }
 
     const newData = [...data]

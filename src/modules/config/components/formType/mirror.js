@@ -30,7 +30,7 @@ const MirrorContent = props =>{
             values:obj,
             message:"update"
         }
-        isAddType && setShellBlock(mirrorRefs.current.editor.getValue())
+        setShellBlock(mirrorRefs.current.editor.getValue())
         isAddType && updateConfigure(params).then(res=>{
             if(res.code===50001){
                 message.info(res.msg)

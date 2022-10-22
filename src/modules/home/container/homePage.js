@@ -13,7 +13,7 @@ import {inject,observer} from "mobx-react";
 const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
-    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList,findTask,taskList} = homePageStore
+    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList,findTask,taskList,findMessage,messageList} = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
@@ -39,10 +39,13 @@ const HomePage = props =>{
         // 我的代办
         findTask(userId)
 
+        // 我的消息
+        findMessage()
+
         // 折线图，近期构建状态
         runState(userId).then(res=>{
             if(res.code === 0 && res.data){
-                renderChart(res.data)
+                // renderChart(res.data)
             }
         })
     },[])
@@ -113,13 +116,19 @@ const HomePage = props =>{
     return(
         <div className="homePage">
             <div className="homePage-content">
-                <div className="homePage-content-left">
+                <div className="homePage-content-top">
                     <QuickIn
                         {...props}
                         setListType={setListType}
                         pipelineLength={pipelineLength}
                         followLength={followLength}
                     />
+                    {/*<div className="statusChart">*/}
+                    {/*    <div className="statusChart-title">近期构建状态</div>*/}
+                    {/*    <div className="statusChart-box" id="burn-down"/>*/}
+                    {/*</div>*/}
+                </div>
+                <div className="homePage-content-center">
                     <PipelineNear
                         {...props}
                         pipelineNearList={pipelineNearList}
@@ -128,17 +137,15 @@ const HomePage = props =>{
                         {...props}
                         taskList={taskList}
                     />
+                </div>
+                <div className="homePage-content-bottom">
                     <DynamicList
                         {...props}
                         dynamicList={dynamicList}
                     />
-                </div>
-                <div className="homePage-content-left">
-                    <div className="statusChart">
-                        <div className="statusChart-title">近期构建状态</div>
-                        <div className="statusChart-box" id="burn-down"/>
-                    </div>
                     <Tidings
+                        {...props}
+                        messageList={messageList}
                     />
                 </div>
             </div>

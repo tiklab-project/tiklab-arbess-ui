@@ -15,7 +15,7 @@ const CodeGiteeOrGithub = props =>{
     const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
     const {formInitialValues,codeType,gitProofId,setGitProofId,setFormInitialValues} = configDataStore
     const {pipelineId} = pipelineStore
-    const {updateConfigure} = configStore
+    const {updateConfigure,isAddType} = configStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -120,15 +120,24 @@ const CodeGiteeOrGithub = props =>{
         updateConfigure(params)
     }
 
+    const style={
+        display:"flex",
+    }
+
+    const stype = {
+        display:"flex",
+        alignItems:"center"
+    }
+
     return(
         <>
-            <Row>
+            <div style={isAddType ? style : stype}>
                 <FindAllProof type={codeType} {...props}/>
                 <Button className="config-details-link" type="link" onClick={()=>setVisible(true)}>
                     <PlusOutlined />
                     新增服务链接
                 </Button>
-            </Row>
+            </div>
             <Form.Item
                 label="仓库"
                 name={"codeName"}

@@ -57,8 +57,13 @@ const Proof = props =>{
         display:"flex",
     }
 
+    const stype = {
+        display:"flex",
+        alignItems:"center"
+    }
+
     return (
-        <div style={style}>
+        <div style={isAddType ? style : stype}>
             <FindAllProof type={allProofType}/>
             <div>
                 {

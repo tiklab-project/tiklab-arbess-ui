@@ -1,8 +1,7 @@
 import React,{useState} from "react";
 import {message,Tooltip,Dropdown,Modal} from "antd";
 import {getUser} from "tiklab-core-ui";
-import {
-    CheckCircleOutlined, CloseCircleOutlined,DeleteOutlined,EditOutlined,
+import {CheckCircleOutlined, CloseCircleOutlined,DeleteOutlined,EditOutlined,
     ExclamationCircleOutlined, EllipsisOutlined, PlayCircleOutlined,ProjectOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
@@ -195,24 +194,28 @@ const PipelineTable = props =>{
                             }
                             </span>
                         </Tooltip>
-                        <Dropdown trigger={["click"]}
+                        <Tooltip title="更多">
+                            <Dropdown
+                                  trigger={["click"]}
+                                  placement="bottomCenter"
                                   overlay={
                                       <div className="pipelineTable-actions-menu">
-                                          <div className="actions-menu-content">
-                                              <div className="pipelineTable-actions" onClick={()=>renameOrDel(record,"rename")}>
+                                          <div className="actions-menu">
+                                              <div className="actions-menu-content" onClick={()=>renameOrDel(record,"rename")}>
                                                   <EditOutlined/> &nbsp;重命名
                                               </div>
-                                              <div className="pipelineTable-actions-del" onClick={()=>renameOrDel(record,"del")}>
+                                              <div className="actions-menu-content actions-del" onClick={()=>renameOrDel(record,"del")}>
                                                   <DeleteOutlined/> &nbsp;删除
                                               </div>
                                           </div>
                                       </div>
                                   }
-                            >
-                            <span className="pipelineTable-actions">
-                                <EllipsisOutlined className="actions-se"/>
-                            </span>
-                        </Dropdown>
+                                >
+                                <span className="pipelineTable-actions">
+                                    <EllipsisOutlined className="actions-se"/>
+                                </span>
+                            </Dropdown>
+                        </Tooltip>
                     </>
                 )
             }

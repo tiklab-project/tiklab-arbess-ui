@@ -1,6 +1,7 @@
 import React from "react";
 import {Input,Select} from "antd";
 import AddProofButton from "./addProofButton";
+import {SearchOutlined} from "@ant-design/icons";
 
 const ProofSwitch = props =>{
 
@@ -26,6 +27,7 @@ const ProofSwitch = props =>{
                     <Input
                         placeholder={"名称"}
                         style={{width:300}}
+                        prefix={<SearchOutlined />}
                     />
                 </div>
             </div>

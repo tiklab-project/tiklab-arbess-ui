@@ -4,7 +4,8 @@ import {
     FindAllOpen,
     RunState,
     FindLog,
-    FindTask
+    FindTask,
+    FindMessage,
 } from "../api/homePage";
 
 export class HomePageStore{
@@ -12,6 +13,7 @@ export class HomePageStore{
     @observable pipelineNearList = []
     @observable dynamicList = []
     @observable taskList = []
+    @observable messageList = []
     @observable page = {
         defaultCurrent: 1,
         pageSize: "15",
@@ -64,7 +66,17 @@ export class HomePageStore{
                 this.taskList=res.data
             }
         })
+    }
 
+    @action
+    findMessage = async value =>{
+        const param = new FormData()
+        param.append("userId",value)
+        FindMessage().then(res=>{
+            if(res.code===0&&res.data){
+                this.messageList=res.data
+            }
+        })
     }
 
 }

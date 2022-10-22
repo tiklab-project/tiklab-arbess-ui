@@ -1,5 +1,6 @@
 import React from "react";
 import {Button,Input,Select} from "antd";
+import {SearchOutlined} from "@ant-design/icons";
 
 const EnviSwitch = props =>{
 
@@ -21,6 +22,7 @@ const EnviSwitch = props =>{
                     <Input
                         style={{width:300}}
                         placeholder={"名称"}
+                        prefix={<SearchOutlined />}
                     />
                 </div>
             </div>

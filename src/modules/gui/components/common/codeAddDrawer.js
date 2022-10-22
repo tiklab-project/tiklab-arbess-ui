@@ -52,7 +52,6 @@ const CodeAddDrawer = props =>{
                                 onClick={onClick}
                             />
                             <CodeAddDrawerRight
-                                {...props}
                                 opt={opt}
                             />
                         </div>

@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {getUser} from "tiklab-core-ui";
 import {Button,Input} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
+import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "../components/pipeline.scss";
@@ -82,6 +82,7 @@ const Pipeline = props =>{
                         placeholder="流水线名称"
                         onChange={onChangeSearch}
                         // onPressEnter={onChangeSearch}
+                        prefix={<SearchOutlined />}
                         style={{ width: 280 }}
                     />
                 </div>

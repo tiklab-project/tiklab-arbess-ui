@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Button,message,Spin} from "antd";
-import {LoadingOutlined} from "@ant-design/icons";
+import {LoadingOutlined,BarsOutlined,AppstoreOutlined} from "@ant-design/icons";
 import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -68,6 +68,8 @@ const ConfigChangeView = props =>{
                          onClick={()=>changeView("forms")}
                     >
                         <div className="changeView-view-item" >
+                            <BarsOutlined  />
+                            &nbsp;
                             表单视图
                         </div>
                     </div>
@@ -75,6 +77,8 @@ const ConfigChangeView = props =>{
                          onClick={()=>changeView("gui")}
                     >
                         <div className="changeView-view-item">
+                            <AppstoreOutlined/>
+                            &nbsp;
                             图形化视图
                         </div>
                     </div>

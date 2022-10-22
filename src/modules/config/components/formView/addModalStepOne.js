@@ -1,6 +1,5 @@
 import React from "react";
 import {Col, Row} from "antd";
-import CodeOrNewStageModalLeft from "./codeOrNewStageModalLeft";
 
 const AddModalStepOne = props =>{
 
@@ -11,6 +10,16 @@ const AddModalStepOne = props =>{
         setInitType(item.type)
     }
 
+    const renderLeftLis = item =>{
+        return  <div
+                    key={item.id}
+                    className={`item ${item.id===type? "item-select":""}`}
+                    onClick={()=>setType(item.id)}
+                >
+                    <div className="item-title">{item.title}</div>
+                </div>
+    }
+
     const renderLis = lis =>{
         return lis && lis.map(group=>{
             return  <div className="group" key={group.title}>
@@ -19,7 +28,7 @@ const AddModalStepOne = props =>{
                 </div>
                 <div className="group-content">
                     {
-                        group.desc.map((item,index)=>{
+                        group.desc.map(item=>{
                             return <div onClick={()=>handleClick(item)}
                                         className={`group-desc ${item.type===initType?"group-select":""}`}
                                         key={item.type}
@@ -47,11 +56,12 @@ const AddModalStepOne = props =>{
     return(
         <Row className="codeOrNewStage-stepOne">
             <Col span={4} className="codeOrNewStage-stepOne-left">
-                <CodeOrNewStageModalLeft
-                    lis={lis}
-                    type={type}
-                    setType={setType}
-                />
+                <div className="modalLeft">
+                    {
+                        lis && lis.map(item=>{
+                            return renderLeftLis(item)}
+                        )}
+                </div>
             </Col>
             <Col span={20} className="codeOrNewStage-stepOne-right">
                 <div className="modalRight">

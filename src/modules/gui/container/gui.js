@@ -17,7 +17,9 @@ const Gui = props =>{
     const {pipelineStore,configDataStore,del} = props
 
     const {pipelineId} = pipelineStore
-    const {formInitialValues,setFormInitialValues,data,codeType,setCodeType,setData} = configDataStore
+    const {formInitialValues,setFormInitialValues,data,codeType,setCodeType,setData,
+        setIsCode,isCode,
+    } = configDataStore
     const {updateConfigure} = ConfigStore
 
     const [form] = Form.useForm()
@@ -77,10 +79,7 @@ const Gui = props =>{
         const params = {
             pipeline:{pipelineId},
             taskType:mode,
-            pipelineTest:obj,
-            pipelineCode:obj,
-            pipelineBuild:obj,
-            pipelineDeploy:obj,
+            values:obj,
             message:"update"
         }
         if(validation(codeType,name,value)){
@@ -131,7 +130,7 @@ const Gui = props =>{
                     })
                     setNewStage(taskType)
                     setTaskFormDrawer(true)
-                }
+                }else setIsCode(true)
                 break
             case "updateType":
                 setCodeType(taskType)
@@ -170,7 +169,7 @@ const Gui = props =>{
                             setNewStage={setNewStage}
                             setTaskFormDrawer={setTaskFormDrawer}
                             codeType={codeType}
-                            setCodeType={setCodeType}
+                            isCode={isCode}
                             formInitialValues={formInitialValues}
                         />
                         <div className="guiView-main">

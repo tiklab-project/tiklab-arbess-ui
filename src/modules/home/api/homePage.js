@@ -35,3 +35,12 @@ export function  FindTask (data){
         data
     })
 }
+
+// 我的消息
+export function  FindMessage (data){
+    return serviceLoc.request({
+        url:"/pipelineWorkSpace/findMessage",
+        method:"post",
+        data
+    })
+}

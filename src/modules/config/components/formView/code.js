@@ -4,7 +4,7 @@ import Headline from "./headline";
 
 const Code = props =>{
 
-    const {data,setData,codeType,del,pipelineId,updateConfigure} = props
+    const {data,setData,codeType,del,pipelineId,updateConfigure,iscode} = props
 
     const [codeVisible,setCodeVisible] = useState(false)
 
@@ -12,7 +12,9 @@ const Code = props =>{
         <>
             <div className="formView-wrapper">
                 <div className="formView-wrapper-Headline code-handle">
-                    代码源
+                   <div className="desc-left">
+                       <span className="desc-title">代码源</span>
+                   </div>
                 </div>
             </div>
             <div
@@ -24,8 +26,8 @@ const Code = props =>{
         </>
     )
 
-    const code = codeType => {
-        return  codeType !== "" ?
+    const code = iscode => {
+        return  iscode ?
             <Headline
                 {...props}
                 type={codeType}
@@ -40,7 +42,7 @@ const Code = props =>{
     }
 
     return <>
-        { code(codeType) }
+        { code(iscode) }
 
         <CodeAddModal
             codeVisible={codeVisible}

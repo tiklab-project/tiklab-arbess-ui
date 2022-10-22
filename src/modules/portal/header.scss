@@ -92,3 +92,30 @@ $gray-main:#cccccc;
         //background: #f7f8fa;
     }
 }
+.header{
+    &-outMenu{
+        background: #fff;
+        width: 200px;
+        &-content{
+            padding: 10px;
+        }
+        &-top{
+            padding-bottom: 10px;
+            padding-left: 5px;
+            .top-user{
+                padding-left: 15px;
+                font-size: 15px;
+            }
+        }
+        &-out{
+            padding: 5px;
+            &:hover{
+                background: #f4f4f4;
+                cursor: pointer;
+            }
+            .bottom-out{
+                padding-left: 5px;
+            }
+        }
+    }
+}
