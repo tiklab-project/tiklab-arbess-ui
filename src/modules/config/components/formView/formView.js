@@ -11,7 +11,7 @@ const formView = props =>{
     const {del,configDataStore,pipelineId,configStore} = props
 
     const {data,setData,codeType,formInitialValues,setFormInitialValues} = configDataStore
-    const {updateConfigure,configValid,enabledValid,validType} = configStore
+    const {configValid,enabledValid} = configStore
 
     const [form] = Form.useForm()
 
@@ -47,24 +47,20 @@ const formView = props =>{
                     autoComplete="off"
                     scrollToFirstError={true}
                     onValuesChange={onValuesChange}
-                    initialValues={{deployType:1}}
+                    initialValues={{deployType:0}}
                 >
                     <Code
-                        validType={validType}
                         del={del}
                         data={data}
                         setData={setData}
                         codeType={codeType}
                         pipelineId={pipelineId}
-                        updateConfigure={updateConfigure}
                     />
                     <NewStage
-                        validType={validType}
                         del={del}
                         data={data}
                         setData={setData}
                         pipelineId={pipelineId}
-                        updateConfigure={updateConfigure}
                     />
                 </Form>
             </div>

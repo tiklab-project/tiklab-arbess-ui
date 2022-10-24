@@ -6,13 +6,13 @@ import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
-import {Empty,Form} from "antd";
+import {Empty} from "antd";
 
 const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,setEnabledValid,enabledValid,isPlugin,setIsPlugin} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
@@ -194,7 +194,6 @@ const ConfigView = props =>{
                 setCodeType("")
                 setGitProofId("")
         }
-        setEnabledValid(!enabledValid)
         setFormInitialValues({...formInitialValues})
     }
 
@@ -222,28 +221,28 @@ const ConfigView = props =>{
         renderFormView()
         :
         <>
-            <Gui
-                {...props}
-                del={del}
-                configStore={configStore}
-                configDataStore={configDataStore}
-                pipelineStore={pipelineStore}
-            />
-            {/*{*/}
-            {/*    !getVersionInfo().expired && isPlugin?*/}
-            {/*        <RemoteUmdComponent*/}
-            {/*            {...props}*/}
-            {/*            point={"gui"}*/}
-            {/*            pluginStore={pluginStore}*/}
-            {/*            isModalType={true}*/}
-            {/*            extraProps={{*/}
-            {/*                pipelineStore:toJS(pipelineStore),*/}
-            {/*                configDataStore:toJS(configDataStore),*/}
-            {/*                del,*/}
-            {/*            }}*/}
-            {/*        />*/}
-            {/*        :null*/}
-            {/*}*/}
+            {/*<Gui*/}
+            {/*    {...props}*/}
+            {/*    del={del}*/}
+            {/*    configStore={configStore}*/}
+            {/*    configDataStore={configDataStore}*/}
+            {/*    pipelineStore={pipelineStore}*/}
+            {/*/>*/}
+            {
+                !getVersionInfo().expired && isPlugin?
+                    <RemoteUmdComponent
+                        {...props}
+                        point={"gui"}
+                        pluginStore={pluginStore}
+                        isModalType={true}
+                        extraProps={{
+                            pipelineStore:toJS(pipelineStore),
+                            configDataStore:toJS(configDataStore),
+                            del,
+                        }}
+                    />
+                    :null
+            }
         </>
 }
 

@@ -106,7 +106,6 @@ const AddModal = props =>{
         updateConfigure(params).then(res=>{
             if(res.code===0){
                 add(initType)
-                setEnabledValid(!enabledValid)
             }
             if(res.code===50001){
                 message.info(res.msg)
@@ -117,6 +116,7 @@ const AddModal = props =>{
 
 
     const add = type =>{
+        setEnabledValid(!enabledValid)
         if(type>0 && type<10){
             setCodeType(type)
         }else if(type>10 && type<20){

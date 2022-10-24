@@ -3,7 +3,7 @@ import Headline from "./headline";
 
 const Code = props =>{
 
-    const {data,setData,codeType,del,pipelineId,updateConfigure,validType} = props
+    const {data,setData,codeType,del,pipelineId} = props
 
     const code = codeType => {
         return  codeType !=="" &&
@@ -11,11 +11,9 @@ const Code = props =>{
                 {...props}
                 type={codeType}
                 del={del}
-                updateConfigure={updateConfigure}
                 data={data}
                 setData={setData}
                 pipelineId={pipelineId}
-                validType={validType}
             />
     }
 

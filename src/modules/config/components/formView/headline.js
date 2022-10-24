@@ -3,10 +3,13 @@ import {DeleteOutlined,ExclamationCircleOutlined,SwapOutlined} from "@ant-design
 import {Modal,message} from "antd";
 import Switch from "./switch";
 import Forms from "../formType/forms";
+import {inject,observer} from "mobx-react";
 
 const Headline = props =>{
 
-    const {type,del,updateConfigure,data,setData,pipelineId,setChangeSortVisible,validType} = props
+    const {configStore,type,del,data,setData,pipelineId,setChangeSortVisible} = props
+
+    const {setEnabledValid,enabledValid,updateConfigure,validType} = configStore
 
     const delType = type =>{
         Modal.confirm({
@@ -27,6 +30,7 @@ const Headline = props =>{
         }
         updateConfigure(params).then(res=>{
             if(res.code===0){
+                setEnabledValid(!enabledValid)
                 del(type)
                 for (let i = 0 ;i<data.length;i++){
                     if(data[i].dataType === type){
@@ -112,4 +116,4 @@ const Headline = props =>{
     )
 }
 
-export default Headline
+export default inject("configStore")(observer(Headline))
