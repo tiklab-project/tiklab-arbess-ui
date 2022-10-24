@@ -4,7 +4,7 @@ import ChangeSortsModal from "./changeSortsModal";
 
 const NewStage = props =>{
 
-    const {data,del,updateConfigure,setData,pipelineId} = props
+    const {data,del,updateConfigure,setData,pipelineId,validType} = props
 
     const [changeSortVisible,setChangeSortVisible] = useState(false)
 
@@ -18,6 +18,8 @@ const NewStage = props =>{
                     setData={setData}
                     pipelineId={pipelineId}
                     setChangeSortVisible={setChangeSortVisible}
+                    updateConfigure={updateConfigure}
+                    validType={validType}
             />
     }
 

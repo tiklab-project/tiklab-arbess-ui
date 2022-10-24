@@ -12,7 +12,7 @@ const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,setEnabledValid,enabledValid} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
@@ -159,6 +159,7 @@ const ConfigView = props =>{
 
     // 统一form表单里面需要删除的值
     const del = i => {
+        setEnabledValid(!enabledValid)
         switch (i) {
             case 11:
                 setUnitShellBlock("")
@@ -194,6 +195,7 @@ const ConfigView = props =>{
                 setCodeType("")
                 setGitProofId("")
         }
+        setEnabledValid(!enabledValid)
         setFormInitialValues({...formInitialValues})
     }
 

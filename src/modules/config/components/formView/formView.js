@@ -11,7 +11,7 @@ const formView = props =>{
     const {del,configDataStore,pipelineId,configStore} = props
 
     const {data,setData,codeType,formInitialValues,setFormInitialValues} = configDataStore
-    const {configValid,enabledValid} = configStore
+    const {configValid,enabledValid,updateConfigure,validType} = configStore
 
     const [form] = Form.useForm()
 
@@ -55,12 +55,16 @@ const formView = props =>{
                         setData={setData}
                         codeType={codeType}
                         pipelineId={pipelineId}
+                        updateConfigure={updateConfigure}
+                        validType={validType}
                     />
                     <NewStage
                         del={del}
                         data={data}
                         setData={setData}
                         pipelineId={pipelineId}
+                        updateConfigure={updateConfigure}
+                        validType={validType}
                     />
                 </Form>
             </div>
