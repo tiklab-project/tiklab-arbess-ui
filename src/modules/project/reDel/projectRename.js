@@ -30,6 +30,11 @@ const ProjectRename = props =>{
                         pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
                         message: "流水线名称不能包含非法字符，如&,%，&，#……等",
                     },
+                    {
+                        type: "string",
+                        max: 10,
+                        message:"流水线名称过长"
+                    },
                     ({ getFieldValue }) => ({
                         validator(rule, value) {
                             if (!value) {

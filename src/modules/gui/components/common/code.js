@@ -1,10 +1,11 @@
 import React,{useState} from "react";
 import NameType from "./nameType";
 import CodeAddDrawer from "./codeAddDrawer";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const Code = props =>{
 
-    const {formInitialValues,setNewStage,codeType,setTaskFormDrawer,isCode} = props
+    const {formInitialValues,setNewStage,codeType,setTaskFormDrawer,validType} = props
 
     const [codeDrawer,setCodeDrawer] = useState(false) // 新建源码抽屉
 
@@ -19,30 +20,38 @@ const Code = props =>{
         setCodeDrawer(true)
     }
 
+    const valid = codeType =>{
+        return validType && validType.some(item=>item==codeType)
+    }
+
     const code = () => {
 
-        return  codeType === "" || !isCode?
+        return  codeType === "" ?
             <div className="guiView-sider_code_add" onClick={()=>addCode()}>
                 添加代码源
             </div>
             :
             <div className="guiView-sider_code_one">
-                <div className="guiView-sider_code_one_name" onClick={()=>showDetailsDrawer()}>
+                <div className={`guiView-sider_code_one_name ${valid(codeType)?"one_name":""}`}
+                     onClick={()=>showDetailsDrawer()}
+                >
                     <NameType type={codeType}/>
+                    {valid(codeType) &&
+                        <span className="one_name-icon">
+                            <ExclamationCircleOutlined />
+                        </span>}
                 </div>
                 {
-                    formInitialValues && formInitialValues.codeName ?
+                    formInitialValues && formInitialValues.codeName &&
                         <div className="guiView-sider_code_one_address">
                             <div className="branch-title"> {formInitialValues.codeName} </div>
                         </div>
-                        : null
                 }
                 {
-                    formInitialValues && formInitialValues.codeBranch ?
+                    formInitialValues && formInitialValues.codeBranch &&
                         <div className="guiView-sider_code_one_branch ">
                             <div className="branch-address">{formInitialValues.codeBranch}</div>
                         </div>
-                        : null
                 }
             </div>
     }

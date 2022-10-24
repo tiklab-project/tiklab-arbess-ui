@@ -31,22 +31,27 @@ const Inputs = props =>{
         switch (name) {
             case "codeName":
                 if(codeType===5){
-                    rule =  [{
-                        pattern: validCodeSvn,
-                        message:"请输入正确的svn地址"
-                    }]
+                    rule =  [
+                        {required:true, message: "请输入svn地址"},
+                        {pattern: validCodeSvn, message:"请输入正确的svn地址"}
+                    ]
                 }else if(codeType===1 || codeType===4){
-                    rule =  [{
-                        pattern: validCodeGit,
-                        message:"请输入正确的git地址"
-                    }]
+                    rule =  [
+                        {required:true, message: "请输入git地址"},
+                        {pattern: validCodeGit, message:"请输入正确的git地址"}
+                    ]
+                }
+                else{
+                    rule =  [
+                        {required:true, message: "请选择git地址"}
+                    ]
                 }
                 break;
             case "sshIp":
-                rule =  [{
-                    pattern:validDeploySshIp,
-                    message:"请输入正确的Ip地址"
-                }]
+                rule =  [
+                    {required:true, message: "请输入Ip地址"},
+                    {pattern:validDeploySshIp, message:"请输入正确的Ip地址"}
+                ]
                 break;
 
         }
@@ -65,7 +70,7 @@ const Inputs = props =>{
                 placeholder={placeholder}
                 onChange={name==="codeName" || name==="codeBranch" ? onchange:null}
                 onBlur={(e)=>valueChange(e.target.value,name,mode)}
-                addonBefore={addonbefore?addonbefore:null}
+                addonBefore={addonbefore}
             />
         </Form.Item>
     )

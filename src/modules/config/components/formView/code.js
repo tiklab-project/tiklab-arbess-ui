@@ -1,33 +1,12 @@
-import React,{useState} from "react";
-import CodeAddModal from "./codeAddModal";
+import React from "react";
 import Headline from "./headline";
 
 const Code = props =>{
 
-    const {data,setData,codeType,del,pipelineId,updateConfigure,iscode} = props
+    const {data,setData,codeType,del,pipelineId,updateConfigure,validType} = props
 
-    const [codeVisible,setCodeVisible] = useState(false)
-
-    const codeNull = (
-        <>
-            <div className="formView-wrapper">
-                <div className="formView-wrapper-Headline code-handle">
-                   <div className="desc-left">
-                       <span className="desc-title">代码源</span>
-                   </div>
-                </div>
-            </div>
-            <div
-                className="formView-wrapper-handle code-handle"
-                onClick={()=>setCodeVisible(true)}
-            >
-                添加代码源
-            </div>
-        </>
-    )
-
-    const code = iscode => {
-        return  iscode ?
+    const code = codeType => {
+        return  codeType !=="" &&
             <Headline
                 {...props}
                 type={codeType}
@@ -36,19 +15,11 @@ const Code = props =>{
                 data={data}
                 setData={setData}
                 pipelineId={pipelineId}
+                validType={validType}
             />
-            :
-            codeNull
     }
 
-    return <>
-        { code(iscode) }
-
-        <CodeAddModal
-            codeVisible={codeVisible}
-            setCodeVisible={setCodeVisible}
-        />
-    </>
+    return code(codeType)
 }
 
 export default Code

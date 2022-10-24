@@ -1,24 +1,20 @@
-import React,{useState} from "react";
-import {message,Tooltip,Dropdown,Modal} from "antd";
+import React from "react";
+import {message,Tooltip} from "antd";
 import {getUser} from "tiklab-core-ui";
-import {CheckCircleOutlined, CloseCircleOutlined,DeleteOutlined,EditOutlined,
-    ExclamationCircleOutlined, EllipsisOutlined, PlayCircleOutlined,ProjectOutlined
+import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
+    FieldStringOutlined,FieldBinaryOutlined,FieldNumberOutlined,FunctionOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
 import Tables from "../../../common/tables/tables";
 import "./pipelineTable.scss";
-import PipelineRenameModal from "./pipelineRenameModal";
 
 const PipelineTable = props =>{
 
     const {structureStore,pipelineStore}=props
 
     const {pipelineStartStructure,killInstance}=structureStore
-    const {pipelineList,updateFollow,updatePipeline,fresh,setFresh,deletePipeline} = pipelineStore
-
-    const [renameVisible,setRenameVisible] = useState(false)
-    const [pipeline,setPipeline] = useState("")
+    const {pipelineList,updateFollow,fresh,setFresh} = pipelineStore
 
     const userId = getUser().userId
 
@@ -70,37 +66,18 @@ const PipelineTable = props =>{
         }
     }
 
-    const renameOrDel = (record,type) =>{
-        if(type === "rename"){
-            setRenameVisible(true)
-            setPipeline(record)
-        }else {
-            Modal.confirm({
-                title: "删除",
-                icon: <ExclamationCircleOutlined />,
-                content: "删除后数据无法恢复",
-                onOk:()=>del(record),
-                okText: "确认",
-                cancelText: "取消",
-            });
+    // % 取余渲染图标
+    const renderIcon = index => {
+        if(index % 2 === 0){
+            return <FieldStringOutlined />
         }
-    }
-    
-    const del = record => {
-        const params = {
-            userId:userId,
-            pipelineId:record.pipelineId
+        else if(index % 3 === 0){
+            return <FieldBinaryOutlined />
         }
-        deletePipeline(params).then(res=>{
-            if(res.code === 0 && res.data === 1){
-                message.info({content: "删除成功", className: "message"})
-            }else {
-                message.error({content:"删除失败", className:"message"})
-            }
-            setFresh(!fresh)
-        }).catch(error=>{
-            console.log(error)
-        })
+        else if(index % 3 === 0 && index % 2 ===0){
+            return <FieldNumberOutlined />
+        }
+        else return <FunctionOutlined />
     }
 
     const columns = [
@@ -108,12 +85,14 @@ const PipelineTable = props =>{
             title: "流水线名称",
             dataIndex: "pipelineName",
             key: "pipelineName",
-            render:(text,record)=>{
+            width:"200px",
+            render:(text,record,index)=>{
                 return(
                     <span onClick={()=>goPipelineTask(text,record)}
+                          className="pipelineTable-pipelineName"
                           style={{color:"#1890ff",cursor:"pointer"}}
                     >
-                        <ProjectOutlined />
+                        {renderIcon(index+1)}
                         {text}
                     </span>
                 )
@@ -123,15 +102,16 @@ const PipelineTable = props =>{
             title: "最近构建状态",
             dataIndex: "buildStatus",
             key: "buildStatus",
+            width:"200px",
             render:text =>{
                 switch (text) {
                     case 30:
                         return  <Tooltip title="成功">
-                                    <CheckCircleOutlined style = {{fontSize:25,color:"#1890ff"}}/>
+                                    <CheckCircleOutlined style = {{fontSize:26,color:"#1890ff"}}/>
                                 </Tooltip>
                     case 1:
                         return <Tooltip title="失败">
-                                    <CloseCircleOutlined style = {{fontSize:25,color:"#ff0000"}}/>
+                                    <CloseCircleOutlined style = {{fontSize:26,color:"#ff0000"}}/>
                                 </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建">
@@ -141,7 +121,7 @@ const PipelineTable = props =>{
                                 </Tooltip>
                     case 20:
                         return  <Tooltip title="停止">
-                                    <ExclamationCircleOutlined style = {{fontSize:25}}/>
+                                    <ExclamationCircleOutlined style = {{fontSize:26}}/>
                                 </Tooltip>
                 }
             }
@@ -150,21 +130,25 @@ const PipelineTable = props =>{
             title: "最近构建时间",
             dataIndex: "lastBuildTime",
             key: "lastBuildTime",
+            width:"220px",
         },
         {
             title: "最近成功时间",
             dataIndex: "lastSuccessTime",
             key: "lastSuccessTime",
+            width:"220px",
         },
         {
             title: "创建时间",
             dataIndex: "createTime",
             key: "createTime",
+            width:"220px",
         },
         {
             title: "操作",
             dataIndex: "action",
             key:"action",
+            width:"200px",
             render:(text,record)=>{
                 return(
                     <>
@@ -194,28 +178,6 @@ const PipelineTable = props =>{
                             }
                             </span>
                         </Tooltip>
-                        <Tooltip title="更多">
-                            <Dropdown
-                                  trigger={["click"]}
-                                  placement="bottomCenter"
-                                  overlay={
-                                      <div className="pipelineTable-actions-menu">
-                                          <div className="actions-menu">
-                                              <div className="actions-menu-content" onClick={()=>renameOrDel(record,"rename")}>
-                                                  <EditOutlined/> &nbsp;重命名
-                                              </div>
-                                              <div className="actions-menu-content actions-del" onClick={()=>renameOrDel(record,"del")}>
-                                                  <DeleteOutlined/> &nbsp;删除
-                                              </div>
-                                          </div>
-                                      </div>
-                                  }
-                                >
-                                <span className="pipelineTable-actions">
-                                    <EllipsisOutlined className="actions-se"/>
-                                </span>
-                            </Dropdown>
-                        </Tooltip>
                     </>
                 )
             }
@@ -227,16 +189,6 @@ const PipelineTable = props =>{
                     columns={columns}
                     dataSource={pipelineList}
                     rowKey={record=>record.pipelineId}
-                />
-                <PipelineRenameModal
-                    fresh={fresh}
-                    setFresh={setFresh}
-                    userId={userId}
-                    pipeline={pipeline}
-                    pipelineList={pipelineList}
-                    renameVisible={renameVisible}
-                    setRenameVisible={setRenameVisible}
-                    updatePipeline={updatePipeline}
                 />
             </>
 }

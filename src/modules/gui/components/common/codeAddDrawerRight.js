@@ -38,13 +38,13 @@ const CodeAddDrawerRight = props =>{
 
     const context = useContext(TestContext)
 
-    const {codeType,setCodeType,isCode} = context.configDataStore
+    const {codeType,setCodeType} = context.configDataStore
     const changType = context.changType
     const addConfig = context.addConfig
     const del = context.del
 
     const handleClick = type =>{
-        if(codeType==="" || !isCode){
+        if(codeType===""){
             setCodeType(type)
             addConfig(type)
         }else {
@@ -87,7 +87,7 @@ const CodeAddDrawerRight = props =>{
                     opt === 2 ?
                         <CodeSvn {...props}/>
                         :
-                        codeType ===1 || codeType===3 ?
+                        codeType ===2 || codeType===3 ?
                             <CodeGiteeOrGithub {...props}/>
                             :
                             <CodeGitOrGitlab {...props}/>

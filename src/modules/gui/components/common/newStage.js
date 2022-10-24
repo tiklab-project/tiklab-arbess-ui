@@ -1,10 +1,11 @@
 import React,{Fragment,useState} from "react";
 import NameType from "./nameType";
 import NewStageAddDrawer from "./newStageAddDrawer";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const NewStage = props =>{
 
-    const {data,setTaskFormDrawer,setNewStage,index,setIndex} = props
+    const {data,setTaskFormDrawer,setNewStage,index,setIndex,validType} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
 
@@ -49,6 +50,10 @@ const NewStage = props =>{
                 </>
     }
 
+    const valid = codeType =>{
+        return validType && validType.some(item=>item==codeType)
+    }
+
     // data渲染
     const newStageShow = data =>{
         return data && data.map((item,index)=>{
@@ -76,11 +81,14 @@ const NewStage = props =>{
                             <div className="newStages-step">
                                 <div className="newStages-content"  >
                                     <div className="newStages-task">
-                                        <div className="newStages-job">
-                                            <div className="newStages-job_text"
-                                                 onClick={()=>showStage(item)}
-                                            >
+                                        <div className={`newStages-job ${valid(item.dataType)?"job-name":""}`}>
+                                            <div className="newStages-job_text" onClick={()=>showStage(item)}>
                                                 <NameType type={item.dataType}/>
+                                                {valid(item.dataType) &&
+                                                    <span key={item} className="newStages-job-warn">
+                                                        <ExclamationCircleOutlined />
+                                                    </span>
+                                                }
                                             </div>
                                         </div>
                                     </div>

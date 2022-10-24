@@ -1,26 +1,29 @@
 import React,{useEffect,useState} from "react";
 import {Button,message,Spin} from "antd";
-import {LoadingOutlined,BarsOutlined,AppstoreOutlined} from "@ant-design/icons";
+import {LoadingOutlined,BarsOutlined,AppstoreOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "./configChangeView.scss";
-import NewStageAddModal from "../formView/newStageAddModal";
+import AddModal from "../formView/addModal";
 
 const ConfigChangeView = props =>{
 
-    const {view,setView,pipelineId,structureStore} = props
+    const {view,setView,pipelineId,configStore,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
+    const {validLength,isPlugin} = configStore
 
     const [processVisible,setProcessVisible] = useState(false)
-    const [newStageVisible,setNewStageVisible] = useState(false)
+    const [addConfigVisible,setAddConfigVisible] = useState(false)
 
     const configView = localStorage.getItem("configView")
     const userId = getUser().userId
 
     useEffect(()=>{
-        if(configView){setView(configView)}
+        if(configView){
+            setView(configView)
+        }
     },[configView])
 
     const run = () => {
@@ -50,18 +53,42 @@ const ConfigChangeView = props =>{
         localStorage.setItem("configView",type)
     }
 
+    const isRun = () =>{
+        return validLength > 0
+    }
+
     return (
         <div className="config_changeView">
             <div className="changeView">
+                <div className="changeView-valid">
+                    {validLength && validLength > 0 &&
+                    <span>
+                        <ExclamationCircleOutlined />
+                        &nbsp;
+                        {validLength}项配置未完成
+                    </span>}
+                </div>
                 <div className="changeView-newStage">
-                    <Button onClick={()=>setNewStageVisible(true)}>
-                        新阶段
+                    <Button onClick={()=>setAddConfigVisible(true)}>
+                        添加配置
                     </Button>
                 </div>
                 <div className="changeView-btn">
-                    <Button type="primary" form="form" onClick={()=>run()}>
-                        {processVisible ? <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} /> :"运行"}
-                    </Button>
+                    {
+                        processVisible ?
+                            <Button type="primary">
+                                <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
+                            </Button>
+                            :
+                            <Button
+                                type="primary"
+                                form="form"
+                                onClick={()=>run()}
+                                disabled={isRun()}
+                            >
+                                运行
+                            </Button>
+                    }
                 </div>
                 <div className="changeView-view">
                     <div className={`changeView-view-li ${view==="forms" ? "changeView-view-inner":""}`}
@@ -88,23 +115,28 @@ const ConfigChangeView = props =>{
                     {/*             onClick={()=>changeView("gui")}*/}
                     {/*        >*/}
                     {/*            <div className="changeView-view-item">*/}
+                    {/*                <AppstoreOutlined/>*/}
+                    {/*                &nbsp;*/}
                     {/*                图形化视图*/}
                     {/*            </div>*/}
                     {/*        </div>*/}
                     {/*        :*/}
                     {/*        <div className="changeView-view-li changeView-view-ban">*/}
+                    {/*            <AppstoreOutlined/>*/}
+                    {/*            &nbsp;*/}
                     {/*            图形化视图*/}
                     {/*        </div>*/}
                     {/*}*/}
                 </div>
             </div>
 
-            <NewStageAddModal
-                newStageVisible={newStageVisible}
-                setNewStageVisible={setNewStageVisible}
+            <AddModal
+                addConfigVisible={addConfigVisible}
+                setAddConfigVisible={setAddConfigVisible}
             />
+
         </div>
     )
 }
 
-export default withRouter(inject("structureStore")(observer(ConfigChangeView)))
+export default withRouter(inject("structureStore","configStore")(observer(ConfigChangeView)))

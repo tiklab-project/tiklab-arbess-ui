@@ -67,18 +67,16 @@ const Structure = props => {
 
     let interval=null
     useEffect(() => {
-        if(pipelineId){
-            findExecState(pipelineId).then(res=>{
-                if(res.data===1){
-                    interval=setInterval(()=>
-                        findStructureState(pipelineId).then(res=>{
-                            if(res.code===0){renderExec(res.data)}
-                        }), 1000)
-                    findAllPipelineConfig(pipelineId)
-                }
-                changPage() // 历史列表
-            })
-        }
+        pipelineId && findExecState(pipelineId).then(res=>{
+            if(res.data===1){
+                interval=setInterval(()=>
+                    findStructureState(pipelineId).then(res=>{
+                        if(res.code===0){renderExec(res.data)}
+                    }), 1000)
+                findAllPipelineConfig(pipelineId)
+            }
+            changPage() // 历史列表
+        })
     }, [pipelineId,freshen])
 
     const changPage = () =>{

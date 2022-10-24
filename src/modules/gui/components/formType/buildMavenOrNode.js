@@ -4,20 +4,18 @@ import {observer} from "mobx-react";
 import Mirror from "./mirror";
 import Inputs from "./inputs";
 import TestContext from "../common/testContext";
-import ConfigStore from "../../store/ConfigStore";
 
 const BuildMavenOrNode = props =>{
 
     const context = useContext(TestContext)
 
-    const {profileAddress} = ConfigStore
+    const {profileAddress} = context.configStore
     const {buildShellBlock,setBuildShellBlock,buildType} = context.configDataStore
     const {pipelineName} = context.pipelineStore
 
     return(
         <>
             <Inputs
-                {...props}
                 placeholder={`"\/\" 代表当前源的根目录`}
                 label={"文件地址"}
                 name={"buildAddress"}

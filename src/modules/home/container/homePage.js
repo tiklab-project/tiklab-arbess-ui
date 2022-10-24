@@ -43,11 +43,11 @@ const HomePage = props =>{
         findMessage()
 
         // 折线图，近期构建状态
-        runState(userId).then(res=>{
-            if(res.code === 0 && res.data){
-                // renderChart(res.data)
-            }
-        })
+        // runState(userId).then(res=>{
+        //     if(res.code === 0 && res.data){
+        //         // renderChart(res.data)
+        //     }
+        // })
     },[])
 
     const renderChart = data => {

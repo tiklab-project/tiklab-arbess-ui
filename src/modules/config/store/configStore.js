@@ -6,16 +6,25 @@ import {
     CodeTestPass,
     FileAddress,
     GetFile,
+    ConfigValid,
 } from "../api/config"
 
 export class ConfigStore{
 
     @observable profileAddress = ""
-    @observable isAddType = true // ture单个表单能更改，false单个表单不能更改
+    @observable enabledValid = false // 是否启用表单效验
+    @observable isPlugin = false // 是否存在插件
+    @observable validLength = []
+    @observable validType = []
 
     @action
-    setIsAddType = value =>{
-        this.isAddType = value
+    setEnabledValid = value =>{
+        this.enabledValid = value
+    }
+
+    @action
+    setIsPlugin = value =>{
+        this.isPlugin = value
     }
 
     @action
@@ -61,7 +70,7 @@ export class ConfigStore{
     fileAddress = () =>{
         FileAddress().then(res=>{
             console.log(res)
-            if(res.code===0 && res.data){
+            if(res.code===0){
                 this.profileAddress = res.data
             }
         }).catch(error=>{
@@ -75,6 +84,24 @@ export class ConfigStore{
         params.append("pipelineName",values.pipelineName)
         params.append("regex",values.regex)
         return await GetFile(params)
+    }
+
+    @action
+    configValid = async values =>{
+        const params = new FormData()
+        params.append("pipelineId",values)
+        return new Promise((resolve, reject) => {
+            ConfigValid(params).then(res=>{
+                if(res.code===0){
+                    this.validLength = res.data && Object.keys(res.data).length
+                    this.validType = res.data && Object.values(res.data)
+                }
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
     }
     
 }

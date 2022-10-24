@@ -15,7 +15,7 @@ const CodeGiteeOrGithub = props =>{
     const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
     const {formInitialValues,codeType,gitProofId,setGitProofId,setFormInitialValues} = configDataStore
     const {pipelineId} = pipelineStore
-    const {updateConfigure,isAddType} = configStore
+    const {updateConfigure} = configStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -108,12 +108,9 @@ const CodeGiteeOrGithub = props =>{
         const obj = {}
         obj[key] = value
         const params = {
-            pipelineId,
-            takType:codeType,
-            pipelineTest:obj,
-            pipelineCode:obj,
-            pipelineBuild:obj,
-            pipelineDeploy:obj,
+            pipeline:{pipelineId},
+            taskType:codeType,
+            values:obj,
             message:"update"
         }
         setFormInitialValues({key:value})
@@ -131,7 +128,7 @@ const CodeGiteeOrGithub = props =>{
 
     return(
         <>
-            <div style={isAddType ? style : stype}>
+            <div style={style}>
                 <FindAllProof type={codeType} {...props}/>
                 <Button className="config-details-link" type="link" onClick={()=>setVisible(true)}>
                     <PlusOutlined />

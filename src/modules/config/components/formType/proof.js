@@ -9,7 +9,7 @@ const Proof = props =>{
     const {allProofType,testType,configDataStore,configStore,type} = props
 
     const {formInitialValues,gitProofId,deployProofId} = configDataStore
-    const {codeTestPass,isAddType} = configStore
+    const {codeTestPass} = configStore
 
     const [testStatus,setTestStatus] = useState(false)
 
@@ -57,13 +57,8 @@ const Proof = props =>{
         display:"flex",
     }
 
-    const stype = {
-        display:"flex",
-        alignItems:"center"
-    }
-
     return (
-        <div style={isAddType ? style : stype}>
+        <div style={style}>
             <FindAllProof type={allProofType}/>
             <div>
                 {

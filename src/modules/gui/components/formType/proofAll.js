@@ -4,7 +4,6 @@ import {observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
 import TestContext from "../common/testContext";
 import proofStore from "../../store/proofStore";
-import ConfigStore from "../../store/ConfigStore";
 import {PlusOutlined} from "@ant-design/icons";
 import ProofAddModal from "./proofAddModal";
 
@@ -17,7 +16,6 @@ const ProofAll = props =>{
     const context = useContext(TestContext)
 
     const {createProof,findPipelineProof,pipelineProofList} = proofStore
-    const {updateConfigure} = ConfigStore
     const {setGitProofId,setDeployProofId} = context.configDataStore
     const {pipelineId} = context.pipelineStore
     const valueChange = context.valueChange

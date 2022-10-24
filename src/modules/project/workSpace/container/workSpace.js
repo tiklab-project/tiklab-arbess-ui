@@ -36,15 +36,13 @@ const WorkSpace = props =>{
             pipelineId:pipelineId,
             userId:userId
         }
-        if(pipelineId){
-            fileTree(params).then(res=>{
-                if(res.code===0){
-                    if(res.data){
-                        setIsFileList(true)
-                    }else setIsFileList(false)
-                }
-            })
-        }
+        pipelineId && fileTree(params).then(res=>{
+            if(res.code===0){
+                if(res.data){
+                    setIsFileList(true)
+                }else setIsFileList(false)
+            }
+        })
     },[fresh,pipelineId])
 
     return(

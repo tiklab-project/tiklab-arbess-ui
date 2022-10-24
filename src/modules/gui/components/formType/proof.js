@@ -3,7 +3,6 @@ import {message,Spin} from "antd";
 import {observer} from "mobx-react";
 import {LoadingOutlined,ApiOutlined} from "@ant-design/icons";
 import ProofAll from "./proofAll";
-import ConfigStore from "../../store/ConfigStore";
 import TestContext from "../common/testContext";
 
 const Proof = props =>{
@@ -13,7 +12,7 @@ const Proof = props =>{
     const context = useContext(TestContext)
 
     const {formInitialValues,codeType,gitProofId,deployProofId} = context.configDataStore
-    const {codeTestPass} = ConfigStore
+    const {codeTestPass} = context.configStore
 
     const [testStatus,setTestStatus] = useState(false)
 

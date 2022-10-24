@@ -5,7 +5,6 @@ import {observer} from "mobx-react";
 import CodeGiteeOrGithubModal from "./codeGiteeOrGithubModal";
 import githubStore from "../../store/githubStore";
 import giteeStore from "../../store/giteeStore";
-import ConfigStore from "../../store/ConfigStore";
 import TestContext from "../common/testContext";
 import ProofAll from "./proofAll";
 
@@ -15,12 +14,12 @@ const CodeGiteeOrGithub = props =>{
 
     const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
     const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
-    const {updateConfigure} = ConfigStore
 
     const context = useContext(TestContext)
 
     const {formInitialValues,codeType,gitProofId,setGitProofId,setFormInitialValues} = context.configDataStore
     const {pipelineId} = context.pipelineStore
+    const {updateConfigure} = context.configStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -115,11 +114,8 @@ const CodeGiteeOrGithub = props =>{
         const params = {
             pipelineId,
             type:codeType,
-            pipelineTest:obj,
-            pipelineCode:obj,
-            pipelineBuild:obj,
-            pipelineDeploy:obj,
-            messgae:"update"
+            values:obj,
+            message:"update"
         }
         setFormInitialValues({key:value})
         updateConfigure(params)

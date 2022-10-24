@@ -12,7 +12,7 @@
             border: 1px solid #1890ff;
             height: 32px;
             line-height: 32px;
-            margin-bottom: 12px;
+            margin-bottom: 24px;
             overflow: hidden;
             &-title{
                 padding-left: 5px   ;
@@ -111,15 +111,6 @@
                     height: 20px;
                 }
             }
-        }
-    }
-
-    .ant-form{
-        .ant-input{
-            border: 1px solid #cccccc;
-        }
-        .ant-select{
-            border: 1px solid #cccccc;
         }
     }
 }

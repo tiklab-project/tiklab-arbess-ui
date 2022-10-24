@@ -12,7 +12,7 @@ const Deploy = props =>{
 
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = configDataStore
 
-    const {fileAddress,getFile,profileAddress,updateConfigure,isAddType} = configStore
+    const {fileAddress,getFile,profileAddress,updateConfigure} = configStore
     const {pipelineId,pipelineName} = pipelineStore
 
     const [messageInfo,setMessageInfo] = useState("")
@@ -58,7 +58,7 @@ const Deploy = props =>{
             values:{deployType:value},
             message:"update"
         }
-        isAddType && updateConfigure(params)
+        updateConfigure(params)
     }
 
     return(

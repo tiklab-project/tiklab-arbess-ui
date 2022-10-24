@@ -8,7 +8,6 @@ const DeployDocker = props =>{
     return(
         <>
             <Inputs
-                {...props}
                 placeholder={" / 代表部署位置"}
                 label={"dockerfile文件地址"}
                 name={"startAddress"}
@@ -16,14 +15,12 @@ const DeployDocker = props =>{
                 addonbefore={"/"}
             />
             <Inputs
-                {...props}
                 placeholder={"请输入启动端口"}
                 label={"启动端口"}
                 name={"startPort"}
                 mode={deployType}
             />
             <Inputs
-                {...props}
                 placeholder={"请输入映射端口"}
                 label={"映射端口"}
                 name={"mappingPort"}

@@ -30,9 +30,6 @@
             .ant-form-item-label{
                 min-width: 130px;
                 text-align: left;
-                &>label:after {
-                    display: none;
-                }
                 .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
                     display: none;
                 }
@@ -87,9 +84,15 @@
                     font-weight: 700;
                 }
                 .desc-title{
-                    padding-left: 8px;
+                    padding: 0 8px;
                     font-size: 16px;
                     font-weight: 700;
+                    width: 80px;
+                    display: inline-block;
+                }
+                .desc-warn{
+                    font-size: 18px;
+                    color: red;
                 }
             }
             &-right{

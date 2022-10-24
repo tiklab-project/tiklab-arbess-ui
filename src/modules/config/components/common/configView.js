@@ -6,16 +6,17 @@ import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
+import {Empty,Form} from "antd";
 
 const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure} = configStore
+    const {findAllConfigure,setEnabledValid,enabledValid,isPlugin,setIsPlugin} = configStore
 
-    const {isPlugin,setIsPlugin,setIsCode,setData,formInitialValues,setFormInitialValues,
+    const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
-        setUnitShellBlock,setBuildShellBlock,
+        setUnitShellBlock,setBuildShellBlock,codeType,data,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
 
@@ -33,20 +34,19 @@ const ConfigView = props =>{
     // 表单初始化
     const newData = []
     useEffect(()=>{
-        if(pipelineId){
-            findAllConfigure(pipelineId).then(res=>{
-                const initialData = res.data
-                if(res.code===0){
-                    if(initialData === null || initialData.length===0){
-                        nonData()
-                    }
-                    else {
-                        nonForm(initialData)
-                        renderFormData(initialData)
-                    }
+        // 配置详情
+        pipelineId && findAllConfigure(pipelineId).then(res=>{
+            const initialData = res.data
+            if(res.code===0){
+                if(initialData === null || initialData.length===0){
+                    nonData()
                 }
-            })
-        }
+                else {
+                    nonForm(initialData)
+                    renderFormData(initialData)
+                }
+            }
+        })
     },[pipelineId])
 
     useEffect(()=>{
@@ -56,7 +56,6 @@ const ConfigView = props =>{
     const nonData = ()=>{
         setCodeType("")
         setData([])
-        setIsCode(false)
         setFormInitialValues({})
         setUnitShellBlock("")
         setVirShellBlock("")
@@ -87,7 +86,6 @@ const ConfigView = props =>{
             const data = initialData[i]
             if(data.type < 6){
                 renderCodeData(data)
-                setIsCode(true)
                 setCodeType(data.type)
             }
             else if(data.type > 10 && data.type < 20){
@@ -193,23 +191,41 @@ const ConfigView = props =>{
                 formInitialValues.codeBranch = null
                 formInitialValues.gitproofName = null
                 formInitialValues.proofName = null
-                setIsCode(false)
                 setCodeType("")
                 setGitProofId("")
         }
+        setEnabledValid(!enabledValid)
         setFormInitialValues({...formInitialValues})
     }
 
+    const renderFormView = () => {
+        if(codeType==="" && data&&data.length===0 ){
+            return <div style={{paddingTop:55}}>
+                        <Empty
+                            image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+                            description="当前没有配置"
+                        />
+                    </div>
+        }return <>
+            <FormView
+                del={del}
+                pipelineId={pipelineId}
+            />
+        </>
+    }
+    
     return view==="forms" ?
-        <FormView
-            del={del}
-            pipelineId={pipelineId}
-        />
+        // <FormView
+        //     del={del}
+        //     pipelineId={pipelineId}
+        // />
+        renderFormView()
         :
         <>
             <Gui
                 {...props}
                 del={del}
+                configStore={configStore}
                 configDataStore={configDataStore}
                 pipelineStore={pipelineStore}
             />

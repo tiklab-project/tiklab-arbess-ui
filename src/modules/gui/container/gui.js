@@ -7,20 +7,17 @@ import TestContext from "../components/common/testContext";
 import Code from "../components/common/code";
 import NewStage from "../components/common/newStage";
 import FormDetailsDrawer from "../components/common/formDetailsDrawer";
-import ConfigStore from "../store/configStore";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 // enableAxiosPlugin()
 
 const Gui = props =>{
 
-    const {pipelineStore,configDataStore,del} = props
+    const {pipelineStore,configDataStore,del,configStore} = props
 
     const {pipelineId} = pipelineStore
-    const {formInitialValues,setFormInitialValues,data,codeType,setCodeType,setData,
-        setIsCode,isCode,
-    } = configDataStore
-    const {updateConfigure} = ConfigStore
+    const {formInitialValues,setFormInitialValues,data,codeType,setCodeType,setData} = configDataStore
+    const {updateConfigure,configValid,enabledValid,validType} = configStore
 
     const [form] = Form.useForm()
 
@@ -31,6 +28,20 @@ const Gui = props =>{
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues,pipelineId])
+
+    useEffect(()=>{
+        // 必填配置是否完善
+        pipelineId && configValid(pipelineId).then(res=>{
+            if(res.code===0){
+                const keys =res.data && Object.keys(res.data)
+                form.validateFields(keys)
+                keys && keys.map(item=>{
+                    const zz = document.getElementById(item)
+                    zz && zz.classList.add("formView-validateFields")
+                })
+            }
+        })
+    },[pipelineId,enabledValid])
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
@@ -130,7 +141,7 @@ const Gui = props =>{
                     })
                     setNewStage(taskType)
                     setTaskFormDrawer(true)
-                }else setIsCode(true)
+                }
                 break
             case "updateType":
                 setCodeType(taskType)
@@ -153,7 +164,7 @@ const Gui = props =>{
 
     return (
         <TestContext.Provider
-            value={{pipelineStore,configDataStore,del,valueChange,changType,addConfig}}
+            value={{pipelineStore,configDataStore,configStore,del,valueChange,changType,addConfig}}
         >
             <div className="guiView">
                 <Form
@@ -162,20 +173,21 @@ const Gui = props =>{
                     layout="vertical"
                     autoComplete="off"
                     onValuesChange={onValuesChange}
-                    initialValues={{deployType:1}}
+                    initialValues={{deployType:0}}
                 >
                     <div className="guiView-content">
                         <Code
+                            validType={validType}
                             setNewStage={setNewStage}
                             setTaskFormDrawer={setTaskFormDrawer}
                             codeType={codeType}
-                            isCode={isCode}
                             formInitialValues={formInitialValues}
                         />
                         <div className="guiView-main">
                             <div className="guiView-main_container">
                                 <div className="guiView-main_group">
                                     <NewStage
+                                        validType={validType}
                                         data={data}
                                         index={index}
                                         setIndex={setIndex}

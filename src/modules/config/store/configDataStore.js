@@ -2,9 +2,6 @@ import {action,observable} from "mobx";
 
 export class ConfigDataStore {
 
-    @observable isPlugin = false // 是否存在插件
-    @observable isCode = false // 是否有源码管理
-
     @observable formInitialValues = {} //表单初始化
     @observable data = [] // 新阶段、新任务需要渲染的值
 
@@ -22,16 +19,6 @@ export class ConfigDataStore {
     @observable deployShellBlock = ""
 
     @observable deployOrderShellBlock = ""
-
-    @action
-    setIsPlugin = value =>{
-        this.isPlugin = value
-    }
-
-    @action
-    setIsCode = value =>{
-        this.isCode = value
-    }
 
     @action
     setCodeType = value =>{

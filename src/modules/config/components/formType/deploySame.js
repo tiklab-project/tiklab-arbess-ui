@@ -13,7 +13,6 @@ const DeploySame = props =>{
     return (
         <>
             <Inputs
-                {...props}
                 placeholder={"请输入该文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"应用源文件地址"}
                 name={"sourceAddress"}
@@ -22,14 +21,12 @@ const DeploySame = props =>{
             />
             <div className="deployTargetAddress">{messageInfo}</div>
             <Inputs
-                {...props}
                 placeholder={"输入Ip地址"}
                 label={"Ip地址"}
                 name={"sshIp"}
                 mode={deployType}
             />
             <Inputs
-                {...props}
                 placeholder={"请输入端口号"}
                 label={"端口号"}
                 name={"sshPort"}
@@ -43,7 +40,6 @@ const DeploySame = props =>{
             />
 
             <Inputs
-                {...props}
                 placeholder={"请输入部署位置"}
                 label={"部署位置"}
                 name={"deployAddress"}

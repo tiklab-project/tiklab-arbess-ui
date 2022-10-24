@@ -1,77 +1,138 @@
-import React, {useEffect,useState} from "react";
-import {Modal,message,Button,Form} from "antd";
+import React,{useState} from "react";
+import {Modal,message} from "antd";
 import {inject,observer} from "mobx-react";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 import "./addModal.scss";
 import AddModalStepOne from "./addModalStepOne";
-import AddModalStepTwo from "./addModalStepTwo";
+
+const lis=[
+    {
+        id:1,
+        title:"源码",
+        icon:"suyuanmabiaoqian",
+        desc:[
+            {
+                type:1,
+                tel:"通用Git",
+                icon:"git"
+            },
+            {
+                type:2,
+                tel:"Gitee",
+                icon:"gitee"
+            },
+            {
+                type:3,
+                tel: "Github",
+                icon:"github"
+            },
+            {
+                type:4,
+                tel: "Gitlab",
+                icon:"gitlab"
+            },
+            {
+                type: 5,
+                tel:"svn",
+                icon:"-_ssh"
+            }
+        ]
+    },
+    {
+        id:2,
+        title:"测试",
+        desc:[
+            {
+                type: 11,
+                tel:"单元测试",
+                icon:"ceshi"
+            }
+        ]
+    },
+    {
+        id:3,
+        title: "构建",
+        desc:[
+            {
+
+                type: 21,
+                tel:"maven",
+                icon:"quanxian"
+            },
+            {
+                type: 22,
+                tel:"node",
+                icon:"nodejs"
+            }
+        ]
+    },
+    {
+        id:4,
+        title: "部署",
+        desc:[
+            {
+                type:31 ,
+                tel:"虚拟机",
+                icon:"xuniji"
+            },
+            {
+                type:32 ,
+                tel:"docker",
+                icon:"docker"
+            },
+        ]
+    }
+]
 
 const AddModal = props =>{
 
-    const {initType,setInitType,lis,configDataStore,configStore,pipelineStore,setVisible,visible} = props
+    const {configDataStore,configStore,pipelineStore,setAddConfigVisible,addConfigVisible} = props
 
-    const {setCodeType,setBuildType,setDeployType,data,setData,setIsCode,
-        formInitialValues,setFormInitialValues,unitShellBlock,
-        deployShellBlock,deployOrderShellBlock,virShellBlock,buildShellBlock,
-    } = configDataStore
+    const {setCodeType,setBuildType,setDeployType,data,setData} = configDataStore
 
-    const {updateConfigure,setIsAddType} = configStore
+    const {updateConfigure,setEnabledValid,enabledValid} = configStore
     const {pipelineId} = pipelineStore
-    const [form] = Form.useForm()
 
-    const [current,setCurrent] = useState(0)
-    const [type,setType] = useState(1)
-
-    useEffect(()=>{
-        if(visible){
-            setIsAddType(false)
-            current===1 && form.resetFields()
-        }
-        return ()=>{
-            setIsAddType(true)
-            setCurrent(0)
-        }
-    },[visible])
-    
-    const hit = (initType,values) => {
-        if( initType>10 && initType<20 && values.testOrder===undefined){
-            values.testOrder=unitShellBlock
-            setIsCode(true)
-        }
-        else if(initType>20 && initType<30 && values.buildOrder===undefined){
-            values.buildOrder=buildShellBlock
-        }
-        else if(initType>30 && initType<40 && values.deployType){
-            switch (values.deployType) {
-                case 1:
-                    values.startShell=virShellBlock
-                    values.deployOrder=deployOrderShellBlock
-                    break
-                case 0:
-                    values.startShell=deployShellBlock
-            }
-        }
-    }
+    const [type,setType] = useState(1) // 左侧
+    const [initType,setInitType] = useState(1)  // 右侧
     
     // 保存
-    const onOk = values => {
-        hit(initType,values)
+    const onOk = () => {
         const params = {
             pipeline:{pipelineId},
             message:"create",
             taskType:initType,
-            values,
         }
-        updateConfigure(params,values).then(res=>{
+        updateConfigure(params).then(res=>{
             if(res.code===0){
-                addData(initType,values)
+                add(initType)
+                setEnabledValid(!enabledValid)
+            }
+            if(res.code===50001){
+                message.info(res.msg)
             }
         })
-        setVisible(false)
+        setAddConfigVisible(false)
+    }
+
+
+    const add = type =>{
+        if(type>0 && type<10){
+            setCodeType(type)
+        }else if(type>10 && type<20){
+            addData(type)
+        }
+        else if(type>20 && type<30){
+            setBuildType(type)
+            addData(type)
+        }else if(type>30 && type<40){
+            setDeployType(type)
+            addData(type)
+        }
     }
 
     const newData = [...data]
-    const addData = (type,values) =>{
+    const addData = type =>{
         if(type>10){
             newData.push({
                 dataId:type,
@@ -79,104 +140,28 @@ const AddModal = props =>{
             })
             setData([...newData])
         }
-        Object.assign(formInitialValues,values)
-        setFormInitialValues({...formInitialValues})
     }
-
-    const add = type =>{
-        if(type>0 && type<10){
-            setCodeType(type)
-        }
-        if(type>20 && type<30){
-            setBuildType(type)
-        }else if(type>30 && type<40){
-            setDeployType(type)
-        }
-    }
-
-    // 判断类型是否存在
-    const isExist = () => {
-        const params = {
-            pipeline:{pipelineId},
-            message:"judge",
-            taskType:initType,
-        }
-        updateConfigure(params).then(res=>{
-            if(res.code===50001){
-                message.info(res.msg)
-            }if(res.code===0){
-                setCurrent(current + 1)
-            }
-        })
-    }
-
-    const previous = () => {
-        setCurrent(current - 1)
-    }
-
-    // 表单底部内容
-    const modalFooter = (
-        <div className="steps-action">
-            {current === 0 && (
-                <Button onClick={()=>setVisible(false)}>
-                    取消
-                </Button>
-            )}
-            {current > 0 && (
-                <Button  onClick={()=>previous()}>
-                    上一步
-                </Button>
-            )}
-            {current < 1 && (
-                <Button type="primary" onClick={()=> isExist()}>
-                    下一步
-                </Button>
-            )}
-            {current === 1 && (
-                <Button type="primary"
-                        onClick={() => {
-                            form
-                                .validateFields()
-                                .then((values) => {
-                                    onOk(values)
-                                })
-                        }}
-                >
-                    保存
-                </Button>
-            )}
-        </div>
-    )
 
     return(
         <Modal
-            visible={visible}
-            onCancel={()=>setVisible(false)}
-            footer={modalFooter}
+            visible={addConfigVisible}
+            onCancel={()=>setAddConfigVisible(false)}
             closable={false}
+            onOk={()=>onOk()}
             width={800}
         >
             <ModalTitle
-                setVisible={setVisible}
+                setVisible={setAddConfigVisible}
                 title={"选择任务组"}
             />
             <div className="codeOrNewStage">
-                {
-                    current===1?
-                        <AddModalStepTwo
-                            initType={initType}
-                            form={form}
-                        />
-                        :
-                       <AddModalStepOne
-                           add={add}
-                           lis={lis}
-                           type={type}
-                           setType={setType}
-                           initType={initType}
-                           setInitType={setInitType}
-                       />
-                }
+                <AddModalStepOne
+                    lis={lis}
+                    type={type}
+                    setType={setType}
+                    initType={initType}
+                    setInitType={setInitType}
+                />
             </div>
         </Modal>
     )

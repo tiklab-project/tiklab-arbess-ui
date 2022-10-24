@@ -6,13 +6,12 @@ import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
 import TestContext from "../common/testContext";
-import ConfigStore from "../../store/ConfigStore";
 
 const Deploy = props =>{
 
     const context = useContext(TestContext)
-    const {fileAddress,getFile,profileAddress} = ConfigStore
 
+    const {fileAddress,getFile,profileAddress} = context.configStore
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = context.configDataStore
     const {pipelineId, pipelineName} = context.pipelineStore
     const valueChange = context.valueChange
@@ -68,7 +67,6 @@ const Deploy = props =>{
                     getFieldValue("deployType") === 0 ? (
                         <>
                             <DeploySame
-                                {...props}
                                 profileaddress={profileAddress+pipelineName}
                                 messageinfo={messageInfo}
                                 configdatastore={context.configDataStore}
@@ -76,12 +74,10 @@ const Deploy = props =>{
                             {
                                 deployType==31 ?
                                 <DeployVir
-                                    {...props}
-                                    configdatastore={context.configDataStore}
+                                    configDatastore={context.configDataStore}
                                 />
                                 :
                                 <DeployDocker
-                                    {...props}
                                     deployType={deployType}
                                 />
                             }

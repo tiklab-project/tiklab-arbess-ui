@@ -7,7 +7,7 @@ const Inputs = props =>{
     const {placeholder,mode,label,name,addonBefore,configStore,pipelineStore,configDataStore} = props
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure,isAddType} = configStore
+    const {updateConfigure,setEnabledValid,enabledValid} = configStore
     const {setFormInitialValues,codeType} = configDataStore
 
     const onchange = e  => {
@@ -50,8 +50,10 @@ const Inputs = props =>{
             values:obj,
             message:"update"
         }
-        if(validation(codeType,name,e.target.value) && isAddType){
+        if(validation(codeType,name,e.target.value)){
+            document.getElementById(name).classList.remove("formView-validateFields")
             updateConfigure(params)
+            setEnabledValid(!enabledValid)
         }
     }
 

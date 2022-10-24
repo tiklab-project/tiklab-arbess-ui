@@ -13,7 +13,6 @@ const CodeSvn = props =>{
     return(
         <>
             <Inputs
-                {...props}
                 placeholder={"请输入svn地址"}
                 label={"svn地址"}
                 name={"codeName"}

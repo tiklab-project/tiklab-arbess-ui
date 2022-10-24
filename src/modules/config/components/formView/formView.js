@@ -10,15 +10,28 @@ const formView = props =>{
 
     const {del,configDataStore,pipelineId,configStore} = props
 
+    const {data,setData,codeType,formInitialValues,setFormInitialValues} = configDataStore
+    const {updateConfigure,configValid,enabledValid,validType} = configStore
+
     const [form] = Form.useForm()
-
-    const {data,setData,isCode,codeType,formInitialValues,setFormInitialValues} = configDataStore
-
-    const {updateConfigure,isAddType} = configStore
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
     },[formInitialValues,pipelineId])
+
+    useEffect(()=>{
+        // 必填配置是否完善
+        pipelineId && configValid(pipelineId).then(res=>{
+            if(res.code===0){
+                const keys =res.data && Object.keys(res.data)
+                form.validateFields(keys)
+                keys && keys.map(item=>{
+                    const zz = document.getElementById(item)
+                    zz && zz.classList.add("formView-validateFields")
+                })
+            }
+        })
+    },[pipelineId,enabledValid])
 
     const onValuesChange = value =>{
         Object.assign(formInitialValues,value)
@@ -34,22 +47,19 @@ const formView = props =>{
                     autoComplete="off"
                     scrollToFirstError={true}
                     onValuesChange={onValuesChange}
-                    validateTrigger={["onBlur"]}
                     initialValues={{deployType:1}}
                 >
                     <Code
-                        {...props}
+                        validType={validType}
                         del={del}
                         data={data}
                         setData={setData}
-                        iscode={isCode}
-                        isAddType={isAddType}
                         codeType={codeType}
                         pipelineId={pipelineId}
                         updateConfigure={updateConfigure}
                     />
                     <NewStage
-                        {...props}
+                        validType={validType}
                         del={del}
                         data={data}
                         setData={setData}

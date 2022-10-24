@@ -19,7 +19,7 @@ const MirrorContent = props =>{
     const mirrorRefs = useRef(null)
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure,isAddType} = configStore
+    const {updateConfigure} = configStore
 
     const onBlur = () =>{
         const obj = {}
@@ -31,14 +31,14 @@ const MirrorContent = props =>{
             message:"update"
         }
         setShellBlock(mirrorRefs.current.editor.getValue())
-        isAddType && updateConfigure(params).then(res=>{
+        updateConfigure(params).then(res=>{
             if(res.code===50001){
                 message.info(res.msg)
             }
         })
     }
 
-    return  <div className={`${isAddType?"formViewCodeMirror":"codeNewStage"}`}>
+    return  <div className={"formViewCodeMirror"}>
         <CodeMirror
             value={shellBlock}//内容
             ref={mirrorRefs}

@@ -1,12 +1,18 @@
 .pipelineTable{
-    &-actions,&-state{
+    &-pipelineName{
+        color: #1890ff;
         cursor: pointer;
-        .actions-se{
-          font-size: 23px;
-        }
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        overflow: hidden;
+        width: 160px;
     }
     &-state{
         cursor: pointer;
+        .actions-se{
+            font-size: 23px;
+        }
         &-running{
             padding: 10px;
         }
@@ -26,38 +32,4 @@
             }
         }
     }
-    &-actions{
-        cursor: pointer;
-        &-all{
-            display: flex;
-            justify-content: left;
-            flex-direction: row;
-        }
-        &-menu{
-            background: #fff;
-            width: 160px;
-            height: 85px;
-            padding: 10px;
-            border-radius: 3px;
-            border: 1px solid #cccccc;
-            .actions-menu{
-                &-content{
-                    padding: 5px;
-                    cursor: pointer;
-                    &:hover{
-                        background: #f4f4f4;
-                        border-radius: 4px;
-                    }
-                }
-            }
-        }
-        .actions-del{
-            margin-top:10px;
-            cursor: pointer;
-            &:hover{
-                color: #ff0000;
-            }
-        }
-    }
-
 }

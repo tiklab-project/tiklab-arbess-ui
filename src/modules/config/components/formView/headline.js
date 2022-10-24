@@ -6,7 +6,7 @@ import Forms from "../formType/forms";
 
 const Headline = props =>{
 
-    const {type,del,updateConfigure,data,setData,pipelineId,setChangeSortVisible} = props
+    const {type,del,updateConfigure,data,setData,pipelineId,setChangeSortVisible,validType} = props
 
     const delType = type =>{
         Modal.confirm({
@@ -68,6 +68,14 @@ const Headline = props =>{
                     </span>
                  </>
     }
+    
+    const renderValidType = () => {
+        return validType && validType.map(item=>{
+            return  item==type && <span key={item} className="desc-warn">
+                <ExclamationCircleOutlined />
+            </span>
+        })
+    }
 
     return(
         <>
@@ -75,23 +83,23 @@ const Headline = props =>{
                 <div className="formView-wrapper-Headline">
                     <div className="desc-left">
                         {titleType(type)}
+                        {renderValidType()}
                     </div>
                     <div className="desc-right">
                         {
-                            setChangeSortVisible ?
+                            setChangeSortVisible &&
                                 <span className="desc-changSort"
                                       onClick={()=>setChangeSortVisible(true)}
                                 >
                                     <SwapOutlined />
                                     更改顺序
                                 </span>
-                                :null
                         }
                         <span className="desc-delete"
                               onClick={()=>delType(type)}
                         >
                             <DeleteOutlined />
-                        删除
+                            删除
                         </span>
                     </div>
                 </div>

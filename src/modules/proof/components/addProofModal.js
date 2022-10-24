@@ -63,13 +63,12 @@ const AddProofModal = props =>{
                         onOk(values)
                     })
             }}
-            bodyStyle={{maxHeight:750,"overflow":"auto"}}
         >
             <ModalTitle
                 title={"添加凭证"}
                 setVisible={setVisible}
             />
-           <div style={{height:500,overflow:"auto"}}>
+           <div style={{height:600,overflow:"auto"}}>
                <Form form={form}
                      layout="vertical"
                      name="userForm"
@@ -117,7 +116,14 @@ const AddProofModal = props =>{
                    <Form.Item
                        label="凭证名称"
                        name="proofName"
-                       rules={[{required:true, message:"请输入凭证名称"}]}
+                       rules={[
+                           {required:true, message:"请输入凭证名称"},
+                           {
+                               type:"string",
+                               max: 10,
+                               message:"流水线名称过长"
+                           },
+                       ]}
                    >
                        <Input placeholder="名称"/>
                    </Form.Item>
