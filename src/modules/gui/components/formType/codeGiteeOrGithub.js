@@ -136,6 +136,7 @@ const CodeGiteeOrGithub = props =>{
             <Form.Item
                 label="仓库"
                 name={"codeName"}
+                rules={[{required:true, message:"请选择仓库"}]}
             >
                 <Select
                     onChange={changeGitStoreHouse}

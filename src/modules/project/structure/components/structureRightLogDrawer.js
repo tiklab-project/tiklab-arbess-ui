@@ -1,7 +1,8 @@
 import React from "react";
-import {Drawer,Button} from "antd";
-import {CloseOutlined} from "@ant-design/icons";
+import {Drawer} from "antd";
+import ModalTitle from "../../../../common/modalTitle/modalTitle";
 import ConfigName from "../../../../common/configName/configName";
+import TitleType from "../../../../common/configName/titleType";
 
 const StructureRightLogDrawer = props =>{
 
@@ -13,24 +14,22 @@ const StructureRightLogDrawer = props =>{
             visible={visible}
             onClose={()=>setVisible(false)}
             closable={false}
-            contentWrapperStyle={{width:600,marginTop:55}}
-            bodyStyle={{padding:0}}
+            style={{marginTop:55}}
+            contentWrapperStyle={{width:600}}
         >
             <div className="drawers">
-                <div className="drawers-head">
-                    <div>
-                        {drawerContent && drawerContent.taskAlias}
-                        &nbsp;--&nbsp;
-                        <ConfigName type={drawerContent.taskType}/>
-                    </div>
-                    <div>
-                        <Button type="text" onClick={()=>setVisible(false)}>
-                            <CloseOutlined />
-                        </Button>
-                    </div>
-                </div>
+                <ModalTitle
+                    title={
+                            <>
+                                <TitleType type={drawerContent.taskType}/>
+                                &nbsp;--&nbsp;
+                                <ConfigName type={drawerContent.taskType}/>
+                            </>
+                    }
+                    setVisible={setVisible}
+                />
                 <div className="drawers-body">
-                    <div className="log" style={{padding:20}}>
+                    <div className="log">
                         <div className="log-content" style={{whiteSpace:"pre-wrap"}}>
                             {drawerContent && drawerContent.runLog}
                         </div>

@@ -91,7 +91,7 @@ const ConfigChangeView = props =>{
                     }
                 </div>
                 <div className="changeView-view">
-                    <div className={`changeView-view-li ${view==="forms" ? "changeView-view-inner":""}`}
+                    <div className={`changeView-view-li ${view==="forms" ? "changeView-view-inner":null}`}
                          onClick={()=>changeView("forms")}
                     >
                         <div className="changeView-view-item" >
@@ -100,7 +100,7 @@ const ConfigChangeView = props =>{
                             表单视图
                         </div>
                     </div>
-                    {/*<div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}*/}
+                    {/*<div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
                     {/*     onClick={()=>changeView("gui")}*/}
                     {/*>*/}
                     {/*    <div className="changeView-view-item">*/}
@@ -111,7 +111,7 @@ const ConfigChangeView = props =>{
                     {/*</div>*/}
                     {
                         !getVersionInfo().expired && isPlugin ?
-                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}
+                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}
                                  onClick={()=>changeView("gui")}
                             >
                                 <div className="changeView-view-item">

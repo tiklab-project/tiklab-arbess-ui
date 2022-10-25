@@ -52,7 +52,7 @@ const Config = props =>{
         }
     }, [])
 
-    if(visible){return  null}
+    // if(visible){return  null}
 
     return (
         <div className="config">

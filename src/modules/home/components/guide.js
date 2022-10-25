@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 
 const Guide = props =>{
 
-    const {title,type} = props
+    const {title,type,setVisible} = props
 
     const goDetails = type =>{
         switch (type) {
@@ -14,7 +14,7 @@ const Guide = props =>{
                 props.history.push("/index/system/myTodoTask")
                 break
             case "tidings":
-                props.history.push("/index/userMessage")
+                setVisible(true)
         }
     }
 

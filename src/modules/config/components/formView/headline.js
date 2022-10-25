@@ -3,6 +3,7 @@ import {DeleteOutlined,ExclamationCircleOutlined,SwapOutlined} from "@ant-design
 import {Modal,message} from "antd";
 import Switch from "./switch";
 import Forms from "../formType/forms";
+import TitleType from "../../../../common/configName/titleType";
 
 const Headline = props =>{
 
@@ -83,7 +84,7 @@ const Headline = props =>{
             <div className="formView-wrapper">
                 <div className="formView-wrapper-Headline">
                     <div className="desc-left">
-                        {titleType(type)}
+                        <TitleType type={type}/>
                         {renderValidType()}
                     </div>
                     <div className="desc-right">

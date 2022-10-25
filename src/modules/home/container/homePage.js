@@ -13,7 +13,7 @@ import {inject,observer} from "mobx-react";
 const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
-    const {findAllOpen,pipelineNearList,runState,findLog,dynamicList,findTask,taskList,findMessage,messageList} = homePageStore
+    const {findAllOpen,pipelineNearList,setVisible,findLog,dynamicList,findTask,taskList,findHomePageMessage,messageList} = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
@@ -23,6 +23,14 @@ const HomePage = props =>{
             userId:userId,
             page:1,
             pageSize:10,
+        }
+
+        const param = {
+            pageParam:{
+                pageSize:6,
+                currentPage:1
+            },
+            receiver:userId, // userId
         }
 
         // 所有流水线
@@ -40,7 +48,7 @@ const HomePage = props =>{
         findTask(userId)
 
         // 我的消息
-        findMessage()
+        findHomePageMessage(param)
 
         // 折线图，近期构建状态
         // runState(userId).then(res=>{
@@ -145,6 +153,7 @@ const HomePage = props =>{
                     />
                     <Tidings
                         {...props}
+                        setVisible={setVisible}
                         messageList={messageList}
                     />
                 </div>

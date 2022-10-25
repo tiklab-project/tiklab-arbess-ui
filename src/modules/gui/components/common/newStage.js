@@ -80,9 +80,12 @@ const NewStage = props =>{
                         <div className="newStages">
                             <div className="newStages-step">
                                 <div className="newStages-content"  >
-                                    <div className="newStages-task">
+                                    <div
+                                        className="newStages-task"
+                                        onClick={()=>showStage(item)}
+                                    >
                                         <div className={`newStages-job ${valid(item.dataType)?"job-name":""}`}>
-                                            <div className="newStages-job_text" onClick={()=>showStage(item)}>
+                                            <div className="newStages-job_text">
                                                 <NameType type={item.dataType}/>
                                                 {valid(item.dataType) &&
                                                     <span key={item} className="newStages-job-warn">

@@ -1,8 +1,7 @@
 import React from "react";
 import {message,Tooltip} from "antd";
 import {getUser} from "tiklab-core-ui";
-import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
-    FieldStringOutlined,FieldBinaryOutlined,FieldNumberOutlined,FunctionOutlined
+import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
@@ -66,18 +65,10 @@ const PipelineTable = props =>{
         }
     }
 
-    // % 取余渲染图标
-    const renderIcon = index => {
-        if(index % 2 === 0){
-            return <FieldStringOutlined />
-        }
-        else if(index % 3 === 0){
-            return <FieldBinaryOutlined />
-        }
-        else if(index % 3 === 0 && index % 2 ===0){
-            return <FieldNumberOutlined />
-        }
-        else return <FunctionOutlined />
+    const renderIcon = text => {
+        let t = text.substring(0,1).toUpperCase()
+        return   <span className="pipelineTable-pipelineName-icon">{t}</span>
+
     }
 
     const columns = [
@@ -86,14 +77,19 @@ const PipelineTable = props =>{
             dataIndex: "pipelineName",
             key: "pipelineName",
             width:"200px",
-            render:(text,record,index)=>{
+            render:(text,record)=>{
                 return(
-                    <span onClick={()=>goPipelineTask(text,record)}
-                          className="pipelineTable-pipelineName"
-                          style={{color:"#1890ff",cursor:"pointer"}}
-                    >
-                        {renderIcon(index+1)}
-                        {text}
+                    <span className="pipelineTable-pipelineName">
+                        <span onClick={()=>goPipelineTask(text,record)}
+                              className="pipelineTable-pipelineName-task"
+                        >
+                            <span className="pipelineTable-pipelineName-icon">
+                                {text.substring(0,1).toUpperCase()}
+                            </span>
+                            <span className="pipelineTable-pipelineName-name">
+                                {text}
+                            </span>
+                        </span>
                     </span>
                 )
             }
@@ -184,13 +180,13 @@ const PipelineTable = props =>{
         },
     ]
 
-    return  <>
+    return  <div className="pipelineTable">
                 <Tables
                     columns={columns}
                     dataSource={pipelineList}
                     rowKey={record=>record.pipelineId}
                 />
-            </>
+            </div>
 }
 
 export default inject("structureStore")(observer(PipelineTable))

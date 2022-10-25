@@ -91,7 +91,7 @@ const ProjectAside = props =>{
     const pipelineMenu = item =>{
         return  <div onClick={()=>{changePipeline(item)}}
                      key={item.pipelineId}
-                     className={`opt-content-group_item ${item.pipelineId===pipelineId?"opt-content-active":""}`}
+                     className={`opt-content-group_item ${item.pipelineId===pipelineId?"opt-content-active":null}`}
                 >
                     <span className="opt-content-group-icon">
                         <TagOutlined />
@@ -122,7 +122,7 @@ const ProjectAside = props =>{
     const renderTaskRouter = item => {
         return   <PrivilegeButton code={item.enCode} key={item.key} {...props}>
                     <li key={item.key}
-                        className={`aside_content aside_item ${nav===item.to ? "aside_active": ""}`}
+                        className={`aside_content aside_item ${nav===item.to ? "aside_active":null}`}
                         onClick={()=>changeNav(item.to)}
                     >
                         <div className="aside_content_icon">
@@ -193,7 +193,7 @@ const ProjectAside = props =>{
                     <Dropdown overlay={settingMenu}>
                         <li
                             onClick={(e)=>e.preventDefault()}
-                            className={`aside_content aside_item ${path.indexOf(`/index/task/${pipelineId}/assembly`) === 0 ? "aside_active": ""}`}
+                            className={`aside_content aside_item ${path.indexOf(`/index/task/${pipelineId}/assembly`) === 0 ? "aside_active":null}`}
                         >
                             <div className="aside_content_icon">
                                 <svg className="icon" aria-hidden="true">

@@ -1,4 +1,4 @@
-import React,{useRef} from "react";
+import React,{useRef,useState} from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
@@ -12,15 +12,24 @@ import "codemirror/addon/display/placeholder.js";
 import {message} from "antd";
 
 import "./mirror.scss";
+import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined} from "@ant-design/icons";
 
 const MirrorContent = props =>{
 
     const {shellBlock,setShellBlock,type,name,pipelineStore,configStore,placeholder} = props
+
     const mirrorRefs = useRef(null)
 
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
 
+    const [isLoading,setIsLoading] = useState(1)
+
+    
+    const onFocus = () => {
+        setIsLoading(2)
+    }
+    
     const onBlur = () =>{
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
@@ -32,13 +41,30 @@ const MirrorContent = props =>{
         }
         setShellBlock(mirrorRefs.current.editor.getValue())
         updateConfigure(params).then(res=>{
-            if(res.code===50001){
+            if(res.code===0){
+                setIsLoading(3)
+            }else {
+                setIsLoading(4)
                 message.info(res.msg)
             }
         })
+        setTimeout(()=>setIsLoading(1),1000)
     }
 
-    return  <div className={"formViewCodeMirror"}>
+    const suffix = () =>{
+        switch (isLoading) {
+            case 1:
+                return <span/>
+            case 2:
+                return <LoadingOutlined style={{color:"#1890ff"}}/>
+            case 3:
+                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
+            case 4:
+                return <CloseCircleOutlined style={{color:"red"}}/>
+        }
+    }
+
+    return  <div className={`${isLoading===2 ?"codeNewStage":"formViewCodeMirror"}`}>
         <CodeMirror
             value={shellBlock}//内容
             ref={mirrorRefs}
@@ -47,8 +73,10 @@ const MirrorContent = props =>{
                 lineNumbers: false, // 是否显示行号
                 // placeholder: placeholder
             }}
-            onBlur={()=>onBlur()}
+            onFocus={onFocus}
+            onBlur={onBlur}
         />
+        <div className="formViewCodeMirror-suffix">{suffix()}</div>
     </div>
 }
 

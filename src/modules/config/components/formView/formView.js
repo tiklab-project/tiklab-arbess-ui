@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import  "./formView.scss";
-import {Form} from "antd";
+import {Empty,Form} from "antd";
 import NewStage from "./newStage";
 import Code from "./code";
 import {inject,observer} from "mobx-react";

@@ -9,7 +9,7 @@ const System = props =>{
     return(
         <div className="system">
             <SystemAside {...props} />
-            <div className="system-background" style={{marginLeft:200}}>
+            <div className="system-content">
                 {renderRoutes(route.routes)}
             </div>
         </div>

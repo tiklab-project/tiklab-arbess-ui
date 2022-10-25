@@ -5,6 +5,8 @@ import {inject,observer} from "mobx-react";
 import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
+import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined} from "@ant-design/icons";
+import "./inputs.scss";
 
 const Deploy = props =>{
 
@@ -15,6 +17,8 @@ const Deploy = props =>{
     const {fileAddress,getFile,profileAddress,updateConfigure} = configStore
     const {pipelineId,pipelineName} = pipelineStore
 
+    const [bordered,setBordered] = useState(false)
+    const [isLoading,setIsLoading] = useState(1)
     const [messageInfo,setMessageInfo] = useState("")
 
     useEffect(()=>{
@@ -58,17 +62,59 @@ const Deploy = props =>{
             values:{deployType:value},
             message:"update"
         }
-        updateConfigure(params)
+        updateConfigure(params).then(res=>{
+            res.code===0 && setIsLoading(3)
+        })
+
+        setTimeout(()=>setIsLoading(1),1000)
+
+    }
+
+    const onClick = () =>{
+        setIsLoading(2)
+    }
+
+    const onFocus = () => {
+        setBordered(true)
+    }
+
+    const onBlur = () => {
+        setBordered(false)
+        setIsLoading(1)
+    }
+
+    const suffix = () =>{
+        switch (isLoading) {
+            case 1:
+                return <span/>
+            case 2:
+                return <LoadingOutlined style={{color:"#1890ff"}}/>
+            case 3:
+                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
+            case 4:
+                return <CloseCircleOutlined style={{color:"red"}}/>
+        }
     }
 
     return(
         <>
-            <Form.Item name={"deployType"} label="部署类型" className="noRequired">
-                <Select bordered={false} onChange={changDeployType}>
-                    <Select.Option value={0}>结构化部署</Select.Option>
-                    <Select.Option value={1}>自定义部署</Select.Option>
-                </Select>
-            </Form.Item>
+            <div className="formView-inputs">
+                <Form.Item name={"deployType"} label="部署类型" className="noRequired">
+                    <Select
+                        bordered={bordered}
+                        onClick={onClick}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        onChange={changDeployType}
+                    >
+                        <Select.Option value={0}>结构化部署</Select.Option>
+                        <Select.Option value={1}>自定义部署</Select.Option>
+                    </Select>
+                </Form.Item>
+                <div className="formView-inputs-suffix">
+                    {suffix(isLoading)}
+                </div>
+            </div>
             <Form.Item
                 shouldUpdate={(prevValues,currentValues)=> prevValues.deployType!==currentValues.deployType}
             >

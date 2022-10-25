@@ -37,7 +37,7 @@ const AddModalStepOne = props =>{
     const renderLeftLis = item =>{
         return  <div
                     key={item.id}
-                    className={`item ${type===item.id? "item-select":""}`}
+                    className={`item ${type===item.id? "item-select":null}`}
                     onClick={()=>changeAnchor(item.id)}
                 >
                     <div className="item-title">{item.title}</div>
@@ -53,7 +53,7 @@ const AddModalStepOne = props =>{
                 {
                     group.desc.map(item=>{
                         return <div onClick={()=>handleClick(item)}
-                                    className={`group-desc ${item.type===initType?"group-select":""}`}
+                                    className={`group-desc ${item.type===initType?"group-select":null}`}
                                     key={item.type}
                                 >
                                     <div className="group-desc-tpl">

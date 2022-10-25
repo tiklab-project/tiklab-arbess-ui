@@ -28,12 +28,6 @@ const ProjectSetReDel=AsyncComponent(()=>import("./modules/project/reDel/project
 const ProjectSetProof=AsyncComponent(()=>import("./modules/project/proof/projectSetProof"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/project/members/projectSetUser"))
 
-/* 账号与成员 */
-const Orga=AsyncComponent(()=>import("./modules/orga/common/orga"))
-
-const UserList=AsyncComponent(()=>import("./modules/orga/user/list"))
-const UserDirectory=AsyncComponent(()=>import("./modules/orga/user/directory"))
-const Org=AsyncComponent(()=>import("./modules/orga/user/org"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
@@ -66,7 +60,9 @@ const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask
 const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
 const TodoTemp=AsyncComponent(()=>import("./modules/system/todotask/todoTemp"))
 
-
+const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
+const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
+const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 
 const NotFound=AsyncComponent(()=>import("./modules/home/components/notFound"))
 
@@ -146,24 +142,6 @@ const routers=[
                 ]
             },
             {
-                path:"/index/orga",
-                component: Orga,
-                routes:[
-                    {
-                        path: "/index/orga/dashbord",
-                        component: Org,
-                    },
-                    {
-                        path: "/index/orga/directory",
-                        component: UserDirectory,
-                    },
-                    {
-                        path: "/index/orga/list",
-                        component: UserList,
-                    },
-                ]
-            },
-            {
                 path:"/index/system",
                 component:System,
                 routes:[
@@ -222,6 +200,18 @@ const routers=[
                     {
                         path:"/index/system/logTemplate",
                         component: LogTemplateList,
+                    },
+                    {
+                        path: "/index/system/dashbord",
+                        component: Org,
+                    },
+                    {
+                        path: "/index/system/directory",
+                        component: UserDirectory,
+                    },
+                    {
+                        path: "/index/system/list",
+                        component: UserList,
                     },
                     // {
                     //     path:"/index/system/*",

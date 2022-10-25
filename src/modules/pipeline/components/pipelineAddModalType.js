@@ -62,7 +62,7 @@ const PipelineAddModalType = props =>{
         return rightLis.map(item=>{
             return(
                 <div key={item.id}
-                     className={`pipelineAddModalType-li ${templateType==item.type?"pipelineAddModalType-selected":""}`}
+                     className={`pipelineAddModalType-li ${templateType==item.type?"pipelineAddModalType-selected":null}`}
                      onClick={()=>setTemplateType(item.type)}
                 >
                     <div className="pipelineAddModalType-li-header">
@@ -104,7 +104,7 @@ const PipelineAddModalType = props =>{
                <div className="pipelineAddModalType-ul"  id="pipelineAddModalType">
                    <div style={{height:40}}>自定义模板</div>
                    <div
-                       className={`pipelineAddModalType-li ${templateType==1?"pipelineAddModalType-selected":""}`}
+                       className={`pipelineAddModalType-li ${templateType==1?"pipelineAddModalType-selected":null}`}
                        onClick={()=>setTemplateType(1)}
                    >
                        <div className="li-self">自定义配置</div>

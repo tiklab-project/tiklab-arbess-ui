@@ -1,5 +1,5 @@
 import React from "react";
-import {verifyUserHoc,useWorkAppConfig} from "tiklab-eam-ui";
+import {verifyUserHoc} from "tiklab-eam-ui";
 import {connect} from "tiklab-plugin-ui/es/_utils";
 import {renderRoutes} from "react-router-config";
 import "./header.scss";
@@ -9,19 +9,16 @@ const Portal= props=>{
 
     const {route}=props
 
-    const [component,ModalComponent,editOrAddModal] = useWorkAppConfig(false, "")
+    // const [component,ModalComponent,editOrAddModal] = WorkAppConfig(false, "")
 
     return(
         <div className="frame">
-            <Heads
-                {...props}
-                AppConfigComponent={component}
-            />
+            <Heads/>
             <div className="frame-content">
                 {renderRoutes(route.routes)}
             </div>
-            {ModalComponent}
-            {editOrAddModal}
+            {/*{ModalComponent}*/}
+            {/*{editOrAddModal}*/}
         </div>
     )
 }

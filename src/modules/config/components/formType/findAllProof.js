@@ -3,6 +3,8 @@ import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
 import AddProofButton from "../../../proof/components/addProofButton";
+import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined} from "@ant-design/icons";
+import "./inputs.scss";
 
 const {Option} = Select
 
@@ -15,7 +17,9 @@ const FindAllProof = props =>{
     const {setGitProofId,setDeployProofId} = configDataStore
     const {updateConfigure} = configStore
 
-    const [open, setOpen] = useState(false)
+    const [open,setOpen] = useState(false)
+    const [bordered,setBordered] = useState(false)
+    const [isLoading,setIsLoading] = useState(1)
 
     const userId = getUser().userId
 
@@ -34,6 +38,7 @@ const FindAllProof = props =>{
             userId:userId
         }
         findPipelineProof(params)
+        setIsLoading(2)
     }
 
     const selectDropdownRender = (menu,type) => {
@@ -65,7 +70,32 @@ const FindAllProof = props =>{
             values:{proof:{proofId:e.key}},
             message:"update"
         }
-        updateConfigure(params)
+        updateConfigure(params).then(res=>{
+            res.code===0 && setIsLoading(3)
+        })
+        setTimeout(()=>setIsLoading(1),1000)
+    }
+
+    const onFocus = () => {
+        setBordered(true)
+    }
+    
+    const onBlur = () => {
+        setIsLoading(1)
+        setBordered(false)
+    }
+
+    const suffix = () =>{
+        switch (isLoading) {
+            case 1:
+                return <span/>
+            case 2:
+                return <LoadingOutlined style={{color:"#1890ff"}}/>
+            case 3:
+                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
+            case 4:
+                return <CloseCircleOutlined style={{color:"red"}}/>
+        }
     }
 
     const style1 = {
@@ -77,16 +107,19 @@ const FindAllProof = props =>{
     }
 
     return(
-        <Form.Item
-            label="凭证"
-            name={type < 6 ? "gitProofName" : "deployProofName"}
-        >
-            <Select
+        <div className="formView-inputs">
+            <Form.Item
+                label="凭证"
+                name={type < 6 ? "gitProofName" : "deployProofName"}
+            >
+                <Select
                     style={type === 2 || type === 3 ? style2:style1}
                     onClick={clickFindAllGit}
                     onChange={(value,e)=>changeGitSelect(value,e)}
                     placeholder="请选择凭证"
                     open={open}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
                     onDropdownVisibleChange={(visible) => setOpen(visible)}
                     dropdownRender={menu=> (
                         <>
@@ -94,19 +127,23 @@ const FindAllProof = props =>{
                             {selectDropdownRender(menu,type)}
                         </>
                     )}
-                    bordered={false}
-            >
-                {
-                    proofList && proofList.map(item=>{
-                        return(
-                            <Option key={item.proofId} value={item.proofName+ "(" + item.proofType + ")"}>
-                                { item.proofName+ "(" + item.proofType + ")"}
-                            </Option>
-                        )
-                    })
-                }
-            </Select>
-        </Form.Item>
+                    bordered={bordered}
+                >
+                    {
+                        proofList && proofList.map(item=>{
+                            return(
+                                <Option key={item.proofId} value={item.proofName+ "(" + item.proofType + ")"}>
+                                    { item.proofName+ "(" + item.proofType + ")"}
+                                </Option>
+                            )
+                        })
+                    }
+                </Select>
+            </Form.Item>
+            <div className="formView-inputs-suffix">
+                {suffix(isLoading)}
+            </div>
+        </div>
     )
 }
 

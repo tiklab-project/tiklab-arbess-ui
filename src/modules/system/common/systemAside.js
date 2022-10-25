@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {PrivilegeButton} from "tiklab-privilege-ui";
+import {userRouter,Router} from "./sysRouters";
 
 const SystemAside= props =>  {
 
@@ -12,169 +13,6 @@ const SystemAside= props =>  {
         setSelectKey(path)
     },[path])
 
-    // useEffect(()=>{
-    //     if(path.indexOf("/index/system/syr")===0){
-    //         setExpandedTree([path,"1"])
-    //     }
-    //     if(path.indexOf("/index/system/project")===0){
-    //         setExpandedTree([path,"2"])
-    //     }
-    //     if(path.indexOf("/index/system/mes")===0){
-    //         setExpandedTree([path,"3"])
-    //     }
-    // },[])
-
-    const router = [
-        {
-            key:"1",
-            label:"系统权限",
-            icon:"#icon-gongzuotongji",
-            enCode:"E",
-            children:[
-                {
-                    key:"/index/system/syr/feature",
-                    label:"系统功能",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"E1",
-                },
-                {
-                    key:"/index/system/syr/role",
-                    label:"系统角色",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"E2",
-                }
-            ]
-        },
-        {
-            key:"2",
-            label:"项目权限",
-            icon:"#icon-gongzuotongji",
-            enCode:"I",
-            children:[
-                {
-                    key:"/index/system/project/feature",
-                    label:"项目功能",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"I2",
-                },
-                {
-                    key:"/index/system/project/role",
-                    label:"项目角色",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"I2",
-                }
-            ]
-        },
-        {
-            key:"/index/system/proof",
-            label:"凭证管理",
-            icon:"#icon-gongzuotongji",
-            enCode:"F",
-        },
-        {
-            key:"/index/system/plugin",
-            label:"插件管理",
-            icon:"#icon-gongzuotongji",
-            enCode:"G",
-        },
-        {
-            key:"/index/system/envi",
-            label:"环境配置",
-            icon:"#icon-gongzuotongji",
-            enCode:"J",
-        },
-        {
-            key:"3",
-            label:"待办事项",
-            icon:"#icon-gongzuotongji",
-            enCode:"I",
-            children: [
-                {
-                    key:"/index/system/task",
-                    label:"待办事项",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"J",
-                },
-                {
-                    key:"/index/system/myTodoTask",
-                    label:"我的待办事项 ",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"F",
-                },
-                {
-                    key:"/index/system/todoTemp",
-                    label:"代办模板 ",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"F",
-                }
-            ]
-        },
-        {
-            key:"4",
-            label:"系统日志",
-            icon:"#icon-gongzuotongji",
-            enCode:"I",
-            children: [
-                {
-                    key:"/index/system/log",
-                    label:"日志列表",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"G",
-                },
-                {
-                    key:"/index/system/myLog",
-                    label:"我的日志",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"H",
-                },
-                {
-                    key:"/index/system/logTemplate",
-                    label:"日志模板",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"H",
-                }
-            ]
-        },
-        {
-            key:"5",
-            label: "消息中心",
-            icon:"#icon-gongzuotongji",
-            enCode: "I",
-            children: [
-                {
-                    key:"/index/system/mes/management",
-                    label:"消息管理",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"J",
-                },
-                {
-                    key:"/index/system/mes/type",
-                    label:"消息类型管理",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"J",
-                },
-                {
-                    key:"/index/system/mes/sendType",
-                    label:"消息发送方式",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"J",
-                },
-                {
-                    key:"/index/system/mes/template",
-                    label:"消息模板管理",
-                    icon:"#icon-gongzuotongji",
-                    enCode:"J",
-                },
-            ]
-        },
-        {
-            key:"/index/system/info",
-            label:"系统信息",
-            icon:"#icon-gongzuotongji",
-            enCode:"H",
-        },
-    ]
-
     const select = key =>{
         props.history.push(key)
     }
@@ -183,7 +21,7 @@ const SystemAside= props =>  {
         return (
             <PrivilegeButton key={data.key} code={data.enCode} {...props}>
                 <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
-                    className={`system-aside-li system-aside-second ${data.key=== selectKey ? "system-aside-select" : ""}`}
+                    className={`system-aside-li system-aside-second ${data.key=== selectKey ? "system-aside-select" :null}`}
                     onClick={()=>select(data.key)}
                     key={data.key}
                 >
@@ -250,7 +88,7 @@ const SystemAside= props =>  {
         <div className="system-aside">
             <ul style={{padding: "10px 0 0"}} key="0" className="system-aside-top">
                 {
-                    router && router.map(firstItem => {
+                    userRouter && userRouter.map(firstItem => {
                         return firstItem.children && firstItem.children.length > 0 ?
                             renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
                     })

@@ -4,14 +4,14 @@ import Guide from "./guide";
 
 const Tidings = props =>{
 
-    const {messageList} = props
+    const {messageList,setVisible} = props
 
     const renderState = state =>{
         switch (state) {
+            case 0:
+                return "未读"
             case 1:
                 return "已读"
-            case 2:
-                return "未读"
         }
     }
 
@@ -20,6 +20,7 @@ const Tidings = props =>{
             <Guide
                 title={"我的消息"}
                 type={"tidings"}
+                setVisible={setVisible}
             />
             <div className="tidings-bottom">
                 {
@@ -33,21 +34,21 @@ const Tidings = props =>{
                                     <div>
                                         <div className="tidings-item-user">
                                             <span className="user-sendUser">
-                                                {item.sendUser}
+                                                {/*{item.receiver}*/}
                                             </span>
                                             <span className="user-time">
-                                                {item.time}
+                                                {item.receiveTime}
                                             </span>
                                         </div>
                                         <div className="tidings-item-message">
-                                            <span>{item.message}</span>
+                                            <span>{item.messageTemplate.content}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    className={`tidings-item-right tidings-item-state-${item.state}`}
+                                    className={`tidings-item-right tidings-item-state-${item.status}`}
                                 >
-                                    {renderState(item.state)}
+                                    {renderState(item.status)}
                                 </div>
                             </div>
                         )

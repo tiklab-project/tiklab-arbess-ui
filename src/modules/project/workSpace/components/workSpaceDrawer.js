@@ -1,6 +1,6 @@
 import React from "react";
-import {Drawer,Button} from "antd";
-import {CloseOutlined} from "@ant-design/icons";
+import {Drawer} from "antd";
+import ModalTitle from "../../../../common/modalTitle/modalTitle";
 
 const WorkSpaceDrawer = props =>{
 
@@ -12,20 +12,16 @@ const WorkSpaceDrawer = props =>{
             visible={detailsDrawer}
             onClose={()=>setDetailsDrawer(false)}
             closable={false}
-            contentWrapperStyle={{width:600,marginTop:55}}
-            bodyStyle={{padding:0}}
+            style={{marginTop:55}}
+            contentWrapperStyle={{width:600}}
         >
             <div className="drawers">
-                <div className="drawers-head">
-                    <div>{drawerContent.title ? drawerContent.title:drawerContent.commitTime}</div>
-                    <div>
-                        <Button type="text" onClick={()=>setDetailsDrawer(false)}>
-                            <CloseOutlined />
-                        </Button>
-                    </div>
-                </div>
+                <ModalTitle
+                    title={drawerContent.title ? drawerContent.title:drawerContent.commitTime}
+                    setVisible={setDetailsDrawer}
+                />
                 <div className="drawers-body">
-                    <div className="log" style={{padding:20}}>
+                    <div className="log">
                         <div className="log-content" style={{whiteSpace:"pre-wrap"}}>
                             {drawerContent.commitFile && drawerContent.commitFile.map((item,index)=>{
                                 return <div key={index}>{drawerContent.title ? null : `${index+1}、`}{item}</div>

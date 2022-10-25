@@ -12,7 +12,7 @@ const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,setEnabledValid,enabledValid} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,setEnabledValid,enabledValid,setValidLength} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
@@ -56,6 +56,7 @@ const ConfigView = props =>{
     const nonData = ()=>{
         setCodeType("")
         setData([])
+        setValidLength([])
         setFormInitialValues({})
         setUnitShellBlock("")
         setVirShellBlock("")
@@ -190,7 +191,7 @@ const ConfigView = props =>{
             default:
                 formInitialValues.codeName = null
                 formInitialValues.codeBranch = null
-                formInitialValues.gitproofName = null
+                formInitialValues.gitProofName = null
                 formInitialValues.proofName = null
                 setCodeType("")
                 setGitProofId("")

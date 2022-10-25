@@ -53,9 +53,7 @@ const Project= (props)=>{
                 {...props}
                 pipelineStore={pipelineStore}
             />
-            <div className="project-content"
-                 style={{marginLeft:80}}
-            >
+            <div className="project-content">
                 {renderRoutes(route.routes)}
             </div>
         </div>

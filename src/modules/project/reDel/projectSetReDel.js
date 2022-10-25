@@ -15,7 +15,6 @@ const ProjectSetReDel = props =>{
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
 
-
     const [form]=Form.useForm()
     const userId = getUser().userId
 
@@ -105,7 +104,7 @@ const ProjectSetReDel = props =>{
     const renderLisItem = item => {
         return  <div key={item.key} className="pipelineReDel-li">
                     <div
-                        className="pipelineReDel-li-top"
+                        className={`pipelineReDel-li-top ${isExpandedTree(item.key) ?"pipelineReDel-li-select":null}`}
                         onClick={()=>setOpenOrClose(item.key)}
                     >
                         <div className="pipelineReDel-li-title">

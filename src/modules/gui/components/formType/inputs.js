@@ -41,11 +41,6 @@ const Inputs = props =>{
                         {pattern: validCodeGit, message:"请输入正确的git地址"}
                     ]
                 }
-                else{
-                    rule =  [
-                        {required:true, message: "请选择git地址"}
-                    ]
-                }
                 break;
             case "sshIp":
                 rule =  [

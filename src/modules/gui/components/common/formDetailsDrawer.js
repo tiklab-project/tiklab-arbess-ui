@@ -29,7 +29,8 @@ const FormDetailsDrawer = props =>{
             onClose={()=>setTaskFormDrawer(false)}
             visible={taskFormDrawer}
             closable={false}
-            contentWrapperStyle={{width:630,marginTop:55}}
+            style={{marginTop:55}}
+            contentWrapperStyle={{width:600}}
             bodyStyle={{padding:0}}
         >
             <div className="wrapper">

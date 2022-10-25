@@ -1,12 +1,28 @@
 .pipelineTable{
     &-pipelineName{
-        color: #1890ff;
-        cursor: pointer;
         text-overflow: ellipsis;
         white-space: nowrap;
-        display: inline-block;
         overflow: hidden;
         width: 160px;
+        display: inline-block;
+        &-task{
+            cursor: pointer;
+        }
+        &-icon{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background: #95c3ed;
+            border-radius: 8px;
+            text-align: center;
+            color: black;
+            margin-right: 10px;
+        }
+        &-name{
+            color: #1890ff;
+
+        }
     }
     &-state{
         cursor: pointer;
@@ -31,5 +47,8 @@
                 color: #1890ff;
             }
         }
+    }
+    .ant-table-tbody>tr>td{
+        padding: 15px;
     }
 }

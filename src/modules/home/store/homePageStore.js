@@ -10,10 +10,12 @@ import {
 
 export class HomePageStore{
 
+    @observable visible = false // 消息详情
     @observable pipelineNearList = []
     @observable dynamicList = []
     @observable taskList = []
     @observable messageList = []
+    @observable messageDispatchItemPage = []
     @observable page = {
         defaultCurrent: 1,
         pageSize: "15",
@@ -21,16 +23,18 @@ export class HomePageStore{
     }
 
     @action
+    setVisible = value =>{
+        this.visible = value
+    }
+
+    @action
     findAllOpen = async value =>{
         const param = new FormData()
         param.append("userId",value)
-        FindAllOpen(param).then(res=>{
-            if(res.code===0 && res.data){
-                this.pipelineNearList = res.data
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await FindAllOpen(param)
+        if(data.code===0 && data.data){
+            this.pipelineNearList = data.data
+        }
     }
 
     @action
@@ -47,36 +51,52 @@ export class HomePageStore{
             page:values.page,
             pageSize:values.pageSize,
         }
-        FindLog(params).then(res=>{
-            if(res.code===0 && res.data){
-                this.dynamicList = res.data
-                this.page.total = res.data.listSize
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await FindLog(params)
+        if(data.code===0 && data.data){
+            this.dynamicList = data.data
+            this.page.total = data.data.listSize
+        }
     }
 
     @action
     findTask = async value =>{
         const param = new FormData()
         param.append("userId",value)
-        FindTask(param).then(res=>{
-            if(res.code===0&&res.data){
-                this.taskList=res.data
-            }
-        })
+        const data = await FindTask(param)
+        if(data.code===0 && data.data){
+            this.taskList = data.data
+        }
+    }
+
+    // 首页消息
+    @action
+    findHomePageMessage = async values =>{
+        await this.findMessageDispatchItemPage(values,7)
+    }
+
+    // 头部消息
+    @action
+    findHeaderMessage = async values =>{
+        await this.findMessageDispatchItemPage(values,100)
     }
 
     @action
-    findMessage = async value =>{
-        const param = new FormData()
-        param.append("userId",value)
-        FindMessage().then(res=>{
-            if(res.code===0&&res.data){
-                this.messageList=res.data
-            }
-        })
+    findMessageDispatchItemPage = async (values,pageSize) =>{
+        const params = {
+            pageParam:{
+                pageSize:pageSize,
+                currentPage:1
+            },
+            application:"matflow",
+            sendType:"site",
+            receiver:values.receiver,
+        }
+        const data = await  FindMessage(params)
+        if(data.code===0){
+            if(pageSize===7){
+                this.messageList = data.data && data.data.dataList
+            }else this.messageDispatchItemPage=data.data && data.data.dataList
+        }
     }
 
 }

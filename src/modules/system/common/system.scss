@@ -1,11 +1,11 @@
 .system {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow: hidden;
     &-aside {
-        position: fixed;
         background-color: #f8f8f8;
         border-right: 1px solid #cccccc;
-        z-index: 888;
-        left: 0;
-        top: 55px;
         height: 100%;
         width: 200px;
         &-sys{
@@ -18,6 +18,8 @@
         }
         &-top{
             height: calc(100% - 120px);
+            overflow: auto;
+            min-height: 100%;
         }
         ul,li {
             list-style: none;
@@ -58,6 +60,11 @@
                 background: #1890ff
             }
         }
+    }
+    &-content{
+        width: 100%;
+        height: calc(100vh - 50px);
+        overflow: auto;
     }
     .icon{
         padding-right: 5px;

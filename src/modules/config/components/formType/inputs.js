@@ -1,6 +1,8 @@
 import React,{useState} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
+import {LoadingOutlined,CheckCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
+import "./inputs.scss";
 
 const Inputs = props =>{
 
@@ -9,6 +11,14 @@ const Inputs = props =>{
     const {pipelineId} = pipelineStore
     const {updateConfigure,setEnabledValid,enabledValid} = configStore
     const {setFormInitialValues,codeType} = configDataStore
+
+    const [bordered,setBordered] = useState(false)
+    const [isLoading,setIsLoading] = useState(1)
+
+
+    const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
+    const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
+    const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
 
     const onchange = e  => {
         switch (name){
@@ -19,10 +29,6 @@ const Inputs = props =>{
                 setFormInitialValues({codeBranch:e.target.value})
         }
     }
-
-    const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
-    const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
-    const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
 
     const validation = (codeType,name,value) =>{
         switch (name) {
@@ -40,7 +46,12 @@ const Inputs = props =>{
         }
     }
 
-    const valueChange = (e) => {
+    const onFocus = () => {
+        setBordered(true)
+        setIsLoading(2)
+    }
+
+    const onBlur = (e) => {
         // 获取input 的id
         const obj = {}
         obj[name] = e.target.value
@@ -51,10 +62,22 @@ const Inputs = props =>{
             message:"update"
         }
         if(validation(codeType,name,e.target.value)){
-            document.getElementById(name).classList.remove("formView-validateFields")
-            updateConfigure(params)
             setEnabledValid(!enabledValid)
+            updateConfigure(params).then(res=>{
+                if(res.code===0){
+                    document.getElementById(name).classList.remove("formView-validateFields")
+                    setIsLoading(3)
+                }else {
+                    setIsLoading(4)
+                    message.info(res.msg)
+                }
+            })
+            setBordered(false)
+        }else {
+            setBordered(true)
         }
+
+        setTimeout(()=>setIsLoading(1),1000)
     }
 
     const rules = () =>{
@@ -72,11 +95,6 @@ const Inputs = props =>{
                                 {pattern: validCodeGit, message:"请输入正确的git地址"}
                             ]
                 }
-                else{
-                    rule =  [
-                                {required:true, message: "请选择git地址"}
-                            ]
-                }
                 break;
             case "sshIp":
                 rule =  [
@@ -89,26 +107,41 @@ const Inputs = props =>{
         return rule
     }
 
+    const suffix = isLoading =>{
+        switch (isLoading) {
+            case 1:
+                return <span/>
+            case 2:
+                return  <LoadingOutlined style={{color:"#1890ff"}}/>
+
+            case 3:
+                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
+            case 4:
+                return <CloseCircleOutlined style={{color:"red"}}/>
+        }
+    }
+
     return (
-       <>
-           <Form.Item
-               name={name}
-               label={label}
-               rules={rules()}
-               validateTrigger="onChange"
-           >
-               <Input
-                   bordered={false}
-                   placeholder={placeholder}
-                   onChange={name==="codeName" || name==="codeBranch" ? onchange:null}
-                   onBlur={(e)=>valueChange(e)}
-                   addonBefore={addonBefore?addonBefore:null}
-               />
-           </Form.Item>
-           <span>
-               {/*{warnContent}*/}
-           </span>
-       </>
+        <div className="formView-inputs">
+            <Form.Item
+                name={name}
+                label={label}
+                rules={rules()}
+                validateTrigger="onChange"
+            >
+                <Input
+                    bordered={bordered}
+                    placeholder={placeholder}
+                    onChange={onchange}
+                    onFocus={onFocus}
+                    onBlur={(e)=>onBlur(e)}
+                    addonBefore={addonBefore}
+                />
+            </Form.Item>
+            <div className="formView-inputs-suffix">
+                {suffix(isLoading)}
+            </div>
+        </div>
     )
 
 }

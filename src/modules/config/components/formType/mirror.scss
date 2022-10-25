@@ -1,7 +1,7 @@
 .formViewCodeMirror{
-    width: 500px;
+    display: flex;
     .react-codemirror2{
-        width:100%;
+        width: 500px;
         border-color:#ffffff;
     }
     .CodeMirror{
@@ -12,9 +12,10 @@
     }
 }
 .codeNewStage{
+    display: flex;
     .react-codemirror2{
-        width:100%;
-        border:1px solid #cccccc;
+        width: 500px;
+        border:1px solid #1890ff;
     }
     .CodeMirror{
         height: 100%;

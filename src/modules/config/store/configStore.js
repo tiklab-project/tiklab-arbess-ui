@@ -23,6 +23,11 @@ export class ConfigStore{
     }
 
     @action
+    setValidLength = value =>{
+        this.validLength = value
+    }
+
+    @action
     setIsPlugin = value =>{
         this.isPlugin = value
     }

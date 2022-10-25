@@ -3,28 +3,40 @@ import {Avatar,Dropdown,Menu} from "antd";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
+import {Profile,WorkAppConfig} from "tiklab-eam-ui";
 import {GlobalOutlined,MessageOutlined,SettingOutlined,LogoutOutlined,
     UserOutlined,BellOutlined
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
+import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/all/matflow.png"
 import portrait from "../../assets/images/portrait.jpg";
 import vipOne from "../../assets/images/vip-one.png";
 import vipTwo from "../../assets/images/vip-two.png";
+import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{
 
-    const {AppConfigComponent} = props
+    const {homePageStore} = props
+
+    const {findHeaderMessage,messageDispatchItemPage,visible,setVisible} = homePageStore
 
     let path = props.location.pathname
     const [currentLink,setCurrentLink] = useState(path)
-    const userId = getUser().userId
 
+    const userId = getUser().userId
     const {i18n,t} = useTranslation()
     const isEE = getVersionInfo().release
     const eeText = isEE === 2 ? vipTwo : vipOne
     const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
     const authType = JSON.parse(localStorage.getItem("authConfig")).authType
+
+    useEffect(()=>{
+        const param = {
+            receiver:userId,
+        }
+        visible && findHeaderMessage(param)
+    },[visible])
 
     useEffect(()=>{
         setCurrentLink(path)
@@ -70,7 +82,7 @@ const Head = props =>{
     const languageMenu = (
         <Menu>
             <Menu.Item key="0" onClick={()=>changeLan("zh")}>中文</Menu.Item>
-            <Menu.Item key="1" onClick={()=>changeLan("en")}>英文</Menu.Item>
+            {/*<Menu.Item key="1" onClick={()=>changeLan("en")}>英文</Menu.Item>*/}
         </Menu>
     )
 
@@ -82,7 +94,8 @@ const Head = props =>{
             }
         })
     }
-    
+
+    // 退出登录页面
     const outMenu = (
         <div className="header-outMenu">
            <div className="header-outMenu-content">
@@ -103,7 +116,7 @@ const Head = props =>{
         </div>
     )
 
-    
+
     const setMenu = () => {
         let url
         if(authType){
@@ -135,23 +148,19 @@ const Head = props =>{
                 </Menu>
         )
     }
-    
-    const messageMenu = (
-        <Menu>
-            <Menu.Item key="1" onClick={()=>goUserMessageContent()}>
-                <BellOutlined />我的信息
-            </Menu.Item>
-        </Menu>
-    )
 
     const goUserMessageContent = () =>{
-        props.history.push("/index/userMessage")
+        setVisible(true)
+    }
+
+    const goSystem = () =>{
+        props.history.push("/index/system")
     }
 
     return(
         <div className="frame-header">
             <div className="frame-header-right">
-                {AppConfigComponent}
+                <WorkAppConfig  isSSO={false}/>
                 <div className="frame-header-logo">
                     <img src={logo} alt="logo" />
                 </div>
@@ -162,9 +171,6 @@ const Head = props =>{
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
                     <div className="frame-header-message">
-                        {/*<Dropdown overlay={messageMenu}>*/}
-                        {/*    <MessageOutlined className="frame-header-icon"/>*/}
-                        {/*</Dropdown>*/}
                         <MessageOutlined
                             className="frame-header-icon"
                             onClick={()=>goUserMessageContent()}
@@ -176,22 +182,28 @@ const Head = props =>{
                         </Dropdown>
                     </div>
                     <div className="frame-header-set">
-                        <Dropdown overlay={setMenu}>
-                            <SettingOutlined className="frame-header-icon"/>
-                        </Dropdown>
+                        <SettingOutlined
+                            className="frame-header-icon"
+                            onClick={()=>goSystem()}
+                        />
                     </div>
-                    <div className="frame-header-user">
-                        <Dropdown overlay={outMenu}>
-                            <Avatar src={portrait} style={{cursor:"pointer"}}/>
-                        </Dropdown>
-                    </div>
+                    <Dropdown overlay={outMenu}>
+                        <div className="frame-header-user">
+                            <Profile userInfo={getUser()}/>
+                        </div>
+                    </Dropdown>
                     <div className="frame-header-status">
                         <img src={eeText} alt="" width = "20px" height= "20px" />
                     </div>
                 </div>
             </div>
+            <MessageDrawer
+                visible={visible}
+                setVisible={setVisible}
+                messageList={messageDispatchItemPage}
+            />
         </div>
     )
 }
 
-export default withRouter(Head)
+export default withRouter(inject("homePageStore")(observer(Head)))

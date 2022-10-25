@@ -101,7 +101,8 @@ const NewStageAddDrawer = props =>{
             placement="right"
             onClose={()=>setNewStageDrawer(false)}
             visible={newStageDrawer}
-            contentWrapperStyle={{width:600,marginTop:55}}
+            style={{marginTop:55}}
+            contentWrapperStyle={{width:600}}
             bodyStyle={{padding:0}}
         >
             <div className="wrapper">

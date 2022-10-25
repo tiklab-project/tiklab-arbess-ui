@@ -1,44 +1,53 @@
-.aside{
-    position: fixed;
-    background-color: #f8f8f8;
-    border-right: 1px solid #cccccc;
-    z-index: 888;
-    left: 0;
-    top: 55px;
-    height: 100%;
-    .content{
-        width: 80px;
-        padding: 10px 0 0;
-    }
-    &_content{
-        height: 55px;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 5px 0;
-        &:not(:last-child){
-            margin-bottom: 5px;
+.project{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow: hidden;
+    .aside{
+        background-color: #f8f8f8;
+        border-right: 1px solid #cccccc;
+        left: 0;
+        top: 55px;
+        height: 100%;
+        .content{
+            width: 80px;
+            padding: 10px 0 0;
         }
-    }
-    &_item{
-        flex-direction: column;
-        &:hover{
+        &_content{
+            height: 55px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0;
+            &:not(:last-child){
+                margin-bottom: 5px;
+            }
+        }
+        &_item{
+            flex-direction: column;
+            &:hover{
+                background: #e3e8f0;
+            }
+        }
+        &_active{
             background: #e3e8f0;
+            &:before{
+                width: 4px;
+                height: 53px;
+                transition: all .4s cubic-bezier(.23,1,.32,1);
+                content: " ";
+                position: absolute;
+                z-index: 2;
+                left: 1px;
+                background: #1890ff
+            }
         }
     }
-    &_active{
-        background: #e3e8f0;
-        &:before{
-            width: 4px;
-            height: 53px;
-            transition: all .4s cubic-bezier(.23,1,.32,1);
-            content: " ";
-            position: absolute;
-            z-index: 2;
-            left: 1px;
-            background: #1890ff
-        }
+    &-content{
+        width: 100%;
+        height: calc(100vh - 50px);
+        overflow: auto;
     }
 }
 

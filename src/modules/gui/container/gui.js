@@ -37,11 +37,11 @@ const Gui = props =>{
                 form.validateFields(keys)
                 keys && keys.map(item=>{
                     const zz = document.getElementById(item)
-                    zz && zz.classList.add("formView-validateFields")
+                    zz && zz.classList.add("guiView-validateFields")
                 })
             }
         })
-    },[pipelineId,enabledValid])
+    },[pipelineId,enabledValid,newStage])
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/

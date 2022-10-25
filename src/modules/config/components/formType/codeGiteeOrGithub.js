@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from "react";
-import {Button,Form,message,Row,Select} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
+import {Button,Form,message,Select} from "antd";
+import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined, PlusOutlined} from "@ant-design/icons";
 import FindAllProof from "./findAllProof";
 import {inject,observer} from "mobx-react";
 import CodeGiteeOrGithubModal from "./codeGIteeOrGIthubModal";
+import "./inputs.scss";
 
 const {Option} =Select
 
@@ -22,6 +23,10 @@ const CodeGiteeOrGithub = props =>{
     const [storehouseList,setStorehouseList] = useState([]) // 仓库
     const [branchList,setBranchList] = useState([]) // 分支
     const [gitStoreHouse,setGitStoreHouse] = useState("")
+
+
+    const [fieldName,setFieldName] = useState("")
+    const [isLoading,setIsLoading] = useState(1)
 
     useEffect(()=>{
         if(formInitialValues && formInitialValues.codeName){
@@ -84,6 +89,8 @@ const CodeGiteeOrGithub = props =>{
                 getBranchList(res)
             })
         }
+        setIsLoading(2)
+
     }
 
     const getBranchList = data =>{
@@ -114,16 +121,40 @@ const CodeGiteeOrGithub = props =>{
             message:"update"
         }
         setFormInitialValues({key:value})
-        updateConfigure(params)
+        updateConfigure(params).then(res=>{
+            res.code===0 && setIsLoading(3)
+        })
+
+        setTimeout(()=>setIsLoading(1),1000)
+
+    }
+
+    const onFocus = name => {
+        setIsLoading(2)
+        setFieldName(name)
+    }
+
+    const onBlur = () => {
+        setIsLoading(1)
+        setFieldName("")
+    }
+
+
+    const suffix = () =>{
+        switch (isLoading) {
+            case 1:
+                return <span/>
+            case 2:
+                return <LoadingOutlined style={{color:"#1890ff"}}/>
+            case 3:
+                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
+            case 4:
+                return <CloseCircleOutlined style={{color:"red"}}/>
+        }
     }
 
     const style={
         display:"flex",
-    }
-
-    const stype = {
-        display:"flex",
-        alignItems:"center"
     }
 
     return(
@@ -135,39 +166,53 @@ const CodeGiteeOrGithub = props =>{
                     新增服务链接
                 </Button>
             </div>
-            <Form.Item
-                label="仓库"
-                name={"codeName"}
-                rules={[{required:true, message:"请选择仓库"}]}
-            >
-                <Select
-                    onChange={changeGitStoreHouse}
-                    onClick={clickGitStoreHouse}
-                    bordered={false}
-                    placeholder="请选择仓库"
+            <div className="formView-inputs">
+                <Form.Item
+                    label="仓库"
+                    name={"codeName"}
+                    rules={[{required:true, message:"请选择仓库"}]}
                 >
-                    {
-                        storehouseList && storehouseList.map(item=>{
-                            return <Option key={item} value={item}> {item} </Option>
-                        })
-                    }
-                </Select>
-            </Form.Item>
-            <Form.Item label="分支"  name={"codeBranch"}>
-                <Select
-                    disabled={prohibited}
-                    bordered={false}
-                    placeholder="请选择分支"
-                    onClick={clickBranch}
-                    onChange={changeBranch}
-                >
-                    {
-                        branchList && branchList.map(item=>{
-                            return  <Option key={item} value={item}> {item} </Option>
-                        })
-                    }
-                </Select>
-            </Form.Item>
+                    <Select
+                        onChange={changeGitStoreHouse}
+                        onClick={clickGitStoreHouse}
+                        onFocus={()=>onFocus("codeName")}
+                        onBlur={onBlur}
+                        bordered={fieldName === "codeName"}
+                        placeholder="请选择仓库"
+                    >
+                        {
+                            storehouseList && storehouseList.map(item=>{
+                                return <Option key={item} value={item}> {item} </Option>
+                            })
+                        }
+                    </Select>
+                </Form.Item>
+                <div className="formView-inputs-suffix">
+                    {fieldName === "codeName" && suffix(isLoading)}
+                </div>
+            </div>
+            <div className="formView-inputs">
+                <Form.Item label="分支"  name={"codeBranch"}>
+                    <Select
+                        disabled={prohibited}
+                        bordered={fieldName === "codeBranch"}
+                        placeholder="请选择分支"
+                        onFocus={()=>onFocus("codeBranch")}
+                        onBlur={onBlur}
+                        onClick={clickBranch}
+                        onChange={changeBranch}
+                    >
+                        {
+                            branchList && branchList.map(item=>{
+                                return  <Option key={item} value={item}> {item} </Option>
+                            })
+                        }
+                    </Select>
+                </Form.Item>
+                <div className="formView-inputs-suffix">
+                    {fieldName === "codeBranch" && suffix(isLoading)}
+                </div>
+            </div>
 
             <CodeGiteeOrGithubModal
                 visible={visible}

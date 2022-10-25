@@ -1,39 +1,45 @@
 .formView{
     padding: 55px 10px 0;
-    &-content{
-        padding-top: 15px;
-        overflow: hidden;
-        .ant-form{
+    .formView-validateFields{
+        border: 1px solid #ff0000;
+    }
+    .ant-form{
+        .ant-input{
+            width: 500px;
+            &:hover{
+                background: #f2f2f2;
+            }
+        }
+        .ant-select{
+            width: 500px;
+            &:hover{
+                background: #f2f2f2;
+            }
+        }
+        .ant-input-group-addon{
+            width: 90px;
+        }
+        .ant-input-group{
             .ant-input{
-                max-width: 500px !important;
-                &:hover{
-                    background: #f2f2f2;
-                }
-                &-error{
-                    border: 1px solid #ff0000;
-                }
+                width: 410px;
             }
-
-            .ant-select{
-                max-width: 500px !important;
-                &:hover{
-                    background: #f2f2f2;
-                }
-            }
-            .ant-input-group{
-                cursor: pointer;
-                width:500px ;
-            }
-            .ant-input-group-addon{
-                border: none;
-            }
-            .ant-form-item-label{
-                min-width: 130px;
-                text-align: left;
-                .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
+        }
+        .ant-input-group-addon{
+            border: none;
+        }
+        .ant-form-item-label{
+            min-width: 130px;
+            text-align: left;
+            &>label:not(.ant-form-item-required){
+                &:after{
                     display: none;
                 }
-                .ant-form-item-required:not(.ant-form-item-required-mark-optional):after{
+            }
+            .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
+                display: none;
+            }
+            .ant-form-item-required{
+                &:after{
                     color: #ff4d4f;
                     font-size: 14px;
                     font-family: SimSun,sans-serif;
@@ -45,6 +51,10 @@
                 }
             }
         }
+    }
+    &-content{
+        padding-top: 15px;
+        overflow: hidden;
         .code-handle{
             margin-bottom: 25px;
         }
