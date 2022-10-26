@@ -18,8 +18,8 @@ const PipelineNear = props =>{
         >
             <div className="pipelineNear-item">
                 <div>
-                    <span className="pipelineNear-item-icon">
-                        U
+                    <span className={`pipelineNear-item-icon icon-${item.pipeline.color}`}>
+                        {item.pipelineName.substring(0,1).toUpperCase()}
                     </span>
                     <span className="pipelineNear-item-pipelineName">
                         {item.pipelineName}
@@ -31,9 +31,7 @@ const PipelineNear = props =>{
     }
 
     return <div className="pipelineNear">
-        <Guide
-            title={"最近访问的流水线"}
-        />
+        <Guide title={"最近访问的流水线"}/>
         <div className="pipelineNear-bottom">
             {
                 pipelineNearList && pipelineNearList.map(item=>{

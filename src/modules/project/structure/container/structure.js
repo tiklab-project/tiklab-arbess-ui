@@ -16,7 +16,7 @@ const Structure = props => {
     const {findExecState,findStructureState,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,isData,
         findPipelineUser,setIsData,execState} = structureStore
     const {state,setState,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
-    const {pipelineId,pipelineName} = pipelineStore
+    const {pipelineId,pipeline} = pipelineStore
     const userId = getUser().userId
 
     const [runImState,setRunImState] = useState(false)
@@ -193,7 +193,7 @@ const Structure = props => {
                     status={status}
                 />
                 <div className="structure-content-right">
-                    <BreadcrumbContent firstItem={pipelineName} secondItem={"历史"}/>
+                    <BreadcrumbContent firstItem={pipeline.pipelineName} secondItem={"历史"}/>
                     {
                         execState !== ""  || leftPageList && leftPageList.length > 0 ?
                             <StructureRight

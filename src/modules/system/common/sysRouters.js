@@ -118,12 +118,6 @@ export const userRouter = [
         enCode:"I",
         children: [
             {
-                key:"/index/system/log",
-                label:"日志列表",
-                icon:"#icon-gongzuotongji",
-                enCode:"G",
-            },
-            {
                 key:"/index/system/myLog",
                 label:"我的日志",
                 icon:"#icon-gongzuotongji",
@@ -210,12 +204,12 @@ export const Router = [
         icon:"#icon-gongzuotongji",
         enCode:"E",
         children:[
-            {
-                key:"/index/system/syr/feature",
-                label:"系统功能",
-                icon:"#icon-gongzuotongji",
-                enCode:"E1",
-            },
+            // {
+            //     key:"/index/system/syr/feature",
+            //     label:"系统功能",
+            //     icon:"#icon-gongzuotongji",
+            //     enCode:"E1",
+            // },
             {
                 key:"/index/system/syr/role",
                 label:"系统角色",
@@ -230,12 +224,12 @@ export const Router = [
         icon:"#icon-gongzuotongji",
         enCode:"I",
         children:[
-            {
-                key:"/index/system/project/feature",
-                label:"项目功能",
-                icon:"#icon-gongzuotongji",
-                enCode:"I2",
-            },
+            // {
+            //     key:"/index/system/project/feature",
+            //     label:"项目功能",
+            //     icon:"#icon-gongzuotongji",
+            //     enCode:"I2",
+            // },
             {
                 key:"/index/system/project/role",
                 label:"项目角色",
@@ -280,12 +274,12 @@ export const Router = [
                 icon:"#icon-gongzuotongji",
                 enCode:"F",
             },
-            {
-                key:"/index/system/todoTemp",
-                label:"代办模板 ",
-                icon:"#icon-gongzuotongji",
-                enCode:"F",
-            }
+            // {
+            //     key:"/index/system/todoTemp",
+            //     label:"代办模板 ",
+            //     icon:"#icon-gongzuotongji",
+            //     enCode:"F",
+            // }
         ]
     },
     {
@@ -295,23 +289,17 @@ export const Router = [
         enCode:"I",
         children: [
             {
-                key:"/index/system/log",
-                label:"日志列表",
-                icon:"#icon-gongzuotongji",
-                enCode:"G",
-            },
-            {
                 key:"/index/system/myLog",
                 label:"我的日志",
                 icon:"#icon-gongzuotongji",
                 enCode:"H",
             },
-            {
-                key:"/index/system/logTemplate",
-                label:"日志模板",
-                icon:"#icon-gongzuotongji",
-                enCode:"H",
-            }
+            // {
+            //     key:"/index/system/logTemplate",
+            //     label:"日志模板",
+            //     icon:"#icon-gongzuotongji",
+            //     enCode:"H",
+            // }
         ]
     },
     {
@@ -320,30 +308,30 @@ export const Router = [
         icon:"#icon-gongzuotongji",
         enCode: "I",
         children: [
-            {
-                key:"/index/system/mes/management",
-                label:"消息管理",
-                icon:"#icon-gongzuotongji",
-                enCode:"J",
-            },
-            {
-                key:"/index/system/mes/type",
-                label:"消息类型管理",
-                icon:"#icon-gongzuotongji",
-                enCode:"J",
-            },
+            // {
+            //     key:"/index/system/mes/management",
+            //     label:"消息管理",
+            //     icon:"#icon-gongzuotongji",
+            //     enCode:"J",
+            // },
+            // {
+            //     key:"/index/system/mes/type",
+            //     label:"消息类型管理",
+            //     icon:"#icon-gongzuotongji",
+            //     enCode:"J",
+            // },
             {
                 key:"/index/system/mes/sendType",
                 label:"消息发送方式",
                 icon:"#icon-gongzuotongji",
                 enCode:"J",
             },
-            {
-                key:"/index/system/mes/template",
-                label:"消息模板管理",
-                icon:"#icon-gongzuotongji",
-                enCode:"J",
-            },
+            // {
+            //     key:"/index/system/mes/template",
+            //     label:"消息模板管理",
+            //     icon:"#icon-gongzuotongji",
+            //     enCode:"J",
+            // },
         ]
     },
     {

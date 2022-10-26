@@ -3,18 +3,13 @@ import {withRouter} from "react-router-dom";
 
 const Guide = props =>{
 
-    const {title,type,setVisible} = props
+    const {title,type} = props
 
     const goDetails = type =>{
         switch (type) {
-            case "dynamic":
-                props.history.push("/index/system/myLog")
-                break
             case "agency":
-                props.history.push("/index/system/myTodoTask")
+                props.history.push("/index/fullWorkTodo")
                 break
-            case "tidings":
-                setVisible(true)
         }
     }
 

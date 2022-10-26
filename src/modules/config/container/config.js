@@ -10,7 +10,7 @@ const Config = props =>{
 
     const {code,getState} = giteeStore
     const {getAccessToken} = githubStore
-    const {pipelineId,pipelineName} = pipelineStore
+    const {pipelineId,pipeline} = pipelineStore
 
     const [visible,setVisible] = useState(false)
     const [view,setView] = useState("forms")
@@ -60,7 +60,7 @@ const Config = props =>{
                 view={view}
                 setView={setView}
                 pipelineId={pipelineId}
-                pipelineName={pipelineName}
+                pipelineName={pipeline.pipelineName}
             />
             <ConfigView view={view}/>
         </div>

@@ -5,7 +5,7 @@ import Mirror from "./mirror";
 
 const TestUnit = props =>{
 
-    const {configDataStore,configStore,pipelineStore} = props
+    const {configDataStore} = props
 
     const {unitShellBlock,setUnitShellBlock} = configDataStore
 
@@ -17,8 +17,6 @@ const TestUnit = props =>{
             <Mirror
                 name={"testOrder"}
                 type={11}
-                pipelineStore={pipelineStore}
-                configStore={configStore}
                 shellBlock={unitShellBlock}
                 setShellBlock={setUnitShellBlock}
                 placeholder={"请输入测试命令"}
@@ -27,4 +25,4 @@ const TestUnit = props =>{
     )
 }
 
-export default inject("configDataStore","configStore","pipelineStore")(observer(TestUnit))
+export default inject("configDataStore")(observer(TestUnit))

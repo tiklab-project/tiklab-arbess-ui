@@ -12,6 +12,7 @@ let fetchMethod = "post"
 fetchMethod = JSON.stringify(fetchMethod);
 // 判断是否是用户环境， 如果是用户环境收到切换为true， 如果是内部公司手动切换为false
 const userProduction = true;
+const devProduction = true;
 
 const appKey = JSON.stringify("");
 const appSecret = JSON.stringify("");
@@ -28,5 +29,6 @@ const webpackGlobal = {
     appSecret,
     version,
     client,
+    devProduction,
 }
 module.exports = {webpackGlobal}

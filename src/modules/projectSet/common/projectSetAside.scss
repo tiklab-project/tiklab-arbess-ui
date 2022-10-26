@@ -1,0 +1,26 @@
+.projectSet{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow: hidden;
+    &-aside{
+        width: 180px;
+        min-width: 180px;
+        background: #fbfbfb;
+    }
+    &-item{
+        padding: 10px;
+        cursor: pointer;
+        &-icon{
+            padding-right: 10px;
+        }
+    }
+    &-select{
+        background: #e3e8f0;
+        border-right: 3px solid #1890ff;
+    }
+    &-content{
+        width: 100%;
+        margin: 0 auto;
+    }
+}

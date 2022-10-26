@@ -51,9 +51,7 @@ const QuickIn = props =>{
         })
     }
 
-    return  <div className="quickIn">
-                {renderStableList(stableList)}
-            </div>
+    return  renderStableList(stableList)
 }
 
 export default QuickIn

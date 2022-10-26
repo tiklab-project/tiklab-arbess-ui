@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import ProjectAside from "../components/projectAside";
+import ProjectAside from "./projectAside";
 import {renderRoutes} from "react-router-config";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
@@ -9,7 +9,7 @@ const Project= (props)=>{
 
     const {route,pipelineStore,match}=props
 
-    const {findAllPipelineStatus,setPipelineId,setPipelineName} = pipelineStore
+    const {findAllPipelineStatus,setPipelineId,setPipeline} = pipelineStore
 
     const pipelineId = match.params.pipelineId
     const userId = getUser().userId
@@ -31,7 +31,7 @@ const Project= (props)=>{
                 // }
                 data && data.map(item=>{
                     if(item.pipelineId === pipelineId){
-                        setPipelineName(item.pipelineName)
+                        setPipeline(item)
                     }
                 })
             }

@@ -6,7 +6,7 @@ import Inputs from "./inputs";
 
 const DeployVir = props =>{
 
-    const {configDataStore,pipelineStore,configStore} = props
+    const {configDataStore} = props
 
     const {virShellBlock,deployType,setVirShellBlock} = configDataStore
     
@@ -24,8 +24,6 @@ const DeployVir = props =>{
                 <Mirror
                     name={"startShell"}
                     type={deployType}
-                    pipelineStore={pipelineStore}
-                    configStore={configStore}
                     shellBlock={virShellBlock}
                     setShellBlock={setVirShellBlock}
                     placeholder={"请输入启动命令"}

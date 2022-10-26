@@ -88,7 +88,13 @@ const SystemAside= props =>  {
         <div className="system-aside">
             <ul style={{padding: "10px 0 0"}} key="0" className="system-aside-top">
                 {
-                    userRouter && userRouter.map(firstItem => {
+                    devProduction && userRouter.map(firstItem => {
+                        return firstItem.children && firstItem.children.length > 0 ?
+                            renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                    })
+                }
+                {
+                    !devProduction && Router.map(firstItem=>{
                         return firstItem.children && firstItem.children.length > 0 ?
                             renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
                     })

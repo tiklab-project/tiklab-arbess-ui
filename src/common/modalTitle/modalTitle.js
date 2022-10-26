@@ -9,7 +9,9 @@ const ModalTitle = props =>{
 
     return(
         <div className="modalTitle" >
-            <div className="modalTitle-title">{title}</div>
+            <div className="modalTitle-title">
+                <span>{title}</span>
+            </div>
             <div className="modalTitle-icon">
                 <Button type="text" onClick={()=>setVisible(false)}>
                     <CloseOutlined />

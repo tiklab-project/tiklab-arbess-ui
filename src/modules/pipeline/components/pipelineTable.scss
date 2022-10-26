@@ -13,11 +13,28 @@
             width: 30px;
             height: 30px;
             line-height: 30px;
-            background: #95c3ed;
-            border-radius: 8px;
+            border-radius: 4px;
+            //background: #6da5f7;
             text-align: center;
             color: black;
             margin-right: 10px;
+        }
+        .icon{
+            &-1{
+                background: #cadbf3;
+            }
+            &-2{
+                background: #e8eaf6;
+            }
+            &-3{
+                background: #ffebee;
+            }
+            &-4{
+                background: #e0f2f1;
+            }
+            &-5{
+                background: #eee;
+            }
         }
         &-name{
             color: #1890ff;

@@ -7,7 +7,7 @@ const ProjectSetProof = props =>{
 
     const {proofStore,pipelineStore} = props
     const {findPipelineProof,fresh} = proofStore
-    const {pipelineId,pipelineName} = pipelineStore
+    const {pipelineId,pipeline} = pipelineStore
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -19,7 +19,7 @@ const ProjectSetProof = props =>{
         findPipelineProof(params)
     },[fresh,pipelineId])
 
-    return  <Proof pipelineId={pipelineId} pipelineName={pipelineName}/>
+    return  <Proof pipelineId={pipelineId} pipelineName={pipeline.pipelineName}/>
 
 }
 

@@ -13,7 +13,7 @@ const WorkSpace = props =>{
     const {workSpaceStore,pipelineStore} = props
 
     const {getSubmitMassage,fileTree,readFile,recordList,fileList,setFileList} = workSpaceStore
-    const {pipelineId,pipelineName} = pipelineStore
+    const {pipelineId,pipeline} = pipelineStore
 
     const [fresh,setFresh] = useState(false)
     const [catalogue,setCatalogue] = useState([]) // 目录
@@ -49,14 +49,14 @@ const WorkSpace = props =>{
         <div className="workSpace">
             <div className="workSpace-top workSpace-top-limited">
                 <BreadcrumbContent
-                    firstItem={pipelineName}
+                    firstItem={pipeline.pipelineName}
                     secondItem={"概况"}
                 />
             </div>
             <div className="workSpace-content">
                 <WorkSpaceNod
                     isFileList={isFileList}
-                    pipelineName={pipelineName}
+                    pipelineName={pipeline.pipelineName}
                     fileList={fileList}
                     setFileList={setFileList}
                     fresh={fresh}

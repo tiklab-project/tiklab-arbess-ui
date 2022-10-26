@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
-import {Avatar,Dropdown,Menu} from "antd";
+import {Avatar,Dropdown,Menu,Badge} from "antd";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {Profile,WorkAppConfig} from "tiklab-eam-ui";
-import {GlobalOutlined,MessageOutlined,SettingOutlined,LogoutOutlined,
-    UserOutlined,BellOutlined
+import {GlobalOutlined,BellOutlined,SettingOutlined,LogoutOutlined,
+    UserOutlined,
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -19,10 +19,13 @@ const Head = props =>{
 
     const {homePageStore} = props
 
-    const {findHeaderMessage,messageDispatchItemPage,visible,setVisible} = homePageStore
+    const {findMessageDispatchItemPage,messageDispatchItemPage,page,setPagination,pagination} = homePageStore
 
     let path = props.location.pathname
+
     const [currentLink,setCurrentLink] = useState(path)
+    const [visible,setVisible] = useState(false)
+    const [isLoading,setIsLoading] = useState(false)
 
     const userId = getUser().userId
     const {i18n,t} = useTranslation()
@@ -35,8 +38,16 @@ const Head = props =>{
         const param = {
             receiver:userId,
         }
-        visible && findHeaderMessage(param)
-    },[visible])
+        findMessageDispatchItemPage(param).then(res=>{
+            res.code===0 && pagination>1 && setIsLoading(false)
+        })
+    },[pagination])
+
+    const moreMessage = () =>{
+        setPagination(pagination+1)
+        setIsLoading(true)
+    }
+
 
     useEffect(()=>{
         setCurrentLink(path)
@@ -170,16 +181,19 @@ const Head = props =>{
             </div>
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
-                    <div className="frame-header-message">
-                        <MessageOutlined
-                            className="frame-header-icon"
-                            onClick={()=>goUserMessageContent()}
-                        />
-                    </div>
                     <div className="frame-header-language">
                         <Dropdown overlay={languageMenu}>
                             <GlobalOutlined className="frame-header-icon"/>
                         </Dropdown>
+                    </div>
+                    <div className="frame-header-message">
+                        <Badge count={page && page.total}>
+                            <BellOutlined
+                                className="frame-header-icon"
+                                onClick={()=>goUserMessageContent()}
+                            />
+                        </Badge>
+
                     </div>
                     <div className="frame-header-set">
                         <SettingOutlined
@@ -200,6 +214,9 @@ const Head = props =>{
             <MessageDrawer
                 visible={visible}
                 setVisible={setVisible}
+                page={page}
+                moreMessage={moreMessage}
+                isLoading={isLoading}
                 messageList={messageDispatchItemPage}
             />
         </div>

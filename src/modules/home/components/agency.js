@@ -21,7 +21,7 @@ const Agency = props =>{
                     <UserOutlined/>
                 </span>
                 <span className="user-create createUser">
-                    {item.createUser}
+                    {item.createUser.name}
                 </span>
                 <span className="user-arrow">
                     <ArrowRightOutlined />
@@ -30,15 +30,15 @@ const Agency = props =>{
                     <UserOutlined/>
                 </span>
                 <span className="user-create execUser">
-                    {item.execUser}
+                    {item.assignUser.name}
                 </span>
             </div>
         )
     }
 
     const renderState = item =>{
-        return  <div className={`agency-item-state state-${item.state}`}>
-                    {state(item.state)}
+        return  <div className={`agency-item-state state-${item.status}`}>
+                    {state(item.status)}
                 </div>
     }
 
@@ -52,16 +52,14 @@ const Agency = props =>{
                 {
                     taskList && taskList.map((item,index)=>{
                         return(
-                            <div key={index} className="agency-bottom-list"
-                                 onClick={()=>props.history.push("/index/system/myTodoTask")}
-                            >
+                            <div key={index} className="agency-bottom-list">
                                <div className="agency-item">
                                    <div className="agency-item-title">
                                         <span className="title-icon">
                                             <ShareAltOutlined/>
                                         </span>
                                        <span className="title-name">
-                                            {item.taskName}
+                                            {item.title}
                                        </span>
                                    </div>
                                    {renderUser(item)}

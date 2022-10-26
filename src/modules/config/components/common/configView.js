@@ -224,28 +224,28 @@ const ConfigView = props =>{
         renderFormView()
         :
         <>
-            {/*<Gui*/}
-            {/*    {...props}*/}
-            {/*    del={del}*/}
-            {/*    configStore={configStore}*/}
-            {/*    configDataStore={configDataStore}*/}
-            {/*    pipelineStore={pipelineStore}*/}
-            {/*/>*/}
-            {
-                !getVersionInfo().expired && isPlugin?
-                    <RemoteUmdComponent
-                        {...props}
-                        point={"gui"}
-                        pluginStore={pluginStore}
-                        isModalType={true}
-                        extraProps={{
-                            pipelineStore:toJS(pipelineStore),
-                            configDataStore:toJS(configDataStore),
-                            del,
-                        }}
-                    />
-                    :null
-            }
+            <Gui
+                {...props}
+                del={del}
+                configStore={configStore}
+                configDataStore={configDataStore}
+                pipelineStore={pipelineStore}
+            />
+            {/*{*/}
+            {/*    !getVersionInfo().expired && isPlugin?*/}
+            {/*        <RemoteUmdComponent*/}
+            {/*            {...props}*/}
+            {/*            point={"gui"}*/}
+            {/*            pluginStore={pluginStore}*/}
+            {/*            isModalType={true}*/}
+            {/*            extraProps={{*/}
+            {/*                pipelineStore:toJS(pipelineStore),*/}
+            {/*                configDataStore:toJS(configDataStore),*/}
+            {/*                del,*/}
+            {/*            }}*/}
+            {/*        />*/}
+            {/*        :null*/}
+            {/*}*/}
         </>
 }
 

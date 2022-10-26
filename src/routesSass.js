@@ -13,7 +13,7 @@ const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
 
-const Project=AsyncComponent(()=>import("./modules/project/common/container/project"))
+const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 
 /*  流水线详情 */
 const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))
@@ -21,9 +21,9 @@ const Structure=AsyncComponent(()=>import("./modules/project/structure/container
 const Config = AsyncComponent(()=>import("./modules/config/container/config"))
 
 /*  流水线详情 -- 设置 */
-const ProjectSetReDel=AsyncComponent(()=>import("./modules/project/reDel/projectSetReDel"))
-const ProjectSetProof=AsyncComponent(()=>import("./modules/project/proof/projectSetProof"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/project/members/projectSetUser"))
+const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
+const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
+const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))

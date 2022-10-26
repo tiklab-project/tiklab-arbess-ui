@@ -12,7 +12,7 @@ const WorkSpaceDrawer = props =>{
             visible={detailsDrawer}
             onClose={()=>setDetailsDrawer(false)}
             closable={false}
-            style={{marginTop:55}}
+            style={{marginTop:50,height:"calc(100vh - 50px)"}}
             contentWrapperStyle={{width:600}}
         >
             <div className="drawers">

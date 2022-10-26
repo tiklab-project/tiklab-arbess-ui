@@ -10,27 +10,27 @@ export function  FindAllOpen (data){
 }
 
 // 近期构建状态
-export function  RunState (data){
+export function  FindState (data){
     return serviceLoc.request({
-        url:"/pipeline/findBuildStatus",
+        url:"/pipeline/findState",
         method:"post",
         data
     })
 }
 
 // 所有动态
-export function  FindLog (data){
+export function  Findlogpage (data){
     return serviceLoc.request({
-        url:"/pipelineWorkSpace/findLog",
+        url:"/oplog/findlogpage",
         method:"post",
         data
     })
 }
 
 // 我的代办
-export function  FindTask (data){
+export function  Findtodopage (data){
     return serviceLoc.request({
-        url:"/pipelineWorkSpace/findTask",
+        url:"/todo/findtodopage",
         method:"post",
         data
     })

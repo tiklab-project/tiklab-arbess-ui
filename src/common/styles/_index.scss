@@ -7,7 +7,7 @@ ul li{
 
 .drawers{
     &-body{
-        height: calc(100vh - 115px);
+        height: calc(100vh - 140px);
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -25,6 +25,24 @@ ul li{
 .message{
     margin-top: 5vh;
     margin-left: 5vh;
+}
+
+::-webkit-scrollbar {
+    /* 滚动条宽度， width：对应竖滚动条的宽度  height：对应横滚动条的高度*/
+    background: #fff;
+    width: 6px;
+    height: 1px;
+    /* background: #ccc; */
+}
+::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    border-radius: 10px;
+    background: #EDEDED;
+}
+/*定义滑块样式*/
+::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    height:10px;    /* 滚动条滑块长度 */
+    background-color: #ccc;
 }
 
 .home-limited{

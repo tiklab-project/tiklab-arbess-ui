@@ -14,7 +14,7 @@ const Deploy = props =>{
 
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = configDataStore
 
-    const {fileAddress,getFile,profileAddress,updateConfigure} = configStore
+    const {getFile,updateConfigure,enabledValid,setEnabledValid} = configStore
     const {pipelineId,pipelineName} = pipelineStore
 
     const [bordered,setBordered] = useState(false)
@@ -26,10 +26,6 @@ const Deploy = props =>{
             setMessageInfo("")
         }
     },[pipelineId])
-
-    useEffect(()=>{
-        fileAddress()
-    },[])
 
     useEffect(()=>{
         const params = {
@@ -64,6 +60,7 @@ const Deploy = props =>{
         }
         updateConfigure(params).then(res=>{
             res.code===0 && setIsLoading(3)
+            value===0 && setEnabledValid(!enabledValid)
         })
 
         setTimeout(()=>setIsLoading(1),1000)
@@ -104,7 +101,7 @@ const Deploy = props =>{
                         bordered={bordered}
                         onClick={onClick}
                         onFocus={onFocus}
-                        onBlur={onBlur}
+                        onBlur={e=>onBlur(e)}
                         onChange={changDeployType}
                     >
                         <Select.Option value={0}>结构化部署</Select.Option>
@@ -124,18 +121,13 @@ const Deploy = props =>{
                             <DeploySame
                                 {...props}
                                 configDataStore={configDataStore}
-                                profileAddress={profileAddress}
                                 messageInfo={messageInfo}
-                                pipelineName={pipelineName}
-                                pipelineStore={pipelineStore}
-                                configStore={configStore}
                             />
                             {
                                 deployType==31 ?
                                 <DeployVir 
                                     {...props}
                                     configDataStore={configDataStore}
-                                    configStore={configStore}
                                 />
                                 :
                                 <DeployDocker deployType={deployType}/>
@@ -143,12 +135,10 @@ const Deploy = props =>{
                         </>) :
                         <Form.Item name={"startShell"} label="Shell命令">
                             <Mirror
-                                pipelineStore={pipelineStore}
                                 name={"startShell"}
                                 type={deployType}
                                 shellBlock={deployShellBlock}
                                 setShellBlock={setDeployShellBlock}
-                                configStore={configStore}
                                 placeholder={"请输入Shell命令"}
                             />
                         </Form.Item>

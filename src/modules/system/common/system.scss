@@ -18,8 +18,11 @@
         }
         &-top{
             height: calc(100% - 120px);
-            overflow: auto;
+            overflow: hidden;
             min-height: 100%;
+            &:hover{
+                overflow: auto;
+            }
         }
         ul,li {
             list-style: none;
@@ -49,16 +52,7 @@
         }
         &-select {
             background: #e3e8f0;
-            &:before{
-                width: 4px;
-                height: 40px;
-                transition: all .4s cubic-bezier(.23,1,.32,1);
-                content: " ";
-                position: absolute;
-                z-index: 2;
-                left: 1px;
-                background: #1890ff
-            }
+            border-right: 3px solid #1890ff;
         }
     }
     &-content{

@@ -18,9 +18,9 @@ export class PipelineStore {
     @observable followLength = ""
     @observable lastPath = ""
     @observable pipelineId = ""
-    @observable pipelineName = ""
     @observable fresh = false
     @observable listType = 1
+    @observable pipeline = ""
 
     @action
     setListType = value =>{
@@ -38,8 +38,8 @@ export class PipelineStore {
     }
 
     @action
-    setPipelineName = value =>{
-        this.pipelineName = value
+    setPipeline = value =>{
+        this.pipeline = value
     }
 
     @action

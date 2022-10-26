@@ -11,7 +11,7 @@ const Deploy = props =>{
 
     const context = useContext(TestContext)
 
-    const {fileAddress,getFile,profileAddress} = context.configStore
+    const {getFile,profileAddress} = context.configStore
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = context.configDataStore
     const {pipelineId, pipelineName} = context.pipelineStore
     const valueChange = context.valueChange
@@ -24,9 +24,6 @@ const Deploy = props =>{
         }
     },[pipelineId])
 
-    useEffect(()=>{
-        fileAddress()
-    },[])
 
     useEffect(()=>{
         const params = {

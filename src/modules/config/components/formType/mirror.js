@@ -1,4 +1,4 @@
-import React,{useRef,useState} from "react";
+import React,{useRef,useState,forwardRef} from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
@@ -10,11 +10,11 @@ import "codemirror/mode/shell/shell.js";
 import "codemirror/addon/display/placeholder.js";
 
 import {message} from "antd";
-
+import {inject,observer} from "mobx-react";
 import "./mirror.scss";
-import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined,CloseCircleOutlined,LoadingOutlined} from "@ant-design/icons";
 
-const MirrorContent = props =>{
+const MirrorContent = forwardRef((props,ref)=>{
 
     const {shellBlock,setShellBlock,type,name,pipelineStore,configStore,placeholder} = props
 
@@ -24,13 +24,15 @@ const MirrorContent = props =>{
     const {updateConfigure} = configStore
 
     const [isLoading,setIsLoading] = useState(1)
+    const [bordered,setBordered] = useState(false)
 
     
     const onFocus = () => {
-        setIsLoading(2)
+        setBordered(true)
     }
     
     const onBlur = () =>{
+        setIsLoading(2)
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
         const params = {
@@ -48,6 +50,7 @@ const MirrorContent = props =>{
                 message.info(res.msg)
             }
         })
+        setBordered(false)
         setTimeout(()=>setIsLoading(1),1000)
     }
 
@@ -64,7 +67,7 @@ const MirrorContent = props =>{
         }
     }
 
-    return  <div className={`${isLoading===2 ?"codeNewStage":"formViewCodeMirror"}`}>
+    return  <div className={`${bordered?"codeNewStage":"formViewCodeMirror"}`}>
         <CodeMirror
             value={shellBlock}//内容
             ref={mirrorRefs}
@@ -78,7 +81,7 @@ const MirrorContent = props =>{
         />
         <div className="formViewCodeMirror-suffix">{suffix()}</div>
     </div>
-}
+})
 
-export default MirrorContent
+export default inject("pipelineStore","configStore")(observer(MirrorContent))
 

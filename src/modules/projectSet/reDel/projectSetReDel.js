@@ -11,7 +11,7 @@ const ProjectSetReDel = props =>{
 
     const {pipelineStore} = props
 
-    const {deletePipeline,updatePipeline,pipelineList,pipelineId,pipelineName,setPipelineName}=pipelineStore
+    const {deletePipeline,updatePipeline,pipelineList,pipelineId,pipeline,setPipelineName}=pipelineStore
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
 
@@ -21,7 +21,7 @@ const ProjectSetReDel = props =>{
     const del = () =>{
         const params = {
             userId:userId,
-            pipelineId:pipelineId
+            pipelineId
         }
         deletePipeline(params).then(res=>{
             if(res.code === 0 && res.data === 1){
@@ -126,7 +126,7 @@ const ProjectSetReDel = props =>{
 
     return(
         <div className="pipelineReDel">
-            <BreadcrumbContent firstItem={pipelineName} secondItem={"设置"}/>
+            <BreadcrumbContent firstItem={pipeline.pipelineName} secondItem={"设置"}/>
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">
                     {

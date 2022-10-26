@@ -48,11 +48,12 @@ const Inputs = props =>{
 
     const onFocus = () => {
         setBordered(true)
-        setIsLoading(2)
     }
 
-    const onBlur = (e) => {
-        // 获取input 的id
+    const onBlur = e => {
+
+        setIsLoading(2)
+
         const obj = {}
         obj[name] = e.target.value
         const params = {

@@ -3,7 +3,7 @@ import {Form,Modal,Button,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import PipelineAddModalType from "./pipelineAddModalType";
-import ProjectRename from "../../project/reDel/projectRename";
+import ProjectRename from "../../projectSet/reDel/projectRename";
 import moment from "../../../common/moment/moment";
 
 const {Step} = Steps

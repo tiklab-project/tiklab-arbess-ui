@@ -65,12 +65,6 @@ const PipelineTable = props =>{
         }
     }
 
-    const renderIcon = text => {
-        let t = text.substring(0,1).toUpperCase()
-        return   <span className="pipelineTable-pipelineName-icon">{t}</span>
-
-    }
-
     const columns = [
         {
             title: "流水线名称",
@@ -83,7 +77,7 @@ const PipelineTable = props =>{
                         <span onClick={()=>goPipelineTask(text,record)}
                               className="pipelineTable-pipelineName-task"
                         >
-                            <span className="pipelineTable-pipelineName-icon">
+                            <span className={`pipelineTable-pipelineName-icon icon-${record.color}`}>
                                 {text.substring(0,1).toUpperCase()}
                             </span>
                             <span className="pipelineTable-pipelineName-name">

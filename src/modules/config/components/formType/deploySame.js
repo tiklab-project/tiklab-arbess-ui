@@ -6,7 +6,7 @@ import Inputs from "./inputs";
 
 const DeploySame = props =>{
 
-    const {configDataStore,profileAddress,messageInfo,pipelineName,pipelineStore,configStore} = props
+    const {configDataStore,messageInfo} = props
 
     const {deployType,deployOrderShellBlock,setDeployOrderShellBlock} = configDataStore
 
@@ -17,7 +17,7 @@ const DeploySame = props =>{
                 label={"应用源文件地址"}
                 name={"sourceAddress"}
                 mode={deployType}
-                addonBefore={profileAddress+pipelineName}
+                addonBefore={"/"}
             />
             <div className="deployTargetAddress">{messageInfo}</div>
             <Inputs
@@ -54,10 +54,8 @@ const DeploySame = props =>{
                 <Mirror
                     name={"deployOrder"}
                     type={deployType}
-                    pipelineStore={pipelineStore}
                     shellBlock={deployOrderShellBlock}
                     setShellBlock={setDeployOrderShellBlock}
-                    configStore={configStore}
                     placeholder={"请输入部署文件命令"}
                 />
             </Form.Item>

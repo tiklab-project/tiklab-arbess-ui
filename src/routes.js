@@ -8,7 +8,10 @@ const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 
 /* 工作台 */
-const Widget=AsyncComponent(()=>import("./modules/wiget/wiget"))
+const FullWorkTodo=AsyncComponent(()=>import("./modules/wiget/fullWorkTodo"))
+const WidgetMangent=AsyncComponent(()=>import("./modules/wiget/widgetMangent"))
+const OpLogWidget=AsyncComponent(()=>import("./modules/wiget/opLogWidget"))
+const TodoWidget=AsyncComponent(()=>import("./modules/wiget/todoWidget"))
 
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
@@ -16,7 +19,7 @@ const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
 
-const Project=AsyncComponent(()=>import("./modules/project/common/container/project"))
+const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 
 /*  流水线详情 */
 const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))
@@ -24,17 +27,17 @@ const Structure=AsyncComponent(()=>import("./modules/project/structure/container
 const Config = AsyncComponent(()=>import("./modules/config/container/config"))
 
 /*  流水线详情 -- 设置 */
-const ProjectSetReDel=AsyncComponent(()=>import("./modules/project/reDel/projectSetReDel"))
-const ProjectSetProof=AsyncComponent(()=>import("./modules/project/proof/projectSetProof"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/project/members/projectSetUser"))
+const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
+
+const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
+const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
+const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
 
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-
-
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 
@@ -89,11 +92,11 @@ const routers=[
                 component: HomePage,
                 exact:true,
             },
-            // {
-            //     path: "/index/widget",
-            //     component: Widget,
-            //     exact:true,
-            // },
+            {
+                path: "/index/fullWorkTodo",
+                component: FullWorkTodo,
+                exact:true,
+            },
             {
                 path:"/index/pipeline",
                 component:Pipeline,
@@ -124,21 +127,27 @@ const routers=[
                         component: Structure
                     },
                     {
-                        path:"/index/task/:pipelineId/assembly/proof",
-                        component:ProjectSetProof
+                        path:"/index/task/:pipelineId/assembly",
+                        component: ProjectSet,
+                        routes:[
+                            {
+                                path:"/index/task/:pipelineId/assembly/proof",
+                                component:ProjectSetProof
+                            },
+                            {
+                                path:"/index/task/:pipelineId/assembly/role",
+                                component: ProjectRole
+                            },
+                            {
+                                path:"/index/task/:pipelineId/assembly/redel",
+                                component: ProjectSetReDel
+                            },
+                            {
+                                path:"/index/task/:pipelineId/assembly/user",
+                                component: ProjectSetUser
+                            },
+                        ]
                     },
-                    {
-                        path:"/index/task/:pipelineId/assembly/role",
-                        component: ProjectRole
-                    },
-                    {
-                        path:"/index/task/:pipelineId/assembly/redel",
-                        component: ProjectSetReDel
-                    },
-                    {
-                        path:"/index/task/:pipelineId/assembly/user",
-                        component: ProjectSetUser
-                    }
                 ]
             },
             {
@@ -189,10 +198,10 @@ const routers=[
                         path: "/index/system/todoTemp",
                         component: TodoTemp,
                     },
-                    {
-                        path:"/index/system/log",
-                        component: LogList,
-                    },
+                    // {
+                    //     path:"/index/system/log",
+                    //     component: LogList,
+                    // },
                     {
                         path:"/index/system/myLog",
                         component: MyLogList,

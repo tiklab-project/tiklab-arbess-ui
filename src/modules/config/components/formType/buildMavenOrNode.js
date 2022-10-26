@@ -6,11 +6,9 @@ import Inputs from "./inputs";
 
 const BuildMavenOrNode = props =>{
 
-    const {configDataStore,configStore,pipelineStore} = props
+    const {configDataStore} = props
 
     const {buildShellBlock,buildType,setBuildShellBlock} = configDataStore
-    const {profileAddress} = configStore
-    const {pipelineName} = pipelineStore
 
     return(
         <>
@@ -20,7 +18,7 @@ const BuildMavenOrNode = props =>{
                 label={"文件地址"}
                 name={"buildAddress"}
                 mode={buildType}
-                addonBefore={profileAddress+pipelineName}
+                addonBefore={"/"}
             />
 
             <Form.Item
@@ -30,8 +28,6 @@ const BuildMavenOrNode = props =>{
                 <Mirror
                     name={"buildOrder"}
                     type={buildType}
-                    pipelineStore={pipelineStore}
-                    configStore={configStore}
                     shellBlock={buildShellBlock}
                     setShellBlock={setBuildShellBlock}
                     placeholder={"请输入执行命令"}
@@ -41,4 +37,4 @@ const BuildMavenOrNode = props =>{
     )
 }
 
-export default inject("configDataStore","configStore","pipelineStore")(observer(BuildMavenOrNode))
+export default inject("configDataStore")(observer(BuildMavenOrNode))
