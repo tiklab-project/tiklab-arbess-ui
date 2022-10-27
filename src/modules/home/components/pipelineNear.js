@@ -11,13 +11,11 @@ const PipelineNear = props =>{
     }
 
     const renderList = (item) => {
-        return <div
-            onClick={()=>goPipeline(item.pipelineId)}
-            className="pipelineNear-bottom-list"
-            key={item.pipelineId}
-        >
+        return <div className="pipelineNear-bottom-list" key={item.pipelineId}>
             <div className="pipelineNear-item">
-                <div>
+                <div className="pipelineNear-item-title"
+                     onClick={()=>goPipeline(item.pipelineId)}
+                >
                     <span className={`pipelineNear-item-icon icon-${item.pipeline.color}`}>
                         {item.pipelineName.substring(0,1).toUpperCase()}
                     </span>

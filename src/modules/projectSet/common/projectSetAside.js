@@ -21,24 +21,24 @@ const ProjectSetAside = props =>{
     // 侧边流水线设置的第二级导航
     const secondRouter = [
         {
+            key:`/index/task/${pipelineId}/assembly/redel`,
+            label:"流水线设置",
+            enCode:"DD4",
+        },
+        {
             key:`/index/task/${pipelineId}/assembly/user`,
-            label:"项目成员",
+            label:"流水线成员",
             enCode:"DD1",
         },
         {
             key:`/index/task/${pipelineId}/assembly/role`,
-            label:"角色管理",
+            label:"流水线权限",
             enCode:"DD2",
         },
         {
             key:`/index/task/${pipelineId}/assembly/proof`,
-            label:"凭证管理",
+            label:"流水线凭证",
             enCode:"DD3",
-        },
-        {
-            key:`/index/task/${pipelineId}/assembly/redel`,
-            label:"其他管理",
-            enCode:"DD4",
         },
     ]
     

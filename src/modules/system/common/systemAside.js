@@ -1,13 +1,15 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {PrivilegeButton} from "tiklab-privilege-ui";
-import {userRouter,Router} from "./sysRouters";
+import {departmentRouter,applicationRouter,templateRouter} from "./sysRouters";
 
 const SystemAside= props =>  {
 
     const path = props.location.pathname
     const [selectKey,setSelectKey] = useState(path)
     const [expandedTree,setExpandedTree] = useState(["/index/system/syr/feature"])  // 树的展开与闭合
+
+    const authType = JSON.parse(localStorage.getItem("authConfig")).authType
 
     useEffect(()=>{
         setSelectKey(path)
@@ -25,9 +27,7 @@ const SystemAside= props =>  {
                     onClick={()=>select(data.key)}
                     key={data.key}
                 >
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref={data.icon} />
-                    </svg>
+                    <span style={{paddingRight:5}}>{data.icon}</span>
                     <span>{data.label}</span>
                 </li>
             </PrivilegeButton>
@@ -43,9 +43,7 @@ const SystemAside= props =>  {
                          onClick={()=>setOpenOrClose(item.key)}
                     >
                         <span style={{color: "$blue-main"}}>
-                            <svg className="icon" aria-hidden="true">
-                                <use xlinkHref={item.icon} />
-                            </svg>
+                            <span style={{paddingRight:5}}>{item.icon}</span>
                             <span className="system-aside-title">{item.label}</span>
                         </span>
                         <div className="system-aside-item-icon">
@@ -88,13 +86,19 @@ const SystemAside= props =>  {
         <div className="system-aside">
             <ul style={{padding: "10px 0 0"}} key="0" className="system-aside-top">
                 {
-                    devProduction && userRouter.map(firstItem => {
+                    authType && departmentRouter.map(firstItem => {
                         return firstItem.children && firstItem.children.length > 0 ?
                             renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
                     })
                 }
                 {
-                    !devProduction && Router.map(firstItem=>{
+                    applicationRouter.map(firstItem => {
+                        return firstItem.children && firstItem.children.length > 0 ?
+                            renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                    })
+                }
+                {
+                    devProduction && templateRouter.map(firstItem=>{
                         return firstItem.children && firstItem.children.length > 0 ?
                             renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
                     })

@@ -1,9 +1,13 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {Button,Form,Input,Radio} from "antd";
 
 const ProjectRename = props =>{
 
-    const {pipelineList,form,re,layout} = props
+    const {pipelineList,form,re,layout,pipeline} = props
+
+    useEffect(()=>{
+        pipeline && form.setFieldsValue({pipelineName:pipeline.pipelineName})
+    },[])
 
     const style1 = {
         "width":416
@@ -19,7 +23,7 @@ const ProjectRename = props =>{
             onFinish={re}
             autoComplete="off"
             layout={layout}
-            initialValues={layout==="vertical"?init:null}
+            initialValues={re ?null:init}
         >
             <Form.Item
                 label={layout==="vertical"?"流水线名称":"重命名"}
@@ -32,7 +36,7 @@ const ProjectRename = props =>{
                     },
                     {
                         type: "string",
-                        max: 10,
+                        max: 20,
                         message:"流水线名称过长"
                     },
                     ({ getFieldValue }) => ({
@@ -52,7 +56,10 @@ const ProjectRename = props =>{
                     }),
                 ]}
             >
-                <Input allowClear style={layout==="inline" ? style1:null}/>
+                <Input
+                    allowClear
+                    style={ re ? style1:null}
+                />
             </Form.Item>
             {
                 layout === "vertical" ?

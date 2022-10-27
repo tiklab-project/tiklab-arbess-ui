@@ -27,10 +27,14 @@
             background: #f4f4f4;
         }
         &-bottom{
-            height: 45px;
-            line-height: 45px;
             padding-left: 45px;
             margin: 10px 0;
+            .bottom{
+                &-rename{
+                    height: 45px;
+                    line-height: 45px;
+                }
+            }
         }
         &-none{
             display: none;

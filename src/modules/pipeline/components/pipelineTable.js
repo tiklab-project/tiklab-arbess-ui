@@ -1,7 +1,8 @@
 import React from "react";
 import {message,Tooltip} from "antd";
 import {getUser} from "tiklab-core-ui";
-import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined
+import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
+    MinusCircleOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
@@ -105,9 +106,7 @@ const PipelineTable = props =>{
                                 </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建">
-                                    <svg className="icon" aria-hidden="true" style={{height:30,width:30}}>
-                                        <use xlinkHref="#icon-dengdai1"/>
-                                    </svg>
+                                    <MinusCircleOutlined style = {{fontSize:26,color:"#6698ff"}}/>
                                 </Tooltip>
                     case 20:
                         return  <Tooltip title="停止">

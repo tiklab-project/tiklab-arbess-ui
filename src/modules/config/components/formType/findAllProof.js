@@ -3,8 +3,8 @@ import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
 import AddProofButton from "../../../proof/components/addProofButton";
-import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined} from "@ant-design/icons";
 import "./inputs.scss";
+import SuffixStatus from "./suffixStatus";
 
 const {Option} = Select
 
@@ -59,6 +59,7 @@ const FindAllProof = props =>{
     }
 
     const changeGitSelect = (value,e) =>{
+        console.log(e.key)
         if(type < 6){
             setGitProofId(e.key)
         }else {
@@ -83,19 +84,6 @@ const FindAllProof = props =>{
     const onBlur = () => {
         setIsLoading(1)
         setBordered(false)
-    }
-
-    const suffix = () =>{
-        switch (isLoading) {
-            case 1:
-                return <span/>
-            case 2:
-                return <LoadingOutlined style={{color:"#1890ff"}}/>
-            case 3:
-                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
-            case 4:
-                return <CloseCircleOutlined style={{color:"red"}}/>
-        }
     }
 
     const style1 = {
@@ -141,7 +129,7 @@ const FindAllProof = props =>{
                 </Select>
             </Form.Item>
             <div className="formView-inputs-suffix">
-                {suffix(isLoading)}
+                <SuffixStatus isLoading={isLoading}/>
             </div>
         </div>
     )

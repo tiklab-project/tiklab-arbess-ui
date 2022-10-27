@@ -63,8 +63,13 @@ const UpdateProof = props =>{
                 setVisible={setVisible}
                 title={"修改凭证"}
             />
-            <div style={{height:600,overflow:"auto"}}>
-                <Form form={form} layout="vertical" name="userForm" autoComplete="off">
+            <div style={{maxHeight:650,overflow:"auto"}}>
+                <Form
+                    form={form}
+                    layout="vertical"
+                    name="userForm"
+                    autoComplete="off"
+                >
                     <Form.Item label="凭证级别" name="type">
                         <Select onChange={opt}>
                             <Option value={1}>全局凭证</Option>
@@ -76,7 +81,6 @@ const UpdateProof = props =>{
                             <Form.Item
                                 label="项目作用域"
                                 name="proofList"
-                                className="proofModal-showPipeline"
                                 rules={[{required:true,message:"请选择项目作用域"}]}
                             >
                                 <Checkbox.Group>
@@ -113,11 +117,8 @@ const UpdateProof = props =>{
                         name="proofName"
                         rules={[
                             {required:true, message:"请输入凭证名称"},
-                            {
-                                type:"string",
-                                max: 10,
-                                message:"流水线名称过长"
-                            },]}
+                            {type:"string", max: 10, message:"凭证名称过长"}
+                        ]}
                     >
                         <Input placeholder="名称"/>
                     </Form.Item>
@@ -137,15 +138,20 @@ const UpdateProof = props =>{
                                         <Form.Item label="密码" name="proofPassword">
                                             <Input.Password disabled={displayPart}/>
                                         </Form.Item>
+                                        <Form.Item name="proofDescribe" label="描述">
+                                            <Input.TextArea />
+                                        </Form.Item>
                                     </>
                                 ):
-                                <Form.Item name="proofPassword" label="私钥">
-                                    <Input.TextArea  disabled={displayPart}/>
-                                </Form.Item>
+                                <>
+                                    <Form.Item name="proofPassword" label="私钥">
+                                        <Input.TextArea  disabled={displayPart}/>
+                                    </Form.Item>
+                                    <Form.Item name="proofDescribe" label="描述">
+                                        <Input.TextArea />
+                                    </Form.Item>
+                                </>
                         }
-                    </Form.Item>
-                    <Form.Item name="proofDescribe" label="描述">
-                        <Input.TextArea />
                     </Form.Item>
                 </Form>
             </div>

@@ -37,7 +37,7 @@ export function  Findtodopage (data){
 }
 
 // 我的消息
-export function  FindMessage (data){
+export function  FindMessageDispatchItemPage(data){
     return serviceLoc.request({
         url:"/message/messageDispatchItem/findMessageDispatchItemPage",
         method:"post",

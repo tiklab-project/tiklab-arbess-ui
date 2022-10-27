@@ -1,8 +1,11 @@
 .messageModal{
     height: calc(100% - 42px);
     overflow: hidden;
-    &-list{
+    &-screen{
         height: calc(100% - 36px);
+    }
+    &-list{
+        height: 100%;
         overflow: auto;
         .tidings-item{
             display: flex;
@@ -12,9 +15,6 @@
             cursor: pointer;
             border-bottom: 1px solid #f4f4f4;
             padding: 5px;
-            &:first-child{
-                border-top: 1px solid #f4f4f4;
-            }
 
             &:hover{
                 background: #f4f4f4;

@@ -1,7 +1,14 @@
 import React,{useEffect,useState} from "react";
 import {getUser} from "tiklab-core-ui";
 import {Spin} from "antd";
-import {LoadingOutlined,ExclamationCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
+import {
+    LoadingOutlined,
+    ExclamationCircleOutlined,
+    CloseCircleOutlined,
+    CheckCircleOutlined,
+    MinusCircleOutlined,
+    PlayCircleOutlined
+} from "@ant-design/icons";
 import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
@@ -137,25 +144,21 @@ const Structure = props => {
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
             case 1 :
                 //成功
-                return  <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-chenggong-"/>
-                        </svg>
+                return  <CheckCircleOutlined style = {{fontSize:17,color:"#1890ff"}}/>
+
             case 2 :
                 //失败
                 return  <CloseCircleOutlined style = {{fontSize:17,color:"red"}}/>
             case 3:
                 //运行--等待运行
-                return  <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-yunhang"/>
-                        </svg>
+                return  <PlayCircleOutlined style = {{fontSize:17}}/>
             case 4:
                 //被迫停止
                 return  <ExclamationCircleOutlined style = {{fontSize:17}}/>
             case 5:
                 //运行过程
-                return  <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-dengdai1"/>
-                        </svg>
+                return  <MinusCircleOutlined style = {{fontSize:17,color:"#6698ff"}}/>
+
         }
     }
     

@@ -1,12 +1,12 @@
-import React,{useState} from "react";
-import {Drawer,Select,Divider} from "antd";
+import React,{useEffect} from "react";
+import {Drawer,Select,Divider,Tabs} from "antd";
 import {UserOutlined,BellOutlined,LoadingOutlined} from "@ant-design/icons";
 import ModalTitle from "../../common/modalTitle/modalTitle";
 import "./messageDrawer.scss";
 
 const MessageDrawer = props =>{
 
-    const {visible,setVisible,messageList,page,moreMessage,isLoading} = props
+    const {visible,setVisible,messageList,page,moreMessage,isLoading,pagination} = props
 
     const renderState = state =>{
         switch (state) {
@@ -17,20 +17,54 @@ const MessageDrawer = props =>{
         }
     }
 
-    const title = (
-        <>
-            <Select bordered={false} style={{width:120}} defaultValue={2}>
-                <Select.Option value={2}>
-                    <BellOutlined style={{fontSize:16}}/>全部消息
-                </Select.Option>
-                <Select.Option value={0}>
-                    <BellOutlined style={{fontSize:16}}/>未读消息
-                </Select.Option>
-                <Select.Option value={1}>
-                    <BellOutlined style={{fontSize:16}}/>已读消息
-                </Select.Option>
-            </Select>
-        </>
+    const renderMessageList = () =>{
+        return messageList && messageList.map((item,index)=>{
+            return(
+                <div className="tidings-item" key={index}>
+                    <div className="tidings-item-left">
+                        <div className="tidings-item-icon">
+                            <UserOutlined/>
+                        </div>
+                        <div>
+                            <div className="tidings-item-user">
+                                <span className="user-sendUser">
+                                    {/*{item.receiver}*/}
+                                </span>
+                                <span className="user-time">
+                                    {item.receiveTime}
+                                </span>
+                            </div>
+                            <div className="tidings-item-message">
+                                <span>{item.messageTemplate.content}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={`tidings-item-right tidings-item-state-${item.status}`}>
+                        {renderState(item.status)}
+                    </div>
+                </div>
+            )
+        })
+    }
+
+    const screen = (
+        <div className="messageModal-screen">
+            <Tabs defaultValue={2}>
+                <Tabs.TabPane key={2} tab={"全部"}>
+                    <div className="messageModal-list">
+                        {
+                            renderMessageList(messageList)
+                        }
+                    </div>
+                </Tabs.TabPane>
+                <Tabs.TabPane key={0} tab={'未读'}>
+                    未读消息
+                </Tabs.TabPane>
+                <Tabs.TabPane key={1} tab={"已读"} >
+                    已读消息
+                </Tabs.TabPane>
+            </Tabs>
+        </div>
     )
 
     return(
@@ -46,44 +80,12 @@ const MessageDrawer = props =>{
             <div className="drawers">
                 <ModalTitle
                     setVisible={setVisible}
-                    title={title}
+                    title={<><BellOutlined style={{fontSize:16}}/>消息</>}
                 />
                 <div className="messageModal">
-                    <div className="messageModal-list">
-                        {
-                            messageList && messageList.map((item,index)=>{
-                                return(
-                                    <div className="tidings-item" key={index}>
-                                        <div className="tidings-item-left">
-                                            <div className="tidings-item-icon">
-                                                <UserOutlined/>
-                                            </div>
-                                            <div>
-                                                <div className="tidings-item-user">
-                                            <span className="user-sendUser">
-                                                {/*{item.receiver}*/}
-                                            </span>
-                                                    <span className="user-time">
-                                                {item.receiveTime}
-                                            </span>
-                                                </div>
-                                                <div className="tidings-item-message">
-                                                    <span>{item.messageTemplate.content}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className={`tidings-item-right tidings-item-state-${item.status}`}
-                                        >
-                                            {renderState(item.status)}
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    {screen}
                     {
-                        messageList && messageList.length === page.total &&
+                        messageList && messageList.length === page.total && pagination > 1&&
                         <Divider plain>没有更多了 🤐</Divider>
                     }
                     {

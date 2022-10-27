@@ -68,7 +68,7 @@ const AddProofModal = props =>{
                 title={"添加凭证"}
                 setVisible={setVisible}
             />
-           <div style={{height:600,overflow:"auto"}}>
+           <div style={{maxHeight:650,overflow:"auto"}}>
                <Form form={form}
                      layout="vertical"
                      name="userForm"
@@ -121,7 +121,7 @@ const AddProofModal = props =>{
                            {
                                type:"string",
                                max: 10,
-                               message:"流水线名称过长"
+                               message:"凭证名称过长"
                            },
                        ]}
                    >
@@ -143,15 +143,20 @@ const AddProofModal = props =>{
                                        <Form.Item label="密码" name="proofPassword">
                                            <Input.Password  placeholder="密码"/>
                                        </Form.Item>
+                                       <Form.Item name="proofDescribe" label="描述">
+                                           <Input.TextArea  placeholder="备注"/>
+                                       </Form.Item>
                                    </>
                                ):
-                               <Form.Item name="proofPassword" label="私钥">
-                                   <Input.TextArea  placeholder="私钥"/>
-                               </Form.Item>
+                               <>
+                                   <Form.Item name="proofPassword" label="私钥">
+                                       <Input.TextArea  placeholder="私钥"/>
+                                   </Form.Item>
+                                   <Form.Item name="proofDescribe" label="描述">
+                                       <Input.TextArea  placeholder="备注"/>
+                                   </Form.Item>
+                               </>
                        }
-                   </Form.Item>
-                   <Form.Item name="proofDescribe" label="描述">
-                       <Input.TextArea  placeholder="备注"/>
                    </Form.Item>
                </Form>
            </div>

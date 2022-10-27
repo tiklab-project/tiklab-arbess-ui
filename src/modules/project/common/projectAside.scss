@@ -6,11 +6,10 @@
     .aside{
         background-color: #f8f8f8;
         left: 0;
-        top: 55px;
+        top: 50px;
         height: 100%;
         .content{
             width: 80px;
-            padding: 10px 0 0;
             height: calc(100% - 55px);
         }
         &_content{

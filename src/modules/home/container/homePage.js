@@ -4,7 +4,7 @@ import DynamicList from "../components/dynamicList";
 import PipelineNear from "../components/pipelineNear";
 import QuickIn from "../components/quickIn";
 import Agency from "../components/agency";
-import State from "../components/state";
+import Statistics from "../components/statistics";
 import "../components/homePage.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -13,8 +13,9 @@ const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
 
-    const {findAllOpen,pipelineNearList,findlogpage,dynamicList,taskList,findtodopage,
-        setDynaPagination,dynaPagination,dynaPage,setDynamicList,findState,stateList
+    const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,
+        setDynaPagination,dynaPagination,dynaPageTotal,findState,stateList,
+        dynamicList,setDynamicList
     } = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
@@ -40,15 +41,19 @@ const HomePage = props =>{
         // 构建状态
         findState()
 
-        return () =>{
+        return()=>{
             setDynamicList([])
             setDynaPagination(1)
         }
+
     },[])
 
     useEffect(()=>{
         const params = {
             userId:userId,
+            pageParam:{
+                currentPage:1
+            }
         }
         // 近期动态
         findlogpage(params).then(res=>{
@@ -71,9 +76,7 @@ const HomePage = props =>{
                         pipelineLength={pipelineLength}
                         followLength={followLength}
                     />
-                    {/*<State*/}
-                    {/*    stateList={stateList}*/}
-                    {/*/>*/}
+                    {/*<Statistics stateList={stateList}/>*/}
                 </div>
                 <div className="homePage-content-center">
                     <PipelineNear
@@ -91,7 +94,8 @@ const HomePage = props =>{
                         dynamicList={dynamicList}
                         moreDynamic={moreDynamic}
                         isDyna={isDyna}
-                        dynaPage={dynaPage}
+                        dynaPageTotal={dynaPageTotal}
+                        dynaPagination={dynaPagination}
                     />
                 </div>
             </div>

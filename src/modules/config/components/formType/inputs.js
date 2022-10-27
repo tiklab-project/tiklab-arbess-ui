@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
-import {LoadingOutlined,CheckCircleOutlined,CloseCircleOutlined} from "@ant-design/icons";
 import "./inputs.scss";
+import SuffixStatus from "./suffixStatus";
 
 const Inputs = props =>{
 
@@ -10,7 +10,7 @@ const Inputs = props =>{
 
     const {pipelineId} = pipelineStore
     const {updateConfigure,setEnabledValid,enabledValid} = configStore
-    const {setFormInitialValues,codeType} = configDataStore
+    const {formInitialValues,codeType} = configDataStore
 
     const [bordered,setBordered] = useState(false)
     const [isLoading,setIsLoading] = useState(1)
@@ -23,10 +23,10 @@ const Inputs = props =>{
     const onchange = e  => {
         switch (name){
             case "codeName":
-                setFormInitialValues({codeName:e.target.value})
+                formInitialValues.codeName=e.target.value
                 break
             case "codeBranch":
-                setFormInitialValues({codeBranch:e.target.value})
+                formInitialValues.codeBranch=e.target.value
         }
     }
 
@@ -76,6 +76,7 @@ const Inputs = props =>{
             setBordered(false)
         }else {
             setBordered(true)
+            setIsLoading(4)
         }
 
         setTimeout(()=>setIsLoading(1),1000)
@@ -108,19 +109,6 @@ const Inputs = props =>{
         return rule
     }
 
-    const suffix = isLoading =>{
-        switch (isLoading) {
-            case 1:
-                return <span/>
-            case 2:
-                return  <LoadingOutlined style={{color:"#1890ff"}}/>
-
-            case 3:
-                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
-            case 4:
-                return <CloseCircleOutlined style={{color:"red"}}/>
-        }
-    }
 
     return (
         <div className="formView-inputs">
@@ -140,7 +128,7 @@ const Inputs = props =>{
                 />
             </Form.Item>
             <div className="formView-inputs-suffix">
-                {suffix(isLoading)}
+                <SuffixStatus isLoading={isLoading}/>
             </div>
         </div>
     )

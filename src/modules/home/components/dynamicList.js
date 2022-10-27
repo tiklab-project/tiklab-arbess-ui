@@ -1,10 +1,10 @@
-import React from "react";
-import {LoadingOutlined, UserOutlined} from "@ant-design/icons";
+import React,{useEffect} from "react";
+import {LoadingOutlined,UserOutlined} from "@ant-design/icons";
 import Guide from "./guide";
 
 const DynamicList = props =>{
 
-    const {dynamicList,moreDynamic,isDyna,dynaPage} = props
+    const {dynamicList,moreDynamic,isDyna,dynaPageTotal,dynaPagination} = props
 
     const renderLis = (item,index) => {
         return <div className="dynamic-item" key={index}>
@@ -38,11 +38,11 @@ const DynamicList = props =>{
                 }
             </div>
             {
-                dynamicList && dynamicList.length === dynaPage.total &&
+                dynamicList && dynamicList.length === dynaPageTotal && dynaPagination > 1 &&
                 <div className="dynamic-bottom dynamic-bottom-none"> 没有更多了 🤐</div>
             }
             {
-                dynamicList && dynamicList.length < dynaPage.total && !isDyna &&
+                dynamicList && dynamicList.length < dynaPageTotal && isDyna===false &&
                 <div
                     className="dynamic-bottom dynamic-bottom-more"
                     onClick={()=>moreDynamic()}

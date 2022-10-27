@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3197798 */
-  src: url('iconfont.woff2?t=1666182388560') format('woff2'),
-       url('iconfont.woff?t=1666182388560') format('woff'),
-       url('iconfont.ttf?t=1666182388560') format('truetype');
+  src: url('iconfont.woff2?t=1666858207317') format('woff2'),
+       url('iconfont.woff?t=1666858207317') format('woff'),
+       url('iconfont.ttf?t=1666858207317') format('truetype');
 }
 
 .iconfont {
@@ -35,10 +35,6 @@
 
 .icon-bushubanben:before {
   content: "\e61a";
-}
-
-.icon-panoramavertical:before {
-  content: "\e9ce";
 }
 
 .icon-xuniji:before {
@@ -101,64 +97,16 @@
   content: "\e60c";
 }
 
-.icon-gongzuotongji:before {
-  content: "\e624";
-}
-
-.icon-shaixuan1:before {
-  content: "\e644";
-}
-
-.icon-jiekoupeizhi:before {
-  content: "\e990";
-}
-
-.icon-lishijishi:before {
-  content: "\e615";
-}
-
 .icon-meiyouxiangguan:before {
   content: "\e610";
-}
-
-.icon-shezhi:before {
-  content: "\e713";
-}
-
-.icon-yunhang:before {
-  content: "\ec61";
 }
 
 .icon-tianjia:before {
   content: "\e613";
 }
 
-.icon-wenjian:before {
-  content: "\e631";
-}
-
-.icon-wenben:before {
-  content: "\e638";
-}
-
 .icon-zengjia:before {
   content: "\e8c8";
-}
-
-.icon-dengdai1:before {
-  content: "\e609";
-}
-
-.icon-cuowu:before {
-  content: "\e600";
-}
-
-.icon-chenggong-:before {
-  content: "\e661";
-}
-
-.icon-chenggong1:before {
-  content: "\e60b";
 }
 
 .icon-xingxing1:before {

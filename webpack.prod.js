@@ -52,7 +52,7 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new CssMinimizerPlugin(),
         new ProgressBarPlugin(),
-        // new BundleAnalyzerPlugin(),
+        new BundleAnalyzerPlugin(),
         // new CompressionPlugin({
         //     filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
         //     algorithm: "gzip", // 算法

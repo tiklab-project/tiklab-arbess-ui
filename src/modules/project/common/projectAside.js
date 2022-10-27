@@ -2,7 +2,9 @@ import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import {PrivilegeButton} from "tiklab-privilege-ui";
 import {Dropdown} from "antd";
-import {CaretDownOutlined,SettingOutlined} from "@ant-design/icons";
+import {CaretDownOutlined,SettingOutlined,ApartmentOutlined,CreditCardOutlined,
+    ClockCircleOutlined
+} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 
 const ProjectAside = props =>{
@@ -25,21 +27,21 @@ const ProjectAside = props =>{
         {
             to:`/index/task/${pipelineId}/work`,
             title:"概况",
-            icon:"#icon-gongzuotongji",
+            icon:<ApartmentOutlined />,
             key:"2",
             enCode:"AA"
         },
         {
             to:`/index/task/${pipelineId}/config`,
             title: "配置",
-            icon: "#icon-jiekoupeizhi",
+            icon: <CreditCardOutlined />,
             key:"3",
             enCode:"BB"
         },
         {
             to:`/index/task/${pipelineId}/structure`,
             title: "历史",
-            icon:"#icon-lishijishi",
+            icon: <ClockCircleOutlined />,
             key:"4",
             enCode:"CC"
         },
@@ -102,9 +104,7 @@ const ProjectAside = props =>{
                         onClick={()=>changeNav(item.to)}
                     >
                         <div className="aside_content_icon">
-                            <svg className="icon" aria-hidden="true">
-                                <use xlinkHref = {item.icon}/>
-                            </svg>
+                            {item.icon}
                         </div>
                         <div className="aside_content_title">{item.title}</div>
                     </div>

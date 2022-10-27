@@ -9,7 +9,7 @@
         justify-content: space-between;
         padding-bottom: 10px;
         &-title{
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
         }
         &-ac{
@@ -75,26 +75,41 @@
             }
         }
         .state{
-            min-width: 100px;
-            line-height: 100px;
-            height: 100px;
-            text-align: center;
             border-radius: 8px;
+            padding: 10px;
+            height: 100px;
             background: #fff;
-            cursor: pointer;
             flex: 1;
+            &-bottom{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 5px;
+            }
+            &-div{
+                width: 151px;
+                display: flex;
+                align-items: center;
+                line-height: 20px;
+                margin-bottom: 10px;
+                &-1{
+                    width: 114px;
+                    display: inline-block;
+                    position: relative;
+                }
+            }
         }
         .pipelineNear{
             border-radius: 8px;
             padding: 10px;
             margin-right: 15px;
-            height: 240px;
+            height: 200px;
             background: #fff;
             flex: 1;
             &-bottom{
                 &-list{
                     padding: 10px 8px;
-                    cursor: pointer;
                     &:not(:last-child){
                         border-bottom: 1px solid #f8f8f8;
                     }
@@ -106,6 +121,9 @@
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
+                        &-title{
+                            cursor: pointer;
+                        }
                         &-icon{
                             display: inline-block;
                             width: 25px;
@@ -145,11 +163,10 @@
             background: #fff;
             border-radius: 8px;
             padding: 10px;
-            height: 240px;
+            height: 200px;
             &-bottom{
                 &-list{
                     padding: 8px;
-                    cursor: pointer;
                     &:not(:last-child){
                         border-bottom: 1px solid #f8f8f8;
                     }

@@ -1,5 +1,6 @@
 import React,{Fragment} from "react";
 import EmptyText from "../../../../common/emptyText/emptyText";
+import {FileTextOutlined,FolderOutlined} from "@ant-design/icons";
 
 // 节点
 const WorkSpaceNod = props =>{
@@ -10,13 +11,9 @@ const WorkSpaceNod = props =>{
     const renderType = treeType => {
         switch (treeType){
             case 1:
-                return  <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-wenben" />
-                        </svg>
+                return  <FileTextOutlined />
             case 2:
-                return  <svg className="icon" aria-hidden="true">
-                            <use xlinkHref="#icon-wenjian" />
-                        </svg>
+                return  <FolderOutlined />
         }
     }
 

@@ -5,8 +5,8 @@ import {inject,observer} from "mobx-react";
 import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
-import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined} from "@ant-design/icons";
 import "./inputs.scss";
+import SuffixStatus from "./suffixStatus";
 
 const Deploy = props =>{
 
@@ -60,7 +60,7 @@ const Deploy = props =>{
         }
         updateConfigure(params).then(res=>{
             res.code===0 && setIsLoading(3)
-            value===0 && setEnabledValid(!enabledValid)
+            setEnabledValid(!enabledValid)
         })
 
         setTimeout(()=>setIsLoading(1),1000)
@@ -80,19 +80,6 @@ const Deploy = props =>{
         setIsLoading(1)
     }
 
-    const suffix = () =>{
-        switch (isLoading) {
-            case 1:
-                return <span/>
-            case 2:
-                return <LoadingOutlined style={{color:"#1890ff"}}/>
-            case 3:
-                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
-            case 4:
-                return <CloseCircleOutlined style={{color:"red"}}/>
-        }
-    }
-
     return(
         <>
             <div className="formView-inputs">
@@ -109,7 +96,7 @@ const Deploy = props =>{
                     </Select>
                 </Form.Item>
                 <div className="formView-inputs-suffix">
-                    {suffix(isLoading)}
+                    <SuffixStatus isLoading={isLoading}/>
                 </div>
             </div>
             <Form.Item

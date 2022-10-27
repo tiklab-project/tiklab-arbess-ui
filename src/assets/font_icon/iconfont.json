@@ -48,13 +48,6 @@
       "unicode_decimal": 58906
     },
     {
-      "icon_id": "703294",
-      "name": "panorama-vertical",
-      "font_class": "panoramavertical",
-      "unicode": "e9ce",
-      "unicode_decimal": 59854
-    },
-    {
       "icon_id": "742135",
       "name": "虚拟机",
       "font_class": "xuniji",
@@ -160,53 +153,11 @@
       "unicode_decimal": 58892
     },
     {
-      "icon_id": "4066480",
-      "name": "工作统计",
-      "font_class": "gongzuotongji",
-      "unicode": "e624",
-      "unicode_decimal": 58916
-    },
-    {
-      "icon_id": "7145700",
-      "name": "筛选",
-      "font_class": "shaixuan1",
-      "unicode": "e644",
-      "unicode_decimal": 58948
-    },
-    {
-      "icon_id": "18267926",
-      "name": "接口配置",
-      "font_class": "jiekoupeizhi",
-      "unicode": "e990",
-      "unicode_decimal": 59792
-    },
-    {
-      "icon_id": "5168123",
-      "name": "历史技师",
-      "font_class": "lishijishi",
-      "unicode": "e615",
-      "unicode_decimal": 58901
-    },
-    {
       "icon_id": "6306120",
       "name": "没有相关",
       "font_class": "meiyouxiangguan",
       "unicode": "e610",
       "unicode_decimal": 58896
-    },
-    {
-      "icon_id": "3816323",
-      "name": "设置",
-      "font_class": "shezhi",
-      "unicode": "e713",
-      "unicode_decimal": 59155
-    },
-    {
-      "icon_id": "5961323",
-      "name": "运行",
-      "font_class": "yunhang",
-      "unicode": "ec61",
-      "unicode_decimal": 60513
     },
     {
       "icon_id": "10199166",
@@ -216,53 +167,11 @@
       "unicode_decimal": 58899
     },
     {
-      "icon_id": "1305090",
-      "name": "文件",
-      "font_class": "wenjian",
-      "unicode": "e631",
-      "unicode_decimal": 58929
-    },
-    {
-      "icon_id": "5203307",
-      "name": "文本",
-      "font_class": "wenben",
-      "unicode": "e638",
-      "unicode_decimal": 58936
-    },
-    {
       "icon_id": "11372787",
       "name": "增加",
       "font_class": "zengjia",
       "unicode": "e8c8",
       "unicode_decimal": 59592
-    },
-    {
-      "icon_id": "23174798",
-      "name": "等待",
-      "font_class": "dengdai1",
-      "unicode": "e609",
-      "unicode_decimal": 58889
-    },
-    {
-      "icon_id": "10073439",
-      "name": "错误",
-      "font_class": "cuowu",
-      "unicode": "e600",
-      "unicode_decimal": 58880
-    },
-    {
-      "icon_id": "8309282",
-      "name": "成功-01",
-      "font_class": "chenggong-",
-      "unicode": "e661",
-      "unicode_decimal": 58977
-    },
-    {
-      "icon_id": "7797608",
-      "name": "成功",
-      "font_class": "chenggong1",
-      "unicode": "e60b",
-      "unicode_decimal": 58891
     },
     {
       "icon_id": "8962925",

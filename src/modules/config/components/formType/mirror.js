@@ -12,7 +12,7 @@ import "codemirror/addon/display/placeholder.js";
 import {message} from "antd";
 import {inject,observer} from "mobx-react";
 import "./mirror.scss";
-import {CheckCircleOutlined,CloseCircleOutlined,LoadingOutlined} from "@ant-design/icons";
+import SuffixStatus from "./suffixStatus";
 
 const MirrorContent = forwardRef((props,ref)=>{
 
@@ -54,19 +54,6 @@ const MirrorContent = forwardRef((props,ref)=>{
         setTimeout(()=>setIsLoading(1),1000)
     }
 
-    const suffix = () =>{
-        switch (isLoading) {
-            case 1:
-                return <span/>
-            case 2:
-                return <LoadingOutlined style={{color:"#1890ff"}}/>
-            case 3:
-                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
-            case 4:
-                return <CloseCircleOutlined style={{color:"red"}}/>
-        }
-    }
-
     return  <div className={`${bordered?"codeNewStage":"formViewCodeMirror"}`}>
         <CodeMirror
             value={shellBlock}//内容
@@ -79,7 +66,9 @@ const MirrorContent = forwardRef((props,ref)=>{
             onFocus={onFocus}
             onBlur={onBlur}
         />
-        <div className="formViewCodeMirror-suffix">{suffix()}</div>
+        <div className="formViewCodeMirror-suffix">
+            <SuffixStatus isLoading={isLoading}/>
+        </div>
     </div>
 })
 

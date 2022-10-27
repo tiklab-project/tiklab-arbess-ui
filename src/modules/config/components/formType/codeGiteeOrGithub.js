@@ -1,30 +1,26 @@
 import React,{useState,useEffect} from "react";
 import {Button,Form,message,Select} from "antd";
-import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined, PlusOutlined} from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 import FindAllProof from "./findAllProof";
 import {inject,observer} from "mobx-react";
 import CodeGiteeOrGithubModal from "./codeGIteeOrGIthubModal";
 import "./inputs.scss";
+import SuffixStatus from "./suffixStatus";
 
 const {Option} =Select
 
 const CodeGiteeOrGithub = props =>{
 
-    const {githubStore,configDataStore,giteeStore,configStore,pipelineStore} = props
+    const {configDataStore,configStore,pipelineStore,authorizeStore} = props
 
-    const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
-    const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
-    const {formInitialValues,codeType,gitProofId,setGitProofId,setFormInitialValues} = configDataStore
+    const {findCode,findState,updateProof,findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
+    const {formInitialValues,codeType,gitProofId} = configDataStore
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
-    const [storehouseList,setStorehouseList] = useState([]) // 仓库
-    const [branchList,setBranchList] = useState([]) // 分支
-    const [gitStoreHouse,setGitStoreHouse] = useState("")
-
-
+    const [isFindState,setIsFindState] = useState(false)
     const [fieldName,setFieldName] = useState("")
     const [isLoading,setIsLoading] = useState(1)
 
@@ -37,71 +33,44 @@ const CodeGiteeOrGithub = props =>{
     // 授权过程--失败或成功提示
     let interval = null
     useEffect(()=>{
-        const params = {
-            code:null,
-            state:0,
-        }
         if(visible){
-            interval = setInterval(()=>getState(params).then(res=>warn(res.data)),1000)
+            interval = setInterval(()=>findState().then(res=>warn(res.data)),1000)
         }else clearInterval(interval)
         return ()=> clearInterval(interval)
-    },[visible])
+    },[visible,isFindState])
     
     const warn = data => {
         if(data === 1){
+            clearInterval(interval)
             message.success({content:"授权成功", className:"message"})
         }else if(data === 2){
             message.error({content:"拒绝授权或授权失败", className:"message"})
+            clearInterval(interval)
         }
     }
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
-        if(codeType === 2){
-            getAllGiteeStorehouse(gitProofId).then(res=>{
-                getStorehouseList(res)
-            })
-        }else {
-            getAllGithubStorehouse(gitProofId).then(res=>{
-                getStorehouseList(res)
-            })
+        const params = {
+            proofId:gitProofId,
+            type:codeType
         }
-    }
-
-    const getStorehouseList = data => {
-        if(data.code===0 && data.data){
-            setStorehouseList(data.data)
-        }
+        findAllStorehouse(params)
     }
 
     // 获取所有分支
     const clickBranch = () => {
         const params ={
-            projectName:gitStoreHouse,
-            proofId:gitProofId
+            houseName:formInitialValues && formInitialValues.codeName,
+            proofId:gitProofId,
+            type:codeType
         }
-        if(codeType === 2){
-            getGiteeBranch(params).then(res=>{
-                getBranchList(res)
-            })
-        }else {
-            getGithubBranch(params).then(res=>{
-                getBranchList(res)
-            })
-        }
+        findBranch(params)
         setIsLoading(2)
-
-    }
-
-    const getBranchList = data =>{
-        if(data.code===0 && data.data){
-            setBranchList(data.data)
-        }
     }
 
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
-        setGitStoreHouse(value)
         change("codeName",value)
         setProhibited(false)
     }
@@ -120,13 +89,11 @@ const CodeGiteeOrGithub = props =>{
             values:obj,
             message:"update"
         }
-        setFormInitialValues({key:value})
+        formInitialValues.key=value
         updateConfigure(params).then(res=>{
             res.code===0 && setIsLoading(3)
         })
-
         setTimeout(()=>setIsLoading(1),1000)
-
     }
 
     const onFocus = name => {
@@ -137,20 +104,6 @@ const CodeGiteeOrGithub = props =>{
     const onBlur = () => {
         setIsLoading(1)
         setFieldName("")
-    }
-
-
-    const suffix = () =>{
-        switch (isLoading) {
-            case 1:
-                return <span/>
-            case 2:
-                return <LoadingOutlined style={{color:"#1890ff"}}/>
-            case 3:
-                return <CheckCircleOutlined style={{color:"#1890ff"}}/>
-            case 4:
-                return <CloseCircleOutlined style={{color:"red"}}/>
-        }
     }
 
     const style={
@@ -188,7 +141,9 @@ const CodeGiteeOrGithub = props =>{
                     </Select>
                 </Form.Item>
                 <div className="formView-inputs-suffix">
-                    {fieldName === "codeName" && suffix(isLoading)}
+                    {fieldName === "codeName" &&
+                        <SuffixStatus isLoading={isLoading}/>
+                    }
                 </div>
             </div>
             <div className="formView-inputs">
@@ -210,7 +165,10 @@ const CodeGiteeOrGithub = props =>{
                     </Select>
                 </Form.Item>
                 <div className="formView-inputs-suffix">
-                    {fieldName === "codeBranch" && suffix(isLoading)}
+                    {
+                        fieldName === "codeBranch" &&
+                        <SuffixStatus isLoading={isLoading}/>
+                    }
                 </div>
             </div>
 
@@ -219,15 +177,14 @@ const CodeGiteeOrGithub = props =>{
                 setVisible={setVisible}
                 formInitialValues={formInitialValues}
                 codeType={codeType}
-                getCode={getCode}
-                getGithubProof={getGithubProof}
-                url={url}
-                getGiteeProof={getGiteeProof}
-                setGitProofId={setGitProofId}
+                findCode={findCode}
+                setIsFindState={setIsFindState}
+                isFindState={isFindState}
+                updateProof={updateProof}
             />
         </>
     )
 }
 
-export default inject("githubStore","configDataStore","giteeStore","configStore","pipelineStore")
+export default inject("configDataStore","configStore","pipelineStore","authorizeStore")
                 (observer(CodeGiteeOrGithub))

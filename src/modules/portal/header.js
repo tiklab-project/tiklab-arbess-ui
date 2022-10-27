@@ -1,18 +1,16 @@
 import React,{useState,useEffect} from "react";
-import {Avatar,Dropdown,Menu,Badge} from "antd";
+import {Dropdown,Menu,Badge} from "antd";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
-import {getUser,getVersionInfo} from "tiklab-core-ui";
+import {getUser} from "tiklab-core-ui";
 import {Profile,WorkAppConfig} from "tiklab-eam-ui";
 import {GlobalOutlined,BellOutlined,SettingOutlined,LogoutOutlined,
-    UserOutlined,
+    QuestionCircleOutlined,ProfileOutlined,ExpandOutlined,ScheduleOutlined,
+    WhatsAppOutlined
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/all/matflow.png"
-import portrait from "../../assets/images/portrait.jpg";
-import vipOne from "../../assets/images/vip-one.png";
-import vipTwo from "../../assets/images/vip-two.png";
 import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{
@@ -29,10 +27,6 @@ const Head = props =>{
 
     const userId = getUser().userId
     const {i18n,t} = useTranslation()
-    const isEE = getVersionInfo().release
-    const eeText = isEE === 2 ? vipTwo : vipOne
-    const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
-    const authType = JSON.parse(localStorage.getItem("authConfig")).authType
 
     useEffect(()=>{
         const param = {
@@ -47,7 +41,6 @@ const Head = props =>{
         setPagination(pagination+1)
         setIsLoading(true)
     }
-
 
     useEffect(()=>{
         setCurrentLink(path)
@@ -111,7 +104,7 @@ const Head = props =>{
         <div className="header-outMenu">
            <div className="header-outMenu-content">
                <div className="header-outMenu-top">
-                   <Avatar src={portrait} style={{cursor:"pointer"}}/>
+                   <Profile userInfo={getUser()}/>
                    <span className="top-user">{getUser().name}</span>
                </div>
                <div
@@ -127,46 +120,14 @@ const Head = props =>{
         </div>
     )
 
-
-    const setMenu = () => {
-        let url
-        if(authType){
-            url="/index/orga"
-        }else {
-            url= authUrl+"#/orga/dashbord"
-        }
-        return(
-            <Menu>
-                    <Menu.Item>
-                        {
-                            authType?
-                                <span onClick={()=>props.history.push(url)}>
-                                    <UserOutlined />
-                                    账号与成员
-                                </span>
-                                :
-                                <a style={{"color":"black"}} href={url}>
-                                    <UserOutlined />
-                                    账号与成员
-                                </a>
-                        }
-
-                    </Menu.Item>
-                    <Menu.Item onClick={()=>props.history.push("/index/system")}>
-                        <SettingOutlined/>
-                        系统设置
-                    </Menu.Item>
-                </Menu>
-        )
-    }
-
-    const goUserMessageContent = () =>{
-        setVisible(true)
-    }
-
-    const goSystem = () =>{
-        props.history.push("/index/system")
-    }
+    const helpMenu = (
+        <Menu style={{minWidth:150}}>
+            <Menu.Item key="1"><ProfileOutlined />文档</Menu.Item>
+            <Menu.Item key="2"><ExpandOutlined />社区支持</Menu.Item>
+            <Menu.Item key="3"><ScheduleOutlined />在线工单</Menu.Item>
+            <Menu.Item key="4"><WhatsAppOutlined />在线客服</Menu.Item>
+        </Menu>
+    )
 
     return(
         <div className="frame-header">
@@ -181,34 +142,34 @@ const Head = props =>{
             </div>
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
+                    <div className="frame-header-set">
+                        <SettingOutlined className="frame-header-icon"
+                            onClick={()=>props.history.push("/index/system")}
+                        />
+                    </div>
+                    <div className="frame-header-message">
+                        <Badge count={page && page.total} size="small">
+                            <BellOutlined
+                                className="frame-header-icon"
+                                onClick={()=>setVisible(true)}
+                            />
+                        </Badge>
+                    </div>
                     <div className="frame-header-language">
                         <Dropdown overlay={languageMenu}>
                             <GlobalOutlined className="frame-header-icon"/>
                         </Dropdown>
                     </div>
-                    <div className="frame-header-message">
-                        <Badge count={page && page.total}>
-                            <BellOutlined
-                                className="frame-header-icon"
-                                onClick={()=>goUserMessageContent()}
-                            />
-                        </Badge>
-
-                    </div>
-                    <div className="frame-header-set">
-                        <SettingOutlined
-                            className="frame-header-icon"
-                            onClick={()=>goSystem()}
-                        />
+                    <div className="frame-header-help">
+                        <Dropdown overlay={helpMenu}>
+                            <QuestionCircleOutlined className="frame-header-icon"/>
+                        </Dropdown>
                     </div>
                     <Dropdown overlay={outMenu}>
                         <div className="frame-header-user">
                             <Profile userInfo={getUser()}/>
                         </div>
                     </Dropdown>
-                    <div className="frame-header-status">
-                        <img src={eeText} alt="" width = "20px" height= "20px" />
-                    </div>
                 </div>
             </div>
             <MessageDrawer
@@ -217,6 +178,7 @@ const Head = props =>{
                 page={page}
                 moreMessage={moreMessage}
                 isLoading={isLoading}
+                pagination={pagination}
                 messageList={messageDispatchItemPage}
             />
         </div>

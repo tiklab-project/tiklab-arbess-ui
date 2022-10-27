@@ -31,7 +31,7 @@
                 padding-left: 2px;
                 .history-content{
                     &-list{
-                        height: calc(100% - 60px);
+                        height: calc(100% - 57px);
                         overflow: auto;
                         &-ul{
                             display: flex;
@@ -63,7 +63,7 @@
                         }
                         &_active{
                             background: #e3e8f0;
-                            border-left: 3px solid #1890ff
+                            border-right: 3px solid #1890ff
                         }
                     }
                     &-page{

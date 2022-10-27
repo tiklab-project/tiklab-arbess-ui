@@ -5,30 +5,26 @@ import {
     FindState,
     Findlogpage,
     Findtodopage,
-    FindMessage,
+    FindMessageDispatchItemPage,
 } from "../api/homePage";
 
 export class HomePageStore{
 
     @observable pipelineNearList = []
-    @observable dynamicList = []
+
     @observable taskList = []  // 代办
     @observable stateList = ""
     @observable messageDispatchItemPage = []
     @observable page = {
         defaultCurrent: 1,
-        pageSize: "15",
-        total: "1",
-    }
-
-    @observable dynaPage = {
-        defaultCurrent: 1,
-        pageSize: "15",
-        total: "1",
+        pageSize: 15,
+        total: 1,
     }
     @observable pagination = 1 //控制接口中页码page的变化，更新接口 -- 消息
-    @observable dynaPagination = 1 // 动态
 
+    @observable dynamicList = []
+    @observable dynaPageTotal = 1
+    @observable dynaPagination = 1 // 动态
 
     @action
     setPagination = value =>{
@@ -76,9 +72,9 @@ export class HomePageStore{
             userId:values.userId,
         }
         const data = await Findlogpage(params)
-        if(data.code===0 && data.data){
-            this.dynamicList = this.dynamicList.concat(data.data && data.data.dataList)
-            this.dynaPage.total=data.data && data.data.totalRecord
+        if(data.code===0){
+            this.dynamicList=this.dynamicList.concat(data.data && data.data.dataList)
+            this.dynaPageTotal=data.data && data.data.totalRecord
         }
         return data
     }
@@ -95,7 +91,7 @@ export class HomePageStore{
         }
         const data = await Findtodopage(params)
         if(data.code===0 && data.data){
-            this.taskList = data.data && data.data.dataList
+            this.taskList=data.data && data.data.dataList
         }
     }
 
@@ -110,7 +106,7 @@ export class HomePageStore{
             sendType:"site",
             receiver:values.receiver,
         }
-        const data = await FindMessage(params)
+        const data = await FindMessageDispatchItemPage(params)
         if(data.code===0){
             this.messageDispatchItemPage=this.messageDispatchItemPage.concat(data.data && data.data.dataList)
             this.page.total=data.data && data.data.totalRecord

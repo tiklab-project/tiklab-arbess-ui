@@ -67,20 +67,28 @@ const ProjectSetReDel = props =>{
             key:1,
             title:"修改流水线名称",
             icon: <EditOutlined />,
-            content:<ProjectRename
-                        form={form}
-                        re={re}
-                        pipelineList={pipelineList}
-                        layout={"inline"}
-                    />
+            content: <div className="bottom-rename">
+                <ProjectRename
+                    form={form}
+                    re={re}
+                    pipelineList={pipelineList}
+                    layout={"inline"}
+                    pipeline={pipeline}
+                />
+            </div>
         },
         {
             key:2,
             title:"删除流水线",
             icon: <DeleteOutlined />,
-            content: <Button type="primary" onClick={onConfirm}>
-                        <DeleteOutlined/> 删除
-                    </Button>
+            content: <div className="bottom-delete">
+                        <div style={{color:"#ff0000",paddingBottom:5}}>
+                            此操作无法恢复！请慎重操作！
+                        </div>
+                        <Button type="primary" danger onClick={onConfirm}>
+                            删除
+                        </Button>
+                    </div>
         }
     ]
 

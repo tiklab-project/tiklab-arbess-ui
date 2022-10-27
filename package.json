@@ -171,7 +171,6 @@
         "tiklab-message-ui": "^1.0.1",
         "tiklab-oplog-ui": "^1.0.1",
         "tiklab-plugin-ui": "^1.0.1",
-        "tiklab-privilege-ui": "^1.0.1",
         "tiklab-todotask-ui": "^1.0.1",
         "tiklab-user-ui": "^1.0.1",
         "tiklab-widget-ui": "^1.0.1"
