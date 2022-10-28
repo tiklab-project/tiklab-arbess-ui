@@ -1,7 +1,6 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import {Modal,Form,Input,Select,Row,Button,message} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
-import {getUser} from "tiklab-core-ui";
 
 const CodeGiteeOrGithubModal = props =>{
 
@@ -42,10 +41,7 @@ const CodeGiteeOrGithubModal = props =>{
         setIsFindState(!isFindState)
         localStorage.setItem("code",codeType)
     }
-    
-    const changeValue = e => {
-        console.log(e)
-    }
+
 
     return(
         <Modal
@@ -75,7 +71,7 @@ const CodeGiteeOrGithubModal = props =>{
                         name="name"
                         rules={[{ required: true, message: "请输入服务连接名" }]}
                     >
-                        <Input onChange={e=>changeValue(e)}/>
+                        <Input/>
                     </Form.Item>
                     <Button onClick={()=>goUrl()} style={{marginTop:30}} type="link" >
                         <PlusOutlined/>

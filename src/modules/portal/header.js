@@ -17,30 +17,19 @@ const Head = props =>{
 
     const {homePageStore} = props
 
-    const {findMessageDispatchItemPage,messageDispatchItemPage,page,setPagination,pagination} = homePageStore
+    const {findMessageDispatchItemPage,page} = homePageStore
 
     let path = props.location.pathname
 
     const [currentLink,setCurrentLink] = useState(path)
     const [visible,setVisible] = useState(false)
-    const [isLoading,setIsLoading] = useState(false)
 
     const userId = getUser().userId
     const {i18n,t} = useTranslation()
 
     useEffect(()=>{
-        const param = {
-            receiver:userId,
-        }
-        findMessageDispatchItemPage(param).then(res=>{
-            res.code===0 && pagination>1 && setIsLoading(false)
-        })
-    },[pagination])
-
-    const moreMessage = () =>{
-        setPagination(pagination+1)
-        setIsLoading(true)
-    }
+        findMessageDispatchItemPage()
+    },[])
 
     useEffect(()=>{
         setCurrentLink(path)
@@ -172,15 +161,12 @@ const Head = props =>{
                     </Dropdown>
                 </div>
             </div>
+
             <MessageDrawer
                 visible={visible}
                 setVisible={setVisible}
-                page={page}
-                moreMessage={moreMessage}
-                isLoading={isLoading}
-                pagination={pagination}
-                messageList={messageDispatchItemPage}
             />
+
         </div>
     )
 }

@@ -2,19 +2,19 @@ import {observable,action} from "mobx";
 
 import {
     FindAllOpen,
-    FindState,
     Findlogpage,
     Findtodopage,
     FindMessageDispatchItemPage,
 } from "../api/homePage";
+
+import {getUser} from "tiklab-core-ui";
 
 export class HomePageStore{
 
     @observable pipelineNearList = []
 
     @observable taskList = []  // 代办
-    @observable stateList = ""
-    @observable messageDispatchItemPage = []
+    @observable messageList = []
     @observable page = {
         defaultCurrent: 1,
         pageSize: 15,
@@ -35,6 +35,10 @@ export class HomePageStore{
     setDynaPagination = value =>{
         this.dynaPagination = value
     }
+    @action
+    setMessageList = value =>{
+        this.messageList = value
+    }
 
     @action
     setDynamicList = value =>{
@@ -44,7 +48,7 @@ export class HomePageStore{
     @action
     findAllOpen = async value =>{
         const param = new FormData()
-        param.append("userId",value)
+        param.append("userId",getUser().userId)
         const data = await FindAllOpen(param)
         if(data.code===0 && data.data){
             this.pipelineNearList = data.data
@@ -52,24 +56,27 @@ export class HomePageStore{
     }
 
     @action
-    findState = async value =>{
-        const param = new FormData()
-        param.append("userId",value)
-        const data = await FindState(param)
-        if(data.code===0 && data.data){
-            this.stateList=data.data
-        }
-    }
-
-    @action
     findlogpage = async values =>{
-        const params = {
-            pageParam:{
-                pageSize:15,
-                currentPage:this.dynaPagination
-            },
-            bgroup:"matflow",
-            userId:values.userId,
+        let params
+        if(values.userId){
+            params = {
+                pageParam:{
+                    pageSize:15,
+                    currentPage:this.dynaPagination,
+                },
+                bgroup:"matflow",
+                userId: values.userId
+            }
+        }else {
+            params = {
+                pageParam:{
+                    pageSize:15,
+                    currentPage:this.dynaPagination,
+                },
+                bgroup:"matflow",
+                contentKey:"pipelineId",
+                content: values.content,
+            }
         }
         const data = await Findlogpage(params)
         if(data.code===0){
@@ -83,11 +90,11 @@ export class HomePageStore{
     findtodopage = async value =>{
         const params = {
             pageParam:{
-                pageSize:4,
+                pageSize:5,
                 currentPage:1
             },
             bgroup:"matflow",
-            userId:value.userId,
+            userId: getUser().userId,
         }
         const data = await Findtodopage(params)
         if(data.code===0 && data.data){
@@ -99,16 +106,16 @@ export class HomePageStore{
     findMessageDispatchItemPage = async values =>{
         const params = {
             pageParam:{
-                pageSize:15,
+                pageSize: 9,
                 currentPage:this.pagination
             },
             application:"matflow",
             sendType:"site",
-            receiver:values.receiver,
+            receiver:getUser().userId,
         }
         const data = await FindMessageDispatchItemPage(params)
         if(data.code===0){
-            this.messageDispatchItemPage=this.messageDispatchItemPage.concat(data.data && data.data.dataList)
+            this.messageList=this.messageList.concat(data.data && data.data.dataList)
             this.page.total=data.data && data.data.totalRecord
         }
         return data

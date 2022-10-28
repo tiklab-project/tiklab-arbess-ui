@@ -29,57 +29,104 @@
     }
     &-content{
         padding: 55px 20px 0;
-        &-nod{
+    }
+    .workSpace-census{
+        padding-top: 10px;
+        height: 400px;
+        min-width: 550px;
+        &-bottom{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        &-stat{
             padding-top: 10px;
-            margin-bottom: 30px;
-            min-height: 150px;
-            &-file{
-                min-height: 150px;
-                .file_item{
-                    &_tree{
-                        color: #1890ff;
+            .stat{
+                &-div{
+                    width: 220px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 10px 0;
+                    .stat-div-title{
                         font-size: 16px;
-                        &_name{
-                            cursor: pointer;
-                            &:hover{
-                                text-decoration: underline;
-                            }
-                        }
                     }
-                }
-            }
-            &-catalogue{
-                margin-bottom: 10px;
-                .catalogue_item{
-                    &_breadcrumb{
-                        cursor: pointer;
-                        font-size: 1rem;
-                        &:hover{
-                            text-decoration: underline;
+                    .stat-div-title-icon{
+                        padding-right: 10px;
+                    }
+                    .census{
+                        &-num{
+                            font-size: 16px;
+                        }
+                        &-number{
+                            color:#f6c659
+                        }
+                        &-successNumber{
+                            color:#77b3eb
+                        }
+                        &-errorNumber{
+                            color:#f06f6f
+                        }
+                        &-removeNumber{
+                            color:#928484
+                        }
+                        &-time{
+                            color:#6852e0cf
                         }
                     }
                 }
             }
         }
-        &-record{
+    }
+    .workSpace-dyna{
+        padding-bottom: 20px;
+        .dyna{
             &-item{
-                .record_item{
-                    &_dayTime{
-                        font-size: 30px;
-                        color: #1890ff;
-                    }
-                    &_commit{
-                        padding: 3px 0;
-                        .btn{
-                            color: #1890ff;
-                            cursor: pointer;
-                        }
-                    }
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 55px;
+                &-left{
+                    display: flex;
+                    align-items: center;
+                }
+                &-icon{
+                    display: inline-block;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    border-radius: 50px;
+                    background: #6da5f7;
+                    margin-right: 8px;
+                    padding-top: 5px;
+                    text-align: center
+                }
+
+                &-userName{
+                    font-weight: 500;
+                }
+                &-message{
+                    color: #695c5c;
+                }
+                .pipelineName{
+                    font-weight: 500;
+                    padding: 0 5px;
+                }
+                &-pipelineName{
+                    cursor: pointer;
+                    font-weight: 500;
+                    color: #1890ff;
                 }
             }
-        }
-        &-null{
-            padding: 20px;
+            &-bottom{
+                font-size: 16px;
+                text-align: center;
+                cursor: pointer;
+                font-weight: 600;
+                &-more{
+                    color: #1890ff;
+                }
+            }
         }
     }
 }

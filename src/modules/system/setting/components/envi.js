@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
-import {Button,Popconfirm,Row,Col} from "antd";
+import {Table,Popconfirm} from "antd";
 import {inject,observer} from "mobx-react";
 import EnviModal from "./enviModal";
 import "./envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import Tables from "../../../../common/tables/tables";
 import EnviSwitch from "./enviSwitch";
+import EmptyText from "../../../../common/emptyText/emptyText";
 
 /*
     系统环境配置
@@ -110,10 +110,12 @@ const Envi = props =>{
                 add={add}
             />
 
-            <Tables
+            <Table
                 columns={columns}
                 dataSource={enviData}
                 rowKey={record=>record.scmId}
+                pagination={false}
+                locale={{emptyText: <EmptyText/>}}
             />
 
             <EnviModal

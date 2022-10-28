@@ -1,21 +1,32 @@
 .messageModal{
-    height: calc(100% - 42px);
+    height: calc(100% - 47px);
     overflow: hidden;
     &-screen{
         height: calc(100% - 36px);
+        &-tab{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #f2f2f2;
+            border-radius: 50px;
+            margin-left: 5px;
+        }
     }
     &-list{
-        height: 100%;
+        height: calc(100vh - 240px);
         overflow: auto;
-        .tidings-item{
+        .message-item{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 55px;
+            height: 70px;
             cursor: pointer;
-            border-bottom: 1px solid #f4f4f4;
             padding: 5px;
-
+            &:not(:last-child){
+                margin-bottom: 10px;
+            }
             &:hover{
                 background: #f4f4f4;
             }
@@ -31,17 +42,20 @@
                 border-radius: 50px;
                 background: #6da5f7;
                 margin-right: 8px;
-                padding-top: 5px;
+                padding-top: 8px;
                 text-align: center
             }
             &-user{
-                .user-sendUser{
+                .user-title{
                     font-weight: 500;
+                    font-size: 16px;
                 }
                 .user-time{
                     color: #00000073;
                     font-size: 13px;
+                    padding-left: 10px;
                 }
+                padding-bottom: 10px;
             }
             &-message{
                 color: #695c5c;

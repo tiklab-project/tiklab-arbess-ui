@@ -1,33 +1,18 @@
-import {observable,action} from "mobx";
+import {action,observable} from "mobx";
 
 import {
-    GetSubmitMassage,
     FileTree,
-    ReadFile,
+    PipelineCensus,
+    ReadFile
 } from "../api/workSpace";
 
 export class WorkSpaceStore{
 
-    @observable recordList = []
     @observable fileList = []
 
     @action
     setFileList = value =>{
         this.fileList = value
-    }
-
-    @action
-    getSubmitMassage = async value =>{
-        const param = new FormData()
-        param.append("pipelineId",value)
-        GetSubmitMassage(param).then(res=>{
-            console.log( res)
-            if(res.code === 0){
-                this.recordList = res.data
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
     }
 
     @action
@@ -47,6 +32,13 @@ export class WorkSpaceStore{
         const param = new FormData()
         param.append("path",value)
         return await ReadFile(param)
+    }
+
+    @action
+    pipelineCensus = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        return await PipelineCensus(param)
     }
 
 }

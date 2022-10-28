@@ -63,7 +63,7 @@ const UpdateProof = props =>{
                 setVisible={setVisible}
                 title={"修改凭证"}
             />
-            <div style={{maxHeight:650,overflow:"auto"}}>
+            <div style={{maxHeight:648,overflow:"auto"}}>
                 <Form
                     form={form}
                     layout="vertical"

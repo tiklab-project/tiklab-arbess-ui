@@ -4,7 +4,6 @@ import DynamicList from "../components/dynamicList";
 import PipelineNear from "../components/pipelineNear";
 import QuickIn from "../components/quickIn";
 import Agency from "../components/agency";
-import Statistics from "../components/statistics";
 import "../components/homePage.scss";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -14,15 +13,13 @@ const HomePage = props =>{
     const {homePageStore,pipelineStore} = props
 
     const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,
-        setDynaPagination,dynaPagination,dynaPageTotal,findState,stateList,
-        dynamicList,setDynamicList
+        setDynaPagination,dynaPagination,dynaPageTotal,dynamicList,setDynamicList
     } = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
 
     const [isDyna,setIsDyna] = useState(false)
-
 
     useEffect(()=>{
 
@@ -33,13 +30,10 @@ const HomePage = props =>{
         findAllFollow(userId)
 
         // 最近打开的流水线
-        findAllOpen(userId)
+        findAllOpen()
 
         // 我的代办
         findtodopage(userId)
-
-        // 构建状态
-        findState()
 
         return()=>{
             setDynamicList([])
@@ -57,7 +51,7 @@ const HomePage = props =>{
         }
         // 近期动态
         findlogpage(params).then(res=>{
-            res.code===0 && dynaPagination>1 && setIsDyna(false)
+            setIsDyna(false)
         })
     },[dynaPagination])
 
@@ -76,7 +70,6 @@ const HomePage = props =>{
                         pipelineLength={pipelineLength}
                         followLength={followLength}
                     />
-                    {/*<Statistics stateList={stateList}/>*/}
                 </div>
                 <div className="homePage-content-center">
                     <PipelineNear

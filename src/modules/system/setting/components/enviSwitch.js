@@ -1,6 +1,6 @@
 import React from "react";
 import {Button,Input,Select} from "antd";
-import {SearchOutlined} from "@ant-design/icons";
+import {SearchOutlined,PlusOutlined} from "@ant-design/icons";
 
 const EnviSwitch = props =>{
 
@@ -27,7 +27,8 @@ const EnviSwitch = props =>{
                 </div>
             </div>
             <div>
-                <Button onClick={()=>add()} type="primary">添加配置</Button>
+                <Button onClick={()=>add()} type="primary">
+                    <PlusOutlined/>添加配置</Button>
             </div>
         </div>
     )

@@ -68,7 +68,7 @@ const AddProofModal = props =>{
                 title={"添加凭证"}
                 setVisible={setVisible}
             />
-           <div style={{maxHeight:650,overflow:"auto"}}>
+           <div style={{maxHeight:648,overflow:"auto"}}>
                <Form form={form}
                      layout="vertical"
                      name="userForm"

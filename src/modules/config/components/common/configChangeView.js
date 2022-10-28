@@ -1,6 +1,12 @@
 import React,{useEffect,useState} from "react";
 import {Button,message,Spin} from "antd";
-import {LoadingOutlined,BarsOutlined,AppstoreOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
+import {LoadingOutlined,
+    BarsOutlined,
+    AppstoreOutlined,
+    ExclamationCircleOutlined,
+    PlusOutlined,
+    CaretRightOutlined
+} from "@ant-design/icons";
 import {getVersionInfo,getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -70,6 +76,7 @@ const ConfigChangeView = props =>{
                 </div>
                 <div className="changeView-newStage">
                     <Button onClick={()=>setAddConfigVisible(true)}>
+                        <PlusOutlined />
                         添加配置
                     </Button>
                 </div>
@@ -86,6 +93,7 @@ const ConfigChangeView = props =>{
                                 onClick={()=>run()}
                                 disabled={isRun()}
                             >
+                                <CaretRightOutlined />
                                 运行
                             </Button>
                     }
@@ -100,33 +108,33 @@ const ConfigChangeView = props =>{
                             表单视图
                         </div>
                     </div>
-                    {/*<div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
-                    {/*     onClick={()=>changeView("gui")}*/}
-                    {/*>*/}
-                    {/*    <div className="changeView-view-item">*/}
-                    {/*        <AppstoreOutlined/>*/}
-                    {/*        &nbsp;*/}
-                    {/*        图形化视图*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {
-                        !getVersionInfo().expired && isPlugin ?
-                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}
-                                 onClick={()=>changeView("gui")}
-                            >
-                                <div className="changeView-view-item">
-                                    <AppstoreOutlined/>
-                                    &nbsp;
-                                    图形化视图
-                                </div>
-                            </div>
-                            :
-                            <div className="changeView-view-li changeView-view-ban">
-                                <AppstoreOutlined/>
-                                &nbsp;
-                                图形化视图
-                            </div>
-                    }
+                    <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}
+                         onClick={()=>changeView("gui")}
+                    >
+                        <div className="changeView-view-item">
+                            <AppstoreOutlined/>
+                            &nbsp;
+                            图形化视图
+                        </div>
+                    </div>
+                    {/*{*/}
+                    {/*    !getVersionInfo().expired && isPlugin ?*/}
+                    {/*        <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
+                    {/*             onClick={()=>changeView("gui")}*/}
+                    {/*        >*/}
+                    {/*            <div className="changeView-view-item">*/}
+                    {/*                <AppstoreOutlined/>*/}
+                    {/*                &nbsp;*/}
+                    {/*                图形化视图*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*        :*/}
+                    {/*        <div className="changeView-view-li changeView-view-ban">*/}
+                    {/*            <AppstoreOutlined/>*/}
+                    {/*            &nbsp;*/}
+                    {/*            图形化视图*/}
+                    {/*        </div>*/}
+                    {/*}*/}
                 </div>
             </div>
 

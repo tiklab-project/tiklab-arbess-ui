@@ -3,8 +3,7 @@ import {Button,Form,message,Row,Select} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import CodeGiteeOrGithubModal from "./codeGiteeOrGithubModal";
-import githubStore from "../../store/githubStore";
-import giteeStore from "../../store/giteeStore";
+import authorizeStore from "../../store/authorizeStore";
 import TestContext from "../common/testContext";
 import ProofAll from "./proofAll";
 
@@ -12,20 +11,19 @@ const {Option} =Select
 
 const CodeGiteeOrGithub = props =>{
 
-    const {getCode,getGithubProof,getAllGithubStorehouse,getGithubBranch} = githubStore
-    const {url,getAllGiteeStorehouse,getGiteeBranch,getGiteeProof,getState} = giteeStore
+    const {findCode,findState,updateProof,findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
 
     const context = useContext(TestContext)
 
-    const {formInitialValues,codeType,gitProofId,setGitProofId,setFormInitialValues} = context.configDataStore
+    const {formInitialValues,codeType,gitProofId} = context.configDataStore
     const {pipelineId} = context.pipelineStore
     const {updateConfigure} = context.configStore
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
-    const [storehouseList,setStorehouseList] = useState([]) // 仓库
-    const [branchList,setBranchList] = useState([]) // 分支
-    const [gitStoreHouse,setGitStoreHouse] = useState("")
+    const [isFindState,setIsFindState] = useState(false)
+    const [fieldName,setFieldName] = useState("")
+    const [isLoading,setIsLoading] = useState(1)
 
     useEffect(()=>{
         if(formInitialValues && formInitialValues.codeName){
@@ -36,72 +34,48 @@ const CodeGiteeOrGithub = props =>{
     // 授权过程--失败或成功提示
     let interval = null
     useEffect(()=>{
-        const params = {
-            code:null,
-            state:0,
-        }
         if(visible){
-            interval = setInterval(()=>getState(params).then(res=>warn(res.data)),1000)
+            interval = setInterval(()=>findState().then(res=>warn(res.data)),1000)
         }else clearInterval(interval)
         return ()=> clearInterval(interval)
-    },[visible])
-    
+    },[visible,isFindState])
+
     const warn = data => {
         if(data === 1){
+            clearInterval(interval)
             message.success({content:"授权成功", className:"message"})
         }else if(data === 2){
             message.error({content:"拒绝授权或授权失败", className:"message"})
+            clearInterval(interval)
         }
     }
 
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
-        if(codeType === 2){
-            getAllGiteeStorehouse(gitProofId).then(res=>{
-                getStorehouseList(res)
-            })
-        }else {
-            getAllGithubStorehouse(gitProofId).then(res=>{
-                getStorehouseList(res)
-            })
+        const params = {
+            proofId:gitProofId,
+            type:codeType
         }
-    }
-
-    const getStorehouseList = data => {
-        if(data.code===0 && data.data){
-            setStorehouseList(data.data)
-        }
+        findAllStorehouse(params)
     }
 
     // 获取所有分支
     const clickBranch = () => {
         const params ={
-            projectName:gitStoreHouse,
-            proofId:gitProofId
+            houseName:formInitialValues && formInitialValues.codeName,
+            proofId:gitProofId,
+            type:codeType
         }
-        if(codeType === 2){
-            getGiteeBranch(params).then(res=>{
-                getBranchList(res)
-            })
-        }else {
-            getGithubBranch(params).then(res=>{
-                getBranchList(res)
-            })
-        }
+        findBranch(params)
     }
 
-    const getBranchList = data =>{
-        if(data.code===0 && data.data){
-            setBranchList(data.data)
-        }
-    }
 
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
-        setGitStoreHouse(value)
         change("codeName",value)
         setProhibited(false)
     }
+
 
     // 选择分支
     const changeBranch = value => {
@@ -112,12 +86,12 @@ const CodeGiteeOrGithub = props =>{
         const obj = {}
         obj[key] = value
         const params = {
-            pipelineId,
-            type:codeType,
+            pipeline:{pipelineId},
+            taskType:codeType,
             values:obj,
             message:"update"
         }
-        setFormInitialValues({key:value})
+        formInitialValues.key=value
         updateConfigure(params)
     }
 
@@ -128,7 +102,7 @@ const CodeGiteeOrGithub = props =>{
                     {...props}
                     type={codeType}
                 />
-                <Button className="config-details-link" type="link" onClick={()=>setVisible(true)}>
+                <Button type="link" onClick={()=>setVisible(true)}>
                     <PlusOutlined />
                     新增服务链接
                 </Button>
@@ -173,11 +147,10 @@ const CodeGiteeOrGithub = props =>{
                 setVisible={setVisible}
                 formInitialValues={formInitialValues}
                 codeType={codeType}
-                getCode={getCode}
-                getGithubProof={getGithubProof}
-                url={url}
-                getGiteeProof={getGiteeProof}
-                setGitProofId={setGitProofId}
+                findCode={findCode}
+                setIsFindState={setIsFindState}
+                isFindState={isFindState}
+                updateProof={updateProof}
             />
         </>
     )

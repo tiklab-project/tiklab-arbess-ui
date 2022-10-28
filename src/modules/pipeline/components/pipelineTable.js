@@ -1,13 +1,13 @@
 import React from "react";
-import {message,Tooltip} from "antd";
+import {message,Tooltip,Table} from "antd";
 import {getUser} from "tiklab-core-ui";
 import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
     MinusCircleOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
-import Tables from "../../../common/tables/tables";
 import "./pipelineTable.scss";
+import EmptyText from "../../../common/emptyText/emptyText";
 
 const PipelineTable = props =>{
 
@@ -174,10 +174,13 @@ const PipelineTable = props =>{
     ]
 
     return  <div className="pipelineTable">
-                <Tables
+                <Table
+                    bordered={false}
                     columns={columns}
                     dataSource={pipelineList}
                     rowKey={record=>record.pipelineId}
+                    pagination={false}
+                    locale={{emptyText: <EmptyText/>}}
                 />
             </div>
 }

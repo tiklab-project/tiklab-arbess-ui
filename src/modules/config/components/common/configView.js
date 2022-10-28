@@ -7,11 +7,10 @@ import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
 import {Empty} from "antd";
-import {getUrlParam} from "../../../../common/getUrlParam/getUrlParam";
 
 const ConfigView = props =>{
 
-    const {view,configDataStore,configStore,pipelineStore,authorizeStore} = props
+    const {view,configDataStore,configStore,pipelineStore} = props
 
     const {findAllConfigure,isPlugin,setIsPlugin,setEnabledValid,enabledValid,setValidLength} = configStore
 
@@ -22,11 +21,9 @@ const ConfigView = props =>{
     } = configDataStore
 
     const {pipelineId} = pipelineStore
-    const {findAccessToken} = authorizeStore
 
     const pluginStore = useSelector(state =>state.pluginStore)
-    const codeValue = getUrlParam("code")
-    const codeError = getUrlParam("error")
+
 
     useEffect(()=>{
         pluginStore && pluginStore.map(item=>{
@@ -34,23 +31,6 @@ const ConfigView = props =>{
         })
     },[])
 
-    // Gitee和Github授权
-    useEffect(() => {
-        const params = {
-            code:codeValue,
-            type:localStorage.getItem("code"),
-        }
-        if(localStorage.getItem("code")){
-            findAccessToken(params).then(res=>{
-                console.log(res)
-                if(res.code===0){
-                    localStorage.setItem("gitProofId",res.data)
-                    localStorage.removeItem("code")
-                }
-                window.close()
-            })
-        }
-    }, [])
 
     const lists = [1,2,3,4,5,11,21,22,31,32]
     // 表单初始化
@@ -246,29 +226,29 @@ const ConfigView = props =>{
         renderFormView()
         :
         <>
-            {/*<Gui*/}
-            {/*    {...props}*/}
-            {/*    del={del}*/}
-            {/*    configStore={configStore}*/}
-            {/*    configDataStore={configDataStore}*/}
-            {/*    pipelineStore={pipelineStore}*/}
-            {/*/>*/}
-            {
-                !getVersionInfo().expired && isPlugin?
-                    <RemoteUmdComponent
-                        {...props}
-                        point={"gui"}
-                        pluginStore={pluginStore}
-                        isModalType={true}
-                        extraProps={{
-                            pipelineStore:toJS(pipelineStore),
-                            configDataStore:toJS(configDataStore),
-                            del,
-                        }}
-                    />
-                    :null
-            }
+            <Gui
+                {...props}
+                del={del}
+                configStore={configStore}
+                configDataStore={configDataStore}
+                pipelineStore={pipelineStore}
+            />
+            {/*{*/}
+            {/*    !getVersionInfo().expired && isPlugin?*/}
+            {/*        <RemoteUmdComponent*/}
+            {/*            {...props}*/}
+            {/*            point={"gui"}*/}
+            {/*            pluginStore={pluginStore}*/}
+            {/*            isModalType={true}*/}
+            {/*            extraProps={{*/}
+            {/*                pipelineStore:toJS(pipelineStore),*/}
+            {/*                configDataStore:toJS(configDataStore),*/}
+            {/*                del,*/}
+            {/*            }}*/}
+            {/*        />*/}
+            {/*        :null*/}
+            {/*}*/}
         </>
 }
 
-export default  inject("configStore","configDataStore","pipelineStore","authorizeStore")(observer(ConfigView))
+export default  inject("configStore","configDataStore","pipelineStore")(observer(ConfigView))

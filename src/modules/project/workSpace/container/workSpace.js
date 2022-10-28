@@ -1,49 +1,78 @@
 import React,{useState,useEffect} from "react";
-import {getUser} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "../components/workSpace.scss";
-import WorkSpaceNod from "../components/workSpaceNod";
-import WorkSpaceRecord from "../components/workSpaceRecord";
-import WorkSpaceDrawer from "../components/workSpaceDrawer";
+import WorkSpaceDyna from "../components/workSpaceDyna";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import echarts from "../../../../common/echarts/echarts";
+import WorkSpaceCensus from "../components/workSpaceCensus";
 
 const WorkSpace = props =>{
 
-    const {workSpaceStore,pipelineStore} = props
+    const {workSpaceStore,pipelineStore,homePageStore} = props
 
-    const {getSubmitMassage,fileTree,readFile,recordList,fileList,setFileList} = workSpaceStore
+    const {findlogpage,dynamicList,setDynamicList,setDynaPagination,dynaPageTotal,dynaPagination,
+    } = homePageStore
+
+    const {pipelineCensus} = workSpaceStore
     const {pipelineId,pipeline} = pipelineStore
+    const [isDyna,setIsDyna] = useState(false) // 更多动态
+    const [census,setCensus] = useState("")
 
-    const [fresh,setFresh] = useState(false)
-    const [catalogue,setCatalogue] = useState([]) // 目录
-    const [detailsDrawer,setDetailsDrawer] = useState(false)
-    const [isFileList,setIsFileList] = useState(false) // 源文件初始是否有数据
-    const [drawerContent,setDrawerContent] = useState("")
-    const userId = getUser().userId
-
-    // 近期提交记录
+    //运行概况
     useEffect(()=>{
         if(pipelineId){
-            getSubmitMassage(pipelineId)
-            setCatalogue([])
+            pipelineCensus(pipelineId).then(res=>{
+                if(res.code===0){
+                    renderChart(res.data)
+                    setCensus(res.data)
+                }
+            })
         }
     },[pipelineId])
 
-    // 节点空间
+    const renderChart = data =>{
+        let option
+        const myChart = echarts.init(document.getElementById("burn-down"))
+        option = {
+            tooltip: {
+                formatter: "{b}: {c} ({d}%)"
+            },
+            color:["#77b3eb","#f06f6f","#f6c659"],
+            type: "pie",
+            series: [{
+                type: "pie",
+                data: [
+                    { value: data && data.successNumber, name: "成功" },
+                    { value: data && data.errorNumber, name: "失败" },
+                    { value: data && data.removeNumber, name: "其他" },
+                ],
+            }]
+        }
+        myChart.setOption(option)
+    }
+
+    // 流水线动态
     useEffect(()=>{
         const params = {
-            pipelineId:pipelineId,
-            userId:userId
+            content:pipelineId,
         }
-        pipelineId && fileTree(params).then(res=>{
-            if(res.code===0){
-                if(res.data){
-                    setIsFileList(true)
-                }else setIsFileList(false)
-            }
+        findlogpage(params).then(res=>{
+            setIsDyna(false)
         })
-    },[fresh,pipelineId])
+    },[pipelineId,dynaPagination])
+
+    useEffect(()=>{
+        return()=>{
+            setDynamicList([])
+            setDynaPagination(1)
+        }
+    },[pipelineId])
+
+    const moreDynamic = () =>{
+        setIsDyna(true)
+        setDynaPagination(dynaPagination+1)
+    }
 
     return(
         <div className="workSpace">
@@ -54,32 +83,27 @@ const WorkSpace = props =>{
                 />
             </div>
             <div className="workSpace-content">
-                <WorkSpaceNod
-                    isFileList={isFileList}
-                    pipelineName={pipeline.pipelineName}
-                    fileList={fileList}
-                    setFileList={setFileList}
-                    fresh={fresh}
-                    setFresh={setFresh}
-                    catalogue={catalogue}
-                    setCatalogue={setCatalogue}
-                    readFile={readFile}
-                    setDetailsDrawer={setDetailsDrawer}
-                    setDrawerContent={setDrawerContent}
-                />
-                <WorkSpaceRecord
-                    recordList={recordList}
-                    setDetailsDrawer={setDetailsDrawer}
-                    setDrawerContent={setDrawerContent}
-                />
-                <WorkSpaceDrawer
-                    detailsDrawer={detailsDrawer}
-                    setDetailsDrawer={setDetailsDrawer}
-                    drawerContent={drawerContent}
+                <div className="workSpace-census workSpace-div">
+                    <div className="workSpace-title">运行概况</div>
+                    <div className="workSpace-census-bottom">
+                        <div className="chart-box" id="burn-down"
+                             style={{width:400,height:300}}
+                        />
+                        <WorkSpaceCensus
+                            census={census}
+                        />
+                    </div>
+                </div>
+                <WorkSpaceDyna
+                    dynamicList={dynamicList}
+                    moreDynamic={moreDynamic}
+                    isDyna={isDyna}
+                    dynaPageTotal={dynaPageTotal}
+                    dynaPagination={dynaPagination}
                 />
             </div>
         </div>
     )
 }
 
-export default withRouter(inject("workSpaceStore","pipelineStore")(observer(WorkSpace)))
+export default withRouter(inject("workSpaceStore","pipelineStore","homePageStore")(observer(WorkSpace)))

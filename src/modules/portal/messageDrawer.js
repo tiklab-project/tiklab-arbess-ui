@@ -1,12 +1,37 @@
-import React,{useEffect} from "react";
-import {Drawer,Select,Divider,Tabs} from "antd";
-import {UserOutlined,BellOutlined,LoadingOutlined} from "@ant-design/icons";
+import React,{useEffect,useState} from "react";
+import {Drawer,Divider,Tabs} from "antd";
+import {MailOutlined,BellOutlined,LoadingOutlined} from "@ant-design/icons";
 import ModalTitle from "../../common/modalTitle/modalTitle";
+import {inject,observer} from "mobx-react";
 import "./messageDrawer.scss";
 
 const MessageDrawer = props =>{
 
-    const {visible,setVisible,messageList,page,moreMessage,isLoading,pagination} = props
+    const {homePageStore,visible,setVisible} = props
+
+    const {findMessageDispatchItemPage,messageList,page,setPagination,pagination,
+        setMessageList
+    } = homePageStore
+
+    const [isLoading,setIsLoading] = useState(false)
+
+    useEffect(()=>{
+        return ()=>{
+            setMessageList([])
+            setPagination(1)
+        }
+    },[visible])
+
+    useEffect(()=>{
+        visible && findMessageDispatchItemPage().then(res=>{
+            setIsLoading(false)
+        })
+    },[visible,pagination])
+
+    const moreMessage = () =>{
+        setPagination(pagination+1)
+        setIsLoading(true)
+    }
 
     const renderState = state =>{
         switch (state) {
@@ -17,29 +42,29 @@ const MessageDrawer = props =>{
         }
     }
 
-    const renderMessageList = () =>{
+    const renderMessageList = messageList =>{
         return messageList && messageList.map((item,index)=>{
             return(
-                <div className="tidings-item" key={index}>
-                    <div className="tidings-item-left">
-                        <div className="tidings-item-icon">
-                            <UserOutlined/>
+                <div className="message-item" key={index}>
+                    <div className="message-item-left">
+                        <div className="message-item-icon">
+                            <MailOutlined />
                         </div>
                         <div>
-                            <div className="tidings-item-user">
-                                <span className="user-sendUser">
-                                    {/*{item.receiver}*/}
+                            <div className="message-item-user">
+                                <span className="user-title">
+                                    {item.messageTemplate.title}
                                 </span>
                                 <span className="user-time">
                                     {item.receiveTime}
                                 </span>
                             </div>
-                            <div className="tidings-item-message">
+                            <div className="message-item-message">
                                 <span>{item.messageTemplate.content}</span>
                             </div>
                         </div>
                     </div>
-                    <div className={`tidings-item-right tidings-item-state-${item.status}`}>
+                    <div className={`message-item-right message-item-state-${item.status}`}>
                         {renderState(item.status)}
                     </div>
                 </div>
@@ -47,10 +72,19 @@ const MessageDrawer = props =>{
         })
     }
 
+    const tab = (
+        <>
+            全部
+            <span className="messageModal-screen-tab">
+                {page && page.total}
+            </span>
+        </>
+    )
+
     const screen = (
         <div className="messageModal-screen">
             <Tabs defaultValue={2}>
-                <Tabs.TabPane key={2} tab={"全部"}>
+                <Tabs.TabPane key={2} tab={tab}>
                     <div className="messageModal-list">
                         {
                             renderMessageList(messageList)
@@ -81,6 +115,7 @@ const MessageDrawer = props =>{
                 <ModalTitle
                     setVisible={setVisible}
                     title={<><BellOutlined style={{fontSize:16}}/>消息</>}
+                    isType={true}
                 />
                 <div className="messageModal">
                     {screen}
@@ -109,4 +144,4 @@ const MessageDrawer = props =>{
     )
 }
 
-export default MessageDrawer
+export default inject("homePageStore")(observer(MessageDrawer))

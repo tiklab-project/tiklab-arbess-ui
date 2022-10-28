@@ -1,11 +1,11 @@
 import React,{useState} from "react";
 import "../components/proof.scss";
-import {Popconfirm,Input,Row,Col,Select} from "antd";
+import {Popconfirm,Table} from "antd";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import UpdateProof from "../components/updateProof";
 import {inject,observer} from "mobx-react";
-import Tables from "../../../common/tables/tables";
 import ProofSwitch from "../components/proofSwitch";
+import EmptyText from "../../../common/emptyText/emptyText";
 
 const Proof = props =>{
 
@@ -107,10 +107,12 @@ const Proof = props =>{
                 <ProofSwitch
                     pipelineList={pipelineList}
                 />
-                <Tables
+                <Table
                     columns={columns}
                     dataSource={proofList}
                     rowKey={record=>record.proofId}
+                    pagination={false}
+                    locale={{emptyText: <EmptyText/>}}
                 />
             </div>
             <UpdateProof
