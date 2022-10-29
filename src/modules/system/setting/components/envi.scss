@@ -1,13 +1,20 @@
 .envi{
     padding: 10px;
     &-content{
+        .ant-table-thead>tr>th{
+            background: #ffffff !important;
+        }
+
+        .ant-table-tbody>tr>td{
+            border: none !important;
+        }
         &-action{
             .del{
                 color:#ff0000;
                 cursor: pointer;
             }
             .edit{
-                padding-right: 10px;
+                padding-right: 15px;
                 color: #1890ff;
                 cursor: pointer;
             }

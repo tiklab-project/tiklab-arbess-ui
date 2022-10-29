@@ -9,6 +9,7 @@ const AddModalStepOne = props =>{
         setInitType(item.type)
     }
 
+    // 锚点
     const changeAnchor = anchorName =>{
         const scrollTop=document.getElementById("modalRight-list")
         if (anchorName) {
@@ -20,6 +21,7 @@ const AddModalStepOne = props =>{
         }
     }
 
+    // 滚动
     const onScroll = () =>{
         const scrollTop=document.getElementById("modalRight-list").scrollTop
         const rightIndex = lis.map((item,index)=>index+1)
@@ -51,7 +53,7 @@ const AddModalStepOne = props =>{
             </div>
             <div className="group-content">
                 {
-                    group.desc.map(item=>{
+                    group.desc && group.desc.map(item=>{
                         return <div onClick={()=>handleClick(item)}
                                     className={`group-desc ${item.type===initType?"group-select":null}`}
                                     key={item.type}

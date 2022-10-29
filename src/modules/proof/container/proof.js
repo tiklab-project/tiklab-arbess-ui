@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import "../components/proof.scss";
 import {Popconfirm,Table} from "antd";
+import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import UpdateProof from "../components/updateProof";
 import {inject,observer} from "mobx-react";
@@ -53,7 +54,9 @@ const Proof = props =>{
         {
             title:"名称",
             dataIndex:"proofName",
-            key:"proofName"
+            key:"proofName",
+            width:"200px",
+            ellipsis:true,
         },
         {
             title   :"类型",
@@ -68,7 +71,9 @@ const Proof = props =>{
         {
             title:"备注",
             dataIndex:"proofDescribe",
-            key:"proofDescribe"
+            key:"proofDescribe",
+            width:"200px",
+            ellipsis:true,
         },
         {
             title:"操作",
@@ -78,7 +83,7 @@ const Proof = props =>{
                 return(
                     <span className="proof-content-action">
                         <span className="edit" onClick={()=>edit(text,record)}>
-                            修改
+                            <EditOutlined /> 修改
                         </span>
                          <Popconfirm
                              style={{marginTop:100}}
@@ -87,7 +92,9 @@ const Proof = props =>{
                              okText="确定"
                              cancelText="取消"
                          >
-                             <span className="del">删除</span>
+                             <span className="del">
+                                 <DeleteOutlined /> 删除
+                             </span>
                          </Popconfirm>
                     </span>
                 )

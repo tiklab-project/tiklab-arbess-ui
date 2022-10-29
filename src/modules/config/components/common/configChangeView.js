@@ -67,12 +67,12 @@ const ConfigChangeView = props =>{
         <div className="config_changeView">
             <div className="changeView">
                 <div className="changeView-valid">
-                    {validLength && validLength > 0 &&
+                    {validLength && validLength > 0 ?
                     <span>
                         <ExclamationCircleOutlined />
                         &nbsp;
                         {validLength}项配置未完成
-                    </span>}
+                    </span> : null}
                 </div>
                 <div className="changeView-newStage">
                     <Button onClick={()=>setAddConfigVisible(true)}>
@@ -108,33 +108,33 @@ const ConfigChangeView = props =>{
                             表单视图
                         </div>
                     </div>
-                    <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}
-                         onClick={()=>changeView("gui")}
-                    >
-                        <div className="changeView-view-item">
-                            <AppstoreOutlined/>
-                            &nbsp;
-                            图形化视图
-                        </div>
-                    </div>
-                    {/*{*/}
-                    {/*    !getVersionInfo().expired && isPlugin ?*/}
-                    {/*        <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
-                    {/*             onClick={()=>changeView("gui")}*/}
-                    {/*        >*/}
-                    {/*            <div className="changeView-view-item">*/}
-                    {/*                <AppstoreOutlined/>*/}
-                    {/*                &nbsp;*/}
-                    {/*                图形化视图*/}
-                    {/*            </div>*/}
-                    {/*        </div>*/}
-                    {/*        :*/}
-                    {/*        <div className="changeView-view-li changeView-view-ban">*/}
-                    {/*            <AppstoreOutlined/>*/}
-                    {/*            &nbsp;*/}
-                    {/*            图形化视图*/}
-                    {/*        </div>*/}
-                    {/*}*/}
+                    {/*<div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
+                    {/*     onClick={()=>changeView("gui")}*/}
+                    {/*>*/}
+                    {/*    <div className="changeView-view-item">*/}
+                    {/*        <AppstoreOutlined/>*/}
+                    {/*        &nbsp;*/}
+                    {/*        图形化视图*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {
+                        !getVersionInfo().expired && isPlugin ?
+                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}
+                                 onClick={()=>changeView("gui")}
+                            >
+                                <div className="changeView-view-item">
+                                    <AppstoreOutlined/>
+                                    &nbsp;
+                                    图形化视图
+                                </div>
+                            </div>
+                            :
+                            <div className="changeView-view-li changeView-view-ban">
+                                <AppstoreOutlined/>
+                                &nbsp;
+                                图形化视图
+                            </div>
+                    }
                 </div>
             </div>
 

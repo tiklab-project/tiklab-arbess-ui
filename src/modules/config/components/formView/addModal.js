@@ -39,12 +39,28 @@ const lis=[
         ]
     },
     {
+        id:5,
+        title: "代码扫描",
+        desc: [
+            {
+                type: 51,
+                tel:"sonarQuebe",
+                icon:"ceshi"
+            }
+        ]
+    },
+    {
         id:2,
         title:"测试",
         desc:[
             {
                 type: 11,
                 tel:"单元测试",
+                icon:"ceshi"
+            },
+            {
+                type: 12,
+                tel: "junit",
                 icon:"ceshi"
             }
         ]
@@ -63,7 +79,33 @@ const lis=[
                 type: 22,
                 tel:"node",
                 icon:"nodejs"
+            },
+            {
+                type: 23,
+                tel:"gradel",
+                icon:"nodejs"
             }
+        ]
+    },
+    {
+        id:6,
+        title: "推送制品",
+        desc: [
+            {
+                type:61,
+                tel:"jfrog",
+                icon: "quanxian"
+            },
+            {
+                type:62,
+                tel:"nexus",
+                icon: "quanxian"
+            },
+            {
+                type:63,
+                tel:"habor",
+                icon: "quanxian"
+            },
         ]
     },
     {
@@ -81,7 +123,28 @@ const lis=[
                 icon:"docker"
             },
         ]
-    }
+    },
+    {
+        id:7,
+        title: "消息通知",
+        desc:[
+            {
+                type:71,
+                tel:"站内信",
+                icon:"xuniji"
+            },
+            {
+                type:72,
+                tel:"钉钉",
+                icon:"xuniji"
+            },
+            {
+                type:73,
+                tel:"企业微信",
+                icon:"xuniji"
+            },
+        ]
+    },
 ]
 
 const AddModal = props =>{
@@ -147,6 +210,8 @@ const AddModal = props =>{
             visible={addConfigVisible}
             onCancel={()=>setAddConfigVisible(false)}
             closable={false}
+            okText="确定"
+            cancelText="取消"
             onOk={()=>onOk()}
             width={800}
         >

@@ -39,7 +39,7 @@ const Project= (props)=>{
     },[pipelineId])
 
     const isPipeline = data => {
-        return data && data.some(item=>item.pipelineName === pipelineName)
+        return data && data.some(item=>item.pipelineId === pipelineId)
     }
 
     useEffect(()=>{

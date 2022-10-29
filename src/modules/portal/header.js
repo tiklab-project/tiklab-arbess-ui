@@ -93,17 +93,21 @@ const Head = props =>{
         <div className="header-outMenu">
            <div className="header-outMenu-content">
                <div className="header-outMenu-top">
-                   <Profile userInfo={getUser()}/>
-                   <span className="top-user">{getUser().name}</span>
+                  <div className="outMenu-out">
+                      <Profile userInfo={getUser()}/>
+                      <div className="outMenu-out-info">
+                          <div className="outMenu-out-name">{getUser().name}</div>
+                          <div className="outMenu-out-eamil">{getUser().userId}@</div>
+                      </div>
+                  </div>
                </div>
-               <div
-                   onClick={()=>goOut()}
-                   className="header-outMenu-out"
-               >
-                   <LogoutOutlined />
-                   <span className="bottom-out">
-                       退出
-                   </span>
+               <div className="header-outMenu-out">
+                   <div  onClick={()=>goOut()} className="outMenu-out">
+                       <LogoutOutlined />
+                       <span className="bottom-out">
+                            退出
+                       </span>
+                   </div>
                </div>
            </div>
         </div>

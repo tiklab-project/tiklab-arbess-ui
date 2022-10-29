@@ -68,6 +68,8 @@ const EnviModal = props =>{
             visible={visible}
             onCancel={()=>setVisible(false)}
             closable={false}
+            okText="确认"
+            cancelText="取消"
             onOk={() => {
                 form
                     .validateFields()
@@ -79,7 +81,7 @@ const EnviModal = props =>{
         >
             <ModalTitle
                 setVisible={setVisible}
-                title={formValue===""?"添加环境配置":"修改环境配置"}
+                title={formValue===""? "添加环境配置":"修改环境配置"}
             />
             <Form
                 form={form}

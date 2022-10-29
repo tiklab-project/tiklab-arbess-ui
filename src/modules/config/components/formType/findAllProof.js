@@ -3,7 +3,6 @@ import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
 import AddProofButton from "../../../proof/components/addProofButton";
-import "./inputs.scss";
 import SuffixStatus from "./suffixStatus";
 
 const {Option} = Select
@@ -59,7 +58,6 @@ const FindAllProof = props =>{
     }
 
     const changeGitSelect = (value,e) =>{
-        console.log(e.key)
         if(type < 6){
             setGitProofId(e.key)
         }else {

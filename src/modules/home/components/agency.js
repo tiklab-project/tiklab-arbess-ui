@@ -1,6 +1,7 @@
 import React from "react";
 import {ShareAltOutlined,UserOutlined,ArrowRightOutlined} from "@ant-design/icons";
 import Guide from "./guide";
+import EmptyText from "../../../common/emptyText/emptyText";
 
 const Agency = props =>{
 
@@ -42,6 +43,26 @@ const Agency = props =>{
                 </div>
     }
 
+    const renderTaskList = (item,index) =>{
+        return <div key={index} className="agency-bottom-list">
+            <div className="agency-item">
+                <div className="agency-item-title">
+                    <span className="title-icon">
+                        <ShareAltOutlined/>
+                    </span>
+                    <span className="title-name">
+                        {item.title}
+                    </span>
+                </div>
+                {renderUser(item)}
+                {renderState(item)}
+                <div className="agency-item-time">
+                    {item.endTime}
+                </div>
+            </div>
+        </div>
+    }
+
     return(
         <div className="agency">
             <Guide
@@ -50,27 +71,14 @@ const Agency = props =>{
             />
             <div className="agency-bottom">
                 {
-                    taskList && taskList.map((item,index)=>{
-                        return(
-                            <div key={index} className="agency-bottom-list">
-                               <div className="agency-item">
-                                   <div className="agency-item-title">
-                                        <span className="title-icon">
-                                            <ShareAltOutlined/>
-                                        </span>
-                                       <span className="title-name">
-                                            {item.title}
-                                       </span>
-                                   </div>
-                                   {renderUser(item)}
-                                   {renderState(item)}
-                                   <div className="agency-item-time">
-                                       {item.endTime}
-                                   </div>
-                               </div>
-                            </div>
-                        )
-                    })
+                    taskList && taskList.length > 0 ?
+                        taskList && taskList.map((item,index)=>{
+                            return renderTaskList(item,index)
+                        })
+                        :
+                        <div className="agency-bottom-empty">
+                            <EmptyText/>
+                        </div>
                 }
             </div>
         </div>

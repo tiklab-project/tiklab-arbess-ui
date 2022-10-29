@@ -54,8 +54,7 @@ const Gui = props =>{
                     return validCodeSvn.test(value)
                 }else if(codeType===1||codeType===4){
                     return validCodeGit.test(value)
-                }
-                break
+                }else return true
             case "sshIp":
                 return validDeploySshIp.test(value)
             default:
@@ -84,7 +83,7 @@ const Gui = props =>{
     }
 
     // 更改
-    const valueChange = (value,name,mode) => {
+    const valueChange = (value,name,mode,setIsLoading) => {
         const obj = {}
         obj[name] = value
         const params = {
@@ -93,9 +92,27 @@ const Gui = props =>{
             values:obj,
             message:"update"
         }
-        if(validation(codeType,name,value)){
-            updateConfig(params,"update")
+        if(name==="proofId"){
+            params.values = {
+                proof: {proofId:value}
+            }
         }
+        if(validation(codeType,name,value)){
+            updateConfigure(params).then(res=>{
+                if(res.code===0){
+                    const zz = document.getElementById(name)
+                    zz && zz.classList.remove("guiView-validateFields")
+                    setIsLoading(3)
+                }else {
+                    setIsLoading(4)
+                    message.info(res.msg)
+                }
+            })
+        }else {
+            setIsLoading(4)
+        }
+
+        setTimeout(()=>setIsLoading(1),1000)
     }
 
     // 删除
@@ -139,9 +156,9 @@ const Gui = props =>{
                         dataId:index,
                         dataType:taskType
                     })
-                    setNewStage(taskType)
-                    setTaskFormDrawer(true)
                 }
+                setNewStage(taskType)
+                setTaskFormDrawer(true)
                 break
             case "updateType":
                 setCodeType(taskType)
@@ -153,6 +170,7 @@ const Gui = props =>{
                         newData.splice(i,1)
                     }
                 }
+                break
         }
         setData([...newData])
     }
@@ -164,7 +182,14 @@ const Gui = props =>{
 
     return (
         <TestContext.Provider
-            value={{pipelineStore,configDataStore,configStore,del,valueChange,changType,addConfig}}
+            value={{pipelineStore,
+                configDataStore,
+                configStore,
+                del,
+                valueChange,
+                changType,
+                addConfig,
+        }}
         >
             <div className="guiView">
                 <Form
@@ -176,21 +201,24 @@ const Gui = props =>{
                     initialValues={{deployType:0}}
                 >
                     <div className="guiView-content">
-                        <Code
-                            validType={validType}
-                            setNewStage={setNewStage}
-                            setTaskFormDrawer={setTaskFormDrawer}
-                            codeType={codeType}
-                            formInitialValues={formInitialValues}
-                        />
                         <div className="guiView-main">
                             <div className="guiView-main_container">
                                 <div className="guiView-main_group">
+                                    <Code
+                                        validType={validType}
+                                        setIndex={setIndex}
+                                        index={index}
+                                        setNewStage={setNewStage}
+                                        setTaskFormDrawer={setTaskFormDrawer}
+                                        codeType={codeType}
+                                        formInitialValues={formInitialValues}
+                                    />
                                     <NewStage
                                         validType={validType}
                                         data={data}
                                         index={index}
                                         setIndex={setIndex}
+                                        codeType={codeType}
                                         setTaskFormDrawer={setTaskFormDrawer}
                                         setNewStage={setNewStage}
                                     />

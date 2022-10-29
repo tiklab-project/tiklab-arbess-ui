@@ -1,5 +1,9 @@
 import React from "react";
-import {CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined} from "@ant-design/icons";
+import {
+    CheckCircleOutlined,
+    CloseCircleOutlined,
+    LoadingOutlined
+} from "@ant-design/icons";
 
 const SuffixStatus = props =>{
     const {isLoading} = props

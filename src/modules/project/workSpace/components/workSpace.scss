@@ -13,6 +13,9 @@
         line-height: 40px;
         padding-left: 10px;
         margin-bottom: 10px;
+        &-name{
+            padding: 0 8px;
+        }
     }
     &-top{
         position: fixed;
@@ -85,7 +88,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                height: 55px;
+                height: 50px;
                 &-left{
                     display: flex;
                     align-items: center;
@@ -102,9 +105,6 @@
                     text-align: center
                 }
 
-                &-userName{
-                    font-weight: 500;
-                }
                 &-message{
                     color: #695c5c;
                 }

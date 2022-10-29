@@ -6,6 +6,7 @@ import TestContext from "../common/testContext";
 import proofStore from "../../store/proofStore";
 import {PlusOutlined} from "@ant-design/icons";
 import ProofAddModal from "./proofAddModal";
+import SuffixStatus from "./suffixStatus";
 
 const {Option} = Select
 
@@ -22,8 +23,8 @@ const ProofAll = props =>{
     const userId = getUser().userId
 
     const [visible,setVisible] = useState(false)
-
     const [open, setOpen] = useState(false)
+    const [isLoading,setIsLoading] = useState(1)
 
     const clickFindAllGit = () =>{
         let proofScope
@@ -40,6 +41,7 @@ const ProofAll = props =>{
             userId:userId
         }
         findPipelineProof(params)
+        setIsLoading(2)
     }
 
     const selectDropdownRender = (menu,type) => {
@@ -76,39 +78,34 @@ const ProofAll = props =>{
         }else {
             setDeployProofId(e.key)
         }
-        valueChange(e.key,"proofName",type)
-        // const params = {
-        //     pipelineId,
-        //     taskType:type,
-        //     pipelineTest: {proof:{proofId:e.key}},
-        //     pipelineCode: {proof:{proofId:e.key}},
-        //     pipelineBuild: {proof:{proofId:e.key}},
-        //     pipelineDeploy: {proof:{proofId:e.key}},
-        //     message:"update"
-        // }
-        // updateConfigure(params)
+        valueChange(e.key,"proofId",type,setIsLoading)
+    }
+
+    const onBlur = () => {
+        setIsLoading(1)
     }
 
     const style1 = {
-        width:420
+        width:300
     }
 
     const style2 = {
-        width:373
+        width:270
     }
 
     return(
-        <Form.Item
-            label="凭证"
-            name={type < 6 ? "gitProofName" : "deployProofName"}
-        >
-            <Select
-                    style={{ width: 300 }}
-                    // style={type === 2 || type === 3 ? style2:style1}
+        <div className="guiView-inputs">
+            <Form.Item
+                label="凭证"
+                name={type < 6 ? "gitProofName" : "deployProofName"}
+            >
+                <Select
+                    style={type === 2 || type === 3 ? style2:style1}
                     onClick={clickFindAllGit}
                     onChange={(value,e)=>changeGitSelect(value,e)}
                     placeholder="请选择凭证"
                     open={open}
+                    onBlur={onBlur}
                     onDropdownVisibleChange={(visible) => setOpen(visible)}
                     dropdownRender={menu=> (
                         <>
@@ -116,18 +113,22 @@ const ProofAll = props =>{
                             {selectDropdownRender(menu,type)}
                         </>
                     )}
-            >
-                {
-                    pipelineProofList && pipelineProofList.map(item=>{
-                        return(
-                            <Option key={item.proofId} value={item.proofName+ "(" + item.proofType + ")"}>
-                                { item.proofName+ "(" + item.proofType + ")"}
-                            </Option>
-                        )
-                    })
-                }
-            </Select>
-        </Form.Item>
+                >
+                    {
+                        pipelineProofList && pipelineProofList.map(item=>{
+                            return(
+                                <Option key={item.proofId} value={item.proofName+ "(" + item.proofType + ")"}>
+                                    { item.proofName+ "(" + item.proofType + ")"}
+                                </Option>
+                            )
+                        })
+                    }
+                </Select>
+            </Form.Item>
+            <div className="guiView-inputs-suffix">
+                {<SuffixStatus isLoading={isLoading}/>}
+            </div>
+        </div>
     )
 }
 

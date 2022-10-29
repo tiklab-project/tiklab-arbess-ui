@@ -9,6 +9,7 @@ import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/home/store/homePageStore";
 import {SETTING_STORE,SettingStore} from "./modules/system/setting/store/settingStore";
 import {AUTHORIZE_STORE,AuthorizeStore} from "./modules/config/store/authorizeStore";
+import {AUTH_STORE,AuthStore} from "./modules/system/auth/store/authStore";
 import {createContext} from "react";
 
 function createStores() {
@@ -23,6 +24,7 @@ function createStores() {
         [HOMEPAGE_STORE]:new HomePageStore(),
         [SETTING_STORE]:new SettingStore(),
         [AUTHORIZE_STORE]:new AuthorizeStore(),
+        [AUTH_STORE]:new AuthStore(),
         [EAM_STORE]:new EamStore(),
     }
 }

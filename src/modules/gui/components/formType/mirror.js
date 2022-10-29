@@ -1,4 +1,4 @@
-import React,{useRef,useContext} from "react";
+import React,{useRef,useContext,useState} from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
@@ -11,6 +11,7 @@ import "codemirror/mode/shell/shell.js";
 import "./mirror.scss";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
+import SuffixStatus from "../../../config/components/formType/suffixStatus";
 
 const Mirror = props =>{
 
@@ -18,6 +19,8 @@ const Mirror = props =>{
 
     const mirrorRefs = useRef(null)
     const context = useContext(TestContext)
+
+    const [isLoading,setIsLoading] = useState(1)
 
     const valueChange = context.valueChange
 
@@ -31,10 +34,14 @@ const Mirror = props =>{
                 lineWrapping: true,//是否支持代码折叠
             }}
             onBlur={()=>{
+                setIsLoading(2)
                 setShellBlock(mirrorRefs.current.editor.getValue())
-                valueChange(mirrorRefs.current.editor.getValue(),name,type)
+                valueChange(mirrorRefs.current.editor.getValue(),name,type,setIsLoading)
             }}
         />
+        <div className="guiView-inputs-suffix">
+            {<SuffixStatus isLoading={isLoading}/>}
+        </div>
     </div>
 
 }

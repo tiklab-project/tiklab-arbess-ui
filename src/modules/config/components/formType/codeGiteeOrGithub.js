@@ -4,7 +4,6 @@ import {PlusOutlined} from "@ant-design/icons";
 import FindAllProof from "./findAllProof";
 import {inject,observer} from "mobx-react";
 import CodeGiteeOrGithubModal from "./codeGIteeOrGIthubModal";
-import "./inputs.scss";
 import SuffixStatus from "./suffixStatus";
 
 const {Option} =Select
@@ -66,13 +65,12 @@ const CodeGiteeOrGithub = props =>{
             type:codeType
         }
         findBranch(params)
-        setIsLoading(2)
     }
 
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
-        change("codeName",value)
         setProhibited(false)
+        change("codeName",value)
     }
 
     // 选择分支
@@ -97,8 +95,8 @@ const CodeGiteeOrGithub = props =>{
     }
 
     const onFocus = name => {
-        setIsLoading(2)
         setFieldName(name)
+        setIsLoading(2)
     }
 
     const onBlur = () => {

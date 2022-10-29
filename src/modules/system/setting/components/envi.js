@@ -6,6 +6,7 @@ import "./envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import EnviSwitch from "./enviSwitch";
 import EmptyText from "../../../../common/emptyText/emptyText";
+import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 
 /*
     系统环境配置
@@ -56,17 +57,18 @@ const Envi = props =>{
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
+
             render:text => scmTitle(text)
         },
         {
             title:"名称",
             dataIndex:"scmName",
-            key:"scmName"
+            key:"scmName",
         },
         {
             title:"地址",
             dataIndex:"scmAddress",
-            key:"scmAddress"
+            key:"scmAddress",
         },
         {
             title:  "操作",
@@ -76,7 +78,7 @@ const Envi = props =>{
                 return(
                     <span className="envi-content-action">
                         <span className="edit" onClick={()=>edit(text,record)}>
-                            修改
+                            <EditOutlined /> 修改
                         </span>
                          <Popconfirm
                              style={{marginTop:100}}
@@ -85,7 +87,9 @@ const Envi = props =>{
                              okText="确定"
                              cancelText="取消"
                          >
-                             <span className="del">删除</span>
+                             <span className="del">
+                                 <DeleteOutlined /> 删除
+                             </span>
                          </Popconfirm>
                     </span>
                 )

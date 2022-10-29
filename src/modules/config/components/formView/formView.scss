@@ -3,6 +3,12 @@
     .formView-validateFields{
         border: 1px solid #ff0000;
     }
+    .formView-inputs{
+        display: flex;
+        &-suffix{
+            padding: 4px 0 0 5px;
+        }
+    }
     .ant-form{
         .ant-input{
             width: 500px;

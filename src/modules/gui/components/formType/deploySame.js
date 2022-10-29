@@ -6,7 +6,7 @@ import Proof from "./proof";
 
 const DeploySame = props =>{
 
-    const {configdatastore,profileaddress,messageinfo} = props
+    const {configdatastore,messageinfo} = props
 
     const {deployType,deployOrderShellBlock,setDeployOrderShellBlock} = configdatastore
 
@@ -17,7 +17,7 @@ const DeploySame = props =>{
                 label={"应用源文件地址"}
                 name={"sourceAddress"}
                 mode={deployType}
-                addonbefore={profileaddress}
+                addonbefore={"/"}
             />
             <div className="deployTargetAddress">{messageinfo}</div>
             <Inputs

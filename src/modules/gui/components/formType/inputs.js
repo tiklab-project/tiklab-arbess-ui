@@ -1,7 +1,8 @@
-import React,{useContext} from "react";
+import React,{useContext,useState} from "react";
 import {Form,Input} from "antd";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
+import SuffixStatus from "./suffixStatus";
 
 const Inputs = props =>{
 
@@ -9,8 +10,10 @@ const Inputs = props =>{
 
     const context = useContext(TestContext)
 
-    const {setFormInitialValues,codeType} = context.configDataStore
+    const {formInitialValues,codeType} = context.configDataStore
     const valueChange = context.valueChange
+
+    const [isLoading,setIsLoading] = useState(1)
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
@@ -19,10 +22,10 @@ const Inputs = props =>{
     const onchange = e  => {
         switch (name){
             case "codeName":
-                setFormInitialValues({codeName:e.target.value})
+                formInitialValues.codeName=e.target.value
                 break
             case "codeBranch":
-                setFormInitialValues({codeBranch:e.target.value})
+                formInitialValues.codeBranch=e.target.value
         }
     }
 
@@ -53,21 +56,31 @@ const Inputs = props =>{
         return rule
     }
 
+    const onBlur = e =>{
+        setIsLoading(2)
+        valueChange(e.target.value,name,mode,setIsLoading)
+    }
+
     return (
-        <Form.Item
-            {...props}
-            name={name}
-            label={label}
-            rules={rules()}
-            validateTrigger="onChange"
-        >
-            <Input
-                placeholder={placeholder}
-                onChange={name==="codeName" || name==="codeBranch" ? onchange:null}
-                onBlur={(e)=>valueChange(e.target.value,name,mode)}
-                addonBefore={addonbefore}
-            />
-        </Form.Item>
+       <div className="guiView-inputs">
+           <Form.Item
+               {...props}
+               name={name}
+               label={label}
+               rules={rules()}
+               validateTrigger="onChange"
+           >
+               <Input
+                   placeholder={placeholder}
+                   onChange={name==="codeName" || name==="codeBranch" ? onchange:null}
+                   onBlur={e=>onBlur(e)}
+                   addonBefore={addonbefore}
+               />
+           </Form.Item>
+           <div className="guiView-inputs-suffix">
+               {<SuffixStatus isLoading={isLoading}/>}
+           </div>
+       </div>
     )
 
 }

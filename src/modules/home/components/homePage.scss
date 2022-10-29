@@ -139,6 +139,9 @@
             padding: 10px;
             height: 350px;
             &-bottom{
+                &-empty{
+                    padding-top: 20px;
+                }
                 &-list{
                     padding: 8px;
                     &:not(:last-child){
@@ -220,7 +223,7 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    height: 55px;
+                    height: 50px;
                     &-left{
                         display: flex;
                         align-items: center;
@@ -235,9 +238,6 @@
                         margin-right: 8px;
                         padding-top: 5px;
                         text-align: center
-                    }
-                    &-userName{
-                        font-weight: 500;
                     }
                     &-message{
                         color: #695c5c;

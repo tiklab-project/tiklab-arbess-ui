@@ -1,4 +1,7 @@
 .pipelineAddModal{
+    .ant-modal-footer{
+        border:none !important;
+    }
     .pipelineAddModalType{
       &-title{
           padding-bottom: 10px;

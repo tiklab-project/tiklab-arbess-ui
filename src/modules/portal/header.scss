@@ -87,22 +87,28 @@ $gray-main:#cccccc;
         background: #fff;
         width: 200px;
         box-shadow: 0 0 8px 1px #00000019;
-        &-content{
-            padding: 10px;
-        }
         &-top{
-            display: flex;
-            .top-user{
-                padding-left: 15px;
-                font-size: 15px;
+            padding: 10px;
+            .outMenu-out{
+                display: flex;
+                align-items: center;
+                &-info{
+                    padding-left: 15px;
+                }
+                &-name{
+                    font-size: 15px;
+                }
             }
         }
         &-out{
             padding: 5px;
-            margin-top: 15px;
-            &:hover{
-                background: #f4f4f4;
-                cursor: pointer;
+            border-top: 1px solid #f4f4f4;
+            .outMenu-out{
+                padding: 5px;
+                &:hover{
+                    background: #f4f4f4;
+                    cursor: pointer;
+                }
             }
             .bottom-out{
                 padding-left: 5px;

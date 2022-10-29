@@ -6,6 +6,7 @@ import WorkSpaceDyna from "../components/workSpaceDyna";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import echarts from "../../../../common/echarts/echarts";
 import WorkSpaceCensus from "../components/workSpaceCensus";
+import {PieChartOutlined} from "@ant-design/icons";
 
 const WorkSpace = props =>{
 
@@ -19,38 +20,36 @@ const WorkSpace = props =>{
     const [isDyna,setIsDyna] = useState(false) // 更多动态
     const [census,setCensus] = useState("")
 
+
     //运行概况
     useEffect(()=>{
         if(pipelineId){
             pipelineCensus(pipelineId).then(res=>{
                 if(res.code===0){
-                    renderChart(res.data)
+                    const data = res.data
+                    let option
+                    const myChart = echarts.init(document.getElementById("burn-down"))
+                    option = {
+                        tooltip: {
+                            formatter: "{b}: {c} ({d}%)"
+                        },
+                        color:["#77b3eb","#f06f6f","#f6c659"],
+                        type: "pie",
+                        series: [{
+                            type: "pie",
+                            data: [
+                                { value: data && data.successNumber, name: "成功" },
+                                { value: data && data.errorNumber, name: "失败" },
+                                { value: data && data.removeNumber, name: "其他" },
+                            ],
+                        }]
+                    }
+                    res.code===0 && myChart.setOption(option)
                     setCensus(res.data)
                 }
             })
         }
     },[pipelineId])
-
-    const renderChart = data =>{
-        let option
-        const myChart = echarts.init(document.getElementById("burn-down"))
-        option = {
-            tooltip: {
-                formatter: "{b}: {c} ({d}%)"
-            },
-            color:["#77b3eb","#f06f6f","#f6c659"],
-            type: "pie",
-            series: [{
-                type: "pie",
-                data: [
-                    { value: data && data.successNumber, name: "成功" },
-                    { value: data && data.errorNumber, name: "失败" },
-                    { value: data && data.removeNumber, name: "其他" },
-                ],
-            }]
-        }
-        myChart.setOption(option)
-    }
 
     // 流水线动态
     useEffect(()=>{
@@ -84,7 +83,10 @@ const WorkSpace = props =>{
             </div>
             <div className="workSpace-content">
                 <div className="workSpace-census workSpace-div">
-                    <div className="workSpace-title">运行概况</div>
+                    <div className="workSpace-title">
+                        <PieChartOutlined />
+                        <span className="workSpace-title-name">运行概况</span>
+                    </div>
                     <div className="workSpace-census-bottom">
                         <div className="chart-box" id="burn-down"
                              style={{width:400,height:300}}

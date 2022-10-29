@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import {toJS} from 'mobx';
+import {toJS} from "mobx";
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
@@ -12,7 +12,7 @@ const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,setEnabledValid,enabledValid,setValidLength} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,setValidLength} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
@@ -162,7 +162,6 @@ const ConfigView = props =>{
 
     // 统一form表单里面需要删除的值
     const del = i => {
-        setEnabledValid(!enabledValid)
         switch (i) {
             case 11:
                 setUnitShellBlock("")
@@ -198,7 +197,6 @@ const ConfigView = props =>{
                 setCodeType("")
                 setGitProofId("")
         }
-        setEnabledValid(!enabledValid)
         setFormInitialValues({...formInitialValues})
     }
 
@@ -226,28 +224,28 @@ const ConfigView = props =>{
         renderFormView()
         :
         <>
-            <Gui
-                {...props}
-                del={del}
-                configStore={configStore}
-                configDataStore={configDataStore}
-                pipelineStore={pipelineStore}
-            />
-            {/*{*/}
-            {/*    !getVersionInfo().expired && isPlugin?*/}
-            {/*        <RemoteUmdComponent*/}
-            {/*            {...props}*/}
-            {/*            point={"gui"}*/}
-            {/*            pluginStore={pluginStore}*/}
-            {/*            isModalType={true}*/}
-            {/*            extraProps={{*/}
-            {/*                pipelineStore:toJS(pipelineStore),*/}
-            {/*                configDataStore:toJS(configDataStore),*/}
-            {/*                del,*/}
-            {/*            }}*/}
-            {/*        />*/}
-            {/*        :null*/}
-            {/*}*/}
+            {/*<Gui*/}
+            {/*    {...props}*/}
+            {/*    del={del}*/}
+            {/*    configStore={configStore}*/}
+            {/*    configDataStore={configDataStore}*/}
+            {/*    pipelineStore={pipelineStore}*/}
+            {/*/>*/}
+            {
+                !getVersionInfo().expired && isPlugin?
+                    <RemoteUmdComponent
+                        {...props}
+                        point={"gui"}
+                        pluginStore={pluginStore}
+                        isModalType={true}
+                        extraProps={{
+                            pipelineStore:toJS(pipelineStore),
+                            configDataStore:toJS(configDataStore),
+                            del,
+                        }}
+                    />
+                    :null
+            }
         </>
 }
 

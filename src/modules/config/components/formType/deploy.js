@@ -5,7 +5,6 @@ import {inject,observer} from "mobx-react";
 import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
-import "./inputs.scss";
 import SuffixStatus from "./suffixStatus";
 
 const Deploy = props =>{
@@ -14,7 +13,7 @@ const Deploy = props =>{
 
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = configDataStore
 
-    const {getFile,updateConfigure,enabledValid,setEnabledValid} = configStore
+    const {getFile,updateConfigure} = configStore
     const {pipelineId,pipelineName} = pipelineStore
 
     const [bordered,setBordered] = useState(false)
@@ -60,7 +59,6 @@ const Deploy = props =>{
         }
         updateConfigure(params).then(res=>{
             res.code===0 && setIsLoading(3)
-            setEnabledValid(!enabledValid)
         })
 
         setTimeout(()=>setIsLoading(1),1000)

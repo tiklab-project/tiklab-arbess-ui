@@ -2,30 +2,33 @@ import React,{useContext} from "react";
 import TestContext from "./testContext";
 import {observer} from "mobx-react";
 
-const NewStageAddDrawerRight = props =>{
+const AddDrawerRight = props =>{
 
-    const {rightLis,onScroll,setNewStageDrawer,index} = props
+    const {lis,onScroll,setNewStageDrawer} = props
 
     const context = useContext(TestContext)
-    const {setBuildType,setDeployType} = context.configDataStore
+    const {setCodeType,setBuildType,setDeployType} = context.configDataStore
     const addConfig = context.addConfig
 
     const handleClick = (group,item) =>{
         addConfig(item.type)
-        if(group.id===2){
-            setBuildType(item.type)
+        if(group.id===1){
+            setCodeType(item.type)
         }
         else if(group.id===3){
+            setBuildType(item.type)
+        }
+        else if(group.id===4){
             setDeployType(item.type)
         }
         setNewStageDrawer(false)
     }
 
     return(
-        <div className="body-menu_right" id="tpl-list-task" onScroll={onScroll}>
+        <div className="guiViewAddDrawerRight" id="tpl-list-task" onScroll={onScroll}>
             <div className="wrap" >
                 {
-                    rightLis && rightLis.map((group,groupIndex)=>{
+                    lis && lis.map((group,groupIndex)=>{
                         return(
                             <div className="group" key={group.id} id={groupIndex+1}>
                                 <div className="group-title">{group.title}</div>
@@ -54,4 +57,4 @@ const NewStageAddDrawerRight = props =>{
     )
 }
 
-export default observer(NewStageAddDrawerRight)
+export default observer(AddDrawerRight)

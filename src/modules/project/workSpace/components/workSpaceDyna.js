@@ -1,5 +1,5 @@
 import React from "react";
-import {LoadingOutlined, UserOutlined} from "@ant-design/icons";
+import {LoadingOutlined,AimOutlined,UserOutlined} from "@ant-design/icons";
 
 const WorkSpaceDyna = props =>{
 
@@ -11,15 +11,10 @@ const WorkSpaceDyna = props =>{
                 <div className={`dyna-item-icon`}>
                     <UserOutlined/>
                 </div>
-                <div>
-                    <div className="dyna-item-userName">
-                        {item.user.name}
-                    </div>
-                    <div className="dyna-item-message">
-                        <div
-                            dangerouslySetInnerHTML={{__html: item.opLogTemplate.content}}
-                        />
-                    </div>
+                <div className="dyna-item-message">
+                    <div
+                        dangerouslySetInnerHTML={{__html: item.opLogTemplate.content}}
+                    />
                 </div>
             </div>
             <div>{item.timestamp}</div>
@@ -28,7 +23,10 @@ const WorkSpaceDyna = props =>{
 
     return(
         <div className="workSpace-dyna workSpace-div">
-            <div className="workSpace-title">流水线动态</div>
+            <div className="workSpace-title">
+                <AimOutlined />
+                <span className="workSpace-title-name">流水线动态</span>
+            </div>
             <div className="dyna">
                 {
                     dynamicList && dynamicList.map((item,index)=>{

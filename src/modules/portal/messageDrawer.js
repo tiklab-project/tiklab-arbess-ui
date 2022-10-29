@@ -83,18 +83,18 @@ const MessageDrawer = props =>{
 
     const screen = (
         <div className="messageModal-screen">
-            <Tabs defaultValue={2}>
-                <Tabs.TabPane key={2} tab={tab}>
+            <Tabs defaultValue={1}>
+                <Tabs.TabPane key={1} tab={tab}>
                     <div className="messageModal-list">
                         {
                             renderMessageList(messageList)
                         }
                     </div>
                 </Tabs.TabPane>
-                <Tabs.TabPane key={0} tab={'未读'}>
+                <Tabs.TabPane key={2} tab={'未读'}>
                     未读消息
                 </Tabs.TabPane>
-                <Tabs.TabPane key={1} tab={"已读"} >
+                <Tabs.TabPane key={3} tab={"已读"} >
                     已读消息
                 </Tabs.TabPane>
             </Tabs>

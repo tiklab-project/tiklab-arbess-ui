@@ -35,7 +35,7 @@ export const departmentRouter = [
 
 export const applicationRouter = [
     {
-        key:"/index/system/syr/role",
+        key:"/index/system/role",
         label:"权限",
         icon: <SafetyCertificateOutlined />,
         enCode:"E",
@@ -53,7 +53,7 @@ export const applicationRouter = [
         enCode:"J",
     },
     {
-        key:"/index/system/mes/sendType",
+        key:"/index/system/mes",
         label: "消息通知",
         icon:<CompassOutlined />,
         enCode: "I",
@@ -128,6 +128,12 @@ export const templateRouter = [
             {
                 key:"/index/system/project/role",
                 label:"项目角色",
+                icon:<MenuOutlined />,
+                enCode:"I",
+            },
+            {
+                key:"/index/system/sysauth",
+                label:"授权管理",
                 icon:<MenuOutlined />,
                 enCode:"I",
             },

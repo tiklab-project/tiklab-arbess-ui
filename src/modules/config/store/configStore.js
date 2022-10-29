@@ -36,7 +36,9 @@ export class ConfigStore{
     updateConfigure = values =>{
         return new Promise((resolve, reject) => {
             UpdateConfigure(values).then(res=>{
-                console.log(res)
+                if(res.code===0){
+                    this.enabledValid=!this.enabledValid
+                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -51,7 +53,6 @@ export class ConfigStore{
         param.append("pipelineId", values)
         return new Promise((resolve, reject) => {
             FindAllConfigure(param).then(res=>{
-                console.log(res)
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

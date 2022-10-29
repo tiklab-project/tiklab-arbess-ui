@@ -9,9 +9,7 @@ const BuildMavenOrNode = props =>{
 
     const context = useContext(TestContext)
 
-    const {profileAddress} = context.configStore
     const {buildShellBlock,setBuildShellBlock,buildType} = context.configDataStore
-    const {pipelineName} = context.pipelineStore
 
     return(
         <>
@@ -20,7 +18,7 @@ const BuildMavenOrNode = props =>{
                 label={"文件地址"}
                 name={"buildAddress"}
                 mode={buildType}
-                addonbefore={profileAddress+pipelineName}
+                addonbefore={"/"}
             />
 
             <Form.Item

@@ -1,14 +1,12 @@
 import React from "react";
-import "./addDrawerLeft.scss";
-
 
 const AddDrawerLeft = props =>{
 
-    const {leftLis,opt,onClick} = props
+    const {lis,opt,onClick} = props
 
     
-    const renderLeftLis = leftLis => {
-        return leftLis && leftLis.map((item,index)=>{
+    const renderLeftLis = lis => {
+        return lis && lis.map((item,index)=>{
             return(
                 <li key={item.id}
                     onClick={ ()=>onClick(index+1) }
@@ -28,7 +26,7 @@ const AddDrawerLeft = props =>{
         <div className="guiViewAddDrawerLeft">
             <ul className="at-nav">
                 {
-                    renderLeftLis(leftLis)
+                    renderLeftLis(lis)
                 }
             </ul>
         </div>

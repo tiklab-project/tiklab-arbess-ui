@@ -1,6 +1,6 @@
 import React from "react";
-import AsyncComponent from "./common/lazy/SyncComponent";
 import {Redirect} from "react-router-dom";
+import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Index=AsyncComponent(()=>import("./modules/portal/portal"))
 
@@ -20,7 +20,11 @@ const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container
 const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
 const Config = AsyncComponent(()=>import("./modules/config/container/config"))
 
+/* 授权 */
+const Authorize=AsyncComponent(()=>import("./modules/authorize/authorize"))
+
 /*  流水线详情 -- 设置 */
+const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
 const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
 const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
@@ -29,15 +33,16 @@ const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/pro
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
+const Envi=AsyncComponent(()=>import("./modules/system/setting/components/envi"))
+const Info=AsyncComponent(()=>import("./modules/system/setting/components/info"))
+
+const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
+
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
-
-const Info=AsyncComponent(()=>import("./modules/system/setting/components/info"))
-const Envi=AsyncComponent(()=>import("./modules/system/setting/components/envi"))
 
 const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/userMessage"))
 const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
@@ -53,15 +58,16 @@ const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask
 const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
 const TodoTemp=AsyncComponent(()=>import("./modules/system/todotask/todoTemp"))
 
-/*
-    账号与成员
- */
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 
+const FullWorkTodo=AsyncComponent(()=>import("./modules/wiget/fullWorkTodo"))
+const WidgetMangent=AsyncComponent(()=>import("./modules/wiget/widgetMangent"))
+const OpLogWidget=AsyncComponent(()=>import("./modules/wiget/opLogWidget"))
+const TodoWidget=AsyncComponent(()=>import("./modules/wiget/todoWidget"))
 
-const routesSaas =[
+const routerSass=[
     {
         path:"/login",
         component:Login,
@@ -85,13 +91,22 @@ const routesSaas =[
                 exact:true,
             },
             {
+                path: "/index/fullWorkTodo",
+                component: FullWorkTodo,
+                exact:true,
+            },
+            {
                 path:"/index/pipeline",
                 component:Pipeline,
                 exact: true,
             },
             {
-                path:"/index/userMessageContent",
+                path:"/index/userMessage",
                 component: UserMessageContent,
+            },
+            {
+                path:"/index/authorize",
+                component: Authorize,
             },
             {
                 path:"/index/task/:pipelineId",
@@ -114,21 +129,27 @@ const routesSaas =[
                         component: Structure
                     },
                     {
-                        path:"/index/task/:pipelineId/assembly/proof",
-                        component:ProjectSetProof
+                        path:"/index/task/:pipelineId/assembly",
+                        component: ProjectSet,
+                        routes:[
+                            {
+                                path:"/index/task/:pipelineId/assembly/proof",
+                                component:ProjectSetProof
+                            },
+                            {
+                                path:"/index/task/:pipelineId/assembly/role",
+                                component: ProjectRole
+                            },
+                            {
+                                path:"/index/task/:pipelineId/assembly/redel",
+                                component: ProjectSetReDel
+                            },
+                            {
+                                path:"/index/task/:pipelineId/assembly/user",
+                                component: ProjectSetUser
+                            },
+                        ]
                     },
-                    {
-                        path:"/index/task/:pipelineId/assembly/role",
-                        component: ProjectRole
-                    },
-                    {
-                        path:"/index/task/:pipelineId/assembly/redel",
-                        component: ProjectSetReDel
-                    },
-                    {
-                        path:"/index/task/:pipelineId/assembly/user",
-                        component: ProjectSetUser
-                    }
                 ]
             },
             {
@@ -140,7 +161,7 @@ const routesSaas =[
                         component: Plugin,
                     },
                     {
-                        path: "/index/system/syr/role",
+                        path: "/index/system/auth",
                         component: SystemRole,
                     },
                     {
@@ -168,22 +189,6 @@ const routesSaas =[
                         component: Envi,
                     },
                     {
-                        path:"/index/system/mes/management",
-                        component: MessageManagement,
-                    },
-                    {
-                        path:"/index/system/mes/template",
-                        component: MessageTemplate,
-                    },
-                    {
-                        path:"/index/system/mes/type",
-                        component: MessageType,
-                    },
-                    {
-                        path:"/index/system/mes/sendType",
-                        component: MessageSendType,
-                    },
-                    {
                         path: "/index/system/task",
                         component: TaskList,
                     },
@@ -194,10 +199,6 @@ const routesSaas =[
                     {
                         path: "/index/system/todoTemp",
                         component: TodoTemp,
-                    },
-                    {
-                        path:"/index/system/log",
-                        component: LogList,
                     },
                     {
                         path:"/index/system/myLog",
@@ -219,15 +220,32 @@ const routesSaas =[
                         path: "/index/system/list",
                         component: UserList,
                     },
+                    {
+                        path:"/index/system/mes/management",
+                        component: MessageManagement,
+                    },
+                    {
+                        path:"/index/system/mes/template",
+                        component: MessageTemplate,
+                    },
+                    {
+                        path:"/index/system/mes/type",
+                        component: MessageType,
+                    },
+                    {
+                        path:"/index/system/mes",
+                        component: MessageSendType,
+                    },
                 ]
             },
         ]
     },
     {
         path:"/",
+        component: Index,
         exact: true,
         render:()=><Redirect to="/index"/>,
     },
 ]
 
-export default routesSaas
+export default routerSass

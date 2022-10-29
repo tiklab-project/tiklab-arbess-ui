@@ -72,6 +72,7 @@ const PipelineTable = props =>{
             dataIndex: "pipelineName",
             key: "pipelineName",
             width:"200px",
+            ellipsis:true,
             render:(text,record)=>{
                 return(
                     <span className="pipelineTable-pipelineName">

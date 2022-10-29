@@ -13,11 +13,8 @@ export class ConfigDataStore {
     @observable unitShellBlock = ""
 
     @observable buildShellBlock = ""
-
     @observable virShellBlock = ""
-
     @observable deployShellBlock = ""
-
     @observable deployOrderShellBlock = ""
 
     @action

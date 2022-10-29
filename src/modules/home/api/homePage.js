@@ -3,7 +3,7 @@ import {serviceLoc} from "../../../common/utils/requset";
 // 最近打开的流水线
 export function  FindAllOpen (data) {
     return serviceLoc.request({
-        url: "/pipelineHome/findAllOpen",
+        url: "/pipeline/findAllOpen",
         method: "post",
         data
     })

@@ -6,6 +6,7 @@ import CodeGiteeOrGithubModal from "./codeGiteeOrGithubModal";
 import authorizeStore from "../../store/authorizeStore";
 import TestContext from "../common/testContext";
 import ProofAll from "./proofAll";
+import SuffixStatus from "./suffixStatus";
 
 const {Option} =Select
 
@@ -16,14 +17,13 @@ const CodeGiteeOrGithub = props =>{
     const context = useContext(TestContext)
 
     const {formInitialValues,codeType,gitProofId} = context.configDataStore
-    const {pipelineId} = context.pipelineStore
-    const {updateConfigure} = context.configStore
+    const valueChange = context.valueChange
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
     const [isFindState,setIsFindState] = useState(false)
-    const [fieldName,setFieldName] = useState("")
     const [isLoading,setIsLoading] = useState(1)
+    const [fieldName,setFieldName] = useState("")
 
     useEffect(()=>{
         if(formInitialValues && formInitialValues.codeName){
@@ -72,27 +72,26 @@ const CodeGiteeOrGithub = props =>{
 
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
-        change("codeName",value)
+        valueChange(value,"codeName",codeType,setIsLoading)
+        formInitialValues.codeName=value
         setProhibited(false)
     }
 
 
     // 选择分支
     const changeBranch = value => {
-        change("codeBranch",value)
+        valueChange(value,"codeBranch",codeType,setIsLoading)
+        formInitialValues.codeBranch=value
     }
 
-    const change = (key,value)=>{
-        const obj = {}
-        obj[key] = value
-        const params = {
-            pipeline:{pipelineId},
-            taskType:codeType,
-            values:obj,
-            message:"update"
-        }
-        formInitialValues.key=value
-        updateConfigure(params)
+    const onFocus = name => {
+        setFieldName(name)
+        setIsLoading(2)
+    }
+
+    const onBlur = () => {
+        setIsLoading(1)
+        setFieldName("")
     }
 
     return(
@@ -107,40 +106,59 @@ const CodeGiteeOrGithub = props =>{
                     新增服务链接
                 </Button>
             </Row>
-            <Form.Item
-                label="仓库"
-                name={"codeName"}
-                rules={[{required:true, message:"请选择仓库"}]}
-            >
-                <Select
-                    onChange={changeGitStoreHouse}
-                    onClick={clickGitStoreHouse}
-                    placeholder="请选择仓库"
+            <div className="guiView-inputs">
+                <Form.Item
+                    label="仓库"
+                    name={"codeName"}
+                    rules={[{required:true, message:"请选择仓库"}]}
                 >
-                    {
-                        storehouseList && storehouseList.map(item=>{
-                            return <Option key={item} value={item}> {item} </Option>
-                        })
+                    <Select
+                        onChange={(value)=>changeGitStoreHouse(value)}
+                        onClick={clickGitStoreHouse}
+                        onFocus={()=>onFocus("codeName")}
+                        onBlur={onBlur}
+                        placeholder="请选择仓库"
+                    >
+                        {
+                            storehouseList && storehouseList.map(item=>{
+                                return <Option key={item} value={item}> {item} </Option>
+                            })
+                        }
+                    </Select>
+                </Form.Item>
+                <div className="guiView-inputs-suffix">
+                    {fieldName === "codeName" &&
+                        <SuffixStatus isLoading={isLoading}/>
                     }
-                </Select>
-            </Form.Item>
-            <Form.Item
-                label="分支"
-                name={"codeBranch"}
-            >
-                <Select
-                    disabled={prohibited}
-                    placeholder="请选择分支"
-                    onClick={clickBranch}
-                    onChange={changeBranch}
+                </div>
+            </div>
+            <div className="guiView-inputs">
+                <Form.Item
+                    label="分支"
+                    name={"codeBranch"}
                 >
+                    <Select
+                        disabled={prohibited}
+                        placeholder="请选择分支"
+                        onFocus={()=>onFocus("codeName")}
+                        onBlur={onBlur}
+                        onClick={clickBranch}
+                        onChange={(value)=>changeBranch(value)}
+                    >
+                        {
+                            branchList && branchList.map(item=>{
+                                return  <Option key={item} value={item}> {item} </Option>
+                            })
+                        }
+                    </Select>
+                </Form.Item>
+                <div className="guiView-inputs-suffix">
                     {
-                        branchList && branchList.map(item=>{
-                            return  <Option key={item} value={item}> {item} </Option>
-                        })
+                        fieldName === "codeBranch" &&
+                        <SuffixStatus isLoading={isLoading}/>
                     }
-                </Select>
-            </Form.Item>
+                </div>
+            </div>
 
             <CodeGiteeOrGithubModal
                 visible={visible}

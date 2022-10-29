@@ -12,15 +12,10 @@ const DynamicList = props =>{
                 <div className="dynamic-item-icon">
                     <UserOutlined/>
                 </div>
-                <div>
-                    <div className="dynamic-item-userName">
-                        {item.user.name}
-                    </div>
-                    <div className="dynamic-item-message">
-                        <div
-                            dangerouslySetInnerHTML={{__html: item.opLogTemplate.content}}
-                        />
-                    </div>
+                <div className="dynamic-item-message">
+                    <div
+                        dangerouslySetInnerHTML={{__html: item.opLogTemplate.content}}
+                    />
                 </div>
             </div>
             <div>{item.timestamp}</div>

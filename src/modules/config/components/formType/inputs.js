@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
-import "./inputs.scss";
 import SuffixStatus from "./suffixStatus";
 
 const Inputs = props =>{
@@ -9,7 +8,7 @@ const Inputs = props =>{
     const {placeholder,mode,label,name,addonBefore,configStore,pipelineStore,configDataStore} = props
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure,setEnabledValid,enabledValid} = configStore
+    const {updateConfigure} = configStore
     const {formInitialValues,codeType} = configDataStore
 
     const [bordered,setBordered] = useState(false)
@@ -63,7 +62,6 @@ const Inputs = props =>{
             message:"update"
         }
         if(validation(codeType,name,e.target.value)){
-            setEnabledValid(!enabledValid)
             updateConfigure(params).then(res=>{
                 if(res.code===0){
                     document.getElementById(name).classList.remove("formView-validateFields")
