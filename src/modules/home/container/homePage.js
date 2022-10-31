@@ -24,16 +24,16 @@ const HomePage = props =>{
     useEffect(()=>{
 
         // 所有流水线
-        findAllPipelineStatus(userId)
+        findAllPipelineStatus()
 
         // 我收藏的流水线
-        findAllFollow(userId)
+        findAllFollow()
 
         // 最近打开的流水线
         findAllOpen()
 
         // 我的代办
-        findtodopage(userId)
+        findtodopage()
 
         return()=>{
             setDynamicList([])

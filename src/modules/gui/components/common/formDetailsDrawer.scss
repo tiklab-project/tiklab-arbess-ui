@@ -1,0 +1,27 @@
+.wrapper-body{
+    .body-taskForm{
+        padding: 20px;
+        width: 100%;
+        .ant-form-item-label{
+            min-width: 105px;
+            text-align: left;
+            &>label:after {
+                display: none;
+            }
+        }
+        .ant-input-group{
+            .ant-input{
+                width: 380px;
+            }
+        }
+        .ant-input{
+            width: 410px;
+        }
+        .ant-select{
+            width: 380px;
+        }
+        .ant-input-group-addon{
+            width: 30px;
+        }
+    }
+}

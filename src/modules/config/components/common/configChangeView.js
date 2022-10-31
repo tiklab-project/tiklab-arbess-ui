@@ -18,10 +18,9 @@ const ConfigChangeView = props =>{
     const {view,setView,pipelineId,configStore,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validLength,isPlugin} = configStore
+    const {validLength,isPlugin,addConfigVisible,setAddConfigVisible} = configStore
 
     const [processVisible,setProcessVisible] = useState(false)
-    const [addConfigVisible,setAddConfigVisible] = useState(false)
 
     const configView = localStorage.getItem("configView")
     const userId = getUser().userId

@@ -4,7 +4,6 @@ import "./gui.scss";
 import {observer} from "mobx-react";
 import {Form,message,Modal} from "antd";
 import TestContext from "../components/common/testContext";
-import Code from "../components/common/code";
 import NewStage from "../components/common/newStage";
 import FormDetailsDrawer from "../components/common/formDetailsDrawer";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
@@ -156,6 +155,11 @@ const Gui = props =>{
                         dataId:index,
                         dataType:taskType
                     })
+                }else {
+                    newData.splice(0,0,{
+                        dataId:index,
+                        dataType:taskType
+                    })
                 }
                 setNewStage(taskType)
                 setTaskFormDrawer(true)
@@ -204,15 +208,6 @@ const Gui = props =>{
                         <div className="guiView-main">
                             <div className="guiView-main_container">
                                 <div className="guiView-main_group">
-                                    <Code
-                                        validType={validType}
-                                        setIndex={setIndex}
-                                        index={index}
-                                        setNewStage={setNewStage}
-                                        setTaskFormDrawer={setTaskFormDrawer}
-                                        codeType={codeType}
-                                        formInitialValues={formInitialValues}
-                                    />
                                     <NewStage
                                         validType={validType}
                                         data={data}
@@ -221,6 +216,7 @@ const Gui = props =>{
                                         codeType={codeType}
                                         setTaskFormDrawer={setTaskFormDrawer}
                                         setNewStage={setNewStage}
+                                        formInitialValues={formInitialValues}
                                     />
                                 </div>
                             </div>

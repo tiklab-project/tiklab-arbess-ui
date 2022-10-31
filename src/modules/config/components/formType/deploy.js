@@ -81,12 +81,15 @@ const Deploy = props =>{
     return(
         <>
             <div className="formView-inputs">
-                <Form.Item name={"deployType"} label="部署类型" className="noRequired">
+                <Form.Item
+                    name={"deployType"}
+                    label="部署类型"
+                >
                     <Select
                         bordered={bordered}
                         onClick={onClick}
                         onFocus={onFocus}
-                        onBlur={e=>onBlur(e)}
+                        onBlur={onBlur}
                         onChange={changDeployType}
                     >
                         <Select.Option value={0}>结构化部署</Select.Option>

@@ -11,7 +11,7 @@ const Proof = props =>{
 
     const context = useContext(TestContext)
 
-    const {formInitialValues,codeType,gitProofId,deployProofId} = context.configDataStore
+    const {formInitialValues,codeType} = context.configDataStore
     const {codeTestPass} = context.configStore
 
     const [testStatus,setTestStatus] = useState(false)
@@ -24,11 +24,11 @@ const Proof = props =>{
             } else {
                 type = 0
             }
-            proofId = gitProofId
+            proofId = formInitialValues && formInitialValues.gitProofId
             port = 0
             url = formInitialValues && formInitialValues.codeName
         } else {
-            proofId = deployProofId
+            proofId = formInitialValues && formInitialValues.deployProofId
             port = formInitialValues && formInitialValues.sshPort
             url = formInitialValues && formInitialValues.sshIp
             type = 2

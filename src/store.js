@@ -10,6 +10,7 @@ import {HOMEPAGE_STORE,HomePageStore} from "./modules/home/store/homePageStore";
 import {SETTING_STORE,SettingStore} from "./modules/system/setting/store/settingStore";
 import {AUTHORIZE_STORE,AuthorizeStore} from "./modules/config/store/authorizeStore";
 import {AUTH_STORE,AuthStore} from "./modules/system/auth/store/authStore";
+import {IDENTIFY_STORE,IdentifyStore} from "./modules/system/identify/store/identifyStore";
 import {createContext} from "react";
 
 function createStores() {
@@ -25,6 +26,7 @@ function createStores() {
         [SETTING_STORE]:new SettingStore(),
         [AUTHORIZE_STORE]:new AuthorizeStore(),
         [AUTH_STORE]:new AuthStore(),
+        [IDENTIFY_STORE]:new IdentifyStore(),
         [EAM_STORE]:new EamStore(),
     }
 }

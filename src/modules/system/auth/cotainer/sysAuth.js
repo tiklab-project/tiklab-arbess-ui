@@ -3,10 +3,10 @@ import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
 import {Popconfirm, Table} from "antd";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import "../components/sysAuth.scss";
 import AuthModal from "../components/authModal";
 import AuthSwitch from "../components/authSwitch";
 import {inject,observer} from "mobx-react";
+import "../components/sysAuth.scss"
 
 const SysAuth = props =>{
 
@@ -42,6 +42,7 @@ const SysAuth = props =>{
         setFormValue(record)
         setVisible(true)
     }
+
     const columns = [
         {
             title:"类型",
@@ -88,7 +89,7 @@ const SysAuth = props =>{
                         <span className="edit"
                               onClick={()=>edit(text,record)}
                         >
-                            <EditOutlined /> 修改
+                            <EditOutlined />
                         </span>
                          <Popconfirm
                              style={{marginTop:100}}
@@ -98,7 +99,7 @@ const SysAuth = props =>{
                              cancelText="取消"
                          >
                              <span className="del">
-                                 <DeleteOutlined /> 删除
+                                 <DeleteOutlined />
                              </span>
                          </Popconfirm>
                     </span>

@@ -8,6 +8,8 @@ import {
     DeleteProof,
 } from "../api/proof";
 
+import {getUser} from "tiklab-core-ui";
+
 export class ProofStore{
 
     @observable proofList = []
@@ -21,7 +23,7 @@ export class ProofStore{
     @action
     createProof =async values =>{
         const params = {
-            user:{id:values.user.id},
+            user:{id:getUser().userId},
             proofScope:values.proofScope,
             proofType:values.proofType,
             proofName:values.proofName,
@@ -32,7 +34,10 @@ export class ProofStore{
             proofCreateTime:values.proofCreateTime,
             proofList:values.proofList
         }
-        return await CreateProof(params)
+        const data = await CreateProof(params)
+        if(data.code===0){
+            this.fresh = !this.fresh
+        }
     }
 
     @action
@@ -46,16 +51,12 @@ export class ProofStore{
     findPipelineProof =async values =>{
         const params = new FormData()
         params.append("pipelineId",values.pipelineId)
-        params.append("userId",values.userId)
+        params.append("userId",getUser().userId)
         params.append("type",values.type)
-        FindPipelineProof(params).then(res=>{
-            console.log(res)
-            if(res.code===0 && res.data){
-                this.proofList = res.data
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await  FindPipelineProof(params)
+        if(data.code===0&&data.data){
+            this.proofList = data.data
+        }
     }
 
     @action
@@ -71,14 +72,22 @@ export class ProofStore{
             type:values.type,
             proofList:values.proofList
         }
-        return await UpdateProof(params)
+        const data = await UpdateProof(params)
+        if(data.code===0){
+            this.fresh = !this.fresh
+        }
+        return data
     }
 
     @action
     deleteProof =async value =>{
         const param = new FormData()
         param.append("proofId",value)
-        return await DeleteProof(param)
+        const data = await DeleteProof(param)
+        if(data.code===0){
+            this.fresh = !this.fresh
+        }
+        return data
     }
 
 }

@@ -1,6 +1,6 @@
-import React,{Fragment,useState} from "react";
+import React,{useState} from "react";
 import AddDrawer from "./addDrawer";
-import Headline from "./headline";
+import BlockContent from "./blockContent";
 
 const NewStage = props =>{
 
@@ -13,35 +13,19 @@ const NewStage = props =>{
         setIndex(data && data.length)
     }
 
-    const insertData = (type,index) => {
-        setNewStageDrawer(true)
-        setIndex(index)
-    }
-
     // data渲染
     const newStageShow = data =>{
         return data && data.map((item,index)=>{
-            return <Fragment  key={index}>
-                <div className="group-flow">
-                    <div className="group-flow_btn" >
-                        <svg className="icon group-flow_btn_i"
-                             aria-hidden="true"
-                             onClick={()=>insertData(item.dataType,index)}
-                        >
-                            <use xlinkHref="#icon-zengjia"/>
-                        </svg>
-                    </div>
-                </div>
-                <Headline
-                    setTaskFormDrawer={setTaskFormDrawer}
-                    setNewStage={setNewStage}
-                    setNewStageDrawer={setNewStageDrawer}
-                    index={index}
-                    setIndex={setIndex}
-                    validType={validType}
-                    type={item.dataType}
-                />
-            </Fragment>
+            return <BlockContent
+                        key={index}
+                        setTaskFormDrawer={setTaskFormDrawer}
+                        setNewStage={setNewStage}
+                        setNewStageDrawer={setNewStageDrawer}
+                        setIndex={setIndex}
+                        inse={index}
+                        validType={validType}
+                        type={item.dataType}
+                    />
         })
     }
 
@@ -50,15 +34,15 @@ const NewStage = props =>{
             return null
         }
         else {
-            return <div className="group-flow">
-                    <div className="group-flow_btn" />
-                </div>
+            return  <div className="group-flow">
+                        <div className="group-flow_btn" />
+                   </div>
         }
     }
 
     // data是否为最长度
     const isAddNewStage = data => {
-        return data && data.length > 2 ?
+        return data && data.length > 4 ?
             null
              :
             <>

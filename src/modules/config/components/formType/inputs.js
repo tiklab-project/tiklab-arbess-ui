@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Form,Input} from "antd";
+import {Form,Input,message} from "antd";
 import {inject,observer} from "mobx-react";
 import SuffixStatus from "./suffixStatus";
 
@@ -9,25 +9,14 @@ const Inputs = props =>{
 
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
-    const {formInitialValues,codeType} = configDataStore
+    const {codeType} = configDataStore
 
     const [bordered,setBordered] = useState(false)
     const [isLoading,setIsLoading] = useState(1)
 
-
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
     const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
-
-    const onchange = e  => {
-        switch (name){
-            case "codeName":
-                formInitialValues.codeName=e.target.value
-                break
-            case "codeBranch":
-                formInitialValues.codeBranch=e.target.value
-        }
-    }
 
     const validation = (codeType,name,value) =>{
         switch (name) {
@@ -102,7 +91,10 @@ const Inputs = props =>{
                             {pattern:validDeploySshIp, message:"请输入正确的Ip地址"}
                         ]
                 break;
-
+            case "projectName":
+                rule = [
+                            {required:true, message: "请输入项目名称"}
+                        ]
         }
         return rule
     }
@@ -119,7 +111,6 @@ const Inputs = props =>{
                 <Input
                     bordered={bordered}
                     placeholder={placeholder}
-                    onChange={onchange}
                     onFocus={onFocus}
                     onBlur={(e)=>onBlur(e)}
                     addonBefore={addonBefore}

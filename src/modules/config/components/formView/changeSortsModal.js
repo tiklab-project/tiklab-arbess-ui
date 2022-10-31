@@ -13,42 +13,23 @@ const ChangeSortsModal = props =>{
         dataTile(data)
         setGData([...nameArray])
     },[data])
-    
+
+    const renderTitle = type =>{
+        switch (type) {
+            case 11:return "测试-单元测试"
+            case 21:return "构建-maven"
+            case 22:return "构建-node"
+            case 31:return "部署-虚拟机"
+            case 32:return "部署-docker"
+            default:return null
+        }
+    }
+
     const dataTile = data => {
         data && data.map((item,index)=>{
-            let tpl,title,icon
-            switch (item.dataType) {
-                case 11:
-                    tpl = "单元测试"
-                    title = "测试"
-                    icon="ceshi1"
-                    break
-                case 21:
-                    tpl = "maven"
-                    title = "构建"
-                    icon="goujiangongju"
-                    break
-                case 22:
-                    tpl = "node"
-                    title = "构建"
-                    icon="goujiangongju"
-                    break
-                case 31:
-                    tpl = "虚拟机"
-                    title = "部署"
-                    icon="bushubanben"
-                    break
-                case 32:
-                    tpl = "docker"
-                    title = "部署"
-                    icon="bushubanben"
-            }
-            nameArray.push({
-                key:index+1,
-                title:title + "--" + tpl,
-                icon:<svg className="icon" aria-hidden="true">
-                        <use xlinkHref={`#icon-${icon}`} />
-                    </svg>,
+            item.dataType>10 && nameArray.push({
+                key:data && data.some(item=>item.dataType<10) ? index :index+1,
+                title:renderTitle(item.dataType),
                 dataId:item.dataId,
                 dataType:item.dataType
             })
@@ -97,10 +78,19 @@ const ChangeSortsModal = props =>{
             taskSort:taskSort,
             taskType:1,
         }
+        const da = [...mData]
         updateConfigure(params).then(res=>{
             //如果改变控件，然后改变data
             if(res.code===0){
-                setData([...mData])
+                data && data.map(item=>{
+                    if(item.dataType<10){
+                        da.splice(0,0,{
+                            dataId:item.dataId,
+                            dataType:item.dataType
+                        })
+                    }
+                })
+                setData([...da])
             }
             if(res.code===50001){
                 message.info(res.msg)

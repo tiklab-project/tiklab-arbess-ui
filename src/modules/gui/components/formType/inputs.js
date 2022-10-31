@@ -10,7 +10,7 @@ const Inputs = props =>{
 
     const context = useContext(TestContext)
 
-    const {formInitialValues,codeType} = context.configDataStore
+    const {codeType} = context.configDataStore
     const valueChange = context.valueChange
 
     const [isLoading,setIsLoading] = useState(1)
@@ -19,15 +19,6 @@ const Inputs = props =>{
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
     const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
 
-    const onchange = e  => {
-        switch (name){
-            case "codeName":
-                formInitialValues.codeName=e.target.value
-                break
-            case "codeBranch":
-                formInitialValues.codeBranch=e.target.value
-        }
-    }
 
     const rules = () =>{
         let rule
@@ -72,7 +63,6 @@ const Inputs = props =>{
            >
                <Input
                    placeholder={placeholder}
-                   onChange={name==="codeName" || name==="codeBranch" ? onchange:null}
                    onBlur={e=>onBlur(e)}
                    addonBefore={addonbefore}
                />

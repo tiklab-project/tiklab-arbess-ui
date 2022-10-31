@@ -3,16 +3,15 @@ import "./addProofModal";
 import AddProofModal from "./addProofModal";
 import {inject,observer} from "mobx-react";
 import {Button} from "antd";
-import {getUser} from "tiklab-core-ui";
 import {PlusOutlined} from "@ant-design/icons";
 
 const AddProofButton = props =>{
 
     const {proofStore,pipelineStore,type,style,pipelineList,isBtn} = props
-    const {createProof,fresh,setFresh} = proofStore
+
+    const {createProof} = proofStore
     const {pipelineId} = pipelineStore
 
-    const userId = getUser().userId
     const [visible,setVisible] = useState(false)
     const [isAuthority,setIsAuthority] = useState(false) // 是否显示凭证作用域
 
@@ -26,15 +25,11 @@ const AddProofButton = props =>{
         setVisible(true)
     }
 
-    const noBtn = {
-        // paddingLeft:10
-    }
-
     return (
         <>
             {
                 isBtn ?
-                    <div style={noBtn} onClick={()=>addProofVisible()}>
+                    <div onClick={()=>addProofVisible()}>
                         <PlusOutlined />&nbsp;&nbsp;添加
                     </div>
                     :
@@ -46,9 +41,6 @@ const AddProofButton = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 createProof={createProof}
-                userId={userId}
-                fresh={fresh}
-                setFresh={setFresh}
                 isAuthority={isAuthority}
                 type={type}
                 style={style}

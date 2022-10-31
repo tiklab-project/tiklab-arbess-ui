@@ -5,10 +5,12 @@ import CodeSvn from "./codeSvn";
 import TestUnit from "./testUnit";
 import BuildMavenOrNode from "./buildMavenOrNode";
 import Deploy from "./deploy";
+import ScanSonarQuebe from "./scanSonarQuebe";
 
 const Forms = props =>{
 
     const {type} = props
+
 
     return (
         <>
@@ -31,6 +33,8 @@ const Forms = props =>{
                         case 31:
                         case 32:
                             return <Deploy/>
+                        case 41:
+                            return <ScanSonarQuebe/>
                     }
                 })()
             }

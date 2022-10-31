@@ -23,7 +23,6 @@ export class AuthStore{
             clientId:value.clientId,
             clientSecret:value.clientSecret,
             callbackUrl:value.callbackUrl,
-
         }
         return await UpdateAuthorize(params)
     }

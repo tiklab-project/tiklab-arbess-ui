@@ -1,14 +1,19 @@
 import React from "react";
-import {DeleteOutlined,ExclamationCircleOutlined,SwapOutlined} from "@ant-design/icons";
+import {
+    DeleteOutlined,
+    ExclamationCircleOutlined,
+    SwapOutlined
+} from "@ant-design/icons";
 import {Modal,message} from "antd";
 import Switch from "./switch";
 import Forms from "../formType/forms";
-import TitleType from "../../../../common/configName/titleType";
+import TitleType from "../formTitle/titleType";
 
-const Headline = props =>{
+const BlockContent = props =>{
 
-    const {type,del,data,setData,pipelineId,setChangeSortVisible,updateConfigure,validType} = props
-
+    const {type,del,data,setData,pipelineId,setChangeSortVisible,updateConfigure,
+        validType,id
+    } = props
 
     const delType = type =>{
         Modal.confirm({
@@ -50,10 +55,10 @@ const Headline = props =>{
             </span>
         })
     }
-
+    
     return(
         <>
-            <div className="formView-wrapper">
+            <div className="formView-wrapper" id={id}>
                 <div className="formView-wrapper-Headline">
                     <div className="desc-left">
                         <TitleType type={type}/>
@@ -61,7 +66,7 @@ const Headline = props =>{
                     </div>
                     <div className="desc-right">
                         {
-                            setChangeSortVisible &&
+                            type >10 &&
                                 <span className="desc-changSort"
                                       onClick={()=>setChangeSortVisible(true)}
                                 >
@@ -86,4 +91,4 @@ const Headline = props =>{
     )
 }
 
-export default Headline
+export default BlockContent

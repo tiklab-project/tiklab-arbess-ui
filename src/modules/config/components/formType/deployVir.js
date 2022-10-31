@@ -13,7 +13,6 @@ const DeployVir = props =>{
     return(
         <>
             <Inputs
-                {...props}
                 placeholder={"/ 启动文件地址"}
                 label={"启动文件地址"}
                 name={"startAddress"}

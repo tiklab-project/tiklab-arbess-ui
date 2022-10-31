@@ -15,7 +15,7 @@ const ConfigView = props =>{
     const {findAllConfigure,isPlugin,setIsPlugin,setValidLength} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
-        setCodeType,setBuildType,setDeployType,setGitProofId,setDeployProofId,
+        setCodeType,setBuildType,setDeployType,setGitProofId,
         setUnitShellBlock,setBuildShellBlock,codeType,data,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
@@ -65,8 +65,6 @@ const ConfigView = props =>{
         setDeployOrderShellBlock("")
         setDeployShellBlock("")
         setBuildShellBlock("")
-        setGitProofId("")
-        setDeployProofId("")
     }
 
     // pipeline切换form数据渲染问题
@@ -98,10 +96,13 @@ const ConfigView = props =>{
                 renderBuild(data)
                 setBuildType(data.type)
             }
-            else if(data.type > 30 || data.type < 40 ){
+            else if(data.type > 30 && data.type < 40 ){
                 renderDeploy(data)
                 deploy(data)
                 setDeployType(data.type)
+            }
+            else if(data.type > 40 && data.type <50){
+                renderScan(data)
             }
             setData([...newData])
             Object.assign(formInitialValues, initialData[i])
@@ -113,10 +114,14 @@ const ConfigView = props =>{
     const renderCodeData = data => {
         const codeFormValue = {
             gitProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
-            proofName:data.proof && data.proof.proofName ,
+            proofName:data.proof && data.proof.proofName,
+            gitProofId:data.proof && data.proof.proofId
         }
+        newData.push({
+            dataId:data.codeId,
+            dataType:data.type,
+        })
         Object.assign(formInitialValues,codeFormValue)
-        setGitProofId(data.proof && data.proof.proofId)
     }
 
     // 测试
@@ -145,9 +150,9 @@ const ConfigView = props =>{
         })
         const DeployFormValue={
             deployProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
+            deployProofId:data.proof && data.proof.proofId
         }
         Object.assign(formInitialValues,DeployFormValue)
-        setDeployProofId(data.proof && data.proof.proofId)
     }
 
     // 部署mirror
@@ -157,6 +162,18 @@ const ConfigView = props =>{
             setVirShellBlock(`${data.startShell ? data.startShell : ""}`)
         }
         else setDeployShellBlock(`${data.startShell ? data.startShell : ""}`)
+    }
+    
+    const renderScan = data => {
+        newData.push({
+            dataId: data.codeScanId,
+            dataType:data.type,
+        })
+        const scanFormValue={
+            scanProofId:data.pipelineAuth && data.pipelineAuth.authId,
+            scanProofName:data.pipelineAuth && data.pipelineAuth.name
+        }
+        Object.assign(formInitialValues,scanFormValue)
     }
 
 
@@ -183,8 +200,8 @@ const ConfigView = props =>{
                 formInitialValues.startAddress = null
                 formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
+                formInitialValues.deployType = 0
                 setDeployType("")
-                setDeployProofId("")
                 setVirShellBlock("")
                 setDeployShellBlock("")
                 setDeployOrderShellBlock("")
@@ -195,7 +212,6 @@ const ConfigView = props =>{
                 formInitialValues.gitProofName = null
                 formInitialValues.proofName = null
                 setCodeType("")
-                setGitProofId("")
         }
         setFormInitialValues({...formInitialValues})
     }

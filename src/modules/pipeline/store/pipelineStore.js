@@ -10,6 +10,8 @@ import {
     UpdateFollow
 } from "../api/pipeline";
 
+import moment from "../../../common/moment/moment";
+import {getUser} from "tiklab-core-ui";
 
 export class PipelineStore {
 
@@ -50,7 +52,7 @@ export class PipelineStore {
     @action
     findAllPipelineStatus = value =>{
         const param = new FormData()
-        param.append("userId",value)
+        param.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
             FindAllPipelineStatus(param).then(res=>{
                 if(res.code===0 && res.data){
@@ -69,11 +71,11 @@ export class PipelineStore {
     @action
     createPipeline = values =>{
         const params = {
-            user: {id:values.user.id,},
+            user: {id:getUser().userId},
             pipelineName: values.pipelineName,
             pipelinePower: values.pipelinePower,
             pipelineType: values.pipelineType,
-            pipelineCreateTime:values.pipelineCreateTime
+            pipelineCreateTime:moment.moment
         }
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
@@ -89,7 +91,7 @@ export class PipelineStore {
     findLike = values =>{
         const params = new FormData()
         params.append("pipelineName",values.pipelineName)
-        params.append("userId",values.userId)
+        params.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
             FindLike(params).then(res=>{
                 if(res.code===0){
@@ -139,7 +141,7 @@ export class PipelineStore {
     @action
     findAllFollow = value =>{
         const param = new FormData()
-        param.append("userId",value)
+        param.append("userId",getUser().userId)
         FindAllFollow(param).then(res=>{
             if(res.code===0){
                 this.pipelineList=res.data

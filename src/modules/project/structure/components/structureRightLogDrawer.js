@@ -1,8 +1,8 @@
 import React from "react";
 import {Drawer} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
-import ConfigName from "../../../../common/configName/configName";
-import TitleType from "../../../../common/configName/titleType";
+import Subtitle from "../../../config/components/formTitle/subtitle";
+import TitleType from "../../../config/components/formTitle/titleType";
 
 const StructureRightLogDrawer = props =>{
 
@@ -23,7 +23,7 @@ const StructureRightLogDrawer = props =>{
                             <>
                                 <TitleType type={drawerContent.taskType}/>
                                 &nbsp;--&nbsp;
-                                <ConfigName type={drawerContent.taskType}/>
+                                <Subtitle type={drawerContent.taskType}/>
                             </>
                     }
                     setVisible={setVisible}

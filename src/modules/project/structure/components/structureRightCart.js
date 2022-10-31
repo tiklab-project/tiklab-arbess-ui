@@ -1,5 +1,5 @@
 import React from "react";
-import ConfigName from "../../../../common/configName/configName";
+import Subtitle from "../../../config/components/formTitle/subtitle";
 
 const StructureRightCart = props =>{
 
@@ -32,7 +32,7 @@ const StructureRightCart = props =>{
                 </span>
                 <span> -- </span>
                 <span className="cart-top-configName">
-                    <ConfigName type={item.taskType}/>
+                    <Subtitle type={item.taskType}/>
                 </span>
             </div>
             <div className="cart-center">

@@ -69,11 +69,9 @@ const CodeGiteeOrGithub = props =>{
         findBranch(params)
     }
 
-
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
         valueChange(value,"codeName",codeType,setIsLoading)
-        formInitialValues.codeName=value
         setProhibited(false)
     }
 
@@ -81,7 +79,6 @@ const CodeGiteeOrGithub = props =>{
     // 选择分支
     const changeBranch = value => {
         valueChange(value,"codeBranch",codeType,setIsLoading)
-        formInitialValues.codeBranch=value
     }
 
     const onFocus = name => {

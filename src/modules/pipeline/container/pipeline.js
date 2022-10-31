@@ -1,5 +1,4 @@
 import React,{useEffect,useState} from "react";
-import {getUser} from "tiklab-core-ui";
 import {Button,Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
@@ -19,11 +18,9 @@ const Pipeline = props =>{
     } = pipelineStore
 
     const [addPipelineVisible,setAddPipelineVisible] = useState(false)
-    const userId = getUser().userId
 
     const onChangeSearch = e =>{
         const params = {
-            userId: getUser().userId,
             pipelineName:e.target.value,
         }
         findLike(params)
@@ -32,9 +29,9 @@ const Pipeline = props =>{
     useEffect(()=>{
         if(listType===1){
             // 所有流水线
-            findAllPipelineStatus(userId)
+            findAllPipelineStatus()
         }else {
-            findAllFollow(userId)
+            findAllFollow()
         }
     },[fresh,listType])
 
@@ -94,7 +91,6 @@ const Pipeline = props =>{
             />
             <PipelineAddModal
                 {...props}
-                userId={userId}
                 createPipeline={createPipeline}
                 pipelineList={pipelineList}
                 addPipelineVisible={addPipelineVisible}

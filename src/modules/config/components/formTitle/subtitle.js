@@ -1,6 +1,6 @@
 import React from "react";
 
-const ConfigName = props =>{
+const Subtitle = props =>{
     const {type} = props
     return (
         <>
@@ -27,6 +27,8 @@ const ConfigName = props =>{
                             return "虚拟机"
                         case 32:
                             return "docker"
+                        case 41:
+                            return "sonarQuebe"
                     }
                 })()
             }
@@ -34,4 +36,4 @@ const ConfigName = props =>{
     )
 }
 
-export default ConfigName
+export default Subtitle

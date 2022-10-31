@@ -1,7 +1,8 @@
 import React from "react";
 import {TeamOutlined,BarsOutlined,BuildOutlined,AppstoreOutlined,ProjectOutlined,
     GroupOutlined,CompassOutlined,MergeCellsOutlined,SafetyCertificateOutlined,
-    SafetyOutlined,SwitcherOutlined,ProfileOutlined,LayoutOutlined,MenuOutlined,
+    FileProtectOutlined,SwitcherOutlined,ProfileOutlined,LayoutOutlined,
+    MenuOutlined,
 } from "@ant-design/icons";
 
 export const departmentRouter = [
@@ -45,6 +46,12 @@ export const applicationRouter = [
         label:"凭证管理",
         icon:<SwitcherOutlined />,
         enCode:"F",
+    },
+    {
+        key:"/index/system/identify",
+        label:"认证管理",
+        icon:<FileProtectOutlined />,
+        enCode:"I",
     },
     {
         key:"/index/system/envi",

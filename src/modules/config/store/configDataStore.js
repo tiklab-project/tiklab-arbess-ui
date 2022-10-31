@@ -8,14 +8,19 @@ export class ConfigDataStore {
     @observable codeType = "" // 源码管理类型
     @observable buildType = "" 
     @observable deployType = ""
-    @observable gitProofId = ""
-    @observable deployProofId = ""
+
     @observable unitShellBlock = ""
 
     @observable buildShellBlock = ""
     @observable virShellBlock = ""
     @observable deployShellBlock = ""
     @observable deployOrderShellBlock = ""
+    @observable opt = 1
+
+    @action
+    setOpt = value =>{
+        this.opt = value
+    }
 
     @action
     setCodeType = value =>{
@@ -65,16 +70,6 @@ export class ConfigDataStore {
     @action
     setDeployOrderShellBlock = value =>{
         this.deployOrderShellBlock = value
-    }
-
-    @action
-    setGitProofId = value =>{
-        this.gitProofId = value
-    }
-
-    @action
-    setDeployProofId = value =>{
-        this.deployProofId = value
     }
 
 }

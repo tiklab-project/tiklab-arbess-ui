@@ -3,6 +3,7 @@ import {Button,Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
 import Forms from "../formType/forms";
 import NameType from "./nameType";
+import "./formDetailsDrawer.scss";
 
 const FormDetailsDrawer = props =>{
 

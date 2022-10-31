@@ -10,7 +10,7 @@ export function  CreateAuthorize (data){
     })
 }
 
-//创建
+//更新
 export function  UpdateAuthorize (data){
     return serviceLoc.request({
         url:"/pipelineAuthorize/updateAuthorize",
@@ -19,7 +19,7 @@ export function  UpdateAuthorize (data){
     })
 }
 
-//创建
+//删除
 export function  DeleteAuthorize (data){
     return serviceLoc.request({
         url:"/pipelineAuthorize/deleteAuthorize",
@@ -37,7 +37,7 @@ export function  FindOneAuthorize (data){
     })
 }
 
-//创建
+//查找
 export function  FindAllAuthorize (data){
     return serviceLoc.request({
         url:"/pipelineAuthorize/findAllAuthorize",

@@ -71,13 +71,6 @@ const Head = props =>{
     const changeLan = type =>{
         i18n.changeLanguage(type)
     }
-    
-    const languageMenu = (
-        <Menu>
-            <Menu.Item key="0" onClick={()=>changeLan("zh")}>中文</Menu.Item>
-            {/*<Menu.Item key="1" onClick={()=>changeLan("en")}>英文</Menu.Item>*/}
-        </Menu>
-    )
 
     const goOut = () => {
         props.history.push({
@@ -100,6 +93,17 @@ const Head = props =>{
                           <div className="outMenu-out-eamil">{getUser().userId}@</div>
                       </div>
                   </div>
+               </div>
+               <div className="header-outMenu-lan">
+                   <div className="outMenu-lan">
+                       <GlobalOutlined/>
+                       <span className="lan-zh lan" onClick={()=>changeLan("zh")}>
+                           中文
+                       </span>
+                       {/*<span className="lan-en lan">*/}
+                       {/*    英文*/}
+                       {/*</span>*/}
+                   </div>
                </div>
                <div className="header-outMenu-out">
                    <div  onClick={()=>goOut()} className="outMenu-out">
@@ -147,11 +151,6 @@ const Head = props =>{
                                 onClick={()=>setVisible(true)}
                             />
                         </Badge>
-                    </div>
-                    <div className="frame-header-language">
-                        <Dropdown overlay={languageMenu}>
-                            <GlobalOutlined className="frame-header-icon"/>
-                        </Dropdown>
                     </div>
                     <div className="frame-header-help">
                         <Dropdown overlay={helpMenu}>

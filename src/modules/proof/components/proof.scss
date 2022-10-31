@@ -28,13 +28,17 @@
         }
         &-action{
             .del{
-                color:#ff0000;
                 cursor: pointer;
+                &:hover{
+                    color:#ff0000;
+                }
             }
             .edit{
-                padding-right: 15px;
-                color: #1890ff;
+                margin-right: 15px;
                 cursor: pointer;
+                &:hover{
+                    color: #1890ff;
+                }
             }
         }
     }

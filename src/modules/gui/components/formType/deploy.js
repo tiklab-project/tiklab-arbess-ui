@@ -6,6 +6,7 @@ import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
 import TestContext from "../common/testContext";
+import SuffixStatus from "../../../config/components/formType/suffixStatus";
 
 const Deploy = props =>{
 
@@ -17,6 +18,7 @@ const Deploy = props =>{
     const valueChange = context.valueChange
 
     const [messageInfo,setMessageInfo] = useState("")
+    const [isLoading,setIsLoading] = useState(1)
 
     useEffect(()=>{
         return ()=>{
@@ -49,14 +51,33 @@ const Deploy = props =>{
         }
     }
 
+    const onClick = () =>{
+        setIsLoading(2)
+    }
+
+
+
+    const onBlur = () => {
+        setIsLoading(1)
+    }
+
     return(
         <>
-            <Form.Item name={"deployType"} label="部署类型" className="noRequired">
-                <Select onChange={(e)=>valueChange(e,"deployType",deployType)}>
-                    <Select.Option value={0}>结构化部署</Select.Option>
-                    <Select.Option value={1}>自定义部署</Select.Option>
-                </Select>
-            </Form.Item>
+            <div className="guiView-inputs">
+                <Form.Item name={"deployType"} label="部署类型" className="noRequired">
+                    <Select
+                        onClick={onClick}
+                        onBlur={onBlur}
+                        onChange={(e)=>valueChange(e,"deployType",deployType,setIsLoading)}
+                    >
+                        <Select.Option value={0}>结构化部署</Select.Option>
+                        <Select.Option value={1}>自定义部署</Select.Option>
+                    </Select>
+                </Form.Item>
+                <div className="guiView-inputs-suffix">
+                    <SuffixStatus isLoading={isLoading}/>
+                </div>
+            </div>
             <Form.Item
                 shouldUpdate={(prevValues,currentValues)=> prevValues.deployType!==currentValues.deployType}
             >

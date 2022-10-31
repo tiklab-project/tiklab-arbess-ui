@@ -1,5 +1,5 @@
 import React from "react";
-import ConfigName from "../../../../common/configName/configName";
+import Subtitle from "../formTitle/subtitle";
 import "./switch.scss";
 
 const Switch = props =>{
@@ -18,6 +18,7 @@ const Switch = props =>{
             case 22:return "nodejs"
             case 31:return "xuniji"
             case 32:return "docker"
+            case 41:return "ceshi"
         }
     }
 
@@ -29,7 +30,7 @@ const Switch = props =>{
                         </svg>
                     </span>
                     <span className="configCode-gitList-item-title">
-                        <ConfigName type={type}/>
+                        <Subtitle type={type}/>
                     </span>
                 </div>
     }
@@ -59,6 +60,12 @@ const Switch = props =>{
                     else if(type > 30 && type < 40){
                         return  <>
                                     <div className="configCode-gitList-title">部署类型</div>
+                                    { renderType(type) }
+                                </>
+                    }
+                    else if(type > 40 && type < 50){
+                        return  <>
+                                    <div className="configCode-gitList-title">代码扫描类型</div>
                                     { renderType(type) }
                                 </>
                     }

@@ -43,7 +43,7 @@ const lis=[
         title: "代码扫描",
         desc: [
             {
-                type: 51,
+                type: 41,
                 tel:"sonarQuebe",
                 icon:"ceshi"
             }
@@ -182,27 +182,30 @@ const AddModal = props =>{
         setEnabledValid(!enabledValid)
         if(type>0 && type<10){
             setCodeType(type)
-        }else if(type>10 && type<20){
-            addData(type)
         }
         else if(type>20 && type<30){
             setBuildType(type)
-            addData(type)
         }else if(type>30 && type<40){
             setDeployType(type)
-            addData(type)
         }
+        addData(type)
     }
 
     const newData = [...data]
     const addData = type =>{
+        if(type<10){
+            newData.splice(0,0,{
+                dataId:type,
+                dataType:type
+            })
+        }
         if(type>10){
             newData.push({
                 dataId:type,
                 dataType:type
             })
-            setData([...newData])
         }
+        setData([...newData])
     }
 
     return(

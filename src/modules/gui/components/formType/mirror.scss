@@ -1,6 +1,8 @@
 .guiViewCodeMirror{
+    display: flex;
     .react-codemirror2{
-        width:430px ;
+        width: 410px;
+        min-height: 32px;
         border: 1px solid #cccccc;
         &:hover{
             border-color: #1890ff;

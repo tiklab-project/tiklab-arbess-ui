@@ -11,7 +11,7 @@ import EmptyText from "../../../common/emptyText/emptyText";
 const Proof = props =>{
 
     const {proofStore,pipelineList,pipelineId,pipelineName} = props
-    const {updateProof,deleteProof,proofList,setFresh,fresh} = proofStore
+    const {updateProof,deleteProof,proofList} = proofStore
 
     const [formValue,setFormValue] = useState("")
     const [visible,setVisible] = useState(false)
@@ -30,11 +30,7 @@ const Proof = props =>{
     }
 
     const del = (text,record) => {
-        deleteProof(record.proofId).then(()=>{
-            setFresh(!fresh)
-        }).catch(error=>{
-            console.log(error)
-        })
+        deleteProof(record.proofId)
     }
 
     const columns = [
@@ -83,7 +79,7 @@ const Proof = props =>{
                 return(
                     <span className="proof-content-action">
                         <span className="edit" onClick={()=>edit(text,record)}>
-                            <EditOutlined /> 修改
+                            <EditOutlined />
                         </span>
                          <Popconfirm
                              style={{marginTop:100}}
@@ -93,7 +89,7 @@ const Proof = props =>{
                              cancelText="取消"
                          >
                              <span className="del">
-                                 <DeleteOutlined /> 删除
+                                 <DeleteOutlined />
                              </span>
                          </Popconfirm>
                     </span>
@@ -126,8 +122,6 @@ const Proof = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 formValue={formValue}
-                fresh={fresh}
-                setFresh={setFresh}
                 displayPart={displayPart}
                 pipelineList={pipelineList}
                 isShowPipeline={isShowPipeline}

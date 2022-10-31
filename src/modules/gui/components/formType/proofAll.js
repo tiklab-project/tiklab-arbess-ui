@@ -17,7 +17,6 @@ const ProofAll = props =>{
     const context = useContext(TestContext)
 
     const {createProof,findPipelineProof,pipelineProofList} = proofStore
-    const {setGitProofId,setDeployProofId} = context.configDataStore
     const {pipelineId} = context.pipelineStore
     const valueChange = context.valueChange
     const userId = getUser().userId
@@ -73,11 +72,6 @@ const ProofAll = props =>{
     }
 
     const changeGitSelect = (value,e) =>{
-        if(type < 6){
-            setGitProofId(e.key)
-        }else {
-            setDeployProofId(e.key)
-        }
         valueChange(e.key,"proofId",type,setIsLoading)
     }
 

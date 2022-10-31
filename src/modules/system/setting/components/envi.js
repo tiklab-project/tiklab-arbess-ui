@@ -57,7 +57,6 @@ const Envi = props =>{
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
-
             render:text => scmTitle(text)
         },
         {
@@ -78,7 +77,7 @@ const Envi = props =>{
                 return(
                     <span className="envi-content-action">
                         <span className="edit" onClick={()=>edit(text,record)}>
-                            <EditOutlined /> 修改
+                            <EditOutlined />
                         </span>
                          <Popconfirm
                              style={{marginTop:100}}
@@ -88,7 +87,7 @@ const Envi = props =>{
                              cancelText="取消"
                          >
                              <span className="del">
-                                 <DeleteOutlined /> 删除
+                                 <DeleteOutlined />
                              </span>
                          </Popconfirm>
                     </span>
@@ -106,6 +105,7 @@ const Envi = props =>{
         }
     }
 
+    // document.getElementsByName("")
     return <div className="envi home-limited">
         <BreadcrumbContent firstItem={"环境配置"} />
         <div className="envi-content">

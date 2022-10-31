@@ -1,17 +1,17 @@
 import React,{useEffect} from "react";
-import  "./formView.scss";
-import {Empty,Form} from "antd";
-import NewStage from "./newStage";
-import Code from "./code";
+import {Form} from "antd";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
+import NewStage from "./newStage";
+import Anch from "./anch";
+import  "./formView.scss";
 
 const formView = props =>{
 
     const {del,configDataStore,pipelineId,configStore} = props
 
-    const {data,setData,codeType,formInitialValues,setFormInitialValues} = configDataStore
-    const {configValid,enabledValid,updateConfigure,validType} = configStore
+    const {data,setData,formInitialValues,setFormInitialValues,opt,setOpt} = configDataStore
+    const {configValid,enabledValid,updateConfigure,validType,setAddConfigVisible} = configStore
 
     const [form] = Form.useForm()
 
@@ -39,36 +39,35 @@ const formView = props =>{
     }
 
     return(
-        <div className="formView">
-            <div className="formView-content">
-                <Form
-                    id="form"
-                    form={form}
-                    autoComplete="off"
-                    scrollToFirstError={true}
-                    onValuesChange={onValuesChange}
-                    initialValues={{deployType:0}}
-                >
-                    <Code
-                        del={del}
-                        data={data}
-                        setData={setData}
-                        codeType={codeType}
-                        pipelineId={pipelineId}
-                        updateConfigure={updateConfigure}
-                        validType={validType}
-                    />
-                    <NewStage
-                        del={del}
-                        data={data}
-                        setData={setData}
-                        pipelineId={pipelineId}
-                        updateConfigure={updateConfigure}
-                        validType={validType}
-                    />
-                </Form>
-            </div>
-        </div>
+       <>
+           <Anch
+               data={data}
+               opt={opt}
+               setOpt={setOpt}
+               setAddConfigVisible={setAddConfigVisible}
+           />
+           <div className="formView">
+               <div className="formView-content">
+                   <Form
+                       id="form"
+                       form={form}
+                       autoComplete="off"
+                       scrollToFirstError={true}
+                       onValuesChange={onValuesChange}
+                       initialValues={{deployType:0}}
+                   >
+                       <NewStage
+                           del={del}
+                           data={data}
+                           setData={setData}
+                           pipelineId={pipelineId}
+                           updateConfigure={updateConfigure}
+                           validType={validType}
+                       />
+                   </Form>
+               </div>
+           </div>
+       </>
     )
 }
 

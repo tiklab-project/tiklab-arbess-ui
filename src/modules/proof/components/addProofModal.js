@@ -7,7 +7,7 @@ const {Option} = Select;
 
 const AddProofModal = props =>{
 
-    const {visible,setVisible,createProof,userId,fresh,setFresh,isAuthority,type,pipelineList,pipelineId} = props
+    const {visible,setVisible,createProof,fresh,setFresh,isAuthority,type,pipelineList,pipelineId} = props
 
     const [form] = Form.useForm()
     const [isShowPipeline,setIsShowPipeline] = useState(1)
@@ -25,7 +25,6 @@ const AddProofModal = props =>{
             proofScope = type
         }
         const params = {
-            user:{id:userId},
             type:values.type,
             proofScope:proofScope,
             proofType:values.proofType,

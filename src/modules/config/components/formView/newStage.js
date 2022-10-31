@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import Headline from "./headline";
+import BlockContent from "./blockContent";
 import ChangeSortsModal from "./changeSortsModal";
 
 const NewStage = props =>{
@@ -8,11 +8,12 @@ const NewStage = props =>{
 
     const [changeSortVisible,setChangeSortVisible] = useState(false)
 
-    const newStage = item =>{
-        return <Headline
+    const newStage = (item,index) =>{
+        return <BlockContent
                     {...props}
+                    id={`formView_${index}`}
                     type={item.dataType}
-                    key={item.dataType}
+                    key={index}
                     del={del}
                     data={data}
                     setData={setData}
@@ -25,8 +26,8 @@ const NewStage = props =>{
 
     return  (
         <>
-            {data && data.map(item=>{
-                return newStage(item)
+            {data && data.map((item,index)=>{
+                return newStage(item,index+1)
             })}
 
             <ChangeSortsModal

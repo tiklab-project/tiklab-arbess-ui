@@ -8,7 +8,7 @@ const Proof = props =>{
 
     const {allProofType,testType,configDataStore,configStore,type} = props
 
-    const {formInitialValues,gitProofId,deployProofId} = configDataStore
+    const {formInitialValues} = configDataStore
     const {codeTestPass} = configStore
 
     const [testStatus,setTestStatus] = useState(false)
@@ -16,11 +16,11 @@ const Proof = props =>{
     const testing = () =>{
         let port,url,proofId
         if(testType === "源码地址"){
-            proofId = gitProofId
+            proofId = formInitialValues && formInitialValues.gitProofId
             port = 0
             url = formInitialValues && formInitialValues.codeName
         } else {
-            proofId = deployProofId
+            proofId = formInitialValues && formInitialValues.deployProofId
             port = formInitialValues && formInitialValues.sshPort
             url = formInitialValues && formInitialValues.sshIp
         }

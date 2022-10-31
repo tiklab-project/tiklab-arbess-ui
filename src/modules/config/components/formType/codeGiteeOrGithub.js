@@ -13,7 +13,7 @@ const CodeGiteeOrGithub = props =>{
     const {configDataStore,configStore,pipelineStore,authorizeStore} = props
 
     const {findCode,findState,updateProof,findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
-    const {formInitialValues,codeType,gitProofId} = configDataStore
+    const {formInitialValues,codeType} = configDataStore
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
 
@@ -48,25 +48,6 @@ const CodeGiteeOrGithub = props =>{
         }
     }
 
-    // 得到所有仓库
-    const clickGitStoreHouse = () =>{
-        const params = {
-            proofId:gitProofId,
-            type:codeType
-        }
-        findAllStorehouse(params)
-    }
-
-    // 获取所有分支
-    const clickBranch = () => {
-        const params ={
-            houseName:formInitialValues && formInitialValues.codeName,
-            proofId:gitProofId,
-            type:codeType
-        }
-        findBranch(params)
-    }
-
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
         setProhibited(false)
@@ -87,7 +68,6 @@ const CodeGiteeOrGithub = props =>{
             values:obj,
             message:"update"
         }
-        formInitialValues.key=value
         updateConfigure(params).then(res=>{
             res.code===0 && setIsLoading(3)
         })
@@ -95,6 +75,22 @@ const CodeGiteeOrGithub = props =>{
     }
 
     const onFocus = name => {
+        switch (name) {
+            case "codeName":
+                const param = {
+                    proofId:formInitialValues && formInitialValues.gitProofId,
+                    type:codeType
+                }
+                findAllStorehouse(param)
+                break
+            default:
+                const params ={
+                    houseName:formInitialValues && formInitialValues.codeName,
+                    proofId:formInitialValues && formInitialValues.gitProofId,
+                    type:codeType
+                }
+                findBranch(params)
+        }
         setFieldName(name)
         setIsLoading(2)
     }
@@ -125,7 +121,6 @@ const CodeGiteeOrGithub = props =>{
                 >
                     <Select
                         onChange={changeGitStoreHouse}
-                        onClick={clickGitStoreHouse}
                         onFocus={()=>onFocus("codeName")}
                         onBlur={onBlur}
                         bordered={fieldName === "codeName"}
@@ -152,7 +147,6 @@ const CodeGiteeOrGithub = props =>{
                         placeholder="请选择分支"
                         onFocus={()=>onFocus("codeBranch")}
                         onBlur={onBlur}
-                        onClick={clickBranch}
                         onChange={changeBranch}
                     >
                         {

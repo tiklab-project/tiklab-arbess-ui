@@ -14,8 +14,10 @@ const TitleType = props =>{
             case 31:
             case 32:
                 return renderTitle("bushubanben","部署")
+            case 41:
+                return renderTitle("ceshi","代码扫描")
             default:
-                return renderTitle("ceshi1","源码管理")
+                return renderTitle("ceshi1","源码")
         }
     }
 

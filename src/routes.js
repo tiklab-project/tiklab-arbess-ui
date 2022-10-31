@@ -37,6 +37,7 @@ const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"
 const Envi=AsyncComponent(()=>import("./modules/system/setting/components/envi"))
 const Info=AsyncComponent(()=>import("./modules/system/setting/components/info"))
 const SysAuth=AsyncComponent(()=>import("./modules/system/auth/cotainer/sysAuth"))
+const Identify=AsyncComponent(()=>import("./modules/system/identify/container/identify"))
 
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 
@@ -188,6 +189,10 @@ const routers=[
                     {
                         path:"/index/system/sysauth",
                         component: SysAuth,
+                    },
+                    {
+                        path:"/index/system/identify",
+                        component: Identify,
                     },
                     {
                         path:"/index/system/envi",

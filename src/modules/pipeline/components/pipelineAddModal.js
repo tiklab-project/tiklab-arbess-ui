@@ -4,13 +4,12 @@ import "./pipelineAddModal.scss";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import PipelineAddModalType from "./pipelineAddModalType";
 import ProjectRename from "../../projectSet/reDel/projectRename";
-import moment from "../../../common/moment/moment";
 
 const {Step} = Steps
 
 const PipelineAddModal = props =>{
 
-    const {addPipelineVisible,setAddPipelineVisible,userId,createPipeline,pipelineList} = props
+    const {addPipelineVisible,setAddPipelineVisible,createPipeline,pipelineList} = props
 
     const [templateType,setTemplateType] = useState(1)
     const [current,setCurrent] = useState(0)
@@ -19,11 +18,9 @@ const PipelineAddModal = props =>{
 
     const onOk = value => {
         const params={
-            user:{id:userId},
             pipelineType:templateType,
             pipelineName:value.pipelineName,
             pipelinePower:value.pipelinePower,
-            pipelineCreateTime:moment.moment
         }
         createPipeline(params).then(res=>{
             if(res.code===0 && res.data){

@@ -16,6 +16,7 @@ export class ConfigStore{
     @observable isPlugin = false // 是否存在插件
     @observable validLength = []
     @observable validType = []
+    @observable addConfigVisible = false
 
     @action
     setEnabledValid = value =>{
@@ -30,6 +31,11 @@ export class ConfigStore{
     @action
     setIsPlugin = value =>{
         this.isPlugin = value
+    }
+
+    @action
+    setAddConfigVisible = value =>{
+        this.addConfigVisible = value
     }
 
     @action

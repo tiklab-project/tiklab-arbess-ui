@@ -3,9 +3,9 @@ import NameType from "./nameType";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import TitleType from "./titleType";
 
-const Headline = props =>{
+const BlockContent = props =>{
 
-    const {setTaskFormDrawer,setNewStage,validType,type,formInitialValues} = props
+    const {setTaskFormDrawer,setNewStage,validType,type,formInitialValues,setNewStageDrawer,setIndex,inse} = props
 
     const showStage = type =>{
         setNewStage(type)
@@ -20,8 +20,23 @@ const Headline = props =>{
         width:260
     }
 
+    const insertData = (type,index) => {
+        setNewStageDrawer(true)
+        setIndex(index)
+    }
+
     return(
         <>
+            {type>10 && <div className="group-flow">
+                <div className="group-flow_btn">
+                    <svg className="icon group-flow_btn_i"
+                         aria-hidden="true"
+                         onClick={() =>insertData(type,inse)}
+                    >
+                        <use xlinkHref="#icon-zengjia"/>
+                    </svg>
+                </div>
+            </div>}
             <div className="group-table">
                 <div className="group-head">
                     <div className="name">
@@ -67,4 +82,4 @@ const Headline = props =>{
     )
 }
 
-export default Headline
+export default BlockContent

@@ -44,7 +44,7 @@ const WorkSpace = props =>{
                             ],
                         }]
                     }
-                    res.code===0 && myChart.setOption(option)
+                    myChart && myChart.setOption(option)
                     setCensus(res.data)
                 }
             })

@@ -38,7 +38,14 @@ export class WorkSpaceStore{
     pipelineCensus = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        return await PipelineCensus(param)
+        return new Promise((resolve,reject)=>{
+            PipelineCensus(param).then(res=>{
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
     }
 
 }

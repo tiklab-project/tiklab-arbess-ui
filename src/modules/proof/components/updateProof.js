@@ -6,7 +6,7 @@ const {Option} = Select
 
 const UpdateProof = props =>{
 
-    const {visible,setVisible,formValue,updateProof,setFresh,fresh,displayPart,pipelineList,
+    const {visible,setVisible,formValue,updateProof,displayPart,pipelineList,
         pipelineId,isShowPipeline,setIsShowPipeline} = props
 
     const [form] = Form.useForm()
@@ -36,11 +36,7 @@ const UpdateProof = props =>{
                 type:values.type,
                 proofList:proofList
             }
-            updateProof(params).then(()=>{
-                setFresh(!fresh)
-            }).catch(error=>{
-                console.log(error)
-            })
+            updateProof(params)
             setVisible(false)
         })
     }
