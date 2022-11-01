@@ -4,7 +4,6 @@
     height: calc(100vh - 50px);
     overflow: hidden;
     .aside{
-        background-color: #f8f8f8;
         left: 0;
         top: 50px;
         height: 100%;
@@ -22,14 +21,16 @@
             &:not(:last-child){
                 margin-bottom: 5px;
             }
+            .aside_content_icon{
+                font-size: 16px;
+            }
             .dropdowns_icon{
-                display: inline-block;
                 width: 25px;
                 height: 25px;
                 line-height: 25px;
                 border-radius: 4px;
-                margin-right: 8px;
-                text-align: center
+                text-align: center;
+                background: #6da5f7;
             }
         }
         &_item{
@@ -37,7 +38,7 @@
         }
         &_active{
             background: #e3e8f0;
-            border-right: 3px solid #1890ff;
+            border-left: 3px solid #1890ff;
         }
     }
     &-sys{

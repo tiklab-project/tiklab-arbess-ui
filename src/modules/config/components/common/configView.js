@@ -85,6 +85,10 @@ const ConfigView = props =>{
     const renderFormData = initialData => {
         for (let i = 0;i<initialData.length;i++){
             const data = initialData[i]
+            newData.push({
+                dataId:i,
+                dataType:data.type,
+            })
             if(data.type < 6){
                 renderCodeData(data)
                 setCodeType(data.type)
@@ -117,37 +121,21 @@ const ConfigView = props =>{
             proofName:data.proof && data.proof.proofName,
             gitProofId:data.proof && data.proof.proofId
         }
-        newData.push({
-            dataId:data.codeId,
-            dataType:data.type,
-        })
         Object.assign(formInitialValues,codeFormValue)
     }
 
     // 测试
     const renderTestData = data =>{
-        newData.push({
-            dataId:data.testId,
-            dataType:data.type,
-        })
         setUnitShellBlock(`${data.testOrder ? data.testOrder :""}`)
     }
     
     // 构建
     const renderBuild = data => {
-        newData.push({
-            dataId: data.buildId,
-            dataType:data.type,
-        })
         setBuildShellBlock(`${data.buildOrder ? data.buildOrder : ""}`)
     }
     
     // 部署
     const renderDeploy = data => {
-        newData.push({
-            dataId:data.deployId,
-            dataType:data.type,
-        })
         const DeployFormValue={
             deployProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
             deployProofId:data.proof && data.proof.proofId
@@ -165,10 +153,6 @@ const ConfigView = props =>{
     }
     
     const renderScan = data => {
-        newData.push({
-            dataId: data.codeScanId,
-            dataType:data.type,
-        })
         const scanFormValue={
             scanProofId:data.pipelineAuth && data.pipelineAuth.authId,
             scanProofName:data.pipelineAuth && data.pipelineAuth.name

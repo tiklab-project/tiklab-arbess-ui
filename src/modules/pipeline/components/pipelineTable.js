@@ -1,8 +1,7 @@
 import React from "react";
 import {message,Tooltip,Table} from "antd";
-import {getUser} from "tiklab-core-ui";
 import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
-    MinusCircleOutlined
+    MinusCircleOutlined,UserOutlined,ClockCircleOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
@@ -16,13 +15,10 @@ const PipelineTable = props =>{
     const {pipelineStartStructure,killInstance}=structureStore
     const {pipelineList,updateFollow,fresh,setFresh} = pipelineStore
 
-    const userId = getUser().userId
-
     //收藏
     const collectAction = record => {
         const params = {
             pipeline:{pipelineId:record.pipelineId},
-            userId:userId
         }
         updateFollow(params).then(res=>{
             if(record.pipelineCollect===0){
@@ -47,9 +43,12 @@ const PipelineTable = props =>{
         props.history.push(`/index/task/${record.pipelineId}/work`)
     }
 
+    const goHistory = record =>{
+        props.history.push(`/index/task/${record.pipelineId}/structure`)
+    }
+
     const work = record =>{
         const params = {
-            userId:userId,
             pipelineId:record.pipelineId
         }
         if(record.pipelineState === 0){
@@ -82,7 +81,7 @@ const PipelineTable = props =>{
                             <span className={`pipelineTable-pipelineName-icon icon-${record.color}`}>
                                 {text.substring(0,1).toUpperCase()}
                             </span>
-                            <span className="pipelineTable-pipelineName-name">
+                            <span className="--mf-dominant-color">
                                 {text}
                             </span>
                         </span>
@@ -129,10 +128,16 @@ const PipelineTable = props =>{
             width:"220px",
         },
         {
-            title: "创建时间",
-            dataIndex: "createTime",
-            key: "createTime",
+            title: "负责人",
+            dataIndex: "userName",
+            key: "userName",
             width:"220px",
+            render:(text) => {
+                return <>
+                    <UserOutlined />
+                    {text}
+                </>
+            }
         },
         {
             title: "操作",
@@ -154,8 +159,17 @@ const PipelineTable = props =>{
                             }
                             </span>
                         </Tooltip>
+                        <Tooltip title="历史">
+                            <span className="pipelineTable-history"
+                                  onClick={()=>goHistory(record)}
+                            >
+                                <ClockCircleOutlined className="actions-se"/>
+                            </span>
+                        </Tooltip>
                         <Tooltip title="收藏">
-                            <span className="pipelineTable-collect actives" onClick={()=>collectAction(record)}>
+                            <span className="pipelineTable-collect actives"
+                                  onClick={()=>collectAction(record)}
+                            >
                             {
                                 record.pipelineCollect === 0 ?
                                     <svg className="icon" aria-hidden="true" >

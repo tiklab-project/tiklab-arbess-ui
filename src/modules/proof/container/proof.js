@@ -7,6 +7,7 @@ import UpdateProof from "../components/updateProof";
 import {inject,observer} from "mobx-react";
 import ProofSwitch from "../components/proofSwitch";
 import EmptyText from "../../../common/emptyText/emptyText";
+import AddProofButton from "../components/addProofButton";
 
 const Proof = props =>{
 
@@ -35,6 +36,13 @@ const Proof = props =>{
 
     const columns = [
         {
+            title:"名称",
+            dataIndex:"proofName",
+            key:"proofName",
+            width:"200px",
+            ellipsis:true,
+        },
+        {
             title:"作用域",
             dataIndex:"type",
             key:"type",
@@ -46,13 +54,6 @@ const Proof = props =>{
                         return "项目凭证"
                 }
             }
-        },
-        {
-            title:"名称",
-            dataIndex:"proofName",
-            key:"proofName",
-            width:"200px",
-            ellipsis:true,
         },
         {
             title   :"类型",
@@ -100,16 +101,17 @@ const Proof = props =>{
 
     return(
         <div className="proof home-limited">
-            {
-                pipelineName ?
-                    <BreadcrumbContent firstItem={pipelineName} secondItem={"凭证设置"}/>
-                    :
-                    <BreadcrumbContent firstItem={"凭证管理"}/>
-            }
+            <div className="proof-upper">
+                {
+                    pipelineName ?
+                        <BreadcrumbContent firstItem={pipelineName} secondItem={"凭证"}/>
+                        :
+                        <BreadcrumbContent firstItem={"凭证"}/>
+                }
+                <AddProofButton style={"primary"} pipelineList={pipelineList}/>
+            </div>
             <div className="proof-content">
-                <ProofSwitch
-                    pipelineList={pipelineList}
-                />
+                <ProofSwitch/>
                 <Table
                     columns={columns}
                     dataSource={proofList}

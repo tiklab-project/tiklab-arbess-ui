@@ -16,7 +16,7 @@ const IdentifyAddBtn = props =>{
     }
 
     return(
-        <>
+        <div>
             {
                 isBtn ?
                     <div onClick={()=>setVisible(true)}>
@@ -36,7 +36,7 @@ const IdentifyAddBtn = props =>{
                 createAuth={createAuth}
                 updateAuth={updateAuth}
             />
-        </>
+        </div>
     )
 }
 

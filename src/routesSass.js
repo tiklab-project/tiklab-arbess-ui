@@ -34,8 +34,8 @@ const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
-const Envi=AsyncComponent(()=>import("./modules/system/setting/components/envi"))
-const Info=AsyncComponent(()=>import("./modules/system/setting/components/info"))
+const Envi=AsyncComponent(()=>import("./modules/system/setting/container/envi"))
+const Info=AsyncComponent(()=>import("./modules/system/setting/container/info"))
 
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 

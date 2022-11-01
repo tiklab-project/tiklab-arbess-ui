@@ -12,14 +12,16 @@ const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
 
-    const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,
-        setDynaPagination,dynaPagination,dynaPageTotal,dynamicList,setDynamicList
+    const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,dynaPageTotal,
     } = homePageStore
     const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
 
+
     const [isDyna,setIsDyna] = useState(false)
+    const [dynamicList,setDynamicList] = useState([])
+    const [dynaPagination,setDynaPagination] = useState(1)
 
     useEffect(()=>{
 
@@ -35,23 +37,21 @@ const HomePage = props =>{
         // 我的代办
         findtodopage()
 
-        return()=>{
-            setDynamicList([])
-            setDynaPagination(1)
-        }
-
     },[])
 
     useEffect(()=>{
         const params = {
             userId:userId,
             pageParam:{
-                currentPage:1
+                currentPage:dynaPagination
             }
         }
         // 近期动态
         findlogpage(params).then(res=>{
-            setIsDyna(false)
+            if(res.code===0){
+                setDynamicList(dynamicList.concat(res.data.dataList))
+                dynaPagination > 1 && setIsDyna(false)
+            }
         })
     },[dynaPagination])
 

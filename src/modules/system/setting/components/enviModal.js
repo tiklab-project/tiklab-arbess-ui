@@ -23,7 +23,7 @@ const lis = [
 
 const EnviModal = props =>{
 
-    const {visible,setVisible,enviData,scmTitle,updatePipelineScm,formValue,fresh,setFresh} = props
+    const {visible,setVisible,enviData,updatePipelineScm,formValue,fresh,setFresh} = props
 
     const [form] = Form.useForm()
     const [scmType,setScmType] = useState(1)
@@ -38,6 +38,15 @@ const EnviModal = props =>{
 
     const opt = value => {
         setScmType(value)
+    }
+
+    const scmTitle = ScmType => {
+        switch (ScmType) {
+            case 1:  return "Git"
+            case 5:  return "SVN"
+            case 21: return "maven"
+            case 22: return "node"
+        }
     }
 
     // 环境配置是否已经存在

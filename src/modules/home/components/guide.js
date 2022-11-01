@@ -1,5 +1,6 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
+import {ArrowRightOutlined} from "@ant-design/icons";
 
 const Guide = props =>{
 
@@ -15,14 +16,14 @@ const Guide = props =>{
 
     return(
         <div className="homePage-guide">
-            <div className="homePage-guide-title">
+            <div className="--mf-second-level-title">
                 {title}
             </div>
             {
                 type && (
-                    <div className="homePage-guide-ac">
+                    <div className="homePage-guide-ac --mf-dominant-color">
                         <span onClick={()=>goDetails(type)}>
-                            更多...
+                            <ArrowRightOutlined />
                         </span>
                     </div>
                 )

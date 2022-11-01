@@ -26,7 +26,7 @@ const AddProofButton = props =>{
     }
 
     return (
-        <>
+        <div>
             {
                 isBtn ?
                     <div onClick={()=>addProofVisible()}>
@@ -43,11 +43,10 @@ const AddProofButton = props =>{
                 createProof={createProof}
                 isAuthority={isAuthority}
                 type={type}
-                style={style}
                 pipelineList={pipelineList}
                 pipelineId={pipelineId}
             />
-        </>
+        </div>
     )
 }
 

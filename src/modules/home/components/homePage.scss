@@ -7,16 +7,12 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         padding-bottom: 10px;
-        &-title{
-            font-size: 15px;
-            font-weight: 600;
-        }
         &-ac{
             border-radius: 3px;
             cursor: pointer;
-            color: #0053ca;
-            font-weight: 600;
+            font-size: 20px;
         }
     }
     &-content{
@@ -29,6 +25,10 @@
         &-center{
             display: flex;
             margin: 15px 0;
+        }
+        &-bottom{
+            display: flex;
+            padding-bottom: 20px;
         }
         .quickIn{
             &-group{
@@ -47,26 +47,22 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    &-title{
-                        font-size: 16px;
-                        font-weight: 600;
-                        padding-right: 5px;
-                        .quickIn-group-icon{
-                            .icon{
-                                width: 30px;
-                                height: 30px;
-                                vertical-align: -0.55rem;
-                            }
+                    .quickIn-group-icon{
+                        .icon{
+                            width: 30px;
+                            height: 30px;
+                            vertical-align: -0.55rem;
                         }
                     }
                     &-number{
+                        margin-left: 5px;
                         width: 20px;
                         height: 20px;
                         line-height: 20px;
                         background: #f2f2f2;
                         border-radius: 50px;
                         font-weight: 500;
-                        font-size: 16px;
+                        font-size: 15px;
                     }
                 }
             }
@@ -101,9 +97,9 @@
                             height: 25px;
                             line-height: 25px;
                             border-radius: 4px;
-                            background: #6da5f7;
                             margin-right: 8px;
-                            text-align: center
+                            text-align: center;
+                            background: #6da5f7;
                         }
                         .icon{
                             &-1{
@@ -121,9 +117,6 @@
                             &-5{
                                 background: #eee;
                             }
-                        }
-                        &-pipelineName{
-                            color: #1890ff;
                         }
                     }
                 }
@@ -236,28 +229,11 @@
                         padding-top: 5px;
                         text-align: center
                     }
-                    &-message{
-                        color: #695c5c;
-                    }
-                    .pipelineName{
-                        font-weight: 500;
-                        padding: 0 5px;
-                    }
-                    &-pipelineName{
-                        cursor: pointer;
-                        font-weight: 500;
-                        color: #1890ff;
-                    }
                 }
             }
             &-bottom{
-                font-size: 16px;
                 text-align: center;
                 cursor: pointer;
-                font-weight: 600;
-                &-more{
-                    color: #1890ff;
-                }
             }
         }
     }

@@ -12,6 +12,8 @@ import {
     FindPipelineUser,
 } from "../api/structure";
 
+import {getUser} from "tiklab-core-ui";
+
 export class StructureStore {
 
     @observable leftPageList = []
@@ -48,7 +50,7 @@ export class StructureStore {
     pipelineStartStructure = async values =>{
         const params = new FormData()
         params.append("pipelineId", values.pipelineId)
-        params.append("userId", values.userId)
+        params.append("userId", getUser().userId)
         return await PipelineStartStructure(params);
     }
 

@@ -11,7 +11,7 @@ const Anch = props =>{
         if (index) {
             const name = document.getElementById("formView_"+index)
             if (name) {
-                scrollTop.scrollTop = name.offsetTop - 160
+                scrollTop.scrollTop = name.offsetTop - 172
                 setOpt(index)
             }
         }

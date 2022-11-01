@@ -7,8 +7,6 @@
     &-title{
         background: #f2f2f2;
         border-radius: 4px;
-        font-size: 16px;
-        font-weight: 600;
         height: 40px;
         line-height: 40px;
         padding-left: 10px;
@@ -46,7 +44,7 @@
             padding-top: 10px;
             .stat{
                 &-div{
-                    width: 220px;
+                    width: 240px;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -104,28 +102,10 @@
                     padding-top: 5px;
                     text-align: center
                 }
-
-                &-message{
-                    color: #695c5c;
-                }
-                .pipelineName{
-                    font-weight: 500;
-                    padding: 0 5px;
-                }
-                &-pipelineName{
-                    cursor: pointer;
-                    font-weight: 500;
-                    color: #1890ff;
-                }
             }
             &-bottom{
-                font-size: 16px;
                 text-align: center;
                 cursor: pointer;
-                font-weight: 600;
-                &-more{
-                    color: #1890ff;
-                }
             }
         }
     }

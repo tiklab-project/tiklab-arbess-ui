@@ -1,12 +1,13 @@
 import React,{useState,useEffect} from "react";
-import {Table,Popconfirm} from "antd";
+import {Table, Popconfirm, Button} from "antd";
 import {inject,observer} from "mobx-react";
-import EnviModal from "./enviModal";
-import "./envi.scss";
+import EnviModal from "../components/enviModal";
+import "../components/envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import EnviSwitch from "./enviSwitch";
+import EnviSwitch from "../components/enviSwitch";
 import EmptyText from "../../../../common/emptyText/emptyText";
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import SubIcon from "../../../config/components/formTitle/subIcon";
+import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 
 /*
     系统环境配置
@@ -57,7 +58,7 @@ const Envi = props =>{
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
-            render:text => scmTitle(text)
+            render:text => <SubIcon type={text}/>
         },
         {
             title:"名称",
@@ -96,23 +97,19 @@ const Envi = props =>{
         }
     ]
 
-    const scmTitle = ScmType => {
-        switch (ScmType) {
-            case 1:  return "Git"
-            case 5:  return "SVN"
-            case 21: return "maven"
-            case 22: return "node"
-        }
-    }
-
     // document.getElementsByName("")
     return <div className="envi home-limited">
-        <BreadcrumbContent firstItem={"环境配置"} />
+        <div className="envi-upper">
+            <BreadcrumbContent firstItem={"环境配置"} />
+            <div>
+                <Button onClick={()=>add()} type="primary">
+                    <PlusOutlined/>添加配置
+                </Button>
+            </div>
+        </div>
         <div className="envi-content">
 
-            <EnviSwitch
-                add={add}
-            />
+            <EnviSwitch/>
 
             <Table
                 columns={columns}
@@ -126,7 +123,6 @@ const Envi = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 enviData={enviData}
-                scmTitle={scmTitle}
                 updatePipelineScm={updatePipelineScm}
                 formValue={formValue}
                 fresh={fresh}

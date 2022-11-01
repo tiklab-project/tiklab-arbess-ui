@@ -16,7 +16,7 @@ const CodeGiteeOrGithub = props =>{
 
     const context = useContext(TestContext)
 
-    const {formInitialValues,codeType,gitProofId} = context.configDataStore
+    const {formInitialValues,codeType} = context.configDataStore
     const valueChange = context.valueChange
 
     const [visible,setVisible] = useState(false)
@@ -53,7 +53,7 @@ const CodeGiteeOrGithub = props =>{
     // 得到所有仓库
     const clickGitStoreHouse = () =>{
         const params = {
-            proofId:gitProofId,
+            proofId:formInitialValues && formInitialValues.gitProofId,
             type:codeType
         }
         findAllStorehouse(params)
@@ -63,7 +63,7 @@ const CodeGiteeOrGithub = props =>{
     const clickBranch = () => {
         const params ={
             houseName:formInitialValues && formInitialValues.codeName,
-            proofId:gitProofId,
+            proofId:formInitialValues && formInitialValues.gitProofId,
             type:codeType
         }
         findBranch(params)

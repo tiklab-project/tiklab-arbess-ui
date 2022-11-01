@@ -38,40 +38,6 @@ const Structure = props => {
         }
     },[pipelineId])
 
-    // let interval,socket=null
-    // useEffect(() => {
-    //     socket = new WebSocket("ws://192.168.10.101:8080/start")
-    //     socket.onopen = () =>{
-    //         findExecState(pipelineId).then(res=>{
-    //             if(res.data === 1 ){
-    //                 interval = setInterval(()=>socket.send(pipelineId),1000)
-    //                 socket.onmessage = response => renderExec(response)
-    //                 findAll(pipelineId) // 构建状态
-    //             }else if(res.data=== 0){
-    //                 setExecState("")
-    //                 socket.close()
-    //             }
-    //             changPage() // 历史列表
-    //         })
-    //     }
-    //     return ()=> {
-    //         clearInterval(interval)
-    //         socket.close()
-    //     }
-    // }, [pipelineId,freshen])
-
-    // const renderExec = response => {
-    //     if(response.data){
-    //         const data = JSON.parse(response.data)
-    //         if( data.data === 0 ){
-    //             clearInterval(interval)
-    //             socket.close()
-    //             setExecState("")
-    //             setFreshen(!freshen)
-    //         } setExecState(data.data)
-    //     }
-    // }
-
     let interval=null
     useEffect(() => {
         pipelineId && findExecState(pipelineId).then(res=>{

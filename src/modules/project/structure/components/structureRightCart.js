@@ -1,34 +1,16 @@
 import React from "react";
 import Subtitle from "../../../config/components/formTitle/subtitle";
+import Headline from "../../../config/components/formTitle/headline";
 
 const StructureRightCart = props =>{
 
     const {item,state,log,time,style} = props
 
-    const title = taskType =>{
-        switch (taskType){
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-                return "源码管理"
-            case 11:
-                return "测试"
-            case 21:
-            case 22:
-                return "构建"
-            case 31:
-            case 32:
-                return "部署"
-        }
-    }
-
     return(
         <div className={`mid_group_center-cart ${style}`}>
             <div className="cart-top">
                 <span className="cart-top-taskAlias">
-                    {title(item.taskType)}
+                    <Headline type={item.taskType}/>
                 </span>
                 <span> -- </span>
                 <span className="cart-top-configName">
@@ -42,7 +24,7 @@ const StructureRightCart = props =>{
                 </div>
             </div>
             <div className="cart-bottom" >
-                <span className="cart-bottom-span" onClick={()=>log(item)}>
+                <span className="cart-bottom-span" onClick={()=>log && log(item)}>
                     日志
                 </span>
             </div>

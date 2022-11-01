@@ -2,10 +2,9 @@ import React,{useState} from "react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import {Button,Form,message,Modal} from "antd";
 import {ExclamationCircleOutlined,DeleteOutlined,CaretDownOutlined,EditOutlined} from "@ant-design/icons";
-import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import "./projectSetReDel.scss";
-import ProjectRename from "./projectRename";
+import PipelineName from "./pipelineName";
 
 const ProjectSetReDel = props =>{
 
@@ -16,11 +15,9 @@ const ProjectSetReDel = props =>{
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
 
     const [form]=Form.useForm()
-    const userId = getUser().userId
 
     const del = () =>{
         const params = {
-            userId:userId,
             pipelineId
         }
         deletePipeline(params).then(res=>{
@@ -37,7 +34,6 @@ const ProjectSetReDel = props =>{
 
     const re = value =>{
         const params={
-            user:{id:userId},
             pipelineId:pipelineId,
             pipelineName:value.pipelineName
         }
@@ -68,7 +64,7 @@ const ProjectSetReDel = props =>{
             title:"修改流水线名称",
             icon: <EditOutlined />,
             content: <div className="bottom-rename">
-                <ProjectRename
+                <PipelineName
                     form={form}
                     re={re}
                     pipelineList={pipelineList}

@@ -7,7 +7,7 @@ import {
 import {Modal,message} from "antd";
 import Switch from "./switch";
 import Forms from "../formType/forms";
-import TitleType from "../formTitle/titleType";
+import HlineIcon from "../formTitle/hlineIcon";
 
 const BlockContent = props =>{
 
@@ -50,9 +50,7 @@ const BlockContent = props =>{
     
     const renderValidType = () => {
         return validType && validType.map(item=>{
-            return  item==type && <span key={item} className="desc-warn">
-                <ExclamationCircleOutlined />
-            </span>
+            return  item==type && <ExclamationCircleOutlined key={item} style={{fontSize:18,color:"#ff0000"}}/>
         })
     }
     
@@ -60,21 +58,21 @@ const BlockContent = props =>{
         <>
             <div className="formView-wrapper" id={id}>
                 <div className="formView-wrapper-Headline">
-                    <div className="desc-left">
-                        <TitleType type={type}/>
+                    <div className="headline-left --mf-first-level-title">
+                        <HlineIcon type={type}/>
                         {renderValidType()}
                     </div>
-                    <div className="desc-right">
+                    <div className="headline-right">
                         {
                             type >10 &&
-                                <span className="desc-changSort"
+                                <span className="headline-changSort"
                                       onClick={()=>setChangeSortVisible(true)}
                                 >
                                     <SwapOutlined />
                                     更改顺序
                                 </span>
                         }
-                        <span className="desc-delete"
+                        <span className="headline-delete"
                               onClick={()=>delType(type)}
                         >
                             <DeleteOutlined />

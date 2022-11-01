@@ -1,0 +1,73 @@
+/* 二级导航 */
+.--mf-second-level-navigation{
+    background: #f8f8f8;
+}
+
+/* 三级导航 */
+.--mf-three-level-navigation{
+    background: #fbfbfb;
+}
+
+/* 导航选中 */
+.--mf-check-navigation{
+    background: #e3e8f0;
+}
+
+/* 强化色 */
+.--mf-dominant-color{
+    color: #1890ff;
+}
+
+.--mf-danger-color{
+    color: #ff0000;
+}
+
+/* 辅助颜色 */
+.--mf-auxiliary-color{
+    color: #00000073;
+}
+
+/* 一级标题  */
+.--mf-first-level-title{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 二级标题 */
+.--mf-second-level-title{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* 三级标题 */
+.--mf-three-level-title{
+    font-weight: 600;
+}
+
+/* 显著标题 */
+.--mf-notable-title{
+    font-size: 16px;
+}
+
+/* 辅助字体 */
+.--mf-auxiliary-title{
+    font-size: 13px;
+}
+
+:root{
+    --mf-second-level-navigation-color: #f8f8f8;
+    --mf-three-level-navigation:#fbfbfb;
+    --mf-check-navigation-color:#e3e8f0;
+    --mf-dominant-color:#1890ff;
+    --mf-danger-color:#ff0000;
+    --mf-auxiliary-color:#00000073;
+
+    --mf-first-level-title-size:16px;
+    --mf-second-level-title-size:15px;
+    --mf-text-title-size:14px;
+    --mf-auxiliary-title-size:13px;
+
+    --mf-notable-title-weight:600;
+
+}
+

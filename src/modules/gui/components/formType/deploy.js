@@ -14,7 +14,7 @@ const Deploy = props =>{
 
     const {getFile,profileAddress} = context.configStore
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = context.configDataStore
-    const {pipelineId, pipelineName} = context.pipelineStore
+    const {pipelineId,pipeline} = context.pipelineStore
     const valueChange = context.valueChange
 
     const [messageInfo,setMessageInfo] = useState("")
@@ -29,7 +29,7 @@ const Deploy = props =>{
 
     useEffect(()=>{
         const params = {
-            pipelineName:pipelineName,
+            pipelineName:pipeline && pipeline.pipelineName,
             regex:formInitialValues.sourceAddress
         }
         if(formInitialValues.sourceAddress && pipelineId){

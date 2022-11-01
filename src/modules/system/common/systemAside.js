@@ -27,7 +27,7 @@ const SystemAside= props =>  {
                     onClick={()=>select(data.key)}
                     key={data.key}
                 >
-                    <span style={{paddingRight:5}}>{data.icon}</span>
+                    <span style={{paddingRight:5,fontSize:16}}>{data.icon}</span>
                     <span>{data.label}</span>
                 </li>
             </PrivilegeButton>
@@ -42,8 +42,8 @@ const SystemAside= props =>  {
                          style={{paddingLeft: `${deep * 20 + 20}`}}
                          onClick={()=>setOpenOrClose(item.key)}
                     >
-                        <span style={{color: "$blue-main"}}>
-                            <span style={{paddingRight:5}}>{item.icon}</span>
+                        <span>
+                            <span style={{paddingRight:5,fontSize:16}}>{item.icon}</span>
                             <span className="system-aside-title">{item.label}</span>
                         </span>
                         <div className="system-aside-item-icon">
@@ -83,7 +83,7 @@ const SystemAside= props =>  {
     }
 
     return (
-        <div className="system-aside">
+        <div className="system-aside --mf-second-level-navigation">
             <ul style={{padding: "10px 0 0"}} key="0" className="system-aside-top">
                 {
                     authType && departmentRouter.map(firstItem => {

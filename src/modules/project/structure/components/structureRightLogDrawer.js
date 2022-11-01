@@ -2,7 +2,7 @@ import React from "react";
 import {Drawer} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 import Subtitle from "../../../config/components/formTitle/subtitle";
-import TitleType from "../../../config/components/formTitle/titleType";
+import HlineIcon from "../../../config/components/formTitle/hlineIcon";
 
 const StructureRightLogDrawer = props =>{
 
@@ -21,7 +21,7 @@ const StructureRightLogDrawer = props =>{
                 <ModalTitle
                     title={
                             <>
-                                <TitleType type={drawerContent.taskType}/>
+                                <HlineIcon type={drawerContent.taskType}/>
                                 &nbsp;--&nbsp;
                                 <Subtitle type={drawerContent.taskType}/>
                             </>

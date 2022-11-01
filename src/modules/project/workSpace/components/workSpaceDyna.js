@@ -1,5 +1,6 @@
 import React from "react";
 import {LoadingOutlined,AimOutlined,UserOutlined} from "@ant-design/icons";
+import WorkLine from "./workLine";
 
 const WorkSpaceDyna = props =>{
 
@@ -21,12 +22,13 @@ const WorkSpaceDyna = props =>{
         </div>
     }
 
+
     return(
         <div className="workSpace-dyna workSpace-div">
-            <div className="workSpace-title">
-                <AimOutlined />
-                <span className="workSpace-title-name">流水线动态</span>
-            </div>
+            <WorkLine
+                icon={<AimOutlined />}
+                title={"流水线动态"}
+            />
             <div className="dyna">
                 {
                     dynamicList && dynamicList.map((item,index)=>{
@@ -36,12 +38,12 @@ const WorkSpaceDyna = props =>{
             </div>
             {
                 dynamicList && dynamicList.length === dynaPageTotal && dynaPagination > 1 &&
-                <div className="dyna-bottom dyna-bottom-none"> 没有更多了 🤐</div>
+                <div className="dyna-bottom --mf-second-level-title"> 没有更多了 🤐</div>
             }
             {
                 dynamicList && dynamicList.length < dynaPageTotal && isDyna===false &&
                 <div
-                    className="dyna-bottom dyna-bottom-more"
+                    className="dyna-bottom --mf-second-level-title --mf-dominant-color"
                     onClick={()=>moreDynamic()}
                 >
                     更多动态...
@@ -49,7 +51,7 @@ const WorkSpaceDyna = props =>{
             }
             {
                 isDyna &&
-                <div className="dyna-bottom dyna-bottom-more">
+                <div className="dyna-bottom --mf-second-level-title --mf-dominant-color">
                     <LoadingOutlined/>
                 </div>
             }

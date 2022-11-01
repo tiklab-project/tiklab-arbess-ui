@@ -24,7 +24,7 @@ const IdentifyModal = props =>{
     const onOk = value =>{
         if(formValue){
             const params = {
-                id:formValue.id,
+                authId:formValue.authId,
                 name:value.name,
                 type:value.type,
                 authType:value.authType,
@@ -77,9 +77,16 @@ const IdentifyModal = props =>{
                 >
                     <Input/>
                 </Form.Item>
+                <Form.Item label="服务器地址" name="url"
+                           rules={[{required:true,message:"请输入服务器地址"}]}
+
+                >
+                    <Input/>
+                </Form.Item>
                 <Form.Item name="type" label="认证类型">
                     <Select>
                         <Select.Option value={1}>代码扫描</Select.Option>
+                        <Select.Option value={2}>推送制品</Select.Option>
                     </Select>
                 </Form.Item>
                 <Form.Item label="授权类型" name="authType">
@@ -112,12 +119,6 @@ const IdentifyModal = props =>{
                         <Input/>
                     </Form.Item>
                 }
-                <Form.Item label="地址" name="url"
-                           rules={[{required:true,message:"请输入地址"}]}
-
-                >
-                    <Input/>
-                </Form.Item>
             </Form>
 
         </Modal>

@@ -109,7 +109,7 @@ export class PipelineStore {
     deletePipeline = async value =>{
         const param = new FormData()
         param.append("pipelineId",value.pipelineId)
-        param.append("userId",value.userId)
+        param.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
             DeletePipeline(param).then(res=>{
                 resolve(res)
@@ -125,7 +125,7 @@ export class PipelineStore {
         const params={
             pipelineId:values.pipelineId,
             pipelineName:values.pipelineName,
-            user:{id:values.user.id}
+            user:{id:getUser().userId}
         }
         return new Promise((resolve, reject) => {
             UpdatePipeline(params).then(res=>{
@@ -156,7 +156,7 @@ export class PipelineStore {
     updateFollow =async value =>{
         const params = {
             pipeline:{pipelineId:value.pipeline.pipelineId},
-            userId:value.userId
+            userId:getUser().userId
         }
         return await UpdateFollow(params)
     }

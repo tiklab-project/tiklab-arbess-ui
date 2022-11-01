@@ -14,8 +14,8 @@ const StructureRightCue = props =>{
 
     return(
         <div className="mid_group_top">
-            <div className="mid_group_top_tel">
-                <span className="tel_title">{title}</span>
+            <div className="mid_group_top_tel --mf-notable-title">
+                <span className="tel_title --mf-three-level-title">{title}</span>
                 <span className="tel_time">执行时长：{time} </span>
                 <span className="tel_way">触发方式：{runWay(way)} </span>
             </div>

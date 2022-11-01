@@ -78,7 +78,6 @@ const StructureRightExecute = props => {
                                     style={style(index+1)}
                                     state={state(index)}
                                     time={times(index)}
-                                    log={null}
                                 />
                             </Fragment>
                 })

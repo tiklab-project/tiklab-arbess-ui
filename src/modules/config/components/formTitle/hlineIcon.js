@@ -1,6 +1,6 @@
 import React from "react";
 
-const TitleType = props =>{
+const HlineIcon = props =>{
 
     const {type} = props
 
@@ -38,4 +38,4 @@ const TitleType = props =>{
 
 }
 
-export default TitleType
+export default HlineIcon

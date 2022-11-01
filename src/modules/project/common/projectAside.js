@@ -2,7 +2,10 @@ import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import {PrivilegeButton} from "tiklab-privilege-ui";
 import {Dropdown} from "antd";
-import {CaretDownOutlined,SettingOutlined,ApartmentOutlined,CreditCardOutlined,
+import {
+    SettingOutlined,
+    ApartmentOutlined,
+    CreditCardOutlined,
     ClockCircleOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
@@ -112,19 +115,17 @@ const ProjectAside = props =>{
     }
 
     return(
-         <div className="aside">
-            <div  className="content">
-                <Dropdown overlay={changPipelineMenu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
-                    <div className="aside_content"
-                        onClick={(e)=>e.preventDefault()}
-                    >
-                        <span className={`dropdowns_icon icon-${pipeline.color}`}>
-                            {pipeline && pipeline.pipelineName.substring(0,1).toUpperCase()}
-                        </span>
-                        <CaretDownOutlined className="dropdowns_select"/>
-                    </div>
+         <div className="aside --mf-second-level-navigation">
+             <div  className="content">
+                 <Dropdown overlay={changPipelineMenu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
+                     <div className="aside_content aside_item"
+                         onClick={(e)=>e.preventDefault()}
+                     >
+                         <div className={`dropdowns_icon icon-${pipeline.color}`}>
+                             {pipeline && pipeline.pipelineName.substring(0,1).toUpperCase()}
+                         </div>
+                     </div>
                 </Dropdown>
-
                 {
                     firstRouters.map(item=>{
                         return renderTaskRouter(item)
@@ -133,7 +134,7 @@ const ProjectAside = props =>{
             </div>
 
              <div className="project-sys"
-                  onClick={()=>props.history.push(`/index/task/${pipelineId}/assembly`)}
+                  onClick={()=>props.history.push(`/index/task/${pipelineId}/assembly/redel`)}
              >
                  <SettingOutlined/>
              </div>

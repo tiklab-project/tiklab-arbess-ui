@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import {LoadingOutlined,UserOutlined} from "@ant-design/icons";
 import Guide from "./guide";
 
@@ -34,12 +34,12 @@ const DynamicList = props =>{
             </div>
             {
                 dynamicList && dynamicList.length === dynaPageTotal && dynaPagination > 1 &&
-                <div className="dynamic-bottom dynamic-bottom-none"> 没有更多了 🤐</div>
+                <div className="dynamic-bottom --mf-second-level-title"> 没有更多了 🤐</div>
             }
             {
                 dynamicList && dynamicList.length < dynaPageTotal && isDyna===false &&
                 <div
-                    className="dynamic-bottom dynamic-bottom-more"
+                    className="dynamic-bottom --mf-second-level-title --mf-dominant-color"
                     onClick={()=>moreDynamic()}
                 >
                     更多动态...
@@ -47,7 +47,7 @@ const DynamicList = props =>{
             }
             {
                 isDyna &&
-                <div className="dynamic-bottom dynamic-bottom-more">
+                <div className="dynamic-bottom --mf-second-level-title --mf-dominant-color">
                     <LoadingOutlined/>
                 </div>
             }

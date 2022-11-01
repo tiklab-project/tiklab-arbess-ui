@@ -34,7 +34,7 @@ export class IdentifyStore {
     @action
     updateAuth = async value=>{
         const params = {
-            id:value.id,
+            authId:value.authId,
             name:value.name,
             type:value.type,
             authType:value.authType,

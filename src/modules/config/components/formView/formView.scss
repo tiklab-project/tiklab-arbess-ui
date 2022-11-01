@@ -69,7 +69,7 @@
         }
         &-content{
             display: flex;
-            background: #f2f2f2;
+            background: #f1f1f1;
             padding-top: 8px;
         }
         .anch-item{
@@ -134,28 +134,15 @@
                 border: 1px solid #1890ff;
             }
         }
-        .desc{
+        .headline{
             &-left{
-                .desc-icon{
-                    display: inline-block;
-                    padding-top: 2px;
-                    font-size: 16px;
-                    font-weight: 700;
-                }
                 .desc-title{
                     padding: 0 8px;
-                    font-size: 16px;
-                    font-weight: 700;
-                    width: 80px;
-                    display: inline-block;
-                }
-                .desc-warn{
-                    font-size: 18px;
-                    color: red;
+
                 }
             }
             &-right{
-                .desc-changSort{
+                .headline-changSort{
                     margin-right: 15px;
                     cursor: pointer;
                     &:hover{

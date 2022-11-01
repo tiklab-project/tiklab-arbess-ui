@@ -3,7 +3,7 @@ import {Form,Modal,Button,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import PipelineAddModalType from "./pipelineAddModalType";
-import ProjectRename from "../../projectSet/reDel/projectRename";
+import PipelineName from "../../projectSet/reDel/pipelineName";
 
 const {Step} = Steps
 
@@ -11,8 +11,9 @@ const PipelineAddModal = props =>{
 
     const {addPipelineVisible,setAddPipelineVisible,createPipeline,pipelineList} = props
 
-    const [templateType,setTemplateType] = useState(1)
     const [current,setCurrent] = useState(0)
+    const [templateType,setTemplateType] = useState(1)
+    const [powerType,setPowerType] = useState(1)
 
     const [form] = Form.useForm()
 
@@ -20,7 +21,7 @@ const PipelineAddModal = props =>{
         const params={
             pipelineType:templateType,
             pipelineName:value.pipelineName,
-            pipelinePower:value.pipelinePower,
+            pipelinePower:powerType,
         }
         createPipeline(params).then(res=>{
             if(res.code===0 && res.data){
@@ -42,10 +43,12 @@ const PipelineAddModal = props =>{
         },
         {
             title: "完善信息",
-            content: <ProjectRename
+            content: <PipelineName
                         form={form}
                         pipelineList={pipelineList}
                         layout={"vertical"}
+                        powerType={powerType}
+                        setPowerType={setPowerType}
                     />
         }
     ]

@@ -6,30 +6,31 @@ import WorkSpaceDyna from "../components/workSpaceDyna";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import echarts from "../../../../common/echarts/echarts";
 import WorkSpaceCensus from "../components/workSpaceCensus";
+import WorkLine from "../components/workLine";
 import {PieChartOutlined} from "@ant-design/icons";
 
 const WorkSpace = props =>{
 
     const {workSpaceStore,pipelineStore,homePageStore} = props
 
-    const {findlogpage,dynamicList,setDynamicList,setDynaPagination,dynaPageTotal,dynaPagination,
-    } = homePageStore
-
+    const {findlogpage,dynaPageTotal} = homePageStore
     const {pipelineCensus} = workSpaceStore
     const {pipelineId,pipeline} = pipelineStore
-    const [isDyna,setIsDyna] = useState(false) // 更多动态
-    const [census,setCensus] = useState("")
 
+    const [isDyna,setIsDyna] = useState(false)
+    const [dynamicList,setDynamicList] = useState([])
+    const [dynaPagination,setDynaPagination] = useState(1)
+    const [census,setCensus] = useState("")
 
     //运行概况
     useEffect(()=>{
         if(pipelineId){
             pipelineCensus(pipelineId).then(res=>{
+                const data = res.data
                 if(res.code===0){
-                    const data = res.data
-                    let option
+                    setCensus(data)
                     const myChart = echarts.init(document.getElementById("burn-down"))
-                    option = {
+                    myChart && myChart.setOption({
                         tooltip: {
                             formatter: "{b}: {c} ({d}%)"
                         },
@@ -43,9 +44,7 @@ const WorkSpace = props =>{
                                 { value: data && data.removeNumber, name: "其他" },
                             ],
                         }]
-                    }
-                    myChart && myChart.setOption(option)
-                    setCensus(res.data)
+                    })
                 }
             })
         }
@@ -55,18 +54,17 @@ const WorkSpace = props =>{
     useEffect(()=>{
         const params = {
             content:pipelineId,
+            pageParam:{
+                currentPage:dynaPagination
+            }
         }
         findlogpage(params).then(res=>{
-            setIsDyna(false)
+            if(res.code===0){
+                setDynamicList(dynamicList.concat(res.data.dataList))
+                dynaPagination > 1 && setIsDyna(false)
+            }
         })
     },[pipelineId,dynaPagination])
-
-    useEffect(()=>{
-        return()=>{
-            setDynamicList([])
-            setDynaPagination(1)
-        }
-    },[pipelineId])
 
     const moreDynamic = () =>{
         setIsDyna(true)
@@ -83,10 +81,10 @@ const WorkSpace = props =>{
             </div>
             <div className="workSpace-content">
                 <div className="workSpace-census workSpace-div">
-                    <div className="workSpace-title">
-                        <PieChartOutlined />
-                        <span className="workSpace-title-name">运行概况</span>
-                    </div>
+                    <WorkLine
+                        icon={<PieChartOutlined />}
+                        title={"运行概况"}
+                    />
                     <div className="workSpace-census-bottom">
                         <div className="chart-box" id="burn-down"
                              style={{width:400,height:300}}

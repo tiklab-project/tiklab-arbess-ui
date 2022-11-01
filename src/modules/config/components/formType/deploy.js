@@ -14,7 +14,7 @@ const Deploy = props =>{
     const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = configDataStore
 
     const {getFile,updateConfigure} = configStore
-    const {pipelineId,pipelineName} = pipelineStore
+    const {pipelineId,pipeline} = pipelineStore
 
     const [bordered,setBordered] = useState(false)
     const [isLoading,setIsLoading] = useState(1)
@@ -28,10 +28,10 @@ const Deploy = props =>{
 
     useEffect(()=>{
         const params = {
-            pipelineName:pipelineName,
-            regex:formInitialValues[deployType+"sourceAddress"]
+            pipelineName:pipeline && pipeline.pipelineName,
+            regex:formInitialValues.sourceAddress
         }
-        if(formInitialValues[deployType+"sourceAddress"] && pipelineId){
+        if(formInitialValues.sourceAddress && pipelineId){
             getFile(params).then(res=>{
                 addMessageInfo(res)
             }).catch(error=>{
@@ -40,7 +40,7 @@ const Deploy = props =>{
         }else{
             setMessageInfo("")
         }
-    },[formInitialValues[deployType+"sourceAddress"],pipelineId])
+    },[formInitialValues.sourceAddress,pipelineId])
 
     const addMessageInfo = data => {
         if(data.code===0){

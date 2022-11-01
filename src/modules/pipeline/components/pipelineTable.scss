@@ -17,6 +17,7 @@
             line-height: 30px;
             border-radius: 4px;
             text-align: center;
+            background: #6da5f7;
             color: black;
             margin-right: 10px;
         }
@@ -37,12 +38,8 @@
                 background: #eee;
             }
         }
-        &-name{
-            color: #1890ff;
-
-        }
     }
-    &-state{
+    &-state,&-history{
         cursor: pointer;
         .actions-se{
             font-size: 23px;
@@ -54,8 +51,10 @@
             color: #1890ff;
         }
     }
-    &-collect{
+    &-history{
         margin: 0 10px;
+    }
+    &-collect{
         cursor: pointer;
         .icon{
             width: 25px !important;

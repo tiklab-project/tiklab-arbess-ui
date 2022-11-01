@@ -22,9 +22,7 @@ export class HomePageStore{
     }
     @observable pagination = 1 //控制接口中页码page的变化，更新接口 -- 消息
 
-    @observable dynamicList = []
     @observable dynaPageTotal = 1
-    @observable dynaPagination = 1 // 动态
 
     @action
     setPagination = value =>{
@@ -32,17 +30,8 @@ export class HomePageStore{
     }
 
     @action
-    setDynaPagination = value =>{
-        this.dynaPagination = value
-    }
-    @action
     setMessageList = value =>{
         this.messageList = value
-    }
-
-    @action
-    setDynamicList = value =>{
-        this.dynamicList = value
     }
 
     @action
@@ -62,7 +51,7 @@ export class HomePageStore{
             params = {
                 pageParam:{
                     pageSize:15,
-                    currentPage:this.dynaPagination,
+                    currentPage:values.pageParam.currentPage,
                 },
                 bgroup:"matflow",
                 userId: values.userId
@@ -71,7 +60,7 @@ export class HomePageStore{
             params = {
                 pageParam:{
                     pageSize:15,
-                    currentPage:this.dynaPagination,
+                    currentPage:values.pageParam.currentPage,
                 },
                 bgroup:"matflow",
                 contentKey:"pipelineId",
@@ -80,7 +69,6 @@ export class HomePageStore{
         }
         const data = await Findlogpage(params)
         if(data.code===0){
-            this.dynamicList=this.dynamicList.concat(data.data && data.data.dataList)
             this.dynaPageTotal=data.data && data.data.totalRecord
         }
         return data

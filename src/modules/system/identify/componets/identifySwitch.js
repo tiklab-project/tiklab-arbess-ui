@@ -1,7 +1,6 @@
 import React from "react";
 import {Input,Select} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
-import IdentifyAddBtn from "./identifyAddBtn";
 
 const IdentifySwitch = props =>{
 
@@ -25,7 +24,6 @@ const IdentifySwitch = props =>{
                     />
                 </div>
             </div>
-            <IdentifyAddBtn/>
         </div>
     )
 }

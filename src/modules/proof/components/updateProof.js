@@ -66,6 +66,16 @@ const UpdateProof = props =>{
                     name="userForm"
                     autoComplete="off"
                 >
+                    <Form.Item
+                        label="凭证名称"
+                        name="proofName"
+                        rules={[
+                            {required:true, message:"请输入凭证名称"},
+                            {type:"string", max: 10, message:"凭证名称过长"}
+                        ]}
+                    >
+                        <Input placeholder="名称"/>
+                    </Form.Item>
                     <Form.Item label="凭证级别" name="type">
                         <Select onChange={opt}>
                             <Option value={1}>全局凭证</Option>
@@ -107,16 +117,6 @@ const UpdateProof = props =>{
                                     <Option value={5}>部署凭证</Option>
                                 </Select>
                         }
-                    </Form.Item>
-                    <Form.Item
-                        label="凭证名称"
-                        name="proofName"
-                        rules={[
-                            {required:true, message:"请输入凭证名称"},
-                            {type:"string", max: 10, message:"凭证名称过长"}
-                        ]}
-                    >
-                        <Input placeholder="名称"/>
                     </Form.Item>
                     <Form.Item label="凭证类型" name="proofType" >
                         <Select placeholder="选择类型" disabled={displayPart}>

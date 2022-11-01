@@ -3,8 +3,8 @@ import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
 import {Popconfirm,Table} from "antd";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../../../common/emptyText/emptyText";
-import IdentifyModal from "../componets/identifyModal";
 import IdentifySwitch from "../componets/identifySwitch";
+import IdentifyAddBtn from "../componets/identifyAddBtn";
 import "../componets/identifyAuth.scss";
 import {inject,observer} from "mobx-react";
 
@@ -25,7 +25,7 @@ const Identify = props =>{
     },[fresh])
 
     const deletePart = (text,record) => {
-        deleteAuth(record.id)
+        deleteAuth(record.authId)
     }
 
     const edit = (text,record) => {
@@ -45,7 +45,13 @@ const Identify = props =>{
             key:"name",
             width: "220px",
             ellipsis:true,
-
+        },
+        {
+            title:"服务器地址",
+            dataIndex:"url",
+            key:"url",
+            width: "220px",
+            ellipsis:true,
         },
         {
             title:"认证类型",
@@ -74,13 +80,6 @@ const Identify = props =>{
                         return "token"
                 }
             }
-        },
-        {
-            title:"地址",
-            dataIndex:"url",
-            key:"url",
-            width: "220px",
-            ellipsis:true,
         },
         {
             title:"创建时间",
@@ -119,11 +118,12 @@ const Identify = props =>{
 
     return(
         <div className="identify home-limited">
-            <BreadcrumbContent firstItem={"认证管理"} />
+            <div className="identify-upper">
+                <BreadcrumbContent firstItem={"认证"} />
+                <IdentifyAddBtn/>
+            </div>
             <div className="identify-content">
-                <IdentifySwitch
-                    add={add}
-                />
+                <IdentifySwitch/>
                 <Table
                     columns={columns}
                     dataSource={identifyList}

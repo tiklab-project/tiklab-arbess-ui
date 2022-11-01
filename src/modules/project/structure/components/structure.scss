@@ -40,15 +40,12 @@
                             padding: 10px 10px 10px 20px;
                             cursor: pointer;
                             margin: 3px 0;
-                            &:hover{
-                                background: #e3e8f0;
-                            }
                             .list{
                                 &-title{
                                     color: #1890ff;
                                     width: 60px;
                                     font-weight: 600;
-                                    font-size: 17px;
+                                    font-size: var(--mf-first-level-title-size);
                                 }
                                 &-group{
                                     flex-grow: 1;
@@ -63,7 +60,7 @@
                         }
                         &_active{
                             background: #e3e8f0;
-                            border-right: 3px solid #1890ff
+                            border-left: 3px solid var(--mf-dominant-color);
                         }
                     }
                     &-page{
@@ -113,13 +110,11 @@
                         flex-direction: row;
                         justify-content: space-between;
                         &_tel{
-                            font-size: 16px;
                             .tel{
                                 &_title{
                                     padding-right: 20px;
                                     color: #1890ff;
                                     width: 60px;
-                                    font-weight: 600;
                                 }
                                 &_time{
                                     padding-right: 20px;

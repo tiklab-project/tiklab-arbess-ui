@@ -1,5 +1,10 @@
 .identify{
     padding: 10px;
+    &-upper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     &-content{
         &-action{
             .del{

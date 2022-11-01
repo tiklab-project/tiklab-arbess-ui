@@ -14,6 +14,7 @@ const MessageDrawer = props =>{
     } = homePageStore
 
     const [isLoading,setIsLoading] = useState(false)
+    const [selected,setSelected] = useState(1)
 
     useEffect(()=>{
         return ()=>{
@@ -52,10 +53,10 @@ const MessageDrawer = props =>{
                         </div>
                         <div>
                             <div className="message-item-user">
-                                <span className="user-title">
+                                <span className="--mf-notable-title">
                                     {item.messageTemplate.title}
                                 </span>
-                                <span className="user-time">
+                                <span className="user-time --mf-auxiliary-color --mf-auxiliary-title">
                                     {item.receiveTime}
                                 </span>
                             </div>
@@ -72,35 +73,36 @@ const MessageDrawer = props =>{
         })
     }
 
-    const tab = (
-        <>
-            全部
-            <span className="messageModal-screen-tab">
-                {page && page.total}
-            </span>
-        </>
-    )
+    const tabs = [
+        {
+            id:1,
+            title:"全部",
+        },
+        {
+            id:2,
+            title:"未读",
+        },
+        {
+            id:3,
+            title:"已读",
+        }
+    ]
 
-    const screen = (
-        <div className="messageModal-screen">
-            <Tabs defaultValue={1}>
-                <Tabs.TabPane key={1} tab={tab}>
-                    <div className="messageModal-list">
-                        {
-                            renderMessageList(messageList)
-                        }
-                    </div>
-                </Tabs.TabPane>
-                <Tabs.TabPane key={2} tab={'未读'}>
-                    未读消息
-                </Tabs.TabPane>
-                <Tabs.TabPane key={3} tab={"已读"} >
-                    已读消息
-                </Tabs.TabPane>
-            </Tabs>
-        </div>
-    )
-
+    
+    const renderTabs = item => {
+        return  <div
+                    className={`title-item ${item.id===selected?"title-select":null}`}
+                    key={item.id}
+                    onClick={()=>setSelected(item.id)}
+                >
+                    {item.title}
+                    {item.id ===1 &&
+                        <span className="messageModal-screen-tab">
+                            {page && page.total}
+                        </span>}
+                </div>
+    }
+    
     return(
         <Drawer
             closable={false}
@@ -110,34 +112,47 @@ const MessageDrawer = props =>{
             visible={visible}
             style={{top:50,height:"calc(100vh - 50px)"}}
             contentWrapperStyle={{width:450}}
+            bodyStyle={{padding:0}}
         >
             <div className="drawers">
-                <ModalTitle
-                    setVisible={setVisible}
-                    title={<><BellOutlined style={{fontSize:16}}/>消息</>}
-                    isType={true}
-                />
+                <div className="drawers-message-up">
+                    <ModalTitle
+                        setVisible={setVisible}
+                        title={<><BellOutlined style={{fontSize:16}}/>消息</>}
+                        isType={true}
+                    />
+                </div>
                 <div className="messageModal">
-                    {screen}
-                    {
-                        messageList && messageList.length === page.total && pagination > 1&&
-                        <Divider plain>没有更多了 🤐</Divider>
-                    }
-                    {
-                        messageList && messageList.length < page.total && !isLoading &&
-                        <div
-                            className="messageModal-more"
-                            onClick={()=>moreMessage()}
-                        >
-                            加载更多...
-                        </div>
-                    }
-                    {
-                        isLoading &&
-                        <div className="messageModal-more">
-                            <LoadingOutlined/>
-                        </div>
-                    }
+                    <div className="messageModal-title">
+                        {
+                            tabs.map(item=>{
+                                return renderTabs(item)
+                            })
+
+                        }
+                    </div>
+                    <div className="messageModal-list">
+                        {renderMessageList(messageList)}
+                        {
+                            messageList && messageList.length === page.total && pagination > 1&&
+                            <Divider plain>没有更多了 🤐</Divider>
+                        }
+                        {
+                            messageList && messageList.length < page.total && !isLoading &&
+                            <div
+                                className="messageModal-more"
+                                onClick={()=>moreMessage()}
+                            >
+                                加载更多...
+                            </div>
+                        }
+                        {
+                            isLoading &&
+                            <div className="messageModal-more">
+                                <LoadingOutlined/>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </Drawer>

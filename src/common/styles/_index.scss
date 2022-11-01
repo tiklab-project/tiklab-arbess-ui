@@ -9,14 +9,11 @@ ul li{
     border:none !important;
 }
 
-.drawers{
-    &-body{
-        height: calc(100vh - 140px);
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
+.drawers-body{
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-
 
 .icon {
     width: 20px;

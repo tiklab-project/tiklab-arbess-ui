@@ -6,7 +6,7 @@ import {getUser} from "tiklab-core-ui";
 import {Profile,WorkAppConfig} from "tiklab-eam-ui";
 import {GlobalOutlined,BellOutlined,SettingOutlined,LogoutOutlined,
     QuestionCircleOutlined,ProfileOutlined,ExpandOutlined,ScheduleOutlined,
-    WhatsAppOutlined
+    WhatsAppOutlined,CaretDownOutlined
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -81,6 +81,13 @@ const Head = props =>{
         })
     }
 
+    const languageMenu = (
+        <div className="outMenu-lan-menu">
+            <div className="lan-menu">中文</div>
+            {/*<div className="lan-menu">英文</div>*/}
+        </div>
+    )
+
     // 退出登录页面
     const outMenu = (
         <div className="header-outMenu">
@@ -95,15 +102,12 @@ const Head = props =>{
                   </div>
                </div>
                <div className="header-outMenu-lan">
-                   <div className="outMenu-lan">
-                       <GlobalOutlined/>
-                       <span className="lan-zh lan" onClick={()=>changeLan("zh")}>
-                           中文
-                       </span>
-                       {/*<span className="lan-en lan">*/}
-                       {/*    英文*/}
-                       {/*</span>*/}
-                   </div>
+                    <Dropdown overlay={languageMenu}>
+                        <div className="outMenu-lan">
+                            <GlobalOutlined/>
+                            <span className="lan">切换语言</span>
+                        </div>
+                    </Dropdown>
                </div>
                <div className="header-outMenu-out">
                    <div  onClick={()=>goOut()} className="outMenu-out">

@@ -26,10 +26,6 @@ const EnviSwitch = props =>{
                     />
                 </div>
             </div>
-            <div>
-                <Button onClick={()=>add()} type="primary">
-                    <PlusOutlined/>添加配置</Button>
-            </div>
         </div>
     )
 }

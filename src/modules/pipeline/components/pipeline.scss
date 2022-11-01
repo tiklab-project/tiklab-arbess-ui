@@ -10,13 +10,6 @@
         justify-content: space-between;
         align-items: center;
     }
-    &-top{
-        &-title{
-            font-size: 1.25em;
-            font-weight: 600;
-            color: #2e2e2e;
-        }
-    }
     &-length{
         display: inline-block;
         width: 20px;
@@ -29,11 +22,9 @@
     &-type{
         height: 50px;
         line-height: 50px;
-        border-bottom: 1px solid #f4f4f4;
         margin-bottom: 10px;
         &-group{
             display: flex;
-            font-size: 16px;
         }
         &-link{
             margin-right: 20px;

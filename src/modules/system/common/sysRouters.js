@@ -1,6 +1,6 @@
 import React from "react";
 import {TeamOutlined,BarsOutlined,BuildOutlined,AppstoreOutlined,ProjectOutlined,
-    GroupOutlined,CompassOutlined,MergeCellsOutlined,SafetyCertificateOutlined,
+    GroupOutlined,SoundOutlined,MergeCellsOutlined,SafetyCertificateOutlined,
     FileProtectOutlined,SwitcherOutlined,ProfileOutlined,LayoutOutlined,
     MenuOutlined,
 } from "@ant-design/icons";
@@ -8,25 +8,25 @@ import {TeamOutlined,BarsOutlined,BuildOutlined,AppstoreOutlined,ProjectOutlined
 export const departmentRouter = [
     {
         key:"1",
-        label: "账号与成员",
+        label: "成员与部门",
         enCode: "I",
         icon:<TeamOutlined />,
         children: [
             {
                 key:"/index/system/dashbord",
-                label:"组织管理",
+                label:"部门",
                 icon:<GroupOutlined />,
                 enCode:"F",
             },
             {
                 key:"/index/system/list",
-                label:"用户列表",
+                label:"用户",
                 icon:<TeamOutlined />,
                 enCode:"H",
             },
             {
                 key:"/index/system/directory",
-                label:"目录管理",
+                label:"用户目录",
                 icon:<BarsOutlined />,
                 enCode:"G",
             },
@@ -43,13 +43,13 @@ export const applicationRouter = [
     },
     {
         key:"/index/system/proof",
-        label:"凭证管理",
+        label:"凭证",
         icon:<SwitcherOutlined />,
         enCode:"F",
     },
     {
         key:"/index/system/identify",
-        label:"认证管理",
+        label:"认证",
         icon:<FileProtectOutlined />,
         enCode:"I",
     },
@@ -60,10 +60,23 @@ export const applicationRouter = [
         enCode:"J",
     },
     {
-        key:"/index/system/mes",
-        label: "消息通知",
-        icon:<CompassOutlined />,
-        enCode: "I",
+        key:"4",
+        label: "消息",
+        icon:<SoundOutlined/>,
+        children: [
+            {
+                key:"/index/system/mes",
+                label: "消息通知",
+                icon:<SoundOutlined />,
+                enCode: "I",
+            },
+            {
+                key:"/index/system/mes/management",
+                label:"消息管理",
+                icon:<SoundOutlined />,
+                enCode:"J",
+            },
+        ]
     },
     {
         key:"3",
@@ -87,7 +100,7 @@ export const applicationRouter = [
     },
     {
         key:"/index/system/plugin",
-        label:"插件管理",
+        label:"插件",
         icon:<MergeCellsOutlined />,
         enCode:"G",
     },
@@ -115,7 +128,7 @@ export const applicationRouter = [
 
 export const templateRouter = [
     {
-        key:"4",
+        key:"5",
         label:"基础数据",
         icon:<ProjectOutlined />,
         enCode:"E",
@@ -155,12 +168,6 @@ export const templateRouter = [
                 label:"日志模板",
                 icon:<MenuOutlined />,
                 enCode:"H",
-            },
-            {
-                key:"/index/system/mes/management",
-                label:"消息管理",
-                icon:<MenuOutlined />,
-                enCode:"J",
             },
             {
                 key:"/index/system/mes/type",

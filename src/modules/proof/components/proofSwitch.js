@@ -5,7 +5,6 @@ import {SearchOutlined} from "@ant-design/icons";
 
 const ProofSwitch = props =>{
 
-    const {pipelineList} = props
 
     return(
         <div className="proof-content-switch">
@@ -30,9 +29,6 @@ const ProofSwitch = props =>{
                         prefix={<SearchOutlined />}
                     />
                 </div>
-            </div>
-            <div className="proof-content-btn">
-                <AddProofButton style={"primary"} pipelineList={pipelineList}/>
             </div>
         </div>
     )
