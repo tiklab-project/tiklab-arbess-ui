@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
-import {Button,message,Spin} from "antd";
-import {LoadingOutlined,
+import {Button, Dropdown, Menu, message, Spin} from "antd";
+import {
+    LoadingOutlined,
     BarsOutlined,
     AppstoreOutlined,
     ExclamationCircleOutlined,
@@ -62,6 +63,13 @@ const ConfigChangeView = props =>{
         return validLength > 0
     }
 
+    const viewMenu = (
+        <Menu>
+            <Menu.Item><BarsOutlined  />表单视图</Menu.Item>
+            <Menu.Item><AppstoreOutlined  />图形视图</Menu.Item>
+        </Menu>
+    )
+    
     return (
         <div className="config_changeView">
             <div className="changeView">
@@ -104,7 +112,7 @@ const ConfigChangeView = props =>{
                         <div className="changeView-view-item" >
                             <BarsOutlined  />
                             &nbsp;
-                            表单视图
+                            表单
                         </div>
                     </div>
                     {/*<div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
@@ -112,8 +120,6 @@ const ConfigChangeView = props =>{
                     {/*>*/}
                     {/*    <div className="changeView-view-item">*/}
                     {/*        <AppstoreOutlined/>*/}
-                    {/*        &nbsp;*/}
-                    {/*        图形化视图*/}
                     {/*    </div>*/}
                     {/*</div>*/}
                     {
@@ -124,14 +130,14 @@ const ConfigChangeView = props =>{
                                 <div className="changeView-view-item">
                                     <AppstoreOutlined/>
                                     &nbsp;
-                                    图形化视图
+                                    图形化
                                 </div>
                             </div>
                             :
                             <div className="changeView-view-li changeView-view-ban">
                                 <AppstoreOutlined/>
                                 &nbsp;
-                                图形化视图
+                                图形化
                             </div>
                     }
                 </div>

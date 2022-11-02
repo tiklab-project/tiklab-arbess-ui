@@ -6,8 +6,11 @@ export class ConfigDataStore {
     @observable data = [] // 新阶段、新任务需要渲染的值
 
     @observable codeType = "" // 源码管理类型
+    @observable testType = ""
     @observable buildType = "" 
     @observable deployType = ""
+    @observable scanType = ""
+    @observable goodsType = ""
 
     @observable unitShellBlock = ""
 
@@ -28,6 +31,11 @@ export class ConfigDataStore {
     }
 
     @action
+    setTestType = value =>{
+        this.testType = value
+    }
+
+    @action
     setBuildType = value => {
         this.buildType = value
     }
@@ -35,6 +43,16 @@ export class ConfigDataStore {
     @action
     setDeployType = value => {
         this.deployType = value
+    }
+
+    @action
+    setScanType = value => {
+        this.scanType = value
+    }
+
+    @action
+    setGoodsType = value => {
+        this.goodsType = value
     }
 
     @action

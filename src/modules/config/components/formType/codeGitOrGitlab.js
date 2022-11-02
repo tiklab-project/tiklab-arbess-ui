@@ -11,13 +11,14 @@ const CodeGitOrGitlab = props =>{
     return(
         <>
             <Inputs
-                placeholder={"请输入git地址"}
+                placeholder={"git地址"}
                 label={"git地址"}
                 name={"codeName"}
                 mode={codeType}
+                isValid={true}
             />
             <Inputs
-                placeholder={"请输入分支，默认为master"}
+                placeholder={"分支，默认为master"}
                 label={"分支"}
                 name={"codeBranch"}
                 mode={codeType}

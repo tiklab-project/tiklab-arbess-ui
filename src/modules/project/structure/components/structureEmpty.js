@@ -1,6 +1,6 @@
 import React from "react";
 import {Button,Empty,Spin} from "antd";
-import {LoadingOutlined} from "@ant-design/icons";
+import {CaretRightOutlined,LoadingOutlined} from "@ant-design/icons";
 
 const StructureEmpty = props =>{
     const {runImmediately,runImState,isData} = props
@@ -24,7 +24,10 @@ const StructureEmpty = props =>{
                                 runImState ?
                                     <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
                                     :
-                                    <Button type="primary" onClick={()=>runImmediately()}>立即运行</Button>
+                                    <Button type="primary" onClick={()=>runImmediately()}>
+                                        <CaretRightOutlined />
+                                        立即运行
+                                    </Button>
                             }
                         </Empty>
                     </div>

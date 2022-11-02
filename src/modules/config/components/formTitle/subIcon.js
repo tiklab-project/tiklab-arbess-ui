@@ -1,7 +1,20 @@
 import React from "react";
 
+
 const SubIcon = props =>{
+
     const {type} = props
+
+    const renderSubIcon = (icon,title) =>{
+        return <>
+            <span className="subicon-icon" style={{paddingRight:5}}>
+                <svg className="icon" aria-hidden="true">
+                    <use xlinkHref={`#icon-${icon}`} />
+                </svg>
+            </span>
+            <span className="subicon-title">{title}</span>
+        </>
+    }
 
     const subIconType = type =>{
         switch (type) {
@@ -16,7 +29,7 @@ const SubIcon = props =>{
             case 5:
                 return renderSubIcon("-_ssh","svn")
             case 11:
-                return renderSubIcon("ceshi","单元测试")
+                return renderSubIcon("ceshi","maven单元测试")
             case 21:
                 return renderSubIcon("quanxian","maven")
             case 22:
@@ -27,21 +40,15 @@ const SubIcon = props =>{
                 return renderSubIcon("docker","docker")
             case 41:
                 return renderSubIcon("ceshi","sonarQuebe")
+            case 51:
+                return renderSubIcon("quanxian","nexus")
         }
     }
 
-    const renderSubIcon = (icon,title) =>{
-        return <>
-            <span className="subicon-icon">
-                <svg className="icon" aria-hidden="true">
-                    <use xlinkHref={`#icon-${icon}`} />
-                </svg>
-            </span>
-            <span className="subicon-title">{title}</span>
-        </>
-    }
 
-    return subIconType(type)
+    return  <>
+                {subIconType(type)}
+            </>
 }
 
 export default SubIcon

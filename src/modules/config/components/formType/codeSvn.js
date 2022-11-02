@@ -12,10 +12,11 @@ const CodeSvn = props =>{
     return(
         <>
             <Inputs
-                placeholder={"请输入svn地址"}
+                placeholder={"svn地址"}
                 label={"svn地址"}
                 name={"codeName"}
                 mode={codeType}
+                isValid={true}
             />
             <Proof
                 allProofType={5}

@@ -60,9 +60,10 @@ export const applicationRouter = [
         enCode:"J",
     },
     {
-        key:"4",
+        key:"2",
         label: "消息",
         icon:<SoundOutlined/>,
+        enCode: "I",
         children: [
             {
                 key:"/index/system/mes",
@@ -74,7 +75,7 @@ export const applicationRouter = [
                 key:"/index/system/mes/management",
                 label:"消息管理",
                 icon:<SoundOutlined />,
-                enCode:"J",
+                enCode:"I",
             },
         ]
     },
@@ -105,7 +106,7 @@ export const applicationRouter = [
         enCode:"G",
     },
     {
-        key:"2",
+        key:"4",
         label:"安全",
         icon:<LayoutOutlined />,
         enCode:"I",

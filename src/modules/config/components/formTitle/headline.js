@@ -15,6 +15,8 @@ const Headline = props =>{
             return "部署"
         }else if(type>40 && type<50){
             return "代码扫描"
+        }else if(type>50 && type<60){
+            return "推送制品"
         }
     }
 

@@ -33,7 +33,7 @@ const FindAllProof = props =>{
                         }}
                     >
                 {
-                    type===41 ?
+                    type>40  ?
                         <IdentifyAddBtn isBtn={"none"}/>
                         :
                         <AddProofButton type={type} isBtn={"none"}/>
@@ -48,8 +48,10 @@ const FindAllProof = props =>{
             formInitialValues.gitProofId = key
         }else if(type>30 && type<40){
             formInitialValues.deployProofId = key
-        }else {
+        }else if(type>40 && type<50){
             formInitialValues.scanProofId = key
+        }else if(type>50 && type<60){
+            formInitialValues.goodsProofId = key
         }
     }
 
@@ -61,7 +63,7 @@ const FindAllProof = props =>{
             values:{proof:{proofId:e.key}},
             message:"update"
         }
-        if(type===41) {
+        if(type>40) {
             params.values={PipelineAuth:{authId:e.key}}
         }
         updateConfigure(params).then(res=>{
@@ -71,7 +73,7 @@ const FindAllProof = props =>{
     }
 
     const onFocus = () => {
-        if(type===41){
+        if(type>40){
             findAllAuth().then(res=>{
                 if(res.code===0){
                     setScanProofList(res.data)
@@ -114,28 +116,30 @@ const FindAllProof = props =>{
             return "gitProofName"
         }else if(type>30 && type<40){
             return "deployProofName"
-        }else {
+        }else if(type>40 && type<50){
             return "scanProofName"
+        }else if(type>50 && type<60){
+            return "goodsProofName"
         }
     }
 
     const renderList = type => {
-        switch (type) {
-            case 41:return scanProofList && scanProofList.map(item=>{
+        if(type>40){
+            return scanProofList && scanProofList.map(item=>{
                 return(
                     <Option key={item.authId} value={item.name}>
                         {item.name}
                     </Option>
                 )
             })
-            default:
-                return proofList && proofList.map(item=>{
-                    return(
-                        <Option key={item.proofId} value={item.proofName+ "(" + item.proofType + ")"}>
-                            { item.proofName+ "(" + item.proofType + ")"}
-                        </Option>
-                    )
-                })
+        }else {
+            return proofList && proofList.map(item=>{
+                return(
+                    <Option key={item.proofId} value={item.proofName+ "(" + item.proofType + ")"}>
+                        { item.proofName+ "(" + item.proofType + ")"}
+                    </Option>
+                )
+            })
         }
     }
 
@@ -148,7 +152,7 @@ const FindAllProof = props =>{
                 <Select
                     style={type === 2 || type === 3 ? style2:style1}
                     onChange={(value,e)=>changeGitSelect(value,e)}
-                    placeholder="请选择凭证"
+                    placeholder="凭证"
                     open={open}
                     onFocus={onFocus}
                     onBlur={onBlur}

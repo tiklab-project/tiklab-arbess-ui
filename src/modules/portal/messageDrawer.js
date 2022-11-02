@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Drawer,Divider,Tabs} from "antd";
+import {Drawer,Divider,Badge} from "antd";
 import {MailOutlined,BellOutlined,LoadingOutlined} from "@ant-design/icons";
 import ModalTitle from "../../common/modalTitle/modalTitle";
 import {inject,observer} from "mobx-react";
@@ -53,10 +53,10 @@ const MessageDrawer = props =>{
                         </div>
                         <div>
                             <div className="message-item-user">
-                                <span className="--mf-notable-title">
+                                <span className="user-title">
                                     {item.messageTemplate.title}
                                 </span>
-                                <span className="user-time --mf-auxiliary-color --mf-auxiliary-title">
+                                <span className="user-time">
                                     {item.receiveTime}
                                 </span>
                             </div>
@@ -87,20 +87,28 @@ const MessageDrawer = props =>{
             title:"已读",
         }
     ]
-
     
     const renderTabs = item => {
-        return  <div
-                    className={`title-item ${item.id===selected?"title-select":null}`}
-                    key={item.id}
-                    onClick={()=>setSelected(item.id)}
-                >
-                    {item.title}
-                    {item.id ===1 &&
-                        <span className="messageModal-screen-tab">
-                            {page && page.total}
-                        </span>}
-                </div>
+        return   <div
+            key={item.id}
+            className={`title-item ${item.id===selected?"title-select":null}`}
+            onClick={()=>setSelected(item.id)}
+        >
+            {item.title}
+
+            {
+                item.id ===1 &&
+                <span className={`messageModal-screen-tab ${page && page.total<100 ?null:"messageModal-screen-much"}`}>
+                    {
+                        page && page.total < 100 ?
+                            page.total
+                            :
+                            99
+                    }
+                </span>
+            }
+
+        </div>
     }
     
     return(
@@ -125,14 +133,13 @@ const MessageDrawer = props =>{
                 <div className="messageModal">
                     <div className="messageModal-title">
                         {
-                            tabs.map(item=>{
-                                return renderTabs(item)
-                            })
-
+                            tabs.map(item=>{return renderTabs(item)})
                         }
                     </div>
                     <div className="messageModal-list">
-                        {renderMessageList(messageList)}
+                        {
+                            renderMessageList(messageList)
+                        }
                         {
                             messageList && messageList.length === page.total && pagination > 1&&
                             <Divider plain>没有更多了 🤐</Divider>

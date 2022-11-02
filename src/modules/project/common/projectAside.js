@@ -115,7 +115,7 @@ const ProjectAside = props =>{
     }
 
     return(
-         <div className="aside --mf-second-level-navigation">
+         <div className="aside">
              <div  className="content">
                  <Dropdown overlay={changPipelineMenu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
                      <div className="aside_content aside_item"

@@ -4,7 +4,7 @@ const WorkLine = props => {
 
     const {icon,title} = props
 
-    return <div className="workSpace-title --mf-first-level-title">
+    return <div className="workSpace-title">
                 {icon}
                 <span className="workSpace-title-name">
                     {title}

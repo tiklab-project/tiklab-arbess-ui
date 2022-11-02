@@ -6,6 +6,7 @@ import TestUnit from "./testUnit";
 import BuildMavenOrNode from "./buildMavenOrNode";
 import Deploy from "./deploy";
 import ScanSonarQuebe from "./scanSonarQuebe";
+import GoodsNexus from "./goodsNexus";
 
 const Forms = props =>{
 
@@ -35,6 +36,8 @@ const Forms = props =>{
                             return <Deploy/>
                         case 41:
                             return <ScanSonarQuebe/>
+                        case 51:
+                            return <GoodsNexus/>
                     }
                 })()
             }

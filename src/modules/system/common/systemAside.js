@@ -83,7 +83,7 @@ const SystemAside= props =>  {
     }
 
     return (
-        <div className="system-aside --mf-second-level-navigation">
+        <div className="system-aside">
             <ul style={{padding: "10px 0 0"}} key="0" className="system-aside-top">
                 {
                     authType && departmentRouter.map(firstItem => {

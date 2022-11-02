@@ -1,73 +1,44 @@
-/* 二级导航 */
-.--mf-second-level-navigation{
-    background: #f8f8f8;
-}
-
-/* 三级导航 */
-.--mf-three-level-navigation{
-    background: #fbfbfb;
-}
-
-/* 导航选中 */
-.--mf-check-navigation{
-    background: #e3e8f0;
-}
-
-/* 强化色 */
-.--mf-dominant-color{
-    color: #1890ff;
-}
-
-.--mf-danger-color{
-    color: #ff0000;
-}
-
-/* 辅助颜色 */
-.--mf-auxiliary-color{
-    color: #00000073;
-}
-
-/* 一级标题  */
-.--mf-first-level-title{
-    font-size: 16px;
-    font-weight: 600;
-}
-
-/* 二级标题 */
-.--mf-second-level-title{
-    font-size: 15px;
-    font-weight: 600;
-}
-
-/* 三级标题 */
-.--mf-three-level-title{
-    font-weight: 600;
-}
-
-/* 显著标题 */
-.--mf-notable-title{
-    font-size: 16px;
-}
-
-/* 辅助字体 */
-.--mf-auxiliary-title{
-    font-size: 13px;
-}
-
 :root{
     --mf-second-level-navigation-color: #f8f8f8;
     --mf-three-level-navigation:#fbfbfb;
-    --mf-check-navigation-color:#e3e8f0;
-    --mf-dominant-color:#1890ff;
     --mf-danger-color:#ff0000;
     --mf-auxiliary-color:#00000073;
+    --mf-navigation-color:#e3e8f0;
+    --mf-hover-color:#f4f4f4;
+    --mf-border-color:#d9d9d9;
 
-    --mf-first-level-title-size:16px;
-    --mf-second-level-title-size:15px;
-    --mf-text-title-size:14px;
-    --mf-auxiliary-title-size:13px;
+    --mf-number-color:#f6c659;
+    --mf-successNumber-color:#77b3eb;
+    --mf-errorNumber-color:#f06f6f;
+    --mf-removeNumber-color:#928484;
+    --mf-time-color:#6852e0cf;
 
-    --mf-notable-title-weight:600;
+    // 色调
+    --tiklab-white: #fff;  // 主色调白
+    --tiklab-black: #000;  // 主色调黑
+    --tiklab-blue: #0063FF;  // 主色调蓝
+    --tiklab-gray-300: #E4E4E4;  // hover颜色
+    --tiklab-gray-400: #D9D9D9;  // 选中颜色
+    --tiklab-gray: #F9F9F9; // 主色调灰
+
+    // 外边距
+    --tiklab-margin: 0;
+    --tiklab-margin-10: 10px; //  页面内容边距
+
+    // 内边距
+    --tiklab-padding: 0;
+    --tiklab-padding-10: 10px; //  页面内容边距
+
+    // 标题
+    --tiklab-font-sm: 13px;  // 描述文字
+    --tiklab-font-base: 14px; // 正文
+    --tiklab-font-lg: 16px; // 标题
+
+    // 字重
+    --tiklab-font-weight-base: 400; // 正文字重
+    --tiklab-font-weight-bold: bold; // 标题字重
+
+    --line-height: 1;
 
 }
 

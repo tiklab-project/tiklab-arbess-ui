@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
-import {Modal,Form,Select,Input} from "antd";
+import {Modal, Form, Select, Input, Tooltip} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
+import {QuestionCircleOutlined} from "@ant-design/icons";
 
 const IdentifyModal = props =>{
 
@@ -77,8 +78,12 @@ const IdentifyModal = props =>{
                 >
                     <Input/>
                 </Form.Item>
-                <Form.Item label="服务器地址" name="url"
-                           rules={[{required:true,message:"请输入服务器地址"}]}
+                <Form.Item
+                    label={<>服务器地址<Tooltip title="服务器地址">
+                        <QuestionCircleOutlined style={{paddingLeft:5,cursor:"pointer"}}/>
+                    </Tooltip></>}
+                    name="url"
+                    rules={[{required:true,message:"请输入服务器地址"}]}
 
                 >
                     <Input/>
@@ -107,7 +112,7 @@ const IdentifyModal = props =>{
                         <Form.Item label="密码" name="password"
                                    rules={[{required:true,message:"请输入密码"}]}
                         >
-                            <Input/>
+                            <Input.Password/>
                         </Form.Item>
                     </>
                 }

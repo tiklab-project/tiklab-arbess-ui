@@ -7,10 +7,11 @@ const ScanSonarQuebe = props =>{
     return(
         <>
             <Inputs
-                placeholder={"请输入项目名称"}
+                placeholder={"项目名称"}
                 label={"项目名称"}
                 name={"projectName"}
                 mode={41}
+                isValid={true}
             />
             <FindAllProof
                 type={41}

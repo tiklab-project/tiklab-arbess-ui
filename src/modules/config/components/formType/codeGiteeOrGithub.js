@@ -124,7 +124,7 @@ const CodeGiteeOrGithub = props =>{
                         onFocus={()=>onFocus("codeName")}
                         onBlur={onBlur}
                         bordered={fieldName === "codeName"}
-                        placeholder="请选择仓库"
+                        placeholder="仓库"
                     >
                         {
                             storehouseList && storehouseList.map(item=>{
@@ -144,7 +144,7 @@ const CodeGiteeOrGithub = props =>{
                     <Select
                         disabled={prohibited}
                         bordered={fieldName === "codeBranch"}
-                        placeholder="请选择分支"
+                        placeholder="分支"
                         onFocus={()=>onFocus("codeBranch")}
                         onBlur={onBlur}
                         onChange={changeBranch}

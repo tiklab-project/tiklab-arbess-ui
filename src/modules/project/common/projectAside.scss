@@ -7,6 +7,7 @@
         left: 0;
         top: 50px;
         height: 100%;
+        background: #f8f8f8;
         .content{
             width: 80px;
             height: calc(100% - 55px);
@@ -30,7 +31,26 @@
                 line-height: 25px;
                 border-radius: 4px;
                 text-align: center;
-                background: #6da5f7;
+            }
+            .icon{
+                &-0{
+                    background: #cad2f3;
+                }
+                &-1{
+                    background: #cadbf3;
+                }
+                &-2{
+                    background: #e8eaf6;
+                }
+                &-3{
+                    background: #ffebee;
+                }
+                &-4{
+                    background: #e0f2f1;
+                }
+                &-5{
+                    background: #eee;
+                }
             }
         }
         &_item{
@@ -38,7 +58,7 @@
         }
         &_active{
             background: #e3e8f0;
-            border-left: 3px solid #1890ff;
+            border-left: 3px solid #0063FF;
         }
     }
     &-sys{

@@ -1,14 +1,10 @@
 .pipelineTable{
-    .ant-table-thead>tr>th{
-        background: #ffffff !important;
-    }
-
-    .ant-table-tbody>tr>td{
-        border: none !important;
-    }
     &-pipelineName{
         &-task{
             cursor: pointer;
+        }
+        &-text{
+            color: #0063FF;
         }
         &-icon{
             display: inline-block;
@@ -17,11 +13,13 @@
             line-height: 30px;
             border-radius: 4px;
             text-align: center;
-            background: #6da5f7;
             color: black;
             margin-right: 10px;
         }
         .icon{
+            &-0{
+                background: #cad2f3;
+            }
             &-1{
                 background: #cadbf3;
             }
@@ -39,31 +37,22 @@
             }
         }
     }
-    &-state,&-history{
+    &-state,&-history,&-collect{
         cursor: pointer;
         .actions-se{
             font-size: 23px;
         }
+        &:hover{
+            color: #0063FF;
+        }
+    }
+    &-state{
         &-running{
             padding: 10px;
-        }
-        &:hover{
-            color: #1890ff;
         }
     }
     &-history{
         margin: 0 10px;
-    }
-    &-collect{
-        cursor: pointer;
-        .icon{
-            width: 25px !important;
-            height: 25px !important;
-            color: #222222;
-            &:hover{
-                color: #1890ff;
-            }
-        }
     }
     .ant-table-tbody>tr>td{
         padding: 15px;

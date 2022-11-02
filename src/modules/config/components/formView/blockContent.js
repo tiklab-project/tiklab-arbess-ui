@@ -58,7 +58,7 @@ const BlockContent = props =>{
         <>
             <div className="formView-wrapper" id={id}>
                 <div className="formView-wrapper-Headline">
-                    <div className="headline-left --mf-first-level-title">
+                    <div className="headline-left">
                         <HlineIcon type={type}/>
                         {renderValidType()}
                     </div>

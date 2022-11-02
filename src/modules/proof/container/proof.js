@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import "../components/proof.scss";
-import {Popconfirm,Table} from "antd";
+import {Popconfirm,Table,Tooltip} from "antd";
 import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import UpdateProof from "../components/updateProof";
@@ -79,20 +79,24 @@ const Proof = props =>{
             render:(text,record)=>{
                 return(
                     <span className="proof-content-action">
-                        <span className="edit" onClick={()=>edit(text,record)}>
-                            <EditOutlined />
-                        </span>
-                         <Popconfirm
-                             style={{marginTop:100}}
-                             title="你确定删除吗"
-                             onConfirm={()=>del(text,record)}
-                             okText="确定"
-                             cancelText="取消"
-                         >
-                             <span className="del">
-                                 <DeleteOutlined />
-                             </span>
-                         </Popconfirm>
+                        <Tooltip title="修改">
+                            <span className="edit" onClick={()=>edit(text,record)}>
+                                <EditOutlined />
+                            </span>
+                        </Tooltip>
+                         <Tooltip title="删除">
+                             <Popconfirm
+                                 style={{marginTop:100}}
+                                 title="你确定删除吗"
+                                 onConfirm={()=>del(text,record)}
+                                 okText="确定"
+                                 cancelText="取消"
+                             >
+                                 <span className="del">
+                                     <DeleteOutlined />
+                                 </span>
+                             </Popconfirm>
+                         </Tooltip>
                     </span>
                 )
             }

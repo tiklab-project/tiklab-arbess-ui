@@ -9,7 +9,7 @@ const ModalTitle = props =>{
 
     return(
         <div className="modalTitle" >
-            <div className="modalTitle-title --mf-three-level-title">
+            <div className="modalTitle-title">
                 <span>{title}</span>
             </div>
             {   isType &&

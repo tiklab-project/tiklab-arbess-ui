@@ -2,23 +2,28 @@
     width: 100%;
     min-height: calc(100vh - 50px);
     max-height: fit-content;
-    background: #f7f8fa;
+    background: var(--mf-homePage-color);
     &-guide{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         padding-bottom: 10px;
+        &-title{
+            font-size: 15px;
+            font-weight: 600;
+        }
         &-ac{
             border-radius: 3px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 16px;
+            color: #0063FF;
         }
     }
     &-content{
         margin: auto;
         max-width: 1280px;
-        padding-top: 15px;
+        padding: 15px 0;
         &-top{
             display: flex;
         }
@@ -28,7 +33,6 @@
         }
         &-bottom{
             display: flex;
-            padding-bottom: 20px;
         }
         .quickIn{
             &-group{
@@ -47,6 +51,10 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    .quickIn-group-title{
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
                     .quickIn-group-icon{
                         .icon{
                             width: 30px;
@@ -99,9 +107,11 @@
                             border-radius: 4px;
                             margin-right: 8px;
                             text-align: center;
-                            background: #6da5f7;
                         }
                         .icon{
+                            &-0{
+                                background: #cad2f3;
+                            }
                             &-1{
                                 background: #cadbf3;
                             }
@@ -117,6 +127,9 @@
                             &-5{
                                 background: #eee;
                             }
+                        }
+                        &-pipelineName{
+                            color: #0063FF;
                         }
                     }
                 }
@@ -183,14 +196,13 @@
                             text-align: center;
                             font-size: 12px;
                             border-radius: 30px;
-                            color: #f4f4f4;
                         }
                         .state{
                             &-1{
                                 background: #87d068;
                             }
                             &-2{
-                                background: #1890ff;
+                                background: #0063FF;;
                             }
                             &-3{
                                 background: red;
@@ -206,7 +218,6 @@
             min-height: 550px;
             border-radius: 8px;
             flex: 1;
-            margin-bottom: 15px;
             &-center{
                 height: calc(100% - 60px);
                 .dynamic-item{
@@ -234,6 +245,9 @@
             &-bottom{
                 text-align: center;
                 cursor: pointer;
+                &-more{
+                    color: #0063FF;
+                }
             }
         }
     }

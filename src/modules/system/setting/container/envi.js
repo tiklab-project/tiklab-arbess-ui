@@ -6,7 +6,7 @@ import "../components/envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import EnviSwitch from "../components/enviSwitch";
 import EmptyText from "../../../../common/emptyText/emptyText";
-import SubIcon from "../../../config/components/formTitle/subIcon";
+import Subtitle from "../../../config/components/formTitle/subtitle";
 import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 
 /*
@@ -58,7 +58,7 @@ const Envi = props =>{
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
-            render:text => <SubIcon type={text}/>
+            render:text => <Subtitle type={text}/>
         },
         {
             title:"名称",

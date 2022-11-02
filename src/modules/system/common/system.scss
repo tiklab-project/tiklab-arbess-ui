@@ -2,10 +2,11 @@
     display: flex;
     width: 100%;
     height: calc(100vh - 50px);
-    overflow: hidden;
     &-aside {
         height: 100%;
         width: 200px;
+        background: #f8f8f8;
+
         &-sys{
             width: 100%;
             text-align: center;
@@ -50,7 +51,7 @@
         }
         &-select {
             background: #e3e8f0;
-            border-left: 3px solid #1890ff;
+            border-left: 3px solid #0063FF;
         }
     }
     &-content{

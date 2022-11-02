@@ -5,25 +5,24 @@ const HlineIcon = props =>{
     const {type} = props
 
     const titleType = type =>{
-        switch (parseInt(type)) {
-            case 11:
-                return renderTitle("ceshi1","测试")
-            case 21:
-            case 22:
-                return renderTitle("goujiangongju","构建")
-            case 31:
-            case 32:
-                return renderTitle("bushubanben","部署")
-            case 41:
-                return renderTitle("ceshi","代码扫描")
-            default:
-                return renderTitle("ceshi1","源码")
+        if(type>0 && type<10){
+            return renderTitle("ceshi1","源码")
+        }else if(type>10 && type<20){
+            return renderTitle("ceshi1","测试")
+        }else if(type>20 && type<30){
+            return renderTitle("goujiangongju","构建")
+        }else if(type>30 && type<40){
+            return renderTitle("bushubanben","部署")
+        }else if(type>40 && type<50){
+            return renderTitle("ceshi","代码扫描")
+        }else if(type>50 && type<60){
+            return renderTitle("quanxian","推送制品")
         }
     }
 
     const renderTitle = (icon,title) =>{
         return  <>
-                    <span className="desc-icon">
+                    <span className="desc-icon" style={{paddingRight:8}}>
                         <svg className="icon" aria-hidden="true">
                             <use xlinkHref={`#icon-${icon}`} />
                         </svg>
@@ -34,7 +33,9 @@ const HlineIcon = props =>{
                 </>
     }
 
-    return titleType(type)
+    return  <>
+                {titleType(type)}
+            </>
 
 }
 

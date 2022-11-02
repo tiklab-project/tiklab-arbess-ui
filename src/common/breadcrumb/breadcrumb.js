@@ -6,8 +6,8 @@ const BreadcrumbContent = props =>{
 
     const {firstItem,secondItem} = props
 
-    return  <div className={"breadcrumbContent --mf-first-level-title"}>
-                <span className={secondItem ? "--mf-auxiliary-color":""}>
+    return  <div className={"breadcrumbContent"}>
+                <span className={secondItem ? "breadcrumbContent-span":""}>
                     {firstItem}
                 </span>
                 {secondItem ? <span>&nbsp; &gt; &nbsp;{secondItem}</span>:null}

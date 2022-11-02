@@ -20,11 +20,14 @@
         text-align: center;
     }
     &-type{
+        display: flex;
+        align-items: center;
         height: 50px;
         line-height: 50px;
         margin-bottom: 10px;
         &-group{
             display: flex;
+            padding-right: 15px;
         }
         &-link{
             margin-right: 20px;
@@ -36,7 +39,7 @@
         }
         &-active{
             font-weight: 600;
-            border-bottom: 3px solid #189
+            border-bottom: 3px solid #0063FF;
         }
     }
 }

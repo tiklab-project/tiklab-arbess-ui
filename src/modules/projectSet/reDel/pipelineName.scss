@@ -28,7 +28,7 @@
         .power-select-show{
             width: 13px;
             height: 13px;
-            background: #1890ff;
+            background: #0063FF;
             border-radius: 50px;
             position: relative;
             &:after{
@@ -38,12 +38,12 @@
                 height: 23px;
                 top: -5px;
                 left: -5px;
-                border: 3px solid #1890ff;
+                border: 3px solid #0063FF;
                 border-radius: 50px;
             }
         }
     }
     &-select{
-        border: 2px solid #1890ff;
+        border: 2px solid #0063FF;
     }
 }

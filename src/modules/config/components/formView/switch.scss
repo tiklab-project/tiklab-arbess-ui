@@ -15,7 +15,7 @@
          line-height: 40px;
       }
       &-item{
-         border: 1px solid #1890ff;
+         border: 1px solid #0063FF;
          border-radius: 4px;
          width: 110px;
          height: 40px;
@@ -33,12 +33,6 @@
          cursor: pointer;
          overflow: hidden;
          margin-right: 12px;
-         &-icon{
-            padding-right: 5px;
-         }
-      }
-      &-selected{
-         border-color: #1890ff;
       }
    }
 }

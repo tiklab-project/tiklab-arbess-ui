@@ -18,7 +18,7 @@ const Subtitle = props =>{
                         case 5:
                             return "SVN"
                         case 11:
-                            return "单元测试"
+                            return "maven单元测试"
                         case 21:
                             return "maven"
                         case 22:
@@ -29,6 +29,8 @@ const Subtitle = props =>{
                             return "docker"
                         case 41:
                             return "sonarQuebe"
+                        case 51:
+                            return "nexus"
                     }
                 })()
             }

@@ -1,6 +1,11 @@
 .breadcrumbContent{
     z-index: 100;
     background: #fff;
-    padding: 12px 0 4px;
+    padding-top: 10px;
     margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    &-span{
+        color: #00000073;
+    }
 }

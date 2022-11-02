@@ -19,7 +19,7 @@ const TestUnit = props =>{
                 type={11}
                 shellBlock={unitShellBlock}
                 setShellBlock={setUnitShellBlock}
-                placeholder={"请输入测试命令"}
+                placeholder={"测试命令"}
             />
         </Form.Item>
     )

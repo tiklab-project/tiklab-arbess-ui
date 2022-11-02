@@ -6,12 +6,6 @@
         align-items: center;
     }
     &-content{
-        .ant-table-thead>tr>th{
-            background: #ffffff !important;
-        }
-        .ant-table-tbody>tr>td{
-            border: none !important;
-        }
         &-action{
             .del{
                 cursor: pointer;
@@ -23,7 +17,7 @@
                 margin-right: 20px;
                 cursor: pointer;
                 &:hover{
-                    color: #1890ff;
+                    color: #0063FF;
                 }
             }
         }

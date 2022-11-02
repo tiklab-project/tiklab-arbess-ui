@@ -1,5 +1,3 @@
-$blue-main: #1890ff;
-$gray-main:#cccccc;
 
 .frame{
     height: 100vh;
@@ -11,7 +9,7 @@ $gray-main:#cccccc;
         width: 100%;
         min-width: 600px;
         height: 50px;
-        border-bottom: 1px solid $gray-main;
+        border-bottom: 1px solid #cccccc;
         &-logo{
             height: 50px;
             width: 120px;
@@ -65,14 +63,14 @@ $gray-main:#cccccc;
                     line-height: 50px;
                     padding: 0 10px;
                     &:hover{
-                        color: $blue-main;
+                        color: #0063FF;
                     }
                 }
 
             }
             &-active{
-                color: $blue-main;
-                border-bottom: 2px solid $blue-main;
+                color: #0063FF;
+                border-bottom: 2px solid #0063FF;
             }
         }
     }

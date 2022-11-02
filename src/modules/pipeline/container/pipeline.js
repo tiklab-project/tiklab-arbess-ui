@@ -70,7 +70,7 @@ const Pipeline = props =>{
                     </Button>
                 </div>
             </div>
-            <div className="pipeline-type pipeline-flex">
+            <div className="pipeline-type">
                 <div className="pipeline-type-group ">
                     {renderLis(lis)}
                 </div>

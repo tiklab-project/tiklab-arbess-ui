@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
-import {Popconfirm,Table} from "antd";
+import {Popconfirm,Table,Tooltip} from "antd";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import IdentifySwitch from "../componets/identifySwitch";
@@ -33,11 +33,6 @@ const Identify = props =>{
         setVisible(true)
     }
 
-    const add = () =>{
-        setFormValue("")
-        setVisible(true)
-    }
-
     const columns = [
         {
             title:"名称",
@@ -50,18 +45,20 @@ const Identify = props =>{
             title:"服务器地址",
             dataIndex:"url",
             key:"url",
-            width: "220px",
+            width: "300",
             ellipsis:true,
         },
         {
             title:"认证类型",
             dataIndex:"type",
             key:"type",
-            width: "200px",
+            width: "180px",
             render:text => {
                 switch (text) {
                     case 1:
                         return "代码扫描"
+                    case 2:
+                        return "推送制品"
                 }
             }
         },
@@ -69,7 +66,7 @@ const Identify = props =>{
             title:"授权类型",
             dataIndex:"authType",
             key:"authType",
-            width: "200px",
+            width: "180px",
             render:text => {
                 switch (text) {
                     case 0:
@@ -94,22 +91,26 @@ const Identify = props =>{
             render:(text,record)=>{
                 return(
                     <span className="identify-content-action">
-                        <span className="edit"
-                              onClick={()=>edit(text,record)}
-                        >
-                            <EditOutlined />
-                        </span>
-                         <Popconfirm
-                             style={{marginTop:100}}
-                             title="你确定删除吗"
-                             onConfirm={()=>deletePart(text,record)}
-                             okText="确定"
-                             cancelText="取消"
-                         >
-                             <span className="del">
-                                 <DeleteOutlined />
-                             </span>
-                         </Popconfirm>
+                        <Tooltip title="修改">
+                            <span className="edit"
+                                  onClick={()=>edit(text,record)}
+                            >
+                                <EditOutlined />
+                            </span>
+                        </Tooltip>
+                        <Tooltip title="删除">
+                            <Popconfirm
+                                style={{marginTop:100}}
+                                title="你确定删除吗"
+                                onConfirm={()=>deletePart(text,record)}
+                                kText="确定"
+                                cancelText="取消"
+                            >
+                                <span className="del">
+                                    <DeleteOutlined />
+                                </span>
+                            </Popconfirm>
+                        </Tooltip>
                     </span>
                 )
             }

@@ -1,7 +1,7 @@
 import React from "react";
 import {message,Tooltip,Table} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
-    MinusCircleOutlined,UserOutlined,ClockCircleOutlined
+    MinusCircleOutlined,UserOutlined,ClockCircleOutlined,StarOutlined,StarTwoTone
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
@@ -81,7 +81,7 @@ const PipelineTable = props =>{
                             <span className={`pipelineTable-pipelineName-icon icon-${record.color}`}>
                                 {text.substring(0,1).toUpperCase()}
                             </span>
-                            <span className="--mf-dominant-color">
+                            <span className="pipelineTable-pipelineName-text">
                                 {text}
                             </span>
                         </span>
@@ -167,18 +167,14 @@ const PipelineTable = props =>{
                             </span>
                         </Tooltip>
                         <Tooltip title="收藏">
-                            <span className="pipelineTable-collect actives"
+                            <span className="pipelineTable-collect"
                                   onClick={()=>collectAction(record)}
                             >
                             {
                                 record.pipelineCollect === 0 ?
-                                    <svg className="icon" aria-hidden="true" >
-                                        <use xlinkHref="#icon-xingxing-kong"  />
-                                    </svg>
+                                    <StarOutlined className="actions-se"/>
                                     :
-                                    <svg className="icon" aria-hidden="true" >
-                                        <use xlinkHref="#icon-xingxing1"  />
-                                    </svg>
+                                    <StarTwoTone className="actions-se"/>
                             }
                             </span>
                         </Tooltip>

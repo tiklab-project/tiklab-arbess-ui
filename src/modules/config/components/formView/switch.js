@@ -1,37 +1,14 @@
 import React from "react";
-import Subtitle from "../formTitle/subtitle";
+import SubIcon from "../formTitle/subIcon";
 import "./switch.scss";
 
 const Switch = props =>{
 
     const {type} = props
 
-    const icon = type => {
-        switch (type) {
-            case 1:return "git"
-            case 2:return "gitee"
-            case 3:return "github"
-            case 4:return "gitlab"
-            case 5:return "-_ssh"
-            case 11:return "ceshi"
-            case 21:return "quanxian"
-            case 22:return "nodejs"
-            case 31:return "xuniji"
-            case 32:return "docker"
-            case 41:return "ceshi"
-        }
-    }
-
     const renderType = type =>{
         return <div className="configCode-gitList-item ">
-                    <span className="configCode-gitList-item-icon">
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref={`#icon-${icon(type)}`} />
-                        </svg>
-                    </span>
-                    <span className="configCode-gitList-item-title">
-                        <Subtitle type={type}/>
-                    </span>
+                    <SubIcon type={type}/>
                 </div>
     }
 
@@ -66,6 +43,12 @@ const Switch = props =>{
                     else if(type > 40 && type < 50){
                         return  <>
                                     <div className="configCode-gitList-title">代码扫描类型</div>
+                                    { renderType(type) }
+                                </>
+                    }
+                    else if(type > 50 && type < 60){
+                        return  <>
+                                    <div className="configCode-gitList-title">推送制品类型</div>
                                     { renderType(type) }
                                 </>
                     }

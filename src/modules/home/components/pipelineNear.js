@@ -19,7 +19,7 @@ const PipelineNear = props =>{
                     <span className={`pipelineNear-item-icon icon-${item.pipeline.color}`}>
                         {item.pipelineName.substring(0,1).toUpperCase()}
                     </span>
-                    <span className="--mf-dominant-color">
+                    <span className="pipelineNear-item-pipelineName">
                         {item.pipelineName}
                     </span>
                 </div>

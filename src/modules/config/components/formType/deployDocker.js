@@ -16,13 +16,13 @@ const DeployDocker = props =>{
                 addonBefore={"/"}
             />
             <Inputs
-                placeholder={"请输入启动端口"}
+                placeholder={"启动端口"}
                 label={"启动端口"}
                 name={"startPort"}
                 mode={deployType}
             />
             <Inputs
-                placeholder={"请输入映射端口"}
+                placeholder={"映射端口"}
                 label={"映射端口"}
                 name={"mappingPort"}
                 mode={deployType}

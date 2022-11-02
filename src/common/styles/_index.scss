@@ -5,6 +5,22 @@ ul li{
     list-style: none;
 }
 
+.ant-btn-primary{
+    background-color: #0063FF !important;
+}
+
+.ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
+    background-color: #0063FF !important;
+}
+
+.ant-table-thead>tr>th{
+    background: #ffffff !important;
+}
+
+.ant-table-tbody>tr>td{
+    border: none !important;
+}
+
 .ant-modal-footer{
     border:none !important;
 }

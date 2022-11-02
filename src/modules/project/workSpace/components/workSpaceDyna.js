@@ -38,12 +38,12 @@ const WorkSpaceDyna = props =>{
             </div>
             {
                 dynamicList && dynamicList.length === dynaPageTotal && dynaPagination > 1 &&
-                <div className="dyna-bottom --mf-second-level-title"> 没有更多了 🤐</div>
+                <div className="dyna-bottom"> 没有更多了 🤐</div>
             }
             {
                 dynamicList && dynamicList.length < dynaPageTotal && isDyna===false &&
                 <div
-                    className="dyna-bottom --mf-second-level-title --mf-dominant-color"
+                    className="dyna-bottom dyna-bottom-more"
                     onClick={()=>moreDynamic()}
                 >
                     更多动态...
@@ -51,7 +51,7 @@ const WorkSpaceDyna = props =>{
             }
             {
                 isDyna &&
-                <div className="dyna-bottom --mf-second-level-title --mf-dominant-color">
+                <div className="dyna-bottom dyna-bottom-more">
                     <LoadingOutlined/>
                 </div>
             }

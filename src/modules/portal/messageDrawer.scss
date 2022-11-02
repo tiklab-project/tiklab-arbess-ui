@@ -9,13 +9,23 @@
             height: calc(100% - 36px);
             &-tab{
                 display: inline-block;
-                width: 20px;
-                height: 20px;
-                line-height: 20px;
+                width: 25px;
+                height: 25px;
+                line-height: 25px;
                 text-align: center;
-                background: #f2f2f2;
+                background: #f4f4f4;
                 border-radius: 50px;
                 margin-left: 5px;
+            }
+            &-much{
+                position: relative;
+                &:after{
+                    position: absolute;
+                    content: "+";
+                    font-size: 16px;
+                    top: -6px;
+                    left: 18px;
+                }
             }
         }
         .messageModal-title{
@@ -27,6 +37,7 @@
             cursor: pointer;
             .title-item{
                 height: 40px;
+                line-height: 40px;
                 min-width: 50px;
                 text-align: center;
                 &:not(:last-child){
@@ -38,8 +49,9 @@
             }
         }
         &-list{
-            height: calc(100vh - 240px);
+            height: calc(100vh - 160px);
             overflow: auto;
+            padding: 10px 10px 0;
             .message-item{
                 display: flex;
                 justify-content: space-between;
@@ -71,6 +83,14 @@
                 &-user{
                     .user-time{
                         padding-left: 10px;
+                    }
+                    .user-title{
+                        font-size: 16px;
+                    }
+                    .user-time{
+                        color: #00000073;
+                        font-size: 13px;
+
                     }
                     padding-bottom: 10px;
                 }

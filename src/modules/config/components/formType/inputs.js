@@ -5,7 +5,7 @@ import SuffixStatus from "./suffixStatus";
 
 const Inputs = props =>{
 
-    const {placeholder,mode,label,name,addonBefore,configStore,pipelineStore,configDataStore} = props
+    const {placeholder,mode,label,name,addonBefore,configStore,isValid,pipelineStore,configDataStore} = props
 
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
@@ -18,24 +18,25 @@ const Inputs = props =>{
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
     const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
 
-    const validation = (codeType,name,value) =>{
+    const onFocus = () => {
+        setBordered(true)
+    }
+
+    // 效验
+    const validation = (mode,name,value) =>{
         switch (name) {
             case "codeName":
-                if(codeType===5){
+                if(mode===5){
                     return validCodeSvn.test(value)
-                }else if(codeType===1||codeType===4){
+                }else if(mode===1||mode===4){
                     return validCodeGit.test(value)
                 }
                 break
             case "sshIp":
                 return validDeploySshIp.test(value)
             default:
-                return true
+                return !(isValid && !value)
         }
-    }
-
-    const onFocus = () => {
-        setBordered(true)
     }
 
     const onBlur = e => {
@@ -50,7 +51,7 @@ const Inputs = props =>{
             values:obj,
             message:"update"
         }
-        if(validation(codeType,name,e.target.value)){
+        if(validation(mode,name,e.target.value)){
             updateConfigure(params).then(res=>{
                 if(res.code===0){
                     document.getElementById(name).classList.remove("formView-validateFields")
@@ -84,21 +85,20 @@ const Inputs = props =>{
                                 {pattern: validCodeGit, message:"请输入正确的git地址"}
                             ]
                 }
-                break;
+                break
             case "sshIp":
                 rule =  [
                             {required:true, message: "请输入Ip地址"},
                             {pattern:validDeploySshIp, message:"请输入正确的Ip地址"}
                         ]
-                break;
-            case "projectName":
-                rule = [
-                            {required:true, message: "请输入项目名称"}
-                        ]
+                break
+            default:
+                if(isValid){
+                    rule = [{required:true,message:`请输入${name}`}]
+                }
         }
         return rule
     }
-
 
     return (
         <div className="formView-inputs">

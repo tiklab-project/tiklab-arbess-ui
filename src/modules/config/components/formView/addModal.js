@@ -55,7 +55,7 @@ const lis=[
         desc:[
             {
                 type: 11,
-                tel:"单元测试",
+                tel:"maven单元测试",
                 icon:"ceshi"
             },
             {
@@ -92,18 +92,13 @@ const lis=[
         title: "推送制品",
         desc: [
             {
-                type:61,
-                tel:"jfrog",
-                icon: "quanxian"
-            },
-            {
-                type:62,
+                type:51,
                 tel:"nexus",
                 icon: "quanxian"
             },
             {
-                type:63,
-                tel:"habor",
+                type:52,
+                tel:"SSH",
                 icon: "quanxian"
             },
         ]
@@ -124,27 +119,27 @@ const lis=[
             },
         ]
     },
-    {
-        id:7,
-        title: "消息通知",
-        desc:[
-            {
-                type:71,
-                tel:"站内信",
-                icon:"xuniji"
-            },
-            {
-                type:72,
-                tel:"钉钉",
-                icon:"xuniji"
-            },
-            {
-                type:73,
-                tel:"企业微信",
-                icon:"xuniji"
-            },
-        ]
-    },
+    // {
+    //     id:7,
+    //     title: "消息通知",
+    //     desc:[
+    //         {
+    //             type:71,
+    //             tel:"站内信",
+    //             icon:"xuniji"
+    //         },
+    //         {
+    //             type:72,
+    //             tel:"钉钉",
+    //             icon:"xuniji"
+    //         },
+    //         {
+    //             type:73,
+    //             tel:"企业微信",
+    //             icon:"xuniji"
+    //         },
+    //     ]
+    // },
 ]
 
 const AddModal = props =>{

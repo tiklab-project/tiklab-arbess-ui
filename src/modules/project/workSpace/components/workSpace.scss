@@ -11,6 +11,8 @@
         line-height: 40px;
         padding-left: 10px;
         margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: 600;
         &-name{
             padding: 0 8px;
         }
@@ -60,16 +62,16 @@
                             font-size: 16px;
                         }
                         &-number{
-                            color:#f6c659
+                            color: #f6c659
                         }
                         &-successNumber{
-                            color:#77b3eb
+                            color: #77b3eb
                         }
                         &-errorNumber{
-                            color:#f06f6f
+                            color: #f06f6f
                         }
                         &-removeNumber{
-                            color:#928484
+                            color: #928484
                         }
                         &-time{
                             color:#6852e0cf
@@ -106,6 +108,9 @@
             &-bottom{
                 text-align: center;
                 cursor: pointer;
+                &-more{
+                    color: #0063FF;
+                }
             }
         }
     }

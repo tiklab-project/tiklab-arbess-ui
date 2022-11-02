@@ -34,7 +34,7 @@ const QuickIn = props =>{
                      onClick={()=>goPipeline(item.id)}
                 >
                     <div className="quickIn-group-wrap">
-                        <div className="--mf-second-level-title">
+                        <div className="quickIn-group-title">
                             <span className="quickIn-group-icon">
                                 <svg className="icon" aria-hidden="true">
                                     <use xlinkHref={`${item.icon}`}/>

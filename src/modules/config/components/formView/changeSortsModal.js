@@ -21,6 +21,8 @@ const ChangeSortsModal = props =>{
             case 22:return "构建-node"
             case 31:return "部署-虚拟机"
             case 32:return "部署-docker"
+            case 41:return "代码扫描-sonarQuebe"
+            case 51:return "推送制品-nexus"
             default:return null
         }
     }
@@ -83,7 +85,7 @@ const ChangeSortsModal = props =>{
             //如果改变控件，然后改变data
             if(res.code===0){
                 data && data.map(item=>{
-                    if(item.dataType<10){
+                    if(item.dataType < 10){
                         da.splice(0,0,{
                             dataId:item.dataId,
                             dataType:item.dataType
@@ -108,7 +110,7 @@ const ChangeSortsModal = props =>{
         >
             <ModalTitle
                 setVisible={setChangeSortVisible}
-                title={"更改配置顺序"}
+                title={"更改顺序"}
             />
             <div className="changeSorts-tree">
                 <Tree

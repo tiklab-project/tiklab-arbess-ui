@@ -15,7 +15,7 @@ const ConfigView = props =>{
     const {findAllConfigure,isPlugin,setIsPlugin,setValidLength} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
-        setCodeType,setBuildType,setDeployType,setGitProofId,
+        setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
         setUnitShellBlock,setBuildShellBlock,codeType,data,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
@@ -95,6 +95,7 @@ const ConfigView = props =>{
             }
             else if(data.type > 10 && data.type < 20){
                 renderTestData(data)
+                setTestType(data.type)
             }
             else if(data.type > 20 && data.type < 30 ){
                 renderBuild(data)
@@ -107,6 +108,11 @@ const ConfigView = props =>{
             }
             else if(data.type > 40 && data.type <50){
                 renderScan(data)
+                setScanType(data.type)
+            }
+            else if(data.type>50 && data.type<60){
+                renderGoods(data)
+                setGoodsType(data.type)
             }
             setData([...newData])
             Object.assign(formInitialValues, initialData[i])
@@ -151,7 +157,8 @@ const ConfigView = props =>{
         }
         else setDeployShellBlock(`${data.startShell ? data.startShell : ""}`)
     }
-    
+
+    // 代码扫描
     const renderScan = data => {
         const scanFormValue={
             scanProofId:data.pipelineAuth && data.pipelineAuth.authId,
@@ -160,12 +167,22 @@ const ConfigView = props =>{
         Object.assign(formInitialValues,scanFormValue)
     }
 
+    // 推动制品
+    const renderGoods = data => {
+        const goodsFormValue={
+            goodsProofId:data.pipelineAuth && data.pipelineAuth.authId,
+            goodsProofName:data.pipelineAuth && data.pipelineAuth.name
+        }
+        Object.assign(formInitialValues,goodsFormValue)
+    }
+
 
     // 统一form表单里面需要删除的值
     const del = i => {
         switch (i) {
             case 11:
                 setUnitShellBlock("")
+                setTestType("")
                 break
             case 21:
             case 22:
@@ -185,10 +202,24 @@ const ConfigView = props =>{
                 formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
                 formInitialValues.deployType = 0
+                formInitialValues.deployProofId = 0
                 setDeployType("")
                 setVirShellBlock("")
                 setDeployShellBlock("")
                 setDeployOrderShellBlock("")
+                break
+            case 41:
+                formInitialValues.scanProofName = null
+                formInitialValues.projectName = null
+                setScanType("")
+                break
+            case 51:
+                formInitialValues.groupId = null
+                formInitialValues.artifactId = null
+                formInitialValues.version = null
+                formInitialValues.fileType = null
+                formInitialValues.fileAddress = null
+                setGoodsType("")
                 break
             default:
                 formInitialValues.codeName = null
@@ -224,28 +255,28 @@ const ConfigView = props =>{
         renderFormView()
         :
         <>
-            {/*<Gui*/}
-            {/*    {...props}*/}
-            {/*    del={del}*/}
-            {/*    configStore={configStore}*/}
-            {/*    configDataStore={configDataStore}*/}
-            {/*    pipelineStore={pipelineStore}*/}
-            {/*/>*/}
-            {
-                !getVersionInfo().expired && isPlugin?
-                    <RemoteUmdComponent
-                        {...props}
-                        point={"gui"}
-                        pluginStore={pluginStore}
-                        isModalType={true}
-                        extraProps={{
-                            pipelineStore:toJS(pipelineStore),
-                            configDataStore:toJS(configDataStore),
-                            del,
-                        }}
-                    />
-                    :null
-            }
+            <Gui
+                {...props}
+                del={del}
+                configStore={configStore}
+                configDataStore={configDataStore}
+                pipelineStore={pipelineStore}
+            />
+            {/*{*/}
+            {/*    !getVersionInfo().expired && isPlugin?*/}
+            {/*        <RemoteUmdComponent*/}
+            {/*            {...props}*/}
+            {/*            point={"gui"}*/}
+            {/*            pluginStore={pluginStore}*/}
+            {/*            isModalType={true}*/}
+            {/*            extraProps={{*/}
+            {/*                pipelineStore:toJS(pipelineStore),*/}
+            {/*                configDataStore:toJS(configDataStore),*/}
+            {/*                del,*/}
+            {/*            }}*/}
+            {/*        />*/}
+            {/*        :null*/}
+            {/*}*/}
         </>
 }
 

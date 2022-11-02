@@ -16,12 +16,12 @@ const Guide = props =>{
 
     return(
         <div className="homePage-guide">
-            <div className="--mf-second-level-title">
+            <div className="homePage-guide-title">
                 {title}
             </div>
             {
                 type && (
-                    <div className="homePage-guide-ac --mf-dominant-color">
+                    <div className="homePage-guide-ac">
                         <span onClick={()=>goDetails(type)}>
                             <ArrowRightOutlined />
                         </span>

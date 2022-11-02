@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Select} from "antd";
+import {CaretDownOutlined} from "@ant-design/icons";
 
 const {Option} = Select;
 
@@ -108,10 +109,12 @@ const StructureLeftDropdown = props =>{
     return(
         <div className="structure-content-left-dropdown">
             <div className="dropdown">
-                <Select  style={{width:135,marginRight:10}}
-                         bordered={false}
-                         value={statusValue}
-                         onChange={(value,e)=>changeState(value,e)}
+                <Select
+                    style={{width:135,marginRight:10}}
+                    bordered={false}
+                    suffixIcon={<CaretDownOutlined />}
+                    value={statusValue}
+                    onChange={(value,e)=>changeState(value,e)}
                 >
                     {
                         stateList.map(item=>{
@@ -119,10 +122,12 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  style={{width:140,marginRight:10}}
-                         bordered={false}
-                         value={userValue}
-                         onChange={(value,e)=>changeEnforcer(value,e)}
+                <Select
+                    style={{width:140,marginRight:10}}
+                    bordered={false}
+                    suffixIcon={<CaretDownOutlined />}
+                    value={userValue}
+                    onChange={(value,e)=>changeEnforcer(value,e)}
                 >
                     <Option key={"全部"} value={"全部"}>全部</Option>
                     {
@@ -131,10 +136,12 @@ const StructureLeftDropdown = props =>{
                         })
                     }
                 </Select>
-                <Select  style={{width:135,marginRight:10}}
-                         bordered={false}
-                         value={modeValue} 
-                         onChange={(value,e)=>changeMode(value,e)}
+                <Select
+                    style={{width:135,marginRight:10}}
+                    bordered={false}
+                    suffixIcon={<CaretDownOutlined />}
+                    value={modeValue}
+                    onChange={(value,e)=>changeMode(value,e)}
                 >
                     {
                         modeList.map(item=>{
