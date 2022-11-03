@@ -6,9 +6,10 @@ import {inject,observer} from "mobx-react";
 
 const IdentifyAddBtn = props =>{
 
-    const {identifyStore,isBtn} = props
+    const {identifyStore,authorizeStore,isBtn} = props
 
     const {visible,setVisible,formValue,setFormValue,createAuth,updateAuth} = identifyStore
+    const {findMessage,findCode,authorizeMes,findState} = authorizeStore
 
     const add = () =>{
         setVisible(true)
@@ -35,9 +36,13 @@ const IdentifyAddBtn = props =>{
                 formValue={formValue}
                 createAuth={createAuth}
                 updateAuth={updateAuth}
+                findMessage={findMessage}
+                findCode={findCode}
+                authorizeMes={authorizeMes}
+                findState={findState}
             />
         </div>
     )
 }
 
-export default inject("identifyStore")(observer(IdentifyAddBtn))
+export default inject("identifyStore","authorizeStore")(observer(IdentifyAddBtn))

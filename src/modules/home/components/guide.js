@@ -1,6 +1,6 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
-import {ArrowRightOutlined} from "@ant-design/icons";
+import {RightOutlined} from "@ant-design/icons";
 
 const Guide = props =>{
 
@@ -23,7 +23,7 @@ const Guide = props =>{
                 type && (
                     <div className="homePage-guide-ac">
                         <span onClick={()=>goDetails(type)}>
-                            <ArrowRightOutlined />
+                            <RightOutlined />
                         </span>
                     </div>
                 )

@@ -41,12 +41,18 @@
                 width: 100%;
             }
         }
-        &-user,&-status,&-message,&-set,&-help{
+        &-user,&-message,&-set,&-help{
             margin: 0 10px;
+            &:hover{
+                color: #0063FF;
+            }
         }
         &-icon{
             font-size: 23px;
             cursor: pointer;
+            &:hover{
+                color: #0063FF;
+            }
         }
         &-user{
             cursor: pointer;

@@ -1,7 +1,8 @@
 import React from "react";
-import {message,Tooltip,Table} from "antd";
+import {Profile} from "tiklab-eam-ui";
+import {message,Tooltip,Table,Space} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
-    MinusCircleOutlined,UserOutlined,ClockCircleOutlined,StarOutlined,StarTwoTone
+    MinusCircleOutlined,ClockCircleOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Running from "./running";
@@ -98,7 +99,7 @@ const PipelineTable = props =>{
                 switch (text) {
                     case 30:
                         return  <Tooltip title="成功">
-                                    <CheckCircleOutlined style = {{fontSize:26,color:"#1890ff"}}/>
+                                    <CheckCircleOutlined style = {{fontSize:26,color:"#0063FF"}}/>
                                 </Tooltip>
                     case 1:
                         return <Tooltip title="失败">
@@ -106,7 +107,7 @@ const PipelineTable = props =>{
                                 </Tooltip>
                     case 0:
                         return  <Tooltip title="待构建">
-                                    <MinusCircleOutlined style = {{fontSize:26,color:"#6698ff"}}/>
+                                    <MinusCircleOutlined style = {{fontSize:26,color:"#8795b1"}}/>
                                 </Tooltip>
                     case 20:
                         return  <Tooltip title="停止">
@@ -122,21 +123,16 @@ const PipelineTable = props =>{
             width:"220px",
         },
         {
-            title: "最近成功时间",
-            dataIndex: "lastSuccessTime",
-            key: "lastSuccessTime",
-            width:"220px",
-        },
-        {
             title: "负责人",
             dataIndex: "userName",
             key: "userName",
             width:"220px",
+            ellipsis: true,
             render:(text) => {
-                return <>
-                    <UserOutlined />
+                return <Space>
+                    <Profile />
                     {text}
-                </>
+                </Space>
             }
         },
         {
@@ -172,9 +168,13 @@ const PipelineTable = props =>{
                             >
                             {
                                 record.pipelineCollect === 0 ?
-                                    <StarOutlined className="actions-se"/>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref={`#icon-xingxing-kong`} />
+                                    </svg>
                                     :
-                                    <StarTwoTone className="actions-se"/>
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref={`#icon-xingxing1`} />
+                                    </svg>
                             }
                             </span>
                         </Tooltip>

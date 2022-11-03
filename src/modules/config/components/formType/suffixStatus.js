@@ -15,10 +15,10 @@ const SuffixStatus = props =>{
                         case 1:
                             return <span/>
                         case 2:
-                            return  <LoadingOutlined style={{color:"#1890ff",fontSize:25}}/>
+                            return  <LoadingOutlined style={{color:"#0063FF",fontSize:25}}/>
 
                         case 3:
-                            return <CheckCircleOutlined style={{color:"#1890ff",fontSize:25}}/>
+                            return <CheckCircleOutlined style={{color:"#0063FF",fontSize:25}}/>
                         case 4:
                             return <CloseCircleOutlined style={{color:"#ff0000",fontSize:25}}/>
                     }

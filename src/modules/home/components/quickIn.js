@@ -42,7 +42,7 @@ const QuickIn = props =>{
                             </span>
                             <span>{item.title}</span>
                         </div>
-                        <div className="quickIn-group-wrap-number">
+                        <div className="quickIn-group-number">
                             {item.listLength}
                         </div>
                     </div>

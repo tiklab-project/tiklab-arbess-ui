@@ -34,7 +34,7 @@ const AddProofButton = props =>{
                     </div>
                     :
                     <Button type={style} onClick={()=>addProofVisible()}>
-                        <PlusOutlined />添加
+                        <PlusOutlined />添加凭证
                     </Button>
             }
             <AddProofModal

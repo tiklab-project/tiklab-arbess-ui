@@ -41,6 +41,16 @@ const Proof = props =>{
             key:"proofName",
             width:"200px",
             ellipsis:true,
+            render:text => {
+                return <>
+                    <span className="proof-content-icon">
+                        {text.substring(0,1).toUpperCase()}
+                    </span>
+                    <span>
+                        {text}
+                    </span>
+                </>
+            }
         },
         {
             title:"作用域",

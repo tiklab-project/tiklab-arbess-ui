@@ -1,12 +1,11 @@
 import React,{useState,useEffect} from "react";
-import {Table, Popconfirm, Button} from "antd";
+import {Table, Popconfirm, Button, Tooltip} from "antd";
 import {inject,observer} from "mobx-react";
 import EnviModal from "../components/enviModal";
 import "../components/envi.scss";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import EnviSwitch from "../components/enviSwitch";
 import EmptyText from "../../../../common/emptyText/emptyText";
-import Subtitle from "../../../config/components/formTitle/subtitle";
+import SubIcon from "../../../config/components/formTitle/subIcon";
 import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 
 /*
@@ -58,7 +57,7 @@ const Envi = props =>{
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
-            render:text => <Subtitle type={text}/>
+            render:text => <SubIcon type={text}/>
         },
         {
             title:"名称",
@@ -77,27 +76,30 @@ const Envi = props =>{
             render:(text,record)=>{
                 return(
                     <span className="envi-content-action">
-                        <span className="edit" onClick={()=>edit(text,record)}>
-                            <EditOutlined />
-                        </span>
-                         <Popconfirm
-                             style={{marginTop:100}}
-                             title="你确定删除吗"
-                             onConfirm={()=>deletePart(text,record)}
-                             okText="确定"
-                             cancelText="取消"
-                         >
-                             <span className="del">
-                                 <DeleteOutlined />
-                             </span>
-                         </Popconfirm>
+                        <Tooltip title="修改">
+                            <span className="edit" onClick={()=>edit(text,record)}>
+                                <EditOutlined />
+                            </span>
+                        </Tooltip>
+                        <Tooltip title="删除">
+                            <Popconfirm
+                                style={{marginTop:100}}
+                                title="你确定删除吗"
+                                onConfirm={()=>deletePart(text,record)}
+                                okText="确定"
+                                cancelText="取消"
+                            >
+                                 <span className="del">
+                                     <DeleteOutlined />
+                                 </span>
+                             </Popconfirm>
+                        </Tooltip>
                     </span>
                 )
             }
         }
     ]
 
-    // document.getElementsByName("")
     return <div className="envi home-limited">
         <div className="envi-upper">
             <BreadcrumbContent firstItem={"环境配置"} />
@@ -108,8 +110,6 @@ const Envi = props =>{
             </div>
         </div>
         <div className="envi-content">
-
-            <EnviSwitch/>
 
             <Table
                 columns={columns}

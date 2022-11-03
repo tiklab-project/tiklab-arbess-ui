@@ -64,10 +64,10 @@ const Proof = props =>{
                 {
                     testStatus ?
                         <div>
-                            <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
+                            <Spin indicator={<LoadingOutlined style={{ fontSize:25,color:"#0063FF"}} spin />} />
                         </div>
                         :
-                        <div style={{color:"#1890ff",cursor:"pointer",padding:"5px 0 0 8px"}}
+                        <div style={{color:"#0063FF",cursor:"pointer",padding:"5px 0 0 8px"}}
                              onClick={()=>testing()}
                         >
                             <ApiOutlined />

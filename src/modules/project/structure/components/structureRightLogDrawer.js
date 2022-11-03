@@ -20,6 +20,7 @@ const StructureRightLogDrawer = props =>{
         >
             <div className="drawers">
                 <ModalTitle
+                    setVisible={setVisible}
                     title={
                             <>
                                 <HlineIcon type={drawerContent.taskType}/>
@@ -27,7 +28,7 @@ const StructureRightLogDrawer = props =>{
                                 <Subtitle type={drawerContent.taskType}/>
                             </>
                     }
-                    setVisible={setVisible}
+                    isType={true}
                 />
                 <div className="drawers-body">
                     <div className="log">

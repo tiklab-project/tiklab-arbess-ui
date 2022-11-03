@@ -53,3 +53,12 @@ export function  UpdateProof (data){
         data
     })
 }
+
+// giteeOrGithub 服务授权信息
+export function FindMessage(data) {
+    return serviceLoc.request({
+        url:"/codeAuthorize/findMessage",
+        method:"post",
+        data
+    })
+}

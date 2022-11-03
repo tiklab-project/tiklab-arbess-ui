@@ -6,6 +6,7 @@ import {
     FindBranch,
     FindState,
     UpdateProof,
+    FindMessage
 } from "../api/authorize";
 
 export class AuthorizeStore {
@@ -13,6 +14,7 @@ export class AuthorizeStore {
 
     @observable storehouseList = []
     @observable branchList = []
+    @observable authorizeMes = ""
 
     @action
     findCode = async value =>{
@@ -64,6 +66,17 @@ export class AuthorizeStore {
         param.append("proofId",value.proofId)
         return await UpdateProof(param)
     }
+
+    @action
+    findMessage = async value=>{
+        const params = new FormData()
+        params.append("authId",value)
+        const data = await FindMessage(params)
+        if(data.code===0){
+            this.authorizeMes = data.data
+        }
+    }
+
 }
 
 export const AUTHORIZE_STORE = "authorizeStore"

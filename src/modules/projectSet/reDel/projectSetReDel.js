@@ -78,7 +78,7 @@ const ProjectSetReDel = props =>{
             title:"删除流水线",
             icon: <DeleteOutlined />,
             content: <div className="bottom-delete">
-                        <div style={{color:"#ff0000",paddingBottom:5}}>
+                        <div style={{color:"#ff0000",paddingBottom:5,fontSize:13}}>
                             此操作无法恢复！请慎重操作！
                         </div>
                         <Button type="primary" danger onClick={onConfirm}>

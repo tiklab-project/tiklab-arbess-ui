@@ -41,6 +41,9 @@
                             padding: 10px 10px 10px 20px;
                             cursor: pointer;
                             margin: 3px 0;
+                            &:hover{
+                                background: #EDF0F5;
+                            }
                             .list{
                                 &-title{
                                     color: #0063FF;
@@ -117,7 +120,6 @@
                                     padding-right: 20px;
                                     color: #0063FF;
                                     width: 60px;
-                                    font-size: 15px;
                                     font-weight: 600;
                                 }
                                 &_time{

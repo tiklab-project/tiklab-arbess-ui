@@ -9,7 +9,7 @@ const MessageDrawer = props =>{
 
     const {homePageStore,visible,setVisible} = props
 
-    const {findMessageDispatchItemPage,messageList,page,setPagination,pagination,
+    const {findMessageDispatchItemPage,messageList,messPage,setMessagePagination,messagePagination,
         setMessageList
     } = homePageStore
 
@@ -19,7 +19,7 @@ const MessageDrawer = props =>{
     useEffect(()=>{
         return ()=>{
             setMessageList([])
-            setPagination(1)
+            setMessagePagination(1)
         }
     },[visible])
 
@@ -27,10 +27,10 @@ const MessageDrawer = props =>{
         visible && findMessageDispatchItemPage().then(res=>{
             setIsLoading(false)
         })
-    },[visible,pagination])
+    },[visible,messagePagination])
 
     const moreMessage = () =>{
-        setPagination(pagination+1)
+        setMessagePagination(messagePagination+1)
         setIsLoading(true)
     }
 
@@ -98,10 +98,10 @@ const MessageDrawer = props =>{
 
             {
                 item.id ===1 &&
-                <span className={`messageModal-screen-tab ${page && page.total<100 ?null:"messageModal-screen-much"}`}>
+                <span className={`messageModal-screen-tab ${messPage && messPage.total<100 ?null:"messageModal-screen-much"}`}>
                     {
-                        page && page.total < 100 ?
-                            page.total
+                        messPage && messPage.total < 100 ?
+                            messPage.total
                             :
                             99
                     }
@@ -141,11 +141,11 @@ const MessageDrawer = props =>{
                             renderMessageList(messageList)
                         }
                         {
-                            messageList && messageList.length === page.total && pagination > 1&&
+                            messageList && messageList.length===messPage.total && setMessagePagination>1 &&
                             <Divider plain>没有更多了 🤐</Divider>
                         }
                         {
-                            messageList && messageList.length < page.total && !isLoading &&
+                            messageList && messageList.length<messPage.total && !isLoading &&
                             <div
                                 className="messageModal-more"
                                 onClick={()=>moreMessage()}

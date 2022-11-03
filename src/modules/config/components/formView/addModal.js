@@ -146,9 +146,11 @@ const AddModal = props =>{
 
     const {configDataStore,configStore,pipelineStore,setAddConfigVisible,addConfigVisible} = props
 
-    const {setCodeType,setBuildType,setDeployType,data,setData} = configDataStore
+    const {setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
+        data,setData
+    } = configDataStore
 
-    const {updateConfigure,setEnabledValid,enabledValid} = configStore
+    const {updateConfigure} = configStore
     const {pipelineId} = pipelineStore
 
     const [type,setType] = useState(1) // 左侧
@@ -174,14 +176,18 @@ const AddModal = props =>{
 
 
     const add = type =>{
-        setEnabledValid(!enabledValid)
         if(type>0 && type<10){
             setCodeType(type)
-        }
-        else if(type>20 && type<30){
+        }else if(type>10 && type<20){
+            setTestType(type)
+        } else if(type>20 && type<30){
             setBuildType(type)
         }else if(type>30 && type<40){
             setDeployType(type)
+        }else if(type>40 && type<50){
+            setScanType(type)
+        }else if(type>50 && type<60){
+            setGoodsType(type)
         }
         addData(type)
     }

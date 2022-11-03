@@ -2,7 +2,7 @@
     width: 100%;
     min-height: calc(100vh - 50px);
     max-height: fit-content;
-    background: var(--mf-homePage-color);
+    background: #F9F9F9;
     &-guide{
         display: flex;
         flex-direction: row;
@@ -10,7 +10,6 @@
         align-items: center;
         padding-bottom: 10px;
         &-title{
-            font-size: 15px;
             font-weight: 600;
         }
         &-ac{
@@ -52,7 +51,6 @@
                     justify-content: center;
                     align-items: center;
                     .quickIn-group-title{
-                        font-size: 15px;
                         font-weight: 600;
                     }
                     .quickIn-group-icon{
@@ -62,7 +60,7 @@
                             vertical-align: -0.55rem;
                         }
                     }
-                    &-number{
+                    .quickIn-group-number{
                         margin-left: 5px;
                         width: 20px;
                         height: 20px;

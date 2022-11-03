@@ -110,7 +110,7 @@ const Structure = props => {
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
             case 1 :
                 //成功
-                return  <CheckCircleOutlined style = {{fontSize:17,color:"#1890ff"}}/>
+                return  <CheckCircleOutlined style = {{fontSize:17,color:"#0063FF"}}/>
 
             case 2 :
                 //失败

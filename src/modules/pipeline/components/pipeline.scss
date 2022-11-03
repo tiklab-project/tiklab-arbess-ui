@@ -22,25 +22,25 @@
     &-type{
         display: flex;
         align-items: center;
+    }
+    .pipeline-tabs{
+        display: flex;
+        justify-content: start;
+        align-items: center;
         height: 50px;
         line-height: 50px;
-        margin-bottom: 10px;
-        &-group{
-            display: flex;
-            padding-right: 15px;
-        }
-        &-link{
-            margin-right: 20px;
-            cursor: pointer;
-            font-size: 15px;
-            &:hover{
-                font-weight: 600;
-            }
-        }
-        &-active{
-            font-weight: 600;
-            border-bottom: 3px solid #0063FF;
-        }
+    }
+    .pipeline-tab{
+        font-size: 13px;
+        cursor: pointer;
+        height: 50px;
+        line-height: 50px;
+        margin-right: 20px;
+    }
+    .active-tab{
+        color: #000;
+        font-weight: 600;
+        border-bottom: 2px solid #0063FF;
     }
 }
 

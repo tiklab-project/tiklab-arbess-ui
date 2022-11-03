@@ -6,7 +6,7 @@ import {getUser} from "tiklab-core-ui";
 import {Profile,WorkAppConfig} from "tiklab-eam-ui";
 import {GlobalOutlined,BellOutlined,SettingOutlined,LogoutOutlined,
     QuestionCircleOutlined,ProfileOutlined,ExpandOutlined,ScheduleOutlined,
-    WhatsAppOutlined,CaretDownOutlined
+    WhatsAppOutlined
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -17,7 +17,7 @@ const Head = props =>{
 
     const {homePageStore} = props
 
-    const {findMessageDispatchItemPage,page} = homePageStore
+    const {findMessageDispatchItemPage,messPage} = homePageStore
 
     let path = props.location.pathname
 
@@ -148,8 +148,8 @@ const Head = props =>{
                             onClick={()=>props.history.push("/index/system")}
                         />
                     </div>
-                    <div className="frame-header-message">
-                        <Badge count={page && page.total} size="small">
+                    <div className="frame-header-message" >
+                        <Badge count={messPage && messPage.total} size="small">
                             <BellOutlined
                                 className="frame-header-icon"
                                 onClick={()=>setVisible(true)}

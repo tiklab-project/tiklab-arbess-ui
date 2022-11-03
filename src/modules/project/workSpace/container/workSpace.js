@@ -13,14 +13,13 @@ const WorkSpace = props =>{
 
     const {workSpaceStore,pipelineStore,homePageStore} = props
 
-    const {findlogpage,dynaPageTotal} = homePageStore
+    const {findlogpage,dynaPageTotal,dynamicList,setDynamicList} = homePageStore
     const {pipelineCensus} = workSpaceStore
     const {pipelineId,pipeline} = pipelineStore
 
-    const [isDyna,setIsDyna] = useState(false)
-    const [dynamicList,setDynamicList] = useState([])
     const [dynaPagination,setDynaPagination] = useState(1)
     const [census,setCensus] = useState("")
+    const [isDyna,setIsDyna] = useState(false)
 
     //运行概况
     useEffect(()=>{
@@ -59,12 +58,16 @@ const WorkSpace = props =>{
             }
         }
         findlogpage(params).then(res=>{
-            if(res.code===0){
-                setDynamicList(dynamicList.concat(res.data.dataList))
-                dynaPagination > 1 && setIsDyna(false)
-            }
+            res.code===0 && dynaPagination > 1 && setIsDyna(false)
         })
     },[pipelineId,dynaPagination])
+
+    useEffect(()=>{
+        return()=>{
+            setDynamicList([])
+        }
+    },[pipelineId])
+
 
     const moreDynamic = () =>{
         setIsDyna(true)

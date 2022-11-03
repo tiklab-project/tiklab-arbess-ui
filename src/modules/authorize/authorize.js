@@ -17,10 +17,10 @@ const Authorize = props =>{
         }
         if(localStorage.getItem("code")){
             findAccessToken(params).then(res=>{
-                window.close()
                 if(res.code===0){
                     localStorage.setItem("gitProofId",res.data)
                     localStorage.removeItem("code")
+                    window.close()
                 }
             })
         }

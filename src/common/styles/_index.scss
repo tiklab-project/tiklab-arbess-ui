@@ -1,5 +1,4 @@
 @import "_color";
-@import "_normalize";
 
 ul li{
     list-style: none;
@@ -9,7 +8,27 @@ ul li{
     background-color: #0063FF !important;
 }
 
+.ant-btn[disabled]{
+    background: #f5f5f5 !important;
+}
+
+.ant-btn-dangerous{
+    background: #ff0000 !important;
+}
+
+.ant-btn-link{
+    color: #0063FF !important;
+}
+
 .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
+    background-color: #0063FF !important;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon{
+    border-color: #0063FF !important;
+}
+
+.ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title:after{
     background-color: #0063FF !important;
 }
 
@@ -44,6 +63,15 @@ ul li{
     margin-left: 5vh;
 }
 
+
+.home-limited{
+    margin: auto;
+    max-width: 1280px;
+    //min-height: calc(100vh - 55px);
+    //max-height: fit-content;
+    //background: #ffffff;
+}
+
 ::-webkit-scrollbar {
     /* 滚动条宽度， width：对应竖滚动条的宽度  height：对应横滚动条的高度*/
     background: #fff;
@@ -62,10 +90,35 @@ ul li{
     background-color: #ccc;
 }
 
-.home-limited{
-    margin: auto;
-    max-width: 1280px;
-    //min-height: calc(100vh - 55px);
-    //max-height: fit-content;
-    //background: #ffffff;
+
+:root {
+    // 色调
+    --tiklab-white: #fff;  // 主色调白
+    --tiklab-black: #000;  // 主色调黑
+    --tiklab-blue: #0063FF;  // 主色调蓝
+    --tiklab-gray-200: #ececec;  // border 的边线
+    --tiklab-gray-300: #E4E4E4;  // hover颜色
+    --tiklab-gray-400: #D9D9D9;  // 左侧导航 选中颜色
+    --tiklab-gray-500: #999; // 文字次级颜色灰色调
+    --tiklab-gray: #F9F9F9; // 主色调灰 左侧导航
+
+    // 外边距
+    --tiklab-margin: 0;
+    --tiklab-margin-10: 10px; //  页面内容边距
+    --tiklab-margin-resove-10: -10px; //  页面内容边距负值
+
+    // 内边距
+    --tiklab-padding: 0;
+    --tiklab-padding-10: 10px; //  页面内容边距
+    --tiklab-padding-resove-10: -10px; //  页面内容边距负值
+
+    // 标题
+    --tiklab-font-12: 12px; // 图文排需要的文字
+    --tiklab-font-13: 13px;  // 描述文字
+    --tiklab-font-14: 14px; // 正文
+    --tiklab-font-16: 16px; // 标题
+
+    // 字重
+    --tiklab-font-weight-bold: bold; // 标题字重
+
 }

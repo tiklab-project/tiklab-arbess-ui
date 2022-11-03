@@ -19,7 +19,7 @@ const CodeGiteeOrGithub = props =>{
 
     const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
-    const [isFindState,setIsFindState] = useState(false)
+    const [isFindState,setIsFindState] = useState(false) // 是否需要查询状态
     const [fieldName,setFieldName] = useState("")
     const [isLoading,setIsLoading] = useState(1)
 

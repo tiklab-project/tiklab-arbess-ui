@@ -20,6 +20,17 @@
                 }
             }
         }
+        &-icon{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 4px;
+            text-align: center;
+            color: black;
+            margin-right: 10px;
+            background: #e8eaf6;
+        }
         &-btn{
             display: flex;
             justify-content: flex-end;

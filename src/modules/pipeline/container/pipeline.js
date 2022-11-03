@@ -38,11 +38,11 @@ const Pipeline = props =>{
     const lis = [
         {
             id:1,
-            title:"所有",
+            title:"所有流水线",
         },
         {
             id:2,
-            title:"收藏",
+            title:"我收藏的",
         }
     ]
 
@@ -53,7 +53,7 @@ const Pipeline = props =>{
     const renderLis = lis => {
         return lis.map(item=>{
             return <div key={item.id}
-                        className={`pipeline-type-link ${listType===item.id ? "pipeline-type-active" : ""}`}
+                        className={`pipeline-tab ${listType===item.id ? "active-tab":""}`}
                         onClick={()=>onclick(item)}
                     >
                         <span>{item.title}</span>
@@ -71,14 +71,13 @@ const Pipeline = props =>{
                 </div>
             </div>
             <div className="pipeline-type">
-                <div className="pipeline-type-group ">
+                <div className="pipeline-tabs ">
                     {renderLis(lis)}
                 </div>
                 <div className="pipeline-type-input">
                     <Input
                         placeholder="流水线名称"
                         onChange={onChangeSearch}
-                        // onPressEnter={onChangeSearch}
                         prefix={<SearchOutlined />}
                         style={{ width: 280 }}
                     />

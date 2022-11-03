@@ -37,7 +37,7 @@
             }
         }
     }
-    &-state,&-history,&-collect{
+    &-state,&-history{
         cursor: pointer;
         .actions-se{
             font-size: 23px;
@@ -49,6 +49,12 @@
     &-state{
         &-running{
             padding: 10px;
+        }
+    }
+    &-collect{
+        .icon{
+            width: 25px;
+            height: 25px;
         }
     }
     &-history{
