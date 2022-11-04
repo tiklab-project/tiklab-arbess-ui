@@ -3,9 +3,7 @@
         display: flex;
         &-btn,&-newStage{
             margin-top: 2px;
-            &>button{
-                margin-right: 15px;
-            }
+            margin-right: 15px;
         }
         &-valid{
             color: red;

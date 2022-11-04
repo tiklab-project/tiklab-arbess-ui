@@ -1,23 +1,28 @@
 @import "_color";
+@import "_normalize";
 
 ul li{
     list-style: none;
 }
 
-.ant-btn-primary{
-    background-color: #0063FF !important;
-}
-
-.ant-btn[disabled]{
-    background: #f5f5f5 !important;
-}
-
-.ant-btn-dangerous{
-    background: #ff0000 !important;
-}
-
-.ant-btn-link{
-    color: #0063FF !important;
+.ant-form{
+    .ant-form-item-label{
+        &>label:not(.ant-form-item-required):after{
+            display: none;
+        }
+        .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
+            display: none;
+        }
+        .ant-form-item-required:after {
+            display: inline-block;
+            margin-right: 4px;
+            color: #ff4d4f;
+            font-size: 14px;
+            font-family: SimSun,sans-serif;
+            line-height: 1;
+            content: "*";
+        }
+    }
 }
 
 .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
@@ -63,7 +68,6 @@ ul li{
     margin-left: 5vh;
 }
 
-
 .home-limited{
     margin: auto;
     max-width: 1280px;
@@ -75,8 +79,8 @@ ul li{
 ::-webkit-scrollbar {
     /* 滚动条宽度， width：对应竖滚动条的宽度  height：对应横滚动条的高度*/
     background: #fff;
-    width: 6px;
-    height: 1px;
+    width: 10px;
+    height: 10px;
     /* background: #ccc; */
 }
 ::-webkit-scrollbar-track {/*滚动条里面轨道*/
@@ -97,28 +101,31 @@ ul li{
     --tiklab-black: #000;  // 主色调黑
     --tiklab-blue: #0063FF;  // 主色调蓝
     --tiklab-gray-200: #ececec;  // border 的边线
-    --tiklab-gray-300: #E4E4E4;  // hover颜色
-    --tiklab-gray-400: #D9D9D9;  // 左侧导航 选中颜色
+    --tiklab-gray-300: #EDF0F5;  // hover颜色
+    --tiklab-gray-400: #e3e8f0;  // 左侧导航 选中颜色
     --tiklab-gray-500: #999; // 文字次级颜色灰色调
-    --tiklab-gray: #F9F9F9; // 主色调灰 左侧导航
+    --tiklab-gray: #f7f8fa; // 主色调灰 左侧导航
 
-    // 外边距
-    --tiklab-margin: 0;
-    --tiklab-margin-10: 10px; //  页面内容边距
-    --tiklab-margin-resove-10: -10px; //  页面内容边距负值
-
-    // 内边距
-    --tiklab-padding: 0;
-    --tiklab-padding-10: 10px; //  页面内容边距
-    --tiklab-padding-resove-10: -10px; //  页面内容边距负值
+    // 边距
+    --tiklab-padding: 20px; //页面边距
+    --tiklab-padding-resove: -20px; //页面边距
+    --tiklab-padding-item: 15px; //元素间隔边距
+    --tiklab-padding-resove-item:-15px; //元素间隔边距
 
     // 标题
     --tiklab-font-12: 12px; // 图文排需要的文字
     --tiklab-font-13: 13px;  // 描述文字
     --tiklab-font-14: 14px; // 正文
+    --tiklab-font-15: 15px; // 2级标题
     --tiklab-font-16: 16px; // 标题
 
     // 字重
     --tiklab-font-weight-bold: bold; // 标题字重
 
+    --mf-main-color:#0063FF;
+    --mf-side-color:#f7f8fa;
+    --mf-select-color:#e3e8f0;
+    --mf-hover-color:#EDF0F5;
+    --mf-border-color:#ececec;
+    --mf-text-weight-bold:bold;
 }

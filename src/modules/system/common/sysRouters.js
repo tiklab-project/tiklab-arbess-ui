@@ -42,16 +42,48 @@ export const applicationRouter = [
         enCode:"E",
     },
     {
-        key:"/index/system/proof",
-        label:"凭证",
+        key:"/index/system/auth",
+        label:"认证配置",
         icon:<SwitcherOutlined />,
         enCode:"F",
     },
     {
-        key:"/index/system/identify",
-        label:"认证",
+        key:2,
+        label:"资源配置",
         icon:<FileProtectOutlined />,
         enCode:"I",
+        children:[
+            {
+                key:"/index/system/resoure/code",
+                label:"源码配置",
+                icon:<FileProtectOutlined />,
+                enCode:"I",
+            },
+            {
+                key:"/index/system/resoure/scan",
+                label:"代码扫描",
+                icon:<FileProtectOutlined />,
+                enCode:"I",
+            },
+            // {
+            //     key:"/index/system/resoure/goods",
+            //     label:"制品配置",
+            //     icon:<FileProtectOutlined />,
+            //     enCode:"I",
+            // },
+            {
+                key:"/index/system/resoure/host",
+                label:"物理主机配置",
+                icon:<FileProtectOutlined />,
+                enCode:"I",
+            },
+            // {
+            //     key:"/index/system/resoure/docker",
+            //     label:"docker配置",
+            //     icon:<FileProtectOutlined />,
+            //     enCode:"I",
+            // },
+        ]
     },
     {
         key:"/index/system/envi",
@@ -60,14 +92,14 @@ export const applicationRouter = [
         enCode:"J",
     },
     {
-        key:"2",
+        key:"3",
         label: "消息",
         icon:<SoundOutlined/>,
         enCode: "I",
         children: [
             {
                 key:"/index/system/mes",
-                label: "消息通知",
+                label: "消息类型",
                 icon:<SoundOutlined />,
                 enCode: "I",
             },
@@ -80,24 +112,10 @@ export const applicationRouter = [
         ]
     },
     {
-        key:"3",
+        key:"/index/system/myTodoTask",
         label:"待办事项",
         icon:<ProfileOutlined />,
-        enCode:"I",
-        children: [
-            {
-                key:"/index/system/task",
-                label:"待办事项",
-                icon:<ProfileOutlined />,
-                enCode:"J",
-            },
-            {
-                key:"/index/system/myTodoTask",
-                label:"我的待办事项 ",
-                icon:<ProfileOutlined />,
-                enCode:"F",
-            },
-        ]
+        enCode:"F",
     },
     {
         key:"/index/system/plugin",
@@ -106,7 +124,7 @@ export const applicationRouter = [
         enCode:"G",
     },
     {
-        key:"4",
+        key:"5",
         label:"安全",
         icon:<LayoutOutlined />,
         enCode:"I",
@@ -129,7 +147,7 @@ export const applicationRouter = [
 
 export const templateRouter = [
     {
-        key:"5",
+        key:"6",
         label:"基础数据",
         icon:<ProjectOutlined />,
         enCode:"E",
@@ -153,10 +171,16 @@ export const templateRouter = [
                 enCode:"I",
             },
             {
-                key:"/index/system/sysauth",
+                key:"/index/system/thirdAddress",
                 label:"授权管理",
                 icon:<MenuOutlined />,
                 enCode:"I",
+            },
+            {
+                key:"/index/system/task",
+                label:"待办事项",
+                icon:<MenuOutlined />,
+                enCode:"J",
             },
             {
                 key:"/index/system/todoTemp",

@@ -56,6 +56,7 @@ const FindAllProof = props =>{
     }
 
     const changeGitSelect = (value,e) =>{
+        setIsLoading(2)
         setProofId(e.key)
         const params = {
             taskType:type,
@@ -67,9 +68,15 @@ const FindAllProof = props =>{
             params.values={PipelineAuth:{authId:e.key}}
         }
         updateConfigure(params).then(res=>{
-            res.code===0 && setIsLoading(3)
+            if(res.code===0){
+                setIsLoading(3)
+            }else {
+                setIsLoading(4)
+            }
+
+            setTimeout(()=>setIsLoading(1),1000)
+
         })
-        setTimeout(()=>setIsLoading(1),1000)
     }
 
     const onFocus = () => {
@@ -94,21 +101,11 @@ const FindAllProof = props =>{
             }
             findPipelineProof(params)
         }
-        setIsLoading(2)
         setBordered(true)
     }
     
     const onBlur = () => {
-        setIsLoading(1)
         setBordered(false)
-    }
-
-    const style1 = {
-        width:420
-    }
-
-    const style2 = {
-        width:373
     }
 
     const name = type => {
@@ -142,6 +139,15 @@ const FindAllProof = props =>{
             })
         }
     }
+
+    const style1 = {
+        width:400
+    }
+
+    const style2 = {
+        width:373
+    }
+
 
     return(
         <div className="formView-inputs">

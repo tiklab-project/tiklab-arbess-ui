@@ -109,10 +109,10 @@ const Identify = props =>{
     }
 
     const typeLis = [
-        {
-            id:1,
-            title:"普通认证",
-        },
+        // {
+        //     id:1,
+        //     title:"普通认证",
+        // },
         {
             id:2,
             title:"服务认证",
@@ -125,45 +125,6 @@ const Identify = props =>{
             id:4,
             title:"第三方授权",
         },
-    ]
-
-    // 普通认证
-    const commonColumns = [
-        {
-            title:"名称",
-            dataIndex:"names",
-            key:"names",
-            render:text => names(text)
-        },
-        {
-            title:"类型",
-            dataIndex:"authType",
-            key:"authType",
-            render: text => authType(text,"私钥")
-        },
-        {
-            title:"创建人",
-            dataIndex:["user","name"],
-            key:"user",
-            render:(text,record) => user(text,record)
-        },
-        {
-            title:"权限",
-            dataIndex:"authPublic",
-            key:"authPublic",
-            render:text => authPublic(text)
-        },
-        {
-            title:"创建时间",
-            dataIndex:"createTime",
-            key:"createTime",
-        },
-        {
-            title:"操作",
-            dataIndex: "action",
-            key: "action",
-            render:(text,record) => action(text,record)
-        }
     ]
 
     // 服务认证
@@ -307,8 +268,6 @@ const Identify = props =>{
 
     const columns = activeTab =>{
         switch (activeTab) {
-            case 1:
-                return commonColumns
             case 2 :
                 return serveColumns
             case 3:
@@ -321,7 +280,7 @@ const Identify = props =>{
     return(
         <div className="identify home-limited">
             <div className="identify-upper">
-                <BreadcrumbContent firstItem={"认证"} />
+                <BreadcrumbContent firstItem={"资源配置"} />
                 <IdentifyAddBtn/>
             </div>
             <div className="identify-content">

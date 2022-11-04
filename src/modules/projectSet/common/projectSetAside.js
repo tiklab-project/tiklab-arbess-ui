@@ -35,11 +35,11 @@ const ProjectSetAside = props =>{
             label:"流水线权限",
             enCode:"DD2",
         },
-        {
-            key:`/index/task/${pipelineId}/assembly/proof`,
-            label:"流水线凭证",
-            enCode:"DD3",
-        },
+        // {
+        //     key:`/index/task/${pipelineId}/assembly/proof`,
+        //     label:"流水线凭证",
+        //     enCode:"DD3",
+        // },
     ]
     
     const renderRouter = item => {

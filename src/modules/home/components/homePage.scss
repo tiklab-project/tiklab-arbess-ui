@@ -10,7 +10,7 @@
         align-items: center;
         padding-bottom: 10px;
         &-title{
-            font-weight: 600;
+            font-weight: var(--mf-text-weight-bold);
         }
         &-ac{
             border-radius: 3px;
@@ -51,7 +51,7 @@
                     justify-content: center;
                     align-items: center;
                     .quickIn-group-title{
-                        font-weight: 600;
+                        font-weight: var(--mf-text-weight-bold);
                     }
                     .quickIn-group-icon{
                         .icon{

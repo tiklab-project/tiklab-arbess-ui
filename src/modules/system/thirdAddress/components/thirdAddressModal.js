@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import {Modal,Form,Select,Input} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 
-const AuthModal = props =>{
+const ThirdAddressModal = props =>{
 
     const {visible,setVisible,formValue,createAuthorize,updateAuthorize,fresh,setFresh} = props
 
@@ -68,7 +68,7 @@ const AuthModal = props =>{
                 autoComplete = "off"
                 initialValues={{type:2}}
             >
-                <Form.Item name="type" label="类型"
+                <Form.Item name="authType" label="类型"
                            rules={[{required:true,message:`请选择类型`}]}
                 >
                     <Select>
@@ -97,4 +97,4 @@ const AuthModal = props =>{
     )
 }
 
-export default AuthModal
+export default ThirdAddressModal

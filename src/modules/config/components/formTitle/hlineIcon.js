@@ -22,12 +22,12 @@ const HlineIcon = props =>{
 
     const renderTitle = (icon,title) =>{
         return  <>
-                    <span className="desc-icon" style={{paddingRight:8}}>
+                    <span className="desc-icon">
                         <svg className="icon" aria-hidden="true">
                             <use xlinkHref={`#icon-${icon}`} />
                         </svg>
                     </span>
-                    <span className="desc-title">
+                    <span className="desc-title"  style={{padding:"0 8px 0 5px"}}>
                         {title}
                     </span>
                 </>

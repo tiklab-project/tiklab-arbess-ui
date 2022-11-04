@@ -9,8 +9,13 @@ import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/home/store/homePageStore";
 import {SETTING_STORE,SettingStore} from "./modules/system/setting/store/settingStore";
 import {AUTHORIZE_STORE,AuthorizeStore} from "./modules/config/store/authorizeStore";
-import {AUTH_STORE,AuthStore} from "./modules/system/auth/store/authStore";
+import {AUTH_STORE,AuthStore} from "./modules/resources/auth/store/authStore";
+import {CODE_STORE,CodeStore} from "./modules/resources/code/store/codeStore";
+import {SCAN_STORE,ScanStore} from "./modules/resources/scan/store/scanStore";
+import {HOST_STORE,HostStore} from "./modules/resources/host/store/hostStore";
+import {THIRDADDRESS_STORE,ThirdAddressStore} from "./modules/system/thirdAddress/store/thirdAddressStore";
 import {IDENTIFY_STORE,IdentifyStore} from "./modules/system/identify/store/identifyStore";
+
 import {createContext} from "react";
 
 function createStores() {
@@ -26,6 +31,10 @@ function createStores() {
         [SETTING_STORE]:new SettingStore(),
         [AUTHORIZE_STORE]:new AuthorizeStore(),
         [AUTH_STORE]:new AuthStore(),
+        [CODE_STORE]:new CodeStore(),
+        [SCAN_STORE]:new ScanStore(),
+        [HOST_STORE]:new HostStore(),
+        [THIRDADDRESS_STORE]:new ThirdAddressStore(),
         [IDENTIFY_STORE]:new IdentifyStore(),
         [EAM_STORE]:new EamStore(),
     }

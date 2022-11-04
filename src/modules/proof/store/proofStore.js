@@ -6,6 +6,11 @@ import {
     FindPipelineProof,
     UpdateProof,
     DeleteProof,
+
+    CreateAuthBasic,
+    UpdateAuthBasic,
+    DeleteAuthBasic,
+    FindAllAuthBasic,
 } from "../api/proof";
 
 import {getUser} from "tiklab-core-ui";
@@ -14,6 +19,7 @@ export class ProofStore{
 
     @observable proofList = []
     @observable fresh = false
+    @observable authBasicList = []
 
     @action
     setFresh = value =>{
@@ -89,6 +95,18 @@ export class ProofStore{
         }
         return data
     }
+
+    @action
+    findAllAuthBasic = () =>{
+        FindAllAuthBasic().then(res=>{
+            if(res.code===0 && res.data){
+                this.authBasicList = res.data
+            }
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
 
 }
 

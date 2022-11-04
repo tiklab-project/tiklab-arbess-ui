@@ -3,16 +3,16 @@ import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
 import {Popconfirm,Table,Tooltip} from "antd";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import AuthModal from "../components/authModal";
-import AuthSwitch from "../components/authSwitch";
+import ThirdAddressModal from "../components/thirdAddressModal";
+import ThirdAddressSwitch from "../components/thirdAddressSwitch";
 import {inject,observer} from "mobx-react";
-import "../components/sysAuth.scss"
+import "../components/thirdAddress.scss"
 
-const SysAuth = props =>{
+const ThirdAddress = props =>{
 
-    const {authStore} = props
+    const {thirdAddressStore} = props
 
-    const {createAuthorize,updateAuthorize,deleteAuthorize,findAllAuthorize} = authStore
+    const {createAuthorize,updateAuthorize,deleteAuthorize,findAllAuthorize} = thirdAddressStore
 
     const [visible,setVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
@@ -46,8 +46,8 @@ const SysAuth = props =>{
     const columns = [
         {
             title:"类型",
-            dataIndex:"type",
-            key:"type",
+            dataIndex:"authType",
+            key:"authType",
             width: "160px",
             render:text => {
                 switch (text) {
@@ -85,7 +85,7 @@ const SysAuth = props =>{
             key:"action",
             render:(text,record)=>{
                 return(
-                    <span className="identify-content-action">
+                    <span className="sysAuth-content-action">
                         <Tooltip title="修改">
                             <span className="edit"
                                   onClick={()=>edit(text,record)}
@@ -121,17 +121,17 @@ const SysAuth = props =>{
         <div className="sysAuth home-limited">
             <BreadcrumbContent firstItem={"授权管理"} />
             <div className="sysAuth-content">
-                <AuthSwitch
+                <ThirdAddressSwitch
                     add={add}
                 />
                 <Table
                     columns={columns}
                     dataSource={authList}
-                    rowKey={record=>record.id}
+                    rowKey={record=>record.authorizedId}
                     pagination={false}
                     locale={{emptyText: <EmptyText/>}}
                 />
-                <AuthModal
+                <ThirdAddressModal
                     visible={visible}
                     setVisible={setVisible}
                     formValue={formValue}
@@ -145,4 +145,4 @@ const SysAuth = props =>{
     )
 }
 
-export default inject("authStore")(observer(SysAuth))
+export default inject("thirdAddressStore")(observer(ThirdAddress))

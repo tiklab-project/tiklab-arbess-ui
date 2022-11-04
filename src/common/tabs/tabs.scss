@@ -1,0 +1,21 @@
+.mf-tabs{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 50px;
+    line-height: 50px;
+}
+
+.mf-tab{
+    font-size: 13px;
+    cursor: pointer;
+    height: 50px;
+    line-height: 50px;
+    margin-right: 20px;
+}
+
+.mf-active-tab{
+    color: #000;
+    font-weight: var(--mf-text-weight-bold);
+    border-bottom: 2px solid #0063FF;
+}

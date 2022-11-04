@@ -51,6 +51,7 @@ const Deploy = props =>{
     }
     
     const changDeployType = value => {
+        setIsLoading(2)
         const params = {
             pipeline:{pipelineId},
             taskType:deployType,
@@ -58,15 +59,13 @@ const Deploy = props =>{
             message:"update"
         }
         updateConfigure(params).then(res=>{
-            res.code===0 && setIsLoading(3)
+            if(res.code===0){
+                setIsLoading(3)
+            }else {
+                setIsLoading(4)
+            }
+            setTimeout(()=>setIsLoading(1),1000)
         })
-
-        setTimeout(()=>setIsLoading(1),1000)
-
-    }
-
-    const onClick = () =>{
-        setIsLoading(2)
     }
 
     const onFocus = () => {
@@ -75,7 +74,6 @@ const Deploy = props =>{
 
     const onBlur = () => {
         setBordered(false)
-        setIsLoading(1)
     }
 
     return(
@@ -87,7 +85,6 @@ const Deploy = props =>{
                 >
                     <Select
                         bordered={bordered}
-                        onClick={onClick}
                         onFocus={onFocus}
                         onBlur={onBlur}
                         onChange={changDeployType}

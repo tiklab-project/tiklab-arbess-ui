@@ -13,6 +13,7 @@ const SystemAside= props =>  {
 
     useEffect(()=>{
         setSelectKey(path)
+        setExpandedTree([2])
     },[path])
 
     const select = key =>{

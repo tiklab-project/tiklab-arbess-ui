@@ -1,26 +1,31 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import "../components/proof.scss";
-import {Popconfirm,Table,Tooltip} from "antd";
+import {Popconfirm, Space, Table, Tooltip} from "antd";
 import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import UpdateProof from "../components/updateProof";
+import UpdateauthBasic from "../components/updateProof";
 import {inject,observer} from "mobx-react";
 import ProofSwitch from "../components/proofSwitch";
 import EmptyText from "../../../common/emptyText/emptyText";
-import AddProofButton from "../components/addProofButton";
+import AddauthBasicButton from "../components/addProofButton";
+import {Profile} from "tiklab-eam-ui";
 
-const Proof = props =>{
+const authBasic = props =>{
 
     const {proofStore,pipelineList,pipelineId,pipelineName} = props
-    const {updateProof,deleteProof,proofList} = proofStore
+    const {authBasicList,findAllAuthBasic} = proofStore
 
     const [formValue,setFormValue] = useState("")
     const [visible,setVisible] = useState(false)
     const [displayPart,setDisplayPart] = useState(false)
     const [isShowPipeline,setIsShowPipeline] = useState(1)
 
+    useEffect(()=>{
+        findAllAuthBasic()
+    },[])
+
     const edit = (text,record) => {
-        if(record.proofScope===2 || record.proofScope===3){
+        if(record.authBasicScope===2 || record.authBasicScope===3){
             setDisplayPart(true)
         }else {
             setDisplayPart(false)
@@ -31,20 +36,18 @@ const Proof = props =>{
     }
 
     const del = (text,record) => {
-        deleteProof(record.proofId)
+        deleteauthBasic(record.authBasicId)
     }
 
-    const columns = [
+    const commonColumns = [
         {
             title:"名称",
-            dataIndex:"proofName",
-            key:"proofName",
-            width:"200px",
-            ellipsis:true,
+            dataIndex:"names",
+            key:"names",
             render:text => {
-                return <>
-                    <span className="proof-content-icon">
-                        {text.substring(0,1).toUpperCase()}
+                return  <>
+                    <span className="authBasic-content-icon">
+                        {text && text.substring(0,1).toUpperCase()}
                     </span>
                     <span>
                         {text}
@@ -53,100 +56,112 @@ const Proof = props =>{
             }
         },
         {
-            title:"作用域",
-            dataIndex:"type",
-            key:"type",
-            render:text => {
+            title:"类型",
+            dataIndex:"authType",
+            key:"authType",
+            render: text => {
                 switch (text) {
-                    case 1:
-                        return "全局凭证"
-                    default:
-                        return "项目凭证"
+                    case 2:
+                        return "username&password"
+                    case 3:
+                        return "私钥"
                 }
             }
         },
         {
-            title   :"类型",
-            dataIndex:"proofType",
-            key:"proofType"
+            title:"创建人",
+            dataIndex:["user","name"],
+            key:"user",
+            render:(text,record) => {
+                return  <Space>
+                            <Profile />
+                            {text}
+                        </Space>
+            }
+        },
+        {
+            title:"权限",
+            dataIndex:"authPublic",
+            key:"authPublic",
+            render:text => {
+                switch (text) {
+                    case 1:
+                        return "全局"
+                    case 2:
+                        return "私有"
+                }
+            }
         },
         {
             title:"创建时间",
-            dataIndex:"proofCreateTime",
-            key:"proofCreateTime"
-        },
-        {
-            title:"备注",
-            dataIndex:"proofDescribe",
-            key:"proofDescribe",
-            width:"200px",
-            ellipsis:true,
+            dataIndex:"createTime",
+            key:"createTime",
         },
         {
             title:"操作",
-            dataIndex:"action",
-            key:"action",
-            render:(text,record)=>{
-                return(
-                    <span className="proof-content-action">
-                        <Tooltip title="修改">
-                            <span className="edit" onClick={()=>edit(text,record)}>
-                                <EditOutlined />
-                            </span>
-                        </Tooltip>
-                         <Tooltip title="删除">
-                             <Popconfirm
-                                 style={{marginTop:100}}
-                                 title="你确定删除吗"
-                                 onConfirm={()=>del(text,record)}
-                                 okText="确定"
-                                 cancelText="取消"
-                             >
-                                 <span className="del">
-                                     <DeleteOutlined />
-                                 </span>
-                             </Popconfirm>
-                         </Tooltip>
+            dataIndex: "action",
+            key: "action",
+            render:(text,record) => {
+                return <span className="authBasic-content-action">
+            <Tooltip title="修改">
+                <span className="edit"
+                      onClick={()=>edit(text,record)}
+                >
+                    <EditOutlined />
+                </span>
+            </Tooltip>
+            <Tooltip title="删除">
+                <Popconfirm
+                    style={{marginTop:100}}
+                    title="你确定删除吗"
+                    onConfirm={()=>del(text,record)}
+                    kText="确定"
+                    cancelText="取消"
+                >
+                    <span className="del">
+                        <DeleteOutlined />
                     </span>
-                )
+                </Popconfirm>
+            </Tooltip>
+        </span>
             }
         }
     ]
 
     return(
-        <div className="proof home-limited">
-            <div className="proof-upper">
+        <div className="authBasic home-limited">
+            <div className="authBasic-upper">
                 {
                     pipelineName ?
-                        <BreadcrumbContent firstItem={pipelineName} secondItem={"凭证"}/>
+                        <BreadcrumbContent firstItem={pipelineName} secondItem={"认证配置"}/>
                         :
                         <BreadcrumbContent firstItem={"凭证"}/>
                 }
-                <AddProofButton style={"primary"} pipelineList={pipelineList}/>
+                <AddauthBasicButton style={"primary"} pipelineList={pipelineList}/>
             </div>
-            <div className="proof-content">
+            <div className="authBasic-content">
                 <ProofSwitch/>
                 <Table
-                    columns={columns}
-                    dataSource={proofList}
-                    rowKey={record=>record.proofId}
+                    columns={commonColumns}
+                    dataSource={authBasicList}
+                    rowKey={record=>record.basicId}
                     pagination={false}
                     locale={{emptyText: <EmptyText/>}}
                 />
             </div>
-            <UpdateProof
-                visible={visible}
-                setVisible={setVisible}
-                formValue={formValue}
-                displayPart={displayPart}
-                pipelineList={pipelineList}
-                isShowPipeline={isShowPipeline}
-                setIsShowPipeline={setIsShowPipeline}
-                updateProof={updateProof}
-                pipelineId={pipelineId}
-            />
+            {/*<UpdateauthBasic*/}
+            {/*    visible={visible}*/}
+            {/*    setVisible={setVisible}*/}
+            {/*    formValue={formValue}*/}
+            {/*    displayPart={displayPart}*/}
+            {/*    pipelineList={pipelineList}*/}
+            {/*    isShowPipeline={isShowPipeline}*/}
+            {/*    setIsShowPipeline={setIsShowPipeline}*/}
+            {/*    updateauthBasic={updateauthBasic}*/}
+            {/*    pipelineId={pipelineId}*/}
+            {/*/>*/}
         </div>
     )
 }
 
-export default inject("proofStore")(observer(Proof))
+export default inject("proofStore")(observer(authBasic))

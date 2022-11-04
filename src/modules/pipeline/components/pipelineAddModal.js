@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import {Form,Modal,Button,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
+import Btn from "../../../common/btn/btn";
 import PipelineAddModalType from "./pipelineAddModalType";
 import PipelineName from "../../projectSet/reDel/pipelineName";
 
@@ -57,32 +58,38 @@ const PipelineAddModal = props =>{
     const modalFooter = (
         <div className="steps-action">
             {current === 0 && (
-                <Button onClick={()=>setAddPipelineVisible(false)}>
-                    取消
-                </Button>
+                <Btn
+                    onClick={()=>setAddPipelineVisible(false)}
+                    title={"取消"}
+                    isMar={true}
+                />
             )}
             {current > 0 && (
-                <Button  onClick={()=>setCurrent(current - 1)}>
-                    上一步
-                </Button>
+                <Btn
+                    onClick={()=>setCurrent(current - 1)}
+                    title={"上一步"}
+                    isMar={true}
+                />
             )}
             {current < steps.length - 1 && (
-                <Button type="primary" onClick={()=>setCurrent(current + 1)}>
-                    下一步
-                </Button>
+                <Btn
+                    type={"primary"}
+                    onClick={()=>setCurrent(current + 1)}
+                    title={"下一步"}
+                />
             )}
             {current === steps.length - 1 && (
-                <Button type="primary"
-                        onClick={() => {
-                            form
-                                .validateFields()
-                                .then((values) => {
-                                    onOk(values)
-                                })
-                        }}
-                >
-                    确认
-                </Button>
+                <Btn
+                    type={"primary"}
+                    onClick={() => {
+                        form
+                            .validateFields()
+                            .then((values) => {
+                                onOk(values)
+                            })
+                    }}
+                    title={"确认"}
+                />
             )}
         </div>
     )
@@ -92,8 +99,6 @@ const PipelineAddModal = props =>{
             visible={addPipelineVisible}
             closable={false}
             onCancel={()=>setAddPipelineVisible(false)}
-            okText="确认"
-            cancelText="取消"
             width={800}
             footer={modalFooter}
         >

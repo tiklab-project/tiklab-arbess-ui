@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Button, Dropdown, Menu, message, Spin} from "antd";
+import {Menu,message,Spin} from "antd";
 import {
     LoadingOutlined,
     BarsOutlined,
@@ -13,6 +13,7 @@ import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "./configChangeView.scss";
 import AddModal from "../formView/addModal";
+import Btn from "../../../../common/btn/btn";
 
 const ConfigChangeView = props =>{
 
@@ -82,27 +83,27 @@ const ConfigChangeView = props =>{
                     </span> : null}
                 </div>
                 <div className="changeView-newStage">
-                    <Button onClick={()=>setAddConfigVisible(true)}>
-                        <PlusOutlined />
-                        添加配置
-                    </Button>
+                    <Btn
+                        onClick={()=>setAddConfigVisible(true)}
+                        icon={<PlusOutlined />}
+                        title={"添加配置"}
+                    />
                 </div>
                 <div className="changeView-btn">
                     {
                         processVisible ?
-                            <Button type="primary">
-                                <Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />
-                            </Button>
+                            <Btn
+                                type={"primary"}
+                                title={<Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />}
+                            />
                             :
-                            <Button
-                                type="primary"
-                                form="form"
-                                onClick={()=>run()}
-                                disabled={isRun()}
-                            >
-                                <CaretRightOutlined />
-                                运行
-                            </Button>
+                            <Btn
+                                type={validLength>0?"disabled":"primary"}
+                                onClick={validLength>0?null:()=>run()}
+                                icon={<CaretRightOutlined />}
+                                title={"运行"}
+                            />
+
                     }
                 </div>
                 <div className="changeView-view">

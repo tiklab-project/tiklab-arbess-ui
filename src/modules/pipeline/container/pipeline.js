@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Button,Input} from "antd";
+import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
@@ -7,7 +7,8 @@ import "../components/pipeline.scss";
 import PipelineTable from "../components/pipelineTable";
 import PipelineAddModal from "../components/pipelineAddModal";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-
+import Btn from "../../../common/btn/btn";
+import Tabs from "../../../common/tabs/tabs";
 
 const Pipeline = props =>{
 
@@ -46,7 +47,7 @@ const Pipeline = props =>{
         }
     ]
 
-    const onclick = item => {
+    const clickType = item => {
         setListType(item.id)
     }
 
@@ -60,19 +61,31 @@ const Pipeline = props =>{
                     </div>
         })
     }
+
+    const onClick = () =>{
+        setAddPipelineVisible(true)
+    }
+
     return(
         <div className="pipeline">
             <div className="pipeline-top pipeline-flex">
                 <BreadcrumbContent firstItem={"流水线"}/>
                 <div className="pipeline-top-r">
-                    <Button type="primary" onClick={()=>setAddPipelineVisible(true)}>
-                        <PlusOutlined/> 新建流水线
-                    </Button>
+                    <Btn
+                        onClick={onClick}
+                        type={"primary"}
+                        title={"新建流水线"}
+                        icon={<PlusOutlined/>}
+                    />
                 </div>
             </div>
             <div className="pipeline-type">
                 <div className="pipeline-tabs ">
-                    {renderLis(lis)}
+                    <Tabs
+                        type={listType}
+                        tabLis={lis}
+                        onClick={clickType}
+                    />
                 </div>
                 <div className="pipeline-type-input">
                     <Input

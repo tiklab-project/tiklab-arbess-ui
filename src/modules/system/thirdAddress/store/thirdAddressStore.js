@@ -1,18 +1,18 @@
 import {action, observable} from "mobx";
 import {
-    CreateAuthorize,
-    DeleteAuthorize,
-    FindAllAuthorize,
-    UpdateAuthorize
-} from "../api/auth";
+    CreateThirdAddress,
+    DeleteThirdAddress,
+    FindAllThirdAddress,
+    UpdateThirdAddress
+} from "../api/thirdAddress";
 
-export class AuthStore{
+export class ThirdAddressStore {
 
     @observable authList = []
 
     @action
     createAuthorize = async value =>{
-        return await CreateAuthorize(value)
+        return await CreateThirdAddress(value)
     }
 
     @action
@@ -24,21 +24,21 @@ export class AuthStore{
             clientSecret:value.clientSecret,
             callbackUrl:value.callbackUrl,
         }
-        return await UpdateAuthorize(params)
+        return await UpdateThirdAddress(params)
     }
 
     @action
     deleteAuthorize = async value =>{
         const params = new FormData()
         params.append("authorizeId",value)
-        return await DeleteAuthorize(params)
+        return await DeleteThirdAddress(params)
     }
 
     @action
     findAllAuthorize = async value =>{
-        return await FindAllAuthorize(value)
+        return await FindAllThirdAddress(value)
     }
 
 }
 
-export const AUTH_STORE = "authStore"
+export const THIRDADDRESS_STORE = "thirdAddressStore"

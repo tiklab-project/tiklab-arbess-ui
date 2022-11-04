@@ -15,8 +15,9 @@ const StructureRightLogDrawer = props =>{
             onClose={()=>setVisible(false)}
             closable={false}
             maskStyle={{background:"transparent"}}
-            style={{marginTop:50,height:"calc(100vh - 50px)"}}
-            contentWrapperStyle={{width:600}}
+            contentWrapperStyle={{width:600,top:50}}
+            bodyStyle={{padding:20}}
+
         >
             <div className="drawers">
                 <ModalTitle

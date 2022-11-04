@@ -4,6 +4,7 @@ import {inject,observer} from "mobx-react";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
 import "./addModal.scss";
 import AddModalStepOne from "./addModalStepOne";
+import Btn from "../../../../common/btn/btn";
 
 const lis=[
     {
@@ -209,15 +210,28 @@ const AddModal = props =>{
         setData([...newData])
     }
 
+    const modalFooter = (
+        <div style={{marginTop:24}}>
+            <Btn
+                onClick={()=>setAddConfigVisible(false)}
+                title={"取消"}
+                isMar={true}
+            />
+            <Btn
+                onClick={onOk}
+                title={"确定"}
+                type={"primary"}
+            />
+        </div>
+    )
+
     return(
         <Modal
             visible={addConfigVisible}
             onCancel={()=>setAddConfigVisible(false)}
             closable={false}
-            okText="确定"
-            cancelText="取消"
-            onOk={()=>onOk()}
             width={800}
+            footer={modalFooter}
         >
             <ModalTitle
                 setVisible={setAddConfigVisible}

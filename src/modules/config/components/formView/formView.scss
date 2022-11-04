@@ -36,26 +36,6 @@
         .ant-form-item-label{
             min-width: 130px;
             text-align: left;
-            &>label:not(.ant-form-item-required){
-                &:after{
-                    display: none;
-                }
-            }
-            .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
-                display: none;
-            }
-            .ant-form-item-required{
-                &:after{
-                    color: #ff4d4f;
-                    font-size: 14px;
-                    font-family: SimSun,sans-serif;
-                    line-height: 1;
-                    content: "*";
-                    position: relative;
-                    top: -0.5px;
-                    margin: 0 8px 0 2px;
-                }
-            }
         }
     }
     &-anch{
@@ -89,14 +69,14 @@
             padding-top: 10px;
             &:hover{
                 background: #ffffff;
-                font-weight: 600;
+                font-weight: var(--mf-text-weight-bold);
                 border-top-left-radius:4px;
                 border-top-right-radius:4px;
             }
         }
         .anch-select{
             background: #ffffff;
-            font-weight: 600;
+            font-weight: var(--mf-text-weight-bold);
             border-top-left-radius:4px;
             border-top-right-radius:4px;
         }
@@ -122,7 +102,7 @@
             .headline{
                 &-left{
                     font-size: 16px;
-                    font-weight: 600;
+                    font-weight: var(--mf-text-weight-bold);
                 }
                 &-right{
                     .headline-changSort{

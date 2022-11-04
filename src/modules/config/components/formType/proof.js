@@ -1,8 +1,9 @@
 import React,{useState} from "react";
 import {message,Spin} from "antd";
 import {inject,observer} from "mobx-react";
-import {LoadingOutlined,ApiOutlined} from "@ant-design/icons";
+import {LoadingOutlined, ApiOutlined, PlusOutlined} from "@ant-design/icons";
 import FindAllProof from "./findAllProof";
+import Btn from "../../../../common/btn/btn";
 
 const Proof = props =>{
 
@@ -67,12 +68,12 @@ const Proof = props =>{
                             <Spin indicator={<LoadingOutlined style={{ fontSize:25,color:"#0063FF"}} spin />} />
                         </div>
                         :
-                        <div style={{color:"#0063FF",cursor:"pointer",padding:"5px 0 0 8px"}}
-                             onClick={()=>testing()}
-                        >
-                            <ApiOutlined />
-                            连接测试
-                        </div>
+                        <Btn
+                            type={"link"}
+                            title={"连接测试"}
+                            icon={<ApiOutlined />}
+                            onClick={()=>testing()}
+                        />
                 }
             </div>
         </div>

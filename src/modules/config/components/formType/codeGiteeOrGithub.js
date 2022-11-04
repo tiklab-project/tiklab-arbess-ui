@@ -5,6 +5,7 @@ import FindAllProof from "./findAllProof";
 import {inject,observer} from "mobx-react";
 import CodeGiteeOrGithubModal from "./codeGIteeOrGIthubModal";
 import SuffixStatus from "./suffixStatus";
+import Btn from "../../../../common/btn/btn";
 
 const {Option} =Select
 
@@ -60,6 +61,7 @@ const CodeGiteeOrGithub = props =>{
     }
 
     const change = (key,value)=>{
+        setIsLoading(2)
         const obj = {}
         obj[key] = value
         const params = {
@@ -69,9 +71,13 @@ const CodeGiteeOrGithub = props =>{
             message:"update"
         }
         updateConfigure(params).then(res=>{
-            res.code===0 && setIsLoading(3)
+            if(res.code===0){
+                setIsLoading(3)
+            }else {
+                setIsLoading(4)
+            }
+            setTimeout(()=>setIsLoading(1),1000)
         })
-        setTimeout(()=>setIsLoading(1),1000)
     }
 
     const onFocus = name => {
@@ -92,11 +98,9 @@ const CodeGiteeOrGithub = props =>{
                 findBranch(params)
         }
         setFieldName(name)
-        setIsLoading(2)
     }
 
     const onBlur = () => {
-        setIsLoading(1)
         setFieldName("")
     }
 
@@ -108,10 +112,12 @@ const CodeGiteeOrGithub = props =>{
         <>
             <div style={style}>
                 <FindAllProof type={codeType} {...props}/>
-                <Button className="config-details-link" type="link" onClick={()=>setVisible(true)}>
-                    <PlusOutlined />
-                    新增服务链接
-                </Button>
+                <Btn
+                    type={"link"}
+                    title={"新增服务链接"}
+                    icon={<PlusOutlined />}
+                    onClick={()=>setVisible(true)}
+                />
             </div>
             <div className="formView-inputs">
                 <Form.Item

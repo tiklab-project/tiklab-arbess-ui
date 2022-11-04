@@ -5,12 +5,13 @@ import {ExclamationCircleOutlined,DeleteOutlined,CaretDownOutlined,EditOutlined}
 import {inject,observer} from "mobx-react";
 import "./projectSetReDel.scss";
 import PipelineName from "./pipelineName";
+import Btn from "../../../common/btn/btn";
 
 const ProjectSetReDel = props =>{
 
     const {pipelineStore} = props
 
-    const {deletePipeline,updatePipeline,pipelineList,pipelineId,pipeline,setPipelineName}=pipelineStore
+    const {deletePipeline,updatePipeline,pipelineList,pipelineId,pipeline}=pipelineStore
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
 
@@ -32,18 +33,18 @@ const ProjectSetReDel = props =>{
         })
     }
 
-    const re = value =>{
-        const params={
-            pipelineId:pipelineId,
-            pipelineName:value.pipelineName
-        }
-        updatePipeline(params).then(res=>{
-            if(res.code === 0){
-                setPipelineName(value.pipelineName)
-                props.history.push(`/index/task/${pipelineId}/work`)
+    const re = () =>{
+        form.validateFields().then((value)=> {
+            const params={
+                pipelineId:pipelineId,
+                pipelineName:value.pipelineName
             }
-        }).catch(error=>{
-            console.log(error)
+            updatePipeline(params).then(res => {
+                if (res.code === 0) {
+                    pipeline.pipelineName = value.pipelineName
+                    props.history.push(`/index/task/${pipelineId}/work`)
+                }
+            })
         })
     }
 
@@ -81,9 +82,11 @@ const ProjectSetReDel = props =>{
                         <div style={{color:"#ff0000",paddingBottom:5,fontSize:13}}>
                             此操作无法恢复！请慎重操作！
                         </div>
-                        <Button type="primary" danger onClick={onConfirm}>
-                            删除
-                        </Button>
+                        <Btn
+                            onClick={onConfirm}
+                            type={"dangerous"}
+                            title={"删除"}
+                        />
                     </div>
         }
     ]

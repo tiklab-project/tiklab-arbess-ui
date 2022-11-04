@@ -5,13 +5,14 @@
     &-aside {
         height: 100%;
         width: 200px;
-        background: #F9F9F9;
+        min-width: 200px;
+        background: var(--mf-side-color);
         &-sys{
             width: 100%;
             text-align: center;
             padding-top: 10px;
             height: 45px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid #ececec;
             cursor: pointer;
         }
         &-top{
@@ -38,10 +39,10 @@
             cursor: pointer;
         }
         .system-aside-first:hover {
-            background: #EDF0F5;
+            background: var(--mf-hover-color);
         }
         .system-aside-second:hover{
-            background: #EDF0F5;
+            background: var(--mf-hover-color);
         }
 
         &-li {
@@ -51,13 +52,12 @@
             padding: 0;
         }
         &-select {
-            background: #e3e8f0;
+            background: var(--mf-select-color);
             border-left: 3px solid #0063FF;
         }
     }
     &-content{
         width: 100%;
-        height: calc(100vh - 50px);
         overflow: auto;
     }
     .icon{

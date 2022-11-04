@@ -1,7 +1,8 @@
 import React,{useEffect} from "react";
-import {Button,Form,Input,Radio} from "antd";
+import {Button,Form,Input} from "antd";
 import {LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import "./pipelineName.scss";
+import Btn from "../../../common/btn/btn";
 
 const PipelineName = props =>{
 
@@ -73,7 +74,6 @@ const PipelineName = props =>{
     return(
         <Form
             form={form}
-            onFinish={re}
             autoComplete="off"
             layout={layout}
             initialValues={re ? null:init}
@@ -117,9 +117,12 @@ const PipelineName = props =>{
             {layout === "vertical" && power}
             {re &&
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                        确定
-                    </Button>
+                    <Btn
+                        htmlType="submit"
+                        type={"primary"}
+                        title={"确定"}
+                        onClick={re}
+                    />
                 </Form.Item>
             }
         </Form>

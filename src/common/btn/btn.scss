@@ -1,0 +1,55 @@
+.mf-btn{
+    line-height: 1.5715;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 4px 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    color: rgba(0,0,0,.85);
+    background: #fff;
+    border: 1px solid #d9d9d9;
+}
+
+.mf-btn-primary{
+    background: #0063FF;
+    border-color: #0063FF;
+    color: #ffffff;
+}
+
+.mf-btn-dangerous{
+    color: #fff;
+    background: #ff0000;
+    border-color: #ff0000;;
+}
+
+.mf-btn-link{
+    color: #0063FF;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.mf-btn-disabled{
+    color: rgba(0,0,0,.25);
+    background: #f5f5f5;
+    border-color: #d9d9d9
+}
+
+.mf-btn-mar{
+    margin-right: 15px;
+}
+
+.mf-btn-icon{
+    padding-right: 10px;
+}

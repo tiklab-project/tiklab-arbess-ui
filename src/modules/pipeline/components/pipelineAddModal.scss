@@ -19,7 +19,7 @@
               display: flex;
               .li-header{
                   &-title{
-                      font-weight: 600;
+                      font-weight: var(--mf-text-weight-bold);
                       font-size: 16px
                   }
                   &-name{

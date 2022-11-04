@@ -66,6 +66,18 @@ const PipelineTable = props =>{
         }
     }
 
+    const tooltip = (statu,text) =>{
+        return <div>
+            <div>
+                构建状态：{statu}
+            </div>
+            <div>
+                构建时间：{text}
+            </div>
+        </div>
+    }
+
+
     const columns = [
         {
             title: "流水线名称",
@@ -91,36 +103,42 @@ const PipelineTable = props =>{
             }
         },
         {
-            title: "最近构建状态",
-            dataIndex: "buildStatus",
-            key: "buildStatus",
-            width:"200px",
-            render:text =>{
-                switch (text) {
-                    case 30:
-                        return  <Tooltip title="成功">
-                                    <CheckCircleOutlined style = {{fontSize:26,color:"#0063FF"}}/>
-                                </Tooltip>
-                    case 1:
-                        return <Tooltip title="失败">
-                                    <CloseCircleOutlined style = {{fontSize:26,color:"#ff0000"}}/>
-                                </Tooltip>
-                    case 0:
-                        return  <Tooltip title="待构建">
-                                    <MinusCircleOutlined style = {{fontSize:26,color:"#8795b1"}}/>
-                                </Tooltip>
-                    case 20:
-                        return  <Tooltip title="停止">
-                                    <ExclamationCircleOutlined style = {{fontSize:26}}/>
-                                </Tooltip>
-                }
-            }
-        },
-        {
-            title: "最近构建时间",
+            title: "最近构建信息",
             dataIndex: "lastBuildTime",
             key: "lastBuildTime",
-            width:"220px",
+            width:"200px",
+            render:(text,record) =>{
+                switch (record.buildStatus) {
+                    case 30:
+                        return  <Tooltip title={tooltip("成功",text)}>
+                            <Space>
+                                <CheckCircleOutlined style = {{fontSize:20,color:"#0063FF"}}/>
+                                {text}
+                            </Space>
+                        </Tooltip>
+                    case 1:
+                        return <Tooltip title={tooltip("失败",text)}>
+                            <Space>
+                                <CloseCircleOutlined style = {{fontSize:20,color:"#ff0000"}}/>
+                                {text}
+                            </Space>
+                        </Tooltip>
+                    case 0:
+                        return <Tooltip title={tooltip("待构建",text)}>
+                            <Space>
+                                <MinusCircleOutlined style = {{fontSize:20,color:"#8795b1"}}/>
+                                {text}
+                            </Space>
+                        </Tooltip>
+                    case 20:
+                        return  <Tooltip title={tooltip("停止",text)}>
+                            <Space>
+                                <ExclamationCircleOutlined style = {{fontSize:20}}/>
+                                {text}
+                            </Space>
+                        </Tooltip>
+                }
+            }
         },
         {
             title: "负责人",
@@ -143,41 +161,45 @@ const PipelineTable = props =>{
             render:(text,record)=>{
                 return(
                     <>
-                        <Tooltip title="运行" >
-                            <span className="pipelineTable-state" onClick={() =>work(record)}>
-                            {
-                                record.pipelineState === 0 ?
-                                    <PlayCircleOutlined className="actions-se"/>
-                                    :
-                                    <span className="pipelineTable-state-running">
-                                        <Running/>
-                                    </span>
-                            }
-                            </span>
-                        </Tooltip>
-                        <Tooltip title="历史">
-                            <span className="pipelineTable-history"
-                                  onClick={()=>goHistory(record)}
-                            >
-                                <ClockCircleOutlined className="actions-se"/>
-                            </span>
-                        </Tooltip>
-                        <Tooltip title="收藏">
-                            <span className="pipelineTable-collect"
-                                  onClick={()=>collectAction(record)}
-                            >
-                            {
-                                record.pipelineCollect === 0 ?
-                                    <svg className="icon" aria-hidden="true">
-                                        <use xlinkHref={`#icon-xingxing-kong`} />
-                                    </svg>
-                                    :
-                                    <svg className="icon" aria-hidden="true">
-                                        <use xlinkHref={`#icon-xingxing1`} />
-                                    </svg>
-                            }
-                            </span>
-                        </Tooltip>
+                        <Space>
+                            <Tooltip title="运行" >
+                                <span className="pipelineTable-state" onClick={() =>work(record)}>
+                                {
+                                    record.pipelineState === 0 ?
+                                        <PlayCircleOutlined className="actions-se"/>
+                                        :
+                                        <span className="pipelineTable-state-running">
+                                            <Running/>
+                                        </span>
+                                }
+                                </span>
+                            </Tooltip>
+                            <Tooltip title="历史">
+                                <span className="pipelineTable-history"
+                                      onClick={()=>goHistory(record)}
+                                >
+                                    <ClockCircleOutlined
+                                        className="actions-se"
+                                    />
+                                </span>
+                            </Tooltip>
+                            <Tooltip title="收藏">
+                                <span className="pipelineTable-collect"
+                                      onClick={()=>collectAction(record)}
+                                >
+                                {
+                                    record.pipelineCollect === 0 ?
+                                        <svg className="icon" aria-hidden="true">
+                                            <use xlinkHref={`#icon-xingxing-kong`} />
+                                        </svg>
+                                        :
+                                        <svg className="icon" aria-hidden="true">
+                                            <use xlinkHref={`#icon-xingxing1`} />
+                                        </svg>
+                                }
+                                </span>
+                            </Tooltip>
+                        </Space>
                     </>
                 )
             }

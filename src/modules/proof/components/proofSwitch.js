@@ -7,8 +7,8 @@ const ProofSwitch = props =>{
 
 
     return(
-        <div className="proof-content-switch">
-            <div className="proof-content-switch-left">
+        <div className="authBasic-content-switch">
+            <div className="authBasic-content-switch-left">
                 <div className="switch-left">
                     <Select style={{width:150}} defaultValue={1}>
                         <Select.Option value={1}>所有创建人</Select.Option>

@@ -118,9 +118,8 @@ const MessageDrawer = props =>{
             onClose={()=>setVisible(false)}
             maskStyle={{background:"transparent"}}
             visible={visible}
-            style={{top:50,height:"calc(100vh - 50px)"}}
-            contentWrapperStyle={{width:450}}
-            bodyStyle={{padding:0}}
+            contentWrapperStyle={{width:450,top:50}}
+            bodyStyle={{padding:20}}
         >
             <div className="drawers">
                 <div className="drawers-message-up">

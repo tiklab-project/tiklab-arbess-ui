@@ -103,7 +103,6 @@ const ConfigView = props =>{
             }
             else if(data.type > 30 && data.type < 40 ){
                 renderDeploy(data)
-                deploy(data)
                 setDeployType(data.type)
             }
             else if(data.type > 40 && data.type <50){
@@ -142,6 +141,7 @@ const ConfigView = props =>{
     
     // 部署
     const renderDeploy = data => {
+        deploy(data)
         const DeployFormValue={
             deployProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
             deployProofId:data.proof && data.proof.proofId

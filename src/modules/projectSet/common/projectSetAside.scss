@@ -12,7 +12,7 @@
         padding: 10px;
         cursor: pointer;
         &:hover{
-            background: #EDF0F5;
+            background: var(--mf-hover-color);
         }
         &-icon{
             padding-right: 10px;
@@ -20,8 +20,8 @@
         }
     }
     &-select{
-        background: #e3e8f0;
-        border-left: 3px solid #0063FF;
+        background: var(--mf-select-color);
+        border-left: 3px solid var(--mf-main-color);
     }
     &-content{
         width: 100%;

@@ -2,16 +2,13 @@
     padding: 10px;
     margin: auto;
     max-width: 900px;
-    min-height: calc(100vh - 55px);
-    max-height: fit-content;
-    background: #fff;
     &-ul{
-        border: 1px solid #cccccc;
+        border: 1px solid #ececec;
         border-radius: 4px;
     }
     &-li{
         &:not(:last-child){
-            border-bottom: 1px solid #e7dede;
+            border-bottom: 1px solid #ececec;
         }
         &-top{
             display: flex;

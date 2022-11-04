@@ -47,4 +47,3 @@ export function  DeleteProof(data){
 
 
 
-

@@ -2,7 +2,7 @@ import React from "react";
 import {Button,Input,Select} from "antd";
 import {SearchOutlined,PlusOutlined} from "@ant-design/icons";
 
-const AuthSwitch = props =>{
+const ThirdAddressSwitch = props =>{
 
     const {add} = props
 
@@ -34,4 +34,4 @@ const AuthSwitch = props =>{
     )
 }
 
-export default AuthSwitch
+export default ThirdAddressSwitch

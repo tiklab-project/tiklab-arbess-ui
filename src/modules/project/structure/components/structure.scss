@@ -17,10 +17,12 @@
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
-            border-right: 1px solid #ccc;
+            border-right: 1px solid #ececec;
             &-dropdown{
                 width: 100%;
-                padding: 15px;
+                padding: 10px 10px 7px;
+                border-bottom: 1px solid #ececec;
+                margin-bottom: 3px;
                 .dropdown{
                     display: flex;
                     justify-content: space-between;
@@ -48,7 +50,7 @@
                                 &-title{
                                     color: #0063FF;
                                     width: 60px;
-                                    font-weight: 600;
+                                    font-weight: var(--mf-text-weight-bold);
                                     font-size: 16px;
                                 }
                                 &-group{
@@ -72,7 +74,7 @@
                         text-align: center;
                         padding-top: 10px;
                         height: 45px;
-                        border-top: 1px solid #f0f0f0;
+                        border-top: 1px solid #ececec;
                     }
                 }
             }
@@ -120,7 +122,7 @@
                                     padding-right: 20px;
                                     color: #0063FF;
                                     width: 60px;
-                                    font-weight: 600;
+                                    font-weight: var(--mf-text-weight-bold);
                                 }
                                 &_time{
                                     padding-right: 20px;
@@ -134,7 +136,7 @@
                             padding: 10px;
                             width: 260px;
                             height: 136px;
-                            border: 1px solid #f0f0f0;
+                            border: 1px solid #ececec;
                             display: inline-block;
                             &:not(:last-child){
                                 margin-right: 20px;
@@ -169,14 +171,14 @@
         &-bottom{
             &-title{
                 font-size: 20px;
-                font-weight: 600;
+                font-weight: var(--mf-text-weight-bold);
             }
             &-outLog{
                 white-space: pre-wrap;
                 height: 58vh;
                 overflow-y: auto;
                 overflow-x: hidden;
-                background: #2F2F2F;
+                background: #000;
                 color: #fff;
                 padding: 10px 10px 20px;
             }
