@@ -1,6 +1,6 @@
 import React from "react";
 import Inputs from "./inputs";
-import FindAllProof from "./findAllProof";
+import FindAuth from "./findAuth";
 import {inject,observer} from "mobx-react";
 
 const GoodsNexus = props => {
@@ -45,7 +45,7 @@ const GoodsNexus = props => {
                 mode={goodsType}
                 isValid={true}
             />
-            <FindAllProof
+            <FindAuth
                 type={goodsType}
             />
         </>

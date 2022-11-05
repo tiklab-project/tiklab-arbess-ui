@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import {Form,Modal,Button,Steps,message} from "antd";
+import React, {useEffect, useState} from "react";
+import {Form,Modal,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import Btn from "../../../common/btn/btn";
@@ -15,8 +15,27 @@ const PipelineAddModal = props =>{
     const [current,setCurrent] = useState(0)
     const [templateType,setTemplateType] = useState(1)
     const [powerType,setPowerType] = useState(1)
+    const [height,setHeight] = useState(0)
 
     const [form] = Form.useForm()
+
+    useEffect(()=>{
+        autoHeight()
+    },[height])
+
+
+    const autoHeight = () =>{
+        let winHeight=0
+        if (window.innerHeight)
+            winHeight = window.innerHeight-200
+        else if ((document.body) && (document.body.clientHeight))
+            winHeight = document.body.clientHeight-200
+        if (document.documentElement && document.documentElement.clientHeight)
+            winHeight = document.documentElement.clientHeight-200
+        setHeight(winHeight)
+        window.onresize=autoHeight
+    }
+
 
     const onOk = value => {
         const params={
@@ -56,7 +75,7 @@ const PipelineAddModal = props =>{
 
     // 表单底部内容
     const modalFooter = (
-        <div className="steps-action">
+        <>
             {current === 0 && (
                 <Btn
                     onClick={()=>setAddPipelineVisible(false)}
@@ -91,7 +110,7 @@ const PipelineAddModal = props =>{
                     title={"确认"}
                 />
             )}
-        </div>
+        </>
     )
 
     return(
@@ -101,6 +120,7 @@ const PipelineAddModal = props =>{
             onCancel={()=>setAddPipelineVisible(false)}
             width={800}
             footer={modalFooter}
+            style={{height:height}}
         >
             <div className="pipelineAddModal">
                 <ModalTitle
@@ -114,7 +134,10 @@ const PipelineAddModal = props =>{
                         ))}
                     </Steps>
                 </div>
-                <div className="steps-content">{steps[current].content}</div>
+                <div className="steps-content"
+                >
+                    {steps[current].content}
+                </div>
             </div>
         </Modal>
     )

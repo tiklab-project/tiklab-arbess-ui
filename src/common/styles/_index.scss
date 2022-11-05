@@ -71,9 +71,7 @@ ul li{
 .home-limited{
     margin: auto;
     max-width: 1280px;
-    //min-height: calc(100vh - 55px);
-    //max-height: fit-content;
-    //background: #ffffff;
+    padding: var(--mf-padding);
 }
 
 ::-webkit-scrollbar {
@@ -128,4 +126,8 @@ ul li{
     --mf-hover-color:#EDF0F5;
     --mf-border-color:#ececec;
     --mf-text-weight-bold:bold;
+    --mf-padding:20px;
+    --mf-padding-item:15px;
+
+
 }

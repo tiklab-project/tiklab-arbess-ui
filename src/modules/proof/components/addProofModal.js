@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import moment from "../../../common/moment/moment";
+import moment from "../../../common/client/client";
 import {Modal,Form,Input,Select,Checkbox,Row,Col} from "antd";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 

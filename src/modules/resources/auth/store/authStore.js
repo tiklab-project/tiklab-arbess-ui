@@ -52,11 +52,11 @@ export class AuthStore {
 
     @action
     findAllAuth = async value=>{
-        FindAllAuth().then(res=>{
-            if(res.code===0 && res.data){
-                this.authList = res.data
-            }
-        })
+        const data = await FindAllAuth()
+        if(data.code===0 && data.data){
+            this.authList = data.data
+        }
+        return data
     }
 
 }

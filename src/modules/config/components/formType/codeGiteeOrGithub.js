@@ -1,26 +1,19 @@
 import React,{useState,useEffect} from "react";
-import {Button,Form,message,Select} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
-import FindAllProof from "./findAllProof";
+import {Form,Select} from "antd";
+import FindAuth from "./findAuth";
 import {inject,observer} from "mobx-react";
-import CodeGiteeOrGithubModal from "./codeGIteeOrGIthubModal";
 import SuffixStatus from "./suffixStatus";
-import Btn from "../../../../common/btn/btn";
-
-const {Option} =Select
 
 const CodeGiteeOrGithub = props =>{
 
     const {configDataStore,configStore,pipelineStore,authorizeStore} = props
 
-    const {findCode,findState,updateProof,findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
+    const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
     const {formInitialValues,codeType} = configDataStore
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
 
-    const [visible,setVisible] = useState(false)
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
-    const [isFindState,setIsFindState] = useState(false) // 是否需要查询状态
     const [fieldName,setFieldName] = useState("")
     const [isLoading,setIsLoading] = useState(1)
 
@@ -29,25 +22,6 @@ const CodeGiteeOrGithub = props =>{
             setProhibited(false)
         }
     },[formInitialValues])
-
-    // 授权过程--失败或成功提示
-    let interval = null
-    useEffect(()=>{
-        if(visible){
-            interval = setInterval(()=>findState().then(res=>warn(res.data)),1000)
-        }else clearInterval(interval)
-        return ()=> clearInterval(interval)
-    },[visible,isFindState])
-    
-    const warn = data => {
-        if(data === 1){
-            clearInterval(interval)
-            message.success({content:"授权成功", className:"message"})
-        }else if(data === 2){
-            message.error({content:"拒绝授权或授权失败", className:"message"})
-            clearInterval(interval)
-        }
-    }
 
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
@@ -84,7 +58,7 @@ const CodeGiteeOrGithub = props =>{
         switch (name) {
             case "codeName":
                 const param = {
-                    proofId:formInitialValues && formInitialValues.gitProofId,
+                    authId:formInitialValues && formInitialValues.authId,
                     type:codeType
                 }
                 findAllStorehouse(param)
@@ -92,7 +66,7 @@ const CodeGiteeOrGithub = props =>{
             default:
                 const params ={
                     houseName:formInitialValues && formInitialValues.codeName,
-                    proofId:formInitialValues && formInitialValues.gitProofId,
+                    authId:formInitialValues && formInitialValues.authId,
                     type:codeType
                 }
                 findBranch(params)
@@ -110,15 +84,7 @@ const CodeGiteeOrGithub = props =>{
 
     return(
         <>
-            <div style={style}>
-                <FindAllProof type={codeType} {...props}/>
-                <Btn
-                    type={"link"}
-                    title={"新增服务链接"}
-                    icon={<PlusOutlined />}
-                    onClick={()=>setVisible(true)}
-                />
-            </div>
+            <FindAuth type={codeType} {...props}/>
             <div className="formView-inputs">
                 <Form.Item
                     label="仓库"
@@ -134,7 +100,7 @@ const CodeGiteeOrGithub = props =>{
                     >
                         {
                             storehouseList && storehouseList.map(item=>{
-                                return <Option key={item} value={item}> {item} </Option>
+                                return <Select.Option key={item} value={item}> {item} </Select.Option>
                             })
                         }
                     </Select>
@@ -157,7 +123,7 @@ const CodeGiteeOrGithub = props =>{
                     >
                         {
                             branchList && branchList.map(item=>{
-                                return  <Option key={item} value={item}> {item} </Option>
+                                return  <Select.Option key={item} value={item}> {item} </Select.Option>
                             })
                         }
                     </Select>
@@ -169,17 +135,6 @@ const CodeGiteeOrGithub = props =>{
                     }
                 </div>
             </div>
-
-            <CodeGiteeOrGithubModal
-                visible={visible}
-                setVisible={setVisible}
-                formInitialValues={formInitialValues}
-                codeType={codeType}
-                findCode={findCode}
-                setIsFindState={setIsFindState}
-                isFindState={isFindState}
-                updateProof={updateProof}
-            />
         </>
     )
 }

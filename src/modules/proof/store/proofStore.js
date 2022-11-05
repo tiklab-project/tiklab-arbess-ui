@@ -6,11 +6,6 @@ import {
     FindPipelineProof,
     UpdateProof,
     DeleteProof,
-
-    CreateAuthBasic,
-    UpdateAuthBasic,
-    DeleteAuthBasic,
-    FindAllAuthBasic,
 } from "../api/proof";
 
 import {getUser} from "tiklab-core-ui";

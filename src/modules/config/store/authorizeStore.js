@@ -5,8 +5,6 @@ import {
     FindAllStorehouse,
     FindBranch,
     FindState,
-    UpdateProof,
-    FindMessage
 } from "../api/authorize";
 
 export class AuthorizeStore {
@@ -14,7 +12,6 @@ export class AuthorizeStore {
 
     @observable storehouseList = []
     @observable branchList = []
-    @observable authorizeMes = ""
 
     @action
     findCode = async value =>{
@@ -34,7 +31,7 @@ export class AuthorizeStore {
     @action
     findAllStorehouse = async value =>{
         const params = new FormData()
-        params.append("proofId",value.proofId)
+        params.append("authId",value.authId)
         params.append("type",value.type)
         const data = await FindAllStorehouse(params)
         if(data.code===0 && data.data){
@@ -46,7 +43,7 @@ export class AuthorizeStore {
     findBranch = async value =>{
         const params = new FormData()
         params.append("type",value.type)
-        params.append("proofId",value.proofId)
+        params.append("authId",value.authId)
         params.append("houseName",value.houseName)
         const data =  await FindBranch(params)
         if(data.code===0 && data.data){
@@ -57,24 +54,6 @@ export class AuthorizeStore {
     @action
     findState = async ()=>{
         return await FindState()
-    }
-
-    @action
-    updateProof = async value=>{
-        const param = new FormData()
-        param.append("name",value.name)
-        param.append("proofId",value.proofId)
-        return await UpdateProof(param)
-    }
-
-    @action
-    findMessage = async value=>{
-        const params = new FormData()
-        params.append("authId",value)
-        const data = await FindMessage(params)
-        if(data.code===0){
-            this.authorizeMes = data.data
-        }
     }
 
 }

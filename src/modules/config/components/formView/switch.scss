@@ -8,7 +8,7 @@
       -ms-flex-wrap: wrap;
       flex-wrap: wrap;
       height: auto;
-      padding-top: 15px;
+      padding-top: var(--mf-padding-item);
       &-title{
          min-width: 130px;
          height: 40px;

@@ -95,6 +95,7 @@ const StructureRightItem = props =>{
                 title={`# ${modeData && modeData.findNumber}`}
                 action={del}
                 actionTitle={"删除"}
+                icon={<ExclamationCircleOutlined/>}
             />
             {rightDetails(rightFlowData)}
             {logRunLog()}

@@ -52,10 +52,10 @@ const Project= (props)=>{
         data && data.map((item,index)=>{
             const form = `formView_${index+1}`
             const iId = document.getElementById(form)
-            const lastId = document.getElementById(form).previousSibling
+            const lastId = document.getElementById(form) && document.getElementById(form).previousSibling
             const iTop = iId && iId.offsetTop
             const lastTop =lastId && lastId.offsetTop
-            if(scrollTop > lastTop && scrollTop < iTop ){
+            if(scrollTop>lastTop && scrollTop<iTop ){
                 setOpt(index+1)
             }
         })

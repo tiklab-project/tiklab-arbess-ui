@@ -1,23 +1,29 @@
-import React,{useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
 import {Popconfirm,Space,Table,Tooltip} from "antd";
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import Tabs from "../../../../common/tabs/tabs";
 import HostBtn from "../component/hostBtn";
 import "../component/host.scss";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import {Profile} from "tiklab-eam-ui";
 
-const Scan = props =>{
+const Host = props =>{
 
     const {hostStore} = props
 
     const {findAllAuthHost,hostList,fresh,setModalVisible,setFormValue,deleteAuthHost} = hostStore
 
+    const [activeTab,setActiveTab] = useState(1)
+
     useEffect(()=>{
         findAllAuthHost()
-    },[fresh])
+    },[fresh,activeTab])
 
+    const clickTab = item =>{
+        setActiveTab(item.id)
+    }
 
     const edit = (text,record) => {
         setModalVisible(true)
@@ -27,6 +33,22 @@ const Scan = props =>{
     const del = (text,record) =>{
         deleteAuthHost(record.hostId)
     }
+
+
+    const lis = [
+        {
+            id:1,
+            title:"普通"
+        },
+        {
+            id:2,
+            title:"aliyun"
+        },
+        {
+            id:3,
+            title:"腾讯云主机"
+        },
+    ]
 
     const column = [
         {
@@ -55,14 +77,14 @@ const Scan = props =>{
             key: "port",
         },
         {
-            title:"类型",
+            title:"认证类型",
             dataIndex:"authType",
             key:"authType",
             render: text => {
                 switch (text) {
-                    case 2:
+                    case 1:
                         return "username&password"
-                    case 3:
+                    case 2:
                         return "私钥"
                 }
             }
@@ -73,9 +95,9 @@ const Scan = props =>{
             key:"user",
             render:(text,record) => {
                 return  <Space>
-                    <Profile />
-                    {text}
-                </Space>
+                            <Profile />
+                            {text}
+                        </Space>
             }
         },
         {
@@ -134,6 +156,11 @@ const Scan = props =>{
                 <HostBtn/>
             </div>
             <div className="code-content">
+                <Tabs
+                    tabLis={lis}
+                    type={activeTab}
+                    onClick={clickTab}
+                />
                 <Table
                     columns={column}
                     dataSource={hostList}
@@ -146,4 +173,4 @@ const Scan = props =>{
     )
 }
 
-export default inject("hostStore")(observer(Scan))
+export default inject("hostStore")(observer(Host))

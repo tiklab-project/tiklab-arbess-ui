@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {Modal,message} from "antd";
 import {inject,observer} from "mobx-react";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
@@ -120,27 +120,6 @@ const lis=[
             },
         ]
     },
-    // {
-    //     id:7,
-    //     title: "消息通知",
-    //     desc:[
-    //         {
-    //             type:71,
-    //             tel:"站内信",
-    //             icon:"xuniji"
-    //         },
-    //         {
-    //             type:72,
-    //             tel:"钉钉",
-    //             icon:"xuniji"
-    //         },
-    //         {
-    //             type:73,
-    //             tel:"企业微信",
-    //             icon:"xuniji"
-    //         },
-    //     ]
-    // },
 ]
 
 const AddModal = props =>{
@@ -156,6 +135,24 @@ const AddModal = props =>{
 
     const [type,setType] = useState(1) // 左侧
     const [initType,setInitType] = useState(1)  // 右侧
+    const [height,setHeight] = useState(0)
+
+    useEffect(()=>{
+        autoHeight()
+    },[height])
+
+
+    const autoHeight = () =>{
+        let winHeight=0
+        if (window.innerHeight)
+            winHeight = window.innerHeight-200
+        else if ((document.body) && (document.body.clientHeight))
+            winHeight = document.body.clientHeight-200
+        if (document.documentElement && document.documentElement.clientHeight)
+            winHeight = document.documentElement.clientHeight-200
+        setHeight(winHeight)
+        window.onresize=autoHeight
+    }
     
     // 保存
     const onOk = () => {
@@ -211,7 +208,7 @@ const AddModal = props =>{
     }
 
     const modalFooter = (
-        <div style={{marginTop:24}}>
+        <>
             <Btn
                 onClick={()=>setAddConfigVisible(false)}
                 title={"取消"}
@@ -222,7 +219,7 @@ const AddModal = props =>{
                 title={"确定"}
                 type={"primary"}
             />
-        </div>
+        </>
     )
 
     return(
@@ -232,6 +229,7 @@ const AddModal = props =>{
             closable={false}
             width={800}
             footer={modalFooter}
+            style={{height:height}}
         >
             <ModalTitle
                 setVisible={setAddConfigVisible}

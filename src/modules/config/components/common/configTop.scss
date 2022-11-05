@@ -7,10 +7,10 @@
     }
     &-top{
         position: fixed;
-        z-index: 88;
+        z-index: 9;
         background: #fff;
         width: 100%;
-        padding: 8px 15px 4px;
+        padding: var(--mf-padding) var(--mf-padding) 0;
         font-size: 16px;
         min-width: 510px;
         &-content{

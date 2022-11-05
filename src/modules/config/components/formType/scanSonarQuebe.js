@@ -1,6 +1,6 @@
 import React from "react";
 import Inputs from "./inputs";
-import FindAllProof from "./findAllProof";
+import FindAuth from "./findAuth";
 
 const ScanSonarQuebe = props =>{
 
@@ -13,7 +13,7 @@ const ScanSonarQuebe = props =>{
                 mode={41}
                 isValid={true}
             />
-            <FindAllProof
+            <FindAuth
                 type={41}
             />
         </>

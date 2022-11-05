@@ -1,51 +1,14 @@
 .formView{
-    padding: 116px 10px 30px;
-    .formView-validateFields{
-        border: 1px solid #ff0000;
-    }
-    .formView-inputs{
-        display: flex;
-        &-suffix{
-            padding: 4px 0 0 5px;
-        }
-    }
-    .ant-form{
-        .ant-input{
-            width: 500px;
-            &:hover{
-                background: #f2f2f2;
-            }
-        }
-        .ant-select{
-            width: 500px;
-            &:hover{
-                background: #f2f2f2;
-            }
-        }
-        .ant-input-group-addon{
-            width: 30px;
-        }
-        .ant-input-group{
-            .ant-input{
-                width: 470px;
-            }
-        }
-        .ant-input-group-addon{
-            border: none;
-        }
-        .ant-form-item-label{
-            min-width: 130px;
-            text-align: left;
-        }
-    }
+    padding: 130px var(--mf-padding) var(--mf-padding);
     &-anch{
         position: fixed;
         z-index:10;
         width: 100%;
-        padding: 0 10px;
+        padding: var(--mf-padding-item) var(--mf-padding);
+        background: #ffffff;
         &-limite{
             max-width: 1150px;
-            margin: 63px auto 0;
+            margin: 56px auto 0;
         }
         &-content{
             display: flex;
@@ -82,7 +45,6 @@
         }
     }
     &-content{
-        margin-top: 5px;
         .code-handle{
             margin-bottom: 25px;
         }
@@ -120,6 +82,44 @@
                     }
                 }
             }
+        }
+    }
+    .formView-validateFields{
+        border: 1px solid #ff0000;
+    }
+    .formView-inputs{
+        display: flex;
+        &-suffix{
+            padding: 4px 0 0 5px;
+        }
+    }
+    .ant-form{
+        .ant-input{
+            width: 500px;
+            &:hover{
+                background: #f2f2f2;
+            }
+        }
+        .ant-select{
+            width: 500px;
+            &:hover{
+                background: #f2f2f2;
+            }
+        }
+        .ant-input-group-addon{
+            width: 30px;
+        }
+        .ant-input-group{
+            .ant-input{
+                width: 470px;
+            }
+        }
+        .ant-input-group-addon{
+            border: none;
+        }
+        .ant-form-item-label{
+            min-width: 130px;
+            text-align: left;
         }
     }
 }

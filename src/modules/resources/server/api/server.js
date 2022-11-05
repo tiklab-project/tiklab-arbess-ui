@@ -1,34 +1,33 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
-export function CreateAuth(data) {
+export function CreateAuthServer(data) {
     return serviceLoc.request({
-        url:"/pipelineAuth/createAuth",
+        url:"/authServer/createAuthServer",
         method:"post",
         data
     })
 }
 
-export function UpdateAuth(data) {
+export function DeleteAuthServer(data) {
     return serviceLoc.request({
-        url:"/pipelineAuth/updateAuth",
+        url:"/authServer/deleteAuthServer",
         method:"post",
         data
     })
 }
 
-export function DeleteAuth(data) {
+export function UpdateAuthServer(data) {
     return serviceLoc.request({
-        url:"/pipelineAuth/deleteAuth",
+        url:"/authServer/updateAuthServer",
         method:"post",
         data
     })
 }
 
-export function FindAllAuth(data) {
+export function FindAllAuthServerList(data) {
     return serviceLoc.request({
-        url:"/pipelineAuth/findAllAuth",
+        url:"/authServer/findAllAuthServerList",
         method:"post",
         data
     })
 }
-

@@ -1,11 +1,10 @@
-.code{
-    padding: 10px;
+.server{
     &-upper{
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    .code-content-icon{
+    .server-content-icon{
         display: inline-block;
         width: 30px;
         height: 30px;
@@ -16,7 +15,7 @@
         background: #cad2f3;
         margin-right: 10px;
     }
-    .code-content-action{
+    .server-content-action{
         .edit{
             cursor: pointer;
             margin-right: 15px;

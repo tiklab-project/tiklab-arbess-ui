@@ -24,7 +24,6 @@ const ConfigView = props =>{
 
     const pluginStore = useSelector(state =>state.pluginStore)
 
-
     useEffect(()=>{
         pluginStore && pluginStore.map(item=>{
             if(item.id==="gui"){setIsPlugin(true)}
@@ -89,7 +88,7 @@ const ConfigView = props =>{
                 dataId:i,
                 dataType:data.type,
             })
-            if(data.type < 6){
+            if(data.type < 10){
                 renderCodeData(data)
                 setCodeType(data.type)
             }
@@ -122,9 +121,8 @@ const ConfigView = props =>{
     // 源码管理
     const renderCodeData = data => {
         const codeFormValue = {
-            gitProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
-            proofName:data.proof && data.proof.proofName,
-            gitProofId:data.proof && data.proof.proofId
+            gitAuthName:data.auth && data.auth.name,
+            gitAuthId:data.auth && data.auth.authId
         }
         Object.assign(formInitialValues,codeFormValue)
     }
@@ -143,8 +141,8 @@ const ConfigView = props =>{
     const renderDeploy = data => {
         deploy(data)
         const DeployFormValue={
-            deployProofName:data.proof ? data.proof && data.proof.proofName+ "(" + data.proof.proofType + ")":"无" ,
-            deployProofId:data.proof && data.proof.proofId
+            deployAuthName:data.auth && data.auth.name,
+            deployAuthId:data.auth && data.auth.authId
         }
         Object.assign(formInitialValues,DeployFormValue)
     }
@@ -161,8 +159,8 @@ const ConfigView = props =>{
     // 代码扫描
     const renderScan = data => {
         const scanFormValue={
-            scanProofId:data.pipelineAuth && data.pipelineAuth.authId,
-            scanProofName:data.pipelineAuth && data.pipelineAuth.name
+            scanAuthName:data.auth && data.auth.name,
+            scanAuthId:data.auth && data.auth.authId
         }
         Object.assign(formInitialValues,scanFormValue)
     }
@@ -170,8 +168,8 @@ const ConfigView = props =>{
     // 推动制品
     const renderGoods = data => {
         const goodsFormValue={
-            goodsProofId:data.pipelineAuth && data.pipelineAuth.authId,
-            goodsProofName:data.pipelineAuth && data.pipelineAuth.name
+            goodsAuthName:data.auth && data.auth.name,
+            goodsAuthId:data.auth && data.auth.authId
         }
         Object.assign(formInitialValues,goodsFormValue)
     }
@@ -192,7 +190,7 @@ const ConfigView = props =>{
                 break
             case 31:
             case 32:
-                formInitialValues.deployProofName = null
+                formInitialValues.deployAuthName = null
                 formInitialValues.sourceAddress = null
                 formInitialValues.sshIp = null
                 formInitialValues.sshPort = null
@@ -202,14 +200,15 @@ const ConfigView = props =>{
                 formInitialValues.startPort = null
                 formInitialValues.mappingPort = null
                 formInitialValues.deployType = 0
-                formInitialValues.deployProofId = 0
+                formInitialValues.deployAuthId = 0
                 setDeployType("")
                 setVirShellBlock("")
                 setDeployShellBlock("")
                 setDeployOrderShellBlock("")
                 break
             case 41:
-                formInitialValues.scanProofName = null
+                formInitialValues.scanAuthName = null
+                formInitialValues.scanAuthId = null
                 formInitialValues.projectName = null
                 setScanType("")
                 break
@@ -224,8 +223,8 @@ const ConfigView = props =>{
             default:
                 formInitialValues.codeName = null
                 formInitialValues.codeBranch = null
-                formInitialValues.gitProofName = null
-                formInitialValues.proofName = null
+                formInitialValues.gitAuthName = null
+                formInitialValues.gitAuthId = null
                 setCodeType("")
         }
         setFormInitialValues({...formInitialValues})

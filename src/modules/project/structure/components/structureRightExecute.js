@@ -1,5 +1,6 @@
 import React,{useState,Fragment} from "react";
 import {getUser} from "tiklab-core-ui";
+import {InfoOutlined} from "@ant-design/icons";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
 
@@ -109,6 +110,7 @@ const StructureRightExecute = props => {
                 title={"运行中"}
                 action={cease}
                 actionTitle={"停止"}
+                icon={<InfoOutlined/>}
             />
             {executeDetails(rightExecuteData)}
             {logRunLog()}

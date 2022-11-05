@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import {message,Spin} from "antd";
 import {inject,observer} from "mobx-react";
-import {LoadingOutlined, ApiOutlined, PlusOutlined} from "@ant-design/icons";
-import FindAllProof from "./findAllProof";
+import {LoadingOutlined,ApiOutlined} from "@ant-design/icons";
+import FindAuth from "./findAuth";
 import Btn from "../../../../common/btn/btn";
 
 const Proof = props =>{
@@ -60,7 +60,7 @@ const Proof = props =>{
 
     return (
         <div style={style}>
-            <FindAllProof type={allProofType}/>
+            <FindAuth type={allProofType}/>
             <div>
                 {
                     testStatus ?

@@ -34,18 +34,14 @@ const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 资源配置 */
 const Auth=AsyncComponent(()=>import("./modules/resources/auth/container/auth"))
-const Code=AsyncComponent(()=>import("./modules/resources/code/container/code"))
-const Scan=AsyncComponent(()=>import("./modules/resources/scan/container/scan"))
-const Goods=AsyncComponent(()=>import("./modules/resources/goods/container/goods"))
 const Host=AsyncComponent(()=>import("./modules/resources/host/container/host"))
-const Docker=AsyncComponent(()=>import("./modules/resources/docker/container/docker"))
+const Server=AsyncComponent(()=>import("./modules/resources/server/container/server"))
 
 /* 系统设置 -- 列表 */
 const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 
 const Envi=AsyncComponent(()=>import("./modules/system/setting/container/envi"))
 const Info=AsyncComponent(()=>import("./modules/system/setting/container/info"))
-const Identify=AsyncComponent(()=>import("./modules/system/identify/container/identify"))
 const ThirdAddress=AsyncComponent(()=>import("./modules/system/thirdAddress/cotainer/thirdAddress"))
 
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
@@ -55,7 +51,6 @@ const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRol
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 
-const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/userMessage"))
 const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
 const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messageTemplate"))
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
@@ -110,10 +105,6 @@ const routers=[
                 path:"/index/pipeline",
                 component:Pipeline,
                 exact: true,
-            },
-            {
-                path:"/index/userMessage",
-                component: UserMessageContent,
             },
             {
                 path:"/index/authorize",
@@ -192,24 +183,12 @@ const routers=[
                         component: Auth,
                     },
                     {
-                        path: "/index/system/resoure/code",
-                        component: Code
-                    },
-                    {
-                        path: "/index/system/resoure/scan",
-                        component: Scan
-                    },
-                    {
-                        path: "/index/system/resoure/goods",
-                        component: Goods
+                        path: "/index/system/resoure/server",
+                        component: Server
                     },
                     {
                         path: "/index/system/resoure/host",
                         component: Host
-                    },
-                    {
-                        path: "/index/system/resoure/docker",
-                        component: Docker
                     },
                     {
                         path:"/index/system/info",
@@ -218,10 +197,6 @@ const routers=[
                     {
                         path:"/index/system/thirdAddress",
                         component: ThirdAddress,
-                    },
-                    {
-                        path:"/index/system/identify",
-                        component: Identify,
                     },
                     {
                         path:"/index/system/envi",
@@ -272,7 +247,7 @@ const routers=[
                         component: MessageType,
                     },
                     {
-                        path:"/index/system/mes",
+                        path:"/index/system/mes/send",
                         component: MessageSendType,
                     },
                     {

@@ -20,16 +20,16 @@
         z-index: 88;
         background: #fff;
         width: 100%;
-        padding: 8px 15px 4px;
         font-size: 16px;
         min-width: 400px;
+        padding: var(--mf-padding) var(--mf-padding) 0;
     }
     &-top-limited{
         max-width: 1150px;
         margin: auto;
     }
     &-content{
-        padding: 55px 20px 0;
+        padding: 55px var(--mf-padding) 0;
     }
     .workSpace-census{
         padding-top: 10px;

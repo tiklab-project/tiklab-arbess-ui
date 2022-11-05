@@ -1,5 +1,4 @@
 .codeOrNewStage{
-    margin-top: 16px;
     border-radius: 2px;
     &-form{
         height: 600px;
@@ -21,6 +20,7 @@
     }
     &-stepOne{
         border: 1px solid #ececec;
+        height: calc(100% - 120px);
         &-left{
             border-right: 1px solid #ececec;
             .modalLeft{
@@ -43,7 +43,7 @@
         &-right{
             .modalRight{
                 padding: 20px;
-                height: 600px;
+                height: 100%;
                 overflow: auto;
             }
             .group{

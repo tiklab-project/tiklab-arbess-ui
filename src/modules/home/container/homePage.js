@@ -62,7 +62,7 @@ const HomePage = props =>{
 
     return(
         <div className="homePage">
-            <div className="homePage-content">
+            <div className="homePage-content home-limited">
                 <div className="homePage-content-top">
                     <QuickIn
                         {...props}

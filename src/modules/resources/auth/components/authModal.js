@@ -75,7 +75,7 @@ const AuthModal = props =>{
                 >
                     <Input/>
                 </Form.Item>
-                <AuthType isWay={true}/>
+                <AuthType/>
             </Form>
         </Modal>
     )

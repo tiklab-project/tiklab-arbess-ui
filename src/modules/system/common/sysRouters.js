@@ -54,35 +54,17 @@ export const applicationRouter = [
         enCode:"I",
         children:[
             {
-                key:"/index/system/resoure/code",
-                label:"源码配置",
+                key:"/index/system/resoure/server",
+                label:"服务配置",
                 icon:<FileProtectOutlined />,
                 enCode:"I",
             },
-            {
-                key:"/index/system/resoure/scan",
-                label:"代码扫描",
-                icon:<FileProtectOutlined />,
-                enCode:"I",
-            },
-            // {
-            //     key:"/index/system/resoure/goods",
-            //     label:"制品配置",
-            //     icon:<FileProtectOutlined />,
-            //     enCode:"I",
-            // },
             {
                 key:"/index/system/resoure/host",
-                label:"物理主机配置",
+                label:"主机配置",
                 icon:<FileProtectOutlined />,
                 enCode:"I",
             },
-            // {
-            //     key:"/index/system/resoure/docker",
-            //     label:"docker配置",
-            //     icon:<FileProtectOutlined />,
-            //     enCode:"I",
-            // },
         ]
     },
     {
@@ -98,7 +80,7 @@ export const applicationRouter = [
         enCode: "I",
         children: [
             {
-                key:"/index/system/mes",
+                key:"/index/system/mes/send",
                 label: "消息类型",
                 icon:<SoundOutlined />,
                 enCode: "I",

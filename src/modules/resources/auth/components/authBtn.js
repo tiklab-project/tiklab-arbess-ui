@@ -6,23 +6,32 @@ import {inject,observer} from "mobx-react";
 
 const AuthBtn = props =>{
 
-    const {authStore} = props
+    const {authStore,isConfig} = props
 
     const {createAuth,modalVisible,setModalVisible,formValue,setFormValue,updateAuth} = authStore
 
     const btnClick = () =>{
-        setModalVisible(true)
         setFormValue("")
+        setModalVisible(true)
     }
 
     return(
         <>
-            <Btn
-                onClick={btnClick}
-                type={"primary"}
-                title={"添加认证"}
-                icon={<PlusOutlined/>}
-            />
+            {
+                isConfig ?
+                    <Btn
+                        onClick={()=>btnClick("config")}
+                        title={"添加认证"}
+                        icon={<PlusOutlined/>}
+                    />
+                    :
+                    <Btn
+                        onClick={btnClick}
+                        type={"primary"}
+                        title={"添加认证"}
+                        icon={<PlusOutlined/>}
+                    />
+            }
             <AuthModal
                 visible={modalVisible}
                 setVisible={setModalVisible}

@@ -1,8 +1,6 @@
 .homePage{
     width: 100%;
-    min-height: calc(100vh - 50px);
-    max-height: fit-content;
-    background: #F9F9F9;
+    background: var(--mf-side-color);
     &-guide{
         display: flex;
         flex-direction: row;
@@ -20,9 +18,6 @@
         }
     }
     &-content{
-        margin: auto;
-        max-width: 1280px;
-        padding: 15px 0;
         &-top{
             display: flex;
         }

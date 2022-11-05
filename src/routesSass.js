@@ -46,7 +46,6 @@ const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRol
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 
-const UserMessageContent=AsyncComponent(()=>import("./modules/system/message/userMessage"))
 const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
 const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messageTemplate"))
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
@@ -101,10 +100,6 @@ const routerSass=[
                 path:"/index/pipeline",
                 component:Pipeline,
                 exact: true,
-            },
-            {
-                path:"/index/userMessage",
-                component: UserMessageContent,
             },
             {
                 path:"/index/authorize",

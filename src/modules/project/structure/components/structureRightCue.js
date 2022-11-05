@@ -1,10 +1,9 @@
 import React from "react";
-import {Button} from "antd";
-import {ExclamationCircleOutlined,InfoOutlined} from "@ant-design/icons";
+import Btn from "../../../../common/btn/btn";
 
 const StructureRightCue = props =>{
 
-    const {way,time,title,action,actionTitle} = props
+    const {way,time,title,action,icon,actionTitle} = props
 
     const runWay = i => {
         switch (i) {
@@ -21,11 +20,11 @@ const StructureRightCue = props =>{
                 <span className="tel_way">触发方式：{runWay(way)} </span>
             </div>
             <div className="mid_group_top_del">
-                <Button onClick={()=>action()}>
-                    {actionTitle ==="停止" && <ExclamationCircleOutlined/>}
-                    {actionTitle ==="删除" && <InfoOutlined />}
-                    {actionTitle}
-                </Button>
+                <Btn
+                    icon={icon}
+                    title={actionTitle}
+                    onClick={action}
+                />
             </div>
         </div>
     )

@@ -51,23 +51,12 @@ const Pipeline = props =>{
         setListType(item.id)
     }
 
-    const renderLis = lis => {
-        return lis.map(item=>{
-            return <div key={item.id}
-                        className={`pipeline-tab ${listType===item.id ? "active-tab":""}`}
-                        onClick={()=>onclick(item)}
-                    >
-                        <span>{item.title}</span>
-                    </div>
-        })
-    }
-
     const onClick = () =>{
         setAddPipelineVisible(true)
     }
 
     return(
-        <div className="pipeline">
+        <div className="pipeline home-limited">
             <div className="pipeline-top pipeline-flex">
                 <BreadcrumbContent firstItem={"流水线"}/>
                 <div className="pipeline-top-r">
