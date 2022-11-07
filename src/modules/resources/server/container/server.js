@@ -15,7 +15,7 @@ const Server = props =>{
 
     const {findAllAuthServerList,authServerList,setModalVisible,setFormValue,fresh,deleteAuthServer} = serverStore
 
-    const [activeTab,setActiveTab] = useState(2)
+    const [activeTab,setActiveTab] = useState(0)
 
     useEffect(()=>{
         findAllAuthServerList(activeTab)
@@ -36,6 +36,10 @@ const Server = props =>{
 
     const lis = [
         {
+            id:0,
+            title: "全部"
+        },
+        {
             id:2,
             title:"gitee"
         },
@@ -44,11 +48,11 @@ const Server = props =>{
             title:"github"
         },
         {
-            id:1,
+            id:41,
             title:"sonar"
         },
         {
-            id:4,
+            id:51,
             title:"nexus"
         },
     ]
@@ -105,26 +109,46 @@ const Server = props =>{
         </span>
     }
 
-    // 第三方授权认证
-    const authorizeColumns = [
+    const allColumn = [
         {
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"200px",
+            ellipsis:true,
             render:text => name(text)
-
+        },
+        {
+            title:"类型",
+            dataIndex:"type",
+            key:"type",
+            width: "180px",
+            render:text => {
+                switch (text) {
+                    case 2:
+                        return "gitee"
+                    case 3:
+                        return "github"
+                    case 41:
+                        return "sonar"
+                    case 51:
+                        return "nexus"
+                }
+            }
         },
         {
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"220px",
+            ellipsis:true,
             render:(text,record) => user(text,record)
-
         },
         {
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width: "180px",
             render:text => authPublic(text)
 
         },
@@ -132,6 +156,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width: "240px",
         },
         {
             title:"操作",
@@ -142,23 +167,75 @@ const Server = props =>{
         }
     ]
 
+    // 第三方授权认证
+    const authorizeColumn = [
+        {
+            title:"名称",
+            dataIndex:"name",
+            key:"name",
+            width:"200px",
+            ellipsis:true,
+            render:text => name(text)
+        },
+        {
+            title:"授权信息",
+            dataIndex:"message",
+            key:"message",
+            width:"180px",
+            ellipsis:true,
+        },
+        {
+            title:"创建人",
+            dataIndex:["user","name"],
+            key:"user",
+            width:"220px",
+            ellipsis:true,
+            render:(text,record) => user(text,record)
+
+        },
+        {
+            title:"权限",
+            dataIndex:"authPublic",
+            key:"authPublic",
+            width:"180px",
+            ellipsis:true,
+            render:text => authPublic(text)
+        },
+        {
+            title:"创建时间",
+            dataIndex:"createTime",
+            key:"createTime",
+            width:"240px",
+        },
+        {
+            title:"操作",
+            dataIndex: "action",
+            key: "action",
+            render:(text,record) => action(text,record)
+        }
+    ]
+
     const authColumn = [
         {
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"200px",
+            ellipsis:true,
             render:text => name(text)
-
         },
         {
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
+            width:"280px",
+            ellipsis:true,
         },
         {
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
+            width:"180px",
             render: text => {
                 switch (text) {
                     case 1:
@@ -172,6 +249,8 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"200px",
+            ellipsis:true,
             render:(text,record) => user(text,record)
 
         },
@@ -179,6 +258,7 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width:"120px",
             render:text => authPublic(text)
 
         },
@@ -186,6 +266,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width:"180px",
         },
         {
             title:"操作",
@@ -198,12 +279,14 @@ const Server = props =>{
 
     const columns = activeTab =>{
         switch (activeTab) {
-            case 1 :
-            case 4 :
+            case 0:
+                return allColumn
+            case 51 :
+            case 41 :
                 return authColumn
             case 2:
             case 3:
-                return authorizeColumns
+                return authorizeColumn
         }
     }
 

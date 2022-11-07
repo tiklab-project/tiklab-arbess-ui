@@ -4,6 +4,7 @@ import {Form,Select,Divider} from "antd";
 import SuffixStatus from "./suffixStatus";
 import ServerBtn from "../../../resources/server/components/serverBtn";
 import AuthBtn from "../../../resources/auth/components/authBtn";
+import HostBtn from "../../../resources/host/component/hostBtn";
 
 const FindAuth = props =>{
 
@@ -31,6 +32,10 @@ const FindAuth = props =>{
             case 41:
             case 51:
                 return <ServerBtn isConfig={true} type={type}/>
+            case 31:
+            case 32:
+                return <HostBtn isConfig={true} type={type}/>
+
 
         }
     }

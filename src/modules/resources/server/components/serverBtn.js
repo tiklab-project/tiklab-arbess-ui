@@ -22,7 +22,7 @@ const ServerBtn = props =>{
                 isConfig ?
                     <Btn
                         onClick={()=>btnClick("config")}
-                        title={"新增服务链接"}
+                        title={"添加"}
                         icon={<PlusOutlined/>}
                     />
                     :

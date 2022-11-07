@@ -17,12 +17,12 @@
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
-            border-right: 1px solid #ececec;
+            border-right: 1px solid var(--mf-border-color);
             &-dropdown{
                 width: 100%;
                 padding: 10px 10px 7px;
-                border-bottom: 1px solid #ececec;
-                margin-bottom: 3px;
+                border-bottom: 1px solid var(--mf-border-color);
+                margin-bottom: 2px;
                 .dropdown{
                     display: flex;
                     justify-content: space-between;
@@ -31,10 +31,9 @@
             }
             &-history{
                 height: calc(100% - 60px);
-                padding-left: 2px;
                 .history-content{
                     &-list{
-                        height: calc(100% - 57px);
+                        height: calc(100% - 50px);
                         overflow: auto;
                         &-ul{
                             display: flex;
@@ -42,7 +41,7 @@
                             width: 100%;
                             padding: 10px 10px 10px 20px;
                             cursor: pointer;
-                            margin: 3px 0;
+                            margin: 2px 0;
                             &:hover{
                                 background: #EDF0F5;
                             }
@@ -74,7 +73,7 @@
                         text-align: center;
                         padding-top: 10px;
                         height: 45px;
-                        border-top: 1px solid #ececec;
+                        background: var(--mf-side-color);
                     }
                 }
             }
@@ -88,58 +87,54 @@
             height: 100%;
             padding: 20px;
             overflow: auto;
-            &-mid{
-                padding-top: var(--mf-padding-item);
-                min-width: 400px;
-                .mid_group{
-                    display: flex;
-                    flex-direction: column;
-                    .item{
-                        &-0{
-                            border-top: 3px solid #444444 !important;
-                        }
-                        &-1{
-                            border-top: 3px solid #ff0000 !important;
-                        }
-                        &-10{
-                            border-top: 3px solid #0063FF !important;
-                        }
-                        &-100{
-                            border-top: 3px solid #43a890 !important;
-                        }
-                        &-all{
-                            border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
-                        }
+            .right-mid{
+                padding-top: 15px;
+                .item{
+                    &-0{
+                        border-top: 3px solid #444444 !important;
                     }
+                    &-1{
+                        border-top: 3px solid #ff0000 !important;
+                    }
+                    &-10{
+                        border-top: 3px solid #0063FF !important;
+                    }
+                    &-100{
+                        border-top: 3px solid #43a890 !important;
+                    }
+                    &-all{
+                        border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
+                    }
+                }
+                .mid_group{
                     &_top{
                         display: flex;
                         flex-direction: row;
                         justify-content: space-between;
                         &_tel{
                             font-size: 16px;
-                            .tel{
-                                &_title{
-                                    padding-right: 20px;
-                                    color: #0063FF;
-                                    width: 60px;
-                                    font-weight: var(--mf-text-weight-bold);
-                                }
-                                &_time{
-                                    padding-right: 20px;
-                                }
+                            .tel_title{
+                                padding-right: 20px;
+                                color: #0063FF;
+                                width: 60px;
+                                font-weight: var(--mf-text-weight-bold);
+                            }
+                            .tel_time{
+                                padding-right: 20px;
                             }
                         }
                     }
                     &_center{
+                        display: flex;
+                        flex-wrap: wrap;
+                        padding: 15px 0;
                         &-cart{
-                            margin: 20px 0;
-                            padding: 10px;
+                            padding: 15px;
                             width: 260px;
-                            height: 136px;
-                            border: 1px solid #ececec;
-                            display: inline-block;
+                            height: 130px;
+                            border: 1px solid var(--mf-border-color);
                             &:not(:last-child){
-                                margin-right: 20px;
+                                margin-right: 15px;
                             }
                             .cart{
                                 &-center{
@@ -169,11 +164,12 @@
             }
         }
         &-bottom{
-            &-title{
+            .structure-content-bottom-title{
                 font-size: var(--tiklab-font-16);
                 font-weight: var(--mf-text-weight-bold);
+                padding-bottom: var(--mf-padding-item);
             }
-            &-outLog{
+            .structure-content-bottom-outLog{
                 white-space: pre-wrap;
                 height: 58vh;
                 overflow-y: auto;
@@ -188,13 +184,11 @@
         }
         &-empty{
             padding:10px;
-            .empty{
-                &-group{
-                    height: calc(100% - 90px);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
+            .empty-group{
+                height: calc(100% - 90px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
     }

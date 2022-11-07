@@ -34,7 +34,7 @@
                 line-height: 100px;
                 height: 100px;
                 text-align: center;
-                border-radius: 8px;
+                border-radius: 4px;
                 background: #fff;
                 cursor: pointer;
                 flex: 1;
@@ -69,7 +69,7 @@
             }
         }
         .pipelineNear{
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 10px;
             margin-right: 15px;
             height: 350px;
@@ -131,7 +131,7 @@
         .agency{
             flex: 1;
             background: #fff;
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 10px;
             height: 350px;
             &-bottom{
@@ -209,7 +209,7 @@
             background: #fff;
             padding: 10px;
             min-height: 550px;
-            border-radius: 8px;
+            border-radius: 4px;
             flex: 1;
             &-center{
                 height: calc(100% - 60px);

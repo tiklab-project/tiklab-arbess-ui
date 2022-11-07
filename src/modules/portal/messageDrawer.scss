@@ -1,28 +1,30 @@
-.drawers{
-    .messageModal{
-        height: calc(100% - 67px);
+.messageModal{
+    padding: var(--mf-padding) 0;
+    .messageModal-up{
+        padding: 0 var(--mf-padding);
+
+    }
+    .messageModal-content{
+        height: calc(100% - 87px);
         overflow: hidden;
-        &-screen{
-            height: calc(100% - 36px);
-            &-tab{
-                display: inline-block;
-                width: 25px;
-                height: 25px;
-                line-height: 25px;
-                text-align: center;
-                background: #f4f4f4;
-                border-radius: 50px;
-                margin-left: 5px;
-            }
-            &-much{
-                position: relative;
-                &:after{
-                    position: absolute;
-                    content: "+";
-                    font-size: 16px;
-                    top: -6px;
-                    left: 18px;
-                }
+        .messageModal-screen-tab{
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            background: #f4f4f4;
+            border-radius: 50px;
+            margin-left: 5px;
+        }
+        .messageModal-screen-much{
+            position: relative;
+            &:after{
+                position: absolute;
+                content: "+";
+                font-size: 16px;
+                top: -6px;
+                left: 18px;
             }
         }
         .messageModal-title{
@@ -31,6 +33,7 @@
             justify-content: left;
             align-items: center;
             cursor: pointer;
+            padding: 0 20px;
             .title-item{
                 height: 40px;
                 line-height: 40px;
@@ -41,12 +44,13 @@
                 }
             }
             .title-select{
-                border-bottom: 2px solid #1890ff;
+                border-bottom: 2px solid var(--mf-main-color);
             }
         }
-        &-list{
-            height: calc(100vh - 160px);
+        .messageModal-list{
+            height: calc(100% - 38px);
             overflow: auto;
+            padding: 0 var(--mf-padding);
             .message-item{
                 display: flex;
                 justify-content: space-between;
@@ -100,7 +104,7 @@
                 }
                 &-state{
                     &-1{
-                        background: #1890ff;
+                        background: var(--mf-main-color);
                     }
                     &-0{
                         background: #cccccc;
@@ -108,13 +112,13 @@
                 }
             }
         }
-        &-more{
+        .messageModal-more{
             text-align: center;
             /* background: #f5f6f8; */
             border-radius: 4px;
             cursor: pointer;
             margin-top: 15px;
-            color: #1890ff;
+            color: var(--mf-main-color);
         }
     }
 }

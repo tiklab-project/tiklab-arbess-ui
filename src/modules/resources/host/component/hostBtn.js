@@ -6,7 +6,7 @@ import HostModal from "./hostModal";
 
 const CodeBtn = props =>{
 
-    const {hostStore} = props
+    const {hostStore,isConfig} = props
     const {createAuthHost,modalVisible,setModalVisible,formValue,setFormValue,updateAuthHost} = hostStore
 
     const btnClick = () =>{
@@ -16,12 +16,21 @@ const CodeBtn = props =>{
 
     return(
         <>
-            <Btn
-                onClick={btnClick}
-                type={"primary"}
-                title={"添加配置"}
-                icon={<PlusOutlined/>}
-            />
+            {
+                isConfig ?
+                    <Btn
+                        onClick={btnClick}
+                        title={"添加"}
+                        icon={<PlusOutlined/>}
+                    />
+                    :
+                    <Btn
+                        onClick={btnClick}
+                        type={"primary"}
+                        title={"添加配置"}
+                        icon={<PlusOutlined/>}
+                    />
+            }
             <HostModal
                 visible={modalVisible}
                 setVisible={setModalVisible}

@@ -24,9 +24,9 @@ export function  UpdateAuthHost(data){
     })
 }
 
-export function  FindAllAuthHost (data){
+export function  FindAllAuthHostList(data){
     return serviceLoc.request({
-        url:"/authHost/findAllAuthHost ",
+        url:"/authHost/findAllAuthHostList ",
         method:"post",
         data
     })

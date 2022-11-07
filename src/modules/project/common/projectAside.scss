@@ -69,13 +69,12 @@
         text-align: center;
         padding-top: 15px;
         height: 45px;
-        border-top: 1px solid #ececec;
         cursor: pointer;
         font-size: 20px;
     }
     &-content{
         width: 100%;
-        height: calc(100vh - 50px);
+        height: calc(100vh - 39px);
         overflow: auto;
     }
 }

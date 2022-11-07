@@ -1,7 +1,4 @@
 .workSpace{
-    margin: auto;
-    max-width: 1150px;
-    background: #fff;
     &-title{
         background: #f2f2f2;
         border-radius: 4px;
@@ -16,23 +13,9 @@
         }
     }
     &-top{
-        position: fixed;
-        z-index: 88;
-        background: #fff;
-        width: 100%;
-        font-size: 16px;
-        min-width: 400px;
-        padding: var(--mf-padding) var(--mf-padding) 0;
-    }
-    &-top-limited{
-        max-width: 1150px;
-        margin: auto;
-    }
-    &-content{
-        padding: 55px var(--mf-padding) 0;
+        padding-bottom: var(--mf-padding-item);
     }
     .workSpace-census{
-        padding-top: 10px;
         height: 400px;
         min-width: 550px;
         &-bottom{

@@ -88,7 +88,7 @@ const StructureRightItem = props =>{
     }
 
     return (
-        <div className="mid_group">
+        <>
             <StructureRightCue
                 way={modeData && modeData.runWay}
                 time={modeData && modeData.execTime}
@@ -99,7 +99,7 @@ const StructureRightItem = props =>{
             />
             {rightDetails(rightFlowData)}
             {logRunLog()}
-        </div>
+        </>
     )
 }
 

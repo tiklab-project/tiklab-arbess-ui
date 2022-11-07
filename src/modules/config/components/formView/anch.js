@@ -7,11 +7,11 @@ const Anch = props =>{
     const {data,opt,setOpt,setAddConfigVisible} = props
 
     const changAnth = index =>{
-        const scrollTop=document.getElementById("formView-content")
+        const scrollTop=document.getElementById("config-content")
         if (index) {
             const name = document.getElementById("formView_"+index)
             if (name) {
-                scrollTop.scrollTop = name.offsetTop - 172
+                scrollTop.scrollTop = name.offsetTop - 178
                 setOpt(index)
             }
         }

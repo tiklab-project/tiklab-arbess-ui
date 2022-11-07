@@ -19,6 +19,9 @@
     color: rgba(0,0,0,.85);
     background: #fff;
     border: 1px solid #d9d9d9;
+    &:hover{
+        border-color: #0063FF;
+    }
 }
 
 .mf-btn-primary{

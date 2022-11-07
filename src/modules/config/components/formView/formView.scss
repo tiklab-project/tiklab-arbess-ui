@@ -1,19 +1,14 @@
 .formView{
-    padding: 130px var(--mf-padding) var(--mf-padding);
+    padding-top: var(--mf-padding-item);
     &-anch{
-        position: fixed;
-        z-index:10;
-        width: 100%;
-        padding: var(--mf-padding-item) var(--mf-padding);
-        background: #ffffff;
-        &-limite{
-            max-width: 1150px;
-            margin: 56px auto 0;
-        }
+        position: sticky;
+        top: 71px;
+        z-index: 10;
         &-content{
             display: flex;
             background: #f1f1f1;
             padding-top: 8px;
+            border-radius: 4px;
         }
         .anch-item{
             height: 35px;
@@ -53,14 +48,19 @@
         }
     }
     &-wrapper{
+        background: #ffffff;
+        border-radius: 4px;
+        padding: 15px;
+        &:not(:last-child){
+            margin-bottom: 15px;
+        }
         &-Headline{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #f2f2f2;
             border-radius: 4px;
+            border-bottom: 1px solid var(--mf-border-color);
             height: 40px;
-            padding: 0 15px;
             .headline{
                 &-left{
                     font-size: 16px;

@@ -93,8 +93,9 @@ const ServerModal = props =>{
                 type:values.type,
                 authPublic:values.authPublic,
                 authType:values.authType,
-                message:values.message,
+                username:values.username,
                 password:values.password,
+                message:values.message,
                 privateKey:values.privateKey,
                 serverAddress:values.serverAddress,
             }
@@ -196,8 +197,8 @@ const ServerModal = props =>{
                     form
                         .validateFields()
                         .then((values) => {
-                            form.resetFields();
-                            onOk(values);
+                            form.resetFields()
+                            onOk(values)
                         })
                 }}
                 title={"确定"}
@@ -242,8 +243,8 @@ const ServerModal = props =>{
                         >
                             <Select.Option value={2}>gitee</Select.Option>
                             <Select.Option value={3}>github</Select.Option>
-                            <Select.Option value={1}>sonar</Select.Option>
-                            <Select.Option value={4}>nexus</Select.Option>
+                            <Select.Option value={41}>sonar</Select.Option>
+                            <Select.Option value={51}>nexus</Select.Option>
                         </Select>
                     </Form.Item>
                     <Form.Item
@@ -257,7 +258,7 @@ const ServerModal = props =>{
                         (serverWay===3 || serverWay===2) && authorize
                     }
                     {
-                        (serverWay===1 || serverWay===4) && server
+                        (serverWay===41 || serverWay===51) && server
                     }
                 </Form>
             </div>

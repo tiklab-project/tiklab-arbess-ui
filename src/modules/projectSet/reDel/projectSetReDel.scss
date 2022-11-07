@@ -1,7 +1,7 @@
 .pipelineReDel{
-    padding: 20px;
-    margin: auto;
-    max-width: 900px;
+    .pipelineReDel-up{
+        padding-bottom: var(--mf-padding-item);
+    }
     &-ul{
         border: 1px solid #ececec;
         border-radius: 4px;

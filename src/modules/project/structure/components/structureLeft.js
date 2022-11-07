@@ -110,11 +110,11 @@ const StructureLeft = props =>{
                                     <ConfigProvider locale={zhCN}>
                                         <Pagination
                                             {...page}
-                                            simple
+                                            size="small"
                                             current={pageCurrent}
-                                            showQuickJumper={true}
-                                            showSizeChanger={false}
                                             onChange={onChangePage}
+                                            showSizeChanger={false}
+                                            showQuickJumper={false}
                                         />
                                     </ConfigProvider>
                                 </div>

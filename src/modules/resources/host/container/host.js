@@ -13,12 +13,12 @@ const Host = props =>{
 
     const {hostStore} = props
 
-    const {findAllAuthHost,hostList,fresh,setModalVisible,setFormValue,deleteAuthHost} = hostStore
+    const {findAllAuthHostList,hostList,fresh,setModalVisible,setFormValue,deleteAuthHost} = hostStore
 
-    const [activeTab,setActiveTab] = useState(1)
+    const [activeTab,setActiveTab] = useState(0)
 
     useEffect(()=>{
-        findAllAuthHost()
+        findAllAuthHostList(activeTab)
     },[fresh,activeTab])
 
     const clickTab = item =>{
@@ -36,6 +36,10 @@ const Host = props =>{
 
 
     const lis = [
+        {
+            id:0,
+            title: "全部"
+        },
         {
             id:1,
             title:"普通"
@@ -55,6 +59,8 @@ const Host = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"200px",
+            ellipsis:true,
             render:text => {
                 return  <>
                     <span className="code-content-icon">
@@ -70,16 +76,21 @@ const Host = props =>{
             title:"ip地址",
             dataIndex: "ip",
             key: "ip",
+            width:"140px",
+            ellipsis:true,
         },
         {
             title:"端口",
             dataIndex: "port",
             key: "port",
+            width:"120px",
+            ellipsis:true,
         },
         {
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
+            width:"180px",
             render: text => {
                 switch (text) {
                     case 1:
@@ -93,6 +104,8 @@ const Host = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"200px",
+            ellipsis:true,
             render:(text,record) => {
                 return  <Space>
                             <Profile />
@@ -104,6 +117,7 @@ const Host = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width:"120px",
             render:text => {
                 switch (text) {
                     case 1:
@@ -117,6 +131,7 @@ const Host = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width:"180px",
         },
         {
             title:"操作",
@@ -152,7 +167,7 @@ const Host = props =>{
     return(
         <div className="code home-limited">
             <div className="code-upper">
-                <BreadcrumbContent firstItem={"物理主机"} />
+                <BreadcrumbContent firstItem={"主机配置"} />
                 <HostBtn/>
             </div>
             <div className="code-content">

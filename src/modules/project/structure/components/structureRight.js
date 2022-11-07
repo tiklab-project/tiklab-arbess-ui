@@ -15,7 +15,7 @@ const StructureRight = props =>{
     const [drawerContent,setDrawerContent] = useState("")
 
     return(
-        <div className="structure-content-right-mid">
+        <div className="right-mid">
             {
                 index === 0 ?
                     <StructureRightExecute

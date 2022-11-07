@@ -75,8 +75,8 @@ const WorkSpace = props =>{
     }
 
     return(
-        <div className="workSpace">
-            <div className="workSpace-top workSpace-top-limited">
+        <div className="workSpace home-limited">
+            <div className="workSpace-top">
                 <BreadcrumbContent
                     firstItem={pipeline.pipelineName}
                     secondItem={"概况"}

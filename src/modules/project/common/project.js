@@ -7,10 +7,9 @@ import {getUser} from "tiklab-core-ui";
 
 const Project= (props)=>{
 
-    const {route,match,pipelineStore,configDataStore}=props
+    const {route,match,pipelineStore}=props
 
     const {findAllPipelineStatus,setPipelineId,setPipeline} = pipelineStore
-    const {data,setOpt} = configDataStore
 
     const pipelineId = match.params.pipelineId
     const userId = getUser().userId
@@ -47,37 +46,19 @@ const Project= (props)=>{
         return ()=>setPipelineId("")
     },[])
 
-    const onScroll = () =>{
-        const scrollTop=document.getElementById("formView-content").scrollTop
-        data && data.map((item,index)=>{
-            const form = `formView_${index+1}`
-            const iId = document.getElementById(form)
-            const lastId = document.getElementById(form) && document.getElementById(form).previousSibling
-            const iTop = iId && iId.offsetTop
-            const lastTop =lastId && lastId.offsetTop
-            if(scrollTop>lastTop && scrollTop<iTop ){
-                setOpt(index+1)
-            }
-        })
-    }
-
     return(
         <div className="project">
             <ProjectAside
                 {...props}
                 pipelineStore={pipelineStore}
             />
-            <div
-                id="formView-content"
-                className="project-content"
-                onScroll={onScroll}
-            >
+            <div className="project-content">
                 {renderRoutes(route.routes)}
             </div>
         </div>
     )
 }
 
-export default withRouter(inject("pipelineStore","configDataStore")(observer(Project)))
+export default withRouter(inject("pipelineStore")(observer(Project)))
 
 

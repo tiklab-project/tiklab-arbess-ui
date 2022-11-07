@@ -12,28 +12,42 @@ const StructureRightExecute = props => {
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
     const state = index =>{
         if(execState){
-            const i = execState.sort
-            const j = execState.status
-            if(i > j && index === i ){
-                return  status(0)  // 运行
-            }else if (index < i ){
-                return  status(1)  //成功
-            }else if(i<j){
-                return  status(2)  //失败
-            }else if(index > i){
-                return  status(3)  //运行--等待运行
+            const zz = execState.timeList
+            if (index+1 < zz.length){
+                return  status(1) //成功
+            }else if (index+1 === zz.length){
+                return status(0) // 运行
+            } else{
+                return status(3) //运行--等待运行
             }
         }
     }
-    
+
+    const style = index => {
+        if(execState){
+            const zz = execState.timeList
+            if (index < zz.length){
+                return  "item-10" //成功
+            }else if (index  === zz.length){
+                return "item-100" // 运行
+            } else{
+                return "item-all" //运行--等待运行
+            }
+        }
+    }
+
+
     const times = index => {
         if(execState){
-            switch (index) {
-                case 0:return execState.oneTime
-                case 1:return execState.twoTime
-                case 2:return execState.threeTime
-                case 3:return execState.fourTime
-            }
+            const zz = execState.timeList
+            console.log("第"+index+"阶段的时间为："+zz.get(index))
+            return zz.get(index)
+            // switch (index) {
+            //     case 0:return execState.oneTime
+            //     case 1:return execState.twoTime
+            //     case 2:return execState.threeTime
+            //     case 3:return execState.fourTime
+            // }
         }
     }
     
@@ -48,20 +62,6 @@ const StructureRightExecute = props => {
         }).catch(error=>{
             console.log(error)
         })
-    }
-    
-    const style = index => {
-        if(execState){
-            const i = execState.sort
-            const j = execState.status
-            if(i > j && index === i ){
-                return  "item-100"  // 运行
-            }else if (index < i ){
-                return  "item-10"  //成功
-            }else if(index > i){
-                return  "item-all"  //运行--等待运行
-            }
-        }
     }
 
     // 关闭滚动条一直在下面
@@ -97,13 +97,13 @@ const StructureRightExecute = props => {
                 <div className="structure-content-bottom-outLog" id="outLog">
                     {execState.runLog}
                 </div>
-                <div className="structure-content-bottom-runLog">{status(0)}</div>
+                {/*<div className="structure-content-bottom-runLog">{status(0)}</div>*/}
             </div>
         }
     }
 
     return(
-        <div className="mid_group">
+        <>
             <StructureRightCue
                 way={execState && execState.runWay}
                 time={execState && execState.allTime}
@@ -114,7 +114,7 @@ const StructureRightExecute = props => {
             />
             {executeDetails(rightExecuteData)}
             {logRunLog()}
-       </div>
+       </>
     )
 }
 

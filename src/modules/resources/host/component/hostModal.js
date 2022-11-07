@@ -112,7 +112,8 @@ const CodeModal = props =>{
                     >
                         <Select
                             onChange={changHostType}
-                            disabled={ban}
+                            // disabled={ban}
+                            disabled={true}
                         >
                             <Select.Option value={1}>普通</Select.Option>
                             <Select.Option value={2}>aliyun</Select.Option>

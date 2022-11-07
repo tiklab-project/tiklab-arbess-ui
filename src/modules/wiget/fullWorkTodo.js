@@ -12,7 +12,7 @@ const FullWorkTodoContent = props =>{
     }
 
 
-    return  <div className="home-limited">
+    return  <div style={{maxWidth:"1120px",margin:"auto"}}>
                 <FullWorkTodo bgroup={"matflow"} changeTodo={changeTodo}/>
             </div>
 }

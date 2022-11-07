@@ -118,18 +118,18 @@ const MessageDrawer = props =>{
             onClose={()=>setVisible(false)}
             maskStyle={{background:"transparent"}}
             visible={visible}
-            contentWrapperStyle={{width:450,top:50}}
-            bodyStyle={{padding:20}}
+            contentWrapperStyle={{width:450,top:50,height:"calc(100% - 50px)"}}
+            bodyStyle={{padding:0}}
         >
-            <div className="drawers">
-                <div className="drawers-message-up">
+            <div className="messageModal">
+                <div className="messageModal-up">
                     <ModalTitle
                         setVisible={setVisible}
                         title={<><BellOutlined style={{fontSize:16}}/>消息</>}
                         isType={true}
                     />
                 </div>
-                <div className="messageModal">
+                <div className="messageModal-content">
                     <div className="messageModal-title">
                         {
                             tabs.map(item=>{return renderTabs(item)})

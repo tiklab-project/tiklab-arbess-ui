@@ -25,7 +25,7 @@ export class StructureStore {
     @observable index = 0  // 构建区分显示 -- 构建1 、2、……
     @observable page = {
         defaultCurrent: 1,
-        pageSize: "10",
+        pageSize: "11",
         total: "1"
     }
     @observable isData = false  // 构建情况是否有数据
@@ -126,7 +126,7 @@ export class StructureStore {
             userId: values.userId,
             pipelineId: values.pipelineId,
             pageParam: {
-                pageSize: 10,
+                pageSize: 11,
                 currentPage: values.pageParam.currentPage,
             },
             state:values.state,

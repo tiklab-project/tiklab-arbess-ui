@@ -4,7 +4,7 @@ import {
     CreateAuthHost,
     DeleteAuthHost,
     UpdateAuthHost,
-    FindAllAuthHost,
+    FindAllAuthHostList,
 } from "../api/host";
 
 export class HostStore {
@@ -33,8 +33,10 @@ export class HostStore {
     }
 
     @action
-    findAllAuthHost = async () =>{
-        const data = await FindAllAuthHost()
+    findAllAuthHostList = async value =>{
+        const param = new FormData()
+        param.append("type",value)
+        const data = await FindAllAuthHostList(param)
         if(data.code===0 && data.data){
             this.hostList = data.data
         }

@@ -127,15 +127,15 @@ const PipelineAddModal = props =>{
                     setVisible={setAddPipelineVisible}
                     title={"创建流水线"}
                 />
-                <div className="steps-top">
-                    <Steps current={current}>
-                        {steps.map(item => (
-                            <Step key={item.title} title={item.title} />
-                        ))}
-                    </Steps>
-                </div>
                 <div className="steps-content"
                 >
+                    <div className="steps-top">
+                        <Steps current={current}>
+                            {steps.map(item => (
+                                <Step key={item.title} title={item.title} />
+                            ))}
+                        </Steps>
+                    </div>
                     {steps[current].content}
                 </div>
             </div>
