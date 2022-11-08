@@ -6,7 +6,7 @@ const {Option} = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {state,setState,enforcer,setEnforcer,mode,setMode,pipelineUserList,change,drop,pipelineId} = props
+    const {setState,setEnforcer,setMode,pipelineUserList,drop,pipelineId,changPage} = props
 
     const [statusValue,setStatusValue] = useState("")
     const [userValue,setUserValue] = useState("")
@@ -22,17 +22,7 @@ const StructureLeftDropdown = props =>{
     const changeState = (value,e) =>{
         setStatusValue(value)
         setState(parseInt(e.key))
-        const params = {
-            pipelineId:pipelineId,
-            state:parseInt(e.key),
-            userId:enforcer,
-            type:mode,
-            pageParam: {
-                pageSize: 10,
-                currentPage: 1
-            }
-        }
-        change(params,1)
+        changPage(1)
     }
 
     // 切换执行人
@@ -42,34 +32,14 @@ const StructureLeftDropdown = props =>{
         }
         setUserValue(value)
         setEnforcer(e.key)
-        const params = {
-            pipelineId:pipelineId,
-            state:state,
-            userId:e.key,
-            type:mode,
-            pageParam: {
-                pageSize: 10,
-                currentPage: 1
-            }
-        }
-        change(params,1)
+        changPage(1)
     }
 
     // 切换方式
     const changeMode = (value,e) =>{
         setModeValue(value)
         setMode(parseInt(e.key))
-        const params = {
-            pipelineId:pipelineId,
-            state:state,
-            userId:enforcer,
-            type:e.key,
-            pageParam: {
-                pageSize: 10,
-                currentPage:1
-            }
-        }
-        change(params,1)
+        changPage(1)
     }
 
     //状态

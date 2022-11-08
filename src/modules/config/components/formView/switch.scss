@@ -8,17 +8,17 @@
       -ms-flex-wrap: wrap;
       flex-wrap: wrap;
       height: auto;
-      padding-top: var(--mf-padding-item);
+      padding-top: var(--tiklab-padding-item);
       &-title{
          min-width: 130px;
          height: 40px;
          line-height: 40px;
       }
       &-item{
-         border: 1px solid #0063FF;
+         border: 1px solid var(--tiklab-blue);
          border-radius: 4px;
-         width: 110px;
          height: 40px;
+         padding: 4px 10px;
          display: -webkit-inline-flex;
          display: -ms-inline-flexbox;
          display: inline-flex;

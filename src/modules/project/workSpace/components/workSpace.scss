@@ -7,13 +7,13 @@
         padding-left: 10px;
         margin-bottom: 10px;
         font-size: 16px;
-        font-weight: var(--mf-text-weight-bold);
+        font-weight: var(--tiklab-font-weight-bold);
         &-name{
             padding: 0 8px;
         }
     }
     &-top{
-        padding-bottom: var(--mf-padding-item);
+        padding-bottom: var(--tiklab-padding-item);
     }
     .workSpace-census{
         height: 400px;
@@ -90,7 +90,7 @@
                 text-align: center;
                 cursor: pointer;
                 &-more{
-                    color: #0063FF;
+                    color: var(--tiklab-blue);
                 }
             }
         }

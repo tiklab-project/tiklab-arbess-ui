@@ -18,10 +18,11 @@ const DeployVir = props =>{
                 name={"startAddress"}
                 mode={deployType}
                 addonBefore={"/"}
+                isValid={true}
             />
-            <Form.Item name={"startShell"} label="启动命令" >
+            <Form.Item name={"startOrder"} label="启动命令" >
                 <Mirror
-                    name={"startShell"}
+                    name={"startOrder"}
                     type={deployType}
                     shellBlock={virShellBlock}
                     setShellBlock={setVirShellBlock}

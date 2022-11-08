@@ -5,7 +5,7 @@ ul li{
     list-style: none;
 }
 
-.ant-form{
+.mf .ant-form{
     .ant-form-item-label{
         &>label:not(.ant-form-item-required):after{
             display: none;
@@ -25,37 +25,33 @@ ul li{
     }
 }
 
-.ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
-    background-color: #0063FF !important;
+.mf .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
+    background-color: #0063FF;
 }
 
-.ant-steps-item-finish .ant-steps-item-icon{
-    border-color: #0063FF !important;
+.mf .ant-steps-item-finish .ant-steps-item-icon{
+    border-color: #0063FF ;
 }
 
-.ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title:after{
-    background-color: #0063FF !important;
+.mf .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title:after{
+    background-color: #0063FF ;
 }
 
-.ant-table-thead>tr>th{
-    background: #ffffff !important;
+.mf .ant-table-thead>tr>th{
+    background: #ffffff;
+    padding: 20px 8px 8px;
 }
 
-.ant-table-tbody>tr>td{
-    border: none !important;
+.mf .ant-table-tbody>tr>td{
+    border: none;
+    padding: 8px;
 }
 
-.ant-modal-footer{
-    border:none !important;
+.mf .ant-modal-footer{
+    border:none;
 }
 
-.drawers-body{
-    height: calc(100vh - 140px);
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.icon {
+.mf .icon {
     width: 20px;
     height: 20px;
     vertical-align: -0.15em;
@@ -63,15 +59,10 @@ ul li{
     overflow: hidden;
 }
 
-.message{
-    margin-top: 5vh;
-    margin-left: 5vh;
-}
-
 .home-limited{
     margin: auto;
     max-width: 1280px;
-    padding: var(--mf-padding);
+    padding: var(--tiklab-padding);
 }
 
 ::-webkit-scrollbar {
@@ -92,9 +83,7 @@ ul li{
     background-color: #ccc;
 }
 
-
 :root {
-    // 色调
     --tiklab-white: #fff;  // 主色调白
     --tiklab-black: #000;  // 主色调黑
     --tiklab-blue: #0063FF;  // 主色调蓝
@@ -104,30 +93,24 @@ ul li{
     --tiklab-gray-500: #999; // 文字次级颜色灰色调
     --tiklab-gray: #f7f8fa; // 主色调灰 左侧导航
 
-    // 边距
     --tiklab-padding: 20px; //页面边距
     --tiklab-padding-resove: -20px; //页面边距
     --tiklab-padding-item: 15px; //元素间隔边距
     --tiklab-padding-resove-item:-15px; //元素间隔边距
 
-    // 标题
     --tiklab-font-12: 12px; // 图文排需要的文字
     --tiklab-font-13: 13px;  // 描述文字
     --tiklab-font-14: 14px; // 正文
     --tiklab-font-15: 15px; // 2级标题
     --tiklab-font-16: 16px; // 标题
 
-    // 字重
     --tiklab-font-weight-bold: bold; // 标题字重
 
-    --mf-main-color:#0063FF;
-    --mf-side-color:#f7f8fa;
-    --mf-select-color:#e3e8f0;
-    --mf-hover-color:#EDF0F5;
-    --mf-border-color:#ececec;
-    --mf-text-weight-bold:bold;
-    --mf-padding:20px;
-    --mf-padding-item:15px;
+    // 图标大小
+    --tiklab-icon-size-16: 16px;
+    --tiklab-icon-size-20: 20px;
+    --tiklab-icon-size-22: 22px;
+    --tiklab-icon-size-32: 32px;
 
-
+    //#3257d3
 }

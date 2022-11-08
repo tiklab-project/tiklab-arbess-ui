@@ -1,6 +1,7 @@
 import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
 import Headline from "../formTitle/headline";
+import "./anch.scss";
 
 const Anch = props =>{
 

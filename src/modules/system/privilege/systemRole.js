@@ -6,7 +6,7 @@ import {SystemRoleList} from "tiklab-privilege-ui";
  */
 const SystemRole = props =>{
 
-    return <SystemRoleList {...props} bgroup={"matflow"} isBase={true}/>
+    return <SystemRoleList {...props} bgroup={"matflow"}/>
     
 }
 

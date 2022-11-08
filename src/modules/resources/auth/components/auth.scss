@@ -4,23 +4,12 @@
         justify-content: space-between;
         align-items: center;
     }
-    .auth-content-icon{
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        border-radius: 4px;
-        text-align: center;
-        color: black;
-        background: #cad2f3;
-        margin-right: 10px;
-    }
     .auth-content-action{
         .edit{
             cursor: pointer;
             margin-right: 15px;
             &:hover{
-                color: #0063FF;
+                color: var(--tiklab-blue);
             }
         }
         .del{

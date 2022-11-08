@@ -27,7 +27,7 @@ const SystemAside= props =>  {
                     onClick={()=>select(data.key)}
                     key={data.key}
                 >
-                    <span style={{paddingRight:5,fontSize:16}}>{data.icon}</span>
+                    <span className="sys-content-icon">{data.icon}</span>
                     <span>{data.label}</span>
                 </li>
             </PrivilegeButton>
@@ -43,7 +43,7 @@ const SystemAside= props =>  {
                          onClick={()=>setOpenOrClose(item.key)}
                     >
                         <span>
-                            <span style={{paddingRight:5,fontSize:16}}>{item.icon}</span>
+                            <span className="sys-content-icon">{item.icon}</span>
                             <span className="system-aside-title">{item.label}</span>
                         </span>
                         <div className="system-aside-item-icon">

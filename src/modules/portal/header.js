@@ -28,17 +28,15 @@ const Head = props =>{
     const {i18n,t} = useTranslation()
 
     useEffect(()=>{
+        // 路由菜单控制
+        privilegeStores.systemRoleStore.getSystemPermissions(userId,"matflow")
+        // 消息通知
         findMessageDispatchItemPage()
     },[])
 
     useEffect(()=>{
         setCurrentLink(path)
     },[path])
-
-    useEffect(()=>{
-        // 路由菜单控制
-        privilegeStores.systemRoleStore.getSystemPermissions(userId,"matflow")
-    },[])
 
     const routers=[
         {
@@ -104,14 +102,14 @@ const Head = props =>{
                <div className="header-outMenu-lan">
                     <Dropdown overlay={languageMenu}>
                         <div className="outMenu-lan">
-                            <GlobalOutlined/>
+                            <GlobalOutlined className="header-dropdown-icon"/>
                             <span className="lan">切换语言</span>
                         </div>
                     </Dropdown>
                </div>
                <div className="header-outMenu-out">
                    <div  onClick={()=>goOut()} className="outMenu-out">
-                       <LogoutOutlined />
+                       <LogoutOutlined className="header-dropdown-icon"/>
                        <span className="bottom-out">
                             退出
                        </span>
@@ -122,12 +120,24 @@ const Head = props =>{
     )
 
     const helpMenu = (
-        <Menu style={{minWidth:150}}>
-            <Menu.Item key="1"><ProfileOutlined />文档</Menu.Item>
-            <Menu.Item key="2"><ExpandOutlined />社区支持</Menu.Item>
-            <Menu.Item key="3"><ScheduleOutlined />在线工单</Menu.Item>
-            <Menu.Item key="4"><WhatsAppOutlined />在线客服</Menu.Item>
-        </Menu>
+        <div className="header-helpMenu">
+            <div className="header-helpMenu-item">
+                <ProfileOutlined className="header-dropdown-icon"/>
+                文档
+            </div>
+            <div className="header-helpMenu-item">
+                <ExpandOutlined className="header-dropdown-icon"/>
+                社区支持
+            </div>
+            <div className="header-helpMenu-item">
+                <ScheduleOutlined className="header-dropdown-icon"/>
+                在线工单
+            </div>
+            <div className="header-helpMenu-item">
+                <WhatsAppOutlined className="header-dropdown-icon"/>
+                在线客服
+            </div>
+        </div>
     )
 
     return(

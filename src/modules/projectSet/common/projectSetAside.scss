@@ -12,7 +12,7 @@
         padding: 10px;
         cursor: pointer;
         &:hover{
-            background: var(--mf-hover-color);
+            background: var(--tiklab-gray-300);
         }
         &-icon{
             padding-right: 10px;
@@ -20,8 +20,8 @@
         }
     }
     &-select{
-        background: var(--mf-select-color);
-        border-left: 3px solid var(--mf-main-color);
+        background: var(--tiklab-gray-400);
+        border-left: 3px solid var(--tiklab-blue);
     }
     &-content{
         width: 100%;

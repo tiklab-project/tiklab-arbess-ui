@@ -36,11 +36,11 @@ const CodeModal = props =>{
     const autoHeight = () =>{
         let winHeight=0
         if (window.innerHeight)
-            winHeight = window.innerHeight-200
+            winHeight = window.innerHeight-120
         else if ((document.body) && (document.body.clientHeight))
-            winHeight = document.body.clientHeight-200
+            winHeight = document.body.clientHeight-120
         if (document.documentElement && document.documentElement.clientHeight)
-            winHeight = document.documentElement.clientHeight-200
+            winHeight = document.documentElement.clientHeight-120
         setHeight(winHeight)
         window.onresize=autoHeight
     }
@@ -93,7 +93,9 @@ const CodeModal = props =>{
             onCancel={()=>setVisible(false)}
             closable={false}
             footer={modalFooter}
-            style={{height:height}}
+            style={{height:height,top:60}}
+            className="mf"
+
         >
             <ModalTitle
                 setVisible={setVisible}
@@ -104,7 +106,7 @@ const CodeModal = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
-                    initialValues={{type:1,authPublic:1,authWay:1,authType:2}}
+                    initialValues={{type:31,authPublic:1,authWay:1,authType:2}}
                 >
                     <Form.Item
                         name="type"
@@ -115,7 +117,7 @@ const CodeModal = props =>{
                             // disabled={ban}
                             disabled={true}
                         >
-                            <Select.Option value={1}>普通</Select.Option>
+                            <Select.Option value={31}>普通</Select.Option>
                             <Select.Option value={2}>aliyun</Select.Option>
                             <Select.Option value={3}>腾讯云主机</Select.Option>
                         </Select>

@@ -1,13 +1,19 @@
 import React from "react";
 import {Profile} from "tiklab-eam-ui";
-import {message,Tooltip,Table,Space} from "antd";
-import {CheckCircleOutlined, CloseCircleOutlined,ExclamationCircleOutlined,PlayCircleOutlined,
-    MinusCircleOutlined,ClockCircleOutlined
+import {message,Tooltip,Table,Space,Spin} from "antd";
+import {
+    CheckCircleOutlined,
+    CloseCircleOutlined,
+    ExclamationCircleOutlined,
+    PlayCircleOutlined,
+    MinusCircleOutlined,
+    ClockCircleOutlined,
+    LoadingOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Running from "./running";
 import "./pipelineTable.scss";
 import EmptyText from "../../../common/emptyText/emptyText";
+import ListName from "../../../common/list/listname";
 
 const PipelineTable = props =>{
 
@@ -86,20 +92,11 @@ const PipelineTable = props =>{
             width:"200px",
             ellipsis:true,
             render:(text,record)=>{
-                return(
-                    <span className="pipelineTable-pipelineName">
-                        <span onClick={()=>goPipelineTask(text,record)}
-                              className="pipelineTable-pipelineName-task"
-                        >
-                            <span className={`pipelineTable-pipelineName-icon icon-${record.color}`}>
-                                {text.substring(0,1).toUpperCase()}
-                            </span>
-                            <span className="pipelineTable-pipelineName-text">
-                                {text}
-                            </span>
-                        </span>
-                    </span>
-                )
+                return  <ListName
+                            text={text}
+                            onClick={()=>goPipelineTask(text,record)}
+                            colors={record.color}
+                        />
             }
         },
         {
@@ -124,7 +121,7 @@ const PipelineTable = props =>{
                             </Space>
                         </Tooltip>
                     case 0:
-                        return <Tooltip title={tooltip("待构建",text)}>
+                        return <Tooltip title={tooltip("待构建","无")}>
                             <Space>
                                 <MinusCircleOutlined style = {{fontSize:20,color:"#8795b1"}}/>
                                 {text}
@@ -168,9 +165,7 @@ const PipelineTable = props =>{
                                     record.pipelineState === 0 ?
                                         <PlayCircleOutlined className="actions-se"/>
                                         :
-                                        <span className="pipelineTable-state-running">
-                                            <Running/>
-                                        </span>
+                                        <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
                                 }
                                 </span>
                             </Tooltip>

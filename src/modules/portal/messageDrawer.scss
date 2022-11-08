@@ -1,7 +1,7 @@
 .messageModal{
-    padding: var(--mf-padding) 0;
+    padding: var(--tiklab-padding-item) 0;
     .messageModal-up{
-        padding: 0 var(--mf-padding);
+        padding: 0 var(--tiklab-padding);
 
     }
     .messageModal-content{
@@ -44,13 +44,13 @@
                 }
             }
             .title-select{
-                border-bottom: 2px solid var(--mf-main-color);
+                border-bottom: 2px solid var(--tiklab-blue);
             }
         }
         .messageModal-list{
             height: calc(100% - 38px);
             overflow: auto;
-            padding: 0 var(--mf-padding);
+            padding: 0 var(--tiklab-padding);
             .message-item{
                 display: flex;
                 justify-content: space-between;
@@ -104,7 +104,7 @@
                 }
                 &-state{
                     &-1{
-                        background: var(--mf-main-color);
+                        background: var(--tiklab-blue);
                     }
                     &-0{
                         background: #cccccc;
@@ -114,11 +114,10 @@
         }
         .messageModal-more{
             text-align: center;
-            /* background: #f5f6f8; */
             border-radius: 4px;
             cursor: pointer;
             margin-top: 15px;
-            color: var(--mf-main-color);
+            color: var(--tiklab-blue);
         }
     }
 }

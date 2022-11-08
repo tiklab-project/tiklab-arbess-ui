@@ -2,7 +2,7 @@
     display: flex;
     .react-codemirror2{
         width: 500px;
-        border-color:#ffffff;
+        border-color: var(--tiklab-gray-200);
         min-height: 32px;
     }
     .CodeMirror{
@@ -16,7 +16,7 @@
     display: flex;
     .react-codemirror2{
         width: 500px;
-        border:1px solid #0063FF;
+        border:1px solid #1890ff;
         min-height: 32px;
     }
     .CodeMirror{

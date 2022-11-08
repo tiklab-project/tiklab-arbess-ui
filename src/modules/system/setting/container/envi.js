@@ -100,7 +100,7 @@ const Envi = props =>{
         }
     ]
 
-    return <div className="envi home-limited">
+    return <div className="envi home-limited mf">
         <div className="envi-upper">
             <BreadcrumbContent firstItem={"环境配置"} />
             <div>

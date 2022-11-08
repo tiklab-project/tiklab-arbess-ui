@@ -1,52 +1,4 @@
 .formView{
-    padding-top: var(--mf-padding-item);
-    &-anch{
-        position: sticky;
-        top: 71px;
-        z-index: 10;
-        &-content{
-            display: flex;
-            background: #f1f1f1;
-            padding-top: 8px;
-            border-radius: 4px;
-        }
-        .anch-item{
-            height: 35px;
-            line-height: 35px;
-            width: 80px;
-            text-align: center;
-            cursor: pointer;
-            &:first-child{
-                margin-left: 5px;
-            }
-            &:not(:last-child){
-                margin-right: 5px;
-            }
-        }
-        .anch-plus{
-            padding-top: 10px;
-            &:hover{
-                background: #ffffff;
-                font-weight: var(--mf-text-weight-bold);
-                border-top-left-radius:4px;
-                border-top-right-radius:4px;
-            }
-        }
-        .anch-select{
-            background: #ffffff;
-            font-weight: var(--mf-text-weight-bold);
-            border-top-left-radius:4px;
-            border-top-right-radius:4px;
-        }
-    }
-    &-content{
-        .code-handle{
-            margin-bottom: 25px;
-        }
-        &-changSort{
-            padding-bottom: 25px;
-        }
-    }
     &-wrapper{
         background: #ffffff;
         border-radius: 4px;
@@ -59,19 +11,18 @@
             justify-content: space-between;
             align-items: center;
             border-radius: 4px;
-            border-bottom: 1px solid var(--mf-border-color);
+            border-bottom: 1px solid var(--tiklab-gray-200);
             height: 40px;
             .headline{
                 &-left{
-                    font-size: 16px;
-                    font-weight: var(--mf-text-weight-bold);
+                    font-weight: var(--tiklab-font-weight-bold);
                 }
                 &-right{
                     .headline-changSort{
                         margin-right: 15px;
                         cursor: pointer;
                         &:hover{
-                            color: #0063FF;
+                            color: var(--tiklab-blue);
                         }
                     }
                     .headline-delete{
@@ -94,16 +45,19 @@
         }
     }
     .ant-form{
-        .ant-input{
-            width: 500px;
-            &:hover{
-                background: #f2f2f2;
+        .ant-form-item-control {
+            .ant-input {
+                width: 500px;
+
+                &:hover {
+                    background: #f2f2f2;
+                }
             }
-        }
-        .ant-select{
-            width: 500px;
-            &:hover{
-                background: #f2f2f2;
+            .ant-select{
+                width: 500px;
+                &:hover{
+                    background: #f2f2f2;
+                }
             }
         }
         .ant-input-group-addon{
@@ -122,4 +76,12 @@
             text-align: left;
         }
     }
+}
+/* 部署应用源文件地址 的匹配提示 */
+.deployTargetAddress{
+    position: absolute;
+    top: 30px;
+    left: 130px;
+    font-size: var(--tiklab-font-13);
+    color: var(--tiklab-gray-500);
 }

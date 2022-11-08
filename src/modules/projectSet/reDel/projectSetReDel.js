@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React,{useEffect,useState} from "react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import {Button,Form,message,Modal} from "antd";
+import {Form,message,Modal} from "antd";
 import {ExclamationCircleOutlined,DeleteOutlined,CaretDownOutlined,EditOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import "./projectSetReDel.scss";
@@ -16,6 +16,10 @@ const ProjectSetReDel = props =>{
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
 
     const [form]=Form.useForm()
+
+    useEffect(()=>{
+        setExpandedTree([1])
+    },[])
 
     const del = () =>{
         const params = {
@@ -132,7 +136,7 @@ const ProjectSetReDel = props =>{
     }
 
     return(
-        <div className="pipelineReDel home-limited">
+        <div className="pipelineReDel home-limited mf">
             <div className="pipelineReDel-up">
                 <BreadcrumbContent
                     firstItem={pipeline.pipelineName}

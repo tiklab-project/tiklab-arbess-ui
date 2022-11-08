@@ -15,23 +15,11 @@ const DeploySame = props =>{
             <Inputs
                 placeholder={"该文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"应用源文件地址"}
-                name={"sourceAddress"}
+                name={"localAddress"}
                 mode={deployType}
                 addonBefore={"/"}
             />
             <div className="deployTargetAddress">{messageInfo}</div>
-            <Inputs
-                placeholder={"Ip地址"}
-                label={"Ip地址"}
-                name={"sshIp"}
-                mode={deployType}
-            />
-            <Inputs
-                placeholder={"端口号"}
-                label={"端口号"}
-                name={"sshPort"}
-                mode={deployType}
-            />
 
             <Proof
                 allProofType={deployType}
@@ -45,6 +33,7 @@ const DeploySame = props =>{
                 name={"deployAddress"}
                 mode={deployType}
                 addonBefore={"/"}
+                isValid={true}
             />
 
             <Form.Item

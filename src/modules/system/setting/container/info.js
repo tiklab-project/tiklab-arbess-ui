@@ -43,7 +43,7 @@ const Info = props =>{
     ]
 
     return(
-        <div className="info home-limited" style={{padding:"10px"}}>
+        <div className="info home-limited mf">
             <BreadcrumbContent firstItem={"系统信息"} />
             <div  className="info-content">
                 {

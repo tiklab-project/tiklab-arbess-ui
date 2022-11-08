@@ -22,7 +22,7 @@ const Structure = props => {
 
     const {findExecState,findStructureState,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,isData,
         findPipelineUser,setIsData,execState} = structureStore
-    const {state,setState,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
+    const {state,setState,pageCurrent,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
     const {pipelineId,pipeline} = pipelineStore
     const userId = getUser().userId
 
@@ -48,16 +48,19 @@ const Structure = props => {
                     }), 1000)
                 findAllPipelineConfig(pipelineId)
             }
-            changPage() // 历史列表
         })
     }, [pipelineId,freshen])
+
+    useEffect(()=>{
+        pipelineId && changPage() // 历史列表
+    },[pipelineId,freshen,pageCurrent,state,enforcer,mode])
 
     const changPage = () =>{
         const params = {
             pipelineId:pipelineId,
             pageParam: {
                 pageSize: 10,
-                currentPage: 1
+                currentPage: pageCurrent
             },
             state:state,
             userId:enforcer,
@@ -65,33 +68,11 @@ const Structure = props => {
         }
         findPageHistory(params).then(res=>{
             if(res.code===0 && res.data && res.data.dataList.length===0){
-                if(state!==0 || enforcer!==null || mode!==0){
-                    setDrop(!drop)
-                    findPage()
-                }else{
-                    if(execState===""){
+                if(state===0 && enforcer===null && mode===0) {
+                    if (execState==="") {
                         setIsData(false)
-                    }else setIsData(true)
+                    } else setIsData(true)
                 }
-            }
-        })
-    }
-
-    // 查找所有构建历史
-    const findPage = () =>{
-        const params = {
-            pipelineId:pipelineId,
-            pageParam: {
-                pageSize: 10,
-                currentPage: 1
-            },
-            state:0,
-            userId:null,
-            type:0
-        }
-        findPageHistory(params).then(res=>{
-            if(res.code===0 && res.data.dataList.length===0){
-                setIsData(false)
             }
         })
     }

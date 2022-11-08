@@ -58,7 +58,7 @@ const CodeGiteeOrGithub = props =>{
         switch (name) {
             case "codeName":
                 const param = {
-                    authId:formInitialValues && formInitialValues.authId,
+                    authId:formInitialValues && formInitialValues.gitAuthId,
                     type:codeType
                 }
                 findAllStorehouse(param)
@@ -66,7 +66,7 @@ const CodeGiteeOrGithub = props =>{
             default:
                 const params ={
                     houseName:formInitialValues && formInitialValues.codeName,
-                    authId:formInitialValues && formInitialValues.authId,
+                    authId:formInitialValues && formInitialValues.gitAuthId,
                     type:codeType
                 }
                 findBranch(params)
@@ -76,10 +76,6 @@ const CodeGiteeOrGithub = props =>{
 
     const onBlur = () => {
         setFieldName("")
-    }
-
-    const style={
-        display:"flex",
     }
 
     return(

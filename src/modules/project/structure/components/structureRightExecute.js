@@ -1,6 +1,7 @@
 import React,{useState,Fragment} from "react";
 import {getUser} from "tiklab-core-ui";
 import {InfoOutlined} from "@ant-design/icons";
+import {getTime} from "../../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
 
@@ -36,18 +37,12 @@ const StructureRightExecute = props => {
         }
     }
 
-
     const times = index => {
         if(execState){
             const zz = execState.timeList
-            console.log("第"+index+"阶段的时间为："+zz.get(index))
-            return zz.get(index)
-            // switch (index) {
-            //     case 0:return execState.oneTime
-            //     case 1:return execState.twoTime
-            //     case 2:return execState.threeTime
-            //     case 3:return execState.fourTime
-            // }
+            let time = zz.get(index)
+            if (time === undefined) return getTime(0)
+            return getTime(time)
         }
     }
     

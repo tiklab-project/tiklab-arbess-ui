@@ -1,6 +1,6 @@
 .pipelineReDel{
     .pipelineReDel-up{
-        padding-bottom: var(--mf-padding-item);
+        padding-bottom: var(--tiklab-padding-item);
     }
     &-ul{
         border: 1px solid #ececec;
@@ -8,7 +8,7 @@
     }
     &-li{
         &:not(:last-child){
-            border-bottom: 1px solid #ececec;
+            border-bottom: 1px solid var(--tiklab-gray-200);
         }
         &-top{
             display: flex;

@@ -75,7 +75,7 @@ const WorkSpace = props =>{
     }
 
     return(
-        <div className="workSpace home-limited">
+        <div className="workSpace home-limited mf">
             <div className="workSpace-top">
                 <BreadcrumbContent
                     firstItem={pipeline.pipelineName}

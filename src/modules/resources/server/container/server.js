@@ -8,6 +8,7 @@ import EmptyText from "../../../../common/emptyText/emptyText";
 import Tabs from "../../../../common/tabs/tabs";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import ServerBtn from "../components/serverBtn";
+import ListName from "../../../../common/list/listname";
 
 const Server = props =>{
 
@@ -58,14 +59,9 @@ const Server = props =>{
     ]
 
     const name = text =>{
-        return  <>
-                <span className="server-content-icon">
-                    {text && text.substring(0,1).toUpperCase()}
-                </span>
-                <span>
-                    {text}
-                </span>
-        </>
+        return  <ListName
+                    text={text}
+                />
     }
 
     const user = (text,record) =>{
@@ -114,15 +110,12 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"200px",
-            ellipsis:true,
             render:text => name(text)
         },
         {
             title:"类型",
             dataIndex:"type",
             key:"type",
-            width: "180px",
             render:text => {
                 switch (text) {
                     case 2:
@@ -140,23 +133,18 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
-            width:"220px",
-            ellipsis:true,
             render:(text,record) => user(text,record)
         },
         {
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width: "180px",
             render:text => authPublic(text)
-
         },
         {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width: "240px",
         },
         {
             title:"操作",
@@ -173,23 +161,17 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"200px",
-            ellipsis:true,
             render:text => name(text)
         },
         {
             title:"授权信息",
             dataIndex:"message",
             key:"message",
-            width:"180px",
-            ellipsis:true,
         },
         {
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
-            width:"220px",
-            ellipsis:true,
             render:(text,record) => user(text,record)
 
         },
@@ -197,15 +179,12 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"180px",
-            ellipsis:true,
             render:text => authPublic(text)
         },
         {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"240px",
         },
         {
             title:"操作",
@@ -220,22 +199,17 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"200px",
-            ellipsis:true,
             render:text => name(text)
         },
         {
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
-            width:"280px",
-            ellipsis:true,
         },
         {
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
-            width:"180px",
             render: text => {
                 switch (text) {
                     case 1:
@@ -249,8 +223,6 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
-            width:"200px",
-            ellipsis:true,
             render:(text,record) => user(text,record)
 
         },
@@ -258,7 +230,6 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"120px",
             render:text => authPublic(text)
 
         },
@@ -266,14 +237,12 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"180px",
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
             render:(text,record) => action(text,record)
-
         }
     ]
 
@@ -291,7 +260,7 @@ const Server = props =>{
     }
 
     return(
-        <div className="server home-limited">
+        <div className="server home-limited mf">
             <div className="server-upper">
                 <BreadcrumbContent firstItem={"服务配置"} />
                 <ServerBtn/>

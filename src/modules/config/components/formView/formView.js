@@ -3,7 +3,7 @@ import {Form} from "antd";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 import NewStage from "./newStage";
-import Anch from "./anch";
+import Anch from "../common/anch";
 import  "./formView.scss";
 
 const formView = props =>{
@@ -40,13 +40,13 @@ const formView = props =>{
 
     return(
        <>
-           <Anch
-               data={data}
-               opt={opt}
-               setOpt={setOpt}
-               setAddConfigVisible={setAddConfigVisible}
-           />
-           <div className="formView">
+           {/*<Anch*/}
+           {/*    data={data}*/}
+           {/*    opt={opt}*/}
+           {/*    setOpt={setOpt}*/}
+           {/*    setAddConfigVisible={setAddConfigVisible}*/}
+           {/*/>*/}
+           <div className="formView mf">
                <div className="formView-content">
                    <Form
                        id="form"

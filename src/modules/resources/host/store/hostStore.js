@@ -40,6 +40,7 @@ export class HostStore {
         if(data.code===0 && data.data){
             this.hostList = data.data
         }
+        return data
     }
 
     @action

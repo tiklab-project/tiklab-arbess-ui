@@ -7,6 +7,7 @@ import EmptyText from "../../../../common/emptyText/emptyText";
 import AuthBtn from "../components/authBtn";
 import "../components/auth.scss";
 import {Profile} from "tiklab-eam-ui";
+import ListName from "../../../../common/list/listname";
 
 const Auth = props =>{
 
@@ -16,7 +17,6 @@ const Auth = props =>{
     useEffect(()=>{
         findAllAuth()
     },[fresh])
-
 
     const edit = (text,record) => {
         setModalVisible(true)
@@ -33,14 +33,9 @@ const Auth = props =>{
             dataIndex:"name",
             key:"name",
             render:text => {
-                return  <>
-                    <span className="auth-content-icon">
-                        {text && text.substring(0,1).toUpperCase()}
-                    </span>
-                    <span>
-                        {text}
-                    </span>
-                </>
+                return  <ListName
+                            text={text}
+                        />
             }
         },
         {
@@ -117,7 +112,7 @@ const Auth = props =>{
     ]
 
     return(
-        <div className="auth home-limited">
+        <div className="auth home-limited mf">
             <div className="auth-upper">
                 <BreadcrumbContent firstItem={"认证配置"}/>
                 <AuthBtn/>

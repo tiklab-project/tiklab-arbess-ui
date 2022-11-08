@@ -19,7 +19,7 @@
               display: flex;
               .li-header{
                   &-title{
-                      font-weight: var(--mf-text-weight-bold);
+                      font-weight: var(--tiklab-font-weight-bold);
                       font-size: 16px
                   }
                   &-name{
@@ -64,7 +64,7 @@
           }
       }
       &-selected{
-          border: 1px solid #0063FF;
+          border: 1px solid var(--tiklab-blue);
         }
     }
     .steps-top{
@@ -76,7 +76,7 @@
         background-color: #fafafa;
         border: 1px dashed #e9e9e9;
         border-radius: 2px;
-        height: calc(100% - 150px);
+        height: calc(100% - 120px);
         overflow: auto
     }
     .ant-steps-item-icon{

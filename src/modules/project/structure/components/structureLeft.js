@@ -3,17 +3,16 @@ import StructureLeftExecute from "./structureLeftExecute";
 import StructureLeftDropdown from "./structureLeftDropdown";
 import StructureEmpty from "./structureEmpty";
 import {inject,observer} from "mobx-react";
-import {ConfigProvider,Pagination} from "antd";
-import zhCN from "antd/es/locale/zh_CN";
+import {LeftOutlined,RightOutlined} from "@ant-design/icons";
 import StructureLeftList from "./structureLeftList";
 
 const StructureLeft = props =>{
 
     const {status,pipelineId,structureStore,structureListStore}=props
 
-    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,findPageHistory,pipelineUserList,
+    const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,pipelineUserList,
         execState} = structureStore
-    const {pageCurrent,setPageCurrent,state,setState,enforcer,setEnforcer,mode,setMode,drop} = structureListStore
+    const {pageCurrent,setPageCurrent,setState,setEnforcer,setMode,drop} = structureListStore
 
     const sta = item =>{
         if(leftPageList){
@@ -34,33 +33,6 @@ const StructureLeft = props =>{
             setModeData(item)
         })
     }
-
-    const onChangePage = pagination => {
-        const params = {
-            pipelineId:pipelineId,
-            pageParam: {
-                pageSize: 10,
-                currentPage:pagination
-            },
-            state:state,
-            name:enforcer,
-            type:mode
-        }
-        change(params,pagination)
-    }
-
-    const change = (params,page) =>{
-        setPageCurrent(page)
-        findPageHistory(params).then(()=>{
-            if(index!==0){
-                if(execState){
-                    setIndex(0)
-                }else{
-                    setIndex(1)
-                }
-            }
-        })
-    }
     
     const renderLeftPageList = leftPageList => {
         return leftPageList.map((item,i)=>{
@@ -77,18 +49,24 @@ const StructureLeft = props =>{
         })
     }
 
+    const changPage = pages =>{
+        setPageCurrent(pages)
+        if(execState===""){
+            setIndex(1)
+        }else {
+            setIndex(0)
+        }
+    }
+
     return(
         <div className="structure-content-left">
             <StructureLeftDropdown
                 {...props}
-                state={state}
                 setState={setState}
-                enforcer={enforcer}
                 setEnforcer={setEnforcer}
-                mode={mode}
                 setMode={setMode}
+                changPage={changPage}
                 pipelineUserList={pipelineUserList}
-                change={change}
                 drop={drop}
                 pipelineId={pipelineId}
             />
@@ -103,20 +81,25 @@ const StructureLeft = props =>{
                                         status={status}
                                         index={index}
                                         setIndex={setIndex}
+                                        changPage={changPage}
                                     />
                                     { renderLeftPageList(leftPageList) }
                                 </div>
                                 <div className="history-content-page">
-                                    <ConfigProvider locale={zhCN}>
-                                        <Pagination
-                                            {...page}
-                                            size="small"
-                                            current={pageCurrent}
-                                            onChange={onChangePage}
-                                            showSizeChanger={false}
-                                            showQuickJumper={false}
-                                        />
-                                    </ConfigProvider>
+                                    <span
+                                        className={`${pageCurrent===1?"page-ban":"page-allow"}`}
+                                        onClick={()=>pageCurrent===1? null :changPage(pageCurrent - 1)}
+                                    >
+                                            <LeftOutlined/>
+                                        </span>
+                                    <span className="page-current">{pageCurrent}</span>
+                                    <span> / {page && page.total}</span>
+                                    <span
+                                        className={`${pageCurrent===page.total?"page-ban":"page-allow"}`}
+                                        onClick={()=>pageCurrent===page.total?null:changPage(pageCurrent + 1)}
+                                    >
+                                        <RightOutlined/>
+                                    </span>
                                 </div>
                             </>
                             :

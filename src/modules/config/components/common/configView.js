@@ -7,6 +7,9 @@ import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
 import {Empty} from "antd";
+import AuthBtn from "../../../resources/auth/components/authBtn";
+import ServerBtn from "../../../resources/server/components/serverBtn";
+import HostBtn from "../../../resources/host/component/hostBtn";
 
 const ConfigView = props =>{
 
@@ -102,6 +105,7 @@ const ConfigView = props =>{
             }
             else if(data.type > 30 && data.type < 40 ){
                 renderDeploy(data)
+                deploy(data)
                 setDeployType(data.type)
             }
             else if(data.type > 40 && data.type <50){
@@ -122,7 +126,7 @@ const ConfigView = props =>{
     const renderCodeData = data => {
         const codeFormValue = {
             gitAuthName:data.auth && data.auth.name,
-            gitAuthId:data.auth && data.auth.authId
+            gitAuthId:data.authId
         }
         Object.assign(formInitialValues,codeFormValue)
     }
@@ -139,28 +143,27 @@ const ConfigView = props =>{
     
     // 部署
     const renderDeploy = data => {
-        deploy(data)
         const DeployFormValue={
             deployAuthName:data.auth && data.auth.name,
-            deployAuthId:data.auth && data.auth.authId
+            deployAuthId: data.authId
         }
         Object.assign(formInitialValues,DeployFormValue)
     }
 
     // 部署mirror
     const deploy =  data =>{
-        if(data.deployType===0){
+        if(data.authType===1){
             setDeployOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
-            setVirShellBlock(`${data.startShell ? data.startShell : ""}`)
+            setVirShellBlock(`${data.startOrder ? data.startOrder : ""}`)
         }
-        else setDeployShellBlock(`${data.startShell ? data.startShell : ""}`)
+        else setDeployShellBlock(`${data.startOrder ? data.startOrder : ""}`)
     }
 
     // 代码扫描
     const renderScan = data => {
         const scanFormValue={
             scanAuthName:data.auth && data.auth.name,
-            scanAuthId:data.auth && data.auth.authId
+            scanAuthId:data.authId
         }
         Object.assign(formInitialValues,scanFormValue)
     }
@@ -169,11 +172,10 @@ const ConfigView = props =>{
     const renderGoods = data => {
         const goodsFormValue={
             goodsAuthName:data.auth && data.auth.name,
-            goodsAuthId:data.auth && data.auth.authId
+            goodsAuthId:data.authId
         }
         Object.assign(formInitialValues,goodsFormValue)
     }
-
 
     // 统一form表单里面需要删除的值
     const del = i => {
@@ -191,15 +193,11 @@ const ConfigView = props =>{
             case 31:
             case 32:
                 formInitialValues.deployAuthName = null
-                formInitialValues.sourceAddress = null
-                formInitialValues.sshIp = null
-                formInitialValues.sshPort = null
+                formInitialValues.localAddress = null
                 formInitialValues.deployAddress = null
                 formInitialValues.deployOrder = null
                 formInitialValues.startAddress = null
-                formInitialValues.startPort = null
-                formInitialValues.mappingPort = null
-                formInitialValues.deployType = 0
+                formInitialValues.authType = 1
                 formInitialValues.deployAuthId = 0
                 setDeployType("")
                 setVirShellBlock("")

@@ -31,7 +31,7 @@ const Deploy = props =>{
             pipelineName:pipeline && pipeline.pipelineName,
             regex:formInitialValues.sourceAddress
         }
-        if(formInitialValues.sourceAddress && pipelineId){
+        if(formInitialValues.sourceAddress){
             getFile(params).then(res=>{
                 addMessageInfo(res)
             }).catch(error=>{
@@ -55,7 +55,7 @@ const Deploy = props =>{
         const params = {
             pipeline:{pipelineId},
             taskType:deployType,
-            values:{deployType:value},
+            values:{authType:value},
             message:"update"
         }
         updateConfigure(params).then(res=>{
@@ -80,8 +80,8 @@ const Deploy = props =>{
         <>
             <div className="formView-inputs">
                 <Form.Item
-                    name={"deployType"}
-                    label="部署类型"
+                    name={"authType"}
+                    label="部署方式"
                 >
                     <Select
                         bordered={bordered}
@@ -89,8 +89,8 @@ const Deploy = props =>{
                         onBlur={onBlur}
                         onChange={changDeployType}
                     >
-                        <Select.Option value={0}>结构化部署</Select.Option>
-                        <Select.Option value={1}>自定义部署</Select.Option>
+                        <Select.Option value={1}>结构化部署</Select.Option>
+                        <Select.Option value={2}>自定义部署</Select.Option>
                     </Select>
                 </Form.Item>
                 <div className="formView-inputs-suffix">
@@ -98,10 +98,10 @@ const Deploy = props =>{
                 </div>
             </div>
             <Form.Item
-                shouldUpdate={(prevValues,currentValues)=> prevValues.deployType!==currentValues.deployType}
+                shouldUpdate={(prevValues,currentValues)=> prevValues.authType!==currentValues.authType}
             >
                 {({ getFieldValue })=>
-                    getFieldValue("deployType") === 0 ? (
+                    getFieldValue("authType") === 1 ? (
                         <>
                             <DeploySame
                                 {...props}
@@ -118,9 +118,9 @@ const Deploy = props =>{
                                 <DeployDocker deployType={deployType}/>
                             }
                         </>) :
-                        <Form.Item name={"startShell"} label="Shell命令">
+                        <Form.Item name={"startOrder"} label="Shell命令">
                             <Mirror
-                                name={"startShell"}
+                                name={"startOrder"}
                                 type={deployType}
                                 shellBlock={deployShellBlock}
                                 setShellBlock={setDeployShellBlock}

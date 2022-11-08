@@ -1,6 +1,7 @@
 import React,{Fragment} from "react";
 import {Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {getTime} from "../../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
 
@@ -55,7 +56,6 @@ const StructureRightItem = props =>{
         return `item-${runState}`
     }
 
-
     // cart
     const rightDetails = rightFlowData =>{
         return <div className="mid_group_center">
@@ -66,7 +66,7 @@ const StructureRightItem = props =>{
                                     item={item}
                                     style={style(item.runState)}
                                     state={state(item)}
-                                    time={item.execTime}
+                                    time={getTime(item.runTime)}
                                     log={log}
                                 />
                             </Fragment>

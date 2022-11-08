@@ -26,7 +26,7 @@ export class StructureStore {
     @observable page = {
         defaultCurrent: 1,
         pageSize: "11",
-        total: "1"
+        total: "1",
     }
     @observable isData = false  // 构建情况是否有数据
 
@@ -143,7 +143,7 @@ export class StructureStore {
                         this.leftPageList = res.data.dataList
                         this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
                         this.modeData =  res.data.dataList && res.data.dataList[0]
-                        this.page.total = res.data.totalRecord
+                        this.page.total = res.data.totalPage
                         this.isData = true
                     }
                 }

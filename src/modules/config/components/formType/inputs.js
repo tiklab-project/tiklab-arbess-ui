@@ -16,7 +16,6 @@ const Inputs = props =>{
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
-    const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
 
     const onFocus = () => {
         setBordered(true)
@@ -32,8 +31,6 @@ const Inputs = props =>{
                     return validCodeGit.test(value)
                 }
                 break
-            case "sshIp":
-                return validDeploySshIp.test(value)
             default:
                 return !(isValid && !value)
         }
@@ -85,12 +82,6 @@ const Inputs = props =>{
                                 {pattern: validCodeGit, message:"请输入正确的git地址"}
                             ]
                 }
-                break
-            case "sshIp":
-                rule =  [
-                            {required:true, message: "请输入Ip地址"},
-                            {pattern:validDeploySshIp, message:"请输入正确的Ip地址"}
-                        ]
                 break
             default:
                 if(isValid){

@@ -136,7 +136,10 @@ const ProjectAside = props =>{
              <div className="project-sys"
                   onClick={()=>props.history.push(`/index/task/${pipelineId}/assembly/redel`)}
              >
-                 <SettingOutlined/>
+                 <div className="aside_content_icon">
+                     <SettingOutlined/>
+                 </div>
+                 <div>设置</div>
              </div>
 
          </div>

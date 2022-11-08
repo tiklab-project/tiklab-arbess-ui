@@ -120,13 +120,13 @@ const MessageDrawer = props =>{
             visible={visible}
             contentWrapperStyle={{width:450,top:50,height:"calc(100% - 50px)"}}
             bodyStyle={{padding:0}}
+            className="mf"
         >
             <div className="messageModal">
                 <div className="messageModal-up">
                     <ModalTitle
                         setVisible={setVisible}
                         title={<><BellOutlined style={{fontSize:16}}/>消息</>}
-                        isType={true}
                     />
                 </div>
                 <div className="messageModal-content">

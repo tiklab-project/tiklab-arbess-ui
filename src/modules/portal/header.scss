@@ -9,7 +9,7 @@
         width: 100%;
         min-width: 600px;
         height: 50px;
-        border-bottom: 1px solid #ececec;
+        border-bottom: 1px solid var(--tiklab-gray-200);
         &-logo{
             height: 50px;
             width: 120px;
@@ -44,14 +44,14 @@
         &-user,&-message,&-set,&-help{
             margin: 0 10px;
             &:hover{
-                color: #0063FF;
+                color: var(--tiklab-blue);
             }
         }
         &-icon{
-            font-size: 23px;
+            font-size: var(--tiklab-icon-size-22);
             cursor: pointer;
             &:hover{
-                color: #0063FF;
+                color: var(--tiklab-blue);
             }
         }
         &-user{
@@ -69,14 +69,14 @@
                     line-height: 50px;
                     padding: 0 10px;
                     &:hover{
-                        color: #0063FF;
+                        color: var(--tiklab-blue);
                     }
                 }
 
             }
             &-active{
-                color: #0063FF;
-                border-bottom: 2px solid #0063FF;
+                color:var(--tiklab-blue);
+                border-bottom: 2px solid var(--tiklab-blue);
             }
         }
     }
@@ -85,6 +85,14 @@
         overflow: auto;
     }
 }
+
+.header-outMenu,.header-helpMenu{
+    .header-dropdown-icon{
+        font-size: var(--tiklab-icon-size-16);
+        padding-right: 5px;
+    }
+}
+
 .header{
     &-outMenu{
         background: #fff;
@@ -112,9 +120,6 @@
                     background: #f4f4f4;
                     cursor: pointer;
                 }
-                .lan{
-                    padding-left: 5px;
-                }
             }
         }
         &-out{
@@ -126,13 +131,11 @@
                     background: #f4f4f4;
                     cursor: pointer;
                 }
-                .bottom-out{
-                    padding-left: 5px;
-                }
             }
         }
     }
 }
+
 .outMenu-lan-menu{
     background: #ffffff;
     box-shadow: 0 0 8px 1px #00000019;
@@ -145,5 +148,17 @@
         height: 30px;
         line-height: 30px;
         cursor: pointer;
+    }
+}
+
+.header-helpMenu{
+    background: #ffffff;
+    width: 150px;
+    .header-helpMenu-item{
+        cursor: pointer;
+        padding: 4px 20px;
+        &:not(:last-child){
+            margin-bottom: 5px;
+        }
     }
 }

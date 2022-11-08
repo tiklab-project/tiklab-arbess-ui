@@ -1,6 +1,6 @@
 .homePage{
     width: 100%;
-    background: var(--mf-side-color);
+    background: var(--tiklab-gray);
     &-guide{
         display: flex;
         flex-direction: row;
@@ -8,13 +8,13 @@
         align-items: center;
         padding-bottom: 10px;
         &-title{
-            font-weight: var(--mf-text-weight-bold);
+            font-weight: var(--tiklab-font-weight-bold);
         }
         &-ac{
             border-radius: 3px;
             cursor: pointer;
             font-size: 16px;
-            color: #0063FF;
+            color: var(--tiklab-blue);
         }
     }
     &-content{
@@ -46,7 +46,7 @@
                     justify-content: center;
                     align-items: center;
                     .quickIn-group-title{
-                        font-weight: var(--mf-text-weight-bold);
+                        font-weight: var(--tiklab-font-weight-bold);
                     }
                     .quickIn-group-icon{
                         .icon{
@@ -77,9 +77,9 @@
             flex: 1;
             &-bottom{
                 &-list{
-                    padding: 10px 8px;
+                    padding: 8px;
                     &:not(:last-child){
-                        border-bottom: 1px solid #f8f8f8;
+                        border-bottom: 1px solid var(--tiklab-gray-200);
                     }
                     &:hover{
                         background: #f4f4f4;
@@ -89,41 +89,6 @@
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        &-title{
-                            cursor: pointer;
-                        }
-                        &-icon{
-                            display: inline-block;
-                            width: 25px;
-                            height: 25px;
-                            line-height: 25px;
-                            border-radius: 4px;
-                            margin-right: 8px;
-                            text-align: center;
-                        }
-                        .icon{
-                            &-0{
-                                background: #cad2f3;
-                            }
-                            &-1{
-                                background: #cadbf3;
-                            }
-                            &-2{
-                                background: #e8eaf6;
-                            }
-                            &-3{
-                                background: #ffebee;
-                            }
-                            &-4{
-                                background: #e0f2f1;
-                            }
-                            &-5{
-                                background: #eee;
-                            }
-                        }
-                        &-pipelineName{
-                            color: #0063FF;
-                        }
                     }
                 }
             }
@@ -141,7 +106,7 @@
                 &-list{
                     padding: 8px;
                     &:not(:last-child){
-                        border-bottom: 1px solid #f8f8f8;
+                        border-bottom: 1px solid var(--tiklab-gray-200);
                     }
                     &:hover{
                         background: #f4f4f4;
@@ -195,7 +160,7 @@
                                 background: #87d068;
                             }
                             &-2{
-                                background: #0063FF;;
+                                background: var(--tiklab-blue);
                             }
                             &-3{
                                 background: red;
@@ -224,9 +189,9 @@
                     }
                     &-icon{
                         display: inline-block;
-                        width: 30px;
-                        height: 30px;
-                        line-height: 30px;
+                        width: var(--tiklab-icon-size-32);
+                        height: var(--tiklab-icon-size-32);
+                        line-height: var(--tiklab-icon-size-32);
                         border-radius: 50px;
                         background: #6da5f7;
                         margin-right: 8px;
@@ -239,7 +204,7 @@
                 text-align: center;
                 cursor: pointer;
                 &-more{
-                    color: #0063FF;
+                    color: var(--tiklab-blue);
                 }
             }
         }

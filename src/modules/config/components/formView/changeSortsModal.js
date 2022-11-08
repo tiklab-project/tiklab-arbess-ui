@@ -7,6 +7,23 @@ const ChangeSortsModal = props =>{
     const {changeSortVisible,setChangeSortVisible,data,setData,updateConfigure,pipelineId} = props
 
     const [gData,setGData] = useState([])
+    const [height,setHeight] = useState(0)
+
+    useEffect(()=>{
+        autoHeight()
+    },[height])
+
+    const autoHeight = () =>{
+        let winHeight=0
+        if (window.innerHeight)
+            winHeight = window.innerHeight-120
+        else if ((document.body) && (document.body.clientHeight))
+            winHeight = document.body.clientHeight-120
+        if (document.documentElement && document.documentElement.clientHeight)
+            winHeight = document.documentElement.clientHeight-120
+        setHeight(winHeight)
+        window.onresize=autoHeight
+    }
 
     const nameArray = []
     useEffect(()=>{
@@ -107,12 +124,16 @@ const ChangeSortsModal = props =>{
             onCancel={()=>setChangeSortVisible(false)}
             visible={changeSortVisible}
             footer={null}
+            style={{height:height,top:60}}
+            className="mf"
         >
             <ModalTitle
                 setVisible={setChangeSortVisible}
                 title={"更改顺序"}
             />
-            <div className="changeSorts-tree">
+            <div className="changeSorts-tree"
+                 style={{height:"calc(100% - 150)",overflow:"auto"}}
+            >
                 <Tree
                       showIcon
                       draggable // 是否可拖拽

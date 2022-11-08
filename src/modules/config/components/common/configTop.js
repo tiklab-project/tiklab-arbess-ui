@@ -11,18 +11,17 @@ import {
 import {message,Spin} from "antd";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {withRouter} from "react-router";
-import {inject, observer} from "mobx-react";
-import AddModal from "../formView/addModal";
+import {inject,observer} from "mobx-react";
 import Btn from "../../../../common/btn/btn";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 
 
 const ConfigTop = props =>{
 
-    const {view,setView,pipelineId,pipelineName,configStore,structureStore} = props
+    const {view,setView,pipelineId,pipelineName,configStore,structureStore,setAddConfigVisible} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validLength,isPlugin,addConfigVisible,setAddConfigVisible} = configStore
+    const {validLength,isPlugin} = configStore
 
     const [processVisible,setProcessVisible] = useState(false)
 
@@ -120,7 +119,6 @@ const ConfigTop = props =>{
                             {/*        <AppstoreOutlined/>*/}
                             {/*        &nbsp;*/}
                             {/*        图形*/}
-
                             {/*    </div>*/}
                             {/*</div>*/}
                             {
@@ -143,12 +141,6 @@ const ConfigTop = props =>{
                             }
                         </div>
                     </div>
-
-                    <AddModal
-                        addConfigVisible={addConfigVisible}
-                        setAddConfigVisible={setAddConfigVisible}
-                    />
-
                 </div>
             </div>
         </div>

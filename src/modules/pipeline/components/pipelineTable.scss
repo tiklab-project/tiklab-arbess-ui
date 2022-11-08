@@ -1,49 +1,11 @@
 .pipelineTable{
-    &-pipelineName{
-        &-task{
-            cursor: pointer;
-        }
-        &-text{
-            color: #0063FF;
-        }
-        &-icon{
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            border-radius: 4px;
-            text-align: center;
-            color: black;
-            margin-right: 10px;
-        }
-        .icon{
-            &-0{
-                background: #cad2f3;
-            }
-            &-1{
-                background: #cadbf3;
-            }
-            &-2{
-                background: #e8eaf6;
-            }
-            &-3{
-                background: #ffebee;
-            }
-            &-4{
-                background: #e0f2f1;
-            }
-            &-5{
-                background: #eee;
-            }
-        }
-    }
     &-state,&-history{
         cursor: pointer;
         .actions-se{
             font-size: 20px;
         }
         &:hover{
-            color: #0063FF;
+            color: var(--tiklab-blue);
         }
     }
     &-state{
@@ -56,8 +18,5 @@
             width: 20px;
             height: 20px;
         }
-    }
-    .ant-table-tbody>tr>td{
-        padding: 15px;
     }
 }

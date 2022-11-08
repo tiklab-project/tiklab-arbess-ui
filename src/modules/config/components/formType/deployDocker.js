@@ -15,18 +15,6 @@ const DeployDocker = props =>{
                 mode={deployType}
                 addonBefore={"/"}
             />
-            <Inputs
-                placeholder={"启动端口"}
-                label={"启动端口"}
-                name={"startPort"}
-                mode={deployType}
-            />
-            <Inputs
-                placeholder={"映射端口"}
-                label={"映射端口"}
-                name={"mappingPort"}
-                mode={deployType}
-            />
         </>
     )
 }

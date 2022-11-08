@@ -8,10 +8,11 @@ import HostBtn from "../../../resources/host/component/hostBtn";
 
 const FindAuth = props =>{
 
-    const {type,pipelineStore,configStore,authStore,configDataStore,serverStore}=props
+    const {type,pipelineStore,configStore,authStore,configDataStore,serverStore,hostStore}=props
 
     const {findAllAuth} = authStore
     const {findAllAuthServerList} = serverStore
+    const {findAllAuthHostList} = hostStore
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
     const {formInitialValues} = configDataStore
@@ -35,7 +36,6 @@ const FindAuth = props =>{
             case 31:
             case 32:
                 return <HostBtn isConfig={true} type={type}/>
-
 
         }
     }
@@ -85,6 +85,11 @@ const FindAuth = props =>{
         })
     }
 
+    const onBlur = () => {
+        setBordered(false)
+    }
+
+
     // 获取下拉内容
     const onFocus = type => {
         setBordered(true)
@@ -99,6 +104,9 @@ const FindAuth = props =>{
             case 41:
             case 51:
                 findAllAuthServerList(type).then(res=>{getList(res)})
+                break
+            case 31:
+                findAllAuthHostList(type).then(res=>{getList(res)})
         }
     }
 
@@ -106,10 +114,6 @@ const FindAuth = props =>{
         if(res.code===0 && res.data){
             setList(res.data)
         }
-    }
-    
-    const onBlur = () => {
-        setBordered(false)
     }
 
     // 区分字段
@@ -125,6 +129,7 @@ const FindAuth = props =>{
         }
     }
 
+    // 下拉框 id
     const setKey = item =>{
         switch (type) {
             case 1:
@@ -136,6 +141,9 @@ const FindAuth = props =>{
             case 41:
             case 51:
                 return item.serverId
+            case 31:
+            case 32:
+                return item.hostId
         }
     }
 
@@ -170,6 +178,7 @@ const FindAuth = props =>{
                         list && list.map(item=>{
                             return <Select.Option value={item.name} key={setKey(item)}>
                                 {item.name}
+                                {}
                             </Select.Option>
                         })
                     }
@@ -183,4 +192,4 @@ const FindAuth = props =>{
 }
 
 export default inject("pipelineStore","configStore","authStore"
-    ,"configDataStore","serverStore")(observer(FindAuth))
+    ,"configDataStore","serverStore","hostStore")(observer(FindAuth))

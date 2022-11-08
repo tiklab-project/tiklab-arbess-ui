@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {getUrlParam} from "../../common/getUrlParam/getUrlParam";
+import {getUrlParam} from "../../common/client/client";
 
 const Authorize = props =>{
 

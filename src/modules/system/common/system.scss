@@ -6,13 +6,13 @@
         height: 100%;
         width: 200px;
         min-width: 200px;
-        background: var(--mf-side-color);
+        background: var(--tiklab-gray);
         &-sys{
             width: 100%;
             text-align: center;
             padding-top: 10px;
             height: 45px;
-            border-top: 1px solid #ececec;
+            border-top: 1px solid var(--tiklab-gray-200);
             cursor: pointer;
         }
         &-top{
@@ -39,10 +39,10 @@
             cursor: pointer;
         }
         .system-aside-first:hover {
-            background: var(--mf-hover-color);
+            background: var(--tiklab-gray-300);
         }
         .system-aside-second:hover{
-            background: var(--mf-hover-color);
+            background: var(--tiklab-gray-300);
         }
 
         &-li {
@@ -52,15 +52,16 @@
             padding: 0;
         }
         &-select {
-            background: var(--mf-select-color);
-            border-left: 3px solid #0063FF;
+            background: var(--tiklab-gray-400);
+            border-left: 3px solid var(--tiklab-blue);
         }
     }
     &-content{
         width: 100%;
         overflow: auto;
     }
-    .icon{
+    .sys-content-icon{
+        font-size: var(--tiklab-icon-size-16);
         padding-right: 5px;
     }
 }

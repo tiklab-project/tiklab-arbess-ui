@@ -26,7 +26,6 @@ const MirrorContent = forwardRef((props,ref)=>{
     const [isLoading,setIsLoading] = useState(1)
     const [bordered,setBordered] = useState(false)
 
-    
     const onFocus = () => {
         setBordered(true)
     }

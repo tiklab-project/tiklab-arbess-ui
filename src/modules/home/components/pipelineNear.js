@@ -1,5 +1,6 @@
 import React from "react";
 import Guide from "./guide";
+import ListName from "../../../common/list/listname";
 
 // 最近访问的流水线
 const PipelineNear = props =>{
@@ -13,15 +14,12 @@ const PipelineNear = props =>{
     const renderList = (item) => {
         return <div className="pipelineNear-bottom-list" key={item.pipelineId}>
             <div className="pipelineNear-item">
-                <div className="pipelineNear-item-title"
-                     onClick={()=>goPipeline(item.pipelineId)}
-                >
-                    <span className={`pipelineNear-item-icon icon-${item.pipeline.color}`}>
-                        {item.pipelineName.substring(0,1).toUpperCase()}
-                    </span>
-                    <span className="pipelineNear-item-pipelineName">
-                        {item.pipelineName}
-                    </span>
+                <div className="pipelineNear-item-title">
+                    <ListName
+                        text={item.pipelineName}
+                        onClick={()=>goPipeline(item.pipelineId)}
+                        colors={item.pipeline.color}
+                    />
                 </div>
                 <div>{item.pipeline.pipelineCreateTime}</div>
             </div>

@@ -29,11 +29,11 @@ const AuthModal = props =>{
     const autoHeight = () =>{
         let winHeight=0
         if (window.innerHeight)
-            winHeight = window.innerHeight-200
+            winHeight = window.innerHeight-120
         else if ((document.body) && (document.body.clientHeight))
-            winHeight = document.body.clientHeight-200
+            winHeight = document.body.clientHeight-120
         if (document.documentElement && document.documentElement.clientHeight)
-            winHeight = document.documentElement.clientHeight-200
+            winHeight = document.documentElement.clientHeight-120
         setHeight(winHeight)
         window.onresize=autoHeight
     }
@@ -79,7 +79,8 @@ const AuthModal = props =>{
             onCancel={()=>setVisible(false)}
             closable={false}
             footer={modalFooter}
-            style={{height:height}}
+            style={{height:height,top:60}}
+            className="mf"
         >
             <ModalTitle
                 setVisible={setVisible}

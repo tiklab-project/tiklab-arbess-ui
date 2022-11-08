@@ -7,7 +7,7 @@
         left: 0;
         top: 50px;
         height: 100%;
-        background: var(--mf-side-color);
+        background: var(--tiklab-gray);
         .content{
             width: 80px;
             height: calc(100% - 55px);
@@ -20,13 +20,10 @@
             align-items: center;
             padding: 5px 0;
             &:hover{
-                background: var(--mf-hover-color);
+                background: var(--tiklab-gray-300);
             }
             &:not(:last-child){
                 margin-bottom: 5px;
-            }
-            .aside_content_icon{
-                font-size: 16px;
             }
             .dropdowns_icon{
                 width: 25px;
@@ -60,8 +57,8 @@
             flex-direction: column;
         }
         &_active{
-            background: var(--mf-select-color);
-            border-left: 3px solid var(--mf-main-color);
+            background: var(--tiklab-gray-400);
+            border-left: 3px solid var(--tiklab-blue);
         }
     }
     &-sys{
@@ -70,12 +67,14 @@
         padding-top: 15px;
         height: 45px;
         cursor: pointer;
-        font-size: 20px;
     }
     &-content{
         width: 100%;
         height: calc(100vh - 39px);
         overflow: auto;
+    }
+    .aside_content_icon{
+        font-size: var(--tiklab-icon-size-16);
     }
 }
 

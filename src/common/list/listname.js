@@ -1,21 +1,21 @@
 import React from "react";
-import "./projectList.scss";
+import "./listname.scss";
 
-const ProjectList = props => {
+const Listname = props => {
 
     const {text,onClick,colors} = props
 
     return  <span
-                className={`mf-projectList ${onClick?"mf-projectList-href":""}`}
+                className={`mf-listname ${onClick?"mf-listname-href":""}`}
                 onClick={onClick}
             >
-                <span className={`mf-projectList-icon icon-${colors}`}>
+                <span className={`mf-listname-icon icon-${colors}`}>
                     {text.substring(0,1).toUpperCase()}
                 </span>
-                <span className={`${onClick?"mf-projectList-name":""}`}>
+                <span className={`${onClick?"mf-listname-name":""}`}>
                     {text}
                 </span>
             </span>
 }
 
-export default ProjectList
+export default Listname
