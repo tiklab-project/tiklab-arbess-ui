@@ -1,0 +1,41 @@
+
+.mf-projectList-href{
+    cursor: pointer;
+}
+
+.mf-projectList-icon{
+    display: inline-block;
+    width: var(--tiklab-icon-size-32);
+    height: var(--tiklab-icon-size-32);
+    line-height: var(--tiklab-icon-size-32);
+    border-radius: 4px;
+    text-align: center;
+    color: black;
+    background: #cad2f3;
+    margin-right: 10px;
+}
+
+.mf-projectList-name{
+    color: var(--tiklab-blue);
+}
+
+.icon{
+    &-0{
+        background: #cad2f3;
+    }
+    &-1{
+        background: #cadbf3;
+    }
+    &-2{
+        background: #e8eaf6;
+    }
+    &-3{
+        background: #ffebee;
+    }
+    &-4{
+        background: #e0f2f1;
+    }
+    &-5{
+        background: #eee;
+    }
+}
