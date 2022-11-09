@@ -14,7 +14,7 @@ const BuildMavenOrNode = props =>{
         <>
             <Inputs
                 placeholder={`"\/\" 代表当前源的根目录`}
-                label={"文件地址"}
+                label={"模块地址"}
                 name={"buildAddress"}
                 mode={buildType}
                 addonBefore={"/"}

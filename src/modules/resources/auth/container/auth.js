@@ -57,7 +57,7 @@ const Auth = props =>{
             key:"user",
             render:(text,record) => {
                 return  <Space>
-                            <Profile />
+                            <Profile userInfo={record.user}/>
                             {text}
                         </Space>
             }

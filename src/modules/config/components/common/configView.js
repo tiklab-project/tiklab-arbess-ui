@@ -33,8 +33,6 @@ const ConfigView = props =>{
         })
     },[])
 
-
-    const lists = [1,2,3,4,5,11,21,22,31,32]
     // 表单初始化
     const newData = []
     useEffect(()=>{
@@ -46,7 +44,6 @@ const ConfigView = props =>{
                     nonData()
                 }
                 else {
-                    nonForm(initialData)
                     renderFormData(initialData)
                 }
             }
@@ -69,20 +66,6 @@ const ConfigView = props =>{
         setBuildShellBlock("")
     }
 
-    // pipeline切换form数据渲染问题
-    const nonForm = initialData =>{
-        for (let i=0; i<initialData.length;i++){
-            for (let j=0; j<lists.length;j++) {
-                const type = parseInt(initialData[i].type/10)
-                if (type*10 < lists[j] && (type+1) *10 > lists[j]) {
-                    lists.splice(j, 1)
-                    j--
-                }
-            }
-        }
-        return lists.map(item=>del(item))
-    }
-
     // 表单数据渲染
     const renderFormData = initialData => {
         for (let i = 0;i<initialData.length;i++){
@@ -93,28 +76,21 @@ const ConfigView = props =>{
             })
             if(data.type < 10){
                 renderCodeData(data)
-                setCodeType(data.type)
             }
             else if(data.type > 10 && data.type < 20){
                 renderTestData(data)
-                setTestType(data.type)
             }
             else if(data.type > 20 && data.type < 30 ){
                 renderBuild(data)
-                setBuildType(data.type)
             }
             else if(data.type > 30 && data.type < 40 ){
                 renderDeploy(data)
-                deploy(data)
-                setDeployType(data.type)
             }
             else if(data.type > 40 && data.type <50){
                 renderScan(data)
-                setScanType(data.type)
             }
             else if(data.type>50 && data.type<60){
                 renderGoods(data)
-                setGoodsType(data.type)
             }
             setData([...newData])
             Object.assign(formInitialValues, initialData[i])
@@ -128,16 +104,19 @@ const ConfigView = props =>{
             gitAuthName:data.auth && data.auth.name,
             gitAuthId:data.authId
         }
+        setCodeType(data.type)
         Object.assign(formInitialValues,codeFormValue)
     }
 
     // 测试
     const renderTestData = data =>{
+        setTestType(data.type)
         setUnitShellBlock(`${data.testOrder ? data.testOrder :""}`)
     }
     
     // 构建
     const renderBuild = data => {
+        setBuildType(data.type)
         setBuildShellBlock(`${data.buildOrder ? data.buildOrder : ""}`)
     }
     
@@ -147,6 +126,8 @@ const ConfigView = props =>{
             deployAuthName:data.auth && data.auth.name,
             deployAuthId: data.authId
         }
+        deploy(data)
+        setDeployType(data.type)
         Object.assign(formInitialValues,DeployFormValue)
     }
 
@@ -165,6 +146,7 @@ const ConfigView = props =>{
             scanAuthName:data.auth && data.auth.name,
             scanAuthId:data.authId
         }
+        setScanType(data.type)
         Object.assign(formInitialValues,scanFormValue)
     }
 
@@ -174,6 +156,7 @@ const ConfigView = props =>{
             goodsAuthName:data.auth && data.auth.name,
             goodsAuthId:data.authId
         }
+        setGoodsType(data.type)
         Object.assign(formInitialValues,goodsFormValue)
     }
 
@@ -211,6 +194,7 @@ const ConfigView = props =>{
                 setScanType("")
                 break
             case 51:
+            case 52:
                 formInitialValues.groupId = null
                 formInitialValues.artifactId = null
                 formInitialValues.version = null
@@ -245,10 +229,6 @@ const ConfigView = props =>{
     }
     
     return view==="forms" ?
-        // <FormView
-        //     del={del}
-        //     pipelineId={pipelineId}
-        // />
         renderFormView()
         :
         <>

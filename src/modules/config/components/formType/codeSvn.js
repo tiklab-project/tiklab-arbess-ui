@@ -1,7 +1,7 @@
 import React from "react";
-import Proof from "./proof";
 import Inputs from "./inputs";
 import {inject,observer} from "mobx-react";
+import FindAuth from "./findAuth";
 
 const CodeSvn = props =>{
 
@@ -18,10 +18,8 @@ const CodeSvn = props =>{
                 mode={codeType}
                 isValid={true}
             />
-            <Proof
-                allProofType={5}
-                testType={"源码地址"}
-                type={1}
+            <FindAuth
+                type={codeType}
             />
         </>
     )

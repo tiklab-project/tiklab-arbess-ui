@@ -1,7 +1,7 @@
 import React from "react";
 import {inject,observer} from "mobx-react";
 import Inputs from "./inputs";
-import Proof from "./proof";
+import FindAuth from "./findAuth";
 
 const CodeGitOrGitlab = props =>{
 
@@ -23,10 +23,8 @@ const CodeGitOrGitlab = props =>{
                 name={"codeBranch"}
                 mode={codeType}
             />
-            <Proof
-                allProofType={codeType}
-                testType={"源码地址"}
-                type={0}
+            <FindAuth
+                type={codeType}
             />
         </>
     )

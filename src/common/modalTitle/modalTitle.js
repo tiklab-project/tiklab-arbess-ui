@@ -1,5 +1,6 @@
 import React from "react";
 import {CloseOutlined} from "@ant-design/icons";
+import {Button} from "antd";
 import "./modalTitle.scss";
 import Btn from "../btn/btn";
 

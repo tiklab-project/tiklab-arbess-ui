@@ -23,7 +23,7 @@ const PipelineName = props =>{
     const powerLis = [
         {
             id:1,
-            title:"公有",
+            title:"全局",
             icon:<UnlockOutlined />,
             desc:"互联网上的任何人都可以查看该项目。不支持TFVC等某些功能。"
         },

@@ -39,8 +39,8 @@ const GoodsNexus = props => {
                 isValid={true}
             />
             <Inputs
-                placeholder={"文件绝对路径"}
-                label={"文件地址"}
+                placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
+                label={"部署文件"}
                 name={"fileAddress"}
                 mode={goodsType}
                 isValid={true}

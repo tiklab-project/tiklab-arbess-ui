@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {getUser} from "tiklab-core-ui";
+import {Row,Col} from "antd";
 import DynamicList from "../components/dynamicList";
 import PipelineNear from "../components/pipelineNear";
 import QuickIn from "../components/quickIn";
@@ -61,7 +62,7 @@ const HomePage = props =>{
     }
 
     return(
-        <div className="homePage">
+        <div className="homePage mf">
             <div className="homePage-content home-limited">
                 <div className="homePage-content-top">
                     <QuickIn
@@ -93,7 +94,6 @@ const HomePage = props =>{
                 </div>
             </div>
         </div>
-
     )
 }
 

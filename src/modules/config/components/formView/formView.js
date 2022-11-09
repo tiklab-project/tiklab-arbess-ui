@@ -46,7 +46,7 @@ const formView = props =>{
            {/*    setOpt={setOpt}*/}
            {/*    setAddConfigVisible={setAddConfigVisible}*/}
            {/*/>*/}
-           <div className="formView mf">
+           <div className="formView">
                <div className="formView-content">
                    <Form
                        id="form"

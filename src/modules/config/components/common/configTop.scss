@@ -12,6 +12,7 @@
     .config-up-content{
         max-width: 1280px;
         margin: auto;
+        min-width: 768px;
         padding: 0 var(--tiklab-padding);
     }
     .config-top{
@@ -26,6 +27,7 @@
     .config-content{
         margin: auto;
         max-width: 1280px;
+        min-width: 768px;
         padding: var(--tiklab-padding-item) var(--tiklab-padding) var(--tiklab-padding);
     }
     .config_changeView{
@@ -54,6 +56,7 @@
                     height: 32px;
                     line-height: 32px;
                     padding: 2px 10px;
+                    border-radius: 4px;
                 }
                 &-item{
                     cursor: pointer;
@@ -61,16 +64,10 @@
                 }
                 &-inner{
                     background-color: #fff;
-                    height: 32px;
-                    line-height: 32px;
-                    border-radius: 4px;
                 }
                 &-ban{
                     color: #C4C4C4;
-                    height: 32px;
-                    line-height: 32px;
-                    padding: 2px 10px;
-                    border-radius: 4px;
+                    cursor:not-allowed;
                 }
             }
         }

@@ -21,6 +21,10 @@ const WorkSpace = props =>{
     const [census,setCensus] = useState("")
     const [isDyna,setIsDyna] = useState(false)
 
+    useEffect(()=>{
+        setDynamicList([])
+    },[pipelineId])
+
     //运行概况
     useEffect(()=>{
         if(pipelineId){
@@ -28,22 +32,7 @@ const WorkSpace = props =>{
                 const data = res.data
                 if(res.code===0){
                     setCensus(data)
-                    const myChart = echarts.init(document.getElementById("burn-down"))
-                    myChart && myChart.setOption({
-                        tooltip: {
-                            formatter: "{b}: {c} ({d}%)"
-                        },
-                        color:["#77b3eb","#f06f6f","#f6c659"],
-                        type: "pie",
-                        series: [{
-                            type: "pie",
-                            data: [
-                                { value: data && data.successNumber, name: "成功" },
-                                { value: data && data.errorNumber, name: "失败" },
-                                { value: data && data.removeNumber, name: "其他" },
-                            ],
-                        }]
-                    })
+                    renderEchart(data)
                 }
             })
         }
@@ -62,12 +51,33 @@ const WorkSpace = props =>{
         })
     },[pipelineId,dynaPagination])
 
-    useEffect(()=>{
-        return()=>{
-            setDynamicList([])
-        }
-    },[pipelineId])
+    const renderEchart = data =>{
+        const chartDom=document.getElementById("burn-down")
+        // 获取实例
+        let myChart=chartDom && echarts.getInstanceByDom(chartDom)
 
+        if (!myChart) // 如果不存在则创建
+        {
+            myChart=chartDom && echarts.init(chartDom)
+        }
+        const option={
+            tooltip: {
+                formatter: "{b}: {c} ({d}%)"
+            },
+            color:["#77b3eb","#f06f6f","#f6c659"],
+            type: "pie",
+            series: [{
+                type: "pie",
+                data: [
+                    { value: data && data.successNumber, name: "成功" },
+                    { value: data && data.errorNumber, name: "失败" },
+                    { value: data && data.removeNumber, name: "其他" },
+                ],
+            }]
+        }
+        myChart && myChart.setOption(option)
+
+    }
 
     const moreDynamic = () =>{
         setIsDyna(true)

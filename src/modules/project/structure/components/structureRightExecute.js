@@ -1,6 +1,6 @@
 import React,{useState,Fragment} from "react";
 import {getUser} from "tiklab-core-ui";
-import {InfoOutlined} from "@ant-design/icons";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {getTime} from "../../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
@@ -101,11 +101,11 @@ const StructureRightExecute = props => {
         <>
             <StructureRightCue
                 way={execState && execState.runWay}
-                time={execState && execState.allTime}
+                time={getTime(execState && execState.runTime)}
                 title={"运行中"}
                 action={cease}
                 actionTitle={"停止"}
-                icon={<InfoOutlined/>}
+                icon={<ExclamationCircleOutlined />}
             />
             {executeDetails(rightExecuteData)}
             {logRunLog()}

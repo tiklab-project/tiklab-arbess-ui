@@ -72,14 +72,11 @@ const PipelineTable = props =>{
         }
     }
 
-    const tooltip = (statu,text) =>{
+    const tooltip = (statu,text,executor) =>{
         return <div>
-            <div>
-                构建状态：{statu}
-            </div>
-            <div>
-                构建时间：{text}
-            </div>
+            <div>执行人：{executor}</div>
+            <div>执行状态：{statu}</div>
+            <div>执行时间：{text}</div>
         </div>
     }
 
@@ -107,28 +104,28 @@ const PipelineTable = props =>{
             render:(text,record) =>{
                 switch (record.buildStatus) {
                     case 30:
-                        return  <Tooltip title={tooltip("成功",text)}>
+                        return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
                             <Space>
                                 <CheckCircleOutlined style = {{fontSize:20,color:"#0063FF"}}/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 1:
-                        return <Tooltip title={tooltip("失败",text)}>
+                        return <Tooltip title={tooltip("失败",text,record.execUser.name)}>
                             <Space>
                                 <CloseCircleOutlined style = {{fontSize:20,color:"#ff0000"}}/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 0:
-                        return <Tooltip title={tooltip("待构建","无")}>
+                        return <Tooltip title={tooltip("待构建","无","无")}>
                             <Space>
                                 <MinusCircleOutlined style = {{fontSize:20,color:"#8795b1"}}/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 20:
-                        return  <Tooltip title={tooltip("停止",text)}>
+                        return  <Tooltip title={tooltip("停止",text,record.execUser.name)}>
                             <Space>
                                 <ExclamationCircleOutlined style = {{fontSize:20}}/>
                                 {text}
@@ -139,13 +136,13 @@ const PipelineTable = props =>{
         },
         {
             title: "负责人",
-            dataIndex: "userName",
-            key: "userName",
+            dataIndex: ["user","name"],
+            key: "user",
             width:"220px",
             ellipsis: true,
-            render:(text) => {
+            render:(text,record) => {
                 return <Space>
-                    <Profile />
+                    <Profile userInfo={record.user}/>
                     {text}
                 </Space>
             }
@@ -165,7 +162,7 @@ const PipelineTable = props =>{
                                     record.pipelineState === 0 ?
                                         <PlayCircleOutlined className="actions-se"/>
                                         :
-                                        <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
+                                        <Spin indicator={<LoadingOutlined className="actions-se" spin />} />
                                 }
                                 </span>
                             </Tooltip>

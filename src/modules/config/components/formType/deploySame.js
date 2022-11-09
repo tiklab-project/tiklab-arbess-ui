@@ -1,8 +1,8 @@
 import React from "react";
 import {Form} from "antd";
 import Mirror from "./mirror";
-import Proof from "./proof";
 import Inputs from "./inputs";
+import FindAuth from "./findAuth";
 
 const DeploySame = props =>{
 
@@ -13,7 +13,7 @@ const DeploySame = props =>{
     return (
         <>
             <Inputs
-                placeholder={"该文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
+                placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"应用源文件地址"}
                 name={"localAddress"}
                 mode={deployType}
@@ -21,10 +21,8 @@ const DeploySame = props =>{
             />
             <div className="deployTargetAddress">{messageInfo}</div>
 
-            <Proof
-                allProofType={deployType}
-                testType={"Ip地址"}
-                type={2}
+            <FindAuth
+                type={deployType}
             />
 
             <Inputs

@@ -45,10 +45,9 @@
         }
     }
     .ant-form{
-        .ant-form-item-control {
-            .ant-input {
+        .ant-form-item-control .ant-form-item-control-input-content{
+            .ant-input{
                 width: 500px;
-
                 &:hover {
                     background: #f2f2f2;
                 }

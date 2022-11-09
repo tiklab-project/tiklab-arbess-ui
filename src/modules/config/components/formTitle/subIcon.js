@@ -42,6 +42,8 @@ const SubIcon = props =>{
                 return renderSubIcon("ceshi","sonarQuebe")
             case 51:
                 return renderSubIcon("quanxian","nexus")
+            case 52:
+                return renderSubIcon("quanxian","SSH")
         }
     }
 

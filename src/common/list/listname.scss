@@ -1,4 +1,13 @@
 
+.mf-listname{
+    display: inline-block;
+    max-width: 260px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
 .mf-listname-href{
     cursor: pointer;
 }

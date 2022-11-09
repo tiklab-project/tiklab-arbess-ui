@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Dropdown,Menu,Badge} from "antd";
+import {Dropdown,Badge} from "antd";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
@@ -10,7 +10,7 @@ import {GlobalOutlined,BellOutlined,SettingOutlined,LogoutOutlined,
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/all/matflow.png"
+import logo from "../../assets/images/matflow.png"
 import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{
@@ -89,33 +89,31 @@ const Head = props =>{
     // 退出登录页面
     const outMenu = (
         <div className="header-outMenu">
-           <div className="header-outMenu-content">
-               <div className="header-outMenu-top">
-                  <div className="outMenu-out">
-                      <Profile userInfo={getUser()}/>
-                      <div className="outMenu-out-info">
-                          <div className="outMenu-out-name">{getUser().name}</div>
-                          <div className="outMenu-out-eamil">{getUser().userId}@</div>
-                      </div>
-                  </div>
-               </div>
-               <div className="header-outMenu-lan">
-                    <Dropdown overlay={languageMenu}>
-                        <div className="outMenu-lan">
-                            <GlobalOutlined className="header-dropdown-icon"/>
-                            <span className="lan">切换语言</span>
-                        </div>
-                    </Dropdown>
-               </div>
-               <div className="header-outMenu-out">
-                   <div  onClick={()=>goOut()} className="outMenu-out">
-                       <LogoutOutlined className="header-dropdown-icon"/>
-                       <span className="bottom-out">
-                            退出
-                       </span>
-                   </div>
-               </div>
-           </div>
+            <div className="header-outMenu-top">
+                <div className="outMenu-out">
+                    <Profile userInfo={getUser()}/>
+                    <div className="outMenu-out-info">
+                        <div className="outMenu-out-name">{getUser().name}</div>
+                        <div className="outMenu-out-eamil">tiklab@</div>
+                    </div>
+                </div>
+            </div>
+            <div className="header-outMenu-lan">
+                <Dropdown overlay={languageMenu}>
+                    <div className="outMenu-lan">
+                        <GlobalOutlined className="header-dropdown-icon"/>
+                        <span className="lan">切换语言</span>
+                    </div>
+                </Dropdown>
+            </div>
+            <div className="header-outMenu-out">
+                <div  onClick={()=>goOut()} className="outMenu-out">
+                    <LogoutOutlined className="header-dropdown-icon"/>
+                    <span className="bottom-out">
+                        退出
+                    </span>
+                </div>
+            </div>
         </div>
     )
 

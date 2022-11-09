@@ -91,20 +91,20 @@ const Structure = props => {
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
             case 1 :
                 //成功
-                return  <CheckCircleOutlined style = {{fontSize:17,color:"#0063FF"}}/>
+                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
 
             case 2 :
                 //失败
-                return  <CloseCircleOutlined style = {{fontSize:17,color:"red"}}/>
+                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
             case 3:
                 //运行--等待运行
-                return  <PlayCircleOutlined style = {{fontSize:17}}/>
+                return  <PlayCircleOutlined style = {{fontSize:16}}/>
             case 4:
                 //被迫停止
-                return  <ExclamationCircleOutlined style = {{fontSize:17}}/>
+                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
             case 5:
                 //运行过程
-                return  <MinusCircleOutlined style = {{fontSize:17,color:"#6698ff"}}/>
+                return  <MinusCircleOutlined style = {{fontSize:16,color:"#6698ff"}}/>
 
         }
     }
@@ -136,7 +136,7 @@ const Structure = props => {
     },[pipelineId,freshen])
     
     return (
-        <div className="structure">
+        <div className="structure mf">
             <div className="structure-content">
                 <StructureLeft
                     pipelineId={pipelineId}

@@ -41,15 +41,14 @@ const ConfigTop = props =>{
         }
         // 改变按钮
         setProcessVisible(true)
-        setTimeout(()=>props.history.push(`/index/task/${pipelineId}/structure`),1000)
         pipelineStartStructure(params).then(res=>{
-            if(res.code===0 && res.data===1){
-                if(res.data===1){
+            if(res.code===0){
+                if(res.data===100){
                     // props.history.push(`/index/task/${pipelineId}/structure`)
-                }else{
-                    setProcessVisible(false)
-                    message.error({content:"项目正在运行", className:"message"})
+                    message.error({content:"流水线正在运行", className:"message"})
                 }
+                props.history.push(`/index/task/${pipelineId}/structure`)
+                // setTimeout(()=>props.history.push(`/index/task/${pipelineId}/structure`),1000)
             }
         }).catch(error=>{
             console.log(error)

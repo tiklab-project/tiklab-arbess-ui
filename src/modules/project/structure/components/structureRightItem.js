@@ -1,6 +1,6 @@
 import React,{Fragment} from "react";
 import {Modal} from "antd";
-import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {DeleteOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {getTime} from "../../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
@@ -91,11 +91,11 @@ const StructureRightItem = props =>{
         <>
             <StructureRightCue
                 way={modeData && modeData.runWay}
-                time={modeData && modeData.execTime}
+                time={getTime(modeData && modeData.runTime)}
                 title={`# ${modeData && modeData.findNumber}`}
                 action={del}
                 actionTitle={"删除"}
-                icon={<ExclamationCircleOutlined/>}
+                icon={<DeleteOutlined />}
             />
             {rightDetails(rightFlowData)}
             {logRunLog()}

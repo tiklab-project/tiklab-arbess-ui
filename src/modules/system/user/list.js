@@ -6,7 +6,7 @@ import {UserList} from "tiklab-user-ui";
  */
 const List = props =>{
 
-    return <UserList {...props} />
+    return <UserList {...props} bgroup={"matflow"}/>
     
 }
 

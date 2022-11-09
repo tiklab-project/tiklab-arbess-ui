@@ -48,6 +48,7 @@ const ThirdAddressModal = props =>{
             closable={false}
             okText="确认"
             cancelText="取消"
+            className="mf"
             onOk={() => {
                 form
                     .validateFields()

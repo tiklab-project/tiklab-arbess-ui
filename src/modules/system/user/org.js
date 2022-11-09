@@ -6,7 +6,7 @@ import {OrgaList} from "tiklab-user-ui";
  */
 const Org = props=>{
 
-    return <OrgaList {...props}/>
+    return <OrgaList {...props} bgroup={"matflow"}/>
     
 }
 

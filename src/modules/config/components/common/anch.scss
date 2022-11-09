@@ -7,6 +7,7 @@
         height: 35px;
         line-height: 35px;
         cursor: pointer;
+        font-size: var(--tiklab-font-15);
         &:not(:last-child){
             margin-right: 15px;
         }

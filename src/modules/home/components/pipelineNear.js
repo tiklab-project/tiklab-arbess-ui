@@ -12,17 +12,15 @@ const PipelineNear = props =>{
     }
 
     const renderList = (item) => {
-        return <div className="pipelineNear-bottom-list" key={item.pipelineId}>
-            <div className="pipelineNear-item">
-                <div className="pipelineNear-item-title">
-                    <ListName
-                        text={item.pipelineName}
-                        onClick={()=>goPipeline(item.pipelineId)}
-                        colors={item.pipeline.color}
-                    />
-                </div>
-                <div>{item.pipeline.pipelineCreateTime}</div>
+        return  <div className="pipelineNear-item" key={item.pipelineId}>
+            <div className="pipelineNear-item-title">
+                <ListName
+                    text={item.pipelineName}
+                    onClick={()=>goPipeline(item.pipelineId)}
+                    colors={item.pipeline.color}
+                />
             </div>
+            <div>{item.pipeline.pipelineCreateTime}</div>
         </div>
     }
 
@@ -32,7 +30,6 @@ const PipelineNear = props =>{
             {
                 pipelineNearList && pipelineNearList.map(item=>{
                     return renderList(item)
-
                 })
             }
         </div>

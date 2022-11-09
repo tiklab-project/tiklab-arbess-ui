@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Modal,Form,Select,Input,message} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
+import {autoHeight} from "../../../../common/client/client";
 
 const lis = [
     {
@@ -30,19 +31,11 @@ const EnviModal = props =>{
     const [height,setHeight] = useState(0)
 
     useEffect(()=>{
-        autoHeight()
+        setHeight(autoHeight())
     },[height])
 
-    const autoHeight = () =>{
-        let winHeight=0
-        if (window.innerHeight)
-            winHeight = window.innerHeight-120
-        else if ((document.body) && (document.body.clientHeight))
-            winHeight = document.body.clientHeight-120
-        if (document.documentElement && document.documentElement.clientHeight)
-            winHeight = document.documentElement.clientHeight-120
-        setHeight(winHeight)
-        window.onresize=autoHeight
+    window.onresize=() =>{
+        setHeight(autoHeight())
     }
 
     useEffect(()=>{

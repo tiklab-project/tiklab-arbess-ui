@@ -2,6 +2,7 @@ import moment from "moment";
 
 export default {
     moment:moment().format("YYYY-MM-DD HH:mm:ss"), //当前时间
+    clientHeight:document.documentElement.clientHeight
 }
 
 // 获取url里面的值
@@ -19,6 +20,17 @@ export const getUrlParam = name => {
     return false;
 }
 
+// 监听浏览器高度
+export const autoHeight = () =>{
+    let winHeight=0
+    if (window.innerHeight)
+        winHeight = window.innerHeight
+    else if ((document.body) && (document.body.clientHeight))
+        winHeight = document.body.clientHeight
+    if (document.documentElement && document.documentElement.clientHeight)
+        winHeight = document.documentElement.clientHeight
+    return winHeight-120
+}
 
 // 时间转换
 export const getTime = time =>{
@@ -28,11 +40,11 @@ export const getTime = time =>{
     let minutes = parseInt((time % ( 60 * 60)) /60);
     let seconds = parseInt(time % 60);
     if(days >= 1){
-        DateTimes= days + " 天" + hours + " 时" + minutes + " 分" + seconds + " 秒";
+        DateTimes= days + " 天 " + hours + " 时 " + minutes + " 分 " + seconds + " 秒";
     }else if(hours >= 1){
-        DateTimes=hours + " 时" + minutes + " 分" + seconds + " 秒";
+        DateTimes=hours + " 时 " + minutes + " 分 " + seconds + " 秒";
     }else if(minutes >= 1){
-        DateTimes=minutes + " 分" + seconds + " 秒";
+        DateTimes=minutes + " 分 " + seconds + " 秒";
     }else{
         DateTimes=seconds + " 秒";
     }

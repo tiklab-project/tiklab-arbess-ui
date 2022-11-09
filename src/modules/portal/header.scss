@@ -86,10 +86,12 @@
     }
 }
 
-.header-outMenu,.header-helpMenu{
+.header-outMenu,.header-helpMenu,.outMenu-lan-menu{
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+    border-radius: 4px;
     .header-dropdown-icon{
         font-size: var(--tiklab-icon-size-16);
-        padding-right: 5px;
+        padding-right: 10px;
     }
 }
 
@@ -97,7 +99,6 @@
     &-outMenu{
         background: #fff;
         width: 200px;
-        box-shadow: 0 0 8px 1px #00000019;
         &-top{
             padding: 10px;
             .outMenu-out{
@@ -112,10 +113,9 @@
             }
         }
         &-lan{
-            padding: 5px;
             border-top: 1px solid #f4f4f4;
             .outMenu-lan{
-                padding: 5px;
+                padding: 10px;
                 &:hover{
                     background: #f4f4f4;
                     cursor: pointer;
@@ -123,10 +123,9 @@
             }
         }
         &-out{
-            padding: 5px;
             border-top: 1px solid #f4f4f4;
             .outMenu-out{
-                padding: 5px;
+                padding: 10px;
                 &:hover{
                     background: #f4f4f4;
                     cursor: pointer;
@@ -138,7 +137,6 @@
 
 .outMenu-lan-menu{
     background: #ffffff;
-    box-shadow: 0 0 8px 1px #00000019;
     position: absolute;
     top: -41px;
     left: -86px;
@@ -153,12 +151,12 @@
 
 .header-helpMenu{
     background: #ffffff;
-    width: 150px;
+    width: 180px;
     .header-helpMenu-item{
         cursor: pointer;
-        padding: 4px 20px;
-        &:not(:last-child){
-            margin-bottom: 5px;
+        padding: 10px;
+        &:hover{
+            background: #f4f4f4;
         }
     }
 }

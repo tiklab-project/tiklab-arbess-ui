@@ -66,7 +66,7 @@ const Server = props =>{
 
     const user = (text,record) =>{
         return  <Space>
-            <Profile />
+            <Profile userInfo={record.user}/>
             {text}
         </Space>
     }

@@ -6,7 +6,7 @@ import {Directory} from "tiklab-user-ui";
  */
 const UserDirectory = props =>{
 
-    return  <Directory {...props}/>
+    return  <Directory {...props} bgroup={"matflow"}/>
     
 }
 

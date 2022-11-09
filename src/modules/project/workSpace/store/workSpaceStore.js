@@ -41,6 +41,7 @@ export class WorkSpaceStore{
         return new Promise((resolve,reject)=>{
             PipelineCensus(param).then(res=>{
                 resolve(res)
+
             }).catch(error=>{
                 console.log(error)
                 reject()

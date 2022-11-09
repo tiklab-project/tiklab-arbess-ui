@@ -22,46 +22,19 @@ const FindAuth = props =>{
     const [bordered,setBordered] = useState(false)
     const [isLoading,setIsLoading] = useState(1)
 
-    const renderBtn = type =>{
-        switch (type) {
-            case 1:
-            case 4:
-            case 5:
-                return <AuthBtn isConfig={true}/>
-            case 2:
-            case 3:
-            case 41:
-            case 51:
-                return <ServerBtn isConfig={true} type={type}/>
-            case 31:
-            case 32:
-                return <HostBtn isConfig={true} type={type}/>
-
-        }
-    }
-
-    // 下拉框自定义内容
-    const selectDropdownRender = (menu,type) => {
-        return <div
-                    style={{padding:"4px 8px",cursor:"pointer"}}
-                    onClick={() => {
-                        setOpen(false)
-                    }}
-                >
-                    {renderBtn(type)}
-                </div>
-    }
 
     // 存储authId
     const setAuthId = key =>{
-        if(type>0 && type<10){
-            formInitialValues.gitAuthId = key
-        }else if(type>30 && type<40){
-            formInitialValues.deployAuthId = key
-        }else if(type>40 && type<50){
-            formInitialValues.scanAuthId = key
-        }else if(type>50 && type<60){
-            formInitialValues.goodsAuthId = key
+        const zz = Math.floor(type/10)
+        switch (zz) {
+            case 0:
+                return formInitialValues.gitAuthId = key
+            case 3:
+                return formInitialValues.deployAuthId = key
+            case 4:
+                return formInitialValues.scanAuthId = key
+            case 5:
+                return formInitialValues.goodsAuthId = key
         }
     }
 
@@ -85,12 +58,12 @@ const FindAuth = props =>{
         })
     }
 
+    // 失去交代
     const onBlur = () => {
         setBordered(false)
     }
 
-
-    // 获取下拉内容
+    // 获取焦点，获取下拉内容
     const onFocus = type => {
         setBordered(true)
         switch (type) {
@@ -99,14 +72,16 @@ const FindAuth = props =>{
             case 5:
                 findAllAuth().then(res=>{getList(res)})
                 break
-            case 3:
             case 2:
+            case 3:
             case 41:
             case 51:
                 findAllAuthServerList(type).then(res=>{getList(res)})
                 break
             case 31:
-                findAllAuthHostList(type).then(res=>{getList(res)})
+            case 32:
+            case 52:
+                findAllAuthHostList(0).then(res=>{getList(res)})
         }
     }
 
@@ -118,14 +93,16 @@ const FindAuth = props =>{
 
     // 区分字段
     const name = type => {
-        if(type>0 && type<10){
-            return "gitAuthName"
-        }else if(type>30 && type<40){
-            return "deployAuthName"
-        }else if(type>40 && type<50){
-            return "scanAuthName"
-        }else if(type>50 && type<60){
-            return "goodsAuthName"
+        const zz = Math.floor(type/10)
+        switch (zz) {
+            case 0:
+                return "gitAuthName"
+            case 3:
+                return "deployAuthName"
+            case 4:
+                return "scanAuthName"
+            case 5:
+                return "goodsAuthName"
         }
     }
 
@@ -143,12 +120,29 @@ const FindAuth = props =>{
                 return item.serverId
             case 31:
             case 32:
+            case 52:
                 return item.hostId
         }
     }
 
-    const style1 = {
-        width:400
+    // 下拉框添加
+    const renderBtn = type =>{
+        switch (type) {
+            case 1:
+            case 4:
+            case 5:
+                return <AuthBtn isConfig={true}/>
+            case 2:
+            case 3:
+            case 41:
+            case 51:
+                return <ServerBtn isConfig={true} type={type}/>
+            case 31:
+            case 32:
+            case 52:
+                return <HostBtn isConfig={true} type={type}/>
+
+        }
     }
 
     return(
@@ -158,7 +152,6 @@ const FindAuth = props =>{
                 name={name(type)}
             >
                 <Select
-                    style={type === 2 || type === 3 ? null:style1}
                     onChange={(value,e)=>changeGitSelect(value,e)}
                     placeholder="凭证"
                     open={open}
@@ -169,7 +162,14 @@ const FindAuth = props =>{
                         <>
                             {menu}
                             <Divider style={{margin:"4px 0"}} />
-                            {selectDropdownRender(menu,type)}
+                            <div
+                                style={{padding:"4px 8px",cursor:"pointer"}}
+                                onClick={() => {
+                                    setOpen(false)
+                                }}
+                            >
+                                {renderBtn(type)}
+                            </div>
                         </>
                     )}
                     bordered={bordered}

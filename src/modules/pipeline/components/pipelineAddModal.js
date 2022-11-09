@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React,{useEffect,useState} from "react";
 import {Form,Modal,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import Btn from "../../../common/btn/btn";
 import PipelineAddModalType from "./pipelineAddModalType";
 import PipelineName from "../../projectSet/reDel/pipelineName";
+import {autoHeight} from "../../../common/client/client";
 
 const {Step} = Steps
 
@@ -20,22 +21,12 @@ const PipelineAddModal = props =>{
     const [form] = Form.useForm()
 
     useEffect(()=>{
-        autoHeight()
+        setHeight(autoHeight())
     },[height])
 
-
-    const autoHeight = () =>{
-        let winHeight=0
-        if (window.innerHeight)
-            winHeight = window.innerHeight-120
-        else if ((document.body) && (document.body.clientHeight))
-            winHeight = document.body.clientHeight-120
-        if (document.documentElement && document.documentElement.clientHeight)
-            winHeight = document.documentElement.clientHeight-120
-        setHeight(winHeight)
-        window.onresize=autoHeight
+    window.onresize=() =>{
+        setHeight(autoHeight())
     }
-
 
     const onOk = value => {
         const params={

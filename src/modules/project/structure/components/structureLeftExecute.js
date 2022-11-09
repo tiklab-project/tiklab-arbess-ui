@@ -5,19 +5,6 @@ const StructureLeftExecute = props => {
 
     const {execState,status,setIndex,index} = props
 
-    const state = () =>{
-        if(execState){
-            switch(execState.runStatus){
-                case 1:
-                    return  status(2) //失败
-                case 30 :
-                    return  status(1) //成功
-                default :
-                    return  status(5) //运行过程
-            }
-        }
-    }
-
     const click = () => {
         setIndex(0)
     }
@@ -30,7 +17,7 @@ const StructureLeftExecute = props => {
                 onClick={click}
                 index={index}
                 name={execState && execState.execName}
-                state={state()}
+                state={status(5)}
                 type={0}
                 createTime={execState && execState.createTime}
                 title={`运行中`}

@@ -5,6 +5,7 @@ import ModalTitle from "../../../../common/modalTitle/modalTitle";
 import "./addModal.scss";
 import AddModalStepOne from "./addModalStepOne";
 import Btn from "../../../../common/btn/btn";
+import {autoHeight} from "../../../../common/client/client";
 
 const lis=[
     {
@@ -138,22 +139,13 @@ const AddModal = props =>{
     const [height,setHeight] = useState(0)
 
     useEffect(()=>{
-        autoHeight()
+        setHeight(autoHeight())
     },[height])
 
-
-    const autoHeight = () =>{
-        let winHeight=0
-        if (window.innerHeight)
-            winHeight = window.innerHeight-120
-        else if ((document.body) && (document.body.clientHeight))
-            winHeight = document.body.clientHeight-120
-        if (document.documentElement && document.documentElement.clientHeight)
-            winHeight = document.documentElement.clientHeight-120
-        setHeight(winHeight)
-        window.onresize=autoHeight
+    window.onresize=() =>{
+        setHeight(autoHeight())
     }
-    
+
     // 保存
     const onOk = () => {
         const params = {
@@ -171,7 +163,6 @@ const AddModal = props =>{
         })
         setAddConfigVisible(false)
     }
-
 
     const add = type =>{
         if(type>0 && type<10){
@@ -225,10 +216,10 @@ const AddModal = props =>{
     return(
         <Modal
             visible={addConfigVisible}
-            onCancel={()=>setAddConfigVisible(false)}
             closable={false}
-            width={800}
+            onCancel={()=>setAddConfigVisible(false)}
             footer={modalFooter}
+            width={800}
             style={{height:height,top:60}}
             className="mf"
         >

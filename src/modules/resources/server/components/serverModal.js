@@ -4,6 +4,7 @@ import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import Btn from "../../../../common/btn/btn";
 import AuthType from "../../common/authType";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
+import {autoHeight} from "../../../../common/client/client";
 
 const ServerModal = props =>{
 
@@ -51,19 +52,11 @@ const ServerModal = props =>{
     },[visible,isFindState,serverWay])
 
     useEffect(()=>{
-        autoHeight()
+        setHeight(autoHeight())
     },[height])
 
-    const autoHeight = () =>{
-        let winHeight=0
-        if (window.innerHeight)
-            winHeight = window.innerHeight-120
-        else if ((document.body) && (document.body.clientHeight))
-            winHeight = document.body.clientHeight-120
-        if (document.documentElement && document.documentElement.clientHeight)
-            winHeight = document.documentElement.clientHeight-120
-        setHeight(winHeight)
-        window.onresize=autoHeight
+    window.onresize=() =>{
+        setHeight(autoHeight())
     }
 
     const warn = data => {

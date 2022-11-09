@@ -75,23 +75,20 @@
             height: 350px;
             background: #fff;
             flex: 1;
-            &-bottom{
-                &-list{
-                    padding: 8px;
-                    &:not(:last-child){
-                        border-bottom: 1px solid var(--tiklab-gray-200);
-                    }
-                    &:hover{
-                        background: #f4f4f4;
-                        border-radius: 4px;
-                    }
-                    .pipelineNear-item{
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    }
+            .pipelineNear-item{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px;
+                &:not(:last-child){
+                    //border-bottom: 1px solid var(--tiklab-gray-200);
+                }
+                &:hover{
+                    background: #f9f9f9;
+                    border-radius: 4px;
                 }
             }
+            // #fbfafa
         }
         .agency{
             flex: 1;
@@ -203,6 +200,7 @@
             &-bottom{
                 text-align: center;
                 cursor: pointer;
+                font-size: var(--tiklab-font-13);
                 &-more{
                     color: var(--tiklab-blue);
                 }

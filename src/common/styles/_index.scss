@@ -52,8 +52,8 @@ ul li{
 }
 
 .mf .icon {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
@@ -62,6 +62,7 @@ ul li{
 .home-limited{
     margin: auto;
     max-width: 1280px;
+    min-width: 768px;
     padding: var(--tiklab-padding);
 }
 
@@ -101,7 +102,7 @@ ul li{
     --tiklab-font-12: 12px; // 图文排需要的文字
     --tiklab-font-13: 13px;  // 描述文字
     --tiklab-font-14: 14px; // 正文
-    --tiklab-font-15: 15px; // 2级标题
+    --tiklab-font-15: 13px; // 2级标题
     --tiklab-font-16: 16px; // 标题
 
     --tiklab-font-weight-bold: bold; // 标题字重

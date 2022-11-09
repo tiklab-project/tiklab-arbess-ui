@@ -33,7 +33,7 @@
                 height: calc(100% - 60px);
                 .history-content{
                     &-list{
-                        height: calc(100% - 50px);
+                        height: calc(100% - 40px);
                         overflow: auto;
                         &-ul{
                             display: flex;
@@ -72,7 +72,7 @@
                         width: 100%;
                         text-align: center;
                         padding-top: 10px;
-                        height: 45px;
+                        height: 47px;
                         background: var(--tiklab-gray);
                         .page-ban{
                             cursor:not-allowed;
@@ -80,6 +80,9 @@
                         }
                         .page-allow{
                             cursor: pointer;
+                            &:hover{
+                                color: var(--tiklab-blue);
+                            }
                         }
                         .page-current{
                             color: var(--tiklab-blue);
@@ -100,7 +103,7 @@
             .right-mid{
                 padding-top: 15px;
                 .item{
-                    &-0{
+                    &-20{
                         border-top: 3px solid #444444 !important;
                     }
                     &-1{
@@ -176,11 +179,10 @@
             .structure-content-bottom-title{
                 font-size: var(--tiklab-font-16);
                 font-weight: var(--tiklab-font-weight-bold);
-                padding-bottom: var(--tiklab-padding-item);
             }
             .structure-content-bottom-outLog{
                 white-space: pre-wrap;
-                height: 58vh;
+                height: 60vh;
                 overflow-y: auto;
                 overflow-x: hidden;
                 background: #000;

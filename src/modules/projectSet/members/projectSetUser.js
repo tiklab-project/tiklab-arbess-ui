@@ -9,7 +9,8 @@ const ProjectSetUser = props =>{
 
     const {pipelineStore} = props
     const {pipelineId} = pipelineStore
-    return <DomainUserList {...props} domainId={pipelineId}/>
+
+    return <DomainUserList {...props} domainId={pipelineId} bgroup={"matflow"}/>
 
 }
 

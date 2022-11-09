@@ -17,10 +17,6 @@ const ProjectSetReDel = props =>{
 
     const [form]=Form.useForm()
 
-    useEffect(()=>{
-        setExpandedTree([1])
-    },[])
-
     const del = () =>{
         const params = {
             pipelineId
@@ -32,8 +28,6 @@ const ProjectSetReDel = props =>{
                 message.error({content:"删除失败", className:"message"})
             }
             props.history.push("/index/pipeline")
-        }).catch(error=>{
-            console.log(error)
         })
     }
 

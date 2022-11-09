@@ -80,7 +80,7 @@ const CodeGiteeOrGithub = props =>{
 
     return(
         <>
-            <FindAuth type={codeType} {...props}/>
+            <FindAuth type={codeType}/>
             <div className="formView-inputs">
                 <Form.Item
                     label="仓库"

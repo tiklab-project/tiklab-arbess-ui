@@ -15,6 +15,7 @@ const Config = props =>{
     const [view,setView] = useState("forms")
     const [addConfigVisible,setAddConfigVisible] = useState(false)
 
+    // 滚动--锚点
     const onScroll = () =>{
         const scrollTop=document.getElementById("config-content").scrollTop
         data && data.map((item,index)=>{
@@ -31,7 +32,7 @@ const Config = props =>{
 
     return (
         <div
-            className="config"
+            className="config mf"
             id="config-content"
             onScroll={onScroll}
         >

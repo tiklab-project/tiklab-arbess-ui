@@ -3,7 +3,6 @@ import {observable,action} from "mobx";
 import {
     UpdateConfigure,
     FindAllConfigure,
-    CodeTestPass,
     FileAddress,
     GetFile,
     ConfigValid,
@@ -59,17 +58,6 @@ export class ConfigStore{
                 reject()
             })
         })
-    }
-
-    @action
-    codeTestPass =async values =>{
-        const params = {
-            proofId:values.proofId,
-            url:values.url,
-            port:values.port,
-            type:values.type,
-        }
-        return await CodeTestPass(params)
     }
 
     @action
