@@ -25,16 +25,13 @@ const Authorize=AsyncComponent(()=>import("./modules/authorize/authorize"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
-const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
-const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
+const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSet"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
 
 /* 系统设置 -- 列表 */
-const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
-
 
 const Envi=AsyncComponent(()=>import("./modules/system/setting/container/envi"))
 const Info=AsyncComponent(()=>import("./modules/system/setting/container/info"))
@@ -130,10 +127,6 @@ const routerSass=[
                         component: ProjectSet,
                         routes:[
                             {
-                                path:"/index/task/:pipelineId/assembly/proof",
-                                component:ProjectSetProof
-                            },
-                            {
                                 path:"/index/task/:pipelineId/assembly/role",
                                 component: ProjectRole
                             },
@@ -172,10 +165,6 @@ const routerSass=[
                     {
                         path: "/index/system/project/feature",
                         component: ProjectFeature,
-                    },
-                    {
-                        path: "/index/system/proof",
-                        component: SystemProof,
                     },
                     {
                         path:"/index/system/info",

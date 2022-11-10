@@ -1,12 +1,15 @@
 .workSpace{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #fafafa;
     &-title{
-        background: #f2f2f2;
         border-radius: 4px;
         height: 40px;
         line-height: 40px;
         padding-left: 10px;
         margin-bottom: 10px;
-        font-size: 16px;
+        //font-size: 16px;
         font-weight: var(--tiklab-font-weight-bold);
         &-name{
             padding: 0 8px;
@@ -18,6 +21,9 @@
     .workSpace-census{
         height: 400px;
         min-width: 550px;
+        border-radius: 4px;
+        background: #fff;
+        margin-bottom: var(--tiklab-padding-item);
         &-bottom{
             display: flex;
             align-items: center;
@@ -64,6 +70,9 @@
     }
     .workSpace-dyna{
         padding-bottom: 20px;
+        border-radius: 4px;
+        background: #fff;
+        min-height: 450px;
         .dyna{
             &-item{
                 display: flex;

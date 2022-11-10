@@ -2,7 +2,7 @@ import React from "react";
 import {OrgaList} from "tiklab-user-ui";
 
 /*
-    组织管理
+    部门
  */
 const Org = props=>{
 

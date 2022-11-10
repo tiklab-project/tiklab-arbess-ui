@@ -25,8 +25,7 @@ const Authorize=AsyncComponent(()=>import("./modules/authorize/authorize"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
-const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSetReDel"))
-const ProjectSetProof=AsyncComponent(()=>import("./modules/projectSet/proof/projectSetProof"))
+const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSet"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
 
 /* 系统设置 */
@@ -38,7 +37,6 @@ const Host=AsyncComponent(()=>import("./modules/resources/host/container/host"))
 const Server=AsyncComponent(()=>import("./modules/resources/server/container/server"))
 
 /* 系统设置 -- 列表 */
-const SystemProof=AsyncComponent(()=>import("./modules/system/proof/systemProof"))
 
 const Envi=AsyncComponent(()=>import("./modules/system/setting/container/envi"))
 const Info=AsyncComponent(()=>import("./modules/system/setting/container/info"))
@@ -134,10 +132,7 @@ const routers=[
                         path:"/index/task/:pipelineId/assembly",
                         component: ProjectSet,
                         routes:[
-                            {
-                                path:"/index/task/:pipelineId/assembly/proof",
-                                component:ProjectSetProof
-                            },
+
                             {
                                 path:"/index/task/:pipelineId/assembly/role",
                                 component: ProjectRole
@@ -223,15 +218,15 @@ const routers=[
                         component: LogTemplateList,
                     },
                     {
-                        path: "/index/system/dashbord",
+                        path: "/index/system/user/dashbord",
                         component: Org,
                     },
                     {
-                        path: "/index/system/directory",
+                        path: "/index/system/user/directory",
                         component: UserDirectory,
                     },
                     {
-                        path: "/index/system/list",
+                        path: "/index/system/user/list",
                         component: UserList,
                     },
                     {

@@ -2,7 +2,7 @@ import React from "react";
 import {UserList} from "tiklab-user-ui";
 
 /*
-    用户列表
+    用户
  */
 const List = props =>{
 

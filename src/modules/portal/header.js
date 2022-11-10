@@ -10,7 +10,7 @@ import {GlobalOutlined,BellOutlined,SettingOutlined,LogoutOutlined,
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/matflow.png"
+import logo from "../../assets/images/matflow1.png"
 import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{
@@ -151,16 +151,17 @@ const Head = props =>{
             </div>
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
-                    <div className="frame-header-set">
-                        <SettingOutlined className="frame-header-icon"
-                            onClick={()=>props.history.push("/index/system")}
-                        />
+                    <div className="frame-header-set"
+                         onClick={()=>props.history.push("/index/system")}
+                    >
+                        <SettingOutlined className="frame-header-icon"/>
                     </div>
-                    <div className="frame-header-message" >
-                        <Badge count={messPage && messPage.total} size="small">
+                    <div className="frame-header-message"
+                         onClick={()=>setVisible(true)}
+                    >
+                        <Badge count={messPage.total>0? messPage.total :null} size="small">
                             <BellOutlined
                                 className="frame-header-icon"
-                                onClick={()=>setVisible(true)}
                             />
                         </Badge>
                     </div>

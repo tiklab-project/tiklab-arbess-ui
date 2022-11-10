@@ -20,6 +20,13 @@ export class ConfigDataStore {
     @observable deployOrderShellBlock = ""
     @observable opt = 1
 
+    @observable addConfigVisible = false
+
+    @action
+    setAddConfigVisible = value =>{
+        this.addConfigVisible = value
+    }
+
     @action
     setOpt = value =>{
         this.opt = value

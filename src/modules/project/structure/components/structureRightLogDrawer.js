@@ -1,8 +1,8 @@
 import React from "react";
 import {Drawer} from "antd";
 import ModalTitle from "../../../../common/modalTitle/modalTitle";
-import Subtitle from "../../../config/components/formTitle/subtitle";
-import HlineIcon from "../../../config/components/formTitle/hlineIcon";
+import Subtitle from "../../../gui/components/title/subtitle";
+import HlineIcon from "../../../gui/components/title/hlineIcon";
 
 const StructureRightLogDrawer = props =>{
 
@@ -15,7 +15,7 @@ const StructureRightLogDrawer = props =>{
             onClose={()=>setVisible(false)}
             closable={false}
             maskStyle={{background:"transparent"}}
-            contentWrapperStyle={{width:600,top:50,height:"calc(100% - 50px)"}}
+            contentWrapperStyle={{width:600,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
             className="mf"
         >

@@ -1,82 +1,25 @@
-import React,{useEffect} from "react";
-import {Button,Form,Input} from "antd";
-import {LockOutlined,UnlockOutlined} from "@ant-design/icons";
-import "./pipelineName.scss";
+import React from "react";
+import {Form,Input} from "antd";
 import Btn from "../../../common/btn/btn";
+import PipelinePower from "./pipelinePower";
 
 const PipelineName = props =>{
 
-    const {pipelineList,form,re,layout,pipeline,powerType,setPowerType} = props
-
-    useEffect(()=>{
-        pipeline && form.setFieldsValue({pipelineName:pipeline.pipelineName})
-    },[])
+    const {pipelineList,form,re,layout,powerType,setPowerType} = props
 
     const style1 = {
         "width":416
     }
 
-    const init = {
-        pipelinePower:2
+    const getPowerType = item =>{
+        setPowerType(item.id)
     }
-
-    const powerLis = [
-        {
-            id:1,
-            title:"全局",
-            icon:<UnlockOutlined />,
-            desc:"互联网上的任何人都可以查看该项目。不支持TFVC等某些功能。"
-        },
-        {
-            id:2,
-            title:"私有",
-            icon:<LockOutlined />,
-            desc: "只有您授予访问权限的人才能查看此项目。"
-        }
-    ]
-
-    const power = (
-        <div className="pipeline-power">
-            <div className="pipeline-power-title">流水线权限</div>
-            <div className="pipeline-power-content">
-                {
-                    powerLis.map(item=>{
-                        return <div
-                            key={item.id}
-                            className={`pipeline-power-item ${powerType===item.id?"pipeline-power-select":""}`}
-                            onClick={()=>setPowerType(item.id)}
-                        >
-                            <div className="power-item">
-                                <div>
-                                    <div className="power-title power-icon">
-                                        {item.icon}
-                                    </div>
-                                    <div className="power-title power-name">
-                                        {item.title}
-                                    </div>
-                                </div>
-                                {
-                                    powerType===item.id &&
-                                    <div className="power-select-show"/>
-                                }
-                            </div>
-                            <div className="power-desc">
-                                {item.desc}
-                            </div>
-                        </div>
-                    })
-                }
-
-            </div>
-        </div>
-    )
 
     return(
         <Form
             form={form}
             autoComplete="off"
             layout={layout}
-            initialValues={re ? null:init}
         >
             <Form.Item
                 label={layout==="vertical"?"流水线名称":"重命名"}
@@ -114,7 +57,12 @@ const PipelineName = props =>{
                     style={ re ? style1:null}
                 />
             </Form.Item>
-            {layout === "vertical" && power}
+            {layout === "vertical" &&
+                <PipelinePower
+                    powerType={powerType}
+                    onClick={getPowerType}
+                />
+            }
             {re &&
                 <Form.Item>
                     <Btn

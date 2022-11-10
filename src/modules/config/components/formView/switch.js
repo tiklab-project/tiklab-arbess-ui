@@ -1,5 +1,5 @@
 import React from "react";
-import SubIcon from "../formTitle/subIcon";
+import SubIcon from "../../../gui/components/title/subIcon";
 import "./switch.scss";
 
 const Switch = props =>{

@@ -11,8 +11,10 @@ pluginAddressUrl = JSON.stringify(pluginAddressUrl);
 let fetchMethod = "post"
 fetchMethod = JSON.stringify(fetchMethod);
 // 判断是否是用户环境， 如果是用户环境收到切换为true， 如果是内部公司手动切换为false
-const userProduction = false;
-const devProduction = true;
+
+const userProduction = true; // 权限
+
+const devProduction = true; // 基础数据
 
 const appKey = JSON.stringify("");
 const appSecret = JSON.stringify("");

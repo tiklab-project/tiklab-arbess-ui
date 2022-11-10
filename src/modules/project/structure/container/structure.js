@@ -86,26 +86,27 @@ const Structure = props => {
 
     const status = i =>{
         switch(i){
+            case 1 :
+                //失败
+                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
+            case 10 :
+                //成功
+                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
+            case 20:
+                //被迫停止
+                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
+
             case 0 :
                 //运行
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
-            case 1 :
-                //成功
-                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
 
-            case 2 :
-                //失败
-                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
             case 3:
                 //运行--等待运行
                 return  <PlayCircleOutlined style = {{fontSize:16}}/>
-            case 4:
-                //被迫停止
-                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
+
             case 5:
                 //运行过程
                 return  <MinusCircleOutlined style = {{fontSize:16,color:"#6698ff"}}/>
-
         }
     }
     

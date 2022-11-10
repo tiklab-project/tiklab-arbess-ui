@@ -8,6 +8,7 @@ import AuthBtn from "../components/authBtn";
 import "../components/auth.scss";
 import {Profile} from "tiklab-eam-ui";
 import ListName from "../../../../common/list/listname";
+import Listaction from "../../../../common/list/listaction";
 
 const Auth = props =>{
 
@@ -44,9 +45,9 @@ const Auth = props =>{
             key:"authType",
             render: text => {
                 switch (text) {
-                    case 2:
+                    case 1:
                         return "username&password"
-                    case 3:
+                    case 2:
                         return "私钥"
                 }
             }
@@ -85,28 +86,10 @@ const Auth = props =>{
             dataIndex: "action",
             key: "action",
             render:(text,record) => {
-                return <span className="auth-content-action">
-            <Tooltip title="修改">
-                <span className="edit"
-                      onClick={()=>edit(text,record)}
-                >
-                    <EditOutlined />
-                </span>
-            </Tooltip>
-            <Tooltip title="删除">
-                <Popconfirm
-                    style={{marginTop:100}}
-                    title="你确定删除吗"
-                    onConfirm={()=>del(text,record)}
-                    kText="确定"
-                    cancelText="取消"
-                >
-                    <span className="del">
-                        <DeleteOutlined />
-                    </span>
-                </Popconfirm>
-            </Tooltip>
-        </span>
+                return  <Listaction
+                            edit={()=>edit(text,record)}
+                            del={()=>del(text,record)}
+                        />
             }
         }
     ]
@@ -126,7 +109,6 @@ const Auth = props =>{
                     locale={{emptyText: <EmptyText/>}}
                 />
             </div>
-
         </div>
     )
 }

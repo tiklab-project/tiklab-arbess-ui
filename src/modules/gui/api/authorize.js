@@ -44,12 +44,3 @@ export function  FindState (data){
         data
     })
 }
-
-//授权--监听授权状态
-export function  UpdateProof (data){
-    return serviceLoc.request({
-        url:"/codeAuthorize/updateProof",
-        method: "post",
-        data
-    })
-}

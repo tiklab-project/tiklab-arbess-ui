@@ -32,7 +32,7 @@ export class AuthorizeStore {
     @action
     findAllStorehouse = async value =>{
         const params = new FormData()
-        params.append("proofId",value.proofId)
+        params.append("authId",value.proofId)
         params.append("type",value.type)
         const data = await FindAllStorehouse(params)
         if(data.code===0 && data.data){
@@ -44,7 +44,7 @@ export class AuthorizeStore {
     findBranch = async value =>{
         const params = new FormData()
         params.append("type",value.type)
-        params.append("proofId",value.proofId)
+        params.append("authId",value.proofId)
         params.append("houseName",value.houseName)
         const data =  await FindBranch(params)
         if(data.code===0 && data.data){
@@ -52,18 +52,7 @@ export class AuthorizeStore {
         }
     }
 
-    @action
-    findState = async ()=>{
-        return await FindState()
-    }
 
-    @action
-    updateProof = async value=>{
-        const param = new FormData()
-        param.append("name",value.name)
-        param.append("proofId",value.proofId)
-        return await UpdateProof(param)
-    }
 }
 
 const authorizeStore = new AuthorizeStore()

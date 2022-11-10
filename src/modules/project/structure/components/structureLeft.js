@@ -13,22 +13,10 @@ const StructureLeft = props =>{
     const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,pipelineUserList,
         execState} = structureStore
     const {pageCurrent,setPageCurrent,setState,setEnforcer,setMode,drop} = structureListStore
-
-    const sta = item =>{
-        if(leftPageList){
-            switch (item.runStatus) {
-                case 1:
-                    return status(2) // 失败
-                case 30:
-                    return status(1) // 成功
-                default:
-                    return status(4) // 被迫停止
-            }
-        }
-    }
     
     const showHistory = (item,i)=> {
         setIndex(i+1)
+        console.log(item)
         findHistoryLog(item.historyId).then(()=>{
             setModeData(item)
         })
@@ -39,7 +27,7 @@ const StructureLeft = props =>{
             return  <StructureLeftList
                         key={i}
                         onClick={()=>showHistory(item,i)}
-                        state={sta(item)}
+                        state={status(item.runStatus)}
                         index={index}
                         type={i+1}
                         name={item.user && item.user.name}

@@ -118,7 +118,7 @@ const MessageDrawer = props =>{
             onClose={()=>setVisible(false)}
             maskStyle={{background:"transparent"}}
             visible={visible}
-            contentWrapperStyle={{width:450,top:50,height:"calc(100% - 50px)"}}
+            contentWrapperStyle={{width:450,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
             className="mf"
         >

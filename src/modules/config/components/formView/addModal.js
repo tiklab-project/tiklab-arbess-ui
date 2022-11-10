@@ -165,20 +165,22 @@ const AddModal = props =>{
     }
 
     const add = type =>{
-        if(type>0 && type<10){
-            setCodeType(type)
-        }else if(type>10 && type<20){
-            setTestType(type)
-        } else if(type>20 && type<30){
-            setBuildType(type)
-        }else if(type>30 && type<40){
-            setDeployType(type)
-        }else if(type>40 && type<50){
-            setScanType(type)
-        }else if(type>50 && type<60){
-            setGoodsType(type)
-        }
         addData(type)
+        const zz = Math.floor(type/10)
+        switch (zz) {
+            case 0:
+                return setCodeType(type)
+            case 1:
+                return setTestType(type)
+            case 2:
+                return setBuildType(type)
+            case 3:
+                return setDeployType(type)
+            case 4:
+                return  setScanType(type)
+            case 5:
+                return setGoodsType(type)
+        }
     }
 
     const newData = [...data]

@@ -103,7 +103,7 @@ const PipelineTable = props =>{
             width:"200px",
             render:(text,record) =>{
                 switch (record.buildStatus) {
-                    case 30:
+                    case 10:
                         return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
                             <Space>
                                 <CheckCircleOutlined style = {{fontSize:20,color:"#0063FF"}}/>

@@ -1,12 +1,12 @@
 .system {
     display: flex;
     width: 100%;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 48px);
     &-aside {
         height: 100%;
         width: 200px;
         min-width: 200px;
-        background: var(--tiklab-gray);
+        background: #efefef;
         &-sys{
             width: 100%;
             text-align: center;

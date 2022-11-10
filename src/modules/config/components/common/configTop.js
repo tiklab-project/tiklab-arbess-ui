@@ -45,7 +45,7 @@ const ConfigTop = props =>{
             if(res.code===0){
                 if(res.data===100){
                     // props.history.push(`/index/task/${pipelineId}/structure`)
-                    message.error({content:"流水线正在运行", className:"message"})
+                    message.info({content:"流水线正在运行", className:"message"})
                 }
                 props.history.push(`/index/task/${pipelineId}/structure`)
                 // setTimeout(()=>props.history.push(`/index/task/${pipelineId}/structure`),1000)
@@ -111,33 +111,33 @@ const ConfigTop = props =>{
                                     表单
                                 </div>
                             </div>
-                            {/*<div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}*/}
-                            {/*     onClick={()=>changeView("gui")}*/}
-                            {/*>*/}
-                            {/*    <div className="changeView-view-item">*/}
-                            {/*        <AppstoreOutlined/>*/}
-                            {/*        &nbsp;*/}
-                            {/*        图形*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-                            {
-                                !getVersionInfo().expired && isPlugin ?
-                                    <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}
-                                         onClick={()=>changeView("gui")}
-                                    >
-                                        <div className="changeView-view-item">
-                                            <AppstoreOutlined/>
-                                            &nbsp;
-                                            图形化
-                                        </div>
-                                    </div>
-                                    :
-                                    <div className="changeView-view-li changeView-view-ban">
-                                        <AppstoreOutlined/>
-                                        &nbsp;
-                                        图形化
-                                    </div>
-                            }
+                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}
+                                 onClick={()=>changeView("gui")}
+                            >
+                                <div className="changeView-view-item">
+                                    <AppstoreOutlined/>
+                                    &nbsp;
+                                    图形
+                                </div>
+                            </div>
+                            {/*{*/}
+                            {/*    !getVersionInfo().expired && isPlugin ?*/}
+                            {/*        <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
+                            {/*             onClick={()=>changeView("gui")}*/}
+                            {/*        >*/}
+                            {/*            <div className="changeView-view-item">*/}
+                            {/*                <AppstoreOutlined/>*/}
+                            {/*                &nbsp;*/}
+                            {/*                图形化*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*        :*/}
+                            {/*        <div className="changeView-view-li changeView-view-ban">*/}
+                            {/*            <AppstoreOutlined/>*/}
+                            {/*            &nbsp;*/}
+                            {/*            图形化*/}
+                            {/*        </div>*/}
+                            {/*}*/}
                         </div>
                     </div>
                 </div>

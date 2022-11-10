@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
 import {PrivilegeButton} from "tiklab-privilege-ui";
+import {SettingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import "./projectSetAside.scss";
-import {SettingOutlined} from "@ant-design/icons";
 
 const ProjectSetAside = props =>{
 
@@ -23,23 +23,18 @@ const ProjectSetAside = props =>{
         {
             key:`/index/task/${pipelineId}/assembly/redel`,
             label:"流水线设置",
-            enCode:"DD4",
+            enCode:"pipeline_seting",
         },
         {
             key:`/index/task/${pipelineId}/assembly/user`,
             label:"流水线成员",
-            enCode:"DD1",
+            enCode:"pipeline_user",
         },
         {
             key:`/index/task/${pipelineId}/assembly/role`,
             label:"流水线权限",
-            enCode:"DD2",
-        },
-        // {
-        //     key:`/index/task/${pipelineId}/assembly/proof`,
-        //     label:"流水线凭证",
-        //     enCode:"DD3",
-        // },
+            enCode:"pipeline_auth",
+        }
     ]
     
     const renderRouter = item => {

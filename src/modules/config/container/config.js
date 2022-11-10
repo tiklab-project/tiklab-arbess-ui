@@ -10,10 +10,9 @@ const Config = props =>{
     const {pipelineStore,configDataStore} = props
 
     const {pipelineId,pipeline} = pipelineStore
-    const {data,opt,setOpt} = configDataStore
+    const {data,opt,setOpt,addConfigVisible,setAddConfigVisible} = configDataStore
 
     const [view,setView] = useState("forms")
-    const [addConfigVisible,setAddConfigVisible] = useState(false)
 
     // 滚动--锚点
     const onScroll = () =>{
@@ -37,28 +36,24 @@ const Config = props =>{
             onScroll={onScroll}
         >
             <div className="config-up">
-                <div className="config-up-content">
-                    <ConfigTop
-                        view={view}
-                        setView={setView}
-                        pipelineId={pipelineId}
-                        pipelineName={pipeline.pipelineName}
-                        setAddConfigVisible={setAddConfigVisible}
-                    />
-                    {
-                        view==="forms" &&
-                        <Anch
-                            data={data}
-                            opt={opt}
-                            setOpt={setOpt}
-                            setAddConfigVisible={setAddConfigVisible}
-                        />
-                    }
-                </div>
+                <ConfigTop
+                    view={view}
+                    setView={setView}
+                    pipelineId={pipelineId}
+                    pipelineName={pipeline.pipelineName}
+                    setAddConfigVisible={setAddConfigVisible}
+                />
+                    {/*{*/}
+                    {/*    view==="forms" &&*/}
+                    {/*    <Anch*/}
+                    {/*        data={data}*/}
+                    {/*        opt={opt}*/}
+                    {/*        setOpt={setOpt}*/}
+                    {/*        setAddConfigVisible={setAddConfigVisible}*/}
+                    {/*    />*/}
+                    {/*}*/}
             </div>
-            <div className="config-content">
-                <ConfigView view={view}/>
-            </div>
+            <ConfigView view={view}/>
             <AddModal
                 addConfigVisible={addConfigVisible}
                 setAddConfigVisible={setAddConfigVisible}

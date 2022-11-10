@@ -1,4 +1,9 @@
 .formView-anch{
+    position: sticky;
+    top: 66px;
+    background: #f7f8fa;
+    z-index: 9;
+    padding: 15px 0;
     &-content{
         display: flex;
         border-radius: 4px;
@@ -7,9 +12,9 @@
         height: 35px;
         line-height: 35px;
         cursor: pointer;
-        font-size: var(--tiklab-font-15);
+        font-size: var(--tiklab-font-16);
         &:not(:last-child){
-            margin-right: 15px;
+            margin-right: 30px;
         }
     }
     .anch-plus{

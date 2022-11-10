@@ -104,14 +104,12 @@ const Deploy = props =>{
                     getFieldValue("authType") === 1 ? (
                         <>
                             <DeploySame
-                                {...props}
                                 configDataStore={configDataStore}
                                 messageInfo={messageInfo}
                             />
                             {
                                 deployType==31 ?
                                 <DeployVir 
-                                    {...props}
                                     configDataStore={configDataStore}
                                 />
                                 :

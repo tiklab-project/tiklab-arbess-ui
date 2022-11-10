@@ -9,6 +9,7 @@ import "../component/host.scss";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import ListName from "../../../../common/list/listname";
 import {Profile} from "tiklab-eam-ui";
+import Listaction from "../../../../common/list/listaction";
 
 const Host = props =>{
 
@@ -123,28 +124,10 @@ const Host = props =>{
             dataIndex: "action",
             key: "action",
             render:(text,record) => {
-                return <span className="code-content-action">
-                    <Tooltip title="修改">
-                        <span className="edit"
-                              onClick={()=>edit(text,record)}
-                        >
-                            <EditOutlined />
-                        </span>
-                    </Tooltip>
-                    <Tooltip title="删除">
-                        <Popconfirm
-                            style={{marginTop:100}}
-                            title="你确定删除吗"
-                            onConfirm={()=>del(text,record)}
-                            kText="确定"
-                            cancelText="取消"
-                        >
-                            <span className="del">
-                                <DeleteOutlined />
-                            </span>
-                        </Popconfirm>
-                    </Tooltip>
-                </span>
+                return  <Listaction
+                            edit={()=>edit(text,record)}
+                            del={()=>del(text,record)}
+                        />
             }
         }
     ]

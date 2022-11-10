@@ -3,10 +3,22 @@
         padding: 20px;
         width: 100%;
         .ant-form-item-label{
-            min-width: 105px;
+            min-width: 110px;
             text-align: left;
-            &>label:after {
+            &>label:not(.ant-form-item-required):after{
                 display: none;
+            }
+            .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
+                display: none;
+            }
+            .ant-form-item-required:after {
+                display: inline-block;
+                margin-right: 4px;
+                color: #ff4d4f;
+                font-size: 14px;
+                font-family: SimSun,sans-serif;
+                line-height: 1;
+                content: "*";
             }
         }
         .ant-input-group{
@@ -18,7 +30,7 @@
             width: 410px;
         }
         .ant-select{
-            width: 380px;
+            width: 410px;
         }
         .ant-input-group-addon{
             width: 30px;

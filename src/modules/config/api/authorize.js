@@ -44,21 +44,3 @@ export function  FindState (data){
         data
     })
 }
-
-//授权--监听授权状态
-export function  UpdateProof (data){
-    return serviceLoc.request({
-        url:"/codeAuthorize/updateProof",
-        method: "post",
-        data
-    })
-}
-
-// giteeOrGithub 服务授权信息
-export function FindMessage(data) {
-    return serviceLoc.request({
-        url:"/codeAuthorize/findMessage",
-        method:"post",
-        data
-    })
-}

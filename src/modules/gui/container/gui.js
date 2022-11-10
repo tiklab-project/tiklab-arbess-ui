@@ -42,24 +42,6 @@ const Gui = props =>{
         })
     },[pipelineId,enabledValid,newStage])
 
-    const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
-    const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
-    const validDeploySshIp = /((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/
-
-    const validation = (codeType,name,value) =>{
-        switch (name) {
-            case "codeName":
-                if(codeType===5){
-                    return validCodeSvn.test(value)
-                }else if(codeType===1||codeType===4){
-                    return validCodeGit.test(value)
-                }else return true
-            case "sshIp":
-                return validDeploySshIp.test(value)
-            default:
-                return true
-        }
-    }
 
     // 添加
     const addConfig = taskType => {
@@ -83,6 +65,7 @@ const Gui = props =>{
 
     // 更改
     const valueChange = (value,name,mode,setIsLoading) => {
+        setIsLoading(2)
         const obj = {}
         obj[name] = value
         const params = {
@@ -91,25 +74,16 @@ const Gui = props =>{
             values:obj,
             message:"update"
         }
-        if(name==="proofId"){
-            params.values = {
-                proof: {proofId:value}
+        updateConfigure(params).then(res=>{
+            if(res.code===0){
+                const zz = document.getElementById(name)
+                zz && zz.classList.remove("guiView-validateFields")
+                setIsLoading(3)
+            }else {
+                setIsLoading(4)
+                message.info(res.msg)
             }
-        }
-        if(validation(codeType,name,value)){
-            updateConfigure(params).then(res=>{
-                if(res.code===0){
-                    const zz = document.getElementById(name)
-                    zz && zz.classList.remove("guiView-validateFields")
-                    setIsLoading(3)
-                }else {
-                    setIsLoading(4)
-                    message.info(res.msg)
-                }
-            })
-        }else {
-            setIsLoading(4)
-        }
+        })
 
         setTimeout(()=>setIsLoading(1),1000)
     }
@@ -202,7 +176,7 @@ const Gui = props =>{
                     layout="vertical"
                     autoComplete="off"
                     onValuesChange={onValuesChange}
-                    initialValues={{deployType:0}}
+                    initialValues={{authType:1}}
                 >
                     <div className="guiView-content">
                         <div className="guiView-main">

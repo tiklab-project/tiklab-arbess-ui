@@ -7,9 +7,6 @@ import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
 import {Empty} from "antd";
-import AuthBtn from "../../../resources/auth/components/authBtn";
-import ServerBtn from "../../../resources/server/components/serverBtn";
-import HostBtn from "../../../resources/host/component/hostBtn";
 
 const ConfigView = props =>{
 

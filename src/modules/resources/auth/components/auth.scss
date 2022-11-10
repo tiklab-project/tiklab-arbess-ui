@@ -4,19 +4,4 @@
         justify-content: space-between;
         align-items: center;
     }
-    .auth-content-action{
-        .edit{
-            cursor: pointer;
-            margin-right: 15px;
-            &:hover{
-                color: var(--tiklab-blue);
-            }
-        }
-        .del{
-            cursor: pointer;
-            &:hover{
-                color: #ff0000;
-            }
-        }
-    }
 }

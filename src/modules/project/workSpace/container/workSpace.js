@@ -85,35 +85,37 @@ const WorkSpace = props =>{
     }
 
     return(
-        <div className="workSpace home-limited mf">
-            <div className="workSpace-top">
-                <BreadcrumbContent
-                    firstItem={pipeline.pipelineName}
-                    secondItem={"概况"}
-                />
-            </div>
-            <div className="workSpace-content">
-                <div className="workSpace-census workSpace-div">
-                    <WorkLine
-                        icon={<PieChartOutlined />}
-                        title={"运行概况"}
+        <div className="workSpace">
+            <div className="workSpace-content home-limited mf">
+                <div className="workSpace-top">
+                    <BreadcrumbContent
+                        firstItem={pipeline.pipelineName}
+                        secondItem={"概况"}
                     />
-                    <div className="workSpace-census-bottom">
-                        <div className="chart-box" id="burn-down"
-                             style={{width:400,height:300}}
-                        />
-                        <WorkSpaceCensus
-                            census={census}
-                        />
-                    </div>
                 </div>
-                <WorkSpaceDyna
-                    dynamicList={dynamicList}
-                    moreDynamic={moreDynamic}
-                    isDyna={isDyna}
-                    dynaPageTotal={dynaPageTotal}
-                    dynaPagination={dynaPagination}
-                />
+                <div className="workSpace-content">
+                    <div className="workSpace-census workSpace-div">
+                        <WorkLine
+                            icon={<PieChartOutlined />}
+                            title={"运行概况"}
+                        />
+                        <div className="workSpace-census-bottom">
+                            <div className="chart-box" id="burn-down"
+                                 style={{width:400,height:300}}
+                            />
+                            <WorkSpaceCensus
+                                census={census}
+                            />
+                        </div>
+                    </div>
+                    <WorkSpaceDyna
+                        dynamicList={dynamicList}
+                        moreDynamic={moreDynamic}
+                        isDyna={isDyna}
+                        dynaPageTotal={dynaPageTotal}
+                        dynaPagination={dynaPagination}
+                    />
+                </div>
             </div>
         </div>
     )

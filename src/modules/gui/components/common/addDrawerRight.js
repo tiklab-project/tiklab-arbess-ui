@@ -41,7 +41,7 @@ const AddDrawerRight = props =>{
                                                      onClick={()=>handleClick(group,item)}
                                                 >
                                                     <div className="group-desc-tpl">
-                                                        <div className="group-tpl">{item.title}</div>
+                                                        <div className="group-tpl">{item.tel}</div>
                                                     </div>
                                                 </div>
                                             )

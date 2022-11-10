@@ -4,6 +4,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import AddDrawerLeft from "./addDrawerLeft";
 import AddDrawerRight from "./addDrawerRight";
 import "./addDrawer.scss";
+import Btn from "../../../../common/btn/btn";
 
 const lis=[
     {
@@ -13,27 +14,27 @@ const lis=[
         desc:[
             {
                 type:1,
-                title:"通用Git",
+                tel:"通用Git",
                 icon:"git"
             },
             {
                 type:2,
-                title:"Gitee",
+                tel:"Gitee",
                 icon:"gitee"
             },
             {
                 type:3,
-                title: "Github",
+                tel: "Github",
                 icon:"github"
             },
             {
                 type:4,
-                title: "Gitlab",
+                tel: "Gitlab",
                 icon:"gitlab"
             },
             {
                 type: 5,
-                title:"svn",
+                tel:"svn",
                 icon:"-_ssh"
             }
         ]
@@ -43,8 +44,8 @@ const lis=[
         title: "代码扫描",
         desc: [
             {
-                type: 51,
-                title:"sonarQuebe",
+                type: 41,
+                tel:"sonarQuebe",
                 icon:"ceshi"
             }
         ]
@@ -55,12 +56,12 @@ const lis=[
         desc:[
             {
                 type: 11,
-                title:"单元测试",
+                tel:"maven单元测试",
                 icon:"ceshi"
             },
             {
                 type: 12,
-                title: "junit",
+                tel: "junit",
                 icon:"ceshi"
             }
         ]
@@ -72,17 +73,17 @@ const lis=[
             {
 
                 type: 21,
-                title:"maven",
+                tel:"maven",
                 icon:"quanxian"
             },
             {
                 type: 22,
-                title:"node",
+                tel:"node",
                 icon:"nodejs"
             },
             {
                 type: 23,
-                title:"gradel",
+                tel:"gradel",
                 icon:"nodejs"
             }
         ]
@@ -92,18 +93,13 @@ const lis=[
         title: "推送制品",
         desc: [
             {
-                type:61,
-                title:"jfrog",
+                type:51,
+                tel:"nexus",
                 icon: "quanxian"
             },
             {
-                type:62,
-                title:"nexus",
-                icon: "quanxian"
-            },
-            {
-                type:63,
-                title:"habor",
+                type:52,
+                tel:"SSH",
                 icon: "quanxian"
             },
         ]
@@ -114,34 +110,13 @@ const lis=[
         desc:[
             {
                 type:31 ,
-                title:"虚拟机",
+                tel:"虚拟机",
                 icon:"xuniji"
             },
             {
                 type:32 ,
-                title:"docker",
+                tel:"docker",
                 icon:"docker"
-            },
-        ]
-    },
-    {
-        id:7,
-        title: "消息通知",
-        desc:[
-            {
-                type:71,
-                title:"站内信",
-                icon:"xuniji"
-            },
-            {
-                type:72,
-                title:"钉钉",
-                icon:"xuniji"
-            },
-            {
-                type:73,
-                title:"企业微信",
-                icon:"xuniji"
             },
         ]
     },
@@ -184,18 +159,18 @@ const AddDrawer = props =>{
             placement="right"
             onClose={()=>setNewStageDrawer(false)}
             visible={newStageDrawer}
-            style={{marginTop:50}}
-            contentWrapperStyle={{width:600}}
+            maskStyle={{background:"transparent"}}
+            contentWrapperStyle={{width:600,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
         >
             <div className="wrapper">
                 <div className="wrapper-head">
                     <div className="wrapper-head-title"> 选择任务组</div>
-                    <div>
-                        <Button type="text" onClick={()=>setNewStageDrawer(false)}>
-                            <CloseOutlined />
-                        </Button>
-                    </div>
+                    <Btn
+                        onClick={()=>setNewStageDrawer(false)}
+                        title={<CloseOutlined />}
+                        type="text"
+                    />
                 </div>
                 <div className="wrapper-body">
                     <div className="body">

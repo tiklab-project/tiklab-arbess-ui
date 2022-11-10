@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
-import {PrivilegeButton} from "tiklab-privilege-ui";
 import {Dropdown} from "antd";
 import {
     SettingOutlined,
@@ -32,21 +31,18 @@ const ProjectAside = props =>{
             title:"概况",
             icon:<ApartmentOutlined />,
             key:"2",
-            enCode:"AA"
         },
         {
             to:`/index/task/${pipelineId}/config`,
             title: "配置",
             icon: <CreditCardOutlined />,
             key:"3",
-            enCode:"BB"
         },
         {
             to:`/index/task/${pipelineId}/structure`,
             title: "历史",
             icon: <ClockCircleOutlined />,
             key:"4",
-            enCode:"CC"
         },
     ]
 
@@ -101,17 +97,15 @@ const ProjectAside = props =>{
 
     // 渲染左侧一级菜单
     const renderTaskRouter = item => {
-        return   <PrivilegeButton code={item.enCode} key={item.key} {...props}>
-                    <div key={item.key}
-                        className={`aside_content aside_item ${nav===item.to ? "aside_active":null}`}
-                        onClick={()=>changeNav(item.to)}
-                    >
-                        <div className="aside_content_icon">
-                            {item.icon}
-                        </div>
-                        <div className="aside_content_title">{item.title}</div>
+        return   <div key={item.key}
+                      className={`aside_content aside_item ${nav===item.to ? "aside_active":null}`}
+                      onClick={()=>changeNav(item.to)}
+                >
+                    <div className="aside_content_icon">
+                        {item.icon}
                     </div>
-                </PrivilegeButton>
+                    <div className="aside_content_title">{item.title}</div>
+                </div>
     }
 
     return(

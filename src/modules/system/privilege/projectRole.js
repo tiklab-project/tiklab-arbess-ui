@@ -1,13 +1,17 @@
 import React from "react";
-import {ProjectRoleList} from "tiklab-privilege-ui";
+import {DomainRoleList} from "tiklab-privilege-ui";
+import {inject,observer} from "mobx-react";
 
 /*
-    项目角色管理
+    项目权限
  */
 const ProjectRole = props =>{
 
-    return <ProjectRoleList {...props} bgroup={"matflow"}/>
+    const {pipelineStore} = props
+    const {pipelineId} = pipelineStore
+
+    return <DomainRoleList {...props} domainId={pipelineId}  bgroup={"matflow"}/>
     
 }
 
-export default ProjectRole
+export default inject("pipelineStore")(observer(ProjectRole))

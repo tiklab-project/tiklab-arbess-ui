@@ -1,0 +1,47 @@
+.pipelineReDel{
+    .pipelineReDel-up{
+        padding-bottom: var(--tiklab-padding-item);
+    }
+    &-ul{
+        border: 1px solid #ececec;
+        border-radius: 4px;
+    }
+    &-li{
+        &:not(:last-child){
+            border-bottom: 1px solid var(--tiklab-gray-200);
+        }
+        &-top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            cursor: pointer;
+            &:hover{
+                background: #f4f4f4;
+            }
+        }
+        &-select{
+            background: #f4f4f4;
+        }
+        &-bottom{
+            padding-left: 45px;
+            margin: 10px 0;
+            .bottom {
+                &-rename {
+                    height: 45px;
+                    line-height: 45px;
+                }
+            }
+        }
+        &-none{
+            display: none;
+        }
+        &-title{
+            &-name{
+                padding-left: 10px;
+            }
+        }
+    }
+}
+
+

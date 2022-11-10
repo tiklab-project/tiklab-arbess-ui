@@ -1,34 +1,22 @@
 .config{
-    background: #f4f4f4;
+    background: #f7f8fa;
     height: 100%;
     overflow: auto;
     .config-up{
-        border-bottom: 1px solid var(--tiklab-gray-200);
         position: sticky;
         top: 0;
-        background: #f4f4f4;
+        background: #ffffff;
         z-index: 9;
-    }
-    .config-up-content{
-        max-width: 1280px;
-        margin: auto;
-        min-width: 768px;
-        padding: 0 var(--tiklab-padding);
+        padding: var(--tiklab-padding) 20px 10px;
+
     }
     .config-top{
-        padding: var(--tiklab-padding) 0 10px;
         &-content{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
         }
-    }
-    .config-content{
-        margin: auto;
-        max-width: 1280px;
-        min-width: 768px;
-        padding: var(--tiklab-padding-item) var(--tiklab-padding) var(--tiklab-padding);
     }
     .config_changeView{
         .changeView{
@@ -99,4 +87,13 @@
             }
         }
     }
+}
+
+/* 部署应用源文件地址 的匹配提示 */
+.deployTargetAddress{
+    position: absolute;
+    top: 30px;
+    left: 130px;
+    font-size: var(--tiklab-font-13);
+    color: var(--tiklab-gray-500);
 }

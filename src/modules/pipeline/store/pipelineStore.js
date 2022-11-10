@@ -125,7 +125,7 @@ export class PipelineStore {
         const params={
             pipelineId:values.pipelineId,
             pipelineName:values.pipelineName,
-            user:{id:getUser().userId}
+            pipelinePower:values.pipelinePower,
         }
         return new Promise((resolve, reject) => {
             UpdatePipeline(params).then(res=>{

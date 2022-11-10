@@ -1,15 +1,15 @@
 import React from "react";
-import NameType from "./nameType";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
-import TitleType from "./titleType";
+import HlineIcon from "../title/hlineIcon";
+import Subtitle from "../title/subtitle";
 
 const BlockContent = props =>{
 
     const {setTaskFormDrawer,setNewStage,validType,type,formInitialValues,setNewStageDrawer,setIndex,inse} = props
 
     const showStage = type =>{
-        setNewStage(type)
         setTaskFormDrawer(true)
+        setNewStage(type)
     }
 
     const valid = type =>{
@@ -41,19 +41,19 @@ const BlockContent = props =>{
                 <div className="group-head">
                     <div className="name">
                         <div  className="label">
-                            <TitleType type={type}/>
+                            <HlineIcon type={type}/>
                         </div>
                     </div>
                 </div>
                 <div className="newStages">
                     <div className="newStages-step">
-                        <div className="newStages-content"  >
-                            <div className="newStages-task" onClick={()=>showStage(type)}>
+                        <div className="newStages-content"  onClick={()=>showStage(type)}>
+                            <div className="newStages-task">
                                 <div className={`newStages-job ${valid(type)?"job-name":""}`}
                                      style={type<10 ? style:null}
                                 >
                                     <div className="newStages-job_text">
-                                        <NameType type={type}/>
+                                        <Subtitle type={type}/>
                                         {valid(type) &&
                                             <span className="newStages-job-warn">
                                             <ExclamationCircleOutlined />

@@ -1,5 +1,7 @@
 .homePage{
     width: 100%;
+    height: 100%;
+    overflow: auto;
     background: var(--tiklab-gray);
     &-guide{
         display: flex;
@@ -170,7 +172,7 @@
         .dynamic{
             background: #fff;
             padding: 10px;
-            min-height: 550px;
+            min-height: 430px;
             border-radius: 4px;
             flex: 1;
             &-center{

@@ -10,18 +10,6 @@ const StructureRightItem = props =>{
     const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,
         freshen,setFreshen,setPageCurrent} = props
 
-    // 状态
-    const state = item =>{
-        switch(item.runState){
-            case 1:
-                return status(2) //失败
-            case 10:
-                return status(1) //成功
-            default:
-                return status(4) //被迫停止
-        }
-    }
-
     // 日志详情
     const log = item => {
         setDrawerContent(item)
@@ -65,7 +53,7 @@ const StructureRightItem = props =>{
                                 <StructureRightCart
                                     item={item}
                                     style={style(item.runState)}
-                                    state={state(item)}
+                                    state={status(item.runState)}
                                     time={getTime(item.runTime)}
                                     log={log}
                                 />

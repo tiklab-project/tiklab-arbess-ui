@@ -1,13 +1,10 @@
 .guiView{
-    padding: 55px 10px 0;
     &-content{
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         flex-direction: row;
-        margin: 15px auto;
-        border-top: 1px solid #cccccc;
         min-height: calc(100% - 76px);
         max-height: fit-content;
     }
@@ -151,10 +148,6 @@
                         font-weight: 700;
                         .label{
                             max-width: 300px;
-                            .icon{
-                                width: 20px;
-                                height: 20px;
-                            }
                             .desc-title{
                                 padding-left: 10px;
                             }
@@ -233,11 +226,13 @@
         font-weight: 700;
         &-title{
             .icon{
-                width: 18px;
-                height: 18px    ;
+                width: 16px;
+                height: 16px;
+                vertical-align: middle;
             }
             .deleted{
                 cursor: pointer;
+                margin-left: 10px;
                 &:hover{
                     color: #ff0000;
                 }

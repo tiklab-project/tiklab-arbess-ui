@@ -15,7 +15,7 @@ const StructureRightExecute = props => {
         if(execState){
             const zz = execState.timeList
             if (index+1 < zz.length){
-                return  status(1) //成功
+                return  status(10) //成功
             }else if (index+1 === zz.length){
                 return status(0) // 运行
             } else{

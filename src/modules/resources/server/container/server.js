@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Profile} from "tiklab-eam-ui";
-import {Popconfirm,Space,Table,Tooltip} from "antd"
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import {Space,Table} from "antd"
 import {inject,observer} from "mobx-react";
 import "../components/server.scss";
 import EmptyText from "../../../../common/emptyText/emptyText";
@@ -9,6 +8,7 @@ import Tabs from "../../../../common/tabs/tabs";
 import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
 import ServerBtn from "../components/serverBtn";
 import ListName from "../../../../common/list/listname";
+import Listaction from "../../../../common/list/listaction";
 
 const Server = props =>{
 
@@ -66,9 +66,9 @@ const Server = props =>{
 
     const user = (text,record) =>{
         return  <Space>
-            <Profile userInfo={record.user}/>
-            {text}
-        </Space>
+                    <Profile userInfo={record.user}/>
+                    {text}
+                </Space>
     }
 
     const authPublic = text =>{
@@ -81,28 +81,10 @@ const Server = props =>{
     }
 
     const action = (text,record) =>{
-        return <span className="server-content-action">
-            <Tooltip title="修改">
-                <span className="edit"
-                      onClick={()=>edit(text,record)}
-                >
-                    <EditOutlined />
-                </span>
-            </Tooltip>
-            <Tooltip title="删除">
-                <Popconfirm
-                    style={{marginTop:100}}
-                    title="你确定删除吗"
-                    onConfirm={()=>del(text,record)}
-                    kText="确定"
-                    cancelText="取消"
-                >
-                    <span className="del">
-                        <DeleteOutlined />
-                    </span>
-                </Popconfirm>
-            </Tooltip>
-        </span>
+        return  <Listaction
+                    edit={()=>edit(text,record)}
+                    del={()=>del(text,record)}
+                />
     }
 
     const allColumn = [

@@ -1,15 +1,16 @@
 .project{
     display: flex;
     width: 100%;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 48px);
     .aside{
         left: 0;
-        top: 50px;
+        top: 48px;
         height: 100%;
-        background: var(--tiklab-gray);
+        background: #efefef;
+        padding-bottom: 10px;
         .content{
             width: 80px;
-            height: calc(100% - 55px);
+            height: calc(100% - 53px);
         }
         &_content{
             height: 55px;
@@ -64,12 +65,11 @@
         width: 100%;
         text-align: center;
         padding-top: 15px;
-        height: 45px;
         cursor: pointer;
     }
     &-content{
         width: 100%;
-        height: calc(100vh - 50px);
+        height: 100%;
         overflow: auto;
     }
     .aside_content_icon{
