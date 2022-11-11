@@ -134,7 +134,6 @@ export class StructureStore {
         }
         return new Promise((resolve, reject)=>{
             FindPageHistory(params).then(res=>{
-                console.log( res)
                 if(res.code===0 && res.data){
                     if(res.data.dataList.length===0){
                         this.leftPageList = []
@@ -188,7 +187,6 @@ export class StructureStore {
         const param = new FormData()
         param.append("pipelineId", value)
         FindPipelineUser(param).then(res=>{
-            console.log(res)
             if(res.code === 0 && res.data){
                 this.pipelineUserList = res.data
             }

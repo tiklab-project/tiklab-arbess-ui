@@ -117,7 +117,7 @@ const EnviModal = props =>{
                         <Select onChange={opt}>
                             {
                                 lis.map(item=>{
-                                    return <Select.Option value={item.scmType} key={item.scmType}  disabled={isGray(item.scmType)}>
+                                    return <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
                                         {scmTitle(item.scmType)}
                                     </Select.Option>
                                 })

@@ -4,20 +4,28 @@ import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
 import {Profile,WorkAppConfig} from "tiklab-eam-ui";
-import {GlobalOutlined,BellOutlined,SettingOutlined,LogoutOutlined,
-    QuestionCircleOutlined,ProfileOutlined,ExpandOutlined,ScheduleOutlined,
+import {
+    GlobalOutlined,
+    BellOutlined,
+    SettingOutlined,
+    LogoutOutlined,
+    QuestionCircleOutlined,
+    ProfileOutlined,
+    ExpandOutlined,
+    ScheduleOutlined,
     WhatsAppOutlined
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/matflow1.png"
+import logo from "../../assets/images/matflow3.png";
 import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{
 
-    const {homePageStore} = props
+    const {homePageStore,pipelineStore} = props
 
-    const {findMessageDispatchItemPage,messPage} = homePageStore
+    const {findMessageDispatchItemPage,unread,fresh} = homePageStore
+    const {findAllPipelineStatus,pipelineList} = pipelineStore
 
     let path = props.location.pathname
 
@@ -30,9 +38,17 @@ const Head = props =>{
     useEffect(()=>{
         // 路由菜单控制
         privilegeStores.systemRoleStore.getSystemPermissions(userId,"matflow")
-        // 消息通知
-        findMessageDispatchItemPage()
+
+        // 所有流水线
+        findAllPipelineStatus()
+
     },[])
+
+    useEffect(()=>{
+        // 未读消息通知
+        findMessageDispatchItemPage(0)
+    },[fresh])
+
 
     useEffect(()=>{
         setCurrentLink(path)
@@ -159,7 +175,7 @@ const Head = props =>{
                     <div className="frame-header-message"
                          onClick={()=>setVisible(true)}
                     >
-                        <Badge count={messPage.total>0? messPage.total :null} size="small">
+                        <Badge count={unread} size="small">
                             <BellOutlined
                                 className="frame-header-icon"
                             />
@@ -179,12 +195,15 @@ const Head = props =>{
             </div>
 
             <MessageDrawer
+                {...props}
                 visible={visible}
                 setVisible={setVisible}
+                findAllPipelineStatus={findAllPipelineStatus}
+                pipelineList={pipelineList}
             />
 
         </div>
     )
 }
 
-export default withRouter(inject("homePageStore")(observer(Head)))
+export default withRouter(inject("homePageStore","pipelineStore")(observer(Head)))

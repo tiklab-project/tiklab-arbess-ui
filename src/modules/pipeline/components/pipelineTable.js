@@ -159,7 +159,7 @@ const PipelineTable = props =>{
                             <Tooltip title="运行" >
                                 <span className="pipelineTable-state" onClick={() =>work(record)}>
                                 {
-                                    record.pipelineState === 0 ?
+                                    record.pipelineState === 2 ?
                                         <PlayCircleOutlined className="actions-se"/>
                                         :
                                         <Spin indicator={<LoadingOutlined className="actions-se" spin />} />

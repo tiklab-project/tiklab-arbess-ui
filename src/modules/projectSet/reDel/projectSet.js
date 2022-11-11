@@ -6,7 +6,7 @@ import {
     CaretDownOutlined,
     EditOutlined
 } from "@ant-design/icons";
-import {PrivilegeButton} from "tiklab-privilege-ui";
+import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 import "./projectSet.scss";
 import PipelineName from "./pipelineName";
@@ -146,7 +146,7 @@ const ProjectSet = props =>{
     }
     
     const renderLisItem = item => {
-        return  <PrivilegeButton code={item.enCode} key={item.key}>
+        return  <PrivilegeProjectButton code={item.enCode} key={item.key} domainId={pipelineId}>
                     <div key={item.key} className="pipelineReDel-li">
                         <div
                             className={`pipelineReDel-li-top ${isExpandedTree(item.key) ?"pipelineReDel-li-select":null}`}
@@ -167,7 +167,7 @@ const ProjectSet = props =>{
                             }
                         </div>
                     </div>
-                </PrivilegeButton>
+                </PrivilegeProjectButton>
     }
 
     return(

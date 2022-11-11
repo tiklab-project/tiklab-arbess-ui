@@ -50,14 +50,14 @@
         .messageModal-list{
             height: calc(100% - 38px);
             overflow: auto;
-            padding: 0 var(--tiklab-padding);
+            padding-top: 5px;
             .message-item{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 height: 70px;
                 cursor: pointer;
-                padding: 5px;
+                padding: 5px var(--tiklab-padding);
                 &:not(:last-child){
                     margin-bottom: 10px;
                 }

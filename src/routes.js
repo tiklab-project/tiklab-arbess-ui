@@ -46,13 +46,16 @@ const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
+const SystemRoleTrue=AsyncComponent(()=>import("./modules/system/privilege/systemRoleTrue"))
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
+const DomainRoleContent=AsyncComponent(()=>import("./modules/system/privilege/domainRole"))
 
 const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
 const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messageTemplate"))
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
+const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
 
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
 const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
@@ -135,7 +138,7 @@ const routers=[
 
                             {
                                 path:"/index/task/:pipelineId/assembly/role",
-                                component: ProjectRole
+                                component: DomainRoleContent
                             },
                             {
                                 path:"/index/task/:pipelineId/assembly/redel",
@@ -160,6 +163,10 @@ const routers=[
                     {
                         path: "/index/system/role",
                         component: SystemRole,
+                    },
+                    {
+                        path: "/index/system/roletrue",
+                        component: SystemRoleTrue,
                     },
                     {
                         path: "/index/system/syr/feature",
@@ -244,6 +251,10 @@ const routers=[
                     {
                         path:"/index/system/mes/send",
                         component: MessageSendType,
+                    },
+                    {
+                        path:"/index/system/mes/sendtrue",
+                        component: MessageSendTypeTrue,
                     },
                     {
                         render:()=><Redirect to="/index/system/role"/>,

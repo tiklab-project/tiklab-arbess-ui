@@ -1,38 +1,59 @@
 import React,{useEffect,useState} from "react";
-import {Drawer,Divider,Badge} from "antd";
+import {Drawer,Divider} from "antd";
 import {MailOutlined,BellOutlined,LoadingOutlined} from "@ant-design/icons";
 import ModalTitle from "../../common/modalTitle/modalTitle";
+import EmptyText from "../../common/emptyText/emptyText";
 import {inject,observer} from "mobx-react";
 import "./messageDrawer.scss";
 
 const MessageDrawer = props =>{
 
-    const {homePageStore,visible,setVisible} = props
+    const {homePageStore,visible,setVisible,findAllPipelineStatus,pipelineList} = props
 
     const {findMessageDispatchItemPage,messageList,messPage,setMessagePagination,messagePagination,
-        setMessageList
+        setMessageList,unread,updateMessageDispatchItem,fresh
     } = homePageStore
 
     const [isLoading,setIsLoading] = useState(false)
-    const [selected,setSelected] = useState(1)
+    const [selected,setSelected] = useState(0)
 
     useEffect(()=>{
         return ()=>{
             setMessageList([])
             setMessagePagination(1)
+            setSelected(0)
         }
     },[visible])
 
     useEffect(()=>{
-        visible && findMessageDispatchItemPage().then(res=>{
+        visible && findAllPipelineStatus()
+    },[visible])
+
+    useEffect(()=>{
+        visible && findMessageDispatchItemPage(selected).then(res=>{
             setIsLoading(false)
         })
-    },[visible,messagePagination])
+    },[visible,messagePagination,selected,fresh])
 
     const moreMessage = () =>{
         setMessagePagination(messagePagination+1)
         setIsLoading(true)
     }
+
+    const tabs = [
+        {
+            id:2,
+            title:"全部",
+        },
+        {
+            id:0,
+            title:"未读",
+        },
+        {
+            id:1,
+            title:"已读",
+        }
+    ]
 
     const renderState = state =>{
         switch (state) {
@@ -42,11 +63,42 @@ const MessageDrawer = props =>{
                 return "已读"
         }
     }
+    
+    const goHref = item => {
+
+        const {message,messageTemplate,status, ...resItem } = item
+
+        if (item.status === 0) {
+            const updateParams = {
+                ...resItem,
+                message: {
+                    id: message.id
+                },
+                messageTemplate: {
+                    id: messageTemplate.id
+                },
+                status: 1
+            }
+            updateMessageDispatchItem(updateParams)
+        }
+
+        if(isPipeline(item.messageTemplate.link)){
+            props.history.push(`/index/task/${item.messageTemplate.link}/work`)
+            setVisible(false)
+        }
+    }
+
+    const isPipeline = id =>{
+        return pipelineList && pipelineList.some(item=>item.pipelineId===id )
+    }
 
     const renderMessageList = messageList =>{
         return messageList && messageList.map((item,index)=>{
             return(
-                <div className="message-item" key={index}>
+                <div
+                    className="message-item" key={index}
+                    onClick={()=>goHref(item)}
+                >
                     <div className="message-item-left">
                         <div className="message-item-icon">
                             <MailOutlined />
@@ -54,54 +106,44 @@ const MessageDrawer = props =>{
                         <div>
                             <div className="message-item-user">
                                 <span className="user-title">
-                                    {item.messageTemplate.title}
+                                    {item.messageTemplate.name}
                                 </span>
                                 <span className="user-time">
                                     {item.receiveTime}
                                 </span>
                             </div>
-                            <div className="message-item-message">
-                                <span>{item.messageTemplate.content}</span>
-                            </div>
+                            <div
+                                dangerouslySetInnerHTML={{__html: item.messageTemplate.content}}
+                            />
                         </div>
                     </div>
-                    <div className={`message-item-right message-item-state-${item.status}`}>
-                        {renderState(item.status)}
-                    </div>
+                    {/*<div className={`message-item-right message-item-state-${item.status}`}>*/}
+                    {/*    {renderState(item.status)}*/}
+                    {/*</div>*/}
                 </div>
             )
         })
     }
 
-    const tabs = [
-        {
-            id:1,
-            title:"全部",
-        },
-        {
-            id:2,
-            title:"未读",
-        },
-        {
-            id:3,
-            title:"已读",
-        }
-    ]
+    const changSelet = item => {
+        setSelected(item.id)
+        setMessagePagination(1)
+    }
     
     const renderTabs = item => {
         return   <div
             key={item.id}
             className={`title-item ${item.id===selected?"title-select":null}`}
-            onClick={()=>setSelected(item.id)}
+            onClick={()=>changSelet(item)}
         >
             {item.title}
 
             {
-                item.id ===1 &&
-                <span className={`messageModal-screen-tab ${messPage && messPage.total<100 ?null:"messageModal-screen-much"}`}>
+                item.id === 0 &&
+                <span className={`messageModal-screen-tab ${unread< 100 ?null:"messageModal-screen-much"}`}>
                     {
-                        messPage && messPage.total < 100 ?
-                            messPage.total
+                        unread < 100 ?
+                            unread
                             :
                             99
                     }
@@ -140,11 +182,15 @@ const MessageDrawer = props =>{
                             renderMessageList(messageList)
                         }
                         {
-                            messageList && messageList.length===messPage.total && setMessagePagination>1 &&
+                            messageList && messageList.length===messPage.total && messagePagination >1 &&
                             <Divider plain>没有更多了 🤐</Divider>
                         }
                         {
-                            messageList && messageList.length<messPage.total && !isLoading &&
+                            messageList && messageList.length===0 && messagePagination ===1 &&
+                            <EmptyText/>
+                        }
+                        {
+                            messageList && messageList.length < messPage.total && !isLoading &&
                             <div
                                 className="messageModal-more"
                                 onClick={()=>moreMessage()}

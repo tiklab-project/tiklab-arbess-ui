@@ -30,6 +30,9 @@
         &-bottom{
             display: flex;
         }
+        .homePage-empty{
+            padding-top: 20px;
+        }
         .quickIn{
             &-group{
                 min-width: 100px;
@@ -99,9 +102,6 @@
             padding: 10px;
             height: 350px;
             &-bottom{
-                &-empty{
-                    padding-top: 20px;
-                }
                 &-list{
                     padding: 8px;
                     &:not(:last-child){

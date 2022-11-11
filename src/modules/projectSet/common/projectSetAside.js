@@ -1,17 +1,24 @@
 import React,{useState,useEffect} from "react";
-import {PrivilegeButton} from "tiklab-privilege-ui";
+import {PrivilegeProjectButton} from "tiklab-privilege-ui";
+import {privilegeStores, SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
 import {SettingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import "./projectSetAside.scss";
+import {getUser} from "tiklab-core-ui";
 
 const ProjectSetAside = props =>{
 
-    const {pipelineStore} = props
+    const {pipelineStore,systemRoleStore} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
     const {pipelineId,setLastPath} = pipelineStore
+    const userId = getUser().userId
+
+    useEffect(()=>{
+        systemRoleStore.getInitProjectPermissions(userId,pipelineId, "matflow")
+    },[])
 
     useEffect(()=>{
         setLastPath(path.substring(path.lastIndexOf('/') + 1))
@@ -39,7 +46,7 @@ const ProjectSetAside = props =>{
     
     const renderRouter = item => {
         return(
-            <PrivilegeButton key={item.key} code={item.enCode} {...props}>
+            <PrivilegeProjectButton key={item.key} code={item.enCode} domainId={pipelineId} {...props}>
                 <div className={`projectSet-item ${nav===item.key?"projectSet-select":""} `}
                      onClick={()=>props.history.push(item.key)}
                 >
@@ -50,7 +57,7 @@ const ProjectSetAside = props =>{
                         {item.label}
                     </span>
                 </div>
-            </PrivilegeButton>
+            </PrivilegeProjectButton>
         )
     }
 
@@ -63,4 +70,4 @@ const ProjectSetAside = props =>{
     )
 }
 
-export default inject("pipelineStore")(observer(ProjectSetAside))
+export default inject("pipelineStore",SYSTEM_ROLE_STORE)(observer(ProjectSetAside))

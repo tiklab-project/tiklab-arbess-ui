@@ -168,6 +168,7 @@
         "tiklab-core-ui": "^1.0.1",
         "tiklab-eam-ui": "^1.0.1",
         "tiklab-enable-axios-ce": "^1.0.1",
+        "tiklab-licence-ui": "^1.0.1",
         "tiklab-message-ui": "^1.0.1",
         "tiklab-oplog-ui": "^1.0.1",
         "tiklab-plugin-ui": "^1.0.1",

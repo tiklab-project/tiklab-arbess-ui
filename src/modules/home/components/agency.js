@@ -76,7 +76,7 @@ const Agency = props =>{
                             return renderTaskList(item,index)
                         })
                         :
-                        <div className="agency-bottom-empty">
+                        <div className="homePage-empty">
                             <EmptyText/>
                         </div>
                 }

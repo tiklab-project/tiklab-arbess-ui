@@ -5,6 +5,7 @@ import {
     Findlogpage,
     Findtodopage,
     FindMessageDispatchItemPage,
+    UpdateMessageDispatchItem,
 } from "../api/homePage";
 
 import {getUser} from "tiklab-core-ui";
@@ -21,7 +22,9 @@ export class HomePageStore{
         total: 1,
     }
     @observable messagePagination = 1 //控制接口中页码page的变化，更新接口 -- 消息
+    @observable unread = ""
 
+    @observable fresh = false
     @observable dynaPageTotal = 1
     @observable dynamicList = []
 
@@ -108,10 +111,30 @@ export class HomePageStore{
             sendType:"site",
             receiver:getUser().userId,
         }
+        if(values===0 || values===1){
+            params.status=values
+        }
         const data = await FindMessageDispatchItemPage(params)
         if(data.code===0){
-            this.messageList=this.messageList.concat(data.data && data.data.dataList)
             this.messPage.total=data.data && data.data.totalRecord
+            if(this.messagePagination === 1){
+                this.messageList=data.data.dataList
+            }
+            if(this.messagePagination > 1) {
+                this.messageList = this.messageList.concat(data.data && data.data.dataList)
+            }
+            if(values===0){
+                this.unread=data.data && data.data.totalRecord
+            }
+        }
+        return data
+    }
+
+    @action
+    updateMessageDispatchItem = async value =>{
+        const data = await UpdateMessageDispatchItem(value)
+        if(data.code===0){
+            this.fresh = !this.fresh
         }
         return data
     }

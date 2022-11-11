@@ -27,10 +27,19 @@ export function  Findtodopage (data){
     })
 }
 
-// 我的消息
+// 全部消息
 export function  FindMessageDispatchItemPage(data){
     return serviceLoc.request({
         url:"/message/messageDispatchItem/findMessageDispatchItemPage",
+        method:"post",
+        data
+    })
+}
+
+// 更新消息
+export function  UpdateMessageDispatchItem(data){
+    return serviceLoc.request({
+        url:"/message/messageDispatchItem/updateMessageDispatchItem",
         method:"post",
         data
     })

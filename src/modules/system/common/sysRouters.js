@@ -141,6 +141,12 @@ export const templateRouter = [
                 purviewCode:"basics",
             },
             {
+                id:"/index/system/roletrue",
+                title:"系统角色",
+                icon: <MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
                 id:"/index/system/project/feature",
                 title:"项目功能",
                 icon:<MenuOutlined />,
@@ -185,6 +191,12 @@ export const templateRouter = [
             {
                 id:"/index/system/mes/template",
                 title:"消息模板管理",
+                icon:<MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
+                id:"/index/system/mes/sendtrue",
+                title:"消息发送方式",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },

@@ -1,6 +1,7 @@
 import React from "react";
 import Guide from "./guide";
 import ListName from "../../../common/list/listname";
+import EmptyText from "../../../common/emptyText/emptyText";
 
 // 最近访问的流水线
 const PipelineNear = props =>{
@@ -28,12 +29,16 @@ const PipelineNear = props =>{
         <Guide title={"最近访问的流水线"}/>
         <div className="pipelineNear-bottom">
             {
-                pipelineNearList && pipelineNearList.map(item=>{
-                    return renderList(item)
-                })
+                pipelineNearList && pipelineNearList > 0 ?
+                    pipelineNearList && pipelineNearList.map(item=>{
+                        return renderList(item)
+                    })
+                    :
+                    <div className="homePage-empty">
+                        <EmptyText/>
+                    </div>
             }
         </div>
-
     </div>
 }
 

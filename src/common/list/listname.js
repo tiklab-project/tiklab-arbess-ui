@@ -10,7 +10,7 @@ const Listname = props => {
                 onClick={onClick}
             >
                 <span className={`mf-listname-icon icon-${colors}`}>
-                    {text.substring(0,1).toUpperCase()}
+                    {text && text.substring(0,1).toUpperCase()}
                 </span>
                 <span className={`${onClick?"mf-listname-name":""}`}>
                     {text}

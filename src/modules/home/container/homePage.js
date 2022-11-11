@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
 import {getUser} from "tiklab-core-ui";
-import {Row,Col} from "antd";
 import DynamicList from "../components/dynamicList";
 import PipelineNear from "../components/pipelineNear";
 import QuickIn from "../components/quickIn";
@@ -14,7 +13,7 @@ const HomePage = props =>{
     const {homePageStore,pipelineStore} = props
 
     const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,dynaPageTotal,dynamicList,setDynamicList} = homePageStore
-    const {findAllFollow,findAllPipelineStatus,pipelineLength,followLength,setListType} = pipelineStore
+    const {findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
 
@@ -22,9 +21,6 @@ const HomePage = props =>{
     const [dynaPagination,setDynaPagination] = useState(1)
 
     useEffect(()=>{
-
-        // 所有流水线
-        findAllPipelineStatus()
 
         // 我收藏的流水线
         findAllFollow()
