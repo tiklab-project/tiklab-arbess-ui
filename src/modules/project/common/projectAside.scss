@@ -6,37 +6,46 @@
         left: 0;
         top: 48px;
         height: 100%;
-        background: #efefef;
+        background: var(--mf-sider-color);
         padding-bottom: 10px;
         .content{
             width: 80px;
             height: calc(100% - 53px);
         }
-        &_content{
-            height: 55px;
+        .aside_chang{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 20px;
+            height: 50px;
+            cursor: pointer;
+            .dropdowns_icon{
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                border-radius: 4px;
+                text-align: center;
+                margin-right: 5px;
+            }
+        }
+
+        .aside_content{
             cursor: pointer;
             display: flex;
-            justify-content: center;
+            height: 50px;
             align-items: center;
             padding: 5px 0;
+            flex-direction: column;
+            justify-content: center;
             &:hover{
                 background: var(--tiklab-gray-300);
             }
             &:not(:last-child){
                 margin-bottom: 5px;
             }
-            .dropdowns_icon{
-                width: 25px;
-                height: 25px;
-                line-height: 25px;
-                border-radius: 4px;
-                text-align: center;
-            }
         }
-        &_item{
-            flex-direction: column;
-        }
-        &_active{
+        .aside_active{
             background: var(--tiklab-gray-400);
             border-left: 3px solid var(--tiklab-blue);
         }
@@ -69,15 +78,13 @@
             font-size: 16px;
         }
         &-group{
-            max-height: 500px;
+            max-height: 700px;
             overflow: auto;
             padding: 10px;
             &_item{
                 margin-bottom: 5px;
                 cursor: pointer;
-                height: 30px;
-                padding-left: 20px;
-                line-height: 30px;
+                padding: 5px 0 5px 10px;
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;

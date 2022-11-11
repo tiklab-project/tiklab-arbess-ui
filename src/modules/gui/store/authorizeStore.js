@@ -5,7 +5,6 @@ import {
     FindAllStorehouse,
     FindBranch,
     FindState,
-    UpdateProof,
 } from "../api/authorize";
 
 export class AuthorizeStore {
@@ -52,6 +51,10 @@ export class AuthorizeStore {
         }
     }
 
+    @action
+    findState = async ()=>{
+        return await FindState()
+    }
 
 }
 

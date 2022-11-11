@@ -70,11 +70,13 @@
                     line-height: 30px;
                     border-radius: 4px;
                     padding: 0 10px;
+                    &:not(:last-child){
+                        margin-right: 10px;
+                    }
                 }
             }
             &-active{
-                color: #444444;
-                background-color: #fff;
+                background: rgba(255, 255, 255, 0.4);
             }
         }
     }

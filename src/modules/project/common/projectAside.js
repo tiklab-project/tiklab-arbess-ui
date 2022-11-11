@@ -5,7 +5,8 @@ import {
     SettingOutlined,
     ApartmentOutlined,
     CreditCardOutlined,
-    ClockCircleOutlined
+    ClockCircleOutlined,
+    CaretDownOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 
@@ -98,7 +99,7 @@ const ProjectAside = props =>{
     // 渲染左侧一级菜单
     const renderTaskRouter = item => {
         return   <div key={item.key}
-                      className={`aside_content aside_item ${nav===item.to ? "aside_active":null}`}
+                      className={`aside_content ${nav===item.to ? "aside_active":""}`}
                       onClick={()=>changeNav(item.to)}
                 >
                     <div className="aside_content_icon">
@@ -111,13 +112,20 @@ const ProjectAside = props =>{
     return(
          <div className="aside">
              <div  className="content">
-                 <Dropdown overlay={changPipelineMenu} trigger={["click"]} overlayStyle={{paddingLeft:10}}>
-                     <div className="aside_content aside_item"
+                 <Dropdown
+                     overlay={changPipelineMenu}
+                     trigger={["click"]}
+                     overlayStyle={{paddingLeft:10}}
+                 >
+                     <div className="aside_chang"
                          onClick={(e)=>e.preventDefault()}
                      >
-                         <div className={`dropdowns_icon icon-${pipeline.color}`}>
+                          <span className={`dropdowns_icon icon-${pipeline.color}`}>
                              {pipeline && pipeline.pipelineName.substring(0,1).toUpperCase()}
-                         </div>
+                         </span>
+                         <span>
+                             <CaretDownOutlined />
+                         </span>
                      </div>
                 </Dropdown>
                 {

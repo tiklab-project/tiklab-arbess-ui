@@ -22,10 +22,9 @@ import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{
 
-    const {homePageStore,pipelineStore} = props
+    const {homePageStore} = props
 
     const {findMessageDispatchItemPage,unread,fresh} = homePageStore
-    const {findAllPipelineStatus,pipelineList} = pipelineStore
 
     let path = props.location.pathname
 
@@ -38,9 +37,6 @@ const Head = props =>{
     useEffect(()=>{
         // 路由菜单控制
         privilegeStores.systemRoleStore.getSystemPermissions(userId,"matflow")
-
-        // 所有流水线
-        findAllPipelineStatus()
 
     },[])
 
@@ -198,12 +194,10 @@ const Head = props =>{
                 {...props}
                 visible={visible}
                 setVisible={setVisible}
-                findAllPipelineStatus={findAllPipelineStatus}
-                pipelineList={pipelineList}
             />
 
         </div>
     )
 }
 
-export default withRouter(inject("homePageStore","pipelineStore")(observer(Head)))
+export default withRouter(inject("homePageStore")(observer(Head)))

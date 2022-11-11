@@ -2,7 +2,11 @@
     padding: var(--tiklab-padding-item) 0;
     .messageModal-up{
         padding: 0 var(--tiklab-padding);
-
+        display: flex;
+        justify-content: space-between;
+        .modalTitle-title-icon{
+            padding-right: 10px;
+        }
     }
     .messageModal-content{
         height: calc(100% - 87px);
@@ -37,8 +41,6 @@
             .title-item{
                 height: 40px;
                 line-height: 40px;
-                min-width: 50px;
-                text-align: center;
                 &:not(:last-child){
                     margin-right: 20px;
                 }

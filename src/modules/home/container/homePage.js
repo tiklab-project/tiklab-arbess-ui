@@ -13,7 +13,7 @@ const HomePage = props =>{
     const {homePageStore,pipelineStore} = props
 
     const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,dynaPageTotal,dynamicList,setDynamicList} = homePageStore
-    const {findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
+    const {findAllPipelineStatus,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     const userId = getUser().userId
 
@@ -21,6 +21,9 @@ const HomePage = props =>{
     const [dynaPagination,setDynaPagination] = useState(1)
 
     useEffect(()=>{
+
+        // 所有流水线
+        findAllPipelineStatus()
 
         // 我收藏的流水线
         findAllFollow()

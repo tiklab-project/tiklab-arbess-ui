@@ -1,7 +1,7 @@
 .formView-anch{
     position: sticky;
     top: 66px;
-    background: #f7f8fa;
+    background: var(--mf-backdrop-color);
     z-index: 9;
     padding: 15px 0;
     &-content{

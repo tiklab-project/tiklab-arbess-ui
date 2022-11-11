@@ -1,14 +1,13 @@
 .config{
-    background: #f7f8fa;
     height: 100%;
     overflow: auto;
+    background: var(--mf-backdrop-color);
     .config-up{
         position: sticky;
         top: 0;
         background: #ffffff;
         z-index: 9;
         padding: var(--tiklab-padding) 20px 10px;
-
     }
     .config-top{
         &-content{

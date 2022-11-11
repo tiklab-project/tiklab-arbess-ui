@@ -29,7 +29,7 @@ const PipelineNear = props =>{
         <Guide title={"最近访问的流水线"}/>
         <div className="pipelineNear-bottom">
             {
-                pipelineNearList && pipelineNearList > 0 ?
+                pipelineNearList && pipelineNearList.length > 0 ?
                     pipelineNearList && pipelineNearList.map(item=>{
                         return renderList(item)
                     })

@@ -1,14 +1,15 @@
 import React,{useEffect,useState} from "react";
 import {Drawer,Divider} from "antd";
-import {MailOutlined,BellOutlined,LoadingOutlined} from "@ant-design/icons";
+import {MailOutlined, BellOutlined, LoadingOutlined, CloseOutlined} from "@ant-design/icons";
 import ModalTitle from "../../common/modalTitle/modalTitle";
 import EmptyText from "../../common/emptyText/emptyText";
 import {inject,observer} from "mobx-react";
 import "./messageDrawer.scss";
+import Btn from "../../common/btn/btn";
 
 const MessageDrawer = props =>{
 
-    const {homePageStore,visible,setVisible,findAllPipelineStatus,pipelineList} = props
+    const {homePageStore,visible,setVisible} = props
 
     const {findMessageDispatchItemPage,messageList,messPage,setMessagePagination,messagePagination,
         setMessageList,unread,updateMessageDispatchItem,fresh
@@ -23,10 +24,6 @@ const MessageDrawer = props =>{
             setMessagePagination(1)
             setSelected(0)
         }
-    },[visible])
-
-    useEffect(()=>{
-        visible && findAllPipelineStatus()
     },[visible])
 
     useEffect(()=>{
@@ -81,15 +78,16 @@ const MessageDrawer = props =>{
             }
             updateMessageDispatchItem(updateParams)
         }
-
-        if(isPipeline(item.messageTemplate.link)){
-            props.history.push(`/index/task/${item.messageTemplate.link}/work`)
-            setVisible(false)
+        switch (item.messageTemplate.id) {
+            case "pipelineCreate":
+                props.history.push(`/index/task/${item.messageTemplate.link}/work`)
+                setVisible(false)
+                break
+            case "pipelineExec":
+            case "pipelineRun":
+                props.history.push(`/index/task/${item.messageTemplate.link}/structure`)
+                setVisible(false)
         }
-    }
-
-    const isPipeline = id =>{
-        return pipelineList && pipelineList.some(item=>item.pipelineId===id )
     }
 
     const renderMessageList = messageList =>{
@@ -158,18 +156,25 @@ const MessageDrawer = props =>{
             closable={false}
             placement="right"
             onClose={()=>setVisible(false)}
-            maskStyle={{background:"transparent"}}
             visible={visible}
+            maskStyle={{background:"transparent"}}
             contentWrapperStyle={{width:450,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
             className="mf"
         >
             <div className="messageModal">
                 <div className="messageModal-up">
-                    <ModalTitle
-                        setVisible={setVisible}
-                        title={<><BellOutlined style={{fontSize:16}}/>消息</>}
-                    />
+                    <div className="modalTitle-title">
+                        <span className="modalTitle-title-icon"><BellOutlined/></span>
+                        <span>消息</span>
+                    </div>
+                    <div className="modalTitle-icon">
+                        <Btn
+                            title={<CloseOutlined />}
+                            type="text"
+                            onClick={()=>setVisible(false)}
+                        />
+                    </div>
                 </div>
                 <div className="messageModal-content">
                     <div className="messageModal-title">

@@ -9,7 +9,7 @@
             height: 100%;
             width: 350px;
             min-width: 350px;
-            background: #fff;
+            background: var(--mf-backdrop-color);
             z-index: 20;
             vertical-align: top;
             -webkit-box-orient: vertical;
@@ -17,7 +17,6 @@
             -webkit-flex-direction: column;
             -ms-flex-direction: column;
             flex-direction: column;
-            border-right: 1px solid var(--tiklab-gray-200);
             &-dropdown{
                 width: 100%;
                 padding: 10px 10px 7px;
@@ -65,7 +64,6 @@
                         }
                         &_active{
                             background: #e3e8f0;
-                            border-left: 3px solid var(--tiklab-blue);
                         }
                     }
                     &-page{
@@ -73,7 +71,7 @@
                         text-align: center;
                         padding-top: 10px;
                         height: 47px;
-                        background: var(--tiklab-gray);
+                        border-top: 1px solid var(--tiklab-gray-200);
                         .page-ban{
                             cursor:not-allowed;
                             color: var(--tiklab-gray-500);
