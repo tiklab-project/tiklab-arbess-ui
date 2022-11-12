@@ -44,3 +44,12 @@ export function  UpdateMessageDispatchItem(data){
         data
     })
 }
+
+// 更新消息
+export function  DeleteMessageDispatchItem(data){
+    return serviceLoc.request({
+        url:"/message/messageDispatchItem/deleteMessageDispatchItem",
+        method:"post",
+        data
+    })
+}

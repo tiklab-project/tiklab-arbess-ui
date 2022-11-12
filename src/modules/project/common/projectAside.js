@@ -28,7 +28,7 @@ const ProjectAside = props =>{
     // 侧边第一栏导航
     const firstRouters=[
         {
-            to:`/index/task/${pipelineId}/work`,
+            to:`/index/task/${pipelineId}/survey`,
             title:"概况",
             icon:<ApartmentOutlined />,
             key:"2",

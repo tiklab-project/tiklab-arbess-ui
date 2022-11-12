@@ -11,8 +11,8 @@ import {inject,observer} from "mobx-react";
 import "./projectSet.scss";
 import PipelineName from "./pipelineName";
 import PipelinePower from "./pipelinePower";
-import Btn from "../../../common/btn/btn";
-import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import Btn from "../../common/btn/btn";
+import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 
 
 const ProjectSet = props =>{
@@ -40,7 +40,7 @@ const ProjectSet = props =>{
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
                     pipeline.pipelineName = value.pipelineName
-                    props.history.push(`/index/task/${pipelineId}/work`)
+                    props.history.push(`/index/task/${pipelineId}/survey`)
                 }
             })
         })

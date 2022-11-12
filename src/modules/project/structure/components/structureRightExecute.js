@@ -1,7 +1,7 @@
 import React,{useState,Fragment} from "react";
 import {getUser} from "tiklab-core-ui";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
-import {getTime} from "../../../../common/client/client";
+import {getTime} from "../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
 

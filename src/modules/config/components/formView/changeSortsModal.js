@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Modal,Tree,message} from "antd";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
-import {autoHeight} from "../../../../common/client/client";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
+import {autoHeight} from "../../../common/client/client";
 
 const ChangeSortsModal = props =>{
 

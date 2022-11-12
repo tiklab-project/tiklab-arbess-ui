@@ -2,14 +2,14 @@ import React, {useEffect, useState} from "react";
 import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
 import {Popconfirm,Space,Table,Tooltip} from "antd";
 import {inject,observer} from "mobx-react";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import Tabs from "../../../../common/tabs/tabs";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import Tabs from "../../../common/tabs/tabs";
 import HostBtn from "../component/hostBtn";
 import "../component/host.scss";
-import EmptyText from "../../../../common/emptyText/emptyText";
-import ListName from "../../../../common/list/listname";
+import EmptyText from "../../../common/emptyText/emptyText";
+import ListName from "../../../common/list/listname";
 import {Profile} from "tiklab-eam-ui";
-import Listaction from "../../../../common/list/listaction";
+import Listaction from "../../../common/list/listaction";
 
 const Host = props =>{
 

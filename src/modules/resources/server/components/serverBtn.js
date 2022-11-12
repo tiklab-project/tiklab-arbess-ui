@@ -1,7 +1,7 @@
 import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 import ServerModal from "./serverModal";
 
 const ServerBtn = props =>{

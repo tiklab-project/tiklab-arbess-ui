@@ -56,7 +56,7 @@ const StructureLeftDropdown = props =>{
             tpl:"停止",
         },
         {
-            type:30,
+            type:10,
             tpl:"成功",
         },
     ]

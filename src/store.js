@@ -4,7 +4,7 @@ import {STRUCTURE_STORE,StructureStore} from "./modules/project/structure/store/
 import {STRUCTURELIST_STORE,StructureListStore} from "./modules/project/structure/store/structureListStore";
 import {CONFIG_STORE,ConfigStore} from "./modules/config/store/configStore";
 import {CONFIGDATA_STORE,ConfigDataStore} from "./modules/config/store/configDataStore";
-import {WORKSPACE_STORE,WorkSpaceStore} from "./modules/project/workSpace/store/workSpaceStore";
+import {SURVEY_STORE,SurveyStore} from "./modules/project/survey/store/surveyStore";
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/home/store/homePageStore";
 import {SETTING_STORE,SettingStore} from "./modules/system/setting/store/settingStore";
 import {AUTHORIZE_STORE,AuthorizeStore} from "./modules/config/store/authorizeStore";
@@ -22,7 +22,7 @@ function createStores() {
         [STRUCTURELIST_STORE]:new StructureListStore(),
         [CONFIG_STORE]:new ConfigStore(),
         [CONFIGDATA_STORE]:new ConfigDataStore(),
-        [WORKSPACE_STORE]:new WorkSpaceStore(),
+        [SURVEY_STORE]:new SurveyStore(),
         [HOMEPAGE_STORE]:new HomePageStore(),
         [SETTING_STORE]:new SettingStore(),
         [AUTHORIZE_STORE]:new AuthorizeStore(),

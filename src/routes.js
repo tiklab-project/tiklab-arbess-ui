@@ -13,15 +13,23 @@ const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
 
-const Project=AsyncComponent(()=>import("./modules/project/common/project"))
-
-/*  流水线详情 */
-const WorkSpace=AsyncComponent(()=>import("./modules/project/workSpace/container/workSpace"))
-const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
-const Config = AsyncComponent(()=>import("./modules/config/container/config"))
 
 /* 授权 */
 const Authorize=AsyncComponent(()=>import("./modules/authorize/authorize"))
+
+/* 代办 */
+const Agency=AsyncComponent(()=>import("./modules/agency/agency"))
+
+/* 动态 */
+const Dyna=AsyncComponent(()=>import("./modules/dyna/dyna"))
+
+const Project=AsyncComponent(()=>import("./modules/project/common/project"))
+
+/*  流水线详情 */
+const PipelineDyan=AsyncComponent(()=>import("./modules/project/dyna/dyna"))
+const Survey=AsyncComponent(()=>import("./modules/project/survey/container/survey"))
+const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
+const Config = AsyncComponent(()=>import("./modules/config/container/config"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
@@ -98,13 +106,18 @@ const routers=[
                 exact:true,
             },
             {
-                path: "/index/fullWorkTodo",
-                component: FullWorkTodo,
-                exact:true,
-            },
-            {
                 path:"/index/pipeline",
                 component:Pipeline,
+                exact: true,
+            },
+            {
+                path:"/index/agency",
+                component:Agency,
+                exact: true,
+            },
+            {
+                path:"/index/dyna",
+                component:Dyna,
                 exact: true,
             },
             {
@@ -116,8 +129,12 @@ const routers=[
                 component: Project,
                 routes:[
                     {
-                        path:"/index/task/:pipelineId/work",
-                        component: WorkSpace
+                        path:"/index/task/:pipelineId/survey",
+                        component: Survey
+                    },
+                    {
+                        path:"/index/task/:pipelineId/dyna",
+                        component: PipelineDyan
                     },
                     {
                         path:"/index/task/:pipelineId/config",

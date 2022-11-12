@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
 import {Modal,message} from "antd";
 import {inject,observer} from "mobx-react";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 import "./addModal.scss";
 import AddModalStepOne from "./addModalStepOne";
-import Btn from "../../../../common/btn/btn";
-import {autoHeight} from "../../../../common/client/client";
+import Btn from "../../../common/btn/btn";
+import {autoHeight} from "../../../common/client/client";
 
 const lis=[
     {

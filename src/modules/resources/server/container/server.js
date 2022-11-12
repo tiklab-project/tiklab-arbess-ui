@@ -3,12 +3,12 @@ import {Profile} from "tiklab-eam-ui";
 import {Space,Table} from "antd"
 import {inject,observer} from "mobx-react";
 import "../components/server.scss";
-import EmptyText from "../../../../common/emptyText/emptyText";
-import Tabs from "../../../../common/tabs/tabs";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import EmptyText from "../../../common/emptyText/emptyText";
+import Tabs from "../../../common/tabs/tabs";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import ServerBtn from "../components/serverBtn";
-import ListName from "../../../../common/list/listname";
-import Listaction from "../../../../common/list/listaction";
+import ListName from "../../../common/list/listname";
+import Listaction from "../../../common/list/listaction";
 
 const Server = props =>{
 

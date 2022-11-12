@@ -1,10 +1,10 @@
 import React,{useEffect,useState} from "react";
 import {Modal, Form, Input, Tooltip, Select} from "antd";
-import Btn from "../../../../common/btn/btn";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
+import Btn from "../../../common/btn/btn";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 import AuthType from "../../common/authType";
 import {QuestionCircleOutlined} from "@ant-design/icons";
-import {autoHeight} from "../../../../common/client/client";
+import {autoHeight} from "../../../common/client/client";
 
 
 const CodeModal = props =>{

@@ -3,22 +3,6 @@
     height: 100%;
     overflow: auto;
     background: var(--mf-backdrop-color);
-    &-guide{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 10px;
-        &-title{
-            font-weight: var(--tiklab-font-weight-bold);
-        }
-        &-ac{
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 16px;
-            color: var(--tiklab-blue);
-        }
-    }
     &-content{
         &-top{
             display: flex;
@@ -34,6 +18,8 @@
             padding-top: 20px;
         }
         .quickIn{
+            margin-bottom: 15px;
+            display: flex;
             &-group{
                 min-width: 100px;
                 line-height: 100px;
@@ -76,7 +62,6 @@
         .pipelineNear{
             border-radius: 4px;
             padding: 10px;
-            margin-right: 15px;
             height: 350px;
             background: #fff;
             flex: 1;
@@ -85,9 +70,6 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 8px;
-                &:not(:last-child){
-                    //border-bottom: 1px solid var(--tiklab-gray-200);
-                }
                 &:hover{
                     background: #f9f9f9;
                     border-radius: 4px;
@@ -100,7 +82,8 @@
             background: #fff;
             border-radius: 4px;
             padding: 10px;
-            height: 350px;
+            min-height: 350px;
+            margin: var(--tiklab-padding-item) 0;
             &-bottom{
                 &-list{
                     padding: 8px;
@@ -169,44 +152,6 @@
                 }
             }
         }
-        .dynamic{
-            background: #fff;
-            padding: 10px;
-            min-height: 430px;
-            border-radius: 4px;
-            flex: 1;
-            &-center{
-                height: calc(100% - 60px);
-                .dynamic-item{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    height: 50px;
-                    &-left{
-                        display: flex;
-                        align-items: center;
-                    }
-                    &-icon{
-                        display: inline-block;
-                        width: var(--tiklab-icon-size-32);
-                        height: var(--tiklab-icon-size-32);
-                        line-height: var(--tiklab-icon-size-32);
-                        border-radius: 50px;
-                        background: #6da5f7;
-                        margin-right: 8px;
-                        padding-top: 5px;
-                        text-align: center
-                    }
-                }
-            }
-            &-bottom{
-                text-align: center;
-                cursor: pointer;
-                font-size: var(--tiklab-font-13);
-                &-more{
-                    color: var(--tiklab-blue);
-                }
-            }
-        }
     }
+
 }

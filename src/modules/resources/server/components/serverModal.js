@@ -1,10 +1,10 @@
 import React,{useEffect,useState} from "react";
 import {Modal,Form,Input,Select,Tooltip,message,Space} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 import AuthType from "../../common/authType";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
-import {autoHeight} from "../../../../common/client/client";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
+import {autoHeight} from "../../../common/client/client";
 
 const ServerModal = props =>{
 

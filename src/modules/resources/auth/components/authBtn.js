@@ -1,6 +1,6 @@
 import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 import AuthModal from "./authModal";
 import {inject,observer} from "mobx-react";
 

@@ -14,6 +14,7 @@ import resources from "./common/language/resources";
 import {store} from "./store";
 import {renderRoutes} from "react-router-config";
 import "./index.scss";
+// import "./assets/images";
 import "./assets/font_icon/iconfont";
 import "./common/language/i18n";
 

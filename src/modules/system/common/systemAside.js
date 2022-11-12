@@ -10,7 +10,6 @@ const SystemAside= props =>  {
     const path = props.location.pathname
     const [selectKey,setSelectKey] = useState(path)
     const [expandedTree,setExpandedTree] = useState(["/index/system/syr/feature"])  // 树的展开与闭合
-    const [selectedKeys,setSelectedKeys] = useState(["/index/system/syr/feature"])  // 树的展开与闭合
 
     const authType = JSON.parse(localStorage.getItem("authConfig")).authType
 

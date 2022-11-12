@@ -12,8 +12,8 @@ import {message,Spin} from "antd";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../common/btn/btn";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import Btn from "../../../common/btn/btn";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 
 
 const ConfigTop = props =>{

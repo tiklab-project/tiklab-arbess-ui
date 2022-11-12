@@ -6,9 +6,9 @@ import {inject,observer} from "mobx-react";
 import "../components/pipeline.scss";
 import PipelineTable from "../components/pipelineTable";
 import PipelineAddModal from "../components/pipelineAddModal";
-import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import Btn from "../../../common/btn/btn";
-import Tabs from "../../../common/tabs/tabs";
+import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
+import Btn from "../../common/btn/btn";
+import Tabs from "../../common/tabs/tabs";
 
 const Pipeline = props =>{
 

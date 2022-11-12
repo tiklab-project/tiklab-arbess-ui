@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from "react";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 import {Modal,Form,Input} from "antd";
 import AuthType from "./authType";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
-import {autoHeight} from "../../../../common/client/client";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
+import {autoHeight} from "../../../common/client/client";
 
 const AuthModal = props =>{
 

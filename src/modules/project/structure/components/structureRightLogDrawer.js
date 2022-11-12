@@ -1,6 +1,6 @@
 import React from "react";
 import {Drawer} from "antd";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 import Subtitle from "../../../gui/components/title/subtitle";
 import HlineIcon from "../../../gui/components/title/hlineIcon";
 

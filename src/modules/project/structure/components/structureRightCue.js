@@ -1,5 +1,5 @@
 import React from "react";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 
 const StructureRightCue = props =>{
 

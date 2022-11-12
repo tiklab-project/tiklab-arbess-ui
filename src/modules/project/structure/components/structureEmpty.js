@@ -1,7 +1,7 @@
 import React from "react";
 import {Empty,Spin} from "antd";
 import {CaretRightOutlined,LoadingOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 
 const StructureEmpty = props =>{
 

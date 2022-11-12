@@ -1,11 +1,11 @@
 import React,{useEffect,useState} from "react";
 import {Form,Modal,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
-import ModalTitle from "../../../common/modalTitle/modalTitle";
-import Btn from "../../../common/btn/btn";
+import ModalTitle from "../../common/modalTitle/modalTitle";
+import Btn from "../../common/btn/btn";
 import PipelineAddModalType from "./pipelineAddModalType";
 import PipelineName from "../../projectSet/reDel/pipelineName";
-import {autoHeight} from "../../../common/client/client";
+import {autoHeight} from "../../common/client/client";
 
 const {Step} = Steps
 

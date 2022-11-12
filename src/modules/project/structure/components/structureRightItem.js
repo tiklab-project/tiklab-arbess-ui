@@ -1,7 +1,7 @@
 import React,{Fragment} from "react";
 import {Modal} from "antd";
 import {DeleteOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
-import {getTime} from "../../../../common/client/client";
+import {getTime} from "../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
 

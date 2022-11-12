@@ -4,10 +4,10 @@ import {inject,observer} from "mobx-react";
 import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 import EnviModal from "../components/enviModal";
 import "../components/envi.scss";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import EmptyText from "../../../../common/emptyText/emptyText";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import EmptyText from "../../../common/emptyText/emptyText";
 import SubIcon from "../../../gui/components/title/subIcon";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 
 /*
     系统环境配置

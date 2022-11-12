@@ -1,28 +1,33 @@
 import React,{useEffect,useState} from "react";
-import {Drawer,Divider} from "antd";
-import {MailOutlined, BellOutlined, LoadingOutlined, CloseOutlined} from "@ant-design/icons";
-import ModalTitle from "../../common/modalTitle/modalTitle";
-import EmptyText from "../../common/emptyText/emptyText";
+import {Drawer,Divider,Space} from "antd";
+import {
+    BellOutlined,
+    LoadingOutlined,
+    CloseOutlined,
+    MessageOutlined
+} from "@ant-design/icons";
+import EmptyText from "../common/emptyText/emptyText";
 import {inject,observer} from "mobx-react";
 import "./messageDrawer.scss";
-import Btn from "../../common/btn/btn";
+import Btn from "../common/btn/btn";
 
 const MessageDrawer = props =>{
 
-    const {homePageStore,visible,setVisible} = props
+    const {homePageStore,visible,setVisible,pipelineStore} = props
 
     const {findMessageDispatchItemPage,messageList,messPage,setMessagePagination,messagePagination,
-        setMessageList,unread,updateMessageDispatchItem,fresh
+        setMessageList,unread,updateMessageDispatchItem,fresh,deleteMessageDispatchItem
     } = homePageStore
+    const {findAllPipelineStatus,pipelineList} = pipelineStore
 
     const [isLoading,setIsLoading] = useState(false)
-    const [selected,setSelected] = useState(0)
+    const [selected,setSelected] = useState(2)
 
     useEffect(()=>{
+        visible && findAllPipelineStatus()
         return ()=>{
             setMessageList([])
             setMessagePagination(1)
-            setSelected(0)
         }
     },[visible])
 
@@ -51,18 +56,9 @@ const MessageDrawer = props =>{
             title:"已读",
         }
     ]
-
-    const renderState = state =>{
-        switch (state) {
-            case 0:
-                return "未读"
-            case 1:
-                return "已读"
-        }
-    }
     
     const goHref = item => {
-
+        
         const {message,messageTemplate,status, ...resItem } = item
 
         if (item.status === 0) {
@@ -78,46 +74,68 @@ const MessageDrawer = props =>{
             }
             updateMessageDispatchItem(updateParams)
         }
-        switch (item.messageTemplate.id) {
-            case "pipelineCreate":
-                props.history.push(`/index/task/${item.messageTemplate.link}/work`)
-                setVisible(false)
-                break
-            case "pipelineExec":
-            case "pipelineRun":
-                props.history.push(`/index/task/${item.messageTemplate.link}/structure`)
-                setVisible(false)
+
+        if(isPipeline(item.messageTemplate.link)){
+            switch (item.messageTemplate.id) {
+                case "pipelineCreate":
+                    props.history.push(`/index/task/${item.messageTemplate.link}/survey`)
+                    setVisible(false)
+                    break
+                case "pipelineExec":
+                case "pipelineRun":
+                    props.history.push(`/index/task/${item.messageTemplate.link}/structure`)
+                    setVisible(false)
+            }
         }
+    }
+
+    // 判断流水线是否还存在
+    const isPipeline = id =>{
+        return pipelineList && pipelineList.some(item=>item.pipelineId===id)
+    }
+
+    const delMessage = (e,item) =>{
+        //屏蔽父层点击事件
+        e.stopPropagation()
+        e.nativeEvent.stopImmediatePropagation()
+        deleteMessageDispatchItem(item.id)
     }
 
     const renderMessageList = messageList =>{
         return messageList && messageList.map((item,index)=>{
             return(
                 <div
-                    className="message-item" key={index}
-                    onClick={()=>goHref(item)}
+                    key={index}
+                    className={`message-item ${item.status===1 ? "message-read":""}`}
+                    onClick={()=>goHref(item)} 
+
                 >
                     <div className="message-item-left">
                         <div className="message-item-icon">
-                            <MailOutlined />
+                            <MessageOutlined />
                         </div>
-                        <div>
+                        <div className="message-item-center">
                             <div className="message-item-user">
-                                <span className="user-title">
-                                    {item.messageTemplate.name}
-                                </span>
-                                <span className="user-time">
-                                    {item.receiveTime}
-                                </span>
+                                <Space>
+                                    <span className="user-title">
+                                        {item.messageTemplate.name}
+                                    </span>
+                                    <span className="user-time">
+                                        {item.receiveTime}
+                                    </span>
+                                </Space>
+                            
+                                <div onClick={e=>delMessage(e,item)}
+                                     className={`message-hidden`}
+                                >
+                                    <CloseOutlined />
+                                </div>
                             </div>
                             <div
                                 dangerouslySetInnerHTML={{__html: item.messageTemplate.content}}
                             />
                         </div>
                     </div>
-                    {/*<div className={`message-item-right message-item-state-${item.status}`}>*/}
-                    {/*    {renderState(item.status)}*/}
-                    {/*</div>*/}
                 </div>
             )
         })
@@ -151,6 +169,14 @@ const MessageDrawer = props =>{
         </div>
     }
     
+    const emptyTitle = (
+        <>
+            { selected===0 && "暂无未读消息"}
+            { selected===1 && "暂无已读消息"}
+            { selected===2 && "暂无消息"}
+        </>
+    )
+
     return(
         <Drawer
             closable={false}
@@ -164,17 +190,15 @@ const MessageDrawer = props =>{
         >
             <div className="messageModal">
                 <div className="messageModal-up">
-                    <div className="modalTitle-title">
-                        <span className="modalTitle-title-icon"><BellOutlined/></span>
+                    <div className="messageModal-up-title">
+                        <span className="messageModal-up-icon"><BellOutlined/></span>
                         <span>消息</span>
                     </div>
-                    <div className="modalTitle-icon">
-                        <Btn
-                            title={<CloseOutlined />}
-                            type="text"
-                            onClick={()=>setVisible(false)}
-                        />
-                    </div>
+                    <Btn
+                        title={<CloseOutlined />}
+                        type="text"
+                        onClick={()=>setVisible(false)}
+                    />
                 </div>
                 <div className="messageModal-content">
                     <div className="messageModal-title">
@@ -192,7 +216,11 @@ const MessageDrawer = props =>{
                         }
                         {
                             messageList && messageList.length===0 && messagePagination ===1 &&
-                            <EmptyText/>
+                            <div>
+                                <EmptyText
+                                    title={emptyTitle}
+                                />
+                            </div>
                         }
                         {
                             messageList && messageList.length < messPage.total && !isLoading &&
@@ -216,4 +244,4 @@ const MessageDrawer = props =>{
     )
 }
 
-export default inject("homePageStore")(observer(MessageDrawer))
+export default inject("homePageStore","pipelineStore")(observer(MessageDrawer))

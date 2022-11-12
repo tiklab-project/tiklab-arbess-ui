@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import {Modal,Form,Select,Input} from "antd";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 const ThirdAddressModal = props =>{
 

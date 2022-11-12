@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Modal,Form,Select,Input,message} from "antd";
-import ModalTitle from "../../../../common/modalTitle/modalTitle";
-import {autoHeight} from "../../../../common/client/client";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
+import {autoHeight} from "../../../common/client/client";
 
 const lis = [
     {

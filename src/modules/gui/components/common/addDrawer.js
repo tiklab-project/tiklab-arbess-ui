@@ -4,7 +4,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import AddDrawerLeft from "./addDrawerLeft";
 import AddDrawerRight from "./addDrawerRight";
 import "./addDrawer.scss";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 
 const lis=[
     {

@@ -17,7 +17,7 @@ import {
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/matflow3.png";
+import logo from "../../assets/images/img/matflow3.png";
 import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{

@@ -6,6 +6,7 @@ import {
     Findtodopage,
     FindMessageDispatchItemPage,
     UpdateMessageDispatchItem,
+    DeleteMessageDispatchItem,
 } from "../api/homePage";
 
 import {getUser} from "tiklab-core-ui";
@@ -55,6 +56,15 @@ export class HomePageStore{
 
     @action
     findlogpage = async values =>{
+        // const params = {
+        //     pageParam:{
+        //         pageSize:15,
+        //         currentPage:values.pageParam.currentPage,
+        //     },
+        //     bgroup:"matflow",
+        //     contentKey:"pipelineId",
+        //     content: values.content,
+        // }
         let params
         if(values.userId){
             params = {
@@ -78,8 +88,13 @@ export class HomePageStore{
         }
         const data = await Findlogpage(params)
         if(data.code===0){
-            this.dynamicList=this.dynamicList.concat(data.data && data.data.dataList)
             this.dynaPageTotal=data.data && data.data.totalRecord
+            if(values.pageParam.currentPage===1){
+                this.dynamicList=data.data && data.data.dataList
+            }
+            if(values.pageParam.currentPage>1){
+                this.dynamicList=this.dynamicList.concat(data.data && data.data.dataList)
+            }
         }
         return data
     }
@@ -133,6 +148,17 @@ export class HomePageStore{
     @action
     updateMessageDispatchItem = async value =>{
         const data = await UpdateMessageDispatchItem(value)
+        if(data.code===0){
+            this.fresh = !this.fresh
+        }
+        return data
+    }
+
+    @action
+    deleteMessageDispatchItem = async value =>{
+        const param = new FormData()
+        param.append("id",value)
+        const data = await DeleteMessageDispatchItem(param)
         if(data.code===0){
             this.fresh = !this.fresh
         }

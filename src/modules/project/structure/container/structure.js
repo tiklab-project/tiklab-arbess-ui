@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import StructureLeft from "../components/structureLeft";
 import StructureRight from "../components/structureRight";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import StructureEmpty from "../components/structureEmpty";
 import "../components/structure.scss";
 import {inject,observer} from "mobx-react";

@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 
 
-const WorkSpaceCensus = props =>{
+const SurveyCensus = props =>{
 
     const {census} = props
 
@@ -41,7 +41,7 @@ const WorkSpaceCensus = props =>{
     ]
 
     return(
-        <div className="workSpace-census-stat">
+        <div className="survey-census-stat">
             <div className="stat">
                 {
                     status.map(item=>{
@@ -65,4 +65,4 @@ const WorkSpaceCensus = props =>{
     )
 }
 
-export default WorkSpaceCensus
+export default SurveyCensus

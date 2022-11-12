@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import "../components/info.scss";
 
 /*

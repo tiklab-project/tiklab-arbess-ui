@@ -3,17 +3,17 @@ import {Profile} from "tiklab-eam-ui";
 import {message,Tooltip,Table,Space,Spin} from "antd";
 import {
     CheckCircleOutlined,
-    CloseCircleOutlined,
-    ExclamationCircleOutlined,
     PlayCircleOutlined,
-    MinusCircleOutlined,
     ClockCircleOutlined,
     LoadingOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import "./pipelineTable.scss";
-import EmptyText from "../../../common/emptyText/emptyText";
-import ListName from "../../../common/list/listname";
+import EmptyText from "../../common/emptyText/emptyText";
+import ListName from "../../common/list/listname";
+import sun from "../../../assets/images/svg/sun.svg";
+import rain from "../../../assets/images/svg/rain.svg";
+import cloudy from "../../../assets/images/svg/cloudy.svg";
 
 const PipelineTable = props =>{
 
@@ -46,13 +46,9 @@ const PipelineTable = props =>{
     }
 
     //去详情页面
-    const goPipelineTask= (text,record) =>{
-        props.history.push(`/index/task/${record.pipelineId}/work`)
-    }
+    const goPipelineTask= (text,record) => props.history.push(`/index/task/${record.pipelineId}/survey`)
 
-    const goHistory = record =>{
-        props.history.push(`/index/task/${record.pipelineId}/structure`)
-    }
+    const goHistory = record => props.history.push(`/index/task/${record.pipelineId}/structure`)
 
     const work = record =>{
         const params = {
@@ -106,28 +102,28 @@ const PipelineTable = props =>{
                     case 10:
                         return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
                             <Space>
-                                <CheckCircleOutlined style = {{fontSize:20,color:"#0063FF"}}/>
+                                <img src={sun} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 1:
                         return <Tooltip title={tooltip("失败",text,record.execUser.name)}>
                             <Space>
-                                <CloseCircleOutlined style = {{fontSize:20,color:"#ff0000"}}/>
+                                <img src={rain} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 0:
                         return <Tooltip title={tooltip("待构建","无","无")}>
                             <Space>
-                                <MinusCircleOutlined style = {{fontSize:20,color:"#8795b1"}}/>
+                                <img src={sun} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 20:
                         return  <Tooltip title={tooltip("停止",text,record.execUser.name)}>
                             <Space>
-                                <ExclamationCircleOutlined style = {{fontSize:20}}/>
+                                <img src={cloudy} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>

@@ -1,7 +1,8 @@
 import React from "react";
-import Guide from "./guide";
-import ListName from "../../../common/list/listname";
-import EmptyText from "../../../common/emptyText/emptyText";
+import {HistoryOutlined} from "@ant-design/icons";
+import Guide from "../../common/guide/guide";
+import ListName from "../../common/list/listname";
+import EmptyText from "../../common/emptyText/emptyText";
 
 // 最近访问的流水线
 const PipelineNear = props =>{
@@ -9,7 +10,7 @@ const PipelineNear = props =>{
     const {pipelineNearList} = props
 
     const goPipeline = pipelineId => {
-        props.history.push(`/index/task/${pipelineId}/work`)
+        props.history.push(`/index/task/${pipelineId}/survey`)
     }
 
     const renderList = (item) => {
@@ -26,7 +27,10 @@ const PipelineNear = props =>{
     }
 
     return <div className="pipelineNear">
-        <Guide title={"最近访问的流水线"}/>
+        <Guide
+            title={"最近访问的流水线"}
+            icon={<HistoryOutlined />}
+        />
         <div className="pipelineNear-bottom">
             {
                 pipelineNearList && pipelineNearList.length > 0 ?
@@ -35,7 +39,9 @@ const PipelineNear = props =>{
                     })
                     :
                     <div className="homePage-empty">
-                        <EmptyText/>
+                        <EmptyText
+                            title={"最近没有访问记录"}
+                        />
                     </div>
             }
         </div>

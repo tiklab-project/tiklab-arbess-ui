@@ -4,7 +4,7 @@ import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
 import Forms from "../forms/forms";
 import SubIcon from "../title/subIcon";
 import "./formDetailsDrawer.scss";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 
 const FormDetailsDrawer = props =>{
 

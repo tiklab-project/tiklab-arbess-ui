@@ -4,9 +4,9 @@ import {
     FileTree,
     PipelineCensus,
     ReadFile
-} from "../api/workSpace";
+} from "../api/survey";
 
-export class WorkSpaceStore{
+export class SurveyStore {
 
     @observable fileList = []
 
@@ -51,4 +51,4 @@ export class WorkSpaceStore{
 
 }
 
-export const WORKSPACE_STORE = "workSpaceStore"
+export const SURVEY_STORE = "surveyStore"

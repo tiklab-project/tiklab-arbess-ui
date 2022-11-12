@@ -10,7 +10,7 @@ import {
     UpdateFollow
 } from "../api/pipeline";
 
-import moment from "../../../common/client/client";
+import moment from "../../common/client/client";
 import {getUser} from "tiklab-core-ui";
 
 export class PipelineStore {

@@ -2,13 +2,13 @@ import React,{useState,useEffect} from "react";
 import {Popconfirm,Space,Table,Tooltip} from "antd";
 import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import EmptyText from "../../../../common/emptyText/emptyText";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import EmptyText from "../../../common/emptyText/emptyText";
 import AuthBtn from "../components/authBtn";
 import "../components/auth.scss";
 import {Profile} from "tiklab-eam-ui";
-import ListName from "../../../../common/list/listname";
-import Listaction from "../../../../common/list/listaction";
+import ListName from "../../../common/list/listname";
+import Listaction from "../../../common/list/listaction";
 
 const Auth = props =>{
 

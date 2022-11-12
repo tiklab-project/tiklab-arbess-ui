@@ -1,7 +1,7 @@
 import React from "react";
-import {ShareAltOutlined,UserOutlined,ArrowRightOutlined} from "@ant-design/icons";
-import Guide from "./guide";
-import EmptyText from "../../../common/emptyText/emptyText";
+import {ShareAltOutlined,UserOutlined,ArrowRightOutlined,CalendarOutlined} from "@ant-design/icons";
+import Guide from "../../common/guide/guide";
+import EmptyText from "../../common/emptyText/emptyText";
 
 const Agency = props =>{
 
@@ -68,6 +68,7 @@ const Agency = props =>{
             <Guide
                 title={"我的待办"}
                 type={"agency"}
+                icon={<CalendarOutlined />}
             />
             <div className="agency-bottom">
                 {
@@ -77,7 +78,9 @@ const Agency = props =>{
                         })
                         :
                         <div className="homePage-empty">
-                            <EmptyText/>
+                            <EmptyText
+                                title={"暂无代办任务"}
+                            />
                         </div>
                 }
             </div>

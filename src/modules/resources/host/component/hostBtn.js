@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {PlusOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 import {inject,observer} from "mobx-react";
 import HostModal from "./hostModal";
 

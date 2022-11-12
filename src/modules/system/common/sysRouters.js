@@ -95,7 +95,7 @@ export const applicationRouter = [
     },
     {
         id:"/index/system/myTodoTask",
-        title:"待办事项",
+        title:"待办任务",
         icon:<ProfileOutlined />,
         purviewCode:"todotask",
     },

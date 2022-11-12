@@ -1,20 +1,21 @@
 import React,{useState,useEffect} from "react";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import "../components/workSpace.scss";
-import WorkSpaceDyna from "../components/workSpaceDyna";
-import BreadcrumbContent from "../../../../common/breadcrumb/breadcrumb";
-import echarts from "../../../../common/echarts/echarts";
-import WorkSpaceCensus from "../components/workSpaceCensus";
-import WorkLine from "../components/workLine";
+import "../components/survey.scss";
+import Dyna from "../../../common/dyna/dynaList";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import echarts from "../../../common/echarts/echarts";
+import SurverCensus from "../components/surveyCensus";
+import Guide from "../../../common/guide/guide";
 import {PieChartOutlined} from "@ant-design/icons";
 
-const WorkSpace = props =>{
 
-    const {workSpaceStore,pipelineStore,homePageStore} = props
+const Survey = props =>{
+
+    const {surveyStore,pipelineStore,homePageStore} = props
 
     const {findlogpage,dynaPageTotal,dynamicList,setDynamicList} = homePageStore
-    const {pipelineCensus} = workSpaceStore
+    const {pipelineCensus} = surveyStore
     const {pipelineId,pipeline} = pipelineStore
 
     const [dynaPagination,setDynaPagination] = useState(1)
@@ -26,6 +27,7 @@ const WorkSpace = props =>{
     },[pipelineId])
 
     //运行概况
+    let myChart
     useEffect(()=>{
         if(pipelineId){
             pipelineCensus(pipelineId).then(res=>{
@@ -35,6 +37,10 @@ const WorkSpace = props =>{
                     renderEchart(data)
                 }
             })
+        }
+        return () => {
+            // myChart.dispose() 销毁实例。实例销毁后无法再被使用
+            myChart.dispose()
         }
     },[pipelineId])
 
@@ -54,7 +60,7 @@ const WorkSpace = props =>{
     const renderEchart = data =>{
         const chartDom=document.getElementById("burn-down")
         // 获取实例
-        let myChart=chartDom && echarts.getInstanceByDom(chartDom)
+        myChart=chartDom && echarts.getInstanceByDom(chartDom)
 
         if (!myChart) // 如果不存在则创建
         {
@@ -85,35 +91,37 @@ const WorkSpace = props =>{
     }
 
     return(
-        <div className="workSpace">
-            <div className="workSpace-content home-limited mf">
-                <div className="workSpace-top">
+        <div className="survey">
+            <div className="survey-content home-limited mf">
+                <div className="survey-top">
                     <BreadcrumbContent
                         firstItem={pipeline.pipelineName}
                         secondItem={"概况"}
                     />
                 </div>
-                <div className="workSpace-content">
-                    <div className="workSpace-census workSpace-div">
-                        <WorkLine
+                <div className="survey-content">
+                    <div className="survey-census survey-div">
+                        <Guide
                             icon={<PieChartOutlined />}
                             title={"运行概况"}
                         />
-                        <div className="workSpace-census-bottom">
+                        <div className="survey-census-bottom">
                             <div className="chart-box" id="burn-down"
                                  style={{width:400,height:300}}
                             />
-                            <WorkSpaceCensus
+                            <SurverCensus
                                 census={census}
                             />
                         </div>
                     </div>
-                    <WorkSpaceDyna
+                    <Dyna
                         dynamicList={dynamicList}
                         moreDynamic={moreDynamic}
                         isDyna={isDyna}
                         dynaPageTotal={dynaPageTotal}
                         dynaPagination={dynaPagination}
+                        guideTitle={"流水线动态"}
+                        pipelineId={pipelineId}
                     />
                 </div>
             </div>
@@ -121,4 +129,4 @@ const WorkSpace = props =>{
     )
 }
 
-export default withRouter(inject("workSpaceStore","pipelineStore","homePageStore")(observer(WorkSpace)))
+export default withRouter(inject("surveyStore","pipelineStore","homePageStore")(observer(Survey)))

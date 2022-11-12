@@ -1,6 +1,6 @@
 import React from "react";
 import {Form,Input} from "antd";
-import Btn from "../../../common/btn/btn";
+import Btn from "../../common/btn/btn";
 import PipelinePower from "./pipelinePower";
 
 const PipelineName = props =>{
