@@ -5,7 +5,7 @@ import EmptyText from "../../common/emptyText/emptyText";
 
 const Agency = props =>{
 
-    const {taskList} = props
+    const {taskList,isHome} = props
     
     const state = state => {
         switch (state){
@@ -65,11 +65,14 @@ const Agency = props =>{
 
     return(
         <div className="agency">
-            <Guide
-                title={"我的待办"}
-                type={"agency"}
-                icon={<CalendarOutlined />}
-            />
+            {
+                isHome &&
+                <Guide
+                    title={"我的待办"}
+                    type={"agency"}
+                    icon={<CalendarOutlined />}
+                />
+            }
             <div className="agency-bottom">
                 {
                     taskList && taskList.length > 0 ?

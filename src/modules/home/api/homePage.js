@@ -45,7 +45,7 @@ export function  UpdateMessageDispatchItem(data){
     })
 }
 
-// 更新消息
+// 删除消息
 export function  DeleteMessageDispatchItem(data){
     return serviceLoc.request({
         url:"/message/messageDispatchItem/deleteMessageDispatchItem",

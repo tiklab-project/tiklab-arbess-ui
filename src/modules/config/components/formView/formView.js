@@ -1,10 +1,11 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {Form} from "antd";
 import {inject,observer} from "mobx-react";
 import {withRouter} from "react-router";
 import NewStage from "./newStage";
 import  "./formView.scss";
-import Anch from "../common/anch";
+import Anch from "./anch";
+import Btn from "../../../common/btn/btn";
 
 const formView = props =>{
 
@@ -16,7 +17,7 @@ const formView = props =>{
     const [form] = Form.useForm()
 
     useEffect(()=>{
-        form.setFieldsValue({...formInitialValues})
+        form && form.setFieldsValue({...formInitialValues})
     },[formInitialValues,pipelineId])
 
     useEffect(()=>{

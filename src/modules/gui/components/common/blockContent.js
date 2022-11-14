@@ -1,7 +1,7 @@
 import React from "react";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
-import HlineIcon from "../title/hlineIcon";
-import Subtitle from "../title/subtitle";
+import HlineIcon from "../../../config/components/formTitle/hlineIcon";
+import Subtitle from "../../../config/components/formTitle/subtitle";
 
 const BlockContent = props =>{
 

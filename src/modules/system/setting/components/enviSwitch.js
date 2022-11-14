@@ -1,10 +1,8 @@
 import React from "react";
-import {Button,Input,Select} from "antd";
-import {SearchOutlined,PlusOutlined} from "@ant-design/icons";
+import {Input,Select} from "antd";
+import {SearchOutlined} from "@ant-design/icons";
 
 const EnviSwitch = props =>{
-
-    const {add} = props
 
     return(
         <div className="envi-content-switch">

@@ -11,7 +11,7 @@ import "codemirror/mode/shell/shell.js";
 import "./mirror.scss";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
-import SuffixStatus from "../../../config/components/formType/suffixStatus";
+import SuffixStatus from "./suffixStatus";
 
 const Mirror = props =>{
 

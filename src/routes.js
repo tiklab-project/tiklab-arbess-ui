@@ -21,7 +21,7 @@ const Authorize=AsyncComponent(()=>import("./modules/authorize/authorize"))
 const Agency=AsyncComponent(()=>import("./modules/agency/agency"))
 
 /* 动态 */
-const Dyna=AsyncComponent(()=>import("./modules/dyna/dyna"))
+const Dyna=AsyncComponent(()=>import("./modules/dyna/dyna/dyna"))
 
 const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 
@@ -76,6 +76,9 @@ const TodoTemp=AsyncComponent(()=>import("./modules/system/todotask/todoTemp"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
+
+const Version=AsyncComponent(()=>import("./modules/system/licence/version"))
+const Licence=AsyncComponent(()=>import("./modules/system/licence/licence"))
 
 const FullWorkTodo=AsyncComponent(()=>import("./modules/wiget/fullWorkTodo"))
 const WidgetMangent=AsyncComponent(()=>import("./modules/wiget/widgetMangent"))
@@ -272,6 +275,10 @@ const routers=[
                     {
                         path:"/index/system/mes/sendtrue",
                         component: MessageSendTypeTrue,
+                    },
+                    {
+                        path:"/index/system/version",
+                        component: Version,
                     },
                     {
                         render:()=><Redirect to="/index/system/role"/>,

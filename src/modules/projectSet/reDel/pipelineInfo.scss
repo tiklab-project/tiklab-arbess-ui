@@ -11,6 +11,7 @@
         padding: 10px;
         cursor: pointer;
         border-radius: 2px;
+        border: 1px solid var(--tiklab-gray-200);
         &:first-child{
           margin-right: 15px;
         }
@@ -45,7 +46,7 @@
     &-set{
         max-width: 300px;
         width: 300px;
-        border: 1px solid var(--tiklab-gray-200);
+        margin-bottom: var(--tiklab-padding-item);
     }
     .pipeline-power-noSet{
         flex: 1;

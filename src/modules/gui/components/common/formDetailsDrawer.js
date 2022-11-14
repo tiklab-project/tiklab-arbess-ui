@@ -2,7 +2,7 @@ import React from "react";
 import {Button,Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
 import Forms from "../forms/forms";
-import SubIcon from "../title/subIcon";
+import SubIcon from "../../../config/components/formTitle/subIcon";
 import "./formDetailsDrawer.scss";
 import Btn from "../../../common/btn/btn";
 

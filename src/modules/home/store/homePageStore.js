@@ -22,11 +22,15 @@ export class HomePageStore{
         pageSize: 15,
         total: 1,
     }
+    @observable dynaPage = {
+        defaultCurrent: 1,
+        pageSize: 15,
+        total: 1,
+    }
     @observable messagePagination = 1 //控制接口中页码page的变化，更新接口 -- 消息
     @observable unread = ""
 
     @observable fresh = false
-    @observable dynaPageTotal = 1
     @observable dynamicList = []
 
     @action
@@ -56,45 +60,10 @@ export class HomePageStore{
 
     @action
     findlogpage = async values =>{
-        // const params = {
-        //     pageParam:{
-        //         pageSize:15,
-        //         currentPage:values.pageParam.currentPage,
-        //     },
-        //     bgroup:"matflow",
-        //     contentKey:"pipelineId",
-        //     content: values.content,
-        // }
-        let params
-        if(values.userId){
-            params = {
-                pageParam:{
-                    pageSize:15,
-                    currentPage:values.pageParam.currentPage,
-                },
-                bgroup:"matflow",
-                userId: values.userId
-            }
-        }else {
-            params = {
-                pageParam:{
-                    pageSize:15,
-                    currentPage:values.pageParam.currentPage,
-                },
-                bgroup:"matflow",
-                contentKey:"pipelineId",
-                content: values.content,
-            }
-        }
-        const data = await Findlogpage(params)
+        const data = await Findlogpage(values)
         if(data.code===0){
-            this.dynaPageTotal=data.data && data.data.totalRecord
-            if(values.pageParam.currentPage===1){
-                this.dynamicList=data.data && data.data.dataList
-            }
-            if(values.pageParam.currentPage>1){
-                this.dynamicList=this.dynamicList.concat(data.data && data.data.dataList)
-            }
+            this.dynaPage.total=data.data && data.data.totalPage
+            this.dynamicList=data.data && data.data.dataList
         }
         return data
     }

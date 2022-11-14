@@ -62,9 +62,10 @@
         .pipelineNear{
             border-radius: 4px;
             padding: 10px;
-            height: 350px;
+            height: 300px;
             background: #fff;
             flex: 1;
+            margin-bottom: 15px;
             .pipelineNear-item{
                 display: flex;
                 justify-content: space-between;
@@ -75,7 +76,6 @@
                     border-radius: 4px;
                 }
             }
-            // #fbfafa
         }
         .agency{
             flex: 1;
@@ -83,7 +83,7 @@
             border-radius: 4px;
             padding: 10px;
             min-height: 350px;
-            margin: var(--tiklab-padding-item) 0;
+            margin-bottom: 15px;
             &-bottom{
                 &-list{
                     padding: 8px;
@@ -152,6 +152,6 @@
                 }
             }
         }
-    }
 
+    }
 }

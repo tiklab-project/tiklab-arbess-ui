@@ -2,7 +2,7 @@ import React from "react";
 import {TeamOutlined,BarsOutlined,BuildOutlined,AppstoreOutlined,ProjectOutlined,
     GroupOutlined,SoundOutlined,MergeCellsOutlined,SafetyCertificateOutlined,
     FileProtectOutlined,SwitcherOutlined,ProfileOutlined,LayoutOutlined,
-    MenuOutlined,
+    MenuOutlined,VerifiedOutlined
 } from "@ant-design/icons";
 
 export const departmentRouter = [
@@ -118,6 +118,12 @@ export const applicationRouter = [
                 purviewCode:"log",
             }
         ]
+    },
+    {
+        id:"/index/system/version",
+        title:"版本与许可证",
+        icon:<VerifiedOutlined />,
+        purviewCode:"version",
     },
     {
         id:"/index/system/info",

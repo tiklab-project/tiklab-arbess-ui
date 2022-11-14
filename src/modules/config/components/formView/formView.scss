@@ -3,6 +3,37 @@
     max-width: 1280px;
     min-width: 768px;
     padding: 0 var(--tiklab-padding) var(--tiklab-padding);
+    .formView-anch{
+        position: sticky;
+        top: 64px;
+        background: var(--mf-backdrop-color);
+        z-index: 9;
+        padding: 15px 0;
+        &-content{
+            display: flex;
+            border-radius: 4px;
+        }
+        .anch-item{
+            height: 35px;
+            line-height: 35px;
+            cursor: pointer;
+            font-size: var(--tiklab-font-16);
+            &:not(:last-child){
+                margin-right: 30px;
+            }
+        }
+        .anch-plus{
+            padding-top: 10px;
+            &:hover{
+                font-weight: var(--tiklab-font-weight-bold);
+                color: #0063FF;
+            }
+        }
+        .anch-select{
+            border-bottom: 2px solid var(--tiklab-blue);
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+    }
     &-wrapper{
         background: #ffffff;
         border-radius: 4px;

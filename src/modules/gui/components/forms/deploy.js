@@ -6,7 +6,7 @@ import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
 import TestContext from "../common/testContext";
-import SuffixStatus from "../../../config/components/formType/suffixStatus";
+import SuffixStatus from "./suffixStatus";
 
 const Deploy = props =>{
 

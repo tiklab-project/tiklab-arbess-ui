@@ -8,12 +8,10 @@ import {
 } from "@ant-design/icons";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
-import "./projectSet.scss";
-import PipelineName from "./pipelineName";
-import PipelinePower from "./pipelinePower";
+import PipelineInfo from "./pipelineInfo";
 import Btn from "../../common/btn/btn";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
-
+import "./projectSet.scss";
 
 const ProjectSet = props =>{
 
@@ -35,7 +33,8 @@ const ProjectSet = props =>{
         form.validateFields().then((value)=> {
             const params={
                 pipelineId:pipelineId,
-                pipelineName:value.pipelineName
+                pipelineName:value.pipelineName,
+                pipelinePower:powerType
             }
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
@@ -44,15 +43,6 @@ const ProjectSet = props =>{
                 }
             })
         })
-    }
-
-    const getPowerType = item =>{
-        setPowerType(item.id)
-        const params={
-            pipelineId:pipelineId,
-            pipelinePower:item.id
-        }
-        updatePipeline(params)
     }
 
     const onConfirm = () =>{
@@ -84,34 +74,23 @@ const ProjectSet = props =>{
     const lis = [
         {
             key:1,
-            title:"修改流水线名称",
+            title:"修改流水线信息",
             icon: <EditOutlined />,
-            enCode:"pipeline_name",
+            enCode:"pipeline_update",
             content: <div className="bottom-rename">
-                <PipelineName
+                <PipelineInfo
                     form={form}
                     re={re}
                     pipelineList={pipelineList}
-                    layout={"inline"}
                     pipeline={pipeline}
+                    powerType={powerType}
+                    setPowerType={setPowerType}
+                    set={"set"}
                 />
             </div>
-        },
+        },    
         {
             key:2,
-            title:"更改流水线权限",
-            icon: <EditOutlined />,
-            enCode:"seting_auth",
-            content: <div className="bottom-power">
-                <PipelinePower
-                    powerType={powerType}
-                    set={"set"}
-                    onClick={getPowerType}
-                />
-            </div>
-        },
-        {
-            key:3,
             title:"删除流水线",
             icon: <DeleteOutlined />,
             enCode:"pipeline_delete",

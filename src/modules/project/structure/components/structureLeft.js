@@ -3,8 +3,8 @@ import StructureLeftExecute from "./structureLeftExecute";
 import StructureLeftDropdown from "./structureLeftDropdown";
 import StructureEmpty from "./structureEmpty";
 import {inject,observer} from "mobx-react";
-import {LeftOutlined,RightOutlined} from "@ant-design/icons";
 import StructureLeftList from "./structureLeftList";
+import Page from "../../../common/page/page";
 
 const StructureLeft = props =>{
 
@@ -73,22 +73,11 @@ const StructureLeft = props =>{
                                     />
                                     { renderLeftPageList(leftPageList) }
                                 </div>
-                                <div className="history-content-page">
-                                    <span
-                                        className={`${pageCurrent===1?"page-ban":"page-allow"}`}
-                                        onClick={()=>pageCurrent===1? null :changPage(pageCurrent - 1)}
-                                    >
-                                            <LeftOutlined/>
-                                        </span>
-                                    <span className="page-current">{pageCurrent}</span>
-                                    <span> / {page && page.total}</span>
-                                    <span
-                                        className={`${pageCurrent===page.total?"page-ban":"page-allow"}`}
-                                        onClick={()=>pageCurrent===page.total?null:changPage(pageCurrent + 1)}
-                                    >
-                                        <RightOutlined/>
-                                    </span>
-                                </div>
+                                <Page
+                                    pageCurrent={pageCurrent}
+                                    changPage={changPage}
+                                    page={page}
+                                />
                             </>
                             :
                             <StructureEmpty isData={true}/>

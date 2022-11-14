@@ -1,12 +1,12 @@
 import React,{useEffect,useState} from "react";
 import "./configTop.scss";
+import {Select} from "antd";
 import {
     AppstoreOutlined,
     BarsOutlined,
     CaretRightOutlined,
     ExclamationCircleOutlined,
     LoadingOutlined,
-    PlusOutlined
 } from "@ant-design/icons";
 import {message,Spin} from "antd";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
@@ -18,7 +18,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 
 const ConfigTop = props =>{
 
-    const {view,setView,pipelineId,pipelineName,configStore,structureStore,setAddConfigVisible} = props
+    const {view,setView,pipelineId,pipelineName,configStore,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
     const {validLength,isPlugin} = configStore
@@ -29,9 +29,8 @@ const ConfigTop = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        if(configView){
-            setView(configView)
-        }
+        (!isPlugin || getVersionInfo().expired) && setView("forms")
+        !getVersionInfo().expired && isPlugin && configView && setView(configView)
     },[configView])
 
     const run = () => {
@@ -61,83 +60,48 @@ const ConfigTop = props =>{
     }
 
     return(
-        <div className="config-top">
-            <div className="config-top-content">
-                <BreadcrumbContent
-                    firstItem={pipelineName}
-                    secondItem={"配置"}
-                />
-                <div className="config_changeView">
-                    <div className="changeView">
-                        <div className="changeView-valid">
-                            {validLength && validLength > 0 ?
-                                <span>
-                        <ExclamationCircleOutlined />
-                                    &nbsp;
-                                    {validLength}项配置未完成
-                    </span> : null}
-                        </div>
-                        <div className="changeView-newStage">
-                            <Btn
-                                onClick={()=>setAddConfigVisible(true)}
-                                icon={<PlusOutlined />}
-                                title={"添加配置"}
-                            />
-                        </div>
-                        <div className="changeView-btn">
-                            {
-                                processVisible ?
-                                    <Btn
-                                        type={"primary"}
-                                        title={<Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />}
-                                    />
-                                    :
-                                    <Btn
-                                        type={validLength>0?"disabled":"primary"}
-                                        onClick={validLength>0?null:()=>run()}
-                                        icon={<CaretRightOutlined />}
-                                        title={"运行"}
-                                    />
+        <div className="config-up">
+            <div className="config-top">
+                <div className="config-top-content">
+                    <BreadcrumbContent
+                        firstItem={pipelineName}
+                        secondItem={"配置"}
+                    />
+                    <div className="config_changeView">
+                        <div className="changeView">
+                            <div className="changeView-valid">
+                                {validLength && validLength > 0 ?
+                                    <span>
+                                    <ExclamationCircleOutlined />
+                                        &nbsp;
+                                        {validLength}项配置未完成
+                                </span> : null}
+                            </div>
+                            <div className="changeView-btn">
+                                {
+                                    processVisible ?
+                                        <Btn
+                                            type={"primary"}
+                                            title={<Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />}
+                                        />
+                                        :
+                                        <Btn
+                                            type={validLength>0?"disabled":"primary"}
+                                            onClick={validLength>0?null:()=>run()}
+                                            icon={<CaretRightOutlined />}
+                                            title={"运行"}
+                                        />
 
-                            }
-                        </div>
-                        <div className="changeView-view">
-                            <div className={`changeView-view-li ${view==="forms" ? "changeView-view-inner":""}`}
-                                 onClick={()=>changeView("forms")}
-                            >
-                                <div className="changeView-view-item" >
-                                    <BarsOutlined  />
-                                    &nbsp;
-                                    表单
-                                </div>
+                                }
                             </div>
-                            <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":""}`}
-                                 onClick={()=>changeView("gui")}
-                            >
-                                <div className="changeView-view-item">
-                                    <AppstoreOutlined/>
-                                    &nbsp;
-                                    图形
-                                </div>
-                            </div>
-                            {/*{*/}
-                            {/*    !getVersionInfo().expired && isPlugin ?*/}
-                            {/*        <div className={`changeView-view-li ${view==="gui" ? "changeView-view-inner":null}`}*/}
-                            {/*             onClick={()=>changeView("gui")}*/}
-                            {/*        >*/}
-                            {/*            <div className="changeView-view-item">*/}
-                            {/*                <AppstoreOutlined/>*/}
-                            {/*                &nbsp;*/}
-                            {/*                图形化*/}
-                            {/*            </div>*/}
-                            {/*        </div>*/}
-                            {/*        :*/}
-                            {/*        <div className="changeView-view-li changeView-view-ban">*/}
-                            {/*            <AppstoreOutlined/>*/}
-                            {/*            &nbsp;*/}
-                            {/*            图形化*/}
-                            {/*        </div>*/}
-                            {/*}*/}
+                            <Select onChange={changeView} value={view}>
+                                <Select.Option value={"forms"}>
+                                    <BarsOutlined  />&nbsp;表单
+                                </Select.Option>
+                                <Select.Option value={"gui"} disabled={getVersionInfo().expired || !isPlugin}>
+                                    <AppstoreOutlined  />&nbsp;图形
+                                </Select.Option>
+                            </Select>
                         </div>
                     </div>
                 </div>

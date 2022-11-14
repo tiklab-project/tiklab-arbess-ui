@@ -21,7 +21,7 @@ const Authorize=AsyncComponent(()=>import("./modules/authorize/authorize"))
 const Agency=AsyncComponent(()=>import("./modules/agency/agency"))
 
 /* 动态 */
-const Dyna=AsyncComponent(()=>import("./modules/dyna/dyna"))
+const Dyna=AsyncComponent(()=>import("./modules/dyna/dyna/dyna"))
 
 const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 

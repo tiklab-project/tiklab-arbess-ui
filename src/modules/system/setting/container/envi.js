@@ -6,7 +6,7 @@ import EnviModal from "../components/enviModal";
 import "../components/envi.scss";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../../common/emptyText/emptyText";
-import SubIcon from "../../../gui/components/title/subIcon";
+import SubIcon from "../../../config/components/formTitle/subIcon";
 import Btn from "../../../common/btn/btn";
 
 /*

@@ -1,4 +1,24 @@
+.pipeline-add{
+    top: 0;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    max-width: 100vw;
+    .ant-modal-body{
+        height: 100%;
+        overflow: auto;
+        padding: 0;
+        background: var(--mf-backdrop-color);
+    }
+    .ant-modal-footer{
+        display: none;
+    }
+}
 .pipelineAddModal{
+    background: #ffffff;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
     .pipelineAddModalType{
       &-title{
           padding-bottom: 10px;
@@ -72,9 +92,6 @@
         margin: auto;
     }
     .steps-content {
-        padding: 10px;
-        background-color: #fafafa;
-        border: 1px dashed #e9e9e9;
         border-radius: 2px;
         height: calc(100% - 120px);
         overflow: auto

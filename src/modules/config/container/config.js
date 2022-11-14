@@ -2,15 +2,13 @@ import React,{useState} from "react";
 import {inject,observer} from "mobx-react";
 import ConfigTop from "../components/common/configTop";
 import ConfigView from "../components/common/configView";
-import Anch from "../components/common/anch";
-import AddModal from "../components/formView/addModal";
 
 const Config = props =>{
 
     const {pipelineStore,configDataStore} = props
 
     const {pipelineId,pipeline} = pipelineStore
-    const {data,opt,setOpt,addConfigVisible,setAddConfigVisible} = configDataStore
+    const {data,setOpt} = configDataStore
 
     const [view,setView] = useState("forms")
 
@@ -35,29 +33,13 @@ const Config = props =>{
             id="config-content"
             onScroll={onScroll}
         >
-            <div className="config-up">
-                <ConfigTop
-                    view={view}
-                    setView={setView}
-                    pipelineId={pipelineId}
-                    pipelineName={pipeline.pipelineName}
-                    setAddConfigVisible={setAddConfigVisible}
-                />
-                    {/*{*/}
-                    {/*    view==="forms" &&*/}
-                    {/*    <Anch*/}
-                    {/*        data={data}*/}
-                    {/*        opt={opt}*/}
-                    {/*        setOpt={setOpt}*/}
-                    {/*        setAddConfigVisible={setAddConfigVisible}*/}
-                    {/*    />*/}
-                    {/*}*/}
-            </div>
-            <ConfigView view={view}/>
-            <AddModal
-                addConfigVisible={addConfigVisible}
-                setAddConfigVisible={setAddConfigVisible}
+            <ConfigTop
+                view={view}
+                setView={setView}
+                pipelineId={pipelineId}
+                pipelineName={pipeline.pipelineName}
             />
+            <ConfigView view={view}/>
         </div>
     )
 }

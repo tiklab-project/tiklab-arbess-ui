@@ -1,0 +1,19 @@
+.mf-page{
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    height: 47px;
+    .mf-page-ban{
+        cursor:not-allowed;
+        color: var(--tiklab-gray-500);
+    }
+    .mf-page-allow{
+        cursor: pointer;
+        &:hover{
+          color: var(--tiklab-blue);
+        }
+    }
+    .mf-page-current{
+        color: var(--tiklab-blue);
+    }
+}

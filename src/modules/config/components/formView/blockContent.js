@@ -7,7 +7,7 @@ import {
 import {Modal,message} from "antd";
 import Switch from "./switch";
 import Forms from "../formType/forms";
-import HlineIcon from "../../../gui/components/title/hlineIcon";
+import HlineIcon from "../formTitle/hlineIcon";
 
 const BlockContent = props =>{
 

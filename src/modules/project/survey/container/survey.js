@@ -1,20 +1,22 @@
 import React,{useState,useEffect} from "react";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
+import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
+
 import "../components/survey.scss";
-import Dyna from "../../../common/dyna/dynaList";
+import Dyna from "../../../dyna/common/dynaList";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import echarts from "../../../common/echarts/echarts";
 import SurverCensus from "../components/surveyCensus";
+import DynaLatest from "../../../dyna/dynaLatest/dynaLatest";
 import Guide from "../../../common/guide/guide";
-import {PieChartOutlined} from "@ant-design/icons";
 
 
 const Survey = props =>{
 
     const {surveyStore,pipelineStore,homePageStore} = props
 
-    const {findlogpage,dynaPageTotal,dynamicList,setDynamicList} = homePageStore
+    const {findlogpage,dynamicList,setDynamicList} = homePageStore
     const {pipelineCensus} = surveyStore
     const {pipelineId,pipeline} = pipelineStore
 
@@ -27,7 +29,6 @@ const Survey = props =>{
     },[pipelineId])
 
     //运行概况
-    let myChart
     useEffect(()=>{
         if(pipelineId){
             pipelineCensus(pipelineId).then(res=>{
@@ -38,29 +39,24 @@ const Survey = props =>{
                 }
             })
         }
-        return () => {
-            // myChart.dispose() 销毁实例。实例销毁后无法再被使用
-            myChart.dispose()
-        }
     },[pipelineId])
 
     // 流水线动态
     useEffect(()=>{
         const params = {
-            content:pipelineId,
+            content:{pipelineId:[pipelineId]},
             pageParam:{
-                currentPage:dynaPagination
+                pageSize:9,
+                currentPage:1
             }
         }
-        findlogpage(params).then(res=>{
-            res.code===0 && dynaPagination > 1 && setIsDyna(false)
-        })
-    },[pipelineId,dynaPagination])
+        findlogpage(params)
+    },[pipelineId])
 
     const renderEchart = data =>{
         const chartDom=document.getElementById("burn-down")
         // 获取实例
-        myChart=chartDom && echarts.getInstanceByDom(chartDom)
+        let myChart=chartDom && echarts.getInstanceByDom(chartDom)
 
         if (!myChart) // 如果不存在则创建
         {
@@ -83,11 +79,6 @@ const Survey = props =>{
         }
         myChart && myChart.setOption(option)
 
-    }
-
-    const moreDynamic = () =>{
-        setIsDyna(true)
-        setDynaPagination(dynaPagination+1)
     }
 
     return(
@@ -114,14 +105,10 @@ const Survey = props =>{
                             />
                         </div>
                     </div>
-                    <Dyna
+                    <DynaLatest
                         dynamicList={dynamicList}
-                        moreDynamic={moreDynamic}
-                        isDyna={isDyna}
-                        dynaPageTotal={dynaPageTotal}
-                        dynaPagination={dynaPagination}
-                        guideTitle={"流水线动态"}
                         pipelineId={pipelineId}
+                        title={"流水线动态"}
                     />
                 </div>
             </div>

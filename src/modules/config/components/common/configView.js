@@ -1,12 +1,13 @@
 import React,{useEffect} from "react";
-import {toJS} from "mobx";
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
+import {PlusOutlined} from "@ant-design/icons";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
-import {Empty} from "antd";
+import AddModal from "../formView/addModal";
+import Btn from "../../../common/btn/btn";
 
 const ConfigView = props =>{
 
@@ -16,7 +17,7 @@ const ConfigView = props =>{
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
-        setUnitShellBlock,setBuildShellBlock,codeType,data,
+        setUnitShellBlock,setBuildShellBlock,codeType,data,addConfigVisible,setAddConfigVisible,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
 
@@ -209,33 +210,58 @@ const ConfigView = props =>{
         setFormInitialValues({...formInitialValues})
     }
 
-    const renderFormView = () => {
-        if(codeType==="" && data&&data.length===0 ){
-            return <div style={{paddingTop:55}}>
-                        <Empty
-                            image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-                            description="当前没有配置"
-                        />
-                    </div>
-        }return <>
-            <FormView
-                del={del}
-                pipelineId={pipelineId}
-            />
-        </>
+    const renderFormView = () =>{
+        if(data && data.length<1){
+            return <div className="home-limited">
+               <div>
+                   <Btn
+                       icon={<PlusOutlined/>}
+                       onClick={() =>setAddConfigVisible(true)}
+                       title={"添加配置"}
+                   />
+               </div>
+            </div>
+        }else {
+            return  <FormView
+                        del={del}
+                        pipelineId={pipelineId}
+                    />
+        }
     }
-    
+
     return view==="forms" ?
-        renderFormView()
-        :
         <>
-            <Gui
-                {...props}
-                del={del}
-                configStore={configStore}
-                configDataStore={configDataStore}
-                pipelineStore={pipelineStore}
+            <AddModal
+                addConfigVisible={addConfigVisible}
+                setAddConfigVisible={setAddConfigVisible}
             />
+            {renderFormView()}
+        </>
+        :
+         <>
+            {/*<Gui*/}
+            {/*    {...props}*/}
+            {/*    del={del}*/}
+            {/*    configStore={configStore}*/}
+            {/*    configDataStore={configDataStore}*/}
+            {/*    pipelineStore={pipelineStore}*/}
+            {/*/>*/}
+            {
+                isPlugin?
+                    <RemoteUmdComponent
+                        {...props}
+                        point={"gui"}
+                        pluginStore={pluginStore}
+                        isModalType={true}
+                        extraProps={{
+                            pipelineStore:pipelineStore,
+                            configDataStore:configDataStore,
+                            configStore:configStore,
+                            del,
+                        }}
+                    />
+                    :null
+            }
             {/*{*/}
             {/*    !getVersionInfo().expired && isPlugin?*/}
             {/*        <RemoteUmdComponent*/}
@@ -244,8 +270,9 @@ const ConfigView = props =>{
             {/*            pluginStore={pluginStore}*/}
             {/*            isModalType={true}*/}
             {/*            extraProps={{*/}
-            {/*                pipelineStore:toJS(pipelineStore),*/}
-            {/*                configDataStore:toJS(configDataStore),*/}
+            {/*                pipelineStore:pipelineStore,*/}
+            {/*                configDataStore:configDataStore,*/}
+            {/*                configStore:configStore,*/}
             {/*                del,*/}
             {/*            }}*/}
             {/*        />*/}
