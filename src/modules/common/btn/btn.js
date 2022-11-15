@@ -1,4 +1,5 @@
 import React from "react";
+import {Space} from "antd";
 import "./btn.scss";
 
 const Btn = props =>{
@@ -9,8 +10,12 @@ const Btn = props =>{
                 className={`mf-btn ${type?`mf-btn-${type}`:""} ${isMar?"mf-btn-mar":""}`}
                 onClick={onClick}
             >
-                <span className={`${icon?"mf-btn-icon":""}`}>{icon && icon}</span>
-                <span>{title}</span>
+                <Space>
+                    {
+                        icon &&  <span className="mf-btn-icon">{icon && icon}</span>
+                    }
+                    {title}
+                </Space>
             </div>
 }
 

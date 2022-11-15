@@ -24,7 +24,7 @@ const Head = props =>{
 
     const {homePageStore} = props
 
-    const {findMessageDispatchItemPage,unread,fresh} = homePageStore
+    const {findMessageDispatchItemPage,unread} = homePageStore
 
     let path = props.location.pathname
 
@@ -37,13 +37,9 @@ const Head = props =>{
     useEffect(()=>{
         // 路由菜单控制
         privilegeStores.systemRoleStore.getSystemPermissions(userId,"matflow")
-
-    },[])
-
-    useEffect(()=>{
         // 未读消息通知
         findMessageDispatchItemPage(0)
-    },[fresh])
+    },[])
 
 
     useEffect(()=>{

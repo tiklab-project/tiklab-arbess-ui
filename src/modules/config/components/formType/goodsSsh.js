@@ -14,7 +14,7 @@ const GoodsSsh = props =>{
                 isValid={true}
             />
             <Inputs
-                placeholder={"artifactId"}
+                placeholder={"推送位置"}
                 label={"推送位置"}
                 name={"putAddress"}
                 mode={52}

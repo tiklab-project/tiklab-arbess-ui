@@ -4,7 +4,8 @@ import {
     BellOutlined,
     LoadingOutlined,
     CloseOutlined,
-    MessageOutlined
+    MessageOutlined,
+    DeleteOutlined
 } from "@ant-design/icons";
 import EmptyText from "../common/emptyText/emptyText";
 import {inject,observer} from "mobx-react";
@@ -32,7 +33,7 @@ const MessageDrawer = props =>{
     },[visible])
 
     useEffect(()=>{
-        visible && findMessageDispatchItemPage(selected).then(res=>{
+        findMessageDispatchItemPage(selected).then(res=>{
             setIsLoading(false)
         })
     },[visible,messagePagination,selected,fresh])
@@ -97,7 +98,6 @@ const MessageDrawer = props =>{
     const delMessage = (e,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
-        e.nativeEvent.stopImmediatePropagation()
         deleteMessageDispatchItem(item.id)
     }
 
@@ -107,8 +107,7 @@ const MessageDrawer = props =>{
                 <div
                     key={index}
                     className={`message-item ${item.status===1 ? "message-read":""}`}
-                    onClick={()=>goHref(item)} 
-
+                    onClick={()=>goHref(item)}
                 >
                     <div className="message-item-left">
                         <div className="message-item-icon">
@@ -128,7 +127,7 @@ const MessageDrawer = props =>{
                                 <div onClick={e=>delMessage(e,item)}
                                      className={`message-hidden`}
                                 >
-                                    <CloseOutlined />
+                                    <DeleteOutlined />
                                 </div>
                             </div>
                             <div
@@ -165,7 +164,6 @@ const MessageDrawer = props =>{
                     }
                 </span>
             }
-
         </div>
     }
     

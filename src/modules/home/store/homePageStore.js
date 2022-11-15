@@ -88,7 +88,7 @@ export class HomePageStore{
     findMessageDispatchItemPage = async values =>{
         const params = {
             pageParam:{
-                pageSize: 10,
+                pageSize: 11,
                 currentPage:this.messagePagination
             },
             application:"matflow",
@@ -100,16 +100,17 @@ export class HomePageStore{
         }
         const data = await FindMessageDispatchItemPage(params)
         if(data.code===0){
+
             this.messPage.total=data.data && data.data.totalRecord
+            this.unread = data.data && data.data.dataList.filter(item=>item.status===0).length;
+
             if(this.messagePagination === 1){
                 this.messageList=data.data.dataList
             }
             if(this.messagePagination > 1) {
                 this.messageList = this.messageList.concat(data.data && data.data.dataList)
             }
-            if(values===0){
-                this.unread=data.data && data.data.totalRecord
-            }
+
         }
         return data
     }

@@ -148,7 +148,7 @@ module.exports = {
                 use: {
                     loader: "file-loader",
                     options: {
-                        outputPath: "images",
+                        outputPath: "images/",
                         name: "[name].[ext]", // 图片输出的路径
                         limit: 8*1024,
                     }

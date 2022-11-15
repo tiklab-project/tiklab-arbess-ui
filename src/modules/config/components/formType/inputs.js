@@ -85,7 +85,7 @@ const Inputs = props =>{
                 break
             default:
                 if(isValid){
-                    rule = [{required:true,message:`请输入${name}`}]
+                    rule = [{required:true,message:`请输入${label}`}]
                 }
         }
         return rule

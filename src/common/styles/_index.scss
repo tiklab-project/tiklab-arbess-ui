@@ -59,12 +59,29 @@ ul li{
     overflow: hidden;
 }
 
+.mf .ant-avatar{
+    width: 22px;
+    height: 22px;
+}
+
+.mf-message-pipelinename{
+    display: inline-block;
+    width: var(--tiklab-icon-size-22);
+    height: var(--tiklab-icon-size-22);
+    line-height: var(--tiklab-icon-size-22);
+    border-radius: 4px;
+    text-align: center;
+    color: black;
+    background: #cad2f3;
+}
+
 .home-limited{
     margin: auto;
     max-width: 1280px;
     min-width: 768px;
     padding: var(--tiklab-padding);
 }
+
 
 ::-webkit-scrollbar {
     /* 滚动条宽度， width：对应竖滚动条的宽度  height：对应横滚动条的高度*/

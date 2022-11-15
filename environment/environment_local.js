@@ -14,7 +14,7 @@ fetchMethod = JSON.stringify(fetchMethod);
 
 const userProduction = true; // 权限
 
-const devProduction = true; // 基础数据
+const devProduction = true; // 存在基础数据
 
 const appKey = JSON.stringify("");
 const appSecret = JSON.stringify("");

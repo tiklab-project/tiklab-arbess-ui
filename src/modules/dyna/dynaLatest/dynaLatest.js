@@ -15,11 +15,12 @@ const DynaLatest = props =>{
                 title={title}
                 icon={<AimOutlined/>}
                 type={"dynamic"}
-                pipelineId={pipelineId}
+                pipelineId={pipelineId[0]}
             />
             <DynaList
                 {...props}
                 dynamicList={dynamicList}
+                pipelineId={pipelineId}
             />
         </div>
     )

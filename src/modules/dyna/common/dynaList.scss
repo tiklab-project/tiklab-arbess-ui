@@ -2,9 +2,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
+    padding: 8px;
+    &:hover{
+        background: #FAFAFA;
+        cursor: pointer;
+    }
     &-left{
         display: flex;
         align-items: center;
+    }
+    .dynamic-item-message-title{
+        padding-bottom: 5px;
+        font-size: var(--tiklab-font-13);
+        font-weight: var(--tiklab-font-weight-bold);
     }
 }

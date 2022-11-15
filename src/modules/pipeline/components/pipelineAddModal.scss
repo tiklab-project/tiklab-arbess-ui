@@ -15,10 +15,10 @@
     }
 }
 .pipelineAddModal{
-    background: #ffffff;
     max-width: 900px;
     margin: auto;
     padding: 20px;
+    height: 100%;
     .pipelineAddModalType{
       &-title{
           padding-bottom: 10px;
@@ -88,13 +88,16 @@
         }
     }
     .steps-top{
-        width: 50%;
-        margin: auto;
+        padding-bottom: var(--tiklab-padding-item);
     }
     .steps-content {
         border-radius: 2px;
-        height: calc(100% - 120px);
-        overflow: auto
+        height: calc(100% - 135px);
+        min-height: 100px;
+        overflow: auto;
+    }
+    .steps-footer{
+        padding: var(--tiklab-padding-item) 0;
     }
     .ant-steps-item-icon{
         padding-top: 7px;

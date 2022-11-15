@@ -14,7 +14,7 @@ const HomePage = props =>{
     const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,
         dynamicList,
     } = homePageStore
-    const {findAllPipelineStatus,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
+    const {findAllPipelineStatus,pipelineList,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     useEffect(()=>{
         // 所有流水线
@@ -55,7 +55,7 @@ const HomePage = props =>{
     }
 
     return(
-        <div className="homePage mf">
+        <div className="homePage">
             <div className="homePage-content home-limited">
                 <QuickIn
                     {...props}
@@ -75,6 +75,7 @@ const HomePage = props =>{
                 <DynaLatest
                     dynamicList={dynamicList}
                     title={"近期动态"}
+                    pipelineId={pipeline(pipelineList)}
                 />
             </div>
         </div>

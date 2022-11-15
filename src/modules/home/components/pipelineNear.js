@@ -20,6 +20,7 @@ const PipelineNear = props =>{
                     text={item.pipelineName}
                     onClick={()=>goPipeline(item.pipelineId)}
                     colors={item.pipeline.color}
+                    isImg={"isImg"}
                 />
             </div>
             <div>{item.pipeline.pipelineCreateTime}</div>

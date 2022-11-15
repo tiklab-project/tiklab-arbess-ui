@@ -38,6 +38,7 @@ const ProjectSet = props =>{
             }
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
+                    message.info("修改成功")
                     pipeline.pipelineName = value.pipelineName
                     props.history.push(`/index/task/${pipelineId}/survey`)
                 }
@@ -61,7 +62,7 @@ const ProjectSet = props =>{
             pipelineId
         }
         deletePipeline(params).then(res=>{
-            if(res.code === 0 && res.data === 1){
+            if(res.code=== 0){
                 message.info({content: "删除成功", className: "message"})
             }else {
                 message.error({content:"删除失败", className:"message"})

@@ -33,6 +33,7 @@ const ChangeSortsModal = props =>{
             case 32:return "部署-docker"
             case 41:return "代码扫描-sonarQuebe"
             case 51:return "推送制品-nexus"
+            case 52:return "推送制品-SSH"
             default:return null
         }
     }

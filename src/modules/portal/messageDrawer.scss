@@ -12,7 +12,7 @@
         }
     }
     .messageModal-content{
-        height: calc(100% - 70px);
+        height: calc(100% - 65px);
         overflow: hidden;
         .messageModal-screen-tab{
             display: inline-block;
@@ -62,11 +62,8 @@
                 align-items: center;
                 cursor: pointer;
                 padding: 10px var(--tiklab-padding);
-                &:not(:last-child){
-                    margin-bottom: 10px;
-                }
                 &:hover{
-                    background: #f4f4f4;
+                    background: #FAFAFA;
                 }
                 &-left{
                     display: flex;
@@ -91,7 +88,8 @@
                     display: flex;
                     justify-content: space-between;
                     .user-title{
-                        font-size: 16px;
+                        font-size: var(--tiklab-font-13);
+                        font-weight: var(--tiklab-font-weight-bold);
                     }
                     .user-time{
                         color: #999;
@@ -117,17 +115,8 @@
             text-align: center;
             border-radius: 4px;
             cursor: pointer;
+            padding-top: 5px;
             color: var(--tiklab-blue);
-        }
-        .mf-message-pipelinename{
-            display: inline-block;
-            width: var(--tiklab-icon-size-22);
-            height: var(--tiklab-icon-size-22);
-            line-height: var(--tiklab-icon-size-22);
-            border-radius: 4px;
-            text-align: center;
-            color: black;
-            background: #cad2f3;
         }
         .icon{
             &-0{

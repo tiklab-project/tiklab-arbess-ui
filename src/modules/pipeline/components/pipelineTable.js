@@ -11,9 +11,10 @@ import {inject,observer} from "mobx-react";
 import "./pipelineTable.scss";
 import EmptyText from "../../common/emptyText/emptyText";
 import ListName from "../../common/list/listname";
-import sun from "../../../assets/images/svg/sun.svg";
-import rain from "../../../assets/images/svg/rain.svg";
-import cloudy from "../../../assets/images/svg/cloudy.svg";
+import success from "../../../assets/images/svg/success.svg";
+import error from "../../../assets/images/svg/error.svg";
+import fog from "../../../assets/images/svg/fog.svg";
+import halt from "../../../assets/images/svg/halt.svg";
 
 const PipelineTable = props =>{
 
@@ -89,6 +90,7 @@ const PipelineTable = props =>{
                             text={text}
                             onClick={()=>goPipelineTask(text,record)}
                             colors={record.color}
+                            isImg={"isImg"}
                         />
             }
         },
@@ -102,28 +104,28 @@ const PipelineTable = props =>{
                     case 10:
                         return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
                             <Space>
-                                <img src={sun} alt={"log"} className="imgs"/>
+                                <img src={success} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 1:
                         return <Tooltip title={tooltip("失败",text,record.execUser.name)}>
                             <Space>
-                                <img src={rain} alt={"log"} className="imgs"/>
+                                <img src={error} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 0:
                         return <Tooltip title={tooltip("待构建","无","无")}>
                             <Space>
-                                <img src={sun} alt={"log"} className="imgs"/>
+                                <img src={fog} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 20:
                         return  <Tooltip title={tooltip("停止",text,record.execUser.name)}>
                             <Space>
-                                <img src={cloudy} alt={"log"} className="imgs"/>
+                                <img src={halt} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>

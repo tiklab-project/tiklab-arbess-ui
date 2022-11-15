@@ -42,9 +42,9 @@ const ConfigTop = props =>{
         setProcessVisible(true)
         pipelineStartStructure(params).then(res=>{
             if(res.code===0){
-                if(res.data===100){
+                if(!res.data){
                     // props.history.push(`/index/task/${pipelineId}/structure`)
-                    message.info({content:"流水线正在运行", className:"message"})
+                    message.info("流水线正在运行")
                 }
                 props.history.push(`/index/task/${pipelineId}/structure`)
                 // setTimeout(()=>props.history.push(`/index/task/${pipelineId}/structure`),1000)
@@ -98,7 +98,9 @@ const ConfigTop = props =>{
                                 <Select.Option value={"forms"}>
                                     <BarsOutlined  />&nbsp;表单
                                 </Select.Option>
-                                <Select.Option value={"gui"} disabled={getVersionInfo().expired || !isPlugin}>
+                                <Select.Option value={"gui"}
+                                               disabled={getVersionInfo().expired || !isPlugin}
+                                >
                                     <AppstoreOutlined  />&nbsp;图形
                                 </Select.Option>
                             </Select>

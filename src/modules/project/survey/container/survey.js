@@ -107,7 +107,7 @@ const Survey = props =>{
                     </div>
                     <DynaLatest
                         dynamicList={dynamicList}
-                        pipelineId={pipelineId}
+                        pipelineId={[pipelineId]}
                         title={"流水线动态"}
                     />
                 </div>

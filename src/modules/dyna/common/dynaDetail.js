@@ -1,9 +1,10 @@
 import React,{useEffect,useState} from "react";
+import {DatePicker,Select,Space} from "antd";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import DynaList from "./dynaList";
 import Page from "../../common/page/page";
+import EmptyText from "../../common/emptyText/emptyText";
 import "./dyna.scss";
-import {DatePicker,Select,Space} from "antd";
 
 const { RangePicker } = DatePicker
 
@@ -15,7 +16,7 @@ const DynaDetail = props =>{
     const [timestamp,setTimestamp] = useState(null) // 时间戳
     const [module,setModule] = useState(null)  // 模板类型
     const [actionType,setActionType] = useState(null) // 动作类型
-    const [content,setContent] = useState(null)  // 内容id
+    const [content,setContent] = useState(pipelineId && pipelineId)  // 内容id
 
     const  params = {
         pageParam:{
@@ -33,7 +34,7 @@ const DynaDetail = props =>{
 
     useEffect(()=>{
         setContent(pipelineId)
-    },[pipelineId])
+    },[])
 
     const changContent = (value,e,type) =>{
         if(e.key!=="1"){
@@ -118,9 +119,9 @@ const DynaDetail = props =>{
                             onChange={(value,e)=>changContent(value,e,"module")}
                         >
                             <Select.Option key={"1"} value={"所有"}>所有动态</Select.Option>
-                            <Select.Option key={"pipeline"} value={"流水线动态"}>流水线动态</Select.Option>
-                            <Select.Option key={"pipelineConfig"} value={"流水线配置动态"}>流水线配置动态</Select.Option>
-                            <Select.Option key={"run"} value={"流水线运行动态"}>流水线运行动态</Select.Option>
+                            <Select.Option key={"pipeline"} value={"pipeline"}>流水线动态</Select.Option>
+                            <Select.Option key={"pipelineConfig"} value={"pipelineConfig"}>流水线配置动态</Select.Option>
+                            <Select.Option key={"run"} value={"run"}>流水线运行动态</Select.Option>
                         </Select>
                         <Select
                             placeholder={"操作"}
@@ -138,17 +139,24 @@ const DynaDetail = props =>{
                         />
                     </Space>
                 </div>
-                <DynaList
-                    {...props}
-                    dynamicList={dynamicList}
-                />
                 {
-                    dynamicList && dynamicList.length>0 &&
-                    <Page
-                        pageCurrent={pageCurrent}
-                        changPage={changPage}
-                        page={dynaPage}
-                    />
+                    dynamicList && dynamicList.length>0 ?
+                        <>
+                            <DynaList
+                                {...props}
+                                dynamicList={dynamicList}
+                                pipelineId={pipelineId}
+                            />
+                            <Page
+                                pageCurrent={pageCurrent}
+                                changPage={changPage}
+                                page={dynaPage}
+                            />
+                        </>
+                        :
+                        <EmptyText
+                            title={"没有查询到数据"}
+                        />
                 }
             </div>
         </div>

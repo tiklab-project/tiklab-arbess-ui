@@ -247,7 +247,7 @@ const ConfigView = props =>{
             {/*    pipelineStore={pipelineStore}*/}
             {/*/>*/}
             {
-                isPlugin?
+                isPlugin ?
                     <RemoteUmdComponent
                         {...props}
                         point={"gui"}

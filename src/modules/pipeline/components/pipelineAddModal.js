@@ -26,9 +26,10 @@ const PipelineAddModal = props =>{
         }
         createPipeline(params).then(res=>{
             if(res.code===0 && res.data){
+                message.info({content:"创建成功", className:"message"})
                 props.history.push(`/index/task/${res.data}/config`)
             }else{
-                message.error({content:"添加失败", className:"message"})
+                message.error({content:"创建失败", className:"message"})
             }
             form.resetFields()
         })
@@ -108,6 +109,13 @@ const PipelineAddModal = props =>{
                     setVisible={setAddPipelineVisible}
                     title={"创建流水线"}
                 />
+                <div className="steps-top">
+                    <Steps current={current}>
+                        {steps.map(item => (
+                            <Step key={item.title} title={item.title} />
+                        ))}
+                    </Steps>
+                </div>
                 <div className="steps-content">
                     {steps[current].content}
                 </div>

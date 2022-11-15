@@ -5,7 +5,7 @@
     padding: 0 var(--tiklab-padding) var(--tiklab-padding);
     .formView-anch{
         position: sticky;
-        top: 64px;
+        top: 62px;
         background: var(--mf-backdrop-color);
         z-index: 9;
         padding: 15px 0;
@@ -80,19 +80,16 @@
         }
     }
     .ant-form{
-        .ant-form-item-control .ant-form-item-control-input-content{
-            .ant-input{
-                width: 500px;
-                cursor: pointer;
-                &:hover {
-                    background: #f2f2f2;
-                }
+        .ant-input{
+            width: 500px;
+            &:hover {
+                background: #f2f2f2;
             }
-            .ant-select{
-                width: 500px;
-                &:hover{
-                    background: #f2f2f2;
-                }
+        }
+        .ant-select{
+            width: 500px;
+            &:hover{
+                background: #f2f2f2;
             }
         }
         .ant-input-group-addon{

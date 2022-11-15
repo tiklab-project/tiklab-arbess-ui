@@ -88,7 +88,7 @@ export class ConfigStore{
             ConfigValid(params).then(res=>{
                 if(res.code===0){
                     this.validLength = res.data && Object.keys(res.data).length
-                    this.validType = res.data && Object.values(res.data)
+                    this.validType = Array.from(new Set(res.data && Object.values(res.data)))
                 }
                 resolve(res)
             }).catch(error=>{

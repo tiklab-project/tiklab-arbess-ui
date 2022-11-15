@@ -5,7 +5,6 @@ import {withRouter} from "react-router";
 import NewStage from "./newStage";
 import  "./formView.scss";
 import Anch from "./anch";
-import Btn from "../../../common/btn/btn";
 
 const formView = props =>{
 
