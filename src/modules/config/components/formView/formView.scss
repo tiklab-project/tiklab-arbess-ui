@@ -109,4 +109,12 @@
         }
     }
 }
+.changeSorts-tree{
+    .ant-tree-switcher{
+        display: none;
+    }
+    .ant-tree .ant-tree-node-content-wrapper .ant-tree-iconEle{
+        vertical-align:middle;
+    }
+}
 

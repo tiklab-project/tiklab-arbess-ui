@@ -29,8 +29,7 @@ const ConfigTop = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        (!isPlugin || getVersionInfo().expired) && setView("forms")
-        !getVersionInfo().expired && isPlugin && configView && setView(configView)
+        setView(configView)
     },[configView])
 
     const run = () => {
@@ -99,7 +98,7 @@ const ConfigTop = props =>{
                                     <BarsOutlined  />&nbsp;表单
                                 </Select.Option>
                                 <Select.Option value={"gui"}
-                                               disabled={getVersionInfo().expired || !isPlugin}
+                                               // disabled={getVersionInfo().expired || !isPlugin}
                                 >
                                     <AppstoreOutlined  />&nbsp;图形
                                 </Select.Option>

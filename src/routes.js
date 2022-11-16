@@ -66,12 +66,14 @@ const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messag
 const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
 
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
-const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
 const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
+const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
+const LogType=AsyncComponent(()=>import("./modules/system/oplog/logType"))
 
 const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
 const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
 const TodoTemp=AsyncComponent(()=>import("./modules/system/todotask/todoTemp"))
+const TodoType=AsyncComponent(()=>import("./modules/system/todotask/todoType"))
 
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
@@ -237,12 +239,20 @@ const routers=[
                         component: TodoTemp,
                     },
                     {
+                        path: "/index/system/todoType",
+                        component: TodoType,
+                    },
+                    {
                         path:"/index/system/myLog",
                         component: MyLogList,
                     },
                     {
                         path:"/index/system/logTemplate",
                         component: LogTemplateList,
+                    },{
+
+                        path:"/index/system/logType",
+                        component: LogType,
                     },
                     {
                         path: "/index/system/user/dashbord",

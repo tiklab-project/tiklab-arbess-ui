@@ -16,7 +16,8 @@ import SuffixStatus from "./suffixStatus";
 
 const MirrorContent = forwardRef((props,ref)=>{
 
-    const {shellBlock,setShellBlock,type,name,pipelineStore,configStore,placeholder} = props
+    const {setShellBlock,type,name,pipelineStore,configStore} = props
+    let {shellBlock} = props
 
     const mirrorRefs = useRef(null)
 
@@ -29,29 +30,43 @@ const MirrorContent = forwardRef((props,ref)=>{
     const onFocus = () => {
         setBordered(true)
     }
-    
+
+    const x = (newValue,lastValue) => {
+        if (newValue == null){
+            return false;
+        }
+        if (newValue === ""  && lastValue == null){
+            return false;
+        }
+        return newValue !== lastValue;
+    }
+
     const onBlur = () =>{
-        setIsLoading(2)
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
-        const params = {
-            pipeline:{pipelineId},
-            taskType:type,
-            values:obj,
-            message:"update"
-        }
-        setShellBlock(mirrorRefs.current.editor.getValue())
-        updateConfigure(params).then(res=>{
-            if(res.code===0){
-                setIsLoading(3)
-            }else {
-                setIsLoading(4)
-                message.info(res.msg)
+        if(x(obj[name],shellBlock)){
+            setIsLoading(2)
+            shellBlock = obj[name]
+            setShellBlock(obj[name])
+            const params = {
+                pipeline:{pipelineId},
+                taskType:type,
+                values:obj,
+                message:"update"
             }
-        })
+            updateConfigure(params).then(res=>{
+                if(res.code===0){
+                    setIsLoading(3)
+                }else {
+                    setIsLoading(4)
+                    message.info(res.msg)
+                }
+            })
+            setTimeout(()=>setIsLoading(1),1000)
+        }
         setBordered(false)
-        setTimeout(()=>setIsLoading(1),1000)
     }
+
 
     return  <div className={`${bordered?"codeNewStage":"formViewCodeMirror"}`}>
         <CodeMirror
@@ -62,6 +77,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                 lineNumbers: false, // 是否显示行号
                 // placeholder: placeholder
             }}
+            // onChange={()}
             onFocus={onFocus}
             onBlur={onBlur}
         />

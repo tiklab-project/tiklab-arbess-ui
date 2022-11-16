@@ -38,7 +38,7 @@ const ProjectSet = props =>{
             }
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
-                    message.info("修改成功")
+                    message.info("更新成功")
                     pipeline.pipelineName = value.pipelineName
                     props.history.push(`/index/task/${pipelineId}/survey`)
                 }
@@ -75,7 +75,7 @@ const ProjectSet = props =>{
     const lis = [
         {
             key:1,
-            title:"修改流水线信息",
+            title:"更新流水线",
             icon: <EditOutlined />,
             enCode:"pipeline_update",
             content: <div className="bottom-rename">

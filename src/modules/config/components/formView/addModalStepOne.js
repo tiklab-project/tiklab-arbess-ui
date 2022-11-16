@@ -58,7 +58,7 @@ const AddModalStepOne = props =>{
                 {
                     group.desc && group.desc.map(item=>{
                         return <div onClick={()=>handleClick(item)}
-                                    className={`group-desc ${item.type===initType?"group-select":null}`}
+                                    className={`group-desc ${item.type===initType?"group-select":""}`}
                                     key={item.type}
                                 >
                                     <div className="group-desc-tpl">

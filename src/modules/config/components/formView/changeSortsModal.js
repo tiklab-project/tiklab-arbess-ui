@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Modal,Tree,message} from "antd";
+import {BorderVerticleOutlined} from "@ant-design/icons";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
 
@@ -26,6 +27,11 @@ const ChangeSortsModal = props =>{
 
     const renderTitle = type =>{
         switch (type) {
+            case 1:return "源码-通用Git"
+            case 2:return "源码-Gitee"
+            case 3:return "源码-Github"
+            case 4:return "源码-Gitlab"
+            case 5:return "源码-svn"
             case 11:return "测试-单元测试"
             case 21:return "构建-maven"
             case 22:return "构建-node"
@@ -40,8 +46,15 @@ const ChangeSortsModal = props =>{
 
     const dataTile = data => {
         data && data.map((item,index)=>{
+            item.dataType<10 && nameArray.push({
+                key:index,
+                title:renderTitle(item.dataType),
+                dataId:item.dataId,
+                dataType:item.dataType,
+                disabled:true
+            })
             item.dataType>10 && nameArray.push({
-                key:data && data.some(item=>item.dataType<10) ? index :index+1,
+                key:index,
                 title:renderTitle(item.dataType),
                 dataId:item.dataId,
                 dataType:item.dataType
@@ -91,19 +104,10 @@ const ChangeSortsModal = props =>{
             taskSort:taskSort,
             taskType:1,
         }
-        const da = [...mData]
         updateConfigure(params).then(res=>{
             //如果改变控件，然后改变data
             if(res.code===0){
-                data && data.map(item=>{
-                    if(item.dataType < 10){
-                        da.splice(0,0,{
-                            dataId:item.dataId,
-                            dataType:item.dataType
-                        })
-                    }
-                })
-                setData([...da])
+                setData([...mData])
             }
             if(res.code===50001){
                 message.info(res.msg)
@@ -125,15 +129,16 @@ const ChangeSortsModal = props =>{
                 setVisible={setChangeSortVisible}
                 title={"更改顺序"}
             />
-            <div className="changeSorts-tree"
-                 style={{height:"calc(100% - 150)",overflow:"auto"}}
-            >
+            <div className="changeSorts-tree" style={{height:"calc(100% - 150)",overflow:"auto"}}>
                 <Tree
-                      showIcon
-                      draggable // 是否可拖拽
-                      blockNode  // 是否占据一行
-                      onDrop={onDrop}
-                      treeData={gData}
+                    showIcon
+                    showLine={false}
+                    icon={<BorderVerticleOutlined style={{fontSize:16}}/>}
+                    className="draggable-tree"
+                    draggable
+                    blockNode
+                    onDrop={onDrop}
+                    treeData={gData}
                 />
             </div>
         </Modal>

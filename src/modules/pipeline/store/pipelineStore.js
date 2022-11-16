@@ -7,7 +7,8 @@ import {
     DeletePipeline,
     UpdatePipeline,
     FindAllFollow,
-    UpdateFollow
+    UpdateFollow,
+    FindUserPage
 } from "../api/pipeline";
 
 import moment from "../../common/client/client";
@@ -47,6 +48,11 @@ export class PipelineStore {
     @action
     setFresh = value =>{
         this.fresh = value
+    }
+
+    @action
+    setTargetKeys = value =>{
+        this.targetKeys = value
     }
 
     @action
@@ -159,6 +165,18 @@ export class PipelineStore {
             userId:getUser().userId
         }
         return await UpdateFollow(params)
+    }
+
+    @action
+    findUserPage =async value =>{
+        const params = {
+            pageParam:{
+                pageSize:6,
+                currentPage:1
+            },
+        }
+        const data =  await FindUserPage(params)
+        return data
     }
 
 }

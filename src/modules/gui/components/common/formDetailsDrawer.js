@@ -17,7 +17,7 @@ const FormDetailsDrawer = props =>{
             visible={taskFormDrawer}
             closable={false}
             maskStyle={{background:"transparent"}}
-            contentWrapperStyle={{width:600,top:48,height:"calc(100% - 48px)"}}
+            contentWrapperStyle={{width:500,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
         >
             <div className="wrapper">

@@ -87,6 +87,7 @@
                 &-user{
                     display: flex;
                     justify-content: space-between;
+                    padding-bottom: 5px;
                     .user-title{
                         font-size: var(--tiklab-font-13);
                         font-weight: var(--tiklab-font-weight-bold);
@@ -95,7 +96,6 @@
                         color: #999;
                         font-size: 13px;
                     }
-                    padding-bottom: 10px;
                 }
             }
         }

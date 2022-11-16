@@ -102,8 +102,10 @@ export class HomePageStore{
         if(data.code===0){
 
             this.messPage.total=data.data && data.data.totalRecord
-            this.unread = data.data && data.data.dataList.filter(item=>item.status===0).length;
-
+            if(values!==1){
+                // 未读消息的长度
+                this.unread = data.data && data.data.dataList.filter(item=>item.status===0).length;
+            }
             if(this.messagePagination === 1){
                 this.messageList=data.data.dataList
             }

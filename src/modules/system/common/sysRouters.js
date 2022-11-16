@@ -81,7 +81,7 @@ export const applicationRouter = [
         children: [
             {
                 id:"/index/system/mes/send",
-                title: "消息发送方式",
+                title: "消息通知",
                 icon:<SoundOutlined />,
                 purviewCode: "message",
             },
@@ -183,8 +183,20 @@ export const templateRouter = [
                 purviewCode:"basics",
             },
             {
+                id:"/index/system/todoType",
+                title:"代办类型 ",
+                icon:<MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
                 id:"/index/system/logTemplate",
                 title:"日志模板",
+                icon:<MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
+                id:"/index/system/logType",
+                title:"日志类型",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },

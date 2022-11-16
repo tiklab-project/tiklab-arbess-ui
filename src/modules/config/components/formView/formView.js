@@ -33,11 +33,6 @@ const formView = props =>{
         })
     },[pipelineId,enabledValid])
 
-    const onValuesChange = value =>{
-        Object.assign(formInitialValues,value)
-        setFormInitialValues({...formInitialValues})
-    }
-
     return(
         <div className="formView">
             <Anch
@@ -52,7 +47,6 @@ const formView = props =>{
                     form={form}
                     autoComplete="off"
                     scrollToFirstError={true}
-                    onValuesChange={onValuesChange}
                     initialValues={{authType:1}}
                 >
                     <NewStage

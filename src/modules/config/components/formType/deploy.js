@@ -61,6 +61,7 @@ const Deploy = props =>{
         updateConfigure(params).then(res=>{
             if(res.code===0){
                 setIsLoading(3)
+                formInitialValues.authType=value
             }else {
                 setIsLoading(4)
             }
@@ -104,6 +105,7 @@ const Deploy = props =>{
                     getFieldValue("authType") === 1 ? (
                         <>
                             <DeploySame
+                                {...props}
                                 configDataStore={configDataStore}
                                 messageInfo={messageInfo}
                             />

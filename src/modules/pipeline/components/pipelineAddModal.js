@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import {Form,Modal,Steps,message} from "antd";
 import "./pipelineAddModal.scss";
 import ModalTitle from "../../common/modalTitle/modalTitle";
@@ -14,7 +14,7 @@ const PipelineAddModal = props =>{
 
     const [current,setCurrent] = useState(0)
     const [templateType,setTemplateType] = useState(1)
-    const [powerType,setPowerType] = useState(1)
+    const [powerType,setPowerType] = useState(2)
 
     const [form] = Form.useForm()
 

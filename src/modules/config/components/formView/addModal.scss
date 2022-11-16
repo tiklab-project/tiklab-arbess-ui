@@ -1,23 +1,32 @@
 .codeOrNewStage{
-    border-radius: 2px;
+    .codeOrNewStage-top{
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+    }
     &-stepOne{
-        border: 1px solid #ececec;
         height: calc(100% - 120px);
         &-left{
             border-right: 1px solid var(--tiklab-gray-200);
             .modalLeft{
-                padding: 10px;
                 .item{
-                    padding: 5px;
-                    &-title{
-                        cursor: pointer;
-                        &:not(:last-child){
-                            margin-bottom: 10px;
-                        }
+                    padding: 5px var(--tiklab-padding);
+                    cursor: pointer;
+                    position: relative;
+                    &:before{
+                        width: 3px;
+                        height: 32px;
+                        -webkit-transition: all .4s cubic-bezier(.23,1,.32,1);
+                        transition: all .4s cubic-bezier(.23,1,.32,1);
+                        content: " ";
+                        position: absolute;
+                        z-index: 2;
+                        left: 0;
+                        top: 0;
                     }
-                    &-select{
-                        background: #f4f4f4;
-                        border-radius: 4px;
+                }
+                .item-select{
+                    background: #f4f4f4;
+                    &:before{
+                        background:var(--tiklab-blue);
                     }
                 }
             }

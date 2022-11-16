@@ -8,7 +8,7 @@
         height: 100%;
         overflow: auto;
         padding: 0;
-        background: var(--mf-backdrop-color);
+        background: var(--tiklab-gray);
     }
     .ant-modal-footer{
         display: none;
@@ -27,7 +27,7 @@
       &-li{
           width:100%;
           border-radius: 4px;
-          background: #e2f7ff;
+          background: #ffffff;
           display: inline-block;
           cursor: pointer;
           padding-bottom: 10px;
@@ -55,7 +55,7 @@
                   height: 40px;
                   line-height: 40px;
                   border-radius: 34px;
-                  background: #fff;
+                  background: var(--tiklab-gray);
                   width: 100px;
                   text-align: center;
                   margin-top: 5px;

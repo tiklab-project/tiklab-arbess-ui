@@ -84,6 +84,26 @@ const FindAuth = props =>{
         }
     }
 
+    const label = type => {
+        switch (type) {
+            case 1:
+            case 5:
+            case 4:
+                return "凭证"
+            case 3:
+            case 2:
+                return "授权信息"
+            case 41:
+            case 51:
+                return "服务地址"
+            case 31:
+            case 32:
+            case 52:
+                return "主机地址"
+        }
+
+    }
+
     // 下拉框 id
     const setKey = item =>{
         switch (type) {
@@ -106,7 +126,7 @@ const FindAuth = props =>{
     return(
         <div className="formView-inputs">
             <Form.Item
-                label="凭证"
+                label={label(type)}
                 name={name(type)}
             >
                 <Select

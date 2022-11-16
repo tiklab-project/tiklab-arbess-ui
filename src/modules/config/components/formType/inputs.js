@@ -9,7 +9,7 @@ const Inputs = props =>{
 
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
-    const {codeType} = configDataStore
+    const {formInitialValues} = configDataStore
 
     const [bordered,setBordered] = useState(false)
     const [isLoading,setIsLoading] = useState(1)
@@ -36,47 +36,59 @@ const Inputs = props =>{
         }
     }
 
+    const x = (newValue,lastValue) => {
+        if (newValue == null){
+            return false;
+        }
+        if (newValue === "" && lastValue == null){
+            return false;
+        }
+        return newValue !== lastValue;
+    }
+
+
     const onBlur = e => {
-
-        setIsLoading(2)
-
-        const obj = {}
-        obj[name] = e.target.value
-        const params = {
-            pipeline:{pipelineId},
-            taskType:mode,
-            values:obj,
-            message:"update"
+        if(x(e.target.value,formInitialValues[name])){
+            setIsLoading(2)
+            const obj = {}
+            obj[name] = e.target.value
+            const params = {
+                pipeline:{pipelineId},
+                taskType:mode,
+                values:obj,
+                message:"update"
+            }
+            if(validation(mode,name,e.target.value)){
+                updateConfigure(params).then(res=>{
+                    if(res.code===0){
+                        document.getElementById(name).classList.remove("formView-validateFields")
+                        setIsLoading(3)
+                        formInitialValues[name]=e.target.value
+                    }else {
+                        setIsLoading(4)
+                        message.info(res.msg)
+                    }
+                })
+                setBordered(false)
+            } else {
+                setBordered(true)
+                setIsLoading(4)
+            }
+            setTimeout(()=>setIsLoading(1),1000)
         }
-        if(validation(mode,name,e.target.value)){
-            updateConfigure(params).then(res=>{
-                if(res.code===0){
-                    document.getElementById(name).classList.remove("formView-validateFields")
-                    setIsLoading(3)
-                }else {
-                    setIsLoading(4)
-                    message.info(res.msg)
-                }
-            })
-            setBordered(false)
-        }else {
-            setBordered(true)
-            setIsLoading(4)
-        }
-
-        setTimeout(()=>setIsLoading(1),1000)
+        setBordered(false)
     }
 
     const rules = () =>{
         let rule
         switch (name) {
             case "codeName":
-                if(codeType===5){
+                if(mode===5){
                     rule =  [
                                 {required:true, message: "请输入svn地址"},
                                 {pattern: validCodeSvn, message:"请输入正确的svn地址"}
                             ]
-                }else if(codeType===1 || codeType===4){
+                }else if(mode===1 || mode===4){
                     rule =  [
                                 {required:true, message: "请输入git地址"},
                                 {pattern: validCodeGit, message:"请输入正确的git地址"}

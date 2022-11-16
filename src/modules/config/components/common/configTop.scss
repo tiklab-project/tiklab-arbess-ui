@@ -33,33 +33,6 @@
             }
         }
     }
-
-}
-
-.changeSorts-tree{
-    .ant-tree{
-        .ant-tree-list{
-            .ant-tree-node-content-wrapper{
-                height: 30px;
-                line-height: 30px;
-                display: flex;
-                align-items: center;
-                padding-left: 10px;
-                &:hover{
-                    background: #e3e8f0;
-                }
-            }
-            .ant-tree-switcher{
-                width: 0;
-            }
-            .ant-tree-node-selected{
-                background: #e3e8f0;
-            }
-            .ant-tree-title{
-                padding-left: 5px;
-            }
-        }
-    }
 }
 
 /* 部署应用源文件地址 的匹配提示 */

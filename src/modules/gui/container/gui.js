@@ -76,8 +76,8 @@ const Gui = props =>{
         }
         updateConfigure(params).then(res=>{
             if(res.code===0){
-                const zz = document.getElementById(name)
-                zz && zz.classList.remove("guiView-validateFields")
+                formInitialValues[name]=value
+                document.getElementById(name) && document.getElementById(name).classList.remove("guiView-validateFields")
                 setIsLoading(3)
             }else {
                 setIsLoading(4)
@@ -153,11 +153,6 @@ const Gui = props =>{
         setData([...newData])
     }
 
-    const onValuesChange = value =>{
-        Object.assign(formInitialValues,value)
-        setFormInitialValues({...formInitialValues})
-    }
-
     return (
         <TestContext.Provider
             value={{pipelineStore,
@@ -175,7 +170,6 @@ const Gui = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
-                    onValuesChange={onValuesChange}
                     initialValues={{authType:1}}
                 >
                     <div className="guiView-content">

@@ -12,6 +12,7 @@ import "./mirror.scss";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
 import SuffixStatus from "./suffixStatus";
+import {message} from "antd";
 
 const Mirror = props =>{
 
@@ -24,6 +25,26 @@ const Mirror = props =>{
 
     const valueChange = context.valueChange
 
+    const x = (newValue,lastValue) => {
+        console.log("新值："+newValue)
+        console.log("旧值："+lastValue)
+        if (newValue == null){
+            return false;
+        }
+        if (newValue === "" && lastValue == null){
+            return false;
+        }
+        return newValue !== lastValue;
+    }
+
+    const onBlur = () =>{
+        const zz = mirrorRefs.current.editor.getValue()
+        if(x(zz,shellBlock)){
+            valueChange(zz,name,type,setIsLoading)
+            setShellBlock(zz)
+        }
+    }
+
     return <div className="guiViewCodeMirror">
         <CodeMirror
             value={shellBlock}//内容
@@ -33,10 +54,7 @@ const Mirror = props =>{
                 lineNumbers: false, // 是否显示行号
                 lineWrapping: true,//是否支持代码折叠
             }}
-            onBlur={()=>{
-                setShellBlock(mirrorRefs.current.editor.getValue())
-                valueChange(mirrorRefs.current.editor.getValue(),name,type,setIsLoading)
-            }}
+            onBlur={onBlur}
         />
         <div className="guiView-inputs-suffix">
             {<SuffixStatus isLoading={isLoading}/>}

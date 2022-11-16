@@ -239,29 +239,30 @@ const ConfigView = props =>{
         </>
         :
          <>
-            {/*<Gui*/}
-            {/*    {...props}*/}
-            {/*    del={del}*/}
-            {/*    configStore={configStore}*/}
-            {/*    configDataStore={configDataStore}*/}
-            {/*    pipelineStore={pipelineStore}*/}
-            {/*/>*/}
-            {
-                isPlugin ?
-                    <RemoteUmdComponent
-                        {...props}
-                        point={"gui"}
-                        pluginStore={pluginStore}
-                        isModalType={true}
-                        extraProps={{
-                            pipelineStore:pipelineStore,
-                            configDataStore:configDataStore,
-                            configStore:configStore,
-                            del,
-                        }}
-                    />
-                    :null
-            }
+            <Gui
+                {...props}
+                del={del}
+                configStore={configStore}
+                configDataStore={configDataStore}
+                pipelineStore={pipelineStore}
+            />
+            {/*{*/}
+            {/*    isPlugin ?*/}
+            {/*        <RemoteUmdComponent*/}
+            {/*            {...props}*/}
+            {/*            point={"gui"}*/}
+            {/*            pluginStore={pluginStore}*/}
+            {/*            isModalType={true}*/}
+            {/*            extraProps={{*/}
+            {/*                pipelineStore:pipelineStore,*/}
+            {/*                configDataStore:configDataStore,*/}
+            {/*                configStore:configStore,*/}
+            {/*                del,*/}
+            {/*            }}*/}
+            {/*        />*/}
+            {/*        :null*/}
+            {/*}*/}
+
             {/*{*/}
             {/*    !getVersionInfo().expired && isPlugin?*/}
             {/*        <RemoteUmdComponent*/}

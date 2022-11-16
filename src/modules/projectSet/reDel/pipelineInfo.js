@@ -1,12 +1,39 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Form,Input} from "antd";
 import {LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import Btn from "../../common/btn/btn";
 import "./pipelineInfo.scss";
+import PipelineUser from "./pipelineUser";
+import {inject, observer} from "mobx-react";
+import {getUser} from "tiklab-core-ui";
 
-const PipelineName = props =>{
+const PipelineInfo = props =>{
 
-    const {pipelineList,form,re,set,powerType,setPowerType} = props
+    const {pipelineList,form,re,set,powerType,setPowerType,pipelineStore} = props
+
+    const {findUserPage} = pipelineStore
+
+    const [userList,setUserList] = useState([])
+    const [targetKeys,setTargetKeys] = useState([])
+
+    const userId = getUser().userId
+
+    useEffect(()=>{
+        findUserPage().then(res=>{
+            const data = res.data && res.data.dataList
+            const newArr = []
+            if(res.code===0){
+                data.map(item=>{
+                    newArr.push({
+                        ...item,
+                        disabled : item.id===userId
+                    })
+                })
+                setTargetKeys(data.filter(item =>item.id===userId).map(item => item.id))
+                setUserList([...newArr])
+            }
+        })
+    },[])
 
     const style1 = {
         "width":416
@@ -70,7 +97,7 @@ const PipelineName = props =>{
             >
                 <Input
                     allowClear
-                    style={ re ? style1:null}
+                    style={set ? style1:null}
                 />
             </Form.Item>
             <div className="pipeline-power">
@@ -105,18 +132,25 @@ const PipelineName = props =>{
                     }
                 </div>
             </div>
-            {re &&
-                <Form.Item>
-                    <Btn
-                        htmlType="submit"
-                        type={"primary"}
-                        title={"确定"}
-                        onClick={re}
-                    />
-                </Form.Item>
+
+            {
+                powerType === 2 &&
+                <PipelineUser
+                    userList={userList}
+                    targetKeys={targetKeys}
+                    setTargetKeys={setTargetKeys}
+                />
+            }
+            {set &&
+                <Btn
+                    htmlType="submit"
+                    type={"primary"}
+                    title={"确定"}
+                    onClick={re}
+                />
             }
         </Form>
     )
 }
 
-export default PipelineName
+export default inject("pipelineStore")(observer(PipelineInfo))

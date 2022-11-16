@@ -63,3 +63,12 @@ export function  UpdateFollow(data){
         data
     })
 }
+
+//查找用户
+export function  FindUserPage(data){
+    return serviceLoc.request({
+        url:"/user/user/findUserPage",
+        method:"post",
+        data
+    })
+}

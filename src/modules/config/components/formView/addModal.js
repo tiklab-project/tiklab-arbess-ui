@@ -223,20 +223,25 @@ const AddModal = props =>{
             footer={modalFooter}
             width={800}
             style={{height:height,top:60}}
+            bodyStyle={{padding:0}}
             className="mf"
         >
-            <ModalTitle
-                setVisible={setAddConfigVisible}
-                title={"选择任务组"}
-            />
             <div className="codeOrNewStage">
-                <AddModalStepOne
-                    lis={lis}
-                    type={type}
-                    setType={setType}
-                    initType={initType}
-                    setInitType={setInitType}
-                />
+                <div className="codeOrNewStage-top">
+                    <ModalTitle
+                        setVisible={setAddConfigVisible}
+                        title={"选择任务组"}
+                    />
+                </div>
+                <div className="codeOrNewStage-content">
+                    <AddModalStepOne
+                        lis={lis}
+                        type={type}
+                        setType={setType}
+                        initType={initType}
+                        setInitType={setInitType}
+                    />
+                </div>
             </div>
         </Modal>
     )

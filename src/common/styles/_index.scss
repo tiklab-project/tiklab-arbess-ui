@@ -42,11 +42,29 @@ ul li{
     padding: 20px 8px 8px;
 }
 
+.mf .ant-table-small .ant-table-thead>tr>th{
+    background: #ffffff;
+    padding: 20px 8px 8px;
+}
+
 .mf .ant-table-tbody>tr>td{
     border: none;
     padding: 8px;
 }
+.mf .ant-transfer-list{
+    background: #ffffff;
+    border: none;
+}
 
+.mf .ant-transfer-list-search-action{
+    top:22px
+}
+.mf .ant-transfer-list-header-dropdown{
+    display: none;
+}
+.mf .ant-transfer-list-header{
+    border: none;
+}
 .mf .ant-modal-footer{
     border:none;
 }

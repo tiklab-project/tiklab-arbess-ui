@@ -1,4 +1,6 @@
+
 .pipeline-power{
+    padding-bottom: var(--tiklab-padding);
     &-title{
         padding: 0 0 8px;
     }
@@ -54,4 +56,25 @@
     &-select{
         border: 2px solid var(--tiklab-blue) !important;
     }
+}
+
+.container {
+    display: flex;
+}
+
+.dataSource {
+    border: 1px solid black;
+    width: 200px;
+    height: 300px;
+}
+
+.operation {
+    display: flex;
+    flex-direction: column;
+}
+
+.target {
+    border: 1px solid black;
+    width: 200px;
+    height: 300px;
 }
