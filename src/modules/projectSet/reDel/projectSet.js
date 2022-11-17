@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Form,message,Modal} from "antd";
+import {message,Modal} from "antd";
 import {
     ExclamationCircleOutlined,
     DeleteOutlined,
@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
-import PipelineInfo from "./pipelineInfo";
+import PipelineInfo from "../../pipeline/components/pipelineAddInfo";
 import Btn from "../../common/btn/btn";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import "./projectSet.scss";
@@ -17,34 +17,15 @@ const ProjectSet = props =>{
 
     const {pipelineStore} = props
 
-    const {deletePipeline,updatePipeline,pipelineList,pipelineId,pipeline}=pipelineStore
+    const {deletePipeline,pipelineId,pipeline}=pipelineStore
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
     const [powerType,setPowerType] = useState(1)
-
-    const [form]=Form.useForm()
 
     useEffect(()=>{
         pipelineId && setPowerType(pipeline && pipeline.pipelinePower)
     },[pipelineId,pipeline])
 
-
-    const re = () =>{
-        form.validateFields().then((value)=> {
-            const params={
-                pipelineId:pipelineId,
-                pipelineName:value.pipelineName,
-                pipelinePower:powerType
-            }
-            updatePipeline(params).then(res => {
-                if (res.code === 0) {
-                    message.info("更新成功")
-                    pipeline.pipelineName = value.pipelineName
-                    props.history.push(`/index/task/${pipelineId}/survey`)
-                }
-            })
-        })
-    }
 
     const onConfirm = () =>{
         Modal.confirm({
@@ -71,7 +52,6 @@ const ProjectSet = props =>{
         })
     }
 
-
     const lis = [
         {
             key:1,
@@ -80,13 +60,9 @@ const ProjectSet = props =>{
             enCode:"pipeline_update",
             content: <div className="bottom-rename">
                 <PipelineInfo
-                    form={form}
-                    re={re}
-                    pipelineList={pipelineList}
-                    pipeline={pipeline}
                     powerType={powerType}
                     setPowerType={setPowerType}
-                    set={"set"}
+                    set={true}
                 />
             </div>
         },    

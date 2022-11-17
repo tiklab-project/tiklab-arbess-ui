@@ -1,13 +1,13 @@
 
 .pipeline-power{
     padding-bottom: var(--tiklab-padding);
-    &-title{
+    .pipeline-power-title{
         padding: 0 0 8px;
     }
-    &-content{
+    .pipeline-power-content{
       display: flex;
     }
-    &-item{
+    .pipeline-power-item{
         height: 150px;
         background: #ffffff;
         padding: 10px;
@@ -45,36 +45,29 @@
             }
         }
     }
-    &-set{
+    .pipeline-power-set{
         max-width: 300px;
         width: 300px;
-        margin-bottom: var(--tiklab-padding-item);
     }
     .pipeline-power-noSet{
         flex: 1;
     }
-    &-select{
+    .pipeline-power-select{
         border: 2px solid var(--tiklab-blue) !important;
     }
 }
 
-.container {
-    display: flex;
-}
-
-.dataSource {
-    border: 1px solid black;
-    width: 200px;
-    height: 300px;
-}
-
-.operation {
-    display: flex;
-    flex-direction: column;
-}
-
-.target {
-    border: 1px solid black;
-    width: 200px;
-    height: 300px;
+.pipeline-user{
+    padding-bottom: var(--tiklab-padding-item);
+    .pipeline-user-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 8px;
+    }
+    .pipeline-user-table{
+        background: #ffffff;
+        padding: 8px;
+        min-height: 240px;
+    }
 }

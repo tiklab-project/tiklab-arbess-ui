@@ -1,6 +1,5 @@
 import React from "react";
 import {CloseOutlined} from "@ant-design/icons";
-import {Button} from "antd";
 import "./modalTitle.scss";
 import Btn from "../btn/btn";
 
@@ -15,7 +14,7 @@ const ModalTitle = props =>{
             </div>
             <div className="modalTitle-icon">
                 <Btn
-                    title={<CloseOutlined />}
+                    title={<CloseOutlined style={{fontSize:16}}/>}
                     type="text"
                     onClick={()=>setVisible(false)}
                 />

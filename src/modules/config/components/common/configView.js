@@ -6,18 +6,18 @@ import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
-import AddModal from "../formView/addModal";
-import Btn from "../../../common/btn/btn";
+import EmptyText from "../../../common/emptyText/emptyText";
+
 
 const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,setValidLength} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,setValidLength,setAddConfigVisible,} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
-        setUnitShellBlock,setBuildShellBlock,codeType,data,addConfigVisible,setAddConfigVisible,
+        setUnitShellBlock,setBuildShellBlock,data,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
 
@@ -210,33 +210,11 @@ const ConfigView = props =>{
         setFormInitialValues({...formInitialValues})
     }
 
-    const renderFormView = () =>{
-        if(data && data.length<1){
-            return <div className="home-limited">
-               <div>
-                   <Btn
-                       icon={<PlusOutlined/>}
-                       onClick={() =>setAddConfigVisible(true)}
-                       title={"添加配置"}
-                   />
-               </div>
-            </div>
-        }else {
-            return  <FormView
-                        del={del}
-                        pipelineId={pipelineId}
-                    />
-        }
-    }
-
     return view==="forms" ?
-        <>
-            <AddModal
-                addConfigVisible={addConfigVisible}
-                setAddConfigVisible={setAddConfigVisible}
-            />
-            {renderFormView()}
-        </>
+        <FormView
+            del={del}
+            pipelineId={pipelineId}
+        />
         :
          <>
             <Gui

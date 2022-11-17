@@ -5,7 +5,7 @@ import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import "../components/pipeline.scss";
 import PipelineTable from "../components/pipelineTable";
-import PipelineAddModal from "../components/pipelineAddModal";
+import PipelineAdd from "../components/pipelineAdd";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import Btn from "../../common/btn/btn";
 import Tabs from "../../common/tabs/tabs";
@@ -14,7 +14,7 @@ const Pipeline = props =>{
 
     const {pipelineStore} = props
 
-    const {pipelineList,fresh,findAllPipelineStatus,findAllFollow,createPipeline,findLike,
+    const {fresh,findAllPipelineStatus,findAllFollow,findLike,
         listType,setListType
     } = pipelineStore
 
@@ -90,10 +90,8 @@ const Pipeline = props =>{
                 {...props}
                 pipelineStore={pipelineStore}
             />
-            <PipelineAddModal
+            <PipelineAdd
                 {...props}
-                createPipeline={createPipeline}
-                pipelineList={pipelineList}
                 addPipelineVisible={addPipelineVisible}
                 setAddPipelineVisible={setAddPipelineVisible}
             />

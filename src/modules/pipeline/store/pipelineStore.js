@@ -11,7 +11,6 @@ import {
     FindUserPage
 } from "../api/pipeline";
 
-import moment from "../../common/client/client";
 import {getUser} from "tiklab-core-ui";
 
 export class PipelineStore {
@@ -51,11 +50,6 @@ export class PipelineStore {
     }
 
     @action
-    setTargetKeys = value =>{
-        this.targetKeys = value
-    }
-
-    @action
     findAllPipelineStatus = value =>{
         const param = new FormData()
         param.append("userId",getUser().userId)
@@ -81,7 +75,7 @@ export class PipelineStore {
             pipelineName: values.pipelineName,
             pipelinePower: values.pipelinePower,
             pipelineType: values.pipelineType,
-            pipelineCreateTime:moment.moment
+            userList: values.userList,
         }
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
@@ -176,6 +170,8 @@ export class PipelineStore {
             },
         }
         const data =  await FindUserPage(params)
+        const zz = data.data && data.data.dataList
+
         return data
     }
 

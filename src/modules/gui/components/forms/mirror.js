@@ -12,11 +12,12 @@ import "./mirror.scss";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
 import SuffixStatus from "./suffixStatus";
-import {message} from "antd";
+
 
 const Mirror = props =>{
 
-    const {shellBlock,setShellBlock,name,type} = props
+    const {setShellBlock,name,type} = props
+    let {shellBlock} = props
 
     const mirrorRefs = useRef(null)
     const context = useContext(TestContext)
@@ -26,8 +27,6 @@ const Mirror = props =>{
     const valueChange = context.valueChange
 
     const x = (newValue,lastValue) => {
-        console.log("新值："+newValue)
-        console.log("旧值："+lastValue)
         if (newValue == null){
             return false;
         }
@@ -41,7 +40,8 @@ const Mirror = props =>{
         const zz = mirrorRefs.current.editor.getValue()
         if(x(zz,shellBlock)){
             valueChange(zz,name,type,setIsLoading)
-            setShellBlock(zz)
+            shellBlock = zz
+            setShellBlock(shellBlock)
         }
     }
 

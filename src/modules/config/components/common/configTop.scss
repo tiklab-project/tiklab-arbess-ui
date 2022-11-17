@@ -22,13 +22,12 @@
         .changeView{
             display: flex;
             align-items: center;
-            &-btn{
-                margin-right: 15px;
-            }
             &-valid{
                 color: red;
                 height: 32px;
                 line-height: 32px;
+            }
+            &-addConfig,&-btn,&-valid{
                 margin-right: 15px;
             }
         }

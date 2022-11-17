@@ -30,7 +30,7 @@ const NewStage = props =>{
     }
 
     const render = () =>{
-        if(data && data.length === 0 && codeType ===""){
+        if(data && data.length === 0){
             return null
         }
         else {
@@ -42,7 +42,7 @@ const NewStage = props =>{
 
     // data是否为最长度
     const isAddNewStage = data => {
-        return data && data.length > 4 ?
+        return data && data.length > 6 ?
             null
              :
             <>

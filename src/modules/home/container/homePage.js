@@ -22,7 +22,7 @@ const HomePage = props =>{
             if(res.code===0){
                 const params = {
                     pageParam:{
-                        pageSize:8,
+                        pageSize:10,
                         currentPage:1
                     },
                     bgroup:"matflow",

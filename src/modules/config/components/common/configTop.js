@@ -6,7 +6,7 @@ import {
     BarsOutlined,
     CaretRightOutlined,
     ExclamationCircleOutlined,
-    LoadingOutlined,
+    LoadingOutlined, PlusOutlined,
 } from "@ant-design/icons";
 import {message,Spin} from "antd";
 import {getUser,getVersionInfo} from "tiklab-core-ui";
@@ -14,6 +14,7 @@ import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/btn";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import AddModal from "../formView/addModal";
 
 
 const ConfigTop = props =>{
@@ -21,7 +22,7 @@ const ConfigTop = props =>{
     const {view,setView,pipelineId,pipelineName,configStore,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validLength,isPlugin} = configStore
+    const {validLength,isPlugin,addConfigVisible,setAddConfigVisible} = configStore
 
     const [processVisible,setProcessVisible] = useState(false)
 
@@ -76,6 +77,17 @@ const ConfigTop = props =>{
                                         {validLength}项配置未完成
                                 </span> : null}
                             </div>
+                            <div className="changeView-addConfig">
+                                <Btn
+                                    icon={<PlusOutlined/>}
+                                    onClick={() =>setAddConfigVisible(true)}
+                                    title={"添加配置"}
+                                />
+                                <AddModal
+                                    addConfigVisible={addConfigVisible}
+                                    setAddConfigVisible={setAddConfigVisible}
+                                />
+                            </div>
                             <div className="changeView-btn">
                                 {
                                     processVisible ?
@@ -99,6 +111,7 @@ const ConfigTop = props =>{
                                 </Select.Option>
                                 <Select.Option value={"gui"}
                                                // disabled={getVersionInfo().expired || !isPlugin}
+                                               disabled={!isPlugin}
                                 >
                                     <AppstoreOutlined  />&nbsp;图形
                                 </Select.Option>

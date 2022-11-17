@@ -116,22 +116,22 @@ const DynaDetail = props =>{
                         <Select
                             placeholder={"类型"}
                             style={{width:150}}
-                            onChange={(value,e)=>changContent(value,e,"module")}
+                            onChange={(value,e)=>changContent(value,e,"action")}
                         >
                             <Select.Option key={"1"} value={"所有"}>所有动态</Select.Option>
-                            <Select.Option key={"pipeline"} value={"pipeline"}>流水线动态</Select.Option>
-                            <Select.Option key={"pipelineConfig"} value={"pipelineConfig"}>流水线配置动态</Select.Option>
-                            <Select.Option key={"run"} value={"run"}>流水线运行动态</Select.Option>
+                            <Select.Option key={"LOG_PIPELINE"} value={"pipeline"}>流水线动态</Select.Option>
+                            <Select.Option key={"LOG_PIPELINE_CONFIG"} value={"pipelineConfig"}>流水线配置动态</Select.Option>
+                            <Select.Option key={"LOG_PIPELINE_RUN"} value={"run"}>流水线运行动态</Select.Option>
                         </Select>
                         <Select
                             placeholder={"操作"}
                             style={{width:150}}
-                            onChange={(value,e)=>changContent(value,e,"action")}
+                            onChange={(value,e)=>changContent(value,e,"module")}
                         >
                             <Select.Option key={"1"} value={"所有"}>所有操作</Select.Option>
-                            <Select.Option key={"create"} value={"创建"}>创建</Select.Option>
-                            <Select.Option key={"update"} value={"更新"}>更新</Select.Option>
-                            <Select.Option key={"delete"} value={"删除"}>删除</Select.Option>
+                            <Select.Option key={"LOG_MD_PIPELINE_CREATE"} value={"创建"}>创建</Select.Option>
+                            <Select.Option key={"LOG_MD_PIPELINE_UPDATE"} value={"更新"}>更新</Select.Option>
+                            <Select.Option key={"LOG_MD_PIPELINE_DELETE"} value={"删除"}>删除</Select.Option>
                         </Select>
                         <RangePicker
                             onChange={(value,e)=>changContent(value,e,"timestamp")}

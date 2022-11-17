@@ -7,17 +7,18 @@
         }
         .ant-form-item {
             flex-direction: column;
+            margin-bottom: 10px;
         }
         .ant-form-item-label{
             min-width: 110px;
             text-align: left;
-            &>label:not(.ant-form-item-required):after{
+            .ant-form-item-label>:not(.ant-form-item-required):after{
                 display: none;
             }
             .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
                 display: none;
             }
-            .ant-form-item-required:after {
+            .ant-form-item-required:not(.ant-form-item-required-mark-optional):after{
                 display: inline-block;
                 margin-right: 4px;
                 color: #ff4d4f;

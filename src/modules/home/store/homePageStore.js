@@ -88,7 +88,7 @@ export class HomePageStore{
     findMessageDispatchItemPage = async values =>{
         const params = {
             pageParam:{
-                pageSize: 11,
+                pageSize: 12,
                 currentPage:this.messagePagination
             },
             application:"matflow",

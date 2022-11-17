@@ -16,17 +16,11 @@ const Survey = props =>{
 
     const {surveyStore,pipelineStore,homePageStore} = props
 
-    const {findlogpage,dynamicList,setDynamicList} = homePageStore
+    const {findlogpage,dynamicList} = homePageStore
     const {pipelineCensus} = surveyStore
     const {pipelineId,pipeline} = pipelineStore
 
-    const [dynaPagination,setDynaPagination] = useState(1)
     const [census,setCensus] = useState("")
-    const [isDyna,setIsDyna] = useState(false)
-
-    useEffect(()=>{
-        setDynamicList([])
-    },[pipelineId])
 
     //运行概况
     useEffect(()=>{
@@ -46,7 +40,7 @@ const Survey = props =>{
         const params = {
             content:{pipelineId:[pipelineId]},
             pageParam:{
-                pageSize:9,
+                pageSize:10,
                 currentPage:1
             }
         }

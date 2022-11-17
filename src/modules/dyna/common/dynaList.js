@@ -10,22 +10,14 @@ const DynaList = props =>{
 
     const dynaGo = item =>{
         if(isPipeline(item.opLogTemplate.link)){
-            switch (item.module) {
-                case "pipelineConfig":
-                    props.history.push(`/index/task/${item.opLogTemplate.link}/config`)
-                    break
-                case "pipeline":
-                    props.history.push(`/index/task/${item.opLogTemplate.link}/survey`)
-                    break
-                case "run":
-                    props.history.push(`/index/task/${item.opLogTemplate.link}/structure`)
-            }
+            props.history.push(item.opLogTemplate.link)
         }
     }
 
     // 判断流水线是否还存在
     const isPipeline = id =>{
-        return pipelineId && pipelineId.some(item=>item===id)
+        const arr = id.split('/')
+        return pipelineId && pipelineId.some(item=>item===arr[3])
     }
 
     const renderLis = (item,index) => {

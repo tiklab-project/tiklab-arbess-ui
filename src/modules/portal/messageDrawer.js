@@ -77,22 +77,16 @@ const MessageDrawer = props =>{
         }
 
         if(isPipeline(item.messageTemplate.link)){
-            switch (item.messageTemplate.id) {
-                case "pipelineCreate":
-                    props.history.push(`/index/task/${item.messageTemplate.link}/survey`)
-                    setVisible(false)
-                    break
-                case "pipelineExec":
-                case "pipelineRun":
-                    props.history.push(`/index/task/${item.messageTemplate.link}/structure`)
-                    setVisible(false)
-            }
+            props.history.push(item.messageTemplate.link)
+            setVisible(false)
         }
     }
 
     // 判断流水线是否还存在
     const isPipeline = id =>{
-        return pipelineList && pipelineList.some(item=>item.pipelineId===id)
+        const arr = id.split('/')
+
+        return pipelineList && pipelineList.some(item=>item.pipelineId===arr[3])
     }
 
     const delMessage = (e,item) =>{

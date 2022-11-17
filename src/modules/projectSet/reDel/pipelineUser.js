@@ -85,10 +85,9 @@ const PipelineUser = props =>{
             targetKeys={targetKeys}     // 显示在右侧框数据的 key 集合
             showSearch
             onChange={onChange}
-            // 接收 inputValue option 两个参数，当 option 符合筛选条件时，应返回 true，反之则返回 false
             filterOption={(inputValue, item) =>
                 item.name.indexOf(inputValue) !== -1 || item.nickname.indexOf(inputValue) !== -1
-            }
+            }       // 接收 inputValue option 两个参数，当 option 符合筛选条件时，应返回 true，反之则返回 false
             leftColumns={leftTableColumns}
             rightColumns={leftTableColumns}
             locale={

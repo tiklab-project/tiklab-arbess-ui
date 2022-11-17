@@ -10,7 +10,7 @@ const formView = props =>{
 
     const {del,configDataStore,pipelineId,configStore} = props
 
-    const {data,setData,formInitialValues,setFormInitialValues,opt,setOpt,setAddConfigVisible} = configDataStore
+    const {data,setData,formInitialValues,opt,setOpt,setAddConfigVisible} = configDataStore
     const {configValid,enabledValid,updateConfigure,validType} = configStore
 
     const [form] = Form.useForm()
