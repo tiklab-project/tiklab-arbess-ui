@@ -2,24 +2,32 @@
     display: flex;
     .react-codemirror2{
         width: 500px;
+        min-height: 64px;
         border-color: var(--tiklab-gray-200);
-        min-height: 32px;
     }
     .CodeMirror{
         height: 100%;
         &:hover{
             background: #f2f2f2;
         }
+        .CodeMirror-placeholder{
+            color: #bfbfbf;
+        }
     }
+
 }
+
 .codeNewStage{
     display: flex;
     .react-codemirror2{
         width: 500px;
         border:1px solid #1890ff;
-        min-height: 32px;
+        min-height: 64px;
     }
     .CodeMirror{
         height: 100%;
+        .CodeMirror-placeholder{
+            color: #bfbfbf;
+        }
     }
 }

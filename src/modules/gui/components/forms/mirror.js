@@ -16,7 +16,7 @@ import SuffixStatus from "./suffixStatus";
 
 const Mirror = props =>{
 
-    const {setShellBlock,name,type} = props
+    const {setShellBlock,name,type,placeholder} = props
     let {shellBlock} = props
 
     const mirrorRefs = useRef(null)
@@ -50,9 +50,9 @@ const Mirror = props =>{
             value={shellBlock}//内容
             ref={mirrorRefs}
             options={{
-                mode: { name: "shell", shell: true },//语言
+                mode: {name: "shell", shell: true},//语言
                 lineNumbers: false, // 是否显示行号
-                lineWrapping: true,//是否支持代码折叠
+                placeholder: placeholder
             }}
             onBlur={onBlur}
         />

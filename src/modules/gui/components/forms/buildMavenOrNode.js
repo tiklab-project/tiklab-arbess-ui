@@ -30,6 +30,7 @@ const BuildMavenOrNode = props =>{
                     type={buildType}
                     shellBlock={buildShellBlock}
                     setShellBlock={setBuildShellBlock}
+                    placeholder={"执行命令"}
                 />
             </Form.Item>
         </>

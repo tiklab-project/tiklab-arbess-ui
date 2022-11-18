@@ -68,6 +68,7 @@ const Gui = props =>{
         setIsLoading(2)
         const obj = {}
         obj[name] = value
+        formInitialValues[name]=value
         const params = {
             pipeline:{pipelineId},
             taskType:mode,
@@ -76,7 +77,6 @@ const Gui = props =>{
         }
         updateConfigure(params).then(res=>{
             if(res.code===0){
-                formInitialValues[name]=value
                 document.getElementById(name) && document.getElementById(name).classList.remove("guiView-validateFields")
                 setIsLoading(3)
             }else {

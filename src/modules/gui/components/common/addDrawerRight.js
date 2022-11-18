@@ -1,4 +1,5 @@
 import React,{useContext} from "react";
+import {Space} from "antd";
 import TestContext from "./testContext";
 import {observer} from "mobx-react";
 
@@ -49,9 +50,12 @@ const AddDrawerRight = props =>{
                                                      className="group-desc"
                                                      onClick={()=>handleClick(group,item)}
                                                 >
-                                                    <div className="group-desc-tpl">
-                                                        <div className="group-tpl">{item.tel}</div>
-                                                    </div>
+                                                    <Space>
+                                                        <svg className="icon" aria-hidden="true">
+                                                            <use xlinkHref={`#icon-${item.icon}`}/>
+                                                        </svg>
+                                                        {item.tel}
+                                                    </Space>                                           
                                                 </div>
                                             )
                                         })

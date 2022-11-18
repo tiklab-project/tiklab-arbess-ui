@@ -1,5 +1,5 @@
 import React from "react";
-import {Col,Row} from "antd";
+import {Col,Row,Space} from "antd";
 
 const AddModalStepOne = props =>{
 
@@ -63,14 +63,12 @@ const AddModalStepOne = props =>{
                                 >
                                     <div className="group-desc-tpl">
                                         <div className="group-tpl">
-                                            <span>
+                                            <Space>
                                                 <svg className="icon" aria-hidden="true">
                                                     <use xlinkHref={`#icon-${item.icon}`}/>
                                                 </svg>
-                                            </span>
-                                            <span>
-                                               {item.tel}
-                                            </span>
+                                                {item.tel}
+                                            </Space>                               
                                         </div>
                                     </div>
                                 </div>

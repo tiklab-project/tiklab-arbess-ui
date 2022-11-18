@@ -14,9 +14,7 @@ const Pipeline = props =>{
 
     const {pipelineStore} = props
 
-    const {fresh,findAllPipelineStatus,findAllFollow,findLike,
-        listType,setListType
-    } = pipelineStore
+    const {fresh,findAllPipelineStatus,findAllFollow,findLike,listType,setListType} = pipelineStore
 
     const [addPipelineVisible,setAddPipelineVisible] = useState(false)
 

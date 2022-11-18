@@ -16,7 +16,6 @@ const CodeSvn = props =>{
                 label={"svn地址"}
                 name={"codeName"}
                 mode={codeType}
-                isValid={true}
             />
             <FindAuth
                 type={codeType}

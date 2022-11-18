@@ -1,8 +1,9 @@
 .guiViewCodeMirror{
     display: flex;
+    padding-top: 5px;
     .react-codemirror2{
-        width: 410px;
-        min-height: 32px;
+        width: 440px;
+        min-height: 64px;
         border: 1px solid #cccccc;
         &:hover{
             border-color: #1890ff;
@@ -10,5 +11,8 @@
     }
     .CodeMirror{
         height: 100%;
+        .CodeMirror-placeholder{
+            color: #bfbfbf;
+        }
     }
 }

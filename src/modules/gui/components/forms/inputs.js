@@ -1,5 +1,5 @@
 import React,{useContext,useState} from "react";
-import {Form,Input} from "antd";
+import {Form,Input, Space} from "antd";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
 import SuffixStatus from "./suffixStatus";
@@ -14,6 +14,7 @@ const Inputs = props =>{
     const valueChange = context.valueChange
 
     const [isLoading,setIsLoading] = useState(1)
+    const [value,setValue] = useState(3)
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
@@ -69,6 +70,7 @@ const Inputs = props =>{
 
     const onBlur = e =>{
         if(x(e.target.value,formInitialValues[name])){
+            setValue(e.target.value)
             if(validation(mode,name,e.target.value)){
                 valueChange(e.target.value,name,mode,setIsLoading)
             }else {
@@ -79,25 +81,24 @@ const Inputs = props =>{
     }
 
     return (
-       <div className="guiView-inputs">
-           <Form.Item
-               name={name}
-               label={label}
-               rules={rules()}
-               validateTrigger="onChange"
-           >
-               <Input
-                   placeholder={placeholder}
-                   onBlur={e=>onBlur(e)}
-                   addonBefore={addonbefore}
-               />
-           </Form.Item>
-           <div className="guiView-inputs-suffix">
-               {<SuffixStatus isLoading={isLoading}/>}
-           </div>
-       </div>
+        <div className="guiView-inputs">
+            <Form.Item
+                name={name}
+                label={label}
+                rules={rules()}
+                validateTrigger="onChange"
+            >
+                <Input
+                    placeholder={placeholder}
+                    onBlur={e=>onBlur(e)}
+                    addonBefore={addonbefore}
+                />
+            </Form.Item>
+            <div className={`guiView-inputs-suffix ${validation(mode,name,value)?"inputs-isValid":"inputs-suffix"}`}>
+                {<SuffixStatus isLoading={isLoading}/>}
+            </div>
+        </div>
     )
-
 }
 
 export default observer(Inputs)

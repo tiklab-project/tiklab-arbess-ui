@@ -10,7 +10,8 @@ import Btn from "../../common/btn/btn";
 
 const PipelineAddInfo = props =>{
 
-    const {set,powerType,setPowerType,pipelineStore, current,setCurrent,templateLis,templateType,
+    const {set,powerType,setPowerType,pipelineStore, current,setCurrent,setAddPipelineVisible,
+        templateLis,templateType,
     } = props
 
     const {pipeline,pipelineId,pipelineList,findUserPage,createPipeline,updatePipeline} = pipelineStore
@@ -217,6 +218,11 @@ const PipelineAddInfo = props =>{
                 :
                 current === 1 &&
                 <>
+                    <Btn
+                        onClick={()=>setAddPipelineVisible(false)}
+                        title={"取消"}
+                        isMar={true}
+                    />
                     <Btn
                         onClick={()=>setCurrent(current - 1)}
                         title={"上一步"}

@@ -86,7 +86,7 @@ const SystemAside= props =>  {
 
     return (
         <div className="system-aside">
-            <ul className="system-aside-top">
+            <ul className="system-aside-top" style={{padding:0}}>
                 {
                     authType && departmentRouter.map(firstItem => {
                         return firstItem.children && firstItem.children.length > 0 ?

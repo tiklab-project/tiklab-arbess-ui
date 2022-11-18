@@ -52,6 +52,7 @@ const Inputs = props =>{
             setIsLoading(2)
             const obj = {}
             obj[name] = e.target.value
+            formInitialValues[name]=obj[name]
             const params = {
                 pipeline:{pipelineId},
                 taskType:mode,
@@ -63,14 +64,14 @@ const Inputs = props =>{
                     if(res.code===0){
                         document.getElementById(name).classList.remove("formView-validateFields")
                         setIsLoading(3)
-                        formInitialValues[name]=e.target.value
                     }else {
                         setIsLoading(4)
                         message.info(res.msg)
                     }
                 })
                 setBordered(false)
-            } else {
+            }
+            else {
                 setBordered(true)
                 setIsLoading(4)
             }
@@ -85,12 +86,13 @@ const Inputs = props =>{
             case "codeName":
                 if(mode===5){
                     rule =  [
-                                {required:true, message: "请输入svn地址"},
+                                {required:true, message: `请输入${label}`},
                                 {pattern: validCodeSvn, message:"请输入正确的svn地址"}
                             ]
-                }else if(mode===1 || mode===4){
+                }
+                if(mode===1 || mode===4){
                     rule =  [
-                                {required:true, message: "请输入git地址"},
+                                {required:true, message: `请输入${label}`},
                                 {pattern: validCodeGit, message:"请输入正确的git地址"}
                             ]
                 }

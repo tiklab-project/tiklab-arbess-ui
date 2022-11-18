@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import AddDrawer from "./addDrawer";
 import BlockContent from "./blockContent";
+import {PlusOutlined} from "@ant-design/icons";
 
 const NewStage = props =>{
 
@@ -54,9 +55,10 @@ const NewStage = props =>{
                     <div className="newStages">
                         <div className="newStages-content"  >
                             <div className="newStages-task">
-                                <div className="newStages-job">
-                                    <div className="newStages-job_text" onClick={()=>newTask()}>
-                                        新任务
+                                <div className="newStages-job" onClick={()=>newTask()}>
+                                    <div className="newStages-job_text">
+                                        <PlusOutlined/>
+                                        <span style={{paddingLeft:5}}>新任务</span>
                                     </div>
                                 </div>
                             </div>

@@ -13,11 +13,11 @@ const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,setValidLength,setAddConfigVisible,} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,setValidLength} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
-        setUnitShellBlock,setBuildShellBlock,data,
+        setUnitShellBlock,setBuildShellBlock,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
 

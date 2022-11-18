@@ -33,7 +33,7 @@ const MessageDrawer = props =>{
     },[visible])
 
     useEffect(()=>{
-        findMessageDispatchItemPage(selected).then(res=>{
+        visible && findMessageDispatchItemPage(selected).then(res=>{
             setIsLoading(false)
         })
     },[visible,messagePagination,selected,fresh])

@@ -16,13 +16,6 @@ export class ConfigStore{
     @observable validLength = []
     @observable validType = []
 
-    @observable addConfigVisible = false
-
-    @action
-    setAddConfigVisible = value =>{
-        this.addConfigVisible = value
-    }
-
     @action
     setEnabledValid = value =>{
         this.enabledValid = value

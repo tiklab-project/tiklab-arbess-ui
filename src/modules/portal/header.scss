@@ -8,10 +8,10 @@
         width: 100%;
         min-width: 600px;
         color: #ffffff;
-        height: 48px;
-        background: #5d70ea;
+        height: var(--mf-head-height);
+        background: var(--tiklab-blue);
         &-logo{
-            height: 48px;
+            height: var(--mf-head-height);
             width: 100px;
             margin: 0 20px;
             img{
@@ -44,7 +44,7 @@
         &-user,&-message,&-set,&-help{
             margin: 0 10px;
             &:hover{
-                color: var(--tiklab-blue);
+                background: rgba(255, 255, 255, 0.4);
             }
         }
         &-icon{
@@ -52,7 +52,7 @@
             cursor: pointer;
             color: #ffffff;
             &:hover{
-                color: var(--tiklab-blue);
+                background: rgba(255, 255, 255, 0.4);
             }
         }
         &-user{
@@ -81,7 +81,7 @@
         }
     }
     &-content{
-        height: calc(100vh - 48px);
+        height: var(--mf-content-height);
         overflow: auto;
     }
 }

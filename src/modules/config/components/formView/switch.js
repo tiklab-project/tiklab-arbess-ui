@@ -1,15 +1,35 @@
-import React from "react";
+import React,{useState} from "react";
+import {Space} from "antd";
+import {SwapOutlined} from "@ant-design/icons";
 import SubIcon from "../formTitle/subIcon";
+import Btn from "../../../common/btn/btn";
+import SwitchType from "./switchType";
 import "./switch.scss";
+
 
 const Switch = props =>{
 
     const {type} = props
 
+    const [visible,setVisible] = useState(false)
+    const [showType,setShowType] = useState("")
+
+    const onClick = type =>{
+        setVisible(true)
+        setShowType(type)
+    }
+
     const renderType = type =>{
-        return <div className="configCode-gitList-item ">
-                    <SubIcon type={type}/>
-                </div>
+        return  <Space>
+                    <div className="configCode-gitList-item ">
+                        <SubIcon type={type}/>
+                    </div>
+                    <Btn
+                        title={<><SwapOutlined/>切换类型</>}
+                        type={"link-small"}
+                        onClick={()=>onClick(type)}
+                    />
+                </Space>
     }
 
     return(
@@ -55,6 +75,11 @@ const Switch = props =>{
 
                 })()
             }
+            <SwitchType
+                visible={visible}
+                setVisible={setVisible}
+                showType={showType}
+            />
         </div>
     )
 }

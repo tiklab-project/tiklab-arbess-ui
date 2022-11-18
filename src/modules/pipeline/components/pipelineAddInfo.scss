@@ -12,8 +12,7 @@
         background: #ffffff;
         padding: 10px;
         cursor: pointer;
-        border-radius: 2px;
-        border: 1px solid var(--tiklab-gray-200);
+        border-radius: 4px;
         &:first-child{
           margin-right: 15px;
         }
@@ -48,6 +47,7 @@
     .pipeline-power-set{
         max-width: 300px;
         width: 300px;
+        border: 1px solid var(--tiklab-gray-200);
     }
     .pipeline-power-noSet{
         flex: 1;

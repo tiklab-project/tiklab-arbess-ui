@@ -16,7 +16,7 @@ import SuffixStatus from "./suffixStatus";
 
 const MirrorContent = forwardRef((props,ref)=>{
 
-    const {setShellBlock,type,name,pipelineStore,configStore} = props
+    const {setShellBlock,type,name,pipelineStore,configStore,placeholder} = props
     let {shellBlock} = props
 
     const mirrorRefs = useRef(null)
@@ -75,7 +75,7 @@ const MirrorContent = forwardRef((props,ref)=>{
             options={{
                 mode: {name:"shell",shell: true },//语言
                 lineNumbers: false, // 是否显示行号
-                // placeholder: placeholder
+                placeholder: placeholder
             }}
             // onChange={()}
             onFocus={onFocus}

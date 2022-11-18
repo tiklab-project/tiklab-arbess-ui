@@ -24,7 +24,7 @@ const formView = props =>{
         pipelineId && configValid(pipelineId).then(res=>{
             if(res.code===0){
                 const keys =res.data && Object.keys(res.data)
-                form.validateFields(keys)
+                form.validateFields(keys && keys)
                 keys && keys.map(item=>{
                     const zz = document.getElementById(item)
                     zz && zz.classList.add("formView-validateFields")

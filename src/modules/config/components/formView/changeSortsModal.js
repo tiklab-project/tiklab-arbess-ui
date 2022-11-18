@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Modal,Tree,message} from "antd";
+import {Modal,Tree,message,Space} from "antd";
 import {BorderVerticleOutlined} from "@ant-design/icons";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
@@ -25,13 +25,9 @@ const ChangeSortsModal = props =>{
         setGData([...nameArray])
     },[data])
 
+   
     const renderTitle = type =>{
         switch (type) {
-            case 1:return "源码-通用Git"
-            case 2:return "源码-Gitee"
-            case 3:return "源码-Github"
-            case 4:return "源码-Gitlab"
-            case 5:return "源码-svn"
             case 11:return "测试-单元测试"
             case 21:return "构建-maven"
             case 22:return "构建-node"
@@ -44,15 +40,18 @@ const ChangeSortsModal = props =>{
         }
     }
 
+    const renderCode = type =>{
+        switch(type){
+            case 1:return "源码-通用Git"
+            case 2:return "源码-Gitee"
+            case 3:return "源码-Github"
+            case 4:return "源码-Gitlab"
+            case 5:return "源码-svn"
+        }
+    }
+
     const dataTile = data => {
-        data && data.map((item,index)=>{
-            item.dataType<10 && nameArray.push({
-                key:index,
-                title:renderTitle(item.dataType),
-                dataId:item.dataId,
-                dataType:item.dataType,
-                disabled:true
-            })
+        data && data.map((item,index)=>{        
             item.dataType>10 && nameArray.push({
                 key:index,
                 title:renderTitle(item.dataType),
@@ -60,6 +59,10 @@ const ChangeSortsModal = props =>{
                 dataType:item.dataType
             })
         })
+    }
+
+    const isData = data =>{
+        return data && data.some(item=>item.dataType<10)
     }
 
     const onDrop = info => {
@@ -104,10 +107,18 @@ const ChangeSortsModal = props =>{
             taskSort:taskSort,
             taskType:1,
         }
+        const newArr = [...mData]
         updateConfigure(params).then(res=>{
-            //如果改变控件，然后改变data
+            //如果改变控件，然后重新渲染data
             if(res.code===0){
-                setData([...mData])
+                data && data.map(item=>{
+                    item.dataType<10 &&
+                    newArr.splice(0,0,{
+                        id:item.id,
+                        dataType:item.dataType
+                    })
+                })
+                setData([...newArr])
             }
             if(res.code===50001){
                 message.info(res.msg)
@@ -130,13 +141,24 @@ const ChangeSortsModal = props =>{
                 title={"更改顺序"}
             />
             <div className="changeSorts-tree" style={{height:"calc(100% - 150)",overflow:"auto"}}>
+                {
+                    isData(data) &&
+                    <div className="changeSorts-tree-code">
+                        <BorderVerticleOutlined style={{fontSize:16,paddingRight:5}}/>
+                        {
+                            data && data.map(item=>{
+                                return item.dataType<10 && renderCode(item.dataType)
+                            })
+                        }
+                    </div>
+                }
                 <Tree
                     showIcon
+                    draggable
+                    blockNode
                     showLine={false}
                     icon={<BorderVerticleOutlined style={{fontSize:16}}/>}
                     className="draggable-tree"
-                    draggable
-                    blockNode
                     onDrop={onDrop}
                     treeData={gData}
                 />

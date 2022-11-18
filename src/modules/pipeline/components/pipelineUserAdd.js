@@ -4,6 +4,7 @@ import {autoHeight} from "../../common/client/client";
 import Btn from "../../common/btn/btn";
 import {Profile} from "tiklab-eam-ui";
 import ModalTitle from "../../common/modalTitle/modalTitle";
+import EmptyText from "../../common/emptyText/emptyText";
 
 
 const PipelineUserAdd = props =>{
@@ -115,6 +116,7 @@ const PipelineUserAdd = props =>{
                 columns={columns}
                 dataSource={nUserList}
                 pagination={false}
+                locale={{emptyText: <EmptyText/>}}
             />
         </Modal>
     )

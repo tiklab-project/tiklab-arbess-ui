@@ -19,10 +19,11 @@ import AddModal from "../formView/addModal";
 
 const ConfigTop = props =>{
 
-    const {view,setView,pipelineId,pipelineName,configStore,structureStore} = props
+    const {view,setView,pipelineId,pipelineName,configStore,structureStore,configDataStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validLength,isPlugin,addConfigVisible,setAddConfigVisible} = configStore
+    const {validLength,isPlugin} = configStore
+    const {data,addConfigVisible,setAddConfigVisible} = configDataStore
 
     const [processVisible,setProcessVisible] = useState(false)
 
@@ -57,6 +58,15 @@ const ConfigTop = props =>{
     const changeView = type => {
         setView(type)
         localStorage.setItem("configView",type)
+    }
+
+    const runStatu = () =>{ 
+           if(data && data.length===0 || validLength>0){
+                return false
+           }
+           else{
+                return "primary"
+           }
     }
 
     return(
@@ -97,15 +107,15 @@ const ConfigTop = props =>{
                                         />
                                         :
                                         <Btn
-                                            type={validLength>0?"disabled":"primary"}
-                                            onClick={validLength>0?null:()=>run()}
+                                            type={runStatu()?"primary":"disabled"}
+                                            onClick={runStatu()?()=>run():null}
                                             icon={<CaretRightOutlined />}
                                             title={"运行"}
                                         />
 
                                 }
                             </div>
-                            <Select onChange={changeView} value={view}>
+                            <Select onChange={changeView} value={view} style={{width:90}}>
                                 <Select.Option value={"forms"}>
                                     <BarsOutlined  />&nbsp;表单
                                 </Select.Option>
@@ -124,4 +134,4 @@ const ConfigTop = props =>{
     )
 }
 
-export default withRouter(inject("structureStore","configStore")(observer(ConfigTop)))
+export default withRouter(inject("structureStore","configStore","configDataStore")(observer(ConfigTop)))

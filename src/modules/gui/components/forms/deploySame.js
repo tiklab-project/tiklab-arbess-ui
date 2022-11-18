@@ -44,6 +44,7 @@ const DeploySame = props =>{
                     type={deployType}
                     shellBlock={deployOrderShellBlock}
                     setShellBlock={setDeployOrderShellBlock}
+                    placeholder={"部署文件命令"}
                 />
             </Form.Item>
         </>

@@ -26,6 +26,7 @@ const DeployVir = props =>{
                     type={deployType}
                     shellBlock={virShellBlock}
                     setShellBlock={setVirShellBlock}
+                    placeholder={"启动命令"}
                 />
             </Form.Item>
         </>

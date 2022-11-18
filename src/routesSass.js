@@ -66,23 +66,28 @@ const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messag
 const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
 
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
-const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
 const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
+const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
+const LogType=AsyncComponent(()=>import("./modules/system/oplog/logType"))
 
 const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
 const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
 const TodoTemp=AsyncComponent(()=>import("./modules/system/todotask/todoTemp"))
+const TodoType=AsyncComponent(()=>import("./modules/system/todotask/todoType"))
 
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
+
+const Version=AsyncComponent(()=>import("./modules/system/licence/version"))
+const Licence=AsyncComponent(()=>import("./modules/system/licence/licence"))
 
 const FullWorkTodo=AsyncComponent(()=>import("./modules/wiget/fullWorkTodo"))
 const WidgetMangent=AsyncComponent(()=>import("./modules/wiget/widgetMangent"))
 const OpLogWidget=AsyncComponent(()=>import("./modules/wiget/opLogWidget"))
 const TodoWidget=AsyncComponent(()=>import("./modules/wiget/todoWidget"))
 
-const routerSass=[
+const routers=[
     {
         path:"/login",
         component:Login,
@@ -234,12 +239,20 @@ const routerSass=[
                         component: TodoTemp,
                     },
                     {
+                        path: "/index/system/todoType",
+                        component: TodoType,
+                    },
+                    {
                         path:"/index/system/myLog",
                         component: MyLogList,
                     },
                     {
                         path:"/index/system/logTemplate",
                         component: LogTemplateList,
+                    },{
+
+                        path:"/index/system/logType",
+                        component: LogType,
                     },
                     {
                         path: "/index/system/user/dashbord",
@@ -274,6 +287,14 @@ const routerSass=[
                         component: MessageSendTypeTrue,
                     },
                     {
+                        path:"/index/system/version",
+                        component: Version,
+                    },
+                    {
+                        path:"/index/system/licence",
+                        component: Licence,
+                    },
+                    {
                         render:()=><Redirect to="/index/system/role"/>,
                     },
                 ]
@@ -288,4 +309,4 @@ const routerSass=[
     },
 ]
 
-export default routerSass
+export default routers

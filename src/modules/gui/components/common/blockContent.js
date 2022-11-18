@@ -1,4 +1,5 @@
 import React from "react";
+import {Space} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import HlineIcon from "../../../config/components/formTitle/hlineIcon";
 import Subtitle from "../../../config/components/formTitle/subtitle";
@@ -49,16 +50,18 @@ const BlockContent = props =>{
                     <div className="newStages-step">
                         <div className="newStages-content"  onClick={()=>showStage(type)}>
                             <div className="newStages-task">
-                                <div className={`newStages-job ${valid(type)?"job-name":""}`}
-                                     style={type<10 ? style:null}
-                                >
+                                <div className={`newStages-job ${valid(type)?"job-name":""}`}>
                                     <div className="newStages-job_text">
-                                        <Subtitle type={type}/>
-                                        {valid(type) &&
-                                            <span className="newStages-job-warn">
-                                            <ExclamationCircleOutlined />
-                                        </span>
-                                        }
+                                        <Space>
+                                            <span className="newStages-job-title">
+                                                <Subtitle type={type}/>
+                                            </span>
+                                            {valid(type) &&
+                                                <span className="newStages-job-warn">
+                                                <ExclamationCircleOutlined />
+                                            </span>
+                                            }
+                                        </Space>                                                               
                                     </div>
                                 </div>
                             </div>

@@ -97,6 +97,7 @@ const Deploy = props =>{
                                 type={deployType}
                                 shellBlock={deployShellBlock}
                                 setShellBlock={setDeployShellBlock}
+                                placeholder={"Shell命令"}
                             />
                         </Form.Item>
                 }

@@ -45,7 +45,7 @@ module.exports = merge(baseWebpackConfig,{
         contentBase: path.join(__dirname, "./dist"),
         hot:true,
         compress:true,
-        port:3004,
+        port:3000,
         host: "192.168.10.23",
         historyApiFallback: true,
         disableHostCheck: true,
