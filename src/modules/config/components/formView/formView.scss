@@ -8,31 +8,40 @@
         top: 62px;
         background: var(--mf-backdrop-color);
         z-index: 9;
-        padding-top: var(--tiklab-padding-item);
+        padding-top: 10px;
         &-content{
             display: flex;
             border-radius: 4px;
-            border-bottom: 1px solid var(--tiklab-gray-200);
+            border-bottom: 1px solid #f0f0f0;
         }
         .anch-item{
-            height: 35px;
-            line-height: 35px;
+            height: 45px;
+            line-height: 45px;
             cursor: pointer;
             font-size: var(--tiklab-font-16);
+            padding: 0 10px;
+            background: #fafafa;
+            outline: none;
             &:not(:last-child){
-                margin-right: 30px;
+                //margin-right: 25px;
             }
         }
         .anch-plus{
-            padding-top: 10px;
+            padding: 14px 10px 0;
+            font-size: 22px;
             &:hover{
-                font-weight: var(--tiklab-font-weight-bold);
-                color: #0063FF;
+                color: var(--tiklab-blue);
             }
         }
+        .anch-pluba{
+            background: #ffffff;
+            border-radius: 4px 4px 0 0;
+        }
         .anch-select{
-            border-bottom: 2px solid var(--tiklab-blue);
-            font-weight: var(--tiklab-font-weight-bold);
+            border-bottom: 3px solid var(--tiklab-blue);
+            color: var(--tiklab-blue);
+            background: #ffffff;
+            border-radius: 4px 4px 0 0;
         }
     }
     .formView-content{
@@ -41,7 +50,7 @@
     &-wrapper{
         background: #ffffff;
         border-radius: 4px;
-        padding: 15px;
+        padding: 10px 15px;
         &:not(:last-child){
             margin-bottom: 15px;
         }

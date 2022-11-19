@@ -86,7 +86,6 @@ const CodeModal = props =>{
             footer={modalFooter}
             style={{height:height,top:60}}
             className="mf"
-
         >
             <ModalTitle
                 setVisible={setVisible}

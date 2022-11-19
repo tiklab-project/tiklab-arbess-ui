@@ -168,13 +168,13 @@ const FindAuth = props =>{
     return(
         <div className="formView-inputs">
             <Form.Item
-                label={label(type)}
                 name={name(type)}
+                label={label(type)}
             >
                 <Select
                     showSearch
                     onChange={(value,e)=>changeGitSelect(value,e)}
-                    placeholder="凭证"
+                    placeholder={label(type)}
                     open={open}
                     onFocus={()=>onFocus(type)}
                     onBlur={onBlur}

@@ -22,7 +22,7 @@ const ConfigTop = props =>{
     const {view,setView,pipelineId,pipelineName,configStore,structureStore,configDataStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validLength,isPlugin} = configStore
+    const {valid,isPlugin} = configStore
     const {data,addConfigVisible,setAddConfigVisible} = configDataStore
 
     const [processVisible,setProcessVisible] = useState(false)
@@ -31,7 +31,11 @@ const ConfigTop = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        setView(configView)
+        if(getVersionInfo().expired || !isPlugin || !configView){
+            setView("forms")
+        }else {
+            setView(configView)
+        }
     },[configView])
 
     const run = () => {
@@ -61,12 +65,7 @@ const ConfigTop = props =>{
     }
 
     const runStatu = () =>{ 
-           if(data && data.length===0 || validLength>0){
-                return false
-           }
-           else{
-                return "primary"
-           }
+           return !(data && data.length < 1 || valid && valid.length > 0);
     }
 
     return(
@@ -80,11 +79,11 @@ const ConfigTop = props =>{
                     <div className="config_changeView">
                         <div className="changeView">
                             <div className="changeView-valid">
-                                {validLength && validLength > 0 ?
+                                {valid && valid.length > 0 ?
                                     <span>
                                     <ExclamationCircleOutlined />
                                         &nbsp;
-                                        {validLength}项配置未完成
+                                        {valid && valid.length}项配置未完成
                                 </span> : null}
                             </div>
                             <div className="changeView-addConfig">
@@ -120,8 +119,7 @@ const ConfigTop = props =>{
                                     <BarsOutlined  />&nbsp;表单
                                 </Select.Option>
                                 <Select.Option value={"gui"}
-                                               // disabled={getVersionInfo().expired || !isPlugin}
-                                               disabled={!isPlugin}
+                                               disabled={getVersionInfo().expired || !isPlugin}
                                 >
                                     <AppstoreOutlined  />&nbsp;图形
                                 </Select.Option>

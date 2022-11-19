@@ -127,9 +127,7 @@ const AddModal = props =>{
 
     const {configDataStore,configStore,pipelineStore,setAddConfigVisible,addConfigVisible} = props
 
-    const {setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
-        data,setData
-    } = configDataStore
+    const {setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType} = configDataStore
 
     const {updateConfigure} = configStore
     const {pipelineId} = pipelineStore
@@ -165,7 +163,6 @@ const AddModal = props =>{
     }
 
     const add = type =>{
-        addData(type)
         const zz = Math.floor(type/10)
         switch (zz) {
             case 0:
@@ -183,22 +180,6 @@ const AddModal = props =>{
         }
     }
 
-    const newData = [...data]
-    const addData = type =>{
-        if(type<10){
-            newData.splice(0,0,{
-                dataId:type,
-                dataType:type
-            })
-        }
-        if(type>10){
-            newData.push({
-                dataId:type,
-                dataType:type
-            })
-        }
-        setData([...newData])
-    }
 
     const modalFooter = (
         <>

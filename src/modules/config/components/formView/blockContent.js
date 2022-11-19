@@ -11,9 +11,7 @@ import HlineIcon from "../formTitle/hlineIcon";
 
 const BlockContent = props =>{
 
-    const {type,del,data,setData,pipelineId,setChangeSortVisible,updateConfigure,
-        validType,id
-    } = props
+    const {type,pipelineId,setChangeSortVisible,updateConfigure,validType,id} = props
 
     const delType = type =>{
         Modal.confirm({
@@ -33,15 +31,6 @@ const BlockContent = props =>{
             message:"delete"
         }
         updateConfigure(params).then(res=>{
-            if(res.code===0){
-                del(type)
-                for (let i = 0 ;i<data.length;i++){
-                    if(data[i].dataType === type){
-                        data.splice(i,1)
-                    }
-                    setData([...data])
-                }
-            }
             if(res.code===50001){
                 message.info(res.msg)
             }

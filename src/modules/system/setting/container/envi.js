@@ -58,22 +58,30 @@ const Envi = props =>{
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
+            width:"30%",
+            ellipsis:true,
             render:text => <SubIcon type={text}/>
         },
         {
             title:"名称",
             dataIndex:"scmName",
             key:"scmName",
+            width:"30%",
+            ellipsis:true,
         },
         {
             title:"地址",
             dataIndex:"scmAddress",
             key:"scmAddress",
+            width:"30%",
+            ellipsis:true,
         },
         {
             title:  "操作",
             dataIndex:"action",
             key:"action",
+            width:"10%",
+            ellipsis:true,
             render:(text,record)=>{
                 return(
                     <span className="envi-content-action">

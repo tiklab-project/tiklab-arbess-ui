@@ -92,12 +92,15 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"25%",
+            ellipsis:true,
             render:text => name(text)
         },
         {
             title:"类型",
             dataIndex:"type",
             key:"type",
+            width:"20%",
             render:text => {
                 switch (text) {
                     case 2:
@@ -115,25 +118,29 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"20%",
+            ellipsis:true,
             render:(text,record) => user(text,record)
         },
         {
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width:"15%",
             render:text => authPublic(text)
         },
         {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width:"15%",
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
+            width:"5%",
             render:(text,record) => action(text,record)
-
         }
     ]
 
@@ -143,17 +150,23 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"25%",
+            ellipsis:true,
             render:text => name(text)
         },
         {
             title:"授权信息",
             dataIndex:"message",
             key:"message",
+            width:"20%",
+            ellipsis:true,
         },
         {
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"20%",
+            ellipsis:true,
             render:(text,record) => user(text,record)
 
         },
@@ -161,17 +174,20 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width:"15%",
             render:text => authPublic(text)
         },
         {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width:"15%",
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
+            width:"5%",
             render:(text,record) => action(text,record)
         }
     ]
@@ -181,17 +197,23 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"25%",
+            ellipsis:true,
             render:text => name(text)
         },
         {
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
+            width:"15%",
+            ellipsis:true,
         },
         {
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
+            width:"15%",
+            ellipsis:true,
             render: text => {
                 switch (text) {
                     case 1:
@@ -205,6 +227,8 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"15%",
+            ellipsis:true,
             render:(text,record) => user(text,record)
 
         },
@@ -212,18 +236,23 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width:"10%",
+            ellipsis:true,
             render:text => authPublic(text)
-
         },
         {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width:"15%",
+            ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
+            width:"5%",
+            ellipsis:true,
             render:(text,record) => action(text,record)
         }
     ]

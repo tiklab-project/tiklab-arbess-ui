@@ -79,7 +79,7 @@ const Pipeline = props =>{
                         placeholder="流水线名称"
                         onChange={onChangeSearch}
                         prefix={<SearchOutlined />}
-                        style={{ width: 280 }}
+                        style={{ width: 200 }}
                     />
                 </div>
             </div>

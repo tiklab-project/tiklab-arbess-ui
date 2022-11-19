@@ -156,6 +156,7 @@ const PipelineAdd = props =>{
             closable={false}
             mask={false}
             footer={false}
+            style={{top:0,padding:0,margin:0,width:"100vw",maxWidth:"100vw"}}
             className="mf pipeline-add"
             width={"100vw"}
         >

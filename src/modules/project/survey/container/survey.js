@@ -77,7 +77,7 @@ const Survey = props =>{
 
     return(
         <div className="survey">
-            <div className="survey-content home-limited mf">
+            <div className="survey-content home-limited">
                 <div className="survey-top">
                     <BreadcrumbContent
                         firstItem={pipeline.pipelineName}

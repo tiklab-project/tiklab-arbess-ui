@@ -67,14 +67,11 @@ const ProjectAside = props =>{
 
     // 切换项目菜单列表
     const pipelineMenu = item =>{
-        return  <div onClick={()=>{changePipeline(item)}}
-                     key={item.pipelineId}
-                     className={`opt-content-group_item ${item.pipelineId===pipelineId?"opt-content-active":null}`}
-                >
-                    <span className={`opt-content-group-icon icon-${item.color}`}>
+        return  <div onClick={()=>{changePipeline(item)}} key={item.pipelineId} className="pipeline-opt-item">
+                    <span className={`pipeline-opt-icon icon-${item.color}`}>
                         {item.pipelineName.substring(0,1).toUpperCase()}
                     </span>
-                    <span className="opt-content-group-name">
+                    <span className="pipeline-opt-name">
                         {item.pipelineName}
                     </span>
                 </div>
@@ -82,16 +79,14 @@ const ProjectAside = props =>{
 
     // 切换项目菜单
     const changPipelineMenu = (
-        <div className="opt">
-            <div className="opt-content">
-                <div className="opt-content-title">流水线名称</div>
-                <div className="opt-content-group">
-                    {
-                        pipelineList && pipelineList.map(item=>{
-                            return pipelineMenu(item)
-                        })
-                    }
-                </div>
+        <div className="pipeline-opt">
+            <div className="pipeline-opt-title">切换流水线</div>
+            <div className="pipeline-opt-group">
+                {
+                    pipelineList && pipelineList.map(item=>{
+                        return pipelineMenu(item)
+                    })
+                }
             </div>
         </div>
     )
@@ -113,9 +108,10 @@ const ProjectAside = props =>{
          <div className="aside">
              <div  className="content">
                  <Dropdown
+                     overlayStyle={{top:"48px",left:"80px"}}
                      overlay={changPipelineMenu}
                      trigger={["click"]}
-                     overlayStyle={{paddingLeft:10}}
+                     overlayClassName="aside-dropdown"
                  >
                      <div className="aside_chang"
                          onClick={(e)=>e.preventDefault()}

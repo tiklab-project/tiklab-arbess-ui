@@ -13,9 +13,9 @@ const DeploySame = props =>{
     return (
         <>
             <Inputs
+                name={"localAddress"}
                 placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"应用源文件地址"}
-                name={"localAddress"}
                 mode={deployType}
                 addonBefore={"/"}
             />
@@ -26,9 +26,9 @@ const DeploySame = props =>{
             />
 
             <Inputs
+                name={"deployAddress"}
                 placeholder={"部署位置"}
                 label={"部署位置"}
-                name={"deployAddress"}
                 mode={deployType}
                 addonBefore={"/"}
                 isValid={true}

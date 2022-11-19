@@ -13,18 +13,9 @@ export class ConfigStore{
     @observable profileAddress = ""
     @observable enabledValid = false // 是否启用表单效验
     @observable isPlugin = false // 是否存在插件
-    @observable validLength = []
+    @observable valid = []
     @observable validType = []
-
-    @action
-    setEnabledValid = value =>{
-        this.enabledValid = value
-    }
-
-    @action
-    setValidLength = value =>{
-        this.validLength = value
-    }
+    @observable isFindConfig = false
 
     @action
     setIsPlugin = value =>{
@@ -36,6 +27,14 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             UpdateConfigure(values).then(res=>{
                 if(res.code===0){
+                    switch (values.message) {
+                        case "update":
+                        case "updateType":
+                            // document.getElementById(Object.keys(values.values)[0]).classList.remove("formView-validateFields")
+                            break
+                        default:
+                            this.isFindConfig=!this.isFindConfig
+                    }
                     this.enabledValid=!this.enabledValid
                 }
                 resolve(res)
@@ -87,12 +86,18 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             ConfigValid(params).then(res=>{
                 if(res.code===0){
-                    this.validLength = res.data && Object.keys(res.data).length
+                    // 需要效验的的表单字段
+                    const keys = res.data && Object.keys(res.data)
+                    this.valid = keys
+                    // 需要效验的类型，存在相同类型需要去重
                     this.validType = Array.from(new Set(res.data && Object.values(res.data)))
+                    keys.map(item=>{
+                        const zz = document.getElementById(`${item}`)
+                        zz && zz.classList.add("formView-validateFields")
+                    })
                 }
                 resolve(res)
             }).catch(error=>{
-                console.log(error)
                 reject()
             })
         })

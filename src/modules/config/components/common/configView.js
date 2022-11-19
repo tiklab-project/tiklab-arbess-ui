@@ -1,19 +1,16 @@
 import React,{useEffect} from "react";
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
-import {PlusOutlined} from "@ant-design/icons";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
-import EmptyText from "../../../common/emptyText/emptyText";
-
 
 const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,setValidLength} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig} = configStore
 
     const {setData,formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
@@ -21,7 +18,7 @@ const ConfigView = props =>{
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
     } = configDataStore
 
-    const {pipelineId} = pipelineStore
+    const {pipelineId,pipeline} = pipelineStore
 
     const pluginStore = useSelector(state =>state.pluginStore)
 
@@ -46,16 +43,15 @@ const ConfigView = props =>{
                 }
             }
         })
-    },[pipelineId])
+    },[pipelineId,isFindConfig])
 
     useEffect(()=>{
         return ()=> nonData()
     },[pipelineId])
 
     const nonData = ()=>{
-        setCodeType("")
         setData([])
-        setValidLength([])
+        setCodeType("")
         setFormInitialValues({})
         setUnitShellBlock("")
         setVirShellBlock("")
@@ -158,105 +154,37 @@ const ConfigView = props =>{
         Object.assign(formInitialValues,goodsFormValue)
     }
 
-    // 统一form表单里面需要删除的值
-    const del = i => {
-        switch (i) {
-            case 11:
-                setUnitShellBlock("")
-                setTestType("")
-                break
-            case 21:
-            case 22:
-                formInitialValues.buildAddress = null
-                setBuildShellBlock("")
-                setBuildType("")
-                break
-            case 31:
-            case 32:
-                formInitialValues.deployAuthName = null
-                formInitialValues.localAddress = null
-                formInitialValues.deployAddress = null
-                formInitialValues.deployOrder = null
-                formInitialValues.startAddress = null
-                formInitialValues.authType = 1
-                formInitialValues.deployAuthId = 0
-                setDeployType("")
-                setVirShellBlock("")
-                setDeployShellBlock("")
-                setDeployOrderShellBlock("")
-                break
-            case 41:
-                formInitialValues.scanAuthName = null
-                formInitialValues.scanAuthId = null
-                formInitialValues.projectName = null
-                setScanType("")
-                break
-            case 51:
-            case 52:
-                formInitialValues.groupId = null
-                formInitialValues.artifactId = null
-                formInitialValues.version = null
-                formInitialValues.fileType = null
-                formInitialValues.fileAddress = null
-                setGoodsType("")
-                break
-            default:
-                formInitialValues.codeName = null
-                formInitialValues.codeBranch = null
-                formInitialValues.gitAuthName = null
-                formInitialValues.gitAuthId = null
-                setCodeType("")
-        }
-        setFormInitialValues({...formInitialValues})
-    }
-
     return view==="forms" ?
         <FormView
-            del={del}
-            pipelineId={pipelineId}
+            pipeline={pipeline}
+            configStore={configStore}
+            configDataStore={configDataStore}
         />
         :
          <>
-            <Gui
-                {...props}
-                del={del}
-                configStore={configStore}
-                configDataStore={configDataStore}
-                pipelineStore={pipelineStore}
-            />
-            {/*{*/}
-            {/*    isPlugin ?*/}
-            {/*        <RemoteUmdComponent*/}
-            {/*            {...props}*/}
-            {/*            point={"gui"}*/}
-            {/*            pluginStore={pluginStore}*/}
-            {/*            isModalType={true}*/}
-            {/*            extraProps={{*/}
-            {/*                pipelineStore:pipelineStore,*/}
-            {/*                configDataStore:configDataStore,*/}
-            {/*                configStore:configStore,*/}
-            {/*                del,*/}
-            {/*            }}*/}
-            {/*        />*/}
-            {/*        :null*/}
-            {/*}*/}
+            {/*<Gui*/}
+            {/*    {...props}*/}
+            {/*    configStore={configStore}*/}
+            {/*    configDataStore={configDataStore}*/}
+            {/*    pipelineStore={pipelineStore}*/}
+            {/*/>*/}
 
-            {/*{*/}
-            {/*    !getVersionInfo().expired && isPlugin?*/}
-            {/*        <RemoteUmdComponent*/}
-            {/*            {...props}*/}
-            {/*            point={"gui"}*/}
-            {/*            pluginStore={pluginStore}*/}
-            {/*            isModalType={true}*/}
-            {/*            extraProps={{*/}
-            {/*                pipelineStore:pipelineStore,*/}
-            {/*                configDataStore:configDataStore,*/}
-            {/*                configStore:configStore,*/}
-            {/*                del,*/}
-            {/*            }}*/}
-            {/*        />*/}
-            {/*        :null*/}
-            {/*}*/}
+
+             {
+                 !getVersionInfo().expired && isPlugin?
+                     <RemoteUmdComponent
+                         {...props}
+                         point={"gui"}
+                         pluginStore={pluginStore}
+                         isModalType={true}
+                         extraProps={{
+                             pipelineStore:pipelineStore,
+                             configDataStore:configDataStore,
+                             configStore:configStore,
+                         }}
+                    />
+                    :null
+            }
         </>
 }
 

@@ -1,37 +1,33 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import {Form} from "antd";
-import {inject,observer} from "mobx-react";
-import {withRouter} from "react-router";
 import NewStage from "./newStage";
+import {observer} from "mobx-react";
 import  "./formView.scss";
 import Anch from "./anch";
 
 const formView = props =>{
 
-    const {del,configDataStore,pipelineId,configStore} = props
+    const {configDataStore,configStore,pipeline} = props
 
-    const {data,setData,formInitialValues,opt,setOpt,setAddConfigVisible} = configDataStore
+    const {data,formInitialValues,opt,setOpt,setAddConfigVisible} = configDataStore
     const {configValid,enabledValid,updateConfigure,validType} = configStore
 
     const [form] = Form.useForm()
 
     useEffect(()=>{
         form && form.setFieldsValue({...formInitialValues})
-    },[formInitialValues,pipelineId])
+    },[pipeline,formInitialValues])
 
+    let timout
     useEffect(()=>{
         // 必填配置是否完善
-        pipelineId && configValid(pipelineId).then(res=>{
-            if(res.code===0){
-                const keys =res.data && Object.keys(res.data)
-                form.validateFields(keys && keys)
-                keys && keys.map(item=>{
-                    const zz = document.getElementById(item)
-                    zz && zz.classList.add("formView-validateFields")
-                })
-            }
-        })
-    },[pipelineId,enabledValid])
+        setTimeout(()=>
+            pipeline && configValid(pipeline.pipelineId).then(res=>{
+                res.code===0 &&
+                form.validateFields( res.data && Object.keys(res.data))
+        }),20)
+        return ()=>clearTimeout(timout)
+    },[pipeline,enabledValid])
 
     return(
         <div className="formView">
@@ -50,10 +46,8 @@ const formView = props =>{
                     initialValues={{authType:1}}
                 >
                     <NewStage
-                        del={del}
                         data={data}
-                        setData={setData}
-                        pipelineId={pipelineId}
+                        pipelineId={pipeline.pipelineId}
                         updateConfigure={updateConfigure}
                         validType={validType}
                     />
@@ -63,4 +57,4 @@ const formView = props =>{
     )
 }
 
-export default withRouter(inject("configDataStore","configStore")(observer(formView)))
+export default observer(formView)

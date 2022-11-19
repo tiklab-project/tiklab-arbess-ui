@@ -24,8 +24,7 @@ const ProjectSet = props =>{
 
     useEffect(()=>{
         pipelineId && setPowerType(pipeline && pipeline.pipelinePower)
-    },[pipelineId,pipeline])
-
+    },[pipelineId])
 
     const onConfirm = () =>{
         Modal.confirm({

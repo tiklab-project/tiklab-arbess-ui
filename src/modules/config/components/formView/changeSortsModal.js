@@ -6,7 +6,7 @@ import {autoHeight} from "../../../common/client/client";
 
 const ChangeSortsModal = props =>{
 
-    const {changeSortVisible,setChangeSortVisible,data,setData,updateConfigure,pipelineId} = props
+    const {changeSortVisible,setChangeSortVisible,data,updateConfigure,pipelineId} = props
 
     const [gData,setGData] = useState([])
     const [height,setHeight] = useState(0)
@@ -109,17 +109,6 @@ const ChangeSortsModal = props =>{
         }
         const newArr = [...mData]
         updateConfigure(params).then(res=>{
-            //如果改变控件，然后重新渲染data
-            if(res.code===0){
-                data && data.map(item=>{
-                    item.dataType<10 &&
-                    newArr.splice(0,0,{
-                        id:item.id,
-                        dataType:item.dataType
-                    })
-                })
-                setData([...newArr])
-            }
             if(res.code===50001){
                 message.info(res.msg)
             }

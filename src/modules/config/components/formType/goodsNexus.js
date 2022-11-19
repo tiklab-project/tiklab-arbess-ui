@@ -11,37 +11,37 @@ const GoodsNexus = props => {
     return(
         <>
             <Inputs
+                name={"groupId"}
                 placeholder={"groupId"}
                 label={"groupId"}
-                name={"groupId"}
                 mode={goodsType}
                 isValid={true}
             />
             <Inputs
+                name={"artifactId"}
                 placeholder={"artifactId"}
                 label={"artifactId"}
-                name={"artifactId"}
                 mode={goodsType}
                 isValid={true}
             />
             <Inputs
+                name={"version"}
                 placeholder={"version"}
                 label={"version"}
-                name={"version"}
                 mode={goodsType}
                 isValid={true}
             />
             <Inputs
+                name={"fileType"}
                 placeholder={"文件类型"}
                 label={"文件类型"}
-                name={"fileType"}
                 mode={goodsType}
                 isValid={true}
             />
             <Inputs
+                name={"fileAddress"}
                 placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"部署文件"}
-                name={"fileAddress"}
                 mode={goodsType}
                 isValid={true}
             />

@@ -7,9 +7,9 @@ const ScanSonarQuebe = props =>{
     return(
         <>
             <Inputs
+                name={"projectName"}
                 placeholder={"项目名称"}
                 label={"项目名称"}
-                name={"projectName"}
                 mode={41}
                 isValid={true}
             />

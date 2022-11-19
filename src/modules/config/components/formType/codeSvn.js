@@ -12,10 +12,11 @@ const CodeSvn = props =>{
     return(
         <>
             <Inputs
+                name={"codeName"}
                 placeholder={"svn地址"}
                 label={"svn地址"}
-                name={"codeName"}
                 mode={codeType}
+                isValid={true}
             />
             <FindAuth
                 type={codeType}

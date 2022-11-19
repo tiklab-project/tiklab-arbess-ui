@@ -102,7 +102,7 @@ const StructureLeftDropdown = props =>{
                     <Option key={"全部"} value={"全部"}>全部</Option>
                     {
                         pipelineUserList && pipelineUserList.map(item=>{
-                            return <Option key={item.user.id} value= {item.user.name}>{item.user && item.user.name}</Option>
+                            return <Option key={item.id} value= {item.nickname}>{item.nickname}</Option>
                         })
                     }
                 </Select>

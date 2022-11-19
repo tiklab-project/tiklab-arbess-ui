@@ -13,8 +13,10 @@ const ProjectSetAside = props =>{
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
-    const {pipelineId,setLastPath} = pipelineStore
+    const {pipeline,setLastPath} = pipelineStore
+
     const userId = getUser().userId
+    const pipelineId = pipeline.pipelineId
 
     useEffect(()=>{
         systemRoleStore.getInitProjectPermissions(userId,pipelineId, "matflow")

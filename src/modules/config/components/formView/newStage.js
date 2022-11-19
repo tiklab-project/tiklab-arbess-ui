@@ -4,7 +4,7 @@ import ChangeSortsModal from "./changeSortsModal";
 
 const NewStage = props =>{
 
-    const {data,del,updateConfigure,setData,pipelineId,validType} = props
+    const {data,updateConfigure,pipelineId,validType} = props
 
     const [changeSortVisible,setChangeSortVisible] = useState(false)
 
@@ -14,9 +14,6 @@ const NewStage = props =>{
                     id={`formView_${index}`}
                     type={item.dataType}
                     key={index}
-                    del={del}
-                    data={data}
-                    setData={setData}
                     pipelineId={pipelineId}
                     setChangeSortVisible={setChangeSortVisible}
                     updateConfigure={updateConfigure}
@@ -34,7 +31,6 @@ const NewStage = props =>{
                 changeSortVisible={changeSortVisible}
                 setChangeSortVisible={setChangeSortVisible}
                 data={data}
-                setData={setData}
                 updateConfigure={updateConfigure}
                 pipelineId={pipelineId}
             />

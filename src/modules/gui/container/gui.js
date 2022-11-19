@@ -12,13 +12,14 @@ import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const Gui = props =>{
 
-    const {pipelineStore,configDataStore,del,configStore} = props
+    const {pipelineStore,configDataStore,configStore} = props
 
-    const {pipelineId} = pipelineStore
-    const {formInitialValues,setFormInitialValues,data,codeType,setCodeType,setData} = configDataStore
+    const {pipeline} = pipelineStore
+    const {formInitialValues,data,codeType,setCodeType,setData} = configDataStore
     const {updateConfigure,configValid,enabledValid,validType} = configStore
 
     const [form] = Form.useForm()
+    const pipelineId = pipeline.pipelineId
 
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
     const [newStage,setNewStage] = useState("") // 表单详情显示
@@ -26,11 +27,11 @@ const Gui = props =>{
 
     useEffect(()=>{
         form.setFieldsValue({...formInitialValues})
-    },[formInitialValues,pipelineId])
+    },[formInitialValues,pipeline])
 
     useEffect(()=>{
         // 必填配置是否完善
-        pipelineId && configValid(pipelineId).then(res=>{
+        pipeline && configValid(pipelineId).then(res=>{
             if(res.code===0){
                 const keys =res.data && Object.keys(res.data)
                 form.validateFields(keys)
@@ -40,7 +41,7 @@ const Gui = props =>{
                 })
             }
         })
-    },[pipelineId,enabledValid,newStage])
+    },[pipeline,enabledValid,newStage])
 
 
     // 添加
@@ -124,30 +125,11 @@ const Gui = props =>{
         const newData = [...data]
         switch (type) {
             case "create":
-                if(taskType>10){
-                    newData.splice(index,0,{
-                        dataId:index,
-                        dataType:taskType
-                    })
-                }else {
-                    newData.splice(0,0,{
-                        dataId:index,
-                        dataType:taskType
-                    })
-                }
                 setNewStage(taskType)
                 setTaskFormDrawer(true)
                 break
             case "updateType":
                 setCodeType(taskType)
-                break
-            case "delete":
-                del(taskType)
-                for (let i = 0 ;i<newData.length;i++){
-                    if(newData[i].dataType === newStage){
-                        newData.splice(i,1)
-                    }
-                }
                 break
         }
         setData([...newData])
@@ -158,7 +140,6 @@ const Gui = props =>{
             value={{pipelineStore,
                 configDataStore,
                 configStore,
-                del,
                 valueChange,
                 changType,
                 addConfig,

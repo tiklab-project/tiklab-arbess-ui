@@ -83,8 +83,8 @@ const CodeGiteeOrGithub = props =>{
             <FindAuth type={codeType}/>
             <div className="formView-inputs">
                 <Form.Item
-                    label="仓库"
                     name={"codeName"}
+                    label="仓库"
                     rules={[{required:true, message:"请选择仓库"}]}
                 >
                     <Select
@@ -108,7 +108,10 @@ const CodeGiteeOrGithub = props =>{
                 </div>
             </div>
             <div className="formView-inputs">
-                <Form.Item label="分支"  name={"codeBranch"}>
+                <Form.Item
+                    name={"codeBranch"}
+                    label="分支"
+                >
                     <Select
                         disabled={prohibited}
                         bordered={fieldName === "codeBranch"}

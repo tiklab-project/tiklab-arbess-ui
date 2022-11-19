@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {Form,Input,message} from "antd";
 import {inject,observer} from "mobx-react";
 import SuffixStatus from "./suffixStatus";
@@ -72,35 +72,33 @@ const Inputs = props =>{
                 setBordered(false)
             }
             else {
-                setBordered(true)
                 setIsLoading(4)
+                setBordered(true)
             }
             setTimeout(()=>setIsLoading(1),1000)
         }
-        setBordered(false)
     }
 
     const rules = () =>{
         let rule
-        switch (name) {
-            case "codeName":
-                if(mode===5){
-                    rule =  [
-                                {required:true, message: `请输入${label}`},
-                                {pattern: validCodeSvn, message:"请输入正确的svn地址"}
-                            ]
+        if(isValid){
+            rule = [{required:true,message:`请输入${label}`}]
+            if(name==="codeName"){
+                switch (mode) {
+                    case 1:
+                    case 4:
+                        rule =  [
+                            {required:true, message: `请输入${label}`},
+                            {pattern: validCodeGit, message:"请输入正确的git地址"}
+                        ]
+                        break
+                    case 5:
+                        rule =  [
+                            {required:true, message: `请输入${label}`},
+                            {pattern: validCodeSvn, message:"请输入正确的svn地址"}
+                        ]
                 }
-                if(mode===1 || mode===4){
-                    rule =  [
-                                {required:true, message: `请输入${label}`},
-                                {pattern: validCodeGit, message:"请输入正确的git地址"}
-                            ]
-                }
-                break
-            default:
-                if(isValid){
-                    rule = [{required:true,message:`请输入${label}`}]
-                }
+            }
         }
         return rule
     }

@@ -58,6 +58,11 @@
         &-user{
             cursor: pointer;
         }
+        &-message{
+            .ant-badge{
+                color: #ffffff;
+            }
+        }
         .headers{
             &-link{
                 display: flex;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./breadcrumb.scss";
 import {Space} from "antd"
-import {LeftOutlined} from "@ant-design/icons";
+import {LeftOutlined,HomeOutlined} from "@ant-design/icons";
 
 // 面包屑
 const BreadcrumbContent = props =>{

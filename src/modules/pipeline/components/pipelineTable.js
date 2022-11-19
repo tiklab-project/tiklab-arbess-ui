@@ -83,7 +83,7 @@ const PipelineTable = props =>{
             title: "流水线名称",
             dataIndex: "pipelineName",
             key: "pipelineName",
-            width:"200px",
+            width:"40%",
             ellipsis:true,
             render:(text,record)=>{
                 return  <ListName
@@ -98,7 +98,8 @@ const PipelineTable = props =>{
             title: "最近构建信息",
             dataIndex: "lastBuildTime",
             key: "lastBuildTime",
-            width:"200px",
+            width:"30%",
+            ellipsis:true,
             render:(text,record) =>{
                 switch (record.buildStatus) {
                     case 10:
@@ -136,7 +137,7 @@ const PipelineTable = props =>{
             title: "负责人",
             dataIndex: ["user","name"],
             key: "user",
-            width:"220px",
+            width:"20%",
             ellipsis: true,
             render:(text,record) => {
                 return <Space>
@@ -149,7 +150,8 @@ const PipelineTable = props =>{
             title: "操作",
             dataIndex: "action",
             key:"action",
-            width:"200px",
+            width:"10%",
+            ellipsis:true,
             render:(text,record)=>{
                 return(
                     <>

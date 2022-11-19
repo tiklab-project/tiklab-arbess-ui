@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
-import {Popconfirm,Space,Table,Tooltip} from "antd";
+import {Space,Table} from "antd";
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import Tabs from "../../../common/tabs/tabs";
@@ -61,6 +60,8 @@ const Host = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"20%",
+            ellipsis:true,
             render:text => {
                 return  <ListName
                             text={text}
@@ -71,16 +72,22 @@ const Host = props =>{
             title:"ip地址",
             dataIndex: "ip",
             key: "ip",
+            width:"10%",
+            ellipsis:true,
         },
         {
             title:"端口",
             dataIndex: "port",
             key: "port",
+            width:"10%",
+            ellipsis:true,
         },
         {
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
+            width:"10%",
+            ellipsis:true,
             render: text => {
                 switch (text) {
                     case 1:
@@ -94,6 +101,8 @@ const Host = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"10%",
+            ellipsis:true,
             render:(text,record) => {
                 return  <Space>
                             <Profile userInfo={record.user}/>
@@ -105,6 +114,8 @@ const Host = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width:"10%",
+            ellipsis:true,
             render:text => {
                 switch (text) {
                     case 1:
@@ -118,11 +129,15 @@ const Host = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width:"15%",
+            ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
+            width:"5%",
+            ellipsis:true,
             render:(text,record) => {
                 return  <Listaction
                             edit={()=>edit(text,record)}

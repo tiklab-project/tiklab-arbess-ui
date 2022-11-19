@@ -15,6 +15,7 @@ const CodeGitOrGitlab = props =>{
                 label={"git地址"}
                 name={"codeName"}
                 mode={codeType}
+                isValid={true}
             />
             <Inputs
                 placeholder={"分支，默认为master"}

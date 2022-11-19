@@ -33,6 +33,8 @@ const Auth = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
+            width:"25%",
+            ellipsis:true,
             render:text => {
                 return  <ListName
                             text={text}
@@ -43,6 +45,8 @@ const Auth = props =>{
             title:"类型",
             dataIndex:"authType",
             key:"authType",
+            width:"20%",
+            ellipsis:true,
             render: text => {
                 switch (text) {
                     case 1:
@@ -56,6 +60,8 @@ const Auth = props =>{
             title:"创建人",
             dataIndex:["user","name"],
             key:"user",
+            width:"15%",
+            ellipsis:true,
             render:(text,record) => {
                 return  <Space>
                             <Profile userInfo={record.user}/>
@@ -64,9 +70,11 @@ const Auth = props =>{
             }
         },
         {
-            title:"权限",
+            title:"权 限",
             dataIndex:"authPublic",
             key:"authPublic",
+            width:"15%",
+            ellipsis:true,
             render:text => {
                 switch (text) {
                     case 1:
@@ -80,11 +88,15 @@ const Auth = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
+            width:"20%",
+            ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
+            width:"5%",
+            ellipsis:true,
             render:(text,record) => {
                 return  <Listaction
                             edit={()=>edit(text,record)}

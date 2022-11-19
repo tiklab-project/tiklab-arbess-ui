@@ -7,7 +7,7 @@ const Config = props =>{
 
     const {pipelineStore,configDataStore} = props
 
-    const {pipelineId,pipeline} = pipelineStore
+    const {pipeline} = pipelineStore
     const {data,setOpt} = configDataStore
 
     const [view,setView] = useState("forms")
@@ -36,7 +36,7 @@ const Config = props =>{
             <ConfigTop
                 view={view}
                 setView={setView}
-                pipelineId={pipelineId}
+                pipelineId={pipeline.pipelineId}
                 pipelineName={pipeline.pipelineName}
             />
             <ConfigView view={view}/>
