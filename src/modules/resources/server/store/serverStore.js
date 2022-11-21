@@ -41,6 +41,7 @@ export class ServerStore{
         if(data.code===0){
             this.fresh=!this.fresh
         }
+        return data
     }
 
     @action

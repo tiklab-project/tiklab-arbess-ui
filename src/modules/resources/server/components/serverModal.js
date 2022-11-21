@@ -148,14 +148,16 @@ const ServerModal = props =>{
                     </Select.Option>
                 </Select>
             </Form.Item>
-            { !ban &&
-                <Btn
-                    type={"link"}
-                    title={"新建"}
-                    icon={<PlusOutlined/>}
-                    onClick={goUrl}
-                />
-            }
+            <div style={{paddingTop:22}}>
+                { !ban &&
+                    <Btn
+                        type={"link"}
+                        title={"新建"}
+                        icon={<PlusOutlined/>}
+                        onClick={goUrl}
+                    />
+                }
+            </div>
         </Space>
     )
 

@@ -19,7 +19,7 @@ const Listname = props => {
                     {/*            {text && text.substring(0,1).toUpperCase()}*/}
                     {/*        </span>*/}
                     {/*}*/}
-                    <span className={`mf-listname-icon icon-${colors}`}>
+                    <span className={`mf-listname-icon ${colors?`mf-icon-${colors}`:"mf-icon-2"}`}>
                         {text && text.substring(0,1).toUpperCase()}
                     </span>
                     <span className={`${onClick?"mf-listname-name":""}`}>

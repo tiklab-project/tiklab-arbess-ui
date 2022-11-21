@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
-import {privilegeStores, SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
+import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
 import {SettingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import "./projectSetAside.scss";
@@ -19,13 +19,13 @@ const ProjectSetAside = props =>{
     const pipelineId = pipeline.pipelineId
 
     useEffect(()=>{
-        systemRoleStore.getInitProjectPermissions(userId,pipelineId, "matflow")
-    },[])
-
-    useEffect(()=>{
         setLastPath(path.substring(path.lastIndexOf('/') + 1))
         setNav(path)
     },[path])
+
+    useEffect(()=>{
+        pipelineId && systemRoleStore.getInitProjectPermissions(userId,pipelineId, "matflow")
+    },[pipelineId])
 
     // 侧边流水线设置的第二级导航
     const secondRouter = [
@@ -45,12 +45,12 @@ const ProjectSetAside = props =>{
             enCode:"pipeline_auth",
         }
     ]
-    
-    const renderRouter = item => {
-        return(
-            <PrivilegeProjectButton key={item.key} code={item.enCode} domainId={pipelineId} {...props}>
-                <div className={`projectSet-item ${nav===item.key?"projectSet-select":""} `}
-                     onClick={()=>props.history.push(item.key)}
+
+    const navContent = item =>{
+        return <div
+                    key={item.key}
+                    className={`projectSet-item ${nav===item.key?"projectSet-select":""} `}
+                    onClick={()=>props.history.push(item.key)}
                 >
                     <span className="projectSet-item-icon">
                         <SettingOutlined/>
@@ -58,15 +58,19 @@ const ProjectSetAside = props =>{
                     <span className="projectSet-item-label">
                         {item.label}
                     </span>
-                </div>
-            </PrivilegeProjectButton>
-        )
+             </div>
+    }
+    
+    const renderRouter = item => {
+        return  <PrivilegeProjectButton key={item.key} code={item.enCode} domainId={pipelineId}>
+                    {navContent(item)}
+                </PrivilegeProjectButton>
     }
 
     return(
         <div className="projectSet-aside">
             {secondRouter.map(item=>{
-                    return renderRouter(item)
+                    return pipeline && pipeline.pipelinePower===1?navContent(item):renderRouter(item)
             })}
         </div>
     )

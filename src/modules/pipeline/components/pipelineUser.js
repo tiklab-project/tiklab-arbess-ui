@@ -43,14 +43,14 @@ const PipelineUser = props =>{
             title:"昵称",
             dataIndex:"nickname",
             key:"nickname",
-            width:"150px",
+            width:"40%",
             ellipsis:true,
         },
         {
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"200px",
+            width:"30%",
             ellipsis:true,
             render:(text,record)=>{
                 return <Space>
@@ -60,15 +60,11 @@ const PipelineUser = props =>{
             }
         },
         {
-            title:"",
-            dataIndex:"",
-            key:"",
-            width:"200px",
-        },
-        {
             title:"权限",
             dataIndex:"power",
             key:"power",
+            width:"25",
+            ellipsis:true,
             render: (text,record)=>(
                 <Select
                     defaultValue={record.id===userId ?"1":"2"}
@@ -87,7 +83,8 @@ const PipelineUser = props =>{
             title:"操作",
             dataIndex:"action",
             key:"action",
-            align:"center",
+            width:"5%",
+            ellipsis:true,
             render: (text,record) => {
                 if (record.id !== userId) {
                     return <Tooltip title="移出用户">

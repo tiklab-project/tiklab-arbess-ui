@@ -10,34 +10,40 @@
         &:not(:last-child){
             border-bottom: 1px solid var(--tiklab-gray-200);
         }
-        &-top{
+        .pipelineReDel-li-top{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             padding: 10px 20px;
             cursor: pointer;
             &:hover{
                 background: #f4f4f4;
             }
         }
-        &-select{
+        .pipelineReDel-li-icon{
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+        .pipelineReDel-li-title{
+            flex-grow: 1;
+        }
+        .pipelineReDel-li-desc{
+            font-size: var(--tiklab-font-13);
+            color: var(--tiklab-gray-500);
+        }
+        .pipelineReDel-li-down{
+            align-self: center;
+        }
+        .pipelineReDel-li-select{
             background: #f4f4f4;
         }
-        &-bottom{
-            padding-left: 20px;
-            margin: 10px 0;
-        
+        .pipelineReDel-li-bottom{
+            padding:10px 20px;
         }
-        &-none{
+        .pipelineReDel-li-none{
             display: none;
-        }
-        &-title{
-            &-name{
-                padding-left: 10px;
-            }
-        }
-        .pipeline_update{
-            width: 57%;
         }
     }
 }

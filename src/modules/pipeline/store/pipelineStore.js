@@ -129,10 +129,9 @@ export class PipelineStore {
         }
         return new Promise((resolve, reject) => {
             UpdatePipeline(params).then(res=>{
-                console.log( res)
+                this.findAllPipelineStatus()
                 resolve(res)
             }).catch(error=>{
-                console.log(error)
                 reject()
             })
         })

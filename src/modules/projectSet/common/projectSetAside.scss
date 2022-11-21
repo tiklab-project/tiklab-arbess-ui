@@ -1,11 +1,12 @@
 .projectSet{
     display: flex;
     width: 100%;
-    height: calc(100vh - 48px);
-    overflow: hidden;
+    height: 100%;
     &-aside{
-        width: 180px;
-        min-width: 180px;
+        height: 100%;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 180px;
         background: var(--mf-backdrop-color);
     }
     &-item{
@@ -24,8 +25,8 @@
         border-left: 3px solid var(--tiklab-blue);
     }
     &-content{
-        width: 100%;
-        margin: 0 auto;
+        flex: 1;
+        height: 100%;
         overflow: auto;
     }
 }

@@ -11,7 +11,7 @@ import {AUTHORIZE_STORE,AuthorizeStore} from "./modules/config/store/authorizeSt
 import {AUTH_STORE,AuthStore} from "./modules/resources/auth/store/authStore";
 import {HOST_STORE,HostStore} from "./modules/resources/host/store/hostStore";
 import {SERVER_STORE,ServerStore} from "./modules/resources/server/store/serverStore";
-import {THIRDADDRESS_STORE,ThirdAddressStore} from "./modules/system/thirdAddress/store/thirdAddressStore";
+import {THIRDADDRESS_STORE,ThirdAddressStore} from "./modules/resources/thirdAddress/store/thirdAddressStore";
 
 import {createContext} from "react";
 

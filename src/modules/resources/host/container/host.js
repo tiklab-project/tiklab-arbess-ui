@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {Space,Table} from "antd";
+import {message,Space,Table} from "antd";
+import {Profile} from "tiklab-eam-ui";
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import Tabs from "../../../common/tabs/tabs";
 import HostBtn from "../component/hostBtn";
-import "../component/host.scss";
+import "../../common/resources.scss";
 import EmptyText from "../../../common/emptyText/emptyText";
 import ListName from "../../../common/list/listname";
-import {Profile} from "tiklab-eam-ui";
 import Listaction from "../../../common/list/listaction";
 
 const Host = props =>{
@@ -32,7 +32,9 @@ const Host = props =>{
     }
 
     const del = (text,record) =>{
-        deleteAuthHost(record.hostId)
+        deleteAuthHost(record.hostId).then(res=>{
+            res.code===0 && message.info("删除成功")
+        })
     }
 
 
@@ -148,17 +150,17 @@ const Host = props =>{
     ]
 
     return(
-        <div className="code home-limited mf">
-            <div className="code-upper">
+        <div className="resources home-limited mf">
+            <div className="resources-upper">
                 <BreadcrumbContent firstItem={"主机配置"} />
                 <HostBtn/>
             </div>
-            <div className="code-content">
-                <Tabs
-                    tabLis={lis}
-                    type={activeTab}
-                    onClick={clickTab}
-                />
+            <Tabs
+                tabLis={lis}
+                type={activeTab}
+                onClick={clickTab}
+            />
+            <div className="resources-content">
                 <Table
                     columns={column}
                     dataSource={hostList}

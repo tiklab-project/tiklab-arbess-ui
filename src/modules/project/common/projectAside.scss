@@ -1,16 +1,16 @@
 .project{
     display: flex;
     width: 100%;
-    height: calc(100vh - 48px);
+    height: 100%;
     .aside{
-        left: 0;
-        top: 48px;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        flex-basis: 80px;
         height: 100%;
         background: var(--mf-sider-color);
-        padding-bottom: 10px;
         .content{
-            width: 80px;
-            height: calc(100% - 53px);
+            flex-grow: 1;
         }
         .aside_chang{
             display: flex;
@@ -53,13 +53,12 @@
     &-sys{
         width: 100%;
         text-align: center;
-        padding-top: 15px;
+        padding: 15px 0;
         cursor: pointer;
     }
     &-content{
-        width: 100%;
+        flex: 1;
         height: 100%;
-        overflow: auto;
     }
     .aside_content_icon{
         font-size: var(--tiklab-icon-size-16);
@@ -84,7 +83,6 @@
         &-group{
             max-height: 500px;
             overflow: auto;
-            padding-bottom: 10px;
         }
         &-item{
             padding: 0 var(--tiklab-padding-item);
@@ -105,30 +103,8 @@
             height: 25px;
             line-height: 25px;
             text-align: center;
-            background: #6da5f7;
             margin-right: 15px;
             border-radius: 3px;
         }
-    }
-}
-
-.icon{
-    &-0{
-        background: #f3caca;
-    }
-    &-1{
-        background: #cadbf3;
-    }
-    &-2{
-        background: #e8eaf6;
-    }
-    &-3{
-        background: #ffebee;
-    }
-    &-4{
-        background: #deedd7;
-    }
-    &-5{
-        background: #caf3ef;
     }
 }

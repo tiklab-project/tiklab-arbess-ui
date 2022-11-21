@@ -123,7 +123,7 @@ const SwitchType = props =>{
                     }
                 })
                 setData([...data])
-                del(showType,configDataStore)
+                del(item.type,configDataStore)
             }
             setVisible(false)
         })

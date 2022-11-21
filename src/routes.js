@@ -6,6 +6,7 @@ const Index=AsyncComponent(()=>import("./modules/portal/portal"))
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
+const Wechat=AsyncComponent(()=>import("./modules/login/wechat"))
 
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
@@ -43,12 +44,12 @@ const System=AsyncComponent(()=>import("./modules/system/common/system"))
 const Auth=AsyncComponent(()=>import("./modules/resources/auth/container/auth"))
 const Host=AsyncComponent(()=>import("./modules/resources/host/container/host"))
 const Server=AsyncComponent(()=>import("./modules/resources/server/container/server"))
+const ThirdAddress=AsyncComponent(()=>import("./modules/resources/thirdAddress/cotainer/thirdAddress"))
 
 /* 系统设置 -- 列表 */
 
 const Envi=AsyncComponent(()=>import("./modules/system/setting/container/envi"))
 const Info=AsyncComponent(()=>import("./modules/system/setting/container/info"))
-const ThirdAddress=AsyncComponent(()=>import("./modules/system/thirdAddress/cotainer/thirdAddress"))
 
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 
@@ -95,6 +96,11 @@ const routers=[
     {
         path:"/logout",
         component:Logout,
+    },
+    {
+        path: "/project",
+        exact:true,
+        component:Wechat,
     },
     {
         path:"/index",

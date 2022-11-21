@@ -45,22 +45,20 @@
             margin: 0 10px;
             &:hover{
                 background: rgba(255, 255, 255, 0.4);
+                border-radius: 4px;
             }
         }
         &-icon{
             font-size: var(--tiklab-icon-size-22);
             cursor: pointer;
             color: #ffffff;
-            &:hover{
-                background: rgba(255, 255, 255, 0.4);
-            }
         }
         &-user{
             cursor: pointer;
         }
         &-message{
             .ant-badge{
-                color: #ffffff;
+                color: #fff !important;
             }
         }
         .headers{
@@ -87,7 +85,6 @@
     }
     &-content{
         height: var(--mf-content-height);
-        overflow: auto;
     }
 }
 

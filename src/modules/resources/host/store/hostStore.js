@@ -51,6 +51,7 @@ export class HostStore {
         if(data.code===0){
             this.fresh=!this.fresh
         }
+        return data
     }
 
     @action
@@ -59,6 +60,7 @@ export class HostStore {
         if(data.code===0){
             this.fresh=!this.fresh
         }
+        return data
     }
 
 

@@ -34,7 +34,7 @@ module.exports = merge(baseWebpackConfig, {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
-            title:"matflow",
+            title:"MatFlow",
             template: path.resolve(__dirname, "./public/index.template.html"),
             hash: false,
             filename: "index.html",

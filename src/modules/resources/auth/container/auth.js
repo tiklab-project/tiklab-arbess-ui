@@ -1,12 +1,11 @@
-import React,{useState,useEffect} from "react";
-import {Popconfirm,Space,Table,Tooltip} from "antd";
-import {EditOutlined,DeleteOutlined} from "@ant-design/icons";
+import React,{useEffect} from "react";
+import {Space,Table,message} from "antd";
 import {inject,observer} from "mobx-react";
+import {Profile} from "tiklab-eam-ui";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../../common/emptyText/emptyText";
 import AuthBtn from "../components/authBtn";
-import "../components/auth.scss";
-import {Profile} from "tiklab-eam-ui";
+import "../../common/resources.scss";
 import ListName from "../../../common/list/listname";
 import Listaction from "../../../common/list/listaction";
 
@@ -25,7 +24,9 @@ const Auth = props =>{
     }
 
     const del = (text,record) => {
-        deleteAuth(record.authId)
+        deleteAuth(record.authId).then(res=>{
+            res.code===0 && message.info("删除成功")
+        })
     }
 
     const commonColumns = [
@@ -107,12 +108,12 @@ const Auth = props =>{
     ]
 
     return(
-        <div className="auth home-limited mf">
-            <div className="auth-upper">
+        <div className="resources home-limited mf">
+            <div className="resources-upper">
                 <BreadcrumbContent firstItem={"认证配置"}/>
                 <AuthBtn/>
             </div>
-            <div className="auth-content">
+            <div className="resources-content">
                 <Table
                     columns={commonColumns}
                     dataSource={authList}

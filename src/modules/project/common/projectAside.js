@@ -68,7 +68,7 @@ const ProjectAside = props =>{
     // 切换项目菜单列表
     const pipelineMenu = item =>{
         return  <div onClick={()=>{changePipeline(item)}} key={item.pipelineId} className="pipeline-opt-item">
-                    <span className={`pipeline-opt-icon icon-${item.color}`}>
+                    <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
                         {item.pipelineName.substring(0,1).toUpperCase()}
                     </span>
                     <span className="pipeline-opt-name">
@@ -116,7 +116,7 @@ const ProjectAside = props =>{
                      <div className="aside_chang"
                          onClick={(e)=>e.preventDefault()}
                      >
-                          <span className={`dropdowns_icon icon-${pipeline.color}`}>
+                          <span className={`dropdowns_icon mf-icon-${pipeline.color}`}>
                              {pipeline && pipeline.pipelineName.substring(0,1).toUpperCase()}
                          </span>
                          <span>

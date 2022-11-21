@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
 import {Profile} from "tiklab-eam-ui";
-import {Space,Table} from "antd"
+import {message,Space,Table} from "antd"
 import {inject,observer} from "mobx-react";
-import "../components/server.scss";
+import "../../common/resources.scss";
 import EmptyText from "../../../common/emptyText/emptyText";
 import Tabs from "../../../common/tabs/tabs";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
@@ -32,7 +32,9 @@ const Server = props =>{
     }
 
     const del = (text,record) =>{
-        deleteAuthServer(record.serverId)
+        deleteAuthServer(record.serverId).then(res=>{
+            res.code===0 && message.info("删除成功")
+        })
     }
 
     const lis = [
@@ -101,6 +103,7 @@ const Server = props =>{
             dataIndex:"type",
             key:"type",
             width:"20%",
+            ellipsis:true,
             render:text => {
                 switch (text) {
                     case 2:
@@ -127,6 +130,7 @@ const Server = props =>{
             dataIndex:"authPublic",
             key:"authPublic",
             width:"15%",
+            ellipsis:true,
             render:text => authPublic(text)
         },
         {
@@ -134,12 +138,14 @@ const Server = props =>{
             dataIndex:"createTime",
             key:"createTime",
             width:"15%",
+            ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
             width:"5%",
+            ellipsis:true,
             render:(text,record) => action(text,record)
         }
     ]
@@ -175,6 +181,7 @@ const Server = props =>{
             dataIndex:"authPublic",
             key:"authPublic",
             width:"15%",
+            ellipsis:true,
             render:text => authPublic(text)
         },
         {
@@ -182,12 +189,14 @@ const Server = props =>{
             dataIndex:"createTime",
             key:"createTime",
             width:"15%",
+            ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
             width:"5%",
+            ellipsis:true,
             render:(text,record) => action(text,record)
         }
     ]
@@ -271,17 +280,17 @@ const Server = props =>{
     }
 
     return(
-        <div className="server home-limited mf">
-            <div className="server-upper">
+        <div className="resources home-limited mf">
+            <div className="resources-upper">
                 <BreadcrumbContent firstItem={"服务配置"} />
                 <ServerBtn/>
             </div>
-            <div className="server-content">
-                <Tabs
-                    tabLis={lis}
-                    type={activeTab}
-                    onClick={clickServerType}
-                />
+            <Tabs
+                tabLis={lis}
+                type={activeTab}
+                onClick={clickServerType}
+            />
+            <div className="resources-content">
                 <Table
                     columns={columns(activeTab)}
                     dataSource={authServerList}

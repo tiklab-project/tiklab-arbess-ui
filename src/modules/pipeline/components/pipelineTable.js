@@ -59,7 +59,7 @@ const PipelineTable = props =>{
             pipelineStartStructure(params).then(res=>{
                 if(res.data === 1){
                     // setFresh(!fresh)
-                    setTimeout(()=>setFresh(!fresh),1000)
+                    setTimeout(()=>setFresh(!fresh),500)
                 }
             })
         }else {

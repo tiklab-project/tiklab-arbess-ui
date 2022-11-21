@@ -19,7 +19,7 @@ const CodeSvn = props =>{
                 isValid={true}
             />
             <FindAuth
-                type={codeType}
+                type={5}
             />
         </>
     )

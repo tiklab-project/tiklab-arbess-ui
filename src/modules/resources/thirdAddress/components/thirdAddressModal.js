@@ -1,10 +1,10 @@
 import React,{useEffect} from "react";
-import {Modal,Form,Select,Input} from "antd";
+import {Modal, Form, Select, Input, message} from "antd";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 const ThirdAddressModal = props =>{
 
-    const {visible,setVisible,formValue,createAuthorize,updateAuthorize,fresh,setFresh} = props
+    const {visible,setVisible,formValue,createAuthorize,updateAuthorize} = props
 
     const [form] = Form.useForm()
 
@@ -26,18 +26,19 @@ const ThirdAddressModal = props =>{
                 callbackUrl:value.callbackUrl,
             }
             updateAuthorize(params).then(res=>{
-                shua(res)
+                remind(res,"添加")
             })
         }else {
             createAuthorize(value).then(res=>{
-                shua(res)
+                remind(res,"添加")
             })
         }
         setVisible(false)
     }
-    const shua = data =>{
+
+    const remind = (data,info) => {
         if(data.code===0){
-            setFresh(!fresh)
+            message.info(`${info}成功`)
         }
     }
 

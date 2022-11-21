@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import Btn from "../../../common/btn/btn";
-import {Modal,Form,Input} from "antd";
+import {Modal, Form, Input, message} from "antd";
 import AuthType from "../../common/authType";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
@@ -34,7 +34,9 @@ const AuthModal = props =>{
     const onOk = () =>{
         form.validateFields().then((values) => {
             if(formValue===""){
-                createAuth(values)
+                createAuth(values).then(res=>{
+                    remind(res,"添加")
+                })
             }else {
                 const param = {
                     authId:formValue.authId,
@@ -45,10 +47,18 @@ const AuthModal = props =>{
                     password:values.password,
                     privateKey:values.privateKey,
                 }
-                updateAuth(param)
+                updateAuth(param).then(res=>{
+                    remind(res,"修改")
+                })
             }
             setVisible(false)
         })
+    }
+
+    const remind = (data,info) => {
+        if(data.code===0){
+            message.info(`${info}成功`)
+        }
     }
 
     const modalFooter = (

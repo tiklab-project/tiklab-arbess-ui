@@ -8,11 +8,15 @@ import {
 
 export class ThirdAddressStore {
 
-    @observable authList = []
+    @observable thirdList = []
 
     @action
     createAuthorize = async value =>{
-        return await CreateThirdAddress(value)
+        const data = await CreateThirdAddress(value)
+        if(data.code===0){
+            this.findAllAuthorize()
+        }
+        return data
     }
 
     @action
@@ -24,19 +28,31 @@ export class ThirdAddressStore {
             clientSecret:value.clientSecret,
             callbackUrl:value.callbackUrl,
         }
-        return await UpdateThirdAddress(params)
+        const data = await UpdateThirdAddress(params)
+        if(data.code===0){
+            this.findAllAuthorize()
+        }
+        return data
     }
 
     @action
     deleteAuthorize = async value =>{
         const params = new FormData()
         params.append("authorizeId",value)
-        return await DeleteThirdAddress(params)
+        const data =  await DeleteThirdAddress(params)
+        if(data.code===0){
+            this.findAllAuthorize()
+        }
+        return data
     }
 
     @action
     findAllAuthorize = async value =>{
-        return await FindAllThirdAddress(value)
+        const data = await FindAllThirdAddress()
+        if(data.code===0 && data.data){
+            this.thirdList = data.data
+        }
+        return data
     }
 
 }

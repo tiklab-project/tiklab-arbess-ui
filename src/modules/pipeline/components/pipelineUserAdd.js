@@ -28,6 +28,7 @@ const PipelineUserAdd = props =>{
     }
 
     const onOk = () => {
+        // 所有id组成数组
         const newArr = addUser.map(item=>item.id)
 
         // yUserList（已选择） 添加
@@ -37,6 +38,8 @@ const PipelineUserAdd = props =>{
         setNUserList(nUserList.filter(item=>!newArr.includes(item.id)))
         setVisible(false)
     }
+
+
     
     const modalFooter = (
         <>
@@ -55,10 +58,17 @@ const PipelineUserAdd = props =>{
 
     const columns = [
         {
+            title:"昵称",
+            dataIndex:"nickname",
+            key:"nickname",
+            width:"25%",
+            ellipsis:true,
+        },
+        {
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"200px",
+            width:"25%",
             ellipsis:true,
             render:(text,record)=>{
                 return <Space>
@@ -68,21 +78,18 @@ const PipelineUserAdd = props =>{
             }
         },
         {
-            title:"昵称",
-            dataIndex:"nickname",
-            key:"nickname",
-            width:"200px",
-            ellipsis:true,
-        },
-        {
             title:"手机号",
             dataIndex:"phone",
             key:"phone",
+            width:"25%",
+            ellipsis:true,
         },
         {
             title:"邮箱",
             dataIndex:"email",
             key:"email",
+            width:"25%",
+            ellipsis:true,
         },
     ]
 

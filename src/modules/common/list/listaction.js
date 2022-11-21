@@ -18,7 +18,7 @@ const Listaction = props =>{
                             style={{marginTop:100}}
                             title="你确定删除吗"
                             onConfirm={del}
-                            kText="确定"
+                            okText="确定"
                             cancelText="取消"
                         >
                             <span className="del">

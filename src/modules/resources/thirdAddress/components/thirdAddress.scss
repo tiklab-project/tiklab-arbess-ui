@@ -1,7 +1,11 @@
-.auth{
-    &-upper{
+.sysAuth{
+    .sysAuth-upper{
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
+    .sysAuth-content{
+        padding-top: 10px;
+    }
 }
+

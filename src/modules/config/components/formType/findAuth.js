@@ -22,7 +22,6 @@ const FindAuth = props =>{
     const [bordered,setBordered] = useState(false)
     const [isLoading,setIsLoading] = useState(1)
 
-
     // 存储authId
     const setAuthId = key =>{
         const zz = Math.floor(type/10)

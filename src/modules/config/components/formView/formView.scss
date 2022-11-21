@@ -8,39 +8,29 @@
         top: 62px;
         background: var(--mf-backdrop-color);
         z-index: 9;
-        padding-top: 10px;
+        padding-top: 5px;
         &-content{
             display: flex;
-            border-radius: 4px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .anch-item{
             height: 45px;
             line-height: 45px;
+            border-bottom: 1px solid #dedede;
+        }
+        .anch-item{
             cursor: pointer;
             font-size: var(--tiklab-font-16);
             padding: 0 10px;
-            background: #fafafa;
             outline: none;
-            &:not(:last-child){
-                //margin-right: 25px;
+            &:hover{
+                color: var(--tiklab-blue);
             }
         }
         .anch-plus{
             padding: 14px 10px 0;
             font-size: 22px;
-            &:hover{
-                color: var(--tiklab-blue);
-            }
-        }
-        .anch-pluba{
-            background: #ffffff;
-            border-radius: 4px 4px 0 0;
         }
         .anch-select{
             border-bottom: 3px solid var(--tiklab-blue);
             color: var(--tiklab-blue);
-            background: #ffffff;
             border-radius: 4px 4px 0 0;
         }
     }

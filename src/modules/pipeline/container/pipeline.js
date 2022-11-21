@@ -54,10 +54,10 @@ const Pipeline = props =>{
     }
 
     return(
-        <div className="pipeline home-limited mf">
-            <div className="pipeline-top pipeline-flex">
-                <BreadcrumbContent firstItem={"流水线"}/>
-                <div className="pipeline-top-r">
+        <div className="pipeline">
+            <div className="pipeline-content home-limited mf">
+                <div className="pipeline-top pipeline-flex">
+                    <BreadcrumbContent firstItem={"流水线"}/>
                     <Btn
                         onClick={onClick}
                         type={"primary"}
@@ -65,34 +65,32 @@ const Pipeline = props =>{
                         icon={<PlusOutlined/>}
                     />
                 </div>
-            </div>
-            <div className="pipeline-type">
-                <div className="pipeline-tabs ">
+                <div className="pipeline-type">
                     <Tabs
                         type={listType}
                         tabLis={lis}
                         onClick={clickType}
                     />
+                    <div className="pipeline-type-input">
+                        <Input
+                            placeholder="流水线名称"
+                            onChange={onChangeSearch}
+                            prefix={<SearchOutlined />}
+                            style={{ width: 200 }}
+                        />
+                    </div>
                 </div>
-                <div className="pipeline-type-input">
-                    <Input
-                        placeholder="流水线名称"
-                        onChange={onChangeSearch}
-                        prefix={<SearchOutlined />}
-                        style={{ width: 200 }}
-                    />
-                </div>
+
+                <PipelineTable
+                    {...props}
+                    pipelineStore={pipelineStore}
+                />
+                <PipelineAdd
+                    {...props}
+                    addPipelineVisible={addPipelineVisible}
+                    setAddPipelineVisible={setAddPipelineVisible}
+                />
             </div>
-            
-            <PipelineTable
-                {...props}
-                pipelineStore={pipelineStore}
-            />
-            <PipelineAdd
-                {...props}
-                addPipelineVisible={addPipelineVisible}
-                setAddPipelineVisible={setAddPipelineVisible}
-            />
         </div>
     )
 }

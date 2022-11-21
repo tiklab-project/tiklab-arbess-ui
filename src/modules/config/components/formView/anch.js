@@ -36,7 +36,7 @@ const Anch = props =>{
                     })
                 }
                 <div
-                    className={`anch-item anch-plus ${data && data.length<1?"anch-pluba":""}`}
+                    className={`anch-item anch-plus`}
                     onClick={()=>setAddConfigVisible(true)}
                 >
                     <PlusOutlined />

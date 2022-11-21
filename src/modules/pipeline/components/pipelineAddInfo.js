@@ -57,31 +57,30 @@ const PipelineAddInfo = props =>{
         if(set){
             const params={
                 pipelineId:pipelineId,
-                pipelineName:value.pipelineName,
+                pipelineName:value.pipelineName===""?pipeline.pipelineName:value.pipelineName,
                 pipelinePower:powerType
             }
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
-                    message.info("更新成功")
-                    pipeline.pipelineName = value.pipelineName
+                    value.pipelineName!=="" && (pipeline.pipelineName = value.pipelineName)
                     props.history.push(`/index/task/${pipelineId}/survey`)
+                    message.info("更新成功")
                 }
             })
         }else {
             const params = {
-                pipelineType: templateType===0? 1:templateLis[templateType-1].type,
+                pipelineType: templateType===0 ? 1:templateLis[templateType-1].type,
                 pipelineName: value.pipelineName,
                 pipelinePower: powerType,
                 userList: member
             }
             createPipeline(params).then(res => {
                 if (res.code === 0 && res.data) {
-                    message.info("创建成功")
                     props.history.push(`/index/task/${res.data}/config`)
+                    message.info("创建成功")
                 } else {
                     message.error("创建失败")
                 }
-                form.resetFields()
             })
         }
     }
@@ -137,8 +136,63 @@ const PipelineAddInfo = props =>{
         </div>
     }
 
-    const style1 = {
-        "width":416
+    const rules = set => {
+        let rule
+        if(set){
+            rule = [
+                {
+                    pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
+                    message: "流水线名称不能包含非法字符，如&,%，&，#……等",
+                },
+                {
+                    type: "string",
+                    max: 20,
+                    message:"流水线名称过长"
+                },
+                ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                        let nameArray = []
+                        if(pipelineList){
+                            const name = pipelineList && pipelineList.map(item=>item.pipelineName)
+                            nameArray = name.filter(item=>item!==pipeline.pipelineName)
+                        }
+                        if (nameArray.includes(value)) {
+                            return Promise.reject("名称已经存在");
+                        }
+                        return Promise.resolve()
+                    },
+
+                })
+            ]
+        }
+        if(!set){
+            rule = [
+                {required:true,message:"请输入名称"},
+                {
+                    pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
+                    message: "流水线名称不能包含非法字符，如&,%，&，#……等",
+                },
+                {
+                    type: "string",
+                    max: 20,
+                    message:"流水线名称过长"
+                },
+                ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                        let nameArray = []
+                        if(pipelineList){
+                            nameArray = pipelineList && pipelineList.map(item=>item.pipelineName)
+                        }
+                        if (nameArray.includes(value)) {
+                            return Promise.reject("名称已经存在");
+                        }
+                        return Promise.resolve()
+                    },
+
+                }),
+            ]
+        }
+        return rule
     }
 
     return(
@@ -147,41 +201,16 @@ const PipelineAddInfo = props =>{
                 form={form}
                 autoComplete="off"
                 layout={"vertical"}
+                initialValues={{pipelineName:pipeline && pipeline.pipelineName}}
             >
                 <Form.Item
                     label={"流水线名称"}
                     name="pipelineName"
-                    rules={[
-                        {required:true,message:""},
-                        {
-                            pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
-                            message: "流水线名称不能包含非法字符，如&,%，&，#……等",
-                        },
-                        {
-                            type: "string",
-                            max: 20,
-                            message:"流水线名称过长"
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(rule, value) {
-                                if (!value) {
-                                    return Promise.reject("请输入名称")
-                                }
-                                let nameArray = []
-                                if(pipelineList){
-                                    nameArray = pipelineList && pipelineList.map(item=>item.pipelineName);
-                                }
-                                if (nameArray.includes(value)) {
-                                    return Promise.reject("名称已经存在");
-                                }
-                                return Promise.resolve()
-                            },
-                        }),
-                    ]}
+                    rules={rules(set)}
                 >
                     <Input
                         allowClear
-                        style={set?style1: {background:"#fff"}}
+                        style={set? {width:612}: {background:"#fff"}}
                         bordered={set}
                     />
                 </Form.Item>
@@ -211,6 +240,8 @@ const PipelineAddInfo = props =>{
                             .validateFields()
                             .then((values) => {
                                 onOk(values)
+                                form.resetFields()
+
                             })
                     }}
                     title={"确认"}
@@ -235,6 +266,8 @@ const PipelineAddInfo = props =>{
                                 .validateFields()
                                 .then((values) => {
                                     onOk(values)
+                                    form.resetFields()
+
                                 })
                         }}
                         title={"确认"}

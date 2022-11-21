@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Modal, Form, Input, Tooltip, Select} from "antd";
+import {Modal, Form, Input, Tooltip, Select, message} from "antd";
 import Btn from "../../../common/btn/btn";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import AuthType from "../../common/authType";
@@ -39,7 +39,9 @@ const CodeModal = props =>{
     const onOk = () =>{
         form.validateFields().then((values) => {
             if(formValue===""){
-                createAuthHost(values)
+                createAuthHost(values).then(res=>{
+                    remind(res,"添加")
+                })
             }else {
                 const params = {
                     hostId:formValue.hostId,
@@ -53,10 +55,18 @@ const CodeModal = props =>{
                     password:values.password,
                     privateKey:values.privateKey,
                 }
-                updateAuthHost(params)
+                updateAuthHost(params).then(res=>{
+                    remind(res,"修改")
+                })
             }
             setVisible(false)
         })
+    }
+
+    const remind = (data,info) => {
+        if(data.code===0){
+            message.info(`${info}成功`)
+        }
     }
 
     const changHostType = value =>{
