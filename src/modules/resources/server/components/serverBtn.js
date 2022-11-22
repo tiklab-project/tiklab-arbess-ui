@@ -8,8 +8,8 @@ const ServerBtn = props =>{
 
     const {serverStore,authorizeStore,isConfig,type} = props
 
-    const {modalVisible,setModalVisible,createAuthServer,formValue,setFormValue,updateAuthServer} = serverStore
-    const {findCode,findState} = authorizeStore
+    const {modalVisible,setModalVisible,createAuthServer,formValue,setFormValue,updateAuthServer,callbackUrl} = serverStore
+    const {findCode,findAccessToken} = authorizeStore
 
     const btnClick = is =>{
         setFormValue(is)
@@ -40,9 +40,10 @@ const ServerBtn = props =>{
                 formValue={formValue}
                 updateAuthServer={updateAuthServer}
                 findCode={findCode}
-                findState={findState}
                 isConfig={isConfig}
                 type={type}
+                callUrl={callbackUrl}
+                findAccessToken={findAccessToken}
             />
         </>
     )

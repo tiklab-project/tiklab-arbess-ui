@@ -33,12 +33,3 @@
         }
     }
 }
-
-/* 部署应用源文件地址 的匹配提示 */
-.deployTargetAddress{
-    position: absolute;
-    top: 30px;
-    left: 130px;
-    font-size: var(--tiklab-font-13);
-    color: var(--tiklab-gray-500);
-}

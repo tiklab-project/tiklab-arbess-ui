@@ -25,9 +25,14 @@
             line-height: 16px;
             margin-right: 10px;
             margin-top: 4px;
+            font-weight: var(--tiklab-font-weight-bold);
+
+        }
+        .pipelineReDel-li-center{
+            flex-grow: 1;
         }
         .pipelineReDel-li-title{
-            flex-grow: 1;
+            font-weight: var(--tiklab-font-weight-bold);
         }
         .pipelineReDel-li-desc{
             font-size: var(--tiklab-font-13);

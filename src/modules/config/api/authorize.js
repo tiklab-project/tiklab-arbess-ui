@@ -36,11 +36,3 @@ export function  FindBranch (data){
     })
 }
 
-//授权--监听授权状态
-export function  FindState (data){
-    return serviceLoc.request({
-        url:"/codeAuthorize/findState",
-        method: "post",
-        data
-    })
-}

@@ -31,3 +31,12 @@ export function FindAllAuthServerList(data) {
         data
     })
 }
+
+// 效验回调地址
+export function CallbackUrl(data) {
+    return serviceLoc.request({
+        url:"/codeAuthorize/callbackUrl",
+        method:"post",
+        data
+    })
+}

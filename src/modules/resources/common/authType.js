@@ -5,12 +5,6 @@ const AuthType = props =>{
 
     return(
         <>
-            <Form.Item name="authPublic" label="认证权限">
-                <Select>
-                    <Select.Option value={1}>全局</Select.Option>
-                    <Select.Option value={2}>私有</Select.Option>
-                </Select>
-            </Form.Item>
             <Form.Item label="认证类型" name="authType">
                 <Select>
                     <Select.Option value={1}>username&password</Select.Option>

@@ -46,6 +46,7 @@ const CodeGiteeOrGithub = props =>{
         }
         updateConfigure(params).then(res=>{
             if(res.code===0){
+                formInitialValues[key]=value
                 setIsLoading(3)
             }else {
                 setIsLoading(4)

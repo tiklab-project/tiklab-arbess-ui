@@ -77,6 +77,9 @@ const Inputs = props =>{
             }
             setTimeout(()=>setIsLoading(1),1000)
         }
+        else {
+            setBordered(false)
+        }
     }
 
     const rules = () =>{

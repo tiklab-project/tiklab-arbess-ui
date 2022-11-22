@@ -11,7 +11,7 @@ import Btn from "../../common/btn/btn";
 const PipelineAddInfo = props =>{
 
     const {set,powerType,setPowerType,pipelineStore, current,setCurrent,setAddPipelineVisible,
-        templateLis,templateType,
+        templateLis,templateType,onClick
     } = props
 
     const {pipeline,pipelineId,pipelineList,findUserPage,createPipeline,updatePipeline} = pipelineStore
@@ -144,11 +144,6 @@ const PipelineAddInfo = props =>{
                     pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
                 },
-                {
-                    type: "string",
-                    max: 20,
-                    message:"流水线名称过长"
-                },
                 ({ getFieldValue }) => ({
                     validator(rule, value) {
                         let nameArray = []
@@ -167,18 +162,16 @@ const PipelineAddInfo = props =>{
         }
         if(!set){
             rule = [
-                {required:true,message:"请输入名称"},
+                {required:true,message:""},
                 {
                     pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
                 },
-                {
-                    type: "string",
-                    max: 20,
-                    message:"流水线名称过长"
-                },
                 ({ getFieldValue }) => ({
                     validator(rule, value) {
+                        if(!value || value.trim() === ""){
+                            return Promise.reject("名称不能为空");
+                        }
                         let nameArray = []
                         if(pipelineList){
                             nameArray = pipelineList && pipelineList.map(item=>item.pipelineName)
@@ -233,19 +226,26 @@ const PipelineAddInfo = props =>{
 
             {
                 set ?
-                <Btn
-                    type={"primary"}
-                    onClick={() => {
-                        form
-                            .validateFields()
-                            .then((values) => {
-                                onOk(values)
-                                form.resetFields()
+                <>
+                    <Btn
+                        onClick={onClick}
+                        title={"取消"}
+                        isMar={true}
+                    />
+                    <Btn
+                        type={"primary"}
+                        onClick={() => {
+                            form
+                                .validateFields()
+                                .then((values) => {
+                                    onOk(values)
+                                    form.resetFields()
 
-                            })
-                    }}
-                    title={"确认"}
-                />
+                                })
+                        }}
+                        title={"确认"}
+                    />
+                </>
                 :
                 current === 1 &&
                 <>

@@ -33,12 +33,12 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     const x = (newValue,lastValue) => {
         if (newValue == null){
-            return false;
+            return false
         }
         if (newValue === ""  && lastValue == null){
-            return false;
+            return false
         }
-        return newValue !== lastValue;
+        return newValue !== lastValue
     }
 
     const onBlur = () =>{

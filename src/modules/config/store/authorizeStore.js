@@ -4,7 +4,6 @@ import {
     FindAccessToken,
     FindAllStorehouse,
     FindBranch,
-    FindState,
 } from "../api/authorize";
 
 export class AuthorizeStore {
@@ -15,17 +14,12 @@ export class AuthorizeStore {
 
     @action
     findCode = async value =>{
-        const params = new FormData()
-        params.append("type",value)
-        return await FindCode(params)
+        return await FindCode(value)
     }
 
     @action
     findAccessToken = async value =>{
-        const params = new FormData()
-        params.append("code",value.code)
-        params.append("type",value.type)
-        return await FindAccessToken(params)
+        return await FindAccessToken(value)
     }
 
     @action
@@ -49,11 +43,6 @@ export class AuthorizeStore {
         if(data.code===0 && data.data){
             this.branchList = data.data
         }
-    }
-
-    @action
-    findState = async ()=>{
-        return await FindState()
     }
 
 }

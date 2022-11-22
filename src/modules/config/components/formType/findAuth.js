@@ -196,9 +196,8 @@ const FindAuth = props =>{
                 >
                     {
                         list && list.map(item=>{
-                            return <Select.Option value={item.name} key={setKey(item)}>
+                            return <Select.Option value={setKey(item)} key={setKey(item)}>
                                 {item.name}
-                                {}
                             </Select.Option>
                         })
                     }

@@ -10,6 +10,14 @@ const DeploySame = props =>{
 
     const {deployType,deployOrderShellBlock,setDeployOrderShellBlock} = configDataStore
 
+    const style = {
+        fontSize:13,
+        color:"#999",
+        paddingLeft:130,
+        paddingBottom:10,
+        marginTop:-10
+    }
+
     return (
         <>
             <Inputs
@@ -19,8 +27,9 @@ const DeploySame = props =>{
                 mode={deployType}
                 addonBefore={"/"}
             />
-            <div className="deployTargetAddress">{messageInfo}</div>
-
+            {
+                messageInfo && <div style={style}>{messageInfo}</div>
+            }
             <FindAuth
                 type={deployType}
             />

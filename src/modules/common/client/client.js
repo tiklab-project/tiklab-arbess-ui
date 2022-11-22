@@ -14,10 +14,10 @@ export const getUrlParam = name => {
     for (let i = 0; i < param_arr.length; i++) {
         let pair = param_arr[i].split("=");
         if (pair[0] === name) {
-            return pair[1];
+            return pair[1]
         }
     }
-    return false;
+    return false
 }
 
 // 监听浏览器高度

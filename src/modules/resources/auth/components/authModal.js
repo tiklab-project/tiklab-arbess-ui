@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import Btn from "../../../common/btn/btn";
-import {Modal, Form, Input, message} from "antd";
+import {Modal, Form, Input, message, Select} from "antd";
 import AuthType from "../../common/authType";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
@@ -96,6 +96,12 @@ const AuthModal = props =>{
                     autoComplete="off"
                     initialValues={{type:1,authPublic:1,authWay:1,authType:2}}
                 >
+                    <Form.Item name="authPublic" label="认证权限">
+                        <Select>
+                            <Select.Option value={1}>全局</Select.Option>
+                            <Select.Option value={2}>私有</Select.Option>
+                        </Select>
+                    </Form.Item>
                     <Form.Item
                         name="name"
                         label="名称"

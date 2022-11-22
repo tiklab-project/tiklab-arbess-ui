@@ -81,7 +81,7 @@ const ConfigTop = props =>{
                             <div className="changeView-valid">
                                 {valid && valid.length > 0 ?
                                     <span>
-                                    <ExclamationCircleOutlined />
+                                    <ExclamationCircleOutlined style={{fontSize:16}}/>
                                         &nbsp;
                                         {valid && valid.length}项配置未完成
                                 </span> : null}

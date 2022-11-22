@@ -122,6 +122,12 @@ const CodeModal = props =>{
                             <Select.Option value={3}>腾讯云主机</Select.Option>
                         </Select>
                     </Form.Item>
+                    <Form.Item name="authPublic" label="认证权限">
+                        <Select>
+                            <Select.Option value={1}>全局</Select.Option>
+                            <Select.Option value={2}>私有</Select.Option>
+                        </Select>
+                    </Form.Item>
                     <Form.Item
                         name="name"
                         label="名称"

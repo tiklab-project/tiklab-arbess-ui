@@ -60,11 +60,11 @@ const lis=[
                 tel:"maven单元测试",
                 icon:"ceshi"
             },
-            {
-                type: 12,
-                tel: "junit",
-                icon:"ceshi"
-            }
+            // {
+            //     type: 12,
+            //     tel: "junit",
+            //     icon:"ceshi"
+            // }
         ]
     },
     {

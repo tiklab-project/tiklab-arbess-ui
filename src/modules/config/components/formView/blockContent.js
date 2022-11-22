@@ -39,7 +39,7 @@ const BlockContent = props =>{
     
     const renderValidType = () => {
         return validType && validType.map((item,index)=>{
-            return  item==type && <ExclamationCircleOutlined key={index} style={{fontSize:18,color:"#ff0000"}}/>
+            return  item==type && <ExclamationCircleOutlined key={index} style={{fontSize:16,color:"#ff0000"}}/>
         })
     }
     

@@ -64,6 +64,7 @@ const ProjectSet = props =>{
                     powerType={powerType}
                     setPowerType={setPowerType}
                     set={true}
+                    onClick={()=>setOpenOrClose(1)}
                 />
             </div>
         },    
@@ -77,6 +78,11 @@ const ProjectSet = props =>{
                         <div style={{color:"#ff0000",paddingBottom:5,fontSize:13}}>
                             此操作无法恢复！请慎重操作！
                         </div>
+                        <Btn
+                            onClick={()=>setOpenOrClose(2)}
+                            title={"取消"}
+                            isMar={true}
+                        />
                         <Btn
                             onClick={onConfirm}
                             type={"dangerous"}
@@ -111,9 +117,12 @@ const ProjectSet = props =>{
                 <div className="pipelineReDel-li-icon">
                     {item.icon}
                 </div>
-                <div className="pipelineReDel-li-title">
-                    <div>{item.title}</div>
-                    <div className="pipelineReDel-li-desc">{item.desc}</div>
+                <div className="pipelineReDel-li-center">
+                    <div className="pipelineReDel-li-title">{item.title}</div>
+                    {
+                        !isExpandedTree(item.key) &&
+                        <div className="pipelineReDel-li-desc">{item.desc}</div>
+                    }
                 </div>
                 <div className="pipelineReDel-li-down">
                     {
@@ -125,8 +134,8 @@ const ProjectSet = props =>{
             </div>
             <div className={`${isExpandedTree(item.key)? "pipelineReDel-li-bottom":"pipelineReDel-li-none"}`}>
                 {
-                    isExpandedTree(item.key)?
-                        item.content:null
+                    isExpandedTree(item.key) &&
+                        item.content
                 }
             </div>
         </div>
@@ -141,10 +150,7 @@ const ProjectSet = props =>{
     return(
         <div className="pipelineReDel home-limited mf">
             <div className="pipelineReDel-up">
-                <BreadcrumbContent
-                    firstItem={pipeline.pipelineName}
-                    secondItem={"设置"}
-                />
+                <BreadcrumbContent firstItem={"流水线设置"}/>
             </div>
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">

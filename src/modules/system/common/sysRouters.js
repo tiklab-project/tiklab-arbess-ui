@@ -2,7 +2,7 @@ import React from "react";
 import {TeamOutlined,BarsOutlined,BuildOutlined,AppstoreOutlined,ProjectOutlined,
     GroupOutlined,SoundOutlined,MergeCellsOutlined,SafetyCertificateOutlined,
     FileProtectOutlined,SwitcherOutlined,ProfileOutlined,LayoutOutlined,
-    MenuOutlined,VerifiedOutlined,AuditOutlined
+    MenuOutlined,VerifiedOutlined
 } from "@ant-design/icons";
 
 export const departmentRouter = [
@@ -66,12 +66,6 @@ export const applicationRouter = [
                 purviewCode:"host",
             },
         ]
-    },
-    {
-        id:"/index/system/thirdAddress",
-        title:"授权管理",
-        icon:<AuditOutlined />,
-        purviewCode:"third_auth",
     },
     {
         id:"/index/system/envi",

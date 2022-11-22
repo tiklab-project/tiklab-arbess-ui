@@ -18,6 +18,12 @@ const CodeSvn = props =>{
                 mode={codeType}
                 isValid={true}
             />
+            <Inputs
+                name={"svnFile"}
+                placeholder={"检出文件夹名称"}
+                label={"检出文件"}
+                mode={codeType}
+            />
             <FindAuth
                 type={5}
             />

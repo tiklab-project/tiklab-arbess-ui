@@ -5,6 +5,7 @@ import {
     DeleteAuthServer,
     UpdateAuthServer,
     FindAllAuthServerList,
+    CallbackUrl
 } from "../api/server";
 
 export class ServerStore{
@@ -13,6 +14,7 @@ export class ServerStore{
     @observable modalVisible = false
     @observable formValue = ""
     @observable authServerList = []
+    @observable callUrlWarn = ""
 
     @action
     setModalVisible = value =>{
@@ -60,6 +62,17 @@ export class ServerStore{
         const data = await FindAllAuthServerList(param)
         if(data.code===0 && data.data){
             this.authServerList = data.data
+        }
+        return data
+    }
+
+    @action
+    callbackUrl = async value=>{
+        const param = new FormData()
+        param.append("callbackUrl",value)
+        const data = await CallbackUrl(param)
+        if(data.code===0){
+            this.callUrlWarn = data.data
         }
         return data
     }
