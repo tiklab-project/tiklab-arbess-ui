@@ -1,6 +1,4 @@
 import React,{Fragment} from "react";
-import {Modal} from "antd";
-import {DeleteOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {getTime} from "../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
@@ -8,7 +6,7 @@ import StructureRightCue from "./structureRightCue";
 const StructureRightItem = props =>{
 
     const {rightFlowData,status,deleteHistoryLog,modeData,index,setIndex,setVisible,setDrawerContent,
-        freshen,setFreshen,setPageCurrent} = props
+        freshen,setFreshen} = props
 
     // 日志详情
     const log = item => {
@@ -16,26 +14,11 @@ const StructureRightItem = props =>{
         setVisible(true)
     }
 
-    // 删除提示
-    const del = () =>{
-        Modal.confirm({
-            title: "删除",
-            icon: <ExclamationCircleOutlined />,
-            content: "删除后数据无法恢复",
-            onOk:()=>delHistory(modeData),
-            okText: "确认",
-            cancelText: "取消",
-        })
-    }
-
     // 确认删除
-    const delHistory = modeData =>{
-        deleteHistoryLog(modeData &&modeData.historyId).then(()=>{
+    const del = () =>{
+        deleteHistoryLog(modeData && modeData.historyId).then(()=>{
             setFreshen(!freshen)
-            setPageCurrent(1)
             if(index!==0){ setIndex(0) }
-        }).catch(error=>{
-            console.log(error)
         })
     }
 
@@ -83,7 +66,6 @@ const StructureRightItem = props =>{
                 title={`# ${modeData && modeData.findNumber}`}
                 action={del}
                 actionTitle={"删除"}
-                icon={<DeleteOutlined />}
             />
             {rightDetails(rightFlowData)}
             {logRunLog()}

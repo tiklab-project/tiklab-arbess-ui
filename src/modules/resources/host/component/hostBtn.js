@@ -19,6 +19,7 @@ const CodeBtn = props =>{
             {
                 isConfig ?
                     <Btn
+                        type={"row"}
                         onClick={btnClick}
                         title={"添加"}
                         icon={<PlusOutlined/>}

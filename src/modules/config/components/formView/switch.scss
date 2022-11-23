@@ -36,13 +36,11 @@
    }
 }
 .switchType-chang{
-   padding: var(--tiklab-padding);
+   padding: var(--tiklab-padding) var(--tiklab-padding) 0 var(--tiklab-padding);
    max-height: calc(100% - 120px);
    overflow:auto;
    .group{
-      margin-bottom: 15px;
       &-content{
-         margin-bottom: 8px;
          display: -webkit-box;
          display: -webkit-flex;
          display: -ms-flexbox;

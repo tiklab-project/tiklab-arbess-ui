@@ -6,10 +6,10 @@ import {inject,observer} from "mobx-react";
 
 const StructureRight = props =>{
 
-    const {structureStore,status,freshen,setFreshen,setPageCurrent,pipelineId} = props
+    const {structureStore,status,pipelineId} = props
 
     const {deleteHistoryLog, killInstance,rightFlowData,modeData,index,setIndex,
-        rightExecuteData,execState} = structureStore
+        rightExecuteData,execState,freshen,setFreshen} = structureStore
 
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState("")
@@ -28,7 +28,6 @@ const StructureRight = props =>{
                         setDrawerContent={setDrawerContent}
                         setVisible={setVisible}
                         killInstance={killInstance}
-                        setPageCurrent={setPageCurrent}
                         pipelineId={pipelineId}
                     />
                     :
@@ -43,7 +42,6 @@ const StructureRight = props =>{
                         setVisible={setVisible}
                         setDrawerContent={setDrawerContent}
                         deleteHistoryLog={deleteHistoryLog}
-                        setPageCurrent={setPageCurrent}
                     />
             }
             <StructureRightLogDrawer
@@ -55,4 +53,4 @@ const StructureRight = props =>{
     )
 }
 
-export default inject("structureStore")(observer(StructureRight))
+export default observer(StructureRight)

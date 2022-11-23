@@ -2,7 +2,6 @@ import React from "react";
 import {Profile} from "tiklab-eam-ui";
 import {message,Tooltip,Table,Space,Spin} from "antd";
 import {
-    CheckCircleOutlined,
     PlayCircleOutlined,
     ClockCircleOutlined,
     LoadingOutlined
@@ -52,18 +51,15 @@ const PipelineTable = props =>{
     const goHistory = record => props.history.push(`/index/task/${record.pipelineId}/structure`)
 
     const work = record =>{
-        const params = {
-            pipelineId:record.pipelineId
-        }
         if(record.pipelineState === 0){
-            pipelineStartStructure(params).then(res=>{
+            pipelineStartStructure(record.pipelineId).then(res=>{
                 if(res.data === 1){
                     // setFresh(!fresh)
                     setTimeout(()=>setFresh(!fresh),500)
                 }
             })
         }else {
-            killInstance(params).then(()=>{
+            killInstance(record.pipelineId).then(()=>{
                 setFresh(!fresh)
             })
         }

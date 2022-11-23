@@ -5,9 +5,9 @@ import {
     DeletePipelineScm,
     UpdatePipelineScm,
     FindAllPipelineScm,
-} from "../api/setting";
+} from "../api/envi";
 
-export class SettingStore {
+export class EnviStore {
 
     @observable infoList = ""
     @observable logList = []
@@ -48,6 +48,5 @@ export class SettingStore {
     }
 
 }
-
-export const SETTING_STORE = "settingStore"
+export const ENVI_STORE = "enviStore"
 

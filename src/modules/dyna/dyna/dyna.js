@@ -45,7 +45,7 @@ const Dyna = props =>{
                 dynaPage={dynaPage}
                 dynamicList={dynamicList}
                 pipelineList={pipelineList}
-                pipelineId={pipeline(pipelineList)}
+                pipelineIdList={pipeline(pipelineList)}
             />
 }
 

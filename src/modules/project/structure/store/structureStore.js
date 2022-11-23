@@ -29,10 +29,41 @@ export class StructureStore {
         total: "1",
     }
     @observable isData = false  // 构建情况是否有数据
+    @observable pageCurrent = 1 // 筛选时，设置当前页数初始化
+
+    @observable state = 0  //状态
+    @observable enforcer = null //执行人
+    @observable mode = 0  //执行方式
+    @observable freshen = false  // 渲染页面
+
+    @action
+    setState = value =>{
+        this.state = value
+    }
+
+    @action
+    setEnforcer = value =>{
+        this.enforcer = value
+    }
+
+    @action
+    setMode = value =>{
+        this.mode = value
+    }
+
+    @action
+    setFreshen = value =>{
+        this.freshen = value
+    }
 
     @action
     setModeData = value =>{
         this.modeData = Object(value)
+    }
+
+    @action
+    setPageCurrent = value =>{
+        this.pageCurrent = value
     }
 
     @action
@@ -45,11 +76,16 @@ export class StructureStore {
         this.isData = value
     }
 
+    @action
+    setExecState = value =>{
+        this.execState = value
+    }
+
     // 开始构建
     @action
     pipelineStartStructure = async values =>{
         const params = new FormData()
-        params.append("pipelineId", values.pipelineId)
+        params.append("pipelineId", values)
         params.append("userId", getUser().userId)
         return await PipelineStartStructure(params);
     }
@@ -99,9 +135,12 @@ export class StructureStore {
     @action
     killInstance = async values =>{
         const params = new FormData()
-        params.append("pipelineId", values.pipelineId)
-        params.append("userId", values.userId)
-        return await KillInstance(params)
+        params.append("pipelineId", values)
+        params.append("userId",getUser().userId)
+        const data = await KillInstance(params)
+        if(data.code===0){
+            this.pageCurrent = 1
+        }
     }
 
     //正在执行的详情
@@ -123,14 +162,11 @@ export class StructureStore {
     @action
     findPageHistory =async values =>{
         const params = {
-            userId: values.userId,
-            pipelineId: values.pipelineId,
             pageParam: {
                 pageSize: 11,
-                currentPage: values.pageParam.currentPage,
+                currentPage: this.pageCurrent,
             },
-            state:values.state,
-            type:values.type,
+            ...values,
         }
         return new Promise((resolve, reject)=>{
             FindPageHistory(params).then(res=>{
@@ -139,10 +175,10 @@ export class StructureStore {
                         this.leftPageList = []
                         this.page = {}
                     }else{
+                        this.page.total = res.data.totalPage
                         this.leftPageList = res.data.dataList
                         this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
                         this.modeData =  res.data.dataList && res.data.dataList[0]
-                        this.page.total = res.data.totalPage
                         this.isData = true
                     }
                 }
@@ -179,7 +215,11 @@ export class StructureStore {
     deleteHistoryLog =async value =>{
         const param = new FormData()
         param.append("historyId", value)
-        return await DeleteHistoryLog(param)
+        const data = await DeleteHistoryLog(param)
+        if(data.code===0){
+            this.pageCurrent = 1
+        }
+        return data
     }
 
     @action

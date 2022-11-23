@@ -6,7 +6,7 @@ const {Option} = Select;
 
 const StructureLeftDropdown = props =>{
 
-    const {setState,setEnforcer,setMode,pipelineUserList,drop,pipelineId,changPage} = props
+    const {setState,setEnforcer,setMode,pipelineUserList,pipelineId,changPage} = props
 
     const [statusValue,setStatusValue] = useState("")
     const [userValue,setUserValue] = useState("")
@@ -16,30 +16,23 @@ const StructureLeftDropdown = props =>{
         setStatusValue("状态")
         setUserValue("执行人")
         setModeValue("执行方式")
-    },[pipelineId,drop])
-
-    // 切换状态
-    const changeState = (value,e) =>{
-        setStatusValue(value)
-        setState(parseInt(e.key))
+    },[pipelineId])
+    
+    const changValue = (value,field) => {
         changPage(1)
-    }
-
-    // 切换执行人
-    const changeEnforcer = (value,e) =>{
-        if(e.key==="全部"){
-            e.key=null
+        switch (field) {
+            case "state":
+                setStatusValue(value)
+                setState(value)
+                break
+            case "userId":
+                setUserValue(value)
+                setEnforcer(value)
+                break
+            case "type":
+                setModeValue(value)
+                setMode(value)
         }
-        setUserValue(value)
-        setEnforcer(e.key)
-        changPage(1)
-    }
-
-    // 切换方式
-    const changeMode = (value,e) =>{
-        setModeValue(value)
-        setMode(parseInt(e.key))
-        changPage(1)
     }
 
     //状态
@@ -84,11 +77,11 @@ const StructureLeftDropdown = props =>{
                     bordered={false}
                     suffixIcon={<CaretDownOutlined />}
                     value={statusValue}
-                    onChange={(value,e)=>changeState(value,e)}
+                    onChange={value=>changValue(value,"state")}
                 >
                     {
                         stateList.map(item=>{
-                            return <Option key={ item.type } value= {item.tpl}>{item.tpl}</Option>
+                            return <Option key={item.type} value={item.type}>{item.tpl}</Option>
                         })
                     }
                 </Select>
@@ -97,12 +90,12 @@ const StructureLeftDropdown = props =>{
                     bordered={false}
                     suffixIcon={<CaretDownOutlined />}
                     value={userValue}
-                    onChange={(value,e)=>changeEnforcer(value,e)}
+                    onChange={value=>changValue(value,"userId")}
                 >
-                    <Option key={"全部"} value={"全部"}>全部</Option>
+                    <Option key={"全部"} value={null}>全部</Option>
                     {
                         pipelineUserList && pipelineUserList.map(item=>{
-                            return <Option key={item.id} value= {item.nickname}>{item.nickname}</Option>
+                            return <Option key={item.id} value={item.id}>{item.nickname}</Option>
                         })
                     }
                 </Select>
@@ -111,11 +104,11 @@ const StructureLeftDropdown = props =>{
                     bordered={false}
                     suffixIcon={<CaretDownOutlined />}
                     value={modeValue}
-                    onChange={(value,e)=>changeMode(value,e)}
+                    onChange={value=>changValue(value,"type")}
                 >
                     {
                         modeList.map(item=>{
-                            return <Option key={ item.type } value= {item.tpl}> {item.tpl} </Option>
+                            return <Option key={item.type} value={item.type}>{item.tpl}</Option>
                         })
                     }
                 </Select>

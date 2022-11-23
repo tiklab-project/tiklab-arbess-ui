@@ -20,6 +20,7 @@ const AuthBtn = props =>{
             {
                 isConfig ?
                     <Btn
+                        type={"row"}
                         onClick={()=>btnClick("config")}
                         title={"添加认证"}
                         icon={<PlusOutlined/>}

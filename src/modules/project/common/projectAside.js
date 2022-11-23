@@ -12,13 +12,12 @@ import {inject,observer} from "mobx-react";
 
 const ProjectAside = props =>{
 
-    const {pipelineStore,structureListStore} = props
+    const {pipelineStore} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
     const {lastPath,setLastPath,pipelineList,pipelineId,pipeline} = pipelineStore
-    const {setState,setEnforcer,setMode} = structureListStore
 
     useEffect(()=>{
         setLastPath(path.substring(path.lastIndexOf('/') + 1))
@@ -54,9 +53,6 @@ const ProjectAside = props =>{
     // 切换流水线的路由跳转
     const changePipeline = item => {
         if(pipelineId!==item.pipelineId){
-            setState(0)
-            setEnforcer(null)
-            setMode(0)
             if(path.indexOf(`/index/task/${pipelineId}/assembly`) === 0) {
                 props.history.push(`/index/task/${item.pipelineId}/assembly/${lastPath}`)
             }else {
@@ -144,4 +140,4 @@ const ProjectAside = props =>{
     )
 }
 
-export default inject("structureListStore")(observer(ProjectAside))
+export default observer(ProjectAside)

@@ -1,22 +1,23 @@
 import React,{useState,useEffect} from "react";
-import {Table, Popconfirm, Button, Tooltip} from "antd";
+import {Table} from "antd";
 import {inject,observer} from "mobx-react";
-import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 import EnviModal from "../components/enviModal";
-import "../components/envi.scss";
+import "../../common/resources.scss";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../../common/emptyText/emptyText";
 import SubIcon from "../../../config/components/formTitle/subIcon";
 import Btn from "../../../common/btn/btn";
+import Listaction from "../../../common/list/listaction";
 
 /*
     系统环境配置
  */
 const Envi = props =>{
 
-    const {settingStore} = props
+    const {enviStore} = props
 
-    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm} = settingStore
+    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm} = enviStore
 
     const [visible,setVisible] = useState(false)
     const [fresh,setFresh] = useState(false)
@@ -38,7 +39,7 @@ const Envi = props =>{
     }
 
     // 删除配置
-    const deletePart = (text,record) => {
+    const del = (text,record) => {
         deletePipelineScm(record.scmId).then(res=>{
             if(res.code===0){
                 setFresh(!fresh)
@@ -83,34 +84,16 @@ const Envi = props =>{
             width:"10%",
             ellipsis:true,
             render:(text,record)=>{
-                return(
-                    <span className="envi-content-action">
-                        <Tooltip title="修改">
-                            <span className="edit" onClick={()=>edit(text,record)}>
-                                <EditOutlined />
-                            </span>
-                        </Tooltip>
-                        <Tooltip title="删除">
-                            <Popconfirm
-                                style={{marginTop:100}}
-                                title="你确定删除吗"
-                                onConfirm={()=>deletePart(text,record)}
-                                okText="确定"
-                                cancelText="取消"
-                            >
-                                 <span className="del">
-                                     <DeleteOutlined />
-                                 </span>
-                             </Popconfirm>
-                        </Tooltip>
-                    </span>
-                )
+                return  <Listaction
+                            edit={()=>edit(text,record)}
+                            del={()=>del(text,record)}
+                        />
             }
         }
     ]
 
-    return <div className="envi home-limited mf">
-        <div className="envi-upper">
+    return <div className="resources home-limited mf">
+        <div className="resources-upper">
             <BreadcrumbContent firstItem={"环境配置"} />
             <Btn
                 onClick={add}
@@ -119,7 +102,7 @@ const Envi = props =>{
                 icon={<PlusOutlined/>}
             />
         </div>
-        <div className="envi-content">
+        <div className="resources-content">
 
             <Table
                 columns={columns}
@@ -142,4 +125,4 @@ const Envi = props =>{
     </div>
 }
 
-export default inject("settingStore")(observer(Envi))
+export default inject("enviStore")(observer(Envi))

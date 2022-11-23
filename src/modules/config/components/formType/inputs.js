@@ -13,6 +13,7 @@ const Inputs = props =>{
 
     const [bordered,setBordered] = useState(false)
     const [isLoading,setIsLoading] = useState(1)
+    const [validateStatus,setValidateStatus] = useState("")
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
@@ -97,7 +98,7 @@ const Inputs = props =>{
                         break
                     case 5:
                         rule =  [
-                            {required:true, message: `请输入${label}`},
+                            {required: true, message: `请输入${label}`},
                             {pattern: validCodeSvn, message:"请输入正确的svn地址"}
                         ]
                 }
@@ -113,12 +114,18 @@ const Inputs = props =>{
                 label={label}
                 rules={rules()}
                 validateTrigger="onChange"
+                // hasFeedback
+                // validateStatus={validateStatus}
             >
                 <Input
                     bordered={bordered}
                     placeholder={placeholder}
                     onFocus={onFocus}
                     onBlur={(e)=>onBlur(e)}
+                    onPressEnter={(e)=>{
+                        onBlur(e)
+                        e.target.blur()
+                    }}
                     addonBefore={addonBefore}
                 />
             </Form.Item>

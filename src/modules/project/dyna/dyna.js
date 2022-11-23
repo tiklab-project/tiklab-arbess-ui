@@ -32,7 +32,7 @@ const PipelineDyna = props =>{
                 findlogpage={findlogpage}
                 dynaPage={dynaPage}
                 dynamicList={dynamicList}
-                pipelineId={[pipelineId]}
+                pipelineIdList={[pipelineId]}
             />
 }
 

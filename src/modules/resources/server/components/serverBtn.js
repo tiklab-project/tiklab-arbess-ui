@@ -21,6 +21,7 @@ const ServerBtn = props =>{
             {
                 isConfig ?
                     <Btn
+                        type={"row"}
                         onClick={()=>btnClick("config")}
                         title={"添加"}
                         icon={<PlusOutlined/>}

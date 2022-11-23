@@ -64,9 +64,9 @@ const ServerModal = props =>{
             }else{
                 const params = {
                     type:serverWay,
-                    clientId:form.getFieldValue("clientId"),
-                    clientSecret:form.getFieldValue("clientSecret"),
-                    callbackUrl:form.getFieldValue("callbackUrl"),
+                    clientId:form && form.getFieldValue("clientId"),
+                    clientSecret:form && form.getFieldValue("clientSecret"),
+                    callbackUrl:form && form.getFieldValue("callbackUrl"),
                     code:codeValue
                 }
                 findAccessToken(params).then(res=>{
@@ -83,9 +83,9 @@ const ServerModal = props =>{
     const validCallbackUrl = /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
 
     const isAddAuth = () => {
-        let clientId = form.getFieldValue("clientId")
-        let clientSecret = form.getFieldValue("clientSecret")
-        let callbackUrl = form.getFieldValue("callbackUrl")
+        let clientId = form && form.getFieldValue("clientId")
+        let clientSecret = form && form.getFieldValue("clientSecret")
+        let callbackUrl = form && form.getFieldValue("callbackUrl")
         if (isNull(clientId) || isNull(clientSecret) || isNull(callbackUrl) || !validCallbackUrl.test(callbackUrl)) {
             setAddAuth(false)
         } else {

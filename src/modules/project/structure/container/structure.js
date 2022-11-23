@@ -1,5 +1,4 @@
 import React,{useEffect,useState} from "react";
-import {getUser} from "tiklab-core-ui";
 import {Spin} from "antd";
 import {
     LoadingOutlined,
@@ -18,22 +17,55 @@ import {inject,observer} from "mobx-react";
 
 const Structure = props => {
 
-    const {structureStore,structureListStore,pipelineStore} = props
+    const {structureStore,pipelineStore} = props
 
     const {findExecState,findStructureState,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,isData,
-        findPipelineUser,setIsData,execState} = structureStore
-    const {state,setState,pageCurrent,enforcer,setEnforcer,mode,setMode,setPageCurrent,freshen,setFreshen,setDrop,drop} = structureListStore
+        findPipelineUser,setIsData,execState,
+        state,setState,enforcer,setEnforcer,mode,setMode,pageCurrent,setPageCurrent,freshen,setFreshen
+    } = structureStore
     const {pipelineId,pipeline} = pipelineStore
-    const userId = getUser().userId
 
     const [runImState,setRunImState] = useState(false)
 
+
+    // let interval,socket=null
+    // useEffect(() => {
+    //     // socket = new WebSocket(`ws://${window.document.location.host}/start`)
+    //     socket = new WebSocket(`ws://192.168.10.100:8080/start`)
+    //     socket.onopen = () =>{
+    //         pipelineId && findExecState(pipelineId).then(res=>{
+    //             if(res.data === 1){
+    //                 interval = setInterval(()=>socket.send(pipelineId),1000)
+    //                 socket.onmessage = response => renderExec(response)
+    //                 findAllPipelineConfig(pipelineId) // 正在执行的详情
+    //             }else if(res.data===0){
+    //                 socket.close()
+    //             }
+    //         })
+    //     }
+    //     return ()=> {
+    //         clearInterval(interval)
+    //         socket.close()
+    //     }
+    // }, [pipelineId,freshen])
+
+    // const renderExec = response => {
+    //     if(response.data){
+    //         const data = JSON.parse(response.data)
+    //         if(data.data === 0 ){
+    //             clearInterval(interval)
+    //             socket.close()
+    //             setExecState("")
+    //             setFreshen(!freshen)
+    //         } else {
+    //             setIndex(0)
+    //             setExecState(data.data)
+    //         }
+    //     }
+    // }
+
     useEffect(()=>{
         if(pipelineId){
-            setPageCurrent(1)
-            setMode(0)
-            setState(0)
-            setEnforcer(null)
             findPipelineUser(pipelineId)
         }
     },[pipelineId])
@@ -51,6 +83,13 @@ const Structure = props => {
         })
     }, [pipelineId,freshen])
 
+    const renderExec = data => {
+        if(data===null || data.runStatus===1 || data.runStatus===30){
+            setFreshen(!freshen)
+            clearInterval(interval)
+        }
+    }
+
     useEffect(()=>{
         pipelineId && changPage() // 历史列表
     },[pipelineId,freshen,pageCurrent,state,enforcer,mode])
@@ -58,10 +97,6 @@ const Structure = props => {
     const changPage = () =>{
         const params = {
             pipelineId:pipelineId,
-            pageParam: {
-                pageSize: 10,
-                currentPage: pageCurrent
-            },
             state:state,
             userId:enforcer,
             type:mode
@@ -75,13 +110,6 @@ const Structure = props => {
                 }
             }
         })
-    }
-
-    const renderExec = data => {
-        if(data===null || data.runStatus===1 || data.runStatus===30){
-            setFreshen(!freshen)
-            clearInterval(interval)
-        }
     }
 
     const status = i =>{
@@ -112,13 +140,9 @@ const Structure = props => {
     
     let timeout = null
     const runImmediately = () => {
-        const params = {
-            userId:userId,
-            pipelineId:pipelineId
-        }
         setRunImState(true)
         timeout = setTimeout(()=>setFreshen(!freshen),1000)
-        pipelineStartStructure(params).then(res=>{
+        pipelineStartStructure(pipelineId).then(res=>{
             // setTimeout(()=>setFreshen(!freshen),500)
             if(res.code===0 && res.data===1){
                 timeout = setTimeout(()=>setRunImState(false),500)
@@ -131,6 +155,10 @@ const Structure = props => {
     // 销毁定时器
     useEffect(()=>{
         return ()=>{
+            setPageCurrent(1)
+            setMode(0)
+            setState(0)
+            setEnforcer(null)
             clearTimeout(timeout)
             clearInterval(interval)
         }
@@ -140,6 +168,7 @@ const Structure = props => {
         <div className="structure mf">
             <div className="structure-content">
                 <StructureLeft
+                    structureStore={structureStore}
                     pipelineId={pipelineId}
                     status={status}
                 />
@@ -148,11 +177,9 @@ const Structure = props => {
                     {
                         execState !== ""  || leftPageList && leftPageList.length > 0 ?
                             <StructureRight
-                                freshen={freshen}
-                                setFreshen={setFreshen}
-                                status={status}
-                                setPageCurrent={setPageCurrent}
+                                structureStore={structureStore}
                                 pipelineId={pipelineId}
+                                status={status}
                             />
                             :
                             <StructureEmpty
@@ -167,4 +194,4 @@ const Structure = props => {
     )
 }
 
-export default inject("structureStore","structureListStore","pipelineStore")(observer(Structure))
+export default inject("structureStore","pipelineStore")(observer(Structure))

@@ -1,13 +1,11 @@
 import React,{useState,Fragment} from "react";
-import {getUser} from "tiklab-core-ui";
-import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {getTime} from "../../../common/client/client";
 import StructureRightCart from "./structureRightCart";
 import StructureRightCue from "./structureRightCue";
 
 const StructureRightExecute = props => {
 
-    const {status,execState,killInstance,rightExecuteData,freshen,setFreshen,setPageCurrent,pipelineId} = props
+    const {status,execState,killInstance,rightExecuteData,freshen,setFreshen,pipelineId} = props
     const [isActiveSlide,setIsActiveSlide] = useState(true) // 日志打印滚动条状态
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
@@ -47,15 +45,8 @@ const StructureRightExecute = props => {
     }
     
     const cease = () => {
-        const params = {
-            userId:getUser().userId,
-            pipelineId:pipelineId
-        }
-        killInstance(params).then(res=>{
-            setPageCurrent(1)
+        killInstance(pipelineId).then(res=>{
             setFreshen(!freshen)
-        }).catch(error=>{
-            console.log(error)
         })
     }
 
@@ -105,7 +96,6 @@ const StructureRightExecute = props => {
                 title={"运行中"}
                 action={cease}
                 actionTitle={"停止"}
-                icon={<ExclamationCircleOutlined />}
             />
             {executeDetails(rightExecuteData)}
             {logRunLog()}

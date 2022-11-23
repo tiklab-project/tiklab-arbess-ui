@@ -8,8 +8,8 @@ import "../components/info.scss";
  */
 const Info = props =>{
 
-    const {settingStore} = props
-    const {getSystemMessage,infoList} = settingStore
+    const {enviStore} = props
+    const {getSystemMessage,infoList} = enviStore
 
     useEffect(()=>{
         getSystemMessage()
@@ -60,4 +60,4 @@ const Info = props =>{
     )
 }
 
-export default inject("settingStore")(observer(Info))
+export default inject("enviStore")(observer(Info))

@@ -15,7 +15,6 @@ const Listaction = props =>{
                     </Tooltip>
                     <Tooltip title="删除">
                         <Popconfirm
-                            style={{marginTop:100}}
                             title="你确定删除吗"
                             onConfirm={del}
                             okText="确定"

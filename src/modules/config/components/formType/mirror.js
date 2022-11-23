@@ -13,6 +13,7 @@ import {message} from "antd";
 import {inject,observer} from "mobx-react";
 import "./mirror.scss";
 import SuffixStatus from "./suffixStatus";
+import Btn from "../../../common/btn/btn";
 
 const MirrorContent = forwardRef((props,ref)=>{
 
@@ -67,24 +68,39 @@ const MirrorContent = forwardRef((props,ref)=>{
         setBordered(false)
     }
 
-
-    return  <div className={`${bordered?"codeNewStage":"formViewCodeMirror"}`}>
-        <CodeMirror
-            value={shellBlock}//内容
-            ref={mirrorRefs}
-            options={{
-                mode: {name:"shell",shell: true },//语言
-                lineNumbers: false, // 是否显示行号
-                placeholder: placeholder
-            }}
-            // onChange={()}
-            onFocus={onFocus}
-            onBlur={onBlur}
-        />
-        <div className="formViewCodeMirror-suffix">
-            <SuffixStatus isLoading={isLoading}/>
+    return  <>
+        <div className={`${bordered?"codeNewStage":"formViewCodeMirror"}`}>
+            <CodeMirror
+                value={shellBlock}//内容
+                ref={mirrorRefs}
+                options={{
+                    mode: {name:"shell",shell: true },//语言
+                    lineNumbers: false, // 是否显示行号
+                    placeholder: placeholder
+                }}
+                onFocus={onFocus}
+                // onBlur={onBlur}
+            />
+            <div className="formViewCodeMirror-suffix">
+                <SuffixStatus isLoading={isLoading}/>
+            </div>
         </div>
-    </div>
+        {
+            bordered &&
+            <div style={{paddingTop:8}}>
+                <Btn
+                    title={"取消"}
+                    isMar={true}
+                    onClick={()=>setBordered(false)}
+                />
+                <Btn
+                    title={"保存"}
+                    type={"primary"}
+                    onClick={()=>onBlur()}
+                />
+            </div>
+        }
+    </>
 })
 
 export default inject("pipelineStore","configStore")(observer(MirrorContent))

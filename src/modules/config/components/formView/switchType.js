@@ -4,6 +4,7 @@ import {inject,observer} from "mobx-react";
 import {autoHeight} from "../../../common/client/client";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {del} from "../common/delData";
+import Btn from "../../../common/btn/btn";
 
 const lis=[
     {
@@ -71,6 +72,7 @@ const SwitchType = props =>{
 
     const [height,setHeight] = useState(0)
     const [group,setGroup] = useState("")
+    const [newType,setNewType] = useState(null)
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -83,7 +85,6 @@ const SwitchType = props =>{
     useEffect(()=>{
         visible && renderGroup(showType)
     },[showType])
-
 
     const renderGroup = showType =>{
         const zz = Math.floor(showType/10)
@@ -109,25 +110,44 @@ const SwitchType = props =>{
     }
 
     const handleClick = item =>{
+        setNewType(item.type)
+    }
+
+    const onOk  = () =>{
         const params = {
             pipeline:{pipelineId},
             taskType:showType,  // 旧类型
-            type:item.type, // 新类型
+            type:newType, // 新类型
             message:"updateType"
         }
-        item.type!==showType && updateConfigure(params).then(res=>{
+        updateConfigure(params).then(res=>{
             if(res.code===0){
                 data && data.map(ite=>{
                     if(ite.dataType===showType){
-                        ite.dataType = item.type
+                        ite.dataType = newType
                     }
                 })
                 setData([...data])
-                del(item.type,configDataStore)
+                del(newType,configDataStore)
             }
             setVisible(false)
         })
     }
+
+    const footer = (
+        <>
+            <Btn
+                onClick={()=>setVisible(false)}
+                title={"取消"}
+                isMar={true}
+            />
+            <Btn
+                onClick={onOk}
+                title={"确定"}
+                type={"primary"}
+            />
+        </>
+    )
 
     return(
         <Modal
@@ -138,7 +158,7 @@ const SwitchType = props =>{
             bodyStyle={{padding:0}}
             destroyOnClose={true}
             className="mf"
-            footer={null}
+            footer={footer}
         >
             <div className="switchType-chang">
                 <div className="switchType-chang-top">
@@ -151,21 +171,21 @@ const SwitchType = props =>{
                     <div className="group-content">
                         {
                             group.desc && group.desc.map(item=>{
-                                return <div onClick={()=>handleClick(item)}
-                                            className={`group-desc ${item.type===showType?"group-ban":""}`}
+                                return <div onClick={item.type===showType?null:()=>handleClick(item)}
+                                            className={`group-desc ${item.type===showType?"group-ban":""} ${item.type===newType?"group-select":""}`}
                                             key={item.type}
                                         >
-                                            <div className="group-desc-tpl">
-                                                <div className="group-tpl">
-                                                    <Space>
-                                                        <svg className="icon" aria-hidden="true">
-                                                            <use xlinkHref={`#icon-${item.icon}`}/>
-                                                        </svg>
-                                                        {item.tel}
-                                                    </Space>                               
-                                                </div>
-                                            </div>
+                                    <div className="group-desc-tpl">
+                                        <div className="group-tpl">
+                                            <Space>
+                                                <svg className="icon" aria-hidden="true">
+                                                    <use xlinkHref={`#icon-${item.icon}`}/>
+                                                </svg>
+                                                {item.tel}
+                                            </Space>
                                         </div>
+                                    </div>
+                                </div>
                             })
                         }
                     </div>

@@ -33,7 +33,7 @@
     box-shadow: none;
     padding-top: 5px;
     &:hover{
-        background: #f5f5f5;
+        background: #f4f4f4;
     }
 }
 
@@ -67,6 +67,17 @@
     font-size: var(--tiklab-font-13);
 }
 
+.mf-btn-row{
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border-color: transparent;
+    padding: 4px 8px;
+    border-radius: 0;
+    &:hover{
+        background: #f4f4f4;
+    }
+}
 
 .mf-btn-mar{
     margin-right: 15px;

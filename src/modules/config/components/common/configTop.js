@@ -9,7 +9,7 @@ import {
     LoadingOutlined, PlusOutlined,
 } from "@ant-design/icons";
 import {message,Spin} from "antd";
-import {getUser,getVersionInfo} from "tiklab-core-ui";
+import {getVersionInfo} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/btn";
@@ -28,7 +28,6 @@ const ConfigTop = props =>{
     const [processVisible,setProcessVisible] = useState(false)
 
     const configView = localStorage.getItem("configView")
-    const userId = getUser().userId
 
     useEffect(()=>{
         if(getVersionInfo().expired || !isPlugin || !configView){
@@ -39,13 +38,9 @@ const ConfigTop = props =>{
     },[configView])
 
     const run = () => {
-        const params = {
-            userId:userId,
-            pipelineId:pipelineId
-        }
         // 改变按钮
         setProcessVisible(true)
-        pipelineStartStructure(params).then(res=>{
+        pipelineStartStructure(pipelineId).then(res=>{
             if(res.code===0){
                 if(!res.data){
                     // props.history.push(`/index/task/${pipelineId}/structure`)

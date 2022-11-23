@@ -44,12 +44,8 @@ const System=AsyncComponent(()=>import("./modules/system/common/system"))
 const Auth=AsyncComponent(()=>import("./modules/resources/auth/container/auth"))
 const Host=AsyncComponent(()=>import("./modules/resources/host/container/host"))
 const Server=AsyncComponent(()=>import("./modules/resources/server/container/server"))
-const ThirdAddress=AsyncComponent(()=>import("./modules/resources/thirdAddress/cotainer/thirdAddress"))
-
-/* 系统设置 -- 列表 */
-
-const Envi=AsyncComponent(()=>import("./modules/system/setting/container/envi"))
-const Info=AsyncComponent(()=>import("./modules/system/setting/container/info"))
+const Envi=AsyncComponent(()=>import("./modules/resources/envi/container/envi"))
+const Info=AsyncComponent(()=>import("./modules/resources/envi/container/info"))
 
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 
@@ -223,10 +219,6 @@ const routers=[
                     {
                         path:"/index/system/info",
                         component: Info,
-                    },
-                    {
-                        path:"/index/system/thirdAddress",
-                        component: ThirdAddress,
                     },
                     {
                         path:"/index/system/envi",

@@ -8,15 +8,14 @@ import Page from "../../../common/page/page";
 
 const StructureLeft = props =>{
 
-    const {status,pipelineId,structureStore,structureListStore}=props
+    const {status,pipelineId,structureStore}=props
 
     const {findHistoryLog,leftPageList,setModeData,setIndex,index,page,pipelineUserList,
-        execState} = structureStore
-    const {pageCurrent,setPageCurrent,setState,setEnforcer,setMode,drop} = structureListStore
-    
+        execState,pageCurrent,setPageCurrent,setState,setEnforcer,setMode,
+    } = structureStore
+
     const showHistory = (item,i)=> {
         setIndex(i+1)
-        console.log(item)
         findHistoryLog(item.historyId).then(()=>{
             setModeData(item)
         })
@@ -55,7 +54,6 @@ const StructureLeft = props =>{
                 setMode={setMode}
                 changPage={changPage}
                 pipelineUserList={pipelineUserList}
-                drop={drop}
                 pipelineId={pipelineId}
             />
             <div className="structure-content-left-history">
@@ -88,4 +86,4 @@ const StructureLeft = props =>{
     )
 }
 
-export default inject("structureStore","structureListStore")(observer(StructureLeft))
+export default observer(StructureLeft)

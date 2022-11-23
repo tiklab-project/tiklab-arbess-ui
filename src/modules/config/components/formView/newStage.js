@@ -14,6 +14,7 @@ const NewStage = props =>{
                     id={`formView_${index}`}
                     type={item.dataType}
                     key={index}
+                    data={data}
                     pipelineId={pipelineId}
                     setChangeSortVisible={setChangeSortVisible}
                     updateConfigure={updateConfigure}

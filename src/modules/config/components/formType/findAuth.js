@@ -5,6 +5,7 @@ import SuffixStatus from "./suffixStatus";
 import ServerBtn from "../../../resources/server/components/serverBtn";
 import AuthBtn from "../../../resources/auth/components/authBtn";
 import HostBtn from "../../../resources/host/component/hostBtn";
+import EmptyText from "../../../common/emptyText/emptyText";
 
 const FindAuth = props =>{
 
@@ -183,7 +184,7 @@ const FindAuth = props =>{
                             {menu}
                             <Divider style={{margin:"4px 0"}} />
                             <div
-                                style={{padding:"4px 8px",cursor:"pointer"}}
+                                style={{cursor:"pointer"}}
                                 onClick={() => {
                                     setOpen(false)
                                 }}
@@ -193,14 +194,13 @@ const FindAuth = props =>{
                         </>
                     )}
                     bordered={bordered}
+                    notFoundContent={<EmptyText/>}
                 >
-                    {
-                        list && list.map(item=>{
-                            return <Select.Option value={setKey(item)} key={setKey(item)}>
-                                {item.name}
-                            </Select.Option>
-                        })
-                    }
+                    {list && list.map(item=>{
+                        return <Select.Option value={setKey(item)} key={setKey(item)}>
+                            {item.name}
+                        </Select.Option>
+                    })}
                 </Select>
             </Form.Item>
             <div className="formView-inputs-suffix">

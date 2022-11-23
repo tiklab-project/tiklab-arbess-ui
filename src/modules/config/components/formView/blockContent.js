@@ -4,27 +4,16 @@ import {
     ExclamationCircleOutlined,
     SwapOutlined
 } from "@ant-design/icons";
-import {Modal,message} from "antd";
+import {message,Popconfirm} from "antd";
 import Switch from "./switch";
 import Forms from "../formType/forms";
 import HlineIcon from "../formTitle/hlineIcon";
 
 const BlockContent = props =>{
 
-    const {type,pipelineId,setChangeSortVisible,updateConfigure,validType,id} = props
-
-    const delType = type =>{
-        Modal.confirm({
-            title: "删除",
-            icon: <ExclamationCircleOutlined />,
-            content: "删除后数据无法恢复",
-            onOk:()=>confirm(type),
-            okText: "确认",
-            cancelText: "取消",
-        })
-    }
+    const {data,type,pipelineId,setChangeSortVisible,updateConfigure,validType,id} = props
     
-    const confirm = type => {
+    const delType = type => {
         const params = {
             pipeline:{pipelineId},
             taskType:type,
@@ -42,7 +31,18 @@ const BlockContent = props =>{
             return  item==type && <ExclamationCircleOutlined key={index} style={{fontSize:16,color:"#ff0000"}}/>
         })
     }
-    
+
+    const isChange = () =>{
+        if(type < 10 || data && data.length < 2){
+            return false
+        }
+        if(data && data.length === 2){
+            return !data.some(item => item.dataType < 10);
+        }
+
+        return true
+    }
+
     return(
         <>
             <div className="formView-wrapper" id={id}>
@@ -53,7 +53,7 @@ const BlockContent = props =>{
                     </div>
                     <div className="headline-right">
                         {
-                            type >10 &&
+                            isChange() &&
                                 <span className="headline-changSort"
                                       onClick={()=>setChangeSortVisible(true)}
                                 >
@@ -61,12 +61,17 @@ const BlockContent = props =>{
                                     更改顺序
                                 </span>
                         }
-                        <span className="headline-delete"
-                              onClick={()=>delType(type)}
+                        <Popconfirm
+                            title="你确定删除吗"
+                            onConfirm={()=>delType(type)}
+                            okText="确定"
+                            cancelText="取消"
                         >
-                            <DeleteOutlined />
-                            删除
-                        </span>
+                            <span className="headline-delete">
+                                <DeleteOutlined />
+                                删除
+                            </span>
+                        </Popconfirm>
                     </div>
                 </div>
                 <Switch type={type}/>

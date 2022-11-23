@@ -10,13 +10,13 @@ const { RangePicker } = DatePicker
 
 const DynaDetail = props =>{
 
-    const {firstItem,secondItem,goBack,findlogpage,dynaPage,dynamicList,pipelineList,pipelineId} = props
+    const {firstItem,secondItem,goBack,findlogpage,dynaPage,dynamicList,pipelineList,pipelineIdList} = props
 
     const [pageCurrent,setPageCurrent] = useState(1)
     const [timestamp,setTimestamp] = useState(null) // 时间戳
     const [module,setModule] = useState(null)  // 模板类型
     const [actionType,setActionType] = useState(null) // 动作类型
-    const [content,setContent] = useState(pipelineId && pipelineId)  // 内容id
+    const [pipelineId,setPipelineId] = useState(pipelineIdList && pipelineIdList)  // 内容id
 
     const  params = {
         pageParam:{
@@ -25,7 +25,7 @@ const DynaDetail = props =>{
         },
         bgroup:"matflow",
         content:{
-            pipelineId:content
+            pipelineId:pipelineId
         },
         timestamp:timestamp,
         module:module,
@@ -33,55 +33,44 @@ const DynaDetail = props =>{
     }
 
     useEffect(()=>{
-        setContent(pipelineId)
-    },[])
+        setPipelineId(pipelineIdList)
+    },[pipelineIdList])
 
-    const changContent = (value,e,type) =>{
-        if(e.key!=="1"){
-            switch (type) {
-                case "pipeline":
-                    setContent([e.key])
-                    params.content.pipelineId=[e.key]
+    const changContent = (value,field) =>{
+        switch (field) {
+            case "timestamp":
+                if(value.some(item=>item==="")){
+                    params[field] = null
                     break
-                case "module":
-                    setModule(e.key)
-                    params.module=e.key
+                }
+                setTimestamp(value)
+                params[field] = value
+                break
+            case "module":
+                setModule(value)
+                params[field] = value
+                break
+            case "actionType":
+                setActionType(value)
+                params[field] = value
+                break
+            case "pipelineId":
+                if(value === null){
+                    params.content[field] = pipelineIdList
                     break
-                case "action":
-                    setActionType(e.key)
-                    params.actionType=e.key
-                    break
-                case "timestamp":
-                    setTimestamp(e)
-                    params.timestamp=e
-            }
-        }else {
-            switch (type) {
-                case "pipeline":
-                    setContent(pipelineId)
-                    params.content.pipelineId=pipelineId
-                    break
-                case "module":
-                    setModule(null)
-                    params.module=null
-                    break
-                case "action":
-                    setActionType(null)
-                    params.actionType=null
-                    break
-                case "timestamp":
-                    setTimestamp(null)
-                    params.timestamp=null
-            }
+                }
+                params.content[field] = [value]
+                setPipelineId(value)
         }
         findDyna(1)
     }
+
 
     const changPage = pages =>{
         findDyna(pages && pages)
     }
 
-    const findDyna = page =>{
+    const findDyna = (page) =>{
         setPageCurrent(page)
         params.pageParam.currentPage=page
         findlogpage(params)
@@ -103,12 +92,12 @@ const DynaDetail = props =>{
                                 showSearch
                                 placeholder={"流水线"}
                                 style={{width:150}}
-                                onChange={(value,e)=>changContent(value,e,"pipeline")}
+                                onChange={(value)=>changContent(value,"pipelineId")}
                             >
-                                <Select.Option key={"1"} value={"所有"}>所有流水线</Select.Option>
+                                <Select.Option key={"1"} value={null}>所有流水线</Select.Option>
                                 {
                                     pipelineList && pipelineList.map(item=>{
-                                        return <Select.Option value={item.pipelineName} key={item.pipelineId}>{item.pipelineName}</Select.Option>
+                                        return <Select.Option value={item.pipelineId} key={item.pipelineId}>{item.pipelineName}</Select.Option>
                                     })
                                 }
                             </Select>
@@ -116,25 +105,25 @@ const DynaDetail = props =>{
                         <Select
                             placeholder={"类型"}
                             style={{width:150}}
-                            onChange={(value,e)=>changContent(value,e,"action")}
+                            onChange={(value)=>changContent(value,"actionType")}
                         >
-                            <Select.Option key={"1"} value={"所有"}>所有动态</Select.Option>
-                            <Select.Option key={"LOG_PIPELINE"} value={"pipeline"}>流水线动态</Select.Option>
-                            <Select.Option key={"LOG_PIPELINE_CONFIG"} value={"pipelineConfig"}>流水线配置动态</Select.Option>
-                            <Select.Option key={"LOG_PIPELINE_RUN"} value={"run"}>流水线运行动态</Select.Option>
+                            <Select.Option key={"1"} value={null}>所有动态</Select.Option>
+                            <Select.Option key={"2"} value={"LOG_PIPELINE"}>流水线动态</Select.Option>
+                            <Select.Option key={"3"} value={"LOG_PIPELINE_CONFIG"}>流水线配置动态</Select.Option>
+                            <Select.Option key={"4"} value={"LOG_PIPELINE_RUN"}>流水线运行动态</Select.Option>
                         </Select>
                         <Select
                             placeholder={"操作"}
                             style={{width:150}}
-                            onChange={(value,e)=>changContent(value,e,"module")}
+                            onChange={(value)=>changContent(value,"module")}
                         >
-                            <Select.Option key={"1"} value={"所有"}>所有操作</Select.Option>
-                            <Select.Option key={"LOG_MD_PIPELINE_CREATE"} value={"创建"}>创建</Select.Option>
-                            <Select.Option key={"LOG_MD_PIPELINE_UPDATE"} value={"更新"}>更新</Select.Option>
-                            <Select.Option key={"LOG_MD_PIPELINE_DELETE"} value={"删除"}>删除</Select.Option>
+                            <Select.Option key={"1"} value={null}>所有操作</Select.Option>
+                            <Select.Option key={"2"} value={"LOG_MD_PIPELINE_CREATE"}>创建</Select.Option>
+                            <Select.Option key={"3"} value={"LOG_MD_PIPELINE_UPDATE"}>更新</Select.Option>
+                            <Select.Option key={"4"} value={"LOG_MD_PIPELINE_DELETE"}>删除</Select.Option>
                         </Select>
                         <RangePicker
-                            onChange={(value,e)=>changContent(value,e,"timestamp")}
+                            onChange={(value,e)=>changContent(e,"timestamp")}
                             placeholder={["开始时间","结束时间"]}
                         />
                     </Space>
