@@ -1,7 +1,6 @@
-import React,{useState,useEffect} from "react";
-import {Form,Input,message} from "antd";
+import React,{useState} from "react";
+import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
-import SuffixStatus from "./suffixStatus";
 
 const Inputs = props =>{
 
@@ -12,14 +11,14 @@ const Inputs = props =>{
     const {formInitialValues} = configDataStore
 
     const [bordered,setBordered] = useState(false)
-    const [isLoading,setIsLoading] = useState(1)
-    const [validateStatus,setValidateStatus] = useState("")
+    const [enter,setEnter] = useState(false)
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
 
-    const onFocus = () => {
+    const onFocus = e => {
         setBordered(true)
+        setEnter(true)
     }
 
     // 效验
@@ -33,7 +32,9 @@ const Inputs = props =>{
                 }
                 break
             default:
-                return !(isValid && !value)
+                if(isValid){
+                    return value && value.trim() !== "";
+                }
         }
     }
 
@@ -49,57 +50,73 @@ const Inputs = props =>{
 
 
     const onBlur = e => {
-        if(x(e.target.value,formInitialValues[name])){
-            setIsLoading(2)
-            const obj = {}
-            obj[name] = e.target.value
-            formInitialValues[name]=obj[name]
-            const params = {
-                pipeline:{pipelineId},
-                taskType:mode,
-                values:obj,
-                message:"update"
-            }
-            if(validation(mode,name,e.target.value)){
+        // 校验成功
+        if(validation(mode,name,e.target.value)){
+            // 值改变
+            if(x(e.target.value,formInitialValues[name])){
+                const obj = {}
+                obj[name] = e.target.value
+                formInitialValues[name]=obj[name]
+                const params = {
+                    pipeline:{pipelineId},
+                    taskType:mode,
+                    values:obj,
+                    message:"update"
+                }
                 updateConfigure(params).then(res=>{
                     if(res.code===0){
                         document.getElementById(name).classList.remove("formView-validateFields")
-                        setIsLoading(3)
-                    }else {
-                        setIsLoading(4)
-                        message.info(res.msg)
                     }
                 })
-                setBordered(false)
             }
-            else {
-                setIsLoading(4)
-                setBordered(true)
-            }
-            setTimeout(()=>setIsLoading(1),1000)
-        }
-        else {
             setBordered(false)
         }
+        setEnter(false)
     }
 
     const rules = () =>{
         let rule
         if(isValid){
-            rule = [{required:true,message:`请输入${label}`}]
+            rule = [
+                {required:true,message:" "},
+                ({ getFieldValue }) => ({
+                    validator(rule,value) {
+                        if(!value || value.trim() === ""){
+                            return Promise.reject(`请输入${label}`)
+                        }
+                        return Promise.resolve()
+                    }
+                })
+            ]
             if(name==="codeName"){
                 switch (mode) {
                     case 1:
                     case 4:
                         rule =  [
-                            {required:true, message: `请输入${label}`},
-                            {pattern: validCodeGit, message:"请输入正确的git地址"}
+                            {required:true, message: ""},
+                            {pattern: validCodeGit, message:"请输入正确的git地址"},
+                            ({ getFieldValue }) => ({
+                                validator(rule,value) {
+                                    if(!value || value.trim() === ""){
+                                        return Promise.reject(`请输入${label}`);
+                                    }
+                                    return Promise.resolve()
+                                }
+                            }),
                         ]
                         break
                     case 5:
                         rule =  [
-                            {required: true, message: `请输入${label}`},
-                            {pattern: validCodeSvn, message:"请输入正确的svn地址"}
+                            {required: true, message: ""},
+                            {pattern: validCodeSvn,message:"请输入正确的svn地址"},
+                            ({ getFieldValue }) => ({
+                                validator(rule,value) {
+                                    if(!value || value.trim() === ""){
+                                        return Promise.reject(`请输入${label}`)
+                                    }
+                                    return Promise.resolve()
+                                }
+                            })
                         ]
                 }
             }
@@ -107,32 +124,26 @@ const Inputs = props =>{
         return rule
     }
 
+    
     return (
-        <div className="formView-inputs">
-            <Form.Item
-                name={name}
-                label={label}
-                rules={rules()}
-                validateTrigger="onChange"
-                // hasFeedback
-                // validateStatus={validateStatus}
-            >
-                <Input
-                    bordered={bordered}
-                    placeholder={placeholder}
-                    onFocus={onFocus}
-                    onBlur={(e)=>onBlur(e)}
-                    onPressEnter={(e)=>{
-                        onBlur(e)
-                        e.target.blur()
-                    }}
-                    addonBefore={addonBefore}
-                />
-            </Form.Item>
-            <div className="formView-inputs-suffix">
-                <SuffixStatus isLoading={isLoading}/>
-            </div>
-        </div>
+        <Form.Item
+            name={name}
+            label={label}
+            rules={rules()}
+            validateTrigger="onChange"
+        >
+            <Input
+                bordered={bordered}
+                placeholder={enter? placeholder+"，回车保存":placeholder}
+                onFocus={onFocus}
+                onBlur={(e)=>onBlur(e)}
+                onPressEnter={(e)=>{
+                    onBlur(e)
+                    e.target.blur()
+                }}
+                addonBefore={addonBefore}
+            />
+        </Form.Item>
     )
 
 }

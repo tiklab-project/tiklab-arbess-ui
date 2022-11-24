@@ -5,10 +5,10 @@ import ConfigView from "../components/common/configView";
 
 const Config = props =>{
 
-    const {pipelineStore,configDataStore} = props
+    const {pipelineStore,configStore} = props
 
     const {pipeline} = pipelineStore
-    const {data,setOpt} = configDataStore
+    const {data,setOpt} = configStore
 
     const [view,setView] = useState("forms")
 
@@ -44,4 +44,4 @@ const Config = props =>{
     )
 }
 
-export default inject("pipelineStore","configDataStore")(observer(Config))
+export default inject("pipelineStore","configStore")(observer(Config))

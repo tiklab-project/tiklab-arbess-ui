@@ -5,6 +5,7 @@ import {autoHeight} from "../../../common/client/client";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {del} from "../common/delData";
 import Btn from "../../../common/btn/btn";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const lis=[
     {
@@ -32,7 +33,7 @@ const lis=[
         title:"测试",
         desc:[
             {type: 11,tel:"maven单元测试",icon:"ceshi"},
-            {type: 12,tel: "junit",icon:"ceshi"}
+            // {type: 12,tel: "junit",icon:"ceshi"}
         ]
     },
     {
@@ -66,8 +67,7 @@ const SwitchType = props =>{
 
     const {visible,setVisible,showType,configStore,configDataStore,pipelineStore} = props
 
-    const {updateConfigure} = configStore
-    const {data,setData} = configDataStore
+    const {updateConfigure,data} = configStore
     const {pipelineId} = pipelineStore
 
     const [height,setHeight] = useState(0)
@@ -123,11 +123,10 @@ const SwitchType = props =>{
         updateConfigure(params).then(res=>{
             if(res.code===0){
                 data && data.map(ite=>{
-                    if(ite.dataType===showType){
-                        ite.dataType = newType
+                    if(ite.type===showType){
+                        ite.type = newType
                     }
                 })
-                setData([...data])
                 del(newType,configDataStore)
             }
             setVisible(false)
@@ -135,18 +134,21 @@ const SwitchType = props =>{
     }
 
     const footer = (
-        <>
+        <Space>
+            <div style={{color:"#ff0000",fontSize:13}}>
+                <ExclamationCircleOutlined/>
+                <span>切换类型数据会丢失</span>
+            </div>
             <Btn
                 onClick={()=>setVisible(false)}
                 title={"取消"}
-                isMar={true}
             />
             <Btn
                 onClick={onOk}
                 title={"确定"}
                 type={"primary"}
             />
-        </>
+        </Space>
     )
 
     return(

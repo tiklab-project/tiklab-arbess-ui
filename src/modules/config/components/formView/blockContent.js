@@ -62,6 +62,7 @@ const BlockContent = props =>{
                                 </span>
                         }
                         <Popconfirm
+                            placement="topRight"
                             title="你确定删除吗"
                             onConfirm={()=>delType(type)}
                             okText="确定"

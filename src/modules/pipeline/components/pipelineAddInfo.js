@@ -168,7 +168,7 @@ const PipelineAddInfo = props =>{
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
                 },
                 ({ getFieldValue }) => ({
-                    validator(rule, value) {
+                    validator(rule,value) {
                         if(!value || value.trim() === ""){
                             return Promise.reject("名称不能为空");
                         }

@@ -6,12 +6,20 @@ import HostModal from "./hostModal";
 
 const CodeBtn = props =>{
 
-    const {hostStore,isConfig} = props
+    const {hostStore,isConfig,type} = props
     const {createAuthHost,modalVisible,setModalVisible,formValue,setFormValue,updateAuthHost} = hostStore
+
+    const [goodsVisible,setGoodsVisible] = useState(false)
 
     const btnClick = () =>{
         setFormValue("")
-        setModalVisible(true)
+        switch (type) {
+            case 52:
+                setGoodsVisible(true)
+                break
+            default:
+                setModalVisible(true)
+        }
     }
 
     return(
@@ -32,9 +40,18 @@ const CodeBtn = props =>{
                         icon={<PlusOutlined/>}
                     />
             }
+
             <HostModal
                 visible={modalVisible}
                 setVisible={setModalVisible}
+                createAuthHost={createAuthHost}
+                formValue={formValue}
+                updateAuthHost={updateAuthHost}
+            />
+
+            <HostModal
+                visible={goodsVisible}
+                setVisible={setGoodsVisible}
                 createAuthHost={createAuthHost}
                 formValue={formValue}
                 updateAuthHost={updateAuthHost}

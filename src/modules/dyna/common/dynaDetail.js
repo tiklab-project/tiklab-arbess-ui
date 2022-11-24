@@ -10,7 +10,7 @@ const { RangePicker } = DatePicker
 
 const DynaDetail = props =>{
 
-    const {firstItem,secondItem,goBack,findlogpage,dynaPage,dynamicList,pipelineList,pipelineIdList} = props
+    const {firstItem,secondItem,goBack,findlogpage,dynaPage,dynamicList,pipelineIdList,pipelineList} = props
 
     const [pageCurrent,setPageCurrent] = useState(1)
     const [timestamp,setTimestamp] = useState(null) // 时间戳
@@ -93,6 +93,10 @@ const DynaDetail = props =>{
                                 placeholder={"流水线"}
                                 style={{width:150}}
                                 onChange={(value)=>changContent(value,"pipelineId")}
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                                notFoundContent={<EmptyText/>}
                             >
                                 <Select.Option key={"1"} value={null}>所有流水线</Select.Option>
                                 {

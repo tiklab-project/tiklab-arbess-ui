@@ -95,6 +95,7 @@ const CodeModal = props =>{
             closable={false}
             footer={modalFooter}
             style={{height:height,top:60}}
+            destroyOnClose={true}
             className="mf"
         >
             <ModalTitle

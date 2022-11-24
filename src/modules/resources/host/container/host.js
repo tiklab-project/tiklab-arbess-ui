@@ -81,7 +81,7 @@ const Host = props =>{
             title:"端口",
             dataIndex: "port",
             key: "port",
-            width:"10%",
+            width:"8%",
             ellipsis:true,
         },
         {
@@ -116,7 +116,7 @@ const Host = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"10%",
+            width:"8%",
             ellipsis:true,
             render:text => {
                 switch (text) {
@@ -138,7 +138,7 @@ const Host = props =>{
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"5%",
+            width:"9%",
             ellipsis:true,
             render:(text,record) => {
                 return  <Listaction

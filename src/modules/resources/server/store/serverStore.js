@@ -8,6 +8,7 @@ import {
     CallbackUrl
 } from "../api/server";
 
+
 export class ServerStore{
 
     @observable fresh = false

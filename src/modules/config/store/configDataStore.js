@@ -3,7 +3,6 @@ import {action,observable} from "mobx";
 export class ConfigDataStore {
 
     @observable formInitialValues = {} //表单初始化
-    @observable data = [] // 新阶段、新任务需要渲染的值
 
     @observable codeType = "" // 源码管理类型
     @observable testType = ""
@@ -18,18 +17,12 @@ export class ConfigDataStore {
     @observable virShellBlock = ""
     @observable deployShellBlock = ""
     @observable deployOrderShellBlock = ""
-    @observable opt = 1
 
     @observable addConfigVisible = false
 
     @action
     setAddConfigVisible = value =>{
         this.addConfigVisible = value
-    }
-
-    @action
-    setOpt = value =>{
-        this.opt = value
     }
 
     @action
@@ -65,11 +58,6 @@ export class ConfigDataStore {
     @action
     setFormInitialValues = value =>{
         this.formInitialValues = value
-    }
-
-    @action
-    setData = value =>{
-        this.data = value
     }
 
     @action

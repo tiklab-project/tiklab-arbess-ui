@@ -6,7 +6,9 @@ import {
     FileAddress,
     GetFile,
     ConfigValid,
-} from "../api/config"
+} from "../api/config";
+
+import {message} from "antd";
 
 export class ConfigStore{
 
@@ -15,11 +17,28 @@ export class ConfigStore{
     @observable isPlugin = false // 是否存在插件
     @observable valid = []
     @observable validType = []
+    @observable data = []
+    @observable opt = 1
     @observable isFindConfig = false
 
     @action
     setIsPlugin = value =>{
         this.isPlugin = value
+    }
+
+    @action
+    setOpt = value =>{
+        this.opt = value
+    }
+
+    @action
+    mess = value =>{
+        message.success({
+            content:`${value}成功`,
+            duration: 1,
+            maxCount:1,
+            className:"mf-message",
+        })
     }
 
     @action
@@ -30,9 +49,18 @@ export class ConfigStore{
                     switch (values.message) {
                         case "update":
                         case "updateType":
-                            // document.getElementById(Object.keys(values.values)[0]).classList.remove("formView-validateFields")
+                            this.mess("更新")
+                            break
+                        case "create":
+                            this.mess("添加")
+                            this.isFindConfig=!this.isFindConfig
+                            break
+                        case "delete":
+                            this.mess("删除")
+                            this.isFindConfig=!this.isFindConfig
                             break
                         default:
+                            this.mess("更新")
                             this.isFindConfig=!this.isFindConfig
                     }
                     this.enabledValid=!this.enabledValid
@@ -51,6 +79,9 @@ export class ConfigStore{
         param.append("pipelineId", values)
         return new Promise((resolve, reject) => {
             FindAllConfigure(param).then(res=>{
+                if(res.code===0){
+                    this.data = res.data && res.data
+                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

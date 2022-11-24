@@ -9,10 +9,8 @@ import "codemirror/mode/shell/shell.js";
 // import "codemirror/mode/css/css";
 import "codemirror/addon/display/placeholder.js";
 
-import {message} from "antd";
 import {inject,observer} from "mobx-react";
 import "./mirror.scss";
-import SuffixStatus from "./suffixStatus";
 import Btn from "../../../common/btn/btn";
 
 const MirrorContent = forwardRef((props,ref)=>{
@@ -25,7 +23,6 @@ const MirrorContent = forwardRef((props,ref)=>{
     const {pipelineId} = pipelineStore
     const {updateConfigure} = configStore
 
-    const [isLoading,setIsLoading] = useState(1)
     const [bordered,setBordered] = useState(false)
 
     const onFocus = () => {
@@ -46,7 +43,6 @@ const MirrorContent = forwardRef((props,ref)=>{
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
         if(x(obj[name],shellBlock)){
-            setIsLoading(2)
             shellBlock = obj[name]
             setShellBlock(obj[name])
             const params = {
@@ -55,15 +51,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                 values:obj,
                 message:"update"
             }
-            updateConfigure(params).then(res=>{
-                if(res.code===0){
-                    setIsLoading(3)
-                }else {
-                    setIsLoading(4)
-                    message.info(res.msg)
-                }
-            })
-            setTimeout(()=>setIsLoading(1),1000)
+            updateConfigure(params)
         }
         setBordered(false)
     }
@@ -79,11 +67,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                     placeholder: placeholder
                 }}
                 onFocus={onFocus}
-                // onBlur={onBlur}
             />
-            <div className="formViewCodeMirror-suffix">
-                <SuffixStatus isLoading={isLoading}/>
-            </div>
         </div>
         {
             bordered &&

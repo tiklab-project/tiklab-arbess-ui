@@ -11,10 +11,14 @@
         }
         .CodeMirror-placeholder{
             color: #bfbfbf;
+            font-family: Microsoft YaHei;
+        }
+        .CodeMirror-code{
+            font-family: Microsoft YaHei;
         }
     }
-
 }
+
 
 .codeNewStage{
     display: flex;
@@ -27,6 +31,10 @@
         height: 100%;
         .CodeMirror-placeholder{
             color: #bfbfbf;
+            font-family: Microsoft YaHei;
+        }
+        .CodeMirror-code{
+            font-family: Microsoft YaHei;
         }
     }
 }

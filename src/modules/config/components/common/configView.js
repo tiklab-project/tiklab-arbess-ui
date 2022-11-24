@@ -10,9 +10,9 @@ const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig,data} = configStore
 
-    const {setData,formInitialValues,setFormInitialValues,
+    const {formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
         setUnitShellBlock,setBuildShellBlock,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
@@ -29,7 +29,6 @@ const ConfigView = props =>{
     },[])
 
     // 表单初始化
-    const newData = []
     useEffect(()=>{
         // 配置详情
         pipelineId && findAllConfigure(pipelineId).then(res=>{
@@ -50,7 +49,6 @@ const ConfigView = props =>{
     },[pipelineId])
 
     const nonData = ()=>{
-        setData([])
         setCodeType("")
         setFormInitialValues({})
         setUnitShellBlock("")
@@ -64,10 +62,6 @@ const ConfigView = props =>{
     const renderFormData = initialData => {
         for (let i = 0;i<initialData.length;i++){
             const data = initialData[i]
-            newData.push({
-                dataId:i,
-                dataType:data.type,
-            })
             if(data.type < 10){
                 renderCodeData(data)
             }
@@ -86,7 +80,6 @@ const ConfigView = props =>{
             else if(data.type>50 && data.type<60){
                 renderGoods(data)
             }
-            setData([...newData])
             Object.assign(formInitialValues, initialData[i])
             setFormInitialValues({...formInitialValues})
         }
@@ -94,9 +87,21 @@ const ConfigView = props =>{
 
     // 源码管理
     const renderCodeData = data => {
-        const codeFormValue = {
-            gitAuthName:data.auth && data.auth.name,
-            gitAuthId:data.authId
+        let codeFormValue
+        switch (data.type) {
+            case 1:
+            case 4:
+            case 5:
+                codeFormValue = {
+                    gitAuthName:data.auth && data.auth.name+"("+(data.auth.authType === 1?auth.username:"私钥")+")",
+                    gitAuthId:data.authId
+                }
+                break
+            default:
+                codeFormValue = {
+                    gitAuthName:data.auth && data.auth.name+"("+ data.auth.message+")",
+                    gitAuthId:data.authId
+                }
         }
         setCodeType(data.type)
         Object.assign(formInitialValues,codeFormValue)
@@ -117,7 +122,7 @@ const ConfigView = props =>{
     // 部署
     const renderDeploy = data => {
         const DeployFormValue={
-            deployAuthName:data.auth && data.auth.name,
+            deployAuthName:data.auth && data.auth.name+"("+ data.auth.ip+")",
             deployAuthId: data.authId
         }
         deploy(data)
@@ -137,7 +142,7 @@ const ConfigView = props =>{
     // 代码扫描
     const renderScan = data => {
         const scanFormValue={
-            scanAuthName:data.auth && data.auth.name,
+            scanAuthName:data.auth && data.auth.name+"("+data.auth.message+")",
             scanAuthId:data.authId
         }
         setScanType(data.type)
@@ -146,9 +151,19 @@ const ConfigView = props =>{
 
     // 推动制品
     const renderGoods = data => {
-        const goodsFormValue={
-            goodsAuthName:data.auth && data.auth.name,
-            goodsAuthId:data.authId
+        let goodsFormValue
+        switch (data.type) {
+            case 51:
+                goodsFormValue={
+                    goodsAuthName:data.auth && data.auth.name+"("+data.auth.message+")",
+                    goodsAuthId:data.authId
+                }
+                break
+            case 52:
+                goodsFormValue={
+                    goodsAuthName:data.auth && data.auth.name+"("+ data.auth.ip+")",
+                    goodsAuthId:data.authId
+                }
         }
         setGoodsType(data.type)
         Object.assign(formInitialValues,goodsFormValue)
@@ -168,7 +183,6 @@ const ConfigView = props =>{
             {/*    configDataStore={configDataStore}*/}
             {/*    pipelineStore={pipelineStore}*/}
             {/*/>*/}
-
 
              {
                  !getVersionInfo().expired && isPlugin?

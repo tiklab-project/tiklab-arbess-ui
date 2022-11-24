@@ -1,7 +1,6 @@
 import React,{useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
-import SuffixStatus from "./suffixStatus";
 import ServerBtn from "../../../resources/server/components/serverBtn";
 import AuthBtn from "../../../resources/auth/components/authBtn";
 import HostBtn from "../../../resources/host/component/hostBtn";
@@ -21,7 +20,6 @@ const FindAuth = props =>{
     const [list,setList] = useState([])
     const [open,setOpen] = useState(false)
     const [bordered,setBordered] = useState(false)
-    const [isLoading,setIsLoading] = useState(1)
 
     // 存储authId
     const setAuthId = key =>{
@@ -40,7 +38,6 @@ const FindAuth = props =>{
 
     // 改变凭证
     const changeGitSelect = (value,e) =>{
-        setIsLoading(2)
         setAuthId(e.key)
         const params = {
             taskType:type,
@@ -48,19 +45,33 @@ const FindAuth = props =>{
             values:{authId:e.key},
             message:"update"
         }
-        updateConfigure(params).then(res=>{
-            if(res.code===0){
-                setIsLoading(3)
-            }else {
-                setIsLoading(4)
-            }
-            setTimeout(()=>setIsLoading(1),1000)
-        })
+        updateConfigure(params)
     }
 
     // 失去交代
     const onBlur = () => {
         setBordered(false)
+    }
+
+    const getList = res =>{
+        if(res.code===0 && res.data){
+            setList(res.data)
+        }
+    }
+
+    // 区分字段
+    const name = type => {
+        const zz = Math.floor(type/10)
+        switch (zz) {
+            case 0:
+                return "gitAuthName"
+            case 3:
+                return "deployAuthName"
+            case 4:
+                return "scanAuthName"
+            case 5:
+                return "goodsAuthName"
+        }
     }
 
     // 获取焦点，获取下拉内容
@@ -85,27 +96,7 @@ const FindAuth = props =>{
         }
     }
 
-    const getList = res =>{
-        if(res.code===0 && res.data){
-            setList(res.data)
-        }
-    }
-
-    // 区分字段
-    const name = type => {
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return "gitAuthName"
-            case 3:
-                return "deployAuthName"
-            case 4:
-                return "scanAuthName"
-            case 5:
-                return "goodsAuthName"
-        }
-    }
-    
+    //认证标题
     const label = type => {
         switch (type) {
             case 1:
@@ -123,7 +114,6 @@ const FindAuth = props =>{
             case 52:
                 return "主机地址"
         }
-      
     }
 
     // 下拉框 id
@@ -161,52 +151,65 @@ const FindAuth = props =>{
             case 32:
             case 52:
                 return <HostBtn isConfig={true} type={type}/>
+        }
+    }
 
+    const selectValue = item =>{
+        switch (type) {
+            case 1:
+            case 4:
+            case 5:
+                return item.name+"("+(item.authType === 1?item.username:"私钥")+")"
+            case 2:
+            case 3:
+            case 41:
+            case 51:
+                return item.name+"("+item.message+")"
+            case 31:
+            case 32:
+            case 52:
+               return item.name+"("+item.ip+")"
         }
     }
 
     return(
-        <div className="formView-inputs">
-            <Form.Item
-                name={name(type)}
-                label={label(type)}
+        <Form.Item
+            name={name(type)}
+            label={label(type)}
+        >
+            <Select
+                showSearch
+                placeholder={label(type)}
+                open={open}
+                bordered={bordered}
+                onFocus={()=>onFocus(type)}
+                onBlur={onBlur}
+                onChange={(value,e)=>changeGitSelect(value,e)}
+                notFoundContent={<EmptyText/>}
+                onDropdownVisibleChange={(visible)=>setOpen(visible)}
+                filterOption={(input, option) =>
+                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+                dropdownRender={menu=> (
+                    <>
+                        {menu}
+                        <Divider style={{margin:"4px 0"}} />
+                        <div
+                            style={{cursor:"pointer"}}
+                            onClick={() => {
+                                setOpen(false)
+                            }}
+                        >
+                            {renderBtn(type)}
+                        </div>
+                    </>
+                )}
             >
-                <Select
-                    showSearch
-                    onChange={(value,e)=>changeGitSelect(value,e)}
-                    placeholder={label(type)}
-                    open={open}
-                    onFocus={()=>onFocus(type)}
-                    onBlur={onBlur}
-                    onDropdownVisibleChange={(visible)=>setOpen(visible)}
-                    dropdownRender={menu=> (
-                        <>
-                            {menu}
-                            <Divider style={{margin:"4px 0"}} />
-                            <div
-                                style={{cursor:"pointer"}}
-                                onClick={() => {
-                                    setOpen(false)
-                                }}
-                            >
-                                {renderBtn(type)}
-                            </div>
-                        </>
-                    )}
-                    bordered={bordered}
-                    notFoundContent={<EmptyText/>}
-                >
-                    {list && list.map(item=>{
-                        return <Select.Option value={setKey(item)} key={setKey(item)}>
-                            {item.name}
-                        </Select.Option>
-                    })}
-                </Select>
-            </Form.Item>
-            <div className="formView-inputs-suffix">
-                <SuffixStatus isLoading={isLoading}/>
-            </div>
-        </div>
+                {list && list.map(item=>{
+                    return <Select.Option value={setKey(item)} key={setKey(item)}>{selectValue(item)}</Select.Option>
+                })}
+            </Select>
+        </Form.Item>
     )
 }
 

@@ -25,7 +25,7 @@ const NewStage = props =>{
                         setIndex={setIndex}
                         inse={index}
                         validType={validType}
-                        type={item.dataType}
+                        type={item.type}
                     />
         })
     }

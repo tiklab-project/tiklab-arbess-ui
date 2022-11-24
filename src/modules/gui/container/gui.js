@@ -15,8 +15,8 @@ const Gui = props =>{
     const {pipelineStore,configDataStore,configStore} = props
 
     const {pipeline} = pipelineStore
-    const {formInitialValues,data,codeType,setCodeType,setData} = configDataStore
-    const {updateConfigure,configValid,enabledValid,validType} = configStore
+    const {formInitialValues,codeType,setCodeType} = configDataStore
+    const {updateConfigure,configValid,enabledValid,validType,data} = configStore
 
     const [form] = Form.useForm()
     const pipelineId = pipeline.pipelineId
@@ -122,7 +122,6 @@ const Gui = props =>{
     }
     
     const renderType = (type,taskType) => {
-        const newData = [...data]
         switch (type) {
             case "create":
                 setNewStage(taskType)
@@ -132,7 +131,6 @@ const Gui = props =>{
                 setCodeType(taskType)
                 break
         }
-        setData([...newData])
     }
 
     return (

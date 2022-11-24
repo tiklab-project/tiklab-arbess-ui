@@ -19,10 +19,7 @@ const Pipeline = props =>{
     const [addPipelineVisible,setAddPipelineVisible] = useState(false)
 
     const onChangeSearch = e =>{
-        const params = {
-            pipelineName:e.target.value,
-        }
-        findLike(params)
+        findLike(e.target.value)
     }
 
     useEffect(()=>{

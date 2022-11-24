@@ -74,7 +74,7 @@ const Auth = props =>{
             title:"权 限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"15%",
+            width:"10%",
             ellipsis:true,
             render:text => {
                 switch (text) {
@@ -96,7 +96,7 @@ const Auth = props =>{
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"5%",
+            width:"10%",
             ellipsis:true,
             render:(text,record) => {
                 return  <Listaction

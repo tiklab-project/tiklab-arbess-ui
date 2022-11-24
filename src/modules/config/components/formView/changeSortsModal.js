@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Modal,Tree,message,Space} from "antd";
+import {Modal,Tree} from "antd";
 import {BorderVerticleOutlined} from "@ant-design/icons";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
@@ -107,13 +107,8 @@ const ChangeSortsModal = props =>{
             taskSort:taskSort,
             taskType:1,
         }
-        const newArr = [...mData]
-        updateConfigure(params).then(res=>{
-            if(res.code===50001){
-                message.info(res.msg)
-            }
-            setChangeSortVisible(false)
-        })
+        updateConfigure(params)
+        setChangeSortVisible(false)
     }
 
     return (

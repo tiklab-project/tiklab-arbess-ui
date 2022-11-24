@@ -12,7 +12,7 @@ const NewStage = props =>{
         return <BlockContent
                     {...props}
                     id={`formView_${index}`}
-                    type={item.dataType}
+                    type={item.type}
                     key={index}
                     data={data}
                     pipelineId={pipelineId}

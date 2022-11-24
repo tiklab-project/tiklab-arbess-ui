@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useState } from "react";
 import {Modal,Form,Input,Select,Tooltip,message,Space} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/btn";
@@ -25,28 +25,18 @@ const ServerModal = props =>{
 
     useEffect(()=>{
         visible && renderFormValue(formValue)
-        return ()=>form.resetFields()
     },[visible])
 
     const renderFormValue = formValue => {
-        switch (formValue) {
-            case "sys":
-                form.setFieldsValue({type:2})
-                setServerWay(2)
-                setInfos("")
-                setBan(false)
-                break
-            case "config":
-                form.setFieldsValue({type:type})
-                setServerWay(type)
-                setInfos("")
-                break
-            default:
-                form.setFieldsValue(formValue)
-                setBan(true)
+        if(formValue){
+            form.setFieldsValue(formValue)
+            setBan(true)
+        }else {
+            form.resetFields()
+            setServerWay(type)
+            setInfos("")
         }
     }
-
 
     useEffect(()=>{
         visible && isAddAuth()
@@ -64,9 +54,9 @@ const ServerModal = props =>{
             }else{
                 const params = {
                     type:serverWay,
-                    clientId:form && form.getFieldValue("clientId"),
-                    clientSecret:form && form.getFieldValue("clientSecret"),
-                    callbackUrl:form && form.getFieldValue("callbackUrl"),
+                    clientId: form.getFieldValue("clientId"),
+                    clientSecret: form.getFieldValue("clientSecret"),
+                    callbackUrl: form.getFieldValue("callbackUrl"),
                     code:codeValue
                 }
                 findAccessToken(params).then(res=>{
@@ -83,13 +73,15 @@ const ServerModal = props =>{
     const validCallbackUrl = /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
 
     const isAddAuth = () => {
-        let clientId = form && form.getFieldValue("clientId")
-        let clientSecret = form && form.getFieldValue("clientSecret")
-        let callbackUrl = form && form.getFieldValue("callbackUrl")
-        if (isNull(clientId) || isNull(clientSecret) || isNull(callbackUrl) || !validCallbackUrl.test(callbackUrl)) {
-            setAddAuth(false)
-        } else {
-            setAddAuth(true)
+        if(form){
+            let clientId = form.getFieldValue("clientId")
+            let clientSecret = form.getFieldValue("clientSecret")
+            let callbackUrl = form.getFieldValue("callbackUrl")
+            if (isNull(clientId) || isNull(clientSecret) || isNull(callbackUrl) || !validCallbackUrl.test(callbackUrl)) {
+                setAddAuth(false)
+            } else {
+                setAddAuth(true)
+            }
         }
     }
 
@@ -265,7 +257,6 @@ const ServerModal = props =>{
                         .validateFields()
                         .then((values) => {
                             onOk(values)
-                            form.resetFields()
                         })
                 }}
                 title={"确定"}
@@ -274,26 +265,51 @@ const ServerModal = props =>{
         </>
     )
 
-    const modalTitle = () =>{
-        if(formValue==="sys" || formValue==="config"){
-            return "添加"
-        }
-        return "修改"
-    }
+    const common = (
+        <>
+            <Form.Item
+                name="type"
+                label="授权类型"
+            >
+                <Select
+                    onChange={changeServerWay}
+                    disabled={ban||isConfig}
+                >
+                    <Select.Option value={2}>Gitee</Select.Option>
+                    <Select.Option value={3}>Github</Select.Option>
+                    <Select.Option value={41}>sonar</Select.Option>
+                    <Select.Option value={51}>nexus</Select.Option>
+                </Select>
+            </Form.Item>
+            <Form.Item name="authPublic" label="服务权限">
+                <Select>
+                    <Select.Option value={1}>全局</Select.Option>
+                    <Select.Option value={2}>私有</Select.Option>
+                </Select>
+            </Form.Item>
+            <Form.Item
+                name="name"
+                label="名称"
+                rules={[{required:true,message:`名称不能空`}]}
+            >
+                <Input/>
+            </Form.Item>
+        </>
+    )
 
     return(
         <Modal
             visible={visible}
             onCancel={()=>setVisible(false)}
             closable={false}
+            destroyOnClose={true}
             footer={modalFooter}
             style={{height:height,top:60}}
             className="mf"
-
         >
             <ModalTitle
                 setVisible={setVisible}
-                title={modalTitle()}
+                title={formValue===""?"添加":"修改"}
             />
             <div style={{maxHeight:"calc(100% - 120px)",overflow:"auto"}}>
                 <Form
@@ -303,33 +319,7 @@ const ServerModal = props =>{
                     onValuesChange={onValuesChange}
                     initialValues={{type:serverWay,authPublic:1,authWay:1,authType:1}}
                 >
-                    <Form.Item
-                        name="type"
-                        label="授权类型"
-                    >
-                        <Select
-                            onChange={changeServerWay}
-                            disabled={ban||isConfig}
-                        >
-                            <Select.Option value={2}>Gitee</Select.Option>
-                            <Select.Option value={3}>Github</Select.Option>
-                            <Select.Option value={41}>sonar</Select.Option>
-                            <Select.Option value={51}>nexus</Select.Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item name="authPublic" label="服务权限">
-                        <Select>
-                            <Select.Option value={1}>全局</Select.Option>
-                            <Select.Option value={2}>私有</Select.Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item
-                        name="name"
-                        label="名称"
-                        rules={[{required:true,message:`名称不能空`}]}
-                    >
-                        <Input/>
-                    </Form.Item>
+                    {common}
                     {
                         (serverWay===3 || serverWay===2) && authorize
                     }

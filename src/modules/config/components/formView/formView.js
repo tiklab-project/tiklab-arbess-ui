@@ -9,8 +9,8 @@ const formView = props =>{
 
     const {configDataStore,configStore,pipeline} = props
 
-    const {data,formInitialValues,opt,setOpt,setAddConfigVisible} = configDataStore
-    const {configValid,enabledValid,updateConfigure,validType} = configStore
+    const {formInitialValues,setAddConfigVisible} = configDataStore
+    const {data,opt,setOpt,configValid,enabledValid,updateConfigure,validType} = configStore
 
     const [form] = Form.useForm()
 
@@ -42,7 +42,6 @@ const formView = props =>{
                     id="form"
                     form={form}
                     autoComplete="off"
-                    scrollToFirstError={true}
                     initialValues={{authType:1}}
                 >
                     <NewStage

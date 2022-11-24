@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {Form,Select} from "antd";
 import FindAuth from "./findAuth";
 import {inject,observer} from "mobx-react";
-import SuffixStatus from "./suffixStatus";
+import EmptyText from "../../../common/emptyText/emptyText";
 
 const CodeGiteeOrGithub = props =>{
 
@@ -15,7 +15,6 @@ const CodeGiteeOrGithub = props =>{
 
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
     const [fieldName,setFieldName] = useState("")
-    const [isLoading,setIsLoading] = useState(1)
 
     useEffect(()=>{
         if(formInitialValues && formInitialValues.codeName){
@@ -35,7 +34,6 @@ const CodeGiteeOrGithub = props =>{
     }
 
     const change = (key,value)=>{
-        setIsLoading(2)
         const obj = {}
         obj[key] = value
         const params = {
@@ -44,15 +42,8 @@ const CodeGiteeOrGithub = props =>{
             values:obj,
             message:"update"
         }
-        updateConfigure(params).then(res=>{
-            if(res.code===0){
-                formInitialValues[key]=value
-                setIsLoading(3)
-            }else {
-                setIsLoading(4)
-            }
-            setTimeout(()=>setIsLoading(1),1000)
-        })
+        formInitialValues[key]=value
+        updateConfigure(params)
     }
 
     const onFocus = name => {
@@ -82,59 +73,46 @@ const CodeGiteeOrGithub = props =>{
     return(
         <>
             <FindAuth type={codeType}/>
-            <div className="formView-inputs">
-                <Form.Item
-                    name={"codeName"}
-                    label="仓库"
-                    rules={[{required:true, message:"请选择仓库"}]}
+            <Form.Item
+                name={"codeName"}
+                label="仓库"
+                rules={[{required:true, message:"请选择仓库"}]}
+            >
+                <Select
+                    onChange={changeGitStoreHouse}
+                    onFocus={()=>onFocus("codeName")}
+                    onBlur={onBlur}
+                    bordered={fieldName === "codeName"}
+                    placeholder="仓库"
+                    notFoundContent={<EmptyText/>}
                 >
-                    <Select
-                        onChange={changeGitStoreHouse}
-                        onFocus={()=>onFocus("codeName")}
-                        onBlur={onBlur}
-                        bordered={fieldName === "codeName"}
-                        placeholder="仓库"
-                    >
-                        {
-                            storehouseList && storehouseList.map(item=>{
-                                return <Select.Option key={item} value={item}> {item} </Select.Option>
-                            })
-                        }
-                    </Select>
-                </Form.Item>
-                <div className="formView-inputs-suffix">
-                    {fieldName === "codeName" &&
-                        <SuffixStatus isLoading={isLoading}/>
-                    }
-                </div>
-            </div>
-            <div className="formView-inputs">
-                <Form.Item
-                    name={"codeBranch"}
-                    label="分支"
-                >
-                    <Select
-                        disabled={prohibited}
-                        bordered={fieldName === "codeBranch"}
-                        placeholder="分支"
-                        onFocus={()=>onFocus("codeBranch")}
-                        onBlur={onBlur}
-                        onChange={changeBranch}
-                    >
-                        {
-                            branchList && branchList.map(item=>{
-                                return  <Select.Option key={item} value={item}> {item} </Select.Option>
-                            })
-                        }
-                    </Select>
-                </Form.Item>
-                <div className="formView-inputs-suffix">
                     {
-                        fieldName === "codeBranch" &&
-                        <SuffixStatus isLoading={isLoading}/>
+                        storehouseList && storehouseList.map(item=>{
+                            return <Select.Option key={item} value={item}> {item} </Select.Option>
+                        })
                     }
-                </div>
-            </div>
+                </Select>
+            </Form.Item>
+            <Form.Item
+                name={"codeBranch"}
+                label="分支"
+            >
+                <Select
+                    disabled={prohibited}
+                    bordered={fieldName === "codeBranch"}
+                    placeholder="分支"
+                    onFocus={()=>onFocus("codeBranch")}
+                    onBlur={onBlur}
+                    onChange={changeBranch}
+                    notFoundContent={<EmptyText/>}
+                >
+                    {
+                        branchList && branchList.map(item=>{
+                            return  <Select.Option key={item} value={item}> {item} </Select.Option>
+                        })
+                    }
+                </Select>
+            </Form.Item>
         </>
     )
 }

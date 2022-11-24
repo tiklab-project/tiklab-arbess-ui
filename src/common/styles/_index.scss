@@ -88,6 +88,17 @@ ul li{
     overflow: hidden;
 }
 
+.ant-message{
+    top: 50px;
+    .ant-message-notice{
+        padding: 0;
+    }
+    .ant-message-notice-content{
+        width: 50%;
+        background: #e8eaf3;
+    }
+}
+
 .mf .ant-avatar{
     width: 22px;
     height: 22px;
@@ -112,6 +123,10 @@ ul li{
     &-5{
         background: #caf3ef;
     }
+}
+
+.mf-message{
+
 }
 
 .home-limited{
@@ -171,7 +186,7 @@ ul li{
 
     --mf-sider-color: #efefef;
     --mf-select-color: #e3e8f0;
-    --mf-hover-color: #EDF0F5;
+    --mf-hover-color: #edf0f5;
     --mf-backdrop-color: #f7f7f7;
     --mf-head-height: 48px;
     --mf-content-height: calc(100vh - 48px)

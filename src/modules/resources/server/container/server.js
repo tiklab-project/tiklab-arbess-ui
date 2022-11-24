@@ -129,7 +129,7 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"15%",
+            width:"10%",
             ellipsis:true,
             render:text => authPublic(text)
         },
@@ -144,7 +144,7 @@ const Server = props =>{
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"5%",
+            width:"10%",
             ellipsis:true,
             render:(text,record) => action(text,record)
         }
@@ -180,7 +180,7 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"15%",
+            width:"10%",
             ellipsis:true,
             render:text => authPublic(text)
         },
@@ -195,7 +195,7 @@ const Server = props =>{
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"5%",
+            width:"10%",
             ellipsis:true,
             render:(text,record) => action(text,record)
         }
@@ -253,14 +253,14 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"15%",
+            width:"10%",
             ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"5%",
+            width:"10%",
             ellipsis:true,
             render:(text,record) => action(text,record)
         }
@@ -283,7 +283,7 @@ const Server = props =>{
         <div className="resources home-limited mf">
             <div className="resources-upper">
                 <BreadcrumbContent firstItem={"服务配置"} />
-                <ServerBtn/>
+                <ServerBtn type={2}/>
             </div>
             <Tabs
                 tabLis={lis}

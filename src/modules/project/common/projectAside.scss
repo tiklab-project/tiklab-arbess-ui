@@ -59,6 +59,7 @@
     &-content{
         flex: 1;
         height: 100%;
+        overflow: auto;
     }
     .aside_content_icon{
         font-size: var(--tiklab-icon-size-16);

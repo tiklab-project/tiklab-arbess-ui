@@ -23,7 +23,7 @@ const Anch = props =>{
                     key={index}
                     className={`anch-item ${opt===index ?"anch-select":""}`}
                 >
-                    <Headline type={item.dataType}/>
+                    <Headline type={item.type}/>
                 </div>
     }
 

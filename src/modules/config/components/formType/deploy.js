@@ -1,11 +1,11 @@
 import React,{useEffect,useState} from "react";
-import {Form,Select} from "antd";
+import {Form,Select,Modal} from "antd";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 import Mirror from "./mirror";
 import {inject,observer} from "mobx-react";
 import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
-import SuffixStatus from "./suffixStatus";
 
 const Deploy = props =>{
 
@@ -17,8 +17,8 @@ const Deploy = props =>{
     const {pipelineId,pipeline} = pipelineStore
 
     const [bordered,setBordered] = useState(false)
-    const [isLoading,setIsLoading] = useState(1)
     const [messageInfo,setMessageInfo] = useState("")
+    const [value,setValue] = useState("")
 
     useEffect(()=>{
         return ()=>{
@@ -51,21 +51,24 @@ const Deploy = props =>{
     }
     
     const changDeployType = value => {
-        setIsLoading(2)
         const params = {
             pipeline:{pipelineId},
             taskType:deployType,
             values:{authType:value},
             message:"update"
         }
-        updateConfigure(params).then(res=>{
-            if(res.code===0){
-                setIsLoading(3)
-                formInitialValues.authType=value
-            }else {
-                setIsLoading(4)
-            }
-            setTimeout(()=>setIsLoading(1),1000)
+        updateConfigure(params)
+        formInitialValues.authType=value
+    }
+
+    const confirm = value =>{
+        Modal.confirm({
+            title: "切换",
+            icon: <ExclamationCircleOutlined />,
+            content: "切换后数据会被删除",
+            onOk:()=>confirm(value),
+            okText: "确认",
+            cancelText: "取消",
         })
     }
 
@@ -79,25 +82,20 @@ const Deploy = props =>{
 
     return(
         <>
-            <div className="formView-inputs">
-                <Form.Item
-                    name={"authType"}
-                    label="部署方式"
+            <Form.Item
+                name={"authType"}
+                label="部署方式"
+            >
+                <Select
+                    bordered={bordered}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    onChange={changDeployType}
                 >
-                    <Select
-                        bordered={bordered}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
-                        onChange={changDeployType}
-                    >
-                        <Select.Option value={1}>结构化部署</Select.Option>
-                        <Select.Option value={2}>自定义部署</Select.Option>
-                    </Select>
-                </Form.Item>
-                <div className="formView-inputs-suffix">
-                    <SuffixStatus isLoading={isLoading}/>
-                </div>
-            </div>
+                    <Select.Option value={1}>结构化部署</Select.Option>
+                    <Select.Option value={2}>自定义部署</Select.Option>
+                </Select>
+            </Form.Item>
             <Form.Item
                 shouldUpdate={(prevValues,currentValues)=> prevValues.authType!==currentValues.authType}
             >

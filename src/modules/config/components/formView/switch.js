@@ -19,16 +19,26 @@ const Switch = props =>{
         setShowType(type)
     }
 
+    const isBtn = type => {
+        if(type===11 || type===41){
+            return
+        }
+        else {
+            return <Btn
+                        title={<><SwapOutlined/>切换类型</>}
+                        type={"link-small"}
+                        onClick={()=>onClick(type)}
+                    />
+        }
+    }
+    
     const renderType = type =>{
         return  <Space>
                     <div className="configCode-gitList-item ">
                         <SubIcon type={type}/>
                     </div>
-                    <Btn
-                        title={<><SwapOutlined/>切换类型</>}
-                        type={"link-small"}
-                        onClick={()=>onClick(type)}
-                    />
+                    {isBtn(type)}
+
                 </Space>
     }
 

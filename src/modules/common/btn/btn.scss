@@ -37,6 +37,13 @@
     }
 }
 
+.mf-btn-small{
+    background: transparent;
+    border-color: transparent;
+    padding: 0;
+    font-size: var(--tiklab-font-13);
+}
+
 .mf-btn-dangerous{
     color: #fff;
     background: #ff0000;

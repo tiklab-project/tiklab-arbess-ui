@@ -12,6 +12,7 @@ import {
 } from "../api/pipeline";
 
 import {getUser} from "tiklab-core-ui";
+import {message} from "antd";
 
 export class PipelineStore {
 
@@ -90,7 +91,7 @@ export class PipelineStore {
     @action
     findLike = values =>{
         const params = new FormData()
-        params.append("pipelineName",values.pipelineName)
+        params.append("pipelineName",values)
         params.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
             FindLike(params).then(res=>{
