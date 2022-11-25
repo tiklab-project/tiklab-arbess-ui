@@ -32,13 +32,13 @@ export class ConfigStore{
     }
 
     @action
+    setIsFindConfig = value =>{
+        this.isFindConfig = value
+    }
+
+    @action
     mess = value =>{
-        message.success({
-            content:`${value}成功`,
-            duration: 1,
-            maxCount:1,
-            className:"mf-message",
-        })
+        message.success(`${value}成功`,1.5)
     }
 
     @action
@@ -93,7 +93,6 @@ export class ConfigStore{
     @action
     fileAddress = () =>{
         FileAddress().then(res=>{
-            console.log(res)
             if(res.code===0){
                 this.profileAddress = res.data
             }

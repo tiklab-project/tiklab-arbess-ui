@@ -80,6 +80,9 @@ export class PipelineStore {
         }
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
+                if(res.code===0){
+                    message.info("创建成功")
+                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -109,10 +112,13 @@ export class PipelineStore {
     @action //删除流水线
     deletePipeline = async value =>{
         const param = new FormData()
-        param.append("pipelineId",value.pipelineId)
+        param.append("pipelineId",value)
         param.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
             DeletePipeline(param).then(res=>{
+                if(res.code===0){
+                    message.info("删除成功")
+                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -130,6 +136,9 @@ export class PipelineStore {
         }
         return new Promise((resolve, reject) => {
             UpdatePipeline(params).then(res=>{
+                if(res.code===0){
+                    message.info("更新成功")
+                }
                 this.findAllPipelineStatus()
                 resolve(res)
             }).catch(error=>{
@@ -158,7 +167,8 @@ export class PipelineStore {
             pipeline:{pipelineId:value.pipeline.pipelineId},
             userId:getUser().userId
         }
-        return await UpdateFollow(params)
+        const data = await UpdateFollow(params)
+        return data
     }
 
     @action

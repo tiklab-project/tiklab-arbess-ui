@@ -7,6 +7,8 @@ import {
     FindAllAuth,
 } from "../api/auth";
 
+import {message} from "antd";
+
 export class AuthStore {
 
     @observable fresh = false
@@ -29,6 +31,10 @@ export class AuthStore {
         const data = await CreateAuth(values)
         if(data.code===0){
             this.fresh = !this.fresh
+            message.info(`添加成功`)
+        }
+        else {
+            message.info(`添加失败`)
         }
         return data
     }
@@ -40,6 +46,10 @@ export class AuthStore {
         const data = await DeleteAuth(param)
         if(data.code===0){
             this.fresh=!this.fresh
+            message.info(`删除成功`)
+        }
+        else {
+            message.info(`删除失败`)
         }
         return data
     }
@@ -49,6 +59,10 @@ export class AuthStore {
         const data = await UpdateAuth(value)
         if(data.code===0){
             this.fresh=!this.fresh
+            message.info(`修改成功`)
+        }
+        else {
+            message.info(`修改失败`)
         }
         return data
     }

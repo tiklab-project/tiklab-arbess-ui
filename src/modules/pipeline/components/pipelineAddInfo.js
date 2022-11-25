@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {Form,Input,message} from "antd";
+import React, {useEffect,useState} from "react";
+import {Form,Input} from "antd";
 import {LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import "./pipelineAddInfo.scss";
@@ -64,7 +64,6 @@ const PipelineAddInfo = props =>{
                 if (res.code === 0) {
                     value.pipelineName!=="" && (pipeline.pipelineName = value.pipelineName)
                     props.history.push(`/index/task/${pipelineId}/survey`)
-                    message.info("更新成功")
                 }
             })
         }else {
@@ -77,9 +76,6 @@ const PipelineAddInfo = props =>{
             createPipeline(params).then(res => {
                 if (res.code === 0 && res.data) {
                     props.history.push(`/index/task/${res.data}/config`)
-                    message.info("创建成功")
-                } else {
-                    message.error("创建失败")
                 }
             })
         }

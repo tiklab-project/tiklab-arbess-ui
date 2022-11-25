@@ -17,8 +17,8 @@ const Deploy = props =>{
     const {pipelineId,pipeline} = pipelineStore
 
     const [bordered,setBordered] = useState(false)
+    const [showArrow,setShowArrow] = useState(false)
     const [messageInfo,setMessageInfo] = useState("")
-    const [value,setValue] = useState("")
 
     useEffect(()=>{
         return ()=>{
@@ -87,7 +87,10 @@ const Deploy = props =>{
                 label="部署方式"
             >
                 <Select
+                    showArrow={showArrow}
                     bordered={bordered}
+                    onMouseEnter={()=>setShowArrow(true)}
+                    onMouseLeave={()=>setShowArrow(false)}
                     onFocus={onFocus}
                     onBlur={onBlur}
                     onChange={changDeployType}
@@ -122,7 +125,7 @@ const Deploy = props =>{
                                 type={deployType}
                                 shellBlock={deployShellBlock}
                                 setShellBlock={setDeployShellBlock}
-                                placeholder={"请输入Shell命令"}
+                                placeholder={"Shell命令"}
                             />
                         </Form.Item>
                 }

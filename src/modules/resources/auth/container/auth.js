@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import {Space,Table,message} from "antd";
+import {Space,Table} from "antd";
 import {inject,observer} from "mobx-react";
 import {Profile} from "tiklab-eam-ui";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
@@ -24,9 +24,7 @@ const Auth = props =>{
     }
 
     const del = (text,record) => {
-        deleteAuth(record.authId).then(res=>{
-            res.code===0 && message.info("删除成功")
-        })
+        deleteAuth(record.authId)
     }
 
     const commonColumns = [

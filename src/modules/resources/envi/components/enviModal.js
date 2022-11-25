@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Modal,Form,Select,Input,message} from "antd";
+import {Modal,Form,Select,Input} from "antd";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
 
@@ -24,7 +24,7 @@ const lis = [
 
 const EnviModal = props =>{
 
-    const {visible,setVisible,enviData,updatePipelineScm,formValue,fresh,setFresh} = props
+    const {visible,setVisible,enviData,updatePipelineScm,formValue} = props
 
     const [form] = Form.useForm()
     const [scmType,setScmType] = useState(1)
@@ -71,14 +71,7 @@ const EnviModal = props =>{
             scmName:values.scmName,
             scmAddress:values.scmAddress,
         }
-        updatePipelineScm(params).then(res=>{
-            if(res.code===0){
-                message.success({content:"保存成功",className:"message"})
-                setFresh(!fresh)
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        updatePipelineScm(params)
         setVisible(false)
     }
 

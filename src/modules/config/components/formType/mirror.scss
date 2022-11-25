@@ -1,5 +1,6 @@
 .formViewCodeMirror{
     display: flex;
+    width: 500px;
     .react-codemirror2{
         width: 500px;
         min-height: 32px;
@@ -22,6 +23,7 @@
 
 .codeNewStage{
     display: flex;
+    width: 500px;
     .react-codemirror2{
         width: 500px;
         border:1px solid #1890ff;

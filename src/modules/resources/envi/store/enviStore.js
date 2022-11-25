@@ -6,16 +6,17 @@ import {
     UpdatePipelineScm,
     FindAllPipelineScm,
 } from "../api/envi";
+import {message} from "antd";
 
 export class EnviStore {
 
     @observable infoList = ""
     @observable logList = []
+    @observable fresh = false
 
     @action
     getSystemMessage = async () =>{
         GetSystemMassage().then(res=>{
-            console.log("系统信息",res)
             if(res.code === 0 && res.data){
                 this.infoList = res.data
             }
@@ -33,7 +34,15 @@ export class EnviStore {
     deletePipelineScm = async value=>{
         const param = new FormData()
         param.append("scmId",value)
-        return await DeletePipelineScm(param)
+        const data = await DeletePipelineScm(param)
+        if(data.code===0){
+            this.fresh = !this.fresh
+            message.info(`删除成功`)
+        }
+        else {
+            message.info(`删除失败`)
+        }
+        return data
     }
 
     @action
@@ -44,7 +53,16 @@ export class EnviStore {
             scmName:values.scmName,
             scmAddress:values.scmAddress,
         }
-        return await UpdatePipelineScm(params)
+        const data = await UpdatePipelineScm(params)
+        if(data.code === 0){
+            this.fresh=!this.fresh
+            values.scmId==="" ?  message.info("保存成功") : message.info(`修改成功`)
+        }
+        else {
+            values.scmId==="" ? message.info("保存失败") :  message.info(`修改失败`)
+
+        }
+        return data
     }
 
 }

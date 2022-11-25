@@ -11,20 +11,12 @@ const Listname = props => {
                 onClick={onClick}
             >
                 <Space>
-                    {/*{*/}
-                    {/*    isImg ?*/}
-                    {/*        <Imgs type={colors}/>*/}
-                    {/*        :*/}
-                    {/*        <span className={`mf-listname-icon icon-${colors}`}>*/}
-                    {/*            {text && text.substring(0,1).toUpperCase()}*/}
-                    {/*        </span>*/}
-                    {/*}*/}
                     <span className={`mf-listname-icon ${colors?`mf-icon-${colors}`:"mf-icon-2"}`}>
                         {text && text.substring(0,1).toUpperCase()}
                     </span>
-                    <span className={`${onClick?"mf-listname-name":""}`}>
-                    {text}
-                </span>
+                    <span className={`${onClick?"mf-listname-name":"mf-listname-home"}`}>
+                        {text}
+                    </span>
                 </Space>
             </span>
 }

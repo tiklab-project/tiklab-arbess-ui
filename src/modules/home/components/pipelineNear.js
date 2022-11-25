@@ -13,7 +13,7 @@ const PipelineNear = props =>{
         props.history.push(`/index/task/${pipelineId}/survey`)
     }
 
-    const renderList = (item) => {
+    const renderList = item => {
         return  <div className="pipelineNear-item" key={item.pipelineId}>
             <div className="pipelineNear-item-title">
                 <ListName

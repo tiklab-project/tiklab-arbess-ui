@@ -11,21 +11,46 @@ const ServerBtn = props =>{
     const {modalVisible,setModalVisible,createAuthServer,formValue,setFormValue,updateAuthServer,callbackUrl} = serverStore
     const {findCode,findAccessToken} = authorizeStore
 
-    const [gitVisible,setGitVisible] = useState(false)
+    const [scanVisible,setScanVisible] = useState(false)
     const [goodsVisible,setGoodsVisible] = useState(false)
+
+    const visible = () =>{
+        switch (type) {
+            case 2:
+            case 3:
+                return modalVisible
+            case 51:
+                return goodsVisible
+            default:
+                return scanVisible
+        }
+    }
+
+    const setVisible = () =>{
+        switch (type) {
+            case 2:
+            case 3:
+                return setModalVisible
+            case 51:
+                return setGoodsVisible
+            default:
+                return setScanVisible
+
+        }
+    }
 
     const btnClick = () =>{
         setFormValue("")
         switch (type) {
             case 2:
             case 3:
-                setGitVisible(true)
+                setModalVisible(true)
                 break
             case 51:
                 setGoodsVisible(true)
                 break
             default:
-                setModalVisible(true)
+                setScanVisible(true)
         }
     }
 
@@ -48,41 +73,14 @@ const ServerBtn = props =>{
                     />
             }
             <ServerModal
-                visible={modalVisible}
-                setVisible={setModalVisible}
+                visible={visible()}
+                setVisible={setVisible()}
                 createAuthServer={createAuthServer}
                 formValue={formValue}
                 updateAuthServer={updateAuthServer}
                 findCode={findCode}
                 isConfig={isConfig}
                 type={type}
-                callUrl={callbackUrl}
-                findAccessToken={findAccessToken}
-            />
-
-            <ServerModal
-                visible={gitVisible}
-                setVisible={setGitVisible}
-                createAuthServer={createAuthServer}
-                formValue={formValue}
-                updateAuthServer={updateAuthServer}
-                findCode={findCode}
-                isConfig={isConfig}
-                type={type}
-                callUrl={callbackUrl}
-                findAccessToken={findAccessToken}
-            />
-
-
-            <ServerModal
-                visible={goodsVisible}
-                setVisible={setGoodsVisible}
-                createAuthServer={createAuthServer}
-                formValue={formValue}
-                updateAuthServer={updateAuthServer}
-                findCode={findCode}
-                isConfig={isConfig}
-                type={51}
                 callUrl={callbackUrl}
                 findAccessToken={findAccessToken}
             />

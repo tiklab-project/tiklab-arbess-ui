@@ -82,11 +82,11 @@ const lis=[
                 tel:"node",
                 icon:"nodejs"
             },
-            {
-                type: 23,
-                tel:"gradel",
-                icon:"nodejs"
-            }
+            // {
+            //     type: 23,
+            //     tel:"gradel",
+            //     icon:"nodejs"
+            // }
         ]
     },
     {
@@ -155,9 +155,6 @@ const AddModal = props =>{
             if(res.code===0){
                 add(initType)
             }
-            if(res.code===50001){
-                message.info(res.msg)
-            }
         })
         setAddConfigVisible(false)
     }
@@ -179,7 +176,7 @@ const AddModal = props =>{
                 return setGoodsType(type)
         }
     }
-
+    
 
     const modalFooter = (
         <>

@@ -7,6 +7,8 @@ import {
     FindAllAuthHostList,
 } from "../api/host";
 
+import {message} from "antd";
+
 export class HostStore {
 
     @observable fresh = false
@@ -29,7 +31,12 @@ export class HostStore {
         const data = await CreateAuthHost(value)
         if(data.code===0){
             this.fresh=!this.fresh
+            message.info(`添加成功`)
         }
+        else {
+            message.info(`添加失败`)
+        }
+        return data
     }
 
     @action
@@ -50,6 +57,10 @@ export class HostStore {
         const data = await DeleteAuthHost(param)
         if(data.code===0){
             this.fresh=!this.fresh
+            message.info(`删除成功`)
+        }
+        else {
+            message.info(`删除失败`)
         }
         return data
     }
@@ -59,6 +70,10 @@ export class HostStore {
         const data = await UpdateAuthHost(value)
         if(data.code===0){
             this.fresh=!this.fresh
+            message.info(`修改成功`)
+        }
+        else {
+            message.info(`修改失败`)
         }
         return data
     }

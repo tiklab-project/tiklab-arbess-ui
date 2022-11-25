@@ -48,6 +48,13 @@ export const del = (type,configDataStore) =>{
             formInitialValues.fileAddress = null
             setGoodsType(type)
             break
+        case "giteeName":
+            formInitialValues.codeName = null
+            formInitialValues.codeBranch = null
+            break
+        case "giteeBranch":
+            formInitialValues.codeBranch = null
+            break
         default:
             formInitialValues.codeName = null
             formInitialValues.codeBranch = null
@@ -57,4 +64,14 @@ export const del = (type,configDataStore) =>{
     }
     
     setFormInitialValues({...formInitialValues})
+}
+
+export const x = (newValue,lastValue) => {
+    if (newValue == null){
+        return false
+    }
+    if (newValue === ""  && lastValue == null){
+        return false
+    }
+    return newValue !== lastValue
 }

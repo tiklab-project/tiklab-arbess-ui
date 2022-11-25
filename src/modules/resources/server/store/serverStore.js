@@ -7,6 +7,7 @@ import {
     FindAllAuthServerList,
     CallbackUrl
 } from "../api/server";
+import {message} from "antd";
 
 
 export class ServerStore{
@@ -32,6 +33,10 @@ export class ServerStore{
         const data = await CreateAuthServer(values)
         if(data.code===0){
             this.fresh = !this.fresh
+            message.info(`添加成功`)
+        }
+        else {
+            message.info(`添加失败`)
         }
         return data
     }
@@ -43,6 +48,10 @@ export class ServerStore{
         const data = await DeleteAuthServer(param)
         if(data.code===0){
             this.fresh=!this.fresh
+            message.info(`删除成功`)
+        }
+        else {
+            message.info(`删除失败`)
         }
         return data
     }
@@ -52,6 +61,10 @@ export class ServerStore{
         const data = await UpdateAuthServer(value)
         if(data.code===0){
             this.fresh=!this.fresh
+            message.info(`修改成功`)
+        }
+        else {
+            message.info(`修改失败`)
         }
         return data
     }

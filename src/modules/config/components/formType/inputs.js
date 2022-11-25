@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
+import {x} from "../common/delData";
 
 const Inputs = props =>{
 
@@ -16,7 +17,7 @@ const Inputs = props =>{
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
 
-    const onFocus = e => {
+    const onFocus = () => {
         setBordered(true)
         setEnter(true)
     }
@@ -33,21 +34,12 @@ const Inputs = props =>{
                 break
             default:
                 if(isValid){
-                    return value && value.trim() !== "";
+                    return value && value.trim() !== ""
+                }else {
+                    return true
                 }
         }
     }
-
-    const x = (newValue,lastValue) => {
-        if (newValue == null){
-            return false;
-        }
-        if (newValue === "" && lastValue == null){
-            return false;
-        }
-        return newValue !== lastValue;
-    }
-
 
     const onBlur = e => {
         // 校验成功
@@ -134,14 +126,14 @@ const Inputs = props =>{
         >
             <Input
                 bordered={bordered}
-                placeholder={enter? placeholder+"，回车保存":placeholder}
+                placeholder={enter? placeholder+"，回车保存":"未设置"}
+                addonBefore={addonBefore}
                 onFocus={onFocus}
                 onBlur={(e)=>onBlur(e)}
                 onPressEnter={(e)=>{
                     onBlur(e)
                     e.target.blur()
                 }}
-                addonBefore={addonBefore}
             />
         </Form.Item>
     )

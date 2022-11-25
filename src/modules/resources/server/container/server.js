@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Profile} from "tiklab-eam-ui";
-import {message,Space,Table} from "antd"
+import {Space,Table} from "antd"
 import {inject,observer} from "mobx-react";
 import "../../common/resources.scss";
 import EmptyText from "../../../common/emptyText/emptyText";
@@ -32,9 +32,7 @@ const Server = props =>{
     }
 
     const del = (text,record) =>{
-        deleteAuthServer(record.serverId).then(res=>{
-            res.code===0 && message.info("删除成功")
-        })
+        deleteAuthServer(record.serverId)
     }
 
     const lis = [

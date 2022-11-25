@@ -10,7 +10,7 @@ const ConfigView = props =>{
 
     const {view,configDataStore,configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig,data} = configStore
+    const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig} = configStore
 
     const {formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
@@ -93,7 +93,7 @@ const ConfigView = props =>{
             case 4:
             case 5:
                 codeFormValue = {
-                    gitAuthName:data.auth && data.auth.name+"("+(data.auth.authType === 1?auth.username:"私钥")+")",
+                    gitAuthName:data.auth && data.auth.name+"("+(data.auth.authType === 1?data.auth.username:"私钥")+")",
                     gitAuthId:data.authId
                 }
                 break
@@ -142,7 +142,7 @@ const ConfigView = props =>{
     // 代码扫描
     const renderScan = data => {
         const scanFormValue={
-            scanAuthName:data.auth && data.auth.name+"("+data.auth.message+")",
+            scanAuthName:data.auth && data.auth.name+"("+data.auth.username+")",
             scanAuthId:data.authId
         }
         setScanType(data.type)
@@ -155,7 +155,7 @@ const ConfigView = props =>{
         switch (data.type) {
             case 51:
                 goodsFormValue={
-                    goodsAuthName:data.auth && data.auth.name+"("+data.auth.message+")",
+                    goodsAuthName:data.auth && data.auth.name+"("+data.auth.username+")",
                     goodsAuthId:data.authId
                 }
                 break

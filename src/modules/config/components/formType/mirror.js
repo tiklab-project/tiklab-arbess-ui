@@ -1,4 +1,4 @@
-import React,{useRef,useState,forwardRef} from "react";
+import React,{useRef,useState,forwardRef,useEffect} from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
@@ -12,6 +12,7 @@ import "codemirror/addon/display/placeholder.js";
 import {inject,observer} from "mobx-react";
 import "./mirror.scss";
 import Btn from "../../../common/btn/btn";
+import {x} from "../common/delData";
 
 const MirrorContent = forwardRef((props,ref)=>{
 
@@ -25,21 +26,19 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     const [bordered,setBordered] = useState(false)
 
-    const onFocus = () => {
+    const onFocus = e => {
         setBordered(true)
+        if(e.state.placeholder){
+            e.state.placeholder.innerHTML=placeholder
+        }
     }
 
-    const x = (newValue,lastValue) => {
-        if (newValue == null){
-            return false
-        }
-        if (newValue === ""  && lastValue == null){
-            return false
-        }
-        return newValue !== lastValue
+    const onCancel = () =>{
+        mirrorRefs.current.editor.setValue(shellBlock)
+        setBordered(false)
     }
 
-    const onBlur = () =>{
+    const onOk = () =>{
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
         if(x(obj[name],shellBlock)){
@@ -64,9 +63,9 @@ const MirrorContent = forwardRef((props,ref)=>{
                 options={{
                     mode: {name:"shell",shell: true },//语言
                     lineNumbers: false, // 是否显示行号
-                    placeholder: placeholder
+                    placeholder: bordered ? placeholder:"未设置"
                 }}
-                onFocus={onFocus}
+                onFocus={e=>onFocus(e)}
             />
         </div>
         {
@@ -75,12 +74,12 @@ const MirrorContent = forwardRef((props,ref)=>{
                 <Btn
                     title={"取消"}
                     isMar={true}
-                    onClick={()=>setBordered(false)}
+                    onClick={()=>onCancel()}
                 />
                 <Btn
                     title={"保存"}
                     type={"primary"}
-                    onClick={()=>onBlur()}
+                    onClick={()=>onOk()}
                 />
             </div>
         }

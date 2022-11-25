@@ -17,10 +17,9 @@ const Envi = props =>{
 
     const {enviStore} = props
 
-    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm} = enviStore
+    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm,fresh} = enviStore
 
     const [visible,setVisible] = useState(false)
-    const [fresh,setFresh] = useState(false)
     const [enviData,setEnviData] = useState([])
     const [formValue,setFormValue] = useState("")
 
@@ -40,13 +39,7 @@ const Envi = props =>{
 
     // 删除配置
     const del = (text,record) => {
-        deletePipelineScm(record.scmId).then(res=>{
-            if(res.code===0){
-                setFresh(!fresh)
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        deletePipelineScm(record.scmId)
     }
 
     const edit = (text,record) => {
@@ -118,8 +111,6 @@ const Envi = props =>{
                 enviData={enviData}
                 updatePipelineScm={updatePipelineScm}
                 formValue={formValue}
-                fresh={fresh}
-                setFresh={setFresh}
             />
         </div>
     </div>

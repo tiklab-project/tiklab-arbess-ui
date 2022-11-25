@@ -6,14 +6,13 @@ import QuickIn from "../components/quickIn";
 import Agency from "../components/agency";
 import "../components/homePage.scss";
 import DynaLatest from "../../dyna/dynaLatest/dynaLatest";
+import PipelineRecent from "../components/pipelineRecent";
 
 const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
 
-    const {findAllOpen,pipelineNearList,findlogpage,taskList,findtodopage,
-        dynamicList,
-    } = homePageStore
+    const {findAllOpen,pipelineNearList,findlogpage,findtodopage,dynamicList} = homePageStore
     const {findAllPipelineStatus,pipelineList,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     useEffect(()=>{
@@ -63,10 +62,15 @@ const HomePage = props =>{
                     pipelineLength={pipelineLength}
                     followLength={followLength}
                 />
-                <PipelineNear
+                <PipelineRecent
                     {...props}
                     pipelineNearList={pipelineNearList}
                 />
+                {/*<PipelineNear*/}
+                {/*    {...props}*/}
+                {/*    pipelineNearList={pipelineNearList}*/}
+                {/*/>*/}
+
                 {/*<Agency*/}
                 {/*    {...props}*/}
                 {/*    taskList={taskList}*/}

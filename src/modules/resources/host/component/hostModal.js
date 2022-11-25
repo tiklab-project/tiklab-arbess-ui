@@ -39,9 +39,7 @@ const CodeModal = props =>{
     const onOk = () =>{
         form.validateFields().then((values) => {
             if(formValue===""){
-                createAuthHost(values).then(res=>{
-                    remind(res,"添加")
-                })
+                createAuthHost(values)
             }else {
                 const params = {
                     hostId:formValue.hostId,
@@ -55,18 +53,10 @@ const CodeModal = props =>{
                     password:values.password,
                     privateKey:values.privateKey,
                 }
-                updateAuthHost(params).then(res=>{
-                    remind(res,"修改")
-                })
+                updateAuthHost(params)
             }
             setVisible(false)
         })
-    }
-
-    const remind = (data,info) => {
-        if(data.code===0){
-            message.info(`${info}成功`)
-        }
     }
 
     const changHostType = value =>{

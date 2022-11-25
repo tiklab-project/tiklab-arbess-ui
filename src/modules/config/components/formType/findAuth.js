@@ -1,10 +1,11 @@
-import React,{useState} from "react";
+import React,{useState,useRef} from "react";
 import {inject,observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
 import ServerBtn from "../../../resources/server/components/serverBtn";
 import AuthBtn from "../../../resources/auth/components/authBtn";
 import HostBtn from "../../../resources/host/component/hostBtn";
 import EmptyText from "../../../common/emptyText/emptyText";
+import {x} from "../common/delData";
 
 const FindAuth = props =>{
 
@@ -20,32 +21,52 @@ const FindAuth = props =>{
     const [list,setList] = useState([])
     const [open,setOpen] = useState(false)
     const [bordered,setBordered] = useState(false)
+    const [showArrow,setShowArrow] = useState(false)
+    const ref = useRef(null)
 
     // 存储authId
-    const setAuthId = key =>{
+    const setAuthId = value =>{
         const zz = Math.floor(type/10)
         switch (zz) {
             case 0:
-                return formInitialValues.gitAuthId = key
+                return formInitialValues.gitAuthId = value
             case 3:
-                return formInitialValues.deployAuthId = key
+                return formInitialValues.deployAuthId = value
             case 4:
-                return formInitialValues.scanAuthId = key
+                return formInitialValues.scanAuthId = value
             case 5:
-                return formInitialValues.goodsAuthId = key
+                return formInitialValues.goodsAuthId = value
+        }
+    }
+
+    // 获取存储authId
+    const isId = type =>{
+        const zz = Math.floor(type/10)
+        switch (zz) {
+            case 0:
+                return formInitialValues.gitAuthId
+            case 3:
+                return formInitialValues.deployAuthId
+            case 4:
+                return formInitialValues.scanAuthId
+            case 5:
+                return formInitialValues.goodsAuthId
         }
     }
 
     // 改变凭证
-    const changeGitSelect = (value,e) =>{
-        setAuthId(e.key)
+    const changeGitSelect = value =>{
         const params = {
             taskType:type,
             pipeline:{pipelineId},
-            values:{authId:e.key},
+            values:{authId:value},
             message:"update"
         }
-        updateConfigure(params)
+        x(value,isId(type)) && updateConfigure(params).then(res=>{
+            res.code===0 && setAuthId(value)
+        })
+        setBordered(false)
+        ref.current.blur()
     }
 
     // 失去交代
@@ -75,7 +96,7 @@ const FindAuth = props =>{
     }
 
     // 获取焦点，获取下拉内容
-    const onFocus = type => {
+    const onFocus = () => {
         setBordered(true)
         switch (type) {
             case 1:
@@ -162,9 +183,10 @@ const FindAuth = props =>{
                 return item.name+"("+(item.authType === 1?item.username:"私钥")+")"
             case 2:
             case 3:
+                return item.name+"("+item.message+")"
             case 41:
             case 51:
-                return item.name+"("+item.message+")"
+                return item.name+"("+item.username+")"
             case 31:
             case 32:
             case 52:
@@ -173,18 +195,19 @@ const FindAuth = props =>{
     }
 
     return(
-        <Form.Item
-            name={name(type)}
-            label={label(type)}
-        >
+        <Form.Item name={name(type)} label={label(type)}>
             <Select
+                ref={ref}
                 showSearch
-                placeholder={label(type)}
+                placeholder={bordered ? label(type):"未选择"}
                 open={open}
                 bordered={bordered}
-                onFocus={()=>onFocus(type)}
+                showArrow={showArrow}
+                onMouseEnter={()=>setShowArrow(true)}
+                onMouseLeave={()=>setShowArrow(false)}
+                onFocus={onFocus}
                 onBlur={onBlur}
-                onChange={(value,e)=>changeGitSelect(value,e)}
+                onChange={changeGitSelect}
                 notFoundContent={<EmptyText/>}
                 onDropdownVisibleChange={(visible)=>setOpen(visible)}
                 filterOption={(input, option) =>
@@ -205,8 +228,8 @@ const FindAuth = props =>{
                     </>
                 )}
             >
-                {list && list.map(item=>{
-                    return <Select.Option value={setKey(item)} key={setKey(item)}>{selectValue(item)}</Select.Option>
+                {list && list.map((item,index)=>{
+                    return <Select.Option value={setKey(item)} key={index}>{selectValue(item)}</Select.Option>
                 })}
             </Select>
         </Form.Item>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {message,Space,Table} from "antd";
+import {Space,Table} from "antd";
 import {Profile} from "tiklab-eam-ui";
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
@@ -32,9 +32,7 @@ const Host = props =>{
     }
 
     const del = (text,record) =>{
-        deleteAuthHost(record.hostId).then(res=>{
-            res.code===0 && message.info("删除成功")
-        })
+        deleteAuthHost(record.hostId)
     }
 
 

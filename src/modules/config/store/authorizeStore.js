@@ -6,6 +6,8 @@ import {
     FindBranch,
 } from "../api/authorize";
 
+import {message} from "antd";
+
 export class AuthorizeStore {
 
 
@@ -19,7 +21,14 @@ export class AuthorizeStore {
 
     @action
     findAccessToken = async value =>{
-        return await FindAccessToken(value)
+        const data = await FindAccessToken(value)
+        if(data.code===0){
+            message.success("授权成功")
+        }
+        else {
+            message.info(data.msg)
+        }
+        return data
     }
 
     @action
@@ -30,6 +39,9 @@ export class AuthorizeStore {
         const data = await FindAllStorehouse(params)
         if(data.code===0 && data.data){
             this.storehouseList = data.data
+        }
+        else {
+            message.info(data.msg)
         }
     }
 
@@ -42,6 +54,9 @@ export class AuthorizeStore {
         const data =  await FindBranch(params)
         if(data.code===0 && data.data){
             this.branchList = data.data
+        }
+        else {
+            message.info(data.msg)
         }
     }
 

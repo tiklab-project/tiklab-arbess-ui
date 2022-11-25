@@ -90,12 +90,13 @@ ul li{
 
 .ant-message{
     top: 50px;
-    .ant-message-notice{
+    .ant-message-notice{  /*mf-message*/
         padding: 0;
     }
     .ant-message-notice-content{
-        width: 50%;
+        width: 30%;
         background: #e8eaf3;
+        box-shadow: none;
     }
 }
 
@@ -123,10 +124,6 @@ ul li{
     &-5{
         background: #caf3ef;
     }
-}
-
-.mf-message{
-
 }
 
 .home-limited{

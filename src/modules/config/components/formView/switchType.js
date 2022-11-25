@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
 import {Modal,Space} from "antd";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {autoHeight} from "../../../common/client/client";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {del} from "../common/delData";
 import Btn from "../../../common/btn/btn";
-import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const lis=[
     {
@@ -42,7 +42,7 @@ const lis=[
         desc:[
             {type: 21,tel:"maven",icon:"quanxian"},
             {type: 22,tel:"node",icon:"nodejs"},
-            {type: 23,tel:"gradel",icon:"nodejs"}
+            // {type: 23,tel:"gradel",icon:"nodejs"}
         ]
     },
     {
@@ -120,7 +120,7 @@ const SwitchType = props =>{
             type:newType, // 新类型
             message:"updateType"
         }
-        updateConfigure(params).then(res=>{
+        showType!==newType && updateConfigure(params).then(res=>{
             if(res.code===0){
                 data && data.map(ite=>{
                     if(ite.type===showType){
@@ -173,7 +173,7 @@ const SwitchType = props =>{
                     <div className="group-content">
                         {
                             group.desc && group.desc.map(item=>{
-                                return <div onClick={item.type===showType?null:()=>handleClick(item)}
+                                return <div onClick={item.type===showType? null:()=>handleClick(item)}
                                             className={`group-desc ${item.type===showType?"group-ban":""} ${item.type===newType?"group-select":""}`}
                                             key={item.type}
                                         >

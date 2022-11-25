@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {message,Modal} from "antd";
+import {Modal} from "antd";
 import {
     ExclamationCircleOutlined,
     DeleteOutlined,
@@ -39,15 +39,7 @@ const ProjectSet = props =>{
     }
 
     const del = () =>{
-        const params = {
-            pipelineId
-        }
-        deletePipeline(params).then(res=>{
-            if(res.code=== 0){
-                message.info({content: "删除成功", className: "message"})
-            }else {
-                message.error({content:"删除失败", className:"message"})
-            }
+        deletePipeline(pipelineId).then(res=>{
             props.history.push("/index/pipeline")
         })
     }

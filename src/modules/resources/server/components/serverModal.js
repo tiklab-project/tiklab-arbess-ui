@@ -28,25 +28,26 @@ const ServerModal = props =>{
     },[visible])
 
     const renderFormValue = formValue => {
+        setInfos("")
         if(formValue){
             form.setFieldsValue(formValue)
+            setServerWay(formValue.type)
             setBan(true)
         }else {
             form.resetFields()
             setServerWay(type)
-            setInfos("")
         }
     }
 
     useEffect(()=>{
-        visible && isAddAuth()
-        visible && window.addEventListener("storage", rightCartData)
+        visible && setAuth()
+        visible && window.addEventListener("storage", authorisation)
         return () => {
-            window.removeEventListener("storage", rightCartData)
+            window.removeEventListener("storage", authorisation)
         }
     },[visible,serverWay,fresh])
 
-    const rightCartData = () =>{
+    const authorisation = () =>{
         let codeValue = localStorage.getItem("codeValue");
         if(codeValue!==null) {
             if (codeValue==="false"){
@@ -61,7 +62,6 @@ const ServerModal = props =>{
                 }
                 findAccessToken(params).then(res=>{
                     if(res.code===0){
-                        message.success("授权成功")
                         setInfos(res.data)
                     }
                 })
@@ -71,9 +71,12 @@ const ServerModal = props =>{
     }
 
     const validCallbackUrl = /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
+    const isNull = values => values === null || values === "" || values === " " || values === undefined
 
-    const isAddAuth = () => {
-        if(form){
+    const setAuth = () =>{
+        if(formValue){
+            setAddAuth(false)
+        }else {
             let clientId = form.getFieldValue("clientId")
             let clientSecret = form.getFieldValue("clientSecret")
             let callbackUrl = form.getFieldValue("callbackUrl")
@@ -84,8 +87,6 @@ const ServerModal = props =>{
             }
         }
     }
-
-    const isNull = values => values === null || values === "" || values === " " || values === undefined
 
     const onValuesChange = value => {
         if(value.clientId || value.clientId===""){
@@ -116,12 +117,7 @@ const ServerModal = props =>{
     }
 
     const onOk = values =>{
-        if(formValue==="sys" || formValue==="config"){
-            createAuthServer(values).then(res=>{
-                remind(res,"添加")
-            })
-            setInfos("")
-        }else {
+        if(formValue){
             const param = {
                 serverId:formValue.serverId,
                 name:values.name,
@@ -137,18 +133,13 @@ const ServerModal = props =>{
                 clientSecret:values.clientSecret,
                 callbackUrl:values.callbackUrl,
             }
-            updateAuthServer(param).then(res=>{
-                remind(res,"修改")
-            })
+            updateAuthServer(param)
+        }else {
+            createAuthServer(values)
         }
         setVisible(false)
     }
-    
-    const remind = (data,info) => {
-        if(data.code===0){
-            message.info(`${info}成功`)
-        }
-    }
+
 
     // 去第三方授权
     const goUrl = way =>{
@@ -265,38 +256,6 @@ const ServerModal = props =>{
         </>
     )
 
-    const common = (
-        <>
-            <Form.Item
-                name="type"
-                label="授权类型"
-            >
-                <Select
-                    onChange={changeServerWay}
-                    disabled={ban||isConfig}
-                >
-                    <Select.Option value={2}>Gitee</Select.Option>
-                    <Select.Option value={3}>Github</Select.Option>
-                    <Select.Option value={41}>sonar</Select.Option>
-                    <Select.Option value={51}>nexus</Select.Option>
-                </Select>
-            </Form.Item>
-            <Form.Item name="authPublic" label="服务权限">
-                <Select>
-                    <Select.Option value={1}>全局</Select.Option>
-                    <Select.Option value={2}>私有</Select.Option>
-                </Select>
-            </Form.Item>
-            <Form.Item
-                name="name"
-                label="名称"
-                rules={[{required:true,message:`名称不能空`}]}
-            >
-                <Input/>
-            </Form.Item>
-        </>
-    )
-
     return(
         <Modal
             visible={visible}
@@ -319,7 +278,25 @@ const ServerModal = props =>{
                     onValuesChange={onValuesChange}
                     initialValues={{type:serverWay,authPublic:1,authWay:1,authType:1}}
                 >
-                    {common}
+                    <Form.Item name="type" label="授权类型">
+                        <Select onChange={changeServerWay} disabled={ban||isConfig}>
+                            <Select.Option value={2}>Gitee</Select.Option>
+                            <Select.Option value={3}>Github</Select.Option>
+                            <Select.Option value={41}>sonar</Select.Option>
+                            <Select.Option value={51}>nexus</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="authPublic" label="服务权限">
+                        <Select>
+                            <Select.Option value={1}>全局</Select.Option>
+                            <Select.Option value={2}>私有</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="name" label="名称"
+                               rules={[{required:true,message:`名称不能空`}]}
+                    >
+                        <Input/>
+                    </Form.Item>
                     {
                         (serverWay===3 || serverWay===2) && authorize
                     }
