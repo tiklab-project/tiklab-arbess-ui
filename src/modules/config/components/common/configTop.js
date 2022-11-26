@@ -16,14 +16,14 @@ import Btn from "../../../common/btn/btn";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import AddModal from "../formView/addModal";
 
-
 const ConfigTop = props =>{
 
-    const {view,setView,pipelineId,pipelineName,configStore,structureStore,configDataStore} = props
+    const {view,setView,pipelineStore,configStore,structureStore,configDataStore} = props
 
     const {pipelineStartStructure} = structureStore
     const {valid,isPlugin} = configStore
     const {data,addConfigVisible,setAddConfigVisible} = configDataStore
+    const {pipelinePermissions,pipeline,pipelineId} = pipelineStore
 
     const [processVisible,setProcessVisible] = useState(false)
 
@@ -59,16 +59,19 @@ const ConfigTop = props =>{
         localStorage.setItem("configView",type)
     }
 
-    const runStatu = () =>{ 
-           return !(data && data.length < 1 || valid && valid.length > 0);
-    }
+    // 权限是否存在
+    const isPermissions = () => pipelinePermissions && pipelinePermissions.some(item=>item==="pipeline_run")
+
+    // 是否能运行
+    // const runStatu = () => !(!isPermissions() || data && data.length < 1 || valid && valid.length > 0)
+    const runStatu = () => !(data && data.length < 1 || valid && valid.length > 0)
 
     return(
         <div className="config-up">
             <div className="config-top">
                 <div className="config-top-content">
                     <BreadcrumbContent
-                        firstItem={pipelineName}
+                        firstItem={pipeline.pipelineName}
                         secondItem={"配置"}
                     />
                     <div className="config_changeView">
@@ -101,8 +104,8 @@ const ConfigTop = props =>{
                                         />
                                         :
                                         <Btn
-                                            type={runStatu()?"primary":"disabled"}
-                                            onClick={runStatu()?()=>run():null}
+                                            type={runStatu() ? "primary" : "disabled" }
+                                            onClick={runStatu() ? ()=>run() : null }
                                             icon={<CaretRightOutlined />}
                                             title={"运行"}
                                         />
@@ -127,4 +130,5 @@ const ConfigTop = props =>{
     )
 }
 
-export default withRouter(inject("structureStore","configStore","configDataStore")(observer(ConfigTop)))
+export default withRouter(inject("structureStore","configStore","configDataStore","pipelineStore")
+(observer(ConfigTop)))

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Drawer,Divider,Space} from "antd";
+import {Drawer,Divider,Space,Tooltip} from "antd";
 import {
     BellOutlined,
     LoadingOutlined,
@@ -59,7 +59,7 @@ const MessageDrawer = props =>{
     ]
     
     const goHref = item => {
-        
+
         const {message,messageTemplate,status, ...resItem } = item
 
         if (item.status === 0) {
@@ -85,7 +85,6 @@ const MessageDrawer = props =>{
     // 判断流水线是否还存在
     const isPipeline = id =>{
         const arr = id.split('/')
-
         return pipelineList && pipelineList.some(item=>item.pipelineId===arr[3])
     }
 
@@ -104,29 +103,20 @@ const MessageDrawer = props =>{
                     onClick={()=>goHref(item)}
                 >
                     <div className="message-item-left">
-                        <div className="message-item-icon">
-                            <MessageOutlined />
-                        </div>
+                        <div className="message-item-icon"><MessageOutlined /></div>
                         <div className="message-item-center">
                             <div className="message-item-user">
                                 <Space>
-                                    <span className="user-title">
-                                        {item.messageTemplate.name}
-                                    </span>
-                                    <span className="user-time">
-                                        {item.receiveTime}
-                                    </span>
+                                    <span className="user-title">{item.messageTemplate.name}</span>
+                                    <span className="user-time">{item.receiveTime}</span>
                                 </Space>
-                            
-                                <div onClick={e=>delMessage(e,item)}
-                                     className={`message-hidden`}
-                                >
-                                    <DeleteOutlined />
-                                </div>
+                                <Tooltip title={"删除"}>
+                                    <div onClick={e=>delMessage(e,item)} className={`message-hidden`}>
+                                        <DeleteOutlined />
+                                    </div>
+                                </Tooltip>
                             </div>
-                            <div
-                                dangerouslySetInnerHTML={{__html: item.messageTemplate.content}}
-                            />
+                            <div dangerouslySetInnerHTML={{__html: item.messageTemplate.content}}/>
                         </div>
                     </div>
                 </div>
@@ -140,13 +130,8 @@ const MessageDrawer = props =>{
     }
     
     const renderTabs = item => {
-        return   <div
-            key={item.id}
-            className={`title-item ${item.id===selected?"title-select":null}`}
-            onClick={()=>changSelet(item)}
-        >
+        return   <div key={item.id} className={`title-item ${item.id===selected?"title-select":null}`} onClick={()=>changSelet(item)}>
             {item.title}
-
             {
                 item.id === 0 &&
                 <span className={`messageModal-screen-tab ${unread< 100 ?null:"messageModal-screen-much"}`}>

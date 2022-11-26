@@ -5,9 +5,8 @@ import ConfigView from "../components/common/configView";
 
 const Config = props =>{
 
-    const {pipelineStore,configStore} = props
+    const {configStore} = props
 
-    const {pipeline} = pipelineStore
     const {data,setOpt} = configStore
 
     const [view,setView] = useState("forms")
@@ -28,20 +27,11 @@ const Config = props =>{
     }
 
     return (
-        <div
-            className="config mf"
-            id="config-content"
-            onScroll={onScroll}
-        >
-            <ConfigTop
-                view={view}
-                setView={setView}
-                pipelineId={pipeline.pipelineId}
-                pipelineName={pipeline.pipelineName}
-            />
+        <div className="config mf" id="config-content" onScroll={onScroll}>
+            <ConfigTop view={view} setView={setView}/>
             <ConfigView view={view}/>
         </div>
     )
 }
 
-export default inject("pipelineStore","configStore")(observer(Config))
+export default inject("configStore")(observer(Config))

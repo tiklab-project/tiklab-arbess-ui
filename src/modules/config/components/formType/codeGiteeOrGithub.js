@@ -93,7 +93,7 @@ const CodeGiteeOrGithub = props =>{
                 rules={[{required:true, message:"请选择仓库"}]}
             >
                 <Select
-                    showSearch
+                    showSearch={nameBorder}
                     bordered={nameBorder}
                     placeholder={nameBorder ?"仓库":"未选择"}
                     showArrow={fieldName === "codeName"}

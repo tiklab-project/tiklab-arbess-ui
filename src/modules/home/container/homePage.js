@@ -1,12 +1,12 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import PipelineNear from "../components/pipelineNear";
+import {AimOutlined} from "@ant-design/icons";
 import QuickIn from "../components/quickIn";
-import Agency from "../components/agency";
 import "../components/homePage.scss";
-import DynaLatest from "../../dyna/dynaLatest/dynaLatest";
 import PipelineRecent from "../components/pipelineRecent";
+import Guide from "../../common/guide/guide";
+import DynaList from "../../dyna/common/dynaList";
 
 const HomePage = props =>{
 
@@ -29,19 +29,16 @@ const HomePage = props =>{
                         pipelineId:pipeline(res.data)
                     }
                 }
-                // 近期动态
-                findlogpage(params)
+                findlogpage(params) // 近期动态
             }
         })
 
         // 我收藏的流水线
         findAllFollow()
-
         // 最近打开的流水线
-        findAllOpen()
+        findAllOpen(5)
 
-        // 我的代办
-        findtodopage()
+        // 我的代办 findtodopage()
 
     },[])
 
@@ -62,25 +59,24 @@ const HomePage = props =>{
                     pipelineLength={pipelineLength}
                     followLength={followLength}
                 />
+
                 <PipelineRecent
                     {...props}
                     pipelineNearList={pipelineNearList}
                 />
-                {/*<PipelineNear*/}
-                {/*    {...props}*/}
-                {/*    pipelineNearList={pipelineNearList}*/}
-                {/*/>*/}
 
-                {/*<Agency*/}
-                {/*    {...props}*/}
-                {/*    taskList={taskList}*/}
-                {/*    isHome={"isHome"}*/}
-                {/*/>*/}
-                <DynaLatest
-                    dynamicList={dynamicList}
-                    title={"近期动态"}
-                    pipelineId={pipeline(pipelineList)}
-                />
+                <div className="home-dyna">
+                    <Guide
+                        title={"近期动态"}
+                        icon={<AimOutlined/>}
+                        type={"dynamic"}
+                        pipelineId={pipeline(pipelineList)}
+                    />
+                    <DynaList
+                        dynamicList={dynamicList}
+                        pipelineId={pipeline(pipelineList)}
+                    />
+                </div>
             </div>
         </div>
     )

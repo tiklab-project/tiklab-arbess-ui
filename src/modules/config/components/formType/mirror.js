@@ -66,6 +66,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                     placeholder: bordered ? placeholder:"未设置"
                 }}
                 onFocus={e=>onFocus(e)}
+                // className={`${bordered?"":""}`}
             />
         </div>
         {

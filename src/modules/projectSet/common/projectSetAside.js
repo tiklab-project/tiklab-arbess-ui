@@ -1,21 +1,18 @@
 import React,{useState,useEffect} from "react";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
-import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
 import {SettingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import "./projectSetAside.scss";
-import {getUser} from "tiklab-core-ui";
 
 const ProjectSetAside = props =>{
 
-    const {pipelineStore,systemRoleStore} = props
+    const {pipelineStore} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
     const {pipeline,setLastPath} = pipelineStore
 
-    const userId = getUser().userId
     const pipelineId = pipeline.pipelineId
 
     useEffect(()=>{
@@ -23,9 +20,6 @@ const ProjectSetAside = props =>{
         setNav(path)
     },[path])
 
-    useEffect(()=>{
-        pipelineId && systemRoleStore.getInitProjectPermissions(userId,pipelineId, "matflow")
-    },[pipelineId])
 
     // 侧边流水线设置的第二级导航
     const secondRouter = [
@@ -67,6 +61,8 @@ const ProjectSetAside = props =>{
                 </PrivilegeProjectButton>
     }
 
+
+
     return(
         <div className="projectSet-aside">
             {secondRouter.map(item=>{
@@ -76,4 +72,4 @@ const ProjectSetAside = props =>{
     )
 }
 
-export default inject("pipelineStore",SYSTEM_ROLE_STORE)(observer(ProjectSetAside))
+export default inject("pipelineStore")(observer(ProjectSetAside))

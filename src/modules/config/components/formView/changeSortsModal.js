@@ -52,17 +52,17 @@ const ChangeSortsModal = props =>{
 
     const dataTile = data => {
         data && data.map((item,index)=>{        
-            item.dataType>10 && nameArray.push({
+            item.type>10 && nameArray.push({
                 key:index,
-                title:renderTitle(item.dataType),
+                title:renderTitle(item.type),
                 dataId:item.dataId,
-                dataType:item.dataType
+                type:item.type
             })
         })
     }
 
     const isData = data =>{
-        return data && data.some(item=>item.dataType<10)
+        return data && data.some(item=>item.type<10)
     }
 
     const onDrop = info => {
@@ -131,7 +131,7 @@ const ChangeSortsModal = props =>{
                         <BorderVerticleOutlined style={{fontSize:16,paddingRight:5}}/>
                         {
                             data && data.map(item=>{
-                                return item.dataType<10 && renderCode(item.dataType)
+                                return item.type<10 && renderCode(item.type)
                             })
                         }
                     </div>

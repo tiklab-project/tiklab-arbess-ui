@@ -1,4 +1,4 @@
-import React,{useState,useRef} from "react";
+import React,{useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
 import ServerBtn from "../../../resources/server/components/serverBtn";
@@ -22,7 +22,6 @@ const FindAuth = props =>{
     const [open,setOpen] = useState(false)
     const [bordered,setBordered] = useState(false)
     const [showArrow,setShowArrow] = useState(false)
-    const ref = useRef(null)
 
     // 存储authId
     const setAuthId = value =>{
@@ -66,7 +65,6 @@ const FindAuth = props =>{
             res.code===0 && setAuthId(value)
         })
         setBordered(false)
-        ref.current.blur()
     }
 
     // 失去交代
@@ -195,12 +193,13 @@ const FindAuth = props =>{
     }
 
     return(
-        <Form.Item name={name(type)} label={label(type)}>
+        <Form.Item
+            label={label(type)}
+            name={name(type)}
+        >
             <Select
-                ref={ref}
-                showSearch
+                showSearch={bordered}
                 placeholder={bordered ? label(type):"未选择"}
-                open={open}
                 bordered={bordered}
                 showArrow={showArrow}
                 onMouseEnter={()=>setShowArrow(true)}
@@ -209,6 +208,7 @@ const FindAuth = props =>{
                 onBlur={onBlur}
                 onChange={changeGitSelect}
                 notFoundContent={<EmptyText/>}
+                open={open}
                 onDropdownVisibleChange={(visible)=>setOpen(visible)}
                 filterOption={(input, option) =>
                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0

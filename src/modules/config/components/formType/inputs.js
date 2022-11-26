@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useRef,useEffect} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import {x} from "../common/delData";
@@ -13,6 +13,16 @@ const Inputs = props =>{
 
     const [bordered,setBordered] = useState(false)
     const [enter,setEnter] = useState(false)
+    const ref = useRef(null)
+
+    useEffect(()=>{
+        if(enter){
+            ref.current.focus()
+        }else {
+            ref.current.blur()
+        }
+    },[enter])
+
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
@@ -125,9 +135,10 @@ const Inputs = props =>{
             validateTrigger="onChange"
         >
             <Input
+                ref={ref}
                 bordered={bordered}
+                addonBefore={enter && addonBefore}
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
-                addonBefore={addonBefore}
                 onFocus={onFocus}
                 onBlur={(e)=>onBlur(e)}
                 onPressEnter={(e)=>{

@@ -8,7 +8,7 @@ const EmptyText = props =>{
                 <svg className="icon" aria-hidden="true" style={{height:50,width:50}} >
                     <use xlinkHref="#icon-meiyouxiangguan"/>
                 </svg>
-                <div>{title ? title : "没有查询到数据"}</div>
+                <div style={{fontSize:13,color:"#999"}}>{title ? title : "没有查询到数据"}</div>
             </div>
 }
 

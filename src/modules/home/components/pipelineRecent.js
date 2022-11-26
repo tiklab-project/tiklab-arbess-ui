@@ -4,11 +4,7 @@ import {
     HistoryOutlined
 } from "@ant-design/icons";
 import Guide from "../../common/guide/guide";
-import "./pipelineRecent.scss";
-import success from "../../../assets/images/svg/success.svg";
-import error from "../../../assets/images/svg/error.svg";
-import fog from "../../../assets/images/svg/fog.svg";
-import halt from "../../../assets/images/svg/halt.svg";
+import EmptyText from "../../common/emptyText/emptyText";
 
 const PipelineRecent = props =>{
 
@@ -18,44 +14,28 @@ const PipelineRecent = props =>{
         props.history.push(`/index/task/${pipelineId}/survey`)
     }
 
-    const src = buildStatus =>{
-        switch (buildStatus) {
-            case 10:
-                return  success
-            case 1:
-                return  error
-            case 0:
-                return  fog
-            case 20:
-                return  halt
-        }
-    }
 
     const renderList = item => {
-        return  <div className="pipelineRecent-item" key={item.pipelineId}
-                     onClick={()=>goPipeline(item.pipelineId)}
+        return  <div className="pipelineRecent-item" key={item.openId}
+                     onClick={()=>goPipeline(item.pipeline.pipelineId)}
                 >
             <div className="pipelineRecent-item-title">
                 <Space>
                     <span className={`mf-icon-${item.pipeline.color} pipelineRecent-icon`}>
-                        {item.pipelineName.substring(0,1).toUpperCase()}
+                        {item.pipeline && item.pipeline.pipelineName.substring(0,1).toUpperCase()}
                     </span>
                     <span className="pipelineRecent-name">
-                        {item.pipelineName}
+                        {item.pipeline && item.pipeline.pipelineName}
                     </span>
                 </Space>
             </div>
             <div className="pipelineRecent-item-details">
                 <div className="pipelineRecent-item-detail">
-                    <span>状态</span>
-                    <span><img src={src(item.pipelineMassage.buildStatus)} alt={"log"} className="detail-imgs"/></span>
-                </div>
-                <div className="pipelineRecent-item-detail">
-                    <span>成功</span>
+                    <span className="details-desc">成功</span>
                     <span>{item.pipelineExecState.successNumber}</span>
                 </div>
                 <div className="pipelineRecent-item-detail">
-                    <span>失败</span>
+                    <span className="details-desc">失败</span>
                     <span>{item.pipelineExecState.errorNumber}</span>
                 </div>
             </div>
@@ -65,17 +45,19 @@ const PipelineRecent = props =>{
 
     return(
         <div className="pipelineRecent">
-            <Guide
-                title={"最近访问的流水线"}
-                icon={<HistoryOutlined />}
-            />
-            <div  className="pipelineRecent-content">
+            <Guide title={"最近访问的流水线"} icon={<HistoryOutlined />}/>
                 {
-                    pipelineNearList && pipelineNearList.map(item=>{
-                        return renderList(item)
-                    })
+                    pipelineNearList && pipelineNearList.length > 0 ?
+                        <div  className="pipelineRecent-content">
+                            {
+                                pipelineNearList.map(item=>{
+                                    return renderList(item)
+                                })
+                            }
+                        </div>
+                        :
+                        <EmptyText title={"最近没有访问流水线"}/>
                 }
-            </div>
         </div>
     )
 }

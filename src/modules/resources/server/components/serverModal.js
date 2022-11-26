@@ -8,20 +8,19 @@ import {autoHeight} from "../../../common/client/client";
 
 const ServerModal = props =>{
 
-    const {visible,setVisible,createAuthServer,formValue,updateAuthServer,callUrl,
-        findCode,isConfig,type,findAccessToken
+    const {visible,setVisible,createAuthServer,formValue,updateAuthServer,callUrl,findCode,isConfig,type,
+        findAccessToken,skin
     } = props
 
     const [form] = Form.useForm()
 
+    const [height,setHeight] = useState(0)
     const [serverWay,setServerWay] = useState(2) // 授权类型
     const [ban,setBan] = useState(false) // 禁用一部分表单
-    const [infos,setInfos] = useState("") // 授权信息
     const [addAuth,setAddAuth] = useState(false)  // 去第三方授权按钮是否禁用
-    const [height,setHeight] = useState(0)
-
-    const [callUrlWarn,setCallUrlWarn] = useState("")
     const [fresh,setFresh] = useState(false)
+    const [infos,setInfos] = useState("") // 授权信息
+    const [callUrlWarn,setCallUrlWarn] = useState("")
 
     useEffect(()=>{
         visible && renderFormValue(formValue)
@@ -139,7 +138,6 @@ const ServerModal = props =>{
         }
         setVisible(false)
     }
-
 
     // 去第三方授权
     const goUrl = way =>{
@@ -264,7 +262,7 @@ const ServerModal = props =>{
             destroyOnClose={true}
             footer={modalFooter}
             style={{height:height,top:60}}
-            className="mf"
+            className={`mf ${skin?"mf-modal-ban":""}`}
         >
             <ModalTitle
                 setVisible={setVisible}

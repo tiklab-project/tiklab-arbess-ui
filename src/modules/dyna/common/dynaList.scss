@@ -11,6 +11,14 @@
         display: flex;
         align-items: center;
     }
+    .dynamic-item-icon{
+        width: 20px;
+        height: 20px;
+        &>img{
+            width: 100%;
+            height: 100%;
+        }
+    }
     .dynamic-item-message-title{
         padding-bottom: 5px;
         font-size: var(--tiklab-font-13);

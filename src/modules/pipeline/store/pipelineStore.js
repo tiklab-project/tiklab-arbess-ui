@@ -24,6 +24,7 @@ export class PipelineStore {
     @observable fresh = false
     @observable listType = 1
     @observable pipeline = ""
+    @observable pipelinePermissions = []
 
     @action
     setListType = value =>{
@@ -48,6 +49,11 @@ export class PipelineStore {
     @action
     setFresh = value =>{
         this.fresh = value
+    }
+
+    @action
+    setPipelinePermissions = value =>{
+        this.pipelinePermissions = value
     }
 
     @action

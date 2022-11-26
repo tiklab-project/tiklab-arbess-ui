@@ -52,10 +52,12 @@ export class HomePageStore{
     findAllOpen = async value =>{
         const param = new FormData()
         param.append("userId",getUser().userId)
+        param.append("number",value)
         const data = await FindAllOpen(param)
         if(data.code===0 && data.data){
             this.pipelineNearList = data.data
         }
+        return data
     }
 
     @action
@@ -102,10 +104,11 @@ export class HomePageStore{
         if(data.code===0){
 
             this.messPage.total=data.data && data.data.totalRecord
-            if(values!==1){
-                // 未读消息的长度
-                this.unread = data.data && data.data.dataList.filter(item=>item.status===0).length;
+
+            if(values===0){
+                this.unread = data.data && data.data.totalRecord  // 未读消息的长度
             }
+
             if(this.messagePagination === 1){
                 this.messageList=data.data.dataList
             }
@@ -122,6 +125,7 @@ export class HomePageStore{
         const data = await UpdateMessageDispatchItem(value)
         if(data.code===0){
             this.fresh = !this.fresh
+            this.unread = this.unread - 1
         }
         return data
     }

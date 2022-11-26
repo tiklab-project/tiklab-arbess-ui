@@ -2,14 +2,12 @@ import React,{useState,useEffect} from "react";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
-
 import "../components/survey.scss";
-import Dyna from "../../../dyna/common/dynaList";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import echarts from "../../../common/echarts/echarts";
 import SurverCensus from "../components/surveyCensus";
-import DynaLatest from "../../../dyna/dynaLatest/dynaLatest";
 import Guide from "../../../common/guide/guide";
+import DynaList from "../../../dyna/common/dynaList";
 
 
 const Survey = props =>{
@@ -24,15 +22,13 @@ const Survey = props =>{
 
     //运行概况
     useEffect(()=>{
-        if(pipelineId){
-            pipelineCensus(pipelineId).then(res=>{
-                const data = res.data
-                if(res.code===0){
-                    setCensus(data)
-                    renderEchart(data)
-                }
-            })
-        }
+        pipelineId && pipelineCensus(pipelineId).then(res=>{
+            const data = res.data
+            if(res.code===0){
+                setCensus(data)
+                renderEchart(data)
+            }
+        })
     },[pipelineId])
 
     // 流水线动态
@@ -79,31 +75,20 @@ const Survey = props =>{
         <div className="survey">
             <div className="survey-content home-limited">
                 <div className="survey-top">
-                    <BreadcrumbContent
-                        firstItem={pipeline.pipelineName}
-                        secondItem={"概况"}
-                    />
+                    <BreadcrumbContent firstItem={pipeline.pipelineName} secondItem={"概况"}/>
                 </div>
                 <div className="survey-content">
-                    <div className="survey-census survey-div">
-                        <Guide
-                            icon={<PieChartOutlined />}
-                            title={"运行概况"}
-                        />
+                    <div className="survey-census">
+                        <Guide icon={<PieChartOutlined />} title={"运行概况"}/>
                         <div className="survey-census-bottom">
-                            <div className="chart-box" id="burn-down"
-                                 style={{width:400,height:300}}
-                            />
-                            <SurverCensus
-                                census={census}
-                            />
+                            <div className="chart-box" id="burn-down" style={{width:400,height:300}}/>
+                            <SurverCensus census={census}/>
                         </div>
                     </div>
-                    <DynaLatest
-                        dynamicList={dynamicList}
-                        pipelineId={[pipelineId]}
-                        title={"流水线动态"}
-                    />
+                    <div className="survey-dyna">
+                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={"dynamic"} pipelineId={pipelineId}/>
+                        <DynaList dynamicList={dynamicList} pipelineId={[pipelineId]}/>
+                    </div>
                 </div>
             </div>
         </div>

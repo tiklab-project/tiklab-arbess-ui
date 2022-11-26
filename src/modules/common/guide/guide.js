@@ -31,13 +31,12 @@ const Guide = props =>{
                 </span>
             </div>
             {
-                type && (
-                    <div className="mf-guide-ac">
-                        <span onClick={()=>goDetails(title)}>
-                            <RightOutlined />
-                        </span>
-                    </div>
-                )
+                type &&
+                <div className="mf-guide-ac">
+                    <span onClick={()=>goDetails(title)}>
+                        <RightOutlined />
+                    </span>
+                </div>
             }
         </div>
     )

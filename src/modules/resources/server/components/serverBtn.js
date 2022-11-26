@@ -9,7 +9,7 @@ const ServerBtn = props =>{
     const {serverStore,authorizeStore,isConfig,type} = props
 
     const {modalVisible,setModalVisible,createAuthServer,formValue,setFormValue,updateAuthServer,callbackUrl} = serverStore
-    const {findCode,findAccessToken} = authorizeStore
+    const {findCode,findAccessToken,skin} = authorizeStore
 
     const [scanVisible,setScanVisible] = useState(false)
     const [goodsVisible,setGoodsVisible] = useState(false)
@@ -83,6 +83,7 @@ const ServerBtn = props =>{
                 type={type}
                 callUrl={callbackUrl}
                 findAccessToken={findAccessToken}
+                skin={skin}
             />
         </>
     )

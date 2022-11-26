@@ -6,7 +6,9 @@
         min-height: 32px;
     }
     .CodeMirror{
+        min-height: 32px;
         height: 100%;
+        padding: 4px 7px;
         &:hover{
             background: #f4f4f4;
         }
@@ -17,6 +19,7 @@
         .CodeMirror-code{
             font-family: Microsoft YaHei;
         }
+
     }
 }
 
@@ -27,10 +30,11 @@
     .react-codemirror2{
         width: 500px;
         border:1px solid #1890ff;
-        min-height: 64px;
     }
     .CodeMirror{
         height: 100%;
+        min-height: 64px;
+        padding: 4px 7px;
         .CodeMirror-placeholder{
             color: #bfbfbf;
             font-family: Microsoft YaHei;

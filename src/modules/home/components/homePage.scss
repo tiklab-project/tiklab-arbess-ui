@@ -59,6 +59,75 @@
                 }
             }
         }
+        .pipelineRecent{
+            border-radius: 4px;
+            padding: 10px;
+            height: 200px;
+            background: #fff;
+            flex: 1;
+            margin-bottom: 15px;
+            .pipelineRecent-content{
+                display: flex;
+                justify-content: flex-start;
+                padding-top: 5px;
+            }
+            .pipelineRecent-item{
+                width: 232px;
+                height: 120px;
+                padding: 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                background-color: var(--mf-backdrop-color);
+                &:not(:last-child){
+                    margin-right: 15px;
+                }
+            }
+            .pipelineRecent-item:hover{
+                border-radius: 4px 4px 0 0;
+                border-bottom: 2px solid var(--tiklab-blue);
+            }
+            .pipelineRecent-item-title{
+                padding-bottom: var(--tiklab-padding-item);
+                .pipelineRecent-icon{
+                    display: inline-block;
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    border-radius: 4px;
+                    text-align: center;
+                    color: black;
+                    font-size: 13px;
+                }
+                .pipelineRecent-name{
+                    display: inline-block;
+                    max-width: 200px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    -o-text-overflow: ellipsis;
+                    font-weight: var(--tiklab-font-weight-bold);
+                }
+            }
+            .pipelineRecent-item-details{
+                font-size: var(--tiklab-font-13);
+                display: flex;
+                justify-content: space-around;
+                .details-desc{
+                    color: #9b9b9b;
+                    padding-right: 8px;
+                }
+            }
+            .pipelineRecent-item-detail{
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+        .home-dyna{
+            background: #fff;
+            padding: 10px;
+            min-height: 450px;
+            border-radius: 4px;
+        }
         .pipelineNear{
             border-radius: 4px;
             padding: 10px;

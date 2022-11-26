@@ -48,6 +48,11 @@ export class ConfigStore{
                 if(res.code===0){
                     switch (values.message) {
                         case "update":
+                            if(values.values.authId && (values.taskType===2 || values.taskType===3)){
+                                this.isFindConfig=!this.isFindConfig
+                            }
+                            this.mess("更新")
+                            break
                         case "updateType":
                             this.mess("更新")
                             break

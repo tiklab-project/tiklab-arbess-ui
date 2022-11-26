@@ -13,6 +13,7 @@ export class AuthorizeStore {
 
     @observable storehouseList = []
     @observable branchList = []
+    @observable skin = true
 
     @action
     findCode = async value =>{
@@ -21,11 +22,14 @@ export class AuthorizeStore {
 
     @action
     findAccessToken = async value =>{
+        this.skin = true
         const data = await FindAccessToken(value)
         if(data.code===0){
-            message.success("授权成功")
+            this.skin = false
+            // message.success("授权成功")
         }
         else {
+            // this.skin = false
             message.info(data.msg)
         }
         return data
