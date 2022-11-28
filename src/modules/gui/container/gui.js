@@ -65,8 +65,7 @@ const Gui = props =>{
     }
 
     // 更改
-    const valueChange = (value,name,mode,setIsLoading) => {
-        setIsLoading(2)
+    const valueChange = (value,name,mode) => {
         const obj = {}
         obj[name] = value
         formInitialValues[name]=value
@@ -79,14 +78,8 @@ const Gui = props =>{
         updateConfigure(params).then(res=>{
             if(res.code===0){
                 document.getElementById(name) && document.getElementById(name).classList.remove("guiView-validateFields")
-                setIsLoading(3)
-            }else {
-                setIsLoading(4)
-                message.info(res.msg)
             }
         })
-
-        setTimeout(()=>setIsLoading(1),1000)
     }
 
     // 删除

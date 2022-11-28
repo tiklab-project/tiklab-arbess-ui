@@ -72,6 +72,7 @@ const ServerModal = props =>{
     const validCallbackUrl = /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
     const isNull = values => values === null || values === "" || values === " " || values === undefined
 
+    // 是否能够新建
     const setAuth = () =>{
         if(formValue){
             setAddAuth(false)

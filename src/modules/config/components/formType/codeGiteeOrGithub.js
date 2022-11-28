@@ -33,7 +33,7 @@ const CodeGiteeOrGithub = props =>{
     }
 
     // 选择分支
-    const changeBranch = (value,e) => {
+    const changeBranch = value => {
         change("codeBranch",value)
     }
 

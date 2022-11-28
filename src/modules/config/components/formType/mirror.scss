@@ -3,12 +3,18 @@
     width: 500px;
     .react-codemirror2{
         width: 500px;
+    }
+    .form-mirror-fa{
         min-height: 32px;
+    }
+    .form-mirror-tr{
+        min-height: 64px;
+        border:1px solid #1890ff;
     }
     .CodeMirror{
         min-height: 32px;
         height: 100%;
-        padding: 4px 7px;
+        padding: 2px 7px;
         &:hover{
             background: #f4f4f4;
         }
@@ -20,27 +26,5 @@
             font-family: Microsoft YaHei;
         }
 
-    }
-}
-
-
-.codeNewStage{
-    display: flex;
-    width: 500px;
-    .react-codemirror2{
-        width: 500px;
-        border:1px solid #1890ff;
-    }
-    .CodeMirror{
-        height: 100%;
-        min-height: 64px;
-        padding: 4px 7px;
-        .CodeMirror-placeholder{
-            color: #bfbfbf;
-            font-family: Microsoft YaHei;
-        }
-        .CodeMirror-code{
-            font-family: Microsoft YaHei;
-        }
     }
 }

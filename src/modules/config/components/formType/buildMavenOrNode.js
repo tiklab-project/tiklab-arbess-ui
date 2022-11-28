@@ -20,10 +20,7 @@ const BuildMavenOrNode = props =>{
                 addonBefore={"/"}
             />
 
-            <Form.Item
-                name={"buildOrder"}
-                label="执行命令"
-            >
+            <Form.Item name={"buildOrder"} label="执行命令">
                 <Mirror
                     name={"buildOrder"}
                     type={buildType}

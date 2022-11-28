@@ -13,6 +13,7 @@ const HlineIcon = props =>{
             case 3: return renderTitle("bushubanben","部署")
             case 4: return renderTitle("ceshi","代码扫描")
             case 5: return renderTitle("quanxian","推送制品")
+            case 6: return renderTitle("quanxian","消息通知")
         }
     }
 

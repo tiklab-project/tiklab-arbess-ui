@@ -1,8 +1,8 @@
-import React,{useContext,useState} from "react";
-import {Form,Input, Space} from "antd";
+import React,{useContext,useState,useRef,useEffect} from "react";
+import {Form,Input} from "antd";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
-import SuffixStatus from "./suffixStatus";
+import {x} from "../common/delData";
 
 const Inputs = props =>{
 
@@ -13,11 +13,24 @@ const Inputs = props =>{
     const {formInitialValues} = context.configDataStore
     const valueChange = context.valueChange
 
-    const [isLoading,setIsLoading] = useState(1)
-    const [value,setValue] = useState(3)
+    const [bordered,setBordered] = useState(false)
+    const ref = useRef(null)
+
+    useEffect(()=>{
+        if(bordered){
+            ref.current.focus()
+        }else {
+            ref.current.blur()
+        }
+    },[bordered])
 
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
+    
+    const onFocus = () => {
+        setBordered(true)
+
+    }
 
     const validation = (mode,name,value) =>{
         switch (name) {
@@ -58,47 +71,32 @@ const Inputs = props =>{
         return rule
     }
 
-    const x = (newValue,lastValue) => {
-        if (newValue == null){
-            return false;
-        }
-        if (newValue === "" && lastValue == null){
-            return false;
-        }
-        return newValue !== lastValue;
-    }
-
     const onBlur = e =>{
         if(x(e.target.value,formInitialValues[name])){
-            setValue(e.target.value)
-            if(validation(mode,name,e.target.value)){
-                valueChange(e.target.value,name,mode,setIsLoading)
-            }else {
-                setIsLoading(4)
-                setTimeout(()=>setIsLoading(1),1000)
-            }
+            valueChange(e.target.value,name,mode)
         }
+        setBordered(false)
     }
 
-    return (
-        <div className="guiView-inputs">
-            <Form.Item
+    return   <Form.Item
                 name={name}
                 label={label}
                 rules={rules()}
                 validateTrigger="onChange"
             >
                 <Input
-                    placeholder={placeholder}
-                    onBlur={e=>onBlur(e)}
-                    addonBefore={addonbefore}
+                    ref={ref}
+                    addonBefore={bordered && addonbefore}
+                    placeholder={bordered ? placeholder+"，回车保存":"未设置"}
+                    onFocus={onFocus}
+                    onBlur={(e)=>onBlur(e)}
+                    onPressEnter={(e)=>{
+                        onBlur(e)
+                        e.target.blur()
+                    }}
                 />
-            </Form.Item>
-            <div className={`guiView-inputs-suffix ${validation(mode,name,value)?"inputs-isValid":"inputs-suffix"}`}>
-                {<SuffixStatus isLoading={isLoading}/>}
-            </div>
-        </div>
-    )
+
+             </Form.Item>
 }
 
 export default observer(Inputs)

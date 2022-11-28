@@ -1,18 +1,27 @@
 .guiViewCodeMirror{
-    display: flex;
     padding-top: 5px;
     .react-codemirror2{
         width: 440px;
-        min-height: 64px;
         border: 1px solid #cccccc;
         &:hover{
             border-color: #1890ff;
         }
     }
+    .gui-mirror-tr{
+        min-height: 64px;
+    }
+    .gui-mirror-fa{
+        min-height: 32px;
+    }
     .CodeMirror{
         height: 100%;
+        padding: 2px 7px;
         .CodeMirror-placeholder{
             color: #bfbfbf;
+            font-family: Microsoft YaHei;
+        }
+        .CodeMirror-code{
+            font-family: Microsoft YaHei;
         }
     }
 }

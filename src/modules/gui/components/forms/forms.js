@@ -8,6 +8,7 @@ import Deploy from "./deploy";
 import ScanSonarQuebe from "./scanSonarQuebe";
 import GoodsNexus from "./goodsNexus";
 import GoodsSsh from "./goodsSsh";
+import MesNotify from "./mesNotify";
 
 const Forms = props =>{
 
@@ -40,6 +41,8 @@ const Forms = props =>{
                             return <GoodsNexus/>
                         case 52:
                             return <GoodsSsh/>
+                        case 61:
+                            return <MesNotify/>
                     }
                 })()
             }

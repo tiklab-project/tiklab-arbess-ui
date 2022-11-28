@@ -212,7 +212,6 @@
     &-head{
         height: 46px;
         background:#fff;
-        padding: 12px;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -226,6 +225,7 @@
         -ms-flex-align: center;
         align-items: center;
         font-weight: 700;
+        padding: 0 20px;
         &-title{
             .icon{
                 width: 16px;
@@ -242,8 +242,8 @@
         }
     }
     &-body{
-        height: calc(100% - 46px);
         overflow: hidden;
+        height: calc(100% - 46px);
         padding: 0;
         .body {
             display: -webkit-box;
@@ -253,19 +253,5 @@
             height: 100%;
             overflow: auto;
         }
-    }
-}
-
-.guiView-inputs{
-    display: flex;
-    align-items: center;
-    .guiView-inputs-suffix{
-        padding-left: 8px;
-    }
-    .inputs-suffix{
-        padding-top: 0px !important;
-    }
-    .inputs-isValid{
-        padding-top: 20px !important;
     }
 }

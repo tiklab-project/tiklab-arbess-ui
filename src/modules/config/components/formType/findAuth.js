@@ -67,7 +67,7 @@ const FindAuth = props =>{
         setBordered(false)
     }
 
-    // 失去交代
+    // 失去焦点
     const onBlur = () => {
         setBordered(false)
     }
@@ -193,10 +193,7 @@ const FindAuth = props =>{
     }
 
     return(
-        <Form.Item
-            label={label(type)}
-            name={name(type)}
-        >
+        <Form.Item label={label(type)} name={name(type)}>
             <Select
                 showSearch={bordered}
                 placeholder={bordered ? label(type):"未选择"}

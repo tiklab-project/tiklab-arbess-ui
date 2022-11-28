@@ -35,6 +35,7 @@ const ConfigTop = props =>{
         }else {
             setView(configView)
         }
+        // setView(configView)
     },[configView])
 
     const run = () => {

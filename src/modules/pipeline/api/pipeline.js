@@ -58,7 +58,7 @@ export function  FindAllFollow(data){
 //收藏
 export function  UpdateFollow(data){
     return serviceLoc.request({
-        url:"/pipelineHome/updateFollow",
+        url:"/pipeline/updateFollow",
         method:"post",
         data
     })

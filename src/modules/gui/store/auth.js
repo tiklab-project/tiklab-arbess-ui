@@ -10,8 +10,6 @@ import {
 
 export class AuthStore {
 
-    
-
     @action
     createAuth =async values =>{
         return await CreateAuth(values)
@@ -36,7 +34,8 @@ export class AuthStore {
 
     @action
     createAuthServer =async values =>{
-        return await CreateAuthServer(values)
+        const data = await CreateAuthServer(values)
+        return data
     }
 
     @action

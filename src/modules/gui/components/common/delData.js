@@ -48,9 +48,6 @@ export const del = (type,configDataStore) =>{
             formInitialValues.fileAddress = null
             setGoodsType(type)
             break
-        case 61:
-            formInitialValues.typeList = []
-            break
         case "giteeName":
             formInitialValues.codeName = null
             formInitialValues.codeBranch = null

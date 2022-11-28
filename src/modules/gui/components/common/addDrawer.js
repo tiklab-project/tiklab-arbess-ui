@@ -120,6 +120,17 @@ const lis=[
             },
         ]
     },
+    {
+        id:7,
+        title: "消息通知",
+        desc: [
+            {
+                type: 61,
+                tel: "消息通知",
+                icon:"xuniji"
+            },
+        ]
+    }
 ]
 
 const AddDrawer = props =>{

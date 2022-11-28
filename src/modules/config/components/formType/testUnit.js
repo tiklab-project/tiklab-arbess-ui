@@ -10,10 +10,7 @@ const TestUnit = props =>{
     const {unitShellBlock,setUnitShellBlock} = configDataStore
 
     return(
-        <Form.Item
-            name={"testOrder"}
-            label="测试命令"
-        >
+        <Form.Item name={"testOrder"} label="测试命令">
             <Mirror
                 name={"testOrder"}
                 type={11}

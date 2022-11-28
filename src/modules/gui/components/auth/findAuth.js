@@ -1,10 +1,11 @@
 import React,{useState,useContext} from "react";
 import {observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
-import SuffixStatus from "../forms/suffixStatus";
 import AuthBtn from "./authBtn";
 import authStore from "../../store/auth";
 import TestContext from "../common/testContext";
+import EmptyText from "../../../common/emptyText/emptyText";
+import {x} from "../common/delData";
 
 const FindAuth = props =>{
 
@@ -19,7 +20,7 @@ const FindAuth = props =>{
 
     const [list,setList] = useState([])
     const [open,setOpen] = useState(false)
-    const [isLoading,setIsLoading] = useState(1)
+    const [bordered,setBordered] = useState(false)
 
     // 存储authId
     const setAuthId = key =>{
@@ -36,14 +37,34 @@ const FindAuth = props =>{
         }
     }
 
+    // 获取存储authId
+    const isId = type =>{
+        const zz = Math.floor(type/10)
+        switch (zz) {
+            case 0:
+                return formInitialValues.gitAuthId
+            case 3:
+                return formInitialValues.deployAuthId
+            case 4:
+                return formInitialValues.scanAuthId
+            case 5:
+                return formInitialValues.goodsAuthId
+        }
+    }
+
     // 改变凭证
-    const changeGitSelect = (value,e) =>{
-        setAuthId(e.key)
-        valueChange(e.key,"authId",type,setIsLoading)
+    const changeGitSelect = value =>{
+        setAuthId(value)
+        console.log(value,"::value")
+        console.log(isId(type),"::isId(type)")
+        console.log(x(value,isId(type)),"::x(value,isId(type))")
+        x(value,isId(type)) && valueChange(value,"authId",type)
+        setBordered(false)
     }
 
     // 获取焦点，获取下拉内容
-    const onFocus = type => {
+    const onFocus = () => {
+        setBordered(true)
         switch (type) {
             case 1:
             case 4:
@@ -61,6 +82,11 @@ const FindAuth = props =>{
             case 52:
                 findAllAuthHostList(0).then(res=>{getList(res)})
         }
+    }
+
+    // 失去焦点
+    const onBlur = () => {
+        setBordered(false)
     }
 
     const getList = res =>{
@@ -123,47 +149,66 @@ const FindAuth = props =>{
         }
     }
 
+    const selectValue = item =>{
+        switch (type) {
+            case 1:
+            case 4:
+            case 5:
+                return item.name+"("+(item.authType === 1?item.username:"私钥")+")"
+            case 2:
+            case 3:
+                return item.name+"("+item.message+")"
+            case 41:
+            case 51:
+                return item.name+"("+item.username+")"
+            case 31:
+            case 32:
+            case 52:
+                return item.name+"("+item.ip+")"
+        }
+    }
+
     return(
-        <div className="formView-inputs">
-            <Form.Item
-                label={label(type)}
-                name={name(type)}
+        <Form.Item
+            label={label(type)}
+            name={name(type)}
+        >
+            <Select
+                showSearch
+                placeholder={bordered ? label(type):"未选择"}
+                onChange={changeGitSelect}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                notFoundContent={<EmptyText/>}
+                open={open}
+                onDropdownVisibleChange={(visible)=>setOpen(visible)}
+                filterOption={(input, option) =>
+                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+                dropdownRender={menu=> (
+                    <>
+                        {menu}
+                        <Divider style={{margin:"4px 0"}} />
+                        <div
+                            style={{cursor:"pointer"}}
+                            onClick={() => {
+                                setOpen(false)
+                            }}
+                        >
+                            <AuthBtn type={type}/>
+                        </div>
+                    </>
+                )}
             >
-                <Select
-                    onChange={(value,e)=>changeGitSelect(value,e)}
-                    placeholder="凭证"
-                    open={open}
-                    onFocus={()=>onFocus(type)}
-                    onDropdownVisibleChange={(visible)=>setOpen(visible)}
-                    dropdownRender={menu=> (
-                        <>
-                            {menu}
-                            <Divider style={{margin:"4px 0"}} />
-                            <div
-                                style={{padding:"4px 8px",cursor:"pointer"}}
-                                onClick={() => {
-                                    setOpen(false)
-                                }}
-                            >
-                                <AuthBtn type={type}/>
-                            </div>
-                        </>
-                    )}
-                >
-                    {
-                        list && list.map(item=>{
-                            return <Select.Option value={item.name} key={setKey(item)}>
-                                {item.name}
-                                {}
-                            </Select.Option>
-                        })
-                    }
-                </Select>
-            </Form.Item>
-            <div className="formView-inputs-suffix">
-                <SuffixStatus isLoading={isLoading}/>
-            </div>
-        </div>
+                {
+                    list && list.map((item,index)=>{
+                        return <Select.Option value={setKey(item)}  key={index}>
+                            {selectValue(item)}
+                        </Select.Option>
+                    })
+                }
+            </Select>
+        </Form.Item>
     )
 }
 

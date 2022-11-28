@@ -1,5 +1,4 @@
 import React from "react";
-import {Space} from "antd";
 import {withRouter} from "react-router-dom";
 import backpack from "../../../assets/images/svg/backpack.svg";
 import buzzer from "../../../assets/images/svg/buzzer.svg";
@@ -40,20 +39,16 @@ const DynaList = props =>{
 
     const renderLis = (item,index) => {
         return <div key={index} className="dynamic-item" onClick={()=>dynaGo(item)}>
-            <div className="dynamic-item-left">
-                <Space>
-                    <div className="dynamic-item-icon">
-                        <img src={img(item.actionType.id)} alt={""}/>
-                    </div>
-                    <div className="dynamic-item-message">
-                        <div className="dynamic-item-message-title">
-                            {item.opLogTemplate.title}
-                        </div>
-                        <div
-                            dangerouslySetInnerHTML={{__html: item.opLogTemplate.content}}
-                        />
-                    </div>
-                </Space>
+            <div className="dynamic-item-icon">
+                <img src={img(item.actionType.id)} alt={""}/>
+            </div>
+            <div className="dynamic-item-message">
+                <div className="dynamic-item-message-title">
+                    {item.opLogTemplate.title}
+                </div>
+                <div
+                    dangerouslySetInnerHTML={{__html: item.opLogTemplate.content}}
+                />
             </div>
             <div>{item.timestamp}</div>
         </div>

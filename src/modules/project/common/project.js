@@ -42,8 +42,7 @@ const Project= (props)=>{
         })
 
         // 流水线权限
-        getInitProjectPermissions(userId,pipelineId,"matflow")
-
+        pipelineId && getInitProjectPermissions(userId,pipelineId,"matflow")
     },[pipelineId])
 
     const isPipeline = data => {

@@ -56,7 +56,7 @@ const MirrorContent = forwardRef((props,ref)=>{
     }
 
     return  <>
-        <div className={`${bordered?"codeNewStage":"formViewCodeMirror"}`}>
+        <div className="formViewCodeMirror">
             <CodeMirror
                 value={shellBlock}//内容
                 ref={mirrorRefs}
@@ -66,7 +66,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                     placeholder: bordered ? placeholder:"未设置"
                 }}
                 onFocus={e=>onFocus(e)}
-                // className={`${bordered?"":""}`}
+                className={`${bordered?"form-mirror-tr":"form-mirror-fa"}`}
             />
         </div>
         {

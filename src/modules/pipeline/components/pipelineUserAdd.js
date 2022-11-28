@@ -17,6 +17,7 @@ const PipelineUserAdd = props =>{
 
     useEffect(()=>{
         setSelectedRowKeys([])
+        setAddUser([])
     },[visible])
 
     useEffect(()=>{
@@ -40,7 +41,6 @@ const PipelineUserAdd = props =>{
     }
 
 
-    
     const modalFooter = (
         <>
             <Btn
@@ -93,6 +93,21 @@ const PipelineUserAdd = props =>{
         },
     ]
 
+    const onSelectRow = record => {
+        // 如果已经选中 -- 取消选中
+        if (selectedRowKeys.indexOf(record.id) >= 0) {
+            addUser.splice(addUser.indexOf(record.id),1)
+            selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
+        }
+        // 如果没有选中 -- 选中
+        else {
+            selectedRowKeys.push(record.id)
+            addUser.push(record)
+        }
+        setSelectedRowKeys([...selectedRowKeys])
+        setAddUser([...addUser])
+    }
+
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             setAddUser(selectedRows)
@@ -120,6 +135,9 @@ const PipelineUserAdd = props =>{
             <Table
                 rowKey={(record) => record.id}
                 rowSelection={rowSelection}
+                onRow={record => ({
+                        onClick: () => onSelectRow(record)
+                })}
                 columns={columns}
                 dataSource={nUserList}
                 pagination={false}

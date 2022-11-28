@@ -33,7 +33,7 @@ const Inputs = props =>{
     }
 
     // 效验
-    const validation = (mode,name,value) =>{
+    const validation = (value,mode,name) =>{
         switch (name) {
             case "codeName":
                 if(mode===5){
@@ -52,26 +52,23 @@ const Inputs = props =>{
     }
 
     const onBlur = e => {
-        // 校验成功
-        if(validation(mode,name,e.target.value)){
-            // 值改变
-            if(x(e.target.value,formInitialValues[name])){
-                const obj = {}
-                obj[name] = e.target.value
-                formInitialValues[name]=obj[name]
-                const params = {
-                    pipeline:{pipelineId},
-                    taskType:mode,
-                    values:obj,
-                    message:"update"
-                }
-                updateConfigure(params).then(res=>{
-                    if(res.code===0){
-                        document.getElementById(name).classList.remove("formView-validateFields")
-                    }
-                })
+        // 效验
+        validation(e.target.value,mode,name) && setBordered(false)
+        if(x(e.target.value,formInitialValues[name])){
+            const obj = {}
+            obj[name] = e.target.value
+            formInitialValues[name]=obj[name]
+            const params = {
+                pipeline:{pipelineId},
+                taskType:mode,
+                values:obj,
+                message:"update"
             }
-            setBordered(false)
+            updateConfigure(params).then(res=>{
+                if(res.code===0){
+                    document.getElementById(name).classList.remove("formView-validateFields")
+                }
+            })
         }
         setEnter(false)
     }

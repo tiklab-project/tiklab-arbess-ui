@@ -20,7 +20,7 @@ const Switch = props =>{
     }
 
     const isBtn = type => {
-        if(type===11 || type===41){
+        if(type===11 || type===41 || type===61){
             return
         }
         else {
@@ -79,6 +79,12 @@ const Switch = props =>{
                     else if(type > 50 && type < 60){
                         return  <>
                                     <div className="configCode-gitList-title">推送制品类型</div>
+                                    { renderType(type) }
+                                </>
+                    }
+                    else if(type > 60 && type < 70){
+                        return  <>
+                                    <div className="configCode-gitList-title">消息通知类型</div>
                                     { renderType(type) }
                                 </>
                     }

@@ -11,7 +11,8 @@ import "codemirror/mode/shell/shell.js";
 import "./mirror.scss";
 import {observer} from "mobx-react";
 import TestContext from "../common/testContext";
-import SuffixStatus from "./suffixStatus";
+import Btn from "../../../common/btn/btn";
+import {x} from "../common/delData";
 
 
 const Mirror = props =>{
@@ -21,45 +22,59 @@ const Mirror = props =>{
 
     const mirrorRefs = useRef(null)
     const context = useContext(TestContext)
-
-    const [isLoading,setIsLoading] = useState(1)
-
     const valueChange = context.valueChange
 
-    const x = (newValue,lastValue) => {
-        if (newValue == null){
-            return false;
+    const [bordered,setBordered] = useState(false)
+
+    const onFocus = e => {
+        setBordered(true)
+        if(e.state.placeholder){
+            e.state.placeholder.innerHTML=placeholder
         }
-        if (newValue === "" && lastValue == null){
-            return false;
-        }
-        return newValue !== lastValue;
     }
 
-    const onBlur = () =>{
+    const onCancel = () =>{
+        mirrorRefs.current.editor.setValue(shellBlock)
+        setBordered(false)
+    }
+
+    const onOk = () =>{
         const zz = mirrorRefs.current.editor.getValue()
         if(x(zz,shellBlock)){
-            valueChange(zz,name,type,setIsLoading)
+            valueChange(zz,name,type)
             shellBlock = zz
             setShellBlock(shellBlock)
         }
     }
 
-    return <div className="guiViewCodeMirror">
-        <CodeMirror
-            value={shellBlock}//内容
-            ref={mirrorRefs}
-            options={{
-                mode: {name: "shell", shell: true},//语言
-                lineNumbers: false, // 是否显示行号
-                placeholder: placeholder
-            }}
-            onBlur={onBlur}
-        />
-        <div className="guiView-inputs-suffix">
-            {<SuffixStatus isLoading={isLoading}/>}
-        </div>
-    </div>
+    return  <div className="guiViewCodeMirror">
+                <CodeMirror
+                    value={shellBlock}//内容
+                    ref={mirrorRefs}
+                    options={{
+                        mode: {name: "shell", shell: true},//语言
+                        lineNumbers: false, // 是否显示行号
+                        placeholder: bordered ? placeholder:"未设置"
+                    }}
+                    onFocus={e=>onFocus(e)}
+                    className={`${bordered?"gui-mirror-tr":"gui-mirror-fa"}`}
+                />
+                {
+                    bordered &&
+                    <div style={{paddingTop:8}}>
+                        <Btn
+                            title={"取消"}
+                            isMar={true}
+                            onClick={()=>onCancel()}
+                        />
+                        <Btn
+                            title={"保存"}
+                            type={"primary"}
+                            onClick={()=>onOk()}
+                        />
+                    </div>
+                }
+            </div>
 
 }
 

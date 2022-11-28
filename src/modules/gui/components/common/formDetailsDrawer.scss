@@ -1,7 +1,7 @@
 .wrapper-body{
     .body-taskForm{
-        padding: 20px;
         width: 100%;
+        padding: 0 20px 20px;
         .ant-row {
             flex-flow: row wrap;
         }
@@ -24,7 +24,11 @@
             width: 30px;
         }
         .ant-form-item-explain-error{
-            min-height: 22px;
+            min-height: 20px;
+            height: 20px;
+        }
+        .ant-form-item-explain{
+            font-size: 13px;
         }
         .ant-form-item-label{
             min-width: 110px;
@@ -45,6 +49,5 @@
                 content: "*";
             }
         }
-    
     }
 }

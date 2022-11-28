@@ -13,6 +13,8 @@ const Headline = props =>{
             case 3: return "部署"
             case 4: return "代码扫描"
             case 5: return "推送制品"
+            case 6: return "消息通知"
+
         }
     }
 

@@ -13,7 +13,7 @@ const AuthBtn = props =>{
     const {type} = props
 
     const {createAuth,createAuthServer,createAuthHost} = authStore
-    const {findCode,findState} = authorizeStore
+    const {findCode,findAccessToken,callbackUrl} = authorizeStore
 
     const [authVisible,setAuthVisible] = useState(false)
     const [serverVisible,setServerVisible] = useState(false)
@@ -41,6 +41,7 @@ const AuthBtn = props =>{
     return(
         <>
             <Btn
+                type={"row"}
                 onClick={btnClick}
                 title={"添加认证"}
                 icon={<PlusOutlined/>}
@@ -55,7 +56,8 @@ const AuthBtn = props =>{
                 setVisible={setServerVisible}
                 createAuthServer={createAuthServer}
                 findCode={findCode}
-                findState={findState}
+                findAccessToken={findAccessToken}
+                callUrl={callbackUrl}
                 type={type}
             />
             <HostModal
