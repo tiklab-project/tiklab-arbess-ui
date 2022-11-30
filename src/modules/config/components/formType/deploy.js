@@ -99,9 +99,7 @@ const Deploy = props =>{
                     <Select.Option value={2}>自定义部署</Select.Option>
                 </Select>
             </Form.Item>
-            <Form.Item
-                shouldUpdate={(prevValues,currentValues)=> prevValues.authType!==currentValues.authType}
-            >
+            <Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues.authType!==currentValues.authType}>
                 {({ getFieldValue })=>
                     getFieldValue("authType") === 1 ? (
                         <>

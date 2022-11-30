@@ -31,26 +31,28 @@ const formView = props =>{
 
     return(
         <div className="formView">
-            <Anch
-                data={data}
-                opt={opt}
-                setOpt={setOpt}
-                setAddConfigVisible={setAddConfigVisible}
-            />
             <div className="formView-content">
-                <Form
-                    id="form"
-                    form={form}
-                    autoComplete="off"
-                    initialValues={{authType:1}}
-                >
-                    <NewStage
-                        data={data}
-                        pipelineId={pipeline.pipelineId}
-                        updateConfigure={updateConfigure}
-                        validType={validType}
-                    />
-                </Form>
+                <Anch
+                    data={data}
+                    opt={opt}
+                    setOpt={setOpt}
+                    setAddConfigVisible={setAddConfigVisible}
+                />
+                <div className="formView-center">
+                    <Form
+                        id="form"
+                        form={form}
+                        autoComplete="off"
+                        initialValues={{authType:1}}
+                    >
+                        <NewStage
+                            data={data}
+                            pipelineId={pipeline.pipelineId}
+                            updateConfigure={updateConfigure}
+                            validType={validType}
+                        />
+                    </Form>
+                </div>
             </div>
         </div>
     )

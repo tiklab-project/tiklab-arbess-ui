@@ -1,15 +1,11 @@
 .formView{
-    margin: auto;
-    max-width: 1280px;
-    min-width: 768px;
-    padding: 0 var(--tiklab-padding) var(--tiklab-padding);
+    //background: var(--mf-backdrop-color);
     .formView-anch{
         position: sticky;
-        top: 63px;
+        top: 110px;
         background: var(--mf-backdrop-color);
         z-index: 9;
-        padding-top: 5px;
-        &-content{
+        .formView-anch-content{
             display: flex;
             height: 40px;
             line-height: 40px;
@@ -35,9 +31,15 @@
         }
     }
     .formView-content{
+        margin: auto;
+        max-width: 1280px;
+        min-width: 768px;
+        padding: 0 var(--tiklab-padding) var(--tiklab-padding);
+    }
+    .formView-center{
         padding-top: var(--tiklab-padding-item);
     }
-    &-wrapper{
+    .formView-wrapper{
         background: #ffffff;
         border-radius: 4px;
         padding: 10px 15px;
@@ -48,7 +50,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 4px;
             border-bottom: 1px solid var(--tiklab-gray-200);
             height: 40px;
             .headline{

@@ -36,6 +36,7 @@ const ChangeSortsModal = props =>{
             case 41:return "代码扫描-sonarQuebe"
             case 51:return "推送制品-nexus"
             case 52:return "推送制品-SSH"
+            case 61:return "消息通知-消息通知"
             default:return null
         }
     }

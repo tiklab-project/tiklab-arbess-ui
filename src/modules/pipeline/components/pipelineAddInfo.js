@@ -4,7 +4,7 @@ import {LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import "./pipelineAddInfo.scss";
 import PipelineUser from "./pipelineUser";
-import {inject, observer} from "mobx-react";
+import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../common/btn/btn";
 
@@ -208,7 +208,7 @@ const PipelineAddInfo = props =>{
             { renderPowerType(powerLis)}
 
             {
-                powerType === 2 &&
+                !set && powerType === 2 &&
                 <PipelineUser
                     yUserList={yUserList}
                     setYUserList={setYUserList}

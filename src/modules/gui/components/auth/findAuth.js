@@ -54,11 +54,8 @@ const FindAuth = props =>{
 
     // 改变凭证
     const changeGitSelect = value =>{
-        setAuthId(value)
-        console.log(value,"::value")
-        console.log(isId(type),"::isId(type)")
-        console.log(x(value,isId(type)),"::x(value,isId(type))")
         x(value,isId(type)) && valueChange(value,"authId",type)
+        setAuthId(value)
         setBordered(false)
     }
 

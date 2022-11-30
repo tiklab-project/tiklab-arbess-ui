@@ -47,10 +47,7 @@ const AddModalStepOne = props =>{
     }
 
     const renderRightLis = group =>{
-        return  <div className="group"
-                     key={group.title}
-                     id={group.id}
-                >
+        return  <div className="group" key={group.title} id={group.id}>
             <div className="group-title">
                 <span>{group.title}</span>
             </div>
@@ -89,11 +86,7 @@ const AddModalStepOne = props =>{
                 </div>
             </Col>
             <Col span={20} className="codeOrNewStage-stepOne-right">
-                <div
-                    className="modalRight"
-                    id="modalRight-list"
-                    onScroll={onScroll}
-                >
+                <div className="modalRight" id="modalRight-list" onScroll={onScroll}>
                     {
                         lis && lis.map(group=>{
                             return renderRightLis(group)

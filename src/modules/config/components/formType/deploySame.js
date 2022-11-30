@@ -43,10 +43,7 @@ const DeploySame = props =>{
                 isValid={true}
             />
 
-            <Form.Item
-                name={"deployOrder"}
-                label={"部署文件命令"}
-            >
+            <Form.Item name={"deployOrder"} label={"部署文件命令"}>
                 <Mirror
                     name={"deployOrder"}
                     type={deployType}

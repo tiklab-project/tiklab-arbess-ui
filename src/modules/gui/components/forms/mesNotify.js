@@ -19,20 +19,19 @@ const MesNotify = props =>{
         setCheckValue(formInitialValues && formInitialValues.typeList)
     },[pipelineId])
 
-    // 是否一致
-    const scalarArrayEquals = (typeList,check) => {
-        if(typeList && check){
-            if(typeList.length !== check.length){ // 一定不一致
-                return true
-            }else {
-                for (let i=0;i<typeList && typeList.length;i++){
-                    if(typeList[i] !== check[i]){
-                        return true
-                    }
-                }
-                return false
+    // 数组是否一致
+    const equalsIgnoreOrder = (a,b) =>{
+        if(a && b){
+            if(a.length !== b.length) return true
+            const uniqueValues = new Set([...a, ...b])
+            for (const v of uniqueValues){
+                const aCount = a.filter(e=>e === v).length
+                const bCount = b.filter(e=>e === v).length
+                if(aCount !== bCount) return true
             }
+            return false
         }
+        return false
     }
 
     const changMesType = value => {
@@ -45,7 +44,7 @@ const MesNotify = props =>{
 
     const onCancel = () => {
         setIsFindConfig(!isFindConfig)
-        setCheckValue([])
+        setCheckValue(formInitialValues && formInitialValues.typeList)
     }
 
     return(
@@ -60,8 +59,8 @@ const MesNotify = props =>{
                 </Checkbox.Group>
             </Form.Item>
             {
-                scalarArrayEquals(formInitialValues && formInitialValues.typeList,checkValue && checkValue) &&
-                    <div style={{paddingLeft:130}}>
+                equalsIgnoreOrder(formInitialValues && formInitialValues.typeList,checkValue && checkValue) &&
+                    <div>
                         <Btn
                             title={"取消"}
                             isMar={true}

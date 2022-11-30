@@ -1,14 +1,17 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
+import {PlusOutlined,AppstoreOutlined,BarsOutlined} from "@ant-design/icons";
 import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../formView/formView";
 import Gui from "../../../gui/container/gui";
+import AddModal from "../formView/addModal";
+import Btn from "../../../common/btn/btn";
 
-const ConfigView = props =>{
+const View = props =>{
 
-    const {view,configDataStore,configStore,pipelineStore} = props
+    const {configDataStore,configStore,pipelineStore} = props
 
     const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig} = configStore
 
@@ -16,16 +19,26 @@ const ConfigView = props =>{
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
         setUnitShellBlock,setBuildShellBlock,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
+        addConfigVisible,setAddConfigVisible,
     } = configDataStore
 
     const {pipelineId,pipeline} = pipelineStore
 
     const pluginStore = useSelector(state =>state.pluginStore)
 
+    const [view,setView] = useState("forms")
+    const configView = localStorage.getItem("configView")
+
     useEffect(()=>{
         pluginStore && pluginStore.map(item=>{
             if(item.id==="gui"){setIsPlugin(true)}
         })
+        if(getVersionInfo().expired || !isPlugin || !configView){
+            setView("forms")
+        }else {
+            setView(configView)
+        }
+        // setView(configView)
     },[])
 
     // 表单初始化
@@ -169,37 +182,73 @@ const ConfigView = props =>{
         Object.assign(formInitialValues,goodsFormValue)
     }
 
-    return view==="forms" ?
-        <FormView
-            pipeline={pipeline}
-            configStore={configStore}
-            configDataStore={configDataStore}
-        />
-        :
-         <>
-            {/*<Gui*/}
-            {/*    {...props}*/}
-            {/*    configStore={configStore}*/}
-            {/*    configDataStore={configDataStore}*/}
-            {/*    pipelineStore={pipelineStore}*/}
-            {/*/>*/}
+    const changeView = type => {
+        setView(type)
+        localStorage.setItem("configView",type)
+    }
 
-             {
-                 !getVersionInfo().expired && isPlugin?
-                     <RemoteUmdComponent
-                         {...props}
-                         point={"gui"}
-                         pluginStore={pluginStore}
-                         isModalType={true}
-                         extraProps={{
-                             pipelineStore:pipelineStore,
-                             configDataStore:configDataStore,
-                             configStore:configStore,
-                         }}
-                    />
-                    :null
-            }
-        </>
+    return <>
+        <div className="config-views">
+            <div>
+                <div className={`config-view ${view==="forms"?"config-view-active":""}`} onClick={()=>changeView("forms")}>
+                    <BarsOutlined  />&nbsp;表单视图
+                </div>
+                {
+                    getVersionInfo().expired || !isPlugin ?
+                    <div className="config-view-ban">
+                        <AppstoreOutlined  />&nbsp;图形视图
+                    </div>
+                    :
+                    <div className={`config-view ${view==="gui"?"config-view-active":""}`} onClick={()=>changeView("gui")}>
+                        <AppstoreOutlined  />&nbsp;图形视图
+                    </div>
+                }               
+            </div>
+            <div>
+                <Btn
+                    icon={<PlusOutlined/>}
+                    onClick={() =>setAddConfigVisible(true)}
+                    title={"添加任务"}
+                />
+                <AddModal
+                    addConfigVisible={addConfigVisible}
+                    setAddConfigVisible={setAddConfigVisible}
+                />
+            </div>
+        </div>
+        {
+            view==="forms" ?
+            <FormView
+                pipeline={pipeline}
+                configStore={configStore}
+                configDataStore={configDataStore}
+            />
+            :
+            <>
+                <Gui
+                    {...props}
+                    configStore={configStore}
+                    configDataStore={configDataStore}
+                    pipelineStore={pipelineStore}
+                />
+
+                {/*{*/}
+                {/*    !getVersionInfo().expired && isPlugin &&*/}
+                {/*        <RemoteUmdComponent*/}
+                {/*            {...props}*/}
+                {/*            point={"gui"}*/}
+                {/*            pluginStore={pluginStore}*/}
+                {/*            isModalType={true}*/}
+                {/*            extraProps={{*/}
+                {/*                pipelineStore:pipelineStore,*/}
+                {/*                configDataStore:configDataStore,*/}
+                {/*                configStore:configStore,*/}
+                {/*            }}*/}
+                {/*       />*/}
+                {/*}*/}
+            </>
+        }
+    </>
 }
 
-export default  inject("configStore","configDataStore","pipelineStore")(observer(ConfigView))
+export default  inject("configStore","configDataStore","pipelineStore")(observer(View))

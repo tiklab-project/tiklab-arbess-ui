@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import {getUrlParam} from "../common/client/client";
+import {getUrlParam} from "../../../common/client/client";
 
 const Authorize = props =>{
 

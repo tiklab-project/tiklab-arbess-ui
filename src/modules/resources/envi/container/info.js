@@ -17,6 +17,10 @@ const Info = props =>{
 
     const infoData = [
         {
+            title:"工作空间",
+            data:infoList && infoList.workspace
+        },
+        {
             title:"系统版本",
             data:infoList && infoList.osName
         },
@@ -56,12 +60,12 @@ const Info = props =>{
                 }
 
             </div>
-            {/*<div className="container">*/}
-            {/*    <div className="dot dot-1"></div>*/}
-            {/*    <div className="dot dot-2"></div>*/}
-            {/*    <div className="dot dot-3"></div>*/}
-            {/*</div>*/}
             {/*<div className="progress-1"></div>*/}
+            {/*<div  className="container">*/}
+            {/*    <div className="shape"/>*/}
+            {/*    <div className="shape"/>*/}
+            {/*    <div className="shape"/>*/}
+            {/*</div>*/}
         </div>
     )
 }

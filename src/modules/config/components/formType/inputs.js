@@ -54,6 +54,7 @@ const Inputs = props =>{
     const onBlur = e => {
         // 效验
         validation(e.target.value,mode,name) && setBordered(false)
+        // 值是否个更改
         if(x(e.target.value,formInitialValues[name])){
             const obj = {}
             obj[name] = e.target.value
@@ -96,7 +97,7 @@ const Inputs = props =>{
                             {pattern: validCodeGit, message:"请输入正确的git地址"},
                             ({ getFieldValue }) => ({
                                 validator(rule,value) {
-                                    if(!value || value.trim() === ""){
+                                    if(!value || value.trim()===""){
                                         return Promise.reject(`请输入${label}`);
                                     }
                                     return Promise.resolve()
@@ -110,7 +111,7 @@ const Inputs = props =>{
                             {pattern: validCodeSvn,message:"请输入正确的svn地址"},
                             ({ getFieldValue }) => ({
                                 validator(rule,value) {
-                                    if(!value || value.trim() === ""){
+                                    if(!value || value.trim()===""){
                                         return Promise.reject(`请输入${label}`)
                                     }
                                     return Promise.resolve()

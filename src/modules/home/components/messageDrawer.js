@@ -7,10 +7,10 @@ import {
     MessageOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
-import EmptyText from "../common/emptyText/emptyText";
+import EmptyText from "../../common/emptyText/emptyText";
 import {inject,observer} from "mobx-react";
 import "./messageDrawer.scss";
-import Btn from "../common/btn/btn";
+import Btn from "../../common/btn/btn";
 
 const MessageDrawer = props =>{
 

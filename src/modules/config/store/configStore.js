@@ -38,7 +38,7 @@ export class ConfigStore{
 
     @action
     mess = value =>{
-        message.success(`${value}成功`,1.5)
+        message.info(value,1.5)
     }
 
     @action
@@ -51,24 +51,27 @@ export class ConfigStore{
                             if(values.values.authId && (values.taskType===2 || values.taskType===3)){
                                 this.isFindConfig=!this.isFindConfig
                             }
-                            this.mess("更新")
+                            this.mess("更新成功")
                             break
                         case "updateType":
-                            this.mess("更新")
+                            this.mess("更新成功")
                             break
                         case "create":
-                            this.mess("添加")
+                            this.mess("添加成功")
                             this.isFindConfig=!this.isFindConfig
                             break
                         case "delete":
-                            this.mess("删除")
+                            this.mess("删除成功")
                             this.isFindConfig=!this.isFindConfig
                             break
                         default:
-                            this.mess("更新")
+                            this.mess("更新成功")
                             this.isFindConfig=!this.isFindConfig
                     }
                     this.enabledValid=!this.enabledValid
+                }
+                else if(res.code===50001){
+                    this.mess(res && res.msg)
                 }
                 resolve(res)
             }).catch(error=>{

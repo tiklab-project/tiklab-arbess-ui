@@ -4,6 +4,7 @@ import {orga_cn} from "tiklab-user-ui/es/_utils";
 import {message_cn} from "tiklab-message-ui/es/_utils";
 import todoTask_cn from "tiklab-todotask-ui/es/_utils/language";
 import oplog_cn from "tiklab-oplog-ui/es/_utils/language";
+import zh_CN from "antd/lib/locale-provider/zh_CN";
 import zhCnTrans from "./cn/translation.json";
 import enCnTrans from "./en/translation.json"
 
@@ -16,6 +17,7 @@ const resources= {
             ...message_cn,
             ...todoTask_cn,
             ...oplog_cn,
+            ...zh_CN,
             ...zhCnTrans,
         },
     },

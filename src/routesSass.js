@@ -2,21 +2,21 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./modules/portal/portal"))
+const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
 const Wechat=AsyncComponent(()=>import("./modules/login/wechat"))
 
 /* 首页 */
-const HomePage=AsyncComponent(()=>import("./modules/home/container/homePage"))
+const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
 
 
 /* 授权 */
-const Authorize=AsyncComponent(()=>import("./modules/authorize/authorize"))
+const Authorize=AsyncComponent(()=>import("./modules/config/components/authorize/authorize"))
 
 /* 代办 */
 const Agency=AsyncComponent(()=>import("./modules/agency/agency"))

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {Dropdown,Badge} from "antd";
-import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
 import {Profile,WorkAppConfig} from "tiklab-eam-ui";
@@ -17,7 +16,7 @@ import {
 } from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/img/matflow3.png";
+import logo from "../../../assets/images/img/matflow3.png";
 import MessageDrawer from "./messageDrawer";
 
 const Head = props =>{
@@ -31,12 +30,9 @@ const Head = props =>{
     const [currentLink,setCurrentLink] = useState(path)
     const [visible,setVisible] = useState(false)
 
-    const userId = getUser().userId
     const {i18n,t} = useTranslation()
 
     useEffect(()=>{
-        // 路由菜单控制
-        privilegeStores.systemRoleStore.getSystemPermissions(userId,"matflow")
         // 未读消息通知
         findMessageDispatchItemPage(0)
     },[])
@@ -117,9 +113,7 @@ const Head = props =>{
             <div className="header-outMenu-out">
                 <div  onClick={()=>goOut()} className="outMenu-out">
                     <LogoutOutlined className="header-dropdown-icon"/>
-                    <span className="bottom-out">
-                        退出
-                    </span>
+                    <span className="bottom-out">退出</span>
                 </div>
             </div>
         </div>
@@ -146,6 +140,10 @@ const Head = props =>{
         </div>
     )
 
+    const goSystem = () =>{
+        props.history.push("/index/system")
+    }
+
     return(
         <div className="frame-header">
             <div className="frame-header-right">
@@ -159,18 +157,12 @@ const Head = props =>{
             </div>
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
-                    <div className="frame-header-set"
-                         onClick={()=>props.history.push("/index/system")}
-                    >
+                    <div className="frame-header-set" onClick={()=>goSystem()}>
                         <SettingOutlined className="frame-header-icon"/>
                     </div>
-                    <div className="frame-header-message"
-                         onClick={()=>setVisible(true)}
-                    >
+                    <div className="frame-header-message" onClick={()=>setVisible(true)}>
                         <Badge count={unread} size="small">
-                            <BellOutlined
-                                className="frame-header-icon"
-                            />
+                            <BellOutlined className="frame-header-icon"/>
                         </Badge>
                     </div>
                     <div className="frame-header-help">

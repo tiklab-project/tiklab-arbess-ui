@@ -15,7 +15,7 @@ const StructureRightLogDrawer = props =>{
             onClose={()=>setVisible(false)}
             closable={false}
             maskStyle={{background:"transparent"}}
-            contentWrapperStyle={{width:600,top:48,height:"calc(100% - 48px)"}}
+            contentWrapperStyle={{width:700,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
             className="mf"
         >

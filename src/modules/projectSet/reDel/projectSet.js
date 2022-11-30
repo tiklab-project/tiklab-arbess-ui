@@ -148,7 +148,7 @@ const ProjectSet = props =>{
                 <div className="pipelineReDel-ul">
                     {
                         lis.map(item=>{
-                            return pipeline.pipelinePower===1?lisItem(item):renderLisItem(item)
+                            return renderLisItem(item)
                         })
                     }
                 </div>

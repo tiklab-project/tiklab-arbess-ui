@@ -128,24 +128,6 @@
             min-height: 450px;
             border-radius: 4px;
         }
-        .pipelineNear{
-            border-radius: 4px;
-            padding: 10px;
-            height: 300px;
-            background: #fff;
-            flex: 1;
-            margin-bottom: 15px;
-            .pipelineNear-item{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 8px;
-                &:hover{
-                    background: #f4f4f4;
-                    border-radius: 4px;
-                }
-            }
-        }
         .agency{
             flex: 1;
             background: #fff;

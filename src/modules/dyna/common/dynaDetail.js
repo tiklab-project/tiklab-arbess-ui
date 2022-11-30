@@ -147,9 +147,7 @@ const DynaDetail = props =>{
                             />
                         </>
                         :
-                        <EmptyText
-                            title={"没有查询到数据"}
-                        />
+                        <EmptyText title={"没有查询到数据"}/>
                 }
             </div>
         </div>

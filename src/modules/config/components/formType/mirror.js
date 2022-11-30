@@ -10,9 +10,10 @@ import "codemirror/mode/shell/shell.js";
 import "codemirror/addon/display/placeholder.js";
 
 import {inject,observer} from "mobx-react";
-import "./mirror.scss";
+import {RadiusUprightOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/btn";
 import {x} from "../common/delData";
+import "./mirror.scss";
 
 const MirrorContent = forwardRef((props,ref)=>{
 
@@ -34,6 +35,8 @@ const MirrorContent = forwardRef((props,ref)=>{
     }
 
     const onCancel = () =>{
+        const targetDiv = document.getElementById(name+"_mirror")
+        targetDiv.style.height = "auto"
         mirrorRefs.current.editor.setValue(shellBlock)
         setBordered(false)
     }
@@ -55,37 +58,70 @@ const MirrorContent = forwardRef((props,ref)=>{
         setBordered(false)
     }
 
-    return  <>
-        <div className="formViewCodeMirror">
-            <CodeMirror
-                value={shellBlock}//内容
-                ref={mirrorRefs}
-                options={{
-                    mode: {name:"shell",shell: true },//语言
-                    lineNumbers: false, // 是否显示行号
-                    placeholder: bordered ? placeholder:"未设置"
-                }}
-                onFocus={e=>onFocus(e)}
-                className={`${bordered?"form-mirror-tr":"form-mirror-fa"}`}
-            />
-        </div>
-        {
-            bordered &&
-            <div style={{paddingTop:8}}>
-                <Btn
-                    title={"取消"}
-                    isMar={true}
-                    onClick={()=>onCancel()}
-                />
-                <Btn
-                    title={"保存"}
-                    type={"primary"}
-                    onClick={()=>onOk()}
-                />
-            </div>
+
+    const handleMouseDown = e => {
+        const targetDiv = document.getElementById(name+"_mirror")
+        const targetDivHeight = targetDiv.offsetHeight
+        // clientY是该表高度，也可以取clientX改变宽度
+        const startY = e.clientY
+        document.onmousemove = function(e) {
+            e.preventDefault()
+            const distY = Math.abs(e.clientY - startY)
+            if (e.clientY > startY) {
+                targetDiv.style.height = targetDivHeight + distY + 'px'
+            }
+            if (e.clientY < startY) {
+                targetDiv.style.height = (targetDivHeight - distY) + 'px'
+            }
+            // 最大高度，也可以通过css  max-height设置
+            if (parseInt(targetDiv.style.height) >= 700) {
+                targetDiv.style.height = 700 + "px"
+            }
+            if (parseInt(targetDiv.style.height) <= 68){
+                targetDiv.style.height = 68 + "px"
+            }
         }
-    </>
-})
+        document.onmouseup = function() {
+            document.onmousemove = null
+        }
+    }
+
+    return  <>
+            <div className="form-mirror" id={name+"_mirror"}>
+                <CodeMirror
+                    value={shellBlock}//内容
+                    ref={mirrorRefs}
+                    options={{
+                        mode: {name:"shell",shell: true },//语言
+                        lineNumbers: false, // 是否显示行号
+                        placeholder: bordered ? placeholder:"未设置",
+                        // readOnly:true
+                    }}
+                    onFocus={e=>onFocus(e)}
+                    className={`${bordered?"form-mirror-tr":"form-mirror-fa"}`}
+                />
+                {
+                    bordered &&
+                    <div className="form-mirror-move"  onMouseDown={handleMouseDown}/>
+                }
+            </div>
+            {
+                bordered &&
+                <div style={{paddingTop:8}}>
+                    <Btn
+                        title={"取消"}
+                        isMar={true}
+                        onClick={()=>onCancel()}
+                    />
+                    <Btn
+                        title={"保存"}
+                        type={"primary"}
+                        onClick={()=>onOk()}
+                    />
+                </div>
+            }
+        </>
+    })
 
 export default inject("pipelineStore","configStore")(observer(MirrorContent))
 

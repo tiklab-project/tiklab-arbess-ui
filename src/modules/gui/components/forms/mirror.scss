@@ -1,7 +1,9 @@
-.guiViewCodeMirror{
+.gui-mirror{
     padding-top: 5px;
+    width: 440px;
     .react-codemirror2{
-        width: 440px;
+        width: 100%;
+        height: 100%;
         border: 1px solid #cccccc;
         &:hover{
             border-color: #1890ff;
@@ -9,9 +11,17 @@
     }
     .gui-mirror-tr{
         min-height: 64px;
+        border: 1px solid #1890ff;
+        //border-left: 1px solid #1890ff;
+        //border-right: 1px solid #1890ff;
+        //border-top: 1px solid #1890ff;
     }
     .gui-mirror-fa{
         min-height: 32px;
+    }
+    .gui-mirror-move{
+        cursor: s-resize;
+        border-bottom: 4px solid #1890ff;
     }
     .CodeMirror{
         height: 100%;

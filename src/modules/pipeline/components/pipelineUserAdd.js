@@ -63,6 +63,12 @@ const PipelineUserAdd = props =>{
             key:"nickname",
             width:"25%",
             ellipsis:true,
+            render:(text,record)=>{
+                return <Space>
+                    <Profile userInfo={record}/>
+                    {text}
+                </Space>
+            }
         },
         {
             title:"名称",
@@ -70,12 +76,6 @@ const PipelineUserAdd = props =>{
             key:"name",
             width:"25%",
             ellipsis:true,
-            render:(text,record)=>{
-                return <Space>
-                    <Profile userInfo={record}/>
-                    {text}
-                </Space>
-            }
         },
         {
             title:"手机号",
@@ -130,7 +130,7 @@ const PipelineUserAdd = props =>{
         >
             <ModalTitle
                 setVisible={setVisible}
-                title={"选择用户"}
+                title={"添加成员"}
             />
             <Table
                 rowKey={(record) => record.id}

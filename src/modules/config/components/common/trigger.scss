@@ -1,0 +1,26 @@
+.trigger{
+    .trigger-content{
+        margin-top: var(--tiklab-padding-item);
+        background: #fff;
+    }
+    .trigger-headline{
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid var(--tiklab-gray-200);
+        margin-bottom: var(--tiklab-padding-item);
+        display: flex;
+        justify-content: space-between;
+        .headline-left{
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+    }
+}
+
+.trigger-modal{
+    .trigger-modal-up{
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+    }
+    .trigger-modal-content{
+        padding: 0 var(--tiklab-padding);
+    }
+}

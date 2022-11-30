@@ -66,7 +66,7 @@ const ProjectSetAside = props =>{
     return(
         <div className="projectSet-aside">
             {secondRouter.map(item=>{
-                    return pipeline && pipeline.pipelinePower===1?navContent(item):renderRouter(item)
+                    return renderRouter(item)               
             })}
         </div>
     )

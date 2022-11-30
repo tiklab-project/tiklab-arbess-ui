@@ -62,7 +62,6 @@ const CodeGiteeOrGithub = props =>{
     }
 
     const onFocus = name => {
-        setFieldName(name)
         switch (name) {
             case "codeName":
                 const param = {

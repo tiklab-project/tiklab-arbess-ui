@@ -206,8 +206,8 @@ const AddModal = props =>{
 
     return(
         <Modal
-            visible={addConfigVisible}
             closable={false}
+            visible={addConfigVisible}
             onCancel={()=>setAddConfigVisible(false)}
             footer={modalFooter}
             width={800}

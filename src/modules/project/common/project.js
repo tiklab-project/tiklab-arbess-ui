@@ -10,7 +10,7 @@ const Project= (props)=>{
 
     const {route,match,pipelineStore,systemRoleStore}=props
 
-    const {findAllPipelineStatus,setPipelineId,setPipeline,setPipelinePermissions} = pipelineStore
+    const {findAllPipelineStatus,setPipelineId,setPipeline} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
 
     const pipelineId = match.params.pipelineId
@@ -36,13 +36,11 @@ const Project= (props)=>{
                 data && data.map(item=>{
                     if(item.pipelineId === pipelineId){
                         setPipeline(item)
+                        getInitProjectPermissions(userId,pipelineId,"matflow",item.pipelinePower===1)
                     }
                 })
             }
         })
-
-        // 流水线权限
-        pipelineId && getInitProjectPermissions(userId,pipelineId,"matflow")
     },[pipelineId])
 
     const isPipeline = data => {

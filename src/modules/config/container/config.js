@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {inject,observer} from "mobx-react";
 import ConfigTop from "../components/common/configTop";
-import ConfigView from "../components/common/configView";
+import View from "../components/common/view";
 
 const Config = props =>{
 
@@ -29,7 +29,7 @@ const Config = props =>{
     return (
         <div className="config mf" id="config-content" onScroll={onScroll}>
             <ConfigTop view={view} setView={setView}/>
-            <ConfigView view={view}/>
+            {/* <View view={view} setView={setView}/> */}
         </div>
     )
 }
