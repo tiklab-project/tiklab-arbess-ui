@@ -1,6 +1,6 @@
 import React from "react";
-import Subtitle from "../../../config/components/formTitle/subtitle";
-import Headline from "../../../config/components/formTitle/headline";
+import Subtitle from "../../../config/view/components/formTitle/subtitle";
+import Headline from "../../../config/view/components/formTitle/headline";
 
 const StructureRightCart = props =>{
 

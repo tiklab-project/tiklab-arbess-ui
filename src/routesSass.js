@@ -16,7 +16,7 @@ const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"
 
 
 /* 授权 */
-const Authorize=AsyncComponent(()=>import("./modules/config/components/authorize/authorize"))
+const Authorize=AsyncComponent(()=>import("./modules/config/authorize/authorize"))
 
 /* 代办 */
 const Agency=AsyncComponent(()=>import("./modules/agency/agency"))

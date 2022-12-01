@@ -7,6 +7,8 @@ import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {messageModuleStores} from "tiklab-message-ui/es/store"
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
+import {ConfigProvider} from "antd";
+import zhCN from "antd/es/locale/zh_CN";
 import {observer,Provider} from "mobx-react";
 import {useTranslation} from "react-i18next";
 import routers from "./routes";
@@ -54,9 +56,11 @@ const Index = observer(() => {
     return (
         <PluginContainer.Provider initialState={initPluginData}>
             <Provider {...allStore}>
-                <HashRouter >
-                    {renderRoutes(initPluginData.routes)}
-                </HashRouter>
+                <ConfigProvider locale={zhCN}>
+                    <HashRouter >
+                        {renderRoutes(initPluginData.routes)}
+                    </HashRouter>
+                </ConfigProvider>
             </Provider>
         </PluginContainer.Provider>
     )

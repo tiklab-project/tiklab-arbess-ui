@@ -1,0 +1,82 @@
+.config{
+    height: 100%;
+    overflow: auto;
+    background: var(--mf-backdrop-color);
+    .config-up{
+        position: sticky;
+        top: 0;
+        background: #ffffff;
+        z-index: 9;
+        min-width: 768px;
+    }
+    .config-top{
+        display: flex;
+        height: 60px;
+        align-items: center;
+        padding: 0 20px;
+        border-bottom: 1px solid #dedede;
+    }
+    .config_bread{
+        padding-right: 20px;
+    }
+}
+
+.config-tabs{
+    display: flex;
+    flex: 1;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 24px;
+    .config-tab{
+        padding: 0 10px;
+        cursor: pointer;
+    }
+    .config-active{
+        color: var(--tiklab-blue);
+        border-bottom: 2px solid var(--tiklab-blue);
+    }
+}
+
+
+.config-views{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    background: #fff;
+    position: sticky;
+    top: 60px;
+    z-index: 9;
+    .config-view{
+        display: inline-block;
+        cursor: pointer;
+        padding: 4px 15px;
+        border-radius: 4px;
+        &:first-child{
+            margin-right: var(--tiklab-padding-item);
+        }
+    }
+    .config-view-ban{
+        display: inline-block;
+        cursor: not-allowed;
+        background: #f5f5f5;
+        border-radius: 4px;
+        padding: 4px 15px;
+        color: rgba(0,0,0,.25);
+    }
+    .config-view-active{
+        background: #f7f7f7;
+    }
+    .config-valid,.config-add{
+        display: inline-block;
+    }
+    .config-valid{
+        margin-right: var(--tiklab-padding-item);
+        color: red;
+        .config-valid-num{
+            font-size: 18px;
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+    }
+}

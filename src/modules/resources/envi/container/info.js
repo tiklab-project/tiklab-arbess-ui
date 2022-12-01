@@ -60,12 +60,6 @@ const Info = props =>{
                 }
 
             </div>
-            {/*<div className="progress-1"></div>*/}
-            {/*<div  className="container">*/}
-            {/*    <div className="shape"/>*/}
-            {/*    <div className="shape"/>*/}
-            {/*    <div className="shape"/>*/}
-            {/*</div>*/}
         </div>
     )
 }

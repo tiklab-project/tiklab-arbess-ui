@@ -1,8 +1,8 @@
 import React from "react";
 import {Drawer} from "antd";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
-import Subtitle from "../../../config/components/formTitle/subtitle";
-import HlineIcon from "../../../config/components/formTitle/hlineIcon";
+import Subtitle from "../../../config/view/components/formTitle/subtitle";
+import HlineIcon from "../../../config/view/components/formTitle/hlineIcon";
 
 const StructureRightLogDrawer = props =>{
 

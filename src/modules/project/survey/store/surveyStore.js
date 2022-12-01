@@ -1,38 +1,8 @@
-import {action,observable} from "mobx";
+import {action} from "mobx";
 
-import {
-    FileTree,
-    PipelineCensus,
-    ReadFile
-} from "../api/survey";
+import {PipelineCensus} from "../api/survey";
 
 export class SurveyStore {
-
-    @observable fileList = []
-
-    @action
-    setFileList = value =>{
-        this.fileList = value
-    }
-
-    @action
-    fileTree = async value =>{
-        const params = new FormData()
-        params.append("pipelineId",value.pipelineId)
-        params.append("userId",value.userId)
-        const data = await FileTree(params)
-        if(data.code===0){
-            this.fileList = data.data
-        }
-        return data
-    }
-
-    @action
-    readFile = async value =>{
-        const param = new FormData()
-        param.append("path",value)
-        return await ReadFile(param)
-    }
 
     @action
     pipelineCensus = async value =>{
