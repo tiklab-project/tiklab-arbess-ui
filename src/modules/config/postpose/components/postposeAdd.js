@@ -20,7 +20,6 @@ const PostposeAdd = props =>{
     }
 
     const getData = item => {
-
         setType(item.id)
     }
 

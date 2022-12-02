@@ -9,35 +9,35 @@ import "./switch.scss";
 
 const Switch = props =>{
 
-    const {type} = props
+    const {dataItem} = props
 
     const [visible,setVisible] = useState(false)
-    const [showType,setShowType] = useState("")
+    const [showItem,setShowItem] = useState("")
 
-    const onClick = type =>{
+    const onClick = dataItem =>{
         setVisible(true)
-        setShowType(type)
+        setShowItem(dataItem)
     }
 
-    const isBtn = type => {
-        if(type===11 || type===41 || type===61){
+    const isBtn = dataItem => {
+        if(dataItem.type===11 || dataItem.type===41 || dataItem.type===61){
             return
         }
         else {
             return <Btn
                         title={<><SwapOutlined/>切换类型</>}
                         type={"link-small"}
-                        onClick={()=>onClick(type)}
+                        onClick={()=>onClick(dataItem)}
                     />
         }
     }
     
-    const renderType = type =>{
+    const renderType = dataItem =>{
         return  <Space>
                     <div className="configCode-gitList-item ">
-                        <SubIcon type={type}/>
+                        <SubIcon type={dataItem.type}/>
                     </div>
-                    {isBtn(type)}
+                    {isBtn(dataItem)}
 
                 </Space>
     }
@@ -46,46 +46,46 @@ const Switch = props =>{
         <div className="configCode-gitList">
             {
                 (()=>{
-                    if(type > 0 &&type < 10){
+                    if(dataItem.type > 0 && dataItem.type < 10){
                         return  <>
                                     <div className="configCode-gitList-title">源码类型</div>
-                                    { renderType(type) }
+                                    { renderType(dataItem) }
                                 </>
                     }
-                    if(type===11){
+                    if(dataItem.type===11){
                         return  <>
                                     <div className="configCode-gitList-title">测试类型</div>
-                                    { renderType(type) }
+                                    { renderType(dataItem) }
                                 </>
                     }
-                    else if(type > 20 && type < 30){
+                    else if(dataItem.type > 20 && dataItem.type < 30){
                         return  <>
                                     <div className="configCode-gitList-title">构建类型</div>
-                                    { renderType(type) }
+                                    { renderType(dataItem) }
                                 </>
                     }
-                    else if(type > 30 && type < 40){
+                    else if(dataItem.type > 30 && dataItem.type < 40){
                         return  <>
                                     <div className="configCode-gitList-title">部署类型</div>
-                                    { renderType(type) }
+                                    { renderType(dataItem) }
                                 </>
                     }
-                    else if(type > 40 && type < 50){
+                    else if(dataItem.type > 40 && dataItem.type < 50){
                         return  <>
                                     <div className="configCode-gitList-title">代码扫描类型</div>
-                                    { renderType(type) }
+                                    { renderType(dataItem) }
                                 </>
                     }
-                    else if(type > 50 && type < 60){
+                    else if(dataItem.type > 50 && dataItem.type < 60){
                         return  <>
                                     <div className="configCode-gitList-title">推送制品类型</div>
-                                    { renderType(type) }
+                                    { renderType(dataItem) }
                                 </>
                     }
-                    else if(type > 60 && type < 70){
+                    else if(dataItem.type > 60 && dataItem.type < 70){
                         return  <>
                                     <div className="configCode-gitList-title">消息通知类型</div>
-                                    { renderType(type) }
+                                    { renderType(dataItem) }
                                 </>
                     }
 
@@ -94,7 +94,7 @@ const Switch = props =>{
             <SwitchType
                 visible={visible}
                 setVisible={setVisible}
-                showType={showType}
+                showItem={showItem}
             />
         </div>
     )

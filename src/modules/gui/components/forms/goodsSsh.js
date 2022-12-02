@@ -4,25 +4,25 @@ import FindAuth from "../auth/findAuth";
 
 const GoodsSsh = props =>{
 
+    const {dataItem} = props
+
     return(
         <>
             <Inputs
                 placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"推送文件"}
                 name={"fileAddress"}
-                mode={52}
+                dataItem={dataItem}
                 isValid={true}
             />
             <Inputs
                 placeholder={"artifactId"}
                 label={"推送位置"}
                 name={"putAddress"}
-                mode={52}
+                dataItem={dataItem}
                 isValid={true}
             />
-            <FindAuth
-                type={52}
-            />
+            <FindAuth dataItem={dataItem}/>
         </>
     )
 }

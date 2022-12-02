@@ -5,11 +5,10 @@ import {x} from "../delData";
 
 const Inputs = props =>{
 
-    const {placeholder,mode,label,name,addonBefore,configStore,isValid,pipelineStore,configDataStore} = props
+    const {placeholder,label,name,addonBefore,configStore,isValid,pipelineStore,dataItem} = props
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure} = configStore
-    const {formInitialValues} = configDataStore
+    const {updateConfigure,formInitialValues} = configStore
 
     const [bordered,setBordered] = useState(false)
     const [enter,setEnter] = useState(false)
@@ -33,12 +32,12 @@ const Inputs = props =>{
     }
 
     // 效验
-    const validation = (value,mode,name) =>{
+    const validation = (value,type,name) =>{
         switch (name) {
             case "codeName":
-                if(mode===5){
+                if(type===5){
                     return validCodeSvn.test(value)
-                }else if(mode===1||mode===4){
+                }else if(type===1||type===4){
                     return validCodeGit.test(value)
                 }
                 break
@@ -53,21 +52,21 @@ const Inputs = props =>{
 
     const onBlur = e => {
         // 效验
-        validation(e.target.value,mode,name) && setBordered(false)
+        validation(e.target.value,dataItem.type,name) && setBordered(false)
         // 值是否个更改
-        if(x(e.target.value,formInitialValues[name])){
+        if(x(e.target.value,formInitialValues[dataItem.configId+"_"+name])){
             const obj = {}
             obj[name] = e.target.value
-            formInitialValues[name]=obj[name]
+            formInitialValues[dataItem.configId+"_"+name]=obj[name]
             const params = {
                 pipeline:{pipelineId},
-                taskType:mode,
+                taskType:dataItem.type,
+                configId:dataItem.configId,
                 values:obj,
-                message:"update"
             }
             updateConfigure(params).then(res=>{
                 if(res.code===0){
-                    document.getElementById(name).classList.remove("formView-validateFields")
+                    document.getElementById(dataItem.configId+"_"+name).classList.remove("formView-validateFields")
                 }
             })
         }
@@ -89,7 +88,7 @@ const Inputs = props =>{
                 })
             ]
             if(name==="codeName"){
-                switch (mode) {
+                switch (dataItem.type) {
                     case 1:
                     case 4:
                         rule =  [
@@ -127,7 +126,7 @@ const Inputs = props =>{
     
     return (
         <Form.Item
-            name={name}
+            name={dataItem.configId+"_"+name}
             label={label}
             rules={rules()}
             validateTrigger="onChange"
@@ -149,4 +148,4 @@ const Inputs = props =>{
 
 }
 
-export default inject("configStore","pipelineStore","configDataStore")(observer(Inputs))
+export default inject("configStore","pipelineStore")(observer(Inputs))

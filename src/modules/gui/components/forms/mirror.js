@@ -17,8 +17,7 @@ import {x} from "../common/delData";
 
 const Mirror = props =>{
 
-    const {setShellBlock,name,type,placeholder} = props
-    let {shellBlock} = props
+    const {name,placeholder,dataItem,mirrorValue} = props
 
     const mirrorRefs = useRef(null)
     const context = useContext(TestContext)
@@ -36,16 +35,14 @@ const Mirror = props =>{
     const onCancel = () =>{
         // const targetDiv = document.getElementById(name+"_guiMirror")
         // targetDiv.style.height = "auto"
-        mirrorRefs.current.editor.setValue(shellBlock)
+        mirrorRefs.current.editor.setValue(mirrorValue)
         setBordered(false)
     }
 
     const onOk = () =>{
         const zz = mirrorRefs.current.editor.getValue()
-        if(x(zz,shellBlock)){
-            valueChange(zz,name,type)
-            shellBlock = zz
-            setShellBlock(shellBlock)
+        if(x(zz,mirrorValue)){
+            valueChange(zz,name,dataItem.type)
         }
         setBordered(false)
     }
@@ -80,7 +77,7 @@ const Mirror = props =>{
     return  <>
         <div className="gui-mirror" id={name+"_guiMirror"}>
             <CodeMirror
-                value={shellBlock}//内容
+                value={mirrorValue}//内容
                 ref={mirrorRefs}
                 options={{
                     mode: {name: "shell", shell: true},//语言

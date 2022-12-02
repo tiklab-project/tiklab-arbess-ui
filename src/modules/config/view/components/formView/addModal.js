@@ -125,11 +125,9 @@ const lis=[
 
 const AddModal = props =>{
 
-    const {configDataStore,configStore,pipelineStore,setAddConfigVisible,addConfigVisible} = props
+    const {configStore,pipelineStore,setAddConfigVisible,addConfigVisible} = props
 
-    const {setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType} = configDataStore
-
-    const {updateConfigure} = configStore
+    const {createConfig} = configStore
     const {pipelineId} = pipelineStore
 
     const [type,setType] = useState(1) // 左侧
@@ -148,35 +146,11 @@ const AddModal = props =>{
     const onOk = () => {
         const params = {
             pipeline:{pipelineId},
-            message:"create",
             taskType:initType,
         }
-        updateConfigure(params).then(res=>{
-            if(res.code===0){
-                add(initType)
-            }
-        })
+        createConfig(params)
         setAddConfigVisible(false)
     }
-
-    const add = type =>{
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return setCodeType(type)
-            case 1:
-                return setTestType(type)
-            case 2:
-                return setBuildType(type)
-            case 3:
-                return setDeployType(type)
-            case 4:
-                return  setScanType(type)
-            case 5:
-                return setGoodsType(type)
-        }
-    }
-    
 
     const modalFooter = (
         <>
@@ -225,4 +199,4 @@ const AddModal = props =>{
     )
 }
 
-export default inject("configDataStore","configStore","pipelineStore")(observer(AddModal))
+export default inject("configStore","pipelineStore")(observer(AddModal))

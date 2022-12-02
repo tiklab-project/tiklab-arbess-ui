@@ -6,7 +6,7 @@ import {autoHeight} from "../../../../common/client/client";
 
 const ChangeSortsModal = props =>{
 
-    const {changeSortVisible,setChangeSortVisible,data,updateConfigure,pipelineId} = props
+    const {changeSortVisible,setChangeSortVisible,data,pipelineId,updateOrderConfig} = props
 
     const [gData,setGData] = useState([])
     const [height,setHeight] = useState(0)
@@ -55,7 +55,7 @@ const ChangeSortsModal = props =>{
             item.type>10 && nameArray.push({
                 key:index,
                 title:renderTitle(item.type),
-                dataId:item.dataId,
+                configId:item.configId,
                 type:item.type
             })
         })
@@ -96,18 +96,17 @@ const ChangeSortsModal = props =>{
             ar.splice(i + 1, 0, dragObj);
         }
         setGData(mData)
-        updateConfig(mData,dragKey+1,dropKey+1)
+        console.log(info)
+        updateConfig(info.dragNode.configId,dropKey+1)
     }
 
-    const updateConfig = (mData,sort,taskSort) =>{
+    const updateConfig = (configId,taskSort) =>{
         const params = {
-            message:"order",
             pipeline:{pipelineId},
-            sort:sort,
+            configId:configId,
             taskSort:taskSort,
-            taskType:1,
         }
-        updateConfigure(params)
+        updateOrderConfig(params)
         setChangeSortVisible(false)
     }
 

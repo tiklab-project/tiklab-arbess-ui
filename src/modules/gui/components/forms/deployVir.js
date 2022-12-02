@@ -6,27 +6,24 @@ import Inputs from "./inputs";
 
 const DeployVir = props =>{
 
-    const {configDatastore} = props
-
-    const {virShellBlock,deployType,setVirShellBlock} = configDatastore
+    const {dataItem} = props
     
     return(
         <>
             <Inputs
+                name={"startAddress"}
                 placeholder={"/ 启动文件地址"}
                 label={"启动文件地址"}
-                name={"startAddress"}
-                mode={deployType}
-                addonbefore={"/"}
+                addonBefore={"/"}
                 isValid={true}
+                dataItem={dataItem}
             />
             <Form.Item name={"startOrder"} label="启动命令" >
                 <Mirror
                     name={"startOrder"}
-                    type={deployType}
-                    shellBlock={virShellBlock}
-                    setShellBlock={setVirShellBlock}
                     placeholder={"启动命令"}
+                    dataItem={dataItem}
+                    mirrorValue={dataItem.startOrder}
                 />
             </Form.Item>
         </>

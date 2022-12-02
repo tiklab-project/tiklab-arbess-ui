@@ -10,11 +10,13 @@ const {Option} =Select
 
 const CodeGiteeOrGithub = props =>{
 
+    const {dataItem} = props
+
     const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
 
     const context = useContext(TestContext)
 
-    const {formInitialValues,codeType} = context.configDataStore
+    const {formInitialValues} = context.configStore
     const valueChange = context.valueChange
 
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -28,14 +30,14 @@ const CodeGiteeOrGithub = props =>{
 
     // 选择仓库地址
     const changeGitStoreHouse = value =>{
-        valueChange(value,"codeName",codeType)
+        valueChange(value,"codeName",dataItem.type)
         setProhibited(false)
     }
 
 
     // 选择分支
     const changeBranch = value => {
-        valueChange(value,"codeBranch",codeType)
+        valueChange(value,"codeBranch",dataItem.type)
     }
 
 
@@ -43,20 +45,19 @@ const CodeGiteeOrGithub = props =>{
         switch (name) {
             case "codeName":
                 const param = {
-                    authId:formInitialValues && formInitialValues.gitAuthId,
-                    type:codeType
+                    authId:formInitialValues && formInitialValues[dataItem.configId+"_authId"],
+                    type:dataItem.type
                 }
                 findAllStorehouse(param)
                 break
             default:
                 const params ={
-                    houseName:formInitialValues && formInitialValues.codeName,
-                    authId:formInitialValues && formInitialValues.gitAuthId,
-                    type:codeType
+                    houseName:formInitialValues && formInitialValues[dataItem.configId+"_codeName"],
+                    authId:formInitialValues && formInitialValues[dataItem.configId+"_authId"],
+                    type:dataItem.type
                 }
                 findBranch(params)
         }
-        setFieldName(name)
     }
 
     const onBlur = () => {
@@ -65,10 +66,10 @@ const CodeGiteeOrGithub = props =>{
 
     return(
         <>
-            <FindAuth type={codeType}/>
+            <FindAuth dataItem={dataItem}/>
             <Form.Item
                 label="仓库"
-                name={"codeName"}
+                name={dataItem.configId+"_codeName"}
                 rules={[{required:true, message:"请选择仓库"}]}
             >
                 <Select
@@ -91,7 +92,7 @@ const CodeGiteeOrGithub = props =>{
             </Form.Item>
             <Form.Item
                 label="分支"
-                name={"codeBranch"}
+                name={dataItem.configId+"_codeBranch"}
             >
                 <Select
                     disabled={prohibited}

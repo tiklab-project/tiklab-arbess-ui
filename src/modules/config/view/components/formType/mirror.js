@@ -17,8 +17,7 @@ import "./mirror.scss";
 
 const MirrorContent = forwardRef((props,ref)=>{
 
-    const {setShellBlock,type,name,pipelineStore,configStore,placeholder} = props
-    let {shellBlock} = props
+    const {name,pipelineStore,configStore,placeholder,dataItem,mirrorValue} = props
 
     const mirrorRefs = useRef(null)
 
@@ -26,7 +25,7 @@ const MirrorContent = forwardRef((props,ref)=>{
     const {updateConfigure} = configStore
 
     const [bordered,setBordered] = useState(false)
-
+    
     const onFocus = e => {
         setBordered(true)
         if(e.state.placeholder){
@@ -37,21 +36,19 @@ const MirrorContent = forwardRef((props,ref)=>{
     const onCancel = () =>{
         const targetDiv = document.getElementById(name+"_mirror")
         targetDiv.style.height = "auto"
-        mirrorRefs.current.editor.setValue(shellBlock)
+        mirrorRefs.current.editor.setValue(mirrorValue)
         setBordered(false)
     }
 
     const onOk = () =>{
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
-        if(x(obj[name],shellBlock)){
-            shellBlock = obj[name]
-            setShellBlock(obj[name])
+        if(x(obj[name],mirrorValue)){
             const params = {
                 pipeline:{pipelineId},
-                taskType:type,
                 values:obj,
-                message:"update"
+                taskType:dataItem.type,
+                configId:dataItem.configId,
             }
             updateConfigure(params)
         }
@@ -89,7 +86,7 @@ const MirrorContent = forwardRef((props,ref)=>{
     return  <>
             <div className="form-mirror" id={name+"_mirror"}>
                 <CodeMirror
-                    value={shellBlock}//内容
+                    value={mirrorValue}//内容
                     ref={mirrorRefs}
                     options={{
                         mode: {name:"shell",shell: true },//语言

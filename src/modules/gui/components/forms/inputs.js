@@ -6,7 +6,7 @@ import {x} from "../common/delData";
 
 const Inputs = props =>{
 
-    const {placeholder,mode,label,name,addonbefore,isValid} = props
+    const {placeholder,dataItem,label,name,addonbefore,isValid} = props
 
     const context = useContext(TestContext)
 
@@ -48,38 +48,63 @@ const Inputs = props =>{
 
     const rules = () =>{
         let rule
-        switch (name) {
-            case "codeName":
-                if(mode===5){
-                    rule =  [
-                        {required:true, message: "请输入svn地址"},
-                        {pattern: validCodeSvn, message:"请输入正确的svn地址"}
-                    ]
-                }else if(mode===1 || mode===4){
-                    rule =  [
-                        {required:true, message: "请输入git地址"},
-                        {pattern: validCodeGit, message:"请输入正确的git地址"}
-                    ]
+        if(isValid){
+            rule = [
+                {required:true,message:" "},
+                ({ getFieldValue }) => ({
+                    validator(rule,value) {
+                        if(!value || value.trim() === ""){
+                            return Promise.reject(`请输入${label}`)
+                        }
+                        return Promise.resolve()
+                    }
+                })
+            ]
+            if(name==="codeName"){
+                switch (dataItem.type) {
+                    case 1:
+                    case 4:
+                        rule =  [
+                            {required:true, message: ""},
+                            {pattern: validCodeGit, message:"请输入正确的git地址"},
+                            ({ getFieldValue }) => ({
+                                validator(rule,value) {
+                                    if(!value || value.trim()===""){
+                                        return Promise.reject(`请输入${label}`);
+                                    }
+                                    return Promise.resolve()
+                                }
+                            }),
+                        ]
+                        break
+                    case 5:
+                        rule =  [
+                            {required: true, message: ""},
+                            {pattern: validCodeSvn,message:"请输入正确的svn地址"},
+                            ({ getFieldValue }) => ({
+                                validator(rule,value) {
+                                    if(!value || value.trim()===""){
+                                        return Promise.reject(`请输入${label}`)
+                                    }
+                                    return Promise.resolve()
+                                }
+                            })
+                        ]
                 }
-                break;
-            default:
-                if(isValid){
-                    rule = [{required:true,message:`请输入${label}`}]
-                }
-
+            }
         }
         return rule
     }
 
     const onBlur = e =>{
-        if(x(e.target.value,formInitialValues[name])){
-            valueChange(e.target.value,name,mode)
+        if(x(e.target.value,formInitialValues[dataItem.configId+"_"+name])){
+            valueChange(e.target.value,name,dataItem.type)
         }
         setBordered(false)
     }
 
     return   <Form.Item
-                name={name}
+                name={dataItem.configId+"_"+name}
                 label={label}
                 rules={rules()}
                 validateTrigger="onChange"

@@ -7,10 +7,9 @@ import Anch from "./anch";
 
 const formView = props =>{
 
-    const {configDataStore,configStore,pipeline} = props
+    const {configStore,pipeline} = props
 
-    const {formInitialValues,setAddConfigVisible} = configDataStore
-    const {data,opt,setOpt,configValid,enabledValid,updateConfigure,validType} = configStore
+    const {formInitialValues,setAddConfigVisible,data,opt,setOpt,configValid,enabledValid,validType,deleteConfig,updateOrderConfig} = configStore
 
     const [form] = Form.useForm()
 
@@ -24,7 +23,7 @@ const formView = props =>{
         setTimeout(()=>
             pipeline && configValid(pipeline.pipelineId).then(res=>{
                 res.code===0 &&
-                form.validateFields( res.data && Object.keys(res.data))
+                form.validateFields( res.data && res.data)
         }),20)
         return ()=>clearTimeout(timout)
     },[pipeline,enabledValid])
@@ -48,8 +47,9 @@ const formView = props =>{
                         <NewStage
                             data={data}
                             pipelineId={pipeline.pipelineId}
-                            updateConfigure={updateConfigure}
+                            deleteConfig={deleteConfig}
                             validType={validType}
+                            updateOrderConfig={updateOrderConfig}
                         />
                     </Form>
                 </div>

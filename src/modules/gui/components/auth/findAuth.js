@@ -9,7 +9,7 @@ import {x} from "../common/delData";
 
 const FindAuth = props =>{
 
-    const {type}=props
+    const {dataItem}=props
 
     const context = useContext(TestContext)
 
@@ -22,39 +22,19 @@ const FindAuth = props =>{
     const [open,setOpen] = useState(false)
     const [bordered,setBordered] = useState(false)
 
-    // 存储authId
-    const setAuthId = key =>{
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return formInitialValues.gitAuthId = key
-            case 3:
-                return formInitialValues.deployAuthId = key
-            case 4:
-                return formInitialValues.scanAuthId = key
-            case 5:
-                return formInitialValues.goodsAuthId = key
-        }
+     // 存储authId
+     const setAuthId = value =>{
+        return formInitialValues[dataItem.configId+"_authId"] = value
     }
 
     // 获取存储authId
-    const isId = type =>{
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return formInitialValues.gitAuthId
-            case 3:
-                return formInitialValues.deployAuthId
-            case 4:
-                return formInitialValues.scanAuthId
-            case 5:
-                return formInitialValues.goodsAuthId
-        }
+    const isId = () =>{
+        return formInitialValues[dataItem.configId+"_authId"]
     }
 
     // 改变凭证
     const changeGitSelect = value =>{
-        x(value,isId(type)) && valueChange(value,"authId",type)
+        x(value,isId()) && valueChange(value,"authId",type)
         setAuthId(value)
         setBordered(false)
     }
@@ -62,7 +42,7 @@ const FindAuth = props =>{
     // 获取焦点，获取下拉内容
     const onFocus = () => {
         setBordered(true)
-        switch (type) {
+        switch (dataItem.type) {
             case 1:
             case 4:
             case 5:
@@ -89,21 +69,6 @@ const FindAuth = props =>{
     const getList = res =>{
         if(res.code===0 && res.data){
             setList(res.data)
-        }
-    }
-
-    // 区分字段
-    const name = type => {
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return "gitAuthName"
-            case 3:
-                return "deployAuthName"
-            case 4:
-                return "scanAuthName"
-            case 5:
-                return "goodsAuthName"
         }
     }
 
@@ -166,10 +131,7 @@ const FindAuth = props =>{
     }
 
     return(
-        <Form.Item
-            label={label(type)}
-            name={name(type)}
-        >
+        <Form.Item label={label(type)} name={dataItem.configId+"_auth"}>
             <Select
                 showSearch
                 placeholder={bordered ? label(type):"未选择"}

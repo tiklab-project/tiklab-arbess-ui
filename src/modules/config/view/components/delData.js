@@ -1,12 +1,10 @@
 import React from "react";
 
-export const del = (type,configDataStore) =>{
+export const del = (type,configStore) =>{
 
-    const {formInitialValues,setFormInitialValues,
-        setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
-        setUnitShellBlock,setBuildShellBlock,
-        setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
-    } = configDataStore
+    const {formInitialValues,setFormInitialValues,setTestType,
+        setUnitShellBlock,
+    } = configStore
 
     switch (type) {
         case 11:
@@ -16,8 +14,6 @@ export const del = (type,configDataStore) =>{
         case 21:
         case 22:
             formInitialValues.buildAddress = null
-            setBuildShellBlock("")
-            setBuildType(type)
             break
         case 31:
         case 32:
@@ -28,16 +24,11 @@ export const del = (type,configDataStore) =>{
             formInitialValues.startAddress = null
             formInitialValues.authType = 1
             formInitialValues.deployAuthId = 0
-            setDeployType(type)
-            setVirShellBlock("")
-            setDeployShellBlock("")
-            setDeployOrderShellBlock("")
             break
         case 41:
             formInitialValues.scanAuthName = null
             formInitialValues.scanAuthId = null
             formInitialValues.projectName = null
-            setScanType(type)
             break
         case 51:
         case 52:
@@ -46,7 +37,7 @@ export const del = (type,configDataStore) =>{
             formInitialValues.version = null
             formInitialValues.fileType = null
             formInitialValues.fileAddress = null
-            setGoodsType(type)
+
             break
         case 61:
             formInitialValues.typeList = []
@@ -63,7 +54,6 @@ export const del = (type,configDataStore) =>{
             formInitialValues.codeBranch = null
             formInitialValues.gitAuthName = null
             formInitialValues.gitAuthId = null
-            setCodeType(type)
     }
     
     setFormInitialValues({...formInitialValues})

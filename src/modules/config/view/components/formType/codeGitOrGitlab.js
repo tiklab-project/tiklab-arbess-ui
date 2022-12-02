@@ -1,12 +1,10 @@
 import React from "react";
-import {inject,observer} from "mobx-react";
 import Inputs from "./inputs";
 import FindAuth from "./findAuth";
 
 const CodeGitOrGitlab = props =>{
 
-    const {configDataStore}=props
-    const {codeType} = configDataStore
+    const {dataItem}=props
 
     return(
         <>
@@ -14,20 +12,18 @@ const CodeGitOrGitlab = props =>{
                 placeholder={"git地址"}
                 label={"git地址"}
                 name={"codeName"}
-                mode={codeType}
                 isValid={true}
+                dataItem={dataItem}
             />
             <Inputs
                 placeholder={"分支，默认为master"}
                 label={"分支"}
                 name={"codeBranch"}
-                mode={codeType}
+                dataItem={dataItem}
             />
-            <FindAuth
-                type={codeType}
-            />
+            <FindAuth dataItem={dataItem}/>
         </>
     )
 }
 
-export default inject("configDataStore")(observer(CodeGitOrGitlab))
+export default CodeGitOrGitlab

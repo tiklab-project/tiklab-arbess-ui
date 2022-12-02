@@ -5,8 +5,7 @@ import {inject,observer} from "mobx-react";
 
 const GoodsNexus = props => {
 
-    const {configDataStore}=props
-    const {goodsType} = configDataStore
+    const {dataItem} = props
 
     return(
         <>
@@ -14,42 +13,39 @@ const GoodsNexus = props => {
                 placeholder={"groupId"}
                 label={"groupId"}
                 name={"groupId"}
-                mode={goodsType}
+                dataItem={dataItem}
                 isValid={true}
             />
             <Inputs
                 placeholder={"artifactId"}
                 label={"artifactId"}
                 name={"artifactId"}
-                mode={goodsType}
+                dataItem={dataItem}
                 isValid={true}
             />
             <Inputs
                 placeholder={"version"}
                 label={"version"}
                 name={"version"}
-                mode={goodsType}
+                dataItem={dataItem}
                 isValid={true}
             />
             <Inputs
                 placeholder={"文件类型"}
                 label={"文件类型"}
-                name={"fileType"}
-                mode={goodsType}
+                dataItem={dataItem}
                 isValid={true}
             />
             <Inputs
                 placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"部署文件"}
                 name={"fileAddress"}
-                mode={goodsType}
+                dataItem={dataItem}
                 isValid={true}
             />
-            <FindAuth
-                type={goodsType}
-            />
+            <FindAuth dataItem={dataItem}/>
         </>
     )
 }
 
-export default inject("configDataStore")(observer(GoodsNexus))
+export default GoodsNexus

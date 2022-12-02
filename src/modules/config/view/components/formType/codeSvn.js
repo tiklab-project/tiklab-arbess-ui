@@ -1,13 +1,10 @@
 import React from "react";
 import Inputs from "./inputs";
-import {inject,observer} from "mobx-react";
 import FindAuth from "./findAuth";
 
 const CodeSvn = props =>{
 
-    const {configDataStore} = props
-
-    const {codeType} = configDataStore
+    const {dataItem} = props
 
     return(
         <>
@@ -15,20 +12,18 @@ const CodeSvn = props =>{
                 name={"codeName"}
                 placeholder={"svn地址"}
                 label={"svn地址"}
-                mode={codeType}
                 isValid={true}
+                dataItem={dataItem}
             />
             <Inputs
                 name={"svnFile"}
                 placeholder={"检出文件夹名称"}
                 label={"检出文件"}
-                mode={codeType}
+                dataItem={dataItem}
             />
-            <FindAuth
-                type={5}
-            />
+            <FindAuth dataItem={dataItem}/>
         </>
     )
 }
 
-export default inject("configDataStore")(observer(CodeSvn))
+export default CodeSvn

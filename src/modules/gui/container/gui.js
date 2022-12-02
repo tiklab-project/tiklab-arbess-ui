@@ -12,17 +12,17 @@ import {ExclamationCircleOutlined} from "@ant-design/icons";
 
 const Gui = props =>{
 
-    const {pipelineStore,configDataStore,configStore} = props
+    const {pipelineStore,configStore} = props
 
     const {pipeline} = pipelineStore
-    const {formInitialValues,codeType,setCodeType} = configDataStore
-    const {updateConfigure,configValid,enabledValid,validType,data} = configStore
+    const {formInitialValues,codeType,setCodeType,updateConfigure,configValid,enabledValid,validType,data} = configStore
 
     const [form] = Form.useForm()
     const pipelineId = pipeline.pipelineId
 
     const [taskFormDrawer,setTaskFormDrawer] = useState(false) // 表单详情抽屉
     const [newStage,setNewStage] = useState("") // 表单详情显示
+    const [dataItem,setDataItem] = useState("")
     const [index,setIndex] = useState("")  // 配置位置的插入
 
     useEffect(()=>{
@@ -49,7 +49,6 @@ const Gui = props =>{
         const params = {
             pipeline:{pipelineId},
             taskType:taskType,
-            message:"create"
         }
         updateConfig(params,"create",taskType)
     }
@@ -129,7 +128,6 @@ const Gui = props =>{
     return (
         <TestContext.Provider
             value={{pipelineStore,
-                configDataStore,
                 configStore,
                 valueChange,
                 changType,
@@ -157,6 +155,7 @@ const Gui = props =>{
                                         setTaskFormDrawer={setTaskFormDrawer}
                                         setNewStage={setNewStage}
                                         formInitialValues={formInitialValues}
+                                        setDataItem={setDataItem}
                                     />
                                 </div>
                             </div>
@@ -166,7 +165,7 @@ const Gui = props =>{
                             deletePart={deletePart}
                             taskFormDrawer={taskFormDrawer}
                             setTaskFormDrawer={setTaskFormDrawer}
-                            newStage={newStage}
+                            dataItem={dataItem}
                         />
                     </div>
                 </Form>

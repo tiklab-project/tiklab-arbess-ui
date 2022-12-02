@@ -9,11 +9,9 @@ import DeploySame from "./deploySame";
 
 const Deploy = props =>{
 
-    const {configStore,configDataStore,pipelineStore} = props
+    const {configStore,pipelineStore,dataItem} = props
 
-    const {formInitialValues,deployType,deployShellBlock,setDeployShellBlock} = configDataStore
-
-    const {updateConfigure} = configStore
+    const {updateConfigure,formInitialValues} = configStore
     const {pipelineId} = pipelineStore
 
     const [bordered,setBordered] = useState(false)
@@ -22,12 +20,12 @@ const Deploy = props =>{
     const changDeployType = value => {
         const params = {
             pipeline:{pipelineId},
-            taskType:deployType,
+            taskType:dataItem.type,
             values:{authType:value},
-            message:"update"
+            configId:dataItem.configId,
         }
         updateConfigure(params)
-        formInitialValues.authType=value
+        formInitialValues[dataItem.configId+"_authType"]=value
     }
 
     const confirm = value =>{
@@ -51,7 +49,7 @@ const Deploy = props =>{
 
     return(
         <>
-            <Form.Item name={"authType"} label="部署方式">
+            <Form.Item name={dataItem.configId+"_authType"} label="部署方式">
                 <Select
                     showArrow={showArrow}
                     bordered={bordered}
@@ -65,25 +63,24 @@ const Deploy = props =>{
                     <Select.Option value={2}>自定义部署</Select.Option>
                 </Select>
             </Form.Item>
-            <Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues.authType!==currentValues.authType}>
+            <Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues[dataItem.configId+"_authType"]!==currentValues[dataItem.configId+"_authType"]}>
                 {({ getFieldValue })=>
-                    getFieldValue("authType") === 1 ? (
+                    getFieldValue([dataItem.configId+"_authType"]) === 1 ? (
                         <>
-                            <DeploySame configDataStore={configDataStore}/>
+                            <DeploySame dataItem={dataItem}/>
                             {
-                                deployType==31 ?
-                                <DeployVir configDataStore={configDataStore}/>
+                                dataItem.type==31 ?
+                                <DeployVir dataItem={dataItem}/>
                                 :
-                                <DeployDocker deployType={deployType}/>
+                                <DeployDocker dataItem={dataItem}/>
                             }
                         </>) :
                         <Form.Item name={"startOrder"} label="Shell命令">
                             <Mirror
                                 name={"startOrder"}
-                                type={deployType}
-                                shellBlock={deployShellBlock}
-                                setShellBlock={setDeployShellBlock}
                                 placeholder={"Shell命令"}
+                                dataItem={dataItem}
+                                mirrorValue={dataItem.startOrder}
                             />
                         </Form.Item>
                 }
@@ -92,4 +89,4 @@ const Deploy = props =>{
     )
 }
 
-export default inject("configStore","configDataStore","pipelineStore")(observer(Deploy))
+export default inject("configStore","pipelineStore")(observer(Deploy))

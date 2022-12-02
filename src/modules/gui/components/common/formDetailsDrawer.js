@@ -1,14 +1,49 @@
 import React from "react";
 import {Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
-import Forms from "../forms/forms";
 import SubIcon from "../../../config/view/components/formTitle/subIcon";
 import Btn from "../../../common/btn/btn";
 import "./formDetailsDrawer.scss";
+import CodeGitOrGitlab from "../forms/codeGitOrGitlab";
+import CodeGiteeOrGithub from "../forms/codeGiteeOrGithub";
+import CodeSvn from "../forms/codeSvn";
+import TestUnit from "../forms/testUnit";
+import BuildMavenOrNode from "../forms/buildMavenOrNode";
+import Deploy from "../forms/deploy";
+import ScanSonarQuebe from "../forms/scanSonarQuebe";
+import GoodsNexus from "../forms/goodsNexus";
+import GoodsSsh from "../forms/goodsSsh";
 
 const FormDetailsDrawer = props =>{
 
-    const {taskFormDrawer,setTaskFormDrawer,newStage,deletePart} = props
+    const {taskFormDrawer,setTaskFormDrawer,dataItem,deletePart} = props
+
+    const renderForms = dataItem =>{
+        switch (dataItem.type){
+            case 1:
+            case 4:
+                return <CodeGitOrGitlab dataItem={dataItem}/>
+            case 2:
+            case 3:
+                return <CodeGiteeOrGithub dataItem={dataItem}/>
+            case 5:
+                return <CodeSvn dataItem={dataItem}/>
+            case 11:
+                return <TestUnit dataItem={dataItem}/>
+            case 21:
+            case 22:
+                return <BuildMavenOrNode dataItem={dataItem}/>
+            case 31:
+            case 32:
+                return <Deploy dataItem={dataItem}/>
+            case 41:
+                return <ScanSonarQuebe dataItem={dataItem}/>
+            case 51:
+                return <GoodsNexus dataItem={dataItem}/>
+            case 52:
+                return <GoodsSsh dataItem={dataItem}/>
+        }
+    }
 
     return(
         <Drawer
@@ -40,7 +75,7 @@ const FormDetailsDrawer = props =>{
                     <div className="body">
                         <div className="body-taskForm">
                             <div className="taskForm-forms">
-                                <Forms type={newStage}/>
+                                {renderForms(dataItem)}
                             </div>
                         </div>
                     </div>

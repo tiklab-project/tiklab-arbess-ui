@@ -75,7 +75,6 @@ const AuthModal = props =>{
             style={{height:height,top:60}}
             className="mf"
             destroyOnClose={true}
-
         >
             <ModalTitle
                 setVisible={setVisible}

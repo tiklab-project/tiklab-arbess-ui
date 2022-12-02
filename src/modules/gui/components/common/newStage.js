@@ -1,11 +1,10 @@
-import React,{useState} from "react";
+import React,{useState,Fragment} from "react";
 import AddDrawer from "./addDrawer";
-import BlockContent from "./blockContent";
 import {PlusOutlined} from "@ant-design/icons";
 
 const NewStage = props =>{
 
-    const {data,setTaskFormDrawer,setNewStage,index,setIndex,validType,codeType} = props
+    const {data,setTaskFormDrawer,index,setIndex,validType,setDataItem} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
 
@@ -14,19 +13,78 @@ const NewStage = props =>{
         setIndex(data && data.length)
     }
 
+    const showStage = item =>{
+        setTaskFormDrawer(true)
+        setDataItem(item)
+    }
+
+    const valid = type =>{
+        return validType && validType.some(item=>item==type)
+    }
+
+    const insertData = (type,index) => {
+        setNewStageDrawer(true)
+        setIndex(index)
+    }
+
     // data渲染
     const newStageShow = data =>{
         return data && data.map((item,index)=>{
-            return <BlockContent
-                        key={index}
-                        setTaskFormDrawer={setTaskFormDrawer}
-                        setNewStage={setNewStage}
-                        setNewStageDrawer={setNewStageDrawer}
-                        setIndex={setIndex}
-                        inse={index}
-                        validType={validType}
-                        type={item.type}
-                    />
+            return <Fragment key={index}>
+               {type>10 && <div className="group-flow">
+                <div className="group-flow_btn">
+                    <svg className="icon group-flow_btn_i"
+                         aria-hidden="true"
+                         onClick={() =>insertData(type,inse)}
+                    >
+                        <use xlinkHref="#icon-zengjia"/>
+                    </svg>
+                </div>
+            </div>}
+            <div className="group-table">
+                <div className="group-head">
+                    <div className="name">
+                        <div  className="label">
+                            <HlineIcon type={type}/>
+                        </div>
+                    </div>
+                </div>
+                <div className="newStages">
+                    <div className="newStages-step">
+                        <div className="newStages-content"  onClick={()=>showStage(item)}>
+                            <div className="newStages-task">
+                                <div className={`newStages-job ${valid(type)?"job-name":""}`}>
+                                    <div className="newStages-job_text">
+                                        <Space>
+                                            <span className="newStages-job-title">
+                                                <Subtitle type={type}/>
+                                            </span>
+                                            {valid(type) &&
+                                                <span className="newStages-job-warn">
+                                                <ExclamationCircleOutlined />
+                                            </span>
+                                            }
+                                        </Space>                                                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {
+                            type < 10 && formInitialValues && formInitialValues.codeName &&
+                            <div className="guiView_codeName">
+                                <div className="branch-title"> {formInitialValues.codeName} </div>
+                            </div>
+                        }
+                        {
+                            type < 10 &&formInitialValues && formInitialValues.codeBranch &&
+                            <div className="guiView_branch ">
+                                <div className="branch-address">{formInitialValues.codeBranch}</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            </Fragment>
         })
     }
 

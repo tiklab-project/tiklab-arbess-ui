@@ -7,12 +7,11 @@ import {del} from "../delData";
 
 const CodeGiteeOrGithub = props =>{
 
-    const {configDataStore,configStore,pipelineStore,authorizeStore} = props
+    const {configStore,pipelineStore,authorizeStore,dataItem} = props
 
     const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
-    const {formInitialValues,codeType} = configDataStore
     const {pipelineId} = pipelineStore
-    const {updateConfigure} = configStore
+    const {updateConfigure,formInitialValues} = configStore
 
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
     const [fieldName,setFieldName] = useState("")
@@ -29,29 +28,29 @@ const CodeGiteeOrGithub = props =>{
     // 选择仓库地址
     const changeGitStoreHouse = (value,e) =>{
         setProhibited(false)
-        change("codeName",value)
+        change("_codeName",value)
     }
 
     // 选择分支
     const changeBranch = value => {
-        change("codeBranch",value)
+        change("_codeBranch",value)
     }
 
     const change = (key,value)=>{
         const obj = {}
-        obj[key] = value
+        obj[dataItem.configId+key] = value
         const params = {
             pipeline:{pipelineId},
-            taskType:codeType,
+            taskType:dataItem.type,
             values:obj,
-            message:"update"
+            configId:dataItem.configId,
         }
         updateConfigure(params).then(res=>{
             if(res.code===0){
                 formInitialValues[key]=value
                 switch (key) {
-                    case "codeName":
-                        del("giteeBranch",configDataStore)
+                    case "_codeName":
+                        del("giteeBranch",configStore)
                         setNameBorder(false)
                         break
                     case "codeBranch":
@@ -65,17 +64,17 @@ const CodeGiteeOrGithub = props =>{
         switch (name) {
             case "codeName":
                 const param = {
-                    authId:formInitialValues && formInitialValues.gitAuthId,
-                    type:codeType
+                    authId:formInitialValues && formInitialValues[dataItem.configId+"_authId"],
+                    type:dataItem.type
                 }
                 setNameBorder(true)
                 findAllStorehouse(param)
                 break
             default:
                 const params ={
-                    houseName:formInitialValues && formInitialValues.codeName,
-                    authId:formInitialValues && formInitialValues.gitAuthId,
-                    type:codeType
+                    houseName:formInitialValues && formInitialValues[dataItem.configId+"_codeName"],
+                    authId:formInitialValues && formInitialValues[dataItem.configId+"_authId"],
+                    type:dataItem.type
                 }
                 setBranchBorder(true)
                 findBranch(params)
@@ -84,10 +83,10 @@ const CodeGiteeOrGithub = props =>{
 
     return(
         <>
-            <FindAuth type={codeType}/>
+            <FindAuth dataItem={dataItem}/>
 
             <Form.Item
-                name={"codeName"}
+                name={dataItem.configId+"_codeName"}
                 label="仓库"
                 rules={[{required:true, message:"请选择仓库"}]}
             >
@@ -114,7 +113,7 @@ const CodeGiteeOrGithub = props =>{
                 </Select>
             </Form.Item>
             <Form.Item
-                name={"codeBranch"}
+                name={dataItem.configId+"_codeBranch"}
                 label="分支"
             >
                 <Select
@@ -140,5 +139,5 @@ const CodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject("configDataStore","configStore","pipelineStore","authorizeStore")
+export default inject("configStore","pipelineStore","authorizeStore")
 (observer(CodeGiteeOrGithub))

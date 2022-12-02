@@ -4,18 +4,18 @@ import FindAuth from "./findAuth";
 
 const ScanSonarQuebe = props =>{
 
+    const {dataItem} = props
+
     return(
         <>
             <Inputs
+                dataItem={dataItem}
                 name={"projectName"}
                 placeholder={"项目名称"}
                 label={"项目名称"}
-                mode={41}
                 isValid={true}
             />
-            <FindAuth
-                type={41}
-            />
+            <FindAuth dataItem={dataItem}/>
         </>
     )
 }

@@ -11,16 +11,9 @@ import Btn from "../../../common/btn/btn";
 
 const View = props =>{
 
-    const {configDataStore,configStore,pipelineStore} = props
+    const {configStore,pipelineStore} = props
 
-    const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig,validType} = configStore
-
-    const {formInitialValues,setFormInitialValues,
-        setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
-        setUnitShellBlock,setBuildShellBlock,
-        setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
-        addConfigVisible,setAddConfigVisible,
-    } = configDataStore
+    const {findAllConfigure,isPlugin,setIsPlugin,isFindConfig,valid,formInitialValues,setFormInitialValues,addConfigVisible,setAddConfigVisible} = configStore
 
     const {pipelineId,pipeline} = pipelineStore
 
@@ -38,12 +31,10 @@ const View = props =>{
         }else {
             setView(configView)
         }
-        // setView(configView)
     },[])
 
     // 表单初始化
     useEffect(()=>{
-        // 配置详情
         pipelineId && findAllConfigure(pipelineId).then(res=>{
             const initialData = res.data
             if(res.code===0){
@@ -62,13 +53,7 @@ const View = props =>{
     },[pipelineId])
 
     const nonData = ()=>{
-        setCodeType("")
         setFormInitialValues({})
-        setUnitShellBlock("")
-        setVirShellBlock("")
-        setDeployOrderShellBlock("")
-        setDeployShellBlock("")
-        setBuildShellBlock("")
     }
 
     // 表单数据渲染
@@ -77,12 +62,6 @@ const View = props =>{
             const data = initialData[i]
             if(data.type < 10){
                 renderCodeData(data)
-            }
-            else if(data.type > 10 && data.type < 20){
-                renderTestData(data)
-            }
-            else if(data.type > 20 && data.type < 30 ){
-                renderBuild(data)
             }
             else if(data.type > 30 && data.type < 40 ){
                 renderDeploy(data)
@@ -93,9 +72,12 @@ const View = props =>{
             else if(data.type>50 && data.type<60){
                 renderGoods(data)
             }
-            Object.assign(formInitialValues, initialData[i])
             setFormInitialValues({...formInitialValues})
         }
+    }
+
+    const getId = (data,name) =>{
+        return data.configId+"_"+name
     }
 
     // 源码管理
@@ -106,59 +88,49 @@ const View = props =>{
             case 4:
             case 5:
                 codeFormValue = {
-                    gitAuthName:data.auth && data.auth.name+"("+(data.auth.authType === 1?data.auth.username:"私钥")+")",
-                    gitAuthId:data.authId
+                    [getId(data,"codeName")]:data && data.codeName,
+                    [getId(data,"codeBranch")]:data && data.codeBranch,
+                    [getId(data,"codeAlias")]:data && data.codeAlias,
+                    [getId(data,"svnFile")]:data && data.svnFile,
+                    [getId(data,"authName")]:data.auth && data.auth.name+"("+(data.auth.authType === 1?data.auth.username:"私钥")+")",
+                    [getId(data,"authId")]:data.authId
                 }
                 break
             default:
                 codeFormValue = {
-                    gitAuthName:data.auth && data.auth.name+"("+ data.auth.message+")",
-                    gitAuthId:data.authId
+                    [getId(data,"codeName")]:data && data.codeName,
+                    [getId(data,"codeBranch")]:data && data.codeBranch,
+                    [getId(data,"codeAlias")]:data && data.codeAlias,
+                    [getId(data,"authName")]:data.auth && data.auth.name+"("+ data.auth.message+")",
+                    [getId(data,"authId")]:data.authId
                 }
+            
         }
-        setCodeType(data.type)
         Object.assign(formInitialValues,codeFormValue)
-    }
-
-    // 测试
-    const renderTestData = data =>{
-        setTestType(data.type)
-        setUnitShellBlock(`${data.testOrder ? data.testOrder :""}`)
-    }
-    
-    // 构建
-    const renderBuild = data => {
-        setBuildType(data.type)
-        setBuildShellBlock(`${data.buildOrder ? data.buildOrder : ""}`)
     }
     
     // 部署
     const renderDeploy = data => {
         const DeployFormValue={
-            deployAuthName:data.auth && data.auth.name+"("+ data.auth.ip+")",
-            deployAuthId: data.authId
+            [getId(data,"localAddress")]:data && data.localAddress,
+            [getId(data,"deployAddress")]:data && data.deployAddress,
+            [getId(data,"deployOrder")]:data && data.deployOrder,
+            [getId(data,"startAddress")]:data && data.startAddress,
+            [getId(data,"authType")]:data && data.authType,
+            [getId(data,"authName")]:data.auth && data.auth.name+"("+ data.auth.ip+")",
+            [getId(data,"authId")]: data.authId,
+    
         }
-        deploy(data)
-        setDeployType(data.type)
         Object.assign(formInitialValues,DeployFormValue)
-    }
-
-    // 部署mirror
-    const deploy =  data =>{
-        if(data.authType===1){
-            setDeployOrderShellBlock(`${data.deployOrder ? data.deployOrder : ""}`)
-            setVirShellBlock(`${data.startOrder ? data.startOrder : ""}`)
-        }
-        else setDeployShellBlock(`${data.startOrder ? data.startOrder : ""}`)
     }
 
     // 代码扫描
     const renderScan = data => {
         const scanFormValue={
-            scanAuthName:data.auth && data.auth.name+"("+data.auth.username+")",
-            scanAuthId:data.authId
+            [getId(data,"projectName")]:data && data.projectName,
+            [getId(data,"authName")]:data.auth && data.auth.name+"("+data.auth.username+")",
+            [getId(data,"authId")]:data.authId
         }
-        setScanType(data.type)
         Object.assign(formInitialValues,scanFormValue)
     }
 
@@ -168,17 +140,26 @@ const View = props =>{
         switch (data.type) {
             case 51:
                 goodsFormValue={
-                    goodsAuthName:data.auth && data.auth.name+"("+data.auth.username+")",
-                    goodsAuthId:data.authId
+                    [getId(data,"groupId")]:data.groupId,
+                    [getId(data,"artifactId")]:data.artifactId,
+                    [getId(data,"version")]:data.version,
+                    [getId(data,"fileType")]:data.fileType,
+                    [getId(data,"fileAddress")]:data.fileAddress,
+                    [getId(data,"authName")]:data.auth && data.auth.name+"("+data.auth.username+")",
+                    [getId(data,"authId")]:data.authId
                 }
                 break
             case 52:
                 goodsFormValue={
-                    goodsAuthName:data.auth && data.auth.name+"("+ data.auth.ip+")",
-                    goodsAuthId:data.authId
+                    [getId(data,"groupId")]:data.groupId,
+                    [getId(data,"artifactId")]:data.artifactId,
+                    [getId(data,"version")]:data.version,
+                    [getId(data,"fileType")]:data.fileType,
+                    [getId(data,"fileAddress")]:data.fileAddress,
+                    [getId(data,"authName")]:data.auth && data.auth.name+"("+ data.auth.ip+")",
+                    [getId(data,"authId")]:data.authId
                 }
         }
-        setGoodsType(data.type)
         Object.assign(formInitialValues,goodsFormValue)
     }
 
@@ -195,7 +176,7 @@ const View = props =>{
                 </div>
                 {
                     getVersionInfo().expired || !isPlugin ?
-                    <div className="config-view-ban" onClick={()=>changeView("gui")}>
+                    <div className="config-view-ban" >
                         <AppstoreOutlined  />&nbsp;图形视图
                     </div>
                     :
@@ -206,10 +187,10 @@ const View = props =>{
             </div>
             <div>
                 <div className="config-valid">
-                    {validType && validType.length > 0 ?
+                    {valid && valid.length > 0 ?
                         <span>
                             <ExclamationCircleOutlined style={{fontSize:16}}/> &nbsp;
-                            <span className="config-valid-num">{validType && validType.length}</span>
+                            <span className="config-valid-num">{valid && valid.length}项未配置</span>
                         </span> :
                         null}
                 </div>
@@ -231,34 +212,31 @@ const View = props =>{
             <FormView
                 pipeline={pipeline}
                 configStore={configStore}
-                configDataStore={configDataStore}
             />
             :
             <>
-                <Gui
-                    {...props}
-                    configStore={configStore}
-                    configDataStore={configDataStore}
-                    pipelineStore={pipelineStore}
-                />
+                {/*<Gui*/}
+                {/*    {...props}*/}
+                {/*    configStore={configStore}*/}
+                {/*    pipelineStore={pipelineStore}*/}
+                {/*/>*/}
 
-                {/*{*/}
-                {/*    !getVersionInfo().expired && isPlugin &&*/}
-                {/*        <RemoteUmdComponent*/}
-                {/*            {...props}*/}
-                {/*            point={"gui"}*/}
-                {/*            pluginStore={pluginStore}*/}
-                {/*            isModalType={true}*/}
-                {/*            extraProps={{*/}
-                {/*                pipelineStore:pipelineStore,*/}
-                {/*                configDataStore:configDataStore,*/}
-                {/*                configStore:configStore,*/}
-                {/*            }}*/}
-                {/*       />*/}
-                {/*}*/}
+                {
+                    !getVersionInfo().expired && isPlugin &&
+                        <RemoteUmdComponent
+                            {...props}
+                            point={"gui"}
+                            pluginStore={pluginStore}
+                            isModalType={true}
+                            extraProps={{
+                                pipelineStore:pipelineStore,
+                                configStore:configStore,
+                            }}
+                       />
+                }
             </>
         }
     </>
 }
 
-export default  inject("configStore","configDataStore","pipelineStore")(observer(View))
+export default  inject("configStore","pipelineStore")(observer(View))

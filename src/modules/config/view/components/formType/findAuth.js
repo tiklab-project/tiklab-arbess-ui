@@ -9,14 +9,13 @@ import {x} from "../delData";
 
 const FindAuth = props =>{
 
-    const {type,pipelineStore,configStore,authStore,configDataStore,serverStore,hostStore}=props
+    const {dataItem,pipelineStore,configStore,authStore,serverStore,hostStore}=props
 
     const {findAllAuth} = authStore
     const {findAllAuthServerList} = serverStore
     const {findAllAuthHostList} = hostStore
     const {pipelineId} = pipelineStore
-    const {updateConfigure} = configStore
-    const {formInitialValues} = configDataStore
+    const {updateConfigure,formInitialValues} = configStore
 
     const [list,setList] = useState([])
     const [open,setOpen] = useState(false)
@@ -25,43 +24,23 @@ const FindAuth = props =>{
 
     // 存储authId
     const setAuthId = value =>{
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return formInitialValues.gitAuthId = value
-            case 3:
-                return formInitialValues.deployAuthId = value
-            case 4:
-                return formInitialValues.scanAuthId = value
-            case 5:
-                return formInitialValues.goodsAuthId = value
-        }
+        return formInitialValues[dataItem.configId+"_authId"] = value
     }
 
     // 获取存储authId
-    const isId = type =>{
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return formInitialValues.gitAuthId
-            case 3:
-                return formInitialValues.deployAuthId
-            case 4:
-                return formInitialValues.scanAuthId
-            case 5:
-                return formInitialValues.goodsAuthId
-        }
+    const isId = () =>{
+        return formInitialValues[dataItem.configId+"_authId"]
     }
 
     // 改变凭证
     const changeGitSelect = value =>{
         const params = {
-            taskType:type,
             pipeline:{pipelineId},
             values:{authId:value},
-            message:"update"
+            taskType:dataItem.type,
+            configId: dataItem.configId
         }
-        x(value,isId(type)) && updateConfigure(params).then(res=>{
+        x(value,isId()) && updateConfigure(params).then(res=>{
             res.code===0 && setAuthId(value)
         })
         setBordered(false)
@@ -78,25 +57,10 @@ const FindAuth = props =>{
         }
     }
 
-    // 区分字段
-    const name = type => {
-        const zz = Math.floor(type/10)
-        switch (zz) {
-            case 0:
-                return "gitAuthName"
-            case 3:
-                return "deployAuthName"
-            case 4:
-                return "scanAuthName"
-            case 5:
-                return "goodsAuthName"
-        }
-    }
-
     // 获取焦点，获取下拉内容
     const onFocus = () => {
         setBordered(true)
-        switch (type) {
+        switch (dataItem.type) {
             case 1:
             case 4:
             case 5:
@@ -137,7 +101,7 @@ const FindAuth = props =>{
 
     // 下拉框 id
     const setKey = item =>{
-        switch (type) {
+        switch (dataItem.type) {
             case 1:
             case 4:
             case 5:
@@ -174,7 +138,7 @@ const FindAuth = props =>{
     }
 
     const selectValue = item =>{
-        switch (type) {
+        switch (dataItem.type) {
             case 1:
             case 4:
             case 5:
@@ -193,10 +157,10 @@ const FindAuth = props =>{
     }
 
     return(
-        <Form.Item label={label(type)} name={name(type)}>
+        <Form.Item label={label(dataItem.type)} name={dataItem.configId+"_authName"}>
             <Select
                 showSearch={bordered}
-                placeholder={bordered ? label(type):"未选择"}
+                placeholder={bordered ? label(dataItem.type):"未选择"}
                 bordered={bordered}
                 showArrow={showArrow}
                 onMouseEnter={()=>setShowArrow(true)}
@@ -220,7 +184,7 @@ const FindAuth = props =>{
                                 setOpen(false)
                             }}
                         >
-                            {renderBtn(type)}
+                            {renderBtn(dataItem.type)}
                         </div>
                     </>
                 )}
@@ -234,4 +198,4 @@ const FindAuth = props =>{
 }
 
 export default inject("pipelineStore","configStore","authStore"
-    ,"configDataStore","serverStore","hostStore")(observer(FindAuth))
+    ,"serverStore","hostStore")(observer(FindAuth))

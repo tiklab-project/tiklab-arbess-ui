@@ -1,23 +1,28 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect,useState} from "react";
 import {Modal,Space,Table} from "antd";
-import {autoHeight} from "../../../common/client/client";
-import Btn from "../../../common/btn/btn";
 import {Profile} from "tiklab-eam-ui";
+import {autoHeight} from "../../../common/client/client";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import EmptyText from "../../../common/emptyText/emptyText";
-
+import Btn from "../../../common/btn/btn";
 
 const PostposeUserAdd = props =>{
 
-    const {visible,setVisible,yUserList,nUserList,setYUserList,setNUserList} = props
+    const {visible,setVisible,yUserList,setYUserList,allUserList} = props
 
     const [height,setHeight] = useState(0)
     const [addUser,setAddUser] = useState([])
+    const [userList,setUserList] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
     useEffect(()=>{
         setSelectedRowKeys([])
         setAddUser([])
+    },[visible])
+
+    useEffect(()=>{
+        const newArr = yUserList.map(item=>item.user.id)
+        visible && setUserList(allUserList.filter(item=>!newArr.includes(item.id)))
     },[visible])
 
     useEffect(()=>{
@@ -29,14 +34,9 @@ const PostposeUserAdd = props =>{
     }
 
     const onOk = () => {
-        // 所有id组成数组
-        const newArr = addUser.map(item=>item.user.id)
 
         // yUserList（已选择） 添加
         setYUserList(yUserList && yUserList.concat(addUser))
-
-        //  nUserList（未选择） 减少
-        setNUserList(nUserList.filter(item=>!newArr.includes(item.id)))
 
         setVisible(false)
     }
@@ -97,7 +97,7 @@ const PostposeUserAdd = props =>{
     const onSelectRow = record => {
         // 如果已经选中 -- 取消选中
         if (selectedRowKeys.indexOf(record.id) >= 0) {
-            addUser.splice(addUser.indexOf(record.user.id),1)
+            setAddUser(addUser.filter(item=>item.user.id!==record.id))
             selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
         }
         // 如果没有选中 -- 选中
@@ -109,7 +109,6 @@ const PostposeUserAdd = props =>{
             })
         }
         setSelectedRowKeys([...selectedRowKeys])
-        setAddUser([...addUser])
     }
 
     const rowSelection = {
@@ -123,8 +122,6 @@ const PostposeUserAdd = props =>{
             })
             setAddUser([...newArr])
             setSelectedRowKeys(selectedRowKeys)
-            console.log("数组::",selectedRows)
-            console.log("id::",selectedRowKeys)
         },
         selectedRowKeys:selectedRowKeys
     }
@@ -150,7 +147,7 @@ const PostposeUserAdd = props =>{
                         onClick: () => onSelectRow(record)
                 })}
                 columns={columns}
-                dataSource={nUserList}
+                dataSource={userList}
                 pagination={false}
                 locale={{emptyText: <EmptyText/>}}
             />

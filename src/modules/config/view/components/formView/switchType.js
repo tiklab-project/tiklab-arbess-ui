@@ -65,7 +65,7 @@ const lis=[
 
 const SwitchType = props =>{
 
-    const {visible,setVisible,showType,configStore,configDataStore,pipelineStore} = props
+    const {visible,setVisible,configStore,pipelineStore,showItem} = props
 
     const {updateConfigure,data} = configStore
     const {pipelineId} = pipelineStore
@@ -83,11 +83,11 @@ const SwitchType = props =>{
     }
 
     useEffect(()=>{
-        visible && renderGroup(showType)
-    },[showType])
+        visible && renderGroup(showItem.type)
+    },[showItem])
 
-    const renderGroup = showType =>{
-        const zz = Math.floor(showType/10)
+    const renderGroup = type =>{
+        const zz = Math.floor(type/10)
         switch(zz){
             case 0 :
                 setGroup(lis[0])
@@ -115,19 +115,18 @@ const SwitchType = props =>{
 
     const onOk  = () =>{
         const params = {
+            configId:showItem.configId,
             pipeline:{pipelineId},
-            taskType:showType,  // 旧类型
-            type:newType, // 新类型
-            message:"updateType"
+            taskType:newType, // 新类型
         }
-        showType!==newType && updateConfigure(params).then(res=>{
+        showItem.type!==newType && updateConfigure(params).then(res=>{
             if(res.code===0){
                 data && data.map(ite=>{
-                    if(ite.type===showType){
+                    if(ite.type===showItem.type){
                         ite.type = newType
                     }
                 })
-                del(newType,configDataStore)
+                del(newType,configStore)
             }
             setVisible(false)
         })
@@ -173,8 +172,8 @@ const SwitchType = props =>{
                     <div className="group-content">
                         {
                             group.desc && group.desc.map(item=>{
-                                return <div onClick={item.type===showType? null:()=>handleClick(item)}
-                                            className={`group-desc ${item.type===showType?"group-ban":""} ${item.type===newType?"group-select":""}`}
+                                return <div onClick={item.type===showItem.type? null:()=>handleClick(item)}
+                                            className={`group-desc ${item.type===showItem.type?"group-ban":""} ${item.type===newType?"group-select":""}`}
                                             key={item.type}
                                         >
                                     <div className="group-desc-tpl">
@@ -197,4 +196,4 @@ const SwitchType = props =>{
     )
 }
 
-export default inject("configStore","configDataStore","pipelineStore")(observer(SwitchType))
+export default inject("configStore","pipelineStore")(observer(SwitchType))

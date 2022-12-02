@@ -4,7 +4,7 @@ import Inputs from "./inputs";
 
 const DeployDocker = props =>{
 
-    const {deployType} = props
+    const {dataItem} = props
     
     return(
         <>
@@ -12,8 +12,8 @@ const DeployDocker = props =>{
                 name={"startAddress"}
                 placeholder={" / 代表部署位置"}
                 label={"dockerfile文件地址"}
-                mode={deployType}
                 addonBefore={"/"}
+                dataItem={dataItem}
             />
         </>
     )

@@ -25,13 +25,22 @@ const Postpose = props =>{
     const [postposeVisible,setPostposeVisible] = useState(false)
     const [postposeUserVisible,setPostposeUserVisible] = useState(false)
     const [isShow,setIsShow] = useState(false)
+    const [allUserList,setAllUserLIst] = useState([])
     const [yUserList,setYUserList] = useState([])
-    const [nUserList,setNUserList] = useState([])
     const [member,setMember] = useState([])
     const [mesType,setMesType] = useState([])
 
     const [form] = Form.useForm()
     const userId = getUser().userId
+
+    useEffect(()=>{
+        findUserPage().then(res=>{
+            const dataList = res.data && res.data.dataList
+            if(res.code===0){
+                setAllUserLIst([...dataList])
+            }
+        })
+    },[pipelineId])
 
     useEffect(()=>{
         findAllAfterConfig(pipelineId).then(res=>{
@@ -41,18 +50,7 @@ const Postpose = props =>{
                 const userList = data && data.userList
                 setYUserList(userList===null ? []:userList)
                 setMesType(mesType && mesType)
-                form.setFieldsValue({typeList: mesType && mesType})
-                findUserPage().then(res=>{
-                    const newArr = userList && userList.map(item=>item.user.id)
-                    const dataList = res.data && res.data.dataList
-                    if(res.code===0){
-                        if(!newArr){
-                            setNUserList([...dataList])
-                        }else {
-                            setNUserList(dataList.filter(item=>!newArr.includes(item.id)))
-                        }
-                    }
-                })
+                data && data.typeList && form.setFieldsValue({typeList: mesType && mesType})
             }
         })
     },[pipelineId,isFindPostposeData])
@@ -85,12 +83,8 @@ const Postpose = props =>{
 
     // 移出用户
     const del = (text,record) =>{
-
         // yUserList（已选择） 减少
         setYUserList(yUserList.filter(item=>item.user.id!==record.user.id))
-
-        // nUserList（未选择） 添加
-        setNUserList(nUserList.concat([record.user]))
     }
 
     // 删除类型
@@ -151,21 +145,7 @@ const Postpose = props =>{
     const isChangeMes = item => {
         const typeList = item.typeList
         const userList = item.userList===null ? [] : item.userList
-        if(isYUser(userList) || isMesType(typeList) || isShow){
-            return <div className="post-pose-btn">
-                        <Btn
-                            onClick={()=>onCancel()}
-                            title={"取消"}
-                            isMar={true}
-                        />
-                        <Btn
-                            onClick={()=>onOk(item)}
-                            title={"确定"}
-                            type={"primary"}
-                        />
-                    </div>
-        }
-        else return null
+        return isYUser(userList) || isMesType(typeList) || isShow
     }
 
     const columns = [
@@ -277,7 +257,7 @@ const Postpose = props =>{
                                     />
                                 }
                                 {
-                                    item.type === 61 &&
+                                    item.type===61 &&
                                     <div className="post-pose-form">
                                         <Form form={form} layout={"vertical"} initialValues={{...item.typeList}}>
                                             <Form.Item label={"消息发送方式"} name={"typeList"}
@@ -300,14 +280,6 @@ const Postpose = props =>{
                                                     onClick={()=>setPostposeUserVisible(true)}
                                                     title={"添加成员"}
                                                 />
-                                                <PostposeUserAdd
-                                                    visible={postposeUserVisible}
-                                                    setVisible={setPostposeUserVisible}
-                                                    nUserList={nUserList}
-                                                    yUserList={yUserList}
-                                                    setYUserList={setYUserList}
-                                                    setNUserList={setNUserList}
-                                                />
                                             </div>
                                             <Table
                                                 bordered={false}
@@ -318,13 +290,33 @@ const Postpose = props =>{
                                                 locale={{emptyText: <EmptyText/>}}
                                             />
                                         </div>
-                                        { isChangeMes(item) }
+                                        { isChangeMes(item) &&
+                                            <div className="post-pose-btn">
+                                                <Btn
+                                                    onClick={()=>onCancel()}
+                                                    title={"取消"}
+                                                    isMar={true}
+                                                />
+                                                <Btn
+                                                    onClick={()=>onOk(item)}
+                                                    title={"确定"}
+                                                    type={"primary"}
+                                                />
+                                            </div>
+                                        }
                                     </div>
                                 }
                             </div>
                         )
                     })
                 }
+                <PostposeUserAdd
+                    visible={postposeUserVisible}
+                    setVisible={setPostposeUserVisible}
+                    yUserList={yUserList}
+                    setYUserList={setYUserList}
+                    allUserList={allUserList}
+                />
             </div>
 
         </div>

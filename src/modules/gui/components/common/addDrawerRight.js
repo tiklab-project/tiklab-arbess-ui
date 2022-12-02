@@ -8,29 +8,11 @@ const AddDrawerRight = props =>{
     const {lis,onScroll,setNewStageDrawer} = props
 
     const context = useContext(TestContext)
-    const {setCodeType,setTestType,setBuildType,setDeployType,setScanType,setGoodsType} = context.configDataStore
+   
     const addConfig = context.addConfig
 
     const handleClick = (group,item) =>{
         addConfig(item.type)
-        switch (group.id) {
-            case 1:setCodeType(item.type)
-                break
-            case 2:
-                setTestType(item.type)
-                break
-            case 3:
-                setBuildType(item.type)
-                break
-            case 4:
-                setDeployType(item.type)
-                break
-            case 5:
-                setScanType(item.type)
-                break
-            case 6:
-                setGoodsType(item.type)
-        }
         setNewStageDrawer(false)
     }
 

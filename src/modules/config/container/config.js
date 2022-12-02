@@ -26,7 +26,7 @@ const Config = props =>{
     const {pipeline,pipelineId} = pipelineStore
 
     const [processVisible,setProcessVisible] = useState(false)
-    const [type,setType] = useState(3)
+    const [type,setType] = useState(1)
 
     const run = () => {
         // 改变按钮
@@ -133,5 +133,5 @@ const Config = props =>{
     )
 }
 
-export default withRouter(inject("structureStore","configStore","configDataStore","pipelineStore")
+export default withRouter(inject("structureStore","configStore","pipelineStore")
                 (observer(Config)))

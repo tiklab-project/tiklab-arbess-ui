@@ -9,13 +9,14 @@ import TestContext from "../common/testContext";
 
 const Deploy = props =>{
 
+    const {dataItem} = props
+
     const context = useContext(TestContext)
 
-    const {deployType,deployShellBlock,setDeployShellBlock} = context.configDataStore
     const valueChange = context.valueChange
 
     const onChange = value =>{
-        valueChange(value,"authType",deployType)
+        valueChange(value,authType,deployType)
     }
 
     return(
@@ -27,26 +28,25 @@ const Deploy = props =>{
                 </Select>
             </Form.Item>
             <Form.Item
-                shouldUpdate={(prevValues,currentValues)=> prevValues.authType!==currentValues.authType}
+                shouldUpdate={(prevValues,currentValues)=>prevValues[dataItem.configId+"_authType"]!==currentValues[dataItem.configId+"_authType"]}
             >
                 {({ getFieldValue })=>
-                    getFieldValue("authType") === 1 ? (
+                    getFieldValue([dataItem.configId+"_authType"]) === 1 ? (
                         <>
-                            <DeploySame configdatastore={context.configDataStore}/>
+                            <DeploySame dataItem={dataItem}/>
                             {
                                 deployType==31 ?
-                                <DeployVir configDatastore={context.configDataStore}/>
+                                <DeployVir dataItem={dataItem}/>
                                 :
-                                <DeployDocker deployType={deployType}/>
+                                <DeployDocker dataItem={dataItem}/>
                             }
                         </>) :
                         <Form.Item name={"startOrder"} label="Shell命令">
                             <Mirror
                                 name={"startOrder"}
-                                type={deployType}
-                                shellBlock={deployShellBlock}
-                                setShellBlock={setDeployShellBlock}
                                 placeholder={"Shell命令"}
+                                dataItem={dataItem}
+                                mirrorValue={dataItem.startOrder}
                             />
                         </Form.Item>
                 }

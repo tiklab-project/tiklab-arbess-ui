@@ -1,12 +1,12 @@
 import React from "react";
 
-export const del = (type,configDataStore) =>{
+export const del = (type,configStore) =>{
 
     const {formInitialValues,setFormInitialValues,
         setCodeType,setBuildType,setDeployType,setTestType,setScanType,setGoodsType,
         setUnitShellBlock,setBuildShellBlock,
         setVirShellBlock,setDeployShellBlock,setDeployOrderShellBlock,
-    } = configDataStore
+    } = configStore
 
     switch (type) {
         case 11:

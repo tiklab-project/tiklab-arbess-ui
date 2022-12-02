@@ -1,14 +1,11 @@
-import React,{useContext} from "react";
+import React from "react";
 import {observer} from "mobx-react";
 import Inputs from "./inputs";
 import FindAuth from "../auth/findAuth";
-import TestContext from "../common/testContext";
 
 const CodeGitOrGitlab = props =>{
 
-    const context = useContext(TestContext)
-
-    const {codeType} = context.configDataStore
+    const {dataItem} = props
 
     return(
         <>
@@ -16,17 +13,15 @@ const CodeGitOrGitlab = props =>{
                 placeholder={"git地址"}
                 label={"git地址"}
                 name={"codeName"}
-                mode={codeType}
+                dataItem={dataItem}
             />
             <Inputs
                 placeholder={"分支，默认为master"}
                 label={"分支"}
                 name={"codeBranch"}
-                mode={codeType}
+                dataItem={dataItem}
             />
-            <FindAuth
-                type={codeType}
-            />
+            <FindAuth dataItem={dataItem}/>
         </>
     )
 }
