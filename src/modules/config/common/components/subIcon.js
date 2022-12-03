@@ -27,11 +27,11 @@ const SubIcon = props =>{
             case 4:
                 return renderSubIcon("gitlab","Gitlab")
             case 5:
-                return renderSubIcon("-_ssh","svn")
+                return renderSubIcon("svn","SVN")
             case 11:
                 return renderSubIcon("ceshi","maven单元测试")
             case 21:
-                return renderSubIcon("quanxian","maven")
+                return renderSubIcon("zu-","maven")
             case 22:
                 return renderSubIcon("nodejs","node")
             case 31:
@@ -39,11 +39,19 @@ const SubIcon = props =>{
             case 32:
                 return renderSubIcon("docker","docker")
             case 41:
-                return renderSubIcon("ceshi","sonarQuebe")
+                return renderSubIcon("Scan","sonarQuebe")
             case 51:
-                return renderSubIcon("quanxian","nexus")
+                return renderSubIcon("tuisongshezhi","nexus")
             case 52:
-                return renderSubIcon("quanxian","SSH")
+                return renderSubIcon("ssh","SSH")
+            case 61:
+                return renderSubIcon("mes","消息通知")
+            case 71:
+                return renderSubIcon("jiaoben","执行bat脚本")
+            case 72:
+                return renderSubIcon("jiaoben","执行shell脚本")
+            case 81:
+                return renderSubIcon("chufa","定时触发")
 
         }
     }

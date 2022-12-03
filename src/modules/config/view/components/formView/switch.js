@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Space} from "antd";
 import {SwapOutlined} from "@ant-design/icons";
-import SubIcon from "../formTitle/subIcon";
+import SubIcon from "../../../common/components/subIcon";
 import Btn from "../../../../common/btn/btn";
 import SwitchType from "./switchType";
 import "./switch.scss";

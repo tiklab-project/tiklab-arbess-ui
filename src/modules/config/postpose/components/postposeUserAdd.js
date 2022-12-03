@@ -8,7 +8,7 @@ import Btn from "../../../common/btn/btn";
 
 const PostposeUserAdd = props =>{
 
-    const {visible,setVisible,yUserList,setYUserList,allUserList} = props
+    const {visible,setVisible,allUserList,dataItem,postposeData,setPostposeData} = props
 
     const [height,setHeight] = useState(0)
     const [addUser,setAddUser] = useState([])
@@ -21,7 +21,7 @@ const PostposeUserAdd = props =>{
     },[visible])
 
     useEffect(()=>{
-        const newArr = yUserList.map(item=>item.user.id)
+        const newArr = dataItem && dataItem.userList.map(item=>item.user.id)
         visible && setUserList(allUserList.filter(item=>!newArr.includes(item.id)))
     },[visible])
 
@@ -34,13 +34,14 @@ const PostposeUserAdd = props =>{
     }
 
     const onOk = () => {
-
-        // yUserList（已选择） 添加
-        setYUserList(yUserList && yUserList.concat(addUser))
-
+        postposeData && postposeData.map(item=>{
+            if(item.configId === dataItem.configId){
+                item.userList = item.userList.concat(addUser)
+            }
+        })
+        setPostposeData([...postposeData])
         setVisible(false)
     }
-
 
     const modalFooter = (
         <>
@@ -131,6 +132,7 @@ const PostposeUserAdd = props =>{
             visible={visible}
             onCancel={()=>setVisible(false)}
             closable={false}
+            destroyOnClose={true}
             footer={modalFooter}
             width={900}
             style={{height:height,top:60}}

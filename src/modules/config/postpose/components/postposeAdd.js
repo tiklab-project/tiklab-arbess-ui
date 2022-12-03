@@ -3,6 +3,7 @@ import {Modal} from "antd";
 import Btn from "../../../common/btn/btn";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
+import SubIcon from "../../common/components/subIcon";
 
 const PostposeAdd = props =>{
 
@@ -20,7 +21,7 @@ const PostposeAdd = props =>{
     }
 
     const getData = item => {
-        setType(item.id)
+        setType(item.type)
     }
 
     const onOk = () => {
@@ -35,15 +36,15 @@ const PostposeAdd = props =>{
 
     const type = [
         {
-            id:71,
+            type:71,
             title:"执行bat脚本"
         },
         {
-            id:72,
+            type:72,
             title:"执行Shell脚本"
         },
         {
-            id:61,
+            type:61,
             title:"消息提醒"
         },
     ]
@@ -85,13 +86,13 @@ const PostposeAdd = props =>{
                         {
                             type.map(item=>{
                                 return <div
-                                    key={item.id}
-                                    className={`group-desc ${typess===item.id?"group-select":""}`}
+                                    key={item.type}
+                                    className={`group-desc ${typess===item.type?"group-select":""}`}
                                     onClick={()=>getData(item)}
                                 >
                                     <div className="group-desc-tpl">
                                         <div className="group-tpl">
-                                            {item.title}
+                                            <SubIcon type={item.type}/>
                                         </div>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@ import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 const TriggerTimeAdd = props =>{
 
-    const {triggerTimeVisible,setTriggerTimeVisible,updateBeforeConfig,pipelineId,dataItem,formValue} = props
+    const {triggerTimeVisible,setTriggerTimeVisible,createTriggerConfig,pipelineId,formValue,updateTriggerConfig} = props
     const [height,setHeight] = useState(0)
 
     const [form] = Form.useForm()
@@ -18,27 +18,45 @@ const TriggerTimeAdd = props =>{
     },[height])
 
     useEffect(()=>{
-        if(triggerTimeVisible && formValue){
-            triggerTimeVisible && form.setFieldsValue({
-                taskType:formValue.taskType,
-                timeList:formValue.timeList,
-                time:moment(formValue.time,"HH:mm")
-            })
+        if(triggerTimeVisible){
+            if(formValue!=="") {
+                form.setFieldsValue({
+                    taskType: formValue.taskType,
+                    timeList: formValue.timeList,
+                    time: moment(formValue.time, "HH:mm")
+                })
+            }else {
+                form.resetFields()
+            }
         }
     },[triggerTimeVisible])
 
     const onOk = fieldsValue =>{
-        const value = {
-            values:{
-                taskType:fieldsValue.taskType,
-                time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
-                timeList:fieldsValue.timeList
-            },
-            configId:dataItem.configId,
-            pipeline:{pipelineId},
-            taskType:81,
+        if(formValue===""){
+            const value = {
+                values:{
+                    taskType:fieldsValue.taskType,
+                    time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
+                    timeList:fieldsValue.timeList
+                },
+                pipeline:{pipelineId},
+                taskType:81,
+            }
+            createTriggerConfig(value)
+        }else {
+            const value = {
+                values:{
+                    taskType:fieldsValue.taskType,
+                    time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
+                    timeList:fieldsValue.timeList
+                },
+                pipeline:{pipelineId},
+                taskType:81,
+                configId:formValue.configId
+            }
+            updateTriggerConfig(value)
         }
-        updateBeforeConfig(value)
+
         setTriggerTimeVisible(false)
     }
 
@@ -99,29 +117,29 @@ const TriggerTimeAdd = props =>{
                         <Form.Item label="日期选择" name={"timeList"} rules={[{required:true,message:"日期选择不能为空"}]}>
                             <Checkbox.Group>
                                 <Row>
+                                    {/*<Col span={8}>*/}
+                                    {/*    <Checkbox value={8}>全选</Checkbox>*/}
+                                    {/*</Col>*/}
                                     <Col span={8}>
-                                        <Checkbox value={1}>全选</Checkbox>
+                                        <Checkbox value={1}>星期一</Checkbox>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox value={2}>星期一</Checkbox>
+                                        <Checkbox value={2} >星期二</Checkbox>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox value={3} >星期二</Checkbox>
+                                        <Checkbox value={3} >星期三</Checkbox>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox value={4} >星期三</Checkbox>
+                                        <Checkbox value={4} >星期四</Checkbox>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox value={5} >星期四</Checkbox>
+                                        <Checkbox value={5} >星期五</Checkbox>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox value={6} >星期五</Checkbox>
+                                        <Checkbox value={6} >星期六</Checkbox>
                                     </Col>
                                     <Col span={8}>
-                                        <Checkbox value={7} >星期六</Checkbox>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Checkbox value={8} >星期天</Checkbox>
+                                        <Checkbox value={7} >星期天</Checkbox>
                                     </Col>
                                 </Row>
                             </Checkbox.Group>

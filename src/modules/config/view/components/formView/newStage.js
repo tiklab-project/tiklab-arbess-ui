@@ -3,7 +3,7 @@ import {DeleteOutlined,ExclamationCircleOutlined,SwapOutlined} from "@ant-design
 import {Popconfirm} from "antd";
 import Switch from "./switch";
 import ChangeSortsModal from "./changeSortsModal";
-import HlineIcon from "../formTitle/hlineIcon";
+import HlineIcon from "../../../common/components/hlineIcon";
 import CodeGitOrGitlab from "../formType/codeGitOrGitlab";
 import CodeGiteeOrGithub from "../formType/codeGiteeOrGithub";
 import CodeSvn from "../formType/codeSvn";

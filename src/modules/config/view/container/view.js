@@ -60,13 +60,13 @@ const View = props =>{
     const renderFormData = initialData => {
         for (let i = 0;i<initialData.length;i++){
             const data = initialData[i]
-            if(data.type < 10){
+            if(data.type<10){
                 renderCodeData(data)
             }
-            else if(data.type > 30 && data.type < 40 ){
+            else if(data.type>30 && data.type<40 ){
                 renderDeploy(data)
             }
-            else if(data.type > 40 && data.type <50){
+            else if(data.type>40 && data.type<50){
                 renderScan(data)
             }
             else if(data.type>50 && data.type<60){
@@ -77,7 +77,7 @@ const View = props =>{
     }
 
     const getId = (data,name) =>{
-        return data.configId+"_"+name
+        return data.configId + "_" + name
     }
 
     // 源码管理
@@ -104,7 +104,6 @@ const View = props =>{
                     [getId(data,"authName")]:data.auth && data.auth.name+"("+ data.auth.message+")",
                     [getId(data,"authId")]:data.authId
                 }
-            
         }
         Object.assign(formInitialValues,codeFormValue)
     }
@@ -119,7 +118,6 @@ const View = props =>{
             [getId(data,"authType")]:data && data.authType,
             [getId(data,"authName")]:data.auth && data.auth.name+"("+ data.auth.ip+")",
             [getId(data,"authId")]: data.authId,
-    
         }
         Object.assign(formInitialValues,DeployFormValue)
     }

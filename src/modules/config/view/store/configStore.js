@@ -25,6 +25,11 @@ export class ConfigStore{
     @observable addConfigVisible = false
 
     @action
+    setData = value =>{
+        this.data = value
+    }
+
+    @action
     setAddConfigVisible = value =>{
         this.addConfigVisible = value
     }
@@ -60,6 +65,7 @@ export class ConfigStore{
         if(data.code===0){
             this.mess("添加成功")
             this.isFindConfig=!this.isFindConfig
+            this.enabledValid=!this.enabledValid
         }
         if(data.code===50001){
             this.mess(data.msg)
@@ -75,6 +81,7 @@ export class ConfigStore{
         if(data.code===0){
             this.mess("删除成功")
             this.isFindConfig=!this.isFindConfig
+            this.enabledValid=!this.enabledValid
         }
         return data
     }

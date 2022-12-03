@@ -34,9 +34,9 @@ const MirrorContent = forwardRef((props,ref)=>{
     }
 
     const onCancel = () =>{
-        const targetDiv = document.getElementById(name+"_mirror")
-        targetDiv.style.height = "auto"
-        mirrorRefs.current.editor.setValue(mirrorValue)
+        // const targetDiv = document.getElementById(name+"_mirror")
+        // targetDiv.style.height = "auto"
+        mirrorRefs.current.editor.setValue(mirrorValue?mirrorValue:"")
         setBordered(false)
     }
 

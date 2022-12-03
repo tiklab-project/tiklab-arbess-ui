@@ -13,57 +13,27 @@ const lis=[
         title:"源码",
         icon:"suyuanmabiaoqian",
         desc:[
-            {
-                type:1,
-                tel:"通用Git",
-                icon:"git"
-            },
-            {
-                type:2,
-                tel:"Gitee",
-                icon:"gitee"
-            },
-            {
-                type:3,
-                tel: "Github",
-                icon:"github"
-            },
-            {
-                type:4,
-                tel: "Gitlab",
-                icon:"gitlab"
-            },
-            {
-                type: 5,
-                tel:"svn",
-                icon:"-_ssh"
-            }
+            {type:1},
+            {type:2},
+            {type:3},
+            {type:4},
+            {type:5}
         ]
     },
     {
         id:5,
         title: "代码扫描",
         desc: [
-            {
-                type: 41,
-                tel:"sonarQuebe",
-                icon:"ceshi"
-            }
+            {type: 41}
         ]
     },
     {
         id:2,
         title:"测试",
         desc:[
-            {
-                type: 11,
-                tel:"maven单元测试",
-                icon:"ceshi"
-            },
+            {type: 11},
             // {
             //     type: 12,
-            //     tel: "junit",
-            //     icon:"ceshi"
             // }
         ]
     },
@@ -71,21 +41,10 @@ const lis=[
         id:3,
         title: "构建",
         desc:[
-            {
-
-                type: 21,
-                tel:"maven",
-                icon:"quanxian"
-            },
-            {
-                type: 22,
-                tel:"node",
-                icon:"nodejs"
-            },
+            {type: 21},
+            {type: 22},
             // {
             //     type: 23,
-            //     tel:"gradel",
-            //     icon:"nodejs"
             // }
         ]
     },
@@ -93,32 +52,16 @@ const lis=[
         id:6,
         title: "推送制品",
         desc: [
-            {
-                type:51,
-                tel:"nexus",
-                icon: "quanxian"
-            },
-            {
-                type:52,
-                tel:"SSH",
-                icon: "quanxian"
-            },
+            {type:51},
+            {type:52},
         ]
     },
     {
         id:4,
         title: "部署",
         desc:[
-            {
-                type:31 ,
-                tel:"虚拟机",
-                icon:"xuniji"
-            },
-            {
-                type:32 ,
-                tel:"docker",
-                icon:"docker"
-            },
+            {type:31},
+            {type:32},
         ]
     },
 ]

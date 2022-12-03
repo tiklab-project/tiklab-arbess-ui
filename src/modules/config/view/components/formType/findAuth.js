@@ -70,7 +70,7 @@ const FindAuth = props =>{
             case 3:
             case 41:
             case 51:
-                findAllAuthServerList(type).then(res=>{getList(res)})
+                findAllAuthServerList(dataItem.type).then(res=>{getList(res)})
                 break
             case 31:
             case 32:

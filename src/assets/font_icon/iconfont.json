@@ -6,6 +6,118 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "751813",
+      "name": "git-1",
+      "font_class": "svn",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "7712749",
+      "name": "ssh",
+      "font_class": "ssh",
+      "unicode": "e73c",
+      "unicode_decimal": 59196
+    },
+    {
+      "icon_id": "7532881",
+      "name": "推送设置",
+      "font_class": "tuisongshezhi",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "13303493",
+      "name": "git",
+      "font_class": "git",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
+      "icon_id": "18629759",
+      "name": "扫描",
+      "font_class": "Scan",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "5978713",
+      "name": "trigger",
+      "font_class": "chufa",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "26360099",
+      "name": "脚本",
+      "font_class": "jiaoben",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "9148582",
+      "name": "消息",
+      "font_class": "mes",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "9189103",
+      "name": "部署",
+      "font_class": "bushu",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "11372649",
+      "name": "测试",
+      "font_class": "ceshi",
+      "unicode": "e8ad",
+      "unicode_decimal": 59565
+    },
+    {
+      "icon_id": "13252877",
+      "name": "快速模型构建",
+      "font_class": "zu-",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "7714975",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "1194619",
+      "name": "candy",
+      "font_class": "candy",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "1194639",
+      "name": "helmet",
+      "font_class": "helmet",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "1194605",
+      "name": "backpack",
+      "font_class": "backpack",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "1194615",
+      "name": "buzzer",
+      "font_class": "buzzer",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
       "icon_id": "3727835",
       "name": "星星",
       "font_class": "icon-test",
@@ -20,32 +132,11 @@
       "unicode_decimal": 65412
     },
     {
-      "icon_id": "2552778",
-      "name": "测试",
-      "font_class": "ceshi1",
-      "unicode": "e6ac",
-      "unicode_decimal": 59052
-    },
-    {
-      "icon_id": "15203366",
-      "name": "构建工具",
-      "font_class": "goujiangongju",
-      "unicode": "e64a",
-      "unicode_decimal": 58954
-    },
-    {
       "icon_id": "19585503",
       "name": "溯源码标签",
       "font_class": "suyuanmabiaoqian",
       "unicode": "e99d",
       "unicode_decimal": 59805
-    },
-    {
-      "icon_id": "20313950",
-      "name": "部署版本",
-      "font_class": "bushubanben",
-      "unicode": "e61a",
-      "unicode_decimal": 58906
     },
     {
       "icon_id": "742135",
@@ -69,81 +160,11 @@
       "unicode_decimal": 59011
     },
     {
-      "icon_id": "16204159",
-      "name": "测试",
-      "font_class": "ceshi",
-      "unicode": "ea26",
-      "unicode_decimal": 59942
-    },
-    {
-      "icon_id": "8225386",
-      "name": "系统权限",
-      "font_class": "xitongquanxian",
-      "unicode": "e61d",
-      "unicode_decimal": 58909
-    },
-    {
-      "icon_id": "14473529",
-      "name": "权限",
-      "font_class": "quanxian",
-      "unicode": "e667",
-      "unicode_decimal": 58983
-    },
-    {
-      "icon_id": "18533070",
-      "name": "权限",
-      "font_class": "quanxian1",
-      "unicode": "e606",
-      "unicode_decimal": 58886
-    },
-    {
-      "icon_id": "128958",
-      "name": "git",
-      "font_class": "git",
-      "unicode": "e799",
-      "unicode_decimal": 59289
-    },
-    {
-      "icon_id": "7239764",
-      "name": "github",
-      "font_class": "github",
-      "unicode": "e732",
-      "unicode_decimal": 59186
-    },
-    {
-      "icon_id": "9053598",
-      "name": "gitlab-fill",
-      "font_class": "gitlab-fill",
-      "unicode": "e768",
-      "unicode_decimal": 59240
-    },
-    {
-      "icon_id": "11983543",
-      "name": "github",
-      "font_class": "github1",
-      "unicode": "ea0b",
-      "unicode_decimal": 59915
-    },
-    {
       "icon_id": "13303504",
       "name": "gitlab",
       "font_class": "gitlab",
       "unicode": "e65c",
       "unicode_decimal": 58972
-    },
-    {
-      "icon_id": "13743932",
-      "name": "gitee-fill-round",
-      "font_class": "gitee-fill-round",
-      "unicode": "e686",
-      "unicode_decimal": 59014
-    },
-    {
-      "icon_id": "25512454",
-      "name": "-_ssh",
-      "font_class": "-_ssh",
-      "unicode": "e636",
-      "unicode_decimal": 58934
     },
     {
       "icon_id": "26267572",

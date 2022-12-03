@@ -1,5 +1,6 @@
 import React from "react";
-import {Col,Row,Space} from "antd";
+import {Col,Row} from "antd";
+import SubIcon from "../../../common/components/subIcon";
 
 const AddModalStepOne = props =>{
 
@@ -60,12 +61,7 @@ const AddModalStepOne = props =>{
                                 >
                                     <div className="group-desc-tpl">
                                         <div className="group-tpl">
-                                            <Space>
-                                                <svg className="icon" aria-hidden="true">
-                                                    <use xlinkHref={`#icon-${item.icon}`}/>
-                                                </svg>
-                                                {item.tel}
-                                            </Space>                               
+                                            <SubIcon type={item.type}/>
                                         </div>
                                     </div>
                                 </div>

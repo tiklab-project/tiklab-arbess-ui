@@ -10,11 +10,11 @@ import {message,Spin} from "antd";
 import {getVersionInfo} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import Btn from "../../common/btn/btn";
-import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
-import View from "../view/container/view";
-import Postpose from "../postpose/container/postpose";
-import Trigger from "../trigger/container/trigger";
+import Btn from "../../../common/btn/btn";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import View from "../../view/container/view";
+import Postpose from "../../postpose/container/postpose";
+import Trigger from "../../trigger/container/trigger";
 import "./config.scss";
 
 const Config = props =>{

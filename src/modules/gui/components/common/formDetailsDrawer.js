@@ -1,7 +1,7 @@
 import React from "react";
 import {Drawer} from "antd";
 import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
-import SubIcon from "../../../config/view/components/formTitle/subIcon";
+import SubIcon from "../../../config/common/components/subIcon";
 import Btn from "../../../common/btn/btn";
 import "./formDetailsDrawer.scss";
 import CodeGitOrGitlab from "../forms/codeGitOrGitlab";

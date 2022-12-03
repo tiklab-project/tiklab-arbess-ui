@@ -1,11 +1,11 @@
 import {observable,action} from "mobx";
 
 import {
-    UpdateBeforeConfig,
-    DeleteBeforeConfig,
-    CreateBeforeConfig,
-    FindAllBeforeConfig,
-    OneAllBeforeConfig
+    UpdateTriggerConfig,
+    DeleteTriggerConfig,
+    CreateTriggerConfig,
+    FindAllTriggerConfig,
+    OneAllTriggerConfig
 } from "../api/trigger";
 
 import {message} from "antd";
@@ -16,9 +16,31 @@ export class TriggerStore {
     @observable isFindTrigger = false
 
     @action
-    updateBeforeConfig = async value =>{
-        const data = await UpdateBeforeConfig(value)
+    updateTriggerConfig = async value =>{
+        const data = await UpdateTriggerConfig(value)
         if(data.code===0){
+            message.info("更新成功",0.5)
+            this.isFindTrigger = !this.isFindTrigger
+        }
+        return data
+    }
+
+    @action
+    deleteTriggerConfig = async value =>{
+        const param = new FormData()
+        param.append("configId",value)
+        const data = await DeleteTriggerConfig(param)
+        if(data.code===0){
+            message.info("删除成功",0.5)
+            this.isFindTrigger = !this.isFindTrigger
+        }
+        return data
+    }
+
+    @action
+    createTriggerConfig = async value =>{
+        const data = await CreateTriggerConfig(value)
+        if (data.code===0){
             message.info("添加成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
         }
@@ -26,28 +48,10 @@ export class TriggerStore {
     }
 
     @action
-    deleteBeforeConfig = async value =>{
-        const data = await DeleteBeforeConfig(value)
-        if(data.code===0){
-            message.info("删除成功",0.5)
-        }
-        return data
-    }
-
-    @action
-    createBeforeConfig = async value =>{
-        const data = await CreateBeforeConfig(value)
-        if (data.code===0){
-            message.info("添加成功",0.5)
-        }
-        return data
-    }
-
-    @action
-    findAllBeforeConfig = async value =>{
+    findAllTriggerConfig = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        const data = await FindAllBeforeConfig(param)
+        const data = await FindAllTriggerConfig(param)
         if (data.code===0){
             this.triggerData = data.data && data.data
         }
@@ -55,8 +59,8 @@ export class TriggerStore {
     }
 
     @action
-    oneAllBeforeConfig = async value =>{
-        const data = await OneAllBeforeConfig(value)
+    oneAllTriggerConfig = async value =>{
+        const data = await OneAllTriggerConfig(value)
         if (data.code===0){
 
         }

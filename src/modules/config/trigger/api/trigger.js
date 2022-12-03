@@ -1,41 +1,41 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
 
-export function  UpdateBeforeConfig (data){
+export function  UpdateTriggerConfig (data){
     return serviceLoc.request({
-        url:"/pipelineBeforeConfig/updateConfig",
+        url:"/pipelineTriggerConfig/updateConfig",
         method:"post",
         data
     })
 }
 
-export function  DeleteBeforeConfig (data){
+export function  DeleteTriggerConfig (data){
     return serviceLoc.request({
-        url:"/pipelineBeforeConfig/deleteConfig",
+        url:"/pipelineTriggerConfig/deleteConfig",
         method:"post",
         data
     })
 }
 
-export function  CreateBeforeConfig (data){
+export function  CreateTriggerConfig (data){
     return serviceLoc.request({
-        url:"/pipelineBeforeConfig/createConfig",
+        url:"/pipelineTriggerConfig/createConfig",
         method:"post",
         data
     })
 }
 
-export function FindAllBeforeConfig (data){
+export function FindAllTriggerConfig (data){
     return serviceLoc.request({
-        url:"/pipelineBeforeConfig/findAllBeforeConfig",
+        url:"/pipelineTriggerConfig/findAllTriggerConfig",
         method:"post",
         data
     })
 }
 
-export function  OneAllBeforeConfig (data){
+export function  OneAllTriggerConfig (data){
     return serviceLoc.request({
-        url:"/pipelineBeforeConfig/oneAllBeforeConfig",
+        url:"/pipelineTriggerConfig/oneAllTriggerConfig",
         method:"post",
         data
     })

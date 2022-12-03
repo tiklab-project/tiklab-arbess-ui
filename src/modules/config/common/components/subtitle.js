@@ -20,6 +20,10 @@ const Subtitle = props =>{
                         case 41: return "sonarQuebe"
                         case 51: return "nexus"
                         case 52: return "SSH"
+                        case 61: return "消息通知"
+                        case 71: return "执行bat脚本"
+                        case 72: return "执行shell脚本"
+                        case 81: return "定时触发"
                     }
                 })()
             }

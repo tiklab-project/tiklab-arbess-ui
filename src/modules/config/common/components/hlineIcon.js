@@ -7,12 +7,15 @@ const HlineIcon = props =>{
     const titleType = type =>{
         const zz = Math.floor(type/10)
         switch (zz) {
-            case 0: return renderTitle("ceshi1","源码")
-            case 1: return renderTitle("ceshi1","测试")
-            case 2: return renderTitle("goujiangongju","构建")
-            case 3: return renderTitle("bushubanben","部署")
-            case 4: return renderTitle("ceshi","代码扫描")
-            case 5: return renderTitle("quanxian","推送制品")
+            case 0: return renderTitle("suyuanmabiaoqian","源码")
+            case 1: return renderTitle("ceshi","测试")
+            case 2: return renderTitle("zu-","构建")
+            case 3: return renderTitle("bushu","部署")
+            case 4: return renderTitle("Scan","代码扫描")
+            case 5: return renderTitle("tuisongshezhi","推送制品")
+            case 6: return renderTitle("mes","消息通知")
+            case 7: return renderTitle("jiaoben",type ===71?"执行bat脚本":"执行shell脚本")
+            case 8: return renderTitle("chufa","定时触发")
         }
     }
 

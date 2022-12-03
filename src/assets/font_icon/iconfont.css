@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3197798 */
-  src: url('iconfont.woff2?t=1666858207317') format('woff2'),
-       url('iconfont.woff?t=1666858207317') format('woff'),
-       url('iconfont.ttf?t=1666858207317') format('truetype');
+  src: url('iconfont.woff2?t=1670053047507') format('woff2'),
+       url('iconfont.woff?t=1670053047507') format('woff'),
+       url('iconfont.ttf?t=1670053047507') format('truetype');
 }
 
 .iconfont {
@@ -13,6 +13,70 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-svn:before {
+  content: "\e62d";
+}
+
+.icon-ssh:before {
+  content: "\e73c";
+}
+
+.icon-tuisongshezhi:before {
+  content: "\e666";
+}
+
+.icon-git:before {
+  content: "\e658";
+}
+
+.icon-Scan:before {
+  content: "\e616";
+}
+
+.icon-chufa:before {
+  content: "\e606";
+}
+
+.icon-jiaoben:before {
+  content: "\e621";
+}
+
+.icon-mes:before {
+  content: "\e60f";
+}
+
+.icon-bushu:before {
+  content: "\e628";
+}
+
+.icon-ceshi:before {
+  content: "\e8ad";
+}
+
+.icon-zu-:before {
+  content: "\e625";
+}
+
+.icon-github:before {
+  content: "\e63a";
+}
+
+.icon-candy:before {
+  content: "\e663";
+}
+
+.icon-helmet:before {
+  content: "\e66a";
+}
+
+.icon-backpack:before {
+  content: "\e660";
+}
+
+.icon-buzzer:before {
+  content: "\e662";
+}
+
 .icon-icon-test:before {
   content: "\e604";
 }
@@ -21,20 +85,8 @@
   content: "\ff84";
 }
 
-.icon-ceshi1:before {
-  content: "\e6ac";
-}
-
-.icon-goujiangongju:before {
-  content: "\e64a";
-}
-
 .icon-suyuanmabiaoqian:before {
   content: "\e99d";
-}
-
-.icon-bushubanben:before {
-  content: "\e61a";
 }
 
 .icon-xuniji:before {
@@ -49,48 +101,8 @@
   content: "\e683";
 }
 
-.icon-ceshi:before {
-  content: "\ea26";
-}
-
-.icon-xitongquanxian:before {
-  content: "\e61d";
-}
-
-.icon-quanxian:before {
-  content: "\e667";
-}
-
-.icon-quanxian1:before {
-  content: "\e606";
-}
-
-.icon-git:before {
-  content: "\e799";
-}
-
-.icon-github:before {
-  content: "\e732";
-}
-
-.icon-gitlab-fill:before {
-  content: "\e768";
-}
-
-.icon-github1:before {
-  content: "\ea0b";
-}
-
 .icon-gitlab:before {
   content: "\e65c";
-}
-
-.icon-gitee-fill-round:before {
-  content: "\e686";
-}
-
-.icon--_ssh:before {
-  content: "\e636";
 }
 
 .icon-gitee:before {
