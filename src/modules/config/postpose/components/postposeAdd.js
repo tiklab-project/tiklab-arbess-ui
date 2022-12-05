@@ -78,7 +78,7 @@ const PostposeAdd = props =>{
                 <div className="postpose-modal-top">
                     <ModalTitle
                         setVisible={setPostposeVisible}
-                        title={"添加"}
+                        title={"添加后置处理"}
                     />
                 </div>
                 <div className="group">
@@ -90,11 +90,7 @@ const PostposeAdd = props =>{
                                     className={`group-desc ${typess===item.type?"group-select":""}`}
                                     onClick={()=>getData(item)}
                                 >
-                                    <div className="group-desc-tpl">
-                                        <div className="group-tpl">
-                                            <SubIcon type={item.type}/>
-                                        </div>
-                                    </div>
+                                    <SubIcon type={item.type}/>
                                 </div>
                             })
                         }

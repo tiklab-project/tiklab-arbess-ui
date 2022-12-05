@@ -1,0 +1,40 @@
+.form-mirror{
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+    .react-codemirror2{
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+    }
+    .form-mirror-fa{
+        min-height: 32px;
+        border: 1px solid #d9d9d9;
+        &:hover{
+            border-color: #1890ff;
+        }
+    }
+    .form-mirror-tr{
+        min-height: 64px;
+        border-color: #1890ff;
+        .CodeMirror{
+            min-height: 64px;
+        }
+    }
+    .form-mirror-move{
+        border-bottom: 2px solid #1890ff;
+        cursor: s-resize;
+    }
+    .CodeMirror{
+        height: 100%;
+        padding: 2px 7px;
+        .CodeMirror-placeholder{
+            color: #bfbfbf;
+            font-family: Microsoft YaHei;
+        }
+        .CodeMirror-code{
+            font-family: Microsoft YaHei;
+        }
+
+    }
+}

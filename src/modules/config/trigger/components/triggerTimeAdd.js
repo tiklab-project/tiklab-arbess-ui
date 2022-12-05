@@ -105,7 +105,7 @@ const TriggerTimeAdd = props =>{
                     <Form
                         form={form}
                         layout={"vertical"}
-                        initialValues={{taskType:1,timeList:[2]}}
+                        initialValues={{taskType:1,timeList:[1]}}
                     >
                         <Form.Item label="触发方式" name={"taskType"}>
                             <Radio.Group>

@@ -2,9 +2,12 @@
     height: 100%;
     overflow: auto;
     background: var(--mf-backdrop-color);
+    display: flex;
+    flex-direction: column;
     .config-up{
         position: sticky;
         top: 0;
+        left: 0;
         background: #ffffff;
         z-index: 9;
         min-width: 768px;
@@ -19,24 +22,26 @@
     .config_bread{
         padding-right: 20px;
     }
-}
-
-.config-tabs{
-    display: flex;
-    flex: 1;
-    height: 60px;
-    line-height: 60px;
-    padding-left: 24px;
-    .config-tab{
-        padding: 0 10px;
-        cursor: pointer;
+    .config-tabs{
+        display: flex;
+        flex: 1;
+        height: 60px;
+        line-height: 60px;
+        padding-left: 24px;
+        .config-tab{
+            padding: 0 10px;
+            cursor: pointer;
+        }
+        .config-active{
+            color: var(--tiklab-blue);
+            border-bottom: 2px solid var(--tiklab-blue);
+        }
     }
-    .config-active{
-        color: var(--tiklab-blue);
-        border-bottom: 2px solid var(--tiklab-blue);
+    .config-valid{
+        margin-right: var(--tiklab-padding-item);
+        color: red;
     }
 }
-
 
 .config-views{
     display: flex;
@@ -70,9 +75,5 @@
     }
     .config-valid,.config-add{
         display: inline-block;
-    }
-    .config-valid{
-        margin-right: var(--tiklab-padding-item);
-        color: red;
     }
 }

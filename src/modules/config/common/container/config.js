@@ -1,10 +1,8 @@
 import React,{useEffect,useState} from "react";
 import {
-    AppstoreOutlined,
-    BarsOutlined,
     CaretRightOutlined,
-    ExclamationCircleOutlined,
-    LoadingOutlined, PlusOutlined,
+    LoadingOutlined,
+    ExclamationCircleOutlined
 } from "@ant-design/icons";
 import {message,Spin} from "antd";
 import {getVersionInfo} from "tiklab-core-ui";
@@ -22,7 +20,7 @@ const Config = props =>{
     const {pipelineStore,configStore,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validType,data,setOpt} = configStore
+    const {validType,data,setOpt,valid} = configStore
     const {pipeline,pipelineId} = pipelineStore
 
     const [processVisible,setProcessVisible] = useState(false)
@@ -38,13 +36,10 @@ const Config = props =>{
                 }
                 props.history.push(`/index/task/${pipelineId}/structure`)
             }
-        }).catch(error=>{
-            console.log(error)
         })
     }
 
     const runStatu = () => !(data && data.length < 1 || validType && validType.length > 0)
-
 
     // 滚动--锚点
     const onScroll = () =>{
@@ -97,6 +92,14 @@ const Config = props =>{
                                 )
                             })
                         }
+                    </div>
+                    <div className="config-valid">
+                        {valid && valid.length > 0 ?
+                            <span>
+                                <ExclamationCircleOutlined style={{fontSize:16}}/> &nbsp;
+                                <span className="config-valid-num">{valid && valid.length}项未配置</span>
+                            </span> :
+                            null}
                     </div>
                     <div className="changeView-btn">
                         {

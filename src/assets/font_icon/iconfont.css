@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3197798 */
-  src: url('iconfont.woff2?t=1670053047507') format('woff2'),
-       url('iconfont.woff?t=1670053047507') format('woff'),
-       url('iconfont.ttf?t=1670053047507') format('truetype');
+  src: url('iconfont.woff2?t=1670235686515') format('woff2'),
+       url('iconfont.woff?t=1670235686515') format('woff'),
+       url('iconfont.ttf?t=1670235686515') format('truetype');
 }
 
 .iconfont {
@@ -13,16 +13,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-svn:before {
-  content: "\e62d";
+.icon-goujian:before {
+  content: "\e651";
+}
+
+.icon-tuisong:before {
+  content: "\e626";
+}
+
+.icon-SVN:before {
+  content: "\e67a";
+}
+
+.icon-sonarqube:before {
+  content: "\ecaa";
 }
 
 .icon-ssh:before {
   content: "\e73c";
-}
-
-.icon-tuisongshezhi:before {
-  content: "\e666";
 }
 
 .icon-git:before {
@@ -51,10 +59,6 @@
 
 .icon-ceshi:before {
   content: "\e8ad";
-}
-
-.icon-zu-:before {
-  content: "\e625";
 }
 
 .icon-github:before {

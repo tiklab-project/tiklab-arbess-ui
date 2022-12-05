@@ -93,8 +93,8 @@ const StructureRightExecute = props => {
             <StructureRightCue
                 way={execState && execState.runWay}
                 time={getTime(execState && execState.runTime)}
-                title={"运行中"}
                 action={cease}
+                title={"运行中"}
                 actionTitle={"停止"}
             />
             {executeDetails(rightExecuteData)}

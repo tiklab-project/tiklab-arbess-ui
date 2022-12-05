@@ -26,7 +26,7 @@ const StructureRightLogDrawer = props =>{
                         title={
                             <>
                                 <HlineIcon type={drawerContent.taskType}/>
-                                &nbsp;--&nbsp;
+                                &nbsp;-- &nbsp;
                                 <Subtitle type={drawerContent.taskType}/>
                             </>
                         }

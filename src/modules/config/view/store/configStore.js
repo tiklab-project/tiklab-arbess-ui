@@ -59,13 +59,35 @@ export class ConfigStore{
         message.info(value,1.5)
     }
 
+    @observable taskFormDrawer = false
+    @observable dataItem = false
+
+    @action
+    setTaskFormDrawer = value =>{
+        this.taskFormDrawer = value
+    }
+
+    @action
+    setDataItem = value =>{
+        this.dataItem = value
+    }
+
     @action
     createConfig = async values =>{
         const data = await CreateConfig(values)
         if(data.code===0){
             this.mess("添加成功")
             this.isFindConfig=!this.isFindConfig
-            this.enabledValid=!this.enabledValid
+            this.taskFormDrawer = true
+            this.dataItem = {
+                type: values.taskType,
+                configId: data.data
+            }
+            switch(values.taskType){
+                case 31:
+                case 32:
+                    this.formInitialValues[data.data+"_authType"] = 1
+            }
         }
         if(data.code===50001){
             this.mess(data.msg)
@@ -139,8 +161,8 @@ export class ConfigStore{
             const cc = []
             data.data && data.data.map(item=>{
                 cc.push(item.split("_")[0])
-                const zz = document.getElementById(`${item}`)
-                zz && zz.classList.add("formView-validateFields")
+                // const zz = document.getElementById(`${item}`)
+                // zz && zz.classList.add("formView-validateFields")
             })
             this.validType = Array.from(new Set(cc && cc))
         

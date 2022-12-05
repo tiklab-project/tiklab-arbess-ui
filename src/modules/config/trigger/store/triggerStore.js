@@ -44,6 +44,9 @@ export class TriggerStore {
             message.info("添加成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
         }
+        if(data.code===50001){
+            message.info(data.msg,0.5)
+        }
         return data
     }
 

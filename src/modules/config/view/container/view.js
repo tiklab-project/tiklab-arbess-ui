@@ -5,7 +5,7 @@ import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import FormView from "../components/formView/formView";
-import Gui from "../../../gui/container/gui";
+import Gui from "../components/guiView/gui";
 import AddModal from "../components/formView/addModal";
 import Btn from "../../../common/btn/btn";
 
@@ -166,75 +166,82 @@ const View = props =>{
         localStorage.setItem("configView",type)
     }
 
-    return <>
-        <div className="config-views">
-            <div>
-                <div className={`config-view ${view==="forms"?"config-view-active":""}`} onClick={()=>changeView("forms")}>
-                    <BarsOutlined  />&nbsp;表单视图
-                </div>
-                {
-                    getVersionInfo().expired || !isPlugin ?
-                    <div className="config-view-ban" >
-                        <AppstoreOutlined  />&nbsp;图形视图
-                    </div>
-                    :
-                    <div className={`config-view ${view==="gui"?"config-view-active":""}`} onClick={()=>changeView("gui")}>
-                        <AppstoreOutlined  />&nbsp;图形视图
-                    </div>
-                }               
-            </div>
-            <div>
-                <div className="config-valid">
-                    {valid && valid.length > 0 ?
-                        <span>
-                            <ExclamationCircleOutlined style={{fontSize:16}}/> &nbsp;
-                            <span className="config-valid-num">{valid && valid.length}项未配置</span>
-                        </span> :
-                        null}
-                </div>
-                <div className="config-add">
-                    <Btn
-                        icon={<PlusOutlined/>}
-                        onClick={() =>setAddConfigVisible(true)}
-                        title={"添加任务"}
-                    />
-                </div>
-                <AddModal
-                    addConfigVisible={addConfigVisible}
-                    setAddConfigVisible={setAddConfigVisible}
-                />
-            </div>
-        </div>
-        {
-            view==="forms" ?
-            <FormView
-                pipeline={pipeline}
+    return  <Gui
+                {...props}
                 configStore={configStore}
+                pipelineStore={pipelineStore}
             />
-            :
-            <>
-                {/*<Gui*/}
-                {/*    {...props}*/}
-                {/*    configStore={configStore}*/}
-                {/*    pipelineStore={pipelineStore}*/}
-                {/*/>*/}
 
-                {
-                    !getVersionInfo().expired && isPlugin &&
-                        <RemoteUmdComponent
-                            {...props}
-                            point={"gui"}
-                            pluginStore={pluginStore}
-                            isModalType={true}
-                            extraProps={{
-                                pipelineStore:pipelineStore,
-                                configStore:configStore,
-                            }}
-                       />
-                }
-            </>
-        }
-    </>
+
+    // return <>
+    //     <div className="config-views">
+    //         <div>
+    //             <div className={`config-view ${view==="forms"?"config-view-active":""}`} onClick={()=>changeView("forms")}>
+    //                 <BarsOutlined  />&nbsp;表单视图
+    //             </div>
+    //             {
+    //                 getVersionInfo().expired || !isPlugin ?
+    //                 <div className="config-view-ban" >
+    //                     <AppstoreOutlined  />&nbsp;图形视图
+    //                 </div>
+    //                 :
+    //                 <div className={`config-view ${view==="gui"?"config-view-active":""}`} onClick={()=>changeView("gui")}>
+    //                     <AppstoreOutlined  />&nbsp;图形视图
+    //                 </div>
+    //             }
+    //         </div>
+    //         <div>
+    //             <div className="config-valid">
+    //                 {valid && valid.length > 0 ?
+    //                     <span>
+    //                         <ExclamationCircleOutlined style={{fontSize:16}}/> &nbsp;
+    //                         <span className="config-valid-num">{valid && valid.length}项未配置</span>
+    //                     </span> :
+    //                     null}
+    //             </div>
+    //             <div className="config-add">
+    //                 <Btn
+    //                     icon={<PlusOutlined/>}
+    //                     onClick={() =>setAddConfigVisible(true)}
+    //                     title={"添加任务"}
+    //                 />
+    //             </div>
+    //             <AddModal
+    //                 addConfigVisible={addConfigVisible}
+    //                 setAddConfigVisible={setAddConfigVisible}
+    //             />
+    //         </div>
+    //     </div>
+    //     {
+    //         view==="forms" ?
+    //         <FormView
+    //             pipeline={pipeline}
+    //             configStore={configStore}
+    //         />
+    //         :
+    //         <>
+    //             <Gui
+    //                 {...props}
+    //                 configStore={configStore}
+    //                 pipelineStore={pipelineStore}
+    //             />
+    //
+    //             {
+    //                 !getVersionInfo().expired && isPlugin &&
+    //                     <RemoteUmdComponent
+    //                         {...props}
+    //                         point={"gui"}
+    //                         pluginStore={pluginStore}
+    //                         isModalType={true}
+    //                         extraProps={{
+    //                             pipelineStore:pipelineStore,
+    //                             configStore:configStore,
+    //                         }}
+    //                    />
+    //             }
+    //         </>
+    //     }
+    // </>
 }
 
 export default  inject("configStore","pipelineStore")(observer(View))

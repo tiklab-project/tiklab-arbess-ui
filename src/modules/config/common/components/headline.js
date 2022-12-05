@@ -14,8 +14,7 @@ const Headline = props =>{
             case 4: return "代码扫描"
             case 5: return "推送制品"
             case 6: return "消息通知"
-            case 7:
-                return type ===71?"执行bat脚本":"执行shell脚本"
+            case 7: return type ===71?"执行bat脚本":"执行shell脚本"
             case 81: return "定时触发"
         }
     }

@@ -178,12 +178,8 @@ const SwitchType = props =>{
                                             className={`group-desc ${item.type===showItem.type?"group-ban":""} ${item.type===newType?"group-select":""}`}
                                             key={item.type}
                                         >
-                                    <div className="group-desc-tpl">
-                                        <div className="group-tpl">
                                             <SubIcon type={item.type}/>
                                         </div>
-                                    </div>
-                                </div>
                             })
                         }
                     </div>

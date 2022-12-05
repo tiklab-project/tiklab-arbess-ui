@@ -43,8 +43,8 @@ const Trigger = props =>{
     const columns = [
         {
             title: "执行时间",
-            dataIndex: "cron",
-            key: "cron",
+            dataIndex: "execTime",
+            key: "execTime",
             // width:"40%",
             // ellipsis:true
         },
@@ -97,9 +97,9 @@ const Trigger = props =>{
                         bordered={false}
                         columns={columns}
                         dataSource={triggerData}
-                        rowKey={record=>record}
+                        rowKey={record=>record.timeId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText/>}}
+                        locale={{emptyText: <EmptyText title={"没有查询到定时任务"}/>}}
                     />
                     <TriggerTimeAdd
                         triggerTimeVisible={triggerTimeVisible}

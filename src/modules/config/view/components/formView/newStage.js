@@ -4,15 +4,15 @@ import {Popconfirm} from "antd";
 import Switch from "./switch";
 import ChangeSortsModal from "./changeSortsModal";
 import HlineIcon from "../../../common/components/hlineIcon";
-import CodeGitOrGitlab from "../formType/codeGitOrGitlab";
-import CodeGiteeOrGithub from "../formType/codeGiteeOrGithub";
-import CodeSvn from "../formType/codeSvn";
-import TestUnit from "../formType/testUnit";
-import BuildMavenOrNode from "../formType/buildMavenOrNode";
-import Deploy from "../formType/deploy";
-import ScanSonarQuebe from "../formType/scanSonarQuebe";
-import GoodsNexus from "../formType/goodsNexus";
-import GoodsSsh from "../formType/goodsSsh";
+import CodeGitOrGitlab from "./forms/codeGitOrGitlab";
+import CodeGiteeOrGithub from "./forms/codeGiteeOrGithub";
+import CodeSvn from "./forms/codeSvn";
+import TestUnit from "./forms/testUnit";
+import BuildMavenOrNode from "./forms/buildMavenOrNode";
+import Deploy from "./forms/deploy";
+import ScanSonarQuebe from "./forms/scanSonarQuebe";
+import GoodsNexus from "./forms/goodsNexus";
+import GoodsSsh from "./forms/goodsSsh";
 
 const NewStage = props =>{
 

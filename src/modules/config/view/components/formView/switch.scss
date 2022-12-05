@@ -79,10 +79,7 @@
          -webkit-transition: -webkit-transform .218s ease-in;
          transition: -webkit-transform .218s ease-in;
          transition: transform .218s ease-in,-webkit-transform .218s ease-in;
-         &-tpl{
-            display: inline-block;
-            vertical-align: top;
-         }
+         vertical-align: top;
       }
       &-ban{
          background: #f5f5f5;
