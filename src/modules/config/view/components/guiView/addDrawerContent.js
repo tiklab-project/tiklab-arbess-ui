@@ -64,19 +64,22 @@ const lis=[
 
 const AddDrawerContent = props =>{
 
-    const {configStore,pipelineStore,setNewStageDrawer} = props
+    const {configStore,pipelineStore,setNewStageDrawer,taskSort,stages,stagesId} = props
 
-    const {createConfig} = configStore
+    const {createTaskConfig} = configStore
     const {pipelineId} = pipelineStore
 
     const [type,setType] = useState(1)
 
     const handleClick = (group,item) =>{
         const params = {
-            pipeline:{pipelineId},
+            pipelineId:pipelineId,
             taskType:item.type,
+            taskSort:taskSort,
+            stages:stages,
+            stagesId:stagesId,
         }
-        createConfig(params)
+        createTaskConfig(params)
         setNewStageDrawer(false)
     }
 

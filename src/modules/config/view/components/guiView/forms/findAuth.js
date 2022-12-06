@@ -15,34 +15,22 @@ const FindAuth = props =>{
     const {findAllAuthServerList} = serverStore
     const {findAllAuthHostList} = hostStore
     const {pipelineId} = pipelineStore
-    const {updateConfigure,formInitialValues} = configStore
+    const {updateTaskConfig} = configStore
 
     const [list,setList] = useState([])
     const [open,setOpen] = useState(false)
     const [bordered,setBordered] = useState(false)
     const [showArrow,setShowArrow] = useState(false)
 
-    // 存储authId
-    const setAuthId = value =>{
-        return formInitialValues[dataItem.configId+"_authId"] = value
-    }
-
-    // 获取存储authId
-    const isId = () =>{
-        return formInitialValues[dataItem.configId+"_authId"]
-    }
-
     // 改变凭证
     const changeGitSelect = value =>{
         const params = {
-            pipeline:{pipelineId},
+            pipelineId,
             values:{authId:value},
             taskType:dataItem.type,
             configId: dataItem.configId
         }
-        x(value,isId()) && updateConfigure(params).then(res=>{
-            res.code===0 && setAuthId(value)
-        })
+        x(value,dataItem.authId) && updateTaskConfig(params)
         setBordered(false)
     }
 

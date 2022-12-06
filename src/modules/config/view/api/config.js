@@ -1,45 +1,45 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
 //创建流水线配置
-export function  CreateConfig (data){
+export function  CreateTaskConfig (data){
     return serviceLoc.request({
-        url:"/pipelineCourseConfig/createConfig",
+        url:"/pipelineConfig/createTaskConfig",
         method:"post",
         data
     })
 }
 
 //删除流水线配置
-export function  DeleteConfig (data){
+export function  DeleteTaskConfig (data){
     return serviceLoc.request({
-        url:"/pipelineCourseConfig/deleteConfig",
+        url:"/pipelineConfig/deleteTaskConfig",
         method:"post",
         data
     })
 }
 
 //更新流水线配置
-export function  UpdateConfigure (data){
+export function  UpdateTaskConfig (data){
     return serviceLoc.request({
-        url:"/pipelineCourseConfig/updateConfig",
+        url:"/pipelineConfig/updateTaskConfig",
         method:"post",
         data
     })
 }
 
 //查看所有配置
-export function  FindAllConfigure(data){
+export function  FindAllTaskConfig(data){
     return serviceLoc.request({
-        url:"/pipelineCourseConfig/findAllConfig",
+        url:"/pipelineConfig/findAllTaskConfig",
         method:"post",
         data
     })
 }
 
 //更改顺序
-export function  UpdateOrderConfig(data){
+export function  UpdateOrderTaskConfig(data){
     return serviceLoc.request({
-        url:"/pipelineCourseConfig/updateOrderConfig",
+        url:"/pipelineConfig/updateOrderTaskConfig",
         method:"post",
         data
     })

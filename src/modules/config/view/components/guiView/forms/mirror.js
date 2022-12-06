@@ -22,7 +22,7 @@ const MirrorContent = forwardRef((props,ref)=>{
     const mirrorRefs = useRef(null)
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure} = configStore
+    const {updateTaskConfig} = configStore
 
     const [bordered,setBordered] = useState(false)
     
@@ -45,12 +45,12 @@ const MirrorContent = forwardRef((props,ref)=>{
         obj[name] = mirrorRefs.current.editor.getValue()
         if(x(obj[name],mirrorValue)){
             const params = {
-                pipeline:{pipelineId},
+                pipelineId,
                 values:obj,
                 taskType:dataItem.type,
                 configId:dataItem.configId,
             }
-            updateConfigure(params)
+            updateTaskConfig(params)
         }
         setBordered(false)
     }
@@ -84,7 +84,7 @@ const MirrorContent = forwardRef((props,ref)=>{
     }
 
     return  <>
-            <div className="form-mirror" id={name+"_mirror"}>
+            <div className="gui-mirror" id={name+"_mirror"}>
                 <CodeMirror
                     value={mirrorValue}//内容
                     ref={mirrorRefs}
@@ -95,11 +95,11 @@ const MirrorContent = forwardRef((props,ref)=>{
                         // readOnly:true
                     }}
                     onFocus={e=>onFocus(e)}
-                    className={`${bordered?"form-mirror-tr":"form-mirror-fa"}`}
+                    className={`${bordered?"gui-mirror-tr":"gui-mirror-fa"}`}
                 />
                 {/*{*/}
                 {/*    bordered &&*/}
-                {/*    <div className="form-mirror-move"  onMouseDown={handleMouseDown}/>*/}
+                {/*    <div className="gui-mirror-move"  onMouseDown={handleMouseDown}/>*/}
                 {/*}*/}
             </div>
             {

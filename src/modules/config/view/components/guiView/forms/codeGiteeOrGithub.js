@@ -10,7 +10,7 @@ const CodeGiteeOrGithub = props =>{
 
     const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
     const {pipelineId} = pipelineStore
-    const {updateConfigure,formInitialValues} = configStore
+    const {updateTaskConfig} = configStore
 
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
     const [fieldName,setFieldName] = useState("")
@@ -18,40 +18,40 @@ const CodeGiteeOrGithub = props =>{
     const [branchBorder,setBranchBorder] = useState(false)
 
     useEffect(()=>{
-        if(formInitialValues && formInitialValues.codeName){
+        if(dataItem && dataItem.codeName){
             setProhibited(false)
         }
         setFieldName("")
-    },[formInitialValues,pipelineId])
+    },[dataItem.codeName,pipelineId])
 
     // 选择仓库地址
     const changeGitStoreHouse = (value,e) =>{
         setProhibited(false)
-        change("_codeName",value)
+        change("codeName",value)
     }
 
     // 选择分支
     const changeBranch = value => {
-        change("_codeBranch",value)
+        change("codeBranch",value)
     }
 
     const change = (key,value)=>{
         const obj = {}
-        obj[dataItem.configId+key] = value
+        obj[key] = value
         const params = {
-            pipeline:{pipelineId},
+            pipelineId,
             taskType:dataItem.type,
             values:obj,
             configId:dataItem.configId,
         }
-        updateConfigure(params)
+        updateTaskConfig(params)
     }
 
     const onFocus = name => {
         switch (name) {
             case "codeName":
                 const param = {
-                    authId:formInitialValues && formInitialValues[dataItem.configId+"_authId"],
+                    authId:dataItem.authId,
                     type:dataItem.type
                 }
                 setNameBorder(true)
@@ -59,8 +59,8 @@ const CodeGiteeOrGithub = props =>{
                 break
             default:
                 const params ={
-                    houseName:formInitialValues && formInitialValues[dataItem.configId+"_codeName"],
-                    authId:formInitialValues && formInitialValues[dataItem.configId+"_authId"],
+                    houseName:dataItem && dataItem.codeName,
+                    authId:dataItem && dataItem.authId,
                     type:dataItem.type
                 }
                 setBranchBorder(true)

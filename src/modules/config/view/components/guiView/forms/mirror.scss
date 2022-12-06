@@ -1,4 +1,4 @@
-.form-mirror{
+.gui-mirror{
     display: flex;
     flex-direction: column;
     width: 440px;
@@ -7,21 +7,21 @@
         width: 100%;
         overflow-y: auto;
     }
-    .form-mirror-fa{
+    .gui-mirror-fa{
         min-height: 32px;
         border: 1px solid #d9d9d9;
         &:hover{
             border-color: #1890ff;
         }
     }
-    .form-mirror-tr{
+    .gui-mirror-tr{
         min-height: 64px;
-        border-color: #1890ff;
+        border: 1px solid #1890ff;
         .CodeMirror{
             min-height: 64px;
         }
     }
-    .form-mirror-move{
+    .gui-mirror-move{
         border-bottom: 2px solid #1890ff;
         cursor: s-resize;
     }

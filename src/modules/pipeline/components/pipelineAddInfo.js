@@ -10,7 +10,7 @@ import Btn from "../../common/btn/btn";
 
 const PipelineAddInfo = props =>{
 
-    const {set,powerType,setPowerType,pipelineStore, current,setCurrent,setAddPipelineVisible,
+    const {set,pipelineStore,setCurrent,setAddPipelineVisible,
         templateLis,templateType,onClick
     } = props
 
@@ -18,6 +18,7 @@ const PipelineAddInfo = props =>{
 
     const [form] = Form.useForm()
 
+    const [powerType,setPowerType] = useState(1) // 流水线权限 -- 私有或公有
     const [yUserList,setYUserList] = useState([])
     const [nUserList,setNUserList] = useState([])
     const [member,setMember] = useState([])  // 流水线成员
@@ -243,7 +244,6 @@ const PipelineAddInfo = props =>{
                     />
                 </>
                 :
-                current === 1 &&
                 <>
                     <Btn
                         onClick={()=>setAddPipelineVisible(false)}
@@ -251,7 +251,7 @@ const PipelineAddInfo = props =>{
                         isMar={true}
                     />
                     <Btn
-                        onClick={()=>setCurrent(current - 1)}
+                        onClick={()=>setCurrent(1)}
                         title={"上一步"}
                         isMar={true}
                     />

@@ -41,7 +41,7 @@ export class PostposeStore {
         const data = await UpdateAfterConfig(value)
         if (data.code===0){
             message.info("更新成功",0.5)
-            this.isFindPostposeData = !this.isFindPostposeData
+            // this.isFindPostposeData = !this.isFindPostposeData
         }
         return data
     }

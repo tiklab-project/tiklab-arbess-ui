@@ -25,7 +25,7 @@ const Postpose = props =>{
 
     const [postposeVisible,setPostposeVisible] = useState(false)
     const [postposeUserVisible,setPostposeUserVisible] = useState(false)
-    const [allUserList,setAllUserLIst] = useState([])
+    const [allUserList,setAllUserList] = useState([])
 
     const [form] = Form.useForm()
     const userId = getUser().userId
@@ -34,7 +34,7 @@ const Postpose = props =>{
         findUserPage().then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
-                setAllUserLIst([...dataList])
+                setAllUserList([...dataList])
             }
         })
     },[pipelineId])
@@ -73,6 +73,7 @@ const Postpose = props =>{
                 configId:item.configId
             }
             updateAfterConfig(params)
+            setIsFindPostposeData(!isFindPostposeData)
         })
     }
 

@@ -1,11 +1,11 @@
 import {observable,action} from "mobx";
 
 import {
-    CreateConfig,
-    DeleteConfig,
-    UpdateConfigure,
-    UpdateOrderConfig,
-    FindAllConfigure,
+    CreateTaskConfig,
+    DeleteTaskConfig,
+    UpdateTaskConfig,
+    UpdateOrderTaskConfig,
+    FindAllTaskConfig,
     ConfigValid,
 } from "../api/config";
 
@@ -13,16 +13,15 @@ import {message} from "antd";
 
 export class ConfigStore{
 
-    @observable enabledValid = false // 是否启用表单效验
-    @observable isPlugin = false // 是否存在插件
     @observable valid = []
     @observable validType = []
     @observable data = []
-    @observable opt = 1
-    @observable isFindConfig = false
     @observable formInitialValues = {} //表单初始化
-
+    @observable opt = 1
     @observable addConfigVisible = false
+    @observable isFindConfig = false
+    @observable enabledValid = false // 是否启用表单效验
+    @observable isPlugin = false // 是否存在插件
 
     @action
     setData = value =>{
@@ -56,7 +55,7 @@ export class ConfigStore{
 
     @action
     mess = value =>{
-        message.info(value,1.5)
+        message.info(value,0.5)
     }
 
     @observable taskFormDrawer = false
@@ -73,21 +72,16 @@ export class ConfigStore{
     }
 
     @action
-    createConfig = async values =>{
-        const data = await CreateConfig(values)
+    createTaskConfig = async values =>{
+        const data = await CreateTaskConfig(values)
         if(data.code===0){
             this.mess("添加成功")
             this.isFindConfig=!this.isFindConfig
-            this.taskFormDrawer = true
             this.dataItem = {
                 type: values.taskType,
-                configId: data.data
+                configId: data.data,
             }
-            switch(values.taskType){
-                case 31:
-                case 32:
-                    this.formInitialValues[data.data+"_authType"] = 1
-            }
+            this.taskFormDrawer = true
         }
         if(data.code===50001){
             this.mess(data.msg)
@@ -96,10 +90,8 @@ export class ConfigStore{
     }
 
     @action
-    deleteConfig = async values =>{
-        const params = new FormData()
-        params.append("configId",values)
-        const data = await DeleteConfig(params)
+    deleteTaskConfig = async values =>{
+        const data = await DeleteTaskConfig(values)
         if(data.code===0){
             this.mess("删除成功")
             this.isFindConfig=!this.isFindConfig
@@ -109,12 +101,13 @@ export class ConfigStore{
     }
 
     @action
-    updateConfigure = values =>{
+    updateTaskConfig = values =>{
         return new Promise((resolve, reject) => {
-            UpdateConfigure(values).then(res=>{
+            UpdateTaskConfig(values).then(res=>{
                 if(res.code===0){
                     this.mess("更新成功")
                     this.enabledValid=!this.enabledValid
+                    this.isFindConfig=!this.isFindConfig
                 }
                 resolve(res)
             }).catch(error=>{
@@ -125,8 +118,8 @@ export class ConfigStore{
     }
 
     @action
-    updateOrderConfig = async value =>{
-        const data = await UpdateOrderConfig(value)
+    updateOrderTaskConfig = async value =>{
+        const data = await UpdateOrderTaskConfig(value)
         if(data.code===0){
             this.mess("更新成功")
             this.isFindConfig=!this.isFindConfig
@@ -135,13 +128,13 @@ export class ConfigStore{
     }
 
     @action
-    findAllConfigure = values =>{
+    findAllTaskConfig = values =>{
         const param = new FormData()
         param.append("pipelineId", values)
         return new Promise((resolve, reject) => {
-            FindAllConfigure(param).then(res=>{
+            FindAllTaskConfig(param).then(res=>{
                 if(res.code===0){
-                    this.data = res.data && res.data
+                    this.data = res.data===null?[]:res.data
                 }
                 resolve(res)
             }).catch(error=>{
@@ -165,7 +158,6 @@ export class ConfigStore{
                 // zz && zz.classList.add("formView-validateFields")
             })
             this.validType = Array.from(new Set(cc && cc))
-        
         }
         return data
     }

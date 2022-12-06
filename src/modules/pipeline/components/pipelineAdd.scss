@@ -13,13 +13,10 @@
     max-width: 900px;
     margin: auto;
     padding: 20px;
-    .pipelineAddModalType-title{
-        padding-bottom: 10px;
-        text-align: right;
-    }
     .pipeline-template{
         .pipeline-template-title{
-            padding: 0 0 8px;
+            height: 50px;
+            line-height: 50px;
         }
         .pipeline-template-content{
             display: flex;
@@ -80,10 +77,9 @@
                 padding: 10px 0;
             }
         }
-        .pipeline-template-li-step1{
-            &:not(:last-child){
-                margin-bottom: var(--tiklab-padding-item);
-            }
+        
+        .pipeline-template-li-step1:not(:last-child){
+            margin-bottom: var(--tiklab-padding-item);
         }
         .pipeline-template-li-step2{
             flex: 1;
@@ -92,9 +88,6 @@
         .pipeline-template-arrow{
             font-size: 16px;
         }
-    }
-    .steps-top{
-        padding-bottom: var(--tiklab-padding-item);
     }
     .steps-content {
         min-height: 100px;

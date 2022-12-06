@@ -8,7 +8,7 @@ const Inputs = props =>{
     const {placeholder,label,name,addonBefore,configStore,isValid,pipelineStore,dataItem} = props
 
     const {pipelineId} = pipelineStore
-    const {updateConfigure,formInitialValues} = configStore
+    const {updateTaskConfig} = configStore
 
     const [enter,setEnter] = useState(false)
     const ref = useRef(null)
@@ -50,21 +50,16 @@ const Inputs = props =>{
 
     const onBlur = e => {
         // 值是否个更改
-        if(x(e.target.value,formInitialValues[dataItem.configId+"_"+name])){
+        if(x(e.target.value,dataItem[name])){
             const obj = {}
             obj[name] = e.target.value
-            formInitialValues[dataItem.configId+"_"+name]=obj[name]
             const params = {
-                pipeline:{pipelineId},
+                pipelineId,
                 taskType:dataItem.type,
                 configId:dataItem.configId,
                 values:obj,
             }
-            updateConfigure(params).then(res=>{
-                if(res.code===0){
-                    document.getElementById(dataItem.configId+"_"+name).classList.remove("formView-validateFields")
-                }
-            })
+            updateTaskConfig(params)
         }
         setEnter(false)
     }
@@ -133,8 +128,8 @@ const Inputs = props =>{
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
                 onFocus={onFocus}
                 onBlur={(e)=>onBlur(e)}
-                onPressEnter={(e)=>{
-                    onBlur(e)
+                onPressEnter={(e)=>{  
+                    // onBlur(e)                  
                     e.target.blur()
                 }}
             />

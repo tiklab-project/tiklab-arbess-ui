@@ -11,20 +11,19 @@ const Deploy = props =>{
 
     const {configStore,pipelineStore,dataItem} = props
 
-    const {updateConfigure,formInitialValues} = configStore
+    const {updateTaskConfig} = configStore
     const {pipelineId} = pipelineStore
 
     const [showArrow,setShowArrow] = useState(false)
     
     const changDeployType = value => {
         const params = {
-            pipeline:{pipelineId},
+            pipelineId,
             taskType:dataItem.type,
             values:{authType:value},
             configId:dataItem.configId,
         }
-        updateConfigure(params)
-        formInitialValues[dataItem.configId+"_authType"]=value
+        updateTaskConfig(params)
     }
 
     const confirm = value =>{
@@ -37,7 +36,6 @@ const Deploy = props =>{
             cancelText: "取消",
         })
     }
-
 
     return(
         <>

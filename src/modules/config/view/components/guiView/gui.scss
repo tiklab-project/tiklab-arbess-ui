@@ -58,90 +58,11 @@
             border-radius: 0 0 0 16px;
         }
     }
-
     .guiView-main_group{
         position: relative;
         height: 100%;
         white-space: nowrap;
         padding: 0 var(--tiklab-padding);
-        .group-flow_btn_i{
-            position: absolute;
-            top: 93px;
-            left: 8px;
-            z-index: 2;
-            color: #595959;
-        }
-        .group-flow{
-            height: 100%;
-            width: 48px;
-            text-align: center;
-            padding: 0 1px;
-            display: inline-block;
-            vertical-align: top;
-            position: relative;
-            -ms-transform: rotate(0);
-            transform: rotate(0);
-            &:first-child{
-                .group-flow_btn{
-                    &:after{
-                        width: 52px !important;
-                        left: 36px;
-                    }
-                }
-            }
-            &_singleBtn{
-                position: relative;
-                z-index: 1;
-                cursor: pointer;
-                color: #8c8c8c;
-                height: 100%;
-                .icon{
-                    width: 30px;
-                    height: 30px;
-                }
-                &:after{
-                    content: "";
-                    width: 130px;
-                    border-top: 1px solid #d9d9d9;
-                    position: absolute;
-                    top: 108px;
-                    left: -40px;
-                }
-                
-            }
-            &_multiBtn{
-                position: relative;
-                z-index: 1;
-                cursor: pointer;
-                color: #8c8c8c;
-                height: 100%;
-                .icon{
-                    width: 30px;
-                    height: 30px;
-                }
-                &_i{
-                    position: absolute;
-                    top: 93px;
-                    left: 8px;
-                    z-index: 2;
-                    color: #595959;
-                }
-                &:after{
-                    content: "";
-                    width: 130px;
-                    border-top: 1px solid #d9d9d9;
-                    position: absolute;
-                    top: 108px;
-                    left: -40px;
-                }
-                &:before{
-                    content: "";
-                    height: 100%;
-                    border-left: 1px solid #d9d9d9;
-                    position: absolute;
-                }
-            }
-        }
         .group-create{
             padding-top: 19px;
             display: inline-block;
@@ -163,13 +84,26 @@
                 font-weight: 700;
             }
         }
+        .group-flow{
+            height: 100%;
+            width: 48px;
+            text-align: center;
+            padding: 0 1px;
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+            -ms-transform: rotate(0);
+            transform: rotate(0);
+        }
+        .group-flow_btn_i{
+            position: absolute;
+            top: 93px;
+            left: 8px;
+            z-index: 2;
+            color: #595959;
+        }
         .newStages-step{
             position: relative;
-        }
-        .newStages-content{
-            display: flex;
-            z-index: 1;
-            margin: 0 14px;
         }
         .newStages-job{
             z-index: 1;
@@ -190,103 +124,11 @@
             -webkit-transition: all .2s ease-in-out;
             transition: all .2s ease-in-out;
         }
-        .newStages-has{
-            &:hover{
-                &:before{
-                    content: "";
-                    width: 18px;
-                    height: 50px;
-                    position: absolute;
-                    top: 21px;
-                    left: 9px;
-                    border-top: 1px solid var(--tiklab-blue);
-                }
-                &:after{
-                    content: "";
-                    width: 18px;
-                    height: 50px;
-                    position: absolute;
-                    top: 21px;
-                    right: 10px;
-                    border-top: 1px solid var(--tiklab-blue);
-                }
-            }
-            .has-add{
-                &::before{
-                    content: "";
-                    height: 100%;
-                    width: 0;
-                    display: inline-block;
-                    vertical-align: middle;
-                }
-            }
-        }
-        .newStages-has:hover{
-            .newStages-has-add{
-                cursor: pointer;
-                opacity: 1;
-            }
-            .newStages-job-content{
-                border-color: var(--tiklab-blue);
-            }
-        }
-        .newStages-has-add{
-            opacity: 0;
-        }
-        .newStages-has-pre{
-            margin-right: 10px;
-        }
-        .newStages-has-next{
-            margin-left: 10px;
-        }
         .newStages-job-code{
             width: 240px !important;
             &:hover{
                 border-color: var(--tiklab-blue);
             }
-        }
-        .newStages-singleJob-content{
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            border-radius: 20px;
-            width: 180px;
-            height: 40px;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: center;
-            -webkit-justify-content: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
-            align-items: center;
-            cursor: pointer;
-            &:hover{
-                border-color: var(--tiklab-blue);
-            }
-        }
-        .newStages-job-content{
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            border-radius: 20px;
-            width: 180px;
-            height: 40px;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: center;
-            -webkit-justify-content: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -ms-flex-align: center;
-            align-items: center;
-            cursor: pointer;
         }
         .newStages-job-title{
             display: inline-block;
@@ -303,8 +145,176 @@
         .job-name{
             border-color: red !important;
         }
+
+        .group-flow:first-child .group-flow_singleBtn:after{
+            left: 35px !important;
+            width: 28px !important;
+        }
+        .group-flow_singleBtn{
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            color: #8c8c8c;
+            height: 100%;
+            .icon{
+                width: 30px;
+                height: 30px;
+            }
+            &:after{
+                content: "";
+                width: 103px;
+                border-top: 1px solid #d9d9d9;
+                position: absolute;
+                top: 108px;
+                left: -20px;
+            }
+        }
+        .newStages-single{
+            .newStages-content{
+                display: flex;
+                z-index: 1;
+                margin: 0 14px;
+            }
+            .newStages-singleJob-content{
+                background: #fff;
+                border: 1px solid #e5e5e5;
+                border-radius: 20px;
+                width: 180px;
+                height: 40px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                cursor: pointer;
+                &:hover{
+                    border-color: var(--tiklab-blue);
+                }
+            }
+        }
+
+        .group-flow:first-child .group-flow_multiBtn:after{
+            left: 24px !important;
+            width: 63px !important;
+        }
+        .group-flow_multiBtn{
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            color: #8c8c8c;
+            height: 100%;
+            .icon{
+                width: 30px;
+                height: 30px;
+            }
+            &:after{
+                content: "";
+                width: 90px;
+                border-top: 1px solid #d9d9d9;
+                position: absolute;
+                top: 108px;
+                left: -26px;
+            }
+            &:before{
+                content: "";
+                height: 100%;
+                border-left: 1px solid #d9d9d9;
+                position: absolute;
+            }
+        }
+        .newStages-multi{
+            display: inline-block;
+            &:not(:last-child) .newStages-job-content:after{
+                content: "";
+                width: 52px;
+                position: absolute;
+                top: 21px;
+                right: -26px;
+                border-top: 1px solid #d9d9d9;
+            }
+            .newStages-content{
+                display: flex;
+                z-index: 1;
+            }
+            .newStages-job-content{
+                background: #fff;
+                border: 1px solid #e5e5e5;
+                border-radius: 20px;
+                width: 180px;
+                height: 40px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                cursor: pointer;
+            }
+            .newStages-has{
+                &:hover{
+                    &:before{
+                        content: "";
+                        width: 12px;
+                        position: absolute;
+                        top: 21px;
+                        left: 14px;
+                        border-top: 1px solid var(--tiklab-blue);
+                    }
+                    &:after{
+                        content: "";
+                        width: 12px;
+                        position: absolute;
+                        top: 21px;
+                        right: 14px;
+                        border-top: 1px solid var(--tiklab-blue);
+                    }
+                }
+                .has-add{
+                    &::before{
+                        content: "";
+                        height: 100%;
+                        width: 0;
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                }
+            }
+            .newStages-has:hover{
+                .newStages-has-add{
+                    cursor: pointer;
+                    opacity: 1;
+                    z-index: 2;
+                }
+                .newStages-job-content{
+                    border-color: var(--tiklab-blue);
+                }
+            }
+            .newStages-has-add{
+                opacity: 0;
+            }
+            .newStages-has-pre{
+                margin-right: 10px;
+            }
+            .newStages-has-next{
+                margin-left: 10px;
+            }
+        }
     }
 }
+
 
 /*  抽屉样式  */
 .wrapper{

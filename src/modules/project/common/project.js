@@ -49,7 +49,7 @@ const Project= (props)=>{
 
     useEffect(()=>{
         return ()=>setPipeline("")
-    },[])
+    },[pipelineId])
 
     return(
         <div className="project">

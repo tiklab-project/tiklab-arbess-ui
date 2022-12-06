@@ -3,12 +3,12 @@ import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import "../components/pipeline.scss";
 import PipelineTable from "../components/pipelineTable";
 import PipelineAdd from "../components/pipelineAdd";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import Btn from "../../common/btn/btn";
 import Tabs from "../../common/tabs/tabs";
+import "../components/pipeline.scss";
 
 const Pipeline = props =>{
 
