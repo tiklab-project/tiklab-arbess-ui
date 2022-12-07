@@ -1,9 +1,9 @@
 import React from "react";
-import Btn from "../../../common/btn/btn";
-import {ExclamationCircleOutlined,DeleteOutlined} from "@ant-design/icons";
 import {Popconfirm} from "antd";
+import {ExclamationCircleOutlined,DeleteOutlined} from "@ant-design/icons";
+import Btn from "../../../common/btn/btn";
 
-const StructureRightCue = props =>{
+const StrRightCue = props =>{
 
     const {way,time,title,action,actionTitle} = props
 
@@ -52,4 +52,4 @@ const StructureRightCue = props =>{
     )
 }
 
-export default StructureRightCue
+export default StrRightCue

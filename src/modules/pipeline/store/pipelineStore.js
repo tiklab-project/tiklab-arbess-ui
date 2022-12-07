@@ -78,11 +78,8 @@ export class PipelineStore {
     @action
     createPipeline = values =>{
         const params = {
-            user: {id:getUser().userId},
-            pipelineName: values.pipelineName,
-            pipelinePower: values.pipelinePower,
-            pipelineType: values.pipelineType,
-            userList: values.userList,
+            ...values,
+            user: {id:getUser().userId}
         }
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
@@ -135,17 +132,12 @@ export class PipelineStore {
 
     @action //重命名流水线
     updatePipeline = values =>{
-        const params={
-            pipelineId:values.pipelineId,
-            pipelineName:values.pipelineName,
-            pipelinePower:values.pipelinePower,
-        }
         return new Promise((resolve, reject) => {
-            UpdatePipeline(params).then(res=>{
+            UpdatePipeline(values).then(res=>{
                 if(res.code===0){
                     message.info("更新成功")
+                    this.findAllPipelineStatus()
                 }
-                this.findAllPipelineStatus()
                 resolve(res)
             }).catch(error=>{
                 reject()

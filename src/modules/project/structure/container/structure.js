@@ -8,20 +8,19 @@ import {
     MinusCircleOutlined,
     PlayCircleOutlined
 } from "@ant-design/icons";
-import StructureLeft from "../components/structureLeft";
-import StructureRight from "../components/structureRight";
-import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import StructureEmpty from "../components/structureEmpty";
-import "../components/structure.scss";
 import {inject,observer} from "mobx-react";
+import StructureLeft from "../components/strLeft";
+import StructureRight from "../components/strRight";
+import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import StrEmpty from "../components/strEmpty";
+import "../components/structure.scss";
 
 const Structure = props => {
 
     const {structureStore,pipelineStore} = props
 
-    const {findExecState,findStructureState,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,isData,
-        findPipelineUser,setIsData,execState,
-        state,setState,enforcer,setEnforcer,mode,setMode,pageCurrent,setPageCurrent,freshen,setFreshen
+    const {findExecState,findStructureState,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,
+        findPipelineUser,execState,state,setState,enforcer,setEnforcer,mode,setMode,pageCurrent,setPageCurrent,freshen,setFreshen
     } = structureStore
     const {pipelineId,pipeline} = pipelineStore
 
@@ -65,9 +64,7 @@ const Structure = props => {
     // }
 
     useEffect(()=>{
-        if(pipelineId){
-            findPipelineUser(pipelineId)
-        }
+        pipelineId && findPipelineUser(pipelineId)
     },[pipelineId])
 
     let interval=null
@@ -101,15 +98,7 @@ const Structure = props => {
             userId:enforcer,
             type:mode
         }
-        findPageHistory(params).then(res=>{
-            if(res.code===0 && res.data && res.data.dataList.length===0){
-                if(state===0 && enforcer===null && mode===0) {
-                    if (execState==="") {
-                        setIsData(false)
-                    } else setIsData(true)
-                }
-            }
-        })
+        findPageHistory(params)
     }
 
     const status = i =>{
@@ -126,7 +115,7 @@ const Structure = props => {
 
             case 0 :
                 //运行
-                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
+                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
 
             case 3:
                 //运行--等待运行
@@ -138,18 +127,9 @@ const Structure = props => {
         }
     }
     
-    let timeout = null
     const runImmediately = () => {
         setRunImState(true)
-        timeout = setTimeout(()=>setFreshen(!freshen),1000)
-        pipelineStartStructure(pipelineId).then(res=>{
-            // setTimeout(()=>setFreshen(!freshen),500)
-            if(res.code===0 && res.data===1){
-                timeout = setTimeout(()=>setRunImState(false),500)
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        pipelineStartStructure(pipelineId)
     }
 
     // 销毁定时器
@@ -159,7 +139,6 @@ const Structure = props => {
             setMode(0)
             setState(0)
             setEnforcer(null)
-            clearTimeout(timeout)
             clearInterval(interval)
         }
     },[pipelineId,freshen])
@@ -179,12 +158,12 @@ const Structure = props => {
                             <StructureRight
                                 structureStore={structureStore}
                                 pipelineId={pipelineId}
+                                pipeline={pipeline}
                                 status={status}
                             />
                             :
-                            <StructureEmpty
+                            <StrEmpty
                                 runImmediately={runImmediately}
-                                isData={isData}
                                 runImState={runImState}
                             />
                     }

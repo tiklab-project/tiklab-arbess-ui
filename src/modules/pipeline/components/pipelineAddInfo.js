@@ -2,16 +2,16 @@ import React, {useEffect,useState} from "react";
 import {Form,Input} from "antd";
 import {LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
-import "./pipelineAddInfo.scss";
-import PipelineUser from "./pipelineUser";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../common/btn/btn";
+import PipelineUser from "./pipelineUser";
+import "./pipelineAddInfo.scss";
 
 const PipelineAddInfo = props =>{
 
     const {set,pipelineStore,setCurrent,setAddPipelineVisible,
-        templateLis,templateType,onClick
+        templateLis,templateType,pipelineType,onClick
     } = props
 
     const {pipeline,pipelineId,pipelineList,findUserPage,createPipeline,updatePipeline} = pipelineStore
@@ -69,7 +69,8 @@ const PipelineAddInfo = props =>{
             })
         }else {
             const params = {
-                pipelineType: templateType===0 ? 1:templateLis[templateType-1].type,
+                pipelineType:pipelineType,
+                pipelineTemplate: templateType===0 ? 1:templateLis[templateType-1].type,
                 pipelineName: value.pipelineName,
                 pipelinePower: powerType,
                 userList: member

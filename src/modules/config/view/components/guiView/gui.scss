@@ -74,7 +74,7 @@
             display: inline-block;
             vertical-align: top;
             height: 100%;
-            overflow-y: auto;
+            // overflow-y: auto;
         }
         .group-head{
             padding: 0 20px;
@@ -162,7 +162,7 @@
             }
             &:after{
                 content: "";
-                width: 103px;
+                width: 85px;
                 border-top: 1px solid #d9d9d9;
                 position: absolute;
                 top: 108px;
@@ -216,7 +216,7 @@
             }
             &:after{
                 content: "";
-                width: 90px;
+                width: 100px;
                 border-top: 1px solid #d9d9d9;
                 position: absolute;
                 top: 108px;
@@ -242,6 +242,9 @@
             .newStages-content{
                 display: flex;
                 z-index: 1;
+            }
+            .newStages-job-code{
+                margin-left: 14px !important;
             }
             .newStages-job-content{
                 background: #fff;
@@ -281,6 +284,14 @@
                         right: 14px;
                         border-top: 1px solid var(--tiklab-blue);
                     }
+                    .newStages-has-add{
+                        cursor: pointer;
+                        opacity: 1;
+                        z-index: 2;
+                    }
+                    .newStages-job-content{
+                        border-color: var(--tiklab-blue);
+                    }
                 }
                 .has-add{
                     &::before{
@@ -292,18 +303,9 @@
                     }
                 }
             }
-            .newStages-has:hover{
-                .newStages-has-add{
-                    cursor: pointer;
-                    opacity: 1;
-                    z-index: 2;
-                }
-                .newStages-job-content{
-                    border-color: var(--tiklab-blue);
-                }
-            }
             .newStages-has-add{
                 opacity: 0;
+                z-index: 2;
             }
             .newStages-has-pre{
                 margin-right: 10px;

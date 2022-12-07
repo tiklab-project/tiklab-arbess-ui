@@ -58,7 +58,6 @@ const Info = props =>{
                                 </div>
                     })
                 }
-
             </div>
         </div>
     )

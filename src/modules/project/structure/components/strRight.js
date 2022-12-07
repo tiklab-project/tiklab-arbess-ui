@@ -1,15 +1,14 @@
 import React,{useState} from "react";
-import StructureRightLogDrawer from "./structureRightLogDrawer";
-import StructureRightExecute from "./structureRightExecute";
-import StructureRightItem from "./structureRightItem";
-import {inject,observer} from "mobx-react";
+import {observer} from "mobx-react";
+import StrRightLogDrawer from "./strRightLogDrawer";
+import StrRightExecute from "./strRightExecute";
+import StrRightItem from "./strRightItem";
 
-const StructureRight = props =>{
+const StrRight = props =>{
 
-    const {structureStore,status,pipelineId} = props
+    const {structureStore,status,pipelineId,pipeline} = props
 
-    const {deleteHistoryLog, killInstance,rightFlowData,modeData,index,setIndex,
-        rightExecuteData,execState,freshen,setFreshen} = structureStore
+    const {deleteHistoryLog,killInstance,rightFlowData,modeData,index,rightExecuteData,execState} = structureStore
 
     const [visible,setVisible] = useState(false)
     const [drawerContent,setDrawerContent] = useState("")
@@ -18,33 +17,26 @@ const StructureRight = props =>{
         <div className="right-mid">
             {
                 index === 0 ?
-                    <StructureRightExecute
-                        freshen={freshen}
-                        setFreshen={setFreshen}
+                    <StrRightExecute
+                        pipeline={pipeline}
                         rightExecuteData={rightExecuteData}
                         status={status}
-                        index={index}
                         execState={execState}
-                        setDrawerContent={setDrawerContent}
-                        setVisible={setVisible}
                         killInstance={killInstance}
                         pipelineId={pipelineId}
                     />
                     :
-                    <StructureRightItem
-                        freshen={freshen}
-                        setFreshen={setFreshen}
+                    <StrRightItem
+                        pipeline={pipeline}
                         rightFlowData={rightFlowData}
                         status={status}
                         modeData={modeData}
-                        index={index}
-                        setIndex={setIndex}
                         setVisible={setVisible}
                         setDrawerContent={setDrawerContent}
                         deleteHistoryLog={deleteHistoryLog}
                     />
             }
-            <StructureRightLogDrawer
+            <StrRightLogDrawer
                 visible={visible}
                 setVisible={setVisible}
                 drawerContent={drawerContent}
@@ -53,4 +45,4 @@ const StructureRight = props =>{
     )
 }
 
-export default observer(StructureRight)
+export default observer(StrRight)

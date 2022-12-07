@@ -41,13 +41,13 @@ export const getTime = time =>{
     let minutes = parseInt((time % ( 60 * 60)) /60);
     let seconds = parseInt(time % 60);
     if(days >= 1){
-        DateTimes= days + " 天 " + hours + " 时 " + minutes + " 分 " + seconds + " 秒";
+        DateTimes= days + " 天 " + hours + " 时 " + minutes + " 分 " + seconds + " 秒"
     }else if(hours >= 1){
-        DateTimes=hours + " 时 " + minutes + " 分 " + seconds + " 秒";
+        DateTimes=hours + " 时 " + minutes + " 分 " + seconds + " 秒"
     }else if(minutes >= 1){
-        DateTimes=minutes + " 分 " + seconds + " 秒";
+        DateTimes=minutes + " 分 " + seconds + " 秒"
     }else{
-        DateTimes=seconds + " 秒";
+        DateTimes=seconds + " 秒"
     }
     return DateTimes
 }

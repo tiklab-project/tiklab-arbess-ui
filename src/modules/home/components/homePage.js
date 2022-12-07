@@ -1,12 +1,12 @@
 import React,{useEffect} from "react";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
+import {Space} from "antd";
 import {AimOutlined, HistoryOutlined} from "@ant-design/icons";
-import "./homePage.scss";
 import Guide from "../../common/guide/guide";
 import DynaList from "../../dyna/common/dynaList";
 import EmptyText from "../../common/emptyText/emptyText";
-import {Space} from "antd";
+import "./homePage.scss";
 
 const HomePage = props =>{
 

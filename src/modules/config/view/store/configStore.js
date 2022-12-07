@@ -22,6 +22,7 @@ export class ConfigStore{
     @observable isFindConfig = false
     @observable enabledValid = false // 是否启用表单效验
     @observable isPlugin = false // 是否存在插件
+    @observable isLoading = false
 
     @action
     setData = value =>{
@@ -129,6 +130,7 @@ export class ConfigStore{
 
     @action
     findAllTaskConfig = values =>{
+        this.isLoading = true
         const param = new FormData()
         param.append("pipelineId", values)
         return new Promise((resolve, reject) => {
@@ -136,6 +138,7 @@ export class ConfigStore{
                 if(res.code===0){
                     this.data = res.data===null?[]:res.data
                 }
+                this.isLoading = false
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

@@ -17,7 +17,7 @@ const MessageDrawer = props =>{
     const {homePageStore,visible,setVisible,pipelineStore} = props
 
     const {findMessageDispatchItemPage,messageList,messPage,setMessagePagination,messagePagination,
-        setMessageList,unread,updateMessageDispatchItem,fresh,deleteMessageDispatchItem
+        setMessageList,unread,updateMessageDispatchItem,mesFresh,deleteMessageDispatchItem
     } = homePageStore
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
@@ -36,7 +36,7 @@ const MessageDrawer = props =>{
         visible && findMessageDispatchItemPage(selected).then(res=>{
             setIsLoading(false)
         })
-    },[visible,messagePagination,selected,fresh])
+    },[visible,messagePagination,selected,mesFresh])
 
     const moreMessage = () =>{
         setMessagePagination(messagePagination+1)

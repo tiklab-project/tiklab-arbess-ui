@@ -13,6 +13,7 @@ import {
 } from "../api/structure";
 
 import {getUser} from "tiklab-core-ui";
+import {message} from "antd";
 
 export class StructureStore {
 
@@ -87,7 +88,11 @@ export class StructureStore {
         const params = new FormData()
         params.append("pipelineId", values)
         params.append("userId", getUser().userId)
-        return await PipelineStartStructure(params);
+        const data = await PipelineStartStructure(params)
+        if(data.code===0 && data.data===1){
+            this.freshen = !this.freshen
+        }
+        return data
     }
 
     // 判断当前流水线是否在构建
@@ -118,17 +123,11 @@ export class StructureStore {
     findStructureState = async value =>{
         const param = new FormData()
         param.append("pipelineId", value)
-        return new Promise((resolve, reject) => {
-            FindStructureState(param).then(res=>{
-                if(res.code===0 && res.data){
-                    this.execState = res.data
-                }
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+        const data = await FindStructureState(param)
+        if(data.code===0 && data.data){
+            this.execState = data.data
+        }
+        return data
     }
 
     //停止构建
@@ -140,6 +139,7 @@ export class StructureStore {
         const data = await KillInstance(params)
         if(data.code===0){
             this.pageCurrent = 1
+            this.freshen = !this.freshen
         }
     }
 
@@ -148,14 +148,10 @@ export class StructureStore {
     findAllPipelineConfig =async value =>{
         const param = new FormData()
         param.append("pipelineId", value)
-        FindAllPipelineConfig(param).then(res=>{
-            if(res.code===0){
-                this.rightExecuteData = res.data
-                this.isData = true
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await FindAllPipelineConfig(param)
+        if(data.code===0){
+            this.rightExecuteData = data.data
+        }
     }
 
     //构建历史
@@ -177,9 +173,8 @@ export class StructureStore {
                     }else{
                         this.page.total = res.data.totalPage
                         this.leftPageList = res.data.dataList
-                        this.findHistoryLog(  res.data.dataList && res.data.dataList[0].historyId)
+                        this.findHistoryLog(res.data.dataList && res.data.dataList[0].historyId)
                         this.modeData =  res.data.dataList && res.data.dataList[0]
-                        this.isData = true
                     }
                 }
                 resolve(res)
@@ -195,19 +190,11 @@ export class StructureStore {
     findHistoryLog =async value =>{
         const param = new FormData()
         param.append("historyId", value)
-        return new Promise((resolve, reject) => {
-            FindHistoryLog(param).then(res=>{
-                if(res.code === 0){
-                    if(this.index!==0){
-                        this.rightFlowData = res.data
-                    }
-                }
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+        const data = await FindHistoryLog(param)
+        if(data.code===0){
+            this.rightFlowData = data.data
+        }
+        return data
     }
 
     //删除构建历史
@@ -217,7 +204,10 @@ export class StructureStore {
         param.append("historyId", value)
         const data = await DeleteHistoryLog(param)
         if(data.code===0){
+            message.info("删除成功",0.5)
+            if(this.index!==0){ this.index=0 }
             this.pageCurrent = 1
+            this.freshen = !this.freshen
         }
         return data
     }
@@ -226,13 +216,11 @@ export class StructureStore {
     findPipelineUser =async value =>{
         const param = new FormData()
         param.append("pipelineId", value)
-        FindPipelineUser(param).then(res=>{
-            if(res.code === 0 && res.data){
-                this.pipelineUserList = res.data
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        const data = await FindPipelineUser(param)
+        if(data.code===0 && data.data){
+            this.pipelineUserList = data.data
+        }
+        return data
     }
 
 }

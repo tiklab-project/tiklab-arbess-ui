@@ -4,7 +4,7 @@ import {CaretDownOutlined} from "@ant-design/icons";
 
 const {Option} = Select;
 
-const StructureLeftDropdown = props =>{
+const StrLeftDropdown = props =>{
 
     const {setState,setEnforcer,setMode,pipelineUserList,pipelineId,changPage} = props
 
@@ -117,4 +117,4 @@ const StructureLeftDropdown = props =>{
     )
 }
 
-export default StructureLeftDropdown
+export default StrLeftDropdown

@@ -3,19 +3,19 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    &-title{
+    .mf-guide-title{
         border-radius: 4px;
         height: 40px;
         line-height: 40px;
         font-weight: var(--tiklab-font-weight-bold);
-        &-icon{
+        .mf-guide-title-icon{
             font-size: var(--tiklab-icon-size-16);
         }
-        &-name{
+        .mf-guide-title-name{
             padding: 0 8px;
         }
     }    
-    &-ac{
+    .mf-guide-ac{
         border-radius: 3px;
         cursor: pointer;
         font-size: 16px;

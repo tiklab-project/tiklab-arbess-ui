@@ -34,7 +34,7 @@ const NewStage = props =>{
         setTaskFormDrawer(true)
     }
 
-    // 多任务 串行（上）
+    // 多阶段 串行（上）
     const serialPre = (item,index,stagesIndex) =>{
         setStages(index+1)
         setStagesId(item.stagesId)
@@ -42,7 +42,7 @@ const NewStage = props =>{
         setNewStageDrawer(true)
     }
 
-    // 多任务 串行（下）
+    // 多阶段 串行（下）
     const serialNext = (item,index,stagesIndex) =>{
         setStages(index+1)
         setStagesId(item.stagesId)
@@ -95,7 +95,7 @@ const NewStage = props =>{
         }
     }
 
-    // 单任务的btn
+    // 多任务的btn
     const renderSingleBtn = (item,index) =>{
         return item.type > 10 &&
             <div className="group-flow">
@@ -110,7 +110,7 @@ const NewStage = props =>{
             </div> 
     }
 
-    // 单任务
+    // 多任务
     const renderSingleTask = (item,index) =>{
         return <Fragment key={index}>
             {renderSingleBtn(item,index)}
@@ -145,7 +145,7 @@ const NewStage = props =>{
         </Fragment>
     }
 
-    // 多任务的btn
+    // 多阶段的btn
     const renderMultiBtn = (item,index) =>{
         return  item.taskType>10 &&
             <div className="group-flow">
@@ -160,7 +160,7 @@ const NewStage = props =>{
             </div>
     }
 
-    // 多任务
+    // 多阶段
     const renderMultitask = (item,index) =>{
         return <Fragment key={index}>
         {renderMultiBtn(item,index)}
@@ -174,7 +174,7 @@ const NewStage = props =>{
                     <div className="newStages-multi" key={stage.configId}>
                         <div className="newStages-step">
                             <div className="newStages-content">
-                                <div className={`newStages-job ${stage.type>10?"newStages-has":""} ${stage.type<10?"newStages-job-code":""}`}>
+                                <div className={`newStages-job ${stage.type>10?"newStages-has":""}`}>
                                     {
                                         stage.type>10 &&
                                         <div className="newStages-has-pre newStages-has-add" onClick={()=>serialPre(item,index,stagesIndex)}>

@@ -4,16 +4,17 @@ import {RemoteUmdComponent} from "tiklab-plugin-ui";
 import {useSelector} from "tiklab-plugin-ui/es/_utils";
 import {getVersionInfo} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
-import FormView from "../components/formView/formView";
+// import FormView from "../components/formView/formView";
 import Gui from "../components/guiView/gui";
 import AddModal from "../components/formView/addModal";
 import Btn from "../../../common/btn/btn";
+import Loading from "../../../common/loading/loading";
 
 const View = props =>{
 
     const {configStore,pipelineStore} = props
 
-    const {findAllTaskConfig,isPlugin,setIsPlugin,isFindConfig} = configStore
+    const {findAllTaskConfig,isPlugin,setIsPlugin,isFindConfig,isLoading} = configStore
 
     const {pipelineId,pipeline} = pipelineStore
 
@@ -41,6 +42,11 @@ const View = props =>{
     const changeView = type => {
         setView(type)
         localStorage.setItem("configView",type)
+    }
+
+    // 加载状态
+    if(isLoading){
+        return <Loading/>
     }
 
     return  <Gui

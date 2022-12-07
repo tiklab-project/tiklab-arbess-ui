@@ -10,6 +10,7 @@ import {
 } from "../api/homePage";
 
 import {getUser} from "tiklab-core-ui";
+import {message} from "antd";
 
 export class HomePageStore{
 
@@ -29,8 +30,8 @@ export class HomePageStore{
     }
     @observable messagePagination = 1 //控制接口中页码page的变化，更新接口 -- 消息
     @observable unread = ""
+    @observable mesFresh = false
 
-    @observable fresh = false
     @observable dynamicList = []
 
     @action
@@ -124,7 +125,7 @@ export class HomePageStore{
     updateMessageDispatchItem = async value =>{
         const data = await UpdateMessageDispatchItem(value)
         if(data.code===0){
-            this.fresh = !this.fresh
+            this.mesFresh = !this.mesFresh
             this.unread = this.unread - 1
         }
         return data
@@ -136,7 +137,8 @@ export class HomePageStore{
         param.append("id",value)
         const data = await DeleteMessageDispatchItem(param)
         if(data.code===0){
-            this.fresh = !this.fresh
+            this.mesFresh = !this.mesFresh
+            message.info("删除成功",0.5)
         }
         return data
     }

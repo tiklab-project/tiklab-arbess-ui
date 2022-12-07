@@ -1,12 +1,11 @@
 import React from "react";
-import StructureLeftExecute from "./structureLeftExecute";
-import StructureLeftDropdown from "./structureLeftDropdown";
-import StructureEmpty from "./structureEmpty";
-import {inject,observer} from "mobx-react";
-import StructureLeftList from "./structureLeftList";
+import {observer} from "mobx-react";
+import StrEmpty from "./strEmpty";
+import StrLeftList from "./strLeftList";
+import StrLeftDropdown from "./strLeftDropdown";
 import Page from "../../../common/page/page";
 
-const StructureLeft = props =>{
+const StrLeft = props =>{
 
     const {status,pipelineId,structureStore}=props
 
@@ -20,34 +19,43 @@ const StructureLeft = props =>{
             setModeData(item)
         })
     }
+
+    const renderLeftPageList = (item,i) => {
+        return  <StrLeftList
+                    key={i}
+                    onClick={()=>showHistory(item,i)}
+                    state={status(item.runStatus)}
+                    index={index}
+                    type={i+1}
+                    name={item.user && item.user.name}
+                    createTime={item.createTime}
+                    title={`# ${item.findNumber}`}
+                />
+    }
     
-    const renderLeftPageList = leftPageList => {
-        return leftPageList.map((item,i)=>{
-            return  <StructureLeftList
-                        key={i}
-                        onClick={()=>showHistory(item,i)}
-                        state={status(item.runStatus)}
-                        index={index}
-                        type={i+1}
-                        name={item.user && item.user.name}
-                        createTime={item.createTime}
-                        title={`# ${item.findNumber}`}
-                    />
-        })
+    const renderExecState = execState =>{
+        return execState===""?
+            null
+            :
+            <StrLeftList
+                onClick={()=>setIndex(0)}
+                index={index}
+                name={execState && execState.execName}
+                state={status(5)}
+                type={0}
+                createTime={execState && execState.createTime}
+                title={`运行中`}
+            />
     }
 
     const changPage = pages =>{
         setPageCurrent(pages)
-        if(execState===""){
-            setIndex(1)
-        }else {
-            setIndex(0)
-        }
+        execState===""?setIndex(1):setIndex(0)
     }
 
     return(
         <div className="structure-content-left">
-            <StructureLeftDropdown
+            <StrLeftDropdown
                 {...props}
                 setState={setState}
                 setEnforcer={setEnforcer}
@@ -62,14 +70,13 @@ const StructureLeft = props =>{
                         execState || leftPageList && leftPageList.length > 0 ?
                             <>
                                 <div className="history-content-list">
-                                    <StructureLeftExecute
-                                        execState={execState}
-                                        status={status}
-                                        index={index}
-                                        setIndex={setIndex}
-                                        changPage={changPage}
-                                    />
-                                    { renderLeftPageList(leftPageList) }
+                                
+                                    { renderExecState(execState) }
+
+                                    { leftPageList && leftPageList.map((item,i)=>{
+                                        return renderLeftPageList(item,i)
+                                    })}
+                                    
                                 </div>
                                 <Page
                                     pageCurrent={pageCurrent}
@@ -78,7 +85,7 @@ const StructureLeft = props =>{
                                 />
                             </>
                             :
-                            <StructureEmpty isData={true}/>
+                            <StrEmpty isData={true}/>
                     }
                 </div>
             </div>
@@ -86,4 +93,4 @@ const StructureLeft = props =>{
     )
 }
 
-export default observer(StructureLeft)
+export default observer(StrLeft)

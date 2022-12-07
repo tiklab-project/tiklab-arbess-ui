@@ -4,7 +4,7 @@ import ModalTitle from "../../../common/modalTitle/modalTitle";
 import Subtitle from "../../../config/common/components/subtitle";
 import HlineIcon from "../../../config/common/components/hlineIcon";
 
-const StructureRightLogDrawer = props =>{
+const StrRightLogDrawer = props =>{
 
     const {visible,setVisible,drawerContent} = props
 
@@ -19,20 +19,20 @@ const StructureRightLogDrawer = props =>{
             bodyStyle={{padding:0}}
             className="mf"
         >
-            <div className="structureModal">
-                <div className="structureModal-up">
+            <div className="structureDrawer">
+                <div className="structureDrawer-up">
                     <ModalTitle
                         setVisible={setVisible}
                         title={
                             <>
-                                <HlineIcon type={drawerContent.taskType}/>
+                                <HlineIcon type={drawerContent.type}/>
                                 &nbsp;-- &nbsp;
-                                <Subtitle type={drawerContent.taskType}/>
+                                <Subtitle type={drawerContent.type}/>
                             </>
                         }
                     />
                 </div>
-                <div className="structureModal-content">
+                <div className="structureDrawer-content">
                     <div className="log">
                         <div className="log-content" style={{whiteSpace:"pre-wrap"}}>
                             {drawerContent && drawerContent.runLog}
@@ -44,4 +44,4 @@ const StructureRightLogDrawer = props =>{
     )
 }
 
-export default StructureRightLogDrawer
+export default StrRightLogDrawer

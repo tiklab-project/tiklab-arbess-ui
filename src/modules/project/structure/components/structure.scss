@@ -1,6 +1,7 @@
 .structure{
     overflow-y: hidden;
     background: #ffffff;
+    height: 100%;
     &-content{
         display: flex;
         flex-direction: row;
@@ -33,6 +34,7 @@
                 .history-content{
                     &-list{
                         height: calc(100% - 40px);
+                        min-height: 100px;
                         overflow: auto;
                         border-bottom: 1px solid var(--tiklab-gray-200);
                         &-ul{
@@ -96,11 +98,13 @@
         }
         &-right{
             flex-grow: 1;
-            height: 100%;
             padding: 20px;
             overflow: auto;
             .right-mid{
+                height: calc(100% - 26px);
                 padding-top: 15px;
+                min-width: 600px;
+                position: relative;
                 .item{
                     &-20{
                         border-top: 3px solid #444444 !important;
@@ -109,7 +113,7 @@
                         border-top: 3px solid #ff0000 !important;
                     }
                     &-10{
-                        border-top: 3px solid #0063FF !important;
+                        border-top: 3px solid var(--tiklab-blue) !important;
                     }
                     &-100{
                         border-top: 3px solid #43a890 !important;
@@ -118,81 +122,104 @@
                         border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
                     }
                 }
-                .mid_group_top{
+            }
+            .mid_group_top{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                &_tel{
+                    font-size: 16px;
+                    .tel_title{
+                        padding-right: 20px;
+                        color: var(--tiklab-blue);
+                        width: 60px;
+                        font-weight: var(--tiklab-font-weight-bold);
+                    }
+                    .tel_time{
+                        padding-right: 20px;
+                    }
+                }
+            }
+            .st-card{
+                padding: 10px;
+                width: 150px;
+                min-width: 150px;
+                border: 1px solid var(--tiklab-gray-200);
+                margin: var(--tiklab-padding-item) 0;
+                &:not(:last-child){
+                    margin-right: 15px;
+                }
+                .card-top{
+                    margin-bottom: var(--tiklab-padding-item);
+                    .card-top-state{
+                        margin-right: 8px;
+                    }
+                }
+                .card-center-item{
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
-                    &_tel{
-                        font-size: 16px;
-                        .tel_title{
-                            padding-right: 20px;
-                            color: #0063FF;
-                            width: 60px;
-                            font-weight: var(--tiklab-font-weight-bold);
-                        }
-                        .tel_time{
-                            padding-right: 20px;
-                        }
+                    padding: 10px 0;
+                    >div{
+                        padding-left: 10px;
                     }
                 }
-                .mid_group_center{
-                    display: flex;
-                    flex-wrap: wrap;
-                    padding-top: var(--tiklab-padding-item);
-                    &-cart{
-                        padding: 15px;
-                        width: 260px;
-                        height: 130px;
-                        border: 1px solid var(--tiklab-gray-200);
-                        margin-bottom: var(--tiklab-padding-item);
-                        &:not(:last-child){
-                            margin-right: 15px;
-                        }
-                        .cart{
-                            &-center{
-                                &-item{
-                                    display: flex;
-                                    flex-direction: row;
-                                    justify-content: space-between;
-                                    padding: 10px 0;
-                                    >div{
-                                        padding-left: 10px;
-                                    }
-                                }
-                            }
-                            &-bottom{
-                                text-align: right;
-                                &-span{
-                                    display: inline-block;
-                                    cursor: pointer;
-                                    color: var(--tiklab-blue);
-                                    width: 30px;
-                                }
-                            }
-                        }
+                .card-bt{
+                    text-align: right;
+                    font-size: var(--tiklab-font-13);
+                    .card-bt-log{
+                        display: inline-block;
+                        cursor: pointer;
+                        color: var(--tiklab-blue);
+                        width: 30px;
+                        margin-right: 8px;
                     }
                 }
+            }
+            .str-single{
+                height: 220px;
+                display: inline-flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+            .str-multi{
+                height: 220px;
+                display: inline-flex;
+                .str-multi-card{
+                    display: inline-flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+                .str-multi-card:not(:last-child){
+                    padding-right: 10px;
+                    border-right: 1px solid #d9d9d9;
+                    margin-right: var(--tiklab-padding-item);
+                }
+            }
+            .mid_group-bottom{
+                position: absolute;
+                // bottom: 0;
+                left: 0;
+                right: 0;
+                .mid_group-bottom-title{
+                    font-size: var(--tiklab-font-16);
+                    font-weight: var(--tiklab-font-weight-bold);
+                }
+                .mid_group-bottom-outLog{
+                    white-space: pre-wrap;
+                    height: 60vh;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    background: #000;
+                    color: #fff;
+                    padding: 10px 10px 20px;
+                }
+                .mid_group-bottom-runLog{
+                    position: relative;
+                }
+            }
+        }
 
-            }
-        }
-        &-bottom{
-            .structure-content-bottom-title{
-                font-size: var(--tiklab-font-16);
-                font-weight: var(--tiklab-font-weight-bold);
-            }
-            .structure-content-bottom-outLog{
-                white-space: pre-wrap;
-                height: 60vh;
-                overflow-y: auto;
-                overflow-x: hidden;
-                background: #000;
-                color: #fff;
-                padding: 10px 10px 20px;
-            }
-            .structure-content-bottom-runLog{
-                position: relative;
-            }
-        }
         &-empty{
             .empty-group{
                 height: calc(100% - 90px);
@@ -204,7 +231,7 @@
     }
 }
 
-.structureModal{
+.structureDrawer{
     padding-top: var(--tiklab-padding);
     display: -webkit-box;
     display: -webkit-flex;
@@ -216,10 +243,10 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    .structureModal-up{
+    .structureDrawer-up{
         padding: 0 var(--tiklab-padding);
     }
-    .structureModal-content{
+    .structureDrawer-content{
         height: 100%;
         width: 100%;
         -webkit-box-flex: 1;
@@ -228,5 +255,10 @@
         flex: 1;
         overflow: auto;
         padding: 0 var(--tiklab-padding) var(--tiklab-padding);
+    }
+    .log-content{
+        // background-color: #222;
+        // color: #fff;
+        // padding: 10px;
     }
 }

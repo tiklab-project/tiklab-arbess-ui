@@ -73,7 +73,6 @@ const Postpose = props =>{
                 configId:item.configId
             }
             updateAfterConfig(params)
-            setIsFindPostposeData(!isFindPostposeData)
         })
     }
 

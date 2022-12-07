@@ -1,11 +1,11 @@
 import React,{useState} from "react";
 import {Modal,Steps} from "antd";
 import {RightOutlined,SwapOutlined} from "@ant-design/icons";
-import "./pipelineAdd.scss";
 import ModalTitle from "../../common/modalTitle/modalTitle";
 import Btn from "../../common/btn/btn";
 import PipelineAddMould from "./pipelineAddMould";
 import PipelineAddInfo from "./pipelineAddInfo";
+import "./pipelineAdd.scss";
 
 const templateLis = [
     {
@@ -89,16 +89,15 @@ const PipelineAdd = props =>{
             title: "选择类型",
             content: <div className="pipeline-template">
                 <div className="pipeline-template-ul">
-                    <div className="pipeline-template-title">单任务</div>
-                    <div className={`pipeline-template-li`} onClick={()=>changType(1)}>
-                        <div className="li-self">单任务</div>
+                    <div className="pipeline-template-title">任务类型</div>
+                    <div className={`pipeline-template-li pipeline-template-li-step1`} onClick={()=>changType(1)}>
+                        <div className="li-self">多任务</div>
                         <div className="pipeline-template-arrow">
                             <RightOutlined />
                         </div>
                     </div>
-                    <div className="pipeline-template-title">多任务</div>
                     <div className={`pipeline-template-li`} onClick={()=>changType(2)}>
-                        <div className="li-self">多任务</div>
+                        <div className="li-self">多阶段</div>
                         <div className="pipeline-template-arrow">
                             <RightOutlined />
                         </div>
@@ -113,7 +112,7 @@ const PipelineAdd = props =>{
                             <div className="pipeline-template-title">流水线类型</div>
                             <div className="pipeline-template-content">
                                 <div className={`pipeline-template-li pipeline-template-li-step2`}>
-                                    <div className="li-self">{type===1?"单任务":"多任务"}</div>
+                                    <div className="li-self">{type===1?"多任务":"多阶段"}</div>
                                 </div>
                                 <div>
                                     <Btn
@@ -152,7 +151,7 @@ const PipelineAdd = props =>{
                     <div className="pipeline-template-title">流水线类型</div>
                     <div className="pipeline-template-content">
                         <div className={`pipeline-template-li pipeline-template-li-step2`}>
-                            <div className="li-self">{type===1?"单任务":"多任务"}</div>
+                            <div className="li-self">{type===1?"多任务":"多阶段"}</div>
                         </div>
                         <div>
                             <Btn
@@ -191,6 +190,7 @@ const PipelineAdd = props =>{
                     setCurrent={setCurrent}
                     templateLis={templateLis}
                     templateType={templateType}
+                    pipelineType={type}
                     set={false}
                     setAddPipelineVisible={setAddPipelineVisible}
                 />

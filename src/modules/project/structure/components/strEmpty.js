@@ -1,19 +1,17 @@
 import React from "react";
-import {Empty,Spin} from "antd";
+import {Spin} from "antd";
 import {CaretRightOutlined,LoadingOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/btn";
+import EmptyText from "../../../common/emptyText/emptyText";
 
-const StructureEmpty = props =>{
+const StrEmpty = props =>{
 
     const {runImmediately,runImState,isData} = props
 
     return(
         <div className="structure-content-empty">
             <div className="empty-group">
-                <Empty
-                    image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-                    description="没有查询到数据"
-                />
+                <EmptyText/>
             </div>
             {/*{*/}
             {/*    isData ?*/}
@@ -48,4 +46,4 @@ const StructureEmpty = props =>{
     )
 }
 
-export default StructureEmpty
+export default StrEmpty

@@ -10,7 +10,6 @@ import {message} from "antd";
 
 export class AuthorizeStore {
 
-
     @observable storehouseList = []
     @observable branchList = []
     @observable skin = false
@@ -26,7 +25,7 @@ export class AuthorizeStore {
         const data = await FindAccessToken(value)
         if(data.code===0){
             this.skin = false
-            message.success("授权成功")
+            message.success("授权成功",0.5)
         }
         else {
             // this.skin = false
