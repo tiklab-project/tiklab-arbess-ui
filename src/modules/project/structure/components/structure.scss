@@ -43,7 +43,6 @@
                             width: 100%;
                             padding: 10px 10px 10px 20px;
                             cursor: pointer;
-                            margin: 2px 0;
                             &:hover{
                                 background: var(--tiklab-gray-300);
                             }
@@ -141,8 +140,6 @@
                 }
             }
             .st-card{
-                padding: 10px;
-                width: 150px;
                 min-width: 150px;
                 border: 1px solid var(--tiklab-gray-200);
                 margin: var(--tiklab-padding-item) 0;
@@ -150,7 +147,7 @@
                     margin-right: 15px;
                 }
                 .card-top{
-                    margin-bottom: var(--tiklab-padding-item);
+                    padding: 10px;
                     .card-top-state{
                         margin-right: 8px;
                     }
@@ -167,24 +164,25 @@
                 .card-bt{
                     text-align: right;
                     font-size: var(--tiklab-font-13);
+                    padding: 10px 12px;
                     .card-bt-log{
                         display: inline-block;
                         cursor: pointer;
                         color: var(--tiklab-blue);
                         width: 30px;
-                        margin-right: 8px;
+                        margin-right: 10px;
                     }
                 }
             }
             .str-single{
                 height: 220px;
-                display: inline-flex;
+                display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;
             }
             .str-multi{
                 height: 220px;
-                display: inline-flex;
+                display: flex;
                 .str-multi-card{
                     display: inline-flex;
                     align-items: flex-start;

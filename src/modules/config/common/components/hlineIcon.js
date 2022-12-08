@@ -13,8 +13,8 @@ const HlineIcon = props =>{
             case 3: return renderTitle("bushu","部署")
             case 4: return renderTitle("sonarqube","代码扫描")
             case 5: return renderTitle("tuisong","推送制品")
-            case 6: return renderTitle("mes","消息通知")
-            case 7: return renderTitle("jiaoben",type ===71?"执行bat脚本":"执行shell脚本")
+            case 6: return renderTitle("mes","后置处理")
+            case 7: return renderTitle("jiaoben","后置处理")
             case 8: return renderTitle("chufa","定时触发")
         }
     }

@@ -76,7 +76,7 @@ const Config = props =>{
             <div className="config-up">
                 <div className="config-top">
                     <div className="config_bread">
-                        <BreadcrumbContent firstItem={pipeline.pipelineName} secondItem={"配置"}/>
+                        <BreadcrumbContent firstItem={pipeline.name} secondItem={"配置"}/>
                     </div>
                     <div className="config-tabs">
                         {

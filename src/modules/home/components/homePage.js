@@ -47,7 +47,7 @@ const HomePage = props =>{
     const pipeline = data =>{
         const newArr = []
         data && data.map(item => {
-            newArr.push(item.pipelineId)
+            newArr.push(item.id)
         })
         return newArr
     }
@@ -55,15 +55,15 @@ const HomePage = props =>{
     // 最近访问的流水线
     const renderList = item => {
         return  <div className="pipelineRecent-item" key={item.openId}
-                     onClick={()=> props.history.push(`/index/task/${item.pipeline && item.pipeline.pipelineId}/survey`)}
+                     onClick={()=> props.history.push(`/index/task/${item.pipeline && item.pipeline.id}/survey`)}
                 >
             <div className="pipelineRecent-item-title">
                 <Space>
                     <span className={`mf-icon-${item.pipeline.color} pipelineRecent-icon`}>
-                        {item.pipeline && item.pipeline.pipelineName.substring(0,1).toUpperCase()}
+                        {item.pipeline && item.pipeline.name.substring(0,1).toUpperCase()}
                     </span>
                     <span className="pipelineRecent-name">
-                        {item.pipeline && item.pipeline.pipelineName}
+                        {item.pipeline && item.pipeline.name}
                     </span>
                 </Space>
             </div>

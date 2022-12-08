@@ -24,7 +24,7 @@ const ProjectSet = props =>{
     const [powerType,setPowerType] = useState(1)
 
     useEffect(()=>{
-        pipeline && setPowerType(pipeline && pipeline.pipelinePower)
+        pipeline && setPowerType(pipeline && pipeline.power)
     },[pipeline])
 
     const onConfirm = () =>{

@@ -97,8 +97,8 @@
         }
         .group-flow_btn_i{
             position: absolute;
-            top: 93px;
-            left: 8px;
+            top: 96px;
+            left: 13px;
             z-index: 2;
             color: #595959;
         }
@@ -130,6 +130,12 @@
                 border-color: var(--tiklab-blue);
             }
         }
+        .newStages-job-sub{
+            display: inline-flex;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+        }
         .newStages-job-title{
             display: inline-block;
             max-width: 100px;
@@ -138,12 +144,22 @@
             text-overflow: ellipsis;
         }
         .newStages-job-warn{
-            padding-left: 5px;
-            font-size: 17px;
+            font-size: 16px;
             color: red;
+            padding-left: 5px;
         }
         .job-name{
             border-color: red !important;
+        }
+        .newStages-job-del{
+            opacity: 0;
+            padding-right: 10px;
+        }
+        .newStages-singleJob-content:hover .newStages-job-del{
+            opacity: 1;
+        }
+        .newStages-job-content:hover .newStages-job-del{
+            opacity: 1;
         }
 
         .group-flow:first-child .group-flow_singleBtn:after{
@@ -157,8 +173,8 @@
             color: #8c8c8c;
             height: 100%;
             .icon{
-                width: 30px;
-                height: 30px;
+                width: 22px;
+                height: 22px;
             }
             &:after{
                 content: "";
@@ -194,6 +210,7 @@
                 -ms-flex-align: center;
                 align-items: center;
                 cursor: pointer;
+                padding-left: 10px;
                 &:hover{
                     border-color: var(--tiklab-blue);
                 }
@@ -211,8 +228,8 @@
             color: #8c8c8c;
             height: 100%;
             .icon{
-                width: 30px;
-                height: 30px;
+                width: 22px;
+                height: 22px    ;
             }
             &:after{
                 content: "";
@@ -265,6 +282,10 @@
                 -ms-flex-align: center;
                 align-items: center;
                 cursor: pointer;
+                padding-left: 10px;
+                &:hover{
+                    border-color: var(--tiklab-blue);
+                }
             }
             .newStages-has{
                 &:hover{
@@ -287,10 +308,6 @@
                     .newStages-has-add{
                         cursor: pointer;
                         opacity: 1;
-                        z-index: 2;
-                    }
-                    .newStages-job-content{
-                        border-color: var(--tiklab-blue);
                     }
                 }
                 .has-add{
@@ -313,6 +330,9 @@
             .newStages-has-next{
                 margin-left: 10px;
             }
+        }
+        .newStages-btn{
+            padding-left: 0 !important;
         }
     }
 }

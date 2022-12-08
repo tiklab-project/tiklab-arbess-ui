@@ -13,7 +13,7 @@ const Project= (props)=>{
     const {findAllPipelineStatus,setPipelineId,setPipeline} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
 
-    const pipelineId = match.params.pipelineId
+    const pipelineId = match.params.id
     const userId = getUser().userId
 
     useEffect(()=>{
@@ -34,9 +34,9 @@ const Project= (props)=>{
                 //     })
                 // }
                 data && data.map(item=>{
-                    if(item.pipelineId === pipelineId){
+                    if(item.id === pipelineId){
                         setPipeline(item)
-                        getInitProjectPermissions(userId,pipelineId,"matflow",item.pipelinePower===1)
+                        getInitProjectPermissions(userId,pipelineId,"matflow",item.power===1)
                     }
                 })
             }
@@ -44,7 +44,7 @@ const Project= (props)=>{
     },[pipelineId])
 
     const isPipeline = data => {
-        return data && data.some(item=>item.pipelineId === pipelineId)
+        return data && data.some(item=>item.id === pipelineId)
     }
 
     useEffect(()=>{

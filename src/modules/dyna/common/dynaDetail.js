@@ -101,7 +101,7 @@ const DynaDetail = props =>{
                                 <Select.Option key={"1"} value={null}>所有流水线</Select.Option>
                                 {
                                     pipelineList && pipelineList.map(item=>{
-                                        return <Select.Option value={item.pipelineId} key={item.pipelineId}>{item.pipelineName}</Select.Option>
+                                        return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
                                     })
                                 }
                             </Select>

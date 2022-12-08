@@ -1,11 +1,7 @@
 import React from "react";
 import {Profile} from "tiklab-eam-ui";
 import {message,Tooltip,Table,Space,Spin} from "antd";
-import {
-    PlayCircleOutlined,
-    ClockCircleOutlined,
-    LoadingOutlined
-} from "@ant-design/icons";
+import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import "./pipelineTable.scss";
 import EmptyText from "../../common/emptyText/emptyText";
@@ -25,10 +21,10 @@ const PipelineTable = props =>{
     //收藏
     const collectAction = record => {
         const params = {
-            pipeline:{pipelineId:record.pipelineId},
+            pipeline:{id:record.id},
         }
         updateFollow(params).then(res=>{
-            if(record.pipelineCollect===0){
+            if(record.collect===0){
                 collectMessage(res,"收藏")
             }else {
                 collectMessage(res,"取消")
@@ -46,20 +42,19 @@ const PipelineTable = props =>{
     }
 
     //去详情页面
-    const goPipelineTask= (text,record) => props.history.push(`/index/task/${record.pipelineId}/survey`)
+    const goPipelineTask= (text,record) => props.history.push(`/index/task/${record.id}/survey`)
 
-    const goHistory = record => props.history.push(`/index/task/${record.pipelineId}/structure`)
+    const goHistory = record => props.history.push(`/index/task/${record.id}/structure`)
 
     const work = record =>{
-        if(record.pipelineState === 0){
-            pipelineStartStructure(record.pipelineId).then(res=>{
-                if(res.data === 1){
-                    // setFresh(!fresh)
-                    setTimeout(()=>setFresh(!fresh),500)
+        if(record.state === 2){
+            pipelineStartStructure(record.id).then(res=>{
+                if(res.data){
+                    setFresh(!fresh)
                 }
             })
         }else {
-            killInstance(record.pipelineId).then(()=>{
+            killInstance(record.id).then(()=>{
                 setFresh(!fresh)
             })
         }
@@ -77,8 +72,8 @@ const PipelineTable = props =>{
     const columns = [
         {
             title: "流水线名称",
-            dataIndex: "pipelineName",
-            key: "pipelineName",
+            dataIndex: "name",
+            key: "name",
             width:"40%",
             ellipsis:true,
             render:(text,record)=>{
@@ -155,7 +150,7 @@ const PipelineTable = props =>{
                             <Tooltip title="运行" >
                                 <span className="pipelineTable-state" onClick={() =>work(record)}>
                                 {
-                                    record.pipelineState === 2 ?
+                                    record.state === 2 ?
                                         <PlayCircleOutlined className="actions-se"/>
                                         :
                                         <Spin indicator={<LoadingOutlined className="actions-se" spin />} />
@@ -176,7 +171,7 @@ const PipelineTable = props =>{
                                       onClick={()=>collectAction(record)}
                                 >
                                 {
-                                    record.pipelineCollect === 0 ?
+                                    record.collect === 0 ?
                                         <svg className="icon" aria-hidden="true">
                                             <use xlinkHref={`#icon-xingxing-kong`} />
                                         </svg>
@@ -199,7 +194,7 @@ const PipelineTable = props =>{
                     bordered={false}
                     columns={columns}
                     dataSource={pipelineList}
-                    rowKey={record=>record.pipelineId}
+                    rowKey={record=>record.id}
                     pagination={false}
                     locale={{emptyText: <EmptyText/>}}
                 />

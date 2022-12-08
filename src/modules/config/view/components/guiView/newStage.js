@@ -1,24 +1,25 @@
 import React,{useState,Fragment} from "react";
-import {Space} from "antd";
+import {Space,Popconfirm} from "antd";
 import {
     PlusOutlined,
     ExclamationCircleOutlined,
     TagsOutlined,
-    ShareAltOutlined
+    ShareAltOutlined,
+    DeleteOutlined
 } from "@ant-design/icons";
 import SubIcon from "../../../common/components/subIcon";
 import AddDrawer from "./addDrawer";
 
 const NewStage = props =>{
 
-    const {data,setTaskFormDrawer,validType,setDataItem,pipeline} = props
+    const {data,setTaskFormDrawer,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     const [taskSort,setTaskSort] = useState(0) // 添加新阶段的位置
     const [stages,setStages] = useState(0) // 阶段加入新任务
     const [stagesId,setStagesId] = useState("") // 阶段加入新任务
     
-    const pipelineType = pipeline.pipelineType
+    const pipelineType = pipeline.type
 
     // +新任务
     const newTask = () =>{
@@ -26,12 +27,6 @@ const NewStage = props =>{
         setStages(0)
         setStagesId("")
         setNewStageDrawer(true)
-    }
-
-    // Form详情
-    const showDetail = item =>{
-        setDataItem(item)
-        setTaskFormDrawer(true)
     }
 
     // 多阶段 串行（上）
@@ -56,6 +51,23 @@ const NewStage = props =>{
         setStages(0)
         setStagesId("")
         setNewStageDrawer(true)
+    }
+
+    // Form详情
+    const showDetail = item =>{
+        setDataItem(item)
+        setTaskFormDrawer(true)
+    }
+    
+    // 删除
+    const deletePart = (e,item) =>{
+        //屏蔽父层点击事件
+        e.stopPropagation()
+        const params = {
+            pipelineId:pipeline.id,
+            configId:item.configId
+        }
+        deleteTaskConfig(params)
     }
 
     // 效验提示
@@ -125,7 +137,7 @@ const NewStage = props =>{
                                 <div onClick={()=>showDetail(item)}
                                     className={`newStages-singleJob-content ${valid(item.configId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
                                 >
-                                    <Space>
+                                    <div className="newStages-job-sub">
                                         <span className="newStages-job-title">
                                             <SubIcon type={item.type}/>
                                         </span>
@@ -134,7 +146,19 @@ const NewStage = props =>{
                                             <ExclamationCircleOutlined />
                                         </span>
                                         }
-                                    </Space>
+                                    </div>
+                                    <Popconfirm
+                                        placement="topRight"
+                                        title="你确定删除吗"
+                                        onConfirm={e=>deletePart(e,item)}
+                                        onCancel={e=>e.stopPropagation()}
+                                        okText="确定"
+                                        cancelText="取消"
+                                    >
+                                        <div className="newStages-job-del" onClick={e=>e.stopPropagation()}>
+                                            <DeleteOutlined />
+                                        </div>
+                                    </Popconfirm>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +171,7 @@ const NewStage = props =>{
 
     // 多阶段的btn
     const renderMultiBtn = (item,index) =>{
-        return  item.taskType>10 &&
+        return !item.code &&
             <div className="group-flow">
                 <div className="group-flow_multiBtn">
                     <svg className={`icon group-flow_btn_i`}
@@ -186,16 +210,28 @@ const NewStage = props =>{
                                     <div onClick={()=>showDetail(stage)}
                                         className={`newStages-job-content ${valid(stage.configId)?"job-name":""} ${stage.type<10?"newStages-job-code":""}`}
                                     >
-                                        <Space>
+                                        <div className="newStages-job-sub">
                                             <span className="newStages-job-title">
                                                 <SubIcon type={stage.type}/>
                                             </span>
                                             {valid(stage.configId) &&
                                                 <span className="newStages-job-warn">
-                                                <ExclamationCircleOutlined />
-                                            </span>
+                                                    <ExclamationCircleOutlined />
+                                                </span>
                                             }
-                                        </Space>
+                                        </div>
+                                        <Popconfirm
+                                            placement="topRight"
+                                            title="你确定删除吗"
+                                            onConfirm={e=>deletePart(e,stage)}
+                                            onCancel={e=>e.stopPropagation()}
+                                            okText="确定"
+                                            cancelText="取消"
+                                        >
+                                            <div className="newStages-job-del" onClick={e=>e.stopPropagation()}>
+                                                <DeleteOutlined />
+                                            </div>
+                                        </Popconfirm>
                                     </div>
                                     {
                                         stage.type>10 &&
@@ -217,22 +253,19 @@ const NewStage = props =>{
         </Fragment>
     }
 
-    const render = () =>{
-        if(data && data.length > 0){
-            return  <div className="group-flow">
-                        <div className={`${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`} />
-                    </div>
-        }
-    }
-
     return(
        <>
             {
                 data && data.map((item,index) =>{
-                    return  pipeline && pipeline.pipelineType===1 ? renderSingleTask(item,index): renderMultitask(item,index)
+                    return  pipeline && pipeline.type===1 ? renderSingleTask(item,index): renderMultitask(item,index)
                 })
             }  
-           {render()}
+           {
+                data && data.length>0 &&
+                <div className="group-flow">
+                    <div className={`${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`} />
+                </div>
+           }
             <div className="group-create">
                 <div className="group-head">
                     <div className="name" style={{opacity:0}}/>
@@ -241,7 +274,7 @@ const NewStage = props =>{
                     <div className="newStages-step"  >
                         <div className="newStages-content">
                             <div className="newStages-job">
-                                <div onClick={()=>newTask()} className="newStages-singleJob-content">
+                                <div onClick={()=>newTask()} className="newStages-singleJob-content newStages-btn">
                                     <PlusOutlined/>
                                     <span style={{paddingLeft:5}}>新任务</span>
                                 </div>

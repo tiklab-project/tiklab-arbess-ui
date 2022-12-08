@@ -53,6 +53,7 @@ const Inputs = props =>{
         if(x(e.target.value,dataItem[name])){
             const obj = {}
             obj[name] = e.target.value
+            dataItem[name] = e.target.value
             const params = {
                 pipelineId,
                 taskType:dataItem.type,

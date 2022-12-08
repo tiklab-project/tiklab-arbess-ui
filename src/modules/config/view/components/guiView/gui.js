@@ -26,13 +26,13 @@ const Gui = props =>{
                         pipeline={pipeline}
                         setTaskFormDrawer={setTaskFormDrawer}
                         setDataItem={setDataItem}
+                        deleteTaskConfig={deleteTaskConfig}
                     />
                 </div>
 
                 <FormDetailsDrawer
                     dataItem={dataItem}
                     pipelineId={pipelineId}
-                    deleteTaskConfig={deleteTaskConfig}
                     taskFormDrawer={taskFormDrawer}
                     setTaskFormDrawer={setTaskFormDrawer}
                     configValid={configValid}

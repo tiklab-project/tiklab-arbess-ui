@@ -136,7 +136,6 @@ export class PipelineStore {
             UpdatePipeline(values).then(res=>{
                 if(res.code===0){
                     message.info("更新成功")
-                    this.findAllPipelineStatus()
                 }
                 resolve(res)
             }).catch(error=>{

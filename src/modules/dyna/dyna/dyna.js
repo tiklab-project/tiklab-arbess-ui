@@ -31,7 +31,7 @@ const Dyna = props =>{
     const pipeline = data =>{
         const newArr = []
         data && data.map(item => {
-            newArr.push(item.pipelineId)
+            newArr.push(item.id)
         })
         return newArr
     }

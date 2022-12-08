@@ -1,7 +1,7 @@
 import React from "react";
+import {Tooltip} from "antd";
 import {observer} from "mobx-react";
 import StrEmpty from "./strEmpty";
-import StrLeftList from "./strLeftList";
 import StrLeftDropdown from "./strLeftDropdown";
 import Page from "../../../common/page/page";
 
@@ -20,32 +20,57 @@ const StrLeft = props =>{
         })
     }
 
+    const title = runStatus =>{
+        switch (runStatus) {
+            case 1:
+                return "执行失败"
+            case 10:
+                return "执行成功"
+            case 20:
+                return "执行停止"
+            case 0:
+                return "正在运行"        
+        
+        }
+    }
+
     const renderLeftPageList = (item,i) => {
-        return  <StrLeftList
-                    key={i}
-                    onClick={()=>showHistory(item,i)}
-                    state={status(item.runStatus)}
-                    index={index}
-                    type={i+1}
-                    name={item.user && item.user.name}
-                    createTime={item.createTime}
-                    title={`# ${item.findNumber}`}
-                />
+        return(
+            <div  key={i} onClick={()=>showHistory(item,i)} className={`history-content-list-ul ${index===i+1 ? "history-content-list_active": ""}`}>
+                <div className="list-title">{`# ${item.findNumber}`}</div>
+                <div className="list-group">
+                    <div className="list-group-item">
+                        <div className="list-state">
+                            <span>状态 : <Tooltip title={title(item.runStatus)}>
+                                            {status(item.runStatus)}
+                                        </Tooltip>
+                            </span> 
+                        </div>
+                        <div className="list-one">执行人 : {item.user && item.user.nickname}</div>
+                    </div>
+                    <div className="list-time"> 执行时间 : {item.createTime}</div>
+                </div>
+            </div>
+        )
     }
     
     const renderExecState = execState =>{
-        return execState===""?
-            null
-            :
-            <StrLeftList
-                onClick={()=>setIndex(0)}
-                index={index}
-                name={execState && execState.execName}
-                state={status(5)}
-                type={0}
-                createTime={execState && execState.createTime}
-                title={`运行中`}
-            />
+        return execState!=="" &&
+        <div onClick={()=>setIndex(0)} className={`history-content-list-ul ${index===0 ? "history-content-list_active": ""}`}>
+            <div className="list-title">运行中</div>
+            <div className="list-group">
+                <div className="list-group-item">
+                    <div className="list-state">
+                        <span>状态 : <Tooltip title={title(0)}>
+                                        {status(0)}
+                                    </Tooltip>
+                        </span> 
+                    </div>
+                    <div className="list-one">执行人 : {execState && execState[0].execUser}</div>
+                </div>
+                <div className="list-time"> 执行时间 : {execState && execState[0].createTime}</div>
+            </div>
+        </div>
     }
 
     const changPage = pages =>{

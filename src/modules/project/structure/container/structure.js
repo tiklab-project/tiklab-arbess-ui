@@ -152,12 +152,11 @@ const Structure = props => {
                     status={status}
                 />
                 <div className="structure-content-right">
-                    <BreadcrumbContent firstItem={pipeline.pipelineName} secondItem={"历史"}/>
+                    <BreadcrumbContent firstItem={pipeline.name} secondItem={"历史"}/>
                     {
                         execState !== ""  || leftPageList && leftPageList.length > 0 ?
                             <StructureRight
                                 structureStore={structureStore}
-                                pipelineId={pipelineId}
                                 pipeline={pipeline}
                                 status={status}
                             />

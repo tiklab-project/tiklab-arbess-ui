@@ -131,19 +131,19 @@ const routers=[
                 component: Authorize,
             },
             {
-                path:"/index/task/:pipelineId",
+                path:"/index/task/:id",
                 component: Project,
                 routes:[
                     {
-                        path:"/index/task/:pipelineId/survey",
+                        path:"/index/task/:id/survey",
                         component: Survey
                     },
                     {
-                        path:"/index/task/:pipelineId/dyna",
+                        path:"/index/task/:id/dyna",
                         component: PipelineDyan
                     },
                     {
-                        path:"/index/task/:pipelineId/config",
+                        path:"/index/task/:id/config",
                         component: Config
                     },
                     {
@@ -151,24 +151,24 @@ const routers=[
                         component: Config
                     },
                     {
-                        path:"/index/task/:pipelineId/structure",
+                        path:"/index/task/:id/structure",
                         component: Structure
                     },
                     {
-                        path:"/index/task/:pipelineId/assembly",
+                        path:"/index/task/:id/assembly",
                         component: ProjectSet,
                         routes:[
 
                             {
-                                path:"/index/task/:pipelineId/assembly/role",
+                                path:"/index/task/:id/assembly/role",
                                 component: DomainRoleContent
                             },
                             {
-                                path:"/index/task/:pipelineId/assembly/redel",
+                                path:"/index/task/:id/assembly/redel",
                                 component: ProjectSetReDel
                             },
                             {
-                                path:"/index/task/:pipelineId/assembly/user",
+                                path:"/index/task/:id/assembly/user",
                                 component: ProjectSetUser
                             }
                         ]

@@ -75,7 +75,7 @@ const Survey = props =>{
         <div className="survey">
             <div className="survey-content home-limited">
                 <div className="survey-top">
-                    <BreadcrumbContent firstItem={pipeline.pipelineName} secondItem={"概况"}/>
+                    <BreadcrumbContent firstItem={pipeline.name} secondItem={"概况"}/>
                 </div>
                 <div className="survey-content">
                     <div className="survey-census">

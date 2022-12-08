@@ -16,7 +16,7 @@ const View = props =>{
 
     const {findAllTaskConfig,isPlugin,setIsPlugin,isFindConfig,isLoading} = configStore
 
-    const {pipelineId,pipeline} = pipelineStore
+    const {pipelineId} = pipelineStore
 
     const pluginStore = useSelector(state =>state.pluginStore)
 
@@ -37,7 +37,7 @@ const View = props =>{
     // 表单初始化
     useEffect(()=>{
         pipelineId && findAllTaskConfig(pipelineId)
-    },[pipeline,isFindConfig])
+    },[pipelineId,isFindConfig])
 
     const changeView = type => {
         setView(type)

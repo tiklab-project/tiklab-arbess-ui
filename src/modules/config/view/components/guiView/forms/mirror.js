@@ -43,6 +43,7 @@ const MirrorContent = forwardRef((props,ref)=>{
     const onOk = () =>{
         const obj = {}
         obj[name] = mirrorRefs.current.editor.getValue()
+        dataItem[name] = mirrorRefs.current.editor.getValue()
         if(x(obj[name],mirrorValue)){
             const params = {
                 pipelineId,

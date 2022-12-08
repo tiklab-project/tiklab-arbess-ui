@@ -5,7 +5,7 @@ import Subtitle from "../../../config/common/components/subtitle";
 
 const StrRightExecute = props => {
 
-    const {pipeline,status,execState,killInstance,rightExecuteData,pipelineId} = props
+    const {pipeline,status,execState,killInstance,rightExecuteData} = props
     const [isActiveSlide,setIsActiveSlide] = useState(true) // 日志打印滚动条状态
 
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
@@ -76,7 +76,6 @@ const StrRightExecute = props => {
             }
             const zz = execState[groupIndex].timeList
             const zIndex =  index+1
-
             if(groupIndex === execState.length-1){
                 if (zIndex < zz.length){
                     return  status(10) //成功
@@ -115,22 +114,21 @@ const StrRightExecute = props => {
     }
 
     const multiTimes = (groupIndex,index) =>{
-        if(execState){
+        if(execState){        
             if(groupIndex >= execState.length){
                 return getTime(0)
             }
             const zz = execState[groupIndex].timeList
-            let time = zz.get(index)
             if(zz.length-1 < index){
                 return getTime(0)
             }
+            let time = zz.get(index)
             return getTime(time)
         }
     }
 
     // 多阶段
     const renderMulti = (group,groupIndex) =>{
-
         return(
             <div className="str-multi-card" key={groupIndex}>
                 {
@@ -180,20 +178,20 @@ const StrRightExecute = props => {
     }
 
     const cease = () => {
-        killInstance(pipelineId)
+        killInstance(pipeline.id)
     }
 
     return(
         <>
             <StrRightCue
-                way={execState && execState.runWay}
-                time={getTime(execState && execState.runTime)}
+                way={execState && execState[0].runWay}
+                time={getTime(execState && execState[0].runTime)}
                 action={cease}
                 title={"运行中"}
                 actionTitle={"停止"}
             />
             {
-                pipeline && pipeline.pipelineType===1? 
+                pipeline && pipeline.type===1?
                 <div className="str-single">
                     {
                         rightExecuteData && rightExecuteData.map((item,index)=>{

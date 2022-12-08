@@ -8,7 +8,7 @@ import {
     ClockCircleOutlined,
     CaretDownOutlined
 } from "@ant-design/icons";
-import {inject,observer} from "mobx-react";
+import {observer} from "mobx-react";
 
 const ProjectAside = props =>{
 
@@ -52,23 +52,23 @@ const ProjectAside = props =>{
 
     // 切换流水线的路由跳转
     const changePipeline = item => {
-        if(pipelineId!==item.pipelineId){
+        if(pipelineId!==item.id){
             if(path.indexOf(`/index/task/${pipelineId}/assembly`) === 0) {
-                props.history.push(`/index/task/${item.pipelineId}/assembly/${lastPath}`)
+                props.history.push(`/index/task/${item.id}/assembly/${lastPath}`)
             }else {
-                props.history.push(`/index/task/${item.pipelineId}/${lastPath}`)
+                props.history.push(`/index/task/${item.id}/${lastPath}`)
             }
         }
     }
 
     // 切换项目菜单列表
     const pipelineMenu = item =>{
-        return  <div onClick={()=>{changePipeline(item)}} key={item.pipelineId} className="pipeline-opt-item">
+        return  <div onClick={()=>{changePipeline(item)}} key={item.id} className="pipeline-opt-item">
                     <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
-                        {item.pipelineName.substring(0,1).toUpperCase()}
+                        {item.name.substring(0,1).toUpperCase()}
                     </span>
                     <span className="pipeline-opt-name">
-                        {item.pipelineName}
+                        {item.name}
                     </span>
                 </div>
     }
@@ -113,7 +113,7 @@ const ProjectAside = props =>{
                          onClick={(e)=>e.preventDefault()}
                      >
                           <span className={`dropdowns_icon mf-icon-${pipeline.color}`}>
-                             {pipeline && pipeline.pipelineName.substring(0,1).toUpperCase()}
+                             {pipeline && pipeline.name.substring(0,1).toUpperCase()}
                          </span>
                          <span>
                              <CaretDownOutlined />

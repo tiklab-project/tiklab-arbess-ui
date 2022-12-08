@@ -53,7 +53,7 @@ const Info = props =>{
                 {
                     infoData && infoData.map(item=>{
                         return  <div className="info-list" key={item.title}>
-                                    <div>{item.title}</div>
+                                    <div className="info-title">{item.title}</div>
                                     <div>{item.data}</div>
                                 </div>
                     })

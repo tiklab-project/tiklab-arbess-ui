@@ -6,7 +6,7 @@ import StrRightItem from "./strRightItem";
 
 const StrRight = props =>{
 
-    const {structureStore,status,pipelineId,pipeline} = props
+    const {structureStore,status,pipeline} = props
 
     const {deleteHistoryLog,killInstance,rightFlowData,modeData,index,rightExecuteData,execState} = structureStore
 
@@ -23,7 +23,6 @@ const StrRight = props =>{
                         status={status}
                         execState={execState}
                         killInstance={killInstance}
-                        pipelineId={pipelineId}
                     />
                     :
                     <StrRightItem

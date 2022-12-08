@@ -130,7 +130,6 @@ export class ConfigStore{
 
     @action
     findAllTaskConfig = values =>{
-        this.isLoading = true
         const param = new FormData()
         param.append("pipelineId", values)
         return new Promise((resolve, reject) => {
@@ -138,7 +137,6 @@ export class ConfigStore{
                 if(res.code===0){
                     this.data = res.data===null?[]:res.data
                 }
-                this.isLoading = false
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

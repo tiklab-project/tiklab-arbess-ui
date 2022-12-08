@@ -57,22 +57,22 @@ const PipelineAddInfo = props =>{
     const onOk = value => {
         if(set){
             const params={
-                pipelineId:pipelineId,
-                pipelineName:value.pipelineName===""?pipeline.pipelineName:value.pipelineName,
-                pipelinePower:powerType
+                id:pipelineId,
+                name:value.name===""?pipeline.name:value.name,
+                power:powerType
             }
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
-                    value.pipelineName!=="" && (pipeline.pipelineName = value.pipelineName)
+                    value.name!=="" && (pipeline.name = value.name)
                     props.history.push(`/index/task/${pipelineId}/survey`)
                 }
             })
         }else {
             const params = {
-                pipelineType:pipelineType,
-                pipelineTemplate: templateType===0 ? 1:templateLis[templateType-1].type,
-                pipelineName: value.pipelineName,
-                pipelinePower: powerType,
+                type:pipelineType,
+                template: templateType===0 ? 1:templateLis[templateType-1].type,
+                name: value.name,
+                power: powerType,
                 userList: member
             }
             createPipeline(params).then(res => {
@@ -192,11 +192,11 @@ const PipelineAddInfo = props =>{
                 form={form}
                 autoComplete="off"
                 layout={"vertical"}
-                initialValues={{pipelineName:pipeline && pipeline.pipelineName}}
+                initialValues={{name:pipeline && pipeline.name}}
             >
                 <Form.Item
                     label={"流水线名称"}
-                    name="pipelineName"
+                    name="name"
                     rules={rules(set)}
                 >
                     <Input

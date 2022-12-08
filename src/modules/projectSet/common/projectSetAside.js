@@ -11,9 +11,7 @@ const ProjectSetAside = props =>{
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
-    const {pipeline,setLastPath} = pipelineStore
-
-    const pipelineId = pipeline.pipelineId
+    const {setLastPath,pipelineId} = pipelineStore
 
     useEffect(()=>{
         setLastPath(path.substring(path.lastIndexOf('/') + 1))

@@ -26,7 +26,7 @@ const PipelineDyna = props =>{
     const goBack = () => props.history.push(`/index/task/${pipelineId}/survey`)
 
     return  <DynaDetail
-                firstItem={pipeline.pipelineName}
+                firstItem={pipeline.name}
                 secondItem={"流水线动态详情"}
                 goBack={goBack}
                 findlogpage={findlogpage}

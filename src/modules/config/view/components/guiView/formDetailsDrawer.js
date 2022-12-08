@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
-import {Drawer,Form,Popconfirm} from "antd";
-import {CloseOutlined,DeleteOutlined} from "@ant-design/icons";
+import {Drawer,Form} from "antd";
+import {CloseOutlined} from "@ant-design/icons";
 import SubIcon from "../../../common/components/subIcon";
 import Btn from "../../../../common/btn/btn";
 import CodeGitOrGitlab from "./forms/codeGitOrGitlab";
@@ -16,7 +16,7 @@ import "./formDetailsDrawer.scss";
 
 const FormDetailsDrawer = props =>{
 
-    const {configValid,pipelineId,deleteTaskConfig,taskFormDrawer,setTaskFormDrawer,dataItem} = props
+    const {configValid,pipelineId,taskFormDrawer,setTaskFormDrawer,dataItem} = props
 
     const [form] = Form.useForm()
 
@@ -101,15 +101,6 @@ const FormDetailsDrawer = props =>{
         })
     },[taskFormDrawer])
 
-    const deletePart = dataItem =>{
-        const params = {
-            pipelineId,
-            configId:dataItem.configId
-        }
-        deleteTaskConfig(params)
-        setTaskFormDrawer(false)
-    }
-
     const renderForms = dataItem =>{
         switch (dataItem.type){
             case 1:
@@ -152,17 +143,6 @@ const FormDetailsDrawer = props =>{
                 <div className="wrapper-head">
                     <div className="wrapper-head-title">
                         <SubIcon type={dataItem.type}/>
-                        <Popconfirm
-                            placement="topRight"
-                            title="你确定删除吗"
-                            onConfirm={()=>deletePart(dataItem)}
-                            okText="确定"
-                            cancelText="取消"
-                        >
-                            <span className="deletePart">
-                                <DeleteOutlined />
-                            </span>
-                        </Popconfirm>
                     </div>
                     <Btn
                         onClick={()=>setTaskFormDrawer(false)}

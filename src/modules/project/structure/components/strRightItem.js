@@ -30,12 +30,12 @@ const StrRightItem = props =>{
                 <div className="card-top">
                     <span className="card-top-state">{status(item.runState)}</span>
                     <span className="card-top-title">
-                        <Subtitle type={item.type}/>
+                        <Subtitle type={item.taskType}/>
                     </span>
                 </div>
     
                 <div className="card-bt" >
-                    <span className="card-bt-log" onClick={()=>log && log(item)}>
+                    <span className="card-bt-log" onClick={()=>log(item)}>
                         日志
                     </span>
                     <span className="card-bt-time">
@@ -56,12 +56,12 @@ const StrRightItem = props =>{
                                     <div className="card-top">
                                         <span className="card-top-state">{status(item.runState)}</span>
                                         <span className="card-top-title">
-                                            <Subtitle type={item.type}/>
+                                            <Subtitle type={item.taskType}/>
                                         </span>
                                     </div>
                         
                                     <div className="card-bt" >
-                                        <span className="card-bt-log" onClick={()=>log && log(item)}>
+                                        <span className="card-bt-log" onClick={()=>log(item)}>
                                             日志
                                         </span>
                                         <span className="card-bt-time">
@@ -91,13 +91,13 @@ const StrRightItem = props =>{
         <>
             <StrRightCue
                 way={modeData && modeData.runWay}
-                time={getTime(modeData && modeData.runTime)}
                 title={`# ${modeData && modeData.findNumber}`}
+                time={getTime(modeData && modeData.runTime)}
                 action={del}
                 actionTitle={"删除"}
             />
             {
-                pipeline && pipeline.pipelineType===1?
+                pipeline && pipeline.type===1?
                 <div className="str-single">
                     {
                         rightFlowData && rightFlowData.map((item,index)=>{

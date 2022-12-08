@@ -85,7 +85,7 @@ const MessageDrawer = props =>{
     // 判断流水线是否还存在
     const isPipeline = id =>{
         const arr = id.split('/')
-        return pipelineList && pipelineList.some(item=>item.pipelineId===arr[3])
+        return pipelineList && pipelineList.some(item=>item.id===arr[3])
     }
 
     const delMessage = (e,item) =>{

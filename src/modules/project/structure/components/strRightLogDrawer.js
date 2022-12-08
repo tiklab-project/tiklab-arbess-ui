@@ -35,7 +35,7 @@ const StrRightLogDrawer = props =>{
                 <div className="structureDrawer-content">
                     <div className="log">
                         <div className="log-content" style={{whiteSpace:"pre-wrap"}}>
-                            {drawerContent && drawerContent.runLog}
+                            {drawerContent && drawerContent.runLog?drawerContent.runLog:"暂无日志"}
                         </div>
                     </div>
                  </div>

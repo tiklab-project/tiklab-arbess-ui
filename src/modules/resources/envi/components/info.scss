@@ -1,11 +1,12 @@
 .info{
-    max-width: 900px;
     &-content{
         .info-list{
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            height: 50px;
+            height: 40px;
+        }
+        .info-title{
+            width: 150px;
         }
     }
 }
