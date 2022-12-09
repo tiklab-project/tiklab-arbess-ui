@@ -17,13 +17,13 @@ const Trigger = props =>{
     const {updateTriggerConfig,deleteTriggerConfig,createTriggerConfig,findAllTriggerConfig,oneAllTriggerConfig,triggerData,
         isFindTrigger
     } = triggerStore
-    const {pipelineId} = pipelineStore
+    const {pipeline,pipelineId} = pipelineStore
 
     const [triggerTimeVisible,setTriggerTimeVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
     useEffect(()=>{
-        findAllTriggerConfig(pipelineId)
+        pipelineId && findAllTriggerConfig(pipelineId)
     },[isFindTrigger,pipelineId])
     
     const addTriggerTime = item => {

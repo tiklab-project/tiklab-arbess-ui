@@ -49,13 +49,16 @@ const Inputs = props =>{
     }
 
     const onBlur = e => {
-        // 值是否个更改
-        if(x(e.target.value,dataItem[name])){
+        /*
+            x(e.target.value,dataItem[name]) -- 值是否个更改
+            validation(e.target.value,dataItem.type,name) -- 效验
+        */
+        if(x(e.target.value,dataItem[name]) && validation(e.target.value,dataItem.type,name)){
             const obj = {}
             obj[name] = e.target.value
             dataItem[name] = e.target.value
             const params = {
-                pipelineId,
+                pipeline:{id:pipelineId},
                 taskType:dataItem.type,
                 configId:dataItem.configId,
                 values:obj,
@@ -84,30 +87,14 @@ const Inputs = props =>{
                     case 1:
                     case 4:
                         rule =  [
-                            {required:true, message: ""},
+                            {required:true, message:`请输入${label}`},
                             {pattern: validCodeGit, message:"请输入正确的git地址"},
-                            ({ getFieldValue }) => ({
-                                validator(rule,value) {
-                                    if(!value || value.trim()===""){
-                                        return Promise.reject(`请输入${label}`);
-                                    }
-                                    return Promise.resolve()
-                                }
-                            }),
                         ]
                         break
                     case 5:
                         rule =  [
-                            {required: true, message: ""},
+                            {required: true, message:`请输入${label}`},
                             {pattern: validCodeSvn,message:"请输入正确的svn地址"},
-                            ({ getFieldValue }) => ({
-                                validator(rule,value) {
-                                    if(!value || value.trim()===""){
-                                        return Promise.reject(`请输入${label}`)
-                                    }
-                                    return Promise.resolve()
-                                }
-                            })
                         ]
                 }
             }

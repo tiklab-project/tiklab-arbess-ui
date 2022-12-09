@@ -39,7 +39,7 @@ const CodeGiteeOrGithub = props =>{
         const obj = {}
         obj[key] = value
         const params = {
-            pipelineId,
+            pipeline:{id:pipelineId},
             taskType:dataItem.type,
             values:obj,
             configId:dataItem.configId,

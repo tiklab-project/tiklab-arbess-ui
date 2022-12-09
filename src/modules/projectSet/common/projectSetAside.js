@@ -22,7 +22,7 @@ const ProjectSetAside = props =>{
     // 侧边流水线设置的第二级导航
     const secondRouter = [
         {
-            key:`/index/task/${pipelineId}/assembly/redel`,
+            key:`/index/task/${pipelineId}/assembly/set`,
             label:"流水线设置",
             enCode:"pipeline_seting",
         },

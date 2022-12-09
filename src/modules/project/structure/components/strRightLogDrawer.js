@@ -25,9 +25,9 @@ const StrRightLogDrawer = props =>{
                         setVisible={setVisible}
                         title={
                             <>
-                                <HlineIcon type={drawerContent.type}/>
+                                <HlineIcon type={drawerContent.taskType}/>
                                 &nbsp;-- &nbsp;
-                                <Subtitle type={drawerContent.type}/>
+                                <Subtitle type={drawerContent.taskType}/>
                             </>
                         }
                     />

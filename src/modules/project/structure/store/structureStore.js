@@ -3,9 +3,9 @@ import {action,observable} from "mobx";
 import {
     DeleteHistoryLog,
     FindAllPipelineConfig,
-    FindExecState,
+    FindPipelineState,
     FindHistoryLog,
-    FindStructureState,
+    PipelineRunStatus,
     KillInstance,
     PipelineStartStructure,
     FindPageHistory,
@@ -97,11 +97,11 @@ export class StructureStore {
 
     // 判断当前流水线是否在构建
     @action
-    findExecState = async value =>{
+    findPipelineState = async value =>{
         const param = new FormData()
         param.append("pipelineId", value)
         return new Promise((resolve, reject) => {
-            FindExecState(param).then(res=>{
+            FindPipelineState(param).then(res=>{
                 if(res.code===0){
                     if(res.data===1){
                         this.index = 0
@@ -120,10 +120,10 @@ export class StructureStore {
 
     //构建状态
     @action
-    findStructureState = async value =>{
+    pipelineRunStatus = async value =>{
         const param = new FormData()
         param.append("pipelineId", value)
-        const data = await FindStructureState(param)
+        const data = await PipelineRunStatus(param)
         if(data.code===0 && data.data){
             this.execState = data.data
         }

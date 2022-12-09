@@ -36,7 +36,7 @@ const StrLeft = props =>{
 
     const renderLeftPageList = (item,i) => {
         return(
-            <div  key={i} onClick={()=>showHistory(item,i)} className={`history-content-list-ul ${index===i+1 ? "history-content-list_active": ""}`}>
+            <div  key={i} onClick={()=>showHistory(item,i)} className={`history-list-ul ${index===i+1 ? "history-list-active": ""}`}>
                 <div className="list-title">{`# ${item.findNumber}`}</div>
                 <div className="list-group">
                     <div className="list-group-item">
@@ -56,7 +56,7 @@ const StrLeft = props =>{
     
     const renderExecState = execState =>{
         return execState!=="" &&
-        <div onClick={()=>setIndex(0)} className={`history-content-list-ul ${index===0 ? "history-content-list_active": ""}`}>
+        <div onClick={()=>setIndex(0)} className={`history-list-ul ${index===0 ? "history-list-active": ""}`}>
             <div className="list-title">运行中</div>
             <div className="list-group">
                 <div className="list-group-item">
@@ -79,7 +79,7 @@ const StrLeft = props =>{
     }
 
     return(
-        <div className="structure-content-left">
+        <div className="structure-left">
             <StrLeftDropdown
                 {...props}
                 setState={setState}
@@ -89,30 +89,28 @@ const StrLeft = props =>{
                 pipelineUserList={pipelineUserList}
                 pipelineId={pipelineId}
             />
-            <div className="structure-content-left-history">
-                <div className="history-content">
-                    {
-                        execState || leftPageList && leftPageList.length > 0 ?
-                            <>
-                                <div className="history-content-list">
-                                
-                                    { renderExecState(execState) }
+            <div className="structure-left-history">
+                {
+                    execState || leftPageList && leftPageList.length > 0 ?
+                        <>
+                            <div className="history-list">
+                            
+                                { renderExecState(execState) }
 
-                                    { leftPageList && leftPageList.map((item,i)=>{
-                                        return renderLeftPageList(item,i)
-                                    })}
-                                    
-                                </div>
-                                <Page
-                                    pageCurrent={pageCurrent}
-                                    changPage={changPage}
-                                    page={page}
-                                />
-                            </>
-                            :
-                            <StrEmpty isData={true}/>
-                    }
-                </div>
+                                { leftPageList && leftPageList.map((item,i)=>{
+                                    return renderLeftPageList(item,i)
+                                })}
+                                
+                            </div>
+                            <Page
+                                pageCurrent={pageCurrent}
+                                changPage={changPage}
+                                page={page}
+                            />
+                        </>
+                        :
+                        <StrEmpty isData={true}/>
+                }
             </div>
         </div>
     )

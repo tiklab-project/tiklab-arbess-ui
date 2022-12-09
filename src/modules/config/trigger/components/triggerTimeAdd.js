@@ -39,7 +39,7 @@ const TriggerTimeAdd = props =>{
                     time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
                     timeList:fieldsValue.timeList
                 },
-                pipeline:{pipelineId},
+                pipeline:{id:pipelineId},
                 taskType:81,
             }
             createTriggerConfig(value)
@@ -50,7 +50,7 @@ const TriggerTimeAdd = props =>{
                     time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
                     timeList:fieldsValue.timeList
                 },
-                pipeline:{pipelineId},
+                pipeline:{id:pipelineId},
                 taskType:81,
                 configId:formValue.configId
             }

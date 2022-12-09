@@ -18,7 +18,7 @@ const Deploy = props =>{
     
     const changDeployType = value => {
         const params = {
-            pipelineId,
+            pipeline:{id:pipelineId},
             taskType:dataItem.type,
             values:{authType:value},
             configId:dataItem.configId,

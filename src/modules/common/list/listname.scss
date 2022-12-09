@@ -1,13 +1,4 @@
 
-.mf-listname{
-    display: inline-block;
-    max-width: 260px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-}
-
 .mf-listname-href{
     cursor: pointer;
 }
@@ -20,6 +11,7 @@
     border-radius: 4px;
     text-align: center;
     color: black;
+    margin-right: 8px;
 }
 
 .mf-listname-name{

@@ -4,7 +4,13 @@ const HIcon = props =>{
 
     const {type} = props
 
-    const icon = type =>{
+    const renderIcon = icon =>{
+        return  <svg className="icon" aria-hidden="true">
+                    <use xlinkHref={`#icon-${icon}`} />
+                </svg>
+    }
+
+    const iconType = type =>{
         const zz = Math.floor(type/10)
         switch (zz) {
             case 0: return renderIcon("suyuanmabiaoqian")
@@ -17,17 +23,10 @@ const HIcon = props =>{
             case 7: return renderIcon("jiaoben")
             case 8: return renderIcon("chufa")
         }
-
-    }
-
-    const renderIcon = icon =>{
-        return  <svg className="icon" aria-hidden="true">
-                    <use xlinkHref={`#icon-${icon}`} />
-                </svg>
     }
 
     return  <>
-                {icon(type)}
+                {iconType(type)}
             </>
 }
 

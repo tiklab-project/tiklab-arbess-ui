@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import {
     CaretRightOutlined,
     LoadingOutlined,
@@ -20,11 +20,12 @@ const Config = props =>{
     const {pipelineStore,configStore,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validType,data,setOpt,valid} = configStore
-    const {pipeline,pipelineId} = pipelineStore
+    const {validType,data,setOpt} = configStore
+    const {pipeline} = pipelineStore
 
     const [processVisible,setProcessVisible] = useState(false)
     const [type,setType] = useState(1)
+    const pipelineId = pipeline.id
 
     const run = () => {
         // 改变按钮
@@ -94,10 +95,10 @@ const Config = props =>{
                         }
                     </div>
                     <div className="config-valid">
-                        {valid && valid.length > 0 ?
+                        {validType && validType.length > 0 ?
                             <span>
                                 <ExclamationCircleOutlined style={{fontSize:16}}/> &nbsp;
-                                <span className="config-valid-num">{valid && valid.length}项未配置</span>
+                                <span className="config-valid-num">{validType && validType.length}项未配置</span>
                             </span> :
                             null}
                     </div>
@@ -122,7 +123,10 @@ const Config = props =>{
             </div>
             {
                 type === 1 &&
-                <View/>
+                <View
+                    configStore={configStore}
+                    pipelineStore={pipelineStore}
+                />
             }
             {
                 type===2 &&

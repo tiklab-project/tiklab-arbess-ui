@@ -33,7 +33,7 @@ const Config = AsyncComponent(()=>import("./modules/config/common/container/conf
 
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
-const ProjectSetReDel=AsyncComponent(()=>import("./modules/projectSet/reDel/projectSet"))
+const ProjectSetting=AsyncComponent(()=>import("./modules/projectSet/set/projectSet"))
 const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
 
 /* 系统设置 */
@@ -46,8 +46,10 @@ const Server=AsyncComponent(()=>import("./modules/resources/server/container/ser
 const Envi=AsyncComponent(()=>import("./modules/resources/envi/container/envi"))
 const Info=AsyncComponent(()=>import("./modules/resources/envi/container/info"))
 
+/* 插件 */
 const Plugin=AsyncComponent(()=>import("./modules/system/plug-in/plugin"))
 
+/* 权限 */
 const SystemFeature=AsyncComponent(()=>import("./modules/system/privilege/systemFeature"))
 const SystemRole=AsyncComponent(()=>import("./modules/system/privilege/systemRole"))
 const SystemRoleTrue=AsyncComponent(()=>import("./modules/system/privilege/systemRoleTrue"))
@@ -55,17 +57,20 @@ const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectR
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 const DomainRoleContent=AsyncComponent(()=>import("./modules/system/privilege/domainRole"))
 
+/* 消息 */
 const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
 const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messageTemplate"))
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
 
+/* 日志 */
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
 const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
 const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
 const LogType=AsyncComponent(()=>import("./modules/system/oplog/logType"))
 
+/* 代办 */
 const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
 const TaskList=AsyncComponent(()=>import("./modules/system/todotask/taskList"))
 const TodoTemp=AsyncComponent(()=>import("./modules/system/todotask/todoTemp"))
@@ -75,6 +80,7 @@ const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 
+/* 版本与许可证 */
 const Version=AsyncComponent(()=>import("./modules/system/licence/version"))
 const Licence=AsyncComponent(()=>import("./modules/system/licence/licence"))
 
@@ -164,8 +170,8 @@ const routers=[
                                 component: DomainRoleContent
                             },
                             {
-                                path:"/index/task/:id/assembly/redel",
-                                component: ProjectSetReDel
+                                path:"/index/task/:id/assembly/set",
+                                component: ProjectSetting
                             },
                             {
                                 path:"/index/task/:id/assembly/user",
@@ -228,7 +234,7 @@ const routers=[
                         component: TaskList,
                     },
                     {
-                        path: "/index/system/myTodoTask",
+                        path: "/index/system/todoTask",
                         component: MyTodoTask,
                     },
                     {

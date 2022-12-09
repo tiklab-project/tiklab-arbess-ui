@@ -6,19 +6,14 @@
         display: flex;
         flex-direction: row;
         height: 100%;
-        &-left {
+        .structure-left{
             height: 100%;
             width: 350px;
             min-width: 350px;
             background: var(--mf-backdrop-color);
             z-index: 20;
             vertical-align: top;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            &-dropdown{
+            .structure-left-dropdown{
                 width: 100%;
                 padding: 10px 10px 7px;
                 border-bottom: 1px solid var(--tiklab-gray-200);
@@ -29,65 +24,43 @@
                     align-items: center;
                 }
             }
-            &-history{
+            .structure-left-history{
                 height: calc(100% - 60px);
-                .history-content{
-                    &-list{
-                        height: calc(100% - 40px);
-                        min-height: 100px;
-                        overflow: auto;
-                        border-bottom: 1px solid var(--tiklab-gray-200);
-                        &-ul{
+                .history-list{
+                    height: calc(100% - 40px);
+                    min-height: 100px;
+                    overflow: auto;
+                    border-bottom: 1px solid var(--tiklab-gray-200);
+                }
+                .history-list-ul{
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    padding: 10px 10px 10px 20px;
+                    cursor: pointer;
+                    &:hover{
+                        background: var(--tiklab-gray-300);
+                    }                            
+                }
+                .list{
+                    &-title{
+                        color: #0063FF;
+                        width: 60px;
+                        font-weight: var(--tiklab-font-weight-bold);
+                        font-size: 16px;
+                    }
+                    &-group{
+                        flex-grow: 1;
+                        &-item{
                             display: flex;
                             flex-direction: row;
-                            width: 100%;
-                            padding: 10px 10px 10px 20px;
-                            cursor: pointer;
-                            &:hover{
-                                background: var(--tiklab-gray-300);
-                            }
-                            .list{
-                                &-title{
-                                    color: #0063FF;
-                                    width: 60px;
-                                    font-weight: var(--tiklab-font-weight-bold);
-                                    font-size: 16px;
-                                }
-                                &-group{
-                                    flex-grow: 1;
-                                    &-item{
-                                        display: flex;
-                                        flex-direction: row;
-                                        justify-content: space-between;
-                                        margin-bottom: 10px;
-                                    }
-                                }
-                            }
-                        }
-                        &_active{
-                            background: #e3e8f0;
+                            justify-content: space-between;
+                            margin-bottom: 10px;
                         }
                     }
-                    &-page{
-                        width: 100%;
-                        text-align: center;
-                        padding-top: 10px;
-                        height: 47px;
-                        border-top: 1px solid var(--tiklab-gray-200);
-                        .page-ban{
-                            cursor:not-allowed;
-                            color: var(--tiklab-gray-500);
-                        }
-                        .page-allow{
-                            cursor: pointer;
-                            &:hover{
-                                color: var(--tiklab-blue);
-                            }
-                        }
-                        .page-current{
-                            color: var(--tiklab-blue);
-                        }
-                    }
+                }
+                .history-list-active{
+                    background: #e3e8f0;
                 }
             }
             .ant-dropdown-trigger{
@@ -95,7 +68,7 @@
                 margin-right: 30px;
             }
         }
-        &-right{
+        .structure-right{
             flex-grow: 1;
             padding: 20px;
             overflow: auto;
@@ -103,7 +76,6 @@
                 height: calc(100% - 26px);
                 padding-top: 15px;
                 min-width: 600px;
-                position: relative;
                 .item{
                     &-20{
                         border-top: 3px solid #444444 !important;
@@ -126,6 +98,7 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                height: 32px;
                 &_tel{
                     font-size: 16px;
                     .tel_title{
@@ -175,13 +148,13 @@
                 }
             }
             .str-single{
-                height: 220px;
+                height: 120px;
                 display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;
             }
             .str-multi{
-                height: 220px;
+                height: 120px;
                 display: flex;
                 .str-multi-card{
                     display: inline-flex;
@@ -195,17 +168,16 @@
                 }
             }
             .mid_group-bottom{
-                position: absolute;
-                // bottom: 0;
-                left: 0;
-                right: 0;
+                height: calc(100% - 152px);
                 .mid_group-bottom-title{
                     font-size: var(--tiklab-font-16);
                     font-weight: var(--tiklab-font-weight-bold);
+                    height: 40px;
+                    line-height: 40px;
                 }
                 .mid_group-bottom-outLog{
                     white-space: pre-wrap;
-                    height: 60vh;
+                    height: calc(100% - 40px);
                     overflow-y: auto;
                     overflow-x: hidden;
                     background: #000;

@@ -127,4 +127,4 @@ const View = props =>{
     // </>
 }
 
-export default  inject("configStore","pipelineStore")(observer(View))
+export default observer(View)

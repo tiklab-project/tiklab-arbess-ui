@@ -1,10 +1,10 @@
 import {observable,action} from "mobx";
 
 import {
-    CreateAfterConfig,
-    UpdateAfterConfig,
-    DeleteAfterConfig,
-    FindAllAfterConfig,
+    CreatePostConfig,
+    UpdatePostConfig,
+    DeletePostConfig,
+    FindAllPostConfig,
 } from "../api/postpose";
 
 import {message} from "antd";
@@ -27,8 +27,8 @@ export class PostposeStore {
     }
 
     @action
-    createAfterConfig = async value =>{
-        const data = await CreateAfterConfig(value)
+    createPostConfig = async value =>{
+        const data = await CreatePostConfig(value)
         if (data.code===0){
             message.info("添加成功",0.5)
             this.isFindPostposeData = !this.isFindPostposeData
@@ -37,8 +37,8 @@ export class PostposeStore {
     }
 
     @action
-    updateAfterConfig = async value =>{
-        const data = await UpdateAfterConfig(value)
+    updatePostConfig = async value =>{
+        const data = await UpdatePostConfig(value)
         if (data.code===0){
             message.info("更新成功",0.5)
             this.isFindPostposeData = !this.isFindPostposeData
@@ -47,10 +47,10 @@ export class PostposeStore {
     }
 
     @action
-    deleteAfterConfig = async value =>{
+    deletePostConfig = async value =>{
         const param = new FormData()
         param.append("configId",value)
-        const data = await DeleteAfterConfig(param)
+        const data = await DeletePostConfig(param)
         if(data.code===0){
             message.info("删除成功",0.5)
             this.isFindPostposeData = !this.isFindPostposeData
@@ -59,11 +59,11 @@ export class PostposeStore {
     }
 
     @action
-    findAllAfterConfig = async value =>{
+    findAllPostConfig = async value =>{
         this.isLoading = true
         const params = new FormData()
         params.append("pipelineId",value)
-        const data = await FindAllAfterConfig(params)
+        const data = await FindAllPostConfig(params)
         if(data.code===0){
             this.postposeData = data.data && data.data
             this.fixedPostposeData = data.data && data.data

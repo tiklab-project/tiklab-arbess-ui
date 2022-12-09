@@ -13,7 +13,6 @@ import {message} from "antd";
 
 export class ConfigStore{
 
-    @observable valid = []
     @observable validType = []
     @observable data = []
     @observable formInitialValues = {} //表单初始化
@@ -131,7 +130,7 @@ export class ConfigStore{
     @action
     findAllTaskConfig = values =>{
         const param = new FormData()
-        param.append("pipelineId", values)
+        param.append("pipelineId",values)
         return new Promise((resolve, reject) => {
             FindAllTaskConfig(param).then(res=>{
                 if(res.code===0){
@@ -150,15 +149,8 @@ export class ConfigStore{
         const params = new FormData()
         params.append("pipelineId",values)
         const data = await ConfigValid(params)
-        if(data.code===0){
-            this.valid = data.data && data.data
-            const cc = []
-            data.data && data.data.map(item=>{
-                cc.push(item.split("_")[0])
-                // const zz = document.getElementById(`${item}`)
-                // zz && zz.classList.add("formView-validateFields")
-            })
-            this.validType = Array.from(new Set(cc && cc))
+        if(data.code===0 && data.data){
+            this.validType = data.data
         }
         return data
     }

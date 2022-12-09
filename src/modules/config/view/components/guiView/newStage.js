@@ -64,7 +64,7 @@ const NewStage = props =>{
         //屏蔽父层点击事件
         e.stopPropagation()
         const params = {
-            pipelineId:pipeline.id,
+            pipeline:{id:pipeline.id},
             configId:item.configId
         }
         deleteTaskConfig(params)
@@ -135,18 +135,19 @@ const NewStage = props =>{
                         <div className="newStages-content">
                             <div className={`newStages-job`}>
                                 <div onClick={()=>showDetail(item)}
-                                    className={`newStages-singleJob-content ${valid(item.configId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
+                                    className={`newStages-job-content ${valid(item.configId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
                                 >
                                     <div className="newStages-job-sub">
                                         <span className="newStages-job-title">
                                             <SubIcon type={item.type}/>
                                         </span>
-                                        {valid(item.configId) &&
-                                            <span className="newStages-job-warn">
-                                            <ExclamationCircleOutlined />
-                                        </span>
-                                        }
+    
                                     </div>
+                                    {valid(item.configId) &&
+                                        <div className="newStages-job-warn">
+                                            <ExclamationCircleOutlined />
+                                        </div>
+                                    }
                                     <Popconfirm
                                         placement="topRight"
                                         title="你确定删除吗"
@@ -202,7 +203,7 @@ const NewStage = props =>{
                                     {
                                         stage.type>10 &&
                                         <div className="newStages-has-pre newStages-has-add" onClick={()=>serialPre(item,index,stagesIndex)}>
-                                            <svg className="icon has-add" aria-hidden="true">
+                                            <svg className="icon" aria-hidden="true">
                                                 <use xlinkHref="#icon-zengjia"/>
                                             </svg>
                                         </div>
@@ -214,12 +215,12 @@ const NewStage = props =>{
                                             <span className="newStages-job-title">
                                                 <SubIcon type={stage.type}/>
                                             </span>
-                                            {valid(stage.configId) &&
-                                                <span className="newStages-job-warn">
-                                                    <ExclamationCircleOutlined />
-                                                </span>
-                                            }
                                         </div>
+                                        {valid(stage.configId) &&
+                                            <div className="newStages-job-warn">
+                                                <ExclamationCircleOutlined />
+                                            </div>
+                                        }
                                         <Popconfirm
                                             placement="topRight"
                                             title="你确定删除吗"
@@ -274,7 +275,7 @@ const NewStage = props =>{
                     <div className="newStages-step"  >
                         <div className="newStages-content">
                             <div className="newStages-job">
-                                <div onClick={()=>newTask()} className="newStages-singleJob-content newStages-btn">
+                                <div onClick={()=>newTask()} className="newStages-job-content newStages-btn">
                                     <PlusOutlined/>
                                     <span style={{paddingLeft:5}}>新任务</span>
                                 </div>

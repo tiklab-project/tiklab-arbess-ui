@@ -73,7 +73,7 @@ const AddDrawerContent = props =>{
 
     const handleClick = (group,item) =>{
         const params = {
-            pipelineId:pipelineId,
+            pipeline:{id:pipelineId},
             taskType:item.type,
             taskSort:taskSort,
             stages:stages,

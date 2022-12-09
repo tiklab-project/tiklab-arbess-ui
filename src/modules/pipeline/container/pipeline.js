@@ -70,6 +70,7 @@ const Pipeline = props =>{
                     />
                     <div className="pipeline-type-input">
                         <Input
+                            allowClear
                             placeholder="流水线名称"
                             onChange={onChangeSearch}
                             prefix={<SearchOutlined />}

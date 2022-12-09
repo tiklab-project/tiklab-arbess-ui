@@ -9,9 +9,9 @@ import {
 } from "@ant-design/icons";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
-import PipelineInfo from "../../pipeline/components/pipelineAddInfo";
 import Btn from "../../common/btn/btn";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
+import PipelineInfo from "../../pipeline/components/pipelineAddInfo";
 import "./projectSet.scss";
 
 const ProjectSet = props =>{

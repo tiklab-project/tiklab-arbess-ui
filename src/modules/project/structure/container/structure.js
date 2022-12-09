@@ -19,20 +19,19 @@ const Structure = props => {
 
     const {structureStore,pipelineStore} = props
 
-    const {findExecState,findStructureState,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,
+    const {findPipelineState,pipelineRunStatus,findAllPipelineConfig,findPageHistory,pipelineStartStructure,leftPageList,
         findPipelineUser,execState,state,setState,enforcer,setEnforcer,mode,setMode,pageCurrent,setPageCurrent,freshen,setFreshen
     } = structureStore
     const {pipelineId,pipeline} = pipelineStore
 
     const [runImState,setRunImState] = useState(false)
 
-
     // let interval,socket=null
     // useEffect(() => {
     //     // socket = new WebSocket(`ws://${window.document.location.host}/start`)
     //     socket = new WebSocket(`ws://192.168.10.100:8080/start`)
     //     socket.onopen = () =>{
-    //         pipelineId && findExecState(pipelineId).then(res=>{
+    //         pipelineId && findPipelineState(pipelineId).then(res=>{
     //             if(res.data === 1){
     //                 interval = setInterval(()=>socket.send(pipelineId),1000)
     //                 socket.onmessage = response => renderExec(response)
@@ -69,10 +68,10 @@ const Structure = props => {
 
     let interval=null
     useEffect(() => {
-        pipelineId && findExecState(pipelineId).then(res=>{
+        pipelineId && findPipelineState(pipelineId).then(res=>{
             if(res.data===1){
                 interval=setInterval(()=>
-                    findStructureState(pipelineId).then(res=>{
+                    pipelineRunStatus(pipelineId).then(res=>{
                         if(res.code===0){renderExec(res.data)}
                     }), 1000)
                 findAllPipelineConfig(pipelineId)
@@ -151,7 +150,7 @@ const Structure = props => {
                     pipelineId={pipelineId}
                     status={status}
                 />
-                <div className="structure-content-right">
+                <div className="structure-right">
                     <BreadcrumbContent firstItem={pipeline.name} secondItem={"历史"}/>
                     {
                         execState !== ""  || leftPageList && leftPageList.length > 0 ?

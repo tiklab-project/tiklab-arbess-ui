@@ -25,7 +25,7 @@ const FindAuth = props =>{
     // 改变凭证
     const changeGitSelect = value =>{
         const params = {
-            pipelineId,
+            pipeline:{id:pipelineId},
             values:{authId:value},
             taskType:dataItem.type,
             configId: dataItem.configId

@@ -7,9 +7,9 @@ import SubIcon from "../../common/components/subIcon";
 
 const PostposeAdd = props =>{
 
-    const {postposeVisible,setPostposeVisible,createAfterConfig,pipelineId} = props
+    const {postposeVisible,setPostposeVisible,createPostConfig,pipelineId} = props
 
-    const [typess,setType] = useState(null)
+    const [typess,setType] = useState(71)
     const [height,setHeight] = useState(0)
 
     useEffect(()=>{
@@ -27,10 +27,10 @@ const PostposeAdd = props =>{
     const onOk = () => {
         const params = {
             taskType:typess,
-            pipeline: {pipelineId},
+            pipeline: {id:pipelineId},
             value:null,
         }
-        createAfterConfig(params)
+        createPostConfig(params)
         setPostposeVisible(false)
     }
 

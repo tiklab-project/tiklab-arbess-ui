@@ -4,7 +4,20 @@ const HlineIcon = props =>{
 
     const {type} = props
 
-    const titleType = type =>{
+    const renderTitle = (icon,title) =>{
+        return  <>
+                    <span className="desc-icon">
+                        <svg className="icon" aria-hidden="true">
+                            <use xlinkHref={`#icon-${icon}`} />
+                        </svg>
+                    </span>
+                    <span className="desc-title"  style={{padding:"0 8px 0 5px"}}>
+                        {title}
+                    </span>
+                </>
+    }
+
+     const titleType = type =>{
         const zz = Math.floor(type/10)
         switch (zz) {
             case 0: return renderTitle("suyuanmabiaoqian","源码")
@@ -19,18 +32,6 @@ const HlineIcon = props =>{
         }
     }
 
-    const renderTitle = (icon,title) =>{
-        return  <>
-                    <span className="desc-icon">
-                        <svg className="icon" aria-hidden="true">
-                            <use xlinkHref={`#icon-${icon}`} />
-                        </svg>
-                    </span>
-                    <span className="desc-title"  style={{padding:"0 8px 0 5px"}}>
-                        {title}
-                    </span>
-                </>
-    }
 
     return  <>
                 {titleType(type)}

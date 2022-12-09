@@ -137,6 +137,9 @@ export class PipelineStore {
                 if(res.code===0){
                     message.info("更新成功")
                 }
+                else{
+                    message.info("更新失败")
+                }
                 resolve(res)
             }).catch(error=>{
                 reject()

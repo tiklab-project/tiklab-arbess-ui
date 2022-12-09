@@ -1,33 +1,33 @@
 import {serviceLoc} from "../../../../common/utils/requset";
 
 
-export function  CreateAfterConfig (data){
+export function  CreatePostConfig (data){
     return serviceLoc.request({
-        url:"/pipelineAfterConfig/createAfterConfig",
+        url:"/pipelinePost/createPost",
         method:"post",
         data
     })
 }
 
-export function  UpdateAfterConfig (data){
+export function  UpdatePostConfig (data){
     return serviceLoc.request({
-        url:"/pipelineAfterConfig/updateAfterConfig",
+        url:"/pipelinePost/updatePost",
         method:"post",
         data
     })
 }
 
-export function  DeleteAfterConfig (data){
+export function  DeletePostConfig (data){
     return serviceLoc.request({
-        url:"/pipelineAfterConfig/deleteAfterConfig",
+        url:"/pipelinePost/deletePost",
         method:"post",
         data
     })
 }
 
-export function  FindAllAfterConfig (data){
+export function  FindAllPostConfig (data){
     return serviceLoc.request({
-        url:"/pipelineAfterConfig/findAllAfterConfig",
+        url:"/pipelinePost/findAllPost",
         method:"post",
         data
     })

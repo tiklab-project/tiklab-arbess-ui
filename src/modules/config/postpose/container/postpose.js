@@ -9,7 +9,7 @@ import MirrorContent from "../components/mirror";
 import Btn from "../../../common/btn/btn";
 import PostposeAdd from "../components/postposeAdd";
 import PostposeUserAdd from "../components/postposeUserAdd";
-import HlineIcon from "../../common/components/hlineIcon";
+import SubIcon from "../../common/components/subIcon";
 import Loading from "../../../common/loading/loading";
 import "../components/postpose.scss";
 
@@ -19,7 +19,7 @@ const Postpose = props =>{
     const {pipelineStore,postposeStore} = props
 
     const {findUserPage,pipelineId} = pipelineStore
-    const {createAfterConfig,updateAfterConfig,deleteAfterConfig,findAllAfterConfig,postposeData,isFindPostposeData,
+    const {createPostConfig,updatePostConfig,deletePostConfig,findAllPostConfig,postposeData,isFindPostposeData,
         setIsFindPostposeData,isLoading,setPostposeData,fixedPostposeData
     } = postposeStore
 
@@ -31,7 +31,7 @@ const Postpose = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        findUserPage().then(res=>{
+        pipelineId && findUserPage().then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
                 setAllUserList([...dataList])
@@ -40,7 +40,7 @@ const Postpose = props =>{
     },[pipelineId])
 
     useEffect(()=>{
-        findAllAfterConfig(pipelineId).then(res=>{
+        pipelineId && findAllPostConfig(pipelineId).then(res=>{
             const data = res.data && res.data.filter(item=>item.type===61)[0]
             if(res.code===0){
                 data && data.typeList && form.setFieldsValue({typeList: data && data.typeList})
@@ -50,7 +50,7 @@ const Postpose = props =>{
 
     // 删除类型
     const delType = item =>{
-        deleteAfterConfig(item.configId)
+        deletePostConfig(item.configId)
     }
     
     // 消息通知保存
@@ -68,11 +68,11 @@ const Postpose = props =>{
                     typeList:values.typeList,
                     userList: newArr,
                 },
-                pipeline:{pipelineId},
+                pipeline:{id:pipelineId},
                 taskType:item.type,
                 configId:item.configId
             }
-            updateAfterConfig(params)
+            updatePostConfig(params)
         })
     }
 
@@ -240,7 +240,7 @@ const Postpose = props =>{
                 <PostposeAdd
                     postposeVisible={postposeVisible}
                     setPostposeVisible={setPostposeVisible}
-                    createAfterConfig={createAfterConfig}
+                    createPostConfig={createPostConfig}
                     pipelineId={pipelineId}
                 />
             </div>
@@ -251,7 +251,7 @@ const Postpose = props =>{
                             <div className="post-pose-forms" key={item.configId}>
                                 <div className="post-pose-headline">
                                     <div className="headline-left">
-                                        <HlineIcon type={item.type}/>
+                                        <SubIcon type={item.type}/>
                                     </div>
                                     <div>
                                         <Popconfirm
@@ -272,7 +272,7 @@ const Postpose = props =>{
                                     <MirrorContent
                                         item={item}
                                         pipelineId={pipelineId}
-                                        updateAfterConfig={updateAfterConfig}
+                                        updatePostConfig={updatePostConfig}
                                     />
                                 }
                                 {

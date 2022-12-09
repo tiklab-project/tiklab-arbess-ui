@@ -109,7 +109,7 @@ export const applicationRouters = a =>{
             ]
         },
         {
-            id:"/index/system/myTodoTask",
+            id:"/index/system/todoTask",
             title:"待办任务",
             icon:<ProfileOutlined />,
             purviewCode:"todotask",
@@ -311,19 +311,19 @@ export const templateRouter = [
             },
             {
                 id:"/index/system/mes/type",
-                title:"消息类型管理",
+                title:"消息类型",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },
             {
                 id:"/index/system/mes/template",
-                title:"消息模板管理",
+                title:"消息模板",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },
             {
                 id:"/index/system/mes/sendtrue",
-                title:"消息发送方式",
+                title:"消息通知类型",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },

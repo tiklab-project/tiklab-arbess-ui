@@ -89,31 +89,31 @@ const StrRightItem = props =>{
 
     return (
         <>
-            <StrRightCue
-                way={modeData && modeData.runWay}
-                title={`# ${modeData && modeData.findNumber}`}
-                time={getTime(modeData && modeData.runTime)}
-                action={del}
-                actionTitle={"删除"}
-            />
-            {
-                pipeline && pipeline.type===1?
-                <div className="str-single">
-                    {
-                        rightFlowData && rightFlowData.map((item,index)=>{
-                            return renderSingle(item,index)
-                        })
-                    }
-                </div>
-                :
-                <div className="str-multi">
-                    {
-                        rightFlowData && rightFlowData.map((group,groupIndex)=>{
-                            return renderMulti(group,groupIndex)
-                        })
-                    }
-                </div>
-            }
+             <StrRightCue
+                    way={modeData && modeData.runWay}
+                    title={`# ${modeData && modeData.findNumber}`}
+                    time={getTime(modeData && modeData.runTime)}
+                    action={del}
+                    actionTitle={"删除"}
+                />
+                {
+                    pipeline && pipeline.type===1?
+                    <div className="str-single">
+                        {
+                            rightFlowData && rightFlowData.map((item,index)=>{
+                                return renderSingle(item,index)
+                            })
+                        }
+                    </div>
+                    :
+                    <div className="str-multi">
+                        {
+                            rightFlowData && rightFlowData.map((group,groupIndex)=>{
+                                return renderMulti(group,groupIndex)
+                            })
+                        }
+                    </div>
+                }
             {logRunLog()}
         </>
     )

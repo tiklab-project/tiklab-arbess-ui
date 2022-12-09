@@ -48,7 +48,7 @@ export function  UpdateOrderTaskConfig(data){
 // 必填配置是否完善
 export function  ConfigValid(data){
     return serviceLoc.request({
-        url:"/pipelineCourseConfig/configValid",
+        url:"/pipelineConfig/validAllConfig",
         method:"post",
         data
     })

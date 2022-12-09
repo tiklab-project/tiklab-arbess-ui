@@ -1,7 +1,6 @@
 .gui-mirror{
-    display: flex;
-    flex-direction: column;
     width: 440px;
+    position: relative;
     .react-codemirror2{
         height: 100%;
         width: 100%;
@@ -35,6 +34,39 @@
         .CodeMirror-code{
             font-family: Microsoft YaHei;
         }
+    }
+    .gui-mirror-expand{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 11px 11px 0 0;
+        cursor: pointer;
+        z-index: 20;
+    }
 
+}
+
+.mirror-expand{
+    .mirror-expand-up{
+        padding: 20px 20px 15px;
+        display: flex;
+        justify-content: space-between;
+        .up-title{
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+    }
+    .mirror-expand-close{
+        cursor: pointer;
+    }
+    .mirror-expand-content{
+        padding: 0 20px;
+        .CodeMirror{
+            .CodeMirror-placeholder{
+                font-family: Microsoft YaHei;
+            }
+            .CodeMirror-code{
+                font-family: Microsoft YaHei;
+            }
+        }
     }
 }

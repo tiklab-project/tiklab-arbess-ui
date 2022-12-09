@@ -1,17 +1,10 @@
-import React,{useRef,useState,forwardRef,useEffect} from "react";
-import {UnControlled as CodeMirror} from "react-codemirror2";
-import "codemirror/lib/codemirror.js";
-import "codemirror/lib/codemirror.css";
-// 设置代码语言模式（比如JS，SQL，python，java等）
-import "codemirror/mode/shell/shell.js";
-// 代码模式，clike是包含java,c++等模式的
-// import "codemirror/mode/clike/clike";
-// import "codemirror/mode/css/css";
-import "codemirror/addon/display/placeholder.js";
-
+import React, {useRef,useState,forwardRef,useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {RadiusUprightOutlined} from "@ant-design/icons";
+import {Tooltip} from "antd";
+import {RadiusUprightOutlined,ExpandOutlined} from "@ant-design/icons";
+import MirrorExpand from "./mirrorExpand";
 import Btn from "../../../../../common/btn/btn";
+import {ViewMirror} from "../../../../common/components/mirror";
 import {x} from "../../delData";
 import "./mirror.scss";
 
@@ -25,7 +18,10 @@ const MirrorContent = forwardRef((props,ref)=>{
     const {updateTaskConfig} = configStore
 
     const [bordered,setBordered] = useState(false)
-    
+    const [visible,setVisible] = useState(false)
+    const [expandValue,setExpandValue] = useState("")
+
+
     const onFocus = e => {
         setBordered(true)
         if(e.state.placeholder){
@@ -33,20 +29,26 @@ const MirrorContent = forwardRef((props,ref)=>{
         }
     }
 
+    const expand = () =>{
+        setExpandValue(mirrorRefs.current.editor.getValue())
+        setBordered(false)
+        setVisible(true)
+    }
+
     const onCancel = () =>{
         // const targetDiv = document.getElementById(name+"_mirror")
         // targetDiv.style.height = "auto"
-        mirrorRefs.current.editor.setValue(mirrorValue?mirrorValue:"")
+        mirrorRefs.current.editor.setValue(dataItem[name]?dataItem[name]:"")
         setBordered(false)
     }
 
-    const onOk = () =>{
+    const onOk = ref =>{
         const obj = {}
-        obj[name] = mirrorRefs.current.editor.getValue()
-        dataItem[name] = mirrorRefs.current.editor.getValue()
+        obj[name] = ref.current.editor.getValue()
         if(x(obj[name],mirrorValue)){
+            dataItem[name] = ref.current.editor.getValue()
             const params = {
-                pipelineId,
+                pipeline:{id:pipelineId},
                 values:obj,
                 taskType:dataItem.type,
                 configId:dataItem.configId,
@@ -86,23 +88,36 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     return  <>
             <div className="gui-mirror" id={name+"_mirror"}>
-                <CodeMirror
-                    value={mirrorValue}//内容
-                    ref={mirrorRefs}
-                    options={{
-                        mode: {name:"shell",shell: true },//语言
-                        lineNumbers: false, // 是否显示行号
-                        placeholder: bordered ? placeholder:"未设置",
-                        // readOnly:true
-                    }}
-                    onFocus={e=>onFocus(e)}
-                    className={`${bordered?"gui-mirror-tr":"gui-mirror-fa"}`}
+                <ViewMirror
+                    mirrorRefs={mirrorRefs}
+                    mirrorValue={dataItem[name]}
+                    bordered={bordered}
+                    onFocus={onFocus}
+                    placeholder={placeholder}
                 />
+                {
+                    bordered &&
+                    <div className="gui-mirror-expand">
+                        <Tooltip title={"全屏编辑"}>
+                            <ExpandOutlined onClick={()=>expand()}/>
+                        </Tooltip>
+                    </div>
+                }
                 {/*{*/}
                 {/*    bordered &&*/}
                 {/*    <div className="gui-mirror-move"  onMouseDown={handleMouseDown}/>*/}
                 {/*}*/}
             </div>
+            <MirrorExpand
+                visible={visible}
+                setVisible={setVisible}
+                expandValue={expandValue}
+                narrowRef={mirrorRefs}
+                dataItem={dataItem}
+                name={name}
+                onOk={onOk}
+
+            />
             {
                 bordered &&
                 <div style={{paddingTop:8}}>
@@ -114,7 +129,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                     <Btn
                         title={"保存"}
                         type={"primary"}
-                        onClick={()=>onOk()}
+                        onClick={()=>onOk(mirrorRefs)}
                     />
                 </div>
             }

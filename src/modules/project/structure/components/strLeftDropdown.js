@@ -70,7 +70,7 @@ const StrLeftDropdown = props =>{
     ]
 
     return(
-        <div className="structure-content-left-dropdown">
+        <div className="structure-left-dropdown">
             <div className="dropdown">
                 <Select
                     style={{width:135,marginRight:10}}

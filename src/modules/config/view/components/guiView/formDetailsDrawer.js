@@ -16,7 +16,7 @@ import "./formDetailsDrawer.scss";
 
 const FormDetailsDrawer = props =>{
 
-    const {configValid,pipelineId,taskFormDrawer,setTaskFormDrawer,dataItem} = props
+    const {taskFormDrawer,setTaskFormDrawer,dataItem} = props
 
     const [form] = Form.useForm()
 
@@ -92,13 +92,8 @@ const FormDetailsDrawer = props =>{
                     break  
 
             }
+            form.validateFields()
         }
-    },[taskFormDrawer])
-
-    useEffect(()=>{
-        taskFormDrawer && configValid(pipelineId).then(res=>{
-            res.code===0 && form.validateFields()
-        })
     },[taskFormDrawer])
 
     const renderForms = dataItem =>{

@@ -2,7 +2,7 @@
     &-state,&-history{
         cursor: pointer;
         .actions-se{
-            font-size: 20px;
+            font-size: 16px;
         }
         &:hover{
             color: var(--tiklab-blue);
@@ -15,8 +15,8 @@
     }
     &-collect{
         .icon{
-            width: 20px !important;
-            height: 20px !important;
+            width: 19px !important;
+            height: 19px !important;
         }
     }
     .imgs{

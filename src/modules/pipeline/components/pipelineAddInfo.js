@@ -26,7 +26,14 @@ const PipelineAddInfo = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        findUserPage().then(res=>{
+        if(set && pipeline){
+            setPowerType(pipeline.power)
+            form.setFieldsValue({name:pipeline.name})
+        }
+    },[pipeline])
+
+    useEffect(()=>{
+        !set && findUserPage().then(res=>{
             const data = res.data && res.data.dataList
             if(res.code===0){
                 setYUserList(data.filter(item=>item.id===userId))
@@ -37,7 +44,7 @@ const PipelineAddInfo = props =>{
 
     useEffect(()=>{
         const newArr = []
-        yUserList && yUserList.map(item=>{
+        !set && yUserList && yUserList.map(item=>{
             if(item.id===userId){
                 newArr.push({
                     id:item.id,
@@ -138,6 +145,7 @@ const PipelineAddInfo = props =>{
         let rule
         if(set){
             rule = [
+                {max:30,message:"请输入1~31位以内的名称"},
                 {
                     pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
@@ -161,6 +169,7 @@ const PipelineAddInfo = props =>{
         if(!set){
             rule = [
                 {required:true,message:""},
+                {max:30,message:"请输入1~31位以内的名称"},
                 {
                     pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
@@ -192,7 +201,6 @@ const PipelineAddInfo = props =>{
                 form={form}
                 autoComplete="off"
                 layout={"vertical"}
-                initialValues={{name:pipeline && pipeline.name}}
             >
                 <Form.Item
                     label={"流水线名称"}
@@ -201,8 +209,8 @@ const PipelineAddInfo = props =>{
                 >
                     <Input
                         allowClear
-                        style={set? {width:612}: {background:"#fff"}}
                         bordered={set}
+                        style={set? {width:612}: {background:"#fff"}}
                     />
                 </Form.Item>
             </Form>

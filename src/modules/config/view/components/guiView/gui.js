@@ -13,8 +13,8 @@ const Gui = props =>{
     
     useEffect(()=>{
         // 效验表单
-        pipeline && configValid(pipelineId)
-    },[pipeline,enabledValid])
+        pipelineId && configValid(pipelineId)
+    },[pipelineId,enabledValid])
 
     return (
         <div className="guiView">
@@ -32,10 +32,8 @@ const Gui = props =>{
 
                 <FormDetailsDrawer
                     dataItem={dataItem}
-                    pipelineId={pipelineId}
                     taskFormDrawer={taskFormDrawer}
                     setTaskFormDrawer={setTaskFormDrawer}
-                    configValid={configValid}
                 />
 
             </div>
