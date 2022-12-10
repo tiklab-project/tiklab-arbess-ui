@@ -7,7 +7,7 @@ import "./addDrawer.scss";
 
 const AddDrawer = props =>{
 
-    const {setNewStageDrawer,newStageDrawer,taskSort,stages,stagesId} = props
+    const {setNewStageDrawer,newStageDrawer} = props
 
     return(
         <Drawer
@@ -29,12 +29,7 @@ const AddDrawer = props =>{
                     />
                 </div>
                 <div className="wrapper-body">
-                    <AddDrawerContent
-                        setNewStageDrawer={setNewStageDrawer}
-                        taskSort={taskSort}
-                        stages={stages}
-                        stagesId={stagesId}
-                    />
+                    <AddDrawerContent setNewStageDrawer={setNewStageDrawer}/>
                 </div>
             </div>
         </Drawer>

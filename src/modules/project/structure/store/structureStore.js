@@ -103,7 +103,7 @@ export class StructureStore {
         return new Promise((resolve, reject) => {
             FindPipelineState(param).then(res=>{
                 if(res.code===0){
-                    if(res.data===1){
+                    if(res.data===2){
                         this.index = 0
                     }else {
                         this.index = 1

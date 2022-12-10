@@ -129,6 +129,7 @@ const FormDetailsDrawer = props =>{
             visible={taskFormDrawer}
             onClose={()=>setTaskFormDrawer(false)}
             closable={false}
+            destroyOnClose={true}
             maskStyle={{background:"transparent"}}
             contentWrapperStyle={{width:480,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}

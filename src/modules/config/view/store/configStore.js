@@ -22,6 +22,12 @@ export class ConfigStore{
     @observable enabledValid = false // 是否启用表单效验
     @observable isPlugin = false // 是否存在插件
     @observable isLoading = false
+    @observable creacteValue = {}
+
+    @action
+    setCreacteValue = value =>{
+        this.creacteValue = value
+    }
 
     @action
     setData = value =>{
@@ -73,14 +79,18 @@ export class ConfigStore{
 
     @action
     createTaskConfig = async values =>{
-        const data = await CreateTaskConfig(values)
+        const params = {
+            ...this.creacteValue,
+            ...values
+        }
+        const data = await CreateTaskConfig(params)
         if(data.code===0){
             this.mess("添加成功")
-            this.isFindConfig=!this.isFindConfig
             this.dataItem = {
                 type: values.taskType,
                 configId: data.data,
             }
+            this.isFindConfig=!this.isFindConfig
             this.taskFormDrawer = true
         }
         if(data.code===50001){
@@ -136,6 +146,9 @@ export class ConfigStore{
                 if(res.code===0){
                     this.data = res.data===null?[]:res.data
                 }
+                else{
+                    this.data = []
+                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -149,8 +162,8 @@ export class ConfigStore{
         const params = new FormData()
         params.append("pipelineId",values)
         const data = await ConfigValid(params)
-        if(data.code===0 && data.data){
-            this.validType = data.data
+        if(data.code===0){
+            this.validType = data.data && data.data
         }
         return data
     }

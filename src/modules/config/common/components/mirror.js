@@ -70,11 +70,11 @@ export const ExpandMirror = props =>{
                 mode: {name:"shell",shell: true },//语言
                 // theme: "solarized light",
                 theme:"dracula",
+                autofocus:true,
                 lineNumbers: true, // 是否显示行号
                 lineWrapping:true,
                 foldGutter: true,
                 styleActiveLine:true,
-                autofocus:true,
             }}
         />
     )

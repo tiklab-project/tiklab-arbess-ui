@@ -48,14 +48,14 @@ const PipelineTable = props =>{
 
     const work = record =>{
         if(record.state === 2){
+            killInstance(record.id).then(()=>{
+                setFresh(!fresh)
+            })
+        }else {
             pipelineStartStructure(record.id).then(res=>{
                 if(res.data){
                     setFresh(!fresh)
                 }
-            })
-        }else {
-            killInstance(record.id).then(()=>{
-                setFresh(!fresh)
             })
         }
     }
@@ -148,12 +148,12 @@ const PipelineTable = props =>{
                     <>
                         <Space>
                             <Tooltip title="运行" >
-                                <span className="pipelineTable-state" onClick={() =>work(record)}>
+                                <span className="pipelineTable-state" onClick={()=>work(record)}>
                                 {
                                     record.state === 2 ?
-                                        <PlayCircleOutlined className="actions-se"/>
-                                        :
                                         <Spin indicator={<LoadingOutlined className="actions-se" spin />} />
+                                        :
+                                        <PlayCircleOutlined className="actions-se"/>
                                 }
                                 </span>
                             </Tooltip>

@@ -21,7 +21,6 @@ const MirrorContent = forwardRef((props,ref)=>{
     const [visible,setVisible] = useState(false)
     const [expandValue,setExpandValue] = useState("")
 
-
     const onFocus = e => {
         setBordered(true)
         if(e.state.placeholder){
@@ -30,7 +29,8 @@ const MirrorContent = forwardRef((props,ref)=>{
     }
 
     const expand = () =>{
-        setExpandValue(mirrorRefs.current.editor.getValue())
+        const value = mirrorRefs.current.editor.getValue()
+        setExpandValue(value?value:"")
         setBordered(false)
         setVisible(true)
     }
@@ -116,7 +116,6 @@ const MirrorContent = forwardRef((props,ref)=>{
                 dataItem={dataItem}
                 name={name}
                 onOk={onOk}
-
             />
             {
                 bordered &&

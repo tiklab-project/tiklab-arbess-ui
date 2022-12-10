@@ -28,7 +28,6 @@ const MirrorExpand = props =>{
 
     const onOks = () =>{
         onOk(mirrorRefs)
-        narrowRef.current.editor.setValue(mirrorRefs.current.editor.getValue())
         setVisible(false)
     }
 
@@ -50,10 +49,10 @@ const MirrorExpand = props =>{
     return(
         <Modal
             closable={false}
-            destroyOnClose={true}
             visible={visible}
             onCancel={()=>setVisible(false)}
             footer={modalFooter}
+            destroyOnClose={true}
             width={800}
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}

@@ -64,22 +64,14 @@ const lis=[
 
 const AddDrawerContent = props =>{
 
-    const {configStore,pipelineStore,setNewStageDrawer,taskSort,stages,stagesId} = props
+    const {configStore,setNewStageDrawer} = props
 
     const {createTaskConfig} = configStore
-    const {pipelineId} = pipelineStore
 
     const [type,setType] = useState(1)
 
-    const handleClick = (group,item) =>{
-        const params = {
-            pipeline:{id:pipelineId},
-            taskType:item.type,
-            taskSort:taskSort,
-            stages:stages,
-            stagesId:stagesId,
-        }
-        createTaskConfig(params)
+    const handleClick = item =>{
+        createTaskConfig({taskType:item.type})
         setNewStageDrawer(false)
     }
 
@@ -128,7 +120,7 @@ const AddDrawerContent = props =>{
                         return(
                             <div key={index}
                                  className="group-desc"
-                                 onClick={()=>handleClick(group,item)}
+                                 onClick={()=>handleClick(item)}
                             >
                                 <SubIcon type={item.type}/>
                             </div>
@@ -162,4 +154,4 @@ const AddDrawerContent = props =>{
     )
 }
 
-export default inject("configStore","pipelineStore")(observer(AddDrawerContent))
+export default inject("configStore")(observer(AddDrawerContent))

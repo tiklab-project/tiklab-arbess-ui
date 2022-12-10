@@ -12,44 +12,49 @@ import AddDrawer from "./addDrawer";
 
 const NewStage = props =>{
 
-    const {data,setTaskFormDrawer,validType,setDataItem,pipeline,deleteTaskConfig} = props
+    const {setCreacteValue,data,setTaskFormDrawer,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
-    const [taskSort,setTaskSort] = useState(0) // 添加新阶段的位置
-    const [stages,setStages] = useState(0) // 阶段加入新任务
-    const [stagesId,setStagesId] = useState("") // 阶段加入新任务
     
     const pipelineType = pipeline.type
 
     // +新任务
     const newTask = () =>{
-        setTaskSort(data && data.length+1)
-        setStages(0)
-        setStagesId("")
+        setCreacteValue({
+            stages:0,
+            taskSort:data && data.length+1,
+            pipeline:{id:pipeline.id},
+        })
         setNewStageDrawer(true)
     }
 
-    // 多阶段 串行（上）
-    const serialPre = (item,index,stagesIndex) =>{
-        setStages(index+1)
-        setStagesId(item.stagesId)
-        setTaskSort(stagesIndex+1)
+    // 多阶段 串行
+    const serial = (list,groupIndex,stagesIndex) =>{
+        setCreacteValue({
+            stages:groupIndex+1,
+            stagesId:list.stagesId,
+            taskSort:stagesIndex,
+            pipeline:{id:pipeline.id},
+        })
         setNewStageDrawer(true)
     }
 
-    // 多阶段 串行（下）
-    const serialNext = (item,index,stagesIndex) =>{
-        setStages(index+1)
-        setStagesId(item.stagesId)
-        setTaskSort(stagesIndex+2)
+     // 多阶段 并行
+     const parallelTask = (groupIndex) => {
+        setCreacteValue({
+            taskSort:0,
+            stages:groupIndex+1,
+            pipeline:{id:pipeline.id},
+        })
         setNewStageDrawer(true)
     }
 
     // 插入任务
-    const insertData = (item,index) => {
-        setTaskSort(index+1)
-        setStages(0)
-        setStagesId("")
+    const insertData = (group,groupIndex) => {
+        setCreacteValue({
+            taskSort:groupIndex+1,
+            pipeline:{id:pipeline.id},
+        })
         setNewStageDrawer(true)
     }
 
@@ -82,13 +87,13 @@ const NewStage = props =>{
                     {
                         item && item.codeName ?
                         <>
-                            <div className="guiView_codeName">
+                            <div className="newStages-codeName">
                                 <div className="branch-title">
                                     <TagsOutlined style={{paddingRight:5}}/>
                                     {item.codeName} 
                                 </div>
                             </div>
-                            <div className="guiView_branch ">
+                            <div className="newStages-branch ">
                                 <div className="branch-address">
                                     {
                                         codeBranch==="" || !codeBranch ?
@@ -107,191 +112,194 @@ const NewStage = props =>{
         }
     }
 
-    // 多任务的btn
-    const renderSingleBtn = (item,index) =>{
-        return item.type > 10 &&
+    const groupHead = (
+        <div className="group-head">
+            <div className="name" style={{opacity:0}}/>
+        </div>
+    )
+
+    // 多任务（添加任务）；多阶段（添加阶段）
+    const renderFlowBtn = (group,groupIndex) =>{
+        return(
             <div className="group-flow">
-                <div className="group-flow_singleBtn">
-                    <svg className={`icon group-flow_btn_i`}
-                        aria-hidden="true"
-                        onClick={() =>insertData(item,index)}
+                <div className={`group-flow_btn ${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`}>
+                    <svg className="icon group-flow_btn_i"
+                            aria-hidden="true"
+                            onClick={() =>insertData(group,groupIndex)}
                     >
                         <use xlinkHref="#icon-zengjia"/>
                     </svg>
                 </div>
-            </div> 
+            </div>
+        )
+    } 
+
+    const newJobContent = (item,deep) =>{
+        return(
+            <div onClick={()=>showDetail(item)}
+                 style={{paddingLeft:deep}}
+                 className={`newStages-job-content ${valid(item.configId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
+            >
+                <div className="newStages-job-sub">
+                    <span className="newStages-job-title">
+                        <SubIcon type={item.type}/>
+                    </span>
+                </div>
+                {valid(item.configId) &&
+                    <div className="newStages-job-warn">
+                        <ExclamationCircleOutlined />
+                    </div>
+                }
+                <Popconfirm
+                    title="你确定删除吗"
+                    onConfirm={e=>deletePart(e,item)}
+                    onCancel={e=>e.stopPropagation()}
+                    okText="确定"
+                    cancelText="取消"
+                >
+                    <div className="newStages-job-del" onClick={e=>e.stopPropagation()}>
+                        <DeleteOutlined />
+                    </div>
+                </Popconfirm>
+            </div>
+        )
     }
 
     // 多任务
-    const renderSingleTask = (item,index) =>{
-        return <Fragment key={index}>
-            {renderSingleBtn(item,index)}
+    const renderSingleTask = (group,groupIndex) =>{
+        return <Fragment key={groupIndex}>
+            { group.type > 10 && renderFlowBtn(group,groupIndex) }
             <div className="group-table">
-                <div className="group-head">
-                    <div className="name" style={{opacity:0}}/>
-                </div>
+                {groupHead}
                 <div className="newStages-single">
-                    <div className="newStages-step">
-                        <div className="newStages-content">
-                            <div className={`newStages-job`}>
-                                <div onClick={()=>showDetail(item)}
-                                    className={`newStages-job-content ${valid(item.configId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
-                                >
-                                    <div className="newStages-job-sub">
-                                        <span className="newStages-job-title">
-                                            <SubIcon type={item.type}/>
-                                        </span>
-    
-                                    </div>
-                                    {valid(item.configId) &&
-                                        <div className="newStages-job-warn">
-                                            <ExclamationCircleOutlined />
-                                        </div>
-                                    }
-                                    <Popconfirm
-                                        placement="topRight"
-                                        title="你确定删除吗"
-                                        onConfirm={e=>deletePart(e,item)}
-                                        onCancel={e=>e.stopPropagation()}
-                                        okText="确定"
-                                        cancelText="取消"
-                                    >
-                                        <div className="newStages-job-del" onClick={e=>e.stopPropagation()}>
-                                            <DeleteOutlined />
-                                        </div>
-                                    </Popconfirm>
-                                </div>
-                            </div>
-                        </div>
-                        {renderCode(item)}
+                    <div className={`newStages-job`}>
+                        {newJobContent(group,0)}
                     </div>
+                    { renderCode(group) }
                 </div>
             </div>
         </Fragment>
     }
 
-    // 多阶段的btn
-    const renderMultiBtn = (item,index) =>{
-        return !item.code &&
-            <div className="group-flow">
-                <div className="group-flow_multiBtn">
-                    <svg className={`icon group-flow_btn_i`}
-                         aria-hidden="true"
-                         onClick={() =>insertData(item,index)}
-                    >
-                        <use xlinkHref="#icon-zengjia"/>
-                    </svg>
-                </div>
+    // 并行任务添加按钮
+    const parallel = (groupIndex) =>{
+        return <div className="newStages-contents add-newStages-contents">
+        <div className="newStages-content" style={{paddingLeft:30}}>
+            <div className="newStages-job">
+                <div className="newStages-job-content" onClick={()=>parallelTask(groupIndex)}>
+                    <PlusOutlined/>
+                    <span style={{paddingLeft:5}}>并行任务</span>
+                </div>         
             </div>
+        </div>
+    </div>       
     }
 
     // 多阶段
-    const renderMultitask = (item,index) =>{
-        return <Fragment key={index}>
-        {renderMultiBtn(item,index)}
-        <div className="group-table">
-            <div className="group-head">
-                <div className="name" style={{opacity:0}}/>
-            </div>
+    const renderMultitask = (group,groupIndex) =>{
+        return <Fragment key={groupIndex}>
             {
-                item && item.taskValues && item.taskValues.map((stage,stagesIndex)=>{
-                    return (
-                    <div className="newStages-multi" key={stage.configId}>
-                        <div className="newStages-step">
-                            <div className="newStages-content">
-                                <div className={`newStages-job ${stage.type>10?"newStages-has":""}`}>
-                                    {
-                                        stage.type>10 &&
-                                        <div className="newStages-has-pre newStages-has-add" onClick={()=>serialPre(item,index,stagesIndex)}>
-                                            <svg className="icon" aria-hidden="true">
-                                                <use xlinkHref="#icon-zengjia"/>
-                                            </svg>
-                                        </div>
-                                    }
-                                    <div onClick={()=>showDetail(stage)}
-                                        className={`newStages-job-content ${valid(stage.configId)?"job-name":""} ${stage.type<10?"newStages-job-code":""}`}
-                                    >
-                                        <div className="newStages-job-sub">
-                                            <span className="newStages-job-title">
-                                                <SubIcon type={stage.type}/>
-                                            </span>
-                                        </div>
-                                        {valid(stage.configId) &&
-                                            <div className="newStages-job-warn">
-                                                <ExclamationCircleOutlined />
-                                            </div>
-                                        }
-                                        <Popconfirm
-                                            placement="topRight"
-                                            title="你确定删除吗"
-                                            onConfirm={e=>deletePart(e,stage)}
-                                            onCancel={e=>e.stopPropagation()}
-                                            okText="确定"
-                                            cancelText="取消"
-                                        >
-                                            <div className="newStages-job-del" onClick={e=>e.stopPropagation()}>
-                                                <DeleteOutlined />
-                                            </div>
-                                        </Popconfirm>
-                                    </div>
-                                    {
-                                        stage.type>10 &&
-                                        <div className="newStages-has-next newStages-has-add" onClick={()=>serialNext(item,index,stagesIndex)}>
-                                            <svg className="icon" aria-hidden="true">
-                                                <use xlinkHref="#icon-zengjia"/>
-                                            </svg>
-                                        </div>
-                                    }  
-                                </div>
-                            </div>
-                            {renderCode(stage)}
-                        </div>
-                    </div>
-                    )
-                })
+                !group.code && renderFlowBtn(group,groupIndex)
             }
-        </div>
+            <div className="group-table">
+                {groupHead}
+                <div className="newStages-multi">
+                    {
+                        group && group.stagesList && group.stagesList.map((list,listIndex)=>{
+                            return(
+                                <div className={`newStages-contents ${list.code?"newStages-code":""}`} key={listIndex}>
+                                    <div className="newStages-content">
+                                        {
+                                            list && list.taskValues && list.taskValues.map((stage,stagesIndex)=>{
+                                                return (
+                                                    <div key={stagesIndex}>
+                                                        <div className={`newStages-job ${!list.code?"newStages-has":""}`} >
+                                                            { !list.code &&
+                                                                <div className="newStages-has-add"
+                                                                     style={{marginRight:15}}
+                                                                     onClick={()=>serial(list,groupIndex,stagesIndex+1)}
+                                                                 >
+                                                                    <svg className="icon" aria-hidden="true">
+                                                                        <use xlinkHref="#icon-zengjia"/>
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                            { newJobContent(stage,20) }
+                                                            { !list.code &&
+                                                                <div className="newStages-has-add"
+                                                                     style={{marginLeft:15}}
+                                                                     onClick={()=>serial(list,groupIndex,stagesIndex+2)}
+                                                                >
+                                                                    <svg className="icon" aria-hidden="true">
+                                                                        <use xlinkHref="#icon-zengjia"/>
+                                                                    </svg>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                        { renderCode(stage) }
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    { !group.code && parallel(groupIndex) }
+                </div>
+            </div>
         </Fragment>
     }
 
     return(
-       <>
+        <div className="guiView-main_group">
             {
-                data && data.map((item,index) =>{
-                    return  pipeline && pipeline.type===1 ? renderSingleTask(item,index): renderMultitask(item,index)
+                data && data.map((group,groupIndex) =>{
+                    return  pipeline && pipeline.type===1 ? renderSingleTask(group,groupIndex): renderMultitask(group,groupIndex)
                 })
             }  
            {
-                data && data.length>0 &&
-                <div className="group-flow">
-                    <div className={`${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`} />
-                </div>
-           }
-            <div className="group-create">
-                <div className="group-head">
-                    <div className="name" style={{opacity:0}}/>
-                </div>
-                <div className="newStages-single">
-                    <div className="newStages-step"  >
-                        <div className="newStages-content">
-                            <div className="newStages-job">
-                                <div onClick={()=>newTask()} className="newStages-job-content newStages-btn">
-                                    <PlusOutlined/>
-                                    <span style={{paddingLeft:5}}>新任务</span>
+                data && data.length > 0 ?
+                <>
+                    <div className="group-flow">
+                        <div className={`group-flow_btn ${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`} />
+                    </div>
+                    <div className="group-create">
+                        {groupHead}
+                        <div className="newStages-multi">
+                            <div className="newStages-contents add-newStage">
+                                <div className="newStages-content">
+                                    <div className="newStages-job">
+                                        <div onClick={()=>newTask()} className="newStages-job-content">
+                                            <PlusOutlined/>
+                                            <span style={{paddingLeft:5}}>新任务</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </>
+                :
+                <div className="group-create">
+                    {groupHead}
+                    <div className="newStages-multi">
+                        <div className="newStages-job">
+                            <div onClick={()=>newTask()} className="newStages-job-content">
+                                <PlusOutlined/>
+                                <span style={{paddingLeft:5}}>新任务</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-           <AddDrawer
-                stages={stages}
-                stagesId={stagesId}
-                taskSort={taskSort}
+           }
+           
+            <AddDrawer
                 newStageDrawer={newStageDrawer}
                 setNewStageDrawer={setNewStageDrawer}
-           />
-       </>
+            />
+        </div>
     )
 }
 

@@ -8,7 +8,7 @@ const Gui = props =>{
 
     const {pipelineStore,configStore} = props
 
-    const {configValid,deleteTaskConfig,enabledValid,validType,data,taskFormDrawer,setTaskFormDrawer,dataItem,setDataItem} = configStore
+    const {setCreacteValue,configValid,deleteTaskConfig,enabledValid,validType,data,taskFormDrawer,setTaskFormDrawer,dataItem,setDataItem} = configStore
     const {pipeline,pipelineId} = pipelineStore
     
     useEffect(()=>{
@@ -19,16 +19,15 @@ const Gui = props =>{
     return (
         <div className="guiView">
             <div className="guiView-content">
-                <div className="guiView-main_group">
-                    <NewStage
-                        data={data}
-                        validType={validType}
-                        pipeline={pipeline}
-                        setTaskFormDrawer={setTaskFormDrawer}
-                        setDataItem={setDataItem}
-                        deleteTaskConfig={deleteTaskConfig}
-                    />
-                </div>
+                <NewStage
+                    data={data}
+                    pipeline={pipeline}
+                    validType={validType}
+                    setDataItem={setDataItem}
+                    setCreacteValue={setCreacteValue}
+                    setTaskFormDrawer={setTaskFormDrawer}
+                    deleteTaskConfig={deleteTaskConfig}
+                />
 
                 <FormDetailsDrawer
                     dataItem={dataItem}

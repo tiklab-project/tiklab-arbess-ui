@@ -69,7 +69,7 @@ const Structure = props => {
     let interval=null
     useEffect(() => {
         pipelineId && findPipelineState(pipelineId).then(res=>{
-            if(res.data===1){
+            if(res.data===2){
                 interval=setInterval(()=>
                     pipelineRunStatus(pipelineId).then(res=>{
                         if(res.code===0){renderExec(res.data)}
