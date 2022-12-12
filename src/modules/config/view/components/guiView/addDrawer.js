@@ -15,8 +15,9 @@ const AddDrawer = props =>{
             placement="right"
             onClose={()=>setNewStageDrawer(false)}
             visible={newStageDrawer}
-            maskStyle={{background:"transparent"}}
-            contentWrapperStyle={{width:600,top:48,height:"calc(100% - 48px)"}}
+            maskStyle={{backgroundColor:"transparent"}}
+            style={{top:48}}
+            contentWrapperStyle={{width:600,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
         >
             <div className="wrapper">

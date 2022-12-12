@@ -37,14 +37,16 @@ const Head = props =>{
         findMessageDispatchItemPage(0)
     },[])
 
-
     useEffect(()=>{
+        if(path.indexOf("/index/task")===0){
+            path = "/index/pipeline"
+        }
         setCurrentLink(path)
     },[path])
 
     const routers=[
         {
-            key:"homePage",
+            key:"home",
             to:"/index/home",
             title: "home",
         },

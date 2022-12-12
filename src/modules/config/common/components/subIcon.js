@@ -7,7 +7,7 @@ const SubIcon = props =>{
 
     const renderSubIcon = (icon,title) =>{
         return <>
-            <span className="subicon-icon" style={{paddingRight:5}}>
+            <span className="subicon-icon" style={{paddingRight:8}}>
                 <svg className="icon" aria-hidden="true">
                     <use xlinkHref={`#icon-${icon}`} />
                 </svg>

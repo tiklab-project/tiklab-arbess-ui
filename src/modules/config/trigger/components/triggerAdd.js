@@ -1,36 +1,62 @@
 import React,{useState,useEffect} from "react";
-import {Modal} from "antd";
+import {Form,Modal,Radio,Checkbox,TimePicker,Row,Col} from "antd";
+import moment from "moment";
 import Btn from "../../../common/btn/btn";
-import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight} from "../../../common/client/client";
+import ModalTitle from "../../../common/modalTitle/modalTitle";
 
 
 const TriggerAdd = props =>{
 
-    const {triggerVisible,setTriggerVisible,pipelineId,createBeforeConfig} = props
+    const {triggerVisible,setTriggerVisible,createTriggerConfig,pipelineId,formValue,updateTriggerConfig} = props
+
+    const [form] = Form.useForm()
 
     const [height,setHeight] = useState(0)
-    const [typess,setType] = useState(null)
 
     useEffect(()=>{
         setHeight(autoHeight())
     },[height])
 
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
-
-    const getData = item => {
-        setType(item.id)
-    }
-
-    const onOk = () =>{
-        const params = {
-            taskType:81,
-            pipeline:{pipelineId},
-            value:null
+    useEffect(()=>{
+        if(triggerVisible){
+            if(formValue!=="") {
+                form.setFieldsValue({
+                    taskType: formValue.taskType,
+                    timeList: formValue.timeList,
+                    time: moment(formValue.time, "HH:mm")
+                })
+            }else {
+                form.resetFields()
+            }
         }
-        createBeforeConfig(params)
+    },[triggerVisible])
+
+    const onOk = fieldsValue =>{
+        if(formValue===""){
+            const value = {
+                values:{
+                    taskType:fieldsValue.taskType,
+                    time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
+                    timeList:fieldsValue.timeList
+                },
+                pipeline:{id:pipelineId},
+                taskType:81,
+            }
+            createTriggerConfig(value)
+        }else {
+            const value = {
+                values:{
+                    taskType:fieldsValue.taskType,
+                    time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
+                    timeList:fieldsValue.timeList
+                },
+                pipeline:{id:pipelineId},
+                taskType:81,
+                configId:formValue.configId
+            }
+            updateTriggerConfig(value)
+        }
         setTriggerVisible(false)
     }
 
@@ -42,56 +68,88 @@ const TriggerAdd = props =>{
                 isMar={true}
             />
             <Btn
-                onClick={onOk}
+                onClick={() => {
+                    form
+                        .validateFields()
+                        .then((values) => {
+                            form.resetFields()
+                            onOk(values)
+                        })
+                }}
                 title={"确定"}
                 type={"primary"}
             />
         </>
     )
 
-    const type = [
-        {
-            id:81,
-            title:"定时触发"
-        },
-    ]
-
     return(
-
         <Modal
-            closable={false}
             visible={triggerVisible}
             onCancel={()=>setTriggerVisible(false)}
+            closable={false}
+            destroyOnClose={true}
             footer={modalFooter}
+            width={500}
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
             className="mf"
         >
             <div className="trigger-modal">
-                <div className="trigger-modal-top">
+                <div className="trigger-modal-up">
                     <ModalTitle
                         setVisible={setTriggerVisible}
-                        title={"添加"}
+                        title={formValue?"修改定时触发":"添加定时触发"}
                     />
                 </div>
-                <div className="group">
-                    <div className="group-content">
-                        {
-                            type.map(item=>{
-                                return <div
-                                    key={item.id}
-                                    className={`group-desc ${typess===item.id?"group-select":""}`}
-                                    onClick={()=>getData(item)}
-                                >
-                                    <div className="group-desc-tpl">
-                                        <div className="group-tpl">
-                                            {item.title}
-                                        </div>
-                                    </div>
-                                </div>
-                            })
-                        }
-                    </div>
+                <div className="trigger-modal-content">
+                    <Form
+                        form={form}
+                        layout={"vertical"}
+                        initialValues={{taskType:1,timeList:[1]}}
+                    >
+                        <Form.Item label="触发方式" name={"taskType"}>
+                            <Radio.Group>
+                                <Radio value={1}>单次触发</Radio>
+                                <Radio value={2}>周期触发</Radio>
+                            </Radio.Group>
+                        </Form.Item>           
+
+                        <Form.Item label="日期选择" name={"timeList"} rules={[{required:true,message:"日期选择不能为空"}]}>
+                            <Checkbox.Group>
+                                <Row>
+                                    {/*<Col span={8}>*/}
+                                    {/*    <Checkbox value={8}>全选</Checkbox>*/}
+                                    {/*</Col>*/}
+                                    <Col span={8}>
+                                        <Checkbox value={1}>星期一</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value={2} >星期二</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value={3} >星期三</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value={4} >星期四</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value={5} >星期五</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value={6} >星期六</Checkbox>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Checkbox value={7} >星期天</Checkbox>
+                                    </Col>
+                                </Row>
+                            </Checkbox.Group>
+                        </Form.Item>
+
+
+                        <Form.Item label="触发时间" name={"time"} rules={[{required:true,message:"触发时间不能为空"},]}>
+                            <TimePicker placeholder="触发时间" format={"HH:mm"}/>
+                        </Form.Item>
+                    </Form>
                 </div>
             </div>
 

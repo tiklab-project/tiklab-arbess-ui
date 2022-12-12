@@ -15,9 +15,6 @@ export class ConfigStore{
 
     @observable validType = []
     @observable data = []
-    @observable formInitialValues = {} //表单初始化
-    @observable opt = 1
-    @observable addConfigVisible = false
     @observable isFindConfig = false
     @observable enabledValid = false // 是否启用表单效验
     @observable isPlugin = false // 是否存在插件
@@ -35,23 +32,8 @@ export class ConfigStore{
     }
 
     @action
-    setAddConfigVisible = value =>{
-        this.addConfigVisible = value
-    }
-
-    @action
-    setFormInitialValues = value =>{
-        this.formInitialValues = value
-    }
-
-    @action
     setIsPlugin = value =>{
         this.isPlugin = value
-    }
-
-    @action
-    setOpt = value =>{
-        this.opt = value
     }
 
     @action
@@ -91,6 +73,7 @@ export class ConfigStore{
                 configId: data.data,
             }
             this.isFindConfig=!this.isFindConfig
+            this.enabledValid=!this.enabledValid
             this.taskFormDrawer = true
         }
         if(data.code===50001){

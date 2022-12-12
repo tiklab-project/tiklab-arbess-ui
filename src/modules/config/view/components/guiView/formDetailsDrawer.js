@@ -94,7 +94,7 @@ const FormDetailsDrawer = props =>{
             }
             form.validateFields()
         }
-    },[taskFormDrawer])
+    },[taskFormDrawer,dataItem])
 
     const renderForms = dataItem =>{
         switch (dataItem.type){
@@ -130,7 +130,8 @@ const FormDetailsDrawer = props =>{
             onClose={()=>setTaskFormDrawer(false)}
             closable={false}
             destroyOnClose={true}
-            maskStyle={{background:"transparent"}}
+            // maskStyle={{background:"transparent"}}
+            mask={false}
             contentWrapperStyle={{width:480,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
             className="mf"

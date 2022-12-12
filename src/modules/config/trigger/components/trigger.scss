@@ -1,28 +1,17 @@
 .trigger{
-    .trigger-add{
+    flex: 1;
+    overflow: auto;
+    .trigger-up{
         display: flex;
-        justify-content: flex-end;
         align-items: center;
-        height: 50px;
-        padding: 0 20px;
-        background: #fff;
-        position: sticky;
-        top: 60px;
-        z-index: 9;
-    }
-    .trigger-tables{
-        background: #ffffff;
-        padding: 10px 15px;
-    }
-    .trigger-headline{
-        height: 40px;
-        line-height: 40px;
-        border-bottom: 1px solid var(--tiklab-gray-200);
-        margin-bottom: var(--tiklab-padding-item);
-        display: flex;
-        justify-content: space-between;
-        .headline-left{
+        padding-bottom: 10px;
+        font-size: var(--tiklab-font-13);
+        .trigger-up-title{
             font-weight: var(--tiklab-font-weight-bold);
+        }
+        .trigger-up-num{
+            flex: 1;
+            padding: 0 var(--tiklab-padding-item);
         }
     }
 }

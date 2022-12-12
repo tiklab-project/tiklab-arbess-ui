@@ -1,14 +1,18 @@
 .post-pose{
-    .post-pose-add{
+    flex: 1;
+    overflow: auto;
+    .post-pose-up{
         display: flex;
-        justify-content: flex-end;
         align-items: center;
-        height: 50px;
-        padding: 0 20px;
-        background: #fff;
-        position: sticky;
-        top: 60px;
-        z-index: 9;
+        padding-bottom: 10px;
+        font-size: var(--tiklab-font-13);
+        .post-pose-up-title{
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+        .post-pose-up-num{
+            flex: 1;
+            padding: 0 var(--tiklab-padding-item);
+        }
     }
     .post-pose-headline{
         height: 40px;
@@ -47,8 +51,41 @@
     }
 }
 
+.post-pose-user .ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
+    padding: 0;
+}
+.post-pose-title{
+    display: flex;
+    justify-content: space-between;
+}
+.post-pose-btn{
+    padding-top: 8px;
+}
+
 .postpose-modal{
     padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+    .react-codemirror2{
+        width: 100%;
+        overflow-y: auto;
+    }
+    .postpose-modal-content{
+        .CodeMirror{
+            .CodeMirror-placeholder{
+                color: #bfbfbf;
+                font-family: Microsoft YaHei;
+            }
+            .CodeMirror-code{
+                font-family: Microsoft YaHei;
+            }
+            .CodeMirror-gutter-wrapper{
+                left: -41px !important;
+            }
+            .CodeMirror-gutters {
+                left: 0 !important;
+            }
+        }
+    }
+
     .group {
         &-content {
             display: -webkit-box;

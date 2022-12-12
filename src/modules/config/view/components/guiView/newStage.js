@@ -1,5 +1,5 @@
 import React,{useState,Fragment} from "react";
-import {Space,Popconfirm} from "antd";
+import {Popconfirm} from "antd";
 import {
     PlusOutlined,
     ExclamationCircleOutlined,
@@ -12,11 +12,17 @@ import AddDrawer from "./addDrawer";
 
 const NewStage = props =>{
 
-    const {setCreacteValue,data,setTaskFormDrawer,validType,setDataItem,pipeline,deleteTaskConfig} = props
+    const {setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     
     const pipelineType = pipeline.type
+
+    // 新建任务弹窗事件操作
+    const popUp = () =>{
+        setTaskFormDrawer(false)
+        setNewStageDrawer(true)
+    }
 
     // +新任务
     const newTask = () =>{
@@ -25,7 +31,7 @@ const NewStage = props =>{
             taskSort:data && data.length+1,
             pipeline:{id:pipeline.id},
         })
-        setNewStageDrawer(true)
+        popUp()
     }
 
     // 多阶段 串行
@@ -36,7 +42,7 @@ const NewStage = props =>{
             taskSort:stagesIndex,
             pipeline:{id:pipeline.id},
         })
-        setNewStageDrawer(true)
+        popUp()
     }
 
      // 多阶段 并行
@@ -46,7 +52,7 @@ const NewStage = props =>{
             stages:groupIndex+1,
             pipeline:{id:pipeline.id},
         })
-        setNewStageDrawer(true)
+        popUp()
     }
 
     // 插入任务
@@ -55,7 +61,7 @@ const NewStage = props =>{
             taskSort:groupIndex+1,
             pipeline:{id:pipeline.id},
         })
-        setNewStageDrawer(true)
+        popUp()
     }
 
     // Form详情
@@ -173,7 +179,7 @@ const NewStage = props =>{
                 {groupHead}
                 <div className="newStages-single">
                     <div className={`newStages-job`}>
-                        {newJobContent(group,0)}
+                        {newJobContent(group,14)}
                     </div>
                     { renderCode(group) }
                 </div>
@@ -299,6 +305,7 @@ const NewStage = props =>{
                 newStageDrawer={newStageDrawer}
                 setNewStageDrawer={setNewStageDrawer}
             />
+        
         </div>
     )
 }

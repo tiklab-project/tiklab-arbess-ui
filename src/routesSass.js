@@ -63,6 +63,7 @@ const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messag
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
+const MessageNoticeContent=AsyncComponent(()=>import("./modules/system/message/messageNotice"))
 
 /* 日志 */
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
@@ -290,12 +291,13 @@ const routers=[
                         component: MessageSendTypeTrue,
                     },
                     {
+                        path:"/index/system/mes/notice",
+                        component: MessageNoticeContent,
+                    },
+                    {
                         path:"/index/system/version",
                         component: Version,
                     },
-                    // {
-                    //     render:()=><Redirect to="/index/system/role"/>,
-                    // },
                 ]
             },
         ]

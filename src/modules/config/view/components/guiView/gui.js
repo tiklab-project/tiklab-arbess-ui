@@ -17,25 +17,22 @@ const Gui = props =>{
     },[pipelineId,enabledValid])
 
     return (
-        <div className="guiView">
-            <div className="guiView-content">
-                <NewStage
-                    data={data}
-                    pipeline={pipeline}
-                    validType={validType}
-                    setDataItem={setDataItem}
-                    setCreacteValue={setCreacteValue}
-                    setTaskFormDrawer={setTaskFormDrawer}
-                    deleteTaskConfig={deleteTaskConfig}
-                />
+        <div className="guiView" style={taskFormDrawer?{maxWidth:"calc(100% - 480px)"}:null}>
+            <NewStage
+                data={data}
+                pipeline={pipeline}
+                validType={validType}
+                setDataItem={setDataItem}
+                setCreacteValue={setCreacteValue}
+                setTaskFormDrawer={setTaskFormDrawer}
+                deleteTaskConfig={deleteTaskConfig}
+            />
 
-                <FormDetailsDrawer
-                    dataItem={dataItem}
-                    taskFormDrawer={taskFormDrawer}
-                    setTaskFormDrawer={setTaskFormDrawer}
-                />
-
-            </div>
+            <FormDetailsDrawer
+                dataItem={dataItem}
+                taskFormDrawer={taskFormDrawer}
+                setTaskFormDrawer={setTaskFormDrawer}
+            />
         </div>
     )
 }

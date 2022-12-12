@@ -2,16 +2,15 @@ import React,{useState} from "react";
 import {
     CaretRightOutlined,
     LoadingOutlined,
-    ExclamationCircleOutlined
 } from "@ant-design/icons";
 import {message,Spin} from "antd";
-import {getVersionInfo} from "tiklab-core-ui";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/btn";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import View from "../../view/container/view";
 import Postpose from "../../postpose/container/postpose";
+// import Postpose from "../../postpose/components/postpose";
 import Trigger from "../../trigger/container/trigger";
 import "./config.scss";
 
@@ -20,16 +19,17 @@ const Config = props =>{
     const {pipelineStore,configStore,structureStore} = props
 
     const {pipelineStartStructure} = structureStore
-    const {validType,data,setOpt} = configStore
+    const {validType,data} = configStore
     const {pipeline} = pipelineStore
 
-    const [processVisible,setProcessVisible] = useState(false)
-    const [type,setType] = useState(1)
+    const [type,setType] = useState(3)
+    const [process,setProcess] = useState(false) // 运行按钮
+    
     const pipelineId = pipeline.id
 
     const run = () => {
         // 改变按钮
-        setProcessVisible(true)
+        setProcess(true)
         pipelineStartStructure(pipelineId).then(res=>{
             if(res.code===0){
                 if(!res.data){
@@ -39,23 +39,9 @@ const Config = props =>{
             }
         })
     }
-
+ 
+    // 是否能运行
     const runStatu = () => !(data && data.length < 1 || validType && validType.length > 0)
-
-    // 滚动--锚点
-    const onScroll = () =>{
-        const scrollTop=document.getElementById("config-content").scrollTop
-        data && data.map((item,index)=>{
-            const form = `formView_${index+1}`
-            const iId = document.getElementById(form)
-            const lastId = document.getElementById(form) && document.getElementById(form).previousSibling
-            const iTop = iId && iId.offsetTop
-            const lastTop =lastId && lastId.offsetTop
-            if(scrollTop>lastTop && scrollTop<iTop ){
-                setOpt(index+1)
-            }
-        })
-    }
 
     const typeLis = [
         {
@@ -73,38 +59,15 @@ const Config = props =>{
     ]
 
     return(
-        <div className="config mf" id="config-content" onScroll={onScroll}>
+        <div className="config mf">
             <div className="config-up">
                 <div className="config-top">
                     <div className="config_bread">
                         <BreadcrumbContent firstItem={pipeline.name} secondItem={"配置"}/>
                     </div>
-                    <div className="config-tabs">
-                        {
-                            typeLis.map(item=>{
-                                return(
-                                    <div
-                                        key={item.id}
-                                        className={`config-tab ${type===item.id?"config-active":""}`}
-                                        onClick={()=>setType(item.id)}
-                                    >
-                                        {item.title}
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="config-valid">
-                        {validType && validType.length > 0 ?
-                            <span>
-                                <ExclamationCircleOutlined style={{fontSize:16}}/> &nbsp;
-                                <span className="config-valid-num">{validType && validType.length}项未配置</span>
-                            </span> :
-                            null}
-                    </div>
                     <div className="changeView-btn">
                         {
-                            processVisible ?
+                            process ?
                                 <Btn
                                     type={"primary"}
                                     title={<Spin indicator={<LoadingOutlined style={{ fontSize: 25 }} spin />} />}
@@ -119,6 +82,21 @@ const Config = props =>{
 
                         }
                     </div>
+                </div>
+                <div className="config-tabs">
+                    {
+                        typeLis.map(item=>{
+                            return(
+                                <div
+                                    key={item.id}
+                                    className={`config-tab ${type===item.id?"config-active":""}`}
+                                    onClick={()=>setType(item.id)}
+                                >
+                                    {item.title}
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
             {

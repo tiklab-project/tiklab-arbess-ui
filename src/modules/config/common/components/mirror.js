@@ -2,6 +2,7 @@ import React from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
+
 // 设置代码语言模式
 import "codemirror/mode/shell/shell.js";
 import "codemirror/mode/ruby/ruby.js";
@@ -9,6 +10,8 @@ import "codemirror/mode/ruby/ruby.js";
 import "codemirror/theme/solarized.css";
 // 黑色主题
 import "codemirror/theme/dracula.css";
+// 高亮
+import "codemirror/addon/selection/active-line";
 // 折叠代码
 import "codemirror/addon/fold/foldgutter.css";
 import "codemirror/addon/fold/foldcode.js";
@@ -20,8 +23,7 @@ import "codemirror/addon/fold/markdown-fold.js";
 import "codemirror/addon/fold/comment-fold.js";
 // 提示
 import "codemirror/addon/display/placeholder.js";
-// 高亮
-import "codemirror/addon/selection/active-line";
+
 
 export const ViewMirror = props =>{
     const {mirrorRefs,mirrorValue,bordered,onFocus,placeholder} = props
@@ -41,15 +43,33 @@ export const ViewMirror = props =>{
     )
 }
 
+export const PostposeMirrorScenario = props =>{
+    const {type,mirrorRefs,value} = props
+    return (
+        <CodeMirror
+            value={value}
+            ref={mirrorRefs}
+            options={{
+                mode: type===71 ? "ruby":"shell",
+                lineNumbers: true,
+                lineWrapping:false,
+                foldGutter: true   ,
+                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+                styleActiveLine:true
+            }}
+        />
+    )
+}
+
 export const PostposeMirror = props =>{
     const {mirrorRefs,item,styleActiveLine,onFocus} = props
     return (
         <CodeMirror
-            value={item && item.scriptOrder}//内容
+            value={item && item.scriptOrder}
             ref={mirrorRefs}
             options={{
-                mode: item.type ===71 ? "ruby":"shell",//语言
-                lineNumbers: true, // 是否显示行号
+                mode: item.type ===71 ? "ruby":"shell",
+                lineNumbers: true,
                 lineWrapping:true,
                 foldGutter: true,
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],

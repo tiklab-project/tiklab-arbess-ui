@@ -1,7 +1,6 @@
 .config{
     height: 100%;
-    overflow: auto;
-    background: var(--mf-backdrop-color);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     .config-up{
@@ -11,26 +10,27 @@
         background: #ffffff;
         z-index: 9;
         min-width: 768px;
+        border-bottom: 1px solid #dedede;
     }
     .config-top{
         display: flex;
-        height: 60px;
         align-items: center;
-        padding: 0 20px;
-        border-bottom: 1px solid #dedede;
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
     }
     .config_bread{
-        padding-right: 20px;
+        padding-right: var(--tiklab-padding-item);
+        flex: 1;
     }
     .config-tabs{
         display: flex;
-        flex: 1;
-        height: 60px;
-        line-height: 60px;
-        padding-left: 24px;
+        padding: 0 var(--tiklab-padding);
+        height: 40px;
+        line-height: 40px;
         .config-tab{
-            padding: 0 10px;
             cursor: pointer;
+            &:not(:last-child){
+                margin-right: var(--tiklab-padding);
+            }
         }
         .config-active{
             color: var(--tiklab-blue);

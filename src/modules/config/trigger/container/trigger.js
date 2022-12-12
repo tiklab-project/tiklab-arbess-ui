@@ -1,39 +1,36 @@
 import React,{useState,useEffect} from "react";
+import {Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
-import {Space,Table} from "antd";
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../../common/emptyText/emptyText";
-import Btn from "../../../common/btn/btn";
-import TriggerTimeAdd from "../components/triggerTimeAdd";
+import TriggerAdd from "../components/triggerAdd";
 import Listaction from "../../../common/list/listaction";
 import "../components/trigger.scss";
-import HlineIcon from "../../common/components/hlineIcon";
+import Btn from "../../../common/btn/btn";
 
 // 触发器
 const Trigger = props =>{
     
     const {triggerStore,pipelineStore} = props
 
-    const {updateTriggerConfig,deleteTriggerConfig,createTriggerConfig,findAllTriggerConfig,oneAllTriggerConfig,triggerData,
-        isFindTrigger
-    } = triggerStore
-    const {pipeline,pipelineId} = pipelineStore
+    const {updateTriggerConfig,deleteTriggerConfig,createTriggerConfig,findAllTriggerConfig,triggerData,isFindTrigger} = triggerStore
+    const {pipelineId} = pipelineStore
 
-    const [triggerTimeVisible,setTriggerTimeVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
+    const [triggerVisible,setTriggerVisible] = useState(false)
 
     useEffect(()=>{
         pipelineId && findAllTriggerConfig(pipelineId)
-    },[isFindTrigger,pipelineId])
-    
-    const addTriggerTime = item => {
+    },[pipelineId,isFindTrigger])
+
+    const addTrigger = () => {
         setFormValue("")
-        setTriggerTimeVisible(true)
+        setTriggerVisible(true)
     }
     
     const edit = (text,record) => {
         setFormValue(record)
-        setTriggerTimeVisible(true)
+        setTriggerVisible(true)
     }
 
     const del = (text,record) => {
@@ -81,18 +78,24 @@ const Trigger = props =>{
     return (
         <div className="trigger">
             <div className="trigger-content home-limited">
+                <div className="trigger-up">
+                    <div className="trigger-up-title">定时触发</div>
+                    <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}个定时任务</div>
+                    <Btn
+                        title={"添加"}
+                        icon={<PlusOutlined/>}
+                        onClick={()=>addTrigger()}
+                    />
+                    <TriggerAdd
+                        triggerVisible={triggerVisible}
+                        setTriggerVisible={setTriggerVisible}
+                        createTriggerConfig={createTriggerConfig}
+                        updateTriggerConfig={updateTriggerConfig}
+                        pipelineId={pipelineId}
+                        formValue={formValue}
+                    />
+                </div>
                 <div className="trigger-tables">
-                    <div className="trigger-headline">
-                        <div className="headline-left">
-                            <HlineIcon type={81}/>
-                        </div>
-                        <Btn
-                            type={"link"}
-                            icon={<PlusOutlined/>}
-                            onClick={()=>addTriggerTime()}
-                            title={"添加"}
-                        />
-                    </div>
                     <Table
                         bordered={false}
                         columns={columns}
@@ -100,14 +103,6 @@ const Trigger = props =>{
                         rowKey={record=>record.timeId}
                         pagination={false}
                         locale={{emptyText: <EmptyText title={"没有查询到定时任务"}/>}}
-                    />
-                    <TriggerTimeAdd
-                        triggerTimeVisible={triggerTimeVisible}
-                        setTriggerTimeVisible={setTriggerTimeVisible}
-                        createTriggerConfig={createTriggerConfig}
-                        updateTriggerConfig={updateTriggerConfig}
-                        pipelineId={pipelineId}
-                        formValue={formValue}
                     />
                 </div>
             </div>

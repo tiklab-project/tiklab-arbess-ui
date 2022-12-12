@@ -101,8 +101,8 @@ export const applicationRouters = a =>{
                     purviewCode: "message_type",
                 },
                 {
-                    id:"/index/system/mes/management",
-                    title:"消息管理",
+                    id:"/index/system/mes/notice",
+                    title:"通知方案",
                     icon:<SoundOutlined />,
                     purviewCode:"message_setting",
                 },
@@ -201,8 +201,8 @@ export const applicationRouter = [
                 purviewCode: "message_type",
             },
             {
-                id:"/index/system/mes/management",
-                title:"消息管理",
+                id:"/index/system/mes/notice",
+                title:"通知方案",
                 icon:<SoundOutlined />,
                 purviewCode:"message_setting",
             },
@@ -310,6 +310,12 @@ export const templateRouter = [
                 purviewCode:"basics",
             },
             {
+                id:"/index/system/mes/management",
+                title:"消息管理",
+                icon:<MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
                 id:"/index/system/mes/type",
                 title:"消息类型",
                 icon:<MenuOutlined />,
@@ -324,6 +330,12 @@ export const templateRouter = [
             {
                 id:"/index/system/mes/sendtrue",
                 title:"消息通知类型",
+                icon:<MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
+                id:"/index/system/mes/noticetrue",
+                title:"通知方案",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },
