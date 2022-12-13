@@ -60,14 +60,12 @@ export class PostposeStore {
 
     @action
     findAllPostConfig = async value =>{
-        this.isLoading = true
         const params = new FormData()
         params.append("pipelineId",value)
         const data = await FindAllPostConfig(params)
         if(data.code===0){
             this.postposeData = data.data && data.data
             this.fixedPostposeData = data.data && data.data
-            this.isLoading = false
         }
         return data
     }

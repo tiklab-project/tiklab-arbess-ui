@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {observer} from "mobx-react";
 import StrRightLogDrawer from "./strRightLogDrawer";
-import StrRightExecute from "./strRightExecute";
+import StrRightExec from "./strRightExec";
 import StrRightItem from "./strRightItem";
 
 const StrRight = props =>{
@@ -17,12 +17,14 @@ const StrRight = props =>{
         <div className="right-mid">
             {
                 index === 0 ?
-                    <StrRightExecute
+                    <StrRightExec
                         pipeline={pipeline}
                         rightExecuteData={rightExecuteData}
                         status={status}
                         execState={execState}
                         killInstance={killInstance}
+                        setVisible={setVisible}
+                        setDrawerContent={setDrawerContent}
                     />
                     :
                     <StrRightItem

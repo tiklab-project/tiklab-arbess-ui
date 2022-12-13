@@ -59,7 +59,6 @@ const DomainRoleContent=AsyncComponent(()=>import("./modules/system/privilege/do
 
 /* 消息 */
 const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
-const MessageTemplate=AsyncComponent(()=>import("./modules/system/message/messageTemplate"))
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
@@ -68,8 +67,8 @@ const MessageNoticeContent=AsyncComponent(()=>import("./modules/system/message/m
 /* 日志 */
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
 const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
-const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
 const LogType=AsyncComponent(()=>import("./modules/system/oplog/logType"))
+const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
 
 /* 代办 */
 const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
@@ -273,10 +272,6 @@ const routers=[
                     {
                         path:"/index/system/mes/management",
                         component: MessageManagement,
-                    },
-                    {
-                        path:"/index/system/mes/template",
-                        component: MessageTemplate,
                     },
                     {
                         path:"/index/system/mes/type",

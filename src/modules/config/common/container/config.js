@@ -22,7 +22,7 @@ const Config = props =>{
     const {validType,data} = configStore
     const {pipeline} = pipelineStore
 
-    const [type,setType] = useState(3)
+    const [type,setType] = useState(1)
     const [process,setProcess] = useState(false) // 运行按钮
     
     const pipelineId = pipeline.id

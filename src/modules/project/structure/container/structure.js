@@ -112,7 +112,7 @@ const Structure = props => {
                 //被迫停止
                 return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
 
-            case 0 :
+            case 0:
                 //运行
                 return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
 
@@ -151,7 +151,9 @@ const Structure = props => {
                     status={status}
                 />
                 <div className="structure-right">
-                    <BreadcrumbContent firstItem={pipeline.name} secondItem={"历史"}/>
+                    <div className="structure-right-bread">
+                        <BreadcrumbContent firstItem={pipeline.name} secondItem={"历史"}/>
+                    </div>
                     {
                         execState !== ""  || leftPageList && leftPageList.length > 0 ?
                             <StructureRight

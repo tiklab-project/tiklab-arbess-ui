@@ -33,7 +33,7 @@ const SystemAside= props =>  {
                 arr = ["message_type","message_setting"]
                 break
             case 3:
-                arr = ["log"]
+                arr = ["pipeline_log"]
                 break
         }
         for (let i = 0; i < arr.length; i++) {
@@ -45,7 +45,7 @@ const SystemAside= props =>  {
     }
 
     useEffect(()=>{
-        getSystemPermissions(getUser().userId,"matflow").then(res=>{
+        getSystemPermissions(getUser().userId).then(res=>{
             const data = res.data && res.data
             for(let i=0;i<department.length;i++){
                 department[i] = x(i,data)

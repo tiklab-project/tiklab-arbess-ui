@@ -44,7 +44,7 @@ export const ViewMirror = props =>{
 }
 
 export const PostposeMirrorScenario = props =>{
-    const {type,mirrorRefs,value} = props
+    const {type,mirrorRefs,value,onFocus,styleActiveLine} = props
     return (
         <CodeMirror
             value={value}
@@ -52,11 +52,12 @@ export const PostposeMirrorScenario = props =>{
             options={{
                 mode: type===71 ? "ruby":"shell",
                 lineNumbers: true,
-                lineWrapping:false,
-                foldGutter: true   ,
+                lineWrapping:true,
+                styleActiveLine:styleActiveLine,
+                foldGutter: true,
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                styleActiveLine:true
             }}
+            onFocus={e=>onFocus(e)}
         />
     )
 }
@@ -71,9 +72,10 @@ export const PostposeMirror = props =>{
                 mode: item.type ===71 ? "ruby":"shell",
                 lineNumbers: true,
                 lineWrapping:true,
+                styleActiveLine: styleActiveLine,
                 foldGutter: true,
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                styleActiveLine: styleActiveLine, //高亮
+            
             }}
             onFocus={e=>onFocus(e)}
         />
@@ -88,13 +90,14 @@ export const ExpandMirror = props =>{
             value={expandValue}//内容
             options={{
                 mode: {name:"shell",shell: true },//语言
-                // theme: "solarized light",
                 theme:"dracula",
                 autofocus:true,
                 lineNumbers: true, // 是否显示行号
                 lineWrapping:true,
                 foldGutter: true,
                 styleActiveLine:true,
+                foldGutter: true,
+                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             }}
         />
     )

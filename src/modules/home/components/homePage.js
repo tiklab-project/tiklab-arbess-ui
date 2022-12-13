@@ -58,14 +58,17 @@ const HomePage = props =>{
                      onClick={()=> props.history.push(`/index/task/${item.pipeline && item.pipeline.id}/survey`)}
                 >
             <div className="pipelineRecent-item-title">
-                <Space>
-                    <span className={`mf-icon-${item.pipeline.color} pipelineRecent-icon`}>
-                        {item.pipeline && item.pipeline.name.substring(0,1).toUpperCase()}
-                    </span>
-                    <span className="pipelineRecent-name">
-                        {item.pipeline && item.pipeline.name}
-                    </span>
-                </Space>
+                {
+                    item && item.pipeline &&
+                    <Space>
+                        <span className={`mf-icon-${item.pipeline.color} pipelineRecent-icon`}>
+                            {item.pipeline.name.substring(0,1).toUpperCase()}
+                        </span>
+                            <span className="pipelineRecent-name">
+                            {item.pipeline.name}
+                        </span>
+                    </Space>
+                }
             </div>
             <div className="pipelineRecent-item-details">
                 <div className="pipelineRecent-item-detail">

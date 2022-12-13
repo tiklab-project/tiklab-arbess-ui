@@ -2,6 +2,11 @@
     overflow-y: hidden;
     background: #ffffff;
     height: 100%;
+    .ant-avatar{
+        width: 20px;
+        height: 20px;
+        font-size: 12px !important;
+    }
     &-content{
         display: flex;
         flex-direction: row;
@@ -36,7 +41,7 @@
                     display: flex;
                     flex-direction: row;
                     width: 100%;
-                    padding: 10px 10px 10px 20px;
+                    padding: 10px 20px;
                     cursor: pointer;
                     &:hover{
                         background: var(--tiklab-gray-300);
@@ -70,11 +75,12 @@
         }
         .structure-right{
             flex-grow: 1;
-            padding: 20px;
-            overflow: auto;
+            overflow: hidden;
+            .structure-right-bread{
+                padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+            }
             .right-mid{
-                height: calc(100% - 26px);
-                padding-top: 15px;
+                height: calc(100% - 40px);
                 min-width: 600px;
                 .item{
                     &-20{
@@ -86,10 +92,10 @@
                     &-10{
                         border-top: 3px solid var(--tiklab-blue) !important;
                     }
-                    &-100{
+                    &-0{
                         border-top: 3px solid #43a890 !important;
                     }
-                    &-all{
+                    &-3{
                         border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
                     }
                 }
@@ -98,7 +104,9 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                height: 32px;
+                height: 40px;
+                align-items: center;
+                padding: 0 var(--tiklab-padding);
                 &_tel{
                     font-size: 16px;
                     .tel_title{
@@ -112,63 +120,104 @@
                     }
                 }
             }
-            .st-card{
-                min-width: 150px;
-                border: 1px solid var(--tiklab-gray-200);
-                margin: var(--tiklab-padding-item) 0;
-                &:not(:last-child){
-                    margin-right: 15px;
-                }
-                .card-top{
-                    padding: 10px;
-                    .card-top-state{
-                        margin-right: 8px;
-                    }
-                }
-                .card-center-item{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    padding: 10px 0;
-                    >div{
-                        padding-left: 10px;
-                    }
-                }
-                .card-bt{
-                    text-align: right;
-                    font-size: var(--tiklab-font-13);
-                    padding: 10px 12px;
-                    .card-bt-log{
-                        display: inline-block;
-                        cursor: pointer;
-                        color: var(--tiklab-blue);
-                        width: 30px;
-                        margin-right: 10px;
-                    }
-                }
-            }
             .str-single{
                 height: 120px;
+                overflow: auto;
                 display: flex;
                 align-items: flex-start;
                 justify-content: flex-start;
+                padding: 0 var(--tiklab-padding);
+                .st-card{
+                    min-width: 150px;
+                    border: 1px solid var(--tiklab-gray-200);
+                    margin: var(--tiklab-padding-item) 0;
+                    border-radius: 4px;
+                    &:not(:last-child){
+                        margin-right: 15px;
+                    }
+                    .card-top{
+                        padding: 10px;
+                        .card-top-state{
+                            margin-right: 8px;
+                        }
+                    }
+                    .card-ct{
+                        padding: 0px 12px;
+                        text-align: center;
+                        font-size: var(--tiklab-font-13);
+                    }
+                    .card-bt{
+                        font-size: var(--tiklab-font-13);
+                        padding: 10px 12px;
+                        display: flex;
+                        justify-content: space-between;
+                        .card-bt-log{
+                            cursor: pointer;
+                            color: var(--tiklab-blue);
+                        }
+                    }
+                }
             }
+
             .str-multi{
-                height: 120px;
+                height: calc(100% - 46px);
                 display: flex;
-                .str-multi-card{
-                    display: inline-flex;
-                    align-items: flex-start;
-                    justify-content: flex-start;
+                overflow: auto;
+                padding: 0 20px;
+                .str-multi-group{
+                    height: 100%;
+                    padding-top: 10px;
                 }
-                .str-multi-card:not(:last-child){
-                    padding-right: 10px;
-                    border-right: 1px solid #d9d9d9;
+                .str-multi-group:not(:last-child){
                     margin-right: var(--tiklab-padding-item);
+                    border-right: 1px solid #d9d9d9;
+                    padding-right: var(--tiklab-padding-item);
                 }
+                .str-multi-card{
+                    display: flex;
+                    justify-content: flex-start;
+                    &:not(:last-child){
+                        margin-bottom: var(--tiklab-padding-item);
+                    }
+                }
+                .st-card{
+                    width: 250px;
+                    height: 145px;
+                    padding: 10px;
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    border: 1px solid var(--tiklab-gray-200);
+                    border-radius: 4px;
+
+                    &:not(:last-child){
+                        margin-right: 15px;
+                    }
+                    .card-top{
+                        .card-top-state{
+                            margin-right: 8px;
+                        }
+                    }
+                    .card-ct{
+                        text-align: center;
+                        font-size: var(--tiklab-font-13);
+                    }
+                    .card-bt{
+                        font-size: var(--tiklab-font-13);
+                        display: flex;
+                        justify-content: space-between;
+                        .card-bt-log{
+                            cursor: pointer;
+                            color: var(--tiklab-blue);
+                        }
+                    }
+                }
+            
             }
             .mid_group-bottom{
-                height: calc(100% - 152px);
+                height: calc(100% - 160px);
+                padding: 0 var(--tiklab-padding) var(--tiklab-padding);
                 .mid_group-bottom-title{
                     font-size: var(--tiklab-font-16);
                     font-weight: var(--tiklab-font-weight-bold);
@@ -226,9 +275,9 @@
         overflow: auto;
         padding: 0 var(--tiklab-padding) var(--tiklab-padding);
     }
-    .log-content{
+    // .log-content{
         // background-color: #222;
         // color: #fff;
         // padding: 10px;
-    }
+    // }
 }

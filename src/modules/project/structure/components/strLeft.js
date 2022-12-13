@@ -1,5 +1,7 @@
 import React from "react";
-import {Tooltip} from "antd";
+import {Profile} from "tiklab-eam-ui";
+import {getUser} from "tiklab-core-ui";
+import {Tooltip,Space} from "antd";
 import {observer} from "mobx-react";
 import StrEmpty from "./strEmpty";
 import StrLeftDropdown from "./strLeftDropdown";
@@ -41,12 +43,17 @@ const StrLeft = props =>{
                 <div className="list-group">
                     <div className="list-group-item">
                         <div className="list-state">
-                            <span>状态 : <Tooltip title={title(item.runStatus)}>
-                                            {status(item.runStatus)}
-                                        </Tooltip>
-                            </span> 
+                            状态 :  <Tooltip title={title(item.runStatus)}>
+                                        {status(item.runStatus)}
+                                    </Tooltip>
                         </div>
-                        <div className="list-one">执行人 : {item.user && item.user.nickname}</div>
+                        <div className="list-one">
+                            <Space>
+                                执行人 :
+                                <Profile userInfo={item.user}/> 
+                                {item.user && item.user.nickname}
+                            </Space>
+                        </div>
                     </div>
                     <div className="list-time"> 执行时间 : {item.createTime}</div>
                 </div>
@@ -61,12 +68,17 @@ const StrLeft = props =>{
             <div className="list-group">
                 <div className="list-group-item">
                     <div className="list-state">
-                        <span>状态 : <Tooltip title={title(0)}>
-                                        {status(0)}
-                                    </Tooltip>
-                        </span> 
+                        状态 :   <Tooltip title={title(0)}>
+                                    {status(0)}
+                                </Tooltip>
                     </div>
-                    <div className="list-one">执行人 : {execState && execState[0].execUser}</div>
+                    <div className="list-one">
+                        <Space>
+                            执行人 :
+                            <Profile userInfo={getUser()}/> 
+                            {execState && execState[0].execUser}
+                        </Space>
+                    </div>
                 </div>
                 <div className="list-time"> 执行时间 : {execState && execState[0].createTime}</div>
             </div>

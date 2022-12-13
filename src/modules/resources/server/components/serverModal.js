@@ -120,18 +120,7 @@ const ServerModal = props =>{
         if(formValue){
             const param = {
                 serverId:formValue.serverId,
-                name:values.name,
-                type:values.type,
-                authPublic:values.authPublic,
-                authType:values.authType,
-                username:values.username,
-                password:values.password,
-                message:values.message,
-                privateKey:values.privateKey,
-                serverAddress:values.serverAddress,
-                clientId:values.clientId,
-                clientSecret:values.clientSecret,
-                callbackUrl:values.callbackUrl,
+                ...values,
             }
             updateAuthServer(param)
         }else {
@@ -267,7 +256,7 @@ const ServerModal = props =>{
         >
             <ModalTitle
                 setVisible={setVisible}
-                title={formValue===""?"添加":"修改"}
+                title={formValue?"修改":"添加"}
             />
             <div style={{maxHeight:"calc(100% - 120px)",overflow:"auto"}}>
                 <Form

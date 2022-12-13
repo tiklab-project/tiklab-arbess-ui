@@ -40,7 +40,7 @@ ul li{
     border-color: var(--tiklab-blue);
 }
 
-.ant-steps-item-finish .ant-steps-finish-icon{
+.mf .ant-steps-item-finish .ant-steps-finish-icon{
     color: var(--tiklab-blue);
 }
 
@@ -51,7 +51,6 @@ ul li{
 .mf .ant-table-thead>tr>th{
     background: #ffffff;
     padding: 8px;
-
 }
 
 .mf .ant-table-tbody>tr>td{
@@ -80,8 +79,6 @@ ul li{
     border:none;
 }
 
-
-
 .mf .icon {
     width: 16px;
     height: 16px;
@@ -100,12 +97,6 @@ ul li{
         background: #e8eaf3;
         box-shadow: none;
     }
-}
-
-.mf .ant-avatar{
-    width: 22px;
-    height: 22px;
-    font-size: 13px !important;
 }
 
 .mf-icon{

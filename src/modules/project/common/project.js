@@ -36,7 +36,7 @@ const Project= (props)=>{
                 data && data.map(item=>{
                     if(item.id === pipelineId){
                         setPipeline(item)
-                        getInitProjectPermissions(userId,pipelineId,"matflow",item.power===1)
+                        getInitProjectPermissions(userId,pipelineId,item.power===1)
                     }
                 })
             }

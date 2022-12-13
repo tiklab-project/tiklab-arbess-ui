@@ -38,22 +38,14 @@ const CodeModal = props =>{
     }
     const onOk = () =>{
         form.validateFields().then((values) => {
-            if(formValue===""){
-                createAuthHost(values)
-            }else {
+            if(formValue){
                 const params = {
                     hostId:formValue.hostId,
-                    name:values.name,
-                    ip:values.ip,
-                    port:values.port,
-                    type:values.type,
-                    authPublic:values.authPublic,
-                    authType:values.authType,
-                    username:values.username,
-                    password:values.password,
-                    privateKey:values.privateKey,
+                    ...values
                 }
                 updateAuthHost(params)
+            }else {
+                createAuthHost(values)
             }
             setVisible(false)
         })
@@ -90,7 +82,7 @@ const CodeModal = props =>{
         >
             <ModalTitle
                 setVisible={setVisible}
-                title={formValue===""?"添加":"修改"}
+                title={formValue?"修改":"添加"}
             />
             <div style={{maxHeight:"calc(100% - 120px)",overflow:"auto"}}>
                 <Form

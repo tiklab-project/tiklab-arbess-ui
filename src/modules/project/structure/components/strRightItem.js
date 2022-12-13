@@ -23,6 +23,17 @@ const StrRightItem = props =>{
         return `item-${runState}`
     }
 
+    const statusText = runState =>{
+        switch (runState) {
+            case 1:
+                return "运行失败"
+            case 10:
+                return "运行成功"
+            case 20:
+                return "运行终止"
+        }
+    }
+
     // 多任务
     const renderSingle = (item,index) =>{
         return(
@@ -49,26 +60,34 @@ const StrRightItem = props =>{
     // 多阶段
     const renderMulti = (group,groupIndex) =>{
         return(
-            <div className="str-multi-card" key={groupIndex}>
+            <div className="str-multi-group" key={groupIndex}>
                 {
-                    group && group.logList && group.logList.map((item,index)=>{
-                        return  <div className={`st-card ${style(item.runState)}`} key={index}>
-                                    <div className="card-top">
-                                        <span className="card-top-state">{status(item.runState)}</span>
-                                        <span className="card-top-title">
-                                            <Subtitle type={item.taskType}/>
-                                        </span>
-                                    </div>
-                        
-                                    <div className="card-bt" >
-                                        <span className="card-bt-log" onClick={()=>log(item)}>
-                                            日志
-                                        </span>
-                                        <span className="card-bt-time">
-                                            {getTime(item.runTime)} 
-                                        </span>
-                                    </div>
-                                </div>
+                    group && group.stagesLogList && group.stagesLogList.map((list,listIndex)=>{
+                        return <div className="str-multi-card" key={listIndex}>
+                        {
+                            list && list.logList && list.logList.map((item,index)=>{
+                                return  <div className={`st-card ${style(item.runState)}`} key={index}>
+                                            <div className="card-top">
+                                                <span className="card-top-state">{status(item.runState)}</span>
+                                                <span className="card-top-title">
+                                                    <Subtitle type={item.taskType}/>
+                                                </span>
+                                            </div>
+                                            <div className="card-ct">
+                                                {statusText(item.runState)}
+                                            </div>
+                                            <div className="card-bt">
+                                                <span className="card-bt-log" onClick={()=>log(item)}>
+                                                    日志
+                                                </span>
+                                                <span className="card-bt-time">
+                                                    {getTime(item.runTime)} 
+                                                </span>
+                                            </div>
+                                        </div>
+                            })
+                        }
+                    </div>
                     })
                 }
             </div>
@@ -98,13 +117,16 @@ const StrRightItem = props =>{
                 />
                 {
                     pipeline && pipeline.type===1?
-                    <div className="str-single">
+                    <>
+                        <div className="str-single">
                         {
                             rightFlowData && rightFlowData.map((item,index)=>{
                                 return renderSingle(item,index)
                             })
                         }
-                    </div>
+                        </div>
+                        {logRunLog()}
+                    </>
                     :
                     <div className="str-multi">
                         {
@@ -114,7 +136,6 @@ const StrRightItem = props =>{
                         }
                     </div>
                 }
-            {logRunLog()}
         </>
     )
 }

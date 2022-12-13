@@ -67,9 +67,7 @@ const EnviModal = props =>{
     const onOk = values =>{
         const params = {
             scmId:formValue && formValue.scmId,
-            scmType:values.scmType,
-            scmName:values.scmName,
-            scmAddress:values.scmAddress,
+            ...values
         }
         updatePipelineScm(params)
         setVisible(false)
@@ -95,7 +93,7 @@ const EnviModal = props =>{
         >
             <ModalTitle
                 setVisible={setVisible}
-                title={formValue===""? "添加环境配置":"修改环境配置"}
+                title={formValue===""? "修改环境配置":"添加环境配置"}
             />
             <div style={{maxHeight:"calc(100% - 120px)",overflow:"auto"}}>
                 <Form

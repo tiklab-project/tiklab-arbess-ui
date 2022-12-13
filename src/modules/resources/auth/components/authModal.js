@@ -15,11 +15,10 @@ const AuthModal = props =>{
 
     useEffect(()=>{
         if(visible){
-            if(formValue===""){
-                form.resetFields()
-            } else {
+            if(formValue){
                 form.setFieldsValue(formValue)
-            }
+            } else {
+                form.resetFields()            }
         }
     },[visible])
 
@@ -33,19 +32,14 @@ const AuthModal = props =>{
 
     const onOk = () =>{
         form.validateFields().then((values) => {
-            if(formValue===""){
-                createAuth(values)
-            }else {
+            if(formValue){
                 const param = {
                     authId:formValue.authId,
-                    name:values.name,
-                    authPublic:values.authPublic,
-                    authType:values.authType,
-                    username:values.username,
-                    password:values.password,
-                    privateKey:values.privateKey,
+                    ...values,
                 }
                 updateAuth(param)
+            }else {
+                createAuth(values)
             }
             setVisible(false)
         })
@@ -78,7 +72,7 @@ const AuthModal = props =>{
         >
             <ModalTitle
                 setVisible={setVisible}
-                title={formValue===""?"添加":"修改"}
+                title={formValue?"修改":"添加"}
             />
             <div style={{maxHeight:"calc(100% - 120px)",overflow:"auto"}}>
                 <Form

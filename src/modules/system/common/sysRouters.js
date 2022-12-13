@@ -54,7 +54,7 @@ export const applicationRouters = a =>{
             id:"/index/system/role",
             title:"权限",
             icon: <SafetyCertificateOutlined />,
-            purviewCode:"permission",
+            purviewCode:"pipeline_permission",
         },
         {
             id:"/index/system/auth",
@@ -86,7 +86,7 @@ export const applicationRouters = a =>{
             id:"/index/system/envi",
             title:"环境配置",
             icon:<BuildOutlined />,
-            purviewCode:"env",
+            purviewCode:"pipeline_env",
         },
         {
             id:"3",
@@ -130,7 +130,7 @@ export const applicationRouters = a =>{
                     id:"/index/system/myLog",
                     title:"操作日志",
                     icon:<LayoutOutlined />,
-                    purviewCode:"log",
+                    purviewCode:"pipeline_log",
                 }
             ]
         },
@@ -138,13 +138,13 @@ export const applicationRouters = a =>{
             id:"/index/system/version",
             title:"版本与许可证",
             icon:<VerifiedOutlined />,
-            purviewCode:"version",
+            purviewCode:"pipeline_version",
         },
         {
             id:"/index/system/info",
             title:"系统信息",
             icon:<AppstoreOutlined />,
-            purviewCode:"system",
+            purviewCode:"pipeline_system",
         },
     ]
 }
@@ -154,7 +154,7 @@ export const applicationRouter = [
         id:"/index/system/role",
         title:"权限",
         icon: <SafetyCertificateOutlined />,
-        purviewCode:"permission",
+        purviewCode:"pipeline_permission",
     },
     {
         id:"/index/system/auth",
@@ -186,7 +186,7 @@ export const applicationRouter = [
         id:"/index/system/envi",
         title:"环境配置",
         icon:<BuildOutlined />,
-        purviewCode:"env",
+        purviewCode:"pipeline_env",
     },
     {
         id:"3",
@@ -224,13 +224,13 @@ export const applicationRouter = [
         id:"5",
         title:"安全",
         icon:<LayoutOutlined />,
-        purviewCode:"log",
+        purviewCode:"pipeline_log",
         children: [
             {
                 id:"/index/system/myLog",
                 title:"操作日志",
                 icon:<LayoutOutlined />,
-                purviewCode:"log",
+                purviewCode:"pipeline_log",
             }
         ]
     },
@@ -238,13 +238,13 @@ export const applicationRouter = [
         id:"/index/system/version",
         title:"版本与许可证",
         icon:<VerifiedOutlined />,
-        purviewCode:"version",
+        purviewCode:"pipeline_version",
     },
     {
         id:"/index/system/info",
         title:"系统信息",
         icon:<AppstoreOutlined />,
-        purviewCode:"system",
+        purviewCode:"pipeline_system",
     },
 ]
 
@@ -318,12 +318,6 @@ export const templateRouter = [
             {
                 id:"/index/system/mes/type",
                 title:"消息类型",
-                icon:<MenuOutlined />,
-                purviewCode:"basics",
-            },
-            {
-                id:"/index/system/mes/template",
-                title:"消息模板",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },

@@ -26,7 +26,7 @@ const StrRightLogDrawer = props =>{
                         title={
                             <>
                                 <HlineIcon type={drawerContent.taskType}/>
-                                &nbsp;-- &nbsp;
+                                &nbsp; -- &nbsp;
                                 <Subtitle type={drawerContent.taskType}/>
                             </>
                         }
@@ -35,7 +35,9 @@ const StrRightLogDrawer = props =>{
                 <div className="structureDrawer-content">
                     <div className="log">
                         <div className="log-content" style={{whiteSpace:"pre-wrap"}}>
-                            {drawerContent && drawerContent.runLog?drawerContent.runLog:"暂无日志"}
+                            {
+                                drawerContent && drawerContent.runLog ? drawerContent.runLog:"没有查询到日志"
+                            }
                         </div>
                     </div>
                  </div>

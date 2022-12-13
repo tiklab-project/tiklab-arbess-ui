@@ -192,7 +192,7 @@ export class StructureStore {
         param.append("historyId", value)
         const data = await FindHistoryLog(param)
         if(data.code===0){
-            this.rightFlowData = data.data
+            this.rightFlowData = data.data && data.data
         }
         return data
     }

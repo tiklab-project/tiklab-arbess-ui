@@ -21,6 +21,7 @@ const PostposeAdd = props =>{
     const [userAddVisible,setUserAddVisible] = useState(false)
     const [allUserList,setAllUserList] = useState([])
     const [yUserList,setYUserList] = useState([])
+    const [styleActiveLine,setStyleActiveLine] = useState(false)
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -28,6 +29,7 @@ const PostposeAdd = props =>{
 
     useEffect(()=>{
         if(postposeVisible){
+            setStyleActiveLine(false)
             if(formValue){
                 form.setFieldsValue({
                     type: formValue.type,
@@ -125,6 +127,10 @@ const PostposeAdd = props =>{
         </>
     )
 
+    const onFocus = () =>{
+        setStyleActiveLine(true)
+    }
+
     const columns = [
         {
             title: "成员",
@@ -198,7 +204,9 @@ const PostposeAdd = props =>{
                         layout={"vertical"}
                         initialValues={{type:61,typeList:["site"]}}
                     >
-                        <Form.Item name={"type"} label={"类型"}>
+                        <Form.Item name={"type"} label={"类型"}
+                                   rules={[{required:true, message:"请选择类型"}]}
+                        >
                             <Select onChange={value=>setType(value)} disabled={formValue && formValue}>
                                 <Select.Option value={61}>消息提醒</Select.Option>
                                 <Select.Option value={71}>执行bat脚本</Select.Option>
@@ -250,6 +258,8 @@ const PostposeAdd = props =>{
                             <PostposeMirrorScenario
                                 value={formValue?formValue.scriptOrder:""}
                                 mirrorRefs={mirrorRefs}
+                                styleActiveLine={styleActiveLine}
+                                onFocus={onFocus}
                                 type={71}
                             />
                         }
@@ -258,6 +268,8 @@ const PostposeAdd = props =>{
                             <PostposeMirrorScenario
                                 value={formValue?formValue.scriptOrder:""}
                                 mirrorRefs={mirrorRefs}
+                                styleActiveLine={styleActiveLine}
+                                onFocus={onFocus}
                                 type={72}
                             />
                         }

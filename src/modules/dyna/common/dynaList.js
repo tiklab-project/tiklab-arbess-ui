@@ -4,6 +4,7 @@ import backpack from "../../../assets/images/svg/backpack.svg";
 import buzzer from "../../../assets/images/svg/buzzer.svg";
 import candy from "../../../assets/images/svg/candy.svg";
 import helmet from "../../../assets/images/svg/helmet.svg";
+import EmptyText from "../../common/emptyText/emptyText";
 import "./dynaList.scss";
 
 const DynaList = props =>{
@@ -57,9 +58,12 @@ const DynaList = props =>{
     return (
         <div className="dynamic-center">
             {
-                dynamicList && dynamicList.map((item,index)=>{
+                dynamicList && dynamicList.length>0?
+                dynamicList.map((item,index)=>{
                     return renderLis(item,index)
                 })
+                :
+                <EmptyText title={"没有近期动态"}/>
             }
         </div>
     )

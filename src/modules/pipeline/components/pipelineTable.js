@@ -3,13 +3,13 @@ import {Profile} from "tiklab-eam-ui";
 import {message,Tooltip,Table,Space,Spin} from "antd";
 import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import "./pipelineTable.scss";
 import EmptyText from "../../common/emptyText/emptyText";
 import ListName from "../../common/list/listname";
 import success from "../../../assets/images/svg/success.svg";
 import error from "../../../assets/images/svg/error.svg";
 import fog from "../../../assets/images/svg/fog.svg";
 import halt from "../../../assets/images/svg/halt.svg";
+import "./pipelineTable.scss";
 
 const PipelineTable = props =>{
 
