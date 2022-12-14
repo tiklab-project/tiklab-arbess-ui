@@ -4,7 +4,7 @@ import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import EmptyText from "../../../common/emptyText/emptyText";
-import PostposeAdd from "./postposeAdd";
+import PostposeAdd from "../components/postposeAdd";
 import SubIcon from "../../common/components/subIcon";
 import Loading from "../../../common/loading/loading";
 import Listaction from "../../../common/list/listaction";

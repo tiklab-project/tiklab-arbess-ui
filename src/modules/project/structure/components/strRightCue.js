@@ -39,7 +39,7 @@ const StrRightCue = props =>{
                     </Popconfirm>
                 }
                 {
-                    actionTitle==="停止"
+                    actionTitle==="终止"
                     &&
                     <Btn
                         icon={<ExclamationCircleOutlined/>}

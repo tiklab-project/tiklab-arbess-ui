@@ -5,7 +5,7 @@ import {inject,observer} from "mobx-react";
 /*
     项目成员
  */
-const ProjectSetUser = props =>{
+const DomainUser = props =>{
 
     const {pipelineStore} = props
     const {pipelineId} = pipelineStore
@@ -14,4 +14,4 @@ const ProjectSetUser = props =>{
 
 }
 
-export default inject("pipelineStore")(observer(ProjectSetUser))
+export default inject("pipelineStore")(observer(DomainUser))

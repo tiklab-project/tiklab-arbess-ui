@@ -28,13 +28,13 @@ const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 /*  流水线详情 */
 const PipelineDyan=AsyncComponent(()=>import("./modules/project/dyna/dyna"))
 const Survey=AsyncComponent(()=>import("./modules/project/survey/container/survey"))
-const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
+const Structure=AsyncComponent(()=>import("./modules/project/str/container/structure"))
 const Config = AsyncComponent(()=>import("./modules/config/common/container/config"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
 const ProjectSetting=AsyncComponent(()=>import("./modules/projectSet/set/projectSet"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
+const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/domainUser/domainUser"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))

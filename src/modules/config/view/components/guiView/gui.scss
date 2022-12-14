@@ -133,16 +133,36 @@
                 .newStages-multi .add-newStages-contents {
                     display: block;
                 }
+                .group-head .group-inputBtn{
+                    display: block;
+                }
             }
         }
+    
         .group-head{
             padding: 0 20px;
-            margin-bottom: var(--tiklab-padding-item);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
             .name{
                 height: 20px;
-                font-weight: 700;
+                display: flex;
+                align-items: center;
+                .group-name{
+                    font-weight: 700;
+                    margin-right: 10px;
+                }
+                .group-inputBtn{
+                    cursor: pointer;
+                    display: none;
+                }
+                .ant-input{
+                    background: var(--mf-backdrop-color);
+                    width: 300px;
+                }
             }
         }
+    
         
         .newStages-job-code{
             width: 240px !important;

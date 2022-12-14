@@ -11,27 +11,27 @@ const StrRightExec = props => {
     // 返回值：logList.status，状态（1）成功，（100）：失败， 默认值 0，成功后 logList.status+10
     const singleState = index =>{
         if(execState){
-            const zz = execState[0].runLogList[index].runState
+            const zz = execState.runList[0].runLogList[index].runState
             return status(zz)
         }
     }
 
     const singleStyle = index => {
         if(execState){
-            const zz = execState[0].runLogList[index].runState
+            const zz = execState.runList[0].runLogList[index].runState
             return `item-${zz}`
         }
     }
 
     const singleTimes = index => {
         if(execState){
-            const zz = execState[0].runLogList[index].runTime
+            const zz = execState.runList[0].runLogList[index].runTime
             return getTime(zz)
         }
     }
 
     const singleLog = index =>{
-        setDrawerContent(execState[0].runLogList[index])
+        setDrawerContent(execState.runList[0].runLogList[index])
         setVisible(true)
     }
 
@@ -58,20 +58,20 @@ const StrRightExec = props => {
 
     const multiStatus = (groupIndex,listIndex,index) =>{
         if(execState){
-            const  a = execState[groupIndex].runList[listIndex]
+            const  a = execState.runList[groupIndex].runList[listIndex]
             const aa =  a &&
-                a.runLogList[index] &&
-                a.runLogList[index].runState
+                        a.runLogList[index] &&
+                        a.runLogList[index].runState
             return status(aa)
         }
     }
 
     const multiCt = (groupIndex,listIndex,index) =>{
         if(execState){
-            const  a = execState[groupIndex].runList[listIndex]
+            const  a = execState.runList[groupIndex].runList[listIndex]
             const aa =  a &&
-                a.runLogList[index] &&
-                a.runLogList[index].runState
+                        a.runLogList[index] &&
+                        a.runLogList[index].runState
             switch (aa) {
                 case 10:
                     return "运行成功" 
@@ -85,17 +85,17 @@ const StrRightExec = props => {
 
     const multiStyle = (groupIndex,listIndex,index) =>{
         if(execState){
-            const  a = execState[groupIndex].runList[listIndex]
+            const  a = execState.runList[groupIndex].runList[listIndex]
             const aa =  a &&
-                a.runLogList[index] &&
-                a.runLogList[index].runState
+                        a.runLogList[index] &&
+                        a.runLogList[index].runState
             return `item-${aa}`
         }
     }
 
     const multiTimes = (groupIndex,listIndex,index) =>{
         if(execState){
-            const  a = execState[groupIndex].runList[listIndex]
+            const  a = execState.runList[groupIndex].runList[listIndex]
             const aa =  a &&
                         a.runLogList[index] &&
                         a.runLogList[index].runTime
@@ -106,7 +106,7 @@ const StrRightExec = props => {
 
     const multiLog = (groupIndex,listIndex,index) =>{
         setVisible(true)
-        setDrawerContent(execState[groupIndex].runList[listIndex].runLogList[index])
+        setDrawerContent(execState.runList[groupIndex].runList[listIndex].runLogList[index])
     }
 
     // 多阶段
@@ -184,18 +184,18 @@ const StrRightExec = props => {
     return(
         <>
             <StrRightCue
-                way={execState && execState[0].runWay}
-                time={getTime(execState && execState[0].runTime)}
+                way={execState && execState.runWay}
+                time={getTime(execState && execState.runTime)}
                 action={cease}
                 title={"运行中"}
-                actionTitle={"停止"}
+                actionTitle={"终止"}
             />
             {
                 pipeline && pipeline.type===1?
                 <>
                     <div className="str-single">
                         {
-                            rightExecuteData && rightExecuteData.map((item,index)=>{
+                            rightExecuteData && rightExecuteData.runList.map((item,index)=>{
                                 return renderSingle(item,index)
                             })
                         }
@@ -205,7 +205,7 @@ const StrRightExec = props => {
                 :
                 <div className="str-multi">
                     {
-                        rightExecuteData && rightExecuteData.map((group,groupIndex)=>{
+                        rightExecuteData && rightExecuteData.runList.map((group,groupIndex)=>{
                             return renderMulti(group,groupIndex)
                         })
                     }

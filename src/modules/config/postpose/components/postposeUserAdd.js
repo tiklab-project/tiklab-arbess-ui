@@ -8,7 +8,7 @@ import Btn from "../../../common/btn/btn";
 
 const PostposeUserAdd = props =>{
 
-    const {visible,setVisible,allUserList,dataItem,postposeData,setPostposeData} = props
+    const {userAddVisible,setUserAddVisible,allUserList,yUserList,setYUserList} = props
 
     const [height,setHeight] = useState(0)
     const [addUser,setAddUser] = useState([])
@@ -18,12 +18,12 @@ const PostposeUserAdd = props =>{
     useEffect(()=>{
         setSelectedRowKeys([])
         setAddUser([])
-    },[visible])
+    },[userAddVisible])
 
     useEffect(()=>{
-        const newArr = dataItem && dataItem.userList.map(item=>item.user.id)
-        visible && setUserList(allUserList.filter(item=>!newArr.includes(item.id)))
-    },[visible])
+        const newArr = yUserList && yUserList.map(item=>item.user.id)
+        userAddVisible && setUserList(allUserList.filter(item=>!newArr.includes(item.id)))
+    },[userAddVisible])
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -34,19 +34,14 @@ const PostposeUserAdd = props =>{
     }
 
     const onOk = () => {
-        postposeData && postposeData.map(item=>{
-            if(item.configId === dataItem.configId){
-                item.userList = item.userList.concat(addUser)
-            }
-        })
-        setPostposeData([...postposeData])
-        setVisible(false)
+        setYUserList(yUserList.concat(addUser))
+        setUserAddVisible(false)
     }
 
     const modalFooter = (
         <>
             <Btn
-                onClick={()=>setVisible(false)}
+                onClick={()=>setUserAddVisible(false)}
                 title={"取消"}
                 isMar={true}
             />
@@ -129,8 +124,8 @@ const PostposeUserAdd = props =>{
 
     return (
         <Modal
-            visible={visible}
-            onCancel={()=>setVisible(false)}
+            visible={userAddVisible}
+            onCancel={()=>setUserAddVisible(false)}
             closable={false}
             destroyOnClose={true}
             footer={modalFooter}
@@ -139,7 +134,7 @@ const PostposeUserAdd = props =>{
             className="mf"
         >
             <ModalTitle
-                setVisible={setVisible}
+                setVisible={setUserAddVisible}
                 title={"添加成员"}
             />
             <Table

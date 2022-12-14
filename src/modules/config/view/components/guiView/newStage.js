@@ -1,18 +1,19 @@
-import React,{useState,Fragment} from "react";
-import {Popconfirm} from "antd";
+import React, {useState, Fragment, useRef, useEffect} from "react";
+import {Popconfirm,Input} from "antd";
 import {
     PlusOutlined,
     ExclamationCircleOutlined,
     TagsOutlined,
     ShareAltOutlined,
-    DeleteOutlined
+    DeleteOutlined,
+    EditOutlined
 } from "@ant-design/icons";
 import SubIcon from "../../../common/components/subIcon";
 import AddDrawer from "./addDrawer";
 
 const NewStage = props =>{
 
-    const {setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
+    const {updateStageName,setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     
@@ -118,11 +119,50 @@ const NewStage = props =>{
         }
     }
 
-    const groupHead = (
-        <div className="group-head">
-            <div className="name" style={{opacity:0}}/>
-        </div>
-    )
+    const [stagesId,setStagesId] = useState("")
+    const inputRef = useRef()
+
+    useEffect(()=>{
+        if(pipeline){
+            stagesId && inputRef.current.focus()
+        }
+    },[stagesId,pipeline])
+
+    const changName = group => {
+        setStagesId(group.stagesId)
+    }
+    const onBlur = (e,group) =>{
+        setStagesId("")
+
+        updateStageName({stagesId:group.stagesId,stagesName:e.target.value})
+    }
+
+    const groupHead = group =>{
+        return(
+            <div className="group-head">
+                {
+                    stagesId===group.stagesId?
+                        <div className="name">
+                            <Input
+                                ref={inputRef}
+                                onBlur={e=>onBlur(e,group)}
+                                onPressEnter={(e)=>e.target.blur()}
+                                defaultValue={group && group.name}
+                            />
+                        </div>
+                        :
+                        <div className="name">
+                            <div className="group-name">
+                                {group && group.name}
+                            </div>
+                            <div className="group-inputBtn" onClick={()=>changName(group)}>
+                                <EditOutlined/>
+                            </div>
+                        </div>
+                }
+            </div>
+        )
+    }
 
     // 多任务（添加任务）；多阶段（添加阶段）
     const renderFlowBtn = (group,groupIndex) =>{
@@ -176,7 +216,7 @@ const NewStage = props =>{
         return <Fragment key={groupIndex}>
             { group.type > 10 && renderFlowBtn(group,groupIndex) }
             <div className="group-table">
-                {groupHead}
+                {groupHead(group)}
                 <div className="newStages-single">
                     <div className={`newStages-job`}>
                         {newJobContent(group,14)}
@@ -208,7 +248,7 @@ const NewStage = props =>{
                 !group.code && renderFlowBtn(group,groupIndex)
             }
             <div className="group-table">
-                {groupHead}
+                {groupHead(group)}
                 <div className="newStages-multi">
                     {
                         group && group.stagesList && group.stagesList.map((list,listIndex)=>{
@@ -272,7 +312,9 @@ const NewStage = props =>{
                         <div className={`group-flow_btn ${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`} />
                     </div>
                     <div className="group-create">
-                        {groupHead}
+                        <div className="group-head">
+                            <div className="name" style={{opacity:0}}/>
+                        </div>
                         <div className="newStages-multi">
                             <div className="newStages-contents add-newStage">
                                 <div className="newStages-content">
@@ -289,7 +331,9 @@ const NewStage = props =>{
                 </>
                 :
                 <div className="group-create">
-                    {groupHead}
+                    <div className="group-head">
+                        <div className="name" style={{opacity:0}}/>
+                    </div>
                     <div className="newStages-multi">
                         <div className="newStages-job">
                             <div onClick={()=>newTask()} className="newStages-job-content">

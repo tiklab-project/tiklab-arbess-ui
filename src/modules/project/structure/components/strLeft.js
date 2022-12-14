@@ -29,7 +29,7 @@ const StrLeft = props =>{
             case 10:
                 return "执行成功"
             case 20:
-                return "执行停止"
+                return "执行终止"
             case 0:
                 return "正在运行"        
         

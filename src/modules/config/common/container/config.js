@@ -10,7 +10,6 @@ import Btn from "../../../common/btn/btn";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import View from "../../view/container/view";
 import Postpose from "../../postpose/container/postpose";
-// import Postpose from "../../postpose/components/postpose";
 import Trigger from "../../trigger/container/trigger";
 import "./config.scss";
 

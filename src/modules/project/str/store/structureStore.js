@@ -2,7 +2,6 @@ import {action,observable} from "mobx";
 
 import {
     DeleteHistoryLog,
-    FindAllPipelineConfig,
     FindPipelineState,
     FindHistoryLog,
     PipelineRunStatus,
@@ -10,7 +9,7 @@ import {
     PipelineStartStructure,
     FindPageHistory,
     FindPipelineUser,
-} from "../api/structure";
+} from "../../structure/api/structure";
 
 import {getUser} from "tiklab-core-ui";
 import {message} from "antd";
@@ -18,39 +17,17 @@ import {message} from "antd";
 export class StructureStore {
 
     @observable leftPageList = []
-    @observable execState = ""
-    @observable rightFlowData = []
-    @observable rightExecuteData = []
     @observable pipelineUserList = []
-    @observable modeData = {}
-    @observable index = 0  // 构建区分显示 -- 构建1 、2、……
+    @observable execData = ""
+    @observable itemData = ""
     @observable page = {
         defaultCurrent: 1,
         pageSize: "11",
         total: "1",
     }
-    @observable isData = false  // 构建情况是否有数据
     @observable pageCurrent = 1 // 筛选时，设置当前页数初始化
 
-    @observable state = 0  //状态
-    @observable enforcer = null //执行人
-    @observable mode = 0  //执行方式
     @observable freshen = false  // 渲染页面
-
-    @action
-    setState = value =>{
-        this.state = value
-    }
-
-    @action
-    setEnforcer = value =>{
-        this.enforcer = value
-    }
-
-    @action
-    setMode = value =>{
-        this.mode = value
-    }
 
     @action
     setFreshen = value =>{
@@ -58,28 +35,8 @@ export class StructureStore {
     }
 
     @action
-    setModeData = value =>{
-        this.modeData = Object(value)
-    }
-
-    @action
     setPageCurrent = value =>{
         this.pageCurrent = value
-    }
-
-    @action
-    setIndex = value =>{
-        this.index = value
-    }
-
-    @action
-    setIsData = value =>{
-        this.isData = value
-    }
-
-    @action
-    setExecState = value =>{
-        this.execState = value
     }
 
     // 开始构建
@@ -100,22 +57,8 @@ export class StructureStore {
     findPipelineState = async value =>{
         const param = new FormData()
         param.append("pipelineId", value)
-        return new Promise((resolve, reject) => {
-            FindPipelineState(param).then(res=>{
-                if(res.code===0){
-                    if(res.data===2){
-                        this.index = 0
-                    }else {
-                        this.index = 1
-                        this.execState = ""
-                    }
-                }
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+        const data = await FindPipelineState(param)
+        return data
     }
 
     //构建状态
@@ -124,8 +67,13 @@ export class StructureStore {
         const param = new FormData()
         param.append("pipelineId", value)
         const data = await PipelineRunStatus(param)
-        if(data.code===0 && data.data){
-            this.execState = data.data
+        if(data.code===0){
+            if(data.data===null){
+                this.freshen=!this.freshen
+            }
+            else{
+                this.execData = data.data
+            }
         }
         return data
     }
@@ -143,17 +91,6 @@ export class StructureStore {
         }
     }
 
-    //正在执行的详情
-    @action
-    findAllPipelineConfig =async value =>{
-        const param = new FormData()
-        param.append("pipelineId", value)
-        const data = await FindAllPipelineConfig(param)
-        if(data.code===0){
-            this.rightExecuteData = data.data
-        }
-    }
-
     //构建历史
     @action
     findPageHistory =async values =>{
@@ -164,25 +101,18 @@ export class StructureStore {
             },
             ...values,
         }
-        return new Promise((resolve, reject)=>{
-            FindPageHistory(params).then(res=>{
-                if(res.code===0 && res.data){
-                    if(res.data.dataList.length===0){
-                        this.leftPageList = []
-                        this.page = {}
-                    }else{
-                        this.page.total = res.data.totalPage
-                        this.leftPageList = res.data.dataList
-                        this.findHistoryLog(res.data.dataList && res.data.dataList[0].historyId)
-                        this.modeData =  res.data.dataList && res.data.dataList[0]
-                    }
-                }
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+        const data = await FindPageHistory(params)
+        if(data.code===0 && data.data){
+            if(data.data.dataList.length===0){
+                this.leftPageList = []
+                this.page = {}
+            }
+            else{
+                this.page.total = data.data.totalPage
+                this.leftPageList = data.data.dataList
+            }
+        }
+        return data
     }
 
     //历史详情日志
@@ -192,7 +122,7 @@ export class StructureStore {
         param.append("historyId", value)
         const data = await FindHistoryLog(param)
         if(data.code===0){
-            this.rightFlowData = data.data && data.data
+            this.itemData = data.data
         }
         return data
     }
@@ -205,7 +135,6 @@ export class StructureStore {
         const data = await DeleteHistoryLog(param)
         if(data.code===0){
             message.info("删除成功",0.5)
-            if(this.index!==0){ this.index=0 }
             this.pageCurrent = 1
             this.freshen = !this.freshen
         }

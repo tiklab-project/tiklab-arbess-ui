@@ -115,7 +115,7 @@ const PipelineTable = props =>{
                             </Space>
                         </Tooltip>
                     case 20:
-                        return  <Tooltip title={tooltip("停止",text,record.execUser.name)}>
+                        return  <Tooltip title={tooltip("终止",text,record.execUser.name)}>
                             <Space>
                                 <img src={halt} alt={"log"} className="imgs"/>
                                 {text}

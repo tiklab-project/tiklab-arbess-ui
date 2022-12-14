@@ -34,7 +34,7 @@ const Config = AsyncComponent(()=>import("./modules/config/common/container/conf
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
 const ProjectSetting=AsyncComponent(()=>import("./modules/projectSet/set/projectSet"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/members/projectSetUser"))
+const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/domainUser/domainUser"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))

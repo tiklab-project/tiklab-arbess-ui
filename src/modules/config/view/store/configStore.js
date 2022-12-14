@@ -7,6 +7,7 @@ import {
     UpdateOrderTaskConfig,
     FindAllTaskConfig,
     ConfigValid,
+    UpdateStageName,
 } from "../api/config";
 
 import {message} from "antd";
@@ -138,6 +139,19 @@ export class ConfigStore{
                 reject()
             })
         })
+    }
+
+    @action
+    updateStageName = async value =>{
+        const params = new FormData()
+        params.append("stagesId",value.stagesId)
+        params.append("stagesName",value.stagesName)
+        const data = await UpdateStageName(params)
+        if(data.code===0){
+            this.mess("更新成功")
+            this.isFindConfig = !this.isFindConfig
+        }
+        return data
     }
 
     @action

@@ -54,6 +54,15 @@ export function  ConfigValid(data){
     })
 }
 
+// 必填配置是否完善
+export function  UpdateStageName(data){
+    return serviceLoc.request({
+        url:"/pipelineConfig/updateStageName",
+        method:"post",
+        data
+    })
+}
+
 
 
 
