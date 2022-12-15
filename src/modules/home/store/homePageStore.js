@@ -94,7 +94,7 @@ export class HomePageStore{
                 pageSize: 12,
                 currentPage:this.messagePagination
             },
-            application:"matflow",
+            bgroup:"matflow",
             sendType:"site",
             receiver:getUser().userId,
         }

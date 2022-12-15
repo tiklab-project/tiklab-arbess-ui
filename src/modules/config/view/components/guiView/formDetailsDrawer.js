@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {Drawer,Form} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import SubIcon from "../../../common/components/subIcon";
@@ -12,6 +12,10 @@ import Deploy from "./forms/deploy";
 import ScanSonarQuebe from "./forms/scanSonarQuebe";
 import GoodsNexus from "./forms/goodsNexus";
 import GoodsSsh from "./forms/goodsSsh";
+import Condition from "./post/condition";
+import Postpose from "./post/postpose";
+import Variable from "./post/variable";
+import Tabs from "../../../../common/tabs/tabs";
 import "./formDetailsDrawer.scss";
 
 const FormDetailsDrawer = props =>{
@@ -19,6 +23,8 @@ const FormDetailsDrawer = props =>{
     const {taskFormDrawer,setTaskFormDrawer,dataItem} = props
 
     const [form] = Form.useForm()
+
+    const [handleType,setHandleType] = useState(1)
 
     const getId = (dataItem,name) =>{
         return dataItem.configId + "_" + name
@@ -123,6 +129,25 @@ const FormDetailsDrawer = props =>{
         }
     }
 
+    const lis = [
+        {
+            id:1,
+            title:"环境变量"
+        },
+        {
+            id:2,
+            title:"条件"
+        },
+        {
+            id:3,
+            title:"后置处理"
+        },
+    ]
+
+    const clickHandleType = item =>{
+        setHandleType(item.id)
+    }
+    
     return(
         <Drawer
             placement="right"
@@ -159,6 +184,16 @@ const FormDetailsDrawer = props =>{
                                 >
                                     {renderForms(dataItem)}
                                 </Form>
+                            </div>
+                            <Tabs
+                                tabLis={lis}
+                                type={handleType}
+                                onClick={clickHandleType}
+                            />
+                            <div className="taskForm-post">
+                                { handleType===1 && <Variable dataItem={dataItem}/>  }
+                                { handleType===2 && <Condition/> }
+                                { handleType===3 && <Postpose/>  }
                             </div>
                         </div>
                     </div>

@@ -74,6 +74,14 @@
     font-size: var(--tiklab-font-13);
 }
 
+.mf-btn-link-nopadding{
+    color: var(--tiklab-blue);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
 .mf-btn-row{
     width: 100%;
     text-align: left;

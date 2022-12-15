@@ -116,4 +116,4 @@ const Postpose = props =>{
     )
 }
 
-export default inject("pipelineStore","postposeStore")(observer(Postpose))
+export default inject("postposeStore")(observer(Postpose))

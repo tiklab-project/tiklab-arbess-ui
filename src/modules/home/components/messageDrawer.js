@@ -107,7 +107,7 @@ const MessageDrawer = props =>{
                         <div className="message-item-center">
                             <div className="message-item-user">
                                 <Space>
-                                    <span className="user-title">{item.messageTemplate.name}</span>
+                                    {/* <span className="user-title">{item.messageTemplate.name}</span> */}
                                     <span className="user-time">{item.receiveTime}</span>
                                 </Space>
                                 <Tooltip title={"删除"}>
@@ -116,7 +116,7 @@ const MessageDrawer = props =>{
                                     </div>
                                 </Tooltip>
                             </div>
-                            <div dangerouslySetInnerHTML={{__html: item.messageTemplate.content}}/>
+                            {/* <div dangerouslySetInnerHTML={{__html: item.messageTemplate.content}}/> */}
                         </div>
                     </div>
                 </div>

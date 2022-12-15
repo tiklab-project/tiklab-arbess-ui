@@ -3,6 +3,7 @@ import {Drawer} from "antd";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import StrItem from "./strItem";
 import StrExec from "./strExec";
+import StrTree from "./strTree";
 
 const StrDetail = props =>{
 
@@ -51,8 +52,13 @@ const StrDetail = props =>{
                                 setLogContent={setLogContent}
                             />
                     }
-                    <div className="strDetailDrawer-content-log">
-                        {logContent && logContent.runLog}
+                    <div className="strDetailDrawer-content-bottom">
+                        {/*<div className="bottom-tree">*/}
+                        {/*    <StrTree/>*/}
+                        {/*</div>*/}
+                        <div className="bottom-log">
+                            {logContent && logContent.runLog}
+                        </div>
                     </div>
                 </div>
             </div>

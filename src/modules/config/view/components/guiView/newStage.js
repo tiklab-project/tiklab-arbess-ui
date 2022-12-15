@@ -133,8 +133,9 @@ const NewStage = props =>{
     }
     const onBlur = (e,group) =>{
         setStagesId("")
-
-        updateStageName({stagesId:group.stagesId,stagesName:e.target.value})
+        if(e.target.value!==group.name){
+            updateStageName({stagesId:group.stagesId,stagesName:e.target.value})
+        }
     }
 
     const groupHead = group =>{
@@ -234,7 +235,7 @@ const NewStage = props =>{
             <div className="newStages-job">
                 <div className="newStages-job-content" onClick={()=>parallelTask(groupIndex)}>
                     <PlusOutlined/>
-                    <span style={{paddingLeft:5}}>并行任务</span>
+                    <span style={{paddingLeft:5}}>并行阶段</span>
                 </div>         
             </div>
         </div>

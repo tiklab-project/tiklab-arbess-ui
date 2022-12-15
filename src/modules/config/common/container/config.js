@@ -11,6 +11,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import View from "../../view/container/view";
 import Postpose from "../../postpose/container/postpose";
 import Trigger from "../../trigger/container/trigger";
+import Variable from "../../variable/container/variable";
 import "./config.scss";
 
 const Config = props =>{
@@ -55,6 +56,10 @@ const Config = props =>{
             id:3,
             title:"后置处理"
         },
+        {
+            id:4,
+            title:"变量"
+        }
     ]
 
     return(
@@ -107,11 +112,21 @@ const Config = props =>{
             }
             {
                 type===2 &&
-                <Trigger/>
+                <Trigger
+                    pipelineStore={pipelineStore}
+                />
             }
             {
                 type===3 &&
-                <Postpose/>
+                <Postpose
+                    pipelineStore={pipelineStore}
+                />
+            }
+            {
+                type===4 &&
+                <Variable
+                    pipelineStore={pipelineStore}
+                />
             }
         </div>
     )

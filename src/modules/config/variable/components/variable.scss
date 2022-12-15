@@ -1,0 +1,29 @@
+.variable{
+    flex: 1;
+    overflow: auto;
+    .variable-up{
+        display: flex;
+        align-items: center;
+        padding-bottom: 10px;
+        font-size: var(--tiklab-font-13);
+        .variable-up-title{
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+        .variable-up-num{
+            flex: 1;
+            padding: 0 var(--tiklab-padding-item);
+        }
+    }
+}
+
+
+.variable-modal{
+    .variable-modal-up{
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+    }
+    .variable-modal-content{
+        padding: 0 var(--tiklab-padding);
+        max-height: calc(100% - 120px);
+        overflow: auto;
+    }
+}

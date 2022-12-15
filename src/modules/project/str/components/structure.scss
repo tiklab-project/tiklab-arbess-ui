@@ -57,18 +57,48 @@
         padding: 20px 20px 0;
     }
     .strDetailDrawer-content{
-        height: calc(100% - 62px);
+        height: calc(100% - 72px);
         display: flex;
         flex-direction: column;
-        padding: 0 20px 20px;
+        overflow: hidden;
     }
-    .strDetailDrawer-content-log{
+    .strDetailDrawer-content-bottom{
         flex: 1;
-        overflow: auto;
-        background: #000;
-        color: #fff;
-        padding: 10px;
-        white-space: pre-wrap;
+        height: 100%;
+        display: flex;
+        padding-bottom: 20px;
+        margin-top: 10px;
+        .bottom-tree{
+            height: 100%;
+            overflow: auto;
+            width: 150px;
+            padding: 0 10px 0 20px;
+            margin-right: 5px;
+            .tree-ul{
+                .tree-li-first{
+                    display: flex;
+                    align-items: center;
+                    height: 25px;
+                    line-height: 25px;
+                    cursor: pointer;
+                }
+                .tree-li-icon{
+                    padding-right: 8px;
+                }
+                .tree-li-hidden{
+                    display: none;
+                }
+            }
+        }
+        .bottom-log{
+            flex: 1;
+            height: 100%;
+            overflow: auto;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            white-space: pre-wrap;
+        }
     }
     .item{
         &-20{
@@ -127,7 +157,6 @@
     }
     .str-multi{
         display: flex;
-        margin-bottom: 15px;
         .str-multi-group{
             height: 100%;
             padding-top: 10px;
@@ -176,22 +205,5 @@
             }
         }
 
-    }
-}
-
-.strModal{
-    .strModal-up{
-        padding: 20px 20px 0;
-        .modalTitle{
-            margin-bottom: 10px;
-        }
-    }
-    .strModal-content{
-        height: calc(100% - 120px);
-        padding: 0 20px;
-        overflow: auto;
-        background: #000;
-        color: #fff;
-        margin-left: 20px;
     }
 }

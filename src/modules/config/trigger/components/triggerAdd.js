@@ -18,6 +18,10 @@ const TriggerAdd = props =>{
         setHeight(autoHeight())
     },[height])
 
+    window.onresize=() =>{
+        setHeight(autoHeight())
+    }
+
     useEffect(()=>{
         if(triggerVisible){
             if(formValue!=="") {

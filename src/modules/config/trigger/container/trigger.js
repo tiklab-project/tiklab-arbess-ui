@@ -110,4 +110,4 @@ const Trigger = props =>{
     )
 }
 
-export default inject("triggerStore","pipelineStore")(observer(Trigger))
+export default inject("triggerStore")(observer(Trigger))

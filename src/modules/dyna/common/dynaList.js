@@ -45,10 +45,10 @@ const DynaList = props =>{
             </div>
             <div className="dynamic-item-message">
                 <div className="dynamic-item-message-title">
-                    {item.opLogTemplate.title}
+                    {/* {item.opLogTemplate} */}
                 </div>
                 <div
-                    dangerouslySetInnerHTML={{__html: item.opLogTemplate.content}}
+                    dangerouslySetInnerHTML={{__html: item.opLogTemplate}}
                 />
             </div>
             <div>{item.timestamp}</div>
