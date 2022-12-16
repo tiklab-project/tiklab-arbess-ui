@@ -1,6 +1,6 @@
 import {EAM_STORE,EamStore} from "tiklab-eam-ui/es/store";
 import {PIPELINE_STORE,PipelineStore} from "./modules/pipeline/store/pipelineStore";
-import {STRUCTURE_STORE,StructureStore} from "./modules/project/str/store/structureStore";
+import {STRUCTURE_STORE,StructureStore} from "./modules/project/structure/store/structureStore";
 import {CONFIG_STORE,ConfigStore} from "./modules/config/view/store/configStore";
 import {SURVEY_STORE,SurveyStore} from "./modules/project/survey/store/surveyStore";
 import {HOMEPAGE_STORE,HomePageStore} from "./modules/home/store/homePageStore";

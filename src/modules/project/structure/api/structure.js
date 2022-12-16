@@ -37,7 +37,7 @@ export function  KillInstance(data){
 }
 
 //历史详情日志
-export function  FindHistoryLog (data){
+export function  FindAllLog (data){
     return serviceLoc.request({
         url:"/pipelineLog/findAllLog",
         method:"post",

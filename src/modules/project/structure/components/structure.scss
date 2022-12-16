@@ -1,282 +1,185 @@
 .structure{
-    overflow-y: hidden;
-    background: #ffffff;
-    height: 100%;
     .ant-avatar{
-        width: 20px;
-        height: 20px;
-        font-size: 12px !important;
+        width: 22px;
+        height: 22px;
+        font-size: 13px !important;
     }
-    &-content{
+    .structure-content{
+        padding: 20px;
+    }
+    .structure-content-table{
+        padding-top: 10px;
+    }
+    .str-table-findNumber{
+        color: var(--tiklab-blue);
+        font-weight: var(--tiklab-font-weight-bold);
+        cursor: pointer;
+    }
+    .str-table-runWay{
         display: flex;
-        flex-direction: row;
-        height: 100%;
-        .structure-left{
-            height: 100%;
-            width: 350px;
-            min-width: 350px;
-            background: var(--mf-backdrop-color);
-            z-index: 20;
-            vertical-align: top;
-            .structure-left-dropdown{
-                width: 100%;
-                padding: 10px 10px 7px;
-                border-bottom: 1px solid var(--tiklab-gray-200);
-                margin-bottom: 2px;
-                .dropdown{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-            }
-            .structure-left-history{
-                height: calc(100% - 60px);
-                .history-list{
-                    height: calc(100% - 40px);
-                    min-height: 100px;
-                    overflow: auto;
-                    border-bottom: 1px solid var(--tiklab-gray-200);
-                }
-                .history-list-ul{
-                    display: flex;
-                    flex-direction: row;
-                    width: 100%;
-                    padding: 10px 20px;
-                    cursor: pointer;
-                    &:hover{
-                        background: var(--tiklab-gray-300);
-                    }                            
-                }
-                .list{
-                    &-title{
-                        color: #0063FF;
-                        width: 60px;
-                        font-weight: var(--tiklab-font-weight-bold);
-                        font-size: 16px;
-                    }
-                    &-group{
-                        flex-grow: 1;
-                        &-item{
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-                            margin-bottom: 10px;
-                        }
-                    }
-                }
-                .history-list-active{
-                    background: #e3e8f0;
-                }
-            }
-            .ant-dropdown-trigger{
-                display: inline-block;
-                margin-right: 30px;
-            }
+        align-items: center;
+        height: 40px;
+        .runWay-user{
+            padding-left: 8px;
         }
-        .structure-right{
-            flex-grow: 1;
-            overflow: hidden;
-            .structure-right-bread{
-                padding: var(--tiklab-padding) var(--tiklab-padding) 0;
-            }
-            .right-mid{
-                height: calc(100% - 40px);
-                min-width: 600px;
-                .item{
-                    &-20{
-                        border-top: 3px solid #444444 !important;
-                    }
-                    &-1{
-                        border-top: 3px solid #ff0000 !important;
-                    }
-                    &-10{
-                        border-top: 3px solid var(--tiklab-blue) !important;
-                    }
-                    &-0{
-                        border-top: 3px solid #43a890 !important;
-                    }
-                    &-3{
-                        border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
-                    }
-                }
-            }
-            .mid_group_top{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                height: 40px;
-                align-items: center;
-                padding: 0 var(--tiklab-padding);
-                &_tel{
-                    font-size: 16px;
-                    .tel_title{
-                        padding-right: 20px;
-                        color: var(--tiklab-blue);
-                        width: 60px;
-                        font-weight: var(--tiklab-font-weight-bold);
-                    }
-                    .tel_time{
-                        padding-right: 20px;
-                    }
-                }
-            }
-            .str-single{
-                height: 120px;
-                overflow: auto;
-                display: flex;
-                align-items: flex-start;
-                justify-content: flex-start;
-                padding: 0 var(--tiklab-padding);
-                .st-card{
-                    min-width: 150px;
-                    border: 1px solid var(--tiklab-gray-200);
-                    margin: var(--tiklab-padding-item) 0;
-                    border-radius: 4px;
-                    &:not(:last-child){
-                        margin-right: 15px;
-                    }
-                    .card-top{
-                        padding: 10px;
-                        .card-top-state{
-                            margin-right: 8px;
-                        }
-                    }
-                    .card-ct{
-                        padding: 0 12px;
-                        text-align: center;
-                        font-size: var(--tiklab-font-13);
-                    }
-                    .card-bt{
-                        font-size: var(--tiklab-font-13);
-                        padding: 10px 12px;
-                        display: flex;
-                        justify-content: space-between;
-                        .card-bt-log{
-                            cursor: pointer;
-                            color: var(--tiklab-blue);
-                        }
-                    }
-                }
-            }
+    }
+    .str-table-del,.str-table-action{
+        cursor: pointer;
+    }
+}
 
-            .str-multi{
-                height: calc(100% - 46px);
-                display: flex;
-                overflow: auto;
-                padding: 0 20px;
-                .str-multi-group{
-                    height: 100%;
-                    padding-top: 10px;
-                }
-                .str-multi-group:not(:last-child){
-                    margin-right: var(--tiklab-padding-item);
-                    border-right: 1px solid #d9d9d9;
-                    padding-right: var(--tiklab-padding-item);
-                }
-                .str-multi-card{
-                    display: flex;
-                    justify-content: flex-start;
-                    &:not(:last-child){
-                        margin-bottom: var(--tiklab-padding-item);
-                    }
-                }
-                .st-card{
-                    width: 250px;
-                    height: 145px;
-                    padding: 10px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    border: 1px solid var(--tiklab-gray-200);
-                    border-radius: 4px;
-
-                    &:not(:last-child){
-                        margin-right: 15px;
-                    }
-                    .card-top{
-                        .card-top-state{
-                            margin-right: 8px;
-                        }
-                    }
-                    .card-ct{
-                        text-align: center;
-                        font-size: var(--tiklab-font-13);
-                    }
-                    .card-bt{
-                        font-size: var(--tiklab-font-13);
-                        display: flex;
-                        justify-content: space-between;
-                        .card-bt-log{
-                            cursor: pointer;
-                            color: var(--tiklab-blue);
-                        }
-                    }
-                }
-            
-            }
-            .mid_group-bottom{
-                height: calc(100% - 160px);
-                padding: 0 var(--tiklab-padding) var(--tiklab-padding);
-                .mid_group-bottom-title{
-                    font-size: var(--tiklab-font-16);
-                    font-weight: var(--tiklab-font-weight-bold);
-                    height: 40px;
-                    line-height: 40px;
-                }
-                .mid_group-bottom-outLog{
-                    white-space: pre-wrap;
-                    height: calc(100% - 40px);
-                    overflow-y: auto;
-                    overflow-x: hidden;
-                    background: #000;
-                    color: #fff;
-                    padding: 10px 10px 20px;
-                }
-                .mid_group-bottom-runLog{
-                    position: relative;
-                }
-            }
+.str-screens{
+    border-radius: 4px;
+    background-color: #fff;
+    width: 260px;
+    max-width: 260px;
+    height: 150px;
+    padding: var(--tiklab-padding-item);
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+    .str-screen{
+        display: flex;
+        align-items: center;
+        &:not(:last-child){
+            margin-bottom: 10px;
         }
-
-        &-empty{
-            .empty-group{
-                height: calc(100% - 90px);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+        .str-screen-user,.str-screen-state,.str-screen-type{
+            width: 90px;
+        }
+        .ant-select{
+            flex: 1;
         }
     }
 }
 
-.structureDrawer{
-    padding-top: var(--tiklab-padding);
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    width: 100%;
+.strDetailDrawer{
     height: 100%;
-    .structureDrawer-up{
-        padding: 0 var(--tiklab-padding);
+    overflow: hidden;
+    .strDetailDrawer-up{
+        padding: 20px 20px 0;
     }
-    .structureDrawer-content{
-        height: 100%;
-        width: 100%;
-        -webkit-box-flex: 1;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        overflow: auto;
-        padding: 0 var(--tiklab-padding) var(--tiklab-padding);
+    .strDetailDrawer-log{
+        margin: 10px 0 0 20px;
+        .bottom-up{
+            border-bottom: 1px solid #d9d9d9;
+            height: 40px;
+            line-height: 40px;
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+        .bottom-content{
+            display: flex;
+            height: calc(100% - 260px);
+            border-left: 1px solid #d9d9d9;
+        }
+        .bottom-tree{
+            height: 100%;
+            overflow: auto;
+            width: 200px;
+            padding: 10px 10px 0;
+            margin-right: 5px;
+            .tree-ul{
+                .tree-li-firsts{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    height: 25px;
+                    line-height: 25px;
+                    cursor: pointer;
+                    padding: 0 5px;
+                    &:hover{
+                        background: var(--tiklab-gray-300);
+                    }
+                }
+                .tree-li-active{
+                    background: var(--tiklab-gray-400);
+                }
+                .tree-li-name{
+                    max-width: 80px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    -o-text-overflow: ellipsis;
+            }
+            .tree-li-icon{
+                padding-right: 8px;
+            }
+            .tree-li-hidden{
+                display: none;
+            }
+            .tree-li-first{
+                display: flex;
+                align-items: center;
+            }
+            .tree-li-time{
+                font-size: var(--tiklab-font-13);
+                color: #999;
+            }
+        }
     }
-    // .log-content{
-        // background-color: #222;
-        // color: #fff;
-        // padding: 10px;
-    // }
+        .bottom-log{
+            flex: 1;
+            height: 100%;
+            overflow: auto;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            white-space: pre-wrap;
+        }
+    }
+    .item{
+        &-20{
+            border-top: 3px solid #444444 !important;
+        }
+        &-1{
+            border-top: 3px solid #ff0000 !important;
+        }
+        &-10{
+            border-top: 3px solid var(--tiklab-blue) !important;
+        }
+        &-0{
+            border-top: 3px solid #43a890 !important;
+        }
+        &-3{
+            border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
+        }
+    }
+    .str-multi{
+        display: flex;
+        padding: 0 20px;
+        .str-multi-group{
+            height: 130px;
+            overflow: auto;
+        }
+        .st-card{
+            width: 230px;
+            height: 130px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--tiklab-gray-200);
+            border-radius: 4px;
+            &:not(:last-child){
+                margin-right: 15px;
+            }
+            .card-top{
+                .card-top-state{
+                    margin-right: 8px;
+                }
+            }
+            .card-ct{
+                text-align: center;
+                font-size: var(--tiklab-font-13);
+            }
+            .card-bt{
+                font-size: var(--tiklab-font-13);
+                display: flex;
+                justify-content: space-between;
+                .card-bt-log{
+                    cursor: pointer;
+                    color: var(--tiklab-blue);
+                }
+            }
+        }
+
+    }
 }

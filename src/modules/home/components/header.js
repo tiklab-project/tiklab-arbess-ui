@@ -23,7 +23,7 @@ const Head = props =>{
 
     const {homePageStore} = props
 
-    const {findMessageDispatchItemPage,unread} = homePageStore
+    const {findMessageItemPage,unread} = homePageStore
 
     let path = props.location.pathname
 
@@ -34,7 +34,7 @@ const Head = props =>{
 
     useEffect(()=>{
         // 未读消息通知
-        findMessageDispatchItemPage(0)
+        findMessageItemPage(0)
     },[])
 
     useEffect(()=>{

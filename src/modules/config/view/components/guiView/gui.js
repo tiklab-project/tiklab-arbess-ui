@@ -26,13 +26,13 @@ const Gui = props =>{
                 setCreacteValue={setCreacteValue}
                 setTaskFormDrawer={setTaskFormDrawer}
                 deleteTaskConfig={deleteTaskConfig}
-                updateStageName={updateStageName}
             />
 
             <FormDetailsDrawer
                 dataItem={dataItem}
                 taskFormDrawer={taskFormDrawer}
                 setTaskFormDrawer={setTaskFormDrawer}
+                updateStageName={updateStageName}
             />
         </div>
     )

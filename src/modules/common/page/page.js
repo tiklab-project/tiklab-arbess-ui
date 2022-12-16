@@ -14,10 +14,10 @@ const Page = props =>{
                     <LeftOutlined/>
                 </span>
                 <span className="mf-page-current">{pageCurrent}</span>
-                <span> / {page && page.total}</span>
+                <span> / {page && page.total?page.total:1}</span>
                 <span
-                    className={`${pageCurrent===page.total?"mf-page-ban":"mf-page-allow"}`}
-                    onClick={()=>pageCurrent===page.total?null:changPage(pageCurrent + 1)}
+                    className={`${(pageCurrent===page.total || !page.total)?"mf-page-ban":"mf-page-allow"}`}
+                    onClick={()=>(pageCurrent===page.total || !page.total)?null:changPage(pageCurrent + 1)}
                 >
                     <RightOutlined/>
                 </span>

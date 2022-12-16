@@ -90,6 +90,7 @@ export class ConfigStore{
             this.mess("删除成功")
             this.isFindConfig=!this.isFindConfig
             this.enabledValid=!this.enabledValid
+            this.taskFormDrawer = false
         }
         return data
     }

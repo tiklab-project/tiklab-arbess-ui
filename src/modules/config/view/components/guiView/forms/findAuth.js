@@ -62,6 +62,10 @@ const FindAuth = props =>{
         }
     }
 
+    const onBlur = () =>{
+        setBordered(false)
+    }
+
     //认证标题
     const label = type => {
         switch (type) {
@@ -148,6 +152,7 @@ const FindAuth = props =>{
                 onMouseEnter={()=>setShowArrow(true)}
                 onMouseLeave={()=>setShowArrow(false)}
                 onFocus={onFocus}
+                onBlur={onBlur}
                 onChange={changeGitSelect}
                 notFoundContent={<EmptyText/>}
                 open={open}

@@ -8,7 +8,7 @@ import ProjectAside from "./projectAside";
 
 const Project= (props)=>{
 
-    const {route,match,pipelineStore,systemRoleStore}=props
+    const {route,match,pipelineStore,systemRoleStore,configStore}=props
 
     const {findAllPipelineStatus,setPipelineId,setPipeline} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
@@ -56,6 +56,7 @@ const Project= (props)=>{
             <ProjectAside
                 {...props}
                 pipelineStore={pipelineStore}
+                configStore={configStore}
             />
             <div className="project-content">
                 {renderRoutes(route.routes)}
@@ -64,6 +65,6 @@ const Project= (props)=>{
     )
 }
 
-export default withRouter(inject("pipelineStore",SYSTEM_ROLE_STORE)(observer(Project)))
+export default withRouter(inject("pipelineStore","configStore",SYSTEM_ROLE_STORE)(observer(Project)))
 
 

@@ -4,9 +4,9 @@ import {
     FindAllOpen,
     Findlogpage,
     Findtodopage,
-    FindMessageDispatchItemPage,
-    UpdateMessageDispatchItem,
-    DeleteMessageDispatchItem,
+    FindMessageItemPage,
+    UpdateMessageItem,
+    DeleteMessageItem,
 } from "../api/homePage";
 
 import {getUser} from "tiklab-core-ui";
@@ -88,7 +88,7 @@ export class HomePageStore{
     }
 
     @action
-    findMessageDispatchItemPage = async values =>{
+    findMessageItemPage = async values =>{
         const params = {
             pageParam:{
                 pageSize: 12,
@@ -101,7 +101,7 @@ export class HomePageStore{
         if(values===0 || values===1){
             params.status=values
         }
-        const data = await FindMessageDispatchItemPage(params)
+        const data = await FindMessageItemPage(params)
         if(data.code===0){
 
             this.messPage.total=data.data && data.data.totalRecord
@@ -122,8 +122,8 @@ export class HomePageStore{
     }
 
     @action
-    updateMessageDispatchItem = async value =>{
-        const data = await UpdateMessageDispatchItem(value)
+    updateMessageItem = async value =>{
+        const data = await UpdateMessageItem(value)
         if(data.code===0){
             this.mesFresh = !this.mesFresh
             this.unread = this.unread - 1
@@ -132,10 +132,10 @@ export class HomePageStore{
     }
 
     @action
-    deleteMessageDispatchItem = async value =>{
+    deleteMessageItem = async value =>{
         const param = new FormData()
         param.append("id",value)
-        const data = await DeleteMessageDispatchItem(param)
+        const data = await DeleteMessageItem(param)
         if(data.code===0){
             this.mesFresh = !this.mesFresh
             message.info("删除成功",0.5)

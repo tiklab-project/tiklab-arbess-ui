@@ -28,7 +28,6 @@ const Variable = props =>{
     }
 
     const edit = (text,reocrd) =>{
-        console.log(reocrd,"zzzz")
         setFormValue(reocrd)
         setVariableVisible(true)
     }

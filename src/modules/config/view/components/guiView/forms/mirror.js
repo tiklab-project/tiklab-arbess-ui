@@ -1,7 +1,7 @@
-import React, {useRef,useState,forwardRef,useEffect} from "react";
+import React, {useRef,useState,forwardRef} from "react";
 import {inject,observer} from "mobx-react";
 import {Tooltip} from "antd";
-import {RadiusUprightOutlined,ExpandOutlined} from "@ant-design/icons";
+import {ExpandOutlined} from "@ant-design/icons";
 import MirrorExpand from "./mirrorExpand";
 import Btn from "../../../../../common/btn/btn";
 import {ViewMirror} from "../../../../common/components/mirror";
@@ -58,34 +58,6 @@ const MirrorContent = forwardRef((props,ref)=>{
         setBordered(false)
     }
 
-
-    const handleMouseDown = e => {
-        const targetDiv = document.getElementById(name+"_mirror")
-        const targetDivHeight = targetDiv.offsetHeight
-        // clientY是该表高度，也可以取clientX改变宽度
-        const startY = e.clientY
-        document.onmousemove = function(e) {
-            e.preventDefault()
-            const distY = Math.abs(e.clientY - startY)
-            if (e.clientY > startY) {
-                targetDiv.style.height = targetDivHeight + distY + 'px'
-            }
-            if (e.clientY < startY) {
-                targetDiv.style.height = (targetDivHeight - distY) + 'px'
-            }
-            // 最大高度，也可以通过css  max-height设置
-            if (parseInt(targetDiv.style.height) >= 700) {
-                targetDiv.style.height = 700 + "px"
-            }
-            if (parseInt(targetDiv.style.height) <= 68){
-                targetDiv.style.height = 68 + "px"
-            }
-        }
-        document.onmouseup = function() {
-            document.onmousemove = null
-        }
-    }
-
     return  <>
             <div className="gui-mirror" id={name+"_mirror"}>
                 <ViewMirror
@@ -103,10 +75,6 @@ const MirrorContent = forwardRef((props,ref)=>{
                         </Tooltip>
                     </div>
                 }
-                {/*{*/}
-                {/*    bordered &&*/}
-                {/*    <div className="gui-mirror-move"  onMouseDown={handleMouseDown}/>*/}
-                {/*}*/}
             </div>
             <MirrorExpand
                 visible={visible}

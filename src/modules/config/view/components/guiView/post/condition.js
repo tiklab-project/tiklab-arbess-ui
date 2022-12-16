@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
-import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import {Select} from "antd";
+import {MinusCircleOutlined,PlusOutlined} from "@ant-design/icons";
 import Btn from "../../../../../common/btn/btn";
 import "./condition.scss";
 import {Input} from "antd";
@@ -25,6 +26,7 @@ const Condition = props =>{
     const renderA = (item,index) =>{
         return(
             <div className="inputs-condition" key={index}>
+                {/*<div>{index}</div>*/}
                 <div className="inputs-condition-key">
                     <Input
                         placeholder={"名称"}
@@ -33,7 +35,13 @@ const Condition = props =>{
                         onPressEnter={(e)=>e.target.blur()}
                     />
                 </div>
-                <div>等于</div>
+                <div>
+                    <Select defaultValue={1}>
+                        <Select.Option value={1}>等于</Select.Option>
+                        <Select.Option value={2}>大于</Select.Option>
+                        <Select.Option value={3}>小于</Select.Option>
+                    </Select>
+                </div>
                 <div className="inputs-condition-value">
                     <Input
                         placeholder={"值"}

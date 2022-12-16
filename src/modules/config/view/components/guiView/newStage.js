@@ -1,5 +1,5 @@
 import React, {useState, Fragment, useRef, useEffect} from "react";
-import {Popconfirm,Input} from "antd";
+import {Popconfirm,Input,Tooltip} from "antd";
 import {
     PlusOutlined,
     ExclamationCircleOutlined,
@@ -13,10 +13,12 @@ import AddDrawer from "./addDrawer";
 
 const NewStage = props =>{
 
-    const {updateStageName,setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
+    const {setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
-    
+    const [multiHover,setMultiHover] = useState("") // 每个模板下每个阶段悬浮样式显示
+    const [hover,setHover] = useState(false) // 并行按钮悬浮样式显示
+
     const pipelineType = pipeline.type
 
     // 新建任务弹窗事件操作
@@ -70,6 +72,12 @@ const NewStage = props =>{
         setDataItem(item)
         setTaskFormDrawer(true)
     }
+
+    // 修改模板和阶段name
+    const changName = group => {
+        setDataItem(group)
+        setTaskFormDrawer(true)
+    }
     
     // 删除
     const deletePart = (e,item) =>{
@@ -89,80 +97,26 @@ const NewStage = props =>{
     const renderCode = item =>{
         if(item.type<10){
             const codeBranch = item && item.codeBranch
-            return (
+            return item && item.codeName ?
                 <>
-                    {
-                        item && item.codeName ?
-                        <>
-                            <div className="newStages-codeName">
-                                <div className="branch-title">
-                                    <TagsOutlined style={{paddingRight:5}}/>
-                                    {item.codeName} 
-                                </div>
-                            </div>
-                            <div className="newStages-branch ">
-                                <div className="branch-address">
-                                    {
-                                        codeBranch==="" || !codeBranch ?
-                                        <><ShareAltOutlined style={{paddingRight:5}}/>master</>
-                                        :
-                                        <><ShareAltOutlined style={{paddingRight:5}}/>{codeBranch}</>
-                                    }
-                                </div>
-                            </div>
-                        </>
-                        :
-                        null
-                    }
-                </>
-            )
-        }
-    }
-
-    const [stagesId,setStagesId] = useState("")
-    const inputRef = useRef()
-
-    useEffect(()=>{
-        if(pipeline){
-            stagesId && inputRef.current.focus()
-        }
-    },[stagesId,pipeline])
-
-    const changName = group => {
-        setStagesId(group.stagesId)
-    }
-    const onBlur = (e,group) =>{
-        setStagesId("")
-        if(e.target.value!==group.name){
-            updateStageName({stagesId:group.stagesId,stagesName:e.target.value})
-        }
-    }
-
-    const groupHead = group =>{
-        return(
-            <div className="group-head">
-                {
-                    stagesId===group.stagesId?
-                        <div className="name">
-                            <Input
-                                ref={inputRef}
-                                onBlur={e=>onBlur(e,group)}
-                                onPressEnter={(e)=>e.target.blur()}
-                                defaultValue={group && group.name}
-                            />
+                    <div className="newStages-codeName">
+                        <div className="branch-title">
+                            <TagsOutlined style={{paddingRight:5}}/>
+                            {item.codeName}
                         </div>
-                        :
-                        <div className="name">
-                            <div className="group-name">
-                                {group && group.name}
-                            </div>
-                            <div className="group-inputBtn" onClick={()=>changName(group)}>
-                                <EditOutlined/>
-                            </div>
+                    </div>
+                    <div className="newStages-branch ">
+                        <div className="branch-address">
+                            {
+                                codeBranch==="" || !codeBranch ?
+                                    <><ShareAltOutlined style={{paddingRight:5}}/>master</>
+                                    :
+                                    <><ShareAltOutlined style={{paddingRight:5}}/>{codeBranch}</>
+                            }
                         </div>
-                }
-            </div>
-        )
+                    </div>
+                </> : null
+        }
     }
 
     // 多任务（添加任务）；多阶段（添加阶段）
@@ -170,12 +124,14 @@ const NewStage = props =>{
         return(
             <div className="group-flow">
                 <div className={`group-flow_btn ${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`}>
-                    <svg className="icon group-flow_btn_i"
-                            aria-hidden="true"
-                            onClick={() =>insertData(group,groupIndex)}
-                    >
-                        <use xlinkHref="#icon-zengjia"/>
-                    </svg>
+                    <Tooltip title={"添加新阶段"}>
+                        <svg className="icon group-flow_btn_i"
+                             aria-hidden="true"
+                             onClick={()=>insertData(group,groupIndex)}
+                        >
+                            <use xlinkHref="#icon-zengjia"/>
+                        </svg>
+                    </Tooltip>
                 </div>
             </div>
         )
@@ -217,7 +173,9 @@ const NewStage = props =>{
         return <Fragment key={groupIndex}>
             { group.type > 10 && renderFlowBtn(group,groupIndex) }
             <div className="group-table">
-                {groupHead(group)}
+                <div className="group-head">
+                    <div className="name" style={{opacity:0}}/>
+                </div>
                 <div className="newStages-single">
                     <div className={`newStages-job`}>
                         {newJobContent(group,14)}
@@ -230,66 +188,119 @@ const NewStage = props =>{
 
     // 并行任务添加按钮
     const parallel = (groupIndex) =>{
-        return <div className="newStages-contents add-newStages-contents">
-        <div className="newStages-content" style={{paddingLeft:30}}>
-            <div className="newStages-job">
-                <div className="newStages-job-content" onClick={()=>parallelTask(groupIndex)}>
-                    <PlusOutlined/>
-                    <span style={{paddingLeft:5}}>并行阶段</span>
-                </div>         
+        return <div className={`multi-content add-newStages-contents ${hover?"add-hover":""}`}>
+            <div className="newStages-content" style={{paddingLeft:30}}>
+                <div className="newStages-job">
+                    <div
+                        className="add-newStages-job-content"
+                        onClick={()=>parallelTask(groupIndex)}
+                        onMouseOver={()=>setHover(true)}
+                        onMouseLeave={()=>setHover(false)}
+                    >
+                        <PlusOutlined/>
+                        <span style={{paddingLeft:5}}>并行阶段</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>       
+    }
+
+    // 每个模板阶段name
+    const groupHead = group =>{
+        return(
+            <div className="group-head">
+                <div className="name">
+                    <div className="group-name">
+                        {group && group.name}
+                    </div>
+                    <div className="group-inputBtn" onClick={()=>changName(group)}>
+                        <EditOutlined/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    // 模板下阶段name
+    const listHead = (group,list) =>{
+        return(
+            <div className="newStages-title" style={group.code?{opacity:0}:null}>
+                <span className="newStages-title-name"
+                      onMouseOver={()=>setMultiHover(list.stagesId)}
+                      onMouseLeave={()=>setMultiHover("")}
+                >
+                    {list.name?list.name:"源码"}
+                    <span className="newStages-title-icon">
+                        <EditOutlined onClick={()=>changName(list)}/>
+                    </span>
+                </span>
+            </div>
+        )
+    }
+
+    // 串行任务--上
+    const hasAddPre = (list,groupIndex,stagesIndex) =>{
+        return(
+            <Tooltip title={"串行任务"}>
+                <div className="newStages-has-add"
+                     style={{marginRight:15}}
+                     onClick={()=>serial(list,groupIndex,stagesIndex+1)}
+                >
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-zengjia"/>
+                    </svg>
+                </div>
+            </Tooltip>
+        )
+    }
+
+    // 串行任务--下
+    const hasAddNext = (list,groupIndex,stagesIndex) =>{
+        return(
+            <Tooltip title={"串行任务"}>
+                <div className="newStages-has-add"
+                     style={{marginLeft:15}}
+                     onClick={()=>serial(list,groupIndex,stagesIndex+2)}
+                >
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-zengjia"/>
+                    </svg>
+                </div>
+            </Tooltip>
+        )
     }
 
     // 多阶段
     const renderMultitask = (group,groupIndex) =>{
         return <Fragment key={groupIndex}>
-            {
-                !group.code && renderFlowBtn(group,groupIndex)
-            }
+            { !group.code && renderFlowBtn(group,groupIndex) }
             <div className="group-table">
-                {groupHead(group)}
+                { groupHead(group) }
                 <div className="newStages-multi">
                     {
                         group && group.stagesList && group.stagesList.map((list,listIndex)=>{
                             return(
-                                <div className={`newStages-contents ${list.code?"newStages-code":""}`} key={listIndex}>
-                                    <div className="newStages-content">
-                                        {
-                                            list && list.taskValues && list.taskValues.map((stage,stagesIndex)=>{
-                                                return (
-                                                    <div key={stagesIndex}>
-                                                        <div className={`newStages-job ${!list.code?"newStages-has":""}`} >
-                                                            { !list.code &&
-                                                                <div className="newStages-has-add"
-                                                                     style={{marginRight:15}}
-                                                                     onClick={()=>serial(list,groupIndex,stagesIndex+1)}
-                                                                 >
-                                                                    <svg className="icon" aria-hidden="true">
-                                                                        <use xlinkHref="#icon-zengjia"/>
-                                                                    </svg>
-                                                                </div>
-                                                            }
-                                                            { newJobContent(stage,20) }
-                                                            { !list.code &&
-                                                                <div className="newStages-has-add"
-                                                                     style={{marginLeft:15}}
-                                                                     onClick={()=>serial(list,groupIndex,stagesIndex+2)}
-                                                                >
-                                                                    <svg className="icon" aria-hidden="true">
-                                                                        <use xlinkHref="#icon-zengjia"/>
-                                                                    </svg>
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                        { renderCode(stage) }
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                </div>
+                               <div key={listIndex} className={`${!group.code?"multi-content":""} ${(!group.code && multiHover===list.stagesId)?"multi-content-hover":""}`}>
+                                   { listHead(group,list) }
+                                   <div className={`newStages-contents ${group.code?"newStages-code":""}`}>
+                                       <div className="newStages-content">
+                                           {
+                                               list && list.taskValues && list.taskValues.map((stage,stagesIndex)=>{
+                                                   return (
+                                                       <div key={stagesIndex}>
+                                                           <div className={`newStages-job ${!group.code?"newStages-has":""}`} >
+                                                               { !group.code && hasAddPre(list,groupIndex,stagesIndex) }
+                                                               { newJobContent(stage,20) }
+                                                               { !group.code && hasAddNext(list,groupIndex,stagesIndex) }
+                                                           </div>
+                                                           { renderCode(stage) }
+                                                       </div>
+                                                   )
+                                               })
+                                           }
+                                       </div>
+                                   </div>
+                               </div>
                             )
                         })
                     }
@@ -322,7 +333,7 @@ const NewStage = props =>{
                                     <div className="newStages-job">
                                         <div onClick={()=>newTask()} className="newStages-job-content">
                                             <PlusOutlined/>
-                                            <span style={{paddingLeft:5}}>新任务</span>
+                                            <span style={{paddingLeft:5}}>{pipelineType===1?"新任务":"新阶段"}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -339,7 +350,7 @@ const NewStage = props =>{
                         <div className="newStages-job">
                             <div onClick={()=>newTask()} className="newStages-job-content">
                                 <PlusOutlined/>
-                                <span style={{paddingLeft:5}}>新任务</span>
+                                <span style={{paddingLeft:5}}>{pipelineType===1?"新任务":"新阶段"}</span>
                             </div>
                         </div>
                     </div>
@@ -350,7 +361,7 @@ const NewStage = props =>{
                 newStageDrawer={newStageDrawer}
                 setNewStageDrawer={setNewStageDrawer}
             />
-        
+
         </div>
     )
 }

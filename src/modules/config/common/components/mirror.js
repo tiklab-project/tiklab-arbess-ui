@@ -6,9 +6,12 @@ import "codemirror/lib/codemirror.css";
 // 设置代码语言模式
 import "codemirror/mode/shell/shell.js";
 import "codemirror/mode/ruby/ruby.js";
+//代码提示
+import "codemirror/addon/hint/show-hint.css";
+import "codemirror/addon/hint/show-hint";
+import "codemirror/addon/hint/anyword-hint.js";
 // 主题风格
 import "codemirror/theme/solarized.css";
-// 黑色主题
 import "codemirror/theme/dracula.css";
 // 高亮
 import "codemirror/addon/selection/active-line";

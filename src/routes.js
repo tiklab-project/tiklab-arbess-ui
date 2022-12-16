@@ -28,7 +28,7 @@ const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 /*  流水线详情 */
 const PipelineDyan=AsyncComponent(()=>import("./modules/project/dyna/dyna"))
 const Survey=AsyncComponent(()=>import("./modules/project/survey/container/survey"))
-const Structure=AsyncComponent(()=>import("./modules/project/str/container/structure"))
+const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
 const Config = AsyncComponent(()=>import("./modules/config/common/container/config"))
 
 /*  流水线详情 -- 设置 */

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Drawer,Form} from "antd";
+import {Drawer,Form,Input} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import SubIcon from "../../../common/components/subIcon";
 import Btn from "../../../../common/btn/btn";
@@ -16,15 +16,17 @@ import Condition from "./post/condition";
 import Postpose from "./post/postpose";
 import Variable from "./post/variable";
 import Tabs from "../../../../common/tabs/tabs";
+import {x} from "../delData";
 import "./formDetailsDrawer.scss";
 
 const FormDetailsDrawer = props =>{
 
-    const {taskFormDrawer,setTaskFormDrawer,dataItem} = props
+    const {taskFormDrawer,setTaskFormDrawer,dataItem,updateStageName} = props
 
     const [form] = Form.useForm()
 
     const [handleType,setHandleType] = useState(1)
+    const [enter,setEnter] = useState(false)
 
     const getId = (dataItem,name) =>{
         return dataItem.configId + "_" + name
@@ -95,12 +97,23 @@ const FormDetailsDrawer = props =>{
                         [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+ dataItem.auth.ip+")",
                         [getId(dataItem,"authId")]:dataItem.authId
                     })
-                    break  
+                    break
+                default:
+                    form.setFieldsValue({
+                        [dataItem.stagesId+"name"]:dataItem.name,
+                    })
 
             }
             form.validateFields()
         }
     },[taskFormDrawer,dataItem])
+
+    const onBlur = e =>{
+        setEnter(false)
+        if(x(e.target.value,dataItem.name)){
+            updateStageName({stagesId:dataItem.stagesId,stagesName:e.target.value})
+        }
+    }
 
     const renderForms = dataItem =>{
         switch (dataItem.type){
@@ -155,7 +168,6 @@ const FormDetailsDrawer = props =>{
             onClose={()=>setTaskFormDrawer(false)}
             closable={false}
             destroyOnClose={true}
-            // maskStyle={{background:"transparent"}}
             mask={false}
             contentWrapperStyle={{width:480,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
@@ -164,7 +176,12 @@ const FormDetailsDrawer = props =>{
             <div className="wrapper">
                 <div className="wrapper-head">
                     <div className="wrapper-head-title">
-                        <SubIcon type={dataItem.type}/>
+                        {
+                            dataItem.configId ?
+                            <SubIcon type={dataItem.type}/>
+                                :
+                            "阶段名称"
+                        }
                     </div>
                     <Btn
                         onClick={()=>setTaskFormDrawer(false)}
@@ -182,19 +199,36 @@ const FormDetailsDrawer = props =>{
                                     layout="vertical"
                                     autoComplete="off"
                                 >
-                                    {renderForms(dataItem)}
+                                    {
+                                        dataItem.configId ?
+                                        renderForms(dataItem)
+                                        :
+                                        <Form.Item name={dataItem.stagesId+"name"} label="名称">
+                                            <Input
+                                                placeholder={enter? "名称，回车保存":"未设置"}
+                                                onFocus={()=>setEnter(true)}
+                                                onBlur={(e)=>onBlur(e)}
+                                                onPressEnter={(e)=>e.target.blur()}
+                                            />
+                                        </Form.Item>
+                                    }
                                 </Form>
                             </div>
-                            <Tabs
-                                tabLis={lis}
-                                type={handleType}
-                                onClick={clickHandleType}
-                            />
-                            <div className="taskForm-post">
-                                { handleType===1 && <Variable dataItem={dataItem}/>  }
-                                { handleType===2 && <Condition/> }
-                                { handleType===3 && <Postpose/>  }
-                            </div>
+                            {
+                                dataItem.configId &&
+                                <>
+                                    <Tabs
+                                        tabLis={lis}
+                                        type={handleType}
+                                        onClick={clickHandleType}
+                                    />
+                                    <div className="taskForm-post">
+                                        { handleType===1 && <Variable dataItem={dataItem}/>  }
+                                        { handleType===2 && <Condition/> }
+                                        { handleType===3 && <Postpose/>  }
+                                    </div>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>

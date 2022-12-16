@@ -28,27 +28,27 @@ export function  Findtodopage (data){
 }
 
 // 全部消息
-export function  FindMessageDispatchItemPage(data){
+export function  FindMessageItemPage(data){
     return serviceLoc.request({
-        url:"/message/messageDispatchItem/findMessageDispatchItemPage",
+        url:"/message/messageItem/findMessageItemPage",
         method:"post",
         data
     })
 }
 
 // 更新消息
-export function  UpdateMessageDispatchItem(data){
+export function  UpdateMessageItem(data){
     return serviceLoc.request({
-        url:"/message/messageDispatchItem/updateMessageDispatchItem",
+        url:"/message/messageItem/updateMessageItem",
         method:"post",
         data
     })
 }
 
 // 删除消息
-export function  DeleteMessageDispatchItem(data){
+export function  DeleteMessageItem(data){
     return serviceLoc.request({
-        url:"/message/messageDispatchItem/deleteMessageDispatchItem",
+        url:"/message/messageItem/deleteMessageItem",
         method:"post",
         data
     })

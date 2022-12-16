@@ -16,8 +16,8 @@ const MessageDrawer = props =>{
 
     const {homePageStore,visible,setVisible,pipelineStore} = props
 
-    const {findMessageDispatchItemPage,messageList,messPage,setMessagePagination,messagePagination,
-        setMessageList,unread,updateMessageDispatchItem,mesFresh,deleteMessageDispatchItem
+    const {findMessageItemPage,messageList,messPage,setMessagePagination,messagePagination,
+        setMessageList,unread,updateMessageItem,mesFresh,deleteMessageItem
     } = homePageStore
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
@@ -33,7 +33,7 @@ const MessageDrawer = props =>{
     },[visible])
 
     useEffect(()=>{
-        visible && findMessageDispatchItemPage(selected).then(res=>{
+        visible && findMessageItemPage(selected).then(res=>{
             setIsLoading(false)
         })
     },[visible,messagePagination,selected,mesFresh])
@@ -73,7 +73,7 @@ const MessageDrawer = props =>{
                 },
                 status: 1
             }
-            updateMessageDispatchItem(updateParams)
+            updateMessageItem(updateParams)
         }
 
         if(isPipeline(item.messageTemplate.link)){
@@ -91,7 +91,7 @@ const MessageDrawer = props =>{
     const delMessage = (e,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
-        deleteMessageDispatchItem(item.id)
+        deleteMessageItem(item.id)
     }
 
     const renderMessageList = messageList =>{

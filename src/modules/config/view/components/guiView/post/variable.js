@@ -13,7 +13,7 @@ const Variable = props => {
 
     useEffect(()=>{
         findAllVariable(dataItem.configId)
-    },[fresh])
+    },[fresh,dataItem && dataItem.configId])
 
     const isequal = (data,varId) =>{
         let a
@@ -69,8 +69,9 @@ const Variable = props => {
                 <div className="inputs-variable">
                     <div className="inputs-variable-key">
                         <Input
+                            status="error"
                             placeholder={"名称"}
-                            defaultValue={item && item.varKey}
+                            defaultValue={item.varKey}
                             onChange={e=>onChange(e,item,"varKey")}
                             onBlur={e=>onBlur(e,item,"varKey")}
                             onPressEnter={(e)=>e.target.blur()}

@@ -80,7 +80,11 @@ const VariableAdd = props =>{
 
     const onFouce = () =>{
         const list = form.getFieldValue("valueList")
-        setOpt([...list])
+        let newArr = []
+        list && list.map(item=>{
+            item && newArr.push(item)
+        })
+        setOpt([...newArr])
     }
 
     return(
@@ -143,7 +147,10 @@ const VariableAdd = props =>{
                                                          >
                                                             <Input placeholder="可选项" style={{ width:"60%",marginRight:30 }} />
                                                         </Form.Item>
-                                                        {fields.length > 1 && <MinusCircleOutlined onClick={() => remove(field.name)}/>}
+                                                        {fields.length > 1 && <MinusCircleOutlined onClick={()=>{
+                                                            remove(field.name)
+                                                            form.setFieldsValue({varValue:null})
+                                                        }}/>}
                                                     </Form.Item>
                                                  ))}
                                                 <Form.Item>
