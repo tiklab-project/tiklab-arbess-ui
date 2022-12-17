@@ -3,7 +3,7 @@ import {getTime} from "../../../common/client/client";
 
 const StrItem = props =>{
 
-    const {itemData,status,setTreeData,setLogData,setExecIndex,index} = props
+    const {itemData,status,setTreeData,setLogData,setExecIndex,index,setId} = props
 
     const log = (item,itemIndex) =>{
         switch (index) {
@@ -13,6 +13,7 @@ const StrItem = props =>{
             case 1:
                 setTreeData(item)
                 setLogData(item)
+                setId(item.id)
         }
     }
 

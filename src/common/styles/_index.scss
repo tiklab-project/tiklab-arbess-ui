@@ -120,13 +120,12 @@ ul li{
     }
 }
 
-.home-limited{
+.mf-home-limited{
     margin: auto;
     max-width: 1280px;
     min-width: 768px;
     padding: var(--tiklab-padding);
 }
-
 
 ::-webkit-scrollbar {
     /* 滚动条宽度， width：对应竖滚动条的宽度  height：对应横滚动条的高度*/

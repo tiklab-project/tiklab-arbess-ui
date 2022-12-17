@@ -78,7 +78,7 @@ const DynaDetail = props =>{
 
     return(
         <div className="dyna">
-            <div className="dyna-content home-limited">
+            <div className="dyna-content mf-home-limited">
                 <BreadcrumbContent
                     firstItem={firstItem}
                     secondItem={secondItem && secondItem}
@@ -138,7 +138,6 @@ const DynaDetail = props =>{
                             <DynaList
                                 {...props}
                                 dynamicList={dynamicList}
-                                pipelineId={pipelineId}
                             />
                             <Page
                                 pageCurrent={pageCurrent}

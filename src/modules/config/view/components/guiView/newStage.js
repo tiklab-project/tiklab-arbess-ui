@@ -8,7 +8,7 @@ import {
     DeleteOutlined,
     EditOutlined
 } from "@ant-design/icons";
-import SubIcon from "../../../common/components/subIcon";
+import SIcon from "../../../common/components/sIcon";
 import AddDrawer from "./addDrawer";
 
 const NewStage = props =>{
@@ -16,7 +16,6 @@ const NewStage = props =>{
     const {setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
-    const [multiHover,setMultiHover] = useState("") // 每个模板下每个阶段悬浮样式显示
     const [hover,setHover] = useState(false) // 并行按钮悬浮样式显示
 
     const pipelineType = pipeline.type
@@ -144,8 +143,11 @@ const NewStage = props =>{
                  className={`newStages-job-content ${valid(item.configId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
             >
                 <div className="newStages-job-sub">
+                    <span className="newStages-job-icon">
+                        <SIcon type={item.type}/>
+                        </span>
                     <span className="newStages-job-title">
-                        <SubIcon type={item.type}/>
+                        {item.name}
                     </span>
                 </div>
                 {valid(item.configId) &&
@@ -225,10 +227,7 @@ const NewStage = props =>{
     const listHead = (group,list) =>{
         return(
             <div className="newStages-title" style={group.code?{opacity:0}:null}>
-                <span className="newStages-title-name"
-                      onMouseOver={()=>setMultiHover(list.stagesId)}
-                      onMouseLeave={()=>setMultiHover("")}
-                >
+                <span className="newStages-title-name">
                     {list.name?list.name:"源码"}
                     <span className="newStages-title-icon">
                         <EditOutlined onClick={()=>changName(list)}/>
@@ -280,7 +279,8 @@ const NewStage = props =>{
                     {
                         group && group.stagesList && group.stagesList.map((list,listIndex)=>{
                             return(
-                               <div key={listIndex} className={`${!group.code?"multi-content":""} ${(!group.code && multiHover===list.stagesId)?"multi-content-hover":""}`}>
+                               <div key={listIndex}
+                                className={`${!group.code?"multi-content":""}`}>
                                    { listHead(group,list) }
                                    <div className={`newStages-contents ${group.code?"newStages-code":""}`}>
                                        <div className="newStages-content">

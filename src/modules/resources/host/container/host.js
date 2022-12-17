@@ -148,7 +148,7 @@ const Host = props =>{
     ]
 
     return(
-        <div className="resources home-limited mf">
+        <div className="resources mf-home-limited mf">
             <div className="resources-upper">
                 <BreadcrumbContent firstItem={"主机配置"} />
                 <HostBtn/>

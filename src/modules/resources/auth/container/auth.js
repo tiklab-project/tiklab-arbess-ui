@@ -106,7 +106,7 @@ const Auth = props =>{
     ]
 
     return(
-        <div className="resources home-limited mf">
+        <div className="resources mf-home-limited mf">
             <div className="resources-upper">
                 <BreadcrumbContent firstItem={"认证配置"}/>
                 <AuthBtn/>

@@ -8,33 +8,40 @@ const StrDetail = props =>{
 
     const {execData,detailsDrawer,setDetailsDrawer,detailsContent,itemData,status,index,pipeline} = props
 
-    const [execIndex,setExecIndex] = useState(0)
     const [logData,setLogData] = useState("")
     const [treeData,setTreeData] = useState("")
+    const [execIndex,setExecIndex] = useState(0)   
 
-    useEffect(()=>{
-        if(detailsDrawer && index===0){
-            setExecIndex(0)
-        }
-    },[detailsDrawer])
+    const [id,setId] = useState("") 
+
+    // useEffect(()=>{ 
+    //     detailsDrawer && itemData && console.log("isData::",isData(itemData.runLogList))
+    // },[detailsDrawer,itemData,id])
+
+    // const isData = data =>{
+    //     console.log(data,"data::")
+    // }
 
     useEffect(()=>{
         if(detailsDrawer){
             switch (index) {
                 case 1:
                     if(itemData){
-                        setLogData(itemData[0])
-                        setTreeData(itemData[0])
+                        const data = itemData.runLogList
+                        setLogData(data[0])
+                        setTreeData(data[0])
                     }
                     break
                 default:
                     if(execData){
-                        setLogData(execData[execIndex])
-                        setTreeData(execData[execIndex])
+                        const data = execData.runLogList
+                        setLogData(data[execIndex])
+                        setTreeData(data[execIndex])
                     }
             }
+
         }
-    },[detailsDrawer,itemData,execData])
+    },[detailsDrawer,itemData,execData,execIndex])
 
     return(
         <Drawer
@@ -58,10 +65,11 @@ const StrDetail = props =>{
                     <StrItem
                         status={status}
                         index={index}
-                        itemData={index===0?execData:itemData}
+                        itemData={index===0 ? execData && execData.runLogList:itemData && itemData.runLogList}
                         setTreeData={setTreeData}
                         setLogData={setLogData}
                         setExecIndex={setExecIndex}
+                        setId={setId}
                     />
                 </div>
                 <div className="strDetailDrawer-log">
@@ -75,6 +83,7 @@ const StrDetail = props =>{
                                     logData={logData}
                                     setLogData={setLogData}
                                     setExecIndex={setExecIndex}
+                                    setId={setId}
                                 />
                             </div>
                         }

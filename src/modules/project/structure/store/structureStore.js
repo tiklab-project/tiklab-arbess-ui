@@ -68,11 +68,11 @@ export class StructureStore {
         param.append("pipelineId", value)
         const data = await PipelineRunStatus(param)
         if(data.code===0){
-            if(data.data===null){
-                this.freshen=!this.freshen
-            }
-            else{
+            if(data.data){
                 this.execData = data.data
+                if(data.data.allState === 0){
+                    this.freshen = !this.freshen
+                }
             }
         }
         return data
@@ -122,7 +122,7 @@ export class StructureStore {
         param.append("historyId", value)
         const data = await FindAllLog(param)
         if(data.code===0){
-            this.itemData = data.data
+            this.itemData = data.data && data.data
         }
         return data
     }

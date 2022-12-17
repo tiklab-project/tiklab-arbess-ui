@@ -74,6 +74,7 @@
             height: 100%;
             overflow: auto;
             width: 200px;
+            min-width: 200px;
             padding: 10px 10px 0;
             margin-right: 5px;
             .tree-ul{
@@ -145,12 +146,14 @@
     .str-multi{
         display: flex;
         padding: 0 20px;
+        overflow: auto;
         .str-multi-group{
             height: 130px;
             overflow: auto;
         }
         .st-card{
             width: 230px;
+            min-width: 230px;
             height: 130px;
             padding: 10px;
             display: flex;

@@ -278,7 +278,7 @@ const Server = props =>{
     }
 
     return(
-        <div className="resources home-limited mf">
+        <div className="resources mf-home-limited mf">
             <div className="resources-upper">
                 <BreadcrumbContent firstItem={"服务配置"} />
                 <ServerBtn type={2}/>

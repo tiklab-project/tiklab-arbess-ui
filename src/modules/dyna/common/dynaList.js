@@ -9,18 +9,11 @@ import "./dynaList.scss";
 
 const DynaList = props =>{
 
-    const {dynamicList,pipelineId} = props
+    const {dynamicList} = props
 
     const dynaGo = item =>{
-        if(isPipeline(item.opLogTemplate.link)){
-            props.history.push(item.opLogTemplate.link)
-        }
-    }
-
-    // 判断流水线是否还存在
-    const isPipeline = id =>{
-        const arr = id.split('/')
-        return pipelineId && pipelineId.some(item=>item===arr[3])
+        // const data = JSON.parse(item.content)
+        props.history.push(item.link.split("#")[1])
     }
 
     const img = actionType =>{
@@ -45,10 +38,10 @@ const DynaList = props =>{
             </div>
             <div className="dynamic-item-message">
                 <div className="dynamic-item-message-title">
-                    {/* {item.opLogTemplate} */}
+                     {item.actionType.name}
                 </div>
                 <div
-                    dangerouslySetInnerHTML={{__html: item.opLogTemplate}}
+                    dangerouslySetInnerHTML={{__html: item.data}}
                 />
             </div>
             <div>{item.timestamp}</div>

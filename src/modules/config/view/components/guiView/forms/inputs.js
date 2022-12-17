@@ -5,7 +5,7 @@ import {x} from "../../delData";
 
 const Inputs = props =>{
 
-    const {placeholder,label,name,addonBefore,configStore,isValid,pipelineStore,dataItem} = props
+    const {placeholder,label,name,addonBefore,dataItem,isValid,pipelineStore,configStore} = props
 
     const {pipelineId} = pipelineStore
     const {updateTaskConfig} = configStore

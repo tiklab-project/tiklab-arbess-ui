@@ -80,7 +80,7 @@ const Postpose = props =>{
 
     return(
         <div className="post-pose">
-            <div className="post-pose-content home-limited">
+            <div className="post-pose-content mf-home-limited">
                 <div className="post-pose-up">
                     <div className="post-pose-up-title">后置处理</div>
                     <div className="post-pose-up-num">共{postposeData && postposeData.length?postposeData.length:0}个后置处理</div>

@@ -59,33 +59,27 @@ const MessageDrawer = props =>{
     ]
     
     const goHref = item => {
-
-        const {message,messageTemplate,status, ...resItem } = item
-
+        const data = JSON.parse(item.data)
+        const {message,status,...resItem } = item
         if (item.status === 0) {
             const updateParams = {
                 ...resItem,
                 message: {
                     id: message.id
                 },
-                messageTemplate: {
-                    id: messageTemplate.id
-                },
                 status: 1
             }
             updateMessageItem(updateParams)
         }
-
-        if(isPipeline(item.messageTemplate.link)){
-            props.history.push(item.messageTemplate.link)
+        if(isPipeline(data.pipelineId)){
+            props.history.push(item.link.split("#")[1])
             setVisible(false)
         }
     }
 
     // 判断流水线是否还存在
     const isPipeline = id =>{
-        const arr = id.split('/')
-        return pipelineList && pipelineList.some(item=>item.id===arr[3])
+        return pipelineList && pipelineList.some(item=>item.id===id)
     }
 
     const delMessage = (e,item) =>{
@@ -96,6 +90,7 @@ const MessageDrawer = props =>{
 
     const renderMessageList = messageList =>{
         return messageList && messageList.map((item,index)=>{
+            const data = JSON.parse(item.data)
             return(
                 <div
                     key={index}
@@ -107,8 +102,8 @@ const MessageDrawer = props =>{
                         <div className="message-item-center">
                             <div className="message-item-user">
                                 <Space>
-                                    {/* <span className="user-title">{item.messageTemplate.name}</span> */}
-                                    <span className="user-time">{item.receiveTime}</span>
+                                     <span className="user-title">{item.title}</span>
+                                    <span className="user-time">{data.date}</span>
                                 </Space>
                                 <Tooltip title={"删除"}>
                                     <div onClick={e=>delMessage(e,item)} className={`message-hidden`}>
@@ -116,7 +111,7 @@ const MessageDrawer = props =>{
                                     </div>
                                 </Tooltip>
                             </div>
-                            {/* <div dangerouslySetInnerHTML={{__html: item.messageTemplate.content}}/> */}
+                             <div dangerouslySetInnerHTML={{__html: item.content}}/>
                         </div>
                     </div>
                 </div>

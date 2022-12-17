@@ -17,7 +17,7 @@ const Agency = props =>{
 
     return(
         <div className="agency">
-            <div className="agency-content home-limited">
+            <div className="agency-content mf-home-limited">
                 <BreadcrumbContent
                     firstItem={"代办任务"}
                     goBack={goBack}

@@ -49,7 +49,7 @@ const Structure = props => {
                 interval=setInterval(()=>
                     pipelineRunStatus(pipelineId).then(res=>{
                         if(res.code===0){
-                            res.data===null && clearInterval(interval)
+                            res.data.allState === 0 && clearInterval(interval)
                         }
                     }), 1000)
             }
@@ -172,29 +172,28 @@ const Structure = props => {
                     case 1 :
                         //失败
                         return  <Tooltip title={"运行失败"}>
-                            <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
-                        </Tooltip>
+                                    <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
+                                </Tooltip>
                     case 10 :
                         //成功
                         return  <Tooltip title={"运行成功"}>
-                            <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
-                        </Tooltip>
+                                    <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
+                                </Tooltip>
                     case 20:
                         //被迫停止
                         return  <Tooltip title={"运行终止"}>
-                            <ExclamationCircleOutlined style = {{fontSize:16}}/>
-                        </Tooltip>
+                                    <ExclamationCircleOutlined style = {{fontSize:16}}/>
+                                </Tooltip>
                     case 0:
                         //运行
                         return  <Tooltip title={"正在运行"}>
-                            <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
-                        </Tooltip>
-
+                                    <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
+                                </Tooltip>
                     case 3:
                         //运行--等待运行
                         return <Tooltip title={"等待运行"}>
-                            <PlayCircleOutlined style = {{fontSize:16}}/>
-                        </Tooltip>
+                                    <PlayCircleOutlined style = {{fontSize:16}}/>
+                                </Tooltip>
                 }
             }
         },
@@ -234,7 +233,7 @@ const Structure = props => {
             render:(text,record)=>{
                 switch(record.runStatus){
                     case 0:
-                        return getTime(execData.runTime)
+                        return execData.allTime?getTime(execData.allTime):"0 秒"
                     default:
                         return getTime(text)
                 }
@@ -269,14 +268,13 @@ const Structure = props => {
                             </Tooltip>
                         )
                 }
-
             },
         }
     ]
 
     return (
         <div className="structure mf">
-            <div className="structure-content home-limited">
+            <div className="structure-content mf-home-limited">
                 <BreadcrumbContent firstItem={pipeline.name} secondItem={"历史"}/>
                 <div className="structure-content-table">
                     <Table

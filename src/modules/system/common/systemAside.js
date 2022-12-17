@@ -1,7 +1,12 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {PrivilegeButton} from "tiklab-privilege-ui";
-import {departmentRouters,applicationRouter,applicationRouters,templateRouter} from "./sysRouters";
+import {
+    departmentRouters,
+    applicationRouters,
+    departmentUnifyRouters,
+    templateRouter,
+} from "./sysRouters";
 import {inject,observer} from "mobx-react";
 import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/lib/store";
 import {getUser} from "tiklab-core-ui";
@@ -18,6 +23,7 @@ const SystemAside= props =>  {
     const [department,setDepartment] = useState(["","","",""])
 
     const authType = JSON.parse(localStorage.getItem("authConfig")).authType
+    const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
 
     const x = (type,data) => {
         let arr = []
@@ -54,20 +60,36 @@ const SystemAside= props =>  {
         })
     },[])
 
-
     useEffect(()=>{
         setSelectKey(path)
     },[path])
 
-    const select = key =>{
-        props.history.push(key)
+    const select = data =>{
+        if(!authType && (data.purviewCode==="orga" || data.purviewCode==="user" || data.purviewCode==="user_dir")){
+            // window.location.href = authUrl +"/#"+ data.id
+            window.open(authUrl +"/#"+ data.id)
+        }else {
+            props.history.push(data.id)
+        }
+    }
+
+    const isExpandedTree = key => {
+        return expandedTree.some(item => item ===key)
+    }
+
+    const setOpenOrClose = key => {
+        if (isExpandedTree(key)) {
+            setExpandedTree(expandedTree.filter(item => item !== key))
+        } else {
+            setExpandedTree(expandedTree.concat(key))
+        }
     }
 
     const menu = (data,deep) =>{
         return(
             <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
                 className={`system-aside-li system-aside-second ${data.id=== selectKey ? "system-aside-select" :null}`}
-                onClick={()=>select(data.id)}
+                onClick={()=>select(data)}
                 key={data.id}
             >
                 <span className="sys-content-icon">{data.icon}</span>
@@ -154,26 +176,20 @@ const SystemAside= props =>  {
         )
     }
 
-    const isExpandedTree = key => {
-        return expandedTree.some(item => item ===key)
-    }
-
-    const setOpenOrClose = key => {
-        if (isExpandedTree(key)) {
-            setExpandedTree(expandedTree.filter(item => item !== key))
-        } else {
-            setExpandedTree(expandedTree.concat(key))
-        }
-    }
-
     return (
         <div className="system-aside">
             <ul className="system-aside-top" style={{padding:0}}>
                 {
-                    authType && departmentRouters(department && department).map(firstItem => {
-                        return firstItem.children && firstItem.children.length > 0 ?
-                            renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                    })
+                    authType ?
+                        departmentRouters(department && department).map(firstItem => {
+                            return firstItem.children && firstItem.children.length > 0 ?
+                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                        })
+                        :
+                        departmentUnifyRouters(department && department).map(firstItem => {
+                            return firstItem.children && firstItem.children.length > 0 ?
+                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                        })
                 }
                 {
                     applicationRouters(department && department).map(firstItem => {
@@ -193,4 +209,4 @@ const SystemAside= props =>  {
 
 }
 
-export default inject(SYSTEM_ROLE_STORE)(observer(SystemAside));
+export default inject(SYSTEM_ROLE_STORE)(observer(SystemAside))

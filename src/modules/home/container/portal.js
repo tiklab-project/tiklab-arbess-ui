@@ -1,14 +1,10 @@
 import React from "react";
-import {verifyUserHoc} from "tiklab-eam-ui";
-import {connect} from "tiklab-plugin-ui/es/_utils";
 import {renderRoutes} from "react-router-config";
-import "../components/header.scss";
 import Heads from "../components/header";
+import "../components/header.scss";
 
 const Portal= props=>{
-
     const {route}=props
-
     return(
         <div className="frame">
             <Heads/>
@@ -19,11 +15,4 @@ const Portal= props=>{
     )
 }
 
-const IndexHoc = verifyUserHoc(Portal)
-function mapStateToProps(state) {
-    return {
-        pluginStore: state.pluginStore
-    }
-}
-
-export default connect(mapStateToProps)(IndexHoc)
+export default Portal

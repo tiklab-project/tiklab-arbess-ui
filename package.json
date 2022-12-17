@@ -11,7 +11,7 @@
         "start": "cross-env NODE_ENV=local CUSTOM_ENV=local webpack-dev-server --progress --config webpack.dev.js ",
         "prod": "cross-env NODE_ENV=prod CUSTOM_ENV=prod webpack --config webpack.prod.js",
         "dev": "cross-env NODE_ENV=dev CUSTOM_ENV=dev webpack-dev-server --progress  --config webpack.dev.js --open",
-        "build": "rimraf es/* && ./node_modules/.bin/babel src --copy-files --extensions .js --out-dir es/module && ncp ./src/ui.js es/dist.js && ncp README.md es/README.md && ncp package.publish.json es/package.json",
+        "build": "rimraf es/* && ./node_modules/.bin/babel src --copy-files --extensions .js --out-dir es/module && ncp ./src/ui.js es/index.js && ncp README.md es/README.md && ncp package.publish.json es/package.json",
         "build:dev": "npm run build:dev:esm && npm run build:dev:cjs && npm run build:umd && npm run build:css",
         "build:prod": "npm run build:esm && npm run build:cjs && npm run build:umd",
         "build:css": "cd scripts && gulp compile",

@@ -47,7 +47,7 @@ const Info = props =>{
     ]
 
     return(
-        <div className="info home-limited mf">
+        <div className="info mf-home-limited mf">
             <BreadcrumbContent firstItem={"系统信息"} />
             <div  className="info-content">
                 {

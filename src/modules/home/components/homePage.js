@@ -12,7 +12,7 @@ const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
 
-    const {findAllOpen,pipelineNearList,findlogpage,findtodopage,dynamicList} = homePageStore
+    const {findAllOpen,pipelineNearList,findlogpage,dynamicList} = homePageStore
     const {findAllPipelineStatus,pipelineList,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     useEffect(()=>{
@@ -38,9 +38,6 @@ const HomePage = props =>{
         // 最近打开的流水线
         findAllOpen(5)
 
-        // 我的代办
-        // findtodopage()
-
     },[])
 
     // 流水线所有id
@@ -61,11 +58,11 @@ const HomePage = props =>{
                 {
                     item && item.pipeline &&
                     <Space>
-                        <span className={`mf-icon-${item.pipeline.color} pipelineRecent-icon`}>
-                            {item.pipeline.name.substring(0,1).toUpperCase()}
+                        <span className={`mf-icon-${item.pipeline.color?item.pipeline.color:0} pipelineRecent-icon`}>
+                            {item.pipeline.name && item.pipeline.name.substring(0,1).toUpperCase()}
                         </span>
                             <span className="pipelineRecent-name">
-                            {item.pipeline.name}
+                            {item.pipeline.name && item.pipeline.name}
                         </span>
                     </Space>
                 }
@@ -126,7 +123,7 @@ const HomePage = props =>{
 
     return(
         <div className="homePage">
-            <div className="homePage-content home-limited">
+            <div className="homePage-content mf-home-limited">
                 <div className="quickIn">
                     {
                         stableList && stableList.map(item=>{
@@ -155,9 +152,8 @@ const HomePage = props =>{
                         title={"近期动态"}
                         icon={<AimOutlined/>}
                         type={"dynamic"}
-                        pipelineId={pipeline(pipelineList)}
                     />
-                    <DynaList dynamicList={dynamicList} pipelineId={pipeline(pipelineList)}/>
+                    <DynaList dynamicList={dynamicList}/>
                 </div>
             </div>
         </div>

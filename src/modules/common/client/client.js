@@ -39,7 +39,7 @@ export const getTime = time =>{
     let days = parseInt(time / ( 60 * 60 * 24));
     let hours = parseInt((time % ( 60 * 60 * 24)) / (60 * 60));
     let minutes = parseInt((time % ( 60 * 60)) /60);
-    let seconds = parseInt(time % 60);
+    let seconds =  parseInt(time % 60);
     if(days >= 1){
         DateTimes= days + " 天 " + hours + " 时 " + minutes + " 分 " + seconds + " 秒"
     }else if(hours >= 1){

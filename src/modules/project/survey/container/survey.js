@@ -73,7 +73,7 @@ const Survey = props =>{
 
     return(
         <div className="survey">
-            <div className="survey-content home-limited">
+            <div className="survey-content mf-home-limited">
                 <div className="survey-top">
                     <BreadcrumbContent firstItem={pipeline.name} secondItem={"概况"}/>
                 </div>
@@ -87,7 +87,7 @@ const Survey = props =>{
                     </div>
                     <div className="survey-dyna">
                         <Guide title={"流水线动态"} icon={<AimOutlined/>} type={"dynamic"} pipelineId={pipelineId}/>
-                        <DynaList dynamicList={dynamicList} pipelineId={[pipelineId]}/>
+                        <DynaList dynamicList={dynamicList}/>
                     </div>
                 </div>
             </div>

@@ -52,7 +52,7 @@ const Pipeline = props =>{
 
     return(
         <div className="pipeline">
-            <div className="pipeline-content home-limited mf">
+            <div className="pipeline-content mf-home-limited mf">
                 <div className="pipeline-top pipeline-flex">
                     <BreadcrumbContent firstItem={"流水线"}/>
                     <Btn

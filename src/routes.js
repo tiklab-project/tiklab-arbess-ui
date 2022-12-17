@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
+const Index=AsyncComponent(()=>import("./modules/home/container/home"))
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))

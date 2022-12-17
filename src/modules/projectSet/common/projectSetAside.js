@@ -23,17 +23,17 @@ const ProjectSetAside = props =>{
     const secondRouter = [
         {
             key:`/index/task/${pipelineId}/assembly/set`,
-            label:"流水线设置",
+            label:"设置",
             enCode:"pipeline_seting",
         },
         {
             key:`/index/task/${pipelineId}/assembly/user`,
-            label:"流水线成员",
+            label:"成员",
             enCode:"pipeline_user",
         },
         {
             key:`/index/task/${pipelineId}/assembly/role`,
-            label:"流水线权限",
+            label:"权限",
             enCode:"pipeline_auth",
         }
     ]

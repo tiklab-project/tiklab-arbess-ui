@@ -4,13 +4,11 @@ import {getTime} from "../../../common/client/client";
 
 const StrTree = props =>{
 
-    const {treeData,logData,setLogData} = props
+    const {treeData,logData,setLogData,setId} = props
 
     const [expandedTree,setExpandedTree] = useState([])
 
-    const isExpandedTree = (key) => {
-        return expandedTree.some(item => item === key)
-    }
+    const isExpandedTree = (key) => expandedTree.some(item => item === key)
 
     //展开闭合 分类
     const setOpenOrClose = group => {
@@ -24,6 +22,7 @@ const StrTree = props =>{
     
     const taskLog = item => {
         setLogData(item)
+        setId(item.id)
     }
     
     const renderLi = (item,itemIndex,deep) =>{

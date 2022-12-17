@@ -21,7 +21,7 @@ export const departmentRouters = a =>{
     return [
         {
             id: "1",
-            title: "成员与部门",
+            title: "用户与部门",
             purviewCode: a[0],
             icon: <TeamOutlined/>,
             children: [
@@ -48,6 +48,17 @@ export const departmentRouters = a =>{
     ]
 }
 
+export const departmentUnifyRouters = a =>{
+    return [
+        {
+            id: "/setting/orga",
+            title: "用户与部门",
+            purviewCode: a[0],
+            icon: <TeamOutlined/>,
+        }
+    ]
+}
+
 export const applicationRouters = a =>{
     return [
         {
@@ -57,13 +68,33 @@ export const applicationRouters = a =>{
             purviewCode:"pipeline_permission",
         },
         {
+            id:"2",
+            title: "消息",
+            icon:<SoundOutlined/>,
+            purviewCode: a[2],
+            children: [
+                {
+                    id:"/index/system/mes/notice",
+                    title:"消息通知方案",
+                    icon:<SoundOutlined />,
+                    purviewCode:"message_setting",
+                },
+                {
+                    id:"/index/system/mes/send",
+                    title: "消息发送方式",
+                    icon:<SoundOutlined />,
+                    purviewCode: "message_type",
+                },
+            ]
+        },
+        {
             id:"/index/system/auth",
             title:"认证配置",
             icon:<SwitcherOutlined />,
             purviewCode:"pipeline_auth",
         },
         {
-            id:2,
+            id:3,
             title:"资源配置",
             icon:<FileProtectOutlined />,
             purviewCode:a[1],
@@ -89,36 +120,10 @@ export const applicationRouters = a =>{
             purviewCode:"pipeline_env",
         },
         {
-            id:"3",
-            title: "消息",
-            icon:<SoundOutlined/>,
-            purviewCode: a[2],
-            children: [
-                {
-                    id:"/index/system/mes/send",
-                    title: "消息通知类型",
-                    icon:<SoundOutlined />,
-                    purviewCode: "message_type",
-                },
-                {
-                    id:"/index/system/mes/notice",
-                    title:"通知方案",
-                    icon:<SoundOutlined />,
-                    purviewCode:"message_setting",
-                },
-            ]
-        },
-        {
-            id:"/index/system/todoTask",
-            title:"待办任务",
-            icon:<ProfileOutlined />,
-            purviewCode:"todotask",
-        },
-        {
             id:"/index/system/plugin",
             title:"插件",
             icon:<MergeCellsOutlined />,
-            purviewCode:"plugin",
+            purviewCode:"pipeline_plugin",
         },
         {
             id:"5",
@@ -195,30 +200,24 @@ export const applicationRouter = [
         purviewCode: "message",
         children: [
             {
-                id:"/index/system/mes/send",
-                title: "消息通知类型",
-                icon:<SoundOutlined />,
-                purviewCode: "message_type",
-            },
-            {
                 id:"/index/system/mes/notice",
-                title:"通知方案",
+                title:"消息通知方案",
                 icon:<SoundOutlined />,
                 purviewCode:"message_setting",
             },
+            {
+                id:"/index/system/mes/send",
+                title: "消息发送方式",
+                icon:<SoundOutlined />,
+                purviewCode: "message_type",
+            },
         ]
-    },
-    {
-        id:"/index/system/myTodoTask",
-        title:"待办任务",
-        icon:<ProfileOutlined />,
-        purviewCode:"todotask",
     },
     {
         id:"/index/system/plugin",
         title:"插件",
         icon:<MergeCellsOutlined />,
-        purviewCode:"plugin",
+        purviewCode:"pipeline_plugin",
     },
     {
         id:"5",
@@ -276,6 +275,12 @@ export const templateRouter = [
             {
                 id:"/index/system/project/role",
                 title:"项目角色",
+                icon:<MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
+                id:"/index/system/todoTask",
+                title:"待办任务",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },

@@ -77,7 +77,7 @@ const Trigger = props =>{
 
     return (
         <div className="trigger">
-            <div className="trigger-content home-limited">
+            <div className="trigger-content mf-home-limited">
                 <div className="trigger-up">
                     <div className="trigger-up-title">定时触发</div>
                     <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}个定时任务</div>

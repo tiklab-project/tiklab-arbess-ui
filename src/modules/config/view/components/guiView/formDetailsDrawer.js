@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Drawer,Form,Input} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import SubIcon from "../../../common/components/subIcon";
 import Btn from "../../../../common/btn/btn";
 import CodeGitOrGitlab from "./forms/codeGitOrGitlab";
 import CodeGiteeOrGithub from "./forms/codeGiteeOrGithub";
@@ -17,6 +16,7 @@ import Postpose from "./post/postpose";
 import Variable from "./post/variable";
 import Tabs from "../../../../common/tabs/tabs";
 import {x} from "../delData";
+import Inputs from "./forms/inputs";
 import "./formDetailsDrawer.scss";
 
 const FormDetailsDrawer = props =>{
@@ -44,7 +44,7 @@ const FormDetailsDrawer = props =>{
                         [getId(dataItem,"codeAlias")]:dataItem && dataItem.codeAlias,
                         [getId(dataItem,"svnFile")]:dataItem && dataItem.svnFile,
                         [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+(dataItem.auth.authType === 1?dataItem.auth.username:"私钥")+")",
-                        [getId(dataItem,"authId")]:dataItem.authId
+                        [getId(dataItem,"authId")]:dataItem.authId,
                     })
                     break
                 case 2:
@@ -104,6 +104,9 @@ const FormDetailsDrawer = props =>{
                     })
 
             }
+            form.setFieldsValue({
+                [getId(dataItem,"name")]:dataItem && dataItem.name,
+            })
             form.validateFields()
         }
     },[taskFormDrawer,dataItem])
@@ -176,12 +179,7 @@ const FormDetailsDrawer = props =>{
             <div className="wrapper">
                 <div className="wrapper-head">
                     <div className="wrapper-head-title">
-                        {
-                            dataItem.configId ?
-                            <SubIcon type={dataItem.type}/>
-                                :
-                            "阶段名称"
-                        }
+                        编辑
                     </div>
                     <Btn
                         onClick={()=>setTaskFormDrawer(false)}
@@ -201,11 +199,20 @@ const FormDetailsDrawer = props =>{
                                 >
                                     {
                                         dataItem.configId ?
-                                        renderForms(dataItem)
+                                        <>
+                                            <Inputs
+                                                placeholder="任务名称"
+                                                label="任务名称"
+                                                name="name"
+                                                isValid={true}
+                                                dataItem={dataItem}
+                                            />
+                                            {renderForms(dataItem)}
+                                        </>
                                         :
-                                        <Form.Item name={dataItem.stagesId+"name"} label="名称">
+                                        <Form.Item name={dataItem.stagesId+"name"} label="阶段名称" rules={[{required:true, message:"请输入阶段名称"}]}>
                                             <Input
-                                                placeholder={enter? "名称，回车保存":"未设置"}
+                                                placeholder={enter? "阶段名称，回车保存":"未设置"}
                                                 onFocus={()=>setEnter(true)}
                                                 onBlur={(e)=>onBlur(e)}
                                                 onPressEnter={(e)=>e.target.blur()}

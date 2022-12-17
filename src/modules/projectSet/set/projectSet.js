@@ -140,9 +140,9 @@ const ProjectSet = props =>{
     }
 
     return(
-        <div className="pipelineReDel home-limited mf">
+        <div className="pipelineReDel mf-home-limited mf">
             <div className="pipelineReDel-up">
-                <BreadcrumbContent firstItem={"流水线设置"}/>
+                <BreadcrumbContent firstItem={"设置"}/>
             </div>
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">
