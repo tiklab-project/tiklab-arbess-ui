@@ -153,10 +153,6 @@ const routers=[
                         component: Config
                     },
                     {
-                        path:"/index/task/config",
-                        component: Config
-                    },
-                    {
                         path:"/index/task/:id/structure",
                         component: Structure
                     },

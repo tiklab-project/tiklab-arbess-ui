@@ -149,7 +149,8 @@ const VariableAdd = props =>{
                                                         </Form.Item>
                                                         {fields.length > 1 && <MinusCircleOutlined onClick={()=>{
                                                             remove(field.name)
-                                                            form.setFieldsValue({varValue:null})
+                                                            const list = form.getFieldValue("valueList").some(item=>form.getFieldValue("varValue")===item)
+                                                            !list && form.setFieldsValue({varValue:null})
                                                         }}/>}
                                                     </Form.Item>
                                                  ))}

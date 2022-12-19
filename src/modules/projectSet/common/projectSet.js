@@ -1,7 +1,6 @@
 import React from "react";
 import ProjectSetAside from "./projectSetAside";
 import {renderRoutes} from "react-router-config";
-import {withRouter} from "react-router-dom";
 
 const ProjectSet = props =>{
 
@@ -17,4 +16,4 @@ const ProjectSet = props =>{
     )
 }
 
-export default withRouter(ProjectSet)
+export default ProjectSet

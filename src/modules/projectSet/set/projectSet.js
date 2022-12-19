@@ -13,12 +13,13 @@ import Btn from "../../common/btn/btn";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import PipelineInfo from "../../pipeline/components/pipelineAddInfo";
 import "./projectSet.scss";
+import Loading from "../../common/loading/loading";
 
 const ProjectSet = props =>{
 
     const {pipelineStore} = props
 
-    const {deletePipeline,pipelineId,pipeline}=pipelineStore
+    const {deletePipeline,pipelineId,pipeline,isLoading}=pipelineStore
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
     const [powerType,setPowerType] = useState(1)
@@ -153,6 +154,9 @@ const ProjectSet = props =>{
                     }
                 </div>
             </div>
+            {
+                isLoading && <Loading/>
+            }
         </div>
     )
 }

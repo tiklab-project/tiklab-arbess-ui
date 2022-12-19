@@ -39,7 +39,7 @@ const AuthType = props =>{
                             name="privateKey"
                             rules={[{required:true,message:"请输入token"}]}
                         >
-                            <Input.TextArea/>
+                            <Input.TextArea style={{overflow:"hidden"}}/>
                         </Form.Item>
                 }
             </Form.Item>

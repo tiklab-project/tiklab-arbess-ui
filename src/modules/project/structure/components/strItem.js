@@ -7,12 +7,12 @@ const StrItem = props =>{
 
     const log = (item,itemIndex) =>{
         switch (index) {
-            case 0:
-                setExecIndex(itemIndex)
-                break
-            case 1:
+            case 2:
                 setTreeData(item)
                 setLogData(item)
+                break
+            default:
+                setExecIndex(itemIndex)
                 setId(item.id)
         }
     }

@@ -1,5 +1,4 @@
 import React,{useEffect} from "react";
-import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import {Space} from "antd";
 import {AimOutlined, HistoryOutlined} from "@ant-design/icons";
@@ -13,7 +12,7 @@ const HomePage = props =>{
     const {homePageStore,pipelineStore} = props
 
     const {findAllOpen,pipelineNearList,findlogpage,dynamicList} = homePageStore
-    const {findAllPipelineStatus,pipelineList,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
+    const {findAllPipelineStatus,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     useEffect(()=>{
         // 所有流水线
@@ -160,4 +159,4 @@ const HomePage = props =>{
     )
 }
 
-export default withRouter(inject("homePageStore","pipelineStore")(observer(HomePage)))
+export default inject("homePageStore","pipelineStore")(observer(HomePage))

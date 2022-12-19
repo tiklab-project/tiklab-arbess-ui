@@ -35,7 +35,7 @@ const SIcon = props =>{
             case 41:
                 return renderIcon("Scan")
             case 51:
-                return renderIcon("tuisongshezhi")
+                return renderIcon("tuisong")
             case 52:
                 return renderIcon("ssh")
             case 61:

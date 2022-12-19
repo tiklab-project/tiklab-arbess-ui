@@ -17,14 +17,14 @@ import {message} from "antd";
 export class PipelineStore {
 
     @observable pipelineList = []
-    @observable pipelineLength = ""
-    @observable followLength = ""
+    @observable pipelineLength = 0
+    @observable followLength = 0
     @observable lastPath = ""
-    @observable pipelineId = ""
-    @observable fresh = false
-    @observable listType = 1
     @observable pipeline = ""
-    @observable pipelinePermissions = []
+    @observable pipelineId = ""
+    @observable listType = 1
+    @observable isLoading = false
+    @observable fresh = false
 
     @action
     setListType = value =>{
@@ -52,11 +52,6 @@ export class PipelineStore {
     }
 
     @action
-    setPipelinePermissions = value =>{
-        this.pipelinePermissions = value
-    }
-
-    @action
     findAllPipelineStatus = value =>{
         const param = new FormData()
         param.append("userId",getUser().userId)
@@ -64,7 +59,7 @@ export class PipelineStore {
             FindAllPipelineStatus(param).then(res=>{
                 if(res.code===0 && res.data){
                     this.pipelineList=res.data
-                    this.pipelineLength=res.data && res.data.length
+                    this.pipelineLength=res.data.length
                 }
                 resolve(res)
             }).catch(error=>{
@@ -81,11 +76,16 @@ export class PipelineStore {
             ...values,
             user: {id:getUser().userId}
         }
+        this.isLoading = true
         return new Promise((resolve, reject) => {
             CreatePipeline(params).then(res=>{
                 if(res.code===0){
                     message.info("创建成功")
                 }
+                else {
+                    message.info("创建失败")
+                }
+                this.isLoading = false
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -114,6 +114,7 @@ export class PipelineStore {
 
     @action //删除流水线
     deletePipeline = async value =>{
+        this.isLoading = true
         const param = new FormData()
         param.append("pipelineId",value)
         param.append("userId",getUser().userId)
@@ -122,6 +123,10 @@ export class PipelineStore {
                 if(res.code===0){
                     message.info("删除成功")
                 }
+                else {
+                    message.info("删除失败")
+                }
+                this.isLoading = false
                 resolve(res)
             }).catch(error=>{
                 console.log(error)

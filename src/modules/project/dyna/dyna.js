@@ -1,5 +1,4 @@
-import React,{useEffect,useState} from "react";
-import {withRouter} from "react-router";
+import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import DynaDetail from "../../dyna/common/dynaDetail";
 
@@ -36,4 +35,4 @@ const PipelineDyna = props =>{
             />
 }
 
-export default withRouter(inject("pipelineStore","homePageStore")(observer(PipelineDyna)))
+export default inject("pipelineStore","homePageStore")(observer(PipelineDyna))

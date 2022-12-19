@@ -67,35 +67,40 @@ const AuthModal = props =>{
             closable={false}
             footer={modalFooter}
             style={{height:height,top:60}}
+            bodyStyle={{padding:0}}
             className="mf"
             destroyOnClose={true}
         >
-            <ModalTitle
-                setVisible={setVisible}
-                title={formValue?"修改":"添加"}
-            />
-            <div style={{maxHeight:"calc(100% - 120px)",overflow:"auto"}}>
-                <Form
-                    form={form}
-                    layout="vertical"
-                    autoComplete="off"
-                    initialValues={{type:1,authPublic:1,authWay:1,authType:2}}
-                >
-                    <Form.Item name="authPublic" label="认证权限">
-                        <Select>
-                            <Select.Option value={1}>全局</Select.Option>
-                            <Select.Option value={2}>私有</Select.Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item
-                        name="name"
-                        label="名称"
-                        rules={[{required:true,message:`请输入名称`}]}
+            <div className="resources-modal">
+                <div className="resources-modal-up">
+                    <ModalTitle
+                        setVisible={setVisible}
+                        title={formValue?"修改":"添加"}
+                    />
+                </div>
+                <div className="resources-modal-content">
+                    <Form
+                        form={form}
+                        layout="vertical"
+                        autoComplete="off"
+                        initialValues={{type:1,authPublic:1,authWay:1,authType:2}}
                     >
-                        <Input/>
-                    </Form.Item>
-                    <AuthType/>
-                </Form>
+                        <Form.Item name="authPublic" label="认证权限">
+                            <Select>
+                                <Select.Option value={1}>全局</Select.Option>
+                                <Select.Option value={2}>私有</Select.Option>
+                            </Select>
+                        </Form.Item>
+                        <Form.Item
+                            name="name"
+                            label="名称"
+                            rules={[{required:true,message:`请输入名称`}]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <AuthType/>
+                    </Form>
+                </div>
             </div>
         </Modal>
     )

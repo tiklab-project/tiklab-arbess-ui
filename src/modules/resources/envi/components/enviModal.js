@@ -81,6 +81,7 @@ const EnviModal = props =>{
             okText="确认"
             cancelText="取消"
             style={{height:height,top:60}}
+            bodyStyle={{padding:0}}
             className="mf"
             onOk={() => {
                 form
@@ -91,44 +92,46 @@ const EnviModal = props =>{
                     })
             }}
         >
-            <ModalTitle
-                setVisible={setVisible}
-                title={formValue===""? "修改环境配置":"添加环境配置"}
-            />
-            <div style={{maxHeight:"calc(100% - 120px)",overflow:"auto"}}>
-                <Form
-                    form={form}
-                    layout="vertical"
-                    name="userForm"
-                    autoComplete = "off"
-                >
-                    <Form.Item name="scmType" label="环境配置类型"
-                               rules={[{required:true,message:`请选择环境配置类型`}]}
+           <div className="resources-modal">
+                <div className="resources-modal-up">
+                    <ModalTitle
+                        setVisible={setVisible}
+                        title={formValue===""? "修改环境配置":"添加环境配置"}
+                    />
+                </div>
+                <div className="resources-modal-content">
+                    <Form
+                        form={form}
+                        layout="vertical"
+                        name="userForm"
+                        autoComplete = "off"
                     >
-                        <Select onChange={opt}>
-                            {
-                                lis.map(item=>{
-                                    return <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
-                                        {scmTitle(item.scmType)}
-                                    </Select.Option>
-                                })
-                            }
-                        </Select>
-                    </Form.Item>
-                    <Form.Item label="名称" name="scmName"
-                               rules={[{required:true,message:`请输入${scmTitle(scmType)}名称`}]}
-                    >
-                        <Input/>
-                    </Form.Item>
-                    <Form.Item label="地址" name="scmAddress"
-                               rules={[{required:true,message:`请输入${scmTitle(scmType)}地址`}]}
-                    >
-                        <Input/>
-                    </Form.Item>
-                </Form>
-
-            </div>
-
+                        <Form.Item name="scmType" label="环境配置类型"
+                                rules={[{required:true,message:`请选择环境配置类型`}]}
+                        >
+                            <Select onChange={opt}>
+                                {
+                                    lis.map(item=>{
+                                        return <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
+                                            {scmTitle(item.scmType)}
+                                        </Select.Option>
+                                    })
+                                }
+                            </Select>
+                        </Form.Item>
+                        <Form.Item label="名称" name="scmName"
+                                rules={[{required:true,message:`请输入${scmTitle(scmType)}名称`}]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item label="地址" name="scmAddress"
+                                rules={[{required:true,message:`请输入${scmTitle(scmType)}地址`}]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                    </Form>
+                </div>
+           </div>
         </Modal>
     )
 }

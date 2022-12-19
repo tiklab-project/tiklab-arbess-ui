@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {
     CaretRightOutlined,
     LoadingOutlined,
@@ -12,20 +12,39 @@ import View from "../../view/container/view";
 import Postpose from "../../postpose/container/postpose";
 import Trigger from "../../trigger/container/trigger";
 import Variable from "../../variable/container/variable";
+import StrDetail from "../../../project/structure/components/strDetail";
 import "./config.scss";
 
 const Config = props =>{
 
     const {pipelineStore,configStore,structureStore} = props
 
-    const {pipelineStartStructure} = structureStore
+    const {pipelineStartStructure,pipelineRunStatus} = structureStore
     const {validType,data} = configStore
     const {pipeline} = pipelineStore
 
     const [type,setType] = useState(1)
     const [process,setProcess] = useState(false) // 运行按钮
-    
+    const [isDetails,setIsDetails] = useState(false) // 运行页面
+
     const pipelineId = pipeline.id
+
+    useEffect(()=>{
+        pipelineId && setIsDetails(false)
+    },[pipelineId])
+
+    let interval = null
+    useEffect(()=>{
+        if(isDetails && pipelineId){
+            interval=setInterval(()=>
+                pipelineRunStatus(pipeline.id).then(res=>{
+                    if(res.code===0){ res.data.allState === 0 && clearInterval(interval)}
+                }), 1000)
+        }
+        return ()=>{
+            clearInterval(interval)
+        }
+    },[isDetails,pipelineId])
 
     const run = () => {
         // 改变按钮
@@ -35,7 +54,8 @@ const Config = props =>{
                 if(!res.data){
                     message.info("流水线正在运行")
                 }
-                props.history.push(`/index/task/${pipelineId}/structure`)
+                setProcess(false)
+                setIsDetails(true)
             }
         })
     }
@@ -61,6 +81,17 @@ const Config = props =>{
             title:"变量"
         }
     ]
+
+    if(isDetails){
+        return <StrDetail
+                    index={1}
+                    pipeline={pipeline}
+                    setIsDetails={setIsDetails}
+                    detailsContent={{findNumber: "#xxx"}}
+                    firstItem={"配置"}
+                    structureStore={structureStore}
+                />
+    }
 
     return(
         <div className="config mf">

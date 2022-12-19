@@ -3,23 +3,25 @@ import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {PrivilegeButton} from "tiklab-privilege-ui";
 import {
     departmentRouters,
-    applicationRouters,
     departmentUnifyRouters,
+    applicationRouters,
     templateRouter,
 } from "./sysRouters";
 import {inject,observer} from "mobx-react";
 import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/lib/store";
 import {getUser} from "tiklab-core-ui";
+import {renderRoutes} from "react-router-config";
+import "./system.scss";
 
-const SystemAside= props =>  {
+const SystemContent= props =>  {
 
-    const {systemRoleStore} = props
+    const {route,isDepartment,systemRoleStore} = props
 
     const {getSystemPermissions} = systemRoleStore
 
     const path = props.location.pathname
     const [selectKey,setSelectKey] = useState(path)
-    const [expandedTree,setExpandedTree] = useState(["/index/system/syr/feature"])  // 树的展开与闭合
+    const [expandedTree,setExpandedTree] = useState([""])  // 树的展开与闭合
     const [department,setDepartment] = useState(["","","",""])
 
     const authType = JSON.parse(localStorage.getItem("authConfig")).authType
@@ -176,37 +178,48 @@ const SystemAside= props =>  {
         )
     }
 
+    const renderDepartment = () => {
+        if(isDepartment){
+            return authType ?
+                departmentRouters(department && department).map(firstItem => {
+                    return firstItem.children && firstItem.children.length > 0 ?
+                        renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                })
+                :
+                departmentUnifyRouters(department && department).map(firstItem => {
+                    return firstItem.children && firstItem.children.length > 0 ?
+                        renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                })
+        }
+    }
+
     return (
-        <div className="system-aside">
-            <ul className="system-aside-top" style={{padding:0}}>
-                {
-                    authType ?
-                        departmentRouters(department && department).map(firstItem => {
-                            return firstItem.children && firstItem.children.length > 0 ?
-                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                        })
-                        :
-                        departmentUnifyRouters(department && department).map(firstItem => {
-                            return firstItem.children && firstItem.children.length > 0 ?
-                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                        })
-                }
-                {
-                    applicationRouters(department && department).map(firstItem => {
-                        return firstItem.children && firstItem.children.length > 0 ?
-                            renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                    })
-                }
-                {
-                    devProduction && templateRouter.map(firstItem=>{
-                        return firstItem.children && firstItem.children.length > 0 ?
-                            subMenu(firstItem,0) : menu(firstItem,0)
-                    })
-                }
-            </ul>
-        </div>
+       <div className="system">
+           <div className="system-aside">
+               <ul className="system-aside-top" style={{padding:0}}>
+                   { renderDepartment() }
+
+                   {
+                       applicationRouters(department && department).map(firstItem => {
+                           return firstItem.children && firstItem.children.length > 0 ?
+                               renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                       })
+                   }
+
+                   {
+                       devProduction && templateRouter.map(firstItem=>{
+                           return firstItem.children && firstItem.children.length > 0 ?
+                               subMenu(firstItem,0) : menu(firstItem,0)
+                       })
+                   }
+               </ul>
+           </div>
+           <div className="system-content">
+               {renderRoutes(route.routes)}
+           </div>
+       </div>
     )
 
 }
 
-export default inject(SYSTEM_ROLE_STORE)(observer(SystemAside))
+export default inject(SYSTEM_ROLE_STORE)(observer(SystemContent))

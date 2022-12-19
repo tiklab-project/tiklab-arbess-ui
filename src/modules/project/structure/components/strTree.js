@@ -1,10 +1,11 @@
 import React,{useState} from "react";
-import {CaretDownOutlined,CaretRightOutlined,FileOutlined} from "@ant-design/icons";
+import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
 import {getTime} from "../../../common/client/client";
+import SIcon from "../../../config/common/components/sIcon";
 
 const StrTree = props =>{
 
-    const {treeData,logData,setLogData,setId} = props
+    const {treeData,logData,setLogData,setId,index} = props
 
     const [expandedTree,setExpandedTree] = useState([])
 
@@ -21,8 +22,13 @@ const StrTree = props =>{
     }
     
     const taskLog = item => {
-        setLogData(item)
-        setId(item.id)
+        switch (index) {
+            case 2:
+                setLogData(item)
+                break
+            default:
+                setId(item.id)
+        }
     }
     
     const renderLi = (item,itemIndex,deep) =>{
@@ -33,7 +39,7 @@ const StrTree = props =>{
                 <div className="tree-li-firsts" style={{cursor:"pointer",paddingLeft:`${ deep*20+5 }`}}>
                     <div className="tree-li-first">
                         <div className="tree-li-icon">
-                            <FileOutlined />
+                            <SIcon type={item.type} />
                         </div>
                         <div className="tree-li-name">{item.name}</div>
                     </div>

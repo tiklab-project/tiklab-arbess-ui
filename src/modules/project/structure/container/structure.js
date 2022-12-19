@@ -1,7 +1,8 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Profile} from "tiklab-eam-ui";
-import {Popconfirm,Spin,Table,Tooltip,Dropdown} from "antd";
+import { withRouter } from "react-router";
+import {Popconfirm,Spin,Table,Tooltip} from "antd";
 import {
     CheckCircleOutlined,
     CloseCircleOutlined,
@@ -10,7 +11,6 @@ import {
     PlayCircleOutlined,
     DeleteOutlined,
     MinusCircleOutlined,
-    FilterOutlined
 } from "@ant-design/icons";
 import StrDetail from "../components/strDetail";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
@@ -27,19 +27,22 @@ const Structure = props => {
     const {findPipelineState,pipelineRunStatus,findPageHistory,deleteHistoryLog,
         findAllLog,findPipelineUser,killInstance,
         leftPageList,pageCurrent,setPageCurrent,freshen,
-        execData,itemData,page,pipelineUserList
+        execData,page,pipelineUserList
     } = structureStore
     const {pipelineId,pipeline} = pipelineStore
     
     const [index,setIndex] = useState(0)
-    const [detailsDrawer,setDetailsDrawer] = useState(false)
     const [detailsContent,setDetailsContent] = useState("")
     const [state,setState] = useState(0)
     const [type,setType] = useState(0)
     const [enforcer,setEnforcer] = useState(null)
+    const [isDetails,setIsDetails] = useState(false)
 
     useEffect(()=>{
-        pipelineId && findPipelineUser(pipelineId)
+        if(pipelineId){
+            findPipelineUser(pipelineId)
+            setIsDetails(false)
+        }
     },[pipelineId])
 
     let interval=null
@@ -54,6 +57,10 @@ const Structure = props => {
                     }), 1000)
             }
         })
+        return ()=>{
+            setPageCurrent(1)
+            clearInterval(interval)
+        }
     }, [pipelineId,freshen])
 
     useEffect(()=>{
@@ -64,28 +71,19 @@ const Structure = props => {
             type:type
         }
         pipelineId && findPageHistory(params) // 历史列表
-    },[pipelineId,freshen,pageCurrent,state,enforcer,type])
-
-    // 销毁定时器
-    useEffect(()=>{
-        return ()=>{
-            setPageCurrent(1)
-            clearInterval(interval)
-        }
-    },[pipelineId,freshen])
-
+    },[pipelineId,freshen,pageCurrent,state,enforcer,type,])
 
     const details = record =>{
         switch (record.runStatus) {
             case 0:
-                setIndex(0)
+                setIndex(1)
                 break
             default:
-                setIndex(1)
+                setIndex(2)
                 findAllLog(record.historyId)
         }
         setDetailsContent(record)
-        setDetailsDrawer(true)
+        setIsDetails(true)
     }
 
     const end = () => {
@@ -98,52 +96,6 @@ const Structure = props => {
 
     const changPage = pages =>{
         setPageCurrent(pages)
-    }
-
-    const status = i =>{
-        switch(i){
-            case 1 :
-                //失败
-                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
-            case 10 :
-                //成功
-                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
-            case 20:
-                //被迫停止
-                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
-
-            case 0:
-                //运行
-                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
-
-            case 3:
-                //运行--等待运行
-                return  <PlayCircleOutlined style = {{fontSize:16}}/>
-
-        }
-    }
-
-    const filterMenu = (
-        <StrScreen
-            pipelineUserList={pipelineUserList}
-            setState={setState}
-            setEnforcer={setEnforcer}
-            setType={setType}
-            changPage={changPage}
-        />
-    )
-
-    const actionTitle = () =>{
-        return(
-            <>
-                <span style={{paddingRight:30}}>操作</span>
-                <Dropdown overlay={filterMenu} trigger={["click"]} placement={"bottomRight"}>
-                    <Tooltip title={"筛选"}>
-                        <span className="str-table-action"><FilterOutlined /></span>
-                    </Tooltip>
-                </Dropdown>
-            </>
-        )
     }
 
     const  columns = [
@@ -240,7 +192,7 @@ const Structure = props => {
             }
         },
         {
-            title: actionTitle,
+            title: "操作",
             dataIndex: "action",
             key:"action",
             width:"10%",
@@ -272,10 +224,28 @@ const Structure = props => {
         }
     ]
 
+    if(isDetails){
+        return <StrDetail
+                    index={index}
+                    pipeline={pipeline}
+                    firstItem={"历史"}
+                    setIsDetails={setIsDetails}
+                    detailsContent={detailsContent}
+                    structureStore={structureStore}
+                />
+    }
+
     return (
         <div className="structure mf">
             <div className="structure-content mf-home-limited">
                 <BreadcrumbContent firstItem={pipeline.name} secondItem={"历史"}/>
+                <StrScreen
+                    pipelineUserList={pipelineUserList}
+                    setState={setState}
+                    setEnforcer={setEnforcer}
+                    setType={setType}
+                    changPage={changPage}
+                />
                 <div className="structure-content-table">
                     <Table
                         bordered={false}
@@ -290,20 +260,10 @@ const Structure = props => {
                         changPage={changPage}
                         page={page}
                     />
-                    <StrDetail
-                        index={index}
-                        pipeline={pipeline}
-                        detailsDrawer={detailsDrawer}
-                        setDetailsDrawer={setDetailsDrawer}
-                        detailsContent={detailsContent}
-                        status={status}
-                        execData={execData}
-                        itemData={itemData}
-                    />
                 </div>
             </div>
         </div>
     )
 }
 
-export default inject("structureStore","pipelineStore")(observer(Structure))
+export default withRouter(inject("structureStore","pipelineStore")(observer(Structure)))

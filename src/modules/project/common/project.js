@@ -1,7 +1,6 @@
 import React,{useEffect} from "react";
 import {renderRoutes} from "react-router-config";
 import {inject,observer} from "mobx-react";
-import {withRouter} from "react-router";
 import {getUser} from "tiklab-core-ui";
 import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/lib/store";
 import ProjectAside from "./projectAside";
@@ -65,6 +64,6 @@ const Project= (props)=>{
     )
 }
 
-export default withRouter(inject("pipelineStore","configStore",SYSTEM_ROLE_STORE)(observer(Project)))
+export default inject("pipelineStore","configStore",SYSTEM_ROLE_STORE)(observer(Project))
 
 

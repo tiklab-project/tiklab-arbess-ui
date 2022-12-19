@@ -6,6 +6,7 @@ import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../common/btn/btn";
 import PipelineUser from "./pipelineUser";
+import Loading from "../../common/loading/loading";
 import "./pipelineAddInfo.scss";
 
 const PipelineAddInfo = props =>{
@@ -14,7 +15,7 @@ const PipelineAddInfo = props =>{
         templateLis,templateType,pipelineType,onClick
     } = props
 
-    const {pipeline,pipelineId,pipelineList,findUserPage,createPipeline,updatePipeline} = pipelineStore
+    const {pipeline,pipelineId,pipelineList,findUserPage,createPipeline,isLoading,updatePipeline} = pipelineStore
 
     const [form] = Form.useForm()
 
@@ -278,6 +279,10 @@ const PipelineAddInfo = props =>{
                         title={"确认"}
                     />
                 </>
+            }
+
+            {
+                isLoading && <Loading/>
             }
         </>
     )
