@@ -1,27 +1,10 @@
 .dynamic-item{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: 8px;
     &:hover{
         background: #f4f4f4;
         cursor: pointer;
-    }
-    .dynamic-item-icon{
-        width: 20px;
-        height: 20px;
-        &>img{
-            width: 100%;
-            height: 100%;
-        }
-    }
-    .dynamic-item-message{
-        flex-grow: 1;
-        margin:0 var(--tiklab-padding-item);
-    }
-    .dynamic-item-message-title{
-        padding-bottom: 5px;
-        font-size: var(--tiklab-font-13);
-        font-weight: var(--tiklab-font-weight-bold);
     }
 }

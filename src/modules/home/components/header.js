@@ -113,7 +113,7 @@ const Head = props =>{
                 </Dropdown>
             </div>
             <div className="header-outMenu-out">
-                <div  onClick={()=>goOut()} className="outMenu-out">
+                <div onClick={()=>goOut()} className="outMenu-out">
                     <LogoutOutlined className="header-dropdown-icon"/>
                     <span className="bottom-out">退出</span>
                 </div>

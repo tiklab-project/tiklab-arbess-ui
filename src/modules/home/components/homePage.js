@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Space} from "antd";
-import {AimOutlined, HistoryOutlined} from "@ant-design/icons";
+import {AimOutlined,HistoryOutlined} from "@ant-design/icons";
 import Guide from "../../common/guide/guide";
 import DynaList from "../../dyna/common/dynaList";
 import EmptyText from "../../common/emptyText/emptyText";
@@ -34,6 +34,7 @@ const HomePage = props =>{
 
         // 我收藏的流水线
         findAllFollow()
+
         // 最近打开的流水线
         findAllOpen(5)
 

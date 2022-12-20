@@ -87,7 +87,6 @@ const Config = props =>{
                     index={1}
                     pipeline={pipeline}
                     setIsDetails={setIsDetails}
-                    detailsContent={{findNumber: "#xxx"}}
                     firstItem={"配置"}
                     structureStore={structureStore}
                 />

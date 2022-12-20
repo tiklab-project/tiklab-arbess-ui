@@ -99,7 +99,7 @@ const Host = props =>{
         },
         {
             title:"创建人",
-            dataIndex:["user","name"],
+            dataIndex:["user","nickname"],
             key:"user",
             width:"10%",
             ellipsis:true,

@@ -78,13 +78,15 @@
                 border-radius: 4px;
                 cursor: pointer;
                 background-color: var(--mf-backdrop-color);
+                border-bottom: 2px solid rgba(255,255,255,0);
                 &:not(:last-child){
                     margin-right: 15px;
                 }
             }
             .pipelineRecent-item:hover{
                 border-radius: 4px 4px 0 0;
-                border-bottom: 2px solid var(--tiklab-blue);
+                border-bottom-color: var(--tiklab-blue);
+                transition: 1s;
             }
             .pipelineRecent-item-title{
                 padding-bottom: var(--tiklab-padding-item);

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {renderRoutes} from "react-router-config";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
@@ -11,7 +11,6 @@ const Project= (props)=>{
 
     const {findAllPipelineStatus,setPipelineId,setPipeline} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
-
     const pipelineId = match.params.id
     const userId = getUser().userId
 

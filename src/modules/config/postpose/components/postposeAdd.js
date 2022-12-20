@@ -208,7 +208,7 @@ const PostposeAdd = props =>{
                                    rules={[{required:true, message:"请选择类型"}]}
                         >
                             <Select onChange={value=>setType(value)} disabled={formValue && formValue}>
-                                <Select.Option value={61}>消息提醒</Select.Option>
+                                <Select.Option value={61}>消息通知</Select.Option>
                                 <Select.Option value={71}>执行bat脚本</Select.Option>
                                 <Select.Option value={72}>执行Shell脚本</Select.Option>
                             </Select>

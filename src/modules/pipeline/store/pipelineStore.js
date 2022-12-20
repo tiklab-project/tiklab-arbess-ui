@@ -169,7 +169,7 @@ export class PipelineStore {
     @action
     updateFollow =async value =>{
         const params = {
-            pipeline:{pipelineId:value.pipeline.pipelineId},
+            pipeline:value,
             userId:getUser().userId
         }
         const data = await UpdateFollow(params)

@@ -17,9 +17,6 @@ const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"
 /* 授权 */
 const Authorize=AsyncComponent(()=>import("./modules/config/authorize/authorize"))
 
-/* 代办 */
-const Agency=AsyncComponent(()=>import("./modules/agency/agency"))
-
 /* 动态 */
 const Dyna=AsyncComponent(()=>import("./modules/dyna/dyna/dyna"))
 
@@ -120,11 +117,6 @@ const routers=[
             {
                 path:"/index/pipeline",
                 component:Pipeline,
-                exact: true,
-            },
-            {
-                path:"/index/agency",
-                component:Agency,
                 exact: true,
             },
             {

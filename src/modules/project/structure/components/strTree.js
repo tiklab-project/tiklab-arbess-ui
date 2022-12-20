@@ -9,7 +9,7 @@ const StrTree = props =>{
 
     const [expandedTree,setExpandedTree] = useState([])
 
-    const isExpandedTree = (key) => expandedTree.some(item => item === key)
+    const isExpandedTree = key => expandedTree.some(item => item === key)
 
     //展开闭合 分类
     const setOpenOrClose = group => {

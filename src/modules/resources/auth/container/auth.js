@@ -57,7 +57,7 @@ const Auth = props =>{
         },
         {
             title:"创建人",
-            dataIndex:["user","name"],
+            dataIndex:["user","nickname"],
             key:"user",
             width:"15%",
             ellipsis:true,

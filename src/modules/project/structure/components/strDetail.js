@@ -17,37 +17,20 @@ import "./strDetail.scss";
 
 const StrDetail = props =>{
 
-    const {firstItem,detailsContent,index,pipeline,setIsDetails,structureStore} = props
+    const {firstItem,index,pipeline,setIsDetails,structureStore} = props
 
     const {execData,itemData,killInstance} = structureStore
-
-    const status = i =>{
-        switch(i){
-            case 1 :
-                //失败
-                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
-            case 10 :
-                //成功
-                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
-            case 20:
-                //被迫停止
-                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
-
-            case 0:
-                //运行
-                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
-
-            case 3:
-                //运行--等待运行
-                return  <PlayCircleOutlined style = {{fontSize:16}}/>
-        }
-    }
 
     const [isActiveSlide,setIsActiveSlide] = useState(true)  // 日志滚动条
     const [logData,setLogData] = useState("")
     const [treeData,setTreeData] = useState("")
     const [execIndex,setExecIndex] = useState(0)  
     const [id,setId] = useState("")
+
+    useEffect(()=>{
+        setId("")
+        setExecIndex(0)
+    },[])
 
     useEffect(()=>{
         if(index===2 && itemData){
@@ -79,37 +62,59 @@ const StrDetail = props =>{
 
         let results = isequal(data)
         if(results != null){
-            return results;
+            return results
         }
 
         for(let i=0 ; i<data.length;i++){
             let a = data[i].runLogList;
             if(!a){
-                continue;
+                continue
             }
             let result = isequal(a)
             if(result == null){
-                continue;
+                continue
             }
-            return result;
+            return result
         }
 
         for(let i=0 ; i<data.length;i++){
             let a = data[i].runLogList
             if(!a){
-                continue;
+                continue
             }
             for(let i=0 ; i<a.length;i++){
                 let b= a[i].runLogList
                 if(!b){
-                    continue;
+                    continue
                 }
                 let result = isequal(b)
                 if(result == null){
-                    continue;
+                    continue
                 }
-                return result;
+                return result
             }
+        }
+    }
+
+    const status = i =>{
+        switch(i){
+            case 1 :
+                //失败
+                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
+            case 10 :
+                //成功
+                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
+            case 20:
+                //被迫停止
+                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
+
+            case 0:
+                //运行
+                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
+
+            case 3:
+                //运行--等待运行
+                return  <PlayCircleOutlined style = {{fontSize:16}}/>
         }
     }
 
@@ -139,7 +144,7 @@ const StrDetail = props =>{
             <div className="strDetail-up" style={{paddingBottom:15}}>
                 <BreadcrumbContent
                     firstItem={firstItem}
-                    secondItem={`详情 #${detailsContent.findNumber}`}
+                    secondItem={`详情 #${index===2 ? itemData && itemData.name:execData && execData.name}`}
                     goBack={goBack}
                 />
                 {

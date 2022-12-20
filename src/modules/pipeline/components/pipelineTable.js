@@ -5,10 +5,10 @@ import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined} from "@ant-desig
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../common/emptyText/emptyText";
 import ListName from "../../common/list/listname";
-import success from "../../../assets/images/svg/success.svg";
-import error from "../../../assets/images/svg/error.svg";
-import fog from "../../../assets/images/svg/fog.svg";
-import halt from "../../../assets/images/svg/halt.svg";
+import pip_success from "../../../assets/images/svg/pip_success.svg";
+import pip_error from "../../../assets/images/svg/pip_error.svg";
+import pip_fog from "../../../assets/images/svg/pip_fog.svg";
+import pip_halt from "../../../assets/images/svg/pip_halt.svg";
 import "./pipelineTable.scss";
 
 const PipelineTable = props =>{
@@ -20,10 +20,7 @@ const PipelineTable = props =>{
 
     //收藏
     const collectAction = record => {
-        const params = {
-            pipeline:{id:record.id},
-        }
-        updateFollow(params).then(res=>{
+        updateFollow({id:record.id}).then(res=>{
             if(record.collect===0){
                 collectMessage(res,"收藏")
             }else {
@@ -68,7 +65,6 @@ const PipelineTable = props =>{
         </div>
     }
 
-
     const columns = [
         {
             title: "流水线名称",
@@ -96,28 +92,28 @@ const PipelineTable = props =>{
                     case 10:
                         return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
                             <Space>
-                                <img src={success} alt={"log"} className="imgs"/>
+                                <img src={pip_success} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 1:
                         return <Tooltip title={tooltip("失败",text,record.execUser.name)}>
                             <Space>
-                                <img src={error} alt={"log"} className="imgs"/>
+                                <img src={pip_error} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 0:
                         return <Tooltip title={tooltip("待构建","无","无")}>
                             <Space>
-                                <img src={fog} alt={"log"} className="imgs"/>
+                                <img src={pip_fog} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
                     case 20:
                         return  <Tooltip title={tooltip("终止",text,record.execUser.name)}>
                             <Space>
-                                <img src={halt} alt={"log"} className="imgs"/>
+                                <img src={pip_halt} alt={"log"} className="imgs"/>
                                 {text}
                             </Space>
                         </Tooltip>
@@ -126,7 +122,7 @@ const PipelineTable = props =>{
         },
         {
             title: "负责人",
-            dataIndex: ["user","name"],
+            dataIndex: ["user","nickname"],
             key: "user",
             width:"20%",
             ellipsis: true,

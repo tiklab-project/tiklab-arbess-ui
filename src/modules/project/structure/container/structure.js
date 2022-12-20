@@ -31,8 +31,7 @@ const Structure = props => {
     } = structureStore
     const {pipelineId,pipeline} = pipelineStore
     
-    const [index,setIndex] = useState(0)
-    const [detailsContent,setDetailsContent] = useState("")
+    const [index,setIndex] = useState(0) //
     const [state,setState] = useState(0)
     const [type,setType] = useState(0)
     const [enforcer,setEnforcer] = useState(null)
@@ -41,7 +40,12 @@ const Structure = props => {
     useEffect(()=>{
         if(pipelineId){
             findPipelineUser(pipelineId)
+        }
+        return()=>{
             setIsDetails(false)
+            setState(0)
+            setType(0)
+            setEnforcer(null)
         }
     },[pipelineId])
 
@@ -71,7 +75,7 @@ const Structure = props => {
             type:type
         }
         pipelineId && findPageHistory(params) // 历史列表
-    },[pipelineId,freshen,pageCurrent,state,enforcer,type,])
+    },[pipelineId,freshen,pageCurrent,state,enforcer,type])
 
     const details = record =>{
         switch (record.runStatus) {
@@ -79,10 +83,9 @@ const Structure = props => {
                 setIndex(1)
                 break
             default:
-                setIndex(2)
                 findAllLog(record.historyId)
+                setIndex(2)
         }
-        setDetailsContent(record)
         setIsDetails(true)
     }
 
@@ -230,7 +233,6 @@ const Structure = props => {
                     pipeline={pipeline}
                     firstItem={"历史"}
                     setIsDetails={setIsDetails}
-                    detailsContent={detailsContent}
                     structureStore={structureStore}
                 />
     }
@@ -245,6 +247,7 @@ const Structure = props => {
                     setEnforcer={setEnforcer}
                     setType={setType}
                     changPage={changPage}
+                    pipelineId={pipelineId}
                 />
                 <div className="structure-content-table">
                     <Table

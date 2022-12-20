@@ -1,12 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {PrivilegeButton} from "tiklab-privilege-ui";
-import {
-    departmentRouters,
-    departmentUnifyRouters,
-    applicationRouters,
-    templateRouter,
-} from "./sysRouters";
+import {departmentRouters,templateRouter} from "./sysRouters";
 import {inject,observer} from "mobx-react";
 import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/lib/store";
 import {getUser} from "tiklab-core-ui";
@@ -15,7 +10,7 @@ import "./system.scss";
 
 const SystemContent= props =>  {
 
-    const {route,isDepartment,systemRoleStore} = props
+    const {route,isDepartment,applicationRouters,systemRoleStore} = props
 
     const {getSystemPermissions} = systemRoleStore
 
@@ -24,12 +19,9 @@ const SystemContent= props =>  {
     const [expandedTree,setExpandedTree] = useState([""])  // 树的展开与闭合
     const [department,setDepartment] = useState(["","","",""])
 
-    const authType = JSON.parse(localStorage.getItem("authConfig")).authType
-    const authUrl = JSON.parse(localStorage.getItem("authConfig")).authUrl
-
     const x = (type,data) => {
         let arr = []
-        let a = "matflow";
+        let a = "matflow"
         switch (type){
             case 0:
                 arr = ["orga","user","user_dir"]
@@ -67,12 +59,7 @@ const SystemContent= props =>  {
     },[path])
 
     const select = data =>{
-        if(!authType && (data.purviewCode==="orga" || data.purviewCode==="user" || data.purviewCode==="user_dir")){
-            // window.location.href = authUrl +"/#"+ data.id
-            window.open(authUrl +"/#"+ data.id)
-        }else {
-            props.history.push(data.id)
-        }
+        props.history.push(data.id)
     }
 
     const isExpandedTree = key => {
@@ -150,10 +137,10 @@ const SystemContent= props =>  {
                          style={{paddingLeft: `${deep * 20 + 20}`}}
                          onClick={()=>setOpenOrClose(item.id)}
                     >
-                    <span>
-                        <span className="sys-content-icon">{item.icon}</span>
-                        <span className="system-aside-title">{item.title}</span>
-                    </span>
+                        <span>
+                            <span className="sys-content-icon">{item.icon}</span>
+                            <span className="system-aside-title">{item.title}</span>
+                        </span>
                         <div className="system-aside-item-icon">
                             {
                                 item.children ?
@@ -178,26 +165,16 @@ const SystemContent= props =>  {
         )
     }
 
-    const renderDepartment = () => {
-        if(isDepartment){
-            return authType ?
-                departmentRouters(department && department).map(firstItem => {
-                    return firstItem.children && firstItem.children.length > 0 ?
-                        renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                })
-                :
-                departmentUnifyRouters(department && department).map(firstItem => {
-                    return firstItem.children && firstItem.children.length > 0 ?
-                        renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                })
-        }
-    }
-
     return (
        <div className="system">
            <div className="system-aside">
                <ul className="system-aside-top" style={{padding:0}}>
-                   { renderDepartment() }
+                   {
+                       isDepartment && departmentRouters(department && department).map(firstItem => {
+                           return firstItem.children && firstItem.children.length > 0 ?
+                               renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                       })
+                   }
 
                    {
                        applicationRouters(department && department).map(firstItem => {

@@ -96,41 +96,40 @@
     }
 }
 
-.header{
-    &-outMenu{
-        background: #fff;
-        width: 200px;
-        &-top{
+.header-outMenu{
+    background: #fff;
+    width: 200px;
+    .header-outMenu-top{
+        padding: 10px;
+        .outMenu-out{
+            display: flex;
+            align-items: center;
+            &-info{
+                padding-left: 15px;
+            }
+            &-name{
+                font-size: 15px;
+            }
+        }
+    }
+    .header-outMenu-lan{
+        border-top: 1px solid #f4f4f4;
+        .outMenu-lan{
             padding: 10px;
-            .outMenu-out{
-                display: flex;
-                align-items: center;
-                &-info{
-                    padding-left: 15px;
-                }
-                &-name{
-                    font-size: 15px;
-                }
+            &:hover{
+                background: #f4f4f4;
+                cursor: pointer;
             }
         }
-        &-lan{
-            border-top: 1px solid #f4f4f4;
-            .outMenu-lan{
-                padding: 10px;
-                &:hover{
-                    background: #f4f4f4;
-                    cursor: pointer;
-                }
-            }
-        }
-        &-out{
-            border-top: 1px solid #f4f4f4;
-            .outMenu-out{
-                padding: 10px;
-                &:hover{
-                    background: #f4f4f4;
-                    cursor: pointer;
-                }
+    }
+    .header-outMenu-out{
+        border-top: 1px solid #f4f4f4;
+        .outMenu-out{
+            padding: 10px;
+            border-radius: 0 0 4px 4px;
+            &:hover{
+                background: #f4f4f4;
+                cursor: pointer;
             }
         }
     }
@@ -142,11 +141,13 @@
     top: -46px;
     left: -86px;
     width: 80px;
-    padding: 5px;
     .lan-menu{
-        height: 30px;
-        line-height: 30px;
-        cursor: pointer;
+        padding: 10px;
+        border-radius: 0 0 4px 4px;
+        &:hover{
+            background: #f4f4f4;
+            cursor: pointer;
+        }
     }
 }
 
@@ -158,6 +159,12 @@
         padding: 10px;
         &:hover{
             background: #f4f4f4;
+        }
+        &:first-child{
+            border-radius: 4px 4px 0 0;
+        }
+        &:last-child{
+            border-radius: 0 0 4px 4px;
         }
     }
 }

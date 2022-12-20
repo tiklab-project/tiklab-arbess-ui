@@ -89,10 +89,10 @@ const NewStage = props =>{
         deleteTaskConfig(params)
     }
 
-    // 效验提示
+    // 多任务||多阶段 -- 效验提示
     const valid = configId => validType && validType.some(item=>item==configId)
 
-    // 源码--地址和分支
+    // 多任务||多阶段 -- 源码地址和分支
     const renderCode = item =>{
         if(item.type<10){
             const codeBranch = item && item.codeBranch
@@ -136,6 +136,7 @@ const NewStage = props =>{
         )
     } 
 
+    // 多任务||多阶段 -- 详情
     const newJobContent = (item,deep) =>{
         return(
             <div onClick={()=>showDetail(item)}
@@ -188,7 +189,7 @@ const NewStage = props =>{
         </Fragment>
     }
 
-    // 并行任务添加按钮
+    // 多阶段 -- 并行任务添加按钮
     const parallel = (groupIndex) =>{
         return <div className={`multi-content add-newStages-contents ${hover?"add-hover":""}`}>
             <div className="newStages-content" style={{paddingLeft:30}}>
@@ -207,7 +208,7 @@ const NewStage = props =>{
         </div>
     }
 
-    // 每个模板阶段name
+    // 多阶段 -- 每个模板阶段name
     const groupHead = group =>{
         return(
             <div className="group-head">
@@ -223,7 +224,7 @@ const NewStage = props =>{
         )
     }
 
-    // 模板下阶段name
+    // 多阶段 -- 模板下阶段name
     const listHead = (group,list) =>{
         return(
             <div className="newStages-title" style={group.code?{opacity:0}:null}>
@@ -237,7 +238,7 @@ const NewStage = props =>{
         )
     }
 
-    // 串行任务--上
+    // 多阶段 -- 串行任务（上）
     const hasAddPre = (list,groupIndex,stagesIndex) =>{
         return(
             <Tooltip title={"串行任务"}>
@@ -253,7 +254,7 @@ const NewStage = props =>{
         )
     }
 
-    // 串行任务--下
+    // 多阶段 -- 串行任务（下）
     const hasAddNext = (list,groupIndex,stagesIndex) =>{
         return(
             <Tooltip title={"串行任务"}>

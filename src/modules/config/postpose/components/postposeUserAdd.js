@@ -129,8 +129,9 @@ const PostposeUserAdd = props =>{
             closable={false}
             destroyOnClose={true}
             footer={modalFooter}
-            width={900}
+            width={800}
             style={{height:height,top:60}}
+            bodyStyle={{minHeight:317}}
             className="mf"
         >
             <ModalTitle
