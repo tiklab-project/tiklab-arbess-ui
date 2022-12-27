@@ -19,7 +19,6 @@ export class ConfigStore{
     @observable isFindConfig = false
     @observable enabledValid = false // 是否启用表单效验
     @observable isPlugin = false // 是否存在插件
-    @observable isLoading = false
     @observable creacteValue = {}
 
     @action
@@ -97,8 +96,8 @@ export class ConfigStore{
                 configId: data.data,
                 name: this.setInitName(values.taskType)
             }
-            this.isFindConfig=!this.isFindConfig
             this.enabledValid=!this.enabledValid
+            this.isFindConfig=!this.isFindConfig
             this.taskFormDrawer = true
         }
         if(data.code===50001){
@@ -112,8 +111,8 @@ export class ConfigStore{
         const data = await DeleteTaskConfig(values)
         if(data.code===0){
             this.mess("删除成功")
-            this.isFindConfig=!this.isFindConfig
             this.enabledValid=!this.enabledValid
+            this.isFindConfig=!this.isFindConfig
             this.taskFormDrawer = false
         }
         return data

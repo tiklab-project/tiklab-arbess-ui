@@ -6,12 +6,13 @@ import DeployVir from "./deployVir";
 import DeployDocker from "./deployDocker";
 import DeploySame from "./deploySame";
 import Mirror from "./mirror";
+import FindAuth from "./findAuth";
 
 const Deploy = props =>{
 
-    const {configStore,pipelineStore,dataItem} = props
+    const {configStore,pipelineStore} = props
 
-    const {updateTaskConfig} = configStore
+    const {updateTaskConfig,dataItem,setDataItem} = configStore
     const {pipelineId} = pipelineStore
 
     const [showArrow,setShowArrow] = useState(false)
@@ -24,6 +25,13 @@ const Deploy = props =>{
             configId:dataItem.configId,
         }
         updateTaskConfig(params)
+        setDataItem({
+            authType:value,
+            deployId:dataItem.deployId,
+            name:dataItem.name,
+            type:dataItem.type,
+            configId:dataItem.configId
+        })
     }
 
     const confirm = value =>{
@@ -62,14 +70,17 @@ const Deploy = props =>{
                                 <DeployDocker dataItem={dataItem}/>
                             }
                         </>) :
-                        <Form.Item name={"startOrder"} label="Shell命令">
-                            <Mirror
-                                name={"startOrder"}
-                                placeholder={"Shell命令"}
-                                dataItem={dataItem}
-                                mirrorValue={dataItem.startOrder}
-                            />
-                        </Form.Item>
+                        <>
+                            <FindAuth dataItem={dataItem}/>
+                            <Form.Item name={"startOrder"} label="Shell命令">
+                                <Mirror
+                                    name={"startOrder"}
+                                    placeholder={"Shell命令"}
+                                    dataItem={dataItem}
+                                    mirrorValue={dataItem.startOrder}
+                                />
+                            </Form.Item>
+                        </>
                 }
             </Form.Item>
         </>

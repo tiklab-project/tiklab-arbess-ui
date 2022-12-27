@@ -77,6 +77,8 @@ const TodoType=AsyncComponent(()=>import("./modules/system/todotask/todoType"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
+const UserGroup=AsyncComponent(()=>import("./modules/system/user/group"))
+const UserGroupTrue=AsyncComponent(()=>import("./modules/system/user/groupture"))
 
 /* 版本与许可证 */
 const Version=AsyncComponent(()=>import("./modules/system/licence/version"))
@@ -246,8 +248,12 @@ const routers=[
                         component: LogType,
                     },
                     {
-                        path: "/index/system/user/dashbord",
+                        path: "/index/system/user/org",
                         component: Org,
+                    },
+                    {
+                        path: "/index/system/user/userGroup",
+                        component: UserGroup,
                     },
                     {
                         path: "/index/system/user/directory",
@@ -280,6 +286,10 @@ const routers=[
                     {
                         path:"/index/system/mes/noticetrue",
                         component: MessageNoticeContentTrue,
+                    },
+                    {
+                        path: "/index/system/user/userGrouptrue",
+                        component: UserGroupTrue,
                     },
                     {
                         path:"/index/system/version",

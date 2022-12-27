@@ -20,7 +20,7 @@ const Config = props =>{
     const {pipelineStore,configStore,structureStore} = props
 
     const {pipelineStartStructure,pipelineRunStatus} = structureStore
-    const {validType,data} = configStore
+    const {validType,data,setTaskFormDrawer,setDataItem} = configStore
     const {pipeline} = pipelineStore
 
     const [type,setType] = useState(1)
@@ -31,6 +31,10 @@ const Config = props =>{
 
     useEffect(()=>{
         pipelineId && setIsDetails(false)
+        return ()=> {
+            setTaskFormDrawer(false)
+            setDataItem("")
+        }
     },[pipelineId])
 
     let interval = null
@@ -41,9 +45,7 @@ const Config = props =>{
                     if(res.code===0){ res.data.allState === 0 && clearInterval(interval)}
                 }), 1000)
         }
-        return ()=>{
-            clearInterval(interval)
-        }
+        return ()=> clearInterval(interval)
     },[isDetails,pipelineId])
 
     const run = () => {
@@ -86,6 +88,7 @@ const Config = props =>{
         return <StrDetail
                     index={1}
                     pipeline={pipeline}
+                    isDetails={isDetails}
                     setIsDetails={setIsDetails}
                     firstItem={"配置"}
                     structureStore={structureStore}

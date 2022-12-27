@@ -65,6 +65,7 @@ $line-color:#d9d9d9;
                 }
                 .group-flow_multiBtn:after{
                     margin-left: 0 !important;
+                    width: 24px !important;
                 }
             }
         }
@@ -73,6 +74,7 @@ $line-color:#d9d9d9;
             display: inline-block;
             vertical-align: top;
             height: 100%;
+            overflow: auto;
             &:hover{
                 .newStages-multi .multi-content:nth-last-child(2) .newStages-contents:before{
                     border-radius: 0;

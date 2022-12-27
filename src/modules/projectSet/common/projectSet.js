@@ -8,7 +8,7 @@ const ProjectSet = props =>{
 
     return(
         <div className="projectSet">
-            <ProjectSetAside{...props}/>
+            <ProjectSetAside {...props}/>
             <div className="projectSet-content">
                 {renderRoutes(route.routes)}
             </div>

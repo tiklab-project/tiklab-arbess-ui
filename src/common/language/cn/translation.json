@@ -4,8 +4,5 @@
     "sys" : "系统设置",
     "my": "我的",
     "collection": "收藏",
-    "add": "新建",
-    "proof": "凭证",
-    "environment": "环境",
-    "widget": "工作台"
+    "environment": "环境"
 }

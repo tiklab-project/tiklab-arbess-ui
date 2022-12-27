@@ -60,7 +60,10 @@ const Condition = props =>{
     return(
         <div className="pose-condition">
             <div className="pose-condition-up">
-                <div>条件</div>
+                <div>
+                    <span style={{paddingRight:5}}>条件</span>
+                    <span style={{fontSize:13}}>({a && a.length?a.length:0}个)</span>
+                </div>
                 <Btn
                     title={"添加"}
                     type={"link-nopadding"}

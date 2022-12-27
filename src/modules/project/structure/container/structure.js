@@ -232,6 +232,7 @@ const Structure = props => {
                     index={index}
                     pipeline={pipeline}
                     firstItem={"历史"}
+                    isDetails={isDetails}
                     setIsDetails={setIsDetails}
                     structureStore={structureStore}
                 />

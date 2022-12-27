@@ -33,7 +33,7 @@ const SIcon = props =>{
             case 32:
                 return renderIcon("docker")
             case 41:
-                return renderIcon("Scan")
+                return renderIcon("sonarqube")
             case 51:
                 return renderIcon("tuisong")
             case 52:

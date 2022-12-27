@@ -27,6 +27,9 @@ const PostposeUserAdd = props =>{
 
     useEffect(()=>{
         setHeight(autoHeight())
+        return ()=>{
+            window.onresize = null
+        }
     },[height])
 
     window.onresize=() =>{

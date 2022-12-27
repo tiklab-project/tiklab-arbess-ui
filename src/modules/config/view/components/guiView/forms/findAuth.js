@@ -5,17 +5,16 @@ import ServerBtn from "../../../../../resources/server/components/serverBtn";
 import AuthBtn from "../../../../../resources/auth/components/authBtn";
 import HostBtn from "../../../../../resources/host/component/hostBtn";
 import EmptyText from "../../../../../common/emptyText/emptyText";
-import {x} from "../../delData";
 
 const FindAuth = props =>{
 
-    const {dataItem,pipelineStore,configStore,authStore,serverStore,hostStore}=props
+    const {pipelineStore,configStore,authStore,serverStore,hostStore}=props
 
     const {findAllAuth} = authStore
     const {findAllAuthServerList} = serverStore
     const {findAllAuthHostList} = hostStore
     const {pipelineId} = pipelineStore
-    const {updateTaskConfig} = configStore
+    const {updateTaskConfig,dataItem} = configStore
 
     const [list,setList] = useState([])
     const [open,setOpen] = useState(false)
@@ -30,7 +29,7 @@ const FindAuth = props =>{
             taskType:dataItem.type,
             configId: dataItem.configId
         }
-        x(value,dataItem.authId) && updateTaskConfig(params)
+        updateTaskConfig(params)
         setBordered(false)
     }
 
@@ -132,10 +131,10 @@ const FindAuth = props =>{
                 return item.name+"("+(item.authType === 1?item.username:"私钥")+")"
             case 2:
             case 3:
-                return item.name+"("+item.message+")"
+                return item.name+"("+(item.authType === 1?item.message:"私钥")+")"
             case 41:
             case 51:
-                return item.name+"("+item.username+")"
+                return item.name+"("+(item.authType === 1?item.username:"私钥")+")"
             case 31:
             case 32:
             case 52:

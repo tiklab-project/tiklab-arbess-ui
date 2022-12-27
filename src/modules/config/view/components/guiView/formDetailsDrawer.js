@@ -53,7 +53,7 @@ const FormDetailsDrawer = props =>{
                         [getId(dataItem,"codeName")]:dataItem && dataItem.codeName,
                         [getId(dataItem,"codeBranch")]:dataItem && dataItem.codeBranch,
                         [getId(dataItem,"codeAlias")]:dataItem && dataItem.codeAlias,
-                        [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+ dataItem.auth.message+")",
+                        [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+ (dataItem.auth.authType === 1?dataItem.auth.message:"私钥") +")",
                         [getId(dataItem,"authId")]:dataItem.authId
                     })  
                     break
@@ -72,7 +72,7 @@ const FormDetailsDrawer = props =>{
                 case 41:
                     form.setFieldsValue({
                         [getId(dataItem,"projectName")]:dataItem && dataItem.projectName,
-                        [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+dataItem.auth.username+")",
+                        [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+(dataItem.auth.authType === 1?dataItem.auth.username:"私钥")+")",
                         [getId(dataItem,"authId")]:dataItem.authId
                     })
                     break
@@ -83,7 +83,7 @@ const FormDetailsDrawer = props =>{
                         [getId(dataItem,"version")]:dataItem.version,
                         [getId(dataItem,"fileType")]:dataItem.fileType,
                         [getId(dataItem,"fileAddress")]:dataItem.fileAddress,
-                        [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+dataItem.auth.username+")",
+                        [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+(dataItem.auth.authType === 1?dataItem.auth.username:"私钥")+")",
                         [getId(dataItem,"authId")]:dataItem.authId
                     })
                     break  
@@ -100,7 +100,7 @@ const FormDetailsDrawer = props =>{
                     break
                 default:
                     form.setFieldsValue({
-                        [dataItem.stagesId+"name"]:dataItem.name,
+                        [dataItem.stagesId+"_name"]:dataItem.name,
                     })
 
             }
@@ -172,7 +172,8 @@ const FormDetailsDrawer = props =>{
             closable={false}
             destroyOnClose={true}
             mask={false}
-            contentWrapperStyle={{width:480,top:48,height:"calc(100% - 48px)"}}
+            width={480}
+            contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
             className="mf"
         >
@@ -210,7 +211,7 @@ const FormDetailsDrawer = props =>{
                                             {renderForms(dataItem)}
                                         </>
                                         :
-                                        <Form.Item name={dataItem.stagesId+"name"} label="阶段名称" rules={[{required:true, message:"请输入阶段名称"}]}>
+                                        <Form.Item name={dataItem.stagesId+"_name"} label="阶段名称" rules={[{required:true, message:"请输入阶段名称"}]}>
                                             <Input
                                                 placeholder={enter? "阶段名称，回车保存":"未设置"}
                                                 onFocus={()=>setEnter(true)}

@@ -123,7 +123,7 @@ const NewStage = props =>{
         return(
             <div className="group-flow">
                 <div className={`group-flow_btn ${pipelineType===1?"group-flow_singleBtn":"group-flow_multiBtn"}`}>
-                    <Tooltip title={"添加新阶段"}>
+                    <Tooltip title={pipelineType===1?"添加新任务":"添加新阶段"}>
                         <svg className="icon group-flow_btn_i"
                              aria-hidden="true"
                              onClick={()=>insertData(group,groupIndex)}
@@ -146,7 +146,7 @@ const NewStage = props =>{
                 <div className="newStages-job-sub">
                     <span className="newStages-job-icon">
                         <SIcon type={item.type}/>
-                        </span>
+                    </span>
                     <span className="newStages-job-title">
                         {item.name}
                     </span>

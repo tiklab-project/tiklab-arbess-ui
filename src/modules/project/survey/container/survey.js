@@ -15,17 +15,14 @@ const Survey = props =>{
     const {surveyStore,pipelineStore,homePageStore} = props
 
     const {findlogpage,dynamicList} = homePageStore
-    const {pipelineCensus} = surveyStore
+    const {pipelineCensus,census} = surveyStore
     const {pipelineId,pipeline} = pipelineStore
-
-    const [census,setCensus] = useState("")
 
     //运行概况
     useEffect(()=>{
         pipelineId && pipelineCensus(pipelineId).then(res=>{
             const data = res.data
             if(res.code===0){
-                setCensus(data)
                 renderEchart(data)
             }
         })

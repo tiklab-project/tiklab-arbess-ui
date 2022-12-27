@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import {Spin} from "antd";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
+import Loading from "../../../common/loading/loading";
 import StrItem from "./strItem";
 import StrTree from "./strTree";
 import Btn from "../../../common/btn/btn";
@@ -28,17 +29,15 @@ const StrDetail = props =>{
     const [id,setId] = useState("")
 
     useEffect(()=>{
-        setId("")
-        setExecIndex(0)
-    },[])
-
-    useEffect(()=>{
         if(index===2 && itemData){
             const data = itemData.runLogList
-            pipeline && pipeline.type===1 ? setLogData(itemData):setLogData(data[0])
+            pipeline && pipeline.type===1 ? setLogData(itemData):setLogData(data[execIndex])
             setTreeData(data[0])
         }
-    },[itemData])
+        return ()=>{
+            setExecIndex(0)
+        }
+    },[itemData,execIndex])
 
     useEffect(()=>{
         if(index===1 && execData){
@@ -46,6 +45,10 @@ const StrDetail = props =>{
             setTreeData(data[execIndex])
             id ? setLogData(isequals(data)) :
                 (pipeline && pipeline.type===1 ? setLogData(execData) : setLogData(data[0]) )
+        }
+        return ()=>{
+            setId("")
+            setExecIndex(0)
         }
     },[execData,execIndex,id])
 
@@ -66,7 +69,7 @@ const StrDetail = props =>{
         }
 
         for(let i=0 ; i<data.length;i++){
-            let a = data[i].runLogList;
+            let a = data[i].runLogList
             if(!a){
                 continue
             }
@@ -133,9 +136,7 @@ const StrDetail = props =>{
                 </div>
     }
 
-    const end = () => {
-        killInstance(pipeline.id)
-    }
+    const end = () => killInstance(pipeline.id)
 
     const goBack = () => setIsDetails(false)
 
@@ -148,7 +149,7 @@ const StrDetail = props =>{
                     goBack={goBack}
                 />
                 {
-                    index===1 && 
+                    index===1 && execData.allState!==0 &&
                     <Btn
                         title={"终止"}
                         icon={<MinusCircleOutlined/>}

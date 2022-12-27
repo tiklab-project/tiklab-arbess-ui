@@ -1,9 +1,9 @@
-.pose-variable{
-    .pose-variable-up{
+.pose-pose{
+    .pose-pose-up{
         display: flex;
         justify-content: space-between;
     }
-    .inputs-variable{
+    .inputs-pose{
         margin-bottom: 12px;
         display: -webkit-box;
         display: -webkit-flex;
@@ -18,28 +18,7 @@
         -ms-flex-align: center;
         align-items: center;
     }
-    .pose-variable-content{
+    .pose-pose-content{
         padding-top: 10px;
-    }
-    .pose-variable-inputs{
-        position: relative;
-    }
-    .inputs-error{
-        color: #ed675a;
-        font-size: 13px;
-        line-height: 13px;
-        margin: -6px 0 4px;
-    }
-    .inputs-variable-key{
-        width: 110px;
-    }
-    .inputs-variable-value{
-        width: 270px;
-    }
-    .inputs-variable-opt {
-        display: inline-block;
-        cursor: pointer;
-        width: 16px;
-        height: 16px;
     }
 }

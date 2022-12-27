@@ -4,9 +4,6 @@
     "sys" : "sys",
     "my": "my",
     "collection": "collection",
-    "add": "add",
-    "proof": "proof",
-    "environment": "enviroment",
-    "widget":"widget"
+    "environment": "enviroment"
 
 }

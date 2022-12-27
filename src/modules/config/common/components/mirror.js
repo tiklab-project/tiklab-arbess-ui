@@ -30,6 +30,7 @@ import "codemirror/addon/display/placeholder.js";
 
 export const ViewMirror = props =>{
     const {mirrorRefs,mirrorValue,bordered,onFocus,placeholder} = props
+
     return(
         <CodeMirror
             value={mirrorValue}//内容
@@ -38,10 +39,19 @@ export const ViewMirror = props =>{
                 mode: {name:"shell",shell: true },//语言
                 lineNumbers: false, // 是否显示行号
                 placeholder: bordered ? placeholder:"未设置",
-                styleActiveLine:bordered
+                styleActiveLine:bordered,
             }}
             onFocus={e=>onFocus(e)}
             className={`${bordered?"gui-mirror-tr":"gui-mirror-fa"}`}
+            onInputRead={( editor, change) => {
+                // editor.showHint()
+                // const data = { t: ['t_user', 'menu', 'auth_info'], t_user: [], menu: [''], default: ['tableinfo'] }
+                // editor.setOption('hintOptions', {
+                //     tables: data,
+                //     completeSingle: false
+                // });
+                // editor.execCommand('autocomplete')
+            }}
         />
     )
 }

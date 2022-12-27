@@ -16,7 +16,6 @@ const Project= (props)=>{
 
     useEffect(()=>{
         setPipelineId(pipelineId)
-
         // 所有流水线
         findAllPipelineStatus(userId).then(res=>{
             const data = res.data

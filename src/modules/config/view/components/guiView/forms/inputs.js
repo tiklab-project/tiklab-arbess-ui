@@ -5,10 +5,10 @@ import {x} from "../../delData";
 
 const Inputs = props =>{
 
-    const {placeholder,label,name,addonBefore,dataItem,isValid,pipelineStore,configStore} = props
+    const {placeholder,label,name,addonBefore,isValid,pipelineStore,configStore} = props
 
     const {pipelineId} = pipelineStore
-    const {updateTaskConfig} = configStore
+    const {updateTaskConfig,dataItem} = configStore
 
     const [enter,setEnter] = useState(false)
     const ref = useRef(null)

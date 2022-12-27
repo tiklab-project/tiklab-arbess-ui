@@ -148,11 +148,11 @@ const PipelineAddInfo = props =>{
             rule = [
                 {max:30,message:"请输入1~31位以内的名称"},
                 {
-                    pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
+                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
                 },
                 ({ getFieldValue }) => ({
-                    validator(rule, value) {
+                    validator(rule, value) { 
                         let nameArray = []
                         if(pipelineList){
                             const name = pipelineList && pipelineList.map(item=>item.pipelineName)
@@ -172,7 +172,7 @@ const PipelineAddInfo = props =>{
                 {required:true,message:""},
                 {max:30,message:"请输入1~31位以内的名称"},
                 {
-                    pattern: /^[\s\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
+                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
                 },
                 ({ getFieldValue }) => ({

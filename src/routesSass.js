@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./modules/home/container/portal"))
+const Index=AsyncComponent(()=>import("./modules/home/container/home"))
 
 const Login=AsyncComponent(()=>import("./modules/login/login"))
 const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
@@ -11,7 +11,7 @@ const Wechat=AsyncComponent(()=>import("./modules/login/wechat"))
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
 
-/* 流水线 */
+/*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
 
 /* 授权 */
@@ -26,7 +26,7 @@ const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 const PipelineDyan=AsyncComponent(()=>import("./modules/project/dyna/dyna"))
 const Survey=AsyncComponent(()=>import("./modules/project/survey/container/survey"))
 const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
-const Config = AsyncComponent(()=>import("./modules/config/common/container/config"))
+const Config=AsyncComponent(()=>import("./modules/config/common/container/config"))
 
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
@@ -60,12 +60,13 @@ const MessageType=AsyncComponent(()=>import("./modules/system/message/messageTyp
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
 const MessageNoticeContent=AsyncComponent(()=>import("./modules/system/message/messageNotice"))
+const MessageNoticeContentTrue=AsyncComponent(()=>import("./modules/system/message/messageNoticeTrue"))
 
 /* 日志 */
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
 const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
-const LogType=AsyncComponent(()=>import("./modules/system/oplog/logType"))
 const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
+const LogType=AsyncComponent(()=>import("./modules/system/oplog/logType"))
 
 /* 代办 */
 const MyTodoTask=AsyncComponent(()=>import("./modules/system/todotask/myTodoTask"))
@@ -76,6 +77,7 @@ const TodoType=AsyncComponent(()=>import("./modules/system/todotask/todoType"))
 const UserList=AsyncComponent(()=>import("./modules/system/user/list"))
 const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory"))
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
+const UserGroup=AsyncComponent(()=>import("./modules/system/user/group"))
 
 /* 版本与许可证 */
 const Version=AsyncComponent(()=>import("./modules/system/licence/version"))
@@ -117,7 +119,6 @@ const routers=[
             {
                 path:"/index/pipeline",
                 component:Pipeline,
-                exact: true,
             },
             {
                 path:"/index/dyna",
@@ -246,8 +247,12 @@ const routers=[
                         component: LogType,
                     },
                     {
-                        path: "/index/system/user/dashbord",
+                        path: "/index/system/user/org",
                         component: Org,
+                    },
+                    {
+                        path: "/index/system/user/userGroup",
+                        component: UserGroup,
                     },
                     {
                         path: "/index/system/user/directory",
@@ -276,6 +281,10 @@ const routers=[
                     {
                         path:"/index/system/mes/notice",
                         component: MessageNoticeContent,
+                    },
+                    {
+                        path:"/index/system/mes/noticetrue",
+                        component: MessageNoticeContentTrue,
                     },
                     {
                         path:"/index/system/version",

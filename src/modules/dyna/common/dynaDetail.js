@@ -4,7 +4,6 @@ import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import DynaList from "./dynaList";
 import Page from "../../common/page/page";
 import EmptyText from "../../common/emptyText/emptyText";
-import "./dyna.scss";
 
 const { RangePicker } = DatePicker
 
@@ -18,7 +17,7 @@ const DynaDetail = props =>{
     const [actionType,setActionType] = useState(null) // 动作类型
     const [pipelineId,setPipelineId] = useState(pipelineIdList && pipelineIdList)  // 内容id
 
-    const  params = {
+    const params = {
         pageParam:{
             pageSize:15,
             currentPage:pageCurrent
@@ -77,14 +76,14 @@ const DynaDetail = props =>{
     }
 
     return(
-        <div className="dyna">
+        <div className="dyna" style={{height:"100%",overflow:"auto"}}>
             <div className="dyna-content mf-home-limited">
                 <BreadcrumbContent
                     firstItem={firstItem}
                     secondItem={secondItem && secondItem}
                     goBack={goBack}
                 />
-                <div className="dyna-screen">
+                <div className="dyna-screen" style={{padding:"15px 0"}}>
                     <Space>
                         {
                             pipelineList &&
@@ -113,8 +112,8 @@ const DynaDetail = props =>{
                         >
                             <Select.Option key={"1"} value={null}>所有动态</Select.Option>
                             <Select.Option key={"2"} value={"LOG_PIPELINE"}>流水线动态</Select.Option>
-                            <Select.Option key={"3"} value={"LOG_PIPELINE_CONFIG"}>流水线配置动态</Select.Option>
-                            <Select.Option key={"4"} value={"LOG_PIPELINE_RUN"}>流水线运行动态</Select.Option>
+                            <Select.Option key={"3"} value={"LOG_CONFIG"}>流水线配置动态</Select.Option>
+                            <Select.Option key={"4"} value={"LOG_RUN"}>流水线运行动态</Select.Option>
                         </Select>
                         <Select
                             placeholder={"操作"}
@@ -122,9 +121,9 @@ const DynaDetail = props =>{
                             onChange={(value)=>changContent(value,"module")}
                         >
                             <Select.Option key={"1"} value={null}>所有操作</Select.Option>
-                            <Select.Option key={"2"} value={"LOG_MD_PIPELINE_CREATE"}>创建</Select.Option>
-                            <Select.Option key={"3"} value={"LOG_MD_PIPELINE_UPDATE"}>更新</Select.Option>
-                            <Select.Option key={"4"} value={"LOG_MD_PIPELINE_DELETE"}>删除</Select.Option>
+                            <Select.Option key={"2"} value={"LOG_MD_CREATE"}>创建</Select.Option>
+                            <Select.Option key={"3"} value={"LOG_MD_UPDATE"}>更新</Select.Option>
+                            <Select.Option key={"4"} value={"LOG_MD_DELETE"}>删除</Select.Option>
                         </Select>
                         <RangePicker
                             onChange={(value,e)=>changContent(e,"timestamp")}

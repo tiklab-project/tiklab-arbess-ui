@@ -16,7 +16,7 @@ export const departmentRouters = a =>{
             icon: <TeamOutlined/>,
             children: [
                 {
-                    id: "/index/system/user/dashbord",
+                    id: "/index/system/user/org",
                     title: "部门",
                     icon: <GroupOutlined/>,
                     purviewCode: "orga",
@@ -24,6 +24,12 @@ export const departmentRouters = a =>{
                 {
                     id: "/index/system/user/list",
                     title: "用户",
+                    icon: <TeamOutlined/>,
+                    purviewCode: "user",
+                },
+                {
+                    id: "/index/system/user/userGroup",
+                    title: "用户组",
                     icon: <TeamOutlined/>,
                     purviewCode: "user",
                 },
@@ -126,6 +132,12 @@ export const templateRouter = [
             {
                 id:"/index/system/mes/noticetrue",
                 title:"通知方案",
+                icon:<MenuOutlined />,
+                purviewCode:"basics",
+            },
+            {
+                id:"/index/system/user/userGrouptrue",
+                title:"用户组true",
                 icon:<MenuOutlined />,
                 purviewCode:"basics",
             },

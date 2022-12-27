@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Input,message} from "antd";
 import {PlusOutlined,MinusCircleOutlined} from "@ant-design/icons";
@@ -69,9 +69,8 @@ const Variable = props => {
                 <div className="inputs-variable">
                     <div className="inputs-variable-key">
                         <Input
-                            status="error"
                             placeholder={"名称"}
-                            defaultValue={item.varKey}
+                            value={item.varKey}
                             onChange={e=>onChange(e,item,"varKey")}
                             onBlur={e=>onBlur(e,item,"varKey")}
                             onPressEnter={(e)=>e.target.blur()}
@@ -81,7 +80,7 @@ const Variable = props => {
                     <div className="inputs-variable-value">
                         <Input
                             placeholder={"值"}
-                            defaultValue={item && item.varValue}
+                            value={item && item.varValue}
                             onChange={e=>onChange(e,item,"varValue")}
                             onBlur={e=>onBlur(e,item,"varValue")}
                             onPressEnter={(e)=>e.target.blur()}
@@ -101,7 +100,10 @@ const Variable = props => {
     return(
         <div className="pose-variable">
             <div className="pose-variable-up">
-                <div>变量</div>
+                <div>
+                    <span style={{paddingRight:5}}>环境变量</span>
+                    <span style={{fontSize:13}}>({variableData && variableData.length?variableData.length:0}个)</span>
+                </div>
                 <Btn
                     title={"添加"}
                     type={"link-nopadding"}

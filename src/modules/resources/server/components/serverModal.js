@@ -105,6 +105,9 @@ const ServerModal = props =>{
 
     useEffect(()=>{
         setHeight(autoHeight())
+        return ()=>{
+            window.onresize = null
+        }
     },[height])
 
     window.onresize=() =>{

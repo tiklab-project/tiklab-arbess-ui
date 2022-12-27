@@ -21,7 +21,7 @@ const DynaList = props =>{
             <div
                 dangerouslySetInnerHTML={{__html: item.data}}
             />
-            <div>{item.timestamp}</div>
+            <div className="dynamic-item-time">{item.timestamp}</div>
         </div>
     }
 
