@@ -1,53 +1,35 @@
 import React,{useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Form,Select,Divider} from "antd";
-import ServerBtn from "../../../../../resources/server/components/serverBtn";
-import AuthBtn from "../../../../../resources/auth/components/authBtn";
-import HostBtn from "../../../../../resources/host/component/hostBtn";
-import EmptyText from "../../../../../common/emptyText/emptyText";
-import {x} from "../../delData";
+import ServerBtn from "../../../../resources/server/components/serverBtn";
+import AuthBtn from "../../../../resources/auth/components/authBtn";
+import HostBtn from "../../../../resources/host/component/hostBtn";
+import EmptyText from "../../../../common/emptyText/emptyText";
 
 const FindAuth = props =>{
 
-    const {dataItem,pipelineStore,configStore,authStore,serverStore,hostStore}=props
+    const {pipelineStore,configStore,authStore,serverStore,hostStore}=props
 
     const {findAllAuth} = authStore
     const {findAllAuthServerList} = serverStore
     const {findAllAuthHostList} = hostStore
     const {pipelineId} = pipelineStore
-    const {updateConfigure,formInitialValues} = configStore
+    const {updateTaskConfig,dataItem} = configStore
 
     const [list,setList] = useState([])
     const [open,setOpen] = useState(false)
     const [bordered,setBordered] = useState(false)
     const [showArrow,setShowArrow] = useState(false)
 
-    // 存储authId
-    const setAuthId = value =>{
-        return formInitialValues[dataItem.configId+"_authId"] = value
-    }
-
-    // 获取存储authId
-    const isId = () =>{
-        return formInitialValues[dataItem.configId+"_authId"]
-    }
-
     // 改变凭证
     const changeGitSelect = value =>{
         const params = {
-            pipeline:{pipelineId},
+            pipeline:{id:pipelineId},
             values:{authId:value},
             taskType:dataItem.type,
             configId: dataItem.configId
         }
-        x(value,isId()) && updateConfigure(params).then(res=>{
-            res.code===0 && setAuthId(value)
-        })
-        setBordered(false)
-    }
-
-    // 失去焦点
-    const onBlur = () => {
+        updateTaskConfig(params)
         setBordered(false)
     }
 
@@ -77,6 +59,10 @@ const FindAuth = props =>{
             case 52:
                 findAllAuthHostList(0).then(res=>{getList(res)})
         }
+    }
+
+    const onBlur = () =>{
+        setBordered(false)
     }
 
     //认证标题
@@ -145,10 +131,10 @@ const FindAuth = props =>{
                 return item.name+"("+(item.authType === 1?item.username:"私钥")+")"
             case 2:
             case 3:
-                return item.name+"("+item.message+")"
+                return item.name+"("+(item.authType === 1?item.message:"私钥")+")"
             case 41:
             case 51:
-                return item.name+"("+item.username+")"
+                return item.name+"("+(item.authType === 1?item.username:"私钥")+")"
             case 31:
             case 32:
             case 52:
@@ -161,7 +147,6 @@ const FindAuth = props =>{
             <Select
                 showSearch={bordered}
                 placeholder={bordered ? label(dataItem.type):"未选择"}
-                bordered={bordered}
                 showArrow={showArrow}
                 onMouseEnter={()=>setShowArrow(true)}
                 onMouseLeave={()=>setShowArrow(false)}

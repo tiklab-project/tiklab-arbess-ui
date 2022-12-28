@@ -8,7 +8,7 @@ import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/btn";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import View from "../../view/container/view";
+import Gui from "../../view/container/gui";
 import Postpose from "../../postpose/container/postpose";
 import Trigger from "../../trigger/container/trigger";
 import Variable from "../../variable/container/variable";
@@ -138,7 +138,7 @@ const Config = props =>{
             </div>
             {
                 type === 1 &&
-                <View
+                <Gui
                     configStore={configStore}
                     pipelineStore={pipelineStore}
                 />

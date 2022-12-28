@@ -1,4 +1,6 @@
 import React from "react";
+import maven from "../../../../assets/images/img/maven.png";
+import nexus from "../../../../assets/images/img/nexus.png";
 
 const SIcon = props =>{
 
@@ -25,7 +27,7 @@ const SIcon = props =>{
             case 11:
                 return renderIcon("ceshi")
             case 21:
-                return renderIcon("goujian")
+                return <img src={maven} alt="maven" style={{width:16,height:16}}/>
             case 22:
                 return renderIcon("nodejs")
             case 31:
@@ -35,7 +37,7 @@ const SIcon = props =>{
             case 41:
                 return renderIcon("sonarqube")
             case 51:
-                return renderIcon("tuisong")
+                return <img src={nexus} alt="nexus" style={{width:30,height:30}}/>
             case 52:
                 return renderIcon("ssh")
             case 61:

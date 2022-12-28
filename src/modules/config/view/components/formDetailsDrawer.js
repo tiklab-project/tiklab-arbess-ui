@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Drawer,Form,Input} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 import CodeGitOrGitlab from "./forms/codeGitOrGitlab";
 import CodeGiteeOrGithub from "./forms/codeGiteeOrGithub";
 import CodeSvn from "./forms/codeSvn";
@@ -14,8 +14,8 @@ import GoodsSsh from "./forms/goodsSsh";
 import Condition from "./post/condition";
 import Postpose from "./post/postpose";
 import Variable from "./post/variable";
-import Tabs from "../../../../common/tabs/tabs";
-import {x} from "../delData";
+import Tabs from "../../../common/tabs/tabs";
+import {x} from "./delData";
 import Inputs from "./forms/inputs";
 import "./formDetailsDrawer.scss";
 

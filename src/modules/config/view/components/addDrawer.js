@@ -1,7 +1,7 @@
 import React from "react";
 import {Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/btn";
+import Btn from "../../../common/btn/btn";
 import AddDrawerContent from "./addDrawerContent";
 import "./addDrawer.scss";
 

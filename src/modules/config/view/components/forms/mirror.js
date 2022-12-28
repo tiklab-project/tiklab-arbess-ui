@@ -3,9 +3,9 @@ import {inject,observer} from "mobx-react";
 import {Tooltip} from "antd";
 import {ExpandOutlined} from "@ant-design/icons";
 import MirrorExpand from "./mirrorExpand";
-import Btn from "../../../../../common/btn/btn";
-import {ViewMirror} from "../../../../common/components/mirror";
-import {x} from "../../delData";
+import Btn from "../../../../common/btn/btn";
+import {ViewMirror} from "../../../common/components/mirror";
+import {x} from "../delData";
 import "./mirror.scss";
 
 const MirrorContent = forwardRef((props,ref)=>{

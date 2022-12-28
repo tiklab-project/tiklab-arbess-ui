@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Profile} from "tiklab-eam-ui";
-import { withRouter } from "react-router";
+import {withRouter} from "react-router";
 import {Popconfirm,Spin,Table,Tooltip} from "antd";
 import {
     CheckCircleOutlined,
@@ -77,6 +77,7 @@ const Structure = props => {
         pipelineId && findPageHistory(params) // 历史列表
     },[pipelineId,freshen,pageCurrent,state,enforcer,type])
 
+    // 构建详情
     const details = record =>{
         switch (record.runStatus) {
             case 0:
@@ -89,14 +90,17 @@ const Structure = props => {
         setIsDetails(true)
     }
 
+    // 终止运行
     const end = () => {
         killInstance(pipelineId)
     }
     
+    // 删除历史
     const del = record =>{
         deleteHistoryLog(record.historyId)
     }
 
+    // 换页
     const changPage = pages =>{
         setPageCurrent(pages)
     }
@@ -167,7 +171,7 @@ const Structure = props => {
                                 <div className="runWay-user">{record.user.nickname}手动触发</div>
                             </>
                             :
-                            <div className="runWay-user">定时任务自动触发</div>
+                            <div>定时任务自动触发</div>
                     }
                 </div>
             }

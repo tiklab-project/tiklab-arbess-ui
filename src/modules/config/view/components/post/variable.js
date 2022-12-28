@@ -2,8 +2,8 @@ import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Input,message} from "antd";
 import {PlusOutlined,MinusCircleOutlined} from "@ant-design/icons";
-import Btn from "../../../../../common/btn/btn";
-import {x} from "../../delData";
+import Btn from "../../../../common/btn/btn";
+import {x} from "../delData";
 import "./variable.scss";
 
 const Variable = props => {

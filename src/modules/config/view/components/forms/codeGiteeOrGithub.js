@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Form,Select} from "antd";
 import {inject,observer} from "mobx-react";
-import EmptyText from "../../../../../common/emptyText/emptyText";
+import EmptyText from "../../../../common/emptyText/emptyText";
 import FindAuth from "./findAuth";
 
 const CodeGiteeOrGithub = props =>{

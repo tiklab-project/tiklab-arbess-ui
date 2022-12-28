@@ -68,7 +68,7 @@ export class ConfigStore{
             case 4:  return "Gitlab"
             case 5:  return "SVN"
             case 11: return "maven单元测试"
-            case 21: return "maven"
+            case 21: return "maven构建"
             case 22: return "node"
             case 31: return "虚拟机"
             case 32: return "docker"

@@ -1,7 +1,7 @@
 import React,{useState,useRef,useEffect} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
-import {x} from "../../delData";
+import {x} from "../delData";
 
 const Inputs = props =>{
 

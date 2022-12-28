@@ -29,8 +29,64 @@ import "codemirror/addon/display/placeholder.js";
 
 
 export const ViewMirror = props =>{
+
     const {mirrorRefs,mirrorValue,bordered,onFocus,placeholder} = props
 
+    const handleShowHint = () =>{
+        const hintList = [
+          {
+            name: "xiaohong",
+            value: "xiaohong"
+          },
+          {
+            name: "xiaozhang",
+            value: [
+              {
+                name: "xiaoli",
+              },
+              {
+                name: "xiaosun",
+              },
+            ],
+          },
+        ];
+        const cmInstance = mirrorRefs.current.editor;
+        // 得到光标
+        let cursor = cmInstance.getCursor();
+        // 得到行内容
+        let cursorLine = cmInstance.getLine(cursor.line)
+        
+        // 得到光标位置
+        let end = cursor.ch;
+        let start = end;
+        const Two = `${cursorLine.charAt(start - 2)}${cursorLine.charAt(start - 1)}`;
+        const One = `${cursorLine.charAt(start - 1)}`;
+        let list = [];
+        if (Two === "$") {
+          hintList.forEach(e => {
+            list.push(e.name)
+          })
+        } else if (One === ".") {
+          let lastIndex = cursorLine.lastIndexOf('${', start)
+          let key = cursorLine.substring(lastIndex + 2, start - 1)
+          list = []
+          hintList.forEach((e) => {
+            if (e.name === key && lastIndex !== -1 && Object.prototype.toString.call(e.value) === '[object Array]') {
+              e.value.forEach(el => {
+                list.push(el.name)
+              })
+            }
+          })
+        }
+        // 得到光标标识
+        let token = cmInstance.getTokenAt(cursor);
+        return {
+          list: list,
+          from: { ch: end, line: cursor.line },
+          to: { ch: token.end, line: cursor.line },
+        };
+    }
+    
     return(
         <CodeMirror
             value={mirrorValue}//内容
@@ -40,17 +96,96 @@ export const ViewMirror = props =>{
                 lineNumbers: false, // 是否显示行号
                 placeholder: bordered ? placeholder:"未设置",
                 styleActiveLine:bordered,
+                hintOptions:{hint:handleShowHint,completeSingle: false}
             }}
             onFocus={e=>onFocus(e)}
             className={`${bordered?"gui-mirror-tr":"gui-mirror-fa"}`}
-            onInputRead={( editor, change) => {
-                // editor.showHint()
-                // const data = { t: ['t_user', 'menu', 'auth_info'], t_user: [], menu: [''], default: ['tableinfo'] }
-                // editor.setOption('hintOptions', {
-                //     tables: data,
-                //     completeSingle: false
-                // });
-                // editor.execCommand('autocomplete')
+            onInputRead={(editor,change) =>{
+                editor.showHint()
+            }}
+            // onChange={(editor,data,value)=>{
+            //     console.log(value)
+            // }}
+        />
+    )
+}
+
+export const ExpandMirror = props =>{
+    const {expandValue,mirrorRefs} = props
+    const handleShowHint = () =>{
+        const hintList = [
+          {
+            name: "xiaohong",
+            value: "xiaohong"
+          },
+          {
+            name: "xiaozhang",
+            value: [
+              {
+                name: "xiaoli",
+              },
+              {
+                name: "xiaosun",
+              },
+            ],
+          },
+        ];
+        const cmInstance = mirrorRefs.current.editor;
+        // 得到光标
+        let cursor = cmInstance.getCursor();
+        // 得到行内容
+        let cursorLine = cmInstance.getLine(cursor.line)
+        
+        // 得到光标位置
+        let end = cursor.ch;
+        let start = end;
+        const Two = `${cursorLine.charAt(start - 2)}${cursorLine.charAt(start - 1)}`;
+        const One = `${cursorLine.charAt(start - 1)}`;
+        let list = [];
+        if (Two === "$") {
+            hintList.forEach(e => {
+                list.push(e.name)
+            })
+        } 
+        // else if (One === ".") {
+        //   let lastIndex = cursorLine.lastIndexOf('$', start)
+        //   let key = cursorLine.substring(lastIndex + 2, start - 1)
+        //   list = []
+        //   hintList.forEach((e) => {
+        //     if (e.name === key && lastIndex !== -1 && Object.prototype.toString.call(e.value) === "[object Array]") {
+        //         e.value.forEach(el => {
+        //             list.push(el.name)
+        //         })
+        //     }
+        //   })
+        // }
+        // 得到光标标识
+        let token = cmInstance.getTokenAt(cursor);
+        return {
+            list: list,
+            from: { ch: end, line: cursor.line },
+            to: { ch: token.end, line: cursor.line },
+        };
+    }
+    
+    return(
+        <CodeMirror
+            ref={mirrorRefs}
+            value={expandValue}//内容
+            options={{
+                mode: {name:"shell",shell: true },//语言
+                theme:"dracula",
+                autofocus:true,
+                lineNumbers: true, // 是否显示行号
+                lineWrapping:true,
+                styleActiveLine:true,
+                foldGutter: true,
+                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+                hintOptions:{hint:handleShowHint,completeSingle: false}
+
+            }}
+            onInputRead={(editor,change) =>{
+                editor.showHint()
             }}
         />
     )
@@ -71,26 +206,6 @@ export const PostposeMirrorScenario = props =>{
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             }}
             onFocus={e=>onFocus(e)}
-        />
-    )
-}
-
-export const ExpandMirror = props =>{
-    const {expandValue,mirrorRefs} = props
-    return(
-        <CodeMirror
-            ref={mirrorRefs}
-            value={expandValue}//内容
-            options={{
-                mode: {name:"shell",shell: true },//语言
-                theme:"dracula",
-                autofocus:true,
-                lineNumbers: true, // 是否显示行号
-                lineWrapping:true,
-                styleActiveLine:true,
-                foldGutter: true,
-                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-            }}
         />
     )
 }

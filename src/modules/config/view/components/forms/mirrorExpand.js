@@ -1,9 +1,9 @@
 import React,{useEffect,useState,useRef} from "react";
 import {Modal} from "antd";
 import {CompressOutlined} from "@ant-design/icons";
-import {autoHeight} from "../../../../../common/client/client";
-import {ExpandMirror} from "../../../../common/components/mirror";
-import Btn from "../../../../../common/btn/btn";
+import {autoHeight} from "../../../../common/client/client";
+import {ExpandMirror} from "../../../common/components/mirror";
+import Btn from "../../../../common/btn/btn";
 
 const MirrorExpand = props =>{
 

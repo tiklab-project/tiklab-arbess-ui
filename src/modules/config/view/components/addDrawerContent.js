@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Col,Row} from "antd";
 import {inject,observer} from "mobx-react";
-import SubIcon from "../../../common/components/subIcon";
+import SubIcon from "../../common/components/subIcon";
 
 const lis=[
     {

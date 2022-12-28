@@ -1,4 +1,6 @@
 import React from "react";
+import maven from "../../../../assets/images/img/maven.png";
+import nexus from "../../../../assets/images/img/nexus.png";
 
 
 const SubIcon = props =>{
@@ -31,7 +33,10 @@ const SubIcon = props =>{
             case 11:
                 return renderSubIcon("ceshi","maven单元测试")
             case 21:
-                return renderSubIcon("goujian","maven")
+                return <>
+                    <img src={maven} alt="maven" style={{width:20,height:20,paddingRight:8}}/>
+                    <span className="subicon-title">maven构建</span>
+                </>
             case 22:
                 return renderSubIcon("nodejs","node")
             case 31:
@@ -41,7 +46,11 @@ const SubIcon = props =>{
             case 41:
                 return renderSubIcon("sonarqube","sonarQuebe")
             case 51:
-                return renderSubIcon("tuisong","nexus")
+                // return renderSubIcon("tuisong","nexus")
+                return  <>
+                            <img src={nexus} alt="maven" style={{width:40,height:34,paddingRight:8}}/>
+                            <span className="subicon-title">nexus</span>
+                        </>
             case 52:
                 return renderSubIcon("ssh","SSH")
             case 61:

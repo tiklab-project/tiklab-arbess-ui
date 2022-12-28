@@ -30,6 +30,10 @@ const PostposeAdd = props =>{
         }
     },[height])
 
+    window.onresize=() =>{
+        setHeight(autoHeight())
+    }
+
     useEffect(()=>{
         if(postposeVisible){
             setStyleActiveLine(false)
@@ -69,10 +73,6 @@ const PostposeAdd = props =>{
             }
         })
     },[postposeVisible])
-
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
 
     // 移出用户
     const remove = (record) =>{
@@ -130,6 +130,17 @@ const PostposeAdd = props =>{
         </>
     )
 
+    // 通知人员通知事件
+    const changType = (value,record)=>{
+        yUserList && yUserList.map(item=>{
+            if(item.user.id===record.user.id){
+                item.type=value
+            }
+        })
+        setYUserList([...yUserList])
+    }
+
+    // 脚本高亮
     const onFocus = () =>{
         setStyleActiveLine(true)
     }
@@ -159,6 +170,7 @@ const PostposeAdd = props =>{
                     defaultValue={record.type}
                     bordered={false}
                     style={{width:80}}
+                    onChange={value=>changType(value,record)}
                 >
                     <Select.Option value={1}>全部</Select.Option>
                     <Select.Option value={2}>仅成功</Select.Option>
@@ -225,7 +237,9 @@ const PostposeAdd = props =>{
                                     <Checkbox.Group>
                                         <Checkbox value="site">站内信</Checkbox>
                                         <Checkbox value="sms">短信通知</Checkbox>
-                                        <Checkbox value="wechat">企业微信</Checkbox>
+                                        <Checkbox value="wechat">企业微信机器人</Checkbox>
+                                        <Checkbox value="dingding">钉钉机器人</Checkbox>
+                                        <Checkbox value="mail">邮箱通知</Checkbox>
                                     </Checkbox.Group>
                                 </Form.Item>
                                 <div className="post-pose-user">

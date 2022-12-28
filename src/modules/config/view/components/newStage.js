@@ -8,7 +8,7 @@ import {
     DeleteOutlined,
     EditOutlined
 } from "@ant-design/icons";
-import SIcon from "../../../common/components/sIcon";
+import SIcon from "../../common/components/sIcon";
 import AddDrawer from "./addDrawer";
 
 const NewStage = props =>{

@@ -90,6 +90,11 @@ const VariableAdd = props =>{
         setOpt([...newArr])
     }
 
+    const onChange = () =>{
+        const list = form.getFieldValue("valueList").some(item=>item===form.getFieldValue("varValue"))
+        !list && form.setFieldsValue({varValue:null})
+    }
+
     return(
         <Modal
             visible={variableVisible}
@@ -148,12 +153,11 @@ const VariableAdd = props =>{
                                                                 }]}
                                                             noStyle
                                                          >
-                                                            <Input placeholder="可选项" style={{ width:"60%",marginRight:30 }} />
+                                                            <Input placeholder="可选项" style={{width:"60%",marginRight:30}} onChange={onChange}/>
                                                         </Form.Item>
                                                         {fields.length > 1 && <MinusCircleOutlined onClick={()=>{
                                                             remove(field.name)
-                                                            const list = form.getFieldValue("valueList").some(item=>form.getFieldValue("varValue")===item)
-                                                            !list && form.setFieldsValue({varValue:null})
+                                                            onChange()
                                                         }}/>}
                                                     </Form.Item>
                                                  ))}

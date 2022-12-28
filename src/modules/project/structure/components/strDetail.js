@@ -29,28 +29,51 @@ const StrDetail = props =>{
     const [id,setId] = useState("")
 
     useEffect(()=>{
-        if(index===2 && itemData){
-            const data = itemData.runLogList
-            pipeline && pipeline.type===1 ? setLogData(itemData):setLogData(data[execIndex])
-            setTreeData(data[0])
-        }
-        return ()=>{
-            setExecIndex(0)
-        }
-    },[itemData,execIndex])
-
-    useEffect(()=>{
-        if(index===1 && execData){
-            const data = execData.runLogList
-            setTreeData(data[execIndex])
-            id ? setLogData(isequals(data)) :
-                (pipeline && pipeline.type===1 ? setLogData(execData) : setLogData(data[0]) )
-        }
         return ()=>{
             setId("")
             setExecIndex(0)
         }
+    },[])
+
+    useEffect(()=>{
+        if(index===2 && itemData){
+            const data = itemData.runLogList
+            pipeline && pipeline.type===1 ? setLogData(itemData):setLogData(data[0])
+            setTreeData(data[0])
+        }
+    },[itemData])
+
+    useEffect(()=>{
+        if(index===1 && execData){
+            const data = execData.runLogList
+            if(id){
+                setTreeData(data[execIndex])
+                setLogData(isequals(data))
+            }else{
+                if(pipeline && pipeline.type===1){
+                    setLogData(execData)
+                    return
+                }
+                setLogData(isEuqals(data))
+                setTreeData(isEuqals(data))
+            }
+        }
     },[execData,execIndex,id])
+
+    const isEuqals = data =>{
+        let a
+        if(data && data.some(item=>item.state===0)){
+            data && data.map(item=>{
+                if(item.state===0){
+                    a = item  
+                }
+            })
+        }
+        else{
+            a = data[data && data.length-1]
+        }
+        return a
+    }
 
     const isequal = data =>{
         for(let i=0 ; i<data.length;i++){
