@@ -12,7 +12,7 @@ import {observer} from "mobx-react";
 
 const ProjectAside = props =>{
 
-    const {pipelineStore,configStore} = props
+    const {pipelineStore,configStore,setIsLoading} = props
 
     let path = props.location.pathname
     const [nav,setNav] = useState("")
@@ -55,11 +55,13 @@ const ProjectAside = props =>{
     const changePipeline = item => {
         setTaskFormDrawer(false)
         if(pipelineId!==item.id){
+            setIsLoading(true)
             if(path.indexOf(`/index/task/${pipelineId}/assembly`) === 0) {
                 props.history.push(`/index/task/${item.id}/assembly/${lastPath}`)
             }else {
                 props.history.push(`/index/task/${item.id}/${lastPath}`)
             }
+            setTimeout(()=>setIsLoading(false),150)
         }
     }
 

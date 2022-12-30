@@ -61,23 +61,25 @@ export const ViewMirror = props =>{
         let start = end;
         const Two = `${cursorLine.charAt(start - 2)}${cursorLine.charAt(start - 1)}`;
         const One = `${cursorLine.charAt(start - 1)}`;
+        
         let list = [];
-        if (Two === "$") {
+        if (One === "$") {
           hintList.forEach(e => {
             list.push(e.name)
           })
-        } else if (One === ".") {
-          let lastIndex = cursorLine.lastIndexOf('${', start)
-          let key = cursorLine.substring(lastIndex + 2, start - 1)
-          list = []
-          hintList.forEach((e) => {
-            if (e.name === key && lastIndex !== -1 && Object.prototype.toString.call(e.value) === '[object Array]') {
-              e.value.forEach(el => {
-                list.push(el.name)
-              })
-            }
-          })
-        }
+        } 
+        // else if (One === ".") {
+        //   let lastIndex = cursorLine.lastIndexOf('${', start)
+        //   let key = cursorLine.substring(lastIndex + 2, start - 1)
+        //   list = []
+        //   hintList.forEach((e) => {
+        //     if (e.name === key && lastIndex !== -1 && Object.prototype.toString.call(e.value) === '[object Array]') {
+        //       e.value.forEach(el => {
+        //         list.push(el.name)
+        //       })
+        //     }
+        //   })
+        // }
         // 得到光标标识
         let token = cmInstance.getTokenAt(cursor);
         return {

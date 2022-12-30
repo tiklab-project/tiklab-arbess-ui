@@ -35,19 +35,23 @@ const ServerModal = props =>{
         }else {
             form.resetFields()
             setServerWay(type)
+            setCallUrlWarn("")
         }
     }
 
     useEffect(()=>{
         visible && setAuth()
+    },[visible,serverWay,fresh])
+
+    useEffect(()=>{
         visible && window.addEventListener("storage", authorisation)
         return () => {
             window.removeEventListener("storage", authorisation)
         }
-    },[visible,serverWay,fresh])
+    },[visible])
 
     const authorisation = () =>{
-        let codeValue = localStorage.getItem("codeValue");
+        let codeValue = localStorage.getItem("codeValue")
         if(codeValue!==null) {
             if (codeValue==="false"){
                 message.info("拒绝授权或授权失败")

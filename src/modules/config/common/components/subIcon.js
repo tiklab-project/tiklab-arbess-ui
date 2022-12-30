@@ -48,7 +48,7 @@ const SubIcon = props =>{
             case 51:
                 // return renderSubIcon("tuisong","nexus")
                 return  <>
-                            <img src={nexus} alt="maven" style={{width:40,height:34,paddingRight:8}}/>
+                            <img src={nexus} alt="maven" style={{width:25,height:20,paddingRight:8}}/>
                             <span className="subicon-title">nexus</span>
                         </>
             case 52:

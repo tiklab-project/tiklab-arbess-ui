@@ -42,7 +42,7 @@ const Config = props =>{
         if(isDetails && pipelineId){
             interval=setInterval(()=>
                 pipelineRunStatus(pipeline.id).then(res=>{
-                    if(res.code===0){ res.data.allState === 0 && clearInterval(interval)}
+                    if(res.code===0){ res.data && res.data.allState === 0 && clearInterval(interval)}
                 }), 1000)
         }
         return ()=> clearInterval(interval)

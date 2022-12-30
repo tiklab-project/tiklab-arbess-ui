@@ -9,7 +9,7 @@ import {
     SafetyCertificateOutlined,
     SoundOutlined,
     SwitcherOutlined,
-    VerifiedOutlined
+    VerifiedOutlined,
 } from "@ant-design/icons";
 
 const System = props =>{

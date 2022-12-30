@@ -19,7 +19,7 @@ module.exports = merge(baseWebpackConfig, {
     entry: [
         path.resolve(__dirname, "./src/index.js")
     ],
-    devtool: 'inline-source-map',
+    devtool: "inline-source-map",
     plugins: [
         new optimizeCss({
             assetNameRegExp: /\.css$/g,

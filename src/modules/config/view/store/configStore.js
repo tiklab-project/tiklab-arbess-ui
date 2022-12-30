@@ -126,6 +126,7 @@ export class ConfigStore{
                     this.mess("更新成功")
                     this.enabledValid=!this.enabledValid
                     this.isFindConfig=!this.isFindConfig
+                    this.dataItem[Object.keys(values.values)[0]] = Object.values(values.values)[0]
                 }
                 resolve(res)
             }).catch(error=>{

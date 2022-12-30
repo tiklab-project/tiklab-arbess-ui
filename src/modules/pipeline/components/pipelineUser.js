@@ -70,12 +70,12 @@ const PipelineUser = props =>{
                     defaultValue={record.id===userId ?"1":"2"}
                     bordered={false}
                     showarrow={"false"}
-                    style={{width:100}}
+                    style={{width:120}}
                     disabled={record.id===userId}
                     onChange={value=>changePower(record,value)}
                 >
-                    <Select.Option value={"1"}>管理员</Select.Option>
-                    <Select.Option value={"2"}>项目成员</Select.Option>
+                    <Select.Option value={"1"}>管理员角色</Select.Option>
+                    <Select.Option value={"2"}>默认角色</Select.Option>
                 </Select>
             )
         },

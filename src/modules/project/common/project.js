@@ -4,6 +4,7 @@ import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/lib/store";
 import ProjectAside from "./projectAside";
+import Loading from "../../common/loading/loading";
 
 const Project= (props)=>{
 
@@ -21,21 +22,16 @@ const Project= (props)=>{
             const data = res.data
             if(res.code===0 && data){
                 // // 如果不存在就重定向404
-                // if(!isPipeline(data)){
-                //     props.history.push("/index/404")
-                // }else {
-                //     data && data.map(item=>{
-                //         if(item.pipelineId === pipelineId){
-                //             setPipelineName(item.pipelineId)
-                //         }
-                //     })
-                // }
-                data && data.map(item=>{
-                    if(item.id === pipelineId){
-                        setPipeline(item)
-                        getInitProjectPermissions(userId,pipelineId,item.power===1)
-                    }
-                })
+                if(!isPipeline(data)){
+                    props.history.push("/404")
+                }else {
+                    data && data.map(item=>{
+                        if(item.id === pipelineId){
+                            setPipeline(item)
+                            getInitProjectPermissions(userId,pipelineId,item.power===1)
+                        }
+                    })
+                }
             }
         })
     },[pipelineId])
@@ -48,16 +44,23 @@ const Project= (props)=>{
         return ()=>setPipeline("")
     },[pipelineId])
 
+    const [isLoading,setIsLoading] = useState(false)
+
     return(
         <div className="project">
             <ProjectAside
                 {...props}
                 pipelineStore={pipelineStore}
                 configStore={configStore}
+                setIsLoading={setIsLoading}
             />
-            <div className="project-content">
-                {renderRoutes(route.routes)}
-            </div>
+            {
+                isLoading ? <Loading/> :
+                <div className="project-content">
+                    {renderRoutes(route.routes)}
+                </div>
+            }
+
         </div>
     )
 }

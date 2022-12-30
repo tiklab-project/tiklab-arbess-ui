@@ -13,12 +13,6 @@ const ProjectSetAside = props =>{
 
     const {setLastPath,pipelineId} = pipelineStore
 
-    useEffect(()=>{
-        setLastPath(path.substring(path.lastIndexOf('/') + 1))
-        setNav(path)
-    },[path])
-
-
     // 侧边流水线设置的第二级导航
     const secondRouter = [
         {
@@ -37,6 +31,11 @@ const ProjectSetAside = props =>{
             enCode:"pipeline_auth",
         }
     ]
+
+    useEffect(()=>{
+        setLastPath(path.substring(path.lastIndexOf('/') + 1))
+        setNav(path)
+    },[path])
 
     const navContent = item =>{
         return <div

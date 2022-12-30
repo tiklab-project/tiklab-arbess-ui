@@ -37,7 +37,7 @@ const SIcon = props =>{
             case 41:
                 return renderIcon("sonarqube")
             case 51:
-                return <img src={nexus} alt="nexus" style={{width:30,height:30}}/>
+                return <img src={nexus} alt="nexus" style={{width:14,height:16}}/>
             case 52:
                 return renderIcon("ssh")
             case 61:

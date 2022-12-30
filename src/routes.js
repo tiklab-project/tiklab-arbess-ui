@@ -4,9 +4,10 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Index=AsyncComponent(()=>import("./modules/home/container/home"))
 
-const Login=AsyncComponent(()=>import("./modules/login/login"))
-const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
-const Wechat=AsyncComponent(()=>import("./modules/login/wechat"))
+const Login=AsyncComponent(()=>import("./modules/eam/login"))
+const Logout=AsyncComponent(()=>import("./modules/eam/Logout"))
+const Wechat=AsyncComponent(()=>import("./modules/eam/wechat"))
+const NotFound=AsyncComponent(()=>import("./modules/eam/404"))
 
 /* 首页 */
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
@@ -59,8 +60,8 @@ const MessageManagement=AsyncComponent(()=>import("./modules/system/message/mess
 const MessageType=AsyncComponent(()=>import("./modules/system/message/messageType"))
 const MessageSendType=AsyncComponent(()=>import("./modules/system/message/messageSendType"))
 const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/system/message/messageSendTypeTrue"))
-const MessageNoticeContent=AsyncComponent(()=>import("./modules/system/message/messageNotice"))
-const MessageNoticeContentTrue=AsyncComponent(()=>import("./modules/system/message/messageNoticeTrue"))
+const MessageNotice=AsyncComponent(()=>import("./modules/system/message/messageNotice"))
+const MessageNoticeTrue=AsyncComponent(()=>import("./modules/system/message/messageNoticeTrue"))
 
 /* 日志 */
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
@@ -80,9 +81,12 @@ const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const UserGroup=AsyncComponent(()=>import("./modules/system/user/group"))
 const UserGroupTrue=AsyncComponent(()=>import("./modules/system/user/groupture"))
 
+const ProductUser=AsyncComponent(()=>import("./modules/system/licence/productUser"))
+const NoProductAuthUser=AsyncComponent(()=>import("./modules/eam/noProductAuthUser"))
+
+
 /* 版本与许可证 */
 const Version=AsyncComponent(()=>import("./modules/system/licence/version"))
-const Licence=AsyncComponent(()=>import("./modules/system/licence/licence"))
 
 const FullWorkTodo=AsyncComponent(()=>import("./modules/wiget/fullWorkTodo"))
 const WidgetMangent=AsyncComponent(()=>import("./modules/wiget/widgetMangent"))
@@ -97,6 +101,11 @@ const routers=[
     {
         path:"/logout",
         component:Logout,
+    },
+    {
+        path:"/no-auth",
+        exact:true,
+        component:NoProductAuthUser,
     },
     {
         path: "/project",
@@ -166,15 +175,27 @@ const routers=[
                             {
                                 path:"/index/task/:id/assembly/user",
                                 component: ProjectSetUser
+                            },
+                            {
+                                path:"/index/task/:id/*",
+                                render:()=><Redirect to={"/index/404"}/>,
                             }
                         ]
                     },
+                    {
+                        path:"/index/task/*",
+                        render:()=><Redirect to={"/index/404"}/>,
+                    }
                 ]
             },
             {
                 path:"/index/system",
                 component:System,
                 routes:[
+                    {
+                        path: "/index/system/productUser",
+                        component: ProductUser,
+                    },
                     {
                         path: "/index/system/plugin",
                         component: Plugin,
@@ -281,11 +302,11 @@ const routers=[
                     },
                     {
                         path:"/index/system/mes/notice",
-                        component: MessageNoticeContent,
+                        component: MessageNotice,
                     },
                     {
                         path:"/index/system/mes/noticetrue",
-                        component: MessageNoticeContentTrue,
+                        component: MessageNoticeTrue,
                     },
                     {
                         path: "/index/system/user/userGrouptrue",
@@ -295,8 +316,20 @@ const routers=[
                         path:"/index/system/version",
                         component: Version,
                     },
+                    {
+                        path:"/index/system/*",
+                        render:()=><Redirect to={"/index/404"}/>,
+                    }
                 ]
             },
+            {
+                path:"/index/404",
+                component:NotFound,
+            },
+            {
+                path:"/index/*",
+                render:()=><Redirect to={"/index/404"}/>,
+            }
         ]
     },
     {
@@ -304,6 +337,10 @@ const routers=[
         component: Index,
         exact: true,
         render:()=><Redirect to="/index"/>,
+    },
+    {
+        path: "*",
+        render:()=><Redirect to="/index/404"/>,
     },
 ]
 
