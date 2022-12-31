@@ -8,7 +8,8 @@ import {
     UpdatePipeline,
     FindAllFollow,
     UpdateFollow,
-    FindUserPage
+    FindUserPage,
+    FindDmUserPage
 } from "../api/pipeline";
 
 import {getUser} from "tiklab-core-ui";
@@ -190,6 +191,22 @@ export class PipelineStore {
         return data
     }
 
+    @observable pipelineUserList = []
+    @action
+    findDmUserPage = async value =>{
+        const params = {
+            pageParam:{
+                pageSize:10,
+                currentPage:1
+            },
+            domainId:value
+        }
+        const data = await FindDmUserPage(params)
+        if(data.code===0){
+            this.pipelineUserList = data.data && data.data.dataList
+        }
+        return data
+    }
 }
 
 export const PIPELINE_STORE = "pipelineStore"

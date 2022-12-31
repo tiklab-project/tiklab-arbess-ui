@@ -64,10 +64,19 @@ export function  UpdateFollow(data){
     })
 }
 
-//查找用户
+//查找系统用户
 export function  FindUserPage(data){
     return serviceLoc.request({
         url:"/user/user/findUserPage",
+        method:"post",
+        data
+    })
+}
+
+//查找项目用户
+export function  FindDmUserPage(data){
+    return serviceLoc.request({
+        url:"/dmUser/findDmUserPage",
         method:"post",
         data
     })

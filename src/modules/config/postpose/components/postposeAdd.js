@@ -2,16 +2,16 @@ import React,{useState,useEffect,useRef} from "react";
 import {Modal,Form,Select,Checkbox,Table,Space,Tooltip} from "antd";
 import {DeleteOutlined,PlusOutlined} from "@ant-design/icons";
 import {Profile} from "tiklab-eam-ui";
+import {PostposeMirrorScenario} from "../../common/components/mirror";
+import {autoHeight} from "../../../common/client/client";
 import Btn from "../../../common/btn/btn";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import EmptyText from "../../../common/emptyText/emptyText";
 import PostposeUserAdd from "./postposeUserAdd";
-import {autoHeight} from "../../../common/client/client";
-import {PostposeMirrorScenario} from "../../common/components/mirror";
 
 const PostposeAdd = props =>{
 
-    const {postposeVisible,setPostposeVisible,createPostConfig,pipelineId,formValue,userId,findUserPage,updatePostConfig} = props
+    const {postposeVisible,setPostposeVisible,createPostConfig,pipelineId,formValue,userId,findDmUserPage,updatePostConfig} = props
 
     const [form] = Form.useForm()
     const mirrorRefs = useRef(null)
@@ -53,7 +53,7 @@ const PostposeAdd = props =>{
 
 
     useEffect(()=>{
-        postposeVisible && findUserPage().then(res=>{
+        postposeVisible && findDmUserPage(pipelineId).then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
                 setAllUserList([...dataList])
@@ -63,9 +63,9 @@ const PostposeAdd = props =>{
                 else{
                     let arr = []
                     dataList.map(item=>{
-                        item.id===userId && arr.push({
-                            user:item,
-                            type:1
+                        item.user.id===userId && arr.push({
+                            ...item,
+                            messageType:1
                         })
                         setYUserList([...arr])
                     })
@@ -75,7 +75,7 @@ const PostposeAdd = props =>{
     },[postposeVisible])
 
     // 移出用户
-    const remove = (record) =>{
+    const remove = record =>{
         setYUserList(yUserList.filter(item=>item.user.id!==record.user.id))
     }
 
@@ -83,7 +83,7 @@ const PostposeAdd = props =>{
         let newArr = []
         yUserList && yUserList.map(item=>{
             newArr.push({
-                type:item.type,
+                messageType:item.messageType,
                 user:{id:item.user.id}
             })
         })
@@ -134,7 +134,7 @@ const PostposeAdd = props =>{
     const changType = (value,record)=>{
         yUserList && yUserList.map(item=>{
             if(item.user.id===record.user.id){
-                item.type=value
+                item.messageType=value
             }
         })
         setYUserList([...yUserList])
@@ -153,10 +153,10 @@ const PostposeAdd = props =>{
             width:"50%",
             ellipsis:true,
             render:(text,record)=>{
-                return <Space>
-                    <Profile userInfo={record}/>
-                    {text}
-                </Space>
+                return  <Space>
+                            <Profile userInfo={record.user}/>
+                            {text}
+                        </Space>
             }
         },
         {
@@ -167,7 +167,7 @@ const PostposeAdd = props =>{
             ellipsis:true,
             render:(text,record)=>(
                 <Select
-                    defaultValue={record.type}
+                    defaultValue={record.messageType}
                     bordered={false}
                     style={{width:80}}
                     onChange={value=>changType(value,record)}
@@ -187,8 +187,8 @@ const PostposeAdd = props =>{
             render: (text,record) => {
                 if (record.user.id !== userId) {
                     return  <Tooltip title="移出用户">
-                        <DeleteOutlined onClick={()=>remove(record)}/>
-                    </Tooltip>
+                                <DeleteOutlined onClick={()=>remove(record)}/>
+                            </Tooltip>
                 }
             }
         },

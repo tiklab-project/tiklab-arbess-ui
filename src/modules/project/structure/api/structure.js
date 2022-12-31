@@ -72,12 +72,3 @@ export function  DeleteHistoryLog (data){
         data
     })
 }
-
-// 查询构建用户
-export function  FindPipelineUser(data){
-    return serviceLoc.request({
-        url:"/pipeline/findPipelineUser",
-        method:"post",
-        data
-    })
-}

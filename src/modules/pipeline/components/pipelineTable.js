@@ -38,11 +38,13 @@ const PipelineTable = props =>{
         }
     }
 
-    //去详情页面
+    //去概况页面
     const goPipelineTask= (text,record) => props.history.push(`/index/task/${record.id}/survey`)
 
+    //去历史页面
     const goHistory = record => props.history.push(`/index/task/${record.id}/structure`)
 
+    //运行或者停止
     const work = record =>{
         if(record.state === 2){
             killInstance(record.id).then(()=>{

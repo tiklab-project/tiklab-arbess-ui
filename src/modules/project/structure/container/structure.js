@@ -25,11 +25,10 @@ const Structure = props => {
     const {structureStore,pipelineStore} = props
 
     const {findPipelineState,pipelineRunStatus,findPageHistory,deleteHistoryLog,
-        findAllLog,findPipelineUser,killInstance,
-        leftPageList,pageCurrent,setPageCurrent,freshen,
-        execData,page,pipelineUserList
+        findAllLog,killInstance,leftPageList,pageCurrent,setPageCurrent,freshen,
+        execData,page,
     } = structureStore
-    const {pipelineId,pipeline} = pipelineStore
+    const {pipelineId,pipeline,findDmUserPage,pipelineUserList} = pipelineStore
     
     const [index,setIndex] = useState(0) //
     const [state,setState] = useState(0)
@@ -39,7 +38,7 @@ const Structure = props => {
 
     useEffect(()=>{
         if(pipelineId){
-            findPipelineUser(pipelineId)
+            findDmUserPage(pipelineId)
         }
         return()=>{
             setIsDetails(false)
@@ -252,7 +251,6 @@ const Structure = props => {
                     setEnforcer={setEnforcer}
                     setType={setType}
                     changPage={changPage}
-                    pipelineId={pipelineId}
                 />
                 <div className="structure-content-table">
                     <Table

@@ -34,59 +34,51 @@ export const ViewMirror = props =>{
 
     const handleShowHint = () =>{
         const hintList = [
-          {
-            name: "xiaohong",
-            value: "xiaohong"
-          },
-          {
-            name: "xiaozhang",
-            value: [
-              {
-                name: "xiaoli",
-              },
-              {
-                name: "xiaosun",
-              },
-            ],
-          },
-        ];
-        const cmInstance = mirrorRefs.current.editor;
+            {
+                name: "xiaohong",
+                value: "xiaohong"
+            },
+            {
+                name: "xiaozhang",
+                value: [
+                    {
+                        name: "xiaoli",
+                    },
+                    {
+                        name: "xiaosun",
+                    },
+                ],
+            },
+        ]
+        const cmInstance = mirrorRefs.current.editor
         // 得到光标
-        let cursor = cmInstance.getCursor();
+        let cursor = cmInstance.getCursor()
         // 得到行内容
         let cursorLine = cmInstance.getLine(cursor.line)
-        
         // 得到光标位置
-        let end = cursor.ch;
-        let start = end;
-        const Two = `${cursorLine.charAt(start - 2)}${cursorLine.charAt(start - 1)}`;
-        const One = `${cursorLine.charAt(start - 1)}`;
+        let end = cursor.ch
+        // 得到输入的当前输入的字符
+        const One = `${cursorLine.charAt(end - 1)}`
+        // 得到最后空格后面的字符串，无空格第一个字符串
+        const Two = cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1]
         
-        let list = [];
+        if(One.trim() !== ""){
+            console.log(Two,"cursorLine")
+        }
+        let list = []
         if (One === "$") {
-          hintList.forEach(e => {
-            list.push(e.name)
-          })
+            hintList.forEach(e => {
+                list.push(e.name)
+            })
         } 
-        // else if (One === ".") {
-        //   let lastIndex = cursorLine.lastIndexOf('${', start)
-        //   let key = cursorLine.substring(lastIndex + 2, start - 1)
-        //   list = []
-        //   hintList.forEach((e) => {
-        //     if (e.name === key && lastIndex !== -1 && Object.prototype.toString.call(e.value) === '[object Array]') {
-        //       e.value.forEach(el => {
-        //         list.push(el.name)
-        //       })
-        //     }
-        //   })
-        // }
+
         // 得到光标标识
-        let token = cmInstance.getTokenAt(cursor);
+        let token = cmInstance.getTokenAt(cursor)
         return {
-          list: list,
-          from: { ch: end, line: cursor.line },
-          to: { ch: token.end, line: cursor.line },
-        };
+            list: list,
+            from: { ch: end, line: cursor.line },
+            to: { ch: token.end, line: cursor.line },
+        }
     }
     
     return(
@@ -114,60 +106,52 @@ export const ViewMirror = props =>{
 
 export const ExpandMirror = props =>{
     const {expandValue,mirrorRefs} = props
+
     const handleShowHint = () =>{
         const hintList = [
-          {
-            name: "xiaohong",
-            value: "xiaohong"
-          },
-          {
-            name: "xiaozhang",
-            value: [
-              {
-                name: "xiaoli",
-              },
-              {
-                name: "xiaosun",
-              },
-            ],
-          },
-        ];
-        const cmInstance = mirrorRefs.current.editor;
+            {
+                name: "xiaohong",
+                value: "xiaohong"
+            },
+            {
+                name: "xiaozhang",
+                value: [
+                    {
+                        name: "xiaoli",
+                    },
+                    {
+                        name: "xiaosun",
+                    },
+                ],
+            },
+        ]
+        const cmInstance = mirrorRefs.current.editor
         // 得到光标
-        let cursor = cmInstance.getCursor();
+        let cursor = cmInstance.getCursor()
         // 得到行内容
         let cursorLine = cmInstance.getLine(cursor.line)
-        
         // 得到光标位置
-        let end = cursor.ch;
-        let start = end;
-        const Two = `${cursorLine.charAt(start - 2)}${cursorLine.charAt(start - 1)}`;
-        const One = `${cursorLine.charAt(start - 1)}`;
-        let list = [];
-        if (Two === "$") {
+        let end = cursor.ch
+        // 得到每一个输入的值
+        const One = `${cursorLine.charAt(end - 1)}`
+
+        if(One.trim() !== ""){
+            console.log(cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1],"cursorLine")
+        }
+        let list = []
+        if (One === "$") {
             hintList.forEach(e => {
                 list.push(e.name)
             })
-        } 
-        // else if (One === ".") {
-        //   let lastIndex = cursorLine.lastIndexOf('$', start)
-        //   let key = cursorLine.substring(lastIndex + 2, start - 1)
-        //   list = []
-        //   hintList.forEach((e) => {
-        //     if (e.name === key && lastIndex !== -1 && Object.prototype.toString.call(e.value) === "[object Array]") {
-        //         e.value.forEach(el => {
-        //             list.push(el.name)
-        //         })
-        //     }
-        //   })
-        // }
+        }
+
         // 得到光标标识
-        let token = cmInstance.getTokenAt(cursor);
+        let token = cmInstance.getTokenAt(cursor)
         return {
             list: list,
             from: { ch: end, line: cursor.line },
             to: { ch: token.end, line: cursor.line },
-        };
+        }
     }
     
     return(

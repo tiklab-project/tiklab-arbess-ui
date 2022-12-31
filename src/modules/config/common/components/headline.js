@@ -14,8 +14,7 @@ const Headline = props =>{
             case 4: return "代码扫描"
             case 5: return "推送制品"
             case 6: 
-            case 7: 
-                return "后置处理"
+            case 7: return "后置处理"
             case 81: return "定时触发"
         }
     }

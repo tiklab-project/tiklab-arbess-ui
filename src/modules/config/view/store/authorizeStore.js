@@ -40,8 +40,10 @@ export class AuthorizeStore {
         params.append("authId",value.authId)
         params.append("type",value.type)
         const data = await FindAllStorehouse(params)
-        if(data.code===0 && data.data){
+        if(data.code===0){
             this.storehouseList = data.data
+        }else {
+            this.storehouseList = []
         }
     }
 
@@ -52,11 +54,12 @@ export class AuthorizeStore {
         params.append("authId",value.authId)
         params.append("houseName",value.houseName)
         const data =  await FindBranch(params)
-        if(data.code===0 && data.data){
+        if(data.code===0){
             this.branchList = data.data
         }
         else {
-            message.info(data.msg)
+            message.info(data.msg,0.5)
+            this.branchList = []
         }
     }
 

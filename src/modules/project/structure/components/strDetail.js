@@ -60,6 +60,7 @@ const StrDetail = props =>{
         }
     },[execData,execIndex,id])
 
+    // 运行日志打印（自动）
     const isEuqals = data =>{
         let a
         if(data && data.some(item=>item.state===0)){

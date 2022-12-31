@@ -56,24 +56,7 @@ const SystemContent= props =>  {
 
     useEffect(()=>{
         setSelectKey(path)
-        const newArr=iseuq([...departmentRouters(department && department),...applicationRouters(department && department)])
-        if(newArr){
-            const cc = systemPermissions && systemPermissions.some(item=>item===newArr.purviewCode)
-            !cc && props.history.push("/index/404")
-        }
     },[path])
-
-    const iseuq = newArr =>{
-        let a
-        newArr && newArr.map(item=>{
-            if(item.id===path){
-                a = item
-            }else{
-                iseuq(item.children)
-            }
-        })
-        return a
-    }
 
     const select = data =>{
         props.history.push(data.id)

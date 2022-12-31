@@ -1,7 +1,6 @@
 import React from "react";
 import {Popconfirm,Tooltip} from "antd";
 import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
-import "./listaction.scss";
 
 const Listaction = props =>{
 
@@ -9,7 +8,7 @@ const Listaction = props =>{
 
     return <span className="mf-listAction">
                     <Tooltip title="修改">
-                        <span onClick={edit} className="edit">
+                        <span onClick={edit} className="edit" style={{cursor:"pointer",marginRight:15}}>
                             <EditOutlined />
                         </span>
                     </Tooltip>
@@ -21,7 +20,7 @@ const Listaction = props =>{
                             okText="确定"
                             cancelText="取消"
                         >
-                            <span className="del">
+                            <span className="del" style={{cursor:"pointer"}}>
                                 <DeleteOutlined />
                             </span>
                         </Popconfirm>

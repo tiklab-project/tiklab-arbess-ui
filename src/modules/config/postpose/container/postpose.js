@@ -6,7 +6,6 @@ import {getUser} from "tiklab-core-ui";
 import EmptyText from "../../../common/emptyText/emptyText";
 import PostposeAdd from "../components/postposeAdd";
 import SubIcon from "../../common/components/subIcon";
-import Loading from "../../../common/loading/loading";
 import Listaction from "../../../common/list/listaction";
 import Btn from "../../../common/btn/btn";
 import "../components/postpose.scss";
@@ -16,8 +15,8 @@ const Postpose = props =>{
 
     const {pipelineStore,postposeStore} = props
 
-    const {findUserPage,pipelineId} = pipelineStore
-    const {createPostConfig,findAllPostConfig,isFindPostposeData,isLoading,postposeData,deletePostConfig,updatePostConfig} = postposeStore
+    const {findDmUserPage,pipelineId} = pipelineStore
+    const {createPostConfig,findAllPostConfig,isFindPostposeData,postposeData,deletePostConfig,updatePostConfig} = postposeStore
 
     const [postposeVisible,setPostposeVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
@@ -43,40 +42,24 @@ const Postpose = props =>{
     }
 
     const columns = [
-        // {
-        //     title: "名称",
-        //     dataIndex: "execTime",
-        //     key: "execTime",
-        //     // width:"40%",
-        //     // ellipsis:true
-        // },
         {
             title: "类型",
             dataIndex: "type",
             key: "type",
-            // width:"40%",
-            // ellipsis:true
             render:(text,record)=> <SubIcon type={text}/>
         },
         {
             title: "操作",
             dataIndex: "action",
             key: "action",
-            // width:"40%",
-            // ellipsis:true
             render:(text,record) => {
                 return  <Listaction
-                    edit={()=>edit(text,record)}
-                    del={()=>del(text,record)}
-                />
+                            edit={()=>edit(text,record)}
+                            del={()=>del(text,record)}
+                        />
             }
         },
     ]
-
-
-    if(isLoading){
-        return <Loading/>
-    }
 
     return(
         <div className="post-pose">
@@ -94,7 +77,7 @@ const Postpose = props =>{
                         setPostposeVisible={setPostposeVisible}
                         createPostConfig={createPostConfig}
                         updatePostConfig={updatePostConfig}
-                        findUserPage={findUserPage}
+                        findDmUserPage={findDmUserPage}
                         pipelineId={pipelineId}
                         formValue={formValue}
                         userId={userId}
@@ -111,7 +94,6 @@ const Postpose = props =>{
                     />
                 </div>
             </div>
-
         </div>
     )
 }

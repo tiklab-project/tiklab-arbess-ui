@@ -33,10 +33,10 @@ const SubIcon = props =>{
             case 11:
                 return renderSubIcon("ceshi","maven单元测试")
             case 21:
-                return <>
-                    <img src={maven} alt="maven" style={{width:20,height:20,paddingRight:8}}/>
-                    <span className="subicon-title">maven构建</span>
-                </>
+                return  <>
+                            <img src={maven} alt="maven" style={{width:20,height:20,paddingRight:8}}/>
+                            <span className="subicon-title">maven构建</span>
+                        </>
             case 22:
                 return renderSubIcon("nodejs","node")
             case 31:

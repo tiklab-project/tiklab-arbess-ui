@@ -8,7 +8,6 @@ import {
     KillInstance,
     PipelineStartStructure,
     FindPageHistory,
-    FindPipelineUser,
 } from "../api/structure";
 
 import {getUser} from "tiklab-core-ui";
@@ -137,17 +136,6 @@ export class StructureStore {
             message.info("删除成功",0.5)
             this.pageCurrent = 1
             this.freshen = !this.freshen
-        }
-        return data
-    }
-
-    @action
-    findPipelineUser =async value =>{
-        const param = new FormData()
-        param.append("pipelineId", value)
-        const data = await FindPipelineUser(param)
-        if(data.code===0 && data.data){
-            this.pipelineUserList = data.data
         }
         return data
     }

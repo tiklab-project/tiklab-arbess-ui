@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React from "react";
 import {Select} from "antd";
 import {CaretDownOutlined} from "@ant-design/icons";
 
@@ -6,7 +6,7 @@ const {Option} = Select;
 
 const StrScreen = props =>{
 
-    const {setState,setEnforcer,setType,pipelineUserList,changPage,pipelineId} = props
+    const {setState,setEnforcer,setType,pipelineUserList,changPage} = props
 
     const changValue = (value,field) => {
         changPage(1)
@@ -36,7 +36,7 @@ const StrScreen = props =>{
                 <Option key={"全部"} value={null}>全部执行人</Option>
                 {
                     pipelineUserList && pipelineUserList.map(item=>{
-                        return <Option key={item.id} value={item.id}>{item.nickname}</Option>
+                        return <Option key={item.id} value={item.user && item.user.id}>{item.user && item.user.nickname}</Option>
                     })
                 }
             </Select>

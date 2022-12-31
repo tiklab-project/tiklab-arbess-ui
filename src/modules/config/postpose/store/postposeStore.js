@@ -14,7 +14,6 @@ export class PostposeStore {
     @observable postposeData = []
     @observable fixedPostposeData = []
     @observable isFindPostposeData = false
-    @observable isLoading = false
 
     @action
     setIsFindPostposeData = value =>{
