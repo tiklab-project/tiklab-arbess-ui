@@ -1,0 +1,85 @@
+.pose-pose{
+    .pose-pose-up{
+        display: flex;
+        justify-content: space-between;
+    }
+    .inputs-pose{
+        margin-bottom: 12px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .pose-pose-content{
+        padding-top: 10px;
+    }
+    .pose-pose-user .ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
+        padding: 0;
+    }
+    .pose-pose-title{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 8px;
+    }
+    .title-typeList{
+        padding-bottom: 8px;
+    }
+    .title-typeList-error{
+        color: #ed675a;
+        font-size: 13px;
+        line-height: 13px;
+    }
+    .site-collapse-custom-collapse{
+        overflow: hidden;
+        background: #fff;
+        border: 0;
+        border-radius: 4px;
+    }
+    .config-scenario{
+        .CodeMirror{
+            .CodeMirror-placeholder{
+                color: #bfbfbf;
+                font-family: Microsoft YaHei;
+            }
+            .CodeMirror-code{
+                font-family: Microsoft YaHei;
+            }
+            .CodeMirror-gutter-wrapper{
+                left: -41px !important;
+            }
+            .CodeMirror-gutters {
+                left: 0 !important;
+            }
+        }
+    }
+
+}
+
+.pose-pose-dropdown{
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+    border-radius: 4px;
+    background: #ffffff;
+    .dropdown-item{
+        height: 35px;
+        line-height: 35px;
+        padding: 0 15px;
+        &:first-child{
+            border-radius: 4px 4px 0 0;
+        }
+        &:last-child{
+            border-radius: 0 0 4px 4px;
+        }
+        &:hover{
+            background: #f4f4f4;
+            cursor: pointer;
+        }
+    }
+}

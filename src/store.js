@@ -12,6 +12,7 @@ import {SERVER_STORE,ServerStore} from "./modules/resources/server/store/serverS
 import {POSTPOSE_STORE,PostposeStore} from "./modules/config/postpose/store/postposeStore";
 import {TRIGGER_STORE,TriggerStore} from "./modules/config/trigger/store/triggerStore";
 import {VARIABLE_STORE,VariableStore} from "./modules/config/variable/store/variableStore";
+import {COND_STORE,CondStore} from "./modules/config/condition/store/conditionStore";
 
 import {createContext} from "react";
 
@@ -30,6 +31,7 @@ function createStores() {
         [POSTPOSE_STORE]:new PostposeStore(),
         [TRIGGER_STORE]:new TriggerStore(),
         [VARIABLE_STORE]:new VariableStore(),
+        [COND_STORE]:new CondStore(),
         [EAM_STORE]:new EamStore(),
     }
 }

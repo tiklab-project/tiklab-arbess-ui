@@ -1,11 +1,15 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {Input,message} from "antd";
+import {Input,message,Tooltip} from "antd";
 import {PlusOutlined,MinusCircleOutlined} from "@ant-design/icons";
 import Btn from "../../../../common/btn/btn";
-import {x} from "../delData";
+import {x} from "../../../view/components/delData";
 import "./variable.scss";
+import EmptyText from "../../../../common/emptyText/emptyText";
 
+/*
+    环境变量
+*/
 const Variable = props => {
 
     const {variableStore,dataItem} = props
@@ -87,7 +91,12 @@ const Variable = props => {
                         />
                     </div>
                     <div className="inputs-variable-opt">
-                        <MinusCircleOutlined onClick={()=>reduceInput(item)}/>
+                        <Tooltip title={"删除"}>
+                            <MinusCircleOutlined
+                                style={{fontSize:16}}
+                                onClick={()=>reduceInput(item)}
+                            />
+                        </Tooltip>
                     </div>
                 </div>
                 <div className="inputs-error">
@@ -113,9 +122,12 @@ const Variable = props => {
             </div>
             <div className="pose-variable-content">
                 {
-                    variableData && variableData.map((item,index)=>{
+                    variableData && variableData.length>0 ?
+                    variableData.map((item,index)=>{
                         return renderInputs(item,index)
                     })
+                    :
+                    <EmptyText title={"暂无环境变量"}/>
                 }
             </div>
         </div>

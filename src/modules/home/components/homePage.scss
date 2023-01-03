@@ -114,6 +114,7 @@
                 font-size: var(--tiklab-font-13);
                 display: flex;
                 justify-content: space-around;
+                white-space: nowrap;
                 .details-desc{
                     color: #9b9b9b;
                     padding-right: 8px;
@@ -122,6 +123,9 @@
             .pipelineRecent-item-detail{
                 height: 40px;
                 line-height: 40px;
+                &:first-child{
+                    margin-right: 10px;
+                }
             }
         }
         .home-dyna{

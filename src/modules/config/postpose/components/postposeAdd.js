@@ -67,8 +67,8 @@ const PostposeAdd = props =>{
                             ...item,
                             messageType:1
                         })
-                        setYUserList([...arr])
                     })
+                    setYUserList([...arr])
                 }
             }
         })
@@ -91,7 +91,7 @@ const PostposeAdd = props =>{
             const params = {
                 taskType:type,
                 configId:formValue.configId,
-                pipeline: {id:pipelineId},
+                taskId:pipelineId,
                 values:null,
             }
             type===61?params.values={ ...value,userList:newArr}:params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
@@ -99,7 +99,7 @@ const PostposeAdd = props =>{
         }else {
             const params = {
                 taskType:type,
-                pipeline: {id:pipelineId},
+                taskId:pipelineId,
                 values:null,
             }
             type===61?params.values={ ...value,userList:newArr}:params.values={scriptOrder: mirrorRefs.current.editor.getValue()}

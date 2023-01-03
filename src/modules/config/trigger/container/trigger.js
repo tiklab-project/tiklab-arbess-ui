@@ -8,7 +8,9 @@ import Listaction from "../../../common/list/listaction";
 import "../components/trigger.scss";
 import Btn from "../../../common/btn/btn";
 
-// 触发器
+/*
+    触发器
+*/
 const Trigger = props =>{
     
     const {triggerStore,pipelineStore} = props

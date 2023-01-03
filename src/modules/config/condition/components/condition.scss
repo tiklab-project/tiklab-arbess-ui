@@ -3,10 +3,6 @@
       display: flex;
       justify-content: space-between;
     }
-
-    .pose-condition-content{
-        padding-top: 10px;
-    }
     .inputs-condition{
         margin-bottom: 12px;
         display: -webkit-box;
@@ -21,6 +17,18 @@
         -webkit-align-items: center;
         -ms-flex-align: center;
         align-items: center;
+    }
+    .pose-condition-content{
+        padding-top: 10px;
+    }
+    .pose-condition-inputs{
+        position: relative;
+    }
+    .inputs-error{
+        color: #ed675a;
+        font-size: 13px;
+        line-height: 13px;
+        margin: -6px 0 4px;
     }
     .inputs-condition-key{
         width: 110px;

@@ -8,6 +8,9 @@ import EmptyText from "../../../common/emptyText/emptyText";
 import VariableAdd from "../components/variableAdd";
 import "../components/variable.scss";
 
+/*
+    变量
+*/
 const Variable = props =>{
 
     const {variableStore,pipelineStore} = props

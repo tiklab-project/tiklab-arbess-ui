@@ -11,9 +11,9 @@ import Deploy from "./forms/deploy";
 import ScanSonarQuebe from "./forms/scanSonarQuebe";
 import GoodsNexus from "./forms/goodsNexus";
 import GoodsSsh from "./forms/goodsSsh";
-import Condition from "./post/condition";
-import Postpose from "./post/postpose";
-import Variable from "./post/variable";
+import Condition from "../../condition/components/condition";
+import Postpose from "../../postpose/components/task/postpose";
+import Variable from "../../variable/components/task/variable";
 import Tabs from "../../../common/tabs/tabs";
 import {x} from "./delData";
 import Inputs from "./forms/inputs";
@@ -232,8 +232,8 @@ const FormDetailsDrawer = props =>{
                                     />
                                     <div className="taskForm-post">
                                         { handleType===1 && <Variable dataItem={dataItem}/>  }
-                                        { handleType===2 && <Condition/> }
-                                        { handleType===3 && <Postpose/>  }
+                                        { handleType===2 && <Condition dataItem={dataItem}/> }
+                                        { handleType===3 && <Postpose dataItem={dataItem}/>  }
                                     </div>
                                 </>
                             }

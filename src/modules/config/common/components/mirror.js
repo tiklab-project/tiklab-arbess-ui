@@ -191,7 +191,7 @@ export const PostposeMirrorScenario = props =>{
                 foldGutter: true,
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             }}
-            onFocus={e=>onFocus(e)}
+            onFocus={onFocus}
         />
     )
 }
