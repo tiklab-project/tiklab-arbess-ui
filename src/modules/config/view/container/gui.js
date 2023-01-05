@@ -9,7 +9,9 @@ const Gui = props =>{
 
     const {configStore,pipelineStore} = props
 
-    const {updateStageName,setCreacteValue,configValid,deleteTaskConfig,enabledValid,validType,data,taskFormDrawer,setTaskFormDrawer,dataItem,setDataItem,findAllTaskConfig,isFindConfig} = configStore
+    const {updateStageName,setCreacteValue,configValid,deleteTaskConfig,enabledValid,validType,data,taskFormDrawer,setTaskFormDrawer,
+        dataItem,setDataItem,findAllTaskConfig,isFindConfig
+    } = configStore
     const {pipeline,pipelineId} = pipelineStore
 
     const [isLoading,setIsLoading] = useState(true)

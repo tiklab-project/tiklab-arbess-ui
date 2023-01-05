@@ -67,7 +67,7 @@ const ProjectAside = props =>{
 
     // 切换项目菜单列表
     const pipelineMenu = item =>{
-        return  <div onClick={()=>{changePipeline(item)}} key={item.id} className="pipeline-opt-item">
+        return  <div onClick={()=>{changePipeline(item)}} key={item.id} className={`pipeline-opt-item ${item.id===pipelineId ?"pipeline-opt-active":""}`}>
                     <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
                         {item.name.substring(0,1).toUpperCase()}
                     </span>

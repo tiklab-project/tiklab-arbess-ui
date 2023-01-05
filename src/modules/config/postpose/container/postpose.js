@@ -16,7 +16,9 @@ const Postpose = props =>{
     const {pipelineStore,postposeStore} = props
 
     const {findDmUserPage,pipelineId} = pipelineStore
-    const {createPostConfig,findAllPostConfig,isFindPostposeData,postposeData,deletePostConfig,updatePostConfig} = postposeStore
+    const {createPostConfig,findAllPostConfig,isFindPostposeData,postposeData,deletePostConfig,updatePostConfig,
+        messageSendType,mesSendData
+    } = postposeStore
 
     const [postposeVisible,setPostposeVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
@@ -26,6 +28,10 @@ const Postpose = props =>{
     useEffect(()=>{
         pipelineId && findAllPostConfig(pipelineId)
     },[pipelineId,isFindPostposeData])
+
+    useEffect(()=>{
+        messageSendType()
+    },[])
 
     const addPostpose = () =>{
         setFormValue("")
@@ -78,6 +84,7 @@ const Postpose = props =>{
                         createPostConfig={createPostConfig}
                         updatePostConfig={updatePostConfig}
                         findDmUserPage={findDmUserPage}
+                        mesSendData={mesSendData}
                         pipelineId={pipelineId}
                         formValue={formValue}
                         userId={userId}

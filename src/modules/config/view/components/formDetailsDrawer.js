@@ -89,11 +89,8 @@ const FormDetailsDrawer = props =>{
                     break  
                 case 52:
                     form.setFieldsValue({
-                        [getId(dataItem,"groupId")]:dataItem.groupId,
-                        [getId(dataItem,"artifactId")]:dataItem.artifactId,
-                        [getId(dataItem,"version")]:dataItem.version,
-                        [getId(dataItem,"fileType")]:dataItem.fileType,
                         [getId(dataItem,"fileAddress")]:dataItem.fileAddress,
+                        [getId(dataItem,"putAddress")]:dataItem.putAddress,
                         [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+ dataItem.auth.ip+")",
                         [getId(dataItem,"authId")]:dataItem.authId
                     })

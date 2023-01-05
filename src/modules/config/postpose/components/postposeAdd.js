@@ -11,7 +11,9 @@ import PostposeUserAdd from "./postposeUserAdd";
 
 const PostposeAdd = props =>{
 
-    const {postposeVisible,setPostposeVisible,createPostConfig,pipelineId,formValue,userId,findDmUserPage,updatePostConfig} = props
+    const {mesSendData,postposeVisible,setPostposeVisible,createPostConfig,pipelineId,formValue,userId,
+        findDmUserPage,updatePostConfig
+    } = props
 
     const [form] = Form.useForm()
     const mirrorRefs = useRef(null)
@@ -194,6 +196,31 @@ const PostposeAdd = props =>{
         },
     ]
 
+    const isType = type => mesSendData && mesSendData.some(item=>item===type)
+
+    const typeList = [
+        {
+            value:"site",
+            title:"站内信"
+        },
+        {
+            value:"sms",
+            title:"短信通知"
+        },
+        {
+            value:"wechat",
+            title:"企业微信机器人"
+        },
+        {
+            value:"dingding",
+            title:"钉钉机器人"
+        },
+        {
+            value:"mail",
+            title:"邮箱通知"
+        },
+    ]
+
     return(
         <Modal
             closable={false}
@@ -235,11 +262,13 @@ const PostposeAdd = props =>{
                                            rules={[{required:true, message:"请选择消息发送方式"}]}
                                 >
                                     <Checkbox.Group>
-                                        <Checkbox value="site">站内信</Checkbox>
-                                        <Checkbox value="sms">短信通知</Checkbox>
-                                        <Checkbox value="wechat">企业微信机器人</Checkbox>
-                                        <Checkbox value="dingding">钉钉机器人</Checkbox>
-                                        <Checkbox value="mail">邮箱通知</Checkbox>
+                                        {
+                                            typeList.map(item=>{
+                                                return  <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
+                                                            <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                                        </Tooltip>
+                                            })
+                                        }
                                     </Checkbox.Group>
                                 </Form.Item>
                                 <div className="post-pose-user">

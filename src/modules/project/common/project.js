@@ -21,7 +21,7 @@ const Project= (props)=>{
         findAllPipelineStatus(userId).then(res=>{
             const data = res.data
             if(res.code===0 && data){
-                // // 如果不存在就重定向404
+                // 如果不存在就重定向404
                 if(!isPipeline(data)){
                     props.history.push("/404")
                 }else {
@@ -36,9 +36,7 @@ const Project= (props)=>{
         })
     },[pipelineId])
 
-    const isPipeline = data => {
-        return data && data.some(item=>item.id === pipelineId)
-    }
+    const isPipeline = data => data && data.some(item=>item.id === pipelineId)
 
     useEffect(()=>{
         return ()=>setPipeline("")

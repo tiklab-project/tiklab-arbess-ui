@@ -1,9 +1,15 @@
 import React,{useState,useRef,useEffect} from "react";
 import {Checkbox,Dropdown,Collapse,Row, Col,Table,Space,Select,Tooltip} from "antd";
-import {PlusOutlined,CaretRightOutlined,MinusCircleOutlined,DeleteOutlined} from "@ant-design/icons";
+import {
+    PlusOutlined,
+    CaretRightOutlined,
+    MinusCircleOutlined,
+    DeleteOutlined,
+    PlusCircleOutlined,
+    CaretDownOutlined
+} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {PostposeMirrorScenario} from "../../../common/components/mirror";
 import PostposeUserAdd from "./postposeUserAdd";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import Btn from "../../../../common/btn/btn";
@@ -22,11 +28,13 @@ const Postpose = props =>{
 
     const {findDmUserPage,pipelineId} = pipelineStore
     const {deletePostConfig,createPostConfig,findAllPostConfig,fixedPostposeData,postposeData,setPostposeData,setIsFindPostposeData,
-        isFindPostposeData,updatePostConfig
+        isFindPostposeData,updatePostConfig,messageSendType,mesSendData
     } = postposeStore
 
     const [userAddVisible,setUserAddVisible] = useState(false)
     const [allUserList,setAllUserList] = useState([])
+    const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
+    const [yUserList,setYUserList] = useState("")
 
     const userId = getUser().userId
 
@@ -35,6 +43,7 @@ const Postpose = props =>{
     },[isFindPostposeData,dataItem.configId])
 
     useEffect(()=>{
+        messageSendType()
         findDmUserPage(pipelineId).then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
@@ -50,15 +59,18 @@ const Postpose = props =>{
         })
     },[])
 
+    // 添加后置处理
     const addPose = type => {
         createPostConfig({
             taskType:type,
             taskId:dataItem.configId,
             values:null
+        }).then(res=>{
+            res.code===0 && setExpandedTree(expandedTree.concat(res.data))
         })
     }
 
-    // 删除后置处理（一）
+    // 删除后置处理
     const del = item => {
         deletePostConfig(item.configId)
     }
@@ -184,18 +196,6 @@ const Postpose = props =>{
         }
     }
 
-    const genExtra = item => (
-        <Tooltip title={"删除"}>
-            <MinusCircleOutlined
-                style={{fontSize:16}}
-                onClick={(event) => {
-                    event.stopPropagation()
-                    del(item)
-                }}
-            />
-        </Tooltip>
-    )
-
     const columns = item =>{
         return [
             {
@@ -247,85 +247,147 @@ const Postpose = props =>{
         ]
     }
 
-    const [yUserList,setYUserList] = useState("")
-
     // 添加通知成员
     const addUser = item =>{
         setYUserList(item)
         setUserAddVisible(true)
     }
 
-    const renderPose = (item,index) =>{
-        return(
-            <Panel key={index} header={header(item)} extra={genExtra(item)}>
-                {
-                    item.type===61 &&
-                    <>
-                        <div className="title-typeList">消息发送方式</div>
-                        <Checkbox.Group onChange={value=>changeMes(value,item)} value={item.typeList}>
-                            <Row>
-                                <Col span={8}>
-                                    <Checkbox value="site">站内信</Checkbox>
-                                </Col>
-                                <Col span={8}>
-                                    <Checkbox value="sms">短信通知</Checkbox>
-                                </Col>
-                                <Col span={8}>
-                                    <Checkbox value="wechat">企业微信机器人</Checkbox>
-                                </Col>
-                                <Col span={8}>
-                                    <Checkbox value="dingding">钉钉机器人</Checkbox>
-                                </Col>
-                                <Col span={8}>
-                                    <Checkbox value="mail">邮箱通知</Checkbox>
-                                </Col>
-                            </Row>
-                        </Checkbox.Group>
+    // 是否存在key -- ture || false
+    const isExpandedTree = key => {
+        return expandedTree.some(item => item ===key)
+    }
+
+    // 展开和闭合
+    const setOpenOrClose = key => {
+        if (isExpandedTree(key)) {
+            // false--闭合
+            setExpandedTree(expandedTree.filter(item => item !== key))
+        } else {
+            // ture--展开
+            setExpandedTree(expandedTree.concat(key))
+        }
+    }
+
+    const typeList = [
+        {
+            value:"site",
+            title:"站内信"
+        },
+        {
+            value:"sms",
+            title:"短信通知"
+        },
+        {
+            value:"wechat",
+            title:"企业微信机器人"
+        },
+        {
+            value:"dingding",
+            title:"钉钉机器人"
+        },
+        {
+            value:"mail",
+            title:"邮箱通知"
+        },
+    ]
+
+    const renderPose = (item,index) => {
+        const isType = type => mesSendData && mesSendData.some(item=>item===type)
+        return (
+            <div className="pose-pose-item" key={index}>
+                <div className="pose-item-head" onClick={()=>setOpenOrClose(item.configId)}>
+                    <div className="pose-item-line">
                         {
-                            item.typeList && item.typeList.length<1 &&
-                            <div className="title-typeList-error">
-                                请选择消息发送方式
-                            </div>
+                            isExpandedTree(item.configId)?
+                                <CaretDownOutlined />:<CaretRightOutlined />
                         }
-                        <div className="pose-pose-user">
-                            <div className="pose-pose-title">
-                                <div className="title-user">消息通知人员</div>
-                                <Btn
-                                    type={"link"}
-                                    icon={<PlusOutlined/>}
-                                    onClick={()=>addUser(item)}
-                                    title={"添加成员"}
-                                />
-                                <PostposeUserAdd
-                                    userAddVisible={userAddVisible}
-                                    setUserAddVisible={setUserAddVisible}
-                                    allUserList={allUserList}
-                                    yUserList={yUserList}
-                                    postposeData={postposeData}
-                                    setPostposeData={setPostposeData}
-                                />
-                            </div>
-                            <Table
-                                bordered={false}
-                                columns={columns(item)}
-                                dataSource={item.userList}
-                                rowKey={(record) => record.user.id}
-                                pagination={false}
-                                locale={{emptyText: <EmptyText/>}}
+                    </div>
+                    <div className="pose-item-title">
+                        { header(item) }
+                    </div>
+                    <div className="pose-item-del">
+                        <Tooltip title={"删除"}>
+                            <MinusCircleOutlined
+                                style={{fontSize:16}}
+                                onClick={(event) => {
+                                    event.stopPropagation()
+                                    del(item)
+                                }}
                             />
-                        </div>
-                        { isChangeMes(item) }
-                    </>
-                }
+                        </Tooltip>
+                    </div>
+                </div>
                 {
-                    (item.type===71 || item.type===72) &&
-                    <MirrorContent
-                        item={item}
-                        pipelineId={pipelineId}
-                        updatePostConfig={updatePostConfig}
-                    />
+                    isExpandedTree(item.configId) &&
+                    <div className="pose-item-content">
+                        {
+                            item.type===61 &&
+                            <>
+                                <div className="pose-item-typeList">
+                                    <div className="title-typeList">消息发送方式</div>
+                                    <Checkbox.Group onChange={value=>changeMes(value,item)} value={item.typeList}>
+                                        <Row>
+                                            {
+                                                typeList.map(item=>{
+                                                    return  <Col key={item.value} span={8}>
+                                                                <Tooltip title={isType(item.value) && `未配置${item.title}`}>
+                                                                    <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                                                </Tooltip>
+                                                            </Col>
+                                                })
+                                            }
+                                        </Row>
+                                    </Checkbox.Group>
+                                    {
+                                        item.typeList && item.typeList.length<1 &&
+                                        <div className="title-typeList-error">
+                                            请选择消息发送方式
+                                        </div>
+                                    }
+                                </div>
+                                <div className="pose-item-user">
+                                    <div className="user-title">
+                                        <div className="title-user">消息通知人员</div>
+                                        <Btn
+                                            type={"link"}
+                                            icon={<PlusOutlined/>}
+                                            onClick={()=>addUser(item)}
+                                            title={"添加成员"}
+                                        />
+                                        <PostposeUserAdd
+                                            userAddVisible={userAddVisible}
+                                            setUserAddVisible={setUserAddVisible}
+                                            allUserList={allUserList}
+                                            yUserList={yUserList}
+                                            postposeData={postposeData}
+                                            setPostposeData={setPostposeData}
+                                        />
+                                    </div>
+                                    <Table
+                                        bordered={false}
+                                        columns={columns(item)}
+                                        dataSource={item.userList}
+                                        rowKey={(record) => record.user.id}
+                                        pagination={false}
+                                        locale={{emptyText: <EmptyText/>}}
+                                    />
+                                </div>
+                                { isChangeMes(item) }
+                            </>
+                        }
+                        {
+                            (item.type===71 || item.type===72) &&
+                            <MirrorContent
+                                item={item}
+                                pipelineId={pipelineId}
+                                updatePostConfig={updatePostConfig}
+                            />
+                        }
+                    </div>
                 }
-            </Panel>
+
+            </div>
         )
     }
 
@@ -346,25 +408,18 @@ const Postpose = props =>{
                 </div>
                 <Dropdown overlay={taskMenu} trigger={["click"]} placement="bottomRight">
                     <Btn
-                        title={"添加任务"}
+                        title={"添加后置处理"}
                         type={"link-nopadding"}
-                        icon={<PlusOutlined/>}
+                        icon={<PlusCircleOutlined />}
                     />
                 </Dropdown>
             </div>
             <div className="pose-pose-content">
                 {
                     postposeData && postposeData.length > 0 ?
-                    <Collapse
-                        className="site-collapse-custom-collapse"
-                        expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-                    >
-                        {
-                             postposeData.map((item,index)=>{
-                                return renderPose(item,index)
-                            })
-                        }
-                    </Collapse>
+                    postposeData.map((item,index)=>{
+                        return renderPose(item,index)
+                    })
                     :
                     <EmptyText title={"暂无后置处理"}/>
                 }

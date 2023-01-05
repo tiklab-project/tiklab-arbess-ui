@@ -25,9 +25,20 @@ export function  DeletePostConfig (data){
     })
 }
 
-export function  FindAllPostConfig (data){
+export function  FindAllPostConfig (data) {
     return serviceLoc.request({
-        url:"/pipelinePost/findAllPost",
+        url: "/pipelinePost/findAllPost",
+        method: "post",
+        data
+    })
+}
+
+/*
+    是否存在消息发送方式
+*/
+export function  MessageSendType (data){
+    return serviceLoc.request({
+        url:"/pipelineHome/messageSendType",
         method:"post",
         data
     })

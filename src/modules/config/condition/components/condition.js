@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import {Tooltip,Select} from "antd";
-import {MinusCircleOutlined,PlusOutlined} from "@ant-design/icons";
+import {MinusCircleOutlined,PlusCircleOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/btn";
@@ -125,9 +125,9 @@ const Condition = props =>{
                     <span style={{fontSize:13}}>({condData && condData.length?condData.length:0}个)</span>
                 </div>
                 <Btn
-                    title={"添加"}
+                    title={"添加条件"}
                     type={"link-nopadding"}
-                    icon={<PlusOutlined/>}
+                    icon={<PlusCircleOutlined/>}
                     onClick={()=>addCondition()}
                 />
             </div>

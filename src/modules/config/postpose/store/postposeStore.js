@@ -5,6 +5,7 @@ import {
     UpdatePostConfig,
     DeletePostConfig,
     FindAllPostConfig,
+    MessageSendType
 } from "../api/postpose";
 
 import {message} from "antd";
@@ -14,6 +15,7 @@ export class PostposeStore {
     @observable postposeData = []
     @observable fixedPostposeData = []
     @observable isFindPostposeData = false
+    @observable mesSendData = []
 
     @action
     setIsFindPostposeData = value =>{
@@ -65,6 +67,15 @@ export class PostposeStore {
         if(data.code===0){
             this.fixedPostposeData = data.data ? data.data : []
             this.postposeData = data.data ? data.data : []
+        }
+        return data
+    }
+
+    @action
+    messageSendType = async value =>{
+        const data = await MessageSendType()
+        if(data.code===0){
+            this.mesSendData=data.data && data.data
         }
         return data
     }

@@ -122,7 +122,6 @@ const ProjectSet = props =>{
                         isExpandedTree(item.key)?
                             <DownOutlined />:<RightOutlined />
                     }
-
                 </div>
             </div>
             <div className={`${isExpandedTree(item.key)? "pipelineReDel-li-bottom":"pipelineReDel-li-none"}`}>

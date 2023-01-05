@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Input,message,Tooltip} from "antd";
-import {PlusOutlined,MinusCircleOutlined} from "@ant-design/icons";
+import {PlusCircleOutlined,MinusCircleOutlined} from "@ant-design/icons";
 import Btn from "../../../../common/btn/btn";
 import {x} from "../../../view/components/delData";
 import "./variable.scss";
@@ -114,9 +114,9 @@ const Variable = props => {
                     <span style={{fontSize:13}}>({variableData && variableData.length?variableData.length:0}个)</span>
                 </div>
                 <Btn
-                    title={"添加"}
+                    title={"添加环境变量"}
                     type={"link-nopadding"}
-                    icon={<PlusOutlined/>}
+                    icon={<PlusCircleOutlined/>}
                     onClick={()=>addInput()}
                 />
             </div>

@@ -9,7 +9,7 @@ $line-color:#d9d9d9;
         height: 100%;
         white-space: nowrap;
         padding: 0 var(--tiklab-padding);
-        overflow: hidden;
+        overflow-y: hidden;
         .group-create{
             padding-top: 51px;
             display: inline-block;

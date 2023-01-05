@@ -1,5 +1,5 @@
-import React, {useState, Fragment, useRef, useEffect} from "react";
-import {Popconfirm,Input,Tooltip} from "antd";
+import React,{useState,Fragment} from "react";
+import {Popconfirm,Tooltip} from "antd";
 import {
     PlusOutlined,
     ExclamationCircleOutlined,
@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import SIcon from "../../common/components/sIcon";
 import AddDrawer from "./addDrawer";
+import {onDrop} from "codemirror/src/edit/drop_events";
 
 const NewStage = props =>{
 
@@ -134,7 +135,7 @@ const NewStage = props =>{
                 </div>
             </div>
         )
-    } 
+    }
 
     // 多任务||多阶段 -- 详情
     const newJobContent = (item,deep) =>{

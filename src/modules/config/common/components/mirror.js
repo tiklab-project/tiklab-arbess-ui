@@ -35,19 +35,10 @@ export const ViewMirror = props =>{
     const handleShowHint = () =>{
         const hintList = [
             {
-                name: "xiaohong",
-                value: "xiaohong"
+                name: "echo",
             },
             {
                 name: "xiaozhang",
-                value: [
-                    {
-                        name: "xiaoli",
-                    },
-                    {
-                        name: "xiaosun",
-                    },
-                ],
             },
         ]
         const cmInstance = mirrorRefs.current.editor
