@@ -12,7 +12,7 @@ import Gui from "../../view/container/gui";
 import Postpose from "../../postpose/container/postpose";
 import Trigger from "../../trigger/container/trigger";
 import Variable from "../../variable/container/variable";
-import StrDetail from "../../../project/structure/components/strDetail";
+import StrDetail from "../../../structure/components/strDetail";
 import "./config.scss";
 
 const Config = props =>{
@@ -37,6 +37,7 @@ const Config = props =>{
         }
     },[pipelineId])
 
+    // 配置运行状态
     let interval = null
     useEffect(()=>{
         if(isDetails && pipelineId){
@@ -61,7 +62,7 @@ const Config = props =>{
             }
         })
     }
- 
+
     // 是否能运行
     const runStatu = () => !(data && data.length < 1 || validType && validType.length > 0)
 
@@ -88,7 +89,6 @@ const Config = props =>{
         return <StrDetail
                     index={1}
                     pipeline={pipeline}
-                    isDetails={isDetails}
                     setIsDetails={setIsDetails}
                     firstItem={"配置"}
                     structureStore={structureStore}
@@ -100,7 +100,7 @@ const Config = props =>{
             <div className="config-up">
                 <div className="config-top">
                     <div className="config_bread">
-                        <BreadcrumbContent firstItem={pipeline.name} secondItem={"配置"}/>
+                        <BreadcrumbContent firstItem={pipeline.name} secondItem={"设计"}/>
                     </div>
                     <div className="changeView-btn">
                         {
@@ -128,8 +128,7 @@ const Config = props =>{
                                     key={item.id}
                                     className={`config-tab ${type===item.id?"config-active":""}`}
                                     onClick={()=>setType(item.id)}
-                                >
-                                    {item.title}
+                                >{item.title}
                                 </div>
                             )
                         })
@@ -145,21 +144,15 @@ const Config = props =>{
             }
             {
                 type===2 &&
-                <Trigger
-                    pipelineStore={pipelineStore}
-                />
+                <Trigger pipelineStore={pipelineStore}/>
             }
             {
                 type===3 &&
-                <Postpose
-                    pipelineStore={pipelineStore}
-                />
+                <Postpose pipelineStore={pipelineStore}/>
             }
             {
                 type===4 &&
-                <Variable
-                    pipelineStore={pipelineStore}
-                />
+                <Variable pipelineStore={pipelineStore}/>
             }
         </div>
     )

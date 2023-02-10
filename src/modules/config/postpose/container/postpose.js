@@ -42,7 +42,7 @@ const Postpose = props =>{
         setFormValue(record)
         setPostposeVisible(true)
     }
-    
+
     const del = (text,record) => {
         deletePostConfig(record.configId)
     }
@@ -97,7 +97,7 @@ const Postpose = props =>{
                         dataSource={postposeData}
                         rowKey={record=>record.configId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText title={"没有查询到后置处理"}/>}}
+                        locale={{emptyText: <EmptyText title={"暂无后置处理"}/>}}
                     />
                 </div>
             </div>

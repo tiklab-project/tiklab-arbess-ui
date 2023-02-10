@@ -114,7 +114,7 @@ const Variable = props =>{
                         dataSource={variableData}
                         rowKey={record=>record.varId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText title={"没有查询到变量"}/>}}
+                        locale={{emptyText: <EmptyText title={"暂无变量"}/>}}
                     />
                 </div>
             </div>

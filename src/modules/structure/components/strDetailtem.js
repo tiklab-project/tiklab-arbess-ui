@@ -1,9 +1,17 @@
 import React from "react";
-import {getTime} from "../../../common/client/client";
+import {
+    CheckCircleOutlined,
+    CloseCircleOutlined,
+    ExclamationCircleOutlined,
+    LoadingOutlined,
+    PlayCircleOutlined
+} from "@ant-design/icons";
+import {Spin} from "antd";
+import {getTime} from "../../common/client/client";
 
-const StrItem = props =>{
+const StrDetailtem = props =>{
 
-    const {itemData,status,setTreeData,setLogData,setExecIndex,index,setId} = props
+    const {itemData,setTreeData,setLogData,setExecIndex,index,setId} = props
 
     const log = (item,itemIndex) =>{
         switch (index) {
@@ -20,6 +28,28 @@ const StrItem = props =>{
     // 样式
     const style = runState => {
         return `item-${runState}`
+    }
+
+    const status = i =>{
+        switch(i){
+            case 1 :
+                //失败
+                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
+            case 10 :
+                //成功
+                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
+            case 20:
+                //被迫停止
+                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
+
+            case 0:
+                //运行
+                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
+
+            case 3:
+                //运行--等待运行
+                return  <PlayCircleOutlined style = {{fontSize:16}}/>
+        }
     }
 
     const statusText = state =>{
@@ -70,4 +100,4 @@ const StrItem = props =>{
     )
 }
 
-export default StrItem
+export default StrDetailtem

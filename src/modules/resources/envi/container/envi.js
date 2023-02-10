@@ -102,7 +102,7 @@ const Envi = props =>{
                 dataSource={enviData}
                 rowKey={record=>record.scmId}
                 pagination={false}
-                locale={{emptyText: <EmptyText/>}}
+                locale={{emptyText: <EmptyText title={'暂无环境配置'}/>}}
             />
 
             <EnviModal

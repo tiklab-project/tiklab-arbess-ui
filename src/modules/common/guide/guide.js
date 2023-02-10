@@ -16,19 +16,15 @@ const Guide = props =>{
                 props.history.push("/index/dyna")
                 break
             case "流水线动态":
-                props.history.push(`/index/task/${pipelineId}/dyna`)
+                props.history.push(`/index/task/${pipelineId}/survey/dyna`)
         }
     }
 
     return(
         <div className="mf-guide">
             <div className="mf-guide-title">
-                <span className="mf-guide-title-icon">
-                    {icon && icon}
-                </span>
-                <span className="mf-guide-title-name">
-                    {title}
-                </span>
+                <span className="mf-guide-title-icon">{icon && icon}</span>
+                <span className="mf-guide-title-name">{title}</span>
             </div>
             {
                 type &&

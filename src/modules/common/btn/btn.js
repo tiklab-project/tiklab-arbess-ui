@@ -12,7 +12,7 @@ const Btn = props =>{
             >
                 <Space>
                     {
-                        icon &&  <span className="mf-btn-icon">{icon && icon}</span>
+                        icon &&  <span className="mf-btn-icon">{icon}</span>
                     }
                     {title}
                 </Space>

@@ -164,7 +164,7 @@ const Host = props =>{
                     dataSource={hostList}
                     rowKey={record=>record.hostId}
                     pagination={false}
-                    locale={{emptyText: <EmptyText/>}}
+                    locale={{emptyText: <EmptyText title={'暂无主机配置'}/>}}
                 />
             </div>
         </div>

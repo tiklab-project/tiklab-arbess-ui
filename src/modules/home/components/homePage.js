@@ -94,7 +94,7 @@ const HomePage = props =>{
             listLength: followLength
         },
     ]
-    
+
     const renderStableList = item => {
         return(
             <div key={item.id} className="quickIn-group" onClick={()=>goPipeline(item.id)}>
@@ -107,9 +107,7 @@ const HomePage = props =>{
                         </span>
                         <span>{item.title}</span>
                     </div>
-                    <div className="quickIn-group-number">
-                        {item.listLength}
-                    </div>
+                    <div className="quickIn-group-number">{item.listLength}</div>
                 </div>
             </div>
         )
@@ -126,9 +124,7 @@ const HomePage = props =>{
             <div className="homePage-content mf-home-limited">
                 <div className="quickIn">
                     {
-                        stableList && stableList.map(item=>{
-                            return renderStableList(item)
-                        })
+                        stableList && stableList.map(item=>renderStableList(item))
                     }
                 </div>
                 <div className="pipelineRecent">
@@ -137,13 +133,11 @@ const HomePage = props =>{
                         pipelineNearList && pipelineNearList.length > 0 ?
                             <div  className="pipelineRecent-content">
                                 {
-                                    pipelineNearList.map(item=>{
-                                            return renderList(item)
-                                    })
+                                    pipelineNearList.map(item=> renderList(item))
                                 }
                             </div>
                             :
-                            <EmptyText title={"最近没有访问流水线"}/>
+                            <EmptyText title={"暂无访问流水线"}/>
                     }
                 </div>
 

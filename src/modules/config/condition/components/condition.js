@@ -44,7 +44,7 @@ const Condition = props =>{
             taskId:dataItem.configId
         })
     }
-    
+
     const ChangeCondType = (value,item) => {
         updateCond({
             condType:value,
@@ -55,7 +55,7 @@ const Condition = props =>{
     const reduceInput = item =>{
         deleteCond(item.condId)
     }
-    
+
     const onBlur = (e,item,name)  => {
         const zz = isequal(fixCondData,item.condId)
         if(x(e.target.value,zz[name])){
@@ -102,10 +102,7 @@ const Condition = props =>{
                     </div>
                     <div className="inputs-condition-opt">
                         <Tooltip title={"删除"}>
-                            <MinusCircleOutlined
-                                style={{fontSize:16}}
-                                onClick={()=>reduceInput(item)}
-                            />
+                            <MinusCircleOutlined style={{fontSize:16}} onClick={()=>reduceInput(item)}/>
                         </Tooltip>
 
                     </div>
@@ -134,9 +131,7 @@ const Condition = props =>{
             <div className="pose-condition-content">
                 {
                     condData && condData.length > 0 ?
-                    condData.map((item,index)=>{
-                        return renderCondData(item,index)
-                    })
+                    condData.map((item,index)=>renderCondData(item,index))
                     :
                     <EmptyText title={"暂无条件"}/>
                 }

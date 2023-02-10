@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
-import {getTime} from "../../../common/client/client";
-import SIcon from "../../../config/common/components/sIcon";
+import {getTime} from "../../common/client/client";
+import SIcon from "../../config/common/components/sIcon";
 
-const StrTree = props =>{
+const StrDetailTree = props =>{
 
     const {treeData,logData,setLogData,setId,index} = props
 
@@ -20,7 +20,7 @@ const StrTree = props =>{
         }
         taskLog(group)
     }
-    
+
     const taskLog = item => {
         switch (index) {
             case 2:
@@ -30,7 +30,7 @@ const StrTree = props =>{
                 setId(item.id)
         }
     }
-    
+
     const renderLi = (item,itemIndex,deep) =>{
         return(
             <div className={`tree-li ${logData.id===item.id?"tree-li-active":""}`} key={itemIndex}
@@ -94,4 +94,4 @@ const StrTree = props =>{
     )
 }
 
-export default StrTree
+export default StrDetailTree

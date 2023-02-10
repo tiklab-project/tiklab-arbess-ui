@@ -1,40 +1,36 @@
 import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
 import {
-    CheckCircleOutlined,
-    CloseCircleOutlined,
-    ExclamationCircleOutlined,
-    LoadingOutlined,
-    PlayCircleOutlined,
     MinusCircleOutlined,
 } from "@ant-design/icons";
-import {Spin} from "antd";
-import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
-import Loading from "../../../common/loading/loading";
-import StrItem from "./strItem";
-import StrTree from "./strTree";
-import Btn from "../../../common/btn/btn";
+import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
+import Loading from "../../common/loading/loading";
+import StrDetailtem from "./strDetailtem";
+import StrDetailTree from "./strDetailTree";
+import Btn from "../../common/btn/btn";
 import "./strDetail.scss";
 
 const StrDetail = props =>{
 
-    const {firstItem,index,pipeline,setIsDetails,structureStore} = props
+    const {firstItem,index,pipeline,setIsDetails,structureStore,isAll} = props
 
-    const {execData,itemData,killInstance} = structureStore
+    const {execData,itemData,killInstance,strDetails} = structureStore
 
     const [isActiveSlide,setIsActiveSlide] = useState(true)  // 日志滚动条
-    const [logData,setLogData] = useState("")
-    const [treeData,setTreeData] = useState("")
-    const [execIndex,setExecIndex] = useState(0)  
+    const [logData,setLogData] = useState("")  // 日志数据
+    const [treeData,setTreeData] = useState("") // 左侧树结构
+    const [execIndex,setExecIndex] = useState(0)
     const [id,setId] = useState("")
 
     useEffect(()=>{
         return ()=>{
             setId("")
             setExecIndex(0)
+            setIsDetails(false)
         }
     },[])
 
+    // 完成状态数据
     useEffect(()=>{
         if(index===2 && itemData){
             const data = itemData.runLogList
@@ -43,30 +39,32 @@ const StrDetail = props =>{
         }
     },[itemData])
 
+    // 运行状态数据
     useEffect(()=>{
         if(index===1 && execData){
             const data = execData.runLogList
+            // id是否有值，有值：手动切换运行状态数据；无值：自动切换运行状态数据；
             if(id){
                 setTreeData(data[execIndex])
-                setLogData(isequals(data))
+                setLogData(manualEquals(data))
             }else{
                 if(pipeline && pipeline.type===1){
                     setLogData(execData)
                     return
                 }
-                setLogData(isEuqals(data))
-                setTreeData(isEuqals(data))
+                setLogData(autoEuqals(data))
+                setTreeData(autoEuqals(data))
             }
         }
     },[execData,execIndex,id])
 
     // 运行日志打印（自动）
-    const isEuqals = data =>{
+    const autoEuqals = data =>{
         let a
         if(data && data.some(item=>item.state===0)){
             data && data.map(item=>{
                 if(item.state===0){
-                    a = item  
+                    a = item
                 }
             })
         }
@@ -85,7 +83,8 @@ const StrDetail = props =>{
         }
     }
 
-    const isequals = data =>{
+    // 运行日志打印（手动，三层嵌套）
+    const manualEquals = data =>{
 
         let results = isequal(data)
         if(results != null){
@@ -123,53 +122,39 @@ const StrDetail = props =>{
         }
     }
 
-    const status = i =>{
-        switch(i){
-            case 1 :
-                //失败
-                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
-            case 10 :
-                //成功
-                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
-            case 20:
-                //被迫停止
-                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
-
-            case 0:
-                //运行
-                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
-
-            case 3:
-                //运行--等待运行
-                return  <PlayCircleOutlined style = {{fontSize:16}}/>
-        }
-    }
-
     // 关闭滚动条一直在下面
     const onWheel = () =>{
         setIsActiveSlide(false)
     }
 
+    // 控制台日志
     const renderLog = logData =>{
         const outLog=document.getElementById("outLog")
         if(index===1 && outLog && isActiveSlide){
             outLog.scrollTop = outLog.scrollHeight
         }
-        return  <div className="bottom-log" id="outLog" onWheel={onWheel}> 
+        return  <div className="bottom-log" id="outLog" onWheel={onWheel}>
                     {logData && logData.runLog ? logData.runLog : "暂无日志"}
                 </div>
     }
 
+    // 终止运行
     const end = () => killInstance(pipeline.id)
 
+    // 返回列表
     const goBack = () => setIsDetails(false)
+
+    // 数据获取钱加载状态
+    if(strDetails){
+        return <Loading/>
+    }
 
     return(
         <div className="strDetail mf-home-limited mf">
             <div className="strDetail-up" style={{paddingBottom:15}}>
                 <BreadcrumbContent
                     firstItem={firstItem}
-                    secondItem={`详情 #${index===2 ? itemData && itemData.name:execData && execData.name}`}
+                    secondItem={`${isAll ? pipeline && pipeline.name:"详情"} # ${index===2?itemData && itemData.name:execData && execData.name}`}
                     goBack={goBack}
                 />
                 {
@@ -182,8 +167,7 @@ const StrDetail = props =>{
                 }
             </div>
             <div className="strDetail-card">
-                <StrItem
-                    status={status}
+                <StrDetailtem
                     index={index}
                     itemData={index===2 ? itemData && itemData.runLogList:execData && execData.runLogList}
                     setTreeData={setTreeData}
@@ -198,7 +182,7 @@ const StrDetail = props =>{
                     {
                         pipeline && pipeline.type===2 &&
                         <div className="bottom-tree">
-                            <StrTree
+                            <StrDetailTree
                                 index={index}
                                 treeData={treeData}
                                 logData={logData}

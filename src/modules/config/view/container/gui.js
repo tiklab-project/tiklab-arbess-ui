@@ -14,10 +14,10 @@ const Gui = props =>{
     } = configStore
     const {pipeline,pipelineId} = pipelineStore
 
-    const [isLoading,setIsLoading] = useState(true)
+    const [isLoading,setIsLoading] = useState(true) // 数据未返回时加载状态
 
     useEffect(()=>{
-        pipelineId && setIsLoading(true)
+        return ()=> setIsLoading(true)
     },[pipelineId])
 
     // 表单初始化

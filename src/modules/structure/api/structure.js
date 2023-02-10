@@ -1,4 +1,4 @@
-import {serviceLoc} from "../../../../common/utils/requset";
+import {serviceLoc} from "../../../common/utils/requset";
 
 //开始构建
 export function  PipelineStartStructure (data){
@@ -68,6 +68,15 @@ export function  FindPageHistory (data){
 export function  DeleteHistoryLog (data){
     return serviceLoc.request({
         url:"/pipelineHistory/deleteHistory",
+        method:"post",
+        data
+    })
+}
+
+//删除构建历史
+export function  FindUserAllHistory (data){
+    return serviceLoc.request({
+        url:"/pipeline/findUserAllHistory",
         method:"post",
         data
     })

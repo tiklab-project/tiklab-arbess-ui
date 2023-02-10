@@ -11,7 +11,7 @@ const ProjectSetAside = props =>{
     let path = props.location.pathname
     const [nav,setNav] = useState("")
 
-    const {setLastPath,pipelineId} = pipelineStore
+    const {pipelineId} = pipelineStore
 
     // 侧边流水线设置的第二级导航
     const secondRouter = [
@@ -33,7 +33,6 @@ const ProjectSetAside = props =>{
     ]
 
     useEffect(()=>{
-        setLastPath(path.substring(path.lastIndexOf('/') + 1))
         setNav(path)
     },[path])
 
@@ -51,7 +50,7 @@ const ProjectSetAside = props =>{
                     </span>
              </div>
     }
-    
+
     const renderRouter = item => {
         return  <PrivilegeProjectButton key={item.key} code={item.enCode} domainId={pipelineId}>
                     {navContent(item)}
@@ -62,9 +61,9 @@ const ProjectSetAside = props =>{
 
     return(
         <div className="projectSet-aside">
-            {secondRouter.map(item=>{
-                    return renderRouter(item)               
-            })}
+            {
+                secondRouter.map(item=>renderRouter(item))
+            }
         </div>
     )
 }

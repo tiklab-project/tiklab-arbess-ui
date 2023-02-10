@@ -60,7 +60,7 @@ const ProjectSet = props =>{
                     onClick={()=>setOpenOrClose(1)}
                 />
             </div>
-        },    
+        },
         {
             key:2,
             title:"流水线删除",
@@ -147,9 +147,7 @@ const ProjectSet = props =>{
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">
                     {
-                        lis.map(item=>{
-                            return renderLisItem(item)
-                        })
+                        lis.map(item=> renderLisItem(item))
                     }
                 </div>
             </div>

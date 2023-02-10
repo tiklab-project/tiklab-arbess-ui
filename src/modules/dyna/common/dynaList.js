@@ -33,7 +33,7 @@ const DynaList = props =>{
                     return renderLis(item,index)
                 })
                 :
-                <EmptyText title={"没有近期动态"}/>
+                <EmptyText title={"暂无近期动态"}/>
             }
         </div>
     )

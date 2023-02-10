@@ -51,3 +51,13 @@ export const getTime = time =>{
     }
     return DateTimes
 }
+
+// 文件路径截取
+export const interceptUrl = (url,data) =>{
+    if(data){
+        return url.split('/index/task/'+data)
+    }
+    else {
+        return url.split('/')
+    }
+}

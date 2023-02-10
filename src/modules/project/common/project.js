@@ -40,7 +40,7 @@ const Project= (props)=>{
 
     useEffect(()=>{
         return ()=>setPipeline("")
-    },[pipelineId])
+    },[])
 
     const [isLoading,setIsLoading] = useState(false)
 

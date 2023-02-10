@@ -18,6 +18,8 @@ const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"
 /* 授权 */
 const Authorize=AsyncComponent(()=>import("./modules/config/authorize/authorize"))
 
+const Structure=AsyncComponent(()=>import("./modules/structure/container/structure"))
+
 /* 动态 */
 const Dyna=AsyncComponent(()=>import("./modules/dyna/dyna/dyna"))
 
@@ -26,7 +28,7 @@ const Project=AsyncComponent(()=>import("./modules/project/common/project"))
 /*  流水线详情 */
 const PipelineDyan=AsyncComponent(()=>import("./modules/project/dyna/dyna"))
 const Survey=AsyncComponent(()=>import("./modules/project/survey/container/survey"))
-const Structure=AsyncComponent(()=>import("./modules/project/structure/container/structure"))
+const StrPipeline=AsyncComponent(()=>import("./modules/structure/components/strPipeline"))
 const Config=AsyncComponent(()=>import("./modules/config/common/container/config"))
 
 /*  流水线详情 -- 设置 */
@@ -138,6 +140,12 @@ const routers=[
             {
                 path:"/index/authorize",
                 component: Authorize,
+                exact: true
+            },
+            {
+                path:"/index/history",
+                component: Structure,
+                exact: true
             },
             {
                 path:"/index/task/:id",
@@ -145,19 +153,23 @@ const routers=[
                 routes:[
                     {
                         path:"/index/task/:id/survey",
+                        exact:true,
                         component: Survey
                     },
                     {
-                        path:"/index/task/:id/dyna",
-                        component: PipelineDyan
+                        path:"/index/task/:id/survey/dyna",
+                        component: PipelineDyan,
+                        exact:true,
                     },
                     {
                         path:"/index/task/:id/config",
-                        component: Config
+                        component: Config,
+                        exact:true,
                     },
                     {
                         path:"/index/task/:id/structure",
-                        component: Structure
+                        component: StrPipeline,
+                        exact:true,
                     },
                     {
                         path:"/index/task/:id/assembly",

@@ -12,7 +12,7 @@ import Btn from "../../../common/btn/btn";
     触发器
 */
 const Trigger = props =>{
-    
+
     const {triggerStore,pipelineStore} = props
 
     const {updateTriggerConfig,deleteTriggerConfig,createTriggerConfig,findAllTriggerConfig,triggerData,isFindTrigger} = triggerStore
@@ -29,7 +29,7 @@ const Trigger = props =>{
         setFormValue("")
         setTriggerVisible(true)
     }
-    
+
     const edit = (text,record) => {
         setFormValue(record)
         setTriggerVisible(true)
@@ -38,7 +38,7 @@ const Trigger = props =>{
     const del = (text,record) => {
         deleteTriggerConfig(record.configId)
     }
-    
+
     const columns = [
         {
             title: "执行时间",
@@ -104,7 +104,7 @@ const Trigger = props =>{
                         dataSource={triggerData}
                         rowKey={record=>record.timeId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText title={"没有查询到定时任务"}/>}}
+                        locale={{emptyText: <EmptyText title={"暂无定时任务"}/>}}
                     />
                 </div>
             </div>

@@ -55,6 +55,11 @@ const Head = props =>{
             to:"/index/pipeline",
             title: "pipeline",
         },
+        {
+            key:"history",
+            to:"/index/history",
+            title:"history",
+        }
     ]
 
     const changeCurrentLink = item => {

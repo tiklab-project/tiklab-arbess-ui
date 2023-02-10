@@ -294,7 +294,7 @@ const Server = props =>{
                     dataSource={authServerList}
                     rowKey={record=>record.serverId}
                     pagination={false}
-                    locale={{emptyText: <EmptyText/>}}
+                    locale={{emptyText: <EmptyText title={'暂无服务配置'}/>}}
                 />
             </div>
         </div>

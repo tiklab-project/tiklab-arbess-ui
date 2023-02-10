@@ -78,7 +78,7 @@ const NewStage = props =>{
         setDataItem(group)
         setTaskFormDrawer(true)
     }
-    
+
     // 删除
     const deletePart = (e,item) =>{
         //屏蔽父层点击事件
@@ -214,9 +214,7 @@ const NewStage = props =>{
         return(
             <div className="group-head">
                 <div className="name">
-                    <div className="group-name">
-                        {group && group.name}
-                    </div>
+                    <div className="group-name">{group && group.name}</div>
                     <div className="group-inputBtn" onClick={()=>changName(group)}>
                         <EditOutlined/>
                     </div>
@@ -318,7 +316,7 @@ const NewStage = props =>{
                 data && data.map((group,groupIndex) =>{
                     return  pipeline && pipeline.type===1 ? renderSingleTask(group,groupIndex): renderMultitask(group,groupIndex)
                 })
-            }  
+            }
            {
                 data && data.length > 0 ?
                 <>
@@ -358,7 +356,7 @@ const NewStage = props =>{
                     </div>
                 </div>
            }
-           
+
             <AddDrawer
                 newStageDrawer={newStageDrawer}
                 setNewStageDrawer={setNewStageDrawer}

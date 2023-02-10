@@ -1,0 +1,24 @@
+.structure{
+    height: 100%;
+    overflow: auto;
+    .structure-content-table{
+        padding-top: 10px;
+        .str-table-name{
+            color: var(--tiklab-blue);
+            cursor: pointer;
+            .str-table-findNumber{
+                font-size: var(--tiklab-font-13);
+                padding-left: 5px;
+            }
+        }
+        .str-table-runWay{
+            display: flex;
+            align-items: center;
+            height: 40px;
+            .runWay-user{
+                padding-left: 8px;
+            }
+        }
+    }
+}
+

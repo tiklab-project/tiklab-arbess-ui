@@ -8,6 +8,7 @@ import {
     KillInstance,
     PipelineStartStructure,
     FindPageHistory,
+    FindUserAllHistory
 } from "../api/structure";
 
 import {getUser} from "tiklab-core-ui";
@@ -15,18 +16,17 @@ import {message} from "antd";
 
 export class StructureStore {
 
-    @observable leftPageList = []
-    @observable pipelineUserList = []
-    @observable execData = ""
-    @observable itemData = ""
+    @observable historyList = [] // 历史列表
+    @observable execData = "" // 构建历史运行状态数据
+    @observable itemData = "" // 构建历史完成状态数据
+    @observable freshen = false  // 重新渲染页面
+    @observable strDetails = false // 构建详情页面数据未返回时加载状态
+    @observable pageCurrent = 1 // 筛选时，设置当前页数初始化
     @observable page = {
         defaultCurrent: 1,
         pageSize: "11",
         total: "1",
     }
-    @observable pageCurrent = 1 // 筛选时，设置当前页数初始化
-
-    @observable freshen = false  // 渲染页面
 
     @action
     setFreshen = value =>{
@@ -103,12 +103,12 @@ export class StructureStore {
         const data = await FindPageHistory(params)
         if(data.code===0 && data.data){
             if(data.data.dataList.length===0){
-                this.leftPageList = []
+                this.historyList = []
                 this.page = {}
             }
             else{
                 this.page.total = data.data.totalPage
-                this.leftPageList = data.data.dataList
+                this.historyList = data.data.dataList
             }
         }
         return data
@@ -117,11 +117,13 @@ export class StructureStore {
     //历史详情日志
     @action
     findAllLog =async value =>{
+        this.strDetails = true
         const param = new FormData()
         param.append("historyId", value)
         const data = await FindAllLog(param)
         if(data.code===0){
             this.itemData = data.data && data.data
+            this.strDetails = false
         }
         return data
     }
@@ -138,6 +140,17 @@ export class StructureStore {
             this.freshen = !this.freshen
         }
         return data
+    }
+
+    @action
+    findUserAllHistory = async value =>{
+        const data = await FindUserAllHistory()
+        if(data.code===0){
+            this.historyList = data.data && data.data
+        }
+        else {
+            this.historyList = []
+        }
     }
 
 }

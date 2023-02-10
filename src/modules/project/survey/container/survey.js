@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react";
-import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
 import "../components/survey.scss";
@@ -92,4 +91,4 @@ const Survey = props =>{
     )
 }
 
-export default withRouter(inject("surveyStore","pipelineStore","homePageStore")(observer(Survey)))
+export default inject("surveyStore","pipelineStore","homePageStore")(observer(Survey))

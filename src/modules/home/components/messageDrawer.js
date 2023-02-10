@@ -57,7 +57,7 @@ const MessageDrawer = props =>{
             title:"已读",
         }
     ]
-    
+
     const goHref = item => {
         const data = JSON.parse(item.data)
         const {message,status,...resItem } = item
@@ -102,7 +102,7 @@ const MessageDrawer = props =>{
                         <div className="message-item-center">
                             <div className="message-item-user">
                                 <Space>
-                                     <span className="user-title">{item.title}</span>
+                                    <span className="user-title">{item.title}</span>
                                     <span className="user-time">{data.date}</span>
                                 </Space>
                                 <Tooltip title={"删除"}>
@@ -123,7 +123,7 @@ const MessageDrawer = props =>{
         setSelected(item.id)
         setMessagePagination(1)
     }
-    
+
     const renderTabs = item => {
         return   <div key={item.id} className={`title-item ${item.id===selected?"title-select":null}`} onClick={()=>changSelet(item)}>
             {item.title}
@@ -131,16 +131,13 @@ const MessageDrawer = props =>{
                 item.id === 0 &&
                 <span className={`messageModal-screen-tab ${unread< 100 ?null:"messageModal-screen-much"}`}>
                     {
-                        unread < 100 ?
-                            unread
-                            :
-                            99
+                        unread < 100 ? unread : 99
                     }
                 </span>
             }
         </div>
     }
-    
+
     const emptyTitle = (
         <>
             { selected===0 && "暂无未读消息"}

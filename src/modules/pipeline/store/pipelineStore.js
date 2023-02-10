@@ -20,7 +20,7 @@ export class PipelineStore {
     @observable pipelineList = []
     @observable pipelineLength = 0
     @observable followLength = 0
-    @observable lastPath = ""
+    @observable pipelineUserList = []
     @observable pipeline = ""
     @observable pipelineId = ""
     @observable listType = 1
@@ -30,11 +30,6 @@ export class PipelineStore {
     @action
     setListType = value =>{
         this.listType = value
-    }
-
-    @action
-    setLastPath = value =>{
-        this.lastPath = value
     }
 
     @action
@@ -186,12 +181,13 @@ export class PipelineStore {
             },
         }
         const data =  await FindUserPage(params)
-        const zz = data.data && data.data.dataList
+        if(data.code===0){
+            this.pipelineUserList = data.data && data.data.dataList
+        }
 
         return data
     }
 
-    @observable pipelineUserList = []
     @action
     findDmUserPage = async value =>{
         const params = {

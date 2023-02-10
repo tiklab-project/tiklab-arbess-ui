@@ -117,7 +117,7 @@ const Auth = props =>{
                     dataSource={authList}
                     rowKey={record=>record.authId}
                     pagination={false}
-                    locale={{emptyText: <EmptyText/>}}
+                    locale={{emptyText: <EmptyText title={'暂无认证配置'}/>}}
                 />
             </div>
         </div>

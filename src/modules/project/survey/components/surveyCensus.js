@@ -48,12 +48,8 @@ const SurveyCensus = props =>{
                         return(
                             <div className="stat-div" key={item.title}>
                                 <div className="stat-div-title">
-                                    <span className="stat-div-title-icon">
-                                        {item.icon}
-                                    </span>
-                                    <span className="stat-div-title-name">
-                                        {item.title}
-                                    </span>
+                                    <span className="stat-div-title-icon">{item.icon}</span>
+                                    <span className="stat-div-title-name">{item.title}</span>
                                 </div>
                                 <div className="census-num">{item.num} </div>
                             </div>

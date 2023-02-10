@@ -4,6 +4,6 @@
     "sys" : "sys",
     "my": "my",
     "collection": "collection",
-    "environment": "enviroment"
-
+    "environment": "enviroment",
+    "history": "history"
 }

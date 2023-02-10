@@ -194,7 +194,7 @@ const PipelineTable = props =>{
                     dataSource={pipelineList}
                     rowKey={record=>record.id}
                     pagination={false}
-                    locale={{emptyText: <EmptyText/>}}
+                    locale={{emptyText: <EmptyText title={'暂无流水线'}/>}}
                 />
             </div>
 }

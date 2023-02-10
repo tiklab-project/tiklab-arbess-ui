@@ -87,6 +87,12 @@ ul li{
     overflow: hidden;
 }
 
+.mf .ant-avatar{
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 12px !important;
+}
+
 .ant-message{
     top: 50px;
     .ant-message-notice{  /*mf-message*/
@@ -125,11 +131,6 @@ ul li{
     max-width: 1280px;
     min-width: 768px;
     padding: var(--tiklab-padding);
-      .ant-avatar{
-        width: 22px !important;
-        height: 22px !important;
-        font-size: 12px !important;
-    }
 }
 
 ::-webkit-scrollbar {
