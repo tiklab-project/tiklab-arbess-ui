@@ -16,7 +16,8 @@ const Deploy = props =>{
     const {pipelineId} = pipelineStore
 
     const [showArrow,setShowArrow] = useState(false)
-    
+    const [border,setBorder] = useState(false)
+
     const changDeployType = value => {
         const params = {
             pipeline:{id:pipelineId},
@@ -32,6 +33,7 @@ const Deploy = props =>{
             type:dataItem.type,
             configId:dataItem.configId
         })
+        setBorder(false)
     }
 
     const confirm = value =>{
@@ -49,10 +51,14 @@ const Deploy = props =>{
         <>
             <Form.Item name={dataItem.configId+"_authType"} label="部署方式">
                 <Select
+                    bordered={border}
                     showArrow={showArrow}
                     onMouseEnter={()=>setShowArrow(true)}
                     onMouseLeave={()=>setShowArrow(false)}
+                    onFocus={()=>setBorder(true)}
+                    onBlur={()=>setBorder(false)}
                     onChange={changDeployType}
+                    className={`${border?'':'input-hover'}`}
                 >
                     <Select.Option value={1}>结构化部署</Select.Option>
                     <Select.Option value={2}>自定义部署</Select.Option>

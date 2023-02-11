@@ -102,7 +102,7 @@ const Inputs = props =>{
         return rule
     }
 
-    
+
     return (
         <Form.Item
             name={dataItem.configId+"_"+name}
@@ -112,14 +112,13 @@ const Inputs = props =>{
         >
             <Input
                 ref={ref}
+                bordered={enter}
                 addonBefore={enter && addonBefore}
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
+                className={`${enter?'':'input-hover'}`}
                 onFocus={onFocus}
                 onBlur={(e)=>onBlur(e)}
-                onPressEnter={(e)=>{  
-                    // onBlur(e)                  
-                    e.target.blur()
-                }}
+                onPressEnter={(e)=>e.target.blur()}
             />
         </Form.Item>
     )

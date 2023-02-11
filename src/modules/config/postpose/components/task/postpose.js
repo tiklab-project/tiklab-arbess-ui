@@ -1,5 +1,5 @@
 import React,{useState,useRef,useEffect} from "react";
-import {Checkbox,Dropdown,Collapse,Row, Col,Table,Space,Select,Tooltip} from "antd";
+import {Checkbox,Dropdown,Collapse,Row, Col,Table,Space,Select,Tooltip,Drawer} from "antd";
 import {
     PlusOutlined,
     CaretRightOutlined,
@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import PostposeUserAdd from "./postposeUserAdd";
+import PostposeUserAdd from "../postposeUserAdd";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import Btn from "../../../../common/btn/btn";
 import MirrorContent from "./mirror";
@@ -19,9 +19,9 @@ import "./postpose.scss";
 
 const { Panel } = Collapse
 
-/*
-    后置处理
-*/
+/**
+ * 后置处理
+ */
 const Postpose = props =>{
 
     const {pipelineStore,postposeStore,dataItem} = props
@@ -74,11 +74,11 @@ const Postpose = props =>{
     const del = item => {
         deletePostConfig(item.configId)
     }
-    
+
     const onCancel = () => {
         setIsFindPostposeData(!isFindPostposeData)
     }
-    
+
     const onOk = item => {
         let newArr = []
         item.userList && item.userList.map(item=>{
@@ -169,7 +169,7 @@ const Postpose = props =>{
     // 消息通知的值是否显示取消确定按钮
     const isChangeMes = item => {
         if(isMesType(item) || isYUser(item)){
-            return <div className="post-pose-btn">
+            return <div className="post-pose-btn" style={{textAlign:"right"}}>
                 <Btn
                     onClick={()=>onCancel()}
                     title={"取消"}
@@ -245,12 +245,6 @@ const Postpose = props =>{
                 }
             },
         ]
-    }
-
-    // 添加通知成员
-    const addUser = item =>{
-        setYUserList(item)
-        setUserAddVisible(true)
     }
 
     // 是否存在key -- ture || false
@@ -349,20 +343,28 @@ const Postpose = props =>{
                                 <div className="pose-item-user">
                                     <div className="user-title">
                                         <div className="title-user">消息通知人员</div>
-                                        <Btn
-                                            type={"link"}
-                                            icon={<PlusOutlined/>}
-                                            onClick={()=>addUser(item)}
-                                            title={"添加成员"}
-                                        />
-                                        <PostposeUserAdd
-                                            userAddVisible={userAddVisible}
-                                            setUserAddVisible={setUserAddVisible}
-                                            allUserList={allUserList}
-                                            yUserList={yUserList}
-                                            postposeData={postposeData}
-                                            setPostposeData={setPostposeData}
-                                        />
+                                        <Dropdown
+                                            overlay={ <PostposeUserAdd
+                                                userAddVisible={userAddVisible}
+                                                setUserAddVisible={setUserAddVisible}
+                                                allUserList={allUserList}
+                                                yUserList={yUserList}
+                                                postposeData={postposeData}
+                                                setPostposeData={setPostposeData}
+                                                type={'task'}
+                                            />}
+                                            placement={"bottomRight"}
+                                            visible={userAddVisible}
+                                            trigger={['click']}
+                                            onVisibleChange={visible => setUserAddVisible(visible)}
+                                        >
+                                            <Btn
+                                                type={"link-nopadding"}
+                                                icon={<PlusOutlined/>}
+                                                onClick={()=>setYUserList(item)}
+                                                title={"添加成员"}
+                                            />
+                                        </Dropdown>
                                     </div>
                                     <Table
                                         bordered={false}
@@ -398,7 +400,7 @@ const Postpose = props =>{
             <div className="dropdown-item" onClick={()=>addPose(72)}>执行Shell脚本</div>
         </div>
     )
-    
+
     return(
         <div className="pose-pose">
             <div className="pose-pose-up">

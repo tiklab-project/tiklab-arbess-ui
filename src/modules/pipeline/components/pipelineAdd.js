@@ -187,6 +187,7 @@ const PipelineAdd = props =>{
                     </div>
                 </div>
                 <PipelineAddInfo
+                    {...props}
                     setCurrent={setCurrent}
                     templateLis={templateLis}
                     templateType={templateType}

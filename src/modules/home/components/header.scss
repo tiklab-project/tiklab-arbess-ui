@@ -90,6 +90,7 @@
 .header-outMenu,.header-helpMenu,.outMenu-lan-menu{
     box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
     border-radius: 4px;
+    background: #ffffff;
     .header-dropdown-icon{
         font-size: var(--tiklab-icon-size-16);
         padding-right: 10px;
@@ -97,7 +98,6 @@
 }
 
 .header-outMenu{
-    background: #fff;
     width: 200px;
     .header-outMenu-top{
         padding: 10px;
@@ -136,7 +136,6 @@
 }
 
 .outMenu-lan-menu{
-    background: #ffffff;
     position: absolute;
     top: -46px;
     left: -86px;
@@ -152,7 +151,6 @@
 }
 
 .header-helpMenu{
-    background: #ffffff;
     width: 180px;
     .header-helpMenu-item{
         cursor: pointer;

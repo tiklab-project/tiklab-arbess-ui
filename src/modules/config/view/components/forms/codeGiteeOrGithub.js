@@ -78,6 +78,8 @@ const CodeGiteeOrGithub = props =>{
                 rules={[{required:true, message:"请选择仓库"}]}
             >
                 <Select
+                    bordered={nameBorder}
+                    className={nameBorder?'':'input-hover'}
                     showSearch={nameBorder}
                     placeholder={nameBorder ?"仓库":"未选择"}
                     showArrow={fieldName === "codeName"}
@@ -102,6 +104,8 @@ const CodeGiteeOrGithub = props =>{
                 label="分支"
             >
                 <Select
+                    bordered={branchBorder}
+                    className={branchBorder?'':'input-hover'}
                     disabled={prohibited}
                     placeholder={branchBorder?"分支":"未选择"}
                     showArrow={fieldName === "codeBranch"}

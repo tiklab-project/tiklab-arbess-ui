@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Space,Table,Select,Tooltip} from "antd";
+import {Space,Table,Select,Tooltip,Dropdown} from "antd";
 import {Profile} from "tiklab-eam-ui";
 import {DeleteOutlined,PlusOutlined} from "@ant-design/icons";
 import Btn from "../../common/btn/btn";
@@ -101,12 +101,26 @@ const PipelineUser = props =>{
                 <div>
                     流水线成员
                 </div>
-                <Btn
-                    title={"添加成员"}
-                    icon={<PlusOutlined/>}
-                    onClick={()=>setVisible(true)}
-                    type={"link"}
-                />
+                <Dropdown overlay={
+                    <PipelineUserAdd
+                        visible={visible}
+                        setVisible={setVisible}
+                        nUserList={nUserList}
+                        yUserList={yUserList}
+                        setYUserList={setYUserList}
+                        setNUserList={setNUserList}
+                    />}
+                      placement={"bottomRight"}
+                      visible={visible}
+                      trigger={['click']}
+                      onVisibleChange={visible => setVisible(visible)}
+                >
+                    <Btn
+                        title={"添加成员"}
+                        icon={<PlusOutlined/>}
+                        type={"link"}
+                    />
+                </Dropdown>
             </div>
             <div className="pipeline-user-table">
                 <Table
@@ -118,14 +132,6 @@ const PipelineUser = props =>{
                     locale={{emptyText: <EmptyText/>}}
                 />
             </div>
-            <PipelineUserAdd
-                visible={visible}
-                setVisible={setVisible}
-                nUserList={nUserList}
-                yUserList={yUserList}
-                setYUserList={setYUserList}
-                setNUserList={setNUserList}
-            />
         </div>
     )
 }

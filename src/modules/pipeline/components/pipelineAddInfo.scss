@@ -70,3 +70,17 @@
         min-height: 240px;
     }
 }
+.pipeline-user-add{
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+    border-radius: 4px;
+    background: #ffffff;
+    padding: 15px;
+    .pipeline-user-add-table{
+        max-height: 220px;
+        overflow: auto;
+    }
+    .pipeline-user-add-btn{
+        padding-top: 10px;
+        text-align: right;
+    }
+}

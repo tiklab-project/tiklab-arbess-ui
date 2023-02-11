@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from "react";
-import {Modal,Form,Select,Checkbox,Table,Space,Tooltip} from "antd";
+import {Modal,Form,Select,Checkbox,Table,Space,Tooltip,Dropdown} from "antd";
 import {DeleteOutlined,PlusOutlined} from "@ant-design/icons";
 import {Profile} from "tiklab-eam-ui";
 import {PostposeMirrorScenario} from "../../common/components/mirror";
@@ -96,7 +96,8 @@ const PostposeAdd = props =>{
                 taskId:pipelineId,
                 values:null,
             }
-            type===61?params.values={ ...value,userList:newArr}:params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
+            type===61?params.values={ ...value,userList:newArr}:
+                params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
             updatePostConfig(params)
         }else {
             const params = {
@@ -104,7 +105,8 @@ const PostposeAdd = props =>{
                 taskId:pipelineId,
                 values:null,
             }
-            type===61?params.values={ ...value,userList:newArr}:params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
+            type===61?params.values={ ...value,userList:newArr}:
+                params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
             createPostConfig(params)
         }
         setPostposeVisible(false)
@@ -241,14 +243,8 @@ const PostposeAdd = props =>{
                     />
                 </div>
                 <div className="postpose-modal-content">
-                    <Form
-                        form={form}
-                        layout={"vertical"}
-                        initialValues={{type:61,typeList:["site"]}}
-                    >
-                        <Form.Item name={"type"} label={"类型"}
-                                   rules={[{required:true, message:"请选择类型"}]}
-                        >
+                    <Form form={form} layout={"vertical"} initialValues={{type:61,typeList:["site"]}}>
+                        <Form.Item name={"type"} label={"类型"} rules={[{required:true, message:"请选择类型"}]}>
                             <Select onChange={value=>setType(value)} disabled={formValue && formValue}>
                                 <Select.Option value={61}>消息通知</Select.Option>
                                 <Select.Option value={71}>执行bat脚本</Select.Option>
@@ -258,9 +254,7 @@ const PostposeAdd = props =>{
                         {
                             type===61 &&
                             <>
-                                <Form.Item label={"消息发送方式"} name={"typeList"}
-                                           rules={[{required:true, message:"请选择消息发送方式"}]}
-                                >
+                                <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"请选择消息发送方式"}]}>
                                     <Checkbox.Group>
                                         {
                                             typeList.map(item=>{
@@ -274,19 +268,25 @@ const PostposeAdd = props =>{
                                 <div className="post-pose-user">
                                     <div className="post-pose-title">
                                         <div className="title-user">消息通知人员</div>
-                                        <Btn
-                                            type={"link"}
-                                            icon={<PlusOutlined/>}
-                                            onClick={()=>setUserAddVisible(true)}
-                                            title={"添加成员"}
-                                        />
-                                        <PostposeUserAdd
-                                            userAddVisible={userAddVisible}
-                                            setUserAddVisible={setUserAddVisible}
-                                            allUserList={allUserList}
-                                            yUserList={yUserList}
-                                            setYUserList={setYUserList}
-                                        />
+                                       <Dropdown
+                                           overlay={ <PostposeUserAdd
+                                               userAddVisible={userAddVisible}
+                                               setUserAddVisible={setUserAddVisible}
+                                               allUserList={allUserList}
+                                               yUserList={yUserList}
+                                               setYUserList={setYUserList}
+                                                />}
+                                           placement={"bottomRight"}
+                                           visible={userAddVisible}
+                                           trigger={['click']}
+                                           onVisibleChange={visible => setUserAddVisible(visible)}
+                                       >
+                                           <Btn
+                                               type={"link-nopadding"}
+                                               icon={<PlusOutlined/>}
+                                               title={"添加成员"}
+                                           />
+                                       </Dropdown>
                                     </div>
                                     <Table
                                         bordered={false}

@@ -4,7 +4,7 @@ import Btn from "../../../common/btn/btn";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import AuthType from "../../common/authType";
 import {QuestionCircleOutlined} from "@ant-design/icons";
-import {autoHeight} from "../../../common/client/client";
+import {autoHeight, Validation} from "../../../common/client/client";
 
 
 const CodeModal = props =>{
@@ -121,7 +121,7 @@ const CodeModal = props =>{
                         <Form.Item
                             name="name"
                             label="名称"
-                            rules={[{required:true,message:`请输入名称`}]}
+                            rules={[{required:true,message:`请输入名称`},Validation("名称")]}
                         >
                             <Input/>
                         </Form.Item>

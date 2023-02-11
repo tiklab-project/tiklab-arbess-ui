@@ -31,7 +31,7 @@ const MirrorContent = props =>{
         updatePostConfig(params)
         setStyleActiveLine(false)
     }
-    
+
     return   <div className="config-scenario">
         <PostposeMirrorScenario
             value={item.scriptOrder}
@@ -42,7 +42,7 @@ const MirrorContent = props =>{
         />
         {
             styleActiveLine &&
-            <div style={{paddingTop:8}}>
+            <div style={{paddingTop:8,textAlign:"right"}}>
                 <Btn
                     title={"取消"}
                     isMar={true}

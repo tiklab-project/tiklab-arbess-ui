@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {Tooltip,Select} from "antd";
 import {MinusCircleOutlined,PlusCircleOutlined} from "@ant-design/icons";
 import {Input} from "antd";
@@ -8,18 +8,21 @@ import {x} from "../../view/components/delData";
 import EmptyText from "../../../common/emptyText/emptyText";
 import "./condition.scss";
 
-/*
-    条件
-*/
+/**
+ * 条件
+ */
 const Condition = props =>{
 
     const {condStore,dataItem} = props
 
     const {createCond,findAllTaskCond,condData,fixCondData,setCondData,updateCond,fresh,deleteCond} = condStore
 
+    const [border,setBorder] = useState('')
+    const [showArrow,setShowArrow] = useState(false)
+
     useEffect(()=>{
         findAllTaskCond(dataItem.configId)
-    },[fresh,dataItem && dataItem.configId])
+    },[fresh,dataItem.configId])
 
     const isequal = (data,condId) =>{
         let a
@@ -46,6 +49,7 @@ const Condition = props =>{
     }
 
     const ChangeCondType = (value,item) => {
+        setBorder('')
         updateCond({
             condType:value,
             condId:item.condId
@@ -57,6 +61,7 @@ const Condition = props =>{
     }
 
     const onBlur = (e,item,name)  => {
+        setBorder('')
         const zz = isequal(fixCondData,item.condId)
         if(x(e.target.value,zz[name])){
             const obj = {}
@@ -74,6 +79,9 @@ const Condition = props =>{
                 <div className="inputs-condition">
                     <div className="inputs-condition-key">
                         <Input
+                            bordered={border===(item.condId+"condKey")}
+                            className={`${border===(item.condId+"condKey")?"":'input-hover'}`}
+                            onFocus={()=>setBorder(item.condId+"condKey")}
                             placeholder={"名称"}
                             value={item && item.condKey}
                             onChange={e=>onChange(e,item,"condKey")}
@@ -83,6 +91,12 @@ const Condition = props =>{
                     </div>
                     <div>
                         <Select
+                            bordered={border===(item.condId+"condType")}
+                            className={`${border===(item.condId+"condType")?"":'input-hover'}`}
+                            onFocus={()=>setBorder(item.condId+"condType")}
+                            showArrow={showArrow}
+                            onMouseEnter={()=>setShowArrow(true)}
+                            onMouseLeave={()=>setShowArrow(false)}
                             value={item.condType}
                             onChange={value=>ChangeCondType(value,item)}
                             style={{width:85}}
@@ -93,6 +107,9 @@ const Condition = props =>{
                     </div>
                     <div className="inputs-condition-value">
                         <Input
+                            bordered={border===(item.condId+"condValue")}
+                            className={`${border===(item.condId+"condValue")?"":'input-hover'}`}
+                            onFocus={()=>setBorder(item.condId+"condValue")}
                             placeholder={"值"}
                             value={item && item.condValue}
                             onChange={e=>onChange(e,item,"condValue")}

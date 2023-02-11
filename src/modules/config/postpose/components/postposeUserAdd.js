@@ -1,18 +1,18 @@
 import React,{useEffect,useState} from "react";
-import {Modal,Space,Table} from "antd";
-import {Profile} from "tiklab-eam-ui";
-import {autoHeight} from "../../../common/client/client";
-import ModalTitle from "../../../common/modalTitle/modalTitle";
+import {Table,Input} from "antd";
+import {SearchOutlined} from '@ant-design/icons';
 import EmptyText from "../../../common/emptyText/emptyText";
 import Btn from "../../../common/btn/btn";
+import "./postposeUserAdd.scss";
 
 const PostposeUserAdd = props =>{
 
-    const {userAddVisible,setUserAddVisible,allUserList,yUserList,setYUserList} = props
+    const {userAddVisible,setUserAddVisible,allUserList,yUserList,setYUserList,
+        postposeData,setPostposeData,type
+    } = props
 
-    const [height,setHeight] = useState(0)
-    const [addUser,setAddUser] = useState([])
-    const [userList,setUserList] = useState([])
+    const [addUser,setAddUser] = useState([]) // 选中的用户
+    const [userList,setUserList] = useState([])  //
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
     useEffect(()=>{
@@ -21,77 +21,29 @@ const PostposeUserAdd = props =>{
     },[userAddVisible])
 
     useEffect(()=>{
-        const newArr = yUserList && yUserList.map(item=>item.user.id)
+        let newArr = []
+        if(type){
+            newArr = yUserList && yUserList.userList.map(item=>item.user.id)
+        }else {
+            newArr = yUserList && yUserList.map(item=>item.user.id)
+        }
         userAddVisible && setUserList(allUserList.filter(item=>!newArr.includes(item.user.id)))
     },[userAddVisible])
 
-    useEffect(()=>{
-        setHeight(autoHeight())
-        return ()=>{
-            window.onresize = null
-        }
-    },[height])
-
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
-
     const onOk = () => {
-        setYUserList(yUserList.concat(addUser))
+        if(type){
+            postposeData && postposeData.map(item=>{
+                if(item.configId===yUserList.configId){
+                    item.userList = item.userList.concat(addUser)
+                }
+            })
+            setPostposeData([...postposeData])
+        }else {
+            setYUserList(yUserList.concat(addUser))
+        }
+
         setUserAddVisible(false)
     }
-
-    const modalFooter = (
-        <>
-            <Btn
-                onClick={()=>setUserAddVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={onOk}
-                title={"确定"}
-                type={"primary"}
-            />
-        </>
-    )
-
-    const columns = [
-        {
-            title:"昵称",
-            dataIndex: ["user","nickname"],
-            key: ["user","nickname"],
-            width:"25%",
-            ellipsis:true,
-            render:(text,record)=>{
-                return <Space>
-                    <Profile userInfo={record.user}/>
-                    {text}
-                </Space>
-            }
-        },
-        {
-            title:"名称",
-            dataIndex:["user","name"],
-            key:["user","name"],
-            width:"25%",
-            ellipsis:true,
-        },
-        {
-            title:"手机号",
-            dataIndex:["user","phone"],
-            key:["user","phone"],
-            width:"25%",
-            ellipsis:true,
-        },
-        {
-            title:"邮箱",
-            dataIndex:["user","email"],
-            key:["user","email"],
-            width:"25%",
-            ellipsis:true,
-        },
-    ]
 
     const onSelectRow = record => {
         // 如果已经选中 -- 取消选中
@@ -121,38 +73,49 @@ const PostposeUserAdd = props =>{
             })
             setAddUser([...newArr])
             setSelectedRowKeys(selectedRowKeys)
+            console.log("数组::",selectedRows)
+            console.log("id::",selectedRowKeys)
         },
         selectedRowKeys:selectedRowKeys
     }
 
+
     return (
-        <Modal
-            visible={userAddVisible}
-            onCancel={()=>setUserAddVisible(false)}
-            closable={false}
-            destroyOnClose={true}
-            footer={modalFooter}
-            width={800}
-            style={{height:height,top:60}}
-            bodyStyle={{minHeight:317}}
-            className="mf"
-        >
-            <ModalTitle
-                setVisible={setUserAddVisible}
-                title={"添加成员"}
+        <div className='post-pose-user-add mf'>
+            <Input
+                placeholder={'名称'}
+                suffix={<SearchOutlined/>}
             />
-            <Table
-                rowKey={(record) => record.id}
-                rowSelection={rowSelection}
-                onRow={record => ({
+            <div className='user-add-table'>
+                <Table
+                    rowKey={(record) => record.id}
+                    rowSelection={rowSelection}
+                    onRow={record => ({
                         onClick: () => onSelectRow(record)
-                })}
-                columns={columns}
-                dataSource={userList}
-                pagination={false}
-                locale={{emptyText: <EmptyText/>}}
-            />
-        </Modal>
+                    })}
+                    columns={[{
+                        title:"名称",
+                        dataIndex:["user","name"],
+                        key:["user","name"],
+                    }]}
+                    dataSource={userList}
+                    pagination={false}
+                    locale={{emptyText: <EmptyText/>}}
+                />
+            </div>
+            <div className='user-add-btn'>
+                <Btn
+                    onClick={()=>setUserAddVisible(false)}
+                    title={"取消"}
+                    isMar={true}
+                />
+                <Btn
+                    onClick={onOk}
+                    title={"确定"}
+                    type={"primary"}
+                />
+            </div>
+        </div>
     )
 }
 

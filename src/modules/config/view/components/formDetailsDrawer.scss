@@ -2,8 +2,13 @@
     .body-taskForm{
         width: 100%;
         padding: 0 20px;
+        .input-hover:hover{
+            background-color: #f2f2f2;
+        }
     }
     .taskForm-forms{
+        padding-top: var(--tiklab-padding-item);
+        padding-bottom: var(--tiklab-padding);
         .ant-row {
             flex-flow: row wrap;
         }
@@ -11,15 +16,10 @@
             flex-direction: column;
             margin-bottom: 10px;
         }
-        .ant-input-group{
-            .ant-input{
-                width: 410px;
-            }
+        .ant-input-group .ant-input{
+            width: 410px;
         }
-        .ant-input{
-            width: 440px;
-        }
-        .ant-select{
+        .ant-input,.ant-select{
             width: 440px;
         }
         .ant-input-group-addon{
@@ -51,9 +51,5 @@
                 content: "*";
             }
         }
-    }
-    .taskForm-post{
-        padding-top: var(--tiklab-padding-item);
-        padding-bottom: var(--tiklab-padding);
     }
 }

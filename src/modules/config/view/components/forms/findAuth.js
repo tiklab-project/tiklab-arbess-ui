@@ -145,11 +145,13 @@ const FindAuth = props =>{
     return(
         <Form.Item label={label(dataItem.type)} name={dataItem.configId+"_authName"}>
             <Select
+                bordered={bordered}
                 showSearch={bordered}
                 placeholder={bordered ? label(dataItem.type):"未选择"}
                 showArrow={showArrow}
                 onMouseEnter={()=>setShowArrow(true)}
                 onMouseLeave={()=>setShowArrow(false)}
+                className={`${bordered?'':'input-hover'}`}
                 onFocus={onFocus}
                 onBlur={onBlur}
                 onChange={changeGitSelect}

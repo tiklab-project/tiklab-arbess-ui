@@ -22,24 +22,21 @@ const AuthType = props =>{
                                 label="用户名"
                                 name="username"
                                 rules={[{required:true,message:"请输入用户名"}]}
-                            >
-                                <Input/>
+                            ><Input/>
                             </Form.Item>
                             <Form.Item
                                 label="密码"
                                 name="password"
                                 rules={[{required:true,message:"请输入密码"}]}
-                            >
-                                <Input.Password/>
+                            ><Input.Password/>
                             </Form.Item>
                         </>
                         :
                         <Form.Item
                             label="私钥"
                             name="privateKey"
-                            rules={[{required:true,message:"请输入token"}]}
-                        >
-                            <Input.TextArea style={{overflow:"hidden"}}/>
+                            rules={[{required:true,message:"请输入私钥"}]}
+                        ><Input.TextArea style={{overflow:"hidden"}}/>
                         </Form.Item>
                 }
             </Form.Item>

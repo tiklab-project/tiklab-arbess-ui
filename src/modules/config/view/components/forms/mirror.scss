@@ -6,16 +6,24 @@
         width: 100%;
         overflow-y: auto;
     }
+    //.gui-mirror-fa{
+    //    min-height: 32px;
+    //    border: 1px solid #d9d9d9;
+    //    &:hover{
+    //        border-color: #1890ff;
+    //    }
+    //}
     .gui-mirror-fa{
         min-height: 32px;
-        border: 1px solid #d9d9d9;
-        &:hover{
-            border-color: #1890ff;
+        &:hover .CodeMirror{
+            background-color: #f2f2f2;
         }
     }
     .gui-mirror-tr{
         min-height: 64px;
         border: 1px solid #1890ff;
+        //-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        //box-shadow:inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
         .CodeMirror{
             min-height: 64px;
         }
@@ -29,10 +37,10 @@
         padding: 2px 7px;
         .CodeMirror-placeholder{
             color: #bfbfbf;
-            font-family: Microsoft YaHei;
+            font-family: Microsoft YaHei, serif;
         }
         .CodeMirror-code{
-            font-family: Microsoft YaHei;
+            font-family: Microsoft YaHei, serif;
         }
     }
     .gui-mirror-expand{
@@ -66,10 +74,10 @@
         padding: 0 20px;
         .CodeMirror{
             .CodeMirror-placeholder{
-                font-family: Microsoft YaHei;
+                font-family: Microsoft YaHei, serif;
             }
             .CodeMirror-code{
-                font-family: Microsoft YaHei;
+                font-family: Microsoft YaHei, serif;
             }
         }
     }

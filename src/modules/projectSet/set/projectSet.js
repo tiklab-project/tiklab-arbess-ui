@@ -103,13 +103,10 @@ const ProjectSet = props =>{
 
     const lisItem = item =>{
         return <div key={item.key} className="pipelineReDel-li">
-            <div
-                className={`pipelineReDel-li-top ${isExpandedTree(item.key) ?"pipelineReDel-li-select":""}`}
+            <div className={`pipelineReDel-li-top ${isExpandedTree(item.key) ?"pipelineReDel-li-select":""}`}
                 onClick={()=>setOpenOrClose(item.key)}
             >
-                <div className="pipelineReDel-li-icon">
-                    {item.icon}
-                </div>
+                <div className="pipelineReDel-li-icon">{item.icon}</div>
                 <div className="pipelineReDel-li-center">
                     <div className="pipelineReDel-li-title">{item.title}</div>
                     {
@@ -118,17 +115,11 @@ const ProjectSet = props =>{
                     }
                 </div>
                 <div className="pipelineReDel-li-down">
-                    {
-                        isExpandedTree(item.key)?
-                            <DownOutlined />:<RightOutlined />
-                    }
+                    { isExpandedTree(item.key)? <DownOutlined />:<RightOutlined /> }
                 </div>
             </div>
             <div className={`${isExpandedTree(item.key)? "pipelineReDel-li-bottom":"pipelineReDel-li-none"}`}>
-                {
-                    isExpandedTree(item.key) &&
-                        item.content
-                }
+                { isExpandedTree(item.key) && item.content }
             </div>
         </div>
     }

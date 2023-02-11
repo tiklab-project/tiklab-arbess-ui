@@ -1,9 +1,7 @@
 import React,{useEffect, useState} from "react";
-import {Modal,Space,Table} from "antd";
-import {autoHeight} from "../../common/client/client";
+import {Table,Input} from "antd";
+import {SearchOutlined} from '@ant-design/icons';
 import Btn from "../../common/btn/btn";
-import {Profile} from "tiklab-eam-ui";
-import ModalTitle from "../../common/modalTitle/modalTitle";
 import EmptyText from "../../common/emptyText/emptyText";
 
 
@@ -11,7 +9,6 @@ const PipelineUserAdd = props =>{
 
     const {visible,setVisible,yUserList,nUserList,setYUserList,setNUserList} = props
 
-    const [height,setHeight] = useState(0)
     const [addUser,setAddUser] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
@@ -19,14 +16,6 @@ const PipelineUserAdd = props =>{
         setSelectedRowKeys([])
         setAddUser([])
     },[visible])
-
-    useEffect(()=>{
-        setHeight(autoHeight())
-    },[height])
-
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
 
     const onOk = () => {
         // 所有id组成数组
@@ -39,59 +28,6 @@ const PipelineUserAdd = props =>{
         setNUserList(nUserList.filter(item=>!newArr.includes(item.id)))
         setVisible(false)
     }
-
-
-    const modalFooter = (
-        <>
-            <Btn
-                onClick={()=>setVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={onOk}
-                title={"确定"}
-                type={"primary"}
-            />
-        </>
-    )
-
-    const columns = [
-        {
-            title:"昵称",
-            dataIndex:"nickname",
-            key:"nickname",
-            width:"25%",
-            ellipsis:true,
-            render:(text,record)=>{
-                return <Space>
-                    <Profile userInfo={record}/>
-                    {text}
-                </Space>
-            }
-        },
-        {
-            title:"名称",
-            dataIndex:"name",
-            key:"name",
-            width:"25%",
-            ellipsis:true,
-        },
-        {
-            title:"手机号",
-            dataIndex:"phone",
-            key:"phone",
-            width:"25%",
-            ellipsis:true,
-        },
-        {
-            title:"邮箱",
-            dataIndex:"email",
-            key:"email",
-            width:"25%",
-            ellipsis:true,
-        },
-    ]
 
     const onSelectRow = record => {
         // 如果已经选中 -- 取消选中
@@ -119,31 +55,38 @@ const PipelineUserAdd = props =>{
     }
 
     return (
-        <Modal
-            visible={visible}
-            onCancel={()=>setVisible(false)}
-            closable={false}
-            footer={modalFooter}
-            width={900}
-            style={{height:height,top:60}}
-            className="mf"
-        >
-            <ModalTitle
-                setVisible={setVisible}
-                title={"添加成员"}
-            />
-            <Table
-                rowKey={(record) => record.id}
-                rowSelection={rowSelection}
-                onRow={record => ({
+        <div className='pipeline-user-add mf'>
+            <Input placeholder={"名称"} suffix={<SearchOutlined/>}/>
+            <div className='pipeline-user-add-table'>
+                <Table
+                    rowKey={(record) => record.id}
+                    rowSelection={rowSelection}
+                    onRow={record => ({
                         onClick: () => onSelectRow(record)
-                })}
-                columns={columns}
-                dataSource={nUserList}
-                pagination={false}
-                locale={{emptyText: <EmptyText/>}}
-            />
-        </Modal>
+                    })}
+                    columns={[{
+                        title:"昵称",
+                        dataIndex:"name",
+                        key:"name",
+                    }]}
+                    dataSource={nUserList}
+                    pagination={false}
+                    locale={{emptyText: <EmptyText/>}}
+                />
+            </div>
+            <div className='pipeline-user-add-btn'>
+                <Btn
+                    onClick={()=>setVisible(false)}
+                    title={"取消"}
+                    isMar={true}
+                />
+                <Btn
+                    onClick={onOk}
+                    title={"确定"}
+                    type={"primary"}
+                />
+            </div>
+        </div>
     )
 }
 

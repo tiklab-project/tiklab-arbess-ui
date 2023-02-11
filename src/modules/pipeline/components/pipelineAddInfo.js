@@ -152,11 +152,11 @@ const PipelineAddInfo = props =>{
                     message: "流水线名称不能包含非法字符，如&,%，&，#……等",
                 },
                 ({ getFieldValue }) => ({
-                    validator(rule, value) { 
+                    validator(rule, value) {
                         let nameArray = []
                         if(pipelineList){
-                            const name = pipelineList && pipelineList.map(item=>item.pipelineName)
-                            nameArray = name.filter(item=>item!==pipeline.pipelineName)
+                            const name = pipelineList && pipelineList.map(item=>item.name)
+                            nameArray = name.filter(item=>item!==pipeline.name)
                         }
                         if (nameArray.includes(value)) {
                             return Promise.reject("名称已经存在");
@@ -169,7 +169,7 @@ const PipelineAddInfo = props =>{
         }
         if(!set){
             rule = [
-                {required:true,message:""},
+                {required:true,message:"名称不能为空"},
                 {max:30,message:"请输入1~31位以内的名称"},
                 {
                     pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
@@ -177,12 +177,9 @@ const PipelineAddInfo = props =>{
                 },
                 ({ getFieldValue }) => ({
                     validator(rule,value) {
-                        if(!value || value.trim() === ""){
-                            return Promise.reject("名称不能为空");
-                        }
                         let nameArray = []
                         if(pipelineList){
-                            nameArray = pipelineList && pipelineList.map(item=>item.pipelineName)
+                            nameArray = pipelineList && pipelineList.map(item=>item.name)
                         }
                         if (nameArray.includes(value)) {
                             return Promise.reject("名称已经存在");
@@ -288,4 +285,4 @@ const PipelineAddInfo = props =>{
     )
 }
 
-export default withRouter(inject("pipelineStore")(observer(PipelineAddInfo)))
+export default inject("pipelineStore")(observer(PipelineAddInfo))

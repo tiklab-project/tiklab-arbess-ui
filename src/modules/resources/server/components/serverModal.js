@@ -4,7 +4,7 @@ import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/btn";
 import AuthType from "../../common/authType";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
-import {autoHeight} from "../../../common/client/client";
+import {autoHeight,Validation} from "../../../common/client/client";
 
 const ServerModal = props =>{
 
@@ -291,10 +291,11 @@ const ServerModal = props =>{
                                 <Select.Option value={2}>私有</Select.Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item name="name" label="名称"
-                                rules={[{required:true,message:`名称不能空`}]}
-                        >
-                            <Input/>
+                        <Form.Item
+                            name="name"
+                            label="名称"
+                            rules={[{required:true,message:`名称不能空`},Validation("名称")]}
+                        ><Input/>
                         </Form.Item>
                         {
                             (serverWay===3 || serverWay===2) && authorize

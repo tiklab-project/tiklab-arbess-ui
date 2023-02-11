@@ -59,7 +59,7 @@ const MirrorContent = forwardRef((props,ref)=>{
     }
 
     return  <>
-            <div className="gui-mirror" id={name+"_mirror"}>
+            <div className={`gui-mirror`} id={name+"_mirror"}>
                 <ViewMirror
                     mirrorRefs={mirrorRefs}
                     mirrorValue={dataItem[name]}

@@ -41,11 +41,6 @@ export class ConfigStore{
         this.isFindConfig = value
     }
 
-    @action
-    mess = value =>{
-        message.info(value,0.5)
-    }
-
     @observable taskFormDrawer = false
     @observable dataItem = false
 
@@ -83,6 +78,12 @@ export class ConfigStore{
     }
 
     @action
+    setReQuery = () =>{
+        this.enabledValid=!this.enabledValid
+        this.isFindConfig=!this.isFindConfig
+    }
+
+    @action
     createTaskConfig = async values =>{
         const params = {
             ...this.creacteValue,
@@ -90,18 +91,17 @@ export class ConfigStore{
         }
         const data = await CreateTaskConfig(params)
         if(data.code===0){
-            this.mess("添加成功")
+            message.info("添加成功",0.5)
             this.dataItem = {
                 type: values.taskType,
                 configId: data.data,
                 name: this.setInitName(values.taskType)
             }
-            this.enabledValid=!this.enabledValid
-            this.isFindConfig=!this.isFindConfig
+            this.setReQuery()
             this.taskFormDrawer = true
         }
         if(data.code===50001){
-            this.mess(data.msg)
+            message.info(data.msg)
         }
         return data
     }
@@ -110,9 +110,8 @@ export class ConfigStore{
     deleteTaskConfig = async values =>{
         const data = await DeleteTaskConfig(values)
         if(data.code===0){
-            this.mess("删除成功")
-            this.enabledValid=!this.enabledValid
-            this.isFindConfig=!this.isFindConfig
+            message.info("删除成功",0.5)
+            this.setReQuery()
             this.taskFormDrawer = false
         }
         return data
@@ -123,9 +122,7 @@ export class ConfigStore{
         return new Promise((resolve, reject) => {
             UpdateTaskConfig(values).then(res=>{
                 if(res.code===0){
-                    this.mess("更新成功")
-                    this.enabledValid=!this.enabledValid
-                    this.isFindConfig=!this.isFindConfig
+                    this.setReQuery()
                     this.dataItem[Object.keys(values.values)[0]] = Object.values(values.values)[0]
                 }
                 resolve(res)
@@ -140,7 +137,6 @@ export class ConfigStore{
     updateOrderTaskConfig = async value =>{
         const data = await UpdateOrderTaskConfig(value)
         if(data.code===0){
-            this.mess("更新成功")
             this.isFindConfig=!this.isFindConfig
         }
         return data
@@ -173,7 +169,6 @@ export class ConfigStore{
         params.append("stagesName",value.stagesName)
         const data = await UpdateStageName(params)
         if(data.code===0){
-            this.mess("更新成功")
             this.isFindConfig = !this.isFindConfig
         }
         return data
@@ -189,7 +184,7 @@ export class ConfigStore{
         }
         return data
     }
-    
+
 }
 
 export const CONFIG_STORE = "configStore"

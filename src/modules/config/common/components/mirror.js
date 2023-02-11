@@ -52,7 +52,7 @@ export const ViewMirror = props =>{
         const One = `${cursorLine.charAt(end - 1)}`
         // 得到最后空格后面的字符串，无空格第一个字符串
         const Two = cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1]
-        
+
         if(One.trim() !== ""){
             console.log(Two,"cursorLine")
         }
@@ -61,7 +61,7 @@ export const ViewMirror = props =>{
             hintList.forEach(e => {
                 list.push(e.name)
             })
-        } 
+        }
 
         // 得到光标标识
         let token = cmInstance.getTokenAt(cursor)
@@ -71,7 +71,7 @@ export const ViewMirror = props =>{
             to: { ch: token.end, line: cursor.line },
         }
     }
-    
+
     return(
         <CodeMirror
             value={mirrorValue}//内容
@@ -127,7 +127,7 @@ export const ExpandMirror = props =>{
         const One = `${cursorLine.charAt(end - 1)}`
 
         if(One.trim() !== ""){
-            console.log(cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1],"cursorLine")
+            // console.log(cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1],"cursorLine")
         }
         let list = []
         if (One === "$") {
@@ -144,7 +144,7 @@ export const ExpandMirror = props =>{
             to: { ch: token.end, line: cursor.line },
         }
     }
-    
+
     return(
         <CodeMirror
             ref={mirrorRefs}

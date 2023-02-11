@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Input,message,Tooltip} from "antd";
 import {PlusCircleOutlined,MinusCircleOutlined} from "@ant-design/icons";
@@ -7,17 +7,19 @@ import {x} from "../../../view/components/delData";
 import "./variable.scss";
 import EmptyText from "../../../../common/emptyText/emptyText";
 
-/*
-    环境变量
-*/
+/**
+ * 环境变量
+ */
 const Variable = props => {
 
     const {variableStore,dataItem} = props
     const {fixVariableData,variableData,setVariableData,createVariable,findAllVariable,fresh,deleteVariable,updateVariable} = variableStore
 
+    const [bordered,serBordered] = useState(' ')
+
     useEffect(()=>{
         findAllVariable(dataItem.configId)
-    },[fresh,dataItem && dataItem.configId])
+    },[fresh,dataItem.configId])
 
     const isequal = (data,varId) =>{
         let a
@@ -51,6 +53,7 @@ const Variable = props => {
 
     // 更新
     const onBlur = (e,item,name) =>{
+        serBordered('')
         const zz = isequal(fixVariableData,item.varId)
         if(x(e.target.value,zz[name])){
             const obj = {}
@@ -73,8 +76,11 @@ const Variable = props => {
                 <div className="inputs-variable">
                     <div className="inputs-variable-key">
                         <Input
+                            bordered={bordered===(item.varId+"varKey")}
+                            className={`${bordered===(item.varId+"varKey")?"":'input-hover'}`}
+                            onFocus={()=>serBordered(item.varId+"varKey")}
                             placeholder={"名称"}
-                            value={item.varKey}
+                            value={item && item.varKey}
                             onChange={e=>onChange(e,item,"varKey")}
                             onBlur={e=>onBlur(e,item,"varKey")}
                             onPressEnter={(e)=>e.target.blur()}
@@ -83,6 +89,9 @@ const Variable = props => {
                     <div>=</div>
                     <div className="inputs-variable-value">
                         <Input
+                            bordered={bordered===(item.varId+"varValue")}
+                            className={`${bordered===(item.varId+"varValue")?"":'input-hover'}`}
+                            onFocus={()=>serBordered(item.varId+"varValue")}
                             placeholder={"值"}
                             value={item && item.varValue}
                             onChange={e=>onChange(e,item,"varValue")}
@@ -123,9 +132,7 @@ const Variable = props => {
             <div className="pose-variable-content">
                 {
                     variableData && variableData.length>0 ?
-                    variableData.map((item,index)=>{
-                        return renderInputs(item,index)
-                    })
+                    variableData.map((item,index)=>renderInputs(item,index))
                     :
                     <EmptyText title={"暂无环境变量"}/>
                 }

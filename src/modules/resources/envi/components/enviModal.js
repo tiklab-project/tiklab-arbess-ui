@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Modal,Form,Select,Input} from "antd";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
-import {autoHeight} from "../../../common/client/client";
+import {autoHeight,Validation} from "../../../common/client/client";
 
 const lis = [
     {
@@ -109,8 +109,10 @@ const EnviModal = props =>{
                         name="userForm"
                         autoComplete = "off"
                     >
-                        <Form.Item name="scmType" label="环境配置类型"
-                                rules={[{required:true,message:`请选择环境配置类型`}]}
+                        <Form.Item
+                            name="scmType"
+                            label="环境配置类型"
+                            rules={[{required:true,message:`请选择环境配置类型`}]}
                         >
                             <Select onChange={opt}>
                                 {
@@ -122,15 +124,23 @@ const EnviModal = props =>{
                                 }
                             </Select>
                         </Form.Item>
-                        <Form.Item label="名称" name="scmName"
-                                rules={[{required:true,message:`请输入${scmTitle(scmType)}名称`}]}
-                        >
-                            <Input/>
+                        <Form.Item
+                            label="名称"
+                            name="scmName"
+                            rules={[
+                                {required:true,message:`请输入${scmTitle(scmType)}名称`},
+                                Validation(scmTitle(scmType)+"名称")
+                            ]}
+                        ><Input/>
                         </Form.Item>
-                        <Form.Item label="地址" name="scmAddress"
-                                rules={[{required:true,message:`请输入${scmTitle(scmType)}地址`}]}
-                        >
-                            <Input/>
+                        <Form.Item
+                            label="地址"
+                            name="scmAddress"
+                            rules={[
+                                {required:true,message:`请输入${scmTitle(scmType)}地址`},
+                                Validation(scmTitle(scmType)+"地址")
+                            ]}
+                        ><Input/>
                         </Form.Item>
                     </Form>
                 </div>

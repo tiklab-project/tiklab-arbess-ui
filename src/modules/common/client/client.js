@@ -61,3 +61,15 @@ export const interceptUrl = (url,data) =>{
         return url.split('/')
     }
 }
+
+// form 效验
+export const Validation = name =>{
+    // return {
+    //     pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
+    //     message: `${name}不能包含非法字符，如&,%，&，#……等`,
+    // }
+    return {
+        pattern:/^[^\s]*$/,
+        message:`${name}不能包含空格`
+    }
+}

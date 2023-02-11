@@ -1,4 +1,6 @@
 .pose-pose{
+    padding-top: var(--tiklab-padding-item);
+    padding-bottom: var(--tiklab-padding);
     .pose-pose-up{
         display: flex;
         justify-content: space-between;
@@ -87,9 +89,8 @@
     border-radius: 4px;
     background: #ffffff;
     .dropdown-item{
-        height: 35px;
-        line-height: 35px;
-        padding: 0 15px;
+        min-width: 120px;
+        padding: 8px 16px;
         &:first-child{
             border-radius: 4px 4px 0 0;
         }

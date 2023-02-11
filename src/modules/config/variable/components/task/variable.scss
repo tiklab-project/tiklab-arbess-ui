@@ -1,4 +1,6 @@
 .pose-variable{
+    padding-top: var(--tiklab-padding-item);
+    padding-bottom: var(--tiklab-padding);
     .pose-variable-up{
         display: flex;
         justify-content: space-between;
