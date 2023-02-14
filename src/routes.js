@@ -34,7 +34,6 @@ const Config=AsyncComponent(()=>import("./modules/config/common/container/config
 /*  流水线详情 -- 设置 */
 const ProjectSet=AsyncComponent(()=>import("./modules/projectSet/common/projectSet"))
 const ProjectSetting=AsyncComponent(()=>import("./modules/projectSet/set/projectSet"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/projectSet/domainUser/domainUser"))
 
 /* 系统设置 */
 const System=AsyncComponent(()=>import("./modules/system/common/system"))
@@ -56,6 +55,7 @@ const SystemRoleTrue=AsyncComponent(()=>import("./modules/system/privilege/syste
 const ProjectRole=AsyncComponent(()=>import("./modules/system/privilege/projectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./modules/system/privilege/projectFeature"))
 const DomainRoleContent=AsyncComponent(()=>import("./modules/system/privilege/domainRole"))
+const ProductAuth=AsyncComponent(()=>import("./modules/system/privilege/productAuth"))
 
 /* 消息 */
 const MessageManagement=AsyncComponent(()=>import("./modules/system/message/messageManagement"))
@@ -68,7 +68,6 @@ const MessageNoticeTrue=AsyncComponent(()=>import("./modules/system/message/mess
 /* 日志 */
 const MyLogList=AsyncComponent(()=>import("./modules/system/oplog/myLogList"))
 const LogTemplateList=AsyncComponent(()=>import("./modules/system/oplog/logTemplateList"))
-const LogList=AsyncComponent(()=>import("./modules/system/oplog/logList"))
 const LogType=AsyncComponent(()=>import("./modules/system/oplog/logType"))
 
 /* 代办 */
@@ -82,10 +81,9 @@ const UserDirectory=AsyncComponent(()=>import("./modules/system/user/directory")
 const Org=AsyncComponent(()=>import("./modules/system/user/org"))
 const UserGroup=AsyncComponent(()=>import("./modules/system/user/group"))
 const UserGroupTrue=AsyncComponent(()=>import("./modules/system/user/groupture"))
+const ProjectSetUser=AsyncComponent(()=>import("./modules/system/user/domainUser"))
 
-const ProductUser=AsyncComponent(()=>import("./modules/system/licence/productUser"))
 const NoProductAuthUser=AsyncComponent(()=>import("./modules/eam/noProductAuthUser"))
-
 
 /* 版本与许可证 */
 const Version=AsyncComponent(()=>import("./modules/system/licence/version"))
@@ -206,7 +204,7 @@ const routers=[
                 routes:[
                     {
                         path: "/index/system/productUser",
-                        component: ProductUser,
+                        component: ProductAuth,
                     },
                     {
                         path: "/index/system/plugin",

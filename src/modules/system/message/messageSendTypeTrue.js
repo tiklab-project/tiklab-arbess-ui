@@ -1,8 +1,8 @@
 import React from "react";
 import {MessageSendType} from "tiklab-message-ui";
 
-/*
-    消息通知类型
+/**
+ * 消息通知类型
  */
 const MessageSendTypeContentTrue = props => {
 

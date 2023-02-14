@@ -1,10 +1,10 @@
 import React from "react";
 import {FullWorkTodo} from "tiklab-widget-ui";
 
-/*
-    全屏我的任务待办（用于工作台点击更多显示）
-*/
 
+/**
+ * 全屏我的任务待办（用于工作台点击更多显示）
+ */
 const FullWorkTodoContent = props =>{
 
     const changeTodo =() =>{

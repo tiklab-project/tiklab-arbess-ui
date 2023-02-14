@@ -14,7 +14,7 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     const mirrorRefs = useRef(null)
 
-    const {pipelineId} = pipelineStore
+    const {pipeline} = pipelineStore
     const {updateTaskConfig} = configStore
 
     const [bordered,setBordered] = useState(false)
@@ -36,8 +36,6 @@ const MirrorContent = forwardRef((props,ref)=>{
     }
 
     const onCancel = () =>{
-        // const targetDiv = document.getElementById(name+"_mirror")
-        // targetDiv.style.height = "auto"
         mirrorRefs.current.editor.setValue(dataItem[name]?dataItem[name]:"")
         setBordered(false)
     }
@@ -48,7 +46,7 @@ const MirrorContent = forwardRef((props,ref)=>{
         if(x(obj[name],mirrorValue)){
             dataItem[name] = ref.current.editor.getValue()
             const params = {
-                pipeline:{id:pipelineId},
+                pipeline:{id:pipeline.id},
                 values:obj,
                 taskType:dataItem.type,
                 configId:dataItem.configId,

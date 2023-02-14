@@ -8,8 +8,6 @@ import {
     MessageSendType
 } from "../api/postpose";
 
-import {message} from "antd";
-
 export class PostposeStore {
 
     @observable postposeData = []
@@ -31,7 +29,6 @@ export class PostposeStore {
     createPostConfig = async value =>{
         const data = await CreatePostConfig(value)
         if (data.code===0){
-            message.info("添加成功",0.5)
             this.isFindPostposeData = !this.isFindPostposeData
         }
         return data
@@ -41,7 +38,6 @@ export class PostposeStore {
     updatePostConfig = async value =>{
         const data = await UpdatePostConfig(value)
         if (data.code===0){
-            message.info("更新成功",0.5)
             this.isFindPostposeData = !this.isFindPostposeData
         }
         return data
@@ -53,7 +49,6 @@ export class PostposeStore {
         param.append("configId",value)
         const data = await DeletePostConfig(param)
         if(data.code===0){
-            message.info("删除成功",0.5)
             this.isFindPostposeData = !this.isFindPostposeData
         }
         return data
@@ -79,6 +74,7 @@ export class PostposeStore {
         }
         return data
     }
+
 }
 
 export const POSTPOSE_STORE = "postposeStore"

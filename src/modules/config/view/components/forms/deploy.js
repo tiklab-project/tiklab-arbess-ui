@@ -13,14 +13,14 @@ const Deploy = props =>{
     const {configStore,pipelineStore} = props
 
     const {updateTaskConfig,dataItem,setDataItem} = configStore
-    const {pipelineId} = pipelineStore
+    const {pipeline} = pipelineStore
 
     const [showArrow,setShowArrow] = useState(false)
     const [border,setBorder] = useState(false)
 
     const changDeployType = value => {
         const params = {
-            pipeline:{id:pipelineId},
+            pipeline:{id:pipeline.id},
             taskType:dataItem.type,
             values:{authType:value},
             configId:dataItem.configId,

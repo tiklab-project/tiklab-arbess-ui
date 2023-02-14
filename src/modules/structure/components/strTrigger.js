@@ -22,14 +22,15 @@ const end = (killInstance,pipeline) => {
     killInstance(pipeline.pipelineId)
 }
 
+// 历史运行--行操作
 export const actionEn = (record,deleteHistoryLog,killInstance,pipeline) =>{
     switch (record.runStatus) {
-        case 0:
+        case 30:
             return  <Tooltip title={"终止"} onClick={()=>end(killInstance,pipeline)}>
                         <MinusCircleOutlined style={{cursor:"pointer"}}/>
                     </Tooltip>
         default:
-            return(
+            return (
                 <Tooltip title={"删除"}>
                     <Popconfirm
                         placement="topRight"
@@ -47,24 +48,25 @@ export const actionEn = (record,deleteHistoryLog,killInstance,pipeline) =>{
     }
 }
 
+// 运行状态
 export const runStatus = type =>{
     switch(type){
         case 1 :
             //失败
             return  <Tooltip title={"运行失败"}>
-                        <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
+                        <CloseCircleOutlined style={{fontSize:16,color:"red"}}/>
                     </Tooltip>
         case 10 :
             //成功
             return  <Tooltip title={"运行成功"}>
-                        <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
+                        <CheckCircleOutlined style={{fontSize:16,color:"#0063FF"}}/>
                     </Tooltip>
         case 20:
             //被迫停止
             return  <Tooltip title={"运行终止"}>
-                        <ExclamationCircleOutlined style = {{fontSize:16}}/>
+                        <ExclamationCircleOutlined style={{fontSize:16}}/>
                     </Tooltip>
-        case 0:
+        case 30:
             //运行
             return  <Tooltip title={"正在运行"}>
                         <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
@@ -72,11 +74,12 @@ export const runStatus = type =>{
         case 3:
             //运行--等待运行
             return <Tooltip title={"等待运行"}>
-                        <PlayCircleOutlined style = {{fontSize:16}}/>
+                        <PlayCircleOutlined style={{fontSize:16}}/>
                     </Tooltip>
     }
 }
 
+// 触发信息--手动或自动
 export const runWay = (text,record) => {
     return (
         <div className="str-table-runWay">

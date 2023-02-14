@@ -16,14 +16,14 @@ const Variable = props =>{
     const {variableStore,pipelineStore} = props
 
     const {createVariable,findAllVariable,fresh,variableData,deleteVariable,updateVariable} = variableStore
-    const {pipelineId} = pipelineStore
+    const {pipeline} = pipelineStore
 
     const [variableVisible,setVariableVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
     useEffect(()=>{
-        pipelineId &&findAllVariable(pipelineId)
-    },[pipelineId,fresh])
+        pipeline &&findAllVariable(pipeline.id)
+    },[pipeline,fresh])
 
     const addVariable = () =>{
         setFormValue("")
@@ -104,7 +104,7 @@ const Variable = props =>{
                         formValue={formValue}
                         createVariable={createVariable}
                         updateVariable={updateVariable}
-                        pipelineId={pipelineId}
+                        pipelineId={pipeline && pipeline.id}
                     />
                 </div>
                 <div className="variable-tables">

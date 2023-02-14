@@ -12,14 +12,14 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../common/btn/btn";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import PipelineInfo from "../../pipeline/components/pipelineAddInfo";
-import "./projectSet.scss";
 import Loading from "../../common/loading/loading";
+import "./projectSet.scss";
 
 const ProjectSet = props =>{
 
     const {pipelineStore} = props
 
-    const {deletePipeline,pipelineId,pipeline,isLoading}=pipelineStore
+    const {deletePipeline,pipeline,isLoading}=pipelineStore
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
     const [powerType,setPowerType] = useState(1)
@@ -40,7 +40,7 @@ const ProjectSet = props =>{
     }
 
     const del = () =>{
-        deletePipeline(pipelineId).then(res=>{
+        deletePipeline(pipeline.id).then(res=>{
             props.history.push("/index/pipeline")
         })
     }
@@ -54,6 +54,7 @@ const ProjectSet = props =>{
             enCode:"pipeline_update",
             content: <div className="bottom-rename">
                 <PipelineInfo
+                    {...props}
                     powerType={powerType}
                     setPowerType={setPowerType}
                     set={true}
@@ -125,7 +126,7 @@ const ProjectSet = props =>{
     }
 
     const renderLisItem = item => {
-        return  <PrivilegeProjectButton code={item.enCode} key={item.key} domainId={pipelineId}>
+        return  <PrivilegeProjectButton code={item.enCode} key={item.key} domainId={pipeline.id}>
                     {lisItem(item)}
                 </PrivilegeProjectButton>
     }

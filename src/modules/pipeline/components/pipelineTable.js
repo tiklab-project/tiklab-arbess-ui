@@ -1,7 +1,7 @@
 import React from "react";
 import {Profile} from "tiklab-eam-ui";
 import {message,Tooltip,Table,Space,Spin} from "antd";
-import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined} from "@ant-design/icons";
+import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../common/emptyText/emptyText";
 import ListName from "../../common/list/listname";
@@ -72,7 +72,7 @@ const PipelineTable = props =>{
             title: "流水线名称",
             dataIndex: "name",
             key: "name",
-            width:"40%",
+            width:"35%",
             ellipsis:true,
             render:(text,record)=>{
                 return  <ListName
@@ -87,38 +87,45 @@ const PipelineTable = props =>{
             title: "最近构建信息",
             dataIndex: "lastBuildTime",
             key: "lastBuildTime",
-            width:"30%",
+            width:"25%",
             ellipsis:true,
             render:(text,record) =>{
                 switch (record.buildStatus) {
                     case 10:
                         return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
-                            <Space>
-                                <img src={pip_success} alt={"log"} className="imgs"/>
-                                {text}
-                            </Space>
-                        </Tooltip>
+                                    <Space>
+                                        <img src={pip_success} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
                     case 1:
-                        return <Tooltip title={tooltip("失败",text,record.execUser.name)}>
-                            <Space>
-                                <img src={pip_error} alt={"log"} className="imgs"/>
-                                {text}
-                            </Space>
-                        </Tooltip>
+                        return  <Tooltip title={tooltip("失败",text,record.execUser.name)}>
+                                    <Space>
+                                        <img src={pip_error} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
+                    case 30:
+                        return <Tooltip title={tooltip("运行中",text,record.execUser.name)}>
+                                    <Space>
+                                        <img src={pip_fog} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
                     case 0:
-                        return <Tooltip title={tooltip("待构建","无","无")}>
-                            <Space>
-                                <img src={pip_fog} alt={"log"} className="imgs"/>
-                                {text}
-                            </Space>
-                        </Tooltip>
+                        return  <Tooltip title={tooltip("待构建","待构建","无")}>
+                                    <Space>
+                                        <img src={pip_fog} alt={"log"} className="imgs"/>
+                                        待构建
+                                    </Space>
+                                </Tooltip>
                     case 20:
-                        return  <Tooltip title={tooltip("终止",text,record.execUser.name)}>
-                            <Space>
-                                <img src={pip_halt} alt={"log"} className="imgs"/>
-                                {text}
-                            </Space>
-                        </Tooltip>
+                        return   <Tooltip title={tooltip("终止",text,record.execUser.name)}>
+                                    <Space>
+                                        <img src={pip_halt} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
                 }
             }
         },
@@ -126,13 +133,34 @@ const PipelineTable = props =>{
             title: "负责人",
             dataIndex: ["user","nickname"],
             key: "user",
-            width:"20%",
+            width:"15%",
             ellipsis: true,
             render:(text,record) => {
-                return <Space>
-                    <Profile userInfo={record.user}/>
-                    {text}
-                </Space>
+                return  <Space>
+                            <Profile userInfo={record.user}/>
+                            {text}
+                        </Space>
+            }
+        },
+        {
+            title: "可见范围",
+            dataIndex: "power",
+            key: "power",
+            width:"15%",
+            ellipsis: true,
+            render:(text,record) => {
+                switch (text) {
+                    case 1:
+                        return  <Space>
+                                    <UnlockOutlined />
+                                    全局
+                                </Space>
+                    case 2:
+                        return  <Space>
+                                    <LockOutlined />
+                                    私有
+                                </Space>
+                }
             }
         },
         {

@@ -6,8 +6,6 @@ import {
     FindAllTaskCond
 } from "../api/condition";
 
-import {message} from "antd";
-
 export class CondStore{
 
     @observable fresh = false
@@ -44,7 +42,6 @@ export class CondStore{
         const data = await UpdateCond(value)
         if(data.code===0){
             this.fresh=!this.fresh
-            message.info("更新成功",0.5)
         }
         return data
     }

@@ -102,13 +102,11 @@ const AddDrawerContent = props =>{
     }
 
     const renderLeftLis = item =>{
-        return  <div
-            key={item.id}
-            className={`item ${type===item.id? "item-select":""}`}
-            onClick={()=>changeAnchor(item.id)}
-        >
-            <div className="item-title">{item.title}</div>
-        </div>
+        return  <div key={item.id} className={`item ${type===item.id? "item-select":""}`}
+                     onClick={()=>changeAnchor(item.id)}
+                >
+                    <div className="item-title">{item.title}</div>
+                </div>
     }
 
     const renderRightLis = group =>{
@@ -118,10 +116,7 @@ const AddDrawerContent = props =>{
                 {
                     group.desc && group.desc.map((item,index)=>{
                         return(
-                            <div key={index}
-                                 className="group-desc"
-                                 onClick={()=>handleClick(item)}
-                            >
+                            <div key={index} className="group-desc" onClick={()=>handleClick(item)}>
                                 <SubIcon type={item.type}/>
                             </div>
                         )
@@ -136,17 +131,14 @@ const AddDrawerContent = props =>{
             <Col span={4} className="gui-drawer-content-left">
                 <div className="drawerLeft">
                     {
-                        lis && lis.map(item=>{
-                            return renderLeftLis(item)}
-                        )}
+                        lis && lis.map(item=>renderLeftLis(item))
+                    }
                 </div>
             </Col>
             <Col span={20} className="gui-drawer-content-right">
                 <div className="drawerRight" id="tpl-task" onScroll={onScroll}>
                     {
-                        lis && lis.map((group)=>{
-                            return renderRightLis(group)
-                        })
+                        lis && lis.map((group)=>renderRightLis(group))
                     }
                 </div>
             </Col>

@@ -7,23 +7,29 @@ import EmptyText from "../../common/emptyText/emptyText";
 import Page from "../../common/page/page";
 import StrDetail from "../components/strDetail";
 import StrScreen from "../components/strScreen";
+import Loading from "../../common/loading/loading";
 import {runStatus, actionEn, runWay} from "../components/strTrigger";
 import "../components/structure.scss";
 
-
+/**
+ * 所有历史运行列表
+ */
 const Structure = props => {
 
     const {structureStore,pipelineStore} = props
 
-    const {findUserAllHistory,historyList,findAllLog,deleteHistoryLog,killInstance,freshen,
-        pageCurrent,setPageCurrent
+    const {findUserRunPageHistory,historyList,findAllLog,deleteHistoryLog,killInstance,freshen,
+        pageCurrent,setPageCurrent,page
     } = structureStore
-
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
     const [detailsVisible,setDetailsVisible] = useState(false) // 列表数据详情
-    const [index,setIndex] = useState(0) //1:运行；2:日志
     const [pipeline,setPipeline] = useState(0) // 获取流水线信息
+    const [index,setIndex] = useState(0) //1:完成状态；2:运行中状态
+    const [pipelineId,setPipelineId] = useState(null)  // 筛选条件--流水线
+    const [state,setState] = useState(0)  // 筛选条件--执行状态
+    const [type,setType] = useState(0)  // 筛选条件--执行方式
+    const [isLoading,setIsLoading] = useState(true) // 加载
 
     useEffect(()=>{
         // 所有流水线
@@ -31,21 +37,36 @@ const Structure = props => {
         return ()=>setPageCurrent(1)
     },[])
 
+    let inter = null
     useEffect(()=>{
         // 所有构建历史列表
-        findUserAllHistory()
-    },[freshen,pageCurrent])
-
+        inter = setInterval(()=>findUserRunPageHistory({
+            pipelineId:pipelineId,
+            state:state,
+            type:type
+        }).then(res=>{
+            if(res.code===0){
+                if(res.data && res.data.dataList[0].runStatus!==30){
+                    clearInterval(inter)
+                }
+            }
+            setIsLoading(false)
+        }),1000)
+        if(detailsVisible){
+            clearInterval(inter)
+        }
+        return ()=>clearInterval(inter)
+    },[freshen,pageCurrent,pipelineId,state,type,detailsVisible])
 
     // 列表数据详情
     const details = record => {
         switch (record.runStatus) {
-            case 0:
-                setIndex(1)
+            case 30:
+                setIndex(2)
                 break
             default:
                 findAllLog(record.historyId)
-                setIndex(2)
+                setIndex(1)
         }
         setPipeline(record.pipeline)
         setDetailsVisible(true)
@@ -55,7 +76,7 @@ const Structure = props => {
         setPageCurrent(pages)
     }
 
-    const  columns = [
+    const columns = [
         {
             title: "名称",
             dataIndex: ["pipeline","name"],
@@ -63,12 +84,10 @@ const Structure = props => {
             width:"25%",
             ellipsis:true,
             render:(text,record) =>{
-                return   <span className="str-table-name"
-                               onClick={()=>details(record)}
-                         >
-                                {`${text}`}
-                                <span className="str-table-findNumber"> #{record.findNumber}</span>
-                         </span>
+                return  <span className="str-table-name" onClick={()=>details(record)}>
+                            {`${text}`}
+                            <span className="str-table-findNumber"> #{record.findNumber}</span>
+                        </span>
             }
         },
         {
@@ -83,7 +102,7 @@ const Structure = props => {
             title: "触发信息",
             dataIndex: "runWay",
             key: "runWay",
-            width:"20%",
+            width:"21%",
             ellipsis:true,
             render:(text,record) => runWay(text,record)
         },
@@ -91,14 +110,14 @@ const Structure = props => {
             title: "开始",
             dataIndex: "createTime",
             key: "createTime",
-            width:"15%",
+            width:"17%",
             ellipsis:true,
         },
         {
             title: "耗时",
             dataIndex: "runTime",
             key: "runTime",
-            width:"15%",
+            width:"17%",
             ellipsis:true,
             render:(text,record)=> getTime(text)
         },
@@ -112,14 +131,18 @@ const Structure = props => {
         }
     ]
 
+    if(isLoading){
+        return <Loading/>
+    }
+
     if(detailsVisible){
         return <StrDetail
                     index={index}
                     pipeline={pipeline}
                     firstItem={"历史"}
+                    isAll={"structure"}
                     setIsDetails={setDetailsVisible}
                     structureStore={structureStore}
-                    isAll={"isAll"}
                 />
     }
 
@@ -130,7 +153,9 @@ const Structure = props => {
                 <StrScreen
                     changPage={changPage}
                     pipelineList={pipelineList}
-                    findUserAllHistory={findUserAllHistory}
+                    setType={setType}
+                    setState={setState}
+                    setPipelineId={setPipelineId}
                 />
                 <div className='structure-content-table'>
                     <Table
@@ -139,12 +164,12 @@ const Structure = props => {
                         dataSource={historyList}
                         rowKey={record=>record.historyId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText title={"暂无历史记录"}/>}}
+                        locale={{emptyText: <EmptyText title={"没有查询到历史记录"}/>}}
                     />
                     <Page
-                        pageCurrent={1}
+                        pageCurrent={pageCurrent}
                         changPage={changPage}
-                        page={1}
+                        page={page}
                     />
                 </div>
             </div>

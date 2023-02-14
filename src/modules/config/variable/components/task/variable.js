@@ -64,9 +64,7 @@ const Variable = props => {
                 varId:item.varId,
                 ...obj,
             }
-            updateVariable(params).then(res=>{
-                res.code===0 && message.info("更新成功",0.5)
-            })
+            updateVariable(params)
         }
     }
 

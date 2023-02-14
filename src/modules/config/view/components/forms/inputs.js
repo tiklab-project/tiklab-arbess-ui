@@ -7,7 +7,7 @@ const Inputs = props =>{
 
     const {placeholder,label,name,addonBefore,isValid,pipelineStore,configStore} = props
 
-    const {pipelineId} = pipelineStore
+    const {pipeline} = pipelineStore
     const {updateTaskConfig,dataItem} = configStore
 
     const [enter,setEnter] = useState(false)
@@ -58,7 +58,7 @@ const Inputs = props =>{
             obj[name] = e.target.value
             dataItem[name] = e.target.value
             const params = {
-                pipeline:{id:pipelineId},
+                pipeline:{id:pipeline.id},
                 taskType:dataItem.type,
                 configId:dataItem.configId,
                 values:obj,

@@ -9,7 +9,7 @@ const CodeGiteeOrGithub = props =>{
     const {configStore,pipelineStore,authorizeStore,dataItem} = props
 
     const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
-    const {pipelineId} = pipelineStore
+    const {pipeline} = pipelineStore
     const {updateTaskConfig} = configStore
 
     const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
@@ -22,7 +22,7 @@ const CodeGiteeOrGithub = props =>{
             setProhibited(false)
         }
         setFieldName("")
-    },[dataItem.codeName,pipelineId])
+    },[dataItem.codeName,pipeline])
 
     // 选择仓库地址
     const changeGitStoreHouse = (value,e) =>{
@@ -39,7 +39,7 @@ const CodeGiteeOrGithub = props =>{
         const obj = {}
         obj[key] = value
         const params = {
-            pipeline:{id:pipelineId},
+            pipeline:{id:pipeline.id},
             taskType:dataItem.type,
             values:obj,
             configId:dataItem.configId,

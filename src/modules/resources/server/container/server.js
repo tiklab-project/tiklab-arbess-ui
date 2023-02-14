@@ -10,6 +10,9 @@ import ServerBtn from "../components/serverBtn";
 import ListName from "../../../common/list/listname";
 import Listaction from "../../../common/list/listaction";
 
+/**
+ * 资源配置--服务配置
+ */
 const Server = props =>{
 
     const {serverStore} = props

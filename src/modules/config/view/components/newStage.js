@@ -10,7 +10,6 @@ import {
 } from "@ant-design/icons";
 import SIcon from "../../common/components/sIcon";
 import AddDrawer from "./addDrawer";
-import {onDrop} from "codemirror/src/edit/drop_events";
 
 const NewStage = props =>{
 
@@ -19,7 +18,7 @@ const NewStage = props =>{
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
     const [hover,setHover] = useState(false) // 并行按钮悬浮样式显示
 
-    const pipelineType = pipeline.type
+    const pipelineType = pipeline && pipeline.type
 
     // 新建任务弹窗事件操作
     const popUp = () =>{

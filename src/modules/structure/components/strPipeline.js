@@ -12,6 +12,9 @@ import {getTime} from "../../common/client/client";
 import {actionEn, runStatus, runWay} from "./strTrigger";
 import "./strPipeline.scss";
 
+/**
+ * 查询单个流水线历史运行列表
+ */
 const StrPipeline = props => {
 
     const {structureStore,pipelineStore} = props
@@ -20,64 +23,61 @@ const StrPipeline = props => {
         findAllLog,killInstance,historyList,freshen,pageCurrent,setPageCurrent,
         execData,page,
     } = structureStore
-    const {pipelineId,pipeline,findDmUserPage,pipelineUserList} = pipelineStore
+    const {pipeline,findDmUserPage,pipelineUserList} = pipelineStore
 
-    const [index,setIndex] = useState(0) //1:运行；2:日志
     const [strPipeDetails,setStrPipeDetails] = useState(false)
-    const [isLoading,setIsLoading] = useState(true)
+    const [isLoading,setIsLoading] = useState(true) // 加载
+    const [index,setIndex] = useState(0) //1:完成状态；2:运行中状态
+    const [state,setState] = useState(0)  // 筛选条件--执行状态
+    const [userId,setUseId] = useState(null)  // 筛选条件--执行人
+    const [type,setType] = useState(0)  // 筛选条件--执行方式
 
     useEffect(()=>{
         // 项目成员
-        if(pipelineId){
-            findDmUserPage(pipelineId)
-        }
-        // 组件销毁
-        return()=>{
-            setPageCurrent(1)
-        }
-    },[pipelineId])
+        pipeline && findDmUserPage(pipeline.id)
+    },[pipeline])
 
     // 运行状态加载
     let interval=null
     useEffect(() => {
-        pipelineId && findPipelineState(pipelineId).then(res=>{
+        pipeline && findPipelineState(pipeline.id).then(res=>{
             if(res.data===2){
                 interval=setInterval(()=>
-                    pipelineRunStatus(pipelineId).then(res=>{
+                    pipelineRunStatus(pipeline.id).then(res=>{
                         if(res.code===0){
                             res.data.allState === 0 && clearInterval(interval)
                         }
                     }), 1000)
             }
         })
+        // 组件销毁事件
         return ()=>{
             setPageCurrent(1)
             clearInterval(interval)
         }
-    }, [pipelineId,freshen])
+    }, [pipeline,freshen])
 
     // 所有历史列表
     useEffect(()=>{
-        const params = {
-            pipelineId:pipelineId,
-            state:0,
-            userId:null,
-            type:0
-        }
-        pipelineId && findPageHistory(params).then(res=>{
+        pipeline && findPageHistory({
+            pipelineId:pipeline.id,
+            state:state,
+            userId:userId,
+            type:type
+        }).then(()=>{
             setIsLoading(false)
         })
-    },[pipelineId,freshen,pageCurrent])
+    },[pipeline,freshen,pageCurrent,userId,state,type])
 
     // 构建详情
     const details = record =>{
         switch (record.runStatus) {
-            case 0:
-                setIndex(1)
+            case 30:
+                setIndex(2)
                 break
             default:
                 findAllLog(record.historyId)
-                setIndex(2)
+                setIndex(1)
         }
         setStrPipeDetails(true)
     }
@@ -87,7 +87,7 @@ const StrPipeline = props => {
         setPageCurrent(pages)
     }
 
-    const  columns = [
+    const columns = [
         {
             title: "名称",
             dataIndex: "findNumber",
@@ -95,9 +95,7 @@ const StrPipeline = props => {
             width:"20%",
             ellipsis:true,
             render:(text,record) =>{
-                return  <span className="str-table-findNumber"
-                             onClick={()=>details(record)}
-                        >
+                return  <span className="str-table-findNumber" onClick={()=>details(record)}>
                             {`# ${text}`}
                         </span>
             }
@@ -133,7 +131,7 @@ const StrPipeline = props => {
             ellipsis:true,
             render:(text,record)=>{
                 switch(record.runStatus){
-                    case 0:
+                    case 30:
                         return execData.allTime?getTime(execData.allTime):"0 秒"
                     default:
                         return getTime(text)
@@ -167,12 +165,13 @@ const StrPipeline = props => {
     return (
         <div className="strPipeline">
             <div className="strPipeline-content mf-home-limited mf">
-                <BreadcrumbContent firstItem={pipeline.name} secondItem={"历史"}/>
+                <BreadcrumbContent firstItem={pipeline && pipeline.name} secondItem={"历史"}/>
                 <StrScreen
                     changPage={changPage}
-                    id={pipelineId}
                     pipelineUserList={pipelineUserList}
-                    findPageHistory={findPageHistory}
+                    setType={setType}
+                    setState={setState}
+                    setUseId={setUseId}
                 />
                 <div className="strPipeline-content-table">
                     <Table
@@ -181,7 +180,7 @@ const StrPipeline = props => {
                         dataSource={historyList}
                         rowKey={record=>record.historyId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText title={"暂无历史记录"}/>}}
+                        locale={{emptyText: <EmptyText title={"没有查询到历史记录"}/>}}
                     />
                     <Page
                         pageCurrent={pageCurrent}

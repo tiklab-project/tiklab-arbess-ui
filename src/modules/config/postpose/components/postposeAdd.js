@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from "react";
-import {Modal,Form,Select,Checkbox,Table,Space,Tooltip,Dropdown} from "antd";
+import {Modal, Form, Select, Checkbox, Table, Space, Tooltip, Dropdown, message} from "antd";
 import {DeleteOutlined,PlusOutlined} from "@ant-design/icons";
 import {Profile} from "tiklab-eam-ui";
 import {PostposeMirrorScenario} from "../../common/components/mirror";
@@ -11,13 +11,11 @@ import PostposeUserAdd from "./postposeUserAdd";
 
 const PostposeAdd = props =>{
 
-    const {mesSendData,postposeVisible,setPostposeVisible,createPostConfig,pipelineId,formValue,userId,
-        findDmUserPage,updatePostConfig
-    } = props
+    const {mesSendData,postposeVisible,setPostposeVisible,createPostConfig,pipelineId,
+        formValue,userId,findDmUserPage,updatePostConfig} = props
 
     const [form] = Form.useForm()
     const mirrorRefs = useRef(null)
-
     const [height,setHeight] = useState(0)
     const [type,setType] = useState(61)
     const [userAddVisible,setUserAddVisible] = useState(false)
@@ -55,23 +53,22 @@ const PostposeAdd = props =>{
 
 
     useEffect(()=>{
-        postposeVisible && findDmUserPage(pipelineId).then(res=>{
+        postposeVisible && findDmUserPage({domainId:pipelineId}).then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
                 setAllUserList([...dataList])
                 if(formValue){
                     setYUserList(formValue && formValue.userList)
+                    return
                 }
-                else{
-                    let arr = []
-                    dataList.map(item=>{
-                        item.user.id===userId && arr.push({
-                            ...item,
-                            messageType:1
-                        })
+                let arr = []
+                dataList.map(item=>{
+                    item.user.id===userId && arr.push({
+                        ...item,
+                        messageType:1
                     })
-                    setYUserList([...arr])
-                }
+                })
+                setYUserList([...arr])
             }
         })
     },[postposeVisible])
@@ -98,7 +95,9 @@ const PostposeAdd = props =>{
             }
             type===61?params.values={ ...value,userList:newArr}:
                 params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
-            updatePostConfig(params)
+            updatePostConfig(params).then(res=>{
+                res.code===0 && message.info("更新成功",0.5)
+            })
         }else {
             const params = {
                 taskType:type,
@@ -107,7 +106,9 @@ const PostposeAdd = props =>{
             }
             type===61?params.values={ ...value,userList:newArr}:
                 params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
-            createPostConfig(params)
+            createPostConfig(params).then(res=>{
+                res.code===0 && message.info("添加成功",0.5)
+            })
         }
         setPostposeVisible(false)
     }
@@ -198,6 +199,7 @@ const PostposeAdd = props =>{
         },
     ]
 
+    // 消息通知方式是否禁止
     const isType = type => mesSendData && mesSendData.some(item=>item===type)
 
     const typeList = [

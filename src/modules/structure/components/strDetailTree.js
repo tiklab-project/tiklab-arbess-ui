@@ -23,7 +23,7 @@ const StrDetailTree = props =>{
 
     const taskLog = item => {
         switch (index) {
-            case 2:
+            case 1:
                 setLogData(item)
                 break
             default:

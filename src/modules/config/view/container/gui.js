@@ -10,27 +10,26 @@ const Gui = props =>{
     const {configStore,pipelineStore} = props
 
     const {updateStageName,setCreacteValue,configValid,deleteTaskConfig,enabledValid,validType,data,taskFormDrawer,setTaskFormDrawer,
-        dataItem,setDataItem,findAllTaskConfig,isFindConfig
-    } = configStore
-    const {pipeline,pipelineId} = pipelineStore
+        dataItem,setDataItem,findAllTaskConfig,isFindConfig} = configStore
+    const {pipeline} = pipelineStore
 
     const [isLoading,setIsLoading] = useState(true) // 数据未返回时加载状态
 
     useEffect(()=>{
         return ()=> setIsLoading(true)
-    },[pipelineId])
+    },[pipeline])
 
     // 表单初始化
     useEffect(()=>{
-        pipelineId && findAllTaskConfig(pipelineId).then(res=>{
+        pipeline && findAllTaskConfig(pipeline.id).then(res=>{
             setIsLoading(false)
         })
-    },[pipelineId,isFindConfig])
+    },[pipeline,isFindConfig])
 
       // 效验表单
     useEffect(()=>{
-        pipelineId && configValid(pipelineId)
-    },[pipelineId,enabledValid])
+        pipeline && configValid(pipeline.id)
+    },[pipeline,enabledValid])
 
     // 加载状态
     if(isLoading){

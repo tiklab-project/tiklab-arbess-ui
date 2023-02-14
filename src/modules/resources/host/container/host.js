@@ -10,6 +10,9 @@ import EmptyText from "../../../common/emptyText/emptyText";
 import ListName from "../../../common/list/listname";
 import Listaction from "../../../common/list/listaction";
 
+/**
+ * 资源配置--主机配置
+ */
 const Host = props =>{
 
     const {hostStore} = props

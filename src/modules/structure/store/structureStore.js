@@ -8,7 +8,7 @@ import {
     KillInstance,
     PipelineStartStructure,
     FindPageHistory,
-    FindUserAllHistory
+    FindUserRunPageHistory
 } from "../api/structure";
 
 import {getUser} from "tiklab-core-ui";
@@ -20,7 +20,6 @@ export class StructureStore {
     @observable execData = "" // 构建历史运行状态数据
     @observable itemData = "" // 构建历史完成状态数据
     @observable freshen = false  // 重新渲染页面
-    @observable strDetails = false // 构建详情页面数据未返回时加载状态
     @observable pageCurrent = 1 // 筛选时，设置当前页数初始化
     @observable page = {
         defaultCurrent: 1,
@@ -90,40 +89,14 @@ export class StructureStore {
         }
     }
 
-    //构建历史
-    @action
-    findPageHistory =async values =>{
-        const params = {
-            pageParam: {
-                pageSize: 13,
-                currentPage: this.pageCurrent,
-            },
-            ...values,
-        }
-        const data = await FindPageHistory(params)
-        if(data.code===0 && data.data){
-            if(data.data.dataList.length===0){
-                this.historyList = []
-                this.page = {}
-            }
-            else{
-                this.page.total = data.data.totalPage
-                this.historyList = data.data.dataList
-            }
-        }
-        return data
-    }
-
     //历史详情日志
     @action
     findAllLog =async value =>{
-        this.strDetails = true
         const param = new FormData()
         param.append("historyId", value)
         const data = await FindAllLog(param)
         if(data.code===0){
             this.itemData = data.data && data.data
-            this.strDetails = false
         }
         return data
     }
@@ -142,11 +115,49 @@ export class StructureStore {
         return data
     }
 
+
+    // 单个流水线历史列表
     @action
-    findUserAllHistory = async value =>{
-        const data = await FindUserAllHistory()
+    findPageHistory =async values =>{
+        const params = {
+            pageParam: {
+                pageSize: 13,
+                currentPage: this.pageCurrent,
+            },
+            ...values,
+        }
+        const data = await FindPageHistory(params)
+        this.setHistoryList(data)
+        return data
+    }
+
+    // 所有流水线列表
+    @action
+    findUserRunPageHistory = async values =>{
+        const params = {
+            pageParam: {
+                pageSize: 13,
+                currentPage: this.pageCurrent,
+            },
+            ...values,
+        }
+        const data = await FindUserRunPageHistory(params)
+        this.setHistoryList(data)
+        return data
+    }
+
+    // 设置历史列表
+    @action
+    setHistoryList = data =>{
         if(data.code===0){
-            this.historyList = data.data && data.data
+            if(data.data && data.data.dataList.length > 0){
+                this.page.total = data.data.totalPage
+                this.historyList = data.data.dataList
+            }
+            else{
+                this.historyList = []
+                this.page = {}
+            }
         }
         else {
             this.historyList = []

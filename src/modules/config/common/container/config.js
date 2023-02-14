@@ -19,7 +19,7 @@ const Config = props =>{
 
     const {pipelineStore,configStore,structureStore} = props
 
-    const {pipelineStartStructure,pipelineRunStatus} = structureStore
+    const {pipelineStartStructure} = structureStore
     const {validType,data,setTaskFormDrawer,setDataItem} = configStore
     const {pipeline} = pipelineStore
 
@@ -27,32 +27,18 @@ const Config = props =>{
     const [process,setProcess] = useState(false) // 运行按钮
     const [isDetails,setIsDetails] = useState(false) // 运行页面
 
-    const pipelineId = pipeline.id
-
     useEffect(()=>{
-        pipelineId && setIsDetails(false)
         return ()=> {
             setTaskFormDrawer(false)
+            setIsDetails(false)
             setDataItem("")
         }
-    },[pipelineId])
-
-    // 配置运行状态
-    let interval = null
-    useEffect(()=>{
-        if(isDetails && pipelineId){
-            interval=setInterval(()=>
-                pipelineRunStatus(pipeline.id).then(res=>{
-                    if(res.code===0){ res.data && res.data.allState === 0 && clearInterval(interval)}
-                }), 1000)
-        }
-        return ()=> clearInterval(interval)
-    },[isDetails,pipelineId])
+    },[pipeline])
 
     const run = () => {
         // 改变按钮
         setProcess(true)
-        pipelineStartStructure(pipelineId).then(res=>{
+        pipelineStartStructure(pipeline.id).then(res=>{
             if(res.code===0){
                 if(!res.data){
                     message.info("流水线正在运行")
@@ -87,10 +73,11 @@ const Config = props =>{
 
     if(isDetails){
         return <StrDetail
-                    index={1}
+                    index={2}
                     pipeline={pipeline}
-                    setIsDetails={setIsDetails}
                     firstItem={"配置"}
+                    isAll={"config"}
+                    setIsDetails={setIsDetails}
                     structureStore={structureStore}
                 />
     }
@@ -100,7 +87,7 @@ const Config = props =>{
             <div className="config-up">
                 <div className="config-top">
                     <div className="config_bread">
-                        <BreadcrumbContent firstItem={pipeline.name} secondItem={"设计"}/>
+                        <BreadcrumbContent firstItem={pipeline && pipeline.name} secondItem={"设计"}/>
                     </div>
                     <div className="changeView-btn">
                         {

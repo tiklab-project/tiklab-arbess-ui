@@ -9,7 +9,7 @@ export function  PipelineStartStructure (data){
     })
 }
 
-//判断当前流水线是否在构建
+//判断单个流水线是否在构建
 export function  FindPipelineState (data){
     return serviceLoc.request({
         url:"/pipelineExec/findPipelineState",
@@ -73,10 +73,10 @@ export function  DeleteHistoryLog (data){
     })
 }
 
-//删除构建历史
-export function  FindUserAllHistory (data){
+// 所有流水线历史列表
+export function FindUserRunPageHistory(data) {
     return serviceLoc.request({
-        url:"/pipeline/findUserAllHistory",
+        url:"/pipelineExec/findUserRunPageHistory",
         method:"post",
         data
     })

@@ -8,36 +8,34 @@ import SurverCensus from "../components/surveyCensus";
 import Guide from "../../../common/guide/guide";
 import DynaList from "../../../dyna/common/dynaList";
 
-
 const Survey = props =>{
 
     const {surveyStore,pipelineStore,homePageStore} = props
 
     const {findlogpage,dynamicList} = homePageStore
     const {pipelineCensus,census} = surveyStore
-    const {pipelineId,pipeline} = pipelineStore
+    const {pipeline} = pipelineStore
 
-    //运行概况
     useEffect(()=>{
-        pipelineId && pipelineCensus(pipelineId).then(res=>{
-            const data = res.data
-            if(res.code===0){
-                renderEchart(data)
-            }
-        })
-    },[pipelineId])
-
-    // 流水线动态
-    useEffect(()=>{
-        const params = {
-            content:{pipelineId:[pipelineId]},
-            pageParam:{
-                pageSize:10,
-                currentPage:1
-            }
+        if(pipeline){
+            // 运行概况
+            pipelineCensus(pipeline.id).then(res=>{
+                const data = res.data
+                if(res.code===0){
+                    renderEchart(data)
+                }
+            })
+            // 流水线动态
+            findlogpage({
+                content:{pipelineId:[pipeline.id]},
+                pageParam:{
+                    pageSize:10,
+                    currentPage:1
+                }
+            })
         }
-        findlogpage(params)
-    },[pipelineId])
+    },[pipeline])
+
 
     const renderEchart = data =>{
         const chartDom=document.getElementById("burn-down")
@@ -71,7 +69,7 @@ const Survey = props =>{
         <div className="survey">
             <div className="survey-content mf-home-limited">
                 <div className="survey-top">
-                    <BreadcrumbContent firstItem={pipeline.name} secondItem={"概况"}/>
+                    <BreadcrumbContent firstItem={pipeline && pipeline.name} secondItem={"概况"}/>
                 </div>
                 <div className="survey-content">
                     <div className="survey-census">
@@ -82,7 +80,7 @@ const Survey = props =>{
                         </div>
                     </div>
                     <div className="survey-dyna">
-                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={"dynamic"} pipelineId={pipelineId}/>
+                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={"dynamic"} pipelineId={pipeline && pipeline.id}/>
                         <DynaList dynamicList={dynamicList}/>
                     </div>
                 </div>

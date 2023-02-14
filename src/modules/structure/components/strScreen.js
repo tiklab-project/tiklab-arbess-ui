@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Select} from "antd";
 import {CaretDownOutlined} from "@ant-design/icons";
 import "./strScreen.scss";
@@ -7,28 +7,10 @@ const {Option} = Select;
 
 const StrScreen = props =>{
 
-    const {id,changPage,findPageHistory,findUserAllHistory,pipelineList,pipelineUserList} = props
+    const {changPage,pipelineList,pipelineUserList,setType,setState,setPipelineId,setUseId} = props
 
-    const [pipelineId,setPipelineId] = useState("")
-    const [state,setState] = useState(0)
-    const [userId,setUseId] = useState(null)
-    const [type,setType] = useState(0)
-
-    useEffect(()=>{
-        if(id){
-            setPipelineId(id)
-        }
-    },[pipelineId])
-
-    const params = {
-        pipelineId:pipelineId,
-        state:state,
-        userId:userId,
-        type:type
-    }
     const changValue = (value,field) => {
         changPage(1)
-        params[field] = value
         switch (field) {
             case 'pipelineId':
                 setPipelineId(value)
@@ -41,12 +23,6 @@ const StrScreen = props =>{
                 break
             case 'type':
                 setType(value)
-        }
-        if(pipelineList){
-            findUserAllHistory()
-        }
-        else {
-            findPageHistory(params)
         }
     }
 
@@ -95,19 +71,21 @@ const StrScreen = props =>{
                 placeholder={"状态"}
                 onChange={value=>changValue(value,"state")}
             >
-                <Select.Option key={"0"} value={0}>全部状态</Select.Option>
-                <Select.Option key={"1"} value={1}>失败</Select.Option>
-                <Select.Option key={"10"} value={10}>成功</Select.Option>
-                <Select.Option key={"20"} value={20}>终止</Select.Option>
+                <Option key={"0"} value={0}>全部状态</Option>
+                <Option key={"1"} value={1}>失败</Option>
+                <Option key={"10"} value={10}>成功</Option>
+                <Option key={"20"} value={20}>终止</Option>
+                <Option key={"30"} value={30}>运行中</Option>
+
             </Select>
             <Select
                 suffixIcon={<CaretDownOutlined />}
                 placeholder={"执行方式"}
                 onChange={value=>changValue(value,"type")}
             >
-                <Select.Option key={"0"} value={0}>全部执行方式</Select.Option>
-                <Select.Option key={"1"} value={1}>手动</Select.Option>
-                <Select.Option key={"2"} value={2}>自动</Select.Option>
+                <Option key={"0"} value={0}>全部执行方式</Option>
+                <Option key={"1"} value={1}>手动</Option>
+                <Option key={"2"} value={2}>自动</Option>
             </Select>
         </div>
     )

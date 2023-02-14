@@ -9,7 +9,8 @@ import {
     FindAllFollow,
     UpdateFollow,
     FindUserPage,
-    FindDmUserPage
+    FindDmUserPage,
+    FindOnePipeline
 } from "../api/pipeline";
 
 import {getUser} from "tiklab-core-ui";
@@ -22,7 +23,6 @@ export class PipelineStore {
     @observable followLength = 0
     @observable pipelineUserList = []
     @observable pipeline = ""
-    @observable pipelineId = ""
     @observable listType = 1
     @observable isLoading = false
     @observable fresh = false
@@ -30,11 +30,6 @@ export class PipelineStore {
     @action
     setListType = value =>{
         this.listType = value
-    }
-
-    @action
-    setPipelineId = value =>{
-        this.pipelineId = value
     }
 
     @action
@@ -179,12 +174,12 @@ export class PipelineStore {
                 pageSize:6,
                 currentPage:1
             },
+            ...value
         }
         const data =  await FindUserPage(params)
         if(data.code===0){
             this.pipelineUserList = data.data && data.data.dataList
         }
-
         return data
     }
 
@@ -195,7 +190,8 @@ export class PipelineStore {
                 pageSize:10,
                 currentPage:1
             },
-            domainId:value
+            // domainId:value
+            ...value,
         }
         const data = await FindDmUserPage(params)
         if(data.code===0){
@@ -203,6 +199,19 @@ export class PipelineStore {
         }
         return data
     }
+
+    @action
+    findOnePipeline = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        const data = await FindOnePipeline(param)
+        if(data.code===0){
+            this.pipeline = data.data && data.data
+        }
+        return data
+
+    }
+
 }
 
 export const PIPELINE_STORE = "pipelineStore"

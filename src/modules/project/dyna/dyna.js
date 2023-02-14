@@ -6,23 +6,23 @@ const PipelineDyna = props =>{
 
     const {pipelineStore,homePageStore} = props
 
-    const {pipelineId,pipeline} = pipelineStore
+    const {pipeline} = pipelineStore
     const {findlogpage,dynamicList,dynaPage} = homePageStore
 
     // 流水线动态
     useEffect(()=>{
         const params = {
-            content:{pipelineId:[pipelineId]},
+            content:{pipelineId:[pipeline.id]},
             pageParam:{
                 pageSize:15,
                 currentPage:1
             },
             bgroup:"matflow",
         }
-        findlogpage(params)
-    },[pipelineId])
+        pipeline && findlogpage(params)
+    },[pipeline])
 
-    const goBack = () => props.history.push(`/index/task/${pipelineId}/survey`)
+    const goBack = () => props.history.push(`/index/task/${pipeline.id}/survey`)
 
     return  <DynaDetail
                 firstItem={pipeline.name}
@@ -31,7 +31,7 @@ const PipelineDyna = props =>{
                 findlogpage={findlogpage}
                 dynaPage={dynaPage}
                 dynamicList={dynamicList}
-                pipelineIdList={[pipelineId]}
+                pipelineIdList={[pipeline.id]}
             />
 }
 

@@ -11,7 +11,6 @@ const TriggerAdd = props =>{
     const {triggerVisible,setTriggerVisible,createTriggerConfig,pipelineId,formValue,updateTriggerConfig} = props
 
     const [form] = Form.useForm()
-
     const [height,setHeight] = useState(0)
 
     useEffect(()=>{
@@ -119,7 +118,7 @@ const TriggerAdd = props =>{
                                 <Radio value={1}>单次触发</Radio>
                                 <Radio value={2}>周期触发</Radio>
                             </Radio.Group>
-                        </Form.Item>           
+                        </Form.Item>
 
                         <Form.Item label="日期选择" name={"timeList"} rules={[{required:true,message:"日期选择不能为空"}]}>
                             <Checkbox.Group>

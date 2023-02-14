@@ -11,16 +11,10 @@ const PipelineAddMould = props =>{
                 >
                 <div>
                     <div className="pipeline-template-li-header">
-                        <span className="li-header-icon">
-                                <NodeIndexOutlined />
-                        </span>
-                        <span className="li-header-name">
-                            {item.title}-{item.brand}
-                        </span>
+                        <span className="li-header-icon"><NodeIndexOutlined /></span>
+                        <span className="li-header-name">{item.title}-{item.brand}</span>
                         <span>部署到</span>
-                        <span className="li-header-title">
-                            {item.desc}
-                        </span>
+                        <span className="li-header-title">{item.desc}</span>
                         <span>环境</span>
                     </div>
                     <div className="pipeline-template-li-content">

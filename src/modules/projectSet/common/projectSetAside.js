@@ -1,17 +1,20 @@
 import React,{useState,useEffect} from "react";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {SettingOutlined} from "@ant-design/icons";
-import {inject,observer} from "mobx-react";
+import {observer} from "mobx-react";
 import "./projectSetAside.scss";
 
 const ProjectSetAside = props =>{
 
-    const {pipelineStore} = props
+    const {location,match} = props
 
-    let path = props.location.pathname
+    let path = location.pathname
+    const pipelineId = match.params.id
     const [nav,setNav] = useState("")
 
-    const {pipelineId} = pipelineStore
+    useEffect(()=>{
+        setNav(path)
+    },[path])
 
     // 侧边流水线设置的第二级导航
     const secondRouter = [
@@ -32,22 +35,13 @@ const ProjectSetAside = props =>{
         }
     ]
 
-    useEffect(()=>{
-        setNav(path)
-    },[path])
-
     const navContent = item =>{
-        return <div
-                    key={item.key}
+        return <div key={item.key}
                     className={`projectSet-item ${nav===item.key?"projectSet-select":""} `}
                     onClick={()=>props.history.push(item.key)}
                 >
-                    <span className="projectSet-item-icon">
-                        <SettingOutlined/>
-                    </span>
-                    <span className="projectSet-item-label">
-                        {item.label}
-                    </span>
+                    <span className="projectSet-item-icon"><SettingOutlined/></span>
+                    <span className="projectSet-item-label">{item.label}</span>
              </div>
     }
 
@@ -68,4 +62,4 @@ const ProjectSetAside = props =>{
     )
 }
 
-export default inject("pipelineStore")(observer(ProjectSetAside))
+export default observer(ProjectSetAside)

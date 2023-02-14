@@ -1,5 +1,5 @@
 import React,{useState,useRef,useEffect} from "react";
-import {Checkbox,Dropdown,Collapse,Row, Col,Table,Space,Select,Tooltip,Drawer} from "antd";
+import {Checkbox,Dropdown,Collapse,Row, Col,Table,Space,Select,Tooltip} from "antd";
 import {
     PlusOutlined,
     CaretRightOutlined,
@@ -26,7 +26,7 @@ const Postpose = props =>{
 
     const {pipelineStore,postposeStore,dataItem} = props
 
-    const {findDmUserPage,pipelineId} = pipelineStore
+    const {findDmUserPage,pipeline} = pipelineStore
     const {deletePostConfig,createPostConfig,findAllPostConfig,fixedPostposeData,postposeData,setPostposeData,setIsFindPostposeData,
         isFindPostposeData,updatePostConfig,messageSendType,mesSendData
     } = postposeStore
@@ -44,7 +44,7 @@ const Postpose = props =>{
 
     useEffect(()=>{
         messageSendType()
-        findDmUserPage(pipelineId).then(res=>{
+        findDmUserPage(pipeline.id).then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
                 let arr = []
@@ -90,7 +90,7 @@ const Postpose = props =>{
         const params = {
             taskType:item.type,
             configId:item.configId,
-            taskId:pipelineId,
+            taskId:pipeline.id,
             values:{
                 typeList:item.typeList,
                 userList:newArr
@@ -382,7 +382,7 @@ const Postpose = props =>{
                             (item.type===71 || item.type===72) &&
                             <MirrorContent
                                 item={item}
-                                pipelineId={pipelineId}
+                                pipelineId={pipeline.id}
                                 updatePostConfig={updatePostConfig}
                             />
                         }

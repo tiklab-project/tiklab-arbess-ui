@@ -9,13 +9,13 @@ import {
 import {Spin} from "antd";
 import {getTime} from "../../common/client/client";
 
-const StrDetailtem = props =>{
+const StrDetailItem = props =>{
 
     const {itemData,setTreeData,setLogData,setExecIndex,index,setId} = props
 
     const log = (item,itemIndex) =>{
         switch (index) {
-            case 2:
+            case 1:
                 setTreeData(item)
                 setLogData(item)
                 break
@@ -25,30 +25,23 @@ const StrDetailtem = props =>{
         }
     }
 
-    // 样式
-    const style = runState => {
-        return `item-${runState}`
-    }
-
-    const status = i =>{
-        switch(i){
+    const status = state =>{
+        switch(state){
             case 1 :
                 //失败
-                return  <CloseCircleOutlined style = {{fontSize:16,color:"red"}}/>
+                return  <CloseCircleOutlined style={{fontSize:16,color:"red"}}/>
             case 10 :
                 //成功
-                return  <CheckCircleOutlined style = {{fontSize:16,color:"#0063FF"}}/>
+                return  <CheckCircleOutlined style={{fontSize:16,color:"#0063FF"}}/>
             case 20:
                 //被迫停止
-                return  <ExclamationCircleOutlined style = {{fontSize:16}}/>
-
+                return  <ExclamationCircleOutlined style={{fontSize:16}}/>
             case 0:
                 //运行
-                return  <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />
-
+                return  <Spin indicator={<LoadingOutlined style={{fontSize:16}} spin />} />
             case 3:
                 //运行--等待运行
-                return  <PlayCircleOutlined style = {{fontSize:16}}/>
+                return  <PlayCircleOutlined style={{fontSize:16}}/>
         }
     }
 
@@ -68,23 +61,15 @@ const StrDetailtem = props =>{
     }
 
     const renderMulti = (item,index) =>{
-        return <div className={`st-card ${style(item.state)}`} key={index}>
+        return <div className={`st-card item-${item.state}`} key={index}>
             <div className="card-top">
-                <span className="card-top-state">
-                    {status(item.state)}
-                </span>
-                <span className="card-top-title">
-                    {item.name}
-                </span>
+                <span className="card-top-state">{status(item.state)}</span>
+                <span className="card-top-title">{item.name}</span>
             </div>
-            <div className="card-ct">
-                {statusText(item.state)}
-            </div>
+            <div className="card-ct">{statusText(item.state)}</div>
             <div className="card-bt">
                 <span className="card-bt-log" onClick={()=>log(item,index)}>日志</span>
-                <span className="card-bt-time">
-                    {getTime(item.time)}
-                </span>
+                <span className="card-bt-time">{getTime(item.time)}</span>
             </div>
         </div>
     }
@@ -92,12 +77,10 @@ const StrDetailtem = props =>{
     return(
         <div className="str-multi">
             {
-                itemData && itemData.map((item,index)=>{
-                    return renderMulti(item,index)
-                })
+                itemData && itemData.map((item,index)=>renderMulti(item,index))
             }
         </div>
     )
 }
 
-export default StrDetailtem
+export default StrDetailItem

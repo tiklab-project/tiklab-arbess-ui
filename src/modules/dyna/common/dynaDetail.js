@@ -37,21 +37,13 @@ const DynaDetail = props =>{
 
     const changContent = (value,field) =>{
         switch (field) {
-            case "timestamp":
-                if(value.some(item=>item==="")){
-                    params[field] = null
-                    break
-                }
-                setTimestamp(value)
-                params[field] = value
-                break
             case "module":
-                setModule(value)
                 params[field] = value
+                setModule(value)
                 break
             case "actionType":
-                setActionType(value)
                 params[field] = value
+                setActionType(value)
                 break
             case "pipelineId":
                 if(value === null){
@@ -60,18 +52,27 @@ const DynaDetail = props =>{
                 }
                 params.content[field] = [value]
                 setPipelineId(value)
+                break
+            case "timestamp":
+                if(value.some(item=>item==="")){
+                    params[field] = null
+                    break
+                }
+                params[field] = value
+                setTimestamp(value)
         }
         findDyna(1)
     }
 
 
+    // 切换分页
     const changPage = pages =>{
-        findDyna(pages && pages)
+        findDyna(pages)
     }
 
-    const findDyna = (page) =>{
-        setPageCurrent(page)
-        params.pageParam.currentPage=page
+    const findDyna = pages =>{
+        setPageCurrent(pages && pages)
+        params.pageParam.currentPage=pages
         findlogpage(params)
     }
 

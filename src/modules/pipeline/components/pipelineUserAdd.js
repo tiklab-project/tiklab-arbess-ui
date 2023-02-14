@@ -7,7 +7,7 @@ import EmptyText from "../../common/emptyText/emptyText";
 
 const PipelineUserAdd = props =>{
 
-    const {visible,setVisible,yUserList,nUserList,setYUserList,setNUserList} = props
+    const {visible,setVisible,yUserList,nUserList,setYUserList,setNUserList,findUserPage} = props
 
     const [addUser,setAddUser] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
@@ -29,45 +29,68 @@ const PipelineUserAdd = props =>{
         setVisible(false)
     }
 
+    // 模糊查询是否可以选中
+    const disabledOpt = record =>{
+        return yUserList && yUserList.some(item=>item.id===record.id)
+    }
+
+    // 点击行选中或取消
     const onSelectRow = record => {
-        // 如果已经选中 -- 取消选中
-        if (selectedRowKeys.indexOf(record.id) >= 0) {
-            addUser.splice(addUser.indexOf(record.id),1)
-            selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
+        if(!disabledOpt(record)){
+            // 如果已经选中 -- 取消选中
+            if (selectedRowKeys.indexOf(record.id) >= 0) {
+                addUser.splice(addUser.indexOf(record.id),1)
+                selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
+            }
+            // 如果没有选中 -- 选中
+            else {
+                selectedRowKeys.push(record.id)
+                addUser.push(record)
+            }
+            setSelectedRowKeys([...selectedRowKeys])
+            setAddUser([...addUser])
         }
-        // 如果没有选中 -- 选中
-        else {
-            selectedRowKeys.push(record.id)
-            addUser.push(record)
-        }
-        setSelectedRowKeys([...selectedRowKeys])
-        setAddUser([...addUser])
     }
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             setAddUser(selectedRows)
             setSelectedRowKeys(selectedRowKeys)
-            console.log("数组::",selectedRows)
-            console.log("id::",selectedRowKeys)
         },
-        selectedRowKeys:selectedRowKeys
+        getCheckboxProps: (record) => ({
+            disabled: disabledOpt(record),
+        }),
+        selectedRowKeys:selectedRowKeys,
+    }
+
+    const findUser = e =>{
+        findUserPage({
+            nickname:e.target.value
+        }).then(res=>{
+            if(res.code===0){
+                setNUserList(res.data && res.data.dataList)
+            }
+        })
     }
 
     return (
         <div className='pipeline-user-add mf'>
-            <Input placeholder={"名称"} suffix={<SearchOutlined/>}/>
+            <Input
+                placeholder={"名称"}
+                prefix={<SearchOutlined/>}
+                onChange={findUser}
+            />
             <div className='pipeline-user-add-table'>
                 <Table
-                    rowKey={(record) => record.id}
+                    rowKey={record=> record.id}
                     rowSelection={rowSelection}
                     onRow={record => ({
                         onClick: () => onSelectRow(record)
                     })}
                     columns={[{
                         title:"昵称",
-                        dataIndex:"name",
-                        key:"name",
+                        dataIndex:"nickname",
+                        key:"nickname",
                     }]}
                     dataSource={nUserList}
                     pagination={false}

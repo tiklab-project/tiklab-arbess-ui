@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Table} from "antd";
+import {message, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
@@ -15,7 +15,7 @@ const Postpose = props =>{
 
     const {pipelineStore,postposeStore} = props
 
-    const {findDmUserPage,pipelineId} = pipelineStore
+    const {findDmUserPage,pipeline} = pipelineStore
     const {createPostConfig,findAllPostConfig,isFindPostposeData,postposeData,deletePostConfig,updatePostConfig,
         messageSendType,mesSendData
     } = postposeStore
@@ -26,8 +26,8 @@ const Postpose = props =>{
     const userId = getUser().userId
 
     useEffect(()=>{
-        pipelineId && findAllPostConfig(pipelineId)
-    },[pipelineId,isFindPostposeData])
+        pipeline && findAllPostConfig(pipeline.id)
+    },[pipeline,isFindPostposeData])
 
     useEffect(()=>{
         messageSendType()
@@ -44,7 +44,9 @@ const Postpose = props =>{
     }
 
     const del = (text,record) => {
-        deletePostConfig(record.configId)
+        deletePostConfig(record.configId).then(res=>{
+            res.code===0 && message.info("删除成功",0.5)
+        })
     }
 
     const columns = [
@@ -85,7 +87,7 @@ const Postpose = props =>{
                         updatePostConfig={updatePostConfig}
                         findDmUserPage={findDmUserPage}
                         mesSendData={mesSendData}
-                        pipelineId={pipelineId}
+                        pipelineId={pipeline && pipeline.id}
                         formValue={formValue}
                         userId={userId}
                     />

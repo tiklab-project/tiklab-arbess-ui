@@ -3,6 +3,9 @@ import {Version} from "tiklab-licence-ui";
 import {Table} from "antd";
 import {CloseOutlined,CheckOutlined} from "@ant-design/icons";
 
+/**
+ * 版本与许可证
+ */
 const VersionContent = props =>{
 
     const renderText = text => {

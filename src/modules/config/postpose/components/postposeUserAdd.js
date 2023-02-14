@@ -8,8 +8,7 @@ import "./postposeUserAdd.scss";
 const PostposeUserAdd = props =>{
 
     const {userAddVisible,setUserAddVisible,allUserList,yUserList,setYUserList,
-        postposeData,setPostposeData,type
-    } = props
+        postposeData,setPostposeData,type} = props
 
     const [addUser,setAddUser] = useState([]) // 选中的用户
     const [userList,setUserList] = useState([])  //
@@ -73,18 +72,16 @@ const PostposeUserAdd = props =>{
             })
             setAddUser([...newArr])
             setSelectedRowKeys(selectedRowKeys)
-            console.log("数组::",selectedRows)
-            console.log("id::",selectedRowKeys)
         },
         selectedRowKeys:selectedRowKeys
     }
-
 
     return (
         <div className='post-pose-user-add mf'>
             <Input
                 placeholder={'名称'}
-                suffix={<SearchOutlined/>}
+                prefix={<SearchOutlined/>}
+                // onChange={findUser}
             />
             <div className='user-add-table'>
                 <Table

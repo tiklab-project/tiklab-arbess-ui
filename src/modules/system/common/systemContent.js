@@ -12,7 +12,7 @@ const SystemContent= props =>  {
 
     const {route,isDepartment,applicationRouters,systemRoleStore} = props
 
-    const {getSystemPermissions,systemPermissions} = systemRoleStore
+    const {getSystemPermissions} = systemRoleStore
 
     const path = props.location.pathname
     const [selectKey,setSelectKey] = useState(path)

@@ -10,8 +10,8 @@ import SubIcon from "../../../config/common/components/subIcon";
 import Btn from "../../../common/btn/btn";
 import Listaction from "../../../common/list/listaction";
 
-/*
-    系统环境配置
+/**
+ * 环境配置
  */
 const Envi = props =>{
 

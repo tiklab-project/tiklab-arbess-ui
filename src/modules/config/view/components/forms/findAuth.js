@@ -13,7 +13,7 @@ const FindAuth = props =>{
     const {findAllAuth} = authStore
     const {findAllAuthServerList} = serverStore
     const {findAllAuthHostList} = hostStore
-    const {pipelineId} = pipelineStore
+    const {pipeline} = pipelineStore
     const {updateTaskConfig,dataItem} = configStore
 
     const [list,setList] = useState([])
@@ -24,7 +24,7 @@ const FindAuth = props =>{
     // 改变凭证
     const changeGitSelect = value =>{
         const params = {
-            pipeline:{id:pipelineId},
+            pipeline:{id:pipeline.id},
             values:{authId:value},
             taskType:dataItem.type,
             configId: dataItem.configId

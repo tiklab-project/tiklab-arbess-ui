@@ -2,15 +2,13 @@ import React,{useState,useEffect} from "react";
 import ReactDOM from "react-dom";
 import {HashRouter} from "react-router-dom";
 import enableAxiosCE from "tiklab-enable-axios-ce";
-import {useAccountConfig} from "tiklab-eam-ui/es/_utils";
 import {orgStores} from "tiklab-user-ui/es/store";
 import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {messageModuleStores} from "tiklab-message-ui/es/store"
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
+import {observer,Provider} from "mobx-react";
 import {ConfigProvider} from "antd";
 import zhCN from "antd/es/locale/zh_CN";
-import {observer,Provider} from "mobx-react";
-import {useTranslation} from "react-i18next";
 import routers from "./routes";
 import resources from "./common/language/resources";
 import {store} from "./store";
@@ -21,8 +19,6 @@ import "./common/language/i18n";
 
 enableAxiosCE()
 const Index = observer(() => {
-
-    const {i18n} = useTranslation()
 
     const [visible,setVisible] = useState(true)
     const [initPluginData,setPluginData] = useState({
@@ -42,7 +38,6 @@ const Index = observer(() => {
         ...store
     }
 
-    useAccountConfig()
     useEffect(() => {
         initFetch("post",routers,resources).then(res => {
             setPluginData(res)
@@ -66,7 +61,3 @@ const Index = observer(() => {
 })
 
 ReactDOM.render(<Index/>, document.getElementById("root"))
-
-if (module.hot) {
-    module.hot.accept()
-}

@@ -30,7 +30,7 @@ const Page = props =>{
                     <LeftOutlined/>
                 </span>
                 <span className="mf-page-current">{pageCurrent}</span>
-                <span> / {page && page.total?page.total:1}</span>
+                <span> / { page && page.total ? page.total:1}</span>
                 { renderRightOut() }
          </div>
 }

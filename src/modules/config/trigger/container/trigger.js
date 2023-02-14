@@ -16,14 +16,14 @@ const Trigger = props =>{
     const {triggerStore,pipelineStore} = props
 
     const {updateTriggerConfig,deleteTriggerConfig,createTriggerConfig,findAllTriggerConfig,triggerData,isFindTrigger} = triggerStore
-    const {pipelineId} = pipelineStore
+    const {pipeline} = pipelineStore
 
     const [formValue,setFormValue] = useState("")
     const [triggerVisible,setTriggerVisible] = useState(false)
 
     useEffect(()=>{
-        pipelineId && findAllTriggerConfig(pipelineId)
-    },[pipelineId,isFindTrigger])
+        pipeline && findAllTriggerConfig(pipeline.id)
+    },[pipeline,isFindTrigger])
 
     const addTrigger = () => {
         setFormValue("")
@@ -93,7 +93,7 @@ const Trigger = props =>{
                         setTriggerVisible={setTriggerVisible}
                         createTriggerConfig={createTriggerConfig}
                         updateTriggerConfig={updateTriggerConfig}
-                        pipelineId={pipelineId}
+                        pipelineId={pipeline && pipeline.id}
                         formValue={formValue}
                     />
                 </div>

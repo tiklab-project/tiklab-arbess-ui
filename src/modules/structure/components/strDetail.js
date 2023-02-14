@@ -1,21 +1,23 @@
 import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
-import {
-    MinusCircleOutlined,
-} from "@ant-design/icons";
+import {MinusCircleOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import Loading from "../../common/loading/loading";
-import StrDetailtem from "./strDetailtem";
+import StrDetailItem from "./strDetailItem";
 import StrDetailTree from "./strDetailTree";
 import Btn from "../../common/btn/btn";
 import "./strDetail.scss";
 
+/**
+ * 单个历史运行详情
+ */
 const StrDetail = props =>{
 
     const {firstItem,index,pipeline,setIsDetails,structureStore,isAll} = props
 
-    const {execData,itemData,killInstance,strDetails} = structureStore
+    const {execData,itemData,killInstance,pipelineRunStatus} = structureStore
 
+    const [strDetails,setStrDetails] = useState(true) // 构建详情页面数据未返回时加载状态
     const [isActiveSlide,setIsActiveSlide] = useState(true)  // 日志滚动条
     const [logData,setLogData] = useState("")  // 日志数据
     const [treeData,setTreeData] = useState("") // 左侧树结构
@@ -26,35 +28,48 @@ const StrDetail = props =>{
         return ()=>{
             setId("")
             setExecIndex(0)
-            setIsDetails(false)
+            setStrDetails(true)
         }
     },[])
 
-    // 完成状态数据
+    // 完成后状态数据
     useEffect(()=>{
-        if(index===2 && itemData){
+        if(index===1 && itemData){
             const data = itemData.runLogList
-            pipeline && pipeline.type===1 ? setLogData(itemData):setLogData(data[0])
             setTreeData(data[0])
+            pipeline && pipeline.type===1 ? setLogData(itemData):setLogData(data[0])
+            setStrDetails(false)
         }
     },[itemData])
 
-    // 运行状态数据
+    // 所有流水线历史列表 && 配置运行 -- 运行中状态接口调用
+    let interval=null
     useEffect(()=>{
-        if(index===1 && execData){
+        if(isAll && index===2){
+            interval=setInterval(()=>
+                pipelineRunStatus(pipeline.id).then(res=>{
+                    if(res.code===0){
+                        res.data.allState === 0 && clearInterval(interval)
+                    }
+                }), 1000)
+        }
+        // 销毁定时器
+        return ()=> clearInterval(interval)
+    },[])
+
+    // 运行中状态数据
+    useEffect(()=>{
+        if(index===2 && execData){
             const data = execData.runLogList
             // id是否有值，有值：手动切换运行状态数据；无值：自动切换运行状态数据；
             if(id){
                 setTreeData(data[execIndex])
                 setLogData(manualEquals(data))
             }else{
-                if(pipeline && pipeline.type===1){
-                    setLogData(execData)
-                    return
-                }
-                setLogData(autoEuqals(data))
                 setTreeData(autoEuqals(data))
+                pipeline && pipeline.type===1 ? setLogData(execData) : setLogData(autoEuqals(data))
             }
+            setStrDetails(false)
         }
     },[execData,execIndex,id])
 
@@ -129,11 +144,11 @@ const StrDetail = props =>{
 
     // 控制台日志
     const renderLog = logData =>{
-        const outLog=document.getElementById("outLog")
-        if(index===1 && outLog && isActiveSlide){
+        const outLog=document.getElementById("str_outLog")
+        if(index===2 && outLog && isActiveSlide){
             outLog.scrollTop = outLog.scrollHeight
         }
-        return  <div className="bottom-log" id="outLog" onWheel={onWheel}>
+        return  <div className="bottom-log" id="str_outLog" onWheel={onWheel}>
                     {logData && logData.runLog ? logData.runLog : "暂无日志"}
                 </div>
     }
@@ -149,16 +164,20 @@ const StrDetail = props =>{
         return <Loading/>
     }
 
+    // 面包屑 secondItem = isAllName() + isFindName()
+    const isAllName = () => isAll==="structure" ? pipeline && pipeline.name:"详情"
+    const isFindName = () => index===1 ? itemData && itemData.name:execData && execData.name
+
     return(
         <div className="strDetail mf-home-limited mf">
             <div className="strDetail-up" style={{paddingBottom:15}}>
                 <BreadcrumbContent
                     firstItem={firstItem}
-                    secondItem={`${isAll ? pipeline && pipeline.name:"详情"} # ${index===2?itemData && itemData.name:execData && execData.name}`}
+                    secondItem={`${isAllName()} # ${isFindName()}`}
                     goBack={goBack}
                 />
                 {
-                    index===1 && execData.allState!==0 &&
+                    index===2 && execData.allState!==0 &&
                     <Btn
                         title={"终止"}
                         icon={<MinusCircleOutlined/>}
@@ -167,9 +186,9 @@ const StrDetail = props =>{
                 }
             </div>
             <div className="strDetail-card">
-                <StrDetailtem
+                <StrDetailItem
                     index={index}
-                    itemData={index===2 ? itemData && itemData.runLogList:execData && execData.runLogList}
+                    itemData={index===1 ? itemData && itemData.runLogList:execData && execData.runLogList}
                     setTreeData={setTreeData}
                     setLogData={setLogData}
                     setExecIndex={setExecIndex}

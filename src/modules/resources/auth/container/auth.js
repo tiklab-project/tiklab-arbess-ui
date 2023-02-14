@@ -9,6 +9,9 @@ import "../../common/resources.scss";
 import ListName from "../../../common/list/listname";
 import Listaction from "../../../common/list/listaction";
 
+/**
+ * 认证配置
+ */
 const Auth = props =>{
 
     const {authStore} = props
