@@ -86,16 +86,8 @@ const MirrorContent = forwardRef((props,ref)=>{
             {
                 bordered &&
                 <div style={{paddingTop:8}}>
-                    <Btn
-                        title={"取消"}
-                        isMar={true}
-                        onClick={()=>onCancel()}
-                    />
-                    <Btn
-                        title={"保存"}
-                        type={"primary"}
-                        onClick={()=>onOk(mirrorRefs)}
-                    />
+                    <Btn title={"取消"} isMar={true} onClick={()=>onCancel()}/>
+                    <Btn title={"保存"} type={"primary"} onClick={()=>onOk(mirrorRefs)}/>
                 </div>
             }
         </>

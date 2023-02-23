@@ -18,9 +18,7 @@ const Tabs = props =>{
     return (
         <div className="mf-tabs">
             {
-                tabLis.map(item=>{
-                    return renderTabItem(item)
-                })
+                tabLis.map(item=>renderTabItem(item))
             }
         </div>
     )

@@ -76,7 +76,6 @@ const StrScreen = props =>{
                 <Option key={"10"} value={10}>成功</Option>
                 <Option key={"20"} value={20}>终止</Option>
                 <Option key={"30"} value={30}>运行中</Option>
-
             </Select>
             <Select
                 suffixIcon={<CaretDownOutlined />}

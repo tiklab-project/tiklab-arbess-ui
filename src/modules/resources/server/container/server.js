@@ -7,8 +7,8 @@ import EmptyText from "../../../common/emptyText/emptyText";
 import Tabs from "../../../common/tabs/tabs";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import ServerBtn from "../components/serverBtn";
-import ListName from "../../../common/list/listname";
 import Listaction from "../../../common/list/listaction";
+import Listname from "../../../common/list/listname";
 
 /**
  * 资源配置--服务配置
@@ -62,9 +62,10 @@ const Server = props =>{
     ]
 
     const name = text =>{
-        return  <ListName
-                    text={text}
-                />
+        return  <span>
+                    <Listname text={text}/>
+                    <span>{text}</span>
+                </span>
     }
 
     const user = (text,record) =>{

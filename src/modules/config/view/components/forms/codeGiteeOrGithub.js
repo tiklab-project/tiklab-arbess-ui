@@ -17,6 +17,7 @@ const CodeGiteeOrGithub = props =>{
     const [nameBorder,setNameBorder] = useState(false)
     const [branchBorder,setBranchBorder] = useState(false)
 
+    // 分支是否可点击
     useEffect(()=>{
         if(dataItem && dataItem.codeName){
             setProhibited(false)
@@ -25,7 +26,7 @@ const CodeGiteeOrGithub = props =>{
     },[dataItem.codeName,pipeline])
 
     // 选择仓库地址
-    const changeGitStoreHouse = (value,e) =>{
+    const changeGitStoreHouse = value =>{
         setProhibited(false)
         change("codeName",value)
     }
@@ -41,8 +42,8 @@ const CodeGiteeOrGithub = props =>{
         const params = {
             pipeline:{id:pipeline.id},
             taskType:dataItem.type,
-            values:obj,
             configId:dataItem.configId,
+            values:obj,
         }
         updateTaskConfig(params)
     }
@@ -72,21 +73,19 @@ const CodeGiteeOrGithub = props =>{
         <>
             <FindAuth dataItem={dataItem}/>
 
-            <Form.Item
-                name={dataItem.configId+"_codeName"}
-                label="仓库"
-                rules={[{required:true, message:"请选择仓库"}]}
-            >
+            <Form.Item name={dataItem.configId+"_codeName"} label="仓库" rules={[{required:true, message:"请选择仓库"}]}>
                 <Select
-                    bordered={nameBorder}
-                    className={nameBorder?'':'input-hover'}
+                    // bordered={nameBorder}
                     showSearch={nameBorder}
+                    className={fieldName === "codeName"?'input-hover':''}
+                    // className={fieldName === "codeName"?'':'input-hover'}
                     placeholder={nameBorder ?"仓库":"未选择"}
                     showArrow={fieldName === "codeName"}
                     onMouseEnter={()=>setFieldName("codeName")}
                     onMouseLeave={()=>setFieldName("")}
                     onFocus={()=>onFocus("codeName")}
-                    onChange={(value,e)=>changeGitStoreHouse(value,e)}
+                    onBlur={()=>setNameBorder(false)}
+                    onChange={changeGitStoreHouse}
                     notFoundContent={<EmptyText/>}
                     filterOption = {(input, option) =>
                         (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -99,20 +98,18 @@ const CodeGiteeOrGithub = props =>{
                     }
                 </Select>
             </Form.Item>
-            <Form.Item
-                name={dataItem.configId+"_codeBranch"}
-                label="分支"
-            >
+            <Form.Item name={dataItem.configId+"_codeBranch"} label="分支">
                 <Select
-                    bordered={branchBorder}
-                    className={branchBorder?'':'input-hover'}
+                    // bordered={branchBorder}
                     disabled={prohibited}
+                    className={branchBorder?'':'input-hover'}
                     placeholder={branchBorder?"分支":"未选择"}
                     showArrow={fieldName === "codeBranch"}
                     onMouseEnter={()=>setFieldName("codeBranch")}
                     onMouseLeave={()=>setFieldName("")}
                     onFocus={()=>onFocus("codeBranch")}
-                    onChange={(value,e)=>changeBranch(value,e)}
+                    onBlur={()=>setBranchBorder(false)}
+                    onChange={changeBranch}
                     notFoundContent={<EmptyText/>}
                 >
                     {

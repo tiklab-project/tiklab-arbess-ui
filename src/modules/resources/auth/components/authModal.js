@@ -17,8 +17,9 @@ const AuthModal = props =>{
         if(visible){
             if(formValue){
                 form.setFieldsValue(formValue)
-            } else {
-                form.resetFields()            }
+                return
+            }
+            form.resetFields()
         }
     },[visible])
 
@@ -76,10 +77,7 @@ const AuthModal = props =>{
         >
             <div className="resources-modal">
                 <div className="resources-modal-up">
-                    <ModalTitle
-                        setVisible={setVisible}
-                        title={formValue?"修改":"添加"}
-                    />
+                    <ModalTitle setVisible={setVisible} title={formValue?"修改":"添加"}/>
                 </div>
                 <div className="resources-modal-content">
                     <Form
@@ -98,8 +96,7 @@ const AuthModal = props =>{
                             name="name"
                             label="名称"
                             rules={[{required:true,message:`请输入名称`},Validation("名称")]}
-                        >
-                            <Input/>
+                        ><Input/>
                         </Form.Item>
                         <AuthType/>
                     </Form>

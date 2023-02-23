@@ -30,7 +30,18 @@ const FindAuth = props =>{
             configId: dataItem.configId
         }
         updateTaskConfig(params)
+        setItem(value)
         setBordered(false)
+    }
+
+    const setItem = value => {
+        list && list.map(item=>{
+            if(setKey(item)===value){
+                Object.assign(dataItem,{auth:item})
+                return
+            }
+            return null
+        })
     }
 
     const getList = res =>{
@@ -59,10 +70,6 @@ const FindAuth = props =>{
             case 52:
                 findAllAuthHostList(0).then(res=>{getList(res)})
         }
-    }
-
-    const onBlur = () =>{
-        setBordered(false)
     }
 
     //认证标题
@@ -145,15 +152,15 @@ const FindAuth = props =>{
     return(
         <Form.Item label={label(dataItem.type)} name={dataItem.configId+"_authName"}>
             <Select
-                bordered={bordered}
+                // bordered={bordered}
                 showSearch={bordered}
                 placeholder={bordered ? label(dataItem.type):"未选择"}
+                className={`${bordered?'':'input-hover'}`}
                 showArrow={showArrow}
                 onMouseEnter={()=>setShowArrow(true)}
                 onMouseLeave={()=>setShowArrow(false)}
-                className={`${bordered?'':'input-hover'}`}
                 onFocus={onFocus}
-                onBlur={onBlur}
+                onBlur={()=>setBordered(false)}
                 onChange={changeGitSelect}
                 notFoundContent={<EmptyText/>}
                 open={open}
@@ -165,12 +172,7 @@ const FindAuth = props =>{
                     <>
                         {menu}
                         <Divider style={{margin:"4px 0"}} />
-                        <div
-                            style={{cursor:"pointer"}}
-                            onClick={() => {
-                                setOpen(false)
-                            }}
-                        >
+                        <div style={{cursor:"pointer"}} onClick={()=>setOpen(false)}>
                             {renderBtn(dataItem.type)}
                         </div>
                     </>

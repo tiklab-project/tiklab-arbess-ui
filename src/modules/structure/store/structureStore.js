@@ -37,6 +37,11 @@ export class StructureStore {
         this.pageCurrent = value
     }
 
+    @action
+    setHistoryList = () =>{
+        this.historyList = []
+    }
+
     // 开始构建
     @action
     pipelineStartStructure = async values =>{
@@ -127,7 +132,7 @@ export class StructureStore {
             ...values,
         }
         const data = await FindPageHistory(params)
-        this.setHistoryList(data)
+        this.findHistoryList(data)
         return data
     }
 
@@ -142,13 +147,13 @@ export class StructureStore {
             ...values,
         }
         const data = await FindUserRunPageHistory(params)
-        this.setHistoryList(data)
+        this.findHistoryList(data)
         return data
     }
 
     // 设置历史列表
     @action
-    setHistoryList = data =>{
+    findHistoryList = data =>{
         if(data.code===0){
             if(data.data && data.data.dataList.length > 0){
                 this.page.total = data.data.totalPage

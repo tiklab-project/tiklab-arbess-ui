@@ -14,6 +14,8 @@ const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
 
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/container/pipeline"))
+const PipelineAdd=AsyncComponent(()=>import("./modules/pipeline/components/pipelineAdd"))
+
 
 /* 授权 */
 const Authorize=AsyncComponent(()=>import("./modules/config/authorize/authorize"))
@@ -129,6 +131,12 @@ const routers=[
             {
                 path:"/index/pipeline",
                 component:Pipeline,
+                exact: true,
+            },
+            {
+                path:"/index/pipeline/new",
+                component:PipelineAdd,
+                exact: true,
             },
             {
                 path:"/index/dyna",
@@ -146,54 +154,54 @@ const routers=[
                 exact: true
             },
             {
-                path:"/index/task/:id",
+                path:"/index/pipeline/:id",
                 component: Project,
                 routes:[
                     {
-                        path:"/index/task/:id/survey",
+                        path:"/index/pipeline/:id/survey",
                         exact:true,
                         component: Survey
                     },
                     {
-                        path:"/index/task/:id/survey/dyna",
+                        path:"/index/pipeline/:id/survey/dyna",
                         component: PipelineDyan,
                         exact:true,
                     },
                     {
-                        path:"/index/task/:id/config",
+                        path:"/index/pipeline/:id/config",
                         component: Config,
                         exact:true,
                     },
                     {
-                        path:"/index/task/:id/structure",
+                        path:"/index/pipeline/:id/structure",
                         component: StrPipeline,
                         exact:true,
                     },
                     {
-                        path:"/index/task/:id/assembly",
+                        path:"/index/pipeline/:id/assembly",
                         component: ProjectSet,
                         routes:[
 
                             {
-                                path:"/index/task/:id/assembly/role",
+                                path:"/index/pipeline/:id/assembly/role",
                                 component: DomainRoleContent
                             },
                             {
-                                path:"/index/task/:id/assembly/set",
+                                path:"/index/pipeline/:id/assembly/set",
                                 component: ProjectSetting
                             },
                             {
-                                path:"/index/task/:id/assembly/user",
+                                path:"/index/pipeline/:id/assembly/user",
                                 component: ProjectSetUser
                             },
                             {
-                                path:"/index/task/:id/*",
+                                path:"/index/pipeline/:id/*",
                                 render:()=><Redirect to={"/index/404"}/>,
                             }
                         ]
                     },
                     {
-                        path:"/index/task/*",
+                        path:"/index/pipeline/*",
                         render:()=><Redirect to={"/index/404"}/>,
                     }
                 ]
@@ -203,7 +211,7 @@ const routers=[
                 component:System,
                 routes:[
                     {
-                        path: "/index/system/productUser",
+                        path: "/index/system/productAuth",
                         component: ProductAuth,
                     },
                     {

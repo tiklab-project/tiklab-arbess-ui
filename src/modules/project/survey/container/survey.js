@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
-import "../components/survey.scss";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import echarts from "../../../common/echarts/echarts";
 import SurverCensus from "../components/surveyCensus";
 import Guide from "../../../common/guide/guide";
 import DynaList from "../../../dyna/common/dynaList";
+import "../components/survey.scss";
 
 const Survey = props =>{
 
@@ -69,7 +69,7 @@ const Survey = props =>{
         <div className="survey">
             <div className="survey-content mf-home-limited">
                 <div className="survey-top">
-                    <BreadcrumbContent firstItem={pipeline && pipeline.name} secondItem={"概况"}/>
+                    <BreadcrumbContent firstItem={"概况"}/>
                 </div>
                 <div className="survey-content">
                     <div className="survey-census">

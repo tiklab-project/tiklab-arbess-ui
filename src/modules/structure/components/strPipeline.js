@@ -1,15 +1,14 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
-import {Profile} from "tiklab-eam-ui";
 import {Table} from "antd";
 import StrDetail from "./strDetail";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../common/emptyText/emptyText";
-import Loading from "../../common/loading/loading"
 import Page from "../../common/page/page";
 import StrScreen from "./strScreen";
 import {getTime} from "../../common/client/client";
 import {actionEn, runStatus, runWay} from "./strTrigger";
+import {SpinLoading} from "../../common/loading/loading";
 import "./strPipeline.scss";
 
 /**
@@ -21,8 +20,7 @@ const StrPipeline = props => {
 
     const {findPipelineState,pipelineRunStatus,findPageHistory,deleteHistoryLog,
         findAllLog,killInstance,historyList,freshen,pageCurrent,setPageCurrent,
-        execData,page,
-    } = structureStore
+        execData,page,setHistoryList} = structureStore
     const {pipeline,findDmUserPage,pipelineUserList} = pipelineStore
 
     const [strPipeDetails,setStrPipeDetails] = useState(false)
@@ -35,6 +33,10 @@ const StrPipeline = props => {
     useEffect(()=>{
         // 项目成员
         pipeline && findDmUserPage(pipeline.id)
+        return ()=>{
+            setPageCurrent(1)
+            setHistoryList()
+        }
     },[pipeline])
 
     // 运行状态加载
@@ -106,7 +108,7 @@ const StrPipeline = props => {
             key: "runStatus",
             width:"10%",
             ellipsis:true,
-            render:(text,record) => runStatus (record.runStatus),
+            render:(text,record) => runStatus(record.runStatus),
         },
         {
             title: "触发信息",
@@ -144,19 +146,16 @@ const StrPipeline = props => {
             key:"action",
             width:"10%",
             ellipsis:true,
-            render:(text,record)=> actionEn(record,deleteHistoryLog,killInstance,pipeline)
+            render:(text,record)=> actionEn(record,deleteHistoryLog,killInstance)
         }
     ]
-
-    if(isLoading){
-        return <Loading/>
-    }
 
     if(strPipeDetails){
         return <StrDetail
                     index={index}
                     pipeline={pipeline}
                     firstItem={"历史"}
+                    isDetails={strPipeDetails}
                     setIsDetails={setStrPipeDetails}
                     structureStore={structureStore}
                 />
@@ -165,7 +164,7 @@ const StrPipeline = props => {
     return (
         <div className="strPipeline">
             <div className="strPipeline-content mf-home-limited mf">
-                <BreadcrumbContent firstItem={pipeline && pipeline.name} secondItem={"历史"}/>
+                <BreadcrumbContent firstItem={"历史"}/>
                 <StrScreen
                     changPage={changPage}
                     pipelineUserList={pipelineUserList}
@@ -180,7 +179,8 @@ const StrPipeline = props => {
                         dataSource={historyList}
                         rowKey={record=>record.historyId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText title={"没有查询到历史记录"}/>}}
+                        locale={{emptyText:isLoading?
+                                <SpinLoading type="table"/>:<EmptyText title={"没有查询到历史记录"}/>}}
                     />
                     <Page
                         pageCurrent={pageCurrent}

@@ -53,7 +53,7 @@ const PostposeAdd = props =>{
 
 
     useEffect(()=>{
-        postposeVisible && findDmUserPage({domainId:pipelineId}).then(res=>{
+        postposeVisible && findDmUserPage(pipelineId).then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
                 setAllUserList([...dataList])
@@ -239,10 +239,7 @@ const PostposeAdd = props =>{
         >
             <div className="postpose-modal">
                 <div className="postpose-modal-up">
-                    <ModalTitle
-                        setVisible={setPostposeVisible}
-                        title={formValue===""?"添加后置处理":"修改后置处理"}
-                    />
+                    <ModalTitle setVisible={setPostposeVisible} title={formValue===""?"添加后置处理":"修改后置处理"}/>
                 </div>
                 <div className="postpose-modal-content">
                     <Form form={form} layout={"vertical"} initialValues={{type:61,typeList:["site"]}}>
@@ -259,11 +256,11 @@ const PostposeAdd = props =>{
                                 <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"请选择消息发送方式"}]}>
                                     <Checkbox.Group>
                                         {
-                                            typeList.map(item=>{
-                                                return  <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
-                                                            <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
-                                                        </Tooltip>
-                                            })
+                                            typeList.map(item=>(
+                                                <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
+                                                    <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                                </Tooltip>
+                                            ))
                                         }
                                     </Checkbox.Group>
                                 </Form.Item>

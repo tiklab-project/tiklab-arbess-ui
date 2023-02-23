@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
 import {MinusCircleOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
-import Loading from "../../common/loading/loading";
+import {SpinLoading} from "../../common/loading/loading";
 import StrDetailItem from "./strDetailItem";
 import StrDetailTree from "./strDetailTree";
 import Btn from "../../common/btn/btn";
@@ -13,7 +13,7 @@ import "./strDetail.scss";
  */
 const StrDetail = props =>{
 
-    const {firstItem,index,pipeline,setIsDetails,structureStore,isAll} = props
+    const {firstItem,index,pipeline,isDetails,setIsDetails,structureStore,isAll} = props
 
     const {execData,itemData,killInstance,pipelineRunStatus} = structureStore
 
@@ -30,7 +30,7 @@ const StrDetail = props =>{
             setExecIndex(0)
             setStrDetails(true)
         }
-    },[])
+    },[isDetails])
 
     // 完成后状态数据
     useEffect(()=>{
@@ -159,14 +159,14 @@ const StrDetail = props =>{
     // 返回列表
     const goBack = () => setIsDetails(false)
 
-    // 数据获取钱加载状态
-    if(strDetails){
-        return <Loading/>
-    }
-
     // 面包屑 secondItem = isAllName() + isFindName()
     const isAllName = () => isAll==="structure" ? pipeline && pipeline.name:"详情"
     const isFindName = () => index===1 ? itemData && itemData.name:execData && execData.name
+
+    // 数据获取前加载状态
+    if(strDetails){
+        return <SpinLoading size='large'/>
+    }
 
     return(
         <div className="strDetail mf-home-limited mf">
@@ -178,11 +178,7 @@ const StrDetail = props =>{
                 />
                 {
                     index===2 && execData.allState!==0 &&
-                    <Btn
-                        title={"终止"}
-                        icon={<MinusCircleOutlined/>}
-                        onClick={()=>end()}
-                    />
+                    <Btn title={"终止"} icon={<MinusCircleOutlined/>} onClick={()=>end()}/>
                 }
             </div>
             <div className="strDetail-card">

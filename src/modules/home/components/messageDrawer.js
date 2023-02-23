@@ -9,8 +9,8 @@ import {
 } from "@ant-design/icons";
 import EmptyText from "../../common/emptyText/emptyText";
 import {inject,observer} from "mobx-react";
-import "./messageDrawer.scss";
 import Btn from "../../common/btn/btn";
+import "./messageDrawer.scss";
 
 const MessageDrawer = props =>{
 
@@ -172,7 +172,7 @@ const MessageDrawer = props =>{
                 <div className="messageModal-content">
                     <div className="messageModal-title">
                         {
-                            tabs.map(item=>{return renderTabs(item)})
+                            tabs.map(item=> renderTabs(item) )
                         }
                     </div>
                     <div className="messageModal-list">
@@ -186,17 +186,12 @@ const MessageDrawer = props =>{
                         {
                             messageList && messageList.length===0 && messagePagination ===1 &&
                             <div>
-                                <EmptyText
-                                    title={emptyTitle}
-                                />
+                                <EmptyText title={emptyTitle}/>
                             </div>
                         }
                         {
                             messageList && messageList.length < messPage.total && !isLoading &&
-                            <div
-                                className="messageModal-more"
-                                onClick={()=>moreMessage()}
-                            >
+                            <div className="messageModal-more" onClick={()=>moreMessage()}>
                                 加载更多...
                             </div>
                         }

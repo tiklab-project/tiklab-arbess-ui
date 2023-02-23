@@ -63,11 +63,11 @@ const Config = props =>{
         },
         {
             id:3,
-            title:"后置处理"
+            title:"变量"
         },
         {
             id:4,
-            title:"变量"
+            title:"后置处理"
         }
     ]
 
@@ -75,8 +75,9 @@ const Config = props =>{
         return <StrDetail
                     index={2}
                     pipeline={pipeline}
-                    firstItem={"配置"}
+                    firstItem={"设计"}
                     isAll={"config"}
+                    isDetails={isDetails}
                     setIsDetails={setIsDetails}
                     structureStore={structureStore}
                 />
@@ -86,8 +87,18 @@ const Config = props =>{
         <div className="config mf">
             <div className="config-up">
                 <div className="config-top">
-                    <div className="config_bread">
-                        <BreadcrumbContent firstItem={pipeline && pipeline.name} secondItem={"设计"}/>
+                    <BreadcrumbContent firstItem={"设计"}/>
+                    <div className="config-tabs">
+                        {
+                            typeLis.map(item=>{
+                                return(
+                                    <div key={item.id}
+                                         className={`config-tab ${type===item.id?"config-active":""}`}
+                                         onClick={()=>setType(item.id)}
+                                    >{item.title}</div>
+                                )
+                            })
+                        }
                     </div>
                     <div className="changeView-btn">
                         {
@@ -107,40 +118,11 @@ const Config = props =>{
                         }
                     </div>
                 </div>
-                <div className="config-tabs">
-                    {
-                        typeLis.map(item=>{
-                            return(
-                                <div
-                                    key={item.id}
-                                    className={`config-tab ${type===item.id?"config-active":""}`}
-                                    onClick={()=>setType(item.id)}
-                                >{item.title}
-                                </div>
-                            )
-                        })
-                    }
-                </div>
             </div>
-            {
-                type === 1 &&
-                <Gui
-                    configStore={configStore}
-                    pipelineStore={pipelineStore}
-                />
-            }
-            {
-                type===2 &&
-                <Trigger pipelineStore={pipelineStore}/>
-            }
-            {
-                type===3 &&
-                <Postpose pipelineStore={pipelineStore}/>
-            }
-            {
-                type===4 &&
-                <Variable pipelineStore={pipelineStore}/>
-            }
+            { type === 1 && <Gui configStore={configStore} pipelineStore={pipelineStore}/> }
+            { type===2 && <Trigger pipelineStore={pipelineStore}/> }
+            { type===3 && <Variable pipelineStore={pipelineStore}/> }
+            { type===4 && <Postpose pipelineStore={pipelineStore}/> }
         </div>
     )
 }

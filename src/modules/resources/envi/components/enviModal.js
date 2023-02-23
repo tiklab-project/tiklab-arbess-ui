@@ -97,30 +97,18 @@ const EnviModal = props =>{
         >
            <div className="resources-modal">
                 <div className="resources-modal-up">
-                    <ModalTitle
-                        setVisible={setVisible}
-                        title={formValue===""? "修改环境配置":"添加环境配置"}
-                    />
+                    <ModalTitle setVisible={setVisible} title={formValue? "修改环境配置":"添加环境配置"}/>
                 </div>
                 <div className="resources-modal-content">
-                    <Form
-                        form={form}
-                        layout="vertical"
-                        name="userForm"
-                        autoComplete = "off"
-                    >
-                        <Form.Item
-                            name="scmType"
-                            label="环境配置类型"
-                            rules={[{required:true,message:`请选择环境配置类型`}]}
-                        >
-                            <Select onChange={opt}>
+                    <Form form={form} layout="vertical" name="userForm" autoComplete="off">
+                        <Form.Item name="scmType" label="环境配置类型" rules={[{required:true,message:`请选择环境配置类型`}]}>
+                            <Select onChange={opt} disabled={formValue && formValue}>
                                 {
-                                    lis.map(item=>{
-                                        return <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
+                                    lis.map(item=>(
+                                        <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
                                             {scmTitle(item.scmType)}
                                         </Select.Option>
-                                    })
+                                    ))
                                 }
                             </Select>
                         </Form.Item>

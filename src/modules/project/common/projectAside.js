@@ -1,13 +1,7 @@
 import React,{useEffect,useState} from "react";
 import "./projectAside.scss";
 import {Dropdown} from "antd";
-import {
-    SettingOutlined,
-    ApartmentOutlined,
-    CreditCardOutlined,
-    ClockCircleOutlined,
-    CaretDownOutlined
-} from "@ant-design/icons";
+import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {interceptUrl} from "../../common/client/client";
 
@@ -24,7 +18,7 @@ const ProjectAside = props =>{
     const [nav,setNav] = useState("")
 
     useEffect(()=>{
-        let indexPath = `/index/task/${match.params.id}/${interceptUrl(path)[4]}`
+        let indexPath = `/index/pipeline/${match.params.id}/${interceptUrl(path)[4]}`
         setNav(indexPath)
     },[path])
 
@@ -33,7 +27,7 @@ const ProjectAside = props =>{
         setTaskFormDrawer(false)
         if(pipeline.id!==item.id){
             setIsLoading(true)
-            props.history.push(`/index/task/${item.id}${lastPath}`)
+            props.history.push(`/index/pipeline/${item.id}${lastPath}`)
             setTimeout(()=>setIsLoading(false),150)
         }
     }
@@ -97,7 +91,7 @@ const ProjectAside = props =>{
                 }
             </div>
 
-             <div className="project-sys" onClick={()=>props.history.push(`/index/task/${pipeline.id}/assembly/set`)}>
+             <div className="project-sys" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/assembly/set`)}>
                  <div className="aside_content_icon"><SettingOutlined/></div>
                  <div>设置</div>
              </div>

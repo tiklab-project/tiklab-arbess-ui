@@ -57,10 +57,11 @@ export const ViewMirror = props =>{
             console.log(Two,"cursorLine")
         }
         let list = []
-        if (One === "$") {
-            hintList.forEach(e => {
-                list.push(e.name)
-            })
+        if (One === "e") {
+            // hintList.forEach(e => {
+            //     list.push(e.name)
+            // })
+            list.push('echo')
         }
 
         // 得到光标标识
@@ -88,9 +89,6 @@ export const ViewMirror = props =>{
             onInputRead={(editor,change) =>{
                 editor.showHint()
             }}
-            // onChange={(editor,data,value)=>{
-            //     console.log(value)
-            // }}
         />
     )
 }

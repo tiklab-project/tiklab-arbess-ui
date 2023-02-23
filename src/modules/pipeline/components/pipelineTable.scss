@@ -1,5 +1,9 @@
 .pipelineTable{
-    &-state,&-history{
+    .pipelineTable-name{
+        color: var(--tiklab-blue);
+        cursor: pointer;
+    }
+    .pipelineTable-state,.pipelineTable-history{
         cursor: pointer;
         .actions-se{
             font-size: 16px;
@@ -8,16 +12,12 @@
             color: var(--tiklab-blue);
         }
     }
-    &-state{
-        &-running{
-            padding: 10px;
-        }
+    .pipelineTable-state .pipelineTable-state-running{
+        padding: 10px;
     }
-    &-collect{
-        .icon{
-            width: 19px !important;
-            height: 19px !important;
-        }
+    .pipelineTable-collect .icon{
+        width: 19px !important;
+        height: 19px !important;
     }
     .imgs{
         width: 24px;

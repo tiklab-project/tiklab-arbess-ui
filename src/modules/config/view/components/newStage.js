@@ -183,7 +183,7 @@ const NewStage = props =>{
                     <div className={`newStages-job`}>
                         {newJobContent(group,14)}
                     </div>
-                    { renderCode(group) }
+                    {/*{ renderCode(group) }*/}
                 </div>
             </div>
         </Fragment>
@@ -292,7 +292,7 @@ const NewStage = props =>{
                                                                { newJobContent(stage,20) }
                                                                { !group.code && hasAddNext(list,groupIndex,stagesIndex) }
                                                            </div>
-                                                           { renderCode(stage) }
+                                                           {/*{ renderCode(stage) }*/}
                                                        </div>
                                                    )
                                                })

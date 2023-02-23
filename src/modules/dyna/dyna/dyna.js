@@ -39,7 +39,7 @@ const Dyna = props =>{
     const goBack = () => props.history.push(`/index/home`)
 
     return <DynaDetail
-                firstItem={"动态详情"}
+                firstItem={"动态"}
                 goBack={goBack}
                 findlogpage={findlogpage}
                 dynaPage={dynaPage}

@@ -1,14 +1,14 @@
 import React,{useEffect,useState} from "react"
 import {inject,observer} from "mobx-react";
 import {Table} from "antd";
+import {SpinLoading} from "../../common/loading/loading";
 import {getTime} from "../../common/client/client";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../common/emptyText/emptyText";
 import Page from "../../common/page/page";
 import StrDetail from "../components/strDetail";
 import StrScreen from "../components/strScreen";
-import Loading from "../../common/loading/loading";
-import {runStatus, actionEn, runWay} from "../components/strTrigger";
+import {runStatus,actionEn,runWay} from "../components/strTrigger";
 import "../components/structure.scss";
 
 /**
@@ -19,8 +19,7 @@ const Structure = props => {
     const {structureStore,pipelineStore} = props
 
     const {findUserRunPageHistory,historyList,findAllLog,deleteHistoryLog,killInstance,freshen,
-        pageCurrent,setPageCurrent,page
-    } = structureStore
+        pageCurrent,setPageCurrent,page,setHistoryList} = structureStore
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
     const [detailsVisible,setDetailsVisible] = useState(false) // 列表数据详情
@@ -34,7 +33,10 @@ const Structure = props => {
     useEffect(()=>{
         // 所有流水线
         findAllPipelineStatus()
-        return ()=>setPageCurrent(1)
+        return ()=>{
+            setPageCurrent(1)
+            setHistoryList()
+        }
     },[])
 
     let inter = null
@@ -45,12 +47,16 @@ const Structure = props => {
             state:state,
             type:type
         }).then(res=>{
+            setIsLoading(false)
             if(res.code===0){
-                if(res.data && res.data.dataList[0].runStatus!==30){
+                if(!res.data){
                     clearInterval(inter)
+                }else {
+                    if(res.data.dataList && res.data.dataList[0].runStatus!==30){
+                        clearInterval(inter)
+                    }
                 }
             }
-            setIsLoading(false)
         }),1000)
         if(detailsVisible){
             clearInterval(inter)
@@ -131,16 +137,13 @@ const Structure = props => {
         }
     ]
 
-    if(isLoading){
-        return <Loading/>
-    }
-
     if(detailsVisible){
         return <StrDetail
                     index={index}
                     pipeline={pipeline}
                     firstItem={"历史"}
                     isAll={"structure"}
+                    isDetails={detailsVisible}
                     setIsDetails={setDetailsVisible}
                     structureStore={structureStore}
                 />
@@ -164,7 +167,9 @@ const Structure = props => {
                         dataSource={historyList}
                         rowKey={record=>record.historyId}
                         pagination={false}
-                        locale={{emptyText: <EmptyText title={"没有查询到历史记录"}/>}}
+                        locale={{emptyText:isLoading?
+                                <SpinLoading type="table"/>:
+                                <EmptyText title={"没有查询到历史记录"}/>}}
                     />
                     <Page
                         pageCurrent={pageCurrent}

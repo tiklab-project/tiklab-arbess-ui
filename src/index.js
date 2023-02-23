@@ -7,12 +7,13 @@ import {privilegeStores} from "tiklab-privilege-ui/es/store";
 import {messageModuleStores} from "tiklab-message-ui/es/store"
 import {initFetch,createContainer} from "tiklab-plugin-ui/es/_utils";
 import {observer,Provider} from "mobx-react";
+import {renderRoutes} from "react-router-config";
 import {ConfigProvider} from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import routers from "./routes";
 import resources from "./common/language/resources";
 import {store} from "./store";
-import {renderRoutes} from "react-router-config";
+import {Loading} from "./modules/common/loading/loading";
 import "./index.scss";
 import "./assets/font_icon/iconfont";
 import "./common/language/i18n";
@@ -45,7 +46,7 @@ const Index = observer(() => {
         })
     }, [])
 
-    if (visible) return <div>加载。。。</div>
+    if (visible) return <Loading/>
 
     return (
         <PluginContainer.Provider initialState={initPluginData}>

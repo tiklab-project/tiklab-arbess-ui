@@ -3,7 +3,16 @@
         width: 100%;
         padding: 0 20px;
         .input-hover:hover{
-            background-color: #f2f2f2;
+            background-color: #f2f2f2 !important;
+        }
+        .input-hover .ant-select-selector:hover{
+            background-color: #f2f2f2 !important;
+        }
+        .ant-input,.ant-select .ant-select-selector{
+            border-color: #efeded;
+        }
+        .ant-input:focus{
+            border-color: #40a9ff;
         }
     }
     .taskForm-forms{
@@ -26,7 +35,6 @@
             width: 30px;
         }
         .ant-form-item-explain-error{
-            min-height: 20px;
             height: 20px;
         }
         .ant-form-item-explain{

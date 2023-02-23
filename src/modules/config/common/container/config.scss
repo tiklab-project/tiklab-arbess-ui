@@ -10,11 +10,12 @@
         background: #ffffff;
         z-index: 9;
         min-width: 768px;
-        border-bottom: 1px solid #dedede;
+        //border-bottom: 1px solid #dedede;
     }
     .config-top{
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: var(--tiklab-padding) var(--tiklab-padding) 0;
     }
     .config_bread{

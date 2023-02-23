@@ -112,7 +112,7 @@ const Inputs = props =>{
         >
             <Input
                 ref={ref}
-                bordered={enter}
+                // bordered={enter}
                 addonBefore={enter && addonBefore}
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
                 className={`${enter?'':'input-hover'}`}

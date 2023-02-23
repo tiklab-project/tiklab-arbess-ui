@@ -47,7 +47,8 @@ const Pipeline = props =>{
     }
 
     const onClick = () =>{
-        setAddPipelineVisible(true)
+        // setAddPipelineVisible(true)
+        props.history.push('/index/pipeline/new')
     }
 
     return(
@@ -83,11 +84,11 @@ const Pipeline = props =>{
                     {...props}
                     pipelineStore={pipelineStore}
                 />
-                <PipelineAdd
-                    {...props}
-                    addPipelineVisible={addPipelineVisible}
-                    setAddPipelineVisible={setAddPipelineVisible}
-                />
+                {/*<PipelineAdd*/}
+                {/*    {...props}*/}
+                {/*    addPipelineVisible={addPipelineVisible}*/}
+                {/*    setAddPipelineVisible={setAddPipelineVisible}*/}
+                {/*/>*/}
             </div>
         </div>
     )

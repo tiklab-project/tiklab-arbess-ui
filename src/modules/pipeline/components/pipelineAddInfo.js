@@ -5,16 +5,14 @@ import {Profile} from "tiklab-eam-ui";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../common/btn/btn";
-import Loading from "../../common/loading/loading";
+import {Loading} from "../../common/loading/loading";
 import PipelineUserAdd from "./pipelineUserAdd";
 import EmptyText from "../../common/emptyText/emptyText";
 import "./pipelineAddInfo.scss";
 
 const PipelineAddInfo = props =>{
 
-    const {set,pipelineStore,setCurrent,setAddPipelineVisible,
-        templateLis,templateType,pipelineType,onClick
-    } = props
+    const {set,pipelineStore,setCurrent,templateLis,templateType,pipelineType,onClick} = props
 
     const {pipeline,pipelineList,findUserPage,createPipeline,isLoading,updatePipeline} = pipelineStore
 
@@ -74,7 +72,7 @@ const PipelineAddInfo = props =>{
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
                     value.name!=="" && (pipeline.name = value.name)
-                    props.history.push(`/index/task/${pipeline.id}/survey`)
+                    props.history.push(`/index/pipeline/${pipeline.id}/survey`)
                 }
             })
         }else {
@@ -87,7 +85,7 @@ const PipelineAddInfo = props =>{
             }
             createPipeline(params).then(res => {
                 if (res.code === 0 && res.data) {
-                    props.history.push(`/index/task/${res.data}/config`)
+                    props.history.push(`/index/pipeline/${res.data}/config`)
                 }
             })
         }
@@ -237,10 +235,10 @@ const PipelineAddInfo = props =>{
                             setNUserList={setNUserList}
                             findUserPage={findUserPage}
                         />}
-                          placement={"bottomRight"}
-                          visible={visible}
-                          trigger={['click']}
-                          onVisibleChange={visible => setVisible(visible)}
+                        placement={"bottomRight"}
+                        visible={visible}
+                        trigger={['click']}
+                        onVisibleChange={visible => setVisible(visible)}
                     >
                         <Btn title={"添加成员"} icon={<PlusOutlined/>} type={"link"}/>
                     </Dropdown>
@@ -315,9 +313,10 @@ const PipelineAddInfo = props =>{
         <>
             <Form form={form} autoComplete="off" layout={"vertical"}>
                 <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
-                    <Input allowClear bordered={set} style={set? {width:612}: {background:"#fff"}}/>
+                    <Input allowClear style={set? {width:612}: {background:"#fff"}}/>
                 </Form.Item>
             </Form>
+
             { renderPowerType(powerLis) }
 
             { !set && powerType === 2 && renderUser() }
@@ -327,7 +326,7 @@ const PipelineAddInfo = props =>{
                 <Btn onClick={onClick} title={"取消"} isMar={true}/>
                 :
                 <>
-                    <Btn onClick={()=>setAddPipelineVisible(false)} title={"取消"} isMar={true}/>
+                    <Btn onClick={()=>props.history.push("/index/pipeline")} title={"取消"} isMar={true}/>
                     <Btn onClick={()=>setCurrent(1)} title={"上一步"} isMar={true}/>
                 </>
             }

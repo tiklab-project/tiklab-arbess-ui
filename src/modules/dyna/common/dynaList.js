@@ -8,6 +8,7 @@ import pip_config from "../../../assets/images/svg/pip_config.svg";
 import pip_run from "../../../assets/images/svg/pip_run.svg";
 import pip_helmet from "../../../assets/images/svg/pip_helmet.svg";
 
+
 const DynaList = props =>{
 
     const {dynamicList} = props
@@ -17,21 +18,17 @@ const DynaList = props =>{
     }
 
     const renderLis = (item,index) => {
-        return <div key={index} className="dynamic-item" onClick={()=>dynaGo(item)}>
-            <div
-                dangerouslySetInnerHTML={{__html: item.data}}
-            />
-            <div className="dynamic-item-time">{item.timestamp}</div>
-        </div>
+        return  <div key={index} className="dynamic-item" onClick={()=>dynaGo(item)}>
+                    <div dangerouslySetInnerHTML={{__html: item.data}}/>
+                    <div className="dynamic-item-time">{item.timestamp}</div>
+                </div>
     }
 
     return (
         <div className="dynamic-center">
             {
                 dynamicList && dynamicList.length>0?
-                dynamicList.map((item,index)=>{
-                    return renderLis(item,index)
-                })
+                dynamicList.map((item,index)=>renderLis(item,index))
                 :
                 <EmptyText title={"暂无近期动态"}/>
             }

@@ -19,14 +19,14 @@ const del = (record,deleteHistoryLog) =>{
 
 // 终止运行
 const end = (killInstance,pipeline) => {
-    killInstance(pipeline.pipelineId)
+    killInstance(pipeline.id)
 }
 
 // 历史运行--行操作
-export const actionEn = (record,deleteHistoryLog,killInstance,pipeline) =>{
+export const actionEn = (record,deleteHistoryLog,killInstance) =>{
     switch (record.runStatus) {
         case 30:
-            return  <Tooltip title={"终止"} onClick={()=>end(killInstance,pipeline)}>
+            return  <Tooltip title={"终止"} onClick={()=>end(killInstance,record.pipeline)}>
                         <MinusCircleOutlined style={{cursor:"pointer"}}/>
                     </Tooltip>
         default:

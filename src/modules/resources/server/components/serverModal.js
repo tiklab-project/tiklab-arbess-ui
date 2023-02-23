@@ -8,15 +8,14 @@ import {autoHeight,Validation} from "../../../common/client/client";
 
 const ServerModal = props =>{
 
-    const {visible,setVisible,createAuthServer,formValue,updateAuthServer,callUrl,findCode,isConfig,type,
-        findAccessToken,skin
+    const {visible,setVisible,createAuthServer,formValue,updateAuthServer,callUrl,findCode,
+        isConfig,type,findAccessToken,skin
     } = props
 
     const [form] = Form.useForm()
 
     const [height,setHeight] = useState(0)
     const [serverWay,setServerWay] = useState(2) // 授权类型
-    const [ban,setBan] = useState(false) // 禁用一部分表单
     const [addAuth,setAddAuth] = useState(false)  // 去第三方授权按钮是否禁用
     const [fresh,setFresh] = useState(false)
     const [infos,setInfos] = useState("") // 授权信息
@@ -31,7 +30,6 @@ const ServerModal = props =>{
         if(formValue){
             form.setFieldsValue(formValue)
             setServerWay(formValue.type)
-            setBan(true)
         }else {
             form.resetFields()
             setServerWay(type)
@@ -40,15 +38,11 @@ const ServerModal = props =>{
     }
 
     useEffect(()=>{
-        visible && setAuth()
-    },[visible,serverWay,fresh])
-
-    useEffect(()=>{
         visible && window.addEventListener("storage", authorisation)
         return () => {
             window.removeEventListener("storage", authorisation)
         }
-    },[visible])
+    },[visible,serverWay])
 
     const authorisation = () =>{
         let codeValue = localStorage.getItem("codeValue")
@@ -72,6 +66,11 @@ const ServerModal = props =>{
             localStorage.removeItem("codeValue")
         }
     }
+
+    // 是否能够去授权
+    useEffect(()=>{
+        visible && setAuth()
+    },[visible,serverWay,fresh])
 
     const validCallbackUrl = /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
     const isNull = values => values === null || values === "" || values === " " || values === undefined
@@ -151,14 +150,10 @@ const ServerModal = props =>{
 
     const authorize = (
        <>
-           <Form.Item label="授权id" name="clientId"
-                      rules={[{required:true,message:`授权id不能空`}]}
-           >
+           <Form.Item label="授权id" name="clientId" rules={[{required:true,message:`授权id不能空`}]}>
                <Input/>
            </Form.Item>
-           <Form.Item label="授权密码" name="clientSecret"
-                      rules={[{required:true,message:`授权密码不能空`}]}
-           >
+           <Form.Item label="授权密码" name="clientSecret" rules={[{required:true,message:`授权密码不能空`}]}>
                <Input/>
            </Form.Item>
            <Form.Item
@@ -177,8 +172,7 @@ const ServerModal = props =>{
                        message:"不是有效的回调地址"
                    },
               ]}
-           >
-               <Input/>
+           ><Input/>
            </Form.Item>
            {
                callUrlWarn &&
@@ -190,13 +184,9 @@ const ServerModal = props =>{
                }}>将下方地址设置为应用{serverWay===2?"Gitee":"Github"}回调地址{callUrlWarn}</div>
            }
            <Space>
-               <Form.Item name="message" label="服务授权信息"
-                          rules={[{required:true,message: "服务授权信息不能空" }]}
-               >
+               <Form.Item name="message" label="服务授权信息" rules={[{required:true,message: "服务授权信息不能空" }]}>
                    <Select style={{width:360}}>
-                       <Select.Option value={infos}>
-                           {infos}
-                       </Select.Option>
+                       <Select.Option value={infos}>{infos}</Select.Option>
                    </Select>
                </Form.Item>
                <div style={{paddingTop:22}}>
@@ -223,8 +213,7 @@ const ServerModal = props =>{
                 name="serverAddress"
                 rules={[{required:true,message:"服务器地址不能空"}]}
 
-            >
-                <Input/>
+            ><Input/>
             </Form.Item>
             <AuthType/>
         </>
@@ -264,10 +253,7 @@ const ServerModal = props =>{
         >
             <div className="resources-modal">
                 <div className="resources-modal-up">
-                    <ModalTitle
-                        setVisible={setVisible}
-                        title={formValue?"修改":"添加"}
-                    />
+                    <ModalTitle setVisible={setVisible} title={formValue?"修改":"添加"}/>
                 </div>
                 <div className="resources-modal-content">
                     <Form
@@ -278,7 +264,7 @@ const ServerModal = props =>{
                         initialValues={{type:serverWay,authPublic:1,authWay:1,authType:1}}
                     >
                         <Form.Item name="type" label="授权类型">
-                            <Select onChange={changeServerWay} disabled={ban||isConfig}>
+                            <Select onChange={changeServerWay} disabled={formValue || isConfig}>
                                 <Select.Option value={2}>Gitee</Select.Option>
                                 <Select.Option value={3}>Github</Select.Option>
                                 <Select.Option value={41}>sonar</Select.Option>

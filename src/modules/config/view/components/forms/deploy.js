@@ -51,7 +51,7 @@ const Deploy = props =>{
         <>
             <Form.Item name={dataItem.configId+"_authType"} label="部署方式">
                 <Select
-                    bordered={border}
+                    // bordered={border}
                     showArrow={showArrow}
                     onMouseEnter={()=>setShowArrow(true)}
                     onMouseLeave={()=>setShowArrow(false)}

@@ -16,7 +16,7 @@ const Guide = props =>{
                 props.history.push("/index/dyna")
                 break
             case "流水线动态":
-                props.history.push(`/index/task/${pipelineId}/survey/dyna`)
+                props.history.push(`/index/pipeline/${pipelineId}/survey/dyna`)
         }
     }
 

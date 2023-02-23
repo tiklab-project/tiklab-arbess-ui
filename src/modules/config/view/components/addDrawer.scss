@@ -84,6 +84,10 @@
                         transform:translate(0,-5px)
                     }
                 }
+                .group-desc-ban{
+                    background-color: #f8f8f8;
+                    cursor: not-allowed;
+                }
                 &-type{
                     margin: 10px;
                 }

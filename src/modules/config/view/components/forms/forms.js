@@ -23,6 +23,8 @@ const Forms = props => {
         return dataItem.configId + "_" + name
     }
 
+    console.log(dataItem)
+
     useEffect(()=>{
         switch(dataItem.type){
             case 1:
@@ -45,6 +47,12 @@ const Forms = props => {
                     [getId(dataItem,"codeAlias")]:dataItem && dataItem.codeAlias,
                     [getId(dataItem,"authName")]:dataItem.auth && dataItem.auth.name+"("+ (dataItem.auth.authType === 1?dataItem.auth.message:"私钥") +")",
                     [getId(dataItem,"authId")]:dataItem.authId
+                })
+                break
+            case 21:
+            case 22:
+                form.setFieldsValue({
+                    [getId(dataItem,"buildAddress")]:dataItem && dataItem.buildAddress,
                 })
                 break
             case 31:
@@ -154,7 +162,7 @@ const Forms = props => {
                         :
                         <Form.Item name={dataItem.stagesId+"_name"} label="阶段名称" rules={[{required:true, message:"请输入阶段名称"}]}>
                             <Input
-                                bordered={enter}
+                                // bordered={enter}
                                 placeholder={enter? "阶段名称，回车保存":"未设置"}
                                 className={`${enter?'':'input-hover'}`}
                                 onFocus={()=>setEnter(true)}

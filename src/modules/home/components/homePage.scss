@@ -4,18 +4,18 @@
     overflow: auto;
     background: var(--mf-backdrop-color);
     &-content{
-        &-top{
+        &-top, &-center,&-bottom{
             display: flex;
         }
         &-center{
-            display: flex;
             margin: 15px 0;
-        }
-        &-bottom{
-            display: flex;
         }
         .homePage-empty{
             padding-top: 20px;
+        }
+        .homePage-loading{
+            text-align: center;
+            padding-top: var(--tiklab-padding-item);
         }
         .quickIn{
             margin-bottom: 15px;
@@ -61,7 +61,7 @@
         }
         .pipelineRecent{
             border-radius: 4px;
-            padding: 10px;
+            padding: 10px 10px 0;
             height: 200px;
             background: #fff;
             flex: 1;
@@ -69,7 +69,9 @@
             .pipelineRecent-content{
                 display: flex;
                 justify-content: flex-start;
-                padding-top: 5px;
+                padding: 5px 0 10px;
+                width: 100%;
+                overflow: auto;
             }
             .pipelineRecent-item{
                 width: 232px;
@@ -90,8 +92,10 @@
             }
             .pipelineRecent-item-title{
                 padding-bottom: var(--tiklab-padding-item);
+                display: flex;
+                flex-direction: row;
+                align-items: center;
                 .pipelineRecent-icon{
-                    display: inline-block;
                     width: 32px;
                     height: 32px;
                     line-height: 32px;
@@ -99,10 +103,10 @@
                     text-align: center;
                     color: black;
                     font-size: 13px;
+                    margin-right: 8px;
                 }
                 .pipelineRecent-name{
-                    display: inline-block;
-                    max-width: 170px;
+                    max-width: 100%;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;

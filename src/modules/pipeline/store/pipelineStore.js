@@ -190,8 +190,8 @@ export class PipelineStore {
                 pageSize:10,
                 currentPage:1
             },
-            // domainId:value
-            ...value,
+            domainId:value,
+            // ...value,
         }
         const data = await FindDmUserPage(params)
         if(data.code===0){

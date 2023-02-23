@@ -10,14 +10,13 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import PostposeUserAdd from "../postposeUserAdd";
+import {Profile} from "tiklab-eam-ui";
 import EmptyText from "../../../../common/emptyText/emptyText";
 import Btn from "../../../../common/btn/btn";
+import PostposeAdd from "./postposeAdd";
 import MirrorContent from "./mirror";
-import {Profile} from "tiklab-eam-ui";
 import "./postpose.scss";
 
-const { Panel } = Collapse
 
 /**
  * 后置处理
@@ -27,11 +26,10 @@ const Postpose = props =>{
     const {pipelineStore,postposeStore,dataItem} = props
 
     const {findDmUserPage,pipeline} = pipelineStore
-    const {deletePostConfig,createPostConfig,findAllPostConfig,fixedPostposeData,postposeData,setPostposeData,setIsFindPostposeData,
-        isFindPostposeData,updatePostConfig,messageSendType,mesSendData
+    const {deletePostConfig,createPostConfig,findAllPostConfig,fixedPostposeData,postposeData,setPostposeData,
+        setIsFindPostposeData,isFindPostposeData,updatePostConfig,messageSendType,mesSendData
     } = postposeStore
 
-    const [userAddVisible,setUserAddVisible] = useState(false)
     const [allUserList,setAllUserList] = useState([])
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
     const [yUserList,setYUserList] = useState("")
@@ -49,7 +47,7 @@ const Postpose = props =>{
             if(res.code===0){
                 let arr = []
                 dataList.map(item=>{
-                    item.user.id===userId && arr.push({
+                    item.user && item.user.id===userId && arr.push({
                         ...item,
                         messageType:1
                     })
@@ -323,13 +321,13 @@ const Postpose = props =>{
                                     <Checkbox.Group onChange={value=>changeMes(value,item)} value={item.typeList}>
                                         <Row>
                                             {
-                                                typeList.map(item=>{
-                                                    return  <Col key={item.value} span={8}>
-                                                                <Tooltip title={isType(item.value) && `未配置${item.title}`}>
-                                                                    <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
-                                                                </Tooltip>
-                                                            </Col>
-                                                })
+                                                typeList.map(item=>(
+                                                    <Col key={item.value} span={8}>
+                                                        <Tooltip title={isType(item.value) && `未配置${item.title}`}>
+                                                            <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                                        </Tooltip>
+                                                    </Col>
+                                                ))
                                             }
                                         </Row>
                                     </Checkbox.Group>
@@ -343,28 +341,14 @@ const Postpose = props =>{
                                 <div className="pose-item-user">
                                     <div className="user-title">
                                         <div className="title-user">消息通知人员</div>
-                                        <Dropdown
-                                            overlay={ <PostposeUserAdd
-                                                userAddVisible={userAddVisible}
-                                                setUserAddVisible={setUserAddVisible}
-                                                allUserList={allUserList}
-                                                yUserList={yUserList}
-                                                postposeData={postposeData}
-                                                setPostposeData={setPostposeData}
-                                                type={'task'}
-                                            />}
-                                            placement={"bottomRight"}
-                                            visible={userAddVisible}
-                                            trigger={['click']}
-                                            onVisibleChange={visible => setUserAddVisible(visible)}
-                                        >
-                                            <Btn
-                                                type={"link-nopadding"}
-                                                icon={<PlusOutlined/>}
-                                                onClick={()=>setYUserList(item)}
-                                                title={"添加成员"}
-                                            />
-                                        </Dropdown>
+                                        <PostposeAdd
+                                            item={item}
+                                            allUserList={allUserList}
+                                            yUserList={yUserList}
+                                            setYUserList={setYUserList}
+                                            postposeData={postposeData}
+                                            setPostposeData={setPostposeData}
+                                        />
                                     </div>
                                     <Table
                                         bordered={false}
@@ -409,19 +393,13 @@ const Postpose = props =>{
                     <span style={{fontSize:13}}>({postposeData && postposeData.length?postposeData.length:0}个)</span>
                 </div>
                 <Dropdown overlay={taskMenu} trigger={["click"]} placement="bottomRight">
-                    <Btn
-                        title={"添加后置处理"}
-                        type={"link-nopadding"}
-                        icon={<PlusCircleOutlined />}
-                    />
+                    <Btn title={"添加后置处理"} type={"link-nopadding"} icon={<PlusCircleOutlined />}/>
                 </Dropdown>
             </div>
             <div className="pose-pose-content">
                 {
                     postposeData && postposeData.length > 0 ?
-                    postposeData.map((item,index)=>{
-                        return renderPose(item,index)
-                    })
+                    postposeData.map((item,index)=>renderPose(item,index))
                     :
                     <EmptyText title={"暂无后置处理"}/>
                 }

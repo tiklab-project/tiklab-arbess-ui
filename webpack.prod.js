@@ -62,7 +62,7 @@ module.exports = merge(baseWebpackConfig, {
         // }),
         new webpack.ContextReplacementPlugin(
             /moment[/\\]locale$/,
-            /zh-cn|es|zh-tw/,
+            /zh-cn|es/,
         ),
     ],
     optimization: {

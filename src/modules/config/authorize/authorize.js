@@ -3,7 +3,7 @@ import {getUrlParam} from "../../common/client/client";
 
 const Authorize = props =>{
 
-    // Gitee和Github授权
+    // 本地存储code
     useEffect(() => {
         let code  = getUrlParam("code")
         if(code !== null){

@@ -79,7 +79,7 @@ const Condition = props =>{
                 <div className="inputs-condition">
                     <div className="inputs-condition-key">
                         <Input
-                            bordered={border===(item.condId+"condKey")}
+                            // bordered={border===(item.condId+"condKey")}
                             className={`${border===(item.condId+"condKey")?"":'input-hover'}`}
                             onFocus={()=>setBorder(item.condId+"condKey")}
                             placeholder={"名称"}
@@ -91,7 +91,7 @@ const Condition = props =>{
                     </div>
                     <div>
                         <Select
-                            bordered={border===(item.condId+"condType")}
+                            // bordered={border===(item.condId+"condType")}
                             className={`${border===(item.condId+"condType")?"":'input-hover'}`}
                             onFocus={()=>setBorder(item.condId+"condType")}
                             showArrow={showArrow}
@@ -107,7 +107,7 @@ const Condition = props =>{
                     </div>
                     <div className="inputs-condition-value">
                         <Input
-                            bordered={border===(item.condId+"condValue")}
+                            // bordered={border===(item.condId+"condValue")}
                             className={`${border===(item.condId+"condValue")?"":'input-hover'}`}
                             onFocus={()=>setBorder(item.condId+"condValue")}
                             placeholder={"值"}

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
-import {SettingOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import "./projectSetAside.scss";
 
@@ -19,17 +18,17 @@ const ProjectSetAside = props =>{
     // 侧边流水线设置的第二级导航
     const secondRouter = [
         {
-            key:`/index/task/${pipelineId}/assembly/set`,
-            label:"设置",
+            key:`/index/pipeline/${pipelineId}/assembly/set`,
+            label:"流水线信息",
             enCode:"pipeline_seting",
         },
         {
-            key:`/index/task/${pipelineId}/assembly/user`,
+            key:`/index/pipeline/${pipelineId}/assembly/user`,
             label:"成员",
             enCode:"pipeline_user",
         },
         {
-            key:`/index/task/${pipelineId}/assembly/role`,
+            key:`/index/pipeline/${pipelineId}/assembly/role`,
             label:"权限",
             enCode:"pipeline_auth",
         }
@@ -37,11 +36,10 @@ const ProjectSetAside = props =>{
 
     const navContent = item =>{
         return <div key={item.key}
-                    className={`projectSet-item ${nav===item.key?"projectSet-select":""} `}
+                    className={`projectSet-aside-item ${nav===item.key?"projectSet-aside-select":""} `}
                     onClick={()=>props.history.push(item.key)}
                 >
-                    <span className="projectSet-item-icon"><SettingOutlined/></span>
-                    <span className="projectSet-item-label">{item.label}</span>
+                    <span className="projectSet-aside-item-label">{item.label}</span>
              </div>
     }
 
@@ -55,6 +53,7 @@ const ProjectSetAside = props =>{
 
     return(
         <div className="projectSet-aside">
+            <div className='projectSet-aside-head'>设置</div>
             {
                 secondRouter.map(item=>renderRouter(item))
             }

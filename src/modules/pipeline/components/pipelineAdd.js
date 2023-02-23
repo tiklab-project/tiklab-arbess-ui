@@ -1,7 +1,7 @@
 import React,{useState} from "react";
-import {Modal,Steps} from "antd";
+import {Steps} from "antd";
 import {RightOutlined,SwapOutlined} from "@ant-design/icons";
-import ModalTitle from "../../common/modalTitle/modalTitle";
+import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import Btn from "../../common/btn/btn";
 import PipelineAddMould from "./pipelineAddMould";
 import PipelineAddInfo from "./pipelineAddInfo";
@@ -68,8 +68,6 @@ const templateLis = [
 
 const PipelineAdd = props =>{
 
-    const {addPipelineVisible,setAddPipelineVisible} = props
-
     const [current,setCurrent] = useState(0)
     const [type,setType] = useState(1) // 流水线类型 -- 下标
     const [templateType,setTemplateType] = useState(1)  // 流水线模板 -- 下标
@@ -111,7 +109,7 @@ const PipelineAdd = props =>{
                         <div className="pipeline-template-ul">
                             <div className="pipeline-template-title">流水线类型</div>
                             <div className="pipeline-template-content">
-                                <div className={`pipeline-template-li pipeline-template-li-step2`}>
+                                <div className='pipeline-template-li pipeline-template-li-step2'>
                                     <div className="li-self">{type===1?"多任务":"多阶段"}</div>
                                 </div>
                                 <div>
@@ -124,7 +122,7 @@ const PipelineAdd = props =>{
                                 </div>
                             </div>
                             <div className="pipeline-template-title">自定义模板</div>
-                            <div className={`pipeline-template-li`} onClick={()=>changTemplate(0)}>
+                            <div className='pipeline-template-li' onClick={()=>changTemplate(0)}>
                                 <div className="li-self">自定义配置</div>
                                 <div className="pipeline-template-arrow">
                                     <RightOutlined />
@@ -176,14 +174,12 @@ const PipelineAdd = props =>{
                                 item={templateLis[templateType-1]}
                             />
                         }
-                        <div>
-                            <Btn
-                                icon={<SwapOutlined/>}
-                                title={"切换模板"}
-                                onClick={()=>setCurrent(1)}
-                                type={"link"}
-                            />
-                        </div>
+                        <Btn
+                            icon={<SwapOutlined/>}
+                            title={"切换模板"}
+                            onClick={()=>setCurrent(1)}
+                            type={"link"}
+                        />
                     </div>
                 </div>
                 <PipelineAddInfo
@@ -193,43 +189,27 @@ const PipelineAdd = props =>{
                     templateType={templateType}
                     pipelineType={type}
                     set={false}
-                    setAddPipelineVisible={setAddPipelineVisible}
                 />
             </>
         }
     ]
 
-    return(
-        <Modal
-            visible={addPipelineVisible}
-            onCancel={()=>setAddPipelineVisible(false)}
-            closable={false}
-            mask={false}
-            footer={false}
-            style={{top:0,padding:0,margin:0,width:"100vw",maxWidth:"100vw"}}
-            className="mf pipeline-add"
-            width={"100vw"}
-        >
-            <div className="pipelineAddModal">
-                <div className="pipelineAddModal-content">
-                    <ModalTitle
-                        setVisible={setAddPipelineVisible}
-                        title={"创建流水线"}
-                    />
-                    <div className="steps-top">
-                        <Steps current={current}>
-                            {steps.map(item => (
-                                <Steps.Step key={item.title} title={item.title} />
-                            ))}
-                        </Steps>
-                    </div>
-                    <div className="steps-content">
-                        {steps[current].content}
-                    </div>
-                </div>
+    return <div className="pipeline-add mf">
+        <div className="pipeline-add-content">
+            <BreadcrumbContent firstItem={'创建流水线'} goBack={()=>props.history.push("/index/pipeline")}/>
+            <div className="steps-top">
+                <Steps current={current}>
+                    {steps.map(item => (
+                        <Steps.Step key={item.title} title={item.title} />
+                    ))}
+                </Steps>
             </div>
-        </Modal>
-    )
+            <div className="steps-content">
+                {steps[current].content}
+            </div>
+        </div>
+    </div>
+
 }
 
 export default PipelineAdd

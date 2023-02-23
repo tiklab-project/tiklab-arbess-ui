@@ -4,7 +4,7 @@ import {message,Tooltip,Table,Space,Spin} from "antd";
 import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../common/emptyText/emptyText";
-import ListName from "../../common/list/listname";
+import Listname from "../../common/list/listname";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
@@ -39,10 +39,10 @@ const PipelineTable = props =>{
     }
 
     //去概况页面
-    const goPipelineTask= (text,record) => props.history.push(`/index/task/${record.id}/survey`)
+    const goPipelineTask= (text,record) => props.history.push(`/index/pipeline/${record.id}/survey`)
 
     //去历史页面
-    const goHistory = record => props.history.push(`/index/task/${record.id}/structure`)
+    const goHistory = record => props.history.push(`/index/pipeline/${record.id}/structure`)
 
     //运行或者停止
     const work = record =>{
@@ -75,12 +75,10 @@ const PipelineTable = props =>{
             width:"35%",
             ellipsis:true,
             render:(text,record)=>{
-                return  <ListName
-                            text={text}
-                            onClick={()=>goPipelineTask(text,record)}
-                            colors={record.color}
-                            isImg={"isImg"}
-                        />
+                return  <span  className='pipelineTable-name' onClick={()=>goPipelineTask(text,record)}>
+                            <Listname text={text} colors={record.color}/>
+                            <span>{text}</span>
+                        </span>
             }
         },
         {
@@ -171,45 +169,37 @@ const PipelineTable = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return(
-                    <>
-                        <Space>
-                            <Tooltip title="运行" >
-                                <span className="pipelineTable-state" onClick={()=>work(record)}>
-                                {
-                                    record.state === 2 ?
-                                        <Spin indicator={<LoadingOutlined className="actions-se" spin />} />
-                                        :
-                                        <PlayCircleOutlined className="actions-se"/>
-                                }
-                                </span>
-                            </Tooltip>
-                            <Tooltip title="历史">
-                                <span className="pipelineTable-history"
-                                      onClick={()=>goHistory(record)}
-                                >
-                                    <ClockCircleOutlined
-                                        className="actions-se"
-                                    />
-                                </span>
-                            </Tooltip>
-                            <Tooltip title="收藏">
-                                <span className="pipelineTable-collect"
-                                      onClick={()=>collectAction(record)}
-                                >
-                                {
-                                    record.collect === 0 ?
-                                        <svg className="icon" aria-hidden="true">
-                                            <use xlinkHref={`#icon-xingxing-kong`} />
-                                        </svg>
-                                        :
-                                        <svg className="icon" aria-hidden="true">
-                                            <use xlinkHref={`#icon-xingxing1`} />
-                                        </svg>
-                                }
-                                </span>
-                            </Tooltip>
-                        </Space>
-                    </>
+                    <Space>
+                        <Tooltip title="运行" >
+                            <span className="pipelineTable-state" onClick={()=>work(record)}>
+                            {
+                                record.state === 2 ?
+                                    <Spin indicator={<LoadingOutlined className="actions-se" spin />} />
+                                    :
+                                    <PlayCircleOutlined className="actions-se"/>
+                            }
+                            </span>
+                        </Tooltip>
+                        <Tooltip title="历史">
+                            <span className="pipelineTable-history" onClick={()=>goHistory(record)}>
+                                <ClockCircleOutlined className="actions-se"/>
+                            </span>
+                        </Tooltip>
+                        <Tooltip title="收藏">
+                            <span className="pipelineTable-collect" onClick={()=>collectAction(record)}>
+                            {
+                                record.collect === 0 ?
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref={`#icon-xingxing-kong`} />
+                                    </svg>
+                                    :
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref={`#icon-xingxing1`} />
+                                    </svg>
+                            }
+                            </span>
+                        </Tooltip>
+                    </Space>
                 )
             }
         },

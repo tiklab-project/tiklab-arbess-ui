@@ -116,7 +116,9 @@ const AddDrawerContent = props =>{
                 {
                     group.desc && group.desc.map((item,index)=>{
                         return(
-                            <div key={index} className="group-desc" onClick={()=>handleClick(item)}>
+                            <div key={index} className={`group-desc ${item.type===32?"group-desc-ban":""}`}
+                                 onClick={()=>item.type!==32&&handleClick(item)}
+                            >
                                 <SubIcon type={item.type}/>
                             </div>
                         )

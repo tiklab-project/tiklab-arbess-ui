@@ -1,6 +1,6 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
-import {Space} from "antd";
+import {Spin} from "antd";
 import {AimOutlined,HistoryOutlined} from "@ant-design/icons";
 import Guide from "../../common/guide/guide";
 import DynaList from "../../dyna/common/dynaList";
@@ -13,6 +13,9 @@ const HomePage = props =>{
 
     const {findAllOpen,pipelineNearList,findlogpage,dynamicList} = homePageStore
     const {findAllPipelineStatus,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
+
+    const [newlyLoading,setNewlyLoading] = useState(true) // 最近打开的流水线加载
+    const [logLoading,setLogLoading] = useState(true) // 动态加载
 
     useEffect(()=>{
         // 所有流水线
@@ -28,7 +31,8 @@ const HomePage = props =>{
                         pipelineId:pipeline(res.data)
                     }
                 }
-                findlogpage(params) // 近期动态
+                // 近期动态
+                findlogpage(params).then(()=>setLogLoading(false))
             }
         })
 
@@ -36,7 +40,7 @@ const HomePage = props =>{
         findAllFollow()
 
         // 最近打开的流水线
-        findAllOpen(5)
+        findAllOpen(5).then(()=>setNewlyLoading(false))
 
     },[])
 
@@ -52,21 +56,19 @@ const HomePage = props =>{
     // 最近访问的流水线
     const renderList = item => {
         return  <div className="pipelineRecent-item" key={item.openId}
-                     onClick={()=> props.history.push(`/index/task/${item.pipeline && item.pipeline.id}/survey`)}
+                     onClick={()=> props.history.push(`/index/pipeline/${item.pipeline && item.pipeline.id}/survey`)}
                 >
-            <div className="pipelineRecent-item-title">
-                {
-                    item && item.pipeline &&
-                    <Space>
-                        <span className={`mf-icon-${item.pipeline.color?item.pipeline.color:0} pipelineRecent-icon`}>
-                            {item.pipeline.name && item.pipeline.name.substring(0,1).toUpperCase()}
-                        </span>
-                            <span className="pipelineRecent-name">
-                            {item.pipeline.name && item.pipeline.name}
-                        </span>
-                    </Space>
-                }
-            </div>
+            {
+                item && item.pipeline &&
+                <div className="pipelineRecent-item-title">
+                    <div className={`mf-icon-${item.pipeline.color?item.pipeline.color:0} pipelineRecent-icon`}>
+                        {item.pipeline.name && item.pipeline.name.substring(0,1).toUpperCase()}
+                    </div>
+                    <div className="pipelineRecent-name">
+                        {item.pipeline.name && item.pipeline.name}
+                    </div>
+                </div>
+            }
             <div className="pipelineRecent-item-details">
                 <div className="pipelineRecent-item-detail">
                     <span className="details-desc">成功</span>
@@ -130,7 +132,10 @@ const HomePage = props =>{
                 <div className="pipelineRecent">
                     <Guide title={"最近访问的流水线"} icon={<HistoryOutlined />}/>
                     {
-                        pipelineNearList && pipelineNearList.length > 0 ?
+                        newlyLoading ?
+                            <div className='homePage-loading'><Spin/></div>
+                            :
+                            pipelineNearList && pipelineNearList.length > 0 ?
                             <div  className="pipelineRecent-content">
                                 {
                                     pipelineNearList.map(item=> renderList(item))
@@ -142,12 +147,14 @@ const HomePage = props =>{
                 </div>
 
                 <div className="home-dyna">
-                    <Guide
-                        title={"近期动态"}
-                        icon={<AimOutlined/>}
-                        type={"dynamic"}
-                    />
-                    <DynaList dynamicList={dynamicList}/>
+                    <Guide title={"近期动态"} icon={<AimOutlined/>} type={"dynamic"}/>
+                    {
+                        logLoading ?
+                            <div className='homePage-loading'><Spin/></div>
+                            :
+                            <DynaList dynamicList={dynamicList}/>
+                    }
+
                 </div>
             </div>
         </div>

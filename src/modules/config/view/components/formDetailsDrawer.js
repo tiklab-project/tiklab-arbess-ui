@@ -80,12 +80,7 @@ const FormDetailsDrawer = props =>{
                                 type={handleType}
                                 onClick={clickHandleType}
                             />
-                            { handleType===1 &&
-                                <Forms
-                                    dataItem={dataItem}
-                                    updateStageName={updateStageName}
-                                />
-                            }
+                            { handleType===1 && <Forms dataItem={dataItem} updateStageName={updateStageName}/>}
                             { handleType===2 && <Variable dataItem={dataItem}/>  }
                             { handleType===3 && <Condition dataItem={dataItem}/> }
                             { handleType===4 && <Postpose dataItem={dataItem}/>  }

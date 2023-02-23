@@ -3,9 +3,9 @@ import {renderRoutes} from "react-router-config";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/lib/store";
-import ProjectAside from "./projectAside";
-import Loading from "../../common/loading/loading";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined} from "@ant-design/icons";
+import ProjectAside from "./projectAside";
+import {Loading} from "../../common/loading/loading";
 
 const Project= (props)=>{
 
@@ -40,19 +40,19 @@ const Project= (props)=>{
     // 侧边第一栏导航
     const firstRouters=[
         {
-            to:`/index/task/${pipelineId}/survey`,
+            to:`/index/pipeline/${pipelineId}/survey`,
             title:"概况",
             icon:<ApartmentOutlined />,
             key:"2",
         },
         {
-            to:`/index/task/${pipelineId}/config`,
+            to:`/index/pipeline/${pipelineId}/config`,
             title: "设计",
             icon: <CreditCardOutlined />,
             key:"3",
         },
         {
-            to:`/index/task/${pipelineId}/structure`,
+            to:`/index/pipeline/${pipelineId}/structure`,
             title: "历史",
             icon: <ClockCircleOutlined />,
             key:"4",

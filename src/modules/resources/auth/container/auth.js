@@ -5,9 +5,9 @@ import {Profile} from "tiklab-eam-ui";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import EmptyText from "../../../common/emptyText/emptyText";
 import AuthBtn from "../components/authBtn";
-import "../../common/resources.scss";
-import ListName from "../../../common/list/listname";
+import Listname from "../../../common/list/listname";
 import Listaction from "../../../common/list/listaction";
+import "../../common/resources.scss";
 
 /**
  * 认证配置
@@ -38,9 +38,10 @@ const Auth = props =>{
             width:"25%",
             ellipsis:true,
             render:text => {
-                return  <ListName
-                            text={text}
-                        />
+                return  <span>
+                            <Listname text={text}/>
+                            <span>{text}</span>
+                        </span>
             }
         },
         {

@@ -5,10 +5,10 @@ import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
 import Tabs from "../../../common/tabs/tabs";
 import HostBtn from "../component/hostBtn";
-import "../../common/resources.scss";
 import EmptyText from "../../../common/emptyText/emptyText";
-import ListName from "../../../common/list/listname";
 import Listaction from "../../../common/list/listaction";
+import Listname from "../../../common/list/listname";
+import "../../common/resources.scss";
 
 /**
  * 资源配置--主机配置
@@ -66,9 +66,10 @@ const Host = props =>{
             width:"20%",
             ellipsis:true,
             render:text => {
-                return  <ListName
-                            text={text}
-                        />
+                return  <span>
+                            <Listname text={text}/>
+                            <span>{text}</span>
+                        </span>
             }
         },
         {

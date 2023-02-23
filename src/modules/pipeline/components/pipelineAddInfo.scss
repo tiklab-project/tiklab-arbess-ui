@@ -12,6 +12,7 @@
         padding: 10px;
         cursor: pointer;
         border-radius: 4px;
+        border: 1px solid #d9d9d9;
         &:first-child{
           margin-right: 15px;
         }
@@ -46,7 +47,6 @@
     .pipeline-power-set{
         max-width: 300px;
         width: 300px;
-        border: 1px solid var(--tiklab-gray-200);
     }
     .pipeline-power-noSet{
         flex: 1;
@@ -67,7 +67,7 @@
     .pipeline-user-table{
         background: #ffffff;
         padding: 8px;
-        min-height: 240px;
+        min-height: 100px;
     }
 }
 .pipeline-user-add{

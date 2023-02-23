@@ -74,7 +74,7 @@ const Variable = props => {
                 <div className="inputs-variable">
                     <div className="inputs-variable-key">
                         <Input
-                            bordered={bordered===(item.varId+"varKey")}
+                            // bordered={bordered===(item.varId+"varKey")}
                             className={`${bordered===(item.varId+"varKey")?"":'input-hover'}`}
                             onFocus={()=>serBordered(item.varId+"varKey")}
                             placeholder={"名称"}
@@ -87,7 +87,7 @@ const Variable = props => {
                     <div>=</div>
                     <div className="inputs-variable-value">
                         <Input
-                            bordered={bordered===(item.varId+"varValue")}
+                            // bordered={bordered===(item.varId+"varValue")}
                             className={`${bordered===(item.varId+"varValue")?"":'input-hover'}`}
                             onFocus={()=>serBordered(item.varId+"varValue")}
                             placeholder={"值"}

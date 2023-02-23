@@ -1,18 +1,11 @@
 .pipeline-add{
-    .ant-modal-body{
-        height: 100%;
-        overflow: auto;
-        padding: 0;
-        background: var(--tiklab-gray);
+   height: 100%;
+    overflow: auto;
+    .pipeline-add-content{
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
     }
-    .ant-modal-footer{
-        display: none;
-    }
-}
-.pipelineAddModal{
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
     .pipeline-template{
         .pipeline-template-title{
             height: 50px;
@@ -30,9 +23,10 @@
             display: flex;
             padding: 8px var(--tiklab-padding);
             justify-content: space-between;
-            align-items: center;        
+            align-items: center;
             &-header{
                 display: flex;
+                align-items: center;
                 padding-bottom: 5px;
                 .li-header-name{
                     font-weight: var(--tiklab-font-weight-bold);
@@ -77,7 +71,7 @@
                 padding: 10px 0;
             }
         }
-        
+
         .pipeline-template-li-step1:not(:last-child){
             margin-bottom: var(--tiklab-padding-item);
         }
@@ -88,6 +82,9 @@
         .pipeline-template-arrow{
             font-size: 16px;
         }
+    }
+    .steps-top{
+        padding-top: var(--tiklab-padding-item);
     }
     .steps-content {
         min-height: 100px;

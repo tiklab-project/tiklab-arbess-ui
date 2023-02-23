@@ -8,20 +8,25 @@
         flex-shrink: 0;
         flex-basis: 180px;
         background: var(--mf-backdrop-color);
-    }
-    &-item{
-        padding: 10px;
-        cursor: pointer;
-        &:hover{
-            background: var(--tiklab-gray-300);
+        .projectSet-aside-head{
+            height: 40px;
+            line-height: 40px;
+            width: 100%;
+            padding: 0 20px;
+            font-weight: var(--tiklab-font-weight-bold);
+            border-bottom: 1px solid #ececec;
+
         }
-        &-icon{
-            padding-right: 10px;
-            font-size: 16px;
+        .projectSet-aside-item{
+            padding: 8px 20px;
+            cursor: pointer;
+            &:hover{
+                background: var(--tiklab-gray-300);
+            }
         }
-    }
-    &-select{
-        background: var(--tiklab-gray-400);
+        .projectSet-aside-select{
+            background: var(--tiklab-gray-400);
+        }
     }
     &-content{
         flex: 1;

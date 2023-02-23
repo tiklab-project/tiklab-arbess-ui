@@ -3,20 +3,12 @@ import "./listname.scss";
 
 const Listname = props => {
 
-    const {text,onClick,colors} = props
+    const {text,colors} = props
 
-    return  <span
-                className={`${onClick?"mf-listname-href":""}`}
-                onClick={onClick}
-            >
-                <span className={`mf-listname-icon ${colors?`mf-icon-${colors}`:"mf-icon-2"}`}>
-                    {text && text.substring(0,1).toUpperCase()}
-                </span>
-                <span className={`${onClick?"mf-listname-name":"mf-listname-home"}`}>
-                    {text}
-                </span>
+    return  <span className={`mf-listname-icon ${colors?`mf-icon-${colors}`:"mf-icon-1"}`}>
+                {text && text.substring(0,1).toUpperCase()}
             </span>
-            
+
 }
 
 export default Listname

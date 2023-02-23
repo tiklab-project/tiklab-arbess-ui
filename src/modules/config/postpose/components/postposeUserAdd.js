@@ -22,11 +22,11 @@ const PostposeUserAdd = props =>{
     useEffect(()=>{
         let newArr = []
         if(type){
-            newArr = yUserList && yUserList.userList.map(item=>item.user.id)
+            newArr = yUserList && yUserList.userList.map(item=>item.user && item.user.id)
         }else {
             newArr = yUserList && yUserList.map(item=>item.user.id)
         }
-        userAddVisible && setUserList(allUserList.filter(item=>!newArr.includes(item.user.id)))
+        userAddVisible && setUserList(allUserList.filter(item=>!newArr.includes(item.user && item.user.id)))
     },[userAddVisible])
 
     const onOk = () => {

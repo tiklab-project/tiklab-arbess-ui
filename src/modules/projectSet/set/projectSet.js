@@ -12,7 +12,7 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../common/btn/btn";
 import BreadcrumbContent from "../../common/breadcrumb/breadcrumb";
 import PipelineInfo from "../../pipeline/components/pipelineAddInfo";
-import Loading from "../../common/loading/loading";
+import {Loading} from "../../common/loading/loading";
 import "./projectSet.scss";
 
 const ProjectSet = props =>{
@@ -134,7 +134,7 @@ const ProjectSet = props =>{
     return(
         <div className="pipelineReDel mf-home-limited mf">
             <div className="pipelineReDel-up">
-                <BreadcrumbContent firstItem={"设置"}/>
+                <BreadcrumbContent firstItem={"流水线信息"}/>
             </div>
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">

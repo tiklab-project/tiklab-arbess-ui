@@ -22,11 +22,10 @@ const PipelineDyna = props =>{
         pipeline && findlogpage(params)
     },[pipeline])
 
-    const goBack = () => props.history.push(`/index/task/${pipeline.id}/survey`)
+    const goBack = () => props.history.push(`/index/pipeline/${pipeline.id}/survey`)
 
     return  <DynaDetail
-                firstItem={pipeline.name}
-                secondItem={"流水线动态详情"}
+                firstItem={"流水线动态详情"}
                 goBack={goBack}
                 findlogpage={findlogpage}
                 dynaPage={dynaPage}

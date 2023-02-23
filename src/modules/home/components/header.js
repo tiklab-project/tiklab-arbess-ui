@@ -38,7 +38,7 @@ const Head = props =>{
     },[])
 
     useEffect(()=>{
-        if(path.indexOf("/index/task")===0){
+        if(path.indexOf("/index/pipeline")===0){
             path = "/index/pipeline"
         }
         setCurrentLink(path)

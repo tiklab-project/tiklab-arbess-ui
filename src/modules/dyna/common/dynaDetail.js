@@ -79,11 +79,7 @@ const DynaDetail = props =>{
     return(
         <div className="dyna" style={{height:"100%",overflow:"auto"}}>
             <div className="dyna-content mf-home-limited">
-                <BreadcrumbContent
-                    firstItem={firstItem}
-                    secondItem={secondItem && secondItem}
-                    goBack={goBack}
-                />
+                <BreadcrumbContent firstItem={firstItem} goBack={goBack}/>
                 <div className="dyna-screen" style={{padding:"15px 0"}}>
                     <Space>
                         {
