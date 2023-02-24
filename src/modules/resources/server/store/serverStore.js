@@ -12,7 +12,7 @@ import {message} from "antd";
 
 export class ServerStore{
 
-    @observable fresh = false
+    @observable serverFresh = false
     @observable modalVisible = false
     @observable formValue = ""
     @observable authServerList = []
@@ -32,7 +32,7 @@ export class ServerStore{
     createAuthServer =async values =>{
         const data = await CreateAuthServer(values)
         if(data.code===0){
-            this.fresh = !this.fresh
+            this.serverFresh = !this.serverFresh
             message.info(`添加成功`)
         }
         else {
@@ -47,7 +47,7 @@ export class ServerStore{
         param.append("serverId",value)
         const data = await DeleteAuthServer(param)
         if(data.code===0){
-            this.fresh=!this.fresh
+            this.serverFresh=!this.serverFresh
             message.info(`删除成功`)
         }
         else {
@@ -60,7 +60,7 @@ export class ServerStore{
     updateAuthServer =async value =>{
         const data = await UpdateAuthServer(value)
         if(data.code===0){
-            this.fresh=!this.fresh
+            this.serverFresh=!this.serverFresh
             message.info(`修改成功`)
         }
         else {

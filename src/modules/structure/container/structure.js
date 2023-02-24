@@ -168,8 +168,7 @@ const Structure = props => {
                         rowKey={record=>record.historyId}
                         pagination={false}
                         locale={{emptyText:isLoading?
-                                <SpinLoading type="table"/>:
-                                <EmptyText title={"没有查询到历史记录"}/>}}
+                                <SpinLoading type="table"/>: <EmptyText title={"没有查询到历史记录"}/>}}
                     />
                     <Page
                         pageCurrent={pageCurrent}

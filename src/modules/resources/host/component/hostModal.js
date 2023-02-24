@@ -60,16 +60,8 @@ const CodeModal = props =>{
 
     const modalFooter = (
         <>
-            <Btn
-                onClick={()=>setVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={onOk}
-                title={"确定"}
-                type={"primary"}
-            />
+            <Btn onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>
+            <Btn onClick={onOk} title={"确定"} type={"primary"}/>
         </>
     )
 

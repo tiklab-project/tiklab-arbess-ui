@@ -2,7 +2,7 @@ import React,{useState,useEffect,useRef} from "react";
 import {Modal, Form, Select, Checkbox, Table, Space, Tooltip, Dropdown, message} from "antd";
 import {DeleteOutlined,PlusOutlined} from "@ant-design/icons";
 import {Profile} from "tiklab-eam-ui";
-import {PostposeMirrorScenario} from "../../common/components/mirror";
+import {PostposeMirrorScenario} from "../../../common/editor/mirror";
 import {autoHeight} from "../../../common/client/client";
 import Btn from "../../../common/btn/btn";
 import ModalTitle from "../../../common/modalTitle/modalTitle";

@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
 import {getTime} from "../../common/client/client";
-import SIcon from "../../config/common/components/sIcon";
+import SIcon from "../../config/config/components/sIcon";
 
 const StrDetailTree = props =>{
 

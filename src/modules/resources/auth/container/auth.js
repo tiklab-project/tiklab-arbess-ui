@@ -15,11 +15,11 @@ import "../../common/resources.scss";
 const Auth = props =>{
 
     const {authStore} = props
-    const {deleteAuth,findAllAuth,authList,fresh,setModalVisible,setFormValue} = authStore
+    const {deleteAuth,findAllAuth,authList,authFresh,setModalVisible,setFormValue} = authStore
 
     useEffect(()=>{
         findAllAuth()
-    },[fresh])
+    },[authFresh])
 
     const edit = (text,record) => {
         setModalVisible(true)

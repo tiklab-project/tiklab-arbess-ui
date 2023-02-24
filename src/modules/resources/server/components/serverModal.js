@@ -122,17 +122,19 @@ const ServerModal = props =>{
         setServerWay(value)
     }
 
-    const onOk = values =>{
-        if(formValue){
-            const param = {
-                serverId:formValue.serverId,
-                ...values,
+    const onOk = () =>{
+        form.validateFields().then((values) => {
+            if(formValue){
+                const param = {
+                    serverId:formValue.serverId,
+                    ...values,
+                }
+                updateAuthServer(param)
+            }else {
+                createAuthServer(values)
             }
-            updateAuthServer(param)
-        }else {
-            createAuthServer(values)
-        }
-        setVisible(false)
+            setVisible(false)
+        })
     }
 
     // 去第三方授权
@@ -221,22 +223,8 @@ const ServerModal = props =>{
 
     const modalFooter = (
         <>
-            <Btn
-                onClick={()=>setVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={() => {
-                    form
-                        .validateFields()
-                        .then((values) => {
-                            onOk(values)
-                        })
-                }}
-                title={"确定"}
-                type={"primary"}
-            />
+            <Btn onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>
+            <Btn onClick={onOk} title={"确定"} type={"primary"}/>
         </>
     )
 

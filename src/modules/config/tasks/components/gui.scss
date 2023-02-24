@@ -1,0 +1,548 @@
+$line-color:#d9d9d9;
+
+.guiView{
+    flex: 1;
+    overflow: auto;
+    background: var(--mf-backdrop-color);
+    .guiView-main_group{
+        position: relative;
+        height: 100%;
+        white-space: nowrap;
+        padding: 0 var(--tiklab-padding);
+        overflow-y: hidden;
+        .group-create{
+            padding-top: 51px;
+            display: inline-block;
+            vertical-align: top;
+            height: 100%;
+        }
+        .group-flow{
+            height: 100%;
+            width: 48px;
+            text-align: center;
+            padding: 0 1px;
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+            -ms-transform: rotate(0);
+            transform: rotate(0);
+            .group-flow_btn_i{
+                position: absolute;
+                top: 128px;
+                left: 12px;
+                z-index: 2;
+                color: #595959;
+            }
+            .group-flow_btn{
+                position: relative;
+                z-index: 1;
+                cursor: pointer;
+                color: #8c8c8c;
+                height: 100%;
+                .icon{
+                    width: 22px;
+                    height: 22px    ;
+                }
+                &:after{
+                    content: "";
+                    width: 48px;
+                    border-top: 1px solid $line-color;
+                    position: absolute;
+                    margin-left: -24px;
+                    top: 138px;
+                }
+
+            }
+            .group-flow_multiBtn:before{
+                content: "";
+                height: 100%;
+                border-left: 1px solid $line-color;
+                position: absolute;
+            }
+            &:first-child{
+                .group-flow_singleBtn:after{
+                    width: 28px !important;
+                    right: 0 !important;
+                }
+                .group-flow_multiBtn:after{
+                    margin-left: 0 !important;
+                    width: 24px !important;
+                }
+            }
+        }
+        .group-table{
+            padding-top: 19px;
+            display: inline-block;
+            vertical-align: top;
+            height: 100%;
+            overflow: auto;
+            &:hover{
+                .newStages-multi .multi-content:nth-last-child(2) .newStages-contents:before{
+                    border-radius: 0;
+                }
+                .newStages-multi .multi-content:last-child:before {
+                    border-radius: 0 0 16px 16px;
+                }
+                .newStages-multi .add-newStages-contents {
+                    display: block;
+                }
+                .group-head .group-inputBtn{
+                    display: block;
+                }
+            }
+        }
+        .group-head{
+            padding: 0 15px;
+            margin-bottom: 38px;
+            position: relative;
+            z-index: 2;
+            .name{
+                height: 20px;
+                display: flex;
+                align-items: center;
+                .group-name{
+                    font-weight: 700;
+                    margin-right: 10px;
+                }
+                .group-inputBtn{
+                    cursor: pointer;
+                    display: none;
+                }
+                .ant-input{
+                    background: var(--mf-backdrop-color);
+                    width: 220px;
+                }
+            }
+        }
+        .newStages-job-code{
+            width: 240px !important;
+            &:hover{
+                border-color: var(--tiklab-blue);
+            }
+        }
+        .newStages-job-sub{
+            display: inline-flex;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+        }
+        .newStages-job-icon{
+            padding-right: 5px;
+        }
+        .newStages-job-title{
+            display: inline-block;
+            max-width: 110px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .newStages-job-warn{
+            color: red;
+            padding-right: 5px;
+        }
+        .job-name{
+            border-color: red !important;
+        }
+        .newStages-job-del{
+            opacity: 0;
+            padding-right: 10px;
+        }
+        .newStages-job-content:hover .newStages-job-del{
+            opacity: 1;
+        }
+
+        .newStages-single{
+            padding-top: 20px;
+            position: relative;
+            .branch-title{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                position: absolute;
+                margin-top: 0;
+                margin-left: 25px;
+                max-width: 210px;
+                white-space: nowrap;
+            }
+            .branch-address{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                position: absolute;
+                margin-top: 36px;
+                margin-left: 25px;
+                max-width: 210px;
+                white-space: nowrap;
+            }
+            .newStages-codeName:before{
+                content: "";
+                width: 18px;
+                height: 50px;
+                position: absolute;
+                left: 0;
+                top: 67px;
+                border-left: 1px solid $line-color;
+                border-bottom: 1px solid $line-color;
+                border-right-color: $line-color;
+                border-top-color: $line-color;
+                border-radius: 0 0 0 16px;
+            }
+            .newStages-branch:before{
+                content: "";
+                width: 18px;
+                height: 50px;
+                position: absolute;
+                top: 98px;
+                left: 0;
+                border-left: 1px solid $line-color;
+                border-bottom: 1px solid $line-color;
+                border-right-color: $line-color;
+                border-top-color: $line-color;
+                border-radius: 0 0 0 16px;
+            }
+            .newStages-job{
+                z-index: 1;
+                position: relative;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                margin: 10px 0;
+                -webkit-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out;
+            }
+            .newStages-job-content{
+                background: #fff;
+                border: 1px solid #e5e5e5;
+                border-radius: 20px;
+                width: 180px;
+                height: 40px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                cursor: pointer;
+                padding-left: 14px;
+                margin: 10px 0;
+                &:hover{
+                    border-color: var(--tiklab-blue);
+                }
+            }
+        }
+
+        .newStages-multi{
+            .branch-title{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                position: absolute;
+                margin-top: 8px;
+                margin-left: 25px;
+                max-width: 210px;
+                white-space: nowrap;
+            }
+            .branch-address{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                position: absolute;
+                margin-top: 45px;
+                margin-left: 25px;
+                max-width: 210px;
+                white-space: nowrap;
+            }
+            .newStages-codeName:before{
+                content: "";
+                width: 18px;
+                height: 50px;
+                position: absolute;
+                left: 0;
+                top: 28px;
+                border-left: 1px solid $line-color;
+                border-bottom: 1px solid $line-color;
+                border-right-color: $line-color;
+                border-top-color: $line-color;
+                border-radius: 0 0 0 16px;
+            }
+            .newStages-branch:before{
+                content: "";
+                width: 18px;
+                height: 50px;
+                position: absolute;
+                top: 67px;
+                left: 0;
+                border-left: 1px solid $line-color;
+                border-bottom: 1px solid $line-color;
+                border-right-color: $line-color;
+                border-top-color: $line-color;
+                border-radius: 0 0 0 16px;
+            }
+            .multi-content{
+                position: relative;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    top: -33%;
+                    left: 0;
+                    border-left: 1px solid $line-color;
+                    border-right: 1px solid $line-color;
+                    width: 100%;
+                    height: 50%;
+                    transition: border .2s ease-in;
+                }
+                &:first-child:before{
+                    top: 18%;
+                    height: 48%;
+                    border-left: none;
+                    border-right: none;
+                }
+                &:nth-last-child(2) .newStages-contents:before{
+                    border-radius: 0 0 16px 16px;
+                }
+                &:first-child .newStages-contents:before{
+                    border-radius: 0;
+                }
+                &:last-child:before{
+                    top: -50%;
+                    height: 100%;
+                    border-bottom: 1px solid $line-color;
+                }
+                &:hover .newStages-title-icon{
+                    display: inline-block;
+                }
+            }
+            .newStages-title{
+                text-align: center;
+                .newStages-title-name{
+                    position: relative;
+                    z-index: 1;
+                    background: var(--mf-backdrop-color);
+                    font-size: var(--tiklab-font-13);
+                    color: #8b8b8b;
+                    padding: 0 8px;
+                    display: inline-block;
+                    height: 32px;
+                    line-height: 32px;
+                }
+                .newStages-title-icon{
+                    display: none;
+                    padding-left: 5px;
+                }
+                .ant-input{
+                    background: var(--mf-backdrop-color);
+                    width: 200px;
+                }
+            }
+            .newStages-title:hover + .newStages-contents:before{
+                border-color: var(--tiklab-blue) !important;
+            }
+            .newStages-contents{
+                position: relative;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    top: -26%;
+                    left: 0;
+                    border: 1px solid $line-color;
+                    width: 100%;
+                    height: 76%;
+                    transition: border .2s ease-in;
+                }
+            }
+            .newStages-code{
+                .newStages-content{
+                    margin: 0;
+                }
+                &:before {
+                    left: 50% !important;
+                    width: 50%;
+                    border-left: none;
+                    border-right: none;
+                    border-top: none;
+                }
+            }
+            .newStages-content{
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                margin: 0 10px;
+            }
+            .add-newStage:before{
+                width: 50% !important;
+                border-left: none;
+                border-right: none;
+                border-top: none;
+            }
+            .newStages-job{
+                z-index: 1;
+                position: relative;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                margin: 10px 0;
+                -webkit-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out;
+                .newStages-job-content{
+                    background: #fff;
+                    border: 1px solid #e5e5e5;
+                    border-radius: 20px;
+                    width: 180px;
+                    height: 40px;
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                    -webkit-justify-content: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    -webkit-box-align: center;
+                    -webkit-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    cursor: pointer;
+                    &:hover{
+                        border-color: var(--tiklab-blue);
+                    }
+                }
+            }
+
+            .newStages-has:hover{
+                &:before{
+                    content: "";
+                    width: 19px;
+                    position: absolute;
+                    top: 20px;
+                    left: 12px;
+                    border-top: 1px solid var(--tiklab-blue);
+                }
+                &:after{
+                    content: "";
+                    width: 19px;
+                    position: absolute;
+                    top: 20px;
+                    right: 12px;
+                    border-top: 1px solid var(--tiklab-blue);
+                }
+                .newStages-has-add{
+                    cursor: pointer;
+                    opacity: 1;
+                }
+            }
+            .newStages-has-add{
+                opacity: 0;
+            }
+            .add-newStages-contents{
+                display: none;
+                &:hover{
+                    &:before{
+                        border-color: var(--tiklab-blue) !important;
+                    }
+                    .add-newStages-job-content{
+                        border-color: var(--tiklab-blue) !important;
+                    }
+                }
+                .add-newStages-job-content{
+                    background: #fff;
+                    border: 1px solid #e5e5e5;
+                    border-radius: 20px;
+                    width: 180px;
+                    height: 40px;
+                    display: -webkit-box;
+                    display: -webkit-flex;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                    -webkit-justify-content: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    -webkit-box-align: center;
+                    -webkit-align-items: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+
+/*  抽屉样式  */
+.wrapper{
+    &-head{
+        height: 40px;
+        background:#fff;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        font-weight: 700;
+        padding: 0 20px;
+        &-title{
+            .icon{
+                width: 16px;
+                height: 16px;
+                vertical-align: middle;
+            }
+            .deletePart{
+                cursor: pointer;
+                margin-left: 10px;
+            }
+        }
+    }
+    &-body{
+        overflow: hidden;
+        height: calc(100% - 46px);
+        padding: 0;
+        .body {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            height: 100%;
+            overflow: auto;
+        }
+    }
+}
+
+.resources-modal{
+    .resources-modal-up{
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0 ;
+    }
+    .resources-modal-content{
+        padding: 0 var(--tiklab-padding);
+        max-height:calc(100% - 120px);
+        overflow:auto;
+    }
+}

@@ -1,5 +1,5 @@
 // import {store as pipelineStore} from "./store";
-// import routesSaas  from "./routesSass";
+// import routesSaas  from "./routes";
 //
 // export {
 //     routesSaas ,
@@ -7,7 +7,7 @@
 // }
 
 import {store as pipelineStore} from "./module/store";
-import routesSaas  from "./module/routesSass";
+import routesSaas  from "./module/routes";
 import Portal from "././module/modules/home/container/portal";
 import SystemContent from "././module/modules/system/common/systemContent";
 

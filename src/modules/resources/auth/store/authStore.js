@@ -11,7 +11,7 @@ import {message} from "antd";
 
 export class AuthStore {
 
-    @observable fresh = false
+    @observable authFresh = false
     @observable modalVisible = false
     @observable formValue = ""
     @observable authList = []
@@ -30,7 +30,7 @@ export class AuthStore {
     createAuth =async values =>{
         const data = await CreateAuth(values)
         if(data.code===0){
-            this.fresh = !this.fresh
+            this.authFresh = !this.authFresh
             message.info(`添加成功`)
         }
         else {
@@ -45,7 +45,7 @@ export class AuthStore {
         param.append("authId",value)
         const data = await DeleteAuth(param)
         if(data.code===0){
-            this.fresh=!this.fresh
+            this.authFresh=!this.authFresh
             message.info(`删除成功`)
         }
         else {
@@ -58,7 +58,7 @@ export class AuthStore {
     updateAuth =async value =>{
         const data = await UpdateAuth(value)
         if(data.code===0){
-            this.fresh=!this.fresh
+            this.authFresh=!this.authFresh
             message.info(`修改成功`)
         }
         else {

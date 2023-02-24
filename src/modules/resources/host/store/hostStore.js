@@ -11,7 +11,7 @@ import {message} from "antd";
 
 export class HostStore {
 
-    @observable fresh = false
+    @observable hostFresh = false
     @observable modalVisible = false
     @observable formValue = ""
     @observable hostList = []
@@ -30,7 +30,7 @@ export class HostStore {
     createAuthHost = async value =>{
         const data = await CreateAuthHost(value)
         if(data.code===0){
-            this.fresh=!this.fresh
+            this.hostFresh=!this.hostFresh
             message.info(`添加成功`)
         }
         else {
@@ -56,7 +56,7 @@ export class HostStore {
         param.append("hostId",value)
         const data = await DeleteAuthHost(param)
         if(data.code===0){
-            this.fresh=!this.fresh
+            this.hostFresh=!this.hostFresh
             message.info(`删除成功`)
         }
         else {
@@ -69,7 +69,7 @@ export class HostStore {
     updateAuthHost =async value =>{
         const data = await UpdateAuthHost(value)
         if(data.code===0){
-            this.fresh=!this.fresh
+            this.hostFresh=!this.hostFresh
             message.info(`修改成功`)
         }
         else {

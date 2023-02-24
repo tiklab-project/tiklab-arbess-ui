@@ -5,7 +5,7 @@ import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import EmptyText from "../../../common/emptyText/emptyText";
 import PostposeAdd from "../components/postposeAdd";
-import SubIcon from "../../common/components/subIcon";
+import SubIcon from "../../config/components/subIcon";
 import Listaction from "../../../common/list/listaction";
 import Btn from "../../../common/btn/btn";
 import "../components/postpose.scss";

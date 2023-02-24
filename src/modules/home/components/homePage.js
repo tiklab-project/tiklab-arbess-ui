@@ -3,7 +3,7 @@ import {inject,observer} from "mobx-react";
 import {Spin} from "antd";
 import {AimOutlined,HistoryOutlined} from "@ant-design/icons";
 import Guide from "../../common/guide/guide";
-import DynaList from "../../dyna/common/dynaList";
+import DynaList from "../../dyna/components/dynaList";
 import EmptyText from "../../common/emptyText/emptyText";
 import "./homePage.scss";
 

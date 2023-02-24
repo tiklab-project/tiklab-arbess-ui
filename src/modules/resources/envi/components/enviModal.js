@@ -2,6 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Modal,Form,Select,Input} from "antd";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight,Validation} from "../../../common/client/client";
+import Btn from "../../../common/btn/btn";
 
 const lis = [
     {
@@ -45,7 +46,9 @@ const EnviModal = props =>{
         if(visible){
             if(formValue){
                 form.setFieldsValue(formValue)
-            }else form.resetFields()
+                return
+            }
+            form.resetFields()
         }
     },[visible])
 
@@ -67,33 +70,33 @@ const EnviModal = props =>{
         return enviData.some(item=>item.scmType===scmType)
     }
 
-    const onOk = values =>{
-        const params = {
-            scmId:formValue && formValue.scmId,
-            ...values
-        }
-        updatePipelineScm(params)
-        setVisible(false)
+    const onOk = () =>{
+        form.validateFields().then((values) => {
+            const params = {
+                scmId:formValue && formValue.scmId,
+                ...values
+            }
+            updatePipelineScm(params)
+            setVisible(false)
+        })
     }
+
+    const modalFooter = (
+        <>
+            <Btn onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>
+            <Btn onClick={onOk} title={"确定"} type={"primary"}/>
+        </>
+    )
 
     return(
         <Modal
             visible={visible}
             onCancel={()=>setVisible(false)}
             closable={false}
-            okText="确认"
-            cancelText="取消"
+            footer={modalFooter}
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
             className="mf"
-            onOk={() => {
-                form
-                    .validateFields()
-                    .then((values) => {
-                        form.resetFields()
-                        onOk(values)
-                    })
-            }}
         >
            <div className="resources-modal">
                 <div className="resources-modal-up">

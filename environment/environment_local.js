@@ -1,4 +1,4 @@
-const api =  "https://172.11.1.18:8080:8080";
+const api =  "http://192.168.10.6:8080";
 const base_url = JSON.stringify(api);
 
 

@@ -17,13 +17,13 @@ const Host = props =>{
 
     const {hostStore} = props
 
-    const {findAllAuthHostList,hostList,fresh,setModalVisible,setFormValue,deleteAuthHost} = hostStore
+    const {findAllAuthHostList,hostList,hostFresh,setModalVisible,setFormValue,deleteAuthHost} = hostStore
 
     const [activeTab,setActiveTab] = useState(0)
 
     useEffect(()=>{
         findAllAuthHostList(activeTab)
-    },[fresh,activeTab])
+    },[hostFresh,activeTab])
 
     const clickTab = item =>{
         setActiveTab(item.id)

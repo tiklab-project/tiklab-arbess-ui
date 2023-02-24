@@ -17,13 +17,13 @@ const Server = props =>{
 
     const {serverStore} = props
 
-    const {findAllAuthServerList,authServerList,setModalVisible,setFormValue,fresh,deleteAuthServer} = serverStore
+    const {findAllAuthServerList,authServerList,setModalVisible,setFormValue,serverFresh,deleteAuthServer} = serverStore
 
     const [activeTab,setActiveTab] = useState(0)
 
     useEffect(()=>{
         findAllAuthServerList(activeTab)
-    },[activeTab,fresh])
+    },[activeTab,serverFresh])
 
     const clickServerType = item =>{
         setActiveTab(item.id)
