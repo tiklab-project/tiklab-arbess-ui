@@ -6,7 +6,7 @@ import Tabs from "../../../../common/tabs/tabs";
 import Condition from "../../condition/components/condition";
 import Postprocess from "../../postprocess/postprocess";
 import Variable from "../../variable/variable";
-import Forms from "../../../tasksDetails/basic/forms";
+import Forms from "../../../tasks/basicInfo/forms";
 import "./formDetailsDrawer.scss";
 
 const FormDetailsDrawer = props =>{

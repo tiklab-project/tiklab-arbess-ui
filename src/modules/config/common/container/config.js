@@ -4,7 +4,6 @@ import {
     LoadingOutlined,
 } from "@ant-design/icons";
 import {message,Spin} from "antd";
-import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/btn";
 import BreadcrumbContent from "../../../common/breadcrumb/breadcrumb";
@@ -13,7 +12,7 @@ import Postpose from "../../postprocess/container/postprocess";
 import Trigger from "../../trigger/container/trigger";
 import Variable from "../../variable/container/variable";
 import StrDetail from "../../../structure/components/strDetail";
-import "./config.scss";
+import "../components/config.scss";
 
 const Config = props =>{
 
@@ -127,4 +126,4 @@ const Config = props =>{
     )
 }
 
-export default withRouter(inject("structureStore","configStore","pipelineStore")(observer(Config)))
+export default inject("structureStore","configStore","pipelineStore")(observer(Config))
