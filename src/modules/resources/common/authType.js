@@ -35,7 +35,7 @@ const AuthType = props =>{
                             label="私钥"
                             name="privateKey"
                             rules={[{required:true,message:"请输入私钥"}]}
-                        ><Input.TextArea autoSize={{minRows: 2, maxRows: 6}}/>
+                        ><Input.TextArea autoSize={{minRows: 2, maxRows: 8}}/>
                         </Form.Item>
                 }
             </Form.Item>

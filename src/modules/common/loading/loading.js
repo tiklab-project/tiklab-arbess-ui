@@ -1,10 +1,11 @@
 import React from "react";
 import {Spin} from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
 import "./loading.scss";
 
 const Loading = props =>{
     return (
-        <div className="mf-container">
+        <div className="mf-loading">
             <div className="mf-shape"/>
             <div className="mf-shape"/>
             <div className="mf-shape"/>
@@ -13,7 +14,7 @@ const Loading = props =>{
 }
 
 
-const SpinLoading = ({size,type}) => {
+const SpinLoading = ({size, type}) => {
 
     if(type==='table'){
         return  <div style={{textAlign:"center",paddingTop:30}}>
@@ -27,4 +28,15 @@ const SpinLoading = ({size,type}) => {
 
 }
 
-export {Loading,SpinLoading}
+const ServerLoading = ({title}) =>{
+    return (
+        <div className='mf-server-loading'>
+            <div className='server-loading-content'>
+                <Spin indicator={<LoadingOutlined style={{fontSize:14}}/>}/>
+                <span className='loading-content-title'>{title}</span>
+            </div>
+        </div>
+    )
+}
+
+export {Loading,SpinLoading,ServerLoading}

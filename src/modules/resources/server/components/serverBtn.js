@@ -12,7 +12,7 @@ const ServerBtn = props =>{
     const {findCode,findAccessToken,skin} = authorizeStore
 
     const [scanVisible,setScanVisible] = useState(false)
-    const [goodsVisible,setGoodsVisible] = useState(false)
+    const [artifactVisible,setArtifactVisible] = useState(false)
 
     const visible = () =>{
         switch (type) {
@@ -20,7 +20,7 @@ const ServerBtn = props =>{
             case 3:
                 return modalVisible
             case 51:
-                return goodsVisible
+                return artifactVisible
             default:
                 return scanVisible
         }
@@ -32,7 +32,7 @@ const ServerBtn = props =>{
             case 3:
                 return setModalVisible
             case 51:
-                return setGoodsVisible
+                return setArtifactVisible
             default:
                 return setScanVisible
 
@@ -47,7 +47,7 @@ const ServerBtn = props =>{
                 setModalVisible(true)
                 break
             case 51:
-                setGoodsVisible(true)
+                setArtifactVisible(true)
                 break
             default:
                 setScanVisible(true)

@@ -13,7 +13,7 @@ const NotFound=AsyncComponent(()=>import("./modules/login/404"))
 const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
 
 /* 授权 */
-const Authorize=AsyncComponent(()=>import("./modules/config/authorize/authorize"))
+const Authorize=AsyncComponent(()=>import("./modules/config/common/components/authorize"))
 /* 历史 */
 const Structure=AsyncComponent(()=>import("./modules/structure/container/structure"))
 
@@ -23,11 +23,11 @@ const Dyna=AsyncComponent(()=>import("./modules/dyna/container/dyna"))
 /*  流水线 */
 const Pipeline=AsyncComponent(()=>import("./modules/pipeline/pipeline/container/pipeline"))
 const PipelineAdd=AsyncComponent(()=>import("./modules/pipeline/pipeline/components/pipelineAdd"))
-const PipelineDetails=AsyncComponent(()=>import("./modules/pipeline/pipelineDetails/pipelineDetails"))
+const PipelineDetails=AsyncComponent(()=>import("./modules/pipeline/common/pipelineDetails"))
 const PipelineDyan=AsyncComponent(()=>import("./modules/dyna/components/dynaPipeline"))
 const Survey=AsyncComponent(()=>import("./modules/pipeline/survey/container/survey"))
 const StrPipeline=AsyncComponent(()=>import("./modules/structure/components/strPipeline"))
-const Config=AsyncComponent(()=>import("./modules/config/config/container/config"))
+const Config=AsyncComponent(()=>import("./modules/config/common/container/config"))
 const PipelineSet=AsyncComponent(()=>import("./modules/pipeline/setting/pipelineSet"))
 const PipelineBasic=AsyncComponent(()=>import("./modules/pipeline/basic/pipelineBasic"))
 

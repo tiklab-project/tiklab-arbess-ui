@@ -89,8 +89,8 @@ const Aside = props =>{
                     }
                 </div>
 
-                <div className="project-sys" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/assembly/set`)}>
-                    <div className="aside_content_icon"><SettingOutlined/></div>
+                <div className="normal-aside-item" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/assembly/set`)}>
+                    <div className="normal-aside-item-icon"><SettingOutlined/></div>
                     <div>设置</div>
                 </div>
             </div>

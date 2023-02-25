@@ -287,11 +287,7 @@ const Server = props =>{
                 <BreadcrumbContent firstItem={"服务配置"} />
                 <ServerBtn type={2}/>
             </div>
-            <Tabs
-                tabLis={lis}
-                type={activeTab}
-                onClick={clickServerType}
-            />
+            <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
             <div className="resources-content">
                 <Table
                     columns={columns(activeTab)}

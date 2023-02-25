@@ -166,7 +166,7 @@ export const ExpandMirror = props =>{
     )
 }
 
-export const PostposeMirrorScenario = props =>{
+export const PostprocessMirrorScenario = props =>{
     const {type,mirrorRefs,value,onFocus,styleActiveLine} = props
     return (
         <CodeMirror

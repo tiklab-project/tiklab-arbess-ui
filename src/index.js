@@ -59,6 +59,7 @@ const Index = observer(() => {
             </Provider>
         </PluginContainer.Provider>
     )
+
 })
 
 ReactDOM.render(<Index/>, document.getElementById("root"))

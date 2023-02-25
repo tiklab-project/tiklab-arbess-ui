@@ -5,6 +5,7 @@ import Btn from "../../../common/btn/btn";
 import AuthType from "../../common/authType";
 import ModalTitle from "../../../common/modalTitle/modalTitle";
 import {autoHeight,Validation} from "../../../common/client/client";
+import {ServerLoading} from "../../../common/loading/loading";
 
 const ServerModal = props =>{
 
@@ -13,28 +14,28 @@ const ServerModal = props =>{
     } = props
 
     const [form] = Form.useForm()
-
     const [height,setHeight] = useState(0)
     const [serverWay,setServerWay] = useState(2) // 授权类型
     const [addAuth,setAddAuth] = useState(false)  // 去第三方授权按钮是否禁用
     const [fresh,setFresh] = useState(false)
     const [infos,setInfos] = useState("") // 授权信息
-    const [callUrlWarn,setCallUrlWarn] = useState("")
+    const [callUrlWarn,setCallUrlWarn] = useState("") // 回调地址
+
 
     useEffect(()=>{
         visible && renderFormValue(formValue)
+        return ()=> setInfos("")
     },[visible])
 
     const renderFormValue = formValue => {
-        setInfos("")
         if(formValue){
             form.setFieldsValue(formValue)
             setServerWay(formValue.type)
-        }else {
-            form.resetFields()
-            setServerWay(type)
-            setCallUrlWarn("")
+            return
         }
+        form.resetFields()
+        setServerWay(type)
+        setCallUrlWarn("")
     }
 
     useEffect(()=>{
@@ -138,9 +139,9 @@ const ServerModal = props =>{
     }
 
     // 去第三方授权
-    const goUrl = way =>{
+    const goUrl = () =>{
         const params = {
-            type:way,
+            type:serverWay,
             clientId:form.getFieldValue("clientId"),
             clientSecret:form.getFieldValue("clientSecret"),
             callbackUrl:form.getFieldValue("callbackUrl"),
@@ -195,7 +196,7 @@ const ServerModal = props =>{
                    <Btn
                        title={"新建"}
                        icon={<PlusOutlined/>}
-                       onClick={addAuth ? ()=>goUrl(serverWay):null}
+                       onClick={addAuth ? ()=>goUrl():null}
                        type={addAuth ? "link" : "link-disabled"}
                    />
                </div>
@@ -279,6 +280,9 @@ const ServerModal = props =>{
                         }
                     </Form>
                 </div>
+                {
+                    skin && <ServerLoading title={'授权中……'}/>
+                }
             </div>
         </Modal>
     )
