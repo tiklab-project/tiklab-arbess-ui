@@ -11,12 +11,12 @@ import {renderRoutes} from "react-router-config";
 import {ConfigProvider} from "antd";
 import zhCN from "antd/es/locale/zh_CN";
 import routers from "./routes";
-import resources from "./common/language/resources";
+import resources from "./common/language/Resources";
 import {store} from "./store";
-import {Loading} from "./modules/common/loading/loading";
+import {Loading} from "./common/loading/Loading";
 import "./index.scss";
 import "./assets/font_icon/iconfont";
-import "./common/language/i18n";
+import "./common/language/I18n";
 
 enableAxiosCE()
 const Index = observer(() => {

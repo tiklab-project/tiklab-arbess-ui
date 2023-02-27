@@ -2,92 +2,92 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./modules/home/container/home"))
+const Index=AsyncComponent(()=>import("./home/container/Home"))
 
-const Login=AsyncComponent(()=>import("./modules/login/login"))
-const Logout=AsyncComponent(()=>import("./modules/login/Logout"))
-const Wechat=AsyncComponent(()=>import("./modules/login/wechat"))
-const NotFound=AsyncComponent(()=>import("./modules/login/404"))
+const Login=AsyncComponent(()=>import("./login/Login"))
+const Logout=AsyncComponent(()=>import("./login/Logout"))
+const Wechat=AsyncComponent(()=>import("./login/Wechat"))
+const NotFound=AsyncComponent(()=>import("./login/404"))
+const NoProductAuthUser=AsyncComponent(()=>import("./login/NoProductAuthUser"))
 
-/* 首页 */
-const HomePage=AsyncComponent(()=>import("./modules/home/components/homePage"))
+/**
+ * 首页
+ */
+const HomePage=AsyncComponent(()=>import("./home/components/HomePage"))
 
-/* 授权 */
-const Authorize=AsyncComponent(()=>import("./modules/config/common/components/authorize"))
-/* 历史 */
-const Structure=AsyncComponent(()=>import("./modules/structure/container/structure"))
+/**
+ * 流水线
+ */
+const Pipeline=AsyncComponent(()=>import("./pipeline/pipeline/container/Pipeline"))
+const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipelineAdd"))
+const PipelineDetails=AsyncComponent(()=>import("./pipeline/common/PipelineDetails"))
+const PipelineDyan=AsyncComponent(()=>import("./dynamic/components/DynamicPipeline"))
+const Overview=AsyncComponent(()=>import("./pipeline/overview/container/Overview"))
+const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
+const Design=AsyncComponent(()=>import("./design/common/Design"))
+const PipelineSet=AsyncComponent(()=>import("./pipeline/setting/PipelineSet"))
+const PipelineBasic=AsyncComponent(()=>import("./pipeline/basicInfo/PipelineBasicInfo"))
 
-/* 动态 */
-const Dyna=AsyncComponent(()=>import("./modules/dyna/container/dyna"))
+const History=AsyncComponent(()=>import("./pipeline/history/container/History"))
+const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
+const Dynamic=AsyncComponent(()=>import("./dynamic/container/Dynamic"))
 
-/*  流水线 */
-const Pipeline=AsyncComponent(()=>import("./modules/pipeline/pipeline/container/pipeline"))
-const PipelineAdd=AsyncComponent(()=>import("./modules/pipeline/pipeline/components/pipelineAdd"))
-const PipelineDetails=AsyncComponent(()=>import("./modules/pipeline/common/pipelineDetails"))
-const PipelineDyan=AsyncComponent(()=>import("./modules/dyna/components/dynaPipeline"))
-const Survey=AsyncComponent(()=>import("./modules/pipeline/survey/container/survey"))
-const StrPipeline=AsyncComponent(()=>import("./modules/structure/components/strPipeline"))
-const Config=AsyncComponent(()=>import("./modules/config/common/container/config"))
-const PipelineSet=AsyncComponent(()=>import("./modules/pipeline/setting/pipelineSet"))
-const PipelineBasic=AsyncComponent(()=>import("./modules/pipeline/basic/pipelineBasic"))
+/**
+ * 系统设置
+ */
+const Setting=AsyncComponent(()=>import("./setting/setting/Setting"))
+const Auth=AsyncComponent(()=>import("./setting/auth/container/Auth"))
+const Host=AsyncComponent(()=>import("./setting/authHost/container/Host"))
+const Server=AsyncComponent(()=>import("./setting/authServer/container/Server"))
+const Envi=AsyncComponent(()=>import("./setting/envi/container/Envi"))
+const Info=AsyncComponent(()=>import("./setting/envi/container/Info"))
 
-/* 系统设置 */
-const System=AsyncComponent(()=>import("./modules/sysmgr/sysmgr/system"))
+// plugin
+const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
 
-/* 资源配置 */
-const Auth=AsyncComponent(()=>import("./modules/resources/auth/container/auth"))
-const Host=AsyncComponent(()=>import("./modules/resources/host/container/host"))
-const Server=AsyncComponent(()=>import("./modules/resources/server/container/server"))
-const Envi=AsyncComponent(()=>import("./modules/resources/envi/container/envi"))
-const Info=AsyncComponent(()=>import("./modules/resources/envi/container/info"))
+// privilege
+const SystemFeature=AsyncComponent(()=>import("./setting/privilege/SystemFeature"))
+const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
+const SystemRoleTrue=AsyncComponent(()=>import("./setting/privilege/SystemRoleTrue"))
+const ProjectRole=AsyncComponent(()=>import("./setting/privilege/ProjectRole"))
+const ProjectFeature=AsyncComponent(()=>import("./setting/privilege/ProjectFeature"))
+const DomainRoleContent=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
+const ProductAuth=AsyncComponent(()=>import("./setting/privilege/productAuth"))
 
-/* 插件 */
-const Plugin=AsyncComponent(()=>import("./modules/sysmgr/plug-in/plugin"))
+// message
+const MessageManagement=AsyncComponent(()=>import("./setting/message/MessageManagement"))
+const MessageType=AsyncComponent(()=>import("./setting/message/MessageType"))
+const MessageSendType=AsyncComponent(()=>import("./setting/message/MessageSendType"))
+const MessageSendTypeTrue=AsyncComponent(()=>import("./setting/message/MessageSendTypeTrue"))
+const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice"))
+const MessageNoticeTrue=AsyncComponent(()=>import("./setting/message/MessageNoticeTrue"))
 
-/* 权限 */
-const SystemFeature=AsyncComponent(()=>import("./modules/sysmgr/privilege/systemFeature"))
-const SystemRole=AsyncComponent(()=>import("./modules/sysmgr/privilege/systemRole"))
-const SystemRoleTrue=AsyncComponent(()=>import("./modules/sysmgr/privilege/systemRoleTrue"))
-const ProjectRole=AsyncComponent(()=>import("./modules/sysmgr/privilege/projectRole"))
-const ProjectFeature=AsyncComponent(()=>import("./modules/sysmgr/privilege/projectFeature"))
-const DomainRoleContent=AsyncComponent(()=>import("./modules/sysmgr/privilege/domainRole"))
-const ProductAuth=AsyncComponent(()=>import("./modules/sysmgr/privilege/productAuth"))
+// oplog
+const MyLogList=AsyncComponent(()=>import("./setting/oplog/MyLogList"))
+const LogTemplateList=AsyncComponent(()=>import("./setting/oplog/LogTemplateList"))
+const LogType=AsyncComponent(()=>import("./setting/oplog/LogType"))
 
-/* 消息 */
-const MessageManagement=AsyncComponent(()=>import("./modules/sysmgr/message/messageManagement"))
-const MessageType=AsyncComponent(()=>import("./modules/sysmgr/message/messageType"))
-const MessageSendType=AsyncComponent(()=>import("./modules/sysmgr/message/messageSendType"))
-const MessageSendTypeTrue=AsyncComponent(()=>import("./modules/sysmgr/message/messageSendTypeTrue"))
-const MessageNotice=AsyncComponent(()=>import("./modules/sysmgr/message/messageNotice"))
-const MessageNoticeTrue=AsyncComponent(()=>import("./modules/sysmgr/message/messageNoticeTrue"))
+// todotask
+const MyTodoTask=AsyncComponent(()=>import("./setting/todotask/MyTodoTask"))
+const TaskList=AsyncComponent(()=>import("./setting/todotask/TaskList"))
+const TodoTemp=AsyncComponent(()=>import("./setting/todotask/TodoTemp"))
+const TodoType=AsyncComponent(()=>import("./setting/todotask/TodoType"))
 
-/* 日志 */
-const MyLogList=AsyncComponent(()=>import("./modules/sysmgr/oplog/myLogList"))
-const LogTemplateList=AsyncComponent(()=>import("./modules/sysmgr/oplog/logTemplateList"))
-const LogType=AsyncComponent(()=>import("./modules/sysmgr/oplog/logType"))
+// user
+const UserList=AsyncComponent(()=>import("./setting/user/List"))
+const UserDirectory=AsyncComponent(()=>import("./setting/user/Directory"))
+const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
+const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
+const UserGroupTrue=AsyncComponent(()=>import("./setting/user/Groupture"))
+const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
 
-/* 代办 */
-const MyTodoTask=AsyncComponent(()=>import("./modules/sysmgr/todotask/myTodoTask"))
-const TaskList=AsyncComponent(()=>import("./modules/sysmgr/todotask/taskList"))
-const TodoTemp=AsyncComponent(()=>import("./modules/sysmgr/todotask/todoTemp"))
-const TodoType=AsyncComponent(()=>import("./modules/sysmgr/todotask/todoType"))
+// licence
+const Version=AsyncComponent(()=>import("./setting/licence/Version"))
 
-const UserList=AsyncComponent(()=>import("./modules/sysmgr/user/list"))
-const UserDirectory=AsyncComponent(()=>import("./modules/sysmgr/user/directory"))
-const Org=AsyncComponent(()=>import("./modules/sysmgr/user/org"))
-const UserGroup=AsyncComponent(()=>import("./modules/sysmgr/user/group"))
-const UserGroupTrue=AsyncComponent(()=>import("./modules/sysmgr/user/groupture"))
-const ProjectSetUser=AsyncComponent(()=>import("./modules/sysmgr/user/domainUser"))
-
-const NoProductAuthUser=AsyncComponent(()=>import("./modules/login/noProductAuthUser"))
-
-/* 版本与许可证 */
-const Version=AsyncComponent(()=>import("./modules/sysmgr/licence/version"))
-
-const FullWorkTodo=AsyncComponent(()=>import("./modules/sysmgr/wiget/fullWorkTodo"))
-const WidgetMangent=AsyncComponent(()=>import("./modules/sysmgr/wiget/widgetMangent"))
-const OpLogWidget=AsyncComponent(()=>import("./modules/sysmgr/wiget/opLogWidget"))
-const TodoWidget=AsyncComponent(()=>import("./modules/sysmgr/wiget/todoWidget"))
+const FullWorkTodo=AsyncComponent(()=>import("./setting/wiget/fullWorkTodo"))
+const WidgetMangent=AsyncComponent(()=>import("./setting/wiget/widgetMangent"))
+const OpLogWidget=AsyncComponent(()=>import("./setting/wiget/opLogWidget"))
+const TodoWidget=AsyncComponent(()=>import("./setting/wiget/todoWidget"))
 
 const routers=[
     {
@@ -134,7 +134,7 @@ const routers=[
             },
             {
                 path:"/index/dyna",
-                component:Dyna,
+                component:Dynamic,
                 exact: true,
             },
             {
@@ -144,7 +144,7 @@ const routers=[
             },
             {
                 path:"/index/history",
-                component: Structure,
+                component: History,
                 exact: true
             },
             {
@@ -154,7 +154,7 @@ const routers=[
                     {
                         path:"/index/pipeline/:id/survey",
                         exact:true,
-                        component: Survey
+                        component: Overview
                     },
                     {
                         path:"/index/pipeline/:id/survey/dyna",
@@ -163,12 +163,12 @@ const routers=[
                     },
                     {
                         path:"/index/pipeline/:id/config",
-                        component: Config,
+                        component: Design,
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/structure",
-                        component: StrPipeline,
+                        path:"/index/pipeline/:id/history",
+                        component: HistoryPipeline,
                         exact:true,
                     },
                     {
@@ -185,7 +185,7 @@ const routers=[
                             },
                             {
                                 path:"/index/pipeline/:id/assembly/user",
-                                component: ProjectSetUser
+                                component: DomainUser
                             },
                             {
                                 path:"/index/pipeline/:id/*",
@@ -201,7 +201,7 @@ const routers=[
             },
             {
                 path:"/index/system",
-                component:System,
+                component:Setting,
                 routes:[
                     {
                         path: "/index/system/productAuth",
@@ -281,7 +281,7 @@ const routers=[
                     },
                     {
                         path: "/index/system/user/org",
-                        component: Org,
+                        component: Orga,
                     },
                     {
                         path: "/index/system/user/userGroup",

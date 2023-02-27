@@ -8,12 +8,12 @@
 
 import {store as pipelineStore} from "./module/store";
 import routesSaas  from "./module/routes";
-import Portal from "././module/modules/home/container/portal";
-import SystemContent from "././module/modules/system/common/systemContent";
+import Portal from "././module/home/container/Portal";
+import SettingContent from "././module/setting/setting/SettingContent";
 
 export {
     routesSaas ,
     pipelineStore,
     Portal,
-    SystemContent
+    SettingContent
 }

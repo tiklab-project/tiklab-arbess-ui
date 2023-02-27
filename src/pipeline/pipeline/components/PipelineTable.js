@@ -1,0 +1,220 @@
+import React from "react";
+import {Profile} from "tiklab-eam-ui";
+import {message,Tooltip,Table,Space,Spin} from "antd";
+import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
+import {inject,observer} from "mobx-react";
+import EmptyText from "../../../common/emptyText/EmptyText";
+import Listname from "../../../common/list/Listname";
+import pip_success from "../../../assets/images/svg/pip_success.svg";
+import pip_error from "../../../assets/images/svg/pip_error.svg";
+import pip_fog from "../../../assets/images/svg/pip_fog.svg";
+import pip_halt from "../../../assets/images/svg/pip_halt.svg";
+import "./PipelineTable.scss";
+
+const PipelineTable = props =>{
+
+    const {historyStore,pipelineStore}=props
+
+    const {pipelineStartStructure,killInstance}=historyStore
+    const {pipelineList,updateFollow,fresh,setFresh} = pipelineStore
+
+    //收藏
+    const collectAction = record => {
+        updateFollow({id:record.id}).then(res=>{
+            if(record.collect===0){
+                collectMessage(res,"收藏")
+            }else {
+                collectMessage(res,"取消")
+            }
+            setFresh(!fresh)
+        })
+    }
+
+    const collectMessage = (res,info) =>{
+        if(res.code===0){
+            message.info({content:`${info}成功`,duration:0.5,className:"message"})
+        }else {
+            message.info({content: res.msg,duration:0.5,className:"message"})
+        }
+    }
+
+    //去概况页面
+    const goPipelineTask= (text,record) => props.history.push(`/index/pipeline/${record.id}/survey`)
+
+    //去历史页面
+    const goHistory = record => props.history.push(`/index/pipeline/${record.id}/structure`)
+
+    //运行或者停止
+    const work = record =>{
+        if(record.state === 2){
+            killInstance(record.id).then(()=>{
+                setFresh(!fresh)
+            })
+        }else {
+            pipelineStartStructure(record.id).then(res=>{
+                if(res.data){
+                    setFresh(!fresh)
+                }
+            })
+        }
+    }
+
+    const tooltip = (statu,text,executor) =>{
+        return <div>
+            <div>执行人：{executor}</div>
+            <div>执行状态：{statu}</div>
+            <div>执行时间：{text}</div>
+        </div>
+    }
+
+    const columns = [
+        {
+            title: "流水线名称",
+            dataIndex: "name",
+            key: "name",
+            width:"35%",
+            ellipsis:true,
+            render:(text,record)=>{
+                return  <span  className='pipelineTable-name' onClick={()=>goPipelineTask(text,record)}>
+                            <Listname text={text} colors={record.color}/>
+                            <span>{text}</span>
+                        </span>
+            }
+        },
+        {
+            title: "最近构建信息",
+            dataIndex: "lastBuildTime",
+            key: "lastBuildTime",
+            width:"25%",
+            ellipsis:true,
+            render:(text,record) =>{
+                switch (record.buildStatus) {
+                    case 10:
+                        return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
+                                    <Space>
+                                        <img src={pip_success} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
+                    case 1:
+                        return  <Tooltip title={tooltip("失败",text,record.execUser.name)}>
+                                    <Space>
+                                        <img src={pip_error} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
+                    case 30:
+                        return <Tooltip title={tooltip("运行中",text,record.execUser.name)}>
+                                    <Space>
+                                        <img src={pip_fog} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
+                    case 0:
+                        return  <Tooltip title={tooltip("待构建","待构建","无")}>
+                                    <Space>
+                                        <img src={pip_fog} alt={"log"} className="imgs"/>
+                                        待构建
+                                    </Space>
+                                </Tooltip>
+                    case 20:
+                        return   <Tooltip title={tooltip("终止",text,record.execUser.name)}>
+                                    <Space>
+                                        <img src={pip_halt} alt={"log"} className="imgs"/>
+                                        {text}
+                                    </Space>
+                                </Tooltip>
+                }
+            }
+        },
+        {
+            title: "负责人",
+            dataIndex: ["user","nickname"],
+            key: "user",
+            width:"15%",
+            ellipsis: true,
+            render:(text,record) => {
+                return  <Space>
+                            <Profile userInfo={record.user}/>
+                            {text}
+                        </Space>
+            }
+        },
+        {
+            title: "可见范围",
+            dataIndex: "power",
+            key: "power",
+            width:"15%",
+            ellipsis: true,
+            render:(text,record) => {
+                switch (text) {
+                    case 1:
+                        return  <Space>
+                                    <UnlockOutlined />
+                                    全局
+                                </Space>
+                    case 2:
+                        return  <Space>
+                                    <LockOutlined />
+                                    私有
+                                </Space>
+                }
+            }
+        },
+        {
+            title: "操作",
+            dataIndex: "action",
+            key:"action",
+            width:"10%",
+            ellipsis:true,
+            render:(text,record)=>{
+                return(
+                    <Space>
+                        <Tooltip title="运行" >
+                            <span className="pipelineTable-state" onClick={()=>work(record)}>
+                            {
+                                record.state === 2 ?
+                                    <Spin indicator={<LoadingOutlined className="actions-se" spin />} />
+                                    :
+                                    <PlayCircleOutlined className="actions-se"/>
+                            }
+                            </span>
+                        </Tooltip>
+                        <Tooltip title="历史">
+                            <span className="pipelineTable-history" onClick={()=>goHistory(record)}>
+                                <ClockCircleOutlined className="actions-se"/>
+                            </span>
+                        </Tooltip>
+                        <Tooltip title="收藏">
+                            <span className="pipelineTable-collect" onClick={()=>collectAction(record)}>
+                            {
+                                record.collect === 0 ?
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref={`#icon-xingxing-kong`} />
+                                    </svg>
+                                    :
+                                    <svg className="icon" aria-hidden="true">
+                                        <use xlinkHref={`#icon-xingxing1`} />
+                                    </svg>
+                            }
+                            </span>
+                        </Tooltip>
+                    </Space>
+                )
+            }
+        },
+    ]
+
+    return  <div className="pipelineTable">
+                <Table
+                    bordered={false}
+                    columns={columns}
+                    dataSource={pipelineList}
+                    rowKey={record=>record.id}
+                    pagination={false}
+                    locale={{emptyText: <EmptyText title={'暂无流水线'}/>}}
+                />
+            </div>
+}
+
+export default inject("historyStore")(observer(PipelineTable))
