@@ -11,7 +11,10 @@ const HistoryDetailTree = props =>{
 
     const isExpandedTree = key => expandedTree.some(item => item === key)
 
-    //展开闭合 分类
+    /**
+     * 展开闭合
+     * @param group
+     */
     const setOpenOrClose = group => {
         if (isExpandedTree(group.id)) {
             setExpandedTree(expandedTree.filter(item => item!==group.id))
@@ -21,6 +24,10 @@ const HistoryDetailTree = props =>{
         taskLog(group)
     }
 
+    /**
+     * 设置日志
+     * @param item
+     */
     const taskLog = item => {
         switch (index) {
             case 1:

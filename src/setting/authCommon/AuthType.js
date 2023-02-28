@@ -1,6 +1,12 @@
 import React from "react";
 import {Form,Input,Select} from "antd";
 
+/**
+ * 认证类型 表单
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const AuthType = props =>{
 
     return(

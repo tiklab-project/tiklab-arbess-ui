@@ -4,6 +4,9 @@ import {inject,observer} from "mobx-react";
 
 /**
  * 项目成员
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const DomainUser = props =>{
 

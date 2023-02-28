@@ -1,11 +1,12 @@
 import {observable,action} from "mobx";
-
 import {
-    GetSystemMassage,
     DeletePipelineScm,
     UpdatePipelineScm,
     FindAllPipelineScm,
 } from "../api/Envi";
+import {
+    GetSystemMassage
+} from "../api/info"
 import {message} from "antd";
 
 export class EnviStore {

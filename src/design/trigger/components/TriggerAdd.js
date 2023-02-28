@@ -5,7 +5,12 @@ import Btn from "../../../common/btn/Btn";
 import {autoHeight} from "../../../common/client/Client";
 import ModalTitle from "../../../common/modalTitle/ModalTitle";
 
-
+/**
+ * 触发器添加，编辑
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TriggerAdd = props =>{
 
     const {triggerVisible,setTriggerVisible,createTriggerConfig,pipelineId,formValue,updateTriggerConfig} = props
@@ -26,6 +31,7 @@ const TriggerAdd = props =>{
 
     useEffect(()=>{
         if(triggerVisible){
+            // 表单初始化
             if(formValue!=="") {
                 form.setFieldsValue({
                     taskType: formValue.taskType,
@@ -38,6 +44,10 @@ const TriggerAdd = props =>{
         }
     },[triggerVisible])
 
+    /**
+     * 触发器添加更新确定
+     * @param fieldsValue
+     */
     const onOk = fieldsValue =>{
         if(formValue===""){
             const value = {
@@ -123,9 +133,6 @@ const TriggerAdd = props =>{
                         <Form.Item label="日期选择" name={"timeList"} rules={[{required:true,message:"日期选择不能为空"}]}>
                             <Checkbox.Group>
                                 <Row>
-                                    {/*<Col span={8}>*/}
-                                    {/*    <Checkbox value={8}>全选</Checkbox>*/}
-                                    {/*</Col>*/}
                                     <Col span={8}>
                                         <Checkbox value={1}>星期一</Checkbox>
                                     </Col>
@@ -150,7 +157,6 @@ const TriggerAdd = props =>{
                                 </Row>
                             </Checkbox.Group>
                         </Form.Item>
-
 
                         <Form.Item label="触发时间" name={"time"} rules={[{required:true,message:"触发时间不能为空"},]}>
                             <TimePicker placeholder="触发时间" format={"HH:mm"}/>

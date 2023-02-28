@@ -1,15 +1,15 @@
 import {serviceLoc} from "../../../common/utils/Requset";
 
 /**
- * 运行概况
+ * 系统信息
  * @param data
  * @returns {Promise<unknown>}
  * @constructor
  */
-export function  PipelineCensus (data){
+export function GetSystemMassage(data){
     return serviceLoc.request({
-        url:"/pipeline/pipelineCensus",
-        method: "post",
+        url:"/systemMassage/getSystemMassage",
+        method:"post",
         data
     })
 }

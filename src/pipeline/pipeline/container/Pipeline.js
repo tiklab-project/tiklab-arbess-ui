@@ -9,6 +9,12 @@ import Btn from "../../../common/btn/Btn";
 import Tabs from "../../../common/tabs/Tabs";
 import "../components/Pipeline.scss";
 
+/**
+ * 流水线页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Pipeline = props =>{
 
     const {pipelineStore} = props
@@ -20,6 +26,7 @@ const Pipeline = props =>{
             // 所有流水线
             findAllPipelineStatus()
         }else {
+            // 所有收藏的流水线
             findAllFollow()
         }
     },[fresh,listType])
@@ -35,14 +42,25 @@ const Pipeline = props =>{
         }
     ]
 
+    /**
+     * 模糊查询流水线
+     * @param e
+     */
     const onChangeSearch = e =>{
         findLike(e.target.value)
     }
 
+    /**
+     * 切换流水线类型
+     * @param item
+     */
     const clickType = item => {
         setListType(item.id)
     }
 
+    /**
+     * 去添加流水线页面
+     */
     const onClick = () =>{
         props.history.push('/index/pipeline/new')
     }
@@ -55,11 +73,7 @@ const Pipeline = props =>{
                     <Btn onClick={onClick} type={"primary"} title={"新建流水线"} icon={<PlusOutlined/>}/>
                 </div>
                 <div className="pipeline-type">
-                    <Tabs
-                        type={listType}
-                        tabLis={lis}
-                        onClick={clickType}
-                    />
+                    <Tabs type={listType} tabLis={lis} onClick={clickType}/>
                     <div className="pipeline-type-input">
                         <Input
                             allowClear
@@ -70,16 +84,7 @@ const Pipeline = props =>{
                         />
                     </div>
                 </div>
-
-                <PipelineTable
-                    {...props}
-                    pipelineStore={pipelineStore}
-                />
-                {/*<PipelineAdd*/}
-                {/*    {...props}*/}
-                {/*    addPipelineVisible={addPipelineVisible}*/}
-                {/*    setAddPipelineVisible={setAddPipelineVisible}*/}
-                {/*/>*/}
+                <PipelineTable {...props} pipelineStore={pipelineStore}/>
             </div>
         </div>
     )

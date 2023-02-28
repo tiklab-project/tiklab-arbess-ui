@@ -2,6 +2,12 @@ import React from "react";
 import Inputs from "../Inputs";
 import FindAuth from "../FindAuth";
 
+/**
+ * 代码扫描 -- SonarQuebe
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ScanSonarQuebe = props =>{
 
     const {dataItem} = props

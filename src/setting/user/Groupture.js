@@ -3,6 +3,9 @@ import {UserGroup} from "tiklab-user-ui";
 
 /**
  * 用户组
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const GroupTrue = props => {
     return <UserGroup {...props} bgroup={"matflow"} isBase={true}/>

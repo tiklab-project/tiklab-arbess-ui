@@ -14,6 +14,12 @@ import Variable from "../variable/container/Variable";
 import HistoryDetail from "../../pipeline/history/components/HistoryDetail";
 import "./Design.scss";
 
+/**
+ * 设计页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Design = props =>{
 
     const {pipelineStore,configStore,historyStore} = props
@@ -27,6 +33,7 @@ const Design = props =>{
     const [isDetails,setIsDetails] = useState(false) // 运行页面
 
     useEffect(()=>{
+        // 组件销毁
         return ()=> {
             setTaskFormDrawer(false)
             setIsDetails(false)
@@ -34,9 +41,13 @@ const Design = props =>{
         }
     },[pipeline])
 
+    /**
+     * 运行
+     */
     const run = () => {
         // 改变按钮
         setProcess(true)
+
         pipelineStartStructure(pipeline.id).then(res=>{
             if(res.code===0){
                 if(!res.data){
@@ -48,7 +59,10 @@ const Design = props =>{
         })
     }
 
-    // 是否能运行
+    /**
+     * 是否能运行
+     * @returns {boolean}
+     */
     const runStatu = () => !(data && data.length < 1 || validType && validType.length > 0)
 
     const typeLis = [

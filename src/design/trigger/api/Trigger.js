@@ -1,6 +1,11 @@
 import {serviceLoc} from "../../../common/utils/Requset";
 
-
+/**
+ * 更新触发器
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  UpdateTriggerConfig (data){
     return serviceLoc.request({
         url:"/pipelineTriggerConfig/updateConfig",
@@ -9,6 +14,12 @@ export function  UpdateTriggerConfig (data){
     })
 }
 
+/**
+ * 删除触发器
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  DeleteTriggerConfig (data){
     return serviceLoc.request({
         url:"/pipelineTriggerConfig/deleteConfig",
@@ -17,6 +28,12 @@ export function  DeleteTriggerConfig (data){
     })
 }
 
+/**
+ * 添加环境变量
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  CreateTriggerConfig (data){
     return serviceLoc.request({
         url:"/pipelineTriggerConfig/createConfig",
@@ -25,6 +42,12 @@ export function  CreateTriggerConfig (data){
     })
 }
 
+/**
+ * 获取所有触发器
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function FindAllTriggerConfig (data){
     return serviceLoc.request({
         url:"/pipelineTriggerConfig/findAllTriggerConfig",
@@ -33,6 +56,12 @@ export function FindAllTriggerConfig (data){
     })
 }
 
+/**
+ * 获取单个触发器信息
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  OneAllTriggerConfig (data){
     return serviceLoc.request({
         url:"/pipelineTriggerConfig/oneAllTriggerConfig",

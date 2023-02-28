@@ -1,12 +1,18 @@
 import moment from "moment";
 
+/**
+ * 系统时间
+ */
 export default {
     moment:moment().format("YYYY-MM-DD HH:mm:ss"), //当前时间
     time:moment().format("HH:mm"),
-    clientHeight:document.documentElement.clientHeight
 }
 
-// 获取url里面的值
+/**
+ * 获取url里面的值(code)
+ * @param name
+ * @returns {string|boolean}
+ */
 export const getUrlParam = name => {
     // 取得url中?后面的字符
     const query = window.location.search.substring(1);
@@ -21,7 +27,10 @@ export const getUrlParam = name => {
     return false
 }
 
-// 监听浏览器高度
+/**
+ * 监听浏览器高度
+ * @returns {number}
+ */
 export const autoHeight = () =>{
     let winHeight=0
     if (window.innerHeight)
@@ -33,7 +42,11 @@ export const autoHeight = () =>{
     return winHeight-120
 }
 
-// 时间转换
+/**
+ * 时间转换
+ * @param time
+ * @returns {string}
+ */
 export const getTime = time =>{
     let DateTimes ;
     let days = parseInt(time / ( 60 * 60 * 24));
@@ -52,7 +65,12 @@ export const getTime = time =>{
     return DateTimes
 }
 
-// 文件路径截取
+/**
+ * 文件路径截取
+ * @param url:路径
+ * @param data:截取数据
+ * @returns {*}
+ */
 export const interceptUrl = (url,data) =>{
     if(data){
         return url.split('/index/pipeline/'+data)
@@ -62,12 +80,13 @@ export const interceptUrl = (url,data) =>{
     }
 }
 
-// form 效验
+/**
+ *  form input效验
+ * @param name：名称
+ * @returns {{pattern: RegExp, message: string}}
+ * @constructor
+ */
 export const Validation = name =>{
-    // return {
-    //     pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
-    //     message: `${name}不能包含非法字符，如&,%，&，#……等`,
-    // }
     return {
         pattern:/^[^\s]*$/,
         message:`${name}不能包含空格`

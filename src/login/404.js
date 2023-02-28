@@ -1,8 +1,14 @@
 import React from "react";
 import {Result} from "antd";
 
+/**
+ * 404页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const NotFound = props =>{
-    
+
     const subTitle = (
         <>
             资源不存在或者没有访问权限，

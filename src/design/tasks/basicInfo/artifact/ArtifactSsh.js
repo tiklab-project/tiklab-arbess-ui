@@ -2,6 +2,12 @@ import React from "react";
 import Inputs from "../Inputs";
 import FindAuth from "../FindAuth";
 
+/**
+ * 制品--Ssh
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ArtifactSsh = props =>{
 
     const {dataItem} = props

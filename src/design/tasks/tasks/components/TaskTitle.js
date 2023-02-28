@@ -1,6 +1,12 @@
 import React from "react";
 
-const Subtitle = props =>{
+/**
+ * task的标题
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const TaskTitle = props =>{
     const {type} = props
     return (
         <>
@@ -31,4 +37,4 @@ const Subtitle = props =>{
     )
 }
 
-export default Subtitle
+export default TaskTitle

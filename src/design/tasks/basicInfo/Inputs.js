@@ -1,8 +1,15 @@
 import React,{useState,useRef,useEffect} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
-import {x} from "../tasks/components/Common";
+import {WhetherChange} from "../tasks/components/Common";
 
+/**
+ * form文本框
+ * task文本内容查看，编辑
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Inputs = props =>{
 
     const {placeholder,label,name,addonBefore,isValid,pipelineStore,configStore} = props
@@ -10,10 +17,11 @@ const Inputs = props =>{
     const {pipeline} = pipelineStore
     const {updateTaskConfig,dataItem} = configStore
 
-    const [enter,setEnter] = useState(false)
     const ref = useRef(null)
+    const [enter,setEnter] = useState(false)
 
     useEffect(()=>{
+        // 文本框聚焦
         if(enter){
             ref.current.focus()
         }else {
@@ -21,15 +29,18 @@ const Inputs = props =>{
         }
     },[enter])
 
-
+    // Git正则表达
     const validCodeGit = /^(http(s)?:\/\/([^\/]+?\/){2}|git@[^:]+:[^\/]+?\/).*?\.git$/
+    // Svn正则表达
     const validCodeSvn = /^svn(\+ssh)?:\/\/([^\/]+?\/){2}.*$/
 
-    const onFocus = () => {
-        setEnter(true)
-    }
-
-    // 效验
+    /**
+     * form效验
+     * @param value
+     * @param type
+     * @param name
+     * @returns {boolean}
+     */
     const validation = (value,type,name) =>{
         switch (name) {
             case "codeName":
@@ -48,12 +59,14 @@ const Inputs = props =>{
         }
     }
 
+    /**
+     * 更新文本
+     * @param e
+     */
     const onBlur = e => {
-        /*
-            x(e.target.value,dataItem[name]) -- 值是否个更改
-            validation(e.target.value,dataItem.type,name) -- 效验
-        */
-        if(x(e.target.value,dataItem[name]) && validation(e.target.value,dataItem.type,name)){
+        //  WhetherChange(e.target.value,dataItem[name]) -- 值是否个更改
+        //  validation(e.target.value,dataItem.type,name) -- 效验
+        if(WhetherChange(e.target.value,dataItem[name]) && validation(e.target.value,dataItem.type,name)){
             const obj = {}
             obj[name] = e.target.value
             dataItem[name] = e.target.value
@@ -68,6 +81,10 @@ const Inputs = props =>{
         setEnter(false)
     }
 
+    /**
+     * 设置表单校验规则
+     * @returns {[{message: string, required: boolean},(function({getFieldValue: *}): {validator(*, *): (Promise<never>)})]}
+     */
     const rules = () =>{
         let rule
         if(isValid){
@@ -116,7 +133,7 @@ const Inputs = props =>{
                 addonBefore={enter && addonBefore}
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
                 className={`${enter?'':'input-hover'}`}
-                onFocus={onFocus}
+                onFocus={()=>setEnter(true)}
                 onBlur={(e)=>onBlur(e)}
                 onPressEnter={(e)=>e.target.blur()}
             />

@@ -1,6 +1,11 @@
 import {serviceLoc} from "../../../common/utils/Requset";
 
-//开始构建
+/**
+ * 开始构建
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  PipelineStartStructure (data){
     return serviceLoc.request({
         url:"/pipelineExec/start",
@@ -9,7 +14,12 @@ export function  PipelineStartStructure (data){
     })
 }
 
-//判断单个流水线是否在构建
+/**
+ * 查询单个流水线是否在构建
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindPipelineState (data){
     return serviceLoc.request({
         url:"/pipelineExec/findPipelineState",
@@ -18,7 +28,12 @@ export function  FindPipelineState (data){
     })
 }
 
-//构建状态
+/**
+ * 运行状态
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  PipelineRunStatus (data){
     return serviceLoc.request({
         url:"/pipelineExec/pipelineRunStatus",
@@ -27,7 +42,12 @@ export function  PipelineRunStatus (data){
     })
 }
 
-//停止构建
+/**
+ * 终止运行
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  KillInstance(data){
     return serviceLoc.request({
         url:"/pipelineExec/killInstance",
@@ -36,7 +56,12 @@ export function  KillInstance(data){
     })
 }
 
-// 所有流水线历史列表
+/**
+ * 所有流水线历史列表
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function FindUserRunPageHistory(data) {
     return serviceLoc.request({
         url:"/pipelineExec/findUserRunPageHistory",

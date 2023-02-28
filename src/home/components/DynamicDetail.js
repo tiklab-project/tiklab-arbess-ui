@@ -1,22 +1,29 @@
 import React,{useEffect,useState} from "react";
 import {DatePicker,Select,Space} from "antd";
 import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
-import DynamicList from "./DynamicList";
+import DynamicList from "../../common/dynamic/DynamicList";
 import Page from "../../common/page/Page";
 import EmptyText from "../../common/emptyText/EmptyText";
 
 const { RangePicker } = DatePicker
 
+/**
+ * 动态详情
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DynamicDetail = props =>{
 
     const {firstItem,goBack,findlogpage,dynaPage,dynamicList,pipelineIdList,pipelineList} = props
 
-    const [pageCurrent,setPageCurrent] = useState(1)
+    const [pageCurrent,setPageCurrent] = useState(1) // 当前页
     const [timestamp,setTimestamp] = useState(null) // 时间戳
     const [module,setModule] = useState(null)  // 模板类型
     const [actionType,setActionType] = useState(null) // 动作类型
     const [pipelineId,setPipelineId] = useState(pipelineIdList && pipelineIdList)  // 内容id
 
+    // 获取动态传的参数
     const params = {
         pageParam:{
             pageSize:15,
@@ -32,10 +39,16 @@ const DynamicDetail = props =>{
     }
 
     useEffect(()=>{
+        // 初始化流水线id
         setPipelineId(pipelineIdList)
     },[pipelineIdList])
 
-    const changContent = (value,field) =>{
+    /**
+     * 改变数据params
+     * @param value
+     * @param field
+     */
+    const changParams = (value,field) =>{
         switch (field) {
             case "module":
                 params[field] = value
@@ -65,11 +78,18 @@ const DynamicDetail = props =>{
     }
 
 
-    // 切换分页
+    /**
+     * 切换分页
+     * @param pages：页码
+     */
     const changPage = pages =>{
         findDyna(pages)
     }
 
+    /**
+     * 获取动态
+     * @param pages：页码
+     */
     const findDyna = pages =>{
         setPageCurrent(pages && pages)
         params.pageParam.currentPage=pages
@@ -88,7 +108,7 @@ const DynamicDetail = props =>{
                                 showSearch
                                 placeholder={"流水线"}
                                 style={{width:150}}
-                                onChange={(value)=>changContent(value,"pipelineId")}
+                                onChange={(value)=>changParams(value,"pipelineId")}
                                 filterOption={(input, option) =>
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
@@ -105,7 +125,7 @@ const DynamicDetail = props =>{
                         <Select
                             placeholder={"类型"}
                             style={{width:150}}
-                            onChange={(value)=>changContent(value,"actionType")}
+                            onChange={(value)=>changParams(value,"actionType")}
                         >
                             <Select.Option key={"1"} value={null}>所有动态</Select.Option>
                             <Select.Option key={"2"} value={"LOG_PIPELINE"}>流水线动态</Select.Option>
@@ -115,7 +135,7 @@ const DynamicDetail = props =>{
                         <Select
                             placeholder={"操作"}
                             style={{width:150}}
-                            onChange={(value)=>changContent(value,"module")}
+                            onChange={(value)=>changParams(value,"module")}
                         >
                             <Select.Option key={"1"} value={null}>所有操作</Select.Option>
                             <Select.Option key={"2"} value={"LOG_MD_CREATE"}>创建</Select.Option>
@@ -123,7 +143,7 @@ const DynamicDetail = props =>{
                             <Select.Option key={"4"} value={"LOG_MD_DELETE"}>删除</Select.Option>
                         </Select>
                         <RangePicker
-                            onChange={(value,e)=>changContent(e,"timestamp")}
+                            onChange={(value,e)=>changParams(e,"timestamp")}
                             placeholder={["开始时间","结束时间"]}
                         />
                     </Space>

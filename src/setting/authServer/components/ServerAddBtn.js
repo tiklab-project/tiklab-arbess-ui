@@ -4,6 +4,12 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/Btn";
 import ServerModal from "./ServerModal";
 
+/**
+ * 服务配置添加按钮
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ServerAddBtn = props =>{
 
     const {serverStore,authorizeStore,isConfig,type} = props
@@ -11,35 +17,13 @@ const ServerAddBtn = props =>{
     const {modalVisible,setModalVisible,createAuthServer,formValue,setFormValue,updateAuthServer,callbackUrl} = serverStore
     const {findCode,findAccessToken,skin} = authorizeStore
 
-    const [scanVisible,setScanVisible] = useState(false)
-    const [artifactVisible,setArtifactVisible] = useState(false)
+    const [scanVisible,setScanVisible] = useState(false)  //代码扫描visible
+    const [artifactVisible,setArtifactVisible] = useState(false) //制品visible
 
-    const visible = () =>{
-        switch (type) {
-            case 2:
-            case 3:
-                return modalVisible
-            case 51:
-                return artifactVisible
-            default:
-                return scanVisible
-        }
-    }
-
-    const setVisible = () =>{
-        switch (type) {
-            case 2:
-            case 3:
-                return setModalVisible
-            case 51:
-                return setArtifactVisible
-            default:
-                return setScanVisible
-
-        }
-    }
-
-    const btnClick = () =>{
+    /**
+     * 添加按钮操作
+     */
+    const addServerBtn = () =>{
         setFormValue("")
         switch (type) {
             case 2:
@@ -54,19 +38,52 @@ const ServerAddBtn = props =>{
         }
     }
 
+    /**
+     * 设置弹出框visible
+     * @returns {boolean|*}
+     */
+    const visible = () =>{
+        switch (type) {
+            case 2:
+            case 3:
+                return modalVisible
+            case 51:
+                return artifactVisible
+            default:
+                return scanVisible
+        }
+    }
+
+    /**
+     * 设置弹出框setVisible
+     * @returns {((value: (((prevState: boolean) => boolean) | boolean)) => void)|*}
+     */
+    const setVisible = () =>{
+        switch (type) {
+            case 2:
+            case 3:
+                return setModalVisible
+            case 51:
+                return setArtifactVisible
+            default:
+                return setScanVisible
+
+        }
+    }
+
     return(
         <>
             {
                 isConfig ?
                     <Btn
                         type={"row"}
-                        onClick={btnClick}
+                        onClick={addServerBtn}
                         title={"添加"}
                         icon={<PlusOutlined/>}
                     />
                     :
                     <Btn
-                        onClick={btnClick}
+                        onClick={addServerBtn}
                         type={"primary"}
                         title={"添加配置"}
                         icon={<PlusOutlined/>}

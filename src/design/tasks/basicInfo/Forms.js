@@ -10,8 +10,15 @@ import Deploy from "./deploy/Deploy";
 import ScanSonarQuebe from "./scan/ScanSonarQuebe";
 import ArtifactNexus from "./artifact/ArtifactNexus";
 import ArtifactSsh from "./artifact/ArtifactSsh";
-import {x} from "../tasks/components/Common";
+import {WhetherChange} from "../tasks/components/Common";
 
+/**
+ * form表单
+ * task的基本信息
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Forms = props => {
 
     const {dataItem,updateStageName} = props
@@ -24,6 +31,7 @@ const Forms = props => {
     }
 
     useEffect(()=>{
+        // 初始化表单内容
         switch(dataItem.type){
             case 1:
             case 4:
@@ -102,7 +110,11 @@ const Forms = props => {
         })
     },[dataItem])
 
-
+    /**
+     * 渲染表单
+     * @param dataItem
+     * @returns {JSX.Element}
+     */
     const renderForms = dataItem =>{
         switch (dataItem.type){
             case 1:
@@ -130,21 +142,20 @@ const Forms = props => {
         }
     }
 
-    const onBlur = e =>{
+    /**
+     * 改变阶段名称
+     * @param e
+     */
+    const changStageName = e =>{
         setEnter(false)
-        if(x(e.target.value,dataItem.name)){
+        if(WhetherChange(e.target.value,dataItem.name)){
             updateStageName({stagesId:dataItem.stagesId,stagesName:e.target.value})
         }
     }
 
     return (
         <div className='taskForm-forms'>
-            <Form
-                id="form"
-                form={form}
-                layout="vertical"
-                autoComplete="off"
-            >
+            <Form id="form" form={form} layout="vertical" autoComplete="off">
                 {
                     dataItem.configId ?
                         <>
@@ -158,7 +169,7 @@ const Forms = props => {
                                 placeholder={enter? "阶段名称，回车保存":"未设置"}
                                 className={`${enter?'':'input-hover'}`}
                                 onFocus={()=>setEnter(true)}
-                                onBlur={(e)=>onBlur(e)}
+                                onBlur={(e)=>changStageName(e)}
                                 onPressEnter={(e)=>e.target.blur()}
                             />
                         </Form.Item>

@@ -10,7 +10,12 @@ import Listaction from "../../../common/list/Listaction";
 import Btn from "../../../common/btn/Btn";
 import "../components/Postprocess.scss";
 
-// 后置处理
+/**
+ * 后置处理页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Postprocess = props =>{
 
     const {pipelineStore,postprocessStore} = props
@@ -20,30 +25,44 @@ const Postprocess = props =>{
         messageSendType,mesSendData
     } = postprocessStore
 
+    const userId = getUser().userId
     const [postprocessVisible,setPostprocessVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
-    const userId = getUser().userId
-
     useEffect(()=>{
-        pipeline && findAllPostConfig(pipeline.id)
-    },[pipeline,isFindPostprocessData])
-
-    useEffect(()=>{
+        // 是否存在消息发送方式
         messageSendType()
     },[])
 
+    useEffect(()=>{
+        // 初始化后置处理
+        pipeline && findAllPostConfig(pipeline.id)
+    },[pipeline,isFindPostprocessData])
+
+    /**
+     * 添加后置处理
+     */
     const addPostprocess = () =>{
         setFormValue("")
         setPostprocessVisible(true)
     }
 
-    const edit = (text,record) =>{
+    /**
+     * 编辑后置处理
+     * @param text
+     * @param record
+     */
+    const editPostprocess = (text,record) =>{
         setFormValue(record)
         setPostprocessVisible(true)
     }
 
-    const del = (text,record) => {
+    /**
+     * 删除后置处理
+     * @param text
+     * @param record
+     */
+    const delPostprocess = (text,record) => {
         deletePostConfig(record.configId).then(res=>{
             res.code===0 && message.info("删除成功",0.5)
         })
@@ -62,8 +81,8 @@ const Postprocess = props =>{
             key: "action",
             render:(text,record) => {
                 return  <Listaction
-                            edit={()=>edit(text,record)}
-                            del={()=>del(text,record)}
+                            edit={()=>editPostprocess(text,record)}
+                            del={()=>delPostprocess(text,record)}
                         />
             }
         },
@@ -75,11 +94,7 @@ const Postprocess = props =>{
                 <div className="post-pose-up">
                     <div className="post-pose-up-title">后置处理</div>
                     <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}个后置处理</div>
-                    <Btn
-                        title={"添加"}
-                        icon={<PlusOutlined/>}
-                        onClick={()=>addPostprocess()}
-                    />
+                    <Btn title={"添加"} icon={<PlusOutlined/>} onClick={()=>addPostprocess()}/>
                     <PostprocessAdd
                         postprocessVisible={postprocessVisible}
                         setPostprocessVisible={setPostprocessVisible}

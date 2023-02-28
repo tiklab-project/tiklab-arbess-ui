@@ -1,7 +1,13 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import DynamicDetail from "./DynamicDetail";
+import DynamicDetail from "../../home/components/DynamicDetail";
 
+/**
+ * 流水线动态
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PipelineDyna = props =>{
 
     const {pipelineStore,homePageStore} = props
@@ -9,7 +15,6 @@ const PipelineDyna = props =>{
     const {pipeline} = pipelineStore
     const {findlogpage,dynamicList,dynaPage} = homePageStore
 
-    // 流水线动态
     useEffect(()=>{
         const params = {
             content:{pipelineId:[pipeline.id]},
@@ -19,9 +24,14 @@ const PipelineDyna = props =>{
             },
             bgroup:"matflow",
         }
+        // 初始化流水线动态
         pipeline && findlogpage(params)
     },[pipeline])
 
+    /**
+     * 去流水线概况页
+     * @returns {*}
+     */
     const goBack = () => props.history.push(`/index/pipeline/${pipeline.id}/survey`)
 
     return  <DynamicDetail

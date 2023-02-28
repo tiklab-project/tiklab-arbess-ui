@@ -20,22 +20,22 @@ const HomePage=AsyncComponent(()=>import("./home/components/HomePage"))
  */
 const Pipeline=AsyncComponent(()=>import("./pipeline/pipeline/container/Pipeline"))
 const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipelineAdd"))
-const PipelineDetails=AsyncComponent(()=>import("./pipeline/common/PipelineDetails"))
-const PipelineDyan=AsyncComponent(()=>import("./dynamic/components/DynamicPipeline"))
+const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
+const PipelineDyan=AsyncComponent(()=>import("./pipeline/dynamic/Dynamic"))
 const Overview=AsyncComponent(()=>import("./pipeline/overview/container/Overview"))
 const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
-const Design=AsyncComponent(()=>import("./design/common/Design"))
-const PipelineSet=AsyncComponent(()=>import("./pipeline/setting/PipelineSet"))
-const PipelineBasic=AsyncComponent(()=>import("./pipeline/basicInfo/PipelineBasicInfo"))
+const Design=AsyncComponent(()=>import("./design/navigator/Design"))
+const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
+const PipelineBasic=AsyncComponent(()=>import("./pipeline/setting/basicInfo/PipelineBasicInfo"))
 
 const History=AsyncComponent(()=>import("./pipeline/history/container/History"))
 const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
-const Dynamic=AsyncComponent(()=>import("./dynamic/container/Dynamic"))
+const Dynamic=AsyncComponent(()=>import("./home/components/Dynamic"))
 
 /**
  * 系统设置
  */
-const Setting=AsyncComponent(()=>import("./setting/setting/Setting"))
+const Setting=AsyncComponent(()=>import("./setting/navigator/Setting"))
 const Auth=AsyncComponent(()=>import("./setting/auth/container/Auth"))
 const Host=AsyncComponent(()=>import("./setting/authHost/container/Host"))
 const Server=AsyncComponent(()=>import("./setting/authServer/container/Server"))
@@ -167,13 +167,13 @@ const routers=[
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/history",
+                        path:"/index/pipeline/:id/structure",
                         component: HistoryPipeline,
                         exact:true,
                     },
                     {
                         path:"/index/pipeline/:id/assembly",
-                        component: PipelineSet,
+                        component: PipelineSetting,
                         routes:[
                             {
                                 path:"/index/pipeline/:id/assembly/role",

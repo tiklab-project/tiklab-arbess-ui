@@ -4,14 +4,17 @@ import {Profile} from "tiklab-eam-ui";
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
-import Listname from "../../../common/list/Listname";
+import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
 import HostAddBtn from "../component/HostAddBtn";
 import Tabs from "../../../common/tabs/Tabs";
 import "../../authCommon/Auth.scss";
 
 /**
- * 资源配置--主机配置
+ * 主机配置页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Host = props =>{
 
@@ -22,22 +25,36 @@ const Host = props =>{
     const [activeTab,setActiveTab] = useState(0)
 
     useEffect(()=>{
+        // 初始化主机配置
         findAllAuthHostList(activeTab)
     },[hostFresh,activeTab])
 
+    /**
+     * 切换主机配置
+     * @param item
+     */
     const clickTab = item =>{
         setActiveTab(item.id)
     }
 
-    const edit = (text,record) => {
+    /**
+     * 编辑主机配置
+     * @param text
+     * @param record
+     */
+    const editHost = (text,record) => {
         setModalVisible(true)
         setFormValue(record)
     }
 
-    const del = (text,record) =>{
+    /**
+     * 删除主机配置
+     * @param text
+     * @param record
+     */
+    const delHost = (text,record) =>{
         deleteAuthHost(record.hostId)
     }
-
 
     const lis = [
         {
@@ -67,7 +84,7 @@ const Host = props =>{
             ellipsis:true,
             render:text => {
                 return  <span>
-                            <Listname text={text}/>
+                            <ListIcon text={text}/>
                             <span>{text}</span>
                         </span>
             }
@@ -144,8 +161,8 @@ const Host = props =>{
             ellipsis:true,
             render:(text,record) => {
                 return  <Listaction
-                            edit={()=>edit(text,record)}
-                            del={()=>del(text,record)}
+                            edit={()=>editHost(text,record)}
+                            del={()=>delHost(text,record)}
                         />
             }
         }

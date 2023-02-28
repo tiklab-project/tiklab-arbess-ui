@@ -5,6 +5,12 @@ import TaskDetails from "../components/TaskDetails";
 import {SpinLoading} from "../../../../common/loading/Loading";
 import "../components/TaskGui.scss";
 
+/**
+ * 流程设计，task图形化界面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TaskGui = props =>{
 
     const {configStore,pipelineStore} = props
@@ -19,15 +25,15 @@ const TaskGui = props =>{
         return ()=> setIsLoading(true)
     },[pipeline])
 
-    // 表单初始化
     useEffect(()=>{
+        // 初始化task
         pipeline && findAllTaskConfig(pipeline.id).then(res=>{
             setIsLoading(false)
         })
     },[pipeline,isFindConfig])
 
-      // 效验表单
     useEffect(()=>{
+        // 初始化任务内容否填写完善
         pipeline && configValid(pipeline.id)
     },[pipeline,enabledValid])
 

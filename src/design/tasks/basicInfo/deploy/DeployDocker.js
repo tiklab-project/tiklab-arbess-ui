@@ -1,7 +1,12 @@
 import React from "react";
 import Inputs from "../Inputs";
 
-
+/**
+ * 部署 -- Docker
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DeployDocker = props =>{
 
     const {dataItem} = props

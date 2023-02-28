@@ -3,8 +3,11 @@ import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import "../components/Info.scss";
 
-/*
-    系统信息
+/**
+ * 系统信息页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Info = props =>{
 
@@ -12,6 +15,7 @@ const Info = props =>{
     const {getSystemMessage,infoList} = enviStore
 
     useEffect(()=>{
+        // 系统信息
         getSystemMessage()
     },[])
 

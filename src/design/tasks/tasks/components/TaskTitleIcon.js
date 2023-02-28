@@ -2,7 +2,12 @@ import React from "react";
 import maven from "../../../../assets/images/img/maven.png";
 import nexus from "../../../../assets/images/img/nexus.png";
 
-
+/**
+ * task的标题&&图标
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TaskTitleIcon = props =>{
 
     const {type} = props

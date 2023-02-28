@@ -15,17 +15,20 @@ const TaskGuiStage = props =>{
 
     const {setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
+    const pipelineType = pipeline && pipeline.type //流水线权限
     const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
 
-    const pipelineType = pipeline && pipeline.type
-
-    // 新建任务弹窗事件操作
+    /**
+     * 新建任务弹窗事件操作
+     */
     const popUp = () =>{
         setTaskFormDrawer(false)
         setNewStageDrawer(true)
     }
 
-    // +新任务
+    /**
+     * 添加新任务
+     */
     const newTask = () =>{
         setCreacteValue({
             stages:0,
@@ -35,7 +38,12 @@ const TaskGuiStage = props =>{
         popUp()
     }
 
-    // 多阶段 串行
+    /**
+     * 多阶段 串行添加
+     * @param list
+     * @param groupIndex
+     * @param stagesIndex
+     */
     const serial = (list,groupIndex,stagesIndex) =>{
         setCreacteValue({
             stages:groupIndex+1,
@@ -46,7 +54,10 @@ const TaskGuiStage = props =>{
         popUp()
     }
 
-     // 多阶段 并行
+    /**
+     * 多阶段 并行添加
+     * @param groupIndex
+     */
      const parallelTask = (groupIndex) => {
         setCreacteValue({
             taskSort:0,
@@ -56,7 +67,11 @@ const TaskGuiStage = props =>{
         popUp()
     }
 
-    // 插入任务
+    /**
+     * 插入任务
+     * @param group
+     * @param groupIndex
+     */
     const insertData = (group,groupIndex) => {
         setCreacteValue({
             taskSort:groupIndex+1,
@@ -65,19 +80,29 @@ const TaskGuiStage = props =>{
         popUp()
     }
 
-    // Form详情
+    /**
+     * task详情
+     * @param item
+     */
     const showDetail = item =>{
         setDataItem(item)
         setTaskFormDrawer(true)
     }
 
-    // 修改模板和阶段name
+    /**
+     * 修改模板和阶段name
+     * @param group
+     */
     const changName = group => {
         setDataItem(group)
         setTaskFormDrawer(true)
     }
 
-    // 删除
+    /**
+     * 删除task
+     * @param e
+     * @param item
+     */
     const deletePart = (e,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
@@ -88,36 +113,44 @@ const TaskGuiStage = props =>{
         deleteTaskConfig(params)
     }
 
-    // 多任务||多阶段 -- 效验提示
+    /**
+     * task效验提示
+     * @param configId
+     * @returns {*}
+     */
     const valid = configId => validType && validType.some(item=>item==configId)
 
-    // 多任务||多阶段 -- 源码地址和分支
-    const renderCode = item =>{
-        if(item.type<10){
-            const codeBranch = item && item.codeBranch
-            return item && item.codeName ?
-                <>
-                    <div className="newStages-codeName">
-                        <div className="branch-title">
-                            <TagsOutlined style={{paddingRight:5}}/>
-                            {item.codeName}
-                        </div>
+    /**
+     * 渲染多任务
+     * @param group
+     * @param groupIndex
+     * @returns {JSX.Element}
+     */
+    const renderSingleTask = (group,groupIndex) =>{
+        return <Fragment key={groupIndex}>
+            { group.type > 10 && renderFlowBtn(group,groupIndex) }
+            <div className="group-table">
+                <div className="group-head">
+                    <div className="name" style={{opacity:0}}/>
+                </div>
+                <div className="newStages-single">
+                    <div className={`newStages-job`}>
+                        {newJobContent(group,14)}
                     </div>
-                    <div className="newStages-branch ">
-                        <div className="branch-address">
-                            {
-                                codeBranch==="" || !codeBranch ?
-                                    <><ShareAltOutlined style={{paddingRight:5}}/>master</>
-                                    :
-                                    <><ShareAltOutlined style={{paddingRight:5}}/>{codeBranch}</>
-                            }
-                        </div>
-                    </div>
-                </> : null
-        }
+                    {/*{ renderCode(group) }*/}
+                </div>
+            </div>
+        </Fragment>
     }
 
-    // 多任务（添加任务）；多阶段（添加阶段）
+
+    /**
+     * 多任务（添加任务）
+     * 多阶段（添加阶段）
+     * @param group
+     * @param groupIndex
+     * @returns {JSX.Element}
+     */
     const renderFlowBtn = (group,groupIndex) =>{
         return(
             <div className="group-flow">
@@ -135,7 +168,13 @@ const TaskGuiStage = props =>{
         )
     }
 
-    // 多任务||多阶段 -- 详情
+    /**
+     * 多任务||多阶段
+     * 详情
+     * @param item
+     * @param deep
+     * @returns {JSX.Element}
+     */
     const newJobContent = (item,deep) =>{
         return(
             <div onClick={()=>showDetail(item)}
@@ -165,99 +204,12 @@ const TaskGuiStage = props =>{
         )
     }
 
-    // 多任务
-    const renderSingleTask = (group,groupIndex) =>{
-        return <Fragment key={groupIndex}>
-            { group.type > 10 && renderFlowBtn(group,groupIndex) }
-            <div className="group-table">
-                <div className="group-head">
-                    <div className="name" style={{opacity:0}}/>
-                </div>
-                <div className="newStages-single">
-                    <div className={`newStages-job`}>
-                        {newJobContent(group,14)}
-                    </div>
-                    {/*{ renderCode(group) }*/}
-                </div>
-            </div>
-        </Fragment>
-    }
-
-    // 多阶段 -- 并行任务添加按钮
-    const parallel = (groupIndex) =>{
-        return <div className="multi-content add-newStages-contents">
-            <div className="newStages-content" style={{paddingLeft:30}}>
-                <div className="newStages-job">
-                    <div className="add-newStages-job-content" onClick={()=>parallelTask(groupIndex)}>
-                        <PlusOutlined/>
-                        <span style={{paddingLeft:5}}>并行阶段</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
-    // 多阶段 -- 每个模板阶段name
-    const groupHead = group =>{
-        return(
-            <div className="group-head">
-                <div className="name">
-                    <div className="group-name">{group && group.name}</div>
-                    <div className="group-inputBtn" onClick={()=>changName(group)}>
-                        <EditOutlined/>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    // 多阶段 -- 模板下阶段name
-    const listHead = (group,list) =>{
-        return(
-            <div className="newStages-title" style={group.code?{opacity:0}:null}>
-                <span className="newStages-title-name">
-                    {list.name?list.name:"源码"}
-                    <span className="newStages-title-icon">
-                        <EditOutlined onClick={()=>changName(list)}/>
-                    </span>
-                </span>
-            </div>
-        )
-    }
-
-    // 多阶段 -- 串行任务（上）
-    const hasAddPre = (list,groupIndex,stagesIndex) =>{
-        return(
-            <Tooltip title={"串行任务"}>
-                <div className="newStages-has-add"
-                     style={{marginRight:15}}
-                     onClick={()=>serial(list,groupIndex,stagesIndex+1)}
-                >
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-zengjia"/>
-                    </svg>
-                </div>
-            </Tooltip>
-        )
-    }
-
-    // 多阶段 -- 串行任务（下）
-    const hasAddNext = (list,groupIndex,stagesIndex) =>{
-        return(
-            <Tooltip title={"串行任务"}>
-                <div className="newStages-has-add"
-                     style={{marginLeft:15}}
-                     onClick={()=>serial(list,groupIndex,stagesIndex+2)}
-                >
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-zengjia"/>
-                    </svg>
-                </div>
-            </Tooltip>
-        )
-    }
-
-    // 多阶段
+    /**
+     * 渲染多阶段
+     * @param group
+     * @param groupIndex
+     * @returns {JSX.Element}
+     */
     const renderMultitask = (group,groupIndex) =>{
         return <Fragment key={groupIndex}>
             { !group.code && renderFlowBtn(group,groupIndex) }
@@ -296,6 +248,109 @@ const TaskGuiStage = props =>{
                 </div>
             </div>
         </Fragment>
+    }
+
+    /**
+     * 多阶段 -- 并行任务添加按钮
+     * @param groupIndex
+     * @returns {JSX.Element}
+     */
+    const parallel = (groupIndex) =>{
+        return <div className="multi-content add-newStages-contents">
+            <div className="newStages-content" style={{paddingLeft:30}}>
+                <div className="newStages-job">
+                    <div className="add-newStages-job-content" onClick={()=>parallelTask(groupIndex)}>
+                        <PlusOutlined/>
+                        <span style={{paddingLeft:5}}>并行阶段</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    /**
+     * 多阶段
+     * 渲染每个模板阶段name
+     * @param group
+     * @returns {JSX.Element}
+     */
+    const groupHead = group =>{
+        return(
+            <div className="group-head">
+                <div className="name">
+                    <div className="group-name">{group && group.name}</div>
+                    <div className="group-inputBtn" onClick={()=>changName(group)}>
+                        <EditOutlined/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    /**
+     * 多阶段
+     * 渲染模板下阶段name
+     * @param group
+     * @param list
+     * @returns {JSX.Element}
+     */
+    const listHead = (group,list) =>{
+        return(
+            <div className="newStages-title" style={group.code?{opacity:0}:null}>
+                <span className="newStages-title-name">
+                    {list.name?list.name:"源码"}
+                    <span className="newStages-title-icon">
+                        <EditOutlined onClick={()=>changName(list)}/>
+                    </span>
+                </span>
+            </div>
+        )
+    }
+
+    /**
+     * 多阶段
+     * 渲染串行任务（上）
+     * @param list
+     * @param groupIndex
+     * @param stagesIndex
+     * @returns {JSX.Element}
+     */
+    const hasAddPre = (list,groupIndex,stagesIndex) =>{
+        return(
+            <Tooltip title={"串行任务"}>
+                <div className="newStages-has-add"
+                     style={{marginRight:15}}
+                     onClick={()=>serial(list,groupIndex,stagesIndex+1)}
+                >
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-zengjia"/>
+                    </svg>
+                </div>
+            </Tooltip>
+        )
+    }
+
+    /**
+     * 多阶段
+     * 渲染串行任务（下）
+     * @param list
+     * @param groupIndex
+     * @param stagesIndex
+     * @returns {JSX.Element}
+     */
+    const hasAddNext = (list,groupIndex,stagesIndex) =>{
+        return(
+            <Tooltip title={"串行任务"}>
+                <div className="newStages-has-add"
+                     style={{marginLeft:15}}
+                     onClick={()=>serial(list,groupIndex,stagesIndex+2)}
+                >
+                    <svg className="icon" aria-hidden="true">
+                        <use xlinkHref="#icon-zengjia"/>
+                    </svg>
+                </div>
+            </Tooltip>
+        )
     }
 
     return(

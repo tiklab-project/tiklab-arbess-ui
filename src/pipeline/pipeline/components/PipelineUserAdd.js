@@ -17,6 +17,9 @@ const PipelineUserAdd = props =>{
         setAddUser([])
     },[visible])
 
+    /**
+     * 添加用户
+     */
     const onOk = () => {
         // 所有id组成数组
         const newArr = addUser.map(item=>item.id)
@@ -29,12 +32,19 @@ const PipelineUserAdd = props =>{
         setVisible(false)
     }
 
-    // 模糊查询是否可以选中
+    /**
+     * 模糊查询是否可以选中
+     * @param record
+     * @returns {*}
+     */
     const disabledOpt = record =>{
         return yUserList && yUserList.some(item=>item.id===record.id)
     }
 
-    // 点击行选中或取消
+    /**
+     * 点击行选中或取消
+     * @param record
+     */
     const onSelectRow = record => {
         if(!disabledOpt(record)){
             // 如果已经选中 -- 取消选中
@@ -52,6 +62,10 @@ const PipelineUserAdd = props =>{
         }
     }
 
+    /**
+     * 表格可选择配置
+     * @type {{onChange: rowSelection.onChange, selectedRowKeys: *[], getCheckboxProps: (function(*): {disabled: *})}}
+     */
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             setAddUser(selectedRows)
@@ -63,6 +77,10 @@ const PipelineUserAdd = props =>{
         selectedRowKeys:selectedRowKeys,
     }
 
+    /**
+     * 模糊查询用户
+     * @param e
+     */
     const findUser = e =>{
         findUserPage({
             nickname:e.target.value

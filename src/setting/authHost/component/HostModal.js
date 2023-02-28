@@ -6,28 +6,20 @@ import ModalTitle from "../../../common/modalTitle/ModalTitle";
 import AuthType from "../../authCommon/AuthType";
 import {autoHeight, Validation} from "../../../common/client/Client";
 
-
-const CodeModal = props =>{
+/**
+ * 主机配置弹出框，添加，更新
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const HostModal = props =>{
 
     const {visible,setVisible,createAuthHost,formValue,updateAuthHost} = props
 
     const [form] = Form.useForm()
 
     const [hostType,setHostType] = useState(1)
-    const [ban,setBan] = useState(false)
     const [height,setHeight] = useState(0)
-
-    useEffect(()=>{
-        if(visible){
-            if(formValue===""){
-                form.resetFields()
-                setBan(false)
-            } else {
-                setBan(true)
-                form.setFieldsValue(formValue)
-            }
-        }
-    },[visible])
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -39,6 +31,21 @@ const CodeModal = props =>{
     window.onresize=() =>{
         setHeight(autoHeight())
     }
+
+    useEffect(()=>{
+        if(visible){
+            // 表单初始化
+            if(formValue===""){
+                form.resetFields()
+            } else {
+                form.setFieldsValue(formValue)
+            }
+        }
+    },[visible])
+
+    /**
+     * 确定添加或者更新
+     */
     const onOk = () =>{
         form.validateFields().then((values) => {
             if(formValue){
@@ -146,4 +153,4 @@ const CodeModal = props =>{
     )
 }
 
-export default CodeModal
+export default HostModal

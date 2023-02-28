@@ -8,6 +8,12 @@ import Mirror from "../CodeBlock";
 import FindAuth from "../FindAuth";
 import Inputs from "../Inputs";
 
+/**
+ * 部署
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Deploy = props =>{
 
     const {configStore,pipelineStore} = props
@@ -18,6 +24,7 @@ const Deploy = props =>{
     const [showArrow,setShowArrow] = useState(false)
     const [border,setBorder] = useState(false)
 
+    // 切换部署方式
     const changDeployType = value => {
         const params = {
             pipeline:{id:pipeline.id},
@@ -34,17 +41,6 @@ const Deploy = props =>{
             configId:dataItem.configId
         })
         setBorder(false)
-    }
-
-    const confirm = value =>{
-        Modal.confirm({
-            title: "切换",
-            icon: <ExclamationCircleOutlined />,
-            content: "切换后数据会被删除",
-            onOk:()=>confirm(value),
-            okText: "确认",
-            cancelText: "取消",
-        })
     }
 
     return(

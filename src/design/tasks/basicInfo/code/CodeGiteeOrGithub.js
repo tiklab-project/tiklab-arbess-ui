@@ -4,6 +4,12 @@ import {inject,observer} from "mobx-react";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 import FindAuth from "../FindAuth";
 
+/**
+ * 源码 -- Gitee && Github
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const CodeGiteeOrGithub = props =>{
 
     const {configStore,pipelineStore,authorizeStore,dataItem} = props

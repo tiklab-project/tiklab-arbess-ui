@@ -1,6 +1,12 @@
 import React from "react";
 
-export const x = (newValue,lastValue) => {
+/**
+ * 值是否更改
+ * @param newValue
+ * @param lastValue
+ * @returns {boolean}
+ */
+export const WhetherChange = (newValue,lastValue) => {
     if (newValue == null){
         return false
     }

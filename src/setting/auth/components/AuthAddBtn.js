@@ -4,13 +4,22 @@ import {PlusOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/Btn";
 import AuthModal from "./AuthModal";
 
+/**
+ * 认证配置添加按钮
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const AuthAddBtn = props =>{
 
     const {authStore,isConfig} = props
 
     const {createAuth,modalVisible,setModalVisible,formValue,setFormValue,updateAuth} = authStore
 
-    const btnClick = () =>{
+    /**
+     * 添加认证
+     */
+    const addAuthBtn = () =>{
         setFormValue("")
         setModalVisible(true)
     }
@@ -18,20 +27,20 @@ const AuthAddBtn = props =>{
     return(
         <>
             {
-                isConfig ?
-                    <Btn
-                        type={"row"}
-                        onClick={()=>btnClick("config")}
-                        title={"添加认证"}
-                        icon={<PlusOutlined/>}
-                    />
-                    :
-                    <Btn
-                        onClick={btnClick}
-                        type={"primary"}
-                        title={"添加认证"}
-                        icon={<PlusOutlined/>}
-                    />
+            isConfig ?
+                <Btn
+                    type={"row"}
+                    onClick={()=>addAuthBtn("config")}
+                    title={"添加认证"}
+                    icon={<PlusOutlined/>}
+                />
+                :
+                <Btn
+                    onClick={addAuthBtn}
+                    type={"primary"}
+                    title={"添加认证"}
+                    icon={<PlusOutlined/>}
+                />
             }
             <AuthModal
                 visible={modalVisible}

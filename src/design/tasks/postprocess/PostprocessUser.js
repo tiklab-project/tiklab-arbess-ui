@@ -4,7 +4,7 @@ import {PlusOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/Btn";
 import PostprocessUserAdd from "../../postprocess/components/PostprocessUserAdd";
 
-const PostprocessAdd = props => {
+const PostprocessUser = props => {
 
     const {item,allUserList,yUserList,setYUserList,postprocessData,setPostprocessData} = props
 
@@ -36,4 +36,4 @@ const PostprocessAdd = props => {
     )
 }
 
-export default PostprocessAdd
+export default PostprocessUser

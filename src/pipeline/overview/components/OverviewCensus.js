@@ -7,41 +7,46 @@ import {
     ClockCircleOutlined,
 } from "@ant-design/icons";
 
+/**
+ * 运行概况
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Overviewoverview = props =>{
 
-const OverviewCensus = props =>{
-
-    const {census} = props
+    const {overview} = props
 
     const status = [
         {
             title:"成功",
-            num:<span className="census-successNumber">{census && census.successNumber} 次</span>,
-            icon:<CheckSquareOutlined className="census-successNumber"/>,
+            num:<span className="overview-successNumber">{overview && overview.successNumber} 次</span>,
+            icon:<CheckSquareOutlined className="overview-successNumber"/>,
         },
         {
             title:"停止",
-            num: <span className="census-removeNumber">{census && census.removeNumber} 次</span>,
-            icon:<ExclamationCircleOutlined className="census-removeNumber"/>,
+            num: <span className="overview-removeNumber">{overview && overview.removeNumber} 次</span>,
+            icon:<ExclamationCircleOutlined className="overview-removeNumber"/>,
         },
         {
             title:"失败",
-            num:<span className="census-errorNumber">{census && census.errorNumber} 次</span>,
-            icon:<CloseSquareOutlined className="census-errorNumber"/>,
+            num:<span className="overview-errorNumber">{overview && overview.errorNumber} 次</span>,
+            icon:<CloseSquareOutlined className="overview-errorNumber"/>,
         },
         {
             title:"执行次数",
-            num:<span className="census-number">{census && census.number} 次</span>,
-            icon:<BorderOuterOutlined className="census-number"/>,
+            num:<span className="overview-number">{overview && overview.number} 次</span>,
+            icon:<BorderOuterOutlined className="overview-number"/>,
         },
         {
             title:"平均执行时长",
-            num:<span className="census-time">{census && census.time}</span>,
-            icon:<ClockCircleOutlined className="census-time"/>
+            num:<span className="overview-time">{overview && overview.time}</span>,
+            icon:<ClockCircleOutlined className="overview-time"/>
         },
     ]
 
     return(
-        <div className="survey-census-stat">
+        <div className="survey-overview-stat">
             <div className="stat">
                 {
                     status.map(item=>{
@@ -51,7 +56,7 @@ const OverviewCensus = props =>{
                                     <span className="stat-div-title-icon">{item.icon}</span>
                                     <span className="stat-div-title-name">{item.title}</span>
                                 </div>
-                                <div className="census-num">{item.num} </div>
+                                <div className="overview-num">{item.num} </div>
                             </div>
                         )
                     })
@@ -61,4 +66,4 @@ const OverviewCensus = props =>{
     )
 }
 
-export default OverviewCensus
+export default Overviewoverview

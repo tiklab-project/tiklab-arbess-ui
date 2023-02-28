@@ -2,9 +2,14 @@ import React from "react";
 import {Popconfirm,Tooltip} from "antd";
 import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
 
-const Listaction = props =>{
-
-    const {edit,del} = props
+/**
+ * 表格操作
+ * @param edit：编辑
+ * @param del：删除
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const Listaction = ({edit,del}) =>{
 
     return <span className="mf-listAction">
                 <Tooltip title="修改">

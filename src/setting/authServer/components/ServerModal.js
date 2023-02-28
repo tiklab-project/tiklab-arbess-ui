@@ -7,6 +7,12 @@ import ModalTitle from "../../../common/modalTitle/ModalTitle";
 import {autoHeight,Validation} from "../../../common/client/Client";
 import {ServerLoading} from "../../../common/loading/Loading";
 
+/**
+ * 服务配置弹出框，添加，更新
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ServerModal = props =>{
 
     const {visible,setVisible,createAuthServer,formValue,updateAuthServer,callUrl,findCode,
@@ -21,8 +27,19 @@ const ServerModal = props =>{
     const [infos,setInfos] = useState("") // 授权信息
     const [callUrlWarn,setCallUrlWarn] = useState("") // 回调地址
 
+    useEffect(()=>{
+        setHeight(autoHeight())
+        return ()=>{
+            window.onresize = null
+        }
+    },[height])
+
+    window.onresize=() =>{
+        setHeight(autoHeight())
+    }
 
     useEffect(()=>{
+        // 表单初始化
         visible && renderFormValue(formValue)
         return ()=> setInfos("")
     },[visible])
@@ -38,6 +55,9 @@ const ServerModal = props =>{
         setCallUrlWarn("")
     }
 
+    /**
+     * 监听本地存储codeValue
+     */
     useEffect(()=>{
         visible && window.addEventListener("storage", authorisation)
         return () => {
@@ -45,6 +65,9 @@ const ServerModal = props =>{
         }
     },[visible,serverWay])
 
+    /**
+     * 授权
+     */
     const authorisation = () =>{
         let codeValue = localStorage.getItem("codeValue")
         if(codeValue!==null) {
@@ -68,15 +91,18 @@ const ServerModal = props =>{
         }
     }
 
-    // 是否能够去授权
+
     useEffect(()=>{
+        //是否能够去授权
         visible && setAuth()
     },[visible,serverWay,fresh])
 
     const validCallbackUrl = /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
     const isNull = values => values === null || values === "" || values === " " || values === undefined
 
-    // 是否能够新建
+    /**
+     * 是否能够授权
+     */
     const setAuth = () =>{
         if(formValue){
             setAddAuth(false)
@@ -92,6 +118,10 @@ const ServerModal = props =>{
         }
     }
 
+    /**
+     * 授权id，授权密码，回调地址事件
+     * @param value
+     */
     const onValuesChange = value => {
         if(value.clientId || value.clientId===""){
             setFresh(!fresh)
@@ -101,28 +131,24 @@ const ServerModal = props =>{
         }
         if(value.callbackUrl || value.callbackUrl===""){
             setFresh(!fresh)
+            //获取回调地址
             callUrl(value.callbackUrl).then(res=>{
                 res.code===0 && setCallUrlWarn(res.data)
             })
         }
     }
 
-    useEffect(()=>{
-        setHeight(autoHeight())
-        return ()=>{
-            window.onresize = null
-        }
-    },[height])
-
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
-
-    // 改变授权类型
+    /**
+     * 改变授权类型
+     * @param value
+     */
     const changeServerWay = value =>{
         setServerWay(value)
     }
 
+    /**
+     * 服务配置添加或者更新确定
+     */
     const onOk = () =>{
         form.validateFields().then((values) => {
             if(formValue){
@@ -138,7 +164,9 @@ const ServerModal = props =>{
         })
     }
 
-    // 去第三方授权
+    /**
+     * 去第三方授权
+     */
     const goUrl = () =>{
         const params = {
             type:serverWay,
@@ -151,6 +179,7 @@ const ServerModal = props =>{
         })
     }
 
+    // 渲染Gitee和Github授权表单
     const authorize = (
        <>
            <Form.Item label="授权id" name="clientId" rules={[{required:true,message:`授权id不能空`}]}>
@@ -204,6 +233,7 @@ const ServerModal = props =>{
        </>
     )
 
+    // 渲染sonar和nexus授权表单
     const server = (
         <>
             <Form.Item

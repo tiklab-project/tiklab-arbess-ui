@@ -3,6 +3,12 @@ import {Spin} from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
 import "./Loading.scss";
 
+/**
+ * 全屏加载
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Loading = props =>{
     return (
         <div className="mf-loading">
@@ -13,7 +19,13 @@ const Loading = props =>{
     )
 }
 
-
+/**
+ * 局部加载
+ * @param size：大小
+ * @param type：类型
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const SpinLoading = ({size, type}) => {
 
     if(type==='table'){
@@ -28,6 +40,12 @@ const SpinLoading = ({size, type}) => {
 
 }
 
+/**
+ * Server--授权加载
+ * @param title：名称
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ServerLoading = ({title}) =>{
     return (
         <div className='mf-server-loading'>

@@ -11,24 +11,29 @@ const PostprocessUserAdd = props =>{
         postprocessData,setPostprocessData,type} = props
 
     const [addUser,setAddUser] = useState([]) // 选中的用户
-    const [userList,setUserList] = useState([])  //
+    const [userList,setUserList] = useState([])  // 用户列表
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
     useEffect(()=>{
-        setSelectedRowKeys([])
-        setAddUser([])
-    },[userAddVisible])
-
-    useEffect(()=>{
-        let newArr = []
-        if(type){
-            newArr = yUserList && yUserList.userList.map(item=>item.user && item.user.id)
-        }else {
-            newArr = yUserList && yUserList.map(item=>item.user.id)
+        if(userAddVisible){
+            // 初始化用户列表
+            let newArr = []
+            if(type){
+                newArr = yUserList && yUserList.userList.map(item=>item.user && item.user.id)
+            }else {
+                newArr = yUserList && yUserList.map(item=>item.user.id)
+            }
+            setUserList(allUserList.filter(item=>!newArr.includes(item.user && item.user.id)))
         }
-        userAddVisible && setUserList(allUserList.filter(item=>!newArr.includes(item.user && item.user.id)))
+        return ()=>{
+            setSelectedRowKeys([])
+            setAddUser([])
+        }
     },[userAddVisible])
 
+    /**
+     * 添加用户
+     */
     const onOk = () => {
         if(type){
             postprocessData && postprocessData.map(item=>{
@@ -44,6 +49,10 @@ const PostprocessUserAdd = props =>{
         setUserAddVisible(false)
     }
 
+    /**
+     * 表格行
+     * @param record
+     */
     const onSelectRow = record => {
         // 如果已经选中 -- 取消选中
         if (selectedRowKeys.indexOf(record.id) >= 0) {
@@ -61,6 +70,10 @@ const PostprocessUserAdd = props =>{
         setSelectedRowKeys([...selectedRowKeys])
     }
 
+    /**
+     * 表格行是否可选择配置
+     * @type {{onChange: rowSelection.onChange, selectedRowKeys: *[]}}
+     */
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
             let newArr = []
@@ -101,16 +114,8 @@ const PostprocessUserAdd = props =>{
                 />
             </div>
             <div className='user-add-btn'>
-                <Btn
-                    onClick={()=>setUserAddVisible(false)}
-                    title={"取消"}
-                    isMar={true}
-                />
-                <Btn
-                    onClick={onOk}
-                    title={"确定"}
-                    type={"primary"}
-                />
+                <Btn onClick={()=>setUserAddVisible(false)} title={"取消"} isMar={true}/>
+                <Btn onClick={onOk} title={"确定"} type={"primary"}/>
             </div>
         </div>
     )

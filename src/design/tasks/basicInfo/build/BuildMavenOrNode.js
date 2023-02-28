@@ -3,6 +3,12 @@ import {Form} from "antd";
 import Mirror from "../CodeBlock";
 import Inputs from "../Inputs";
 
+/**
+ * 构建
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const BuildMavenOrNode = props =>{
 
     const {dataItem} = props

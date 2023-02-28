@@ -13,6 +13,11 @@ const HistoryDetailItem = props =>{
 
     const {itemData,setTreeData,setLogData,setExecIndex,index,setId} = props
 
+    /**
+     * 设置日志
+     * @param item
+     * @param itemIndex
+     */
     const log = (item,itemIndex) =>{
         switch (index) {
             case 1:
@@ -25,6 +30,11 @@ const HistoryDetailItem = props =>{
         }
     }
 
+    /**
+     * 状态icon
+     * @param state
+     * @returns {JSX.Element}
+     */
     const status = state =>{
         switch(state){
             case 1 :
@@ -45,6 +55,11 @@ const HistoryDetailItem = props =>{
         }
     }
 
+    /**
+     * 状态text
+     * @param state
+     * @returns {string}
+     */
     const statusText = state =>{
         switch (state) {
             case 1:

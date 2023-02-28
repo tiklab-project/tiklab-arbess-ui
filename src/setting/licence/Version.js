@@ -4,7 +4,10 @@ import {Table} from "antd";
 import {CloseOutlined,CheckOutlined} from "@ant-design/icons";
 
 /**
- * 版本与许可证
+ * 版本与许可证页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const VersionContent = props =>{
 

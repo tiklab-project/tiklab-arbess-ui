@@ -1,5 +1,11 @@
 import {serviceLoc} from "../../../common/utils/Requset";
 
+/**
+ * 添加变量
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function CreateVariable(data){
     return serviceLoc.request({
         url:"/pipelineVariable/createVariable",
@@ -8,6 +14,12 @@ export function CreateVariable(data){
     })
 }
 
+/**
+ * 添加变量
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function DeleteVariable(data){
     return serviceLoc.request({
         url:"/pipelineVariable/deleteVariable",
@@ -16,6 +28,12 @@ export function DeleteVariable(data){
     })
 }
 
+/**
+ * 添加变量
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function UpdateVariable(data){
     return serviceLoc.request({
         url:"/pipelineVariable/updateVariable",
@@ -24,6 +42,12 @@ export function UpdateVariable(data){
     })
 }
 
+/**
+ * 添加变量
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function FindAllVariable(data){
     return serviceLoc.request({
         url:"/pipelineVariable/findAllVariable",

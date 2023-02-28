@@ -1,6 +1,11 @@
 import {serviceLoc} from "../../../common/utils/Requset";
 
-// 新建流水线
+/**
+ * 添加流水线
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function CreatePipeline(data){
     return serviceLoc.request({
         url:"/pipeline/createPipeline",
@@ -9,7 +14,12 @@ export function CreatePipeline(data){
     })
 }
 
-// 获取所有流水线
+/**
+ * 获取所有流水线
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function FindAllPipelineStatus(data) {
     return serviceLoc.request({
         url:"/pipeline/findUserPipeline",
@@ -18,7 +28,12 @@ export function FindAllPipelineStatus(data) {
     })
 }
 
-// 模糊搜索流水线
+/**
+ * 模糊搜索流水线
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function FindLike(data){
     return serviceLoc.request({
         url:"/pipeline/findLikePipeline",
@@ -27,7 +42,12 @@ export function FindLike(data){
     })
 }
 
-// 删除流水线
+/**
+ * 删除流水线
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function DeletePipeline (data){
     return serviceLoc.request({
         url:"/pipeline/deletePipeline",
@@ -36,7 +56,12 @@ export function DeletePipeline (data){
     })
 }
 
-// 重命名流水线
+/**
+ * 更新流水线
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function UpdatePipeline(data){
     return serviceLoc.request({
         url:"/pipeline/updatePipeline",
@@ -46,7 +71,12 @@ export function UpdatePipeline(data){
 }
 
 
-// 所有收藏
+/**
+ * 获取所有收藏
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindAllFollow(data){
     return serviceLoc.request({
         url:"/pipeline/findUserFollowPipeline",
@@ -55,7 +85,12 @@ export function  FindAllFollow(data){
     })
 }
 
-// 收藏
+/**
+ * 收藏
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  UpdateFollow(data){
     return serviceLoc.request({
         url:"/pipeline/updateFollow",
@@ -64,7 +99,12 @@ export function  UpdateFollow(data){
     })
 }
 
-// 查询单个流水线信息
+/**
+ * 查询单个流水线信息
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindOnePipeline(data){
     return serviceLoc.request({
         url:"/pipeline/findOnePipeline",
@@ -73,7 +113,12 @@ export function  FindOnePipeline(data){
     })
 }
 
-// 查找系统用户
+/**
+ * 获取用户
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindUserPage(data){
     return serviceLoc.request({
         url:"/user/user/findUserPage",
@@ -82,7 +127,12 @@ export function  FindUserPage(data){
     })
 }
 
-// 查找项目用户
+/**
+ * 获取项目用户
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindDmUserPage(data){
     return serviceLoc.request({
         url:"/dmUser/findDmUserPage",

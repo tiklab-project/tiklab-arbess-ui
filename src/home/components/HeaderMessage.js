@@ -12,6 +12,12 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../common/btn/Btn";
 import "./HeaderMessage.scss";
 
+/**
+ * 消息通知
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const HeaderMessage = props =>{
 
     const {homePageStore,visible,setVisible,pipelineStore} = props
@@ -21,10 +27,11 @@ const HeaderMessage = props =>{
     } = homePageStore
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
-    const [isLoading,setIsLoading] = useState(false)
-    const [selected,setSelected] = useState(2)
+    const [isLoading,setIsLoading] = useState(false) //加载
+    const [selected,setSelected] = useState(2) //消息类型
 
     useEffect(()=>{
+        // 获取流水线
         visible && findAllPipelineStatus()
         return ()=>{
             setMessageList([])
@@ -33,11 +40,15 @@ const HeaderMessage = props =>{
     },[visible])
 
     useEffect(()=>{
+        // 获取全部消息
         visible && findMessageItemPage(selected).then(res=>{
             setIsLoading(false)
         })
     },[visible,messagePagination,selected,mesFresh])
 
+    /**
+     * 加载更多消息
+     */
     const moreMessage = () =>{
         setMessagePagination(messagePagination+1)
         setIsLoading(true)
@@ -58,6 +69,10 @@ const HeaderMessage = props =>{
         }
     ]
 
+    /**
+     * 消息详情路由跳转
+     * @param item
+     */
     const goHref = item => {
         const data = JSON.parse(item.data)
         const {message,status,...resItem } = item
@@ -69,6 +84,7 @@ const HeaderMessage = props =>{
                 },
                 status: 1
             }
+            // 更新消息（已读）
             updateMessageItem(updateParams)
         }
         if(isPipeline(data.pipelineId)){
@@ -77,26 +93,59 @@ const HeaderMessage = props =>{
         }
     }
 
-    // 判断流水线是否还存在
+    /**
+     * 判断流水线是否还存在
+     * @param id
+     * @returns {*}
+     */
     const isPipeline = id =>{
         return pipelineList && pipelineList.some(item=>item.id===id)
     }
 
+    /**
+     * 删除消息
+     * @param e
+     * @param item
+     */
     const delMessage = (e,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
         deleteMessageItem(item.id)
     }
 
+    /**
+     * 切换消息类型
+     * @param item
+     */
+    const changMessage = item => {
+        setSelected(item.id)
+        setMessagePagination(1)
+    }
+
+    const renderTabs = item => {
+        return   <div key={item.id} className={`title-item ${item.id===selected?"title-select":null}`} onClick={()=>changMessage(item)}>
+            {item.title}
+            {
+                item.id === 0 &&
+                <span className={`messageModal-screen-tab ${unread< 100 ?null:"messageModal-screen-much"}`}>
+                    {
+                        unread < 100 ? unread : 99
+                    }
+                </span>
+            }
+        </div>
+    }
+
+    /**
+     * 渲染消息列表
+     * @param messageList
+     * @returns {*}
+     */
     const renderMessageList = messageList =>{
         return messageList && messageList.map((item,index)=>{
             const data = JSON.parse(item.data)
             return(
-                <div
-                    key={index}
-                    className={`message-item ${item.status===1 ? "message-read":""}`}
-                    onClick={()=>goHref(item)}
-                >
+                <div key={index} className={`message-item ${item.status===1 ? "message-read":""}`} onClick={()=>goHref(item)}>
                     <div className="message-item-left">
                         <div className="message-item-icon"><MessageOutlined /></div>
                         <div className="message-item-center">
@@ -117,25 +166,6 @@ const HeaderMessage = props =>{
                 </div>
             )
         })
-    }
-
-    const changSelet = item => {
-        setSelected(item.id)
-        setMessagePagination(1)
-    }
-
-    const renderTabs = item => {
-        return   <div key={item.id} className={`title-item ${item.id===selected?"title-select":null}`} onClick={()=>changSelet(item)}>
-            {item.title}
-            {
-                item.id === 0 &&
-                <span className={`messageModal-screen-tab ${unread< 100 ?null:"messageModal-screen-much"}`}>
-                    {
-                        unread < 100 ? unread : 99
-                    }
-                </span>
-            }
-        </div>
     }
 
     const emptyTitle = (

@@ -3,6 +3,9 @@ import {LogTemplateList} from "tiklab-oplog-ui";
 
 /**
  * 日志模板
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const LogTemplateListContent = props => {
 

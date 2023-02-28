@@ -3,6 +3,12 @@ import {CloseOutlined} from "@ant-design/icons";
 import Btn from "../btn/Btn"
 import "./ModalTitle.scss";
 
+/**
+ * 弹出框标题
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ModalTitle = props =>{
 
     const {setVisible,title} = props

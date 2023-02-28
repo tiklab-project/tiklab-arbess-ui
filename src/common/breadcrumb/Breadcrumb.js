@@ -3,9 +3,15 @@ import {Space} from "antd"
 import {LeftOutlined} from "@ant-design/icons";
 import "./Breadcrumb.scss";
 
-const BreadcrumbContent = props =>{
-
-    const {firstItem,secondItem,goBack} = props
+/**
+ * 面包屑
+ * @param firstItem：标题1
+ * @param secondItem：标题2
+ * @param goBack：事件
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const BreadcrumbContent = ({firstItem,secondItem,goBack}) =>{
 
     return  <div className={"breadcrumbContent"}>
                 <Space>

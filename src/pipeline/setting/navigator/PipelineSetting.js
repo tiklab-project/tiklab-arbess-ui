@@ -1,12 +1,13 @@
 import React from "react";
-import Setting from "../../common/aside/Setting";
+import Setting from "../../../common/aside/Setting";
 
-const PipelineSet = props =>{
+const PipelineSetting = props =>{
 
     const {match} = props
 
     const pipelineId = match.params.id
 
+    // 左侧导航（三级标题）
     const secondRouter = [
         {
             key:`/index/pipeline/${pipelineId}/assembly/set`,
@@ -33,4 +34,4 @@ const PipelineSet = props =>{
 
 }
 
-export default PipelineSet
+export default PipelineSetting

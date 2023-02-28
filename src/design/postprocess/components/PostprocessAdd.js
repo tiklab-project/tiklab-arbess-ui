@@ -17,11 +17,11 @@ const PostprocessAdd = props =>{
     const [form] = Form.useForm()
     const mirrorRefs = useRef(null)
     const [height,setHeight] = useState(0)
-    const [type,setType] = useState(61)
-    const [userAddVisible,setUserAddVisible] = useState(false)
-    const [allUserList,setAllUserList] = useState([])
-    const [yUserList,setYUserList] = useState([])
-    const [styleActiveLine,setStyleActiveLine] = useState(false)
+    const [type,setType] = useState(61) // 后置处理类型
+    const [userAddVisible,setUserAddVisible] = useState(false) // 通知人员
+    const [allUserList,setAllUserList] = useState([])  // 所有通知人员
+    const [yUserList,setYUserList] = useState([]) // 选中的通知人员
+    const [styleActiveLine,setStyleActiveLine] = useState(false) // 代码块行高亮
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -36,7 +36,7 @@ const PostprocessAdd = props =>{
 
     useEffect(()=>{
         if(postprocessVisible){
-            setStyleActiveLine(false)
+            // 初始表单
             if(formValue){
                 form.setFieldsValue({
                     type: formValue.type,
@@ -48,10 +48,13 @@ const PostprocessAdd = props =>{
             form.resetFields()
             setType(61)
         }
+        return ()=>{
+            setStyleActiveLine(false)
+        }
      },[postprocessVisible])
 
-
     useEffect(()=>{
+        // 获取通知人员
         postprocessVisible && findDmUserPage(pipelineId).then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
@@ -69,11 +72,47 @@ const PostprocessAdd = props =>{
         })
     },[postprocessVisible])
 
-    // 移出用户
+    /**
+     * 移出用户
+     * @param record
+     */
     const remove = record =>{
         setYUserList(yUserList.filter(item=>item.user.id!==record.user.id))
     }
 
+    /**
+     * 通知人员通知事件
+     * @param value
+     * @param record
+     */
+    const changType = (value,record)=>{
+        yUserList && yUserList.map(item=>{
+            if(item.user.id===record.user.id){
+                item.messageType=value
+            }
+        })
+        setYUserList([...yUserList])
+    }
+
+    /**
+     * 执行脚本高亮
+     */
+    const onFocus = () =>{
+        setStyleActiveLine(true)
+    }
+
+
+    /**
+     * 消息通知方式是否禁止
+     * @param type
+     * @returns {boolean}
+     */
+    const isType = type => mesSendData && mesSendData.some(item=>item===type)
+
+    /**
+     * 添加或者更新后置处理
+     * @param value
+     */
     const onOk = value => {
         let newArr = []
         yUserList && yUserList.map(item=>{
@@ -131,21 +170,6 @@ const PostprocessAdd = props =>{
         </>
     )
 
-    // 通知人员通知事件
-    const changType = (value,record)=>{
-        yUserList && yUserList.map(item=>{
-            if(item.user.id===record.user.id){
-                item.messageType=value
-            }
-        })
-        setYUserList([...yUserList])
-    }
-
-    // 脚本高亮
-    const onFocus = () =>{
-        setStyleActiveLine(true)
-    }
-
     const columns = [
         {
             title: "成员",
@@ -194,9 +218,6 @@ const PostprocessAdd = props =>{
             }
         },
     ]
-
-    // 消息通知方式是否禁止
-    const isType = type => mesSendData && mesSendData.some(item=>item===type)
 
     const typeList = [
         {

@@ -13,13 +13,15 @@ import {getUser} from "tiklab-core-ui";
 import {Profile} from "tiklab-eam-ui";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import Btn from "../../../common/btn/Btn";
-import PostprocessAdd from "./PostprocessAdd";
+import PostprocessUser from "./PostprocessUser";
 import MirrorContent from "./CodeBlock";
 import "./Postprocess.scss";
 
-
 /**
- * 后置处理
+ * task的后置处理
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Postprocess = props =>{
 
@@ -30,18 +32,21 @@ const Postprocess = props =>{
         setIsFindPostprocessData,isFindPostprocessData,updatePostConfig,messageSendType,mesSendData
     } = postprocessStore
 
-    const [allUserList,setAllUserList] = useState([])
+    const [allUserList,setAllUserList] = useState([]) // 所有通知人员
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
-    const [yUserList,setYUserList] = useState("")
+    const [yUserList,setYUserList] = useState("") // 选中的通知人员
 
     const userId = getUser().userId
 
     useEffect(()=>{
+        // 初始化task的后置处理
         findAllPostConfig(dataItem.configId)
     },[isFindPostprocessData,dataItem.configId])
 
     useEffect(()=>{
+        // 初始化是否存在消息发送方式
         messageSendType()
+        // 初始化通知人员
         findDmUserPage(pipeline.id).then(res=>{
             const dataList = res.data && res.data.dataList
             if(res.code===0){
@@ -57,7 +62,10 @@ const Postprocess = props =>{
         })
     },[])
 
-    // 添加后置处理
+    /**
+     * 添加后置处理
+     * @param type
+     */
     const addPose = type => {
         createPostConfig({
             taskType:type,
@@ -68,15 +76,25 @@ const Postprocess = props =>{
         })
     }
 
-    // 删除后置处理
+    /**
+     * 删除后置处理
+     * @param item
+     */
     const del = item => {
         deletePostConfig(item.configId)
     }
 
+    /**
+     * 取消修改
+     */
     const onCancel = () => {
         setIsFindPostprocessData(!isFindPostprocessData)
     }
 
+    /**
+     * 确定更新
+     * @param item
+     */
     const onOk = item => {
         let newArr = []
         item.userList && item.userList.map(item=>{
@@ -97,7 +115,12 @@ const Postprocess = props =>{
         item.typeList && item.typeList.length> 0 && updatePostConfig(params)
     }
 
-    // 值是否更改
+    /**
+     * 两组数组是否相等
+     * @param a
+     * @param b
+     * @returns {boolean}
+     */
     const isEqual = (a,b) =>{
         if(a && b){
             if(a.length !== b.length) return true
@@ -112,7 +135,12 @@ const Postprocess = props =>{
         return false
     }
 
-    // 是否符合要求
+    /**
+     * 获取符合要求的item
+     * @param data
+     * @param item
+     * @returns {*}
+     */
     const isSuit = (data,item)=>{
         let a
         data && data.map(list=>{
@@ -123,14 +151,23 @@ const Postprocess = props =>{
         return a
     }
 
-    // 移出用户
+    /**
+     * 移出用户
+     * @param record
+     * @param item
+     */
     const removeUser = (record,item) =>{
         const zz = isSuit(postprocessData,item)
         zz.userList = zz.userList.filter(item=>item.user.id!==record.user.id)
         setPostprocessData([...postprocessData])
     }
 
-    // 用户通知事件
+    /**
+     * 改变用户通知事件
+     * @param item
+     * @param record
+     * @param value
+     */
     const changEnev = (item,record,value) =>{
         const zz = isSuit(postprocessData,item)
         zz.userList && zz.userList.map(it=>{
@@ -141,14 +178,22 @@ const Postprocess = props =>{
         setPostprocessData([...postprocessData])
     }
 
-    // 消息发送方式
+    /**
+     * 改变消息发送方式
+     * @param value
+     * @param item
+     */
     const changeMes = (value,item) =>{
         const zz = isSuit(postprocessData,item)
         zz.typeList = value
         setPostprocessData([...postprocessData])
     }
 
-    // 消息通知 ，消息通知人员是否更改
+    /**
+     * 消息通知 ，消息通知人员是否更改
+     * @param item
+     * @returns {boolean}
+     */
     const isYUser = item =>{
         const userList = item.userList
         const yUserList = isSuit(fixedPostprocessData && fixedPostprocessData,item)
@@ -157,32 +202,61 @@ const Postprocess = props =>{
         return isEqual(newId,oldId)
     }
 
-    // 消息通知 ，消息发送方式是否更改
+    /**
+     *  消息通知 ，消息发送方式是否更改
+     * @param item
+     * @returns {boolean}
+     */
     const isMesType = item =>{
         const typeList = item.typeList
         const mesType = isSuit(fixedPostprocessData && fixedPostprocessData,item)
         return isEqual(typeList,mesType && mesType.typeList)
     }
 
-    // 消息通知的值是否显示取消确定按钮
+    /**
+     * 消息通知的值是否显示取消确定按钮
+     * @param item
+     * @returns {JSX.Element|null}
+     */
     const isChangeMes = item => {
         if(isMesType(item) || isYUser(item)){
             return <div className="post-pose-btn" style={{textAlign:"right"}}>
-                <Btn
-                    onClick={()=>onCancel()}
-                    title={"取消"}
-                    isMar={true}
-                />
-                <Btn
-                    onClick={() => onOk(item)}
-                    title={"确定"}
-                    type={"primary"}
-                />
+                <Btn onClick={()=>onCancel()} title={"取消"} isMar={true}/>
+                <Btn onClick={() => onOk(item)} title={"确定"} type={"primary"}/>
             </div>
         }
         return null
     }
 
+    /**
+     * 是否存在
+     * @param key
+     * @returns {boolean}
+     */
+    const isExpandedTree = key => {
+        return expandedTree.some(item => item ===key)
+    }
+
+    /**
+     * 展开和闭合
+     * @param key
+     */
+    const setOpenOrClose = key => {
+        if (isExpandedTree(key)) {
+            // false--闭合
+            setExpandedTree(expandedTree.filter(item => item !== key))
+        } else {
+            // ture--展开
+            setExpandedTree(expandedTree.concat(key))
+        }
+    }
+
+
+    /**
+     * 后置处理类型
+     * @param item
+     * @returns {string}
+     */
     const header = item =>{
         switch (item.type) {
             case 61:
@@ -243,22 +317,6 @@ const Postprocess = props =>{
                 }
             },
         ]
-    }
-
-    // 是否存在key -- ture || false
-    const isExpandedTree = key => {
-        return expandedTree.some(item => item ===key)
-    }
-
-    // 展开和闭合
-    const setOpenOrClose = key => {
-        if (isExpandedTree(key)) {
-            // false--闭合
-            setExpandedTree(expandedTree.filter(item => item !== key))
-        } else {
-            // ture--展开
-            setExpandedTree(expandedTree.concat(key))
-        }
     }
 
     const typeList = [
@@ -341,7 +399,7 @@ const Postprocess = props =>{
                                 <div className="pose-item-user">
                                     <div className="user-title">
                                         <div className="title-user">消息通知人员</div>
-                                        <PostprocessAdd
+                                        <PostprocessUser
                                             item={item}
                                             allUserList={allUserList}
                                             yUserList={yUserList}

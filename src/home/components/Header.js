@@ -18,6 +18,12 @@ import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/img/matflow3.png";
 import HeaderMessage from "./HeaderMessage";
 
+/**
+ * header 头部
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const  Head = props =>{
 
     const {homePageStore} = props
@@ -25,14 +31,13 @@ const  Head = props =>{
     const {findMessageItemPage,unread} = homePageStore
 
     let path = props.location.pathname
-
+    const {i18n,t} = useTranslation()
     const [currentLink,setCurrentLink] = useState(path)
     const [visible,setVisible] = useState(false)
 
-    const {i18n,t} = useTranslation()
 
     useEffect(()=>{
-        // 未读消息通知
+        // 获取未读消息通知
         findMessageItemPage(0)
     },[])
 
@@ -43,6 +48,7 @@ const  Head = props =>{
         setCurrentLink(path)
     },[path])
 
+    // 一级标题
     const routers=[
         {
             key:"home",
@@ -61,10 +67,35 @@ const  Head = props =>{
         }
     ]
 
+    /**
+     * 路由跳转
+     * @param item
+     */
     const changeCurrentLink = item => {
         props.history.push(item.to)
     }
 
+    /**
+     * 切换语言
+     * @param type
+     */
+    const changeLan = type =>{
+        i18n.changeLanguage(type)
+    }
+
+    /**
+     * 退出登录
+     */
+    const goOut = () => {
+        props.history.push({
+            pathname: "/logout",
+            state:{
+                preRoute: props.location.pathname
+            }
+        })
+    }
+
+    // 渲染一级标题
     const renderRouter = routers => {
         return routers && routers.map(routers=>{
             return  <div key={routers.key}
@@ -76,19 +107,7 @@ const  Head = props =>{
         })
     }
 
-    const changeLan = type =>{
-        i18n.changeLanguage(type)
-    }
-
-    const goOut = () => {
-        props.history.push({
-            pathname: "/logout",
-            state:{
-                preRoute: props.location.pathname
-            }
-        })
-    }
-
+    // 切换语言目录
     const languageMenu = (
         <div className="outMenu-lan-menu">
             <div className="lan-menu">中文</div>
@@ -125,6 +144,7 @@ const  Head = props =>{
         </div>
     )
 
+    // 帮助目录
     const helpMenu = (
         <div className="header-helpMenu">
             <div className="header-helpMenu-item">
@@ -146,6 +166,7 @@ const  Head = props =>{
         </div>
     )
 
+    // 去系统设置
     const goSystem = () =>{
         props.history.push("/index/system")
     }

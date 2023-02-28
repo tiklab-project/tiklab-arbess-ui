@@ -1,15 +1,11 @@
 import {serviceLoc} from "../../../common/utils/Requset";
 
-//系统信息
-export function GetSystemMassage(data){
-    return serviceLoc.request({
-        url:"/systemMassage/getSystemMassage",
-        method:"post",
-        data
-    })
-}
-
-//删除环境配置
+/**
+ * 删除环境配置
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function DeletePipelineScm(data){
     return serviceLoc.request({
         url:"/scm/deletePipelineScm",
@@ -18,7 +14,12 @@ export function DeletePipelineScm(data){
     })
 }
 
-//更新环境配置
+/**
+ * 更新环境配置
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function UpdatePipelineScm(data){
     return serviceLoc.request({
         url:"/scm/updatePipelineScm",
@@ -27,7 +28,12 @@ export function UpdatePipelineScm(data){
     })
 }
 
-//查找环境配置
+/**
+ * 查找环境配置
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function FindAllPipelineScm(data){
     return serviceLoc.request({
         url:"/scm/findAllPipelineScm",

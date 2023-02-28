@@ -1,16 +1,16 @@
-import {observable,action} from "mobx";
+import {action, observable} from "mobx";
 
 import {
-    FindAllPipelineStatus,
     CreatePipeline,
-    FindLike,
     DeletePipeline,
-    UpdatePipeline,
     FindAllFollow,
-    UpdateFollow,
-    FindUserPage,
+    FindAllPipelineStatus,
     FindDmUserPage,
-    FindOnePipeline
+    FindLike,
+    FindOnePipeline,
+    FindUserPage,
+    UpdateFollow,
+    UpdatePipeline
 } from "../api/Pipeline";
 
 import {getUser} from "tiklab-core-ui";
@@ -18,12 +18,12 @@ import {message} from "antd";
 
 export class PipelineStore {
 
-    @observable pipelineList = []
-    @observable pipelineLength = 0
-    @observable followLength = 0
-    @observable pipelineUserList = []
-    @observable pipeline = ""
-    @observable listType = 1
+    @observable pipelineList = []  // 流水线列表
+    @observable pipelineLength = 0  // 流水线长度
+    @observable followLength = 0  // 流水线收藏长度
+    @observable pipelineUserList = [] // 流水线用户
+    @observable pipeline = ""  // 流水线信息
+    @observable listType = 1 // 1:所有流水线；2：我收藏的流水线
     @observable isLoading = false
     @observable fresh = false
 
@@ -163,8 +163,7 @@ export class PipelineStore {
             pipeline:value,
             userId:getUser().userId
         }
-        const data = await UpdateFollow(params)
-        return data
+        return await UpdateFollow(params)
     }
 
     @action

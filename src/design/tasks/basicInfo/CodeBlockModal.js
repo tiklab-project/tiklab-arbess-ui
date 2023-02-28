@@ -24,11 +24,17 @@ const CodeBlockModal = props =>{
         setHeight(autoHeight())
     }
 
+    /**
+     * 取消编辑
+     */
     const onCancel = () =>{
         narrowRef.current.editor.setValue(dataItem[name]?dataItem[name]:"")
         setVisible(false)
     }
 
+    /**
+     * 确定更改
+     */
     const onOks = () =>{
         onOk(mirrorRefs)
         setVisible(false)

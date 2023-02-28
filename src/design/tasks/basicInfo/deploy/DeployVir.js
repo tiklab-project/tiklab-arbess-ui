@@ -3,7 +3,12 @@ import {Form} from "antd";
 import Mirror from "../CodeBlock";
 import Inputs from "../Inputs";
 
-
+/**
+ * 部署 -- Vir
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const DeployVir = props =>{
 
     const {dataItem} = props

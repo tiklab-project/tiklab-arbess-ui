@@ -67,12 +67,19 @@ const TaskAdd = props =>{
 
     const [type,setType] = useState(1)
 
-    const handleClick = item =>{
+    /**
+     * 添加task
+     * @param item
+     */
+    const addTask = item =>{
         createTaskConfig({taskType:item.type})
         setNewStageDrawer(false)
     }
 
-    // 锚点
+    /**
+     * 锚点跳转
+     * @param anchorName
+     */
     const changeAnchor = anchorName =>{
         const scrollTop=document.getElementById("tpl-task")
         if (anchorName) {
@@ -84,6 +91,9 @@ const TaskAdd = props =>{
         }
     }
 
+    /**
+     * 滚动加载
+     */
     const onScroll = () =>{
         const scrollTop=document.getElementById("tpl-task").scrollTop
         const rightIndex = lis.map((item,index)=>index+1)
@@ -114,7 +124,7 @@ const TaskAdd = props =>{
                     group.desc && group.desc.map((item,index)=>{
                         return(
                             <div key={index} className={`group-desc ${item.type===32?"group-desc-ban":""}`}
-                                 onClick={()=>item.type!==32&&handleClick(item)}
+                                 onClick={()=>item.type!==32&&addTask(item)}
                             >
                                 <TaskTitleIcon type={item.type}/>
                             </div>

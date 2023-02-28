@@ -1,6 +1,12 @@
 import React from "react";
 import {NodeIndexOutlined,RightOutlined} from "@ant-design/icons";
 
+/**
+ * 流水线模板
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PipelineAddMould = props =>{
 
     const {item,index,changTemplate} = props

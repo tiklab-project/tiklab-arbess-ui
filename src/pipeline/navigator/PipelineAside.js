@@ -6,7 +6,13 @@ import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined} from "@ant-d
 import {Loading} from "../../common/loading/Loading";
 import Aside from "../../common/aside/Aside";
 
-const PipelineDetails= (props)=>{
+/**
+ * 流水线左侧导航（二级导航）
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const PipelineAside= (props)=>{
 
     const {match,pipelineStore,systemRoleStore}=props
 
@@ -30,12 +36,13 @@ const PipelineDetails= (props)=>{
                 props.history.push('/index/404')
             }else {
                 setIsAside(false)
+                // 获取流水线权限
                 getInitProjectPermissions(userId,pipelineId,res.data.power===1)
             }
         })
     },[pipelineId])
 
-    // 侧边第一栏导航
+    // 左侧菜单（二级菜单）
     const firstRouters=[
         {
             to:`/index/pipeline/${pipelineId}/survey`,
@@ -50,7 +57,7 @@ const PipelineDetails= (props)=>{
             key:"3",
         },
         {
-            to:`/index/pipeline/${pipelineId}/history`,
+            to:`/index/pipeline/${pipelineId}/structure`,
             title: "历史",
             icon: <ClockCircleOutlined />,
             key:"4",
@@ -70,6 +77,6 @@ const PipelineDetails= (props)=>{
 
 }
 
-export default inject("pipelineStore",SYSTEM_ROLE_STORE)(observer(PipelineDetails))
+export default inject("pipelineStore",SYSTEM_ROLE_STORE)(observer(PipelineAside))
 
 

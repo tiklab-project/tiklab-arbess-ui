@@ -10,6 +10,12 @@ import PipelineUserAdd from "./PipelineUserAdd";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import "./PipelineAddInfo.scss";
 
+/**
+ * 添加流水线，完善信息
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PipelineAddInfo = props =>{
 
     const {set,pipelineStore,setCurrent,templateLis,templateType,pipelineType,onClick} = props
@@ -17,23 +23,24 @@ const PipelineAddInfo = props =>{
     const {pipeline,pipelineList,findUserPage,createPipeline,isLoading,updatePipeline} = pipelineStore
 
     const [form] = Form.useForm()
-
+    const userId = getUser().userId
     const [powerType,setPowerType] = useState(1) // 流水线权限 -- 私有或公有
     const [yUserList,setYUserList] = useState([])
     const [nUserList,setNUserList] = useState([])
     const [member,setMember] = useState([])  // 流水线成员
     const [visible,setVisible] = useState(false) // 添加用户下拉显示
 
-    const userId = getUser().userId
-
     useEffect(()=>{
         if(set && pipeline){
+            // 初始化权限
             setPowerType(pipeline.power)
+            // 初始化表单
             form.setFieldsValue({name:pipeline.name})
         }
     },[pipeline])
 
     useEffect(()=>{
+        // 获取用户
         !set && findUserPage().then(res=>{
             const data = res.data && res.data.dataList
             if(res.code===0){
@@ -44,6 +51,7 @@ const PipelineAddInfo = props =>{
     },[])
 
     useEffect(()=>{
+        // 监听选中的用户，设置流水线成员
         const newArr = []
         !set && yUserList && yUserList.map(item=>{
             if(item.id===userId){
@@ -62,6 +70,10 @@ const PipelineAddInfo = props =>{
         setMember([...newArr])
     },[yUserList])
 
+    /**
+     * 流水线创建或更新确定
+     * @param value
+     */
     const onOk = value => {
         if(set){
             const params={

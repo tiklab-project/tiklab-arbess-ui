@@ -4,13 +4,16 @@ import {inject,observer} from "mobx-react";
 import {Profile} from "tiklab-eam-ui";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
-import Listname from "../../../common/list/Listname";
+import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
 import AuthAddBtn from "../components/AuthAddBtn";
 import "../../authCommon/Auth.scss";
 
 /**
- * 认证配置
+ * 认证配置页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Auth = props =>{
 
@@ -18,15 +21,26 @@ const Auth = props =>{
     const {deleteAuth,findAllAuth,authList,authFresh,setModalVisible,setFormValue} = authStore
 
     useEffect(()=>{
+        // 初始化认证配置
         findAllAuth()
     },[authFresh])
 
-    const edit = (text,record) => {
+    /**
+     * 编辑认证配置
+     * @param text
+     * @param record
+     */
+    const editAuth = (text,record) => {
         setModalVisible(true)
         setFormValue(record)
     }
 
-    const del = (text,record) => {
+    /**
+     * 删除认证配置
+     * @param text
+     * @param record
+     */
+    const delAuth = (text,record) => {
         deleteAuth(record.authId)
     }
 
@@ -39,7 +53,7 @@ const Auth = props =>{
             ellipsis:true,
             render:text => {
                 return  <span>
-                            <Listname text={text}/>
+                            <ListIcon text={text}/>
                             <span>{text}</span>
                         </span>
             }
@@ -102,8 +116,8 @@ const Auth = props =>{
             ellipsis:true,
             render:(text,record) => {
                 return  <Listaction
-                            edit={()=>edit(text,record)}
-                            del={()=>del(text,record)}
+                            edit={()=>editAuth(text,record)}
+                            del={()=>delAuth(text,record)}
                         />
             }
         }

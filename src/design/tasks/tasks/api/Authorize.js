@@ -1,6 +1,11 @@
 import {serviceLoc} from "../../../../common/utils/Requset";
 
-//授权--Code
+/**
+ * 授权--Code
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindCode (data){
     return serviceLoc.request({
         url:"/codeAuthorize/findCode",
@@ -9,7 +14,12 @@ export function  FindCode (data){
     })
 }
 
-//授权--获取token
+/**
+ * 授权--获取token
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindAccessToken (data){
     return serviceLoc.request({
         url:"/codeAuthorize/findAccessToken",
@@ -18,7 +28,12 @@ export function  FindAccessToken (data){
     })
 }
 
-//授权--获取仓库
+/**
+ * 授权--获取仓库
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindAllStorehouse (data){
     return serviceLoc.request({
         url:"/codeAuthorize/findAllStorehouse",
@@ -27,7 +42,12 @@ export function  FindAllStorehouse (data){
     })
 }
 
-//授权--获取分支
+/**
+ * 授权--获取分支
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindBranch (data){
     return serviceLoc.request({
         url:"/codeAuthorize/findBranch",

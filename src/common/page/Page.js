@@ -2,10 +2,17 @@ import React from "react";
 import {LeftOutlined,RightOutlined} from "@ant-design/icons";
 import "./Page.scss";
 
+/**
+ * 分页
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Page = props =>{
 
     const {pageCurrent,changPage,page} = props
 
+    // 渲染向右 > 箭头
     const renderRightOut = () =>{
         if(pageCurrent===page.total || !page.total){
             return(
@@ -22,7 +29,7 @@ const Page = props =>{
         }
     }
 
-    return <div className="mf-page">
+    return  <div className="mf-page">
                 <span
                     className={`${pageCurrent===1?"mf-page-ban":"mf-page-allow"}`}
                     onClick={()=>pageCurrent===1? null :changPage(pageCurrent - 1)}
@@ -32,7 +39,7 @@ const Page = props =>{
                 <span className="mf-page-current">{pageCurrent}</span>
                 <span> / { page && page.total ? page.total:1}</span>
                 { renderRightOut() }
-         </div>
+            </div>
 }
 
 export default Page

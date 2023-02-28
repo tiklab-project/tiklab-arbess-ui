@@ -5,12 +5,17 @@ import Btn from "../../../common/btn/Btn";
 import {autoHeight} from "../../../common/client/Client";
 import ModalTitle from "../../../common/modalTitle/ModalTitle";
 
+/**
+ * 变量添加编辑
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const VariableAdd = props =>{
 
     const {variableVisible,setVariableVisible,formValue,createVariable,pipelineId,updateVariable} = props
 
     const [form] = Form.useForm()
-
     const [height,setHeight] = useState(0)
 
     useEffect(()=>{
@@ -26,14 +31,19 @@ const VariableAdd = props =>{
 
     useEffect(()=>{
         if(variableVisible){
+            // 表单初始
             if(formValue){
                 form.setFieldsValue({...formValue})
-            }else {
-                form.resetFields()
+                return
             }
+            form.resetFields()
         }
     },[variableVisible])
 
+    /**
+     * 变量添加编辑确定
+     * @param values
+     */
     const onOk = values =>{
         if(formValue){
             const params = {
@@ -81,7 +91,8 @@ const VariableAdd = props =>{
 
     const [opt,setOpt] = useState([])
 
-    const onFouce = () =>{
+    // 聚焦获取默认选项
+    const fouceVarValue = () =>{
         const list = form.getFieldValue("valueList")
         let newArr = []
         list && list.map(item=>{
@@ -90,7 +101,8 @@ const VariableAdd = props =>{
         setOpt([...newArr])
     }
 
-    const onChange = () =>{
+    // chang可选项
+    const changeValueList = () =>{
         const list = form.getFieldValue("valueList").some(item=>item===form.getFieldValue("varValue"))
         !list && form.setFieldsValue({varValue:null})
     }
@@ -109,10 +121,7 @@ const VariableAdd = props =>{
         >
             <div className="variable-modal">
                 <div className="variable-modal-up">
-                    <ModalTitle
-                        setVisible={setVariableVisible}
-                        title={"添加变量"}
-                    />
+                    <ModalTitle setVisible={setVariableVisible} title={"添加变量"}/>
                 </div>
                 <div className="variable-modal-content">
                     <Form
@@ -153,11 +162,11 @@ const VariableAdd = props =>{
                                                                 }]}
                                                             noStyle
                                                          >
-                                                            <Input placeholder="可选项" style={{width:"60%",marginRight:30}} onChange={onChange}/>
+                                                            <Input placeholder="可选项" style={{width:"60%",marginRight:30}} onChange={changeValueList}/>
                                                         </Form.Item>
                                                         {fields.length > 1 && <MinusCircleOutlined onClick={()=>{
                                                             remove(field.name)
-                                                            onChange()
+                                                            changeValueList()
                                                         }}/>}
                                                     </Form.Item>
                                                  ))}
@@ -173,7 +182,7 @@ const VariableAdd = props =>{
                                          )}}
                                      </Form.List>
                                      <Form.Item name="varValue" label="默认选项">
-                                         <Select onFocus={()=>onFouce()} rules={[{required:true,message:"默认选项不能为空"}]} placeholder="默认选项">
+                                         <Select onFocus={()=>fouceVarValue()} rules={[{required:true,message:"默认选项不能为空"}]} placeholder="默认选项">
                                              {
                                                  opt && opt.map((item,index)=>{
                                                      return <Select.Option value={item} key={index}>{item}</Select.Option>

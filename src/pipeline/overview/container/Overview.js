@@ -5,9 +5,15 @@ import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import echarts from "../../../common/echarts/Echarts";
 import OverviewCensus from "../components/OverviewCensus";
 import Guide from "../../../common/guide/Guide";
-import DynamicList from "../../../dynamic/components/DynamicList";
+import DynamicList from "../../../common/dynamic/DynamicList";
 import "../components/Overview.scss";
 
+/**
+ * 概况
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Overview = props =>{
 
     const {OverviewStore,pipelineStore,homePageStore} = props
@@ -36,7 +42,7 @@ const Overview = props =>{
         }
     },[pipeline])
 
-
+    // 渲染图表
     const renderEchart = data =>{
         const chartDom=document.getElementById("burn-down")
         // 获取实例

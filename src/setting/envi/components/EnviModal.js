@@ -44,6 +44,7 @@ const EnviModal = props =>{
 
     useEffect(()=>{
         if(visible){
+            // 表单初始化
             if(formValue){
                 form.setFieldsValue(formValue)
                 return
@@ -52,10 +53,19 @@ const EnviModal = props =>{
         }
     },[visible])
 
-    const opt = value => {
+    /**
+     * 切换环境配置类型
+     * @param value
+     */
+    const changScmType = value => {
         setScmType(value)
     }
 
+    /**
+     * 环境标题
+     * @param ScmType
+     * @returns {string}
+     */
     const scmTitle = ScmType => {
         switch (ScmType) {
             case 1:  return "Git"
@@ -65,11 +75,18 @@ const EnviModal = props =>{
         }
     }
 
-    // 环境配置是否已经存在
+    /**
+     * 环境配置是否已经存在
+     * @param scmType
+     * @returns {*}
+     */
     const isGray = scmType => {
         return enviData.some(item=>item.scmType===scmType)
     }
 
+    /**
+     * 更新或添加确定
+     */
     const onOk = () =>{
         form.validateFields().then((values) => {
             const params = {
@@ -105,7 +122,7 @@ const EnviModal = props =>{
                 <div className="resources-modal-content">
                     <Form form={form} layout="vertical" name="userForm" autoComplete="off">
                         <Form.Item name="scmType" label="环境配置类型" rules={[{required:true,message:`请选择环境配置类型`}]}>
-                            <Select onChange={opt} disabled={formValue && formValue}>
+                            <Select onChange={changScmType} disabled={formValue && formValue}>
                                 {
                                     lis.map(item=>(
                                         <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>

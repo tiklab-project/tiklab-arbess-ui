@@ -11,7 +11,10 @@ import Listaction from "../../../common/list/Listaction";
 import "../../authCommon/Auth.scss";
 
 /**
- * 环境配置
+ * 环境配置页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Envi = props =>{
 
@@ -23,8 +26,8 @@ const Envi = props =>{
     const [enviData,setEnviData] = useState([])
     const [formValue,setFormValue] = useState("")
 
-    // 初始化
     useEffect(()=>{
+        // 初始化环境配置
         findAllPipelineScm().then(res=>{
             if(res.code===0 && res.data){
                 setEnviData(res.data)
@@ -32,17 +35,29 @@ const Envi = props =>{
         })
     },[fresh])
 
-    const add = () =>{
+    /**
+     * 添加环境配置
+     */
+    const addEnvi = () =>{
         setFormValue("")
         setVisible(true)
     }
 
-    // 删除配置
-    const del = (text,record) => {
+    /**
+     * 删除环境配置
+     * @param text
+     * @param record
+     */
+    const delEnvi = (text,record) => {
         deletePipelineScm(record.scmId)
     }
 
-    const edit = (text,record) => {
+    /**
+     * 编辑环境配置
+     * @param text
+     * @param record
+     */
+    const editEnvi = (text,record) => {
         setFormValue(record)
         setVisible(true)
     }
@@ -78,8 +93,8 @@ const Envi = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return  <Listaction
-                            edit={()=>edit(text,record)}
-                            del={()=>del(text,record)}
+                            edit={()=>editEnvi(text,record)}
+                            del={()=>delEnvi(text,record)}
                         />
             }
         }
@@ -89,7 +104,7 @@ const Envi = props =>{
         <div className="resources-upper">
             <BreadcrumbContent firstItem={"环境配置"} />
             <Btn
-                onClick={add}
+                onClick={addEnvi}
                 type={"primary"}
                 title={"添加配置"}
                 icon={<PlusOutlined/>}

@@ -5,23 +5,18 @@ import AuthType from "../../authCommon/AuthType";
 import ModalTitle from "../../../common/modalTitle/ModalTitle";
 import {autoHeight,Validation} from "../../../common/client/Client";
 
+/**
+ * 认证配置弹出框，添加，更新
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const AuthModal = props =>{
 
     const {visible,setVisible,createAuth,formValue,updateAuth} = props
 
     const [form] = Form.useForm()
-
     const [height,setHeight] = useState(0)
-
-    useEffect(()=>{
-        if(visible){
-            if(formValue){
-                form.setFieldsValue(formValue)
-                return
-            }
-            form.resetFields()
-        }
-    },[visible])
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -34,6 +29,20 @@ const AuthModal = props =>{
         setHeight(autoHeight())
     }
 
+    useEffect(()=>{
+        if(visible){
+            //  表单初始化
+            if(formValue){
+                form.setFieldsValue(formValue)
+                return
+            }
+            form.resetFields()
+        }
+    },[visible])
+
+    /**
+     * 认证添加或更新确定
+     */
     const onOk = () =>{
         form.validateFields().then((values) => {
             if(formValue){

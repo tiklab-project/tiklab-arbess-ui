@@ -14,26 +14,25 @@ import {message} from "antd";
 
 export class HomePageStore{
 
-    @observable pipelineNearList = []
-
+    @observable pipelineNearList = [] // 最近打开流水线
     @observable taskList = []  // 代办
-    @observable messageList = []
+    @observable messageList = [] // 消息
     @observable messPage = {
         defaultCurrent: 1,
         pageSize: 15,
         total: 1,
-    }
+    }  // 消息分页
     @observable dynaPage = {
         defaultCurrent: 1,
         pageSize: 15,
         total: 1,
-    }
+    } // 动态分页
     @observable messagePagination = 1 //控制接口中页码page的变化，更新接口 -- 消息
-    @observable unread = ""
+    @observable unread = "" // 未读消息num
     @observable mesFresh = false
+    @observable dynamicList = [] // 动态
 
-    @observable dynamicList = []
-
+    // 消息page
     @action
     setMessagePagination = value =>{
         this.messagePagination = value

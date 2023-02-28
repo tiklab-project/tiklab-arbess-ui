@@ -2,6 +2,12 @@ import React from "react";
 import Inputs from "../Inputs";
 import FindAuth from "../FindAuth";
 
+/**
+ * 源码 -- Svn
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const CodeSvn = props =>{
 
     const {dataItem} = props

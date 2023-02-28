@@ -9,12 +9,18 @@ import {
 } from "@ant-design/icons";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
-import Btn from "../../common/btn/Btn";
-import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
-import PipelineAddInfo from "../pipeline/components/PipelineAddInfo";
-import {Loading} from "../../common/loading/Loading";
+import Btn from "../../../common/btn/Btn";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
+import {Loading} from "../../../common/loading/Loading";
 import "./PipelineBasicInfo.scss";
 
+/**
+ * 流水线信息
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PipelineBasicInfo = props =>{
 
     const {pipelineStore} = props
@@ -22,9 +28,10 @@ const PipelineBasicInfo = props =>{
     const {deletePipeline,pipeline,isLoading}=pipelineStore
 
     const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
-    const [powerType,setPowerType] = useState(1)
+    const [powerType,setPowerType] = useState(1) // 流水线权限
 
     useEffect(()=>{
+        // 初始化流水线权限
         pipeline && setPowerType(pipeline && pipeline.power)
     },[pipeline])
 
@@ -33,13 +40,16 @@ const PipelineBasicInfo = props =>{
             title: "删除",
             icon: <ExclamationCircleOutlined />,
             content: "删除后数据无法恢复",
-            onOk:()=>del(),
+            onOk:()=>delPipeline(),
             okText: "确认",
             cancelText: "取消",
         });
     }
 
-    const del = () =>{
+    /**
+     * 删除流水线
+     */
+    const delPipeline = () =>{
         deletePipeline(pipeline.id).then(res=>{
             props.history.push("/index/pipeline")
         })
@@ -53,14 +63,14 @@ const PipelineBasicInfo = props =>{
             icon: <EditOutlined />,
             enCode:"pipeline_update",
             content: <div className="bottom-rename">
-                <PipelineAddInfo
-                    {...props}
-                    powerType={powerType}
-                    setPowerType={setPowerType}
-                    set={true}
-                    onClick={()=>setOpenOrClose(1)}
-                />
-            </div>
+                        <PipelineAddInfo
+                            {...props}
+                            powerType={powerType}
+                            setPowerType={setPowerType}
+                            set={true}
+                            onClick={()=>setOpenOrClose(1)}
+                        />
+                    </div>
         },
         {
             key:2,
@@ -86,12 +96,19 @@ const PipelineBasicInfo = props =>{
         }
     ]
 
-    // 是否存在key -- ture || false
+    /**
+     * 是否符合要求
+     * @param key
+     * @returns {boolean}
+     */
     const isExpandedTree = key => {
         return expandedTree.some(item => item ===key)
     }
 
-    // 展开和闭合
+    /**
+     * 展开和闭合
+     * @param key
+     */
     const setOpenOrClose = key => {
         if (isExpandedTree(key)) {
             // false--闭合

@@ -3,10 +3,16 @@ import {inject,observer} from "mobx-react";
 import {Spin} from "antd";
 import {AimOutlined,HistoryOutlined} from "@ant-design/icons";
 import Guide from "../../common/guide/Guide";
-import DynamicList from "../../dynamic/components/DynamicList";
+import DynamicList from "../../common/dynamic/DynamicList";
 import EmptyText from "../../common/emptyText/EmptyText";
 import "./homePage.scss";
 
+/**
+ * 首页
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
@@ -18,7 +24,7 @@ const HomePage = props =>{
     const [logLoading,setLogLoading] = useState(true) // 动态加载
 
     useEffect(()=>{
-        // 所有流水线
+        // 获取所有流水线
         findAllPipelineStatus().then(res=>{
             if(res.code===0){
                 const params = {
@@ -28,7 +34,7 @@ const HomePage = props =>{
                     },
                     bgroup:"matflow",
                     content:{
-                        pipelineId:pipeline(res.data)
+                        pipelineId:setPipelineId(res.data)
                     }
                 }
                 // 近期动态
@@ -36,16 +42,20 @@ const HomePage = props =>{
             }
         })
 
-        // 我收藏的流水线
+        // 获取我收藏的流水线
         findAllFollow()
 
-        // 最近打开的流水线
+        // 获取最近打开的流水线
         findAllOpen(5).then(()=>setNewlyLoading(false))
 
     },[])
 
-    // 流水线所有id
-    const pipeline = data =>{
+    /**
+     * 获取流水线所有id
+     * @param data
+     * @returns {*[流水线id]}
+     */
+    const setPipelineId = data =>{
         const newArr = []
         data && data.map(item => {
             newArr.push(item.id)
@@ -53,7 +63,54 @@ const HomePage = props =>{
         return newArr
     }
 
-    // 最近访问的流水线
+    /**
+     * 去流水线页面
+     * @param type
+     */
+    const goPipeline = type =>{
+        setListType(type)
+        props.history.push("/index/pipeline")
+    }
+
+    const stableList = [
+        {
+            type:1,
+            title: "我的流水线",
+            icon:"#icon-renwu",
+            listLength:pipelineLength
+        },
+        {
+            type:2,
+            title:"我的收藏",
+            icon:"#icon-icon-test",
+            listLength: followLength
+        },
+    ]
+
+    const renderStableList = item => {
+        return(
+            <div key={item.type} className="quickIn-group" onClick={()=>goPipeline(item.type)}>
+                <div className="quickIn-group-wrap">
+                    <div className="quickIn-group-title">
+                        <span className="quickIn-group-icon">
+                            <svg className="icon" aria-hidden="true">
+                                <use xlinkHref={`${item.icon}`}/>
+                            </svg>
+                        </span>
+                        <span>{item.title}</span>
+                    </div>
+                    <div className="quickIn-group-number">{item.listLength}</div>
+                </div>
+            </div>
+        )
+    }
+
+
+    /**
+     * 最近访问的流水线
+     * @param item
+     * @returns {JSX.Element}
+     */
     const renderList = item => {
         return  <div className="pipelineRecent-item" key={item.openId}
                      onClick={()=> props.history.push(`/index/pipeline/${item.pipeline && item.pipeline.id}/survey`)}
@@ -81,45 +138,6 @@ const HomePage = props =>{
             </div>
         </div>
     }
-
-    const stableList = [
-        {
-            id:1,
-            title: "我的流水线",
-            icon:"#icon-renwu",
-            listLength:pipelineLength
-        },
-        {
-            id:2,
-            title:"我的收藏",
-            icon:"#icon-icon-test",
-            listLength: followLength
-        },
-    ]
-
-    const renderStableList = item => {
-        return(
-            <div key={item.id} className="quickIn-group" onClick={()=>goPipeline(item.id)}>
-                <div className="quickIn-group-wrap">
-                    <div className="quickIn-group-title">
-                        <span className="quickIn-group-icon">
-                            <svg className="icon" aria-hidden="true">
-                                <use xlinkHref={`${item.icon}`}/>
-                            </svg>
-                        </span>
-                        <span>{item.title}</span>
-                    </div>
-                    <div className="quickIn-group-number">{item.listLength}</div>
-                </div>
-            </div>
-        )
-    }
-
-    const goPipeline = id =>{
-        setListType(id)
-        props.history.push("/index/pipeline")
-    }
-
 
     return(
         <div className="homePage">

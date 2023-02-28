@@ -9,7 +9,10 @@ import Btn from "../../../common/btn/Btn";
 import "../components/Trigger.scss";
 
 /**
- *  触发器
+ * 触发器页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Trigger = props =>{
 
@@ -22,20 +25,34 @@ const Trigger = props =>{
     const [triggerVisible,setTriggerVisible] = useState(false)
 
     useEffect(()=>{
+        // 初始化触发器
         pipeline && findAllTriggerConfig(pipeline.id)
     },[pipeline,isFindTrigger])
 
+    /**
+     * 添加触发器
+     */
     const addTrigger = () => {
         setFormValue("")
         setTriggerVisible(true)
     }
 
-    const edit = (text,record) => {
+    /**
+     * 编辑触发器
+     * @param text
+     * @param record
+     */
+    const editTrigger = (text,record) => {
         setFormValue(record)
         setTriggerVisible(true)
     }
 
-    const del = (text,record) => {
+    /**
+     * 删除触发器
+     * @param text
+     * @param record
+     */
+    const delTrigger = (text,record) => {
         deleteTriggerConfig(record.configId)
     }
 
@@ -44,15 +61,11 @@ const Trigger = props =>{
             title: "执行时间",
             dataIndex: "execTime",
             key: "execTime",
-            // width:"40%",
-            // ellipsis:true
         },
         {
             title: "执行方式",
             dataIndex: "taskType",
             key: "taskType",
-            // width:"40%",
-            // ellipsis:true
             render:(text,record)=>{
                 switch (text) {
                     case 1:
@@ -66,14 +79,12 @@ const Trigger = props =>{
             title: "操作",
             dataIndex: "action",
             key: "action",
-            // width:"40%",
-            // ellipsis:true
-            render:(text,record) => {
-                return  <Listaction
-                    edit={()=>edit(text,record)}
-                    del={()=>del(text,record)}
+            render:(text,record) =>(
+                <Listaction
+                    edit={()=>editTrigger(text,record)}
+                    del={()=>delTrigger(text,record)}
                 />
-            }
+            )
         },
     ]
 

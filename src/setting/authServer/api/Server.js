@@ -1,5 +1,11 @@
 import {serviceLoc} from "../../../common/utils/Requset";
 
+/**
+ * 添加服务配置
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function CreateAuthServer(data) {
     return serviceLoc.request({
         url:"/authServer/createAuthServer",
@@ -8,6 +14,12 @@ export function CreateAuthServer(data) {
     })
 }
 
+/**
+ * 删除服务配置
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function DeleteAuthServer(data) {
     return serviceLoc.request({
         url:"/authServer/deleteAuthServer",
@@ -16,6 +28,12 @@ export function DeleteAuthServer(data) {
     })
 }
 
+/**
+ * 更新服务配置
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function UpdateAuthServer(data) {
     return serviceLoc.request({
         url:"/authServer/updateAuthServer",
@@ -24,6 +42,12 @@ export function UpdateAuthServer(data) {
     })
 }
 
+/**
+ * 获取服务配置
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function FindAllAuthServerList(data) {
     return serviceLoc.request({
         url:"/authServer/findAllAuthServerList",
@@ -32,7 +56,12 @@ export function FindAllAuthServerList(data) {
     })
 }
 
-// 效验回调地址
+/**
+ * 获取回调地址
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function CallbackUrl(data) {
     return serviceLoc.request({
         url:"/codeAuthorize/callbackUrl",

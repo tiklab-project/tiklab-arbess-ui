@@ -2,6 +2,12 @@ import React from "react";
 import Inputs from "../Inputs";
 import FindAuth from "../FindAuth";
 
+/**
+ * 源码 -- Git && Gitlab
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const CodeGitOrGitlab = props =>{
 
     const {dataItem}=props

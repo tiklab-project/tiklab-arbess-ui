@@ -12,15 +12,18 @@ import {SpinLoading} from "../../../common/loading/Loading";
 import "./HistoryPipeline.scss";
 
 /**
- * 查询单个流水线历史运行列表
+ * 单个流水线历史页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const HistoryPipeline = props => {
 
     const {historyStore,pipelineStore} = props
 
-    const {findPipelineState,pipelineRunStatus,findPageHistory,deleteHistoryLog,
-        findAllLog,killInstance,historyList,freshen,pageCurrent,setPageCurrent,
-        execData,page,setHistoryList} = historyStore
+    const {findPipelineState,pipelineRunStatus,findPageHistory,deleteHistoryLog,findAllLog,killInstance,
+        historyList,freshen,pageCurrent,setPageCurrent,execData,page,setHistoryList
+    } = historyStore
     const {pipeline,findDmUserPage,pipelineUserList} = pipelineStore
 
     const [strPipeDetails,setStrPipeDetails] = useState(false)
@@ -39,9 +42,9 @@ const HistoryPipeline = props => {
         }
     },[pipeline])
 
-    // 运行状态加载
     let interval=null
     useEffect(() => {
+        // 运行状态加载
         pipeline && findPipelineState(pipeline.id).then(res=>{
             if(res.data===2){
                 interval=setInterval(()=>
@@ -59,8 +62,8 @@ const HistoryPipeline = props => {
         }
     }, [pipeline,freshen])
 
-    // 所有历史列表
     useEffect(()=>{
+        // 所有历史列表
         pipeline && findPageHistory({
             pipelineId:pipeline.id,
             state:state,
@@ -71,7 +74,10 @@ const HistoryPipeline = props => {
         })
     },[pipeline,freshen,pageCurrent,userId,state,type])
 
-    // 构建详情
+    /**
+     * 构建详情
+     * @param record
+     */
     const details = record =>{
         switch (record.runStatus) {
             case 30:
@@ -84,7 +90,10 @@ const HistoryPipeline = props => {
         setStrPipeDetails(true)
     }
 
-    // 换页
+    /**
+     * 换页
+     * @param pages
+     */
     const changPage = pages =>{
         setPageCurrent(pages)
     }

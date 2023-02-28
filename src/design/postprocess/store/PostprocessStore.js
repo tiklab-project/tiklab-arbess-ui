@@ -13,7 +13,7 @@ export class PostprocessStore {
     @observable postprocessData = []
     @observable fixedPostprocessData = []
     @observable isFindPostprocessData = false
-    @observable mesSendData = []
+    @observable mesSendData = []  //未配置的消息发送方式
 
     @action
     setIsFindPostprocessData = value =>{

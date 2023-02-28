@@ -3,12 +3,15 @@ import {inject,observer} from "mobx-react";
 import {Input,message,Tooltip} from "antd";
 import {PlusCircleOutlined,MinusCircleOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/Btn";
-import {x} from "../tasks/components/Common";
+import {WhetherChange} from "../tasks/components/Common";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import "./Variable.scss";
 
 /**
- * 环境变量
+ * task的变量
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Variable = props => {
 
@@ -18,9 +21,16 @@ const Variable = props => {
     const [bordered,serBordered] = useState(' ')
 
     useEffect(()=>{
+        // 初始化变量
         findAllVariable(dataItem.configId)
     },[fresh,dataItem.configId])
 
+    /**
+     * 获取符合要求的item
+     * @param data
+     * @param varId
+     * @returns {*}
+     */
     const isequal = (data,varId) =>{
         let a
         data && data.map(item=>{
@@ -31,13 +41,21 @@ const Variable = props => {
         return a
     }
 
+    /**
+     * 改变文本框值
+     * @param e
+     * @param item
+     * @param name
+     */
     const onChange = (e,item,name) =>{
         const zz = isequal(variableData,item.varId)
         zz[name] = e.target.value
         setVariableData([...variableData])
     }
 
-    // 添加
+    /**
+     * 添加环境变量
+     */
     const addInput = () =>{
         createVariable({
             type:2,
@@ -46,16 +64,24 @@ const Variable = props => {
         })
     }
 
-    // 删除
+    /**
+     * 删除环境变量
+     * @param item
+     */
     const reduceInput = (item) => {
         deleteVariable(item.varId)
     }
 
-    // 更新
+    /**
+     * 确定更改
+     * @param e
+     * @param item
+     * @param name
+     */
     const onBlur = (e,item,name) =>{
         serBordered('')
         const zz = isequal(fixVariableData,item.varId)
-        if(x(e.target.value,zz[name])){
+        if(WhetherChange(e.target.value,zz[name])){
             const obj = {}
             obj[name] = e.target.value
             const params = {

@@ -4,13 +4,19 @@ import {message,Tooltip,Table,Space,Spin} from "antd";
 import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
-import Listname from "../../../common/list/Listname";
+import ListIcon from "../../../common/list/ListIcon";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
 import pip_halt from "../../../assets/images/svg/pip_halt.svg";
 import "./PipelineTable.scss";
 
+/**
+ * 流水线表格页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PipelineTable = props =>{
 
     const {historyStore,pipelineStore}=props
@@ -18,7 +24,10 @@ const PipelineTable = props =>{
     const {pipelineStartStructure,killInstance}=historyStore
     const {pipelineList,updateFollow,fresh,setFresh} = pipelineStore
 
-    //收藏
+    /**
+     * 收藏
+     * @param record
+     */
     const collectAction = record => {
         updateFollow({id:record.id}).then(res=>{
             if(record.collect===0){
@@ -30,27 +39,46 @@ const PipelineTable = props =>{
         })
     }
 
+    /**
+     * 收藏提示
+     * @param res
+     * @param info
+     */
     const collectMessage = (res,info) =>{
         if(res.code===0){
-            message.info({content:`${info}成功`,duration:0.5,className:"message"})
+            message.info(`${info}成功`,0.5)
         }else {
-            message.info({content: res.msg,duration:0.5,className:"message"})
+            message.info(res.msg,0.5)
         }
     }
 
-    //去概况页面
+    /**
+     * 去概况页面
+     * @param text
+     * @param record
+     * @returns {*}
+     */
     const goPipelineTask= (text,record) => props.history.push(`/index/pipeline/${record.id}/survey`)
 
-    //去历史页面
+    /**
+     * 去历史页面
+     * @param record
+     * @returns {*}
+     */
     const goHistory = record => props.history.push(`/index/pipeline/${record.id}/structure`)
 
-    //运行或者停止
+    /**
+     * 运行或者终止
+     * @param record
+     */
     const work = record =>{
         if(record.state === 2){
+            // 终止
             killInstance(record.id).then(()=>{
                 setFresh(!fresh)
             })
         }else {
+            // 运行
             pipelineStartStructure(record.id).then(res=>{
                 if(res.data){
                     setFresh(!fresh)
@@ -59,13 +87,14 @@ const PipelineTable = props =>{
         }
     }
 
-    const tooltip = (statu,text,executor) =>{
-        return <div>
+    // 构建信息提示
+    const buildStatusTooltip = (statu,text,executor) => (
+        <div>
             <div>执行人：{executor}</div>
             <div>执行状态：{statu}</div>
             <div>执行时间：{text}</div>
         </div>
-    }
+    )
 
     const columns = [
         {
@@ -76,7 +105,7 @@ const PipelineTable = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return  <span  className='pipelineTable-name' onClick={()=>goPipelineTask(text,record)}>
-                            <Listname text={text} colors={record.color}/>
+                            <ListIcon text={text} colors={record.color}/>
                             <span>{text}</span>
                         </span>
             }
@@ -90,35 +119,35 @@ const PipelineTable = props =>{
             render:(text,record) =>{
                 switch (record.buildStatus) {
                     case 10:
-                        return  <Tooltip title={tooltip("成功",text,record.execUser.name)}>
+                        return  <Tooltip title={buildStatusTooltip("成功",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_success} alt={"log"} className="imgs"/>
                                         {text}
                                     </Space>
                                 </Tooltip>
                     case 1:
-                        return  <Tooltip title={tooltip("失败",text,record.execUser.name)}>
+                        return  <Tooltip title={buildStatusTooltip("失败",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_error} alt={"log"} className="imgs"/>
                                         {text}
                                     </Space>
                                 </Tooltip>
                     case 30:
-                        return <Tooltip title={tooltip("运行中",text,record.execUser.name)}>
+                        return <Tooltip title={buildStatusTooltip("运行中",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_fog} alt={"log"} className="imgs"/>
                                         {text}
                                     </Space>
                                 </Tooltip>
                     case 0:
-                        return  <Tooltip title={tooltip("待构建","待构建","无")}>
+                        return  <Tooltip title={buildStatusTooltip("待构建","待构建","无")}>
                                     <Space>
                                         <img src={pip_fog} alt={"log"} className="imgs"/>
                                         待构建
                                     </Space>
                                 </Tooltip>
                     case 20:
-                        return   <Tooltip title={tooltip("终止",text,record.execUser.name)}>
+                        return   <Tooltip title={buildStatusTooltip("终止",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_halt} alt={"log"} className="imgs"/>
                                         {text}

@@ -1,6 +1,11 @@
 import {serviceLoc} from "../../common/utils/Requset";
 
-// 最近打开的流水线
+/**
+ * 最近打开的流水线
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindAllOpen (data) {
     return serviceLoc.request({
         url: "/pipeline/findAllOpen",
@@ -9,7 +14,12 @@ export function  FindAllOpen (data) {
     })
 }
 
-// 所有动态
+/**
+ * 所有动态
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  Findlogpage (data){
     return serviceLoc.request({
         url:"/oplog/findlogpage",
@@ -18,7 +28,12 @@ export function  Findlogpage (data){
     })
 }
 
-// 我的代办
+/**
+ * 我的代办
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  Findtodopage (data){
     return serviceLoc.request({
         url:"/todo/findtodopage",
@@ -27,7 +42,12 @@ export function  Findtodopage (data){
     })
 }
 
-// 全部消息
+/**
+ * 全部消息
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  FindMessageItemPage(data){
     return serviceLoc.request({
         url:"/message/messageItem/findMessageItemPage",
@@ -36,7 +56,12 @@ export function  FindMessageItemPage(data){
     })
 }
 
-// 更新消息
+/**
+ * 更新消息
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  UpdateMessageItem(data){
     return serviceLoc.request({
         url:"/message/messageItem/updateMessageItem",
@@ -45,7 +70,12 @@ export function  UpdateMessageItem(data){
     })
 }
 
-// 删除消息
+/**
+ * 删除消息
+ * @param data
+ * @returns {Promise<unknown>}
+ * @constructor
+ */
 export function  DeleteMessageItem(data){
     return serviceLoc.request({
         url:"/message/messageItem/deleteMessageItem",

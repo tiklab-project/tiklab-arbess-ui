@@ -16,7 +16,7 @@ export class ServerStore{
     @observable modalVisible = false
     @observable formValue = ""
     @observable authServerList = []
-    @observable callUrlWarn = ""
+    @observable callUrlWarn = "" // 回调地址
 
     @action
     setModalVisible = value =>{

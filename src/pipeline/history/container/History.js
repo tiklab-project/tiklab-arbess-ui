@@ -12,7 +12,10 @@ import {runStatus,actionEn,runWay} from "../components/HistoryTrigger";
 import "../components/History.scss";
 
 /**
- * 所有历史运行列表
+ * 所有历史页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const History = props => {
 
@@ -64,7 +67,10 @@ const History = props => {
         return ()=>clearInterval(inter)
     },[freshen,pageCurrent,pipelineId,state,type,detailsVisible])
 
-    // 列表数据详情
+    /**
+     * 列表数据详情
+     * @param record
+     */
     const details = record => {
         switch (record.runStatus) {
             case 30:
@@ -78,6 +84,10 @@ const History = props => {
         setDetailsVisible(true)
     }
 
+    /**
+     * 换也
+     * @param pages
+     */
     const changPage = pages =>{
         setPageCurrent(pages)
     }

@@ -12,21 +12,35 @@ import {
 import {Profile} from "tiklab-eam-ui";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg"
 
-// 删除历史
+/**
+ * 删除历史
+ * @param record
+ * @param deleteHistoryLog
+ */
 const del = (record,deleteHistoryLog) =>{
     deleteHistoryLog(record.historyId)
 }
 
-// 终止运行
-const end = (killInstance,pipeline) => {
+/**
+ * 终止运行
+ * @param killInstance：终止
+ * @param pipeline：流水线信息
+ */
+const terminateOperation = (killInstance,pipeline) => {
     killInstance(pipeline.id)
 }
 
-// 历史运行--行操作
+/**
+ * 表格，历史操作
+ * @param record
+ * @param deleteHistoryLog：删除
+ * @param killInstance：终止
+ * @returns 终止，删除
+ */
 export const actionEn = (record,deleteHistoryLog,killInstance) =>{
     switch (record.runStatus) {
         case 30:
-            return  <Tooltip title={"终止"} onClick={()=>end(killInstance,record.pipeline)}>
+            return  <Tooltip title={"终止"} onClick={()=>terminateOperation(killInstance,record.pipeline)}>
                         <MinusCircleOutlined style={{cursor:"pointer"}}/>
                     </Tooltip>
         default:
@@ -48,7 +62,11 @@ export const actionEn = (record,deleteHistoryLog,killInstance) =>{
     }
 }
 
-// 运行状态
+/**
+ * 运行状态
+ * @param type：运行类型
+ * @returns {JSX.Element}
+ */
 export const runStatus = type =>{
     switch(type){
         case 1 :
@@ -79,7 +97,12 @@ export const runStatus = type =>{
     }
 }
 
-// 触发信息--手动或自动
+/**
+ * 触发信息
+ * @param text（1：手动；2：自动）
+ * @param record
+ * @returns {JSX.Element}
+ */
 export const runWay = (text,record) => {
     return (
         <div className="str-table-runWay">

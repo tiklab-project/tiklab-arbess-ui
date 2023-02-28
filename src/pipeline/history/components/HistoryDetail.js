@@ -9,7 +9,10 @@ import Btn from "../../../common/btn/Btn";
 import "./HistoryDetail.scss";
 
 /**
- * 单个历史运行详情
+ * 历史运行详情页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const HistoryDetail = props =>{
 
@@ -73,7 +76,11 @@ const HistoryDetail = props =>{
         }
     },[execData,execIndex,id])
 
-    // 运行日志打印（自动）
+    /**
+     * 运行日志打印（自动）
+     * @param data
+     * @returns {*}
+     */
     const autoEuqals = data =>{
         let a
         if(data && data.some(item=>item.state===0)){
@@ -89,6 +96,11 @@ const HistoryDetail = props =>{
         return a
     }
 
+    /**
+     * 获取符合要求的值
+     * @param data
+     * @returns {*}
+     */
     const isequal = data =>{
         for(let i=0 ; i<data.length;i++){
             if(data[i].id !== id){
@@ -98,14 +110,20 @@ const HistoryDetail = props =>{
         }
     }
 
-    // 运行日志打印（手动，三层嵌套）
+    /**
+     * 运行日志打印（手动，三层嵌套）
+     * @param data
+     * @returns {*}
+     */
     const manualEquals = data =>{
 
+        // 第一层
         let results = isequal(data)
         if(results != null){
             return results
         }
 
+        // 第二层
         for(let i=0 ; i<data.length;i++){
             let a = data[i].runLogList
             if(!a){
@@ -118,6 +136,7 @@ const HistoryDetail = props =>{
             return result
         }
 
+        // 第三层
         for(let i=0 ; i<data.length;i++){
             let a = data[i].runLogList
             if(!a){
@@ -137,12 +156,18 @@ const HistoryDetail = props =>{
         }
     }
 
-    // 关闭滚动条一直在下面
+    /**
+     * 关闭滚动条一直在下面
+     */
     const onWheel = () =>{
         setIsActiveSlide(false)
     }
 
-    // 控制台日志
+    /**
+     * 控制台日志
+     * @param logData
+     * @returns {JSX.Element}
+     */
     const renderLog = logData =>{
         const outLog=document.getElementById("str_outLog")
         if(index===2 && outLog && isActiveSlide){
@@ -153,13 +178,20 @@ const HistoryDetail = props =>{
                 </div>
     }
 
-    // 终止运行
-    const end = () => killInstance(pipeline.id)
+    /**
+     * 终止运行
+     */
+    const terminateOperation = () => killInstance(pipeline.id)
 
-    // 返回列表
+    /**
+     * 返回列表
+     */
     const goBack = () => setIsDetails(false)
 
-    // 面包屑 secondItem = isAllName() + isFindName()
+    /**
+     * 面包屑 secondItem = isAllName() + isFindName()
+     * @returns {*|string}
+     */
     const isAllName = () => isAll==="structure" ? pipeline && pipeline.name:"详情"
     const isFindName = () => index===1 ? itemData && itemData.name:execData && execData.name
 
@@ -178,7 +210,7 @@ const HistoryDetail = props =>{
                 />
                 {
                     index===2 && execData.allState!==0 &&
-                    <Btn title={"终止"} icon={<MinusCircleOutlined/>} onClick={()=>end()}/>
+                    <Btn title={"终止"} icon={<MinusCircleOutlined/>} onClick={()=>terminateOperation()}/>
                 }
             </div>
             <div className="strDetail-card">

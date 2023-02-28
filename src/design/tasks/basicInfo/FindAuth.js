@@ -6,6 +6,13 @@ import AuthAddBtn from "../../../setting/auth/components/AuthAddBtn";
 import HostAddBtn from "../../../setting/authHost/component/HostAddBtn";
 import EmptyText from "../../../common/emptyText/EmptyText";
 
+/**
+ * form下拉框
+ * 认证，授权，凭证……
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const FindAuth = props =>{
 
     const {pipelineStore,configStore,authStore,serverStore,hostStore}=props
@@ -16,15 +23,20 @@ const FindAuth = props =>{
     const {pipeline} = pipelineStore
     const {updateTaskConfig,dataItem} = configStore
 
-    const [list,setList] = useState([])
-    const [open,setOpen] = useState(false)
-    const [bordered,setBordered] = useState(false)
-    const [showArrow,setShowArrow] = useState(false)
+    const [list,setList] = useState([])  //下拉框列表
+    const [open,setOpen] = useState(false)  //下拉框visible
+    const [bordered,setBordered] = useState(false) //下拉框边框
+    const [showArrow,setShowArrow] = useState(false)  //
 
     useEffect(()=>{
+        // 初始化下拉框list
         dataItem.type && initList(dataItem.type)
     },[dataItem.type,authFresh,serverFresh,hostFresh])
 
+    /**
+     * 获取下拉框list
+     * @param dataItemType
+     */
     const initList = dataItemType =>{
         switch (dataItemType) {
             case 1:
@@ -45,7 +57,20 @@ const FindAuth = props =>{
         }
     }
 
-    // 改变凭证
+    /**
+     * 设置下拉框List,setList
+     * @param res
+     */
+    const getList = res =>{
+        if(res.code===0 && res.data){
+            setList(res.data)
+        }
+    }
+
+    /**
+     * 改变凭证
+     * @param value
+     */
     const changeGitSelect = value =>{
         const params = {
             pipeline:{id:pipeline.id},
@@ -58,6 +83,10 @@ const FindAuth = props =>{
         setBordered(false)
     }
 
+    /**
+     * dataItem添加对象
+     * @param value
+     */
     const setItem = value => {
         list && list.map(item=>{
             if(setKey(item)===value){
@@ -68,18 +97,11 @@ const FindAuth = props =>{
         })
     }
 
-    const getList = res =>{
-        if(res.code===0 && res.data){
-            setList(res.data)
-        }
-    }
-
-    // 获取焦点，获取下拉内容
-    const onFocus = () => {
-        setBordered(true)
-    }
-
-    //认证标题
+    /**
+     * 认证标题
+     * @param type
+     * @returns {string}
+     */
     const label = type => {
         switch (type) {
             case 1:
@@ -99,7 +121,11 @@ const FindAuth = props =>{
         }
     }
 
-    // 下拉框 id
+    /**
+     * 下拉框 id
+     * @param item
+     * @returns {id}
+     */
     const setKey = item =>{
         switch (dataItem.type) {
             case 1:
@@ -118,7 +144,11 @@ const FindAuth = props =>{
         }
     }
 
-    // 下拉框添加
+    /**
+     * 下拉框按钮
+     * @param type
+     * @returns {JSX.Element}
+     */
     const renderBtn = type =>{
         switch (type) {
             case 1:
@@ -137,7 +167,12 @@ const FindAuth = props =>{
         }
     }
 
-    const selectValue = item =>{
+    /**
+     * 下拉框label
+     * @param item
+     * @returns {string}
+     */
+    const selectLabel = item =>{
         switch (dataItem.type) {
             case 1:
             case 4:
@@ -166,7 +201,7 @@ const FindAuth = props =>{
                 showArrow={showArrow}
                 onMouseEnter={()=>setShowArrow(true)}
                 onMouseLeave={()=>setShowArrow(false)}
-                onFocus={onFocus}
+                onFocus={()=>setBordered(true)}
                 onBlur={()=>setBordered(false)}
                 onChange={changeGitSelect}
                 notFoundContent={<EmptyText/>}
@@ -186,7 +221,7 @@ const FindAuth = props =>{
                 )}
             >
                 {list && list.map((item,index)=>{
-                    return <Select.Option value={setKey(item)} key={index}>{selectValue(item)}</Select.Option>
+                    return <Select.Option value={setKey(item)} key={index}>{selectLabel(item)}</Select.Option>
                 })}
             </Select>
         </Form.Item>

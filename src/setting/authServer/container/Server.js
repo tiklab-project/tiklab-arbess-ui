@@ -4,14 +4,17 @@ import {Space,Table} from "antd"
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
-import Listname from "../../../common/list/Listname";
+import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
 import Tabs from "../../../common/tabs/Tabs";
 import ServerAddBtn from "../components/ServerAddBtn";
 import "../../authCommon/Auth.scss";
 
 /**
- * 资源配置--服务配置
+ * 服务配置页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Server = props =>{
 
@@ -22,19 +25,34 @@ const Server = props =>{
     const [activeTab,setActiveTab] = useState(0)
 
     useEffect(()=>{
+        // 初始化服务配置
         findAllAuthServerList(activeTab)
     },[activeTab,serverFresh])
 
+    /**
+     * 切换服务配置类型
+     * @param item
+     */
     const clickServerType = item =>{
         setActiveTab(item.id)
     }
 
-    const edit = (text,record) => {
+    /**
+     * 编辑服务配置
+     * @param text
+     * @param record
+     */
+    const editServer = (text,record) => {
         setModalVisible(true)
         setFormValue(record)
     }
 
-    const del = (text,record) =>{
+    /**
+     * 删除服务配置
+     * @param text
+     * @param record
+     */
+    const delServer = (text,record) =>{
         deleteAuthServer(record.serverId)
     }
 
@@ -61,13 +79,15 @@ const Server = props =>{
         },
     ]
 
+    // 标题
     const name = text =>{
         return  <span>
-                    <Listname text={text}/>
+                    <ListIcon text={text}/>
                     <span>{text}</span>
                 </span>
     }
 
+    // 创建人
     const user = (text,record) =>{
         return  <Space>
                     <Profile userInfo={record.user}/>
@@ -75,6 +95,7 @@ const Server = props =>{
                 </Space>
     }
 
+    // 权限
     const authPublic = text =>{
         switch (text) {
             case 1:
@@ -84,13 +105,15 @@ const Server = props =>{
         }
     }
 
+    // 操作
     const action = (text,record) =>{
         return  <Listaction
-                    edit={()=>edit(text,record)}
-                    del={()=>del(text,record)}
+                    edit={()=>editServer(text,record)}
+                    del={()=>delServer(text,record)}
                 />
     }
 
+    // 全部
     const allColumn = [
         {
             title:"名称",
@@ -152,7 +175,7 @@ const Server = props =>{
         }
     ]
 
-    // 第三方授权认证
+    // 第三方授权认证 Gitee和Github
     const authorizeColumn = [
         {
             title:"名称",
@@ -203,6 +226,7 @@ const Server = props =>{
         }
     ]
 
+    // sonar和nexus
     const authColumn = [
         {
             title:"名称",
@@ -268,6 +292,7 @@ const Server = props =>{
         }
     ]
 
+    // 表格内容
     const columns = activeTab =>{
         switch (activeTab) {
             case 0:

@@ -4,14 +4,23 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/Btn";
 import HostModal from "./HostModal";
 
-const CodeBtn = props =>{
+/**
+ * 主机配置添加按钮
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+const HostAddBtn = props =>{
 
     const {hostStore,isConfig,type} = props
     const {createAuthHost,modalVisible,setModalVisible,formValue,setFormValue,updateAuthHost} = hostStore
 
     const [goodsVisible,setGoodsVisible] = useState(false)
 
-    const btnClick = () =>{
+    /**
+     * 添加按钮操作
+     */
+    const addHostBtn = () =>{
         setFormValue("")
         switch (type) {
             case 52:
@@ -22,19 +31,45 @@ const CodeBtn = props =>{
         }
     }
 
+    /**
+     * 设置弹出框visible
+     * @returns {boolean|*}
+     */
+    const visible = () => {
+        switch (type) {
+            case 52:
+                return goodsVisible
+            default:
+                return modalVisible
+        }
+    }
+
+    /**
+     * 设置弹出框setVisible
+     * @returns {((value: (((prevState: boolean) => boolean) | boolean)) => void)|*}
+     */
+    const setVisible = () =>{
+        switch (type) {
+            case 52:
+                return setGoodsVisible
+            default:
+                return setModalVisible
+        }
+    }
+
     return(
         <>
             {
                 isConfig ?
                     <Btn
                         type={"row"}
-                        onClick={btnClick}
+                        onClick={addHostBtn}
                         title={"添加"}
                         icon={<PlusOutlined/>}
                     />
                     :
                     <Btn
-                        onClick={btnClick}
+                        onClick={addHostBtn}
                         type={"primary"}
                         title={"添加配置"}
                         icon={<PlusOutlined/>}
@@ -42,22 +77,15 @@ const CodeBtn = props =>{
             }
 
             <HostModal
-                visible={modalVisible}
-                setVisible={setModalVisible}
+                visible={visible()}
+                setVisible={setVisible()}
                 createAuthHost={createAuthHost}
                 formValue={formValue}
                 updateAuthHost={updateAuthHost}
             />
 
-            <HostModal
-                visible={goodsVisible}
-                setVisible={setGoodsVisible}
-                createAuthHost={createAuthHost}
-                formValue={formValue}
-                updateAuthHost={updateAuthHost}
-            />
         </>
     )
 }
 
-export default inject("hostStore")(observer(CodeBtn))
+export default inject("hostStore")(observer(HostAddBtn))

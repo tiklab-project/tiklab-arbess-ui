@@ -3,6 +3,12 @@ import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {renderRoutes} from 'react-router-config'
 import "./Setting.scss";
 
+/**
+ * 左侧路由（三级菜单）
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Setting = props =>{
 
     const {location,route,secondRouter,pipelineId} = props
@@ -14,6 +20,11 @@ const Setting = props =>{
         setNav(path)
     },[path])
 
+    /**
+     * 渲染菜单
+     * @param item
+     * @returns {JSX.Element}
+     */
     const navContent = item =>{
         return  <div key={item.key}
                      className={`mf-setting-aside-item ${nav===item.key?"mf-setting-aside-select":""} `}
@@ -38,7 +49,7 @@ const Setting = props =>{
                 }
             </div>
             <div className='mf-setting-content'>
-                {renderRoutes(route.routes)}
+                { renderRoutes(route.routes) }
             </div>
         </div>
     )

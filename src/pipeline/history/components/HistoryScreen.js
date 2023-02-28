@@ -5,10 +5,21 @@ import "./HistoryScreen.scss";
 
 const {Option} = Select;
 
+/**
+ * 流水线历史筛选
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const HistoryScreen = props =>{
 
     const {changPage,pipelineList,pipelineUserList,setType,setState,setPipelineId,setUseId} = props
 
+    /**
+     * 切换下拉框value
+     * @param value
+     * @param field
+     */
     const changValue = (value,field) => {
         changPage(1)
         switch (field) {

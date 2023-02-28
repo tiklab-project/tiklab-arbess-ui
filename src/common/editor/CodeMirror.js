@@ -27,20 +27,18 @@ import "codemirror/addon/fold/comment-fold.js";
 // 提示
 import "codemirror/addon/display/placeholder.js";
 
-
-export const ViewMirror = props =>{
+/**
+ * 任务命令代码块(task详情)
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export const TaskMirror = props =>{
 
     const {mirrorRefs,mirrorValue,bordered,onFocus,placeholder} = props
 
+    // 输入提示
     const handleShowHint = () =>{
-        const hintList = [
-            {
-                name: "echo",
-            },
-            {
-                name: "xiaozhang",
-            },
-        ]
         const cmInstance = mirrorRefs.current.editor
         // 得到光标
         let cursor = cmInstance.getCursor()
@@ -52,18 +50,13 @@ export const ViewMirror = props =>{
         const One = `${cursorLine.charAt(end - 1)}`
         // 得到最后空格后面的字符串，无空格第一个字符串
         const Two = cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1]
-
         if(One.trim() !== ""){
             console.log(Two,"cursorLine")
         }
         let list = []
-        if (One === "e") {
-            // hintList.forEach(e => {
-            //     list.push(e.name)
-            // })
+        if (One==="e" || One==="$") {
             list.push('echo')
         }
-
         // 得到光标标识
         let token = cmInstance.getTokenAt(cursor)
         return {
@@ -93,27 +86,17 @@ export const ViewMirror = props =>{
     )
 }
 
+/**
+ * 任务命令代码块（全屏）
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const ExpandMirror = props =>{
+
     const {expandValue,mirrorRefs} = props
 
     const handleShowHint = () =>{
-        const hintList = [
-            {
-                name: "xiaohong",
-                value: "xiaohong"
-            },
-            {
-                name: "xiaozhang",
-                value: [
-                    {
-                        name: "xiaoli",
-                    },
-                    {
-                        name: "xiaosun",
-                    },
-                ],
-            },
-        ]
         const cmInstance = mirrorRefs.current.editor
         // 得到光标
         let cursor = cmInstance.getCursor()
@@ -121,19 +104,17 @@ export const ExpandMirror = props =>{
         let cursorLine = cmInstance.getLine(cursor.line)
         // 得到光标位置
         let end = cursor.ch
-        // 得到每一个输入的值
+        // 得到输入的当前输入的字符
         const One = `${cursorLine.charAt(end - 1)}`
-
+        // 得到最后空格后面的字符串，无空格第一个字符串
+        const Two = cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1]
         if(One.trim() !== ""){
-            // console.log(cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1],"cursorLine")
+            console.log(Two,"cursorLine")
         }
         let list = []
-        if (One === "$") {
-            hintList.forEach(e => {
-                list.push(e.name)
-            })
+        if (One==="e" || One==="$") {
+            list.push('echo')
         }
-
         // 得到光标标识
         let token = cmInstance.getTokenAt(cursor)
         return {
@@ -166,8 +147,16 @@ export const ExpandMirror = props =>{
     )
 }
 
+/**
+ * 后置处理代码块
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const PostprocessMirrorScenario = props =>{
+
     const {type,mirrorRefs,value,onFocus,styleActiveLine} = props
+
     return (
         <CodeMirror
             value={value}

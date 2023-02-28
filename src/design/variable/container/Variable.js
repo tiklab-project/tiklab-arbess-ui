@@ -8,9 +8,12 @@ import EmptyText from "../../../common/emptyText/EmptyText";
 import VariableAdd from "../components/VariableAdd";
 import "../components/Variable.scss";
 
-/*
-    变量
-*/
+/**
+ * 变量页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Variable = props =>{
 
     const {variableStore,pipelineStore} = props
@@ -21,21 +24,36 @@ const Variable = props =>{
     const [variableVisible,setVariableVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
+
     useEffect(()=>{
+        // 初始化变量
         pipeline &&findAllVariable(pipeline.id)
     },[pipeline,fresh])
 
+    /**
+     * 添加变量
+     */
     const addVariable = () =>{
         setFormValue("")
         setVariableVisible(true)
     }
 
-    const edit = (text,reocrd) =>{
+    /**
+     * 编辑变量
+     * @param text
+     * @param reocrd
+     */
+    const editVariable = (text,reocrd) =>{
         setFormValue(reocrd)
         setVariableVisible(true)
     }
 
-    const del = (text,reocrd) =>{
+    /**
+     * 删除变量
+     * @param text
+     * @param reocrd
+     */
+    const delVariable = (text,reocrd) =>{
         deleteVariable(reocrd.varId).then(res=>{
             res.code===0 && message.info("删除成功",0.5)
         })
@@ -46,15 +64,11 @@ const Variable = props =>{
             title: "变量名",
             dataIndex: "varKey",
             key: "varKey",
-            // width:"40%",
-            // ellipsis:true
         },
         {
             title: "类别",
             dataIndex: "taskType",
             key: "taskType",
-            // width:"40%",
-            // ellipsis:true,
             render:(text,record)=>{
                 switch (text) {
                     case 1:
@@ -68,22 +82,18 @@ const Variable = props =>{
             title: "默认值",
             dataIndex: "varValue",
             key: "varValue",
-            // width:"40%",
-            // ellipsis:true
 
         },
         {
             title: "操作",
             dataIndex: "action",
             key: "action",
-            // width:"40%",
-            // ellipsis:true
-            render:(text,record) => {
-                return  <Listaction
-                    edit={()=>edit(text,record)}
-                    del={()=>del(text,record)}
+            render:(text,record) => (
+                <Listaction
+                    edit={()=>editVariable(text,record)}
+                    del={()=>delVariable(text,record)}
                 />
-            }
+            )
         },
     ]
 

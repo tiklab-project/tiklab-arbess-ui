@@ -1,7 +1,13 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import DynamicDetail from "../components/DynamicDetail";
+import DynamicDetail from "./DynamicDetail";
 
+/**
+ * 动态详情页面
+ * @param props
+ * @returns
+ * @constructor
+ */
 const Dynamic = props =>{
 
     const {homePageStore,pipelineStore} = props
@@ -10,6 +16,7 @@ const Dynamic = props =>{
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
     useEffect(()=>{
+        // 获取所有流水线
         findAllPipelineStatus().then(res=>{
             if(res.code===0){
                 const params = {
@@ -19,16 +26,21 @@ const Dynamic = props =>{
                     },
                     bgroup:"matflow",
                     content:{
-                        pipelineId:pipeline(res.data)
+                        pipelineId:setPipelineId(res.data)
                     }
                 }
-                // 近期动态
+                // 获取近期动态
                 findlogpage(params)
             }
         })
     },[])
 
-    const pipeline = data =>{
+    /**
+     * 获取流水线所有id
+     * @param data
+     * @returns {*[流水线id]}
+     */
+    const setPipelineId = data =>{
         const newArr = []
         data && data.map(item => {
             newArr.push(item.id)
@@ -36,6 +48,10 @@ const Dynamic = props =>{
         return newArr
     }
 
+    /**
+     * 返回首页
+     * @returns {*}
+     */
     const goBack = () => props.history.push(`/index/home`)
 
     return <DynamicDetail
@@ -44,7 +60,7 @@ const Dynamic = props =>{
                 findlogpage={findlogpage}
                 dynaPage={dynaPage}
                 dynamicList={dynamicList}
-                pipelineIdList={pipeline(pipelineList)}
+                pipelineIdList={setPipelineId(pipelineList)}
                 pipelineList={pipelineList}
             />
 }

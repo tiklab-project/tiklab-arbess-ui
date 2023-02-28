@@ -12,6 +12,12 @@ import {
 } from "@ant-design/icons";
 import SystemContent from "./SettingContent";
 
+/**
+ * 系统设置页面
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Setting = props =>{
 
     const applicationRouters = a =>{

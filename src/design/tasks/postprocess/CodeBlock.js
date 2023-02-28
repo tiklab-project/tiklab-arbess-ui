@@ -2,6 +2,13 @@ import React,{useRef,useState} from "react";
 import {PostprocessMirrorScenario} from "../../../common/editor/CodeMirror";
 import Btn from "../../../common/btn/Btn";
 
+/**
+ * 后置处理代码块
+ * shell && bat执行命令
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const MirrorContent = props =>{
 
     const {item,pipelineId,updatePostConfig} = props
@@ -10,15 +17,17 @@ const MirrorContent = props =>{
 
     const [styleActiveLine,setStyleActiveLine] = useState(false)
 
-    const onFocus = e => {
-        setStyleActiveLine(true)
-    }
-
+    /**
+     * 取消编辑
+     */
     const onCancel = () =>{
         setStyleActiveLine(false)
         mirrorRefs.current.editor.setValue(item && item.scriptOrder===null?"":item.scriptOrder)
     }
 
+    /**
+     * 确定更改
+     */
     const onOk = () => {
         const params = {
             taskType:item.type,
@@ -38,7 +47,7 @@ const MirrorContent = props =>{
             type={item.type}
             mirrorRefs={mirrorRefs}
             styleActiveLine={styleActiveLine}
-            onFocus={onFocus}
+            onFocus={()=>setStyleActiveLine(true)}
         />
         {
             styleActiveLine &&

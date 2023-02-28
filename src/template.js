@@ -1,6 +1,11 @@
 import React from 'react'
 
-// 日志模板
+/**
+ * 日志模板
+ * @param type
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Template_oplog = ({type}) =>{
     switch (type) {
         case '配置创建':

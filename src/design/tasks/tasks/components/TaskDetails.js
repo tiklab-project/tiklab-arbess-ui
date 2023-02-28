@@ -40,7 +40,11 @@ const TaskDetails = props =>{
         },
     ]
 
-    const clickHandleType = item =>{
+    /**
+     * task类型
+     * @param item
+     */
+    const changHandleType = item =>{
         setHandleType(item.id)
     }
 
@@ -68,7 +72,7 @@ const TaskDetails = props =>{
                             <Tabs
                                 tabLis={dataItem.configId ? lis: [{id:1, title: "基本信息"}]}
                                 type={handleType}
-                                onClick={clickHandleType}
+                                onClick={changHandleType}
                             />
                             { handleType===1 && <Forms dataItem={dataItem} updateStageName={updateStageName}/>}
                             { handleType===2 && <Variable dataItem={dataItem}/>  }

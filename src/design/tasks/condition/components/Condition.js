@@ -4,12 +4,15 @@ import {MinusCircleOutlined,PlusCircleOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../common/btn/Btn";
-import {x} from "../../tasks/components/Common";
+import {WhetherChange} from "../../tasks/components/Common";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 import "./Condition.scss";
 
 /**
  * 条件
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
  */
 const Condition = props =>{
 
@@ -21,9 +24,16 @@ const Condition = props =>{
     const [showArrow,setShowArrow] = useState(false)
 
     useEffect(()=>{
+        // 初始化条件
         findAllTaskCond(dataItem.configId)
     },[fresh,dataItem.configId])
 
+    /**
+     * 获取符合要求的item
+     * @param data
+     * @param condId
+     * @returns {*}
+     */
     const isequal = (data,condId) =>{
         let a
         data && data.map(item=>{
@@ -34,13 +44,21 @@ const Condition = props =>{
         return a
     }
 
+    /**
+     * 改变文本框值
+     * @param e
+     * @param item
+     * @param name
+     */
     const onChange = (e,item,name) =>{
         const zz = isequal(condData,item.condId)
         zz[name] = e.target.value
         setCondData([...condData])
     }
 
-    // 添加
+    /**
+     * 添加条件
+     */
     const addCondition = () => {
         createCond({
             condType:1,
@@ -48,7 +66,12 @@ const Condition = props =>{
         })
     }
 
-    const ChangeCondType = (value,item) => {
+    /**
+     * 切换条件变量
+     * @param value
+     * @param item
+     */
+    const changeCondType = (value,item) => {
         setBorder('')
         updateCond({
             condType:value,
@@ -56,14 +79,24 @@ const Condition = props =>{
         })
     }
 
+    /**
+     * 删除变量
+     * @param item
+     */
     const reduceInput = item =>{
         deleteCond(item.condId)
     }
 
+    /**
+     * 更新条件
+     * @param e
+     * @param item
+     * @param name
+     */
     const onBlur = (e,item,name)  => {
         setBorder('')
         const zz = isequal(fixCondData,item.condId)
-        if(x(e.target.value,zz[name])){
+        if(WhetherChange(e.target.value,zz[name])){
             const obj = {}
             obj[name] = e.target.value
             updateCond({
@@ -98,7 +131,7 @@ const Condition = props =>{
                             onMouseEnter={()=>setShowArrow(true)}
                             onMouseLeave={()=>setShowArrow(false)}
                             value={item.condType}
-                            onChange={value=>ChangeCondType(value,item)}
+                            onChange={value=>changeCondType(value,item)}
                             style={{width:85}}
                         >
                             <Select.Option value={1}>等于</Select.Option>
