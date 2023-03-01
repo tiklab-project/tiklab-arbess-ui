@@ -16,33 +16,65 @@ import {message} from "antd";
 
 export class HistoryStore {
 
-    @observable historyList = [] // 历史列表
-    @observable execData = "" // 构建历史运行状态数据
-    @observable itemData = "" // 构建历史完成状态数据
-    @observable freshen = false  // 重新渲染页面
-    @observable pageCurrent = 1 // 筛选时，设置当前页数初始化
-    @observable page = {
+    // 历史列表
+    @observable
+    historyList = []
+
+    // 构建历史运行状态数据
+    @observable
+    execData = ""
+
+    // 构建历史完成状态数据
+    @observable
+    itemData = ""
+
+    // 重新渲染页面
+    @observable
+    freshen = false
+
+    // 筛选时，设置当前页数初始化
+    @observable
+    pageCurrent = 1
+
+    // 分页
+    @observable
+    page = {
         defaultCurrent: 1,
         pageSize: "11",
         total: "1",
     }
 
+    /**
+     * 设置刷新
+     * @param value
+     */
     @action
     setFreshen = value =>{
         this.freshen = value
     }
 
+    /**
+     * 设置当前页
+     * @param value
+     */
     @action
     setPageCurrent = value =>{
         this.pageCurrent = value
     }
 
+    /**
+     * 设置列表
+     */
     @action
     setHistoryList = () =>{
         this.historyList = []
     }
 
-    // 开始构建
+    /**
+     * 开始构建
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     pipelineStartStructure = async values =>{
         const params = new FormData()
@@ -55,7 +87,11 @@ export class HistoryStore {
         return data
     }
 
-    // 判断当前流水线是否在构建
+    /**
+     * 判断当前流水线是否在构建
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findPipelineState = async value =>{
         const param = new FormData()
@@ -64,7 +100,11 @@ export class HistoryStore {
         return data
     }
 
-    //构建状态
+    /**
+     * 构建状态
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     pipelineRunStatus = async value =>{
         const param = new FormData()
@@ -81,7 +121,11 @@ export class HistoryStore {
         return data
     }
 
-    //停止构建
+    /**
+     * 终止运行
+     * @param values
+     * @returns {Promise<void>}
+     */
     @action
     killInstance = async values =>{
         const params = new FormData()
@@ -94,7 +138,11 @@ export class HistoryStore {
         }
     }
 
-    //历史详情日志
+    /**
+     * 历史详情日志
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllLog =async value =>{
         const param = new FormData()
@@ -106,7 +154,11 @@ export class HistoryStore {
         return data
     }
 
-    //删除构建历史
+    /**
+     * 删除历史
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deleteHistoryLog =async value =>{
         const param = new FormData()
@@ -121,7 +173,11 @@ export class HistoryStore {
     }
 
 
-    // 单个流水线历史列表
+    /**
+     * 单个流水线历史列表
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     findPageHistory =async values =>{
         const params = {
@@ -136,7 +192,11 @@ export class HistoryStore {
         return data
     }
 
-    // 所有流水线列表
+    /**
+     * 所有流水线历史列表
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     findUserRunPageHistory = async values =>{
         const params = {
@@ -151,7 +211,10 @@ export class HistoryStore {
         return data
     }
 
-    // 设置历史列表
+    /**
+     * 设置历史列表
+     * @param data
+     */
     @action
     findHistoryList = data =>{
         if(data.code===0){

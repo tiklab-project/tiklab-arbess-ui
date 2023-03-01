@@ -27,8 +27,11 @@ const PipelineBasicInfo = props =>{
 
     const {deletePipeline,pipeline,isLoading}=pipelineStore
 
-    const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
-    const [powerType,setPowerType] = useState(1) // 流水线权限
+    // 树的展开与闭合
+    const [expandedTree,setExpandedTree] = useState([])
+
+    // 流水线权限
+    const [powerType,setPowerType] = useState(1)
 
     useEffect(()=>{
         // 初始化流水线权限

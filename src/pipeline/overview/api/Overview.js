@@ -8,7 +8,7 @@ import {serviceLoc} from "../../../common/utils/Requset";
  */
 export function  PipelineCensus (data){
     return serviceLoc.request({
-        url:"/pipeline/pipelineCensus",
+        url:"/overview/pipelineCensus",
         method: "post",
         data
     })

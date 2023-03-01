@@ -16,7 +16,7 @@ const HistoryScreen = props =>{
     const {changPage,pipelineList,pipelineUserList,setType,setState,setPipelineId,setUseId} = props
 
     /**
-     * 切换下拉框value
+     * 切换选择框value
      * @param value
      * @param field
      */

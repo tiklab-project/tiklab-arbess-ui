@@ -32,16 +32,20 @@ const Postprocess = props =>{
         setIsFindPostprocessData,isFindPostprocessData,updatePostConfig,messageSendType,mesSendData
     } = postprocessStore
 
-    const [allUserList,setAllUserList] = useState([]) // 所有通知人员
-    const [expandedTree,setExpandedTree] = useState([])  // 树的展开与闭合
-    const [yUserList,setYUserList] = useState("") // 选中的通知人员
-
     const userId = getUser().userId
+    // 所有通知人员
+    const [allUserList,setAllUserList] = useState([])
+
+    // 树的展开与闭合
+    const [expandedTree,setExpandedTree] = useState([])
+
+    // 选中的通知人员
+    const [yUserList,setYUserList] = useState("")
 
     useEffect(()=>{
         // 初始化task的后置处理
-        findAllPostConfig(dataItem.configId)
-    },[isFindPostprocessData,dataItem.configId])
+        findAllPostConfig(dataItem.taskId)
+    },[isFindPostprocessData,dataItem.taskId])
 
     useEffect(()=>{
         // 初始化是否存在消息发送方式
@@ -69,7 +73,7 @@ const Postprocess = props =>{
     const addPose = type => {
         createPostConfig({
             taskType:type,
-            taskId:dataItem.configId,
+            taskId:dataItem.taskId,
             values:null
         }).then(res=>{
             res.code===0 && setExpandedTree(expandedTree.concat(res.data))

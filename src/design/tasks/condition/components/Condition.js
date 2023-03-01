@@ -25,8 +25,8 @@ const Condition = props =>{
 
     useEffect(()=>{
         // 初始化条件
-        findAllTaskCond(dataItem.configId)
-    },[fresh,dataItem.configId])
+        findAllTaskCond(dataItem.taskId)
+    },[fresh,dataItem.taskId])
 
     /**
      * 获取符合要求的item
@@ -62,7 +62,7 @@ const Condition = props =>{
     const addCondition = () => {
         createCond({
             condType:1,
-            taskId:dataItem.configId
+            taskId:dataItem.taskId
         })
     }
 

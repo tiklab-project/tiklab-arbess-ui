@@ -154,50 +154,6 @@ $line-color:#d9d9d9;
         .newStages-single{
             padding-top: 20px;
             position: relative;
-            .branch-title{
-                overflow: hidden;
-                text-overflow: ellipsis;
-                position: absolute;
-                margin-top: 0;
-                margin-left: 25px;
-                max-width: 210px;
-                white-space: nowrap;
-            }
-            .branch-address{
-                overflow: hidden;
-                text-overflow: ellipsis;
-                position: absolute;
-                margin-top: 36px;
-                margin-left: 25px;
-                max-width: 210px;
-                white-space: nowrap;
-            }
-            .newStages-codeName:before{
-                content: "";
-                width: 18px;
-                height: 50px;
-                position: absolute;
-                left: 0;
-                top: 67px;
-                border-left: 1px solid $line-color;
-                border-bottom: 1px solid $line-color;
-                border-right-color: $line-color;
-                border-top-color: $line-color;
-                border-radius: 0 0 0 16px;
-            }
-            .newStages-branch:before{
-                content: "";
-                width: 18px;
-                height: 50px;
-                position: absolute;
-                top: 98px;
-                left: 0;
-                border-left: 1px solid $line-color;
-                border-bottom: 1px solid $line-color;
-                border-right-color: $line-color;
-                border-top-color: $line-color;
-                border-radius: 0 0 0 16px;
-            }
             .newStages-job{
                 z-index: 1;
                 position: relative;
@@ -245,50 +201,6 @@ $line-color:#d9d9d9;
         }
 
         .newStages-multi{
-            .branch-title{
-                overflow: hidden;
-                text-overflow: ellipsis;
-                position: absolute;
-                margin-top: 8px;
-                margin-left: 25px;
-                max-width: 210px;
-                white-space: nowrap;
-            }
-            .branch-address{
-                overflow: hidden;
-                text-overflow: ellipsis;
-                position: absolute;
-                margin-top: 45px;
-                margin-left: 25px;
-                max-width: 210px;
-                white-space: nowrap;
-            }
-            .newStages-codeName:before{
-                content: "";
-                width: 18px;
-                height: 50px;
-                position: absolute;
-                left: 0;
-                top: 28px;
-                border-left: 1px solid $line-color;
-                border-bottom: 1px solid $line-color;
-                border-right-color: $line-color;
-                border-top-color: $line-color;
-                border-radius: 0 0 0 16px;
-            }
-            .newStages-branch:before{
-                content: "";
-                width: 18px;
-                height: 50px;
-                position: absolute;
-                top: 67px;
-                left: 0;
-                border-left: 1px solid $line-color;
-                border-bottom: 1px solid $line-color;
-                border-right-color: $line-color;
-                border-top-color: $line-color;
-                border-radius: 0 0 0 16px;
-            }
             .multi-content{
                 position: relative;
                 &:before{

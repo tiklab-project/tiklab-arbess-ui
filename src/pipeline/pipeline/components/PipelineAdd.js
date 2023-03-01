@@ -16,8 +16,13 @@ import "./pipelineAdd.scss";
 const PipelineAdd = props =>{
 
     const [current,setCurrent] = useState(0)
-    const [type,setType] = useState(1) // 流水线类型 -- 下标
-    const [templateType,setTemplateType] = useState(1)  // 流水线模板 -- 下标
+
+    // 流水线类型
+    const [type,setType] = useState(1)
+
+    // 流水线模板 -- 下标
+    const [templateType,setTemplateType] = useState(1)
+
     // 模板list
     const templateLis = [
         {

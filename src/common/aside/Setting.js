@@ -20,11 +20,7 @@ const Setting = props =>{
         setNav(path)
     },[path])
 
-    /**
-     * 渲染菜单
-     * @param item
-     * @returns {JSX.Element}
-     */
+    // 渲染菜单
     const navContent = item =>{
         return  <div key={item.key}
                      className={`mf-setting-aside-item ${nav===item.key?"mf-setting-aside-select":""} `}

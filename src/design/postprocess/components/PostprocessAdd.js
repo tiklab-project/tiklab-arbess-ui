@@ -12,16 +12,27 @@ import PostprocessUserAdd from "./PostprocessUserAdd";
 const PostprocessAdd = props =>{
 
     const {mesSendData,postprocessVisible,setPostprocessVisible,createPostConfig,pipelineId,
-        formValue,userId,findDmUserPage,updatePostConfig} = props
+        formValue,userId,findDmUserPage,updatePostConfig
+    } = props
 
     const [form] = Form.useForm()
     const mirrorRefs = useRef(null)
     const [height,setHeight] = useState(0)
-    const [type,setType] = useState(61) // 后置处理类型
-    const [userAddVisible,setUserAddVisible] = useState(false) // 通知人员
-    const [allUserList,setAllUserList] = useState([])  // 所有通知人员
-    const [yUserList,setYUserList] = useState([]) // 选中的通知人员
-    const [styleActiveLine,setStyleActiveLine] = useState(false) // 代码块行高亮
+
+    // 后置处理类型
+    const [type,setType] = useState(61)
+
+    // 通知人员选择框展示||隐藏
+    const [userAddVisible,setUserAddVisible] = useState(false)
+
+    // 所有通知人员
+    const [allUserList,setAllUserList] = useState([])
+
+    // 选中的通知人员
+    const [yUserList,setYUserList] = useState([])
+
+    // 代码块行高亮
+    const [styleActiveLine,setStyleActiveLine] = useState(false)
 
     useEffect(()=>{
         setHeight(autoHeight())

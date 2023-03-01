@@ -4,8 +4,15 @@ import {PipelineCensus} from "../api/Overview";
 
 export class OverviewStore {
 
-    @observable census = ""
+    // 运行概况数据
+    @observable
+    census = ""
 
+    /**
+     * 获取运行概况数据
+     * @param value
+     * @returns {Promise<unknown>}
+     */
     @action
     pipelineCensus = async value =>{
         const param = new FormData()

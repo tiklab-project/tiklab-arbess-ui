@@ -10,15 +10,33 @@ import {message} from "antd";
 
 export class AuthorizeStore {
 
-    @observable storehouseList = []
-    @observable branchList = []
-    @observable skin = false
+    // 仓库
+    @observable
+    storehouseList = []
 
+    // 分支
+    @observable
+    branchList = []
+
+    // 是否在授权中
+    @observable
+    skin = false
+
+    /**
+     * 授权,获取code
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findCode = async value =>{
         return await FindCode(value)
     }
 
+    /**
+     * 获取token
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAccessToken = async value =>{
         this.skin = true
@@ -34,6 +52,11 @@ export class AuthorizeStore {
         return data
     }
 
+    /**
+     * 获取仓库
+     * @param value
+     * @returns {Promise<void>}
+     */
     @action
     findAllStorehouse = async value =>{
         const params = new FormData()
@@ -47,6 +70,11 @@ export class AuthorizeStore {
         }
     }
 
+    /**
+     * 获取分支
+     * @param value
+     * @returns {Promise<void>}
+     */
     @action
     findBranch = async value =>{
         const params = new FormData()

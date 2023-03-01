@@ -7,7 +7,7 @@ import HostAddBtn from "../../../setting/authHost/component/HostAddBtn";
 import EmptyText from "../../../common/emptyText/EmptyText";
 
 /**
- * form下拉框
+ * form选择框
  * 认证，授权，凭证……
  * @param props
  * @returns {JSX.Element}
@@ -23,18 +23,25 @@ const FindAuth = props =>{
     const {pipeline} = pipelineStore
     const {updateTaskConfig,dataItem} = configStore
 
-    const [list,setList] = useState([])  //下拉框列表
-    const [open,setOpen] = useState(false)  //下拉框visible
-    const [bordered,setBordered] = useState(false) //下拉框边框
-    const [showArrow,setShowArrow] = useState(false)  //
+    //选择框列表
+    const [list,setList] = useState([])
+
+    //选择框visible
+    const [open,setOpen] = useState(false)
+
+    //选择框边框
+    const [bordered,setBordered] = useState(false)
+
+    //选择框下拉图标
+    const [showArrow,setShowArrow] = useState(false)
 
     useEffect(()=>{
-        // 初始化下拉框list
+        // 初始化选择框list
         dataItem.type && initList(dataItem.type)
     },[dataItem.type,authFresh,serverFresh,hostFresh])
 
     /**
-     * 获取下拉框list
+     * 获取选择框list
      * @param dataItemType
      */
     const initList = dataItemType =>{
@@ -58,7 +65,7 @@ const FindAuth = props =>{
     }
 
     /**
-     * 设置下拉框List,setList
+     * 设置选择框List,setList
      * @param res
      */
     const getList = res =>{
@@ -76,7 +83,7 @@ const FindAuth = props =>{
             pipeline:{id:pipeline.id},
             values:{authId:value},
             taskType:dataItem.type,
-            configId: dataItem.configId
+            taskId: dataItem.taskId
         }
         updateTaskConfig(params)
         setItem(value)
@@ -122,7 +129,7 @@ const FindAuth = props =>{
     }
 
     /**
-     * 下拉框 id
+     * 选择框 id
      * @param item
      * @returns {id}
      */
@@ -145,7 +152,7 @@ const FindAuth = props =>{
     }
 
     /**
-     * 下拉框按钮
+     * 选择框按钮
      * @param type
      * @returns {JSX.Element}
      */
@@ -168,7 +175,7 @@ const FindAuth = props =>{
     }
 
     /**
-     * 下拉框label
+     * 选择框label
      * @param item
      * @returns {string}
      */
@@ -192,7 +199,7 @@ const FindAuth = props =>{
     }
 
     return(
-        <Form.Item label={label(dataItem.type)} name={dataItem.configId+"_authName"}>
+        <Form.Item label={label(dataItem.type)} name={dataItem.taskId+"_authName"}>
             <Select
                 // bordered={bordered}
                 showSearch={bordered}

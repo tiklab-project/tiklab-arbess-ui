@@ -11,21 +11,45 @@ import {message} from "antd";
 
 export class AuthStore {
 
-    @observable authFresh = false
-    @observable modalVisible = false
-    @observable formValue = ""
-    @observable authList = []
+    // 刷新
+    @observable
+    authFresh = false
 
+    // 认证添加编辑弹出框状态
+    @observable
+    modalVisible = false
+
+    // 认证添加编辑弹出框的表单值
+    @observable
+    formValue = ""
+
+    // 认证配置数据
+    @observable
+    authList = []
+
+    /**
+     * 设置认证添加编辑弹出框状态
+     * @param value
+     */
     @action
     setModalVisible = value =>{
         this.modalVisible = value
     }
 
+    /**
+     * 设置认证添加编辑弹出框的表单值
+     * @param value
+     */
     @action
     setFormValue = value =>{
         this.formValue = value
     }
 
+    /**
+     * 添加认证
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     createAuth =async values =>{
         const data = await CreateAuth(values)
@@ -39,6 +63,11 @@ export class AuthStore {
         return data
     }
 
+    /**
+     * 删除认证
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deleteAuth =async value =>{
         const param = new FormData()
@@ -54,6 +83,11 @@ export class AuthStore {
         return data
     }
 
+    /**
+     * 更新认证
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateAuth =async value =>{
         const data = await UpdateAuth(value)
@@ -67,6 +101,11 @@ export class AuthStore {
         return data
     }
 
+    /**
+     * 获取认证数据
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllAuth = async value=>{
         const data = await FindAllAuth()

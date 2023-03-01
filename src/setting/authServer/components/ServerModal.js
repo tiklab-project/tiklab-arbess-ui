@@ -21,11 +21,21 @@ const ServerModal = props =>{
 
     const [form] = Form.useForm()
     const [height,setHeight] = useState(0)
-    const [serverWay,setServerWay] = useState(2) // 授权类型
-    const [addAuth,setAddAuth] = useState(false)  // 去第三方授权按钮是否禁用
+
+    // 授权类型
+    const [serverWay,setServerWay] = useState(2)
+
+    // 去第三方授权按钮是否禁用
+    const [addAuth,setAddAuth] = useState(false)
+
+    // 刷新
     const [fresh,setFresh] = useState(false)
-    const [infos,setInfos] = useState("") // 授权信息
-    const [callUrlWarn,setCallUrlWarn] = useState("") // 回调地址
+
+    // 授权信息
+    const [infos,setInfos] = useState("")
+
+    // 回调地址
+    const [callUrlWarn,setCallUrlWarn] = useState("")
 
     useEffect(()=>{
         setHeight(autoHeight())

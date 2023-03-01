@@ -16,10 +16,12 @@ const TaskGui = props =>{
     const {configStore,pipelineStore} = props
 
     const {pipeline} = pipelineStore
-    const {updateStageName,setCreacteValue,configValid,deleteTaskConfig,enabledValid,validType,data,taskFormDrawer,
-        setTaskFormDrawer,dataItem,setDataItem,findAllTaskConfig,isFindConfig} = configStore
+    const {updateStageName,setCreateValue,configValid,deleteTaskConfig,enabledValid,validType,data,taskFormDrawer,
+        setTaskFormDrawer,dataItem,setDataItem,findAllTaskConfig,isFindConfig
+    } = configStore
 
-    const [isLoading,setIsLoading] = useState(true) // 数据未返回时加载状态
+    // 数据未返回时加载状态
+    const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
         return ()=> setIsLoading(true)
@@ -47,7 +49,7 @@ const TaskGui = props =>{
                         pipeline={pipeline}
                         validType={validType}
                         setDataItem={setDataItem}
-                        setCreacteValue={setCreacteValue}
+                        setCreateValue={setCreateValue}
                         setTaskFormDrawer={setTaskFormDrawer}
                         deleteTaskConfig={deleteTaskConfig}
                     />

@@ -8,11 +8,17 @@ import "./PostprocessUserAdd.scss";
 const PostprocessUserAdd = props =>{
 
     const {userAddVisible,setUserAddVisible,allUserList,yUserList,setYUserList,
-        postprocessData,setPostprocessData,type} = props
+        postprocessData,setPostprocessData,type
+    } = props
 
-    const [addUser,setAddUser] = useState([]) // 选中的用户
-    const [userList,setUserList] = useState([])  // 用户列表
-    const [selectedRowKeys, setSelectedRowKeys] = useState([])
+    // 选中的用户
+    const [addUser,setAddUser] = useState([])
+
+    // 用户列表
+    const [userList,setUserList] = useState([])
+
+    // 选中的用户id
+    const [selectedRowKeys,setSelectedRowKeys] = useState([])
 
     useEffect(()=>{
         if(userAddVisible){

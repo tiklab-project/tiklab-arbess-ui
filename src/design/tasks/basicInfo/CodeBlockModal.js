@@ -10,7 +10,6 @@ const CodeBlockModal = props =>{
     const {visible,setVisible,expandValue,narrowRef,dataItem,name,onOk} = props
 
     const mirrorRefs = useRef(null)
-
     const [height,setHeight] = useState(0)
 
     useEffect(()=>{

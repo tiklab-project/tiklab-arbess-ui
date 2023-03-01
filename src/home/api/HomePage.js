@@ -8,7 +8,7 @@ import {serviceLoc} from "../../common/utils/Requset";
  */
 export function  FindAllOpen (data) {
     return serviceLoc.request({
-        url: "/pipeline/findAllOpen",
+        url: "/open/findAllOpen",
         method: "post",
         data
     })

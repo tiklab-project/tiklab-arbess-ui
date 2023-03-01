@@ -24,11 +24,21 @@ const PipelineAddInfo = props =>{
 
     const [form] = Form.useForm()
     const userId = getUser().userId
-    const [powerType,setPowerType] = useState(1) // 流水线权限 -- 私有或公有
+
+    // 流水线权限 -- 私有或公有
+    const [powerType,setPowerType] = useState(1)
+
+    // 选中的用户
     const [yUserList,setYUserList] = useState([])
+
+    // 未选中的用户
     const [nUserList,setNUserList] = useState([])
-    const [member,setMember] = useState([])  // 流水线成员
-    const [visible,setVisible] = useState(false) // 添加用户下拉显示
+
+    // 流水线成员
+    const [member,setMember] = useState([])
+
+    // 添加用户下拉显示
+    const [visible,setVisible] = useState(false)
 
     useEffect(()=>{
         if(set && pipeline){

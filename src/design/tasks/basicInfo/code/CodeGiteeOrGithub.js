@@ -18,7 +18,9 @@ const CodeGiteeOrGithub = props =>{
     const {pipeline} = pipelineStore
     const {updateTaskConfig} = configStore
 
-    const [prohibited,setProhibited] = useState(true) // 分支选择器是否禁止
+    // 分支选择器是否禁止
+    const [prohibited,setProhibited] = useState(true)
+
     const [fieldName,setFieldName] = useState("")
     const [nameBorder,setNameBorder] = useState(false)
     const [branchBorder,setBranchBorder] = useState(false)
@@ -48,7 +50,7 @@ const CodeGiteeOrGithub = props =>{
         const params = {
             pipeline:{id:pipeline.id},
             taskType:dataItem.type,
-            configId:dataItem.configId,
+            taskId:dataItem.taskId,
             values:obj,
         }
         updateTaskConfig(params)
@@ -79,7 +81,7 @@ const CodeGiteeOrGithub = props =>{
         <>
             <FindAuth dataItem={dataItem}/>
 
-            <Form.Item name={dataItem.configId+"_codeName"} label="仓库" rules={[{required:true, message:"请选择仓库"}]}>
+            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"请选择仓库"}]}>
                 <Select
                     // bordered={nameBorder}
                     showSearch={nameBorder}
@@ -104,7 +106,7 @@ const CodeGiteeOrGithub = props =>{
                     }
                 </Select>
             </Form.Item>
-            <Form.Item name={dataItem.configId+"_codeBranch"} label="分支">
+            <Form.Item name={dataItem.taskId+"_codeBranch"} label="分支">
                 <Select
                     // bordered={branchBorder}
                     disabled={prohibited}

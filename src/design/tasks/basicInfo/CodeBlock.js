@@ -20,9 +20,15 @@ const MirrorContent = forwardRef((props,ref)=>{
     const {updateTaskConfig} = configStore
 
     const mirrorRefs = useRef(null)
-    const [bordered,setBordered] = useState(false) // 边框
-    const [visible,setVisible] = useState(false)  // 全屏visible
-    const [expandValue,setExpandValue] = useState("") // 全屏代码块value
+
+    // 边框
+    const [bordered,setBordered] = useState(false)
+
+    // 全屏visible
+    const [visible,setVisible] = useState(false)
+
+    // 全屏代码块value
+    const [expandValue,setExpandValue] = useState("")
 
     /**
      * 获取焦点改变placeholder
@@ -66,7 +72,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                 pipeline:{id:pipeline.id},
                 values:obj,
                 taskType:dataItem.type,
-                configId:dataItem.configId,
+                taskId:dataItem.taskId,
             }
             updateTaskConfig(params)
         }

@@ -25,13 +25,26 @@ const History = props => {
         pageCurrent,setPageCurrent,page,setHistoryList} = historyStore
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
-    const [detailsVisible,setDetailsVisible] = useState(false) // 列表数据详情
-    const [pipeline,setPipeline] = useState(0) // 获取流水线信息
-    const [index,setIndex] = useState(0) //1:完成状态；2:运行中状态
-    const [pipelineId,setPipelineId] = useState(null)  // 筛选条件--流水线
-    const [state,setState] = useState(0)  // 筛选条件--执行状态
-    const [type,setType] = useState(0)  // 筛选条件--执行方式
-    const [isLoading,setIsLoading] = useState(true) // 加载
+    // 列表数据详情
+    const [detailsVisible,setDetailsVisible] = useState(false)
+
+    // 获取流水线信息
+    const [pipeline,setPipeline] = useState(0)
+
+    //1:完成状态；2:运行中状态
+    const [index,setIndex] = useState(0)
+
+    // 筛选条件--流水线
+    const [pipelineId,setPipelineId] = useState(null)
+
+    // 筛选条件--执行状态
+    const [state,setState] = useState(0)
+
+    // 筛选条件--执行方式
+    const [type,setType] = useState(0)
+
+    // 加载
+    const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
         // 所有流水线

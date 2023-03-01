@@ -27,8 +27,11 @@ const HeaderMessage = props =>{
     } = homePageStore
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
-    const [isLoading,setIsLoading] = useState(false) //加载
-    const [selected,setSelected] = useState(2) //消息类型
+    //加载
+    const [isLoading,setIsLoading] = useState(false)
+
+    //消息类型
+    const [selected,setSelected] = useState(2)
 
     useEffect(()=>{
         // 获取流水线

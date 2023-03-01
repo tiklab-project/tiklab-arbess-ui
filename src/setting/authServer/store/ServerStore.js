@@ -12,22 +12,49 @@ import {message} from "antd";
 
 export class ServerStore{
 
-    @observable serverFresh = false
-    @observable modalVisible = false
-    @observable formValue = ""
-    @observable authServerList = []
-    @observable callUrlWarn = "" // 回调地址
+    // 刷新
+    @observable
+    serverFresh = false
 
+    // 服务添加编辑弹出框状态
+    @observable
+    modalVisible = false
+
+    // 服务添加编辑弹出框的表单值
+    @observable
+    formValue = ""
+
+    // 服务配置数据
+    @observable
+    authServerList = []
+
+    // 回调地址
+    @observable
+    callUrlWarn = ""
+
+    /**
+     * 设置服务添加编辑弹出框状态
+     * @param value
+     */
     @action
     setModalVisible = value =>{
         this.modalVisible = value
     }
 
+    /**
+     * 设置服务添加编辑弹出框的表单值
+     * @param value
+     */
     @action
     setFormValue = value =>{
         this.formValue = value
     }
 
+    /**
+     * 添加服务配置
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     createAuthServer =async values =>{
         const data = await CreateAuthServer(values)
@@ -41,6 +68,11 @@ export class ServerStore{
         return data
     }
 
+    /**
+     * 删除服务配置
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deleteAuthServer =async value =>{
         const param = new FormData()
@@ -56,6 +88,11 @@ export class ServerStore{
         return data
     }
 
+    /**
+     * 更新服务配置
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateAuthServer =async value =>{
         const data = await UpdateAuthServer(value)
@@ -69,6 +106,11 @@ export class ServerStore{
         return data
     }
 
+    /**
+     * 获取所有服务配置
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllAuthServerList = async value=>{
         const param = new FormData()
@@ -80,6 +122,11 @@ export class ServerStore{
         return data
     }
 
+    /**
+     * 获取回调地址
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     callbackUrl = async value=>{
         const param = new FormData()

@@ -12,9 +12,19 @@ import {message} from "antd";
 
 export class TriggerStore {
 
-    @observable triggerData = []
-    @observable isFindTrigger = false
+    // 触发器
+    @observable
+    triggerData = []
 
+    // 是否需要重新查找触发器
+    @observable
+    isFindTrigger = false
+
+    /**
+     * 更新触发器
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateTriggerConfig = async value =>{
         const data = await UpdateTriggerConfig(value)
@@ -25,6 +35,11 @@ export class TriggerStore {
         return data
     }
 
+    /**
+     * 删除触发器
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deleteTriggerConfig = async value =>{
         const param = new FormData()
@@ -37,6 +52,11 @@ export class TriggerStore {
         return data
     }
 
+    /**
+     * 添加触发器
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     createTriggerConfig = async value =>{
         const data = await CreateTriggerConfig(value)
@@ -50,6 +70,11 @@ export class TriggerStore {
         return data
     }
 
+    /**
+     * 获取所有触发器
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllTriggerConfig = async value =>{
         const param = new FormData()
@@ -61,6 +86,11 @@ export class TriggerStore {
         return data
     }
 
+    /**
+     * 获取单个触发器信息
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     oneAllTriggerConfig = async value =>{
         const data = await OneAllTriggerConfig(value)

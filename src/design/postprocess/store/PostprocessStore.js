@@ -10,21 +10,45 @@ import {
 
 export class PostprocessStore {
 
-    @observable postprocessData = []
-    @observable fixedPostprocessData = []
-    @observable isFindPostprocessData = false
-    @observable mesSendData = []  //未配置的消息发送方式
+    // 后置处理数据
+    @observable
+    postprocessData = []
 
+    // 后置处理数据
+    @observable
+    fixedPostprocessData = []
+
+    // 查找后置处理
+    @observable
+    isFindPostprocessData = false
+
+    //未配置的消息发送方式
+    @observable
+    mesSendData = []
+
+    /**
+     * 设置重新查找后置处理
+     * @param value
+     */
     @action
     setIsFindPostprocessData = value =>{
         this.isFindPostprocessData = value
     }
 
+    /**
+     * 设置后置处理数据
+     * @param value
+     */
     @action
     setPostprocessData = value =>{
         this.postprocessData = value
     }
 
+    /**
+     * 添加后置处理
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     createPostConfig = async value =>{
         const data = await CreatePostConfig(value)
@@ -34,6 +58,11 @@ export class PostprocessStore {
         return data
     }
 
+    /**
+     * 更新后置处理
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updatePostConfig = async value =>{
         const data = await UpdatePostConfig(value)
@@ -43,6 +72,11 @@ export class PostprocessStore {
         return data
     }
 
+    /**
+     * 删除后置处理
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deletePostConfig = async value =>{
         const param = new FormData()
@@ -54,6 +88,11 @@ export class PostprocessStore {
         return data
     }
 
+    /**
+     * 获取所有后置处理
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllPostConfig = async value =>{
         const params = new FormData()
@@ -66,6 +105,11 @@ export class PostprocessStore {
         return data
     }
 
+    /**
+     * 获取未配置的消息发送方式
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     messageSendType = async value =>{
         const data = await MessageSendType()

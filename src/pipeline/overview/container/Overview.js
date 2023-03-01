@@ -42,7 +42,10 @@ const Overview = props =>{
         }
     },[pipeline])
 
-    // 渲染图表
+    /**
+     * 渲染图表
+     * @param data
+     */
     const renderEchart = data =>{
         const chartDom=document.getElementById("burn-down")
         // 获取实例

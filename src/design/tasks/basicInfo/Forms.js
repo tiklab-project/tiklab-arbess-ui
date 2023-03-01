@@ -27,7 +27,7 @@ const Forms = props => {
     const [enter,setEnter] = useState(false)
 
     const getId = (dataItem,name) =>{
-        return dataItem.configId + "_" + name
+        return dataItem.taskId + "_" + name
     }
 
     useEffect(()=>{
@@ -101,12 +101,12 @@ const Forms = props => {
                 break
             default:
                 form.setFieldsValue({
-                    [dataItem.stagesId+"_name"]:dataItem.name,
+                    [dataItem.stagesId+"_stagesName"]:dataItem.stagesName,
                 })
 
         }
         form.setFieldsValue({
-            [getId(dataItem,"name")]:dataItem && dataItem.name,
+            [getId(dataItem,"taskName")]:dataItem && dataItem.taskName,
         })
     },[dataItem])
 
@@ -157,13 +157,13 @@ const Forms = props => {
         <div className='taskForm-forms'>
             <Form id="form" form={form} layout="vertical" autoComplete="off">
                 {
-                    dataItem.configId ?
+                    dataItem.taskId ?
                         <>
-                            <Inputs placeholder="任务名称" label="任务名称" name="name" isValid={true} dataItem={dataItem}/>
+                            <Inputs placeholder="任务名称" label="任务名称" name="taskName" isValid={true} dataItem={dataItem}/>
                             {renderForms(dataItem)}
                         </>
                         :
-                        <Form.Item name={dataItem.stagesId+"_name"} label="阶段名称" rules={[{required:true, message:"请输入阶段名称"}]}>
+                        <Form.Item name={dataItem.stagesId+"_stagesName"} label="阶段名称" rules={[{required:true, message:"请输入阶段名称"}]}>
                             <Input
                                 // bordered={enter}
                                 placeholder={enter? "阶段名称，回车保存":"未设置"}

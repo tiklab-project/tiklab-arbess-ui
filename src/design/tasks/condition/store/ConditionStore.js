@@ -8,15 +8,32 @@ import {
 
 export class CondStore{
 
-    @observable fresh = false
-    @observable condData = []
-    @observable fixCondData = []
+    // 刷新
+    @observable
+    fresh = false
 
+    // 条件数据
+    @observable
+    condData = []
+
+    // 条件数据
+    @observable
+    fixCondData = []
+
+    /**
+     * 设置条件数据
+     * @param value
+     */
     @action
     setCondData = value =>{
         this.condData = value
     }
 
+    /**
+     * 添加条件
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     createCond = async value =>{
         const data = await CreateCond(value)
@@ -26,6 +43,11 @@ export class CondStore{
         return data
     }
 
+    /**
+     * 删除条件
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deleteCond = async value =>{
         const param = new FormData()
@@ -37,6 +59,11 @@ export class CondStore{
         return data
     }
 
+    /**
+     * 更新条件
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateCond = async value =>{
         const data = await UpdateCond(value)
@@ -46,6 +73,11 @@ export class CondStore{
         return data
     }
 
+    /**
+     * 获取天剑
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllTaskCond = async value =>{
         const param = new FormData()

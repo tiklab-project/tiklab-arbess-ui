@@ -27,11 +27,21 @@ const HistoryPipeline = props => {
     const {pipeline,findDmUserPage,pipelineUserList} = pipelineStore
 
     const [strPipeDetails,setStrPipeDetails] = useState(false)
-    const [isLoading,setIsLoading] = useState(true) // 加载
-    const [index,setIndex] = useState(0) //1:完成状态；2:运行中状态
-    const [state,setState] = useState(0)  // 筛选条件--执行状态
-    const [userId,setUseId] = useState(null)  // 筛选条件--执行人
-    const [type,setType] = useState(0)  // 筛选条件--执行方式
+
+    // 加载
+    const [isLoading,setIsLoading] = useState(true)
+
+    //1:完成状态；2:运行中状态
+    const [index,setIndex] = useState(0)
+
+    // 筛选条件--执行状态
+    const [state,setState] = useState(0)
+
+    // 筛选条件--执行人
+    const [userId,setUseId] = useState(null)
+
+    // 筛选条件--执行方式
+    const [type,setType] = useState(0)
 
     useEffect(()=>{
         // 项目成员

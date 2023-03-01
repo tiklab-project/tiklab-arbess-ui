@@ -20,8 +20,11 @@ const HomePage = props =>{
     const {findAllOpen,pipelineNearList,findlogpage,dynamicList} = homePageStore
     const {findAllPipelineStatus,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
-    const [newlyLoading,setNewlyLoading] = useState(true) // 最近打开的流水线加载
-    const [logLoading,setLogLoading] = useState(true) // 动态加载
+    // 最近打开的流水线加载
+    const [newlyLoading,setNewlyLoading] = useState(true)
+
+    // 动态加载
+    const [logLoading,setLogLoading] = useState(true)
 
     useEffect(()=>{
         // 获取所有流水线

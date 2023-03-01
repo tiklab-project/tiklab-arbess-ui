@@ -19,6 +19,12 @@ const SettingContent= props =>  {
     const [expandedTree,setExpandedTree] = useState([""])  // 树的展开与闭合
     const [department,setDepartment] = useState(["","","",""])
 
+    /**
+     * 路由是否渲染
+     * @param type
+     * @param data
+     * @returns {string|*}
+     */
     const x = (type,data) => {
         let arr = []
         let a = "matflow"
@@ -45,6 +51,7 @@ const SettingContent= props =>  {
     }
 
     useEffect(()=>{
+        //初始化菜单权限
         getSystemPermissions(getUser().userId).then(res=>{
             const data = res.data && res.data
             for(let i=0;i<department.length;i++){
@@ -55,6 +62,7 @@ const SettingContent= props =>  {
     },[])
 
     useEffect(()=>{
+        // 激活菜单
         setSelectKey(path)
     },[path])
 
@@ -66,6 +74,10 @@ const SettingContent= props =>  {
         return expandedTree.some(item => item ===key)
     }
 
+    /**
+     * 展开 || 闭合
+     * @param key
+     */
     const setOpenOrClose = key => {
         if (isExpandedTree(key)) {
             setExpandedTree(expandedTree.filter(item => item !== key))

@@ -17,8 +17,11 @@ const ServerAddBtn = props =>{
     const {modalVisible,setModalVisible,createAuthServer,formValue,setFormValue,updateAuthServer,callbackUrl} = serverStore
     const {findCode,findAccessToken,skin} = authorizeStore
 
-    const [scanVisible,setScanVisible] = useState(false)  //代码扫描visible
-    const [artifactVisible,setArtifactVisible] = useState(false) //制品visible
+    //代码扫描visible
+    const [scanVisible,setScanVisible] = useState(false)
+
+    //制品visible
+    const [artifactVisible,setArtifactVisible] = useState(false)
 
     /**
      * 添加按钮操作

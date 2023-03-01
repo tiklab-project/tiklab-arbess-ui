@@ -57,7 +57,7 @@ export function  FindAllPostConfig (data) {
 }
 
 /**
- * 是否存在消息发送方式
+ * 获取未配置的消息发送方式
  * @param data
  * @returns {Promise<unknown>}
  * @constructor

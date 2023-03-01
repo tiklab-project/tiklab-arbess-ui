@@ -73,7 +73,7 @@ const Inputs = props =>{
             const params = {
                 pipeline:{id:pipeline.id},
                 taskType:dataItem.type,
-                configId:dataItem.configId,
+                taskId:dataItem.taskId,
                 values:obj,
             }
             updateTaskConfig(params)
@@ -122,7 +122,7 @@ const Inputs = props =>{
 
     return (
         <Form.Item
-            name={dataItem.configId+"_"+name}
+            name={dataItem.taskId+"_"+name}
             label={label}
             rules={rules()}
             validateTrigger="onChange"

@@ -29,8 +29,12 @@ const Design = props =>{
     const {pipeline} = pipelineStore
 
     const [type,setType] = useState(1)
-    const [process,setProcess] = useState(false) // 运行按钮
-    const [isDetails,setIsDetails] = useState(false) // 运行页面
+
+    // 运行按钮状态
+    const [process,setProcess] = useState(false)
+
+    // 运行页面展示||隐藏
+    const [isDetails,setIsDetails] = useState(false)
 
     useEffect(()=>{
         // 组件销毁

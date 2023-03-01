@@ -14,40 +14,82 @@ import {message} from "antd";
 
 export class HomePageStore{
 
-    @observable pipelineNearList = [] // 最近打开流水线
-    @observable taskList = []  // 代办
-    @observable messageList = [] // 消息
-    @observable messPage = {
-        defaultCurrent: 1,
-        pageSize: 15,
-        total: 1,
-    }  // 消息分页
-    @observable dynaPage = {
-        defaultCurrent: 1,
-        pageSize: 15,
-        total: 1,
-    } // 动态分页
-    @observable messagePagination = 1 //控制接口中页码page的变化，更新接口 -- 消息
-    @observable unread = "" // 未读消息num
-    @observable mesFresh = false
-    @observable dynamicList = [] // 动态
+    // 最近打开流水线
+    @observable
+    pipelineNearList = []
 
-    // 消息page
+    // 代办
+    @observable
+    taskList = []
+
+    // 消息
+    @observable
+    messageList = []
+
+    // 消息分页
+    @observable
+    messPage = {
+        defaultCurrent: 1,
+        pageSize: 15,
+        total: 1,
+    }
+
+    // 动态分页
+    @observable
+    dynaPage = {
+        defaultCurrent: 1,
+        pageSize: 15,
+        total: 1,
+    }
+
+    // 控制接口中页码page的变化，更新接口 -- 消息
+    @observable
+    messagePagination = 1
+
+    // 未读消息num
+    @observable
+    unread = ""
+
+    //消息刷新
+    @observable
+    mesFresh = false
+
+    // 动态
+    @observable
+    dynamicList = []
+
+    /**
+     * 设置消息page
+     * @param value
+     */
     @action
     setMessagePagination = value =>{
         this.messagePagination = value
     }
 
+    /**
+     * 设置消息列表
+     * @param value
+     */
     @action
     setMessageList = value =>{
         this.messageList = value
     }
 
+    /**
+     * 设置动态列表
+     * @param value
+     */
     @action
     setDynamicList = value =>{
         this.dynamicList = value
     }
 
+    /**
+     * 获取最近打开的流水线
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllOpen = async value =>{
         const param = new FormData()
@@ -60,6 +102,11 @@ export class HomePageStore{
         return data
     }
 
+    /**
+     * 获取所有动态
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     findlogpage = async values =>{
         const data = await Findlogpage(values)
@@ -70,6 +117,11 @@ export class HomePageStore{
         return data
     }
 
+    /**
+     * 获取代办
+     * @param value
+     * @returns {Promise<void>}
+     */
     @action
     findtodopage = async value =>{
         const params = {
@@ -86,6 +138,11 @@ export class HomePageStore{
         }
     }
 
+    /**
+     * 获取消息
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     findMessageItemPage = async values =>{
         const params = {
@@ -102,11 +159,12 @@ export class HomePageStore{
         }
         const data = await FindMessageItemPage(params)
         if(data.code===0){
-
+            // 消息的总数
             this.messPage.total=data.data && data.data.totalRecord
 
+            // 未读消息的长度
             if(values===0){
-                this.unread = data.data && data.data.totalRecord  // 未读消息的长度
+                this.unread = data.data && data.data.totalRecord
             }
 
             if(this.messagePagination === 1){
@@ -120,6 +178,11 @@ export class HomePageStore{
         return data
     }
 
+    /**
+     * 更新消息
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateMessageItem = async value =>{
         const data = await UpdateMessageItem(value)
@@ -130,6 +193,12 @@ export class HomePageStore{
         return data
     }
 
+
+    /**
+     * 删除消息
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deleteMessageItem = async value =>{
         const param = new FormData()

@@ -14,46 +14,84 @@ import {message} from "antd";
 
 export class ConfigStore{
 
-    @observable validType = []
-    @observable data = []
-    @observable isFindConfig = false
-    @observable enabledValid = false // 是否启用表单效验
-    @observable isPlugin = false // 是否存在插件
-    @observable creacteValue = {}
+    // 未完善必填配置的task
+    @observable
+    validType = []
 
+    // task数据
+    @observable
+    data = []
+
+    // 是否需要重新查找task
+    @observable
+    isFindConfig = false
+
+    // 是否启用表单效验
+    @observable
+    enabledValid = false
+
+    // 添加配置需要的值
+    @observable
+    createValue = {}
+
+    // task详情抽屉状态
+    @observable
+    taskFormDrawer = false
+
+    // task详情基本信息数据
+    @observable
+    dataItem = null
+
+    /**
+     * 添加配置需要的值
+     * @param value
+     */
     @action
-    setCreacteValue = value =>{
-        this.creacteValue = value
+    setCreateValue = value =>{
+        this.createValue = value
     }
 
+    /**
+     * task数据
+     * @param value
+     */
     @action
     setData = value =>{
         this.data = value
     }
 
-    @action
-    setIsPlugin = value =>{
-        this.isPlugin = value
-    }
-
+    /**
+     * 是否需要重新查找task
+     * @param value
+     */
     @action
     setIsFindConfig = value =>{
         this.isFindConfig = value
     }
 
-    @observable taskFormDrawer = false
-    @observable dataItem = false
-
+    /**
+     * 抽屉状态
+     * @param value
+     */
     @action
     setTaskFormDrawer = value =>{
         this.taskFormDrawer = value
     }
 
+    /**
+     * 设置task详情基本信息数据
+     * @param value
+     */
     @action
     setDataItem = value =>{
         this.dataItem = value
     }
 
+    /**
+     * task的标题
+     * @param value
+     * @returns {string}
+     */
     @action
     setInitName = value =>{
         switch (value) {
@@ -77,16 +115,24 @@ export class ConfigStore{
         }
     }
 
+    /**
+     * 重新查找task和查找必填配置是否完善
+     */
     @action
     setReQuery = () =>{
         this.enabledValid=!this.enabledValid
         this.isFindConfig=!this.isFindConfig
     }
 
+    /**
+     * 添加配置
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     createTaskConfig = async values =>{
         const params = {
-            ...this.creacteValue,
+            ...this.createValue,
             ...values
         }
         const data = await CreateTaskConfig(params)
@@ -94,8 +140,8 @@ export class ConfigStore{
             message.info("添加成功",0.5)
             this.dataItem = {
                 type: values.taskType,
-                configId: data.data,
-                name: this.setInitName(values.taskType)
+                taskId: data.data,
+                taskName: this.setInitName(values.taskType)
             }
             this.setReQuery()
             this.taskFormDrawer = true
@@ -106,6 +152,11 @@ export class ConfigStore{
         return data
     }
 
+    /**
+     * 删除配置
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     deleteTaskConfig = async values =>{
         const data = await DeleteTaskConfig(values)
@@ -117,6 +168,11 @@ export class ConfigStore{
         return data
     }
 
+    /**
+     * 更新配置
+     * @param values
+     * @returns {Promise<unknown>}
+     */
     @action
     updateTaskConfig = values =>{
         return new Promise((resolve, reject) => {
@@ -133,6 +189,12 @@ export class ConfigStore{
         })
     }
 
+
+    /**
+     * 更改顺序配置
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateOrderTaskConfig = async value =>{
         const data = await UpdateOrderTaskConfig(value)
@@ -142,6 +204,11 @@ export class ConfigStore{
         return data
     }
 
+    /**
+     * 查找所有配置
+     * @param values
+     * @returns {Promise<unknown>}
+     */
     @action
     findAllTaskConfig = values =>{
         const param = new FormData()
@@ -162,6 +229,11 @@ export class ConfigStore{
         })
     }
 
+    /**
+     * 更改阶段名称
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateStageName = async value =>{
         const params = new FormData()
@@ -174,6 +246,11 @@ export class ConfigStore{
         return data
     }
 
+    /**
+     * 必填配置是否完善
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     configValid =async values =>{
         const params = new FormData()

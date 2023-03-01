@@ -19,7 +19,7 @@ const Aside = props =>{
     const path = location.pathname
     const lastPath = interceptUrl(path,match.params.id)[1]
     const [nav,setNav] = useState("")
-    const [isLoading,setIsLoading] = useState(false) // 加载
+    const [isLoading,setIsLoading] = useState(false)
 
     useEffect(()=>{
         let indexPath = `/index/pipeline/${match.params.id}/${interceptUrl(path)[4]}`
@@ -38,10 +38,7 @@ const Aside = props =>{
         }
     }
 
-    /**
-     * 流水线切换的目录
-     * @type {JSX.Element}
-     */
+    // 流水线切换的目录
     const renderPipelineMenu = (
         <div className="pipeline-opt">
             <div className="pipeline-opt-title">切换流水线</div>
@@ -65,11 +62,7 @@ const Aside = props =>{
         </div>
     )
 
-    /**
-     * 渲染左侧菜单
-     * @param item
-     * @returns {JSX.Element}
-     */
+    // 渲染左侧菜单
     const renderTaskRouter = item => {
         return   <div key={item.key}
                       className={`normal-aside-item ${nav===item.to ? "normal-aside-select":""}`}

@@ -13,10 +13,12 @@ import TaskAdd from "./TaskAdd";
 
 const TaskGuiStage = props =>{
 
-    const {setTaskFormDrawer,setCreacteValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
+    const {setTaskFormDrawer,setCreateValue,data,validType,setDataItem,pipeline,deleteTaskConfig} = props
 
-    const pipelineType = pipeline && pipeline.type //流水线权限
-    const [newStageDrawer,setNewStageDrawer] = useState(false) // 添加新阶段抽屉
+    //流水线权限
+    const pipelineType = pipeline && pipeline.type
+    // 新任务抽屉状态
+    const [newStageDrawer,setNewStageDrawer] = useState(false)
 
     /**
      * 新建任务弹窗事件操作
@@ -30,7 +32,7 @@ const TaskGuiStage = props =>{
      * 添加新任务
      */
     const newTask = () =>{
-        setCreacteValue({
+        setCreateValue({
             stages:0,
             taskSort:data && data.length+1,
             pipeline:{id:pipeline.id},
@@ -45,7 +47,7 @@ const TaskGuiStage = props =>{
      * @param stagesIndex
      */
     const serial = (list,groupIndex,stagesIndex) =>{
-        setCreacteValue({
+        setCreateValue({
             stages:groupIndex+1,
             stagesId:list.stagesId,
             taskSort:stagesIndex,
@@ -59,7 +61,7 @@ const TaskGuiStage = props =>{
      * @param groupIndex
      */
      const parallelTask = (groupIndex) => {
-        setCreacteValue({
+        setCreateValue({
             taskSort:0,
             stages:groupIndex+1,
             pipeline:{id:pipeline.id},
@@ -73,7 +75,7 @@ const TaskGuiStage = props =>{
      * @param groupIndex
      */
     const insertData = (group,groupIndex) => {
-        setCreacteValue({
+        setCreateValue({
             taskSort:groupIndex+1,
             pipeline:{id:pipeline.id},
         })
@@ -103,22 +105,22 @@ const TaskGuiStage = props =>{
      * @param e
      * @param item
      */
-    const deletePart = (e,item) =>{
+    const deleteTask = (e,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
         const params = {
             pipeline:{id:pipeline.id},
-            configId:item.configId
+            taskId:item.taskId
         }
         deleteTaskConfig(params)
     }
 
     /**
      * task效验提示
-     * @param configId
+     * @param taskId
      * @returns {*}
      */
-    const valid = configId => validType && validType.some(item=>item==configId)
+    const valid = taskId => validType && validType.some(item=>item==taskId)
 
     /**
      * 渲染多任务
@@ -137,7 +139,6 @@ const TaskGuiStage = props =>{
                     <div className={`newStages-job`}>
                         {newJobContent(group,14)}
                     </div>
-                    {/*{ renderCode(group) }*/}
                 </div>
             </div>
         </Fragment>
@@ -179,19 +180,19 @@ const TaskGuiStage = props =>{
         return(
             <div onClick={()=>showDetail(item)}
                  style={{paddingLeft:deep}}
-                 className={`newStages-job-content ${valid(item.configId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
+                 className={`newStages-job-content ${valid(item.taskId)?"job-name":""} ${item.type<10?"newStages-job-code":""}`}
             >
                 <div className="newStages-job-sub">
                     <span className="newStages-job-icon"><TaskIcon type={item.type}/></span>
-                    <span className="newStages-job-title">{item.name}</span>
+                    <span className="newStages-job-title">{item.taskName}</span>
                 </div>
                 {
-                    valid(item.configId) &&
+                    valid(item.taskId) &&
                     <div className="newStages-job-warn"><ExclamationCircleOutlined /></div>
                 }
                 <Popconfirm
                     title="你确定删除吗"
-                    onConfirm={e=>deletePart(e,item)}
+                    onConfirm={e=>deleteTask(e,item)}
                     onCancel={e=>e.stopPropagation()}
                     okText="确定"
                     cancelText="取消"
@@ -219,8 +220,7 @@ const TaskGuiStage = props =>{
                     {
                         group && group.stagesList && group.stagesList.map((list,listIndex)=>{
                             return(
-                               <div key={listIndex}
-                                className={`${!group.code?"multi-content":""}`}>
+                               <div key={listIndex} className={`${!group.code?"multi-content":""}`}>
                                    { listHead(group,list) }
                                    <div className={`newStages-contents ${group.code?"newStages-code":""}`}>
                                        <div className="newStages-content">
@@ -233,7 +233,6 @@ const TaskGuiStage = props =>{
                                                                { newJobContent(stage,20) }
                                                                { !group.code && hasAddNext(list,groupIndex,stagesIndex) }
                                                            </div>
-                                                           {/*{ renderCode(stage) }*/}
                                                        </div>
                                                    )
                                                })
@@ -278,7 +277,7 @@ const TaskGuiStage = props =>{
         return(
             <div className="group-head">
                 <div className="name">
-                    <div className="group-name">{group && group.name}</div>
+                    <div className="group-name">{group && group.stagesName}</div>
                     <div className="group-inputBtn" onClick={()=>changName(group)}>
                         <EditOutlined/>
                     </div>
@@ -298,7 +297,7 @@ const TaskGuiStage = props =>{
         return(
             <div className="newStages-title" style={group.code?{opacity:0}:null}>
                 <span className="newStages-title-name">
-                    {list.name?list.name:"源码"}
+                    {list.stagesName?list.stagesName:"源码"}
                     <span className="newStages-title-icon">
                         <EditOutlined onClick={()=>changName(list)}/>
                     </span>

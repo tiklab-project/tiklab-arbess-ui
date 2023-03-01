@@ -17,11 +17,20 @@ const DynamicDetail = props =>{
 
     const {firstItem,goBack,findlogpage,dynaPage,dynamicList,pipelineIdList,pipelineList} = props
 
-    const [pageCurrent,setPageCurrent] = useState(1) // 当前页
-    const [timestamp,setTimestamp] = useState(null) // 时间戳
-    const [module,setModule] = useState(null)  // 模板类型
-    const [actionType,setActionType] = useState(null) // 动作类型
-    const [pipelineId,setPipelineId] = useState(pipelineIdList && pipelineIdList)  // 内容id
+    // 当前页
+    const [pageCurrent,setPageCurrent] = useState(1)
+
+    // 时间戳
+    const [timestamp,setTimestamp] = useState(null)
+
+    // 模板类型
+    const [module,setModule] = useState(null)
+
+    // 动作类型
+    const [actionType,setActionType] = useState(null)
+
+    // pipelineId
+    const [pipelineId,setPipelineId] = useState(pipelineIdList && pipelineIdList)
 
     // 获取动态传的参数
     const params = {

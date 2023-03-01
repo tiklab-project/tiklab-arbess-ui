@@ -11,21 +11,45 @@ import {message} from "antd";
 
 export class HostStore {
 
-    @observable hostFresh = false
-    @observable modalVisible = false
-    @observable formValue = ""
-    @observable hostList = []
+    // 刷新
+    @observable
+    hostFresh = false
 
+    // 主机添加编辑弹出框状态
+    @observable
+    modalVisible = false
+
+    // 主机添加编辑弹出框的表单值
+    @observable
+    formValue = ""
+
+    // 主机配置数据
+    @observable
+    hostList = []
+
+    /**
+     * 设置主机添加编辑弹出框状态
+     * @param value
+     */
     @action
     setModalVisible = value =>{
         this.modalVisible = value
     }
 
+    /**
+     * 设置主机添加编辑弹出框的表单值
+     * @param value
+     */
     @action
     setFormValue = value =>{
         this.formValue = value
     }
 
+    /**
+     * 添加主机配置
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     createAuthHost = async value =>{
         const data = await CreateAuthHost(value)
@@ -39,6 +63,11 @@ export class HostStore {
         return data
     }
 
+    /**
+     * 获取主机配置数据
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     findAllAuthHostList = async value =>{
         const param = new FormData()
@@ -50,6 +79,11 @@ export class HostStore {
         return data
     }
 
+    /**
+     * 删除主机
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deleteAuthHost =async value =>{
         const param = new FormData()
@@ -65,6 +99,11 @@ export class HostStore {
         return data
     }
 
+    /**
+     * 更新主机
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     updateAuthHost =async value =>{
         const data = await UpdateAuthHost(value)

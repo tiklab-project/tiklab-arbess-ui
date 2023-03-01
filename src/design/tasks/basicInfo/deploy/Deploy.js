@@ -30,7 +30,7 @@ const Deploy = props =>{
             pipeline:{id:pipeline.id},
             taskType:dataItem.type,
             values:{authType:value},
-            configId:dataItem.configId,
+            taskId:dataItem.taskId,
         }
         updateTaskConfig(params)
         setDataItem({
@@ -38,14 +38,14 @@ const Deploy = props =>{
             deployId:dataItem.deployId,
             name:dataItem.name,
             type:dataItem.type,
-            configId:dataItem.configId
+            taskId:dataItem.taskId
         })
         setBorder(false)
     }
 
     return(
         <>
-            <Form.Item name={dataItem.configId+"_authType"} label="部署方式">
+            <Form.Item name={dataItem.taskId+"_authType"} label="部署方式">
                 <Select
                     // bordered={border}
                     showArrow={showArrow}
@@ -60,9 +60,9 @@ const Deploy = props =>{
                     <Select.Option value={2}>自定义部署</Select.Option>
                 </Select>
             </Form.Item>
-            <Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues[dataItem.configId+"_authType"]!==currentValues[dataItem.configId+"_authType"]}>
+            <Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues[dataItem.taskId+"_authType"]!==currentValues[dataItem.taskId+"_authType"]}>
                 {({ getFieldValue })=>
-                    getFieldValue([dataItem.configId+"_authType"]) === 1 ? (
+                    getFieldValue([dataItem.taskId+"_authType"]) === 1 ? (
                         <>
                             <>
                                 <Inputs

@@ -70,7 +70,7 @@ const TaskDetails = props =>{
                     <div className="body">
                         <div className="body-taskForm">
                             <Tabs
-                                tabLis={dataItem.configId ? lis: [{id:1, title: "基本信息"}]}
+                                tabLis={dataItem && dataItem.taskId ? lis: [{id:1, title: "基本信息"}]}
                                 type={handleType}
                                 onClick={changHandleType}
                             />

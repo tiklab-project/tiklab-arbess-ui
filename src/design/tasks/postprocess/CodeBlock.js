@@ -14,7 +14,6 @@ const MirrorContent = props =>{
     const {item,pipelineId,updatePostConfig} = props
 
     const mirrorRefs = useRef(null)
-
     const [styleActiveLine,setStyleActiveLine] = useState(false)
 
     /**
@@ -52,8 +51,8 @@ const MirrorContent = props =>{
         {
             styleActiveLine &&
             <div style={{paddingTop:8,textAlign:"right"}}>
-                <Btn title={"取消"} isMar={true} onClick={()=>onCancel()}/>
-                <Btn title={"保存"} type={"primary"} onClick={()=>onOk()}/>
+                <Btn title={"取消"} isMar={true} onClick={onCancel}/>
+                <Btn title={"保存"} type={"primary"} onClick={onOk}/>
             </div>
         }
     </div>

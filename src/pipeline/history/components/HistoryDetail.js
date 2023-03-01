@@ -20,11 +20,22 @@ const HistoryDetail = props =>{
 
     const {execData,itemData,killInstance,pipelineRunStatus} = historyStore
 
-    const [strDetails,setStrDetails] = useState(true) // 构建详情页面数据未返回时加载状态
-    const [isActiveSlide,setIsActiveSlide] = useState(true)  // 日志滚动条
-    const [logData,setLogData] = useState("")  // 日志数据
-    const [treeData,setTreeData] = useState("") // 左侧树结构
+    // 构建详情页面数据未返回时加载状态
+    const [strDetails,setStrDetails] = useState(true)
+
+    // 日志滚动条
+    const [isActiveSlide,setIsActiveSlide] = useState(true)
+
+    // 日志数据
+    const [logData,setLogData] = useState("")
+
+    // 左侧树结构
+    const [treeData,setTreeData] = useState("")
+
+    // 正在运行的task下标
     const [execIndex,setExecIndex] = useState(0)
+
+    // 日志id
     const [id,setId] = useState("")
 
     useEffect(()=>{
@@ -111,7 +122,7 @@ const HistoryDetail = props =>{
     }
 
     /**
-     * 运行日志打印（手动，三层嵌套）
+     * 获取自动切换运行状态数据（手动，三层嵌套）
      * @param data
      * @returns {*}
      */
@@ -155,6 +166,19 @@ const HistoryDetail = props =>{
             }
         }
     }
+
+    /**
+     * 获取自动切换运行状态数据
+     * @param data
+     */
+    // const setLogs = data =>{
+    //     data && data.map(item=>{
+    //         if(item.id !==id ){
+    //             setLogs(item)
+    //         }
+    //         return item
+    //     })
+    // }
 
     /**
      * 关闭滚动条一直在下面

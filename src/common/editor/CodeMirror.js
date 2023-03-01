@@ -37,7 +37,10 @@ export const TaskMirror = props =>{
 
     const {mirrorRefs,mirrorValue,bordered,onFocus,placeholder} = props
 
-    // 输入提示
+    /**
+     * 输入提示
+     * @returns {{from: {ch: *, line}, to: {ch: *, line}, list: *[]}}
+     */
     const handleShowHint = () =>{
         const cmInstance = mirrorRefs.current.editor
         // 得到光标
@@ -96,6 +99,10 @@ export const ExpandMirror = props =>{
 
     const {expandValue,mirrorRefs} = props
 
+    /**
+     * 输入提示
+     * @returns {{from: {ch: *, line}, to: {ch: *, line}, list: *[]}}
+     */
     const handleShowHint = () =>{
         const cmInstance = mirrorRefs.current.editor
         // 得到光标

@@ -11,10 +11,18 @@ import {message} from "antd";
 
 export class EnviStore {
 
-    @observable infoList = ""
-    @observable logList = []
-    @observable fresh = false
+    // 系统信息
+    @observable
+    infoList = ""
 
+    // 刷新
+    @observable
+    fresh = false
+
+    /**
+     * 获取系统信息
+     * @returns {Promise<void>}
+     */
     @action
     getSystemMessage = async () =>{
         GetSystemMassage().then(res=>{
@@ -26,11 +34,20 @@ export class EnviStore {
         })
     }
 
+    /**
+     * 获取环境配置
+     * @returns {Promise<*>}
+     */
     @action
     findAllPipelineScm = async () =>{
         return await FindAllPipelineScm()
     }
 
+    /**
+     * 删除环境配置
+     * @param value
+     * @returns {Promise<*>}
+     */
     @action
     deletePipelineScm = async value=>{
         const param = new FormData()
@@ -46,6 +63,11 @@ export class EnviStore {
         return data
     }
 
+    /**
+     * 更新环境配置
+     * @param values
+     * @returns {Promise<*>}
+     */
     @action
     updatePipelineScm = async values=>{
         const params = {

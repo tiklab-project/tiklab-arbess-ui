@@ -22,8 +22,8 @@ const Variable = props => {
 
     useEffect(()=>{
         // 初始化变量
-        findAllVariable(dataItem.configId)
-    },[fresh,dataItem.configId])
+        findAllVariable(dataItem.taskId)
+    },[fresh,dataItem.taskId])
 
     /**
      * 获取符合要求的item
@@ -60,7 +60,7 @@ const Variable = props => {
         createVariable({
             type:2,
             taskType:1,
-            taskId:dataItem.configId,
+            taskId:dataItem.taskId,
         })
     }
 

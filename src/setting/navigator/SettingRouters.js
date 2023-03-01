@@ -7,6 +7,7 @@ import {
     TeamOutlined,
 } from "@ant-design/icons";
 
+// 用户与部门路由
 export const departmentRouters = a =>{
     return [
         {
@@ -44,6 +45,7 @@ export const departmentRouters = a =>{
     ]
 }
 
+// 基础数据路由
 export const templateRouter = [
     {
         id:"6",
