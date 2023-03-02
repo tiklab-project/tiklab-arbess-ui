@@ -7,7 +7,7 @@ import {message,Spin} from "antd";
 import {inject,observer} from "mobx-react";
 import Btn from "../../common/btn/Btn";
 import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
-import TaskGui from "../tasks/tasks/container/TaskGui";
+import ProcessDesign from "../processDesign/processDesign/container/ProcessDesign";
 import Postprocess from "../postprocess/container/Postprocess";
 import Trigger from "../trigger/container/Trigger";
 import Variable from "../variable/container/Variable";
@@ -22,10 +22,10 @@ import "./Design.scss";
  */
 const Design = props =>{
 
-    const {pipelineStore,configStore,historyStore} = props
+    const {pipelineStore,taskStore,historyStore} = props
 
     const {pipelineStartStructure} = historyStore
-    const {validType,data,setTaskFormDrawer,setDataItem} = configStore
+    const {validType,taskList} = taskStore
     const {pipeline} = pipelineStore
 
     const [type,setType] = useState(1)
@@ -35,15 +35,6 @@ const Design = props =>{
 
     // 运行页面展示||隐藏
     const [isDetails,setIsDetails] = useState(false)
-
-    useEffect(()=>{
-        // 组件销毁
-        return ()=> {
-            setTaskFormDrawer(false)
-            setIsDetails(false)
-            setDataItem("")
-        }
-    },[pipeline])
 
     /**
      * 运行
@@ -67,7 +58,7 @@ const Design = props =>{
      * 是否能运行
      * @returns {boolean}
      */
-    const runStatu = () => !(data && data.length < 1 || validType && validType.length > 0)
+    const runStatu = () => !(taskList && taskList.length < 1 || validType && validType.length > 0)
 
     const typeLis = [
         {
@@ -136,7 +127,7 @@ const Design = props =>{
                     </div>
                 </div>
             </div>
-            { type===1 && <TaskGui configStore={configStore} pipelineStore={pipelineStore}/> }
+            { type===1 && <ProcessDesign pipelineStore={pipelineStore}/> }
             { type===2 && <Trigger pipelineStore={pipelineStore}/> }
             { type===3 && <Variable pipelineStore={pipelineStore}/> }
             { type===4 && <Postprocess pipelineStore={pipelineStore}/> }
@@ -144,4 +135,4 @@ const Design = props =>{
     )
 }
 
-export default inject("historyStore","configStore","pipelineStore")(observer(Design))
+export default inject("historyStore","taskStore","pipelineStore")(observer(Design))

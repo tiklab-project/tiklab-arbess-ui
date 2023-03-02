@@ -4,7 +4,12 @@ import {SearchOutlined} from '@ant-design/icons';
 import Btn from "../../../common/btn/Btn";
 import EmptyText from "../../../common/emptyText/EmptyText";
 
-
+/**
+ * 流水线用户添加
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PipelineUserAdd = props =>{
 
     const {visible,setVisible,yUserList,nUserList,setYUserList,setNUserList,findUserPage} = props
@@ -34,7 +39,7 @@ const PipelineUserAdd = props =>{
 
     /**
      * 模糊查询是否可以选中
-     * @param record
+     * @param record：表格行信息
      * @returns {*}
      */
     const disabledOpt = record =>{
@@ -43,7 +48,7 @@ const PipelineUserAdd = props =>{
 
     /**
      * 点击行选中或取消
-     * @param record
+     * @param record：表格行信息
      */
     const onSelectRow = record => {
         if(!disabledOpt(record)){
@@ -71,6 +76,7 @@ const PipelineUserAdd = props =>{
             setAddUser(selectedRows)
             setSelectedRowKeys(selectedRowKeys)
         },
+        // 禁止选择
         getCheckboxProps: (record) => ({
             disabled: disabledOpt(record),
         }),
@@ -79,7 +85,7 @@ const PipelineUserAdd = props =>{
 
     /**
      * 模糊查询用户
-     * @param e
+     * @param e：文本框value
      */
     const findUser = e =>{
         findUserPage({

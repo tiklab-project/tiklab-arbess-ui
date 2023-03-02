@@ -41,8 +41,8 @@ const PipelineTable = props =>{
 
     /**
      * 收藏提示
-     * @param res
-     * @param info
+     * @param res：收藏返回的状态
+     * @param info：收藏||取消收藏
      */
     const collectMessage = (res,info) =>{
         if(res.code===0){
@@ -54,7 +54,7 @@ const PipelineTable = props =>{
 
     /**
      * 去概况页面
-     * @param text
+     * @param text：流水线名称
      * @param record
      * @returns {*}
      */

@@ -44,7 +44,7 @@ const Overview = props =>{
 
     /**
      * 渲染图表
-     * @param data
+     * @param data：图标所需数据
      */
     const renderEchart = data =>{
         const chartDom=document.getElementById("burn-down")

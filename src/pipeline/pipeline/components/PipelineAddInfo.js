@@ -81,6 +81,41 @@ const PipelineAddInfo = props =>{
     },[yUserList])
 
     /**
+     * 改变用户权限
+     * @param record
+     * @param value
+     */
+    const changePower = (record,value) => {
+        if(value==="1"){
+            value=true
+        }
+        if(value==="2"){
+            value=false
+        }
+        member && member.map(item=>{
+            if(item.id===record.id){
+                item.adminRole = value
+            }
+        })
+        setMember([...member])
+    }
+
+    /**
+     * 移出用户
+     * @param text
+     * @param record
+     */
+    const del = (text,record) =>{
+
+        // yUserList（已选择） 减少
+        setYUserList(yUserList.filter(item=>item.id!==record.id))
+
+        // nUserList（未选择） 添加
+        setNUserList(nUserList.concat([record]))
+    }
+
+
+    /**
      * 流水线创建或更新确定
      * @param value
      */
@@ -156,32 +191,6 @@ const PipelineAddInfo = props =>{
                 }
             </div>
         </div>
-    }
-
-    // 用户权限
-    const changePower = (record,value) => {
-        if(value==="1"){
-            value=true
-        }
-        if(value==="2"){
-            value=false
-        }
-        member && member.map(item=>{
-            if(item.id===record.id){
-                item.adminRole = value
-            }
-        })
-        setMember([...member])
-    }
-
-    // 移出用户
-    const del = (text,record) =>{
-
-        // yUserList（已选择） 减少
-        setYUserList(yUserList.filter(item=>item.id!==record.id))
-
-        // nUserList（未选择） 添加
-        setNUserList(nUserList.concat([record]))
     }
 
     const columns = [

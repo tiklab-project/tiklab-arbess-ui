@@ -5,7 +5,7 @@ import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import PostprocessAdd from "../components/PostprocessAdd";
-import TaskTitleIcon from "../../tasks/tasks/components/TaskTitleIcon";
+import TaskTitleIcon from "../../processDesign/processDesign/components/TaskTitleIcon";
 import Listaction from "../../../common/list/Listaction";
 import Btn from "../../../common/btn/Btn";
 import "../components/Postprocess.scss";

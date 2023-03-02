@@ -22,7 +22,8 @@ const History = props => {
     const {historyStore,pipelineStore} = props
 
     const {findUserRunPageHistory,historyList,findAllLog,deleteHistoryLog,killInstance,freshen,
-        pageCurrent,setPageCurrent,page,setHistoryList} = historyStore
+        pageCurrent,setPageCurrent,page,setHistoryList
+    } = historyStore
     const {findAllPipelineStatus,pipelineList} = pipelineStore
 
     // 列表数据详情
@@ -98,8 +99,8 @@ const History = props => {
     }
 
     /**
-     * 换也
-     * @param pages
+     * 换页
+     * @param pages：页码
      */
     const changPage = pages =>{
         setPageCurrent(pages)

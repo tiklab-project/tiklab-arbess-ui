@@ -44,7 +44,7 @@ const Pipeline = props =>{
 
     /**
      * 模糊查询流水线
-     * @param e
+     * @param e：文本框value
      */
     const onChangeSearch = e =>{
         findLike(e.target.value)
