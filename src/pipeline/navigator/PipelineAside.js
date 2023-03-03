@@ -16,7 +16,7 @@ const PipelineAside= (props)=>{
 
     const {match,pipelineStore,systemRoleStore}=props
 
-    const {findAllPipelineStatus,setPipeline,findOnePipeline,pipelineList,pipeline} = pipelineStore
+    const {findAllPipelineStatus,setPipeline,findOnePipeline,pipelineList,pipeline,fresh} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
 
     const pipelineId = match.params.id
@@ -24,10 +24,15 @@ const PipelineAside= (props)=>{
     const [isAside,setIsAside] = useState(true)
 
     useEffect(()=>{
-        // 所有流水线
-        findAllPipelineStatus()
-        return ()=>setPipeline()
+        // 组件销毁清空流水线信息
+        return setPipeline("")
     },[])
+
+    useEffect(()=>{
+        // 获取所有流水线
+        // fresh，监听流水线更新时候重新获取
+        findAllPipelineStatus()
+    },[fresh])
 
     useEffect(()=>{
         // 所有流水线

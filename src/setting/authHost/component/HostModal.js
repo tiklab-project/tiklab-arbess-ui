@@ -120,7 +120,7 @@ const HostModal = props =>{
                         <Form.Item
                             name="name"
                             label="名称"
-                            rules={[{required:true,message:`请输入名称`},Validation("名称")]}
+                            rules={[{required:true,message:`名称不能空`},Validation("名称")]}
                         >
                             <Input/>
                         </Form.Item>

@@ -61,10 +61,11 @@ export class PipelineStore {
 
     /**
      * 设置流水线信息
+     * @param value
      */
     @action
-    setPipeline = () =>{
-        this.pipeline = ""
+    setPipeline = value =>{
+        this.pipeline = value
     }
 
     /**
@@ -195,6 +196,7 @@ export class PipelineStore {
                 else{
                     message.info("更新失败")
                 }
+                this.fresh=!this.fresh
                 resolve(res)
             }).catch(error=>{
                 reject()
@@ -231,6 +233,7 @@ export class PipelineStore {
             pipeline:value,
             userId:getUser().userId
         }
+        const data = await UpdateFollow(params)
         return await UpdateFollow(params)
     }
 

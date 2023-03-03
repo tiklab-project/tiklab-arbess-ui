@@ -5,7 +5,7 @@ import {PlusOutlined} from "@ant-design/icons";
 import EnviModal from "../components/EnviModal";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
-import TaskTitleIcon from "../../../design/processDesign/processDesign/components/TaskTitleIcon";
+import TaskTitleIcon from "../../../pipeline/design/processDesign/processDesign/components/TaskTitleIcon";
 import Btn from "../../../common/btn/Btn";
 import Listaction from "../../../common/list/Listaction";
 import "../../authCommon/Auth.scss";

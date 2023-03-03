@@ -1,0 +1,47 @@
+.pose-variable{
+    padding-top: 10px;
+    padding-bottom: var(--tiklab-padding);
+    .pose-variable-up{
+        display: flex;
+        justify-content: space-between;
+    }
+    .inputs-variable{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        height: 35px;
+    }
+    .pose-variable-content{
+        padding-top: 10px;
+    }
+    .pose-variable-inputs{
+        position: relative;
+    }
+    .inputs-error{
+        color: #ed675a;
+        font-size: 13px;
+        line-height: 13px;
+        padding-bottom: 5px;
+    }
+    .inputs-variable-key{
+        width: 110px;
+    }
+    .inputs-variable-value{
+        width: 270px;
+    }
+    .inputs-variable-opt {
+        display: inline-block;
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+    }
+}

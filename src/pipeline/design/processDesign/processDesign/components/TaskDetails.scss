@@ -1,0 +1,96 @@
+.task-details{
+    .task-details-up{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: var(--tiklab-font-weight-bold);
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+    }
+    .task-details-bottom{
+        overflow: hidden;
+        height: calc(100% - 46px);
+        padding: 0;
+        .body {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            height: 100%;
+            overflow: auto;
+        }
+        .body-taskForm{
+            width: 100%;
+            padding: 0 20px;
+            .input-hover:hover{
+                background-color: #f2f2f2 !important;
+            }
+            .input-hover .ant-select-selector:hover{
+                background-color: #f2f2f2 !important;
+            }
+            .ant-input,.ant-select .ant-select-selector{
+                border-color: #efeded;
+            }
+            .ant-input:focus{
+                border-color: #40a9ff;
+            }
+        }
+        .taskForm-forms{
+            padding-top: var(--tiklab-padding-item);
+            padding-bottom: var(--tiklab-padding);
+            .ant-row {
+                flex-flow: row wrap;
+            }
+            .ant-form-item {
+                flex-direction: column;
+                margin-bottom: 10px;
+            }
+            .ant-input-group .ant-input{
+                width: 410px;
+            }
+            .ant-input,.ant-select{
+                width: 440px;
+            }
+            .ant-input-group-addon{
+                width: 30px;
+            }
+            .ant-form-item-explain-error{
+                height: 20px;
+            }
+            .ant-form-item-explain{
+                font-size: 13px;
+            }
+            .ant-form-item-label{
+                min-width: 110px;
+                text-align: left;
+                &>label:after{
+                    display: none;
+                }
+                .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
+                    display: none;
+                }
+                .ant-form-item-required:not(.ant-form-item-required-mark-optional):after{
+                    display: inline-block;
+                    margin-right: 4px;
+                    color: #ff4d4f;
+                    font-size: 14px;
+                    font-family: SimSun,sans-serif;
+                    line-height: 1;
+                    content: "*";
+                }
+            }
+        }
+    }
+}
+
+
+.resources-modal{
+    .resources-modal-up{
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0 ;
+    }
+    .resources-modal-content{
+        padding: 0 var(--tiklab-padding);
+        max-height:calc(100% - 120px);
+        overflow:auto;
+    }
+}
