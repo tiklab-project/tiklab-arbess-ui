@@ -5,6 +5,12 @@ import {observer,inject} from "mobx-react";
 import {TaskFinalAdd, TaskTypeContent, TaskInsertBtn} from "./Common";
 import {SpinLoading} from "../../../../../common/loading/Loading";
 
+/**
+ * 多阶段
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Stage = props =>{
 
     const {stageStore,taskStore,pipeline,addTask,setCreateValue,setTaskFormDrawer} = props
@@ -15,13 +21,11 @@ const Stage = props =>{
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
-        if(pipeline){
-            // 初始化多阶段
-            finAllStage(pipeline.id).then(()=>{
-                setIsLoading(false)
-            })
-        }
-    },[pipeline,stageFresh,taskFresh])
+        // 初始化多阶段
+        finAllStage(pipeline.id).then(()=>{
+            setIsLoading(false)
+        })
+    },[stageFresh,taskFresh])
 
     /**
      * 添加新任务
@@ -126,7 +130,7 @@ const Stage = props =>{
                                                            <div className={`newStages-job ${!group.code?"newStages-has":""}`} >
                                                                { !group.code && hasAddPre(list,groupIndex,taskIndex) }
                                                                { TaskTypeContent(task,20,showDetail,deleteTask) }
-                                                               { !group.code && hasAddNext(list,groupIndex,taskIndex) }                                
+                                                               { !group.code && hasAddNext(list,groupIndex,taskIndex) }
                                                            </div>
                                                        </div>
                                                    )

@@ -2,7 +2,7 @@ import React,{useEffect} from "react";
 import {getUrlParam} from "../../common/client/Client";
 
 /**
- * 回调地址页面
+ * 授权回调地址页面
  * Gitee&&Github授权
  * @param props
  * @returns {JSX.Element}

@@ -1,6 +1,5 @@
 import {action,observable} from "mobx";
-
-import {PipelineCensus} from "../api/Overview";
+import {Axios} from "tiklab-core-ui";
 
 export class OverviewStore {
 
@@ -18,7 +17,7 @@ export class OverviewStore {
         const param = new FormData()
         param.append("pipelineId",value)
         return new Promise((resolve,reject)=>{
-            PipelineCensus(param).then(res=>{
+            Axios.post("/overview/pipelineCensus",param).then(res=>{
                 if(res.code===0){
                     this.census = res.data && res.data
                 }

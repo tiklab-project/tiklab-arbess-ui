@@ -3,10 +3,10 @@ import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import echarts from "../../../common/echarts/Echarts";
-import OverviewCensus from "../components/OverviewCensus";
+import OverviewCensus from "./OverviewCensus";
 import Guide from "../../../common/guide/Guide";
 import DynamicList from "../../../common/dynamic/DynamicList";
-import "../components/Overview.scss";
+import "./Overview.scss";
 
 /**
  * 概况

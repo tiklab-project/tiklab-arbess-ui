@@ -1,11 +1,9 @@
 import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
-import {MinusCircleOutlined} from "@ant-design/icons";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import {SpinLoading} from "../../../common/loading/Loading";
 import HistoryDetailItem from "./HistoryDetailItem";
 import HistoryDetailTree from "./HistoryDetailTree";
-import Btn from "../../../common/btn/Btn";
 import "./HistoryDetail.scss";
 
 /**
@@ -16,12 +14,18 @@ import "./HistoryDetail.scss";
  */
 const HistoryDetail = props =>{
 
-    const {firstItem,index,pipeline,isDetails,setIsDetails,historyStore,isAll} = props
+    const {historyItem,firstItem,detailsVisible,setDetailsVisible,historyStore,tableType} = props
 
-    const {execData,itemData,killInstance,pipelineRunStatus} = historyStore
+    const {findTaskInstance,findStageInstance,execData} = historyStore
+
+    // 获取当前历史运行状态
+    const isRun = historyItem && historyItem.runStatus === "run"
+
+    // 获取当前流水线信息
+    const pipeline = historyItem && historyItem.pipeline
 
     // 构建详情页面数据未返回时加载状态
-    const [strDetails,setStrDetails] = useState(true)
+    const [detailsLoading,setDetailsLoading] = useState(true)
 
     // 日志滚动条
     const [isActiveSlide,setIsActiveSlide] = useState(true)
@@ -32,58 +36,73 @@ const HistoryDetail = props =>{
     // 左侧树结构
     const [treeData,setTreeData] = useState("")
 
-    // 正在运行的task下标
+    // 正在运行的任务下标
     const [execIndex,setExecIndex] = useState(0)
 
     // 日志id
     const [id,setId] = useState("")
 
     useEffect(()=>{
+        // 销毁组件数据处理
         return ()=>{
             setId("")
             setExecIndex(0)
-            setStrDetails(true)
+            setDetailsLoading(true)
         }
-    },[isDetails])
+    },[detailsVisible])
 
-    // 完成后状态数据
+    let inter
     useEffect(()=>{
-        if(index===1 && itemData){
-            const data = itemData.runLogList
-            setTreeData(data[0])
-            pipeline && pipeline.type===1 ? setLogData(itemData):setLogData(data[0])
-            setStrDetails(false)
+        if(pipeline){
+            if(pipeline.type===1){
+                // 获取多任务历史日志详情
+                inter = setInterval(()=>findTaskInstance(historyItem.instanceId).then(res=>{
+                    destroyInter(res,"runState")
+                }),1000)
+                return
+            }
+             // 获取多阶段历史日志详情
+             inter = setInterval(()=>findStageInstance(historyItem.instanceId).then(res=> {
+                destroyInter(res, "stageState")
+             }),1000)
         }
-    },[itemData])
+        return ()=> clearInterval(inter)
+    },[pipeline])
 
-    // 所有流水线历史列表 && 配置运行 -- 运行中状态接口调用
-    let interval=null
-    useEffect(()=>{
-        if(isAll && index===2){
-            interval=setInterval(()=>
-                pipelineRunStatus(pipeline.id).then(res=>{
-                    if(res.code===0){
-                        res.data.allState === 0 && clearInterval(interval)
-                    }
-                }), 1000)
+    /**
+     * 清空定时器
+     * @param data
+     * @param state
+     */
+    const destroyInter = (data,state) =>{
+        setDetailsLoading(false)
+        const isRunStatus = data.data && data.data.some(item=>item[state]==="run")
+        if(!isRunStatus){
+            clearInterval(inter)
         }
-        // 销毁定时器
-        return ()=> clearInterval(interval)
-    },[])
+    }
 
-    // 运行中状态数据
     useEffect(()=>{
-        if(index===2 && execData){
-            const data = execData.runLogList
+        // 完成后状态数据
+        if(!isRun && execData){
+            setTreeData(execData[0])
+            setLogData(execData[0])
+        }
+    },[execData])
+
+    useEffect(()=>{
+        // 运行中状态数据
+        if(isRun && execData){
             // id是否有值，有值：手动切换运行状态数据；无值：自动切换运行状态数据；
             if(id){
-                setTreeData(data[execIndex])
-                setLogData(manualEquals(data))
-            }else{
-                setTreeData(autoEuqals(data))
-                pipeline && pipeline.type===1 ? setLogData(execData) : setLogData(autoEuqals(data))
+                setTreeData(execData[execIndex])
+                pipeline && pipeline.type===1 ?
+                    setLogData(execData[execIndex]) :
+                    setLogData(manualEquals(execData))
+            }else {
+                setTreeData(autoEuqals(execData))
+                setLogData(autoEuqals(execData))
             }
-            setStrDetails(false)
         }
     },[execData,execIndex,id])
 
@@ -93,10 +112,11 @@ const HistoryDetail = props =>{
      * @returns {*}
      */
     const autoEuqals = data =>{
+        const state = pipeline && pipeline.type===1 ? "runState":"stageState"
         let a
-        if(data && data.some(item=>item.state===0)){
+        if(data && data.some(item=>item[state]==="run")){
             data && data.map(item=>{
-                if(item.state===0){
+                if(item[state]==="run"){
                     a = item
                 }
             })
@@ -122,7 +142,7 @@ const HistoryDetail = props =>{
     }
 
     /**
-     * 获取自动切换运行状态数据（手动，三层嵌套）
+     * 获取多阶段自动切换运行状态数据（手动，三层嵌套）
      * @param data
      * @returns {*}
      */
@@ -136,7 +156,7 @@ const HistoryDetail = props =>{
 
         // 第二层
         for(let i=0 ; i<data.length;i++){
-            let a = data[i].runLogList
+            let a = data[i].stageInstanceList
             if(!a){
                 continue
             }
@@ -149,12 +169,12 @@ const HistoryDetail = props =>{
 
         // 第三层
         for(let i=0 ; i<data.length;i++){
-            let a = data[i].runLogList
+            let a = data[i].stageInstanceList
             if(!a){
                 continue
             }
             for(let i=0 ; i<a.length;i++){
-                let b= a[i].runLogList
+                let b= a[i].taskInstanceList
                 if(!b){
                     continue
                 }
@@ -168,59 +188,34 @@ const HistoryDetail = props =>{
     }
 
     /**
-     * 获取自动切换运行状态数据
-     * @param data
-     */
-    // const setLogs = data =>{
-    //     data && data.map(item=>{
-    //         if(item.id !==id ){
-    //             setLogs(item)
-    //         }
-    //         return item
-    //     })
-    // }
-
-    /**
-     * 关闭滚动条一直在下面
-     */
-    const onWheel = () =>{
-        setIsActiveSlide(false)
-    }
-
-    /**
      * 控制台日志
      * @param logData
      * @returns {JSX.Element}
      */
     const renderLog = logData =>{
         const outLog=document.getElementById("str_outLog")
-        if(index===2 && outLog && isActiveSlide){
+        if(outLog && isActiveSlide){
             outLog.scrollTop = outLog.scrollHeight
         }
-        return  <div className="bottom-log" id="str_outLog" onWheel={onWheel}>
+        return  <div className="bottom-log" id="str_outLog" onWheel={()=>setIsActiveSlide(false)}>
                     {logData && logData.runLog ? logData.runLog : "暂无日志"}
                 </div>
     }
 
     /**
-     * 终止运行
-     */
-    const terminateOperation = () => killInstance(pipeline.id)
-
-    /**
      * 返回列表
      */
-    const goBack = () => setIsDetails(false)
+    const goBack = () => setDetailsVisible(false)
 
     /**
      * 面包屑 secondItem = isAllName() + isFindName()
      * @returns {*|string}
      */
-    const isAllName = () => isAll==="structure" ? pipeline && pipeline.name:"详情"
-    const isFindName = () => index===1 ? itemData && itemData.name:execData && execData.name
+    const isAllName = () => tableType==="history" ? pipeline && pipeline.name:"详情"
+    const isFindName = () => historyItem && historyItem.findNumber
 
     // 数据获取前加载状态
-    if(strDetails){
+    if(detailsLoading){
         return <SpinLoading size='large'/>
     }
 
@@ -232,15 +227,12 @@ const HistoryDetail = props =>{
                     secondItem={`${isAllName()} # ${isFindName()}`}
                     goBack={goBack}
                 />
-                {
-                    index===2 && execData.allState!==0 &&
-                    <Btn title={"终止"} icon={<MinusCircleOutlined/>} onClick={()=>terminateOperation()}/>
-                }
             </div>
             <div className="strDetail-card">
                 <HistoryDetailItem
-                    index={index}
-                    itemData={index===1 ? itemData && itemData.runLogList:execData && execData.runLogList}
+                    isRun={isRun}
+                    pipeline={pipeline}
+                    execData={execData}
                     setTreeData={setTreeData}
                     setLogData={setLogData}
                     setExecIndex={setExecIndex}
@@ -254,7 +246,7 @@ const HistoryDetail = props =>{
                         pipeline && pipeline.type===2 &&
                         <div className="bottom-tree">
                             <HistoryDetailTree
-                                index={index}
+                                isRun={isRun}
                                 treeData={treeData}
                                 logData={logData}
                                 setLogData={setLogData}

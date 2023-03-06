@@ -1,15 +1,5 @@
 import {observable,action} from "mobx";
-
-import {
-    FindAllOpen,
-    Findlogpage,
-    Findtodopage,
-    FindMessageItemPage,
-    UpdateMessageItem,
-    DeleteMessageItem,
-} from "../api/HomePage";
-
-import {getUser} from "tiklab-core-ui";
+import {getUser,Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class HomePageStore{
@@ -95,7 +85,7 @@ export class HomePageStore{
         const param = new FormData()
         param.append("userId",getUser().userId)
         param.append("number",value)
-        const data = await FindAllOpen(param)
+        const data = await Axios.post("/open/findAllOpen",param)
         if(data.code===0 && data.data){
             this.pipelineNearList = data.data
         }
@@ -109,7 +99,7 @@ export class HomePageStore{
      */
     @action
     findlogpage = async values =>{
-        const data = await Findlogpage(values)
+        const data = await Axios.post("/oplog/findlogpage",values)
         if(data.code===0){
             this.dynaPage.total=data.data && data.data.totalPage
             this.dynamicList=data.data && data.data.dataList
@@ -132,7 +122,7 @@ export class HomePageStore{
             bgroup:"matflow",
             userId: getUser().userId,
         }
-        const data = await Findtodopage(params)
+        const data = await Axios.post("/todo/findtodopage",params)
         if(data.code===0 && data.data){
             this.taskList=data.data && data.data.dataList
         }
@@ -157,7 +147,7 @@ export class HomePageStore{
         if(values===0 || values===1){
             params.status=values
         }
-        const data = await FindMessageItemPage(params)
+        const data = await Axios.post("/message/messageItem/findMessageItemPage",params)
         if(data.code===0){
             // 消息的总数
             this.messPage.total=data.data && data.data.totalRecord
@@ -185,7 +175,7 @@ export class HomePageStore{
      */
     @action
     updateMessageItem = async value =>{
-        const data = await UpdateMessageItem(value)
+        const data = await Axios.post("/message/messageItem/updateMessageItem",value)
         if(data.code===0){
             this.mesFresh = !this.mesFresh
             this.unread = this.unread - 1
@@ -203,7 +193,7 @@ export class HomePageStore{
     deleteMessageItem = async value =>{
         const param = new FormData()
         param.append("id",value)
-        const data = await DeleteMessageItem(param)
+        const data = await Axios.post("/message/messageItem/deleteMessageItem",param)
         if(data.code===0){
             this.mesFresh = !this.mesFresh
             message.info("删除成功",0.5)

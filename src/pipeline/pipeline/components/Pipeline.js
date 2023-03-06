@@ -3,11 +3,11 @@ import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
-import PipelineTable from "../components/PipelineTable";
+import PipelineTable from "./PipelineTable";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import Btn from "../../../common/btn/Btn";
 import Tabs from "../../../common/tabs/Tabs";
-import "../components/Pipeline.scss";
+import "./Pipeline.scss";
 
 /**
  * 流水线页面
@@ -19,12 +19,12 @@ const Pipeline = props =>{
 
     const {pipelineStore} = props
 
-    const {fresh,findAllPipelineStatus,findAllFollow,findLike,listType,setListType} = pipelineStore
+    const {fresh,findUserPipeline,findAllFollow,findLike,listType,setListType} = pipelineStore
 
     useEffect(()=>{
         if(listType===1){
             // 所有流水线
-            findAllPipelineStatus()
+            findUserPipeline()
         }else {
             // 所有收藏的流水线
             findAllFollow()

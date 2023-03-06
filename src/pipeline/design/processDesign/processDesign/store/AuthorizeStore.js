@@ -1,11 +1,5 @@
 import {action,observable} from "mobx";
-import {
-    FindCode,
-    FindAccessToken,
-    FindAllStorehouse,
-    FindBranch,
-} from "../api/Authorize";
-
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class AuthorizeStore {
@@ -29,7 +23,7 @@ export class AuthorizeStore {
      */
     @action
     findCode = async value =>{
-        return await FindCode(value)
+        return await Axios.post("/codeAuthorize/findCode",value)
     }
 
     /**
@@ -40,7 +34,7 @@ export class AuthorizeStore {
     @action
     findAccessToken = async value =>{
         this.skin = true
-        const data = await FindAccessToken(value)
+        const data = await Axios.post("/codeAuthorize/findAccessToken",value)
         if(data.code===0){
             this.skin = false
             message.success("授权成功",0.5)
@@ -62,7 +56,7 @@ export class AuthorizeStore {
         const params = new FormData()
         params.append("authId",value.authId)
         params.append("type",value.type)
-        const data = await FindAllStorehouse(params)
+        const data = await Axios.post("/codeAuthorize/findAllStorehouse",params)
         if(data.code===0){
             this.storehouseList = data.data
         }else {
@@ -81,7 +75,7 @@ export class AuthorizeStore {
         params.append("type",value.type)
         params.append("authId",value.authId)
         params.append("houseName",value.houseName)
-        const data =  await FindBranch(params)
+        const data =  await Axios.post("/codeAuthorize/findBranch",params)
         if(data.code===0){
             this.branchList = data.data
         }

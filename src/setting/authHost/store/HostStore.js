@@ -1,12 +1,5 @@
 import {action,observable} from "mobx";
-
-import {
-    CreateAuthHost,
-    DeleteAuthHost,
-    UpdateAuthHost,
-    FindAllAuthHostList,
-} from "../api/Host";
-
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class HostStore {
@@ -52,7 +45,7 @@ export class HostStore {
      */
     @action
     createAuthHost = async value =>{
-        const data = await CreateAuthHost(value)
+        const data = await Axios.post("/authHost/createAuthHost",value)
         if(data.code===0){
             this.hostFresh=!this.hostFresh
             message.info(`添加成功`)
@@ -72,7 +65,7 @@ export class HostStore {
     findAllAuthHostList = async value =>{
         const param = new FormData()
         param.append("type",value)
-        const data = await FindAllAuthHostList(param)
+        const data = await Axios.post("/authHost/findAllAuthHostList",param)
         if(data.code===0 && data.data){
             this.hostList = data.data
         }
@@ -88,7 +81,7 @@ export class HostStore {
     deleteAuthHost =async value =>{
         const param = new FormData()
         param.append("hostId",value)
-        const data = await DeleteAuthHost(param)
+        const data = await Axios.post("/authHost/deleteAuthHost",param)
         if(data.code===0){
             this.hostFresh=!this.hostFresh
             message.info(`删除成功`)
@@ -106,7 +99,7 @@ export class HostStore {
      */
     @action
     updateAuthHost =async value =>{
-        const data = await UpdateAuthHost(value)
+        const data = await Axios.post("/authHost/updateAuthHost",value)
         if(data.code===0){
             this.hostFresh=!this.hostFresh
             message.info(`修改成功`)

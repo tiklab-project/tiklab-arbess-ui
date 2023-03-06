@@ -5,7 +5,7 @@ import TaskIcon from "../../design/processDesign/processDesign/components/TaskIc
 
 const HistoryDetailTree = props =>{
 
-    const {treeData,logData,setLogData,setId,index} = props
+    const {treeData,logData,setLogData,setId,isRun} = props
 
     const [expandedTree,setExpandedTree] = useState([])
 
@@ -29,13 +29,11 @@ const HistoryDetailTree = props =>{
      * @param item
      */
     const taskLog = item => {
-        switch (index) {
-            case 1:
-                setLogData(item)
-                break
-            default:
-                setId(item.id)
+        if(isRun){
+            setId(item.id)
+            return
         }
+        setLogData(item)
     }
 
     const renderLi = (item,itemIndex,deep) =>{
@@ -46,11 +44,11 @@ const HistoryDetailTree = props =>{
                 <div className="tree-li-firsts" style={{cursor:"pointer",paddingLeft:`${ deep*20+5 }`}}>
                     <div className="tree-li-first">
                         <div className="tree-li-icon">
-                            <TaskIcon type={item.type} />
+                            <TaskIcon type={item.taskType} />
                         </div>
-                        <div className="tree-li-name">{item.name}</div>
+                        <div className="tree-li-name">{item.taskName}</div>
                     </div>
-                    <div className="tree-li-time">{getTime(item.time)}</div>
+                    <div className="tree-li-time">{getTime(item.runTime)}</div>
                 </div>
             </div>
         )
@@ -58,7 +56,7 @@ const HistoryDetailTree = props =>{
 
     const renderSubLi = (group,groupIndex,deep) =>{
         return(
-            <div key={groupIndex} className="tree-li">
+            <div className="tree-li" key={groupIndex}>
                 <div className={`tree-li-firsts ${logData.id===group.id?"tree-li-active":""}`}
                      style={{paddingLeft: `${deep * 20+5}`}}
                      onClick={()=>setOpenOrClose(group)}
@@ -66,22 +64,19 @@ const HistoryDetailTree = props =>{
                     <div className="tree-li-first">
                         <div className="tree-li-icon">
                             {
-                                group.runLogList?
-                                    (isExpandedTree(group.id)?
-                                            <CaretDownOutlined style={{fontSize: "10px"}}/> :
-                                            <CaretRightOutlined style={{fontSize: "10px"}}/>
-                                    ): ""
+                                isExpandedTree(group.id)?
+                                    <CaretDownOutlined style={{fontSize: "10px"}}/> :
+                                    <CaretRightOutlined style={{fontSize: "10px"}}/>
                             }
                         </div>
-                        <div className="tree-li-name">{group.name}</div>
+                        <div className="tree-li-name">{group.stageName}</div>
                     </div>
-                    <div className="tree-li-time">{getTime(group.time)}</div>
+                    <div className="tree-li-time">{getTime(group.stageTime)}</div>
                 </div>
                 <div className={`tree-ul ${isExpandedTree(group.id) ? null:"tree-li-hidden"}`}>
                     {
-                        group.runLogList && group.runLogList.map((item,itemIndex)=>{
-                            const deepnew = deep + 1
-                            return item.runLogList && item.runLogList.length?renderSubLi(item,itemIndex,deepnew):renderLi(item,itemIndex,deepnew)
+                        group.taskInstanceList && group.taskInstanceList.map((list,listIndex)=>{
+                            return renderLi(list,listIndex,deep+1)
                         })
                     }
                 </div>
@@ -89,14 +84,15 @@ const HistoryDetailTree = props =>{
         )
     }
 
+
     return(
         <div className="tree-ul">
             {
-                treeData && treeData.runLogList && treeData.runLogList.map((group,groupIndex)=>{
-                    return group.runLogList && group.runLogList.length > 0 ?
-                        renderSubLi(group,groupIndex,0):renderLi(group,groupIndex,0)
+                treeData && treeData.stageInstanceList && treeData.stageInstanceList.map((group,groupIndex)=>{
+                    return renderSubLi(group,groupIndex,0)
                 })
             }
+
         </div>
     )
 }

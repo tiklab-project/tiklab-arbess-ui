@@ -13,11 +13,11 @@ const Dynamic = props =>{
     const {homePageStore,pipelineStore} = props
 
     const {findlogpage,dynamicList,dynaPage} = homePageStore
-    const {findAllPipelineStatus,pipelineList} = pipelineStore
+    const {findUserPipeline,pipelineList} = pipelineStore
 
     useEffect(()=>{
         // 获取所有流水线
-        findAllPipelineStatus().then(res=>{
+        findUserPipeline().then(res=>{
             if(res.code===0){
                 const params = {
                     pageParam:{

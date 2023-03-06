@@ -6,7 +6,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
-import HostAddBtn from "../component/HostAddBtn";
+import HostAddBtn from "./HostAddBtn";
 import Tabs from "../../../common/tabs/Tabs";
 import "../../authCommon/Auth.scss";
 

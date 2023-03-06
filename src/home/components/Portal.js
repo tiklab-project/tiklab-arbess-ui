@@ -1,8 +1,14 @@
 import React from "react";
 import {renderRoutes} from "react-router-config";
-import Header from "../components/Header";
-import "../components/Header.scss";
+import Header from "./Header";
+import "./Header.scss";
 
+/**
+ * 首页
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Portal= props=>{
     const {route}=props
     return(

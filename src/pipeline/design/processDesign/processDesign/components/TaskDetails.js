@@ -10,6 +10,12 @@ import Variable from "../../variable/Variable";
 import BasicInfo from "../../basicInfo/BasicInfo";
 import "./TaskDetails.scss";
 
+/**
+ * 任务详情
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TaskDetails = props =>{
 
     const {taskFormDrawer,setTaskFormDrawer,taskStore,stageStore} = props

@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {Table} from "antd";
 import {inject,observer} from "mobx-react";
 import {PlusOutlined} from "@ant-design/icons";
-import EnviModal from "../components/EnviModal";
+import EnviModal from "./EnviModal";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import TaskTitleIcon from "../../../pipeline/design/processDesign/processDesign/components/TaskTitleIcon";

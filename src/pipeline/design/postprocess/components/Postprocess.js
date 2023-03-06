@@ -4,11 +4,11 @@ import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import EmptyText from "../../../../common/emptyText/EmptyText";
-import PostprocessAdd from "../components/PostprocessAdd";
+import PostprocessAdd from "./PostprocessAdd";
 import TaskTitleIcon from "../../processDesign/processDesign/components/TaskTitleIcon";
 import Listaction from "../../../../common/list/Listaction";
 import Btn from "../../../../common/btn/Btn";
-import "../components/Postprocess.scss";
+import "./Postprocess.scss";
 
 /**
  * 后置处理页面

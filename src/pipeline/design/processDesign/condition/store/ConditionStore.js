@@ -1,10 +1,5 @@
 import {action,observable} from "mobx";
-import {
-    CreateCond,
-    DeleteCond,
-    UpdateCond,
-    FindAllTaskCond
-} from "../api/Condition";
+import {Axios} from "tiklab-core-ui";
 
 export class CondStore{
 
@@ -36,7 +31,7 @@ export class CondStore{
      */
     @action
     createCond = async value =>{
-        const data = await CreateCond(value)
+        const data = await Axios.post("/pipelineCond/createCond",value)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -52,7 +47,7 @@ export class CondStore{
     deleteCond = async value =>{
         const param = new FormData()
         param.append("condId",value)
-        const data = await DeleteCond(param)
+        const data = await Axios.post("/pipelineCond/deleteCond",param)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -66,7 +61,7 @@ export class CondStore{
      */
     @action
     updateCond = async value =>{
-        const data = await UpdateCond(value)
+        const data = await Axios.post("/pipelineCond/updateCond",value)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -82,7 +77,7 @@ export class CondStore{
     findAllTaskCond = async value =>{
         const param = new FormData()
         param.append("taskId",value)
-        const data = await FindAllTaskCond(param)
+        const data = await Axios.post("/pipelineCond/findAllTaskCond",param)
         if(data.code===0){
             this.condData = data.data && data.data
             this.fixCondData = data.data && data.data

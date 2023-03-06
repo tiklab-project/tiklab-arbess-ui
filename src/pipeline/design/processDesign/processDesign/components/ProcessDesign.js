@@ -1,10 +1,10 @@
 import React,{useEffect,useState} from "react";
 import {observer} from "mobx-react";
-import Stage from "../components/Stage";
-import Task from "../components/Task";
-import TaskDetails from "../components/TaskDetails";
-import TaskAdd from "../components/TaskAdd";
-import "../components/Task.scss";
+import Stage from "./Stage";
+import Task from "./Task";
+import TaskDetails from "./TaskDetails";
+import TaskAdd from "./TaskAdd";
+import "./Task.scss";
 
 /**
  * 流程设计，task图形化界面

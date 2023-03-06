@@ -1,13 +1,5 @@
 import {observable,action} from "mobx";
-
-import {
-    CreatePost,
-    UpdatePost,
-    DeletePost,
-    FindPipelinePost,
-    FindTaskPost,
-    MessageSendType
-} from "../api/Postprocess";
+import {Axios} from "tiklab-core-ui";
 
 export class PostprocessStore {
 
@@ -52,7 +44,7 @@ export class PostprocessStore {
      */
     @action
     createPost = async value =>{
-        const data = await CreatePost(value)
+        const data = await Axios.post("/postprocess/createPost",value)
         if (data.code===0){
             this.isFindPostprocessData = !this.isFindPostprocessData
         }
@@ -66,7 +58,7 @@ export class PostprocessStore {
      */
     @action
     updatePost = async value =>{
-        const data = await UpdatePost(value)
+        const data = await Axios.post("/postprocess/updatePost",value)
         if (data.code===0){
             this.isFindPostprocessData = !this.isFindPostprocessData
         }
@@ -82,7 +74,7 @@ export class PostprocessStore {
     deletePost = async value =>{
         const param = new FormData()
         param.append("postId",value)
-        const data = await DeletePost(param)
+        const data = await Axios.post("/postprocess/deletePost",param)
         if(data.code===0){
             this.isFindPostprocessData = !this.isFindPostprocessData
         }
@@ -98,7 +90,7 @@ export class PostprocessStore {
     findPipelinePost = async value =>{
         const params = new FormData()
         params.append("pipelineId",value)
-        const data = await FindPipelinePost(params)
+        const data = await Axios.post("/postprocess/findPipelinePost",params)
         if(data.code===0){
             this.postprocessData = data.data ? data.data : []
         }
@@ -114,7 +106,7 @@ export class PostprocessStore {
     findTaskPost = async value =>{
         const params = new FormData()
         params.append("taskId",value)
-        const data = await FindTaskPost(params)
+        const data = await Axios.post("/postprocess/findTaskPost",params)
         if(data.code===0){
             this.fixedPostprocessData = data.data ? data.data : []
             this.postprocessData = data.data ? data.data : []
@@ -129,7 +121,7 @@ export class PostprocessStore {
      */
     @action
     messageSendType = async value =>{
-        const data = await MessageSendType()
+        const data = await Axios.post("/postprocess/messageSendType")
         if(data.code===0){
             this.mesSendData=data.data && data.data
         }

@@ -1,12 +1,6 @@
 import {observable,action} from "mobx";
-import {
-    CreateTask,
-    FinAllTask,
-    UpdateTask,
-    UpdateTaskName,
-    DeleteTask
-} from "../api/Task";
 import {message} from "antd";
+import {Axios} from "tiklab-core-ui";
 
 export class TaskStore {
 
@@ -38,7 +32,7 @@ export class TaskStore {
      */
     @action
     createTask = async value =>{
-        const data = await CreateTask(value)
+        const data = await Axios.post("/tasks/createTask",value)
         if(data.code===0){
             message.info("添加成功")
             this.taskFresh = !this.taskFresh
@@ -55,7 +49,7 @@ export class TaskStore {
     findAllTask = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        const data = await FinAllTask(param)
+        const data = await Axios.post("/tasks/finAllTask",param)
         if(data.code===0){
             this.taskList = data.data && data.data
         }
@@ -69,7 +63,7 @@ export class TaskStore {
      */
     @action
     updateTask = async values =>{
-        const data = await UpdateTask(values)
+        const data = await Axios.post("/tasks/updateTask",values)
         if(data.code===0){
             this.dataItem.task[Object.keys(values.values)[0]] = Object.values(values.values)[0]
             this.taskFresh=!this.taskFresh
@@ -84,7 +78,7 @@ export class TaskStore {
      */
     @action
     updateTaskName = async value =>{
-        const data = await UpdateTaskName(value)
+        const data = await Axios.post("/tasks/updateTaskName",value)
         if(data.code===0){
             this.dataItem[Object.keys(value.values)[0]] = Object.values(value.values)[0]
             this.taskFresh=!this.taskFresh
@@ -101,7 +95,7 @@ export class TaskStore {
     deleteTask = async value =>{
         const params = new FormData()
         params.append("taskId",value)
-        const data = await DeleteTask(params)
+        const data = await Axios.post("/tasks/deleteTask",value)
         if(data.code===0){
             message.info("删除成功")
             this.taskFresh = !this.taskFresh

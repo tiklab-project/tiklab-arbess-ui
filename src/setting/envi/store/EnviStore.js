@@ -1,13 +1,6 @@
 import {observable,action} from "mobx";
-import {
-    DeletePipelineScm,
-    UpdatePipelineScm,
-    FindAllPipelineScm,
-} from "../api/Envi";
-import {
-    GetSystemMassage
-} from "../api/info"
 import {message} from "antd";
+import {Axios} from "tiklab-core-ui";
 
 export class EnviStore {
 
@@ -25,7 +18,7 @@ export class EnviStore {
      */
     @action
     getSystemMessage = async () =>{
-        GetSystemMassage().then(res=>{
+        Axios.post("/systemMassage/getSystemMassage").then(res=>{
             if(res.code === 0 && res.data){
                 this.infoList = res.data
             }
@@ -40,7 +33,7 @@ export class EnviStore {
      */
     @action
     findAllPipelineScm = async () =>{
-        return await FindAllPipelineScm()
+        return await Axios.post("/scm/findAllPipelineScm")
     }
 
     /**
@@ -52,7 +45,7 @@ export class EnviStore {
     deletePipelineScm = async value=>{
         const param = new FormData()
         param.append("scmId",value)
-        const data = await DeletePipelineScm(param)
+        const data = await Axios.post("/scm/deletePipelineScm",param)
         if(data.code===0){
             this.fresh = !this.fresh
             message.info(`删除成功`)
@@ -76,13 +69,13 @@ export class EnviStore {
             scmName:values.scmName,
             scmAddress:values.scmAddress,
         }
-        const data = await UpdatePipelineScm(params)
+        const data = await Axios.post("/scm/updatePipelineScm",params)
         if(data.code === 0){
             this.fresh=!this.fresh
-            values.scmId==="" ?  message.info("保存成功") : message.info(`修改成功`)
+            values.scmId==="" ?  message.info("添加成功") : message.info(`修改成功`)
         }
         else {
-            values.scmId==="" ? message.info("保存失败") :  message.info(`修改失败`)
+            values.scmId==="" ? message.info("添加失败") :  message.info(`修改失败`)
 
         }
         return data

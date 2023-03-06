@@ -1,13 +1,5 @@
 import {observable,action} from "mobx";
-
-import {
-    UpdateTriggerConfig,
-    DeleteTriggerConfig,
-    CreateTriggerConfig,
-    FindAllTriggerConfig,
-    OneAllTriggerConfig
-} from "../api/Trigger";
-
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class TriggerStore {
@@ -27,7 +19,7 @@ export class TriggerStore {
      */
     @action
     updateTriggerConfig = async value =>{
-        const data = await UpdateTriggerConfig(value)
+        const data = await Axios.post("/pipelineTriggerConfig/updateConfig",value)
         if(data.code===0){
             message.info("更新成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
@@ -44,7 +36,7 @@ export class TriggerStore {
     deleteTriggerConfig = async value =>{
         const param = new FormData()
         param.append("configId",value)
-        const data = await DeleteTriggerConfig(param)
+        const data = await Axios.post("/pipelineTriggerConfig/deleteConfig",param)
         if(data.code===0){
             message.info("删除成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
@@ -59,7 +51,7 @@ export class TriggerStore {
      */
     @action
     createTriggerConfig = async value =>{
-        const data = await CreateTriggerConfig(value)
+        const data = await Axios.post("/pipelineTriggerConfig/createConfig",value)
         if (data.code===0){
             message.info("添加成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
@@ -79,7 +71,7 @@ export class TriggerStore {
     findAllTriggerConfig = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        const data = await FindAllTriggerConfig(param)
+        const data = await Axios.post("/pipelineTriggerConfig/findAllTriggerConfig",param)
         if (data.code===0){
             this.triggerData = data.data && data.data
         }
@@ -93,7 +85,7 @@ export class TriggerStore {
      */
     @action
     oneAllTriggerConfig = async value =>{
-        const data = await OneAllTriggerConfig(value)
+        const data = await Axios.post("/pipelineTriggerConfig/oneAllTriggerConfig",value)
         if (data.code===0){
 
         }

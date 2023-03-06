@@ -25,7 +25,7 @@ const HeaderMessage = props =>{
     const {findMessageItemPage,messageList,messPage,setMessagePagination,messagePagination,
         setMessageList,unread,updateMessageItem,mesFresh,deleteMessageItem
     } = homePageStore
-    const {findAllPipelineStatus,pipelineList} = pipelineStore
+    const {findUserPipeline,pipelineList} = pipelineStore
 
     //加载
     const [isLoading,setIsLoading] = useState(false)
@@ -35,7 +35,7 @@ const HeaderMessage = props =>{
 
     useEffect(()=>{
         // 获取流水线
-        visible && findAllPipelineStatus()
+        visible && findUserPipeline()
         return ()=>{
             setMessageList([])
             setMessagePagination(1)

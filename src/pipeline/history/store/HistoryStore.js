@@ -1,18 +1,6 @@
-import {action,observable} from "mobx";
-import {
-    DeleteHistoryLog,
-    FindAllLog,
-    FindPageHistory,
-} from "../api/History";
-import {
-    FindPipelineState,
-    PipelineRunStatus,
-    KillInstance,
-    PipelineStartStructure,
-    FindUserRunPageHistory
-} from "../api/Execute";
-import {getUser} from "tiklab-core-ui";
+import {action, observable} from "mobx";
 import {message} from "antd";
+import {Axios} from "tiklab-core-ui";
 
 export class HistoryStore {
 
@@ -23,10 +11,6 @@ export class HistoryStore {
     // 构建历史运行状态数据
     @observable
     execData = ""
-
-    // 构建历史完成状态数据
-    @observable
-    itemData = ""
 
     // 重新渲染页面
     @observable
@@ -71,85 +55,57 @@ export class HistoryStore {
     }
 
     /**
-     * 开始构建
-     * @param values
+     * 开始运行
+     * @param value
      * @returns {Promise<*>}
      */
     @action
-    pipelineStartStructure = async values =>{
+    execStart = async value =>{
         const params = new FormData()
-        params.append("pipelineId", values)
-        params.append("userId", getUser().userId)
-        const data = await PipelineStartStructure(params)
-        if(data.code===0 && data.data===1){
-            this.freshen = !this.freshen
-        }
-        return data
-    }
-
-    /**
-     * 判断当前流水线是否在构建
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    findPipelineState = async value =>{
-        const param = new FormData()
-        param.append("pipelineId", value)
-        const data = await FindPipelineState(param)
-        return data
-    }
-
-    /**
-     * 构建状态
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    pipelineRunStatus = async value =>{
-        const param = new FormData()
-        param.append("pipelineId", value)
-        const data = await PipelineRunStatus(param)
-        if(data.code===0){
-            if(data.data){
-                this.execData = data.data
-                if(data.data.allState === 0){
-                    this.freshen = !this.freshen
-                }
-            }
-        }
-        return data
+        params.append("pipelineId", value)
+        return await Axios.post("/exec/start", params)
     }
 
     /**
      * 终止运行
-     * @param values
-     * @returns {Promise<void>}
-     */
-    @action
-    killInstance = async values =>{
-        const params = new FormData()
-        params.append("pipelineId", values)
-        params.append("userId",getUser().userId)
-        const data = await KillInstance(params)
-        if(data.code===0){
-            this.pageCurrent = 1
-            this.freshen = !this.freshen
-        }
-    }
-
-    /**
-     * 历史详情日志
      * @param value
      * @returns {Promise<*>}
      */
     @action
-    findAllLog =async value =>{
+    execStop = async value =>{
         const param = new FormData()
-        param.append("historyId", value)
-        const data = await FindAllLog(param)
+        param.append("pipelineId",value)
+        return await Axios.post("/exec/stop", param)
+    }
+
+    /**
+     * 获取多任务历史日志详情
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findTaskInstance = async value =>{
+        const param = new FormData()
+        param.append("instanceId",value)
+        const data = await Axios.post("/taskInstance/findTaskInstance",param)
         if(data.code===0){
-            this.itemData = data.data && data.data
+            this.execData = data.data && data.data
+        }
+        return data
+    }
+
+    /**
+     * 获取多阶段历史日志详情
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findStageInstance = async value =>{
+        const param = new FormData()
+        param.append("instanceId",value)
+        const data = await Axios.post("/stageInstance/findStageInstance",param)
+        if(data.code===0){
+            this.execData = data.data && data.data
         }
         return data
     }
@@ -160,10 +116,10 @@ export class HistoryStore {
      * @returns {Promise<*>}
      */
     @action
-    deleteHistoryLog =async value =>{
+    deleteInstance =async value =>{
         const param = new FormData()
-        param.append("historyId", value)
-        const data = await DeleteHistoryLog(param)
+        param.append("instanceId", value)
+        const data = await Axios.post("/instance/deleteInstance",param)
         if(data.code===0){
             message.info("删除成功",0.5)
             this.pageCurrent = 1
@@ -172,14 +128,13 @@ export class HistoryStore {
         return data
     }
 
-
     /**
-     * 单个流水线历史列表
+     * 获取所有流水线历史列表
      * @param values
      * @returns {Promise<*>}
      */
     @action
-    findPageHistory =async values =>{
+    findUserInstance = async values =>{
         const params = {
             pageParam: {
                 pageSize: 13,
@@ -187,29 +142,31 @@ export class HistoryStore {
             },
             ...values,
         }
-        const data = await FindPageHistory(params)
+        const data = await Axios.post("/instance/findUserInstance",params)
         this.findHistoryList(data)
         return data
     }
 
+
     /**
-     * 所有流水线历史列表
-     * @param values
+     * 获取单个流水线历史
+     * @param value
      * @returns {Promise<*>}
      */
     @action
-    findUserRunPageHistory = async values =>{
+    findPipelineInstance = async value =>{
         const params = {
             pageParam: {
                 pageSize: 13,
                 currentPage: this.pageCurrent,
             },
-            ...values,
+            ...value,
         }
-        const data = await FindUserRunPageHistory(params)
+        const data = await Axios.post("/instance/findPipelineInstance",params)
         this.findHistoryList(data)
         return data
     }
+
 
     /**
      * 设置历史列表

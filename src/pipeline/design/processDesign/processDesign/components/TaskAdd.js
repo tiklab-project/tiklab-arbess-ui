@@ -6,8 +6,12 @@ import Btn from "../../../../../common/btn/Btn";
 import TaskTitleIcon from "./TaskTitleIcon";
 import "./TaskAdd.scss";
 
-
-
+/**
+ * 添加任务
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TaskAdd = props =>{
 
     const {pipeline,setTaskFormDrawer,setNewStageDrawer,newStageDrawer,createValue,taskStore,stageStore} = props

@@ -1,14 +1,6 @@
 import {action,observable} from "mobx";
-
-import {
-    CreateAuthServer,
-    DeleteAuthServer,
-    UpdateAuthServer,
-    FindAllAuthServerList,
-    CallbackUrl
-} from "../api/Server";
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
-
 
 export class ServerStore{
 
@@ -57,7 +49,7 @@ export class ServerStore{
      */
     @action
     createAuthServer =async values =>{
-        const data = await CreateAuthServer(values)
+        const data = await Axios.post("/authServer/createAuthServer",values)
         if(data.code===0){
             this.serverFresh = !this.serverFresh
             message.info(`添加成功`)
@@ -77,7 +69,7 @@ export class ServerStore{
     deleteAuthServer =async value =>{
         const param = new FormData()
         param.append("serverId",value)
-        const data = await DeleteAuthServer(param)
+        const data = await Axios.post("/authServer/deleteAuthServer",param)
         if(data.code===0){
             this.serverFresh=!this.serverFresh
             message.info(`删除成功`)
@@ -95,7 +87,7 @@ export class ServerStore{
      */
     @action
     updateAuthServer =async value =>{
-        const data = await UpdateAuthServer(value)
+        const data = await Axios.post("/authServer/updateAuthServer",value)
         if(data.code===0){
             this.serverFresh=!this.serverFresh
             message.info(`修改成功`)
@@ -115,7 +107,7 @@ export class ServerStore{
     findAllAuthServerList = async value=>{
         const param = new FormData()
         param.append("type",value)
-        const data = await FindAllAuthServerList(param)
+        const data = await Axios.post("/authServer/findAllAuthServerList",param)
         if(data.code===0 && data.data){
             this.authServerList = data.data
         }
@@ -131,7 +123,7 @@ export class ServerStore{
     callbackUrl = async value=>{
         const param = new FormData()
         param.append("callbackUrl",value)
-        const data = await CallbackUrl(param)
+        const data = await Axios.post("/codeAuthorize/callbackUrl",param)
         if(data.code===0){
             this.callUrlWarn = data.data
         }

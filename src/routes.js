@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./home/container/Home"))
+const Index=AsyncComponent(()=>import("./home/components/Home"))
 
 const Login=AsyncComponent(()=>import("./login/Login"))
 const Logout=AsyncComponent(()=>import("./login/Logout"))
@@ -18,16 +18,16 @@ const HomePage=AsyncComponent(()=>import("./home/components/HomePage"))
 /**
  * 流水线
  */
-const Pipeline=AsyncComponent(()=>import("./pipeline/pipeline/container/Pipeline"))
+const Pipeline=AsyncComponent(()=>import("./pipeline/pipeline/components/Pipeline"))
 const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipelineAdd"))
 const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
 const PipelineDyan=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
-const Overview=AsyncComponent(()=>import("./pipeline/overview/container/Overview"))
+const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
 const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const PipelineBasic=AsyncComponent(()=>import("./pipeline/setting/basicInfo/PipelineBasicInfo"))
-const History=AsyncComponent(()=>import("./pipeline/history/container/History"))
+const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const Dynamic=AsyncComponent(()=>import("./home/components/Dynamic"))
 
@@ -35,11 +35,11 @@ const Dynamic=AsyncComponent(()=>import("./home/components/Dynamic"))
  * 系统设置
  */
 const Setting=AsyncComponent(()=>import("./setting/navigator/Setting"))
-const Auth=AsyncComponent(()=>import("./setting/auth/container/Auth"))
-const Host=AsyncComponent(()=>import("./setting/authHost/container/Host"))
-const Server=AsyncComponent(()=>import("./setting/authServer/container/Server"))
-const Envi=AsyncComponent(()=>import("./setting/envi/container/Envi"))
-const Info=AsyncComponent(()=>import("./setting/envi/container/Info"))
+const Auth=AsyncComponent(()=>import("./setting/auth/components/Auth"))
+const Host=AsyncComponent(()=>import("./setting/authHost/component/Host"))
+const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
+const Envi=AsyncComponent(()=>import("./setting/envi/components/Envi"))
+const Info=AsyncComponent(()=>import("./setting/envi/components/Info"))
 
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))

@@ -4,7 +4,7 @@ import {RightOutlined} from "@ant-design/icons";
 import "./Guide.scss";
 
 /**
- * 动态，代办……标题
+ * 动态，代办……小标题
  * @param props
  * @returns {JSX.Element}
  * @constructor

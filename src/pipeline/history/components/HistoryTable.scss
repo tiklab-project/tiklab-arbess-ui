@@ -1,17 +1,20 @@
-.structure{
+.history{
     height: 100%;
     overflow: auto;
-    .structure-content-table{
+    .history-table{
         padding-top: 10px;
-        .str-table-name{
+        .history-table-name{
+            cursor: pointer;
+        }
+        .history-table-pipeline{
+            padding-right: 5px;
+            color: var(--tiklab-blue);
+        }
+        .history-table-findNumber{
             color: var(--tiklab-blue);
             cursor: pointer;
-            .str-table-findNumber{
-                font-size: var(--tiklab-font-13);
-                padding-left: 5px;
-            }
         }
-        .str-table-runWay{
+        .history-table-runWay{
             display: flex;
             align-items: center;
             height: 40px;
@@ -21,4 +24,3 @@
         }
     }
 }
-

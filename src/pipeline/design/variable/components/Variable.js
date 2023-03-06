@@ -5,8 +5,8 @@ import {inject,observer} from "mobx-react";
 import Listaction from "../../../../common/list/Listaction";
 import Btn from "../../../../common/btn/Btn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
-import VariableAdd from "../components/VariableAdd";
-import "../components/Variable.scss";
+import VariableAdd from "./VariableAdd";
+import "./Variable.scss";
 
 /**
  * 变量页面
@@ -27,8 +27,8 @@ const Variable = props =>{
 
     useEffect(()=>{
         // 初始化变量
-        pipeline &&findAllVariable(pipeline.id)
-    },[pipeline,fresh])
+        findAllVariable(pipeline.id)
+    },[fresh])
 
     /**
      * 添加变量

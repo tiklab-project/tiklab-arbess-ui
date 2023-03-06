@@ -3,10 +3,10 @@ import {Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../../../common/emptyText/EmptyText";
-import TriggerAdd from "../components/TriggerAdd";
+import TriggerAdd from "./TriggerAdd";
 import Listaction from "../../../../common/list/Listaction";
 import Btn from "../../../../common/btn/Btn";
-import "../components/Trigger.scss";
+import "./Trigger.scss";
 
 /**
  * 触发器页面
@@ -26,8 +26,8 @@ const Trigger = props =>{
 
     useEffect(()=>{
         // 初始化触发器
-        pipeline && findAllTriggerConfig(pipeline.id)
-    },[pipeline,isFindTrigger])
+        findAllTriggerConfig(pipeline.id)
+    },[isFindTrigger])
 
     /**
      * 添加触发器

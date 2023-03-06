@@ -21,7 +21,7 @@ const PipelineTable = props =>{
 
     const {historyStore,pipelineStore}=props
 
-    const {pipelineStartStructure,killInstance}=historyStore
+    const {execStart,execStop}=historyStore
     const {pipelineList,updateFollow,fresh,setFresh} = pipelineStore
 
     /**
@@ -74,15 +74,13 @@ const PipelineTable = props =>{
     const work = record =>{
         if(record.state === 2){
             // 终止
-            killInstance(record.id).then(()=>{
+            execStop(record.id).then(()=>{
                 setFresh(!fresh)
             })
         }else {
             // 运行
-            pipelineStartStructure(record.id).then(res=>{
-                if(res.data){
-                    setFresh(!fresh)
-                }
+            execStart(record.id).then(()=>{
+                setFresh(!fresh)
             })
         }
     }
@@ -118,35 +116,35 @@ const PipelineTable = props =>{
             ellipsis:true,
             render:(text,record) =>{
                 switch (record.buildStatus) {
-                    case 10:
+                    case "success":
                         return  <Tooltip title={buildStatusTooltip("成功",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_success} alt={"log"} className="imgs"/>
                                         {text}
                                     </Space>
                                 </Tooltip>
-                    case 1:
+                    case "error":
                         return  <Tooltip title={buildStatusTooltip("失败",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_error} alt={"log"} className="imgs"/>
                                         {text}
                                     </Space>
                                 </Tooltip>
-                    case 30:
+                    case "run":
                         return <Tooltip title={buildStatusTooltip("运行中",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_fog} alt={"log"} className="imgs"/>
                                         {text}
                                     </Space>
                                 </Tooltip>
-                    case 0:
+                    case "wait":
                         return  <Tooltip title={buildStatusTooltip("待构建","待构建","无")}>
                                     <Space>
                                         <img src={pip_fog} alt={"log"} className="imgs"/>
                                         待构建
                                     </Space>
                                 </Tooltip>
-                    case 20:
+                    case "halt":
                         return   <Tooltip title={buildStatusTooltip("终止",text,record.execUser.name)}>
                                     <Space>
                                         <img src={pip_halt} alt={"log"} className="imgs"/>

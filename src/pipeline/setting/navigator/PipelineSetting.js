@@ -1,6 +1,12 @@
 import React from "react";
 import Setting from "../../../common/aside/Setting";
 
+/**
+ * 流水线左侧导航（三级导航）
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const PipelineSetting = props =>{
 
     const {match} = props

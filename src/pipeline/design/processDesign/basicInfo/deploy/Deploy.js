@@ -67,8 +67,8 @@ const Deploy = props =>{
                                 placeholder={"Shell命令"}
                             />
                         </Form.Item>
-                    </>:
-
+                    </>
+                    :
                     <>
                         <FormsItem
                             name={"localAddress"}

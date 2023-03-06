@@ -7,7 +7,7 @@ import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
 import Tabs from "../../../common/tabs/Tabs";
-import ServerAddBtn from "../components/ServerAddBtn";
+import ServerAddBtn from "./ServerAddBtn";
 import "../../authCommon/Auth.scss";
 
 /**

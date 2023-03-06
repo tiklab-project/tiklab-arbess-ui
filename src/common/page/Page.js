@@ -12,7 +12,10 @@ const Page = props =>{
 
     const {pageCurrent,changPage,page} = props
 
-    // 渲染向右 > 箭头
+    /**
+     * 渲染向右 > 箭头
+     * @returns {JSX.Element}
+     */
     const renderRightOut = () =>{
         if(pageCurrent===page.total || !page.total){
             return(

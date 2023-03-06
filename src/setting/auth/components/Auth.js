@@ -6,7 +6,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
-import AuthAddBtn from "../components/AuthAddBtn";
+import AuthAddBtn from "./AuthAddBtn";
 import "../../authCommon/Auth.scss";
 
 /**

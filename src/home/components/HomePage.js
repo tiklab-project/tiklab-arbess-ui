@@ -18,7 +18,7 @@ const HomePage = props =>{
     const {homePageStore,pipelineStore} = props
 
     const {findAllOpen,pipelineNearList,findlogpage,dynamicList} = homePageStore
-    const {findAllPipelineStatus,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
+    const {findUserPipeline,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     // 最近打开的流水线加载
     const [newlyLoading,setNewlyLoading] = useState(true)
@@ -28,7 +28,7 @@ const HomePage = props =>{
 
     useEffect(()=>{
         // 获取所有流水线
-        findAllPipelineStatus().then(res=>{
+        findUserPipeline().then(res=>{
             if(res.code===0){
                 const params = {
                     pageParam:{

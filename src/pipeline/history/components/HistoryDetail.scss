@@ -54,6 +54,7 @@
                 }
                 .tree-li-hidden{
                     display: none;
+
                 }
                 .tree-li-first{
                     display: flex;
@@ -76,19 +77,19 @@
         }
     }
     .item{
-        &-20{
+        &-halt{
             border-top: 3px solid #444444 !important;
         }
-        &-1{
+        &-error{
             border-top: 3px solid #ff0000 !important;
         }
-        &-10{
+        &-success{
             border-top: 3px solid var(--tiklab-blue) !important;
         }
-        &-0{
+        &-run{
             border-top: 3px solid #43a890 !important;
         }
-        &-3{
+        &-wait{
             border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
         }
     }

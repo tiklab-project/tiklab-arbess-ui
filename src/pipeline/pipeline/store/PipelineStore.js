@@ -1,19 +1,5 @@
 import {action, observable} from "mobx";
-
-import {
-    CreatePipeline,
-    DeletePipeline,
-    FindAllFollow,
-    FindAllPipelineStatus,
-    FindDmUserPage,
-    FindLike,
-    FindOnePipeline,
-    FindUserPage,
-    UpdateFollow,
-    UpdatePipeline
-} from "../api/Pipeline";
-
-import {getUser} from "tiklab-core-ui";
+import {Axios,getUser} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class PipelineStore {
@@ -83,11 +69,11 @@ export class PipelineStore {
      * @returns {Promise<unknown>}
      */
     @action
-    findAllPipelineStatus = value =>{
+    findUserPipeline = value =>{
         const param = new FormData()
         param.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
-            FindAllPipelineStatus(param).then(res=>{
+            Axios.post("/pipeline/findUserPipeline",param).then(res=>{
                 if(res.code===0 && res.data){
                     this.pipelineList=res.data
                     this.pipelineLength=res.data.length
@@ -114,7 +100,7 @@ export class PipelineStore {
         }
         this.isLoading = true
         return new Promise((resolve, reject) => {
-            CreatePipeline(params).then(res=>{
+            Axios.post("/pipeline/createPipeline",params).then(res=>{
                 if(res.code===0){
                     message.info("创建成功")
                 }
@@ -141,7 +127,7 @@ export class PipelineStore {
         params.append("pipelineName",values)
         params.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
-            FindLike(params).then(res=>{
+            Axios.post("/pipeline/findLikePipeline",params).then(res=>{
                 if(res.code===0){
                     this.pipelineList=res.data
                 }
@@ -165,7 +151,7 @@ export class PipelineStore {
         param.append("pipelineId",value)
         param.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
-            DeletePipeline(param).then(res=>{
+            Axios.post("/pipeline/deletePipeline",param).then(res=>{
                 if(res.code===0){
                     message.info("删除成功")
                 }
@@ -189,7 +175,7 @@ export class PipelineStore {
     @action
     updatePipeline = values =>{
         return new Promise((resolve, reject) => {
-            UpdatePipeline(values).then(res=>{
+            Axios.post("/pipeline/updatePipeline",values).then(res=>{
                 if(res.code===0){
                     message.info("更新成功")
                 }
@@ -212,7 +198,7 @@ export class PipelineStore {
     findAllFollow = value =>{
         const param = new FormData()
         param.append("userId",getUser().userId)
-        FindAllFollow(param).then(res=>{
+        Axios.post("/pipeline/findUserFollowPipeline",param).then(res=>{
             if(res.code===0){
                 this.pipelineList=res.data
                 this.followLength=res.data && res.data.length
@@ -233,8 +219,7 @@ export class PipelineStore {
             pipeline:value,
             userId:getUser().userId
         }
-        const data = await UpdateFollow(params)
-        return await UpdateFollow(params)
+        return await Axios.post("/pipeline/updateFollow",params)
     }
 
     /**
@@ -251,7 +236,7 @@ export class PipelineStore {
             },
             ...value
         }
-        const data =  await FindUserPage(params)
+        const data =  await Axios.post("/user/user/findUserPage",params)
         if(data.code===0){
             this.pipelineUserList = data.data && data.data.dataList
         }
@@ -273,7 +258,7 @@ export class PipelineStore {
             domainId:value,
             // ...value,
         }
-        const data = await FindDmUserPage(params)
+        const data = await Axios.post("/dmUser/findDmUserPage",params)
         if(data.code===0){
             this.pipelineUserList = data.data && data.data.dataList
         }
@@ -289,7 +274,7 @@ export class PipelineStore {
     findOnePipeline = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        const data = await FindOnePipeline(param)
+        const data = await Axios.post("/pipeline/findOnePipeline",param)
         if(data.code===0){
             this.pipeline = data.data && data.data
         }

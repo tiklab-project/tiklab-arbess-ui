@@ -130,7 +130,7 @@ const HostModal = props =>{
                             </Tooltip></>}
                             name="ip"
                             rules={[
-                                {required: true, message: "请输入Ip地址"},
+                                {required: true, message: "Ip地址不能为空"},
                                 {
                                     pattern:/((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/,
                                     message:"请输入正确的Ip地址"
@@ -141,7 +141,7 @@ const HostModal = props =>{
                         </Form.Item>
                         <Form.Item
                             label="端口" name="port"
-                            rules={[{required: true, message: "请输入用户名"}]}
+                            rules={[{required: true, message: "端口不能为空"}]}
                         >
                             <Input/>
                         </Form.Item>

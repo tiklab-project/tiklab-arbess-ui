@@ -1,11 +1,5 @@
 import {action,observable} from "mobx";
-
-import {
-    CreateVariable,
-    DeleteVariable,
-    UpdateVariable,
-    FindAllVariable
-} from "../api/Variable";
+import {Axios} from "tiklab-core-ui";
 
 export class VariableStore{
 
@@ -34,7 +28,7 @@ export class VariableStore{
      */
     @action
     createVariable = async value =>{
-        const data = await CreateVariable(value)
+        const data = await Axios.post("/pipelineVariable/createVariable",value)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -50,7 +44,7 @@ export class VariableStore{
     deleteVariable = async value =>{
         const param = new FormData()
         param.append("varId",value)
-        const data = await DeleteVariable(param)
+        const data = await Axios.post("/pipelineVariable/deleteVariable",param)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -64,7 +58,7 @@ export class VariableStore{
      */
     @action
     updateVariable = async value =>{
-        const data = await UpdateVariable(value)
+        const data = await Axios.post("/pipelineVariable/updateVariable",value)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -80,7 +74,7 @@ export class VariableStore{
     findAllVariable = async value =>{
         const param = new FormData()
         param.append("taskId",value)
-        const data = await FindAllVariable(param)
+        const data = await Axios.post("/pipelineVariable/findAllVariable",param)
         if(data.code===0){
             this.variableData = data.data && data.data
             this.fixVariableData = data.data && data.data

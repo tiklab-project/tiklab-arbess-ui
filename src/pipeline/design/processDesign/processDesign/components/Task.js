@@ -3,6 +3,12 @@ import {inject,observer} from "mobx-react";
 import {TaskFinalAdd,TaskTypeContent,TaskInsertBtn} from "./Common";
 import {SpinLoading} from "../../../../../common/loading/Loading";
 
+/**
+ * 多任务
+ * @param props
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const Task = props => {
 
     const {pipeline,taskStore,addTask,setTaskFormDrawer,setCreateValue} = props
@@ -12,13 +18,10 @@ const Task = props => {
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
-        if(pipeline){
-            // 初始化多任务
-            findAllTask(pipeline.id).then(()=>{
-                setIsLoading(false)
-            })
-        }
-    },[pipeline,taskFresh])
+        findAllTask(pipeline.id).then(()=>{
+            setIsLoading(false)
+        })
+    },[taskFresh])
 
     /**
      * 添加新任务

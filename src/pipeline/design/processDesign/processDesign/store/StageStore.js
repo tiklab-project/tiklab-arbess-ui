@@ -1,11 +1,5 @@
 import {observable,action} from "mobx";
-import {
-    CreateStage,
-    FinAllStage,
-    UpdateStageName,
-    DeleteStage
-} from "../api/Stage";
-
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class StageStore {
@@ -25,7 +19,7 @@ export class StageStore {
      */
     @action
     createStage = async value =>{
-        const data = await CreateStage(value)
+        const data = await Axios.post("/stage/createStage",value)
         if(data.code===0){
             message.info("添加成功")
             this.stageFresh=!this.stageFresh
@@ -42,7 +36,7 @@ export class StageStore {
     finAllStage = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        const data = await FinAllStage(param)
+        const data = await Axios.post("/stage/finAllStage",param)
         if(data.code===0){
             this.stageList = data.data && data.data
         }
@@ -56,7 +50,7 @@ export class StageStore {
      */
     @action
     updateStageName = async value =>{
-        const data = await UpdateStageName(value)
+        const data = await Axios.post("/stage/updateStageName",value)
         if(data.code===0){
             this.stageFresh=!this.stageFresh
         }
@@ -72,7 +66,7 @@ export class StageStore {
     deleteStage = async value =>{
         const param = new FormData()
         param.append("taskId",value)
-        const data = await DeleteStage(param)
+        const data = await Axios.post("/stage/deleteStage",param)
         if(data.code===0){
             message.info("删除成功")
             this.stageFresh=!this.stageFresh

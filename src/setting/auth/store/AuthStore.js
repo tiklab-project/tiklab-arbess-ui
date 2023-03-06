@@ -1,12 +1,5 @@
 import {action,observable} from "mobx";
-
-import {
-    CreateAuth,
-    DeleteAuth,
-    UpdateAuth,
-    FindAllAuth,
-} from "../api/Auth";
-
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class AuthStore {
@@ -52,7 +45,7 @@ export class AuthStore {
      */
     @action
     createAuth =async values =>{
-        const data = await CreateAuth(values)
+        const data = await Axios.post("/auth/createAuth",values)
         if(data.code===0){
             this.authFresh = !this.authFresh
             message.info(`添加成功`)
@@ -72,7 +65,7 @@ export class AuthStore {
     deleteAuth =async value =>{
         const param = new FormData()
         param.append("authId",value)
-        const data = await DeleteAuth(param)
+        const data = await Axios.post("/auth/deleteAuth",param)
         if(data.code===0){
             this.authFresh=!this.authFresh
             message.info(`删除成功`)
@@ -90,7 +83,7 @@ export class AuthStore {
      */
     @action
     updateAuth =async value =>{
-        const data = await UpdateAuth(value)
+        const data = await Axios.post("/auth/updateAuth",value)
         if(data.code===0){
             this.authFresh=!this.authFresh
             message.info(`修改成功`)
@@ -108,7 +101,7 @@ export class AuthStore {
      */
     @action
     findAllAuth = async value=>{
-        const data = await FindAllAuth()
+        const data = await Axios.post("/auth/findAllAuth")
         if(data.code===0 && data.data){
             this.authList = data.data
         }

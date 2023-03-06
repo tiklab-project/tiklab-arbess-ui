@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import "../components/Info.scss";
+import "./Info.scss";
 
 /**
  * 系统信息页面

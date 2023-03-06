@@ -16,7 +16,7 @@ const PipelineAside= (props)=>{
 
     const {match,pipelineStore,systemRoleStore}=props
 
-    const {findAllPipelineStatus,setPipeline,findOnePipeline,pipelineList,pipeline,fresh} = pipelineStore
+    const {findUserPipeline,setPipeline,findOnePipeline,pipelineList,pipeline,fresh} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
 
     const pipelineId = match.params.id
@@ -31,18 +31,18 @@ const PipelineAside= (props)=>{
     useEffect(()=>{
         // 获取所有流水线
         // fresh，监听流水线更新时候重新获取
-        findAllPipelineStatus()
+        findUserPipeline()
     },[fresh])
 
     useEffect(()=>{
-        // 所有流水线
+        // 获取单个流水线信息
         findOnePipeline(pipelineId).then(res=>{
             if(res.data===null){
                 props.history.push('/index/404')
             }else {
                 setIsAside(false)
                 // 获取流水线权限
-                getInitProjectPermissions(userId,pipelineId,res.data.power===1)
+                getInitProjectPermissions(userId,pipelineId,res.data && res.data.power===1)
             }
         })
     },[pipelineId])
