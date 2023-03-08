@@ -39,7 +39,7 @@ const VersionContent = props =>{
                 if (index === 3) {
                     obj.props.rowSpan = 2;
                 }
-                if(index > 3){
+                if(index >3 ){
                     obj.props.rowSpan = 0;
                 }
                 return obj;
@@ -100,7 +100,7 @@ const VersionContent = props =>{
             feature: "权限",
             ce: true,
             ee: true,
-        },
+        }
     ]
 
     return <Version {...props} bgroup={"matflow"}>

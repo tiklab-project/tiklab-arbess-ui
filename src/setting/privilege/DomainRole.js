@@ -1,5 +1,5 @@
 import React from "react";
-import {DomainRoleList} from "tiklab-privilege-ui";
+import {DomainRole} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 
 /**
@@ -13,7 +13,7 @@ const DomainRoleContent = props =>{
     const {pipelineStore} = props
     const {pipeline} = pipelineStore
 
-    return <DomainRoleList {...props} domainId={pipeline.id}  bgroup={"matflow"}/>
+    return <DomainRole {...props} domainId={pipeline.id}  bgroup={"matflow"}/>
 
 }
 

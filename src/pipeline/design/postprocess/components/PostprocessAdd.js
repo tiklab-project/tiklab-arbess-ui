@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from "react";
 import {Modal, Form, Select, Checkbox, Table, Space, Tooltip, Dropdown, message} from "antd";
 import {DeleteOutlined,PlusOutlined} from "@ant-design/icons";
-import {Profile} from "tiklab-eam-ui";
+import {getUser} from "tiklab-core-ui";
 import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
 import {autoHeight} from "../../../../common/client/Client";
 import Btn from "../../../../common/btn/Btn";
@@ -12,10 +12,11 @@ import PostprocessUserAdd from "./PostprocessUserAdd";
 const PostprocessAdd = props =>{
 
     const {mesSendData,postprocessVisible,setPostprocessVisible,createPost,pipelineId,
-        formValue,userId,findDmUserPage,updatePost
+        formValue,pipelineUserList,updatePost,postprocessData
     } = props
 
     const [form] = Form.useForm()
+    const userId = getUser().userId
     const mirrorRefs = useRef(null)
     const [height,setHeight] = useState(0)
 
@@ -25,14 +26,13 @@ const PostprocessAdd = props =>{
     // 通知人员选择框展示||隐藏
     const [userAddVisible,setUserAddVisible] = useState(false)
 
-    // 所有通知人员
-    const [allUserList,setAllUserList] = useState([])
+    // 代码块行高亮
+    const [styleActiveLine,setStyleActiveLine] = useState(false)
 
     // 选中的通知人员
     const [yUserList,setYUserList] = useState([])
 
-    // 代码块行高亮
-    const [styleActiveLine,setStyleActiveLine] = useState(false)
+    const [eventType, setEventType] = useState(null);
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -47,15 +47,23 @@ const PostprocessAdd = props =>{
 
     useEffect(()=>{
         if(postprocessVisible){
-            // 初始表单
             if(formValue){
+                // 初始化表单
                 form.setFieldsValue({
                     taskType: formValue.taskType,
-                    typeList: formValue.values.typeList,
+                    typeList: formValue.task.values.typeList,
                 })
+                setYUserList(formValue && formValue.task.values.userList)
                 setPostprocessType(formValue.taskType)
                 return
             }
+            // 获取通知人员
+            let arr = []
+            pipelineUserList.map(item=> {
+                item.user && item.user.id===userId && arr.push(Object.assign({},item,{receiveType:1}))
+            })
+            setYUserList([...arr])
+            // 清空表单
             form.resetFields()
         }
         return ()=>{
@@ -63,25 +71,6 @@ const PostprocessAdd = props =>{
             setPostprocessType(61)
         }
      },[postprocessVisible])
-
-    useEffect(()=>{
-        // 获取通知人员
-        postprocessVisible && findDmUserPage(pipelineId).then(res=>{
-            const dataList = res.data && res.data.dataList
-            if(res.code===0){
-                setAllUserList([...dataList])
-                if(formValue){
-                    setYUserList(formValue && formValue.values.userList)
-                    return
-                }
-                let arr = []
-                dataList.map(item=> {
-                    item.user && item.user.id===userId && arr.push(Object.assign({},item,{messageType:1}))
-                })
-                setYUserList([...arr])
-            }
-        })
-    },[postprocessVisible])
 
     /**
      * 移出用户
@@ -99,10 +88,9 @@ const PostprocessAdd = props =>{
     const changType = (value,record)=>{
         yUserList && yUserList.map(item=>{
             if(item.user.id===record.user.id){
-                item.messageType=value
+                item.receiveType=value
             }
         })
-        setYUserList([...yUserList])
     }
 
     /**
@@ -111,7 +99,6 @@ const PostprocessAdd = props =>{
     const onFocus = () =>{
         setStyleActiveLine(true)
     }
-
 
     /**
      * 消息通知方式是否禁止
@@ -128,17 +115,18 @@ const PostprocessAdd = props =>{
         let newArr = []
         yUserList && yUserList.map(item=>{
             newArr.push({
-                messageType:item.messageType,
+                receiveType:item.receiveType,
                 user:{id:item.user.id}
             })
         })
         if(formValue){
             const params = {
                 taskType:postprocessType,
-                taskId:formValue.taskId,
+                postprocessId:formValue.postprocessId,
                 values:null,
             }
-            postprocessType===61?params.values={ ...value,userList:newArr}:
+            postprocessType===61?
+                params.values={ ...value,userList:newArr}:
                 params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
             updatePost(params).then(res=>{
                 res.code===0 && message.info("更新成功",0.5)
@@ -149,9 +137,11 @@ const PostprocessAdd = props =>{
                 pipelineId:pipelineId,
                 values:null,
             }
-            postprocessType===61?params.values={ ...value,userList:newArr}:
+            postprocessType===61?
+                params.values={ ...value,userList:newArr}:
                 params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
-            createPostConfig(params).then(res=>{
+
+            createPost(params).then(res=>{
                 res.code===0 && message.info("添加成功",0.5)
             })
         }
@@ -189,20 +179,20 @@ const PostprocessAdd = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return  <Space>
-                            <Profile userInfo={record.user}/>
+                            {/*<Profile userInfo={record.user}/>*/}
                             {text}
                         </Space>
             }
         },
         {
             title: "通知事件",
-            dataIndex: "messageType",
-            key: "messageType",
+            dataIndex: "receiveType",
+            key: "receiveType",
             width:"30%",
             ellipsis:true,
             render:(text,record)=>(
                 <Select
-                    defaultValue={record.messageType}
+                    value={record.receiveType}
                     bordered={false}
                     style={{width:80}}
                     onChange={value=>changType(value,record)}
@@ -239,7 +229,7 @@ const PostprocessAdd = props =>{
             title:"短信通知"
         },
         {
-            value:"wechat",
+            value:"qywechat",
             title:"企业微信机器人"
         },
         {
@@ -247,7 +237,7 @@ const PostprocessAdd = props =>{
             title:"钉钉机器人"
         },
         {
-            value:"mail",
+            value:"email",
             title:"邮箱通知"
         },
     ]
@@ -298,7 +288,7 @@ const PostprocessAdd = props =>{
                                            overlay={ <PostprocessUserAdd
                                                userAddVisible={userAddVisible}
                                                setUserAddVisible={setUserAddVisible}
-                                               allUserList={allUserList}
+                                               allUserList={pipelineUserList}
                                                yUserList={yUserList}
                                                setYUserList={setYUserList}
                                                 />}
@@ -320,7 +310,7 @@ const PostprocessAdd = props =>{
                                         dataSource={yUserList}
                                         rowKey={(record) => record.user.id}
                                         pagination={false}
-                                        locale={{emptyText: <EmptyText/>}}
+                                        locale={{emptyText:<EmptyText/>}}
                                     />
                                 </div>
                             </>
@@ -328,7 +318,7 @@ const PostprocessAdd = props =>{
                         {
                             (postprocessType===71 || postprocessType===72) &&
                             <PostprocessMirrorScenario
-                                value={formValue?formValue.values && formValue.values.scriptOrder:""}
+                                value={formValue?formValue.task.values.scriptOrder:""}
                                 mirrorRefs={mirrorRefs}
                                 styleActiveLine={styleActiveLine}
                                 onFocus={onFocus}

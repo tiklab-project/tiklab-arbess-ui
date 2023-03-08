@@ -8,7 +8,7 @@ const Login=AsyncComponent(()=>import("./login/Login"))
 const Logout=AsyncComponent(()=>import("./login/Logout"))
 const Wechat=AsyncComponent(()=>import("./login/Wechat"))
 const NotFound=AsyncComponent(()=>import("./login/404"))
-const NoProductAuthUser=AsyncComponent(()=>import("./login/NoProductAuthUser"))
+const ExcludeProductUser=AsyncComponent(()=>import("./login/ExcludeProductUser"))
 
 /**
  * 首页
@@ -61,20 +61,20 @@ const MessageSendTypeTrue=AsyncComponent(()=>import("./setting/message/MessageSe
 const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice"))
 const MessageNoticeTrue=AsyncComponent(()=>import("./setting/message/MessageNoticeTrue"))
 
-// oplog
-const MyLogList=AsyncComponent(()=>import("./setting/oplog/MyLogList"))
-const LogTemplateList=AsyncComponent(()=>import("./setting/oplog/LogTemplateList"))
-const LogType=AsyncComponent(()=>import("./setting/oplog/LogType"))
+// security
+const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
+const LogTemplate=AsyncComponent(()=>import("./setting/security/LogTemplate"))
+const LogType=AsyncComponent(()=>import("./setting/security/LogType"))
 
 // todotask
 const MyTodoTask=AsyncComponent(()=>import("./setting/todotask/MyTodoTask"))
-const TaskList=AsyncComponent(()=>import("./setting/todotask/TaskList"))
+const Task=AsyncComponent(()=>import("./setting/todotask/Task"))
 const TodoTemp=AsyncComponent(()=>import("./setting/todotask/TodoTemp"))
 const TodoType=AsyncComponent(()=>import("./setting/todotask/TodoType"))
 
 // user
-const UserList=AsyncComponent(()=>import("./setting/user/List"))
-const UserDirectory=AsyncComponent(()=>import("./setting/user/Directory"))
+const User=AsyncComponent(()=>import("./setting/user/User"))
+const Directory=AsyncComponent(()=>import("./setting/user/Directory"))
 const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
 const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
 const UserGroupTrue=AsyncComponent(()=>import("./setting/user/Groupture"))
@@ -82,11 +82,6 @@ const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
-
-const FullWorkTodo=AsyncComponent(()=>import("./setting/wiget/fullWorkTodo"))
-const WidgetMangent=AsyncComponent(()=>import("./setting/wiget/widgetMangent"))
-const OpLogWidget=AsyncComponent(()=>import("./setting/wiget/opLogWidget"))
-const TodoWidget=AsyncComponent(()=>import("./setting/wiget/todoWidget"))
 
 const routers=[
     {
@@ -100,10 +95,10 @@ const routers=[
     {
         path:"/no-auth",
         exact:true,
-        component:NoProductAuthUser,
+        component:ExcludeProductUser,
     },
     {
-        path: "/project",
+        path: "/wechat",
         exact:true,
         component:Wechat,
     },
@@ -252,7 +247,7 @@ const routers=[
                     },
                     {
                         path: "/index/system/task",
-                        component: TaskList,
+                        component: Task,
                     },
                     {
                         path: "/index/system/todoTask",
@@ -268,11 +263,11 @@ const routers=[
                     },
                     {
                         path:"/index/system/myLog",
-                        component: MyLogList,
+                        component: MyLog,
                     },
                     {
                         path:"/index/system/logTemplate",
-                        component: LogTemplateList,
+                        component: LogTemplate,
                     },{
 
                         path:"/index/system/logType",
@@ -288,11 +283,11 @@ const routers=[
                     },
                     {
                         path: "/index/system/user/directory",
-                        component: UserDirectory,
+                        component: Directory,
                     },
                     {
                         path: "/index/system/user/list",
-                        component: UserList,
+                        component: User,
                     },
                     {
                         path:"/index/system/mes/management",

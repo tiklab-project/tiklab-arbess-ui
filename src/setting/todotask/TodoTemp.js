@@ -1,5 +1,5 @@
 import React from "react";
-import {TodoTempList} from "tiklab-todotask-ui";
+import {TodoTemp} from "tiklab-todotask-ui";
 
 /**
  * 待办模板
@@ -7,11 +7,11 @@ import {TodoTempList} from "tiklab-todotask-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const TodoTemp = props =>{
+const TodoTempContent = props =>{
 
-    return <TodoTempList {...props} bgroup={"matflow"}/>
+    return <TodoTemp {...props} bgroup={"matflow"}/>
 
 }
 
 
-export default TodoTemp
+export default TodoTempContent

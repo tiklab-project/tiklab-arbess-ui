@@ -1,5 +1,5 @@
 import React from "react";
-import {SystemFeatureList} from "tiklab-privilege-ui";
+import {SystemFeature} from "tiklab-privilege-ui";
 
 /**
  * 系统功能管理
@@ -7,10 +7,10 @@ import {SystemFeatureList} from "tiklab-privilege-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const SystemFeature = props =>{
+const SystemFeatureContent = props =>{
 
-    return <SystemFeatureList {...props} bgroup={"matflow"}/>
+    return <SystemFeature {...props} bgroup={"matflow"}/>
 
 }
 
-export default SystemFeature
+export default SystemFeatureContent

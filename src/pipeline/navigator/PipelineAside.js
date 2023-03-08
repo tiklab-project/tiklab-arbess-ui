@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/lib/store";
+import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined} from "@ant-design/icons";
 import {Loading} from "../../common/loading/Loading";
 import Aside from "../../common/aside/Aside";
@@ -16,7 +16,7 @@ const PipelineAside= (props)=>{
 
     const {match,pipelineStore,systemRoleStore}=props
 
-    const {findUserPipeline,setPipeline,findOnePipeline,pipelineList,pipeline,fresh} = pipelineStore
+    const {findUserPipeline,setPipeline,findOnePipeline,pipelineList,pipeline,fresh,updateOpen} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
 
     const pipelineId = match.params.id
@@ -45,6 +45,8 @@ const PipelineAside= (props)=>{
                 getInitProjectPermissions(userId,pipelineId,res.data && res.data.power===1)
             }
         })
+        // 当前流水线打开
+        updateOpen(pipelineId)
     },[pipelineId])
 
     // 左侧菜单（二级菜单）

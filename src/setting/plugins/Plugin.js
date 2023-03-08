@@ -1,5 +1,5 @@
 import React from "react";
-import {PluginList} from "tiklab-plugin-ui";
+import {Plugin} from "tiklab-plugin-manager-ui";
 
 /**
  * 插件
@@ -7,10 +7,10 @@ import {PluginList} from "tiklab-plugin-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const Plugin = props =>{
+const PluginContent = props =>{
 
-    return <PluginList {...props}/>
+    return <Plugin {...props}/>
 
 }
 
-export default Plugin
+export default PluginContent

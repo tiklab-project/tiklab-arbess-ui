@@ -19,8 +19,8 @@ env = JSON.stringify(env)
 
 const appKey = JSON.stringify("");
 const appSecret = JSON.stringify("");
-const version = JSON.stringify("");
-const client = JSON.stringify("");
+const version = JSON.stringify("ce");
+const client = JSON.stringify("web");
 
 const webpackGlobal = {
     base_url,

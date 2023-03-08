@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Col, Drawer, Row} from "antd";
+import {Col, Drawer, Row, message} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/btn/Btn";
@@ -97,7 +97,6 @@ const TaskAdd = props =>{
             })
         }
         setNewStageDrawer(false)
-        setTaskFormDrawer(true)
     }
 
     /**
@@ -113,6 +112,10 @@ const TaskAdd = props =>{
                 taskName:setInitName(type),
                 task:{}
             })
+            setTaskFormDrawer(true)
+        }
+        if(data.code===50001){
+            message.info(data.msg,0.7)
         }
     }
 

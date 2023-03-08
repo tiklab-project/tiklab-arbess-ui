@@ -22,10 +22,10 @@ const Stage = props =>{
 
     useEffect(()=>{
         // 初始化多阶段
-        finAllStage(pipeline.id).then(()=>{
+        pipeline && finAllStage(pipeline.id).then(()=>{
             setIsLoading(false)
         })
-    },[stageFresh,taskFresh])
+    },[pipeline,stageFresh,taskFresh])
 
     /**
      * 添加新任务

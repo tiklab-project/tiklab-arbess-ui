@@ -1,7 +1,6 @@
 import React,{useEffect} from "react";
 import {Space,Table} from "antd";
 import {inject,observer} from "mobx-react";
-import {Profile} from "tiklab-eam-ui";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
@@ -81,7 +80,7 @@ const Auth = props =>{
             ellipsis:true,
             render:(text,record) => {
                 return  <Space>
-                            <Profile userInfo={record.user}/>
+                            {/*<Profile userInfo={record.user}/>*/}
                             {text}
                         </Space>
             }

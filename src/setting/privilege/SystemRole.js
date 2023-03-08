@@ -1,5 +1,5 @@
 import React from "react";
-import {SystemRoleList} from "tiklab-privilege-ui";
+import {SystemRole} from "tiklab-privilege-ui";
 
 /**
  * 系统权限
@@ -7,10 +7,10 @@ import {SystemRoleList} from "tiklab-privilege-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const SystemRole = props =>{
+const SystemRoleContent = props =>{
 
-    return <SystemRoleList {...props} bgroup={"matflow"}/>
+    return <SystemRole {...props} bgroup={"matflow"}/>
 
 }
 
-export default SystemRole
+export default SystemRoleContent

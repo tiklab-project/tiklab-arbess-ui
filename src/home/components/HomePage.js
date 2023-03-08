@@ -17,8 +17,8 @@ const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
 
-    const {findAllOpen,pipelineNearList,findlogpage,dynamicList} = homePageStore
-    const {findUserPipeline,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
+    const {findlogpage,dynamicList} = homePageStore
+    const {findAllOpen,pipelineNearList,findUserPipeline,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
 
     // 最近打开的流水线加载
     const [newlyLoading,setNewlyLoading] = useState(true)

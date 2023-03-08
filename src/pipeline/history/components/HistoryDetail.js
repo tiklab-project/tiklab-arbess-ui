@@ -78,6 +78,7 @@ const HistoryDetail = props =>{
         setDetailsLoading(false)
         const isRunStatus = data.data && data.data.some(item=>item[state]==="run")
         if(!isRunStatus){
+            !id && execIndex===0 && setExecIndex(data.data && data.data.length-1)
             clearInterval(inter)
         }
     }
@@ -98,10 +99,10 @@ const HistoryDetail = props =>{
                 setTreeData(execData[execIndex])
                 pipeline && pipeline.type===1 ?
                     setLogData(execData[execIndex]) :
-                    setLogData(manualEquals(execData))
+                    setLogData(manualLog(execData))
             }else {
-                setTreeData(autoEuqals(execData))
-                setLogData(autoEuqals(execData))
+                setTreeData(autoLog(execData))
+                setLogData(autoLog(execData))
             }
         }
     },[execData,execIndex,id])
@@ -111,11 +112,11 @@ const HistoryDetail = props =>{
      * @param data
      * @returns {*}
      */
-    const autoEuqals = data =>{
+    const autoLog = data =>{
         const state = pipeline && pipeline.type===1 ? "runState":"stageState"
         let a
         if(data && data.some(item=>item[state]==="run")){
-            data && data.map(item=>{
+            data && data.map((item)=>{
                 if(item[state]==="run"){
                     a = item
                 }
@@ -146,7 +147,7 @@ const HistoryDetail = props =>{
      * @param data
      * @returns {*}
      */
-    const manualEquals = data =>{
+    const manualLog = data =>{
 
         // 第一层
         let results = isequal(data)
@@ -250,7 +251,6 @@ const HistoryDetail = props =>{
                                 treeData={treeData}
                                 logData={logData}
                                 setLogData={setLogData}
-                                setExecIndex={setExecIndex}
                                 setId={setId}
                             />
                         </div>

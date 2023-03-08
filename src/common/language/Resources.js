@@ -1,11 +1,12 @@
-import {eam_cn} from "tiklab-eam-ui/es/_utils";
-import {privilege_cn} from "tiklab-privilege-ui/es/_utils";
-import {orga_cn} from "tiklab-user-ui/es/_utils";
-import {message_cn} from "tiklab-message-ui/es/_utils";
-import todoTask_cn from "tiklab-todotask-ui/es/_utils/language";
-import oplog_cn from "tiklab-oplog-ui/es/_utils/language";
+import {eam_cn} from "tiklab-eam-ui/es/utils";
+import {privilege_cn} from "tiklab-privilege-ui/es/utils";
+import {orga_cn} from "tiklab-user-ui/es/utils";
+import {message_cn} from "tiklab-message-ui/es/utils";
+import todoTask_cn from "tiklab-todotask-ui/es/utils/language";
+import oplog_cn from "tiklab-security-ui/es/utils/language";
+import pluginManage_cn from "tiklab-plugin-manager-ui/es/utils/language";
 import zhCnTrans from "./cn.json";
-import enCnTrans from "./en.json"
+import enCnTrans from "./en.json";
 
 const resources= {
     zh:{
@@ -16,11 +17,14 @@ const resources= {
             ...message_cn,
             ...todoTask_cn,
             ...oplog_cn,
+            ...pluginManage_cn,
             ...zhCnTrans,
         },
     },
     en:{
-        translation:{...enCnTrans}
+        translation:{
+            ...enCnTrans
+        }
         // translation:{...orga_en,...privilege_en, ...message_en},
     },
 

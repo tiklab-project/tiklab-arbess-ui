@@ -1,5 +1,4 @@
 import React from "react";
-import {Profile} from "tiklab-eam-ui";
 import {message,Tooltip,Table,Space,Spin} from "antd";
 import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
@@ -162,7 +161,7 @@ const PipelineTable = props =>{
             ellipsis: true,
             render:(text,record) => {
                 return  <Space>
-                            <Profile userInfo={record.user}/>
+                            {/*<Profile userInfo={record.user}/>*/}
                             {text}
                         </Space>
             }

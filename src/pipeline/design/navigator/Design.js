@@ -24,7 +24,7 @@ const Design = props =>{
 
     const {match,pipelineStore,taskStore,historyStore,stageStore} = props
 
-    const {pipeline,findOnePipeline} = pipelineStore
+    const {pipeline,findOnePipeline,findDmUserPage} = pipelineStore
     const {execStart} = historyStore
     const {validType,taskList} = taskStore
     const {stageList} = stageStore
@@ -41,6 +41,12 @@ const Design = props =>{
     const [historyItem,setHistoryItem] = useState({})
 
     useEffect(()=>{
+        // 获取项目成员
+        findDmUserPage(pipelineId)
+    },[])
+
+    useEffect(()=>{
+        // 监听运行状态，获取流水线信息
         findOnePipeline(pipelineId)
     },[isDetails])
 

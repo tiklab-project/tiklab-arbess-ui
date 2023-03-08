@@ -1,5 +1,5 @@
 import React from "react";
-import {TodoTypeList} from "tiklab-todotask-ui";
+import {TodoType} from "tiklab-todotask-ui";
 
 /**
  * 待办类型
@@ -7,10 +7,10 @@ import {TodoTypeList} from "tiklab-todotask-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const TodoType = props =>{
+const TodoTypeContent = props =>{
 
-    return <TodoTypeList {...props} bgroup={"matflow"}/>
+    return <TodoType {...props} bgroup={"matflow"}/>
 
 }
 
-export default TodoType
+export default TodoTypeContent

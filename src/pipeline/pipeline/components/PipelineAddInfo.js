@@ -1,7 +1,6 @@
 import React, {useEffect,useState} from "react";
 import {Dropdown, Form, Input, Select, Space, Table, Tooltip} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
-import {Profile} from "tiklab-eam-ui";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../../common/btn/Btn";
@@ -20,7 +19,7 @@ const PipelineAddInfo = props =>{
 
     const {set,pipelineStore,setCurrent,templateLis,templateType,pipelineType,onClick} = props
 
-    const {pipeline,pipelineList,findUserPage,createPipeline,isLoading,updatePipeline} = pipelineStore
+    const {pipeline,pipelineList,findUserPage,createPipeline,isLoading,updatePipeline,findUserPipeline} = pipelineStore
 
     const [form] = Form.useForm()
     const userId = getUser().userId
@@ -50,14 +49,19 @@ const PipelineAddInfo = props =>{
     },[pipeline])
 
     useEffect(()=>{
-        // 获取用户
-        !set && findUserPage().then(res=>{
-            const data = res.data && res.data.dataList
-            if(res.code===0){
-                setYUserList(data.filter(item=>item.id===userId))
-                setNUserList(data.filter(item=>item.id!==userId))
-            }
-        })
+        if(!set){
+            // 获取流水线
+            findUserPipeline()
+            // 获取用户
+            findUserPage().then(res=>{
+                const data = res.data && res.data.dataList
+                if(res.code===0){
+                    setYUserList(data.filter(item=>item.id===userId))
+                    setNUserList(data.filter(item=>item.id!==userId))
+                }
+            })
+        }
+
     },[])
 
     useEffect(()=>{
@@ -209,7 +213,7 @@ const PipelineAddInfo = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return  <Space>
-                            <Profile userInfo={record}/>
+                            {/*<Profile userInfo={record}/>*/}
                             {text}
                         </Space>
             }

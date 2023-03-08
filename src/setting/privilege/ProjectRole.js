@@ -1,5 +1,5 @@
 import React from "react";
-import {ProjectRoleList} from "tiklab-privilege-ui";
+import {ProjectRole} from "tiklab-privilege-ui";
 
 /**
  * 项目权限
@@ -7,10 +7,10 @@ import {ProjectRoleList} from "tiklab-privilege-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const ProjectRole = props =>{
+const ProjectRoleContent = props =>{
 
-    return <ProjectRoleList {...props} bgroup={"matflow"} isBase={true}/>
+    return <ProjectRole {...props} bgroup={"matflow"} isBase={true}/>
 
 }
 
-export default ProjectRole
+export default ProjectRoleContent

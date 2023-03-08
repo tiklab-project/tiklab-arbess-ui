@@ -4,10 +4,6 @@ import {message} from "antd";
 
 export class HomePageStore{
 
-    // 最近打开流水线
-    @observable
-    pipelineNearList = []
-
     // 代办
     @observable
     taskList = []
@@ -73,23 +69,6 @@ export class HomePageStore{
     @action
     setDynamicList = value =>{
         this.dynamicList = value
-    }
-
-    /**
-     * 获取最近打开的流水线
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    findAllOpen = async value =>{
-        const param = new FormData()
-        param.append("userId",getUser().userId)
-        param.append("number",value)
-        const data = await Axios.post("/open/findAllOpen",param)
-        if(data.code===0 && data.data){
-            this.pipelineNearList = data.data
-        }
-        return data
     }
 
     /**

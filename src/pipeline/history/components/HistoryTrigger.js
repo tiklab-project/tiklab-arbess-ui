@@ -9,7 +9,6 @@ import {
     MinusCircleOutlined,
     PlayCircleOutlined
 } from "@ant-design/icons";
-import {Profile} from "tiklab-eam-ui";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg"
 
 /**
@@ -65,7 +64,7 @@ export const actionEn = (record,deleteHistoryLog,execStop) =>{
 /**
  * 运行状态说明
  * @param type：运行类型
- * @returns {JSX.Element}
+ * @returns {string}
  */
 export const runStatusText = type =>{
     switch (type) {
@@ -125,7 +124,7 @@ export const runWay = (text,record) => {
             {
                 text===1?
                     <>
-                        <Profile userInfo={record.user}/>
+                        {/*<Profile userInfo={record.user}/>*/}
                         <div className="runWay-user">{record.user.nickname}手动触发</div>
                     </>
                     :

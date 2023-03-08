@@ -1,5 +1,5 @@
 import React from "react";
-import {OrgaList} from "tiklab-user-ui";
+import {Orga} from "tiklab-user-ui";
 
 /**
  * 部门
@@ -7,10 +7,10 @@ import {OrgaList} from "tiklab-user-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const Orga = props=>{
+const OrgaContent = props=>{
 
-    return <OrgaList {...props} bgroup={"matflow"}/>
+    return <Orga {...props} bgroup={"matflow"}/>
 
 }
 
-export default Orga
+export default OrgaContent

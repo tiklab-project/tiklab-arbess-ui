@@ -18,7 +18,6 @@
 }
 
 .postprocess-modal{
-    padding: var(--tiklab-padding) var(--tiklab-padding) 0;
     .react-codemirror2{
         width: 100%;
         overflow-y: auto;
@@ -33,7 +32,13 @@
     .post-pose-btn{
         padding-top: 8px;
     }
+    .postprocess-modal-up{
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0 ;
+    }
     .postprocess-modal-content{
+        padding: 0 var(--tiklab-padding);
+        max-height:calc(100% - 120px);
+        overflow:auto;
         .CodeMirror{
             .CodeMirror-placeholder{
                 color: #bfbfbf;

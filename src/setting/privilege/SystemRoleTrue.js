@@ -1,5 +1,5 @@
 import React from "react";
-import {SystemRoleList} from "tiklab-privilege-ui";
+import {SystemRole} from "tiklab-privilege-ui";
 
 /**
  * 系统权限
@@ -9,7 +9,7 @@ import {SystemRoleList} from "tiklab-privilege-ui";
  */
 const SystemRoleTrue = props =>{
 
-    return <SystemRoleList {...props} bgroup={"matflow"} isBase={true}/>
+    return <SystemRole {...props} bgroup={"matflow"} isBase={true}/>
 
 }
 

@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import {message, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import {getUser} from "tiklab-core-ui";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 import PostprocessAdd from "./PostprocessAdd";
 import TaskTitleIcon from "../../processDesign/processDesign/components/TaskTitleIcon";
@@ -20,24 +19,23 @@ const Postprocess = props =>{
 
     const {pipelineStore,postprocessStore} = props
 
-    const {findDmUserPage,pipeline} = pipelineStore
+    const {pipelineUserList,pipeline} = pipelineStore
     const {createPost,findPipelinePost,isFindPostprocessData,postprocessData,deletePost,updatePost,
-        messageSendType,mesSendData
+        findMessageSendType,mesSendData
     } = postprocessStore
 
-    const userId = getUser().userId
     const [postprocessVisible,setPostprocessVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
     useEffect(()=>{
         // 是否存在消息发送方式
-        messageSendType()
+        findMessageSendType()
     },[])
 
     useEffect(()=>{
         // 初始化后置处理
-        pipeline && findPipelinePost(pipeline.id)
-    },[pipeline,isFindPostprocessData])
+        findPipelinePost(pipeline.id)
+    },[isFindPostprocessData])
 
     /**
      * 添加后置处理
@@ -88,6 +86,7 @@ const Postprocess = props =>{
         },
     ]
 
+
     return(
         <div className="post-pose">
             <div className="post-pose-content mf-home-limited">
@@ -100,11 +99,11 @@ const Postprocess = props =>{
                         setPostprocessVisible={setPostprocessVisible}
                         createPost={createPost}
                         updatePost={updatePost}
-                        findDmUserPage={findDmUserPage}
+                        pipelineUserList={pipelineUserList}
                         mesSendData={mesSendData}
                         pipelineId={pipeline && pipeline.id}
                         formValue={formValue}
-                        userId={userId}
+                        postprocessData={postprocessData}
                     />
                 </div>
                 <div className="trigger-tables">

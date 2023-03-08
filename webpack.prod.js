@@ -92,9 +92,9 @@ module.exports = merge(baseWebpackConfig, {
                     reuseExistingChunk: true //遇到重复包直接引用，不重新打包
                 },
                 tiklabPluginUI: {
-                    name: "chunk-tiklab-plugin-ui",
+                    name: "chunk-tiklab-plugin-manager-ui",
                     chunks: "all",
-                    test: /tiklab-plugin-ui/,
+                    test: /tiklab-plugin-manager-ui/,
                     priority: 60,
                     reuseExistingChunk: true
                 },

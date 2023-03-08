@@ -36,12 +36,12 @@ const HistoryDetailTree = props =>{
         setLogData(item)
     }
 
-    const renderLi = (item,itemIndex,deep) =>{
+    const renderLi = (item,itemIndex) =>{
         return(
             <div className={`tree-li ${logData.id===item.id?"tree-li-active":""}`} key={itemIndex}
                  onClick={()=>taskLog(item)}
             >
-                <div className="tree-li-firsts" style={{cursor:"pointer",paddingLeft:`${ deep*20+5 }`}}>
+                <div className="tree-li-firsts" style={{cursor:"pointer",paddingLeft:25}}>
                     <div className="tree-li-first">
                         <div className="tree-li-icon">
                             <TaskIcon type={item.taskType} />
@@ -54,11 +54,11 @@ const HistoryDetailTree = props =>{
         )
     }
 
-    const renderSubLi = (group,groupIndex,deep) =>{
+    const renderSubLi = (group,groupIndex) =>{
         return(
             <div className="tree-li" key={groupIndex}>
                 <div className={`tree-li-firsts ${logData.id===group.id?"tree-li-active":""}`}
-                     style={{paddingLeft: `${deep * 20+5}`}}
+                     style={{paddingLeft: 5}}
                      onClick={()=>setOpenOrClose(group)}
                 >
                     <div className="tree-li-first">
@@ -76,7 +76,7 @@ const HistoryDetailTree = props =>{
                 <div className={`tree-ul ${isExpandedTree(group.id) ? null:"tree-li-hidden"}`}>
                     {
                         group.taskInstanceList && group.taskInstanceList.map((list,listIndex)=>{
-                            return renderLi(list,listIndex,deep+1)
+                            return renderLi(list,listIndex)
                         })
                     }
                 </div>
@@ -89,7 +89,7 @@ const HistoryDetailTree = props =>{
         <div className="tree-ul">
             {
                 treeData && treeData.stageInstanceList && treeData.stageInstanceList.map((group,groupIndex)=>{
-                    return renderSubLi(group,groupIndex,0)
+                    return renderSubLi(group,groupIndex)
                 })
             }
 

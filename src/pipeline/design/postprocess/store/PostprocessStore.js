@@ -73,7 +73,7 @@ export class PostprocessStore {
     @action
     deletePost = async value =>{
         const param = new FormData()
-        param.append("postId",value)
+        param.append("postprocessId",value)
         const data = await Axios.post("/postprocess/deletePost",param)
         if(data.code===0){
             this.isFindPostprocessData = !this.isFindPostprocessData
@@ -92,7 +92,7 @@ export class PostprocessStore {
         params.append("pipelineId",value)
         const data = await Axios.post("/postprocess/findPipelinePost",params)
         if(data.code===0){
-            this.postprocessData = data.data ? data.data : []
+            this.postprocessData = data.data && data.data
         }
         return data
     }
@@ -120,8 +120,8 @@ export class PostprocessStore {
      * @returns {Promise<*>}
      */
     @action
-    messageSendType = async value =>{
-        const data = await Axios.post("/postprocess/messageSendType")
+    findMessageSendType = async value =>{
+        const data = await Axios.post("/message/findMessageSendType")
         if(data.code===0){
             this.mesSendData=data.data && data.data
         }

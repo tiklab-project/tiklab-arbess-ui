@@ -44,7 +44,7 @@ const MirrorContent = props =>{
 
     return   <div className="config-scenario">
         <PostprocessMirrorScenario
-            value={item.values.scriptOrder}
+            value={item.task.values.scriptOrder}
             type={item.taskType}
             mirrorRefs={mirrorRefs}
             styleActiveLine={styleActiveLine}

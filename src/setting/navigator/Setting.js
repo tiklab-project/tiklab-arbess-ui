@@ -9,6 +9,7 @@ import {
     SoundOutlined,
     SwitcherOutlined,
     VerifiedOutlined,
+    BoxPlotOutlined,
 } from "@ant-design/icons";
 import SystemContent from "./SettingContent";
 
@@ -54,7 +55,7 @@ const Setting = props =>{
                 icon:<SwitcherOutlined />,
                 purviewCode:"pipeline_auth",
             },
-            {
+                {
                 id:3,
                 title:"资源配置",
                 icon:<FileProtectOutlined />,

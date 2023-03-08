@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Space,Table} from "antd";
-import {Profile} from "tiklab-eam-ui";
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
@@ -126,7 +125,7 @@ const Host = props =>{
             ellipsis:true,
             render:(text,record) => {
                 return  <Space>
-                            <Profile userInfo={record.user}/>
+                            {/*<Profile userInfo={record.user}/>*/}
                             {text}
                         </Space>
             }

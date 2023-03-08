@@ -1,5 +1,5 @@
 import React from "react";
-import {ProjectFeatureList} from "tiklab-privilege-ui";
+import {ProjectFeature} from "tiklab-privilege-ui";
 
 /**
  * 项目功能管理
@@ -7,10 +7,10 @@ import {ProjectFeatureList} from "tiklab-privilege-ui";
  * @returns {JSX.Element}
  * @constructor
  */
-const ProjectFeature = props =>{
+const ProjectFeatureContent = props =>{
 
-    return <ProjectFeatureList {...props} bgroup={"matflow"}/>
+    return <ProjectFeature {...props} bgroup={"matflow"}/>
 
 }
 
-export default ProjectFeature
+export default ProjectFeatureContent

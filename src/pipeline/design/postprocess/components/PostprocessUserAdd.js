@@ -70,7 +70,7 @@ const PostprocessUserAdd = props =>{
             selectedRowKeys.push(record.id)
             addUser.push({
                 ...record,
-                messageType:1,
+                receiveType:1,
             })
         }
         setSelectedRowKeys([...selectedRowKeys])
@@ -86,7 +86,7 @@ const PostprocessUserAdd = props =>{
             selectedRows && selectedRows.map(item=>{
                 newArr.push({
                     ...item,
-                    messageType:1,
+                    receiveType:1,
                 })
             })
             setAddUser([...newArr])

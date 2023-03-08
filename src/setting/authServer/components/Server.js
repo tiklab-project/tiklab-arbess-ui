@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react";
-import {Profile} from "tiklab-eam-ui";
 import {Space,Table} from "antd"
 import {inject,observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
@@ -90,7 +89,7 @@ const Server = props =>{
     // 创建人
     const user = (text,record) =>{
         return  <Space>
-                    <Profile userInfo={record.user}/>
+                    {/*<Profile userInfo={record.user}/>*/}
                     {text}
                 </Space>
     }

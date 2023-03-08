@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {Profile} from "tiklab-eam-ui";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 import Btn from "../../../../common/btn/Btn";
 import MirrorContent from "./CodeBlock";
@@ -26,14 +25,12 @@ const Postprocess = props =>{
 
     const {pipelineStore,postprocessStore,dataItem} = props
 
-    const {findDmUserPage,pipeline} = pipelineStore
+    const {pipelineUserList} = pipelineStore
     const {deletePost,createPost,findTaskPost,fixedPostprocessData,postprocessData,setPostprocessData,
-        setIsFindPostprocessData,isFindPostprocessData,updatePost,messageSendType,mesSendData
+        setIsFindPostprocessData,isFindPostprocessData,updatePost,findMessageSendType,mesSendData
     } = postprocessStore
 
     const userId = getUser().userId
-    // 所有通知人员
-    const [allUserList,setAllUserList] = useState([])
 
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([])
@@ -42,28 +39,14 @@ const Postprocess = props =>{
     const [userAddVisible,setUserAddVisible] = useState(false)
 
     useEffect(()=>{
+        // 初始化是否存在消息发送方式
+        findMessageSendType()
+    },[])
+
+    useEffect(()=>{
         // 初始化task的后置处理
         findTaskPost(dataItem.taskId)
     },[isFindPostprocessData,dataItem.taskId])
-
-    useEffect(()=>{
-        // 初始化是否存在消息发送方式
-        messageSendType()
-        // 初始化通知人员
-        findDmUserPage(pipeline.id).then(res=>{
-            const dataList = res.data && res.data.dataList
-            if(res.code===0){
-                let arr = []
-                dataList.map(item=>{
-                    item.user && item.user.id===userId && arr.push({
-                        ...item,
-                        messageType:1
-                    })
-                })
-                setAllUserList([...dataList])
-            }
-        })
-    },[])
 
     /**
      * 添加后置处理
@@ -102,11 +85,11 @@ const Postprocess = props =>{
      */
     const onUpdate = item => {
         let newArr=[],typeList=[]
-        const values = item.values
+        const values = item.task.values
         if(values){
             values.userList && values.userList.map(item=>{
                 newArr.push({
-                    messageType:item.messageType,
+                    receiveType:item.receiveType,
                     user:{id:item.user.id}
                 })
             })
@@ -114,7 +97,7 @@ const Postprocess = props =>{
         }
         const params = {
             taskType:item.taskType,
-            taskId:item.taskId,
+            postprocessId:item.postprocessId,
             values:{
                 typeList:typeList,
                 userList:newArr
@@ -152,8 +135,8 @@ const Postprocess = props =>{
     const isSuit = (data,item)=>{
         let a
         data && data.map(list=>{
-            if(list.taskId===item.taskId){
-                a = list && list.values
+            if(list.postprocessId===item.postprocessId){
+                a = list
             }
         })
         return a
@@ -178,9 +161,9 @@ const Postprocess = props =>{
      */
     const changEnev = (item,record,value) =>{
         const zz = isSuit(postprocessData,item)
-        zz.userList && zz.userList.map(it=>{
+        zz.task.values.userList.map(it=>{
             if(it.user.id===record.user.id){
-                it.messageType = value
+                it.receiveType = value
             }
         })
         setPostprocessData([...postprocessData])
@@ -193,36 +176,36 @@ const Postprocess = props =>{
      */
     const changeMes = (value,item) =>{
         const zz = isSuit(postprocessData,item)
-        zz.typeList = value
+        zz.task.values.typeList = value
         setPostprocessData([...postprocessData])
     }
 
     /**
-     * 消息通知 ，消息通知人员是否更改
+     * 消息通知人员是否更改
      * @param item
      * @returns {boolean}
      */
     const isYUser = item =>{
-        if(item.values){
-            const userList = item.values.userList
+        if(item.task.values){
+            const userList = item.task.values.userList
             const yUserList = isSuit(fixedPostprocessData && fixedPostprocessData,item)
-            const newId = userList && userList.map(item=>item.user.id + item.messageType)
-            const oldId = yUserList && yUserList.userList.map(item=>item.user.id + item.messageType)
+            const newId = userList && userList.map(item=>item.user.id + item.receiveType)
+            const oldId = yUserList && yUserList.task.values.userList.map(item=>item.user.id + item.receiveType)
             return isEqual(newId,oldId)
         }
         return false
     }
 
     /**
-     *  消息通知 ，消息发送方式是否更改
+     * 消息发送方式是否更改
      * @param item
      * @returns {boolean}
      */
     const isMesType = item =>{
-        if(item.values){
-            const typeList = item.values.typeList
+        if(item.task.values){
+            const typeList = item.task.values.typeList
             const mesType = isSuit(fixedPostprocessData && fixedPostprocessData,item)
-            return isEqual(typeList,mesType && mesType.typeList)
+            return isEqual(typeList,mesType && mesType.task.values.typeList)
         }
         return false
     }
@@ -265,7 +248,6 @@ const Postprocess = props =>{
         }
     }
 
-
     /**
      * 后置处理类型
      * @param item
@@ -292,20 +274,20 @@ const Postprocess = props =>{
                 ellipsis:true,
                 render:(text,record)=>(
                     <Space>
-                        <Profile userInfo={record.user}/>
+                        {/*<Profile userInfo={record.user}/>*/}
                         {text}
                     </Space>
                 )
             },
             {
                 title: "通知事件",
-                dataIndex: "messageType",
-                key: "messageType",
+                dataIndex: "receiveType",
+                key: "receiveType",
                 width:"30%",
                 ellipsis:true,
                 render:(text,record)=>(
                     <Select
-                        value={record.messageType}
+                        value={record.receiveType}
                         bordered={false}
                         style={{width:80}}
                         onChange={value=>changEnev(item,record,value)}
@@ -343,7 +325,7 @@ const Postprocess = props =>{
             title:"短信通知"
         },
         {
-            value:"wechat",
+            value:"qywechat",
             title:"企业微信机器人"
         },
         {
@@ -351,7 +333,7 @@ const Postprocess = props =>{
             title:"钉钉机器人"
         },
         {
-            value:"mail",
+            value:"email",
             title:"邮箱通知"
         },
     ]
@@ -387,7 +369,7 @@ const Postprocess = props =>{
                             <>
                                 <div className="pose-item-typeList">
                                     <div className="title-typeList">消息发送方式</div>
-                                    <Checkbox.Group onChange={value=>changeMes(value,item)} value={item.values.typeList}>
+                                    <Checkbox.Group onChange={value=>changeMes(value,item)} value={item.task.values.typeList}>
                                         <Row>
                                             {
                                                 typeList.map(item=>(
@@ -403,7 +385,7 @@ const Postprocess = props =>{
                                         </Row>
                                     </Checkbox.Group>
                                     {
-                                        item.values && item.values.typeList.length < 1 &&
+                                        item.task.values && item.task.values.typeList.length < 1 &&
                                         <div className="title-typeList-error">请选择消息发送方式</div>
                                     }
                                 </div>
@@ -414,8 +396,8 @@ const Postprocess = props =>{
                                             overlay={ <PostprocessUserAdd
                                                 userAddVisible={userAddVisible}
                                                 setUserAddVisible={setUserAddVisible}
-                                                allUserList={allUserList}
-                                                yUserList={item.values}
+                                                allUserList={pipelineUserList}
+                                                yUserList={item.task.values}
                                                 postprocessData={postprocessData}
                                                 setPostprocessData={setPostprocessData}
                                                 type={'task'}
@@ -435,7 +417,7 @@ const Postprocess = props =>{
                                     <Table
                                         bordered={false}
                                         columns={columns(item)}
-                                        dataSource={item.values.userList}
+                                        dataSource={item.task.values.userList}
                                         rowKey={(record) => record.user.id}
                                         pagination={false}
                                         locale={{emptyText: <EmptyText/>}}

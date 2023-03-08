@@ -1,5 +1,5 @@
 import {action, observable} from "mobx";
-import {Axios,getUser} from "tiklab-core-ui";
+import {Axios, getUser} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class PipelineStore {
@@ -7,6 +7,10 @@ export class PipelineStore {
     // 流水线列表
     @observable
     pipelineList = []
+
+    // 最近打开流水线
+    @observable
+    pipelineNearList = []
 
     // 流水线长度
     @observable
@@ -19,6 +23,13 @@ export class PipelineStore {
     // 流水线用户
     @observable
     pipelineUserList = []
+
+    @observable
+    userPage = {
+        defaultCurrent: 1,
+        pageSize: "11",
+        total: "1",
+    }
 
     // 流水线信息
     @observable
@@ -219,7 +230,7 @@ export class PipelineStore {
             pipeline:value,
             userId:getUser().userId
         }
-        return await Axios.post("/pipeline/updateFollow",params)
+        return await Axios.post("/follow/updateFollow",params)
     }
 
     /**
@@ -237,9 +248,7 @@ export class PipelineStore {
             ...value
         }
         const data =  await Axios.post("/user/user/findUserPage",params)
-        if(data.code===0){
-            this.pipelineUserList = data.data && data.data.dataList
-        }
+        this.findPipelineUser(data)
         return data
     }
 
@@ -259,10 +268,16 @@ export class PipelineStore {
             // ...value,
         }
         const data = await Axios.post("/dmUser/findDmUserPage",params)
+        this.findPipelineUser(data)
+        return data
+    }
+
+    @action
+    findPipelineUser = data =>{
         if(data.code===0){
             this.pipelineUserList = data.data && data.data.dataList
+            this.userPage.total = data.data.totalPage
         }
-        return data
     }
 
     /**
@@ -279,7 +294,35 @@ export class PipelineStore {
             this.pipeline = data.data && data.data
         }
         return data
+    }
 
+    /**
+     * 获取最近打开的流水线
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findAllOpen = async value =>{
+        const param = new FormData()
+        param.append("userId",getUser().userId)
+        param.append("number",value)
+        const data = await Axios.post("/open/findAllOpen",param)
+        if(data.code===0 && data.data){
+            this.pipelineNearList = data.data
+        }
+        return data
+    }
+
+    /**
+     * 更新最近打开的流水线
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    updateOpen = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        return await Axios.post("/open/updateOpen", param)
     }
 
 }
