@@ -12,8 +12,7 @@ const History = props => {
 
     const {historyStore,pipelineStore} = props
 
-    const {findUserInstance,freshen,setHistoryList,pageCurrent,setPageCurrent,
-    } = historyStore
+    const {findUserInstance,setHistoryList,historyFresh,pageCurrent,setPageCurrent} = historyStore
     const {findUserPipeline,pipelineList} = pipelineStore
 
     // 列表数据详情状态
@@ -23,7 +22,7 @@ const History = props => {
     const [pipelineId,setPipelineId] = useState(null)
 
     // 筛选条件--执行状态
-    const [state,setState] = useState(0)
+    const [state,setState] = useState(null)
 
     // 筛选条件--执行方式
     const [type,setType] = useState(0)
@@ -34,9 +33,9 @@ const History = props => {
     useEffect(()=>{
         // 所有流水线
         findUserPipeline()
-        return ()=>{
+        return ()=> {
             setPageCurrent(1)
-            setHistoryList()
+            setHistoryList([])
         }
     },[])
 
@@ -60,9 +59,19 @@ const History = props => {
         }),1000)
         if(detailsVisible){
             clearInterval(inter)
+            initScreen()
         }
-        return ()=>clearInterval(inter)
-    },[freshen,pageCurrent,pipelineId,state,type,detailsVisible])
+        return ()=> clearInterval(inter)
+    },[historyFresh,pageCurrent,pipelineId,state,type,detailsVisible])
+
+    /**
+     * 初始化历史筛选条件
+     */
+    const initScreen = () =>{
+        setType(0)
+        setState(null)
+        setPipelineId(null)
+    }
 
     return (
         <HistoryTable
@@ -71,6 +80,7 @@ const History = props => {
             setType={setType}
             setState={setState}
             setPipelineId={setPipelineId}
+            setIsLoading={setIsLoading}
             pipelineList={pipelineList}
             detailsVisible={detailsVisible}
             setDetailsVisible={setDetailsVisible}

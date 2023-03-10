@@ -12,9 +12,9 @@ export class HistoryStore {
     @observable
     execData = ""
 
-    // 重新渲染页面
+    // 重新刷新
     @observable
-    freshen = false
+    historyFresh = false
 
     // 筛选时，设置当前页数初始化
     @observable
@@ -26,15 +26,6 @@ export class HistoryStore {
         defaultCurrent: 1,
         pageSize: "11",
         total: "1",
-    }
-
-    /**
-     * 设置刷新
-     * @param value
-     */
-    @action
-    setFreshen = value =>{
-        this.freshen = value
     }
 
     /**
@@ -50,8 +41,8 @@ export class HistoryStore {
      * 设置列表
      */
     @action
-    setHistoryList = () =>{
-        this.historyList = []
+    setHistoryList = value =>{
+        this.historyList = value
     }
 
     /**
@@ -123,7 +114,7 @@ export class HistoryStore {
         if(data.code===0){
             message.info("删除成功",0.5)
             this.pageCurrent = 1
-            this.freshen = !this.freshen
+            this.historyFresh = !this.historyFresh
         }
         return data
     }

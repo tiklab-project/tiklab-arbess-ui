@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import {DatePicker,Select,Space} from "antd";
 import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
 import DynamicList from "../../common/dynamic/DynamicList";
@@ -47,11 +47,6 @@ const DynamicDetail = props =>{
         actionType:actionType,
     }
 
-    useEffect(()=>{
-        // 初始化流水线id
-        setPipelineId(pipelineIdList)
-    },[pipelineIdList])
-
     /**
      * 改变数据params
      * @param value
@@ -69,7 +64,7 @@ const DynamicDetail = props =>{
                 break
             case "pipelineId":
                 if(value === null){
-                    params.content[field] = pipelineIdList
+                    params.content = {}
                     break
                 }
                 params.content[field] = [value]
@@ -123,7 +118,7 @@ const DynamicDetail = props =>{
                                 }
                                 notFoundContent={<EmptyText/>}
                             >
-                                <Select.Option key={"1"} value={null}>所有流水线</Select.Option>
+                                <Select.Option key={"1"} value={"null"}>所有流水线</Select.Option>
                                 {
                                     pipelineList && pipelineList.map(item=>{
                                         return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>

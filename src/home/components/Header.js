@@ -123,7 +123,7 @@ const  Head = props =>{
                     <Avatar />
                     <div className="outMenu-out-info">
                         <div className="outMenu-out-name">{getUser().name}</div>
-                        <div className="outMenu-out-eamil">{getUser().eamil}</div>
+                        <div className="outMenu-out-eamil">{getUser().eamil?getUser():"--"}</div>
                     </div>
                 </div>
             </div>

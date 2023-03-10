@@ -1,5 +1,5 @@
 import React from "react";
-import {DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined, PlusOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {Popconfirm, Tooltip} from "antd";
 import TaskIcon from "./TaskIcon";
 
@@ -76,23 +76,24 @@ export const TaskFinalAdd = (type,list,title,newTask) =>{
  * @param showDetail：任务详情事件
  * @param deep
  * @param delTask：删除任务事件
+ * @param validData：未填的必需任务
  * @returns {JSX.Element}
  */
-export const TaskTypeContent = (item,deep,showDetail,delTask) =>{
+export const TaskTypeContent = (item,deep,showDetail,delTask,validData) =>{
+    const valid = taskId => validData && validData.some(item=>item===taskId)
     return (
         <div onClick={()=>showDetail(item)}
-            // ${valid(item.taskId)?"job-name":""}
              style={{paddingLeft:deep}}
-             className={`newStages-job-content ${item.taskType<10?"newStages-job-code":""}`}
+             className={`newStages-job-content ${valid(item.taskId)?"job-name":""} ${item.taskType<10?"newStages-job-code":""}`}
         >
             <div className="newStages-job-sub">
                 <span className="newStages-job-icon"><TaskIcon type={item.taskType}/></span>
                 <span className="newStages-job-title">{item.taskName}</span>
             </div>
-            {/*{*/}
-            {/*    valid(item.taskId) &&*/}
-            {/*    <div className="newStages-job-warn"><ExclamationCircleOutlined /></div>*/}
-            {/*}*/}
+            {
+                valid(item.taskId) &&
+                <div className="newStages-job-warn"><ExclamationCircleOutlined /></div>
+            }
             <Popconfirm
                 title="你确定删除吗"
                 onConfirm={e=>delTask(e,item)}

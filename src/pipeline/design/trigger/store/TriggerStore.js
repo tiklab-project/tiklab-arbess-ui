@@ -18,8 +18,8 @@ export class TriggerStore {
      * @returns {Promise<*>}
      */
     @action
-    updateTriggerConfig = async value =>{
-        const data = await Axios.post("/pipelineTriggerConfig/updateConfig",value)
+    updateTrigger = async value =>{
+        const data = await Axios.post("/trigger/updateTrigger",value)
         if(data.code===0){
             message.info("更新成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
@@ -33,10 +33,10 @@ export class TriggerStore {
      * @returns {Promise<*>}
      */
     @action
-    deleteTriggerConfig = async value =>{
+    deleteTrigger = async value =>{
         const param = new FormData()
-        param.append("configId",value)
-        const data = await Axios.post("/pipelineTriggerConfig/deleteConfig",param)
+        param.append("triggerId",value)
+        const data = await Axios.post("/trigger/deleteTrigger",param)
         if(data.code===0){
             message.info("删除成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
@@ -50,8 +50,8 @@ export class TriggerStore {
      * @returns {Promise<*>}
      */
     @action
-    createTriggerConfig = async value =>{
-        const data = await Axios.post("/pipelineTriggerConfig/createConfig",value)
+    createTrigger = async value =>{
+        const data = await Axios.post("/trigger/createTrigger",value)
         if (data.code===0){
             message.info("添加成功",0.5)
             this.isFindTrigger = !this.isFindTrigger
@@ -68,26 +68,12 @@ export class TriggerStore {
      * @returns {Promise<*>}
      */
     @action
-    findAllTriggerConfig = async value =>{
+    findAllTrigger = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        const data = await Axios.post("/pipelineTriggerConfig/findAllTriggerConfig",param)
+        const data = await Axios.post("/trigger/findAllTrigger",param)
         if (data.code===0){
             this.triggerData = data.data && data.data
-        }
-        return data
-    }
-
-    /**
-     * 获取单个触发器信息
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    oneAllTriggerConfig = async value =>{
-        const data = await Axios.post("/pipelineTriggerConfig/oneAllTriggerConfig",value)
-        if (data.code===0){
-
         }
         return data
     }

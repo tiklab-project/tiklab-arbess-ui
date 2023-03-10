@@ -20,6 +20,10 @@ export class TaskStore {
     @observable
     dataItem = {}
 
+    // 多任务未填的必需任务
+    @observable
+    taskMustField = []
+
     @action
     setDataItem = value =>{
         this.dataItem = value
@@ -95,13 +99,30 @@ export class TaskStore {
     deleteTask = async value =>{
         const params = new FormData()
         params.append("taskId",value)
-        const data = await Axios.post("/tasks/deleteTask",value)
+        const data = await Axios.post("/tasks/deleteTask",params)
         if(data.code===0){
             message.info("删除成功",0.7)
             this.taskFresh = !this.taskFresh
         }
         return data
     }
+
+    /**
+     * 获取多任务未填的必需任务
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    validTaskMustField = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        const data = await Axios.post("/tasks/validTaskMustField",param)
+        if(data.code===0){
+            this.taskMustField = data.data && data.data
+        }
+        return data
+    }
+
 
 }
 

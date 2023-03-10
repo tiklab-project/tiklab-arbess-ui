@@ -1,4 +1,4 @@
-import {observable,action} from "mobx";
+import {action, observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 
 export class PostprocessStore {
@@ -115,13 +115,25 @@ export class PostprocessStore {
     }
 
     /**
+     * 获取单个后置处理信息
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findOnePost = async value =>{
+        const param = new FormData()
+        param.append("postprocessId",value)
+        return await Axios.post("/postprocess/findOnePost", param)
+    }
+
+    /**
      * 获取未配置的消息发送方式
      * @param value
      * @returns {Promise<*>}
      */
     @action
     findMessageSendType = async value =>{
-        const data = await Axios.post("/message/findMessageSendType")
+        const data = await Axios.post("/taskMessage/findMessageSendType")
         if(data.code===0){
             this.mesSendData=data.data && data.data
         }

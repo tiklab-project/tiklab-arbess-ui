@@ -15,17 +15,21 @@ const Stage = props =>{
 
     const {stageStore,taskStore,pipeline,addTask,setCreateValue,setTaskFormDrawer} = props
 
-    const {stageList,finAllStage,stageFresh,deleteStage} = stageStore
+    const {stageList,finAllStage,stageFresh,deleteStage,validStagesMustField,stageMustField} = stageStore
     const {setDataItem,taskFresh} = taskStore
 
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
         // 初始化多阶段
-        pipeline && finAllStage(pipeline.id).then(()=>{
+        finAllStage(pipeline.id).then(()=>{
             setIsLoading(false)
         })
-    },[pipeline,stageFresh,taskFresh])
+
+        // 获取未填的必需任务
+        validStagesMustField(pipeline.id)
+
+    },[stageFresh,taskFresh])
 
     /**
      * 添加新任务
@@ -129,7 +133,7 @@ const Stage = props =>{
                                                        <div key={taskIndex}>
                                                            <div className={`newStages-job ${!group.code?"newStages-has":""}`} >
                                                                { !group.code && hasAddPre(list,groupIndex,taskIndex) }
-                                                               { TaskTypeContent(task,20,showDetail,deleteTask) }
+                                                               { TaskTypeContent(task,20,showDetail,deleteTask,stageMustField) }
                                                                { !group.code && hasAddNext(list,groupIndex,taskIndex) }
                                                            </div>
                                                        </div>

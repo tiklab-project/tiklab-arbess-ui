@@ -119,6 +119,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif)/,
+                exclude: /\.(png|jpg|jpeg|gif).js/,
                 // exclude: /node_modules/,
                 use: {
                     loader: "url-loader",
@@ -145,6 +146,7 @@ module.exports = {
             },
             {
                 test: /\.(svg)/,
+                exclude: /\.(svg).js/,
                 use: {
                     loader: "file-loader",
                     options: {

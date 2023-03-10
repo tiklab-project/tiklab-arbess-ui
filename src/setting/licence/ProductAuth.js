@@ -1,5 +1,5 @@
 import React from "react";
-import {ProductAuth} from "tiklab-privilege-ui";
+import {ProductAuth} from "tiklab-licence-ui";
 
 /**
  * 产品授权页面

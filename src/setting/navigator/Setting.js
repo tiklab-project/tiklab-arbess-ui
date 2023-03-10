@@ -9,7 +9,7 @@ import {
     SoundOutlined,
     SwitcherOutlined,
     VerifiedOutlined,
-    BoxPlotOutlined,
+    AuditOutlined,
 } from "@ant-design/icons";
 import SystemContent from "./SettingContent";
 
@@ -105,6 +105,12 @@ const Setting = props =>{
                 id:"/index/system/version",
                 title:"版本与许可证",
                 icon:<VerifiedOutlined />,
+                purviewCode:"pipeline_version",
+            },
+            {
+                id:"/index/system/productAuth",
+                title:"应用授权",
+                icon:<AuditOutlined />,
                 purviewCode:"pipeline_version",
             },
             {

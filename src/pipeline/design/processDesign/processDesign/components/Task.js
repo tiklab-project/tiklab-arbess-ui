@@ -13,14 +13,17 @@ const Task = props => {
 
     const {pipeline,taskStore,addTask,setTaskFormDrawer,setCreateValue} = props
 
-    const {findAllTask,taskList,taskFresh,setDataItem,deleteTask} = taskStore
+    const {findAllTask,taskList,taskFresh,setDataItem,deleteTask,validTaskMustField,taskMustField} = taskStore
 
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
+        // 获取多任务
         findAllTask(pipeline.id).then(()=>{
             setIsLoading(false)
         })
+        // 获取未填的必需任务
+        validTaskMustField(pipeline.id)
     },[taskFresh])
 
     /**
@@ -81,7 +84,7 @@ const Task = props => {
                 </div>
                 <div className="newStages-single">
                     <div className={`newStages-job`}>
-                        {TaskTypeContent(group,14,showDetail,delTask)}
+                        {TaskTypeContent(group,14,showDetail,delTask,taskMustField)}
                     </div>
                 </div>
             </div>

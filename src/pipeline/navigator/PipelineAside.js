@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
+import {SYSTEM_ROLE_STORE} from "tiklab-user-ui/es/store";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined} from "@ant-design/icons";
 import {Loading} from "../../common/loading/Loading";
 import Aside from "../../common/aside/Aside";

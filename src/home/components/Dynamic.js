@@ -17,21 +17,16 @@ const Dynamic = props =>{
 
     useEffect(()=>{
         // 获取所有流水线
-        findUserPipeline().then(res=>{
-            if(res.code===0){
-                const params = {
-                    pageParam:{
-                        pageSize:15,
-                        currentPage:1
-                    },
-                    bgroup:"matflow",
-                    content:{
-                        pipelineId:setPipelineId(res.data)
-                    }
-                }
-                // 获取近期动态
-                findlogpage(params)
-            }
+        findUserPipeline()
+
+        // 获取近期动态
+        findlogpage({
+            pageParam:{
+                pageSize:15,
+                currentPage:1
+            },
+            bgroup:"matflow",
+            content:{}
         })
     },[])
 

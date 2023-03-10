@@ -53,25 +53,6 @@ module.exports = {
         },"tiklab-user-ui"],
 
         ["import", {
-            "libraryName": "tiklab-privilege-ui",
-            "libraryDirectory": "es",
-            "style": true,
-            "customName": (name) => {
-                let split = name.split('-');
-                const fullName = split.reduce((total, currentValue, currentIndex, arr) => {
-                    if(currentIndex=== 0) {
-                        return total += currentValue;
-                    }
-                    const UpBit = currentValue.slice(0,1).toUpperCase();
-                    const lowBit = currentValue.slice(1,currentValue.length);
-                    const name = UpBit + lowBit
-                    return total += name;
-                },'');
-                return `tiklab-privilege-ui/es/${fullName}`;
-            }
-        },"tiklab-privilege-ui"],
-
-        ["import", {
             "libraryName": "tiklab-eam-ui",
             "libraryDirectory": "es",
             "style": true,
@@ -89,6 +70,25 @@ module.exports = {
                 return `tiklab-eam-ui/es/${fullName}`;
             }
         },"tiklab-eam-ui"],
+
+        ["import", {
+            "libraryName": "tiklab-integration-ui",
+            "libraryDirectory": "es",
+            "style": true,
+            "customName": (name) => {
+                let split = name.split('-');
+                const fullName = split.reduce((total, currentValue, currentIndex, arr) => {
+                    if(currentIndex=== 0) {
+                        return total += currentValue;
+                    }
+                    const UpBit = currentValue.slice(0,1).toUpperCase();
+                    const lowBit = currentValue.slice(1,currentValue.length);
+                    const name = UpBit + lowBit
+                    return total += name;
+                },'');
+                return `tiklab-integration-ui/es/${fullName}`;
+            }
+        }, "tiklab-integration-ui"],
 
         ["import", {
             "libraryName": "tiklab-message-ui",

@@ -26,8 +26,8 @@ const Design = props =>{
 
     const {pipeline,findOnePipeline,findDmUserPage} = pipelineStore
     const {execStart} = historyStore
-    const {validType,taskList} = taskStore
-    const {stageList} = stageStore
+    const {taskList,taskMustField} = taskStore
+    const {stageList,stageMustField} = stageStore
 
     const pipelineId = match.params.id
 
@@ -68,9 +68,9 @@ const Design = props =>{
      */
     const runStatu = () => {
         if(pipeline && pipeline.type===1){
-            return !(taskList && taskList.length < 1 || validType && validType.length > 0)
+            return !(taskList && taskList.length < 1 || taskMustField && taskMustField.length > 0)
         }
-        return !(stageList && stageList.length < 1 || validType && validType.length > 0)
+        return !(stageList && stageList.length < 1 || stageMustField && stageMustField.length > 0)
     }
 
     const typeLis = [
@@ -103,16 +103,16 @@ const Design = props =>{
     }
 
     return(
-        <div className="config mf">
-            <div className="config-up">
-                <div className="config-top">
+        <div className="design mf">
+            <div className="design-up">
+                <div className="design-top">
                     <BreadcrumbContent firstItem={"设计"}/>
-                    <div className="config-tabs">
+                    <div className="design-tabs">
                         {
                             typeLis.map(item=>{
                                 return(
                                     <div key={item.id}
-                                         className={`config-tab ${type===item.id?"config-active":""}`}
+                                         className={`design-tab ${type===item.id?"design-active":""}`}
                                          onClick={()=>setType(item.id)}
                                     >{item.title}</div>
                                 )

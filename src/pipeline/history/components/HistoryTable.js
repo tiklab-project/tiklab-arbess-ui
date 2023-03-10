@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import {Table} from "antd";
+import React,{useState,useEffect} from "react";
+import {Popconfirm, Table, Tooltip} from "antd";
 import { observer } from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
@@ -8,16 +8,18 @@ import {getTime} from "../../../common/client/Client";
 import {SpinLoading} from "../../../common/loading/Loading";
 import HistoryDetail from "./HistoryDetail";
 import HistoryScreen from "./HistoryScreen";
-import {runStatus,actionEn,runWay} from "./HistoryTrigger";
+import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 import "./HistoryTable.scss"
+import {DeleteOutlined, MinusCircleOutlined} from "@ant-design/icons";
+import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
 
 const HistoryTable = props =>{
 
-    const {tableType,isLoading,setType,setUseId,setState,setPipelineId,pipelineUserList,pipelineList,
+    const {tableType,isLoading,setType,setUseId,setState,setPipelineId,setIsLoading,pipelineUserList,pipelineList,
         detailsVisible,setDetailsVisible,historyStore
     } = props
 
-    const {pageCurrent,setPageCurrent,page,historyList,deleteInstance,execStop} = historyStore
+    const {pageCurrent,setPageCurrent,page,historyList,setHistoryList,deleteInstance,execStop} = historyStore
 
     // 单个历史信息
     const [historyItem,setHistoryItem] = useState({})
@@ -37,6 +39,25 @@ const HistoryTable = props =>{
      */
     const changPage = pages =>{
         setPageCurrent(pages)
+        setHistoryList([])
+        // 重新加载
+        setIsLoading(true)
+    }
+
+    /**
+     * 删除历史
+     * @param record
+     */
+    const del = record =>{
+        deleteInstance(record.instanceId)
+    }
+
+    /**
+     * 终止运行
+     * @param pipeline：流水线信息
+     */
+    const terminateOperation = pipeline => {
+        execStop(pipeline.id)
     }
 
     const columns = [
@@ -48,7 +69,7 @@ const HistoryTable = props =>{
             ellipsis:true,
             render:(text,record) =>{
                 if(tableType==="history"){
-                    return <span className="history-table-name" onClick={()=>details(record)}>                        
+                    return <span className="history-table-name" onClick={()=>details(record)}>
                                 <span className="history-table-pipeline">{record.pipeline && record.pipeline.name}</span>
                                 <span className="history-table-findNumber"> #{text}</span>
                             </span>
@@ -64,7 +85,11 @@ const HistoryTable = props =>{
             key: "runStatus",
             width:"10%",
             ellipsis:true,
-            render:(text,record) => runStatus(record.runStatus),
+            render:(text,record) => (
+                <Tooltip title={runStatusText(record.runStatus)}>
+                    {runStatusIcon(record.runStatus)}
+                </Tooltip>
+            )
         },
         {
             title: "触发信息",
@@ -72,7 +97,22 @@ const HistoryTable = props =>{
             key: "runWay",
             width:"20%",
             ellipsis:true,
-            render:(text,record) => runWay(text,record)
+            render:(text,record) => (
+                <div className="history-table-runWay">
+                    {
+                        text===1?
+                            <>
+                                {/*<Profile userInfo={record.user}/>*/}
+                                <div className="runWay-user">{record.user.nickname}手动触发</div>
+                            </>
+                            :
+                            <>
+                                {/*<img src={pip_trigger} alt={'trigger'} style={{width:22,height:22}}/>*/}
+                                <div className="runWay-user">定时任务自动触发</div>
+                            </>
+                    }
+                </div>
+            )
         },
         {
             title: "开始",
@@ -95,7 +135,30 @@ const HistoryTable = props =>{
             key:"action",
             width:"10%",
             ellipsis:true,
-            render:(text,record)=> actionEn(record,deleteInstance,execStop)
+            render:(text,record)=> {
+                switch (record.runStatus) {
+                    case "run":
+                        return  <Tooltip title={"终止"} onClick={()=>terminateOperation(record.pipeline)}>
+                                    <MinusCircleOutlined style={{cursor:"pointer"}}/>
+                                </Tooltip>
+                    default:
+                        return (
+                            <Tooltip title={"删除"}>
+                                <Popconfirm
+                                    placement="topRight"
+                                    title="你确定删除吗"
+                                    onConfirm={()=>del(record)}
+                                    okText="确定"
+                                    cancelText="取消"
+                                >
+                                <span style={{cursor:"pointer"}}>
+                                    <DeleteOutlined />
+                                </span>
+                                </Popconfirm>
+                            </Tooltip>
+                        )
+                }
+            }
         }
     ]
 

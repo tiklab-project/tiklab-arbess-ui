@@ -17,7 +17,7 @@ const Tabs = props =>{
                 tabLis.map(item=>(
                     <div
                         key={item.id}
-                        className={`mf-tab ${type===item.id?"mf-active-tab":null}`}
+                        className={`mf-tab ${type===item.id?"mf-active-tab":""}`}
                         onClick={()=>onClick(item)}
                     >{item.title}</div>
                 ))

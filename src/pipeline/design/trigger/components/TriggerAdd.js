@@ -13,7 +13,7 @@ import ModalTitle from "../../../../common/modalTitle/ModalTitle";
  */
 const TriggerAdd = props =>{
 
-    const {triggerVisible,setTriggerVisible,createTriggerConfig,pipelineId,formValue,updateTriggerConfig} = props
+    const {triggerVisible,setTriggerVisible,createTrigger,pipelineId,formValue,updateTrigger} = props
 
     const [form] = Form.useForm()
     const [height,setHeight] = useState(0)
@@ -59,7 +59,7 @@ const TriggerAdd = props =>{
                 pipeline:{id:pipelineId},
                 taskType:81,
             }
-            createTriggerConfig(value)
+            createTrigger(value)
         }else {
             const value = {
                 values:{
@@ -69,9 +69,9 @@ const TriggerAdd = props =>{
                 },
                 pipeline:{id:pipelineId},
                 taskType:81,
-                configId:formValue.configId
+                triggerId:formValue.triggerId
             }
-            updateTriggerConfig(value)
+            updateTrigger(value)
         }
         setTriggerVisible(false)
     }
@@ -108,7 +108,7 @@ const TriggerAdd = props =>{
             width={500}
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
-            className="mf"
+            className="mf trigger-modal"
         >
             <div className="trigger-modal">
                 <div className="trigger-modal-up">

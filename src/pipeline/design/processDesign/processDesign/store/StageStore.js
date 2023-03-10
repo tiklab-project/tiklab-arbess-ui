@@ -12,6 +12,10 @@ export class StageStore {
     @observable
     stageFresh = false
 
+    // 多阶段未填的必需任务
+    @observable
+    stageMustField = []
+
     /**
      * 添加多阶段
      * @param value
@@ -70,6 +74,23 @@ export class StageStore {
         if(data.code===0){
             message.info("删除成功",0.7)
             this.stageFresh=!this.stageFresh
+        }
+        return data
+    }
+
+
+    /**
+     * 获取多阶段未填的必需任务
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    validStagesMustField = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        const data = await Axios.post("/stage/validStagesMustField",param)
+        if(data.code===0){
+            this.stageMustField = data.data && data.data
         }
         return data
     }

@@ -141,7 +141,13 @@ const HostModal = props =>{
                         </Form.Item>
                         <Form.Item
                             label="端口" name="port"
-                            rules={[{required: true, message: "端口不能为空"}]}
+                            rules={[
+                                {required: true, message: "端口不能为空"},
+                                {
+                                    pattern:/^[0-9]*$/,
+                                    message:"端口只包含整数"
+                                }
+                            ]}
                         >
                             <Input/>
                         </Form.Item>

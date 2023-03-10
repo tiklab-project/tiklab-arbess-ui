@@ -7,7 +7,7 @@ import {
     RightOutlined,
     EditOutlined
 } from "@ant-design/icons";
-import {PrivilegeProjectButton} from "tiklab-privilege-ui";
+import {PrivilegeProjectButton} from "tiklab-user-ui";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/Btn";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";

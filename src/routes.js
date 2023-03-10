@@ -44,15 +44,6 @@ const Info=AsyncComponent(()=>import("./setting/envi/components/Info"))
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
 
-// privilege
-const SystemFeature=AsyncComponent(()=>import("./setting/privilege/SystemFeature"))
-const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
-const SystemRoleTrue=AsyncComponent(()=>import("./setting/privilege/SystemRoleTrue"))
-const ProjectRole=AsyncComponent(()=>import("./setting/privilege/ProjectRole"))
-const ProjectFeature=AsyncComponent(()=>import("./setting/privilege/ProjectFeature"))
-const DomainRoleContent=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
-const ProductAuth=AsyncComponent(()=>import("./setting/privilege/productAuth"))
-
 // message
 const MessageManagement=AsyncComponent(()=>import("./setting/message/MessageManagement"))
 const MessageType=AsyncComponent(()=>import("./setting/message/MessageType"))
@@ -79,9 +70,16 @@ const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
 const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
 const UserGroupTrue=AsyncComponent(()=>import("./setting/user/Groupture"))
 const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
+const SystemFeature=AsyncComponent(()=>import("./setting/user/SystemFeature"))
+const SystemRole=AsyncComponent(()=>import("./setting/user/SystemRole"))
+const SystemRoleTrue=AsyncComponent(()=>import("./setting/user/SystemRoleTrue"))
+const ProjectRole=AsyncComponent(()=>import("./setting/user/ProjectRole"))
+const ProjectFeature=AsyncComponent(()=>import("./setting/user/ProjectFeature"))
+const DomainRoleContent=AsyncComponent(()=>import("./setting/user/DomainRole"))
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
+const ProductAuth=AsyncComponent(()=>import("./setting/licence/ProductAuth"))
 
 const routers=[
     {

@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
-import {PrivilegeButton} from "tiklab-privilege-ui";
+import {PrivilegeButton} from "tiklab-user-ui";
 import {inject,observer} from "mobx-react";
-import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
+import {SYSTEM_ROLE_STORE} from "tiklab-user-ui/es/store";
 import {getUser} from "tiklab-core-ui";
 import {renderRoutes} from "react-router-config";
 import {departmentRouters,templateRouter} from "./SettingRouters";
@@ -43,7 +43,7 @@ const SettingContent= props =>  {
                 break
         }
         for (let i = 0; i < arr.length; i++) {
-            if (data.indexOf(arr[i]) > -1){
+            if (data && data.indexOf(arr[i]) > -1){
                 return arr[i]
             }
         }
@@ -89,7 +89,7 @@ const SettingContent= props =>  {
     const menu = (data,deep) =>{
         return(
             <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
-                className={`system-aside-li system-aside-second ${data.id=== selectKey ? "system-aside-select" :null}`}
+                className={`system-aside-li system-aside-second ${data.id=== selectKey ? "system-aside-select":""}`}
                 onClick={()=>select(data)}
                 key={data.id}
             >
@@ -204,7 +204,7 @@ const SettingContent= props =>  {
                </ul>
            </div>
            <div className="system-content">
-               {renderRoutes(route.routes)}
+               {renderRoutes(route.routes) }
            </div>
        </div>
     )

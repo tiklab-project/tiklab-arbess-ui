@@ -12,8 +12,7 @@ const HistoryPipeline = props => {
 
     const {historyStore,pipelineStore} = props
 
-    const {findPipelineInstance,setHistoryList,freshen,pageCurrent,setPageCurrent,
-    } = historyStore
+    const {findPipelineInstance,setHistoryList,historyFresh,pageCurrent,setPageCurrent} = historyStore
     const {pipeline,findDmUserPage,pipelineUserList} = pipelineStore
 
     // 加载
@@ -23,7 +22,7 @@ const HistoryPipeline = props => {
     const [detailsVisible,setDetailsVisible] = useState(false)
 
     // 筛选条件--执行状态
-    const [state,setState] = useState(0)
+    const [state,setState] = useState(null)
 
     // 筛选条件--执行人
     const [userId,setUseId] = useState(null)
@@ -34,10 +33,11 @@ const HistoryPipeline = props => {
     useEffect(()=>{
         // 项目成员
         pipeline && findDmUserPage(pipeline.id)
-        return ()=>{
+        return ()=> {
             setPageCurrent(1)
-            setHistoryList()
+            setHistoryList([])
         }
+
     },[pipeline])
 
     let inter=null
@@ -63,10 +63,20 @@ const HistoryPipeline = props => {
         }
         if(detailsVisible){
             clearInterval(inter)
+            initScreen()
         }
         // 组件销毁事件
         return ()=> clearInterval(inter)
-    },[pipeline,freshen,pageCurrent,userId,state,type,detailsVisible])
+    },[historyFresh,pipeline,pageCurrent,userId,state,type,detailsVisible])
+
+    /**
+     * 初始化历史筛选条件
+     */
+    const initScreen = () =>{
+        setType(0)
+        setState(null)
+        setUseId(null)
+    }
 
     return (
         <HistoryTable
@@ -74,6 +84,7 @@ const HistoryPipeline = props => {
             setType={setType}
             setState={setState}
             setUseId={setUseId}
+            setIsLoading={setIsLoading}
             pipelineUserList={pipelineUserList}
             detailsVisible={detailsVisible}
             setDetailsVisible={setDetailsVisible}

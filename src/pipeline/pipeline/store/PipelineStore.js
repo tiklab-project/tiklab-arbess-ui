@@ -1,5 +1,5 @@
-import {action, observable} from "mobx";
-import {Axios, getUser} from "tiklab-core-ui";
+import {action,observable} from "mobx";
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 export class PipelineStore {
@@ -81,10 +81,8 @@ export class PipelineStore {
      */
     @action
     findUserPipeline = value =>{
-        const param = new FormData()
-        param.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findUserPipeline",param).then(res=>{
+            Axios.post("/pipeline/findUserPipeline").then(res=>{
                 if(res.code===0 && res.data){
                     this.pipelineList=res.data
                     this.pipelineLength=res.data.length
@@ -105,13 +103,9 @@ export class PipelineStore {
      */
     @action
     createPipeline = values =>{
-        const params = {
-            ...values,
-            user: {id:getUser().userId}
-        }
         this.isLoading = true
         return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/createPipeline",params).then(res=>{
+            Axios.post("/pipeline/createPipeline",values).then(res=>{
                 if(res.code===0){
                     message.info("创建成功")
                 }
@@ -136,7 +130,6 @@ export class PipelineStore {
     findLike = values =>{
         const params = new FormData()
         params.append("pipelineName",values)
-        params.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
             Axios.post("/pipeline/findLikePipeline",params).then(res=>{
                 if(res.code===0){
@@ -160,7 +153,6 @@ export class PipelineStore {
         this.isLoading = true
         const param = new FormData()
         param.append("pipelineId",value)
-        param.append("userId",getUser().userId)
         return new Promise((resolve, reject) => {
             Axios.post("/pipeline/deletePipeline",param).then(res=>{
                 if(res.code===0){
@@ -207,9 +199,7 @@ export class PipelineStore {
      */
     @action
     findAllFollow = value =>{
-        const param = new FormData()
-        param.append("userId",getUser().userId)
-        Axios.post("/pipeline/findUserFollowPipeline",param).then(res=>{
+        Axios.post("/pipeline/findUserFollowPipeline").then(res=>{
             if(res.code===0){
                 this.pipelineList=res.data
                 this.followLength=res.data && res.data.length
@@ -228,7 +218,6 @@ export class PipelineStore {
     updateFollow =async value =>{
         const params = {
             pipeline:value,
-            userId:getUser().userId
         }
         return await Axios.post("/follow/updateFollow",params)
     }
@@ -265,7 +254,6 @@ export class PipelineStore {
                 currentPage:1
             },
             domainId:value,
-            // ...value,
         }
         const data = await Axios.post("/dmUser/findDmUserPage",params)
         this.findPipelineUser(data)
@@ -304,7 +292,6 @@ export class PipelineStore {
     @action
     findAllOpen = async value =>{
         const param = new FormData()
-        param.append("userId",getUser().userId)
         param.append("number",value)
         const data = await Axios.post("/open/findAllOpen",param)
         if(data.code===0 && data.data){

@@ -7,10 +7,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const optimizeCss = require("optimize-css-assets-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const webpack = require("webpack");
 const customEnv = process.env.CUSTOM_ENV;
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const {webpackGlobal} = require("./environment/environment_" + customEnv);
 const CompressionPlugin = require("compression-webpack-plugin");
 
@@ -112,13 +112,6 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 65,
                     reuseExistingChunk: true
                 },
-                tiklabPrivilegeUI: {
-                    name: "chunk-tiklab-privilege-ui",
-                    chunks: "all",
-                    test: /tiklab-privilege-ui/,
-                    priority: 70,
-                    reuseExistingChunk: true
-                },
                 tiklabMessageUI: {
                     name: "chunk-tiklab-message-ui",
                     chunks: "all",
@@ -196,8 +189,8 @@ module.exports = merge(baseWebpackConfig, {
                 terserOptions: {
                     compress: {
                         // 去除console.log ,debugger
-                        drop_console: false,
-                        drop_debugger: false,
+                        drop_console: true,
+                        drop_debugger: true,
                     },
                 }
             })

@@ -1,80 +1,36 @@
-.config{
+.design{
     height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    .config-up{
+    .design-up{
         position: sticky;
         top: 0;
         left: 0;
         background: #ffffff;
         z-index: 9;
         min-width: 768px;
-        //border-bottom: 1px solid #dedede;
     }
-    .config-top{
+    .design-top{
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: var(--tiklab-padding) var(--tiklab-padding) 0;
     }
-    .config_bread{
-        padding-right: var(--tiklab-padding-item);
-        flex: 1;
-    }
-    .config-tabs{
+    .design-tabs{
         display: flex;
         padding: 0 var(--tiklab-padding);
         height: 40px;
         line-height: 40px;
-        .config-tab{
+        .design-tab{
             cursor: pointer;
             &:not(:last-child){
                 margin-right: var(--tiklab-padding);
             }
         }
-        .config-active{
+        .design-active{
             color: var(--tiklab-blue);
             border-bottom: 2px solid var(--tiklab-blue);
         }
-    }
-    .config-valid{
-        margin-right: var(--tiklab-padding-item);
-        color: red;
-    }
-}
-
-.config-views{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    padding: 0 20px;
-    background: #fff;
-    position: sticky;
-    top: 60px;
-    z-index: 9;
-    .config-view{
-        display: inline-block;
-        cursor: pointer;
-        padding: 4px 15px;
-        border-radius: 4px;
-        &:first-child{
-            margin-right: var(--tiklab-padding-item);
-        }
-    }
-    .config-view-ban{
-        display: inline-block;
-        cursor: not-allowed;
-        background: #f5f5f5;
-        border-radius: 4px;
-        padding: 4px 15px;
-        color: rgba(0,0,0,.25);
-    }
-    .config-view-active{
-        background: #f7f7f7;
-    }
-    .config-valid,.config-add{
-        display: inline-block;
     }
 }

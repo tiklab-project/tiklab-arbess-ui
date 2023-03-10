@@ -12,7 +12,7 @@ import PostprocessUserAdd from "./PostprocessUserAdd";
 const PostprocessAdd = props =>{
 
     const {mesSendData,postprocessVisible,setPostprocessVisible,createPost,pipelineId,
-        formValue,pipelineUserList,updatePost,postprocessData
+        formValue,pipelineUserList,updatePost
     } = props
 
     const [form] = Form.useForm()
@@ -91,6 +91,7 @@ const PostprocessAdd = props =>{
                 item.receiveType=value
             }
         })
+        setYUserList([...yUserList])
     }
 
     /**

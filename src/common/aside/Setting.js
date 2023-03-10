@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {PrivilegeProjectButton} from "tiklab-privilege-ui";
+import {PrivilegeProjectButton} from "tiklab-user-ui";
 import {renderRoutes} from 'react-router-config'
 import "./Setting.scss";
 

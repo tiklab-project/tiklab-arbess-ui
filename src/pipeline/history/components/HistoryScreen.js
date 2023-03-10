@@ -82,11 +82,11 @@ const HistoryScreen = props =>{
                 placeholder={"状态"}
                 onChange={value=>changValue(value,"state")}
             >
-                <Option key={"0"} value={0}>全部状态</Option>
-                <Option key={"1"} value={1}>失败</Option>
-                <Option key={"10"} value={10}>成功</Option>
-                <Option key={"20"} value={20}>终止</Option>
-                <Option key={"30"} value={30}>运行中</Option>
+                <Option key={"0"} value={null}>全部状态</Option>
+                <Option key={"1"} value={"error"}>失败</Option>
+                <Option key={"10"} value={"success"}>成功</Option>
+                <Option key={"20"} value={"halt"}>终止</Option>
+                <Option key={"30"} value={"run"}>运行中</Option>
             </Select>
             <Select
                 suffixIcon={<CaretDownOutlined />}

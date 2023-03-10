@@ -61,7 +61,7 @@ const AuthFind = props =>{
             case 52:
                 findAllAuthHostList(0).then(res=>{getList(res)})
                 return
-           
+
         }
     }
 
@@ -96,7 +96,7 @@ const AuthFind = props =>{
     const setItem = value => {
         list && list.map(item=>{
             if(setKey(item)===value){
-                Object.assign(dataItem,{auth:item})
+                Object.assign(dataItem,{task:{auth:item}})
                 return
             }
             return null
@@ -183,13 +183,13 @@ const AuthFind = props =>{
             case 1:
             case 4:
             case 5:
-                return item.name+"("+(item.authtaskType === 1?item.username:"私钥")+")"
+                return item.name+"("+(item.authType===1?item.username:"私钥")+")"
             case 2:
             case 3:
-                return item.name+"("+(item.authtaskType === 1?item.message:"私钥")+")"
+                return item.name+"("+(item.authType===1?item.message:"私钥")+")"
             case 41:
             case 51:
-                return item.name+"("+(item.authtaskType === 1?item.username:"私钥")+")"
+                return item.name+"("+(item.authType===1?item.username:"私钥")+")"
             case 31:
             case 32:
             case 52:

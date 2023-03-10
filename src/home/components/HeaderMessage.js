@@ -126,11 +126,11 @@ const HeaderMessage = props =>{
     }
 
     const renderTabs = item => {
-        return   <div key={item.id} className={`title-item ${item.id===selected?"title-select":null}`} onClick={()=>changMessage(item)}>
+        return   <div key={item.id} className={`title-item ${item.id===selected?"title-select":""}`} onClick={()=>changMessage(item)}>
             {item.title}
             {
                 item.id === 0 &&
-                <span className={`messageModal-screen-tab ${unread< 100 ?null:"messageModal-screen-much"}`}>
+                <span className={`messageModal-screen-tab ${unread< 100 ?"":"messageModal-screen-much"}`}>
                     {
                         unread < 100 ? unread : 99
                     }

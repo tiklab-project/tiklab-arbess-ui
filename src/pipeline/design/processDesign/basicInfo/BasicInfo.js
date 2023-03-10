@@ -43,7 +43,7 @@ const BasicInfo = props => {
                     [getId(dataItem,"codeBranch")]:task && task.codeBranch,
                     [getId(dataItem,"codeAlias")]:task && task.codeAlias,
                     [getId(dataItem,"svnFile")]:task && task.svnFile,
-                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+(task.auth.authType === 1?task.auth.username:"私钥")+")",
+                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+(task.auth.authType===1?task.auth.username:"私钥")+")",
                     [getId(dataItem,"authId")]:task && task.authId,
                 })
                 break
@@ -53,7 +53,7 @@ const BasicInfo = props => {
                     [getId(dataItem,"codeName")]:task && task.codeName,
                     [getId(dataItem,"codeBranch")]:task && task.codeBranch,
                     [getId(dataItem,"codeAlias")]:task && task.codeAlias,
-                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+ (task.auth.authType === 1?task.auth.message:"私钥") +")",
+                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+ (task.auth.authType===1?task.auth.message:"私钥") +")",
                     [getId(dataItem,"authId")]:task && task.authId
                 })
                 break
@@ -71,14 +71,14 @@ const BasicInfo = props => {
                     [getId(dataItem,"deployOrder")]:task && task.deployOrder,
                     [getId(dataItem,"startAddress")]:task && task.startAddress,
                     [getId(dataItem,"authType")]:task && task.authType ? task.authType:1,
-                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+ dataItem.auth.ip+")",
+                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+ task.auth.ip+")",
                     [getId(dataItem,"authId")]: task && task.authId,
                 })
                 break
             case 41:
                 form.setFieldsValue({
                     [getId(dataItem,"projectName")]:task && task.projectName,
-                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+(task.auth.authType === 1?task.auth.username:"私钥")+")",
+                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+(task.auth.authType===1?task.auth.username:"私钥")+")",
                     [getId(dataItem,"authId")]:task && task.authId
                 })
                 break
@@ -89,7 +89,7 @@ const BasicInfo = props => {
                     [getId(dataItem,"version")]:task && task.version,
                     [getId(dataItem,"fileType")]:task && task.fileType,
                     [getId(dataItem,"fileAddress")]:task && task.fileAddress,
-                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+(task.auth.authType === 1?task.auth.username:"私钥")+")",
+                    [getId(dataItem,"authName")]:task && task.auth && task.auth.name+"("+(task.auth.authType=== 1?task.auth.username:"私钥")+")",
                     [getId(dataItem,"authId")]:task && task.authId
                 })
                 break

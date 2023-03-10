@@ -21,7 +21,7 @@ const Postprocess = props =>{
 
     const {pipelineUserList,pipeline} = pipelineStore
     const {createPost,findPipelinePost,isFindPostprocessData,postprocessData,deletePost,updatePost,
-        findMessageSendType,mesSendData
+        findMessageSendType,mesSendData,findOnePost
     } = postprocessStore
 
     const [postprocessVisible,setPostprocessVisible] = useState(false)
@@ -51,8 +51,12 @@ const Postprocess = props =>{
      * @param record
      */
     const editPostprocess = (text,record) =>{
-        setFormValue(record)
-        setPostprocessVisible(true)
+        findOnePost(record.postprocessId).then(res=>{
+            if(res.code===0){
+                setFormValue(res.data && res.data)
+                setPostprocessVisible(true)
+            }
+        })
     }
 
     /**
@@ -103,7 +107,6 @@ const Postprocess = props =>{
                         mesSendData={mesSendData}
                         pipelineId={pipeline && pipeline.id}
                         formValue={formValue}
-                        postprocessData={postprocessData}
                     />
                 </div>
                 <div className="trigger-tables">

@@ -28,22 +28,17 @@ const HomePage = props =>{
 
     useEffect(()=>{
         // 获取所有流水线
-        findUserPipeline().then(res=>{
-            if(res.code===0){
-                const params = {
-                    pageParam:{
-                        pageSize:10,
-                        currentPage:1
-                    },
-                    bgroup:"matflow",
-                    content:{
-                        pipelineId:setPipelineId(res.data)
-                    }
-                }
-                // 近期动态
-                findlogpage(params).then(()=>setLogLoading(false))
-            }
-        })
+        findUserPipeline()
+
+        // 获取近期动态
+        findlogpage({
+            pageParam:{
+                pageSize:10,
+                currentPage:1
+            },
+            bgroup:"matflow",
+            content:{}
+        }).then(()=>setLogLoading(false))
 
         // 获取我收藏的流水线
         findAllFollow()
@@ -52,19 +47,6 @@ const HomePage = props =>{
         findAllOpen(5).then(()=>setNewlyLoading(false))
 
     },[])
-
-    /**
-     * 获取流水线所有id
-     * @param data
-     * @returns {*[流水线id]}
-     */
-    const setPipelineId = data =>{
-        const newArr = []
-        data && data.map(item => {
-            newArr.push(item.id)
-        })
-        return newArr
-    }
 
     /**
      * 去流水线页面

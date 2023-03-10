@@ -18,7 +18,7 @@ const Trigger = props =>{
 
     const {triggerStore,pipelineStore} = props
 
-    const {updateTriggerConfig,deleteTriggerConfig,createTriggerConfig,findAllTriggerConfig,triggerData,isFindTrigger} = triggerStore
+    const {updateTrigger,deleteTrigger,createTrigger,findAllTrigger,triggerData,isFindTrigger} = triggerStore
     const {pipeline} = pipelineStore
 
     const [formValue,setFormValue] = useState("")
@@ -26,7 +26,7 @@ const Trigger = props =>{
 
     useEffect(()=>{
         // 初始化触发器
-        findAllTriggerConfig(pipeline.id)
+        findAllTrigger(pipeline.id)
     },[isFindTrigger])
 
     /**
@@ -53,7 +53,7 @@ const Trigger = props =>{
      * @param record
      */
     const delTrigger = (text,record) => {
-        deleteTriggerConfig(record.configId)
+        deleteTrigger(record.triggerId)
     }
 
     const columns = [
@@ -102,8 +102,8 @@ const Trigger = props =>{
                     <TriggerAdd
                         triggerVisible={triggerVisible}
                         setTriggerVisible={setTriggerVisible}
-                        createTriggerConfig={createTriggerConfig}
-                        updateTriggerConfig={updateTriggerConfig}
+                        createTrigger={createTrigger}
+                        updateTrigger={updateTrigger}
                         pipelineId={pipeline && pipeline.id}
                         formValue={formValue}
                     />
@@ -113,7 +113,7 @@ const Trigger = props =>{
                         bordered={false}
                         columns={columns}
                         dataSource={triggerData}
-                        rowKey={record=>record.timeId}
+                        rowKey={record=>record.triggerId}
                         pagination={false}
                         locale={{emptyText: <EmptyText title={"暂无定时任务"}/>}}
                     />

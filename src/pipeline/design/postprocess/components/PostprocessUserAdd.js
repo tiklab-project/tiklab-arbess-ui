@@ -111,8 +111,8 @@ const PostprocessUserAdd = props =>{
                     })}
                     columns={[{
                         title:"名称",
-                        dataIndex:["user","name"],
-                        key:["user","name"],
+                        dataIndex:["user","nickname"],
+                        key:["user","nickname"],
                     }]}
                     dataSource={userList}
                     pagination={false}
