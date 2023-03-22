@@ -1,10 +1,9 @@
 import React,{useState,useEffect} from "react";
-import {Dropdown,Badge,Avatar} from "antd";
+import {Dropdown,Badge} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
 import {AppLink} from "tiklab-integration-ui";
 import {
-    UserOutlined,
     GlobalOutlined,
     BellOutlined,
     SettingOutlined,
@@ -18,6 +17,7 @@ import {
 import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/img/matflow3.png";
 import HeaderMessage from "./HeaderMessage";
+import Profile from "../../common/Profile/Profile";
 
 /**
  * header 头部
@@ -120,10 +120,10 @@ const  Head = props =>{
         <div className="header-outMenu">
             <div className="header-outMenu-top">
                 <div className="outMenu-out">
-                    <Avatar />
+                    <Profile user={getUser()} />
                     <div className="outMenu-out-info">
-                        <div className="outMenu-out-name">{getUser().name}</div>
-                        <div className="outMenu-out-eamil">{getUser().eamil?getUser():"--"}</div>
+                        <div className="outMenu-out-name">{getUser().nickName || getUser().name}</div>
+                        <div className="outMenu-out-eamil">{getUser().eamil || "--"}</div>
                     </div>
                 </div>
             </div>
@@ -199,7 +199,7 @@ const  Head = props =>{
                     </div>
                     <Dropdown overlay={outMenu}>
                         <div className="frame-header-user">
-                            <Avatar/>
+                            <Profile user={getUser()} />
                         </div>
                     </Dropdown>
                 </div>

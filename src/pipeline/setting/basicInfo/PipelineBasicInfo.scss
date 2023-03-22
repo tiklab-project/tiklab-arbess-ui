@@ -2,20 +2,21 @@
     .pipelineReDel-up{
         padding-bottom: var(--tiklab-padding-item);
     }
-    &-li{
-        border: 1px solid #ececec;
+    .pipelineReDel-ul{
         border-radius: 4px;
+        border: 1px solid #ececec;
+    }
+    .pipelineReDel-li{
         &:not(:last-child){
-            margin-bottom: var(--tiklab-padding-item);
+            border-bottom: 1px solid #ececec;
         }
         .pipelineReDel-li-top{
             display: flex;
             align-items: flex-start;
             padding: 10px 20px;
             cursor: pointer;
-            background-color: #f7f7f7;
             &:hover{
-                background: #f4f4f4;
+                background: #fafafa;
             }
         }
         .pipelineReDel-li-icon{
@@ -40,7 +41,7 @@
             align-self: center;
         }
         .pipelineReDel-li-select{
-            background: #f4f4f4;
+            background: #fafafa;
         }
         .pipelineReDel-li-bottom{
             padding:10px 20px;

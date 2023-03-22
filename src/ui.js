@@ -8,16 +8,16 @@
 
 import {store as pipelineStore} from "./module/store";
 import routesSaas  from "./module/routes";
+import App from "./module/app"
 import Portal from "././module/home/components/Portal";
 import SettingContent from "././module/setting/navigator/SettingContent";
-import resources from "././module/common/language/Resources";
 
 export {
-    routesSaas ,
+    routesSaas,
     pipelineStore,
+    App,
     Portal,
     SettingContent,
-    resources
 }
 
 

@@ -5,6 +5,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
+import Profile from "../../../common/Profile/Profile";
 import Tabs from "../../../common/tabs/Tabs";
 import ServerAddBtn from "./ServerAddBtn";
 import "../../authCommon/Auth.scss";
@@ -89,7 +90,7 @@ const Server = props =>{
     // 创建人
     const user = (text,record) =>{
         return  <Space>
-                    {/*<Profile userInfo={record.user}/>*/}
+                    <Profile userInfo={record.user}/>
                     {text}
                 </Space>
     }

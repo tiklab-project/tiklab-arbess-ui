@@ -1,4 +1,4 @@
-const api =  "http://192.168.10.6:8080";
+const api =  "http://192.168.10.21:8089";
 const base_url = JSON.stringify(api);
 
 
@@ -11,8 +11,7 @@ pluginAddressUrl = JSON.stringify(pluginAddressUrl);
 let fetchMethod = "post"
 fetchMethod = JSON.stringify(fetchMethod);
 // 判断是否是用户环境， 如果是用户环境收到切换为true， 如果是内部公司手动切换为false
-
-const userProduction = true; // 权限
+const userProduction = true;
 
 const devProduction = true; // 存在基础数据
 

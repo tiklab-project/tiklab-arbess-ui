@@ -68,10 +68,9 @@ const PipelineBasicInfo = props =>{
             content: <div className="bottom-rename">
                         <PipelineAddInfo
                             {...props}
-                            powerType={powerType}
-                            setPowerType={setPowerType}
                             set={true}
                             onClick={()=>setOpenOrClose(1)}
+                            pipelineStore={pipelineStore}
                         />
                     </div>
         },

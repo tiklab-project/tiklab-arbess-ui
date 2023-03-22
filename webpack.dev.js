@@ -24,6 +24,7 @@ module.exports = merge(baseWebpackConfig,{
             alwaysWriteToDisk: true,
             title:"MatFlow",
             template: path.resolve(__dirname, "./public/index.template.html"),
+            favicon: path.resolve('./public/matflowIcon.png'),
             hash: false,
             filename: "index.html",
             inject: "body",

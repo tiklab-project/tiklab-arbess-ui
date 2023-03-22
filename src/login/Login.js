@@ -11,7 +11,7 @@ const LoginContent = props => {
     return  <Login
                 {...props}
                 loginGoRouter="/"
-                // vaildUserAuthRouter={"/no-auth"}
+                vaildUserAuthRouter={"/no-auth"}
             />
 }
 

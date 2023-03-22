@@ -8,42 +8,39 @@ import {
 } from "@ant-design/icons";
 
 // 用户与部门路由
-export const departmentRouters = a =>{
-    return [
-        {
-            id: "1",
-            title: "用户与部门",
-            purviewCode: a[0],
-            icon: <TeamOutlined/>,
-            children: [
-                {
-                    id: "/index/system/user/org",
-                    title: "部门",
-                    icon: <GroupOutlined/>,
-                    purviewCode: "orga",
-                },
-                {
-                    id: "/index/system/user/list",
-                    title: "用户",
-                    icon: <TeamOutlined/>,
-                    purviewCode: "user",
-                },
-                {
-                    id: "/index/system/user/userGroup",
-                    title: "用户组",
-                    icon: <TeamOutlined/>,
-                    purviewCode: "user",
-                },
-                {
-                    id: "/index/system/user/directory",
-                    title: "用户目录",
-                    icon: <BarsOutlined/>,
-                    purviewCode: "user_dir",
-                },
-            ]
-        }
-    ]
-}
+export const departmentRouters =[
+    {
+        id: "1",
+        title: "用户与部门",
+        icon: <TeamOutlined/>,
+        children: [
+            {
+                id: "/index/system/user/org",
+                title: "部门",
+                icon: <GroupOutlined/>,
+                purviewCode: "orga",
+            },
+            {
+                id: "/index/system/user/list",
+                title: "用户",
+                icon: <TeamOutlined/>,
+                purviewCode: "user",
+            },
+            {
+                id: "/index/system/user/userGroup",
+                title: "用户组",
+                icon: <TeamOutlined/>,
+                purviewCode: "user",
+            },
+            {
+                id: "/index/system/user/directory",
+                title: "用户目录",
+                icon: <BarsOutlined/>,
+                purviewCode: "user_dir",
+            },
+        ]
+    }
+]
 
 // 基础数据路由
 export const templateRouter = [
@@ -51,7 +48,6 @@ export const templateRouter = [
         id:"6",
         title:"基础数据",
         icon:<ProjectOutlined />,
-        purviewCode:"basics",
         children:[
             {
                 id:"/index/system/syr/feature",

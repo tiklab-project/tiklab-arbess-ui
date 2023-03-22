@@ -19,4 +19,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(UserVerify(Home))
+export default connect(mapStateToProps)(UserVerify(Home,"/no-auth"))

@@ -78,7 +78,7 @@ const HistoryDetail = props =>{
         setDetailsLoading(false)
         const isRunStatus = data.data && data.data.some(item=>item[state]==="run")
         if(!isRunStatus){
-            !id && execIndex===0 && setExecIndex(data.data && data.data.length-1)
+            !id && isRun && setExecIndex(data.data && data.data.length-1)
             clearInterval(inter)
         }
     }
@@ -86,8 +86,10 @@ const HistoryDetail = props =>{
     useEffect(()=>{
         // 完成后状态数据
         if(!isRun && execData){
-            setTreeData(execData[0])
-            setLogData(execData[0])
+            if(execData.length>0){
+                setTreeData(execData[0])
+                setLogData(execData[0])
+            }
         }
     },[execData])
 

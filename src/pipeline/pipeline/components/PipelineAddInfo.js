@@ -1,12 +1,12 @@
 import React, {useEffect,useState} from "react";
 import {Dropdown, Form, Input, Select, Space, Table, Tooltip} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
-import {inject,observer} from "mobx-react";
+import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../../common/btn/Btn";
-import {Loading} from "../../../common/loading/Loading";
 import PipelineUserAdd from "./PipelineUserAdd";
 import EmptyText from "../../../common/emptyText/EmptyText";
+import Profile from "../../../common/Profile/Profile";
 import "./PipelineAddInfo.scss";
 
 /**
@@ -17,14 +17,17 @@ import "./PipelineAddInfo.scss";
  */
 const PipelineAddInfo = props =>{
 
-    const {set,pipelineStore,setCurrent,templateLis,templateType,pipelineType,onClick} = props
+    const {set,pipelineStore,setCurrent,onClick,setBaseInfo} = props
 
-    const {pipeline,pipelineList,findUserPage,createPipeline,isLoading,updatePipeline,findUserPipeline} = pipelineStore
+    const {pipeline,pipelineList,findUserPage,updatePipeline,findUserPipeline} = pipelineStore
 
     const [form] = Form.useForm()
     const userId = getUser().userId
 
-    // 流水线权限 -- 私有或公有
+    // 流水线类型
+    const [type,setType] = useState(1)
+
+    // 流水线权限 -- 1私有或2公有
     const [powerType,setPowerType] = useState(1)
 
     // 选中的用户
@@ -38,6 +41,7 @@ const PipelineAddInfo = props =>{
 
     // 添加用户下拉显示
     const [visible,setVisible] = useState(false)
+
 
     useEffect(()=>{
         if(set && pipeline){
@@ -136,20 +140,15 @@ const PipelineAddInfo = props =>{
                     props.history.push(`/index/pipeline/${pipeline.id}/survey`)
                 }
             })
-        }else {
-            const params = {
-                type:pipelineType,
-                template: templateType===0 ? 1:templateLis[templateType-1].type,
-                name: value.name,
-                power: powerType,
-                userList: member
-            }
-            createPipeline(params).then(res => {
-                if (res.code === 0 && res.data) {
-                    props.history.push(`/index/pipeline/${res.data}/config`)
-                }
-            })
+            return
         }
+        setCurrent(1)
+        setBaseInfo({
+            type:type,
+            name: value.name,
+            power: powerType,
+            userList: member
+        })
     }
 
     const powerLis = [
@@ -167,9 +166,27 @@ const PipelineAddInfo = props =>{
         }
     ]
 
+    const renderType = (
+        <div className="pipeline-add-type">
+            <div className="pipeline-type-title">流水线类型</div>
+            <div className="pipeline-type-ul">
+                <div
+                    onClick={()=>setType(1)}
+                    className={`${type===1?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
+                >多任务
+                </div>
+                <div
+                    onClick={()=>setType(2)}
+                    className={`${type===2?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
+                >多阶段
+                </div>
+            </div>
+        </div>
+    )
+
     // 权限
-    const renderPowerType = powerLis =>{
-        return  <div className="pipeline-power">
+    const renderPowerType = (
+        <div className="pipeline-power">
             <div className="pipeline-power-title">流水线权限</div>
             <div className="pipeline-power-content">
                 {
@@ -195,7 +212,7 @@ const PipelineAddInfo = props =>{
                 }
             </div>
         </div>
-    }
+    )
 
     const columns = [
         {
@@ -213,7 +230,7 @@ const PipelineAddInfo = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return  <Space>
-                            {/*<Profile userInfo={record}/>*/}
+                            <Profile userInfo={record}/>
                             {text}
                         </Space>
             }
@@ -344,6 +361,31 @@ const PipelineAddInfo = props =>{
         return rule
     }
 
+    if(set){
+        return (
+            <>
+                <Form form={form} autoComplete="off" layout={"vertical"}>
+                    <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
+                        <Input allowClear style={set? {width:612}: {background:"#fff"}}/>
+                    </Form.Item>
+                </Form>
+                { renderPowerType }
+                <Btn onClick={onClick} title={"取消"} isMar={true}/>
+                <Btn type={"primary"}
+                     title={"确定"}
+                     onClick={() => {
+                         form
+                             .validateFields()
+                             .then((values) => {
+                                 onOk(values)
+                                 form.resetFields()
+                             })
+                     }}
+                />
+            </>
+        )
+    }
+
     return(
         <>
             <Form form={form} autoComplete="off" layout={"vertical"}>
@@ -351,21 +393,16 @@ const PipelineAddInfo = props =>{
                     <Input allowClear style={set? {width:612}: {background:"#fff"}}/>
                 </Form.Item>
             </Form>
-
-            { renderPowerType(powerLis) }
-
-            { !set && powerType === 2 && renderUser() }
-
-            {
-                set ?
-                <Btn onClick={onClick} title={"取消"} isMar={true}/>
-                :
-                <>
-                    <Btn onClick={()=>props.history.push("/index/pipeline")} title={"取消"} isMar={true}/>
-                    <Btn onClick={()=>setCurrent(1)} title={"上一步"} isMar={true}/>
-                </>
-            }
-            <Btn type={"primary"} title={"确认"}
+            { renderType }
+            { renderPowerType }
+            { powerType === 2 && renderUser() }
+            <Btn
+                onClick={()=>props.history.push("/index/pipeline")}
+                title={"取消"}
+                isMar={true}
+            />
+            <Btn type={"primary"}
+                 title={"下一步"}
                  onClick={() => {
                      form
                          .validateFields()
@@ -373,11 +410,10 @@ const PipelineAddInfo = props =>{
                              onOk(values)
                              form.resetFields()
                          })
-                     }}
-                />
-            { isLoading && <Loading/> }
+                 }}
+            />
         </>
     )
 }
 
-export default inject("pipelineStore")(observer(PipelineAddInfo))
+export default observer(PipelineAddInfo)

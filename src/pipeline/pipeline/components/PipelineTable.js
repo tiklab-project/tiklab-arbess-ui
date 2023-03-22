@@ -4,6 +4,7 @@ import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,Unlo
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
+import Profile from "../../../common/Profile/Profile";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
@@ -150,6 +151,13 @@ const PipelineTable = props =>{
                                         {text}
                                     </Space>
                                 </Tooltip>
+                    default:
+                        return  <Tooltip title={buildStatusTooltip("待构建","待构建","无")}>
+                                    <Space>
+                                        <img src={pip_fog} alt={"log"} className="imgs"/>
+                                        待构建
+                                    </Space>
+                                </Tooltip>
                 }
             }
         },
@@ -161,7 +169,7 @@ const PipelineTable = props =>{
             ellipsis: true,
             render:(text,record) => {
                 return  <Space>
-                            {/*<Profile userInfo={record.user}/>*/}
+                            <Profile userInfo={record.user}/>
                             {text}
                         </Space>
             }

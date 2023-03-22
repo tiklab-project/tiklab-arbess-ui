@@ -7,6 +7,7 @@ import {autoHeight} from "../../../../common/client/Client";
 import Btn from "../../../../common/btn/Btn";
 import ModalTitle from "../../../../common/modalTitle/ModalTitle";
 import EmptyText from "../../../../common/emptyText/EmptyText";
+import Profile from "../../../../common/Profile/Profile";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 
 const PostprocessAdd = props =>{
@@ -120,28 +121,23 @@ const PostprocessAdd = props =>{
                 user:{id:item.user.id}
             })
         })
+        let params = {
+            taskType:postprocessType,
+            values: postprocessType===61? { ...value,userList:newArr}: {scriptOrder: mirrorRefs.current.editor.getValue()}
+        }
         if(formValue){
-            const params = {
-                taskType:postprocessType,
-                postprocessId:formValue.postprocessId,
-                values:null,
-            }
-            postprocessType===61?
-                params.values={ ...value,userList:newArr}:
-                params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
+             params = {
+                 ...params,
+                 postprocessId:formValue.postprocessId,
+             }
             updatePost(params).then(res=>{
                 res.code===0 && message.info("更新成功",0.5)
             })
         }else {
-            const params = {
-                taskType:postprocessType,
+            params = {
+                ...params,
                 pipelineId:pipelineId,
-                values:null,
             }
-            postprocessType===61?
-                params.values={ ...value,userList:newArr}:
-                params.values={scriptOrder: mirrorRefs.current.editor.getValue()}
-
             createPost(params).then(res=>{
                 res.code===0 && message.info("添加成功",0.5)
             })
@@ -180,7 +176,7 @@ const PostprocessAdd = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return  <Space>
-                            {/*<Profile userInfo={record.user}/>*/}
+                            <Profile userInfo={record.user}/>
                             {text}
                         </Space>
             }

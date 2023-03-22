@@ -106,9 +106,16 @@
             align-items: center;
             &-info{
                 padding-left: 15px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
             &-name{
                 font-size: 15px;
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
             }
         }
     }

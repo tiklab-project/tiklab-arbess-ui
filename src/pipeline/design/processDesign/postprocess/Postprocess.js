@@ -13,6 +13,7 @@ import EmptyText from "../../../../common/emptyText/EmptyText";
 import Btn from "../../../../common/btn/Btn";
 import MirrorContent from "./CodeBlock";
 import PostprocessUserAdd from "../../postprocess/components/PostprocessUserAdd";
+import Profile from "../../../../common/Profile/Profile";
 import "./Postprocess.scss";
 
 /**
@@ -274,7 +275,7 @@ const Postprocess = props =>{
                 ellipsis:true,
                 render:(text,record)=>(
                     <Space>
-                        {/*<Profile userInfo={record.user}/>*/}
+                        <Profile userInfo={record.user}/>
                         {text}
                     </Space>
                 )

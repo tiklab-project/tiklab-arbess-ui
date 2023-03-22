@@ -45,41 +45,44 @@ const Info=AsyncComponent(()=>import("./setting/envi/components/Info"))
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
 
 // message
-const MessageManagement=AsyncComponent(()=>import("./setting/message/MessageManagement"))
-const MessageType=AsyncComponent(()=>import("./setting/message/MessageType"))
 const MessageSendType=AsyncComponent(()=>import("./setting/message/MessageSendType"))
-const MessageSendTypeTrue=AsyncComponent(()=>import("./setting/message/MessageSendTypeTrue"))
 const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice"))
-const MessageNoticeTrue=AsyncComponent(()=>import("./setting/message/MessageNoticeTrue"))
 
 // security
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
-const LogTemplate=AsyncComponent(()=>import("./setting/security/LogTemplate"))
-const LogType=AsyncComponent(()=>import("./setting/security/LogType"))
-
-// todotask
-const MyTodoTask=AsyncComponent(()=>import("./setting/todotask/MyTodoTask"))
-const Task=AsyncComponent(()=>import("./setting/todotask/Task"))
-const TodoTemp=AsyncComponent(()=>import("./setting/todotask/TodoTemp"))
-const TodoType=AsyncComponent(()=>import("./setting/todotask/TodoType"))
 
 // user
 const User=AsyncComponent(()=>import("./setting/user/User"))
 const Directory=AsyncComponent(()=>import("./setting/user/Directory"))
 const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
 const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
-const UserGroupTrue=AsyncComponent(()=>import("./setting/user/Groupture"))
 const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
-const SystemFeature=AsyncComponent(()=>import("./setting/user/SystemFeature"))
 const SystemRole=AsyncComponent(()=>import("./setting/user/SystemRole"))
-const SystemRoleTrue=AsyncComponent(()=>import("./setting/user/SystemRoleTrue"))
-const ProjectRole=AsyncComponent(()=>import("./setting/user/ProjectRole"))
-const ProjectFeature=AsyncComponent(()=>import("./setting/user/ProjectFeature"))
 const DomainRoleContent=AsyncComponent(()=>import("./setting/user/DomainRole"))
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
 const ProductAuth=AsyncComponent(()=>import("./setting/licence/ProductAuth"))
+
+// base
+const UserGroupTrue=AsyncComponent(()=>import("./setting/base/user/Groupture"))
+const SystemFeature=AsyncComponent(()=>import("./setting/base/user/SystemFeature"))
+const SystemRoleTrue=AsyncComponent(()=>import("./setting/base/user/SystemRoleTrue"))
+const ProjectRole=AsyncComponent(()=>import("./setting/base/user/ProjectRole"))
+const ProjectFeature=AsyncComponent(()=>import("./setting/base/user/ProjectFeature"))
+
+const MyTodoTask=AsyncComponent(()=>import("./setting/base/todo/MyTodoTask"))
+const Task=AsyncComponent(()=>import("./setting/base/todo/Task"))
+const TodoTemp=AsyncComponent(()=>import("./setting/base/todo/TodoTemp"))
+const TodoType=AsyncComponent(()=>import("./setting/base/todo/TodoType"))
+
+const LogTemplate=AsyncComponent(()=>import("./setting/base/log/LogTemplate"))
+const LogType=AsyncComponent(()=>import("./setting/base/log/LogType"))
+
+const MessageManagement=AsyncComponent(()=>import("./setting/base/message/MessageManagement"))
+const MessageNoticeTrue=AsyncComponent(()=>import("./setting/base/message/MessageNoticeTrue"))
+const MessageSendTypeTrue=AsyncComponent(()=>import("./setting/base/message/MessageSendTypeTrue"))
+const MessageType=AsyncComponent(()=>import("./setting/base/message/MessageType"))
 
 const routers=[
     {
@@ -196,16 +199,68 @@ const routers=[
                 component:Setting,
                 routes:[
                     {
-                        path: "/index/system/productAuth",
-                        component: ProductAuth,
+                        path: "/index/system/user/org",
+                        component: Orga,
+                    },
+                    {
+                        path: "/index/system/user/list",
+                        component: User,
+                    },
+                    {
+                        path: "/index/system/user/userGroup",
+                        component: UserGroup,
+                    },
+                    {
+                        path: "/index/system/user/directory",
+                        component: Directory,
+                    },
+                    {
+                        path: "/index/system/role",
+                        component: SystemRole,
+                    },
+                    {
+                        path:"/index/system/mes/notice",
+                        component: MessageNotice,
+                    },
+                    {
+                        path:"/index/system/mes/send",
+                        component: MessageSendType,
+                    },
+                    {
+                        path: "/index/system/auth",
+                        component: Auth,
+                    },
+                    {
+                        path: "/index/system/resoure/server",
+                        component: Server
+                    },
+                    {
+                        path: "/index/system/resoure/host",
+                        component: Host
+                    },
+                    {
+                        path:"/index/system/envi",
+                        component: Envi,
                     },
                     {
                         path: "/index/system/plugin",
                         component: Plugin,
                     },
                     {
-                        path: "/index/system/role",
-                        component: SystemRole,
+                        path:"/index/system/myLog",
+                        component: MyLog,
+                    },
+                    {
+                        path:"/index/system/version",
+                        component: Version,
+                    },
+                    {
+                        path: "/index/system/productAuth",
+                        component: ProductAuth,
+                    },
+                    {
+                        path:"/index/system/info",
+                        component: Info,
                     },
                     {
                         path: "/index/system/roletrue",
@@ -224,26 +279,6 @@ const routers=[
                         component: ProjectFeature,
                     },
                     {
-                        path: "/index/system/auth",
-                        component: Auth,
-                    },
-                    {
-                        path: "/index/system/resoure/server",
-                        component: Server
-                    },
-                    {
-                        path: "/index/system/resoure/host",
-                        component: Host
-                    },
-                    {
-                        path:"/index/system/info",
-                        component: Info,
-                    },
-                    {
-                        path:"/index/system/envi",
-                        component: Envi,
-                    },
-                    {
                         path: "/index/system/task",
                         component: Task,
                     },
@@ -260,32 +295,12 @@ const routers=[
                         component: TodoType,
                     },
                     {
-                        path:"/index/system/myLog",
-                        component: MyLog,
-                    },
-                    {
                         path:"/index/system/logTemplate",
                         component: LogTemplate,
                     },{
 
                         path:"/index/system/logType",
                         component: LogType,
-                    },
-                    {
-                        path: "/index/system/user/org",
-                        component: Orga,
-                    },
-                    {
-                        path: "/index/system/user/userGroup",
-                        component: UserGroup,
-                    },
-                    {
-                        path: "/index/system/user/directory",
-                        component: Directory,
-                    },
-                    {
-                        path: "/index/system/user/list",
-                        component: User,
                     },
                     {
                         path:"/index/system/mes/management",
@@ -296,16 +311,8 @@ const routers=[
                         component: MessageType,
                     },
                     {
-                        path:"/index/system/mes/send",
-                        component: MessageSendType,
-                    },
-                    {
                         path:"/index/system/mes/sendtrue",
                         component: MessageSendTypeTrue,
-                    },
-                    {
-                        path:"/index/system/mes/notice",
-                        component: MessageNotice,
                     },
                     {
                         path:"/index/system/mes/noticetrue",
@@ -314,10 +321,6 @@ const routers=[
                     {
                         path: "/index/system/user/userGrouptrue",
                         component: UserGroupTrue,
-                    },
-                    {
-                        path:"/index/system/version",
-                        component: Version,
                     },
                     {
                         path:"/index/system/*",

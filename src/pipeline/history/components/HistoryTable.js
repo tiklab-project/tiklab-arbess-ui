@@ -6,6 +6,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import Page from "../../../common/page/Page";
 import {getTime} from "../../../common/client/Client";
 import {SpinLoading} from "../../../common/loading/Loading";
+import Profile from "../../../common/Profile/Profile";
 import HistoryDetail from "./HistoryDetail";
 import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
@@ -102,12 +103,12 @@ const HistoryTable = props =>{
                     {
                         text===1?
                             <>
-                                {/*<Profile userInfo={record.user}/>*/}
+                                <Profile userInfo={record.user}/>
                                 <div className="runWay-user">{record.user.nickname}手动触发</div>
                             </>
                             :
                             <>
-                                {/*<img src={pip_trigger} alt={'trigger'} style={{width:22,height:22}}/>*/}
+                                <img src={pip_trigger} alt={'trigger'} style={{width:22,height:22}}/>
                                 <div className="runWay-user">定时任务自动触发</div>
                             </>
                     }

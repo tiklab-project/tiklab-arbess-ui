@@ -15,49 +15,23 @@ const SettingContent= props =>  {
     const {getSystemPermissions} = systemRoleStore
 
     const path = props.location.pathname
-    const [selectKey,setSelectKey] = useState(path)
-    const [expandedTree,setExpandedTree] = useState([""])  // 树的展开与闭合
-    const [department,setDepartment] = useState(["","","",""])
 
-    /**
-     * 路由是否渲染
-     * @param type
-     * @param data
-     * @returns {string|*}
-     */
-    const x = (type,data) => {
-        let arr = []
-        let a = "matflow"
-        switch (type){
-            case 0:
-                arr = ["orga","user","user_dir"]
-                break
-            case 1:
-                arr = ["resources_server","resources_host"]
-                break
-            case 2:
-                arr = ["message_type","message_setting"]
-                break
-            case 3:
-                arr = ["pipeline_log"]
-                break
-        }
-        for (let i = 0; i < arr.length; i++) {
-            if (data && data.indexOf(arr[i]) > -1){
-                return arr[i]
-            }
-        }
-        return a
-    }
+    // 当前路径
+    const [selectKey,setSelectKey] = useState(path)
+
+    // 树的展开与闭合
+    const [expandedTree,setExpandedTree] = useState([""])
+
+    // 系统权限
+    const [systemPermissions,setSystemPermissions] = useState([])
 
     useEffect(()=>{
         //初始化菜单权限
         getSystemPermissions(getUser().userId).then(res=>{
             const data = res.data && res.data
-            for(let i=0;i<department.length;i++){
-                department[i] = x(i,data)
+            if(res.code===0){
+                setSystemPermissions(data)
             }
-            setDepartment([...department])
         })
     },[])
 
@@ -102,12 +76,12 @@ const SettingContent= props =>  {
     const renderMenu = (data,deep)=> {
         return (
             <PrivilegeButton key={data.id} code={data.purviewCode} {...props}>
-                {menu(data,deep)}
+                { menu(data,deep) }
             </PrivilegeButton>
         )
     }
 
-    const subMenu = (item,deep) =>{
+    const subMenu = (item,deep,type) =>{
         return(
             <li key={item.id} className="system-aside-li">
                 <div className="system-aside-item system-aside-first"
@@ -130,11 +104,18 @@ const SettingContent= props =>  {
                 </div>
                 <ul className={`system-aside-ul ${isExpandedTree(item.id) ? null: "system-aside-hidden"}`}>
                     {
-                        item.children && item.children.map(item =>{
-                            const deepnew = deep +1
-                            return item.children && item.children.length?
-                                subMenu(item,deepnew) : menu(item,deepnew)
-                        })
+                        type ?
+                            item.children && item.children.map(item =>{
+                                const deepnew = deep +1
+                                return item.children && item.children.length?
+                                    subMenu(item,deepnew) : menu(item,deepnew)
+                            })
+                            :
+                            item.children && item.children.map(item =>{
+                                const deepnew = deep +1
+                                return item.children && item.children.length ?
+                                    renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
+                            })
                     }
                 </ul>
             </li>
@@ -142,39 +123,8 @@ const SettingContent= props =>  {
     }
 
     const renderSubMenu = (item,deep)=> {
-        return (
-            <PrivilegeButton key={item.id} code={item.purviewCode} {...props}>
-                <li key={item.id} className="system-aside-li">
-                    <div className="system-aside-item system-aside-first"
-                         style={{paddingLeft: `${deep * 20 + 20}`}}
-                         onClick={()=>setOpenOrClose(item.id)}
-                    >
-                        <span>
-                            <span className="sys-content-icon">{item.icon}</span>
-                            <span className="system-aside-title">{item.title}</span>
-                        </span>
-                        <div className="system-aside-item-icon">
-                            {
-                                item.children ?
-                                    (isExpandedTree(item.id)?
-                                            <DownOutlined style={{fontSize: "10px"}}/> :
-                                            <UpOutlined style={{fontSize: "10px"}}/>
-                                    ): ""
-                            }
-                        </div>
-                    </div>
-                    <ul className={`system-aside-ul ${isExpandedTree(item.id) ? null: "system-aside-hidden"}`}>
-                        {
-                            item.children && item.children.map(item =>{
-                                const deepnew = deep +1
-                                return item.children && item.children.length?
-                                    renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
-                            })
-                        }
-                    </ul>
-                </li>
-            </PrivilegeButton>
-        )
+        const isPromise = item.children.some(list=> systemPermissions.includes(list.purviewCode))
+        return isPromise && subMenu(item,deep)
     }
 
     return (
@@ -182,14 +132,14 @@ const SettingContent= props =>  {
            <div className="system-aside">
                <ul className="system-aside-top" style={{padding:0}}>
                    {
-                       isDepartment && departmentRouters(department && department).map(firstItem => {
+                       isDepartment && departmentRouters.map(firstItem => {
                            return firstItem.children && firstItem.children.length > 0 ?
                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
                        })
                    }
 
                    {
-                       applicationRouters(department && department).map(firstItem => {
+                       applicationRouters.map(firstItem => {
                            return firstItem.children && firstItem.children.length > 0 ?
                                renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
                        })
@@ -198,7 +148,7 @@ const SettingContent= props =>  {
                    {
                        devProduction && templateRouter.map(firstItem=>{
                            return firstItem.children && firstItem.children.length > 0 ?
-                               subMenu(firstItem,0) : menu(firstItem,0)
+                               subMenu(firstItem,0,"devBaseData") : menu(firstItem,0)
                        })
                    }
                </ul>

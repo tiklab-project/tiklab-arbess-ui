@@ -5,8 +5,9 @@ import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
-import HostAddBtn from "./HostAddBtn";
+import Profile from "../../../common/Profile/Profile";
 import Tabs from "../../../common/tabs/Tabs";
+import HostAddBtn from "./HostAddBtn";
 import "../../authCommon/Auth.scss";
 
 /**
@@ -125,7 +126,7 @@ const Host = props =>{
             ellipsis:true,
             render:(text,record) => {
                 return  <Space>
-                            {/*<Profile userInfo={record.user}/>*/}
+                            <Profile userInfo={record.user}/>
                             {text}
                         </Space>
             }

@@ -6,7 +6,35 @@
         margin: auto;
         padding: 20px;
     }
+    .pipeline-add-type{
+        .pipeline-type-title{
+            padding-bottom: 10px;
+        }
+        .pipeline-type-ul{
+            padding-bottom: var(--tiklab-padding-item);
+            display: flex;
+            flex-direction: row;
+        }
+        .pipeline-type-li{
+            padding: 8px 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .pipeline-type-li:first-child{
+            margin-right: var(--tiklab-padding-item);
+        }
+        .pipeline-type-select{
+          border-color: var(--tiklab-blue);
+        }
+    }
     .pipeline-template{
+        .template-base{
+            display: inline-block;
+            &:not(:last-child){
+                margin-right: 15px;
+            }
+        }
         .pipeline-template-title{
             height: 50px;
             line-height: 50px;
@@ -19,6 +47,7 @@
         .pipeline-template-li{
             border-radius: 4px;
             background: #e7f6ff;
+            border: 1px solid #d9d9d9;
             cursor: pointer;
             display: flex;
             padding: 8px var(--tiklab-padding);
@@ -66,31 +95,26 @@
                     }
                 }
             }
+            &:not(:last-child){
+                margin-bottom: var(--tiklab-padding-item);
+            }
             .li-self{
                 font-size: 16px;
                 padding: 10px 0;
             }
         }
-
-        .pipeline-template-li-step1:not(:last-child){
-            margin-bottom: var(--tiklab-padding-item);
-        }
-        .pipeline-template-li-step2{
-            flex: 1;
-            margin-right: var(--tiklab-padding-item);
-        }
-        .pipeline-template-arrow{
-            font-size: 16px;
+        .pipeline-template-select{
+            border-color: var(--tiklab-blue);
         }
     }
     .steps-top{
-        padding-top: var(--tiklab-padding-item);
+        padding: var(--tiklab-padding-item) 0 10px 0;
     }
     .steps-content {
         min-height: 100px;
     }
-    .steps-footer{
-        padding: var(--tiklab-padding-item) 0;
+    .steps-bottom{
+        padding-top: var(--tiklab-padding-item)
     }
     .ant-steps-item-icon{
         padding-top: 7px;

@@ -1,8 +1,9 @@
-const api =  "http://192.168.10.6:8080";
+const api =  "http://192.168.10.21:8089";
 const base_url = JSON.stringify(api);
 
 const url = "http://127.0.0.1:3004";
 const plugin_base_url = JSON.stringify(url);
+
 let pluginAddressUrl = `/pluginConfig/getPluginConfig`;
 pluginAddressUrl = JSON.stringify(pluginAddressUrl);
 
