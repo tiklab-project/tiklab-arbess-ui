@@ -9,19 +9,23 @@ import "./Btn.scss";
  * @param title：内容
  * @param onClick：事件
  * @param isMar：boolean（true:右边距;）
+ * @param children
  * @returns {JSX.Element}
  * @constructor
  */
-const Btn = ({icon,type,title,onClick,isMar}) =>{
+const Btn = ({icon,type,title,onClick,isMar,children}) =>{
 
     return (
         <div className={`mf-btn ${type?`mf-btn-${type}`:""} ${isMar?"mf-btn-mar":""}`} onClick={onClick}>
-            <Space>
-                {
-                    icon &&  <span className="mf-btn-icon">{icon}</span>
-                }
-                {title}
-            </Space>
+            {
+                children ? children:
+                    <Space>
+                        {
+                            icon &&  <span className="mf-btn-icon">{icon}</span>
+                        }
+                        {title}
+                    </Space>
+            }
         </div>
     )
 }

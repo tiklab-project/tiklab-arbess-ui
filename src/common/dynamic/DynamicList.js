@@ -34,7 +34,7 @@ const DynamicList = props =>{
     return (
         <div className="dynamic-center">
             {
-                dynamicList && dynamicList.length>0?
+                dynamicList && dynamicList.length>0 ?
                 dynamicList.map((item,index)=>renderLis(item,index))
                 :
                 <EmptyText title={"暂无近期动态"}/>

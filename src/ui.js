@@ -7,13 +7,13 @@
 // }
 
 import {store as pipelineStore} from "./module/store";
-import routesSaas  from "./module/routes";
+import routesCloud  from "./module/routesCloud";
 import App from "./module/app"
 import Portal from "././module/home/components/Portal";
 import SettingContent from "././module/setting/navigator/SettingContent";
 
 export {
-    routesSaas,
+    routesCloud,
     pipelineStore,
     App,
     Portal,

@@ -1,9 +1,7 @@
 import React,{useEffect,useState} from "react";
-import Btn from "../../../common/btn/Btn";
 import {Modal, Form, Input, message, Select} from "antd";
 import AuthType from "../../authCommon/AuthType";
-import ModalTitle from "../../../common/modalTitle/ModalTitle";
-import {autoHeight,Validation} from "../../../common/client/Client";
+import {autoHeight,Validation,ModalTitle,Btn} from "../../../common";
 
 /**
  * 认证配置弹出框，添加，更新

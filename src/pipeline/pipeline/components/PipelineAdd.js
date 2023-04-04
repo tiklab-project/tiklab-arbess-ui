@@ -1,12 +1,10 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import {Steps} from "antd";
 import {inject,observer} from "mobx-react";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import Btn from "../../../common/btn/Btn";
 import PipelineAddMould from "./PipelineAddMould";
 import PipelineAddInfo from "./PipelineAddInfo";
+import {Loading,Btn,BreadcrumbContent} from "../../../common";
 import "./pipelineAdd.scss";
-import {Loading} from "../../../common/loading/Loading";
 
 /**
  * 添加流水线

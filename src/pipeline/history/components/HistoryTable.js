@@ -1,23 +1,18 @@
 import React,{useState,useEffect} from "react";
 import {Popconfirm, Table, Tooltip} from "antd";
-import { observer } from "mobx-react";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import Page from "../../../common/page/Page";
-import {getTime} from "../../../common/client/Client";
-import {SpinLoading} from "../../../common/loading/Loading";
-import Profile from "../../../common/Profile/Profile";
+import {observer} from "mobx-react";
+import {getTime,SpinLoading,Profile,Page,BreadcrumbContent,EmptyText} from "../../../common";
 import HistoryDetail from "./HistoryDetail";
 import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
-import "./HistoryTable.scss"
 import {DeleteOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
+import "./HistoryTable.scss"
 
 const HistoryTable = props =>{
 
-    const {tableType,isLoading,setType,setUseId,setState,setPipelineId,setIsLoading,pipelineUserList,pipelineList,
-        detailsVisible,setDetailsVisible,historyStore
+    const {tableType,isLoading,setIsLoading,pipelineUserList,pipelineList,
+        detailsVisible,setDetailsVisible,historyStore,setParams,params
     } = props
 
     const {pageCurrent,setPageCurrent,page,historyList,setHistoryList,deleteInstance,execStop} = historyStore
@@ -124,11 +119,11 @@ const HistoryTable = props =>{
         },
         {
             title: "耗时",
-            dataIndex: "runTime",
-            key: "runTime",
+            dataIndex: "runTimeDate",
+            key: "runTimeDate",
             width:"17%",
             ellipsis:true,
-            render:(text,record)=> getTime(text)
+            // render:(text,record)=> getTime(text)
         },
         {
             title: "操作",
@@ -182,10 +177,8 @@ const HistoryTable = props =>{
                     changPage={changPage}
                     pipelineList={pipelineList}
                     pipelineUserList={pipelineUserList}
-                    setType={setType}
-                    setState={setState}
-                    setPipelineId={setPipelineId}
-                    setUseId={setUseId}
+                    params={params}
+                    setParams={setParams}
                 />
                 <div className="history-table">
                     <Table
@@ -197,11 +190,14 @@ const HistoryTable = props =>{
                         locale={{emptyText:isLoading?
                                 <SpinLoading type="table"/>:<EmptyText title={"没有查询到历史记录"}/>}}
                     />
-                    <Page
-                        pageCurrent={pageCurrent}
-                        changPage={changPage}
-                        page={page}
-                    />
+                    {
+                        page && page.total > 1 &&
+                        <Page
+                            pageCurrent={pageCurrent}
+                            changPage={changPage}
+                            page={page}
+                        />
+                    }
                 </div>
             </div>
         </div>

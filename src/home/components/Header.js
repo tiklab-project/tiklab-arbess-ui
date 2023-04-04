@@ -3,6 +3,7 @@ import {Dropdown,Badge} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
 import {AppLink} from "tiklab-integration-ui";
+import {USER_STORE} from "tiklab-user-ui/es/store";
 import {
     GlobalOutlined,
     BellOutlined,
@@ -17,7 +18,7 @@ import {
 import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/img/matflow3.png";
 import HeaderMessage from "./HeaderMessage";
-import Profile from "../../common/Profile/Profile";
+import {Profile,UserName} from "../../common";
 
 /**
  * header 头部
@@ -27,9 +28,10 @@ import Profile from "../../common/Profile/Profile";
  */
 const  Head = props =>{
 
-    const {homePageStore} = props
+    const {homePageStore,pipelineStore,userStore} = props
 
     const {findMessageItemPage,unread} = homePageStore
+    const {findWeChatContactConfig,findWeChatApplyContactConfig} = userStore
 
     let path = props.location.pathname
     const {i18n,t} = useTranslation()
@@ -47,6 +49,16 @@ const  Head = props =>{
         }
         setCurrentLink(path)
     },[path])
+
+    useEffect(()=>{
+        if(getUser().tenant){
+            const wechatConfigUrl = location.href.split('#')[0]
+            // 获取企业微信config配置
+            findWeChatContactConfig(wechatConfigUrl,getUser().tenant)
+            // 获取企业微信agentConfig配置
+            findWeChatApplyContactConfig(wechatConfigUrl,getUser().tenant)
+        }
+    },[])
 
     // 一级标题
     const routers=[
@@ -122,7 +134,9 @@ const  Head = props =>{
                 <div className="outMenu-out">
                     <Profile user={getUser()} />
                     <div className="outMenu-out-info">
-                        <div className="outMenu-out-name">{getUser().nickName || getUser().name}</div>
+                        <div className="outMenu-out-name">
+                            <UserName name={getUser().nickName} id={getUser().userId}/>
+                        </div>
                         <div className="outMenu-out-eamil">{getUser().eamil || "--"}</div>
                     </div>
                 </div>
@@ -209,10 +223,12 @@ const  Head = props =>{
                 {...props}
                 visible={visible}
                 setVisible={setVisible}
+                homePageStore={homePageStore}
+                pipelineStore={pipelineStore}
             />
 
         </div>
     )
 }
 
-export default inject("homePageStore")(observer(Head))
+export default inject("homePageStore","pipelineStore",USER_STORE)(observer(Head))

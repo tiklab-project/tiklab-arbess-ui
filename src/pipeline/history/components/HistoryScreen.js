@@ -13,7 +13,7 @@ const {Option} = Select;
  */
 const HistoryScreen = props =>{
 
-    const {changPage,pipelineList,pipelineUserList,setType,setState,setPipelineId,setUseId} = props
+    const {params,setParams,changPage,pipelineList,pipelineUserList} = props
 
     /**
      * 切换选择框value
@@ -21,20 +21,11 @@ const HistoryScreen = props =>{
      * @param field
      */
     const changValue = (value,field) => {
+        setParams({
+            ...params,
+            [field]:value
+        })
         changPage(1)
-        switch (field) {
-            case 'pipelineId':
-                setPipelineId(value)
-                break
-            case 'state':
-                setState(value)
-                break
-            case 'userId':
-                setUseId(value)
-                break
-            case 'type':
-                setType(value)
-        }
     }
 
     return(

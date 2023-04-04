@@ -3,8 +3,7 @@ import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {SYSTEM_ROLE_STORE} from "tiklab-user-ui/es/store";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined} from "@ant-design/icons";
-import {Loading} from "../../common/loading/Loading";
-import Aside from "../../common/aside/Aside";
+import {Loading,Aside} from "../../common";
 
 /**
  * 流水线左侧导航（二级导航）
@@ -16,7 +15,7 @@ const PipelineAside= (props)=>{
 
     const {match,pipelineStore,systemRoleStore}=props
 
-    const {findUserPipeline,setPipeline,findOnePipeline,pipelineList,pipeline,fresh,updateOpen} = pipelineStore
+    const {findUserPipeline,setPipeline,findOnePipeline,pipelineList,pipeline,updateOpen} = pipelineStore
     const {getInitProjectPermissions} = systemRoleStore
 
     const pipelineId = match.params.id
@@ -24,15 +23,10 @@ const PipelineAside= (props)=>{
     const [isAside,setIsAside] = useState(true)
 
     useEffect(()=>{
+        findUserPipeline()
         // 组件销毁清空流水线信息
         return setPipeline("")
     },[])
-
-    useEffect(()=>{
-        // 获取所有流水线
-        // fresh，监听流水线更新时候重新获取
-        findUserPipeline()
-    },[fresh])
 
     useEffect(()=>{
         // 获取单个流水线信息

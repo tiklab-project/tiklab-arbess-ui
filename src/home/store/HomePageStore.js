@@ -17,7 +17,7 @@ export class HomePageStore{
     messPage = {
         defaultCurrent: 1,
         pageSize: 15,
-        total: 1,
+        total: 1, // 此处为总数
     }
 
     // 动态分页
@@ -25,7 +25,7 @@ export class HomePageStore{
     dynaPage = {
         defaultCurrent: 1,
         pageSize: 15,
-        total: 1,
+        total: 1, // 此处为动态分页的页数
     }
 
     // 控制接口中页码page的变化，更新接口 -- 消息

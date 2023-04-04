@@ -3,11 +3,8 @@ import {Table} from "antd";
 import {inject,observer} from "mobx-react";
 import {PlusOutlined} from "@ant-design/icons";
 import EnviModal from "./EnviModal";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/emptyText/EmptyText";
+import {BreadcrumbContent,EmptyText,Btn,Listaction} from "../../../common"
 import TaskTitleIcon from "../../../pipeline/design/processDesign/processDesign/components/TaskTitleIcon";
-import Btn from "../../../common/btn/Btn";
-import Listaction from "../../../common/list/Listaction";
 import "../../authCommon/Auth.scss";
 
 /**

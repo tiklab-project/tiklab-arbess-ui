@@ -2,9 +2,7 @@ import React from "react";
 import {message,Tooltip,Table,Space,Spin} from "antd";
 import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import ListIcon from "../../../common/list/ListIcon";
-import Profile from "../../../common/Profile/Profile";
+import {EmptyText,ListIcon,Profile,Page,UserName} from "../../../common";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
@@ -19,10 +17,10 @@ import "./PipelineTable.scss";
  */
 const PipelineTable = props =>{
 
-    const {historyStore,pipelineStore}=props
+    const {historyStore,pipelineStore,changPage}=props
 
     const {execStart,execStop}=historyStore
-    const {pipelineList,updateFollow,fresh,setFresh} = pipelineStore
+    const {pipelineListPage,updateFollow,setFresh,pipPage} = pipelineStore
 
     /**
      * 收藏
@@ -35,7 +33,7 @@ const PipelineTable = props =>{
             }else {
                 collectMessage(res,"取消")
             }
-            setFresh(!fresh)
+            setFresh()
         })
     }
 
@@ -75,12 +73,12 @@ const PipelineTable = props =>{
         if(record.state === 2){
             // 终止
             execStop(record.id).then(()=>{
-                setFresh(!fresh)
+                setFresh()
             })
         }else {
             // 运行
             execStart(record.id).then(()=>{
-                setFresh(!fresh)
+                setFresh()
             })
         }
     }
@@ -170,7 +168,9 @@ const PipelineTable = props =>{
             render:(text,record) => {
                 return  <Space>
                             <Profile userInfo={record.user}/>
-                            {text}
+                            {
+                                record.user && <UserName name={text} id={record.user.id}/>
+                            }
                         </Space>
             }
         },
@@ -243,11 +243,15 @@ const PipelineTable = props =>{
                 <Table
                     bordered={false}
                     columns={columns}
-                    dataSource={pipelineList}
+                    dataSource={pipelineListPage}
                     rowKey={record=>record.id}
                     pagination={false}
                     locale={{emptyText: <EmptyText title={'暂无流水线'}/>}}
                 />
+                {
+                    pipPage && pipPage.total > 1 &&
+                    <Page pageCurrent={pipPage.defaultCurrent} changPage={changPage} page={pipPage}/>
+                }
             </div>
 }
 

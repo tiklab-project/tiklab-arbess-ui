@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import DynamicDetail from "../../../home/components/DynamicDetail";
 
@@ -15,18 +15,22 @@ const PipelineDyna = props =>{
     const {pipeline} = pipelineStore
     const {findlogpage,dynamicList,dynaPage} = homePageStore
 
+    // 获取近期动态请求数据
+    const [params,setParams] = useState({
+        pageParam:{
+            pageSize:15,
+            currentPage:1
+        },
+        bgroup:"matflow",
+    })
+
     useEffect(()=>{
-        const params = {
-            content:{pipelineId:[pipeline.id]},
-            pageParam:{
-                pageSize:15,
-                currentPage:1
-            },
-            bgroup:"matflow",
-        }
         // 初始化流水线动态
-        pipeline && findlogpage(params)
-    },[pipeline])
+        pipeline && findlogpage({
+            content:{pipelineId:[pipeline.id]},
+            ...params
+        })
+    },[pipeline,params])
 
     /**
      * 去流水线概况页
@@ -37,10 +41,10 @@ const PipelineDyna = props =>{
     return  <DynamicDetail
                 firstItem={"流水线动态详情"}
                 goBack={goBack}
-                findlogpage={findlogpage}
+                params={params}
+                setParams={setParams}
                 dynaPage={dynaPage}
                 dynamicList={dynamicList}
-                pipelineIdList={[pipeline.id]}
             />
 }
 

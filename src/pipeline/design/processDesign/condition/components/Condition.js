@@ -3,9 +3,8 @@ import {Tooltip,Select} from "antd";
 import {MinusCircleOutlined,PlusCircleOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../../common/btn/Btn";
 import {WhetherChange} from "../../processDesign/components/Common";
-import EmptyText from "../../../../../common/emptyText/EmptyText";
+import {EmptyText,Btn} from "../../../../../common";
 import "./Condition.scss";
 
 /**

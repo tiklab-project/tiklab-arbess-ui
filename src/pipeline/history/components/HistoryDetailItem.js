@@ -1,6 +1,5 @@
 import React from "react";
-
-import {getTime} from "../../../common/client/Client";
+import {getTime} from "../../../common";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 
 const HistoryDetailItem = props =>{
@@ -31,7 +30,7 @@ const HistoryDetailItem = props =>{
             <div className="card-ct">{runStatusText(item.runState)}</div>
             <div className="card-bt">
                 <span className="card-bt-log" onClick={()=>log(item,index)}>日志</span>
-                <span className="card-bt-time">{getTime(item.runTime)}</span>
+                <span className="card-bt-time">{item.runTimeDate}</span>
             </div>
         </div>
     }

@@ -24,8 +24,8 @@ export class HistoryStore {
     @observable
     page = {
         defaultCurrent: 1,
-        pageSize: "11",
-        total: "1",
+        pageSize: 13,
+        total: 1,
     }
 
     /**
@@ -167,12 +167,16 @@ export class HistoryStore {
     findHistoryList = data =>{
         if(data.code===0){
             if(data.data && data.data.dataList.length > 0){
-                this.page.total = data.data.totalPage
                 this.historyList = data.data.dataList
+                this.page.total = data.data.totalPage
             }
             else{
                 this.historyList = []
-                this.page = {}
+                this.page = {
+                    defaultCurrent: 1,
+                    pageSize: 13,
+                    total: 1,
+                }
             }
         }
         else {

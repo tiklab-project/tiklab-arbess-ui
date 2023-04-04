@@ -1,9 +1,6 @@
-import React,{useState} from "react";
+import React from "react";
 import {DatePicker,Select,Space} from "antd";
-import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
-import DynamicList from "../../common/dynamic/DynamicList";
-import Page from "../../common/page/Page";
-import EmptyText from "../../common/emptyText/EmptyText";
+import {EmptyText,Page,DynamicList,BreadcrumbContent} from "../../common";
 
 const { RangePicker } = DatePicker
 
@@ -15,37 +12,7 @@ const { RangePicker } = DatePicker
  */
 const DynamicDetail = props =>{
 
-    const {firstItem,goBack,findlogpage,dynaPage,dynamicList,pipelineIdList,pipelineList} = props
-
-    // 当前页
-    const [pageCurrent,setPageCurrent] = useState(1)
-
-    // 时间戳
-    const [timestamp,setTimestamp] = useState(null)
-
-    // 模板类型
-    const [module,setModule] = useState(null)
-
-    // 动作类型
-    const [actionType,setActionType] = useState(null)
-
-    // pipelineId
-    const [pipelineId,setPipelineId] = useState(pipelineIdList && pipelineIdList)
-
-    // 获取动态传的参数
-    const params = {
-        pageParam:{
-            pageSize:15,
-            currentPage:pageCurrent
-        },
-        bgroup:"matflow",
-        content:{
-            pipelineId:pipelineId
-        },
-        timestamp:timestamp,
-        module:module,
-        actionType:actionType,
-    }
+    const {firstItem,goBack,params,setParams,dynaPage,dynamicList,pipelineList} = props
 
     /**
      * 改变数据params
@@ -54,50 +21,32 @@ const DynamicDetail = props =>{
      */
     const changParams = (value,field) =>{
         switch (field) {
-            case "module":
-                params[field] = value
-                setModule(value)
+            case "content":
+                setParams({
+                    ...params,
+                    [field] : value==="null"?{}:{pipelineId:[value]}
+                })
                 break
-            case "actionType":
-                params[field] = value
-                setActionType(value)
-                break
-            case "pipelineId":
-                if(value === null){
-                    params.content = {}
-                    break
-                }
-                params.content[field] = [value]
-                setPipelineId(value)
-                break
-            case "timestamp":
-                if(value.some(item=>item==="")){
-                    params[field] = null
-                    break
-                }
-                params[field] = value
-                setTimestamp(value)
+            default:
+                setParams({
+                    ...params,
+                    [field] : value
+                })
         }
-        findDyna(1)
     }
-
 
     /**
      * 切换分页
      * @param pages：页码
      */
     const changPage = pages =>{
-        findDyna(pages)
-    }
-
-    /**
-     * 获取动态
-     * @param pages：页码
-     */
-    const findDyna = pages =>{
-        setPageCurrent(pages && pages)
-        params.pageParam.currentPage=pages
-        findlogpage(params)
+        setParams({
+            ...params,
+            pageParam:{
+                pageSize:15,
+                currentPage:pages
+            }
+        })
     }
 
     return(
@@ -112,7 +61,7 @@ const DynamicDetail = props =>{
                                 showSearch
                                 placeholder={"流水线"}
                                 style={{width:150}}
-                                onChange={(value)=>changParams(value,"pipelineId")}
+                                onChange={(value)=>changParams(value,"content")}
                                 filterOption={(input, option) =>
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
@@ -152,14 +101,10 @@ const DynamicDetail = props =>{
                         />
                     </Space>
                 </div>
+                <DynamicList {...props} dynamicList={dynamicList}/>
                 {
-                    dynamicList && dynamicList.length>0 ?
-                        <>
-                            <DynamicList{...props} dynamicList={dynamicList}/>
-                            <Page pageCurrent={pageCurrent} changPage={changPage} page={dynaPage}/>
-                        </>
-                        :
-                        <EmptyText/>
+                    dynaPage && dynaPage.total > 1 &&
+                    <Page pageCurrent={params.pageParam.currentPage} changPage={changPage} page={dynaPage}/>
                 }
             </div>
         </div>

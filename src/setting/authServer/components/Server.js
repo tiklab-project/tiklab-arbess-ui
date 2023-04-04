@@ -1,12 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Space,Table} from "antd"
 import {inject,observer} from "mobx-react";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import ListIcon from "../../../common/list/ListIcon";
-import Listaction from "../../../common/list/Listaction";
-import Profile from "../../../common/Profile/Profile";
-import Tabs from "../../../common/tabs/Tabs";
+import {BreadcrumbContent,EmptyText,ListIcon,Listaction,Profile,Tabs,UserName} from "../../../common";
 import ServerAddBtn from "./ServerAddBtn";
 import "../../authCommon/Auth.scss";
 
@@ -91,7 +86,7 @@ const Server = props =>{
     const user = (text,record) =>{
         return  <Space>
                     <Profile userInfo={record.user}/>
-                    {text}
+                    <UserName name={text} id={record.user.id}/>
                 </Space>
     }
 
@@ -194,8 +189,8 @@ const Server = props =>{
         },
         {
             title:"创建人",
-            dataIndex:["user","name"],
-            key:"user",
+            dataIndex:["user","nickname"],
+            key:["user","nickname"],
             width:"20%",
             ellipsis:true,
             render:(text,record) => user(text,record)
@@ -260,8 +255,8 @@ const Server = props =>{
         },
         {
             title:"创建人",
-            dataIndex:["user","name"],
-            key:"user",
+            dataIndex:["user","nickname"],
+            key:["user","nickname"],
             width:"15%",
             ellipsis:true,
             render:(text,record) => user(text,record)

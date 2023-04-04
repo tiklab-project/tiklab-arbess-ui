@@ -1,9 +1,7 @@
 import React,{useEffect, useState} from "react";
 import {Table,Input} from "antd";
 import {SearchOutlined} from '@ant-design/icons';
-import Btn from "../../../common/btn/Btn";
-import EmptyText from "../../../common/emptyText/EmptyText";
-
+import {Btn,EmptyText,Page,UserName} from "../../../common";
 
 /**
  * 流水线用户添加
@@ -13,33 +11,44 @@ import EmptyText from "../../../common/emptyText/EmptyText";
  */
 const PipelineUserAdd = props =>{
 
-    const {visible,setVisible,yUserList,nUserList,setYUserList,setNUserList,findUserPage} = props
+    const {visible,setVisible,allUserList,yUserList,setYUserList,pipelineStore} = props
+
+    const {findUserPage,userPage} = pipelineStore
 
     const [addUser,setAddUser] = useState([])
+
+    const [userList,setUserList] = useState([])
+
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
+    const [findUserParam,setFindUserParam] = useState({
+        pageParam:{
+            pageSize:6,
+            currentPage:1
+        }
+    })
+
     useEffect(()=>{
-        setSelectedRowKeys([])
-        setAddUser([])
+        if(visible){
+            setUserList(allUserList)
+        }
+        return ()=>{
+            setSelectedRowKeys([])
+            setAddUser([])
+        }
     },[visible])
 
     /**
      * 添加用户
      */
     const onOk = () => {
-        // 所有id组成数组
-        const newArr = addUser.map(item=>item.id)
-
         // yUserList（已选择） 添加
         setYUserList(yUserList.concat(addUser))
-
-        // nUserList（未选择） 减少
-        setNUserList(nUserList.filter(item=>!newArr.includes(item.id)))
         setVisible(false)
     }
 
     /**
-     * 模糊查询是否可以选中
+     * 已选中的用户不可添加
      * @param record：表格行信息
      * @returns {*}
      */
@@ -61,10 +70,12 @@ const PipelineUserAdd = props =>{
             // 如果没有选中 -- 选中
             else {
                 selectedRowKeys.push(record.id)
-                addUser.push(record)
+                addUser.push({
+                    ...record,
+                    adminRole: false
+                })
             }
             setSelectedRowKeys([...selectedRowKeys])
-            setAddUser([...addUser])
         }
     }
 
@@ -74,7 +85,8 @@ const PipelineUserAdd = props =>{
      */
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-            setAddUser(selectedRows)
+            const newArr =selectedRows && selectedRows.map(item=>({...item,adminRole: false}))
+            setAddUser(newArr)
             setSelectedRowKeys(selectedRowKeys)
         },
         // 禁止选择
@@ -88,12 +100,28 @@ const PipelineUserAdd = props =>{
      * 模糊查询用户
      * @param e：文本框value
      */
-    const findUser = e =>{
-        findUserPage({
+    const changFindUser = e =>{
+        findUser({
+            ...findUserParam,
             nickname:e.target.value
-        }).then(res=>{
+        })
+    }
+
+    const changUserPage = page =>{
+        findUser({
+            ...findUserParam,
+            pageParam:{
+                pageSize:6,
+                currentPage:page
+            }
+        })
+    }
+
+    const findUser = value =>{
+        setFindUserParam(value)
+        findUserPage(value).then(res=>{
             if(res.code===0){
-                setNUserList(res.data && res.data.dataList)
+                setUserList(res.data && res.data.dataList)
             }
         })
     }
@@ -103,7 +131,7 @@ const PipelineUserAdd = props =>{
             <Input
                 placeholder={"名称"}
                 prefix={<SearchOutlined/>}
-                onChange={findUser}
+                onChange={changFindUser}
             />
             <div className='pipeline-user-add-table'>
                 <Table
@@ -116,11 +144,16 @@ const PipelineUserAdd = props =>{
                         title:"昵称",
                         dataIndex:"nickname",
                         key:"nickname",
+                        render:(text,record)=><UserName name={text} id={record.id}/>
                     }]}
-                    dataSource={nUserList}
+                    dataSource={userList}
                     pagination={false}
                     locale={{emptyText: <EmptyText/>}}
                 />
+                {
+                    userPage && userPage.total>1 &&
+                    <Page pageCurrent={findUserParam.pageParam.currentPage} changPage={changUserPage} page={userPage}/>
+                }
             </div>
             <div className='pipeline-user-add-btn'>
                 <Btn onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>

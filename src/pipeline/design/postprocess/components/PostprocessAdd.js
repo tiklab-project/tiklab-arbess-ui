@@ -1,13 +1,8 @@
 import React,{useState,useEffect,useRef} from "react";
 import {Modal, Form, Select, Checkbox, Table, Space, Tooltip, Dropdown, message} from "antd";
-import {DeleteOutlined,PlusOutlined} from "@ant-design/icons";
+import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
-import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
-import {autoHeight} from "../../../../common/client/Client";
-import Btn from "../../../../common/btn/Btn";
-import ModalTitle from "../../../../common/modalTitle/ModalTitle";
-import EmptyText from "../../../../common/emptyText/EmptyText";
-import Profile from "../../../../common/Profile/Profile";
+import {autoHeight,PostprocessMirrorScenario,Btn,ModalTitle,EmptyText,Profile,UserName} from "../../../../common";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 
 const PostprocessAdd = props =>{
@@ -24,16 +19,11 @@ const PostprocessAdd = props =>{
     // 后置处理类型
     const [postprocessType,setPostprocessType] = useState(61)
 
-    // 通知人员选择框展示||隐藏
-    const [userAddVisible,setUserAddVisible] = useState(false)
-
     // 代码块行高亮
     const [styleActiveLine,setStyleActiveLine] = useState(false)
 
     // 选中的通知人员
     const [yUserList,setYUserList] = useState([])
-
-    const [eventType, setEventType] = useState(null);
 
     useEffect(()=>{
         setHeight(autoHeight())
@@ -114,16 +104,10 @@ const PostprocessAdd = props =>{
      * @param value
      */
     const onOk = value => {
-        let newArr = []
-        yUserList && yUserList.map(item=>{
-            newArr.push({
-                receiveType:item.receiveType,
-                user:{id:item.user.id}
-            })
-        })
+        let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
         let params = {
             taskType:postprocessType,
-            values: postprocessType===61? { ...value,userList:newArr}: {scriptOrder: mirrorRefs.current.editor.getValue()}
+            values: postprocessType===61 ? { ...value,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
         }
         if(formValue){
              params = {
@@ -177,7 +161,7 @@ const PostprocessAdd = props =>{
             render:(text,record)=>{
                 return  <Space>
                             <Profile userInfo={record.user}/>
-                            {text}
+                            <UserName name={text} id={record.user.id}/>
                         </Space>
             }
         },
@@ -281,25 +265,11 @@ const PostprocessAdd = props =>{
                                 <div className="post-pose-user">
                                     <div className="post-pose-title">
                                         <div className="title-user">消息通知人员</div>
-                                       <Dropdown
-                                           overlay={ <PostprocessUserAdd
-                                               userAddVisible={userAddVisible}
-                                               setUserAddVisible={setUserAddVisible}
-                                               allUserList={pipelineUserList}
-                                               yUserList={yUserList}
-                                               setYUserList={setYUserList}
-                                                />}
-                                           placement={"bottomRight"}
-                                           visible={userAddVisible}
-                                           trigger={['click']}
-                                           onVisibleChange={visible => setUserAddVisible(visible)}
-                                       >
-                                           <Btn
-                                               type={"link-nopadding"}
-                                               icon={<PlusOutlined/>}
-                                               title={"添加成员"}
-                                           />
-                                       </Dropdown>
+                                        <PostprocessUserAdd
+                                            allUserList={pipelineUserList}
+                                            yUserList={yUserList}
+                                            setYUserList={setYUserList}
+                                        />
                                     </div>
                                     <Table
                                         bordered={false}

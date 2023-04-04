@@ -7,9 +7,8 @@ import {
     MessageOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
-import EmptyText from "../../common/emptyText/EmptyText";
-import {inject,observer} from "mobx-react";
-import Btn from "../../common/btn/Btn";
+import {observer} from "mobx-react";
+import {Btn,EmptyText} from "../../common";
 import "./HeaderMessage.scss";
 
 /**
@@ -241,4 +240,4 @@ const HeaderMessage = props =>{
     )
 }
 
-export default inject("homePageStore","pipelineStore")(observer(HeaderMessage))
+export default observer(HeaderMessage)

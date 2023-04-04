@@ -1,5 +1,5 @@
 import React from "react";
-import Setting from "../../../common/aside/Setting";
+import {Setting} from "../../../common";
 
 /**
  * 流水线左侧导航（三级导航）

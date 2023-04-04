@@ -2,10 +2,8 @@ import React,{useState,useEffect} from "react";
 import {Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import EmptyText from "../../../../common/emptyText/EmptyText";
 import TriggerAdd from "./TriggerAdd";
-import Listaction from "../../../../common/list/Listaction";
-import Btn from "../../../../common/btn/Btn";
+import {Listaction,EmptyText,Btn} from "../../../../common";
 import "./Trigger.scss";
 
 /**

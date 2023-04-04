@@ -29,7 +29,7 @@ const Loading = props =>{
 const SpinLoading = ({size, type}) => {
 
     if(type==='table'){
-        return  <div style={{textAlign:"center",paddingTop:30}}>
+        return  <div style={{textAlign:"center",padding:"25px 0"}}>
                     <Spin size={size?size:'default '}/>
                 </div>
     }

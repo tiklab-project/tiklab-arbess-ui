@@ -8,27 +8,32 @@ export class PipelineStore {
     @observable
     pipelineList = []
 
+    // 流水线分页列表
+    @observable
+    pipelineListPage = []
+
     // 最近打开流水线
     @observable
     pipelineNearList = []
-
-    // 流水线长度
-    @observable
-    pipelineLength = 0
-
-    // 流水线收藏长度
-    @observable
-    followLength = 0
 
     // 流水线用户
     @observable
     pipelineUserList = []
 
+    // 流水线分页
+    @observable
+    pipPage = {
+        defaultCurrent: 1,
+        pageSize: 6,
+        total: 1,
+    }
+
+    // 用户分页
     @observable
     userPage = {
         defaultCurrent: 1,
-        pageSize: "11",
-        total: "1",
+        pageSize: 6,
+        total: 1,
     }
 
     // 流水线信息
@@ -43,9 +48,14 @@ export class PipelineStore {
     @observable
     isLoading = false
 
-    // 刷新
+    // 重新查询
     @observable
     fresh = false
+
+    @action
+    setFresh = () =>{
+        this.fresh = !this.fresh
+    }
 
     /**
      * 改变流水线tab标签
@@ -66,26 +76,20 @@ export class PipelineStore {
     }
 
     /**
-     * 设置刷新状态
-     * @param value
-     */
-    @action
-    setFresh = value =>{
-        this.fresh = value
-    }
-
-    /**
-     * 查找所有流水线
-     * @param value
+     * 分页、类型（所有，收藏）、模糊查询来获取流水线
      * @returns {Promise<unknown>}
      */
     @action
-    findUserPipeline = value =>{
+    findUserPipelinePage = value =>{
         return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findUserPipeline").then(res=>{
+            Axios.post("/pipeline/findUserPipelinePage",value).then(res=>{
                 if(res.code===0 && res.data){
-                    this.pipelineList=res.data
-                    this.pipelineLength=res.data.length
+                    // 流水线列表
+                    this.pipelineListPage=res.data.dataList
+                    // 流水线页数
+                    this.pipPage.total = res.data.totalPage
+                    // 流水线当前页
+                    this.pipPage.defaultCurrent = res.data.currentPage
                 }
                 resolve(res)
             }).catch(error=>{
@@ -93,8 +97,44 @@ export class PipelineStore {
                 reject()
             })
         })
-
     }
+
+    /**
+     * 获取所有流水线（未分页）
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findUserPipeline = () =>{
+        return new Promise((resolve, reject) => {
+            Axios.post("/pipeline/findUserPipeline").then(res=>{
+                if(res.code===0 && res.data){
+                    // 流水线列表
+                    this.pipelineList=res.data
+                }
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
+    }
+
+    /**
+     * 所有收藏（未分页）
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findUserFollowPipeline = () =>{
+        return new Promise((resolve, reject) => {
+            Axios.post("/pipeline/findUserFollowPipeline").then(res=>{
+                resolve(res)
+            }).catch(error=>{
+                console.log(error)
+                reject()
+            })
+        })
+    }
+
 
     /**
      * 添加流水线
@@ -113,28 +153,6 @@ export class PipelineStore {
                     message.info("创建失败")
                 }
                 this.isLoading = false
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
-
-    /**
-     * 模糊搜索流水线
-     * @param values
-     * @returns {Promise<unknown>}
-     */
-    @action
-    findLike = values =>{
-        const params = new FormData()
-        params.append("pipelineName",values)
-        return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findLikePipeline",params).then(res=>{
-                if(res.code===0){
-                    this.pipelineList=res.data
-                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -181,31 +199,15 @@ export class PipelineStore {
             Axios.post("/pipeline/updatePipeline",values).then(res=>{
                 if(res.code===0){
                     message.info("更新成功")
+                    this.findUserPipeline()
                 }
                 else{
                     message.info("更新失败")
                 }
-                this.fresh=!this.fresh
                 resolve(res)
             }).catch(error=>{
                 reject()
             })
-        })
-    }
-
-    /**
-     * 获取我收藏的流水线
-     * @param value
-     */
-    @action
-    findAllFollow = value =>{
-        Axios.post("/pipeline/findUserFollowPipeline").then(res=>{
-            if(res.code===0){
-                this.pipelineList=res.data
-                this.followLength=res.data && res.data.length
-            }
-        }).catch(error=>{
-            console.log(error)
         })
     }
 
@@ -229,14 +231,7 @@ export class PipelineStore {
      */
     @action
     findUserPage =async value =>{
-        const params = {
-            pageParam:{
-                pageSize:6,
-                currentPage:1
-            },
-            ...value
-        }
-        const data =  await Axios.post("/user/user/findUserPage",params)
+        const data =  await Axios.post("/user/user/findUserPage",value)
         this.findPipelineUser(data)
         return data
     }
@@ -250,7 +245,7 @@ export class PipelineStore {
     findDmUserPage = async value =>{
         const params = {
             pageParam:{
-                pageSize:10,
+                pageSize:6,
                 currentPage:1
             },
             domainId:value,

@@ -9,10 +9,8 @@ import {
 } from "@ant-design/icons";
 import {PrivilegeProjectButton} from "tiklab-user-ui";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../common/btn/Btn";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
-import {Loading} from "../../../common/loading/Loading";
+import {Loading,Btn,BreadcrumbContent} from "../../../common";
 import "./PipelineBasicInfo.scss";
 
 /**

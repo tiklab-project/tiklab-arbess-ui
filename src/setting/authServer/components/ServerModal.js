@@ -1,11 +1,8 @@
 import React,{useEffect,useState } from "react";
 import {Modal,Form,Input,Select,Tooltip,message,Space} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
-import Btn from "../../../common/btn/Btn";
 import AuthType from "../../authCommon/AuthType";
-import ModalTitle from "../../../common/modalTitle/ModalTitle";
-import {autoHeight,Validation} from "../../../common/client/Client";
-import {ServerLoading} from "../../../common/loading/Loading";
+import {autoHeight, Validation,ModalTitle,Btn,ServerLoading} from "../../../common";
 
 /**
  * 服务配置弹出框，添加，更新

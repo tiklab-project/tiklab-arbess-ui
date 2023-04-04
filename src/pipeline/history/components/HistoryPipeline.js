@@ -21,14 +21,12 @@ const HistoryPipeline = props => {
     // 列表数据详情状态
     const [detailsVisible,setDetailsVisible] = useState(false)
 
-    // 筛选条件--执行状态
-    const [state,setState] = useState(null)
-
-    // 筛选条件--执行人
-    const [userId,setUseId] = useState(null)
-
-    // 筛选条件--执行方式
-    const [type,setType] = useState(0)
+    // 获取流水线历史列表请求数据
+    const [params,setParams] = useState({
+        state:null,
+        userId:null,
+        type:0
+    })
 
     useEffect(()=>{
         // 项目成员
@@ -37,7 +35,6 @@ const HistoryPipeline = props => {
             setPageCurrent(1)
             setHistoryList([])
         }
-
     },[pipeline])
 
     let inter=null
@@ -46,44 +43,40 @@ const HistoryPipeline = props => {
         if(pipeline){
             inter = setInterval(()=>findPipelineInstance({
                 pipelineId:pipeline.id,
-                state:state,
-                userId:userId,
-                type:type
+                ...params
             }).then(res=>{
                 setIsLoading(false)
                 if(res.code===0){
-                    if(res.data.dataList.length<1 || res.data.dataList[0].runStatus!=="run"){
-                        clearInterval(inter)
-                    }
+                    if(!res.data) return clearInterval(inter)
+                    if(res.data.dataList.length<1 || res.data.dataList[0].runStatus!=="run") clearInterval(inter)
                 }
-                else {
-                    clearInterval(inter)
-                }
+                else clearInterval(inter)
             }),1000)
         }
         if(detailsVisible){
-            clearInterval(inter)
             initScreen()
+            clearInterval(inter)
         }
         // 组件销毁事件
         return ()=> clearInterval(inter)
-    },[historyFresh,pipeline,pageCurrent,userId,state,type,detailsVisible])
+    },[historyFresh,pipeline,pageCurrent,params])
 
     /**
      * 初始化历史筛选条件
      */
     const initScreen = () =>{
-        setType(0)
-        setState(null)
-        setUseId(null)
+        setParams({
+            state:null,
+            userId:null,
+            type:0
+        })
     }
 
     return (
         <HistoryTable
             isLoading={isLoading}
-            setType={setType}
-            setState={setState}
-            setUseId={setUseId}
+            params={params}
+            setParams={setParams}
             setIsLoading={setIsLoading}
             pipelineUserList={pipelineUserList}
             detailsVisible={detailsVisible}

@@ -1,6 +1,5 @@
 import React,{useRef,useState} from "react";
-import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
-import Btn from "../../../../common/btn/Btn";
+import {PostprocessMirrorScenario,Btn} from "../../../../common";
 
 /**
  * 后置处理代码块

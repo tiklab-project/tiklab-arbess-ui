@@ -2,9 +2,7 @@ import React,{useState,useEffect} from "react";
 import {message,Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Listaction from "../../../../common/list/Listaction";
-import Btn from "../../../../common/btn/Btn";
-import EmptyText from "../../../../common/emptyText/EmptyText";
+import {EmptyText,Btn,Listaction} from "../../../../common";
 import VariableAdd from "./VariableAdd";
 import "./Variable.scss";
 

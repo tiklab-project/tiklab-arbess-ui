@@ -1,15 +1,15 @@
 import React,{useEffect,useState} from "react";
-import {Table,Input} from "antd";
-import {SearchOutlined} from '@ant-design/icons';
-import EmptyText from "../../../../common/emptyText/EmptyText";
-import Btn from "../../../../common/btn/Btn";
+import {Table, Input, Dropdown} from "antd";
+import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
+import {Btn,EmptyText,UserName} from "../../../../common";
 import "./PostprocessUserAdd.scss";
 
 const PostprocessUserAdd = props =>{
 
-    const {userAddVisible,setUserAddVisible,allUserList,yUserList,setYUserList,
-        postprocessData,setPostprocessData,type
-    } = props
+    const {allUserList,yUserList,setYUserList,postprocessData,setPostprocessData,type} = props
+
+    // 消息通知人员下拉框
+    const [userAddVisible,setUserAddVisible] = useState(false)
 
     // 选中的用户
     const [addUser,setAddUser] = useState([])
@@ -22,14 +22,7 @@ const PostprocessUserAdd = props =>{
 
     useEffect(()=>{
         if(userAddVisible){
-            // 初始化用户列表
-            let newArr = []
-            if(type){
-                newArr = yUserList && yUserList.userList.map(item=>item.user && item.user.id)
-            }else {
-                newArr = yUserList && yUserList.map(item=>item.user.id)
-            }
-            setUserList(allUserList.filter(item=>!newArr.includes(item.user && item.user.id)))
+            setUserList(allUserList)
         }
         return ()=>{
             setSelectedRowKeys([])
@@ -43,8 +36,8 @@ const PostprocessUserAdd = props =>{
     const onOk = () => {
         if(type){
             postprocessData && postprocessData.map(item=>{
-                if(item.taskId===yUserList.taskId){
-                    item.values.userList = item.values.userList.concat(addUser)
+                if(item.task.taskId===yUserList.taskId){
+                    item.task.values.userList = item.task.values.userList.concat(addUser)
                 }
             })
             setPostprocessData([...postprocessData])
@@ -56,24 +49,43 @@ const PostprocessUserAdd = props =>{
     }
 
     /**
+     * 已选中的用户不可添加
+     * @param record：表格行信息
+     * @returns {*}
+     */
+    const disabledOpt = record =>{
+        let newArr = []
+        if(type){
+            newArr = yUserList && yUserList.userList
+        }else {
+            newArr = yUserList
+        }
+        return newArr && newArr.some(item=>item.user.id===record.user.id)
+    }
+
+
+    /**
      * 表格行
      * @param record
      */
     const onSelectRow = record => {
-        // 如果已经选中 -- 取消选中
-        if (selectedRowKeys.indexOf(record.id) >= 0) {
-            setAddUser(addUser.filter(item=>item.id!==record.id))
-            selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
+        if(!disabledOpt(record)){
+            // 如果已经选中 -- 取消选中
+            if (selectedRowKeys.indexOf(record.id) >= 0) {
+                setAddUser(addUser.filter(item=>item.id!==record.id))
+                selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
+            }
+            // 如果没有选中 -- 选中
+            else {
+                selectedRowKeys.push(record.id)
+                addUser.push({
+                    ...record,
+                    receiveType:1,
+                })
+            }
+            setSelectedRowKeys([...selectedRowKeys])
         }
-        // 如果没有选中 -- 选中
-        else {
-            selectedRowKeys.push(record.id)
-            addUser.push({
-                ...record,
-                receiveType:1,
-            })
-        }
-        setSelectedRowKeys([...selectedRowKeys])
+
     }
 
     /**
@@ -82,20 +94,18 @@ const PostprocessUserAdd = props =>{
      */
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {
-            let newArr = []
-            selectedRows && selectedRows.map(item=>{
-                newArr.push({
-                    ...item,
-                    receiveType:1,
-                })
-            })
-            setAddUser([...newArr])
+            const newArr =selectedRows && selectedRows.map(item=>({...item,receiver:1}))
+            setAddUser(newArr)
             setSelectedRowKeys(selectedRowKeys)
         },
+        // 禁止选择
+        getCheckboxProps: (record) => ({
+            disabled: disabledOpt(record),
+        }),
         selectedRowKeys:selectedRowKeys
     }
 
-    return (
+    const userAddMnue = (
         <div className='post-pose-user-add mf'>
             <Input
                 placeholder={'名称'}
@@ -113,6 +123,7 @@ const PostprocessUserAdd = props =>{
                         title:"名称",
                         dataIndex:["user","nickname"],
                         key:["user","nickname"],
+                        render:(text,record)=><UserName name={text} id={record.user.id}/>
                     }]}
                     dataSource={userList}
                     pagination={false}
@@ -124,6 +135,22 @@ const PostprocessUserAdd = props =>{
                 <Btn onClick={onOk} title={"确定"} type={"primary"}/>
             </div>
         </div>
+    )
+
+    return (
+        <Dropdown
+            overlay={userAddMnue}
+            placement={"bottomRight"}
+            visible={userAddVisible}
+            trigger={['click']}
+            onVisibleChange={visible => setUserAddVisible(visible)}
+        >
+            <Btn
+                type={"link-nopadding"}
+                icon={<PlusOutlined/>}
+                title={"添加成员"}
+            />
+        </Dropdown>
     )
 }
 

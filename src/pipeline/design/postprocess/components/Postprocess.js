@@ -2,11 +2,9 @@ import React,{useState,useEffect} from "react";
 import {message, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import EmptyText from "../../../../common/emptyText/EmptyText";
 import PostprocessAdd from "./PostprocessAdd";
 import TaskTitleIcon from "../../processDesign/processDesign/components/TaskTitleIcon";
-import Listaction from "../../../../common/list/Listaction";
-import Btn from "../../../../common/btn/Btn";
+import {Listaction,Btn,EmptyText} from "../../../../common";
 import "./Postprocess.scss";
 
 /**

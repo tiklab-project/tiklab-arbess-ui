@@ -1,11 +1,8 @@
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import echarts from "../../../common/echarts/Echarts";
+import {BreadcrumbContent,echarts,Guide,DynamicList} from "../../../common";
 import OverviewCensus from "./OverviewCensus";
-import Guide from "../../../common/guide/Guide";
-import DynamicList from "../../../common/dynamic/DynamicList";
 import "./Overview.scss";
 
 /**
@@ -18,7 +15,7 @@ const Overview = props =>{
 
     const {OverviewStore,pipelineStore,homePageStore} = props
 
-    const {findlogpage,dynamicList} = homePageStore
+    const {findlogpage,dynamicList,dynaPage} = homePageStore
     const {pipelineCensus,census} = OverviewStore
     const {pipeline} = pipelineStore
 
@@ -89,7 +86,7 @@ const Overview = props =>{
                         </div>
                     </div>
                     <div className="overview-dyna">
-                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={"dynamic"} pipelineId={pipeline && pipeline.id}/>
+                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={dynaPage} pipelineId={pipeline && pipeline.id}/>
                         <DynamicList dynamicList={dynamicList}/>
                     </div>
                 </div>

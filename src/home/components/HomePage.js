@@ -1,10 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
-import {Spin} from "antd";
 import {AimOutlined,HistoryOutlined} from "@ant-design/icons";
-import Guide from "../../common/guide/Guide";
-import DynamicList from "../../common/dynamic/DynamicList";
-import EmptyText from "../../common/emptyText/EmptyText";
+import {EmptyText,DynamicList,Guide,SpinLoading} from "../../common";
 import "./homePage.scss";
 
 /**
@@ -17,8 +14,19 @@ const HomePage = props =>{
 
     const {homePageStore,pipelineStore} = props
 
-    const {findlogpage,dynamicList} = homePageStore
-    const {findAllOpen,pipelineNearList,findUserPipeline,findAllFollow,pipelineLength,followLength,setListType} = pipelineStore
+    const {findlogpage,dynamicList,dynaPage} = homePageStore
+    const {findAllOpen,pipelineNearList,findUserPipeline,findUserFollowPipeline,setListType} = pipelineStore
+
+    const [pageParam] = useState({
+        pageSize:13,
+        currentPage: 1,
+    })
+
+    // 我的流水线数量
+    const [pipelineLength,setPipelineLength] = useState(0)
+
+    // 我的收藏数量
+    const [followLength,setFollowLength] = useState(0)
 
     // 最近打开的流水线加载
     const [newlyLoading,setNewlyLoading] = useState(true)
@@ -28,20 +36,21 @@ const HomePage = props =>{
 
     useEffect(()=>{
         // 获取所有流水线
-        findUserPipeline()
+        findUserPipeline().then(res=>{
+            if(res.code===0 && res.data) setPipelineLength(res.data.length)
+        })
+
+        // 获取我的收藏
+        findUserFollowPipeline({pageParam,pipelineFollow:1}).then(res=>{
+            if(res.code===0 && res.data) setFollowLength(res.data.length)
+        })
 
         // 获取近期动态
         findlogpage({
-            pageParam:{
-                pageSize:10,
-                currentPage:1
-            },
+            pageParam,
             bgroup:"matflow",
             content:{}
         }).then(()=>setLogLoading(false))
-
-        // 获取我收藏的流水线
-        findAllFollow()
 
         // 获取最近打开的流水线
         findAllOpen(5).then(()=>setNewlyLoading(false))
@@ -91,11 +100,7 @@ const HomePage = props =>{
     }
 
 
-    /**
-     * 最近访问的流水线
-     * @param item
-     * @returns {JSX.Element}
-     */
+    // 渲染最近访问的流水线
     const renderList = item => {
         return  <div className="pipelineRecent-item" key={item.openId}
                      onClick={()=> props.history.push(`/index/pipeline/${item.pipeline && item.pipeline.id}/survey`)}
@@ -136,7 +141,7 @@ const HomePage = props =>{
                     <Guide title={"最近访问的流水线"} icon={<HistoryOutlined />}/>
                     {
                         newlyLoading ?
-                            <div className='homePage-loading'><Spin/></div>
+                            <SpinLoading type='table'/>
                             :
                             pipelineNearList && pipelineNearList.length > 0 ?
                             <div  className="pipelineRecent-content">
@@ -150,14 +155,13 @@ const HomePage = props =>{
                 </div>
 
                 <div className="home-dyna">
-                    <Guide title={"近期动态"} icon={<AimOutlined/>} type={"dynamic"}/>
+                    <Guide title={"近期动态"} icon={<AimOutlined/>} type={dynaPage}/>
                     {
                         logLoading ?
-                            <div className='homePage-loading'><Spin/></div>
+                            <SpinLoading type='table'/>
                             :
                             <DynamicList dynamicList={dynamicList}/>
                     }
-
                 </div>
             </div>
         </div>

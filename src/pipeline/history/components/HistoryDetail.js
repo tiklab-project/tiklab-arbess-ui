@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import {SpinLoading} from "../../../common/loading/Loading";
+import {SpinLoading,BreadcrumbContent} from "../../../common";
 import HistoryDetailItem from "./HistoryDetailItem";
 import HistoryDetailTree from "./HistoryDetailTree";
 import "./HistoryDetail.scss";
@@ -48,6 +47,7 @@ const HistoryDetail = props =>{
             setId("")
             setExecIndex(0)
             setDetailsLoading(true)
+            clearInterval(inter)
         }
     },[detailsVisible])
 
@@ -118,11 +118,7 @@ const HistoryDetail = props =>{
         const state = pipeline && pipeline.type===1 ? "runState":"stageState"
         let a
         if(data && data.some(item=>item[state]==="run")){
-            data && data.map((item)=>{
-                if(item[state]==="run"){
-                    a = item
-                }
-            })
+            a = data && data.find(item=>item[state]==='run')
         }
         else{
             a = data[data && data.length-1]

@@ -5,8 +5,7 @@ import {
 } from "@ant-design/icons";
 import {Spin} from "antd";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../common/btn/Btn";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import {BreadcrumbContent,Btn} from "../../../common";
 import ProcessDesign from "../processDesign/processDesign/components/ProcessDesign";
 import Postprocess from "../postprocess/components/Postprocess";
 import Trigger from "../trigger/components/Trigger";

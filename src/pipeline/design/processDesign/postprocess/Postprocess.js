@@ -9,11 +9,9 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import EmptyText from "../../../../common/emptyText/EmptyText";
-import Btn from "../../../../common/btn/Btn";
+import {EmptyText,Btn,Profile,UserName} from "../../../../common";
 import MirrorContent from "./CodeBlock";
 import PostprocessUserAdd from "../../postprocess/components/PostprocessUserAdd";
-import Profile from "../../../../common/Profile/Profile";
 import "./Postprocess.scss";
 
 /**
@@ -88,12 +86,7 @@ const Postprocess = props =>{
         let newArr=[],typeList=[]
         const values = item.task.values
         if(values){
-            values.userList && values.userList.map(item=>{
-                newArr.push({
-                    receiveType:item.receiveType,
-                    user:{id:item.user.id}
-                })
-            })
+            newArr = values.userList && values.userList.map(item=>({receiveType:item.receiveType,user:{id:item.user.id}}))
             typeList = values.typeList
         }
         const params = {
@@ -150,7 +143,7 @@ const Postprocess = props =>{
      */
     const removeUser = (record,item) =>{
         const zz = isSuit(postprocessData,item)
-        zz.userList = zz.userList.filter(item=>item.user.id!==record.user.id)
+        zz.task.values.userList = zz.task.values.userList.filter(item=>item.user.id!==record.user.id)
         setPostprocessData([...postprocessData])
     }
 
@@ -189,7 +182,7 @@ const Postprocess = props =>{
     const isYUser = item =>{
         if(item.task.values){
             const userList = item.task.values.userList
-            const yUserList = isSuit(fixedPostprocessData && fixedPostprocessData,item)
+            const yUserList = isSuit(fixedPostprocessData,item)
             const newId = userList && userList.map(item=>item.user.id + item.receiveType)
             const oldId = yUserList && yUserList.task.values.userList.map(item=>item.user.id + item.receiveType)
             return isEqual(newId,oldId)
@@ -276,7 +269,7 @@ const Postprocess = props =>{
                 render:(text,record)=>(
                     <Space>
                         <Profile userInfo={record.user}/>
-                        {text}
+                        <UserName name={text} id={record.user.id}/>
                     </Space>
                 )
             },
@@ -343,10 +336,10 @@ const Postprocess = props =>{
         const isType = type => mesSendData && mesSendData.some(item=>item===type)
         return (
             <div className="pose-pose-item" key={index}>
-                <div className="pose-item-head" onClick={()=>setOpenOrClose(item.taskId)}>
+                <div className="pose-item-head" onClick={()=>setOpenOrClose(item.postprocessId)}>
                     <div className="pose-item-line">
                         {
-                            isExpandedTree(item.taskId)?
+                            isExpandedTree(item.postprocessId)?
                                 <CaretDownOutlined />:<CaretRightOutlined />
                         }
                     </div>
@@ -363,7 +356,7 @@ const Postprocess = props =>{
                     </div>
                 </div>
                 {
-                    isExpandedTree(item.taskId) &&
+                    isExpandedTree(item.postprocessId) &&
                     <div className="pose-item-content">
                         {
                             item.taskType===61 &&
@@ -393,27 +386,13 @@ const Postprocess = props =>{
                                 <div className="pose-item-user">
                                     <div className="user-title">
                                         <div className="title-user">消息通知人员</div>
-                                        <Dropdown
-                                            overlay={ <PostprocessUserAdd
-                                                userAddVisible={userAddVisible}
-                                                setUserAddVisible={setUserAddVisible}
-                                                allUserList={pipelineUserList}
-                                                yUserList={item.task.values}
-                                                postprocessData={postprocessData}
-                                                setPostprocessData={setPostprocessData}
-                                                type={'task'}
-                                            />}
-                                            placement={"bottomRight"}
-                                            visible={userAddVisible}
-                                            trigger={['click']}
-                                            onVisibleChange={visible=>setUserAddVisible(visible)}
-                                        >
-                                            <Btn
-                                                type={"link-nopadding"}
-                                                icon={<PlusOutlined/>}
-                                                title={"添加成员"}
-                                            />
-                                        </Dropdown>
+                                        <PostprocessUserAdd
+                                            allUserList={pipelineUserList}
+                                            yUserList={item.task.values}
+                                            postprocessData={postprocessData}
+                                            setPostprocessData={setPostprocessData}
+                                            type={'task'}
+                                        />
                                     </div>
                                     <Table
                                         bordered={false}

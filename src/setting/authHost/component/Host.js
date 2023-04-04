@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Space,Table} from "antd";
 import {inject,observer} from "mobx-react";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import ListIcon from "../../../common/list/ListIcon";
-import Listaction from "../../../common/list/Listaction";
-import Profile from "../../../common/Profile/Profile";
-import Tabs from "../../../common/tabs/Tabs";
+import {BreadcrumbContent,EmptyText,ListIcon,Listaction,Profile,Tabs,UserName} from "../../../common";
 import HostAddBtn from "./HostAddBtn";
 import "../../authCommon/Auth.scss";
 
@@ -127,7 +122,7 @@ const Host = props =>{
             render:(text,record) => {
                 return  <Space>
                             <Profile userInfo={record.user}/>
-                            {text}
+                            <UserName name={text} id={record.user.id}/>
                         </Space>
             }
         },

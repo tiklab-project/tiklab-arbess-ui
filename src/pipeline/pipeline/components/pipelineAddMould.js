@@ -1,8 +1,8 @@
 import React from "react";
-import {NodeIndexOutlined,RightOutlined} from "@ant-design/icons";
+import {NodeIndexOutlined} from "@ant-design/icons";
 
 /**
- * 流水线模板
+ * 添加流水线模板
  * @param templateType
  * @param setTemplateType
  * @returns {JSX.Element}

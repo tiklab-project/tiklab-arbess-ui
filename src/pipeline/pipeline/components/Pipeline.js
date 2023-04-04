@@ -4,9 +4,7 @@ import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import PipelineTable from "./PipelineTable";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
-import Btn from "../../../common/btn/Btn";
-import Tabs from "../../../common/tabs/Tabs";
+import {BreadcrumbContent,Btn,Tabs} from "../../../common";
 import "./Pipeline.scss";
 
 /**
@@ -19,17 +17,27 @@ const Pipeline = props =>{
 
     const {pipelineStore} = props
 
-    const {fresh,findUserPipeline,findAllFollow,findLike,listType,setListType} = pipelineStore
+    const {fresh,findUserPipelinePage,listType,setListType} = pipelineStore
+
+    const [pageParam] = useState({
+        pageSize:13,
+        currentPage: 1,
+    })
+
+    const [pipelineParam,setPipelineParam] = useState({
+        pageParam
+    })
 
     useEffect(()=>{
         if(listType===1){
-            // 所有流水线
-            findUserPipeline()
+            findUserPipelinePage(pipelineParam)
         }else {
-            // 所有收藏的流水线
-            findAllFollow()
+            findUserPipelinePage({
+                ...pipelineParam,
+                pipelineFollow:1
+            })
         }
-    },[fresh,listType])
+    },[fresh,pipelineParam])
 
     const lis = [
         {
@@ -47,7 +55,25 @@ const Pipeline = props =>{
      * @param e：文本框value
      */
     const onChangeSearch = e =>{
-        findLike(e.target.value)
+        setPipelineParam({
+            ...pipelineParam,
+            pipelineName:e.target.value,
+            pageParam
+        })
+    }
+
+    /**
+     * 换页
+     * @param page
+     */
+    const changPage = page =>{
+        setPipelineParam({
+            ...pipelineParam,
+            pageParam:{
+                pageSize:13,
+                currentPage: page,
+            }
+        })
     }
 
     /**
@@ -55,6 +81,17 @@ const Pipeline = props =>{
      * @param item
      */
     const clickType = item => {
+        switch (item.id) {
+            case 1:
+                setPipelineParam({
+                    pageParam
+                })
+                break
+            case 2:
+                setPipelineParam({
+                    pageParam
+                })
+        }
         setListType(item.id)
     }
 
@@ -84,7 +121,11 @@ const Pipeline = props =>{
                         />
                     </div>
                 </div>
-                <PipelineTable {...props} pipelineStore={pipelineStore}/>
+                <PipelineTable
+                    {...props}
+                    changPage={changPage}
+                    pipelineStore={pipelineStore}
+                />
             </div>
         </div>
     )

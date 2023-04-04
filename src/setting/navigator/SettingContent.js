@@ -108,7 +108,7 @@ const SettingContent= props =>  {
                             item.children && item.children.map(item =>{
                                 const deepnew = deep +1
                                 return item.children && item.children.length?
-                                    subMenu(item,deepnew) : menu(item,deepnew)
+                                    subMenu(item,deepnew,'devBaseData') : menu(item,deepnew)
                             })
                             :
                             item.children && item.children.map(item =>{

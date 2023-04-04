@@ -2,9 +2,8 @@ import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Input,message,Tooltip} from "antd";
 import {PlusCircleOutlined,MinusCircleOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/Btn";
+import {Btn,EmptyText} from "../../../../common";
 import {WhetherChange} from "../processDesign/components/Common";
-import EmptyText from "../../../../common/emptyText/EmptyText";
 import "./Variable.scss";
 
 /**

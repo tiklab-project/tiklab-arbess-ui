@@ -3,10 +3,8 @@ import {Dropdown, Form, Input, Select, Space, Table, Tooltip} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import Btn from "../../../common/btn/Btn";
+import {Btn,EmptyText,Profile,UserName} from "../../../common";
 import PipelineUserAdd from "./PipelineUserAdd";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import Profile from "../../../common/Profile/Profile";
 import "./PipelineAddInfo.scss";
 
 /**
@@ -30,18 +28,14 @@ const PipelineAddInfo = props =>{
     // 流水线权限 -- 1私有或2公有
     const [powerType,setPowerType] = useState(1)
 
+    // 全部用户
+    const [allUserList,setAllUserList] = useState([])
+
     // 选中的用户
     const [yUserList,setYUserList] = useState([])
 
-    // 未选中的用户
-    const [nUserList,setNUserList] = useState([])
-
-    // 流水线成员
-    const [member,setMember] = useState([])
-
     // 添加用户下拉显示
     const [visible,setVisible] = useState(false)
-
 
     useEffect(()=>{
         if(set && pipeline){
@@ -57,36 +51,20 @@ const PipelineAddInfo = props =>{
             // 获取流水线
             findUserPipeline()
             // 获取用户
-            findUserPage().then(res=>{
+            findUserPage({
+                pageParam:{
+                    pageSize:6,
+                    currentPage:1
+                }
+            }).then(res=>{
                 const data = res.data && res.data.dataList
                 if(res.code===0){
-                    setYUserList(data.filter(item=>item.id===userId))
-                    setNUserList(data.filter(item=>item.id!==userId))
+                    setAllUserList(data)
+                    setYUserList(data.map(item=>({...item,adminRole:true})).filter(item=>item.id===userId))
                 }
             })
         }
-
     },[])
-
-    useEffect(()=>{
-        // 监听选中的用户，设置流水线成员
-        const newArr = []
-        !set && yUserList && yUserList.map(item=>{
-            if(item.id===userId){
-                newArr.push({
-                    id:item.id,
-                    adminRole: true
-                })
-            }else {
-                newArr.push({
-                    id:item.id,
-                    adminRole: false
-                })
-            }
-
-        })
-        setMember([...newArr])
-    },[yUserList])
 
     /**
      * 改变用户权限
@@ -94,18 +72,12 @@ const PipelineAddInfo = props =>{
      * @param value
      */
     const changePower = (record,value) => {
-        if(value==="1"){
-            value=true
-        }
-        if(value==="2"){
-            value=false
-        }
-        member && member.map(item=>{
+        yUserList && yUserList.map(item=>{
             if(item.id===record.id){
                 item.adminRole = value
             }
         })
-        setMember([...member])
+        setYUserList([...yUserList])
     }
 
     /**
@@ -114,14 +86,9 @@ const PipelineAddInfo = props =>{
      * @param record
      */
     const del = (text,record) =>{
-
         // yUserList（已选择） 减少
         setYUserList(yUserList.filter(item=>item.id!==record.id))
-
-        // nUserList（未选择） 添加
-        setNUserList(nUserList.concat([record]))
     }
-
 
     /**
      * 流水线创建或更新确定
@@ -143,11 +110,12 @@ const PipelineAddInfo = props =>{
             return
         }
         setCurrent(1)
+        const userList = yUserList && yUserList.map(item=>({id:item.id,adminRole:item.adminRole}))
         setBaseInfo({
             type:type,
             name: value.name,
             power: powerType,
-            userList: member
+            userList,
         })
     }
 
@@ -221,6 +189,9 @@ const PipelineAddInfo = props =>{
             key:"nickname",
             width:"40%",
             ellipsis:true,
+            render:(text,record) => {
+                return <UserName name={text} id={record.id}/>
+            }
         },
         {
             title:"名称",
@@ -237,21 +208,21 @@ const PipelineAddInfo = props =>{
         },
         {
             title:"权限",
-            dataIndex:"power",
-            key:"power",
+            dataIndex:"adminRole",
+            key:"adminRole",
             width:"25",
             ellipsis:true,
             render: (text,record)=>(
                 <Select
-                    defaultValue={record.id===userId ?"1":"2"}
+                    defaultValue={record.id===userId}
                     bordered={false}
                     showarrow={"false"}
                     style={{width:120}}
                     disabled={record.id===userId}
                     onChange={value=>changePower(record,value)}
                 >
-                    <Select.Option value={"1"}>管理员角色</Select.Option>
-                    <Select.Option value={"2"}>默认角色</Select.Option>
+                    <Select.Option value={true}>管理员角色</Select.Option>
+                    <Select.Option value={false}>默认角色</Select.Option>
                 </Select>
             )
         },
@@ -263,9 +234,9 @@ const PipelineAddInfo = props =>{
             ellipsis:true,
             render: (text,record) => {
                 if (record.id !== userId) {
-                    return <Tooltip title="移出用户">
-                        <DeleteOutlined onClick={()=>del(text,record)}/>
-                    </Tooltip>
+                    return  <Tooltip title="移出用户">
+                                <DeleteOutlined onClick={()=>del(text,record)}/>
+                            </Tooltip>
                 }
             }
         },
@@ -281,11 +252,10 @@ const PipelineAddInfo = props =>{
                         <PipelineUserAdd
                             visible={visible}
                             setVisible={setVisible}
-                            nUserList={nUserList}
+                            allUserList={allUserList}
                             yUserList={yUserList}
                             setYUserList={setYUserList}
-                            setNUserList={setNUserList}
-                            findUserPage={findUserPage}
+                            pipelineStore={pipelineStore}
                         />}
                         placement={"bottomRight"}
                         visible={visible}
