@@ -2,7 +2,10 @@ import React from "react";
 import {message,Tooltip,Table,Space,Spin} from "antd";
 import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import {EmptyText,ListIcon,Profile,Page,UserName} from "../../../common";
+import EmptyText from "../../../common/emptyText/EmptyText";
+import Profile from "../../../common/profile/Profile";
+import ListIcon from "../../../common/list/ListIcon";
+import Page from "../../../common/page/Page";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
@@ -20,7 +23,7 @@ const PipelineTable = props =>{
     const {historyStore,pipelineStore,changPage}=props
 
     const {execStart,execStop}=historyStore
-    const {pipelineListPage,updateFollow,setFresh,pipPage} = pipelineStore
+    const {pipelineListPage,updateFollow,listType,setFresh,pipPage} = pipelineStore
 
     /**
      * 收藏
@@ -168,9 +171,7 @@ const PipelineTable = props =>{
             render:(text,record) => {
                 return  <Space>
                             <Profile userInfo={record.user}/>
-                            {
-                                record.user && <UserName name={text} id={record.user.id}/>
-                            }
+                            { text }
                         </Space>
             }
         },
@@ -246,7 +247,7 @@ const PipelineTable = props =>{
                     dataSource={pipelineListPage}
                     rowKey={record=>record.id}
                     pagination={false}
-                    locale={{emptyText: <EmptyText title={'暂无流水线'}/>}}
+                    locale={{emptyText: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
                 />
                 {
                     pipPage && pipPage.total > 1 &&

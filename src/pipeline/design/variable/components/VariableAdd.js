@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react";
 import {Modal,Form,Input,Select,message} from "antd";
 import {PlusOutlined,MinusCircleOutlined } from "@ant-design/icons";
-import {autoHeight,Btn,ModalTitle} from "../../../../common";
+import {autoHeight} from "../../../../common/client/Client";
+import Btn from "../../../../common/btn/Btn";
+import ModalTitle from "../../../../common/modalTitle/ModalTitle";
 
 /**
  * 变量添加编辑

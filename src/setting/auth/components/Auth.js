@@ -1,7 +1,11 @@
 import React,{useEffect} from "react";
 import {Space,Table} from "antd";
 import {inject,observer} from "mobx-react";
-import {BreadcrumbContent,EmptyText,ListIcon,Listaction,Profile,UserName} from "../../../common";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import EmptyText from "../../../common/emptyText/EmptyText";
+import ListIcon from "../../../common/list/ListIcon";
+import Listaction from "../../../common/list/Listaction";
+import Profile from "../../../common/profile/Profile";
 import AuthAddBtn from "./AuthAddBtn";
 import "../../authCommon/Auth.scss";
 
@@ -78,7 +82,7 @@ const Auth = props =>{
             render:(text,record) => {
                 return  <Space>
                             <Profile userInfo={record.user}/>
-                            <UserName name={text} id={record.user.id}/>
+                            {text}
                         </Space>
             }
         },

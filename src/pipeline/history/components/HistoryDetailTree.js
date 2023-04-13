@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
-import {getTime} from "../../../common";
+import {getTime} from "../../../common/client/Client";
 import TaskIcon from "../../design/processDesign/processDesign/components/TaskIcon";
 
 const HistoryDetailTree = props =>{
@@ -48,7 +48,7 @@ const HistoryDetailTree = props =>{
                         </div>
                         <div className="tree-li-name">{item.taskName}</div>
                     </div>
-                    <div className="tree-li-time">{getTime(item.runTime)}</div>
+                    <div className="tree-li-time">{item.runTimeDate}</div>
                 </div>
             </div>
         )

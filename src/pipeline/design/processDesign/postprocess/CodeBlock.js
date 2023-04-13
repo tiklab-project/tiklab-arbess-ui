@@ -1,5 +1,6 @@
 import React,{useRef,useState} from "react";
-import {PostprocessMirrorScenario,Btn} from "../../../../common";
+import Btn from "../../../../common/btn/Btn";
+import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
 
 /**
  * 后置处理代码块
@@ -32,7 +33,7 @@ const MirrorContent = props =>{
     const onOk = () => {
         const params = {
             taskType:item.taskType,
-            taskId:item.taskId,
+            postprocessId:item.postprocessId,
             values:{
                 scriptOrder: mirrorRefs.current.editor.getValue()
             }

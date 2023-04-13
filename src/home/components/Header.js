@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from "react";
-import {Dropdown,Badge} from "antd";
+import {Dropdown,Badge,Tooltip} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
 import {AppLink} from "tiklab-integration-ui";
-import {USER_STORE} from "tiklab-user-ui/es/store";
 import {
     GlobalOutlined,
     BellOutlined,
@@ -18,7 +17,7 @@ import {
 import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/img/matflow3.png";
 import HeaderMessage from "./HeaderMessage";
-import {Profile,UserName} from "../../common";
+import Profile from "../../common/profile/Profile";
 
 /**
  * header 头部
@@ -28,10 +27,9 @@ import {Profile,UserName} from "../../common";
  */
 const  Head = props =>{
 
-    const {homePageStore,pipelineStore,userStore} = props
+    const {homePageStore,pipelineStore} = props
 
     const {findMessageItemPage,unread} = homePageStore
-    const {findWeChatContactConfig,findWeChatApplyContactConfig} = userStore
 
     let path = props.location.pathname
     const {i18n,t} = useTranslation()
@@ -44,21 +42,9 @@ const  Head = props =>{
     },[])
 
     useEffect(()=>{
-        if(path.indexOf("/index/pipeline")===0){
-            path = "/index/pipeline"
-        }
+        if(path.indexOf("/index/pipeline")===0) path = "/index/pipeline"
         setCurrentLink(path)
     },[path])
-
-    useEffect(()=>{
-        if(getUser().tenant){
-            const wechatConfigUrl = location.href.split('#')[0]
-            // 获取企业微信config配置
-            findWeChatContactConfig(wechatConfigUrl,getUser().tenant)
-            // 获取企业微信agentConfig配置
-            findWeChatApplyContactConfig(wechatConfigUrl,getUser().tenant)
-        }
-    },[])
 
     // 一级标题
     const routers=[
@@ -101,10 +87,17 @@ const  Head = props =>{
     const goOut = () => {
         props.history.push({
             pathname: "/logout",
-            state:{
-                preRoute: props.location.pathname
-            }
+            // state:{
+            //     preRoute: props.location.pathname
+            // }
         })
+    }
+
+    /**
+     * 帮助文档
+     */
+    const goHelp = path => {
+        window.open(`http://tiklab.net/${path}`)
     }
 
     // 渲染一级标题
@@ -135,9 +128,9 @@ const  Head = props =>{
                     <Profile user={getUser()} />
                     <div className="outMenu-out-info">
                         <div className="outMenu-out-name">
-                            <UserName name={getUser().nickName} id={getUser().userId}/>
+                            <span>{getUser().nickname || getUser().name || "用户"}</span>
                         </div>
-                        <div className="outMenu-out-eamil">{getUser().eamil || "--"}</div>
+                        <div className="outMenu-out-eamil">{getUser().phone || getUser().eamil || "--"}</div>
                     </div>
                 </div>
             </div>
@@ -161,29 +154,24 @@ const  Head = props =>{
     // 帮助目录
     const helpMenu = (
         <div className="header-helpMenu">
-            <div className="header-helpMenu-item">
+            <div className="header-helpMenu-item" onClick={()=>goHelp("document/documentList")}>
                 <ProfileOutlined className="header-dropdown-icon"/>
                 文档
             </div>
-            <div className="header-helpMenu-item">
+            <div className="header-helpMenu-item" onClick={()=>goHelp("question/questionList")}>
                 <ExpandOutlined className="header-dropdown-icon"/>
                 社区支持
             </div>
-            <div className="header-helpMenu-item">
+            <div className="header-helpMenu-item" onClick={()=>goHelp("account/workOrder/workOrderList")}>
                 <ScheduleOutlined className="header-dropdown-icon"/>
                 在线工单
             </div>
-            <div className="header-helpMenu-item">
+            <div className="header-helpMenu-item" onClick={()=>goHelp("account/group/onlineservice")}>
                 <WhatsAppOutlined className="header-dropdown-icon"/>
                 在线客服
             </div>
         </div>
     )
-
-    // 去系统设置
-    const goSystem = () =>{
-        props.history.push("/index/system")
-    }
 
     return(
         <div className="frame-header">
@@ -198,24 +186,32 @@ const  Head = props =>{
             </div>
             <div className="frame-header-right">
                 <div className="frame-header-right-text">
-                    <div className="frame-header-set" onClick={()=>goSystem()}>
-                        <SettingOutlined className="frame-header-icon"/>
-                    </div>
-                    <div className="frame-header-message" onClick={()=>setVisible(true)}>
-                        <Badge count={unread} size="small">
-                            <BellOutlined className="frame-header-icon"/>
-                        </Badge>
-                    </div>
-                    <div className="frame-header-help">
-                        <Dropdown overlay={helpMenu}>
-                            <QuestionCircleOutlined className="frame-header-icon"/>
-                        </Dropdown>
-                    </div>
-                    <Dropdown overlay={outMenu}>
-                        <div className="frame-header-user">
-                            <Profile user={getUser()} />
+                    <Tooltip title={"设置"}>
+                        <div className="frame-header-set" onClick={()=>props.history.push("/index/system")}>
+                            <SettingOutlined className="frame-header-icon"/>
                         </div>
-                    </Dropdown>
+                    </Tooltip>
+                    <Tooltip title={"消息"}>
+                        <div className="frame-header-message" onClick={()=>setVisible(true)}>
+                            <Badge count={unread} size="small">
+                                <BellOutlined className="frame-header-icon"/>
+                            </Badge>
+                        </div>
+                    </Tooltip>
+                    <Tooltip title={"帮助与文档"}>
+                        <Dropdown overlay={helpMenu} trigger={["click"]}>
+                            <div className="frame-header-help">
+                                <QuestionCircleOutlined className="frame-header-icon"/>
+                            </div>
+                        </Dropdown>
+                    </Tooltip>
+                    <Tooltip title={"个人中心"}>
+                        <Dropdown overlay={outMenu} trigger={["click"]}>
+                            <div className="frame-header-user">
+                                <Profile userInfo={getUser()} />
+                            </div>
+                        </Dropdown>
+                    </Tooltip>
                 </div>
             </div>
 
@@ -231,4 +227,4 @@ const  Head = props =>{
     )
 }
 
-export default inject("homePageStore","pipelineStore",USER_STORE)(observer(Head))
+export default inject("homePageStore","pipelineStore")(observer(Head))

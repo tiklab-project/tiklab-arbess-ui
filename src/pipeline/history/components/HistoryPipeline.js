@@ -54,12 +54,11 @@ const HistoryPipeline = props => {
             }),1000)
         }
         if(detailsVisible){
-            initScreen()
             clearInterval(inter)
         }
         // 组件销毁事件
         return ()=> clearInterval(inter)
-    },[historyFresh,pipeline,pageCurrent,params])
+    },[historyFresh,pipeline,pageCurrent,params,detailsVisible])
 
     /**
      * 初始化历史筛选条件
@@ -74,6 +73,7 @@ const HistoryPipeline = props => {
 
     return (
         <HistoryTable
+            initScreen={initScreen}
             isLoading={isLoading}
             params={params}
             setParams={setParams}

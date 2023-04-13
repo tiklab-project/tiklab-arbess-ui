@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
-import {SpinLoading,BreadcrumbContent} from "../../../common";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import {SpinLoading} from "../../../common/loading/Loading";
 import HistoryDetailItem from "./HistoryDetailItem";
 import HistoryDetailTree from "./HistoryDetailTree";
 import "./HistoryDetail.scss";
@@ -13,7 +14,7 @@ import "./HistoryDetail.scss";
  */
 const HistoryDetail = props =>{
 
-    const {historyItem,firstItem,detailsVisible,setDetailsVisible,historyStore,tableType} = props
+    const {historyItem,firstItem,detailsVisible,setDetailsVisible,historyStore,tableType,initScreen} = props
 
     const {findTaskInstance,findStageInstance,execData} = historyStore
 
@@ -70,7 +71,7 @@ const HistoryDetail = props =>{
     },[pipeline])
 
     /**
-     * 清空定时器
+     * 清除定时器
      * @param data
      * @param state
      */
@@ -80,6 +81,8 @@ const HistoryDetail = props =>{
         if(!isRunStatus){
             !id && isRun && setExecIndex(data.data && data.data.length-1)
             clearInterval(inter)
+            if(state==='runState') return findTaskInstance(historyItem.instanceId)
+            findStageInstance(historyItem.instanceId)
         }
     }
 
@@ -204,7 +207,10 @@ const HistoryDetail = props =>{
     /**
      * 返回列表
      */
-    const goBack = () => setDetailsVisible(false)
+    const goBack = () => {
+        firstItem === "历史" && initScreen()
+        setDetailsVisible(false)
+    }
 
     /**
      * 面包屑 secondItem = isAllName() + isFindName()

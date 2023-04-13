@@ -8,7 +8,8 @@ import {
     DeleteOutlined
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
-import {Btn,EmptyText} from "../../common";
+import EmptyText from "../../common/emptyText/EmptyText";
+import Btn from "../../common/btn/Btn";
 import "./HeaderMessage.scss";
 
 /**
@@ -30,7 +31,7 @@ const HeaderMessage = props =>{
     const [isLoading,setIsLoading] = useState(false)
 
     //消息类型
-    const [selected,setSelected] = useState(2)
+    const [selected,setSelected] = useState(0)
 
     useEffect(()=>{
         // 获取流水线

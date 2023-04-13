@@ -4,7 +4,9 @@ import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import PipelineTable from "./PipelineTable";
-import {BreadcrumbContent,Btn,Tabs} from "../../../common";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Btn from "../../../common/btn/Btn";
+import Tabs from "../../../common/tabs/Tabs";
 import "./Pipeline.scss";
 
 /**
@@ -81,17 +83,9 @@ const Pipeline = props =>{
      * @param item
      */
     const clickType = item => {
-        switch (item.id) {
-            case 1:
-                setPipelineParam({
-                    pageParam
-                })
-                break
-            case 2:
-                setPipelineParam({
-                    pageParam
-                })
-        }
+        setPipelineParam({
+            pageParam
+        })
         setListType(item.id)
     }
 

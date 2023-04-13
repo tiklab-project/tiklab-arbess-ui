@@ -7,7 +7,7 @@
         flex-grow: 0;
         flex-shrink: 0;
         flex-basis: 200px;
-        background: var(--mf-sider-color);
+        background: #efefef;
         &-sys{
             width: 100%;
             text-align: center;
@@ -20,7 +20,7 @@
             height: 100%;
             overflow: hidden;
             &:hover{
-                overflow: auto;
+              overflow: auto;
             }
         }
         ul,li {
@@ -44,7 +44,6 @@
         .system-aside-second:hover{
             background: var(--tiklab-gray-300);
         }
-
         &-li {
             line-height: 40px;
         }

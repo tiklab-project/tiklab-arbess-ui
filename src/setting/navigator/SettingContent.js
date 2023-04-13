@@ -1,20 +1,40 @@
-import React,{useEffect,useState} from "react";
+import React, {useEffect, useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
-import {PrivilegeButton} from "tiklab-user-ui";
-import {inject,observer} from "mobx-react";
+import {SystemNav,PrivilegeButton} from "tiklab-user-ui";
 import {SYSTEM_ROLE_STORE} from "tiklab-user-ui/es/store";
 import {getUser} from "tiklab-core-ui";
+import {inject,observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 import {departmentRouters,templateRouter} from "./SettingRouters";
-import "./Setting.scss";
+import "./SettingContent.scss";
 
 const SettingContent= props =>  {
 
     const {route,isDepartment,applicationRouters,systemRoleStore} = props
 
-    const {getSystemPermissions} = systemRoleStore
+    const {getSystemPermissions,systemPermissions} = systemRoleStore
 
-    const path = props.location.pathname
+    let path = props.location.pathname
+
+    // 菜单
+    let menus = () => {
+        try{
+            if(isDepartment && devProduction){
+                return [...departmentRouters,...applicationRouters,...templateRouter]
+            }
+            if(!isDepartment && devProduction){
+                return [...applicationRouters,...templateRouter]
+            }
+            if(isDepartment && !devProduction){
+                return [...departmentRouters,...applicationRouters]
+            }
+            else {
+                return [...applicationRouters]
+            }
+        }catch {
+            return [...applicationRouters]
+        }
+    }
 
     // 当前路径
     const [selectKey,setSelectKey] = useState(path)
@@ -22,17 +42,8 @@ const SettingContent= props =>  {
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([""])
 
-    // 系统权限
-    const [systemPermissions,setSystemPermissions] = useState([])
-
     useEffect(()=>{
-        //初始化菜单权限
-        getSystemPermissions(getUser().userId).then(res=>{
-            const data = res.data && res.data
-            if(res.code===0){
-                setSystemPermissions(data)
-            }
-        })
+        getSystemPermissions(getUser().userId)
     },[])
 
     useEffect(()=>{
@@ -40,13 +51,14 @@ const SettingContent= props =>  {
         setSelectKey(path)
     },[path])
 
-    const select = data =>{
-        props.history.push(data.id)
-    }
+    /**
+     * 路由跳转
+     * @param data
+     * @returns {*}
+     */
+    const select = data => props.history.push(data.id)
 
-    const isExpandedTree = key => {
-        return expandedTree.some(item => item ===key)
-    }
+    const isExpandedTree = key => expandedTree.some(item => item ===key)
 
     /**
      * 展开 || 闭合
@@ -60,28 +72,22 @@ const SettingContent= props =>  {
         }
     }
 
-    const menu = (data,deep) =>{
-        return(
-            <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
-                className={`system-aside-li system-aside-second ${data.id=== selectKey ? "system-aside-select":""}`}
-                onClick={()=>select(data)}
-                key={data.id}
-            >
-                <span className="sys-content-icon">{data.icon}</span>
-                <span>{data.title}</span>
-            </li>
-        )
-    }
-
     const renderMenu = (data,deep)=> {
         return (
             <PrivilegeButton key={data.id} code={data.purviewCode} {...props}>
-                { menu(data,deep) }
+                <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
+                    className={`system-aside-li system-aside-second ${data.id=== selectKey ? "system-aside-select":""}`}
+                    onClick={()=>select(data)}
+                    key={data.id}
+                >
+                    <span className="sys-content-icon">{data.icon}</span>
+                    <span>{data.title}</span>
+                </li>
             </PrivilegeButton>
         )
     }
 
-    const subMenu = (item,deep,type) =>{
+    const subMenu = (item,deep) =>{
         return(
             <li key={item.id} className="system-aside-li">
                 <div className="system-aside-item system-aside-first"
@@ -104,18 +110,11 @@ const SettingContent= props =>  {
                 </div>
                 <ul className={`system-aside-ul ${isExpandedTree(item.id) ? null: "system-aside-hidden"}`}>
                     {
-                        type ?
-                            item.children && item.children.map(item =>{
-                                const deepnew = deep +1
-                                return item.children && item.children.length?
-                                    subMenu(item,deepnew,'devBaseData') : menu(item,deepnew)
-                            })
-                            :
-                            item.children && item.children.map(item =>{
-                                const deepnew = deep +1
-                                return item.children && item.children.length ?
-                                    renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
-                            })
+                        item.children && item.children.map(item =>{
+                            const deepnew = deep +1
+                            return item.children && item.children.length ?
+                                renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
+                        })
                     }
                 </ul>
             </li>
@@ -123,42 +122,38 @@ const SettingContent= props =>  {
     }
 
     const renderSubMenu = (item,deep)=> {
+        const isCode = item.children.some(list=>!list.purviewCode)
+        if(isCode) return subMenu(item,deep)
         const isPromise = item.children.some(list=> systemPermissions.includes(list.purviewCode))
         return isPromise && subMenu(item,deep)
     }
 
     return (
-       <div className="system">
-           <div className="system-aside">
-               <ul className="system-aside-top" style={{padding:0}}>
-                   {
-                       isDepartment && departmentRouters.map(firstItem => {
-                           return firstItem.children && firstItem.children.length > 0 ?
-                               renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                       })
-                   }
-
-                   {
-                       applicationRouters.map(firstItem => {
-                           return firstItem.children && firstItem.children.length > 0 ?
-                               renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
-                       })
-                   }
-
-                   {
-                       devProduction && templateRouter.map(firstItem=>{
-                           return firstItem.children && firstItem.children.length > 0 ?
-                               subMenu(firstItem,0,"devBaseData") : menu(firstItem,0)
-                       })
-                   }
-               </ul>
-           </div>
-           <div className="system-content">
-               {renderRoutes(route.routes) }
-           </div>
-       </div>
+        <SystemNav
+            {...props}
+            applicationRouters={menus()}
+            expandedTree={expandedTree}
+            setExpandedTree={setExpandedTree}
+            outerPath={"/index/system"}
+        >
+            <div className="system">
+                <div className="system-aside">
+                    <ul className="system-aside-top" style={{padding:0}}>
+                        {
+                            menus().map(firstItem => {
+                                return firstItem.children && firstItem.children.length > 0 ?
+                                    renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                            })
+                        }
+                    </ul>
+                </div>
+                <div className="system-content">
+                    { renderRoutes(route.routes) }
+                </div>
+            </div>
+        </SystemNav>
     )
-
 }
 
 export default inject(SYSTEM_ROLE_STORE)(observer(SettingContent))
+

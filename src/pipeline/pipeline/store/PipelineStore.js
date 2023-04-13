@@ -90,6 +90,13 @@ export class PipelineStore {
                     this.pipPage.total = res.data.totalPage
                     // 流水线当前页
                     this.pipPage.defaultCurrent = res.data.currentPage
+                }else {
+                    this.pipelineListPage = []
+                    this.pipPage = {
+                        defaultCurrent: 1,
+                        pageSize: 6,
+                        total: 1,
+                    }
                 }
                 resolve(res)
             }).catch(error=>{
@@ -107,9 +114,9 @@ export class PipelineStore {
     findUserPipeline = () =>{
         return new Promise((resolve, reject) => {
             Axios.post("/pipeline/findUserPipeline").then(res=>{
-                if(res.code===0 && res.data){
+                if(res.code===0){
                     // 流水线列表
-                    this.pipelineList=res.data
+                    this.pipelineList = res.data && res.data
                 }
                 resolve(res)
             }).catch(error=>{

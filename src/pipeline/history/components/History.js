@@ -50,10 +50,9 @@ const History = props => {
         }),1000)
         if(detailsVisible){
             clearInterval(inter)
-            initScreen()
         }
         return ()=> clearInterval(inter)
-    },[historyFresh,pageCurrent,params])
+    },[historyFresh,pageCurrent,params,detailsVisible])
 
     /**
      * 初始化历史筛选条件
@@ -68,6 +67,7 @@ const History = props => {
 
     return (
         <HistoryTable
+            initScreen={initScreen}
             tableType="history"
             isLoading={isLoading}
             params={params}

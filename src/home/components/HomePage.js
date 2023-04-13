@@ -1,7 +1,10 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {AimOutlined,HistoryOutlined} from "@ant-design/icons";
-import {EmptyText,DynamicList,Guide,SpinLoading} from "../../common";
+import EmptyText from "../../common/emptyText/EmptyText";
+import DynamicList from "../../common/dynamic/DynamicList";
+import Guide from "../../common/guide/Guide";
+import {SpinLoading} from "../../common/loading/Loading";
 import "./homePage.scss";
 
 /**
@@ -37,12 +40,12 @@ const HomePage = props =>{
     useEffect(()=>{
         // 获取所有流水线
         findUserPipeline().then(res=>{
-            if(res.code===0 && res.data) setPipelineLength(res.data.length)
+            if(res.code===0) setPipelineLength(res.data && res.data.length)
         })
 
         // 获取我的收藏
         findUserFollowPipeline({pageParam,pipelineFollow:1}).then(res=>{
-            if(res.code===0 && res.data) setFollowLength(res.data.length)
+            if(res.code===0) setFollowLength(res.data && res.data.length)
         })
 
         // 获取近期动态

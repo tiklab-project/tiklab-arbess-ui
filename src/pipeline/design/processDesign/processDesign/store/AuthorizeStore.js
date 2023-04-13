@@ -41,7 +41,7 @@ export class AuthorizeStore {
         }
         else {
             this.skin = false
-            message.info(data.msg)
+            message.info(data.msg,0.5)
         }
         return data
     }
@@ -55,11 +55,11 @@ export class AuthorizeStore {
     findAllStorehouse = async value =>{
         const params = new FormData()
         params.append("authId",value.authId)
-        params.append("type",value.type)
         const data = await Axios.post("/codeAuthorize/findAllStorehouse",params)
         if(data.code===0){
             this.storehouseList = data.data
         }else {
+            message.info(data.msg,0.5)
             this.storehouseList = []
         }
     }
@@ -72,7 +72,6 @@ export class AuthorizeStore {
     @action
     findBranch = async value =>{
         const params = new FormData()
-        params.append("type",value.type)
         params.append("authId",value.authId)
         params.append("houseName",value.houseName)
         const data =  await Axios.post("/codeAuthorize/findBranch",params)

@@ -1,7 +1,11 @@
 import React,{useState,useEffect} from "react";
 import {Popconfirm, Table, Tooltip} from "antd";
 import {observer} from "mobx-react";
-import {getTime,SpinLoading,Profile,Page,BreadcrumbContent,EmptyText} from "../../../common";
+import EmptyText from "../../../common/emptyText/EmptyText";
+import {SpinLoading} from "../../../common/loading/Loading";
+import Profile from "../../../common/profile/Profile";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Page from "../../../common/page/Page";
 import HistoryDetail from "./HistoryDetail";
 import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
@@ -12,7 +16,7 @@ import "./HistoryTable.scss"
 const HistoryTable = props =>{
 
     const {tableType,isLoading,setIsLoading,pipelineUserList,pipelineList,
-        detailsVisible,setDetailsVisible,historyStore,setParams,params
+        detailsVisible,setDetailsVisible,historyStore,setParams,params,initScreen
     } = props
 
     const {pageCurrent,setPageCurrent,page,historyList,setHistoryList,deleteInstance,execStop} = historyStore
@@ -166,6 +170,7 @@ const HistoryTable = props =>{
                     detailsVisible={detailsVisible}
                     setDetailsVisible={setDetailsVisible}
                     historyStore={historyStore}
+                    initScreen={initScreen}
                 />
     }
 

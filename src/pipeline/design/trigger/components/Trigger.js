@@ -3,7 +3,9 @@ import {Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import TriggerAdd from "./TriggerAdd";
-import {Listaction,EmptyText,Btn} from "../../../../common";
+import Btn from "../../../../common/btn/Btn";
+import EmptyText from "../../../../common/emptyText/EmptyText";
+import Listaction from "../../../../common/list/Listaction";
 import "./Trigger.scss";
 
 /**

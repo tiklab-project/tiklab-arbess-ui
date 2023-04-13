@@ -92,3 +92,41 @@ export const Validation = name =>{
         message:`${name}不能包含空格`
     }
 }
+
+
+/**
+ * 获取数组中相同的值
+ * @param arr1
+ * @param arr2
+ * @param type
+ * @returns {T}
+ * @constructor
+ */
+export const SameValue = (arr1,arr2,type) =>{
+    const sion = Array.from(new Set([...arr1].filter(x => arr2.some(y=>y[type]===x))))
+    if(sion){
+        return arr2.find(item => item[type] === sion[0])
+    }
+}
+
+/**
+ * 获取所有路由
+ * @param routers
+ * @returns {*[]}
+ */
+export const links = routers =>{
+    const newArr = []
+    const loop = (data,result) =>{
+        data && data.map(item=>{
+            if(item.children) {
+                const children = item.children.map(child=>({...child,type:item.id}))
+                loop(children,newArr)
+            }else {
+                result.push(item)
+            }
+        })
+    }
+    loop(routers,newArr)
+    return newArr
+}
+

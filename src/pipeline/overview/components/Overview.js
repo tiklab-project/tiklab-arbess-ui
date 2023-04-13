@@ -1,7 +1,10 @@
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
-import {BreadcrumbContent,echarts,Guide,DynamicList} from "../../../common";
+import DynamicList from "../../../common/dynamic/DynamicList";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import echarts from "../../../common/echarts/Echarts";
+import Guide from "../../../common/guide/Guide";
 import OverviewCensus from "./OverviewCensus";
 import "./Overview.scss";
 

@@ -181,6 +181,11 @@ module.exports = merge(baseWebpackConfig, {
                     // minportal: 0 // 提取公共部分最小的大小
                     // enforce: true
                 },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
+                }
             }
         },
         minimizer: [

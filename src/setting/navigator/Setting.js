@@ -34,13 +34,13 @@ const Setting = props =>{
             icon:<SoundOutlined/>,
             children: [
                 {
-                    id:"/index/system/mes/notice",
+                    id:"/index/system/notice",
                     title:"消息通知方案",
                     icon:<SoundOutlined />,
                     purviewCode:"message_setting",
                 },
                 {
-                    id:"/index/system/mes/send",
+                    id:"/index/system/send",
                     title: "消息发送方式",
                     icon:<SoundOutlined />,
                     purviewCode: "message_type",
@@ -59,13 +59,13 @@ const Setting = props =>{
             icon:<FileProtectOutlined />,
             children:[
                 {
-                    id:"/index/system/resoure/server",
+                    id:"/index/system/server",
                     title:"服务配置",
                     icon:<FileProtectOutlined />,
                     purviewCode:"resources_server",
                 },
                 {
-                    id:"/index/system/resoure/host",
+                    id:"/index/system/host",
                     title:"主机配置",
                     icon:<FileProtectOutlined />,
                     purviewCode:"resources_host",
@@ -107,7 +107,7 @@ const Setting = props =>{
             id:"/index/system/productAuth",
             title:"应用授权",
             icon:<AuditOutlined />,
-            purviewCode:"pipeline_version",
+            purviewCode:"product_auth",
         },
         {
             id:"/index/system/info",

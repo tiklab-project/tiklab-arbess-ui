@@ -1,7 +1,8 @@
 import React,{useEffect,useState} from "react";
 import {Table, Input, Dropdown} from "antd";
 import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
-import {Btn,EmptyText,UserName} from "../../../../common";
+import Btn from "../../../../common/btn/Btn";
+import EmptyText from "../../../../common/emptyText/EmptyText";
 import "./PostprocessUserAdd.scss";
 
 const PostprocessUserAdd = props =>{
@@ -107,11 +108,11 @@ const PostprocessUserAdd = props =>{
 
     const userAddMnue = (
         <div className='post-pose-user-add mf'>
-            <Input
-                placeholder={'名称'}
-                prefix={<SearchOutlined/>}
-                // onChange={findUser}
-            />
+            {/*<Input*/}
+            {/*    placeholder={'名称'}*/}
+            {/*    prefix={<SearchOutlined/>}*/}
+            {/*    // onChange={findUser}*/}
+            {/*/>*/}
             <div className='user-add-table'>
                 <Table
                     rowKey={(record) => record.id}
@@ -123,7 +124,6 @@ const PostprocessUserAdd = props =>{
                         title:"名称",
                         dataIndex:["user","nickname"],
                         key:["user","nickname"],
-                        render:(text,record)=><UserName name={text} id={record.user.id}/>
                     }]}
                     dataSource={userList}
                     pagination={false}

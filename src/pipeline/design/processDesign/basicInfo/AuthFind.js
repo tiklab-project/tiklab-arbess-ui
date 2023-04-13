@@ -80,7 +80,6 @@ const AuthFind = props =>{
      * @param value
      */
     const changeGitSelect = value =>{
-
         updateTask({
             taskId:dataItem.taskId,
             values: {authId:value}
@@ -165,11 +164,11 @@ const AuthFind = props =>{
             case 3:
             case 41:
             case 51:
-                return <ServerAddBtn isConfig={true} taskType={taskType}/>
+                return <ServerAddBtn isConfig={true} type={taskType}/>
             case 31:
             case 32:
             case 52:
-                return <HostAddBtn isConfig={true} taskType={taskType}/>
+                return <HostAddBtn isConfig={true} type={taskType}/>
         }
     }
 

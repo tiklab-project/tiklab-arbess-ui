@@ -4,7 +4,9 @@ import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAdd from "./PostprocessAdd";
 import TaskTitleIcon from "../../processDesign/processDesign/components/TaskTitleIcon";
-import {Listaction,Btn,EmptyText} from "../../../../common";
+import Btn from "../../../../common/btn/Btn";
+import EmptyText from "../../../../common/emptyText/EmptyText";
+import Listaction from "../../../../common/list/Listaction";
 import "./Postprocess.scss";
 
 /**

@@ -3,7 +3,10 @@ import {Dropdown, Form, Input, Select, Space, Table, Tooltip} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {Btn,EmptyText,Profile,UserName} from "../../../common";
+import {PrivilegeProjectButton} from "tiklab-user-ui";
+import Profile from "../../../common/profile/Profile";
+import Btn from "../../../common/btn/Btn";
+import EmptyText from "../../../common/emptyText/EmptyText";
 import PipelineUserAdd from "./PipelineUserAdd";
 import "./PipelineAddInfo.scss";
 
@@ -189,9 +192,6 @@ const PipelineAddInfo = props =>{
             key:"nickname",
             width:"40%",
             ellipsis:true,
-            render:(text,record) => {
-                return <UserName name={text} id={record.id}/>
-            }
         },
         {
             title:"名称",
@@ -341,17 +341,19 @@ const PipelineAddInfo = props =>{
                 </Form>
                 { renderPowerType }
                 <Btn onClick={onClick} title={"取消"} isMar={true}/>
-                <Btn type={"primary"}
-                     title={"确定"}
-                     onClick={() => {
-                         form
-                             .validateFields()
-                             .then((values) => {
-                                 onOk(values)
-                                 form.resetFields()
-                             })
-                     }}
-                />
+                <PrivilegeProjectButton code={"pipeline_update"} domainId={pipeline && pipeline.id}>
+                    <Btn type={"primary"}
+                         title={"确定"}
+                         onClick={() => {
+                             form
+                                 .validateFields()
+                                 .then((values) => {
+                                     onOk(values)
+                                     form.resetFields()
+                                 })
+                         }}
+                    />
+                </PrivilegeProjectButton>
             </>
         )
     }

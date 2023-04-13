@@ -3,7 +3,9 @@ import {Steps} from "antd";
 import {inject,observer} from "mobx-react";
 import PipelineAddMould from "./PipelineAddMould";
 import PipelineAddInfo from "./PipelineAddInfo";
-import {Loading,Btn,BreadcrumbContent} from "../../../common";
+import {Loading} from "../../../common/loading/Loading";
+import Btn from "../../../common/btn/Btn";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import "./pipelineAdd.scss";
 
 /**

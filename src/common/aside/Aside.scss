@@ -59,6 +59,9 @@
       .normal-aside-item-icon{
           font-size: var(--tiklab-icon-size-16);
       }
+      .normal-aside-item-ban{
+          color: #94979a;
+      }
 }
 
 .aside-dropdown{
@@ -69,7 +72,6 @@
     background-color: #ffffff;
     .pipeline-opt{
         width: 200px;
-        min-height: 100px;
         &-title{
             font-weight: var(--tiklab-font-weight-bold);
             padding: 0 var(--tiklab-padding-item);
@@ -78,8 +80,9 @@
             border-bottom: 1px solid var(--tiklab-gray-200);
         }
         &-group{
-            max-height: 500px;
-            overflow: auto;
+            min-height: 45px;
+            //max-height: 500px;
+            //overflow: auto;
         }
         &-item{
             padding: 0 var(--tiklab-padding-item);

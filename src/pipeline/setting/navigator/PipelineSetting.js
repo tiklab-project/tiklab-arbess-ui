@@ -1,5 +1,7 @@
-import React from "react";
-import {Setting} from "../../../common";
+import React, {useEffect, useState} from "react";
+import {ProjectNav,PrivilegeProjectButton} from "tiklab-user-ui";
+import {renderRoutes} from 'react-router-config';
+import "./PipelineSetting.scss";
 
 /**
  * 流水线左侧导航（三级导航）
@@ -9,35 +11,73 @@ import {Setting} from "../../../common";
  */
 const PipelineSetting = props =>{
 
-    const {match} = props
+    const {route,match} = props
 
+    let path = props.location.pathname
     const pipelineId = match.params.id
+
+    // 导航
+    const [nav,setNav] = useState("")
+
+    useEffect(()=>{
+        setNav(path)
+    },[path])
 
     // 左侧导航（三级标题）
     const secondRouter = [
         {
-            key:`/index/pipeline/${pipelineId}/assembly/set`,
-            label:"流水线信息",
-            enCode:"pipeline_seting",
+            id:`/index/pipeline/${pipelineId}/assembly/set`,
+            title:"流水线信息",
+            purviewCode:"pipeline_seting",
         },
         {
-            key:`/index/pipeline/${pipelineId}/assembly/user`,
-            label:"成员",
-            enCode:"pipeline_user",
+            id:`/index/pipeline/${pipelineId}/assembly/user`,
+            title:"成员",
+            purviewCode:"pipeline_user",
         },
         {
-            key:`/index/pipeline/${pipelineId}/assembly/role`,
-            label:"权限",
-            enCode:"pipeline_auth",
+            id:`/index/pipeline/${pipelineId}/assembly/role`,
+            title:"权限",
+            purviewCode:"pipeline_auth",
         }
     ]
 
-    return  <Setting
-                {...props}
-                pipelineId={pipelineId}
-                secondRouter={secondRouter}
-            />
+    // 渲染菜单
+    const navContent = item =>{
+        return  <div key={item.id}
+                     className={`project-nav-aside-item ${nav===item.id?"project-nav-aside-select":""} `}
+                     onClick={()=>props.history.push(item.id)}
+                >
+                    <span className="project-nav-aside-item-title">{item.title}</span>
+                </div>
+    }
 
+    const renderRouter = item => {
+        return   <PrivilegeProjectButton key={item.id} code={item.purviewCode} domainId={pipelineId}>
+                    {navContent(item)}
+                </PrivilegeProjectButton>
+    }
+
+    return(
+        <ProjectNav
+            {...props}
+            domainId={pipelineId}
+            projectRouters={secondRouter}
+            outerPath={`/index/pipeline/${pipelineId}/assembly`}
+        >
+            <div className='project-nav'>
+                <div className="project-nav-aside">
+                    <div className='project-nav-aside-head'>设置</div>
+                    {
+                        secondRouter.map(item=>renderRouter(item))
+                    }
+                </div>
+                <div className='project-nav-content'>
+                    { renderRoutes(route.routes) }
+                </div>
+            </div>
+        </ProjectNav>
+    )
 }
 
 export default PipelineSetting

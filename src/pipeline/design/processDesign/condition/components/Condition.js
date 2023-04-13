@@ -4,7 +4,8 @@ import {MinusCircleOutlined,PlusCircleOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import {inject,observer} from "mobx-react";
 import {WhetherChange} from "../../processDesign/components/Common";
-import {EmptyText,Btn} from "../../../../../common";
+import Btn from "../../../../../common/btn/Btn";
+import EmptyText from "../../../../../common/emptyText/EmptyText";
 import "./Condition.scss";
 
 /**

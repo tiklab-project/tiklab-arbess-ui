@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Dropdown} from "antd";
 import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {renderRoutes} from "react-router-config";
-import {interceptUrl} from "../client/Client";
+import {interceptUrl,autoHeight} from "../client/Client";
 import {Loading} from "../loading/Loading";
 import "./Aside.scss";
 
@@ -17,9 +17,21 @@ const Aside = props =>{
     const {pipelineList,pipeline,route,location,match,firstRouters} = props
 
     const path = location.pathname
-    const lastPath = interceptUrl(path,match.params.id)[1]
     const [nav,setNav] = useState("")
+
     const [isLoading,setIsLoading] = useState(false)
+
+    // 切换流水线的高度
+    const [height,setHeight] = useState(0)
+
+    useEffect(()=>{
+        setHeight(autoHeight())
+        return window.onresize = null
+    },[height])
+
+    window.onresize=() =>{
+        setHeight(autoHeight())
+    }
 
     useEffect(()=>{
         let indexPath = `/index/pipeline/${match.params.id}/${interceptUrl(path)[4]}`
@@ -33,7 +45,7 @@ const Aside = props =>{
     const changePipeline = item => {
         if(pipeline.id!==item.id){
             setIsLoading(true)
-            props.history.push(`/index/pipeline/${item.id}${lastPath}`)
+            props.history.push(`/index/pipeline/${item.id}/survey`)
             setTimeout(()=>setIsLoading(false),150)
         }
     }
@@ -42,7 +54,7 @@ const Aside = props =>{
     const renderPipelineMenu = (
         <div className="pipeline-opt">
             <div className="pipeline-opt-title">切换流水线</div>
-            <div className="pipeline-opt-group">
+            <div className="pipeline-opt-group" style={{maxHeight:height,overflow:"auto"}}>
                 {
                     pipelineList && pipelineList.map(item=>(
                         <div onClick={()=>changePipeline(item)}
@@ -65,8 +77,8 @@ const Aside = props =>{
     // 渲染左侧菜单
     const renderTaskRouter = item => {
         return   <div key={item.key}
-                      className={`normal-aside-item ${nav===item.to ? "normal-aside-select":""}`}
-                      onClick={()=>props.history.push(item.to)}
+                      className={`normal-aside-item ${nav===item.id ? "normal-aside-select":""}`}
+                      onClick={()=>props.history.push(item.id)}
                 >
                     <div className="normal-aside-item-icon">{item.icon}</div>
                     <div className="normal-aside-item-title">{item.title}</div>
@@ -95,7 +107,7 @@ const Aside = props =>{
                     }
                 </div>
 
-                <div className="normal-aside-item" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/assembly/set`)}>
+                <div className="normal-aside-item" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/assembly`)}>
                     <div className="normal-aside-item-icon"><SettingOutlined/></div>
                     <div>设置</div>
                 </div>

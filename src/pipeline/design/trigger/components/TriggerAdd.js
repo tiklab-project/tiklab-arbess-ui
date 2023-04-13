@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react";
 import {Form,Modal,Radio,Checkbox,TimePicker,Row,Col} from "antd";
 import moment from "moment";
-import {autoHeight,ModalTitle,Btn} from "../../../../common";
+import Btn from "../../../../common/btn/Btn";
+import {autoHeight} from "../../../../common/client/Client";
+import ModalTitle from "../../../../common/modalTitle/ModalTitle";
 
 /**
  * 触发器添加，编辑

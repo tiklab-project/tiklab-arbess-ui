@@ -5,7 +5,8 @@ import {
 } from "@ant-design/icons";
 import {Spin} from "antd";
 import {inject,observer} from "mobx-react";
-import {BreadcrumbContent,Btn} from "../../../common";
+import Btn from "../../../common/btn/Btn";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import ProcessDesign from "../processDesign/processDesign/components/ProcessDesign";
 import Postprocess from "../postprocess/components/Postprocess";
 import Trigger from "../trigger/components/Trigger";
@@ -54,11 +55,14 @@ const Design = props =>{
      */
     const run = () => {
         execStart(pipeline.id).then(res=>{
-            if(res.code===0){
+            if(version==='ce' && res.code===0){
                 setHistoryItem(res.data && res.data)
                 setIsDetails(true)
             }
         })
+        if(version!=='ce'){
+            setTimeout(()=>props.history.push(`/index/pipeline/${pipelineId}/structure`),1000)
+        }
     }
 
     /**
@@ -133,7 +137,6 @@ const Design = props =>{
                                     icon={<CaretRightOutlined />}
                                     title={"运行"}
                                 />
-
                         }
                     </div>
                 </div>

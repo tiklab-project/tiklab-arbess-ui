@@ -2,7 +2,11 @@ import React,{useEffect,useState } from "react";
 import {Modal,Form,Input,Select,Tooltip,message,Space} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import AuthType from "../../authCommon/AuthType";
-import {autoHeight, Validation,ModalTitle,Btn,ServerLoading} from "../../../common";
+import {ServerLoading} from "../../../common/loading/Loading"
+import {autoHeight, Validation} from "../../../common/client/Client";
+import ModalTitle from "../../../common/modalTitle/ModalTitle";
+import Btn from "../../../common/btn/Btn";
+
 
 /**
  * 服务配置弹出框，添加，更新
@@ -57,7 +61,7 @@ const ServerModal = props =>{
             setServerWay(formValue.type)
             return
         }
-        form.resetFields()
+        // form.resetFields()
         setServerWay(type)
         setCallUrlWarn("")
     }
@@ -190,10 +194,10 @@ const ServerModal = props =>{
     const authorize = (
        <>
            <Form.Item label="授权id" name="clientId" rules={[{required:true,message:`授权id不能空`}]}>
-               <Input/>
+               <Input disabled={formValue}/>
            </Form.Item>
            <Form.Item label="授权密码" name="clientSecret" rules={[{required:true,message:`授权密码不能空`}]}>
-               <Input/>
+               <Input disabled={formValue}/>
            </Form.Item>
            <Form.Item
                name="callbackUrl"
@@ -211,7 +215,7 @@ const ServerModal = props =>{
                        message:"不是有效的回调地址"
                    },
               ]}
-           ><Input/>
+           ><Input disabled={formValue}/>
            </Form.Item>
            {
                callUrlWarn &&
@@ -224,7 +228,7 @@ const ServerModal = props =>{
            }
            <Space>
                <Form.Item name="message" label="服务授权信息" rules={[{required:true,message: "服务授权信息不能空" }]}>
-                   <Select style={{width:360}}>
+                   <Select style={{width:360}} disabled={formValue}>
                        <Select.Option value={infos}>{infos}</Select.Option>
                    </Select>
                </Form.Item>

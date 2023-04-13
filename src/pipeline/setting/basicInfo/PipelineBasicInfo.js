@@ -10,7 +10,9 @@ import {
 import {PrivilegeProjectButton} from "tiklab-user-ui";
 import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
-import {Loading,Btn,BreadcrumbContent} from "../../../common";
+import {Loading} from "../../../common/loading/Loading";
+import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Btn from "../../../common/btn/Btn";
 import "./PipelineBasicInfo.scss";
 
 /**
@@ -27,14 +29,6 @@ const PipelineBasicInfo = props =>{
 
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([])
-
-    // 流水线权限
-    const [powerType,setPowerType] = useState(1)
-
-    useEffect(()=>{
-        // 初始化流水线权限
-        pipeline && setPowerType(pipeline && pipeline.power)
-    },[pipeline])
 
     const onConfirm = () =>{
         Modal.confirm({
@@ -87,11 +81,13 @@ const PipelineBasicInfo = props =>{
                             title={"取消"}
                             isMar={true}
                         />
-                        <Btn
-                            onClick={onConfirm}
-                            type={"dangerous"}
-                            title={"删除"}
-                        />
+                        <PrivilegeProjectButton code={"pipeline_delete"} domainId={pipeline && pipeline.id}>
+                            <Btn
+                                onClick={onConfirm}
+                                type={"dangerous"}
+                                title={"删除"}
+                            />
+                        </PrivilegeProjectButton>
                     </div>
         }
     ]
@@ -142,12 +138,6 @@ const PipelineBasicInfo = props =>{
         </div>
     }
 
-    const renderLisItem = item => {
-        return  <PrivilegeProjectButton code={item.enCode} key={item.key} domainId={pipeline.id}>
-                    {lisItem(item)}
-                </PrivilegeProjectButton>
-    }
-
     return(
         <div className="pipelineReDel mf-home-limited mf">
             <div className="pipelineReDel-up">
@@ -156,7 +146,7 @@ const PipelineBasicInfo = props =>{
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">
                     {
-                        lis.map(item=> renderLisItem(item))
+                        lis.map(item=> lisItem(item))
                     }
                 </div>
             </div>

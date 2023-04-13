@@ -6,7 +6,7 @@ import React from 'react'
  * @returns {JSX.Element}
  * @constructor
  */
-const Template_oplog = ({type}) =>{
+const Template_log = ({type}) =>{
     switch (type) {
         case '配置创建':
             return <div style="display: flex;justify-content: flex-start; align-items:center">

@@ -1,7 +1,9 @@
 import React,{useEffect, useState} from "react";
 import {Table,Input} from "antd";
 import {SearchOutlined} from '@ant-design/icons';
-import {Btn,EmptyText,Page,UserName} from "../../../common";
+import Btn from "../../../common/btn/Btn";
+import EmptyText from "../../../common/emptyText/EmptyText";
+import Page from "../../../common/page/Page";
 
 /**
  * 流水线用户添加
@@ -144,7 +146,6 @@ const PipelineUserAdd = props =>{
                         title:"昵称",
                         dataIndex:"nickname",
                         key:"nickname",
-                        render:(text,record)=><UserName name={text} id={record.id}/>
                     }]}
                     dataSource={userList}
                     pagination={false}

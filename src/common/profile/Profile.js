@@ -12,8 +12,8 @@ const ProfileContent = ({userInfo = undefined}) => {
             return <Avatar src={user.avatar}/>
         }
 
-        if (user.nickName && user.nickName !== "null") {
-            return <Avatar >{user.nickName.substring(0, 1)}</Avatar>
+        if(user.nickname && user.nickname !== "null"){
+            return <Avatar >{user.nickname.substring(0, 1)}</Avatar>
         }
 
         if (user.name && user.name !== "null") {

@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from "react";
-import {Form,Select} from "antd";
+import {Form,Select,Spin} from "antd";
+import {LoadingOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../../../../common/emptyText/EmptyText";
 import AuthFind from "../AuthFind";
@@ -29,8 +30,11 @@ const CodeGiteeOrGithub = props =>{
     // 分支焦点
     const [branchBorder,setBranchBorder] = useState(false)
 
+    // 仓库获取加载
+    const [isSpin,setSpin] = useState(false)
+
     useEffect(()=>{
-        // 分支是否状态
+        // 分支是否禁止
         if(dataItem && dataItem.task.codeName){
             setProhibited(false)
         }
@@ -76,20 +80,21 @@ const CodeGiteeOrGithub = props =>{
         switch (name) {
             case "codeName":
                 setNameBorder(true)
+                setSpin(true)
                 findAllStorehouse({
                     authId:dataItem && dataItem.task.authId,
-                    type:dataItem && dataItem.task.type
-                })
+                }).then(r=>setSpin(false))
                 break
             default:
                 setBranchBorder(true)
                 findBranch({
                     houseName:dataItem && dataItem.task.codeName,
                     authId:dataItem && dataItem.task.authId,
-                    type:dataItem.taskType
                 })
         }
     }
+
+    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <EmptyText/>
 
     return(
         <>
@@ -106,7 +111,7 @@ const CodeGiteeOrGithub = props =>{
                     onFocus={()=>onFocus("codeName")}
                     onBlur={()=>setNameBorder(false)}
                     onChange={changeGitStoreHouse}
-                    notFoundContent={<EmptyText/>}
+                    notFoundContent={notFoundContent}
                     filterOption = {(input, option) =>
                         (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }

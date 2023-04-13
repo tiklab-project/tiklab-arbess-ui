@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import {getUrlParam} from "../../common";
+import {getUrlParam} from "../../common/client/Client";
 
 /**
  * 授权回调地址页面

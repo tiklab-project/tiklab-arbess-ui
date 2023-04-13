@@ -5,11 +5,13 @@ import {
     MinusCircleOutlined,
     DeleteOutlined,
     PlusCircleOutlined,
-    CaretDownOutlined, PlusOutlined
+    CaretDownOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {EmptyText,Btn,Profile,UserName} from "../../../../common";
+import Btn from "../../../../common/btn/Btn";
+import EmptyText from "../../../../common/emptyText/EmptyText";
+import Profile from "../../../../common/profile/Profile";
 import MirrorContent from "./CodeBlock";
 import PostprocessUserAdd from "../../postprocess/components/PostprocessUserAdd";
 import "./Postprocess.scss";
@@ -33,9 +35,6 @@ const Postprocess = props =>{
 
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([])
-
-    // 消息通知人员下拉框
-    const [userAddVisible,setUserAddVisible] = useState(false)
 
     useEffect(()=>{
         // 初始化是否存在消息发送方式
@@ -269,7 +268,7 @@ const Postprocess = props =>{
                 render:(text,record)=>(
                     <Space>
                         <Profile userInfo={record.user}/>
-                        <UserName name={text} id={record.user.id}/>
+                        {text}
                     </Space>
                 )
             },

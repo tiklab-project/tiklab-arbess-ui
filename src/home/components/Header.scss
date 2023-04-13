@@ -42,7 +42,8 @@
             }
         }
         &-user,&-message,&-set,&-help{
-            margin: 0 10px;
+            margin: 0 var(--tiklab-padding-item);
+            cursor: pointer;
             &:hover{
                 background: rgba(255, 255, 255, 0.4);
                 border-radius: 4px;
@@ -50,16 +51,17 @@
         }
         &-icon{
             font-size: var(--tiklab-icon-size-22);
-            cursor: pointer;
             color: #ffffff;
+        }
+        &-icon-ban{
+            color: #94979a;
+            font-size: var(--tiklab-icon-size-22);
         }
         &-user{
             cursor: pointer;
         }
-        &-message{
-            .ant-badge{
-                color: #fff !important;
-            }
+        &-message .ant-badge{
+            color: #fff !important;
         }
         .headers{
             &-link{
@@ -73,7 +75,7 @@
                     line-height: 48px;
                     padding: 0 10px;
                     &:not(:last-child){
-                        margin-right: 10px;
+                        margin-right: var(--tiklab-padding-item);
                     }
                 }
             }

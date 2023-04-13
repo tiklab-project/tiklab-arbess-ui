@@ -1,8 +1,13 @@
 import React,{useState,useEffect,useRef} from "react";
-import {Modal, Form, Select, Checkbox, Table, Space, Tooltip, Dropdown, message} from "antd";
+import {Modal, Form, Select, Checkbox, Table, Space, Tooltip, message} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
-import {autoHeight,PostprocessMirrorScenario,Btn,ModalTitle,EmptyText,Profile,UserName} from "../../../../common";
+import Btn from "../../../../common/btn/Btn";
+import EmptyText from "../../../../common/emptyText/EmptyText";
+import ModalTitle from "../../../../common/modalTitle/ModalTitle";
+import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
+import Profile from "../../../../common/profile/Profile";
+import {autoHeight} from "../../../../common/client/Client";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 
 const PostprocessAdd = props =>{
@@ -161,7 +166,7 @@ const PostprocessAdd = props =>{
             render:(text,record)=>{
                 return  <Space>
                             <Profile userInfo={record.user}/>
-                            <UserName name={text} id={record.user.id}/>
+                            { text }
                         </Space>
             }
         },

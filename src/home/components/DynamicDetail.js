@@ -1,6 +1,9 @@
 import React from "react";
 import {DatePicker,Select,Space} from "antd";
-import {EmptyText,Page,DynamicList,BreadcrumbContent} from "../../common";
+import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
+import EmptyText from "../../common/emptyText/EmptyText";
+import Page from "../../common/page/Page";
+import DynamicList from "../../common/dynamic/DynamicList";
 
 const { RangePicker } = DatePicker
 

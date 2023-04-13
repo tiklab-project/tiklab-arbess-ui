@@ -3,7 +3,7 @@ import {Tooltip} from "antd";
 import {PlusOutlined, EditOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
 import {TaskFinalAdd, TaskTypeContent, TaskInsertBtn} from "./Common";
-import {SpinLoading} from "../../../../../common";
+import {SpinLoading} from "../../../../../common/loading/Loading";
 
 /**
  * 多阶段

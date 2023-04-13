@@ -2,7 +2,9 @@ import React,{useEffect,useState} from "react";
 import {Modal, Form, Input, Tooltip, Select, message} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import AuthType from "../../authCommon/AuthType";
-import {autoHeight, Validation,ModalTitle,Btn} from "../../../common";
+import {autoHeight, Validation} from "../../../common/client/Client";
+import ModalTitle from "../../../common/modalTitle/ModalTitle";
+import Btn from "../../../common/btn/Btn";
 
 /**
  * 主机配置弹出框，添加，更新
