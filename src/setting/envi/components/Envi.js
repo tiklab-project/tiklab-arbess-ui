@@ -69,7 +69,14 @@ const Envi = props =>{
             key:"scmType",
             width:"30%",
             ellipsis:true,
-            render:text => <TaskTitleIcon type={text}/>
+            render:text =>{
+                switch (text) {
+                    case 1:  return <TaskTitleIcon type='git'/>
+                    case 5:  return <TaskTitleIcon type='svn'/>
+                    case 21: return <TaskTitleIcon type='maven'/>
+                    case 22: return <TaskTitleIcon type='nodejs'/>
+                }
+            }
         },
         {
             title:"名称",

@@ -1,6 +1,9 @@
 import React from "react";
 import maven from "../../../../../assets/images/img/maven.png";
 import nexus from "../../../../../assets/images/img/nexus.png";
+import pip_helmet from "../../../../../assets/images/svg/pip_helmet.svg"
+import pip_config from "../../../../../assets/images/svg/pip_config.svg"
+import testonImg from 'tiklab-eam-ui/es/assests/img/teston.png';
 
 /**
  * task的标题&&图标
@@ -23,52 +26,39 @@ const TaskTitleIcon = props =>{
         </>
     }
 
-    const subIconType = type =>{
-        switch (type) {
-            case 1:
-                return renderSubIcon("git","通用git")
-            case 2:
-                return renderSubIcon("gitee","Gitee")
-            case 3:
-                return renderSubIcon("github","Github")
-            case 4:
-                return renderSubIcon("gitlab","Gitlab")
-            case 5:
-                return renderSubIcon("SVN","SVN")
-            case 11:
-                return renderSubIcon("ceshi","maven单元测试")
-            case 21:
-                return  <>
-                            <img src={maven} alt="maven" style={{width:20,height:20,paddingRight:8}}/>
-                            <span className="subicon-title">maven构建</span>
-                        </>
-            case 22:
-                return renderSubIcon("nodejs","node")
-            case 31:
-                return renderSubIcon("xuniji","虚拟机")
-            case 32:
-                return renderSubIcon("docker","docker")
-            case 41:
-                return renderSubIcon("sonarqube","sonarQuebe")
-            case 51:
-                return  <>
-                            <img src={nexus} alt="maven" style={{width:25,height:20,paddingRight:8}}/>
-                            <span className="subicon-title">nexus</span>
-                        </>
-            case 52:
-                return renderSubIcon("ssh","SSH")
-            case 61:
-                return renderSubIcon("mes","消息通知")
-            case 71:
-                return renderSubIcon("jiaoben","执行bat脚本")
-            case 72:
-                return renderSubIcon("jiaoben","执行shell脚本")
-            case 81:
-                return renderSubIcon("chufa","定时触发")
-
-        }
+    const renderSubImg = (img,title) =>{
+        return (
+            <>
+                <img src={img} alt="maven" style={{width:25,height:20,paddingRight:8}}/>
+                <span className="subicon-title">{title}</span>
+            </>
+        )
     }
 
+    const subIconType = type =>{
+        switch (type) {
+            case 'git': return renderSubIcon("git","通用Git")
+            case 'gitee': return renderSubIcon("gitee","Gitee")
+            case 'github': return renderSubIcon("github","Github")
+            case 'gitlab': return renderSubIcon("gitlab","Gitlab")
+            case 'svn': return renderSubIcon("SVN","SVN")
+            case 'xcode': return renderSubImg(pip_helmet,"XCode")
+            case 'maventest': return renderSubIcon("ceshi","maven单元测试")
+            case 'teston': return renderSubImg(testonImg,"testOn自动化测试")
+            case 'maven': return renderSubImg(maven,"maven构建")
+            case 'nodejs': return renderSubIcon("nodejs","Node")
+            case 'liunx': return renderSubIcon("xuniji","虚拟机")
+            case 'docker': return renderSubIcon("docker","Docker")
+            case 'sonar': return renderSubIcon("sonarqube","SonarQuebe")
+            case 'nexus': return renderSubImg(nexus,"nexus",)
+            case 'ssh': return renderSubIcon("ssh","SSH")
+            case 'xpack': return renderSubImg(pip_config,"XPack")
+            case 'message': return renderSubIcon("mes","消息通知")
+            case 'bat': return renderSubIcon("jiaoben","执行bat脚本")
+            case 'shell': return renderSubIcon("jiaoben","执行shell脚本")
+            case 81: return renderSubIcon("chufa","定时触发")
+        }
+    }
 
     return  <>
                 {subIconType(type)}

@@ -169,7 +169,7 @@ export const PostprocessMirrorScenario = props =>{
             value={value}
             ref={mirrorRefs}
             options={{
-                mode: type===71 ? "ruby":"shell",
+                mode: type==='bat' ? "ruby":"shell",
                 lineNumbers: true,
                 lineWrapping:true,
                 styleActiveLine:styleActiveLine,

@@ -12,6 +12,12 @@ export class HomePageStore{
     @observable
     messageList = []
 
+    // 最近构建
+    newlyBuild = []
+
+    // 最近打开
+    newlyOpen = []
+
     // 消息分页
     @observable
     messPage = {
@@ -72,6 +78,36 @@ export class HomePageStore{
     }
 
     /**
+     * 获取最近打开的流水线
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findAllOpen = async value =>{
+        const param = new FormData()
+        param.append("number",value)
+        const data = await Axios.post("/open/findAllOpen",param)
+        if(data.code===0){
+            this.newlyOpen = data.data || []
+        }
+        return data
+    }
+
+    /**
+     * 获取最近构建的流水线
+     * @returns {Promise<unknown>}
+     */
+    findPipelineRecently = async value =>{
+        const param = new FormData()
+        param.append("number",value)
+        const data = await Axios.post('/pipeline/findPipelineRecently',param)
+        if(data.code===0){
+            this.newlyBuild = data.data || []
+        }
+        return data
+    }
+
+    /**
      * 获取所有动态
      * @param values
      * @returns {Promise<*>}
@@ -88,11 +124,10 @@ export class HomePageStore{
 
     /**
      * 获取代办
-     * @param value
      * @returns {Promise<void>}
      */
     @action
-    findtodopage = async value =>{
+    findtodopage = async () =>{
         const params = {
             pageParam:{
                 pageSize:5,
@@ -124,7 +159,7 @@ export class HomePageStore{
             receiver:getUser().userId,
         }
         if(values===0 || values===1){
-            params.status=values
+            params.status = values
         }
         const data = await Axios.post("/message/messageItem/findMessageItemPage",params)
         if(data.code===0){

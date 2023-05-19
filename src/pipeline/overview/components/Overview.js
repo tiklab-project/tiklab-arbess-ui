@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
-import DynamicList from "../../../common/dynamic/DynamicList";
+import DynamicList from "../../../common/list/DynamicList";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import echarts from "../../../common/echarts/Echarts";
 import Guide from "../../../common/guide/Guide";
@@ -34,6 +34,7 @@ const Overview = props =>{
             // 流水线动态
             findlogpage({
                 content:{pipelineId:[pipeline.id]},
+                bgroup:"matflow",
                 pageParam:{
                     pageSize:10,
                     currentPage:1

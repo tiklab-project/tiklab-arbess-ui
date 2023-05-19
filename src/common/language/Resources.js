@@ -1,6 +1,7 @@
 import {eam_cn} from "tiklab-eam-ui/es/utils";
 import {user_cn} from "tiklab-user-ui/es/utils";
 import {message_cn} from "tiklab-message-ui/es/utils";
+import {privilege_cn} from "tiklab-privilege-ui/es/utils";
 import todoTask_cn from "tiklab-todotask-ui/es/utils/language";
 import oplog_cn from "tiklab-security-ui/es/utils/language";
 import pluginManage_cn from "tiklab-plugin-manager-ui/es/utils/language";
@@ -16,6 +17,7 @@ const resources= {
             ...todoTask_cn,
             ...oplog_cn,
             ...pluginManage_cn,
+            ...privilege_cn,
             ...zhCnTrans,
         },
     },
@@ -23,7 +25,6 @@ const resources= {
         translation:{
             ...enCnTrans
         }
-        // translation:{...orga_en,...privilege_en, ...message_en},
     },
 
 }

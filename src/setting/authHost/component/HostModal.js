@@ -14,11 +14,13 @@ import Btn from "../../../common/btn/Btn";
  */
 const HostModal = props =>{
 
-    const {visible,setVisible,createAuthHost,formValue,updateAuthHost} = props
+    const {visible,setVisible,hostStore} = props
+
+    const {createAuthHost,formValue,updateAuthHost} = hostStore
 
     const [form] = Form.useForm()
 
-    const [hostType,setHostType] = useState(1)
+    const [hostType,setHostType] = useState('common')
     const [height,setHeight] = useState(0)
 
     useEffect(()=>{
@@ -106,9 +108,9 @@ const HostModal = props =>{
                                 // disabled={ban}
                                 disabled={true}
                             >
-                                <Select.Option value={31}>普通</Select.Option>
-                                <Select.Option value={2}>aliyun</Select.Option>
-                                <Select.Option value={3}>腾讯云主机</Select.Option>
+                                <Select.Option value={'common'}>普通</Select.Option>
+                                <Select.Option value={'aliyun'}>aliyun</Select.Option>
+                                <Select.Option value={'tencent'}>腾讯云主机</Select.Option>
                             </Select>
                         </Form.Item>
                         <Form.Item name="authPublic" label="认证权限">

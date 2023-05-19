@@ -184,6 +184,14 @@ export class HistoryStore {
         }
     }
 
+    @action
+    findOneInstance = value =>{
+        const param = new FormData()
+        param.append('instanceId',value)
+        const data = Axios.post('/instance/findOneInstance',param)
+        return data
+    }
+
 }
 
 export const HISTORY_STORE = "historyStore"

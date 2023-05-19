@@ -1,5 +1,5 @@
 import React from "react";
-import {SystemRole} from "tiklab-user-ui";
+import {SystemRole} from "tiklab-privilege-ui";
 
 /**
  * 系统权限

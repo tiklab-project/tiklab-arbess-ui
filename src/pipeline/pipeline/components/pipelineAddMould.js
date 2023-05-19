@@ -79,19 +79,17 @@ const PipelineAddMould = ({templateType,setTemplateType}) =>{
 
     return <div className="pipeline-template-ul">
                 <div className="pipeline-template-title">流水线模板</div>
-                <div
-                    className={`${templateType===1?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
-                    onClick={()=>setTemplateType(1)}
+                <div className={`${templateType===1?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
+                     onClick={()=>setTemplateType(1)}
                 >
                     <div className="li-self">自定义</div>
                 </div>
                 {
                     templateLis.map(item=>{
                         return (
-                            <div
-                                key={item.id}
-                                className={`${templateType===item.type?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
-                                onClick={()=>setTemplateType(item.type)}
+                            <div key={item.id}
+                                 className={`${templateType===item.type?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
+                                 onClick={()=>setTemplateType(item.type)}
                             >
                                 <div>
                                     <div className="pipeline-template-li-header">

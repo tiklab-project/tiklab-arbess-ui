@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {SYSTEM_ROLE_STORE} from "tiklab-user-ui/es/store";
+import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined} from "@ant-design/icons";
 import {Loading} from "../../common/loading/Loading";
 import Aside from "../../common/aside/Aside";
@@ -25,6 +25,7 @@ const PipelineAside= (props)=>{
     const [isAside,setIsAside] = useState(true)
 
     useEffect(()=>{
+        // 获取流水线
         findUserPipeline()
         // 组件销毁清空流水线信息
         return setPipeline("")

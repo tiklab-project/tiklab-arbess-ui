@@ -12,6 +12,10 @@ export class AuthorizeStore {
     @observable
     branchList = []
 
+    // xpack推送地址
+    @observable
+    xpackPutAddress = []
+
     // 是否在授权中
     @observable
     skin = false
@@ -47,17 +51,17 @@ export class AuthorizeStore {
     }
 
     /**
-     * 获取仓库
+     * 获取仓库（gitee & github）
      * @param value
      * @returns {Promise<void>}
      */
     @action
     findAllStorehouse = async value =>{
         const params = new FormData()
-        params.append("authId",value.authId)
+        params.append("authId",value)
         const data = await Axios.post("/codeAuthorize/findAllStorehouse",params)
         if(data.code===0){
-            this.storehouseList = data.data
+            this.storehouseList = data.data || []
         }else {
             message.info(data.msg,0.5)
             this.storehouseList = []
@@ -65,7 +69,7 @@ export class AuthorizeStore {
     }
 
     /**
-     * 获取分支
+     * 获取分支（gitee & github）
      * @param value
      * @returns {Promise<void>}
      */
@@ -76,12 +80,70 @@ export class AuthorizeStore {
         params.append("houseName",value.houseName)
         const data =  await Axios.post("/codeAuthorize/findBranch",params)
         if(data.code===0){
-            this.branchList = data.data
+            this.branchList = data.data || []
         }
         else {
             message.info(data.msg,0.5)
             this.branchList = []
         }
+    }
+
+    /**
+     * 获取仓库（xcode）
+     * @param value
+     * @returns {Promise<void>}
+     */
+    @action
+    findAllRepository = async value =>{
+        const params = new FormData()
+        params.append("authId",value)
+        const data = await Axios.post("/xcodeAuthorize/findAllRepository",params)
+        if(data.code===0){
+            this.storehouseList = data.data || []
+        }else {
+            message.info(data.msg,0.5)
+            this.storehouseList = []
+        }
+    }
+
+    /**
+     * 获取分支（xcode）
+     * @param value
+     * @returns {Promise<void>}
+     */
+    @action
+    findAllBranch = async value =>{
+        const params = new FormData()
+        params.append("authId",value.authId )
+        params.append("rpyName",value.rpyName)
+        const data =  await Axios.post("/xcodeAuthorize/findAllBranch",params)
+        if(data.code===0){
+            this.branchList = data.data || []
+        }
+        else {
+            message.info(data.msg,0.5)
+            this.branchList = []
+        }
+    }
+
+    /**
+     * 获取xpack推送位置
+     * @param value
+     * @returns {Promise<void>}
+     */
+    @action
+    findXPackPutAddress = async value =>{
+        const param = new FormData()
+        param.append('authId',value)
+        const data = await Axios.post('/xpackAuthorize/findAllRepository',param)
+        if(data.code===0){
+            this.xpackPutAddress = data.data || []
+        }
+        else {
+            message.info(data.msg,0.5)
+            this.xpackPutAddress = []
+        }
+
     }
 
 }

@@ -7,7 +7,7 @@ import HostAddBtn from "../../../../setting/authHost/component/HostAddBtn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 
 /**
- * form选择框
+ * 任务配置
  * 认证，授权，凭证……
  * @param props
  * @returns {JSX.Element}
@@ -45,21 +45,24 @@ const AuthFind = props =>{
      */
     const initList = taskType =>{
         switch (taskType) {
-            case 1:
-            case 4:
-            case 5:
+            case 'git':
+            case 'gitlab':
+            case 'svn':
                 findAllAuth().then(res=>{getList(res)})
                 return
-            case 2:
-            case 3:
-            case 41:
-            case 51:
+            case 'gitee':
+            case 'github':
+            case 'xcode':
+            case 'teston':
+            case 'sonar':
+            case 'nexus':
+            case 'xpack':
                 findAllAuthServerList(taskType).then(res=>{getList(res)})
                 return
-            case 31:
-            case 32:
-            case 52:
-                findAllAuthHostList(0).then(res=>{getList(res)})
+            case 'liunx':
+            case 'docker':
+            case 'ssh':
+                findAllAuthHostList('common').then(res=>{getList(res)})
                 return
 
         }
@@ -109,19 +112,22 @@ const AuthFind = props =>{
      */
     const label = taskType => {
         switch (taskType) {
-            case 1:
-            case 5:
-            case 4:
+            case 'git':
+            case 'gitlab':
+            case 'svn':
                 return "凭证"
-            case 3:
-            case 2:
+            case 'gitee':
+            case 'github':
                 return "授权信息"
-            case 41:
-            case 51:
+            case 'xcode':
+            case 'teston':
+            case 'sonar':
+            case 'nexus':
+            case 'xpack':
                 return "服务地址"
-            case 31:
-            case 32:
-            case 52:
+            case 'liunx':
+            case 'docker':
+            case 'ssh':
                 return "主机地址"
         }
     }
@@ -129,22 +135,25 @@ const AuthFind = props =>{
     /**
      * 选择框 id
      * @param item
-     * @returns {id}
+     * @returns {number}
      */
     const setKey = item =>{
         switch (dataItem.taskType) {
-            case 1:
-            case 4:
-            case 5:
+            case 'git':
+            case 'gitlab':
+            case 'svn':
                 return item.authId
-            case 3:
-            case 2:
-            case 41:
-            case 51:
+            case 'gitee':
+            case 'github':
+            case 'xcode':
+            case 'teston':
+            case 'sonar':
+            case 'nexus':
+            case 'xpack':
                 return item.serverId
-            case 31:
-            case 32:
-            case 52:
+            case 'liunx':
+            case 'docker':
+            case 'ssh':
                 return item.hostId
         }
     }
@@ -156,18 +165,21 @@ const AuthFind = props =>{
      */
     const renderBtn = taskType =>{
         switch (taskType) {
-            case 1:
-            case 4:
-            case 5:
+            case 'git':
+            case 'gitlab':
+            case 'svn':
                 return <AuthAddBtn isConfig={true}/>
-            case 2:
-            case 3:
-            case 41:
-            case 51:
+            case 'gitee':
+            case 'github':
+            case 'xcode':
+            case 'teston':
+            case 'sonar':
+            case 'nexus':
+            case 'xpack':
                 return <ServerAddBtn isConfig={true} type={taskType}/>
-            case 31:
-            case 32:
-            case 52:
+            case 'liunx':
+            case 'docker':
+            case 'ssh':
                 return <HostAddBtn isConfig={true} type={taskType}/>
         }
     }
@@ -179,19 +191,22 @@ const AuthFind = props =>{
      */
     const selectLabel = item =>{
         switch (dataItem.taskType) {
-            case 1:
-            case 4:
-            case 5:
+            case 'git':
+            case 'gitlab':
+            case 'svn':
                 return item.name+"("+(item.authType===1?item.username:"私钥")+")"
-            case 2:
-            case 3:
+            case 'gitee':
+            case 'github':
                 return item.name+"("+(item.authType===1?item.message:"私钥")+")"
-            case 41:
-            case 51:
+            case 'xcode':
+            case 'teston':
+            case 'sonar':
+            case 'nexus':
+            case 'xpack':
                 return item.name+"("+(item.authType===1?item.username:"私钥")+")"
-            case 31:
-            case 32:
-            case 52:
+            case 'liunx':
+            case 'docker':
+            case 'ssh':
                return item.name+"("+item.ip+")"
         }
     }
@@ -199,7 +214,6 @@ const AuthFind = props =>{
     return(
         <Form.Item label={label(dataItem.taskType)} name={dataItem.taskId+"_authName"}>
             <Select
-                // bordered={bordered}
                 showSearch={bordered}
                 placeholder={bordered ? label(dataItem.taskType):"未选择"}
                 className={`${bordered?'':'input-hover'}`}

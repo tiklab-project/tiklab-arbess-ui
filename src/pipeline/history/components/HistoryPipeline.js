@@ -18,9 +18,6 @@ const HistoryPipeline = props => {
     // 加载
     const [isLoading,setIsLoading] = useState(true)
 
-    // 列表数据详情状态
-    const [detailsVisible,setDetailsVisible] = useState(false)
-
     // 获取流水线历史列表请求数据
     const [params,setParams] = useState({
         state:null,
@@ -30,7 +27,13 @@ const HistoryPipeline = props => {
 
     useEffect(()=>{
         // 项目成员
-        pipeline && findDmUserPage(pipeline.id)
+        pipeline && findDmUserPage({
+            pageParam:{
+                pageSize:5,
+                currentPage:1
+            },
+            domainId:pipeline.id,
+        })
         return ()=> {
             setPageCurrent(1)
             setHistoryList([])
@@ -53,34 +56,18 @@ const HistoryPipeline = props => {
                 else clearInterval(inter)
             }),1000)
         }
-        if(detailsVisible){
-            clearInterval(inter)
-        }
         // 组件销毁事件
         return ()=> clearInterval(inter)
-    },[historyFresh,pipeline,pageCurrent,params,detailsVisible])
-
-    /**
-     * 初始化历史筛选条件
-     */
-    const initScreen = () =>{
-        setParams({
-            state:null,
-            userId:null,
-            type:0
-        })
-    }
+    },[historyFresh,pipeline,pageCurrent,params])
 
     return (
         <HistoryTable
-            initScreen={initScreen}
-            isLoading={isLoading}
+            {...props}
             params={params}
             setParams={setParams}
+            isLoading={isLoading}
             setIsLoading={setIsLoading}
             pipelineUserList={pipelineUserList}
-            detailsVisible={detailsVisible}
-            setDetailsVisible={setDetailsVisible}
             historyStore={historyStore}
         />
     )

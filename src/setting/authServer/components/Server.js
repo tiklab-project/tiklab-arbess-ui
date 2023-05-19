@@ -22,7 +22,7 @@ const Server = props =>{
 
     const {findAllAuthServerList,authServerList,setModalVisible,setFormValue,serverFresh,deleteAuthServer} = serverStore
 
-    const [activeTab,setActiveTab] = useState(0)
+    const [activeTab,setActiveTab] = useState('all')
 
     useEffect(()=>{
         // 初始化服务配置
@@ -58,24 +58,36 @@ const Server = props =>{
 
     const lis = [
         {
-            id:0,
+            id:'all',
             title: "全部"
         },
         {
-            id:2,
-            title:"gitee"
+            id:'gitee',
+            title:"Gitee"
         },
         {
-            id:3,
-            title:"github"
+            id:'github',
+            title:"Github"
         },
         {
-            id:41,
-            title:"sonar"
+            id:'xcode',
+            title:"XCode"
         },
         {
-            id:51,
-            title:"nexus"
+            id:'teston',
+            title:"TestOn"
+        },
+        {
+            id:'sonar',
+            title:"Sonar"
+        },
+        {
+            id:'nexus',
+            title:"Nexus",
+        },
+        {
+            id:'xpack',
+            title:"XPack",
         },
     ]
 
@@ -129,18 +141,6 @@ const Server = props =>{
             key:"type",
             width:"20%",
             ellipsis:true,
-            render:text => {
-                switch (text) {
-                    case 2:
-                        return "gitee"
-                    case 3:
-                        return "github"
-                    case 41:
-                        return "sonar"
-                    case 51:
-                        return "nexus"
-                }
-            }
         },
         {
             title:"创建人",
@@ -226,7 +226,7 @@ const Server = props =>{
         }
     ]
 
-    // sonar和nexus
+    // sonar & nexus & teston & xcode
     const authColumn = [
         {
             title:"名称",
@@ -295,14 +295,17 @@ const Server = props =>{
     // 表格内容
     const columns = activeTab =>{
         switch (activeTab) {
-            case 0:
+            case 'all':
                 return allColumn
-            case 51 :
-            case 41 :
-                return authColumn
-            case 2:
-            case 3:
+            case 'gitee':
+            case 'github':
                 return authorizeColumn
+            case 'xcode':
+            case 'teston':
+            case 'sonar' :
+            case 'nexus' :
+            case 'xpack' :
+                return authColumn
         }
     }
 
@@ -310,7 +313,7 @@ const Server = props =>{
         <div className="resources mf-home-limited mf">
             <div className="resources-upper">
                 <BreadcrumbContent firstItem={"服务配置"} />
-                <ServerAddBtn type={2}/>
+                <ServerAddBtn type={'gitee'}/>
             </div>
             <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
             <div className="resources-content">

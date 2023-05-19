@@ -27,7 +27,7 @@ const DynamicList = props =>{
     const renderLis = (item,index) => {
         return  <div key={index} className="dynamic-item" onClick={()=>goDynaLink(item)}>
                     <div dangerouslySetInnerHTML={{__html: item.data}}/>
-                    <div className="dynamic-item-time">{item.timestamp}</div>
+                    <div className="dynamic-item-time">{item.createTime}</div>
                 </div>
     }
 

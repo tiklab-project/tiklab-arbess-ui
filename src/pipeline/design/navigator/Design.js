@@ -42,7 +42,13 @@ const Design = props =>{
 
     useEffect(()=>{
         // 获取项目成员
-        findDmUserPage(pipelineId)
+        findDmUserPage({
+            pageParam:{
+                pageSize:5,
+                currentPage:1
+            },
+            domainId:pipelineId,
+        })
     },[])
 
     useEffect(()=>{
@@ -55,14 +61,11 @@ const Design = props =>{
      */
     const run = () => {
         execStart(pipeline.id).then(res=>{
-            if(version==='ce' && res.code===0){
+            if(res.code===0){
                 setHistoryItem(res.data && res.data)
                 setIsDetails(true)
             }
         })
-        if(version!=='ce'){
-            setTimeout(()=>props.history.push(`/index/pipeline/${pipelineId}/structure`),1000)
-        }
     }
 
     /**
@@ -97,10 +100,9 @@ const Design = props =>{
 
     if(isDetails){
         return <HistoryDetail
-                    historyItem={historyItem}
                     firstItem={"设计"}
-                    detailsVisible={isDetails}
-                    setDetailsVisible={setIsDetails}
+                    historyItem={historyItem}
+                    back={()=>setIsDetails(false)}
                     historyStore={historyStore}
                 />
     }

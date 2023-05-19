@@ -21,13 +21,13 @@ const PipelineDyna = props =>{
             pageSize:15,
             currentPage:1
         },
-        bgroup:"matflow",
     })
 
     useEffect(()=>{
         // 初始化流水线动态
         pipeline && findlogpage({
             content:{pipelineId:[pipeline.id]},
+            bgroup:"matflow",
             ...params
         })
     },[pipeline,params])

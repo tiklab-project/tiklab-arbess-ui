@@ -22,13 +22,14 @@ const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipe
 const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
 const PipelineDyan=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
-const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const PipelineBasic=AsyncComponent(()=>import("./pipeline/setting/basicInfo/PipelineBasicInfo"))
-const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const Dynamic=AsyncComponent(()=>import("./home/components/Dynamic"))
+const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
+const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
+const HistoryPipelineDetail=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipelineDetail"))
 
 /**
  * 系统设置
@@ -51,17 +52,24 @@ const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice")
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
 
 // user
+const User=AsyncComponent(()=>import("./setting/user/User"))
+const Directory=AsyncComponent(()=>import("./setting/user/Directory"))
+const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
+const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
 const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
-const SystemRole=AsyncComponent(()=>import("./setting/user/SystemRole"))
-const DomainRole=AsyncComponent(()=>import("./setting/user/DomainRole"))
-const NotFound=AsyncComponent(()=>import("./setting/user/NotFound"))
+const DomainRole=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
+const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
+const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
+
+// licence
+const Version=AsyncComponent(()=>import("./setting/licence/Version"))
 
 // base
 const UserGroupTrue=AsyncComponent(()=>import("./setting/base/user/Groupture"))
-const SystemFeature=AsyncComponent(()=>import("./setting/base/user/SystemFeature"))
-const SystemRoleTrue=AsyncComponent(()=>import("./setting/base/user/SystemRoleTrue"))
-const ProjectRole=AsyncComponent(()=>import("./setting/base/user/ProjectRole"))
-const ProjectFeature=AsyncComponent(()=>import("./setting/base/user/ProjectFeature"))
+const SystemFeature=AsyncComponent(()=>import("./setting/base/privilege/SystemFeature"))
+const SystemRoleTrue=AsyncComponent(()=>import("./setting/base/privilege/SystemRoleTrue"))
+const ProjectRole=AsyncComponent(()=>import("./setting/base/privilege/ProjectRole"))
+const ProjectFeature=AsyncComponent(()=>import("./setting/base/privilege/ProjectFeature"))
 
 const MyTodoTask=AsyncComponent(()=>import("./setting/base/todo/MyTodoTask"))
 const Task=AsyncComponent(()=>import("./setting/base/todo/Task"))
@@ -101,8 +109,8 @@ const routers=[
         routes:[
             {
                 path: "/index",
-                exact:true,
-                render:()=><Redirect to={"/index/home"}/>,
+                exact: true,
+                render:()=> <Redirect to={"/index/home"}/>,
             },
             {
                 path: "/index/home",
@@ -160,6 +168,11 @@ const routers=[
                     {
                         path:"/index/pipeline/:id/structure",
                         component: HistoryPipeline,
+                        exact:true,
+                    },
+                    {
+                        path:"/index/pipeline/:id/structure/:instanceId/post",
+                        component: HistoryPipelineDetail,
                         exact:true,
                     },
                     {
@@ -240,6 +253,11 @@ const routers=[
                     {
                         path:"/index/system/myLog",
                         component: MyLog,
+                        exact: true,
+                    },
+                    {
+                        path:"/index/system/version",
+                        component: Version,
                         exact: true,
                     },
                     {
@@ -337,8 +355,6 @@ const routers=[
     },
     {
         path:"/",
-        component: Index,
-        exact: true,
         render:()=><Redirect to="/index"/>,
     },
     {

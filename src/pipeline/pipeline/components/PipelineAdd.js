@@ -18,7 +18,9 @@ const PipelineAdd = props =>{
 
     const {pipelineStore} = props
 
-    const {createPipeline,isLoading} = pipelineStore
+    const {createPipeline} = pipelineStore
+
+    const [isLoading,setIsLoading] = useState(false)
 
     const [current,setCurrent] = useState(0)
 
@@ -36,8 +38,10 @@ const PipelineAdd = props =>{
             ...baseInfo,
             template:templateType,
         }
+        setIsLoading(true)
         createPipeline(params).then(res => {
-            if (res.code === 0 && res.data) {
+            if (res.code===0) {
+                setIsLoading(false)
                 props.history.push(`/index/pipeline/${res.data}/config`)
             }
         })

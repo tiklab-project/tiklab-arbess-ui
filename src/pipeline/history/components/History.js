@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react"
 import {inject,observer} from "mobx-react";
 import HistoryTable from "./HistoryTable";
+import HistoryDetail from "./HistoryDetail";
 
 /**
  * 所有历史页面
@@ -18,8 +19,11 @@ const History = props => {
     // 列表数据详情状态
     const [detailsVisible,setDetailsVisible] = useState(false)
 
-    // 加载
+    // 加载状态
     const [isLoading,setIsLoading] = useState(true)
+
+    // 历史信息
+    const [historyItem,setHistoryItem] = useState({})
 
     // 获取所有历史列表请求数据
     const [params,setParams] = useState({
@@ -65,17 +69,39 @@ const History = props => {
         })
     }
 
+    /**
+     * 返回
+     */
+    const back = () => {
+        setDetailsVisible(false)
+        initScreen()
+    }
+
+    const disDetails = record =>{
+        setDetailsVisible(true)
+        setHistoryItem(record)
+    }
+
+    if(detailsVisible){
+        return  <HistoryDetail
+                    firstItem={"历史"}
+                    tableType="history"
+                    back={back}
+                    historyItem={historyItem}
+                    historyStore={historyStore}
+                />
+    }
+
     return (
         <HistoryTable
-            initScreen={initScreen}
+            {...props}
             tableType="history"
-            isLoading={isLoading}
+            disDetails={disDetails}
             params={params}
             setParams={setParams}
+            isLoading={isLoading}
             setIsLoading={setIsLoading}
             pipelineList={pipelineList}
-            detailsVisible={detailsVisible}
-            setDetailsVisible={setDetailsVisible}
             historyStore={historyStore}
         />
     )

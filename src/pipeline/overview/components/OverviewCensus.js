@@ -25,7 +25,7 @@ const OverviewCensus = props =>{
         },
         {
             title:"停止",
-            num: <span className="census-removeNumber">{census && census.removeNumber} 次</span>,
+            num: <span className="census-removeNumber">{census && census.haltNumber} 次</span>,
             icon:<ExclamationCircleOutlined className="census-removeNumber"/>,
         },
         {
@@ -35,7 +35,7 @@ const OverviewCensus = props =>{
         },
         {
             title:"执行次数",
-            num:<span className="census-number">{census && census.number} 次</span>,
+            num:<span className="census-number">{census && census.allNumber} 次</span>,
             icon:<BorderOuterOutlined className="census-number"/>,
         },
         {

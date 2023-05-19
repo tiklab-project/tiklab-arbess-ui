@@ -22,7 +22,7 @@ const Host = props =>{
 
     const {findAllAuthHostList,hostList,hostFresh,setModalVisible,setFormValue,deleteAuthHost} = hostStore
 
-    const [activeTab,setActiveTab] = useState(0)
+    const [activeTab,setActiveTab] = useState('all')
 
     useEffect(()=>{
         // 初始化主机配置
@@ -58,19 +58,19 @@ const Host = props =>{
 
     const lis = [
         {
-            id:0,
+            id:'all',
             title: "全部"
         },
         {
-            id:31,
+            id:'common',
             title:"普通"
         },
         {
-            id:2,
+            id:'aliyun',
             title:"aliyun"
         },
         {
-            id:3,
+            id:'tencent',
             title:"腾讯云主机"
         },
     ]

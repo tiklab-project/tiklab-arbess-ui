@@ -11,96 +11,105 @@ import {CloseOutlined,CheckOutlined} from "@ant-design/icons";
  */
 const VersionContent = props =>{
 
-    const renderText = text => {
-        if(text){
-            return <CheckOutlined style={{color:"#0063FF"}}/>
-        }else {
-            return <CloseOutlined style={{color:"#ff0000"}}/>
-        }
-    }
-
-    const columns = [
+    const columns=[
         {
-            title: "功能",
-            dataIndex: "title",
-            key:"title",
+            title: '功能',
+            dataIndex: 'title',
+            key: 'title',
             colSpan: 2,
             render: (value, row, index) => {
-                const obj = {
+                return {
                     children: value,
-                    props: {},
+                    props: {
+                        rowSpan: row.rowSpan,
+                    },
                 };
-                if (index === 0) {
-                    obj.props.rowSpan = 3;
-                }
-                if(index>0 && index<3){
-                    obj.props.rowSpan = 0;
-                }
-                if (index === 3) {
-                    obj.props.rowSpan = 2;
-                }
-                if(index >3 ){
-                    obj.props.rowSpan = 0;
-                }
-                return obj;
             },
         },
         {
-            title: "功能",
-            dataIndex: "feature",
-            key:"feature",
+            title: '功能点',
+            dataIndex: 'feature',
+            key: 'feature',
             colSpan: 0,
+            render: (value, row, index) => {
+                if (row.colSpan > 0) {
+                    return null
+                } else {
+                    return value
+                }
+            },
         },
         {
-            title: "社区版",
-            dataIndex: "ce",
-            key:"ce",
-            render:text => renderText(text)
+            title: '社区版',
+            dataIndex: 'ce',
+            key: 'ce',
+            render: (value, row, index) => {
+                if (row.colSpan > 0) {
+                    return null
+                } else {
+                    return value ? <CheckOutlined style={{color:"var(--tiklab-blue)", fontSize:'var(--tiklab-icon-size-16)'}}/> : <CloseOutlined style={{color:"red"}}/>
+                }
+            },
         },
         {
-            title: "企业版",
-            dataIndex: "ee",
-            key:"ee",
-            render:text => renderText(text)
+            title: '企业版',
+            dataIndex: 'ee',
+            key: 'ee',
+            render: (value, row, index) => {
+                return value ? <CheckOutlined style={{color:"var(--tiklab-blue)",fontSize:'var(--tiklab-icon-size-16)'}}/> : <CloseOutlined style={{color:"red"}}/>
+            },
         },
     ]
 
     const dataSource = [
         {
-            key: "1",
+            key: '1',
             title:"基本功能",
-            feature: "LDAP",
-            ce: false,
-            ee: true,
-        },
-        {
-            key: "2",
-            title:"基本功能",
-            feature: "在线客服",
-            ce: false,
-            ee: true,
-        },
-        {
-            key: "3",
-            title:"基本功能",
-            feature: "用户和部门",
+            feature: '用户和部门',
             ce: true,
             ee: true,
+            rowSpan: 2
         },
         {
-            key: "4",
-            title:"升级功能",
-            feature: "插件",
-            ce: false,
-            ee: true,
-        },
-        {
-            key: "5",
-            title:"升级功能",
-            feature: "权限",
+            key: '2',
+            title:"基本功能",
+            feature: '权限',
             ce: true,
             ee: true,
-        }
+            rowSpan: 0
+        },
+        {
+            key: '3',
+            title: "升级功能",
+            feature: '企业微信',
+            ce: false,
+            ee: true,
+            rowSpan: 4,
+        },
+        {
+            key: '4',
+            title: "升级功能",
+            feature: 'LDAP',
+            ce: false,
+            ee: true,
+            rowSpan: 0,
+        },
+        {
+            key: '5',
+            title:"升级功能",
+            feature: '插件',
+            ce: false,
+            ee: true,
+            rowSpan: 0
+        },
+        {
+            key: '6',
+            title:"升级功能",
+            feature: '在线客服',
+            ce: false,
+            ee: true,
+            rowSpan: 0
+        },
     ]
 
     return <Version {...props} bgroup={"matflow"}>

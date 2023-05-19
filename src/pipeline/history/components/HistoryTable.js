@@ -15,22 +15,22 @@ import "./HistoryTable.scss"
 
 const HistoryTable = props =>{
 
-    const {tableType,isLoading,setIsLoading,pipelineUserList,pipelineList,
-        detailsVisible,setDetailsVisible,historyStore,setParams,params,initScreen
+    const {tableType,isLoading,setIsLoading,pipelineUserList,pipelineList,historyStore,setParams,params,
+        disDetails
     } = props
 
     const {pageCurrent,setPageCurrent,page,historyList,setHistoryList,deleteInstance,execStop} = historyStore
-
-    // 单个历史信息
-    const [historyItem,setHistoryItem] = useState({})
 
     /**
      * 切换列表详情页面
      * @param record
      */
     const details = record => {
-        setHistoryItem(record)
-        setDetailsVisible(true)
+        if(tableType==="history"){
+            disDetails(record)
+        }else {
+            props.history.push(`/index/pipeline/${record.pipeline.id}/structure/${record.instanceId}/post`)
+        }
     }
 
     /**
@@ -161,18 +161,6 @@ const HistoryTable = props =>{
             }
         }
     ]
-
-    if(detailsVisible){
-        return  <HistoryDetail
-                    firstItem={"历史"}
-                    tableType={tableType}
-                    historyItem={historyItem}
-                    detailsVisible={detailsVisible}
-                    setDetailsVisible={setDetailsVisible}
-                    historyStore={historyStore}
-                    initScreen={initScreen}
-                />
-    }
 
     return (
         <div className='history'>

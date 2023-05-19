@@ -104,12 +104,6 @@ const Setting = props =>{
             purviewCode:"pipeline_version",
         },
         {
-            id:"/index/system/productAuth",
-            title:"应用授权",
-            icon:<AuditOutlined />,
-            purviewCode:"product_auth",
-        },
-        {
             id:"/index/system/info",
             title:"系统信息",
             icon:<AppstoreOutlined />,

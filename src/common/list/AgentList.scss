@@ -1,0 +1,13 @@
+.agent-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    &:hover{
+        background: #fafafa;
+        cursor: pointer;
+    }
+    .dynamic-item-time{
+        font-size: 13px;
+    }
+}

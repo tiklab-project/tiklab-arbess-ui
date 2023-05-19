@@ -7,7 +7,7 @@ import {
     RightOutlined,
     EditOutlined
 } from "@ant-design/icons";
-import {PrivilegeProjectButton} from "tiklab-user-ui";
+import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
 import {Loading} from "../../../common/loading/Loading";
@@ -25,10 +25,12 @@ const PipelineBasicInfo = props =>{
 
     const {pipelineStore} = props
 
-    const {deletePipeline,pipeline,isLoading}=pipelineStore
+    const {deletePipeline,pipeline}=pipelineStore
 
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([])
+
+    const [isLoading,setIsLoading] = useState(false)
 
     const onConfirm = () =>{
         Modal.confirm({
@@ -45,7 +47,9 @@ const PipelineBasicInfo = props =>{
      * 删除流水线
      */
     const delPipeline = () =>{
-        deletePipeline(pipeline.id).then(res=>{
+        setIsLoading(true)
+        deletePipeline(pipeline.id).then(()=>{
+            setIsLoading(false)
             props.history.push("/index/pipeline")
         })
     }

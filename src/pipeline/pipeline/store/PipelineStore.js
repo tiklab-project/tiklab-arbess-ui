@@ -12,10 +12,6 @@ export class PipelineStore {
     @observable
     pipelineListPage = []
 
-    // 最近打开流水线
-    @observable
-    pipelineNearList = []
-
     // 流水线用户
     @observable
     pipelineUserList = []
@@ -39,32 +35,6 @@ export class PipelineStore {
     // 流水线信息
     @observable
     pipeline = ""
-
-    // 1:所有流水线；2：我收藏的流水线
-    @observable
-    listType = 1
-
-    // 加载状态
-    @observable
-    isLoading = false
-
-    // 重新查询
-    @observable
-    fresh = false
-
-    @action
-    setFresh = () =>{
-        this.fresh = !this.fresh
-    }
-
-    /**
-     * 改变流水线tab标签
-     * @param value
-     */
-    @action
-    setListType = value =>{
-        this.listType = value
-    }
 
     /**
      * 设置流水线信息
@@ -116,7 +86,7 @@ export class PipelineStore {
             Axios.post("/pipeline/findUserPipeline").then(res=>{
                 if(res.code===0){
                     // 流水线列表
-                    this.pipelineList = res.data && res.data
+                    this.pipelineList = res.data || []
                 }
                 resolve(res)
             }).catch(error=>{
@@ -125,23 +95,6 @@ export class PipelineStore {
             })
         })
     }
-
-    /**
-     * 所有收藏（未分页）
-     * @returns {Promise<unknown>}
-     */
-    @action
-    findUserFollowPipeline = () =>{
-        return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findUserFollowPipeline").then(res=>{
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
-    }
-
 
     /**
      * 添加流水线
@@ -150,7 +103,6 @@ export class PipelineStore {
      */
     @action
     createPipeline = values =>{
-        this.isLoading = true
         return new Promise((resolve, reject) => {
             Axios.post("/pipeline/createPipeline",values).then(res=>{
                 if(res.code===0){
@@ -159,7 +111,6 @@ export class PipelineStore {
                 else {
                     message.info("创建失败")
                 }
-                this.isLoading = false
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -175,7 +126,6 @@ export class PipelineStore {
      */
     @action
     deletePipeline = async value =>{
-        this.isLoading = true
         const param = new FormData()
         param.append("pipelineId",value)
         return new Promise((resolve, reject) => {
@@ -186,7 +136,6 @@ export class PipelineStore {
                 else {
                     message.info("删除失败")
                 }
-                this.isLoading = false
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -250,14 +199,7 @@ export class PipelineStore {
      */
     @action
     findDmUserPage = async value =>{
-        const params = {
-            pageParam:{
-                pageSize:6,
-                currentPage:1
-            },
-            domainId:value,
-        }
-        const data = await Axios.post("/dmUser/findDmUserPage",params)
+        const data = await Axios.post("/dmUser/findDmUserPage",value)
         this.findPipelineUser(data)
         return data
     }
@@ -282,22 +224,6 @@ export class PipelineStore {
         const data = await Axios.post("/pipeline/findOnePipeline",param)
         if(data.code===0){
             this.pipeline = data.data && data.data
-        }
-        return data
-    }
-
-    /**
-     * 获取最近打开的流水线
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    findAllOpen = async value =>{
-        const param = new FormData()
-        param.append("number",value)
-        const data = await Axios.post("/open/findAllOpen",param)
-        if(data.code===0 && data.data){
-            this.pipelineNearList = data.data
         }
         return data
     }

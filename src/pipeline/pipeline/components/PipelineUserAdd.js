@@ -17,21 +17,27 @@ const PipelineUserAdd = props =>{
 
     const {findUserPage,userPage} = pipelineStore
 
+    // 选中的用户
     const [addUser,setAddUser] = useState([])
 
+    // 用户列表
     const [userList,setUserList] = useState([])
 
+    // 选中的用户id
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
+    const [pageParam] = useState({
+        pageSize:5,
+        currentPage:1
+    })
+
     const [findUserParam,setFindUserParam] = useState({
-        pageParam:{
-            pageSize:6,
-            currentPage:1
-        }
+        pageParam
     })
 
     useEffect(()=>{
         if(visible){
+            // 初始化用户添加列表
             setUserList(allUserList)
         }
         return ()=>{
@@ -66,8 +72,8 @@ const PipelineUserAdd = props =>{
         if(!disabledOpt(record)){
             // 如果已经选中 -- 取消选中
             if (selectedRowKeys.indexOf(record.id) >= 0) {
-                addUser.splice(addUser.indexOf(record.id),1)
                 selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
+                addUser.splice(addUser.indexOf(record.id),1)
             }
             // 如果没有选中 -- 选中
             else {
@@ -77,8 +83,40 @@ const PipelineUserAdd = props =>{
                     adminRole: false
                 })
             }
+            // setSelectedRowKeys(selectedRowKeys)
             setSelectedRowKeys([...selectedRowKeys])
+            setAddUser([...addUser])
         }
+    }
+
+    /**
+     * 手动选择/取消选择某行的回调
+     * @param record
+     */
+    const onSelect = record => {
+        onSelectRow(record)
+    }
+
+    /**
+     * 手动选择/取消选择所有行的回调
+     * @param selected
+     * @param selectedRows
+     * @param changeRows
+     */
+    const onSelectAll = (selected,selectedRows,changeRows) => {
+        const newArr = changeRows.map(item=>item && item.id).filter(item2 => item2 !== undefined)
+        const newUser = changeRows.map(item=>({...item,adminRole: false})).filter(item2=>item2 !==undefined)
+        let row,user
+        if(selected){
+            row = Array.from(new Set([...selectedRowKeys,...newArr]))
+            user = Array.from(new Set([...addUser,...newUser]))
+        }
+        else {
+            row = selectedRowKeys.filter(item=>!newArr.includes(item))
+            user = addUser.filter(item=>!newArr.includes(item.id))
+        }
+        setSelectedRowKeys(row)
+        setAddUser(user)
     }
 
     /**
@@ -86,11 +124,8 @@ const PipelineUserAdd = props =>{
      * @type {{onChange: rowSelection.onChange, selectedRowKeys: *[], getCheckboxProps: (function(*): {disabled: *})}}
      */
     const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            const newArr =selectedRows && selectedRows.map(item=>({...item,adminRole: false}))
-            setAddUser(newArr)
-            setSelectedRowKeys(selectedRowKeys)
-        },
+        onSelectAll:onSelectAll,
+        onSelect:onSelect,
         // 禁止选择
         getCheckboxProps: (record) => ({
             disabled: disabledOpt(record),
@@ -109,16 +144,24 @@ const PipelineUserAdd = props =>{
         })
     }
 
+    /**
+     * 换页查询用户
+     * @param page
+     */
     const changUserPage = page =>{
         findUser({
             ...findUserParam,
             pageParam:{
-                pageSize:6,
+                pageSize:5,
                 currentPage:page
             }
         })
     }
 
+    /**
+     * 查询用户
+     * @param value
+     */
     const findUser = value =>{
         setFindUserParam(value)
         findUserPage(value).then(res=>{

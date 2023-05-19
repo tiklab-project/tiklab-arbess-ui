@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
-import {SystemNav,PrivilegeButton} from "tiklab-user-ui";
-import {SYSTEM_ROLE_STORE} from "tiklab-user-ui/es/store";
+import {SystemNav,PrivilegeButton} from "tiklab-privilege-ui";
+import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
 import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";

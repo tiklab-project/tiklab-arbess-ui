@@ -4,58 +4,17 @@
     overflow: auto;
     background: var(--mf-backdrop-color);
     &-content{
-        &-top, &-center,&-bottom{
-            display: flex;
+        .pipeline-icon{
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            border-radius: 4px;
+            text-align: center;
+            color: black;
+            font-size: 13px;
+            margin-right: 8px;
         }
-        &-center{
-            margin: 15px 0;
-        }
-        .homePage-empty{
-            padding-top: 20px;
-        }
-        .quickIn{
-            margin-bottom: 15px;
-            display: flex;
-            &-group{
-                min-width: 100px;
-                line-height: 100px;
-                height: 100px;
-                text-align: center;
-                border-radius: 4px;
-                background: #fff;
-                cursor: pointer;
-                flex: 1;
-                &:not(:last-child){
-                    margin-right: 15px;
-                }
-                &-wrap{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    .quickIn-group-title{
-                        font-weight: var(--tiklab-font-weight-bold);
-                    }
-                    .quickIn-group-icon{
-                        .icon{
-                            width: 30px;
-                            height: 30px;
-                            vertical-align: -0.55rem;
-                        }
-                    }
-                    .quickIn-group-number{
-                        margin-left: 5px;
-                        width: 20px;
-                        height: 20px;
-                        line-height: 20px;
-                        background: #f2f2f2;
-                        border-radius: 50px;
-                        font-weight: 500;
-                        font-size: 15px;
-                    }
-                }
-            }
-        }
-        .pipelineRecent{
+        .home-recent{
             border-radius: 4px;
             padding: 10px 10px 0;
             height: 200px;
@@ -91,16 +50,6 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                .pipelineRecent-icon{
-                    width: 32px;
-                    height: 32px;
-                    line-height: 32px;
-                    border-radius: 4px;
-                    text-align: center;
-                    color: black;
-                    font-size: 13px;
-                    margin-right: 8px;
-                }
                 .pipelineRecent-name{
                     max-width: 100%;
                     overflow: hidden;
@@ -128,10 +77,44 @@
                 }
             }
         }
-        .home-dyna{
+        .home-build{
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+            min-height: 200px;
+            margin-bottom: var(--tiklab-padding-item);
+            .pipelineBuild-item{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 8px;
+                &:hover{
+                    background: #fafafa;
+                    cursor: pointer;
+                }
+                .pipelineBuild-item-info{
+                    flex: 1;
+                    margin-right: 8px;
+                }
+                .pipelineBuild-item-name{
+                    color: var(--tiklab-blue);
+                }
+                .pipelineBuild-item-desc{
+                    font-size: 12px;
+                    .desc-number{
+                        padding-right: 8px;
+                    }
+                }
+                .pipelineBuild-item-execTime{
+                    font-size: var(--tiklab-font-13);
+                    color: var(--tiklab-gray-500);
+                }
+            }
+        }
+        .home-agent{
             background: #fff;
             padding: 10px;
-            min-height: 450px;
+            min-height: 400px;
             border-radius: 4px;
         }
     }

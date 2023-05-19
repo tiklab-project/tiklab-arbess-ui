@@ -69,6 +69,10 @@ const Task = props => {
         setTaskFormDrawer(false)
     }
 
+    const isBtn = type =>{
+        return !(type === 'git' || type === 'gitee' || type === 'github' || type === 'gitlab' || type === 'svn' || type === 'xcode');
+    }
+
     /**
      * 渲染多任务
      * @param group
@@ -77,7 +81,7 @@ const Task = props => {
      */
     const renderSingleTask = (group,groupIndex) =>{
         return <Fragment key={groupIndex}>
-            { group.taskType > 10 && TaskInsertBtn(insertData,group,groupIndex,"singleBtn") }
+            { isBtn(group.taskType) && TaskInsertBtn(insertData,group,groupIndex,"singleBtn") }
             <div className="group-table">
                 <div className="group-head">
                     <div className="name" style={{opacity:0}}/>

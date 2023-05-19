@@ -3,14 +3,12 @@ import FormsItem from "../FormsItem";
 import AuthFind from "../AuthFind";
 
 /**
- * 代码扫描 -- SonarQuebe
+ * SonarQuebe：代码扫描
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
 const ScanSonarQuebe = props =>{
-
-    const {dataItem} = props
 
     return(
         <>

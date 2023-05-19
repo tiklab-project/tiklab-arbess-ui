@@ -82,84 +82,84 @@ module.exports = merge(baseWebpackConfig, {
                     name: "chunk-lodash",
                     chunks:"all",
                     test: /lodash/,
-                    priority: 40,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 antIcon: {
                     name: "chunk-antIcon",
                     chunks: "all",
                     test: /@ant-design/,
-                    priority: 65,
+                    priority: 0,
                     reuseExistingChunk: true //遇到重复包直接引用，不重新打包
                 },
                 tiklabPluginUI: {
                     name: "chunk-tiklab-plugin-manager-ui",
                     chunks: "all",
                     test: /tiklab-plugin-manager-ui/,
-                    priority: 60,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 tiklabEamUI: {
                     name: "chunk-tiklab-eam-ui",
                     chunks: "all",
                     test: /tiklab-eam-ui/,
-                    priority: 60,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
-                tiklabUserUI: {
-                    name: "chunk-tiklab-user-ui",
+                tiklabPrivilegeUI: {
+                    name: "chunk-tiklab-privilege-ui",
                     chunks: "all",
-                    test: /tiklab-user-ui/,
-                    priority: 65,
+                    test: /tiklab-privilege-ui/,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 tiklabMessageUI: {
                     name: "chunk-tiklab-message-ui",
                     chunks: "all",
                     test: /tiklab-message-ui/,
-                    priority: 70,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 echarts: {
                     name: "chunk-echarts",
                     chunks: "all",
                     test: /echarts/,
-                    priority: 60,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 codemirror: {
                     name: "chunk-codemirror",
                     chunks: "all",
                     test: /codemirror/,
-                    priority: 70,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 moment: {
                     name: "chunk-moment",
                     chunks: "all",
                     test: /moment/,
-                    priority: 70,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 antdUI: {
                     name: "chunk-antdUI",
                     chunks: "async",
                     test: /antd/,
-                    priority: 80,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 icon: {
                     name: "chunk-icon",
                     chunks: "all",
                     test: /font_icon/,
-                    priority: 80,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 rcomponent: {
                     name: "chunk-rcomponent",
                     chunks: "all",
                     test: /rc-[a-zA-Z]/,
-                    priority: 80,
+                    priority: 0,
                     reuseExistingChunk: true
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */
@@ -203,4 +203,3 @@ module.exports = merge(baseWebpackConfig, {
         ]
     },
 });
-

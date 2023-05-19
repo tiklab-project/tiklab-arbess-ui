@@ -70,8 +70,8 @@ const EnviModal = props =>{
         switch (ScmType) {
             case 1:  return "Git"
             case 5:  return "SVN"
-            case 21: return "maven"
-            case 22: return "node"
+            case 21: return "Maven"
+            case 22: return "Node"
         }
     }
 

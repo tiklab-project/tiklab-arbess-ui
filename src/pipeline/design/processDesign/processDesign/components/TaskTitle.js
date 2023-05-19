@@ -2,39 +2,32 @@ import React from "react";
 
 /**
  * task的标题
- * @param props
- * @returns {JSX.Element}
+ * @param type
+ * @returns {string}
  * @constructor
  */
-const TaskTitle = props =>{
-    const {type} = props
-    return (
-        <>
-            {
-                (()=>{
-                    switch (type){
-                        case 1:  return "通用Git"
-                        case 2:  return "Gitee"
-                        case 3:  return "Github"
-                        case 4:  return "Gitlab"
-                        case 5:  return "SVN"
-                        case 11: return "maven单元测试"
-                        case 21: return "maven构建"
-                        case 22: return "node"
-                        case 31: return "虚拟机"
-                        case 32: return "docker"
-                        case 41: return "sonarQuebe"
-                        case 51: return "nexus"
-                        case 52: return "SSH"
-                        case 61: return "消息通知"
-                        case 71: return "执行bat脚本"
-                        case 72: return "执行shell脚本"
-                        case 81: return "定时触发"
-                    }
-                })()
-            }
-        </>
-    )
+export const taskTitle = type =>{
+    switch (type){
+        case 'git':  return "通用Git"
+        case 'gitee':  return "Gitee"
+        case 'github':  return "Github"
+        case 'gitlab':  return "Gitlab"
+        case 'svn':  return "SVN"
+        case 'xcode':  return "XCode"
+        case 'maventest': return "maven单元测试"
+        case 'teston': return "testOn自动化测试"
+        case 'maven': return "maven构建"
+        case 'nodejs': return "node"
+        case 'liunx': return "虚拟机"
+        case 'docker': return "Docker"
+        case 'sonar': return "SonarQuebe"
+        case 'nexus': return "Nexus"
+        case 'ssh': return "SSH"
+        case 'xpack': return "XPack"
+        case 'message': return "消息通知"
+        case 'bat': return "执行bat脚本"
+        case 'shell': return "执行shell脚本"
+        case 81: return "定时触发"
+    }
 }
 
-export default TaskTitle

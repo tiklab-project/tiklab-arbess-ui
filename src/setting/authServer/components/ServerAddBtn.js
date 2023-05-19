@@ -14,8 +14,7 @@ const ServerAddBtn = props =>{
 
     const {serverStore,authorizeStore,isConfig,type} = props
 
-    const {modalVisible,setModalVisible,createAuthServer,formValue,setFormValue,updateAuthServer,callbackUrl} = serverStore
-    const {findCode,findAccessToken,skin} = authorizeStore
+    const {modalVisible,setModalVisible,setFormValue} = serverStore
 
     //代码扫描visible
     const [scanVisible,setScanVisible] = useState(false)
@@ -29,11 +28,11 @@ const ServerAddBtn = props =>{
     const addServerBtn = () =>{
         setFormValue("")
         switch (type) {
-            case 2:
-            case 3:
+            case 'gitee':
+            case 'github':
                 setModalVisible(true)
                 break
-            case 51:
+            case 'nexus':
                 setArtifactVisible(true)
                 break
             default:
@@ -47,10 +46,10 @@ const ServerAddBtn = props =>{
      */
     const visible = () =>{
         switch (type) {
-            case 2:
-            case 3:
+            case 'gitee':
+            case 'github':
                 return modalVisible
-            case 51:
+            case 'nexus':
                 return artifactVisible
             default:
                 return scanVisible
@@ -63,14 +62,13 @@ const ServerAddBtn = props =>{
      */
     const setVisible = () =>{
         switch (type) {
-            case 2:
-            case 3:
+            case 'gitee':
+            case 'github':
                 return setModalVisible
-            case 51:
+            case 'nexus':
                 return setArtifactVisible
             default:
                 return setScanVisible
-
         }
     }
 
@@ -95,15 +93,10 @@ const ServerAddBtn = props =>{
             <ServerModal
                 visible={visible()}
                 setVisible={setVisible()}
-                createAuthServer={createAuthServer}
-                formValue={formValue}
-                updateAuthServer={updateAuthServer}
-                findCode={findCode}
-                isConfig={isConfig}
                 type={type}
-                callUrl={callbackUrl}
-                findAccessToken={findAccessToken}
-                skin={skin}
+                isConfig={isConfig}
+                serverStore={serverStore}
+                authorizeStore={authorizeStore}
             />
         </>
     )

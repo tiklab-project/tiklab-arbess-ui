@@ -42,7 +42,7 @@ export class StageStore {
         param.append("pipelineId",value)
         const data = await Axios.post("/stage/finAllStage",param)
         if(data.code===0){
-            this.stageList = data.data && data.data
+            this.stageList = data.data || []
         }
         return data
     }
@@ -90,7 +90,7 @@ export class StageStore {
         param.append("pipelineId",value)
         const data = await Axios.post("/stage/validStagesMustField",param)
         if(data.code===0){
-            this.stageMustField = data.data && data.data
+            this.stageMustField = data.data && []
         }
         return data
     }

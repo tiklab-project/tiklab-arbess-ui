@@ -14,7 +14,7 @@ import "./HistoryDetail.scss";
  */
 const HistoryDetail = props =>{
 
-    const {historyItem,firstItem,detailsVisible,setDetailsVisible,historyStore,tableType,initScreen} = props
+    const {historyItem,firstItem,back,historyStore,tableType} = props
 
     const {findTaskInstance,findStageInstance,execData} = historyStore
 
@@ -50,7 +50,7 @@ const HistoryDetail = props =>{
             setDetailsLoading(true)
             clearInterval(inter)
         }
-    },[detailsVisible])
+    },[historyItem])
 
     let inter
     useEffect(()=>{
@@ -79,10 +79,12 @@ const HistoryDetail = props =>{
         setDetailsLoading(false)
         const isRunStatus = data.data && data.data.some(item=>item[state]==="run")
         if(!isRunStatus){
-            !id && isRun && setExecIndex(data.data && data.data.length-1)
             clearInterval(inter)
-            if(state==='runState') return findTaskInstance(historyItem.instanceId)
-            findStageInstance(historyItem.instanceId)
+            if(isRun){
+                !id && setExecIndex(data.data && data.data.length-1)
+                if(state==='runState') return setTimeout(()=>findTaskInstance(historyItem.instanceId),1000)
+                setTimeout(()=>findStageInstance(historyItem.instanceId),1000)
+            }
         }
     }
 
@@ -208,8 +210,11 @@ const HistoryDetail = props =>{
      * 返回列表
      */
     const goBack = () => {
-        firstItem === "历史" && initScreen()
-        setDetailsVisible(false)
+        setId("")
+        setExecIndex(0)
+        setDetailsLoading(true)
+        clearInterval(inter)
+        back()
     }
 
     /**

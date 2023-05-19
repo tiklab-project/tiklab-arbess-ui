@@ -6,16 +6,16 @@ import EmptyText from "../../../../../common/emptyText/EmptyText";
 import AuthFind from "../AuthFind";
 
 /**
- * gitee & github
+ * xcode
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const CodeGiteeOrGithub = props =>{
+const CodeGiteeOrGithubOrXcode = props =>{
 
     const {authorizeStore,taskStore} = props
 
-    const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
+    const {findAllRepository,storehouseList,findAllBranch,branchList} = authorizeStore
     const {updateTask,dataItem} = taskStore
 
     // 分支选择器是否禁止
@@ -73,12 +73,12 @@ const CodeGiteeOrGithub = props =>{
             case "codeName":
                 setNameBorder(true)
                 setSpin(true)
-                findAllStorehouse(dataItem && dataItem.task.authId).then(r=>setSpin(false))
+                findAllRepository(dataItem && dataItem.task.authId).then(r=>setSpin(false))
                 break
             default:
                 setBranchBorder(true)
-                findBranch({
-                    houseName:dataItem && dataItem.task.codeName,
+                findAllBranch({
+                    rpyName:dataItem && dataItem.task.codeName,
                     authId:dataItem && dataItem.task.authId,
                 })
         }
@@ -107,7 +107,7 @@ const CodeGiteeOrGithub = props =>{
                 >
                     {
                         storehouseList && storehouseList.map(item=>{
-                            return <Select.Option key={item} value={item}> {item} </Select.Option>
+                            return <Select.Option key={item.rpyId} value={item.name}> {item.name} </Select.Option>
                         })
                     }
                 </Select>
@@ -127,7 +127,7 @@ const CodeGiteeOrGithub = props =>{
                 >
                     {
                         branchList && branchList.map(item=>{
-                            return  <Select.Option key={item} value={item}> {item} </Select.Option>
+                            return  <Select.Option key={item.branchName} value={item.branchName}> {item.branchName} </Select.Option>
                         })
                     }
                 </Select>
@@ -136,4 +136,4 @@ const CodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject("taskStore","authorizeStore")(observer(CodeGiteeOrGithub))
+export default inject("taskStore","authorizeStore")(observer(CodeGiteeOrGithubOrXcode))

@@ -3,7 +3,7 @@ import {Dropdown, Form, Input, Select, Space, Table, Tooltip} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {PrivilegeProjectButton} from "tiklab-user-ui";
+import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import Profile from "../../../common/profile/Profile";
 import Btn from "../../../common/btn/Btn";
 import EmptyText from "../../../common/emptyText/EmptyText";
@@ -56,7 +56,7 @@ const PipelineAddInfo = props =>{
             // 获取用户
             findUserPage({
                 pageParam:{
-                    pageSize:6,
+                    pageSize:5,
                     currentPage:1
                 }
             }).then(res=>{

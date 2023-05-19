@@ -12,9 +12,10 @@ import PostprocessUserAdd from "./PostprocessUserAdd";
 
 const PostprocessAdd = props =>{
 
-    const {mesSendData,postprocessVisible,setPostprocessVisible,createPost,pipelineId,
-        formValue,pipelineUserList,updatePost
-    } = props
+    const {postprocessVisible,setPostprocessVisible,formValue,postprocessStore,pipelineStore} = props
+
+    const {pipeline,pipelineUserList} = pipelineStore
+    const {createPost,updatePost,mesSendData} = postprocessStore
 
     const [form] = Form.useForm()
     const userId = getUser().userId
@@ -22,7 +23,7 @@ const PostprocessAdd = props =>{
     const [height,setHeight] = useState(0)
 
     // 后置处理类型
-    const [postprocessType,setPostprocessType] = useState(61)
+    const [postprocessType,setPostprocessType] = useState('message')
 
     // 代码块行高亮
     const [styleActiveLine,setStyleActiveLine] = useState(false)
@@ -64,7 +65,7 @@ const PostprocessAdd = props =>{
         }
         return ()=>{
             setStyleActiveLine(false)
-            setPostprocessType(61)
+            setPostprocessType('message')
         }
      },[postprocessVisible])
 
@@ -112,7 +113,7 @@ const PostprocessAdd = props =>{
         let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
         let params = {
             taskType:postprocessType,
-            values: postprocessType===61 ? { ...value,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
+            values: postprocessType==='message' ? { ...value,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
         }
         if(formValue){
              params = {
@@ -125,7 +126,7 @@ const PostprocessAdd = props =>{
         }else {
             params = {
                 ...params,
-                pipelineId:pipelineId,
+                pipelineId:pipeline.id,
             }
             createPost(params).then(res=>{
                 res.code===0 && message.info("添加成功",0.5)
@@ -245,16 +246,16 @@ const PostprocessAdd = props =>{
                     <ModalTitle setVisible={setPostprocessVisible} title={formValue===""?"添加后置处理":"修改后置处理"}/>
                 </div>
                 <div className="postprocess-modal-content">
-                    <Form form={form} layout={"vertical"} initialValues={{taskType:61,typeList:["site"]}}>
+                    <Form form={form} layout={"vertical"} initialValues={{taskType:'message',typeList:["site"]}}>
                         <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"请选择类型"}]}>
                             <Select onChange={value=>setPostprocessType(value)} disabled={formValue && formValue}>
-                                <Select.Option value={61}>消息通知</Select.Option>
-                                <Select.Option value={71}>执行bat脚本</Select.Option>
-                                <Select.Option value={72}>执行Shell脚本</Select.Option>
+                                <Select.Option value={'message'}>消息通知</Select.Option>
+                                <Select.Option value={'bat'}>执行bat脚本</Select.Option>
+                                <Select.Option value={'shell'}>执行Shell脚本</Select.Option>
                             </Select>
                         </Form.Item>
                         {
-                            postprocessType===61 &&
+                            postprocessType==='message' &&
                             <>
                                 <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"请选择消息发送方式"}]}>
                                     <Checkbox.Group>
@@ -271,7 +272,7 @@ const PostprocessAdd = props =>{
                                     <div className="post-pose-title">
                                         <div className="title-user">消息通知人员</div>
                                         <PostprocessUserAdd
-                                            allUserList={pipelineUserList}
+                                            pipelineStore={pipelineStore}
                                             yUserList={yUserList}
                                             setYUserList={setYUserList}
                                         />
@@ -288,7 +289,7 @@ const PostprocessAdd = props =>{
                             </>
                         }
                         {
-                            (postprocessType===71 || postprocessType===72) &&
+                            (postprocessType==='bat' || postprocessType==='shell') &&
                             <PostprocessMirrorScenario
                                 value={formValue?formValue.task.values.scriptOrder:""}
                                 mirrorRefs={mirrorRefs}

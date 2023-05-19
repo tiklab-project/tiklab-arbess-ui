@@ -3,7 +3,7 @@ import {DatePicker,Select,Space} from "antd";
 import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../common/emptyText/EmptyText";
 import Page from "../../common/page/Page";
-import DynamicList from "../../common/dynamic/DynamicList";
+import DynamicList from "../../common/list/DynamicList";
 
 const { RangePicker } = DatePicker
 
@@ -99,7 +99,7 @@ const DynamicDetail = props =>{
                             <Select.Option key={"4"} value={"LOG_MD_DELETE"}>删除</Select.Option>
                         </Select>
                         <RangePicker
-                            onChange={(value,e)=>changParams(e,"timestamp")}
+                            onChange={(value,e)=>changParams(e,"createTime")}
                             placeholder={["开始时间","结束时间"]}
                         />
                     </Space>

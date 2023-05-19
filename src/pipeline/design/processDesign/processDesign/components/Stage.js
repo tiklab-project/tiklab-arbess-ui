@@ -101,14 +101,6 @@ const Stage = props =>{
     }
 
     /**
-     * task效验提示
-     * @param taskId
-     * @returns {*}
-     */
-    // const valid = taskId => validType && validType.some(item=>item==taskId)
-    const valid = taskId => false
-
-    /**
      * 渲染多阶段
      * @param group
      * @param groupIndex

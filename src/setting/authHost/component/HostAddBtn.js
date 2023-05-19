@@ -13,7 +13,7 @@ import HostModal from "./HostModal";
 const HostAddBtn = props =>{
 
     const {hostStore,isConfig,type} = props
-    const {createAuthHost,modalVisible,setModalVisible,formValue,setFormValue,updateAuthHost} = hostStore
+    const {modalVisible,setModalVisible,setFormValue} = hostStore
 
     const [goodsVisible,setGoodsVisible] = useState(false)
 
@@ -23,7 +23,7 @@ const HostAddBtn = props =>{
     const addHostBtn = () =>{
         setFormValue("")
         switch (type) {
-            case 52:
+            case 'ssh':
                 setGoodsVisible(true)
                 break
             default:
@@ -37,7 +37,7 @@ const HostAddBtn = props =>{
      */
     const visible = () => {
         switch (type) {
-            case 52:
+            case 'ssh':
                 return goodsVisible
             default:
                 return modalVisible
@@ -50,7 +50,7 @@ const HostAddBtn = props =>{
      */
     const setVisible = () =>{
         switch (type) {
-            case 52:
+            case 'ssh':
                 return setGoodsVisible
             default:
                 return setModalVisible
@@ -79,9 +79,7 @@ const HostAddBtn = props =>{
             <HostModal
                 visible={visible()}
                 setVisible={setVisible()}
-                createAuthHost={createAuthHost}
-                formValue={formValue}
-                updateAuthHost={updateAuthHost}
+                hostStore={hostStore}
             />
 
         </>

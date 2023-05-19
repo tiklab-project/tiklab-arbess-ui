@@ -26,7 +26,6 @@ const Postprocess = props =>{
 
     const {pipelineStore,postprocessStore,dataItem} = props
 
-    const {pipelineUserList} = pipelineStore
     const {deletePost,createPost,findTaskPost,fixedPostprocessData,postprocessData,setPostprocessData,
         setIsFindPostprocessData,isFindPostprocessData,updatePost,findMessageSendType,mesSendData
     } = postprocessStore
@@ -248,12 +247,9 @@ const Postprocess = props =>{
      */
     const header = item =>{
         switch (item.taskType) {
-            case 61:
-                return "消息通知"
-            case 71:
-                return "执行Bat脚本"
-            case 72:
-                return "执行Shell脚本"
+            case 'message': return "消息通知"
+            case 'bat': return "执行Bat脚本"
+            case 'shell': return "执行Shell脚本"
         }
     }
 
@@ -358,7 +354,7 @@ const Postprocess = props =>{
                     isExpandedTree(item.postprocessId) &&
                     <div className="pose-item-content">
                         {
-                            item.taskType===61 &&
+                            item.taskType==='message' &&
                             <>
                                 <div className="pose-item-typeList">
                                     <div className="title-typeList">消息发送方式</div>
@@ -386,11 +382,11 @@ const Postprocess = props =>{
                                     <div className="user-title">
                                         <div className="title-user">消息通知人员</div>
                                         <PostprocessUserAdd
-                                            allUserList={pipelineUserList}
+                                            type={'task'}
+                                            pipelineStore={pipelineStore}
                                             yUserList={item.task.values}
                                             postprocessData={postprocessData}
                                             setPostprocessData={setPostprocessData}
-                                            type={'task'}
                                         />
                                     </div>
                                     <Table
@@ -406,7 +402,7 @@ const Postprocess = props =>{
                             </>
                         }
                         {
-                            (item.taskType===71 || item.taskType===72) &&
+                            (item.taskType==='bat' || item.taskType==='shell') &&
                             <MirrorContent
                                 item={item}
                                 updatePost={updatePost}

@@ -3,8 +3,15 @@
         color: var(--tiklab-blue);
         cursor: pointer;
     }
-    .pipelineTable-state,.pipelineTable-history,.pipelineTable-collect{
+    .pipelineTable-state,.pipelineTable-history,.pipelineTable-collect,.pipeline-number{
         cursor: pointer;
+    }
+    .pipeline-number{
+        display: inline-block;
+        color: var(--tiklab-blue);
+        padding: 3px 10px;
+        background: #eeeff9;
+        border-radius: 30px
     }
     .actions-se{
         font-size: var(--tiklab-font-16);

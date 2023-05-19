@@ -4,6 +4,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/btn/Btn";
 import TaskTitleIcon from "./TaskTitleIcon";
+import {taskTitle} from "./TaskTitle";
 import "./TaskAdd.scss";
 
 /**
@@ -27,49 +28,52 @@ const TaskAdd = props =>{
             id:1,
             title:"源码",
             desc:[
-                {type:1},
-                {type:2},
-                {type:3},
-                {type:4},
-                {type:5}
+                {type:'git'},
+                {type:'gitee'},
+                {type:'github'},
+                {type:'gitlab'},
+                {type:'svn'},
+                {type:'xcode'}
             ]
         },
         {
             id:5,
             title: "代码扫描",
             desc: [
-                {type: 41}
+                {type: 'sonar'}
             ]
         },
         {
             id:2,
             title:"测试",
             desc:[
-                {type: 11},
+                {type: 'maventest'},
+                {type: 'teston'}
             ]
         },
         {
             id:3,
             title: "构建",
             desc:[
-                {type: 21},
-                {type: 22},
+                {type: 'maven'},
+                {type: 'nodejs'},
             ]
         },
         {
             id:6,
             title: "推送制品",
             desc: [
-                {type:51},
-                {type:52},
+                {type:'nexus'},
+                {type:'ssh'},
+                {type:'xpack'}
             ]
         },
         {
             id:4,
             title: "部署",
             desc:[
-                {type:31},
-                {type:32},
+                {type:'liunx'},
+                {type:'docker'},
             ]
         },
     ]
@@ -109,7 +113,7 @@ const TaskAdd = props =>{
             setDataItem({
                 taskType:type,
                 taskId:data.data,
-                taskName:setInitName(type),
+                taskName:taskTitle(type),
                 task:{}
             })
             setTaskFormDrawer(true)
@@ -119,32 +123,6 @@ const TaskAdd = props =>{
         }
     }
 
-    /**
-     * 任务名称
-     * @param value
-     * @returns {string}
-     */
-    const setInitName = value =>{
-        switch (value) {
-            case 1:  return "通用Git"
-            case 2:  return "Gitee"
-            case 3:  return "Github"
-            case 4:  return "Gitlab"
-            case 5:  return "SVN"
-            case 11: return "maven单元测试"
-            case 21: return "maven构建"
-            case 22: return "node"
-            case 31: return "虚拟机"
-            case 32: return "docker"
-            case 41: return "sonarQuebe"
-            case 51: return "nexus"
-            case 52: return "SSH"
-            case 61: return "消息通知"
-            case 71: return "执行bat脚本"
-            case 72: return "执行shell脚本"
-            case 81: return "定时触发"
-        }
-    }
 
     /**
      * 锚点跳转
@@ -193,8 +171,8 @@ const TaskAdd = props =>{
                 {
                     group.desc && group.desc.map((item,index)=>{
                         return(
-                            <div key={index} className={`group-desc ${item.type===32?"group-desc-ban":""}`}
-                                 onClick={()=>item.type!==32&&addTask(item)}
+                            <div key={index} className={`group-desc ${item.type==='docker'?"group-desc-ban":""}`}
+                                 onClick={()=>item.type!=='docker'&&addTask(item)}
                             >
                                 <TaskTitleIcon type={item.type}/>
                             </div>

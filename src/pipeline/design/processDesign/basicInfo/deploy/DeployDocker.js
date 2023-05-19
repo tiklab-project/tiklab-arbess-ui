@@ -2,7 +2,7 @@ import React from "react";
 import FormsItem from "../FormsItem";
 
 /**
- * 部署 -- Docker
+ * Docker
  * @param props
  * @returns {JSX.Element}
  * @constructor

@@ -87,9 +87,9 @@ const  Head = props =>{
     const goOut = () => {
         props.history.push({
             pathname: "/logout",
-            // state:{
-            //     preRoute: props.location.pathname
-            // }
+            state:{
+                preRoute: props.location.pathname
+            }
         })
     }
 
@@ -208,7 +208,7 @@ const  Head = props =>{
                     <Tooltip title={"个人中心"}>
                         <Dropdown overlay={outMenu} trigger={["click"]}>
                             <div className="frame-header-user">
-                                <Profile userInfo={getUser()} />
+                                <Profile />
                             </div>
                         </Dropdown>
                     </Tooltip>

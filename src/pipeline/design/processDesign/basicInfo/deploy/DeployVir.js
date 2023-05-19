@@ -4,7 +4,7 @@ import Mirror from "../CodeBlock";
 import FormsItem from "../FormsItem";
 
 /**
- * 部署 -- Vir
+ * 虚拟机
  * @param props
  * @returns {JSX.Element}
  * @constructor

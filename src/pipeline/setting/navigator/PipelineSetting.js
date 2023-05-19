@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {ProjectNav,PrivilegeProjectButton} from "tiklab-user-ui";
+import {ProjectNav,PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {renderRoutes} from 'react-router-config';
 import "./PipelineSetting.scss";
 

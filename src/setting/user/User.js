@@ -1,5 +1,5 @@
 import React from "react";
-import {User} from "tiklab-user-ui";
+import {User as UserList} from "tiklab-user-ui";
 
 /**
  * 用户
@@ -9,7 +9,7 @@ import {User} from "tiklab-user-ui";
  */
 const UserContent = props =>{
 
-    return <User {...props} bgroup={"matflow"}/>
+    return <UserList {...props} bgroup={"matflow"}/>
 
 }
 

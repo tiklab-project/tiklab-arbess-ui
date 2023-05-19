@@ -3,11 +3,14 @@ import {Table, Input, Dropdown} from "antd";
 import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
 import Btn from "../../../../common/btn/Btn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
+import Page from "../../../../common/page/Page";
 import "./PostprocessUserAdd.scss";
 
 const PostprocessUserAdd = props =>{
 
-    const {allUserList,yUserList,setYUserList,postprocessData,setPostprocessData,type} = props
+    const {pipelineStore,yUserList,setYUserList,postprocessData,setPostprocessData,type} = props
+
+    const {pipeline,userPage,pipelineUserList,findDmUserPage} = pipelineStore
 
     // 消息通知人员下拉框
     const [userAddVisible,setUserAddVisible] = useState(false)
@@ -21,9 +24,18 @@ const PostprocessUserAdd = props =>{
     // 选中的用户id
     const [selectedRowKeys,setSelectedRowKeys] = useState([])
 
+    const [pageParam] = useState({
+        pageSize:5,
+        currentPage:1
+    })
+
+    const [findUserParam,setFindUserParam] = useState({
+        pageParam
+    })
+
     useEffect(()=>{
         if(userAddVisible){
-            setUserList(allUserList)
+            setUserList(pipelineUserList)
         }
         return ()=>{
             setSelectedRowKeys([])
@@ -86,7 +98,36 @@ const PostprocessUserAdd = props =>{
             }
             setSelectedRowKeys([...selectedRowKeys])
         }
+    }
 
+    /**
+     * 手动选择/取消选择某行的回调
+     * @param record
+     */
+    const onSelect = record => {
+        onSelectRow(record)
+    }
+
+    /**
+     * 手动选择/取消选择所有行的回调
+     * @param selected
+     * @param selectedRows
+     * @param changeRows
+     */
+    const onSelectAll = (selected,selectedRows,changeRows) => {
+        const newArr = changeRows.map(item=>item && item.id).filter(item2 => item2 !== undefined)
+        const newUser = changeRows.map(item=>({...item,receiveType: 1})).filter(item2=>item2 !==undefined)
+        let row,user
+        if(selected){
+            row = Array.from(new Set([...selectedRowKeys,...newArr]))
+            user = Array.from(new Set([...addUser,...newUser]))
+        }
+        else {
+            row = selectedRowKeys.filter(item=>!newArr.includes(item))
+            user = addUser.filter(item=>!newArr.includes(item.id))
+        }
+        setSelectedRowKeys(row)
+        setAddUser(user)
     }
 
     /**
@@ -94,16 +135,39 @@ const PostprocessUserAdd = props =>{
      * @type {{onChange: rowSelection.onChange, selectedRowKeys: *[]}}
      */
     const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            const newArr =selectedRows && selectedRows.map(item=>({...item,receiver:1}))
-            setAddUser(newArr)
-            setSelectedRowKeys(selectedRowKeys)
-        },
+        onSelectAll:onSelectAll,
+        onSelect:onSelect,
         // 禁止选择
         getCheckboxProps: (record) => ({
             disabled: disabledOpt(record),
         }),
         selectedRowKeys:selectedRowKeys
+    }
+
+    const changUserPage = page =>{
+        findUser({
+            ...findUserParam,
+            pageParam:{
+                pageSize:5,
+                currentPage:page
+            }
+        })
+    }
+
+    /**
+     * 查询项目用户
+     * @param value
+     */
+    const findUser = value =>{
+        setFindUserParam(value)
+        findDmUserPage({
+            ...value,
+            domainId:pipeline.id
+        }).then(res=>{
+            if(res.code===0){
+                setUserList(res.data && res.data.dataList)
+            }
+        })
     }
 
     const userAddMnue = (
@@ -129,6 +193,10 @@ const PostprocessUserAdd = props =>{
                     pagination={false}
                     locale={{emptyText: <EmptyText/>}}
                 />
+                {
+                    userPage && userPage.total>1 &&
+                    <Page pageCurrent={findUserParam.pageParam.currentPage} changPage={changUserPage} page={userPage}/>
+                }
             </div>
             <div className='user-add-btn'>
                 <Btn onClick={()=>setUserAddVisible(false)} title={"取消"} isMar={true}/>

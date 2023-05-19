@@ -3,12 +3,12 @@ import {Form} from "antd";
 import Mirror from "../CodeBlock";
 
 /**
- * 测试 -- 单元测试
+ * 单元测试
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const TestUnit = props =>{
+const TestMvnUnit = props =>{
 
     return(
         <Form.Item name={"testOrder"} label="测试命令">
@@ -20,4 +20,4 @@ const TestUnit = props =>{
     )
 }
 
-export default TestUnit
+export default TestMvnUnit

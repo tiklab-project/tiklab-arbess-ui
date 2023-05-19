@@ -55,7 +55,7 @@ export class TaskStore {
         param.append("pipelineId",value)
         const data = await Axios.post("/tasks/finAllTask",param)
         if(data.code===0){
-            this.taskList = data.data && data.data
+            this.taskList = data.data || []
         }
         return data
     }
@@ -118,7 +118,7 @@ export class TaskStore {
         param.append("pipelineId",value)
         const data = await Axios.post("/tasks/validTaskMustField",param)
         if(data.code===0){
-            this.taskMustField = data.data && data.data
+            this.taskMustField = data.data && []
         }
         return data
     }

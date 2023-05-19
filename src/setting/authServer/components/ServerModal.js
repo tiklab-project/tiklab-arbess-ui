@@ -16,15 +16,16 @@ import Btn from "../../../common/btn/Btn";
  */
 const ServerModal = props =>{
 
-    const {visible,setVisible,createAuthServer,formValue,updateAuthServer,callUrl,findCode,
-        isConfig,type,findAccessToken,skin
-    } = props
+    const {visible,setVisible,isConfig,type,serverStore,authorizeStore} = props
+
+    const {callbackUrl,createAuthServer,formValue,updateAuthServer} = serverStore
+    const {findCode,findAccessToken,skin} = authorizeStore
 
     const [form] = Form.useForm()
     const [height,setHeight] = useState(0)
 
     // 授权类型
-    const [serverWay,setServerWay] = useState(2)
+    const [serverWay,setServerWay] = useState('gitee')
 
     // 去第三方授权按钮是否禁用
     const [addAuth,setAddAuth] = useState(false)
@@ -61,7 +62,7 @@ const ServerModal = props =>{
             setServerWay(formValue.type)
             return
         }
-        // form.resetFields()
+        form.resetFields()
         setServerWay(type)
         setCallUrlWarn("")
     }
@@ -143,7 +144,7 @@ const ServerModal = props =>{
         if(value.callbackUrl || value.callbackUrl===""){
             setFresh(!fresh)
             //获取回调地址
-            callUrl(value.callbackUrl).then(res=>{
+            callbackUrl(value.callbackUrl).then(res=>{
                 res.code===0 && setCallUrlWarn(res.data)
             })
         }
@@ -224,7 +225,7 @@ const ServerModal = props =>{
                    fontSize:13,
                    color:"#999",
                    paddingBottom:10,
-               }}>将下方地址设置为应用{serverWay===2?"Gitee":"Github"}回调地址{callUrlWarn}</div>
+               }}>将下方地址设置为应用{serverWay==='gitee'?"Gitee":"Github"}回调地址{callUrlWarn}</div>
            }
            <Space>
                <Form.Item name="message" label="服务授权信息" rules={[{required:true,message: "服务授权信息不能空" }]}>
@@ -295,10 +296,13 @@ const ServerModal = props =>{
                     >
                         <Form.Item name="type" label="授权类型">
                             <Select onChange={changeServerWay} disabled={formValue || isConfig}>
-                                <Select.Option value={2}>Gitee</Select.Option>
-                                <Select.Option value={3}>Github</Select.Option>
-                                <Select.Option value={41}>sonar</Select.Option>
-                                <Select.Option value={51}>nexus</Select.Option>
+                                <Select.Option value={'gitee'}>Gitee</Select.Option>
+                                <Select.Option value={'github'}>Github</Select.Option>
+                                <Select.Option value={'xcode'}>XCode</Select.Option>
+                                <Select.Option value={'teston'}>TestOn</Select.Option>
+                                <Select.Option value={'sonar'}>Sonar</Select.Option>
+                                <Select.Option value={'nexus'}>Nexus</Select.Option>
+                                <Select.Option value={'xpack'}>XPack</Select.Option>
                             </Select>
                         </Form.Item>
                         <Form.Item name="authPublic" label="服务权限">
@@ -314,10 +318,7 @@ const ServerModal = props =>{
                         ><Input/>
                         </Form.Item>
                         {
-                            (serverWay===3 || serverWay===2) && authorize
-                        }
-                        {
-                            (serverWay===41 || serverWay===51) && server
+                            (serverWay==='gitee' || serverWay==='github' ) ? authorize : server
                         }
                     </Form>
                 </div>

@@ -91,7 +91,7 @@ const Deploy = props =>{
                             />
                         </Form.Item>
                         {
-                            dataItem.taskType==31 ?
+                            dataItem.taskType==='liunx' ?
                             <DeployVir dataItem={dataItem}/>
                             :
                             <DeployDocker dataItem={dataItem}/>

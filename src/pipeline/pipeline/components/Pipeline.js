@@ -19,7 +19,11 @@ const Pipeline = props =>{
 
     const {pipelineStore} = props
 
-    const {fresh,findUserPipelinePage,listType,setListType} = pipelineStore
+    const {findUserPipelinePage} = pipelineStore
+
+    const [listType,setListType] = useState(1)
+
+    const [fresh,setFresh] = useState(false)
 
     const [pageParam] = useState({
         pageSize:13,
@@ -92,9 +96,12 @@ const Pipeline = props =>{
     /**
      * 去添加流水线页面
      */
-    const onClick = () =>{
-        props.history.push('/index/pipeline/new')
-    }
+    const onClick = () =>props.history.push('/index/pipeline/new')
+
+    /**
+     * 重新获取流水线，刷新状态
+     */
+    const changFresh = () =>setFresh(!fresh)
 
     return(
         <div className="pipeline">
@@ -117,7 +124,9 @@ const Pipeline = props =>{
                 </div>
                 <PipelineTable
                     {...props}
+                    listType={listType}
                     changPage={changPage}
+                    changFresh={changFresh}
                     pipelineStore={pipelineStore}
                 />
             </div>

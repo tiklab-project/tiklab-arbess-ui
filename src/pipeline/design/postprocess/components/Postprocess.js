@@ -19,9 +19,9 @@ const Postprocess = props =>{
 
     const {pipelineStore,postprocessStore} = props
 
-    const {pipelineUserList,pipeline} = pipelineStore
-    const {createPost,findPipelinePost,isFindPostprocessData,postprocessData,deletePost,updatePost,
-        findMessageSendType,mesSendData,findOnePost
+    const {pipeline} = pipelineStore
+    const {findPipelinePost,isFindPostprocessData,postprocessData,deletePost,
+        findMessageSendType,findOnePost
     } = postprocessStore
 
     const [postprocessVisible,setPostprocessVisible] = useState(false)
@@ -101,11 +101,8 @@ const Postprocess = props =>{
                     <PostprocessAdd
                         postprocessVisible={postprocessVisible}
                         setPostprocessVisible={setPostprocessVisible}
-                        createPost={createPost}
-                        updatePost={updatePost}
-                        pipelineUserList={pipelineUserList}
-                        mesSendData={mesSendData}
-                        pipelineId={pipeline && pipeline.id}
+                        postprocessStore={postprocessStore}
+                        pipelineStore={pipelineStore}
                         formValue={formValue}
                     />
                 </div>

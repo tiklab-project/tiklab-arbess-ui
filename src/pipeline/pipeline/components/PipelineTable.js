@@ -20,10 +20,10 @@ import "./PipelineTable.scss";
  */
 const PipelineTable = props =>{
 
-    const {historyStore,pipelineStore,changPage}=props
+    const {historyStore,pipelineStore,changPage,changFresh,listType}=props
 
     const {execStart,execStop}=historyStore
-    const {pipelineListPage,updateFollow,listType,setFresh,pipPage} = pipelineStore
+    const {pipelineListPage,updateFollow,pipPage} = pipelineStore
 
     /**
      * 收藏
@@ -36,7 +36,7 @@ const PipelineTable = props =>{
             }else {
                 collectMessage(res,"取消")
             }
-            setFresh()
+            changFresh()
         })
     }
 
@@ -52,6 +52,13 @@ const PipelineTable = props =>{
             message.info(res.msg,0.5)
         }
     }
+
+    /**
+     * 去历史构建详情
+     * @param record
+     * @returns {*}
+     */
+    const goInstance = record => props.history.push(`/index/pipeline/${record.id}/structure/${record.instanceId}/post`)
 
     /**
      * 去概况页面
@@ -76,24 +83,49 @@ const PipelineTable = props =>{
         if(record.state === 2){
             // 终止
             execStop(record.id).then(()=>{
-                setFresh()
+                changFresh()
             })
         }else {
             // 运行
             execStart(record.id).then(()=>{
-                setFresh()
+                changFresh()
             })
         }
     }
 
-    // 构建信息提示
-    const buildStatusTooltip = (statu,text,executor) => (
-        <div>
-            <div>执行人：{executor}</div>
-            <div>执行状态：{statu}</div>
-            <div>执行时间：{text}</div>
-        </div>
-    )
+    const renTip = buildStatus => {
+        switch (buildStatus) {
+            case "success":
+                return  "成功"
+            case "error":
+                return "失败"
+            case "run":
+                return  "正在运行"
+            case "wait":
+                return  "等待"
+            case "halt":
+                return  "终止"
+            default:
+                return '无构建'
+        }
+    }
+
+    const renImg = buildStatus => {
+        switch (buildStatus) {
+            case "success":
+                return pip_success
+            case "error":
+                return pip_error
+            case "run":
+                return pip_fog
+            case "wait":
+                return pip_fog
+            case "halt":
+                return pip_halt
+            default:
+                return pip_success
+        }
+    }
 
     const columns = [
         {
@@ -103,7 +135,7 @@ const PipelineTable = props =>{
             width:"35%",
             ellipsis:true,
             render:(text,record)=>{
-                return  <span  className='pipelineTable-name' onClick={()=>goPipelineTask(text,record)}>
+                return  <span className='pipelineTable-name' onClick={()=>goPipelineTask(text,record)}>
                             <ListIcon text={text} colors={record.color}/>
                             <span>{text}</span>
                         </span>
@@ -116,50 +148,16 @@ const PipelineTable = props =>{
             width:"25%",
             ellipsis:true,
             render:(text,record) =>{
-                switch (record.buildStatus) {
-                    case "success":
-                        return  <Tooltip title={buildStatusTooltip("成功",text,record.execUser.name)}>
-                                    <Space>
-                                        <img src={pip_success} alt={"log"} className="imgs"/>
-                                        {text}
-                                    </Space>
-                                </Tooltip>
-                    case "error":
-                        return  <Tooltip title={buildStatusTooltip("失败",text,record.execUser.name)}>
-                                    <Space>
-                                        <img src={pip_error} alt={"log"} className="imgs"/>
-                                        {text}
-                                    </Space>
-                                </Tooltip>
-                    case "run":
-                        return <Tooltip title={buildStatusTooltip("运行中",text,record.execUser.name)}>
-                                    <Space>
-                                        <img src={pip_fog} alt={"log"} className="imgs"/>
-                                        {text}
-                                    </Space>
-                                </Tooltip>
-                    case "wait":
-                        return  <Tooltip title={buildStatusTooltip("待构建","待构建","无")}>
-                                    <Space>
-                                        <img src={pip_fog} alt={"log"} className="imgs"/>
-                                        待构建
-                                    </Space>
-                                </Tooltip>
-                    case "halt":
-                        return   <Tooltip title={buildStatusTooltip("终止",text,record.execUser.name)}>
-                                    <Space>
-                                        <img src={pip_halt} alt={"log"} className="imgs"/>
-                                        {text}
-                                    </Space>
-                                </Tooltip>
-                    default:
-                        return  <Tooltip title={buildStatusTooltip("待构建","待构建","无")}>
-                                    <Space>
-                                        <img src={pip_fog} alt={"log"} className="imgs"/>
-                                        待构建
-                                    </Space>
-                                </Tooltip>
-                }
+                const {buildStatus,number} = record
+                return (
+                    <Space>
+                        <Tooltip title={renTip(buildStatus)}>
+                            <img src={renImg(buildStatus)} alt={"log"} className="imgs"/>
+                        </Tooltip>
+                        {text || '无构建'}
+                        { number && <span className='pipeline-number' onClick={() => goInstance(record)}># {number}</span>}
+                    </Space>
+                )
             }
         },
         {
