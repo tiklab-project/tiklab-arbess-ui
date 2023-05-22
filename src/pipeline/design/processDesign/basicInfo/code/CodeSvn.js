@@ -1,5 +1,5 @@
 import React from "react";
-import FormsItem from "../FormsItem";
+import FormsInput from "../FormsInput";
 import AuthFind from "../AuthFind";
 
 /**
@@ -12,13 +12,13 @@ const CodeSvn = props =>{
 
     return(
         <>
-            <FormsItem
+            <FormsInput
                 name={"codeName"}
                 placeholder={"svn地址"}
                 label={"svn地址"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"svnFile"}
                 placeholder={"检出文件夹名称"}
                 label={"检出文件"}

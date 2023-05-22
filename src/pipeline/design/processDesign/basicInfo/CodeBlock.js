@@ -64,12 +64,13 @@ const MirrorContent = forwardRef((props,ref)=>{
      * @param ref
      */
     const onOk = ref =>{
-        const obj = {}
-        obj[name] = ref.current.editor.getValue()
-        if(WhetherChange(obj[name],dataItem.task[name])){
+        const value = ref.current.editor.getValue()
+        if(WhetherChange(value,dataItem.task[name])){
             updateTask({
                 taskId:dataItem.taskId,
-                values:obj,
+                values:{
+                    [name]:value
+                },
             })
         }
         setBordered(false)

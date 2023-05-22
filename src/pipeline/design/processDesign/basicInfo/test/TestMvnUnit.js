@@ -3,14 +3,14 @@ import {Form} from "antd";
 import Mirror from "../CodeBlock";
 
 /**
- * 单元测试
+ * maven单元测试
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
 const TestMvnUnit = props =>{
 
-    return(
+    return (
         <Form.Item name={"testOrder"} label="测试命令">
             <Mirror
                 name={"testOrder"}

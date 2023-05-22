@@ -1,7 +1,7 @@
 import React from "react";
 import {Form} from "antd";
 import Mirror from "../CodeBlock";
-import FormsItem from "../FormsItem";
+import FormsInput from "../FormsInput";
 
 /**
  * 构建
@@ -13,7 +13,7 @@ const BuildMavenOrNode = props =>{
 
     return(
         <>
-            <FormsItem
+            <FormsInput
                 name={"buildAddress"}
                 placeholder={`"\/\" 代表当前源的根目录`}
                 label={"模块地址"}

@@ -14,7 +14,9 @@ import {VARIABLE_STORE,VariableStore} from "./pipeline/design/variable/store/Var
 import {COND_STORE,CondStore} from "./pipeline/design/processDesign/condition/store/ConditionStore";
 import {TASK_STORE,TaskStore} from "./pipeline/design/processDesign/processDesign/store/TaskStore";
 import {STAGE_STORE,StageStore} from "./pipeline/design/processDesign/processDesign/store/StageStore";
-
+import {TESTON_STORE,TestOnStore} from "./pipeline/design/processDesign/processDesign/store/TestOnStore";
+import {XPACK_STORE,XPackStore} from "./pipeline/design/processDesign/processDesign/store/XPackStore";
+import {XCODE_STORE,XCodeStore} from "./pipeline/design/processDesign/processDesign/store/XCodeStore";
 import {createContext} from "react";
 
 function createStores() {
@@ -34,6 +36,9 @@ function createStores() {
         [COND_STORE]:new CondStore(),
         [TASK_STORE]:new TaskStore(),
         [STAGE_STORE]:new StageStore(),
+        [TESTON_STORE]:new TestOnStore(),
+        [XPACK_STORE]:new XPackStore(),
+        [XCODE_STORE]:new XCodeStore(),
         [EAM_STORE]:new EamStore(),
     }
 }

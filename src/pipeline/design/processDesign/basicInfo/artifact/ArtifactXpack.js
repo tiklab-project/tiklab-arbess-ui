@@ -1,10 +1,9 @@
 import React,{useState} from "react";
-import {Select, Form, Spin} from "antd";
+import {Select, Form} from "antd";
 import {inject,observer} from "mobx-react";
-import FormsItem from "../FormsItem";
+import FormsInput from "../FormsInput";
+import FormsSelect from "../FormsSelect";
 import AuthFind from "../AuthFind";
-import {LoadingOutlined} from "@ant-design/icons";
-import EmptyText from "../../../../../common/emptyText/EmptyText";
 
 /**
  * xpack
@@ -14,13 +13,10 @@ import EmptyText from "../../../../../common/emptyText/EmptyText";
  */
 const ArtifactXpack = props => {
 
-    const {taskStore,authorizeStore} = props
+    const {taskStore,xpackStore} = props
 
     const {updateTask,dataItem} = taskStore
-    const {findXPackPutAddress,xpackPutAddress} = authorizeStore
-
-    // 是否显示下拉图标
-    const [showArrow,setShoeArrow] = useState(false)
+    const {findXPackPutAddress,xpackPutAddress} = xpackStore
 
     // 聚焦状态
     const [border,setBorder] = useState(false)
@@ -33,7 +29,8 @@ const ArtifactXpack = props => {
      */
     const onFocus = () =>{
         setBorder(true)
-        findXPackPutAddress(dataItem && dataItem.task.authId).then(r=>setSpin(false))
+        setSpin(true)
+        findXPackPutAddress(dataItem.task?.authId).then(r=>setSpin(false))
     }
 
     /**
@@ -47,61 +44,51 @@ const ArtifactXpack = props => {
         })
     }
 
-    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <EmptyText/>
-
     return(
         <>
             <AuthFind/>
             <Form.Item name={dataItem.taskId+"_putAddress"} label={"推送位置"}>
-                <Select
-                    showSearch={border}
-                    placeholder={border ?"推送位置":"未选择"}
-                    className={border?'':'input-hover'}
-                    showArrow={showArrow}
-                    onMouseEnter={()=>setShoeArrow(true)}
-                    onMouseLeave={()=>setShoeArrow(false)}
+                <FormsSelect
+                    label={'推送位置'}
+                    border={border}
+                    isSpin={isSpin}
                     onBlur={()=>setBorder(false)}
                     onFocus={onFocus}
                     onChange={onChange}
-                    notFoundContent={notFoundContent}
-                    filterOption = {(input, option) =>
-                        (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
                 >
                     {
                         xpackPutAddress && xpackPutAddress.map(item=>{
                             return <Select.Option value={item.name} key={item.id}>{item.name}</Select.Option>
                         })
                     }
-
-                </Select>
+                </FormsSelect>
             </Form.Item>
 
-            <FormsItem
+            <FormsInput
                 name={"groupId"}
                 placeholder={"groupId"}
                 label={"groupId"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"artifactId"}
                 placeholder={"artifactId"}
                 label={"artifactId"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"version"}
                 placeholder={"version"}
                 label={"version"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"fileType"}
                 placeholder={"文件类型"}
                 label={"文件类型"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"fileAddress"}
                 placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"部署文件"}
@@ -111,4 +98,4 @@ const ArtifactXpack = props => {
     )
 }
 
-export default inject("taskStore","authorizeStore")(observer(ArtifactXpack))
+export default inject("taskStore","xpackStore")(observer(ArtifactXpack))

@@ -11,7 +11,7 @@ import {Validation} from "../../../../common/client/Client";
  * @returns {JSX.Element}
  * @constructor
  */
-const FormsItem = props =>{
+const FormsInput = props =>{
 
     const {placeholder,label,name,addonBefore,isValid,taskStore} = props
 
@@ -73,12 +73,12 @@ const FormsItem = props =>{
         const isTaskChange =  WhetherChange(e.target.value,dataItem.task && dataItem.task[name])
         // 任务名称是否修改
         const isNameChange = WhetherChange(e.target.value,dataItem.taskName)
-        const obj = {}
-        obj[name] = e.target.value
         setEnter(false)
         const params = {
             taskId:dataItem.taskId,
-            values:obj
+            values:{
+                [name]:e.target.value
+            }
         }
         if(valid){
             if(name==="taskName"){
@@ -131,7 +131,6 @@ const FormsItem = props =>{
         >
             <Input
                 ref={ref}
-                // bordered={enter}
                 addonBefore={enter && addonBefore}
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
                 className={`${enter?'':'input-hover'}`}
@@ -144,4 +143,4 @@ const FormsItem = props =>{
 
 }
 
-export default inject("taskStore")(observer(FormsItem))
+export default inject("taskStore")(observer(FormsInput))

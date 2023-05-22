@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from "react";
-import {Form,Select,Spin} from "antd";
-import {LoadingOutlined} from "@ant-design/icons";
+import {Form,Select} from "antd";
 import {inject,observer} from "mobx-react";
-import EmptyText from "../../../../../common/emptyText/EmptyText";
 import AuthFind from "../AuthFind";
+import FormsSelect from "../FormsSelect";
 
 /**
  * xcode
@@ -11,18 +10,15 @@ import AuthFind from "../AuthFind";
  * @returns {JSX.Element}
  * @constructor
  */
-const CodeGiteeOrGithubOrXcode = props =>{
+const CodeXcode = props =>{
 
-    const {authorizeStore,taskStore} = props
+    const {xcodeStore,taskStore} = props
 
-    const {findAllRepository,storehouseList,findAllBranch,branchList} = authorizeStore
+    const {findAllRepository,storehouseList,findAllBranch,branchList} = xcodeStore
     const {updateTask,dataItem} = taskStore
 
     // 分支选择器是否禁止
     const [prohibited,setProhibited] = useState(true)
-
-    // 选择器悬浮
-    const [fieldName,setFieldName] = useState("")
 
     // 仓库焦点需要
     const [nameBorder,setNameBorder] = useState(false)
@@ -38,7 +34,6 @@ const CodeGiteeOrGithubOrXcode = props =>{
         if(dataItem && dataItem.task.codeName){
             setProhibited(false)
         }
-        setFieldName("")
     },[dataItem.task.codeName])
 
     /**
@@ -66,74 +61,63 @@ const CodeGiteeOrGithubOrXcode = props =>{
 
     /**
      * 获取仓库||分支
-     * @param name
+     * @param type：类型
      */
-    const onFocus = name => {
-        switch (name) {
+    const onFocus = type => {
+        switch (type) {
             case "codeName":
                 setNameBorder(true)
                 setSpin(true)
-                findAllRepository(dataItem && dataItem.task.authId).then(r=>setSpin(false))
+                findAllRepository(dataItem.task?.authId).then(r=>setSpin(false))
                 break
             default:
                 setBranchBorder(true)
                 findAllBranch({
-                    rpyName:dataItem && dataItem.task.codeName,
-                    authId:dataItem && dataItem.task.authId,
+                    rpyName:dataItem.task?.codeName,
+                    authId:dataItem.task?.authId,
                 })
         }
     }
-
-    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <EmptyText/>
 
     return(
         <>
             <AuthFind/>
             <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"请选择仓库"}]}>
-                <Select
-                    showSearch={nameBorder}
-                    placeholder={nameBorder ?"仓库":"未选择"}
-                    className={nameBorder?'':'input-hover'}
-                    showArrow={fieldName==="codeName"}
-                    onMouseEnter={()=>setFieldName("codeName")}
-                    onMouseLeave={()=>setFieldName("")}
+                <FormsSelect
+                    label="仓库"
+                    isSpin={isSpin}
+                    border={nameBorder}
                     onBlur={()=>setNameBorder(false)}
                     onFocus={()=>onFocus("codeName")}
                     onChange={changeGitStoreHouse}
-                    notFoundContent={notFoundContent}
-                    filterOption = {(input, option) =>
-                        (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
                 >
                     {
                         storehouseList && storehouseList.map(item=>{
                             return <Select.Option key={item.rpyId} value={item.name}> {item.name} </Select.Option>
                         })
                     }
-                </Select>
+                </FormsSelect>
             </Form.Item>
             <Form.Item name={dataItem.taskId+"_codeBranch"} label="分支">
-                <Select
+                <FormsSelect
+                    label="分支"
+                    isSpin={false}
+                    border={branchBorder}
                     disabled={prohibited}
-                    className={branchBorder?'':'input-hover'}
-                    placeholder={branchBorder?"分支":"未选择"}
-                    showArrow={fieldName==="codeBranch"}
-                    onMouseEnter={()=>setFieldName("codeBranch")}
-                    onMouseLeave={()=>setFieldName("")}
                     onBlur={()=>setBranchBorder(false)}
                     onFocus={()=>onFocus("codeBranch")}
                     onChange={changeBranch}
-                    notFoundContent={<EmptyText/>}
                 >
                     {
                         branchList && branchList.map(item=>{
                             return  <Select.Option key={item.branchName} value={item.branchName}> {item.branchName} </Select.Option>
                         })
                     }
-                </Select>
+                </FormsSelect>
+
             </Form.Item>
         </>
     )
 }
 
-export default inject("taskStore","authorizeStore")(observer(CodeGiteeOrGithubOrXcode))
+export default inject("taskStore","xcodeStore")(observer(CodeXcode))

@@ -29,7 +29,7 @@ const HistoryPipeline = props => {
         // 项目成员
         pipeline && findDmUserPage({
             pageParam:{
-                pageSize:5,
+                pageSize: 20,
                 currentPage:1
             },
             domainId:pipeline.id,

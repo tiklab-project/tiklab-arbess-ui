@@ -1,5 +1,5 @@
 import React from "react";
-import FormsItem from "../FormsItem";
+import FormsInput from "../FormsInput";
 import AuthFind from "../AuthFind";
 
 /**
@@ -12,13 +12,13 @@ const CodeGitOrGitlab = props =>{
 
     return(
         <>
-            <FormsItem
+            <FormsInput
                 placeholder={"git地址"}
                 label={"git地址"}
                 name={"codeName"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 placeholder={"分支，默认为master"}
                 label={"分支"}
                 name={"codeBranch"}

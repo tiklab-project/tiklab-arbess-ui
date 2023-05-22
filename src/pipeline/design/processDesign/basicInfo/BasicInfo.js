@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Form, Input} from "antd";
 import {WhetherChange} from "../processDesign/components/Common";
-import FormsItem from "./FormsItem";
+import FormsInput from "./FormsInput";
 
 import CodeGiteeOrGithubOrXcode from "./code/CodeGiteeOrGithub";
 import CodeGitOrGitlab from "./code/CodeGitOrGitlab";
@@ -14,7 +14,7 @@ import BuildMavenOrNode from "./build/BuildMavenOrNode";
 import ArtifactNexus from "./artifact/ArtifactNexus";
 import ArtifactSsh from "./artifact/ArtifactSsh";
 import ArtifactXpack from "./artifact/ArtifactXpack";
-import Deploy from "./deploy/Deploy";
+import DeployLinuxOrDocker from "./deploy/DeployLinuxOrDocker";
 
 /**
  * task的基本信息
@@ -42,12 +42,13 @@ const BasicInfo = props => {
             case 'git':
             case 'gitlab':
             case 'svn':
+            case 'xcode':
                 form.setFieldsValue({
                     [getId(dataItem,"codeName")]:task?.codeName,
                     [getId(dataItem,"codeBranch")]:task?.codeBranch,
                     [getId(dataItem,"codeAlias")]:task?.codeAlias,
                     [getId(dataItem,"svnFile")]:task?.svnFile,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth.name+"("+(task.auth.authType===1?task.auth.username:"私钥")+")",
+                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType===1?task.auth?.username:"私钥")+")",
                     [getId(dataItem,"authId")]:task?.authId,
                 })
                 break
@@ -57,16 +58,7 @@ const BasicInfo = props => {
                     [getId(dataItem,"codeName")]:task?.codeName,
                     [getId(dataItem,"codeBranch")]:task?.codeBranch,
                     [getId(dataItem,"codeAlias")]:task?.codeAlias,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth.name+"("+ (task.auth.authType===1?task.auth.message:"私钥") +")",
-                    [getId(dataItem,"authId")]:task?.authId
-                })
-                break
-            case 'xcode':
-                form.setFieldsValue({
-                    [getId(dataItem,"codeName")]:task?.codeName,
-                    [getId(dataItem,"codeBranch")]:task?.codeBranch,
-                    [getId(dataItem,"codeAlias")]:task?.codeAlias,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth.name+"("+(task.auth.authType===1?task.auth.username:"私钥")+")",
+                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+ (task.auth?.authType===1?task.auth?.message:"私钥") +")",
                     [getId(dataItem,"authId")]:task?.authId
                 })
                 break
@@ -84,14 +76,25 @@ const BasicInfo = props => {
                     [getId(dataItem,"deployOrder")]:task?.deployOrder,
                     [getId(dataItem,"startAddress")]:task?.startAddress,
                     [getId(dataItem,"authType")]:task?.authType ? task.authType:1,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth.name+"("+ task.auth.ip+")",
+                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+ task.auth?.ip+")",
                     [getId(dataItem,"authId")]:task?.authId,
                 })
                 break
             case 'sonar':
                 form.setFieldsValue({
                     [getId(dataItem,"projectName")]:task?.projectName,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth.name+"("+(task.auth.authType===1?task.auth.username:"私钥")+")",
+                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType===1?task.auth?.username:"私钥")+")",
+                    [getId(dataItem,"authId")]:task?.authId
+                })
+                break
+            case 'teston':
+                form.setFieldsValue({
+                    [getId(dataItem,"testSpace")]:task?.testSpace?.name,
+                    [getId(dataItem,"apiEnv")]:task?.apiEnv?.name,
+                    [getId(dataItem,"appEnv")]:task?.appEnv?.name,
+                    [getId(dataItem,"webEnv")]:task?.webEnv?.name,
+                    [getId(dataItem,"testPlan")]:task?.testPlan?.name,
+                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType=== 1?task.auth?.username:"私钥")+")",
                     [getId(dataItem,"authId")]:task?.authId
                 })
                 break
@@ -104,7 +107,7 @@ const BasicInfo = props => {
                     [getId(dataItem,"fileType")]:task?.fileType,
                     [getId(dataItem,"fileAddress")]:task?.fileAddress,
                     [getId(dataItem,"putAddress")]:task?.putAddress,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth.name+"("+(task.auth.authType=== 1?task.auth.username:"私钥")+")",
+                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType=== 1?task.auth?.username:"私钥")+")",
                     [getId(dataItem,"authId")]:task?.authId
                 })
                 break
@@ -112,7 +115,7 @@ const BasicInfo = props => {
                 form.setFieldsValue({
                     [getId(dataItem,"fileAddress")]:task?.fileAddress,
                     [getId(dataItem,"putAddress")]:task?.putAddress,
-                    [getId(dataItem,"authName")]:task?.auth.name+"("+ task.auth.ip+")",
+                    [getId(dataItem,"authName")]:task?.auth?.name+"("+ task.auth?.ip+")",
                     [getId(dataItem,"authId")]:task?.authId
                 })
                 break
@@ -153,7 +156,7 @@ const BasicInfo = props => {
                 return <BuildMavenOrNode dataItem={dataItem}/>
             case 'liunx':
             case 'docker':
-                return <Deploy dataItem={dataItem}/>
+                return <DeployLinuxOrDocker dataItem={dataItem}/>
             case 'sonar':
                 return <ScanSonarQuebe dataItem={dataItem}/>
             case 'nexus':
@@ -182,7 +185,7 @@ const BasicInfo = props => {
                 {
                     dataItem && dataItem.taskId ?
                         <>
-                            <FormsItem placeholder="任务名称" label="任务名称" name="taskName" isValid={true} dataItem={dataItem}/>
+                            <FormsInput placeholder="任务名称" label="任务名称" name="taskName" isValid={true} dataItem={dataItem}/>
                             {renderForms(dataItem)}
                         </>
                         :

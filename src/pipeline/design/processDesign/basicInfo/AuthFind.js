@@ -4,7 +4,7 @@ import {Form,Select,Divider} from "antd";
 import ServerAddBtn from "../../../../setting/authServer/components/ServerAddBtn";
 import AuthAddBtn from "../../../../setting/auth/components/AuthAddBtn";
 import HostAddBtn from "../../../../setting/authHost/component/HostAddBtn";
-import EmptyText from "../../../../common/emptyText/EmptyText";
+import FormsSelect from "./FormsSelect";
 
 /**
  * 任务配置
@@ -30,9 +30,6 @@ const AuthFind = props =>{
 
     //选择框边框
     const [bordered,setBordered] = useState(false)
-
-    //选择框下拉图标
-    const [showArrow,setShowArrow] = useState(false)
 
     useEffect(()=>{
         // 初始化选择框list
@@ -82,7 +79,7 @@ const AuthFind = props =>{
      * 改变凭证
      * @param value
      */
-    const changeGitSelect = value =>{
+    const changeGitSelect = (value) =>{
         updateTask({
             taskId:dataItem.taskId,
             values: {authId:value}
@@ -133,7 +130,7 @@ const AuthFind = props =>{
     }
 
     /**
-     * 选择框 id
+     * 选择框 value
      * @param item
      * @returns {number}
      */
@@ -213,22 +210,14 @@ const AuthFind = props =>{
 
     return(
         <Form.Item label={label(dataItem.taskType)} name={dataItem.taskId+"_authName"}>
-            <Select
-                showSearch={bordered}
-                placeholder={bordered ? label(dataItem.taskType):"未选择"}
-                className={`${bordered?'':'input-hover'}`}
-                showArrow={showArrow}
-                onMouseEnter={()=>setShowArrow(true)}
-                onMouseLeave={()=>setShowArrow(false)}
-                onFocus={()=>setBordered(true)}
+            <FormsSelect
+                label={label(dataItem.taskType)}
+                border={bordered}
+                open={open}
+                isSpin={false}
                 onBlur={()=>setBordered(false)}
                 onChange={changeGitSelect}
-                notFoundContent={<EmptyText/>}
-                open={open}
                 onDropdownVisibleChange={(visible)=>setOpen(visible)}
-                filterOption={(input, option) =>
-                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
                 dropdownRender={menu=> (
                     <>
                         {menu}
@@ -242,7 +231,7 @@ const AuthFind = props =>{
                 {list && list.map((item,index)=>{
                     return <Select.Option value={setKey(item)} key={index}>{selectLabel(item)}</Select.Option>
                 })}
-            </Select>
+            </FormsSelect>
         </Form.Item>
     )
 }

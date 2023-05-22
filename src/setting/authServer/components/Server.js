@@ -131,7 +131,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -162,7 +162,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"15%",
+            width:"20%",
             ellipsis:true,
         },
         {
@@ -181,7 +181,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -213,7 +213,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"15%",
+            width:"20%",
             ellipsis:true,
         },
         {
@@ -232,7 +232,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -279,7 +279,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"10%",
+            width:"20%",
             ellipsis:true,
         },
         {

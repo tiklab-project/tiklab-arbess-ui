@@ -1,25 +1,23 @@
 import React,{useState} from "react";
-import {Form,Select,Modal} from "antd";
+import {Form,Select} from "antd";
 import {inject,observer} from "mobx-react";
-import DeployVir from "./DeployVir";
-import DeployDocker from "./DeployDocker";
 import Mirror from "../CodeBlock";
 import AuthFind from "../AuthFind";
-import FormsItem from "../FormsItem";
+import FormsInput from "../FormsInput";
+import FormsSelect from "../FormsSelect";
 
 /**
- * 部署
+ * linux & docker
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const Deploy = props =>{
+const DeployLinuxOrDocker = props =>{
 
     const {taskStore} = props
 
     const {updateTask,dataItem,setDataItem} = taskStore
 
-    const [showArrow,setShowArrow] = useState(false)
     const [border,setBorder] = useState(false)
 
     /**
@@ -43,41 +41,35 @@ const Deploy = props =>{
     return(
         <>
             <Form.Item name={dataItem.taskId+"_authType"} label="部署方式">
-                <Select
-                    // bordered={border}
-                    showArrow={showArrow}
-                    onMouseEnter={()=>setShowArrow(true)}
-                    onMouseLeave={()=>setShowArrow(false)}
+                <FormsSelect
+                    label="部署方式"
+                    border={border}
                     onFocus={()=>setBorder(true)}
                     onBlur={()=>setBorder(false)}
                     onChange={changDeployType}
-                    className={`${border?'':'input-hover'}`}
                 >
                     <Select.Option value={1}>结构化部署</Select.Option>
                     <Select.Option value={2}>自定义部署</Select.Option>
-                </Select>
+                </FormsSelect>
             </Form.Item>
             {
-                dataItem.task && dataItem.task.authType ===2?
-                    <>
-                        <AuthFind />
-                        <Form.Item name={"startOrder"} label="Shell命令">
-                            <Mirror
-                                name={"startOrder"}
-                                placeholder={"Shell命令"}
-                            />
-                        </Form.Item>
-                    </>
+                dataItem.task && dataItem.task.authType === 2?
+                    <Form.Item name={"startOrder"} label="Shell命令">
+                        <Mirror
+                            name={"startOrder"}
+                            placeholder={"Shell命令"}
+                        />
+                    </Form.Item>
                     :
                     <>
-                        <FormsItem
+                        <FormsInput
                             name={"localAddress"}
                             placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                             label={"应用源文件地址"}
                             addonBefore={"/"}
                         />
                         <AuthFind/>
-                        <FormsItem
+                        <FormsInput
                             name={"deployAddress"}
                             placeholder={"部署位置"}
                             label={"部署位置"}
@@ -92,9 +84,28 @@ const Deploy = props =>{
                         </Form.Item>
                         {
                             dataItem.taskType==='liunx' ?
-                            <DeployVir dataItem={dataItem}/>
+                            <>
+                                <FormsInput
+                                    name={"startAddress"}
+                                    placeholder={"/ 启动文件地址"}
+                                    label={"启动文件地址"}
+                                    addonBefore={"/"}
+                                    isValid={true}
+                                />
+                                <Form.Item name={"startOrder"} label="启动命令" >
+                                    <Mirror
+                                        name={"startOrder"}
+                                        placeholder={"启动命令"}
+                                    />
+                                </Form.Item>
+                            </>
                             :
-                            <DeployDocker dataItem={dataItem}/>
+                            <FormsInput
+                                name={"startAddress"}
+                                placeholder={" / 代表部署位置"}
+                                label={"dockerfile文件地址"}
+                                addonBefore={"/"}
+                            />
                         }
                     </>
                 }
@@ -102,4 +113,4 @@ const Deploy = props =>{
     )
 }
 
-export default inject("taskStore")(observer(Deploy))
+export default inject("taskStore")(observer(DeployLinuxOrDocker))

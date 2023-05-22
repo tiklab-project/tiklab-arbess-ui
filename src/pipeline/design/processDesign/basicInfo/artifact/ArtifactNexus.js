@@ -1,5 +1,5 @@
 import React from "react";
-import FormsItem from "../FormsItem";
+import FormsInput from "../FormsInput";
 import AuthFind from "../AuthFind";
 
 /**
@@ -12,31 +12,31 @@ const ArtifactNexus = props => {
 
     return(
         <>
-            <FormsItem
+            <FormsInput
                 name={"groupId"}
                 placeholder={"groupId"}
                 label={"groupId"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"artifactId"}
                 placeholder={"artifactId"}
                 label={"artifactId"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"version"}
                 placeholder={"version"}
                 label={"version"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"fileType"}
                 placeholder={"文件类型"}
                 label={"文件类型"}
                 isValid={true}
             />
-            <FormsItem
+            <FormsInput
                 name={"fileAddress"}
                 placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
                 label={"部署文件"}

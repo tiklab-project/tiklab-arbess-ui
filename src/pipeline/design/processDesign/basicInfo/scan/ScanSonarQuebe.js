@@ -1,5 +1,5 @@
 import React from "react";
-import FormsItem from "../FormsItem";
+import FormsInput from "../FormsInput";
 import AuthFind from "../AuthFind";
 
 /**
@@ -12,7 +12,7 @@ const ScanSonarQuebe = props =>{
 
     return(
         <>
-            <FormsItem
+            <FormsInput
                 name={"projectName"}
                 placeholder={"项目名称"}
                 label={"项目名称"}
