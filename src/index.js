@@ -26,3 +26,7 @@ const Index = observer(() => {
 })
 
 ReactDOM.render(<Index/>, document.getElementById("root"))
+
+if(module.hot){
+    module.hot.accept()
+}

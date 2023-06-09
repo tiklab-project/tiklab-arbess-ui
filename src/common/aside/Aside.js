@@ -107,7 +107,7 @@ const Aside = props =>{
                     }
                 </div>
 
-                <div className="normal-aside-item" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/assembly`)}>
+                <div className="normal-aside-item" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/set`)}>
                     <div className="normal-aside-item-icon"><SettingOutlined/></div>
                     <div>设置</div>
                 </div>

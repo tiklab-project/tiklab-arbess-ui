@@ -23,10 +23,11 @@ const Loading = props =>{
  * 局部加载
  * @param size：大小
  * @param type：类型
+ * @param title：名称
  * @returns {JSX.Element}
  * @constructor
  */
-const SpinLoading = ({size, type}) => {
+const SpinLoading = ({size, type,title}) => {
 
     if(type==='table'){
         return  <div style={{textAlign:"center",padding:"25px 0"}}>
@@ -34,8 +35,11 @@ const SpinLoading = ({size, type}) => {
                 </div>
     }
 
-    return  <div style={{height:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <Spin size={size?size:'default '}/>
+    return  <div className='mf-spin-loading'>
+                <Spin size={size? size:'default '}/>
+                {
+                    title && <div className='spin-loading-title'>{title}</div>
+                }
             </div>
 
 }

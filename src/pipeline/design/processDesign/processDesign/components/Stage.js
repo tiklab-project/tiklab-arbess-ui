@@ -244,7 +244,7 @@ const Stage = props =>{
     }
 
     if(isLoading){
-        return <SpinLoading size="large"/>
+        return <SpinLoading size="large" title="加载中……"/>
     }
 
 

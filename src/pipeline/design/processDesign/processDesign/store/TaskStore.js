@@ -12,17 +12,17 @@ export class TaskStore {
     @observable
     validType = []
 
-    // 重新渲染
+    // 多任务未填的必需任务
     @observable
-    taskFresh = false
+    taskMustField = []
 
     // 抽屉详情数据
     @observable
     dataItem = {}
 
-    // 多任务未填的必需任务
+    // 重新渲染
     @observable
-    taskMustField = []
+    taskFresh = false
 
     @action
     setDataItem = value =>{
@@ -61,7 +61,7 @@ export class TaskStore {
     }
 
     /**
-     * 更新多任务
+     * 更新任务
      * @param values
      * @returns {Promise<*>}
      */
@@ -69,14 +69,14 @@ export class TaskStore {
     updateTask = async values =>{
         const data = await Axios.post("/tasks/updateTask",values)
         if(data.code===0){
-            this.dataItem.task[Object.keys(values.values)[0]] = Object.values(values.values)[0]
+            await this.findOneTasksOrTask(this.dataItem.taskId)
             this.taskFresh=!this.taskFresh
         }
         return data
     }
 
     /**
-     * 更新多任务名称
+     * 更新任务名称
      * @param value
      * @returns {Promise<*>}
      */
@@ -84,14 +84,17 @@ export class TaskStore {
     updateTaskName = async value =>{
         const data = await Axios.post("/tasks/updateTaskName",value)
         if(data.code===0){
-            this.dataItem[Object.keys(value.values)[0]] = Object.values(value.values)[0]
+            this.dataItem = {
+                ...this.dataItem,
+                ...value.values
+            }
             this.taskFresh=!this.taskFresh
         }
         return data
     }
 
     /**
-     * 删除多任务
+     * 删除任务
      * @param value：taskId
      * @returns {Promise<*>}
      */
@@ -108,6 +111,25 @@ export class TaskStore {
     }
 
     /**
+     * 获取单个任务详情
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findOneTasksOrTask = async value =>{
+        const params = new FormData()
+        params.append('taskId',value)
+        const data = await Axios.post("/tasks/findOneTasksOrTask",params)
+        if(data.code===0){
+            this.dataItem = data.data || []
+        }
+        else {
+            message.info(data.msg)
+        }
+        return data
+    }
+
+    /**
      * 获取多任务未填的必需任务
      * @param value
      * @returns {Promise<*>}
@@ -118,7 +140,7 @@ export class TaskStore {
         param.append("pipelineId",value)
         const data = await Axios.post("/tasks/validTaskMustField",param)
         if(data.code===0){
-            this.taskMustField = data.data && []
+            this.taskMustField = data.data || []
         }
         return data
     }

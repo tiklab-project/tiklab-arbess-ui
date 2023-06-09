@@ -11,7 +11,7 @@ import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
  */
 const Listaction = ({edit,del}) =>{
 
-    return <span className="mf-listAction">
+    if(del) return <span className="mf-listAction">
                 <Tooltip title="修改">
                     <span onClick={edit} className="edit" style={{cursor:"pointer",marginRight:15}}>
                         <EditOutlined />
@@ -29,6 +29,14 @@ const Listaction = ({edit,del}) =>{
                             <DeleteOutlined />
                         </span>
                     </Popconfirm>
+                </Tooltip>
+            </span>
+
+    return <span className="mf-listAction">
+                <Tooltip title="修改">
+                    <span onClick={edit} className="edit" style={{cursor:"pointer",marginRight:15}}>
+                        <EditOutlined />
+                    </span>
                 </Tooltip>
             </span>
 }

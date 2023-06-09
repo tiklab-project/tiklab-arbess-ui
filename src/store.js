@@ -17,6 +17,7 @@ import {STAGE_STORE,StageStore} from "./pipeline/design/processDesign/processDes
 import {TESTON_STORE,TestOnStore} from "./pipeline/design/processDesign/processDesign/store/TestOnStore";
 import {XPACK_STORE,XPackStore} from "./pipeline/design/processDesign/processDesign/store/XPackStore";
 import {XCODE_STORE,XCodeStore} from "./pipeline/design/processDesign/processDesign/store/XCodeStore";
+import {RESOURCE_STORE,ResourceStore} from "./setting/resources/store/ResourceStore";
 import {createContext} from "react";
 
 function createStores() {
@@ -39,6 +40,7 @@ function createStores() {
         [TESTON_STORE]:new TestOnStore(),
         [XPACK_STORE]:new XPackStore(),
         [XCODE_STORE]:new XCodeStore(),
+        [RESOURCE_STORE]:new ResourceStore(),
         [EAM_STORE]:new EamStore(),
     }
 }

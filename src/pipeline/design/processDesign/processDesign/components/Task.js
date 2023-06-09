@@ -87,7 +87,7 @@ const Task = props => {
                     <div className="name" style={{opacity:0}}/>
                 </div>
                 <div className="newStages-single">
-                    <div className={`newStages-job`}>
+                    <div className="newStages-job">
                         {TaskTypeContent(group,14,showDetail,delTask,taskMustField)}
                     </div>
                 </div>
@@ -96,7 +96,7 @@ const Task = props => {
     }
 
     if(isLoading){
-        return <SpinLoading size="large"/>
+        return <SpinLoading size="large" title="加载中……"/>
     }
 
     return (

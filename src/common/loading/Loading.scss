@@ -40,6 +40,19 @@
     //}
 }
 
+.mf-spin-loading{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .spin-loading-title{
+        padding-top: 10px;
+        font-size: 13px;
+        color: var(--tiklab-gray-500);
+    }
+}
+
 .mf-server-loading{
     position: fixed;
     width: 100%;

@@ -12,13 +12,27 @@ const Page = props =>{
 
     const {pageCurrent,changPage,page} = props
 
-    /**
-     * 渲染向右 > 箭头
-     * @returns {JSX.Element}
-     */
+    // 换页-<
+    const renderLeftOut = () =>{
+        if(pageCurrent===1){
+            return (
+                <span className="mf-page-ban">
+                    <LeftOutlined/>
+                </span>
+            )
+        }else {
+            return (
+                <span className="mf-page-allow" onClick={()=>changPage(pageCurrent-1)}>
+                    <LeftOutlined/>
+                </span>
+            )
+        }
+    }
+
+    // 换页+>
     const renderRightOut = () =>{
-        if(pageCurrent===page.total || !page.total){
-            return(
+        if(pageCurrent===page.total){
+            return (
                 <span className="mf-page-ban">
                     <RightOutlined/>
                 </span>
@@ -32,15 +46,12 @@ const Page = props =>{
         }
     }
 
+    if(!page || page.total<2) return null
+
     return  <div className="mf-page">
-                <span
-                    className={`${pageCurrent===1?"mf-page-ban":"mf-page-allow"}`}
-                    onClick={()=>pageCurrent===1? null :changPage(pageCurrent - 1)}
-                >
-                    <LeftOutlined/>
-                </span>
+                { renderLeftOut() }
                 <span className="mf-page-current">{pageCurrent}</span>
-                <span> / { page && page.total ? page.total:1}</span>
+                <span> / {page?.total || 1}</span>
                 { renderRightOut() }
             </div>
 }

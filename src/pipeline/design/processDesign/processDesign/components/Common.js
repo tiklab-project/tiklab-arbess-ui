@@ -4,7 +4,7 @@ import {Popconfirm, Tooltip} from "antd";
 import TaskIcon from "./TaskIcon";
 
 /**
- * 值是否更改
+ * 值是否相同
  * @param newValue
  * @param lastValue
  * @returns {boolean}
@@ -80,7 +80,7 @@ export const TaskFinalAdd = (type,list,title,newTask) =>{
  * @returns {JSX.Element}
  */
 export const TaskTypeContent = (item,deep,showDetail,delTask,validData) =>{
-    const valid = taskId => validData && validData.some(item=>item===taskId)
+    const valid = taskId => validData && validData.some(li=>li===taskId)
     return (
         <div onClick={()=>showDetail(item)}
              style={{paddingLeft:deep}}

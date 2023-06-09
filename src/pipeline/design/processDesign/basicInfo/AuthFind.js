@@ -70,8 +70,8 @@ const AuthFind = props =>{
      * @param res
      */
     const getList = res =>{
-        if(res.code===0 && res.data){
-            setList(res.data)
+        if(res.code===0){
+            setList(res.data || [])
         }
     }
 
@@ -84,22 +84,7 @@ const AuthFind = props =>{
             taskId:dataItem.taskId,
             values: {authId:value}
         })
-        setItem(value)
         setBordered(false)
-    }
-
-    /**
-     * dataItem添加对象
-     * @param value
-     */
-    const setItem = value => {
-        list && list.map(item=>{
-            if(setKey(item)===value){
-                Object.assign(dataItem,{task:{auth:item}})
-                return
-            }
-            return null
-        })
     }
 
     /**
@@ -168,16 +153,18 @@ const AuthFind = props =>{
                 return <AuthAddBtn isConfig={true}/>
             case 'gitee':
             case 'github':
-            case 'xcode':
-            case 'teston':
             case 'sonar':
             case 'nexus':
-            case 'xpack':
                 return <ServerAddBtn isConfig={true} type={taskType}/>
             case 'liunx':
             case 'docker':
             case 'ssh':
                 return <HostAddBtn isConfig={true} type={taskType}/>
+            case 'xcode':
+            case 'teston':
+            case 'xpack':
+                if(version==='ce') return <ServerAddBtn isConfig={true} type={taskType}/>
+                return null
         }
     }
 
@@ -215,6 +202,7 @@ const AuthFind = props =>{
                 border={bordered}
                 open={open}
                 isSpin={false}
+                onFocus={()=>setBordered(true)}
                 onBlur={()=>setBordered(false)}
                 onChange={changeGitSelect}
                 onDropdownVisibleChange={(visible)=>setOpen(visible)}

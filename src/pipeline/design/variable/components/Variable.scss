@@ -15,15 +15,3 @@
         }
     }
 }
-
-
-.variable-modal{
-    .variable-modal-up{
-        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
-    }
-    .variable-modal-content{
-        padding: 0 var(--tiklab-padding);
-        max-height: calc(100% - 120px);
-        overflow: auto;
-    }
-}

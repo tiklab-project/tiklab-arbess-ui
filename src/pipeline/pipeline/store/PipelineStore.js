@@ -19,7 +19,7 @@ export class PipelineStore {
     // 流水线分页
     @observable
     pipPage = {
-        defaultCurrent: 1,
+        current: 1,
         pageSize: 6,
         total: 1,
     }
@@ -59,11 +59,11 @@ export class PipelineStore {
                     // 流水线页数
                     this.pipPage.total = res.data.totalPage
                     // 流水线当前页
-                    this.pipPage.defaultCurrent = res.data.currentPage
+                    this.pipPage.current = res.data.currentPage
                 }else {
                     this.pipelineListPage = []
                     this.pipPage = {
-                        defaultCurrent: 1,
+                        current: 1,
                         pageSize: 6,
                         total: 1,
                     }
@@ -107,6 +107,7 @@ export class PipelineStore {
             Axios.post("/pipeline/createPipeline",values).then(res=>{
                 if(res.code===0){
                     message.info("创建成功")
+                    this.findUserPipeline()
                 }
                 else {
                     message.info("创建失败")
@@ -132,6 +133,7 @@ export class PipelineStore {
             Axios.post("/pipeline/deletePipeline",param).then(res=>{
                 if(res.code===0){
                     message.info("删除成功")
+                    this.findUserPipeline()
                 }
                 else {
                     message.info("删除失败")

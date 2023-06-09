@@ -33,24 +33,16 @@ const HomePage = props =>{
         findPipelineRecently(6).then(()=>setBuildLoading(false))
     },[])
 
-    /**
-     * 跳转到最近构建的详情
-     * @param item
-     */
-    const goNewlyBuild = item => {
-        props.history.push(`/index/pipeline/${item.pipelineId}/structure/${item.instanceId}/post`)
-    }
-
     // 渲染最近访问的流水线
     const renderOpen = item => {
         return  <div className="pipelineRecent-item" key={item.pipeline?.id}
-                     onClick={()=> props.history.push(`/index/pipeline/${item.pipeline && item.pipeline.id}/survey`)}
+                     onClick={()=> props.history.push(`/index/pipeline/${item.pipeline?.id}/survey`)}
                 >
             {
                 item && item.pipeline &&
                 <div className="pipelineRecent-item-title">
-                    <div className={`mf-icon-${item.pipeline.color?item.pipeline.color:0} pipeline-icon`}>
-                        {item.pipeline.name && item.pipeline.name.substring(0,1).toUpperCase()}
+                    <div className={`mf-icon-${item.pipeline?.color || 0} pipeline-icon`}>
+                        {item.pipeline?.name.substring(0,1).toUpperCase()}
                     </div>
                     <div className="pipelineRecent-name">
                         {item.pipeline?.name}
@@ -80,7 +72,11 @@ const HomePage = props =>{
     }
 
     const renderBuild = item => (
-        <div key={item.pipelineId} className='pipelineBuild-item' onClick={()=>goNewlyBuild(item)}>
+        <div
+            key={item.pipelineId}
+            className='pipelineBuild-item'
+            onClick={()=>props.history.push(`/index/pipeline/${item.pipelineId}/structure/${item.instanceId}/post`)}
+        >
             <div className={`mf-icon-${item?.color} pipeline-icon`}>
                 {item.pipelineName?.substring(0,1).toUpperCase()}
             </div>

@@ -5,7 +5,7 @@ import {getUser} from "tiklab-core-ui"
 
 const ProfileContent = ({userInfo = undefined}) => {
 
-    const user = !!userInfo ? userInfo : getUser();
+    const user = userInfo ? userInfo : getUser();
 
     const renderEl = () => {
         if (user.avatar && user.avatar !== "null") {

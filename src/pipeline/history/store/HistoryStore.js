@@ -54,7 +54,11 @@ export class HistoryStore {
     execStart = async value =>{
         const params = new FormData()
         params.append("pipelineId", value)
-        return await Axios.post("/exec/start", params)
+        const data = await Axios.post("/exec/start", params)
+        if(data.code!==0){
+            message.info(data.msg)
+        }
+        return data
     }
 
     /**
@@ -188,8 +192,7 @@ export class HistoryStore {
     findOneInstance = value =>{
         const param = new FormData()
         param.append('instanceId',value)
-        const data = Axios.post('/instance/findOneInstance',param)
-        return data
+        return Axios.post('/instance/findOneInstance', param)
     }
 
 }

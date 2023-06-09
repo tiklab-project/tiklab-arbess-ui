@@ -39,20 +39,18 @@ const Server = props =>{
 
     /**
      * 编辑服务配置
-     * @param text
      * @param record
      */
-    const editServer = (text,record) => {
-        setModalVisible(true)
+    const editServer = record => {
         setFormValue(record)
+        setModalVisible(true)
     }
 
     /**
      * 删除服务配置
-     * @param text
      * @param record
      */
-    const delServer = (text,record) =>{
+    const delServer = record =>{
         deleteAuthServer(record.serverId)
     }
 
@@ -118,10 +116,19 @@ const Server = props =>{
     }
 
     // 操作
-    const action = (text,record) =>{
+    const action = record =>{
+        const {type} = record
+        if(type==='xcode' || type==='xpack' || type==='teston'){
+            if(version==='cloud') return (
+                <Listaction
+                    edit={()=>editServer(record)}
+                />
+            )
+        }
+
         return  <Listaction
-                    edit={()=>editServer(text,record)}
-                    del={()=>delServer(text,record)}
+                    edit={()=>editServer(record)}
+                    del={()=>delServer(record)}
                 />
     }
 
@@ -171,7 +178,7 @@ const Server = props =>{
             key: "action",
             width:"10%",
             ellipsis:true,
-            render:(text,record) => action(text,record)
+            render:(text,record) => action(record)
         }
     ]
 
@@ -222,7 +229,7 @@ const Server = props =>{
             key: "action",
             width:"10%",
             ellipsis:true,
-            render:(text,record) => action(text,record)
+            render:(text,record) => action(record)
         }
     ]
 
@@ -288,7 +295,7 @@ const Server = props =>{
             key: "action",
             width:"10%",
             ellipsis:true,
-            render:(text,record) => action(text,record)
+            render:(text,record) => action(record)
         }
     ]
 
@@ -310,13 +317,13 @@ const Server = props =>{
     }
 
     return(
-        <div className="resources mf-home-limited mf">
-            <div className="resources-upper">
+        <div className="auth mf-home-limited mf">
+            <div className="auth-upper">
                 <BreadcrumbContent firstItem={"服务配置"} />
                 <ServerAddBtn type={'gitee'}/>
             </div>
             <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
-            <div className="resources-content">
+            <div className="auth-content">
                 <Table
                     columns={columns(activeTab)}
                     dataSource={authServerList}

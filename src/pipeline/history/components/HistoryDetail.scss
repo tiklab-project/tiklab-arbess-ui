@@ -16,7 +16,7 @@
         }
         .bottom-content{
             display: flex;
-            height: calc(100% - 230px);
+            height: calc(100% - 220px);
             border-left: 1px solid #d9d9d9;
         }
         .bottom-tree{
@@ -73,6 +73,7 @@
             background: #000;
             color: #fff;
             padding: 10px;
+            word-wrap: break-word;
             white-space: pre-wrap;
         }
     }

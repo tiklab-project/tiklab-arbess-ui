@@ -40,20 +40,18 @@ const Variable = props =>{
 
     /**
      * 编辑变量
-     * @param text
      * @param reocrd
      */
-    const editVariable = (text,reocrd) =>{
+    const editVariable = reocrd =>{
         setFormValue(reocrd)
         setVariableVisible(true)
     }
 
     /**
      * 删除变量
-     * @param text
      * @param reocrd
      */
-    const delVariable = (text,reocrd) =>{
+    const delVariable = reocrd =>{
         deleteVariable(reocrd.varId).then(res=>{
             res.code===0 && message.info("删除成功",0.5)
         })
@@ -69,14 +67,7 @@ const Variable = props =>{
             title: "类别",
             dataIndex: "taskType",
             key: "taskType",
-            render:(text,record)=>{
-                switch (text) {
-                    case 1:
-                        return "字符串"
-                    case 2:
-                        return "单选"
-                }
-            }
+            render:text => text===1?"字符串":"单选"
         },
         {
             title: "默认值",
@@ -88,10 +79,10 @@ const Variable = props =>{
             title: "操作",
             dataIndex: "action",
             key: "action",
-            render:(text,record) => (
+            render:(_,record) => (
                 <Listaction
-                    edit={()=>editVariable(text,record)}
-                    del={()=>delVariable(text,record)}
+                    edit={()=>editVariable(record)}
+                    del={()=>delVariable(record)}
                 />
             )
         },

@@ -1,6 +1,13 @@
 import React from "react";
 import {message,Tooltip,Table,Space,Spin} from "antd";
-import {PlayCircleOutlined,ClockCircleOutlined,LoadingOutlined,LockOutlined,UnlockOutlined} from "@ant-design/icons";
+import {
+    PlayCircleOutlined,
+    ClockCircleOutlined,
+    LoadingOutlined,
+    LockOutlined,
+    UnlockOutlined,
+    MinusCircleOutlined
+} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import Profile from "../../../common/profile/Profile";
@@ -11,6 +18,7 @@ import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
 import pip_halt from "../../../assets/images/svg/pip_halt.svg";
 import "./PipelineTable.scss";
+import {SpinLoading} from "../../../common/loading/Loading";
 
 /**
  * 流水线表格页面
@@ -20,7 +28,7 @@ import "./PipelineTable.scss";
  */
 const PipelineTable = props =>{
 
-    const {historyStore,pipelineStore,changPage,changFresh,listType}=props
+    const {historyStore,pipelineStore,changPage,changFresh,listType,isLoading}=props
 
     const {execStart,execStop}=historyStore
     const {pipelineListPage,updateFollow,pipPage} = pipelineStore
@@ -80,14 +88,14 @@ const PipelineTable = props =>{
      * @param record
      */
     const work = record =>{
-        if(record.state === 2){
-            // 终止
-            execStop(record.id).then(()=>{
-                changFresh()
-            })
-        }else {
+        if(record.state === 1){
             // 运行
             execStart(record.id).then(()=>{
+                changFresh()
+            })
+        } else {
+            // 运行
+            execStop(record.id).then(()=>{
                 changFresh()
             })
         }
@@ -95,35 +103,23 @@ const PipelineTable = props =>{
 
     const renTip = buildStatus => {
         switch (buildStatus) {
-            case "success":
-                return  "成功"
-            case "error":
-                return "失败"
-            case "run":
-                return  "正在运行"
-            case "wait":
-                return  "等待"
-            case "halt":
-                return  "终止"
-            default:
-                return '无构建'
+            case "success": return  "成功"
+            case "error": return "失败"
+            case "run": return  "正在运行"
+            case "wait": return  "等待"
+            case "halt": return  "终止"
+            default: return '无构建'
         }
     }
 
     const renImg = buildStatus => {
         switch (buildStatus) {
-            case "success":
-                return pip_success
-            case "error":
-                return pip_error
-            case "run":
-                return pip_fog
-            case "wait":
-                return pip_fog
-            case "halt":
-                return pip_halt
-            default:
-                return pip_success
+            case "success": return pip_success
+            case "error": return pip_error
+            case "run": return pip_fog
+            case "wait": return pip_fog
+            case "halt": return pip_halt
+            default: return pip_success
         }
     }
 
@@ -132,7 +128,7 @@ const PipelineTable = props =>{
             title: "流水线名称",
             dataIndex: "name",
             key: "name",
-            width:"35%",
+            width:"30%",
             ellipsis:true,
             render:(text,record)=>{
                 return  <span className='pipelineTable-name' onClick={()=>goPipelineTask(text,record)}>
@@ -154,7 +150,7 @@ const PipelineTable = props =>{
                         <Tooltip title={renTip(buildStatus)}>
                             <img src={renImg(buildStatus)} alt={"log"} className="imgs"/>
                         </Tooltip>
-                        {text || '无构建'}
+                        { text || '无构建' }
                         { number && <span className='pipeline-number' onClick={() => goInstance(record)}># {number}</span>}
                     </Space>
                 )
@@ -164,7 +160,7 @@ const PipelineTable = props =>{
             title: "负责人",
             dataIndex: ["user","nickname"],
             key: "user",
-            width:"15%",
+            width:"20%",
             ellipsis: true,
             render:(text,record) => {
                 return  <Space>
@@ -179,7 +175,7 @@ const PipelineTable = props =>{
             key: "power",
             width:"15%",
             ellipsis: true,
-            render:(text,record) => {
+            render:text => {
                 switch (text) {
                     case 1:
                         return  <Space>
@@ -201,16 +197,14 @@ const PipelineTable = props =>{
             width:"10%",
             ellipsis:true,
             render:(text,record)=>{
+                const {state,collect} = record
                 return(
                     <Space>
-                        <Tooltip title="运行" >
+                        <Tooltip title={state===3?"等待":"运行"} >
                             <span className="pipelineTable-state" onClick={()=>work(record)}>
-                            {
-                                record.state === 2 ?
-                                    <Spin indicator={<LoadingOutlined className="actions-se" spin />} />
-                                    :
-                                    <PlayCircleOutlined className="actions-se"/>
-                            }
+                                { state === 1 && <PlayCircleOutlined className="actions-se"/> }
+                                { state === 2 && <Spin indicator={<LoadingOutlined className="actions-se" spin />} /> }
+                                { state === 3 && <MinusCircleOutlined className="actions-se"/> }
                             </span>
                         </Tooltip>
                         <Tooltip title="历史">
@@ -221,7 +215,7 @@ const PipelineTable = props =>{
                         <Tooltip title="收藏">
                             <span className="pipelineTable-collect" onClick={()=>collectAction(record)}>
                             {
-                                record.collect === 0 ?
+                                collect === 0 ?
                                     <svg className="icon" aria-hidden="true">
                                         <use xlinkHref={`#icon-xingxing-kong`} />
                                     </svg>
@@ -245,11 +239,12 @@ const PipelineTable = props =>{
                     dataSource={pipelineListPage}
                     rowKey={record=>record.id}
                     pagination={false}
-                    locale={{emptyText: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
+                    locale={{emptyText: isLoading ?
+                            <SpinLoading type="table"/>: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
                 />
                 {
-                    pipPage && pipPage.total > 1 &&
-                    <Page pageCurrent={pipPage.defaultCurrent} changPage={changPage} page={pipPage}/>
+                    pipPage?.total > 1 &&
+                    <Page pageCurrent={pipPage.current} changPage={changPage} page={pipPage}/>
                 }
             </div>
 }

@@ -20,12 +20,11 @@ import "./HeaderMessage.scss";
  */
 const HeaderMessage = props =>{
 
-    const {homePageStore,visible,setVisible,pipelineStore} = props
+    const {homePageStore,visible,setVisible,pipelineList} = props
 
     const {findMessageItemPage,messageList,messPage,setMessagePagination,messagePagination,
         setMessageList,unread,updateMessageItem,mesFresh,deleteMessageItem
     } = homePageStore
-    const {findUserPipeline,pipelineList} = pipelineStore
 
     //加载
     const [isLoading,setIsLoading] = useState(false)
@@ -34,8 +33,6 @@ const HeaderMessage = props =>{
     const [selected,setSelected] = useState(0)
 
     useEffect(()=>{
-        // 获取流水线
-        visible && findUserPipeline()
         return ()=>{
             setMessageList([])
             setMessagePagination(1)

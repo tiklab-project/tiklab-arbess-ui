@@ -45,19 +45,17 @@ const Envi = props =>{
 
     /**
      * 删除环境配置
-     * @param text
      * @param record
      */
-    const delEnvi = (text,record) => {
+    const delEnvi = record => {
         deletePipelineScm(record.scmId)
     }
 
     /**
      * 编辑环境配置
-     * @param text
      * @param record
      */
-    const editEnvi = (text,record) => {
+    const editEnvi = record => {
         setFormValue(record)
         setVisible(true)
     }
@@ -100,15 +98,15 @@ const Envi = props =>{
             ellipsis:true,
             render:(text,record)=>{
                 return  <Listaction
-                            edit={()=>editEnvi(text,record)}
-                            del={()=>delEnvi(text,record)}
+                            edit={()=>editEnvi(record)}
+                            del={()=>delEnvi(record)}
                         />
             }
         }
     ]
 
-    return <div className="resources mf-home-limited mf">
-        <div className="resources-upper">
+    return <div className="auth mf-home-limited mf">
+        <div className="auth-upper">
             <BreadcrumbContent firstItem={"环境配置"} />
             <Btn
                 onClick={addEnvi}
@@ -117,7 +115,7 @@ const Envi = props =>{
                 icon={<PlusOutlined/>}
             />
         </div>
-        <div className="resources-content">
+        <div className="auth-content">
 
             <Table
                 columns={columns}

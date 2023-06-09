@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from "react";
-import {Form,Select} from "antd";
-import {inject,observer} from "mobx-react";
+import React, {useEffect, useState} from "react";
+import {Form, Select} from "antd";
+import {inject, observer} from "mobx-react";
 import AuthFind from "../AuthFind";
 import FormsSelect from "../FormsSelect";
 
@@ -14,27 +14,24 @@ const CodeXcode = props =>{
 
     const {xcodeStore,taskStore} = props
 
-    const {findAllRepository,storehouseList,findAllBranch,branchList} = xcodeStore
+    const {findXcodeRpy,xcodeRpy,findXcodeBranch,xcodeBranch} = xcodeStore
     const {updateTask,dataItem} = taskStore
 
     // 分支选择器是否禁止
     const [prohibited,setProhibited] = useState(true)
 
-    // 仓库焦点需要
-    const [nameBorder,setNameBorder] = useState(false)
-
-    // 分支焦点
-    const [branchBorder,setBranchBorder] = useState(false)
+    // 仓库 | 分支聚焦
+    const [border,setBorder] = useState(null)
 
     // 仓库获取加载
     const [isSpin,setSpin] = useState(false)
 
     useEffect(()=>{
         // 分支是否禁止
-        if(dataItem && dataItem.task.codeName){
+        if(dataItem && dataItem.task?.repository?.name){
             setProhibited(false)
         }
-    },[dataItem.task.codeName])
+    },[dataItem.task?.repository?.name])
 
     /**
      * 切换仓库
@@ -44,7 +41,7 @@ const CodeXcode = props =>{
         setProhibited(false)
         updateTask({
             taskId:dataItem.taskId,
-            values:{codeName:value}
+            values:{repository:{id:value}}
         })
     }
 
@@ -55,7 +52,7 @@ const CodeXcode = props =>{
     const changeBranch = value => {
         updateTask({
             taskId:dataItem.taskId,
-            values:{codeBranch:value}
+            values:{branch: {id:value}}
         })
     }
 
@@ -64,16 +61,15 @@ const CodeXcode = props =>{
      * @param type：类型
      */
     const onFocus = type => {
+        setBorder(type)
         switch (type) {
             case "codeName":
-                setNameBorder(true)
                 setSpin(true)
-                findAllRepository(dataItem.task?.authId).then(r=>setSpin(false))
+                findXcodeRpy(dataItem.task?.authId).then(r=>setSpin(false))
                 break
             default:
-                setBranchBorder(true)
-                findAllBranch({
-                    rpyName:dataItem.task?.codeName,
+                findXcodeBranch({
+                    rpyId:dataItem.task?.repository?.id,
                     authId:dataItem.task?.authId,
                 })
         }
@@ -82,18 +78,18 @@ const CodeXcode = props =>{
     return(
         <>
             <AuthFind/>
-            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"请选择仓库"}]}>
+            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
                 <FormsSelect
                     label="仓库"
                     isSpin={isSpin}
-                    border={nameBorder}
-                    onBlur={()=>setNameBorder(false)}
+                    border={border==='codeName'}
+                    onBlur={()=>setBorder(null)}
                     onFocus={()=>onFocus("codeName")}
                     onChange={changeGitStoreHouse}
                 >
                     {
-                        storehouseList && storehouseList.map(item=>{
-                            return <Select.Option key={item.rpyId} value={item.name}> {item.name} </Select.Option>
+                        xcodeRpy && xcodeRpy.map(item=>{
+                            return <Select.Option key={item.id} value={item.id}> {item.name} </Select.Option>
                         })
                     }
                 </FormsSelect>
@@ -102,15 +98,15 @@ const CodeXcode = props =>{
                 <FormsSelect
                     label="分支"
                     isSpin={false}
-                    border={branchBorder}
                     disabled={prohibited}
-                    onBlur={()=>setBranchBorder(false)}
+                    border={border==='codeBranch'}
+                    onBlur={()=>setBorder(false)}
                     onFocus={()=>onFocus("codeBranch")}
                     onChange={changeBranch}
                 >
                     {
-                        branchList && branchList.map(item=>{
-                            return  <Select.Option key={item.branchName} value={item.branchName}> {item.branchName} </Select.Option>
+                        xcodeBranch && xcodeBranch.map(item=>{
+                            return  <Select.Option key={item.id} value={item.id}> {item.name} </Select.Option>
                         })
                     }
                 </FormsSelect>

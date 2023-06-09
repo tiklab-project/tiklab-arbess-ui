@@ -77,15 +77,28 @@ const HistoryDetail = props =>{
      */
     const destroyInter = (data,state) =>{
         setDetailsLoading(false)
-        const isRunStatus = data.data && data.data.some(item=>item[state]==="run")
-        if(!isRunStatus){
-            clearInterval(inter)
-            if(isRun){
-                !id && setExecIndex(data.data && data.data.length-1)
-                if(state==='runState') return setTimeout(()=>findTaskInstance(historyItem.instanceId),1000)
-                setTimeout(()=>findStageInstance(historyItem.instanceId),1000)
+        const endValue = data.data?.pop()
+        if(endValue){
+            const states = endValue[state]
+            if(states ==="success" || states ==="error" || states ==="halt" ){
+                clearInterval(inter)
+                if(isRun){
+                    !id && setExecIndex(data.data && data.data.length-1)
+                    if(state==='runState') return setTimeout(()=>findTaskInstance(historyItem.instanceId),1000)
+                    setTimeout(()=>findStageInstance(historyItem.instanceId),1000)
+                }
             }
         }
+        // const isRunStatus = data.data && data.data.some(item=>item[state]==="run")
+        //
+        // if(!isRunStatus){
+        //     clearInterval(inter)
+        //     if(isRun){
+        //         !id && setExecIndex(data.data && data.data.length-1)
+        //         if(state==='runState') return setTimeout(()=>findTaskInstance(historyItem.instanceId),1000)
+        //         setTimeout(()=>findStageInstance(historyItem.instanceId),1000)
+        //     }
+        // }
     }
 
     useEffect(()=>{
@@ -202,7 +215,7 @@ const HistoryDetail = props =>{
             outLog.scrollTop = outLog.scrollHeight
         }
         return  <div className="bottom-log" id="str_outLog" onWheel={()=>setIsActiveSlide(false)}>
-                    {logData && logData.runLog ? logData.runLog : "暂无日志"}
+                    {logData?.runLog || "暂无日志"}
                 </div>
     }
 

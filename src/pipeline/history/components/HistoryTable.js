@@ -6,7 +6,6 @@ import {SpinLoading} from "../../../common/loading/Loading";
 import Profile from "../../../common/profile/Profile";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import Page from "../../../common/page/Page";
-import HistoryDetail from "./HistoryDetail";
 import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 import {DeleteOutlined, MinusCircleOutlined} from "@ant-design/icons";
@@ -183,14 +182,7 @@ const HistoryTable = props =>{
                         locale={{emptyText:isLoading?
                                 <SpinLoading type="table"/>:<EmptyText title={"没有查询到历史记录"}/>}}
                     />
-                    {
-                        page && page.total > 1 &&
-                        <Page
-                            pageCurrent={pageCurrent}
-                            changPage={changPage}
-                            page={page}
-                        />
-                    }
+                    <Page pageCurrent={pageCurrent} changPage={changPage} page={page}/>
                 </div>
             </div>
         </div>

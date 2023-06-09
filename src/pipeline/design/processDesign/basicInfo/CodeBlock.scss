@@ -55,24 +55,8 @@
     z-index: 1000 !important;
 }
 
-.mirror-expand{
-    .mirror-expand-up{
-        padding: 20px 20px 15px;
-        display: flex;
-        justify-content: space-between;
-        .up-title{
-            font-weight: var(--tiklab-font-weight-bold);
-        }
-    }
-    .mirror-expand-close{
-        cursor: pointer;
-    }
-    .mirror-expand-content{
-        padding: 0 20px;
-        .CodeMirror{
-            .CodeMirror-placeholder,.CodeMirror-code{
-                font-family: Microsoft YaHei, serif;
-            }
-        }
+.mirror-expand .CodeMirror{
+    .CodeMirror-placeholder,.CodeMirror-code{
+        font-family: Microsoft YaHei, serif;
     }
 }

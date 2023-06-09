@@ -47,10 +47,9 @@ const Postprocess = props =>{
 
     /**
      * 编辑后置处理
-     * @param text
      * @param record
      */
-    const editPostprocess = (text,record) =>{
+    const editPostprocess = record =>{
         findOnePost(record.postprocessId).then(res=>{
             if(res.code===0){
                 setFormValue(res.data && res.data)
@@ -61,10 +60,9 @@ const Postprocess = props =>{
 
     /**
      * 删除后置处理
-     * @param text
      * @param record
      */
-    const delPostprocess = (text,record) => {
+    const delPostprocess = record => {
         deletePost(record.postprocessId).then(res=>{
             res.code===0 && message.info("删除成功",0.5)
         })
@@ -75,16 +73,17 @@ const Postprocess = props =>{
             title: "类型",
             dataIndex: "taskType",
             key: "taskType",
+            width:"90%",
             render:(text,record)=> <TaskTitleIcon type={text}/>
         },
         {
             title: "操作",
             dataIndex: "action",
             key: "action",
-            render:(text,record) => {
+            render:(_,record) => {
                 return  <Listaction
-                            edit={()=>editPostprocess(text,record)}
-                            del={()=>delPostprocess(text,record)}
+                            edit={()=>editPostprocess(record)}
+                            del={()=>delPostprocess(record)}
                         />
             }
         },

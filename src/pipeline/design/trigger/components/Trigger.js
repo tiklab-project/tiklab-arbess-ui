@@ -39,20 +39,18 @@ const Trigger = props =>{
 
     /**
      * 编辑触发器
-     * @param text
      * @param record
      */
-    const editTrigger = (text,record) => {
+    const editTrigger = record => {
         setFormValue(record)
         setTriggerVisible(true)
     }
 
     /**
      * 删除触发器
-     * @param text
      * @param record
      */
-    const delTrigger = (text,record) => {
+    const delTrigger = record => {
         deleteTrigger(record.triggerId)
     }
 
@@ -66,23 +64,16 @@ const Trigger = props =>{
             title: "执行方式",
             dataIndex: "taskType",
             key: "taskType",
-            render:(text,record)=>{
-                switch (text) {
-                    case 1:
-                        return "单次触发"
-                    case 2:
-                        return "周期触发"
-                }
-            }
+            render:text => text===1?"单次触发":"周期触发"
         },
         {
             title: "操作",
             dataIndex: "action",
             key: "action",
-            render:(text,record) =>(
+            render:(_,record) =>(
                 <Listaction
-                    edit={()=>editTrigger(text,record)}
-                    del={()=>delTrigger(text,record)}
+                    edit={()=>editTrigger(record)}
+                    del={()=>delTrigger(record)}
                 />
             )
         },

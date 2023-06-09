@@ -1,13 +1,12 @@
 import React,{useState,useEffect,useRef} from "react";
-import {Modal, Form, Select, Checkbox, Table, Space, Tooltip, message} from "antd";
+import {Form, Select, Checkbox, Table, Space, Tooltip, message} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../../../common/btn/Btn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
-import ModalTitle from "../../../../common/modalTitle/ModalTitle";
+import Modals from "../../../../common/modal/Modal";
 import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
 import Profile from "../../../../common/profile/Profile";
-import {autoHeight} from "../../../../common/client/Client";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 
 const PostprocessAdd = props =>{
@@ -20,7 +19,6 @@ const PostprocessAdd = props =>{
     const [form] = Form.useForm()
     const userId = getUser().userId
     const mirrorRefs = useRef(null)
-    const [height,setHeight] = useState(0)
 
     // 后置处理类型
     const [postprocessType,setPostprocessType] = useState('message')
@@ -30,17 +28,6 @@ const PostprocessAdd = props =>{
 
     // 选中的通知人员
     const [yUserList,setYUserList] = useState([])
-
-    useEffect(()=>{
-        setHeight(autoHeight())
-        return ()=>{
-            window.onresize = null
-        }
-    },[height])
-
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
 
     useEffect(()=>{
         if(postprocessVisible){
@@ -230,78 +217,71 @@ const PostprocessAdd = props =>{
     ]
 
     return(
-        <Modal
+        <Modals
             closable={false}
             visible={postprocessVisible}
             onCancel={()=>setPostprocessVisible(false)}
             footer={modalFooter}
             destroyOnClose={true}
             width={800}
-            style={{height:height,top:60}}
-            bodyStyle={{padding:0}}
-            className="mf"
+            title={formValue?"修改":"添加"}
         >
             <div className="postprocess-modal">
-                <div className="postprocess-modal-up">
-                    <ModalTitle setVisible={setPostprocessVisible} title={formValue===""?"添加后置处理":"修改后置处理"}/>
-                </div>
-                <div className="postprocess-modal-content">
-                    <Form form={form} layout={"vertical"} initialValues={{taskType:'message',typeList:["site"]}}>
-                        <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"请选择类型"}]}>
-                            <Select onChange={value=>setPostprocessType(value)} disabled={formValue && formValue}>
-                                <Select.Option value={'message'}>消息通知</Select.Option>
-                                <Select.Option value={'bat'}>执行bat脚本</Select.Option>
-                                <Select.Option value={'shell'}>执行Shell脚本</Select.Option>
-                            </Select>
-                        </Form.Item>
-                        {
-                            postprocessType==='message' &&
-                            <>
-                                <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"请选择消息发送方式"}]}>
-                                    <Checkbox.Group>
-                                        {
-                                            typeList.map(item=>(
-                                                <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
-                                                    <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
-                                                </Tooltip>
-                                            ))
-                                        }
-                                    </Checkbox.Group>
-                                </Form.Item>
-                                <div className="post-pose-user">
-                                    <div className="post-pose-title">
-                                        <div className="title-user">消息通知人员</div>
-                                        <PostprocessUserAdd
-                                            pipelineStore={pipelineStore}
-                                            yUserList={yUserList}
-                                            setYUserList={setYUserList}
-                                        />
-                                    </div>
-                                    <Table
-                                        bordered={false}
-                                        columns={columns}
-                                        dataSource={yUserList}
-                                        rowKey={(record) => record.user.id}
-                                        pagination={false}
-                                        locale={{emptyText:<EmptyText/>}}
+                <Form form={form} layout={"vertical"} initialValues={{taskType:'message',typeList:["site"]}}>
+                    <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"请选择类型"}]}>
+                        <Select onChange={value=>setPostprocessType(value)} disabled={formValue && formValue}>
+                            <Select.Option value={'message'}>消息通知</Select.Option>
+                            <Select.Option value={'bat'}>执行bat脚本</Select.Option>
+                            <Select.Option value={'shell'}>执行Shell脚本</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    {
+                        postprocessType==='message' &&
+                        <>
+                            <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"请选择消息发送方式"}]}>
+                                <Checkbox.Group>
+                                    {
+                                        typeList.map(item=>(
+                                            <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
+                                                <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                            </Tooltip>
+                                        ))
+                                    }
+                                </Checkbox.Group>
+                            </Form.Item>
+                            <div className="post-pose-user">
+                                <div className="post-pose-title">
+                                    <div className="title-user">消息通知人员</div>
+                                    <PostprocessUserAdd
+                                        pipelineStore={pipelineStore}
+                                        yUserList={yUserList}
+                                        setYUserList={setYUserList}
                                     />
                                 </div>
-                            </>
-                        }
-                        {
-                            (postprocessType==='bat' || postprocessType==='shell') &&
-                            <PostprocessMirrorScenario
-                                value={formValue?formValue.task.values.scriptOrder:""}
-                                mirrorRefs={mirrorRefs}
-                                styleActiveLine={styleActiveLine}
-                                onFocus={onFocus}
-                                type={postprocessType}
-                            />
-                        }
-                    </Form>
-                </div>
+                                <Table
+                                    bordered={false}
+                                    columns={columns}
+                                    dataSource={yUserList}
+                                    rowKey={(record) => record.user.id}
+                                    pagination={false}
+                                    locale={{emptyText:<EmptyText/>}}
+                                />
+                            </div>
+                        </>
+                    }
+                    {
+                        (postprocessType==='bat' || postprocessType==='shell') &&
+                        <PostprocessMirrorScenario
+                            value={formValue?formValue.task.values.scriptOrder:""}
+                            mirrorRefs={mirrorRefs}
+                            styleActiveLine={styleActiveLine}
+                            onFocus={onFocus}
+                            type={postprocessType}
+                        />
+                    }
+                </Form>
             </div>
-        </Modal>
+        </Modals>
     )
 }
 

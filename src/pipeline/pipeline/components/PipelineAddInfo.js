@@ -11,7 +11,7 @@ import PipelineUserAdd from "./PipelineUserAdd";
 import "./PipelineAddInfo.scss";
 
 /**
- * 添加流水线，完善信息
+ * 流水线信息，添加 | 更改
  * @param props
  * @returns {JSX.Element}
  * @constructor
@@ -20,7 +20,7 @@ const PipelineAddInfo = props =>{
 
     const {set,pipelineStore,setCurrent,onClick,setBaseInfo} = props
 
-    const {pipeline,pipelineList,findUserPage,updatePipeline,findUserPipeline} = pipelineStore
+    const {pipeline,pipelineList,findUserPage,updatePipeline} = pipelineStore
 
     const [form] = Form.useForm()
     const userId = getUser().userId
@@ -41,18 +41,16 @@ const PipelineAddInfo = props =>{
     const [visible,setVisible] = useState(false)
 
     useEffect(()=>{
-        if(set && pipeline){
+        if(set){
             // 初始化权限
             setPowerType(pipeline.power)
             // 初始化表单
             form.setFieldsValue({name:pipeline.name})
         }
-    },[pipeline])
+    },[])
 
     useEffect(()=>{
         if(!set){
-            // 获取流水线
-            findUserPipeline()
             // 获取用户
             findUserPage({
                 pageParam:{
@@ -136,24 +134,6 @@ const PipelineAddInfo = props =>{
             desc: "只有您授予访问权限的人才能查看此项目。"
         }
     ]
-
-    const renderType = (
-        <div className="pipeline-add-type">
-            <div className="pipeline-type-title">流水线类型</div>
-            <div className="pipeline-type-ul">
-                <div
-                    onClick={()=>setType(1)}
-                    className={`${type===1?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
-                >多任务
-                </div>
-                <div
-                    onClick={()=>setType(2)}
-                    className={`${type===2?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
-                >多阶段
-                </div>
-            </div>
-        </div>
-    )
 
     // 权限
     const renderPowerType = (
@@ -284,10 +264,9 @@ const PipelineAddInfo = props =>{
         let rule
         if(set){
             rule = [
-                {max:30,message:"请输入1~31位以内的名称"},
                 {
-                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
-                    message: "流水线名称不能包含非法字符，如&,%，&，#……等",
+                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,30}$/,
+                    message: "流水线名称最长30位且不能包含非法字符，如&,%，&，#……等",
                 },
                 ({ getFieldValue }) => ({
                     validator(rule, value) {
@@ -308,10 +287,9 @@ const PipelineAddInfo = props =>{
         if(!set){
             rule = [
                 {required:true,message:"名称不能为空"},
-                {max:30,message:"请输入1~31位以内的名称"},
                 {
-                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,}$/,
-                    message: "流水线名称不能包含非法字符，如&,%，&，#……等",
+                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,30}$/,
+                    message: "流水线名称最长30位且不能包含非法字符，如&,%，&，#……等",
                 },
                 ({ getFieldValue }) => ({
                     validator(rule,value) {
@@ -324,7 +302,6 @@ const PipelineAddInfo = props =>{
                         }
                         return Promise.resolve()
                     },
-
                 }),
             ]
         }
@@ -365,7 +342,21 @@ const PipelineAddInfo = props =>{
                     <Input allowClear style={set? {width:612}: {background:"#fff"}}/>
                 </Form.Item>
             </Form>
-            { renderType }
+            <div className="pipeline-add-type">
+                <div className="pipeline-type-title">流水线类型</div>
+                <div className="pipeline-type-ul">
+                    <div
+                        onClick={()=>setType(1)}
+                        className={`${type===1?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
+                    >多任务
+                    </div>
+                    <div
+                        onClick={()=>setType(2)}
+                        className={`${type===2?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
+                    >多阶段
+                    </div>
+                </div>
+            </div>
             { renderPowerType }
             { powerType === 2 && renderUser() }
             <Btn

@@ -6,11 +6,11 @@ export class XCodeStore {
 
     // 仓库
     @observable
-    storehouseList = []
+    xcodeRpy = []
 
     // 分支
     @observable
-    branchList = []
+    xcodeBranch = []
 
     /**
      * 获取xcode仓库
@@ -18,15 +18,15 @@ export class XCodeStore {
      * @returns {Promise<void>}
      */
     @action
-    findAllRepository = async value =>{
+    findXcodeRpy = async value =>{
         const params = new FormData()
         params.append("authId",value)
         const data = await Axios.post("/xcodeAuthorize/findAllRepository",params)
         if(data.code===0){
-            this.storehouseList = data.data || []
+            this.xcodeRpy = data.data || []
         }else {
-            message.info(data.msg,0.5)
-            this.storehouseList = []
+            message.info(data.msg)
+            this.xcodeRpy = []
         }
     }
 
@@ -36,17 +36,17 @@ export class XCodeStore {
      * @returns {Promise<void>}
      */
     @action
-    findAllBranch = async value =>{
+    findXcodeBranch = async value =>{
         const params = new FormData()
         params.append("authId",value.authId )
-        params.append("rpyName",value.rpyName)
+        params.append("rpyId",value.rpyId)
         const data =  await Axios.post("/xcodeAuthorize/findAllBranch",params)
         if(data.code===0){
-            this.branchList = data.data || []
+            this.xcodeBranch = data.data || []
         }
         else {
-            message.info(data.msg,0.5)
-            this.branchList = []
+            message.info(data.msg)
+            this.xcodeBranch = []
         }
     }
 

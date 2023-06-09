@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react";
-import {Modal,Form,Select,Input} from "antd";
-import ModalTitle from "../../../common/modalTitle/ModalTitle";
-import {autoHeight,Validation} from "../../../common/client/Client";
+import {Form,Select,Input} from "antd";
+import {Validation} from "../../../common/client/Client";
 import Btn from "../../../common/btn/Btn";
+import Modals from "../../../common/modal/Modal";
 
 const lis = [
     {
@@ -29,18 +29,6 @@ const EnviModal = props =>{
 
     const [form] = Form.useForm()
     const [scmType,setScmType] = useState(1)
-    const [height,setHeight] = useState(0)
-
-    useEffect(()=>{
-        setHeight(autoHeight())
-        return ()=>{
-            window.onresize = null
-        }
-    },[height])
-
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
 
     useEffect(()=>{
         if(visible){
@@ -106,54 +94,47 @@ const EnviModal = props =>{
     )
 
     return(
-        <Modal
+        <Modals
             visible={visible}
             onCancel={()=>setVisible(false)}
             closable={false}
             footer={modalFooter}
-            style={{height:height,top:60}}
-            bodyStyle={{padding:0}}
-            className="mf"
+            title={formValue?"修改":"添加"}
         >
-           <div className="resources-modal">
-                <div className="resources-modal-up">
-                    <ModalTitle setVisible={setVisible} title={formValue? "修改环境配置":"添加环境配置"}/>
-                </div>
-                <div className="resources-modal-content">
-                    <Form form={form} layout="vertical" name="userForm" autoComplete="off">
-                        <Form.Item name="scmType" label="环境配置类型" rules={[{required:true,message:`请选择环境配置类型`}]}>
-                            <Select onChange={changScmType} disabled={formValue && formValue}>
-                                {
-                                    lis.map(item=>(
-                                        <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
-                                            {scmTitle(item.scmType)}
-                                        </Select.Option>
-                                    ))
-                                }
-                            </Select>
-                        </Form.Item>
-                        <Form.Item
-                            label="名称"
-                            name="scmName"
-                            rules={[
-                                {required:true,message:`请输入${scmTitle(scmType)}名称`},
-                                Validation(scmTitle(scmType)+"名称")
-                            ]}
-                        ><Input/>
-                        </Form.Item>
-                        <Form.Item
-                            label="地址"
-                            name="scmAddress"
-                            rules={[
-                                {required:true,message:`请输入${scmTitle(scmType)}地址`},
-                                Validation(scmTitle(scmType)+"地址")
-                            ]}
-                        ><Input/>
-                        </Form.Item>
-                    </Form>
-                </div>
-           </div>
-        </Modal>
+            <div className="resources-modal">
+                <Form form={form} layout="vertical" name="userForm" autoComplete="off">
+                    <Form.Item name="scmType" label="环境配置类型" rules={[{required:true,message:`请选择环境配置类型`}]}>
+                        <Select onChange={changScmType} disabled={formValue && formValue}>
+                            {
+                                lis.map(item=>(
+                                    <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
+                                        {scmTitle(item.scmType)}
+                                    </Select.Option>
+                                ))
+                            }
+                        </Select>
+                    </Form.Item>
+                    <Form.Item
+                        label="名称"
+                        name="scmName"
+                        rules={[
+                            {required:true,message:`请输入${scmTitle(scmType)}名称`},
+                            Validation(scmTitle(scmType)+"名称")
+                        ]}
+                    ><Input/>
+                    </Form.Item>
+                    <Form.Item
+                        label="地址"
+                        name="scmAddress"
+                        rules={[
+                            {required:true,message:`请输入${scmTitle(scmType)}地址`},
+                            Validation(scmTitle(scmType)+"地址")
+                        ]}
+                    ><Input/>
+                    </Form.Item>
+                </Form>
+            </div>
+        </Modals>
     )
 }
 

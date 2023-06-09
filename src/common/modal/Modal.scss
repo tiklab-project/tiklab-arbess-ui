@@ -1,0 +1,18 @@
+.mf-modal{
+    .mf-modal-up{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+        &>div:first-child{
+            font-size: 15px;
+            font-weight: var(--tiklab-font-weight-bold);
+        }
+    }
+    .mf-modal-content{
+        padding: 0 var(--tiklab-padding);
+        max-height:calc(100% - 120px);
+        overflow:auto;
+    }
+}

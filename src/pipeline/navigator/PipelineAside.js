@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
-import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined} from "@ant-design/icons";
+import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined,ExperimentOutlined} from "@ant-design/icons";
 import {Loading} from "../../common/loading/Loading";
 import Aside from "../../common/aside/Aside";
 
@@ -16,7 +16,7 @@ const PipelineAside= (props)=>{
 
     const {match,pipelineStore,systemRoleStore}=props
 
-    const {findUserPipeline,findOnePipeline,updateOpen,pipelineList,pipeline,setPipeline} = pipelineStore
+    const {findOnePipeline,updateOpen,pipelineList,pipeline,setPipeline} = pipelineStore
 
     const {getInitProjectPermissions} = systemRoleStore
 
@@ -25,8 +25,6 @@ const PipelineAside= (props)=>{
     const [isAside,setIsAside] = useState(true)
 
     useEffect(()=>{
-        // 获取流水线
-        findUserPipeline()
         // 组件销毁清空流水线信息
         return setPipeline("")
     },[])
@@ -65,6 +63,12 @@ const PipelineAside= (props)=>{
             title: "历史",
             icon: <ClockCircleOutlined />,
             key:"4",
+        },
+        {
+            id:`/index/pipeline/${pipelineId}/test`,
+            title: "测试",
+            icon: <ExperimentOutlined />,
+            key:"5",
         },
     ]
 

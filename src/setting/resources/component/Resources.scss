@@ -1,0 +1,28 @@
+.resources{
+    .resources-info-version{
+        margin: 10px 0;
+        font-size: 13px;
+        font-weight: var(--tiklab-font-weight-bold);
+    }
+    .resources-info-item{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 8px;
+        .resources-item-title,.resources-item-total{
+            width: 75px;
+        }
+        .resources-item-total,.resources-item-residue{
+            font-size: 13px;
+            color: #999;
+        }
+        .resources-item-progress{
+            flex: 1;
+            margin: 0 10px;
+        }
+        .resources-item-residue{
+            text-align: right;
+            width: 60px;
+        }
+    }
+}

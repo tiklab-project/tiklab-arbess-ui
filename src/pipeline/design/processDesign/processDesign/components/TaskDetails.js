@@ -20,16 +20,15 @@ const TaskDetails = props =>{
 
     const {taskFormDrawer,setTaskFormDrawer,taskStore,stageStore} = props
 
-    const {dataItem} = taskStore
+    const {dataItem,findOneTasksOrTask} = taskStore
     const {updateStageName} = stageStore
 
     // 标签类型
     const [handleType,setHandleType] = useState(1)
 
     useEffect(()=>{
-        return ()=>{
-            setHandleType(1)
-        }
+        // if(taskFormDrawer && dataItem.taskId) findOneTasksOrTask(dataItem.taskId)
+        return ()=> setHandleType(1)
     },[taskFormDrawer])
 
     const lis = [
@@ -59,6 +58,37 @@ const TaskDetails = props =>{
         setHandleType(item.id)
     }
 
+    /**
+     * 编辑类型
+     * @returns {string}
+     */
+    const titleType = () => {
+        switch (dataItem?.taskType) {
+            case 'git':
+            case 'gitlab':
+            case 'svn':
+            case 'xcode':
+            case 'gitee':
+            case 'github':
+                return '源码'
+            case 'sonar':
+                return '代码扫描'
+            case 'maventest':
+            case 'teston':
+                return '测试'
+            case 'maven':
+            case 'nodejs':
+                return '构建'
+            case 'nexus':
+            case 'ssh':
+            case 'xpack':
+                return '推送制品'
+            case 'liunx':
+            case 'docker':
+                return '部署'
+        }
+    }
+
     return(
         <Drawer
             placement="right"
@@ -73,7 +103,7 @@ const TaskDetails = props =>{
             className="mf task-details"
         >
             <div className="task-details-up">
-                <div className="wrapper-head-title">编辑</div>
+                <div className="wrapper-head-title">编辑{titleType()}</div>
                 <Btn onClick={()=>setTaskFormDrawer(false)} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-details-bottom">

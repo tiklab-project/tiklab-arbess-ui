@@ -28,14 +28,14 @@ const App = ({allStore,routes}) => {
         })
     }, [])
 
-    if (visible) return <div>加载。。。</div>
+    if (visible) return <div>加载中</div>
 
     return (
         <PluginProvider store={initPluginData}>
             <Provider {...allStore}>
                 <ConfigProvider locale={zhCN}>
                     <HashRouter >
-                        {renderRoutes(initPluginData.routes)}
+                        { renderRoutes(initPluginData.routes) }
                     </HashRouter>
                 </ConfigProvider>
             </Provider>

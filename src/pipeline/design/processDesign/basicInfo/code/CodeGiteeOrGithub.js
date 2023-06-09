@@ -82,7 +82,7 @@ const CodeGiteeOrGithub = props =>{
     return(
         <>
             <AuthFind/>
-            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"请选择仓库"}]}>
+            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
                 <FormsSelect
                     label="仓库"
                     isSpin={isSpin}

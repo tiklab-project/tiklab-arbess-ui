@@ -22,17 +22,26 @@
         .body-taskForm{
             width: 100%;
             padding: 0 20px;
-            .input-hover:hover{
-                background-color: #f2f2f2 !important;
-            }
-            .input-hover .ant-select-selector:hover{
-                background-color: #f2f2f2 !important;
-            }
-            .ant-input,.ant-select .ant-select-selector{
+            .input-hover,.input-hover .ant-select-selector{
                 border-color: #efeded;
             }
-            .ant-input:focus{
-                border-color: #40a9ff;
+            .ant-form-item-has-error .ant-input{
+                background-color: #fff;
+                border-color: #ff4d4f;
+            }
+            .ant-form-item-has-error .ant-input:focus{
+                border-color: #ff7875;
+            }
+            .ant-form-item-has-success .input-hover:hover{
+                background-color: #f2f2f2;
+                border-color: transparent;
+            }
+            .ant-form-item-has-success .input-hover .ant-select-selector:hover{
+                background-color: #f2f2f2;
+                border-color: transparent;
+            }
+            .input-hover:hover{
+                background-color: #f2f2f2;
             }
         }
         .taskForm-forms{
@@ -53,31 +62,6 @@
             }
             .ant-input-group-addon{
                 width: 30px;
-            }
-            .ant-form-item-explain-error{
-                height: 20px;
-            }
-            .ant-form-item-explain{
-                font-size: 13px;
-            }
-            .ant-form-item-label{
-                min-width: 110px;
-                text-align: left;
-                &>label:after{
-                    display: none;
-                }
-                .ant-form-item-required:not(.ant-form-item-required-mark-optional):before{
-                    display: none;
-                }
-                .ant-form-item-required:not(.ant-form-item-required-mark-optional):after{
-                    display: inline-block;
-                    margin-right: 4px;
-                    color: #ff4d4f;
-                    font-size: 14px;
-                    font-family: SimSun,sans-serif;
-                    line-height: 1;
-                    content: "*";
-                }
             }
         }
     }

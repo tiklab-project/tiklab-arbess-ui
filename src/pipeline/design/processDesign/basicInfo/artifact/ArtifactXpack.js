@@ -16,7 +16,7 @@ const ArtifactXpack = props => {
     const {taskStore,xpackStore} = props
 
     const {updateTask,dataItem} = taskStore
-    const {findXPackPutAddress,xpackPutAddress} = xpackStore
+    const {findXPackRpy,xpackRpy} = xpackStore
 
     // 聚焦状态
     const [border,setBorder] = useState(false)
@@ -30,7 +30,7 @@ const ArtifactXpack = props => {
     const onFocus = () =>{
         setBorder(true)
         setSpin(true)
-        findXPackPutAddress(dataItem.task?.authId).then(r=>setSpin(false))
+        findXPackRpy(dataItem.task?.authId).then(r=>setSpin(false))
     }
 
     /**
@@ -40,14 +40,14 @@ const ArtifactXpack = props => {
     const onChange = value => {
         updateTask({
             taskId:dataItem.taskId,
-            values:{putAddress:value}
+            values:{repository: {id:value}}
         })
     }
 
     return(
         <>
             <AuthFind/>
-            <Form.Item name={dataItem.taskId+"_putAddress"} label={"推送位置"}>
+            <Form.Item name={dataItem.taskId+"_putAddress"} label={"制品库"} rules={[{required:true, message:"制品库不能为空"}]}>
                 <FormsSelect
                     label={'推送位置'}
                     border={border}
@@ -57,8 +57,8 @@ const ArtifactXpack = props => {
                     onChange={onChange}
                 >
                     {
-                        xpackPutAddress && xpackPutAddress.map(item=>{
-                            return <Select.Option value={item.name} key={item.id}>{item.name}</Select.Option>
+                        xpackRpy && xpackRpy.map(item=>{
+                            return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
                         })
                     }
                 </FormsSelect>

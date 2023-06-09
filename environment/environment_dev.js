@@ -1,38 +1,28 @@
 const api =  "http://192.168.10.21:8089";
 const base_url = JSON.stringify(api);
 
-const url = "http://127.0.0.1:3004";
-const plugin_base_url = JSON.stringify(url);
-
-let pluginAddressUrl = `/pluginConfig/getPluginConfig`;
-pluginAddressUrl = JSON.stringify(pluginAddressUrl);
-
-// 判断是否是用户环境， 如果是用户环境收到切换为true， 如果是内部公司手动切换为false
-const userProduction = false; // 权限
-
-const devProduction = true; // 基础数据
-
-let fetchMethod = "post"
-fetchMethod = JSON.stringify(fetchMethod);
-
-let env = "dev";
-env = JSON.stringify(env)
-
-const appKey = JSON.stringify("");
-const appSecret = JSON.stringify("");
-const version = JSON.stringify("ce");
-const client = JSON.stringify("web");
-
 const webpackGlobal = {
-    base_url,
-    userProduction,
-    plugin_base_url,
-    pluginAddressUrl,
-    fetchMethod,
-    appKey,
-    appSecret,
-    version,
-    client,
-    devProduction,
+    // 判断是否是用户环境， 如果是用户环境收到切换为true， 如果是内部公司手动切换为false
+    userProduction: true,
+    base_url: base_url,
+    plugin_base_url : base_url,
+
+    // 这个不是固定的
+    plugin_url: JSON.stringify( `/pluginConfig/getPluginConfig`),
+    method:JSON.stringify('post'),
+
+    appKey: JSON.stringify('appKey-1'),
+    appSecret: JSON.stringify('appSecret-1'),
+    version: JSON.stringify('ce'),
+    client: JSON.stringify('web'),
+
+    tenant_type: JSON.stringify('single'), // mult  参数带tenant
+
+    acc_url: JSON.stringify(''),
+    mobile: JSON.stringify(''),
+    devProduction: true
 }
-module.exports = {webpackGlobal}
+
+module.exports =  {
+    webpackGlobal,
+}

@@ -27,20 +27,18 @@ const Auth = props =>{
 
     /**
      * 编辑认证配置
-     * @param text
      * @param record
      */
-    const editAuth = (text,record) => {
+    const editAuth = record => {
         setModalVisible(true)
         setFormValue(record)
     }
 
     /**
      * 删除认证配置
-     * @param text
      * @param record
      */
-    const delAuth = (text,record) => {
+    const delAuth = record => {
         deleteAuth(record.authId)
     }
 
@@ -116,20 +114,20 @@ const Auth = props =>{
             ellipsis:true,
             render:(text,record) => {
                 return  <Listaction
-                            edit={()=>editAuth(text,record)}
-                            del={()=>delAuth(text,record)}
+                            edit={()=>editAuth(record)}
+                            del={()=>delAuth(record)}
                         />
             }
         }
     ]
 
     return(
-        <div className="resources mf-home-limited mf">
-            <div className="resources-upper">
+        <div className="auth mf-home-limited mf">
+            <div className="auth-upper">
                 <BreadcrumbContent firstItem={"认证配置"}/>
                 <AuthAddBtn/>
             </div>
-            <div className="resources-content">
+            <div className="auth-content">
                 <Table
                     columns={commonColumns}
                     dataSource={authList}

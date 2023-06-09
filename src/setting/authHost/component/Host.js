@@ -39,20 +39,18 @@ const Host = props =>{
 
     /**
      * 编辑主机配置
-     * @param text
      * @param record
      */
-    const editHost = (text,record) => {
+    const editHost = record => {
         setModalVisible(true)
         setFormValue(record)
     }
 
     /**
      * 删除主机配置
-     * @param text
      * @param record
      */
-    const delHost = (text,record) =>{
+    const delHost = record =>{
         deleteAuthHost(record.hostId)
     }
 
@@ -161,16 +159,16 @@ const Host = props =>{
             ellipsis:true,
             render:(text,record) => {
                 return  <Listaction
-                            edit={()=>editHost(text,record)}
-                            del={()=>delHost(text,record)}
+                            edit={()=>editHost(record)}
+                            del={()=>delHost(record)}
                         />
             }
         }
     ]
 
     return(
-        <div className="resources mf-home-limited mf">
-            <div className="resources-upper">
+        <div className="auth mf-home-limited mf">
+            <div className="auth-upper">
                 <BreadcrumbContent firstItem={"主机配置"} />
                 <HostAddBtn/>
             </div>
@@ -179,7 +177,7 @@ const Host = props =>{
                 type={activeTab}
                 onClick={clickTab}
             />
-            <div className="resources-content">
+            <div className="auth-content">
                 <Table
                     columns={column}
                     dataSource={hostList}

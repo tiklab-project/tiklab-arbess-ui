@@ -79,6 +79,12 @@ const Setting = props =>{
             purviewCode:"pipeline_env",
         },
         {
+            id:"/index/system/resources",
+            title:"资源占用",
+            icon:<FileProtectOutlined />,
+            purviewCode:"pipeline_resources",
+        },
+        {
             id:"/index/system/plugin",
             title:"插件",
             icon:<MergeCellsOutlined />,

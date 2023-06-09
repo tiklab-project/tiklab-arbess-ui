@@ -30,6 +30,7 @@ const  Head = props =>{
     const {homePageStore,pipelineStore} = props
 
     const {findMessageItemPage,unread} = homePageStore
+    const {findUserPipeline,pipelineList} = pipelineStore
 
     let path = props.location.pathname
     const {i18n,t} = useTranslation()
@@ -39,6 +40,9 @@ const  Head = props =>{
     useEffect(()=>{
         // 获取未读消息通知
         findMessageItemPage(0)
+
+        // 获取所有流水线
+        findUserPipeline()
     },[])
 
     useEffect(()=>{
@@ -58,11 +62,6 @@ const  Head = props =>{
             to:"/index/pipeline",
             title: "pipeline",
         },
-        {
-            key:"history",
-            to:"/index/history",
-            title:"history",
-        }
     ]
 
     /**
@@ -219,8 +218,8 @@ const  Head = props =>{
                 {...props}
                 visible={visible}
                 setVisible={setVisible}
+                pipelineList={pipelineList}
                 homePageStore={homePageStore}
-                pipelineStore={pipelineStore}
             />
 
         </div>

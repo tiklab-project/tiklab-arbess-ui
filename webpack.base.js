@@ -8,6 +8,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
+
 const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
         isDevelopment && "style-loader",

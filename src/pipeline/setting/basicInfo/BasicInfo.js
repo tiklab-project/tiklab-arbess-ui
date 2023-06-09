@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+    import React,{useState,useEffect} from "react";
 import {Modal} from "antd";
 import {
     ExclamationCircleOutlined,
@@ -13,7 +13,7 @@ import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
 import {Loading} from "../../../common/loading/Loading";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import Btn from "../../../common/btn/Btn";
-import "./PipelineBasicInfo.scss";
+import "./BasicInfo.scss";
 
 /**
  * 流水线信息
@@ -21,7 +21,7 @@ import "./PipelineBasicInfo.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const PipelineBasicInfo = props =>{
+const BasicInfo = props =>{
 
     const {pipelineStore} = props
 
@@ -161,4 +161,4 @@ const PipelineBasicInfo = props =>{
     )
 }
 
-export default inject("pipelineStore")(observer(PipelineBasicInfo))
+export default inject("pipelineStore")(observer(BasicInfo))

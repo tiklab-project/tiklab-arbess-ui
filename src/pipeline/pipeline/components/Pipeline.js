@@ -25,6 +25,8 @@ const Pipeline = props =>{
 
     const [fresh,setFresh] = useState(false)
 
+    const [isLoading,setIsLoading] = useState(true)
+
     const [pageParam] = useState({
         pageSize:13,
         currentPage: 1,
@@ -36,25 +38,14 @@ const Pipeline = props =>{
 
     useEffect(()=>{
         if(listType===1){
-            findUserPipelinePage(pipelineParam)
+            findUserPipelinePage(pipelineParam).then(r=>setIsLoading(false))
         }else {
             findUserPipelinePage({
                 ...pipelineParam,
                 pipelineFollow:1
-            })
+            }).then(r=>setIsLoading(false))
         }
     },[fresh,pipelineParam])
-
-    const lis = [
-        {
-            id:1,
-            title:"所有流水线",
-        },
-        {
-            id:2,
-            title:"我收藏的",
-        }
-    ]
 
     /**
      * 模糊查询流水线
@@ -111,7 +102,10 @@ const Pipeline = props =>{
                     <Btn onClick={onClick} type={"primary"} title={"新建流水线"} icon={<PlusOutlined/>}/>
                 </div>
                 <div className="pipeline-type">
-                    <Tabs type={listType} tabLis={lis} onClick={clickType}/>
+                    <Tabs type={listType} tabLis={[
+                        {id:1, title:"所有流水线"},
+                        {id:2, title:"我收藏的"}
+                    ]} onClick={clickType}/>
                     <div className="pipeline-type-input">
                         <Input
                             allowClear
@@ -125,6 +119,7 @@ const Pipeline = props =>{
                 <PipelineTable
                     {...props}
                     listType={listType}
+                    isLoading={isLoading}
                     changPage={changPage}
                     changFresh={changFresh}
                     pipelineStore={pipelineStore}

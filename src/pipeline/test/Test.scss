@@ -1,0 +1,44 @@
+.test{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: var(--mf-backdrop-color);
+    .test-table{
+        padding-top: var(--tiklab-padding-item);
+    }
+    .test-table-item{
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        &:not(:last-child){
+            margin-bottom: var(--tiklab-padding-item);
+        }
+        .test-item-name{
+            margin-right: 8px;
+            color: var(--tiklab-blue);
+            font-size: 18px;
+            width: 45%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .test-item-total,.test-item-passNum,.test-item-failNum,.test-item-passRate,.test-item-time{
+            &>div:first-child{
+                color: var(--tiklab-gray-500);
+                font-size: 13px;
+                margin-bottom: 5px;
+            }
+        }
+        .test-item-total,.test-item-passNum,.test-item-failNum,.test-item-passRate{
+            width: 10%;
+        }
+        .test-item-time{
+            width: 13%;
+        }
+        .test-item-action{
+            margin-left: 8px;
+        }
+    }
+}

@@ -7,7 +7,7 @@ export class XPackStore {
 
     // xpack推送地址
     @observable
-    xpackPutAddress = []
+    xpackRpy = []
 
     /**
      * 获取xpack推送位置
@@ -15,16 +15,16 @@ export class XPackStore {
      * @returns {Promise<void>}
      */
     @action
-    findXPackPutAddress = async value =>{
+    findXPackRpy = async value =>{
         const param = new FormData()
         param.append('authId',value)
         const data = await Axios.post('/xpackAuthorize/findAllRepository',param)
         if(data.code===0){
-            this.xpackPutAddress = data.data || []
+            this.xpackRpy = data.data || []
         }
         else {
             message.info(data.msg,0.5)
-            this.xpackPutAddress = []
+            this.xpackRpy = []
         }
     }
 

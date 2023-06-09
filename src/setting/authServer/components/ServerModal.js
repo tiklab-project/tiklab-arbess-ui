@@ -1,11 +1,12 @@
 import React,{useEffect,useState } from "react";
-import {Modal,Form,Input,Select,Tooltip,message,Space} from "antd";
+import {Form,Input,Select,Tooltip,message,Space} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import AuthType from "../../authCommon/AuthType";
 import {ServerLoading} from "../../../common/loading/Loading"
-import {autoHeight, Validation} from "../../../common/client/Client";
-import ModalTitle from "../../../common/modalTitle/ModalTitle";
+import {Validation} from "../../../common/client/Client";
 import Btn from "../../../common/btn/Btn";
+import Modals from "../../../common/modal/Modal";
+import Listaction from "../../../common/list/Listaction";
 
 
 /**
@@ -22,7 +23,6 @@ const ServerModal = props =>{
     const {findCode,findAccessToken,skin} = authorizeStore
 
     const [form] = Form.useForm()
-    const [height,setHeight] = useState(0)
 
     // 授权类型
     const [serverWay,setServerWay] = useState('gitee')
@@ -40,17 +40,6 @@ const ServerModal = props =>{
     const [callUrlWarn,setCallUrlWarn] = useState("")
 
     useEffect(()=>{
-        setHeight(autoHeight())
-        return ()=>{
-            window.onresize = null
-        }
-    },[height])
-
-    window.onresize=() =>{
-        setHeight(autoHeight())
-    }
-
-    useEffect(()=>{
         // 表单初始化
         visible && renderFormValue(formValue)
         return ()=> setInfos("")
@@ -62,7 +51,6 @@ const ServerModal = props =>{
             setServerWay(formValue.type)
             return
         }
-        form.resetFields()
         setServerWay(type)
         setCallUrlWarn("")
     }
@@ -172,8 +160,16 @@ const ServerModal = props =>{
             }else {
                 createAuthServer(values)
             }
-            setVisible(false)
+            onCancel()
         })
+    }
+
+    /**
+     * 关闭弹出框
+     */
+    const onCancel = () => {
+        setVisible(false)
+        form.resetFields()
     }
 
     /**
@@ -237,13 +233,25 @@ const ServerModal = props =>{
                    <Btn
                        title={"新建"}
                        icon={<PlusOutlined/>}
-                       onClick={addAuth ? ()=>goUrl():null}
+                       onClick={addAuth ? goUrl:null}
                        type={addAuth ? "link" : "link-disabled"}
                    />
                </div>
            </Space>
        </>
     )
+
+    /**
+     * 服务地址是否禁用
+     * @returns {boolean}
+     */
+    const serverAddressDisabled = () => {
+        const {type} = formValue
+        if(type==='xcode' || type==='xpack' || type==='teston'){
+            return version === 'cloud'
+        }
+        return false
+    }
 
     // 渲染sonar和nexus授权表单
     const server = (
@@ -256,9 +264,14 @@ const ServerModal = props =>{
                         </Tooltip>
                     </>}
                 name="serverAddress"
-                rules={[{required:true,message:"服务器地址不能空"}]}
-
-            ><Input/>
+                rules={[
+                    {required:true,message:"服务器地址不能空"},
+                    {
+                        pattern:/^(https?:\/\/)?[^\s\/]+(\.[^\s\/]+)+(\/[^\s\/]*)*[^\s\/\\.,。，、;:'"?!]$/,
+                        message:"请输入正确的服务地址"
+                    }
+                ]}
+            ><Input disabled={serverAddressDisabled()}/>
             </Form.Item>
             <AuthType/>
         </>
@@ -266,67 +279,70 @@ const ServerModal = props =>{
 
     const modalFooter = (
         <>
-            <Btn onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>
+            <Btn onClick={onCancel} title={"取消"} isMar={true}/>
             <Btn onClick={onOk} title={"确定"} type={"primary"}/>
         </>
     )
 
     return(
-        <Modal
+        <Modals
             visible={visible}
-            onCancel={()=>setVisible(false)}
+            onCancel={onCancel}
             closable={false}
             destroyOnClose={true}
             footer={modalFooter}
-            style={{height:height,top:60}}
-            bodyStyle={{padding:0}}
-            className="mf"
+            title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">
-                <div className="resources-modal-up">
-                    <ModalTitle setVisible={setVisible} title={formValue?"修改":"添加"}/>
-                </div>
-                <div className="resources-modal-content">
-                    <Form
-                        form={form}
-                        layout="vertical"
-                        autoComplete="off"
-                        onValuesChange={onValuesChange}
-                        initialValues={{type:serverWay,authPublic:1,authWay:1,authType:1}}
-                    >
-                        <Form.Item name="type" label="授权类型">
-                            <Select onChange={changeServerWay} disabled={formValue || isConfig}>
-                                <Select.Option value={'gitee'}>Gitee</Select.Option>
-                                <Select.Option value={'github'}>Github</Select.Option>
-                                <Select.Option value={'xcode'}>XCode</Select.Option>
-                                <Select.Option value={'teston'}>TestOn</Select.Option>
-                                <Select.Option value={'sonar'}>Sonar</Select.Option>
-                                <Select.Option value={'nexus'}>Nexus</Select.Option>
-                                <Select.Option value={'xpack'}>XPack</Select.Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item name="authPublic" label="服务权限">
-                            <Select>
-                                <Select.Option value={1}>全局</Select.Option>
-                                <Select.Option value={2}>私有</Select.Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item
-                            name="name"
-                            label="名称"
-                            rules={[{required:true,message:`名称不能空`},Validation("名称")]}
-                        ><Input/>
-                        </Form.Item>
+                <Form
+                    form={form}
+                    layout="vertical"
+                    autoComplete="off"
+                    onValuesChange={onValuesChange}
+                    initialValues={{type:type,authPublic:1,authWay:1,authType:1}}
+                >
+                    <Form.Item name="type" label="授权类型">
                         {
-                            (serverWay==='gitee' || serverWay==='github' ) ? authorize : server
+                            version==='ce'?
+                                <Select onChange={changeServerWay} disabled={formValue || isConfig}>
+                                    <Select.Option value={'gitee'}>Gitee</Select.Option>
+                                    <Select.Option value={'github'}>Github</Select.Option>
+                                    <Select.Option value={'xcode'}>XCode</Select.Option>
+                                    <Select.Option value={'teston'}>TestOn</Select.Option>
+                                    <Select.Option value={'sonar'}>Sonar</Select.Option>
+                                    <Select.Option value={'nexus'}>Nexus</Select.Option>
+                                    <Select.Option value={'xpack'}>XPack</Select.Option>
+                                </Select>
+                                :
+                                <Select onChange={changeServerWay} disabled={formValue || isConfig}>
+                                    <Select.Option value={'gitee'}>Gitee</Select.Option>
+                                    <Select.Option value={'github'}>Github</Select.Option>
+                                    <Select.Option value={'sonar'}>Sonar</Select.Option>
+                                    <Select.Option value={'nexus'}>Nexus</Select.Option>
+                                </Select>
                         }
-                    </Form>
-                </div>
+                    </Form.Item>
+                    <Form.Item name="authPublic" label="服务权限">
+                        <Select>
+                            <Select.Option value={1}>全局</Select.Option>
+                            <Select.Option value={2}>私有</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item
+                        name="name"
+                        label="名称"
+                        rules={[{required:true,message:`名称不能空`},Validation("名称")]}
+                    ><Input/>
+                    </Form.Item>
+                    {
+                        (serverWay==='gitee' || serverWay==='github' ) ? authorize : server
+                    }
+                </Form>
                 {
                     skin && <ServerLoading title={'授权中……'}/>
                 }
             </div>
-        </Modal>
+        </Modals>
     )
 }
 

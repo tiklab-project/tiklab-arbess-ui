@@ -24,12 +24,13 @@ const PipelineDyan=AsyncComponent(()=>import("./pipeline/overview/components/Dyn
 const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
-const PipelineBasic=AsyncComponent(()=>import("./pipeline/setting/basicInfo/PipelineBasicInfo"))
+const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
 const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const Dynamic=AsyncComponent(()=>import("./home/components/Dynamic"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
 const HistoryPipelineDetail=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipelineDetail"))
+const Test=AsyncComponent(()=>import("./pipeline/test/Test"))
 
 /**
  * 系统设置
@@ -40,6 +41,7 @@ const Host=AsyncComponent(()=>import("./setting/authHost/component/Host"))
 const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
 const Envi=AsyncComponent(()=>import("./setting/envi/components/Envi"))
 const Info=AsyncComponent(()=>import("./setting/envi/components/Info"))
+const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
 
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
@@ -52,10 +54,6 @@ const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice")
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
 
 // user
-const User=AsyncComponent(()=>import("./setting/user/User"))
-const Directory=AsyncComponent(()=>import("./setting/user/Directory"))
-const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
-const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
 const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
 const DomainRole=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
 const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
@@ -107,11 +105,6 @@ const routers=[
         path:"/index",
         component: Index,
         routes:[
-            {
-                path: "/index",
-                exact: true,
-                render:()=> <Redirect to={"/index/home"}/>,
-            },
             {
                 path: "/index/home",
                 component: HomePage,
@@ -176,26 +169,31 @@ const routers=[
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/assembly",
+                        path:"/index/pipeline/:id/test",
+                        component: Test,
+                        exact:true,
+                    },
+                    {
+                        path:"/index/pipeline/:id/set",
                         component: PipelineSetting,
                         routes:[
                             {
-                                path:"/index/pipeline/:id/assembly/role",
+                                path:"/index/pipeline/:id/set/role",
                                 component: DomainRole,
                                 exact: true,
                             },
                             {
-                                path:"/index/pipeline/:id/assembly/set",
-                                component: PipelineBasic,
+                                path:"/index/pipeline/:id/set/info",
+                                component: BasicInfo,
                                 exact: true,
                             },
                             {
-                                path:"/index/pipeline/:id/assembly/user",
+                                path:"/index/pipeline/:id/set/user",
                                 component: DomainUser,
                                 exact: true,
                             },
                             {
-                                path:"/index/pipeline/:id/assembly/*",
+                                path:"/index/pipeline/:id/set/*",
                                 render:()=><Redirect to={"/index/404"}/>,
                             }
                         ]
@@ -263,6 +261,11 @@ const routers=[
                     {
                         path:"/index/system/info",
                         component: Info,
+                        exact: true,
+                    },
+                    {
+                        path:"/index/system/resources",
+                        component: Resources,
                         exact: true,
                     },
                     {
@@ -355,7 +358,7 @@ const routers=[
     },
     {
         path:"/",
-        render:()=><Redirect to="/index"/>,
+        render:()=><Redirect to="/index/home"/>,
     },
     {
         path: "*",

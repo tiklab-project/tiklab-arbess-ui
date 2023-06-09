@@ -61,7 +61,7 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     /**
      * 确定更改
-     * @param ref
+     * @param ref：ref.current.editor.getValue()，获取值
      */
     const onOk = ref =>{
         const value = ref.current.editor.getValue()
@@ -80,7 +80,7 @@ const MirrorContent = forwardRef((props,ref)=>{
             <div className={`gui-mirror`} id={name+"_mirror"}>
                 <TaskMirror
                     mirrorRefs={mirrorRefs}
-                    mirrorValue={dataItem.task[name]}
+                    mirrorValue={dataItem.task?.[name]}
                     bordered={bordered}
                     onFocus={onFocus}
                     placeholder={placeholder}
@@ -99,8 +99,7 @@ const MirrorContent = forwardRef((props,ref)=>{
                 setVisible={setVisible}
                 expandValue={expandValue}
                 narrowRef={mirrorRefs}
-                dataItem={dataItem}
-                name={name}
+                initValue={dataItem.task?.[name]}
                 onOk={onOk}
             />
             {
