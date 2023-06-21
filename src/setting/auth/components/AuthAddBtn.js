@@ -1,5 +1,4 @@
 import React from "react";
-import {inject,observer} from "mobx-react";
 import {PlusOutlined} from "@ant-design/icons";
 import Btn from "../../../common/btn/Btn";
 import AuthModal from "./AuthModal";
@@ -12,45 +11,34 @@ import AuthModal from "./AuthModal";
  */
 const AuthAddBtn = props =>{
 
-    const {authStore,isConfig} = props
-
-    const {createAuth,modalVisible,setModalVisible,formValue,setFormValue,updateAuth} = authStore
+    const {isConfig,visible,setVisible,formValue,setFormValue,findAuth} = props
 
     /**
      * 添加认证
      */
     const addAuthBtn = () =>{
-        setFormValue("")
-        setModalVisible(true)
+        setVisible(true)
+        if(formValue){
+            setFormValue(null)
+        }
     }
 
     return(
         <>
-            {
-            isConfig ?
-                <Btn
-                    type={"row"}
-                    onClick={()=>addAuthBtn("config")}
-                    title={"添加认证"}
-                    icon={<PlusOutlined/>}
-                />
-                :
-                <Btn
-                    onClick={addAuthBtn}
-                    type={"primary"}
-                    title={"添加认证"}
-                    icon={<PlusOutlined/>}
-                />
-            }
+            <Btn
+                onClick={addAuthBtn}
+                type={isConfig?"row":"primary"}
+                title={"添加认证"}
+                icon={<PlusOutlined/>}
+            />
             <AuthModal
-                visible={modalVisible}
-                setVisible={setModalVisible}
-                createAuth={createAuth}
-                formValue={formValue}
-                updateAuth={updateAuth}
+                visible={visible}
+                setVisible={setVisible}
+                formValue={formValue || null}
+                findAuth={findAuth}
             />
         </>
     )
 }
 
-export default inject("authStore")(observer(AuthAddBtn))
+export default AuthAddBtn

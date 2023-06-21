@@ -1,42 +1,8 @@
-import {action,observable} from "mobx";
+import {action} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class HostStore {
-
-    // 刷新
-    @observable
-    hostFresh = false
-
-    // 主机添加编辑弹出框状态
-    @observable
-    modalVisible = false
-
-    // 主机添加编辑弹出框的表单值
-    @observable
-    formValue = ""
-
-    // 主机配置数据
-    @observable
-    hostList = []
-
-    /**
-     * 设置主机添加编辑弹出框状态
-     * @param value
-     */
-    @action
-    setModalVisible = value =>{
-        this.modalVisible = value
-    }
-
-    /**
-     * 设置主机添加编辑弹出框的表单值
-     * @param value
-     */
-    @action
-    setFormValue = value =>{
-        this.formValue = value
-    }
+class HostStore {
 
     /**
      * 添加主机配置
@@ -47,7 +13,6 @@ export class HostStore {
     createAuthHost = async value =>{
         const data = await Axios.post("/authHost/createAuthHost",value)
         if(data.code===0){
-            this.hostFresh=!this.hostFresh
             message.info(`添加成功`)
         }
         else {
@@ -65,11 +30,7 @@ export class HostStore {
     findAllAuthHostList = async value =>{
         const param = new FormData()
         param.append("type",value)
-        const data = await Axios.post("/authHost/findAllAuthHostList",param)
-        if(data.code===0 && data.data){
-            this.hostList = data.data
-        }
-        return data
+        return await Axios.post("/authHost/findAllAuthHostList", param)
     }
 
     /**
@@ -83,7 +44,6 @@ export class HostStore {
         param.append("hostId",value)
         const data = await Axios.post("/authHost/deleteAuthHost",param)
         if(data.code===0){
-            this.hostFresh=!this.hostFresh
             message.info(`删除成功`)
         }
         else {
@@ -101,7 +61,6 @@ export class HostStore {
     updateAuthHost =async value =>{
         const data = await Axios.post("/authHost/updateAuthHost",value)
         if(data.code===0){
-            this.hostFresh=!this.hostFresh
             message.info(`修改成功`)
         }
         else {
@@ -113,4 +72,5 @@ export class HostStore {
 
 }
 
-export const HOST_STORE = "hostStore"
+const hostStore = new HostStore();
+export default hostStore

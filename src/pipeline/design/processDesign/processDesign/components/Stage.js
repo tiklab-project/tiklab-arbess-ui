@@ -21,15 +21,17 @@ const Stage = props =>{
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
-        // 初始化多阶段
-        finAllStage(pipeline.id).then(()=>{
-            setIsLoading(false)
-        })
+        if(pipeline){
+            // 初始化多阶段
+            finAllStage(pipeline.id).then(()=>{
+                setIsLoading(false)
+            })
 
-        // 获取未填的必需任务
-        validStagesMustField(pipeline.id)
+            // 获取未填的必需任务
+            validStagesMustField(pipeline.id)
+        }
 
-    },[stageFresh,taskFresh])
+    },[stageFresh,taskFresh,pipeline])
 
     /**
      * 添加新任务

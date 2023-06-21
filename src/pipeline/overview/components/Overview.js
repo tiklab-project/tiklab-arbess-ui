@@ -6,6 +6,7 @@ import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import echarts from "../../../common/echarts/Echarts";
 import Guide from "../../../common/guide/Guide";
 import OverviewCensus from "./OverviewCensus";
+import overviewStore from "../store/OverviewStore";
 import "./Overview.scss";
 
 /**
@@ -16,10 +17,9 @@ import "./Overview.scss";
  */
 const Overview = props =>{
 
-    const {OverviewStore,pipelineStore,homePageStore} = props
+    const {pipelineStore} = props
 
-    const {findlogpage,dynamicList,dynaPage} = homePageStore
-    const {pipelineCensus,census} = OverviewStore
+    const {pipelineCensus,census,findlogpage,dynamicList,dynaPage} = overviewStore
     const {pipeline} = pipelineStore
 
     useEffect(()=>{
@@ -90,7 +90,7 @@ const Overview = props =>{
                         </div>
                     </div>
                     <div className="overview-dyna">
-                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={dynaPage} pipelineId={pipeline && pipeline.id}/>
+                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={dynaPage} pipelineId={pipeline?.id}/>
                         <DynamicList dynamicList={dynamicList}/>
                     </div>
                 </div>
@@ -99,4 +99,4 @@ const Overview = props =>{
     )
 }
 
-export default inject("OverviewStore","pipelineStore","homePageStore")(observer(Overview))
+export default inject("pipelineStore")(observer(Overview))

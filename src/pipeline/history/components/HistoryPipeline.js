@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
+import historyStore from "../store/HistoryStore";
 import HistoryTable from "./HistoryTable";
 
 /**
@@ -10,7 +11,7 @@ import HistoryTable from "./HistoryTable";
  */
 const HistoryPipeline = props => {
 
-    const {historyStore,pipelineStore} = props
+    const {pipelineStore} = props
 
     const {findPipelineInstance,setHistoryList,historyFresh,pageCurrent,setPageCurrent} = historyStore
     const {pipeline,findDmUserPage,pipelineUserList} = pipelineStore
@@ -74,4 +75,4 @@ const HistoryPipeline = props => {
 
 }
 
-export default inject("historyStore","pipelineStore")(observer(HistoryPipeline))
+export default inject("pipelineStore")(observer(HistoryPipeline))

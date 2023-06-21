@@ -1,7 +1,7 @@
 import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 
-export class ResourceStore {
+class ResourceStore {
 
     // 资源占用列表
     @observable
@@ -22,4 +22,5 @@ export class ResourceStore {
 
 }
 
-export const RESOURCE_STORE = 'resourceStore'
+const resourceStore = new ResourceStore();
+export default resourceStore;

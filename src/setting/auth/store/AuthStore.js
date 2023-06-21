@@ -1,42 +1,8 @@
-import {action,observable} from "mobx";
+import {action} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class AuthStore {
-
-    // 刷新
-    @observable
-    authFresh = false
-
-    // 认证添加编辑弹出框状态
-    @observable
-    modalVisible = false
-
-    // 认证添加编辑弹出框的表单值
-    @observable
-    formValue = ""
-
-    // 认证配置数据
-    @observable
-    authList = []
-
-    /**
-     * 设置认证添加编辑弹出框状态
-     * @param value
-     */
-    @action
-    setModalVisible = value =>{
-        this.modalVisible = value
-    }
-
-    /**
-     * 设置认证添加编辑弹出框的表单值
-     * @param value
-     */
-    @action
-    setFormValue = value =>{
-        this.formValue = value
-    }
+class AuthStore {
 
     /**
      * 添加认证
@@ -47,7 +13,6 @@ export class AuthStore {
     createAuth =async values =>{
         const data = await Axios.post("/auth/createAuth",values)
         if(data.code===0){
-            this.authFresh = !this.authFresh
             message.info(`添加成功`)
         }
         else {
@@ -67,7 +32,6 @@ export class AuthStore {
         param.append("authId",value)
         const data = await Axios.post("/auth/deleteAuth",param)
         if(data.code===0){
-            this.authFresh=!this.authFresh
             message.info(`删除成功`)
         }
         else {
@@ -85,7 +49,6 @@ export class AuthStore {
     updateAuth =async value =>{
         const data = await Axios.post("/auth/updateAuth",value)
         if(data.code===0){
-            this.authFresh=!this.authFresh
             message.info(`修改成功`)
         }
         else {
@@ -96,18 +59,14 @@ export class AuthStore {
 
     /**
      * 获取认证数据
-     * @param value
-     * @returns {Promise<*>}
+     * @returns {Promise<unknown>}
      */
     @action
-    findAllAuth = async value=>{
-        const data = await Axios.post("/auth/findAllAuth")
-        if(data.code===0 && data.data){
-            this.authList = data.data
-        }
-        return data
+    findAllAuth =async ()=>{
+        return await Axios.post("/auth/findAllAuth")
     }
 
 }
 
-export const AUTH_STORE = "authStore"
+const authStore = new AuthStore();
+export default authStore

@@ -20,14 +20,13 @@ const TaskDetails = props =>{
 
     const {taskFormDrawer,setTaskFormDrawer,taskStore,stageStore} = props
 
-    const {dataItem,findOneTasksOrTask} = taskStore
+    const {dataItem} = taskStore
     const {updateStageName} = stageStore
 
     // 标签类型
     const [handleType,setHandleType] = useState(1)
 
     useEffect(()=>{
-        // if(taskFormDrawer && dataItem.taskId) findOneTasksOrTask(dataItem.taskId)
         return ()=> setHandleType(1)
     },[taskFormDrawer])
 

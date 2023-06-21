@@ -18,13 +18,15 @@ const Task = props => {
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
-        // 获取多任务
-        findAllTask(pipeline.id).then(()=>{
-            setIsLoading(false)
-        })
-        // 获取未填的必需任务
-        validTaskMustField(pipeline.id)
-    },[taskFresh])
+        if(pipeline){
+            // 获取多任务
+            findAllTask(pipeline.id).then(()=>{
+                setIsLoading(false)
+            })
+            // 获取未填的必需任务
+            validTaskMustField(pipeline.id)
+        }
+    },[pipeline,taskFresh])
 
     /**
      * 添加新任务

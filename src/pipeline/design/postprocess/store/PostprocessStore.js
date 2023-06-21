@@ -1,7 +1,7 @@
 import {action, observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 
-export class PostprocessStore {
+class PostprocessStore {
 
     // 后置处理数据
     @observable
@@ -142,5 +142,5 @@ export class PostprocessStore {
 
 }
 
-export const POSTPROCESS_STORE = "postprocessStore"
-
+const postprocessStore = new PostprocessStore();
+export default postprocessStore

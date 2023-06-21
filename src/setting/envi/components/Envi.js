@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Table} from "antd";
-import {inject,observer} from "mobx-react";
 import {PlusOutlined} from "@ant-design/icons";
+import enviStore from "../store/EnviStore";
 import EnviModal from "./EnviModal";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import Btn from "../../../common/btn/Btn";
@@ -18,9 +18,7 @@ import "../../authCommon/Auth.scss";
  */
 const Envi = props =>{
 
-    const {enviStore} = props
-
-    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm,fresh} = enviStore
+    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm} = enviStore
 
     const [visible,setVisible] = useState(false)
     const [enviData,setEnviData] = useState([])
@@ -28,12 +26,19 @@ const Envi = props =>{
 
     useEffect(()=>{
         // 初始化环境配置
+        findAllScm()
+    },[])
+
+    /**
+     * 获取所有环境配置
+     */
+    const findAllScm = () =>{
         findAllPipelineScm().then(res=>{
             if(res.code===0 && res.data){
                 setEnviData(res.data)
             }
         })
-    },[fresh])
+    }
 
     /**
      * 添加环境配置
@@ -48,7 +53,11 @@ const Envi = props =>{
      * @param record
      */
     const delEnvi = record => {
-        deletePipelineScm(record.scmId)
+        deletePipelineScm(record.scmId).then(res=>{
+            if(res.code===0){
+                findAllScm()
+            }
+        })
     }
 
     /**
@@ -60,7 +69,7 @@ const Envi = props =>{
         setVisible(true)
     }
 
-    const columns = [
+    const columnsCe = [
         {
             title:"类型",
             dataIndex:"scmType",
@@ -105,20 +114,55 @@ const Envi = props =>{
         }
     ]
 
+    const columns = [
+        {
+            title:"类型",
+            dataIndex:"scmType",
+            key:"scmType",
+            width:"32%",
+            ellipsis:true,
+            render:text =>{
+                switch (text) {
+                    case 1:  return <TaskTitleIcon type='git'/>
+                    case 5:  return <TaskTitleIcon type='svn'/>
+                    case 21: return <TaskTitleIcon type='maven'/>
+                    case 22: return <TaskTitleIcon type='nodejs'/>
+                }
+            }
+        },
+        {
+            title:"名称",
+            dataIndex:"scmName",
+            key:"scmName",
+            width:"33%",
+            ellipsis:true,
+        },
+        {
+            title:"地址",
+            dataIndex:"scmAddress",
+            key:"scmAddress",
+            width:"35%",
+            ellipsis:true,
+        }
+    ]
+
     return <div className="auth mf-home-limited mf">
         <div className="auth-upper">
             <BreadcrumbContent firstItem={"环境配置"} />
-            <Btn
-                onClick={addEnvi}
-                type={"primary"}
-                title={"添加配置"}
-                icon={<PlusOutlined/>}
-            />
+            {
+                version==='ce' &&
+                <Btn
+                    onClick={addEnvi}
+                    type={"primary"}
+                    title={"添加配置"}
+                    icon={<PlusOutlined/>}
+                />
+            }
         </div>
         <div className="auth-content">
 
             <Table
-                columns={columns}
+                columns={version!=='ce'?columns:columnsCe}
                 dataSource={enviData}
                 rowKey={record=>record.scmId}
                 pagination={false}
@@ -131,9 +175,10 @@ const Envi = props =>{
                 enviData={enviData}
                 updatePipelineScm={updatePipelineScm}
                 formValue={formValue}
+                findAllScm={findAllScm}
             />
         </div>
     </div>
 }
 
-export default inject("enviStore")(observer(Envi))
+export default Envi

@@ -2,7 +2,7 @@ import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class AuthorizeStore {
+class AuthorizeStore {
 
     // 仓库
     @observable
@@ -85,4 +85,5 @@ export class AuthorizeStore {
     }
 }
 
-export const AUTHORIZE_STORE = "authorizeStore"
+const authorizeStore = new AuthorizeStore();
+export default authorizeStore

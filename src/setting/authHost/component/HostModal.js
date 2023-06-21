@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
-import {Form, Input, Tooltip, Select, message} from "antd";
+import {Form, Input, Tooltip, Select} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
+import hostStore from "../store/HostStore";
 import AuthType from "../../authCommon/AuthType";
 import {Validation} from "../../../common/client/Client";
 import Btn from "../../../common/btn/Btn";
@@ -14,9 +15,9 @@ import Modals from "../../../common/modal/Modal";
  */
 const HostModal = props =>{
 
-    const {visible,setVisible,hostStore} = props
+    const {visible,setVisible,formValue,findAuth} = props
 
-    const {createAuthHost,formValue,updateAuthHost} = hostStore
+    const {createAuthHost,updateAuthHost} = hostStore
 
     const [form] = Form.useForm()
 
@@ -41,9 +42,17 @@ const HostModal = props =>{
                     hostId:formValue.hostId,
                     ...values
                 }
-                updateAuthHost(params)
+                updateAuthHost(params).then(r=>{
+                    if(r.code===0){
+                        findAuth()
+                    }
+                })
             }else {
-                createAuthHost(values)
+                createAuthHost(values).then(r=>{
+                    if(r.code===0){
+                        findAuth()
+                    }
+                })
             }
             onCancel()
         })

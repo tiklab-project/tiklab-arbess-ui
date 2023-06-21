@@ -1,5 +1,5 @@
-import React,{useEffect} from "react";
-import {inject,observer} from "mobx-react";
+import React,{useEffect,useState} from "react";
+import enviStore from "../store/EnviStore";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import "./Info.scss";
 
@@ -11,12 +11,17 @@ import "./Info.scss";
  */
 const Info = props =>{
 
-    const {enviStore} = props
-    const {getSystemMessage,infoList} = enviStore
+    const {getSystemMessage} = enviStore
+
+    const [infoList,setInfoList] = useState([])
 
     useEffect(()=>{
         // 系统信息
-        getSystemMessage()
+        getSystemMessage().then(res=>{
+            if(res.code===0 && res.data){
+                setInfoList(res.data)
+            }
+        })
     },[])
 
     const infoData = [
@@ -67,4 +72,4 @@ const Info = props =>{
     )
 }
 
-export default inject("enviStore")(observer(Info))
+export default Info

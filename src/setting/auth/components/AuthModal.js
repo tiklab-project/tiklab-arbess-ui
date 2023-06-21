@@ -1,7 +1,8 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect} from "react";
 import {Form, Input, Select} from "antd";
 import AuthType from "../../authCommon/AuthType";
 import {Validation} from "../../../common/client/Client";
+import authStore from "../store/AuthStore";
 import Btn from "../../../common/btn/Btn";
 import Modals from "../../../common/modal/Modal";
 
@@ -13,7 +14,9 @@ import Modals from "../../../common/modal/Modal";
  */
 const AuthModal = props =>{
 
-    const {visible,setVisible,createAuth,formValue,updateAuth} = props
+    const {visible,setVisible,formValue,findAuth} = props
+
+    const {createAuth,updateAuth} = authStore
 
     const [form] = Form.useForm()
 
@@ -38,9 +41,17 @@ const AuthModal = props =>{
                     authId:formValue.authId,
                     ...values,
                 }
-                updateAuth(param)
+                updateAuth(param).then(r=>{
+                    if(r.code===0){
+                        findAuth()
+                    }
+                })
             }else {
-                createAuth(values)
+                createAuth(values).then(r=>{
+                    if(r.code===0){
+                        findAuth()
+                    }
+                })
             }
             setVisible(false)
         })

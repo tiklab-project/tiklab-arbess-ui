@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined,ExperimentOutlined} from "@ant-design/icons";
 import {Loading} from "../../common/loading/Loading";
 import Aside from "../../common/aside/Aside";
@@ -36,7 +35,7 @@ const PipelineAside= (props)=>{
                 props.history.push('/index/404')
             }else {
                 // 获取流水线权限
-                getInitProjectPermissions(userId,pipelineId,res.data && res.data.power===1)
+                getInitProjectPermissions(userId,pipelineId,res.data?.power===1)
                 setIsAside(false)
             }
         })
@@ -83,6 +82,6 @@ const PipelineAside= (props)=>{
 
 }
 
-export default inject("pipelineStore",SYSTEM_ROLE_STORE)(observer(PipelineAside))
+export default inject("systemRoleStore","pipelineStore")(observer(PipelineAside))
 
 

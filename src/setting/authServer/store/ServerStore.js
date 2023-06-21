@@ -1,46 +1,12 @@
-import {action,observable} from "mobx";
+import {action, observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class ServerStore{
-
-    // 刷新
-    @observable
-    serverFresh = false
-
-    // 服务添加编辑弹出框状态
-    @observable
-    modalVisible = false
-
-    // 服务添加编辑弹出框的表单值
-    @observable
-    formValue = ""
-
-    // 服务配置数据
-    @observable
-    authServerList = []
+class ServerStore{
 
     // 回调地址
     @observable
     callUrlWarn = ""
-
-    /**
-     * 设置服务添加编辑弹出框状态
-     * @param value
-     */
-    @action
-    setModalVisible = value =>{
-        this.modalVisible = value
-    }
-
-    /**
-     * 设置服务添加编辑弹出框的表单值
-     * @param value
-     */
-    @action
-    setFormValue = value =>{
-        this.formValue = value
-    }
 
     /**
      * 添加服务配置
@@ -51,7 +17,6 @@ export class ServerStore{
     createAuthServer =async values =>{
         const data = await Axios.post("/authServer/createAuthServer",values)
         if(data.code===0){
-            this.serverFresh = !this.serverFresh
             message.info(`添加成功`)
         }
         else {
@@ -71,7 +36,6 @@ export class ServerStore{
         param.append("serverId",value)
         const data = await Axios.post("/authServer/deleteAuthServer",param)
         if(data.code===0){
-            this.serverFresh=!this.serverFresh
             message.info(`删除成功`)
         }
         else {
@@ -89,7 +53,6 @@ export class ServerStore{
     updateAuthServer =async value =>{
         const data = await Axios.post("/authServer/updateAuthServer",value)
         if(data.code===0){
-            this.serverFresh=!this.serverFresh
             message.info(`修改成功`)
         }
         else {
@@ -107,11 +70,7 @@ export class ServerStore{
     findAllAuthServerList = async value=>{
         const param = new FormData()
         param.append("type",value)
-        const data = await Axios.post("/authServer/findAllAuthServerList",param)
-        if(data.code===0 && data.data){
-            this.authServerList = data.data
-        }
-        return data
+        return await Axios.post("/authServer/findAllAuthServerList", param)
     }
 
     /**
@@ -132,4 +91,5 @@ export class ServerStore{
 
 }
 
-export const SERVER_STORE = "serverStore"
+const serverStore  = new ServerStore();
+export default serverStore

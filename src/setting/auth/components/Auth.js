@@ -1,6 +1,6 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import {Space,Table} from "antd";
-import {inject,observer} from "mobx-react";
+import authStore from "../store/AuthStore"
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
@@ -17,20 +17,32 @@ import "../../authCommon/Auth.scss";
  */
 const Auth = props =>{
 
-    const {authStore} = props
-    const {deleteAuth,findAllAuth,authList,authFresh,setModalVisible,setFormValue} = authStore
+    const {deleteAuth,findAllAuth} = authStore
+
+    const [authList,setAuthList] = useState([])
+
+    const [visible,setVisible] = useState(false)
+    const [formValue,setFormValue] = useState("")
 
     useEffect(()=>{
         // 初始化认证配置
-        findAllAuth()
-    },[authFresh])
+        findAuth()
+    },[])
+
+    const findAuth = () =>{
+        findAllAuth().then(res=>{
+            if(res.code===0){
+                setAuthList(res.data || [])
+            }
+        })
+    }
 
     /**
      * 编辑认证配置
      * @param record
      */
     const editAuth = record => {
-        setModalVisible(true)
+        setVisible(true)
         setFormValue(record)
     }
 
@@ -39,7 +51,11 @@ const Auth = props =>{
      * @param record
      */
     const delAuth = record => {
-        deleteAuth(record.authId)
+        deleteAuth(record.authId).then(r=>{
+            if(r.code===0){
+                findAuth()
+            }
+        })
     }
 
     const commonColumns = [
@@ -125,7 +141,13 @@ const Auth = props =>{
         <div className="auth mf-home-limited mf">
             <div className="auth-upper">
                 <BreadcrumbContent firstItem={"认证配置"}/>
-                <AuthAddBtn/>
+                <AuthAddBtn
+                    visible={visible}
+                    setVisible={setVisible}
+                    formValue={formValue}
+                    setFormValue={setFormValue}
+                    findAuth={findAuth}
+                />
             </div>
             <div className="auth-content">
                 <Table
@@ -140,4 +162,4 @@ const Auth = props =>{
     )
 }
 
-export default inject("authStore")(observer(Auth))
+export default Auth

@@ -10,7 +10,9 @@ import Portal from "./Portal";
  * @constructor
  */
 const Home = props => {
-    return <Portal {...props}/>
+    return  <Portal
+                {...props}
+            />
 }
 
 function mapStateToProps(state) {

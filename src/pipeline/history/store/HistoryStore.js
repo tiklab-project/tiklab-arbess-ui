@@ -2,7 +2,7 @@ import {action, observable} from "mobx";
 import {message} from "antd";
 import {Axios} from "tiklab-core-ui";
 
-export class HistoryStore {
+class HistoryStore {
 
     // 历史列表
     @observable
@@ -197,4 +197,5 @@ export class HistoryStore {
 
 }
 
-export const HISTORY_STORE = "historyStore"
+const historyStore = new HistoryStore();
+export default historyStore

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Tooltip,Select} from "antd";
 import {MinusCircleOutlined,PlusCircleOutlined} from "@ant-design/icons";
 import {Input} from "antd";
-import {inject,observer} from "mobx-react";
+import condStore from "../store/ConditionStore";
 import {WhetherChange} from "../../processDesign/components/Common";
 import Btn from "../../../../../common/btn/Btn";
 import EmptyText from "../../../../../common/emptyText/EmptyText";
@@ -16,17 +16,20 @@ import "./Condition.scss";
  */
 const Condition = props =>{
 
-    const {condStore,dataItem} = props
+    const {dataItem} = props
 
-    const {createCond,findAllTaskCond,condData,fixCondData,setCondData,updateCond,fresh,deleteCond} = condStore
+    const {createCond,findAllTaskCond,fixCondData,updateCond,deleteCond} = condStore
 
     const [border,setBorder] = useState('')
     const [showArrow,setShowArrow] = useState(false)
 
+    const [condData,setCondData] = useState([])
+
     useEffect(()=>{
         // 初始化条件
         findAllTaskCond(dataItem.taskId)
-    },[fresh,dataItem.taskId])
+    },[dataItem.taskId])
+
 
     /**
      * 获取符合要求的item
@@ -190,4 +193,4 @@ const Condition = props =>{
     )
 }
 
-export default inject("condStore")(observer(Condition))
+export default Condition

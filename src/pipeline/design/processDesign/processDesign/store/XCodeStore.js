@@ -2,7 +2,7 @@ import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class XCodeStore {
+class XCodeStore {
 
     // 仓库
     @observable
@@ -52,4 +52,5 @@ export class XCodeStore {
 
 }
 
-export const XCODE_STORE = "xcodeStore"
+const xcodeStore= new XCodeStore()
+export default xcodeStore

@@ -25,7 +25,7 @@ const lis = [
 
 const EnviModal = props =>{
 
-    const {visible,setVisible,enviData,updatePipelineScm,formValue} = props
+    const {visible,setVisible,enviData,updatePipelineScm,formValue,findAllScm} = props
 
     const [form] = Form.useForm()
     const [scmType,setScmType] = useState(1)
@@ -81,7 +81,11 @@ const EnviModal = props =>{
                 scmId:formValue && formValue.scmId,
                 ...values
             }
-            updatePipelineScm(params)
+            updatePipelineScm(params).then(res=>{
+                if(res.code===0){
+                    findAllScm()
+                }
+            })
             setVisible(false)
         })
     }

@@ -2,7 +2,7 @@ import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class XPackStore {
+class XPackStore {
 
 
     // xpack推送地址
@@ -31,4 +31,5 @@ export class XPackStore {
 
 }
 
-export const XPACK_STORE = 'xpackStore'
+const xpackStore = new XPackStore();
+export default xpackStore;

@@ -1,6 +1,5 @@
-import React,{useState} from "react";
+import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
-import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/Btn";
 import HostModal from "./HostModal";
 
@@ -12,78 +11,37 @@ import HostModal from "./HostModal";
  */
 const HostAddBtn = props =>{
 
-    const {hostStore,isConfig,type} = props
-    const {modalVisible,setModalVisible,setFormValue} = hostStore
-
-    const [goodsVisible,setGoodsVisible] = useState(false)
+    const {isConfig,visible,setVisible,formValue,setFormValue,findAuth} = props
 
     /**
-     * 添加按钮操作
+     * 添加认证
      */
     const addHostBtn = () =>{
-        setFormValue("")
-        switch (type) {
-            case 'ssh':
-                setGoodsVisible(true)
-                break
-            default:
-                setModalVisible(true)
+        setVisible(true)
+        if(formValue){
+            setFormValue(null)
         }
     }
 
-    /**
-     * 设置弹出框visible
-     * @returns {boolean|*}
-     */
-    const visible = () => {
-        switch (type) {
-            case 'ssh':
-                return goodsVisible
-            default:
-                return modalVisible
-        }
-    }
-
-    /**
-     * 设置弹出框setVisible
-     * @returns {((value: (((prevState: boolean) => boolean) | boolean)) => void)|*}
-     */
-    const setVisible = () =>{
-        switch (type) {
-            case 'ssh':
-                return setGoodsVisible
-            default:
-                return setModalVisible
-        }
-    }
 
     return(
         <>
-            {
-                isConfig ?
-                    <Btn
-                        type={"row"}
-                        onClick={addHostBtn}
-                        title={"添加"}
-                        icon={<PlusOutlined/>}
-                    />
-                    :
-                    <Btn
-                        onClick={addHostBtn}
-                        type={"primary"}
-                        title={"添加配置"}
-                        icon={<PlusOutlined/>}
-                    />
-            }
+            <Btn
+                onClick={addHostBtn}
+                type={isConfig?"row":"primary"}
+                title={"添加认证"}
+                icon={<PlusOutlined/>}
+            />
 
             <HostModal
-                visible={visible()}
-                setVisible={setVisible()}
-                hostStore={hostStore}
+                visible={visible}
+                setVisible={setVisible}
+                formValue={formValue || ""}
+                findAuth={findAuth}
             />
 
         </>
     )
 }
 
-export default inject("hostStore")(observer(HostAddBtn))
+export default HostAddBtn

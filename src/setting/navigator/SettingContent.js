@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "tiklab-privilege-ui";
-import {SYSTEM_ROLE_STORE} from "tiklab-privilege-ui/es/store";
-import {getUser} from "tiklab-core-ui";
 import {inject,observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 import {departmentRouters,templateRouter} from "./SettingRouters";
@@ -12,7 +10,7 @@ const SettingContent= props =>  {
 
     const {route,isDepartment,applicationRouters,systemRoleStore} = props
 
-    const {getSystemPermissions,systemPermissions} = systemRoleStore
+    const {systemPermissions} = systemRoleStore
 
     let path = props.location.pathname
 
@@ -41,10 +39,6 @@ const SettingContent= props =>  {
 
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([""])
-
-    useEffect(()=>{
-        getSystemPermissions(getUser().userId)
-    },[])
 
     useEffect(()=>{
         // 激活菜单
@@ -102,8 +96,8 @@ const SettingContent= props =>  {
                         {
                             item.children ?
                                 (isExpandedTree(item.id)?
-                                        <DownOutlined style={{fontSize: "10px"}}/> :
-                                        <UpOutlined style={{fontSize: "10px"}}/>
+                                    <DownOutlined style={{fontSize: "10px"}}/> :
+                                    <UpOutlined style={{fontSize: "10px"}}/>
                                 ): ""
                         }
                     </div>
@@ -155,5 +149,5 @@ const SettingContent= props =>  {
     )
 }
 
-export default inject(SYSTEM_ROLE_STORE)(observer(SettingContent))
+export default inject("systemRoleStore")(observer(SettingContent))
 

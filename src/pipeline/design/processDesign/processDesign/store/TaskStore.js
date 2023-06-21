@@ -2,7 +2,7 @@ import {observable,action} from "mobx";
 import {message} from "antd";
 import {Axios} from "tiklab-core-ui";
 
-export class TaskStore {
+class TaskStore {
 
     // 多任务数据
     @observable
@@ -148,4 +148,5 @@ export class TaskStore {
 
 }
 
-export const TASK_STORE = "taskStore"
+const taskStore = new TaskStore();
+export default taskStore

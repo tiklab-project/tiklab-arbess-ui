@@ -8,7 +8,7 @@ import {
     UnlockOutlined,
     MinusCircleOutlined
 } from "@ant-design/icons";
-import {inject,observer} from "mobx-react";
+import historyStore from "../../history/store/HistoryStore";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import Profile from "../../../common/profile/Profile";
 import ListIcon from "../../../common/list/ListIcon";
@@ -28,7 +28,7 @@ import {SpinLoading} from "../../../common/loading/Loading";
  */
 const PipelineTable = props =>{
 
-    const {historyStore,pipelineStore,changPage,changFresh,listType,isLoading}=props
+    const {pipelineStore,changPage,changFresh,listType,isLoading}=props
 
     const {execStart,execStop}=historyStore
     const {pipelineListPage,updateFollow,pipPage} = pipelineStore
@@ -249,4 +249,4 @@ const PipelineTable = props =>{
             </div>
 }
 
-export default inject("historyStore")(observer(PipelineTable))
+export default PipelineTable

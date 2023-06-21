@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from "react";
 import HistoryDetail from "./HistoryDetail";
-import {observer,inject} from "mobx-react";
+import historyStore from "../store/HistoryStore";
 
 const HistoryPipelineDetail = props => {
 
-    const {historyStore,match:{params}} = props
+    const {match:{params}} = props
 
     const {findOneInstance} = historyStore
 
@@ -33,4 +33,4 @@ const HistoryPipelineDetail = props => {
     )
 }
 
-export default inject('historyStore')(observer(HistoryPipelineDetail))
+export default HistoryPipelineDetail

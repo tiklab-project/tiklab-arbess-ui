@@ -2,7 +2,7 @@ import {observable,action} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class TriggerStore {
+class TriggerStore {
 
     // 触发器
     @observable
@@ -80,4 +80,5 @@ export class TriggerStore {
 
 }
 
-export const TRIGGER_STORE = "triggerStore"
+const triggerStore = new TriggerStore();
+export default triggerStore

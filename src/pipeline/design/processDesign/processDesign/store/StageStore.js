@@ -2,7 +2,7 @@ import {observable,action} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class StageStore {
+class StageStore {
 
     // 多阶段列表
     @observable
@@ -97,4 +97,5 @@ export class StageStore {
 
 }
 
-export const STAGE_STORE = "stageStore"
+const stageStore = new StageStore();
+export default stageStore

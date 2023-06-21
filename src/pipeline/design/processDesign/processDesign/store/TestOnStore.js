@@ -2,7 +2,7 @@ import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
-export class TestOnStore {
+class TestOnStore {
 
     // 测试空间列表
     @observable
@@ -124,4 +124,5 @@ export class TestOnStore {
 
 }
 
-export const TESTON_STORE = "testOnStore"
+const testOnStore = new TestOnStore();
+export default testOnStore

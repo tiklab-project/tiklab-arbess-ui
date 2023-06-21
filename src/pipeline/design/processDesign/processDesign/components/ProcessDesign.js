@@ -1,9 +1,17 @@
 import React,{useEffect,useState} from "react";
-import {observer} from "mobx-react";
+import {observer,inject, Provider} from "mobx-react";
 import Stage from "./Stage";
 import Task from "./Task";
 import TaskDetails from "./TaskDetails";
 import TaskAdd from "./TaskAdd";
+import condStore from "../../condition/store/ConditionStore";
+import authorizeStore from "../store/AuthorizeStore";
+import testOnStore from "../store/TestOnStore";
+import xcodeStore from "../store/XCodeStore";
+import xpackStore from "../store/XPackStore";
+import authStore from "../../../../../setting/auth/store/AuthStore";
+import hostStore from "../../../../../setting/authHost/store/HostStore";
+import serverStore from "../../../../../setting/authServer/store/ServerStore";
 import "./Task.scss";
 
 /**
@@ -13,6 +21,17 @@ import "./Task.scss";
  * @constructor
  */
 const ProcessDesign = props =>{
+
+    const store = {
+        condStore,
+        authorizeStore,
+        testOnStore,
+        xcodeStore,
+        xpackStore,
+        authStore,
+        hostStore,
+        serverStore,
+    }
 
     const {pipelineStore} = props
 
@@ -37,7 +56,9 @@ const ProcessDesign = props =>{
         setNewStageDrawer(true)
     }
 
-    return  <div className="guiView" style={taskFormDrawer?{maxWidth:"calc(100% - 480px)"}:null}>
+    return  (
+        <Provider {...store}>
+            <div className="guiView" style={taskFormDrawer?{maxWidth:"calc(100% - 480px)"}:null}>
                 {
                     pipeline && pipeline.type===1 ?
                         <Task
@@ -69,6 +90,8 @@ const ProcessDesign = props =>{
                 />
 
             </div>
+        </Provider>
+    )
 }
 
-export default observer(ProcessDesign)
+export default inject("pipelineStore")(observer(ProcessDesign))

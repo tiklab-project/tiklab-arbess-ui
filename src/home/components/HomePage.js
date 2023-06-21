@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
-import {inject,observer} from "mobx-react";
 import {AimOutlined,HistoryOutlined,BlockOutlined} from "@ant-design/icons";
+import homePageStore from "../store/HomePageStore";
 import EmptyText from "../../common/emptyText/EmptyText";
 import AgentList from "../../common/list/AgentList";
 import Guide from "../../common/guide/Guide";
@@ -14,8 +14,6 @@ import "./homePage.scss";
  * @constructor
  */
 const HomePage = props =>{
-
-    const {homePageStore} = props
 
     const {findPipelineRecently,newlyBuild,findAllOpen,newlyOpen} = homePageStore
 
@@ -138,4 +136,4 @@ const HomePage = props =>{
     )
 }
 
-export default inject("homePageStore")(observer(HomePage))
+export default HomePage

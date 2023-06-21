@@ -1,16 +1,8 @@
-import {observable,action} from "mobx";
+import {action} from "mobx";
 import {message} from "antd";
 import {Axios} from "tiklab-core-ui";
 
-export class EnviStore {
-
-    // 系统信息
-    @observable
-    infoList = ""
-
-    // 刷新
-    @observable
-    fresh = false
+class EnviStore {
 
     /**
      * 获取系统信息
@@ -18,13 +10,7 @@ export class EnviStore {
      */
     @action
     getSystemMessage = async () =>{
-        Axios.post("/systemMassage/getSystemMassage").then(res=>{
-            if(res.code === 0 && res.data){
-                this.infoList = res.data
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+        return Axios.post("/systemMassage/getSystemMassage")
     }
 
     /**
@@ -47,7 +33,6 @@ export class EnviStore {
         param.append("scmId",value)
         const data = await Axios.post("/scm/deletePipelineScm",param)
         if(data.code===0){
-            this.fresh = !this.fresh
             message.info(`删除成功`)
         }
         else {
@@ -71,7 +56,6 @@ export class EnviStore {
         }
         const data = await Axios.post("/scm/updatePipelineScm",params)
         if(data.code === 0){
-            this.fresh=!this.fresh
             values.scmId==="" ?  message.info("添加成功") : message.info(`修改成功`)
         }
         else {
@@ -82,5 +66,7 @@ export class EnviStore {
     }
 
 }
-export const ENVI_STORE = "enviStore"
+
+const enviStore = new EnviStore();
+export default enviStore
 

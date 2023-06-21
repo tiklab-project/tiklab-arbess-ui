@@ -2,11 +2,12 @@ import React,{useEffect,useState } from "react";
 import {Form,Input,Select,Tooltip,message,Space} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import AuthType from "../../authCommon/AuthType";
+import serverStore from "../store/ServerStore";
+import authorizeStore from "../../../pipeline/design/processDesign/processDesign/store/AuthorizeStore";
 import {ServerLoading} from "../../../common/loading/Loading"
 import {Validation} from "../../../common/client/Client";
 import Btn from "../../../common/btn/Btn";
 import Modals from "../../../common/modal/Modal";
-import Listaction from "../../../common/list/Listaction";
 
 
 /**
@@ -17,9 +18,9 @@ import Listaction from "../../../common/list/Listaction";
  */
 const ServerModal = props =>{
 
-    const {visible,setVisible,isConfig,type,serverStore,authorizeStore} = props
+    const {visible,setVisible,formValue,findAuth,type, isConfig} = props
 
-    const {callbackUrl,createAuthServer,formValue,updateAuthServer} = serverStore
+    const {callbackUrl,createAuthServer,updateAuthServer} = serverStore
     const {findCode,findAccessToken,skin} = authorizeStore
 
     const [form] = Form.useForm()
@@ -156,9 +157,17 @@ const ServerModal = props =>{
                     serverId:formValue.serverId,
                     ...values,
                 }
-                updateAuthServer(param)
+                updateAuthServer(param).then(r=>{
+                    if(r.code===0){
+                        findAuth()
+                    }
+                })
             }else {
-                createAuthServer(values)
+                createAuthServer(values).then(r=>{
+                    if(r.code===0){
+                        findAuth()
+                    }
+                })
             }
             onCancel()
         })

@@ -120,4 +120,4 @@ const Postprocess = props =>{
     )
 }
 
-export default inject("postprocessStore")(observer(Postprocess))
+export default inject("pipelineStore","postprocessStore")(observer(Postprocess))

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Space,Table} from "antd";
-import {inject,observer} from "mobx-react";
+import hostStore from "../store/HostStore";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
@@ -18,16 +18,26 @@ import "../../authCommon/Auth.scss";
  */
 const Host = props =>{
 
-    const {hostStore} = props
+    const {findAllAuthHostList,deleteAuthHost} = hostStore
 
-    const {findAllAuthHostList,hostList,hostFresh,setModalVisible,setFormValue,deleteAuthHost} = hostStore
-
+    const [visible,setVisible] = useState(false)
+    const [formValue,setFormValue] = useState(null)
     const [activeTab,setActiveTab] = useState('all')
+
+    const [hostList,setHostList] = useState([])
 
     useEffect(()=>{
         // 初始化主机配置
-        findAllAuthHostList(activeTab)
-    },[hostFresh,activeTab])
+        findAuth()
+    },[activeTab])
+
+    const findAuth = () =>{
+        findAllAuthHostList(activeTab).then(r=>{
+            if(r.code===0){
+                setHostList(r.data || [])
+            }
+        })
+    }
 
     /**
      * 切换主机配置
@@ -42,7 +52,7 @@ const Host = props =>{
      * @param record
      */
     const editHost = record => {
-        setModalVisible(true)
+        setVisible(true)
         setFormValue(record)
     }
 
@@ -51,7 +61,11 @@ const Host = props =>{
      * @param record
      */
     const delHost = record =>{
-        deleteAuthHost(record.hostId)
+        deleteAuthHost(record.hostId).then(r=>{
+            if(r.code===0){
+                findAuth()
+            }
+        })
     }
 
     const lis = [
@@ -170,7 +184,13 @@ const Host = props =>{
         <div className="auth mf-home-limited mf">
             <div className="auth-upper">
                 <BreadcrumbContent firstItem={"主机配置"} />
-                <HostAddBtn/>
+                <HostAddBtn
+                    visible={visible}
+                    setVisible={setVisible}
+                    formValue={formValue}
+                    setFormValue={setFormValue}
+                    findAuth={findAuth}
+                />
             </div>
             <Tabs
                 tabLis={lis}
@@ -190,4 +210,4 @@ const Host = props =>{
     )
 }
 
-export default inject("hostStore")(observer(Host))
+export default Host

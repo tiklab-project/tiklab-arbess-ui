@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react";
 import { Progress } from 'antd';
-import { inject,observer } from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import {SpinLoading} from "../../../common/loading/Loading";
+import resourceStore from "../store/ResourceStore";
 import "./Resources.scss";
 
 /**
@@ -12,8 +12,6 @@ import "./Resources.scss";
  * @constructor
  */
 const Resources = props => {
-
-    const {resourceStore} = props
 
     const {findResourcesList,resourceList} = resourceStore
 
@@ -79,4 +77,4 @@ const Resources = props => {
     )
 }
 
-export default inject("resourceStore")(observer(Resources))
+export default Resources

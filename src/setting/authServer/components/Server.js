@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Space,Table} from "antd"
-import {inject,observer} from "mobx-react";
+import serverStore from "../store/ServerStore";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
@@ -18,16 +18,26 @@ import "../../authCommon/Auth.scss";
  */
 const Server = props =>{
 
-    const {serverStore} = props
+    const {findAllAuthServerList,deleteAuthServer} = serverStore
 
-    const {findAllAuthServerList,authServerList,setModalVisible,setFormValue,serverFresh,deleteAuthServer} = serverStore
-
+    const [visible,setVisible] = useState(false)
+    const [formValue,setFormValue] = useState("")
     const [activeTab,setActiveTab] = useState('all')
+
+    const [authServerList,setAuthServerList] = useState([])
 
     useEffect(()=>{
         // 初始化服务配置
-        findAllAuthServerList(activeTab)
-    },[activeTab,serverFresh])
+        findAuth()
+    },[activeTab])
+
+    const findAuth = () =>{
+        findAllAuthServerList(activeTab).then(r=>{
+            if(r.code===0){
+                setAuthServerList(r.data || [])
+            }
+        })
+    }
 
     /**
      * 切换服务配置类型
@@ -43,7 +53,7 @@ const Server = props =>{
      */
     const editServer = record => {
         setFormValue(record)
-        setModalVisible(true)
+        setVisible(true)
     }
 
     /**
@@ -51,7 +61,11 @@ const Server = props =>{
      * @param record
      */
     const delServer = record =>{
-        deleteAuthServer(record.serverId)
+        deleteAuthServer(record.serverId).then(r=>{
+            if(r.code===0){
+                findAuth()
+            }
+        })
     }
 
     const lis = [
@@ -320,7 +334,14 @@ const Server = props =>{
         <div className="auth mf-home-limited mf">
             <div className="auth-upper">
                 <BreadcrumbContent firstItem={"服务配置"} />
-                <ServerAddBtn type={'gitee'}/>
+                <ServerAddBtn
+                    type={'gitee'}
+                    visible={visible}
+                    setVisible={setVisible}
+                    formValue={formValue}
+                    setFormValue={setFormValue}
+                    findAuth={findAuth}
+                />
             </div>
             <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
             <div className="auth-content">
@@ -336,4 +357,4 @@ const Server = props =>{
     )
 }
 
-export default inject("serverStore")(observer(Server))
+export default Server

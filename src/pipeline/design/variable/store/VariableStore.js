@@ -1,7 +1,7 @@
 import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 
-export class VariableStore{
+class VariableStore{
 
     // 刷新
     @observable
@@ -84,4 +84,5 @@ export class VariableStore{
 
 }
 
-export const VARIABLE_STORE = "variableStore"
+const variableStore = new VariableStore();
+export default variableStore

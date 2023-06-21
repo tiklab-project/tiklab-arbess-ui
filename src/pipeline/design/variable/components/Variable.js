@@ -123,4 +123,4 @@ const Variable = props =>{
     )
 }
 
-export default inject("variableStore")(observer(Variable))
+export default inject("variableStore","pipelineStore")(observer(Variable))

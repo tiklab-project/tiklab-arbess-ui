@@ -54,13 +54,6 @@ module.exports = merge(baseWebpackConfig, {
         new CssMinimizerPlugin(),
         new ProgressBarPlugin(),
         new BundleAnalyzerPlugin(),
-        // new CompressionPlugin({
-        //     filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
-        //     algorithm: "gzip", // 算法
-        //     test: new RegExp("\\.(js|css|sass|scss)$"), // 压缩 js 与 css
-        //     threshold: 10240, // 只处理比这个值大的资源。按字节计算
-        //     minRatio: 0.8 // 只有压缩率比这个值小的资源才会被处理
-        // }),
         new webpack.ContextReplacementPlugin(
             /moment[/\\]locale$/,
             /zh-cn|es/,
@@ -71,7 +64,7 @@ module.exports = merge(baseWebpackConfig, {
         nodeEnv: process.env.NODE_ENV,
         splitChunks: {
             chunks: "all",
-            minSize: 30000, ////默认值，超过30K才独立分包
+            minSize: 30000, // 默认值，超过30K才独立分包
             minChunks: 1,
             maxAsyncRequests: 7,
             maxInitialRequests: 5,
@@ -120,20 +113,6 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                echarts: {
-                    name: "chunk-echarts",
-                    chunks: "all",
-                    test: /echarts/,
-                    priority: 0,
-                    reuseExistingChunk: true
-                },
-                codemirror: {
-                    name: "chunk-codemirror",
-                    chunks: "all",
-                    test: /codemirror/,
-                    priority: 0,
-                    reuseExistingChunk: true
-                },
                 moment: {
                     name: "chunk-moment",
                     chunks: "all",
@@ -141,25 +120,39 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true
                 },
+                echarts: {
+                    name: "chunk-echarts",
+                    chunks: "all",
+                    test: /echarts/,
+                    priority: 1,
+                    reuseExistingChunk: true
+                },
+                codemirror: {
+                    name: "chunk-codemirror",
+                    chunks: "all",
+                    test: /codemirror/,
+                    priority: 1,
+                    reuseExistingChunk: true
+                },
                 antdUI: {
                     name: "chunk-antdUI",
                     chunks: "async",
                     test: /antd/,
-                    priority: 0,
+                    priority: 1,
                     reuseExistingChunk: true
                 },
                 icon: {
                     name: "chunk-icon",
                     chunks: "all",
                     test: /font_icon/,
-                    priority: 0,
+                    priority: 1,
                     reuseExistingChunk: true
                 },
                 rcomponent: {
                     name: "chunk-rcomponent",
                     chunks: "all",
                     test: /rc-[a-zA-Z]/,
-                    priority: 0,
+                    priority: 1,
                     reuseExistingChunk: true
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */
@@ -167,8 +160,6 @@ module.exports = merge(baseWebpackConfig, {
                     name: "commons",
                     test: function (module, chunks) {
                         if (
-                            /src\/components\//.test(module.context) ||
-                            /src\/util\//.test(module.context) ||
                             /react/.test(module.context) ||
                             /react-dom/.test(module.context) ||
                             /redux/.test(module.context)

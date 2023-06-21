@@ -1,7 +1,7 @@
 import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
 
-export class CondStore{
+class CondStore{
 
     // 刷新
     @observable
@@ -87,4 +87,5 @@ export class CondStore{
 
 }
 
-export const COND_STORE = "condStore"
+const condStore = new CondStore();
+export default condStore

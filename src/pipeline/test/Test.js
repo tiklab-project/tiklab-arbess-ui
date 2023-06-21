@@ -3,6 +3,7 @@ import {inject,observer} from "mobx-react";
 import {Tooltip} from "antd";
 import {applyJump} from "tiklab-core-ui"
 import {DeleteOutlined} from "@ant-design/icons";
+import testOnStore from "../design/processDesign/processDesign/store/TestOnStore";
 import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../common/emptyText/EmptyText";
 import {SpinLoading} from "../../common/loading/Loading";
@@ -17,7 +18,7 @@ import "./Test.scss";
  */
 const Test = props => {
 
-    const {testOnStore,pipelineStore} = props
+    const {pipelineStore} = props
 
     const {pipeline} = pipelineStore
     const {findAllRelevance,testList,deleteRelevance} = testOnStore
@@ -198,4 +199,4 @@ const Test = props => {
     )
 }
 
-export default inject("testOnStore","pipelineStore")(observer(Test))
+export default inject("pipelineStore")(observer(Test))

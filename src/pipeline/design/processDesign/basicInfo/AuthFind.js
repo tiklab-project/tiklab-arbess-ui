@@ -17,10 +17,16 @@ const AuthFind = props =>{
 
     const {taskStore,authStore,serverStore,hostStore}=props
 
-    const {findAllAuth,authFresh} = authStore
-    const {findAllAuthServerList,serverFresh} = serverStore
-    const {findAllAuthHostList,hostFresh} = hostStore
+    const {findAllAuth} = authStore
+    const {findAllAuthServerList} = serverStore
+    const {findAllAuthHostList} = hostStore
     const {updateTask,dataItem} = taskStore
+
+    // 是否重新查询
+    const [fresh,setFresh] = useState(false)
+
+    // 弹出框
+    const [visible,setVisible] = useState(false)
 
     //选择框列表
     const [list,setList] = useState([])
@@ -34,7 +40,7 @@ const AuthFind = props =>{
     useEffect(()=>{
         // 初始化选择框list
         initList(dataItem.taskType)
-    },[authFresh,serverFresh,hostFresh])
+    },[fresh])
 
     /**
      * 获取选择框list
@@ -63,6 +69,13 @@ const AuthFind = props =>{
                 return
 
         }
+    }
+
+    /**
+     * 重新查询
+     */
+    const findAuth = () => {
+        setFresh(!fresh)
     }
 
     /**
@@ -150,20 +163,50 @@ const AuthFind = props =>{
             case 'git':
             case 'gitlab':
             case 'svn':
-                return <AuthAddBtn isConfig={true}/>
+                return (
+                    <AuthAddBtn
+                        isConfig={true}
+                        visible={visible}
+                        setVisible={setVisible}
+                        findAuth={findAuth}
+                    />
+                )
             case 'gitee':
             case 'github':
             case 'sonar':
             case 'nexus':
-                return <ServerAddBtn isConfig={true} type={taskType}/>
+                return (
+                    <ServerAddBtn
+                        type={taskType}
+                        isConfig={true}
+                        visible={visible}
+                        setVisible={setVisible}
+                        findAuth={findAuth}
+                    />
+                )
             case 'liunx':
             case 'docker':
             case 'ssh':
-                return <HostAddBtn isConfig={true} type={taskType}/>
+                return (
+                    <HostAddBtn
+                        isConfig={true}
+                        visible={visible}
+                        setVisible={setVisible}
+                        findAuth={findAuth}
+                    />
+                )
             case 'xcode':
             case 'teston':
             case 'xpack':
-                if(version==='ce') return <ServerAddBtn isConfig={true} type={taskType}/>
+                if(version==='ce') return (
+                    <ServerAddBtn
+                        type={taskType}
+                        isConfig={true}
+                        visible={visible}
+                        setVisible={setVisible}
+                        findAuth={findAuth}
+                    />
+                )
                 return null
         }
     }

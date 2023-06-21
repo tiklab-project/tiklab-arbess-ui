@@ -20,11 +20,11 @@ import "./HeaderMessage.scss";
  */
 const HeaderMessage = props =>{
 
-    const {homePageStore,visible,setVisible,pipelineList} = props
+    const {homeStore,visible,setVisible,pipelineList} = props
 
     const {findMessageItemPage,messageList,messPage,setMessagePagination,messagePagination,
         setMessageList,unread,updateMessageItem,mesFresh,deleteMessageItem
-    } = homePageStore
+    } = homeStore
 
     //加载
     const [isLoading,setIsLoading] = useState(false)

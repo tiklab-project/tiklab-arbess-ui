@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react"
 import {inject,observer} from "mobx-react";
+import historyStore from "../store/HistoryStore";
 import HistoryTable from "./HistoryTable";
 import HistoryDetail from "./HistoryDetail";
 
@@ -11,10 +12,10 @@ import HistoryDetail from "./HistoryDetail";
  */
 const History = props => {
 
-    const {historyStore,pipelineStore} = props
+    const {pipelineStore} = props
 
     const {findUserInstance,setHistoryList,historyFresh,pageCurrent,setPageCurrent} = historyStore
-    const {findUserPipeline,pipelineList} = pipelineStore
+    const {pipelineList} = pipelineStore
 
     // 列表数据详情状态
     const [detailsVisible,setDetailsVisible] = useState(false)
@@ -33,8 +34,6 @@ const History = props => {
     })
 
     useEffect(()=>{
-        // 所有流水线
-        findUserPipeline()
         return ()=> {
             setPageCurrent(1)
             setHistoryList([])
@@ -108,4 +107,4 @@ const History = props => {
 
 }
 
-export default inject("historyStore","pipelineStore")(observer(History))
+export default inject("pipelineStore")(observer(History))
