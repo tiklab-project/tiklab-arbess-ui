@@ -19,22 +19,22 @@ export class PipelineStore {
     // 流水线分页
     @observable
     pipPage = {
+        pageSize: 13,
         current: 1,
-        pageSize: 6,
         total: 1,
     }
 
     // 用户分页
     @observable
     userPage = {
+        pageSize: 13,
         defaultCurrent: 1,
-        pageSize: 6,
         total: 1,
     }
 
     // 流水线信息
     @observable
-    pipeline = ""
+    pipeline = null
 
     /**
      * 设置流水线信息
@@ -50,16 +50,16 @@ export class PipelineStore {
      * @returns {Promise<unknown>}
      */
     @action
-    findUserPipelinePage = value =>{
+    findUserPipelinePage = async value =>{
         return new Promise((resolve, reject) => {
             Axios.post("/pipeline/findUserPipelinePage",value).then(res=>{
                 if(res.code===0 && res.data){
-                    // 流水线列表
-                    this.pipelineListPage=res.data.dataList
-                    // 流水线页数
-                    this.pipPage.total = res.data.totalPage
-                    // 流水线当前页
-                    this.pipPage.current = res.data.currentPage
+                    this.pipelineListPage = res.data.dataList
+                    this.pipPage = {
+                        pageSize: 13,
+                        current: res.data.currentPage,
+                        total: res.data.totalPage,
+                    }
                 }else {
                     this.pipelineListPage = []
                     this.pipPage = {

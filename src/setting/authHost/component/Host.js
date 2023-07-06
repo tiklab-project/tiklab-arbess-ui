@@ -20,10 +20,16 @@ const Host = props =>{
 
     const {findAllAuthHostList,deleteAuthHost} = hostStore
 
+    // 弹出框状态
     const [visible,setVisible] = useState(false)
+
+    // 弹出框form表单value
     const [formValue,setFormValue] = useState(null)
+
+    // 主机配置类型
     const [activeTab,setActiveTab] = useState('all')
 
+    // 主机列表
     const [hostList,setHostList] = useState([])
 
     useEffect(()=>{
@@ -31,6 +37,9 @@ const Host = props =>{
         findAuth()
     },[activeTab])
 
+    /**
+     * 获取主机配置
+     */
     const findAuth = () =>{
         findAllAuthHostList(activeTab).then(r=>{
             if(r.code===0){
@@ -69,22 +78,10 @@ const Host = props =>{
     }
 
     const lis = [
-        {
-            id:'all',
-            title: "全部"
-        },
-        {
-            id:'common',
-            title:"普通"
-        },
-        {
-            id:'aliyun',
-            title:"aliyun"
-        },
-        {
-            id:'tencent',
-            title:"腾讯云主机"
-        },
+        {id:'all', title: "全部"},
+        {id:'common', title:"普通"},
+        {id:'aliyun', title:"aliyun"},
+        {id:'tencent', title:"腾讯云主机"}
     ]
 
     const column = [
@@ -121,14 +118,7 @@ const Host = props =>{
             key:"authType",
             width:"10%",
             ellipsis:true,
-            render: text => {
-                switch (text) {
-                    case 1:
-                        return "username&password"
-                    case 2:
-                        return "私钥"
-                }
-            }
+            render: text => text===1?"username&password":"私钥"
         },
         {
             title:"创建人",
@@ -149,14 +139,7 @@ const Host = props =>{
             key:"authPublic",
             width:"8%",
             ellipsis:true,
-            render:text => {
-                switch (text) {
-                    case 1:
-                        return "全局"
-                    case 2:
-                        return "私有"
-                }
-            }
+            render:text => text===1?"全局":"私有"
         },
         {
             title:"创建时间",
@@ -171,7 +154,7 @@ const Host = props =>{
             key: "action",
             width:"9%",
             ellipsis:true,
-            render:(text,record) => {
+            render:(_,record) => {
                 return  <Listaction
                             edit={()=>editHost(record)}
                             del={()=>delHost(record)}

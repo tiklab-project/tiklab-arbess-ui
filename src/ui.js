@@ -1,36 +1,12 @@
-// // import {store as pipelineStore} from "./store";
-// // import routesSaas  from "./routes";
-// //
-// // export {
-// //     routesSaas ,
-// //     pipelineStore,
-// // }
-//
-// import {store as pipelineStore} from "./module/store";
-// import routesCloud  from "./module/routesCloud";
-// import App from "./module/app"
-// import Portal from "././module/home/components/Portal";
-// import SettingContent from "././module/setting/navigator/SettingContent";
-//
-// export {
-//     routesCloud,
-//     pipelineStore,
-//     App,
-//     Portal,
-//     SettingContent,
-// }
-//
-//
-
-
-import React from "react";
 import {store as pipelineStore} from "./store";
-import App from "./app"
+import App from "./app";
 import Portal from "./home/components/Portal";
 import SettingContent from "./setting/navigator/SettingContent";
 
 import AsyncComponent from "./common/lazy/SyncComponent";
 
+const Login=AsyncComponent(()=>import("./login/Login"))
+const Logout=AsyncComponent(()=>import("./login/Logout"))
 const Wechat=AsyncComponent(()=>import("./login/Wechat"))
 const ExcludeProductUser=AsyncComponent(()=>import("./login/ExcludeProductUser"))
 
@@ -82,7 +58,13 @@ const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice")
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
 
 // user
+const User=AsyncComponent(()=>import("./setting/user/User"))
+const Directory=AsyncComponent(()=>import("./setting/user/Directory"))
+const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
+const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
 const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
+
+// privilege
 const DomainRole=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
 const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
 const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
@@ -116,6 +98,8 @@ export {
     Portal,
     SettingContent,
 
+    Login,
+    Logout,
     Wechat,
     ExcludeProductUser,
     Dynamic,
@@ -151,10 +135,14 @@ export {
     MessageSendType,
     MessageNotice,
     MyLog,
+
+    User,
+    UserGroup,
+    Orga,
+    Directory,
     SystemRole,
     NotFound,
     Version,
-
 
     UserGroupTrue,
     SystemFeature,

@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "tiklab matflow",
     "main": "es/src/ui.js",
-    "module": "es/index.js",
+    "module": "es/src/ui.js",
     "files": [
         "es"
     ],
@@ -178,9 +178,7 @@
         "react-router": "^5.2.0",
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
-        "tiklab-core-cloud-ui": "^1.0.1",
         "tiklab-core-ui": "^1.0.1",
-        "tiklab-eam-cloud-ui": "^1.0.1",
         "tiklab-eam-ui": "^1.0.1",
         "tiklab-integration-ui": "^1.0.1",
         "tiklab-licence-ui": "^1.0.1",

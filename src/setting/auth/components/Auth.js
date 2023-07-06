@@ -19,9 +19,13 @@ const Auth = props =>{
 
     const {deleteAuth,findAllAuth} = authStore
 
+    // 认证配置列表
     const [authList,setAuthList] = useState([])
 
+    // 弹出框状态
     const [visible,setVisible] = useState(false)
+
+    // 弹出框form表单value
     const [formValue,setFormValue] = useState("")
 
     useEffect(()=>{
@@ -29,6 +33,9 @@ const Auth = props =>{
         findAuth()
     },[])
 
+    /**
+     * 获取认证配置
+     */
     const findAuth = () =>{
         findAllAuth().then(res=>{
             if(res.code===0){
@@ -78,14 +85,7 @@ const Auth = props =>{
             key:"authType",
             width:"20%",
             ellipsis:true,
-            render: text => {
-                switch (text) {
-                    case 1:
-                        return "username&password"
-                    case 2:
-                        return "私钥"
-                }
-            }
+            render: text => text===1?"username&password":"私钥"
         },
         {
             title:"创建人",
@@ -106,14 +106,7 @@ const Auth = props =>{
             key:"authPublic",
             width:"10%",
             ellipsis:true,
-            render:text => {
-                switch (text) {
-                    case 1:
-                        return "全局"
-                    case 2:
-                        return "私有"
-                }
-            }
+            render:text => text===1?"全局":"私有"
         },
         {
             title:"创建时间",
@@ -128,7 +121,7 @@ const Auth = props =>{
             key: "action",
             width:"10%",
             ellipsis:true,
-            render:(text,record) => {
+            render:(_,record) => {
                 return  <Listaction
                             edit={()=>editAuth(record)}
                             del={()=>delAuth(record)}

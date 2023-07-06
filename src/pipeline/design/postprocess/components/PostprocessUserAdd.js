@@ -144,6 +144,10 @@ const PostprocessUserAdd = props =>{
         selectedRowKeys:selectedRowKeys
     }
 
+    /**
+     * 换页切换
+     * @param page
+     */
     const changUserPage = page =>{
         findUser({
             ...findUserParam,
@@ -172,11 +176,11 @@ const PostprocessUserAdd = props =>{
 
     const userAddMnue = (
         <div className='post-pose-user-add mf'>
-            {/*<Input*/}
-            {/*    placeholder={'名称'}*/}
-            {/*    prefix={<SearchOutlined/>}*/}
-            {/*    // onChange={findUser}*/}
-            {/*/>*/}
+            <Input
+                placeholder={'名称'}
+                prefix={<SearchOutlined/>}
+                // onChange={findUser}
+            />
             <div className='user-add-table'>
                 <Table
                     rowKey={(record) => record.id}

@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react";
-import {observer} from "mobx-react";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
 import {SpinLoading} from "../../../common/loading/Loading";
 import HistoryDetailItem from "./HistoryDetailItem";
@@ -16,13 +15,15 @@ const HistoryDetail = props =>{
 
     const {historyItem,firstItem,back,historyStore,tableType} = props
 
-    const {findTaskInstance,findStageInstance,execData} = historyStore
+    const {findTaskInstance,findStageInstance} = historyStore
 
     // 获取当前历史运行状态
     const isRun = historyItem && historyItem.runStatus === "run"
 
     // 获取当前流水线信息
     const pipeline = historyItem && historyItem.pipeline
+
+    const [execData,setExecData] = useState([])
 
     // 构建详情页面数据未返回时加载状态
     const [detailsLoading,setDetailsLoading] = useState(true)
@@ -58,13 +59,15 @@ const HistoryDetail = props =>{
             if(pipeline.type===1){
                 // 获取多任务历史日志详情
                 inter = setInterval(()=>findTaskInstance(historyItem.instanceId).then(res=>{
+                    setExecData(res.data && res.data)
                     destroyInter(res,"runState")
                 }),1000)
                 return
             }
              // 获取多阶段历史日志详情
              inter = setInterval(()=>findStageInstance(historyItem.instanceId).then(res=> {
-                destroyInter(res, "stageState")
+                 setExecData(res.data && res.data)
+                 destroyInter(res, "stageState")
              }),1000)
         }
         return ()=> clearInterval(inter)
@@ -77,28 +80,23 @@ const HistoryDetail = props =>{
      */
     const destroyInter = (data,state) =>{
         setDetailsLoading(false)
-        const endValue = data.data?.pop()
+        // 浅拷贝
+        const endValue = [...data.data].pop()
         if(endValue){
             const states = endValue[state]
             if(states ==="success" || states ==="error" || states ==="halt" ){
                 clearInterval(inter)
                 if(isRun){
                     !id && setExecIndex(data.data && data.data.length-1)
-                    if(state==='runState') return setTimeout(()=>findTaskInstance(historyItem.instanceId),1000)
-                    setTimeout(()=>findStageInstance(historyItem.instanceId),1000)
+                    if(state==='runState') return setTimeout(()=>findTaskInstance(historyItem.instanceId).then(res=>{
+                        setExecData(res.data && res.data)
+                    }),1000)
+                    setTimeout(()=>findStageInstance(historyItem.instanceId).then(res=>{
+                        setExecData(res.data && res.data)
+                    }),1000)
                 }
             }
         }
-        // const isRunStatus = data.data && data.data.some(item=>item[state]==="run")
-        //
-        // if(!isRunStatus){
-        //     clearInterval(inter)
-        //     if(isRun){
-        //         !id && setExecIndex(data.data && data.data.length-1)
-        //         if(state==='runState') return setTimeout(()=>findTaskInstance(historyItem.instanceId),1000)
-        //         setTimeout(()=>findStageInstance(historyItem.instanceId),1000)
-        //     }
-        // }
     }
 
     useEffect(()=>{
@@ -132,7 +130,7 @@ const HistoryDetail = props =>{
      * @param data
      * @returns {*}
      */
-    const autoLog = data =>{
+    const   autoLog = data =>{
         const state = pipeline && pipeline.type===1 ? "runState":"stageState"
         let a
         if(data && data.some(item=>item[state]==="run")){
@@ -234,8 +232,8 @@ const HistoryDetail = props =>{
      * 面包屑 secondItem = isAllName() + isFindName()
      * @returns {*|string}
      */
-    const isAllName = () => tableType==="history" ? pipeline && pipeline.name:"详情"
-    const isFindName = () => historyItem && historyItem.findNumber
+    const isAllName = () => tableType==="history" ? pipeline?.name:"详情"
+    const isFindName = () => historyItem?.findNumber
 
     // 数据获取前加载状态
     if(detailsLoading){
@@ -284,4 +282,4 @@ const HistoryDetail = props =>{
     )
 }
 
-export default observer(HistoryDetail)
+export default HistoryDetail

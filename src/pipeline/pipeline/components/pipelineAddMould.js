@@ -100,7 +100,7 @@ const PipelineAddMould = ({templateType,setTemplateType}) =>{
                                         <span>环境</span>
                                     </div>
                                     <div className="pipeline-template-li-content">
-                                        { item.zreo? name(item.zreo) : null }
+                                        { item.zreo && name(item.zreo)}
                                         { name(item.first) }
                                         { name(item.second) }
                                     </div>
@@ -110,7 +110,6 @@ const PipelineAddMould = ({templateType,setTemplateType}) =>{
                     })
                 }
             </div>
-
 }
 
 export default PipelineAddMould

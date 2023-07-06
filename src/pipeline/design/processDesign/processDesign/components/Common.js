@@ -2,6 +2,7 @@ import React from "react";
 import {DeleteOutlined, PlusOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {Popconfirm, Tooltip} from "antd";
 import TaskIcon from "./TaskIcon";
+import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 
 /**
  * 值是否相同
@@ -123,12 +124,13 @@ export const TaskInsertBtn = (insertData,group,groupIndex,type) =>{
         <div className="group-flow">
             <div className={`group-flow_btn group-flow_${type}`}>
                 <Tooltip title="添加新任务">
-                    <svg className="icon group-flow_btn_i"
-                         aria-hidden="true"
-                         onClick={()=>insertData(group,groupIndex)}
-                    >
-                        <use xlinkHref="#icon-zengjia"/>
-                    </svg>
+                    <img
+                        src={pip_zengjia}
+                        style={{width:22,height:22}}
+                        className="group-flow_btn_i"
+                        alt={"添加"}
+                        onClick={()=>insertData(group,groupIndex)}
+                    />
                 </Tooltip>
             </div>
         </div>

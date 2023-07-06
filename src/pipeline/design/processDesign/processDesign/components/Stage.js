@@ -4,6 +4,7 @@ import {PlusOutlined, EditOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
 import {TaskFinalAdd, TaskTypeContent, TaskInsertBtn} from "./Common";
 import {SpinLoading} from "../../../../../common/loading/Loading";
+import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 
 /**
  * 多阶段
@@ -215,9 +216,11 @@ const Stage = props =>{
                      style={{marginRight:15}}
                      onClick={()=>serial(list,groupIndex,stagesIndex+1)}
                 >
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-zengjia"/>
-                    </svg>
+                    <img
+                        src={pip_zengjia}
+                        style={{width:16,height:16}}
+                        alt={"添加"}
+                    />
                 </div>
             </Tooltip>
         )
@@ -237,9 +240,11 @@ const Stage = props =>{
                      style={{marginLeft:15}}
                      onClick={()=>serial(list,groupIndex,stagesIndex+2)}
                 >
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#icon-zengjia"/>
-                    </svg>
+                    <img
+                        src={pip_zengjia}
+                        style={{width:16,height:16}}
+                        alt={"添加"}
+                    />
                 </div>
             </Tooltip>
         )

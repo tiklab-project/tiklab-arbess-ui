@@ -7,7 +7,6 @@ import zhCN from "antd/es/locale/zh_CN";
 import {HashRouter} from "react-router-dom";
 import {renderRoutes} from "react-router-config";
 import resources from "./common/language/Resources";
-import "./assets/font_icon/iconfont";
 import "./common/language/I18n";
 import "./index.scss";
 

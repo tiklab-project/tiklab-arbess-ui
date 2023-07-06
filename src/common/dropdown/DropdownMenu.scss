@@ -1,6 +1,6 @@
-.mf_portal{
+.mf_dropdown{
     position: relative;
-    margin-left: 15px;
+    margin-left: 20px;
     &_block {
         height: 100%;
         position: relative;
@@ -8,19 +8,11 @@
         flex-direction: column;
         justify-items: center;
         justify-content: center;
-        &_item {
+        &_title, &_item {
             cursor: pointer;
             padding: 4px;
-            display: inline-block;
-            &:hover{
-                display: inline-block;
-                border-radius: 50%;
-                color: rgb(0, 82, 204);
-                background-color: rgba(222, 235, 255, 0.9);
-            }
         }
-        &_linked{
-            display: inline-block;
+        &_item:hover, &_linked {
             border-radius: 50%;
             color: rgb(0, 82, 204);
             background-color: rgba(222, 235, 255, 0.9);

@@ -20,8 +20,10 @@ const PipelineAdd = props =>{
 
     const {createPipeline} = pipelineStore
 
+    // 添加状态
     const [isLoading,setIsLoading] = useState(false)
 
+    // 当前步骤
     const [current,setCurrent] = useState(0)
 
     // 流水线模板 -- 下标
@@ -60,7 +62,7 @@ const PipelineAdd = props =>{
                </div>
                <div className="template-base">
                    <span>流水线权限：</span>
-                   <span> {baseInfo.power===1?"全局":"私有"}</span>
+                   <span>{baseInfo.power===1?"全局":"私有"}</span>
                </div>
                <PipelineAddMould
                    templateType={templateType}
@@ -81,7 +83,7 @@ const PipelineAdd = props =>{
     )
 
     const renderBtn = (
-        current ===1 &&
+        current === 1 &&
         <>
             <Btn
                 onClick={()=>props.history.push("/index/pipeline")}

@@ -8,17 +8,20 @@ import {
     UnlockOutlined,
     MinusCircleOutlined
 } from "@ant-design/icons";
+import {observer} from "mobx-react";
 import historyStore from "../../history/store/HistoryStore";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import Profile from "../../../common/profile/Profile";
 import ListIcon from "../../../common/list/ListIcon";
 import Page from "../../../common/page/Page";
+import {SpinLoading} from "../../../common/loading/Loading";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
 import pip_halt from "../../../assets/images/svg/pip_halt.svg";
+import pip_xingxing from "../../../assets/images/svg/pip_xingxing.svg";
+import pip_xingxing_kong from "../../../assets/images/svg/pip_xingxing-kong.svg";
 import "./PipelineTable.scss";
-import {SpinLoading} from "../../../common/loading/Loading";
 
 /**
  * 流水线表格页面
@@ -30,8 +33,8 @@ const PipelineTable = props =>{
 
     const {pipelineStore,changPage,changFresh,listType,isLoading}=props
 
-    const {execStart,execStop}=historyStore
     const {pipelineListPage,updateFollow,pipPage} = pipelineStore
+    const {execStart,execStop}=historyStore
 
     /**
      * 收藏
@@ -44,7 +47,6 @@ const PipelineTable = props =>{
             }else {
                 collectMessage(res,"取消")
             }
-            changFresh()
         })
     }
 
@@ -56,8 +58,27 @@ const PipelineTable = props =>{
     const collectMessage = (res,info) =>{
         if(res.code===0){
             message.info(`${info}成功`,0.5)
+            changFresh()
         }else {
             message.info(res.msg,0.5)
+        }
+    }
+
+    /**
+     * 运行或者终止
+     * @param record
+     */
+    const work = record =>{
+        if(record.state === 1){
+            // 开始运行
+            execStart(record.id).then(r=>{
+                if(r.code===0) return changFresh()
+            })
+        } else {
+            // 停止运行
+            execStop(record.id).then(r=>{
+                if(r.code===0) return changFresh()
+            })
         }
     }
 
@@ -82,24 +103,6 @@ const PipelineTable = props =>{
      * @returns {*}
      */
     const goHistory = record => props.history.push(`/index/pipeline/${record.id}/structure`)
-
-    /**
-     * 运行或者终止
-     * @param record
-     */
-    const work = record =>{
-        if(record.state === 1){
-            // 运行
-            execStart(record.id).then(()=>{
-                changFresh()
-            })
-        } else {
-            // 运行
-            execStop(record.id).then(()=>{
-                changFresh()
-            })
-        }
-    }
 
     const renTip = buildStatus => {
         switch (buildStatus) {
@@ -197,7 +200,7 @@ const PipelineTable = props =>{
             width:"10%",
             ellipsis:true,
             render:(text,record)=>{
-                const {state,collect} = record
+                const {state} = record
                 return(
                     <Space>
                         <Tooltip title={state===3?"等待":"运行"} >
@@ -214,16 +217,7 @@ const PipelineTable = props =>{
                         </Tooltip>
                         <Tooltip title="收藏">
                             <span className="pipelineTable-collect" onClick={()=>collectAction(record)}>
-                            {
-                                collect === 0 ?
-                                    <svg className="icon" aria-hidden="true">
-                                        <use xlinkHref={`#icon-xingxing-kong`} />
-                                    </svg>
-                                    :
-                                    <svg className="icon" aria-hidden="true">
-                                        <use xlinkHref={`#icon-xingxing1`} />
-                                    </svg>
-                            }
+                                <img src={record.collect === 0 ? pip_xingxing_kong : pip_xingxing} alt={"收藏"} width={20} height={20}/>
                             </span>
                         </Tooltip>
                     </Space>
@@ -249,4 +243,4 @@ const PipelineTable = props =>{
             </div>
 }
 
-export default PipelineTable
+export default observer(PipelineTable)

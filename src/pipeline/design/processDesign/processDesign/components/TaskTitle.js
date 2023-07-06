@@ -15,7 +15,7 @@ export const taskTitle = type =>{
         case 'svn':  return "SVN"
         case 'xcode':  return "XCode"
         case 'maventest': return "maven单元测试"
-        case 'teston': return "testOn自动化测试"
+        case 'teston': return "TestOn自动化测试"
         case 'maven': return "maven构建"
         case 'nodejs': return "node"
         case 'liunx': return "虚拟机"

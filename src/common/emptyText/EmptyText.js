@@ -1,4 +1,5 @@
 import React from "react";
+import pip_meiyouxiangguan from "../../assets/images/svg/pip_meiyouxiangguan.svg";
 
 /**
  * 暂无数据
@@ -11,9 +12,7 @@ const EmptyText = props =>{
     const {title} = props
 
     return  <div style={{textAlign:"center"}}>
-                <svg className="icon" aria-hidden="true" style={{height:50,width:50}} >
-                    <use xlinkHref="#icon-meiyouxiangguan"/>
-                </svg>
+                <img src={pip_meiyouxiangguan} alt="maven" style={{width:50,height:50}}/>
                 <div style={{fontSize:13,color:"#999"}}>{title ? title : "暂无数据"}</div>
             </div>
 }

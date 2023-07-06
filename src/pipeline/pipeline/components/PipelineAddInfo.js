@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react";
-import {Dropdown, Form, Input, Select, Space, Table, Tooltip} from "antd";
+import {Form, Input, Select, Space, Table, Tooltip} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
@@ -7,6 +7,7 @@ import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import Profile from "../../../common/profile/Profile";
 import Btn from "../../../common/btn/Btn";
 import EmptyText from "../../../common/emptyText/EmptyText";
+import {PipelineDropdown} from "../../../common/dropdown/DropdownMenu";
 import PipelineUserAdd from "./PipelineUserAdd";
 import "./PipelineAddInfo.scss";
 
@@ -47,11 +48,8 @@ const PipelineAddInfo = props =>{
             // 初始化表单
             form.setFieldsValue({name:pipeline.name})
         }
-    },[])
-
-    useEffect(()=>{
-        if(!set){
-            // 获取用户
+        else {
+            // 初始化获取用户
             findUserPage({
                 pageParam:{
                     pageSize:5,
@@ -83,10 +81,9 @@ const PipelineAddInfo = props =>{
 
     /**
      * 移出用户
-     * @param text
      * @param record
      */
-    const del = (text,record) =>{
+    const del = record =>{
         // yUserList（已选择） 减少
         setYUserList(yUserList.filter(item=>item.id!==record.id))
     }
@@ -192,7 +189,7 @@ const PipelineAddInfo = props =>{
             key:"adminRole",
             width:"25",
             ellipsis:true,
-            render: (text,record)=>(
+            render: (_,record)=>(
                 <Select
                     defaultValue={record.id===userId}
                     bordered={false}
@@ -212,10 +209,10 @@ const PipelineAddInfo = props =>{
             key:"action",
             width:"5%",
             ellipsis:true,
-            render: (text,record) => {
+            render: (_,record) => {
                 if (record.id !== userId) {
                     return  <Tooltip title="移出用户">
-                                <DeleteOutlined onClick={()=>del(text,record)}/>
+                                <DeleteOutlined onClick={()=>del(record)}/>
                             </Tooltip>
                 }
             }
@@ -228,7 +225,12 @@ const PipelineAddInfo = props =>{
             <div className="pipeline-user">
                 <div className="pipeline-user-title">
                     <div>流水线成员</div>
-                    <Dropdown overlay={
+                    <PipelineDropdown
+                        Icon={<Btn title={"添加成员"} icon={<PlusOutlined/>} type={"link-nopadding"}/>}
+                        visible={visible}
+                        setVisible={setVisible}
+                        width={240}
+                    >
                         <PipelineUserAdd
                             visible={visible}
                             setVisible={setVisible}
@@ -236,14 +238,8 @@ const PipelineAddInfo = props =>{
                             yUserList={yUserList}
                             setYUserList={setYUserList}
                             pipelineStore={pipelineStore}
-                        />}
-                        placement={"bottomRight"}
-                        visible={visible}
-                        trigger={['click']}
-                        onVisibleChange={visible => setVisible(visible)}
-                    >
-                        <Btn title={"添加成员"} icon={<PlusOutlined/>} type={"link"}/>
-                    </Dropdown>
+                        />
+                    </PipelineDropdown>
                 </div>
                 <div className="pipeline-user-table">
                     <Table

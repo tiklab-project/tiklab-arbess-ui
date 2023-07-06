@@ -30,8 +30,7 @@ const HistoryDetailTree = props =>{
      */
     const taskLog = item => {
         if(isRun){
-            setId(item.id)
-            return
+            return setId(item.id)
         }
         setLogData(item)
     }
@@ -75,7 +74,7 @@ const HistoryDetailTree = props =>{
                 </div>
                 <div className={`tree-ul ${isExpandedTree(group.id) ? null:"tree-li-hidden"}`}>
                     {
-                        group.taskInstanceList && group.taskInstanceList.map((list,listIndex)=>{
+                        group?.taskInstanceList.map((list,listIndex)=>{
                             return renderLi(list,listIndex)
                         })
                     }
@@ -88,7 +87,7 @@ const HistoryDetailTree = props =>{
     return(
         <div className="tree-ul">
             {
-                treeData && treeData.stageInstanceList && treeData.stageInstanceList.map((group,groupIndex)=>{
+                treeData?.stageInstanceList && treeData.stageInstanceList.map((group,groupIndex)=>{
                     return renderSubLi(group,groupIndex)
                 })
             }

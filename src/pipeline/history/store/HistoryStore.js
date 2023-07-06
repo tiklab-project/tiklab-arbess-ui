@@ -8,10 +8,6 @@ class HistoryStore {
     @observable
     historyList = []
 
-    // 构建历史运行状态数据
-    @observable
-    execData = ""
-
     // 重新刷新
     @observable
     historyFresh = false
@@ -82,11 +78,7 @@ class HistoryStore {
     findTaskInstance = async value =>{
         const param = new FormData()
         param.append("instanceId",value)
-        const data = await Axios.post("/taskInstance/findTaskInstance",param)
-        if(data.code===0){
-            this.execData = data.data && data.data
-        }
-        return data
+        return await Axios.post("/taskInstance/findTaskInstance", param)
     }
 
     /**
@@ -98,11 +90,7 @@ class HistoryStore {
     findStageInstance = async value =>{
         const param = new FormData()
         param.append("instanceId",value)
-        const data = await Axios.post("/stageInstance/findStageInstance",param)
-        if(data.code===0){
-            this.execData = data.data && data.data
-        }
-        return data
+        return await Axios.post("/stageInstance/findStageInstance", param)
     }
 
     /**

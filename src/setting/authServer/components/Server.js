@@ -20,10 +20,16 @@ const Server = props =>{
 
     const {findAllAuthServerList,deleteAuthServer} = serverStore
 
+    // 弹出框状态
     const [visible,setVisible] = useState(false)
+
+    // 弹出窗form表单value
     const [formValue,setFormValue] = useState("")
+
+    // 服务配置类型
     const [activeTab,setActiveTab] = useState('all')
 
+    // 服务配置列表
     const [authServerList,setAuthServerList] = useState([])
 
     useEffect(()=>{
@@ -31,6 +37,9 @@ const Server = props =>{
         findAuth()
     },[activeTab])
 
+    /**
+     * 获取服务配置
+     */
     const findAuth = () =>{
         findAllAuthServerList(activeTab).then(r=>{
             if(r.code===0){
@@ -69,38 +78,14 @@ const Server = props =>{
     }
 
     const lis = [
-        {
-            id:'all',
-            title: "全部"
-        },
-        {
-            id:'gitee',
-            title:"Gitee"
-        },
-        {
-            id:'github',
-            title:"Github"
-        },
-        {
-            id:'xcode',
-            title:"XCode"
-        },
-        {
-            id:'teston',
-            title:"TestOn"
-        },
-        {
-            id:'sonar',
-            title:"Sonar"
-        },
-        {
-            id:'nexus',
-            title:"Nexus",
-        },
-        {
-            id:'xpack',
-            title:"XPack",
-        },
+        {id:'all', title: "全部"},
+        {id:'gitee', title:"Gitee"},
+        {id:'github', title:"Github"},
+        {id:'xcode', title:"XCode"},
+        {id:'teston', title:"TestOn"},
+        {id:'sonar', title:"Sonar"},
+        {id:'nexus', title:"Nexus"},
+        {id:'xpack', title:"XPack"},
     ]
 
     // 标题
@@ -115,17 +100,15 @@ const Server = props =>{
     const user = (text,record) =>{
         return  <Space>
                     <Profile userInfo={record.user}/>
-                {text}
+                    {text}
                 </Space>
     }
 
     // 权限
     const authPublic = text =>{
         switch (text) {
-            case 1:
-                return "全局"
-            case 2:
-                return "私有"
+            case 1: return "全局"
+            case 2: return "私有"
         }
     }
 
@@ -270,14 +253,7 @@ const Server = props =>{
             key:"authType",
             width:"15%",
             ellipsis:true,
-            render: text => {
-                switch (text) {
-                    case 1:
-                        return "username&password"
-                    case 2:
-                        return "私钥"
-                }
-            }
+            render: text => text===1?"username&password":"私钥"
         },
         {
             title:"创建人",
@@ -309,7 +285,7 @@ const Server = props =>{
             key: "action",
             width:"10%",
             ellipsis:true,
-            render:(text,record) => action(record)
+            render:(_,record) => action(record)
         }
     ]
 

@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
-import {withRouter} from "react-router";
 import {inject,observer} from "mobx-react";
 import PipelineTable from "./PipelineTable";
 import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
@@ -21,10 +20,13 @@ const Pipeline = props =>{
 
     const {findUserPipelinePage} = pipelineStore
 
+    // 流水线分类
     const [listType,setListType] = useState(1)
 
+    // 刷新状态
     const [fresh,setFresh] = useState(false)
 
+    // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
     const [pageParam] = useState({
@@ -32,20 +34,26 @@ const Pipeline = props =>{
         currentPage: 1,
     })
 
+    // 请求数据
     const [pipelineParam,setPipelineParam] = useState({
         pageParam
     })
 
     useEffect(()=>{
+        // 初始化获取流水线
         if(listType===1){
-            findUserPipelinePage(pipelineParam).then(r=>setIsLoading(false))
+            // 所有流水线
+            findUserPipelinePage({
+                ...pipelineParam
+            }).then(r=>setIsLoading(false))
         }else {
+            // 我收藏的流水线
             findUserPipelinePage({
                 ...pipelineParam,
                 pipelineFollow:1
             }).then(r=>setIsLoading(false))
         }
-    },[fresh,pipelineParam])
+    },[pipelineParam,fresh])
 
     /**
      * 模糊查询流水线
@@ -85,14 +93,16 @@ const Pipeline = props =>{
     }
 
     /**
+     * 操作更新流水线状态
+     */
+    const changFresh = () => {
+        setFresh(!fresh)
+    }
+
+    /**
      * 去添加流水线页面
      */
     const onClick = () =>props.history.push('/index/pipeline/new')
-
-    /**
-     * 重新获取流水线，刷新状态
-     */
-    const changFresh = () =>setFresh(!fresh)
 
     return(
         <div className="pipeline">
@@ -129,4 +139,4 @@ const Pipeline = props =>{
     )
 }
 
-export default withRouter(inject("pipelineStore")(observer(Pipeline)))
+export default inject("pipelineStore")(observer(Pipeline))

@@ -64,9 +64,12 @@ const Directory=AsyncComponent(()=>import("./setting/user/Directory"))
 const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
 const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
 const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
+
+// privilege
 const DomainRole=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
 const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
 const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
+
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))

@@ -7,10 +7,9 @@ import {
     MessageOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
-import {observer} from "mobx-react";
 import EmptyText from "../../common/emptyText/EmptyText";
 import Btn from "../../common/btn/Btn";
-import "./HeaderMessage.scss";
+import "./PortalMessage.scss";
 
 /**
  * 消息通知
@@ -18,13 +17,20 @@ import "./HeaderMessage.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const HeaderMessage = props =>{
+const PortalMessage = props =>{
 
-    const {homeStore,visible,setVisible,pipelineList} = props
+    const {messageStore,unread,setUnread,visible,setVisible,pipelineList} = props
 
-    const {findMessageItemPage,messageList,messPage,setMessagePagination,messagePagination,
-        setMessageList,unread,updateMessageItem,mesFresh,deleteMessageItem
-    } = homeStore
+    const {findMessageItemPage,updateMessageItem,deleteMessageItem} = messageStore
+
+    // 消息列表
+    const [messageList,setMessageList] = useState([])
+
+    // 消息分页
+    const [messagePagination,setMessagePagination] = useState(1)
+
+    // 消息总页
+    const [messageTotalPage,setMessageTotalPage] = useState(1)
 
     //加载
     const [isLoading,setIsLoading] = useState(false)
@@ -40,11 +46,39 @@ const HeaderMessage = props =>{
     },[visible])
 
     useEffect(()=>{
-        // 获取全部消息
-        visible && findMessageItemPage(selected).then(res=>{
+        // 获取消息
+        visible && findMessage()
+    },[visible,messagePagination,selected])
+
+    /**
+     * 获取信息
+     */
+    const findMessage = () => {
+        let param = {
+            pageParam: {
+                pageSize: 12,
+                currentPage: messagePagination
+            }
+        }
+        if(selected!==2){
+            param.status = selected
+        }
+        findMessageItemPage(param).then(res=>{
             setIsLoading(false)
+            if(res.code===0){
+                setMessageTotalPage(res.data?.totalPage || 1)
+                if(selected===0){
+                    setUnread(res.data.totalRecord || 0)
+                }
+                if(res.data.currentPage===1){
+                    setMessageList(res.data.dataList || [])
+                }
+                if (res.data.currentPage > 1){
+                    setMessageList([...messageList,...res.data.dataList])
+                }
+            }
         })
-    },[visible,messagePagination,selected,mesFresh])
+    }
 
     /**
      * 加载更多消息
@@ -55,18 +89,9 @@ const HeaderMessage = props =>{
     }
 
     const tabs = [
-        {
-            id:2,
-            title:"全部",
-        },
-        {
-            id:0,
-            title:"未读",
-        },
-        {
-            id:1,
-            title:"已读",
-        }
+        { id:2, title:"全部"},
+        { id:0, title:"未读"},
+        { id:1, title:"已读",}
     ]
 
     /**
@@ -85,7 +110,9 @@ const HeaderMessage = props =>{
                 status: 1
             }
             // 更新消息（已读）
-            updateMessageItem(updateParams)
+            updateMessageItem(updateParams).then(res=>{
+                findMessage()
+            })
         }
         if(isPipeline(data.pipelineId)){
             props.history.push(item.link.split("#")[1])
@@ -110,7 +137,11 @@ const HeaderMessage = props =>{
     const delMessage = (e,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
-        deleteMessageItem(item.id)
+        deleteMessageItem(item.id).then(res=>{
+            if(res.code===0){
+                findMessage()
+            }
+        })
     }
 
     /**
@@ -123,17 +154,19 @@ const HeaderMessage = props =>{
     }
 
     const renderTabs = item => {
-        return   <div key={item.id} className={`title-item ${item.id===selected?"title-select":""}`} onClick={()=>changMessage(item)}>
-            {item.title}
-            {
-                item.id === 0 &&
-                <span className={`messageModal-screen-tab ${unread< 100 ?"":"messageModal-screen-much"}`}>
+        return (
+            <div key={item.id} className={`title-item ${item.id===selected?"title-select":""}`} onClick={()=>changMessage(item)}>
+                {item.title}
+                {
+                    item.id === 0 &&
+                    <span className={`messageModal-screen-tab ${unread< 100 ?"":"messageModal-screen-much"}`}>
                     {
                         unread < 100 ? unread : 99
                     }
                 </span>
-            }
-        </div>
+                }
+            </div>
+        )
     }
 
     /**
@@ -210,7 +243,7 @@ const HeaderMessage = props =>{
                             renderMessageList(messageList)
                         }
                         {
-                            messageList && messageList.length===messPage.total && messagePagination >1 &&
+                            messagePagination === messageTotalPage && messagePagination > 1 &&
                             <Divider plain>没有更多了 🤐</Divider>
                         }
                         {
@@ -220,7 +253,7 @@ const HeaderMessage = props =>{
                             </div>
                         }
                         {
-                            messageList && messageList.length < messPage.total && !isLoading &&
+                            messagePagination < messageTotalPage && !isLoading &&
                             <div className="messageModal-more" onClick={()=>moreMessage()}>
                                 加载更多...
                             </div>
@@ -238,4 +271,4 @@ const HeaderMessage = props =>{
     )
 }
 
-export default observer(HeaderMessage)
+export default PortalMessage

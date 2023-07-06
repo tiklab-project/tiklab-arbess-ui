@@ -136,15 +136,8 @@ module.exports = merge(baseWebpackConfig, {
                 },
                 antdUI: {
                     name: "chunk-antdUI",
-                    chunks: "async",
-                    test: /antd/,
-                    priority: 1,
-                    reuseExistingChunk: true
-                },
-                icon: {
-                    name: "chunk-icon",
                     chunks: "all",
-                    test: /font_icon/,
+                    test: /antd/,
                     priority: 1,
                     reuseExistingChunk: true
                 },
@@ -160,6 +153,8 @@ module.exports = merge(baseWebpackConfig, {
                     name: "commons",
                     test: function (module, chunks) {
                         if (
+                            /src\/components\//.test(module.context) ||
+                            /src\/util\//.test(module.context) ||
                             /react/.test(module.context) ||
                             /react-dom/.test(module.context) ||
                             /redux/.test(module.context)

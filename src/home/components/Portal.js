@@ -2,6 +2,8 @@ import React,{useState,useEffect} from "react";
 import {Dropdown,Badge} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
+import {AppLink} from "tiklab-integration-ui";
+import {renderRoutes} from "react-router-config";
 import {
     GlobalOutlined,
     BellOutlined,
@@ -15,11 +17,10 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/img/matflow3.png";
-import HeaderMessage from "./HeaderMessage";
 import Profile from "../../common/profile/Profile";
-import PortalMenu from "./PortalMenu";
-import {AppLink} from "tiklab-integration-ui";
-import {renderRoutes} from "react-router-config";
+import { PortalDropdown } from "../../common/dropdown/DropdownMenu";
+import PortalMessage from "./PortalMessage";
+import messageStore from "../store/MessageStore"
 import "./Portal.scss";
 
 /**
@@ -30,9 +31,9 @@ import "./Portal.scss";
  */
 const  Portal = props =>{
 
-    const {route,homeStore,pipelineStore,systemRoleStore} = props
+    const {route,pipelineStore,systemRoleStore} = props
 
-    const {findMessageItemPage,unread} = homeStore
+    const {findMessageItemPage} = messageStore
     const {findUserPipeline,pipelineList} = pipelineStore
     const {getSystemPermissions} = systemRoleStore
 
@@ -40,10 +41,22 @@ const  Portal = props =>{
     const {i18n,t} = useTranslation()
     const [currentLink,setCurrentLink] = useState(path)
     const [visible,setVisible] = useState(false)
+    const [unread,setUnread] = useState(1)
 
     useEffect(()=>{
+
         // 获取未读消息通知
-        findMessageItemPage(0)
+        findMessageItemPage({
+            status:0,
+            pageParam: {
+                pageSize: 12,
+                currentPage: 1
+            }
+        }).then(res=>{
+            if(res.code===0){
+                setUnread(res.data.totalRecord || 0)
+            }
+        })
 
         // 获取所有流水线
         findUserPipeline()
@@ -144,26 +157,28 @@ const  Portal = props =>{
                 </div>
                 <div className="frame-header-right">
                     <div className="frame-header-right-text">
-                        <PortalMenu
+                        <PortalDropdown
                             tooltip={'设置'}
                             Icon={<SettingOutlined className="frame-header-icon"/>}
                             onClick={()=>props.history.push("/index/system")}
                         />
-                        <PortalMenu
+                        <PortalDropdown
                             tooltip={'消息'}
                             Icon={ <Badge count={unread} size="small">
                                         <BellOutlined className="frame-header-icon"/>
                                    </Badge>}
                             onClick={()=>setVisible(true)}
                         />
-                        <HeaderMessage
+                        <PortalMessage
                             {...props}
                             visible={visible}
                             setVisible={setVisible}
                             pipelineList={pipelineList}
-                            homeStore={homeStore}
+                            unread={unread}
+                            setUnread={setUnread}
+                            messageStore={messageStore}
                         />
-                        <PortalMenu
+                        <PortalDropdown
                             tooltip={'帮助与支持'}
                             Icon={<QuestionCircleOutlined className="frame-header-icon"/>}
                             width={200}
@@ -186,9 +201,9 @@ const  Portal = props =>{
                                     在线客服
                                 </div>
                             </div>
-                        </PortalMenu>
+                        </PortalDropdown>
 
-                        <PortalMenu
+                        <PortalDropdown
                             tooltip={'个人中心'}
                             Icon={<Profile />}
                             width={240}
@@ -220,7 +235,7 @@ const  Portal = props =>{
                                     </div>
                                 </div>
                             </div>
-                        </PortalMenu>
+                        </PortalDropdown>
                     </div>
                 </div>
 
@@ -232,4 +247,4 @@ const  Portal = props =>{
     )
 }
 
-export default inject("systemRoleStore","homeStore","pipelineStore")(observer(Portal))
+export default inject("systemRoleStore","pipelineStore")(observer(Portal))

@@ -9,7 +9,7 @@ import {
     SoundOutlined,
     SwitcherOutlined,
     VerifiedOutlined,
-    AuditOutlined,
+
 } from "@ant-design/icons";
 import SystemContent from "./SettingContent";
 

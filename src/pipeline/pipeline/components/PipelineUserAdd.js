@@ -189,6 +189,8 @@ const PipelineUserAdd = props =>{
                         title:"昵称",
                         dataIndex:"nickname",
                         key:"nickname",
+                        width:"100%",
+                        ellipsis:true
                     }]}
                     dataSource={userList}
                     pagination={false}
