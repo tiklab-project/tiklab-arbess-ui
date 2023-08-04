@@ -134,7 +134,7 @@ const HistoryTable = props =>{
             key:"action",
             width:"10%",
             ellipsis:true,
-            render:(text,record)=> {
+            render:(_,record)=> {
                 switch (record.runStatus) {
                     case "run":
                         return  <Tooltip title={"终止"} onClick={()=>terminateOperation(record.pipeline)}>
@@ -182,7 +182,11 @@ const HistoryTable = props =>{
                         locale={{emptyText:isLoading?
                                 <SpinLoading type="table"/>:<EmptyText title={"没有查询到历史记录"}/>}}
                     />
-                    <Page pageCurrent={pageCurrent} changPage={changPage} page={page}/>
+                    <Page
+                        pageCurrent={pageCurrent}
+                        changPage={changPage}
+                        page={page}
+                    />
                 </div>
             </div>
         </div>

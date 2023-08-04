@@ -3,7 +3,7 @@ import {Form, Input, Tooltip, Select} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import hostStore from "../store/HostStore";
 import AuthType from "../../authCommon/AuthType";
-import {Validation} from "../../../common/client/Client";
+import {Validation} from "../../../common/utils/Client";
 import Btn from "../../../common/btn/Btn";
 import Modals from "../../../common/modal/Modal";
 
@@ -81,7 +81,6 @@ const HostModal = props =>{
         <Modals
             visible={visible}
             onCancel={onCancel}
-            closable={false}
             footer={modalFooter}
             destroyOnClose={true}
             title={formValue?"修改":"添加"}
@@ -91,7 +90,7 @@ const HostModal = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
-                    initialValues={{type:31,authPublic:1,authWay:1,authType:2}}
+                    initialValues={{type:"common",authPublic:1,authWay:1,authType:2}}
                 >
                     <Form.Item
                         name="type"

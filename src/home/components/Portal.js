@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import {Dropdown,Badge} from "antd";
 import {useTranslation} from "react-i18next";
 import {getUser} from "tiklab-core-ui";
-import {AppLink} from "tiklab-integration-ui";
 import {renderRoutes} from "react-router-config";
 import {
     GlobalOutlined,
@@ -31,7 +30,7 @@ import "./Portal.scss";
  */
 const  Portal = props =>{
 
-    const {route,pipelineStore,systemRoleStore} = props
+    const {route,pipelineStore,systemRoleStore,AppLink} = props
 
     const {findMessageItemPage} = messageStore
     const {findUserPipeline,pipelineList} = pipelineStore
@@ -147,7 +146,7 @@ const  Portal = props =>{
         <div className="frame">
             <div className="frame-header">
                 <div className="frame-header-right">
-                    <AppLink isSSO={false}/>
+                    {AppLink}
                     <div className="frame-header-logo">
                         <img src={logo} alt="logo" />
                     </div>

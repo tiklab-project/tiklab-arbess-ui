@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Form,Select,Input} from "antd";
+import {Form,Select} from "antd";
 import {inject, observer} from "mobx-react";
 import AuthFind from "../AuthFind";
 import FormsSelect from "../FormsSelect";

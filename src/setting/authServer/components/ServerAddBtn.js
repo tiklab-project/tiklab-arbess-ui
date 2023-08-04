@@ -1,6 +1,5 @@
-import React,{useState} from "react";
+import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
-import {inject,observer} from "mobx-react";
 import Btn from "../../../common/btn/Btn";
 import ServerModal from "./ServerModal";
 
@@ -21,7 +20,7 @@ const ServerAddBtn = props =>{
     const addServerBtn = () =>{
         setVisible(true)
         if(formValue){
-            setFormValue("null")
+            setFormValue(null)
         }
     }
 

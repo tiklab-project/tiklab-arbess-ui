@@ -33,11 +33,10 @@ const BasicInfo = props => {
 
     /**
      * 表单id
-     * @param dataItem：表单数据
      * @param name：类型
      * @returns {string}
      */
-    const getId = (dataItem,name) =>{
+    const getId = name =>{
         return dataItem.taskId + "_" + name
     }
 
@@ -45,119 +44,123 @@ const BasicInfo = props => {
         // 初始化表单内容
         const task = dataItem && dataItem.task
 
+        const authHost = task.auth ? task.auth.name+"("+ task.auth.ip+")" : null
+        const authAuth = task.auth ? task.auth.name+"("+(task.auth.authType===1 ? task.auth.username:"私钥")+")" : null
+
         switch(dataItem.taskType){
             case 'git':
             case 'gitlab':
             case 'svn':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"codeName")]:task?.codeName,
-                    [getId(dataItem,"codeBranch")]:task?.codeBranch,
-                    [getId(dataItem,"codeAlias")]:task?.codeAlias,
-                    [getId(dataItem,"svnFile")]:task?.svnFile,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType===1?task.auth?.username:"私钥")+")",
-                    [getId(dataItem,"authId")]:task?.authId,
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("codeName")]:task?.codeName,
+                    [getId("codeBranch")]:task?.codeBranch,
+                    [getId("codeAlias")]:task?.codeAlias,
+                    [getId("svnFile")]:task?.svnFile,
+                    [getId("authName")]:authAuth,
+                    [getId("authId")]:task?.authId,
                 })
                 break
             case 'xcode':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"codeName")]:task?.repository?.name,
-                    [getId(dataItem,"codeBranch")]:task?.branch?.name,
-                    [getId(dataItem,"codeAlias")]:task?.codeAlias,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType===1?task.auth?.username:"私钥")+")",
-                    [getId(dataItem,"authId")]:task?.authId,
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("codeName")]:task?.repository?.name,
+                    [getId("codeBranch")]:task?.branch?.name,
+                    [getId("codeAlias")]:task?.codeAlias,
+                    [getId("authName")]:authAuth,
+                    [getId("authId")]:task?.authId,
                 })
                 break
             case 'gitee':
             case 'github':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"codeName")]:task?.codeName,
-                    [getId(dataItem,"codeBranch")]:task?.codeBranch,
-                    [getId(dataItem,"codeAlias")]:task?.codeAlias,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+ (task.auth?.authType===1?task.auth?.message:"私钥") +")",
-                    [getId(dataItem,"authId")]:task?.authId
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("codeName")]:task?.codeName,
+                    [getId("codeBranch")]:task?.codeBranch,
+                    [getId("codeAlias")]:task?.codeAlias,
+                    [getId("authName")]:authAuth,
+                    [getId("authId")]:task?.authId
                 })
                 break
             case 'maven':
             case 'nodejs':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"buildAddress")]:task?.buildAddress,
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("buildAddress")]:task?.buildAddress,
+                    [getId("productRule")]:task?.productRule,
                 })
                 break
             case 'liunx':
             case 'docker':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"localAddress")]:task?.localAddress,
-                    [getId(dataItem,"deployAddress")]:task?.deployAddress,
-                    [getId(dataItem,"deployOrder")]:task?.deployOrder,
-                    [getId(dataItem,"startAddress")]:task?.startAddress,
-                    [getId(dataItem,"authType")]:task?.authType ? task.authType:1,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+ task.auth?.ip+")",
-                    [getId(dataItem,"authId")]:task?.authId,
+                    [getId("taskName")]:dataItem?.taskName,
+                    // [getId("localAddress")]:task?.localAddress,
+                    [getId("deployAddress")]:task?.deployAddress,
+                    [getId("deployOrder")]:task?.deployOrder,
+                    [getId("startAddress")]:task?.startAddress,
+                    [getId("authType")]:task.authType ? task.authType:1,
+                    [getId("authName")]: authHost,
+                    [getId("authId")]:task?.authId,
                 })
                 break
             case 'sonar':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"projectName")]:task?.projectName,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType===1?task.auth?.username:"私钥")+")",
-                    [getId(dataItem,"authId")]:task?.authId
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("projectName")]:task?.projectName,
+                    [getId("authName")]: authAuth,
+                    [getId("authId")]:task?.authId
                 })
                 break
             case 'teston':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"testSpace")]:task?.testSpace?.name,
-                    [getId(dataItem,"apiEnv")]:task?.apiEnv?.name,
-                    [getId(dataItem,"appEnv")]:task?.appEnv?.name,
-                    [getId(dataItem,"webEnv")]:task?.webEnv?.name,
-                    [getId(dataItem,"testPlan")]:task?.testPlan?.name,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType=== 1?task.auth?.username:"私钥")+")",
-                    [getId(dataItem,"authId")]:task?.authId
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("testSpace")]:task?.testSpace?.name,
+                    [getId("apiEnv")]:task?.apiEnv?.name,
+                    [getId("appEnv")]:task?.appEnv?.name,
+                    [getId("webEnv")]:task?.webEnv?.name,
+                    [getId("testPlan")]:task?.testPlan?.name,
+                    [getId("authName")]: authAuth,
+                    [getId("authId")]:task?.authId
                 })
                 break
             case 'nexus':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"groupId")]:task?.groupId,
-                    [getId(dataItem,"artifactId")]:task?.artifactId,
-                    [getId(dataItem,"version")]:task?.version,
-                    [getId(dataItem,"fileType")]:task?.fileType,
-                    [getId(dataItem,"fileAddress")]:task?.fileAddress,
-                    [getId(dataItem,"putAddress")]:task?.repository?.name,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType=== 1?task.auth?.username:"私钥")+")",
-                    [getId(dataItem,"authId")]:task?.authId
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("groupId")]:task?.groupId,
+                    [getId("artifactId")]:task?.artifactId,
+                    [getId("version")]:task?.version,
+                    // [getId("fileType")]:task?.fileType,
+                    // [getId("fileAddress")]:task?.fileAddress,
+                    [getId("putAddress")]:task?.repository?.name,
+                    [getId("authName")]:authAuth,
+                    [getId("authId")]:task?.authId
                 })
                 break
             case 'xpack':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"groupId")]:task?.groupId,
-                    [getId(dataItem,"artifactId")]:task?.artifactId,
-                    [getId(dataItem,"version")]:task?.version,
-                    [getId(dataItem,"fileType")]:task?.fileType,
-                    [getId(dataItem,"fileAddress")]:task?.fileAddress,
-                    [getId(dataItem,"putAddress")]:task?.repository?.name,
-                    [getId(dataItem,"authName")]:task?.auth && task.auth?.name+"("+(task.auth?.authType=== 1?task.auth?.username:"私钥")+")",
-                    [getId(dataItem,"authId")]:task?.authId
+                    [getId("taskName")]:dataItem?.taskName,
+                    [getId("groupId")]:task?.groupId,
+                    [getId("artifactId")]:task?.artifactId,
+                    [getId("version")]:task?.version,
+                    // [getId("fileType")]:task?.fileType,
+                    // [getId("fileAddress")]:task?.fileAddress,
+                    [getId("putAddress")]:task?.repository?.name,
+                    [getId("authName")]: authAuth,
+                    [getId("authId")]:task?.authId
                 })
                 break
             case 'ssh':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
-                    [getId(dataItem,"fileAddress")]:task?.fileAddress,
-                    [getId(dataItem,"putAddress")]:task?.putAddress,
-                    [getId(dataItem,"authName")]:task?.auth?.name+"("+ task.auth?.ip+")",
-                    [getId(dataItem,"authId")]:task?.authId
+                    [getId("taskName")]:dataItem?.taskName,
+                    // [getId("fileAddress")]:task?.fileAddress,
+                    [getId("putAddress")]:task?.putAddress,
+                    [getId("authName")]:authHost,
+                    [getId("authId")]:task?.authId
                 })
                 break
             case 'maventest':
                 form.setFieldsValue({
-                    [getId(dataItem,"taskName")]:dataItem?.taskName,
+                    [getId("taskName")]:dataItem?.taskName,
                 })
                 break
             default:
@@ -165,7 +168,7 @@ const BasicInfo = props => {
                     [dataItem.stageId+"_stageName"]:dataItem?.stageName,
                 })
         }
-        form.validateFields()
+        form.validateFields().then(r => {})
         return ()=>form.resetFields(null)
     },[dataItem])
 
@@ -222,7 +225,7 @@ const BasicInfo = props => {
         <div className='taskForm-forms'>
             <Form form={form} layout="vertical" autoComplete="off">
                 {
-                    dataItem && dataItem.taskId ?
+                    dataItem && dataItem.taskType ?
                         <>
                             <FormsInput placeholder="任务名称" label="任务名称" name="taskName" isValid={true} dataItem={dataItem}/>
                             {renderForms(dataItem)}

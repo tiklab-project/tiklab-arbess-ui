@@ -2,7 +2,7 @@ import React,{useState,useRef,useEffect} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import {WhetherChange} from "../processDesign/components/Common";
-import {Validation} from "../../../../common/client/Client";
+import {Validation} from "../../../../common/utils/Client";
 
 /**
  * form文本框

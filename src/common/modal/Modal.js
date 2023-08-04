@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Modal} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import {autoHeight} from "../client/Client";
+import {autoHeight} from "../utils/Client";
 import Btn from "../btn/Btn";
 import "./Modal.scss";
 
@@ -31,6 +31,7 @@ const Modals = props => {
         <Modal
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
+            closable={false}
             className="mf"
             {...res}
         >

@@ -26,6 +26,12 @@ const BuildMavenOrNode = props =>{
                     placeholder={"执行命令"}
                 />
             </Form.Item>
+
+            <FormsInput
+                name={"productRule"}
+                placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
+                label={"制品信息"}
+            />
         </>
     )
 }

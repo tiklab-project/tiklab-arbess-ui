@@ -165,8 +165,7 @@ const Host = props =>{
 
     return(
         <div className="auth mf-home-limited mf">
-            <div className="auth-upper">
-                <BreadcrumbContent firstItem={"主机配置"} />
+            <BreadcrumbContent firstItem={"主机配置"}>
                 <HostAddBtn
                     visible={visible}
                     setVisible={setVisible}
@@ -174,7 +173,7 @@ const Host = props =>{
                     setFormValue={setFormValue}
                     findAuth={findAuth}
                 />
-            </div>
+            </BreadcrumbContent>
             <Tabs
                 tabLis={lis}
                 type={activeTab}

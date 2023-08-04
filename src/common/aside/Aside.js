@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Dropdown} from "antd";
 import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {renderRoutes} from "react-router-config";
-import {interceptUrl,autoHeight} from "../client/Client";
+import {interceptUrl,autoHeight} from "../utils/Client";
 import {Loading} from "../loading/Loading";
 import "./Aside.scss";
 

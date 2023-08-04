@@ -191,8 +191,11 @@ const Test = props => {
                         <EmptyText title={'暂无测试记录'}/>
                     }
 
-                    <Page pageCurrent={param.pageParam.currentPage} changPage={changPage} page={testPage}/>
-
+                    <Page
+                        pageCurrent={param.pageParam.currentPage} 
+                        changPage={changPage} 
+                        page={testPage}
+                    />
                 </div>
             </div>
         </div>

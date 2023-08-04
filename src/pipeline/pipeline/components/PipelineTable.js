@@ -236,10 +236,11 @@ const PipelineTable = props =>{
                     locale={{emptyText: isLoading ?
                             <SpinLoading type="table"/>: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
                 />
-                {
-                    pipPage?.total > 1 &&
-                    <Page pageCurrent={pipPage.current} changPage={changPage} page={pipPage}/>
-                }
+                <Page
+                    pageCurrent={pipPage.current}
+                    changPage={changPage}
+                    page={pipPage}
+                />
             </div>
 }
 

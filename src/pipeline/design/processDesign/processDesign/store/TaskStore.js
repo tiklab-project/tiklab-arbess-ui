@@ -69,6 +69,13 @@ class TaskStore {
     updateTask = async values =>{
         const data = await Axios.post("/tasks/updateTask",values)
         if(data.code===0){
+            // this.dataItem = {
+            //     ...this.dataItem,
+            //     task:{
+            //         ...this.dataItem.task,
+            //         ...values.values
+            //     }
+            // }
             await this.findOneTasksOrTask(this.dataItem.taskId)
             this.taskFresh=!this.taskFresh
         }
@@ -121,7 +128,7 @@ class TaskStore {
         params.append('taskId',value)
         const data = await Axios.post("/tasks/findOneTasksOrTask",params)
         if(data.code===0){
-            this.dataItem = data.data || []
+            this.dataItem = data.data || {}
         }
         else {
             message.info(data.msg)

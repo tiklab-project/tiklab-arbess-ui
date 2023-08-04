@@ -19,7 +19,7 @@ import "./PipelineAddInfo.scss";
  */
 const PipelineAddInfo = props =>{
 
-    const {set,pipelineStore,setCurrent,onClick,setBaseInfo} = props
+    const {set,pipelineStore,setCurrent,onClick,setBaseInfo,setIsLoading} = props
 
     const {pipeline,pipelineList,findUserPage,updatePipeline} = pipelineStore
 
@@ -96,12 +96,14 @@ const PipelineAddInfo = props =>{
         if(set){
             const params={
                 id:pipeline.id,
-                name:value.name===""?pipeline.name:value.name,
-                power:powerType
+                name:value.name===""? pipeline.name:value.name,
+                power: powerType
             }
+            setIsLoading(true)
             updatePipeline(params).then(res => {
                 if (res.code === 0) {
                     value.name!=="" && (pipeline.name = value.name)
+                    setIsLoading(false)
                     props.history.push(`/index/pipeline/${pipeline.id}/survey`)
                 }
             })
@@ -322,7 +324,6 @@ const PipelineAddInfo = props =>{
                                  .validateFields()
                                  .then((values) => {
                                      onOk(values)
-                                     form.resetFields()
                                  })
                          }}
                     />

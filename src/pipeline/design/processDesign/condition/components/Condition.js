@@ -23,13 +23,21 @@ const Condition = props =>{
     const [border,setBorder] = useState('')
     const [showArrow,setShowArrow] = useState(false)
 
-    const [condData,setCondData] = useState([])
+    const [condData,setCondData] = useState([]);
 
     useEffect(()=>{
         // 初始化条件
-        findAllTaskCond(dataItem.taskId)
+        findCond()
     },[dataItem.taskId])
 
+    const findCond = () => {
+        // 初始化条件
+        findAllTaskCond(dataItem.taskId).then(res=>{
+            if(res.code===0){
+                setCondData(res.data || [])
+            }
+        })
+    }
 
     /**
      * 获取符合要求的item
@@ -66,6 +74,10 @@ const Condition = props =>{
         createCond({
             condType:1,
             taskId:dataItem.taskId
+        }).then(res=>{
+            if(res.code===0){
+                findCond()
+            }
         })
     }
 
@@ -79,6 +91,10 @@ const Condition = props =>{
         updateCond({
             condType:value,
             condId:item.condId
+        }).then(res=>{
+            if(res.code===0){
+                findCond()
+            }
         })
     }
 
@@ -87,7 +103,11 @@ const Condition = props =>{
      * @param item
      */
     const reduceInput = item =>{
-        deleteCond(item.condId)
+        deleteCond(item.condId).then(res=>{
+            if(res.code===0){
+                findCond()
+            }
+        })
     }
 
     /**
@@ -105,6 +125,10 @@ const Condition = props =>{
             updateCond({
                 condId:item.condId,
                 ...obj
+            }).then(res=>{
+                if(res.code===0){
+                    findCond()
+                }
             })
         }
     }

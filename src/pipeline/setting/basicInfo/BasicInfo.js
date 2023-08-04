@@ -65,6 +65,7 @@ const BasicInfo = props =>{
                         <PipelineAddInfo
                             {...props}
                             set={true}
+                            setIsLoading={setIsLoading}
                             onClick={()=>setOpenOrClose(1)}
                             pipelineStore={pipelineStore}
                         />

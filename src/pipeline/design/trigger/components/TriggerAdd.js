@@ -89,7 +89,6 @@ const TriggerAdd = props =>{
         <Modals
             visible={triggerVisible}
             onCancel={()=>setTriggerVisible(false)}
-            closable={false}
             destroyOnClose={true}
             footer={modalFooter}
             width={500}

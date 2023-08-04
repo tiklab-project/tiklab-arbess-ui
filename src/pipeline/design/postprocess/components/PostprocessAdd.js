@@ -122,28 +122,6 @@ const PostprocessAdd = props =>{
         setPostprocessVisible(false)
     }
 
-    const modalFooter = (
-        <>
-            <Btn
-                onClick={()=>setPostprocessVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={() => {
-                    form
-                        .validateFields()
-                        .then((values) => {
-                            form.resetFields()
-                            onOk(values)
-                        })
-                }}
-                title={"确定"}
-                type={"primary"}
-            />
-        </>
-    )
-
     const columns = [
         {
             title: "成员",
@@ -216,9 +194,30 @@ const PostprocessAdd = props =>{
         },
     ]
 
+    const modalFooter = (
+        <>
+            <Btn
+                onClick={()=>setPostprocessVisible(false)}
+                title={"取消"}
+                isMar={true}
+            />
+            <Btn
+                onClick={() => {
+                    form
+                        .validateFields()
+                        .then((values) => {
+                            form.resetFields()
+                            onOk(values)
+                        })
+                }}
+                title={"确定"}
+                type={"primary"}
+            />
+        </>
+    )
+
     return(
         <Modals
-            closable={false}
             visible={postprocessVisible}
             onCancel={()=>setPostprocessVisible(false)}
             footer={modalFooter}

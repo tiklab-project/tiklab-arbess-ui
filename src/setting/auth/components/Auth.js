@@ -26,7 +26,7 @@ const Auth = props =>{
     const [visible,setVisible] = useState(false)
 
     // 弹出框form表单value
-    const [formValue,setFormValue] = useState("")
+    const [formValue,setFormValue] = useState(null)
 
     useEffect(()=>{
         // 初始化认证配置
@@ -132,8 +132,7 @@ const Auth = props =>{
 
     return(
         <div className="auth mf-home-limited mf">
-            <div className="auth-upper">
-                <BreadcrumbContent firstItem={"认证配置"}/>
+            <BreadcrumbContent firstItem={"认证配置"}>
                 <AuthAddBtn
                     visible={visible}
                     setVisible={setVisible}
@@ -141,7 +140,7 @@ const Auth = props =>{
                     setFormValue={setFormValue}
                     findAuth={findAuth}
                 />
-            </div>
+            </BreadcrumbContent>
             <div className="auth-content">
                 <Table
                     columns={commonColumns}

@@ -24,7 +24,7 @@ const Server = props =>{
     const [visible,setVisible] = useState(false)
 
     // 弹出窗form表单value
-    const [formValue,setFormValue] = useState("")
+    const [formValue,setFormValue] = useState(null)
 
     // 服务配置类型
     const [activeTab,setActiveTab] = useState('all')
@@ -308,8 +308,7 @@ const Server = props =>{
 
     return(
         <div className="auth mf-home-limited mf">
-            <div className="auth-upper">
-                <BreadcrumbContent firstItem={"服务配置"} />
+            <BreadcrumbContent firstItem={"服务配置"} >
                 <ServerAddBtn
                     type={'gitee'}
                     visible={visible}
@@ -318,7 +317,7 @@ const Server = props =>{
                     setFormValue={setFormValue}
                     findAuth={findAuth}
                 />
-            </div>
+            </BreadcrumbContent>
             <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
             <div className="auth-content">
                 <Table

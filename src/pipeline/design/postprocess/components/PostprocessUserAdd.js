@@ -197,10 +197,11 @@ const PostprocessUserAdd = props =>{
                     pagination={false}
                     locale={{emptyText: <EmptyText/>}}
                 />
-                {
-                    userPage && userPage.total>1 &&
-                    <Page pageCurrent={findUserParam.pageParam.currentPage} changPage={changUserPage} page={userPage}/>
-                }
+                <Page 
+                    pageCurrent={findUserParam.pageParam.currentPage}
+                    changPage={changUserPage}
+                    page={userPage}
+                />
             </div>
             <div className='user-add-btn'>
                 <Btn onClick={()=>setUserAddVisible(false)} title={"取消"} isMar={true}/>

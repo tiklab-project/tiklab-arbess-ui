@@ -105,10 +105,11 @@ const DynamicDetail = props =>{
                     </Space>
                 </div>
                 <DynamicList {...props} dynamicList={dynamicList}/>
-                {
-                    dynaPage && dynaPage.total > 1 &&
-                    <Page pageCurrent={params.pageParam.currentPage} changPage={changPage} page={dynaPage}/>
-                }
+                <Page
+                    pageCurrent={params.pageParam.currentPage}
+                    changPage={changPage}
+                    page={dynaPage}
+                />
             </div>
         </div>
 

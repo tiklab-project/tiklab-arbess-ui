@@ -5,7 +5,7 @@ import AuthType from "../../authCommon/AuthType";
 import serverStore from "../store/ServerStore";
 import authorizeStore from "../../../pipeline/design/processDesign/processDesign/store/AuthorizeStore";
 import {ServerLoading} from "../../../common/loading/Loading"
-import {Validation} from "../../../common/client/Client";
+import {Validation} from "../../../common/utils/Client";
 import Btn from "../../../common/btn/Btn";
 import Modals from "../../../common/modal/Modal";
 
@@ -297,7 +297,6 @@ const ServerModal = props =>{
         <Modals
             visible={visible}
             onCancel={onCancel}
-            closable={false}
             destroyOnClose={true}
             footer={modalFooter}
             title={formValue?"修改":"添加"}

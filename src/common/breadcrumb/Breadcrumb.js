@@ -11,7 +11,7 @@ import "./Breadcrumb.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const BreadcrumbContent = ({firstItem,secondItem,goBack}) =>{
+const BreadcrumbContent = ({firstItem,secondItem,goBack,children}) =>{
 
     return  <div className={"breadcrumbContent"}>
                 <Space>
@@ -21,6 +21,7 @@ const BreadcrumbContent = ({firstItem,secondItem,goBack}) =>{
                     </span>
                     {secondItem && <span> / &nbsp; {secondItem}</span>}
                 </Space>
+                <div>{children}</div>
             </div>
 }
 

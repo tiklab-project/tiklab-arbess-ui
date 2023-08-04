@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import DynamicDetail from "../../../home/components/DynamicDetail";
+import overviewStore from "../store/OverviewStore";
 
 /**
  * 单个流水线动态
@@ -10,10 +11,10 @@ import DynamicDetail from "../../../home/components/DynamicDetail";
  */
 const PipelineDyna = props =>{
 
-    const {pipelineStore,homePageStore} = props
+    const {pipelineStore} = props
 
     const {pipeline} = pipelineStore
-    const {findlogpage,dynamicList,dynaPage} = homePageStore
+    const {findlogpage,dynamicList,dynaPage} = overviewStore
 
     // 获取近期动态请求数据
     const [params,setParams] = useState({
@@ -48,4 +49,4 @@ const PipelineDyna = props =>{
             />
 }
 
-export default inject("pipelineStore","homePageStore")(observer(PipelineDyna))
+export default inject("pipelineStore")(observer(PipelineDyna))

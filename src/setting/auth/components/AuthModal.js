@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import {Form, Input, Select} from "antd";
 import AuthType from "../../authCommon/AuthType";
-import {Validation} from "../../../common/client/Client";
+import {Validation} from "../../../common/utils/Client";
 import authStore from "../store/AuthStore";
 import Btn from "../../../common/btn/Btn";
 import Modals from "../../../common/modal/Modal";
@@ -68,7 +68,6 @@ const AuthModal = props =>{
         <Modals
             visible={visible}
             onCancel={()=>setVisible(false)}
-            closable={false}
             footer={modalFooter}
             destroyOnClose={true}
             title={formValue?"修改":"添加"}

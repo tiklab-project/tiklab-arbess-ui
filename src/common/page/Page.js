@@ -46,9 +46,7 @@ const Page = props =>{
         }
     }
 
-    if(!page || page.total<2) return null
-
-    return  <div className="mf-page">
+    return   page?.total > 1 && <div className="mf-page">
                 { renderLeftOut() }
                 <span className="mf-page-current">{pageCurrent}</span>
                 <span> / {page?.total || 1}</span>

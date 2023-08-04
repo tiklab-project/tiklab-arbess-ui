@@ -8,6 +8,15 @@ import Btn from "../../../common/btn/Btn";
 import Tabs from "../../../common/tabs/Tabs";
 import "./Pipeline.scss";
 
+function debounce(fn, delay) {
+    let timer
+    return function(...args) {
+        if (timer) clearTimeout(timer)
+        // 使用箭头函数来处理this问题
+        timer = setTimeout(() => fn.apply(this, args), delay)
+    }
+}
+
 /**
  * 流水线页面
  * @param props
@@ -59,13 +68,13 @@ const Pipeline = props =>{
      * 模糊查询流水线
      * @param e：文本框value
      */
-    const onChangeSearch = e =>{
+    const onChangeSearch = debounce((e) => {
         setPipelineParam({
             ...pipelineParam,
             pipelineName:e.target.value,
             pageParam
         })
-    }
+    }, 500);
 
     /**
      * 换页
@@ -107,10 +116,9 @@ const Pipeline = props =>{
     return(
         <div className="pipeline">
             <div className="pipeline-content mf-home-limited mf">
-                <div className="pipeline-top pipeline-flex">
-                    <BreadcrumbContent firstItem={"流水线"}/>
+                <BreadcrumbContent firstItem={"流水线"}>
                     <Btn onClick={onClick} type={"primary"} title={"新建流水线"} icon={<PlusOutlined/>}/>
-                </div>
+                </BreadcrumbContent>
                 <div className="pipeline-type">
                     <Tabs type={listType} tabLis={[
                         {id:1, title:"所有流水线"},

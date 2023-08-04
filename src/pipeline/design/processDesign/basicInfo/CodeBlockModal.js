@@ -34,7 +34,6 @@ const CodeBlockModal = props =>{
 
     return(
         <Modals
-            closable={false}
             visible={visible}
             onCancel={onCancel}
             footer={modalFooter}

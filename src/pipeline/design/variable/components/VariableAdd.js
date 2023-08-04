@@ -98,7 +98,6 @@ const VariableAdd = props =>{
         <Modals
             visible={variableVisible}
             onCancel={()=>setVariableVisible(false)}
-            closable={false}
             destroyOnClose={true}
             footer={modalFooter}
             width={500}

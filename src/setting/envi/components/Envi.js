@@ -22,7 +22,7 @@ const Envi = props =>{
 
     const [visible,setVisible] = useState(false)
     const [enviData,setEnviData] = useState([])
-    const [formValue,setFormValue] = useState("")
+    const [formValue,setFormValue] = useState(null)
 
     useEffect(()=>{
         // 初始化环境配置
@@ -44,7 +44,7 @@ const Envi = props =>{
      * 添加环境配置
      */
     const addEnvi = () =>{
-        setFormValue("")
+        setFormValue(null)
         setVisible(true)
     }
 
@@ -147,8 +147,7 @@ const Envi = props =>{
     ]
 
     return <div className="auth mf-home-limited mf">
-        <div className="auth-upper">
-            <BreadcrumbContent firstItem={"环境配置"} />
+        <BreadcrumbContent firstItem={"环境配置"}>
             {
                 version==='ce' &&
                 <Btn
@@ -158,7 +157,7 @@ const Envi = props =>{
                     icon={<PlusOutlined/>}
                 />
             }
-        </div>
+        </BreadcrumbContent>    
         <div className="auth-content">
 
             <Table
