@@ -177,6 +177,10 @@ const PostprocessAdd = props =>{
             title:"站内信"
         },
         {
+            value:"email",
+            title:"邮箱通知"
+        },
+        {
             value:"sms",
             title:"短信通知"
         },
@@ -187,10 +191,6 @@ const PostprocessAdd = props =>{
         {
             value:"dingding",
             title:"钉钉机器人"
-        },
-        {
-            value:"email",
-            title:"邮箱通知"
         },
     ]
 
@@ -240,11 +240,14 @@ const PostprocessAdd = props =>{
                             <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"请选择消息发送方式"}]}>
                                 <Checkbox.Group>
                                     {
-                                        typeList.map(item=>(
-                                            <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
-                                                <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
-                                            </Tooltip>
-                                        ))
+                                        typeList.map(item=>{
+                                            if(version==='ce' && item.value==='sms') return;
+                                            return (
+                                                <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
+                                                    <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                                </Tooltip>
+                                            )
+                                        })
                                     }
                                 </Checkbox.Group>
                             </Form.Item>

@@ -40,7 +40,7 @@ const HomePage = props =>{
                 item && item.pipeline &&
                 <div className="pipelineRecent-item-title">
                     <div className={`mf-icon-${item.pipeline?.color || 0} pipeline-icon`}>
-                        {item.pipeline?.name.substring(0,1).toUpperCase()}
+                        {item.pipeline.name.substring(0,1).toUpperCase()}
                     </div>
                     <div className="pipelineRecent-name">
                         {item.pipeline?.name}

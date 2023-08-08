@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import { Progress } from 'antd';
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import {SpinLoading} from "../../../common/loading/Loading";
 import resourceStore from "../store/ResourceStore";
 import "./Resources.scss";
@@ -40,7 +40,7 @@ const Resources = props => {
 
     return (
         <div className='resources mf-home-limited mf'>
-            <BreadcrumbContent firstItem={"资源占用"}/>
+            <Breadcrumb firstItem={"资源占用"}/>
             <div className="resources-content">
                 <div className='resources-info-version'>当前版本：{resourceList?.version===1?'免费版':'付费版'}</div>
                 <div>

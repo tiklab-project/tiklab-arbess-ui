@@ -49,7 +49,9 @@ const History = props => {
                 if(!res.data) return clearInterval(inter)
                 if(res.data.dataList.length<1 || res.data.dataList[0].runStatus!=="run") clearInterval(inter)
             }
-            else clearInterval(inter)
+            else{
+                clearInterval(inter)
+            }
         }),1000)
         if(detailsVisible){
             clearInterval(inter)

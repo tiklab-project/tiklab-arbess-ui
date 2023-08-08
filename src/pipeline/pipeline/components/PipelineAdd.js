@@ -5,7 +5,7 @@ import PipelineAddMould from "./PipelineAddMould";
 import PipelineAddInfo from "./PipelineAddInfo";
 import {Loading} from "../../../common/loading/Loading";
 import Btn from "../../../common/btn/Btn";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import "./pipelineAdd.scss";
 
 /**
@@ -117,7 +117,7 @@ const PipelineAdd = props =>{
 
     return <div className="pipeline-add mf">
         <div className="pipeline-add-content">
-            <BreadcrumbContent firstItem={'新建流水线'} goBack={()=>props.history.push("/index/pipeline")}/>
+            <Breadcrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/index/pipeline")}/>
             <div className="steps-top">
                 <Steps current={current}>
                     {steps.map(item => (

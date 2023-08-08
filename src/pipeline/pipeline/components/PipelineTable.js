@@ -95,7 +95,7 @@ const PipelineTable = props =>{
      * @param record
      * @returns {*}
      */
-    const goPipelineTask= (text,record) => props.history.push(`/index/pipeline/${record.id}/survey`)
+    const goPipelineTask = (text,record) => props.history.push(`/index/pipeline/${record.id}/survey`)
 
     /**
      * 去历史页面

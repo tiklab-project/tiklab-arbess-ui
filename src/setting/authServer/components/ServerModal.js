@@ -307,7 +307,7 @@ const ServerModal = props =>{
                     layout="vertical"
                     autoComplete="off"
                     onValuesChange={onValuesChange}
-                    initialValues={{type:type,authPublic:1,authWay:1,authType:1}}
+                    initialValues={{type:type,authPublic:2,authWay:1,authType:1}}
                 >
                     <Form.Item name="type" label="授权类型">
                         {

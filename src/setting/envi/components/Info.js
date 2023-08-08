@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import enviStore from "../store/EnviStore";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import "./Info.scss";
 
 /**
@@ -57,7 +57,7 @@ const Info = props =>{
 
     return(
         <div className="info mf-home-limited mf">
-            <BreadcrumbContent firstItem={"系统信息"} />
+            <Breadcrumb firstItem={"系统信息"} />
             <div  className="info-content">
                 {
                     infoData && infoData.map(item=>{

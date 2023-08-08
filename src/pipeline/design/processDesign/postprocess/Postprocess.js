@@ -310,6 +310,10 @@ const Postprocess = props =>{
             title:"站内信"
         },
         {
+            value:"email",
+            title:"邮箱通知"
+        },
+        {
             value:"sms",
             title:"短信通知"
         },
@@ -320,10 +324,6 @@ const Postprocess = props =>{
         {
             value:"dingding",
             title:"钉钉机器人"
-        },
-        {
-            value:"email",
-            title:"邮箱通知"
         },
     ]
 
@@ -361,15 +361,18 @@ const Postprocess = props =>{
                                     <Checkbox.Group onChange={value=>changeMes(value,item)} value={item.task.values.typeList}>
                                         <Row>
                                             {
-                                                typeList.map(item=>(
-                                                    <Col key={item.value} span={8}>
-                                                        <Tooltip title={isType(item.value) && `未配置${item.title}`}>
-                                                            <Checkbox value={item.value} disabled={isType(item.value)}>
-                                                                {item.title}
-                                                            </Checkbox>
-                                                        </Tooltip>
-                                                    </Col>
-                                                ))
+                                                typeList.map(item=>{
+                                                    if(version==='ce' && item.value==='sms') return null;
+                                                    return (
+                                                        <Col key={item.value} span={8}>
+                                                            <Tooltip title={isType(item.value) && `未配置${item.title}`}>
+                                                                <Checkbox value={item.value} disabled={isType(item.value)}>
+                                                                    {item.title}
+                                                                </Checkbox>
+                                                            </Tooltip>
+                                                        </Col>
+                                                    )
+                                                })
                                             }
                                         </Row>
                                     </Checkbox.Group>

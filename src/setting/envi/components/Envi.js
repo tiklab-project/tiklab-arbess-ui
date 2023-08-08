@@ -3,7 +3,7 @@ import {Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import enviStore from "../store/EnviStore";
 import EnviModal from "./EnviModal";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import Btn from "../../../common/btn/Btn";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import Listaction from "../../../common/list/Listaction";
@@ -147,7 +147,7 @@ const Envi = props =>{
     ]
 
     return <div className="auth mf-home-limited mf">
-        <BreadcrumbContent firstItem={"环境配置"}>
+        <Breadcrumb firstItem={"环境配置"}>
             {
                 version==='ce' &&
                 <Btn
@@ -157,7 +157,7 @@ const Envi = props =>{
                     icon={<PlusOutlined/>}
                 />
             }
-        </BreadcrumbContent>    
+        </Breadcrumb>    
         <div className="auth-content">
 
             <Table

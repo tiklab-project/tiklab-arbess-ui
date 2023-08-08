@@ -1,7 +1,7 @@
 import React from "react";
 import {UserVerify} from "tiklab-eam-ui";
 import {connect} from "tiklab-plugin-core-ui";
-import {AppLink} from "tiklab-integration-ui";
+import {AppLink} from "tiklab-licence-ui";
 import Portal from "./Portal";
 
 /**

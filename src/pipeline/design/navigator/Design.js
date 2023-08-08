@@ -13,7 +13,7 @@ import variableStore from "../variable/store/VariableStore";
 import postprocessStore from "../postprocess/store/PostprocessStore";
 import triggerStore from "../trigger/store/TriggerStore";
 import Btn from "../../../common/btn/Btn";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
 import "./Design.scss";
 
@@ -126,7 +126,7 @@ const Design = props =>{
             <div className="design mf">
                 <div className="design-up">
                     <div className="design-top">
-                        <BreadcrumbContent firstItem={"设计"}/>
+                        <Breadcrumb firstItem={"设计"}/>
                         <div className="design-tabs">
                             {
                                 typeLis.map(item=>{

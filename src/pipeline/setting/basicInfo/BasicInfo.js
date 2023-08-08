@@ -11,7 +11,7 @@ import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
 import {Loading} from "../../../common/loading/Loading";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import Btn from "../../../common/btn/Btn";
 import "./BasicInfo.scss";
 
@@ -30,6 +30,7 @@ const BasicInfo = props =>{
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([])
 
+    // 加载状态
     const [isLoading,setIsLoading] = useState(false)
 
     const onConfirm = () =>{
@@ -146,7 +147,7 @@ const BasicInfo = props =>{
     return(
         <div className="pipelineReDel mf-home-limited mf">
             <div className="pipelineReDel-up">
-                <BreadcrumbContent firstItem={"流水线信息"}/>
+                <Breadcrumb firstItem={"流水线信息"}/>
             </div>
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">

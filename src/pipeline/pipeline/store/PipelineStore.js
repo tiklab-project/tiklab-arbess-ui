@@ -19,7 +19,6 @@ export class PipelineStore {
     // 流水线分页
     @observable
     pipPage = {
-        pageSize: 13,
         current: 1,
         total: 1,
     }
@@ -27,8 +26,7 @@ export class PipelineStore {
     // 用户分页
     @observable
     userPage = {
-        pageSize: 13,
-        defaultCurrent: 1,
+        current: 1,
         total: 1,
     }
 
@@ -56,7 +54,6 @@ export class PipelineStore {
                 if(res.code===0 && res.data){
                     this.pipelineListPage = res.data.dataList
                     this.pipPage = {
-                        pageSize: 13,
                         current: res.data.currentPage,
                         total: res.data.totalPage,
                     }
@@ -64,7 +61,6 @@ export class PipelineStore {
                     this.pipelineListPage = []
                     this.pipPage = {
                         current: 1,
-                        pageSize: 6,
                         total: 1,
                     }
                 }

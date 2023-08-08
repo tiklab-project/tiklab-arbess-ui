@@ -60,7 +60,9 @@ const  Portal = props =>{
         // 获取所有流水线
         findUserPipeline()
 
+        // 获取系统权限
         getSystemPermissions(getUser().userId)
+
     },[])
 
     useEffect(()=>{
@@ -183,15 +185,15 @@ const  Portal = props =>{
                             width={200}
                         >
                             <div className="header-helpMenu">
-                                <div className="header-helpMenu-item" onClick={()=>goHelp("document/documentList")}>
+                                <div className="header-helpMenu-item" onClick={()=>goHelp("document")}>
                                     <ProfileOutlined className="header-dropdown-icon"/>
                                     文档
                                 </div>
-                                <div className="header-helpMenu-item" onClick={()=>goHelp("question/questionList")}>
+                                <div className="header-helpMenu-item" onClick={()=>goHelp("question")}>
                                     <ExpandOutlined className="header-dropdown-icon"/>
                                     社区支持
                                 </div>
-                                <div className="header-helpMenu-item" onClick={()=>goHelp("account/workOrder/workOrderList")}>
+                                <div className="header-helpMenu-item" onClick={()=>goHelp("account/workOrder")}>
                                     <ScheduleOutlined className="header-dropdown-icon"/>
                                     在线工单
                                 </div>

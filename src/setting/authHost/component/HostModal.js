@@ -90,7 +90,7 @@ const HostModal = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
-                    initialValues={{type:"common",authPublic:1,authWay:1,authType:2}}
+                    initialValues={{type:"common",authPublic:2,authWay:1,authType:2}}
                 >
                     <Form.Item
                         name="type"

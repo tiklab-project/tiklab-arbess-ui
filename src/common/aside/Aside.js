@@ -56,19 +56,21 @@ const Aside = props =>{
             <div className="pipeline-opt-title">切换流水线</div>
             <div className="pipeline-opt-group" style={{maxHeight:height,overflow:"auto"}}>
                 {
-                    pipelineList && pipelineList.map(item=>(
-                        <div onClick={()=>changePipeline(item)}
-                             key={item.id}
-                             className={`pipeline-opt-item ${pipeline && pipeline.id === item.id ?"pipeline-opt-active":""}`}
-                        >
-                            <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
-                                {item.name.substring(0,1).toUpperCase()}
-                            </span>
-                            <span className="pipeline-opt-name">
-                                {item.name}
-                            </span>
-                        </div>
-                    ))
+                    pipelineList && pipelineList.map((item,index)=>{
+                        return (
+                            <div onClick={()=>changePipeline(item)}
+                                key={item.id}
+                                className={`pipeline-opt-item ${pipeline && pipeline.id === item.id ?"pipeline-opt-active":""}`}
+                            >
+                                <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
+                                    {item.name.substring(0,1).toUpperCase()}
+                                </span>
+                                <span className="pipeline-opt-name">
+                                    {item.name}
+                                </span>
+                            </div>
+                        )
+                    })
                 }
             </div>
         </div>

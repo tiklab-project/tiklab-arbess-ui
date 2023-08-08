@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
 import DynamicList from "../../../common/list/DynamicList";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import echarts from "../../../common/echarts/Echarts";
 import Guide from "../../../common/guide/Guide";
 import OverviewCensus from "./OverviewCensus";
@@ -79,7 +79,7 @@ const Overview = props =>{
         <div className="overview">
             <div className="overview-content mf-home-limited">
                 <div className="overview-top">
-                    <BreadcrumbContent firstItem={"概况"}/>
+                    <Breadcrumb firstItem={"概况"}/>
                 </div>
                 <div className="overview-content">
                     <div className="overview-census">

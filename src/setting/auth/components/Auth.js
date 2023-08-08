@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Space,Table} from "antd";
 import authStore from "../store/AuthStore"
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
@@ -132,7 +132,7 @@ const Auth = props =>{
 
     return(
         <div className="auth mf-home-limited mf">
-            <BreadcrumbContent firstItem={"认证配置"}>
+            <Breadcrumb firstItem={"认证配置"}>
                 <AuthAddBtn
                     visible={visible}
                     setVisible={setVisible}
@@ -140,7 +140,7 @@ const Auth = props =>{
                     setFormValue={setFormValue}
                     findAuth={findAuth}
                 />
-            </BreadcrumbContent>
+            </Breadcrumb>
             <div className="auth-content">
                 <Table
                     columns={commonColumns}

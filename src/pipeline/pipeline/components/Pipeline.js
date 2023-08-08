@@ -3,7 +3,7 @@ import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PipelineTable from "./PipelineTable";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import Btn from "../../../common/btn/Btn";
 import Tabs from "../../../common/tabs/Tabs";
 import "./Pipeline.scss";
@@ -39,7 +39,7 @@ const Pipeline = props =>{
     const [isLoading,setIsLoading] = useState(true)
 
     const [pageParam] = useState({
-        pageSize:13,
+        pageSize:15,
         currentPage: 1,
     })
 
@@ -84,7 +84,7 @@ const Pipeline = props =>{
         setPipelineParam({
             ...pipelineParam,
             pageParam:{
-                pageSize:13,
+                pageSize:15,
                 currentPage: page,
             }
         })
@@ -116,9 +116,9 @@ const Pipeline = props =>{
     return(
         <div className="pipeline">
             <div className="pipeline-content mf-home-limited mf">
-                <BreadcrumbContent firstItem={"流水线"}>
+                <Breadcrumb firstItem={"流水线"}>
                     <Btn onClick={onClick} type={"primary"} title={"新建流水线"} icon={<PlusOutlined/>}/>
-                </BreadcrumbContent>
+                </Breadcrumb>
                 <div className="pipeline-type">
                     <Tabs type={listType} tabLis={[
                         {id:1, title:"所有流水线"},

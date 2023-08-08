@@ -31,7 +31,7 @@ const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const Dynamic=AsyncComponent(()=>import("./home/components/Dynamic"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
-const HistoryPipelineDetail=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipelineDetail"))
+const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
 const Test=AsyncComponent(()=>import("./pipeline/test/Test"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
@@ -198,7 +198,7 @@ const routers=[
                     },
                     {
                         path:"/index/pipeline/:id/structure/:instanceId/post",
-                        component: HistoryPipelineDetail,
+                        component: HistoryInstance,
                         exact:true,
                     },
                     {

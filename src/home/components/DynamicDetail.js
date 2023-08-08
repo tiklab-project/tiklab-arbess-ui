@@ -1,6 +1,6 @@
 import React from "react";
 import {DatePicker,Select,Space} from "antd";
-import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../common/emptyText/EmptyText";
 import Page from "../../common/page/Page";
 import DynamicList from "../../common/list/DynamicList";
@@ -55,7 +55,7 @@ const DynamicDetail = props =>{
     return(
         <div className="dyna" style={{height:"100%",overflow:"auto"}}>
             <div className="dyna-content mf-home-limited">
-                <BreadcrumbContent firstItem={firstItem} goBack={goBack}/>
+                <Breadcrumb firstItem={firstItem} onClick={goBack}/>
                 <div className="dyna-screen" style={{padding:"15px 0"}}>
                     <Space>
                         {

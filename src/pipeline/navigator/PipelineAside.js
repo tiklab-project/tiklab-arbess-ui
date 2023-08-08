@@ -29,18 +29,20 @@ const PipelineAside= (props)=>{
     },[])
 
     useEffect(()=>{
-        // 获取单个流水线信息
-        findOnePipeline(pipelineId).then(res=>{
-            if(res.data===null){
-                props.history.push('/index/404')
-            }else {
-                // 获取流水线权限
-                getInitProjectPermissions(userId,pipelineId,res.data?.power===1)
-                setIsAside(false)
-            }
-        })
-        // 当前流水线打开
-        updateOpen(pipelineId)
+        if(pipelineId){
+            // 获取单个流水线信息
+            findOnePipeline(pipelineId).then(res=>{
+                if(res.data===null){
+                    props.history.push('/index/404')
+                }else {
+                    // 获取流水线权限
+                    getInitProjectPermissions(userId,pipelineId,res.data?.power===1)
+                    setIsAside(false)
+                }
+            })
+            // 当前流水线打开
+            updateOpen(pipelineId)
+        }
     },[pipelineId])
 
     // 左侧菜单（二级菜单）

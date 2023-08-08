@@ -19,8 +19,6 @@ class HistoryStore {
     // 分页
     @observable
     page = {
-        defaultCurrent: 1,
-        pageSize: 13,
         total: 1,
     }
 
@@ -165,8 +163,6 @@ class HistoryStore {
             else{
                 this.historyList = []
                 this.page = {
-                    defaultCurrent: 1,
-                    pageSize: 13,
                     total: 1,
                 }
             }
@@ -176,11 +172,40 @@ class HistoryStore {
         }
     }
 
+    /**
+     * 当前构建历史信息
+     * @param {*} value 
+     * @returns 
+     */
     @action
     findOneInstance = value =>{
         const param = new FormData()
         param.append('instanceId',value)
         return Axios.post('/instance/findOneInstance', param)
+    }
+
+    /**
+     * 多任务构建全部日志
+     * @param {*} value 
+     * @returns 
+     */
+     @action
+     findAllInstanceLogs = value =>{
+         const param = new FormData()
+         param.append('instanceId',value)
+         return Axios.post('/taskInstance/findAllInstanceLogs', param)
+     }
+
+    /**
+     * 多阶段构建全部日志
+     * @param {*} value 
+     * @returns 
+     */
+    @action
+    findAllStageInstanceLogs = value =>{
+        const param = new FormData()
+        param.append('instanceId',value)
+        return Axios.post('/stageInstance/findAllStageInstanceLogs', param)
     }
 
 }

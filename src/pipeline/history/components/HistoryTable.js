@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import {SpinLoading} from "../../../common/loading/Loading";
 import Profile from "../../../common/profile/Profile";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import Page from "../../../common/page/Page";
 import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
@@ -164,7 +164,7 @@ const HistoryTable = props =>{
     return (
         <div className='history'>
             <div className="history-content mf-home-limited mf">
-                <BreadcrumbContent firstItem={"历史"}/>
+                <Breadcrumb firstItem={"历史"}/>
                 <HistoryScreen
                     changPage={changPage}
                     pipelineList={pipelineList}

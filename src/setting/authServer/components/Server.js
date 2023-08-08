@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Space,Table} from "antd"
 import serverStore from "../store/ServerStore";
-import BreadcrumbContent from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import ListIcon from "../../../common/list/ListIcon";
 import Listaction from "../../../common/list/Listaction";
@@ -308,7 +308,7 @@ const Server = props =>{
 
     return(
         <div className="auth mf-home-limited mf">
-            <BreadcrumbContent firstItem={"服务配置"} >
+            <Breadcrumb firstItem={"服务配置"} >
                 <ServerAddBtn
                     type={'gitee'}
                     visible={visible}
@@ -317,7 +317,7 @@ const Server = props =>{
                     setFormValue={setFormValue}
                     findAuth={findAuth}
                 />
-            </BreadcrumbContent>
+            </Breadcrumb>
             <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
             <div className="auth-content">
                 <Table

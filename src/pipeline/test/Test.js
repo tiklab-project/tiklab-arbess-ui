@@ -4,7 +4,7 @@ import {Tooltip} from "antd";
 import {applyJump} from "tiklab-core-ui"
 import {DeleteOutlined} from "@ant-design/icons";
 import testOnStore from "../design/processDesign/processDesign/store/TestOnStore";
-import BreadcrumbContent from "../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../common/breadcrumb/Breadcrumb";
 import EmptyText from "../../common/emptyText/EmptyText";
 import {SpinLoading} from "../../common/loading/Loading";
 import Page from "../../common/page/Page";
@@ -131,7 +131,7 @@ const Test = props => {
     return (
         <div className='test'>
             <div className="test-content mf-home-limited mf">
-                <BreadcrumbContent firstItem={"测试"}/>
+                <Breadcrumb firstItem={"测试"}/>
                 <div className='test-table'>
                     {
                         testList && testList.length > 0 ?

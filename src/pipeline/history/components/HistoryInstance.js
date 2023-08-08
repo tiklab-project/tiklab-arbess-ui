@@ -2,7 +2,12 @@ import React,{useState,useEffect} from "react";
 import HistoryDetail from "./HistoryDetail";
 import historyStore from "../store/HistoryStore";
 
-const HistoryPipelineDetail = props => {
+/**
+ * 历史运行实例
+ * @param {*} props 
+ * @returns 
+ */
+const HistoryInstance = props => {
 
     const {match:{params}} = props
 
@@ -33,4 +38,4 @@ const HistoryPipelineDetail = props => {
     )
 }
 
-export default HistoryPipelineDetail
+export default HistoryInstance

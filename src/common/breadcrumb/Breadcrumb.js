@@ -7,17 +7,20 @@ import "./Breadcrumb.scss";
  * 面包屑
  * @param firstItem：标题1
  * @param secondItem：标题2
- * @param goBack：事件
+ * @param onClick
+ * @param children
  * @returns {JSX.Element}
  * @constructor
  */
-const BreadcrumbContent = ({firstItem,secondItem,goBack,children}) =>{
+const Breadcrumb = ({firstItem,secondItem,onClick,children}) =>{
 
-    return  <div className={"breadcrumbContent"}>
+    return  <div className="mf-breadcrumb">
                 <Space>
-                    {goBack && <LeftOutlined onClick={goBack} style={{color:"#0063FF"}}/>}
-                    <span className={secondItem ? "breadcrumbContent-span":""}>
-                        {firstItem}
+                    <span className={onClick ? "mf-breadcrumb-first":""} onClick={onClick}>
+                        {onClick && <LeftOutlined style={{marginRight:8}}/>}
+                        <span className={secondItem ? "mf-breadcrumb-span":""}>
+                            {firstItem}
+                        </span>
                     </span>
                     {secondItem && <span> / &nbsp; {secondItem}</span>}
                 </Space>
@@ -25,4 +28,4 @@ const BreadcrumbContent = ({firstItem,secondItem,goBack,children}) =>{
             </div>
 }
 
-export default BreadcrumbContent
+export default Breadcrumb
