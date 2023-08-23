@@ -235,7 +235,7 @@ const PortalMessage = props =>{
                 <div className="messageModal-content">
                     <div className="messageModal-title">
                         {
-                            tabs.map(item=> renderTabs(item) )
+                            tabs.map(item=> renderTabs(item))
                         }
                     </div>
                     <div className="messageModal-list">

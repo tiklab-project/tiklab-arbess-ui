@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+// import HistoryDetail from "./HistoryDetail";
 import HistoryDetail from "./HistoryDetail";
 import historyStore from "../store/HistoryStore";
 
@@ -31,7 +32,6 @@ const HistoryInstance = props => {
     return (
         <HistoryDetail
             back={back}
-            firstItem={"历史"}
             historyItem={historyItem}
             historyStore={historyStore}
         />

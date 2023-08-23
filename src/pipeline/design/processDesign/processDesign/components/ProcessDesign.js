@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import {observer,inject, Provider} from "mobx-react";
 import Stage from "./Stage";
 import Task from "./Task";
@@ -58,7 +58,7 @@ const ProcessDesign = props =>{
 
     return  (
         <Provider {...store}>
-            <div className="guiView" style={taskFormDrawer?{maxWidth:"calc(100% - 480px)"}:null}>
+            <div className="guiView">
                 {
                     pipeline && pipeline.type===1 ?
                         <Task

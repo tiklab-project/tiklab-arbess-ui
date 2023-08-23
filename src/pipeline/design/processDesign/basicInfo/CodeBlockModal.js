@@ -1,6 +1,5 @@
 import React,{useRef} from "react";
 import {ExpandMirror} from "../../../../common/editor/CodeMirror";
-import Btn from "../../../../common/btn/Btn"
 import Modals from "../../../../common/modal/Modal";
 
 const CodeBlockModal = props =>{
@@ -25,18 +24,11 @@ const CodeBlockModal = props =>{
         setVisible(false)
     }
 
-    const modalFooter = (
-        <>
-            <Btn onClick={onCancel} title={"取消"} isMar={true}/>
-            <Btn onClick={onOks} title={"确定"} type={"primary"}/>
-        </>
-    )
-
     return(
         <Modals
             visible={visible}
             onCancel={onCancel}
-            footer={modalFooter}
+            onOk={onOks}
             destroyOnClose={true}
             width={800}
             title={'编辑多行文本'}

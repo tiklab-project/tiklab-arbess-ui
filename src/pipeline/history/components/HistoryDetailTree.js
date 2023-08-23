@@ -2,10 +2,11 @@ import React,{useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
 import {getTime} from "../../../common/utils/Client";
 import TaskIcon from "../../design/processDesign/processDesign/components/TaskIcon";
+import {runStatusIcon} from "./HistoryTrigger";
 
 const HistoryDetailTree = props =>{
 
-    const {treeData,logData,setLogData,setId,isRun} = props
+    const {pipeline,id,changeAnchor,execData} = props
 
     const [expandedTree,setExpandedTree] = useState([])
 
@@ -13,9 +14,8 @@ const HistoryDetailTree = props =>{
 
     /**
      * 展开闭合
-     * @param group
      */
-    const setOpenOrClose = group => {
+    const setOpenOrClose = (group) => {
         if (isExpandedTree(group.id)) {
             setExpandedTree(expandedTree.filter(item => item!==group.id))
         } else {
@@ -25,39 +25,37 @@ const HistoryDetailTree = props =>{
     }
 
     /**
-     * 设置日志
-     * @param item
+     * 日志
      */
-    const taskLog = item => {
-        if(isRun){
-            return setId(item.id)
-        }
-        setLogData(item)
+    const taskLog = (item) => {
+        changeAnchor(item.id)
     }
 
-    const renderLi = (item,itemIndex) =>{
+    const renderLi = (item,deep) =>{
         return(
-            <div className={`tree-li ${logData.id===item.id?"tree-li-active":""}`} key={itemIndex}
+            <div className={`tree-li ${id===item.id?"tree-li-active":""}`} key={item.id}
                  onClick={()=>taskLog(item)}
             >
-                <div className="tree-li-firsts" style={{cursor:"pointer",paddingLeft:25}}>
+                <div className="tree-li-firsts" style={{cursor:"pointer",paddingLeft:deep}}>
                     <div className="tree-li-first">
                         <div className="tree-li-icon">
                             <TaskIcon type={item.taskType} />
                         </div>
                         <div className="tree-li-name">{item.taskName}</div>
                     </div>
+                    <div className="tree-li-state">{runStatusIcon(item.runState)}</div>
                     <div className="tree-li-time">{item.runTimeDate}</div>
                 </div>
             </div>
         )
     }
 
-    const renderSubLi = (group,groupIndex) =>{
+    const renderSubLi = (group,deep) =>{
+        const {taskInstanceList} = group
         return(
-            <div className="tree-li" key={groupIndex}>
-                <div className={`tree-li-firsts ${logData.id===group.id?"tree-li-active":""}`}
-                     style={{paddingLeft: 5}}
+            <div className="tree-li" key={group.id}>
+                <div className={`tree-li-firsts ${id===group.id?"tree-li-active":""}`}
+                     style={{paddingLeft: deep,fontSize:15}}
                      onClick={()=>setOpenOrClose(group)}
                 >
                     <div className="tree-li-first">
@@ -70,13 +68,12 @@ const HistoryDetailTree = props =>{
                         </div>
                         <div className="tree-li-name">{group.stageName}</div>
                     </div>
+                    <div className="tree-li-state">{runStatusIcon(group.stageState)}</div>
                     <div className="tree-li-time">{getTime(group.stageTime)}</div>
                 </div>
                 <div className={`tree-ul ${isExpandedTree(group.id) ? null:"tree-li-hidden"}`}>
                     {
-                        group?.taskInstanceList.map((list,listIndex)=>{
-                            return renderLi(list,listIndex)
-                        })
+                        taskInstanceList && taskInstanceList.map(list=>renderLi(list,45))
                     }
                 </div>
             </div>
@@ -85,13 +82,44 @@ const HistoryDetailTree = props =>{
 
 
     return(
-        <div className="tree-ul">
-            {
-                treeData?.stageInstanceList && treeData.stageInstanceList.map((group,groupIndex)=>{
-                    return renderSubLi(group,groupIndex)
-                })
-            }
-
+        <div className="bottom-tree">
+            <div className="tree-ul">
+                {
+                    pipeline?.type===1?
+                    execData && execData.map(item=>renderLi(item,5))
+                    :
+                    execData && execData.map(group=>{
+                        return (
+                            <div className="tree-li" key={group.id}>
+                                <div className={`tree-li-firsts ${id===group.id?"tree-li-active":""}`}
+                                     style={{paddingLeft:5,fontSize:16}}
+                                     onClick={()=>setOpenOrClose(group)}
+                                >
+                                    <div className="tree-li-first">
+                                        <div className="tree-li-icon">
+                                            {
+                                                isExpandedTree(group.id)?
+                                                    <CaretDownOutlined style={{fontSize: "10px"}}/> :
+                                                    <CaretRightOutlined style={{fontSize: "10px"}}/>
+                                            }
+                                        </div>
+                                        <div className="tree-li-name">{group.stageName}</div>
+                                    </div>
+                                    <div className="tree-li-state">{runStatusIcon(group.stageState)}</div>
+                                    <div className="tree-li-time">{getTime(group.stageTime)}</div>
+                                </div>
+                                <div className={`tree-ul ${isExpandedTree(group.id) ? null:"tree-li-hidden"}`}>
+                                    {
+                                        group?.stageInstanceList.map(list=>{
+                                            return renderSubLi(list,25)
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

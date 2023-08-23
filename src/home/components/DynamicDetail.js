@@ -70,7 +70,7 @@ const DynamicDetail = props =>{
                                 }
                                 notFoundContent={<EmptyText/>}
                             >
-                                <Select.Option key={"1"} value={"null"}>所有流水线</Select.Option>
+                                <Select.Option key={"1"} value={"null"}>流水线</Select.Option>
                                 {
                                     pipelineList && pipelineList.map(item=>{
                                         return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
@@ -106,7 +106,7 @@ const DynamicDetail = props =>{
                 </div>
                 <DynamicList {...props} dynamicList={dynamicList}/>
                 <Page
-                    pageCurrent={params.pageParam.currentPage}
+                    currentPage={params.pageParam.currentPage}
                     changPage={changPage}
                     page={dynaPage}
                 />

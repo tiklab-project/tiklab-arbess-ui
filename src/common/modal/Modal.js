@@ -27,13 +27,21 @@ const Modals = props => {
         setHeight(autoHeight())
     }
 
+    const modalFooter = (
+        <>
+            <Btn onClick={res.onCancel} title={"取消"} isMar={true}/>
+            <Btn onClick={res.onOk} title={"确定"} type={"primary"}/>
+        </>
+    )
+
     return (
         <Modal
+            {...res}
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
             closable={false}
+            footer={modalFooter}
             className="mf"
-            {...res}
         >
             <div className='mf-modal'>
                 <div className='mf-modal-up'>

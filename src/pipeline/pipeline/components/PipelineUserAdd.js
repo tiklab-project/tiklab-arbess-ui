@@ -198,7 +198,7 @@ const PipelineUserAdd = props =>{
                 />
              
                 <Page
-                    pageCurrent={findUserParam.pageParam.currentPage}
+                    currentPage={findUserParam.pageParam.currentPage}
                     changPage={changUserPage}
                     page={userPage}
                 />

@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Form,Select,Input} from "antd";
 import {Validation} from "../../../common/utils/Client";
-import Btn from "../../../common/btn/Btn";
 import Modals from "../../../common/modal/Modal";
 
 const lis = [
@@ -90,18 +89,11 @@ const EnviModal = props =>{
         })
     }
 
-    const modalFooter = (
-        <>
-            <Btn onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>
-            <Btn onClick={onOk} title={"确定"} type={"primary"}/>
-        </>
-    )
-
     return(
         <Modals
             visible={visible}
             onCancel={()=>setVisible(false)}
-            footer={modalFooter}
+            onOk={onOk}
             title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">

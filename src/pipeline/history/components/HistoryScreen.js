@@ -1,5 +1,5 @@
 import React from "react";
-import {Select} from "antd";
+import {Select,Input} from "antd";
 import {CaretDownOutlined} from "@ant-design/icons";
 import "./HistoryScreen.scss";
 
@@ -13,35 +13,40 @@ const {Option} = Select;
  */
 const HistoryScreen = props =>{
 
-    const {params,setParams,changPage,pipelineList,pipelineUserList} = props
+    const {params,screen,pipelineList,pipelineUserList} = props
 
     /**
      * 切换选择框value
-     * @param value
-     * @param field
      */
     const changValue = (value,field) => {
-        setParams({
-            ...params,
-            [field]:value
+        screen({
+            [field]:value,
+            pageParam:{
+                pageSize: 13,
+                currentPage: 1,
+            }
         })
-        changPage(1)
     }
 
     return(
         <div className="str-screens">
+            <Input
+                placeholder="名称"
+                onPressEnter={e=>changValue(e.target.value,"number")}
+                defaultValue={params?.number}
+            />
             {
                 pipelineList &&
                 <Select
                     showSearch
                     suffixIcon={<CaretDownOutlined />}
-                    placeholder={"流水线"}
                     onChange={value=>changValue(value,"pipelineId")}
                     filterOption={(input, option) =>
                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }
+                    defaultValue={params.pipelineId}
                 >
-                    <Option key={"全部"} value={null}>全部流水线</Option>
+                    <Option key={"全部"} value={null}>流水线</Option>
                     {
                         pipelineList && pipelineList.map(item=>(
                             <Option key={item.id} value={item.id}>{item.name}</Option>
@@ -54,13 +59,13 @@ const HistoryScreen = props =>{
                 <Select
                     showSearch
                     suffixIcon={<CaretDownOutlined />}
-                    placeholder={"执行人"}
                     onChange={value=>changValue(value,"userId")}
                     filterOption={(input, option) =>
                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }
+                    defaultValue={params.userId}
                 >
-                    <Option key={"全部"} value={null}>全部执行人</Option>
+                    <Option key={"全部"} value={null}>执行人</Option>
                     {
                         pipelineUserList && pipelineUserList.map(item=>(
                             <Option key={item.id} value={item.user && item.user.id}>{item.user && item.user.nickname}</Option>
@@ -70,10 +75,10 @@ const HistoryScreen = props =>{
             }
             <Select
                 suffixIcon={<CaretDownOutlined />}
-                placeholder={"状态"}
                 onChange={value=>changValue(value,"state")}
+                defaultValue={params.state}
             >
-                <Option key={"0"} value={null}>全部状态</Option>
+                <Option key={"0"} value={null}>状态</Option>
                 <Option key={"1"} value={"error"}>失败</Option>
                 <Option key={"10"} value={"success"}>成功</Option>
                 <Option key={"20"} value={"halt"}>终止</Option>
@@ -81,10 +86,10 @@ const HistoryScreen = props =>{
             </Select>
             <Select
                 suffixIcon={<CaretDownOutlined />}
-                placeholder={"执行方式"}
                 onChange={value=>changValue(value,"type")}
+                defaultValue={params.type}
             >
-                <Option key={"0"} value={0}>全部执行方式</Option>
+                <Option key={"0"} value={0}>执行方式</Option>
                 <Option key={"1"} value={1}>手动</Option>
                 <Option key={"2"} value={2}>自动</Option>
             </Select>

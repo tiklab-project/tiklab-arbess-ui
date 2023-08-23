@@ -57,7 +57,6 @@ const PostprocessUserAdd = props =>{
         }else {
             setYUserList(yUserList.concat(addUser))
         }
-
         setUserAddVisible(false)
     }
 
@@ -197,8 +196,8 @@ const PostprocessUserAdd = props =>{
                     pagination={false}
                     locale={{emptyText: <EmptyText/>}}
                 />
-                <Page 
-                    pageCurrent={findUserParam.pageParam.currentPage}
+                <Page
+                    currentPage={findUserParam.pageParam.currentPage}
                     changPage={changUserPage}
                     page={userPage}
                 />

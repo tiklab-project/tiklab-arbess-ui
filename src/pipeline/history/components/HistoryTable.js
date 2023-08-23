@@ -1,8 +1,7 @@
-import React,{useState,useEffect} from "react";
+import React, {useState} from "react";
 import {Popconfirm, Table, Tooltip} from "antd";
 import {observer} from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
-import {SpinLoading} from "../../../common/loading/Loading";
 import Profile from "../../../common/profile/Profile";
 import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import Page from "../../../common/page/Page";
@@ -10,37 +9,51 @@ import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 import {DeleteOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
+import HistoryDetail from "./HistoryDetail";
 import "./HistoryTable.scss"
 
 const HistoryTable = props =>{
 
-    const {tableType,isLoading,setIsLoading,pipelineUserList,pipelineList,historyStore,setParams,params,
-        disDetails
+    const {tableType,isLoading,setIsLoading,setDetail,params,setParams,
+        historyStore,pipelineUserList,pipelineList,
     } = props
 
-    const {pageCurrent,setPageCurrent,page,historyList,setHistoryList,deleteInstance,execStop} = historyStore
+    const {page,historyList,deleteInstance,execStop} = historyStore
+
+    // 历史信息
+    const [historyItem,setHistoryItem] = useState(null)
 
     /**
      * 切换列表详情页面
      * @param record
      */
     const details = record => {
-        if(tableType==="history"){
-            disDetails(record)
-        }else {
-            props.history.push(`/index/pipeline/${record.pipeline.id}/structure/${record.instanceId}/post`)
-        }
+        setDetail(false)
+        setHistoryItem(record)
+    }
+
+    /**
+     * 筛选
+     * @param value
+     */
+    const screen = value =>{
+        setIsLoading(true)
+        setParams({
+            ...params,
+            ...value,
+        })
     }
 
     /**
      * 换页
-     * @param pages：页码
      */
     const changPage = pages =>{
-        setPageCurrent(pages)
-        setHistoryList([])
-        // 重新加载
-        setIsLoading(true)
+        screen({
+            pageParam:{
+                pageSize: 13,
+                currentPage: pages,
+            }
+        })
     }
 
     /**
@@ -53,10 +66,9 @@ const HistoryTable = props =>{
 
     /**
      * 终止运行
-     * @param pipeline：流水线信息
      */
-    const terminateOperation = pipeline => {
-        execStop(pipeline.id)
+    const terminateOperation = record => {
+        execStop(record.id)
     }
 
     const columns = [
@@ -150,9 +162,9 @@ const HistoryTable = props =>{
                                     okText="确定"
                                     cancelText="取消"
                                 >
-                                <span style={{cursor:"pointer"}}>
-                                    <DeleteOutlined />
-                                </span>
+                                    <span style={{cursor:"pointer"}}>
+                                        <DeleteOutlined />
+                                    </span>
                                 </Popconfirm>
                             </Tooltip>
                         )
@@ -161,29 +173,42 @@ const HistoryTable = props =>{
         }
     ]
 
+    const goBack = () => {
+        setDetail(true)
+        setHistoryItem(false)
+    }
+
+    if(historyItem){
+        return  <HistoryDetail
+                    back={goBack}
+                    tableType={tableType}
+                    historyItem={historyItem}
+                    historyStore={historyStore}
+                />
+    }
+
     return (
         <div className='history'>
             <div className="history-content mf-home-limited mf">
                 <Breadcrumb firstItem={"历史"}/>
                 <HistoryScreen
-                    changPage={changPage}
                     pipelineList={pipelineList}
                     pipelineUserList={pipelineUserList}
                     params={params}
-                    setParams={setParams}
+                    screen={screen}
                 />
                 <div className="history-table">
                     <Table
                         bordered={false}
+                        loading={isLoading}
                         columns={columns}
                         dataSource={historyList}
                         rowKey={record=>record.instanceId}
                         pagination={false}
-                        locale={{emptyText:isLoading?
-                                <SpinLoading type="table"/>:<EmptyText title={"没有查询到历史记录"}/>}}
+                        locale={{emptyText: <EmptyText title={"没有查询到历史记录"}/>}}
                     />
                     <Page
-                        pageCurrent={pageCurrent}
+                        currentPage={page.currentPage}
                         changPage={changPage}
                         page={page}
                     />

@@ -14,7 +14,6 @@ import EmptyText from "../../../common/emptyText/EmptyText";
 import Profile from "../../../common/profile/Profile";
 import ListIcon from "../../../common/list/ListIcon";
 import Page from "../../../common/page/Page";
-import {SpinLoading} from "../../../common/loading/Loading";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
@@ -52,8 +51,6 @@ const PipelineTable = props =>{
 
     /**
      * 收藏提示
-     * @param res：收藏返回的状态
-     * @param info：收藏||取消收藏
      */
     const collectMessage = (res,info) =>{
         if(res.code===0){
@@ -229,15 +226,15 @@ const PipelineTable = props =>{
     return  <div className="pipelineTable">
                 <Table
                     bordered={false}
+                    loading={isLoading}
                     columns={columns}
                     dataSource={pipelineListPage}
                     rowKey={record=>record.id}
                     pagination={false}
-                    locale={{emptyText: isLoading ?
-                            <SpinLoading type="table"/>: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
+                    locale={{emptyText: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
                 />
                 <Page
-                    pageCurrent={pipPage.current}
+                    currentPage={pipPage.currentPage}
                     changPage={changPage}
                     page={pipPage}
                 />

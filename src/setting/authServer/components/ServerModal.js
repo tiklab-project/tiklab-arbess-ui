@@ -286,19 +286,12 @@ const ServerModal = props =>{
         </>
     )
 
-    const modalFooter = (
-        <>
-            <Btn onClick={onCancel} title={"取消"} isMar={true}/>
-            <Btn onClick={onOk} title={"确定"} type={"primary"}/>
-        </>
-    )
-
     return(
         <Modals
             visible={visible}
             onCancel={onCancel}
             destroyOnClose={true}
-            footer={modalFooter}
+            onOk={onOk}
             title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">

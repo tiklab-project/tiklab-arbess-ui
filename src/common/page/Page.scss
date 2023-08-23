@@ -1,19 +1,23 @@
 .mf-page{
-    width: 100%;
-    text-align: center;
-    padding-top: 10px;
-    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
     .mf-page-ban{
         cursor:not-allowed;
         color: var(--tiklab-gray-500);
     }
     .mf-page-allow{
         cursor: pointer;
-        &:hover{
-          color: var(--tiklab-blue);
-        }
     }
-    .mf-page-current{
+    .mf-page-current,.mf-page-allow:hover{
         color: var(--tiklab-blue);
+    }
+    .mf-page-line{
+        margin: 0 5px;
+    }
+    .mf-page-record{
+        margin-left: 10px;
+        font-size: var(--tiklab-font-12);
     }
 }

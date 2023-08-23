@@ -2,7 +2,6 @@ import React,{useState,useEffect,useRef} from "react";
 import {Form, Select, Checkbox, Table, Space, Tooltip, message} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
-import Btn from "../../../../common/btn/Btn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 import Modals from "../../../../common/modal/Modal";
 import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
@@ -94,32 +93,33 @@ const PostprocessAdd = props =>{
 
     /**
      * 添加或者更新后置处理
-     * @param value
      */
-    const onOk = value => {
-        let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
-        let params = {
-            taskType:postprocessType,
-            values: postprocessType==='message' ? { ...value,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
-        }
-        if(formValue){
-             params = {
-                 ...params,
-                 postprocessId:formValue.postprocessId,
-             }
-            updatePost(params).then(res=>{
-                res.code===0 && message.info("更新成功",0.5)
-            })
-        }else {
-            params = {
-                ...params,
-                pipelineId:pipeline.id,
+    const onOk = () => {
+        form.validateFields().then((value)=>{
+            let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
+            let params = {
+                taskType:postprocessType,
+                values: postprocessType==='message' ? { ...value,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
             }
-            createPost(params).then(res=>{
-                res.code===0 && message.info("添加成功",0.5)
-            })
-        }
-        setPostprocessVisible(false)
+            if(formValue){
+                 params = {
+                     ...params,
+                     postprocessId:formValue.postprocessId,
+                 }
+                updatePost(params).then(res=>{
+                    res.code===0 && message.info("更新成功",0.5)
+                })
+            }else {
+                params = {
+                    ...params,
+                    pipelineId:pipeline.id,
+                }
+                createPost(params).then(res=>{
+                    res.code===0 && message.info("添加成功",0.5)
+                })
+            }
+            setPostprocessVisible(false)
+        })
     }
 
     const columns = [
@@ -194,33 +194,11 @@ const PostprocessAdd = props =>{
         },
     ]
 
-    const modalFooter = (
-        <>
-            <Btn
-                onClick={()=>setPostprocessVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={() => {
-                    form
-                        .validateFields()
-                        .then((values) => {
-                            form.resetFields()
-                            onOk(values)
-                        })
-                }}
-                title={"确定"}
-                type={"primary"}
-            />
-        </>
-    )
-
     return(
         <Modals
             visible={postprocessVisible}
             onCancel={()=>setPostprocessVisible(false)}
-            footer={modalFooter}
+            onOk={onOk}
             destroyOnClose={true}
             width={800}
             title={formValue?"修改":"添加"}

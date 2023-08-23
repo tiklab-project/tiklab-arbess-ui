@@ -19,15 +19,17 @@ export class PipelineStore {
     // 流水线分页
     @observable
     pipPage = {
-        current: 1,
-        total: 1,
+        currentPage: 1,
+        totalPage: 1,
+        totalRecord: 1,
     }
 
     // 用户分页
     @observable
     userPage = {
-        current: 1,
-        total: 1,
+        currentPage: 1,
+        totalPage: 1,
+        totalRecord: 1,
     }
 
     // 流水线信息
@@ -54,14 +56,16 @@ export class PipelineStore {
                 if(res.code===0 && res.data){
                     this.pipelineListPage = res.data.dataList
                     this.pipPage = {
-                        current: res.data.currentPage,
-                        total: res.data.totalPage,
+                        currentPage: res.data.currentPage,
+                        totalPage: res.data.totalPage,
+                        totalRecord: res.data.totalRecord,
                     }
                 }else {
                     this.pipelineListPage = []
                     this.pipPage = {
-                        current: 1,
-                        total: 1,
+                        currentPage: 1,
+                        totalPage: 1,
+                        totalRecord: 1,
                     }
                 }
                 resolve(res)
@@ -206,7 +210,11 @@ export class PipelineStore {
     findPipelineUser = data =>{
         if(data.code===0){
             this.pipelineUserList = data.data && data.data.dataList
-            this.userPage.total = data.data.totalPage
+            this.userPage = {
+                currentPage: data.data.currentPage,
+                totalPage: data.data.totalPage,
+                totalRecord: data.data.totalRecord
+            }
         }
     }
 

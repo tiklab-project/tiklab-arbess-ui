@@ -90,32 +90,33 @@ const PipelineAddInfo = props =>{
 
     /**
      * 流水线创建或更新确定
-     * @param value
      */
-    const onOk = value => {
-        if(set){
-            const params={
-                id:pipeline.id,
-                name:value.name===""? pipeline.name:value.name,
-                power: powerType
-            }
-            setIsLoading(true)
-            updatePipeline(params).then(res => {
-                if (res.code === 0) {
-                    value.name!=="" && (pipeline.name = value.name)
-                    setIsLoading(false)
-                    props.history.push(`/index/pipeline/${pipeline.id}/survey`)
+    const onOk = () => {
+        form.validateFields().then(value=>{
+            if(set){
+                const params={
+                    id:pipeline.id,
+                    name:value.name===""? pipeline.name:value.name,
+                    power: powerType
                 }
+                setIsLoading(true)
+                updatePipeline(params).then(res => {
+                    if (res.code === 0) {
+                        value.name!=="" && (pipeline.name = value.name)
+                        setIsLoading(false)
+                        props.history.push(`/index/pipeline/${pipeline.id}/survey`)
+                    }
+                })
+                return
+            }
+            setCurrent(1)
+            const userList = yUserList && yUserList.map(item=>({id:item.id,adminRole:item.adminRole}))
+            setBaseInfo({
+                type:type,
+                name: value.name,
+                power: powerType,
+                userList,
             })
-            return
-        }
-        setCurrent(1)
-        const userList = yUserList && yUserList.map(item=>({id:item.id,adminRole:item.adminRole}))
-        setBaseInfo({
-            type:type,
-            name: value.name,
-            power: powerType,
-            userList,
         })
     }
 
@@ -232,6 +233,7 @@ const PipelineAddInfo = props =>{
                         visible={visible}
                         setVisible={setVisible}
                         width={240}
+                        style={{right:0,top:48}}
                     >
                         <PipelineUserAdd
                             visible={visible}
@@ -311,7 +313,7 @@ const PipelineAddInfo = props =>{
             <>
                 <Form form={form} autoComplete="off" layout={"vertical"}>
                     <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
-                        <Input allowClear style={set? {width:612}: {background:"#fff"}}/>
+                        <Input allowClear style={{width:612}}/>
                     </Form.Item>
                 </Form>
                 { renderPowerType }
@@ -319,13 +321,7 @@ const PipelineAddInfo = props =>{
                 <PrivilegeProjectButton code={"pipeline_update"} domainId={pipeline && pipeline.id}>
                     <Btn type={"primary"}
                          title={"确定"}
-                         onClick={() => {
-                             form
-                                 .validateFields()
-                                 .then((values) => {
-                                     onOk(values)
-                                 })
-                         }}
+                         onClick={onOk}
                     />
                 </PrivilegeProjectButton>
             </>
@@ -336,41 +332,29 @@ const PipelineAddInfo = props =>{
         <>
             <Form form={form} autoComplete="off" layout={"vertical"}>
                 <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
-                    <Input allowClear style={set? {width:612}: {background:"#fff"}}/>
+                    <Input allowClear style={{background:"#fff"}}/>
                 </Form.Item>
             </Form>
             <div className="pipeline-add-type">
                 <div className="pipeline-type-title">流水线类型</div>
                 <div className="pipeline-type-ul">
-                    <div
-                        onClick={()=>setType(1)}
-                        className={`${type===1?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
-                    >多任务
-                    </div>
-                    <div
-                        onClick={()=>setType(2)}
-                        className={`${type===2?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
-                    >多阶段
-                    </div>
+                    <div onClick={()=>setType(1)}
+                         className={`${type===1?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
+                    >多任务</div>
+                    <div onClick={()=>setType(2)}
+                         className={`${type===2?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
+                    >多阶段</div>
                 </div>
             </div>
             { renderPowerType }
             { powerType === 2 && renderUser() }
-            <Btn
-                onClick={()=>props.history.push("/index/pipeline")}
-                title={"取消"}
-                isMar={true}
+            <Btn onClick={()=>props.history.push("/index/pipeline")}
+                 title={"取消"}
+                 isMar={true}
             />
             <Btn type={"primary"}
                  title={"下一步"}
-                 onClick={() => {
-                     form
-                         .validateFields()
-                         .then((values) => {
-                             onOk(values)
-                             form.resetFields()
-                         })
-                 }}
+                 onClick={onOk}
             />
         </>
     )

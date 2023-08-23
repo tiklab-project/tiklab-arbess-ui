@@ -50,6 +50,13 @@ const Pipeline = props =>{
 
     useEffect(()=>{
         // 初始化获取流水线
+        findPipeline()
+    },[pipelineParam,fresh])
+
+    /**
+     * 获取流水线
+     */
+    const findPipeline = () =>{
         if(listType===1){
             // 所有流水线
             findUserPipelinePage({
@@ -62,13 +69,13 @@ const Pipeline = props =>{
                 pipelineFollow:1
             }).then(r=>setIsLoading(false))
         }
-    },[pipelineParam,fresh])
-
+    }
     /**
      * 模糊查询流水线
      * @param e：文本框value
      */
     const onChangeSearch = debounce((e) => {
+        setIsLoading(true)
         setPipelineParam({
             ...pipelineParam,
             pipelineName:e.target.value,
@@ -81,6 +88,7 @@ const Pipeline = props =>{
      * @param page
      */
     const changPage = page =>{
+        setIsLoading(true)
         setPipelineParam({
             ...pipelineParam,
             pageParam:{
@@ -95,6 +103,7 @@ const Pipeline = props =>{
      * @param item
      */
     const clickType = item => {
+        setIsLoading(true)
         setPipelineParam({
             pageParam
         })
@@ -128,7 +137,8 @@ const Pipeline = props =>{
                         <Input
                             allowClear
                             placeholder="流水线名称"
-                            onChange={onChangeSearch}
+                            // onChange={onChangeSearch}
+                            onPressEnter={onChangeSearch}
                             prefix={<SearchOutlined />}
                             style={{ width: 200 }}
                         />

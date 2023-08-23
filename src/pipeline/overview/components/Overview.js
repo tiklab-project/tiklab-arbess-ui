@@ -23,25 +23,23 @@ const Overview = props =>{
     const {pipeline} = pipelineStore
 
     useEffect(()=>{
-        if(pipeline){
-            // 运行概况
-            pipelineCensus(pipeline.id).then(res=>{
-                const data = res.data
-                if(res.code===0){
-                    renderEchart(data)
-                }
-            })
-            // 流水线动态
-            findlogpage({
-                content:{pipelineId:[pipeline.id]},
-                bgroup:"matflow",
-                pageParam:{
-                    pageSize:10,
-                    currentPage:1
-                }
-            })
-        }
-    },[pipeline])
+        // 运行概况
+        pipelineCensus(pipeline.id).then(res=>{
+            const data = res.data
+            if(res.code===0){
+                renderEchart(data)
+            }
+        })
+        // 流水线动态
+        findlogpage({
+            content:{pipelineId:[pipeline.id]},
+            bgroup:"matflow",
+            pageParam:{
+                pageSize:10,
+                currentPage:1
+            }
+        })
+    },[])
 
     /**
      * 渲染图表

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, {useState} from "react";
 import {Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
@@ -25,10 +25,6 @@ const TaskDetails = props =>{
 
     // 标签类型
     const [handleType,setHandleType] = useState(1)
-
-    useEffect(()=>{
-        return ()=> setHandleType(1)
-    },[taskFormDrawer])
 
     const lis = [
         {
@@ -88,14 +84,21 @@ const TaskDetails = props =>{
         }
     }
 
+    /**
+     * 关闭弹出框
+     */
+    const close = () =>{
+        setHandleType(1)
+        setTaskFormDrawer(false)
+    }
+
     return(
         <Drawer
             placement="right"
             visible={taskFormDrawer}
-            onClose={()=>setTaskFormDrawer(false)}
+            onClose={close}
             closable={false}
             destroyOnClose={true}
-            mask={false}
             width={480}
             contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
@@ -103,7 +106,7 @@ const TaskDetails = props =>{
         >
             <div className="task-details-up">
                 <div className="wrapper-head-title">编辑{titleType()}</div>
-                <Btn onClick={()=>setTaskFormDrawer(false)} title={<CloseOutlined />} type="text"/>
+                <Btn onClick={close} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-details-bottom">
                 <div className="body">

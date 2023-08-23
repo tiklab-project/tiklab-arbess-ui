@@ -1,9 +1,9 @@
 .str-screens{
     padding-top: var(--tiklab-padding-item);
-    .ant-select{
+    .ant-input,.ant-select{
         width: 150px;
-        &:not(:last-child){
-            margin-right: var(--tiklab-padding-item);
-        }
+    }
+    .ant-select{
+        margin-left: var(--tiklab-padding-item);
     }
 }

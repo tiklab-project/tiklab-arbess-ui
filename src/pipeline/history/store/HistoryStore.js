@@ -1,6 +1,6 @@
 import {action, observable} from "mobx";
 import {message} from "antd";
-import {Axios} from "tiklab-core-ui";
+import {Axios, getUser} from "tiklab-core-ui";
 
 class HistoryStore {
 
@@ -12,23 +12,12 @@ class HistoryStore {
     @observable
     historyFresh = false
 
-    // 筛选时，设置当前页数初始化
-    @observable
-    pageCurrent = 1
-
     // 分页
     @observable
     page = {
-        total: 1,
-    }
-
-    /**
-     * 设置当前页
-     * @param value
-     */
-    @action
-    setPageCurrent = value =>{
-        this.pageCurrent = value
+        currentPage: 1,
+        totalRecord: 1,
+        totalPage: 1,
     }
 
     /**
@@ -48,6 +37,7 @@ class HistoryStore {
     execStart = async value =>{
         const params = new FormData()
         params.append("pipelineId", value)
+        params.append("userId", getUser().userId)
         const data = await Axios.post("/exec/start", params)
         if(data.code!==0){
             message.info(data.msg)
@@ -103,7 +93,6 @@ class HistoryStore {
         const data = await Axios.post("/instance/deleteInstance",param)
         if(data.code===0){
             message.info("删除成功",0.5)
-            this.pageCurrent = 1
             this.historyFresh = !this.historyFresh
         }
         return data
@@ -116,14 +105,7 @@ class HistoryStore {
      */
     @action
     findUserInstance = async values =>{
-        const params = {
-            pageParam: {
-                pageSize: 13,
-                currentPage: this.pageCurrent,
-            },
-            ...values,
-        }
-        const data = await Axios.post("/instance/findUserInstance",params)
+        const data = await Axios.post("/instance/findUserInstance",values)
         this.findHistoryList(data)
         return data
     }
@@ -136,14 +118,7 @@ class HistoryStore {
      */
     @action
     findPipelineInstance = async value =>{
-        const params = {
-            pageParam: {
-                pageSize: 13,
-                currentPage: this.pageCurrent,
-            },
-            ...value,
-        }
-        const data = await Axios.post("/instance/findPipelineInstance",params)
+        const data = await Axios.post("/instance/findPipelineInstance",value)
         this.findHistoryList(data)
         return data
     }
@@ -155,20 +130,21 @@ class HistoryStore {
      */
     @action
     findHistoryList = data =>{
-        if(data.code===0){
-            if(data.data && data.data.dataList.length > 0){
-                this.historyList = data.data.dataList
-                this.page.total = data.data.totalPage
-            }
-            else{
-                this.historyList = []
-                this.page = {
-                    total: 1,
-                }
+        if(data.code===0 && data.data){
+            this.historyList = data.data.dataList
+            this.page = {
+                currentPage:data.data.currentPage,
+                totalPage:data.data.totalPage,
+                totalRecord:data.data.totalRecord,
             }
         }
-        else {
+        else{
             this.historyList = []
+            this.page = {
+                currentPage:1,
+                totalPage:1,
+                totalRecord:1,
+            }
         }
     }
 

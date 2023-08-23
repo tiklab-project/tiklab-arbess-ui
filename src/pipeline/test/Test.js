@@ -30,7 +30,8 @@ const Test = props => {
 
     // 测试页数
     const [testPage,setTestPage] = useState({
-        total:1
+        totalPage:1,
+        totalRecord:1
     })
 
     // 请求数据
@@ -51,7 +52,8 @@ const Test = props => {
             ...param
         }).then(r=>{
             setTestPage({
-                total: r.data?.totalPage || 1
+                totalPage: r.data?.totalPage || 1,
+                totalRecord: r.data?.totalRecord || 1,
             })
             setIsLoading(false)
         })
@@ -63,8 +65,8 @@ const Test = props => {
      */
     const goTestDetail = item => {
         if(item.status===2) return
-        const url = "http://192.168.10.22:3000/#/repository/report/"+item.testonId
-        // const url = item.url+"/#/repository/report/"+item.testonId
+        // const url = "http://192.168.10.22:3000/#/repository/report/"+item.testonId
+        const url = item.url+"/#/repository/report/"+item.testonId
         return applyJump(url)
     }
 
@@ -192,7 +194,7 @@ const Test = props => {
                     }
 
                     <Page
-                        pageCurrent={param.pageParam.currentPage} 
+                        currentPage={param.pageParam.currentPage}
                         changPage={changPage} 
                         page={testPage}
                     />

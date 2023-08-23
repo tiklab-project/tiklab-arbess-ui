@@ -21,6 +21,8 @@ const PipelineAside= (props)=>{
 
     const pipelineId = match.params.id
     const userId = getUser().userId
+
+    // 加载状态
     const [isAside,setIsAside] = useState(true)
 
     useEffect(()=>{

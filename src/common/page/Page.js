@@ -4,53 +4,22 @@ import "./Page.scss";
 
 /**
  * 分页
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
 const Page = props =>{
 
-    const {pageCurrent,changPage,page} = props
+    const {currentPage,changPage,page:{totalPage=1,totalRecord=1}} = props
 
-    // 换页-<
-    const renderLeftOut = () =>{
-        if(pageCurrent===1){
-            return (
-                <span className="mf-page-ban">
-                    <LeftOutlined/>
-                </span>
-            )
-        }else {
-            return (
-                <span className="mf-page-allow" onClick={()=>changPage(pageCurrent-1)}>
-                    <LeftOutlined/>
-                </span>
-            )
-        }
-    }
-
-    // 换页+>
-    const renderRightOut = () =>{
-        if(pageCurrent===page.total){
-            return (
-                <span className="mf-page-ban">
-                    <RightOutlined/>
-                </span>
-            )
-        }else {
-            return (
-                <span className="mf-page-allow" onClick={()=>changPage(pageCurrent+1)}>
-                    <RightOutlined/>
-                </span>
-            )
-        }
-    }
-
-    return   page?.total > 1 && <div className="mf-page">
-                { renderLeftOut() }
-                <span className="mf-page-current">{pageCurrent}</span>
-                <span> / {page?.total || 1}</span>
-                { renderRightOut() }
+    return totalPage > 1 && <div className="mf-page">
+                <div className={`${currentPage===1?"mf-page-ban":"mf-page-allow"}`}
+                     onClick={()=>currentPage===1 ? null:changPage(currentPage-1)}
+                ><LeftOutlined/></div>
+                <div className="mf-page-current">{currentPage}</div>
+                <div className='mf-page-line'> / </div>
+                <div>{totalPage}</div>
+                <div className={`${currentPage===totalPage?"mf-page-ban":"mf-page-allow"}`}
+                     onClick={()=>currentPage===totalPage? null:changPage(currentPage+1)}
+                ><RightOutlined/></div>
+                <div className='mf-page-record'>  共{totalRecord}条 </div>
             </div>
 }
 

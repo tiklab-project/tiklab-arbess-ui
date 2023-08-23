@@ -4,21 +4,14 @@ import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 
 const HistoryDetailItem = props =>{
 
-    const {pipeline,execData,setTreeData,setLogData,setExecIndex,setId,isRun} = props
+    const {changeAnchor,pipeline,execData,setExecIndex} = props
 
     /**
-     * 设置日志
-     * @param item
-     * @param itemIndex
+     * 日志
      */
     const log = (item,itemIndex) =>{
-        if(isRun){
-            setExecIndex(itemIndex)
-            setId(item.id)
-        }else{
-            setTreeData(item)
-            setLogData(item)
-        }
+        changeAnchor(item.id)
+        setExecIndex(itemIndex)
     }
 
     const renderTask = (item,index) =>{

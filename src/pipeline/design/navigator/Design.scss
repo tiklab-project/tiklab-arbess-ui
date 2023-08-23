@@ -15,17 +15,17 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+        padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
     }
     .design-tabs{
         display: flex;
-        padding: 0 var(--tiklab-padding);
+        padding: 0 var(--tiklab-padding-item);
         height: 40px;
         line-height: 40px;
         .design-tab{
             cursor: pointer;
             &:not(:last-child){
-                margin-right: var(--tiklab-padding);
+                margin-right: var(--tiklab-padding-item);
             }
         }
         .design-active{

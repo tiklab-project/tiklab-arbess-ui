@@ -29,52 +29,31 @@ const VariableAdd = props =>{
 
     /**
      * 变量添加编辑确定
-     * @param values
      */
-    const onOk = values =>{
-        if(formValue){
-            const params = {
-                ...values,
-                type:1,
-                varId:formValue.varId
+    const onOk = () =>{
+        form.validateFields().then((values)=>{
+            if(formValue){
+                const params = {
+                    ...values,
+                    type:1,
+                    varId:formValue.varId
+                }
+                updateVariable(params).then(res=>{
+                    res.code===0 && message.info("更新成功",0.5)
+                })
+            }else {
+                const params = {
+                    ...values,
+                    type:1,
+                    taskId:pipelineId,
+                }
+                createVariable(params).then(res=>{
+                    res.code===0 && message.info("添加成功",0.5)
+                })
             }
-            updateVariable(params).then(res=>{
-                res.code===0 && message.info("更新成功",0.5)
-            })
-        }else {
-            const params = {
-                ...values,
-                type:1,
-                taskId:pipelineId,
-            }
-            createVariable(params).then(res=>{
-                res.code===0 && message.info("添加成功",0.5)
-            })
-        }
-        setVariableVisible(false)
+            setVariableVisible(false)
+        })
     }
-
-    const modalFooter = (
-        <>
-            <Btn
-                onClick={()=>setVariableVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={() => {
-                    form
-                        .validateFields()
-                        .then((values) => {
-                            form.resetFields()
-                            onOk(values)
-                        })
-                }}
-                title={"确定"}
-                type={"primary"}
-            />
-        </>
-    )
 
     const [opt,setOpt] = useState([])
 
@@ -99,7 +78,7 @@ const VariableAdd = props =>{
             visible={variableVisible}
             onCancel={()=>setVariableVisible(false)}
             destroyOnClose={true}
-            footer={modalFooter}
+            onOk={onOk}
             width={500}
             title={formValue?"修改":"添加"}
         >

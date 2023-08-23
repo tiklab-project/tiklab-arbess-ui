@@ -116,7 +116,7 @@ const Server = props =>{
     const action = record =>{
         const {type} = record
         if(type==='xcode' || type==='xpack' || type==='teston'){
-            if(version==='cloud') return (
+            if(version !=='ce') return (
                 <Listaction
                     edit={()=>editServer(record)}
                 />

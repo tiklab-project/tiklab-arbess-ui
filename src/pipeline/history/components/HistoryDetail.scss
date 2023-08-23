@@ -1,77 +1,108 @@
 .str-detail{
     height: 100%;
-    overflow-y: hidden;
-    .str-detail-log{
-        margin-top: 10px;
-        .bottom-up{
-            border-bottom: 1px solid #d9d9d9;
-            height: 40px;
-            line-height: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 768px;
+    .str-detail-bread{
+        padding: 15px 15px 10px;
+        .bread-center{
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            div:first-child{
-                font-weight: var(--tiklab-font-weight-bold);
-            }
-            .bottom-up-allow{
-                cursor: pointer;
-                color: var(--tiklab-blue);
-            }
-        }
-        .bottom-content{
-            display: flex;
-            height: calc(100% - 260px);
-            border-left: 1px solid #d9d9d9;
-        }
-        .bottom-tree{
-            height: 100%;
-            overflow: auto;
-            width: 200px;
-            min-width: 200px;
-            padding: 10px 10px 0;
-            border-bottom: 1px solid #d9d9d9;
-            .tree-ul{
-                .tree-li-firsts{
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    height: 25px;
-                    line-height: 25px;
-                    cursor: pointer;
-                    padding: 0 5px;
-                    &:hover{
-                        background: var(--tiklab-gray-300);
-                    }
+            padding-top: 10px;
+            .bread-center-item{
+                font-size: 13px;
+                height: 100px;
+                width: 200px;
+                min-width: 200px;
+                padding: 10px;
+                background: #f7f7f7;
+                border-radius: 4px;
+                &:not(:last-child){
+                    margin-right: 15px;
+                    padding-right: 15px;
                 }
-                .tree-li-active{
-                    background: var(--tiklab-gray-400);
-                }
-                .tree-li-name{
-                    max-width: 80px;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    -o-text-overflow: ellipsis;
-                }
-                .tree-li-icon{
+                .bread-center-name{
                     padding-right: 8px;
+                    font-weight: bold;
                 }
-                .tree-li-hidden{
-                    display: none;
-
-                }
-                .tree-li-first{
-                    display: flex;
-                    align-items: center;
-                }
-                .tree-li-time{
-                    font-size: var(--tiklab-font-13);
-                    color: #999;
+                .bread-center-desc{
+                    text-align: center;
+                    padding-top:18px;
                 }
             }
         }
+    }
+
+    .bottom-margin{
+        margin-left: 15px;
+    }
+    .str-detail-bottom{
+        flex: 1;
+        height: 0;
+        display: flex;
+        flex-direction: row;
+    }
+    .bottom-tree{
+        width: 260px;
+        min-width: 260px;
+        padding: 10px;
+        height: 100%;
+        overflow-y: auto;
+        background: #f7f7f7;
+        .tree-ul{
+            .tree-li-firsts{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 35px;
+                line-height: 35px;
+                cursor: pointer;
+                padding: 0 5px;
+                &:hover{
+                    background: var(--tiklab-gray-300);
+                }
+            }
+            .tree-li-active{
+                background: var(--tiklab-gray-400);
+            }
+            .tree-li-name{
+                flex: 1;
+                width: 0;
+            }
+            .tree-li-time{
+                font-size: var(--tiklab-font-13);
+                color: #999;
+                width: 60px;
+                text-align: right;
+            }
+            .tree-li-time,.tree-li-name{
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+            }
+            .tree-li-icon{
+                padding-right: 8px;
+            }
+            .tree-li-hidden{
+                display: none;
+
+            }
+            .tree-li-first{
+                display: flex;
+                align-items: center;
+                flex: 1;
+            }
+            .tree-li-state{
+                width: 20px;
+            }
+        }
+    }
+    .str-detail-log{
+        flex: 1;
+        height: 100%;
+        padding: 0 15px 15px;
         .bottom-log{
-            flex: 1;
             height: 100%;
             overflow: auto;
             background: #000;
@@ -80,89 +111,26 @@
             word-wrap: break-word;
             white-space: pre-wrap;
         }
+        .bottom-log-item:not(:last-child){
+            margin-bottom: 50px;
+        }
     }
-    .item{
+    .bread-center{
         &-halt{
-            border-top: 3px solid #444444 !important;
+            color: #444444;
         }
         &-error{
-            border-top: 3px solid #ff0000 !important;
+            color: #ff0000;
         }
         &-success{
-            border-top: 3px solid var(--tiklab-blue) !important;
+            color: var(--tiklab-blue);
         }
         &-run{
-            border-top: 3px solid #43a890 !important;
+            color: #43a890;
         }
         &-wait{
-            border-top: 3px solid rgba(0, 0, 0, 0.18) !important;
-        }
-    }
-    .str-multi{
-        display: flex;
-        overflow: auto;
-        .str-multi-group{
-            height: 130px;
-            overflow: auto;
-        }
-        .st-card{
-            width: 230px;
-            min-width: 230px;
-            height: 130px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid var(--tiklab-gray-200);
-            border-radius: 4px;
-            border-top: 3px solid rgba(0, 0, 0, 0.18);
-            &:not(:last-child){
-                margin-right: 15px;
-            }
-            .card-top .card-top-state{
-                margin-right: 8px;
-            }
-            .card-ct{
-                text-align: center;
-                font-size: var(--tiklab-font-13);
-            }
-            .card-bt{
-                font-size: var(--tiklab-font-13);
-                display: flex;
-                justify-content: space-between;
-                .card-bt-log{
-                    cursor: pointer;
-                    color: var(--tiklab-blue);
-                }
-            }
+            color: rgba(0, 0, 0, 0.18);
         }
     }
 }
 
-.str-detail-up{
-    padding-bottom: var(--tiklab-padding-item);
-}
-
-.str-detail-all-log{
-    height: 100%;
-    overflow: auto;
-    .all-log-content{
-        padding-top: 0 !important;
-    }
-    .all-log-title{
-        position: sticky;
-        top:0;
-        left: 0;
-        z-index: 1;
-        background-color: #ffffff;
-        padding-top: var(--tiklab-padding);
-    }
-    .all-log{
-        background: #000;
-        color: #fff;
-        padding: 10px;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        min-height: 100px;
-    }
-}

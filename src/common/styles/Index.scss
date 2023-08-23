@@ -100,9 +100,6 @@ ul li{
 
 .ant-message{
     top: 50px;
-    .ant-message-notice{  /*mf-message*/
-        padding: 0;
-    }
     .ant-message-notice-content{
         width: 30%;
         background: #e8eaf3;
@@ -135,7 +132,7 @@ ul li{
     margin: auto;
     max-width: 1280px;
     min-width: 768px;
-    padding: var(--tiklab-padding);
+    padding: var(--tiklab-padding-item);
 }
 
 ::-webkit-scrollbar {
@@ -175,7 +172,7 @@ ul li{
     --tiklab-font-12: 12px;  /*图文排需要的文字 */
     --tiklab-font-13: 13px;  /*描述文字 */
     --tiklab-font-14: 14px; /*正文 */
-    --tiklab-font-15: 13px;  /* 2级标题*/
+    --tiklab-font-15: 15px;  /* 2级标题*/
     --tiklab-font-16: 16px;  /*标题 */
 
     --tiklab-font-weight-bold: bold;  /*标题字重 */

@@ -1,7 +1,6 @@
-import React,{useState,useEffect} from "react";
+import React,{useEffect} from "react";
 import {Form,Radio,Checkbox,TimePicker,Row,Col} from "antd";
 import moment from "moment";
-import Btn from "../../../../common/btn/Btn";
 import Modals from "../../../../common/modal/Modal";
 
 /**
@@ -33,64 +32,43 @@ const TriggerAdd = props =>{
 
     /**
      * 触发器添加更新确定
-     * @param fieldsValue
      */
-    const onOk = fieldsValue =>{
-        if(formValue===""){
-            const value = {
-                values:{
-                    taskType:fieldsValue.taskType,
-                    time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
-                    timeList:fieldsValue.timeList
-                },
-                pipeline:{id:pipelineId},
-                taskType:81,
+    const onOk = () =>{
+        form.validateFields().then((fieldsValue)=>{
+            if(formValue===""){
+                const value = {
+                    values:{
+                        taskType:fieldsValue.taskType,
+                        time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
+                        timeList:fieldsValue.timeList
+                    },
+                    pipeline:{id:pipelineId},
+                    taskType:81,
+                }
+                createTrigger(value)
+            }else {
+                const value = {
+                    values:{
+                        taskType:fieldsValue.taskType,
+                        time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
+                        timeList:fieldsValue.timeList
+                    },
+                    pipeline:{id:pipelineId},
+                    taskType:81,
+                    triggerId:formValue.triggerId
+                }
+                updateTrigger(value)
             }
-            createTrigger(value)
-        }else {
-            const value = {
-                values:{
-                    taskType:fieldsValue.taskType,
-                    time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
-                    timeList:fieldsValue.timeList
-                },
-                pipeline:{id:pipelineId},
-                taskType:81,
-                triggerId:formValue.triggerId
-            }
-            updateTrigger(value)
-        }
-        setTriggerVisible(false)
+            setTriggerVisible(false)
+        })
     }
-
-    const modalFooter = (
-        <>
-            <Btn
-                onClick={()=>setTriggerVisible(false)}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={() => {
-                    form
-                        .validateFields()
-                        .then((values) => {
-                            form.resetFields()
-                            onOk(values)
-                        })
-                }}
-                title={"确定"}
-                type={"primary"}
-            />
-        </>
-    )
 
     return(
         <Modals
             visible={triggerVisible}
             onCancel={()=>setTriggerVisible(false)}
+            onOk={onOk}
             destroyOnClose={true}
-            footer={modalFooter}
             width={500}
             title={formValue?"修改":"添加"}
         >

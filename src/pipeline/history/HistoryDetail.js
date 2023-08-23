@@ -1,12 +1,9 @@
 import React,{useState,useEffect,useRef} from "react";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import {SpinLoading} from "../../../common/loading/Loading";
+import Breadcrumb from "../../common/breadcrumb/Breadcrumb";
+import {SpinLoading} from "../../common/loading/Loading";
+import HistoryDetailItem from "./components/HistoryDetailItem";
 import HistoryDetailTree from "./HistoryDetailTree";
 import "./HistoryDetail.scss";
-import {runStatusIcon, runStatusText} from "./HistoryTrigger";
-import {getTime} from "../../../common/utils/Client";
-import {Space} from "antd";
-import {text} from "node-forge/lib/util";
 
 /**
  * 历史运行详情页面
@@ -33,13 +30,17 @@ const HistoryDetail = props =>{
 
     const [execData,setExecData] = useState([])
 
-    const [isClick,setIsClick] = useState(true)
-
     // 构建详情页面数据未返回时加载状态
     const [detailsLoading,setDetailsLoading] = useState(true)
 
     // 日志滚动条
     const [isActiveSlide,setIsActiveSlide] = useState(true)
+
+    // 正在运行的任务下标
+    const [execIndex,setExecIndex] = useState(0)
+
+    // 左侧树结构
+    const [treeData,setTreeData] = useState(null)
 
     // 日志id
     const [id,setId] = useState(null)
@@ -67,7 +68,7 @@ const HistoryDetail = props =>{
         }
         if(taskRes.code===0 && taskRes.data){
             setDetailsLoading(false)
-            setExecData(taskRes.data)
+            setExecData(taskRes.data || [])
             if(isRun && type==="init"){findInter()}
         }
     }
@@ -108,18 +109,15 @@ const HistoryDetail = props =>{
         }
     }
 
-    useEffect(()=>{
-        if(execData){
-            if(isRun && isClick){
-                setId(autoLog(execData)?.id)
-            }
-            if(!isRun){
-                const data = [...execData].pop()
-                if(data){setId(data.id)}
+    useEffect(() => {
+        if(pipeline?.type===2 && execData){
+            if(id){
+                setTreeData(execData[execIndex])
+            }else {
+                setTreeData(autoLog(execData))
             }
         }
-    },[execData,isClick])
-
+    }, [execData,execIndex,id]);
 
     /**
      * 运行日志打印（自动）
@@ -147,66 +145,58 @@ const HistoryDetail = props =>{
 
     const init = ()=>{
         setId(null)
+        setExecIndex(0)
         setDetailsLoading(true)
         clearInterval(inter)
     }
-
-    console.log(historyItem)
 
     /**
      * 锚点跳转
      */
     const changeAnchor = id =>{
-        setId(id)
         setIsActiveSlide(false)
-        setIsClick(false)
         if (id) {
+            setId(id)
             const anchorElement = document.getElementById(id)
             if (anchorElement) {
-                scrollRef.current.scrollTop = anchorElement.offsetTop - 210
+                scrollRef.current.scrollTop = anchorElement.offsetTop - 300
             }
         }
     }
+
+    console.log(treeData)
 
     // 控制台日志
     const renderLog = () =>{
         if(scrollRef.current && isActiveSlide){
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight
         }
-        if(pipeline?.type===2){
-            return (
-                <div className="bottom-log" ref={scrollRef}  onWheel={()=>setIsActiveSlide(false)}>
+        if(pipeline?.type===2 && treeData){
+            const {stageInstanceList} = treeData
+            return  <div className="bottom-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
+                        <div id={treeData.id}>
+                            {
+                                stageInstanceList && stageInstanceList.map(list=>{
+                                    const {taskInstanceList} = list
+                                    return <div key={list.id} id={list.id}>
+                                        {
+                                            taskInstanceList && taskInstanceList.map(item=>{
+                                                return <div key={item.id} id={item.id}>{item.runLog}</div>
+                                            })
+                                        }
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </div>
+        }
+        return  <div className="bottom-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
                     {
-                        execData && execData.map(group=>{
-                            const {stageInstanceList} = group
-                            return <div key={group.id} id={group.id} className='bottom-log-item'>
-                                {
-                                    stageInstanceList && stageInstanceList.map(list=>{
-                                        const {taskInstanceList} = list
-                                        return <div key={list.id} id={list.id}>
-                                            {
-                                                taskInstanceList && taskInstanceList.map(item=>{
-                                                    return <div key={item.id} id={item.id}>{item.runLog}</div>
-                                                })
-                                            }
-                                        </div>
-                                    })
-                                }
-                            </div>
+                        execData && execData.map(item=>{
+                            return <div key={item.id} id={item.id}>{item.runLog}</div>
                         })
                     }
                 </div>
-            )
-        }
-        return (
-            <div className="bottom-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
-                {
-                    execData && execData.map(item=>{
-                        return <div key={item.id} id={item.id} className='bottom-log-item'>{item.runLog}</div>
-                    })
-                }
-            </div>
-        )
     }
 
     // 面包屑
@@ -220,43 +210,36 @@ const HistoryDetail = props =>{
 
     return(
         <div className="str-detail">
-            <div className="str-detail-bread">
-                <Breadcrumb
-                    firstItem={`${isAllName()} # ${isFindName()}`}
-                    onClick={goBack}
-                />
-                <div className="bread-center">
-                    <div className="bread-center-item">
-                        <div className='bread-center-name'>开始时间</div>
-                        <div className='bread-center-desc'>{historyItem?.createTime }</div>
-                    </div>
-                    <div className="bread-center-item">
-                        <div className='bread-center-name'>运行方式</div>
-                        <div className='bread-center-desc'>{historyItem?.runWay===1 ? historyItem?.user?.nickname + " · 手动触发" : "定时触发" }</div>
-                    </div>
-                    <div className="bread-center-item">
-                        <div className='bread-center-name'>运行状态</div>
-                        <div className={`bread-center-desc bread-center-${historyItem?.runStatus}`}>{runStatusText(historyItem?.runStatus)}</div>
-                    </div>
-                    <div className="bread-center-item">
-                        <div className='bread-center-name'>运行时长</div>
-                        <div className='bread-center-desc'>{getTime(historyItem?.runTime)}</div>
-                    </div>
+            <div className="mf-home-limited mf">
+                <div className="str-detail-up">
+                    <Breadcrumb
+                        firstItem={`${isAllName()} # ${isFindName()}`}
+                        onClick={goBack}
+                    />
                 </div>
-
-            </div>
-            <div className={`str-detail-bottom ${tableType?"bottom-margin":""}`}>
-                <HistoryDetailTree
-                    id={id}
-                    execData={execData}
-                    pipeline={pipeline}
-                    changeAnchor={changeAnchor}
-                />
+                <div className="str-detail-card">
+                    <HistoryDetailItem
+                        pipeline={pipeline}
+                        execData={execData}
+                        setExecIndex={setExecIndex}
+                        changeAnchor={changeAnchor}
+                    />
+                </div>
                 <div className="str-detail-log">
-                    { renderLog() }
+                    <div className="bottom-up">控制台</div>
+                    <div className="bottom-content">
+                        {
+                            pipeline?.type===2 &&
+                            <HistoryDetailTree
+                                id={id}
+                                treeData={treeData}
+                                changeAnchor={changeAnchor}
+                            />
+                        }
+                        { renderLog() }
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }

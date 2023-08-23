@@ -26,12 +26,12 @@ const PipelineDyna = props =>{
 
     useEffect(()=>{
         // 初始化流水线动态
-        pipeline && findlogpage({
+        findlogpage({
             content:{pipelineId:[pipeline.id]},
             bgroup:"matflow",
             ...params
         })
-    },[pipeline,params])
+    },[params])
 
     /**
      * 去流水线概况页
@@ -40,7 +40,7 @@ const PipelineDyna = props =>{
     const goBack = () => props.history.push(`/index/pipeline/${pipeline.id}/survey`)
 
     return  <DynamicDetail
-                firstItem={"流水线动态详情"}
+                firstItem={"动态"}
                 goBack={goBack}
                 params={params}
                 setParams={setParams}

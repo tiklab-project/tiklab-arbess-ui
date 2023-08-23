@@ -2,7 +2,6 @@ import React,{useEffect,useState} from "react"
 import {inject,observer} from "mobx-react";
 import historyStore from "../store/HistoryStore";
 import HistoryTable from "./HistoryTable";
-import HistoryDetail from "./HistoryDetail";
 
 /**
  * 所有历史页面
@@ -14,20 +13,23 @@ const History = props => {
 
     const {pipelineStore} = props
 
-    const {findUserInstance,setHistoryList,historyFresh,pageCurrent,setPageCurrent} = historyStore
+    const {findUserInstance,setHistoryList,historyFresh} = historyStore
     const {pipelineList} = pipelineStore
-
-    // 列表数据详情状态
-    const [detailsVisible,setDetailsVisible] = useState(false)
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
-    // 历史信息
-    const [historyItem,setHistoryItem] = useState({})
+    const [detail,setDetail] = useState(true)
+
+    // 监听关闭定时器的状态
+    const pageParam = {
+        pageSize: 13,
+        currentPage: 1,
+    }
 
     // 获取所有历史列表请求数据
     const [params,setParams] = useState({
+        pageParam,
         pipelineId:null,
         state:null,
         type:0
@@ -35,73 +37,58 @@ const History = props => {
 
     useEffect(()=>{
         return ()=> {
-            setPageCurrent(1)
             setHistoryList([])
         }
     },[])
 
-    let inter = null
+    let inters = null;
     useEffect(()=>{
-        // 获取所有历史列表
-        inter = setInterval(()=>findUserInstance(params).then(res=>{
-            setIsLoading(false)
-            if(res.code===0){
-                if(!res.data) return clearInterval(inter)
-                if(res.data.dataList.length<1 || res.data.dataList[0].runStatus!=="run") clearInterval(inter)
-            }
-            else{
-                clearInterval(inter)
-            }
-        }),1000)
-        if(detailsVisible){
-            clearInterval(inter)
+        if(detail){
+            findHistoryInstance()
+        }else {
+            clearInterval(inters)
         }
-        return ()=> clearInterval(inter)
-    },[historyFresh,pageCurrent,params,detailsVisible])
+        return ()=> clearInterval(inters)
+    },[historyFresh,params,detail])
 
     /**
-     * 初始化历史筛选条件
+     * 获取历史列表
      */
-    const initScreen = () =>{
-        setParams({
-            pipelineId:null,
-            state:null,
-            type:0
+    const findHistoryInstance = () => {
+        findUserInstance(params).then(res=>{
+            setIsLoading(false)
+            if(res.code===0){
+                if(!res.data || res.data.dataList.length<1 || res.data.dataList[0].runStatus!=="run"){
+                    return
+                }
+                findInter()
+            }
         })
     }
 
     /**
-     * 返回
+     * 开启定时器
      */
-    const back = () => {
-        setDetailsVisible(false)
-        initScreen()
-    }
-
-    const disDetails = record =>{
-        setDetailsVisible(true)
-        setHistoryItem(record)
-    }
-
-    if(detailsVisible){
-        return  <HistoryDetail
-                    firstItem={"历史"}
-                    tableType="history"
-                    back={back}
-                    historyItem={historyItem}
-                    historyStore={historyStore}
-                />
+    const findInter = () => {
+        clearInterval(inters)
+        inters = setInterval(()=>{
+            findUserInstance(params).then(res=>{
+                if(!res.data || res.data.dataList.length<1 || res.data.dataList[0].runStatus!=="run"){
+                    clearInterval(inters)
+                }
+            })
+        },1000)
     }
 
     return (
         <HistoryTable
             {...props}
             tableType="history"
-            disDetails={disDetails}
             params={params}
             setParams={setParams}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            setDetail={setDetail}
             pipelineList={pipelineList}
             historyStore={historyStore}
         />

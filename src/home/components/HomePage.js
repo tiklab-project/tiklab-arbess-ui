@@ -33,28 +33,29 @@ const HomePage = props =>{
 
     // 渲染最近访问的流水线
     const renderOpen = item => {
-        return  <div className="pipelineRecent-item" key={item.pipeline?.id}
-                     onClick={()=> props.history.push(`/index/pipeline/${item.pipeline?.id}/survey`)}
+        const {pipeline,pipelineExecState} = item
+        return  <div className="pipelineRecent-item" key={pipeline?.id}
+                     onClick={()=> props.history.push(`/index/pipeline/${pipeline?.id}/survey`)}
                 >
             {
-                item && item.pipeline &&
+                pipeline &&
                 <div className="pipelineRecent-item-title">
-                    <div className={`mf-icon-${item.pipeline?.color || 0} pipeline-icon`}>
-                        {item.pipeline.name.substring(0,1).toUpperCase()}
+                    <div className={`mf-icon-${pipeline?.color || 0} pipeline-icon`}>
+                        {pipeline?.name? pipeline.name.substring(0,1).toUpperCase():"T"}
                     </div>
                     <div className="pipelineRecent-name">
-                        {item.pipeline?.name}
+                        {pipeline?.name}
                     </div>
                 </div>
             }
             <div className="pipelineRecent-item-details">
                 <div className="pipelineRecent-item-detail">
                     <span className="details-desc">成功</span>
-                    <span>{item.pipelineExecState.successNumber}</span>
+                    <span>{pipelineExecState.successNumber}</span>
                 </div>
                 <div className="pipelineRecent-item-detail">
                     <span className="details-desc">失败</span>
-                    <span>{item.pipelineExecState.errorNumber}</span>
+                    <span>{pipelineExecState.errorNumber}</span>
                 </div>
             </div>
         </div>

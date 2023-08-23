@@ -40,7 +40,7 @@ const  Portal = props =>{
     const {i18n,t} = useTranslation()
     const [currentLink,setCurrentLink] = useState(path)
     const [visible,setVisible] = useState(false)
-    const [unread,setUnread] = useState(1)
+    const [unread,setUnread] = useState(0)
 
     useEffect(()=>{
 

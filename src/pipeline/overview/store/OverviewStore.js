@@ -14,9 +14,9 @@ class OverviewStore {
     // 动态分页
     @observable
     dynaPage = {
-        defaultCurrent: 1,
-        pageSize: 15,
-        total: 1, // 此处为动态分页的页数
+        currentPage: 1,
+        totalPage: 1,
+        totalRecord: 1,
     }
 
     /**
@@ -28,8 +28,12 @@ class OverviewStore {
     findlogpage = async values =>{
         const data = await Axios.post("/oplog/findlogpage",values)
         if(data.code===0){
-            this.dynaPage.total=data.data && data.data.totalPage
             this.dynamicList=data.data && data.data.dataList
+            this.pipPage = {
+                currentPage: data.data.currentPage,
+                totalPage: data.data.totalPage,
+                totalRecord: data.data.totalRecord,
+            }
         }
         return data
     }

@@ -114,7 +114,6 @@ const Design = props =>{
 
     if(isDetails){
         return <HistoryDetail
-                    firstItem={"设计"}
                     historyItem={historyItem}
                     back={()=>setIsDetails(false)}
                     historyStore={historyStore}
@@ -127,18 +126,6 @@ const Design = props =>{
                 <div className="design-up">
                     <div className="design-top">
                         <Breadcrumb firstItem={"设计"}/>
-                        <div className="design-tabs">
-                            {
-                                typeLis.map(item=>{
-                                    return(
-                                        <div key={item.id}
-                                             className={`design-tab ${path===item.id?"design-active":""}`}
-                                             onClick={()=>props.history.push(item.id)}
-                                        >{item.title}</div>
-                                    )
-                                })
-                            }
-                        </div>
                         <div className="changeView-btn">
                             {
                                 pipeline && pipeline.state===2 ?
@@ -156,6 +143,18 @@ const Design = props =>{
                                     />
                             }
                         </div>
+                    </div>
+                    <div className="design-tabs">
+                        {
+                            typeLis.map(item=>{
+                                return(
+                                    <div key={item.id}
+                                         className={`design-tab ${path===item.id?"design-active":""}`}
+                                         onClick={()=>props.history.push(item.id)}
+                                    >{item.title}</div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 { renderRoutes(route.routes) }

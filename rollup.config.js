@@ -1,10 +1,3 @@
-
-/**
- * @name: rollup.config
- * @author mahai
- * @date 2022/7/8 1:07 PM
- * @description rollup.config
- */
 import fs from 'fs';
 import path from 'path';
 import filesize from 'rollup-plugin-filesize';
@@ -12,7 +5,6 @@ import { uglify } from "rollup-plugin-uglify";
 import {terser} from 'rollup-plugin-terser';
 
 import commonPlugins from "./scripts/commonPlugins";
-
 
 const pkg = require("./package.json");
 
@@ -41,9 +33,9 @@ const getFiles = (entry, extensions=[], excludeExtensions = []) => {
     return fileNames;
 }
 const globals = {
-    react: 'React',
+    'react': 'React',
     'react-dom': 'ReactDOM',
-    antd:"antd",
+    'antd':"antd",
     'react-i18next':'reactI18next',
     "tiklab-core-ui":"tiklabCoreUi",
     "@ant-design/icons":"icons",

@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import {Form, Input} from "antd";
 import {WhetherChange} from "../processDesign/components/Common";
 import FormsInput from "./FormsInput";
-
 import CodeGiteeOrGithubOrXcode from "./code/CodeGiteeOrGithub";
 import CodeGitOrGitlab from "./code/CodeGitOrGitlab";
 import CodeSvn from "./code/CodeSvn";
@@ -44,8 +43,8 @@ const BasicInfo = props => {
         // 初始化表单内容
         const task = dataItem && dataItem.task
 
-        const authHost = task.auth ? task.auth.name+"("+ task.auth.ip+")" : null
-        const authAuth = task.auth ? task.auth.name+"("+(task.auth.authType===1 ? task.auth.username:"私钥")+")" : null
+        const authHost = task?.auth ? task.auth.name+"("+ task.auth.ip+")" : null
+        const authAuth = task?.auth ? task.auth.name+"("+(task.auth.authType===1 ? task.auth.username:"私钥")+")" : null
 
         switch(dataItem.taskType){
             case 'git':
