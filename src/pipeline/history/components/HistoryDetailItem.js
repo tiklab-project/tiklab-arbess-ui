@@ -1,6 +1,5 @@
 import React from "react";
-import {getTime} from "../../../common/utils/Client";
-import {runStatusIcon,runStatusText} from "./HistoryTrigger";
+import {runStatusIcon,runStatusText,getTime} from "./HistoryTrigger";
 
 const HistoryDetailItem = props =>{
 

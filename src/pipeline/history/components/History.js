@@ -19,7 +19,7 @@ const History = props => {
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
-    const [detail,setDetail] = useState(true)
+    const [detail,setDetail] = useState(false)
 
     // 监听关闭定时器的状态
     const pageParam = {
@@ -36,17 +36,15 @@ const History = props => {
     })
 
     useEffect(()=>{
-        return ()=> {
-            setHistoryList([])
-        }
+        return ()=> setHistoryList([])
     },[])
 
     let inters = null;
     useEffect(()=>{
         if(detail){
-            findHistoryInstance()
-        }else {
             clearInterval(inters)
+        }else {
+            findHistoryInstance()
         }
         return ()=> clearInterval(inters)
     },[historyFresh,params,detail])
@@ -83,11 +81,12 @@ const History = props => {
     return (
         <HistoryTable
             {...props}
-            tableType="history"
+            historyType="history"
             params={params}
             setParams={setParams}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            detail={detail}
             setDetail={setDetail}
             pipelineList={pipelineList}
             historyStore={historyStore}

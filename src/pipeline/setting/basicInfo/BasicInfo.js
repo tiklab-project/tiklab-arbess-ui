@@ -145,7 +145,7 @@ const BasicInfo = props =>{
     }
 
     return(
-        <div className="pipelineReDel mf-home-limited mf">
+        <div className="pipelineReDel mf">
             <div className="pipelineReDel-up">
                 <Breadcrumb firstItem={"流水线信息"}/>
             </div>

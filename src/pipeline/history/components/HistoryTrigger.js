@@ -48,3 +48,25 @@ export const runStatusIcon = type =>{
     }
 }
 
+/**
+ * 时间转换
+ * @param time
+ * @returns {string}
+ */
+export const getTime = time =>{
+    let DateTimes ;
+    let days = parseInt(time / ( 60 * 60 * 24));
+    let hours = parseInt((time % ( 60 * 60 * 24)) / (60 * 60));
+    let minutes = parseInt((time % ( 60 * 60)) /60);
+    let seconds =  parseInt(time % 60);
+    if(days >= 1){
+        DateTimes= days + " 天 " + hours + " 时 " + minutes + " 分 " + seconds + " 秒"
+    }else if(hours >= 1){
+        DateTimes=hours + " 时 " + minutes + " 分 " + seconds + " 秒"
+    }else if(minutes >= 1){
+        DateTimes=minutes + " 分 " + seconds + " 秒"
+    }else{
+        DateTimes=seconds + " 秒"
+    }
+    return DateTimes
+}

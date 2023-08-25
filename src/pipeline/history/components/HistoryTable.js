@@ -1,24 +1,27 @@
 import React, {useState} from "react";
-import {Popconfirm, Table, Tooltip} from "antd";
+import {Table, Tooltip, Drawer, Row, Col} from "antd";
+import {MinusCircleOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import Profile from "../../../common/profile/Profile";
 import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import Page from "../../../common/page/Page";
+import ListAction from "../../../common/list/Listaction";
 import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
-import {DeleteOutlined, MinusCircleOutlined} from "@ant-design/icons";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
 import HistoryDetail from "./HistoryDetail";
+import HistoryDrawer from "./HistoryDrawer";
 import "./HistoryTable.scss"
+
 
 const HistoryTable = props =>{
 
-    const {tableType,isLoading,setIsLoading,setDetail,params,setParams,
-        historyStore,pipelineUserList,pipelineList,
+    const {historyType,isLoading,setIsLoading,detail,setDetail,params,setParams,
+        historyStore,pipelineUserList,pipelineList,match
     } = props
 
-    const {page,historyList,deleteInstance,execStop} = historyStore
+    const {page,historyList,deleteInstance,execStart,execStop} = historyStore
 
     // 历史信息
     const [historyItem,setHistoryItem] = useState(null)
@@ -28,7 +31,7 @@ const HistoryTable = props =>{
      * @param record
      */
     const details = record => {
-        setDetail(false)
+        setDetail(true)
         setHistoryItem(record)
     }
 
@@ -79,15 +82,14 @@ const HistoryTable = props =>{
             width:"20%",
             ellipsis:true,
             render:(text,record) =>{
-                if(tableType==="history"){
-                    return <span className="history-table-name" onClick={()=>details(record)}>
+                return <span className="history-table-name" onClick={()=>details(record)}>
+                            {
+                                historyType==="history" &&
                                 <span className="history-table-pipeline">{record.pipeline && record.pipeline.name}</span>
-                                <span className="history-table-findNumber"> #{text}</span>
-                            </span>
-                }
-                return  <span className="history-table-findNumber" onClick={()=>details(record)}>
-                            {`# ${text}`}
+                            }
+                            <span className="history-table-findNumber"> # {text}</span>
                         </span>
+
             }
         },
         {
@@ -138,7 +140,6 @@ const HistoryTable = props =>{
             key: "runTimeDate",
             width:"17%",
             ellipsis:true,
-            // render:(text,record)=> getTime(text)
         },
         {
             title: "操作",
@@ -153,68 +154,62 @@ const HistoryTable = props =>{
                                     <MinusCircleOutlined style={{cursor:"pointer"}}/>
                                 </Tooltip>
                     default:
-                        return (
-                            <Tooltip title={"删除"}>
-                                <Popconfirm
-                                    placement="topRight"
-                                    title="你确定删除吗"
-                                    onConfirm={()=>del(record)}
-                                    okText="确定"
-                                    cancelText="取消"
-                                >
-                                    <span style={{cursor:"pointer"}}>
-                                        <DeleteOutlined />
-                                    </span>
-                                </Popconfirm>
-                            </Tooltip>
-                        )
+                        return <ListAction del={()=>del(record)}/>
                 }
             }
         }
     ]
 
     const goBack = () => {
-        setDetail(true)
-        setHistoryItem(false)
-    }
-
-    if(historyItem){
-        return  <HistoryDetail
-                    back={goBack}
-                    tableType={tableType}
-                    historyItem={historyItem}
-                    historyStore={historyStore}
-                />
+        setDetail(false)
     }
 
     return (
-        <div className='history'>
-            <div className="history-content mf-home-limited mf">
-                <Breadcrumb firstItem={"历史"}/>
-                <HistoryScreen
-                    pipelineList={pipelineList}
-                    pipelineUserList={pipelineUserList}
-                    params={params}
-                    screen={screen}
-                />
-                <div className="history-table">
-                    <Table
-                        bordered={false}
-                        loading={isLoading}
-                        columns={columns}
-                        dataSource={historyList}
-                        rowKey={record=>record.instanceId}
-                        pagination={false}
-                        locale={{emptyText: <EmptyText title={"没有查询到历史记录"}/>}}
-                    />
-                    <Page
-                        currentPage={page.currentPage}
-                        changPage={changPage}
-                        page={page}
-                    />
+        <Row style={{ height: "100%", overflow: "auto" }}>
+            <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }} >
+                <div className='history'>
+                    <div className="history-content mf">
+                        <Breadcrumb firstItem={"历史"}/>
+                        <HistoryScreen
+                            pipelineList={pipelineList}
+                            pipelineUserList={pipelineUserList}
+                            params={params}
+                            screen={screen}
+                        />
+                        <div className="history-table">
+                            <Table
+                                bordered={false}
+                                loading={isLoading}
+                                columns={columns}
+                                dataSource={historyList}
+                                rowKey={record=>record.instanceId}
+                                pagination={false}
+                                locale={{emptyText: <EmptyText title={"没有查询到历史记录"}/>}}
+                            />
+                            <Page
+                                currentPage={page.currentPage}
+                                changPage={changPage}
+                                page={page}
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+
+                <HistoryDrawer
+                    visible={detail}
+                    onClose={goBack}
+                    mask={false}
+                >
+                    <HistoryDetail
+                        back={goBack}
+                        historyType={"drawer"}
+                        historyItem={historyItem}
+                        setHistoryItem={setHistoryItem}
+                        historyStore={historyStore}
+                    />
+                </HistoryDrawer>
+            </Col>
+        </Row>
     )
 }
 

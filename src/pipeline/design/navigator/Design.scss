@@ -1,8 +1,6 @@
 .design{
     height: 100%;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
     .design-up{
         position: sticky;
         top: 0;
@@ -14,12 +12,12 @@
     .design-top{
         display: flex;
         align-items: center;
-        justify-content: space-between;
         padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
     }
     .design-tabs{
+        flex:1;
         display: flex;
-        padding: 0 var(--tiklab-padding-item);
+        padding: 0 var(--tiklab-padding);
         height: 40px;
         line-height: 40px;
         .design-tab{

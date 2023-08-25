@@ -27,12 +27,20 @@ const DynamicDetail = props =>{
             case "content":
                 setParams({
                     ...params,
+                    pageParam:{
+                        pageSize:15,
+                        currentPage:1
+                    },
                     [field] : value==="null"?{}:{pipelineId:[value]}
                 })
                 break
             default:
                 setParams({
                     ...params,
+                    pageParam:{
+                        pageSize:15,
+                        currentPage:1
+                    },
                     [field] : value
                 })
         }
@@ -78,25 +86,25 @@ const DynamicDetail = props =>{
                                 }
                             </Select>
                         }
-                        <Select
-                            placeholder={"类型"}
-                            style={{width:150}}
-                            onChange={(value)=>changParams(value,"actionType")}
-                        >
-                            <Select.Option key={"1"} value={null}>所有动态</Select.Option>
-                            <Select.Option key={"2"} value={"LOG_PIPELINE"}>流水线动态</Select.Option>
-                            <Select.Option key={"3"} value={"LOG_CONFIG"}>流水线配置动态</Select.Option>
-                            <Select.Option key={"4"} value={"LOG_RUN"}>流水线运行动态</Select.Option>
-                        </Select>
+                        {/*<Select*/}
+                        {/*    placeholder={"类型"}*/}
+                        {/*    style={{width:150}}*/}
+                        {/*    onChange={(value)=>changParams(value,"actionType")}*/}
+                        {/*>*/}
+                        {/*    <Select.Option key={"1"} value={null}>动态</Select.Option>*/}
+                        {/*    <Select.Option key={"2"} value={"LOG_PIPELINE"}>流水线动态</Select.Option>*/}
+                        {/*    <Select.Option key={"3"} value={"LOG_CONFIG"}>流水线配置动态</Select.Option>*/}
+                        {/*    <Select.Option key={"4"} value={"LOG_RUN"}>流水线运行动态</Select.Option>*/}
+                        {/*</Select>*/}
                         <Select
                             placeholder={"操作"}
                             style={{width:150}}
                             onChange={(value)=>changParams(value,"module")}
                         >
                             <Select.Option key={"1"} value={null}>所有操作</Select.Option>
-                            <Select.Option key={"2"} value={"LOG_MD_CREATE"}>创建</Select.Option>
-                            <Select.Option key={"3"} value={"LOG_MD_UPDATE"}>更新</Select.Option>
-                            <Select.Option key={"4"} value={"LOG_MD_DELETE"}>删除</Select.Option>
+                            <Select.Option key={"2"} value={"CREATE"}>创建</Select.Option>
+                            <Select.Option key={"3"} value={"UPDATE"}>更新</Select.Option>
+                            <Select.Option key={"5"} value={"RUN"}>运行</Select.Option>
                         </Select>
                         <RangePicker
                             onChange={(value,e)=>changParams(e,"createTime")}

@@ -3,7 +3,7 @@ import {
     CaretRightOutlined,
     LoadingOutlined,
 } from "@ant-design/icons";
-import {Spin} from "antd";
+import {Spin,Drawer} from "antd";
 import {inject,observer,Provider} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 import taskStore from "../processDesign/processDesign/store/TaskStore";
@@ -42,13 +42,14 @@ const Design = props =>{
 
     const pipelineId = match.params.id
 
+    // 路由菜单
     const [path,setPath] = useState("")
 
     // 运行页面展示||隐藏
     const [isDetails,setIsDetails] = useState(false)
 
     // 单个历史信息
-    const [historyItem,setHistoryItem] = useState({})
+    const [historyItem,setHistoryItem] = useState(null)
 
     useEffect(()=>{
         setPath(props.location.pathname)
@@ -63,11 +64,14 @@ const Design = props =>{
             },
             domainId:pipelineId,
         })
+        findOnePipeline(pipelineId)
     },[])
 
     useEffect(()=>{
         // 监听运行状态，获取流水线信息
-        findOnePipeline(pipelineId)
+        if(!isDetails){
+            findOnePipeline(pipelineId)
+        }
     },[isDetails])
 
     /**
@@ -88,9 +92,9 @@ const Design = props =>{
      */
     const runStatu = () => {
         if(pipeline && pipeline.type===1){
-            return !(taskList && taskList.length < 1 || taskMustField && taskMustField.length > 0)
+            return !(taskList?.length < 1 || taskMustField?.length > 0)
         }
-        return !(stageList && stageList.length < 1 || stageMustField && stageMustField.length > 0)
+        return !(stageList?.length < 1 || stageMustField?.length > 0)
     }
 
     const typeLis = [
@@ -112,12 +116,8 @@ const Design = props =>{
         }
     ]
 
-    if(isDetails){
-        return <HistoryDetail
-                    historyItem={historyItem}
-                    back={()=>setIsDetails(false)}
-                    historyStore={historyStore}
-                />
+    const goBack = () =>{
+        setIsDetails(false)
     }
 
     return(
@@ -126,9 +126,21 @@ const Design = props =>{
                 <div className="design-up">
                     <div className="design-top">
                         <Breadcrumb firstItem={"设计"}/>
+                        <div className="design-tabs">
+                            {
+                                typeLis.map(item=>{
+                                    return(
+                                        <div key={item.id}
+                                             className={`design-tab ${path===item.id?"design-active":""}`}
+                                             onClick={()=>props.history.push(item.id)}
+                                        >{item.title}</div>
+                                    )
+                                })
+                            }
+                        </div>
                         <div className="changeView-btn">
                             {
-                                pipeline && pipeline.state===2 ?
+                                pipeline?.state===2 ?
                                     <Btn
                                         type={"primary"}
                                         icon={<Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
@@ -137,28 +149,34 @@ const Design = props =>{
                                     :
                                     <Btn
                                         type={runStatu() ? "primary" : "disabled" }
-                                        onClick={runStatu() ? ()=>run() : null }
+                                        onClick={runStatu() ? ()=>run() : undefined }
                                         icon={<CaretRightOutlined />}
                                         title={"运行"}
                                     />
                             }
                         </div>
                     </div>
-                    <div className="design-tabs">
-                        {
-                            typeLis.map(item=>{
-                                return(
-                                    <div key={item.id}
-                                         className={`design-tab ${path===item.id?"design-active":""}`}
-                                         onClick={()=>props.history.push(item.id)}
-                                    >{item.title}</div>
-                                )
-                            })
-                        }
-                    </div>
                 </div>
                 { renderRoutes(route.routes) }
             </div>
+            <Drawer
+                placement="right"
+                visible={isDetails}
+                onClose={goBack}
+                closable={false}
+                destroyOnClose={true}
+                width={"75%"}
+                contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
+                bodyStyle={{padding:0}}
+            >
+                <HistoryDetail
+                    back={goBack}
+                    historyType={"drawer"}
+                    historyItem={historyItem}
+                    setHistoryItem={setHistoryItem}
+                    historyStore={historyStore}
+                />
+            </Drawer>
         </Provider>
     )
 }

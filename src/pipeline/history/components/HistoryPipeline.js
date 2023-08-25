@@ -20,7 +20,7 @@ const HistoryPipeline = props => {
     const [isLoading,setIsLoading] = useState(true)
 
     // 监听关闭定时器的状态
-    const [detail,setDetail] = useState(true)
+    const [detail,setDetail] = useState(false)
 
     const pageParam = {
         pageSize: 13,
@@ -49,9 +49,9 @@ const HistoryPipeline = props => {
     let inters=null
     useEffect(() => {
         if(detail){
-            findHistoryInstance()
-        }else {
             clearInterval(inters)
+        }else {
+            findHistoryInstance()
         }
         return ()=> clearInterval(inters)
     },[historyFresh,params,detail])
@@ -94,10 +94,12 @@ const HistoryPipeline = props => {
     return (
         <HistoryTable
             {...props}
+            historyType="history-pipeline"
             params={params}
             setParams={setParams}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            detail={detail}
             setDetail={setDetail}
             pipelineUserList={pipelineUserList}
             historyStore={historyStore}

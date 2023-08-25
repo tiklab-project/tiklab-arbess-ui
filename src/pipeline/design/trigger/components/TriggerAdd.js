@@ -89,7 +89,7 @@ const TriggerAdd = props =>{
                         <Checkbox.Group>
                             <Row>
                                 <Col span={8}>
-                                    <Checkbox value={1}>星期一</Checkbox>
+                                    <Checkbox value={1} >星期一</Checkbox>
                                 </Col>
                                 <Col span={8}>
                                     <Checkbox value={2} >星期二</Checkbox>
@@ -118,7 +118,6 @@ const TriggerAdd = props =>{
                     </Form.Item>
                 </Form>
             </div>
-
         </Modals>
     )
 }

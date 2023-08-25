@@ -34,7 +34,7 @@ const Guide = props =>{
                 <span className="mf-guide-title-name">{title}</span>
             </div>
             {
-                type && type.total > 1 &&
+                type?.totalPage > 1 &&
                 <div className="mf-guide-ac">
                     <span onClick={()=>goDetails(title)}>
                         <RightOutlined />

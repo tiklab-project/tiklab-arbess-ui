@@ -132,7 +132,7 @@ const Test = props => {
 
     return (
         <div className='test'>
-            <div className="test-content mf-home-limited mf">
+            <div className="test-content mf">
                 <Breadcrumb firstItem={"测试"}/>
                 <div className='test-table'>
                     {

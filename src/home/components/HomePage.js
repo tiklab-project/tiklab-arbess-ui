@@ -35,7 +35,7 @@ const HomePage = props =>{
     const renderOpen = item => {
         const {pipeline,pipelineExecState} = item
         return  <div className="pipelineRecent-item" key={pipeline?.id}
-                     onClick={()=> props.history.push(`/index/pipeline/${pipeline?.id}/survey`)}
+                     onClick={()=> props.history.push(`/index/pipeline/${pipeline?.id}/structure`)}
                 >
             {
                 pipeline &&

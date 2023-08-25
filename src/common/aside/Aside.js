@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {renderRoutes} from "react-router-config";
-import {interceptUrl,autoHeight} from "../utils/Client";
+import {interceptUrl} from "../utils/Client";
 import {Loading} from "../loading/Loading";
 import {PipelineDropdown} from "../dropdown/DropdownMenu";
 import "./Aside.scss";
@@ -20,8 +20,6 @@ const Aside = props =>{
 
     const [visible,setVisible] = useState(false)
 
-
-
     useEffect(()=>{
         // 初始化菜单
         let indexPath = `/index/pipeline/${match.params.id}/${interceptUrl(path)[4]}`
@@ -36,7 +34,7 @@ const Aside = props =>{
         if(pipeline.id!==item.id){
             setIsLoading(true)
             setVisible(false)
-            props.history.push(`/index/pipeline/${item.id}/survey`)
+            props.history.push(`/index/pipeline/${item.id}/structure`)
             setTimeout(()=>setIsLoading(false),150)
         }
     }
@@ -50,13 +48,13 @@ const Aside = props =>{
                     visible={visible}
                     setVisible={setVisible}
                     Icon={
-                        <div className='normal-aside_chang'>
-                            <span className={`dropdowns_icon mf-icon-${pipeline && pipeline.color}`}>
-                                 {pipeline && pipeline.name.substring(0,1).toUpperCase()}
-                             </span>
-                            <span><CaretDownOutlined /></span>
-                        </div>
-                    }
+                            <div className='normal-aside-opt' data-title-right={pipeline?.name}>
+                                <span className={`dropdowns_icon mf-icon-${pipeline && pipeline.color}`}>
+                                     {pipeline && pipeline.name.substring(0,1).toUpperCase()}
+                                </span>
+                                <span><CaretDownOutlined /></span>
+                            </div>
+            }
                 >
                     <div className="pipeline-opt">
                         <div className="pipeline-opt-title">切换流水线</div>

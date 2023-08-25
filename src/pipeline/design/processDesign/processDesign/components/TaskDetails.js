@@ -105,7 +105,7 @@ const TaskDetails = props =>{
             className="mf task-details"
         >
             <div className="task-details-up">
-                <div className="wrapper-head-title">编辑{titleType()}</div>
+                <div className="wrapper-head-title">{titleType()}</div>
                 <Btn onClick={close} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-details-bottom">

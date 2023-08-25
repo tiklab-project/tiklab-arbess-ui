@@ -29,7 +29,7 @@ class OverviewStore {
         const data = await Axios.post("/oplog/findlogpage",values)
         if(data.code===0){
             this.dynamicList=data.data && data.data.dataList
-            this.pipPage = {
+            this.dynaPage = {
                 currentPage: data.data.currentPage,
                 totalPage: data.data.totalPage,
                 totalRecord: data.data.totalRecord,

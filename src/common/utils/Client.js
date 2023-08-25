@@ -43,33 +43,7 @@ export const autoHeight = () =>{
 }
 
 /**
- * 时间转换
- * @param time
- * @returns {string}
- */
-export const getTime = time =>{
-    let DateTimes ;
-    let days = parseInt(time / ( 60 * 60 * 24));
-    let hours = parseInt((time % ( 60 * 60 * 24)) / (60 * 60));
-    let minutes = parseInt((time % ( 60 * 60)) /60);
-    let seconds =  parseInt(time % 60);
-    if(days >= 1){
-        DateTimes= days + " 天 " + hours + " 时 " + minutes + " 分 " + seconds + " 秒"
-    }else if(hours >= 1){
-        DateTimes=hours + " 时 " + minutes + " 分 " + seconds + " 秒"
-    }else if(minutes >= 1){
-        DateTimes=minutes + " 分 " + seconds + " 秒"
-    }else{
-        DateTimes=seconds + " 秒"
-    }
-    return DateTimes
-}
-
-/**
  * 文件路径截取
- * @param url:路径
- * @param data:截取数据
- * @returns {*}
  */
 export const interceptUrl = (url,data) =>{
     if(data){
@@ -82,9 +56,6 @@ export const interceptUrl = (url,data) =>{
 
 /**
  *  form input效验
- * @param name：名称
- * @returns {{pattern: RegExp, message: string}}
- * @constructor
  */
 export const Validation = name =>{
     return {

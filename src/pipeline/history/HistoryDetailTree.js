@@ -1,11 +1,11 @@
 import React,{useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
-import {getTime} from "../../common/utils/Client";
+import {getTime} from "./components/HistoryTrigger";
 import TaskIcon from "../design/processDesign/processDesign/components/TaskIcon";
 
 const HistoryDetailTree = props =>{
 
-    const {treeData,id,changeAnchor,setExecIndex} = props
+    const {treeData,id,changeAnchor} = props
 
     const [expandedTree,setExpandedTree] = useState([])
 

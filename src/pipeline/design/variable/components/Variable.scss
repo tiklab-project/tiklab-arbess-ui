@@ -1,6 +1,6 @@
 .variable{
-    flex: 1;
-    overflow: auto;
+    padding: var(--tiklab-padding-item);
+    min-width: 768px;
     .variable-up{
         display: flex;
         align-items: center;

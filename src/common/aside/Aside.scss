@@ -12,24 +12,6 @@
         .normal-aside-up{
             flex: 1;
         }
-        .normal-aside_chang{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-left: 20px;
-            height: 50px;
-            cursor: pointer;
-            .dropdowns_icon{
-                display: inline-block;
-                width: 32px;
-                height: 32px;
-                line-height: 32px;
-                border-radius: 4px;
-                text-align: center;
-                margin-right: 5px;
-            }
-        }
-
         .normal-aside-item{
             cursor: pointer;
             display: flex;
@@ -61,6 +43,23 @@
     }
     .normal-aside-item-ban{
         color: #94979a;
+    }
+    .normal-aside-opt{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 20px;
+        height: 50px;
+        cursor: pointer;
+        .dropdowns_icon{
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            border-radius: 4px;
+            text-align: center;
+            margin-right: 5px;
+        }
     }
     .pipeline-opt{
         &-title{

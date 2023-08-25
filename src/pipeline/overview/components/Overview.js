@@ -75,11 +75,11 @@ const Overview = props =>{
 
     return(
         <div className="overview">
-            <div className="overview-content mf-home-limited">
+            <div className="overview-content">
                 <div className="overview-top">
                     <Breadcrumb firstItem={"概况"}/>
                 </div>
-                <div className="overview-content">
+                <div className="overview-bottom">
                     <div className="overview-census">
                         <Guide icon={<PieChartOutlined />} title={"运行概况"}/>
                         <div className="overview-census-bottom">

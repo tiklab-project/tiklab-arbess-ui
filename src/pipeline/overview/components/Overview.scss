@@ -3,6 +3,12 @@
     height: 100%;
     overflow: auto;
     background: var(--mf-backdrop-color);
+    .overview-content{
+        margin: auto;
+        max-width: 1280px;
+        min-width: 768px;
+        padding: var(--tiklab-padding-item);
+    }
     .overview-top{
         padding-bottom: var(--tiklab-padding-item);
     }

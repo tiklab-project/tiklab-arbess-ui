@@ -88,18 +88,8 @@ const PipelineTable = props =>{
 
     /**
      * 去概况页面
-     * @param text：流水线名称
-     * @param record
-     * @returns {*}
      */
-    const goPipelineTask = (text,record) => props.history.push(`/index/pipeline/${record.id}/survey`)
-
-    /**
-     * 去历史页面
-     * @param record
-     * @returns {*}
-     */
-    const goHistory = record => props.history.push(`/index/pipeline/${record.id}/structure`)
+    const goPipelineTask = (text,record) => props.history.push(`/index/pipeline/${record.id}/structure`)
 
     const renTip = buildStatus => {
         switch (buildStatus) {
@@ -205,11 +195,6 @@ const PipelineTable = props =>{
                                 { state === 1 && <PlayCircleOutlined className="actions-se"/> }
                                 { state === 2 && <Spin indicator={<LoadingOutlined className="actions-se" spin />} /> }
                                 { state === 3 && <MinusCircleOutlined className="actions-se"/> }
-                            </span>
-                        </Tooltip>
-                        <Tooltip title="历史">
-                            <span className="pipelineTable-history" onClick={()=>goHistory(record)}>
-                                <ClockCircleOutlined className="actions-se"/>
                             </span>
                         </Tooltip>
                         <Tooltip title="收藏">

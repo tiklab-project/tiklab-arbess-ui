@@ -1,7 +1,7 @@
 $line-color:#d9d9d9;
 
 .guiView{
-    flex: 1;
+    height: calc(100% - 55px);
     overflow: auto;
     background: var(--mf-backdrop-color);
     .guiView-main_group{
@@ -342,20 +342,12 @@ $line-color:#d9d9d9;
             }
 
             .newStages-has:hover{
-                &:before{
+                &:before,&:after{
                     content: "";
                     width: 19px;
                     position: absolute;
                     top: 20px;
                     left: 12px;
-                    border-top: 1px solid var(--tiklab-blue);
-                }
-                &:after{
-                    content: "";
-                    width: 19px;
-                    position: absolute;
-                    top: 20px;
-                    right: 12px;
                     border-top: 1px solid var(--tiklab-blue);
                 }
                 .newStages-has-add{

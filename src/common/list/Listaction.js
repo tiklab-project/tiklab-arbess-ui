@@ -9,14 +9,20 @@ import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
  * @returns {JSX.Element}
  * @constructor
  */
-const Listaction = ({edit,del}) =>{
+const ListAction = ({edit,del}) =>{
 
-    if(del) return <span className="mf-listAction">
+    return (
+        <span className="mf-listAction">
+            {
+                edit &&
                 <Tooltip title="修改">
                     <span onClick={edit} className="edit" style={{cursor:"pointer",marginRight:15}}>
                         <EditOutlined />
                     </span>
                 </Tooltip>
+            }
+            {
+                del &&
                 <Tooltip title="删除">
                     <Popconfirm
                         placement="topRight"
@@ -30,15 +36,9 @@ const Listaction = ({edit,del}) =>{
                         </span>
                     </Popconfirm>
                 </Tooltip>
-            </span>
-
-    return <span className="mf-listAction">
-                <Tooltip title="修改">
-                    <span onClick={edit} className="edit" style={{cursor:"pointer",marginRight:15}}>
-                        <EditOutlined />
-                    </span>
-                </Tooltip>
-            </span>
+            }
+        </span>
+    )
 }
 
-export default Listaction
+export default ListAction

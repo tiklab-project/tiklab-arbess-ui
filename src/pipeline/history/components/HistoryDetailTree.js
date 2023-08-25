@@ -1,8 +1,7 @@
 import React,{useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
-import {getTime} from "../../../common/utils/Client";
 import TaskIcon from "../../design/processDesign/processDesign/components/TaskIcon";
-import {runStatusIcon} from "./HistoryTrigger";
+import {runStatusIcon,getTime} from "./HistoryTrigger";
 
 const HistoryDetailTree = props =>{
 
@@ -89,6 +88,7 @@ const HistoryDetailTree = props =>{
                     execData && execData.map(item=>renderLi(item,5))
                     :
                     execData && execData.map(group=>{
+                        const {stageInstanceList} = group
                         return (
                             <div className="tree-li" key={group.id}>
                                 <div className={`tree-li-firsts ${id===group.id?"tree-li-active":""}`}
@@ -110,7 +110,7 @@ const HistoryDetailTree = props =>{
                                 </div>
                                 <div className={`tree-ul ${isExpandedTree(group.id) ? null:"tree-li-hidden"}`}>
                                     {
-                                        group?.stageInstanceList.map(list=>{
+                                        stageInstanceList && stageInstanceList.map(list=>{
                                             return renderSubLi(list,25)
                                         })
                                     }

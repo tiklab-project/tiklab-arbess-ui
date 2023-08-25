@@ -5,12 +5,6 @@ import "./Breadcrumb.scss";
 
 /**
  * 面包屑
- * @param firstItem：标题1
- * @param secondItem：标题2
- * @param onClick
- * @param children
- * @returns {JSX.Element}
- * @constructor
  */
 const Breadcrumb = ({firstItem,secondItem,onClick,children}) =>{
 

@@ -6,7 +6,6 @@ import "./DropdownMenu.scss";
  * 下拉菜单
  */
 
-
 export const PortalDropdown = props => {
 
     const {tooltip, children, Icon, width=140, onClick} = props
@@ -38,11 +37,9 @@ export const PortalDropdown = props => {
                     className={`mf_dropdown_block_item ${visible? "mf_dropdown_block_linked": ''}`}
                     onClick={onClick? onClick : link}
                 >
-                    <Tooltip title={tooltip} mouseEnterDelay={0.3}>
-                        <span className="mf_dropdown_block_icon">
-                            { Icon }
-                        </span>
-                    </Tooltip>
+                    <span className="mf_dropdown_block_icon" data-title-bottom={tooltip}>
+                        { Icon }
+                    </span>
                 </span>
             </div>
             {

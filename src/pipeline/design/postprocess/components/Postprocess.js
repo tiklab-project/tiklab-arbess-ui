@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {message, Table} from "antd";
+import {Col, message, Row, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAdd from "./PostprocessAdd";
@@ -91,32 +91,36 @@ const Postprocess = props =>{
 
 
     return(
-        <div className="post-pose">
-            <div className="post-pose-content mf-home-limited">
-                <div className="post-pose-up">
-                    <div className="post-pose-up-title">后置处理</div>
-                    <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}个后置处理</div>
-                    <Btn title={"添加"} icon={<PlusOutlined/>} onClick={()=>addPostprocess()}/>
-                    <PostprocessAdd
-                        postprocessVisible={postprocessVisible}
-                        setPostprocessVisible={setPostprocessVisible}
-                        postprocessStore={postprocessStore}
-                        pipelineStore={pipelineStore}
-                        formValue={formValue}
-                    />
+        <Row style={{ height: "100%", overflow: "auto" }} >
+            <Col md={{ span: 24 }} lg={{ span: "18", offset: "3" }}>
+                <div className="post-pose">
+                    <div className="post-pose-content">
+                        <div className="post-pose-up">
+                            <div className="post-pose-up-title">后置处理</div>
+                            <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}个后置处理</div>
+                            <Btn title={"添加"} icon={<PlusOutlined/>} onClick={()=>addPostprocess()}/>
+                            <PostprocessAdd
+                                postprocessVisible={postprocessVisible}
+                                setPostprocessVisible={setPostprocessVisible}
+                                postprocessStore={postprocessStore}
+                                pipelineStore={pipelineStore}
+                                formValue={formValue}
+                            />
+                        </div>
+                        <div className="trigger-tables">
+                            <Table
+                                bordered={false}
+                                columns={columns}
+                                dataSource={postprocessData}
+                                rowKey={record=>record.postprocessId}
+                                pagination={false}
+                                locale={{emptyText: <EmptyText title={"暂无后置处理"}/>}}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="trigger-tables">
-                    <Table
-                        bordered={false}
-                        columns={columns}
-                        dataSource={postprocessData}
-                        rowKey={record=>record.postprocessId}
-                        pagination={false}
-                        locale={{emptyText: <EmptyText title={"暂无后置处理"}/>}}
-                    />
-                </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

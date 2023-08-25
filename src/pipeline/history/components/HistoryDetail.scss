@@ -1,9 +1,8 @@
 .str-detail{
     height: 100%;
-    overflow: hidden;
+    min-width: 700px;
     display: flex;
     flex-direction: column;
-    min-width: 768px;
     .str-detail-bread{
         padding: 15px 15px 10px;
         .bread-center{
@@ -11,9 +10,8 @@
             padding-top: 10px;
             .bread-center-item{
                 font-size: 13px;
-                height: 100px;
-                width: 200px;
-                min-width: 200px;
+                height: 80px;
+                width: 150px;
                 padding: 10px;
                 background: #f7f7f7;
                 border-radius: 4px;
@@ -27,20 +25,17 @@
                 }
                 .bread-center-desc{
                     text-align: center;
-                    padding-top:18px;
+                    padding-top:10px;
                 }
             }
         }
-    }
-
-    .bottom-margin{
-        margin-left: 15px;
     }
     .str-detail-bottom{
         flex: 1;
         height: 0;
         display: flex;
         flex-direction: row;
+        margin-left: 15px;
     }
     .bottom-tree{
         width: 260px;

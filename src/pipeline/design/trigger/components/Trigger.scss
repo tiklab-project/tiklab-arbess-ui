@@ -1,6 +1,6 @@
 .trigger{
-    flex: 1;
-    overflow: auto;
+    padding: var(--tiklab-padding-item);
+    min-width: 768px;
     .trigger-up{
         display: flex;
         align-items: center;
@@ -13,6 +13,10 @@
             flex: 1;
             padding: 0 var(--tiklab-padding-item);
         }
+    }
+    .trigger-data-time .data-time-line{
+        padding: 0 8px;
+        color: #d9d9d9;
     }
 }
 

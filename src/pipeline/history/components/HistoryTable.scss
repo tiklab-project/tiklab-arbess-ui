@@ -1,18 +1,14 @@
 .history{
-    height: 100%;
-    overflow: auto;
+    padding: var(--tiklab-padding-item);
+    min-width: 768px;
     .history-table{
         padding-top: 10px;
         .history-table-name{
             cursor: pointer;
+            color: var(--tiklab-blue);
         }
         .history-table-pipeline{
             padding-right: 5px;
-            color: var(--tiklab-blue);
-        }
-        .history-table-findNumber{
-            color: var(--tiklab-blue);
-            cursor: pointer;
         }
         .history-table-runWay{
             display: flex;

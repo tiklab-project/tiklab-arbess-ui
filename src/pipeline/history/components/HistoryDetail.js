@@ -1,12 +1,12 @@
 import React,{useState,useEffect,useRef} from "react";
+import {CloseOutlined} from "@ant-design/icons";
+import Btn from "../../../common/btn/Btn";
 import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import {SpinLoading} from "../../../common/loading/Loading";
 import HistoryDetailTree from "./HistoryDetailTree";
+import {runStatusText,getTime} from "./HistoryTrigger";
 import "./HistoryDetail.scss";
-import {runStatusIcon, runStatusText} from "./HistoryTrigger";
-import {getTime} from "../../../common/utils/Client";
-import {Space} from "antd";
-import {text} from "node-forge/lib/util";
+
 
 /**
  * 历史运行详情页面
@@ -16,9 +16,9 @@ import {text} from "node-forge/lib/util";
  */
 const HistoryDetail = props =>{
 
-    const {historyItem,back,historyStore,tableType} = props
+    const {historyItem,setHistoryItem,back,historyStore,historyType} = props
 
-    const {findTaskInstance,findStageInstance} = historyStore
+    const {findOneInstance,findTaskInstance,findStageInstance} = historyStore
 
     const scrollRef = useRef();
 
@@ -30,9 +30,11 @@ const HistoryDetail = props =>{
 
     // 当前流水线运行State
     const state = pipeline?.type===1 ? "runState":"stageState";
+    const time = pipeline?.type===1 ? "runTime":"stageTime";
 
     const [execData,setExecData] = useState([])
 
+    // 运行时是否点击锚点
     const [isClick,setIsClick] = useState(true)
 
     // 构建详情页面数据未返回时加载状态
@@ -46,14 +48,15 @@ const HistoryDetail = props =>{
 
     let inter
     useEffect(()=>{
-        if(pipeline){
+        if(historyItem?.instanceId){
+            setDetailsLoading(true)
             findTask("init").then()
         }
         return ()=> {
             clearInterval(inter)
             init()
         }
-    },[pipeline])
+    },[historyItem?.instanceId])
 
     /**
      * 运行历史
@@ -69,7 +72,17 @@ const HistoryDetail = props =>{
             setDetailsLoading(false)
             setExecData(taskRes.data)
             if(isRun && type==="init"){findInter()}
+            if(isRun && type==="end"){findInstance()}
         }
+    }
+
+    /**
+     * 重新查询
+     */
+    const findInstance = () => {
+        findOneInstance(historyItem.instanceId).then(res=>{
+            if(res.code===0){setHistoryItem(res.data)}
+        })
     }
 
     /**
@@ -77,7 +90,7 @@ const HistoryDetail = props =>{
      */
     const findInter = () =>{
         clearInterval(inter)
-        if(pipeline.type===1){
+        if(pipeline?.type===1){
             inter = setInterval(()=>{
                 findTaskInstance(historyItem.instanceId).then(res=>{
                     if(res.code===0){destroyInter(res)}
@@ -103,17 +116,17 @@ const HistoryDetail = props =>{
             const states = endValue[state]
             if(states ==="success" || states ==="error" || states ==="halt" ){
                 clearInterval(inter)
-                setTimeout(()=>findTask(),1000)
+                setTimeout(()=>findTask("end"),1000)
             }
         }
     }
 
     useEffect(()=>{
-        if(execData){
-            if(isRun && isClick){
+        if(execData && isClick){
+            if(isRun){
                 setId(autoLog(execData)?.id)
             }
-            if(!isRun){
+            else {
                 const data = [...execData].pop()
                 if(data){setId(data.id)}
             }
@@ -148,18 +161,17 @@ const HistoryDetail = props =>{
     const init = ()=>{
         setId(null)
         setDetailsLoading(true)
+        setIsClick(true)
         clearInterval(inter)
     }
-
-    console.log(historyItem)
 
     /**
      * 锚点跳转
      */
     const changeAnchor = id =>{
-        setId(id)
-        setIsActiveSlide(false)
         setIsClick(false)
+        setIsActiveSlide(false)
+        setId(id)
         if (id) {
             const anchorElement = document.getElementById(id)
             if (anchorElement) {
@@ -175,7 +187,7 @@ const HistoryDetail = props =>{
         }
         if(pipeline?.type===2){
             return (
-                <div className="bottom-log" ref={scrollRef}  onWheel={()=>setIsActiveSlide(false)}>
+                <div className="bottom-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
                     {
                         execData && execData.map(group=>{
                             const {stageInstanceList} = group
@@ -209,22 +221,32 @@ const HistoryDetail = props =>{
         )
     }
 
-    // 面包屑
-    const isAllName = () => tableType==="history" ? pipeline?.name:"详情"
-    const isFindName = () => historyItem?.findNumber
-
     // 数据获取前加载状态
     if(detailsLoading){
         return <SpinLoading size='large'/>
     }
 
+    // 获取时间
+    const setTime = execData && execData.reduce((pre, cur) => {
+        return pre + cur[time];
+    }, 0);
+
     return(
         <div className="str-detail">
             <div className="str-detail-bread">
                 <Breadcrumb
-                    firstItem={`${isAllName()} # ${isFindName()}`}
-                    onClick={goBack}
-                />
+                    firstItem={pipeline?.name +" # " + historyItem?.findNumber}
+                    onClick={historyType!=="drawer" ? goBack: undefined}
+                >
+                    {
+                        historyType==="drawer" &&
+                        <Btn
+                            title={<CloseOutlined style={{fontSize:16}}/>}
+                            type="text"
+                            onClick={goBack}
+                        />
+                    }
+                </Breadcrumb>
                 <div className="bread-center">
                     <div className="bread-center-item">
                         <div className='bread-center-name'>开始时间</div>
@@ -240,12 +262,11 @@ const HistoryDetail = props =>{
                     </div>
                     <div className="bread-center-item">
                         <div className='bread-center-name'>运行时长</div>
-                        <div className='bread-center-desc'>{getTime(historyItem?.runTime)}</div>
+                        <div className='bread-center-desc'>{getTime(setTime)}</div>
                     </div>
                 </div>
-
             </div>
-            <div className={`str-detail-bottom ${tableType?"bottom-margin":""}`}>
+            <div className="str-detail-bottom">
                 <HistoryDetailTree
                     id={id}
                     execData={execData}
