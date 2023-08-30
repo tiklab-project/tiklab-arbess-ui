@@ -1,9 +1,8 @@
 import React,{useState} from "react";
-import {Steps} from "antd";
+import {Spin, Steps} from "antd";
 import {inject,observer} from "mobx-react";
 import PipelineAddMould from "./PipelineAddMould";
 import PipelineAddInfo from "./PipelineAddInfo";
-import {Loading} from "../../../common/loading/Loading";
 import Btn from "../../../common/btn/Btn";
 import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import "./pipelineAdd.scss";
@@ -115,25 +114,28 @@ const PipelineAdd = props =>{
         },
     ]
 
-    return <div className="pipeline-add mf">
-        <div className="pipeline-add-content">
-            <Breadcrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/index/pipeline")}/>
-            <div className="steps-top">
-                <Steps current={current}>
-                    {steps.map(item => (
-                        <Steps.Step key={item.title} title={item.title} />
-                    ))}
-                </Steps>
+    return (
+        <Spin spinning={isLoading}>
+            <div className="pipeline-add mf">
+                <div className="pipeline-add-content">
+                    <Breadcrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/index/pipeline")}/>
+                    <div className="steps-top">
+                        <Steps current={current}>
+                            {steps.map(item => (
+                                <Steps.Step key={item.title} title={item.title} />
+                            ))}
+                        </Steps>
+                    </div>
+                    <div className="steps-content">
+                        {steps[current].content}
+                    </div>
+                    <div className="steps-bottom">
+                        {renderBtn}
+                    </div>
+                </div>
             </div>
-            <div className="steps-content">
-                {steps[current].content}
-            </div>
-            <div className="steps-bottom">
-                {renderBtn}
-            </div>
-            { isLoading && <Loading/> }
-        </div>
-    </div>
+        </Spin>
+    )
 
 }
 

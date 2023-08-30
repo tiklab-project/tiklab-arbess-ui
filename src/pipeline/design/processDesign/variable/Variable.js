@@ -1,10 +1,9 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
-import {Input,message,Tooltip} from "antd";
-import {PlusCircleOutlined,MinusCircleOutlined} from "@ant-design/icons";
+import {Input, Popconfirm, Select, Space} from "antd";
+import {PlusCircleOutlined, DeleteOutlined, CloseOutlined, CaretDownOutlined,EditOutlined,CaretRightOutlined} from "@ant-design/icons";
 import Btn from "../../../../common/btn/Btn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
-import {WhetherChange} from "../processDesign/components/Common";
 import "./Variable.scss";
 
 /**
@@ -16,9 +15,21 @@ import "./Variable.scss";
 const Variable = props => {
 
     const {variableStore,dataItem} = props
-    const {fixVariableData,variableData,setVariableData,createVariable,findAllVariable,fresh,deleteVariable,updateVariable} = variableStore
+    const {variableData,createVariable,findAllVariable,fresh,deleteVariable,
+        updateVariable
+    } = variableStore
 
-    const [bordered,serBordered] = useState(' ')
+    const variables = {
+        varId:null,
+        varKey:"",
+        varValue: "",
+    }
+
+    const [variableObj,setVariableObj] = useState({
+        ...variables
+    })
+
+    const [showArrow,setShowArrow] = useState(false);
 
     useEffect(()=>{
         // 初始化变量
@@ -26,115 +37,168 @@ const Variable = props => {
     },[fresh,dataItem.taskId])
 
     /**
-     * 获取符合要求的item
-     * @param data
-     * @param varId
-     * @returns {*}
-     */
-    const isequal = (data,varId) =>{
-        let a
-        data && data.map(item=>{
-            if(item.varId===varId){
-                a = item
-            }
-        })
-        return a
-    }
-
-    /**
-     * 改变文本框值
-     * @param e
-     * @param item
-     * @param name
-     */
-    const onChange = (e,item,name) =>{
-        const zz = isequal(variableData,item.varId)
-        zz[name] = e.target.value
-        setVariableData([...variableData])
-    }
-
-    /**
      * 添加环境变量
      */
     const addInput = () =>{
-        createVariable({
-            type:2,
-            taskType:1,
-            taskId:dataItem.taskId,
+        setVariableObj({
+            var:"add",
+            varKey:"VARIABLE_NAME",
+            varValue:"${VARIABLE_VALUE}",
         })
     }
 
+
     /**
-     * 删除环境变量
-     * @param item
+     * 编辑变量
      */
-    const reduceInput = (item) => {
+    const editInput = (item) => {
+        setVariableObj({
+            var:"edit",
+            varId:item.varId,
+            varKey:item.varKey || "",
+            varValue:item.varValue || "",
+        })
+    }
+    
+    /**
+     * 删除变量
+     */
+    const reduceInput = (e,item) => {
+        e.stopPropagation();
         deleteVariable(item.varId)
     }
 
     /**
-     * 确定更改
-     * @param e
-     * @param item
-     * @param name：varKey||varValue
+     * 更新值
      */
-    const onBlur = (e,item,name) =>{
-        serBordered('')
-        const zz = isequal(fixVariableData,item.varId)
-        if(WhetherChange(e.target.value,zz[name])){
-            const obj = {}
-            obj[name] = e.target.value
-            const params = {
-                type:2,
-                taskType:1,
-                varId:item.varId,
-                ...obj,
-            }
-            updateVariable(params)
-        }
+    const changeVar = (e,type) => {
+        setVariableObj({
+            ...variableObj,
+            [type]:e.target.value
+        })
     }
+
+    const onCancel = () =>{
+        setVariableObj({})
+    }
+
+    /**
+     * 确定添加或修改
+     */
+    const onOk = item =>{
+        const {varKey,varValue} = variableObj
+        if(varKey.trim()==='' || varValue.trim()==='' ){
+            return
+        }
+        if(item && item.varKey===varKey && item.varValue===varValue){
+            onCancel()
+            return;
+        }
+        update({
+            type:2,
+            taskType:1,
+            varKey:varKey,
+            varValue:varValue,
+        })
+    }
+
+    const update = value =>{
+        if(variableObj.var==='add'){
+            createVariable({
+                taskId:dataItem.taskId,
+                ...value
+            }).then(res=>{
+                if(res.code===0){onCancel()}
+            })
+            return
+        }
+        updateVariable({
+            varId:variableObj.varId,
+            ...value
+        }).then(res=>{
+            if(res.code===0){onCancel()}
+        })
+
+    }
+
+    const inputHtml = item =>(
+        <>
+            <div className="inputs-variable-key">
+                <div className="inputs-variable-title">变量名</div>
+                <Input
+                    placeholder={"变量名"}
+                    defaultValue={variableObj && variableObj.varKey}
+                    onChange={e=>changeVar(e,"varKey")}
+                />
+                {
+                    variableObj?.varKey.trim()==="" && <div className="inputs-error">变量名不能为空</div>
+                }
+            </div>
+            <div className="inputs-variable-type">
+                <div className="inputs-variable-title">类别</div>
+                <Select
+                    showArrow={showArrow}
+                    onMouseEnter={()=>setShowArrow(true)}
+                    onMouseLeave={()=>setShowArrow(false)}
+                    defaultValue={1}
+                    style={{width:"100%"}}
+                >
+                    <Select.Option value={1}>等于</Select.Option>
+                </Select>
+            </div>
+            <div className="inputs-variable-value">
+                <div className="inputs-variable-title">变量值</div>
+                <Input
+                    placeholder={"变量值"}
+                    defaultValue={variableObj && variableObj.varValue}
+                    onChange={e=>changeVar(e,"varValue")}
+                />
+                {
+                    variableObj?.varValue.trim()==="" && <div className="inputs-error">变量值不能为空</div>
+                }
+            </div>
+            <div className="inputs-variable-btn">
+                <Btn onClick={()=>onCancel()} title={"取消"} isMar={true}/>
+                <Btn onClick={()=>onOk(item)} title={"保存"} type={"primary"}/>
+            </div>
+        </>
+    )
 
     const renderInputs = (item,index) =>{
         return(
             <div key={index} className="pose-variable-inputs">
-                <div className="inputs-variable">
-                    <div className="inputs-variable-key">
-                        <Input
-                            // bordered={bordered===(item.varId+"varKey")}
-                            className={`${bordered===(item.varId+"varKey")?"":'input-hover'}`}
-                            onFocus={()=>serBordered(item.varId+"varKey")}
-                            placeholder={"名称"}
-                            value={item && item.varKey}
-                            onChange={e=>onChange(e,item,"varKey")}
-                            onBlur={e=>onBlur(e,item,"varKey")}
-                            onPressEnter={(e)=>e.target.blur()}
-                        />
+                <div className="inputs-variable"
+                     onClick={()=>variableObj?.varId === item.varId ? onCancel() : editInput(item)}
+                >
+                    <div className="inputs-variable-icon">
+                    {
+                        variableObj?.varId === item.varId ?
+                            <CaretDownOutlined />
+                            :
+                            <CaretRightOutlined />
+                    }
                     </div>
-                    <div>=</div>
-                    <div className="inputs-variable-value">
-                        <Input
-                            // bordered={bordered===(item.varId+"varValue")}
-                            className={`${bordered===(item.varId+"varValue")?"":'input-hover'}`}
-                            onFocus={()=>serBordered(item.varId+"varValue")}
-                            placeholder={"值"}
-                            value={item && item.varValue}
-                            onChange={e=>onChange(e,item,"varValue")}
-                            onBlur={e=>onBlur(e,item,"varValue")}
-                            onPressEnter={(e)=>e.target.blur()}
-                        />
-                    </div>
+                    <div className="inputs-variable-varKey">{item && item.varKey}</div>
                     <div className="inputs-variable-opt">
-                        <Tooltip title={"删除"}>
-                            <MinusCircleOutlined
-                                style={{fontSize:16}}
-                                onClick={()=>reduceInput(item)}
-                            />
-                        </Tooltip>
+                        <span data-title-bottom={"删除"} onClick={e=>e.stopPropagation()}>
+                            <Popconfirm
+                                placement="bottomRight"
+                                title={"你确定删除吗"}
+                                okText="确定"
+                                cancelText="取消"
+                                onConfirm={e=>reduceInput(e,item)}
+                            >
+                                <DeleteOutlined />
+                             </Popconfirm>
+                        </span>
                     </div>
                 </div>
-                <div className="inputs-error">
-                    { item && item.varKey && item.varKey.trim()!=="" ? item.varValue && item.varValue.trim()!=="" ?"":"请输入参数值":"请输入名称"}
-                </div>
+                {
+                    variableObj?.varId === item.varId &&
+                    <div className="inputs-variable-html">
+                        { inputHtml(item) }
+                    </div>
+                }
             </div>
         )
     }
@@ -143,22 +207,23 @@ const Variable = props => {
         <div className="pose-variable">
             <div className="pose-variable-up">
                 <div>
-                    <span style={{paddingRight:5}}>环境变量</span>
+                    <span style={{paddingRight:5}}>变量</span>
                     <span style={{fontSize:13}}>({variableData && variableData.length?variableData.length:0}个)</span>
                 </div>
                 <Btn
-                    title={"添加环境变量"}
+                    title={"添加变量"}
                     type={"link-nopadding"}
                     icon={<PlusCircleOutlined/>}
                     onClick={()=>addInput()}
                 />
             </div>
             <div className="pose-variable-content">
+                {variableObj?.var==='add' && inputHtml()}
                 {
                     variableData && variableData.length>0 ?
                     variableData.map((item,index)=>renderInputs(item,index))
                     :
-                    <EmptyText title={"暂无环境变量"}/>
+                    <EmptyText title={"暂无变量"}/>
                 }
             </div>
         </div>

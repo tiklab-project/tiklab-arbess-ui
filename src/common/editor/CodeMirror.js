@@ -85,6 +85,7 @@ export const TaskMirror = props =>{
             onInputRead={(editor,change) =>{
                 editor.showHint()
             }}
+
         />
     )
 }
@@ -162,7 +163,7 @@ export const ExpandMirror = props =>{
  */
 export const PostprocessMirrorScenario = props =>{
 
-    const {type,mirrorRefs,value,onFocus,styleActiveLine} = props
+    const {onFocus,type,mirrorRefs,value,styleActiveLine} = props
 
     return (
         <CodeMirror
@@ -177,6 +178,7 @@ export const PostprocessMirrorScenario = props =>{
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
             }}
             onFocus={onFocus}
+
         />
     )
 }

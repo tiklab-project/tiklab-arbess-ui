@@ -5,45 +5,56 @@
         display: flex;
         justify-content: space-between;
     }
-    .inputs-pose{
-        margin-bottom: 12px;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-pack: justify;
-        -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-    }
     .pose-pose-content{
         padding-top: 10px;
     }
     .pose-pose-item{
-        border-bottom: 1px solid #d9d9d9;
+        border-bottom: 1px solid #f0f0f0;
         .pose-item-head{
             height: 40px;
             display: flex;
             align-items: center;
             cursor: pointer;
         }
-        .pose-item-line{
-            width: 16px;
-            height: 16px;
-        }
         .pose-item-title{
             flex: 1;
+            width: 0;
+            font-weight: bold;
         }
         .pose-item-content{
-            padding: 0 16px 5px;
+            padding: 0 10px 5px;
         }
-        .post-pose-btn{
-            padding-top: 8px;
+    }
+    .post-pose-btn{
+        padding-top: 10px;
+        padding-bottom: 8px;
+    }
+    .pose-item-user-list{
+        display: flex;
+        align-items: center;
+        padding-bottom: 8px;
+        .user-list-name{
+            width: 55%;
         }
+        .user-list-receive{
+            width: 35%;
+            margin: 0 5px;
+        }
+        .user-list-remove {
+            width: 10%;
+            cursor: pointer;
+            .remove-ban{
+                cursor: not-allowed;
+                color: #cccccc;
+            }
+        }
+    }
+    .user-list-name,.pose-item-title{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        margin-right: 10px;
     }
     .pose-item-user .ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
         padding: 0;
@@ -51,15 +62,7 @@
     .user-title{
         display: flex;
         justify-content: space-between;
-        padding-top: 8px;
-    }
-    .title-typeList{
-        padding-bottom: 8px;
-    }
-    .title-typeList-error{
-        color: #ed675a;
-        font-size: 13px;
-        line-height: 13px;
+        padding: 8px 0;
     }
     .site-collapse-custom-collapse{
         overflow: hidden;
@@ -68,6 +71,9 @@
         border-radius: 4px;
     }
     .config-scenario{
+        .config-scenario-title{
+            margin-bottom: 5px;
+        }
         .CodeMirror{
             .CodeMirror-placeholder{
                 color: #bfbfbf;

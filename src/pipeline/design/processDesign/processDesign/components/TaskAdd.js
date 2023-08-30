@@ -3,8 +3,8 @@ import {Col, Drawer, Row, message} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/btn/Btn";
-import TaskTitleIcon from "./TaskTitleIcon";
-import {taskTitle} from "./TaskTitle";
+import {TaskTitleIcon,taskTitle} from "./TaskTitleIcon";
+import PipelineDrawer from "../../../../../common/drawer/Drawer";
 import "./TaskAdd.scss";
 
 /**
@@ -184,14 +184,11 @@ const TaskAdd = props =>{
     }
 
     return(
-        <Drawer
-            closable={false}
-            placement="right"
+        <PipelineDrawer
             onClose={()=>setNewStageDrawer(false)}
             visible={newStageDrawer}
             width={600}
-            contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
-            bodyStyle={{padding:0}}
+            mask={true}
             className="mf task-add"
         >
             <div className="task-add-up">
@@ -216,7 +213,7 @@ const TaskAdd = props =>{
                     </Col>
                 </Row>
             </div>
-        </Drawer>
+        </PipelineDrawer>
     )
 }
 

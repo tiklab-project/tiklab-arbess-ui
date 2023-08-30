@@ -1,6 +1,6 @@
 .post-pose{
     padding: var(--tiklab-padding-item);
-    min-width: 768px;
+    min-width: 700px;
     .post-pose-up{
         display: flex;
         align-items: center;
@@ -14,7 +14,6 @@
             padding: 0 var(--tiklab-padding-item);
         }
     }
-
 }
 
 .postprocess-modal{
@@ -24,6 +23,10 @@
     }
     .post-pose-user .ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
         padding: 0;
+    }
+    .post-pose-user  .title-user-ban{
+        cursor: not-allowed;
+        color: #999999;
     }
     .post-pose-title{
         display: flex;

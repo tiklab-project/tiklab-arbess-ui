@@ -35,9 +35,10 @@ class HistoryStore {
      */
     @action
     execStart = async value =>{
-        const params = new FormData()
-        params.append("pipelineId", value)
-        params.append("userId", getUser().userId)
+        const params = {
+            pipelineId:value,
+            userId:getUser().userId
+        }
         const data = await Axios.post("/exec/start", params)
         if(data.code!==0){
             message.info(data.msg)

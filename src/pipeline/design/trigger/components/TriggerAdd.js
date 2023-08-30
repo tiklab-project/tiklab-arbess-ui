@@ -68,7 +68,6 @@ const TriggerAdd = props =>{
             visible={triggerVisible}
             onCancel={()=>setTriggerVisible(false)}
             onOk={onOk}
-            destroyOnClose={true}
             width={500}
             title={formValue?"修改":"添加"}
         >

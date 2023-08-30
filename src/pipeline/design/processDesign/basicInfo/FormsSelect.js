@@ -26,6 +26,7 @@ const FormsSelect = props => {
             showArrow={showArrow}
             onMouseEnter={()=>setShoeArrow(true)}
             onMouseLeave={()=>setShoeArrow(false)}
+            getPopupContainer={e => e.parentElement}
             notFoundContent={notFoundContent}
             filterOption = {(input, option) =>
                 (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0

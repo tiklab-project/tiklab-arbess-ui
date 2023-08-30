@@ -189,7 +189,7 @@ const PipelineTable = props =>{
             render:(text,record)=>{
                 const {state} = record
                 return(
-                    <Space>
+                    <Space size="middle">
                         <Tooltip title={state===3?"等待":"运行"} >
                             <span className="pipelineTable-state" onClick={()=>work(record)}>
                                 { state === 1 && <PlayCircleOutlined className="actions-se"/> }

@@ -1,9 +1,9 @@
 import React,{useRef,useEffect} from "react";
 import {Drawer} from "antd";
 
-const HistoryDrawer = props =>{
+const PipelineDrawer = props =>{
 
-    const {children,...res} = props
+    const {type,children,...res} = props
 
     const detailRef = useRef()
 
@@ -28,16 +28,15 @@ const HistoryDrawer = props =>{
             {...res}
             placement="right"
             closable={false}
-            destroyOnClose={true}
-            width={"75%"}
+            destroyOnClose
             contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
-            bodyStyle={{padding:0}}
+            bodyStyle={{padding:0,overflow:"hidden"}}
         >
-            <div ref={detailRef}>
+            <div ref={type && detailRef}>
                 {children}
             </div>
         </Drawer>
     )
 }
 
-export default HistoryDrawer
+export default PipelineDrawer

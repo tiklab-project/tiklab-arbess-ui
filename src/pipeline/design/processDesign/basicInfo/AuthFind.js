@@ -247,6 +247,7 @@ const AuthFind = props =>{
                 isSpin={false}
                 onFocus={()=>setBordered(true)}
                 onBlur={()=>setBordered(false)}
+                getPopupContainer={e => e.parentElement}
                 onChange={changeGitSelect}
                 onDropdownVisibleChange={(visible)=>setOpen(visible)}
                 dropdownRender={menu=> (

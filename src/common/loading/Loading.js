@@ -1,6 +1,5 @@
 import React from "react";
 import {Spin} from "antd";
-import { LoadingOutlined } from '@ant-design/icons';
 import "./Loading.scss";
 
 /**
@@ -44,21 +43,4 @@ const SpinLoading = ({size, type,title}) => {
 
 }
 
-/**
- * Server--授权加载
- * @param title：名称
- * @returns {JSX.Element}
- * @constructor
- */
-const ServerLoading = ({title}) =>{
-    return (
-        <div className='mf-server-loading'>
-            <div className='server-loading-content'>
-                <Spin indicator={<LoadingOutlined style={{fontSize:14}}/>}/>
-                <span className='loading-content-title'>{title}</span>
-            </div>
-        </div>
-    )
-}
-
-export {Loading,SpinLoading,ServerLoading}
+export {Loading,SpinLoading}

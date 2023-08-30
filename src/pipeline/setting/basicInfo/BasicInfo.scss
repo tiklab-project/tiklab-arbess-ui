@@ -56,4 +56,35 @@
     }
 }
 
+.pipelineReDel-modal{
+    .pipelineReDel-modal-warn{
+        border: 2px solid #ff0000;
+        color: #ff0000;
+        padding: 15px;
+        background-color: #FFE8E6;
+        margin-bottom: 15px;
+        .warn-continue{
+            padding: 15px 0;
+        }
+        .warn-pipeline-title,.warn-pipeline{
+            color: #21242a;
+            font-weight: 600;
+        }
+    }
+    .pipelineReDel-modal-error{
+        font-size: 12px;
+        font-weight: bold;
+        color: #ff4d4f;
+        padding-top: 3px;
+        padding-bottom: 10px;
+    }
+    .inputs-error{
+        border-color: #ff7875;
+        box-shadow: 0 0 0 2px rgba(255,77,79,0.2);
+    }
+    .pipelineReDel-modal-btn{
+        text-align: right;
+    }
+}
+
 

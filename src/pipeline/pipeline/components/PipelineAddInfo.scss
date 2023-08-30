@@ -68,6 +68,10 @@
         background: #ffffff;
         padding: 8px;
         min-height: 100px;
+        .user-table-ban{
+            color: #cccccc;
+            cursor: not-allowed;
+        }
     }
 }
 .pipeline-user-add{

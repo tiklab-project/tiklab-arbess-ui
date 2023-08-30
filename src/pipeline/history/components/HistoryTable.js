@@ -1,25 +1,27 @@
 import React, {useState} from "react";
-import {Table, Tooltip, Drawer, Row, Col} from "antd";
-import {MinusCircleOutlined} from "@ant-design/icons";
-import {observer} from "mobx-react";
+import {Table, Tooltip, Row, Col, message} from "antd";
+import {MinusCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
+import {observer,inject} from "mobx-react";
 import EmptyText from "../../../common/emptyText/EmptyText";
 import Profile from "../../../common/profile/Profile";
 import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
 import Page from "../../../common/page/Page";
 import ListAction from "../../../common/list/Listaction";
+import PipelineDrawer from "../../../common/drawer/Drawer";
 import HistoryScreen from "./HistoryScreen";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
 import HistoryDetail from "./HistoryDetail";
-import HistoryDrawer from "./HistoryDrawer";
 import "./HistoryTable.scss"
 
 
 const HistoryTable = props =>{
 
     const {historyType,isLoading,setIsLoading,detail,setDetail,params,setParams,
-        historyStore,pipelineUserList,pipelineList,match
+        historyStore,pipelineUserList,pipelineList,pipelineStore
     } = props
+
+    const {findOnePipeline} = pipelineStore
 
     const {page,historyList,deleteInstance,execStart,execStop} = historyStore
 
@@ -71,7 +73,23 @@ const HistoryTable = props =>{
      * 终止运行
      */
     const terminateOperation = record => {
-        execStop(record.id)
+        const {runStatus,pipeline} = record
+        if(runStatus==="run"){
+            execStop(pipeline.id)
+            return
+        }
+        findOnePipeline(pipeline.id).then(res=>{
+            if(res.code===0){
+                if(res.data.state===2){
+                   return message.info("当前流水线正在在运行！")
+                }
+                execStart(pipeline.id).then(res=>{
+                    if(res.code===0){
+                        details(res.data)
+                    }
+                })
+            }
+        })
     }
 
     const columns = [
@@ -150,11 +168,16 @@ const HistoryTable = props =>{
             render:(_,record)=> {
                 switch (record.runStatus) {
                     case "run":
-                        return  <Tooltip title={"终止"} onClick={()=>terminateOperation(record.pipeline)}>
-                                    <MinusCircleOutlined style={{cursor:"pointer"}}/>
+                        return  <Tooltip title={"终止"} onClick={()=>terminateOperation(record)}>
+                                    <MinusCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
                                 </Tooltip>
                     default:
-                        return <ListAction del={()=>del(record)}/>
+                        return <>
+                            <ListAction del={()=>del(record)}/>
+                            <span style={{marginLeft:15}} onClick={()=>terminateOperation(record)}>
+                                <PlayCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
+                            </span>
+                        </>
                 }
             }
         }
@@ -165,9 +188,9 @@ const HistoryTable = props =>{
     }
 
     return (
-        <Row style={{ height: "100%", overflow: "auto" }}>
+        <Row style={detail?{ height: "100%", overflow: "hidden" }:{height: "100%", overflow: "auto" }}>
             <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }} >
-                <div className='history'>
+                <div className="history">
                     <div className="history-content mf">
                         <Breadcrumb firstItem={"历史"}/>
                         <HistoryScreen
@@ -195,10 +218,12 @@ const HistoryTable = props =>{
                     </div>
                 </div>
 
-                <HistoryDrawer
+                <PipelineDrawer
+                    width={"75%"}
                     visible={detail}
                     onClose={goBack}
                     mask={false}
+                    type={'history'}
                 >
                     <HistoryDetail
                         back={goBack}
@@ -207,10 +232,10 @@ const HistoryTable = props =>{
                         setHistoryItem={setHistoryItem}
                         historyStore={historyStore}
                     />
-                </HistoryDrawer>
+                </PipelineDrawer>
             </Col>
         </Row>
     )
 }
 
-export default observer(HistoryTable)
+export default inject("pipelineStore")(observer(HistoryTable))

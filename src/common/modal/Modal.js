@@ -12,7 +12,7 @@ import "./Modal.scss";
  */
 const Modals = props => {
 
-    const {title,children,...res} = props
+    const {title,children,footer,...res} = props
 
     const [height,setHeight] = useState(0)
 
@@ -40,7 +40,8 @@ const Modals = props => {
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
             closable={false}
-            footer={modalFooter}
+            destroyOnClose={true}
+            footer={footer || modalFooter}
             className="mf"
         >
             <div className='mf-modal'>

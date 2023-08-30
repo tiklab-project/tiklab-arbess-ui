@@ -93,7 +93,6 @@ const BasicInfo = props => {
             case 'docker':
                 form.setFieldsValue({
                     [getId("taskName")]:dataItem?.taskName,
-                    // [getId("localAddress")]:task?.localAddress,
                     [getId("deployAddress")]:task?.deployAddress,
                     [getId("deployOrder")]:task?.deployOrder,
                     [getId("startAddress")]:task?.startAddress,
@@ -128,8 +127,6 @@ const BasicInfo = props => {
                     [getId("groupId")]:task?.groupId,
                     [getId("artifactId")]:task?.artifactId,
                     [getId("version")]:task?.version,
-                    // [getId("fileType")]:task?.fileType,
-                    // [getId("fileAddress")]:task?.fileAddress,
                     [getId("putAddress")]:task?.repository?.name,
                     [getId("authName")]:authAuth,
                     [getId("authId")]:task?.authId
@@ -141,8 +138,6 @@ const BasicInfo = props => {
                     [getId("groupId")]:task?.groupId,
                     [getId("artifactId")]:task?.artifactId,
                     [getId("version")]:task?.version,
-                    // [getId("fileType")]:task?.fileType,
-                    // [getId("fileAddress")]:task?.fileAddress,
                     [getId("putAddress")]:task?.repository?.name,
                     [getId("authName")]: authAuth,
                     [getId("authId")]:task?.authId
@@ -151,7 +146,6 @@ const BasicInfo = props => {
             case 'ssh':
                 form.setFieldsValue({
                     [getId("taskName")]:dataItem?.taskName,
-                    // [getId("fileAddress")]:task?.fileAddress,
                     [getId("putAddress")]:task?.putAddress,
                     [getId("authName")]:authHost,
                     [getId("authId")]:task?.authId
@@ -169,7 +163,7 @@ const BasicInfo = props => {
         }
         form.validateFields().then(r => {})
         return ()=>form.resetFields(null)
-    },[dataItem])
+    },[dataItem.taskId])
 
     /**
      * 渲染表单
@@ -224,7 +218,7 @@ const BasicInfo = props => {
         <div className='taskForm-forms'>
             <Form form={form} layout="vertical" autoComplete="off">
                 {
-                    dataItem && dataItem.taskType ?
+                    dataItem?.taskName ?
                         <>
                             <FormsInput placeholder="任务名称" label="任务名称" name="taskName" isValid={true} dataItem={dataItem}/>
                             {renderForms(dataItem)}

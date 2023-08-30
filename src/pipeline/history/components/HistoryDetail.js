@@ -175,7 +175,7 @@ const HistoryDetail = props =>{
         if (id) {
             const anchorElement = document.getElementById(id)
             if (anchorElement) {
-                scrollRef.current.scrollTop = anchorElement.offsetTop - 210
+                scrollRef.current.scrollTop = anchorElement.offsetTop - 130
             }
         }
     }
@@ -187,7 +187,7 @@ const HistoryDetail = props =>{
         }
         if(pipeline?.type===2){
             return (
-                <div className="bottom-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
+                <div className="bottom-log">
                     {
                         execData && execData.map(group=>{
                             const {stageInstanceList} = group
@@ -211,7 +211,7 @@ const HistoryDetail = props =>{
             )
         }
         return (
-            <div className="bottom-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
+            <div className="bottom-log">
                 {
                     execData && execData.map(item=>{
                         return <div key={item.id} id={item.id} className='bottom-log-item'>{item.runLog}</div>
@@ -223,7 +223,9 @@ const HistoryDetail = props =>{
 
     // 数据获取前加载状态
     if(detailsLoading){
-        return <SpinLoading size='large'/>
+        return <div className="str-detail">
+                    <SpinLoading size='large'/>
+                </div>
     }
 
     // 获取时间
@@ -249,20 +251,20 @@ const HistoryDetail = props =>{
                 </Breadcrumb>
                 <div className="bread-center">
                     <div className="bread-center-item">
-                        <div className='bread-center-name'>开始时间</div>
-                        <div className='bread-center-desc'>{historyItem?.createTime }</div>
+                        <span className='bread-center-name'>开始时间</span>
+                        <span className='bread-center-desc'>{historyItem?.createTime }</span>
                     </div>
                     <div className="bread-center-item">
-                        <div className='bread-center-name'>运行方式</div>
-                        <div className='bread-center-desc'>{historyItem?.runWay===1 ? historyItem?.user?.nickname + " · 手动触发" : "定时触发" }</div>
+                        <span className='bread-center-name'>运行方式</span>
+                        <span className='bread-center-desc'>{historyItem?.runWay===1 ? historyItem?.user?.nickname + " · 手动触发" : "定时触发" }</span>
                     </div>
                     <div className="bread-center-item">
-                        <div className='bread-center-name'>运行状态</div>
-                        <div className={`bread-center-desc bread-center-${historyItem?.runStatus}`}>{runStatusText(historyItem?.runStatus)}</div>
+                        <span className='bread-center-name'>运行状态</span>
+                        <span className={`bread-center-desc bread-center-${historyItem?.runStatus}`}>{runStatusText(historyItem?.runStatus)}</span>
                     </div>
                     <div className="bread-center-item">
-                        <div className='bread-center-name'>运行时长</div>
-                        <div className='bread-center-desc'>{getTime(setTime)}</div>
+                        <span className='bread-center-name'>运行时长</span>
+                        <span className='bread-center-desc'>{getTime(setTime)}</span>
                     </div>
                 </div>
             </div>
@@ -273,7 +275,7 @@ const HistoryDetail = props =>{
                     pipeline={pipeline}
                     changeAnchor={changeAnchor}
                 />
-                <div className="str-detail-log">
+                <div className="str-detail-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
                     { renderLog() }
                 </div>
             </div>

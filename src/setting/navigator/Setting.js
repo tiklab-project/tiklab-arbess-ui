@@ -107,7 +107,7 @@ const Setting = props =>{
             id:"/index/system/version",
             title:"版本与许可证",
             icon:<VerifiedOutlined />,
-            purviewCode:"pipeline_version",
+            purviewCode:"version",
         },
         {
             id:"/index/system/info",

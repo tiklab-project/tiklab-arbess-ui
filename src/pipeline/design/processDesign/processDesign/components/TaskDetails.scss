@@ -5,7 +5,7 @@
         justify-content: space-between;
         align-items: center;
         font-weight: var(--tiklab-font-weight-bold);
-        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
+        padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
     }
     .task-details-bottom{
         overflow: hidden;
@@ -21,7 +21,7 @@
         }
         .body-taskForm{
             width: 100%;
-            padding: 0 20px;
+            padding: 0 15px;
             .input-hover,.input-hover .ant-select-selector{
                 border-color: #efeded;
             }
@@ -53,15 +53,6 @@
             .ant-form-item {
                 flex-direction: column;
                 margin-bottom: 10px;
-            }
-            .ant-input-group .ant-input{
-                width: 410px;
-            }
-            .ant-input,.ant-select{
-                width: 440px;
-            }
-            .ant-input-group-addon{
-                width: 30px;
             }
         }
     }

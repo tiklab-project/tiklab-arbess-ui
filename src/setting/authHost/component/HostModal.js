@@ -74,7 +74,6 @@ const HostModal = props =>{
             visible={visible}
             onCancel={onCancel}
             onOk={onOk}
-            destroyOnClose={true}
             title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">

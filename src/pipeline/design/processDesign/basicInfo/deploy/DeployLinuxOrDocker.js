@@ -62,12 +62,6 @@ const DeployLinuxOrDocker = props =>{
                     </Form.Item>
                     :
                     <>
-                        {/*<FormsInput*/}
-                        {/*    name={"localAddress"}*/}
-                        {/*    placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}*/}
-                        {/*    label={"应用源文件地址"}*/}
-                        {/*    addonBefore={"/"}*/}
-                        {/*/>*/}
                         <AuthFind/>
                         <FormsInput
                             name={"deployAddress"}
@@ -84,21 +78,7 @@ const DeployLinuxOrDocker = props =>{
                         </Form.Item>
                         {
                             dataItem.taskType==='liunx' ?
-                            <>
-                                {/*<FormsInput*/}
-                                {/*    name={"startAddress"}*/}
-                                {/*    placeholder={"/ 启动文件地址"}*/}
-                                {/*    label={"启动文件地址"}*/}
-                                {/*    addonBefore={"/"}*/}
-                                {/*    isValid={true}*/}
-                                {/*/>*/}
-                                {/*<Form.Item name={"startOrder"} label="启动命令" >*/}
-                                {/*    <Mirror*/}
-                                {/*        name={"startOrder"}*/}
-                                {/*        placeholder={"启动命令"}*/}
-                                {/*    />*/}
-                                {/*</Form.Item>*/}
-                            </>
+                            null
                             :
                             <FormsInput
                                 name={"startAddress"}

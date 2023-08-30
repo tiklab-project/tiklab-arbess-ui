@@ -5,10 +5,11 @@ import Btn from "../../../../common/btn/Btn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 import Page from "../../../../common/page/Page";
 import "./PostprocessUserAdd.scss";
+import {PipelineDropdown} from "../../../../common/dropdown/DropdownMenu";
 
 const PostprocessUserAdd = props =>{
 
-    const {pipelineStore,yUserList,setYUserList,postprocessData,setPostprocessData,type} = props
+    const {pipelineStore,yUserList,setYUserList,type} = props
 
     const {pipeline,userPage,pipelineUserList,findDmUserPage} = pipelineStore
 
@@ -48,12 +49,10 @@ const PostprocessUserAdd = props =>{
      */
     const onOk = () => {
         if(type){
-            postprocessData && postprocessData.map(item=>{
-                if(item.task.taskId===yUserList.taskId){
-                    item.task.values.userList = item.task.values.userList.concat(addUser)
-                }
+            setYUserList({
+                ...yUserList,
+                userList:yUserList.userList.concat(addUser)
             })
-            setPostprocessData([...postprocessData])
         }else {
             setYUserList(yUserList.concat(addUser))
         }
@@ -215,6 +214,7 @@ const PostprocessUserAdd = props =>{
             placement={"bottomRight"}
             visible={userAddVisible}
             trigger={['click']}
+            getPopupContainer={e => e.parentElement}
             onVisibleChange={visible => setUserAddVisible(visible)}
         >
             <Btn

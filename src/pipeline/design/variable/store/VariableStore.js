@@ -11,16 +11,6 @@ class VariableStore{
     @observable
     variableData = []
 
-    // 变量数据（初始）
-    @observable
-    fixVariableData = []
-
-    // 设置变量
-    @action
-    setVariableData = value =>{
-        this.variableData = value
-    }
-
     /**
      * 添加变量
      * @param value
@@ -77,7 +67,6 @@ class VariableStore{
         const data = await Axios.post("/pipelineVariable/findAllVariable",param)
         if(data.code===0){
             this.variableData = data.data && data.data
-            this.fixVariableData = data.data && data.data
         }
         return data
     }

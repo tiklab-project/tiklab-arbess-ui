@@ -3,7 +3,7 @@ import {Col, message, Row, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAdd from "./PostprocessAdd";
-import TaskTitleIcon from "../../processDesign/processDesign/components/TaskTitleIcon";
+import {TaskTitleIcon} from "../../processDesign/processDesign/components/TaskTitleIcon";
 import Btn from "../../../../common/btn/Btn";
 import EmptyText from "../../../../common/emptyText/EmptyText";
 import Listaction from "../../../../common/list/Listaction";
@@ -70,10 +70,16 @@ const Postprocess = props =>{
 
     const columns = [
         {
+            title: "名称",
+            dataIndex: "name",
+            key: "name",
+            width:"60%",
+        },
+        {
             title: "类型",
             dataIndex: "taskType",
             key: "taskType",
-            width:"90%",
+            width:"30%",
             render:(text,record)=> <TaskTitleIcon type={text}/>
         },
         {
@@ -91,7 +97,7 @@ const Postprocess = props =>{
 
 
     return(
-        <Row style={{ height: "100%", overflow: "auto" }} >
+        <Row className="design-content">
             <Col md={{ span: 24 }} lg={{ span: "18", offset: "3" }}>
                 <div className="post-pose">
                     <div className="post-pose-content">

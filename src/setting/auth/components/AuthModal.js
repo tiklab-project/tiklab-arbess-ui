@@ -62,7 +62,6 @@ const AuthModal = props =>{
             onCancel={()=>setVisible(false)}
             onOk={onOk}
             destroyOnClose={true}
-            footer={<></>}
             title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">

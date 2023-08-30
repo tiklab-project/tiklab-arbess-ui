@@ -1,7 +1,7 @@
 import React from "react";
 import {DeleteOutlined, PlusOutlined,ExclamationCircleOutlined} from "@ant-design/icons";
 import {Popconfirm, Tooltip} from "antd";
-import TaskIcon from "./TaskIcon";
+import {TaskIcon} from "./TaskTitleIcon";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 
 /**

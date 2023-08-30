@@ -1,9 +1,13 @@
 import React,{useEffect,useState} from "react";
-import {Tooltip,Select} from "antd";
-import {MinusCircleOutlined,PlusCircleOutlined} from "@ant-design/icons";
+import {Popconfirm, Select, Space} from "antd";
+import {
+    DeleteOutlined,
+    PlusCircleOutlined,
+    CaretDownOutlined,
+    CaretRightOutlined
+} from "@ant-design/icons";
 import {Input} from "antd";
 import condStore from "../store/ConditionStore";
-import {WhetherChange} from "../../processDesign/components/Common";
 import Btn from "../../../../../common/btn/Btn";
 import EmptyText from "../../../../../common/emptyText/EmptyText";
 import "./Condition.scss";
@@ -18,12 +22,13 @@ const Condition = props =>{
 
     const {dataItem} = props
 
-    const {createCond,findAllTaskCond,fixCondData,updateCond,deleteCond} = condStore
-
-    const [border,setBorder] = useState('')
-    const [showArrow,setShowArrow] = useState(false)
+    const {createCond,findAllTaskCond,updateCond,deleteCond} = condStore
 
     const [condData,setCondData] = useState([]);
+
+    const [showArrow,setShowArrow] = useState(false);
+
+    const [condObj,setCondObj] = useState({})
 
     useEffect(()=>{
         // 初始化条件
@@ -40,69 +45,35 @@ const Condition = props =>{
     }
 
     /**
-     * 获取符合要求的item
-     * @param data
-     * @param condId
-     * @returns {*}
-     */
-    const isequal = (data,condId) =>{
-        let a
-        data && data.map(item=>{
-            if(item.condId===condId){
-                a = item
-            }
-        })
-        return a
-    }
-
-    /**
-     * 改变文本框值
-     * @param e
-     * @param item
-     * @param name
-     */
-    const onChange = (e,item,name) =>{
-        const zz = isequal(condData,item.condId)
-        zz[name] = e.target.value
-        setCondData([...condData])
-    }
-
-    /**
      * 添加条件
      */
     const addCondition = () => {
-        createCond({
-            condType:1,
-            taskId:dataItem.taskId
-        }).then(res=>{
-            if(res.code===0){
-                findCond()
-            }
+        setCondObj({
+            cond:"add",
+            condKey: "COND_NAME",
+            condValue: "${COND_VALUE}",
+            condType:1
         })
     }
 
     /**
-     * 切换条件变量
-     * @param value
-     * @param item
+     * 编辑条件
      */
-    const changeCondType = (value,item) => {
-        setBorder('')
-        updateCond({
-            condType:value,
-            condId:item.condId
-        }).then(res=>{
-            if(res.code===0){
-                findCond()
-            }
+    const editInput = item => {
+        setCondObj({
+            cond:"edit",
+            condId:item.condId,
+            condKey:item.condKey,
+            condValue:item.condValue,
+            condType:item.condType,
         })
     }
 
     /**
-     * 删除变量
-     * @param item
+     * 删除条件
      */
-    const reduceInput = item =>{
+    const reduceInput = (e,item) =>{
+        e.stopPropagation();
         deleteCond(item.condId).then(res=>{
             if(res.code===0){
                 findCond()
@@ -111,82 +82,144 @@ const Condition = props =>{
     }
 
     /**
-     * 更新条件
+     * 更新值
      * @param e
-     * @param item
-     * @param name
+     * @param type
      */
-    const onBlur = (e,item,name)  => {
-        setBorder('')
-        const zz = isequal(fixCondData,item.condId)
-        if(WhetherChange(e.target.value,zz[name])){
-            const obj = {}
-            obj[name] = e.target.value
-            updateCond({
-                condId:item.condId,
-                ...obj
+    const changeCond = (e,type) => {
+        setCondObj({
+            ...condObj,
+            [type]:type==='condType'? e:e.target.value
+        })
+    }
+
+    const onCancel = () =>{
+        setCondObj({})
+    }
+
+    /**
+     * 更新条件
+     */
+    const onOk = item => {
+        const {condType,condValue,condKey} = condObj
+        if(condValue.trim()==='' || condKey.trim()==='' ){
+            return
+        }
+        if(item && item.condType===condType && item.condKey===condKey && item.condValue===condValue){
+            onCancel()
+            return;
+        }
+        update({
+            condType,
+            condValue,
+            condKey,
+        })
+    }
+
+    const update = value =>{
+        if(condObj.cond==='add'){
+            createCond({
+                taskId:dataItem.taskId,
+                ...value
             }).then(res=>{
                 if(res.code===0){
                     findCond()
+                    onCancel()
                 }
             })
+            return
         }
+        updateCond({
+            condId:condObj.condId,
+            ...value
+        }).then(res=>{
+            if(res.code===0){
+                findCond()
+                onCancel()
+            }
+        })
     }
+
+    const inputHtml = item =>(
+        <>
+            <div className="inputs-condition-key">
+                <div className="inputs-condition-title">名称</div>
+                <Input
+                    placeholder={"名称"}
+                    defaultValue={condObj && condObj.condKey}
+                    onChange={e=>changeCond(e,'condKey')}
+                />
+                {
+                    condObj?.condKey.trim()==="" && <div className="inputs-error">条件名称不能为空</div>
+                }
+            </div>
+            <div className="inputs-condition-type">
+                <div className="inputs-condition-title">类别</div>
+                <Select
+                    showArrow={showArrow}
+                    onMouseEnter={()=>setShowArrow(true)}
+                    onMouseLeave={()=>setShowArrow(false)}
+                    defaultValue={condObj.condType}
+                    style={{width:"100%"}}
+                    onChange={e=>changeCond(e,'condType')}
+                >
+                    <Select.Option value={1}>等于</Select.Option>
+                    <Select.Option value={2}>不等于</Select.Option>
+                </Select>
+            </div>
+            <div className="inputs-condition-value">
+                <div className="inputs-condition-title">值</div>
+                <Input
+                    placeholder={"值"}
+                    defaultValue={condObj && condObj.condValue}
+                    onChange={e=>changeCond(e,'condValue')}
+                />
+                {
+                    condObj?.condValue.trim()==="" && <div className="inputs-error">条件值不能为空</div>
+                }
+            </div>
+            <div className="inputs-condition-btn">
+                <Btn onClick={()=>onCancel()} title={"取消"} isMar={true}/>
+                <Btn onClick={()=>onOk(item)} title={"保存"} type={"primary"}/>
+            </div>
+        </>
+    )
 
     const renderCondData = (item,index) =>{
         return(
             <div className="pose-condition-inputs" key={index}>
-                <div className="inputs-condition">
-                    <div className="inputs-condition-key">
-                        <Input
-                            // bordered={border===(item.condId+"condKey")}
-                            className={`${border===(item.condId+"condKey")?"":'input-hover'}`}
-                            onFocus={()=>setBorder(item.condId+"condKey")}
-                            placeholder={"名称"}
-                            value={item && item.condKey}
-                            onChange={e=>onChange(e,item,"condKey")}
-                            onBlur={e=>onBlur(e,item,"condKey")}
-                            onPressEnter={(e)=>e.target.blur()}
-                        />
+                <div className="inputs-condition"
+                     onClick={()=>condObj?.condId === item.condId ? onCancel() : editInput(item)}
+                >
+                    <div className="inputs-condition-icon">
+                        {
+                            condObj?.condId === item.condId ?
+                                <CaretDownOutlined />
+                                :
+                                <CaretRightOutlined />
+                        }
                     </div>
-                    <div>
-                        <Select
-                            // bordered={border===(item.condId+"condType")}
-                            className={`${border===(item.condId+"condType")?"":'input-hover'}`}
-                            onFocus={()=>setBorder(item.condId+"condType")}
-                            showArrow={showArrow}
-                            onMouseEnter={()=>setShowArrow(true)}
-                            onMouseLeave={()=>setShowArrow(false)}
-                            value={item.condType}
-                            onChange={value=>changeCondType(value,item)}
-                            style={{width:85}}
-                        >
-                            <Select.Option value={1}>等于</Select.Option>
-                            <Select.Option value={2}>不等于</Select.Option>
-                        </Select>
-                    </div>
-                    <div className="inputs-condition-value">
-                        <Input
-                            // bordered={border===(item.condId+"condValue")}
-                            className={`${border===(item.condId+"condValue")?"":'input-hover'}`}
-                            onFocus={()=>setBorder(item.condId+"condValue")}
-                            placeholder={"值"}
-                            value={item && item.condValue}
-                            onChange={e=>onChange(e,item,"condValue")}
-                            onBlur={e=>onBlur(e,item,"condValue")}
-                            onPressEnter={(e)=>e.target.blur()}
-                        />
-                    </div>
+                    <div className="inputs-condition-condKey">{item && item.condKey}</div>
                     <div className="inputs-condition-opt">
-                        <Tooltip title={"删除"}>
-                            <MinusCircleOutlined style={{fontSize:16}} onClick={()=>reduceInput(item)}/>
-                        </Tooltip>
-
+                        <span data-title-bottom="删除" onClick={e=>e.stopPropagation()}>
+                            <Popconfirm
+                                placement="bottomRight"
+                                title={"你确定删除吗"}
+                                okText="确定"
+                                cancelText="取消"
+                                onConfirm={e=>reduceInput(e,item)}
+                            >
+                                <DeleteOutlined />
+                             </Popconfirm>
+                        </span>
                     </div>
                 </div>
-                <div className="inputs-error">
-                    { item && item.condKey && item.condKey.trim()!=="" ? item.condValue && item.condValue.trim()!=="" ?"":"请输入参数值":"请输入名称"}
-                </div>
+                {
+                    condObj?.condId === item.condId &&
+                    <div className="inputs-condition-html">
+                        { inputHtml(item) }
+                    </div>
+                }
             </div>
         )
     }
@@ -206,6 +239,7 @@ const Condition = props =>{
                 />
             </div>
             <div className="pose-condition-content">
+                {condObj?.cond==='add' && inputHtml()}
                 {
                     condData && condData.length > 0 ?
                     condData.map((item,index)=>renderCondData(item,index))

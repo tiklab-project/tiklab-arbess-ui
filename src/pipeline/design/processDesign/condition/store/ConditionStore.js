@@ -3,10 +3,6 @@ import {Axios} from "tiklab-core-ui";
 
 class CondStore{
 
-    // 条件数据
-    @observable
-    fixCondData = []
-
     /**
      * 添加条件
      * @param value
@@ -53,9 +49,6 @@ class CondStore{
         const param = new FormData()
         param.append("taskId",value)
         const data = await Axios.post("/pipelineCond/findAllTaskCond",param)
-        if(data.code===0){
-            this.fixCondData = data.data && data.data
-        }
         return data
     }
 

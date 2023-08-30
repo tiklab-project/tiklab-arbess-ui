@@ -80,7 +80,6 @@ const VariableAdd = props =>{
         <Modals
             visible={variableVisible}
             onCancel={()=>setVariableVisible(false)}
-            destroyOnClose={true}
             onOk={onOk}
             width={500}
             title={formValue?"修改":"添加"}

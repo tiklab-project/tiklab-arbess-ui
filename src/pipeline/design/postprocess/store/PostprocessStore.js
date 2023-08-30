@@ -7,10 +7,6 @@ class PostprocessStore {
     @observable
     postprocessData = []
 
-    // 后置处理数据
-    @observable
-    fixedPostprocessData = []
-
     // 查找后置处理
     @observable
     isFindPostprocessData = false
@@ -108,7 +104,6 @@ class PostprocessStore {
         params.append("taskId",value)
         const data = await Axios.post("/postprocess/findTaskPost",params)
         if(data.code===0){
-            this.fixedPostprocessData = data.data ? data.data : []
             this.postprocessData = data.data ? data.data : []
         }
         return data

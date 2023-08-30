@@ -65,7 +65,6 @@ const Test = props => {
      */
     const goTestDetail = item => {
         if(item.status===2) return
-        // const url = "http://192.168.10.22:3000/#/repository/report/"+item.testonId
         const url = item.url+"/#/repository/report/"+item.testonId
         return applyJump(url)
     }
@@ -127,7 +126,9 @@ const Test = props => {
     }
 
     if(isLoading){
-        return <SpinLoading size="large" title="加载中……"/>
+        return  <div className='test'>
+                    <SpinLoading size="large" title="加载中……"/>
+                </div>
     }
 
     return (

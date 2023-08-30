@@ -105,10 +105,7 @@ const Aside = props =>{
                 </div>
             </div>
             {
-                isLoading ? <Loading/> :
-                    <div className='mf-layout-content'>
-                        {renderRoutes(route.routes)}
-                    </div>
+                isLoading ? <Loading/> : renderRoutes(route.routes)
             }
         </div>
     )

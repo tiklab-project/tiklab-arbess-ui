@@ -218,6 +218,9 @@ const PipelineAddInfo = props =>{
                                 <DeleteOutlined onClick={()=>del(record)}/>
                             </Tooltip>
                 }
+                return  <span className="user-table-ban">
+                             <DeleteOutlined />
+                        </span>
             }
         },
     ]

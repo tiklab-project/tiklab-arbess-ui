@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Drawer} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/btn/Btn";
@@ -8,6 +7,7 @@ import Condition from "../../condition/components/Condition";
 import Postprocess from "../../postprocess/Postprocess";
 import Variable from "../../variable/Variable";
 import BasicInfo from "../../basicInfo/BasicInfo";
+import PipelineDrawer from "../../../../../common/drawer/Drawer";
 import "./TaskDetails.scss";
 
 /**
@@ -81,32 +81,30 @@ const TaskDetails = props =>{
             case 'liunx':
             case 'docker':
                 return '部署'
+            default :
+                return "阶段名称"
         }
     }
 
     /**
      * 关闭弹出框
      */
-    const close = () =>{
+    const onClose = () =>{
         setHandleType(1)
         setTaskFormDrawer(false)
     }
 
     return(
-        <Drawer
-            placement="right"
+        <PipelineDrawer
             visible={taskFormDrawer}
-            onClose={close}
-            closable={false}
-            destroyOnClose={true}
-            width={480}
-            contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
-            bodyStyle={{padding:0}}
+            onClose={onClose}
+            width={520}
+            mask={true}
             className="mf task-details"
         >
             <div className="task-details-up">
                 <div className="wrapper-head-title">{titleType()}</div>
-                <Btn onClick={close} title={<CloseOutlined />} type="text"/>
+                <Btn onClick={onClose} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-details-bottom">
                 <div className="body">
@@ -138,7 +136,7 @@ const TaskDetails = props =>{
                     </div>
                 </div>
             </div>
-        </Drawer>
+        </PipelineDrawer>
     )
 }
 

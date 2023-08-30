@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from "react";
-import {Form, Select, Checkbox, Table, Space, Tooltip, message} from "antd";
+import {Form, Select, Checkbox, Table, Space, Tooltip, message, Input} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
 import EmptyText from "../../../../common/emptyText/EmptyText";
@@ -7,6 +7,7 @@ import Modals from "../../../../common/modal/Modal";
 import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
 import Profile from "../../../../common/profile/Profile";
 import PostprocessUserAdd from "./PostprocessUserAdd";
+import {Validation} from "../../../../common/utils/Client";
 
 const PostprocessAdd = props =>{
 
@@ -35,6 +36,7 @@ const PostprocessAdd = props =>{
                 form.setFieldsValue({
                     taskType: formValue.taskType,
                     typeList: formValue.task.values.typeList,
+                    name: formValue.name
                 })
                 setYUserList(formValue && formValue.task.values.userList)
                 setPostprocessType(formValue.taskType)
@@ -98,8 +100,9 @@ const PostprocessAdd = props =>{
         form.validateFields().then((value)=>{
             let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
             let params = {
-                taskType:postprocessType,
-                values: postprocessType==='message' ? { ...value,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
+                taskType: value.taskType,
+                name: value.name,
+                values: postprocessType==='message' ? { typeList:value.typeList,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
             }
             if(formValue){
                  params = {
@@ -167,6 +170,9 @@ const PostprocessAdd = props =>{
                                 <DeleteOutlined onClick={()=>remove(record)}/>
                             </Tooltip>
                 }
+                return <span className="title-user-ban">
+                             <DeleteOutlined />
+                        </span>
             }
         },
     ]
@@ -199,23 +205,25 @@ const PostprocessAdd = props =>{
             visible={postprocessVisible}
             onCancel={()=>setPostprocessVisible(false)}
             onOk={onOk}
-            destroyOnClose={true}
             width={800}
             title={formValue?"修改":"添加"}
         >
             <div className="postprocess-modal">
                 <Form form={form} layout={"vertical"} initialValues={{taskType:'message',typeList:["site"]}}>
-                    <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"请选择类型"}]}>
+                    <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"类型不能为空"}]}>
                         <Select onChange={value=>setPostprocessType(value)} disabled={formValue && formValue}>
                             <Select.Option value={'message'}>消息通知</Select.Option>
                             <Select.Option value={'bat'}>执行bat脚本</Select.Option>
                             <Select.Option value={'shell'}>执行Shell脚本</Select.Option>
                         </Select>
                     </Form.Item>
+                    <Form.Item name="name" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
+                        <Input/>
+                    </Form.Item>
                     {
                         postprocessType==='message' &&
                         <>
-                            <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"请选择消息发送方式"}]}>
+                            <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"消息发送方式不能为空"}]}>
                                 <Checkbox.Group>
                                     {
                                         typeList.map(item=>{

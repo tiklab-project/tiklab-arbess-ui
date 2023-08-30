@@ -85,7 +85,7 @@ const Trigger = props =>{
     ]
 
     return (
-        <Row style={{ height: "100%", overflow: "auto" }}>
+        <Row className="design-content">
             <Col md={{ span: 24 }} lg={{ span: "18", offset: "3" }}>
                 <div className="trigger">
                     <div className="trigger-content">

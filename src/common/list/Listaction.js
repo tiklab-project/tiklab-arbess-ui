@@ -17,7 +17,7 @@ const ListAction = ({edit,del}) =>{
                 edit &&
                 <Tooltip title="修改">
                     <span onClick={edit} className="edit" style={{cursor:"pointer",marginRight:15}}>
-                        <EditOutlined />
+                        <EditOutlined style={{fontSize:16}}/>
                     </span>
                 </Tooltip>
             }
@@ -32,7 +32,7 @@ const ListAction = ({edit,del}) =>{
                         cancelText="取消"
                     >
                         <span className="del" style={{cursor:"pointer"}}>
-                            <DeleteOutlined />
+                            <DeleteOutlined style={{fontSize:16}}/>
                         </span>
                     </Popconfirm>
                 </Tooltip>

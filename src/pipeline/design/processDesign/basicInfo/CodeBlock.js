@@ -1,4 +1,4 @@
-import React, {useRef,useState,forwardRef} from "react";
+import React, {useRef, useState, forwardRef} from "react";
 import {inject,observer} from "mobx-react";
 import {Tooltip} from "antd";
 import {ExpandOutlined} from "@ant-design/icons";
@@ -10,9 +10,9 @@ import "./CodeBlock.scss";
 
 /**
  * 任务基本消息，执行命令…… -- 代码块
- * @type {React.ForwardRefExoticComponent<React.PropsWithoutRef<{}> & React.RefAttributes<unknown>>}
  */
 const MirrorContent = forwardRef((props,ref)=>{
+
     const {name,placeholder,taskStore} = props
 
     const {updateTask,dataItem} = taskStore
@@ -27,6 +27,7 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     // 全屏代码块value
     const [expandValue,setExpandValue] = useState("")
+
 
     /**
      * 获取焦点改变placeholder
@@ -61,7 +62,6 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     /**
      * 确定更改
-     * @param ref：ref.current.editor.getValue()，获取值
      */
     const onOk = ref =>{
         const value = ref.current.editor.getValue()
@@ -113,4 +113,3 @@ const MirrorContent = forwardRef((props,ref)=>{
     })
 
 export default inject("taskStore")(observer(MirrorContent))
-

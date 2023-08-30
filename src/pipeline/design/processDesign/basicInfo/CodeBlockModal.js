@@ -29,7 +29,6 @@ const CodeBlockModal = props =>{
             visible={visible}
             onCancel={onCancel}
             onOk={onOks}
-            destroyOnClose={true}
             width={800}
             title={'编辑多行文本'}
         >

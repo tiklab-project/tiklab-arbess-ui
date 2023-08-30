@@ -48,26 +48,3 @@
         color: var(--tiklab-gray-500);
     }
 }
-
-.mf-server-loading{
-    position: fixed;
-    width: 100%;
-    height: fit-content;
-    margin: 0 auto;
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    .server-loading-content{
-        width: 30%;
-        background: #f2f2f2;
-        box-shadow: none;
-        padding: 10px 16px;
-        text-align: center;
-        .loading-content-title{
-            padding-left: 8px;
-        }
-    }
-}

@@ -30,17 +30,6 @@ const ArtifactNexus = props => {
                 label={"version"}
                 isValid={true}
             />
-            {/*<FormsInput*/}
-            {/*    name={"fileType"}*/}
-            {/*    placeholder={"文件类型"}*/}
-            {/*    label={"文件类型"}*/}
-            {/*    isValid={true}*/}
-            {/*/>*/}
-            {/*<FormsInput*/}
-            {/*    name={"fileAddress"}*/}
-            {/*    placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}*/}
-            {/*    label={"部署文件"}*/}
-            {/*    isValid={true}*/}
             {/*/>*/}
             <AuthFind/>
         </>

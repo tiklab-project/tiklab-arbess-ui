@@ -1,7 +1,6 @@
-    import React,{useState,useEffect} from "react";
-import {Modal} from "antd";
+    import React,{useState} from "react";
+import {Input, Spin} from "antd";
 import {
-    ExclamationCircleOutlined,
     DeleteOutlined,
     DownOutlined,
     RightOutlined,
@@ -10,8 +9,8 @@ import {
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
-import {Loading} from "../../../common/loading/Loading";
 import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
+import Modals from "../../../common/modal/Modal";
 import Btn from "../../../common/btn/Btn";
 import "./BasicInfo.scss";
 
@@ -30,29 +29,40 @@ const BasicInfo = props =>{
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([])
 
-    // 加载状态
+    // 删除加载状态
     const [isLoading,setIsLoading] = useState(false)
 
-    const onConfirm = () =>{
-        Modal.confirm({
-            title: "删除",
-            icon: <ExclamationCircleOutlined />,
-            content: "删除后数据无法恢复",
-            onOk:()=>delPipeline(),
-            okText: "确认",
-            cancelText: "取消",
-        });
-    }
+    // 删除弹出框
+    const [delVisible,setDelVisible] = useState(false)
+
+    // 删除文本框内容
+    const [delValue,setDelValue] = useState("")
+
+    // 删除效验提示内容
+    const [delError,setDelError] = useState(null)
 
     /**
      * 删除流水线
      */
     const delPipeline = () =>{
+        if(delValue.trim()==="" || delValue!==pipeline.name){
+            setDelError("流水线名称错误")
+            return;
+        }
         setIsLoading(true)
         deletePipeline(pipeline.id).then(()=>{
-            setIsLoading(false)
+            onCancel()
             props.history.push("/index/pipeline")
         })
+    }
+
+    const onCancel = () =>{
+        if(!isLoading){
+            setIsLoading(false)
+            setDelVisible(false)
+            setDelValue("")
+            setDelError(null)
+        }
     }
 
     const lis = [
@@ -89,7 +99,7 @@ const BasicInfo = props =>{
                         />
                         <PrivilegeProjectButton code={"pipeline_delete"} domainId={pipeline && pipeline.id}>
                             <Btn
-                                onClick={onConfirm}
+                                onClick={()=>setDelVisible(true)}
                                 type={"dangerous"}
                                 title={"删除"}
                             />
@@ -156,9 +166,38 @@ const BasicInfo = props =>{
                     }
                 </div>
             </div>
-            {
-                isLoading && <Loading/>
-            }
+            <Modals
+                visible={delVisible}
+                onCancel={onCancel}
+                onOk={delPipeline}
+                title={"删除流水线"}
+                footer={<></>}
+            >
+                <Spin spinning={isLoading} tip="删除中...">
+                    <div className="pipelineReDel-modal">
+                        <div className="pipelineReDel-modal-warn">危险：流水线删除无法恢复！请慎重操作！</div>
+                        <div className="pipelineReDel-modal-warn">
+                            <div>该操作将永久删除流水线<span className="warn-pipeline"> {pipeline?.name} </span>的相关数据，包括（配置、历史、制品）等。</div>
+                            <div className="warn-continue">为防止意外，确认继续操作请输入以下内容：</div>
+                            <div className="warn-pipeline-title">{pipeline?.name}</div>
+                        </div>
+                        <div className="pipelineReDel-modal-input">
+                            <Input
+                                className={`${delError?"inputs-error":""}`}
+                                placeholder="请输入提示内容以确认继续操作"
+                                onChange={e=>setDelValue(e.target.value)}
+                            />
+                        </div>
+                        <div className="pipelineReDel-modal-error">
+                            {delError}
+                        </div>
+                        <div className="pipelineReDel-modal-btn">
+                            <Btn onClick={onCancel} title={"取消"} isMar={true}/>
+                            <Btn onClick={delPipeline} title={"确认删除"} type={"dangerous"}/>
+                        </div>
+                    </div>
+                </Spin>
+            </Modals>
         </div>
     )
 }
