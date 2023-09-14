@@ -1,11 +1,11 @@
 import React,{useEffect,useState} from "react";
 import {Space,Table} from "antd";
 import authStore from "../store/AuthStore"
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import ListIcon from "../../../common/list/ListIcon";
-import Listaction from "../../../common/list/Listaction";
-import Profile from "../../../common/profile/Profile";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListIcon from "../../../common/component/list/ListIcon";
+import Listaction from "../../../common/component/list/Listaction";
+import Profile from "../../../common/component/profile/Profile";
 import AuthAddBtn from "./AuthAddBtn";
 import "../../authCommon/Auth.scss";
 

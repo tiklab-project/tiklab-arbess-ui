@@ -37,7 +37,7 @@ export const taskTitle = type =>{
         case 'teston': return "TestOn自动化测试"
         case 'maven': return "maven构建"
         case 'nodejs': return "node"
-        case 'liunx': return "虚拟机"
+        case 'liunx': return "主机部署"
         case 'docker': return "Docker"
         case 'sonar': return "SonarQuebe"
         case 'nexus': return "Nexus"

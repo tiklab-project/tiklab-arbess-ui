@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Modal} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import {autoHeight} from "../utils/Client";
+import {autoHeight} from "../../utils/Client";
 import Btn from "../btn/Btn";
 import "./Modal.scss";
 
@@ -29,8 +29,8 @@ const Modals = props => {
 
     const modalFooter = (
         <>
-            <Btn onClick={res.onCancel} title={"取消"} isMar={true}/>
-            <Btn onClick={res.onOk} title={"确定"} type={"primary"}/>
+            <Btn onClick={res.onCancel} title={res.cancelText || "取消"} isMar={true}/>
+            <Btn onClick={res.onOk} title={res.okText ||  "确定"} type={"primary"}/>
         </>
     )
 

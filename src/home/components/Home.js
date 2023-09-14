@@ -1,7 +1,7 @@
 import React from "react";
 import {UserVerify} from "tiklab-eam-ui";
 import {connect} from "tiklab-plugin-core-ui";
-import {AppLink} from "tiklab-licence-ui";
+import {AppLink,HelpLink,AvatarLink} from "tiklab-licence-ui";
 import Portal from "./Portal";
 
 /**
@@ -13,7 +13,9 @@ import Portal from "./Portal";
 const Home = props => {
     return  <Portal
                 {...props}
-                AppLink={<AppLink isSSO={false}/>}
+                AppLink={<AppLink/>}
+                HelpLink={<HelpLink/>}
+                AvatarLink={<AvatarLink {...props}/>}
             />
 }
 

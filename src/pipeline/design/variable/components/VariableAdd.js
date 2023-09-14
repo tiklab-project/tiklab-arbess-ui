@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
 import {Form,Input,Select,message} from "antd";
 import {PlusOutlined,MinusCircleOutlined } from "@ant-design/icons";
-import Btn from "../../../../common/btn/Btn";
-import Modals from "../../../../common/modal/Modal";
+import Btn from "../../../../common/component/btn/Btn";
+import Modals from "../../../../common/component/modal/Modal";
 
 /**
  * 变量添加编辑

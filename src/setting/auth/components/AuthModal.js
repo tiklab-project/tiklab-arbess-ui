@@ -3,7 +3,7 @@ import {Form, Input, Select} from "antd";
 import AuthType from "../../authCommon/AuthType";
 import {Validation} from "../../../common/utils/Client";
 import authStore from "../store/AuthStore";
-import Modals from "../../../common/modal/Modal";
+import Modals from "../../../common/component/modal/Modal";
 
 /**
  * 认证配置弹出框，添加，更新
@@ -61,7 +61,6 @@ const AuthModal = props =>{
             visible={visible}
             onCancel={()=>setVisible(false)}
             onOk={onOk}
-            destroyOnClose={true}
             title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">

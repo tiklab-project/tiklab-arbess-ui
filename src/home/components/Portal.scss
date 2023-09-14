@@ -9,6 +9,7 @@
         min-width: 600px;
         height: var(--mf-head-height);
         background: var(--tiklab-blue);
+        padding: 0 15px;
         &-logo{
             height: var(--mf-head-height);
             width: 100px;
@@ -25,45 +26,13 @@
             justify-items: flex-end;
             align-items: center;
             height: 100%;
-            padding-left: 20px;
-            &-text{
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                align-items: center;
-                height: 100%;
-                width: 100%;
-                padding-right: 20px;
-            }
-            &-search-wrap{
-                position: relative;
-                width: 100%;
-            }
-        }
-        &-user,&-message{
-            cursor: pointer;
-            &:hover{
-                background: rgba(255, 255, 255, 0.4);
-                border-radius: 4px;
+            .frame-header-right-text{
+                margin-left: 20px;
             }
         }
         &-icon{
             font-size: var(--tiklab-icon-size-22);
             color: #ffffff;
-        }
-        &-icon-ban{
-            color: #94979a;
-            font-size: var(--tiklab-icon-size-22);
-        }
-        &-user{
-            cursor: pointer;
-        }
-        &-message {
-            margin-left: 15px;
-            .ant-badge{
-                margin-left: 15px;
-                color: #fff !important;
-            }
         }
         .headers{
             &-link{
@@ -89,92 +58,5 @@
     }
     &-content{
         height: var(--mf-content-height);
-    }
-}
-
-.header-outMenu,.header-helpMenu,.outMenu-lan-menu{
-    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
-    border-radius: 4px;
-    background: #ffffff;
-    .header-dropdown-icon{
-        font-size: var(--tiklab-icon-size-16);
-        padding-right: 10px;
-    }
-}
-
-.header-outMenu{
-    .header-outMenu-top{
-        padding: 10px;
-        .outMenu-out{
-            display: flex;
-            align-items: center;
-            &-info{
-                padding-left: 15px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            &-name{
-                font-size: 15px;
-                width: 100%;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            &-eamil{
-                font-size: 13px;
-                color: #999999;
-            }
-        }
-    }
-    .header-outMenu-lan{
-        border-top: 1px solid #f4f4f4;
-        .outMenu-lan{
-            padding: 10px;
-            &:hover{
-                background: #f4f4f4;
-                cursor: pointer;
-            }
-        }
-    }
-    .header-outMenu-out{
-        border-top: 1px solid #f4f4f4;
-        .outMenu-out{
-            padding: 10px;
-            border-radius: 0 0 4px 4px;
-            &:hover{
-                background: #f4f4f4;
-                cursor: pointer;
-            }
-        }
-    }
-}
-
-.outMenu-lan-menu{
-    position: absolute;
-    top: -46px;
-    left: -86px;
-    width: 80px;
-    .lan-menu{
-        padding: 10px;
-        border-radius: 0 0 4px 4px;
-        &:hover{
-            background: #f4f4f4;
-            cursor: pointer;
-        }
-    }
-}
-
-.header-helpMenu .header-helpMenu-item{
-    cursor: pointer;
-    padding: 10px;
-    &:hover{
-        background: #f4f4f4;
-    }
-    &:first-child{
-        border-radius: 4px 4px 0 0;
-    }
-    &:last-child{
-        border-radius: 0 0 4px 4px;
     }
 }

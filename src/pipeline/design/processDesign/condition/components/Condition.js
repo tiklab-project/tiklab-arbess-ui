@@ -8,8 +8,8 @@ import {
 } from "@ant-design/icons";
 import {Input} from "antd";
 import condStore from "../store/ConditionStore";
-import Btn from "../../../../../common/btn/Btn";
-import EmptyText from "../../../../../common/emptyText/EmptyText";
+import Btn from "../../../../../common/component/btn/Btn";
+import EmptyText from "../../../../../common/component/emptyText/EmptyText";
 import "./Condition.scss";
 
 /**

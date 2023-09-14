@@ -5,16 +5,10 @@ import HistoryTable from "./HistoryTable";
 
 /**
  * 所有历史页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
 const History = props => {
 
-    const {pipelineStore} = props
-
-    const {findUserInstance,setHistoryList,historyFresh} = historyStore
-    const {pipelineList} = pipelineStore
+    const {findUserInstance,setHistoryList} = historyStore
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
@@ -47,7 +41,7 @@ const History = props => {
             findHistoryInstance()
         }
         return ()=> clearInterval(inters)
-    },[historyFresh,params,detail])
+    },[params,detail])
 
     /**
      * 获取历史列表
@@ -88,7 +82,6 @@ const History = props => {
             setIsLoading={setIsLoading}
             detail={detail}
             setDetail={setDetail}
-            pipelineList={pipelineList}
             historyStore={historyStore}
         />
     )

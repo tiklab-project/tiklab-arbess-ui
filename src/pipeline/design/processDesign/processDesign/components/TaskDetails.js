@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../../common/btn/Btn";
-import Tabs from "../../../../../common/tabs/Tabs";
+import Btn from "../../../../../common/component/btn/Btn";
+import Tabs from "../../../../../common/component/tabs/Tabs";
 import Condition from "../../condition/components/Condition";
 import Postprocess from "../../postprocess/Postprocess";
 import Variable from "../../variable/Variable";
 import BasicInfo from "../../basicInfo/BasicInfo";
-import PipelineDrawer from "../../../../../common/drawer/Drawer";
+import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import "./TaskDetails.scss";
 
 /**

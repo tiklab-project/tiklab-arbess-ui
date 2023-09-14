@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Select, Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
-import EmptyText from "../../../../common/emptyText/EmptyText";
+import EmptyText from "../../../../common/component/emptyText/EmptyText";
 
 /**
  * 下拉框

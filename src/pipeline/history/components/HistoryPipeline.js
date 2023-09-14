@@ -5,16 +5,13 @@ import HistoryTable from "./HistoryTable";
 
 /**
  * 单个流水线历史页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
 const HistoryPipeline = props => {
 
     const {pipelineStore} = props
 
-    const {findPipelineInstance,setHistoryList,historyFresh} = historyStore
-    const {pipeline,findDmUserPage,pipelineUserList} = pipelineStore
+    const {findPipelineInstance,setHistoryList} = historyStore
+    const {pipeline} = pipelineStore
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
@@ -36,11 +33,6 @@ const HistoryPipeline = props => {
     })
 
     useEffect(()=>{
-        // 项目成员
-        findDmUserPage({
-            pageParam,
-            domainId:pipeline.id,
-        })
         return ()=> {
             setHistoryList([])
         }
@@ -54,7 +46,7 @@ const HistoryPipeline = props => {
             findHistoryInstance()
         }
         return ()=> clearInterval(inters)
-    },[historyFresh,params,detail])
+    },[params,detail])
 
     /**
      * 获取所有历史列表
@@ -94,14 +86,13 @@ const HistoryPipeline = props => {
     return (
         <HistoryTable
             {...props}
-            historyType="history-pipeline"
+            historyType="historyPipeline"
             params={params}
             setParams={setParams}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
             detail={detail}
             setDetail={setDetail}
-            pipelineUserList={pipelineUserList}
             historyStore={historyStore}
         />
     )

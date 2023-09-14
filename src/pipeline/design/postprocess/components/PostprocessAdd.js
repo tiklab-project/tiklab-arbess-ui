@@ -2,10 +2,10 @@ import React,{useState,useEffect,useRef} from "react";
 import {Form, Select, Checkbox, Table, Space, Tooltip, message, Input} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
-import EmptyText from "../../../../common/emptyText/EmptyText";
-import Modals from "../../../../common/modal/Modal";
-import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
-import Profile from "../../../../common/profile/Profile";
+import EmptyText from "../../../../common/component/emptyText/EmptyText";
+import Modals from "../../../../common/component/modal/Modal";
+import {PostprocessMirrorScenario} from "../../../../common/component/editor/CodeMirror";
+import Profile from "../../../../common/component/profile/Profile";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 import {Validation} from "../../../../common/utils/Client";
 

@@ -10,7 +10,7 @@ import {
 // 用户与部门路由
 export const departmentRouters =[
     {
-        id: "1",
+        id: "user",
         title: "用户与部门",
         icon: <TeamOutlined/>,
         children: [
@@ -45,7 +45,7 @@ export const departmentRouters =[
 // 基础数据路由
 export const templateRouter = [
     {
-        id:"6",
+        id:"base",
         title:"基础数据",
         icon:<ProjectOutlined />,
         children:[

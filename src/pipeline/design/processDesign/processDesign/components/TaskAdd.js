@@ -2,9 +2,9 @@ import React,{useState} from "react";
 import {Col, Drawer, Row, message} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../../common/btn/Btn";
+import Btn from "../../../../../common/component/btn/Btn";
 import {TaskTitleIcon,taskTitle} from "./TaskTitleIcon";
-import PipelineDrawer from "../../../../../common/drawer/Drawer";
+import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import "./TaskAdd.scss";
 
 /**

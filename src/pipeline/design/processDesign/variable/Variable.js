@@ -2,8 +2,8 @@ import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Input, Popconfirm, Select, Space} from "antd";
 import {PlusCircleOutlined, DeleteOutlined, CloseOutlined, CaretDownOutlined,EditOutlined,CaretRightOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/btn/Btn";
-import EmptyText from "../../../../common/emptyText/EmptyText";
+import Btn from "../../../../common/component/btn/Btn";
+import EmptyText from "../../../../common/component/emptyText/EmptyText";
 import "./Variable.scss";
 
 /**

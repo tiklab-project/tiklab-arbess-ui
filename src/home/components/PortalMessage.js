@@ -7,8 +7,8 @@ import {
     MessageOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
-import EmptyText from "../../common/emptyText/EmptyText";
-import Btn from "../../common/btn/Btn";
+import EmptyText from "../../common/component/emptyText/EmptyText";
+import Btn from "../../common/component/btn/Btn";
 import "./PortalMessage.scss";
 
 /**

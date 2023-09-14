@@ -12,16 +12,15 @@ import historyStore from "../../history/store/HistoryStore";
 import variableStore from "../variable/store/VariableStore";
 import postprocessStore from "../postprocess/store/PostprocessStore";
 import triggerStore from "../trigger/store/TriggerStore";
-import Btn from "../../../common/btn/Btn";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
+import Btn from "../../../common/component/btn/Btn";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
+import {debounce} from "../../../common/utils/Client";
 import "./Design.scss";
+import DiskModal from "../../../common/component/modal/DiskModal";
 
 /**
  * 设计页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
 const Design = props =>{
 
@@ -51,6 +50,8 @@ const Design = props =>{
     // 单个历史信息
     const [historyItem,setHistoryItem] = useState(null)
 
+    const [diskVisible,setDiskVisible] = useState(false)
+
     useEffect(()=>{
         setPath(props.location.pathname)
     },[props.location.pathname])
@@ -77,14 +78,16 @@ const Design = props =>{
     /**
      * 开始运行
      */
-    const run = () => {
+    const run = debounce(() => {
         execStart(pipeline.id).then(res=>{
             if(res.code===0){
                 setHistoryItem(res.data && res.data)
                 setIsDetails(true)
+                return
             }
+            if(res.code===9000) return setDiskVisible(true)
         })
-    }
+    },1000)
 
     /**
      * 是否能运行
@@ -104,7 +107,7 @@ const Design = props =>{
         },
         {
             id:`/index/pipeline/${pipelineId}/config/tigger`,
-            title:"触发器",
+            title:"触发设置",
         },
         {
             id:`/index/pipeline/${pipelineId}/config/vari`,
@@ -159,6 +162,10 @@ const Design = props =>{
                 </div>
                 { renderRoutes(route.routes) }
             </div>
+            <DiskModal
+                visible={diskVisible}
+                setVisible={setDiskVisible}
+            />
             <Drawer
                 placement="right"
                 visible={isDetails}

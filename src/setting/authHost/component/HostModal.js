@@ -4,7 +4,7 @@ import {QuestionCircleOutlined} from "@ant-design/icons";
 import hostStore from "../store/HostStore";
 import AuthType from "../../authCommon/AuthType";
 import {Validation} from "../../../common/utils/Client";
-import Modals from "../../../common/modal/Modal";
+import Modals from "../../../common/component/modal/Modal";
 
 /**
  * 主机配置弹出框，添加，更新

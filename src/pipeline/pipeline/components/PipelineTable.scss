@@ -3,7 +3,7 @@
         color: var(--tiklab-blue);
         cursor: pointer;
     }
-    .pipelineTable-state,.pipelineTable-history,.pipelineTable-collect,.pipeline-number{
+    .pipelineTable-action,.pipeline-number{
         cursor: pointer;
     }
     .pipeline-number{
@@ -16,15 +16,29 @@
     .actions-se{
         font-size: var(--tiklab-font-16);
     }
-    .pipelineTable-state .pipelineTable-state-running{
-        padding: 10px;
-    }
-    .pipelineTable-collect .icon{
-        width: 19px !important;
-        height: 19px !important;
-    }
+
     .imgs{
         width: 24px;
         height: 24px;
     }
+}
+
+.pipelineTable-dropdown-more{
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+    border-radius: 4px;
+    background: #ffffff;
+    width: 150px;
+    padding: 8px;
+    .dropdown-more-item{
+        cursor: pointer;
+        padding: 5px;
+        &:hover{
+            background: #f4f4f4;
+        }
+    }
+}
+
+.pipelineTable-copy-modal-btn{
+    text-align: right;
+    padding-top: 10px;
 }

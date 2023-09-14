@@ -4,9 +4,9 @@ import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAdd from "./PostprocessAdd";
 import {TaskTitleIcon} from "../../processDesign/processDesign/components/TaskTitleIcon";
-import Btn from "../../../../common/btn/Btn";
-import EmptyText from "../../../../common/emptyText/EmptyText";
-import Listaction from "../../../../common/list/Listaction";
+import Btn from "../../../../common/component/btn/Btn";
+import EmptyText from "../../../../common/component/emptyText/EmptyText";
+import Listaction from "../../../../common/component/list/Listaction";
 import "./Postprocess.scss";
 
 /**

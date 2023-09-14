@@ -1,24 +1,26 @@
 import React, {useState} from "react";
 import {Table, Tooltip, Row, Col, message} from "antd";
 import {MinusCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
-import {observer,inject} from "mobx-react";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import Profile from "../../../common/profile/Profile";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import Page from "../../../common/page/Page";
-import ListAction from "../../../common/list/Listaction";
-import PipelineDrawer from "../../../common/drawer/Drawer";
+import {observer} from "mobx-react";
+import EmptyText from "../../../common/component/emptyText/EmptyText";
+import Profile from "../../../common/component/profile/Profile";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import Page from "../../../common/component/page/Page";
+import ListAction from "../../../common/component/list/Listaction";
+import PipelineDrawer from "../../../common/component/drawer/Drawer";
+import DiskModal from "../../../common/component/modal/DiskModal";
+import {deleteSuccessReturnCurrenPage,debounce} from "../../../common/utils/Client";
 import HistoryScreen from "./HistoryScreen";
+import HistoryDetail from "./HistoryDetail";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
-import HistoryDetail from "./HistoryDetail";
 import "./HistoryTable.scss"
 
 
 const HistoryTable = props =>{
 
     const {historyType,isLoading,setIsLoading,detail,setDetail,params,setParams,
-        historyStore,pipelineUserList,pipelineList,pipelineStore
+        historyStore,pipelineStore
     } = props
 
     const {findOnePipeline} = pipelineStore
@@ -27,6 +29,8 @@ const HistoryTable = props =>{
 
     // 历史信息
     const [historyItem,setHistoryItem] = useState(null)
+
+    const [diskVisible,setDiskVisible] = useState(false)
 
     /**
      * 切换列表详情页面
@@ -66,13 +70,18 @@ const HistoryTable = props =>{
      * @param record
      */
     const del = record =>{
-        deleteInstance(record.instanceId)
+        deleteInstance(record.instanceId).then(res=>{
+            if(res.code===0){
+                const current = deleteSuccessReturnCurrenPage(page.totalRecord,13,params.pageParam.currentPage)
+                changPage(current)
+            }
+        })
     }
 
     /**
      * 终止运行
      */
-    const terminateOperation = record => {
+    const terminateOperation = debounce(record => {
         const {runStatus,pipeline} = record
         if(runStatus==="run"){
             execStop(pipeline.id)
@@ -81,16 +90,15 @@ const HistoryTable = props =>{
         findOnePipeline(pipeline.id).then(res=>{
             if(res.code===0){
                 if(res.data.state===2){
-                   return message.info("当前流水线正在在运行！")
+                    return message.info("当前流水线正在在运行！")
                 }
                 execStart(pipeline.id).then(res=>{
-                    if(res.code===0){
-                        details(res.data)
-                    }
+                    if(res.code===0) return details(res.data)
+                    if(res.code===9000) return setDiskVisible(true)
                 })
             }
         })
-    }
+    },1000)
 
     const columns = [
         {
@@ -194,8 +202,8 @@ const HistoryTable = props =>{
                     <div className="history-content mf">
                         <Breadcrumb firstItem={"历史"}/>
                         <HistoryScreen
-                            pipelineList={pipelineList}
-                            pipelineUserList={pipelineUserList}
+                            {...props}
+                            historyType={historyType}
                             params={params}
                             screen={screen}
                         />
@@ -217,7 +225,10 @@ const HistoryTable = props =>{
                         </div>
                     </div>
                 </div>
-
+                <DiskModal
+                    visible={diskVisible}
+                    setVisible={setDiskVisible}
+                />
                 <PipelineDrawer
                     width={"75%"}
                     visible={detail}
@@ -238,4 +249,4 @@ const HistoryTable = props =>{
     )
 }
 
-export default inject("pipelineStore")(observer(HistoryTable))
+export default observer(HistoryTable)

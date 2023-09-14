@@ -4,10 +4,11 @@ import {Tooltip} from "antd";
 import {applyJump} from "tiklab-core-ui"
 import {DeleteOutlined} from "@ant-design/icons";
 import testOnStore from "../design/processDesign/processDesign/store/TestOnStore";
-import Breadcrumb from "../../common/breadcrumb/Breadcrumb";
-import EmptyText from "../../common/emptyText/EmptyText";
-import {SpinLoading} from "../../common/loading/Loading";
-import Page from "../../common/page/Page";
+import Breadcrumb from "../../common/component/breadcrumb/Breadcrumb";
+import EmptyText from "../../common/component/emptyText/EmptyText";
+import {SpinLoading} from "../../common/component/loading/Loading";
+import Page from "../../common/component/page/Page";
+import {deleteSuccessReturnCurrenPage} from "../../common/utils/Client";
 import "./Test.scss";
 
 /**
@@ -106,9 +107,10 @@ const Test = props => {
         //屏蔽父层点击事件
         e.stopPropagation()
         deleteRelevance(item.relevanceId).then(res=>{
-            if(res.code===0) return setParam({
-                pageParam
-            })
+            if(res.code===0){
+                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,10,param.pageParam.currentPage)
+                changPage(current)
+            }
         })
     }
 

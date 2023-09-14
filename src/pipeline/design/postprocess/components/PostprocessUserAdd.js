@@ -1,11 +1,10 @@
 import React,{useEffect,useState} from "react";
 import {Table, Input, Dropdown} from "antd";
 import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
-import Btn from "../../../../common/btn/Btn";
-import EmptyText from "../../../../common/emptyText/EmptyText";
-import Page from "../../../../common/page/Page";
+import Btn from "../../../../common/component/btn/Btn";
+import EmptyText from "../../../../common/component/emptyText/EmptyText";
+import Page from "../../../../common/component/page/Page";
 import "./PostprocessUserAdd.scss";
-import {PipelineDropdown} from "../../../../common/dropdown/DropdownMenu";
 
 const PostprocessUserAdd = props =>{
 

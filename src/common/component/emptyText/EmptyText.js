@@ -1,5 +1,5 @@
 import React from "react";
-import pip_meiyouxiangguan from "../../assets/images/svg/pip_meiyouxiangguan.svg";
+import pip_meiyouxiangguan from "../../../assets/images/svg/pip_meiyouxiangguan.svg";
 
 /**
  * 暂无数据

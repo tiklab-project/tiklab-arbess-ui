@@ -9,9 +9,9 @@ import {
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import Modals from "../../../common/modal/Modal";
-import Btn from "../../../common/btn/Btn";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import Modals from "../../../common/component/modal/Modal";
+import Btn from "../../../common/component/btn/Btn";
 import "./BasicInfo.scss";
 
 /**

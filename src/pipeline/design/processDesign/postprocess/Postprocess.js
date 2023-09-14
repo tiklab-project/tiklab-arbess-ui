@@ -8,13 +8,13 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import Btn from "../../../../common/btn/Btn";
-import EmptyText from "../../../../common/emptyText/EmptyText";
+import Btn from "../../../../common/component/btn/Btn";
+import EmptyText from "../../../../common/component/emptyText/EmptyText";
 import PostprocessUserAdd from "../../postprocess/components/PostprocessUserAdd";
-import {PostprocessMirrorScenario} from "../../../../common/editor/CodeMirror";
+import {PostprocessMirrorScenario} from "../../../../common/component/editor/CodeMirror";
 import {Validation} from "../../../../common/utils/Client";
 import {TaskIcon, taskTitle} from "../processDesign/components/TaskTitleIcon";
-import {PipelineDropdown} from "../../../../common/dropdown/DropdownMenu";
+import {PipelineDropdown} from "../../../../common/component/dropdown/DropdownMenu";
 import "./Postprocess.scss";
 
 

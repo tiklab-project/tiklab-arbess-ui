@@ -1,9 +1,9 @@
 import React,{useEffect, useState} from "react";
 import {Table,Input} from "antd";
 import {SearchOutlined} from '@ant-design/icons';
-import Btn from "../../../common/btn/Btn";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import Page from "../../../common/page/Page";
+import Btn from "../../../common/component/btn/Btn";
+import EmptyText from "../../../common/component/emptyText/EmptyText";
+import Page from "../../../common/component/page/Page";
 
 /**
  * 流水线用户添加

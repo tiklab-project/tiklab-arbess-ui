@@ -63,3 +63,31 @@ export const Validation = name =>{
         message:`${name}不能包含空格`
     }
 }
+
+/**
+ * 分页删除
+ */
+export const deleteSuccessReturnCurrenPage = (totalRecord, pageSize, current) => {
+    const maxCurrentCount = current * pageSize;
+    const minCurrentCount = (current - 1) * pageSize + 1;
+    if (totalRecord >= maxCurrentCount) {
+        return current
+    }
+    if (totalRecord <= minCurrentCount) {
+        return current === 1 ? 1 : current - 1
+    }
+    return current
+}
+
+/**
+ * 防抖
+ */
+export function debounce(fn, delay) {
+    let timer
+    return function(...args) {
+        if (timer) clearTimeout(timer)
+        // 使用箭头函数来处理this问题
+        timer = setTimeout(() => fn.apply(this, args), delay)
+    }
+}
+

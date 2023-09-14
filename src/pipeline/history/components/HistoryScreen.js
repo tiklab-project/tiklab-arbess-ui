@@ -1,19 +1,64 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import {Select,Input} from "antd";
 import {CaretDownOutlined} from "@ant-design/icons";
 import "./HistoryScreen.scss";
+import {observer} from "mobx-react";
 
 const {Option} = Select;
 
 /**
  * 流水线历史筛选
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
 const HistoryScreen = props =>{
 
-    const {params,screen,pipelineList,pipelineUserList} = props
+    const {historyType,params,screen,pipelineStore} = props
+
+    const {pipeline,pipelineList,findDmUserPage} = pipelineStore
+
+    const [userList,setUserList] = useState([])
+
+    const [currentPage,setCurrentPage] = useState(1)
+
+    const [page,setPage] = useState({})
+
+    useEffect(()=>{
+        if(historyType==='historyPipeline'){
+            findDmUser()
+        }
+    },[currentPage])
+
+    const findDmUser = () =>{
+        findDmUserPage({
+            pageParam:{
+                pageSize: 9,
+                currentPage: currentPage,
+            },
+            domainId:pipeline.id
+        }).then(res=>{
+            if(res.code===0){
+                setPage({
+                    totalRecord: res.data.totalRecord,
+                    totalPage: res.data.totalPage,
+                })
+                if(currentPage===1){setUserList(res.data.dataList)}
+                else {setUserList([...userList,...res.data.dataList])}
+            }
+        })
+    }
+
+    /**
+     * 下拉滚动查看用户
+     * @param e
+     */
+    const scrollEnd = (e) => {
+        e.persist();
+        const { target } = e;
+        if (target.scrollTop + target.offsetHeight === target.scrollHeight) {
+            if (currentPage < page.totalPage) {
+                setCurrentPage(currentPage+1)
+            }
+        }
+    }
 
     /**
      * 切换选择框value
@@ -36,43 +81,43 @@ const HistoryScreen = props =>{
                 defaultValue={params?.number}
             />
             {
-                pipelineList &&
-                <Select
-                    showSearch
-                    suffixIcon={<CaretDownOutlined />}
-                    onChange={value=>changValue(value,"pipelineId")}
-                    filterOption={(input, option) =>
-                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    defaultValue={params.pipelineId}
-                >
-                    <Option key={"全部"} value={null}>流水线</Option>
-                    {
-                        pipelineList && pipelineList.map(item=>(
-                            <Option key={item.id} value={item.id}>{item.name}</Option>
-                        ))
-                    }
-                </Select>
+                historyType==="history" ?
+                    <Select
+                        showSearch
+                        suffixIcon={<CaretDownOutlined />}
+                        onChange={value=>changValue(value,"pipelineId")}
+                        filterOption={(input, option) =>
+                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                        defaultValue={params.pipelineId}
+                    >
+                        <Option key={"全部"} value={null}>流水线</Option>
+                        {
+                            pipelineList && pipelineList.map(item=>(
+                                <Option key={item.id} value={item.id}>{item.name}</Option>
+                            ))
+                        }
+                    </Select>
+                    :
+                    <Select
+                        showSearch
+                        suffixIcon={<CaretDownOutlined />}
+                        onPopupScroll={scrollEnd}
+                        onChange={value=>changValue(value,"userId")}
+                        filterOption={(input, option) =>
+                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                        defaultValue={params.userId}
+                    >
+                        <Option key={"全部"} value={null}>执行人</Option>
+                        {
+                            userList && userList.map(item=>(
+                                <Option key={item.id} value={item.user && item.user.id}>{item.user && item.user.nickname}</Option>
+                            ))
+                        }
+                    </Select>
             }
-            {
-                pipelineUserList &&
-                <Select
-                    showSearch
-                    suffixIcon={<CaretDownOutlined />}
-                    onChange={value=>changValue(value,"userId")}
-                    filterOption={(input, option) =>
-                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    defaultValue={params.userId}
-                >
-                    <Option key={"全部"} value={null}>执行人</Option>
-                    {
-                        pipelineUserList && pipelineUserList.map(item=>(
-                            <Option key={item.id} value={item.user && item.user.id}>{item.user && item.user.nickname}</Option>
-                        ))
-                    }
-                </Select>
-            }
+
             <Select
                 suffixIcon={<CaretDownOutlined />}
                 onChange={value=>changValue(value,"state")}
@@ -97,4 +142,4 @@ const HistoryScreen = props =>{
     )
 }
 
-export default HistoryScreen
+export default observer(HistoryScreen)

@@ -1,10 +1,10 @@
 import React,{useEffect,useState} from "react";
 import {AimOutlined,HistoryOutlined,BlockOutlined} from "@ant-design/icons";
 import homePageStore from "../store/HomePageStore";
-import EmptyText from "../../common/emptyText/EmptyText";
-import AgentList from "../../common/list/AgentList";
-import Guide from "../../common/guide/Guide";
-import {SpinLoading} from "../../common/loading/Loading";
+import EmptyText from "../../common/component/emptyText/EmptyText";
+import AgentList from "../../common/component/list/AgentList";
+import Guide from "../../common/component/guide/Guide";
+import {SpinLoading} from "../../common/component/loading/Loading";
 import "./homePage.scss";
 
 /**

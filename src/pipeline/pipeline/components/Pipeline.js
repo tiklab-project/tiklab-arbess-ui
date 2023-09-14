@@ -3,19 +3,11 @@ import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PipelineTable from "./PipelineTable";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import Btn from "../../../common/btn/Btn";
-import Tabs from "../../../common/tabs/Tabs";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import Btn from "../../../common/component/btn/Btn";
+import Tabs from "../../../common/component/tabs/Tabs";
+import {debounce} from "../../../common/utils/Client";
 import "./Pipeline.scss";
-
-function debounce(fn, delay) {
-    let timer
-    return function(...args) {
-        if (timer) clearTimeout(timer)
-        // 使用箭头函数来处理this问题
-        timer = setTimeout(() => fn.apply(this, args), delay)
-    }
-}
 
 /**
  * 流水线页面
@@ -150,7 +142,6 @@ const Pipeline = props =>{
                     isLoading={isLoading}
                     changPage={changPage}
                     changFresh={changFresh}
-                    pipelineStore={pipelineStore}
                 />
             </div>
         </div>

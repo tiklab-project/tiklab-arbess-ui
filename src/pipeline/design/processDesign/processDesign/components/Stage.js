@@ -3,7 +3,7 @@ import {Tooltip} from "antd";
 import {PlusOutlined, EditOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
 import {TaskFinalAdd, TaskTypeContent, TaskInsertBtn} from "./Common";
-import {SpinLoading} from "../../../../../common/loading/Loading";
+import {SpinLoading} from "../../../../../common/component/loading/Loading";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 
 /**

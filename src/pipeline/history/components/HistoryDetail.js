@@ -1,8 +1,8 @@
 import React,{useState,useEffect,useRef} from "react";
 import {CloseOutlined} from "@ant-design/icons";
-import Btn from "../../../common/btn/Btn";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import {SpinLoading} from "../../../common/loading/Loading";
+import Btn from "../../../common/component/btn/Btn";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import {SpinLoading} from "../../../common/component/loading/Loading";
 import HistoryDetailTree from "./HistoryDetailTree";
 import {runStatusText,getTime} from "./HistoryTrigger";
 import "./HistoryDetail.scss";

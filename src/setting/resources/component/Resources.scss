@@ -25,4 +25,18 @@
             width: 60px;
         }
     }
+    .resources-info-disk{
+        margin-bottom: 15px;
+        .info-disk-item{
+            border-radius: 4px;
+            cursor: pointer;
+            .info-disk-item-size{
+                font-size: 13px;
+                color: #999999;
+            }
+        }
+        .ant-table{
+            border: none;
+        }
+    }
 }

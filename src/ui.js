@@ -44,7 +44,6 @@ const Auth=AsyncComponent(()=>import("./setting/auth/components/Auth"))
 const Host=AsyncComponent(()=>import("./setting/authHost/component/Host"))
 const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
 const Envi=AsyncComponent(()=>import("./setting/envi/components/Envi"))
-const Info=AsyncComponent(()=>import("./setting/envi/components/Info"))
 const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
 
 // plugin
@@ -56,6 +55,7 @@ const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice")
 
 // security
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
+const BackupRecovery=AsyncComponent(()=>import("./setting/security/BackupRecovery"))
 
 // user
 const User=AsyncComponent(()=>import("./setting/user/User"))
@@ -128,13 +128,13 @@ export {
     Host,
     Server,
     Envi,
-    Info,
     Resources,
 
     Plugin,
     MessageSendType,
     MessageNotice,
     MyLog,
+    BackupRecovery,
 
     User,
     UserGroup,

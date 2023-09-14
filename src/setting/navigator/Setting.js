@@ -9,7 +9,7 @@ import {
     SoundOutlined,
     SwitcherOutlined,
     VerifiedOutlined,
-
+    SaveOutlined,
 } from "@ant-design/icons";
 import SystemContent from "./SettingContent";
 
@@ -29,7 +29,7 @@ const Setting = props =>{
             purviewCode:"pipeline_permission",
         },
         {
-            id:"2",
+            id:"message",
             title: "消息",
             icon:<SoundOutlined/>,
             children: [
@@ -54,7 +54,7 @@ const Setting = props =>{
             purviewCode:"pipeline_auth",
         },
         {
-            id:"3",
+            id:"resources",
             title:"资源配置",
             icon:<FileProtectOutlined />,
             children:[
@@ -91,10 +91,16 @@ const Setting = props =>{
             purviewCode:"pipeline_plugin",
         },
         {
-            id:"5",
+            id:"security",
             title:"安全",
             icon:<LayoutOutlined />,
             children: [
+                {
+                    id:"/index/system/backups",
+                    title:"备份与恢复",
+                    icon:<LayoutOutlined />,
+                    purviewCode:"restore",
+                },
                 {
                     id:"/index/system/myLog",
                     title:"操作日志",
@@ -108,12 +114,6 @@ const Setting = props =>{
             title:"版本与许可证",
             icon:<VerifiedOutlined />,
             purviewCode:"version",
-        },
-        {
-            id:"/index/system/info",
-            title:"系统信息",
-            icon:<AppstoreOutlined />,
-            purviewCode:"pipeline_system",
         },
     ]
 

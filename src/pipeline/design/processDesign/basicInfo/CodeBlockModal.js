@@ -1,6 +1,6 @@
 import React,{useRef} from "react";
-import {ExpandMirror} from "../../../../common/editor/CodeMirror";
-import Modals from "../../../../common/modal/Modal";
+import {ExpandMirror} from "../../../../common/component/editor/CodeMirror";
+import Modals from "../../../../common/component/modal/Modal";
 
 const CodeBlockModal = props =>{
 

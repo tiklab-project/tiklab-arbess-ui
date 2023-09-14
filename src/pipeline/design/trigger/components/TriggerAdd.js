@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import {Form,Radio,Checkbox,TimePicker,Row,Col} from "antd";
 import moment from "moment";
-import Modals from "../../../../common/modal/Modal";
+import Modals from "../../../../common/component/modal/Modal";
 
 /**
  * 触发器添加，编辑

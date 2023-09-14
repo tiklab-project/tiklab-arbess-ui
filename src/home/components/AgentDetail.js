@@ -1,6 +1,6 @@
 import React from 'react';
-import Breadcrumb from "../../common/breadcrumb/Breadcrumb";
-import AgentList from "../../common/list/AgentList";
+import Breadcrumb from "../../common/component/breadcrumb/Breadcrumb";
+import AgentList from "../../common/component/list/AgentList";
 
 const AgentDetail = props => {
     return (

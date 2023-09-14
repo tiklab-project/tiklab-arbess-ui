@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from "react";
 import {Space,Table} from "antd"
 import serverStore from "../store/ServerStore";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import ListIcon from "../../../common/list/ListIcon";
-import Listaction from "../../../common/list/Listaction";
-import Profile from "../../../common/profile/Profile";
-import Tabs from "../../../common/tabs/Tabs";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListIcon from "../../../common/component/list/ListIcon";
+import Listaction from "../../../common/component/list/Listaction";
+import Profile from "../../../common/component/profile/Profile";
+import Tabs from "../../../common/component/tabs/Tabs";
 import ServerAddBtn from "./ServerAddBtn";
 import "../../authCommon/Auth.scss";
 

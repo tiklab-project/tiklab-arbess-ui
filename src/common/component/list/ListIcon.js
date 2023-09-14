@@ -2,11 +2,7 @@ import React from "react";
 import "./ListIcon.scss";
 
 /**
- * 表格标题首字母，icon
- * @param text：标题
- * @param colors：颜色
- * @returns {JSX.Element}
- * @constructor
+ * 表格标题首字母
  */
 const ListIcon = ({text,colors}) => {
 

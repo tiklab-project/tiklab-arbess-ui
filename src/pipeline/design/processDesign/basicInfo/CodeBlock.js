@@ -3,8 +3,8 @@ import {inject,observer} from "mobx-react";
 import {Tooltip} from "antd";
 import {ExpandOutlined} from "@ant-design/icons";
 import CodeBlockModal from "./CodeBlockModal";
-import Btn from "../../../../common/btn/Btn";
-import {TaskMirror} from "../../../../common/editor/CodeMirror";
+import Btn from "../../../../common/component/btn/Btn";
+import {TaskMirror} from "../../../../common/component/editor/CodeMirror";
 import {WhetherChange} from "../processDesign/components/Common"
 import "./CodeBlock.scss";
 

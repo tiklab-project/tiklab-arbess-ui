@@ -28,7 +28,7 @@ const PipelineDrawer = props =>{
             {...res}
             placement="right"
             closable={false}
-            destroyOnClose
+            destroyOnClose={true}
             contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0,overflow:"hidden"}}
         >

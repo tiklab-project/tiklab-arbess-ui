@@ -5,8 +5,8 @@ import AuthType from "../../authCommon/AuthType";
 import serverStore from "../store/ServerStore";
 import authorizeStore from "../../../pipeline/design/processDesign/processDesign/store/AuthorizeStore";
 import {Validation} from "../../../common/utils/Client";
-import Btn from "../../../common/btn/Btn";
-import Modals from "../../../common/modal/Modal";
+import Btn from "../../../common/component/btn/Btn";
+import Modals from "../../../common/component/modal/Modal";
 
 
 /**
@@ -341,7 +341,7 @@ const ServerModal = props =>{
                         }
                     </Form>
                 </div>
-                <div style={{textAlign:"right"}}>
+                <div className="auth-server-modal-btn">
                     <Btn onClick={onCancel} title={"取消"} isMar={true}/>
                     <Btn onClick={onOk} title={"确定"} type={"primary"}/>
                 </div>

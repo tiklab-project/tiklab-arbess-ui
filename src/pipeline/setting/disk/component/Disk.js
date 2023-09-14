@@ -1,5 +1,5 @@
 import React from "react";
-import Breadcrumb from "../../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../../common/component/breadcrumb/Breadcrumb";
 import "./Disk.scss";
 
 /**

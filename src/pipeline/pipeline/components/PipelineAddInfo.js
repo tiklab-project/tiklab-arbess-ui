@@ -4,10 +4,10 @@ import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-d
 import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
-import Profile from "../../../common/profile/Profile";
-import Btn from "../../../common/btn/Btn";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import {PipelineDropdown} from "../../../common/dropdown/DropdownMenu";
+import Profile from "../../../common/component/profile/Profile";
+import Btn from "../../../common/component/btn/Btn";
+import EmptyText from "../../../common/component/emptyText/EmptyText";
+import {PipelineDropdown} from "../../../common/component/dropdown/DropdownMenu";
 import PipelineUserAdd from "./PipelineUserAdd";
 import "./PipelineAddInfo.scss";
 
@@ -236,7 +236,7 @@ const PipelineAddInfo = props =>{
                         visible={visible}
                         setVisible={setVisible}
                         width={240}
-                        style={{right:0,top:48}}
+                        style={{right:0,top:30}}
                     >
                         <PipelineUserAdd
                             visible={visible}

@@ -1,8 +1,7 @@
-import React from "react";
-import {message,Tooltip,Table,Space,Spin} from "antd";
+import React,{useState} from "react";
+import {message,Tooltip,Table,Space,Spin,Dropdown,Form,Input} from "antd";
 import {
     PlayCircleOutlined,
-    ClockCircleOutlined,
     LoadingOutlined,
     LockOutlined,
     UnlockOutlined,
@@ -10,16 +9,21 @@ import {
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
 import historyStore from "../../history/store/HistoryStore";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import Profile from "../../../common/profile/Profile";
-import ListIcon from "../../../common/list/ListIcon";
-import Page from "../../../common/page/Page";
+import EmptyText from "../../../common/component/emptyText/EmptyText";
+import Profile from "../../../common/component/profile/Profile";
+import ListIcon from "../../../common/component/list/ListIcon";
+import Page from "../../../common/component/page/Page";
+import Modals from "../../../common/component/modal/Modal";
+import Btn from "../../../common/component/btn/Btn";
+import {debounce} from "../../../common/utils/Client";
+import DiskModal from "../../../common/component/modal/DiskModal";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
 import pip_halt from "../../../assets/images/svg/pip_halt.svg";
 import pip_xingxing from "../../../assets/images/svg/pip_xingxing.svg";
 import pip_xingxing_kong from "../../../assets/images/svg/pip_xingxing-kong.svg";
+import pip_more from "../../../assets/images/svg/pie_more.svg";
 import "./PipelineTable.scss";
 
 /**
@@ -32,8 +36,22 @@ const PipelineTable = props =>{
 
     const {pipelineStore,changPage,changFresh,listType,isLoading}=props
 
-    const {pipelineListPage,updateFollow,pipPage} = pipelineStore
+    const {pipelineListPage,updateFollow,pipPage,pipelineList,findPipelineCloneName,pipelineClone} = pipelineStore
     const {execStart,execStop}=historyStore
+
+    const [form] = Form.useForm();
+
+    // 克隆的对象
+    const [pipelineObj,setPipelineObj] = useState(null)
+
+    // 克隆弹出框
+    const [copyVisible,setCopyVisible] = useState(false)
+
+    // 克隆状态
+    const [copyStatus,setCopyStatus] = useState(false)
+
+    // 磁盘内存状态
+    const [diskVisible,setDiskVisible] = useState(false)
 
     /**
      * 收藏
@@ -63,13 +81,13 @@ const PipelineTable = props =>{
 
     /**
      * 运行或者终止
-     * @param record
      */
-    const work = record =>{
+    const work = debounce(record =>{
         if(record.state === 1){
             // 开始运行
             execStart(record.id).then(r=>{
                 if(r.code===0) return changFresh()
+                if(r.code===9000) return setDiskVisible(true)
             })
         } else {
             // 停止运行
@@ -77,7 +95,58 @@ const PipelineTable = props =>{
                 if(r.code===0) return changFresh()
             })
         }
+    },1000)
+
+
+    /**
+     * 克隆
+     */
+    const toCopy = (record) => {
+        findPipelineCloneName(record.id).then(res=>{
+            setPipelineObj({
+                id:record.id,
+                name:res.data || record.name,
+            })
+            form.setFieldsValue({name:res.data || record.name})
+            setCopyVisible(true)
+        })
     }
+
+    /**
+     * 确定克隆
+     */
+    const onCopyOk = () => {
+        form.validateFields().then(value=>{
+            if(copyStatus) return;
+            setCopyStatus(true)
+            pipelineClone({
+                pipelineId:pipelineObj.id,
+                pipelineName:value.name
+            }).then(res=>{
+                if(res.code===0){
+                    message.info("克隆成功",0.5)
+                    onCancel()
+                    changFresh()
+                }
+                else {
+                    message.info("克隆失败",0.5)
+                }
+                setCopyStatus(false)
+            })
+        })
+    }
+
+    /**
+     * 取消克隆
+     */
+    const onCancel = () =>{
+        if(!copyStatus){
+            form.resetFields()
+            setCopyVisible(false)
+            setPipelineObj(null)
+        }
+    }
+
 
     /**
      * 去历史构建详情
@@ -191,39 +260,104 @@ const PipelineTable = props =>{
                 return(
                     <Space size="middle">
                         <Tooltip title={state===3?"等待":"运行"} >
-                            <span className="pipelineTable-state" onClick={()=>work(record)}>
+                            <span className="pipelineTable-action" onClick={()=>work(record)}>
                                 { state === 1 && <PlayCircleOutlined className="actions-se"/> }
                                 { state === 2 && <Spin indicator={<LoadingOutlined className="actions-se" spin />} /> }
                                 { state === 3 && <MinusCircleOutlined className="actions-se"/> }
                             </span>
                         </Tooltip>
                         <Tooltip title="收藏">
-                            <span className="pipelineTable-collect" onClick={()=>collectAction(record)}>
+                            <span className="pipelineTable-action" onClick={()=>collectAction(record)}>
                                 <img src={record.collect === 0 ? pip_xingxing_kong : pip_xingxing} alt={"收藏"} width={20} height={20}/>
                             </span>
                         </Tooltip>
+                        <Dropdown
+                            overlay={
+                                <div className="pipelineTable-dropdown-more">
+                                    <div className="dropdown-more-item" onClick={()=>toCopy(record)}>克隆</div>
+                                </div>
+                            }
+                            trigger={['click']}
+                            placement={"bottomRight"}
+                        >
+                            <Tooltip title="更多">
+                                <span className="pipelineTable-action">
+                                    <img src={pip_more} alt={"更多"} width={20} height={20}/>
+                                </span>
+                            </Tooltip>
+                        </Dropdown>
                     </Space>
                 )
             }
         },
     ]
 
-    return  <div className="pipelineTable">
-                <Table
-                    bordered={false}
-                    loading={isLoading}
-                    columns={columns}
-                    dataSource={pipelineListPage}
-                    rowKey={record=>record.id}
-                    pagination={false}
-                    locale={{emptyText: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
-                />
-                <Page
-                    currentPage={pipPage.currentPage}
-                    changPage={changPage}
-                    page={pipPage}
-                />
-            </div>
+    return  (
+        <div className="pipelineTable">
+            <Table
+                bordered={false}
+                loading={isLoading}
+                columns={columns}
+                dataSource={pipelineListPage}
+                rowKey={record=>record.id}
+                pagination={false}
+                locale={{emptyText: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
+            />
+            <Page
+                currentPage={pipPage.currentPage}
+                changPage={changPage}
+                page={pipPage}
+            />
+            <Modals
+                title={`复制流水线`}
+                visible={copyVisible}
+                onOk={onCopyOk}
+                onCancel={onCancel}
+                footer={<></>}
+                width={500}
+            >
+                <Spin spinning={copyStatus} tip={"克隆中……"}>
+                    <div className="pipelineTable-copy-modal-form">
+                        <Form form={form} layout={"vertical"}>
+                            <Form.Item
+                                name='name'
+                                label='名称'
+                                rules={[
+                                    {required:true,message:"名称不能为空"},
+                                    {
+                                        pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,30}$/,
+                                        message: "流水线名称最长30位且不能包含非法字符，如&,%，&，#……等",
+                                    },
+                                    ({ getFieldValue }) => ({
+                                        validator(rule,value) {
+                                            let nameArray = []
+                                            if(pipelineList){
+                                                nameArray = pipelineList && pipelineList.map(item=>item.name)
+                                            }
+                                            if (nameArray.includes(value)) {
+                                                return Promise.reject("名称已经存在");
+                                            }
+                                            return Promise.resolve()
+                                        },
+                                    }),
+                                ]}
+                            >
+                                <Input/>
+                            </Form.Item>
+                        </Form>
+                    </div>
+                    <div className="pipelineTable-copy-modal-btn">
+                        <Btn onClick={onCancel} title={"取消"} isMar={true}/>
+                        <Btn onClick={onCopyOk} title={"确定"} type={"primary"}/>
+                    </div>
+                </Spin>
+            </Modals>
+            <DiskModal
+                visible={diskVisible}
+                setVisible={setDiskVisible}
+            />
+        </div>
+    )
 }
 
 export default observer(PipelineTable)

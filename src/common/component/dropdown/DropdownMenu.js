@@ -1,5 +1,4 @@
-import React, {useState,useEffect,useRef} from "react";
-import {Tooltip} from "antd";
+import React, {useEffect,useState,useRef} from "react";
 import "./DropdownMenu.scss";
 
 /**
@@ -8,11 +7,19 @@ import "./DropdownMenu.scss";
 
 export const PortalDropdown = props => {
 
-    const {tooltip, children, Icon, width=140, onClick} = props
+    const {visibility,tooltip, children, Icon, width=140, onClick} = props
 
     const [visible,setVisible] = useState(false);
 
     const mf_dropdown_menu = useRef(null);
+
+    useEffect(() => {
+        if (visible && visibility) {
+            setVisible(!visibility)
+        } else {
+            setVisible(visibility)
+        }
+    }, [visibility]);
 
     useEffect(() => {
         window.addEventListener('click', (e) => {
@@ -49,13 +56,12 @@ export const PortalDropdown = props => {
                 </div>
             }
         </div>
-
     )
 };
 
 export const PipelineDropdown = props => {
 
-    const {visible,setVisible,tooltip, children, Icon, width=140,style} = props
+    const {visible,setVisible, children, Icon, width=140,style} = props
 
     const mf_dropdown_pipeline_menu = useRef(null);
 
@@ -74,9 +80,7 @@ export const PipelineDropdown = props => {
     return(
         <div className="mf_dropdown_pipeline" ref={mf_dropdown_pipeline_menu}>
             <div className="mf_dropdown_block" onClick={()=>setVisible(!visible)}>
-                <Tooltip title={tooltip} mouseEnterDelay={0.3}>
-                    { Icon }
-                </Tooltip>
+                { Icon }
             </div>
             <div style={{width,...style}} className={`mf_dropdown_aside_menu ${visible?"":"mf_dropdown_hidden"}`} >
                 {children}

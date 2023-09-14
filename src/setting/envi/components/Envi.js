@@ -3,11 +3,12 @@ import {Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import enviStore from "../store/EnviStore";
 import EnviModal from "./EnviModal";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
-import Btn from "../../../common/btn/Btn";
-import EmptyText from "../../../common/emptyText/EmptyText";
-import Listaction from "../../../common/list/Listaction";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import Btn from "../../../common/component/btn/Btn";
+import EmptyText from "../../../common/component/emptyText/EmptyText";
+import Listaction from "../../../common/component/list/Listaction";
 import {TaskTitleIcon} from "../../../pipeline/design/processDesign/processDesign/components/TaskTitleIcon";
+import ListIcon from "../../../common/component/list/ListIcon";
 import "../../authCommon/Auth.scss";
 
 /**
@@ -71,10 +72,23 @@ const Envi = props =>{
 
     const columnsCe = [
         {
+            title:"名称",
+            dataIndex:"scmName",
+            key:"scmName",
+            width:"30%",
+            ellipsis:true,
+            render:text => {
+                return  <span>
+                            <ListIcon text={text}/>
+                            <span>{text}</span>
+                        </span>
+            }
+        },
+        {
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
-            width:"30%",
+            width:"25%",
             ellipsis:true,
             render:text =>{
                 switch (text) {
@@ -86,17 +100,10 @@ const Envi = props =>{
             }
         },
         {
-            title:"名称",
-            dataIndex:"scmName",
-            key:"scmName",
-            width:"30%",
-            ellipsis:true,
-        },
-        {
             title:"地址",
             dataIndex:"scmAddress",
             key:"scmAddress",
-            width:"30%",
+            width:"35%",
             ellipsis:true,
         },
         {

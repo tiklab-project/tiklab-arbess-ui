@@ -57,6 +57,7 @@ const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice")
 
 // security
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
+const BackupRecovery=AsyncComponent(()=>import("./setting/security/BackupRecovery"))
 
 // user
 const User=AsyncComponent(()=>import("./setting/user/User"))
@@ -307,6 +308,11 @@ const routers=[
                         exact: true,
                     },
                     {
+                        path:"/index/system/backups",
+                        component: BackupRecovery,
+                        exact: true,
+                    },
+                    {
                         path:"/index/system/myLog",
                         component: MyLog,
                         exact: true,
@@ -314,11 +320,6 @@ const routers=[
                     {
                         path:"/index/system/version",
                         component: Version,
-                        exact: true,
-                    },
-                    {
-                        path:"/index/system/info",
-                        component: Info,
                         exact: true,
                     },
                     {

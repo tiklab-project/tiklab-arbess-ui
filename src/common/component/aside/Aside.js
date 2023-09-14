@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {renderRoutes} from "react-router-config";
-import {interceptUrl} from "../utils/Client";
+import {interceptUrl} from "../../utils/Client";
 import {Loading} from "../loading/Loading";
 import {PipelineDropdown} from "../dropdown/DropdownMenu";
 import "./Aside.scss";
@@ -53,8 +53,7 @@ const Aside = props =>{
                                      {pipeline && pipeline.name.substring(0,1).toUpperCase()}
                                 </span>
                                 <span><CaretDownOutlined /></span>
-                            </div>
-            }
+                            </div>}
                 >
                     <div className="pipeline-opt">
                         <div className="pipeline-opt-title">切换流水线</div>

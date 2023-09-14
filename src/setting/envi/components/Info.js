@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import enviStore from "../store/EnviStore";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import "./Info.scss";
 
 /**

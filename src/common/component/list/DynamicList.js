@@ -3,10 +3,10 @@ import {withRouter} from "react-router-dom";
 import EmptyText from "../emptyText/EmptyText";
 import "./DynamicList.scss";
 /* 日志模板需要的图片 */
-import pip_pipeline from "../../assets/images/svg/pip_pipeline.svg";
-import pip_config from "../../assets/images/svg/pip_config.svg";
-import pip_run from "../../assets/images/svg/pip_run.svg";
-import pip_helmet from "../../assets/images/svg/pip_helmet.svg";
+import pip_pipeline from "../../../assets/images/svg/pip_pipeline.svg";
+import pip_config from "../../../assets/images/svg/pip_config.svg";
+import pip_run from "../../../assets/images/svg/pip_run.svg";
+import pip_helmet from "../../../assets/images/svg/pip_helmet.svg";
 
 /**
  * 动态列表

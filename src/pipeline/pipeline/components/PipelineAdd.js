@@ -3,8 +3,8 @@ import {Spin, Steps} from "antd";
 import {inject,observer} from "mobx-react";
 import PipelineAddMould from "./PipelineAddMould";
 import PipelineAddInfo from "./PipelineAddInfo";
-import Btn from "../../../common/btn/Btn";
-import Breadcrumb from "../../../common/breadcrumb/Breadcrumb";
+import Btn from "../../../common/component/btn/Btn";
+import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import "./pipelineAdd.scss";
 
 /**

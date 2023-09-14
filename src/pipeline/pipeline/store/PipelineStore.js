@@ -235,6 +235,33 @@ export class PipelineStore {
     }
 
     /**
+     * 克隆
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    pipelineClone = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value.pipelineId)
+        param.append("pipelineName",value.pipelineName)
+        const data = await Axios.post("/pipeline/pipelineClone",param)
+        return data
+    }
+
+    /**
+     * 克隆前获取名字
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findPipelineCloneName = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        const data = await Axios.post("/pipeline/findPipelineCloneName",param)
+        return data
+    }
+
+    /**
      * 更新最近打开的流水线
      * @param value
      * @returns {Promise<*>}

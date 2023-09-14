@@ -1,6 +1,6 @@
 import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
-import Btn from "../../../common/btn/Btn";
+import Btn from "../../../common/component/btn/Btn";
 import ServerModal from "./ServerModal";
 
 /**

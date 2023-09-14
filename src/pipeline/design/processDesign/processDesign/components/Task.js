@@ -1,7 +1,7 @@
 import React,{Fragment,useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {TaskFinalAdd,TaskTypeContent,TaskInsertBtn} from "./Common";
-import {SpinLoading} from "../../../../../common/loading/Loading";
+import {SpinLoading} from "../../../../../common/component/loading/Loading";
 
 /**
  * 多任务

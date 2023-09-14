@@ -1,11 +1,8 @@
-import {action,observable} from "mobx";
+import {action} from "mobx";
 import {Axios} from "tiklab-core-ui";
+import {message} from "antd";
 
 class ResourceStore {
-
-    // 资源占用列表
-    @observable
-    resourceList = {}
 
     /**
      * 获取资源占用内存
@@ -14,9 +11,28 @@ class ResourceStore {
     @action
     findResourcesList = async () =>{
         const data = await Axios.post("/resources/findResourcesList")
-        if(data.code===0){
-            this.resourceList = data.data || {}
-        }
+        return data
+    }
+
+
+    /**
+     * 获取流水线缓存
+     */
+    @action
+    findDiskList = async () =>{
+        const data = await Axios.post("/disk/findDiskList")
+        return data
+    }
+
+
+    /**
+     * 清理磁盘空间
+     */
+    @action
+    cleanDisk = async value =>{
+        const data = await Axios.post("/disk/cleanDisk",value)
+        if(data.code===0){message.info("清理成功",0.5)}
+        else {message.info("清理失败",0.5)}
         return data
     }
 

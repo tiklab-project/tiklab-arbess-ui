@@ -2,8 +2,8 @@ import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined,ExperimentOutlined} from "@ant-design/icons";
-import {Loading} from "../../common/loading/Loading";
-import Aside from "../../common/aside/Aside";
+import {Loading} from "../../common/component/loading/Loading";
+import Aside from "../../common/component/aside/Aside";
 
 /**
  * 流水线左侧导航（二级导航）

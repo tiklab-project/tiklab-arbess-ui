@@ -8,10 +8,6 @@ class HistoryStore {
     @observable
     historyList = []
 
-    // 重新刷新
-    @observable
-    historyFresh = false
-
     // 分页
     @observable
     page = {
@@ -40,7 +36,7 @@ class HistoryStore {
             userId:getUser().userId
         }
         const data = await Axios.post("/exec/start", params)
-        if(data.code!==0){
+        if(data.code!==0 && data.code!==9000){
             message.info(data.msg)
         }
         return data
@@ -94,7 +90,6 @@ class HistoryStore {
         const data = await Axios.post("/instance/deleteInstance",param)
         if(data.code===0){
             message.info("删除成功",0.5)
-            this.historyFresh = !this.historyFresh
         }
         return data
     }
