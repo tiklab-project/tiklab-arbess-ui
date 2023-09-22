@@ -20,9 +20,6 @@ const PostprocessAdd = props =>{
     const userId = getUser().userId
     const mirrorRefs = useRef(null)
 
-    // 后置处理类型
-    const [postprocessType,setPostprocessType] = useState('message')
-
     // 代码块行高亮
     const [styleActiveLine,setStyleActiveLine] = useState(false)
 
@@ -34,12 +31,11 @@ const PostprocessAdd = props =>{
             if(formValue){
                 // 初始化表单
                 form.setFieldsValue({
-                    taskType: formValue.taskType,
-                    typeList: formValue.task.values.typeList,
-                    name: formValue.name
+                    ...formValue,
+                    type:formValue.values.type,
+                    typeList: formValue.values.typeList,
                 })
-                setYUserList(formValue && formValue.task.values.userList)
-                setPostprocessType(formValue.taskType)
+                setYUserList(formValue.values.userList || [])
                 return
             }
             // 获取通知人员
@@ -52,8 +48,8 @@ const PostprocessAdd = props =>{
             form.resetFields()
         }
         return ()=>{
+            setYUserList([])
             setStyleActiveLine(false)
-            setPostprocessType('message')
         }
      },[postprocessVisible])
 
@@ -98,11 +94,21 @@ const PostprocessAdd = props =>{
      */
     const onOk = () => {
         form.validateFields().then((value)=>{
+            const {taskType,postName,type} = value
             let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
             let params = {
-                taskType: value.taskType,
-                name: value.name,
-                values: postprocessType==='message' ? { typeList:value.typeList,userList}: {scriptOrder: mirrorRefs.current.editor.getValue()}
+                pipelineId:pipeline.id,
+                taskType: taskType,
+                postName: postName,
+                values: taskType==='message' ?
+                    {
+                        typeList:value.typeList,userList
+                    }
+                    :
+                    {
+                        scriptOrder: mirrorRefs.current.editor.getValue(),
+                        type:type,
+                    }
             }
             if(formValue){
                  params = {
@@ -115,7 +121,6 @@ const PostprocessAdd = props =>{
             }else {
                 params = {
                     ...params,
-                    pipelineId:pipeline.id,
                 }
                 createPost(params).then(res=>{
                     res.code===0 && message.info("添加成功",0.5)
@@ -178,26 +183,11 @@ const PostprocessAdd = props =>{
     ]
 
     const typeList = [
-        {
-            value:"site",
-            title:"站内信"
-        },
-        {
-            value:"email",
-            title:"邮箱通知"
-        },
-        {
-            value:"sms",
-            title:"短信通知"
-        },
-        {
-            value:"qywechat",
-            title:"企业微信机器人"
-        },
-        {
-            value:"dingding",
-            title:"钉钉机器人"
-        },
+        {value:"site", title:"站内信"},
+        {value:"email", title:"邮箱通知"},
+        {value:"sms", title:"短信通知"},
+        {value:"qywechat", title:"企业微信机器人"},
+        {value:"dingding", title:"钉钉机器人"},
     ]
 
     return(
@@ -209,64 +199,86 @@ const PostprocessAdd = props =>{
             title={formValue?"修改":"添加"}
         >
             <div className="postprocess-modal">
-                <Form form={form} layout={"vertical"} initialValues={{taskType:'message',typeList:["site"]}}>
+                <Form
+                    form={form}
+                    layout={"vertical"}
+                    autoComplete={'off'}
+                    initialValues={{taskType:'message',typeList:["site"],type:'shell'}}
+                >
                     <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"类型不能为空"}]}>
-                        <Select onChange={value=>setPostprocessType(value)} disabled={formValue && formValue}>
+                        <Select disabled={formValue && formValue}>
                             <Select.Option value={'message'}>消息通知</Select.Option>
-                            <Select.Option value={'bat'}>执行bat脚本</Select.Option>
-                            <Select.Option value={'shell'}>执行Shell脚本</Select.Option>
+                            <Select.Option value={'script'}>执行脚本</Select.Option>
                         </Select>
                     </Form.Item>
-                    <Form.Item name="name" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
-                        <Input/>
+                    <Form.Item
+                        noStyle
+                        shouldUpdate={(prevValues, currentValues) => prevValues.taskType !== currentValues.taskType}
+                    >
+                        {({ getFieldValue }) =>
+                            getFieldValue('taskType') === 'message' ?
+                                <>
+                                    <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
+                                        <Input/>
+                                    </Form.Item>
+                                    <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"消息发送方式不能为空"}]}>
+                                        <Checkbox.Group>
+                                            {
+                                                typeList.map(item=>{
+                                                    if(version==='ce' && item.value==='sms') return;
+                                                    return (
+                                                        <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
+                                                            <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                                        </Tooltip>
+                                                    )
+                                                })
+                                            }
+                                        </Checkbox.Group>
+                                    </Form.Item>
+                                    <div className="post-pose-user">
+                                        <div className="post-pose-title">
+                                            <div className="title-user">消息通知人员</div>
+                                            <PostprocessUserAdd
+                                                pipelineStore={pipelineStore}
+                                                yUserList={yUserList}
+                                                setYUserList={setYUserList}
+                                            />
+                                        </div>
+                                        <Table
+                                            bordered={false}
+                                            columns={columns}
+                                            dataSource={yUserList}
+                                            rowKey={(record) => record.user.id}
+                                            pagination={false}
+                                            locale={{emptyText: <EmptyText/>}}
+                                        />
+                                    </div>
+                                </>
+
+                                :
+                                <>
+                                    <Form.Item name="type" label={"脚本类型"} rules={[{required:true, message:"类型不能为空"}]}>
+                                        <Select>
+                                            <Select.Option value={"shell"}>shell脚本</Select.Option>
+                                            <Select.Option value={"bat"}>bat脚本</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                    <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
+                                        <Input/>
+                                    </Form.Item>
+                                    <Form.Item label={'脚本命令'}>
+                                        <PostprocessMirrorScenario
+                                            value={formValue?formValue.values.scriptOrder:""}
+                                            mirrorRefs={mirrorRefs}
+                                            styleActiveLine={styleActiveLine}
+                                            onFocus={onFocus}
+                                            type={getFieldValue('type')}
+                                        />
+                                    </Form.Item>
+                                </>
+                        }
                     </Form.Item>
-                    {
-                        postprocessType==='message' &&
-                        <>
-                            <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"消息发送方式不能为空"}]}>
-                                <Checkbox.Group>
-                                    {
-                                        typeList.map(item=>{
-                                            if(version==='ce' && item.value==='sms') return;
-                                            return (
-                                                <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
-                                                    <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
-                                                </Tooltip>
-                                            )
-                                        })
-                                    }
-                                </Checkbox.Group>
-                            </Form.Item>
-                            <div className="post-pose-user">
-                                <div className="post-pose-title">
-                                    <div className="title-user">消息通知人员</div>
-                                    <PostprocessUserAdd
-                                        pipelineStore={pipelineStore}
-                                        yUserList={yUserList}
-                                        setYUserList={setYUserList}
-                                    />
-                                </div>
-                                <Table
-                                    bordered={false}
-                                    columns={columns}
-                                    dataSource={yUserList}
-                                    rowKey={(record) => record.user.id}
-                                    pagination={false}
-                                    locale={{emptyText:<EmptyText/>}}
-                                />
-                            </div>
-                        </>
-                    }
-                    {
-                        (postprocessType==='bat' || postprocessType==='shell') &&
-                        <PostprocessMirrorScenario
-                            value={formValue?formValue.task.values.scriptOrder:""}
-                            mirrorRefs={mirrorRefs}
-                            styleActiveLine={styleActiveLine}
-                            onFocus={onFocus}
-                            type={postprocessType}
-                        />
-                    }
+
                 </Form>
             </div>
         </Modals>

@@ -48,6 +48,19 @@ class StageStore {
     }
 
     /**
+     * 获取多阶段
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findStageYaml = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        const data = await Axios.post("/stage/findStageYaml",param)
+        return data
+    }
+
+    /**
      * 更新多阶段名称
      * @param value
      * @returns {Promise<*>}

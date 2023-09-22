@@ -3,8 +3,8 @@ import {AimOutlined,HistoryOutlined,BlockOutlined} from "@ant-design/icons";
 import homePageStore from "../store/HomePageStore";
 import EmptyText from "../../common/component/emptyText/EmptyText";
 import AgentList from "../../common/component/list/AgentList";
-import Guide from "../../common/component/guide/Guide";
 import {SpinLoading} from "../../common/component/loading/Loading";
+import ListIcon from "../../common/component/list/ListIcon";
 import "./homePage.scss";
 
 /**
@@ -40,9 +40,10 @@ const HomePage = props =>{
             {
                 pipeline &&
                 <div className="pipelineRecent-item-title">
-                    <div className={`mf-icon-${pipeline?.color || 0} pipeline-icon`}>
-                        {pipeline?.name? pipeline.name.substring(0,1).toUpperCase():"T"}
-                    </div>
+                    <ListIcon
+                        text={pipeline?.name || "T"}
+                        colors={pipeline?.color}
+                    />
                     <div className="pipelineRecent-name">
                         {pipeline?.name}
                     </div>
@@ -76,11 +77,12 @@ const HomePage = props =>{
             className='pipelineBuild-item'
             onClick={()=>props.history.push(`/index/pipeline/${item.pipelineId}/structure/${item.instanceId}/post`)}
         >
-            <div className={`mf-icon-${item?.color} pipeline-icon`}>
-                {item.pipelineName?.substring(0,1).toUpperCase()}
-            </div>
+            <ListIcon
+                text={item?.pipelineName || 'T'}
+                colors={item?.color}
+            />
             <div className='pipelineBuild-item-info'>
-                <div className='pipelineBuild-item-name'>{item.pipelineName}</div>
+                <div className='pipelineBuild-item-name'>{item.pipelineName || '无'}</div>
                 <div className='pipelineBuild-item-desc'>
                     <span className='desc-number'>#{(item.number)}</span>
                     <span className='desc-lastRunState'>{lastRunState(item.lastRunState)}</span>
@@ -96,13 +98,16 @@ const HomePage = props =>{
         <div className="homePage">
             <div className="homePage-content mf-home-limited">
                 <div className="home-recent">
-                    <Guide title={"我最近访问的"} icon={<HistoryOutlined />}/>
+                    <div className="homePage-guide-title">
+                        <HistoryOutlined className="guide-icon"/>
+                        <span className="guide-title">我最近访问的</span>
+                    </div>
                     {
                         newlyLoading ?
                             <SpinLoading type='table'/>
                             :
                             newlyOpen && newlyOpen.length > 0 ?
-                            <div  className="pipelineRecent-content">
+                            <div className="pipelineRecent-content">
                                 {
                                     newlyOpen.map(item=> renderOpen(item))
                                 }
@@ -112,7 +117,10 @@ const HomePage = props =>{
                     }
                 </div>
                 <div className="home-build">
-                    <Guide title={"我最近构建的"} icon={<BlockOutlined />}/>
+                    <div className="homePage-guide-title">
+                        <BlockOutlined className="guide-icon"/>
+                        <span className="guide-title">我最近构建的</span>
+                    </div>
                     {
                         buildLoading ?
                             <SpinLoading type='table'/>
@@ -128,7 +136,10 @@ const HomePage = props =>{
                     }
                 </div>
                 <div className="home-agent">
-                    <Guide title={"我的代办"} icon={<AimOutlined />}/>
+                    <div className="homePage-guide-title">
+                        <AimOutlined className="guide-icon"/>
+                        <span className="guide-title">我的代办</span>
+                    </div>
                     <AgentList agentList={[]}/>
                 </div>
 

@@ -118,7 +118,12 @@ const Pipeline = props =>{
         <div className="pipeline">
             <div className="pipeline-content mf-home-limited mf">
                 <Breadcrumb firstItem={"流水线"}>
-                    <Btn onClick={onClick} type={"primary"} title={"新建流水线"} icon={<PlusOutlined/>}/>
+                    <Btn
+                        onClick={onClick}
+                        type={"primary"}
+                        title={"新建流水线"}
+                        icon={<PlusOutlined/>}
+                    />
                 </Breadcrumb>
                 <div className="pipeline-type">
                     <Tabs type={listType} tabLis={[

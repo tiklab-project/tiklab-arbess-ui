@@ -150,6 +150,7 @@ const ServerModal = props =>{
      * 服务配置添加或者更新确定
      */
     const onOk = () =>{
+        if(skin) return
         form.validateFields().then((values) => {
             if(formValue){
                 const param = {
@@ -291,8 +292,8 @@ const ServerModal = props =>{
         <Modals
             visible={visible}
             onCancel={onCancel}
+            onOk={onOk}
             title={formValue?"修改":"添加"}
-            footer={<></>}
         >
             <Spin spinning={skin} tip="获取授权信息...">
                 <div className="resources-modal">
@@ -340,10 +341,6 @@ const ServerModal = props =>{
                             (serverWay==='gitee' || serverWay==='github' ) ? authorize : server
                         }
                     </Form>
-                </div>
-                <div className="auth-server-modal-btn">
-                    <Btn onClick={onCancel} title={"取消"} isMar={true}/>
-                    <Btn onClick={onOk} title={"确定"} type={"primary"}/>
                 </div>
             </Spin>
         </Modals>

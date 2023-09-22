@@ -256,7 +256,7 @@ const PipelineTable = props =>{
             width:"10%",
             ellipsis:true,
             render:(text,record)=>{
-                const {state} = record
+                const {state,collect} = record
                 return(
                     <Space size="middle">
                         <Tooltip title={state===3?"等待":"运行"} >
@@ -268,7 +268,7 @@ const PipelineTable = props =>{
                         </Tooltip>
                         <Tooltip title="收藏">
                             <span className="pipelineTable-action" onClick={()=>collectAction(record)}>
-                                <img src={record.collect === 0 ? pip_xingxing_kong : pip_xingxing} alt={"收藏"} width={20} height={20}/>
+                                <img src={collect === 0 ? pip_xingxing_kong : pip_xingxing} alt={"收藏"} width={20} height={20}/>
                             </span>
                         </Tooltip>
                         <Dropdown
@@ -281,7 +281,7 @@ const PipelineTable = props =>{
                             placement={"bottomRight"}
                         >
                             <Tooltip title="更多">
-                                <span className="pipelineTable-action">
+                                <span className="pipelineTable-action" title={"更多"}>
                                     <img src={pip_more} alt={"更多"} width={20} height={20}/>
                                 </span>
                             </Tooltip>

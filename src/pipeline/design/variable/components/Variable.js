@@ -18,7 +18,7 @@ const Variable = props =>{
 
     const {variableStore,pipelineStore} = props
 
-    const {createVariable,findAllVariable,fresh,variableData,deleteVariable,updateVariable} = variableStore
+    const {createVariable,findVariable,fresh,variableData,deleteVariable,updateVariable} = variableStore
     const {pipeline} = pipelineStore
 
     const [variableVisible,setVariableVisible] = useState(false)
@@ -27,7 +27,10 @@ const Variable = props =>{
 
     useEffect(()=>{
         // 初始化变量
-        findAllVariable(pipeline.id)
+        findVariable({
+            pipelineId:pipeline.id,
+            type:'pipeline',
+        })
     },[fresh])
 
     /**
@@ -52,7 +55,11 @@ const Variable = props =>{
      * @param reocrd
      */
     const delVariable = reocrd =>{
-        deleteVariable(reocrd.varId).then(res=>{
+        deleteVariable({
+            pipelineId:pipeline.id,
+            varKey:reocrd.varKey,
+            type:'pipeline',
+        }).then(res=>{
             res.code===0 && message.info("删除成功",0.5)
         })
     }
@@ -67,11 +74,11 @@ const Variable = props =>{
         },
         {
             title: "类别",
-            dataIndex: "taskType",
-            key: "taskType",
+            dataIndex: "varType",
+            key: "varType",
             width:"20%",
             ellipsis:true,
-            render:text => text===1?"字符串":"单选"
+            render:text => text==="str"?"字符串":"单选"
         },
         {
             title: "默认值",
@@ -111,6 +118,7 @@ const Variable = props =>{
                                variableVisible={variableVisible}
                                setVariableVisible={setVariableVisible}
                                formValue={formValue}
+                               variableData={variableData}
                                createVariable={createVariable}
                                updateVariable={updateVariable}
                                pipelineId={pipeline && pipeline.id}
@@ -121,7 +129,7 @@ const Variable = props =>{
                                bordered={false}
                                columns={columns}
                                dataSource={variableData}
-                               rowKey={record=>record.varId}
+                               rowKey={record=>record.varKey}
                                pagination={false}
                                locale={{emptyText: <EmptyText title={"暂无变量"}/>}}
                            />

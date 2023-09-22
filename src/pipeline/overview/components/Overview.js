@@ -1,10 +1,9 @@
-import React,{useState,useEffect} from "react";
+import React,{useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {AimOutlined, PieChartOutlined} from "@ant-design/icons";
+import {AimOutlined, PieChartOutlined, RightOutlined} from "@ant-design/icons";
 import DynamicList from "../../../common/component/list/DynamicList";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import echarts from "../../../common/component/echarts/Echarts";
-import Guide from "../../../common/component/guide/Guide";
 import OverviewCensus from "./OverviewCensus";
 import overviewStore from "../store/OverviewStore";
 import "./Overview.scss";
@@ -81,14 +80,32 @@ const Overview = props =>{
                 </div>
                 <div className="overview-bottom">
                     <div className="overview-census">
-                        <Guide icon={<PieChartOutlined />} title={"运行概况"}/>
+                        <div className='overview-guide'>
+                            <div className='overview-guide-title'>
+                                <PieChartOutlined className='overview-guide-title-icon'/>
+                                <span className='overview-guide-title-name'>运行概况</span>
+                            </div>
+                        </div>
                         <div className="overview-census-bottom">
                             <div className="chart-box" id="burn-down" style={{width:400,height:300}}/>
                             <OverviewCensus census={census}/>
                         </div>
                     </div>
                     <div className="overview-dyna">
-                        <Guide title={"流水线动态"} icon={<AimOutlined/>} type={dynaPage} pipelineId={pipeline?.id}/>
+                        <div className='overview-guide'>
+                            <div className='overview-guide-title'>
+                                <AimOutlined className='overview-guide-title-icon'/>
+                                <span className='overview-guide-title-name'>流水线动态</span>
+                            </div>
+                            {
+                                dynaPage?.totalPage > 1 &&
+                                <div onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/survey/dyna`)}
+                                     className="overview-guide-skip"
+                                >
+                                    <RightOutlined />
+                                </div>
+                            }
+                        </div>
                         <DynamicList dynamicList={dynamicList}/>
                     </div>
                 </div>

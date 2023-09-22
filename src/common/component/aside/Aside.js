@@ -48,7 +48,7 @@ const Aside = props =>{
                     visible={visible}
                     setVisible={setVisible}
                     Icon={
-                            <div className='normal-aside-opt' data-title-right={pipeline?.name}>
+                            <div className='normal-aside-opt' title={pipeline?.name}>
                                 <span className={`dropdowns_icon mf-icon-${pipeline && pipeline.color}`}>
                                      {pipeline && pipeline.name.substring(0,1).toUpperCase()}
                                 </span>

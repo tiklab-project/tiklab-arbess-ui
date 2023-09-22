@@ -15,6 +15,21 @@
         align-items: center;
         padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
     }
+    .changeView-type{
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+        border-radius: 4px;
+        background: #f7f7f7;
+        border: 1px solid #f7f7f7;
+        div{
+            cursor: pointer;
+            padding: 4px 15px;
+        }
+        .type-active{
+            background: #e3e8f0;
+        }
+    }
     .design-tabs{
         flex:1;
         display: flex;

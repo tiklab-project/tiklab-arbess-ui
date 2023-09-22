@@ -4,6 +4,7 @@ import {getUser} from "tiklab-core-ui";
 import {ApartmentOutlined, ClockCircleOutlined, CreditCardOutlined,ExperimentOutlined} from "@ant-design/icons";
 import {Loading} from "../../common/component/loading/Loading";
 import Aside from "../../common/component/aside/Aside";
+import {message} from "antd";
 
 /**
  * 流水线左侧导航（二级导航）
@@ -19,7 +20,7 @@ const PipelineAside= (props)=>{
 
     const {getInitProjectPermissions} = systemRoleStore
 
-    const pipelineId = match.params.id
+    const id = match.params.id
     const userId = getUser().userId
 
     // 加载状态
@@ -31,44 +32,45 @@ const PipelineAside= (props)=>{
     },[])
 
     useEffect(()=>{
-        if(pipelineId){
+        if(id){
             // 获取单个流水线信息
-            findOnePipeline(pipelineId).then(res=>{
+            findOnePipeline(id).then(res=>{
                 if(res.data===null){
-                    props.history.push('/index/404')
-                }else {
-                    // 获取流水线权限
-                    getInitProjectPermissions(userId,pipelineId,res.data?.power===1)
-                    setIsAside(false)
+                    message.info("当前流水线不存在")
+                    props.history.push('/index/pipeline')
+                    return
                 }
+                // 获取流水线权限
+                getInitProjectPermissions(userId,id,res.data?.power===1)
+                setIsAside(false)
             })
             // 当前流水线打开
-            updateOpen(pipelineId)
+            updateOpen(id)
         }
-    },[pipelineId])
+    },[id])
 
     // 左侧菜单（二级菜单）
     const firstRouters=[
         {
-            id:`/index/pipeline/${pipelineId}/survey`,
+            id:`/index/pipeline/${id}/survey`,
             title:"概况",
             icon:<ApartmentOutlined />,
             key:"2",
         },
         {
-            id:`/index/pipeline/${pipelineId}/config`,
+            id:`/index/pipeline/${id}/config`,
             title: "设计",
             icon: <CreditCardOutlined />,
             key:"3",
         },
         {
-            id:`/index/pipeline/${pipelineId}/structure`,
+            id:`/index/pipeline/${id}/structure`,
             title: "历史",
             icon: <ClockCircleOutlined />,
             key:"4",
         },
         {
-            id:`/index/pipeline/${pipelineId}/test`,
+            id:`/index/pipeline/${id}/test`,
             title: "测试",
             icon: <ExperimentOutlined />,
             key:"5",

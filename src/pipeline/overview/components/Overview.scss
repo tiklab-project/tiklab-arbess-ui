@@ -12,6 +12,26 @@
     .overview-top{
         padding-bottom: var(--tiklab-padding-item);
     }
+    .overview-guide{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        .overview-guide-title{
+            font-weight: var(--tiklab-font-weight-bold);
+            .overview-guide-title-icon{
+                font-size: 16px;
+            }
+            .overview-guide-title-name{
+                padding-left: 8px;
+            }
+        }
+        .overview-guide-skip{
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--tiklab-blue);
+        }
+    }
     .overview-census{
         height: 345px;
         min-width: 550px;

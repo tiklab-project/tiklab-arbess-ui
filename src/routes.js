@@ -23,7 +23,7 @@ const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAs
 const PipelineDyan=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
-const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/processDesign/components/ProcessDesign"))
+const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/processDesign/component/ProcessDesign"))
 const DesignTrigger=AsyncComponent(()=>import("./pipeline/design/trigger/components/Trigger"))
 const DesignVariable=AsyncComponent(()=>import("./pipeline/design/variable/components/Variable"))
 const DesignPostprocess=AsyncComponent(()=>import("./pipeline/design/postprocess/components/Postprocess"))

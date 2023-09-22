@@ -123,9 +123,7 @@ const HistoryDetail = props =>{
 
     useEffect(()=>{
         if(execData && isClick){
-            if(isRun){
-                setId(autoLog(execData)?.id)
-            }
+            if(isRun){setId(autoLog(execData)?.id)}
             else {
                 const data = [...execData].pop()
                 if(data){setId(data.id)}
@@ -162,6 +160,7 @@ const HistoryDetail = props =>{
         setId(null)
         setDetailsLoading(true)
         setIsClick(true)
+        setIsActiveSlide(true)
         clearInterval(inter)
     }
 
@@ -176,6 +175,42 @@ const HistoryDetail = props =>{
             const anchorElement = document.getElementById(id)
             if (anchorElement) {
                 scrollRef.current.scrollTop = anchorElement.offsetTop - 130
+            }
+        }
+    }
+
+    /**
+     * 鼠标滚轮滑动事件
+     */
+    const onWheel = () => {
+        if(!isActiveSlide) return
+        setIsActiveSlide(false)
+    }
+
+    let startScrollTop  = 0;
+
+    /**
+     * 鼠标左键事件获取内容区域初始滚动位置
+     * @param e
+     */
+    const handleMouseDown = e =>{
+        if(e.button===0){
+            if(!isActiveSlide) return
+            startScrollTop  = scrollRef.current.scrollTop;
+        }
+    }
+
+
+    /**
+     * 结束滚动位置
+     * @param e
+     */
+    const handleMouseUp = e => {
+        if(e.button===0){
+            if(!isActiveSlide) return
+            const endScrollTop = scrollRef.current.scrollTop;
+            if(startScrollTop !== endScrollTop) {
+                setIsActiveSlide(false)
             }
         }
     }
@@ -275,7 +310,12 @@ const HistoryDetail = props =>{
                     pipeline={pipeline}
                     changeAnchor={changeAnchor}
                 />
-                <div className="str-detail-log" ref={scrollRef} onWheel={()=>setIsActiveSlide(false)}>
+                <div className="str-detail-log" 
+                     ref={scrollRef} 
+                     onWheel={onWheel}
+                     onMouseDown={handleMouseDown}
+                     onMouseUp={handleMouseUp}
+                >
                     { renderLog() }
                 </div>
             </div>

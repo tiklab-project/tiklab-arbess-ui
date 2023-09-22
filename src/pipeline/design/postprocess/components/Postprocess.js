@@ -3,7 +3,7 @@ import {Col, message, Row, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAdd from "./PostprocessAdd";
-import {TaskTitleIcon} from "../../processDesign/processDesign/components/TaskTitleIcon";
+import {TaskTitleIcon} from "../../processDesign/gui/gui/TaskTitleIcon";
 import Btn from "../../../../common/component/btn/Btn";
 import EmptyText from "../../../../common/component/emptyText/EmptyText";
 import Listaction from "../../../../common/component/list/Listaction";
@@ -24,8 +24,10 @@ const Postprocess = props =>{
         findMessageSendType,findOnePost
     } = postprocessStore
 
+    // 后置处理添加编辑弹出框
     const [postprocessVisible,setPostprocessVisible] = useState(false)
-    const [formValue,setFormValue] = useState("")
+    // 编辑内容
+    const [formValue,setFormValue] = useState(null)
 
     useEffect(()=>{
         // 是否存在消息发送方式
@@ -41,7 +43,7 @@ const Postprocess = props =>{
      * 添加后置处理
      */
     const addPostprocess = () =>{
-        setFormValue("")
+        setFormValue(null)
         setPostprocessVisible(true)
     }
 
@@ -50,11 +52,19 @@ const Postprocess = props =>{
      * @param record
      */
     const editPostprocess = record =>{
+        if(record.taskType==='script'){
+            setFormValue(record)
+            setPostprocessVisible(true)
+            return
+        }
         findOnePost(record.postprocessId).then(res=>{
             if(res.code===0){
                 setFormValue(res.data && res.data)
                 setPostprocessVisible(true)
+                return
             }
+            setFormValue(record)
+            setPostprocessVisible(true)
         })
     }
 
@@ -71,8 +81,8 @@ const Postprocess = props =>{
     const columns = [
         {
             title: "名称",
-            dataIndex: "name",
-            key: "name",
+            dataIndex: "postName",
+            key: "postName",
             width:"60%",
         },
         {

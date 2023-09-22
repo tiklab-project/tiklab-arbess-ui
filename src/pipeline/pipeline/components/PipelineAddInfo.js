@@ -283,7 +283,6 @@ const PipelineAddInfo = props =>{
                         }
                         return Promise.resolve()
                     },
-
                 })
             ]
         }

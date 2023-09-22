@@ -24,6 +24,19 @@ class TaskStore {
     @observable
     taskFresh = false
 
+    // 抽屉详情面板遮罩
+    @observable
+    taskDetailsDrawerMask = true
+
+    /**
+     * 改变抽屉详情面板遮罩
+     * @param value
+     */
+    @action
+    setTaskDetailsDrawerMask = value =>{
+        this.taskDetailsDrawerMask = value
+    }
+
     @action
     setDataItem = value =>{
         this.dataItem = value
@@ -61,6 +74,19 @@ class TaskStore {
     }
 
     /**
+     * 获取多任务,文本编辑器
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    finYamlTask = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        const data = await Axios.post("/tasks/finYamlTask",param)
+        return data
+    }
+
+    /**
      * 更新任务
      * @param values
      * @returns {Promise<*>}
@@ -69,7 +95,10 @@ class TaskStore {
     updateTask = async values =>{
         const data = await Axios.post("/tasks/updateTask",values)
         if(data.code===0){
-            await this.findOneTasksOrTask(this.dataItem.taskId)
+            await this.findOneTasks({
+                taskName:values.taskName,
+                pipelineId:values.pipelineId
+            })
             this.taskFresh=!this.taskFresh
         }
         return data
@@ -95,13 +124,12 @@ class TaskStore {
 
     /**
      * 删除任务
-     * @param value：taskId
-     * @returns {Promise<*>}
      */
     @action
     deleteTask = async value =>{
         const params = new FormData()
-        params.append("taskId",value)
+        params.append("taskName",value.taskName)
+        params.append("pipelineId",value.pipelineId)
         const data = await Axios.post("/tasks/deleteTask",params)
         if(data.code===0){
             message.info("删除成功",0.7)
@@ -112,14 +140,13 @@ class TaskStore {
 
     /**
      * 获取单个任务详情
-     * @param value
-     * @returns {Promise<unknown>}
      */
     @action
-    findOneTasksOrTask = async value =>{
+    findOneTasks = async value =>{
         const params = new FormData()
-        params.append('taskId',value)
-        const data = await Axios.post("/tasks/findOneTasksOrTask",params)
+        params.append('taskName',value.taskName)
+        params.append('pipelineId',value.pipelineId)
+        const data = await Axios.post("/tasks/findOneTasks",params)
         if(data.code===0){
             this.dataItem = data.data
         } else {

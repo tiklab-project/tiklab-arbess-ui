@@ -27,14 +27,10 @@ class VariableStore{
 
     /**
      * 删除变量
-     * @param value
-     * @returns {Promise<*>}
      */
     @action
     deleteVariable = async value =>{
-        const param = new FormData()
-        param.append("varId",value)
-        const data = await Axios.post("/pipelineVariable/deleteVariable",param)
+        const data = await Axios.post("/pipelineVariable/deleteVariable",value)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -57,14 +53,10 @@ class VariableStore{
 
     /**
      * 获取所有变量
-     * @param value
-     * @returns {Promise<*>}
      */
     @action
-    findAllVariable = async value =>{
-        const param = new FormData()
-        param.append("taskId",value)
-        const data = await Axios.post("/pipelineVariable/findAllVariable",param)
+    findVariable = async value =>{
+        const data = await Axios.post("/pipelineVariable/findVariable",value)
         if(data.code===0){
             this.variableData = data.data && data.data
         }

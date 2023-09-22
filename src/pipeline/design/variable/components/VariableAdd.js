@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Form,Input,Select,message} from "antd";
-import {PlusOutlined,MinusCircleOutlined } from "@ant-design/icons";
-import Btn from "../../../../common/component/btn/Btn";
 import Modals from "../../../../common/component/modal/Modal";
+import {Validation} from "../../../../common/utils/Client";
 
 /**
  * 变量添加编辑
@@ -12,7 +11,9 @@ import Modals from "../../../../common/component/modal/Modal";
  */
 const VariableAdd = props =>{
 
-    const {variableVisible,setVariableVisible,formValue,createVariable,pipelineId,updateVariable} = props
+    const {variableVisible,setVariableVisible,formValue,createVariable,pipelineId,updateVariable,
+        variableData,
+    } = props
 
     const [form] = Form.useForm()
 
@@ -22,7 +23,7 @@ const VariableAdd = props =>{
             if(formValue){
                 form.setFieldsValue({
                     ...formValue,
-                    valueList:formValue.taskType===1?[formValue.varValue]:formValue.valueList
+                    valueList:formValue.varType==="str"?[formValue.varValue]:formValue.valueList
                 })
                 return
             }
@@ -38,8 +39,9 @@ const VariableAdd = props =>{
             if(formValue){
                 const params = {
                     ...values,
-                    type:1,
-                    varId:formValue.varId
+                    type:"pipeline",
+                    lastKey:formValue.varKey,
+                    pipelineId:pipelineId,
                 }
                 updateVariable(params).then(res=>{
                     res.code===0 && message.info("更新成功",0.5)
@@ -47,8 +49,8 @@ const VariableAdd = props =>{
             }else {
                 const params = {
                     ...values,
-                    type:1,
-                    taskId:pipelineId,
+                    type:"pipeline",
+                    pipelineId:pipelineId,
                 }
                 createVariable(params).then(res=>{
                     res.code===0 && message.info("添加成功",0.5)
@@ -88,23 +90,43 @@ const VariableAdd = props =>{
                 <Form
                     form={form}
                     layout={"vertical"}
-                    initialValues={{valueList:[""],taskType:1}}
+                    autoComplete={"off"}
+                    initialValues={{valueList:[""],varType:"str"}}
                 >
-                    <Form.Item name="varKey" label="变量名" rules={[{required:true,message:"变量名不能为空"}]}>
+                    <Form.Item
+                        name="varKey"
+                        label="变量名"
+                        rules={[
+                            {required:true,message:"变量名不能为空"},
+                            Validation("变量名"),
+                            ({ getFieldValue }) => ({
+                                validator(rule,value) {
+                                    let nameArray = []
+                                    if(variableData){
+                                        nameArray = variableData && variableData.map(item=>item.varKey)
+                                    }
+                                    if (nameArray.includes(value)) {
+                                        return Promise.reject("变量名已经存在");
+                                    }
+                                    return Promise.resolve()
+                                },
+                            }),
+                        ]}
+                    >
                         <Input/>
                     </Form.Item>
-                    <Form.Item name="taskType" label="类别" rules={[{required:true,message:"类别不能为空"}]}>
+                    <Form.Item name="varType" label="类别" rules={[{required:true,message:"类别不能为空"}]}>
                         <Select>
-                            <Select.Option value={1}>字符串</Select.Option>
-                            {/*<Select.Option value={2}>单选</Select.Option>*/}
+                            <Select.Option value={"str"}>字符串</Select.Option>
+                            {/*<Select.Option value={"single"}>单选</Select.Option>*/}
                         </Select>
                     </Form.Item>
                     <Form.Item name="varValue" label="默认值" rules={[{required:true,message:"默认值不能为空"}]}>
                         <Input/>
                     </Form.Item>
-                    {/*<Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues.taskType!==currentValues.taskType}>*/}
+                    {/*<Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues.varType!==currentValues.varType}>*/}
                     {/*    {({ getFieldValue })=>*/}
-                    {/*        getFieldValue("taskType") === 1 ? (*/}
+                    {/*        getFieldValue("varType") === 1 ? (*/}
                     {/*            <Form.Item name="varValue" label="默认值" rules={[{required:true,message:"默认值不能为空"}]}>*/}
                     {/*                <Input/>*/}
                     {/*            </Form.Item>) :*/}

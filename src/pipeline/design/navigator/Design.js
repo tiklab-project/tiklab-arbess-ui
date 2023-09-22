@@ -34,7 +34,7 @@ const Design = props =>{
 
     const {route,match,pipelineStore} = props
 
-    const {pipeline,findOnePipeline,findDmUserPage} = pipelineStore
+    const {pipeline,setPipeline,findOnePipeline,findDmUserPage} = pipelineStore
     const {execStart} = historyStore
     const {taskList,taskMustField} = taskStore
     const {stageList,stageMustField} = stageStore
@@ -65,7 +65,6 @@ const Design = props =>{
             },
             domainId:pipelineId,
         })
-        findOnePipeline(pipelineId)
     },[])
 
     useEffect(()=>{
@@ -74,6 +73,16 @@ const Design = props =>{
             findOnePipeline(pipelineId)
         }
     },[isDetails])
+
+    /**
+     * 切换图形展示
+     */
+    const changView = type => {
+        setPipeline({
+            ...pipeline,
+            view:type
+        })
+    }
 
     /**
      * 开始运行
@@ -141,6 +150,17 @@ const Design = props =>{
                                 })
                             }
                         </div>
+                        {
+                            path === `/index/pipeline/${pipelineId}/config` &&
+                            <div className="changeView-type">
+                                <div className={`${pipeline?.view!=='text'?"type-active":""}`}
+                                     onClick={()=>changView('gui')}
+                                >图形化编辑器</div>
+                                <div className={`${pipeline?.view==='text'?"type-active":""}`}
+                                     onClick={()=>changView('text')}
+                                >文本编辑器</div>
+                            </div>
+                        }
                         <div className="changeView-btn">
                             {
                                 pipeline?.state===2 ?

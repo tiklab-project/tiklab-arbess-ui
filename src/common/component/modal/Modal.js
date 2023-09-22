@@ -42,20 +42,18 @@ const Modals = props => {
             closable={false}
             destroyOnClose={true}
             footer={footer || modalFooter}
-            className="mf"
+            className="mf mf-modal"
         >
-            <div className='mf-modal'>
-                <div className='mf-modal-up'>
-                    <div>{title}</div>
-                    <Btn
-                        title={<CloseOutlined style={{fontSize:16}}/>}
-                        type="text"
-                        onClick={res.onCancel}
-                    />
-                </div>
-                <div className='mf-modal-content'>
-                    {children}
-                </div>
+            <div className='mf-modal-up'>
+                <div>{title}</div>
+                <Btn
+                    title={<CloseOutlined style={{fontSize:16}}/>}
+                    type="text"
+                    onClick={res.onCancel}
+                />
+            </div>
+            <div className='mf-modal-content'>
+                {children}
             </div>
         </Modal>
     )
