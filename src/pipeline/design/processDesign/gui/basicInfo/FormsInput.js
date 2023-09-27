@@ -10,9 +10,10 @@ import {Validation} from "../../../../../common/utils/Client";
  */
 const FormsInput = props =>{
 
-    const {placeholder,label,name,addonBefore,isValid,taskStore,pipelineStore} = props
+    const {placeholder,label,name,addonBefore,isValid,taskStore,stageStore,pipelineStore} = props
 
-    const {dataItem,updateTask,updateTaskName} = taskStore
+    const {dataItem,updateTask} = taskStore
+    const {updateStage} = stageStore
 
     const {pipeline} = pipelineStore
 
@@ -63,32 +64,25 @@ const FormsInput = props =>{
      * @param e
      */
     const onBlur = e => {
-        // WhetherChange(e.target.value,dataItem[name])：获取内容更改状态
-        // validation(e.target.value,dataItem.type,name)：效验
-
         const value = e.target.value
-
         // 文本内容效验是否通过
         const valid =  validation(value,dataItem.taskType,name)
-
+        const isTaskChange =  WhetherChange(value,dataItem.task && dataItem.task[name])
         setEnter(false)
-
-        if(valid){
-            if(name==="taskName"){
-                // 任务名称是否修改
-                const isNameChange = WhetherChange(value,dataItem.taskName)
-                // 改变任务名称
-                isNameChange && updateTaskName({
+        if(valid && isTaskChange){
+            if(pipeline.type===1){
+                updateTask({
                     pipelineId:pipeline.id,
-                    lastName: dataItem.taskName,
-                    taskName:value,
+                    taskName:dataItem.taskName,
+                    values:{[name]:value}
                 })
-                return
+                return;
             }
-            // 任务是否修改内容
-            const isTaskChange =  WhetherChange(value,dataItem.task && dataItem.task[name])
-            isTaskChange && updateTask({
+
+            updateStage({
                 pipelineId:pipeline.id,
+                stageName:dataItem.stageName,
+                parallelName:dataItem.parallelName,
                 taskName:dataItem.taskName,
                 values:{[name]:value}
             })
@@ -97,7 +91,6 @@ const FormsInput = props =>{
 
     /**
      * 设置表单校验规则
-     * @returns {[{message: string, required: boolean},(function({getFieldValue: *}): {validator(*, *): (Promise<never>)})]}
      */
     const rules = () =>{
         let rule
@@ -148,4 +141,4 @@ const FormsInput = props =>{
 
 }
 
-export default inject("taskStore","pipelineStore")(observer(FormsInput))
+export default inject("taskStore","stageStore","pipelineStore")(observer(FormsInput))

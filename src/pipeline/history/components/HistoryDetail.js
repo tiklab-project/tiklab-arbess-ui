@@ -24,18 +24,13 @@ const HistoryDetail = props =>{
 
     // 获取当前历史运行状态
     const isRun = historyItem?.runStatus === "run";
-
     // 获取当前流水线信息
     const pipeline = historyItem && historyItem.pipeline;
-
     // 当前流水线运行State
     const state = pipeline?.type===1 ? "runState":"stageState";
     const time = pipeline?.type===1 ? "runTime":"stageTime";
 
     const [execData,setExecData] = useState([])
-
-    // 运行时是否点击锚点
-    const [isClick,setIsClick] = useState(true)
 
     // 构建详情页面数据未返回时加载状态
     const [detailsLoading,setDetailsLoading] = useState(true)
@@ -46,7 +41,7 @@ const HistoryDetail = props =>{
     // 日志id
     const [id,setId] = useState(null)
 
-    let inter
+    let inter;
     useEffect(()=>{
         if(historyItem?.instanceId){
             setDetailsLoading(true)
@@ -122,14 +117,14 @@ const HistoryDetail = props =>{
     }
 
     useEffect(()=>{
-        if(execData && isClick){
+        if(execData && isActiveSlide){
             if(isRun){setId(autoLog(execData)?.id)}
             else {
                 const data = [...execData].pop()
                 if(data){setId(data.id)}
             }
         }
-    },[execData,isClick])
+    },[execData,isActiveSlide])
 
 
     /**
@@ -159,7 +154,6 @@ const HistoryDetail = props =>{
     const init = ()=>{
         setId(null)
         setDetailsLoading(true)
-        setIsClick(true)
         setIsActiveSlide(true)
         clearInterval(inter)
     }
@@ -168,7 +162,6 @@ const HistoryDetail = props =>{
      * 锚点跳转
      */
     const changeAnchor = id =>{
-        setIsClick(false)
         setIsActiveSlide(false)
         setId(id)
         if (id) {

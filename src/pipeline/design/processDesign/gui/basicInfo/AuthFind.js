@@ -15,13 +15,13 @@ import FormsSelect from "./FormsSelect";
  */
 const AuthFind = props =>{
 
-    const {taskStore,authStore,serverStore,hostStore,pipelineStore}=props
+    const {taskStore,stageStore,authStore,serverStore,hostStore,pipelineStore}=props
 
     const {findAllAuth} = authStore
     const {findAllAuthServerList} = serverStore
     const {findAllAuthHostList} = hostStore
     const {updateTask,dataItem} = taskStore
-
+    const {updateStage} = stageStore
     const {pipeline} = pipelineStore
 
     // 是否重新查询
@@ -94,13 +94,23 @@ const AuthFind = props =>{
      * 改变凭证
      * @param value
      */
-    const changeGitSelect = (value) =>{
-        updateTask({
+    const changeGitSelect = value =>{
+        setBordered(false)
+        if(pipeline.type===1){
+            updateTask({
+                pipelineId:pipeline.id,
+                taskName:dataItem.taskName,
+                values: {authId:value}
+            })
+            return
+        }
+        updateStage({
             pipelineId:pipeline.id,
+            stageName:dataItem.stageName,
+            parallelName:dataItem.parallelName,
             taskName:dataItem.taskName,
             values: {authId:value}
         })
-        setBordered(false)
     }
 
     /**
@@ -270,4 +280,4 @@ const AuthFind = props =>{
     )
 }
 
-export default inject("taskStore","authStore","serverStore","hostStore","pipelineStore")(observer(AuthFind))
+export default inject("taskStore","stageStore","authStore","serverStore","hostStore","pipelineStore")(observer(AuthFind))

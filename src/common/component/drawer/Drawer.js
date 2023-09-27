@@ -32,7 +32,7 @@ const PipelineDrawer = props =>{
             contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0,overflow:"hidden"}}
         >
-            <div ref={type && detailRef}>
+            <div ref={type && detailRef} >
                 {children}
             </div>
         </Drawer>

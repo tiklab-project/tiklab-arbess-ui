@@ -16,8 +16,8 @@ import Btn from "../../../common/component/btn/Btn";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
 import {debounce} from "../../../common/utils/Client";
-import "./Design.scss";
 import DiskModal from "../../../common/component/modal/DiskModal";
+import "./Design.scss";
 
 /**
  * 设计页面
@@ -34,7 +34,7 @@ const Design = props =>{
 
     const {route,match,pipelineStore} = props
 
-    const {pipeline,setPipeline,findOnePipeline,findDmUserPage} = pipelineStore
+    const {pipeline,setPipeline,findOnePipeline} = pipelineStore
     const {execStart} = historyStore
     const {taskList,taskMustField} = taskStore
     const {stageList,stageMustField} = stageStore
@@ -55,17 +55,6 @@ const Design = props =>{
     useEffect(()=>{
         setPath(props.location.pathname)
     },[props.location.pathname])
-
-    useEffect(()=>{
-        // 获取项目成员
-        findDmUserPage({
-            pageParam:{
-                pageSize:5,
-                currentPage:1
-            },
-            domainId:pipelineId,
-        })
-    },[])
 
     useEffect(()=>{
         // 监听运行状态，获取流水线信息

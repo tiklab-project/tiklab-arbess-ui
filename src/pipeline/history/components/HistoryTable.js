@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Table, Tooltip, Row, Col, message} from "antd";
 import {MinusCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
+import {deleteSuccessReturnCurrenPage,debounce} from "../../../common/utils/Client";
 import EmptyText from "../../../common/component/emptyText/EmptyText";
 import Profile from "../../../common/component/profile/Profile";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
@@ -9,13 +10,11 @@ import Page from "../../../common/component/page/Page";
 import ListAction from "../../../common/component/list/Listaction";
 import PipelineDrawer from "../../../common/component/drawer/Drawer";
 import DiskModal from "../../../common/component/modal/DiskModal";
-import {deleteSuccessReturnCurrenPage,debounce} from "../../../common/utils/Client";
 import HistoryScreen from "./HistoryScreen";
 import HistoryDetail from "./HistoryDetail";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
 import "./HistoryTable.scss"
-
 
 const HistoryTable = props =>{
 
@@ -105,7 +104,7 @@ const HistoryTable = props =>{
             title: "名称",
             dataIndex: "findNumber",
             key: "findNumber",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
             render:(text,record) =>{
                 return <span className="history-table-name" onClick={()=>details(record)}>
@@ -141,8 +140,8 @@ const HistoryTable = props =>{
                     {
                         text===1?
                             <>
-                                <Profile userInfo={record.user}/>
-                                <div className="runWay-user">{record.user.nickname}手动触发</div>
+                                <Profile userInfo={record?.user}/>
+                                <div className="runWay-user">{record?.user?.nickname || "--"}手动触发</div>
                             </>
                             :
                             <>
@@ -164,7 +163,7 @@ const HistoryTable = props =>{
             title: "耗时",
             dataIndex: "runTimeDate",
             key: "runTimeDate",
-            width:"17%",
+            width:"15%",
             ellipsis:true,
         },
         {

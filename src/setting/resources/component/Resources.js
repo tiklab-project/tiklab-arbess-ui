@@ -101,7 +101,7 @@ const Resources = props => {
      * 手动选择/取消选择所有行的回调
      */
     const onSelectAll = (selected,selectedRows,changeRows) => {
-        const newArr = changeRows.map(item=>item && item.pipelineId).filter(item2 => item2 !== undefined)
+        const newArr = changeRows.map(item=>item && item.pipelineId).filter(Boolean)
         if(selected){
             const uniq = Array.from(new Set([...newArr,...selectedRowKeys]))
             setSelectedRowKeys(uniq)

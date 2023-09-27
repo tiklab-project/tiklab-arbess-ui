@@ -19,50 +19,29 @@ import "./PipelineAddInfo.scss";
  */
 const PipelineAddInfo = props =>{
 
-    const {set,pipelineStore,setCurrent,onClick,setBaseInfo,setIsLoading} = props
+    const {set,pipelineStore,setCurrent,onClick,baseInfo,setBaseInfo,setIsLoading} = props
 
-    const {pipeline,pipelineList,findUserPage,updatePipeline} = pipelineStore
+    const {pipeline,pipelineList,updatePipeline} = pipelineStore
 
     const [form] = Form.useForm()
-    const userId = getUser().userId
-
-    // 流水线类型
-    const [type,setType] = useState(1)
-
-    // 流水线权限 -- 1私有或2公有
-    const [powerType,setPowerType] = useState(1)
-
-    // 全部用户
-    const [allUserList,setAllUserList] = useState([])
-
-    // 选中的用户
-    const [yUserList,setYUserList] = useState([])
+    const user = getUser()
 
     // 添加用户下拉显示
     const [visible,setVisible] = useState(false)
 
+    // 流水线类型 -- 1多任务或2或阶段
+    const [type,setType] = useState(baseInfo?.type || 1)
+
+    // 流水线权限 -- 1私有或2公有
+    const [powerType,setPowerType] = useState(1)
+
+    // 流水线私有添加用户
+    const [yUserList,setYUserList] = useState(baseInfo?.userList || [])
+
     useEffect(()=>{
-        if(set){
-            // 初始化权限
-            setPowerType(pipeline.power)
-            // 初始化表单
-            form.setFieldsValue({name:pipeline.name})
-        }
-        else {
-            // 初始化获取用户
-            findUserPage({
-                pageParam:{
-                    pageSize:5,
-                    currentPage:1
-                }
-            }).then(res=>{
-                const data = res.data && res.data.dataList
-                if(res.code===0){
-                    setAllUserList(data)
-                    setYUserList(data.map(item=>({...item,adminRole:true})).filter(item=>item.id===userId))
-                }
-            })
-        }
+        // 初始化权限
+        if(set){setPowerType(pipeline.power)}
+        else {setPowerType(baseInfo?.power || 1)}
     },[])
 
     /**
@@ -95,8 +74,8 @@ const PipelineAddInfo = props =>{
         form.validateFields().then(value=>{
             if(set){
                 const params={
-                    id:pipeline.id,
-                    name:value.name===""? pipeline.name:value.name,
+                    id: pipeline.id,
+                    name: value.name===""? pipeline.name:value.name,
                     power: powerType
                 }
                 setIsLoading(true)
@@ -110,12 +89,11 @@ const PipelineAddInfo = props =>{
                 return
             }
             setCurrent(1)
-            const userList = yUserList && yUserList.map(item=>({id:item.id,adminRole:item.adminRole}))
             setBaseInfo({
-                type:type,
+                type: type,
                 name: value.name,
                 power: powerType,
-                userList,
+                userList: yUserList,
             })
         })
     }
@@ -172,6 +150,7 @@ const PipelineAddInfo = props =>{
             key:"nickname",
             width:"40%",
             ellipsis:true,
+            render: text => text || '--'
         },
         {
             title:"名称",
@@ -182,7 +161,7 @@ const PipelineAddInfo = props =>{
             render:(text,record)=>{
                 return  <Space>
                             <Profile userInfo={record}/>
-                            {text}
+                            {text || '--'}
                         </Space>
             }
         },
@@ -194,11 +173,11 @@ const PipelineAddInfo = props =>{
             ellipsis:true,
             render: (_,record)=>(
                 <Select
-                    defaultValue={record.id===userId}
                     bordered={false}
                     showarrow={"false"}
                     style={{width:120}}
-                    disabled={record.id===userId}
+                    defaultValue={record.adminRole}
+                    disabled={record.id===user.userId}
                     onChange={value=>changePower(record,value)}
                 >
                     <Select.Option value={true}>管理员角色</Select.Option>
@@ -213,7 +192,7 @@ const PipelineAddInfo = props =>{
             width:"5%",
             ellipsis:true,
             render: (_,record) => {
-                if (record.id !== userId) {
+                if (record.id !== user.userId) {
                     return  <Tooltip title="移出用户">
                                 <DeleteOutlined onClick={()=>del(record)}/>
                             </Tooltip>
@@ -239,9 +218,7 @@ const PipelineAddInfo = props =>{
                         style={{right:0,top:30}}
                     >
                         <PipelineUserAdd
-                            visible={visible}
                             setVisible={setVisible}
-                            allUserList={allUserList}
                             yUserList={yUserList}
                             setYUserList={setYUserList}
                             pipelineStore={pipelineStore}
@@ -313,7 +290,7 @@ const PipelineAddInfo = props =>{
     if(set){
         return (
             <>
-                <Form form={form} autoComplete="off" layout={"vertical"}>
+                <Form form={form} autoComplete="off" layout={"vertical"} initialValues={{name:pipeline?.name}}>
                     <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
                         <Input allowClear style={{width:612}}/>
                     </Form.Item>
@@ -332,7 +309,7 @@ const PipelineAddInfo = props =>{
 
     return(
         <>
-            <Form form={form} autoComplete="off" layout={"vertical"}>
+            <Form form={form} autoComplete="off" layout={"vertical"} initialValues={{name:baseInfo?.name}}>
                 <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
                     <Input allowClear style={{background:"#fff"}}/>
                 </Form.Item>

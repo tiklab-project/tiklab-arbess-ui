@@ -26,7 +26,7 @@ class TaskStore {
 
     // 抽屉详情面板遮罩
     @observable
-    taskDetailsDrawerMask = true
+    taskDetailsDrawerMask = false
 
     /**
      * 改变抽屉详情面板遮罩
@@ -53,6 +53,10 @@ class TaskStore {
         if(data.code===0){
             message.info("添加成功",0.7)
             this.taskFresh = !this.taskFresh
+        }
+
+        if(data.code===10000){
+            message.info(data.msg)
         }
         return data
     }
@@ -95,11 +99,11 @@ class TaskStore {
     updateTask = async values =>{
         const data = await Axios.post("/tasks/updateTask",values)
         if(data.code===0){
+            this.taskFresh=!this.taskFresh
             await this.findOneTasks({
                 taskName:values.taskName,
                 pipelineId:values.pipelineId
             })
-            this.taskFresh=!this.taskFresh
         }
         return data
     }
@@ -115,9 +119,12 @@ class TaskStore {
         if(data.code===0){
             this.dataItem = {
                 ...this.dataItem,
-                ...value.values
+                ...value.values,
             }
             this.taskFresh=!this.taskFresh
+        }
+        if(data.code===10000){
+            message.info(data.msg)
         }
         return data
     }
@@ -148,7 +155,10 @@ class TaskStore {
         params.append('pipelineId',value.pipelineId)
         const data = await Axios.post("/tasks/findOneTasks",params)
         if(data.code===0){
-            this.dataItem = data.data
+            this.dataItem = {
+                ...data.data,
+                formType:'task',
+            }
         } else {
             message.info(data.msg)
         }

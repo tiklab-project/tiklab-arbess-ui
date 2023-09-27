@@ -12,10 +12,12 @@ import FormsSelect from "../FormsSelect";
  */
 const TestOn = props => {
 
-    const {taskStore,testOnStore} = props
+    const {taskStore,stageStore,testOnStore,pipelineStore} = props
 
     const {updateTask,dataItem} = taskStore
+    const {updateStage} = stageStore
     const {findTestSpace,testSpace,findTestEnv,testEnv,findTestPlan,testPlan} = testOnStore
+    const {pipeline} = pipelineStore
 
     // 测试空间 | 测试计划 | 测试环境 聚焦状态
     const [border,setBorder] = useState(null)
@@ -55,7 +57,18 @@ const TestOn = props => {
      */
     const onChange = (value,type) => {
         setBorder(null)
-        updateTask({
+        if(pipeline.type===1){
+            updateTask({
+                pipelineId:pipeline.id,
+                taskName:dataItem.taskName,
+                values:{[type]: {id:value}}
+            })
+            return
+        }
+        updateStage({
+            pipelineId:pipeline.id,
+            stageName:dataItem.stageName,
+            parallelName:dataItem.parallelName,
             taskName:dataItem.taskName,
             values:{[type]: {id:value}}
         })
@@ -167,5 +180,5 @@ const TestOn = props => {
     )
 }
 
-export default inject("taskStore","testOnStore")(observer(TestOn))
+export default inject("taskStore","stageStore","testOnStore","pipelineStore")(observer(TestOn))
 

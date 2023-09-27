@@ -18,10 +18,9 @@ import "./TaskDetails.scss";
  */
 const TaskDetails = props =>{
 
-    const {taskFormDrawer,setTaskFormDrawer,taskStore,stageStore} = props
+    const {taskFormDrawer,setTaskFormDrawer,taskStore} = props
 
     const {dataItem} = taskStore
-    const {updateStageName} = stageStore
 
     // 标签类型
     const [handleType,setHandleType] = useState("base")
@@ -98,8 +97,7 @@ const TaskDetails = props =>{
                 <div className="body">
                     <div className="body-taskForm">
                         <BasicInfo
-                            dataItem={dataItem}
-                            updateStageName={updateStageName}
+                            {...props}
                         />
                         {/*<Tabs*/}
                         {/*    tabLis={dataItem && dataItem.taskName ? lis: [{id:"base", title: "基本信息"}]}*/}

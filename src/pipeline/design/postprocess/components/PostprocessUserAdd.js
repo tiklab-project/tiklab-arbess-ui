@@ -10,7 +10,7 @@ const PostprocessUserAdd = props =>{
 
     const {pipelineStore,yUserList,setYUserList,type} = props
 
-    const {pipeline,userPage,pipelineUserList,findDmUserPage} = pipelineStore
+    const {pipeline,userPage,findDmUserPage} = pipelineStore
 
     // 消息通知人员下拉框
     const [userAddVisible,setUserAddVisible] = useState(false)
@@ -34,15 +34,20 @@ const PostprocessUserAdd = props =>{
     })
 
     useEffect(()=>{
-        if(userAddVisible){
-            setUserList(pipelineUserList)
-        }
-        return ()=>{
-            setSelectedRowKeys([])
-            setAddUser([])
-        }
-    },[userAddVisible])
+        findDmUser()
+    },[findUserParam])
 
+    const findDmUser = () => {
+        findDmUserPage({
+            ...findUserParam,
+            domainId:pipeline.id
+        }).then(res=>{
+            if(res.code===0){
+                setUserList(res.data?.dataList || [])
+            }
+        })
+    }
+    
     /**
      * 添加用户
      */
@@ -60,7 +65,7 @@ const PostprocessUserAdd = props =>{
 
     /**
      * 已选中的用户不可添加
-     * @param record：表格行信息
+     * @param record
      * @returns {*}
      */
     const disabledOpt = record =>{
@@ -112,8 +117,8 @@ const PostprocessUserAdd = props =>{
      * @param changeRows
      */
     const onSelectAll = (selected,selectedRows,changeRows) => {
-        const newArr = changeRows.map(item=>item && item.id).filter(item2 => item2 !== undefined)
-        const newUser = changeRows.map(item=>({...item,receiveType: 1})).filter(item2=>item2 !==undefined)
+        const newArr = changeRows.map(item=>item && item.id).filter(Boolean)
+        const newUser = changeRows.map(item=>({...item,receiveType: 1})).filter(Boolean)
         let row,user
         if(selected){
             row = Array.from(new Set([...selectedRowKeys,...newArr]))
@@ -146,27 +151,11 @@ const PostprocessUserAdd = props =>{
      * @param page
      */
     const changUserPage = page =>{
-        findUser({
+        setFindUserParam({
             ...findUserParam,
             pageParam:{
                 pageSize:5,
                 currentPage:page
-            }
-        })
-    }
-
-    /**
-     * 查询项目用户
-     * @param value
-     */
-    const findUser = value =>{
-        setFindUserParam(value)
-        findDmUserPage({
-            ...value,
-            domainId:pipeline.id
-        }).then(res=>{
-            if(res.code===0){
-                setUserList(res.data && res.data.dataList)
             }
         })
     }

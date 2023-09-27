@@ -3,6 +3,7 @@ import {Spin, Steps} from "antd";
 import {inject,observer} from "mobx-react";
 import PipelineAddMould from "./PipelineAddMould";
 import PipelineAddInfo from "./PipelineAddInfo";
+import {getUser} from "tiklab-core-ui";
 import Btn from "../../../common/component/btn/Btn";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import "./pipelineAdd.scss";
@@ -18,6 +19,7 @@ const PipelineAdd = props =>{
     const {pipelineStore} = props
 
     const {createPipeline} = pipelineStore
+    const user = getUser()
 
     // 添加状态
     const [isLoading,setIsLoading] = useState(false)
@@ -29,14 +31,26 @@ const PipelineAdd = props =>{
     const [templateType,setTemplateType] = useState(1)
 
     // 基本信息
-    const [baseInfo,setBaseInfo] = useState({})
+    const [baseInfo,setBaseInfo] = useState({
+        power:1,
+        type:1,
+        userList:[{
+            ...user,
+            id: user.userId,
+            adminRole: true
+        }]
+    })
 
     /**
      * 创建流水线
      */
     const createPip = () => {
+        const {name,type,power,userList} = baseInfo
         const params = {
-            ...baseInfo,
+            name:name,
+            type:type,
+            power:power,
+            userList:userList && userList.map(item=>({id:item.id,adminRole:item.adminRole})),
             template:templateType,
         }
         setIsLoading(true)
@@ -74,33 +88,11 @@ const PipelineAdd = props =>{
     const renderInfo = (
         <PipelineAddInfo
             {...props}
-            pipelineStore={pipelineStore}
-            setCurrent={setCurrent}
-            setBaseInfo={setBaseInfo}
             set={false}
+            setCurrent={setCurrent}
+            baseInfo={baseInfo}
+            setBaseInfo={setBaseInfo}
         />
-    )
-
-    const renderBtn = (
-        current === 1 &&
-        <>
-            <Btn
-                onClick={()=>props.history.push("/index/pipeline")}
-                title={"取消"}
-                isMar={true}
-            />
-            <Btn
-                onClick={()=>setCurrent(0)}
-                title={"上一步"}
-                isMar={true}
-            />
-            <Btn
-                type={"primary"}
-                onClick={()=>createPip()}
-                title={"确定"}
-            />
-        </>
-
     )
 
     const steps = [
@@ -129,9 +121,26 @@ const PipelineAdd = props =>{
                     <div className="steps-content">
                         {steps[current].content}
                     </div>
-                    <div className="steps-bottom">
-                        {renderBtn}
-                    </div>
+                    {
+                        current===1 &&
+                        <div className="steps-bottom">
+                            <Btn
+                                onClick={()=>props.history.push("/index/pipeline")}
+                                title={"取消"}
+                                isMar={true}
+                            />
+                            <Btn
+                                onClick={()=>setCurrent(0)}
+                                title={"上一步"}
+                                isMar={true}
+                            />
+                            <Btn
+                                type={"primary"}
+                                onClick={()=>createPip()}
+                                title={"确定"}
+                            />
+                        </div>
+                    }
                 </div>
             </div>
         </Spin>

@@ -61,6 +61,7 @@ const Gui = props =>{
             />
 
             <TaskDetails
+                pipeline={pipeline}
                 taskFormDrawer={taskFormDrawer}
                 setTaskFormDrawer={setTaskFormDrawer}
             />

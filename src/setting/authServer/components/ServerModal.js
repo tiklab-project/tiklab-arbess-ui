@@ -257,7 +257,7 @@ const ServerModal = props =>{
      * @returns {boolean}
      */
     const serverAddressDisabled = () => {
-        const {type} = formValue
+        const type = formValue?.type
         if(type==='xcode' || type==='xpack' || type==='teston'){
             return version === 'cloud'
         }

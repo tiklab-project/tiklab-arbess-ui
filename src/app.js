@@ -33,7 +33,7 @@ const App = ({allStore,routes}) => {
         <PluginProvider store={initPluginData}>
             <Provider {...allStore}>
                 <ConfigProvider locale={zhCN}>
-                    <HashRouter >
+                    <HashRouter>
                         { renderRoutes(initPluginData.routes) }
                     </HashRouter>
                 </ConfigProvider>

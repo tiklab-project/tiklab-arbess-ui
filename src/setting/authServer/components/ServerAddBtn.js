@@ -37,7 +37,7 @@ const ServerAddBtn = props =>{
                 visible={visible}
                 setVisible={setVisible}
                 type={type}
-                formValue={formValue || ""}
+                formValue={formValue || null}
                 findAuth={findAuth}
                 isConfig={isConfig}
             />

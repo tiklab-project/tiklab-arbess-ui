@@ -13,11 +13,11 @@ const PostprocessAdd = props =>{
 
     const {postprocessVisible,setPostprocessVisible,formValue,postprocessStore,pipelineStore} = props
 
-    const {pipeline,pipelineUserList} = pipelineStore
+    const {pipeline} = pipelineStore
     const {createPost,updatePost,mesSendData} = postprocessStore
 
     const [form] = Form.useForm()
-    const userId = getUser().userId
+    const user = getUser()
     const mirrorRefs = useRef(null)
 
     // 代码块行高亮
@@ -38,12 +38,11 @@ const PostprocessAdd = props =>{
                 setYUserList(formValue.values.userList || [])
                 return
             }
-            // 获取通知人员
-            let arr = []
-            pipelineUserList.map(item=> {
-                item.user && item.user.id===userId && arr.push(Object.assign({},item,{receiveType:1}))
-            })
-            setYUserList([...arr])
+            // 初始化通知用户
+            setYUserList([{
+                user:{...user,id:user.userId},
+                receiveType:1
+            }])
             // 清空表单
             form.resetFields()
         }
@@ -119,9 +118,6 @@ const PostprocessAdd = props =>{
                     res.code===0 && message.info("更新成功",0.5)
                 })
             }else {
-                params = {
-                    ...params,
-                }
                 createPost(params).then(res=>{
                     res.code===0 && message.info("添加成功",0.5)
                 })
@@ -170,7 +166,7 @@ const PostprocessAdd = props =>{
             width:"20%",
             ellipsis:true,
             render: (text,record) => {
-                if (record.user.id !== userId) {
+                if (record.user.id !== user.userId) {
                     return  <Tooltip title="移出用户">
                                 <DeleteOutlined onClick={()=>remove(record)}/>
                             </Tooltip>

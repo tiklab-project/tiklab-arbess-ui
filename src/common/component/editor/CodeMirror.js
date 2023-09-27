@@ -2,7 +2,6 @@ import React,{useEffect,useRef} from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
-
 // 设置代码语言模式
 import "codemirror/mode/shell/shell.js";
 import "codemirror/mode/ruby/ruby.js";
@@ -132,32 +131,29 @@ export const TextMirrorEditor =  props => {
      */
     const handleShowHint = () =>{
 
-        const cmInstance = editorRef.current.editor
-        // 得到光标
-        let cursor = cmInstance.getCursor()
-        // 得到行内容
-        let cursorLine = cmInstance.getLine(cursor.line)
-        // 得到光标位置
-        let end = cursor.ch
-        // 得到输入的当前输入的字符
-        const One = `${cursorLine.charAt(end - 1)}`
-        // 得到最后空格后面的字符串，无空格第一个字符串
-        const Two = cursorLine.trim().split(" ")[cursorLine.trim().split(" ").length-1]
-        if(One.trim() !== ""){
-            console.log(Two,"cursorLine")
-        }
+        const editor = editorRef.current.editor
+
+        const cursor = editor.getCursor()
+
+        const A1 = cursor.line;
+        const A2 = cursor.ch;
+
+        const B1 = editor.findWordAt({line: A1, ch: A2}).anchor.ch;
+        const B2 = editor.findWordAt({line: A1, ch: A2}).head.ch;
+
+        const word = editor.getRange({line: A1,ch: B1}, {line: A1,ch: B2})
 
         let list = []
-        if (Two==="e" || One==="$") {
+        if (word==="e" || word==="$") {
             list.push('echo','sdgsg')
         }
 
         // 得到光标标识
-        let token = cmInstance.getTokenAt(cursor)
+        let token = editor.getTokenAt(cursor)
 
         return {
             list: list,
-            from: { ch: end, line: cursor.line },
+            from: { ch: cursor.ch, line: cursor.line },
             to: { ch: token.end, line: cursor.line },
         }
     }

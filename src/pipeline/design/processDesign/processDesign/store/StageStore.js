@@ -1,6 +1,7 @@
 import {observable,action} from "mobx";
 import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
+import taskStore from "./TaskStore";
 
 class StageStore {
 
@@ -27,6 +28,9 @@ class StageStore {
         if(data.code===0){
             message.info("添加成功",0.7)
             this.stageFresh=!this.stageFresh
+        }
+        if(data.code===10000){
+            message.info(data.msg)
         }
         return data
     }
@@ -61,6 +65,46 @@ class StageStore {
     }
 
     /**
+     * 更新多阶段
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    updateStage = async value =>{
+        const data = await Axios.post("/stage/updateStage",value)
+        if(data.code===0){
+            this.stageFresh=!this.stageFresh
+            await this.findOneStage({
+                pipelineId:value.pipelineId,
+                stageName:value.stageName,
+                parallelName:value.parallelName,
+                taskName:value.taskName,
+            })
+        }
+        return data
+    }
+
+    /**
+     * 更新多阶段名称
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findOneStage = async value =>{
+        const data = await Axios.post("/stage/findOneStage",value)
+        if(data.code===0){
+            taskStore.dataItem = {
+                ...data.data,
+                formType:'task',
+                stageName:value.stageName,
+                parallelName:value.parallelName,
+            }
+        }
+        return data
+    }
+
+
+    /**
      * 更新多阶段名称
      * @param value
      * @returns {Promise<*>}
@@ -69,7 +113,14 @@ class StageStore {
     updateStageName = async value =>{
         const data = await Axios.post("/stage/updateStageName",value)
         if(data.code===0){
-            this.stageFresh=!this.stageFresh
+            taskStore.dataItem = {
+                ...taskStore.dataItem,
+                ...value.values
+            }
+            this.stageFresh = !this.stageFresh
+        }
+        if(data.code===10000){
+            message.info(data.msg)
         }
         return data
     }
@@ -81,9 +132,7 @@ class StageStore {
      */
     @action
     deleteStage = async value =>{
-        const param = new FormData()
-        param.append("taskId",value)
-        const data = await Axios.post("/stage/deleteStage",param)
+        const data = await Axios.post("/stage/deleteStage",value)
         if(data.code===0){
             message.info("删除成功",0.7)
             this.stageFresh=!this.stageFresh

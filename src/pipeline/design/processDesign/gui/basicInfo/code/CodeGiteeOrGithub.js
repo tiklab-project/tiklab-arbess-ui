@@ -12,11 +12,11 @@ import FormsSelect from "../FormsSelect";
  */
 const CodeGiteeOrGithub = props =>{
 
-    const {authorizeStore,taskStore,pipelineStore} = props
+    const {authorizeStore,taskStore,stageStore,pipelineStore} = props
 
     const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
     const {updateTask,dataItem} = taskStore
-
+    const {updateStage} = stageStore
     const {pipeline} = pipelineStore
 
     // 分支选择器是否禁止
@@ -33,10 +33,10 @@ const CodeGiteeOrGithub = props =>{
 
     useEffect(()=>{
         // 分支是否禁止
-        if(dataItem && dataItem.task.codeName){
+        if(dataItem?.task?.codeName){
             setProhibited(false)
         }
-    },[dataItem.task.codeName])
+    },[dataItem?.task?.codeName])
 
     /**
      * 切换仓库
@@ -44,11 +44,7 @@ const CodeGiteeOrGithub = props =>{
      */
     const changeGitStoreHouse = value =>{
         setProhibited(false)
-        updateTask({
-            pipelineId:pipeline.id,
-            taskName:dataItem.taskName,
-            values:{codeName:value}
-        })
+        changTask("codeName",value)
     }
 
     /**
@@ -56,10 +52,27 @@ const CodeGiteeOrGithub = props =>{
      * @param value
      */
     const changeBranch = value => {
-        updateTask({
+        changTask("codeBranch",value)
+    }
+
+    /**
+     * 更改任务
+     */
+    const changTask = (type,value) =>{
+        if(pipeline.type===1){
+            updateTask({
+                pipelineId:pipeline.id,
+                taskName:dataItem.taskName,
+                values:{[type]:value}
+            })
+            return
+        }
+        updateStage({
             pipelineId:pipeline.id,
+            stageName:dataItem.stageName,
+            parallelName:dataItem.parallelName,
             taskName:dataItem.taskName,
-            values:{codeBranch:value}
+            values:{[type]:value}
         })
     }
 
@@ -124,4 +137,4 @@ const CodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject("taskStore","authorizeStore","pipelineStore")(observer(CodeGiteeOrGithub))
+export default inject("taskStore","stageStore","authorizeStore","pipelineStore")(observer(CodeGiteeOrGithub))

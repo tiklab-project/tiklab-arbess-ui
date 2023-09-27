@@ -3,6 +3,7 @@ import {Form, Select} from "antd";
 import {inject, observer} from "mobx-react";
 import AuthFind from "../AuthFind";
 import FormsSelect from "../FormsSelect";
+import {values} from "mobx";
 
 /**
  * xcode
@@ -12,12 +13,13 @@ import FormsSelect from "../FormsSelect";
  */
 const CodeXcode = props =>{
 
-    const {xcodeStore,taskStore,pipelineStore} = props
+    const {xcodeStore,taskStore,stageStore,pipelineStore} = props
 
     const {pipeline} = pipelineStore
 
     const {findXcodeRpy,xcodeRpy,findXcodeBranch,xcodeBranch} = xcodeStore
     const {updateTask,dataItem} = taskStore
+    const {updateStage} = stageStore
 
     // 分支选择器是否禁止
     const [prohibited,setProhibited] = useState(true)
@@ -41,11 +43,7 @@ const CodeXcode = props =>{
      */
     const changeGitStoreHouse = value =>{
         setProhibited(false)
-        updateTask({
-            pipelineId:pipeline.id,
-            taskName:dataItem.taskName,
-            values:{repository:{id:value}}
-        })
+        changTask("repository",value)
     }
 
     /**
@@ -53,10 +51,24 @@ const CodeXcode = props =>{
      * @param value
      */
     const changeBranch = value => {
-        updateTask({
+        changTask("branch",value)
+    }
+
+    const changTask = (type,value) =>{
+        if(pipeline.type===1){
+            updateTask({
+                pipelineId:pipeline.id,
+                taskName:dataItem.taskName,
+                values:{[type]: {id:value}}
+            })
+            return
+        }
+        updateStage({
             pipelineId:pipeline.id,
+            stageName:dataItem.stageName,
+            parallelName:dataItem.parallelName,
             taskName:dataItem.taskName,
-            values:{branch: {id:value}}
+            values:{[type]: {id:value}}
         })
     }
 
@@ -120,4 +132,4 @@ const CodeXcode = props =>{
     )
 }
 
-export default inject("taskStore","xcodeStore","pipelineStore")(observer(CodeXcode))
+export default inject("taskStore","stageStore","xcodeStore","pipelineStore")(observer(CodeXcode))

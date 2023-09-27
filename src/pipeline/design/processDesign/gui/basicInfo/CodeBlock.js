@@ -2,10 +2,10 @@ import React, {useRef, useState, forwardRef} from "react";
 import {inject,observer} from "mobx-react";
 import {Tooltip} from "antd";
 import {ExpandOutlined} from "@ant-design/icons";
-import CodeBlockModal from "./CodeBlockModal";
 import Btn from "../../../../../common/component/btn/Btn";
 import {TaskMirror} from "../../../../../common/component/editor/CodeMirror";
-import {WhetherChange} from "../gui/Common"
+import {WhetherChange} from "../gui/Common";
+import CodeBlockModal from "./CodeBlockModal";
 import "./CodeBlock.scss";
 
 /**
@@ -13,10 +13,10 @@ import "./CodeBlock.scss";
  */
 const MirrorContent = forwardRef((props,ref)=>{
 
-    const {name,placeholder,taskStore,pipelineStore} = props
+    const {name,placeholder,taskStore,stageStore,pipelineStore} = props
 
     const {updateTask,dataItem} = taskStore
-
+    const {updateStage} = stageStore
     const {pipeline} = pipelineStore
 
     const mirrorRefs = useRef(null)
@@ -29,7 +29,6 @@ const MirrorContent = forwardRef((props,ref)=>{
 
     // 全屏代码块value
     const [expandValue,setExpandValue] = useState("")
-
 
     /**
      * 获取焦点改变placeholder
@@ -67,14 +66,24 @@ const MirrorContent = forwardRef((props,ref)=>{
      */
     const onOk = ref =>{
         const value = ref.current.editor.getValue()
+        setBordered(false)
         if(WhetherChange(value,dataItem.task?.[name])){
-            updateTask({
+            if(pipeline.type===1){
+                updateTask({
+                    pipelineId:pipeline.id,
+                    taskName:dataItem.taskName,
+                    values:{[name]:value},
+                })
+                return
+            }
+            updateStage({
                 pipelineId:pipeline.id,
+                stageName:dataItem.stageName,
+                parallelName:dataItem.parallelName,
                 taskName:dataItem.taskName,
-                values:{[name]:value},
+                values:{[name]:value}
             })
         }
-        setBordered(false)
     }
 
     return  <>
@@ -113,4 +122,4 @@ const MirrorContent = forwardRef((props,ref)=>{
         </>
     })
 
-export default inject("taskStore","pipelineStore")(observer(MirrorContent))
+export default inject("taskStore","stageStore","pipelineStore")(observer(MirrorContent))

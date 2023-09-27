@@ -13,7 +13,7 @@ import Page from "../../../common/component/page/Page";
  */
 const PipelineUserAdd = props =>{
 
-    const {visible,setVisible,allUserList,yUserList,setYUserList,pipelineStore} = props
+    const {setVisible,yUserList,setYUserList,pipelineStore} = props
 
     const {findUserPage,userPage} = pipelineStore
 
@@ -36,15 +36,16 @@ const PipelineUserAdd = props =>{
     })
 
     useEffect(()=>{
-        if(visible){
-            // 初始化用户添加列表
-            setUserList(allUserList)
-        }
-        return ()=>{
-            setSelectedRowKeys([])
-            setAddUser([])
-        }
-    },[visible])
+        findUser()
+    },[findUserParam])
+
+    const findUser = () => {
+        findUserPage(findUserParam).then(res=>{
+            if(res.code===0){
+                setUserList(res.data?.dataList || [])
+            }
+        })
+    }
 
     /**
      * 添加用户
@@ -57,7 +58,7 @@ const PipelineUserAdd = props =>{
 
     /**
      * 已选中的用户不可添加
-     * @param record：表格行信息
+     * @param record
      * @returns {*}
      */
     const disabledOpt = record =>{
@@ -66,7 +67,7 @@ const PipelineUserAdd = props =>{
 
     /**
      * 点击行选中或取消
-     * @param record：表格行信息
+     * @param record
      */
     const onSelectRow = record => {
         if(!disabledOpt(record)){
@@ -83,7 +84,6 @@ const PipelineUserAdd = props =>{
                     adminRole: false
                 })
             }
-            // setSelectedRowKeys(selectedRowKeys)
             setSelectedRowKeys([...selectedRowKeys])
             setAddUser([...addUser])
         }
@@ -104,8 +104,8 @@ const PipelineUserAdd = props =>{
      * @param changeRows
      */
     const onSelectAll = (selected,selectedRows,changeRows) => {
-        const newArr = changeRows.map(item=>item && item.id).filter(item2 => item2 !== undefined)
-        const newUser = changeRows.map(item=>({...item,adminRole: false})).filter(item2=>item2 !==undefined)
+        const newArr = changeRows.map(item=>item && item.id).filter(Boolean)
+        const newUser = changeRows.map(item=>({...item,adminRole: false})).filter(Boolean)
         let row,user
         if(selected){
             row = Array.from(new Set([...selectedRowKeys,...newArr]))
@@ -138,7 +138,7 @@ const PipelineUserAdd = props =>{
      * @param e：文本框value
      */
     const changFindUser = e =>{
-        findUser({
+        setFindUserParam({
             ...findUserParam,
             nickname:e.target.value
         })
@@ -149,24 +149,11 @@ const PipelineUserAdd = props =>{
      * @param page
      */
     const changUserPage = page =>{
-        findUser({
+        setFindUserParam({
             ...findUserParam,
             pageParam:{
                 pageSize:5,
                 currentPage:page
-            }
-        })
-    }
-
-    /**
-     * 查询用户
-     * @param value
-     */
-    const findUser = value =>{
-        setFindUserParam(value)
-        findUserPage(value).then(res=>{
-            if(res.code===0){
-                setUserList(res.data && res.data.dataList)
             }
         })
     }
@@ -176,7 +163,7 @@ const PipelineUserAdd = props =>{
             <Input
                 placeholder={"名称"}
                 prefix={<SearchOutlined/>}
-                onChange={changFindUser}
+                onPressEnter={changFindUser}
             />
             <div className='pipeline-user-add-table'>
                 <Table

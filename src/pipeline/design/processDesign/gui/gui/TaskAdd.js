@@ -1,9 +1,9 @@
 import React,{useState} from "react";
-import {Col, Drawer, Row, message} from "antd";
+import {Col, Row, message} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
-import {TaskTitleIcon,taskTitle} from "./TaskTitleIcon";
+import {TaskTitleIcon} from "./TaskTitleIcon";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import "./TaskAdd.scss";
 
@@ -110,9 +110,13 @@ const TaskAdd = props =>{
      */
     const setTaskFormValue = (data,type) =>{
         if(data.code===0){
+            let name;
+            if(pipeline.type===1){name = {taskName:data.data}}
+            else {name={...data.data}}
             setDataItem({
+                ...name,
                 taskType:type,
-                taskName:data.data,
+                formType:'task',
                 task:{}
             })
             setTaskFormDrawer(true)

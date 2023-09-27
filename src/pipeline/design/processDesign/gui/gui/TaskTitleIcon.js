@@ -16,7 +16,6 @@ import pip_ssh from "../../../../../assets/images/svg/pip_ssh.svg";
 import pip_config from "../../../../../assets/images/svg/pip_config.svg";
 import pip_message from "../../../../../assets/images/svg/pip_message.svg";
 import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
-import pip_trigger from "../../../../../assets/images/svg/pip_trigger-1.svg";
 import testonImg from "tiklab-eam-ui/es/assests/img/teston.png";
 
 /**
@@ -45,7 +44,6 @@ export const taskTitle = type =>{
         case 'xpack': return "XPack"
         case 'message': return "消息通知"
         case 'script': return "执行脚本"
-        case 81: return "定时触发"
     }
 }
 
@@ -75,8 +73,6 @@ export const TaskIcon = props =>{
             case 'xpack': return renderImg(pip_config)
             case 'message': return renderImg(pip_message)
             case 'script': return renderImg(pip_shell)
-            case 81: return renderImg(pip_trigger)
-
         }
     }
 

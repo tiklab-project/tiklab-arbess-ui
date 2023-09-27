@@ -224,7 +224,7 @@ const PipelineTable = props =>{
             render:(text,record) => {
                 return  <Space>
                             <Profile userInfo={record.user}/>
-                            { text }
+                            { text || '--'}
                         </Space>
             }
         },

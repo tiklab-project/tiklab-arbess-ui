@@ -13,6 +13,7 @@ const webpack = require("webpack");
 const customEnv = process.env.CUSTOM_ENV;
 const {webpackGlobal} = require("./environment/environment_" + customEnv);
 const CompressionPlugin = require("compression-webpack-plugin");
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 module.exports = merge(baseWebpackConfig, {
     mode: "production",
@@ -58,6 +59,9 @@ module.exports = merge(baseWebpackConfig, {
             /moment[/\\]locale$/,
             /zh-cn|es/,
         ),
+        // new MonacoWebpackPlugin({
+        //     languages:['yaml','shell','bat']
+        // }),
     ],
     optimization: {
         minimize: true,
@@ -134,6 +138,13 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 1,
                     reuseExistingChunk: true
                 },
+                // monacoEditor: {
+                //     name: "chunk-monaco-editor",
+                //     chunks: "all",
+                //     test: /monaco-editor/,
+                //     priority: 1,
+                //     reuseExistingChunk: true
+                // },
                 antdUI: {
                     name: "chunk-antdUI",
                     chunks: "all",

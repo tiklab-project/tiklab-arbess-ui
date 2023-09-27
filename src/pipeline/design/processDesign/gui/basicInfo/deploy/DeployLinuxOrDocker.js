@@ -14,10 +14,10 @@ import FormsSelect from "../FormsSelect";
  */
 const DeployLinuxOrDocker = props =>{
 
-    const {taskStore,pipelineStore} = props
+    const {taskStore,stageStore,pipelineStore} = props
 
-    const {updateTask,dataItem,setDataItem} = taskStore
-
+    const {updateTask,dataItem} = taskStore
+    const {updateStage} = stageStore
     const {pipeline} = pipelineStore
 
     const [border,setBorder] = useState(false)
@@ -26,17 +26,22 @@ const DeployLinuxOrDocker = props =>{
      * 切换部署方式
      */
     const changDeployType = value => {
-        updateTask({
-            pipelineId:pipeline.id,
-            taskName:dataItem.taskName,
-            values:{authType:value},
-        })
-        setDataItem({
-            taskName:dataItem.taskName,
-            taskType:dataItem.taskType,
-            task:{authType:value}
-        })
         setBorder(false)
+        if (pipeline.type === 1) {
+            updateTask({
+                pipelineId: pipeline.id,
+                taskName: dataItem.taskName,
+                values: {authType: value},
+            })
+            return
+        }
+        updateStage({
+            pipelineId: pipeline.id,
+            stageName: dataItem.stageName,
+            parallelName: dataItem.parallelName,
+            taskName: dataItem.taskName,
+            values: {authType: value},
+        })
     }
 
     return(
@@ -54,7 +59,7 @@ const DeployLinuxOrDocker = props =>{
                 </FormsSelect>
             </Form.Item>
             {
-                dataItem.task && dataItem.task.authType === 2?
+                dataItem?.task?.authType === 2 ?
                     <Form.Item name={"startOrder"} label="Shell命令">
                         <Mirror
                             name={"startOrder"}
@@ -94,4 +99,4 @@ const DeployLinuxOrDocker = props =>{
     )
 }
 
-export default inject("taskStore",'pipelineStore')(observer(DeployLinuxOrDocker))
+export default inject("taskStore","stageStore",'pipelineStore')(observer(DeployLinuxOrDocker))

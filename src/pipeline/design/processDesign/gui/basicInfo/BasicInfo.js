@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Form, Input} from "antd";
 import {WhetherChange} from "../gui/Common";
-import FormsInput from "./FormsInput";
 import CodeGiteeOrGithubOrXcode from "./code/CodeGiteeOrGithub";
 import CodeGitOrGitlab from "./code/CodeGitOrGitlab";
 import CodeSvn from "./code/CodeSvn";
@@ -17,18 +16,18 @@ import DeployLinuxOrDocker from "./deploy/DeployLinuxOrDocker";
 
 /**
  * task的基本信息
- * @param props
- * @returns {JSX.Element}
- * @constructor
  */
 const BasicInfo = props => {
 
-    const {dataItem,updateStageName} = props
+    const {pipeline,taskStore,stageStore} = props
 
-    console.log(dataItem,"dataItem")
+    const {dataItem,taskList,updateTaskName} = taskStore
+    const {updateStageName} = stageStore
 
     const [form] = Form.useForm()
     const [enter,setEnter] = useState(false)
+
+    console.log(dataItem)
 
     /**
      * 设置表单文本框id
@@ -47,7 +46,7 @@ const BasicInfo = props => {
             case 'gitlab':
             case 'svn':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("codeName")]:task?.codeName,
                     [getId("codeBranch")]:task?.codeBranch,
                     [getId("codeAlias")]:task?.codeAlias,
@@ -58,7 +57,7 @@ const BasicInfo = props => {
                 break
             case 'xcode':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("codeName")]:task?.repository?.name,
                     [getId("codeBranch")]:task?.branch?.name,
                     [getId("codeAlias")]:task?.codeAlias,
@@ -69,7 +68,7 @@ const BasicInfo = props => {
             case 'gitee':
             case 'github':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("codeName")]:task?.codeName,
                     [getId("codeBranch")]:task?.codeBranch,
                     [getId("codeAlias")]:task?.codeAlias,
@@ -80,7 +79,7 @@ const BasicInfo = props => {
             case 'maven':
             case 'nodejs':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("buildAddress")]:task?.buildAddress,
                     [getId("productRule")]:task?.productRule,
                 })
@@ -88,18 +87,18 @@ const BasicInfo = props => {
             case 'liunx':
             case 'docker':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("deployAddress")]:task?.deployAddress,
                     [getId("deployOrder")]:task?.deployOrder,
                     [getId("startAddress")]:task?.startAddress,
-                    [getId("authType")]:task.authType ? task.authType:1,
+                    [getId("authType")]:task?.authType ? task.authType:1,
                     [getId("authName")]: authHost,
                     [getId("authId")]:task?.authId,
                 })
                 break
             case 'sonar':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("projectName")]:task?.projectName,
                     [getId("authName")]: authAuth,
                     [getId("authId")]:task?.authId
@@ -107,7 +106,7 @@ const BasicInfo = props => {
                 break
             case 'teston':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("testSpace")]:task?.testSpace?.name,
                     [getId("apiEnv")]:task?.apiEnv?.name,
                     [getId("appEnv")]:task?.appEnv?.name,
@@ -119,7 +118,7 @@ const BasicInfo = props => {
                 break
             case 'nexus':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("groupId")]:task?.groupId,
                     [getId("artifactId")]:task?.artifactId,
                     [getId("version")]:task?.version,
@@ -130,7 +129,7 @@ const BasicInfo = props => {
                 break
             case 'xpack':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("groupId")]:task?.groupId,
                     [getId("artifactId")]:task?.artifactId,
                     [getId("version")]:task?.version,
@@ -141,7 +140,7 @@ const BasicInfo = props => {
                 break
             case 'ssh':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                     [getId("putAddress")]:task?.putAddress,
                     [getId("authName")]:authHost,
                     [getId("authId")]:task?.authId
@@ -149,12 +148,12 @@ const BasicInfo = props => {
                 break
             case 'maventest':
                 form.setFieldsValue({
-                    [getId("taskName")]:dataItem?.taskName,
+                    taskName:dataItem?.taskName,
                 })
                 break
             default:
                 form.setFieldsValue({
-                    [dataItem.stageId+"_stageName"]:dataItem?.stageName,
+                    taskName: dataItem?.formType==='stage'? dataItem?.stageName : dataItem?.parallelName,
                 })
         }
         form.validateFields().then(r => {})
@@ -163,8 +162,6 @@ const BasicInfo = props => {
 
     /**
      * 渲染表单
-     * @param dataItem
-     * @returns {JSX.Element}
      */
     const renderForms = dataItem =>{
         switch (dataItem.taskType){
@@ -203,39 +200,68 @@ const BasicInfo = props => {
      * 改变阶段名称
      * @param e
      */
-    const changStageName = e =>{
+    const changName = e =>{
         setEnter(false)
-        if(WhetherChange(e.target.value,dataItem.stageName)){
-            updateStageName({stageId:dataItem.stageId,stageName:e.target.value})
+        const value = e.target.value
+        if(WhetherChange(value,dataItem.taskName)){
+            if(pipeline.type===1){
+                // const validation
+                updateTaskName({
+                    pipelineId: pipeline.id,
+                    lastName: dataItem.taskName,
+                    taskName: value,
+                })
+                return
+            }
+            if(dataItem.formType==="task"){
+                updateStageName({
+                    pipelineId:pipeline.id,
+                    stageName:dataItem.stageName,
+                    parallelName:dataItem.parallelName,
+                    lastName:dataItem.taskName,
+                    taskName:value,
+                    stageType:'task'
+                })
+                return;
+            }
+            if(dataItem.formType==="parallel"){
+                updateStageName({
+                    pipelineId:pipeline.id,
+                    stageName:dataItem.stageName,
+                    lastName:dataItem.parallelName,
+                    parallelName:value,
+                    stageType:'parallel',
+                })
+                return;
+            }
+            updateStageName({
+                pipelineId:pipeline.id,
+                lastName:dataItem.stageName,
+                stageName:value,
+                stageType:'stage',
+            });
         }
     }
 
     return (
         <div className='taskForm-forms'>
             <Form form={form} layout="vertical" autoComplete="off">
+                <Form.Item
+                    name={"taskName"}
+                    label={dataItem?.formType==='task'? "任务名称":"阶段名称"}
+                    rules={[{required:true, message:"名称不能为空"}]}
+                >
+                    <Input
+                        placeholder={enter? "阶段名称，回车保存":"未设置"}
+                        className={`${enter?'':'input-hover'}`}
+                        onFocus={()=>setEnter(true)}
+                        onBlur={(e)=>changName(e)}
+                        onPressEnter={(e)=>e.target.blur()}
+                    />
+                </Form.Item>
                 {
-                    dataItem?.taskName ?
-                        <>
-                            <FormsInput
-                                placeholder="任务名称"
-                                label="任务名称"
-                                name="taskName"
-                                isValid={true}
-                                dataItem={dataItem}
-                            />
-                            {renderForms(dataItem)}
-                        </>
-                        :
-                        <Form.Item name={dataItem.stageId+"_stageName"} label="阶段名称" rules={[{required:true, message:"请输入阶段名称"}]}>
-                            <Input
-                                // bordered={enter}
-                                placeholder={enter? "阶段名称，回车保存":"未设置"}
-                                className={`${enter?'':'input-hover'}`}
-                                onFocus={()=>setEnter(true)}
-                                onBlur={(e)=>changStageName(e)}
-                                onPressEnter={(e)=>e.target.blur()}
-                            />
-                        </Form.Item>
+                    dataItem?.formType==='task' &&
+                    renderForms(dataItem)
                 }
             </Form>
         </div>

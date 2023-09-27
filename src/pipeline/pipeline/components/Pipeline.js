@@ -134,7 +134,6 @@ const Pipeline = props =>{
                         <Input
                             allowClear
                             placeholder="流水线名称"
-                            // onChange={onChangeSearch}
                             onPressEnter={onChangeSearch}
                             prefix={<SearchOutlined />}
                             style={{ width: 200 }}

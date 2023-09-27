@@ -339,9 +339,7 @@ const Postprocess = props =>{
                 <PipelineDropdown
                     visible={addVisible}
                     setVisible={setAddVisible}
-                    style={{
-                        right:0
-                    }}
+                    style={{right:0}}
                     Icon={<Btn title={"添加后置处理"} type={"link-nopadding"} icon={<PlusCircleOutlined />}/>}
                 >
                     <div className="pose-pose-dropdown">

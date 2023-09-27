@@ -78,7 +78,6 @@ const BasicInfo = props =>{
                             set={true}
                             setIsLoading={setIsLoading}
                             onClick={()=>setOpenOrClose(1)}
-                            pipelineStore={pipelineStore}
                         />
                     </div>
         },

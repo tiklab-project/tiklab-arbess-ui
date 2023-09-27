@@ -13,11 +13,11 @@ import AuthFind from "../AuthFind";
  */
 const ArtifactXpack = props => {
 
-    const {taskStore,xpackStore,pipelineStore} = props
+    const {taskStore,stageStore,xpackStore,pipelineStore} = props
 
     const {updateTask,dataItem} = taskStore
+    const {updateStage} = stageStore
     const {findXPackRpy,xpackRpy} = xpackStore
-
     const {pipeline} = pipelineStore
 
     // 聚焦状态
@@ -40,8 +40,18 @@ const ArtifactXpack = props => {
      * @param value
      */
     const onChange = value => {
-        updateTask({
+        if(pipeline.type===1){
+            updateTask({
+                pipelineId:pipeline.id,
+                taskName:dataItem.taskName,
+                values:{repository: {id:value}}
+            })
+            return
+        }
+        updateStage({
             pipelineId:pipeline.id,
+            stageName:dataItem.stageName,
+            parallelName:dataItem.parallelName,
             taskName:dataItem.taskName,
             values:{repository: {id:value}}
         })
@@ -89,4 +99,4 @@ const ArtifactXpack = props => {
     )
 }
 
-export default inject("taskStore","xpackStore","pipelineStore")(observer(ArtifactXpack))
+export default inject("taskStore","stageStore","xpackStore","pipelineStore")(observer(ArtifactXpack))

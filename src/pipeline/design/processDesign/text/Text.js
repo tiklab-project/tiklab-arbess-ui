@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef} from "react";
+import React,{useState,useEffect} from "react";
 import {observer,inject} from "mobx-react";
 import {TextMirrorEditor} from "../../../../common/component/editor/CodeMirror";
 import {SpinLoading} from "../../../../common/component/loading/Loading";
@@ -12,10 +12,8 @@ const Text = props =>{
     const {pipelineStore,stageStore,taskStore} = props
 
     const {pipeline:{id,type}} = pipelineStore
-
     const {finYamlTask} = taskStore
     const {findStageYaml} = stageStore
-
 
     const [textEditor,setTextEditor] = useState(null);
 
@@ -30,6 +28,7 @@ const Text = props =>{
                 }
                 setLoading(false)
             })
+            return
         }
         // 多阶段
         findStageYaml(id).then(res=>{

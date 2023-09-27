@@ -1,7 +1,10 @@
 import React,{Fragment,useEffect,useState} from "react";
+import {Popconfirm} from "antd";
+import {DeleteOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import {TaskFinalAdd,TaskTypeContent,TaskInsertBtn} from "./Common";
+import {TaskFinalAdd,TaskInsertBtn} from "./Common";
 import {SpinLoading} from "../../../../../common/component/loading/Loading";
+import {TaskIcon} from "./TaskTitleIcon";
 
 /**
  * 多任务
@@ -50,10 +53,12 @@ const Task = props => {
 
     /**
      * 多阶段详情
-     * @param item
      */
     const showDetail = item => {
-        setDataItem(item)
+        setDataItem({
+            ...item,
+            formType:'task',
+        })
         setTaskFormDrawer(true)
     }
 
@@ -80,6 +85,8 @@ const Task = props => {
      * @returns {JSX.Element}
      */
     const renderSingleTask = (group,groupIndex) =>{
+        const valid = taskName => taskMustField && taskMustField.some(li=>li===taskName)
+
         return <Fragment key={groupIndex}>
             { isBtn(group.taskType) && TaskInsertBtn(insertData,group,groupIndex,"singleBtn") }
             <div className="group-table">
@@ -88,7 +95,30 @@ const Task = props => {
                 </div>
                 <div className="newStages-single">
                     <div className="newStages-job">
-                        {TaskTypeContent(group,14,showDetail,delTask,taskMustField)}
+                        <div onClick={()=>showDetail(group)}
+                             style={{paddingLeft:14}}
+                             className={`newStages-job-content ${valid(group.taskName)?"job-name":""}`}
+                        >
+                            <div className="newStages-job-sub">
+                                <span className="newStages-job-icon"><TaskIcon type={group.taskType}/></span>
+                                <span className="newStages-job-title">{group.taskName}</span>
+                            </div>
+                            {
+                                valid(group.taskName) &&
+                                <div className="newStages-job-warn"><ExclamationCircleOutlined /></div>
+                            }
+                            <Popconfirm
+                                title="你确定删除吗"
+                                onConfirm={e=>delTask(e,group)}
+                                onCancel={e=>e.stopPropagation()}
+                                okText="确定"
+                                cancelText="取消"
+                            >
+                                <div className="newStages-job-del" onClick={e=>e.stopPropagation()}>
+                                    <DeleteOutlined />
+                                </div>
+                            </Popconfirm>
+                        </div>
                     </div>
                 </div>
             </div>
