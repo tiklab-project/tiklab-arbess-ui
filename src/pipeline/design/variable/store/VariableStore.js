@@ -30,7 +30,9 @@ class VariableStore{
      */
     @action
     deleteVariable = async value =>{
-        const data = await Axios.post("/pipelineVariable/deleteVariable",value)
+        const param = new FormData()
+        param.append("varId",value)
+        const data = await Axios.post("/pipelineVariable/deleteVariable",param)
         if(data.code===0){
             this.fresh=!this.fresh
         }
@@ -56,7 +58,9 @@ class VariableStore{
      */
     @action
     findVariable = async value =>{
-        const data = await Axios.post("/pipelineVariable/findVariable",value)
+        const param = new FormData()
+        param.append("taskId",value)
+        const data = await Axios.post("/pipelineVariable/findAllVariable",param)
         if(data.code===0){
             this.variableData = data.data && data.data
         }

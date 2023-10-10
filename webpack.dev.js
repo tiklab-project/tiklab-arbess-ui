@@ -7,7 +7,6 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const customEnv = process.env.CUSTOM_ENV;
 const {webpackGlobal} = require("./environment/environment_" + customEnv);
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = merge(baseWebpackConfig,{
     // 指定构建环境
@@ -41,7 +40,6 @@ module.exports = merge(baseWebpackConfig,{
             ignoreOrder: true
         }),
         new CssMinimizerPlugin(),
-        new MonacoWebpackPlugin(),
     ],
     // 开发环境本地启动的服务配置
     devServer: {

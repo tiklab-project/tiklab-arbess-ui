@@ -27,10 +27,7 @@ const Variable = props =>{
 
     useEffect(()=>{
         // 初始化变量
-        findVariable({
-            pipelineId:pipeline.id,
-            type:'pipeline',
-        })
+        findVariable(pipeline.id)
     },[fresh])
 
     /**
@@ -55,11 +52,7 @@ const Variable = props =>{
      * @param reocrd
      */
     const delVariable = reocrd =>{
-        deleteVariable({
-            pipelineId:pipeline.id,
-            varKey:reocrd.varKey,
-            type:'pipeline',
-        }).then(res=>{
+        deleteVariable(reocrd.varId).then(res=>{
             res.code===0 && message.info("删除成功",0.5)
         })
     }
@@ -129,7 +122,7 @@ const Variable = props =>{
                                bordered={false}
                                columns={columns}
                                dataSource={variableData}
-                               rowKey={record=>record.varKey}
+                               rowKey={record=>record.varId}
                                pagination={false}
                                locale={{emptyText: <EmptyText title={"暂无变量"}/>}}
                            />

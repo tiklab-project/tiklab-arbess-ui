@@ -43,12 +43,16 @@
         max-height:calc(100% - 120px);
         overflow:auto;
         .CodeMirror{
+            .CodeMirror-placeholder,.CodeMirror-code{
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+                font-weight: normal;
+                font-size: 14px;
+                font-feature-settings: "liga" 0, "calt" 0;
+                line-height: 19px;
+                letter-spacing: 0;
+            }
             .CodeMirror-placeholder{
                 color: #bfbfbf;
-                font-family: Microsoft YaHei, serif;
-            }
-            .CodeMirror-code{
-                font-family: Microsoft YaHei, serif;
             }
             .CodeMirror-gutter-wrapper{
                 left: -41px !important;

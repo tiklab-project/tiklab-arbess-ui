@@ -35,7 +35,6 @@ const CodeBlockModal = props =>{
             <div className="mirror-expand">
                 <ExpandMirror mirrorRefs={mirrorRefs} expandValue={expandValue}/>
             </div>
-
         </Modals>
     )
 }

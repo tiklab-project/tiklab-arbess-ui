@@ -12,12 +12,10 @@ import FormsSelect from "../FormsSelect";
  */
 const TestOn = props => {
 
-    const {taskStore,stageStore,testOnStore,pipelineStore} = props
+    const {taskStore,testOnStore} = props
 
     const {updateTask,dataItem} = taskStore
-    const {updateStage} = stageStore
     const {findTestSpace,testSpace,findTestEnv,testEnv,findTestPlan,testPlan} = testOnStore
-    const {pipeline} = pipelineStore
 
     // 测试空间 | 测试计划 | 测试环境 聚焦状态
     const [border,setBorder] = useState(null)
@@ -57,21 +55,7 @@ const TestOn = props => {
      */
     const onChange = (value,type) => {
         setBorder(null)
-        if(pipeline.type===1){
-            updateTask({
-                pipelineId:pipeline.id,
-                taskName:dataItem.taskName,
-                values:{[type]: {id:value}}
-            })
-            return
-        }
-        updateStage({
-            pipelineId:pipeline.id,
-            stageName:dataItem.stageName,
-            parallelName:dataItem.parallelName,
-            taskName:dataItem.taskName,
-            values:{[type]: {id:value}}
-        })
+        updateTask({[type]: {id:value}})
     }
 
     /**
@@ -92,7 +76,7 @@ const TestOn = props => {
     return (
         <>
             <AuthFind/>
-            <Form.Item name={dataItem.taskName+"_testSpace"} label={"测试空间"} rules={[{required:true, message:"测试空间不能为空"}]}>
+            <Form.Item name={dataItem.taskId+"_testSpace"} label={"测试空间"} rules={[{required:true, message:"测试空间不能为空"}]}>
                 <FormsSelect
                     label={"空间"}
                     isSpin={isSpin}
@@ -109,7 +93,7 @@ const TestOn = props => {
                 </FormsSelect>
             </Form.Item>
 
-            <Form.Item name={dataItem.taskName+"_apiEnv"} label={"API环境"} rules={[{validator: validatorEnv}]}>
+            <Form.Item name={dataItem.taskId+"_apiEnv"} label={"API环境"} rules={[{validator: validatorEnv}]}>
                 <FormsSelect
                     label={"API环境"}
                     isSpin={false}
@@ -126,7 +110,7 @@ const TestOn = props => {
                 </FormsSelect>
             </Form.Item>
 
-            <Form.Item name={dataItem.taskName+"_appEnv"} label={"APP环境"} rules={[{validator: validatorEnv}]}>
+            <Form.Item name={dataItem.taskId+"_appEnv"} label={"APP环境"} rules={[{validator: validatorEnv}]}>
                 <FormsSelect
                     label={"APP环境"}
                     isSpin={false}
@@ -143,7 +127,7 @@ const TestOn = props => {
                 </FormsSelect>
             </Form.Item>
 
-            <Form.Item name={dataItem.taskName+"_webEnv"} label={"WEB环境"} rules={[{validator: validatorEnv}]}>
+            <Form.Item name={dataItem.taskId+"_webEnv"} label={"WEB环境"} rules={[{validator: validatorEnv}]}>
                 <FormsSelect
                     label={"WEB环境"}
                     isSpin={false}
@@ -160,7 +144,7 @@ const TestOn = props => {
                 </FormsSelect>
             </Form.Item>
 
-            <Form.Item name={dataItem.taskName+"_testPlan"} label={"测试计划"} rules={[{required:true, message:"测试计划不能为空"}]}>
+            <Form.Item name={dataItem.taskId+"_testPlan"} label={"测试计划"} rules={[{required:true, message:"测试计划不能为空"}]}>
                 <FormsSelect
                     label={"测试计划"}
                     isSpin={false}
@@ -180,5 +164,5 @@ const TestOn = props => {
     )
 }
 
-export default inject("taskStore","stageStore","testOnStore","pipelineStore")(observer(TestOn))
+export default inject("taskStore","testOnStore")(observer(TestOn))
 

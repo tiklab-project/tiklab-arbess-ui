@@ -60,7 +60,7 @@ export const interceptUrl = (url,data) =>{
 export const Validation = name =>{
     return {
         pattern:/^(?=.*\S).+$/,
-        message:`${name}不能为纯空格`
+        message:`${name}不能为全为空格`
     }
 }
 

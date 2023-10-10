@@ -60,10 +60,10 @@ const Aside = props =>{
                         <div className="pipeline-opt-group">
                             {
                                 pipelineList && pipelineList.map((item,index)=>{
-                                    return index < 6 &&
+                                    return index < 6 && pipeline?.id !== item.id &&
                                         <div onClick={()=>changePipeline(item)}
                                              key={item.id}
-                                             className={`pipeline-opt-item ${pipeline && pipeline.id === item.id ?"pipeline-opt-active":""}`}
+                                             className={`pipeline-opt-item`}
                                         >
                                             <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
                                                 {item.name.substring(0,1).toUpperCase()}

@@ -10,12 +10,9 @@ import {Validation} from "../../../../../common/utils/Client";
  */
 const FormsInput = props =>{
 
-    const {placeholder,label,name,addonBefore,isValid,taskStore,stageStore,pipelineStore} = props
+    const {placeholder,label,name,addonBefore,isValid,taskStore} = props
 
     const {dataItem,updateTask} = taskStore
-    const {updateStage} = stageStore
-
-    const {pipeline} = pipelineStore
 
     const ref = useRef(null)
     const [enter,setEnter] = useState(false)
@@ -70,22 +67,7 @@ const FormsInput = props =>{
         const isTaskChange =  WhetherChange(value,dataItem.task && dataItem.task[name])
         setEnter(false)
         if(valid && isTaskChange){
-            if(pipeline.type===1){
-                updateTask({
-                    pipelineId:pipeline.id,
-                    taskName:dataItem.taskName,
-                    values:{[name]:value}
-                })
-                return;
-            }
-
-            updateStage({
-                pipelineId:pipeline.id,
-                stageName:dataItem.stageName,
-                parallelName:dataItem.parallelName,
-                taskName:dataItem.taskName,
-                values:{[name]:value}
-            })
+            updateTask({[name]:value})
         }
     }
 
@@ -122,7 +104,7 @@ const FormsInput = props =>{
 
     return (
         <Form.Item
-            name={dataItem && dataItem.taskName+"_"+name}
+            name={dataItem?.taskId+"_"+name}
             label={label}
             rules={rules()}
             validateTrigger="onChange"
@@ -141,4 +123,4 @@ const FormsInput = props =>{
 
 }
 
-export default inject("taskStore","stageStore","pipelineStore")(observer(FormsInput))
+export default inject("taskStore")(observer(FormsInput))

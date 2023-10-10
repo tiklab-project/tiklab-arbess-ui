@@ -100,15 +100,14 @@ const TaskDetails = props =>{
                             {...props}
                         />
                         {/*<Tabs*/}
-                        {/*    tabLis={dataItem && dataItem.taskName ? lis: [{id:"base", title: "基本信息"}]}*/}
+                        {/*    tabLis={dataItem?.formType==='task' ? lis: [{id:"base", title: "基本信息"}]}*/}
                         {/*    type={handleType}*/}
                         {/*    onClick={changHandleType}*/}
                         {/*/>*/}
                         {/*{*/}
                         {/*    handleType==="base" &&*/}
                         {/*    <BasicInfo*/}
-                        {/*        dataItem={dataItem}*/}
-                        {/*        updateStageName={updateStageName}*/}
+                        {/*        {...props}*/}
                         {/*    />*/}
                         {/*}*/}
                         {/*{*/}

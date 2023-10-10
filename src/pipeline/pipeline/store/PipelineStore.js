@@ -12,21 +12,9 @@ export class PipelineStore {
     @observable
     pipelineListPage = []
 
-    // 流水线用户
-    @observable
-    pipelineUserList = []
-
     // 流水线分页
     @observable
     pipPage = {
-        currentPage: 1,
-        totalPage: 1,
-        totalRecord: 1,
-    }
-
-    // 用户分页
-    @observable
-    userPage = {
         currentPage: 1,
         totalPage: 1,
         totalRecord: 1,
@@ -85,7 +73,6 @@ export class PipelineStore {
         return new Promise((resolve, reject) => {
             Axios.post("/pipeline/findUserPipeline").then(res=>{
                 if(res.code===0){
-                    // 流水线列表
                     this.pipelineList = res.data || []
                 }
                 resolve(res)
@@ -190,7 +177,6 @@ export class PipelineStore {
     @action
     findUserPage =async value =>{
         const data =  await Axios.post("/user/user/findUserPage",value)
-        this.findPipelineUser(data)
         return data
     }
 
@@ -202,20 +188,7 @@ export class PipelineStore {
     @action
     findDmUserPage = async value =>{
         const data = await Axios.post("/dmUser/findDmUserPage",value)
-        this.findPipelineUser(data)
         return data
-    }
-
-    @action
-    findPipelineUser = data =>{
-        if(data.code===0){
-            this.pipelineUserList = data.data && data.data.dataList
-            this.userPage = {
-                currentPage: data.data.currentPage,
-                totalPage: data.data.totalPage,
-                totalRecord: data.data.totalRecord
-            }
-        }
     }
 
     /**
@@ -258,6 +231,23 @@ export class PipelineStore {
         const param = new FormData()
         param.append("pipelineId",value)
         const data = await Axios.post("/pipeline/findPipelineCloneName",param)
+        return data
+    }
+
+    /**
+     * 导出yaml文件
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    importPipelineYaml = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        const data = await Axios.post(
+            "/pipeline/importPipelineYaml",
+            param,
+            {},
+            {responseType: "blob"})
         return data
     }
 

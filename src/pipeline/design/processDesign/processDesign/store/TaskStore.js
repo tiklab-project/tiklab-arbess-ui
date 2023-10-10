@@ -4,10 +4,6 @@ import {Axios} from "tiklab-core-ui";
 
 class TaskStore {
 
-    // 多任务数据
-    @observable
-    taskList = []
-
     // 必填配置是否完善
     @observable
     validType = []
@@ -71,9 +67,6 @@ class TaskStore {
         const param = new FormData()
         param.append("pipelineId",value)
         const data = await Axios.post("/tasks/finAllTask",param)
-        if(data.code===0){
-            this.taskList = data.data || []
-        }
         return data
     }
 
@@ -97,31 +90,42 @@ class TaskStore {
      */
     @action
     updateTask = async values =>{
-        const data = await Axios.post("/tasks/updateTask",values)
+        const param = {
+            taskId:this.dataItem.taskId,
+            values,
+        }
+        const data = await Axios.post("/tasks/updateTask",param)
         if(data.code===0){
             this.taskFresh=!this.taskFresh
-            await this.findOneTasks({
-                taskName:values.taskName,
-                pipelineId:values.pipelineId
-            })
+            this.dataItem = {
+                ...this.dataItem,
+                task:{
+                    ...this.dataItem.task,
+                    ...values,
+                }
+            }
         }
         return data
     }
 
     /**
      * 更新任务名称
-     * @param value
+     * @param taskName
      * @returns {Promise<*>}
      */
     @action
-    updateTaskName = async value =>{
-        const data = await Axios.post("/tasks/updateTaskName",value)
+    updateTaskName = async taskName =>{
+        const param = {
+            taskId: this.dataItem.taskId,
+            taskName
+        }
+        const data = await Axios.post("/tasks/updateTaskName",param)
         if(data.code===0){
+            this.taskFresh=!this.taskFresh
             this.dataItem = {
                 ...this.dataItem,
-                ...value.values,
+                taskName
             }
-            this.taskFresh=!this.taskFresh
         }
         if(data.code===10000){
             message.info(data.msg)
@@ -135,8 +139,7 @@ class TaskStore {
     @action
     deleteTask = async value =>{
         const params = new FormData()
-        params.append("taskName",value.taskName)
-        params.append("pipelineId",value.pipelineId)
+        params.append("taskId",value)
         const data = await Axios.post("/tasks/deleteTask",params)
         if(data.code===0){
             message.info("删除成功",0.7)

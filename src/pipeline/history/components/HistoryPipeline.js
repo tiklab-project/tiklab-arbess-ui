@@ -16,7 +16,7 @@ const HistoryPipeline = props => {
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
-    // 监听关闭定时器的状态
+    // 历史详情状态 && 监听关闭定时器的状态
     const [detail,setDetail] = useState(false)
 
     const pageParam = {

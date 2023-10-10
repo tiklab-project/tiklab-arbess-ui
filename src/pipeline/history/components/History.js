@@ -13,9 +13,9 @@ const History = props => {
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
+    // 历史详情状态 && 监听关闭定时器的状态
     const [detail,setDetail] = useState(false)
 
-    // 监听关闭定时器的状态
     const pageParam = {
         pageSize: 13,
         currentPage: 1,

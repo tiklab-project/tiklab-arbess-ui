@@ -34,10 +34,10 @@ const Design = props =>{
 
     const {route,match,pipelineStore} = props
 
-    const {pipeline,setPipeline,findOnePipeline} = pipelineStore
+    const {pipeline,findOnePipeline} = pipelineStore
     const {execStart} = historyStore
-    const {taskList,taskMustField} = taskStore
-    const {stageList,stageMustField} = stageStore
+    const {validTaskMustField, taskMustField,taskFresh} = taskStore
+    const {validStagesMustField,stageMustField,stageFresh} = stageStore
 
     const pipelineId = match.params.id
 
@@ -56,22 +56,19 @@ const Design = props =>{
         setPath(props.location.pathname)
     },[props.location.pathname])
 
+    useEffect(() => {
+        if(pipeline?.type===1){
+            return validTaskMustField(pipelineId)
+        }
+        return validStagesMustField(pipelineId)
+    }, [taskFresh,stageFresh]);
+
     useEffect(()=>{
         // 监听运行状态，获取流水线信息
         if(!isDetails){
             findOnePipeline(pipelineId)
         }
     },[isDetails])
-
-    /**
-     * 切换图形展示
-     */
-    const changView = type => {
-        setPipeline({
-            ...pipeline,
-            view:type
-        })
-    }
 
     /**
      * 开始运行
@@ -92,10 +89,10 @@ const Design = props =>{
      * @returns {boolean}
      */
     const runStatu = () => {
-        if(pipeline && pipeline.type===1){
-            return !(taskList?.length < 1 || taskMustField?.length > 0)
+        if(pipeline?.type===1){
+            return taskMustField?.length <= 0;
         }
-        return !(stageList?.length < 1 || stageMustField?.length > 0)
+        return stageMustField?.length <= 0;
     }
 
     const typeLis = [
@@ -139,17 +136,6 @@ const Design = props =>{
                                 })
                             }
                         </div>
-                        {
-                            path === `/index/pipeline/${pipelineId}/config` &&
-                            <div className="changeView-type">
-                                <div className={`${pipeline?.view!=='text'?"type-active":""}`}
-                                     onClick={()=>changView('gui')}
-                                >图形化编辑器</div>
-                                <div className={`${pipeline?.view==='text'?"type-active":""}`}
-                                     onClick={()=>changView('text')}
-                                >文本编辑器</div>
-                            </div>
-                        }
                         <div className="changeView-btn">
                             {
                                 pipeline?.state===2 ?

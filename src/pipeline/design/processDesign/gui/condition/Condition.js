@@ -9,32 +9,30 @@ import {
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
 import EmptyText from "../../../../../common/component/emptyText/EmptyText";
-import "./Condition.scss";
 import {Validation} from "../../../../../common/utils/Client";
+import "./Condition.scss";
 
 /**
  * task的条件
  */
 const Condition = props =>{
 
-    const {dataItem,pipelineStore,condStore} = props
-
-    const {pipeline} = pipelineStore
+    const {dataItem,condStore} = props
 
     const {createCond,findTaskCond,updateCond,deleteCond} = condStore;
 
     const [formCond] = Form.useForm();
-
+    // 条件数据
     const [condData,setCondData] = useState([]);
-
+    // 下拉图标显示
     const [showArrow,setShowArrow] = useState(false);
-
+    // 条件修改对象
     const [condObj,setCondObj] = useState(null)
 
     useEffect(()=>{
         // 初始化条件
         findCond()
-    },[dataItem.taskName])
+    },[dataItem.taskId])
 
     useEffect(()=>{
         if(condObj){
@@ -46,10 +44,7 @@ const Condition = props =>{
      * 获取条件
      */
     const findCond = () => {
-        findTaskCond({
-            pipelineId:pipeline.id,
-            taskName: dataItem.taskName
-        }).then(res=>{
+        findTaskCond(dataItem.taskId).then(res=>{
             if(res.code===0){
                 setCondData(res.data || [])
             }
@@ -71,7 +66,7 @@ const Condition = props =>{
     const editInput = item => {
         setCondObj({
             cond:"edit",
-            lastCondKey:item.condKey,
+            condId:item.condId,
             condKey:item.condKey,
             condValue:item.condValue,
             condType:item.condType,
@@ -83,11 +78,7 @@ const Condition = props =>{
      */
     const reduceInput = (e,item) =>{
         e.stopPropagation();
-        deleteCond({
-            pipelineId:pipeline.id,
-            condKey:item.condKey,
-            taskName: dataItem.taskName,
-        }).then(res=>{
+        deleteCond(item.condId).then(res=>{
             if(res.code===0){
                 findCond()
             }
@@ -109,11 +100,7 @@ const Condition = props =>{
                 return;
             }
             update({
-                condType:condType,
-                condValue:condValue,
-                condKey:condKey,
-                pipelineId:pipeline.id,
-                taskName: dataItem.taskName,
+                ...value
             }).then()
         })
     }
@@ -122,12 +109,13 @@ const Condition = props =>{
         let Res;
         if(condObj.cond==='add'){
             Res = await createCond({
-                ...value
+                ...value,
+                taskId:dataItem.taskId,
             })
         } else {
             Res = await updateCond({
                 ...value,
-                lastCondKey:condObj.lastCondKey
+                condId:condObj.condId,
             })
         }
         if(Res.code===0){
@@ -200,11 +188,11 @@ const Condition = props =>{
         return(
             <div className="pose-condition-inputs" key={index}>
                 <div className="inputs-condition"
-                     onClick={()=>condObj?.lastCondKey === item.condKey ? onCancel() : editInput(item)}
+                     onClick={()=>condObj?.condId === item.condId ? onCancel() : editInput(item)}
                 >
                     <div className="inputs-condition-icon">
                         {
-                            condObj?.lastCondKey === item.condKey ?
+                            condObj?.condId === item.condId ?
                                 <CaretDownOutlined />
                                 :
                                 <CaretRightOutlined />
@@ -226,7 +214,7 @@ const Condition = props =>{
                     </div>
                 </div>
                 {
-                    condObj?.lastCondKey === item.condKey &&
+                    condObj?.condId === item.condId &&
                     <div className="inputs-condition-html">
                         { inputHtml(item) }
                     </div>
@@ -262,4 +250,4 @@ const Condition = props =>{
     )
 }
 
-export default inject("condStore","pipelineStore")(observer(Condition))
+export default inject("condStore")(observer(Condition))

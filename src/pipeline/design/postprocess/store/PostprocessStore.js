@@ -69,7 +69,7 @@ class PostprocessStore {
     @action
     deletePost = async value =>{
         const param = new FormData()
-        param.append("postprocessId",value)
+        param.append("postId",value)
         const data = await Axios.post("/postprocess/deletePost",param)
         if(data.code===0){
             this.isFindPostprocessData = !this.isFindPostprocessData
@@ -117,7 +117,7 @@ class PostprocessStore {
     @action
     findOnePost = async value =>{
         const param = new FormData()
-        param.append("postprocessId",value)
+        param.append("postId",value)
         return await Axios.post("/postprocess/findOnePost", param)
     }
 

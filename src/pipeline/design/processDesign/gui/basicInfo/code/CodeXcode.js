@@ -13,13 +13,10 @@ import {values} from "mobx";
  */
 const CodeXcode = props =>{
 
-    const {xcodeStore,taskStore,stageStore,pipelineStore} = props
-
-    const {pipeline} = pipelineStore
+    const {xcodeStore,taskStore} = props
 
     const {findXcodeRpy,xcodeRpy,findXcodeBranch,xcodeBranch} = xcodeStore
     const {updateTask,dataItem} = taskStore
-    const {updateStage} = stageStore
 
     // 分支选择器是否禁止
     const [prohibited,setProhibited] = useState(true)
@@ -43,7 +40,7 @@ const CodeXcode = props =>{
      */
     const changeGitStoreHouse = value =>{
         setProhibited(false)
-        changTask("repository",value)
+        updateTask({repository: {id:value}})
     }
 
     /**
@@ -51,25 +48,7 @@ const CodeXcode = props =>{
      * @param value
      */
     const changeBranch = value => {
-        changTask("branch",value)
-    }
-
-    const changTask = (type,value) =>{
-        if(pipeline.type===1){
-            updateTask({
-                pipelineId:pipeline.id,
-                taskName:dataItem.taskName,
-                values:{[type]: {id:value}}
-            })
-            return
-        }
-        updateStage({
-            pipelineId:pipeline.id,
-            stageName:dataItem.stageName,
-            parallelName:dataItem.parallelName,
-            taskName:dataItem.taskName,
-            values:{[type]: {id:value}}
-        })
+        updateTask({branch: {id:value}})
     }
 
     /**
@@ -94,7 +73,7 @@ const CodeXcode = props =>{
     return(
         <>
             <AuthFind/>
-            <Form.Item name={dataItem.taskName+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
+            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
                 <FormsSelect
                     label="仓库"
                     isSpin={isSpin}
@@ -110,7 +89,7 @@ const CodeXcode = props =>{
                     }
                 </FormsSelect>
             </Form.Item>
-            <Form.Item name={dataItem.taskName+"_codeBranch"} label="分支">
+            <Form.Item name={dataItem.taskId+"_codeBranch"} label="分支">
                 <FormsSelect
                     label="分支"
                     isSpin={false}
@@ -132,4 +111,4 @@ const CodeXcode = props =>{
     )
 }
 
-export default inject("taskStore","stageStore","xcodeStore","pipelineStore")(observer(CodeXcode))
+export default inject("taskStore","xcodeStore")(observer(CodeXcode))

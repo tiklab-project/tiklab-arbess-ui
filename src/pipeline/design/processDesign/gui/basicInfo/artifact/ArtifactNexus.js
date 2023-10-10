@@ -30,7 +30,6 @@ const ArtifactNexus = props => {
                 label={"version"}
                 isValid={true}
             />
-            {/*/>*/}
             <AuthFind/>
         </>
     )

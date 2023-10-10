@@ -32,10 +32,10 @@ const PortalMessage = props =>{
     // 消息总页
     const [messageTotalPage,setMessageTotalPage] = useState(1)
 
-    //加载
+    // 加载
     const [isLoading,setIsLoading] = useState(false)
 
-    //消息类型
+    // 消息类型
     const [selected,setSelected] = useState(0)
 
     useEffect(()=>{
@@ -201,14 +201,6 @@ const PortalMessage = props =>{
         })
     }
 
-    const emptyTitle = (
-        <>
-            { selected===0 && "暂无未读消息"}
-            { selected===1 && "暂无已读消息"}
-            { selected===2 && "暂无消息"}
-        </>
-    )
-
     return(
         <Drawer
             closable={false}
@@ -249,13 +241,19 @@ const PortalMessage = props =>{
                         {
                             messageList && messageList.length===0 && messagePagination ===1 &&
                             <div>
-                                <EmptyText title={emptyTitle}/>
+                                <EmptyText title={
+                                    <>
+                                        { selected===0 && "暂无未读消息"}
+                                        { selected===1 && "暂无已读消息"}
+                                        { selected===2 && "暂无消息"}
+                                    </>
+                                }/>
                             </div>
                         }
                         {
                             messagePagination < messageTotalPage && !isLoading &&
                             <div className="messageModal-more" onClick={()=>moreMessage()}>
-                                加载更多...
+                                加载更多……
                             </div>
                         }
                         {

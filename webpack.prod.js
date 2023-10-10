@@ -13,7 +13,6 @@ const webpack = require("webpack");
 const customEnv = process.env.CUSTOM_ENV;
 const {webpackGlobal} = require("./environment/environment_" + customEnv);
 const CompressionPlugin = require("compression-webpack-plugin");
-const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 module.exports = merge(baseWebpackConfig, {
     mode: "production",
@@ -59,9 +58,6 @@ module.exports = merge(baseWebpackConfig, {
             /moment[/\\]locale$/,
             /zh-cn|es/,
         ),
-        // new MonacoWebpackPlugin({
-        //     languages:['yaml','shell','bat']
-        // }),
     ],
     optimization: {
         minimize: true,

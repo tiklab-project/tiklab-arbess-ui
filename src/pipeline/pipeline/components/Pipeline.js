@@ -62,6 +62,7 @@ const Pipeline = props =>{
             }).then(r=>setIsLoading(false))
         }
     }
+
     /**
      * 模糊查询流水线
      * @param e：文本框value
@@ -134,6 +135,7 @@ const Pipeline = props =>{
                         <Input
                             allowClear
                             placeholder="流水线名称"
+                            autoComplete={"off"}
                             onPressEnter={onChangeSearch}
                             prefix={<SearchOutlined />}
                             style={{ width: 200 }}

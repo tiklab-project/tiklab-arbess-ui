@@ -3,8 +3,8 @@ import {Col, Row, message} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
-import {TaskTitleIcon} from "./TaskTitleIcon";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
+import {taskTitle, TaskTitleIcon} from "./TaskTitleIcon";
 import "./TaskAdd.scss";
 
 /**
@@ -110,13 +110,11 @@ const TaskAdd = props =>{
      */
     const setTaskFormValue = (data,type) =>{
         if(data.code===0){
-            let name;
-            if(pipeline.type===1){name = {taskName:data.data}}
-            else {name={...data.data}}
             setDataItem({
-                ...name,
+                taskId:data.data,
                 taskType:type,
                 formType:'task',
+                taskName:taskTitle(type),
                 task:{}
             })
             setTaskFormDrawer(true)
@@ -175,7 +173,7 @@ const TaskAdd = props =>{
                     group.desc && group.desc.map((item,index)=>{
                         return(
                             <div key={index} className={`group-desc ${item.type==='docker'?"group-desc-ban":""}`}
-                                 onClick={()=>item.type!=='docker'&&addTask(item)}
+                                 onClick={()=>item.type==='docker' ? undefined: addTask(item)}
                             >
                                 <TaskTitleIcon type={item.type}/>
                             </div>

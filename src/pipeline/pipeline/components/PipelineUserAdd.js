@@ -15,7 +15,7 @@ const PipelineUserAdd = props =>{
 
     const {setVisible,yUserList,setYUserList,pipelineStore} = props
 
-    const {findUserPage,userPage} = pipelineStore
+    const {findUserPage} = pipelineStore
 
     // 选中的用户
     const [addUser,setAddUser] = useState([])
@@ -31,9 +31,13 @@ const PipelineUserAdd = props =>{
         currentPage:1
     })
 
+    // 用户请求数据
     const [findUserParam,setFindUserParam] = useState({
         pageParam
     })
+
+    // 用户分页
+    const [userPage,setUserPage] = useState({})
 
     useEffect(()=>{
         findUser()
@@ -43,6 +47,11 @@ const PipelineUserAdd = props =>{
         findUserPage(findUserParam).then(res=>{
             if(res.code===0){
                 setUserList(res.data?.dataList || [])
+                setUserPage({
+                    currentPage: res.data.currentPage,
+                    totalPage: res.data.totalPage,
+                    totalRecord: res.data.totalRecord
+                })
             }
         })
     }

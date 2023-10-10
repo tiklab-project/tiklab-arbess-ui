@@ -44,9 +44,16 @@ export const taskTitle = type =>{
         case 'xpack': return "XPack"
         case 'message': return "消息通知"
         case 'script': return "执行脚本"
+        case 'post': return "后置处理"
     }
 }
 
+/**
+ * task的图标
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 export const TaskIcon = props =>{
 
     const {type, width=16, height=16} = props
@@ -73,6 +80,7 @@ export const TaskIcon = props =>{
             case 'xpack': return renderImg(pip_config)
             case 'message': return renderImg(pip_message)
             case 'script': return renderImg(pip_shell)
+            case 'post': return renderImg(pip_config)
         }
     }
 

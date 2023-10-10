@@ -14,9 +14,9 @@ import Profile from "../../../common/component/profile/Profile";
 import ListIcon from "../../../common/component/list/ListIcon";
 import Page from "../../../common/component/page/Page";
 import Modals from "../../../common/component/modal/Modal";
-import Btn from "../../../common/component/btn/Btn";
 import {debounce} from "../../../common/utils/Client";
 import DiskModal from "../../../common/component/modal/DiskModal";
+import {PipelineDropdown} from "../../../common/component/dropdown/DropdownMenu";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
@@ -36,7 +36,10 @@ const PipelineTable = props =>{
 
     const {pipelineStore,changPage,changFresh,listType,isLoading}=props
 
-    const {pipelineListPage,updateFollow,pipPage,pipelineList,findPipelineCloneName,pipelineClone} = pipelineStore
+    const {pipelineListPage,updateFollow,pipPage,pipelineList,
+        findPipelineCloneName,pipelineClone,
+        importPipelineYaml
+    } = pipelineStore
     const {execStart,execStop}=historyStore
 
     const [form] = Form.useForm();
@@ -147,6 +150,29 @@ const PipelineTable = props =>{
         }
     }
 
+    /**
+     * 导出yaml文件
+     */
+    const toYaml = record => {
+        importPipelineYaml(record.id).then(response=>{
+            if(!response.code){
+                // 生成二进制数据的blob URL
+                const url = window.URL.createObjectURL(new Blob([response],{type: 'text/plain;charset=utf-8;content-type'}));
+                // 创建a标签并设置download属性
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `${record.name}.yaml`);
+                // 点击触发下载
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                // 释放内存
+                window.URL.revokeObjectURL(url);
+            }else {
+                message.info(response.msg,0.5)
+            }
+        })
+    }
 
     /**
      * 去历史构建详情
@@ -275,6 +301,7 @@ const PipelineTable = props =>{
                             overlay={
                                 <div className="pipelineTable-dropdown-more">
                                     <div className="dropdown-more-item" onClick={()=>toCopy(record)}>克隆</div>
+                                    <div className="dropdown-more-item" onClick={()=>toYaml(record)}>导出YAML文件</div>
                                 </div>
                             }
                             trigger={['click']}
@@ -313,7 +340,6 @@ const PipelineTable = props =>{
                 visible={copyVisible}
                 onOk={onCopyOk}
                 onCancel={onCancel}
-                footer={<></>}
                 width={500}
             >
                 <Spin spinning={copyStatus} tip={"克隆中……"}>
@@ -345,10 +371,6 @@ const PipelineTable = props =>{
                                 <Input/>
                             </Form.Item>
                         </Form>
-                    </div>
-                    <div className="pipelineTable-copy-modal-btn">
-                        <Btn onClick={onCancel} title={"取消"} isMar={true}/>
-                        <Btn onClick={onCopyOk} title={"确定"} type={"primary"}/>
                     </div>
                 </Spin>
             </Modals>

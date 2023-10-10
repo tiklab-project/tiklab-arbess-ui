@@ -20,6 +20,7 @@ const FormsSelect = props => {
 
     return (
         <Select
+            {...res}
             showSearch={border}
             placeholder={border ? label:"未选择"}
             className={border?'':'input-hover'}
@@ -31,7 +32,6 @@ const FormsSelect = props => {
             filterOption = {(input, option) =>
                 (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
-            {...res}
         >
             {children}
         </Select>

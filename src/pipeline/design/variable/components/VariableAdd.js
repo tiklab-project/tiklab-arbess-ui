@@ -39,9 +39,8 @@ const VariableAdd = props =>{
             if(formValue){
                 const params = {
                     ...values,
-                    type:"pipeline",
-                    lastKey:formValue.varKey,
-                    pipelineId:pipelineId,
+                    type:1,
+                    varId:formValue.varId
                 }
                 updateVariable(params).then(res=>{
                     res.code===0 && message.info("更新成功",0.5)
@@ -49,8 +48,8 @@ const VariableAdd = props =>{
             }else {
                 const params = {
                     ...values,
-                    type:"pipeline",
-                    pipelineId:pipelineId,
+                    type:1,
+                    taskId:pipelineId,
                 }
                 createVariable(params).then(res=>{
                     res.code===0 && message.info("添加成功",0.5)
@@ -102,8 +101,10 @@ const VariableAdd = props =>{
                             ({ getFieldValue }) => ({
                                 validator(rule,value) {
                                     let nameArray = []
-                                    if(variableData){
-                                        nameArray = variableData && variableData.map(item=>item.varKey)
+                                    if(formValue){
+                                        nameArray = variableData && variableData.map(list=>list.varKey).filter(list=>list!==formValue.varKey)
+                                    } else {
+                                        nameArray = variableData && variableData.map(list=>list.varKey)
                                     }
                                     if (nameArray.includes(value)) {
                                         return Promise.reject("变量名已经存在");

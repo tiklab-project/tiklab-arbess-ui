@@ -12,12 +12,10 @@ import FormsSelect from "../FormsSelect";
  */
 const CodeGiteeOrGithub = props =>{
 
-    const {authorizeStore,taskStore,stageStore,pipelineStore} = props
+    const {authorizeStore,taskStore} = props
 
     const {findAllStorehouse,storehouseList,findBranch,branchList} = authorizeStore
     const {updateTask,dataItem} = taskStore
-    const {updateStage} = stageStore
-    const {pipeline} = pipelineStore
 
     // 分支选择器是否禁止
     const [prohibited,setProhibited] = useState(true)
@@ -44,7 +42,7 @@ const CodeGiteeOrGithub = props =>{
      */
     const changeGitStoreHouse = value =>{
         setProhibited(false)
-        changTask("codeName",value)
+        updateTask({codeName:value})
     }
 
     /**
@@ -52,28 +50,7 @@ const CodeGiteeOrGithub = props =>{
      * @param value
      */
     const changeBranch = value => {
-        changTask("codeBranch",value)
-    }
-
-    /**
-     * 更改任务
-     */
-    const changTask = (type,value) =>{
-        if(pipeline.type===1){
-            updateTask({
-                pipelineId:pipeline.id,
-                taskName:dataItem.taskName,
-                values:{[type]:value}
-            })
-            return
-        }
-        updateStage({
-            pipelineId:pipeline.id,
-            stageName:dataItem.stageName,
-            parallelName:dataItem.parallelName,
-            taskName:dataItem.taskName,
-            values:{[type]:value}
-        })
+        updateTask({codeBranch:value})
     }
 
     /**
@@ -99,7 +76,7 @@ const CodeGiteeOrGithub = props =>{
     return(
         <>
             <AuthFind/>
-            <Form.Item name={dataItem.taskName+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
+            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
                 <FormsSelect
                     label="仓库"
                     isSpin={isSpin}
@@ -115,7 +92,7 @@ const CodeGiteeOrGithub = props =>{
                     }
                 </FormsSelect>
             </Form.Item>
-            <Form.Item name={dataItem.taskName+"_codeBranch"} label="分支">
+            <Form.Item name={dataItem.taskId+"_codeBranch"} label="分支">
                 <FormsSelect
                     label="分支"
                     isSpin={false}
@@ -137,4 +114,4 @@ const CodeGiteeOrGithub = props =>{
     )
 }
 
-export default inject("taskStore","stageStore","authorizeStore","pipelineStore")(observer(CodeGiteeOrGithub))
+export default inject("taskStore","authorizeStore")(observer(CodeGiteeOrGithub))

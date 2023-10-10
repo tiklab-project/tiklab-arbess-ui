@@ -16,17 +16,22 @@ const Task = props => {
 
     const {pipeline,taskStore,addTask,setTaskFormDrawer,setCreateValue} = props
 
-    const {findAllTask,taskList,taskFresh,setDataItem,deleteTask,validTaskMustField,taskMustField} = taskStore
+    const {findAllTask,taskFresh,setDataItem,deleteTask,taskMustField} = taskStore
 
+    // 加载状态
     const [isLoading,setIsLoading] = useState(true)
+
+    // 多任务列表
+    const [taskList,setTaskList] = useState([])
 
     useEffect(()=>{
         // 获取多任务
-        findAllTask(pipeline.id).then(()=>{
+        findAllTask(pipeline.id).then(res=>{
             setIsLoading(false)
+            if(res.code===0){
+                setTaskList(res.data || [])
+            }
         })
-        // 获取未填的必需任务
-        validTaskMustField(pipeline.id)
     },[taskFresh])
 
     /**
@@ -68,10 +73,8 @@ const Task = props => {
     const delTask = (e,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
-        deleteTask({
-            taskName:item.taskName,
-            pipelineId:pipeline.id
-        })
+        deleteTask(item.taskId)
+        setTaskFormDrawer(false)
     }
 
     const isBtn = type =>{
@@ -85,7 +88,7 @@ const Task = props => {
      * @returns {JSX.Element}
      */
     const renderSingleTask = (group,groupIndex) =>{
-        const valid = taskName => taskMustField && taskMustField.some(li=>li===taskName)
+        const valid = () => taskMustField && taskMustField.some(li=>li===group.taskId)
 
         return <Fragment key={groupIndex}>
             { isBtn(group.taskType) && TaskInsertBtn(insertData,group,groupIndex,"singleBtn") }
@@ -97,14 +100,14 @@ const Task = props => {
                     <div className="newStages-job">
                         <div onClick={()=>showDetail(group)}
                              style={{paddingLeft:14}}
-                             className={`newStages-job-content ${valid(group.taskName)?"job-name":""}`}
+                             className={`newStages-job-content ${valid()?"job-name":""}`}
                         >
                             <div className="newStages-job-sub">
                                 <span className="newStages-job-icon"><TaskIcon type={group.taskType}/></span>
                                 <span className="newStages-job-title">{group.taskName}</span>
                             </div>
                             {
-                                valid(group.taskName) &&
+                                valid() &&
                                 <div className="newStages-job-warn"><ExclamationCircleOutlined /></div>
                             }
                             <Popconfirm

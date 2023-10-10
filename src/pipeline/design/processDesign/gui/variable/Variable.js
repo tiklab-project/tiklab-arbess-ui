@@ -12,9 +12,8 @@ import "./Variable.scss";
  */
 const Variable = props => {
 
-    const {variableStore,pipelineStore,dataItem} = props
+    const {variableStore,dataItem} = props
 
-    const {pipeline} = pipelineStore
     const {variableData,createVariable,findVariable,fresh,deleteVariable,
         updateVariable
     } = variableStore
@@ -27,11 +26,7 @@ const Variable = props => {
 
     useEffect(()=>{
         // 初始化变量
-        findVariable({
-            pipelineId:pipeline.id,
-            type:'task',
-            taskName: dataItem.taskName,
-        })
+        findVariable(dataItem.taskId)
     },[fresh,dataItem.taskId])
 
     useEffect(()=>{
@@ -55,7 +50,7 @@ const Variable = props => {
     const editInput = (item) => {
         setVariableObj({
             var:"edit",
-            lastKey:item.varKey,
+            varId:item.varId,
             varKey:item.varKey,
             varValue:item.varValue || "",
         })
@@ -66,12 +61,7 @@ const Variable = props => {
      */
     const reduceInput = (e,item) => {
         e.stopPropagation();
-        deleteVariable({
-            pipelineId:pipeline.id,
-            varKey:item.varKey,
-            type:'task',
-            taskName: dataItem.taskName,
-        })
+        deleteVariable(item.varId)
     }
 
     const onCancel = () =>{
@@ -88,29 +78,24 @@ const Variable = props => {
                 onCancel()
                 return;
             }
-            update({
-                type:"task",
-                ...value,
-                pipelineId:pipeline.id,
-                taskName: dataItem.taskName,
-            })
-        })
-    }
-
-    const update = value =>{
-        if(variableObj.var==='add'){
-            createVariable(value).then(res=>{
+            if(variableObj.var==='add'){
+                createVariable({
+                    type:2,
+                    taskId:dataItem.taskId,
+                    ...value,
+                }).then(res=>{
+                    if(res.code===0){onCancel()}
+                })
+                return
+            }
+            updateVariable({
+                type:2,
+                varId:variableObj.varId,
+                ...value
+            }).then(res=>{
                 if(res.code===0){onCancel()}
             })
-            return
-        }
-        updateVariable({
-            ...value,
-            lastKey:variableObj?.lastKey
-        }).then(res=>{
-            if(res.code===0){onCancel()}
         })
-
     }
 
     const inputHtml = item =>{
@@ -179,11 +164,11 @@ const Variable = props => {
         return(
             <div key={index} className="pose-variable-inputs">
                 <div className="inputs-variable"
-                     onClick={()=>variableObj?.lastKey === item.varKey ? onCancel() : editInput(item)}
+                     onClick={()=>variableObj?.varId === item.varId ? onCancel() : editInput(item)}
                 >
                     <div className="inputs-variable-icon">
                     {
-                        variableObj?.lastKey === item.varKey ?
+                        variableObj?.varId === item.varId ?
                             <CaretDownOutlined />
                             :
                             <CaretRightOutlined />
@@ -205,7 +190,7 @@ const Variable = props => {
                     </div>
                 </div>
                 {
-                    variableObj?.lastKey === item.varKey &&
+                    variableObj?.varId === item.varId &&
                     <div className="inputs-variable-html">
                         { inputHtml(item) }
                     </div>
@@ -241,4 +226,4 @@ const Variable = props => {
     )
 }
 
-export default inject("variableStore","pipelineStore")(observer(Variable))
+export default inject("variableStore")(observer(Variable))

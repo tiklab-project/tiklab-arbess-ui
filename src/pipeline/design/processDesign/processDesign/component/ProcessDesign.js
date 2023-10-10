@@ -9,7 +9,6 @@ import authStore from "../../../../../setting/auth/store/AuthStore";
 import hostStore from "../../../../../setting/authHost/store/HostStore";
 import serverStore from "../../../../../setting/authServer/store/ServerStore";
 import Gui from "../../gui/gui/Gui";
-import Text from "../../text/Text";
 
 const ProcessDesign = props =>{
 
@@ -26,17 +25,11 @@ const ProcessDesign = props =>{
 
     const {pipelineStore} = props
 
-    const {pipeline} = pipelineStore
-
     return (
         <Provider {...store}>
-            {
-                pipeline?.view==="text" ?
-                    <Text pipelineStore={pipelineStore}/>
-                    :
-                    <Gui pipelineStore={pipelineStore}/>
-
-            }
+            <Gui
+                pipelineStore={pipelineStore}
+            />
         </Provider>
     )
 }

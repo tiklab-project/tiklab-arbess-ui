@@ -89,7 +89,7 @@ const Postprocess = props =>{
      */
     const del = (e,item) => {
         e.stopPropagation()
-        deletePost(item.postprocessId)
+        deletePost(item.postId)
     }
 
     /**
@@ -103,9 +103,9 @@ const Postprocess = props =>{
     const edit = item =>{
         setPoseObj({
             pose:'edit',
-            name:item.name,
+            postName:item.postName,
             taskType:item.taskType,
-            postprocessId:item.postprocessId,
+            postId:item.postId,
             userList:item.task.values.userList,
             typeList:item.task.values.typeList,
             scriptOrder:item.task.values.scriptOrder,
@@ -120,7 +120,7 @@ const Postprocess = props =>{
             if(poseObj.taskType==='message'){
                 const userList = poseObj.userList.map(item=>({receiveType:item.receiveType,user:{id:item.user.id}}))
                 update({
-                    name:values.name,
+                    postName:values.postName,
                     values:{
                         typeList:values.typeList,
                         userList
@@ -128,7 +128,7 @@ const Postprocess = props =>{
                 })
             }else {
                 update({
-                    name:values.name,
+                    postName:values.postName,
                     values:{
                         scriptOrder: mirrorRefs.current.editor.getValue()
                     }
@@ -149,7 +149,7 @@ const Postprocess = props =>{
             return
         }
         updatePost({
-            postprocessId: poseObj.postprocessId,
+            postId: poseObj.postId,
             taskType:poseObj.taskType,
             ...values
         }).then(res=>{
@@ -202,7 +202,7 @@ const Postprocess = props =>{
         return (
             <div className="pose-item-content">
                 <Form form={form} layout={"vertical"} onValuesChange={onValuesChange}>
-                    <Form.Item name="name" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
+                    <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
                         <Input/>
                     </Form.Item>
                     {
@@ -294,11 +294,11 @@ const Postprocess = props =>{
         return (
             <div className="pose-pose-item" key={index}>
                 <div className="pose-item-head"
-                     onClick={()=>poseObj?.postprocessId ===item.postprocessId ? onCancel():edit(item)}
+                     onClick={()=>poseObj?.postId ===item.postId ? onCancel():edit(item)}
                 >
                     <div className="pose-item-line">
                         {
-                            poseObj?.postprocessId === item.postprocessId?
+                            poseObj?.postId === item.postId?
                                 <CaretDownOutlined />:<CaretRightOutlined />
                         }
                     </div>
@@ -323,7 +323,7 @@ const Postprocess = props =>{
                     </div>
                 </div>
                 {
-                    poseObj?.postprocessId === item.postprocessId && poseHtml(item)
+                    poseObj?.postId === item.postId && poseHtml(item)
                 }
             </div>
         )

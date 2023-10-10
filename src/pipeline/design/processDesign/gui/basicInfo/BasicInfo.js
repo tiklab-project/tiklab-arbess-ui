@@ -12,16 +12,16 @@ import BuildMavenOrNode from "./build/BuildMavenOrNode";
 import ArtifactNexus from "./artifact/ArtifactNexus";
 import ArtifactSsh from "./artifact/ArtifactSsh";
 import ArtifactXpack from "./artifact/ArtifactXpack";
-import DeployLinuxOrDocker from "./deploy/DeployLinuxOrDocker";
+import DeployLinux from "./deploy/DeployLinux";
 
 /**
  * task的基本信息
  */
 const BasicInfo = props => {
 
-    const {pipeline,taskStore,stageStore} = props
+    const {taskStore,stageStore} = props
 
-    const {dataItem,taskList,updateTaskName} = taskStore
+    const {dataItem,setDataItem,updateTaskName} = taskStore
     const {updateStageName} = stageStore
 
     const [form] = Form.useForm()
@@ -32,7 +32,7 @@ const BasicInfo = props => {
     /**
      * 设置表单文本框id
      */
-    const getId = name => dataItem.taskName + "_" + name
+    const getId = name => dataItem.taskId + "_" + name
 
     useEffect(()=>{
         // 初始化表单内容
@@ -153,12 +153,12 @@ const BasicInfo = props => {
                 break
             default:
                 form.setFieldsValue({
-                    taskName: dataItem?.formType==='stage'? dataItem?.stageName : dataItem?.parallelName,
+                    taskName: dataItem?.stageName
                 })
         }
         form.validateFields().then(r => {})
         return ()=>form.resetFields(null)
-    },[dataItem.taskName])
+    },[dataItem.taskId])
 
     /**
      * 渲染表单
@@ -183,8 +183,7 @@ const BasicInfo = props => {
             case 'maven':
                 return <BuildMavenOrNode dataItem={dataItem}/>
             case 'liunx':
-            case 'docker':
-                return <DeployLinuxOrDocker dataItem={dataItem}/>
+                return <DeployLinux dataItem={dataItem}/>
             case 'sonar':
                 return <ScanSonarQuebe dataItem={dataItem}/>
             case 'nexus':
@@ -203,43 +202,18 @@ const BasicInfo = props => {
     const changName = e =>{
         setEnter(false)
         const value = e.target.value
-        if(WhetherChange(value,dataItem.taskName)){
-            if(pipeline.type===1){
-                // const validation
-                updateTaskName({
-                    pipelineId: pipeline.id,
-                    lastName: dataItem.taskName,
-                    taskName: value,
-                })
-                return
-            }
-            if(dataItem.formType==="task"){
-                updateStageName({
-                    pipelineId:pipeline.id,
-                    stageName:dataItem.stageName,
-                    parallelName:dataItem.parallelName,
-                    lastName:dataItem.taskName,
-                    taskName:value,
-                    stageType:'task'
-                })
-                return;
-            }
-            if(dataItem.formType==="parallel"){
-                updateStageName({
-                    pipelineId:pipeline.id,
-                    stageName:dataItem.stageName,
-                    lastName:dataItem.parallelName,
-                    parallelName:value,
-                    stageType:'parallel',
-                })
-                return;
-            }
-            updateStageName({
-                pipelineId:pipeline.id,
-                lastName:dataItem.stageName,
-                stageName:value,
-                stageType:'stage',
-            });
+        if(dataItem.formType==="task" && WhetherChange(value,dataItem.taskName)){
+            return updateTaskName(value)
+        }
+        if(WhetherChange(value,dataItem.stageName)){
+            return updateStageName({stageId:dataItem.stageId,stageName:value}).then(res=>{
+                if(res.code===0){
+                    setDataItem({
+                        ...dataItem,
+                        stageName:value
+                    })
+                }
+            })
         }
     }
 

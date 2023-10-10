@@ -13,12 +13,10 @@ import AuthFind from "../AuthFind";
  */
 const ArtifactXpack = props => {
 
-    const {taskStore,stageStore,xpackStore,pipelineStore} = props
+    const {taskStore,xpackStore} = props
 
     const {updateTask,dataItem} = taskStore
-    const {updateStage} = stageStore
     const {findXPackRpy,xpackRpy} = xpackStore
-    const {pipeline} = pipelineStore
 
     // 聚焦状态
     const [border,setBorder] = useState(false)
@@ -40,27 +38,13 @@ const ArtifactXpack = props => {
      * @param value
      */
     const onChange = value => {
-        if(pipeline.type===1){
-            updateTask({
-                pipelineId:pipeline.id,
-                taskName:dataItem.taskName,
-                values:{repository: {id:value}}
-            })
-            return
-        }
-        updateStage({
-            pipelineId:pipeline.id,
-            stageName:dataItem.stageName,
-            parallelName:dataItem.parallelName,
-            taskName:dataItem.taskName,
-            values:{repository: {id:value}}
-        })
+        updateTask({repository: {id:value}})
     }
 
     return(
         <>
             <AuthFind/>
-            <Form.Item name={dataItem.taskName+"_putAddress"} label={"制品库"} rules={[{required:true, message:"制品库不能为空"}]}>
+            <Form.Item name={dataItem.taskId+"_putAddress"} label={"制品库"} rules={[{required:true, message:"制品库不能为空"}]}>
                 <FormsSelect
                     label={'推送位置'}
                     border={border}
@@ -99,4 +83,4 @@ const ArtifactXpack = props => {
     )
 }
 
-export default inject("taskStore","stageStore","xpackStore","pipelineStore")(observer(ArtifactXpack))
+export default inject("taskStore","xpackStore")(observer(ArtifactXpack))

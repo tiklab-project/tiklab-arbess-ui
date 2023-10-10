@@ -32,10 +32,10 @@ const PostprocessAdd = props =>{
                 // 初始化表单
                 form.setFieldsValue({
                     ...formValue,
-                    type:formValue.values.type,
-                    typeList: formValue.values.typeList,
+                    type:formValue.task.values?.type,
+                    typeList: formValue.task.values?.typeList,
                 })
-                setYUserList(formValue.values.userList || [])
+                setYUserList(formValue.task.values.userList || [])
                 return
             }
             // 初始化通知用户
@@ -101,18 +101,19 @@ const PostprocessAdd = props =>{
                 postName: postName,
                 values: taskType==='message' ?
                     {
-                        typeList:value.typeList,userList
+                        typeList:value.typeList,
+                        userList
                     }
                     :
                     {
                         scriptOrder: mirrorRefs.current.editor.getValue(),
-                        type:type,
+                        type,
                     }
             }
             if(formValue){
                  params = {
                      ...params,
-                     postprocessId:formValue.postprocessId,
+                     postId:formValue.postId,
                  }
                 updatePost(params).then(res=>{
                     res.code===0 && message.info("更新成功",0.5)
@@ -264,7 +265,7 @@ const PostprocessAdd = props =>{
                                     </Form.Item>
                                     <Form.Item label={'脚本命令'}>
                                         <PostprocessMirrorScenario
-                                            value={formValue?formValue.values.scriptOrder:""}
+                                            value={formValue?formValue.task?.values.scriptOrder:""}
                                             mirrorRefs={mirrorRefs}
                                             styleActiveLine={styleActiveLine}
                                             onFocus={onFocus}

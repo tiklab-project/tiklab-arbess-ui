@@ -17,19 +17,24 @@ const Stage = props =>{
 
     const {stageStore,taskStore,pipeline,addTask,setCreateValue,setTaskFormDrawer} = props
 
-    const {stageList,finAllStage,stageFresh,deleteStage,validStagesMustField,stageMustField} = stageStore
-    const {setDataItem} = taskStore
+    const {finAllStage,stageFresh,deleteStage,stageMustField} = stageStore
+    const {setDataItem,taskFresh} = taskStore
 
-    const [isLoading,setIsLoading] = useState(true)
+    // 加载状态
+    const [isLoading,setIsLoading] = useState(true);
+
+    // 多阶段列表
+    const [stageList,setStageList] = useState([])
 
     useEffect(()=>{
         // 初始化多阶段
-        finAllStage(pipeline.id).then(()=>{
+        finAllStage(pipeline.id).then(res=>{
             setIsLoading(false)
+            if(res.code===0){
+                setStageList(res.data || [])
+            }
         })
-        // 获取未填的必需任务
-        validStagesMustField(pipeline.id)
-    },[stageFresh])
+    },[stageFresh,taskFresh])
 
     /**
      * 添加新任务
@@ -37,7 +42,6 @@ const Stage = props =>{
     const newTask = () =>{
         setCreateValue({
             stageSort:stageList && stageList.length>0?stageList.length+1:1,
-            stageType:'stage',
         })
         addTask()
     }
@@ -45,13 +49,11 @@ const Stage = props =>{
     /**
      * 多阶段 串行添加
      */
-    const serial = (group,list,groupIndex,stagesIndex) =>{
+    const serial = (list,groupIndex,stagesIndex) =>{
         setCreateValue({
-            stageName:group.stageName,
-            parallelName:list.parallelName,
             stageSort:groupIndex+1,
+            stageId:list.stageId,
             taskSort:stagesIndex,
-            stageType:'task'
         })
         addTask()
     }
@@ -61,10 +63,9 @@ const Stage = props =>{
      * @param group
      */
      const parallelTask = group => {
-         setCreateValue({
-             stageName:group.stageName,
-             stageType:'parallel',
-         })
+        setCreateValue({
+            stageId:group.stageId
+        })
         addTask()
     }
 
@@ -76,7 +77,6 @@ const Stage = props =>{
     const insertData = (group,groupIndex) => {
         setCreateValue({
             stageSort:groupIndex+1,
-            stageType:'stage',
         })
         addTask()
     }
@@ -84,10 +84,9 @@ const Stage = props =>{
     /**
      * task详情
      */
-    const showDetail = (item,formType,name) =>{
+    const showDetail = (item,formType) =>{
         setDataItem({
             ...item,
-            ...name,
             formType
         })
         setTaskFormDrawer(true)
@@ -99,12 +98,7 @@ const Stage = props =>{
     const deleteTask = (e,group,list,item) =>{
         //屏蔽父层点击事件
         e.stopPropagation()
-        deleteStage({
-            pipelineId:pipeline.id,
-            stageName:group.stageName,
-            parallelName:list.parallelName,
-            taskName:item.taskName,
-        })
+        deleteStage(item.taskId)
         setTaskFormDrawer(false)
     }
 
@@ -120,9 +114,9 @@ const Stage = props =>{
             <div className="group-table">
                 <div className="group-head">
                     <div className="name">
-                        <div className="group-name">{group && group.stageName}</div>
+                        <div className="group-name">{group?.stageName}</div>
                         <div className="group-inputBtn"
-                             onClick={()=>showDetail(group,'stage',{})}
+                             onClick={()=>showDetail(group,'stage')}
                         ><EditOutlined/></div>
                     </div>
                 </div>
@@ -133,11 +127,9 @@ const Stage = props =>{
                                <div key={listIndex} className={`${!group.code?"multi-content":""}`}>
                                    <div className="newStages-title" style={group.code? {opacity:0}:null}>
                                         <span className="newStages-title-name">
-                                            {list?.parallelName || "阶段"}
+                                            {list?.stageName || "阶段"}
                                             <span className="newStages-title-icon">
-                                                <EditOutlined onClick={()=>showDetail(list,'parallel', {
-                                                    stageName:group?.stageName
-                                                })}/>
+                                                <EditOutlined onClick={()=>showDetail(list,'parallel')}/>
                                             </span>
                                         </span>
                                    </div>
@@ -145,10 +137,7 @@ const Stage = props =>{
                                        <div className="newStages-content">
                                            {
                                                list && list.taskValues && list.taskValues.map((task,taskIndex)=>{
-                                                   const valid = stageMustField && stageMustField.some(li=>{
-                                                       const {stageName,parallelName,taskName} = li
-                                                       return stageName===group.stageName&&parallelName===list.parallelName&&taskName===task.taskName
-                                                   })
+                                                   const valid = () => stageMustField && stageMustField.some(li=>li===task.taskId)
                                                    return (
                                                        <div key={taskIndex}>
                                                            <div className={`newStages-job ${!group.code?"newStages-has":""}`} >
@@ -156,7 +145,7 @@ const Stage = props =>{
                                                                    <Tooltip title={"串行任务"}>
                                                                        <div className="newStages-has-add"
                                                                             style={{marginRight:15}}
-                                                                            onClick={()=>serial(group,list,groupIndex,taskIndex+1)}
+                                                                            onClick={()=>serial(list,groupIndex,taskIndex+1)}
                                                                        >
                                                                            <img
                                                                                src={pip_zengjia}
@@ -167,18 +156,15 @@ const Stage = props =>{
                                                                    </Tooltip>
                                                                }
                                                                <div style={{paddingLeft:20}}
-                                                                    className={`newStages-job-content ${valid?"job-name":""}`}
-                                                                    onClick={()=>showDetail(task,'task',{
-                                                                        stageName:group?.stageName,
-                                                                        parallelName:list?.parallelName,
-                                                                    })}
+                                                                    className={`newStages-job-content ${valid() ? "job-name":""}`}
+                                                                    onClick={()=>showDetail(task,'task')}
                                                                >
                                                                    <div className="newStages-job-sub">
                                                                        <span className="newStages-job-icon"><TaskIcon type={task.taskType}/></span>
                                                                        <span className="newStages-job-title">{task.taskName}</span>
                                                                    </div>
                                                                    {
-                                                                       valid &&
+                                                                       valid() &&
                                                                        <div className="newStages-job-warn"><ExclamationCircleOutlined /></div>
                                                                    }
                                                                    <Popconfirm
@@ -197,7 +183,7 @@ const Stage = props =>{
                                                                    <Tooltip title={"串行任务"}>
                                                                        <div className="newStages-has-add"
                                                                             style={{marginLeft:15}}
-                                                                            onClick={()=>serial(group,list,groupIndex,taskIndex+2)}
+                                                                            onClick={()=>serial(list,groupIndex,taskIndex+2)}
                                                                        >
                                                                            <img
                                                                                src={pip_zengjia}

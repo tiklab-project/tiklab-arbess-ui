@@ -33,7 +33,7 @@ const PipelineAside= (props)=>{
 
     useEffect(()=>{
         // 组件销毁清空流水线信息
-        return setPipeline("")
+        return ()=>{setPipeline("")}
     },[])
 
     useEffect(()=>{

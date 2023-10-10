@@ -10,7 +10,7 @@ const PostprocessUserAdd = props =>{
 
     const {pipelineStore,yUserList,setYUserList,type} = props
 
-    const {pipeline,userPage,findDmUserPage} = pipelineStore
+    const {pipeline,findDmUserPage} = pipelineStore
 
     // 消息通知人员下拉框
     const [userAddVisible,setUserAddVisible] = useState(false)
@@ -29,9 +29,14 @@ const PostprocessUserAdd = props =>{
         currentPage:1
     })
 
+    // 用户请求数据
     const [findUserParam,setFindUserParam] = useState({
         pageParam
     })
+
+    // 用户分页
+    const [userPage,setUserPage] = useState({})
+
 
     useEffect(()=>{
         findDmUser()
@@ -44,6 +49,11 @@ const PostprocessUserAdd = props =>{
         }).then(res=>{
             if(res.code===0){
                 setUserList(res.data?.dataList || [])
+                setUserPage({
+                    currentPage: res.data.currentPage,
+                    totalPage: res.data.totalPage,
+                    totalRecord: res.data.totalRecord
+                })
             }
         })
     }

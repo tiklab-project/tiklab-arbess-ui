@@ -7,18 +7,16 @@ import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
 
 /**
- * linux & docker
+ * 主机部署
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const DeployLinuxOrDocker = props =>{
+const DeployLinux = props =>{
 
-    const {taskStore,stageStore,pipelineStore} = props
+    const {taskStore} = props
 
     const {updateTask,dataItem} = taskStore
-    const {updateStage} = stageStore
-    const {pipeline} = pipelineStore
 
     const [border,setBorder] = useState(false)
 
@@ -27,26 +25,12 @@ const DeployLinuxOrDocker = props =>{
      */
     const changDeployType = value => {
         setBorder(false)
-        if (pipeline.type === 1) {
-            updateTask({
-                pipelineId: pipeline.id,
-                taskName: dataItem.taskName,
-                values: {authType: value},
-            })
-            return
-        }
-        updateStage({
-            pipelineId: pipeline.id,
-            stageName: dataItem.stageName,
-            parallelName: dataItem.parallelName,
-            taskName: dataItem.taskName,
-            values: {authType: value},
-        })
+        updateTask({authType:value})
     }
 
     return(
         <>
-            <Form.Item name={dataItem.taskName+"_authType"} label="部署方式">
+            <Form.Item name={dataItem.taskId+"_authType"} label="部署方式">
                 <FormsSelect
                     label="部署方式"
                     border={border}
@@ -82,21 +66,10 @@ const DeployLinuxOrDocker = props =>{
                                 placeholder={"部署命令"}
                             />
                         </Form.Item>
-                        {
-                            dataItem.taskType==='liunx' ?
-                            null
-                            :
-                            <FormsInput
-                                name={"startAddress"}
-                                placeholder={" / 代表部署位置"}
-                                label={"dockerfile文件地址"}
-                                addonBefore={"/"}
-                            />
-                        }
                     </>
                 }
         </>
     )
 }
 
-export default inject("taskStore","stageStore",'pipelineStore')(observer(DeployLinuxOrDocker))
+export default inject("taskStore")(observer(DeployLinux))

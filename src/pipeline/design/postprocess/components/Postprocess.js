@@ -57,7 +57,7 @@ const Postprocess = props =>{
             setPostprocessVisible(true)
             return
         }
-        findOnePost(record.postprocessId).then(res=>{
+        findOnePost(record.postId).then(res=>{
             if(res.code===0){
                 setFormValue(res.data && res.data)
                 setPostprocessVisible(true)
@@ -73,7 +73,7 @@ const Postprocess = props =>{
      * @param record
      */
     const delPostprocess = record => {
-        deletePost(record.postprocessId).then(res=>{
+        deletePost(record.postId).then(res=>{
             res.code===0 && message.info("删除成功",0.5)
         })
     }
@@ -128,7 +128,7 @@ const Postprocess = props =>{
                                 bordered={false}
                                 columns={columns}
                                 dataSource={postprocessData}
-                                rowKey={record=>record.postprocessId}
+                                rowKey={record=>record.postId}
                                 pagination={false}
                                 locale={{emptyText: <EmptyText title={"暂无后置处理"}/>}}
                             />

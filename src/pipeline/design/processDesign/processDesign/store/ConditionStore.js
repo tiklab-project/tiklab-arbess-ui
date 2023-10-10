@@ -21,6 +21,8 @@ class CondStore{
      */
     @action
     deleteCond = async value =>{
+        const param = new FormData()
+        param.append("condId",value)
         const data = await Axios.post("/pipelineCond/deleteCond",param)
         return data
     }
@@ -43,7 +45,9 @@ class CondStore{
      */
     @action
     findTaskCond = async value =>{
-        const data = await Axios.post("/pipelineCond/findTaskCond",value)
+        const param = new FormData()
+        param.append("taskId",value)
+        const data = await Axios.post("/pipelineCond/findAllTaskCond",param)
         return data
     }
 

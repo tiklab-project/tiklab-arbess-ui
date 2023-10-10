@@ -13,11 +13,9 @@ import "./CodeBlock.scss";
  */
 const MirrorContent = forwardRef((props,ref)=>{
 
-    const {name,placeholder,taskStore,stageStore,pipelineStore} = props
+    const {name,placeholder,taskStore} = props
 
     const {updateTask,dataItem} = taskStore
-    const {updateStage} = stageStore
-    const {pipeline} = pipelineStore
 
     const mirrorRefs = useRef(null)
 
@@ -68,21 +66,7 @@ const MirrorContent = forwardRef((props,ref)=>{
         const value = ref.current.editor.getValue()
         setBordered(false)
         if(WhetherChange(value,dataItem.task?.[name])){
-            if(pipeline.type===1){
-                updateTask({
-                    pipelineId:pipeline.id,
-                    taskName:dataItem.taskName,
-                    values:{[name]:value},
-                })
-                return
-            }
-            updateStage({
-                pipelineId:pipeline.id,
-                stageName:dataItem.stageName,
-                parallelName:dataItem.parallelName,
-                taskName:dataItem.taskName,
-                values:{[name]:value}
-            })
+            updateTask({[name]:value})
         }
     }
 
@@ -122,4 +106,4 @@ const MirrorContent = forwardRef((props,ref)=>{
         </>
     })
 
-export default inject("taskStore","stageStore","pipelineStore")(observer(MirrorContent))
+export default inject("taskStore")(observer(MirrorContent))

@@ -14,7 +14,7 @@ import HistoryScreen from "./HistoryScreen";
 import HistoryDetail from "./HistoryDetail";
 import {runStatusIcon,runStatusText} from "./HistoryTrigger";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
-import "./HistoryTable.scss"
+import "./HistoryTable.scss";
 
 const HistoryTable = props =>{
 
@@ -29,6 +29,7 @@ const HistoryTable = props =>{
     // 历史信息
     const [historyItem,setHistoryItem] = useState(null)
 
+    // 磁盘空间状态弹出框
     const [diskVisible,setDiskVisible] = useState(false)
 
     /**

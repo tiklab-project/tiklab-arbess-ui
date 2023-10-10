@@ -22,11 +22,12 @@ const HistoryScreen = props =>{
     const [page,setPage] = useState({})
 
     useEffect(()=>{
-        if(historyType==='historyPipeline'){
-            findDmUser()
-        }
+        if(historyType==='historyPipeline'){findDmUser()}
     },[currentPage])
 
+    /**
+     * 获取项目成员
+     */
     const findDmUser = () =>{
         findDmUserPage({
             pageParam:{
