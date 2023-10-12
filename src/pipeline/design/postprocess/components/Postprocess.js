@@ -2,11 +2,11 @@ import React,{useState,useEffect} from "react";
 import {Col, message, Row, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import PostprocessAdd from "./PostprocessAdd";
+import PostprocessAddEdit from "./PostprocessAddEdit";
 import {TaskTitleIcon} from "../../processDesign/gui/gui/TaskTitleIcon";
 import Btn from "../../../../common/component/btn/Btn";
-import EmptyText from "../../../../common/component/emptyText/EmptyText";
-import Listaction from "../../../../common/component/list/Listaction";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListAction from "../../../../common/component/list/ListAction";
 import "./Postprocess.scss";
 
 /**
@@ -17,9 +17,8 @@ import "./Postprocess.scss";
  */
 const Postprocess = props =>{
 
-    const {pipelineStore,postprocessStore} = props
+    const {postprocessStore,match:{params}} = props
 
-    const {pipeline} = pipelineStore
     const {findPipelinePost,isFindPostprocessData,postprocessData,deletePost,
         findMessageSendType,findOnePost
     } = postprocessStore
@@ -36,7 +35,7 @@ const Postprocess = props =>{
 
     useEffect(()=>{
         // 初始化后置处理
-        findPipelinePost(pipeline.id)
+        findPipelinePost(params.id)
     },[isFindPostprocessData])
 
     /**
@@ -74,7 +73,7 @@ const Postprocess = props =>{
      */
     const delPostprocess = record => {
         deletePost(record.postId).then(res=>{
-            res.code===0 && message.info("删除成功",0.5)
+            res.code===0 && message.info("删除成功")
         })
     }
 
@@ -97,7 +96,7 @@ const Postprocess = props =>{
             dataIndex: "action",
             key: "action",
             render:(_,record) => {
-                return  <Listaction
+                return  <ListAction
                             edit={()=>editPostprocess(record)}
                             del={()=>delPostprocess(record)}
                         />
@@ -115,12 +114,11 @@ const Postprocess = props =>{
                             <div className="post-pose-up-title">后置处理</div>
                             <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}个后置处理</div>
                             <Btn title={"添加"} icon={<PlusOutlined/>} onClick={()=>addPostprocess()}/>
-                            <PostprocessAdd
+                            <PostprocessAddEdit
+                                {...props}
+                                formValue={formValue}
                                 postprocessVisible={postprocessVisible}
                                 setPostprocessVisible={setPostprocessVisible}
-                                postprocessStore={postprocessStore}
-                                pipelineStore={pipelineStore}
-                                formValue={formValue}
                             />
                         </div>
                         <div className="trigger-tables">
@@ -130,7 +128,7 @@ const Postprocess = props =>{
                                 dataSource={postprocessData}
                                 rowKey={record=>record.postId}
                                 pagination={false}
-                                locale={{emptyText: <EmptyText title={"暂无后置处理"}/>}}
+                                locale={{emptyText: <ListEmpty title={"暂无后置处理"}/>}}
                             />
                         </div>
                     </div>

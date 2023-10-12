@@ -21,7 +21,7 @@ class TriggerStore {
     updateTrigger = async value =>{
         const data = await Axios.post("/trigger/updateTrigger",value)
         if(data.code===0){
-            message.info("更新成功",0.5)
+            message.info("更新成功")
             this.isFindTrigger = !this.isFindTrigger
         }
         return data
@@ -38,7 +38,7 @@ class TriggerStore {
         param.append("triggerId",value)
         const data = await Axios.post("/trigger/deleteTrigger",param)
         if(data.code===0){
-            message.info("删除成功",0.5)
+            message.info("删除成功")
             this.isFindTrigger = !this.isFindTrigger
         }
         return data
@@ -53,11 +53,11 @@ class TriggerStore {
     createTrigger = async value =>{
         const data = await Axios.post("/trigger/createTrigger",value)
         if (data.code===0){
-            message.info("添加成功",0.5)
+            message.info("添加成功")
             this.isFindTrigger = !this.isFindTrigger
         }
         if(data.code===50001){
-            message.info(data.msg,0.5)
+            message.info(data.msg)
         }
         return data
     }

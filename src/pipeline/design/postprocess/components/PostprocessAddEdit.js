@@ -2,14 +2,14 @@ import React,{useState,useEffect,useRef} from "react";
 import {Form, Select, Checkbox, Table, Space, Tooltip, message, Input} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
-import EmptyText from "../../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Modals from "../../../../common/component/modal/Modal";
 import {PostprocessMirrorScenario} from "../../../../common/component/editor/CodeMirror";
 import Profile from "../../../../common/component/profile/Profile";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 import {Validation} from "../../../../common/utils/Client";
 
-const PostprocessAdd = props =>{
+const PostprocessAddEdit = props =>{
 
     const {postprocessVisible,setPostprocessVisible,formValue,postprocessStore,pipelineStore} = props
 
@@ -116,11 +116,11 @@ const PostprocessAdd = props =>{
                      postId:formValue.postId,
                  }
                 updatePost(params).then(res=>{
-                    res.code===0 && message.info("更新成功",0.5)
+                    res.code===0 && message.info("更新成功")
                 })
             }else {
                 createPost(params).then(res=>{
-                    res.code===0 && message.info("添加成功",0.5)
+                    res.code===0 && message.info("添加成功")
                 })
             }
             setPostprocessVisible(false)
@@ -168,11 +168,9 @@ const PostprocessAdd = props =>{
             ellipsis:true,
             render: (text,record) => {
                 if (record.user.id !== user.userId) {
-                    return  <Tooltip title="移出用户">
-                                <DeleteOutlined onClick={()=>remove(record)}/>
-                            </Tooltip>
+                    return  <DeleteOutlined onClick={()=>remove(record)}/>
                 }
-                return <span className="title-user-ban">
+                return  <span className="title-user-ban">
                              <DeleteOutlined />
                         </span>
             }
@@ -247,7 +245,7 @@ const PostprocessAdd = props =>{
                                             dataSource={yUserList}
                                             rowKey={(record) => record.user.id}
                                             pagination={false}
-                                            locale={{emptyText: <EmptyText/>}}
+                                            locale={{emptyText: <ListEmpty/>}}
                                         />
                                     </div>
                                 </>
@@ -282,4 +280,4 @@ const PostprocessAdd = props =>{
     )
 }
 
-export default PostprocessAdd
+export default PostprocessAddEdit

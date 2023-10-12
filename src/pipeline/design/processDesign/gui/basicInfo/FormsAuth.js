@@ -13,7 +13,7 @@ import FormsSelect from "./FormsSelect";
  * @returns {JSX.Element}
  * @constructor
  */
-const AuthFind = props =>{
+const FormsAuth = props =>{
 
     const {taskStore,authStore,serverStore,hostStore}=props
 
@@ -264,4 +264,4 @@ const AuthFind = props =>{
     )
 }
 
-export default inject("taskStore","authStore","serverStore","hostStore")(observer(AuthFind))
+export default inject("taskStore","authStore","serverStore","hostStore")(observer(FormsAuth))

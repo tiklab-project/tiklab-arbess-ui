@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
-import EmptyText from "../../../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../../../common/component/list/ListEmpty";
 import {Validation} from "../../../../../common/utils/Client";
 import "./Condition.scss";
 
@@ -243,7 +243,7 @@ const Condition = props =>{
                     condData && condData.length > 0 ?
                     condData.map((item,index)=>renderCondData(item,index))
                     :
-                    <EmptyText title={"暂无条件"}/>
+                    <ListEmpty title={"暂无条件"}/>
                 }
             </div>
         </div>

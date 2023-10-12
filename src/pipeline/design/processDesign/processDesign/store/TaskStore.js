@@ -47,7 +47,7 @@ class TaskStore {
     createTask = async value =>{
         const data = await Axios.post("/tasks/createTask",value)
         if(data.code===0){
-            message.info("添加成功",0.7)
+            message.info("添加成功")
             this.taskFresh = !this.taskFresh
         }
 
@@ -142,7 +142,7 @@ class TaskStore {
         params.append("taskId",value)
         const data = await Axios.post("/tasks/deleteTask",params)
         if(data.code===0){
-            message.info("删除成功",0.7)
+            message.info("删除成功")
             this.taskFresh = !this.taskFresh
         }
         return data

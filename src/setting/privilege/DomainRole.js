@@ -1,6 +1,5 @@
 import React from "react";
 import {DomainRole} from "tiklab-privilege-ui";
-import {inject,observer} from "mobx-react";
 
 /**
  * 项目权限
@@ -10,11 +9,8 @@ import {inject,observer} from "mobx-react";
  */
 const DomainRoleContent = props =>{
 
-    const {pipelineStore} = props
-    const {pipeline} = pipelineStore
-
-    return <DomainRole {...props} domainId={pipeline.id}  bgroup={"matflow"}/>
+    return <DomainRole {...props} domainId={props.match.params.id}  bgroup={"matflow"}/>
 
 }
 
-export default inject("pipelineStore")(observer(DomainRoleContent))
+export default DomainRoleContent

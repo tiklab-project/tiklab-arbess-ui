@@ -3,7 +3,7 @@ import {inject,observer} from "mobx-react";
 import {Input, Popconfirm, Select, Form} from "antd";
 import {PlusCircleOutlined, DeleteOutlined, CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
 import Btn from "../../../../../common/component/btn/Btn";
-import EmptyText from "../../../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../../../common/component/list/ListEmpty";
 import {Validation} from "../../../../../common/utils/Client";
 import "./Variable.scss";
 
@@ -219,7 +219,7 @@ const Variable = props => {
                     variableData && variableData.length>0 ?
                     variableData.map((item,index)=>renderInputs(item,index))
                     :
-                    <EmptyText title={"暂无变量"}/>
+                    <ListEmpty title={"暂无变量"}/>
                 }
             </div>
         </div>

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Table, Input, Dropdown} from "antd";
 import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
 import Btn from "../../../../common/component/btn/Btn";
-import EmptyText from "../../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Page from "../../../../common/component/page/Page";
 import "./PostprocessUserAdd.scss";
 
@@ -191,7 +191,7 @@ const PostprocessUserAdd = props =>{
                     }]}
                     dataSource={userList}
                     pagination={false}
-                    locale={{emptyText: <EmptyText/>}}
+                    locale={{emptyText: <ListEmpty/>}}
                 />
                 <Page
                     currentPage={findUserParam.pageParam.currentPage}

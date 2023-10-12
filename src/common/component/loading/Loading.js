@@ -8,7 +8,7 @@ import "./Loading.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const Loading = props =>{
+export const Loading = props =>{
     return (
         <div className="mf-loading">
             <div className="mf-shape"/>
@@ -26,7 +26,7 @@ const Loading = props =>{
  * @returns {JSX.Element}
  * @constructor
  */
-const SpinLoading = ({size, type,title}) => {
+export const SpinLoading = ({size, type,title}) => {
 
     if(type==='table'){
         return  <div style={{textAlign:"center",padding:"25px 0"}}>
@@ -42,5 +42,3 @@ const SpinLoading = ({size, type,title}) => {
             </div>
 
 }
-
-export {Loading,SpinLoading}

@@ -16,6 +16,7 @@ import pip_ssh from "../../../../../assets/images/svg/pip_ssh.svg";
 import pip_config from "../../../../../assets/images/svg/pip_config.svg";
 import pip_message from "../../../../../assets/images/svg/pip_message.svg";
 import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
+import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import testonImg from "tiklab-eam-ui/es/assests/img/teston.png";
 
 /**
@@ -36,8 +37,9 @@ export const taskTitle = type =>{
         case 'teston': return "TestOn自动化测试"
         case 'maven': return "maven构建"
         case 'nodejs': return "node"
+        case 'build_docker': return "Docker构建"
         case 'liunx': return "主机部署"
-        case 'docker': return "Docker"
+        case 'docker': return "Docker部署"
         case 'sonar': return "SonarQuebe"
         case 'nexus': return "Nexus"
         case 'ssh': return "SSH"
@@ -72,6 +74,7 @@ export const TaskIcon = props =>{
             case 'teston': return renderImg(testonImg)
             case 'maven': return renderImg(maven)
             case 'nodejs': return renderImg(pip_nodejs)
+            case 'build_docker': return renderImg(pip_docker)
             case 'liunx': return renderImg(pip_liunx)
             case 'docker': return renderImg(pip_docker)
             case 'sonar': return renderImg(pip_sonar)
@@ -80,7 +83,7 @@ export const TaskIcon = props =>{
             case 'xpack': return renderImg(pip_config)
             case 'message': return renderImg(pip_message)
             case 'script': return renderImg(pip_shell)
-            case 'post': return renderImg(pip_config)
+            case 'post': return renderImg(pip_post)
         }
     }
 
@@ -103,4 +106,35 @@ export const TaskTitleIcon = props =>{
                     { taskTitle(type) }
                 </span>
             </>
+}
+
+
+export const HeadlineTitle = type =>{
+    switch (type) {
+        case 'git':
+        case 'gitlab':
+        case 'svn':
+        case 'xcode':
+        case 'gitee':
+        case 'github':
+            return '源码'
+        case 'sonar':
+            return '代码扫描'
+        case 'maventest':
+        case 'teston':
+            return '测试'
+        case 'maven':
+        case 'nodejs':
+        case 'build_docker':
+            return '构建'
+        case 'nexus':
+        case 'ssh':
+        case 'xpack':
+            return '推送制品'
+        case 'liunx':
+        case 'docker':
+            return '部署'
+        default :
+            return "阶段名称"
+    }
 }

@@ -11,7 +11,6 @@ import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/img/matflow3.png";
 import { PortalDropdown } from "../../common/component/dropdown/DropdownMenu";
 import PortalMessage from "./PortalMessage";
-import messageStore from "../store/MessageStore"
 import "./Portal.scss";
 
 /**
@@ -19,39 +18,22 @@ import "./Portal.scss";
  */
 const  Portal = props =>{
 
-    const {route,pipelineStore,systemRoleStore,AppLink,HelpLink,AvatarLink} = props
+    const {route,systemRoleStore,AppLink,HelpLink,AvatarLink} = props
 
-    const {findMessageItemPage} = messageStore
-    const {findUserPipeline,pipelineList} = pipelineStore
     const {getSystemPermissions} = systemRoleStore
 
     let path = props.location.pathname
     const {t} = useTranslation()
+    // 当前路由
     const [currentLink,setCurrentLink] = useState(path)
+    // 消息抽屉状态
     const [visible,setVisible] = useState(false)
+    // 未读消息数量
     const [unread,setUnread] = useState(0)
 
     useEffect(()=>{
-
-        // 获取未读消息通知
-        findMessageItemPage({
-            status:0,
-            pageParam: {
-                pageSize: 12,
-                currentPage: 1
-            }
-        }).then(res=>{
-            if(res.code===0){
-                setUnread(res.data.totalRecord || 0)
-            }
-        })
-
-        // 获取所有流水线
-        findUserPipeline()
-
         // 获取系统权限
         getSystemPermissions(getUser().userId)
-
     },[])
 
     useEffect(()=>{
@@ -78,26 +60,6 @@ const  Portal = props =>{
         }
     ]
 
-    /**
-     * 路由跳转
-     * @param item
-     */
-    const changeCurrentLink = item => {
-        props.history.push(item.to)
-    }
-
-    // 渲染一级标题
-    const renderRouter = routers => {
-        return routers && routers.map(routers => {
-            return <div key={routers.key}
-                        onClick={() => changeCurrentLink(routers)}
-                        className={currentLink === routers.to ? "headers-active" : null}
-            >
-                {t(routers.title)}
-            </div>
-        })
-    }
-
     return(
         <div className="frame">
             <div className="frame-header">
@@ -107,7 +69,16 @@ const  Portal = props =>{
                         <img src={logo} alt="logo" />
                     </div>
                     <div className="headers-link">
-                        {renderRouter(routers)}
+                        {
+                            routers && routers.map(routers =>(
+                                <div key={routers.key}
+                                     onClick={() => props.history.push(routers.to)}
+                                     className={currentLink === routers.to ? "headers-active" : null}
+                                >
+                                    {t(routers.title)}
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className="frame-header-right">
@@ -131,10 +102,8 @@ const  Portal = props =>{
                             {...props}
                             visible={visible}
                             setVisible={setVisible}
-                            pipelineList={pipelineList}
                             unread={unread}
                             setUnread={setUnread}
-                            messageStore={messageStore}
                         />
                     </div>
                     <div className="frame-header-right-text">
@@ -152,4 +121,4 @@ const  Portal = props =>{
     )
 }
 
-export default inject("systemRoleStore","pipelineStore")(observer(Portal))
+export default inject("systemRoleStore")(observer(Portal))

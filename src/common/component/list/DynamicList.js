@@ -1,6 +1,6 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
-import EmptyText from "../emptyText/EmptyText";
+import ListEmpty from "./ListEmpty";
 import "./DynamicList.scss";
 
 /**
@@ -18,7 +18,9 @@ const DynamicList = props =>{
     // 渲染动态列表
     const renderLis = (item,index) => {
         return  <div key={index} className="dynamic-item" onClick={()=>goDynaLink(item)}>
-                    <div dangerouslySetInnerHTML={{__html: item.data}}/>
+                    <div className="dynamic-item-data">
+                        <div dangerouslySetInnerHTML={{__html: item.data}}/>
+                    </div>
                     <div className="dynamic-item-time">{item.createTime}</div>
                 </div>
     }
@@ -29,7 +31,7 @@ const DynamicList = props =>{
                 dynamicList && dynamicList.length>0 ?
                 dynamicList.map((item,index)=>renderLis(item,index))
                 :
-                <EmptyText title={"暂无近期动态"}/>
+                <ListEmpty title={"暂无动态"}/>
             }
         </div>
     )

@@ -18,12 +18,12 @@ const FormsInput = props =>{
     const [enter,setEnter] = useState(false)
 
     useEffect(()=>{
-        // 文本框聚焦
-        if(enter){
-            ref.current.focus()
-        }else {
-            ref.current.blur()
-        }
+        // // 文本框聚焦
+        // if(enter){
+        //     ref.current.focus()
+        // }else {
+        //     ref.current.blur()
+        // }
     },[enter])
 
     // Git正则表达

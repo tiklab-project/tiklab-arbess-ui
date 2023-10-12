@@ -2,10 +2,10 @@ import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import TriggerAdd from "./TriggerAdd";
+import TriggerAddEdit from "./TriggerAddEdit";
 import Btn from "../../../../common/component/btn/Btn";
-import EmptyText from "../../../../common/component/emptyText/EmptyText";
-import Listaction from "../../../../common/component/list/Listaction";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListAction from "../../../../common/component/list/ListAction";
 import "./Trigger.scss";
 
 /**
@@ -16,24 +16,23 @@ import "./Trigger.scss";
  */
 const Trigger = props =>{
 
-    const {triggerStore,pipelineStore} = props
+    const {triggerStore,match:{params}} = props
 
     const {updateTrigger,deleteTrigger,createTrigger,findAllTrigger,triggerData,isFindTrigger} = triggerStore
-    const {pipeline} = pipelineStore
 
-    const [formValue,setFormValue] = useState("")
+    const [formValue,setFormValue] = useState(null)
     const [triggerVisible,setTriggerVisible] = useState(false)
 
     useEffect(()=>{
         // 初始化触发器
-        findAllTrigger(pipeline.id)
+        findAllTrigger(params.id)
     },[isFindTrigger])
 
     /**
      * 添加触发器
      */
     const addTrigger = () => {
-        setFormValue("")
+        setFormValue(null)
         setTriggerVisible(true)
     }
 
@@ -76,7 +75,7 @@ const Trigger = props =>{
             key: "action",
             width:"10%",
             render:(_,record) =>(
-                <Listaction
+                <ListAction
                     edit={()=>editTrigger(record)}
                     del={()=>delTrigger(record)}
                 />
@@ -97,12 +96,12 @@ const Trigger = props =>{
                                 icon={<PlusOutlined/>}
                                 onClick={()=>addTrigger()}
                             />
-                            <TriggerAdd
+                            <TriggerAddEdit
                                 triggerVisible={triggerVisible}
                                 setTriggerVisible={setTriggerVisible}
                                 createTrigger={createTrigger}
                                 updateTrigger={updateTrigger}
-                                pipelineId={pipeline && pipeline.id}
+                                pipelineId={params.id}
                                 formValue={formValue}
                             />
                         </div>
@@ -113,7 +112,7 @@ const Trigger = props =>{
                                 dataSource={triggerData}
                                 rowKey={record=>record.triggerId}
                                 pagination={false}
-                                locale={{emptyText: <EmptyText title={"暂无定时任务"}/>}}
+                                locale={{emptyText: <ListEmpty title={"暂无定时任务"}/>}}
                             />
                         </div>
                     </div>
@@ -123,4 +122,4 @@ const Trigger = props =>{
     )
 }
 
-export default inject("triggerStore","pipelineStore")(observer(Trigger))
+export default inject("triggerStore")(observer(Trigger))

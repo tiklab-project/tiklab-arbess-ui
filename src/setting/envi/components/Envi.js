@@ -5,8 +5,8 @@ import enviStore from "../store/EnviStore";
 import EnviModal from "./EnviModal";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import Btn from "../../../common/component/btn/Btn";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
-import Listaction from "../../../common/component/list/Listaction";
+import ListEmpty from "../../../common/component/list/ListEmpty";
+import ListAction from "../../../common/component/list/ListAction";
 import {TaskTitleIcon} from "../../../pipeline/design/processDesign/gui/gui/TaskTitleIcon";
 import ListIcon from "../../../common/component/list/ListIcon";
 import "../../authCommon/Auth.scss";
@@ -113,7 +113,7 @@ const Envi = props =>{
             width:"10%",
             ellipsis:true,
             render:(text,record)=>{
-                return  <Listaction
+                return  <ListAction
                             edit={()=>editEnvi(record)}
                             del={()=>delEnvi(record)}
                         />
@@ -172,7 +172,7 @@ const Envi = props =>{
                 dataSource={enviData}
                 rowKey={record=>record.scmId}
                 pagination={false}
-                locale={{emptyText: <EmptyText title={'暂无环境配置'}/>}}
+                locale={{emptyText: <ListEmpty title={'暂无环境配置'}/>}}
             />
 
             <EnviModal

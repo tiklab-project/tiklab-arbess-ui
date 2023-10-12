@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from "react";
 import {Select,Input} from "antd";
 import {CaretDownOutlined} from "@ant-design/icons";
-import "./HistoryScreen.scss";
 import {observer} from "mobx-react";
+import "./HistoryScreen.scss";
 
 const {Option} = Select;
 
@@ -11,18 +11,26 @@ const {Option} = Select;
  */
 const HistoryScreen = props =>{
 
-    const {historyType,params,screen,pipelineStore} = props
+    const {params,screen,pipelineStore,route} = props
 
-    const {pipeline,pipelineList,findDmUserPage} = pipelineStore
+    const {findUserPipeline,findDmUserPage,pipeline,pipelineList} = pipelineStore
 
-    const [userList,setUserList] = useState([])
+    // 流水线成员
+    const [userList,setUserList] = useState([]);
 
+    // 当前页
     const [currentPage,setCurrentPage] = useState(1)
 
+    // 分页
     const [page,setPage] = useState({})
 
     useEffect(()=>{
-        if(historyType==='historyPipeline'){findDmUser()}
+        if(route.path==='/index/history'){
+            findUserPipeline()
+        }
+        if(route.path==='/index/pipeline/:id/structure'){
+            findDmUser()
+        }
     },[currentPage])
 
     /**
@@ -82,7 +90,7 @@ const HistoryScreen = props =>{
                 defaultValue={params?.number}
             />
             {
-                historyType==="history" ?
+                route.path==='/index/history' ?
                     <Select
                         showSearch
                         suffixIcon={<CaretDownOutlined />}

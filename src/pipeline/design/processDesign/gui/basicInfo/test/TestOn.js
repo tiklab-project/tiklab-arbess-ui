@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Form,Select} from "antd";
 import {inject, observer} from "mobx-react";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
 
 /**
@@ -75,7 +75,7 @@ const TestOn = props => {
 
     return (
         <>
-            <AuthFind/>
+            <FormsAuth />
             <Form.Item name={dataItem.taskId+"_testSpace"} label={"测试空间"} rules={[{required:true, message:"测试空间不能为空"}]}>
                 <FormsSelect
                     label={"空间"}

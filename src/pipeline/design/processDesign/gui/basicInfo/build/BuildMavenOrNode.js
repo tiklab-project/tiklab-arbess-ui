@@ -1,6 +1,5 @@
 import React from "react";
-import {Form} from "antd";
-import Mirror from "../CodeBlock";
+import FormsMirror from "../FormsMirror";
 import FormsInput from "../FormsInput";
 
 /**
@@ -20,12 +19,11 @@ const BuildMavenOrNode = props =>{
                 addonBefore={"/"}
             />
 
-            <Form.Item name={"buildOrder"} label="执行命令">
-                <Mirror
-                    name={"buildOrder"}
-                    placeholder={"执行命令"}
-                />
-            </Form.Item>
+            <FormsMirror
+                name={"buildOrder"}
+                label={"执行命令"}
+                placeholder={"执行命令"}
+            />
 
             <FormsInput
                 name={"productRule"}

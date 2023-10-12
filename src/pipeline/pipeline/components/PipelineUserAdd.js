@@ -2,7 +2,7 @@ import React,{useEffect, useState} from "react";
 import {Table,Input} from "antd";
 import {SearchOutlined} from '@ant-design/icons';
 import Btn from "../../../common/component/btn/Btn";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";
 
 /**
@@ -190,7 +190,7 @@ const PipelineUserAdd = props =>{
                     }]}
                     dataSource={userList}
                     pagination={false}
-                    locale={{emptyText: <EmptyText/>}}
+                    locale={{emptyText: <ListEmpty/>}}
                 />
              
                 <Page

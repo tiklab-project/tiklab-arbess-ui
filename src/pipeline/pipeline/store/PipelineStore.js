@@ -8,18 +8,6 @@ export class PipelineStore {
     @observable
     pipelineList = []
 
-    // 流水线分页列表
-    @observable
-    pipelineListPage = []
-
-    // 流水线分页
-    @observable
-    pipPage = {
-        currentPage: 1,
-        totalPage: 1,
-        totalRecord: 1,
-    }
-
     // 流水线信息
     @observable
     pipeline = null
@@ -41,21 +29,6 @@ export class PipelineStore {
     findUserPipelinePage = async value =>{
         return new Promise((resolve, reject) => {
             Axios.post("/pipeline/findUserPipelinePage",value).then(res=>{
-                if(res.code===0 && res.data){
-                    this.pipelineListPage = res.data.dataList
-                    this.pipPage = {
-                        currentPage: res.data.currentPage,
-                        totalPage: res.data.totalPage,
-                        totalRecord: res.data.totalRecord,
-                    }
-                }else {
-                    this.pipelineListPage = []
-                    this.pipPage = {
-                        currentPage: 1,
-                        totalPage: 1,
-                        totalRecord: 1,
-                    }
-                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -157,41 +130,6 @@ export class PipelineStore {
     }
 
     /**
-     * 收藏
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    updateFollow =async value =>{
-        const params = {
-            pipeline:value,
-        }
-        return await Axios.post("/follow/updateFollow",params)
-    }
-
-    /**
-     * 获取流水线用户
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    findUserPage =async value =>{
-        const data =  await Axios.post("/user/user/findUserPage",value)
-        return data
-    }
-
-    /**
-     * 获取流水线项目用户
-     * @param value
-     * @returns {Promise<*>}
-     */
-    @action
-    findDmUserPage = async value =>{
-        const data = await Axios.post("/dmUser/findDmUserPage",value)
-        return data
-    }
-
-    /**
      * 获取单个流水线信息
      * @param value
      * @returns {Promise<*>}
@@ -263,6 +201,43 @@ export class PipelineStore {
         return await Axios.post("/open/updateOpen", param)
     }
 
+    /**
+     * 收藏
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    updateFollow =async value =>{
+        const params = {
+            pipeline:value,
+        }
+        return await Axios.post("/follow/updateFollow",params)
+    }
+
+    /**
+     * 获取流水线用户
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findUserPage =async value =>{
+        const data =  await Axios.post("/user/user/findUserPage",value)
+        return data
+    }
+
+    /**
+     * 获取流水线项目用户
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findDmUserPage = async value =>{
+        const data = await Axios.post("/dmUser/findDmUserPage",value)
+        return data
+    }
+
 }
 
 export const PIPELINE_STORE = "pipelineStore"
+
+export default new PipelineStore();

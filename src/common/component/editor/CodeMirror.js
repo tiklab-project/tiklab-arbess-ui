@@ -1,4 +1,4 @@
-import React,{useEffect,useRef} from "react";
+import React from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
 import "codemirror/lib/codemirror.css";
@@ -15,6 +15,8 @@ import "codemirror/theme/solarized.css";
 import "codemirror/theme/dracula.css";
 // 高亮
 import "codemirror/addon/selection/active-line";
+// 提示
+import "codemirror/addon/display/placeholder.js";
 // 折叠代码
 import "codemirror/addon/fold/foldgutter.css";
 import "codemirror/addon/fold/foldcode.js";
@@ -24,56 +26,31 @@ import "codemirror/addon/fold/xml-fold.js";
 import "codemirror/addon/fold/indent-fold.js";
 import "codemirror/addon/fold/markdown-fold.js";
 import "codemirror/addon/fold/comment-fold.js";
-// 提示
-import "codemirror/addon/display/placeholder.js";
 
 /**
  * 任务命令代码块(task详情)
  */
 export const TaskMirror = props =>{
 
-    const {mirrorRefs,mirrorValue,bordered,onFocus,placeholder} = props
+    const {type,mirrorValue,setMirrorValue,bordered,placeholder,...res} = props
 
     return(
         <CodeMirror
+            {...res}
             value={mirrorValue}//内容
-            ref={mirrorRefs}
             options={{
                 mode: {name:"shell",shell: true },//语言
-                lineNumbers: false, // 是否显示行号
-                placeholder: bordered ? placeholder:"未设置",
-                styleActiveLine:bordered,
+                theme:type? "dracula":"material",
+                autofocus: type,
+                lineNumbers: type, // 是否显示行号
+                placeholder: type ? "" : bordered ? placeholder: "未设置",
+                styleActiveLine: bordered,
             }}
-            onFocus={e=>onFocus(e)}
-            className={`${bordered?"gui-mirror-tr":"gui-mirror-fa"}`}
+            onChange={(_,__,value)=>setMirrorValue(value)}
         />
     )
 }
 
-/**
- * 任务命令代码块（全屏）
- */
-export const ExpandMirror = props =>{
-
-    const {expandValue,mirrorRefs} = props
-
-    return(
-        <CodeMirror
-            ref={mirrorRefs}
-            value={expandValue}//内容
-            options={{
-                mode: {name:"shell",shell: true },//语言
-                theme:"dracula",
-                autofocus:true,
-                lineNumbers: true, // 是否显示行号
-                lineWrapping:true,
-                styleActiveLine:true,
-                foldGutter: true,
-                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-            }}
-        />
-    )
-}
 
 /**
  * 后置处理代码块
@@ -97,86 +74,4 @@ export const PostprocessMirrorScenario = props =>{
             onFocus={onFocus}
         />
     )
-}
-
-export const TextMirrorEditor =  props => {
-
-    const {value} = props
-
-    const editorRef = useRef(null);
-
-    useEffect(() => {
-        if (value && editorRef.current) {
-            const editor = editorRef.current.editor;
-            editor.setValue(value);
-            editor.clearHistory();
-            let isChanged = false;
-            editor.on('change', () => {
-                if (!isChanged) {
-                    editor.on('undo');
-                    editor.on('redo');
-                    isChanged = true;
-                }
-            });
-            return () => {
-                editor.off('change');
-                editor.off('undo');
-                editor.off('redo');
-            }
-        }
-    }, [value]);
-
-    /**
-     * 输入提示
-     */
-    const handleShowHint = () =>{
-
-        const editor = editorRef.current.editor
-
-        const cursor = editor.getCursor()
-
-        const A1 = cursor.line;
-        const A2 = cursor.ch;
-
-        const B1 = editor.findWordAt({line: A1, ch: A2}).anchor.ch;
-        const B2 = editor.findWordAt({line: A1, ch: A2}).head.ch;
-
-        const word = editor.getRange({line: A1,ch: B1}, {line: A1,ch: B2})
-
-        let list = []
-        if (word==="e" || word==="$") {
-            list.push('echo','sdgsg')
-        }
-
-        // 得到光标标识
-        let token = editor.getTokenAt(cursor)
-
-        return {
-            list: list,
-            from: { ch: cursor.ch, line: cursor.line },
-            to: { ch: token.end, line: cursor.line },
-        }
-    }
-
-    return (
-        <CodeMirror
-            ref={editorRef}
-            value={value}
-            options={{
-                mode: "yaml",
-                lineNumbers: true,
-                lineWrapping:false,  // 换行
-                foldGutter: true,
-                // styleActiveLine: true,
-                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                hintOptions:{hint:handleShowHint,completeSingle: false}
-            }}
-            onChange={(editor, data, values) => {
-            }}
-            onInputRead={(editor,change) =>{
-                editor.showHint()
-            }}
-        />
-    )
-
 }

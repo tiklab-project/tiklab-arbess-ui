@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import {Form,Select} from "antd";
 import {inject,observer} from "mobx-react";
-import Mirror from "../CodeBlock";
-import AuthFind from "../AuthFind";
+import FormsMirror from "../FormsMirror";
+import FormsAuth from "../FormsAuth";
 import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
 
@@ -44,15 +44,14 @@ const DeployLinux = props =>{
             </Form.Item>
             {
                 dataItem?.task?.authType === 2 ?
-                    <Form.Item name={"startOrder"} label="Shell命令">
-                        <Mirror
-                            name={"startOrder"}
-                            placeholder={"Shell命令"}
-                        />
-                    </Form.Item>
+                    <FormsMirror
+                        name={"startOrder"}
+                        label={"Shell命令"}
+                        placeholder={"Shell命令"}
+                    />
                     :
                     <>
-                        <AuthFind/>
+                        <FormsAuth />
                         <FormsInput
                             name={"deployAddress"}
                             placeholder={"部署位置"}
@@ -60,12 +59,11 @@ const DeployLinux = props =>{
                             addonBefore={"/"}
                             isValid={true}
                         />
-                        <Form.Item name={"deployOrder"} label={"部署命令"}>
-                            <Mirror
-                                name={"deployOrder"}
-                                placeholder={"部署命令"}
-                            />
-                        </Form.Item>
+                        <FormsMirror
+                            name={"deployOrder"}
+                            label={"部署命令"}
+                            placeholder={"部署命令"}
+                        />
                     </>
                 }
         </>

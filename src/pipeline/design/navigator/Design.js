@@ -50,6 +50,7 @@ const Design = props =>{
     // 单个历史信息
     const [historyItem,setHistoryItem] = useState(null)
 
+    // 磁盘内存弹出框状态
     const [diskVisible,setDiskVisible] = useState(false)
 
     useEffect(()=>{

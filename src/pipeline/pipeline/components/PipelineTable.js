@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {message,Tooltip,Table,Space,Spin,Dropdown,Form,Input} from "antd";
 import {
     PlayCircleOutlined,
@@ -9,14 +9,14 @@ import {
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
 import historyStore from "../../history/store/HistoryStore";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
+import pipelineStore from "../store/PipelineStore";
+import ListEmpty from "../../../common/component/list/ListEmpty";
 import Profile from "../../../common/component/profile/Profile";
 import ListIcon from "../../../common/component/list/ListIcon";
 import Page from "../../../common/component/page/Page";
 import Modals from "../../../common/component/modal/Modal";
 import {debounce} from "../../../common/utils/Client";
 import DiskModal from "../../../common/component/modal/DiskModal";
-import {PipelineDropdown} from "../../../common/component/dropdown/DropdownMenu";
 import pip_success from "../../../assets/images/svg/pip_success.svg";
 import pip_error from "../../../assets/images/svg/pip_error.svg";
 import pip_fog from "../../../assets/images/svg/pip_fog.svg";
@@ -34,15 +34,17 @@ import "./PipelineTable.scss";
  */
 const PipelineTable = props =>{
 
-    const {pipelineStore,changPage,changFresh,listType,isLoading}=props
+    const {pipPage,pipelineListPage,changPage,changFresh,listType,isLoading}=props
 
-    const {pipelineListPage,updateFollow,pipPage,pipelineList,
-        findPipelineCloneName,pipelineClone,
-        importPipelineYaml
+    const {updateFollow,findPipelineCloneName,pipelineClone,
+        importPipelineYaml,findUserPipeline
     } = pipelineStore
     const {execStart,execStop}=historyStore
 
     const [form] = Form.useForm();
+
+    // 所有流水线
+    const [pipelineList,setPipelineList] = useState([])
 
     // 克隆的对象
     const [pipelineObj,setPipelineObj] = useState(null)
@@ -53,8 +55,19 @@ const PipelineTable = props =>{
     // 克隆状态
     const [copyStatus,setCopyStatus] = useState(false)
 
-    // 磁盘内存状态
+    // 磁盘内存弹出框状态
     const [diskVisible,setDiskVisible] = useState(false)
+
+    useEffect(()=>{
+        if(copyVisible){
+            // 获取所有流水线
+            findUserPipeline().then(res=>{
+                if(res.code===0){
+                    setPipelineList(res.data || [])
+                }
+            })
+        }
+    },[copyVisible])
 
     /**
      * 收藏
@@ -75,10 +88,10 @@ const PipelineTable = props =>{
      */
     const collectMessage = (res,info) =>{
         if(res.code===0){
-            message.info(`${info}成功`,0.5)
+            message.info(`${info}成功`)
             changFresh()
         }else {
-            message.info(res.msg,0.5)
+            message.info(res.msg)
         }
     }
 
@@ -127,12 +140,12 @@ const PipelineTable = props =>{
                 pipelineName:value.name
             }).then(res=>{
                 if(res.code===0){
-                    message.info("克隆成功",0.5)
+                    message.info("克隆成功")
                     onCancel()
                     changFresh()
                 }
                 else {
-                    message.info("克隆失败",0.5)
+                    message.info("克隆失败")
                 }
                 setCopyStatus(false)
             })
@@ -169,7 +182,7 @@ const PipelineTable = props =>{
                 // 释放内存
                 window.URL.revokeObjectURL(url);
             }else {
-                message.info(response.msg,0.5)
+                message.info(response.msg)
             }
         })
     }
@@ -328,7 +341,7 @@ const PipelineTable = props =>{
                 dataSource={pipelineListPage}
                 rowKey={record=>record.id}
                 pagination={false}
-                locale={{emptyText: <EmptyText title={listType===1?"暂无流水线":"暂无收藏"}/>}}
+                locale={{emptyText: <ListEmpty title={listType==='all'?"暂无流水线":"暂无收藏"}/>}}
             />
             <Page
                 currentPage={pipPage.currentPage}

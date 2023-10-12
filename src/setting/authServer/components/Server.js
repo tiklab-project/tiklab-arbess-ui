@@ -2,9 +2,9 @@ import React,{useState,useEffect} from "react";
 import {Space,Table} from "antd"
 import serverStore from "../store/ServerStore";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListIcon from "../../../common/component/list/ListIcon";
-import Listaction from "../../../common/component/list/Listaction";
+import ListAction from "../../../common/component/list/ListAction";
 import Profile from "../../../common/component/profile/Profile";
 import Tabs from "../../../common/component/tabs/Tabs";
 import ServerAddBtn from "./ServerAddBtn";
@@ -116,17 +116,20 @@ const Server = props =>{
     const action = record =>{
         const {type} = record
         if(type==='xcode' || type==='xpack' || type==='teston'){
-            if(version !=='ce') return (
-                <Listaction
-                    edit={()=>editServer(record)}
-                />
-            )
+            if(version !=='ce'){
+                return (
+                    <ListAction
+                        edit={()=>editServer(record)}
+                    />
+                )
+            }
         }
-
-        return  <Listaction
-                    edit={()=>editServer(record)}
-                    del={()=>delServer(record)}
-                />
+        return (
+            <ListAction
+                edit={()=>editServer(record)}
+                del={()=>delServer(record)}
+            />
+        )
     }
 
     // 全部
@@ -325,7 +328,7 @@ const Server = props =>{
                     dataSource={authServerList}
                     rowKey={record=>record.serverId}
                     pagination={false}
-                    locale={{emptyText: <EmptyText title={'暂无服务配置'}/>}}
+                    locale={{emptyText: <ListEmpty title={'暂无服务配置'}/>}}
                 />
             </div>
         </div>

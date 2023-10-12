@@ -2,9 +2,9 @@ import React,{useEffect,useState} from "react";
 import {Space,Table} from "antd";
 import authStore from "../store/AuthStore"
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListIcon from "../../../common/component/list/ListIcon";
-import Listaction from "../../../common/component/list/Listaction";
+import ListAction from "../../../common/component/list/ListAction";
 import Profile from "../../../common/component/profile/Profile";
 import AuthAddBtn from "./AuthAddBtn";
 import "../../authCommon/Auth.scss";
@@ -122,7 +122,7 @@ const Auth = props =>{
             width:"10%",
             ellipsis:true,
             render:(_,record) => {
-                return  <Listaction
+                return  <ListAction
                             edit={()=>editAuth(record)}
                             del={()=>delAuth(record)}
                         />
@@ -147,7 +147,7 @@ const Auth = props =>{
                     dataSource={authList}
                     rowKey={record=>record.authId}
                     pagination={false}
-                    locale={{emptyText: <EmptyText title={'暂无认证配置'}/>}}
+                    locale={{emptyText: <ListEmpty title={'暂无认证配置'}/>}}
                 />
             </div>
         </div>

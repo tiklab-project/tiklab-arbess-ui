@@ -3,9 +3,9 @@ import {Row, Col, message, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../common/component/btn/Btn";
-import EmptyText from "../../../../common/component/emptyText/EmptyText";
-import Listaction from "../../../../common/component/list/Listaction";
-import VariableAdd from "./VariableAdd";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListAction from "../../../../common/component/list/ListAction";
+import VariableAddEdit from "./VariableAddEdit";
 import "./Variable.scss";
 
 /**
@@ -16,10 +16,9 @@ import "./Variable.scss";
  */
 const Variable = props =>{
 
-    const {variableStore,pipelineStore} = props
+    const {variableStore,match:{params}} = props
 
-    const {createVariable,findVariable,fresh,variableData,deleteVariable,updateVariable} = variableStore
-    const {pipeline} = pipelineStore
+    const {findVariable,deleteVariable,fresh,variableData} = variableStore
 
     const [variableVisible,setVariableVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
@@ -27,7 +26,7 @@ const Variable = props =>{
 
     useEffect(()=>{
         // 初始化变量
-        findVariable(pipeline.id)
+        findVariable(params.id)
     },[fresh])
 
     /**
@@ -53,7 +52,7 @@ const Variable = props =>{
      */
     const delVariable = reocrd =>{
         deleteVariable(reocrd.varId).then(res=>{
-            res.code===0 && message.info("删除成功",0.5)
+            res.code===0 && message.info("删除成功")
         })
     }
 
@@ -86,7 +85,7 @@ const Variable = props =>{
             key: "action",
             width:"10%",
             render:(_,record) => (
-                <Listaction
+                <ListAction
                     edit={()=>editVariable(record)}
                     del={()=>delVariable(record)}
                 />
@@ -107,14 +106,12 @@ const Variable = props =>{
                                icon={<PlusOutlined/>}
                                onClick={()=>addVariable()}
                            />
-                           <VariableAdd
+                           <VariableAddEdit
+                               {...props}
                                variableVisible={variableVisible}
                                setVariableVisible={setVariableVisible}
                                formValue={formValue}
-                               variableData={variableData}
-                               createVariable={createVariable}
-                               updateVariable={updateVariable}
-                               pipelineId={pipeline && pipeline.id}
+                               pipelineId={params.id}
                            />
                        </div>
                        <div className="variable-tables">
@@ -124,7 +121,7 @@ const Variable = props =>{
                                dataSource={variableData}
                                rowKey={record=>record.varId}
                                pagination={false}
-                               locale={{emptyText: <EmptyText title={"暂无变量"}/>}}
+                               locale={{emptyText: <ListEmpty title={"暂无变量"}/>}}
                            />
                        </div>
                    </div>
@@ -134,4 +131,4 @@ const Variable = props =>{
     )
 }
 
-export default inject("variableStore","pipelineStore")(observer(Variable))
+export default inject("variableStore")(observer(Variable))

@@ -9,7 +9,7 @@ import Modals from "../../../../common/component/modal/Modal";
  * @returns {JSX.Element}
  * @constructor
  */
-const TriggerAdd = props =>{
+const TriggerAddEdit = props =>{
 
     const {triggerVisible,setTriggerVisible,createTrigger,pipelineId,formValue,updateTrigger} = props
 
@@ -17,8 +17,8 @@ const TriggerAdd = props =>{
 
     useEffect(()=>{
         if(triggerVisible){
-            // 表单初始化
-            if(formValue!=="") {
+            if(formValue) {
+                // 表单初始化
                 form.setFieldsValue({
                     taskType: formValue.taskType,
                     timeList: formValue.timeList,
@@ -35,29 +35,22 @@ const TriggerAdd = props =>{
      */
     const onOk = () =>{
         form.validateFields().then((fieldsValue)=>{
-            if(formValue===""){
-                const value = {
-                    values:{
-                        taskType:fieldsValue.taskType,
-                        time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
-                        timeList:fieldsValue.timeList
-                    },
-                    pipeline:{id:pipelineId},
-                    taskType:81,
-                }
-                createTrigger(value)
-            }else {
-                const value = {
-                    values:{
-                        taskType:fieldsValue.taskType,
-                        time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
-                        timeList:fieldsValue.timeList
-                    },
-                    pipeline:{id:pipelineId},
-                    taskType:81,
+            const param = {
+                values:{
+                    taskType:fieldsValue.taskType,
+                    time:fieldsValue.time && fieldsValue.time.format("HH:mm"),
+                    timeList:fieldsValue.timeList
+                },
+                pipeline:{id:pipelineId},
+                taskType:81,
+            }
+            if(formValue){
+                updateTrigger({
+                    ...param,
                     triggerId:formValue.triggerId
-                }
-                updateTrigger(value)
+                })
+            }else {
+                createTrigger(param)
             }
             setTriggerVisible(false)
         })
@@ -121,4 +114,4 @@ const TriggerAdd = props =>{
     )
 }
 
-export default TriggerAdd
+export default TriggerAddEdit

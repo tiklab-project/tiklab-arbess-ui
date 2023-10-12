@@ -16,10 +16,6 @@ class TestOnStore {
     @observable
     testPlan = []
 
-    // 关联测试列表
-    @observable
-    testList = []
-
     /**
      * 获取teston测试空间
      * @param value
@@ -93,13 +89,6 @@ class TestOnStore {
         const param = new FormData()
         param.append('pipelineId',value)
         const data = await Axios.post('/testOnRelevance/findAllRelevancePage',value)
-        if(data.code===0){
-            this.testList = data.data?.dataList || []
-        }
-        else {
-            message.info(data.msg)
-            this.testList = []
-        }
         return data
     }
 
@@ -114,10 +103,10 @@ class TestOnStore {
         param.append('relevanceId',value)
         const data = await Axios.post('/testOnRelevance/deleteRelevance',param)
         if(data.code===0){
-            message.info('删除成功',0.5)
+            message.info('删除成功')
         }
         else {
-            message.info('删除失败',0.5)
+            message.info('删除失败')
         }
         return data
     }

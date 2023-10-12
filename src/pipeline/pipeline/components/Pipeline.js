@@ -1,12 +1,12 @@
 import React,{useEffect,useState} from "react";
 import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
-import {inject,observer} from "mobx-react";
 import PipelineTable from "./PipelineTable";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import Btn from "../../../common/component/btn/Btn";
 import Tabs from "../../../common/component/tabs/Tabs";
 import {debounce} from "../../../common/utils/Client";
+import pipelineStore from "../store/PipelineStore";
 import "./Pipeline.scss";
 
 /**
@@ -17,12 +17,10 @@ import "./Pipeline.scss";
  */
 const Pipeline = props =>{
 
-    const {pipelineStore} = props
-
     const {findUserPipelinePage} = pipelineStore
 
     // 流水线分类
-    const [listType,setListType] = useState(1)
+    const [listType,setListType] = useState('all')
 
     // 刷新状态
     const [fresh,setFresh] = useState(false)
@@ -40,6 +38,12 @@ const Pipeline = props =>{
         pageParam
     })
 
+    // 流水线列表
+    const [pipelineListPage,setPipelineListPage] = useState([])
+
+    // 流水线分页
+    const [pipPage,setPipPage] = useState({})
+
     useEffect(()=>{
         // 初始化获取流水线
         findPipeline()
@@ -49,18 +53,24 @@ const Pipeline = props =>{
      * 获取流水线
      */
     const findPipeline = () =>{
-        if(listType===1){
-            // 所有流水线
-            findUserPipelinePage({
-                ...pipelineParam
-            }).then(r=>setIsLoading(false))
-        }else {
-            // 我收藏的流水线
-            findUserPipelinePage({
+        let param = pipelineParam
+        if(listType==='follow'){
+            param = {
                 ...pipelineParam,
                 pipelineFollow:1
-            }).then(r=>setIsLoading(false))
+            }
         }
+        findUserPipelinePage(param).then(res=>{
+            setIsLoading(false)
+            if(res.code===0){
+                setPipelineListPage(res.data.dataList || [])
+                setPipPage({
+                    currentPage: res.data.currentPage,
+                    totalPage: res.data.totalPage,
+                    totalRecord: res.data.totalRecord,
+                })
+            }
+        })
     }
 
     /**
@@ -128,8 +138,8 @@ const Pipeline = props =>{
                 </Breadcrumb>
                 <div className="pipeline-type">
                     <Tabs type={listType} tabLis={[
-                        {id:1, title:"所有流水线"},
-                        {id:2, title:"我收藏的"}
+                        {id:'all', title:"所有流水线"},
+                        {id:'follow', title:"我收藏的"}
                     ]} onClick={clickType}/>
                     <div className="pipeline-type-input">
                         <Input
@@ -148,10 +158,12 @@ const Pipeline = props =>{
                     isLoading={isLoading}
                     changPage={changPage}
                     changFresh={changFresh}
+                    pipPage={pipPage}
+                    pipelineListPage={pipelineListPage}
                 />
             </div>
         </div>
     )
 }
 
-export default inject("pipelineStore")(observer(Pipeline))
+export default Pipeline

@@ -1,6 +1,6 @@
 import React from "react";
 import FormsInput from "../FormsInput";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 
 /**
  * 制品--Ssh
@@ -18,7 +18,7 @@ const ArtifactSsh = props =>{
                 label={"推送位置"}
                 isValid={true}
             />
-            <AuthFind/>
+            <FormsAuth />
         </>
     )
 }

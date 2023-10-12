@@ -31,8 +31,8 @@ class ResourceStore {
     @action
     cleanDisk = async value =>{
         const data = await Axios.post("/disk/cleanDisk",value)
-        if(data.code===0){message.info("清理成功",0.5)}
-        else {message.info("清理失败",0.5)}
+        if(data.code===0){message.info("清理成功")}
+        else {message.info("清理失败")}
         return data
     }
 

@@ -4,7 +4,7 @@ import Btn from "../../../common/component/btn/Btn";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import {SpinLoading} from "../../../common/component/loading/Loading";
 import HistoryDetailTree from "./HistoryDetailTree";
-import {runStatusText,getTime} from "./HistoryTrigger";
+import {runStatusText,getTime} from "./HistoryCommon";
 import "./HistoryDetail.scss";
 
 
@@ -164,11 +164,9 @@ const HistoryDetail = props =>{
     const changeAnchor = id =>{
         setIsActiveSlide(false)
         setId(id)
-        if (id) {
-            const anchorElement = document.getElementById(id)
-            if (anchorElement) {
-                scrollRef.current.scrollTop = anchorElement.offsetTop - 130
-            }
+        const anchorElement = document.getElementById(id)
+        if (anchorElement) {
+            scrollRef.current.scrollTop = anchorElement.offsetTop - 130
         }
     }
 
@@ -189,7 +187,7 @@ const HistoryDetail = props =>{
     const handleMouseDown = e =>{
         if(e.button===0){
             if(!isActiveSlide) return
-            startScrollTop  = scrollRef.current.scrollTop;
+            startScrollTop = scrollRef.current.scrollTop;
         }
     }
 

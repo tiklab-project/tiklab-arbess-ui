@@ -1,6 +1,6 @@
 import React from "react";
 import FormsInput from "../FormsInput";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 
 /**
  * SonarQuebe：代码扫描
@@ -18,7 +18,7 @@ const ScanSonarQuebe = props =>{
                 label={"项目名称"}
                 isValid={true}
             />
-            <AuthFind/>
+            <FormsAuth />
         </>
     )
 }

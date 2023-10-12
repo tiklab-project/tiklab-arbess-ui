@@ -23,12 +23,10 @@ const ProcessDesign = props =>{
         serverStore,
     }
 
-    const {pipelineStore} = props
-
     return (
         <Provider {...store}>
             <Gui
-                pipelineStore={pipelineStore}
+                {...props}
             />
         </Provider>
     )

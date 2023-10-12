@@ -39,11 +39,7 @@ const PipelineSetting = props =>{
             id:`/index/pipeline/${pipelineId}/set/role`,
             title:"权限",
             purviewCode:"pipeline_auth",
-        },
-        // {
-        //     id:`/index/pipeline/${pipelineId}/set/disk`,
-        //     title:"磁盘空间",
-        // }
+        }
     ]
 
     // 渲染菜单

@@ -1,6 +1,6 @@
 import React from "react";
 import FormsInput from "../FormsInput";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 
 /**
  * 制品--nexus
@@ -30,7 +30,7 @@ const ArtifactNexus = props => {
                 label={"version"}
                 isValid={true}
             />
-            <AuthFind/>
+            <FormsAuth />
         </>
     )
 }

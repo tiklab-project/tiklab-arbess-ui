@@ -3,7 +3,7 @@ import {message, Progress, Space, Table} from 'antd';
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import Btn from "../../../common/component/btn/Btn";
 import {SpinLoading} from "../../../common/component/loading/Loading";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListIcon from "../../../common/component/list/ListIcon";
 import resourceStore from "../store/ResourceStore";
 import "./Resources.scss";
@@ -200,7 +200,7 @@ const Resources = props => {
                         columns={columns}
                         dataSource={diskList?.diskList}
                         rowKey={record=>record.pipelineId}
-                        locale={{emptyText: <EmptyText title={"暂无缓存信息"}/>}}
+                        locale={{emptyText: <ListEmpty title={"暂无缓存信息"}/>}}
                     />
                 </div>
                 {

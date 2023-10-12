@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import {Select, Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
-import EmptyText from "../../../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../../../common/component/list/ListEmpty";
 
 /**
  * 下拉框
@@ -16,7 +16,7 @@ const FormsSelect = props => {
     // 是否显示下拉图标
     const [showArrow,setShoeArrow] = useState(false)
 
-    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <EmptyText/>
+    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <ListEmpty/>
 
     return (
         <Select

@@ -1,16 +1,15 @@
 import React from 'react';
-import AgentDetail from "./AgentDetail";
+import Breadcrumb from "../../common/component/breadcrumb/Breadcrumb";
+import AgentList from "../../common/component/list/AgentList";
 
-/**
- * 代办
- * @param props
- * @constructor
- */
 const Agent = props => {
     return (
-        <AgentDetail
+        <div className='agent'>
+            <div className='agent-content home-limited'>
+                <Breadcrumb firstItem={'代办'}/>
 
-        />
+            </div>
+        </div>
     )
 }
 

@@ -6,7 +6,7 @@ import {getUser} from "tiklab-core-ui";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import Profile from "../../../common/component/profile/Profile";
 import Btn from "../../../common/component/btn/Btn";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../common/component/list/ListEmpty";
 import {PipelineDropdown} from "../../../common/component/dropdown/DropdownMenu";
 import PipelineUserAdd from "./PipelineUserAdd";
 import "./PipelineAddInfo.scss";
@@ -21,7 +21,7 @@ const PipelineAddInfo = props =>{
 
     const {set,pipelineStore,setCurrent,onClick,baseInfo,setBaseInfo,setIsLoading} = props
 
-    const {pipeline,pipelineList,updatePipeline} = pipelineStore
+    const {findUserPipeline,updatePipeline,pipeline,pipelineList} = pipelineStore
 
     const [form] = Form.useForm()
     const user = getUser()
@@ -39,9 +39,16 @@ const PipelineAddInfo = props =>{
     const [yUserList,setYUserList] = useState(baseInfo?.userList || [])
 
     useEffect(()=>{
-        // 初始化权限
-        if(set){setPowerType(pipeline.power)}
-        else {setPowerType(baseInfo?.power || 1)}
+        if(set){
+            // 初始化权限
+            setPowerType(pipeline.power)
+        }
+        else {
+            // 初始化权限
+            setPowerType(baseInfo?.power || 1)
+            // 获取所有流水线
+            findUserPipeline().then()
+        }
     },[])
 
     /**
@@ -232,7 +239,7 @@ const PipelineAddInfo = props =>{
                         dataSource={yUserList}
                         pagination={false}
                         showHeader={false}
-                        locale={{emptyText: <EmptyText/>}}
+                        locale={{emptyText: <ListEmpty/>}}
                     />
                 </div>
             </div>

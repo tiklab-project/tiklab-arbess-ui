@@ -7,8 +7,9 @@ import {
     MessageOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
-import EmptyText from "../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../common/component/list/ListEmpty";
 import Btn from "../../common/component/btn/Btn";
+import messageStore from "../store/MessageStore"
 import "./PortalMessage.scss";
 
 /**
@@ -19,7 +20,7 @@ import "./PortalMessage.scss";
  */
 const PortalMessage = props =>{
 
-    const {messageStore,unread,setUnread,visible,setVisible,pipelineList} = props
+    const {unread,setUnread,visible,setVisible} = props
 
     const {findMessageItemPage,updateMessageItem,deleteMessageItem} = messageStore
 
@@ -44,6 +45,20 @@ const PortalMessage = props =>{
             setMessagePagination(1)
         }
     },[visible])
+
+    useEffect(()=>{
+        findMessageItemPage({
+            status:0,
+            pageParam: {
+                pageSize: 12,
+                currentPage: 1
+            }
+        }).then(res=>{
+            if(res.code===0){
+                setUnread(res.data.totalRecord || 0)
+            }
+        })
+    },[])
 
     useEffect(()=>{
         // 获取消息
@@ -114,19 +129,8 @@ const PortalMessage = props =>{
                 findMessage()
             })
         }
-        if(isPipeline(data.pipelineId)){
-            props.history.push(item.link.split("#")[1])
-            setVisible(false)
-        }
-    }
-
-    /**
-     * 判断流水线是否还存在
-     * @param id
-     * @returns {*}
-     */
-    const isPipeline = id =>{
-        return pipelineList && pipelineList.some(item=>item.id===id)
+        props.history.push(item.link.split("#")[1])
+        setVisible(false)
     }
 
     /**
@@ -160,10 +164,10 @@ const PortalMessage = props =>{
                 {
                     item.id === 0 &&
                     <span className={`messageModal-screen-tab ${unread< 100 ?"":"messageModal-screen-much"}`}>
-                    {
-                        unread < 100 ? unread : 99
-                    }
-                </span>
+                        {
+                            unread < 100 ? unread : 99
+                        }
+                    </span>
                 }
             </div>
         )
@@ -205,8 +209,8 @@ const PortalMessage = props =>{
         <Drawer
             closable={false}
             placement="right"
-            onClose={()=>setVisible(false)}
             visible={visible}
+            onClose={()=>setVisible(false)}
             maskStyle={{background:"transparent"}}
             contentWrapperStyle={{width:450,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
@@ -241,7 +245,7 @@ const PortalMessage = props =>{
                         {
                             messageList && messageList.length===0 && messagePagination ===1 &&
                             <div>
-                                <EmptyText title={
+                                <ListEmpty title={
                                     <>
                                         { selected===0 && "暂无未读消息"}
                                         { selected===1 && "暂无已读消息"}

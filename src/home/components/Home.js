@@ -5,7 +5,7 @@ import {AppLink,HelpLink,AvatarLink} from "tiklab-licence-ui";
 import Portal from "./Portal";
 
 /**
- * 首页入口
+ * 入口
  * @param props
  * @returns {JSX.Element}
  * @constructor

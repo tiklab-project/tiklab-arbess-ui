@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Form, Select} from "antd";
 import {inject, observer} from "mobx-react";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
-import {values} from "mobx";
 
 /**
  * xcode
@@ -72,7 +71,7 @@ const CodeXcode = props =>{
 
     return(
         <>
-            <AuthFind/>
+            <FormsAuth />
             <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
                 <FormsSelect
                     label="仓库"

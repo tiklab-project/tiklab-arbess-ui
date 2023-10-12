@@ -23,7 +23,7 @@ class XPackStore {
             this.xpackRpy = data.data || []
         }
         else {
-            message.info(data.msg,0.5)
+            message.info(data.msg)
             this.xpackRpy = []
         }
     }

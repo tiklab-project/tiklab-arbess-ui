@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import {Space,Table} from "antd";
 import hostStore from "../store/HostStore";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
-import EmptyText from "../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListIcon from "../../../common/component/list/ListIcon";
-import Listaction from "../../../common/component/list/Listaction";
+import ListAction from "../../../common/component/list/ListAction";
 import Profile from "../../../common/component/profile/Profile";
 import Tabs from "../../../common/component/tabs/Tabs";
 import HostAddBtn from "./HostAddBtn";
@@ -155,7 +155,7 @@ const Host = props =>{
             width:"9%",
             ellipsis:true,
             render:(_,record) => {
-                return  <Listaction
+                return  <ListAction
                             edit={()=>editHost(record)}
                             del={()=>delHost(record)}
                         />
@@ -185,7 +185,7 @@ const Host = props =>{
                     dataSource={hostList}
                     rowKey={record=>record.hostId}
                     pagination={false}
-                    locale={{emptyText: <EmptyText title={'暂无主机配置'}/>}}
+                    locale={{emptyText: <ListEmpty title={'暂无主机配置'}/>}}
                 />
             </div>
         </div>

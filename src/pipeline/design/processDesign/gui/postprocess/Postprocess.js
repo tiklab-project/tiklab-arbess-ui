@@ -9,7 +9,7 @@ import {
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../../../../common/component/btn/Btn";
-import EmptyText from "../../../../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../../../../common/component/list/ListEmpty";
 import PostprocessUserAdd from "../../../postprocess/components/PostprocessUserAdd";
 import {PostprocessMirrorScenario} from "../../../../../common/component/editor/CodeMirror";
 import {Validation} from "../../../../../common/utils/Client";
@@ -355,7 +355,7 @@ const Postprocess = props =>{
                     postprocessData && postprocessData.length > 0 ?
                         postprocessData.map((item,index)=>renderPose(item,index))
                         :
-                        <EmptyText title={"暂无后置处理"}/>
+                        <ListEmpty title={"暂无后置处理"}/>
                 }
             </div>
         </div>

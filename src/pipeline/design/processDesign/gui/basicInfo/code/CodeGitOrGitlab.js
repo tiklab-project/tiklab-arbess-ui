@@ -1,6 +1,6 @@
 import React from "react";
 import FormsInput from "../FormsInput";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 
 /**
  * Git & Gitlab
@@ -23,7 +23,7 @@ const CodeGitOrGitlab = props =>{
                 label={"分支"}
                 name={"codeBranch"}
             />
-            <AuthFind/>
+            <FormsAuth />
         </>
     )
 }

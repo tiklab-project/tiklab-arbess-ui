@@ -1,11 +1,7 @@
 import {action,observable} from "mobx";
-import {Axios} from "tiklab-core-ui";
+import {Axios, getUser} from "tiklab-core-ui";
 
 class OverviewStore {
-
-    // 运行概况数据
-    @observable
-    census = ""
 
     // 动态
     @observable
@@ -26,7 +22,11 @@ class OverviewStore {
      */
     @action
     findlogpage = async values =>{
-        const data = await Axios.post("/oplog/findlogpage",values)
+        const param = {
+            ...values,
+            bgroup:"matflow",
+        }
+        const data = await Axios.post("/oplog/findlogpage",param)
         if(data.code===0){
             this.dynamicList=data.data && data.data.dataList
             this.dynaPage = {
@@ -49,15 +49,29 @@ class OverviewStore {
         param.append("pipelineId",value)
         return new Promise((resolve,reject)=>{
             Axios.post("/overview/pipelineCensus",param).then(res=>{
-                if(res.code===0){
-                    this.census = res.data && res.data
-                }
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
                 reject()
             })
         })
+    }
+    /**
+     * 获取代办
+     * @returns {Promise<void>}
+     */
+    @action
+    findtodopage = async () =>{
+        const params = {
+            pageParam:{
+                pageSize:5,
+                currentPage:1
+            },
+            bgroup:"matflow",
+            userId: getUser().userId,
+        }
+        const data = await Axios.post("/todo/findtodopage",params)
+        return data
     }
 
 }

@@ -3,7 +3,7 @@ import {Select, Form} from "antd";
 import {inject,observer} from "mobx-react";
 import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 
 /**
  * xpack
@@ -43,7 +43,7 @@ const ArtifactXpack = props => {
 
     return(
         <>
-            <AuthFind/>
+            <FormsAuth />
             <Form.Item name={dataItem.taskId+"_putAddress"} label={"制品库"} rules={[{required:true, message:"制品库不能为空"}]}>
                 <FormsSelect
                     label={'推送位置'}

@@ -20,7 +20,6 @@ const HomePage=AsyncComponent(()=>import("./home/components/HomePage"))
 const Pipeline=AsyncComponent(()=>import("./pipeline/pipeline/components/Pipeline"))
 const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipelineAdd"))
 const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
-const PipelineDyan=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
 const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/processDesign/component/ProcessDesign"))
@@ -28,14 +27,12 @@ const DesignTrigger=AsyncComponent(()=>import("./pipeline/design/trigger/compone
 const DesignVariable=AsyncComponent(()=>import("./pipeline/design/variable/components/Variable"))
 const DesignPostprocess=AsyncComponent(()=>import("./pipeline/design/postprocess/components/Postprocess"))
 const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
-const Dynamic=AsyncComponent(()=>import("./home/components/Dynamic"))
+const Dynamic=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
-const HistoryPipeline=AsyncComponent(()=>import("./pipeline/history/components/HistoryPipeline"))
 const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
 const Test=AsyncComponent(()=>import("./pipeline/test/Test"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
-const Disk=AsyncComponent(()=>import("./pipeline/setting/disk/component/Disk"))
 
 /**
  * 系统设置
@@ -163,7 +160,7 @@ const routers=[
                     },
                     {
                         path:"/index/pipeline/:id/survey/dyna",
-                        component: PipelineDyan,
+                        component: Dynamic,
                         exact:true,
                     },
                     {
@@ -194,7 +191,7 @@ const routers=[
                     },
                     {
                         path:"/index/pipeline/:id/structure",
-                        component: HistoryPipeline,
+                        component: History,
                         exact:true,
                     },
                     {
@@ -219,11 +216,6 @@ const routers=[
                             {
                                 path:"/index/pipeline/:id/set/info",
                                 component: BasicInfo,
-                                exact: true,
-                            },
-                            {
-                                path:"/index/pipeline/:id/set/disk",
-                                component: Disk,
                                 exact: true,
                             },
                             {

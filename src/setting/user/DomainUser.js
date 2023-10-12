@@ -1,6 +1,5 @@
 import React from "react";
 import {DomainUser} from "tiklab-user-ui";
-import {inject,observer} from "mobx-react";
 
 /**
  * 项目成员
@@ -10,11 +9,8 @@ import {inject,observer} from "mobx-react";
  */
 const DomainUserContent = props =>{
 
-    const {pipelineStore} = props
-    const {pipeline} = pipelineStore
-
-    return <DomainUser {...props} domainId={pipeline && pipeline.id} bgroup={"matflow"}/>
+    return <DomainUser {...props} domainId={props.match.params.id} bgroup={"matflow"}/>
 
 }
 
-export default inject("pipelineStore")(observer(DomainUserContent))
+export default DomainUserContent

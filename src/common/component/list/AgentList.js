@@ -1,6 +1,9 @@
 import React from "react";
-import EmptyText from "../emptyText/EmptyText";
+import ListEmpty from "./ListEmpty";
 
+/**
+ * 代办列表
+ */
 const AgentList = props => {
 
     const {agentList} = props
@@ -8,7 +11,9 @@ const AgentList = props => {
     const renderAgent = item =>{
         return (
             <div key={item.id} className='agent-item'>
-                <div dangerouslySetInnerHTML={{__html: item.data}}/>
+                <div className="agent-item-data">
+                    <div dangerouslySetInnerHTML={{__html: item.data}}/>
+                </div>
                 <div className="agent-item-time">{item.createTime}</div>
             </div>
         )
@@ -20,7 +25,7 @@ const AgentList = props => {
                 agentList && agentList.length>0 ?
                     agentList.map(item=>renderAgent(item))
                     :
-                    <EmptyText title={"暂无代办"}/>
+                    <ListEmpty title={"暂无代办"}/>
             }
         </div>
     )

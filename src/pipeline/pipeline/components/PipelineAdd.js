@@ -6,6 +6,7 @@ import PipelineAddInfo from "./PipelineAddInfo";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../../common/component/btn/Btn";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import pipelineStore from "../store/PipelineStore";
 import "./pipelineAdd.scss";
 
 /**
@@ -15,8 +16,6 @@ import "./pipelineAdd.scss";
  * @constructor
  */
 const PipelineAdd = props =>{
-
-    const {pipelineStore} = props
 
     const {createPipeline} = pipelineStore
     const user = getUser()
@@ -92,6 +91,7 @@ const PipelineAdd = props =>{
             setCurrent={setCurrent}
             baseInfo={baseInfo}
             setBaseInfo={setBaseInfo}
+            pipelineStore={pipelineStore}
         />
     )
 
@@ -148,4 +148,4 @@ const PipelineAdd = props =>{
 
 }
 
-export default inject("pipelineStore")(observer(PipelineAdd))
+export default PipelineAdd

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {inject,observer} from "mobx-react";
+import {inject,observer,Provider} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {message} from "antd";
 import {
@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import {Loading} from "../../common/component/loading/Loading";
 import Aside from "../../common/component/aside/Aside";
+import pipelineStore from "../pipeline/store/PipelineStore";
 
 /**
  * 流水线左侧导航（二级导航）
@@ -19,9 +20,13 @@ import Aside from "../../common/component/aside/Aside";
  */
 const PipelineAside= (props)=>{
 
-    const {match,pipelineStore,systemRoleStore}=props
+    const store = {
+        pipelineStore
+    }
 
-    const {findOnePipeline,updateOpen,pipelineList,pipeline,setPipeline} = pipelineStore
+    const {match,systemRoleStore}=props
+
+    const {findUserPipeline,findOnePipeline,updateOpen,pipelineList,pipeline,setPipeline} = pipelineStore
 
     const {getInitProjectPermissions} = systemRoleStore
 
@@ -32,6 +37,8 @@ const PipelineAside= (props)=>{
     const [isAside,setIsAside] = useState(true)
 
     useEffect(()=>{
+        // 获取所有流水线
+        findUserPipeline().then()
         // 组件销毁清空流水线信息
         return ()=>{setPipeline("")}
     },[])
@@ -50,7 +57,7 @@ const PipelineAside= (props)=>{
                 setIsAside(false)
             })
             // 当前流水线打开
-            updateOpen(id)
+            updateOpen(id).then()
         }
     },[id])
 
@@ -84,15 +91,19 @@ const PipelineAside= (props)=>{
 
     if(isAside) return <Loading/>
 
-    return  <Aside
+    return (
+        <Provider {...store}>
+            <Aside
                 {...props}
                 pipeline={pipeline}
                 pipelineList={pipelineList}
                 firstRouters={firstRouters}
             />
+        </Provider>
+    )
 
 }
 
-export default inject("systemRoleStore","pipelineStore")(observer(PipelineAside))
+export default inject("systemRoleStore")(observer(PipelineAside))
 
 

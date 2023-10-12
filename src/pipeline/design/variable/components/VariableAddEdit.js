@@ -9,11 +9,13 @@ import {Validation} from "../../../../common/utils/Client";
  * @returns {JSX.Element}
  * @constructor
  */
-const VariableAdd = props =>{
+const VariableAddEdit = props =>{
 
-    const {variableVisible,setVariableVisible,formValue,createVariable,pipelineId,updateVariable,
-        variableData,
+    const {variableVisible,setVariableVisible,formValue,pipelineId,
+        variableStore
     } = props
+
+    const {variableData,createVariable,updateVariable} = variableStore
 
     const [form] = Form.useForm()
 
@@ -43,7 +45,7 @@ const VariableAdd = props =>{
                     varId:formValue.varId
                 }
                 updateVariable(params).then(res=>{
-                    res.code===0 && message.info("更新成功",0.5)
+                    res.code===0 && message.info("更新成功")
                 })
             }else {
                 const params = {
@@ -52,7 +54,7 @@ const VariableAdd = props =>{
                     taskId:pipelineId,
                 }
                 createVariable(params).then(res=>{
-                    res.code===0 && message.info("添加成功",0.5)
+                    res.code===0 && message.info("添加成功")
                 })
             }
             setVariableVisible(false)
@@ -186,4 +188,4 @@ const VariableAdd = props =>{
     )
 }
 
-export default VariableAdd
+export default VariableAddEdit

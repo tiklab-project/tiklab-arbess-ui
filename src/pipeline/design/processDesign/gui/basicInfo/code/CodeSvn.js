@@ -1,6 +1,6 @@
 import React from "react";
 import FormsInput from "../FormsInput";
-import AuthFind from "../AuthFind";
+import FormsAuth from "../FormsAuth";
 
 /**
  * Svn
@@ -23,7 +23,7 @@ const CodeSvn = props =>{
                 placeholder={"检出文件夹名称"}
                 label={"检出文件"}
             />
-            <AuthFind />
+            <FormsAuth />
         </>
     )
 }

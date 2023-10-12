@@ -1,11 +1,10 @@
 import React,{useState,useEffect} from "react";
-import {inject,observer} from "mobx-react";
 import {Tooltip} from "antd";
 import {applyJump} from "tiklab-core-ui"
 import {DeleteOutlined} from "@ant-design/icons";
 import testOnStore from "../design/processDesign/processDesign/store/TestOnStore";
 import Breadcrumb from "../../common/component/breadcrumb/Breadcrumb";
-import EmptyText from "../../common/component/emptyText/EmptyText";
+import ListEmpty from "../../common/component/list/ListEmpty";
 import {SpinLoading} from "../../common/component/loading/Loading";
 import Page from "../../common/component/page/Page";
 import {deleteSuccessReturnCurrenPage} from "../../common/utils/Client";
@@ -19,15 +18,17 @@ import "./Test.scss";
  */
 const Test = props => {
 
-    const {pipelineStore} = props
+    const {match:{params}} = props
 
-    const {pipeline} = pipelineStore
-    const {findAllRelevance,testList,deleteRelevance} = testOnStore
+    const {findAllRelevance,deleteRelevance} = testOnStore
 
     const [pageParam] = useState({
         pageSize:10,
         currentPage: 1,
     })
+
+    // 测试列表
+    const [testList,setTestList] = useState([])
 
     // 测试页数
     const [testPage,setTestPage] = useState({
@@ -49,13 +50,17 @@ const Test = props => {
     useEffect(()=>{
         // 获取测试列表
         findAllRelevance({
-            pipelineId:pipeline.id,
+            pipelineId:params.id,
             ...param
         }).then(r=>{
-            setTestPage({
-                totalPage: r.data?.totalPage || 1,
-                totalRecord: r.data?.totalRecord || 1,
-            })
+            if(r.code===0){
+                setTestList(r.data?.dataList || [])
+                setTestPage({
+                    totalPage: r.data?.totalPage || 1,
+                    totalRecord: r.data?.totalRecord || 1,
+                })
+            }
+
             setIsLoading(false)
         })
     },[param])
@@ -193,7 +198,7 @@ const Test = props => {
                             )
                         })
                         :
-                        <EmptyText title={'暂无测试记录'}/>
+                        <ListEmpty title={'暂无测试记录'}/>
                     }
 
                     <Page
@@ -207,4 +212,4 @@ const Test = props => {
     )
 }
 
-export default inject("pipelineStore")(observer(Test))
+export default Test

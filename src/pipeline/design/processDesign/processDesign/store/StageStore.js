@@ -21,7 +21,7 @@ class StageStore {
     createStage = async value =>{
         const data = await Axios.post("/stage/createStage",value)
         if(data.code===0){
-            message.info("添加成功",0.7)
+            message.info("添加成功")
             this.stageFresh=!this.stageFresh
         }
         if(data.code===10000){
@@ -112,7 +112,7 @@ class StageStore {
         param.append("taskId",value)
         const data = await Axios.post("/stage/deleteStage",param)
         if(data.code===0){
-            message.info("删除成功",0.7)
+            message.info("删除成功")
             this.stageFresh=!this.stageFresh
         }
         return data

@@ -37,11 +37,11 @@ class AuthorizeStore {
         const data = await Axios.post("/codeAuthorize/findAccessToken",value)
         if(data.code===0){
             this.skin = false
-            message.success("授权成功",0.5)
+            message.success("授权成功")
         }
         else {
             this.skin = false
-            message.info(data.msg,0.5)
+            message.info(data.msg)
         }
         return data
     }
@@ -59,7 +59,7 @@ class AuthorizeStore {
         if(data.code===0){
             this.storehouseList = data.data || []
         }else {
-            message.info(data.msg,0.5)
+            message.info(data.msg)
             this.storehouseList = []
         }
     }
@@ -79,7 +79,7 @@ class AuthorizeStore {
             this.branchList = data.data || []
         }
         else {
-            message.info(data.msg,0.5)
+            message.info(data.msg)
             this.branchList = []
         }
     }

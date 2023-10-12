@@ -4,6 +4,7 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import BasicInfo from "../basicInfo/BasicInfo";
+import {HeadlineTitle} from "./TaskTitleIcon";
 import Tabs from "../../../../../common/component/tabs/Tabs";
 import Condition from "../condition/Condition";
 import Postprocess from "../postprocess/Postprocess";
@@ -41,39 +42,6 @@ const TaskDetails = props =>{
     }
 
     /**
-     * 编辑类型
-     * @returns {string}
-     */
-    const titleType = () => {
-        switch (dataItem?.taskType) {
-            case 'git':
-            case 'gitlab':
-            case 'svn':
-            case 'xcode':
-            case 'gitee':
-            case 'github':
-                return '源码'
-            case 'sonar':
-                return '代码扫描'
-            case 'maventest':
-            case 'teston':
-                return '测试'
-            case 'maven':
-            case 'nodejs':
-                return '构建'
-            case 'nexus':
-            case 'ssh':
-            case 'xpack':
-                return '推送制品'
-            case 'liunx':
-            case 'docker':
-                return '部署'
-            default :
-                return "阶段名称"
-        }
-    }
-
-    /**
      * 关闭弹出框
      */
     const onClose = () =>{
@@ -90,7 +58,7 @@ const TaskDetails = props =>{
             className="mf task-details"
         >
             <div className="task-details-up">
-                <div className="wrapper-head-title">{titleType()}</div>
+                <div className="wrapper-head-title">{HeadlineTitle(dataItem?.taskType)}</div>
                 <Btn onClick={onClose} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-details-bottom">

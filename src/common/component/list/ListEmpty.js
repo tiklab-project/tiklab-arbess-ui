@@ -7,7 +7,7 @@ import pip_meiyouxiangguan from "../../../assets/images/svg/pip_meiyouxiangguan.
  * @returns {JSX.Element}
  * @constructor
  */
-const EmptyText = props =>{
+const ListEmpty = props =>{
 
     const {title} = props
 
@@ -17,4 +17,4 @@ const EmptyText = props =>{
             </div>
 }
 
-export default EmptyText
+export default ListEmpty
