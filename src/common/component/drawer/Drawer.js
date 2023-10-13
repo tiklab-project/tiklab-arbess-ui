@@ -3,7 +3,7 @@ import {Drawer} from "antd";
 
 const PipelineDrawer = props =>{
 
-    const {type,children,...res} = props
+    const {requireRef,children,...res} = props
 
     const detailRef = useRef()
 
@@ -15,7 +15,7 @@ const PipelineDrawer = props =>{
     }, [res.visible])
 
     const closeModal = (e) => {
-        if (!detailRef.current) {
+        if (!detailRef.current || !requireRef) {
             return;
         }
         if (!detailRef.current.contains(e.target) && detailRef.current !== e.target) {
@@ -32,7 +32,7 @@ const PipelineDrawer = props =>{
             contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0,overflow:"hidden"}}
         >
-            <div ref={type && detailRef} >
+            <div ref={requireRef && detailRef} >
                 {children}
             </div>
         </Drawer>

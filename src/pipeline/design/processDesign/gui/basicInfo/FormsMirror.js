@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState, useRef} from "react";
 import {inject,observer} from "mobx-react";
 import {Tooltip,Form} from "antd";
 import {ExpandOutlined} from "@ant-design/icons";
@@ -17,24 +17,14 @@ const FormsMirror = props =>{
 
     const {updateTask,dataItem} = taskStore
 
-    // 代码块内容
-    const [mirrorValue,setMirrorValue] = useState(null)
+    const narrowMirrorRef = useRef();
+    const expandMirrorRef = useRef();
 
     // 边框
     const [bordered,setBordered] = useState(false)
 
     // 代码块弹出框显示
     const [visible,setVisible] = useState(false)
-
-    useEffect(() => {
-        getMirrorValue()
-    }, [dataItem.taskId]);
-
-    const getMirrorValue = () =>{
-        if(dataItem.task){
-            setMirrorValue(dataItem.task[name]? dataItem.task[name] : "")
-        }
-    }
 
     /**
      * 获取焦点改变placeholder
@@ -59,16 +49,23 @@ const FormsMirror = props =>{
      * 取消编辑
      */
     const onCancel = type =>{
-        getMirrorValue()
+        setNarrowMirrorValue()
         closeMirror(type)
+    }
+
+    const setNarrowMirrorValue = () =>{
+        if(dataItem.task){
+            narrowMirrorRef.current.editor.setValue(dataItem.task[name]? dataItem.task[name] : "")
+        }
     }
 
     /**
      * 确定更改
      */
-    const onOk = type =>{
-        if(WhetherChange(mirrorValue,dataItem.task?.[name])){
-            updateTask({[name]:mirrorValue})
+    const onOk = (type,ref) =>{
+        const value = ref.current.editor.getValue()
+        if(WhetherChange(value,dataItem.task?.[name])){
+            updateTask({[name]:value})
         }
         closeMirror(type)
     }
@@ -92,8 +89,8 @@ const FormsMirror = props =>{
                     <TaskMirror
                         bordered={bordered}
                         placeholder={placeholder}
-                        mirrorValue={mirrorValue}
-                        setMirrorValue={setMirrorValue}
+                        mirrorValue={dataItem?.task?.[name] || ""}
+                        mirrorRef={narrowMirrorRef}
                         onFocus={e=>onFocus(e)}
                         // className={
                         //     isValid ?
@@ -124,21 +121,21 @@ const FormsMirror = props =>{
                     bordered &&
                     <div style={{paddingTop:8}}>
                         <Btn title={"取消"} isMar={true} onClick={()=>onCancel('narrow')}/>
-                        <Btn title={"保存"} type={"primary"} onClick={()=>onOk('narrow')}/>
+                        <Btn title={"保存"} type={"primary"} onClick={()=>onOk('narrow',narrowMirrorRef)}/>
                     </div>
                 }
                 <Modals
                     visible={visible}
                     onCancel={()=>onCancel('expand')}
-                    onOk={()=>onOk('expand')}
+                    onOk={()=>onOk('expand',expandMirrorRef)}
                     width={800}
                     title={'编辑多行文本'}
                 >
                     <div className="mirror-expand">
                         <TaskMirror
                             type={true}
-                            mirrorValue={mirrorValue}
-                            setMirrorValue={setMirrorValue}
+                            mirrorRef={expandMirrorRef}
+                            mirrorValue={narrowMirrorRef?.current?.editor.getValue()}
                         />
                     </div>
                 </Modals>
