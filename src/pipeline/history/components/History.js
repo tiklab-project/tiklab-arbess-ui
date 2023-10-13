@@ -341,7 +341,7 @@ const History = props =>{
                     visible={detail}
                     onClose={goBack}
                     mask={false}
-                    type={'history'}
+                    requireRef={true}
                 >
                     <HistoryDetail
                         back={goBack}

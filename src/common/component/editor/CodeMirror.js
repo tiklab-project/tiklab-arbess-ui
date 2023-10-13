@@ -11,7 +11,6 @@ import "codemirror/addon/hint/show-hint.css";
 import "codemirror/addon/hint/show-hint";
 import "codemirror/addon/hint/anyword-hint.js";
 // 主题风格
-import "codemirror/theme/solarized.css";
 import "codemirror/theme/dracula.css";
 // 高亮
 import "codemirror/addon/selection/active-line";
@@ -32,21 +31,21 @@ import "codemirror/addon/fold/comment-fold.js";
  */
 export const TaskMirror = props =>{
 
-    const {type,mirrorValue,setMirrorValue,bordered,placeholder,...res} = props
+    const {type,mirrorRef,mirrorValue,bordered,placeholder,...res} = props
 
     return(
         <CodeMirror
             {...res}
+            ref={mirrorRef}
             value={mirrorValue}//内容
             options={{
                 mode: {name:"shell",shell: true },//语言
-                theme:type? "dracula":"material",
+                theme:type ? "dracula":"default",
                 autofocus: type,
                 lineNumbers: type, // 是否显示行号
                 placeholder: type ? "" : bordered ? placeholder: "未设置",
                 styleActiveLine: bordered,
             }}
-            onChange={(_,__,value)=>setMirrorValue(value)}
         />
     )
 }
