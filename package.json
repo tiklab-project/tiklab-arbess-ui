@@ -177,15 +177,15 @@
         "react-router": "^5.2.0",
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
-        "tiklab-core-ui": "^1.0.1",
-        "tiklab-eam-ui": "^1.0.1",
-        "tiklab-licence-ui": "^1.0.1",
-        "tiklab-message-ui": "^1.0.1",
-        "tiklab-plugin-core-ui": "^1.0.1",
-        "tiklab-plugin-manager-ui": "^1.0.1",
-        "tiklab-privilege-ui": "^1.0.1",
-        "tiklab-security-ui": "^1.0.1",
-        "tiklab-todotask-ui": "^1.0.1",
-        "tiklab-user-ui": "^1.0.1"
+        "tiklab-core-ui": "^1.0.2",
+        "tiklab-eam-ui": "^1.0.2",
+        "tiklab-licence-ui": "^1.0.2",
+        "tiklab-message-ui": "^1.0.2",
+        "tiklab-plugin-core-ui": "^1.0.2",
+        "tiklab-plugin-manager-ui": "^1.0.2",
+        "tiklab-privilege-ui": "^1.0.2",
+        "tiklab-security-ui": "^1.0.2",
+        "tiklab-todotask-ui": "^1.0.2",
+        "tiklab-user-ui": "^1.0.2"
     }
 }

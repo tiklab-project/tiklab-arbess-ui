@@ -70,7 +70,7 @@ const SettingContent= props =>  {
         return (
             <PrivilegeButton key={data.id} code={data.purviewCode} {...props}>
                 <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
-                    className={`system-aside-li ${data.id=== selectKey ? "system-aside-select":""}`}
+                    className={`system-aside-li system-aside-second  ${data.id=== selectKey ? "system-aside-select":""}`}
                     onClick={()=>select(data)}
                     key={data.id}
                 >
