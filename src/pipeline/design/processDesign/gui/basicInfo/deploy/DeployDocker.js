@@ -15,11 +15,17 @@ const DeployDocker = props =>{
         <>
             <FormsAuth />
             <FormsInput
+                name={"dockerImage"}
+                placeholder={"部署镜像名称"}
+                label={"部署镜像名称"}
+                isRequire={true}
+            />
+            <FormsInput
                 name={"deployAddress"}
                 placeholder={"部署位置"}
                 label={"部署位置"}
                 addonBefore={"/"}
-                isValid={true}
+                isRequire={true}
             />
             <FormsMirror
                 name={"deployOrder"}

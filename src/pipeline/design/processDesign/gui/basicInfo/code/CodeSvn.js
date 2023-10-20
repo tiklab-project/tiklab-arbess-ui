@@ -16,7 +16,7 @@ const CodeSvn = props =>{
                 name={"codeName"}
                 placeholder={"svn地址"}
                 label={"svn地址"}
-                isValid={true}
+                isRequire={true}
             />
             <FormsInput
                 name={"svnFile"}

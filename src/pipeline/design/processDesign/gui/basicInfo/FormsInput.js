@@ -1,7 +1,7 @@
 import React,{useState,useRef,useEffect} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
-import {WhetherChange} from "../gui/Common";
+import {WhetherChange} from "../Common";
 import {Validation} from "../../../../../common/utils/Client";
 
 /**
@@ -10,20 +10,20 @@ import {Validation} from "../../../../../common/utils/Client";
  */
 const FormsInput = props =>{
 
-    const {placeholder,label,name,addonBefore,isValid,taskStore} = props
+    const {placeholder,label,name,addonBefore,isRequire,taskStore} = props
 
     const {dataItem,updateTask} = taskStore
 
-    const ref = useRef(null)
+    const inputRef = useRef(null)
     const [enter,setEnter] = useState(false)
 
     useEffect(()=>{
-        // // 文本框聚焦
-        // if(enter){
-        //     ref.current.focus()
-        // }else {
-        //     ref.current.blur()
-        // }
+        // 文本框聚焦
+        if(enter){
+            inputRef.current.focus()
+        }else {
+            inputRef.current.blur()
+        }
     },[enter])
 
     // Git正则表达
@@ -48,7 +48,7 @@ const FormsInput = props =>{
                 }
                 break
             default:
-                if(isValid){
+                if(isRequire){
                     return value && value.trim() !== ""
                 }else {
                     return true
@@ -64,7 +64,7 @@ const FormsInput = props =>{
         const value = e.target.value
         // 文本内容效验是否通过
         const valid =  validation(value,dataItem.taskType,name)
-        const isTaskChange =  WhetherChange(value,dataItem.task && dataItem.task[name])
+        const isTaskChange =  WhetherChange(value,dataItem.task?.[name])
         setEnter(false)
         if(valid && isTaskChange){
             updateTask({[name]:value})
@@ -76,7 +76,7 @@ const FormsInput = props =>{
      */
     const rules = () =>{
         let rule
-        if(isValid){
+        if(isRequire){
             rule = [
                 {required:true,message:`${label}不能为空`},
                 Validation(label),
@@ -110,7 +110,7 @@ const FormsInput = props =>{
             validateTrigger="onChange"
         >
             <Input
-                ref={ref}
+                ref={inputRef}
                 addonBefore={enter && addonBefore}
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
                 className={`${enter?'':'input-hover'}`}

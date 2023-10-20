@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Space,Table} from "antd"
+import {Space,Table} from "antd";
 import serverStore from "../store/ServerStore";
 import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";

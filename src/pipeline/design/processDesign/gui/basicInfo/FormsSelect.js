@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import {Select, Spin} from "antd";
+import React, {useState,useEffect,useRef} from "react";
+import {Form,Select, Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 import ListEmpty from "../../../../../common/component/list/ListEmpty";
 
@@ -11,30 +11,64 @@ import ListEmpty from "../../../../../common/component/list/ListEmpty";
  */
 const FormsSelect = props => {
 
-    const {border,label,isSpin,children,...res} = props
+    const {name,rules,label,isSpin,children,...res} = props
+
+    const selectRef = useRef();
 
     // 是否显示下拉图标
     const [showArrow,setShoeArrow] = useState(false)
 
+    // 下拉框聚焦
+    const [bordered,setBordered] = useState(false)
+
+    useEffect(()=>{
+        if(bordered){
+            selectRef.current.focus()
+        }else {
+            selectRef.current.blur()
+        }
+    },[bordered])
+
     const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <ListEmpty/>
 
     return (
-        <Select
-            {...res}
-            showSearch={border}
-            placeholder={border ? label:"未选择"}
-            className={border?'':'input-hover'}
-            showArrow={showArrow}
-            onMouseEnter={()=>setShoeArrow(true)}
-            onMouseLeave={()=>setShoeArrow(false)}
-            getPopupContainer={e => e.parentElement}
-            notFoundContent={notFoundContent}
-            filterOption = {(input, option) =>
-                (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-        >
-            {children}
-        </Select>
+        <Form.Item name={name} label={label} rules={rules}>
+            <Select
+                {...res}
+                showSearch
+                ref={selectRef}
+                placeholder={bordered ? label:"未选择"}
+                className={bordered?'':'input-hover'}
+                showArrow={showArrow}
+                onMouseEnter={()=>setShoeArrow(true)}
+                onMouseLeave={()=>setShoeArrow(false)}
+                onFocus={()=>{
+                    if (res.onFocus) {
+                        res.onFocus();
+                    }
+                    setBordered(true)
+                }}
+                onBlur={()=>{
+                    if (res.onBlur) {
+                        res.onBlur();
+                    }
+                    setBordered(false)
+                }}
+                onChange={value=>{
+                    if(res.onChange) {
+                        res.onChange(value);
+                    }
+                    setBordered(false)
+                }}
+                getPopupContainer={e => e.parentElement}
+                notFoundContent={notFoundContent}
+                filterOption = {(input, option) =>
+                    (Array.isArray(option.children) ? option.children.join('') : option.children).toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+            >
+                {children}
+            </Select>
+        </Form.Item>
     )
 }
 

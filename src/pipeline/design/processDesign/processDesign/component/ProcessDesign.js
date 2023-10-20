@@ -8,7 +8,7 @@ import xpackStore from "../store/XPackStore";
 import authStore from "../../../../../setting/auth/store/AuthStore";
 import hostStore from "../../../../../setting/authHost/store/HostStore";
 import serverStore from "../../../../../setting/authServer/store/ServerStore";
-import Gui from "../../gui/gui/Gui";
+import Gui from "../../gui/Gui";
 
 const ProcessDesign = props =>{
 

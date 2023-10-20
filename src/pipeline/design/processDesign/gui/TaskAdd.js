@@ -2,8 +2,8 @@ import React,{useState,useRef} from "react";
 import {Col, Row, message} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../../common/component/btn/Btn";
-import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
+import Btn from "../../../../common/component/btn/Btn";
+import PipelineDrawer from "../../../../common/component/drawer/Drawer";
 import {taskTitle, TaskTitleIcon} from "./TaskTitleIcon";
 import "./TaskAdd.scss";
 
@@ -63,12 +63,21 @@ const TaskAdd = props =>{
             ]
         },
         {
-            id:"artifact",
+            id:"artifact_pull",
+            title: "拉取制品",
+            desc: [
+                {type:'pull_maven'},
+                {type:'pull_nodejs'},
+                {type:'pull_docker'}
+            ]
+        },
+        {
+            id:"artifact_push",
             title: "推送制品",
             desc: [
-                {type:'nexus'},
-                {type:'ssh'},
-                {type:'xpack'}
+                {type:'artifact_maven'},
+                {type:'artifact_nodejs'},
+                {type:'artifact_docker'}
             ]
         },
         {
@@ -118,13 +127,27 @@ const TaskAdd = props =>{
                 taskType:type,
                 formType:'task',
                 taskName:taskTitle(type),
-                task:{}
+                task: taskObj(type)
             })
             setTaskFormDrawer(true)
         }
-        if(data.code===50001){
-            message.info(data.msg)
+    }
+
+    /**
+     * 初始化
+     * @param type
+     */
+    const taskObj = type => {
+        if(type==='artifact_maven' || type==='artifact_docker'){
+            return {artifactType:'nexus'}
         }
+        else if(type==='pull_maven' || type==='pull_docker'){
+            return {pullType:'nexus',transitive:true}
+        }
+        else if(type==='liunx'){
+            return {authType:1}
+        }
+        return {}
     }
 
     /**
@@ -205,8 +228,8 @@ const TaskAdd = props =>{
                                             {
                                                 group.desc && group.desc.map((item,index)=>{
                                                     return(
-                                                        <div key={index} className={`group-desc`}
-                                                             onClick={()=> addTask(item)}
+                                                        <div key={index} className={`group-desc ${(item.type==='artifact_nodejs' || item.type==='pull_nodejs')?"group-desc-ban":""}`}
+                                                             onClick={()=> (item.type==='artifact_nodejs' || item.type==='pull_nodejs') ? null : addTask(item)}
                                                         >
                                                             <TaskTitleIcon type={item.type}/>
                                                         </div>

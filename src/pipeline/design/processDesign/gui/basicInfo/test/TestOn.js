@@ -1,11 +1,11 @@
 import React,{useState} from "react";
-import {Form,Select} from "antd";
+import {Select} from "antd";
 import {inject, observer} from "mobx-react";
 import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
 
 /**
- * teston 接口测试
+ * teston接口测试
  * @param props
  * @returns {JSX.Element}
  * @constructor
@@ -17,19 +17,16 @@ const TestOn = props => {
     const {updateTask,dataItem} = taskStore
     const {findTestSpace,testSpace,findTestEnv,testEnv,findTestPlan,testPlan} = testOnStore
 
-    // 测试空间 | 测试计划 | 测试环境 聚焦状态
-    const [border,setBorder] = useState(null)
-
     // 推送地址获取加载状态
-    const [isSpin,setSpin] = useState(false)
+    const [isSpin,setSpin] = useState(false);
 
     /**
      * 获取测试空间 | 测试计划 | 测试环境
-     * @param type：类型
+     * @param type
      */
     const onFocus = type => {
         const authId = dataItem.task?.authId
-        setBorder(type)
+        if(!authId) return;
         switch (type) {
             case 'testSpace':
                 setSpin(true)
@@ -42,7 +39,7 @@ const TestOn = props => {
                 })
                 return;
             default:
-                return findTestEnv({
+                findTestEnv({
                     rpyId:dataItem.task?.testSpace?.id,
                     authId:authId,
                     env:type
@@ -54,7 +51,6 @@ const TestOn = props => {
      * 切换空间 | API环境 | APP环境 | WEB环境 | 测试计划
      */
     const onChange = (value,type) => {
-        setBorder(null)
         updateTask({[type]: {id:value}})
     }
 
@@ -69,97 +65,86 @@ const TestOn = props => {
         if (!apiEnvValue && !appEnvValue && !webEnvValue) {
             return Promise.reject(new Error('API环境、APP环境、WEB环境不能同时为空'));
         }
-
         return Promise.resolve();
     }
 
     return (
         <>
             <FormsAuth />
-            <Form.Item name={dataItem.taskId+"_testSpace"} label={"测试空间"} rules={[{required:true, message:"测试空间不能为空"}]}>
-                <FormsSelect
-                    label={"空间"}
-                    isSpin={isSpin}
-                    border={border==='testSpace'}
-                    onBlur={()=>setBorder(null)}
-                    onFocus={()=>onFocus('testSpace')}
-                    onChange={value=>onChange(value,'testSpace')}
-                >
-                    {
-                        testSpace && testSpace.map(item=>{
-                            return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                        })
-                    }
-                </FormsSelect>
-            </Form.Item>
+            <FormsSelect
+                rules={[{required:true, message:"测试空间不能为空"}]}
+                name={dataItem.taskId+"_testSpace"}
+                label={"空间"}
+                isSpin={isSpin}
+                onFocus={()=>onFocus('testSpace')}
+                onChange={value=>onChange(value,'testSpace')}
+            >
+                {
+                    testSpace && testSpace.map(item=>{
+                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                    })
+                }
+            </FormsSelect>
 
-            <Form.Item name={dataItem.taskId+"_apiEnv"} label={"API环境"} rules={[{validator: validatorEnv}]}>
-                <FormsSelect
-                    label={"API环境"}
-                    isSpin={false}
-                    border={border==='api'}
-                    onBlur={()=>setBorder(null)}
-                    onFocus={()=>onFocus('api')}
-                    onChange={value=>onChange(value,'apiEnv')}
-                >
-                    {
-                        testEnv && testEnv.map(item=>{
-                            return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                        })
-                    }
-                </FormsSelect>
-            </Form.Item>
+            <FormsSelect
+                rules={[{validator: validatorEnv}]}
+                name={dataItem.taskId+"_apiEnv"}
+                label={"API环境"}
+                isSpin={false}
+                onFocus={()=>onFocus('api')}
+                onChange={value=>onChange(value,'apiEnv')}
+            >
+                {
+                    testEnv && testEnv.map(item=>{
+                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                    })
+                }
+            </FormsSelect>
 
-            <Form.Item name={dataItem.taskId+"_appEnv"} label={"APP环境"} rules={[{validator: validatorEnv}]}>
-                <FormsSelect
-                    label={"APP环境"}
-                    isSpin={false}
-                    border={border==='app'}
-                    onBlur={()=>setBorder(null)}
-                    onFocus={()=>onFocus('app')}
-                    onChange={value=>onChange(value,'appEnv')}
-                >
-                    {
-                        testEnv && testEnv.map(item=>{
-                            return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                        })
-                    }
-                </FormsSelect>
-            </Form.Item>
+            <FormsSelect
+                rules={[{validator: validatorEnv}]}
+                name={dataItem.taskId+"_appEnv"}
+                label={"APP环境"}
+                isSpin={false}
+                onFocus={()=>onFocus('app')}
+                onChange={value=>onChange(value,'appEnv')}
+            >
+                {
+                    testEnv && testEnv.map(item=>{
+                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                    })
+                }
+            </FormsSelect>
 
-            <Form.Item name={dataItem.taskId+"_webEnv"} label={"WEB环境"} rules={[{validator: validatorEnv}]}>
-                <FormsSelect
-                    label={"WEB环境"}
-                    isSpin={false}
-                    border={border==='web'}
-                    onBlur={()=>setBorder(null)}
-                    onFocus={()=>onFocus('web')}
-                    onChange={value=>onChange(value,'webEnv')}
-                >
-                    {
-                        testEnv && testEnv.map(item=>{
-                            return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                        })
-                    }
-                </FormsSelect>
-            </Form.Item>
+            <FormsSelect
+                rules={[{validator: validatorEnv}]}
+                name={dataItem.taskId+"_webEnv"}
+                label={"WEB环境"}
+                isSpin={false}
+                onFocus={()=>onFocus('web')}
+                onChange={value=>onChange(value,'webEnv')}
+            >
+                {
+                    testEnv && testEnv.map(item=>{
+                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                    })
+                }
+            </FormsSelect>
 
-            <Form.Item name={dataItem.taskId+"_testPlan"} label={"测试计划"} rules={[{required:true, message:"测试计划不能为空"}]}>
-                <FormsSelect
-                    label={"测试计划"}
-                    isSpin={false}
-                    border={border==='testPlan'}
-                    onBlur={()=>setBorder(null)}
-                    onFocus={()=>onFocus('testPlan')}
-                    onChange={value=>onChange(value,'testPlan')}
-                >
-                    {
-                        testPlan && testPlan.map(item=>{
-                            return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                        })
-                    }
-                </FormsSelect>
-            </Form.Item>
+            <FormsSelect
+                rules={[{required:true, message:"测试计划不能为空"}]}
+                name={dataItem.taskId+"_testPlan"}
+                label={"测试计划"}
+                isSpin={false}
+                onFocus={()=>onFocus('testPlan')}
+                onChange={value=>onChange(value,'testPlan')}
+            >
+                {
+                    testPlan && testPlan.map(item=>{
+                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                    })
+                }
+            </FormsSelect>
         </>
     )
 }

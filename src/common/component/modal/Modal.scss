@@ -12,6 +12,7 @@
     }
     .mf-modal-content{
         padding: 0 var(--tiklab-padding);
+        min-height: 100px;
         max-height:calc(100% - 120px);
         overflow:auto;
     }

@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../../common/component/btn/Btn";
-import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
-import BasicInfo from "../basicInfo/BasicInfo";
+import Btn from "../../../../common/component/btn/Btn";
+import PipelineDrawer from "../../../../common/component/drawer/Drawer";
+import BasicInfo from "./basicInfo/BasicInfo";
 import {HeadlineTitle} from "./TaskTitleIcon";
-import Tabs from "../../../../../common/component/tabs/Tabs";
-import Condition from "../condition/Condition";
-import Postprocess from "../postprocess/Postprocess";
-import Variable from "../variable/Variable";
+import Tabs from "../../../../common/component/tabs/Tabs";
+import Condition from "./condition/Condition";
+import Postprocess from "./postprocess/Postprocess";
+import Variable from "./variable/Variable";
 import "./TaskDetails.scss";
 
 /**
@@ -21,7 +21,7 @@ const TaskDetails = props =>{
 
     const {taskFormDrawer,setTaskFormDrawer,taskStore} = props
 
-    const {dataItem} = taskStore
+    const {dataItem,taskDetailsDrawerMask} = taskStore
 
     // 标签类型
     const [handleType,setHandleType] = useState("base")

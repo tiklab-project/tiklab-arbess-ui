@@ -1,10 +1,11 @@
 import moment from "moment";
+// import {taskTitle} from "../../pipeline/design/processDesign/gui/TaskTitleIcon";
 
 /**
- * 系统时间
+ * 当前时间
  */
 export default {
-    moment:moment().format("YYYY-MM-DD HH:mm:ss"), //当前时间
+    moments:moment().format("YYYY-MM-DD HH:mm:ss"),
     time:moment().format("HH:mm"),
 }
 
@@ -91,3 +92,43 @@ export function debounce(fn, delay) {
     }
 }
 
+// /**
+//  * 模糊搜索
+//  * @param search
+//  * @param data
+//  * @returns {*[]}
+//  */
+// export const fuzzySearch = (search, data) => {
+//     const matches = [];
+//     for (let item of data) {
+//         if (fuzzyMatch(search, item.title)) {
+//             matches.push(item);
+//             continue;
+//         }
+//         // 标记是否匹配当前对象
+//         let isMatch = false;
+//         // 过滤描述数组
+//         const filteredDesc = item.desc.filter(desc => {
+//             if (fuzzyMatch(search, taskTitle(desc.type))) {
+//                 isMatch = true;
+//                 return true;
+//             }
+//             return false;
+//         });
+//         if (isMatch) {
+//             // 构建过滤后的对象
+//             const match = {
+//                 id: item.id,
+//                 title: item.title,
+//                 desc: filteredDesc
+//             };
+//             matches.push(match);
+//         }
+//     }
+//     return matches;
+// }
+//
+// const fuzzyMatch = (s1, s2) => {
+//     const regexp = new RegExp(s1, 'i');
+//     return regexp.test(s2);
+// }

@@ -321,7 +321,7 @@ const PipelineTable = props =>{
                             placement={"bottomRight"}
                         >
                             <Tooltip title="更多">
-                                <span className="pipelineTable-action" title={"更多"}>
+                                <span className="pipelineTable-action">
                                     <img src={pip_more} alt={"更多"} width={20} height={20}/>
                                 </span>
                             </Tooltip>

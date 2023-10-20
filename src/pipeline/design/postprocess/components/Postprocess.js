@@ -3,7 +3,7 @@ import {Col, message, Row, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAddEdit from "./PostprocessAddEdit";
-import {TaskTitleIcon} from "../../processDesign/gui/gui/TaskTitleIcon";
+import {TaskTitleIcon} from "../../processDesign/gui/TaskTitleIcon";
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";

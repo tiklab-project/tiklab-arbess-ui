@@ -141,7 +141,7 @@ const Test = props => {
     return (
         <div className='test'>
             <div className="test-content mf">
-                <Breadcrumb firstItem={"测试"}/>
+                <Breadcrumb firstItem={"测试报告"}/>
                 <div className='test-table'>
                     {
                         testList && testList.length > 0 ?
@@ -198,7 +198,7 @@ const Test = props => {
                             )
                         })
                         :
-                        <ListEmpty title={'暂无测试记录'}/>
+                        <ListEmpty title={'暂无测试报告'}/>
                     }
 
                     <Page

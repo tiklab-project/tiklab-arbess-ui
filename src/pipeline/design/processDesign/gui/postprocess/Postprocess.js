@@ -13,7 +13,7 @@ import ListEmpty from "../../../../../common/component/list/ListEmpty";
 import PostprocessUserAdd from "../../../postprocess/components/PostprocessUserAdd";
 import {PostprocessMirrorScenario} from "../../../../../common/component/editor/CodeMirror";
 import {Validation} from "../../../../../common/utils/Client";
-import {TaskIcon, taskTitle} from "../gui/TaskTitleIcon";
+import {TaskIcon, taskTitle} from "../TaskTitleIcon";
 import {PipelineDropdown} from "../../../../../common/component/dropdown/DropdownMenu";
 import "./Postprocess.scss";
 

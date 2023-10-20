@@ -2,10 +2,10 @@ import React,{useState,useEffect,Fragment} from "react";
 import {Popconfirm, Tooltip} from "antd";
 import {PlusOutlined, EditOutlined, ExclamationCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
-import {TaskFinalAdd, TaskInsertBtn} from "./Common";
-import {SpinLoading} from "../../../../../common/component/loading/Loading";
+import {SpinLoading} from "../../../../common/component/loading/Loading";
 import {TaskIcon} from "./TaskTitleIcon";
-import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
+import {TaskFinalAdd} from "./Common";
+import pip_zengjia from "../../../../assets/images/svg/pip_zengjia.svg";
 
 /**
  * 多阶段
@@ -103,6 +103,15 @@ const Stage = props =>{
     }
 
     /**
+     * true：源码，fasle：不是源码
+     * @param type
+     * @returns {boolean}
+     */
+    const isCode = type =>{
+        return type === 'git' || type === 'gitee' || type === 'github' || type === 'gitlab' || type === 'svn' || type === 'xcode';
+    }
+
+    /**
      * 渲染多阶段
      * @param group
      * @param groupIndex
@@ -110,7 +119,22 @@ const Stage = props =>{
      */
     const renderMultitask = (group,groupIndex) =>{
         return <Fragment key={groupIndex}>
-            { !group.code && TaskInsertBtn(insertData,group,groupIndex,"multiBtn") }
+            {
+                !group.code &&
+                <div className="group-flow">
+                    <div className="group-flow_btn group-flow_multiBtn">
+                        <Tooltip title="添加新任务">
+                            <img
+                                src={pip_zengjia}
+                                style={{width:22,height:22}}
+                                className="group-flow_btn_i"
+                                alt={"添加"}
+                                onClick={()=>insertData(group,groupIndex)}
+                            />
+                        </Tooltip>
+                    </div>
+                </div>
+            }
             <div className="group-table">
                 <div className="group-head">
                     <div className="name">

@@ -83,7 +83,7 @@ const PipelineAside= (props)=>{
         },
         {
             id:`/index/pipeline/${id}/test`,
-            title: "测试",
+            title: "测试报告",
             icon: <ExperimentOutlined />,
             key:"5",
         },

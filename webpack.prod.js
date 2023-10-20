@@ -134,13 +134,6 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 1,
                     reuseExistingChunk: true
                 },
-                // monacoEditor: {
-                //     name: "chunk-monaco-editor",
-                //     chunks: "all",
-                //     test: /monaco-editor/,
-                //     priority: 1,
-                //     reuseExistingChunk: true
-                // },
                 antdUI: {
                     name: "chunk-antdUI",
                     chunks: "all",

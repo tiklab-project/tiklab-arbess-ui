@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Form,Select} from "antd";
+import {Select} from "antd";
 import {inject,observer} from "mobx-react";
 import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
@@ -19,12 +19,6 @@ const CodeGiteeOrGithub = props =>{
 
     // 分支选择器是否禁止
     const [prohibited,setProhibited] = useState(true)
-
-    // 仓库焦点需要
-    const [nameBorder,setNameBorder] = useState(false)
-
-    // 分支焦点
-    const [branchBorder,setBranchBorder] = useState(false)
 
     // 仓库获取加载状态
     const [isSpin,setSpin] = useState(false)
@@ -58,58 +52,50 @@ const CodeGiteeOrGithub = props =>{
      * @param name
      */
     const onFocus = name => {
-        switch (name) {
-            case "codeName":
-                setNameBorder(true)
-                setSpin(true)
-                findAllStorehouse(dataItem.task?.authId).then(r=>setSpin(false))
-                break
-            default:
-                setBranchBorder(true)
-                findBranch({
-                    houseName:dataItem.task?.codeName,
-                    authId:dataItem.task?.authId,
-                })
+        if(!dataItem.task?.authId) return;
+        if(name==="codeName"){
+            setSpin(true)
+            findAllStorehouse(dataItem.task?.authId).then(r=>setSpin(false))
+            return;
         }
+        if(!dataItem.task?.codeName) return;
+        findBranch({
+            houseName:dataItem.task?.codeName,
+            authId:dataItem.task?.authId,
+        })
     }
 
     return(
         <>
             <FormsAuth />
-            <Form.Item name={dataItem.taskId+"_codeName"} label="仓库" rules={[{required:true, message:"仓库不能为空"}]}>
-                <FormsSelect
-                    label="仓库"
-                    isSpin={isSpin}
-                    border={nameBorder}
-                    onBlur={()=>setNameBorder(false)}
-                    onFocus={()=>onFocus("codeName")}
-                    onChange={changeGitStoreHouse}
-                >
-                    {
-                        storehouseList && storehouseList.map(item=>{
-                            return <Select.Option key={item} value={item}> {item} </Select.Option>
-                        })
-                    }
-                </FormsSelect>
-            </Form.Item>
-            <Form.Item name={dataItem.taskId+"_codeBranch"} label="分支">
-                <FormsSelect
-                    label="分支"
-                    isSpin={false}
-                    border={branchBorder}
-                    disabled={prohibited}
-                    onBlur={()=>setBranchBorder(false)}
-                    onFocus={()=>onFocus("codeBranch")}
-                    onChange={changeBranch}
-                >
-                    {
-                        branchList && branchList.map(item=>{
-                            return  <Select.Option key={item} value={item}> {item} </Select.Option>
-                        })
-                    }
-                </FormsSelect>
-
-            </Form.Item>
+            <FormsSelect
+                rules={[{required:true, message:"仓库不能为空"}]}
+                name={dataItem.taskId+"_codeName"}
+                label="仓库"
+                isSpin={isSpin}
+                onFocus={()=>onFocus("codeName")}
+                onChange={changeGitStoreHouse}
+            >
+                {
+                    storehouseList && storehouseList.map(item=>{
+                        return <Select.Option key={item} value={item}> {item} </Select.Option>
+                    })
+                }
+            </FormsSelect>
+            <FormsSelect
+                name={dataItem.taskId+"_codeBranch"}
+                label="分支"
+                isSpin={false}
+                disabled={prohibited}
+                onFocus={()=>onFocus("codeBranch")}
+                onChange={changeBranch}
+            >
+                {
+                    branchList && branchList.map(item=>{
+                        return  <Select.Option key={item} value={item}> {item} </Select.Option>
+                    })
+                }
+            </FormsSelect>
         </>
     )
 }

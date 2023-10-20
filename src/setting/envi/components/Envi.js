@@ -7,7 +7,7 @@ import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import Btn from "../../../common/component/btn/Btn";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListAction from "../../../common/component/list/ListAction";
-import {TaskTitleIcon} from "../../../pipeline/design/processDesign/gui/gui/TaskTitleIcon";
+import {TaskTitleIcon} from "../../../pipeline/design/processDesign/gui/TaskTitleIcon";
 import ListIcon from "../../../common/component/list/ListIcon";
 import "../../authCommon/Auth.scss";
 

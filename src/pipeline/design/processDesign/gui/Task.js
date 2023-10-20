@@ -1,10 +1,11 @@
 import React,{Fragment,useEffect,useState} from "react";
-import {Popconfirm} from "antd";
+import {Popconfirm, Tooltip} from "antd";
 import {DeleteOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import {TaskFinalAdd,TaskInsertBtn} from "./Common";
-import {SpinLoading} from "../../../../../common/component/loading/Loading";
+import {SpinLoading} from "../../../../common/component/loading/Loading";
 import {TaskIcon} from "./TaskTitleIcon";
+import {TaskFinalAdd} from "./Common";
+import pip_zengjia from "../../../../assets/images/svg/pip_zengjia.svg";
 
 /**
  * 多任务
@@ -77,7 +78,12 @@ const Task = props => {
         setTaskFormDrawer(false)
     }
 
-    const isBtn = type =>{
+    /**
+     * false：源码；true：不是源码
+     * @param type
+     * @returns {boolean}
+     */
+    const isCode = type =>{
         return !(type === 'git' || type === 'gitee' || type === 'github' || type === 'gitlab' || type === 'svn' || type === 'xcode');
     }
 
@@ -91,7 +97,22 @@ const Task = props => {
         const valid = () => taskMustField && taskMustField.some(li=>li===group.taskId)
 
         return <Fragment key={groupIndex}>
-            { isBtn(group.taskType) && TaskInsertBtn(insertData,group,groupIndex,"singleBtn") }
+            {
+                isCode(group.taskType) &&
+                <div className="group-flow">
+                    <div className="group-flow_btn group-flow_singleBtn">
+                        <Tooltip title="添加新任务">
+                            <img
+                                src={pip_zengjia}
+                                style={{width:22,height:22}}
+                                className="group-flow_btn_i"
+                                alt={"添加"}
+                                onClick={()=>insertData(group,groupIndex)}
+                            />
+                        </Tooltip>
+                    </div>
+                </div>
+            }
             <div className="group-table">
                 <div className="group-head">
                     <div className="name" style={{opacity:0}}/>

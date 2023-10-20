@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Form, Input} from "antd";
-import {WhetherChange} from "../gui/Common";
+import {WhetherChange} from "../Common";
 import CodeGiteeOrGithubOrXcode from "./code/CodeGiteeOrGithub";
 import CodeGitOrGitlab from "./code/CodeGitOrGitlab";
 import CodeSvn from "./code/CodeSvn";
@@ -8,13 +8,15 @@ import CodeXcode from "./code/CodeXcode";
 import ScanSonarQuebe from "./scan/ScanSonarQuebe";
 import TestMvnUnit from "./test/TestMvnUnit";
 import TestOn from "./test/TestOn";
-import BuildMavenOrNode from "./build/BuildMavenOrNode";
+import BuildMaven from "./build/BuildMaven";
+import BuildNode from "./build/BuildNode";
 import BuildDocker from "./build/BuildDocker";
-import ArtifactNexus from "./artifact/ArtifactNexus";
-import ArtifactSsh from "./artifact/ArtifactSsh";
-import ArtifactXpack from "./artifact/ArtifactXpack";
 import DeployLinux from "./deploy/DeployLinux";
 import DeployDocker from "./deploy/DeployDocker";
+import ArtifactPushMaven from "./artifact/ArtifactPushMaven";
+import ArtifactPushDocker from "./artifact/ArtifactPushDocker";
+import ArtifactPullMaven from "./artifact/ArtifactPullMaven";
+import ArtifactPullDocker from "./artifact/ArtifactPullDocker";
 
 /**
  * task的基本信息
@@ -29,19 +31,17 @@ const BasicInfo = props => {
     const [form] = Form.useForm()
     const [enter,setEnter] = useState(false)
 
-    console.log(dataItem)
-
     /**
      * 设置表单文本框id
      */
     const getId = name => dataItem.taskId + "_" + name
 
     useEffect(()=>{
+
         // 初始化表单内容
         const task = dataItem && dataItem.task
 
-        const authHost = task?.auth ? task.auth.name+"("+ task.auth.ip+")" : null
-        const authAuth = task?.auth ? task.auth.name+"("+(task.auth.authType===1 ? task.auth.username:"私钥")+")" : null
+        console.log(task)
 
         switch(dataItem.taskType){
             case 'git':
@@ -49,22 +49,14 @@ const BasicInfo = props => {
             case 'svn':
             case 'gitee':
             case 'github':
-                form.setFieldsValue({
-                    taskName:dataItem?.taskName,
-                    [getId("codeName")]:task?.codeName,
-                    [getId("codeBranch")]:task?.codeBranch,
-                    [getId("codeAlias")]:task?.codeAlias,
-                    [getId("svnFile")]:task?.svnFile,
-                    [getId("authName")]:authAuth,
-                })
-                break
             case 'xcode':
                 form.setFieldsValue({
                     taskName:dataItem?.taskName,
-                    [getId("codeName")]:task?.repository?.name,
-                    [getId("codeBranch")]:task?.branch?.name,
+                    [getId("codeName")]:dataItem.taskType==='xcode' ? task.repository?.name : task?.codeName,
+                    [getId("codeBranch")]:dataItem.taskType==='xcode' ? task.branch?.name : task?.codeBranch,
                     [getId("codeAlias")]:task?.codeAlias,
-                    [getId("authName")]:authAuth,
+                    [getId("svnFile")]:task?.svnFile,
+                    [getId("authId")]:task?.authId,
                 })
                 break
             case 'maven':
@@ -73,9 +65,7 @@ const BasicInfo = props => {
                 form.setFieldsValue({
                     taskName:dataItem?.taskName,
                     [getId("buildAddress")]:task?.buildAddress,
-                    [getId("productRule")]:task?.productRule,
-                    [getId("dockerName")]:task?.dockerName,
-                    [getId("dockerVersion")]:task?.dockerVersion,
+                    [getId("buildOrder")]:task?.buildOrder,
                     [getId("dockerFile")]:task?.dockerFile,
                     [getId("dockerOrder")]:task?.dockerOrder,
                 })
@@ -84,18 +74,22 @@ const BasicInfo = props => {
             case 'docker':
                 form.setFieldsValue({
                     taskName:dataItem?.taskName,
+                    [getId("authType")]:task?.authType || 1,
                     [getId("deployAddress")]:task?.deployAddress,
                     [getId("deployOrder")]:task?.deployOrder,
                     [getId("startAddress")]:task?.startAddress,
-                    [getId("authType")]:task?.authType ? task.authType:1,
-                    [getId("authName")]: authHost,
+                    [getId("localAddress")]:task?.localAddress,
+                    [getId("dockerImage")]:task?.dockerImage,
+                    [getId("startOrder")]:task?.startOrder,
+                    [getId("rule")]:task?.rule,
+                    [getId("authId")]:task?.authId,
                 })
                 break
             case 'sonar':
                 form.setFieldsValue({
                     taskName:dataItem?.taskName,
                     [getId("projectName")]:task?.projectName,
-                    [getId("authName")]: authAuth,
+                    [getId("authId")]:task?.authId,
                 })
                 break
             case 'teston':
@@ -106,40 +100,48 @@ const BasicInfo = props => {
                     [getId("appEnv")]:task?.appEnv?.name,
                     [getId("webEnv")]:task?.webEnv?.name,
                     [getId("testPlan")]:task?.testPlan?.name,
-                    [getId("authName")]: authAuth,
+                    [getId("authId")]:task?.authId,
                 })
                 break
-            case 'nexus':
-            case 'xpack':
+            case 'artifact_maven':
+            case 'artifact_docker':
                 form.setFieldsValue({
                     taskName:dataItem?.taskName,
+                    [getId("artifactType")]:task?.artifactType,
+                    [getId("putAddress")]:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
+                    [getId("fileAddress")]:task?.fileAddress,
+                    [getId("rule")]:task?.rule,
                     [getId("groupId")]:task?.groupId,
-                    [getId("artifactId")]:task?.artifactId,
                     [getId("version")]:task?.version,
+                    [getId("artifactId")]:task?.artifactId,
+                    [getId("dockerImage")]:task?.dockerImage,
+                    [getId("authId")]:task?.authId,
+                })
+                break
+            case 'pull_maven':
+            case 'pull_docker':
+                form.setFieldsValue({
+                    taskName:dataItem?.taskName,
+                    [getId("pullType")]:task?.pullType,
+                    [getId("remoteAddress")]:task?.remoteAddress,
+                    [getId("localAddress")]:task?.localAddress,
+                    [getId("transitive")]:task?.transitive,
+                    [getId("groupId")]:task?.groupId,
+                    [getId("version")]:task?.version,
+                    [getId("artifactId")]:task?.artifactId,
+                    [getId("dockerImage")]:task?.dockerImage,
                     [getId("putAddress")]:task?.repository?.name,
-                    [getId("authName")]:authAuth,
-                })
-                break
-            case 'ssh':
-                form.setFieldsValue({
-                    taskName:dataItem?.taskName,
-                    [getId("putAddress")]:task?.putAddress,
-                    [getId("authName")]:authHost,
-                })
-                break
-            case 'maventest':
-                form.setFieldsValue({
-                    taskName:dataItem?.taskName,
+                    [getId("authId")]:task?.authId,
                 })
                 break
             default:
                 form.setFieldsValue({
-                    taskName: dataItem?.stageName
+                    taskName: dataItem.formType==='task'? dataItem?.taskName : dataItem?.stageName
                 })
         }
-        form.validateFields().then(r => {})
-        return ()=>{form.resetFields(null)}
-    },[dataItem.taskId])
+        form.validateFields().then()
+        return ()=>form.resetFields(null)
+    },[dataItem?.taskId])
 
     /**
      * 渲染表单
@@ -161,8 +163,9 @@ const BasicInfo = props => {
             case 'teston':
                 return <TestOn />
             case 'nodejs':
+                return <BuildNode />
             case 'maven':
-                return <BuildMavenOrNode />
+                return <BuildMaven />
             case 'build_docker':
                 return <BuildDocker />
             case 'liunx':
@@ -171,12 +174,14 @@ const BasicInfo = props => {
                 return <DeployDocker />
             case 'sonar':
                 return <ScanSonarQuebe />
-            case 'nexus':
-                return <ArtifactNexus />
-            case 'ssh':
-                return <ArtifactSsh />
-            case 'xpack':
-                return <ArtifactXpack />
+            case 'artifact_maven':
+                return <ArtifactPushMaven />
+            case 'artifact_docker':
+                return <ArtifactPushDocker />
+            case 'pull_maven':
+                return <ArtifactPullMaven />
+            case 'pull_docker':
+                return <ArtifactPullDocker />
         }
     }
 

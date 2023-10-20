@@ -5,7 +5,7 @@ import {ExpandOutlined} from "@ant-design/icons";
 import Modals from "../../../../../common/component/modal/Modal";
 import Btn from "../../../../../common/component/btn/Btn";
 import {TaskMirror} from "../../../../../common/component/editor/CodeMirror";
-import {WhetherChange} from "../gui/Common";
+import {WhetherChange} from "../Common";
 import "./FormsMirror.scss";
 
 /**
@@ -13,7 +13,7 @@ import "./FormsMirror.scss";
  */
 const FormsMirror = props =>{
 
-    const {isValid,name,label,placeholder,taskStore} = props
+    const {isRequire,name,label,placeholder,taskStore} = props
 
     const {updateTask,dataItem} = taskStore
 
@@ -55,7 +55,7 @@ const FormsMirror = props =>{
 
     const setNarrowMirrorValue = () =>{
         if(dataItem.task){
-            narrowMirrorRef.current.editor.setValue(dataItem.task[name]? dataItem.task[name] : "")
+            narrowMirrorRef.current.editor.setValue(dataItem.task[name] || "")
         }
     }
 
@@ -82,7 +82,7 @@ const FormsMirror = props =>{
         <Form.Item
             name={dataItem?.taskId+"_"+name}
             label={label}
-            // rules={isValid && [{required:true,message:``}]}
+            // rules={isRequire && [{required:true,message:``}]}
         >
             <Form.Item>
                 <div className={`gui-mirror `} id={name+"_mirror"}>
@@ -93,7 +93,7 @@ const FormsMirror = props =>{
                         mirrorRef={narrowMirrorRef}
                         onFocus={e=>onFocus(e)}
                         // className={
-                        //     isValid ?
+                        //     isRequire ?
                         //     mirrorValue ?
                         //         bordered ? "gui-mirror-has-focus":"gui-mirror-has"
                         //         :

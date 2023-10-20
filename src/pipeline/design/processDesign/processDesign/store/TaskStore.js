@@ -47,11 +47,9 @@ class TaskStore {
     createTask = async value =>{
         const data = await Axios.post("/tasks/createTask",value)
         if(data.code===0){
-            message.info("添加成功")
             this.taskFresh = !this.taskFresh
         }
-
-        if(data.code===10000){
+        if(data.code===10000 || data.code===50001){
             message.info(data.msg)
         }
         return data
@@ -97,13 +95,27 @@ class TaskStore {
         const data = await Axios.post("/tasks/updateTask",param)
         if(data.code===0){
             this.taskFresh=!this.taskFresh
-            this.dataItem = {
-                ...this.dataItem,
-                task:{
-                    ...this.dataItem.task,
-                    ...values,
-                }
-            }
+            // const key = Object.keys(values)[0]
+            // let task = {
+            //     ...this.dataItem,
+            //     task: values
+            // }
+            // if(key==='pullType'){
+            //     task.task = {
+            //         ...values,
+            //         transitive:true,
+            //     }
+            // }
+            // else {
+            //     task.task = {
+            //         ...this.dataItem.task,
+            //         ...values,
+            //     }
+            // }
+            // this.dataItem = task
+            await this.findOneTasksOrTask(this.dataItem.taskId)
+        }else {
+            this.dataItem = {...this.dataItem}
         }
         return data
     }
@@ -144,6 +156,25 @@ class TaskStore {
         if(data.code===0){
             message.info("删除成功")
             this.taskFresh = !this.taskFresh
+        }
+        return data
+    }
+
+    /**
+     * 获取单个任务详情
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findOneTasksOrTask = async value =>{
+        const params = new FormData()
+        params.append('taskId',value)
+        const data = await Axios.post("/tasks/findOneTasksOrTask",params)
+        if(data.code===0){
+            this.dataItem = {
+                ...data.data,
+                formType:'task',
+            }
         }
         return data
     }

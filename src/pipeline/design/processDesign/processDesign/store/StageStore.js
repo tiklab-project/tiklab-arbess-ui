@@ -21,11 +21,7 @@ class StageStore {
     createStage = async value =>{
         const data = await Axios.post("/stage/createStage",value)
         if(data.code===0){
-            message.info("添加成功")
             this.stageFresh=!this.stageFresh
-        }
-        if(data.code===10000){
-            message.info(data.msg)
         }
         return data
     }

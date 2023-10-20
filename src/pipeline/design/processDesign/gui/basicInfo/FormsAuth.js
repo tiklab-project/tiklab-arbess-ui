@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {Form,Select,Divider} from "antd";
+import {Select,Divider} from "antd";
 import ServerAddBtn from "../../../../../setting/authServer/components/ServerAddBtn";
 import AuthAddBtn from "../../../../../setting/auth/components/AuthAddBtn";
 import HostAddBtn from "../../../../../setting/authHost/component/HostAddBtn";
@@ -34,13 +34,10 @@ const FormsAuth = props =>{
     //选择框visible
     const [open,setOpen] = useState(false)
 
-    //选择框边框
-    const [bordered,setBordered] = useState(false)
-
     useEffect(()=>{
         // 初始化选择框list
         initList(dataItem.taskType)
-    },[fresh])
+    },[fresh,dataItem.task?.artifactType,dataItem.task?.pullType])
 
     /**
      * 获取选择框list
@@ -51,23 +48,26 @@ const FormsAuth = props =>{
             case 'git':
             case 'gitlab':
             case 'svn':
-                findAllAuth().then(res=>{getList(res)})
-                return
+                return findAllAuth().then(res=>{getList(res)})
             case 'gitee':
             case 'github':
             case 'xcode':
             case 'teston':
             case 'sonar':
-            case 'nexus':
-            case 'xpack':
-                findAllAuthServerList(taskType).then(res=>{getList(res)})
-                return
+                return findAllAuthServerList(taskType).then(res=>{getList(res)})
             case 'liunx':
             case 'docker':
-            case 'ssh':
-                findAllAuthHostList('common').then(res=>{getList(res)})
-                return
-
+                return findAllAuthHostList('common').then(res=>{getList(res)})
+            case 'artifact_maven':
+            case 'artifact_docker':
+            case 'pull_maven':
+            case 'pull_docker':
+                const artifactType = (dataItem.taskType==='pull_maven' || dataItem.taskType==='pull_docker') ?
+                      dataItem.task?.pullType : dataItem.task?.artifactType
+                if(artifactType==='ssh'){
+                    return findAllAuthHostList('common').then(res=>{getList(res)})
+                }
+                return findAllAuthServerList(artifactType).then(res=>{getList(res)})
         }
     }
 
@@ -93,7 +93,6 @@ const FormsAuth = props =>{
      * @param value
      */
     const changeGitSelect = value =>{
-        setBordered(false)
         updateTask({authId:value})
     }
 
@@ -114,13 +113,20 @@ const FormsAuth = props =>{
             case 'xcode':
             case 'teston':
             case 'sonar':
-            case 'nexus':
-            case 'xpack':
                 return "服务地址"
             case 'liunx':
             case 'docker':
-            case 'ssh':
                 return "主机地址"
+            case 'artifact_maven':
+            case 'artifact_docker':
+                const artifactType = dataItem.task?.artifactType
+                if(artifactType==='ssh'){return "远程地址"}
+                return "推送地址"
+            case 'pull_maven':
+            case 'pull_docker':
+                const pullType =dataItem.task?.pullType
+                if(pullType==='ssh'){return "远程地址"}
+                return "拉取地址"
         }
     }
 
@@ -140,13 +146,18 @@ const FormsAuth = props =>{
             case 'xcode':
             case 'teston':
             case 'sonar':
-            case 'nexus':
-            case 'xpack':
                 return item.serverId
             case 'liunx':
             case 'docker':
-            case 'ssh':
                 return item.hostId
+            case 'artifact_maven':
+            case 'artifact_docker':
+            case 'pull_maven':
+            case 'pull_docker':
+                const artifactType = (dataItem.taskType==='pull_maven' || dataItem.taskType==='pull_docker') ?
+                      dataItem.task?.pullType : dataItem.task?.artifactType
+                if(artifactType==='ssh'){return item.hostId}
+                return item.serverId
         }
     }
 
@@ -171,7 +182,11 @@ const FormsAuth = props =>{
             case 'gitee':
             case 'github':
             case 'sonar':
-            case 'nexus':
+            case 'xcode':
+            case 'teston':
+                if((taskType==='xcode' || taskType==='teston') && version!=='ce'){
+                    return null
+                }
                 return (
                     <ServerAddBtn
                         type={taskType}
@@ -183,7 +198,6 @@ const FormsAuth = props =>{
                 )
             case 'liunx':
             case 'docker':
-            case 'ssh':
                 return (
                     <HostAddBtn
                         isConfig={true}
@@ -192,18 +206,31 @@ const FormsAuth = props =>{
                         findAuth={findAuth}
                     />
                 )
-            case 'xcode':
-            case 'teston':
-            case 'xpack':
-                if(version==='ce') return (
-                    <ServerAddBtn
-                        type={taskType}
-                        isConfig={true}
-                        visible={visible}
-                        setVisible={setVisible}
-                        findAuth={findAuth}
-                    />
-                )
+            case 'artifact_maven':
+            case 'artifact_docker':
+            case 'pull_maven':
+            case 'pull_docker':
+                const artifactType = (dataItem.taskType==='pull_maven' || dataItem.taskType==='pull_docker') ?
+                      dataItem.task?.pullType : dataItem.task?.artifactType
+                if(artifactType==='ssh'){
+                    return  <HostAddBtn
+                                isConfig={true}
+                                visible={visible}
+                                setVisible={setVisible}
+                                findAuth={findAuth}
+                            />
+                }
+                if((artifactType==='xpack' && version==='ce') || artifactType==='nexus'){
+                    return (
+                        <ServerAddBtn
+                            type={artifactType}
+                            isConfig={true}
+                            visible={visible}
+                            setVisible={setVisible}
+                            findAuth={findAuth}
+                        />
+                    )
+                }
                 return null
         }
     }
@@ -218,49 +245,50 @@ const FormsAuth = props =>{
             case 'git':
             case 'gitlab':
             case 'svn':
+            case 'xcode':
+            case 'teston':
                 return item.name+"("+(item.authType===1?item.username:"私钥")+")"
             case 'gitee':
             case 'github':
                 return item.name+"("+(item.authType===1?item.message:"私钥")+")"
-            case 'xcode':
-            case 'teston':
-            case 'sonar':
-            case 'nexus':
-            case 'xpack':
-                return item.name+"("+(item.authType===1?item.username:"私钥")+")"
             case 'liunx':
             case 'docker':
-            case 'ssh':
                return item.name+"("+item.ip+")"
+            case 'artifact_maven':
+            case 'artifact_docker':
+            case 'pull_maven':
+            case 'pull_docker':
+                const artifactType = (dataItem.taskType==='pull_maven' || dataItem.taskType==='pull_docker') ?
+                    dataItem.task?.pullType : dataItem.task?.artifactType
+                if(artifactType==='ssh'){
+                    return item.name+"("+item.ip+")"
+                }
+                return item.name+"("+(item.authType===1?item.username:"私钥")+")"
         }
     }
 
     return(
-        <Form.Item label={label(dataItem.taskType)} name={dataItem.taskId+"_authName"}>
-            <FormsSelect
-                label={label(dataItem.taskType)}
-                border={bordered}
-                open={open}
-                isSpin={false}
-                onFocus={()=>setBordered(true)}
-                onBlur={()=>setBordered(false)}
-                onChange={changeGitSelect}
-                onDropdownVisibleChange={(visible)=>setOpen(visible)}
-                dropdownRender={menu=> (
-                    <>
-                        {menu}
-                        <Divider style={{margin:"4px 0"}} />
-                        <div style={{cursor:"pointer"}} onClick={()=>setOpen(false)}>
-                            {renderBtn(dataItem.taskType)}
-                        </div>
-                    </>
-                )}
-            >
-                {list && list.map((item,index)=>{
-                    return <Select.Option value={setKey(item)} key={index}>{selectLabel(item)}</Select.Option>
-                })}
-            </FormsSelect>
-        </Form.Item>
+        <FormsSelect
+            name={dataItem.taskId+"_authId"}
+            label={label(dataItem.taskType)}
+            open={open}
+            isSpin={false}
+            onChange={changeGitSelect}
+            onDropdownVisibleChange={(visible)=>setOpen(visible)}
+            dropdownRender={menu=> (
+                <>
+                    {menu}
+                    <Divider style={{margin:"4px 0"}} />
+                    <div style={{cursor:"pointer"}} onClick={()=>setOpen(false)}>
+                        {renderBtn(dataItem.taskType)}
+                    </div>
+                </>
+            )}
+        >
+            {list && list.map((item,index)=>{
+                return <Select.Option value={setKey(item)} key={index}>{selectLabel(item)}</Select.Option>
+            })}
+        </FormsSelect>
     )
 }
 

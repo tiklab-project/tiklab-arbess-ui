@@ -24,10 +24,10 @@ const PostprocessUserAdd = props =>{
     // 选中的用户id
     const [selectedRowKeys,setSelectedRowKeys] = useState([])
 
-    const [pageParam] = useState({
+    const pageParam = {
         pageSize:5,
         currentPage:1
-    })
+    }
 
     // 用户请求数据
     const [findUserParam,setFindUserParam] = useState({
@@ -36,7 +36,6 @@ const PostprocessUserAdd = props =>{
 
     // 用户分页
     const [userPage,setUserPage] = useState({})
-
 
     useEffect(()=>{
         findDmUser()

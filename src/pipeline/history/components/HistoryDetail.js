@@ -7,7 +7,6 @@ import HistoryDetailTree from "./HistoryDetailTree";
 import {runStatusText,getTime} from "./HistoryCommon";
 import "./HistoryDetail.scss";
 
-
 /**
  * 历史运行详情页面
  * @param props
@@ -30,16 +29,16 @@ const HistoryDetail = props =>{
     const state = pipeline?.type===1 ? "runState":"stageState";
     const time = pipeline?.type===1 ? "runTime":"stageTime";
 
-    const [execData,setExecData] = useState([])
+    const [execData,setExecData] = useState([]);
 
     // 构建详情页面数据未返回时加载状态
-    const [detailsLoading,setDetailsLoading] = useState(true)
+    const [detailsLoading,setDetailsLoading] = useState(true);
 
     // 日志滚动条
-    const [isActiveSlide,setIsActiveSlide] = useState(true)
+    const [isActiveSlide,setIsActiveSlide] = useState(true);
 
     // 日志id
-    const [id,setId] = useState(null)
+    const [id,setId] = useState(null);
 
     let inter;
     useEffect(()=>{
@@ -68,6 +67,8 @@ const HistoryDetail = props =>{
             setExecData(taskRes.data)
             if(isRun && type==="init"){findInter()}
             if(isRun && type==="end"){findInstance()}
+        }else {
+            clearInterval(inter)
         }
     }
 
@@ -88,14 +89,14 @@ const HistoryDetail = props =>{
         if(pipeline?.type===1){
             inter = setInterval(()=>{
                 findTaskInstance(historyItem.instanceId).then(res=>{
-                    if(res.code===0){destroyInter(res)}
+                    destroyInter(res)
                 })
             },1000)
             return
         }
         inter = setInterval(()=>{
             findStageInstance(historyItem.instanceId).then(res=>{
-                if(res.code===0){destroyInter(res)}
+                destroyInter(res)
             })
         },1000)
     }
@@ -105,14 +106,19 @@ const HistoryDetail = props =>{
      * @param data
      */
     const destroyInter = data =>{
-        setExecData(data.data && data.data )
-        const endValue = [...data.data].pop()
-        if(endValue){
-            const states = endValue[state]
-            if(states ==="success" || states ==="error" || states ==="halt" ){
-                clearInterval(inter)
-                setTimeout(()=>findTask("end"),1000)
+        if(data.code===0){
+            setExecData(data.data && data.data )
+            const endValue = [...data.data].pop()
+            if(endValue){
+                const states = endValue[state]
+                if(states ==="success" || states ==="error" || states ==="halt" ){
+                    clearInterval(inter)
+                    setTimeout(()=>findTask("end"),1000)
+                }
             }
+        }
+        else {
+            clearInterval(inter)
         }
     }
 
@@ -125,7 +131,6 @@ const HistoryDetail = props =>{
             }
         }
     },[execData,isActiveSlide])
-
 
     /**
      * 运行日志打印（自动）
@@ -161,10 +166,10 @@ const HistoryDetail = props =>{
     /**
      * 锚点跳转
      */
-    const changeAnchor = id =>{
+    const changeAnchor = anchorId =>{
         setIsActiveSlide(false)
-        setId(id)
-        const anchorElement = document.getElementById(id)
+        setId(anchorId)
+        const anchorElement = document.getElementById(anchorId)
         if (anchorElement) {
             scrollRef.current.scrollTop = anchorElement.offsetTop - 130
         }
@@ -190,7 +195,6 @@ const HistoryDetail = props =>{
             startScrollTop = scrollRef.current.scrollTop;
         }
     }
-
 
     /**
      * 结束滚动位置

@@ -16,7 +16,7 @@ const CodeGitOrGitlab = props =>{
                 placeholder={"git地址"}
                 label={"git地址"}
                 name={"codeName"}
-                isValid={true}
+                isRequire={true}
             />
             <FormsInput
                 placeholder={"分支，默认为master"}

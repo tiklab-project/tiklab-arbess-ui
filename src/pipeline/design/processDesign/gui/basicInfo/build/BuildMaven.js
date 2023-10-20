@@ -3,12 +3,12 @@ import FormsMirror from "../FormsMirror";
 import FormsInput from "../FormsInput";
 
 /**
- * 构建
+ * maven构建
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const BuildMavenOrNode = props =>{
+const BuildMaven = props =>{
 
     return(
         <>
@@ -25,13 +25,8 @@ const BuildMavenOrNode = props =>{
                 placeholder={"执行命令"}
             />
 
-            <FormsInput
-                name={"productRule"}
-                placeholder={"文件的唯一标识，如:Jar,zip等（支持正则表达式）"}
-                label={"制品信息"}
-            />
         </>
     )
 }
 
-export default BuildMavenOrNode
+export default BuildMaven
