@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    AppstoreOutlined,
     BuildOutlined,
     FileProtectOutlined,
     LayoutOutlined,
@@ -36,13 +35,11 @@ const Setting = props =>{
                 {
                     id:"/index/system/notice",
                     title:"消息通知方案",
-                    icon:<SoundOutlined />,
                     purviewCode:"message_setting",
                 },
                 {
                     id:"/index/system/send",
                     title: "消息发送方式",
-                    icon:<SoundOutlined />,
                     purviewCode: "message_type",
                 },
             ]
@@ -61,13 +58,11 @@ const Setting = props =>{
                 {
                     id:"/index/system/server",
                     title:"服务配置",
-                    icon:<FileProtectOutlined />,
                     purviewCode:"resources_server",
                 },
                 {
                     id:"/index/system/host",
                     title:"主机配置",
-                    icon:<FileProtectOutlined />,
                     purviewCode:"resources_host",
                 },
             ]
@@ -98,13 +93,11 @@ const Setting = props =>{
                 {
                     id:"/index/system/backups",
                     title:"备份与恢复",
-                    icon:<LayoutOutlined />,
                     purviewCode:"restore",
                 },
                 {
                     id:"/index/system/myLog",
                     title:"操作日志",
-                    icon:<LayoutOutlined />,
                     purviewCode:"pipeline_log",
                 }
             ]

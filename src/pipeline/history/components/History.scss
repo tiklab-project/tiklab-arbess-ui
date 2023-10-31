@@ -3,7 +3,7 @@
     min-width: 768px;
     .history-table{
         padding-top: 10px;
-        .history-table-name{
+        .history-table-name:hover{
             cursor: pointer;
             color: var(--tiklab-blue);
         }

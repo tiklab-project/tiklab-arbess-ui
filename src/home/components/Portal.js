@@ -8,7 +8,7 @@ import {
     SettingOutlined,
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/img/matflow3.png";
+import logo from "../../assets/images/img/matflow.png";
 import { PortalDropdown } from "../../common/component/dropdown/DropdownMenu";
 import PortalMessage from "./PortalMessage";
 import "./Portal.scss";
@@ -64,7 +64,9 @@ const  Portal = props =>{
         <div className="frame">
             <div className="frame-header">
                 <div className="frame-header-right">
-                    {AppLink}
+                    <div className="frame-header-applink">
+                        {AppLink}
+                    </div>
                     <div className="frame-header-logo">
                         <img src={logo} alt="logo" />
                     </div>

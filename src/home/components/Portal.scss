@@ -8,8 +8,11 @@
         width: 100%;
         min-width: 600px;
         height: var(--mf-head-height);
-        background: var(--tiklab-blue);
+        border-bottom: 2px solid var(--tiklab-gray-200);
         padding: 0 15px;
+        &-applink{
+            padding-left: 5px;
+        }
         &-logo{
             height: var(--mf-head-height);
             width: 100px;
@@ -32,14 +35,12 @@
         }
         &-icon{
             font-size: var(--tiklab-icon-size-22);
-            color: #ffffff;
         }
         .headers{
             &-link{
                 display: flex;
                 flex-direction: row;
                 flex-shrink: 0;
-                color: #ffffff;
                 & > div{
                     cursor: pointer;
                     margin-right: 10px;
@@ -52,7 +53,7 @@
                 }
             }
             &-active{
-                background: rgba(255, 255, 255, 0.4);
+                border-bottom: 2px solid var(--tiklab-blue);
             }
         }
     }

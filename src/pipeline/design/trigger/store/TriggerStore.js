@@ -8,10 +8,6 @@ class TriggerStore {
     @observable
     triggerData = []
 
-    // 是否需要重新查找触发器
-    @observable
-    isFindTrigger = false
-
     /**
      * 更新触发器
      * @param value
@@ -22,7 +18,6 @@ class TriggerStore {
         const data = await Axios.post("/trigger/updateTrigger",value)
         if(data.code===0){
             message.info("更新成功")
-            this.isFindTrigger = !this.isFindTrigger
         }
         return data
     }
@@ -39,7 +34,6 @@ class TriggerStore {
         const data = await Axios.post("/trigger/deleteTrigger",param)
         if(data.code===0){
             message.info("删除成功")
-            this.isFindTrigger = !this.isFindTrigger
         }
         return data
     }
@@ -54,7 +48,6 @@ class TriggerStore {
         const data = await Axios.post("/trigger/createTrigger",value)
         if (data.code===0){
             message.info("添加成功")
-            this.isFindTrigger = !this.isFindTrigger
         }
         if(data.code===50001){
             message.info(data.msg)

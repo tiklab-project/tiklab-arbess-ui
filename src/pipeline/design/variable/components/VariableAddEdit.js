@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Form,Input,Select,message} from "antd";
+import {Form,Input,Select} from "antd";
 import Modals from "../../../../common/component/modal/Modal";
 import {Validation} from "../../../../common/utils/Client";
 
@@ -11,7 +11,7 @@ import {Validation} from "../../../../common/utils/Client";
  */
 const VariableAddEdit = props =>{
 
-    const {variableVisible,setVariableVisible,formValue,pipelineId,
+    const {findVariable,variableVisible,setVariableVisible,formValue,pipelineId,
         variableStore
     } = props
 
@@ -45,7 +45,9 @@ const VariableAddEdit = props =>{
                     varId:formValue.varId
                 }
                 updateVariable(params).then(res=>{
-                    res.code===0 && message.info("更新成功")
+                    if(res.code===0){
+                        findVariable()
+                    }
                 })
             }else {
                 const params = {
@@ -54,7 +56,9 @@ const VariableAddEdit = props =>{
                     taskId:pipelineId,
                 }
                 createVariable(params).then(res=>{
-                    res.code===0 && message.info("添加成功")
+                    if(res.code===0){
+                        findVariable()
+                    }
                 })
             }
             setVariableVisible(false)

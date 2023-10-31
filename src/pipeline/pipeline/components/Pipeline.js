@@ -136,7 +136,7 @@ const Pipeline = props =>{
                         icon={<PlusOutlined/>}
                     />
                 </Breadcrumb>
-                <div className="pipeline-type">
+                <div className="pipeline-flex">
                     <Tabs type={listType} tabLis={[
                         {id:'all', title:"所有流水线"},
                         {id:'follow', title:"我收藏的"}

@@ -11,7 +11,7 @@ import {Validation} from "../../../../common/utils/Client";
 
 const PostprocessAddEdit = props =>{
 
-    const {postprocessVisible,setPostprocessVisible,formValue,postprocessStore,pipelineStore} = props
+    const {findPost,postprocessVisible,setPostprocessVisible,formValue,postprocessStore,pipelineStore} = props
 
     const {pipeline} = pipelineStore
     const {createPost,updatePost,mesSendData} = postprocessStore
@@ -116,11 +116,15 @@ const PostprocessAddEdit = props =>{
                      postId:formValue.postId,
                  }
                 updatePost(params).then(res=>{
-                    res.code===0 && message.info("更新成功")
+                    if(res.code===0){
+                        findPost()
+                    }
                 })
             }else {
                 createPost(params).then(res=>{
-                    res.code===0 && message.info("添加成功")
+                    if(res.code===0){
+                        findPost()
+                    }
                 })
             }
             setPostprocessVisible(false)

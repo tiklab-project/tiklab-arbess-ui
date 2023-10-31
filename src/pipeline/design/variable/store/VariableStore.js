@@ -1,11 +1,8 @@
 import {action,observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
+import {message} from "antd";
 
 class VariableStore{
-
-    // 刷新
-    @observable
-    fresh = false
 
     // 变量数据
     @observable
@@ -20,7 +17,7 @@ class VariableStore{
     createVariable = async value =>{
         const data = await Axios.post("/pipelineVariable/createVariable",value)
         if(data.code===0){
-            this.fresh=!this.fresh
+            message.info("添加成功")
         }
         return data
     }
@@ -34,7 +31,7 @@ class VariableStore{
         param.append("varId",value)
         const data = await Axios.post("/pipelineVariable/deleteVariable",param)
         if(data.code===0){
-            this.fresh=!this.fresh
+            message.info("删除成功")
         }
         return data
     }
@@ -48,7 +45,7 @@ class VariableStore{
     updateVariable = async value =>{
         const data = await Axios.post("/pipelineVariable/updateVariable",value)
         if(data.code===0){
-            this.fresh=!this.fresh
+            message.info("更新成功")
         }
         return data
     }
@@ -57,12 +54,16 @@ class VariableStore{
      * 获取所有变量
      */
     @action
-    findVariable = async value =>{
+    findAllVariable = async (value,type) =>{
         const param = new FormData()
         param.append("taskId",value)
         const data = await Axios.post("/pipelineVariable/findAllVariable",param)
         if(data.code===0){
-            this.variableData = data.data && data.data
+            if(type==='task'){
+
+            } else {
+                this.variableData = data.data && data.data
+            }
         }
         return data
     }

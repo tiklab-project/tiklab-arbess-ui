@@ -7,12 +7,14 @@
         top: 0;
         left: 0;
         background: #ffffff;
+        border-bottom: 1px solid #d9d9d9;
         z-index: 9;
         min-width: 768px;
     }
     .design-top{
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
     }
     .changeView-type{
@@ -31,15 +33,20 @@
         }
     }
     .design-tabs{
-        flex:1;
+        //flex:1;
         display: flex;
-        padding: 0 var(--tiklab-padding);
+        padding: 0 var(--tiklab-padding-item);
         height: 40px;
         line-height: 40px;
         .design-tab{
             cursor: pointer;
+            display: flex;
+            align-items: center;
             &:not(:last-child){
-                margin-right: var(--tiklab-padding-item);
+                margin-right: 30px;
+            }
+            .design-tab-icon{
+                padding-right: 2px;
             }
         }
         .design-active{

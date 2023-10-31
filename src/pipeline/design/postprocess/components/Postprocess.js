@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Col, message, Row, Table} from "antd";
+import {Col, Row, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAddEdit from "./PostprocessAddEdit";
@@ -19,7 +19,7 @@ const Postprocess = props =>{
 
     const {postprocessStore,match:{params}} = props
 
-    const {findPipelinePost,isFindPostprocessData,postprocessData,deletePost,
+    const {findPipelinePost,postprocessData,deletePost,
         findMessageSendType,findOnePost
     } = postprocessStore
 
@@ -31,12 +31,17 @@ const Postprocess = props =>{
     useEffect(()=>{
         // 是否存在消息发送方式
         findMessageSendType()
+
+        // // 初始化后置处理
+        // findPost()
     },[])
 
-    useEffect(()=>{
-        // 初始化后置处理
+    /**
+     * 获取后置处理
+     */
+    const findPost = () =>{
         findPipelinePost(params.id)
-    },[isFindPostprocessData])
+    }
 
     /**
      * 添加后置处理
@@ -73,7 +78,9 @@ const Postprocess = props =>{
      */
     const delPostprocess = record => {
         deletePost(record.postId).then(res=>{
-            res.code===0 && message.info("删除成功")
+            if(res.code===0){
+                findPost()
+            }
         })
     }
 
@@ -111,11 +118,12 @@ const Postprocess = props =>{
                 <div className="post-pose">
                     <div className="post-pose-content">
                         <div className="post-pose-up">
-                            <div className="post-pose-up-title">后置处理</div>
+                            {/*<div className="post-pose-up-title">后置处理</div>*/}
                             <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}个后置处理</div>
                             <Btn title={"添加"} icon={<PlusOutlined/>} onClick={()=>addPostprocess()}/>
                             <PostprocessAddEdit
                                 {...props}
+                                findPost={findPost}
                                 formValue={formValue}
                                 postprocessVisible={postprocessVisible}
                                 setPostprocessVisible={setPostprocessVisible}

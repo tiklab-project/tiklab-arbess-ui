@@ -3,7 +3,7 @@ import {
     CaretRightOutlined,
     LoadingOutlined,
 } from "@ant-design/icons";
-import {Spin,Drawer} from "antd";
+import {Spin, Drawer, Space} from "antd";
 import {inject,observer,Provider} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 import taskStore from "../processDesign/processDesign/store/TaskStore";
@@ -17,6 +17,12 @@ import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
 import {debounce} from "../../../common/utils/Client";
 import DiskModal from "../../../common/component/modal/DiskModal";
+import {
+    DeploymentUnitOutlined,
+    CrownOutlined,
+    BugOutlined,
+    PartitionOutlined,
+} from "@ant-design/icons"
 import "./Design.scss";
 
 /**
@@ -38,6 +44,9 @@ const Design = props =>{
     const {execStart} = historyStore
     const {validTaskMustField, taskMustField,taskFresh} = taskStore
     const {validStagesMustField,stageMustField,stageFresh} = stageStore
+    const {findPipelinePost,postprocessData} = postprocessStore
+    const {findAllTrigger,triggerData} = triggerStore
+    const {findAllVariable,variableData} = variableStore
 
     const pipelineId = match.params.id
 
@@ -56,6 +65,12 @@ const Design = props =>{
     useEffect(()=>{
         setPath(props.location.pathname)
     },[props.location.pathname])
+
+    useEffect(()=>{
+        findPipelinePost(pipelineId)
+        findAllTrigger(pipelineId)
+        findAllVariable(pipelineId)
+    },[])
 
     useEffect(() => {
         if(pipeline?.type===1){
@@ -100,18 +115,25 @@ const Design = props =>{
         {
             id:`/index/pipeline/${pipelineId}/config`,
             title:"流程设计",
+            icon: <DeploymentUnitOutlined/>
         },
         {
             id:`/index/pipeline/${pipelineId}/config/tigger`,
             title:"触发设置",
+            icon: <CrownOutlined/>,
+            long: triggerData
         },
         {
             id:`/index/pipeline/${pipelineId}/config/vari`,
-            title:"变量"
+            title:"变量",
+            icon: <BugOutlined/>,
+            long: variableData
         },
         {
             id:`/index/pipeline/${pipelineId}/config/postprocess`,
-            title:"后置处理"
+            title:"后置处理",
+            icon: <PartitionOutlined/>,
+            long: postprocessData
         }
     ]
 
@@ -125,19 +147,12 @@ const Design = props =>{
                 <div className="design-up">
                     <div className="design-top">
                         <Breadcrumb firstItem={"设计"}/>
-                        <div className="design-tabs">
-                            {
-                                typeLis.map(item=>{
-                                    return(
-                                        <div key={item.id}
-                                             className={`design-tab ${path===item.id?"design-active":""}`}
-                                             onClick={()=>props.history.push(item.id)}
-                                        >{item.title}</div>
-                                    )
-                                })
-                            }
-                        </div>
                         <div className="changeView-btn">
+                            <Btn
+                                isMar={true}
+                                title={"帮助"}
+                                onClick={()=>window.open('http://tiklab.net/document')}
+                            />
                             {
                                 pipeline?.state===2 ?
                                     <Btn
@@ -154,6 +169,36 @@ const Design = props =>{
                                     />
                             }
                         </div>
+                    </div>
+                    <div className="design-tabs">
+                        {
+                            typeLis.map(item=>{
+                                return(
+                                    <div key={item.id}
+                                         className={`design-tab ${path===item.id?"design-active":""}`}
+                                         onClick={()=>props.history.push(item.id)}
+                                    >
+                                        <div className="design-tab-icon">{item.icon}</div>
+                                        <div className="design-tab-title">
+                                            {item.title}
+                                            {
+                                                item?.long && <span>({item.long.length})</span>
+                                            }
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                        {/*{*/}
+                        {/*    typeLis.map(item=>{*/}
+                        {/*        return(*/}
+                        {/*            <div key={item.id}*/}
+                        {/*                 className={`design-tab ${path===item.id?"design-active":""}`}*/}
+                        {/*                 onClick={()=>props.history.push(item.id)}*/}
+                        {/*            ></div>*/}
+                        {/*        )*/}
+                        {/*    })*/}
+                        {/*}*/}
                     </div>
                 </div>
                 { renderRoutes(route.routes) }

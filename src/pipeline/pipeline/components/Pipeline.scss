@@ -5,6 +5,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 10px 0;
     }
     &-length{
         display: inline-block;
@@ -14,12 +15,6 @@
         border-radius: 50px;
         background: #f2f2f2;
         text-align: center;
-    }
-    &-type{
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 10px 0;
     }
 }
 

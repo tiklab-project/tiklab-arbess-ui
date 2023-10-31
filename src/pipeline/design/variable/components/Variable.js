@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Row, Col, message, Table} from "antd";
+import {Row, Col, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../common/component/btn/Btn";
@@ -18,16 +18,23 @@ const Variable = props =>{
 
     const {variableStore,match:{params}} = props
 
-    const {findVariable,deleteVariable,fresh,variableData} = variableStore
+    const {findAllVariable,deleteVariable,variableData} = variableStore
 
     const [variableVisible,setVariableVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
 
     useEffect(()=>{
-        // 初始化变量
-        findVariable(params.id)
-    },[fresh])
+        // // 初始化变量
+        // findAllVariable(params.id)
+    },[])
+
+    /**
+     * 获取变量
+     */
+    const findVariable = () =>{
+        findAllVariable(params.id)
+    }
 
     /**
      * 添加变量
@@ -52,7 +59,9 @@ const Variable = props =>{
      */
     const delVariable = reocrd =>{
         deleteVariable(reocrd.varId).then(res=>{
-            res.code===0 && message.info("删除成功")
+            if(res.code===0){
+                findVariable()
+            }
         })
     }
 
@@ -99,7 +108,7 @@ const Variable = props =>{
                <div className="variable">
                    <div className="variable-content">
                        <div className="variable-up">
-                           <div className="variable-up-title">变量</div>
+                           {/*<div className="variable-up-title">变量</div>*/}
                            <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}个变量</div>
                            <Btn
                                title={"添加"}
@@ -108,6 +117,7 @@ const Variable = props =>{
                            />
                            <VariableAddEdit
                                {...props}
+                               findVariable={findVariable}
                                variableVisible={variableVisible}
                                setVariableVisible={setVariableVisible}
                                formValue={formValue}

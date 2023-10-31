@@ -11,7 +11,7 @@ import Modals from "../../../../common/component/modal/Modal";
  */
 const TriggerAddEdit = props =>{
 
-    const {triggerVisible,setTriggerVisible,createTrigger,pipelineId,formValue,updateTrigger} = props
+    const {findTrigger,triggerVisible,setTriggerVisible,createTrigger,pipelineId,formValue,updateTrigger} = props
 
     const [form] = Form.useForm()
 
@@ -48,9 +48,17 @@ const TriggerAddEdit = props =>{
                 updateTrigger({
                     ...param,
                     triggerId:formValue.triggerId
+                }).then(res=>{
+                    if(res.code===0){
+                        findTrigger()
+                    }
                 })
             }else {
-                createTrigger(param)
+                createTrigger(param).then(res=>{
+                    if(res.code===0){
+                        findTrigger()
+                    }
+                })
             }
             setTriggerVisible(false)
         })

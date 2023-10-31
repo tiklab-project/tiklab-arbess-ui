@@ -1,5 +1,6 @@
 import {action, observable} from "mobx";
 import {Axios} from "tiklab-core-ui";
+import {message} from "antd";
 
 class PostprocessStore {
 
@@ -7,22 +8,9 @@ class PostprocessStore {
     @observable
     postprocessData = []
 
-    // 查找后置处理
-    @observable
-    isFindPostprocessData = false
-
     //未配置的消息发送方式
     @observable
     mesSendData = []
-
-    /**
-     * 设置重新查找后置处理
-     * @param value
-     */
-    @action
-    setIsFindPostprocessData = value =>{
-        this.isFindPostprocessData = value
-    }
 
     /**
      * 设置后置处理数据
@@ -42,7 +30,7 @@ class PostprocessStore {
     createPost = async value =>{
         const data = await Axios.post("/postprocess/createPost",value)
         if (data.code===0){
-            this.isFindPostprocessData = !this.isFindPostprocessData
+            message.info("添加成功")
         }
         return data
     }
@@ -56,7 +44,7 @@ class PostprocessStore {
     updatePost = async value =>{
         const data = await Axios.post("/postprocess/updatePost",value)
         if (data.code===0){
-            this.isFindPostprocessData = !this.isFindPostprocessData
+            message.info("更新成功")
         }
         return data
     }
@@ -72,7 +60,7 @@ class PostprocessStore {
         param.append("postId",value)
         const data = await Axios.post("/postprocess/deletePost",param)
         if(data.code===0){
-            this.isFindPostprocessData = !this.isFindPostprocessData
+            message.info("删除成功")
         }
         return data
     }
@@ -99,12 +87,16 @@ class PostprocessStore {
      * @returns {Promise<*>}
      */
     @action
-    findTaskPost = async value =>{
+    findTaskPost = async (value,type) =>{
         const params = new FormData()
         params.append("taskId",value)
         const data = await Axios.post("/postprocess/findTaskPost",params)
         if(data.code===0){
-            this.postprocessData = data.data ? data.data : []
+            if(type==='task'){
+
+            }else {
+                this.postprocessData = data?.data || []
+            }
         }
         return data
     }

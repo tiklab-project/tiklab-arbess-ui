@@ -14,20 +14,31 @@ const Variable = props => {
 
     const {variableStore,dataItem} = props
 
-    const {variableData,createVariable,findVariable,fresh,deleteVariable,
-        updateVariable
-    } = variableStore
+    const {createVariable,findAllVariable,deleteVariable, updateVariable} = variableStore
 
     const [formVar] = Form.useForm();
 
-    const [variableObj,setVariableObj] = useState(null)
+    const [variableData,setVariableData] = useState([])
+
+    const [variableObj,setVariableObj] = useState(null);
 
     const [showArrow,setShowArrow] = useState(false);
 
     useEffect(()=>{
         // 初始化变量
-        findVariable(dataItem.taskId)
-    },[fresh,dataItem.taskId])
+        findVariable()
+    },[dataItem.taskId])
+
+    /**
+     * 获取变量
+     */
+    const findVariable = () =>{
+        findAllVariable(dataItem.taskId,'task').then(res=>{
+            if(res.code===0){
+                setVariableData(res?.data || [])
+            }
+        })
+    }
 
     useEffect(()=>{
         if(variableObj){
@@ -61,7 +72,11 @@ const Variable = props => {
      */
     const reduceInput = (e,item) => {
         e.stopPropagation();
-        deleteVariable(item.varId)
+        deleteVariable(item.varId).then(res=>{
+            if(res.code===0){
+                findVariable()
+            }
+        })
     }
 
     const onCancel = () =>{
@@ -84,7 +99,10 @@ const Variable = props => {
                     taskId:dataItem.taskId,
                     ...value,
                 }).then(res=>{
-                    if(res.code===0){onCancel()}
+                    if(res.code===0){
+                        onCancel()
+                        findVariable()
+                    }
                 })
                 return
             }
@@ -93,7 +111,10 @@ const Variable = props => {
                 varId:variableObj.varId,
                 ...value
             }).then(res=>{
-                if(res.code===0){onCancel()}
+                if(res.code===0){
+                    onCancel()
+                    findVariable()
+                }
             })
         })
     }

@@ -21,9 +21,11 @@
         &:not(:last-child){
             margin-bottom: var(--tiklab-padding-item);
         }
+        &:hover .test-item-name{
+            color: var(--tiklab-blue);
+        }
         .test-item-name{
             margin-right: 8px;
-            color: var(--tiklab-blue);
             font-size: 18px;
             width: 45%;
             overflow: hidden;

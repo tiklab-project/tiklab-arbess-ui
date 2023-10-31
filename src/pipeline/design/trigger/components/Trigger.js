@@ -18,15 +18,19 @@ const Trigger = props =>{
 
     const {triggerStore,match:{params}} = props
 
-    const {updateTrigger,deleteTrigger,createTrigger,findAllTrigger,triggerData,isFindTrigger} = triggerStore
+    const {updateTrigger,deleteTrigger,createTrigger,findAllTrigger,triggerData} = triggerStore
 
     const [formValue,setFormValue] = useState(null)
     const [triggerVisible,setTriggerVisible] = useState(false)
 
     useEffect(()=>{
-        // 初始化触发器
+        // // 初始化触发器
+        // findTrigger()
+    },[])
+
+    const findTrigger = () =>{
         findAllTrigger(params.id)
-    },[isFindTrigger])
+    }
 
     /**
      * 添加触发器
@@ -50,7 +54,11 @@ const Trigger = props =>{
      * @param record
      */
     const delTrigger = record => {
-        deleteTrigger(record.triggerId)
+        deleteTrigger(record.triggerId).then(res=>{
+            if(res.code===0){
+                findTrigger()
+            }
+        })
     }
 
     const columns = [
@@ -89,7 +97,7 @@ const Trigger = props =>{
                 <div className="trigger">
                     <div className="trigger-content">
                         <div className="trigger-up">
-                            <div className="trigger-up-title">定时触发</div>
+                            {/*<div className="trigger-up-title">定时触发</div>*/}
                             <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}个定时任务</div>
                             <Btn
                                 title={"添加"}
@@ -101,6 +109,7 @@ const Trigger = props =>{
                                 setTriggerVisible={setTriggerVisible}
                                 createTrigger={createTrigger}
                                 updateTrigger={updateTrigger}
+                                findTrigger={findTrigger}
                                 pipelineId={params.id}
                                 formValue={formValue}
                             />

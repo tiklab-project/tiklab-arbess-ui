@@ -74,7 +74,10 @@ const SettingContent= props =>  {
                     onClick={()=>select(data)}
                     key={data.id}
                 >
-                    <span className="sys-content-icon">{data.icon}</span>
+                    {
+                        data?.icon &&
+                        <span className="sys-content-icon">{data?.icon}</span>
+                    }
                     <span>{data.title}</span>
                 </li>
             </PrivilegeButton>

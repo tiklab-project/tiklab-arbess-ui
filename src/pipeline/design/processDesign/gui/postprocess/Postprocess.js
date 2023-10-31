@@ -28,8 +28,7 @@ const Postprocess = props =>{
 
     const {pipelineStore,postprocessStore,dataItem} = props
 
-    const {deletePost,createPost,findTaskPost,postprocessData
-        ,isFindPostprocessData,updatePost,findMessageSendType,mesSendData
+    const {deletePost,createPost,findTaskPost,updatePost,findMessageSendType,mesSendData
     } = postprocessStore
 
     const userId = getUser().userId;
@@ -37,6 +36,8 @@ const Postprocess = props =>{
     const [form] = Form.useForm();
 
     const mirrorRefs = useRef();
+
+    const [postprocessData,setPostprocessData] = useState([])
 
     // 添加后置处理下拉菜单
     const [addVisible,setAddVisible] = useState(false)
@@ -55,7 +56,15 @@ const Postprocess = props =>{
     useEffect(()=>{
         // 初始化task的后置处理
         findTaskPost(dataItem.taskId)
-    },[isFindPostprocessData,dataItem.taskId])
+    },[dataItem.taskId])
+
+    const findPost = () =>{
+        findTaskPost(dataItem.taskId,'task').then(res=>{
+            if(res.code===0){
+                setPostprocessData(res?.data || [])
+            }
+        })
+    }
 
     useEffect(() => {
         if(poseObj.name){
@@ -144,7 +153,10 @@ const Postprocess = props =>{
                 taskType:poseObj.taskType,
                 ...values
             }).then(res=>{
-                if(res.code===0){onCancel()}
+                if(res.code===0){
+                    findPost()
+                    onCancel()
+                }
             })
             return
         }
@@ -153,7 +165,10 @@ const Postprocess = props =>{
             taskType:poseObj.taskType,
             ...values
         }).then(res=>{
-            if(res.code===0){onCancel()}
+            if(res.code===0){
+                findPost()
+                onCancel()
+            }
         })
 
     }
