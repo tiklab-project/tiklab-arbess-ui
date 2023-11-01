@@ -2,6 +2,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    background: var(--mf-backdrop-color);
     &-content{
         .homePage-guide-title{
             height: 40px;
@@ -19,7 +20,6 @@
             padding: 10px 10px 0;
             height: 200px;
             background: #fff;
-            border: 1px solid var(--mf-border-color);
             margin-bottom: 15px;
             .pipelineRecent-content{
                 display: flex;
@@ -79,7 +79,6 @@
         }
         .home-build{
             background: #fff;
-            border: 1px solid var(--mf-border-color);
             padding: 10px;
             border-radius: 4px;
             min-height: 200px;
@@ -97,24 +96,20 @@
                     flex: 1;
                     margin-right: 8px;
                 }
-                .pipelineBuild-item-name{
+                &:hover .pipelineBuild-item-name{
                     color: var(--tiklab-blue);
                 }
                 .pipelineBuild-item-desc{
                     font-size: 12px;
+                    color: var(--tiklab-gray-500);
                     .desc-number{
                         padding-right: 8px;
                     }
-                }
-                .pipelineBuild-item-execTime{
-                    font-size: var(--tiklab-font-13);
-                    color: var(--tiklab-gray-500);
                 }
             }
         }
         .home-agent{
             background: #fff;
-            border: 1px solid var(--mf-border-color);
             padding: 10px;
             min-height: 400px;
             border-radius: 4px;

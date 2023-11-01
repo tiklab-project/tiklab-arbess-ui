@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Tooltip} from "antd";
+import {Tooltip,Table} from "antd";
 import {applyJump} from "tiklab-core-ui"
 import {DeleteOutlined} from "@ant-design/icons";
 import testOnStore from "../design/processDesign/processDesign/store/TestOnStore";
@@ -8,6 +8,7 @@ import ListEmpty from "../../common/component/list/ListEmpty";
 import {SpinLoading} from "../../common/component/loading/Loading";
 import Page from "../../common/component/page/Page";
 import {deleteSuccessReturnCurrenPage} from "../../common/utils/Client";
+import ListAction from "../../common/component/list/ListAction";
 import "./Test.scss";
 
 /**
@@ -44,8 +45,6 @@ const Test = props => {
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
-    // 列表toolTip状态
-    const [open,setOpen] = useState(null)
 
     useEffect(()=>{
         // 获取测试列表
@@ -76,41 +75,10 @@ const Test = props => {
     }
 
     /**
-     * 列表提示状态
-     * @param item
-     */
-    const onOpenChange = item => {
-        if(item.status===2){
-            if(open) return setOpen(null)
-            return setOpen(item.relevanceId)
-        }
-    }
-
-    /**
-     * 鼠标悬浮事件
-     * @param item
-     */
-    const itemMouseOver = item => {
-        if(item.status===2) return setOpen(item.relevanceId)
-    }
-
-    /**
-     * 删除按钮鼠标事件
-     * @param e
-     */
-    const delMouse = e => {
-        e.stopPropagation()
-        setOpen(null)
-    }
-
-    /**
      * 删除测试
-     * @param e
      * @param item
      */
-    const del = (e,item) => {
-        //屏蔽父层点击事件
-        e.stopPropagation()
+    const del = (item) => {
         deleteRelevance(item.relevanceId).then(res=>{
             if(res.code===0){
                 const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,10,param.pageParam.currentPage)
@@ -132,75 +100,93 @@ const Test = props => {
         })
     }
 
-    if(isLoading){
-        return  <div className='test'>
-                    <SpinLoading size="large" title="加载中……"/>
-                </div>
-    }
+    const columns = [
+        {
+            title: "名称",
+            dataIndex: ["object","testPlanName"],
+            key: "testPlanName",
+            width:"30%",
+            ellipsis:true,
+            render:(text,record) =>{
+                return (
+                    <span
+                        className="test-item-name"
+                        onClick={()=>goTestDetail(record)}
+                    >
+                        # {text}
+                    </span>
+                )
+            }
+        },
+        {
+            title: "用例数",
+            dataIndex: ["object","total"],
+            key: "total",
+            width:"10%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "成功数",
+            dataIndex: ["object","passNum"],
+            key: "passNum",
+            width:"10%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "失败数",
+            dataIndex: ["object","failNum"],
+            key: "failNum",
+            width:"10%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "成功率",
+            dataIndex: ["object","passRate"],
+            key: "passRate",
+            width:"15%",
+            ellipsis:true,
+            render:text=>text || '0.00%'
+        },
+        {
+            title: "时间",
+            dataIndex: "time",
+            key: "time",
+            width:"15%",
+            ellipsis:true,
+            render:text=>text || '--'
+        },
+        {
+            title: "操作",
+            dataIndex: "action",
+            key:"action",
+            width:"10%",
+            ellipsis:true,
+            render:(_,record)=> (
+                <ListAction
+                    del={()=>del(record)}
+                />
+            )
+        }
+    ]
+
 
     return (
         <div className='test'>
             <div className="test-content mf">
                 <Breadcrumb firstItem={"测试报告"}/>
                 <div className='test-table'>
-                    {
-                        testList && testList.length > 0 ?
-                        testList.map(item=> {
-                            const {object} = item
-                            return (
-                                <Tooltip
-                                    key={item.relevanceId}
-                                    title={item.status===2 && "该测试记录详情已被删除"}
-                                    visible={open===item.relevanceId}
-                                    onOpenChange={()=>{onOpenChange(item)}}
-                                >
-                                    <div
-                                        className='test-table-item'
-                                        style={{backgroundColor:item.status===2?"#f0f0f0":"#ffffff"}}
-                                        onClick={()=>goTestDetail(item)}
-                                        onMouseOver={()=>itemMouseOver(item)}
-                                        onMouseLeave={()=>setOpen(null)}
-                                    >
-                                        <div className='test-item-name'>{object?.testPlanName || '--'}</div>
-                                        <div className='test-item-total'>
-                                            <div>用例数</div>
-                                            <div>{object?.total || '--'}</div>
-                                        </div>
-                                        <div className='test-item-passNum'>
-                                            <div>成功数</div>
-                                            <div>{object?.passNum || '--'}</div>
-                                        </div>
-                                        <div className='test-item-failNum'>
-                                            <div>失败数</div>
-                                            <div>{object?.failNum || '--'}</div>
-                                        </div>
-                                        <div className='test-item-passRate'>
-                                            <div>成功率</div>
-                                            <div>{object?.passRate || '--'}</div>
-                                        </div>
-                                        <div className='test-item-time'>
-                                            <div>时间</div>
-                                            <div>{item?.time || '--'}</div>
-                                        </div>
-                                        <div className='test-item-action'>
-                                            <span
-                                                onClick={e=>del(e,item)}
-                                                onMouseOver={e=>delMouse(e)}
-                                                onMouseLeave={e=>delMouse(e)}
-                                            >
-                                                <Tooltip title={'删除'}>
-                                                    <DeleteOutlined/>
-                                                </Tooltip>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </Tooltip>
-                            )
-                        })
-                        :
-                        <ListEmpty title={'暂无测试报告'}/>
-                    }
-
+                    <Table
+                        bordered={false}
+                        loading={isLoading}
+                        columns={columns}
+                        dataSource={testList}
+                        rowKey={record=>record.relevanceId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={"暂无测试报告"}/>}}
+                    />
                     <Page
                         currentPage={param.pageParam.currentPage}
                         changPage={changPage} 

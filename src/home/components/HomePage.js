@@ -118,7 +118,7 @@ const HomePage = props =>{
                 <div className="home-recent">
                     <div className="homePage-guide-title">
                         <HistoryOutlined className="guide-icon"/>
-                        <span className="guide-title">我最近访问的</span>
+                        <span className="guide-title">常用</span>
                     </div>
                     {
                         newlyLoading ?
@@ -139,26 +139,26 @@ const HomePage = props =>{
                         <BlockOutlined className="guide-icon"/>
                         <span className="guide-title">我最近构建的</span>
                     </div>
-                    {
-                        buildLoading ?
-                            <SpinLoading type='table'/>
-                            :
-                            newlyBuild && newlyBuild.length > 0 ?
-                            <div className='pipelineBuild-content'>
-                                {
-                                    newlyBuild.map(item=>renderBuild(item))
-                                }
-                            </div>
-                            :
-                            <ListEmpty title={"暂无构建流水线"}/>
-                    }
+                    <div className="home-build-content">
+                        {
+                            buildLoading ?
+                                <SpinLoading type='table'/>
+                                :
+                                newlyBuild && newlyBuild.length > 0 ?
+                                newlyBuild.map(item=>renderBuild(item))
+                                :
+                                <ListEmpty title={"暂无构建流水线"}/>
+                        }
+                    </div>
                 </div>
                 <div className="home-agent">
                     <div className="homePage-guide-title">
                         <AimOutlined className="guide-icon"/>
                         <span className="guide-title">我的代办</span>
                     </div>
-                    <AgentList agentList={[]}/>
+                    <div className="home-agent-content">
+                        <AgentList agentList={[]}/>
+                    </div>
                 </div>
 
             </div>
