@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {message, Progress, Space, Table} from 'antd';
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
 import {SpinLoading} from "../../../common/component/loading/Loading";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -9,7 +9,7 @@ import resourceStore from "../store/ResourceStore";
 import "./Resources.scss";
 
 /**
- * 资源占用，可用容量
+ * 资源监控，可用容量
  * @param props
  * @returns {JSX.Element}
  * @constructor
@@ -152,12 +152,12 @@ const Resources = props => {
 
     return (
         <div className='resources mf-home-limited mf'>
-            <Breadcrumb firstItem={"资源占用"}>
+            <BreadCrumb firstItem={"资源监控"}>
                 <Btn
                     type={"primary"}
                     title={"升级企业版"}
                 />
-            </Breadcrumb>
+            </BreadCrumb>
             <div className="resources-content">
                 <div className='resources-info-version'>当前版本：{resourceList?.version===1?'免费版':'付费版'}</div>
                 <div>

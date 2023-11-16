@@ -56,7 +56,7 @@ const PostprocessUserAdd = props =>{
             }
         })
     }
-    
+
     /**
      * 添加用户
      */
@@ -169,7 +169,7 @@ const PostprocessUserAdd = props =>{
         })
     }
 
-    const userAddMnue = (
+    const userAddMenu = (
         <div className='post-pose-user-add mf'>
             <Input
                 placeholder={'名称'}
@@ -207,7 +207,7 @@ const PostprocessUserAdd = props =>{
 
     return (
         <Dropdown
-            overlay={userAddMnue}
+            overlay={userAddMenu}
             placement={"bottomRight"}
             visible={userAddVisible}
             trigger={['click']}

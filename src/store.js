@@ -1,7 +1,7 @@
 import {createContext} from "react";
 
 function createStores() {
-    return{
+    return {
 
     }
 }

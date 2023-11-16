@@ -22,7 +22,7 @@ const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipe
 const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
 const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
-const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/processDesign/component/ProcessDesign"))
+const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/gui/component/Gui"))
 const DesignTrigger=AsyncComponent(()=>import("./pipeline/design/trigger/components/Trigger"))
 const DesignVariable=AsyncComponent(()=>import("./pipeline/design/variable/components/Variable"))
 const DesignPostprocess=AsyncComponent(()=>import("./pipeline/design/postprocess/components/Postprocess"))
@@ -30,7 +30,8 @@ const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const Dynamic=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
-const Test=AsyncComponent(()=>import("./pipeline/test/Test"))
+const Test=AsyncComponent(()=>import("./pipeline/test/component/Test"))
+const Scan=AsyncComponent(()=>import("./pipeline/scan/component/Scan"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
 
@@ -40,9 +41,9 @@ const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInf
 const Setting=AsyncComponent(()=>import("./setting/navigator/Setting"))
 const Auth=AsyncComponent(()=>import("./setting/auth/components/Auth"))
 const Host=AsyncComponent(()=>import("./setting/authHost/component/Host"))
+const HostGroup=AsyncComponent(()=>import("./setting/authHost/component/HostGroup"))
 const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
-const Envi=AsyncComponent(()=>import("./setting/envi/components/Envi"))
-const Info=AsyncComponent(()=>import("./setting/envi/components/Info"))
+const Tool=AsyncComponent(()=>import("./setting/tool/components/Tool"))
 const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
 
 // plugin
@@ -205,6 +206,11 @@ const routers=[
                         exact:true,
                     },
                     {
+                        path:"/index/pipeline/:id/scan",
+                        component: Scan,
+                        exact:true,
+                    },
+                    {
                         path:"/index/pipeline/:id/set",
                         component: PipelineSetting,
                         routes:[
@@ -290,8 +296,13 @@ const routers=[
                         exact: true,
                     },
                     {
-                        path:"/index/system/envi",
-                        component: Envi,
+                        path: "/index/system/hostGroup",
+                        component: HostGroup,
+                        exact: true,
+                    },
+                    {
+                        path:"/index/system/tool",
+                        component: Tool,
                         exact: true,
                     },
                     {

@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from "react";
 import {CloseOutlined} from "@ant-design/icons";
 import Btn from "../../../common/component/btn/Btn";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import {SpinLoading} from "../../../common/component/loading/Loading";
 import HistoryDetailTree from "./HistoryDetailTree";
 import {runStatusText,getTime} from "./HistoryCommon";
@@ -266,7 +266,7 @@ const HistoryDetail = props =>{
     return(
         <div className="str-detail">
             <div className="str-detail-bread">
-                <Breadcrumb
+                <BreadCrumb
                     firstItem={pipeline?.name +" # " + historyItem?.findNumber}
                     onClick={historyType!=="drawer" ? goBack: undefined}
                 >
@@ -278,7 +278,7 @@ const HistoryDetail = props =>{
                             onClick={goBack}
                         />
                     }
-                </Breadcrumb>
+                </BreadCrumb>
                 <div className="bread-center">
                     <div className="bread-center-item">
                         <span className='bread-center-name'>开始时间</span>
@@ -305,8 +305,8 @@ const HistoryDetail = props =>{
                     pipeline={pipeline}
                     changeAnchor={changeAnchor}
                 />
-                <div className="str-detail-log" 
-                     ref={scrollRef} 
+                <div className="str-detail-log"
+                     ref={scrollRef}
                      onWheel={onWheel}
                      onMouseDown={handleMouseDown}
                      onMouseUp={handleMouseUp}

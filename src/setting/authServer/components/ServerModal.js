@@ -3,7 +3,7 @@ import {Form, Input, Select, Tooltip, message, Space, Spin} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
 import AuthType from "../../authCommon/AuthType";
 import serverStore from "../store/ServerStore";
-import authorizeStore from "../../../pipeline/design/processDesign/processDesign/store/AuthorizeStore";
+import authorizeStore from "../../../pipeline/design/processDesign/gui/store/AuthorizeStore";
 import {Validation} from "../../../common/utils/Client";
 import Btn from "../../../common/component/btn/Btn";
 import Modals from "../../../common/component/modal/Modal";

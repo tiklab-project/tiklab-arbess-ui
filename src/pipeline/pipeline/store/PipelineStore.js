@@ -238,6 +238,4 @@ export class PipelineStore {
 
 }
 
-export const PIPELINE_STORE = "pipelineStore"
-
 export default new PipelineStore();

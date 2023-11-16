@@ -9,6 +9,8 @@ import {
     SwitcherOutlined,
     VerifiedOutlined,
     SaveOutlined,
+    DeploymentUnitOutlined,
+    MacCommandOutlined
 } from "@ant-design/icons";
 import SystemContent from "./SettingContent";
 
@@ -45,20 +47,26 @@ const Setting = props =>{
             ]
         },
         {
-            id:"/index/system/auth",
-            title:"认证配置",
-            icon:<SwitcherOutlined />,
-            purviewCode:"pipeline_auth",
+            id:"/index/system/group",
+            title:"分组管理",
+            icon:<DeploymentUnitOutlined />,
+            purviewCode:"pipeline_env",
+        },
+        {
+            id:"/index/system/env",
+            title:"环境管理",
+            icon:<SaveOutlined />,
+            purviewCode:"pipeline_env",
         },
         {
             id:"resources",
-            title:"资源配置",
+            title:"主机管理",
             icon:<FileProtectOutlined />,
             children:[
                 {
-                    id:"/index/system/server",
-                    title:"服务配置",
-                    purviewCode:"resources_server",
+                    id:"/index/system/hostGroup",
+                    title:"主机组",
+                    purviewCode:"resources_host",
                 },
                 {
                     id:"/index/system/host",
@@ -68,14 +76,26 @@ const Setting = props =>{
             ]
         },
         {
-            id:"/index/system/envi",
-            title:"环境配置",
+            id:"/index/system/auth",
+            title:"认证配置",
+            icon:<SwitcherOutlined />,
+            purviewCode:"pipeline_auth",
+        },
+        {
+            id:"/index/system/tool",
+            title:"工具配置",
             icon:<BuildOutlined />,
             purviewCode:"pipeline_env",
         },
         {
+            id:"/index/system/server",
+            title:"服务集成",
+            icon:<MacCommandOutlined />,
+            purviewCode:"resources_server",
+        },
+        {
             id:"/index/system/resources",
-            title:"资源占用",
+            title:"资源监控",
             icon:<FileProtectOutlined />,
             purviewCode:"pipeline_resources",
         },

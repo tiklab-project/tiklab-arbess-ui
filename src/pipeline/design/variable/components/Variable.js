@@ -23,12 +23,6 @@ const Variable = props =>{
     const [variableVisible,setVariableVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
-
-    useEffect(()=>{
-        // // 初始化变量
-        // findAllVariable(params.id)
-    },[])
-
     /**
      * 获取变量
      */

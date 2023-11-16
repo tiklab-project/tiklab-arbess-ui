@@ -1,0 +1,46 @@
+.task-details{
+    .task-details-up{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: var(--tiklab-font-weight-bold);
+        padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
+    }
+    .task-details-bottom{
+        overflow: auto;
+        height: calc(100% - 46px);
+        width: 100%;
+        padding: 0 15px;
+        .body-taskForm{
+            .input-hover,.input-hover .ant-select-selector{
+                border-color: #efeded;
+            }
+            .ant-form-item-has-error .ant-input{
+                background-color: #fff;
+                border-color: #ff4d4f;
+            }
+            .ant-form-item-has-error .ant-input:focus{
+                border-color: #ff7875;
+            }
+            .ant-form-item-has-success .input-hover:hover{
+                background-color: #f2f2f2;
+                border-color: transparent;
+            }
+            .ant-form-item-has-success .input-hover .ant-select-selector:hover{
+                background-color: #f2f2f2;
+                border-color: transparent;
+            }
+            .input-hover:hover{
+                background-color: #f2f2f2;
+            }
+        }
+        .taskForm-forms{
+            padding-top: var(--tiklab-padding-item);
+            padding-bottom: var(--tiklab-padding);
+        }
+    }
+}
+
+
+

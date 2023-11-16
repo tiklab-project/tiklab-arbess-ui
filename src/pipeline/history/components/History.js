@@ -5,7 +5,7 @@ import {observer} from "mobx-react";
 import {deleteSuccessReturnCurrenPage,debounce} from "../../../common/utils/Client";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import Profile from "../../../common/component/profile/Profile";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Page from "../../../common/component/page/Page";
 import ListAction from "../../../common/component/list/ListAction";
 import PipelineDrawer from "../../../common/component/drawer/Drawer";
@@ -307,7 +307,7 @@ const History = props =>{
             <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }} >
                 <div className="history">
                     <div className="history-content mf">
-                        <Breadcrumb firstItem={"历史"}/>
+                        <BreadCrumb firstItem={"历史"}/>
                         <HistoryScreen
                             {...props}
                             params={params}

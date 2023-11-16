@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Space,Table} from "antd";
 import hostStore from "../store/HostStore";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListIcon from "../../../common/component/list/ListIcon";
 import ListAction from "../../../common/component/list/ListAction";
@@ -165,7 +165,7 @@ const Host = props =>{
 
     return(
         <div className="auth mf-home-limited mf">
-            <Breadcrumb firstItem={"主机配置"}>
+            <BreadCrumb firstItem={"主机配置"}>
                 <HostAddBtn
                     visible={visible}
                     setVisible={setVisible}
@@ -173,7 +173,7 @@ const Host = props =>{
                     setFormValue={setFormValue}
                     findAuth={findAuth}
                 />
-            </Breadcrumb>
+            </BreadCrumb>
             <Tabs
                 tabLis={lis}
                 type={activeTab}

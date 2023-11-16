@@ -6,7 +6,8 @@ import {
     ApartmentOutlined,
     ClockCircleOutlined,
     CreditCardOutlined,
-    ExperimentOutlined
+    ExperimentOutlined,
+    ScanOutlined
 } from "@ant-design/icons";
 import {Loading} from "../../common/component/loading/Loading";
 import Aside from "../../common/component/aside/Aside";
@@ -67,25 +68,31 @@ const PipelineAside= (props)=>{
             id:`/index/pipeline/${id}/survey`,
             title:"概况",
             icon:<ApartmentOutlined />,
-            key:"2",
+            key:"survey",
         },
         {
             id:`/index/pipeline/${id}/config`,
             title: "设计",
             icon: <CreditCardOutlined />,
-            key:"3",
+            key:"config",
         },
         {
             id:`/index/pipeline/${id}/structure`,
             title: "历史",
             icon: <ClockCircleOutlined />,
-            key:"4",
+            key:"structure",
+        },
+        {
+            id:`/index/pipeline/${id}/scan`,
+            title: "代码扫描",
+            icon: <ScanOutlined />,
+            key:"scan",
         },
         {
             id:`/index/pipeline/${id}/test`,
             title: "测试报告",
             icon: <ExperimentOutlined />,
-            key:"5",
+            key:"test",
         },
     ]
 

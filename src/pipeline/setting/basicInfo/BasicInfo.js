@@ -9,7 +9,7 @@ import {
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Modals from "../../../common/component/modal/Modal";
 import Btn from "../../../common/component/btn/Btn";
 import "./BasicInfo.scss";
@@ -156,7 +156,7 @@ const BasicInfo = props =>{
     return(
         <div className="pipelineReDel mf">
             <div className="pipelineReDel-up">
-                <Breadcrumb firstItem={"流水线信息"}/>
+                <BreadCrumb firstItem={"流水线信息"}/>
             </div>
             <div className="pipelineReDel-content">
                 <div className="pipelineReDel-ul">

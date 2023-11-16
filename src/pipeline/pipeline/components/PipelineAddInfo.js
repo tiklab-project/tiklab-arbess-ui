@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react";
-import {Form, Input, Select, Space, Table, Tooltip} from "antd";
+import {Form, Input, Select, Space, Table, Tooltip,Dropdown} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
@@ -7,7 +7,6 @@ import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import Profile from "../../../common/component/profile/Profile";
 import Btn from "../../../common/component/btn/Btn";
 import ListEmpty from "../../../common/component/list/ListEmpty";
-import {PipelineDropdown} from "../../../common/component/dropdown/DropdownMenu";
 import PipelineUserAdd from "./PipelineUserAdd";
 import "./PipelineAddInfo.scss";
 
@@ -217,20 +216,27 @@ const PipelineAddInfo = props =>{
             <div className="pipeline-user">
                 <div className="pipeline-user-title">
                     <div>流水线成员</div>
-                    <PipelineDropdown
-                        Icon={<Btn title={"添加成员"} icon={<PlusOutlined/>} type={"link-nopadding"}/>}
+                    <Dropdown
+                        overlay={
+                            <PipelineUserAdd
+                                setVisible={setVisible}
+                                yUserList={yUserList}
+                                setYUserList={setYUserList}
+                                pipelineStore={pipelineStore}
+                            />
+                        }
                         visible={visible}
-                        setVisible={setVisible}
-                        width={240}
-                        style={{right:0,top:30}}
+                        onVisibleChange={visible=>setVisible(visible)}
+                        trigger={['click']}
+                        placement={'bottomRight'}
+                        overlayStyle={{width:240}}
                     >
-                        <PipelineUserAdd
-                            setVisible={setVisible}
-                            yUserList={yUserList}
-                            setYUserList={setYUserList}
-                            pipelineStore={pipelineStore}
+                        <Btn
+                            type={"link-nopadding"}
+                            icon={<PlusOutlined/>}
+                            title={"添加成员"}
                         />
-                    </PipelineDropdown>
+                    </Dropdown>
                 </div>
                 <div className="pipeline-user-table">
                     <Table

@@ -1,0 +1,194 @@
+import React,{useState,useEffect} from "react";
+import {Table} from "antd";
+import {observer} from "mobx-react";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
+import Page from "../../../common/component/page/Page";
+import ListEmpty from "../../../common/component/list/ListEmpty";
+import scanStore from "../store/ScanStore";
+import ScanDetails from "./ScanDetails";
+import ListAction from "../../../common/component/list/ListAction";
+import "./Scan.scss";
+import {deleteSuccessReturnCurrenPage} from "../../../common/utils/Client";
+
+const Scan = (props) => {
+
+    const {match:{params}} = props
+
+    const {spotbugsScan,deleteSpotbugs} = scanStore
+
+    // 加载状态
+    const [isLoading,setIsLoading] = useState(true)
+
+    // 页数
+    const [scanPage,setScanPage] = useState({
+        totalPage:1,
+        totalRecord:1
+    })
+
+    const pageParam = {
+        pageSize:15,
+        currentPage: 1,
+    }
+
+    // 请求数据
+    const [scanParam,setScanParam] = useState({pageParam})
+
+    // 扫描数据
+    const [scanList,setScanList] = useState([]);
+
+    const [detailObj,setDetailObj] = useState(null);
+
+    useEffect(()=>{
+        spotbugsScan({
+            pipelineId:params.id,
+            ...scanParam
+        }).then(r=>{
+            if(r.code===0){
+                setScanList(r.data?.dataList || [])
+                setScanPage({
+                    totalPage: r.data?.totalPage || 1,
+                    totalRecord: r.data?.totalRecord || 1,
+                })
+            }
+            setIsLoading(false)
+        })
+    },[scanParam])
+
+    /**
+     * 详情
+     * @param record
+     */
+    const getBugs = record => {
+        setDetailObj(record)
+    }
+
+    /**
+     * 删除
+     * @param record
+     */
+    const del = record => {
+        deleteSpotbugs(record.id).then(res=>{
+            if(res.code===0){
+                const current = deleteSuccessReturnCurrenPage(scanPage.totalRecord,15,scanParam.pageParam.currentPage)
+                changPage(current)
+            }
+        })
+    }
+
+    /**
+     * 换页
+     * @param page
+     */
+    const changPage = page => {
+        setScanParam({
+            pageParam:{
+                pageSize:15,
+                currentPage: page
+            }
+        })
+    }
+
+
+    const columns = [
+        {
+            title: "名称",
+            dataIndex: "id",
+            key: "id",
+            width:"22%",
+            ellipsis:true,
+            render:(text,record) =>{
+                return (
+                    <span className="scan-item-name" onClick={()=>getBugs(record)}>
+                        # {text}
+                    </span>
+                )
+            }
+        },
+        {
+            title: "Bug数量",
+            dataIndex: "totalBugs",
+            key: "totalBugs",
+            width:"12%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "一级问题",
+            dataIndex: "priorityOne",
+            key: "priorityOne",
+            width:"12%",
+            ellipsis:true,
+        },
+        {
+            title: "二级问题",
+            dataIndex: "priorityTwo",
+            key: "priorityTwo",
+            width:"12%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "三级问题",
+            dataIndex: "priorityThree",
+            key: "priorityThree",
+            width:"12%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "扫描时间",
+            dataIndex: "scanTime",
+            key: "scanTime",
+            width:"20%",
+            ellipsis:true,
+            render:text=>text || '--'
+        },
+        {
+            title: "操作",
+            dataIndex: "action",
+            key:"action",
+            width:"10%",
+            ellipsis:true,
+            render:(_,record)=> (
+                <ListAction
+                    del={()=>del(record)}
+                />
+            )
+        }
+    ]
+
+    if(detailObj){
+        return (
+            <ScanDetails
+                detailObj={detailObj}
+                setDetailObj={setDetailObj}
+            />
+        )
+    }
+
+    return (
+        <div className="scan">
+            <div className="mf-home-limited mf">
+                <BreadCrumb firstItem={"代码扫描"}/>
+                <div className="scan-table">
+                    <Table
+                        bordered={false}
+                        loading={isLoading}
+                        columns={columns}
+                        dataSource={scanList}
+                        rowKey={record=>record.id}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={"暂无代码扫描"}/>}}
+                    />
+                    <Page
+                        currentPage={scanParam.pageParam.currentPage}
+                        changPage={changPage}
+                        page={scanPage}
+                    />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default observer(Scan)

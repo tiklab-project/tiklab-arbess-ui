@@ -3,7 +3,7 @@ import {Col, Row, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAddEdit from "./PostprocessAddEdit";
-import {TaskTitleIcon} from "../../processDesign/gui/TaskTitleIcon";
+import {TaskTitleIcon} from "../../processDesign/gui/component/TaskTitleIcon";
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
@@ -32,8 +32,6 @@ const Postprocess = props =>{
         // 是否存在消息发送方式
         findMessageSendType()
 
-        // // 初始化后置处理
-        // findPost()
     },[])
 
     /**

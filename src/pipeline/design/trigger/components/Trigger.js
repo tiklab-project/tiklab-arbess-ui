@@ -23,11 +23,6 @@ const Trigger = props =>{
     const [formValue,setFormValue] = useState(null)
     const [triggerVisible,setTriggerVisible] = useState(false)
 
-    useEffect(()=>{
-        // // 初始化触发器
-        // findTrigger()
-    },[])
-
     const findTrigger = () =>{
         findAllTrigger(params.id)
     }

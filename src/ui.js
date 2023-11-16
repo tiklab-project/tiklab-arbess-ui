@@ -23,7 +23,7 @@ const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipe
 const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
 const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
-const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/processDesign/component/ProcessDesign"))
+const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/gui/component/Gui"))
 
 const DesignTrigger=AsyncComponent(()=>import("./pipeline/design/trigger/components/Trigger"))
 const DesignVariable=AsyncComponent(()=>import("./pipeline/design/variable/components/Variable"))
@@ -34,7 +34,9 @@ const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const Dynamic=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
-const Test=AsyncComponent(()=>import("./pipeline/test/Test"))
+const Test=AsyncComponent(()=>import("./pipeline/test/component/Test"))
+
+const Scan=AsyncComponent(()=>import("./pipeline/scan/component/Scan"))
 
 /**
  * 系统设置
@@ -42,7 +44,7 @@ const Test=AsyncComponent(()=>import("./pipeline/test/Test"))
 const Auth=AsyncComponent(()=>import("./setting/auth/components/Auth"))
 const Host=AsyncComponent(()=>import("./setting/authHost/component/Host"))
 const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
-const Envi=AsyncComponent(()=>import("./setting/envi/components/Envi"))
+const Tool=AsyncComponent(()=>import("./setting/tool/components/Tool"))
 const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
 
 // plugin
@@ -96,6 +98,7 @@ export {
     App,
     Portal,
     SettingContent,
+    AsyncComponent,
 
     Login,
     Logout,
@@ -118,13 +121,14 @@ export {
     History,
     HistoryInstance,
     Test,
+    Scan,
     DomainUser,
     DomainRole,
 
     Auth,
     Host,
     Server,
-    Envi,
+    Tool,
     Resources,
 
     Plugin,

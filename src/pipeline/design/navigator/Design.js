@@ -3,17 +3,17 @@ import {
     CaretRightOutlined,
     LoadingOutlined,
 } from "@ant-design/icons";
-import {Spin, Drawer, Space} from "antd";
+import {Spin, Drawer} from "antd";
 import {inject,observer,Provider} from "mobx-react";
 import {renderRoutes} from "react-router-config";
-import taskStore from "../processDesign/processDesign/store/TaskStore";
-import stageStore from "../processDesign/processDesign/store/StageStore";
+import taskStore from "../processDesign/gui/store/TaskStore";
+import stageStore from "../processDesign/gui/store/StageStore";
 import historyStore from "../../history/store/HistoryStore";
 import variableStore from "../variable/store/VariableStore";
 import postprocessStore from "../postprocess/store/PostprocessStore";
 import triggerStore from "../trigger/store/TriggerStore";
 import Btn from "../../../common/component/btn/Btn";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
 import {debounce} from "../../../common/utils/Client";
 import DiskModal from "../../../common/component/modal/DiskModal";
@@ -67,9 +67,9 @@ const Design = props =>{
     },[props.location.pathname])
 
     useEffect(()=>{
-        findPipelinePost(pipelineId)
-        findAllTrigger(pipelineId)
-        findAllVariable(pipelineId)
+        findPipelinePost(pipelineId).then()
+        findAllTrigger(pipelineId).then()
+        findAllVariable(pipelineId).then()
     },[])
 
     useEffect(() => {
@@ -146,7 +146,7 @@ const Design = props =>{
             <div className="design mf">
                 <div className="design-up">
                     <div className="design-top">
-                        <Breadcrumb firstItem={"设计"}/>
+                        <BreadCrumb firstItem={"设计"}/>
                         <div className="changeView-btn">
                             <Btn
                                 isMar={true}
@@ -189,16 +189,6 @@ const Design = props =>{
                                 )
                             })
                         }
-                        {/*{*/}
-                        {/*    typeLis.map(item=>{*/}
-                        {/*        return(*/}
-                        {/*            <div key={item.id}*/}
-                        {/*                 className={`design-tab ${path===item.id?"design-active":""}`}*/}
-                        {/*                 onClick={()=>props.history.push(item.id)}*/}
-                        {/*            ></div>*/}
-                        {/*        )*/}
-                        {/*    })*/}
-                        {/*}*/}
                     </div>
                 </div>
                 { renderRoutes(route.routes) }

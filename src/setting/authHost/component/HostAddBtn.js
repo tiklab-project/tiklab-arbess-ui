@@ -36,7 +36,7 @@ const HostAddBtn = props =>{
             <HostModal
                 visible={visible}
                 setVisible={setVisible}
-                formValue={formValue || ""}
+                formValue={formValue || null}
                 findAuth={findAuth}
             />
 

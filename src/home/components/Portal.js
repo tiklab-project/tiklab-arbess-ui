@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import logo from "../../assets/images/img/matflow.png";
-import { PortalDropdown } from "../../common/component/dropdown/DropdownMenu";
 import PortalMessage from "./PortalMessage";
 import "./Portal.scss";
 
@@ -85,21 +84,22 @@ const  Portal = props =>{
                 </div>
                 <div className="frame-header-right">
                     <div className="frame-header-right-text">
-                        <PortalDropdown
-                            tooltip={'设置'}
-                            Icon={<SettingOutlined className="frame-header-icon"/>}
-                            onClick={()=>props.history.push("/index/system")}
-                        />
+                        <div className="text_icon_block_item"
+                             onClick={()=>props.history.push("/index/system")}
+                             data-title-bottom={'设置'}
+                        >
+                            <SettingOutlined className="frame-header-icon"/>
+                        </div>
                     </div>
                     <div className="frame-header-right-text">
-                        <PortalDropdown
-                            visibility={visible}
-                            tooltip={'消息'}
-                            Icon={ <Badge count={unread} size="small">
-                                    <BellOutlined className="frame-header-icon"/>
-                                </Badge>}
-                            onClick={()=>setVisible(true)}
-                        />
+                        <div className={`text_icon_block_item ${visible? "text_icon_block_linked": ''}`}
+                             onClick={()=>setVisible(true)}
+                             data-title-bottom={'消息'}
+                        >
+                            <Badge count={unread} size="small">
+                                <BellOutlined className="frame-header-icon"/>
+                            </Badge>
+                        </div>
                         <PortalMessage
                             {...props}
                             visible={visible}

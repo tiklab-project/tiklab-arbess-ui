@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Input} from "antd";
 import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
 import PipelineTable from "./PipelineTable";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
 import Tabs from "../../../common/component/tabs/Tabs";
 import {debounce} from "../../../common/utils/Client";
@@ -128,14 +128,14 @@ const Pipeline = props =>{
     return(
         <div className="pipeline">
             <div className="pipeline-content mf-home-limited mf">
-                <Breadcrumb firstItem={"流水线"}>
+                <BreadCrumb firstItem={"流水线"}>
                     <Btn
                         onClick={onClick}
                         type={"primary"}
                         title={"新建流水线"}
                         icon={<PlusOutlined/>}
                     />
-                </Breadcrumb>
+                </BreadCrumb>
                 <div className="pipeline-flex">
                     <Tabs type={listType} tabLis={[
                         {id:'all', title:"所有流水线"},

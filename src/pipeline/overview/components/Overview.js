@@ -10,7 +10,7 @@ import {
     RightOutlined
 } from "@ant-design/icons";
 import DynamicList from "../../../common/component/list/DynamicList";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import echarts from "../../../common/component/echarts/Echarts";
 import overviewStore from "../store/OverviewStore";
 import "./Overview.scss";
@@ -122,7 +122,7 @@ const Overview = props =>{
         <div className="overview">
             <div className="overview-content">
                 <div className="overview-top">
-                    <Breadcrumb firstItem={"概况"}/>
+                    <BreadCrumb firstItem={"概况"}/>
                 </div>
                 <div className="overview-bottom">
                     <div className="overview-census">

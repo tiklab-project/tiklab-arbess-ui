@@ -1,11 +1,10 @@
 import React,{useState} from "react";
 import {Spin, Steps} from "antd";
-import {inject,observer} from "mobx-react";
-import PipelineAddMould from "./PipelineAddMould";
-import PipelineAddInfo from "./PipelineAddInfo";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../../common/component/btn/Btn";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
+import PipelineAddMould from "./PipelineAddMould";
+import PipelineAddInfo from "./PipelineAddInfo";
 import pipelineStore from "../store/PipelineStore";
 import "./pipelineAdd.scss";
 
@@ -110,7 +109,7 @@ const PipelineAdd = props =>{
         <Spin spinning={isLoading}>
             <div className="pipeline-add mf">
                 <div className="pipeline-add-content">
-                    <Breadcrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/index/pipeline")}/>
+                    <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/index/pipeline")}/>
                     <div className="steps-top">
                         <Steps current={current}>
                             {steps.map(item => (

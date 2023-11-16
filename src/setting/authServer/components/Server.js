@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Space,Table} from "antd";
 import serverStore from "../store/ServerStore";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListIcon from "../../../common/component/list/ListIcon";
 import ListAction from "../../../common/component/list/ListAction";
@@ -143,17 +143,25 @@ const Server = props =>{
             render:text => name(text)
         },
         {
+            title: "服务地址",
+            dataIndex: "serverAddress",
+            key: "serverAddress",
+            width:"20%",
+            ellipsis:true,
+            render:text => text || '--'
+        },
+        {
             title:"类型",
             dataIndex:"type",
             key:"type",
-            width:"20%",
+            width:"10%",
             ellipsis:true,
         },
         {
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"20%",
+            width:"15%",
             ellipsis:true,
             render:(text,record) => user(text,record)
         },
@@ -161,7 +169,7 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"10%",
+            width:"5%",
             ellipsis:true,
             render:text => authPublic(text)
         },
@@ -247,7 +255,7 @@ const Server = props =>{
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
-            width:"15%",
+            width:"20%",
             ellipsis:true,
         },
         {
@@ -271,7 +279,7 @@ const Server = props =>{
             title:"权限",
             dataIndex:"authPublic",
             key:"authPublic",
-            width:"10%",
+            width:"5%",
             ellipsis:true,
             render:text => authPublic(text)
         },
@@ -311,7 +319,7 @@ const Server = props =>{
 
     return(
         <div className="auth mf-home-limited mf">
-            <Breadcrumb firstItem={"服务配置"} >
+            <BreadCrumb firstItem={"服务集成"} >
                 <ServerAddBtn
                     type={'gitee'}
                     visible={visible}
@@ -320,7 +328,7 @@ const Server = props =>{
                     setFormValue={setFormValue}
                     findAuth={findAuth}
                 />
-            </Breadcrumb>
+            </BreadCrumb>
             <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
             <div className="auth-content">
                 <Table

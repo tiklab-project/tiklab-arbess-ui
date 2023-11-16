@@ -1,5 +1,5 @@
 import {action} from "mobx";
-import {Axios} from "tiklab-core-ui";
+import {Axios,getUser} from "tiklab-core-ui";
 import {message} from "antd";
 
 class HostStore {
@@ -22,7 +22,7 @@ class HostStore {
     }
 
     /**
-     * 获取主机配置数据
+     * 获取主机配置
      * @param value
      * @returns {Promise<*>}
      */
@@ -31,6 +31,20 @@ class HostStore {
         const param = new FormData()
         param.append("type",value)
         return await Axios.post("/authHost/findAllAuthHostList", param)
+    }
+
+    /**
+     * 获取主机配置(分页)
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findAuthHostPage = async value =>{
+        const params = {
+            ...value,
+            userId:getUser().userId
+        }
+        return await Axios.post("/authHost/findAuthHostPage", params)
     }
 
     /**

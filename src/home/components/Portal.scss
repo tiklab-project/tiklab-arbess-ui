@@ -34,7 +34,19 @@
             }
         }
         &-icon{
-            font-size: var(--tiklab-icon-size-22);
+            font-size: var(--tiklab-icon-size-24);
+        }
+        .text_icon_block_item{
+            cursor: pointer;
+            padding: 4px;
+        }
+        .text_icon_block_item:hover, .text_icon_block_linked {
+            border-radius: 50%;
+            color: rgb(0, 82, 204);
+            background-color: rgba(222, 235, 255, 0.9);
+            .frame-header-icon{
+                color: rgb(0, 82, 204);
+            }
         }
         .headers{
             &-link{

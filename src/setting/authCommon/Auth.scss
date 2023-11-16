@@ -1,3 +1,37 @@
 .auth .auth-content{
     padding-top: 10px;
 }
+
+.host-group-add-drop{
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+    border-radius: 4px;
+    background: #ffffff;
+    padding: 15px;
+    .host-group-host-table{
+        padding-top: 8px;
+    }
+    .host-group-host-add-btn{
+        text-align: right;
+        padding-top: 10px;
+    }
+}
+
+.host-group-host-add{
+    .host-group-add-title{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: rgba(0, 0, 0, 0.85);
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        list-style: none;
+        font-feature-settings: 'tnum';
+        margin-bottom: 8px;
+        vertical-align: top;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    margin-bottom: 8px;
+}

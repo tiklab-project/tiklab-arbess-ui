@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from "react";
+import {Dropdown} from "antd";
 import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {renderRoutes} from "react-router-config";
 import {interceptUrl} from "../../utils/Client";
 import {Loading} from "../loading/Loading";
-import {PipelineDropdown} from "../dropdown/DropdownMenu";
 import "./Aside.scss";
 
 /**
@@ -19,8 +19,6 @@ const Aside = props =>{
     // 加载状态
     const [isLoading,setIsLoading] = useState(false)
 
-    const [visible,setVisible] = useState(false)
-
     useEffect(()=>{
         // 初始化菜单
         let indexPath = `/index/pipeline/${match.params.id}/${interceptUrl(path)[4]}`
@@ -34,7 +32,6 @@ const Aside = props =>{
     const changePipeline = item => {
         if(pipeline.id!==item.id){
             setIsLoading(true)
-            setVisible(false)
             props.history.push(`/index/pipeline/${item.id}/structure`)
             setTimeout(()=>setIsLoading(false),150)
         }
@@ -43,48 +40,49 @@ const Aside = props =>{
     return(
         <div className="mf-layout">
             <div className="mf-normal-aside">
-                <PipelineDropdown
-                    width={200}
-                    style={{left:80,top:0}}
-                    visible={visible}
-                    setVisible={setVisible}
-                    Icon={
-                            <div className='normal-aside-opt' title={pipeline?.name}>
+                <Dropdown
+                    overlayStyle={{width:200,top:48,left:80}}
+                    trigger={['click']}
+                    overlay={
+                        <div className="pipeline-opt">
+                            <div className="pipeline-opt-title">切换流水线</div>
+                            <div className="pipeline-opt-group">
+                                {
+                                    pipelineList && pipelineList.map((item,index)=>{
+                                        return index < 6 && pipeline?.id !== item.id &&
+                                            <div onClick={()=>changePipeline(item)}
+                                                 key={item.id}
+                                                 className={`pipeline-opt-item`}
+                                            >
+                                                <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
+                                                    {item.name.substring(0,1).toUpperCase()}
+                                                </span>
+                                                    <span className="pipeline-opt-name">
+                                                    {item.name}
+                                                </span>
+                                            </div>
+                                    })
+                                }
+                                {
+                                    pipelineList && pipelineList.length > 6 &&
+                                    <div className='pipeline-opt-item pipeline-opt-more'
+                                         onClick={()=>props.history.push('/index/pipeline')}
+                                    >更多</div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    overlayClassName={"normal-aside-dropdown"}
+                >
+                    <div className='normal-aside-opt' data-title-bottom={pipeline?.name}>
+                        <div className="normal-aside-opt-icon">
                                 <span className={`dropdowns_icon mf-icon-${pipeline && pipeline.color}`}>
                                      {pipeline && pipeline.name.substring(0,1).toUpperCase()}
                                 </span>
-                                <span><CaretDownOutlined /></span>
-                            </div>}
-                >
-                    <div className="pipeline-opt">
-                        <div className="pipeline-opt-title">切换流水线</div>
-                        <div className="pipeline-opt-group">
-                            {
-                                pipelineList && pipelineList.map((item,index)=>{
-                                    return index < 6 && pipeline?.id !== item.id &&
-                                        <div onClick={()=>changePipeline(item)}
-                                             key={item.id}
-                                             className={`pipeline-opt-item`}
-                                        >
-                                            <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
-                                                {item.name.substring(0,1).toUpperCase()}
-                                            </span>
-                                            <span className="pipeline-opt-name">
-                                                {item.name}
-                                            </span>
-                                        </div>
-
-                                })
-                            }
-                            {
-                                pipelineList && pipelineList.length > 6 &&
-                                <div className='pipeline-opt-item pipeline-opt-more'
-                                     onClick={()=>props.history.push('/index/pipeline')}
-                                >更多</div>
-                            }
+                            <span><CaretDownOutlined /></span>
                         </div>
                     </div>
-                </PipelineDropdown>
+                </Dropdown>
                 <div className="normal-aside-up">
                     {
                         firstRouters.map(item=>(

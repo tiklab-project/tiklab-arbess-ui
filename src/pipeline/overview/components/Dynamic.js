@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
 import {DatePicker,Select,Space} from "antd";
 import {observer} from "mobx-react";
-import Breadcrumb from "../../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";
 import DynamicList from "../../../common/component/list/DynamicList";
@@ -100,7 +100,7 @@ const Dynamic = props =>{
     return(
         <div className="dyna" style={{height:"100%",width:"100%",overflow:"auto"}}>
             <div className="dyna-content mf-home-limited">
-                <Breadcrumb firstItem={"动态"} onClick={goBack}/>
+                <BreadCrumb firstItem={"动态"} onClick={goBack}/>
                 <div className="dyna-screen" style={{padding:"15px 0"}}>
                     <Space>
                         {

@@ -4,10 +4,10 @@ ul li{
     list-style: none;
 }
 
-.ant-form-item{
+.mf .ant-form-item{
     margin-bottom: 8px !important;
 }
-.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):after {
+.mf .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):after {
     display: inline-block;
     margin-right: 4px;
     color: #ff4d4f;
@@ -17,16 +17,16 @@ ul li{
     content: "*";
 }
 
-.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+.mf .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
     display: none !important;
     content: "" !important;
 }
 
-.ant-form-item-explain{
+.mf .ant-form-item-explain{
     font-size: 13px !important;
 }
 
-.ant-form-item-explain-error{
+.mf .ant-form-item-explain-error{
     min-height: 20px !important;
     height: 20px !important;
 }
@@ -181,6 +181,7 @@ ul li{
     --tiklab-icon-size-16: 16px;
     --tiklab-icon-size-20: 20px;
     --tiklab-icon-size-22: 22px;
+    --tiklab-icon-size-24: 24px;
     --tiklab-icon-size-32: 32px;
 
     --mf-border-color: #ececec;

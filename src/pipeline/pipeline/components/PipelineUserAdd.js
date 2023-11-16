@@ -148,7 +148,7 @@ const PipelineUserAdd = props =>{
      */
     const changFindUser = e =>{
         setFindUserParam({
-            ...findUserParam,
+            pageParam,
             nickname:e.target.value
         })
     }
@@ -192,7 +192,7 @@ const PipelineUserAdd = props =>{
                     pagination={false}
                     locale={{emptyText: <ListEmpty/>}}
                 />
-             
+
                 <Page
                     currentPage={findUserParam.pageParam.currentPage}
                     changPage={changUserPage}

@@ -1,12 +1,12 @@
 import React from 'react';
-import Breadcrumb from "../../common/component/breadcrumb/Breadcrumb";
+import BreadCrumb from "../../common/component/breadcrumb/BreadCrumb";
 import AgentList from "../../common/component/list/AgentList";
 
 const Agent = props => {
     return (
         <div className='agent'>
             <div className='agent-content home-limited'>
-                <Breadcrumb firstItem={'代办'}/>
+                <BreadCrumb firstItem={'代办'}/>
 
             </div>
         </div>
