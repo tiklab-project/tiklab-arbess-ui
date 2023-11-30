@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import {inject, observer} from "mobx-react";
 import {Form, Input} from "antd";
 import {WhetherChange} from "../Common";
 import CodeGiteeOrGithubOrXcode from "./code/CodeGiteeOrGithub";
@@ -18,7 +19,6 @@ import ArtifactPushMaven from "./artifact/ArtifactPushMaven";
 import ArtifactPushDocker from "./artifact/ArtifactPushDocker";
 import ArtifactPullMaven from "./artifact/ArtifactPullMaven";
 import ArtifactPullDocker from "./artifact/ArtifactPullDocker";
-import {inject, observer} from "mobx-react";
 
 /**
  * task的基本信息
@@ -34,12 +34,9 @@ const BasicInfo = props => {
     const [enter,setEnter] = useState(false)
 
     useEffect(()=>{
-
         // 初始化表单内容
         const task = dataItem && dataItem.task
-
         console.log(task)
-
         switch(dataItem.taskType){
             case 'git':
             case 'gitlab':
@@ -47,13 +44,6 @@ const BasicInfo = props => {
             case 'gitee':
             case 'github':
             case 'xcode':
-                form.setFieldsValue({
-                    taskName:dataItem?.taskName,
-                    codeName:dataItem.taskType==='xcode' ? task.repository?.name : task?.codeName,
-                    codeBranch:dataItem.taskType==='xcode' ? task.branch?.name : task?.codeBranch,
-                    ...task,
-                })
-                break
             case 'maven':
             case 'nodejs':
             case 'build_docker':
@@ -61,9 +51,17 @@ const BasicInfo = props => {
             case 'docker':
             case 'sonar':
             case 'spotbugs':
+            case 'artifact_maven':
+            case 'artifact_docker':
+            case 'pull_maven':
+            case 'pull_docker':
+            case 'maventest':
                 form.setFieldsValue({
-                    taskName:dataItem?.taskName,
                     ...task,
+                    taskName:dataItem?.taskName,
+                    codeName:dataItem.taskType==='xcode' ? task.repository?.name : task?.codeName,
+                    codeBranch:dataItem.taskType==='xcode' ? task.branch?.branchName : task?.codeBranch,
+                    putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
                 })
                 break
             case 'teston':
@@ -75,16 +73,6 @@ const BasicInfo = props => {
                     webEnv:task?.webEnv?.name,
                     testPlan:task?.testPlan?.name,
                     authId:task?.authId,
-                })
-                break
-            case 'artifact_maven':
-            case 'artifact_docker':
-            case 'pull_maven':
-            case 'pull_docker':
-                form.setFieldsValue({
-                    taskName:dataItem?.taskName,
-                    putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
-                    ...task,
                 })
                 break
             default:

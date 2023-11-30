@@ -26,7 +26,7 @@ const HostGroupAddHost = (props) => {
     const pageParam = {
         pageSize:5,
         currentPage:1
-    }
+    };
 
     const [hostParams,setHostParams] = useState({pageParam});
 

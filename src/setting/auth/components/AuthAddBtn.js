@@ -28,7 +28,7 @@ const AuthAddBtn = props =>{
             <Btn
                 onClick={addAuthBtn}
                 type={isConfig?"row":"primary"}
-                title={"添加认证"}
+                title={isConfig?"添加":"添加认证"}
                 icon={<PlusOutlined/>}
             />
             <AuthModal

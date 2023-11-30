@@ -43,11 +43,13 @@ const PipelineAdd = props =>{
      * 创建流水线
      */
     const createPip = () => {
-        const {name,type,power,userList} = baseInfo
+        const {name,type,power,userList,group,env} = baseInfo
         const params = {
             name:name,
             type:type,
             power:power,
+            env:{id:env},
+            group:{id:group},
             userList:userList && userList.map(item=>({id:item.id,adminRole:item.adminRole})),
             template:templateType,
         }

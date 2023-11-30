@@ -67,7 +67,6 @@ export class PipelineStore {
             Axios.post("/pipeline/createPipeline",values).then(res=>{
                 if(res.code===0){
                     message.info("创建成功")
-                    this.findUserPipeline()
                 }
                 else {
                     message.info("创建失败")
@@ -93,7 +92,6 @@ export class PipelineStore {
             Axios.post("/pipeline/deletePipeline",param).then(res=>{
                 if(res.code===0){
                     message.info("删除成功")
-                    this.findUserPipeline()
                 }
                 else {
                     message.info("删除失败")
@@ -117,7 +115,6 @@ export class PipelineStore {
             Axios.post("/pipeline/updatePipeline",values).then(res=>{
                 if(res.code===0){
                     message.info("更新成功")
-                    this.findUserPipeline()
                 }
                 else{
                     message.info("更新失败")
@@ -213,6 +210,20 @@ export class PipelineStore {
         }
         return await Axios.post("/follow/updateFollow",params)
     }
+
+    /**
+     * 切换流水线
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findRecentlyPipeline =async value =>{
+        const params = new FormData();
+        params.append("number",5);
+        params.append("pipelineId",value);
+        return await Axios.post("/pipeline/findRecentlyPipeline",params)
+    }
+
 
     /**
      * 获取流水线用户

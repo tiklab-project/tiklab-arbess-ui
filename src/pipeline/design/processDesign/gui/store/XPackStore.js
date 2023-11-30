@@ -17,6 +17,7 @@ class XPackStore {
         if(data.code!==0){
             message.info(data.msg)
         }
+        return data
     }
 
 

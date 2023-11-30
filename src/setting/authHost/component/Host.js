@@ -8,7 +8,7 @@ import ListAction from "../../../common/component/list/ListAction";
 import Profile from "../../../common/component/profile/Profile";
 import Tabs from "../../../common/component/tabs/Tabs";
 import HostAddBtn from "./HostAddBtn";
-import "../../authCommon/Auth.scss";
+import "../../common/Common.scss";
 
 /**
  * 主机配置页面
@@ -102,7 +102,7 @@ const Host = props =>{
             title:"ip地址",
             dataIndex: "ip",
             key: "ip",
-            width:"10%",
+            width:"12%",
             ellipsis:true,
         },
         {
@@ -116,7 +116,7 @@ const Host = props =>{
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
-            width:"10%",
+            width:"15%",
             ellipsis:true,
             render: text => text===1?"username&password":"私钥"
         },
@@ -124,7 +124,7 @@ const Host = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"10%",
+            width:"18%",
             ellipsis:true,
             render:(text,record) => {
                 return  <Space>
@@ -134,25 +134,17 @@ const Host = props =>{
             }
         },
         {
-            title:"权限",
-            dataIndex:"authPublic",
-            key:"authPublic",
-            width:"8%",
-            ellipsis:true,
-            render:text => text===1?"全局":"私有"
-        },
-        {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"15%",
+            width:"17%",
             ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"9%",
+            width:"10%",
             ellipsis:true,
             render:(_,record) => {
                 return  <ListAction

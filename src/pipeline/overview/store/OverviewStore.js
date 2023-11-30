@@ -57,7 +57,7 @@ class OverviewStore {
         })
     }
     /**
-     * 获取代办
+     * 获取待办
      * @returns {Promise<void>}
      */
     @action

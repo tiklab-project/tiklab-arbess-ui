@@ -29,7 +29,7 @@ const HostAddBtn = props =>{
             <Btn
                 onClick={addHostBtn}
                 type={isConfig?"row":"primary"}
-                title={"添加认证"}
+                title={isConfig?"添加":"添加主机"}
                 icon={<PlusOutlined/>}
             />
 

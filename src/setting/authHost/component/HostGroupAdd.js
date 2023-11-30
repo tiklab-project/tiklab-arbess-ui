@@ -5,6 +5,12 @@ import Modals from "../../../common/component/modal/Modal";
 import HostGroupAddHost from "./HostGroupAddHost";
 import hostGroupStore from "../store/HostGroupStore";
 
+/**
+ * 添加或编辑主机组
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const HostGroupAdd = (props) => {
 
     const {visible,setVisible,formValue,findAuth} = props;

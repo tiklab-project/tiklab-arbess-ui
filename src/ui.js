@@ -43,9 +43,13 @@ const Scan=AsyncComponent(()=>import("./pipeline/scan/component/Scan"))
  */
 const Auth=AsyncComponent(()=>import("./setting/auth/components/Auth"))
 const Host=AsyncComponent(()=>import("./setting/authHost/component/Host"))
+const HostGroup=AsyncComponent(()=>import("./setting/authHost/component/HostGroup"))
 const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
 const Tool=AsyncComponent(()=>import("./setting/tool/components/Tool"))
 const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
+const Grouping=AsyncComponent(()=>import("./setting/grouping/component/Grouping"))
+const Env=AsyncComponent(()=>import("./setting/env/component/Env"))
+
 
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
@@ -125,8 +129,11 @@ export {
     DomainUser,
     DomainRole,
 
+    Grouping,
+    Env,
     Auth,
     Host,
+    HostGroup,
     Server,
     Tool,
     Resources,

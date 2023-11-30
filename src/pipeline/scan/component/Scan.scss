@@ -3,7 +3,7 @@
     height: 100%;
     overflow: auto;
     .scan-table{
-        padding-top: 10px;
+        padding-top: var(--tiklab-padding-item);
         .scan-item-name:hover{
             cursor: pointer;
             color: var(--tiklab-blue);
@@ -13,7 +13,7 @@
         }
     }
     .scan-overview{
-        padding-top: 10px;
+        padding-top: var(--tiklab-padding-item);
         .scan-overview-info{
             display: flex;
             align-items: center;
@@ -31,7 +31,7 @@
                 }
                 div:last-child{
                     font-size: 15px;
-                    padding: 10px 0;
+                    padding: 10px 0 15px;
                     text-align: center;
                 }
             }

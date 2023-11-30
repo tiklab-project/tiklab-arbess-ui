@@ -116,7 +116,6 @@ const Postprocess = props =>{
                 <div className="post-pose">
                     <div className="post-pose-content">
                         <div className="post-pose-up">
-                            {/*<div className="post-pose-up-title">后置处理</div>*/}
                             <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}个后置处理</div>
                             <Btn title={"添加"} icon={<PlusOutlined/>} onClick={()=>addPostprocess()}/>
                             <PostprocessAddEdit

@@ -7,7 +7,7 @@ import ListIcon from "../../../common/component/list/ListIcon";
 import ListAction from "../../../common/component/list/ListAction";
 import Profile from "../../../common/component/profile/Profile";
 import AuthAddBtn from "./AuthAddBtn";
-import "../../authCommon/Auth.scss";
+import "../../common/Common.scss";
 
 /**
  * 认证配置页面
@@ -91,7 +91,7 @@ const Auth = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"15%",
+            width:"20%",
             ellipsis:true,
             render:(text,record) => {
                 return  <Space>
@@ -101,18 +101,10 @@ const Auth = props =>{
             }
         },
         {
-            title:"权 限",
-            dataIndex:"authPublic",
-            key:"authPublic",
-            width:"10%",
-            ellipsis:true,
-            render:text => text===1?"全局":"私有"
-        },
-        {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
         },
         {

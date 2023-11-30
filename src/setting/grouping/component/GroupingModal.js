@@ -1,21 +1,20 @@
 import React,{useEffect} from "react";
-import {Form, Input, Select} from "antd";
-import AuthType from "../../common/AuthType";
-import {Validation} from "../../../common/utils/Client";
-import authStore from "../store/AuthStore";
+import {Form, Input} from "antd";
 import Modals from "../../../common/component/modal/Modal";
+import {Validation} from "../../../common/utils/Client";
+import groupingStore from "../store/GroupingStore";
 
 /**
- * 认证配置弹出框，添加，更新
+ * 环境管理弹出框，添加，更新
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const AuthModal = props =>{
+const GroupingModal = props =>{
 
-    const {visible,setVisible,formValue,findAuth} = props
+    const {visible,setVisible,formValue,findGrouping} = props
 
-    const {createAuth,updateAuth} = authStore
+    const {createGroup,updateGroup} = groupingStore
 
     const [form] = Form.useForm()
 
@@ -37,18 +36,18 @@ const AuthModal = props =>{
         form.validateFields().then((values) => {
             if(formValue){
                 const param = {
-                    authId:formValue.authId,
+                    id:formValue.id,
                     ...values,
                 }
-                updateAuth(param).then(r=>{
+                updateGroup(param).then(r=>{
                     if(r.code===0){
-                        findAuth()
+                        findGrouping()
                     }
                 })
             }else {
-                createAuth(values).then(r=>{
+                createGroup(values).then(r=>{
                     if(r.code===0){
-                        findAuth()
+                        findGrouping()
                     }
                 })
             }
@@ -68,25 +67,22 @@ const AuthModal = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
-                    initialValues={{type:1,authWay:1,authType:2}}
                 >
-                    <Form.Item name="authPublic" label="认证权限">
-                        <Select>
-                            <Select.Option value={1}>全局</Select.Option>
-                            <Select.Option value={2}>私有</Select.Option>
-                        </Select>
-                    </Form.Item>
                     <Form.Item
-                        name="name"
+                        name="groupName"
                         label="名称"
                         rules={[{required:true,message:`名称不能空`},Validation("名称")]}
                     ><Input/>
                     </Form.Item>
-                    <AuthType/>
+                    <Form.Item
+                        name="detail"
+                        label="说明"
+                    ><Input.TextArea autoSize={{minRows: 2, maxRows: 4}}/>
+                    </Form.Item>
                 </Form>
             </div>
         </Modals>
     )
 }
 
-export default AuthModal
+export default GroupingModal

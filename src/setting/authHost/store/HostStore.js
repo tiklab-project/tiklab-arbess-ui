@@ -1,5 +1,5 @@
 import {action} from "mobx";
-import {Axios,getUser} from "tiklab-core-ui";
+import {Axios} from "tiklab-core-ui";
 import {message} from "antd";
 
 class HostStore {
@@ -40,11 +40,7 @@ class HostStore {
      */
     @action
     findAuthHostPage = async value =>{
-        const params = {
-            ...value,
-            userId:getUser().userId
-        }
-        return await Axios.post("/authHost/findAuthHostPage", params)
+        return await Axios.post("/authHost/findAuthHostPage", value)
     }
 
     /**

@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Form, Input, Tooltip, Select} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import hostStore from "../store/HostStore";
-import AuthType from "../../authCommon/AuthType";
+import AuthType from "../../common/AuthType";
 import {Validation} from "../../../common/utils/Client";
 import Modals from "../../../common/component/modal/Modal";
 
@@ -81,7 +81,7 @@ const HostModal = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
-                    initialValues={{type:"common",authPublic:2,authWay:1,authType:2}}
+                    initialValues={{type:"common",authWay:1,authType:2}}
                 >
                     <Form.Item
                         name="type"
@@ -95,12 +95,6 @@ const HostModal = props =>{
                             <Select.Option value={'common'}>普通</Select.Option>
                             <Select.Option value={'aliyun'}>aliyun</Select.Option>
                             <Select.Option value={'tencent'}>腾讯云主机</Select.Option>
-                        </Select>
-                    </Form.Item>
-                    <Form.Item name="authPublic" label="认证权限">
-                        <Select>
-                            <Select.Option value={1}>全局</Select.Option>
-                            <Select.Option value={2}>私有</Select.Option>
                         </Select>
                     </Form.Item>
                     <Form.Item
@@ -118,7 +112,7 @@ const HostModal = props =>{
                         rules={[
                             {required: true, message: "Ip地址不能为空"},
                             {
-                                pattern:/((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)/,
+                                pattern:/^((25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)$/,
                                 message:"请输入正确的Ip地址"
                             }
                         ]}

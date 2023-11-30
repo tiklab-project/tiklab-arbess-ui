@@ -8,6 +8,8 @@ import Profile from "../../../common/component/profile/Profile";
 import Btn from "../../../common/component/btn/Btn";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import PipelineUserAdd from "./PipelineUserAdd";
+import envStore from "../../../setting/env/store/EnvStore";
+import groupingStore from "../../../setting/grouping/store/GroupingStore";
 import "./PipelineAddInfo.scss";
 
 /**
@@ -20,35 +22,60 @@ const PipelineAddInfo = props =>{
 
     const {set,pipelineStore,setCurrent,onClick,baseInfo,setBaseInfo,setIsLoading} = props
 
-    const {findUserPipeline,updatePipeline,pipeline,pipelineList} = pipelineStore
+    const {findUserPipeline,updatePipeline,pipeline,pipelineList} = pipelineStore;
+    const {findEnvList} = envStore;
+    const {findGroupList} = groupingStore;
 
     const [form] = Form.useForm()
     const user = getUser()
 
     // 添加用户下拉显示
-    const [visible,setVisible] = useState(false)
+    const [visible,setVisible] = useState(false);
 
     // 流水线类型 -- 1多任务或2或阶段
-    const [type,setType] = useState(baseInfo?.type || 1)
+    const [type,setType] = useState(baseInfo?.type || 1);
 
     // 流水线权限 -- 1私有或2公有
-    const [powerType,setPowerType] = useState(1)
+    const [powerType,setPowerType] = useState(1);
 
     // 流水线私有添加用户
-    const [yUserList,setYUserList] = useState(baseInfo?.userList || [])
+    const [yUserList,setYUserList] = useState(baseInfo?.userList || []);
+
+    // 环境管理列表
+    const [envList,setEnvList] = useState([]);
+
+    // 分组管理列表
+    const [groupList,setGroupList] = useState([])
 
     useEffect(()=>{
+        // 获取环境和分组管理
+        getEnvOrGroup();
         if(set){
             // 初始化权限
             setPowerType(pipeline.power)
-        }
-        else {
+        } else {
             // 初始化权限
             setPowerType(baseInfo?.power || 1)
             // 获取所有流水线
             findUserPipeline().then()
         }
-    },[])
+    },[]);
+
+    /**
+     * 获取环境和分组管理
+     */
+    const getEnvOrGroup = () => {
+        findEnvList().then(res=>{
+            if(res.code===0){
+                setEnvList(res.data || [])
+            }
+        })
+        findGroupList().then(res=>{
+            if(res.code===0){
+                setGroupList(res.data || [])
+            }
+        })
+    }
 
     /**
      * 改变用户权限
@@ -82,12 +109,17 @@ const PipelineAddInfo = props =>{
                 const params={
                     id: pipeline.id,
                     name: value.name===""? pipeline.name:value.name,
-                    power: powerType
+                    power: powerType,
+                    env:{id:value.env},
+                    group:{id:value.group},
                 }
                 setIsLoading(true)
                 updatePipeline(params).then(res => {
                     if (res.code === 0) {
-                        value.name!=="" && (pipeline.name = value.name)
+                        pipeline.power=params.power
+                        pipeline.name=params.name
+                        pipeline.env=params.env
+                        pipeline.group=params.group
                         setIsLoading(false)
                         props.history.push(`/index/pipeline/${pipeline.id}/survey`)
                     }
@@ -96,8 +128,8 @@ const PipelineAddInfo = props =>{
             }
             setCurrent(1)
             setBaseInfo({
+                ...value,
                 type: type,
-                name: value.name,
                 power: powerType,
                 userList: yUserList,
             })
@@ -210,102 +242,65 @@ const PipelineAddInfo = props =>{
         },
     ]
 
-    // 用户
-    const renderUser = () => {
-        return (
-            <div className="pipeline-user">
-                <div className="pipeline-user-title">
-                    <div>流水线成员</div>
-                    <Dropdown
-                        overlay={
-                            <PipelineUserAdd
-                                setVisible={setVisible}
-                                yUserList={yUserList}
-                                setYUserList={setYUserList}
-                                pipelineStore={pipelineStore}
-                            />
-                        }
-                        visible={visible}
-                        onVisibleChange={visible=>setVisible(visible)}
-                        trigger={['click']}
-                        placement={'bottomRight'}
-                        overlayStyle={{width:240}}
-                    >
-                        <Btn
-                            type={"link-nopadding"}
-                            icon={<PlusOutlined/>}
-                            title={"添加成员"}
-                        />
-                    </Dropdown>
-                </div>
-                <div className="pipeline-user-table">
-                    <Table
-                        rowKey={(record) => record.id}
-                        columns={columns}
-                        dataSource={yUserList}
-                        pagination={false}
-                        showHeader={false}
-                        locale={{emptyText: <ListEmpty/>}}
-                    />
-                </div>
-            </div>
-        )
-    }
-
     // 表单名称效验
-    const rules = set => {
-        let rule
-        if(set){
-            rule = [
-                {
-                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,30}$/,
-                    message: "流水线名称最长30位且不能包含非法字符，如&,%，&，#……等",
-                },
-                ({ getFieldValue }) => ({
-                    validator(rule, value) {
-                        let nameArray = []
-                        if(pipelineList){
-                            const name = pipelineList && pipelineList.map(item=>item.name)
-                            nameArray = name.filter(item=>item!==pipeline.name)
-                        }
-                        if (nameArray.includes(value)) {
-                            return Promise.reject("名称已经存在");
-                        }
-                        return Promise.resolve()
-                    },
-                })
-            ]
-        }
-        if(!set){
-            rule = [
-                {required:true,message:"名称不能为空"},
-                {
-                    pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,30}$/,
-                    message: "流水线名称最长30位且不能包含非法字符，如&,%，&，#……等",
-                },
-                ({ getFieldValue }) => ({
-                    validator(rule,value) {
-                        let nameArray = []
-                        if(pipelineList){
-                            nameArray = pipelineList && pipelineList.map(item=>item.name)
-                        }
-                        if (nameArray.includes(value)) {
-                            return Promise.reject("名称已经存在");
-                        }
-                        return Promise.resolve()
-                    },
-                }),
-            ]
-        }
-        return rule
-    }
+    const rules = [
+        {
+            required:!set,
+            message:"名称不能为空"
+        },
+        {
+            pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,30}$/,
+            message: "流水线名称最长30位且不能包含非法字符，如&,%，&，#……等",
+        },
+        ({ getFieldValue }) => ({
+            validator(rule,value) {
+                let nameArray = []
+                if(set){
+                    nameArray = pipelineList && pipelineList.map(item=>item.name).filter(li=>li!==pipeline.name)
+                }else {
+                    nameArray = pipelineList && pipelineList.map(item=>item.name)
+                }
+                if (nameArray.includes(value)) {
+                    return Promise.reject("名称已经存在");
+                }
+                return Promise.resolve()
+            },
+        }),
+    ]
 
     if(set){
         return (
             <>
-                <Form form={form} autoComplete="off" layout={"vertical"} initialValues={{name:pipeline?.name}}>
-                    <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
+                <Form
+                    form={form}
+                    autoComplete="off"
+                    layout={"vertical"}
+                    initialValues={{
+                        name: pipeline?.name ,
+                        group: pipeline?.group?.id ,
+                        env: pipeline?.env?.id ,
+                    }}
+                >
+                    <Form.Item label={"流水线名称"} name="name" rules={rules}>
                         <Input allowClear style={{width:612}}/>
+                    </Form.Item>
+                    <Form.Item label={"流水线分组"} name="group">
+                        <Select style={{width:612}}>
+                            {
+                                groupList && groupList.map(item=>(
+                                    <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
+                                ))
+                            }
+                        </Select>
+                    </Form.Item>
+                    <Form.Item label={"流水线环境"} name="env">
+                        <Select style={{width:612}}>
+                            {
+                                envList && envList.map(item=>(
+                                    <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
+                                ))
+                            }
+                        </Select>
                     </Form.Item>
                 </Form>
                 { renderPowerType }
@@ -322,9 +317,36 @@ const PipelineAddInfo = props =>{
 
     return(
         <>
-            <Form form={form} autoComplete="off" layout={"vertical"} initialValues={{name:baseInfo?.name}}>
-                <Form.Item label={"流水线名称"} name="name" rules={rules(set)}>
-                    <Input allowClear style={{background:"#fff"}}/>
+            <Form
+                form={form}
+                autoComplete="off"
+                layout={"vertical"}
+                initialValues={{
+                    name: baseInfo?.name,
+                    group: "default",
+                    env: "default",
+                }}
+            >
+                <Form.Item label={"流水线名称"} name="name" rules={rules}>
+                    <Input allowClear/>
+                </Form.Item>
+                <Form.Item label={"流水线分组"} name="group">
+                    <Select>
+                        {
+                            groupList && groupList.map(item=>(
+                                <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
+                            ))
+                        }
+                    </Select>
+                </Form.Item>
+                <Form.Item label={"流水线环境"} name="env">
+                    <Select>
+                        {
+                            envList && envList.map(item=>(
+                                <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
+                            ))
+                        }
+                    </Select>
                 </Form.Item>
             </Form>
             <div className="pipeline-add-type">
@@ -339,7 +361,45 @@ const PipelineAddInfo = props =>{
                 </div>
             </div>
             { renderPowerType }
-            { powerType === 2 && renderUser() }
+            {
+                powerType === 2 &&
+                <div className="pipeline-user">
+                    <div className="pipeline-user-title">
+                        <div>流水线成员</div>
+                        <Dropdown
+                            overlay={
+                                <PipelineUserAdd
+                                    setVisible={setVisible}
+                                    yUserList={yUserList}
+                                    setYUserList={setYUserList}
+                                    pipelineStore={pipelineStore}
+                                />
+                            }
+                            visible={visible}
+                            onVisibleChange={visible=>setVisible(visible)}
+                            trigger={['click']}
+                            placement={'bottomRight'}
+                            overlayStyle={{width:240}}
+                        >
+                            <Btn
+                                type={"link-nopadding"}
+                                icon={<PlusOutlined/>}
+                                title={"添加成员"}
+                            />
+                        </Dropdown>
+                    </div>
+                    <div className="pipeline-user-table">
+                        <Table
+                            rowKey={(record) => record.id}
+                            columns={columns}
+                            dataSource={yUserList}
+                            pagination={false}
+                            showHeader={false}
+                            locale={{emptyText: <ListEmpty/>}}
+                        />
+                    </div>
+                </div>
+            }
             <Btn onClick={()=>props.history.push("/index/pipeline")}
                  title={"取消"}
                  isMar={true}

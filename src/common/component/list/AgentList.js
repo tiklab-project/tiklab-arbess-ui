@@ -2,7 +2,7 @@ import React from "react";
 import ListEmpty from "./ListEmpty";
 
 /**
- * 代办列表
+ * 待办
  */
 const AgentList = props => {
 
@@ -25,7 +25,7 @@ const AgentList = props => {
                 agentList && agentList.length>0 ?
                     agentList.map(item=>renderAgent(item))
                     :
-                    <ListEmpty title={"暂无代办"}/>
+                    <ListEmpty title={"暂无待办"}/>
             }
         </div>
     )

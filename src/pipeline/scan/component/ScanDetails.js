@@ -55,7 +55,6 @@ const ScanDetails = (props) => {
         },
     ]
 
-
     return (
         <div className="scan">
             <div className="mf-home-limited mf">

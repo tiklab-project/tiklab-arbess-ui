@@ -102,7 +102,6 @@ const Variable = props =>{
                <div className="variable">
                    <div className="variable-content">
                        <div className="variable-up">
-                           {/*<div className="variable-up-title">变量</div>*/}
                            <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}个变量</div>
                            <Btn
                                title={"添加"}

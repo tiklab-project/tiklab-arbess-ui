@@ -51,16 +51,19 @@ const Design = props =>{
     const pipelineId = match.params.id
 
     // 路由菜单
-    const [path,setPath] = useState("")
+    const [path,setPath] = useState("");
+
+    // 点击运行按钮
+    const [isSpin,setIsSpin] = useState(false);
 
     // 运行页面展示||隐藏
-    const [isDetails,setIsDetails] = useState(false)
+    const [isDetails,setIsDetails] = useState(false);
 
     // 单个历史信息
-    const [historyItem,setHistoryItem] = useState(null)
+    const [historyItem,setHistoryItem] = useState(null);
 
     // 磁盘内存弹出框状态
-    const [diskVisible,setDiskVisible] = useState(false)
+    const [diskVisible,setDiskVisible] = useState(false);
 
     useEffect(()=>{
         setPath(props.location.pathname)
@@ -89,8 +92,10 @@ const Design = props =>{
     /**
      * 开始运行
      */
-    const run = debounce(() => {
+    const run = () =>{
+        setIsSpin(true)
         execStart(pipeline.id).then(res=>{
+            setIsSpin(false)
             if(res.code===0){
                 setHistoryItem(res.data && res.data)
                 setIsDetails(true)
@@ -98,7 +103,7 @@ const Design = props =>{
             }
             if(res.code===9000) return setDiskVisible(true)
         })
-    },1000)
+    }
 
     /**
      * 是否能运行
@@ -144,54 +149,54 @@ const Design = props =>{
     return(
         <Provider {...store}>
             <div className="design mf">
-                <div className="design-up">
-                    <div className="design-top">
-                        <BreadCrumb firstItem={"设计"}/>
-                        <div className="changeView-btn">
-                            <Btn
-                                isMar={true}
-                                title={"帮助"}
-                                onClick={()=>window.open('http://tiklab.net/document')}
-                            />
+                <Spin spinning={isSpin}>
+                    <div className="design-up">
+                        <div className="design-top">
+                            <BreadCrumb firstItem={"设计"}/>
+                            <div className="changeView-btn">
+                                <Btn
+                                    isMar={true}
+                                    title={"帮助"}
+                                    onClick={()=>window.open('http://tiklab.net/document')}
+                                />
+                                {
+                                    pipeline?.state===2 ?
+                                        <Btn
+                                            type={"primary"}
+                                            icon={<Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
+                                            title={"运行中"}
+                                        />
+                                        :
+                                        <Btn
+                                            type={runStatu() ? "primary" : "disabled" }
+                                            onClick={runStatu() ? ()=>run() : undefined }
+                                            icon={<CaretRightOutlined />}
+                                            title={"运行"}
+                                        />
+                                }
+                            </div>
+                        </div>
+                        <div className="design-tabs">
                             {
-                                pipeline?.state===2 ?
-                                    <Btn
-                                        type={"primary"}
-                                        icon={<Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
-                                        title={"运行中"}
-                                    />
-                                    :
-                                    <Btn
-                                        type={runStatu() ? "primary" : "disabled" }
-                                        onClick={runStatu() ? ()=>run() : undefined }
-                                        icon={<CaretRightOutlined />}
-                                        title={"运行"}
-                                    />
+                                typeLis.map(item=>{
+                                    return(
+                                        <div key={item.id}
+                                             className={`design-tab ${path===item.id?"design-active":""}`}
+                                             onClick={()=>props.history.push(item.id)}
+                                        >
+                                            <div className="design-tab-icon">{item.icon}</div>
+                                            <div className="design-tab-title">
+                                                {item.title}
+                                                {item?.long && <span>({item.long.length})</span>}
+                                            </div>
+                                        </div>
+                                    )
+                                })
                             }
                         </div>
                     </div>
-                    <div className="design-tabs">
-                        {
-                            typeLis.map(item=>{
-                                return(
-                                    <div key={item.id}
-                                         className={`design-tab ${path===item.id?"design-active":""}`}
-                                         onClick={()=>props.history.push(item.id)}
-                                    >
-                                        <div className="design-tab-icon">{item.icon}</div>
-                                        <div className="design-tab-title">
-                                            {item.title}
-                                            {
-                                                item?.long && <span>({item.long.length})</span>
-                                            }
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-                { renderRoutes(route.routes) }
+                    { renderRoutes(route.routes) }
+                </Spin>
             </div>
             <DiskModal
                 visible={diskVisible}

@@ -1,7 +1,7 @@
 .str-detail{
     height: 100%;
     width: 100%;
-    min-width: 768px;
+    min-width: 500px;
     padding: 0 15px;
     .str-detail-bread{
         padding: 15px 0 10px;
@@ -92,7 +92,6 @@
         overflow: auto;
         background: #000;
         .bottom-log{
-            min-width: 600px;
             color: #fff;
             padding: 10px;
             word-wrap: break-word;

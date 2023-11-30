@@ -62,8 +62,9 @@ class TriggerStore {
      */
     @action
     findAllTrigger = async value =>{
-        const param = new FormData()
-        param.append("pipelineId",value)
+        const param = {
+            pipelineId:value
+        }
         const data = await Axios.post("/trigger/findAllTrigger",param)
         if (data.code===0){
             this.triggerData = data.data && data.data

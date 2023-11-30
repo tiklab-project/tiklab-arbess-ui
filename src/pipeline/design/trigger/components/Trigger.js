@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Table,Row,Col} from "antd";
+import {Table, Row, Col, Tag} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import TriggerAddEdit from "./TriggerAddEdit";
@@ -61,16 +61,27 @@ const Trigger = props =>{
             title: "执行时间",
             dataIndex: "execTime",
             key: "execTime",
-            width:"60%",
+            width:"50%",
             ellipsis:true,
         },
         {
             title: "执行方式",
             dataIndex: "taskType",
             key: "taskType",
-            width:"30%",
+            width:"25%",
             ellipsis:true,
             render:text => text===1?"单次触发":"周期触发"
+        },
+        {
+            title: "触发状态",
+            dataIndex: "state",
+            key: "state",
+            width:"15%",
+            ellipsis:true,
+            render:text => text==="1" ?
+                <Tag color="green">未触发</Tag>
+                :
+                <Tag color="red">已触发</Tag>
         },
         {
             title: "操作",
@@ -92,7 +103,6 @@ const Trigger = props =>{
                 <div className="trigger">
                     <div className="trigger-content">
                         <div className="trigger-up">
-                            {/*<div className="trigger-up-title">定时触发</div>*/}
                             <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}个定时任务</div>
                             <Btn
                                 title={"添加"}

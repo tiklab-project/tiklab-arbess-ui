@@ -8,17 +8,17 @@ import ListAction from "../../../common/component/list/ListAction";
 import Profile from "../../../common/component/profile/Profile";
 import Tabs from "../../../common/component/tabs/Tabs";
 import ServerAddBtn from "./ServerAddBtn";
-import "../../authCommon/Auth.scss";
+import "../../common/Common.scss";
 
 /**
- * 服务配置页面
+ * 服务集成
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
 const Server = props =>{
 
-    const {findAllAuthServerList,deleteAuthServer} = serverStore
+    const {findAuthServerList,deleteAuthServer} = serverStore
 
     // 弹出框状态
     const [visible,setVisible] = useState(false)
@@ -41,7 +41,7 @@ const Server = props =>{
      * 获取服务配置
      */
     const findAuth = () =>{
-        findAllAuthServerList(activeTab).then(r=>{
+        findAuthServerList(activeTab).then(r=>{
             if(r.code===0){
                 setAuthServerList(r.data || [])
             }
@@ -100,16 +100,8 @@ const Server = props =>{
     const user = (text,record) =>{
         return  <Space>
                     <Profile userInfo={record.user}/>
-                    {text}
+                    {text || '--'}
                 </Space>
-    }
-
-    // 权限
-    const authPublic = text =>{
-        switch (text) {
-            case 1: return "全局"
-            case 2: return "私有"
-        }
     }
 
     // 操作
@@ -146,7 +138,7 @@ const Server = props =>{
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
             render:text => text || '--'
         },
@@ -164,14 +156,6 @@ const Server = props =>{
             width:"15%",
             ellipsis:true,
             render:(text,record) => user(text,record)
-        },
-        {
-            title:"权限",
-            dataIndex:"authPublic",
-            key:"authPublic",
-            width:"5%",
-            ellipsis:true,
-            render:text => authPublic(text)
         },
         {
             title:"创建时间",
@@ -211,24 +195,16 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:["user","nickname"],
-            width:"20%",
+            width:"25%",
             ellipsis:true,
             render:(text,record) => user(text,record)
 
         },
         {
-            title:"权限",
-            dataIndex:"authPublic",
-            key:"authPublic",
-            width:"10%",
-            ellipsis:true,
-            render:text => authPublic(text)
-        },
-        {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
         },
         {
@@ -255,7 +231,7 @@ const Server = props =>{
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
         },
         {
@@ -274,14 +250,6 @@ const Server = props =>{
             ellipsis:true,
             render:(text,record) => user(text,record)
 
-        },
-        {
-            title:"权限",
-            dataIndex:"authPublic",
-            key:"authPublic",
-            width:"5%",
-            ellipsis:true,
-            render:text => authPublic(text)
         },
         {
             title:"创建时间",
@@ -329,7 +297,11 @@ const Server = props =>{
                     findAuth={findAuth}
                 />
             </BreadCrumb>
-            <Tabs tabLis={lis} type={activeTab} onClick={clickServerType}/>
+            <Tabs
+                tabLis={lis}
+                type={activeTab}
+                onClick={clickServerType}
+            />
             <div className="auth-content">
                 <Table
                     columns={columns(activeTab)}

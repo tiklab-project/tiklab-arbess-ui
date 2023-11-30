@@ -30,7 +30,7 @@ const ServerAddBtn = props =>{
             <Btn
                 onClick={addServerBtn}
                 type={isConfig?"row":"primary"}
-                title={"添加认证"}
+                title={isConfig?"添加":"添加服务"}
                 icon={<PlusOutlined/>}
             />
             <ServerModal

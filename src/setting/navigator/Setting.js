@@ -47,16 +47,14 @@ const Setting = props =>{
             ]
         },
         {
-            id:"/index/system/group",
+            id:"/index/system/grouping",
             title:"分组管理",
             icon:<DeploymentUnitOutlined />,
-            purviewCode:"pipeline_env",
         },
         {
             id:"/index/system/env",
             title:"环境管理",
             icon:<SaveOutlined />,
-            purviewCode:"pipeline_env",
         },
         {
             id:"resources",
@@ -66,7 +64,6 @@ const Setting = props =>{
                 {
                     id:"/index/system/hostGroup",
                     title:"主机组",
-                    purviewCode:"resources_host",
                 },
                 {
                     id:"/index/system/host",

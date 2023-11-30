@@ -45,6 +45,8 @@ const HostGroup=AsyncComponent(()=>import("./setting/authHost/component/HostGrou
 const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
 const Tool=AsyncComponent(()=>import("./setting/tool/components/Tool"))
 const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
+const Grouping=AsyncComponent(()=>import("./setting/grouping/component/Grouping"))
+const Env=AsyncComponent(()=>import("./setting/env/component/Env"))
 
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
@@ -278,6 +280,16 @@ const routers=[
                     {
                         path:"/index/system/send",
                         component: MessageSendType,
+                        exact: true,
+                    },
+                    {
+                        path:"/index/system/grouping",
+                        component: Grouping,
+                        exact: true,
+                    },
+                    {
+                        path:"/index/system/env",
+                        component: Env,
                         exact: true,
                     },
                     {

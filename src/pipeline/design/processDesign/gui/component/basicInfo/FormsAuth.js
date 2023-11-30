@@ -22,7 +22,7 @@ const FormsAuth = props =>{
     const {taskStore}=props
 
     const {findAllAuth} = authStore
-    const {findAllAuthServerList} = serverStore
+    const {findAuthServerList} = serverStore
     const {findAllAuthHostList} = hostStore
     const {findHostGroupList} = hostGroupStore
     const {updateTask,dataItem} = taskStore
@@ -65,14 +65,18 @@ const FormsAuth = props =>{
                 return findHost()
             case 'artifact_maven':
             case 'artifact_docker':
-            case 'pull_maven':
-            case 'pull_docker':
-                const artifactType = (dataItem.taskType==='pull_maven' || dataItem.taskType==='pull_docker') ?
-                      dataItem.task?.pullType : dataItem.task?.artifactType
+                const artifactType = dataItem.task?.artifactType
                 if(artifactType==='ssh'){
                     return findHost()
                 }
                 return finsServer(artifactType)
+            case 'pull_maven':
+            case 'pull_docker':
+                const pullType = dataItem.task?.pullType
+                if(pullType==='ssh'){
+                    return findHost()
+                }
+                return finsServer(pullType)
         }
     }
 
@@ -105,7 +109,7 @@ const FormsAuth = props =>{
      * @param serverType
      */
     const finsServer = (serverType) => {
-        findAllAuthServerList(serverType).then(res=>{
+        findAuthServerList(serverType).then(res=>{
             if(res.code===0){
                 setList(res.data)
             }

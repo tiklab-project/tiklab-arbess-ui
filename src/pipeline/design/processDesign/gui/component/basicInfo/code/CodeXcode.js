@@ -42,9 +42,9 @@ const CodeXcode = props =>{
      */
     const changeGitStoreHouse = value =>{
         const task = dataItem.task
-        if(task && task.repository?.id===value){return;}
+        if(task && task.repository?.rpyId===value){return;}
         setProhibited(false)
-        updateTask({repository: {id:value}})
+        updateTask({repository: {rpyId:value}})
     }
 
     /**
@@ -53,8 +53,8 @@ const CodeXcode = props =>{
      */
     const changeBranch = value => {
         const task = dataItem.task
-        if(task && task.branch?.id===value){return;}
-        updateTask({branch: {id:value}})
+        if(task && task.branch?.branchId===value){return;}
+        updateTask({branch: {branchId:value}})
     }
 
     /**
@@ -73,9 +73,9 @@ const CodeXcode = props =>{
             })
             return;
         }
-        if(!dataItem.task?.repository?.id) return;
+        if(!dataItem.task?.repository?.rpyId) return;
         findXcodeBranch({
-            rpyId:dataItem.task?.repository?.id,
+            rpyId:dataItem.task?.repository?.rpyId,
             authId:dataItem.task?.authId,
         }).then(r=>{
             if(r.code===0){
@@ -97,7 +97,7 @@ const CodeXcode = props =>{
             >
                 {
                     xcodeRpy && xcodeRpy.map(item=>{
-                        return <Select.Option key={item.id} value={item.id}> {item.name} </Select.Option>
+                        return <Select.Option key={item.rpyId} value={item.rpyId}> {item.name} </Select.Option>
                     })
                 }
             </FormsSelect>
@@ -111,7 +111,7 @@ const CodeXcode = props =>{
             >
                 {
                     xcodeBranch && xcodeBranch.map(item=>{
-                        return  <Select.Option key={item.id} value={item.id}> {item.name} </Select.Option>
+                        return  <Select.Option key={item.branchId} value={item.branchId}> {item.branchName} </Select.Option>
                     })
                 }
             </FormsSelect>

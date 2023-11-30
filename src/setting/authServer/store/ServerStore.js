@@ -67,10 +67,8 @@ class ServerStore{
      * @returns {Promise<*>}
      */
     @action
-    findAllAuthServerList = async value=>{
-        const param = new FormData()
-        param.append("type",value)
-        return await Axios.post("/authServer/findAllAuthServerList", param)
+    findAuthServerList = async value=>{
+        return await Axios.post("/authServer/findAuthServerList", {type:value})
     }
 
     /**

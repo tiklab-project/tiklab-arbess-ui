@@ -6,12 +6,9 @@
         align-items: center;
         padding-bottom: 10px;
         font-size: var(--tiklab-font-13);
-        .trigger-up-title{
-            font-weight: var(--tiklab-font-weight-bold);
-        }
         .trigger-up-num{
             flex: 1;
-            //padding: 0 var(--tiklab-padding-item);
+            margin-right: var(--tiklab-padding-item);
         }
     }
     .trigger-data-time .data-time-line{

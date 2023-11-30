@@ -1,7 +1,7 @@
 import React,{useEffect,useState } from "react";
 import {Form, Input, Select, Tooltip, message, Space, Spin} from "antd";
 import {PlusOutlined,QuestionCircleOutlined} from "@ant-design/icons";
-import AuthType from "../../authCommon/AuthType";
+import AuthType from "../../common/AuthType";
 import serverStore from "../store/ServerStore";
 import authorizeStore from "../../../pipeline/design/processDesign/gui/store/AuthorizeStore";
 import {Validation} from "../../../common/utils/Client";
@@ -278,11 +278,11 @@ const ServerModal = props =>{
                 rules={[
                     {required:true,message:"服务器地址不能空"},
                     {
-                        pattern:/^(https?:\/\/)?[^\s\/]+(\.[^\s\/]+)+(\/[^\s\/]*)*[^\s\/\\.,。，、;:'"?!]$/,
+                        pattern:/^(https?:\/\/)[^\s\/]+(\.[^\s\/]+)+(\/[^\s\/]*)*[^\s\/\\.,。，、;:'"?!]$/,
                         message:"请输入正确的服务地址"
                     }
                 ]}
-            ><Input disabled={serverAddressDisabled()}/>
+            ><Input disabled={serverAddressDisabled()} type={"url"}/>
             </Form.Item>
             <AuthType/>
         </>
@@ -302,7 +302,7 @@ const ServerModal = props =>{
                         layout="vertical"
                         autoComplete="off"
                         onValuesChange={onValuesChange}
-                        initialValues={{type:type,authPublic:2,authWay:1,authType:1}}
+                        initialValues={{type:type,authWay:1,authType:1}}
                     >
                         <Form.Item name="type" label="授权类型">
                             {
@@ -324,12 +324,6 @@ const ServerModal = props =>{
                                         <Select.Option value={'nexus'}>Nexus</Select.Option>
                                     </Select>
                             }
-                        </Form.Item>
-                        <Form.Item name="authPublic" label="服务权限">
-                            <Select>
-                                <Select.Option value={1}>全局</Select.Option>
-                                <Select.Option value={2}>私有</Select.Option>
-                            </Select>
                         </Form.Item>
                         <Form.Item
                             name="name"

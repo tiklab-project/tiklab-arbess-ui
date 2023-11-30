@@ -56,7 +56,7 @@ class TestOnStore {
     }
 
     /**
-     * 获取关联的测试列表
+     * 获取teston自动化测试列表
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -67,7 +67,7 @@ class TestOnStore {
     }
 
     /**
-     * 删除关联的测试
+     * 删除teston自动化测试
      * @param value
      * @returns {Promise<unknown>}
      */

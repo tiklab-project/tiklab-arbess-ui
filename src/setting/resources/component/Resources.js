@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {message, Progress, Space, Table} from 'antd';
+import {getUser,parseUserSearchParams} from "tiklab-core-ui";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
 import {SpinLoading} from "../../../common/component/loading/Loading";
@@ -18,12 +19,16 @@ const Resources = props => {
 
     const {findResourcesList,findDiskList,cleanDisk} = resourceStore
 
+    // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
+    // 资源占用列表
     const [diskList,setDiskList] = useState([])
 
+    // 资源占用概况
     const [resourceList,setResourceList] = useState({})
 
+    // 选择清理缓存的keys
     const [selectedRowKeys,setSelectedRowKeys] = useState([]);
 
     useEffect(()=>{
@@ -65,7 +70,7 @@ const Resources = props => {
             return message.info("请选择需要清除缓存的流水线")
         }
         cleanDisk({
-            pipelineList: selectedRowKeys
+            fileList: selectedRowKeys
         }).then(r=>{
             if(r.code===0){
                 findDisk()
@@ -76,10 +81,10 @@ const Resources = props => {
 
     const columns = [
         {
-            title: "全选",
+            title: "名称",
             dataIndex: "name",
             key: "name",
-            width:"100%",
+            width:"60%",
             ellipsis:true,
             render:(text,record)=>{
                 return (
@@ -94,6 +99,13 @@ const Resources = props => {
                     </div>
                 )
             }
+        },
+        {
+            title: "路径",
+            dataIndex: "filePath",
+            key: "filePath",
+            width:"40%",
+            ellipsis:true,
         }
     ]
 
@@ -101,7 +113,7 @@ const Resources = props => {
      * 手动选择/取消选择所有行的回调
      */
     const onSelectAll = (selected,selectedRows,changeRows) => {
-        const newArr = changeRows.map(item=>item && item.pipelineId).filter(Boolean)
+        const newArr = changeRows.map(item=>item && item.path).filter(Boolean)
         if(selected){
             const uniq = Array.from(new Set([...newArr,...selectedRowKeys]))
             setSelectedRowKeys(uniq)
@@ -117,12 +129,12 @@ const Resources = props => {
      * @param record
      */
     const onSelectRow = record => {
-        if (selectedRowKeys.indexOf(record.pipelineId) >= 0) {
-            selectedRowKeys.splice(selectedRowKeys.indexOf(record.pipelineId), 1)
+        if (selectedRowKeys.indexOf(record.path) >= 0) {
+            selectedRowKeys.splice(selectedRowKeys.indexOf(record.path), 1)
         }
         // 如果没有选中 -- 选中
         else {
-            selectedRowKeys.push(record.pipelineId)
+            selectedRowKeys.push(record.path)
         }
         setSelectedRowKeys([...selectedRowKeys])
     }
@@ -150,13 +162,33 @@ const Resources = props => {
         return number + unit
     }
 
+    const upGradation = () => {
+        if(version==='ce'){
+            window.open("http://tiklab.net/download/product/productDetail?code=matflow&type=ee")
+            return
+        }
+        const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
+        if(authServiceUrl){
+            const user = getUser();
+            window.open(`${authServiceUrl}/#/enterprise/application?${parseUserSearchParams({
+                ticket:user.ticket,
+                tenant:user.tenant,
+                userId:user.userId
+            })}`)
+        }
+    }
+
     return (
         <div className='resources mf-home-limited mf'>
             <BreadCrumb firstItem={"资源监控"}>
-                <Btn
-                    type={"primary"}
-                    title={"升级企业版"}
-                />
+                {
+                    resourceList?.version===1 &&
+                    <Btn
+                        type={"primary"}
+                        title={"升级企业版"}
+                        onClick={upGradation}
+                    />
+                }
             </BreadCrumb>
             <div className="resources-content">
                 <div className='resources-info-version'>当前版本：{resourceList?.version===1?'免费版':'付费版'}</div>
@@ -198,13 +230,13 @@ const Resources = props => {
                             onClick: () => onSelectRow(record)
                         })}
                         columns={columns}
-                        dataSource={diskList?.diskList}
-                        rowKey={record=>record.pipelineId}
+                        dataSource={diskList}
+                        rowKey={r=>r.path}
                         locale={{emptyText: <ListEmpty title={"暂无缓存信息"}/>}}
                     />
                 </div>
                 {
-                    diskList?.diskList && diskList?.diskList.length > 0 &&
+                    diskList?.length > 0 &&
                     <Btn title={"清理缓存"} onClick={clean}/>
                 }
             </div>

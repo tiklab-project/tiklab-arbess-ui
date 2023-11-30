@@ -135,29 +135,40 @@ const TaskAdd = props =>{
     }
 
     /**
-     * 初始化
+     * 添加任务时的默认字段
      * @param type
      */
     const taskObj = type => {
-        if(type==='artifact_maven' || type==='artifact_docker'){
-            return {artifactType:'nexus'}
+        switch (type) {
+            case 'artifact_maven':
+            case 'artifact_docker':
+                return {
+                    artifactType:'nexus',transitive:true
+                }
+            case 'pull_maven':
+            case 'pull_docker':
+                return {
+                    pullType:'nexus',transitive:true
+                }
+            case 'spotbugs':
+                return {
+                    openAssert:false,
+                    openDebug:false,
+                    scanPath:"${DEFAULT_CODE_ADDRESS}",
+                    scanGrade:"default",
+                    errGrade:"default",
+                }
+            case 'maventest':
+                return {
+                    address:"${DEFAULT_CODE_ADDRESS}"
+                }
+            case 'liunx':
+                return {
+                    authType:1
+                }
+            default:
+                return {}
         }
-        else if(type==='pull_maven' || type==='pull_docker'){
-            return {pullType:'nexus',transitive:true}
-        }
-        else if(type==='spotbugs'){
-            return {
-                openAssert:false,
-                openDebug:false,
-                scanPath:"${DEFAULT_CODE_ADDRESS}",
-                scanGrade:"default",
-                errGrade:"default",
-            }
-        }
-        else if(type==='liunx'){
-            return {authType:1}
-        }
-        return {}
     }
 
     /**
@@ -206,7 +217,7 @@ const TaskAdd = props =>{
             className="mf task-add"
         >
             <div className="task-add-up">
-                <div className="wrapper-head-title"> 选择任务组</div>
+                <div className="wrapper-head-title">选择任务组</div>
                 <Btn onClick={()=>setNewStageDrawer(false)} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-add-bottom">

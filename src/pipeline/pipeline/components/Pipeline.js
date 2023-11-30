@@ -1,12 +1,14 @@
 import React,{useEffect,useState} from "react";
-import {Input} from "antd";
-import {PlusOutlined,SearchOutlined} from "@ant-design/icons";
+import {Input,Select,Space} from "antd";
+import {CaretDownOutlined, PlusOutlined, SearchOutlined} from "@ant-design/icons";
 import PipelineTable from "./PipelineTable";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
 import Tabs from "../../../common/component/tabs/Tabs";
 import {debounce} from "../../../common/utils/Client";
 import pipelineStore from "../store/PipelineStore";
+import envStore from "../../../setting/env/store/EnvStore";
+import groupingStore from "../../../setting/grouping/store/GroupingStore";
 import "./Pipeline.scss";
 
 /**
@@ -17,7 +19,9 @@ import "./Pipeline.scss";
  */
 const Pipeline = props =>{
 
-    const {findUserPipelinePage} = pipelineStore
+    const {findUserPipelinePage} = pipelineStore;
+    const {findEnvList} = envStore;
+    const {findGroupList} = groupingStore;
 
     // 流水线分类
     const [listType,setListType] = useState('all')
@@ -36,13 +40,40 @@ const Pipeline = props =>{
     // 请求数据
     const [pipelineParam,setPipelineParam] = useState({
         pageParam
-    })
+    });
 
     // 流水线列表
-    const [pipelineListPage,setPipelineListPage] = useState([])
+    const [pipelineListPage,setPipelineListPage] = useState([]);
 
     // 流水线分页
-    const [pipPage,setPipPage] = useState({})
+    const [pipPage,setPipPage] = useState({});
+
+    // 环境管理列表
+    const [envList,setEnvList] = useState([]);
+
+    // 分组管理列表
+    const [groupList,setGroupList] = useState([]);
+
+    useEffect(()=>{
+        // 获取环境和分组管理
+        getEnvOrGroup()
+    },[])
+
+    /**
+     * 获取环境和分组管理
+     */
+    const getEnvOrGroup = () => {
+        findEnvList().then(res=>{
+            if(res.code===0){
+                setEnvList(res.data || [])
+            }
+        })
+        findGroupList().then(res=>{
+            if(res.code===0){
+                setGroupList(res.data || [])
+            }
+        })
+    }
 
     useEffect(()=>{
         // 初始化获取流水线
@@ -114,6 +145,26 @@ const Pipeline = props =>{
     }
 
     /**
+     * 筛选
+     * @param value
+     * @param type
+     */
+    const screen = (value,type) => {
+        if(value==='all'){
+            delete pipelineParam[type]
+            setPipelineParam({
+                ...pipelineParam,
+            })
+        }else {
+            setPipelineParam({
+                ...pipelineParam,
+                [type]:value,
+                pageParam
+            })
+        }
+    }
+
+    /**
      * 操作更新流水线状态
      */
     const changFresh = () => {
@@ -141,7 +192,41 @@ const Pipeline = props =>{
                         {id:'all', title:"所有流水线"},
                         {id:'follow', title:"我收藏的"}
                     ]} onClick={clickType}/>
-                    <div className="pipeline-type-input">
+                    <Space>
+                        <Select
+                            showSearch
+                            style={{width:150}}
+                            placeholder={"分组管理"}
+                            suffixIcon={<CaretDownOutlined />}
+                            filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                            onChange={value=>screen(value,"groupId")}
+                        >
+                            <Select.Option value={'all'} key={'all'}>全部</Select.Option>
+                            {
+                                groupList && groupList.map(item=>(
+                                    <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
+                                ))
+                            }
+                        </Select>
+                        <Select
+                            showSearch
+                            style={{width:150}}
+                            placeholder={"环境管理"}
+                            suffixIcon={<CaretDownOutlined />}
+                            filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                            onChange={value=>screen(value,"envId")}
+                        >
+                            <Select.Option value={'all'} key={'all'}>全部</Select.Option>
+                            {
+                                envList && envList.map(item=>(
+                                    <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
+                                ))
+                            }
+                        </Select>
                         <Input
                             allowClear
                             placeholder="流水线名称"
@@ -150,7 +235,7 @@ const Pipeline = props =>{
                             prefix={<SearchOutlined />}
                             style={{ width: 200 }}
                         />
-                    </div>
+                    </Space>
                 </div>
                 <PipelineTable
                     {...props}

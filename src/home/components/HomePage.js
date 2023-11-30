@@ -154,7 +154,7 @@ const HomePage = props =>{
                 <div className="home-agent">
                     <div className="homePage-guide-title">
                         <AimOutlined className="guide-icon"/>
-                        <span className="guide-title">我的代办</span>
+                        <span className="guide-title">我的待办</span>
                     </div>
                     <div className="home-agent-content">
                         <AgentList agentList={[]}/>

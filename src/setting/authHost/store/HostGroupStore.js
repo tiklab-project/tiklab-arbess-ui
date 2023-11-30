@@ -10,9 +10,7 @@ class HostGroupStore {
      */
     @action
     findHostGroupList = async () =>{
-        const param = new FormData();
-        param.append("userId",getUser().userId);
-        const res = await Axios.post("/authHostGroup/findHostGroupList",param)
+        const res = await Axios.post("/authHostGroup/findHostGroupList",{})
         return res
     }
 
@@ -41,6 +39,12 @@ class HostGroupStore {
             ...value
         }
         const res = await Axios.post("/authHostGroup/updateAuthHostGroup",params)
+        if(res.code===0){
+            message.info(`修改成功`)
+        }
+        else {
+            message.info(`修改失败`)
+        }
         return res
     }
 
@@ -53,6 +57,12 @@ class HostGroupStore {
         const params = new FormData();
         params.append("groupId",value)
         const res = await Axios.post("/authHostGroup/deleteAuthHostGroup",params)
+        if(res.code===0){
+            message.info(`删除成功`)
+        }
+        else {
+            message.info(`删除失败`)
+        }
         return res
     }
 

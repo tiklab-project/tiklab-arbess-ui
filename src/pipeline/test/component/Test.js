@@ -1,12 +1,15 @@
 import React,{useState,useEffect} from "react";
-import {Table,message} from "antd";
+import {Table,message,Tag} from "antd";
 import {applyJump} from "tiklab-core-ui"
-import testOnStore from "../store/TestOnStore";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";
 import {deleteSuccessReturnCurrenPage} from "../../../common/utils/Client";
 import ListAction from "../../../common/component/list/ListAction";
+import Tabs from "../../../common/component/tabs/Tabs";
+import TestMavenDetail from "./TestMavenDetail";
+import testOnStore from "../store/TestOnStore";
+import mavenTestStore from "../store/MavenTestStore";
 import "./Test.scss";
 
 /**
@@ -19,12 +22,14 @@ const Test = props => {
 
     const {match:{params}} = props
 
-    const {findAllRelevance,deleteRelevance} = testOnStore
+    const {findAllRelevance,deleteRelevance} = testOnStore;
+    const {findMavenTestPage,deleteMavenTest} = mavenTestStore;
 
-    const [pageParam] = useState({
-        pageSize:15,
-        currentPage: 1,
-    })
+    // teston:自动化测试；unit:单元测试
+    const [activeTab,setActiveTab] = useState("mavenTest");
+
+    // 加载状态
+    const [isLoading,setIsLoading] = useState(true)
 
     // 测试列表
     const [testList,setTestList] = useState([])
@@ -35,38 +40,56 @@ const Test = props => {
         totalRecord:1
     })
 
+    const pageParam= {
+        pageSize:15,
+        currentPage: 1,
+    }
+
     // 请求数据
     const [param,setParam] = useState({
         pageParam
     })
 
-    // 加载状态
-    const [isLoading,setIsLoading] = useState(true)
-
+    const [mavenTestObj,setMavenTestObj] = useState(null);
 
     useEffect(()=>{
         // 获取测试列表
-        findAllRelevance({
-            pipelineId:params.id,
-            ...param
-        }).then(r=>{
-            if(r.code===0){
-                setTestList(r.data?.dataList || [])
+        findTestList().then(Res=>{
+            if(Res.code===0){
+                setTestList(Res.data?.dataList || [])
                 setTestPage({
-                    totalPage: r.data?.totalPage || 1,
-                    totalRecord: r.data?.totalRecord || 1,
+                    totalPage: Res.data?.totalPage || 1,
+                    totalRecord: Res.data?.totalRecord || 1,
                 })
             }
-
             setIsLoading(false)
         })
     },[param])
 
     /**
+     * 获取测试列表
+     */
+    const findTestList = async () => {
+        let Res;
+        if(activeTab === "teston"){
+            Res = await findAllRelevance({
+                pipelineId:params.id,
+                ...param
+            })
+        }else {
+            Res = findMavenTestPage({
+                pipelineId:params.id,
+                ...param
+            })
+        }
+        return Res
+    }
+
+    /**
      * 查看测试详情
      * @param item
      */
-    const goTestDetail = item => {
+    const goTestonDetail = item => {
         if(item.status===2){
             return message.info("当前测试报告详情已删除")
         }
@@ -75,11 +98,32 @@ const Test = props => {
     }
 
     /**
-     * 删除测试
+     * 删除自动化测试
      * @param item
      */
-    const del = (item) => {
+    const delTeston = (item) => {
         deleteRelevance(item.relevanceId).then(res=>{
+            if(res.code===0){
+                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,15,param.pageParam.currentPage)
+                changPage(current)
+            }
+        })
+    }
+
+    /**
+     * 查看maven测试详情
+     */
+    const goMavenTestDetail = (record) => {
+        setMavenTestObj(record)
+    }
+
+
+    /**
+     * 删除maven测试
+     * @param record
+     */
+    const delMavenTest = (record) => {
+        deleteMavenTest(record.id).then(res=>{
             if(res.code===0){
                 const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,15,param.pageParam.currentPage)
                 changPage(current)
@@ -100,7 +144,19 @@ const Test = props => {
         })
     }
 
-    const columns = [
+    /**
+     * 切换tab
+     * @param item
+     */
+    const changActiveTab = item => {
+        setIsLoading(true);
+        setActiveTab(item.id)
+        setParam({
+            pageParam
+        })
+    }
+
+    const testonColumns = [
         {
             title: "名称",
             dataIndex: ["object","testPlanName"],
@@ -111,9 +167,9 @@ const Test = props => {
                 return (
                     <span
                         className="test-item-name"
-                        onClick={()=>goTestDetail(record)}
+                        onClick={()=>goTestonDetail(record)}
                     >
-                        # {text}
+                        # {text || '--'}
                     </span>
                 )
             }
@@ -122,7 +178,7 @@ const Test = props => {
             title: "用例数",
             dataIndex: ["object","total"],
             key: "total",
-            width:"12%",
+            width:"10%",
             ellipsis:true,
             render:text=>text || '0'
         },
@@ -130,7 +186,7 @@ const Test = props => {
             title: "成功数",
             dataIndex: ["object","passNum"],
             key: "passNum",
-            width:"12%",
+            width:"10%",
             ellipsis:true,
             render:text=>text || '0'
         },
@@ -138,23 +194,31 @@ const Test = props => {
             title: "失败数",
             dataIndex: ["object","failNum"],
             key: "failNum",
-            width:"12%",
+            width:"10%",
             ellipsis:true,
             render:text=>text || '0'
         },
         {
-            title: "成功率",
+            title: "通过率",
             dataIndex: ["object","passRate"],
             key: "passRate",
-            width:"14%",
+            width:"10%",
             ellipsis:true,
-            render:text=>text || '0.00%'
+            render:text=> <Tag color="green">{text || "0.00%"}</Tag>
         },
         {
-            title: "时间",
+            title: "失误率",
+            dataIndex: ["object","errorRate"],
+            key: "errorRate",
+            width:"10%",
+            ellipsis:true,
+            render:text=> <Tag color="red">{text || "0.00%"}</Tag>
+        },
+        {
+            title: "执行时间",
             dataIndex: "time",
             key: "time",
-            width:"15%",
+            width:"20%",
             ellipsis:true,
             render:text=>text || '--'
         },
@@ -162,28 +226,133 @@ const Test = props => {
             title: "操作",
             dataIndex: "action",
             key:"action",
-            width:"10%",
+            width:"5%",
             ellipsis:true,
             render:(_,record)=> (
                 <ListAction
-                    del={()=>del(record)}
+                    del={()=>delTeston(record)}
                 />
             )
         }
     ]
 
+    const mavenTestColumns = [
+        {
+            title: "名称",
+            dataIndex: "id",
+            key: "id",
+            width:"25%",
+            ellipsis:true,
+            render:(text,record) =>{
+                return (
+                    <span
+                        className="test-item-name"
+                        onClick={()=>goMavenTestDetail(record)}
+                    >
+                        # {text}
+                    </span>
+                )
+            }
+        },
+        {
+            title: "状态",
+            dataIndex: "testState",
+            key: "testState",
+            width:"10%",
+            ellipsis:true,
+            render:text=>(
+                text==='success'?
+                <Tag color="green">成功</Tag>
+                :
+                <Tag color="red">失败</Tag>
+            )
+        },
+        {
+            title: "总用例数",
+            dataIndex: "allNumber",
+            key: "allNumber",
+            width:"10%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "错误用例数",
+            dataIndex: "errorNumber",
+            key: "errorNumber",
+            width:"10%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "失败用例数",
+            dataIndex: "failNumber",
+            key: "failNumber",
+            width:"10%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "跳过用例数",
+            dataIndex: "skipNumber",
+            key: "skipNumber",
+            width:"10%",
+            ellipsis:true,
+            render:text=>text || '0'
+        },
+        {
+            title: "执行时间",
+            dataIndex: "createTime",
+            key: "createTime",
+            width:"20%",
+            ellipsis:true,
+        },
+        {
+            title: "操作",
+            dataIndex: "action",
+            key:"action",
+            width:"5%",
+            ellipsis:true,
+            render:(_,record)=> (
+                <ListAction
+                    del={()=>delMavenTest(record)}
+                />
+            )
+        }
+    ]
+
+    if(mavenTestObj){
+        return (
+            <TestMavenDetail
+                mavenTestObj={mavenTestObj}
+                setMavenTestObj={setMavenTestObj}
+            />
+        )
+    }
 
     return (
         <div className='test'>
             <div className="mf-home-limited mf">
                 <BreadCrumb firstItem={"测试报告"}/>
+                <Tabs
+                    tabLis={[
+                        {id:"mavenTest",title:"单元测试"},
+                        {id:"teston",title:"自动化测试"},
+                    ]}
+                    type={activeTab}
+                    onClick={changActiveTab}
+                />
                 <div className='test-table'>
                     <Table
                         bordered={false}
                         loading={isLoading}
-                        columns={columns}
+                        columns={activeTab==="teston"?testonColumns:mavenTestColumns}
                         dataSource={testList}
-                        rowKey={record=>record.relevanceId}
+                        rowKey={record=>{
+                            if(record.relevanceId){
+                                return record.relevanceId
+                            }
+                            return record.id
+                        }}
                         pagination={false}
                         locale={{emptyText: <ListEmpty title={"暂无测试报告"}/>}}
                     />

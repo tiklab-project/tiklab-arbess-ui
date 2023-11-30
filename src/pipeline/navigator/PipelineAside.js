@@ -27,7 +27,7 @@ const PipelineAside= (props)=>{
 
     const {match,systemRoleStore}=props
 
-    const {findUserPipeline,findOnePipeline,updateOpen,pipelineList,pipeline,setPipeline} = pipelineStore
+    const {findOnePipeline,updateOpen,findRecentlyPipeline,pipeline} = pipelineStore
 
     const {getInitProjectPermissions} = systemRoleStore
 
@@ -35,14 +35,9 @@ const PipelineAside= (props)=>{
     const userId = getUser().userId
 
     // 加载状态
-    const [isAside,setIsAside] = useState(true)
+    const [isAside,setIsAside] = useState(true);
 
-    useEffect(()=>{
-        // 获取所有流水线
-        findUserPipeline().then()
-        // 组件销毁清空流水线信息
-        return ()=>{setPipeline("")}
-    },[])
+    const [recentlyPipeline,setRecentlyPipeline] = useState([])
 
     useEffect(()=>{
         if(id){
@@ -59,6 +54,12 @@ const PipelineAside= (props)=>{
             })
             // 当前流水线打开
             updateOpen(id).then()
+            // 切换流水线
+            findRecentlyPipeline(id).then(res=>{
+                if(res.code===0){
+                    setRecentlyPipeline(res.data)
+                }
+            })
         }
     },[id])
 
@@ -103,8 +104,8 @@ const PipelineAside= (props)=>{
             <Aside
                 {...props}
                 pipeline={pipeline}
-                pipelineList={pipelineList}
                 firstRouters={firstRouters}
+                recentlyPipeline={recentlyPipeline}
             />
         </Provider>
     )

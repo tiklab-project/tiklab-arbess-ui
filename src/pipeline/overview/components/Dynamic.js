@@ -66,6 +66,13 @@ const Dynamic = props =>{
                     [field] : value==="null"?{}:{pipelineId:[value]}
                 })
                 break
+            case "timestamp":
+                setParams({
+                    ...params,
+                    pageParam,
+                    [field] : value[0]===''? null:value
+                })
+                break
             default:
                 setParams({
                     ...params,
@@ -123,16 +130,6 @@ const Dynamic = props =>{
                                 }
                             </Select>
                         }
-                        {/*<Select*/}
-                        {/*    placeholder={"类型"}*/}
-                        {/*    style={{width:150}}*/}
-                        {/*    onChange={(value)=>changParams(value,"actionType")}*/}
-                        {/*>*/}
-                        {/*    <Select.Option key={"1"} value={null}>动态</Select.Option>*/}
-                        {/*    <Select.Option key={"2"} value={"LOG_PIPELINE"}>流水线动态</Select.Option>*/}
-                        {/*    <Select.Option key={"3"} value={"LOG_CONFIG"}>流水线配置动态</Select.Option>*/}
-                        {/*    <Select.Option key={"4"} value={"LOG_RUN"}>流水线运行动态</Select.Option>*/}
-                        {/*</Select>*/}
                         <Select
                             placeholder={"操作"}
                             style={{width:150}}
@@ -144,7 +141,7 @@ const Dynamic = props =>{
                             <Select.Option key={"5"} value={"RUN"}>运行</Select.Option>
                         </Select>
                         <RangePicker
-                            onChange={(value,e)=>changParams(e,"createTime")}
+                            onChange={(value,e)=>changParams(e,"timestamp")}
                             placeholder={["开始时间","结束时间"]}
                         />
                     </Space>

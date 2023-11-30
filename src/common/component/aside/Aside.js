@@ -11,7 +11,7 @@ import "./Aside.scss";
  */
 const Aside = props =>{
 
-    const {pipelineList,pipeline,route,location,match,firstRouters} = props
+    const {recentlyPipeline,pipeline,route,location,match,firstRouters} = props
 
     const path = location.pathname
     const [nav,setNav] = useState("")
@@ -48,33 +48,31 @@ const Aside = props =>{
                             <div className="pipeline-opt-title">切换流水线</div>
                             <div className="pipeline-opt-group">
                                 {
-                                    pipelineList && pipelineList.map((item,index)=>{
-                                        return index < 6 && pipeline?.id !== item.id &&
+                                    recentlyPipeline && recentlyPipeline.map(item=>{
+                                        return (
                                             <div onClick={()=>changePipeline(item)}
                                                  key={item.id}
-                                                 className={`pipeline-opt-item`}
+                                                 className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
                                             >
                                                 <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
                                                     {item.name.substring(0,1).toUpperCase()}
                                                 </span>
-                                                    <span className="pipeline-opt-name">
+                                                <span className="pipeline-opt-name">
                                                     {item.name}
                                                 </span>
                                             </div>
+                                        )
                                     })
                                 }
-                                {
-                                    pipelineList && pipelineList.length > 6 &&
-                                    <div className='pipeline-opt-item pipeline-opt-more'
-                                         onClick={()=>props.history.push('/index/pipeline')}
-                                    >更多</div>
-                                }
+                                <div className='pipeline-opt-item pipeline-opt-more'
+                                     onClick={()=>props.history.push('/index/pipeline')}
+                                >更多</div>
                             </div>
                         </div>
                     }
-                    overlayClassName={"normal-aside-dropdown"}
+                    overlayClassName="normal-aside-dropdown"
                 >
-                    <div className='normal-aside-opt' data-title-bottom={pipeline?.name}>
+                    <div className='normal-aside-opt' data-title-right={pipeline?.name}>
                         <div className="normal-aside-opt-icon">
                                 <span className={`dropdowns_icon mf-icon-${pipeline && pipeline.color}`}>
                                      {pipeline && pipeline.name.substring(0,1).toUpperCase()}

@@ -344,11 +344,16 @@ $line-color:#d9d9d9;
             .newStages-has:hover{
                 &:before,&:after{
                     content: "";
-                    width: 19px;
+                    width: 18px;
                     position: absolute;
                     top: 20px;
-                    left: 12px;
                     border-top: 1px solid var(--tiklab-blue);
+                }
+                &:after{
+                    left: 210px;
+                }
+                &:before{
+                    left: 13px;
                 }
                 .newStages-has-add{
                     cursor: pointer;

@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Space, Table} from "antd";
+import {PlusOutlined} from "@ant-design/icons";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import hostGroupStore from "../store/HostGroupStore";
 import Btn from "../../../common/component/btn/Btn";
@@ -8,7 +9,7 @@ import ListIcon from "../../../common/component/list/ListIcon";
 import HostGroupAdd from "./HostGroupAdd";
 import Profile from "../../../common/component/profile/Profile";
 import ListAction from "../../../common/component/list/ListAction";
-import "../../authCommon/Auth.scss";
+import "../../common/Common.scss";
 
 /**
  * 主机组
@@ -73,7 +74,7 @@ const HostGroup = (props) => {
             title:"名称",
             dataIndex:"groupName",
             key:"groupName",
-            width:"35%",
+            width:"30%",
             ellipsis:true,
             render:text => {
                 return  <span>
@@ -86,7 +87,7 @@ const HostGroup = (props) => {
             title:"主机数量",
             dataIndex:"detailsList.length",
             key:"detailsList.length",
-            width:"10%",
+            width:"15%",
             ellipsis:true,
             render:(_,record) => {
                 const {detailsList} = record
@@ -120,10 +121,12 @@ const HostGroup = (props) => {
             width:"9%",
             ellipsis:true,
             render:(_,record) => {
-                return  <ListAction
-                    edit={()=>editHostGroup(record)}
-                    del={()=>delHostGroup(record)}
-                />
+                return (
+                    <ListAction
+                        edit={()=>editHostGroup(record)}
+                        del={()=>delHostGroup(record)}
+                    />
+                )
             }
         }
     ]
@@ -135,6 +138,7 @@ const HostGroup = (props) => {
                     type={"primary"}
                     title={"添加主机组"}
                     onClick={addHostGroup}
+                    icon={<PlusOutlined/>}
                 />
             </BreadCrumb>
             <HostGroupAdd

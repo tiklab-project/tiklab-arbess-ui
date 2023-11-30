@@ -9,7 +9,7 @@ import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListAction from "../../../common/component/list/ListAction";
 import {TaskTitleIcon} from "../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
 import ListIcon from "../../../common/component/list/ListIcon";
-import "../../authCommon/Auth.scss";
+import "../../common/Common.scss";
 
 /**
  * 工具配置
@@ -113,20 +113,35 @@ const Tool = props =>{
             width:"10%",
             ellipsis:true,
             render:(text,record)=>{
-                return  <ListAction
-                            edit={()=>editEnvi(record)}
-                            del={()=>delEnvi(record)}
-                        />
+                return (
+                    <ListAction
+                        edit={()=>editEnvi(record)}
+                        del={()=>delEnvi(record)}
+                    />
+                )
             }
         }
     ]
 
     const columns = [
         {
+            title:"名称",
+            dataIndex:"scmName",
+            key:"scmName",
+            width:"35%",
+            ellipsis:true,
+            render:text => {
+                return  <span>
+                            <ListIcon text={text}/>
+                            <span>{text}</span>
+                        </span>
+            }
+        },
+        {
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
-            width:"32%",
+            width:"30%",
             ellipsis:true,
             render:text =>{
                 switch (text) {
@@ -136,13 +151,6 @@ const Tool = props =>{
                     case 22: return <TaskTitleIcon type='nodejs'/>
                 }
             }
-        },
-        {
-            title:"名称",
-            dataIndex:"scmName",
-            key:"scmName",
-            width:"33%",
-            ellipsis:true,
         },
         {
             title:"地址",
@@ -160,15 +168,14 @@ const Tool = props =>{
                 <Btn
                     onClick={addEnvi}
                     type={"primary"}
-                    title={"添加配置"}
+                    title={"添加工具"}
                     icon={<PlusOutlined/>}
                 />
             }
         </BreadCrumb>
         <div className="auth-content">
-
             <Table
-                columns={version!=='ce'?columns:columnsCe}
+                columns={version==='ce'?columnsCe:columns}
                 dataSource={enviData}
                 rowKey={record=>record.scmId}
                 pagination={false}

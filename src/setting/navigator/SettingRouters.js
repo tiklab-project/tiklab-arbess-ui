@@ -71,11 +71,11 @@ export const templateRouter = [
             },
             {
                 id:"/index/system/todoTemp",
-                title:"代办模板 ",
+                title:"待办模板 ",
             },
             {
                 id:"/index/system/todoType",
-                title:"代办类型 ",
+                title:"待办类型 ",
             },
             {
                 id:"/index/system/logTemplate",
