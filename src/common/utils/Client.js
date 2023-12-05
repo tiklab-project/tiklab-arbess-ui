@@ -48,7 +48,7 @@ export const autoHeight = () =>{
  */
 export const interceptUrl = (url,data) =>{
     if(data){
-        return url.split('/index/pipeline/'+data)
+        return url.split('/pipeline/'+data)
     }
     else {
         return url.split('/')

@@ -24,7 +24,7 @@
             .test-overview-info-item{
                 padding: 8px;
                 border-radius: 4px;
-                min-width: 150px;
+                flex: 1;
                 border: 1px solid var(--mf-border-color);
                 &:not(:last-child){
                     margin-right: 15px;

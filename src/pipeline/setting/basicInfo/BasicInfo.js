@@ -1,5 +1,5 @@
-    import React,{useState} from "react";
-import {Input, Spin} from "antd";
+import React,{useState} from "react";
+import {Input, Spin,Row,Col} from "antd";
 import {
     DeleteOutlined,
     DownOutlined,
@@ -52,7 +52,7 @@ const BasicInfo = props =>{
         setIsLoading(true)
         deletePipeline(pipeline.id).then(()=>{
             onCancel()
-            props.history.push("/index/pipeline")
+            props.history.push("/pipeline")
         })
     }
 
@@ -154,50 +154,56 @@ const BasicInfo = props =>{
     }
 
     return(
-        <div className="pipelineReDel mf">
-            <div className="pipelineReDel-up">
-                <BreadCrumb firstItem={"流水线信息"}/>
-            </div>
-            <div className="pipelineReDel-content">
-                <div className="pipelineReDel-ul">
-                    {
-                        lis.map(item=> lisItem(item))
-                    }
-                </div>
-            </div>
-            <Modals
-                visible={delVisible}
-                onCancel={onCancel}
-                onOk={delPipeline}
-                title={"删除流水线"}
-                footer={<></>}
+        <Row className="pipelineReDel">
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "18", offset: "3" }}
             >
-                <Spin spinning={isLoading} tip="删除中...">
-                    <div className="pipelineReDel-modal">
-                        <div className="pipelineReDel-modal-warn">危险：流水线删除无法恢复！请慎重操作！</div>
-                        <div className="pipelineReDel-modal-warn">
-                            <div>该操作将永久删除流水线<span className="warn-pipeline"> {pipeline?.name} </span>的相关数据，包括（配置、历史、制品）等。</div>
-                            <div className="warn-continue">为防止意外，确认继续操作请输入以下内容：</div>
-                            <div className="warn-pipeline-title">{pipeline?.name}</div>
-                        </div>
-                        <div className="pipelineReDel-modal-input">
-                            <Input
-                                className={`${delError?"inputs-error":""}`}
-                                placeholder="请输入提示内容以确认继续操作"
-                                onChange={e=>setDelValue(e.target.value)}
-                            />
-                        </div>
-                        <div className="pipelineReDel-modal-error">
-                            {delError}
-                        </div>
-                        <div className="pipelineReDel-modal-btn">
-                            <Btn onClick={onCancel} title={"取消"} isMar={true}/>
-                            <Btn onClick={delPipeline} title={"确认删除"} type={"dangerous"}/>
+                <div className="mf-home-limited mf">
+                    <div className="pipelineReDel-up">
+                        <BreadCrumb firstItem={"流水线信息"}/>
+                    </div>
+                    <div className="pipelineReDel-content">
+                        <div className="pipelineReDel-ul">
+                            {
+                                lis.map(item=> lisItem(item))
+                            }
                         </div>
                     </div>
-                </Spin>
-            </Modals>
-        </div>
+                </div>
+                <Modals
+                    visible={delVisible}
+                    onCancel={onCancel}
+                    title={"删除流水线"}
+                    footer={<></>}
+                >
+                    <Spin spinning={isLoading} tip="删除中...">
+                        <div className="pipelineReDel-modal">
+                            <div className="pipelineReDel-modal-warn">危险：流水线删除无法恢复！请慎重操作！</div>
+                            <div className="pipelineReDel-modal-warn">
+                                <div>该操作将永久删除流水线<span className="warn-pipeline"> {pipeline?.name} </span>的相关数据，包括（配置、历史、制品）等。</div>
+                                <div className="warn-continue">为防止意外，确认继续操作请输入以下内容：</div>
+                                <div className="warn-pipeline-title">{pipeline?.name}</div>
+                            </div>
+                            <div className="pipelineReDel-modal-input">
+                                <Input
+                                    className={`${delError?"inputs-error":""}`}
+                                    placeholder="请输入提示内容以确认继续操作"
+                                    onChange={e=>setDelValue(e.target.value)}
+                                />
+                            </div>
+                            <div className="pipelineReDel-modal-error">
+                                {delError}
+                            </div>
+                            <div className="pipelineReDel-modal-btn">
+                                <Btn onClick={onCancel} title={"取消"} isMar={true}/>
+                                <Btn onClick={delPipeline} title={"确认删除"} type={"dangerous"}/>
+                            </div>
+                        </div>
+                    </Spin>
+                </Modals>
+            </Col>
+        </Row>
     )
 }
 

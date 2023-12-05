@@ -4,8 +4,8 @@ import historyStore from "../store/HistoryStore";
 
 /**
  * 历史运行实例
- * @param {*} props 
- * @returns 
+ * @param {*} props
+ * @returns
  */
 const HistoryInstance = props => {
 
@@ -21,12 +21,12 @@ const HistoryInstance = props => {
         findOneInstance(params.instanceId).then(res=>{
             if(res.code===0){
                 if(res.data) return  setHistoryItem(res.data)
-                return props.history.push(`/index/404`)
+                return props.history.push(`/404`)
             }
         })
     },[])
 
-    const back = () => props.history.push(`/index/pipeline/${params.id}/structure`)
+    const back = () => props.history.push(`/pipeline/${params.id}/history`)
 
     return (
         <HistoryDetail

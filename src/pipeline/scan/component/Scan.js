@@ -1,14 +1,14 @@
 import React,{useState,useEffect} from "react";
-import {Table} from "antd";
+import {Table,Row,Col} from "antd";
 import {observer} from "mobx-react";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Page from "../../../common/component/page/Page";
 import ListEmpty from "../../../common/component/list/ListEmpty";
+import ListAction from "../../../common/component/list/ListAction";
+import {deleteSuccessReturnCurrenPage} from "../../../common/utils/Client";
 import scanStore from "../store/ScanStore";
 import ScanDetails from "./ScanDetails";
-import ListAction from "../../../common/component/list/ListAction";
 import "./Scan.scss";
-import {deleteSuccessReturnCurrenPage} from "../../../common/utils/Client";
 
 const Scan = (props) => {
 
@@ -108,22 +108,24 @@ const Scan = (props) => {
             title: "Bug数量",
             dataIndex: "totalBugs",
             key: "totalBugs",
-            width:"12%",
+            width:"13%",
             ellipsis:true,
-            render:text=>text || '0'
+            render:text=>(
+                <div className="scan-data-height">{text || '0'}</div>
+            )
         },
         {
             title: "一级问题",
             dataIndex: "priorityOne",
             key: "priorityOne",
-            width:"12%",
+            width:"13%",
             ellipsis:true,
         },
         {
             title: "二级问题",
             dataIndex: "priorityTwo",
             key: "priorityTwo",
-            width:"12%",
+            width:"13%",
             ellipsis:true,
             render:text=>text || '0'
         },
@@ -131,7 +133,7 @@ const Scan = (props) => {
             title: "三级问题",
             dataIndex: "priorityThree",
             key: "priorityThree",
-            width:"12%",
+            width:"13%",
             ellipsis:true,
             render:text=>text || '0'
         },
@@ -147,7 +149,7 @@ const Scan = (props) => {
             title: "操作",
             dataIndex: "action",
             key:"action",
-            width:"10%",
+            width:"6%",
             ellipsis:true,
             render:(_,record)=> (
                 <ListAction
@@ -167,27 +169,32 @@ const Scan = (props) => {
     }
 
     return (
-        <div className="scan">
-            <div className="mf-home-limited mf">
-                <BreadCrumb firstItem={"代码扫描"}/>
-                <div className="scan-table">
-                    <Table
-                        bordered={false}
-                        loading={isLoading}
-                        columns={columns}
-                        dataSource={scanList}
-                        rowKey={record=>record.id}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={"暂无代码扫描"}/>}}
-                    />
-                    <Page
-                        currentPage={scanParam.pageParam.currentPage}
-                        changPage={changPage}
-                        page={scanPage}
-                    />
+        <Row className="scan">
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <div className="mf-home-limited mf">
+                    <BreadCrumb firstItem={"代码扫描"}/>
+                    <div className="scan-table">
+                        <Table
+                            bordered={false}
+                            loading={isLoading}
+                            columns={columns}
+                            dataSource={scanList}
+                            rowKey={record=>record.id}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={"暂无代码扫描"}/>}}
+                        />
+                        <Page
+                            currentPage={scanParam.pageParam.currentPage}
+                            changPage={changPage}
+                            page={scanPage}
+                        />
+                    </div>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

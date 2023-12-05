@@ -121,7 +121,7 @@ const PipelineAddInfo = props =>{
                         pipeline.env=params.env
                         pipeline.group=params.group
                         setIsLoading(false)
-                        props.history.push(`/index/pipeline/${pipeline.id}/survey`)
+                        props.history.push(`/pipeline/${pipeline.id}/survey`)
                     }
                 })
                 return
@@ -282,10 +282,10 @@ const PipelineAddInfo = props =>{
                     }}
                 >
                     <Form.Item label={"流水线名称"} name="name" rules={rules}>
-                        <Input allowClear style={{width:612}}/>
+                        <Input allowClear />
                     </Form.Item>
                     <Form.Item label={"流水线分组"} name="group">
-                        <Select style={{width:612}}>
+                        <Select >
                             {
                                 groupList && groupList.map(item=>(
                                     <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
@@ -294,7 +294,7 @@ const PipelineAddInfo = props =>{
                         </Select>
                     </Form.Item>
                     <Form.Item label={"流水线环境"} name="env">
-                        <Select style={{width:612}}>
+                        <Select>
                             {
                                 envList && envList.map(item=>(
                                     <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
@@ -400,7 +400,7 @@ const PipelineAddInfo = props =>{
                     </div>
                 </div>
             }
-            <Btn onClick={()=>props.history.push("/index/pipeline")}
+            <Btn onClick={()=>props.history.push("/pipeline")}
                  title={"取消"}
                  isMar={true}
             />

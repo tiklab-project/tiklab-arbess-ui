@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Table,message,Tag} from "antd";
+import {Table,message,Tag,Row,Col} from "antd";
 import {applyJump} from "tiklab-core-ui"
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -330,40 +330,46 @@ const Test = props => {
     }
 
     return (
-        <div className='test'>
-            <div className="mf-home-limited mf">
-                <BreadCrumb firstItem={"测试报告"}/>
-                <Tabs
-                    tabLis={[
-                        {id:"mavenTest",title:"单元测试"},
-                        {id:"teston",title:"自动化测试"},
-                    ]}
-                    type={activeTab}
-                    onClick={changActiveTab}
-                />
-                <div className='test-table'>
-                    <Table
-                        bordered={false}
-                        loading={isLoading}
-                        columns={activeTab==="teston"?testonColumns:mavenTestColumns}
-                        dataSource={testList}
-                        rowKey={record=>{
-                            if(record.relevanceId){
-                                return record.relevanceId
-                            }
-                            return record.id
-                        }}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={"暂无测试报告"}/>}}
+        <Row className='test'>
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "20", offset: "2" }}
+                xxl={{ span: "18", offset: "3" }}
+            >
+                <div className="mf-home-limited mf">
+                    <BreadCrumb firstItem={"测试报告"}/>
+                    <Tabs
+                        tabLis={[
+                            {id:"mavenTest",title:"单元测试"},
+                            {id:"teston",title:"自动化测试"},
+                        ]}
+                        type={activeTab}
+                        onClick={changActiveTab}
                     />
-                    <Page
-                        currentPage={param.pageParam.currentPage}
-                        changPage={changPage}
-                        page={testPage}
-                    />
+                    <div className='test-table'>
+                        <Table
+                            bordered={false}
+                            loading={isLoading}
+                            columns={activeTab==="teston"?testonColumns:mavenTestColumns}
+                            dataSource={testList}
+                            rowKey={record=>{
+                                if(record.relevanceId){
+                                    return record.relevanceId
+                                }
+                                return record.id
+                            }}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={"暂无测试报告"}/>}}
+                        />
+                        <Page
+                            currentPage={param.pageParam.currentPage}
+                            changPage={changPage}
+                            page={testPage}
+                        />
+                    </div>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

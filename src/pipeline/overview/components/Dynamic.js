@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import {DatePicker,Select,Space} from "antd";
+import {DatePicker,Select,Space,Row,Col} from "antd";
 import {observer} from "mobx-react";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -30,7 +30,7 @@ const Dynamic = props =>{
 
     // 获取近期动态请求数据
     const [params,setParams] = useState(
-        route.path === '/index/dyna' ?
+        route.path === '/dyna' ?
             {
                 pageParam,
                 content:{}
@@ -43,7 +43,7 @@ const Dynamic = props =>{
     )
 
     useEffect(()=>{
-        if(route.path==='/index/dyna'){
+        if(route.path==='/dyna'){
             findUserPipeline().then()
         }
     },[])
@@ -97,66 +97,71 @@ const Dynamic = props =>{
     }
 
     const goBack = () =>{
-        if(route.path === '/index/dyna'){
-            props.history.push('/index/home')
+        if(route.path === '/dyna'){
+            props.history.push('/home')
             return
         }
-        props.history.push(`/index/pipeline/${match.params.id}/survey`)
+        props.history.push(`/pipeline/${match.params.id}/survey`)
     }
 
     return(
-        <div className="dyna" style={{height:"100%",width:"100%",overflow:"auto"}}>
-            <div className="dyna-content mf-home-limited">
-                <BreadCrumb firstItem={"动态"} onClick={goBack}/>
-                <div className="dyna-screen" style={{padding:"15px 0"}}>
-                    <Space>
-                        {
-                            route.path==='/index/dyna' &&
+        <Row className="dyna" style={{height:"100%",width:"100%",overflow:"auto"}}>
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <div className="mf-home-limited">
+                    <BreadCrumb firstItem={"动态"} onClick={goBack}/>
+                    <div className="dyna-screen" style={{padding:"15px 0"}}>
+                        <Space>
+                            {
+                                route.path==='/dyna' &&
+                                <Select
+                                    showSearch
+                                    placeholder={"流水线"}
+                                    style={{width:150}}
+                                    onChange={(value)=>changParams(value,"content")}
+                                    filterOption={(input, option) =>
+                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    }
+                                    notFoundContent={<ListEmpty/>}
+                                >
+                                    <Select.Option key={"1"} value={"null"}>流水线</Select.Option>
+                                    {
+                                        pipelineList && pipelineList.map(item=>{
+                                            return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
+                                        })
+                                    }
+                                </Select>
+                            }
                             <Select
-                                showSearch
-                                placeholder={"流水线"}
+                                placeholder={"操作"}
                                 style={{width:150}}
-                                onChange={(value)=>changParams(value,"content")}
-                                filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                }
-                                notFoundContent={<ListEmpty/>}
+                                onChange={(value)=>changParams(value,"module")}
                             >
-                                <Select.Option key={"1"} value={"null"}>流水线</Select.Option>
-                                {
-                                    pipelineList && pipelineList.map(item=>{
-                                        return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
-                                    })
-                                }
+                                <Select.Option key={"1"} value={null}>所有操作</Select.Option>
+                                <Select.Option key={"2"} value={"CREATE"}>创建</Select.Option>
+                                <Select.Option key={"3"} value={"UPDATE"}>更新</Select.Option>
+                                <Select.Option key={"5"} value={"RUN"}>运行</Select.Option>
                             </Select>
-                        }
-                        <Select
-                            placeholder={"操作"}
-                            style={{width:150}}
-                            onChange={(value)=>changParams(value,"module")}
-                        >
-                            <Select.Option key={"1"} value={null}>所有操作</Select.Option>
-                            <Select.Option key={"2"} value={"CREATE"}>创建</Select.Option>
-                            <Select.Option key={"3"} value={"UPDATE"}>更新</Select.Option>
-                            <Select.Option key={"5"} value={"RUN"}>运行</Select.Option>
-                        </Select>
-                        <RangePicker
-                            onChange={(value,e)=>changParams(e,"timestamp")}
-                            placeholder={["开始时间","结束时间"]}
-                        />
-                    </Space>
+                            <RangePicker
+                                onChange={(value,e)=>changParams(e,"timestamp")}
+                                placeholder={["开始时间","结束时间"]}
+                            />
+                        </Space>
+                    </div>
+                    <DynamicList
+                        {...props}
+                        dynamicList={dynamicList}
+                    />
+                    <Page
+                        currentPage={params.pageParam.currentPage}
+                        changPage={changPage}
+                        page={dynaPage}
+                    />
                 </div>
-                <DynamicList
-                    {...props}
-                    dynamicList={dynamicList}
-                />
-                <Page
-                    currentPage={params.pageParam.currentPage}
-                    changPage={changPage}
-                    page={dynaPage}
-                />
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

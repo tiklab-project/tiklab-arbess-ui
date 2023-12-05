@@ -192,12 +192,12 @@ const PipelineTable = props =>{
      * @param record
      * @returns {*}
      */
-    const goInstance = record => props.history.push(`/index/pipeline/${record.id}/structure/${record.instanceId}/post`)
+    const goInstance = record => props.history.push(`/pipeline/${record.id}/history/${record.instanceId}`)
 
     /**
      * 去概况页面
      */
-    const goPipelineTask = (text,record) => props.history.push(`/index/pipeline/${record.id}/structure`)
+    const goPipelineTask = (text,record) => props.history.push(`/pipeline/${record.id}/history`)
 
     const renTip = buildStatus => {
         switch (buildStatus) {
@@ -239,7 +239,7 @@ const PipelineTable = props =>{
             title: "最近构建信息",
             dataIndex: "lastBuildTime",
             key: "lastBuildTime",
-            width:"25%",
+            width:"30%",
             ellipsis:true,
             render:(text,record) =>{
                 const {buildStatus,number} = record
@@ -258,7 +258,7 @@ const PipelineTable = props =>{
             title: "负责人",
             dataIndex: ["user","nickname"],
             key: "user",
-            width:"20%",
+            width:"16%",
             ellipsis: true,
             render:(text,record) => {
                 return  <Space>
@@ -271,7 +271,7 @@ const PipelineTable = props =>{
             title: "可见范围",
             dataIndex: "power",
             key: "power",
-            width:"15%",
+            width:"12%",
             ellipsis: true,
             render:text => {
                 switch (text) {
@@ -292,7 +292,7 @@ const PipelineTable = props =>{
             title: "操作",
             dataIndex: "action",
             key:"action",
-            width:"10%",
+            width:"12%",
             ellipsis:true,
             render:(text,record)=>{
                 const {state,collect} = record

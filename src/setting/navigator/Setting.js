@@ -24,7 +24,7 @@ const Setting = props =>{
 
     const applicationRouters =  [
         {
-            id:"/index/system/role",
+            id:"/setting/role",
             title:"权限",
             icon: <SafetyCertificateOutlined />,
             purviewCode:"pipeline_permission",
@@ -35,24 +35,24 @@ const Setting = props =>{
             icon:<SoundOutlined/>,
             children: [
                 {
-                    id:"/index/system/notice",
+                    id:"/setting/notice",
                     title:"消息通知方案",
                     purviewCode:"message_setting",
                 },
                 {
-                    id:"/index/system/send",
+                    id:"/setting/send",
                     title: "消息发送方式",
                     purviewCode: "message_type",
                 },
             ]
         },
         {
-            id:"/index/system/grouping",
+            id:"/setting/grouping",
             title:"分组管理",
             icon:<DeploymentUnitOutlined />,
         },
         {
-            id:"/index/system/env",
+            id:"/setting/env",
             title:"环境管理",
             icon:<SaveOutlined />,
         },
@@ -62,42 +62,42 @@ const Setting = props =>{
             icon:<FileProtectOutlined />,
             children:[
                 {
-                    id:"/index/system/hostGroup",
+                    id:"/setting/hostGroup",
                     title:"主机组",
                 },
                 {
-                    id:"/index/system/host",
+                    id:"/setting/host",
                     title:"主机配置",
                     purviewCode:"resources_host",
                 },
             ]
         },
         {
-            id:"/index/system/auth",
+            id:"/setting/auth",
             title:"认证配置",
             icon:<SwitcherOutlined />,
             purviewCode:"pipeline_auth",
         },
         {
-            id:"/index/system/tool",
+            id:"/setting/tool",
             title:"工具配置",
             icon:<BuildOutlined />,
             purviewCode:"pipeline_env",
         },
         {
-            id:"/index/system/server",
+            id:"/setting/server",
             title:"服务集成",
             icon:<MacCommandOutlined />,
             purviewCode:"resources_server",
         },
         {
-            id:"/index/system/resources",
+            id:"/setting/resources",
             title:"资源监控",
             icon:<FileProtectOutlined />,
             purviewCode:"pipeline_resources",
         },
         {
-            id:"/index/system/plugin",
+            id:"/setting/plugin",
             title:"插件",
             icon:<MergeCellsOutlined />,
             purviewCode:"pipeline_plugin",
@@ -108,22 +108,32 @@ const Setting = props =>{
             icon:<LayoutOutlined />,
             children: [
                 {
-                    id:"/index/system/backups",
+                    id:"/setting/backups",
                     title:"备份与恢复",
                     purviewCode:"restore",
                 },
                 {
-                    id:"/index/system/myLog",
+                    id:"/setting/myLog",
                     title:"操作日志",
                     purviewCode:"pipeline_log",
                 }
             ]
         },
         {
-            id:"/index/system/version",
-            title:"版本与许可证",
-            icon:<VerifiedOutlined />,
-            purviewCode:"version",
+            id:"licence",
+            title:"应用",
+            icon:<LayoutOutlined />,
+            children: [
+                {
+                    id:'/setting/version',
+                    title: '版本与许可证',
+                    purviewCode:'version',
+                },
+                {
+                    id:'/setting/productAuth',
+                    title: '应用访问权限',
+                },
+            ]
         },
     ]
 

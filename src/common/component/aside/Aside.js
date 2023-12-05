@@ -21,7 +21,7 @@ const Aside = props =>{
 
     useEffect(()=>{
         // 初始化菜单
-        let indexPath = `/index/pipeline/${match.params.id}/${interceptUrl(path)[4]}`
+        let indexPath = `/pipeline/${match.params.id}/${interceptUrl(path)[3]}`
         setNav(indexPath)
     },[path])
 
@@ -32,7 +32,7 @@ const Aside = props =>{
     const changePipeline = item => {
         if(pipeline.id!==item.id){
             setIsLoading(true)
-            props.history.push(`/index/pipeline/${item.id}/structure`)
+            props.history.push(`/pipeline/${item.id}/history`)
             setTimeout(()=>setIsLoading(false),150)
         }
     }
@@ -41,6 +41,7 @@ const Aside = props =>{
         <div className="mf-layout">
             <div className="mf-normal-aside">
                 <Dropdown
+                    getPopupContainer={e => e.parentElement}
                     overlayStyle={{width:200,top:48,left:80}}
                     trigger={['click']}
                     overlay={
@@ -64,8 +65,8 @@ const Aside = props =>{
                                         )
                                     })
                                 }
-                                <div className='pipeline-opt-item pipeline-opt-more'
-                                     onClick={()=>props.history.push('/index/pipeline')}
+                                <div className='pipeline-opt-more'
+                                     onClick={()=>props.history.push('/pipeline')}
                                 >更多</div>
                             </div>
                         </div>
@@ -95,7 +96,7 @@ const Aside = props =>{
                     }
                 </div>
 
-                <div className="normal-aside-item" onClick={()=>props.history.push(`/index/pipeline/${pipeline.id}/set`)}>
+                <div className="normal-aside-item" onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}>
                     <div className="normal-aside-item-icon"><SettingOutlined/></div>
                     <div>设置</div>
                 </div>

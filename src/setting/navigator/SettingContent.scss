@@ -18,10 +18,7 @@
         }
         &-top{
             height: 100%;
-            overflow: hidden;
-            &:hover{
-              overflow: auto;
-            }
+            overflow: auto;
         }
         ul,li {
             list-style: none;
@@ -35,7 +32,7 @@
             align-items: center;
             height: 40px;
             line-height: 40px;
-            padding: 0 20px;
+            padding-right: 20px;
             cursor: pointer;
         }
         .system-aside-first:hover {

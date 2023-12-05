@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Space,Table} from "antd";
+import {Space,Table,Row,Col} from "antd";
 import serverStore from "../store/ServerStore";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -130,7 +130,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -153,7 +153,7 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"15%",
+            width:"13%",
             ellipsis:true,
             render:(text,record) => user(text,record)
         },
@@ -161,7 +161,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"20%",
+            width:"17%",
             ellipsis:true,
         },
         {
@@ -180,7 +180,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -188,14 +188,14 @@ const Server = props =>{
             title:"授权信息",
             dataIndex:"message",
             key:"message",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
         },
         {
             title:"创建人",
             dataIndex:["user","nickname"],
             key:["user","nickname"],
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:(text,record) => user(text,record)
 
@@ -204,7 +204,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
         },
         {
@@ -223,7 +223,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"20%",
+            width:"25%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -246,7 +246,7 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:["user","nickname"],
-            width:"15%",
+            width:"13%",
             ellipsis:true,
             render:(text,record) => user(text,record)
 
@@ -255,7 +255,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"20%",
+            width:"17%",
             ellipsis:true,
         },
         {
@@ -286,32 +286,37 @@ const Server = props =>{
     }
 
     return(
-        <div className="auth mf-home-limited mf">
-            <BreadCrumb firstItem={"服务集成"} >
-                <ServerAddBtn
-                    type={'gitee'}
-                    visible={visible}
-                    setVisible={setVisible}
-                    formValue={formValue}
-                    setFormValue={setFormValue}
-                    findAuth={findAuth}
+        <Row className="auth mf-home-limited mf">
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "20", offset: "2" }}
+            >
+                <BreadCrumb firstItem={"服务集成"} >
+                    <ServerAddBtn
+                        type={'gitee'}
+                        visible={visible}
+                        setVisible={setVisible}
+                        formValue={formValue}
+                        setFormValue={setFormValue}
+                        findAuth={findAuth}
+                    />
+                </BreadCrumb>
+                <Tabs
+                    tabLis={lis}
+                    type={activeTab}
+                    onClick={clickServerType}
                 />
-            </BreadCrumb>
-            <Tabs
-                tabLis={lis}
-                type={activeTab}
-                onClick={clickServerType}
-            />
-            <div className="auth-content">
-                <Table
-                    columns={columns(activeTab)}
-                    dataSource={authServerList}
-                    rowKey={record=>record.serverId}
-                    pagination={false}
-                    locale={{emptyText: <ListEmpty title={'暂无服务配置'}/>}}
-                />
-            </div>
-        </div>
+                <div className="auth-content">
+                    <Table
+                        columns={columns(activeTab)}
+                        dataSource={authServerList}
+                        rowKey={record=>record.serverId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={'暂无服务配置'}/>}}
+                    />
+                </div>
+            </Col>
+        </Row>
     )
 }
 

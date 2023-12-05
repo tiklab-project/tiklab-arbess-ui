@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Spin, Steps} from "antd";
+import {Spin, Steps, Row, Col} from "antd";
 import {getUser} from "tiklab-core-ui";
 import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
@@ -57,7 +57,7 @@ const PipelineAdd = props =>{
         createPipeline(params).then(res => {
             if (res.code===0) {
                 setIsLoading(false)
-                props.history.push(`/index/pipeline/${res.data}/config`)
+                props.history.push(`/pipeline/${res.data}/config`)
             }
         })
     }
@@ -109,41 +109,46 @@ const PipelineAdd = props =>{
 
     return (
         <Spin spinning={isLoading}>
-            <div className="pipeline-add mf">
-                <div className="pipeline-add-content">
-                    <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/index/pipeline")}/>
-                    <div className="steps-top">
-                        <Steps current={current}>
-                            {steps.map(item => (
-                                <Steps.Step key={item.title} title={item.title} />
-                            ))}
-                        </Steps>
-                    </div>
-                    <div className="steps-content">
-                        {steps[current].content}
-                    </div>
-                    {
-                        current===1 &&
-                        <div className="steps-bottom">
-                            <Btn
-                                onClick={()=>props.history.push("/index/pipeline")}
-                                title={"取消"}
-                                isMar={true}
-                            />
-                            <Btn
-                                onClick={()=>setCurrent(0)}
-                                title={"上一步"}
-                                isMar={true}
-                            />
-                            <Btn
-                                type={"primary"}
-                                onClick={()=>createPip()}
-                                title={"确定"}
-                            />
+            <Row className="pipeline-add">
+                <Col
+                    sm={{span: "24"}}
+                    md={{ span: "14", offset: "5"  }}
+                >
+                    <div className="mf-home-limited mf">
+                        <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/pipeline")}/>
+                        <div className="steps-top">
+                            <Steps current={current}>
+                                {steps.map(item => (
+                                    <Steps.Step key={item.title} title={item.title} />
+                                ))}
+                            </Steps>
                         </div>
-                    }
-                </div>
-            </div>
+                        <div className="steps-content">
+                            {steps[current].content}
+                        </div>
+                        {
+                            current===1 &&
+                            <div className="steps-bottom">
+                                <Btn
+                                    onClick={()=>props.history.push("/pipeline")}
+                                    title={"取消"}
+                                    isMar={true}
+                                />
+                                <Btn
+                                    onClick={()=>setCurrent(0)}
+                                    title={"上一步"}
+                                    isMar={true}
+                                />
+                                <Btn
+                                    type={"primary"}
+                                    onClick={()=>createPip()}
+                                    title={"确定"}
+                                />
+                            </div>
+                        }
+                    </div>
+                </Col>
+            </Row>
         </Spin>
     )
 

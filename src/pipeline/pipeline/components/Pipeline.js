@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Input,Select,Space} from "antd";
+import {Input,Select,Space,Row,Col} from "antd";
 import {CaretDownOutlined, PlusOutlined, SearchOutlined} from "@ant-design/icons";
 import PipelineTable from "./PipelineTable";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
@@ -174,80 +174,85 @@ const Pipeline = props =>{
     /**
      * 去添加流水线页面
      */
-    const onClick = () =>props.history.push('/index/pipeline/new')
+    const onClick = () =>props.history.push('/pipeline/new')
 
     return(
-        <div className="pipeline">
-            <div className="pipeline-content mf-home-limited mf">
-                <BreadCrumb firstItem={"流水线"}>
-                    <Btn
-                        onClick={onClick}
-                        type={"primary"}
-                        title={"新建流水线"}
-                        icon={<PlusOutlined/>}
-                    />
-                </BreadCrumb>
-                <div className="pipeline-flex">
-                    <Tabs type={listType} tabLis={[
-                        {id:'all', title:"所有流水线"},
-                        {id:'follow', title:"我收藏的"}
-                    ]} onClick={clickType}/>
-                    <Space>
-                        <Select
-                            showSearch
-                            style={{width:150}}
-                            placeholder={"分组管理"}
-                            suffixIcon={<CaretDownOutlined />}
-                            filterOption={(input, option) =>
-                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                            }
-                            onChange={value=>screen(value,"groupId")}
-                        >
-                            <Select.Option value={'all'} key={'all'}>全部</Select.Option>
-                            {
-                                groupList && groupList.map(item=>(
-                                    <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
-                                ))
-                            }
-                        </Select>
-                        <Select
-                            showSearch
-                            style={{width:150}}
-                            placeholder={"环境管理"}
-                            suffixIcon={<CaretDownOutlined />}
-                            filterOption={(input, option) =>
-                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                            }
-                            onChange={value=>screen(value,"envId")}
-                        >
-                            <Select.Option value={'all'} key={'all'}>全部</Select.Option>
-                            {
-                                envList && envList.map(item=>(
-                                    <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
-                                ))
-                            }
-                        </Select>
-                        <Input
-                            allowClear
-                            placeholder="流水线名称"
-                            autoComplete={"off"}
-                            onPressEnter={onChangeSearch}
-                            prefix={<SearchOutlined />}
-                            style={{ width: 200 }}
+        <Row className="pipeline">
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <div className="mf-home-limited mf">
+                    <BreadCrumb firstItem={"流水线"}>
+                        <Btn
+                            onClick={onClick}
+                            type={"primary"}
+                            title={"新建流水线"}
+                            icon={<PlusOutlined/>}
                         />
-                    </Space>
+                    </BreadCrumb>
+                    <div className="pipeline-flex">
+                        <Tabs type={listType} tabLis={[
+                            {id:'all', title:"所有流水线"},
+                            {id:'follow', title:"我收藏的"}
+                        ]} onClick={clickType}/>
+                        <Space>
+                            <Select
+                                showSearch
+                                style={{width:120}}
+                                placeholder={"分组管理"}
+                                suffixIcon={<CaretDownOutlined />}
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                                onChange={value=>screen(value,"groupId")}
+                            >
+                                <Select.Option value={'all'} key={'all'}>全部</Select.Option>
+                                {
+                                    groupList && groupList.map(item=>(
+                                        <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
+                                    ))
+                                }
+                            </Select>
+                            <Select
+                                showSearch
+                                style={{width:120}}
+                                placeholder={"环境管理"}
+                                suffixIcon={<CaretDownOutlined />}
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                                onChange={value=>screen(value,"envId")}
+                            >
+                                <Select.Option value={'all'} key={'all'}>全部</Select.Option>
+                                {
+                                    envList && envList.map(item=>(
+                                        <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
+                                    ))
+                                }
+                            </Select>
+                            <Input
+                                allowClear
+                                placeholder="流水线名称"
+                                autoComplete={"off"}
+                                onPressEnter={onChangeSearch}
+                                prefix={<SearchOutlined />}
+                                style={{ width: 150 }}
+                            />
+                        </Space>
+                    </div>
+                    <PipelineTable
+                        {...props}
+                        listType={listType}
+                        isLoading={isLoading}
+                        changPage={changPage}
+                        changFresh={changFresh}
+                        pipPage={pipPage}
+                        pipelineListPage={pipelineListPage}
+                    />
                 </div>
-                <PipelineTable
-                    {...props}
-                    listType={listType}
-                    isLoading={isLoading}
-                    changPage={changPage}
-                    changFresh={changFresh}
-                    pipPage={pipPage}
-                    pipelineListPage={pipelineListPage}
-                />
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

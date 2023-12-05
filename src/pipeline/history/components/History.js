@@ -51,7 +51,7 @@ const History = props =>{
 
     // 获取历史列表请求数据
     const [params,setParams] = useState(
-        route.path==='/index/history' ?
+        route.path==='/history' ?
             {
                 pageParam,
                 pipelineId:null,
@@ -85,7 +85,7 @@ const History = props =>{
      * 获取历史列表
      */
     const findInstance = () => {
-        if(route.path==='/index/history'){
+        if(route.path==='/history'){
             findUserInstance(params).then(Res=>{
                 setIsLoading(false)
                 if(Res.code===0){
@@ -116,7 +116,7 @@ const History = props =>{
      */
     const findInter = () => {
         clearInterval(inters)
-        if(route.path==='/index/history'){
+        if(route.path==='/history'){
             inters = setInterval(()=>{
                 findUserInstance(params).then(Res=>{
                     if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
@@ -211,13 +211,13 @@ const History = props =>{
             title: "名称",
             dataIndex: "findNumber",
             key: "findNumber",
-            width:"25%",
+            width:"22%",
             ellipsis:true,
             render:(text,record) =>{
                 return (
                     <span className="history-table-name" onClick={()=>details(record)}>
                         {
-                            route.path==='/index/history' &&
+                            route.path==='/history' &&
                             <span className="history-table-pipeline">{record.pipeline && record.pipeline.name}</span>
                         }
                         <span className="history-table-findNumber"> # {text}</span>
@@ -241,7 +241,7 @@ const History = props =>{
             title: "触发信息",
             dataIndex: "runWay",
             key: "runWay",
-            width:"20%",
+            width:"23%",
             ellipsis:true,
             render:(text,record) => (
                 <div className="history-table-runWay">
@@ -303,33 +303,34 @@ const History = props =>{
     }
 
     return (
-        <Row style={detail?{ height: "100%", overflow: "hidden" }:{height: "100%", overflow: "auto" }}>
-            <Col lg={{ span: 24 }} xxl={{ span: "18", offset: "3" }} >
-                <div className="history">
-                    <div className="history-content mf">
-                        <BreadCrumb firstItem={"历史"}/>
-                        <HistoryScreen
-                            {...props}
-                            params={params}
-                            screen={screen}
-                            pipelineStore={pipelineStore}
+        <Row className="history" style={detail ? { height: "100%", overflow: "hidden" }:{height: "100%", overflow: "auto" }}>
+            <Col
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <div className="mf-home-limited mf">
+                    <BreadCrumb firstItem={"历史"}/>
+                    <HistoryScreen
+                        {...props}
+                        params={params}
+                        screen={screen}
+                        pipelineStore={pipelineStore}
+                    />
+                    <div className="history-table">
+                        <Table
+                            bordered={false}
+                            loading={isLoading}
+                            columns={columns}
+                            dataSource={historyList}
+                            rowKey={record=>record.instanceId}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={"没有查询到历史记录"}/>}}
                         />
-                        <div className="history-table">
-                            <Table
-                                bordered={false}
-                                loading={isLoading}
-                                columns={columns}
-                                dataSource={historyList}
-                                rowKey={record=>record.instanceId}
-                                pagination={false}
-                                locale={{emptyText: <ListEmpty title={"没有查询到历史记录"}/>}}
-                            />
-                            <Page
-                                currentPage={page.currentPage}
-                                changPage={changPage}
-                                page={page}
-                            />
-                        </div>
+                        <Page
+                            currentPage={page.currentPage}
+                            changPage={changPage}
+                            page={page}
+                        />
                     </div>
                 </div>
                 <DiskModal

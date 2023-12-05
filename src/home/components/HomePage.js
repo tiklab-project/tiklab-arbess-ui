@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from "react";
+import {Col, Row} from "antd";
 import {AimOutlined,HistoryOutlined,BlockOutlined} from "@ant-design/icons";
 import homePageStore from "../store/HomePageStore";
 import ListEmpty from "../../common/component/list/ListEmpty";
@@ -52,7 +53,7 @@ const HomePage = props =>{
         const {pipeline,pipelineExecState} = item
         return(
             <div className="pipelineRecent-item" key={pipeline?.id}
-                 onClick={()=> props.history.push(`/index/pipeline/${pipeline?.id}/structure`)}
+                 onClick={()=> props.history.push(`/pipeline/${pipeline?.id}/history`)}
             >
                 {
                     pipeline &&
@@ -93,7 +94,7 @@ const HomePage = props =>{
         <div
             key={item.pipelineId}
             className='pipelineBuild-item'
-            onClick={()=>props.history.push(`/index/pipeline/${item.pipelineId}/structure/${item.instanceId}/post`)}
+            onClick={()=>props.history.push(`/pipeline/${item.pipelineId}/history/${item.instanceId}`)}
         >
             <ListIcon
                 text={item?.pipelineName || 'T'}
@@ -113,56 +114,61 @@ const HomePage = props =>{
     )
 
     return(
-        <div className="homePage">
-            <div className="homePage-content mf-home-limited">
-                <div className="home-recent">
-                    <div className="homePage-guide-title">
-                        <HistoryOutlined className="guide-icon"/>
-                        <span className="guide-title">常用</span>
-                    </div>
-                    {
-                        newlyLoading ?
-                            <SpinLoading type='table'/>
-                            :
-                            newlyOpen && newlyOpen.length > 0 ?
-                            <div className="pipelineRecent-content">
-                                {
-                                    newlyOpen.map(item=> renderOpen(item))
-                                }
-                            </div>
-                            :
-                            <ListEmpty title={"暂无访问流水线"}/>
-                    }
-                </div>
-                <div className="home-build">
-                    <div className="homePage-guide-title">
-                        <BlockOutlined className="guide-icon"/>
-                        <span className="guide-title">我最近构建的</span>
-                    </div>
-                    <div className="home-build-content">
+        <Row className="homePage" >
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <div className="homePage-content mf-home-limited">
+                    <div className="home-recent">
+                        <div className="homePage-guide-title">
+                            <HistoryOutlined className="guide-icon"/>
+                            <span className="guide-title">常用</span>
+                        </div>
                         {
-                            buildLoading ?
+                            newlyLoading ?
                                 <SpinLoading type='table'/>
                                 :
-                                newlyBuild && newlyBuild.length > 0 ?
-                                newlyBuild.map(item=>renderBuild(item))
-                                :
-                                <ListEmpty title={"暂无构建流水线"}/>
+                                newlyOpen && newlyOpen.length > 0 ?
+                                    <div className="pipelineRecent-content">
+                                        {
+                                            newlyOpen.map(item=> renderOpen(item))
+                                        }
+                                    </div>
+                                    :
+                                    <ListEmpty title={"暂无访问流水线"}/>
                         }
                     </div>
-                </div>
-                <div className="home-agent">
-                    <div className="homePage-guide-title">
-                        <AimOutlined className="guide-icon"/>
-                        <span className="guide-title">我的待办</span>
+                    <div className="home-build">
+                        <div className="homePage-guide-title">
+                            <BlockOutlined className="guide-icon"/>
+                            <span className="guide-title">我最近构建的</span>
+                        </div>
+                        <div className="home-build-content">
+                            {
+                                buildLoading ?
+                                    <SpinLoading type='table'/>
+                                    :
+                                    newlyBuild && newlyBuild.length > 0 ?
+                                        newlyBuild.map(item=>renderBuild(item))
+                                        :
+                                        <ListEmpty title={"暂无构建流水线"}/>
+                            }
+                        </div>
                     </div>
-                    <div className="home-agent-content">
-                        <AgentList agentList={[]}/>
+                    <div className="home-agent">
+                        <div className="homePage-guide-title">
+                            <AimOutlined className="guide-icon"/>
+                            <span className="guide-title">我的待办</span>
+                        </div>
+                        <div className="home-agent-content">
+                            <AgentList agentList={[]}/>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-        </div>
+                </div>
+            </Col>
+        </Row>
     )
 }
 

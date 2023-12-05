@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Space, Table} from "antd";
+import {Col, Row, Space, Table} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import hostGroupStore from "../store/HostGroupStore";
@@ -132,31 +132,36 @@ const HostGroup = (props) => {
     ]
 
     return (
-        <div className="auth mf-home-limited mf">
-            <BreadCrumb firstItem={"主机组"}>
-                <Btn
-                    type={"primary"}
-                    title={"添加主机组"}
-                    onClick={addHostGroup}
-                    icon={<PlusOutlined/>}
+        <Row className="auth mf-home-limited mf">
+            <Col
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <BreadCrumb firstItem={"主机组"}>
+                    <Btn
+                        type={"primary"}
+                        title={"添加主机组"}
+                        onClick={addHostGroup}
+                        icon={<PlusOutlined/>}
+                    />
+                </BreadCrumb>
+                <HostGroupAdd
+                    visible={visible}
+                    setVisible={setVisible}
+                    formValue={formValue}
+                    findAuth={findAllHostGroup}
                 />
-            </BreadCrumb>
-            <HostGroupAdd
-                visible={visible}
-                setVisible={setVisible}
-                formValue={formValue}
-                findAuth={findAllHostGroup}
-            />
-            <div className="auth-content">
-                <Table
-                    columns={columns}
-                    dataSource={hostGroupList}
-                    rowKey={record=>record.groupId}
-                    pagination={false}
-                    locale={{emptyText: <ListEmpty title={'暂无主机组'}/>}}
-                />
-            </div>
-        </div>
+                <div className="auth-content">
+                    <Table
+                        columns={columns}
+                        dataSource={hostGroupList}
+                        rowKey={record=>record.groupId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={'暂无主机组'}/>}}
+                    />
+                </div>
+            </Col>
+        </Row>
     )
 }
 

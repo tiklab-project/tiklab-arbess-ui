@@ -25,10 +25,10 @@ const HistoryScreen = props =>{
     const [page,setPage] = useState({})
 
     useEffect(()=>{
-        if(route.path==='/index/history'){
+        if(route.path==='/history'){
             findUserPipeline()
         }
-        if(route.path==='/index/pipeline/:id/structure'){
+        if(route.path==='/pipeline/:id/history'){
             findDmUser()
         }
     },[currentPage])
@@ -90,7 +90,7 @@ const HistoryScreen = props =>{
                 defaultValue={params?.number}
             />
             {
-                route.path==='/index/history' ?
+                route.path==='/history' ?
                     <Select
                         showSearch
                         suffixIcon={<CaretDownOutlined />}

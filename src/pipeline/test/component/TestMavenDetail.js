@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Table, Tag} from "antd";
+import {Table, Tag,Row,Col} from "antd";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import mavenTestStore from "../store/MavenTestStore";
@@ -96,62 +96,68 @@ const TestMavenDetail = (props) => {
     ]
 
     return (
-        <div className='test'>
-            <div className="mf-home-limited mf">
-                <BreadCrumb
-                    firstItem={"测试报告"}
-                    onClick={backTest}
-                />
-                <div className='test-overview'>
-                    <div className="test-overview-info">
-                        <div className="test-overview-info-item">
-                            <div>状态</div>
-                            <div className={`testState-${mavenTestObj?.testState}`}>
-                                {
-                                    mavenTestObj?.testState==='success'?
-                                        "成功"
-                                        :
-                                        "失败"
-                                }
+        <Row className='test'>
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "20", offset: "2" }}
+                xxl={{ span: "18", offset: "3" }}
+            >
+                <div className="mf-home-limited mf">
+                    <BreadCrumb
+                        firstItem={"测试报告"}
+                        onClick={backTest}
+                    />
+                    <div className='test-overview'>
+                        <div className="test-overview-info">
+                            <div className="test-overview-info-item">
+                                <div>状态</div>
+                                <div className={`testState-${mavenTestObj?.testState}`}>
+                                    {
+                                        mavenTestObj?.testState==='success'?
+                                            "成功"
+                                            :
+                                            "失败"
+                                    }
+                                </div>
+                            </div>
+                            <div className="test-overview-info-item">
+                                <div>总用例数</div>
+                                <div>{mavenTestObj?.allNumber || 0}</div>
+                            </div>
+                            <div className="test-overview-info-item">
+                                <div>错误用例数</div>
+                                <div>{mavenTestObj?.errorNumber || 0}</div>
+                            </div>
+                            <div className="test-overview-info-item">
+                                <div>失败用例数</div>
+                                <div>{mavenTestObj?.failNumber || 0}</div>
+                            </div>
+                            <div className="test-overview-info-item">
+                                <div>跳过用例数</div>
+                                <div>{mavenTestObj?.skipNumber || 0}</div>
                             </div>
                         </div>
-                        <div className="test-overview-info-item">
-                            <div>总用例数</div>
-                            <div>{mavenTestObj?.allNumber || 0}</div>
-                        </div>
-                        <div className="test-overview-info-item">
-                            <div>错误用例数</div>
-                            <div>{mavenTestObj?.errorNumber || 0}</div>
-                        </div>
-                        <div className="test-overview-info-item">
-                            <div>失败用例数</div>
-                            <div>{mavenTestObj?.failNumber || 0}</div>
-                        </div>
-                        <div className="test-overview-info-item">
-                            <div>跳过用例数</div>
-                            <div>{mavenTestObj?.skipNumber || 0}</div>
-                        </div>
+                    </div>
+                    <div className="test-table">
+                        <Table
+                            bordered={false}
+                            loading={isLoading}
+                            columns={columns}
+                            dataSource={mavenTestList}
+                            pagination={false}
+                            rowKey={r=>r.id}
+                            expandable={{
+                                expandedRowRender: (record) => (
+                                    <div className="test-table-expand">
+                                        {record?.message}
+                                    </div>
+                                )}}
+                            locale={{emptyText: <ListEmpty />}}
+                        />
                     </div>
                 </div>
-                <div className="test-table">
-                    <Table
-                        bordered={false}
-                        loading={isLoading}
-                        columns={columns}
-                        dataSource={mavenTestList}
-                        pagination={false}
-                        rowKey={r=>r.id}
-                        expandable={{
-                            expandedRowRender: (record) => (
-                                <div className="test-table-expand">
-                                    {record?.message}
-                                </div>
-                            )}}
-                        locale={{emptyText: <ListEmpty />}}
-                    />
-                </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 
 }

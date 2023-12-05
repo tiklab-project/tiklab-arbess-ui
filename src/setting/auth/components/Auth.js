@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Space,Table} from "antd";
+import {Space,Table, Row, Col} from "antd";
 import authStore from "../store/AuthStore"
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -123,26 +123,31 @@ const Auth = props =>{
     ]
 
     return(
-        <div className="auth mf-home-limited mf">
-            <BreadCrumb firstItem={"认证配置"}>
-                <AuthAddBtn
-                    visible={visible}
-                    setVisible={setVisible}
-                    formValue={formValue}
-                    setFormValue={setFormValue}
-                    findAuth={findAuth}
-                />
-            </BreadCrumb>
-            <div className="auth-content">
-                <Table
-                    columns={commonColumns}
-                    dataSource={authList}
-                    rowKey={record=>record.authId}
-                    pagination={false}
-                    locale={{emptyText: <ListEmpty title={'暂无认证配置'}/>}}
-                />
-            </div>
-        </div>
+        <Row className="auth mf-home-limited mf">
+            <Col
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <BreadCrumb firstItem={"认证配置"}>
+                    <AuthAddBtn
+                        visible={visible}
+                        setVisible={setVisible}
+                        formValue={formValue}
+                        setFormValue={setFormValue}
+                        findAuth={findAuth}
+                    />
+                </BreadCrumb>
+                <div className="auth-content">
+                    <Table
+                        columns={commonColumns}
+                        dataSource={authList}
+                        rowKey={record=>record.authId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={'暂无认证配置'}/>}}
+                    />
+                </div>
+            </Col>
+        </Row>
     )
 }
 

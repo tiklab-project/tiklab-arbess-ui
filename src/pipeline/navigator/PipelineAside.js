@@ -45,7 +45,7 @@ const PipelineAside= (props)=>{
             findOnePipeline(id).then(res=>{
                 if(res.data===null){
                     message.info("当前流水线不存在")
-                    props.history.push('/index/pipeline')
+                    props.history.push('/pipeline')
                     return
                 }
                 // 获取流水线权限
@@ -66,31 +66,31 @@ const PipelineAside= (props)=>{
     // 左侧菜单（二级菜单）
     const firstRouters=[
         {
-            id:`/index/pipeline/${id}/survey`,
+            id:`/pipeline/${id}/survey`,
             title:"概况",
             icon:<ApartmentOutlined />,
             key:"survey",
         },
         {
-            id:`/index/pipeline/${id}/config`,
+            id:`/pipeline/${id}/config`,
             title: "设计",
             icon: <CreditCardOutlined />,
             key:"config",
         },
         {
-            id:`/index/pipeline/${id}/structure`,
+            id:`/pipeline/${id}/history`,
             title: "历史",
             icon: <ClockCircleOutlined />,
-            key:"structure",
+            key:"history",
         },
         {
-            id:`/index/pipeline/${id}/scan`,
+            id:`/pipeline/${id}/scan`,
             title: "代码扫描",
             icon: <ScanOutlined />,
             key:"scan",
         },
         {
-            id:`/index/pipeline/${id}/test`,
+            id:`/pipeline/${id}/test`,
             title: "测试报告",
             icon: <ExperimentOutlined />,
             key:"test",

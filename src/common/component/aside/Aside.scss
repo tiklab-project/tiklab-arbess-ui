@@ -49,7 +49,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-left: 15px;
+            padding-left: 20px;
         }
         .dropdowns_icon{
             display: inline-block;
@@ -78,8 +78,8 @@
             border-bottom: 1px solid var(--tiklab-gray-200);
         }
         &-group{
+            max-height: calc(100vh - 120px);
             min-height: 45px;
-            max-height: 300px;
             overflow: auto;
         }
         &-item{
@@ -92,7 +92,7 @@
             overflow: hidden;
             max-width: 200px;
             &:hover{
-                background: #f4f4f4;
+                background: #edf0f5;
             }
         }
         &-icon{
@@ -105,10 +105,13 @@
             border-radius: 4px;
         }
         &-active{
-            background:#f4f4f4;
+            background:#edf0f5;
         }
         &-more{
+            cursor: pointer;
             text-align: center;
+            padding: 8px 0 ;
+            background: #f8f8f8;
             color: var(--tiklab-blue);
         }
     }

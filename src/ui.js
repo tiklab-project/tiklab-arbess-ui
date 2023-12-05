@@ -60,7 +60,7 @@ const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice")
 
 // security
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
-const BackupRecovery=AsyncComponent(()=>import("./setting/security/BackupRecovery"))
+const BackupRestore=AsyncComponent(()=>import("./setting/security/BackupRestore"))
 
 // user
 const User=AsyncComponent(()=>import("./setting/user/User"))
@@ -76,6 +76,7 @@ const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
+const ProductAuth=AsyncComponent(()=>import("./setting/licence/ProductAuth"))
 
 // base
 const UserGroupTrue=AsyncComponent(()=>import("./setting/base/user/Groupture"))
@@ -142,7 +143,7 @@ export {
     MessageSendType,
     MessageNotice,
     MyLog,
-    BackupRecovery,
+    BackupRestore,
 
     User,
     UserGroup,
@@ -151,6 +152,7 @@ export {
     SystemRole,
     NotFound,
     Version,
+    ProductAuth,
 
     UserGroupTrue,
     SystemFeature,

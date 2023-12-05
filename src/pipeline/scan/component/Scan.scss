@@ -12,6 +12,10 @@
             padding-left: 48px;
         }
     }
+    .scan-data-height{
+        height: 35px;
+        line-height: 35px;
+    }
     .scan-overview{
         padding-top: var(--tiklab-padding-item);
         .scan-overview-info{
@@ -21,7 +25,7 @@
             .scan-overview-info-item{
                 padding: 8px;
                 border-radius: 4px;
-                min-width: 150px;
+                flex: 1;
                 border: 1px solid var(--mf-border-color);
                 &:not(:last-child){
                     margin-right: 15px;

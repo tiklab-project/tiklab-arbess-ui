@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from "react";
+import {Row,Col} from "antd";
 import {
     AimOutlined,
     BorderOuterOutlined,
@@ -119,58 +120,63 @@ const Overview = props =>{
     ]
 
     return(
-        <div className="overview">
-            <div className="overview-content">
-                <div className="overview-top">
-                    <BreadCrumb firstItem={"概况"}/>
-                </div>
-                <div className="overview-bottom">
-                    <div className="overview-census">
-                        <div className='overview-guide'>
-                            <div className='overview-guide-title'>
-                                <PieChartOutlined className='overview-guide-title-icon'/>
-                                <span className='overview-guide-title-name'>运行概况</span>
+        <Row className="overview">
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <div className="mf-home-limited">
+                    <div className="overview-top">
+                        <BreadCrumb firstItem={"概况"}/>
+                    </div>
+                    <div className="overview-bottom">
+                        <div className="overview-census">
+                            <div className='overview-guide'>
+                                <div className='overview-guide-title'>
+                                    <PieChartOutlined className='overview-guide-title-icon'/>
+                                    <span className='overview-guide-title-name'>运行概况</span>
+                                </div>
+                            </div>
+                            <div className="overview-census-bottom">
+                                <div className="chart-box" id="burn-down" style={{width:400,height:300}}/>
+                                <div className="overview-census-stat">
+                                    {
+                                        status.map(item=>{
+                                            return(
+                                                <div className="stat-div" key={item.title}>
+                                                    <div className="stat-div-title">
+                                                        <span className="stat-div-title-icon">{item.icon}</span>
+                                                        <span className="stat-div-title-name">{item.title}</span>
+                                                    </div>
+                                                    <div className="census-num">{item.num} </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
-                        <div className="overview-census-bottom">
-                            <div className="chart-box" id="burn-down" style={{width:400,height:300}}/>
-                            <div className="overview-census-stat">
+                        <div className="overview-dyna">
+                            <div className='overview-guide'>
+                                <div className='overview-guide-title'>
+                                    <AimOutlined className='overview-guide-title-icon'/>
+                                    <span className='overview-guide-title-name'>流水线动态</span>
+                                </div>
                                 {
-                                    status.map(item=>{
-                                        return(
-                                            <div className="stat-div" key={item.title}>
-                                                <div className="stat-div-title">
-                                                    <span className="stat-div-title-icon">{item.icon}</span>
-                                                    <span className="stat-div-title-name">{item.title}</span>
-                                                </div>
-                                                <div className="census-num">{item.num} </div>
-                                            </div>
-                                        )
-                                    })
+                                    dynaData?.dynaTotalPagePage > 1 &&
+                                    <div onClick={()=>props.history.push(`/pipeline/${params.id}/survey/dyna`)}
+                                         className="overview-guide-skip"
+                                    >
+                                        <RightOutlined />
+                                    </div>
                                 }
                             </div>
+                            <DynamicList dynamicList={dynaData?.dynamicList || []}/>
                         </div>
-                    </div>
-                    <div className="overview-dyna">
-                        <div className='overview-guide'>
-                            <div className='overview-guide-title'>
-                                <AimOutlined className='overview-guide-title-icon'/>
-                                <span className='overview-guide-title-name'>流水线动态</span>
-                            </div>
-                            {
-                                dynaData?.dynaTotalPagePage > 1 &&
-                                <div onClick={()=>props.history.push(`/index/pipeline/${params.id}/survey/dyna`)}
-                                     className="overview-guide-skip"
-                                >
-                                    <RightOutlined />
-                                </div>
-                            }
-                        </div>
-                        <DynamicList dynamicList={dynaData?.dynamicList || []}/>
                     </div>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

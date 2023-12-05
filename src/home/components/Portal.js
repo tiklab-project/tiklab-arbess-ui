@@ -36,7 +36,7 @@ const  Portal = props =>{
     },[])
 
     useEffect(()=>{
-        if(path.indexOf("/index/pipeline")===0) path = "/index/pipeline"
+        if(path.indexOf("/pipeline")===0) path = "/pipeline"
         setCurrentLink(path)
     },[path])
 
@@ -44,17 +44,17 @@ const  Portal = props =>{
     const routers=[
         {
             key:"home",
-            to:"/index/home",
+            to:"/home",
             title: "home",
         },
         {
             key:"pipeline",
-            to:"/index/pipeline",
+            to:"/pipeline",
             title: "pipeline",
         },
         {
             key:"history",
-            to:"/index/history",
+            to:"/history",
             title:"history",
         }
     ]
@@ -63,9 +63,7 @@ const  Portal = props =>{
         <div className="frame">
             <div className="frame-header">
                 <div className="frame-header-right">
-                    <div className="frame-header-applink">
-                        {AppLink}
-                    </div>
+                    {AppLink}
                     <div className="frame-header-logo">
                         <img src={logo} alt="logo" />
                     </div>
@@ -85,7 +83,7 @@ const  Portal = props =>{
                 <div className="frame-header-right">
                     <div className="frame-header-right-text">
                         <div className="text_icon_block_item"
-                             onClick={()=>props.history.push("/index/system")}
+                             onClick={()=>props.history.push("/setting")}
                              data-title-bottom={'设置'}
                         >
                             <SettingOutlined className="frame-header-icon"/>

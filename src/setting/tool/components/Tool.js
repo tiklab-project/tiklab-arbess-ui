@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Table} from "antd";
+import {Table,Row,Col} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import toolStore from "../store/ToolStore";
 import ToolModal from "./ToolModal";
@@ -75,7 +75,7 @@ const Tool = props =>{
             title:"名称",
             dataIndex:"scmName",
             key:"scmName",
-            width:"30%",
+            width:"25%",
             ellipsis:true,
             render:text => {
                 return  <span>
@@ -103,7 +103,7 @@ const Tool = props =>{
             title:"地址",
             dataIndex:"scmAddress",
             key:"scmAddress",
-            width:"35%",
+            width:"40%",
             ellipsis:true,
         },
         {
@@ -128,7 +128,7 @@ const Tool = props =>{
             title:"名称",
             dataIndex:"scmName",
             key:"scmName",
-            width:"35%",
+            width:"30%",
             ellipsis:true,
             render:text => {
                 return  <span>
@@ -156,42 +156,49 @@ const Tool = props =>{
             title:"地址",
             dataIndex:"scmAddress",
             key:"scmAddress",
-            width:"35%",
+            width:"40%",
             ellipsis:true,
         }
     ]
 
-    return <div className="auth mf-home-limited mf">
-        <BreadCrumb firstItem={"工具配置"}>
-            {
-                version==='ce' &&
-                <Btn
-                    onClick={addEnvi}
-                    type={"primary"}
-                    title={"添加工具"}
-                    icon={<PlusOutlined/>}
-                />
-            }
-        </BreadCrumb>
-        <div className="auth-content">
-            <Table
-                columns={version==='ce'?columnsCe:columns}
-                dataSource={enviData}
-                rowKey={record=>record.scmId}
-                pagination={false}
-                locale={{emptyText: <ListEmpty title={'暂无环境配置'}/>}}
-            />
+    return (
+        <Row className="auth mf-home-limited mf">
+            <Col
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <BreadCrumb firstItem={"工具配置"}>
+                    {
+                        version==='ce' &&
+                        <Btn
+                            onClick={addEnvi}
+                            type={"primary"}
+                            title={"添加工具"}
+                            icon={<PlusOutlined/>}
+                        />
+                    }
+                </BreadCrumb>
+                <div className="auth-content">
+                    <Table
+                        columns={version==='ce'?columnsCe:columns}
+                        dataSource={enviData}
+                        rowKey={record=>record.scmId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={'暂无环境配置'}/>}}
+                    />
 
-            <ToolModal
-                visible={visible}
-                setVisible={setVisible}
-                enviData={enviData}
-                updatePipelineScm={updatePipelineScm}
-                formValue={formValue}
-                findAllScm={findAllScm}
-            />
-        </div>
-    </div>
+                    <ToolModal
+                        visible={visible}
+                        setVisible={setVisible}
+                        enviData={enviData}
+                        updatePipelineScm={updatePipelineScm}
+                        formValue={formValue}
+                        findAllScm={findAllScm}
+                    />
+                </div>
+            </Col>
+        </Row>
+    )
 }
 
 export default Tool

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Space,Table} from "antd";
+import {Space,Table,Row,Col} from "antd";
 import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -135,31 +135,36 @@ const Grouping = props =>{
     ]
 
     return(
-        <div className="auth mf-home-limited mf">
-            <BreadCrumb firstItem={"分组管理"}>
-                <Btn
-                    type={'primary'}
-                    title={"添加分组"}
-                    onClick={createEnv}
-                    icon={<PlusOutlined/>}
+        <Row className="auth mf-home-limited mf">
+            <Col
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <BreadCrumb firstItem={"分组管理"}>
+                    <Btn
+                        type={'primary'}
+                        title={"添加分组"}
+                        onClick={createEnv}
+                        icon={<PlusOutlined/>}
+                    />
+                </BreadCrumb>
+                <GroupingModal
+                    visible={visible}
+                    setVisible={setVisible}
+                    formValue={formValue}
+                    findGrouping={findGrouping}
                 />
-            </BreadCrumb>
-            <GroupingModal
-                visible={visible}
-                setVisible={setVisible}
-                formValue={formValue}
-                findGrouping={findGrouping}
-            />
-            <div className="auth-content">
-                <Table
-                    columns={columns}
-                    dataSource={groupList}
-                    rowKey={record=>record.id}
-                    pagination={false}
-                    locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
-                />
-            </div>
-        </div>
+                <div className="auth-content">
+                    <Table
+                        columns={columns}
+                        dataSource={groupList}
+                        rowKey={record=>record.id}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
+                    />
+                </div>
+            </Col>
+        </Row>
     )
 }
 

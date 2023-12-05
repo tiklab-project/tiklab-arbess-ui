@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {message, Progress, Space, Table} from 'antd';
+import {message, Progress, Space, Table,Row,Col} from 'antd';
 import {getUser,parseUserSearchParams} from "tiklab-core-ui";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
@@ -84,7 +84,7 @@ const Resources = props => {
             title: "名称",
             dataIndex: "name",
             key: "name",
-            width:"60%",
+            width:"50%",
             ellipsis:true,
             render:(text,record)=>{
                 return (
@@ -104,7 +104,7 @@ const Resources = props => {
             title: "路径",
             dataIndex: "filePath",
             key: "filePath",
-            width:"40%",
+            width:"50%",
             ellipsis:true,
         }
     ]
@@ -179,68 +179,73 @@ const Resources = props => {
     }
 
     return (
-        <div className='resources mf-home-limited mf'>
-            <BreadCrumb firstItem={"资源监控"}>
-                {
-                    resourceList?.version===1 &&
-                    <Btn
-                        type={"primary"}
-                        title={"升级企业版"}
-                        onClick={upGradation}
-                    />
-                }
-            </BreadCrumb>
-            <div className="resources-content">
-                <div className='resources-info-version'>当前版本：{resourceList?.version===1?'免费版':'付费版'}</div>
-                <div>
-                    <div className='resources-info-item'>
-                        <div className='resources-item-title'>并发数</div>
-                        <div className='resources-item-total'>{limitation(resourceList?.ccyNumber,'')}</div>
-                        <div className='resources-item-progress'>
-                            <Progress percent={ccyPercent > 1 ? ccyPercent : 1} showInfo={false}/>
+        <Row className='resources mf-home-limited mf'>
+            <Col
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+            >
+                <BreadCrumb firstItem={"资源监控"}>
+                    {
+                        resourceList?.version===1 &&
+                        <Btn
+                            type={"primary"}
+                            title={"升级企业版"}
+                            onClick={upGradation}
+                        />
+                    }
+                </BreadCrumb>
+                <div className="resources-content">
+                    <div className='resources-info-version'>当前版本：{resourceList?.version===1?'免费版':'付费版'}</div>
+                    <div>
+                        <div className='resources-info-item'>
+                            <div className='resources-item-title'>并发数</div>
+                            <div className='resources-item-total'>{limitation(resourceList?.ccyNumber,'')}</div>
+                            <div className='resources-item-progress'>
+                                <Progress percent={ccyPercent > 1 ? ccyPercent : 1} showInfo={false}/>
+                            </div>
+                            <div className='resources-item-title'>剩余并发数</div>
+                            <div className='resources-item-residue'>{limitation(resourceList?.residueCcyNumber,'')} </div>
                         </div>
-                        <div className='resources-item-title'>剩余并发数</div>
-                        <div className='resources-item-residue'>{limitation(resourceList?.residueCcyNumber,'')} </div>
-                    </div>
-                    <div className='resources-info-item'>
-                        <div className='resources-item-title'>构建时长</div>
-                        <div className='resources-item-total'>{limitation(resourceList?.sceNumber,'分钟/月')}</div>
-                        <div className='resources-item-progress'>
-                            <Progress percent={scePercent > 1 ? scePercent : 1} showInfo={false}/>
+                        <div className='resources-info-item'>
+                            <div className='resources-item-title'>构建时长</div>
+                            <div className='resources-item-total'>{limitation(resourceList?.sceNumber,'分钟/月')}</div>
+                            <div className='resources-item-progress'>
+                                <Progress percent={scePercent > 1 ? scePercent : 1} showInfo={false}/>
+                            </div>
+                            <div className='resources-item-title'>剩余时长</div>
+                            <div className='resources-item-residue'>{limitation(resourceList?.residueSceNumber,'分钟')}</div>
                         </div>
-                        <div className='resources-item-title'>剩余时长</div>
-                        <div className='resources-item-residue'>{limitation(resourceList?.residueSceNumber,'分钟')}</div>
-                    </div>
-                    <div className='resources-info-item'>
-                        <div className='resources-item-title'>磁盘空间</div>
-                        <div className='resources-item-total'>{limitation(resourceList?.cacheNumber,'G')}</div>
-                        <div className='resources-item-progress'>
-                            <Progress percent={cachePercent > 1 ? cachePercent : 1}  showInfo={false}/>
+                        <div className='resources-info-item'>
+                            <div className='resources-item-title'>磁盘空间</div>
+                            <div className='resources-item-total'>{limitation(resourceList?.cacheNumber,'G')}</div>
+                            <div className='resources-item-progress'>
+                                <Progress percent={cachePercent > 1 ? cachePercent : 1}  showInfo={false}/>
+                            </div>
+                            <div className='resources-item-title'>剩余空间</div>
+                            <div className='resources-item-residue'>{limitation(resourceList?.residueCacheNumber,'G')}</div>
                         </div>
-                        <div className='resources-item-title'>剩余空间</div>
-                        <div className='resources-item-residue'>{limitation(resourceList?.residueCacheNumber,'G')}</div>
                     </div>
+                    <div className='resources-info-version'> 流水线缓存</div>
+                    <div className='resources-info-disk'>
+                        <Table
+                            pagination={false}
+                            rowSelection={rowSelection}
+                            onRow={record => ({
+                                onClick: () => onSelectRow(record)
+                            })}
+                            columns={columns}
+                            dataSource={diskList}
+                            rowKey={r=>r.path}
+                            locale={{emptyText: <ListEmpty title={"暂无缓存信息"}/>}}
+                        />
+                    </div>
+                    {
+                        diskList?.length > 0 &&
+                        <Btn title={"清理缓存"} onClick={clean}/>
+                    }
                 </div>
-                <div className='resources-info-version'> 流水线缓存</div>
-                <div className='resources-info-disk'>
-                    <Table
-                        pagination={false}
-                        rowSelection={rowSelection}
-                        onRow={record => ({
-                            onClick: () => onSelectRow(record)
-                        })}
-                        columns={columns}
-                        dataSource={diskList}
-                        rowKey={r=>r.path}
-                        locale={{emptyText: <ListEmpty title={"暂无缓存信息"}/>}}
-                    />
-                </div>
-                {
-                    diskList?.length > 0 &&
-                    <Btn title={"清理缓存"} onClick={clean}/>
-                }
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }
 

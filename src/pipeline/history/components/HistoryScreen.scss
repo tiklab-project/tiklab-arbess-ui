@@ -3,7 +3,10 @@
     .ant-input,.ant-select{
         width: 150px;
     }
-    .ant-select{
-        margin-left: var(--tiklab-padding-item);
+    .ant-input{
+        margin-right:var(--tiklab-padding-item) ;
+    }
+    .ant-select:not(:first-child){
+        margin-right: var(--tiklab-padding-item);
     }
 }

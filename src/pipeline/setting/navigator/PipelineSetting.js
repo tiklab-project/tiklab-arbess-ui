@@ -26,17 +26,17 @@ const PipelineSetting = props =>{
     // 左侧导航（三级标题）
     const secondRouter = [
         {
-            id:`/index/pipeline/${pipelineId}/set/info`,
+            id:`/pipeline/${pipelineId}/set/info`,
             title:"流水线信息",
             purviewCode:"pipeline_seting",
         },
         {
-            id:`/index/pipeline/${pipelineId}/set/user`,
+            id:`/pipeline/${pipelineId}/set/user`,
             title:"成员",
             purviewCode:"pipeline_user",
         },
         {
-            id:`/index/pipeline/${pipelineId}/set/role`,
+            id:`/pipeline/${pipelineId}/set/role`,
             title:"权限",
             purviewCode:"pipeline_auth",
         }
@@ -63,7 +63,7 @@ const PipelineSetting = props =>{
             {...props}
             domainId={pipelineId}
             projectRouters={secondRouter}
-            outerPath={`/index/pipeline/${pipelineId}/set`}
+            outerPath={`/pipeline/${pipelineId}/set`}
         >
             <div className='project-nav'>
                 <div className="project-nav-aside">

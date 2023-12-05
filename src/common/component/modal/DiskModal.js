@@ -7,7 +7,7 @@ const DiskModal = props =>{
     const {visible,setVisible} = props
 
     const onOk = () => {
-        props.history.push('/index/system/resources')
+        props.history.push('/setting/resources')
     }
 
     const onCancel = () => {

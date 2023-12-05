@@ -69,7 +69,7 @@ const SettingContent= props =>  {
     const renderMenu = (data,deep)=> {
         return (
             <PrivilegeButton key={data.id} code={data.purviewCode} {...props}>
-                <li style={{cursor:"pointer",paddingLeft:`${deep*20+20}`}}
+                <li style={{cursor:"pointer",paddingLeft:`${deep*30+30}`}}
                     className={`system-aside-li system-aside-second  ${data.id=== selectKey ? "system-aside-select":""}`}
                     onClick={()=>select(data)}
                     key={data.id}
@@ -88,7 +88,7 @@ const SettingContent= props =>  {
         return(
             <li key={item.id} className="system-aside-li">
                 <div className="system-aside-item system-aside-first"
-                     style={{paddingLeft: `${deep * 20 + 20}`}}
+                     style={{paddingLeft: `${deep * 30 + 30}`}}
                      onClick={()=>setOpenOrClose(item.id)}
                 >
                     <span>
@@ -131,7 +131,7 @@ const SettingContent= props =>  {
             applicationRouters={menus()}
             expandedTree={expandedTree}
             setExpandedTree={setExpandedTree}
-            outerPath={"/index/system"}
+            outerPath={"/setting"}
         >
             <div className="system">
                 <div className="system-aside">

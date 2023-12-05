@@ -118,24 +118,24 @@ const Design = props =>{
 
     const typeLis = [
         {
-            id:`/index/pipeline/${pipelineId}/config`,
+            id:`/pipeline/${pipelineId}/config`,
             title:"流程设计",
             icon: <DeploymentUnitOutlined/>
         },
         {
-            id:`/index/pipeline/${pipelineId}/config/tigger`,
+            id:`/pipeline/${pipelineId}/config/tigger`,
             title:"触发设置",
             icon: <CrownOutlined/>,
             long: triggerData
         },
         {
-            id:`/index/pipeline/${pipelineId}/config/vari`,
+            id:`/pipeline/${pipelineId}/config/vari`,
             title:"变量",
             icon: <BugOutlined/>,
             long: variableData
         },
         {
-            id:`/index/pipeline/${pipelineId}/config/postprocess`,
+            id:`/pipeline/${pipelineId}/config/postprocess`,
             title:"后置处理",
             icon: <PartitionOutlined/>,
             long: postprocessData

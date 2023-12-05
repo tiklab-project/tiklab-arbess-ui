@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Space,Table} from "antd";
+import {Space,Table, Row, Col} from "antd";
 import hostStore from "../store/HostStore";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -89,7 +89,7 @@ const Host = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"20%",
+            width:"18%",
             ellipsis:true,
             render:text => {
                 return  <span>
@@ -102,7 +102,7 @@ const Host = props =>{
             title:"ip地址",
             dataIndex: "ip",
             key: "ip",
-            width:"12%",
+            width:"14%",
             ellipsis:true,
         },
         {
@@ -116,7 +116,7 @@ const Host = props =>{
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
-            width:"15%",
+            width:"18%",
             ellipsis:true,
             render: text => text===1?"username&password":"私钥"
         },
@@ -124,7 +124,7 @@ const Host = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"18%",
+            width:"13%",
             ellipsis:true,
             render:(text,record) => {
                 return  <Space>
@@ -137,14 +137,14 @@ const Host = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"17%",
+            width:"20%",
             ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"10%",
+            width:"9%",
             ellipsis:true,
             render:(_,record) => {
                 return  <ListAction
@@ -156,31 +156,37 @@ const Host = props =>{
     ]
 
     return(
-        <div className="auth mf-home-limited mf">
-            <BreadCrumb firstItem={"主机配置"}>
-                <HostAddBtn
-                    visible={visible}
-                    setVisible={setVisible}
-                    formValue={formValue}
-                    setFormValue={setFormValue}
-                    findAuth={findAuth}
+        <Row className="auth mf-home-limited mf">
+            <Col
+                lg={{span: "24"}}
+                xl={{ span: "20", offset: "2" }}
+                xxl={{ span: "18", offset: "3" }}
+            >
+                <BreadCrumb firstItem={"主机配置"}>
+                    <HostAddBtn
+                        visible={visible}
+                        setVisible={setVisible}
+                        formValue={formValue}
+                        setFormValue={setFormValue}
+                        findAuth={findAuth}
+                    />
+                </BreadCrumb>
+                <Tabs
+                    tabLis={lis}
+                    type={activeTab}
+                    onClick={clickTab}
                 />
-            </BreadCrumb>
-            <Tabs
-                tabLis={lis}
-                type={activeTab}
-                onClick={clickTab}
-            />
-            <div className="auth-content">
-                <Table
-                    columns={column}
-                    dataSource={hostList}
-                    rowKey={record=>record.hostId}
-                    pagination={false}
-                    locale={{emptyText: <ListEmpty title={'暂无主机配置'}/>}}
-                />
-            </div>
-        </div>
+                <div className="auth-content">
+                    <Table
+                        columns={column}
+                        dataSource={hostList}
+                        rowKey={record=>record.hostId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={'暂无主机配置'}/>}}
+                    />
+                </div>
+            </Col>
+        </Row>
     )
 }
 

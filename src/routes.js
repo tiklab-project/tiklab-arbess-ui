@@ -57,7 +57,7 @@ const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice")
 
 // security
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
-const BackupRecovery=AsyncComponent(()=>import("./setting/security/BackupRecovery"))
+const BackupRestore=AsyncComponent(()=>import("./setting/security/BackupRestore"))
 
 // user
 const User=AsyncComponent(()=>import("./setting/user/User"))
@@ -74,6 +74,7 @@ const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
+const ProductAuth=AsyncComponent(()=>import("./setting/licence/ProductAuth"))
 
 // base
 const UserGroupTrue=AsyncComponent(()=>import("./setting/base/user/Groupture"))
@@ -115,328 +116,329 @@ const routers=[
         component:Wechat,
     },
     {
-        path:"/index",
+        path:"/",
         component: Index,
         routes:[
             {
-                path: "/index/home",
+                path: "/home",
                 component: HomePage,
                 exact:true,
             },
             {
-                path:"/index/pipeline",
+                path:"/pipeline",
                 component:Pipeline,
                 exact: true,
             },
             {
-                path:"/index/pipeline/new",
+                path:"/pipeline/new",
                 component:PipelineAdd,
                 exact: true,
             },
             {
-                path:"/index/dyna",
+                path:"/dyna",
                 component:Dynamic,
                 exact: true,
             },
             {
-                path:"/index/authorize",
+                path:"/authorize",
                 component: Authorize,
                 exact: true
             },
             {
-                path:"/index/history",
+                path:"/history",
                 component: History,
                 exact: true
             },
             {
-                path:"/index/404",
+                path:"/404",
                 component:NotFound,
             },
             {
-                path:"/index/pipeline/:id",
+                path:"/pipeline/:id",
                 component: PipelineDetails,
                 routes:[
                     {
-                        path:"/index/pipeline/:id/survey",
+                        path:"/pipeline/:id/survey",
                         exact:true,
                         component: Overview
                     },
                     {
-                        path:"/index/pipeline/:id/survey/dyna",
+                        path:"/pipeline/:id/survey/dyna",
                         component: Dynamic,
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/config",
+                        path:"/pipeline/:id/config",
                         component: Design,
                         routes:[
                             {
-                                path:"/index/pipeline/:id/config",
+                                path:"/pipeline/:id/config",
                                 component: DesignProcess,
                                 exact:true,
                             },
                             {
-                                path:"/index/pipeline/:id/config/tigger",
+                                path:"/pipeline/:id/config/tigger",
                                 component: DesignTrigger,
                                 exact:true,
                             },
                             {
-                                path:"/index/pipeline/:id/config/vari",
+                                path:"/pipeline/:id/config/vari",
                                 component: DesignVariable,
                                 exact:true,
                             },
                             {
-                                path:"/index/pipeline/:id/config/postprocess",
+                                path:"/pipeline/:id/config/postprocess",
                                 component: DesignPostprocess,
                                 exact:true,
                             },
                         ]
                     },
                     {
-                        path:"/index/pipeline/:id/structure",
+                        path:"/pipeline/:id/history",
                         component: History,
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/structure/:instanceId/post",
+                        path:"/pipeline/:id/history/:instanceId",
                         component: HistoryInstance,
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/test",
+                        path:"/pipeline/:id/test",
                         component: Test,
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/scan",
+                        path:"/pipeline/:id/scan",
                         component: Scan,
                         exact:true,
                     },
                     {
-                        path:"/index/pipeline/:id/set",
+                        path:"/pipeline/:id/set",
                         component: PipelineSetting,
                         routes:[
                             {
-                                path:"/index/pipeline/:id/set/role",
+                                path:"/pipeline/:id/set/role",
                                 component: DomainRole,
                                 exact: true,
                             },
                             {
-                                path:"/index/pipeline/:id/set/info",
+                                path:"/pipeline/:id/set/info",
                                 component: BasicInfo,
                                 exact: true,
                             },
                             {
-                                path:"/index/pipeline/:id/set/user",
+                                path:"/pipeline/:id/set/user",
                                 component: DomainUser,
                                 exact: true,
                             },
                             {
-                                path:"/index/pipeline/:id/set/*",
-                                render:()=><Redirect to={"/index/404"}/>,
+                                path:"/pipeline/:id/set/*",
+                                render:()=><Redirect to={"/404"}/>,
                             }
                         ]
                     },
                     {
-                        path:"/index/pipeline/:id/*",
-                        render:()=><Redirect to={"/index/404"}/>,
+                        path:"/pipeline/:id/*",
+                        render:()=><Redirect to={"/404"}/>,
                     }
                 ]
             },
             {
-                path:"/index/system",
+                path:"/setting",
                 component:Setting,
                 routes:[
                     {
-                        path: "/index/system/org",
+                        path: "/setting/org",
                         component: Orga,
                         exact: true,
                     },
                     {
-                        path: "/index/system/list",
+                        path: "/setting/user",
                         component: User,
                         exact: true,
                     },
                     {
-                        path: "/index/system/userGroup",
+                        path: "/setting/userGroup",
                         component: UserGroup,
                         exact: true,
                     },
                     {
-                        path: "/index/system/directory",
+                        path: "/setting/directory",
                         component: Directory,
                         exact: true,
                     },
                     {
-                        path: "/index/system/role",
+                        path: "/setting/role",
                         component: SystemRole,
                         exact: true,
                     },
                     {
-                        path:"/index/system/notice",
+                        path:"/setting/notice",
                         component: MessageNotice,
                         exact: true,
                     },
                     {
-                        path:"/index/system/send",
+                        path:"/setting/send",
                         component: MessageSendType,
                         exact: true,
                     },
                     {
-                        path:"/index/system/grouping",
+                        path:"/setting/grouping",
                         component: Grouping,
                         exact: true,
                     },
                     {
-                        path:"/index/system/env",
+                        path:"/setting/env",
                         component: Env,
                         exact: true,
                     },
                     {
-                        path: "/index/system/auth",
+                        path: "/setting/auth",
                         component: Auth,
                         exact: true,
                     },
                     {
-                        path: "/index/system/server",
+                        path: "/setting/server",
                         component: Server,
                         exact: true,
                     },
                     {
-                        path: "/index/system/host",
+                        path: "/setting/host",
                         component: Host,
                         exact: true,
                     },
                     {
-                        path: "/index/system/hostGroup",
+                        path: "/setting/hostGroup",
                         component: HostGroup,
                         exact: true,
                     },
                     {
-                        path:"/index/system/tool",
+                        path:"/setting/tool",
                         component: Tool,
                         exact: true,
                     },
                     {
-                        path: "/index/system/plugin",
+                        path: "/setting/plugin",
                         component: Plugin,
                         exact: true,
                     },
                     {
-                        path:"/index/system/backups",
-                        component: BackupRecovery,
+                        path:"/setting/backups",
+                        component: BackupRestore,
                         exact: true,
                     },
                     {
-                        path:"/index/system/myLog",
+                        path:"/setting/myLog",
                         component: MyLog,
                         exact: true,
                     },
                     {
-                        path:"/index/system/version",
+                        path:"/setting/version",
                         component: Version,
                         exact: true,
                     },
                     {
-                        path:"/index/system/resources",
+                        path:"/setting/productAuth",
+                        component: ProductAuth,
+                        exact: true,
+                    },
+                    {
+                        path:"/setting/resources",
                         component: Resources,
                         exact: true,
                     },
                     {
-                        path: "/index/system/roletrue",
+                        path: "/setting/roletrue",
                         component: SystemRoleTrue,
                         exact: true,
                     },
                     {
-                        path: "/index/system/syr/feature",
+                        path: "/setting/syr/feature",
                         component: SystemFeature,
                         exact: true,
                     },
                     {
-                        path: "/index/system/project/role",
+                        path: "/setting/project/role",
                         component: ProjectRole,
                         exact: true,
                     },
                     {
-                        path: "/index/system/project/feature",
+                        path: "/setting/project/feature",
                         component: ProjectFeature,
                         exact: true,
                     },
                     {
-                        path: "/index/system/task",
+                        path: "/setting/task",
                         component: Task,
                         exact: true,
                     },
                     {
-                        path: "/index/system/todoTask",
+                        path: "/setting/todoTask",
                         component: MyTodoTask,
                         exact: true,
                     },
                     {
-                        path: "/index/system/todoTemp",
+                        path: "/setting/todoTemp",
                         component: TodoTemp,
                         exact: true,
                     },
                     {
-                        path: "/index/system/todoType",
+                        path: "/setting/todoType",
                         component: TodoType,
                         exact: true,
                     },
                     {
-                        path:"/index/system/logTemplate",
+                        path:"/setting/logTemplate",
                         component: LogTemplate,
                         exact: true,
                     },
                     {
 
-                        path:"/index/system/logType",
+                        path:"/setting/logType",
                         component: LogType,
                         exact: true,
                     },
                     {
-                        path:"/index/system/management",
+                        path:"/setting/management",
                         component: MessageManagement,
                         exact: true,
                     },
                     {
-                        path:"/index/system/type",
+                        path:"/setting/type",
                         component: MessageType,
                         exact: true,
                     },
                     {
-                        path:"/index/system/sendtrue",
+                        path:"/setting/sendtrue",
                         component: MessageSendTypeTrue,
                         exact: true,
                     },
                     {
-                        path:"/index/system/noticetrue",
+                        path:"/setting/noticetrue",
                         component: MessageNoticeTrue,
                         exact: true,
                     },
                     {
-                        path: "/index/system/userGrouptrue",
+                        path: "/setting/userGrouptrue",
                         component: UserGroupTrue,
                         exact: true,
                     },
                     {
-                        path:"/index/system/*",
-                        render:()=><Redirect to={"/index/404"}/>,
+                        path:"/setting/*",
+                        render:()=><Redirect to={"/404"}/>,
                     }
                 ]
             },
             {
-                path:"/index/*",
-                render:()=><Redirect to={"/index/404"}/>,
-            }
+                path:"/",
+                render:()=><Redirect to="/home"/>,
+            },
+            {
+                path:"*",
+                render:()=><Redirect to="/404"/>
+            },
         ]
-    },
-    {
-        path:"/",
-        render:()=><Redirect to="/index/home"/>,
-    },
-    {
-        path:"*",
-        render:()=><Redirect to="/index/404"/>
     },
 
 ]
