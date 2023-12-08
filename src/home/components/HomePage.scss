@@ -4,6 +4,17 @@
     overflow: auto;
     background: var(--mf-backdrop-color);
     &-content{
+        .homePage-guide{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .homePage-guide-skip{
+                cursor: pointer;
+                font-size: 16px;
+                color: var(--tiklab-blue);
+            }
+
+        }
         .homePage-guide-title{
             height: 40px;
             line-height: 40px;
@@ -32,6 +43,7 @@
                 flex: 1;
                 height: 110px;
                 padding: 10px;
+                max-width: 232px;
                 min-width: 120px;
                 border-radius: 4px;
                 cursor: pointer;

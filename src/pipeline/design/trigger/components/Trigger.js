@@ -99,7 +99,12 @@ const Trigger = props =>{
 
     return (
         <Row className="design-content">
-            <Col md={{ span: 24 }} lg={{ span: "18", offset: "3" }}>
+            <Col
+                sm={{ span: "24" }}
+                md={{ span: "24" }}
+                lg={{ span: "18", offset: "3" }}
+                xl={{ span: "16", offset: "4" }}
+            >
                 <div className="trigger">
                     <div className="trigger-content">
                         <div className="trigger-up">

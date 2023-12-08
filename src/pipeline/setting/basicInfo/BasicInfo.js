@@ -45,6 +45,9 @@ const BasicInfo = props =>{
      * 删除流水线
      */
     const delPipeline = () =>{
+        if(isLoading){
+            return;
+        }
         if(delValue.trim()==="" || delValue!==pipeline.name){
             setDelError("流水线名称错误")
             return;
@@ -156,8 +159,11 @@ const BasicInfo = props =>{
     return(
         <Row className="pipelineReDel">
             <Col
-                lg={{span: "24"}}
+                sm={{ span: "24" }}
+                md={{ span: "24" }}
+                lg={{ span: "24" }}
                 xl={{ span: "18", offset: "3" }}
+                xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited mf">
                     <div className="pipelineReDel-up">
@@ -175,7 +181,10 @@ const BasicInfo = props =>{
                     visible={delVisible}
                     onCancel={onCancel}
                     title={"删除流水线"}
-                    footer={<></>}
+                    footer={<>
+                        <Btn onClick={onCancel} title={"取消"} isMar={true}/>
+                        <Btn onClick={delPipeline} title={"确认删除"} type={"dangerous"}/>
+                    </>}
                 >
                     <Spin spinning={isLoading} tip="删除中...">
                         <div className="pipelineReDel-modal">
@@ -194,10 +203,6 @@ const BasicInfo = props =>{
                             </div>
                             <div className="pipelineReDel-modal-error">
                                 {delError}
-                            </div>
-                            <div className="pipelineReDel-modal-btn">
-                                <Btn onClick={onCancel} title={"取消"} isMar={true}/>
-                                <Btn onClick={delPipeline} title={"确认删除"} type={"dangerous"}/>
                             </div>
                         </div>
                     </Spin>

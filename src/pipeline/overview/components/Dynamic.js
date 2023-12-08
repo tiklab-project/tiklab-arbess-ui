@@ -21,7 +21,7 @@ const Dynamic = props =>{
     const {match,route} = props
 
     const {findUserPipeline,pipelineList} = pipelineStore
-    const {findlogpage,dynamicList,dynaPage} = overviewStore
+    const {findlogpage} = overviewStore
 
     const pageParam = {
         pageSize:15,
@@ -42,6 +42,9 @@ const Dynamic = props =>{
             }
     )
 
+    const [dynamicList,setDynamicList] = useState([]);
+    const [dynaPage,setDynaPage] = useState([]);
+
     useEffect(()=>{
         if(route.path==='/dyna'){
             findUserPipeline().then()
@@ -49,7 +52,16 @@ const Dynamic = props =>{
     },[])
 
     useEffect(()=>{
-        findlogpage(params).then()
+        findlogpage(params).then(res=>{
+            if(res.code===0){
+                setDynamicList(res.data?.dataList || [])
+                setDynaPage({
+                    currentPage: res.data.currentPage,
+                    totalPage: res.data.totalPage,
+                    totalRecord: res.data.totalRecord,
+                })
+            }
+        })
     },[params])
 
     /**
@@ -107,8 +119,11 @@ const Dynamic = props =>{
     return(
         <Row className="dyna" style={{height:"100%",width:"100%",overflow:"auto"}}>
             <Col
-                lg={{span: "24"}}
+                sm={{ span: "24" }}
+                md={{ span: "24" }}
+                lg={{ span: "24" }}
                 xl={{ span: "18", offset: "3" }}
+                xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited">
                     <BreadCrumb firstItem={"动态"} onClick={goBack}/>

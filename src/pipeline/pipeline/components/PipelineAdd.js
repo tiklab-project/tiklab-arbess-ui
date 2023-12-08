@@ -111,8 +111,11 @@ const PipelineAdd = props =>{
         <Spin spinning={isLoading}>
             <Row className="pipeline-add">
                 <Col
-                    sm={{span: "24"}}
-                    md={{ span: "14", offset: "5"  }}
+                    sm={{ span: "24" }}
+                    md={{ span: "24" }}
+                    lg={{ span: "18", offset: "3" }}
+                    xl={{ span: "14", offset: "5" }}
+                    xxl={{ span: "12", offset: "6" }}
                 >
                     <div className="mf-home-limited mf">
                         <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/pipeline")}/>

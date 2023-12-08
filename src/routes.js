@@ -163,7 +163,7 @@ const routers=[
                         component: Overview
                     },
                     {
-                        path:"/pipeline/:id/survey/dyna",
+                        path:"/pipeline/:id/dyna",
                         component: Dynamic,
                         exact:true,
                     },
@@ -434,13 +434,8 @@ const routers=[
                 path:"/",
                 render:()=><Redirect to="/home"/>,
             },
-            {
-                path:"*",
-                render:()=><Redirect to="/404"/>
-            },
         ]
     },
-
 ]
 
 export default routers

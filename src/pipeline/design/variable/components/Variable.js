@@ -98,7 +98,12 @@ const Variable = props =>{
 
     return(
         <Row className="design-content">
-            <Col md={{ span: 24 }} lg={{ span: "18", offset: "3" }}>
+            <Col
+                sm={{ span: "24" }}
+                md={{ span: "24" }}
+                lg={{ span: "18", offset: "3" }}
+                xl={{ span: "16", offset: "4" }}
+            >
                <div className="variable">
                    <div className="variable-content">
                        <div className="variable-up">

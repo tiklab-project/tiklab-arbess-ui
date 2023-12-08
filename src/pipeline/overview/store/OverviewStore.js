@@ -1,19 +1,7 @@
-import {action,observable} from "mobx";
+import {action} from "mobx";
 import {Axios, getUser} from "tiklab-core-ui";
 
 class OverviewStore {
-
-    // 动态
-    @observable
-    dynamicList = []
-
-    // 动态分页
-    @observable
-    dynaPage = {
-        currentPage: 1,
-        totalPage: 1,
-        totalRecord: 1,
-    }
 
     /**
      * 获取所有动态
@@ -26,16 +14,7 @@ class OverviewStore {
             ...values,
             bgroup:"matflow",
         }
-        const data = await Axios.post("/oplog/findlogpage",param)
-        if(data.code===0){
-            this.dynamicList=data.data && data.data.dataList
-            this.dynaPage = {
-                currentPage: data.data.currentPage,
-                totalPage: data.data.totalPage,
-                totalRecord: data.data.totalRecord,
-            }
-        }
-        return data
+        return await Axios.post("/oplog/findlogpage", param)
     }
 
     /**

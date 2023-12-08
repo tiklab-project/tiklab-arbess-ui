@@ -47,14 +47,13 @@ const Overview = props =>{
         findlogpage({
             content:{pipelineId:[params.id]},
             pageParam:{
-                pageSize:15,
+                pageSize:10,
                 currentPage:1
             }
         }).then(res=>{
             if(res.code===0){
                 setDynaData({
                     dynamicList: res.data.dataList || [],
-                    dynaTotalPagePage: res.data.totalPage || 1
                 })
             }
         })
@@ -122,8 +121,11 @@ const Overview = props =>{
     return(
         <Row className="overview">
             <Col
-                lg={{span: "24"}}
+                sm={{ span: "24" }}
+                md={{ span: "24" }}
+                lg={{ span: "24" }}
                 xl={{ span: "18", offset: "3" }}
+                xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited">
                     <div className="overview-top">
@@ -160,16 +162,13 @@ const Overview = props =>{
                             <div className='overview-guide'>
                                 <div className='overview-guide-title'>
                                     <AimOutlined className='overview-guide-title-icon'/>
-                                    <span className='overview-guide-title-name'>流水线动态</span>
+                                    <span className='overview-guide-title-name'>最新动态</span>
                                 </div>
-                                {
-                                    dynaData?.dynaTotalPagePage > 1 &&
-                                    <div onClick={()=>props.history.push(`/pipeline/${params.id}/survey/dyna`)}
-                                         className="overview-guide-skip"
-                                    >
-                                        <RightOutlined />
-                                    </div>
-                                }
+                                <div onClick={()=>props.history.push(`/pipeline/${params.id}/dyna`)}
+                                     className="overview-guide-skip"
+                                >
+                                    <RightOutlined />
+                                </div>
                             </div>
                             <DynamicList dynamicList={dynaData?.dynamicList || []}/>
                         </div>

@@ -15,7 +15,6 @@ import triggerStore from "../trigger/store/TriggerStore";
 import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
-import {debounce} from "../../../common/utils/Client";
 import DiskModal from "../../../common/component/modal/DiskModal";
 import {
     DeploymentUnitOutlined,
@@ -187,7 +186,7 @@ const Design = props =>{
                                             <div className="design-tab-icon">{item.icon}</div>
                                             <div className="design-tab-title">
                                                 {item.title}
-                                                {item?.long && <span>({item.long.length})</span>}
+                                                <span>({item?.long?.length || 0})</span>
                                             </div>
                                         </div>
                                     )

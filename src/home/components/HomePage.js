@@ -1,10 +1,11 @@
 import React,{useEffect,useState} from "react";
 import {Col, Row} from "antd";
-import {AimOutlined,HistoryOutlined,BlockOutlined} from "@ant-design/icons";
+import {AimOutlined, HistoryOutlined, BlockOutlined, RightOutlined} from "@ant-design/icons";
 import homePageStore from "../store/HomePageStore";
+import overviewStore from "../../pipeline/overview/store/OverviewStore";
 import ListEmpty from "../../common/component/list/ListEmpty";
 import ListIcon from "../../common/component/list/ListIcon";
-import AgentList from "../../common/component/list/AgentList";
+import DynamicList from "../../common/component/list/DynamicList";
 import {SpinLoading} from "../../common/component/loading/Loading";
 import "./homePage.scss";
 
@@ -16,19 +17,26 @@ import "./homePage.scss";
  */
 const HomePage = props =>{
 
-    const {findPipelineRecently,findAllOpen} = homePageStore
+    const {findPipelineRecently,findAllOpen} = homePageStore;
+    const {findlogpage} = overviewStore
 
-    // 最近打开的流水线加载
+    // 常用流水线加载
     const [newlyLoading,setNewlyLoading] = useState(true)
 
-    // 最近打开的流水线列表
+    // 常用流水线列表
     const [newlyBuild,setNewlyBuild] = useState([])
 
     // 最近构建的流水线加载
     const [buildLoading,setBuildLoading] = useState(true)
 
     // 最近构建的流水线列表
-    const [newlyOpen,setNewlyOpen] = useState([])
+    const [newlyOpen,setNewlyOpen] = useState([]);
+
+    // 最新动态加载
+    const [dynaLoading,setDynaLoading] = useState(true)
+
+    // 最新动态
+    const [dyna,setDyna] = useState([]);
 
     useEffect(()=>{
         // 获取最近打开的流水线
@@ -44,6 +52,20 @@ const HomePage = props =>{
             setBuildLoading(false)
             if(res.code===0){
                 setNewlyBuild(res.data || [])
+            }
+        })
+
+        // 获取最新动态
+        findlogpage({
+            pageParam:{
+                pageSize:10,
+                currentPage:1
+            },
+            content:{}
+        }).then(res=>{
+            setDynaLoading(false)
+            if(res.code===0){
+                setDyna(res.data?.dataList || [])
             }
         })
     },[])
@@ -116,14 +138,17 @@ const HomePage = props =>{
     return(
         <Row className="homePage" >
             <Col
-                lg={{span: "24"}}
+                sm={{ span: "24" }}
+                md={{ span: "24" }}
+                lg={{ span: "24" }}
                 xl={{ span: "18", offset: "3" }}
+                xxl={{ span: "18", offset: "3" }}
             >
                 <div className="homePage-content mf-home-limited">
                     <div className="home-recent">
                         <div className="homePage-guide-title">
                             <HistoryOutlined className="guide-icon"/>
-                            <span className="guide-title">常用</span>
+                            <span className="guide-title">常用流水线</span>
                         </div>
                         {
                             newlyLoading ?
@@ -157,12 +182,25 @@ const HomePage = props =>{
                         </div>
                     </div>
                     <div className="home-agent">
-                        <div className="homePage-guide-title">
-                            <AimOutlined className="guide-icon"/>
-                            <span className="guide-title">我的待办</span>
+                        <div className='homePage-guide'>
+                            <div className='homePage-guide-title'>
+                                <AimOutlined className='guide-icon'/>
+                                <span className='guide-title'>最新动态</span>
+                            </div>
+                            <div onClick={()=>props.history.push('/dyna')}
+                                 className="homePage-guide-skip"
+                            >
+                                <RightOutlined />
+                            </div>
                         </div>
                         <div className="home-agent-content">
-                            <AgentList agentList={[]}/>
+                            {
+                                dynaLoading ?
+                                    <SpinLoading type='table'/>
+                                    :
+                                    <DynamicList dynamicList={dyna}/>
+
+                            }
                         </div>
                     </div>
 

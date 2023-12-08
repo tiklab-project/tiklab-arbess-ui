@@ -45,20 +45,22 @@ const PipelineAside= (props)=>{
             findOnePipeline(id).then(res=>{
                 if(res.data===null){
                     message.info("当前流水线不存在")
+                    debugger
                     props.history.push('/pipeline')
                     return
                 }
+                setIsAside(false)
                 // 获取流水线权限
                 getInitProjectPermissions(userId,id,res.data?.power===1)
-                setIsAside(false)
-            })
-            // 当前流水线打开
-            updateOpen(id).then()
-            // 切换流水线
-            findRecentlyPipeline(id).then(res=>{
-                if(res.code===0){
-                    setRecentlyPipeline(res.data)
-                }
+                // 当前流水线打开
+                updateOpen(id).then()
+                // 切换流水线
+                findRecentlyPipeline(id).then(res=>{
+                    if(res.code===0){
+                        setRecentlyPipeline(res.data)
+                    }
+                })
+
             })
         }
     },[id])

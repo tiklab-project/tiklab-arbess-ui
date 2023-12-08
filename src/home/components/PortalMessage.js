@@ -114,7 +114,6 @@ const PortalMessage = props =>{
      * @param item
      */
     const goHref = item => {
-        const data = JSON.parse(item.data)
         const {message,status,...resItem } = item
         if (item.status === 0) {
             const updateParams = {
