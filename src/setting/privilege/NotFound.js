@@ -1,5 +1,5 @@
 import React from "react";
-import {NotFound} from "tiklab-privilege-ui";
+import {NotFound} from "thoughtware-privilege-ui";
 
 const NotFoundContent = props =>{
     return <NotFound {...props}/>

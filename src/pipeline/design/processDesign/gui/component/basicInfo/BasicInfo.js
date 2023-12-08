@@ -2,10 +2,10 @@ import React,{useState,useEffect} from "react";
 import {inject, observer} from "mobx-react";
 import {Form, Input} from "antd";
 import {WhetherChange} from "../Common";
-import CodeGiteeOrGithubOrXcode from "./code/CodeGiteeOrGithub";
+import CodeGiteeOrGithub from "./code/CodeGiteeOrGithub";
 import CodeGitOrGitlab from "./code/CodeGitOrGitlab";
 import CodeSvn from "./code/CodeSvn";
-import CodeXcode from "./code/CodeXcode";
+import CodeGitTork from "./code/CodeGitTork";
 import ScanSonarQuebe from "./scan/ScanSonarQuebe";
 import ScanSpotbugs from "./scan/ScanSpotbugs";
 import TestMvnUnit from "./test/TestMvnUnit";
@@ -43,7 +43,7 @@ const BasicInfo = props => {
             case 'svn':
             case 'gitee':
             case 'github':
-            case 'xcode':
+            case 'gittork':
             case 'maven':
             case 'nodejs':
             case 'build_docker':
@@ -59,8 +59,8 @@ const BasicInfo = props => {
                 form.setFieldsValue({
                     ...task,
                     taskName:dataItem?.taskName,
-                    codeName:dataItem.taskType==='xcode' ? task.repository?.name : task?.codeName,
-                    codeBranch:dataItem.taskType==='xcode' ? task.branch?.branchName : task?.codeBranch,
+                    codeName:dataItem.taskType==='gittork' ? task.repository?.name : task?.codeName,
+                    codeBranch:dataItem.taskType==='gittork' ? task.branch?.branchName : task?.codeBranch,
                     putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
                 })
                 break
@@ -94,11 +94,11 @@ const BasicInfo = props => {
                 return <CodeGitOrGitlab {...props}/>
             case 'gitee':
             case 'github':
-                return <CodeGiteeOrGithubOrXcode {...props}/>
+                return <CodeGiteeOrGithub {...props}/>
             case 'svn':
                 return <CodeSvn {...props}/>
-            case 'xcode':
-                return <CodeXcode {...props}/>
+            case 'gittork':
+                return <CodeGitTork {...props}/>
             case 'maventest':
                 return <TestMvnUnit {...props}/>
             case 'teston':

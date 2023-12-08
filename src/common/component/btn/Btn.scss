@@ -13,8 +13,8 @@
 }
 
 .mf-btn-primary{
-    background: var(--tiklab-blue);
-    border-color: var(--tiklab-blue);
+    background: var(--thoughtware-blue);
+    border-color: var(--thoughtware-blue);
     color: #ffffff;
 }
 
@@ -53,14 +53,14 @@
 }
 
 .mf-btn-link{
-    color: var(--tiklab-blue);
+    color: var(--thoughtware-blue);
     background: transparent;
     border-color: transparent;
     box-shadow: none;
 }
 
 .mf-btn-link-nopadding{
-    color: var(--tiklab-blue);
+    color: var(--thoughtware-blue);
     background: transparent;
     border-color: transparent;
     box-shadow: none;
@@ -87,5 +87,5 @@
     display: inline-block;
     width: 16px;
     height: 16px;
-    font-size: var(--tiklab-icon-size-16);
+    font-size: var(--thoughtware-icon-size-16);
 }

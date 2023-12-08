@@ -1,5 +1,5 @@
 import React from "react";
-import {TodoTemp} from "tiklab-todotask-ui";
+import {TodoTemp} from "thoughtware-todotask-ui";
 
 /**
  * 待办模板

@@ -1,7 +1,7 @@
 {
-    "name": "tiklab-matflow-ui",
+    "name": "thoughtware-matflow-ui",
     "version": "1.0.2",
-    "description": "tiklab matflow",
+    "description": "thoughtware matflow",
     "main": "es/src/ui.js",
     "module": "es/src/ui.js",
     "files": [
@@ -22,7 +22,7 @@
         "build:umd": "rimraf dist && cross-env BABEL_ENV=umd rollup -c"
     },
     "keywords": [
-        "tiklab-matflow"
+        "thoughtware-matflow"
     ],
     "author": "",
     "license": "ISC",
@@ -31,7 +31,7 @@
     },
     "peerDependencies": {
         "@ant-design/icons": "^4.3.0",
-        "antd": "^4.15.2",
+        "antd": "4.15.2",
         "axios": "^0.21.0",
         "codemirror": "^5.65.4",
         "echarts": "^5.3.3",
@@ -48,20 +48,20 @@
         "react-router": "^5.2.0",
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
-        "tiklab-eam-cloud-ui": "^1.0.1",
-        "tiklab-licence-cloud-ui": "^1.0.0",
-        "tiklab-tenant-cloud-ui": "^1.0.1",
-        "tiklab-matflow-ui": "^1.0.2",
-        "tiklab-core-ui": "^1.0.2",
-        "tiklab-eam-ui": "^1.0.2",
-        "tiklab-licence-ui": "^1.0.2",
-        "tiklab-message-ui": "^1.0.2",
-        "tiklab-plugin-core-ui": "^1.0.2",
-        "tiklab-plugin-manager-ui": "^1.0.2",
-        "tiklab-privilege-ui": "^1.0.2",
-        "tiklab-security-ui": "^1.0.2",
-        "tiklab-todotask-ui": "^1.0.2",
-        "tiklab-user-ui": "^1.0.2"
+        "thoughtware-eam-cloud-ui": "^1.0.1",
+        "thoughtware-licence-cloud-ui": "^1.0.0",
+        "thoughtware-tenant-cloud-ui": "^1.0.1",
+        "thoughtware-matflow-ui": "^1.0.2",
+        "thoughtware-core-ui": "^1.0.2",
+        "thoughtware-eam-ui": "^1.0.2",
+        "thoughtware-licence-ui": "^1.0.2",
+        "thoughtware-message-ui": "^1.0.2",
+        "thoughtware-plugin-core-ui": "^1.0.2",
+        "thoughtware-plugin-manager-ui": "^1.0.2",
+        "thoughtware-privilege-ui": "^1.0.2",
+        "thoughtware-security-ui": "^1.0.2",
+        "thoughtware-todotask-ui": "^1.0.2",
+        "thoughtware-user-ui": "^1.0.2"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.1",
@@ -177,15 +177,15 @@
         "react-router": "^5.2.0",
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
-        "tiklab-core-ui": "^1.0.2",
-        "tiklab-eam-ui": "^1.0.2",
-        "tiklab-licence-ui": "^1.0.2",
-        "tiklab-message-ui": "^1.0.2",
-        "tiklab-plugin-core-ui": "^1.0.2",
-        "tiklab-plugin-manager-ui": "^1.0.2",
-        "tiklab-privilege-ui": "^1.0.2",
-        "tiklab-security-ui": "^1.0.2",
-        "tiklab-todotask-ui": "^1.0.2",
-        "tiklab-user-ui": "^1.0.2"
+        "thoughtware-core-ui": "^1.0.2",
+        "thoughtware-eam-ui": "^1.0.2",
+        "thoughtware-licence-ui": "^1.0.2",
+        "thoughtware-message-ui": "^1.0.2",
+        "thoughtware-plugin-core-ui": "^1.0.2",
+        "thoughtware-plugin-manager-ui": "^1.0.2",
+        "thoughtware-privilege-ui": "^1.0.2",
+        "thoughtware-security-ui": "^1.0.2",
+        "thoughtware-todotask-ui": "^1.0.2",
+        "thoughtware-user-ui": "^1.0.2"
     }
 }

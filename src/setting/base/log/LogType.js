@@ -1,5 +1,5 @@
 import React from "react";
-import {LogType} from "tiklab-security-ui";
+import {LogType} from "thoughtware-security-ui";
 
 /**
  * 日志类型

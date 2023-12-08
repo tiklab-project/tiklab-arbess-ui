@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {message, Progress, Space, Table,Row,Col} from 'antd';
-import {getUser,parseUserSearchParams} from "tiklab-core-ui";
+import {getUser,parseUserSearchParams} from "thoughtware-core-ui";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
 import {SpinLoading} from "../../../common/component/loading/Loading";
@@ -164,7 +164,7 @@ const Resources = props => {
 
     const upGradation = () => {
         if(version==='ce'){
-            window.open("http://tiklab.net/download/product/productDetail?code=matflow&type=ee")
+            window.open("http://thoughtware.net/download/product/productDetail?code=matflow&type=ee")
             return
         }
         const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl

@@ -1,6 +1,6 @@
  
-# `tiklab-matflow-ui`
-## `npm i tiklab-matflow-ui`
+# `thoughtware-matflow-ui`
+## `npm i thoughtware-matflow-ui`
 
 
  

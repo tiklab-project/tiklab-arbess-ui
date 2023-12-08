@@ -1,5 +1,5 @@
 .pipeline-power{
-    padding-bottom: var(--tiklab-padding);
+    padding-bottom: var(--thoughtware-padding);
     .pipeline-power-title{
         padding: 0 0 8px;
     }
@@ -29,7 +29,7 @@
         .power-select-show{
             width: 13px;
             height: 13px;
-            background: var(--tiklab-blue);
+            background: var(--thoughtware-blue);
             border-radius: 50px;
             position: relative;
             &:after{
@@ -39,7 +39,7 @@
                 height: 23px;
                 top: -5px;
                 left: -5px;
-                border: 3px solid var(--tiklab-blue);
+                border: 3px solid var(--thoughtware-blue);
                 border-radius: 50px;
             }
         }
@@ -52,12 +52,12 @@
         flex: 1;
     }
     .pipeline-power-select{
-        border: 1px solid var(--tiklab-blue) !important;
+        border: 1px solid var(--thoughtware-blue) !important;
     }
 }
 
 .pipeline-user{
-    padding-bottom: var(--tiklab-padding-item);
+    padding-bottom: var(--thoughtware-padding-item);
     .pipeline-user-title{
         display: flex;
         justify-content: space-between;

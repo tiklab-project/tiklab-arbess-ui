@@ -1,6 +1,6 @@
 import {observable,action} from "mobx";
 import {message} from "antd";
-import {Axios} from "tiklab-core-ui";
+import {Axios} from "thoughtware-core-ui";
 
 class TaskStore {
 

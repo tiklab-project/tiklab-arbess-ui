@@ -14,18 +14,18 @@
             line-height: 40px;
             width: 100%;
             padding: 0 20px;
-            font-weight: var(--tiklab-font-weight-bold);
+            font-weight: var(--thoughtware-font-weight-bold);
             border-bottom: 1px solid #ececec;
         }
         .project-nav-aside-item{
             padding: 8px 20px;
             cursor: pointer;
             &:hover{
-                background: var(--tiklab-gray-300);
+                background: var(--thoughtware-gray-300);
             }
         }
         .project-nav-aside-select{
-            background: var(--tiklab-gray-400);
+            background: var(--thoughtware-gray-400);
         }
     }
     &-content{

@@ -85,31 +85,31 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true //遇到重复包直接引用，不重新打包
                 },
-                tiklabPluginUI: {
-                    name: "chunk-tiklab-plugin-manager-ui",
+                thoughtwarePluginUI: {
+                    name: "chunk-thoughtware-plugin-manager-ui",
                     chunks: "all",
-                    test: /tiklab-plugin-manager-ui/,
+                    test: /thoughtware-plugin-manager-ui/,
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                tiklabEamUI: {
-                    name: "chunk-tiklab-eam-ui",
+                thoughtwareEamUI: {
+                    name: "chunk-thoughtware-eam-ui",
                     chunks: "all",
-                    test: /tiklab-eam-ui/,
+                    test: /thoughtware-eam-ui/,
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                tiklabPrivilegeUI: {
-                    name: "chunk-tiklab-privilege-ui",
+                thoughtwarePrivilegeUI: {
+                    name: "chunk-thoughtware-privilege-ui",
                     chunks: "all",
-                    test: /tiklab-privilege-ui/,
+                    test: /thoughtware-privilege-ui/,
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                tiklabMessageUI: {
-                    name: "chunk-tiklab-message-ui",
+                thoughtwareMessageUI: {
+                    name: "chunk-thoughtware-message-ui",
                     chunks: "all",
-                    test: /tiklab-message-ui/,
+                    test: /thoughtware-message-ui/,
                     priority: 0,
                     reuseExistingChunk: true
                 },

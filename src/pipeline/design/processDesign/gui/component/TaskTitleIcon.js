@@ -15,7 +15,7 @@ import pip_message from "../../../../../assets/images/svg/pip_message.svg";
 import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
-import testonImg from "tiklab-eam-ui/es/assests/img/teston.png";
+import testonImg from "thoughtware-licence-ui/es/assests/teston.png";
 
 /**
  * task的标题
@@ -30,7 +30,7 @@ export const taskTitle = type =>{
         case 'github':  return "Github"
         case 'gitlab':  return "Gitlab"
         case 'svn':  return "SVN"
-        case 'xcode':  return "XCode"
+        case 'gittork':  return "GitTork"
         case 'maventest': return "Maven单元测试"
         case 'teston': return "TestOn自动化测试"
         case 'maven': return "Maven构建"
@@ -71,7 +71,7 @@ export const TaskIcon = props =>{
             case 'github':  return renderImg(pip_github)
             case 'gitlab':  return renderImg(pip_gitlab)
             case 'svn':  return renderImg(pip_svn)
-            case 'xcode':  return renderImg(pip_helmet)
+            case 'gittork':  return renderImg(pip_helmet)
             case 'maventest': return renderImg(pip_ceshi)
             case 'teston': return renderImg(testonImg)
             case 'maven': return renderImg(maven)
@@ -120,7 +120,7 @@ export const HeadlineTitle = type =>{
         case 'git':
         case 'gitlab':
         case 'svn':
-        case 'xcode':
+        case 'gittork':
         case 'gitee':
         case 'github':
             return '源码'

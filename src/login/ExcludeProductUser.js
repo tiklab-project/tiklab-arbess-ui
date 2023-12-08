@@ -1,5 +1,5 @@
 import React from "react";
-import {ExcludeProductUser} from "tiklab-eam-ui";
+import {ExcludeProductUser} from "thoughtware-eam-ui";
 
 /**
  * 用户不在产品授权中的页面

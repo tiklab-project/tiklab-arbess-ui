@@ -1,6 +1,6 @@
 import {action, observable} from "mobx";
 import {message} from "antd";
-import {Axios, getUser} from "tiklab-core-ui";
+import {Axios, getUser} from "thoughtware-core-ui";
 
 class HistoryStore {
 
@@ -146,8 +146,8 @@ class HistoryStore {
 
     /**
      * 当前构建历史信息
-     * @param {*} value 
-     * @returns 
+     * @param {*} value
+     * @returns
      */
     @action
     findOneInstance = value =>{
@@ -158,8 +158,8 @@ class HistoryStore {
 
     /**
      * 多任务构建全部日志
-     * @param {*} value 
-     * @returns 
+     * @param {*} value
+     * @returns
      */
      @action
      findAllInstanceLogs = value =>{
@@ -170,8 +170,8 @@ class HistoryStore {
 
     /**
      * 多阶段构建全部日志
-     * @param {*} value 
-     * @returns 
+     * @param {*} value
+     * @returns
      */
     @action
     findAllStageInstanceLogs = value =>{

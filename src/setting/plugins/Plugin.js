@@ -1,5 +1,5 @@
 import React from "react";
-import {Plugin} from "tiklab-plugin-manager-ui";
+import {Plugin} from "thoughtware-plugin-manager-ui";
 
 /**
  * 插件

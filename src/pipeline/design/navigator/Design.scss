@@ -15,7 +15,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
+        padding: var(--thoughtware-padding-item) var(--thoughtware-padding-item) 0;
     }
     .changeView-type{
         display: flex;
@@ -34,7 +34,7 @@
     }
     .design-tabs{
         display: flex;
-        padding: 0 var(--tiklab-padding-item);
+        padding: 0 var(--thoughtware-padding-item);
         height: 40px;
         line-height: 40px;
         .design-tab{
@@ -49,8 +49,8 @@
             }
         }
         .design-active{
-            color: var(--tiklab-blue);
-            border-bottom: 2px solid var(--tiklab-blue);
+            color: var(--thoughtware-blue);
+            border-bottom: 2px solid var(--thoughtware-blue);
         }
     }
     .design-content{

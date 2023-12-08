@@ -1,11 +1,11 @@
 .messageModal{
-    padding: var(--tiklab-padding-item) 0;
+    padding: var(--thoughtware-padding-item) 0;
     .messageModal-up{
-        padding: 0 var(--tiklab-padding);
+        padding: 0 var(--thoughtware-padding);
         display: flex;
         justify-content: space-between;
         .messageModal-up-title{
-            font-weight: var(--tiklab-font-weight-bold);
+            font-weight: var(--thoughtware-font-weight-bold);
         }
         .messageModal-up-icon{
             padding-right: 10px;
@@ -50,7 +50,7 @@
                 }
             }
             .title-select{
-                border-bottom: 2px solid var(--tiklab-blue);
+                border-bottom: 2px solid var(--thoughtware-blue);
             }
         }
         .messageModal-list{
@@ -62,7 +62,7 @@
                 justify-content: space-between;
                 align-items: center;
                 cursor: pointer;
-                padding: 10px var(--tiklab-padding);
+                padding: 10px var(--thoughtware-padding);
                 &:hover{
                     background: #fafafa;
                 }
@@ -90,8 +90,8 @@
                     justify-content: space-between;
                     padding-bottom: 5px;
                     .user-title{
-                        font-size: var(--tiklab-font-13);
-                        font-weight: var(--tiklab-font-weight-bold);
+                        font-size: var(--thoughtware-font-13);
+                        font-weight: var(--thoughtware-font-weight-bold);
                     }
                     .user-time{
                         color: #999;
@@ -103,7 +103,7 @@
         .message-item:hover .message-hidden{
             display: block;
             &:hover{
-                color: var(--tiklab-blue);
+                color: var(--thoughtware-blue);
             }
         }
         .message-hidden{
@@ -117,7 +117,7 @@
             border-radius: 4px;
             cursor: pointer;
             padding-top: 5px;
-            color: var(--tiklab-blue);
+            color: var(--thoughtware-blue);
         }
     }
 }

@@ -5,19 +5,19 @@
     height: 40px;
     .mf-page-ban{
         cursor:not-allowed;
-        color: var(--tiklab-gray-500);
+        color: var(--thoughtware-gray-500);
     }
     .mf-page-allow{
         cursor: pointer;
     }
     .mf-page-current,.mf-page-allow:hover{
-        color: var(--tiklab-blue);
+        color: var(--thoughtware-blue);
     }
     .mf-page-line{
         margin: 0 5px;
     }
     .mf-page-record{
         margin-left: 10px;
-        font-size: var(--tiklab-font-12);
+        font-size: var(--thoughtware-font-12);
     }
 }

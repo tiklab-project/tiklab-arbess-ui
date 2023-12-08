@@ -6,7 +6,7 @@
             padding-bottom: 10px;
         }
         .pipeline-type-ul{
-            padding-bottom: var(--tiklab-padding-item);
+            padding-bottom: var(--thoughtware-padding-item);
             display: flex;
             flex-direction: row;
         }
@@ -17,10 +17,10 @@
             cursor: pointer;
         }
         .pipeline-type-li:first-child{
-            margin-right: var(--tiklab-padding-item);
+            margin-right: var(--thoughtware-padding-item);
         }
         .pipeline-type-select{
-          border-color: var(--tiklab-blue);
+          border-color: var(--thoughtware-blue);
         }
     }
     .pipeline-template{
@@ -45,7 +45,7 @@
             border: 1px solid #d9d9d9;
             cursor: pointer;
             display: flex;
-            padding: 8px var(--tiklab-padding);
+            padding: 8px var(--thoughtware-padding);
             justify-content: space-between;
             align-items: center;
             &-header{
@@ -53,7 +53,7 @@
                 align-items: center;
                 padding-bottom: 5px;
                 .li-header-name{
-                    font-weight: var(--tiklab-font-weight-bold);
+                    font-weight: var(--thoughtware-font-weight-bold);
                     padding-left: 5px;
                     font-size: 16px
                 }
@@ -91,7 +91,7 @@
                 }
             }
             &:not(:last-child){
-                margin-bottom: var(--tiklab-padding-item);
+                margin-bottom: var(--thoughtware-padding-item);
             }
             .li-self{
                 font-size: 16px;
@@ -99,17 +99,17 @@
             }
         }
         .pipeline-template-select{
-            border-color: var(--tiklab-blue);
+            border-color: var(--thoughtware-blue);
         }
     }
     .steps-top{
-        padding: var(--tiklab-padding-item) 0 10px 0;
+        padding: var(--thoughtware-padding-item) 0 10px 0;
     }
     .steps-content {
         min-height: 100px;
     }
     .steps-bottom{
-        padding-top: var(--tiklab-padding-item)
+        padding-top: var(--thoughtware-padding-item)
     }
     .ant-steps-item-icon{
         padding-top: 7px;

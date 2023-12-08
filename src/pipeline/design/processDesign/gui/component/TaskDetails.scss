@@ -4,8 +4,8 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        font-weight: var(--tiklab-font-weight-bold);
-        padding: var(--tiklab-padding-item) var(--tiklab-padding-item) 0;
+        font-weight: var(--thoughtware-font-weight-bold);
+        padding: var(--thoughtware-padding-item) var(--thoughtware-padding-item) 0;
     }
     .task-details-bottom{
         overflow: auto;
@@ -36,8 +36,8 @@
             }
         }
         .taskForm-forms{
-            padding-top: var(--tiklab-padding-item);
-            padding-bottom: var(--tiklab-padding);
+            padding-top: var(--thoughtware-padding-item);
+            padding-bottom: var(--thoughtware-padding);
         }
     }
 }

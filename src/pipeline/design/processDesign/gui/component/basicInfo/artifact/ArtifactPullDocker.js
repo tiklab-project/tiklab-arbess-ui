@@ -4,7 +4,7 @@ import FormsSelect from "../FormsSelect";
 import {observer} from "mobx-react";
 import FormsInput from "../FormsInput";
 import FormsAuth from "../FormsAuth";
-import {ArtifactXpack} from "./ArtifactCommon";
+import {ArtifactHadess} from "./ArtifactCommon";
 
 /**
  * docker拉取制品
@@ -30,13 +30,13 @@ const ArtifactPullDocker = props => {
                 label={"拉取方式"}
                 onChange={e=>onChange(e,'pullType')}
             >
-                <Select.Option value={"xpack"}>XPack</Select.Option>
+                <Select.Option value={"hadess"}>Hadess</Select.Option>
                 <Select.Option value={"nexus"}>Nexus</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.pullType==='xpack' &&
-                <ArtifactXpack
+                dataItem.task?.pullType==='hadess' &&
+                <ArtifactHadess
                     label={'拉取仓库'}
                     dataItem={dataItem}
                     onChange={e=>onChange(e,'putAddress')}

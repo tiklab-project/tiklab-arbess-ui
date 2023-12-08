@@ -1,12 +1,12 @@
 .str-screens{
-    padding-top: var(--tiklab-padding-item);
+    padding-top: var(--thoughtware-padding-item);
     .ant-input,.ant-select{
         width: 150px;
     }
     .ant-input{
-        margin-right:var(--tiklab-padding-item) ;
+        margin-right:var(--thoughtware-padding-item) ;
     }
     .ant-select:not(:first-child){
-        margin-right: var(--tiklab-padding-item);
+        margin-right: var(--thoughtware-padding-item);
     }
 }

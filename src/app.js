@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {pluginLoader,PluginProvider} from "tiklab-plugin-core-ui";
+import {pluginLoader,PluginProvider} from "thoughtware-plugin-core-ui";
 import {useTranslation} from "react-i18next";
 import {Provider} from "mobx-react";
 import {ConfigProvider} from "antd";

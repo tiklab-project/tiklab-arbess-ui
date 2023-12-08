@@ -1,6 +1,6 @@
 .pose-variable{
     padding-top: 10px;
-    padding-bottom: var(--tiklab-padding);
+    padding-bottom: var(--thoughtware-padding);
     .pose-variable-up{
         display: flex;
         justify-content: space-between;
@@ -31,7 +31,7 @@
     .inputs-variable-varKey{
         flex: 1;
         width: 0;
-        font-weight: var(--tiklab-font-weight-bold);
+        font-weight: var(--thoughtware-font-weight-bold);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;

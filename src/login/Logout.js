@@ -1,5 +1,5 @@
 import React from "react";
-import {Logout} from "tiklab-eam-ui";
+import {Logout} from "thoughtware-eam-ui";
 
 /**
  * 退出登录

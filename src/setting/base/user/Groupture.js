@@ -1,5 +1,5 @@
 import React from "react";
-import {UserGroup} from "tiklab-user-ui";
+import {UserGroup} from "thoughtware-user-ui";
 
 /**
  * 用户组

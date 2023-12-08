@@ -48,18 +48,18 @@
                 cursor: pointer;
                 padding: 0 5px;
                 &:hover{
-                    background: var(--tiklab-gray-300);
+                    background: var(--thoughtware-gray-300);
                 }
             }
             .tree-li-active{
-                background: var(--tiklab-gray-400);
+                background: var(--thoughtware-gray-400);
             }
             .tree-li-name{
                 flex: 1;
                 width: 0;
             }
             .tree-li-time{
-                font-size: var(--tiklab-font-13);
+                font-size: var(--thoughtware-font-13);
                 color: #999;
                 width: 60px;
                 text-align: right;
@@ -109,7 +109,7 @@
             color: #ff0000;
         }
         &-success{
-            color: var(--tiklab-blue);
+            color: var(--thoughtware-blue);
         }
         &-run{
             color: #43a890;

@@ -11,14 +11,14 @@
             .homePage-guide-skip{
                 cursor: pointer;
                 font-size: 16px;
-                color: var(--tiklab-blue);
+                color: var(--thoughtware-blue);
             }
 
         }
         .homePage-guide-title{
             height: 40px;
             line-height: 40px;
-            font-weight: var(--tiklab-font-weight-bold);
+            font-weight: var(--thoughtware-font-weight-bold);
             .guide-icon{
                 font-size: 16px;
             }
@@ -55,11 +55,11 @@
             }
             .pipelineRecent-item:hover{
                 border-radius: 4px 4px 0 0;
-                border-bottom-color: var(--tiklab-blue);
+                border-bottom-color: var(--thoughtware-blue);
                 transition: 1s;
             }
             .pipelineRecent-item-title{
-                padding-bottom: var(--tiklab-padding-item);
+                padding-bottom: var(--thoughtware-padding-item);
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -69,11 +69,11 @@
                     white-space: nowrap;
                     text-overflow: ellipsis;
                     -o-text-overflow: ellipsis;
-                    font-weight: var(--tiklab-font-weight-bold);
+                    font-weight: var(--thoughtware-font-weight-bold);
                 }
             }
             .pipelineRecent-item-details{
-                font-size: var(--tiklab-font-13);
+                font-size: var(--thoughtware-font-13);
                 display: flex;
                 white-space: nowrap;
                 .details-desc{
@@ -94,7 +94,7 @@
             padding: 10px;
             border-radius: 4px;
             min-height: 200px;
-            margin-bottom: var(--tiklab-padding-item);
+            margin-bottom: var(--thoughtware-padding-item);
             .pipelineBuild-item{
                 display: flex;
                 flex-direction: row;
@@ -109,11 +109,11 @@
                     margin-right: 8px;
                 }
                 &:hover .pipelineBuild-item-name{
-                    color: var(--tiklab-blue);
+                    color: var(--thoughtware-blue);
                 }
                 .pipelineBuild-item-desc{
                     font-size: 12px;
-                    color: var(--tiklab-gray-500);
+                    color: var(--thoughtware-gray-500);
                     .desc-number{
                         padding-right: 8px;
                     }

@@ -1,5 +1,5 @@
 import React from "react";
-import {InternalWechatEntry} from "tiklab-eam-ui";
+import {InternalWechatEntry} from "thoughtware-eam-ui";
 
 /**
  * 微信登录入口

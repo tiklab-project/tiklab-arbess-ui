@@ -8,7 +8,7 @@
         width: 100%;
         min-width: 600px;
         height: var(--mf-head-height);
-        border-bottom: 1px solid var(--tiklab-gray-200);
+        border-bottom: 1px solid var(--thoughtware-gray-200);
         padding: 0 30px;
         &-logo{
             height: var(--mf-head-height);
@@ -31,7 +31,7 @@
             }
         }
         &-icon{
-            font-size: var(--tiklab-icon-size-24);
+            font-size: var(--thoughtware-icon-size-24);
         }
         .text_icon_block_item{
             cursor: pointer;
@@ -57,12 +57,12 @@
                     line-height: 48px;
                     padding: 0 10px;
                     &:not(:last-child){
-                        margin-right: var(--tiklab-padding-item);
+                        margin-right: var(--thoughtware-padding-item);
                     }
                 }
             }
             &-active{
-                border-bottom: 2px solid var(--tiklab-blue);
+                border-bottom: 2px solid var(--thoughtware-blue);
             }
         }
     }

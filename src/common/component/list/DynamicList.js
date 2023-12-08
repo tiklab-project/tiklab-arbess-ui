@@ -18,12 +18,11 @@ const DynamicList = props =>{
     // 渲染动态列表
     const renderLis = (item,index) => {
         return  <div key={index} className="dynamic-item" onClick={()=>goDynaLink(item)}>
+                    <div dangerouslySetInnerHTML={{__html: item.data}}/>
                     {/*<div className="dynamic-item-data">*/}
                     {/*    <div dangerouslySetInnerHTML={{__html: item.data}}/>*/}
                     {/*</div>*/}
-            <div dangerouslySetInnerHTML={{__html: item.data}}/>
-
-            {/*<div className="dynamic-item-time">{item.createTime}</div>*/}
+                    {/*<div className="dynamic-item-time">{item.createTime}</div>*/}
                 </div>
     }
 

@@ -3,19 +3,19 @@ import {Select} from "antd";
 import {observer} from "mobx-react";
 import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
-import xcodeStore from "../../../store/XCodeStore";
+import gitTorkStore from "../../../store/GitTorkStore";
 
 /**
- * xcode
+ * gitTork
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const CodeXcode = props =>{
+const CodeGitTork = props =>{
 
     const {taskStore} = props
 
-    const {findXcodeRpy,findXcodeBranch} = xcodeStore
+    const {findXcodeRpy,findXcodeBranch} = gitTorkStore
     const {updateTask,dataItem} = taskStore
 
     // 分支选择器是否禁止
@@ -119,4 +119,4 @@ const CodeXcode = props =>{
     )
 }
 
-export default observer(CodeXcode)
+export default observer(CodeGitTork)

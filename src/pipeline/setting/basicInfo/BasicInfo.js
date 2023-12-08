@@ -6,7 +6,7 @@ import {
     RightOutlined,
     EditOutlined
 } from "@ant-design/icons";
-import {PrivilegeProjectButton} from "tiklab-privilege-ui";
+import {PrivilegeProjectButton} from "thoughtware-privilege-ui";
 import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";

@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import FormsSelect from "../FormsSelect";
 import FormsAuth from "../FormsAuth";
 import FormsInput from "../FormsInput";
-import {ArtifactXpack} from "./ArtifactCommon";
+import {ArtifactHadess} from "./ArtifactCommon";
 
 /**
  * maven拉取制品
@@ -36,7 +36,7 @@ const ArtifactPullMaven = props => {
                 label={"拉取方式"}
                 onChange={e=>onChange(e,'pullType')}
             >
-                <Select.Option value={"xpack"}>XPack</Select.Option>
+                <Select.Option value={"hadess"}>Hadess</Select.Option>
                 <Select.Option value={"nexus"}>Nexus</Select.Option>
                 <Select.Option value={"ssh"}>SSH</Select.Option>
             </FormsSelect>
@@ -60,8 +60,8 @@ const ArtifactPullMaven = props => {
                 :
                 <>
                     {
-                        dataItem.task?.pullType==='xpack' &&
-                        <ArtifactXpack
+                        dataItem.task?.pullType==='hadess' &&
+                        <ArtifactHadess
                             label={'拉取仓库'}
                             dataItem={dataItem}
                             onChange={e=>onChange(e,'putAddress')}

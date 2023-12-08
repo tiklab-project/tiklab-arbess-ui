@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from "react";
 import {Form, Select, Checkbox, Table, Space, Tooltip, message, Input} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
-import {getUser} from "tiklab-core-ui";
+import {getUser} from "thoughtware-core-ui";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Modals from "../../../../common/component/modal/Modal";
 import {PostprocessMirrorScenario} from "../../../../common/component/editor/CodeMirror";

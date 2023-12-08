@@ -6,3 +6,4 @@ es
 lib
 *.iml
 *.zip
+package-lock.json

@@ -1,8 +1,8 @@
 import {action} from "mobx";
-import {Axios} from "tiklab-core-ui";
+import {Axios} from "thoughtware-core-ui";
 import {message} from "antd";
 
-class XCodeStore {
+class GitTorkStore {
 
     /**
      * 获取xcode仓库
@@ -36,5 +36,4 @@ class XCodeStore {
 
 }
 
-const xcodeStore= new XCodeStore()
-export default xcodeStore
+export default new GitTorkStore()

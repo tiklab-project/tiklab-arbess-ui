@@ -4,9 +4,9 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        font-weight: var(--tiklab-font-weight-bold);
+        font-weight: var(--thoughtware-font-weight-bold);
         height: 40px;
-        padding: 0 var(--tiklab-padding);
+        padding: 0 var(--thoughtware-padding);
     }
     .task-add-bottom{
         overflow: hidden;
@@ -15,10 +15,10 @@
         .gui-drawer-content{
             height: 100%;
             .gui-drawer-content-left{
-                border-right: 1px solid var(--tiklab-gray-200);
+                border-right: 1px solid var(--thoughtware-gray-200);
                 .drawerLeft{
                     .item{
-                        padding: 5px var(--tiklab-padding);
+                        padding: 5px var(--thoughtware-padding);
                         cursor: pointer;
                         position: relative;
                         &:before{
@@ -36,7 +36,7 @@
                     .item-select{
                         background: #f4f4f4;
                         &:before{
-                            background:var(--tiklab-blue);
+                            background:var(--thoughtware-blue);
                         }
                     }
                 }

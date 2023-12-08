@@ -156,7 +156,7 @@ const Design = props =>{
                                 <Btn
                                     isMar={true}
                                     title={"帮助"}
-                                    onClick={()=>window.open('http://tiklab.net/document')}
+                                    onClick={()=>window.open('http://thoughtware.net/document')}
                                 />
                                 {
                                     pipeline?.state===2 ?

@@ -8,7 +8,7 @@ $line-color:#d9d9d9;
         position: relative;
         height: 100%;
         white-space: nowrap;
-        padding: 0 var(--tiklab-padding-item);
+        padding: 0 var(--thoughtware-padding-item);
         overflow-y: hidden;
         .group-create{
             padding-top: 51px;
@@ -117,7 +117,7 @@ $line-color:#d9d9d9;
         .newStages-job-code{
             width: 240px !important;
             &:hover{
-                border-color: var(--tiklab-blue);
+                border-color: var(--thoughtware-blue);
             }
         }
         .newStages-job-sub{
@@ -195,7 +195,7 @@ $line-color:#d9d9d9;
                 padding-left: 14px;
                 margin: 10px 0;
                 &:hover{
-                    border-color: var(--tiklab-blue);
+                    border-color: var(--thoughtware-blue);
                 }
             }
         }
@@ -241,7 +241,7 @@ $line-color:#d9d9d9;
                     position: relative;
                     z-index: 1;
                     background: var(--mf-backdrop-color);
-                    font-size: var(--tiklab-font-13);
+                    font-size: var(--thoughtware-font-13);
                     color: #8b8b8b;
                     padding: 0 8px;
                     display: inline-block;
@@ -258,7 +258,7 @@ $line-color:#d9d9d9;
                 }
             }
             .newStages-title:hover + .newStages-contents:before{
-                border-color: var(--tiklab-blue) !important;
+                border-color: var(--thoughtware-blue) !important;
             }
             .newStages-contents{
                 position: relative;
@@ -336,7 +336,7 @@ $line-color:#d9d9d9;
                     align-items: center;
                     cursor: pointer;
                     &:hover{
-                        border-color: var(--tiklab-blue);
+                        border-color: var(--thoughtware-blue);
                     }
                 }
             }
@@ -347,7 +347,7 @@ $line-color:#d9d9d9;
                     width: 18px;
                     position: absolute;
                     top: 20px;
-                    border-top: 1px solid var(--tiklab-blue);
+                    border-top: 1px solid var(--thoughtware-blue);
                 }
                 &:after{
                     left: 210px;
@@ -367,10 +367,10 @@ $line-color:#d9d9d9;
                 display: none;
                 &:hover{
                     &:before{
-                        border-color: var(--tiklab-blue) !important;
+                        border-color: var(--thoughtware-blue) !important;
                     }
                     .add-newStages-job-content{
-                        border-color: var(--tiklab-blue) !important;
+                        border-color: var(--thoughtware-blue) !important;
                     }
                 }
                 .add-newStages-job-content{

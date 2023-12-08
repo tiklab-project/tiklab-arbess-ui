@@ -1,5 +1,5 @@
 import React from "react";
-import {Orga} from "tiklab-user-ui";
+import {Orga} from "thoughtware-user-ui";
 
 /**
  * 部门

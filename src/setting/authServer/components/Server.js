@@ -81,11 +81,11 @@ const Server = props =>{
         {id:'all', title: "全部"},
         {id:'gitee', title:"Gitee"},
         {id:'github', title:"Github"},
-        {id:'xcode', title:"XCode"},
+        {id:'gittork', title:"GitTork"},
         {id:'teston', title:"TestOn"},
         {id:'sonar', title:"Sonar"},
         {id:'nexus', title:"Nexus"},
-        {id:'xpack', title:"XPack"},
+        {id:'hadess', title:"Hadess"},
     ]
 
     // 标题
@@ -107,7 +107,7 @@ const Server = props =>{
     // 操作
     const action = record =>{
         const {type} = record
-        if(type==='xcode' || type==='xpack' || type==='teston'){
+        if(type==='gittork' || type==='hadess' || type==='teston'){
             if(version !=='ce'){
                 return (
                     <ListAction
@@ -276,11 +276,11 @@ const Server = props =>{
             case 'gitee':
             case 'github':
                 return authorizeColumn
-            case 'xcode':
+            case 'gittork':
             case 'teston':
             case 'sonar' :
             case 'nexus' :
-            case 'xpack' :
+            case 'hadess' :
                 return authColumn
         }
     }

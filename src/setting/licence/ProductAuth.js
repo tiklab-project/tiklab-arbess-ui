@@ -1,5 +1,5 @@
 import React from "react";
-import {ProductAuth} from "tiklab-licence-ui";
+import {ProductAuth} from "thoughtware-licence-ui";
 
 const ProductAuthContent = (props) => {
     return (

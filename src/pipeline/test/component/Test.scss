@@ -3,10 +3,10 @@
     height: 100%;
     overflow: auto;
     .test-table{
-        padding-top: var(--tiklab-padding-item);
+        padding-top: var(--thoughtware-padding-item);
         .test-item-name:hover{
             cursor: pointer;
-            color: var(--tiklab-blue);
+            color: var(--thoughtware-blue);
         }
         .test-table-expand{
             padding-left: 48px;
@@ -16,7 +16,7 @@
     }
 
     .test-overview{
-        padding-top: var(--tiklab-padding-item);
+        padding-top: var(--thoughtware-padding-item);
         .test-overview-info{
             display: flex;
             align-items: center;
@@ -39,7 +39,7 @@
                 }
                 .testState{
                     &-success{
-                        color: var(--tiklab-blue);
+                        color: var(--thoughtware-blue);
                     }
                     &-error{
                         color: #ff4d4f;

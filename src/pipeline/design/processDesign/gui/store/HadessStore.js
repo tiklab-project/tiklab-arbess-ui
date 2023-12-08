@@ -1,8 +1,8 @@
 import {action} from "mobx";
-import {Axios} from "tiklab-core-ui";
+import {Axios} from "thoughtware-core-ui";
 import {message} from "antd";
 
-class XPackStore {
+class HadessStore {
 
     /**
      * 获取xpack推送位置
@@ -23,5 +23,4 @@ class XPackStore {
 
 }
 
-const xpackStore = new XPackStore();
-export default xpackStore;
+export default new HadessStore();

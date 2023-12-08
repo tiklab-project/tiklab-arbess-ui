@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Badge} from "antd";
 import {useTranslation} from "react-i18next";
-import {getUser} from "tiklab-core-ui";
+import {getUser} from "thoughtware-core-ui";
 import {renderRoutes} from "react-router-config";
 import {
     BellOutlined,

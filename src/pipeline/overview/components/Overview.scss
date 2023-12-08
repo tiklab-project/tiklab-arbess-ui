@@ -4,7 +4,7 @@
     overflow: auto;
     background: var(--mf-backdrop-color);
     .overview-top{
-        padding-bottom: var(--tiklab-padding-item);
+        padding-bottom: var(--thoughtware-padding-item);
     }
     .overview-guide{
         display: flex;
@@ -12,7 +12,7 @@
         align-items: center;
         height: 40px;
         .overview-guide-title{
-            font-weight: var(--tiklab-font-weight-bold);
+            font-weight: var(--thoughtware-font-weight-bold);
             .overview-guide-title-icon{
                 font-size: 16px;
             }
@@ -23,7 +23,7 @@
         .overview-guide-skip{
             cursor: pointer;
             font-size: 16px;
-            color: var(--tiklab-blue);
+            color: var(--thoughtware-blue);
         }
     }
     .overview-census{
@@ -32,7 +32,7 @@
         border-radius: 4px;
         background: #fff;
         padding: 10px;
-        margin-bottom: var(--tiklab-padding-item);
+        margin-bottom: var(--thoughtware-padding-item);
         &-bottom{
             display: flex;
             align-items: center;

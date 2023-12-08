@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
 import FormsAuth from "../FormsAuth";
-import {ArtifactXpack} from "./ArtifactCommon";
+import {ArtifactHadess} from "./ArtifactCommon";
 
 /**
  * docker推送制品
@@ -32,13 +32,13 @@ const ArtifactPushDocker = props =>{
                 label={"推送方式"}
                 onChange={e=>onChange(e,'artifactType')}
             >
-                <Select.Option value={"xpack"}>XPack</Select.Option>
+                <Select.Option value={"hadess"}>Hadess</Select.Option>
                 <Select.Option value={"nexus"}>Nexus</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.artifactType==='xpack' &&
-                <ArtifactXpack
+                dataItem.task?.artifactType==='hadess' &&
+                <ArtifactHadess
                     label={'推送仓库'}
                     dataItem={dataItem}
                     onChange={e=>onChange(e,'putAddress')}

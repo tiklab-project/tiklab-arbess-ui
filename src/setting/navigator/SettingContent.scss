@@ -13,7 +13,7 @@
             text-align: center;
             padding-top: 10px;
             height: 45px;
-            border-top: 1px solid var(--tiklab-gray-200);
+            border-top: 1px solid var(--thoughtware-gray-200);
             cursor: pointer;
         }
         &-top{
@@ -36,10 +36,10 @@
             cursor: pointer;
         }
         .system-aside-first:hover {
-            background: var(--tiklab-gray-300);
+            background: var(--thoughtware-gray-300);
         }
         .system-aside-second:hover{
-            background: var(--tiklab-gray-300);
+            background: var(--thoughtware-gray-300);
         }
         &-li {
             line-height: 40px;
@@ -48,8 +48,8 @@
             padding: 0;
         }
         &-select {
-            background: var(--tiklab-gray-400);
-            border-left: 3px solid var(--tiklab-blue);
+            background: var(--thoughtware-gray-400);
+            border-left: 3px solid var(--thoughtware-blue);
         }
     }
     &-content{

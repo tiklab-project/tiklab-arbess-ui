@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {Table,message,Tag,Row,Col} from "antd";
-import {applyJump} from "tiklab-core-ui"
+import {applyJump} from "thoughtware-core-ui"
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";

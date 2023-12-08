@@ -1,14 +1,14 @@
 .variable{
-    padding: var(--tiklab-padding-item);
+    padding: var(--thoughtware-padding-item);
     min-width: 576px;
     .variable-up{
         display: flex;
         align-items: center;
         padding-bottom: 10px;
-        font-size: var(--tiklab-font-13);
+        font-size: var(--thoughtware-font-13);
         .variable-up-num{
             flex: 1;
-            margin-right: var(--tiklab-padding-item);
+            margin-right: var(--thoughtware-padding-item);
         }
     }
 }

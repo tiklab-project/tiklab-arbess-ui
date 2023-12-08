@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer,Provider} from "mobx-react";
-import {getUser} from "tiklab-core-ui";
+import {getUser} from "thoughtware-core-ui";
 import {message} from "antd";
 import {
     ApartmentOutlined,

@@ -1,13 +1,13 @@
 import React,{useState} from "react";
 import {Select} from "antd";
 import FormsSelect from "../FormsSelect";
-import xpackStore from "../../../store/XPackStore";
+import hadessStore from "../../../store/HadessStore";
 
-export const ArtifactXpack = props =>{
+export const ArtifactHadess = props =>{
 
     const {label,dataItem,onChange} = props
 
-    const {findXPackRpy} = xpackStore
+    const {findXPackRpy} = hadessStore
 
     // 推送地址获取加载状态
     const [isSpin,setSpin] = useState(false);
