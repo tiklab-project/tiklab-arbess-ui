@@ -182,7 +182,7 @@ const PipelineUserAdd = props =>{
                         onClick: () => onSelectRow(record)
                     })}
                     columns={[{
-                        title:"昵称",
+                        title:"姓名",
                         dataIndex:"nickname",
                         key:"nickname",
                         width:"100%",

@@ -130,7 +130,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -153,7 +153,7 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"13%",
+            width:"17%",
             ellipsis:true,
             render:(text,record) => user(text,record)
         },
@@ -161,14 +161,14 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"17%",
+            width:"20%",
             ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"10%",
+            width:"8%",
             ellipsis:true,
             render:(text,record) => action(record)
         }
@@ -180,7 +180,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -195,7 +195,7 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:["user","nickname"],
-            width:"20%",
+            width:"25%",
             ellipsis:true,
             render:(text,record) => user(text,record)
 
@@ -204,14 +204,14 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"20%",
+            width:"22%",
             ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"10%",
+            width:"8%",
             ellipsis:true,
             render:(text,record) => action(record)
         }
@@ -223,7 +223,7 @@ const Server = props =>{
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:text => name(text)
         },
@@ -231,14 +231,14 @@ const Server = props =>{
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
-            width:"25%",
+            width:"23%",
             ellipsis:true,
         },
         {
             title:"认证类型",
             dataIndex:"authType",
             key:"authType",
-            width:"15%",
+            width:"18%",
             ellipsis:true,
             render: text => text===1?"username&password":"私钥"
         },
@@ -246,23 +246,22 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:["user","nickname"],
-            width:"13%",
+            width:"16%",
             ellipsis:true,
             render:(text,record) => user(text,record)
-
         },
         {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"17%",
+            width:"20%",
             ellipsis:true,
         },
         {
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"10%",
+            width:"8%",
             ellipsis:true,
             render:(_,record) => action(record)
         }
@@ -291,7 +290,7 @@ const Server = props =>{
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{span: "24"}}
-                xl={{ span: "22", offset: "1" }}
+                xl={{ span: "22", offset: "1"}}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <BreadCrumb firstItem={"服务集成"} >

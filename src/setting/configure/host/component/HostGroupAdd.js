@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Form, Input} from "antd";
-import {Validation} from "../../../common/utils/Client";
-import Modals from "../../../common/component/modal/Modal";
+import {Validation} from "../../../../common/utils/Client";
+import Modals from "../../../../common/component/modal/Modal";
 import HostGroupAddHost from "./HostGroupAddHost";
 import hostGroupStore from "../store/HostGroupStore";
 

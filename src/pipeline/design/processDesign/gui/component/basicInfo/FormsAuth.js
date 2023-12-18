@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Select,Divider} from "antd";
-import ServerAddBtn from "../../../../../../setting/authServer/components/ServerAddBtn";
-import AuthAddBtn from "../../../../../../setting/auth/components/AuthAddBtn";
-import HostAddBtn from "../../../../../../setting/authHost/component/HostAddBtn";
-import authStore from "../../../../../../setting/auth/store/AuthStore";
-import hostStore from "../../../../../../setting/authHost/store/HostStore";
-import hostGroupStore from "../../../../../../setting/authHost/store/HostGroupStore";
-import serverStore from "../../../../../../setting/authServer/store/ServerStore";
+import ServerAddBtn from "../../../../../../setting/server/components/ServerAddBtn";
+import AuthAddBtn from "../../../../../../setting/configure/auth/components/AuthAddBtn";
+import HostAddBtn from "../../../../../../setting/configure/host/component/HostAddBtn";
+import authStore from "../../../../../../setting/configure/auth/store/AuthStore";
+import hostStore from "../../../../../../setting/configure/host/store/HostStore";
+import hostGroupStore from "../../../../../../setting/configure/host/store/HostGroupStore";
+import serverStore from "../../../../../../setting/server/store/ServerStore";
 import FormsSelect from "./FormsSelect";
 
 /**

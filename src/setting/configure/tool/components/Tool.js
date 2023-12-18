@@ -3,13 +3,13 @@ import {Table,Row,Col} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import toolStore from "../store/ToolStore";
 import ToolModal from "./ToolModal";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import Btn from "../../../common/component/btn/Btn";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import ListAction from "../../../common/component/list/ListAction";
-import {TaskTitleIcon} from "../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
-import ListIcon from "../../../common/component/list/ListIcon";
-import "../../common/Common.scss";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import Btn from "../../../../common/component/btn/Btn";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListAction from "../../../../common/component/list/ListAction";
+import {TaskTitleIcon} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
+import ListIcon from "../../../../common/component/list/ListIcon";
+import "../../../common/Common.scss";
 
 /**
  * 工具配置
@@ -107,7 +107,7 @@ const Tool = props =>{
             ellipsis:true,
         },
         {
-            title:  "操作",
+            title:"操作",
             dataIndex:"action",
             key:"action",
             width:"10%",
@@ -170,7 +170,7 @@ const Tool = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"工具配置"}>
+                <BreadCrumb firstItem={"工具"}>
                     {
                         version==='ce' &&
                         <Btn

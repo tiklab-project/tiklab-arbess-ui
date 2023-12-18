@@ -1,47 +1,44 @@
 import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
-import Btn from "../../../common/component/btn/Btn";
-import HostModal from "./HostModal";
+import Btn from "../../../../common/component/btn/Btn";
+import AuthModal from "./AuthModal";
 
 /**
- * 主机配置添加按钮
+ * 认证配置添加按钮
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const HostAddBtn = props =>{
+const AuthAddBtn = props =>{
 
     const {isConfig,visible,setVisible,formValue,setFormValue,findAuth} = props
 
     /**
      * 添加认证
      */
-    const addHostBtn = () =>{
+    const addAuthBtn = () =>{
         setVisible(true)
         if(formValue){
             setFormValue(null)
         }
     }
 
-
     return(
         <>
             <Btn
-                onClick={addHostBtn}
+                onClick={addAuthBtn}
                 type={isConfig?"row":"primary"}
-                title={isConfig?"添加":"添加主机"}
+                title={isConfig?"添加":"添加认证"}
                 icon={<PlusOutlined/>}
             />
-
-            <HostModal
+            <AuthModal
                 visible={visible}
                 setVisible={setVisible}
                 formValue={formValue || null}
                 findAuth={findAuth}
             />
-
         </>
     )
 }
 
-export default HostAddBtn
+export default AuthAddBtn

@@ -179,7 +179,8 @@ const PortalMessage = props =>{
      */
     const renderMessageList = messageList =>{
         return messageList && messageList.map((item,index)=>{
-            const data = JSON.parse(item.data)
+            const {sendUser,messageType,sendTime,action,data} = item
+            const dataObj = JSON.parse(data)
             return(
                 <div key={index} className={`message-item ${item.status===1 ? "message-read":""}`} onClick={()=>goHref(item)}>
                     <div className="message-item-left">
@@ -187,8 +188,8 @@ const PortalMessage = props =>{
                         <div className="message-item-center">
                             <div className="message-item-user">
                                 <Space>
-                                    <span className="user-title">{item.title}</span>
-                                    <span className="user-time">{data.date}</span>
+                                    <div className="user-title">{sendUser?.nickname || sendUser?.name} {messageType.name}</div>
+                                    <div className="user-time">{sendTime}</div>
                                 </Space>
                                 <Tooltip title={"删除"}>
                                     <div onClick={e=>delMessage(e,item)} className={`message-hidden`}>
@@ -196,7 +197,13 @@ const PortalMessage = props =>{
                                     </div>
                                 </Tooltip>
                             </div>
-                             <div dangerouslySetInnerHTML={{__html: item.content}}/>
+                            <div className='message-item-info'>
+                                <div className='message-item-info-action'>{action}</div>
+                                {
+                                    dataObj?.message &&
+                                    <div className="message-item-info-message"> {dataObj?.message}</div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

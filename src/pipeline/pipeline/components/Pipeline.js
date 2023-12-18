@@ -7,8 +7,8 @@ import Btn from "../../../common/component/btn/Btn";
 import Tabs from "../../../common/component/tabs/Tabs";
 import {debounce} from "../../../common/utils/Client";
 import pipelineStore from "../store/PipelineStore";
-import envStore from "../../../setting/env/store/EnvStore";
-import groupingStore from "../../../setting/grouping/store/GroupingStore";
+import envStore from "../../../setting/configure/env/store/EnvStore";
+import groupingStore from "../../../setting/configure/grouping/store/GroupingStore";
 import "./Pipeline.scss";
 
 /**
@@ -248,6 +248,7 @@ const Pipeline = props =>{
                         {...props}
                         listType={listType}
                         isLoading={isLoading}
+                        setIsLoading={setIsLoading}
                         changPage={changPage}
                         changFresh={changFresh}
                         pipPage={pipPage}

@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Form,Select,Input} from "antd";
-import {Validation} from "../../../common/utils/Client";
-import Modals from "../../../common/component/modal/Modal";
+import {Validation} from "../../../../common/utils/Client";
+import Modals from "../../../../common/component/modal/Modal";
 
 const lis = [
     {

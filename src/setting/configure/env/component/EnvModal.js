@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import {Form, Input} from "antd";
-import Modals from "../../../common/component/modal/Modal";
-import {Validation} from "../../../common/utils/Client";
+import Modals from "../../../../common/component/modal/Modal";
+import {Validation} from "../../../../common/utils/Client";
 import envStore from "../store/EnvStore";
 
 /**

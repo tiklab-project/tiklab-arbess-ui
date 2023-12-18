@@ -20,7 +20,7 @@ const HistoryInstance = props => {
         // 获取当前构建历史信息
         findOneInstance(params.instanceId).then(res=>{
             if(res.code===0){
-                if(res.data) return  setHistoryItem(res.data)
+                if(res.data) return setHistoryItem(res.data)
                 return props.history.push(`/404`)
             }
         })

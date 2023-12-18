@@ -33,12 +33,12 @@ const Dynamic = props =>{
         route.path === '/dyna' ?
             {
                 pageParam,
-                content:{}
+                data:{}
             }
             :
             {
                 pageParam,
-                content:{pipelineId:[match.params.id]},
+                data:{pipelineId:[match.params.id]},
             }
     )
 
@@ -71,7 +71,7 @@ const Dynamic = props =>{
      */
     const changParams = (value,field) =>{
         switch (field) {
-            case "content":
+            case "data":
                 setParams({
                     ...params,
                     pageParam,
@@ -135,7 +135,7 @@ const Dynamic = props =>{
                                     showSearch
                                     placeholder={"流水线"}
                                     style={{width:150}}
-                                    onChange={(value)=>changParams(value,"content")}
+                                    onChange={(value)=>changParams(value,"data")}
                                     filterOption={(input, option) =>
                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                     }
@@ -152,12 +152,13 @@ const Dynamic = props =>{
                             <Select
                                 placeholder={"操作"}
                                 style={{width:150}}
-                                onChange={(value)=>changParams(value,"module")}
+                                onChange={(value)=>changParams(value,"actionType")}
                             >
                                 <Select.Option key={"1"} value={null}>所有操作</Select.Option>
-                                <Select.Option key={"2"} value={"CREATE"}>创建</Select.Option>
-                                <Select.Option key={"3"} value={"UPDATE"}>更新</Select.Option>
-                                <Select.Option key={"5"} value={"RUN"}>运行</Select.Option>
+                                <Select.Option key={"2"} value={"PIP_GREATE"}>创建流水线</Select.Option>
+                                <Select.Option key={"3"} value={"PIP_DELETE"}>删除流水线</Select.Option>
+                                <Select.Option key={"5"} value={"PIP_UPDATE"}>更新流水线</Select.Option>
+                                <Select.Option key={"5"} value={"PIP_RUN"}>运行流水线</Select.Option>
                             </Select>
                             <RangePicker
                                 onChange={(value,e)=>changParams(e,"timestamp")}

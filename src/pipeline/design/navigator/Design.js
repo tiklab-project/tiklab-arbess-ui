@@ -119,25 +119,26 @@ const Design = props =>{
         {
             id:`/pipeline/${pipelineId}/config`,
             title:"流程设计",
-            icon: <DeploymentUnitOutlined/>
+            icon: <DeploymentUnitOutlined/>,
+            long:false,
         },
         {
             id:`/pipeline/${pipelineId}/config/tigger`,
             title:"触发设置",
             icon: <CrownOutlined/>,
-            long: triggerData
+            long: triggerData?.length || '0'
         },
         {
             id:`/pipeline/${pipelineId}/config/vari`,
             title:"变量",
             icon: <BugOutlined/>,
-            long: variableData
+            long: variableData?.length || '0'
         },
         {
             id:`/pipeline/${pipelineId}/config/postprocess`,
             title:"后置处理",
             icon: <PartitionOutlined/>,
-            long: postprocessData
+            long: postprocessData?.length || '0'
         }
     ]
 
@@ -186,7 +187,10 @@ const Design = props =>{
                                             <div className="design-tab-icon">{item.icon}</div>
                                             <div className="design-tab-title">
                                                 {item.title}
-                                                <span>({item?.long?.length || 0})</span>
+                                                {
+                                                    item?.long &&
+                                                    <span>({item.long})</span>
+                                                }
                                             </div>
                                         </div>
                                     )

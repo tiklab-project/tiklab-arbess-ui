@@ -39,8 +39,8 @@ const HomePage = props =>{
     const [dyna,setDyna] = useState([]);
 
     useEffect(()=>{
-        // 获取最近打开的流水线
-        findAllOpen(5).then(res=> {
+        // 获取常用流水线
+        findAllOpen(4).then(res=> {
             setNewlyLoading(false)
             if(res.code===0){
                 setNewlyOpen(res.data || [])
@@ -61,7 +61,7 @@ const HomePage = props =>{
                 pageSize:10,
                 currentPage:1
             },
-            content:{}
+            data:{}
         }).then(res=>{
             setDynaLoading(false)
             if(res.code===0){

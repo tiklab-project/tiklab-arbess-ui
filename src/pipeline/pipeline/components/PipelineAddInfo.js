@@ -8,8 +8,8 @@ import Profile from "../../../common/component/profile/Profile";
 import Btn from "../../../common/component/btn/Btn";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import PipelineUserAdd from "./PipelineUserAdd";
-import envStore from "../../../setting/env/store/EnvStore";
-import groupingStore from "../../../setting/grouping/store/GroupingStore";
+import envStore from "../../../setting/configure/env/store/EnvStore";
+import groupingStore from "../../../setting/configure/grouping/store/GroupingStore";
 import "./PipelineAddInfo.scss";
 
 /**
@@ -183,7 +183,7 @@ const PipelineAddInfo = props =>{
 
     const columns = [
         {
-            title:"昵称",
+            title:"姓名",
             dataIndex:"nickname",
             key:"nickname",
             width:"40%",

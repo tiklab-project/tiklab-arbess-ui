@@ -43,9 +43,8 @@ const PipelineAside= (props)=>{
         if(id){
             // 获取单个流水线信息
             findOnePipeline(id).then(res=>{
-                if(res.data===null){
-                    message.info("当前流水线不存在")
-                    debugger
+                if(res.data===null || !res.data){
+                    message.info("当前流水线不存在或没有权限！")
                     props.history.push('/pipeline')
                     return
                 }

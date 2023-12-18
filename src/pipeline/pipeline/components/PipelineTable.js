@@ -34,7 +34,7 @@ import "./PipelineTable.scss";
  */
 const PipelineTable = props =>{
 
-    const {pipPage,pipelineListPage,changPage,changFresh,listType,isLoading}=props
+    const {pipPage,pipelineListPage,changPage,changFresh,listType,isLoading,setIsLoading}=props
 
     const {updateFollow,findPipelineCloneName,pipelineClone,
         importPipelineYaml,findUserPipeline
@@ -99,15 +99,25 @@ const PipelineTable = props =>{
      * 运行或者终止
      */
     const work = debounce(record =>{
+        setIsLoading(true)
         if(record.state === 1){
             // 开始运行
             execStart(record.id).then(r=>{
-                if(r.code===0) return changFresh()
-                if(r.code===9000) return setDiskVisible(true)
+                if(r.code===0){
+                    return goInstance({
+                        id:record.id,
+                        instanceId:r.data.instanceId
+                    })
+                }
+                if(r.code===9000) {
+                    return setDiskVisible(true)
+                }
+                setIsLoading(false)
             })
         } else {
             // 停止运行
             execStop(record.id).then(r=>{
+                setIsLoading(false)
                 if(r.code===0) return changFresh()
             })
         }
@@ -335,7 +345,6 @@ const PipelineTable = props =>{
     return  (
         <div className="pipelineTable">
             <Table
-                bordered={false}
                 loading={isLoading}
                 columns={columns}
                 dataSource={pipelineListPage}

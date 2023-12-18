@@ -2,9 +2,9 @@ import React,{useEffect,useState} from "react";
 import {Form, Input, Tooltip, Select} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import hostStore from "../store/HostStore";
-import AuthType from "../../common/AuthType";
-import {Validation} from "../../../common/utils/Client";
-import Modals from "../../../common/component/modal/Modal";
+import AuthType from "../../../common/AuthType";
+import {Validation} from "../../../../common/utils/Client";
+import Modals from "../../../../common/component/modal/Modal";
 
 /**
  * 主机配置弹出框，添加，更新

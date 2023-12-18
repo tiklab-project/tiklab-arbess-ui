@@ -39,14 +39,14 @@ const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInf
  * 系统设置
  */
 const Setting=AsyncComponent(()=>import("./setting/navigator/Setting"))
-const Auth=AsyncComponent(()=>import("./setting/auth/components/Auth"))
-const Host=AsyncComponent(()=>import("./setting/authHost/component/Host"))
-const HostGroup=AsyncComponent(()=>import("./setting/authHost/component/HostGroup"))
-const Server=AsyncComponent(()=>import("./setting/authServer/components/Server"))
-const Tool=AsyncComponent(()=>import("./setting/tool/components/Tool"))
+const Auth=AsyncComponent(()=>import("./setting/configure/auth/components/Auth"))
+const Host=AsyncComponent(()=>import("./setting/configure/host/component/Host"))
+const HostGroup=AsyncComponent(()=>import("./setting/configure/host/component/HostGroup"))
+const Server=AsyncComponent(()=>import("./setting/server/components/Server"))
+const Tool=AsyncComponent(()=>import("./setting/configure/tool/components/Tool"))
 const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
-const Grouping=AsyncComponent(()=>import("./setting/grouping/component/Grouping"))
-const Env=AsyncComponent(()=>import("./setting/env/component/Env"))
+const Grouping=AsyncComponent(()=>import("./setting/configure/grouping/component/Grouping"))
+const Env=AsyncComponent(()=>import("./setting/configure/env/component/Env"))
 
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))

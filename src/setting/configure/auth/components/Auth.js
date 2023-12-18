@@ -1,13 +1,13 @@
 import React,{useEffect,useState} from "react";
 import {Space,Table, Row, Col} from "antd";
 import authStore from "../store/AuthStore"
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import ListIcon from "../../../common/component/list/ListIcon";
-import ListAction from "../../../common/component/list/ListAction";
-import Profile from "../../../common/component/profile/Profile";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListIcon from "../../../../common/component/list/ListIcon";
+import ListAction from "../../../../common/component/list/ListAction";
+import Profile from "../../../../common/component/profile/Profile";
 import AuthAddBtn from "./AuthAddBtn";
-import "../../common/Common.scss";
+import "../../../common/Common.scss";
 
 /**
  * 认证配置页面
@@ -131,7 +131,7 @@ const Auth = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"认证配置"}>
+                <BreadCrumb firstItem={"认证"}>
                     <AuthAddBtn
                         visible={visible}
                         setVisible={setVisible}

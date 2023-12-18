@@ -84,6 +84,7 @@
                 }
                 &-center{
                     flex: 1;
+                    width: 0;
                 }
                 &-user{
                     display: flex;
@@ -92,10 +93,39 @@
                     .user-title{
                         font-size: var(--thoughtware-font-13);
                         font-weight: var(--thoughtware-font-weight-bold);
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        -o-text-overflow: ellipsis;
+                        max-width: 200px;
                     }
                     .user-time{
                         color: #999;
                         font-size: 13px;
+                    }
+                }
+                &-info{
+                    display: flex;
+                    align-items: center;
+                    .message-item-info-action,.message-item-info-message{
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        -o-text-overflow: ellipsis;
+                    }
+                    .message-item-info-action{
+                        font-size: 13px;
+                        color: var(--thoughtware-gray-500);
+                        max-width: 200px;
+                    }
+                    .message-item-info-message{
+                        display: inline-block;
+                        background-color: #f6f6f6;
+                        padding: 4px;
+                        border-radius: 4px;
+                        font-size: 12px;
+                        margin-left: 10px;
+                        max-width: 120px;
                     }
                 }
             }

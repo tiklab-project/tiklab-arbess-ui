@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Space,Table, Row, Col} from "antd";
 import hostStore from "../store/HostStore";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import ListIcon from "../../../common/component/list/ListIcon";
-import ListAction from "../../../common/component/list/ListAction";
-import Profile from "../../../common/component/profile/Profile";
-import Tabs from "../../../common/component/tabs/Tabs";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListIcon from "../../../../common/component/list/ListIcon";
+import ListAction from "../../../../common/component/list/ListAction";
+import Profile from "../../../../common/component/profile/Profile";
+import Tabs from "../../../../common/component/tabs/Tabs";
 import HostAddBtn from "./HostAddBtn";
-import "../../common/Common.scss";
+import "../../../common/Common.scss";
 
 /**
  * 主机配置页面
@@ -102,7 +102,7 @@ const Host = props =>{
             title:"ip地址",
             dataIndex: "ip",
             key: "ip",
-            width:"14%",
+            width:"15%",
             ellipsis:true,
         },
         {
@@ -144,7 +144,7 @@ const Host = props =>{
             title:"操作",
             dataIndex: "action",
             key: "action",
-            width:"9%",
+            width:"8%",
             ellipsis:true,
             render:(_,record) => {
                 return  <ListAction
@@ -164,7 +164,7 @@ const Host = props =>{
                 xl={{ span: "22", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"主机配置"}>
+                <BreadCrumb firstItem={"主机"}>
                     <HostAddBtn
                         visible={visible}
                         setVisible={setVisible}

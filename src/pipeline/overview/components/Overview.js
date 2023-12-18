@@ -45,7 +45,7 @@ const Overview = props =>{
         })
         // 流水线动态
         findlogpage({
-            content:{pipelineId:[params.id]},
+            data:{pipelineId:[params.id]},
             pageParam:{
                 pageSize:10,
                 currentPage:1

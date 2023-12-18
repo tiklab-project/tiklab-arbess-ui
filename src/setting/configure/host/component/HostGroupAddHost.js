@@ -2,9 +2,9 @@ import React,{useEffect,useState} from "react";
 import {Dropdown, Input, Table} from "antd";
 import {DeleteOutlined, PlusOutlined, SearchOutlined} from "@ant-design/icons";
 import hostStore from "../store/HostStore";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import Btn from "../../../common/component/btn/Btn";
-import Page from "../../../common/component/page/Page";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import Btn from "../../../../common/component/btn/Btn";
+import Page from "../../../../common/component/page/Page";
 
 const HostGroupAddHost = (props) => {
 

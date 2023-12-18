@@ -1,14 +1,10 @@
 import React from "react";
 import {
-    BuildOutlined,
     FileProtectOutlined,
     LayoutOutlined,
     MergeCellsOutlined,
     SafetyCertificateOutlined,
     SoundOutlined,
-    SwitcherOutlined,
-    VerifiedOutlined,
-    SaveOutlined,
     DeploymentUnitOutlined,
     MacCommandOutlined
 } from "@ant-design/icons";
@@ -47,42 +43,38 @@ const Setting = props =>{
             ]
         },
         {
-            id:"/setting/grouping",
-            title:"分组管理",
+            id:"configure",
+            title:"流水线配置",
             icon:<DeploymentUnitOutlined />,
-        },
-        {
-            id:"/setting/env",
-            title:"环境管理",
-            icon:<SaveOutlined />,
-        },
-        {
-            id:"resources",
-            title:"主机管理",
-            icon:<FileProtectOutlined />,
             children:[
+                {
+                    id:"/setting/grouping",
+                    title:"分组",
+                },
+                {
+                    id:"/setting/env",
+                    title:"环境",
+                },
+                {
+                    id:"/setting/host",
+                    title:"主机",
+                    purviewCode:"resources_host",
+                },
                 {
                     id:"/setting/hostGroup",
                     title:"主机组",
                 },
                 {
-                    id:"/setting/host",
-                    title:"主机配置",
-                    purviewCode:"resources_host",
+                    id:"/setting/auth",
+                    title:"认证",
+                    purviewCode:"pipeline_auth",
+                },
+                {
+                    id:"/setting/tool",
+                    title:"工具",
+                    purviewCode:"pipeline_env",
                 },
             ]
-        },
-        {
-            id:"/setting/auth",
-            title:"认证配置",
-            icon:<SwitcherOutlined />,
-            purviewCode:"pipeline_auth",
-        },
-        {
-            id:"/setting/tool",
-            title:"工具配置",
-            icon:<BuildOutlined />,
-            purviewCode:"pipeline_env",
         },
         {
             id:"/setting/server",

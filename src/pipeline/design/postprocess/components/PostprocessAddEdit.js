@@ -186,7 +186,7 @@ const PostprocessAddEdit = props =>{
         {value:"email", title:"邮箱通知"},
         {value:"sms", title:"短信通知"},
         {value:"qywechat", title:"企业微信机器人"},
-        {value:"dingding", title:"钉钉机器人"},
+        // {value:"dingding", title:"钉钉机器人"},
     ]
 
     return(

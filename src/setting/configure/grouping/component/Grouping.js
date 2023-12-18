@@ -1,15 +1,15 @@
 import React,{useEffect,useState} from "react";
 import {Space,Table,Row,Col} from "antd";
 import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import ListIcon from "../../../common/component/list/ListIcon";
-import ListAction from "../../../common/component/list/ListAction";
-import Profile from "../../../common/component/profile/Profile";
-import Btn from "../../../common/component/btn/Btn";
-import EnvModal from "./EnvModal";
-import envStore from "../store/EnvStore";
-import "../../common/Common.scss";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListIcon from "../../../../common/component/list/ListIcon";
+import ListAction from "../../../../common/component/list/ListAction";
+import Profile from "../../../../common/component/profile/Profile";
+import Btn from "../../../../common/component/btn/Btn";
+import GroupingModal from "./GroupingModal";
+import groupingStore from "../store/GroupingStore";
+import "../../../common/Common.scss";
 
 /**
  * 环境管理
@@ -17,12 +17,12 @@ import "../../common/Common.scss";
  * @returns {JSX.Element}
  * @constructor
  */
-const Env = props =>{
+const Grouping = props =>{
 
-    const {findEnvList,deleteEnv} = envStore
+    const {findGroupList,deleteGroup} = groupingStore
 
-    //环境管理列表
-    const [envList,setEnvList] = useState([])
+    // 分组管理列表
+    const [groupList,setGroupList] = useState([])
 
     // 弹出框状态
     const [visible,setVisible] = useState(false)
@@ -32,16 +32,16 @@ const Env = props =>{
 
     useEffect(()=>{
         // 初始化认证配置
-        findEnv()
+        findGrouping()
     },[])
 
     /**
-     * 获取环境管理
+     * 获取分组管理
      */
-    const findEnv = () =>{
-        findEnvList().then(res=>{
+    const findGrouping = () =>{
+        findGroupList().then(res=>{
             if(res.code===0){
-                setEnvList(res.data || [])
+                setGroupList(res.data || [])
             }
         })
     }
@@ -52,7 +52,7 @@ const Env = props =>{
     }
 
     /**
-     * 编辑环境管理
+     * 编辑分组管理
      * @param record
      */
     const editAuth = record => {
@@ -61,13 +61,13 @@ const Env = props =>{
     }
 
     /**
-     * 删除环境管理
+     * 删除分组管理
      * @param record
      */
     const delAuth = record => {
-        deleteEnv(record.id).then(r=>{
+        deleteGroup(record.id).then(r=>{
             if(r.code===0){
-                findEnv()
+                findGrouping()
             }
         })
     }
@@ -75,8 +75,8 @@ const Env = props =>{
     const columns = [
         {
             title:"名称",
-            dataIndex:"envName",
-            key:"envName",
+            dataIndex:"groupName",
+            key:"groupName",
             width:"35%",
             ellipsis:true,
             render:text => {
@@ -118,7 +118,7 @@ const Env = props =>{
             render:(_,record) => {
                 if(record.id==='default'){
                     return (
-                        <span className="env-table-ban">
+                        <span className="grouping-table-ban">
                             <EditOutlined className="text-ban"/>
                             <DeleteOutlined className="text-ban"/>
                         </span>
@@ -143,24 +143,24 @@ const Env = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"环境管理"}>
+                <BreadCrumb firstItem={"分组"}>
                     <Btn
                         type={'primary'}
-                        title={"添加环境"}
+                        title={"添加分组"}
                         onClick={createEnv}
                         icon={<PlusOutlined/>}
                     />
                 </BreadCrumb>
-                <EnvModal
+                <GroupingModal
                     visible={visible}
                     setVisible={setVisible}
                     formValue={formValue}
-                    findEnv={findEnv}
+                    findGrouping={findGrouping}
                 />
                 <div className="auth-content">
                     <Table
                         columns={columns}
-                        dataSource={envList}
+                        dataSource={groupList}
                         rowKey={record=>record.id}
                         pagination={false}
                         locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
@@ -171,4 +171,4 @@ const Env = props =>{
     )
 }
 
-export default Env
+export default Grouping

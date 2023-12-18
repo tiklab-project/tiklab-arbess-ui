@@ -69,14 +69,14 @@ const SettingContent= props =>  {
     const renderMenu = (data,deep)=> {
         return (
             <PrivilegeButton key={data.id} code={data.purviewCode} {...props}>
-                <li style={{cursor:"pointer",paddingLeft:`${deep*30+30}`}}
+                <li style={{cursor:"pointer",paddingLeft:deep}}
                     className={`system-aside-li system-aside-second  ${data.id=== selectKey ? "system-aside-select":""}`}
                     onClick={()=>select(data)}
                     key={data.id}
                 >
                     {
                         data?.icon &&
-                        <span className="sys-content-icon">{data?.icon}</span>
+                        <span className="sys-content-icon">{data.icon}</span>
                     }
                     <span>{data.title}</span>
                 </li>
@@ -88,13 +88,16 @@ const SettingContent= props =>  {
         return(
             <li key={item.id} className="system-aside-li">
                 <div className="system-aside-item system-aside-first"
-                     style={{paddingLeft: `${deep * 30 + 30}`}}
+                     style={{paddingLeft: deep}}
                      onClick={()=>setOpenOrClose(item.id)}
                 >
-                    <span>
-                        <span className="sys-content-icon">{item.icon}</span>
+                    <div>
+                        {
+                            item?.icon &&
+                            <span className="sys-content-icon">{item.icon}</span>
+                        }
                         <span className="system-aside-title">{item.title}</span>
-                    </span>
+                    </div>
                     <div className="system-aside-item-icon">
                         {
                             item.children ?
@@ -108,7 +111,7 @@ const SettingContent= props =>  {
                 <ul className={`system-aside-ul ${isExpandedTree(item.id) ? null: "system-aside-hidden"}`}>
                     {
                         item.children && item.children.map(item =>{
-                            const deepnew = deep +1
+                            const deepnew = deep + 20
                             return item.children && item.children.length ?
                                 renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
                         })
@@ -139,7 +142,7 @@ const SettingContent= props =>  {
                         {
                             menus().map(firstItem => {
                                 return firstItem.children && firstItem.children.length > 0 ?
-                                    renderSubMenu(firstItem,0) : renderMenu(firstItem,0)
+                                    renderSubMenu(firstItem,30) : renderMenu(firstItem,30)
                             })
                         }
                     </ul>
