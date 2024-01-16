@@ -21,7 +21,7 @@ const Dynamic = props =>{
     const {match,route} = props
 
     const {findUserPipeline,pipelineList} = pipelineStore
-    const {findlogpage} = overviewStore
+    const {findlogpage,findlogtype} = overviewStore
 
     const pageParam = {
         pageSize:15,
@@ -42,16 +42,28 @@ const Dynamic = props =>{
             }
     )
 
+    // 动态列表
     const [dynamicList,setDynamicList] = useState([]);
+    // 动态分页
     const [dynaPage,setDynaPage] = useState([]);
+    // 动态操作类型
+    const [dynamicType,setDynamicType] = useState([]);
 
     useEffect(()=>{
         if(route.path==='/dyna'){
+            // 获取所有流水线
             findUserPipeline().then()
         }
+        // 获取动态操作类型
+        findlogtype().then(res=>{
+            if(res.code===0){
+                setDynamicType(res.data)
+            }
+        })
     },[])
 
     useEffect(()=>{
+        // 获取动态列表
         findlogpage(params).then(res=>{
             if(res.code===0){
                 setDynamicList(res.data?.dataList || [])
@@ -75,7 +87,7 @@ const Dynamic = props =>{
                 setParams({
                     ...params,
                     pageParam,
-                    [field] : value==="null"?{}:{pipelineId:[value]}
+                    [field] : value?{pipelineId:[value]}:{}
                 })
                 break
             case "timestamp":
@@ -141,7 +153,7 @@ const Dynamic = props =>{
                                     }
                                     notFoundContent={<ListEmpty/>}
                                 >
-                                    <Select.Option key={"1"} value={"null"}>流水线</Select.Option>
+                                    <Select.Option key={'all'} value={null}>流水线</Select.Option>
                                     {
                                         pipelineList && pipelineList.map(item=>{
                                             return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
@@ -154,11 +166,12 @@ const Dynamic = props =>{
                                 style={{width:150}}
                                 onChange={(value)=>changParams(value,"actionType")}
                             >
-                                <Select.Option key={"1"} value={null}>所有操作</Select.Option>
-                                <Select.Option key={"2"} value={"PIP_GREATE"}>创建流水线</Select.Option>
-                                <Select.Option key={"3"} value={"PIP_DELETE"}>删除流水线</Select.Option>
-                                <Select.Option key={"5"} value={"PIP_UPDATE"}>更新流水线</Select.Option>
-                                <Select.Option key={"5"} value={"PIP_RUN"}>运行流水线</Select.Option>
+                                <Select.Option key={'all'} value={null}>所有操作</Select.Option>
+                                {
+                                    dynamicType && dynamicType.map(item=>{
+                                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                                    })
+                                }
                             </Select>
                             <RangePicker
                                 onChange={(value,e)=>changParams(e,"timestamp")}

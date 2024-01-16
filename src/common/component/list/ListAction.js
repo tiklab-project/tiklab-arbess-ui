@@ -1,6 +1,6 @@
 import React from "react";
-import {Popconfirm,Tooltip} from "antd";
-import {DeleteOutlined,EditOutlined} from "@ant-design/icons";
+import {Dropdown, Modal, Tooltip} from "antd";
+import {EditOutlined,EllipsisOutlined} from "@ant-design/icons";
 
 /**
  * 表格操作
@@ -23,19 +23,33 @@ const ListAction = ({edit,del}) =>{
             }
             {
                 del &&
-                <Tooltip title="删除">
-                    <Popconfirm
-                        placement="topRight"
-                        title="你确定删除吗"
-                        onConfirm={del}
-                        okText="确定"
-                        cancelText="取消"
-                    >
+                <Dropdown
+                    overlay={
+                        <div className="mf-dropdown-more">
+                            <div className="dropdown-more-item" onClick={()=>{
+                                Modal.confirm({
+                                    title: '确定删除吗？',
+                                    content: <span style={{color:"#f81111"}}>删除后无法恢复！</span>,
+                                    okText: '确认',
+                                    cancelText: '取消',
+                                    onOk() {
+                                        del()
+                                    },
+                                    onCancel() {
+                                    },
+                                })
+                            }}>删除</div>
+                        </div>
+                    }
+                    trigger={['click']}
+                    placement={"bottomRight"}
+                >
+                    <Tooltip title="更多">
                         <span className="del" style={{cursor:"pointer"}}>
-                            <DeleteOutlined style={{fontSize:16}}/>
-                        </span>
-                    </Popconfirm>
-                </Tooltip>
+                            <EllipsisOutlined style={{fontSize:17}}/>
+                       </span>
+                    </Tooltip>
+                </Dropdown>
             }
         </span>
     )

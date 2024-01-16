@@ -103,37 +103,34 @@ const Variable = props =>{
                 md={{ span: "24" }}
                 lg={{ span: "18", offset: "3" }}
                 xl={{ span: "16", offset: "4" }}
+                className="variable"
             >
-               <div className="variable">
-                   <div className="variable-content">
-                       <div className="variable-up">
-                           <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}个变量</div>
-                           <Btn
-                               title={"添加"}
-                               icon={<PlusOutlined/>}
-                               onClick={()=>addVariable()}
-                           />
-                           <VariableAddEdit
-                               {...props}
-                               findVariable={findVariable}
-                               variableVisible={variableVisible}
-                               setVariableVisible={setVariableVisible}
-                               formValue={formValue}
-                               pipelineId={params.id}
-                           />
-                       </div>
-                       <div className="variable-tables">
-                           <Table
-                               bordered={false}
-                               columns={columns}
-                               dataSource={variableData}
-                               rowKey={record=>record.varId}
-                               pagination={false}
-                               locale={{emptyText: <ListEmpty title={"暂无变量"}/>}}
-                           />
-                       </div>
-                   </div>
-               </div>
+                <div className="variable-up">
+                    <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}个变量</div>
+                    <Btn
+                        title={"添加"}
+                        icon={<PlusOutlined/>}
+                        onClick={()=>addVariable()}
+                    />
+                    <VariableAddEdit
+                        {...props}
+                        findVariable={findVariable}
+                        variableVisible={variableVisible}
+                        setVariableVisible={setVariableVisible}
+                        formValue={formValue}
+                        pipelineId={params.id}
+                    />
+                </div>
+                <div className="variable-tables">
+                    <Table
+                        bordered={false}
+                        columns={columns}
+                        dataSource={variableData}
+                        rowKey={record=>record.varId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={"暂无变量"}/>}}
+                    />
+                </div>
            </Col>
        </Row>
     )

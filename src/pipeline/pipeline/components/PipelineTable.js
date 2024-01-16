@@ -5,7 +5,7 @@ import {
     LoadingOutlined,
     LockOutlined,
     UnlockOutlined,
-    MinusCircleOutlined
+    MinusCircleOutlined, EllipsisOutlined, CloseCircleOutlined, CheckCircleOutlined, ExclamationCircleOutlined
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
 import historyStore from "../../history/store/HistoryStore";
@@ -16,14 +16,8 @@ import ListIcon from "../../../common/component/list/ListIcon";
 import Page from "../../../common/component/page/Page";
 import Modals from "../../../common/component/modal/Modal";
 import {debounce} from "../../../common/utils/Client";
-import DiskModal from "../../../common/component/modal/DiskModal";
-import pip_success from "../../../assets/images/svg/pip_success.svg";
-import pip_error from "../../../assets/images/svg/pip_error.svg";
-import pip_fog from "../../../assets/images/svg/pip_fog.svg";
-import pip_halt from "../../../assets/images/svg/pip_halt.svg";
 import pip_xingxing from "../../../assets/images/svg/pip_xingxing.svg";
 import pip_xingxing_kong from "../../../assets/images/svg/pip_xingxing-kong.svg";
-import pip_more from "../../../assets/images/svg/pie_more.svg";
 import "./PipelineTable.scss";
 
 /**
@@ -54,9 +48,6 @@ const PipelineTable = props =>{
 
     // 克隆状态
     const [copyStatus,setCopyStatus] = useState(false)
-
-    // 磁盘内存弹出框状态
-    const [diskVisible,setDiskVisible] = useState(false)
 
     useEffect(()=>{
         if(copyVisible){
@@ -103,16 +94,13 @@ const PipelineTable = props =>{
         if(record.state === 1){
             // 开始运行
             execStart(record.id).then(r=>{
+                setIsLoading(false)
                 if(r.code===0){
                     return goInstance({
                         id:record.id,
                         instanceId:r.data.instanceId
                     })
                 }
-                if(r.code===9000) {
-                    return setDiskVisible(true)
-                }
-                setIsLoading(false)
             })
         } else {
             // 停止运行
@@ -209,25 +197,18 @@ const PipelineTable = props =>{
      */
     const goPipelineTask = (text,record) => props.history.push(`/pipeline/${record.id}/history`)
 
-    const renTip = buildStatus => {
+    const renIcon = buildStatus => {
         switch (buildStatus) {
-            case "success": return  "成功"
-            case "error": return "失败"
-            case "run": return  "正在运行"
-            case "wait": return  "等待"
-            case "halt": return  "终止"
-            default: return '无构建'
-        }
-    }
-
-    const renImg = buildStatus => {
-        switch (buildStatus) {
-            case "success": return pip_success
-            case "error": return pip_error
-            case "run": return pip_fog
-            case "wait": return pip_fog
-            case "halt": return pip_halt
-            default: return pip_success
+            case "error" :
+                return  <CloseCircleOutlined style={{color:"#FF0000"}}/>
+            case "success" :
+                return  <CheckCircleOutlined style={{color:"#0063FF"}}/>
+            case "halt":
+                return  <ExclamationCircleOutlined style={{color:"#222222"}}/>
+            case "run":
+                return  <Spin indicator={<LoadingOutlined style={{color:"#222222"}} spin />} />
+            case "wait":
+                return  <PlayCircleOutlined style={{color:"#222222"}}/>
         }
     }
 
@@ -255,11 +236,12 @@ const PipelineTable = props =>{
                 const {buildStatus,number} = record
                 return (
                     <Space>
-                        <Tooltip title={renTip(buildStatus)}>
-                            <img src={renImg(buildStatus)} alt={"log"} className="imgs"/>
-                        </Tooltip>
                         { text || '无构建' }
-                        { number && <span className='pipeline-number' onClick={() => goInstance(record)}># {number}</span>}
+                        { number &&
+                            <span className='pipeline-number' onClick={() => goInstance(record)}># {number}
+                                <span className='pipeline-number-desc'>{renIcon(buildStatus)}</span>
+                            </span>
+                        }
                     </Space>
                 )
             }
@@ -322,7 +304,7 @@ const PipelineTable = props =>{
                         </Tooltip>
                         <Dropdown
                             overlay={
-                                <div className="pipelineTable-dropdown-more">
+                                <div className="mf-dropdown-more">
                                     <div className="dropdown-more-item" onClick={()=>toCopy(record)}>克隆</div>
                                     <div className="dropdown-more-item" onClick={()=>toYaml(record)}>导出YAML文件</div>
                                 </div>
@@ -332,7 +314,7 @@ const PipelineTable = props =>{
                         >
                             <Tooltip title="更多">
                                 <span className="pipelineTable-action">
-                                    <img src={pip_more} alt={"更多"} width={20} height={20}/>
+                                    <EllipsisOutlined style={{fontSize:17}}/>
                                 </span>
                             </Tooltip>
                         </Dropdown>
@@ -396,10 +378,6 @@ const PipelineTable = props =>{
                     </div>
                 </Spin>
             </Modals>
-            <DiskModal
-                visible={diskVisible}
-                setVisible={setDiskVisible}
-            />
         </div>
     )
 }

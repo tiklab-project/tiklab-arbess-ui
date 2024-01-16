@@ -1,10 +1,9 @@
 .variable{
-    padding: var(--thoughtware-padding-item);
     min-width: 576px;
     .variable-up{
         display: flex;
         align-items: center;
-        padding-bottom: 10px;
+        padding-bottom: var(--thoughtware-padding-item);
         font-size: var(--thoughtware-font-13);
         .variable-up-num{
             flex: 1;

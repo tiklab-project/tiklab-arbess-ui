@@ -12,7 +12,7 @@
     }
     .mf-modal-content{
         padding: 0 var(--thoughtware-padding);
-        min-height: 100px;
+        min-height: 50px;
         max-height:calc(100% - 120px);
         overflow:auto;
     }

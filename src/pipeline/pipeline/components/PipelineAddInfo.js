@@ -367,6 +367,7 @@ const PipelineAddInfo = props =>{
                     <div className="pipeline-user-title">
                         <div>流水线成员</div>
                         <Dropdown
+                            getPopupContainer={e => e.parentElement}
                             overlay={
                                 <PipelineUserAdd
                                     setVisible={setVisible}

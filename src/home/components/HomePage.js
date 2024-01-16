@@ -142,7 +142,7 @@ const HomePage = props =>{
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
                 xl={{ span: "18", offset: "3" }}
-                xxl={{ span: "18", offset: "3" }}
+                xxl={{ span: "16", offset: "4" }}
             >
                 <div className="homePage-content mf-home-limited">
                     <div className="home-recent">

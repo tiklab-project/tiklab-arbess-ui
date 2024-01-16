@@ -23,11 +23,13 @@ const HostGroupAdd = (props) => {
     const [addHost,setAddHost] = useState([]);
 
     useEffect(()=>{
-        if(formValue){
-            form.setFieldsValue(formValue);
-            setAddHost(formValue?.detailsList.map(item=>({...item.authHost})))
-        }else {
-            setAddHost([])
+        if(visible){
+            if(formValue){
+                form.setFieldsValue(formValue);
+                setAddHost(formValue?.detailsList.map(item=>({...item.authHost})))
+            }else {
+                setAddHost([])
+            }
         }
     },[visible])
 
@@ -58,9 +60,12 @@ const HostGroupAdd = (props) => {
         })
     }
 
+    /**
+     * 关闭弹出框
+     */
     const onCancel = () => {
-        setVisible(false);
         form.resetFields();
+        setVisible(false);
     }
 
     return (

@@ -15,7 +15,6 @@ import triggerStore from "../trigger/store/TriggerStore";
 import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
-import DiskModal from "../../../common/component/modal/DiskModal";
 import {
     DeploymentUnitOutlined,
     CrownOutlined,
@@ -61,9 +60,6 @@ const Design = props =>{
     // 单个历史信息
     const [historyItem,setHistoryItem] = useState(null);
 
-    // 磁盘内存弹出框状态
-    const [diskVisible,setDiskVisible] = useState(false);
-
     useEffect(()=>{
         setPath(props.location.pathname)
     },[props.location.pathname])
@@ -98,9 +94,7 @@ const Design = props =>{
             if(res.code===0){
                 setHistoryItem(res.data && res.data)
                 setIsDetails(true)
-                return
             }
-            if(res.code===9000) return setDiskVisible(true)
         })
     }
 
@@ -157,7 +151,7 @@ const Design = props =>{
                                 <Btn
                                     isMar={true}
                                     title={"帮助"}
-                                    onClick={()=>window.open('http://thoughtware.net/document')}
+                                    onClick={()=>window.open('http://thoughtware.cn/document')}
                                 />
                                 {
                                     pipeline?.state===2 ?
@@ -201,10 +195,6 @@ const Design = props =>{
                     { renderRoutes(route.routes) }
                 </Spin>
             </div>
-            <DiskModal
-                visible={diskVisible}
-                setVisible={setDiskVisible}
-            />
             <Drawer
                 placement="right"
                 visible={isDetails}

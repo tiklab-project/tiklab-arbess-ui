@@ -45,7 +45,7 @@ const DynamicList = props =>{
     }
 
     return (
-        <div className="dynamic-center">
+        <div className="mf-dynamic-center">
             {
                 dynamicList && dynamicList.length>0 ?
                 dynamicList.map(item=>renderLis(item))

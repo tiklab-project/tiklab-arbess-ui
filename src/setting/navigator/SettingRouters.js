@@ -86,20 +86,20 @@ export const templateRouter = [
                 title:"日志类型",
             },
             {
-                id:"/setting/management",
-                title:"消息管理",
-            },
-            {
                 id:"/setting/type",
                 title:"消息类型",
             },
             {
                 id:"/setting/sendtrue",
-                title:"消息通知类型",
+                title:"消息发送方式",
             },
             {
-                id:"/setting/noticetrue",
-                title:"通知方案",
+                id:"/setting/systemNotice",
+                title:"系统消息通知方案",
+            },
+            {
+                id:"/setting/projectNotice",
+                title:"项目消息通知方案",
             },
             {
                 id:"/setting/userGrouptrue",

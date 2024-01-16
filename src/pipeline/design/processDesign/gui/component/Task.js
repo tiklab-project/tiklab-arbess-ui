@@ -84,7 +84,7 @@ const Task = props => {
      * @returns {boolean}
      */
     const isCode = type =>{
-        return !(type === 'git' || type === 'gitee' || type === 'github' || type === 'gitlab' || type === 'svn' || type === 'gittork');
+        return !(type === 'git' || type === 'gitee' || type === 'github' || type === 'gitlab' || type === 'svn' || type === 'gittok');
     }
 
     /**

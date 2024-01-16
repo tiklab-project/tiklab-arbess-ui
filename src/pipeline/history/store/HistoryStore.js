@@ -36,7 +36,7 @@ class HistoryStore {
             userId:getUser().userId
         }
         const data = await Axios.post("/exec/start", params)
-        if(data.code!==0 && data.code!==9000){
+        if(data.code!==0){
             message.info(data.msg)
         }
         return data

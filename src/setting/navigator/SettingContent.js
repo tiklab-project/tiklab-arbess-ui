@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
 import {inject,observer} from "mobx-react";
@@ -34,16 +34,9 @@ const SettingContent= props =>  {
         }
     }
 
-    // 当前路径
-    const [selectKey,setSelectKey] = useState(path)
-
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([""])
 
-    useEffect(()=>{
-        // 激活菜单
-        setSelectKey(path)
-    },[path])
 
     /**
      * 路由跳转
@@ -53,6 +46,7 @@ const SettingContent= props =>  {
     const select = data => props.history.push(data.id)
 
     const isExpandedTree = key => expandedTree.some(item => item ===key)
+
 
     /**
      * 展开 || 闭合
@@ -70,7 +64,7 @@ const SettingContent= props =>  {
         return (
             <PrivilegeButton key={data.id} code={data.purviewCode} {...props}>
                 <li style={{cursor:"pointer",paddingLeft:deep}}
-                    className={`system-aside-li system-aside-second  ${data.id=== selectKey ? "system-aside-select":""}`}
+                    className={`system-aside-li system-aside-second ${path === data.id  ? "system-aside-select":""}`}
                     onClick={()=>select(data)}
                     key={data.id}
                 >

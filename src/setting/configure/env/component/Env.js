@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Space,Table,Row,Col} from "antd";
-import {DeleteOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
+import {EllipsisOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListIcon from "../../../../common/component/list/ListIcon";
@@ -120,7 +120,7 @@ const Env = props =>{
                     return (
                         <span className="env-table-ban">
                             <EditOutlined className="text-ban"/>
-                            <DeleteOutlined className="text-ban"/>
+                            <EllipsisOutlined className="text-ban"/>
                         </span>
                     )
                 }

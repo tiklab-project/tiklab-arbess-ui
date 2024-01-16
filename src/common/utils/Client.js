@@ -44,18 +44,6 @@ export const autoHeight = () =>{
 }
 
 /**
- * 文件路径截取
- */
-export const interceptUrl = (url,data) =>{
-    if(data){
-        return url.split('/pipeline/'+data)
-    }
-    else {
-        return url.split('/')
-    }
-}
-
-/**
  *  form input效验
  */
 export const Validation = name =>{
@@ -80,55 +68,47 @@ export const deleteSuccessReturnCurrenPage = (totalRecord, pageSize, current) =>
     return current
 }
 
-/**
- * 防抖
- */
-export function debounce(fn, delay) {
-    let timer
-    return function(...args) {
-        if (timer) clearTimeout(timer)
-        // 使用箭头函数来处理this问题
-        timer = setTimeout(() => fn.apply(this, args), delay)
+function laterDebounce(func, wait = 50) {
+    let timer = 0
+    return function (...params) {
+        timer && clearTimeout(timer)
+        timer = setTimeout(() => func.apply(this, params), wait)
     }
 }
 
-// /**
-//  * 模糊搜索
-//  * @param search
-//  * @param data
-//  * @returns {*[]}
-//  */
-// export const fuzzySearch = (search, data) => {
-//     const matches = [];
-//     for (let item of data) {
-//         if (fuzzyMatch(search, item.title)) {
-//             matches.push(item);
-//             continue;
-//         }
-//         // 标记是否匹配当前对象
-//         let isMatch = false;
-//         // 过滤描述数组
-//         const filteredDesc = item.desc.filter(desc => {
-//             if (fuzzyMatch(search, taskTitle(desc.type))) {
-//                 isMatch = true;
-//                 return true;
-//             }
-//             return false;
-//         });
-//         if (isMatch) {
-//             // 构建过滤后的对象
-//             const match = {
-//                 id: item.id,
-//                 title: item.title,
-//                 desc: filteredDesc
-//             };
-//             matches.push(match);
-//         }
-//     }
-//     return matches;
-// }
-//
-// const fuzzyMatch = (s1, s2) => {
-//     const regexp = new RegExp(s1, 'i');
-//     return regexp.test(s2);
-// }
+/**
+ * 立刻执行防抖
+ * @param {function} func           防抖函数
+ * @param {number} wait             防抖时间间隔
+ * @return {function}               返回客户调用函数
+ */
+function immediateDebounce(func, wait = 50) {
+    let timer
+    let isRepeat = false // 是否重复点击
+    const later = () => setTimeout(() => {
+        isRepeat = false // 延时wait后 isRepeat=false，timer=null，便可以调用函数
+        timer = null
+    }, wait)
+
+    return function (...params) {
+        if (!timer && !isRepeat) { // isRepeat=false，timer=null，便可以调用函数
+            func.apply(this, params)
+        } else {
+            isRepeat = true
+        }
+        timer && clearTimeout(timer)
+        timer = later()
+    }
+}
+
+/**
+ * 可配置防抖函数
+ * @param  {function} func        回调函数
+ * @param  {number}   wait        表示时间窗口的间隔
+ * @param  {boolean}  immediate   设置为ture时，是否立即调用函数
+ * @return {function}             返回客户调用函数
+ */
+export function debounce(func, wait = 50, immediate = true) {
+    return immediate ? immediateDebounce(func, wait) : laterDebounce(func, wait)
+}
+

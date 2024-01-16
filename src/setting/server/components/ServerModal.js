@@ -258,7 +258,7 @@ const ServerModal = props =>{
      */
     const serverAddressDisabled = () => {
         const type = formValue?.type
-        if(type==='gittork' || type==='hadess' || type==='teston'){
+        if(type==='gittok' || type==='hadess' || type==='teston'){
             return version === 'cloud'
         }
         return false
@@ -310,7 +310,7 @@ const ServerModal = props =>{
                                     <Select onChange={changeServerWay} disabled={formValue || isConfig}>
                                         <Select.Option value={'gitee'}>Gitee</Select.Option>
                                         <Select.Option value={'github'}>Github</Select.Option>
-                                        <Select.Option value={'gittork'}>GitTork</Select.Option>
+                                        <Select.Option value={'gittok'}>GitTok</Select.Option>
                                         <Select.Option value={'teston'}>TestOn</Select.Option>
                                         <Select.Option value={'sonar'}>Sonar</Select.Option>
                                         <Select.Option value={'nexus'}>Nexus</Select.Option>

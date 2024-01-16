@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {ProjectNav,PrivilegeProjectButton} from "thoughtware-privilege-ui";
 import {renderRoutes} from 'react-router-config';
 import "./PipelineSetting.scss";
@@ -16,19 +16,17 @@ const PipelineSetting = props =>{
     let path = props.location.pathname
     const pipelineId = match.params.id
 
-    // 导航
-    const [nav,setNav] = useState("")
-
-    useEffect(()=>{
-        setNav(path)
-    },[path])
-
     // 左侧导航（三级标题）
     const secondRouter = [
         {
             id:`/pipeline/${pipelineId}/set/info`,
             title:"流水线信息",
             purviewCode:"pipeline_seting",
+        },
+        {
+            id:`/pipeline/${pipelineId}/set/message`,
+            title:"消息通知方案",
+            purviewCode:"pip_message_notice",
         },
         {
             id:`/pipeline/${pipelineId}/set/user`,
@@ -39,13 +37,13 @@ const PipelineSetting = props =>{
             id:`/pipeline/${pipelineId}/set/role`,
             title:"权限",
             purviewCode:"pipeline_auth",
-        }
+        },
     ]
 
     // 渲染菜单
     const navContent = item =>{
         return  <div key={item.id}
-                     className={`project-nav-aside-item ${nav===item.id?"project-nav-aside-select":""} `}
+                     className={`project-nav-aside-item ${path === item.id ?"project-nav-aside-select":""} `}
                      onClick={()=>props.history.push(item.id)}
                 >
                     <span className="project-nav-aside-item-title">{item.title}</span>

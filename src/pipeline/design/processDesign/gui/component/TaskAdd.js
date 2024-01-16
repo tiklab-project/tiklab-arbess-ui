@@ -35,7 +35,7 @@ const TaskAdd = props =>{
                 {type:'github'},
                 {type:'gitlab'},
                 {type:'svn'},
-                {type:'gittork'}
+                {type:'gittok'}
             ]
         },
         {

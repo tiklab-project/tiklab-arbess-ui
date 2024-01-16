@@ -104,37 +104,34 @@ const Trigger = props =>{
                 md={{ span: "24" }}
                 lg={{ span: "18", offset: "3" }}
                 xl={{ span: "16", offset: "4" }}
+                className="trigger"
             >
-                <div className="trigger">
-                    <div className="trigger-content">
-                        <div className="trigger-up">
-                            <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}个定时任务</div>
-                            <Btn
-                                title={"添加"}
-                                icon={<PlusOutlined/>}
-                                onClick={()=>addTrigger()}
-                            />
-                            <TriggerAddEdit
-                                triggerVisible={triggerVisible}
-                                setTriggerVisible={setTriggerVisible}
-                                createTrigger={createTrigger}
-                                updateTrigger={updateTrigger}
-                                findTrigger={findTrigger}
-                                pipelineId={params.id}
-                                formValue={formValue}
-                            />
-                        </div>
-                        <div className="trigger-tables">
-                            <Table
-                                bordered={false}
-                                columns={columns}
-                                dataSource={triggerData}
-                                rowKey={record=>record.triggerId}
-                                pagination={false}
-                                locale={{emptyText: <ListEmpty title={"暂无定时任务"}/>}}
-                            />
-                        </div>
-                    </div>
+                <div className="trigger-up">
+                    <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}个定时任务</div>
+                    <Btn
+                        title={"添加"}
+                        icon={<PlusOutlined/>}
+                        onClick={()=>addTrigger()}
+                    />
+                    <TriggerAddEdit
+                        triggerVisible={triggerVisible}
+                        setTriggerVisible={setTriggerVisible}
+                        createTrigger={createTrigger}
+                        updateTrigger={updateTrigger}
+                        findTrigger={findTrigger}
+                        pipelineId={params.id}
+                        formValue={formValue}
+                    />
+                </div>
+                <div className="trigger-tables">
+                    <Table
+                        bordered={false}
+                        columns={columns}
+                        dataSource={triggerData}
+                        rowKey={record=>record.triggerId}
+                        pagination={false}
+                        locale={{emptyText: <ListEmpty title={"暂无定时任务"}/>}}
+                    />
                 </div>
             </Col>
         </Row>

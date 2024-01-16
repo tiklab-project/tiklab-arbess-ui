@@ -1,5 +1,6 @@
 import React from "react";
 import ListEmpty from "./ListEmpty";
+import Profile from "../profile/Profile";
 
 /**
  * 待办
@@ -9,18 +10,32 @@ const AgentList = props => {
     const {agentList} = props
 
     const renderAgent = item =>{
+        const {actionType,action,user,createTime,data} = item
+        const dataObj = data && JSON.parse(data)
         return (
-            <div key={item.id} className='agent-item'>
+            <div key={item.id} className="agent-item" onClick={()=>goDynaLink(item)}>
                 <div className="agent-item-data">
-                    <div dangerouslySetInnerHTML={{__html: item.data}}/>
+                    <Profile
+                        userInfo={user}
+                    />
+                    <div className='item-data-info'>
+                        <div className='item-data-info-name'>{user?.nickname || user?.name} {actionType?.name}</div>
+                        <div className='item-data-info-desc'>
+                            <div className='desc-action'> {action}</div>
+                            {
+                                dataObj?.message &&
+                                <div className='desc-message'>{dataObj.message}</div>
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div className="agent-item-time">{item.createTime}</div>
+                <div className="agent-item-time">{createTime}</div>
             </div>
         )
     }
 
     return (
-        <div className='agent-center'>
+        <div className='mf-agent-center'>
             {
                 agentList && agentList.length>0 ?
                     agentList.map(item=>renderAgent(item))

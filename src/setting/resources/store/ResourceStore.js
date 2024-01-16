@@ -14,14 +14,22 @@ class ResourceStore {
         return data
     }
 
+    /**
+     * 查看磁盘空间详情
+     */
+    @action
+    findResourcesDetails = async value =>{
+        const param = new FormData();
+        param.append('type',value)
+        return await Axios.post("/resources/findResourcesDetails", param)
+    }
 
     /**
      * 获取流水线缓存
      */
     @action
     findDiskList = async () =>{
-        const data = await Axios.post("/disk/findDiskList")
-        return data
+        return await Axios.post("/disk/findDiskList")
     }
 
 
@@ -36,6 +44,22 @@ class ResourceStore {
         if(data.code===0){message.info("清理成功")}
         else {message.info("清理失败")}
         return data
+    }
+
+    /**
+     * 获取日志、制品保存时长
+     */
+    @action
+    findAllCathe = async () =>{
+        return await Axios.post("/cache/findAllCathe")
+    }
+
+    /**
+     * 更新日志、制品保存时长
+     */
+    @action
+    updateCathe = async value =>{
+        return await Axios.post("/cache/updateCathe", value)
     }
 
 }

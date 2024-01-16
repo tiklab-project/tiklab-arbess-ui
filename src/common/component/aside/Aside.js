@@ -1,9 +1,9 @@
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import {Dropdown} from "antd";
 import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {renderRoutes} from "react-router-config";
-import {interceptUrl} from "../../utils/Client";
 import {Loading} from "../loading/Loading";
+import ListIcon from "../list/ListIcon";
 import "./Aside.scss";
 
 /**
@@ -11,19 +11,12 @@ import "./Aside.scss";
  */
 const Aside = props =>{
 
-    const {recentlyPipeline,pipeline,route,location,match,firstRouters} = props
+    const {recentlyPipeline,pipeline,route,location,firstRouters} = props
 
     const path = location.pathname
-    const [nav,setNav] = useState("")
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(false)
-
-    useEffect(()=>{
-        // 初始化菜单
-        let indexPath = `/pipeline/${match.params.id}/${interceptUrl(path)[3]}`
-        setNav(indexPath)
-    },[path])
 
     /**
      * 切换流水线
@@ -50,19 +43,22 @@ const Aside = props =>{
                             <div className="pipeline-opt-group">
                                 {
                                     recentlyPipeline && recentlyPipeline.map(item=>{
-                                        return (
-                                            <div onClick={()=>changePipeline(item)}
-                                                 key={item.id}
-                                                 className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
-                                            >
-                                                <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
-                                                    {item.name.substring(0,1).toUpperCase()}
-                                                </span>
-                                                <span className="pipeline-opt-name">
-                                                    {item.name}
-                                                </span>
-                                            </div>
-                                        )
+                                        if(item){
+                                            return (
+                                                <div onClick={()=>changePipeline(item)}
+                                                     key={item.id}
+                                                     className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
+                                                >
+                                                    <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
+                                                        {item.name.substring(0,1).toUpperCase()}
+                                                    </span>
+                                                    <span className="pipeline-opt-name">
+                                                        {item.name}
+                                                    </span>
+                                                </div>
+                                            )
+                                        }
+                                        return null
                                     })
                                 }
                                 <div className='pipeline-opt-more'
@@ -75,9 +71,10 @@ const Aside = props =>{
                 >
                     <div className='normal-aside-opt' data-title-right={pipeline?.name}>
                         <div className="normal-aside-opt-icon">
-                                <span className={`dropdowns_icon mf-icon-${pipeline && pipeline.color}`}>
-                                     {pipeline && pipeline.name.substring(0,1).toUpperCase()}
-                                </span>
+                            <ListIcon
+                                text={pipeline?.name}
+                                colors={pipeline && pipeline?.color}
+                            />
                             <span><CaretDownOutlined /></span>
                         </div>
                     </div>
@@ -86,7 +83,7 @@ const Aside = props =>{
                     {
                         firstRouters.map(item=>(
                             <div key={item.key}
-                                 className={`normal-aside-item ${nav===item.id ? "normal-aside-select":""}`}
+                                 className={`normal-aside-item ${path.indexOf(item.id) === 0 ? "normal-aside-select":""}`}
                                  onClick={()=>props.history.push(item.id)}
                             >
                                 <div className="normal-aside-item-icon">{item.icon}</div>

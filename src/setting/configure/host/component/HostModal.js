@@ -61,8 +61,8 @@ const HostModal = props =>{
      * 关闭弹出框
      */
     const onCancel = () => {
-        setVisible(false)
         form.resetFields()
+        setVisible(false)
     }
 
     const changHostType = value =>{

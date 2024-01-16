@@ -107,30 +107,24 @@ ul li{
     }
 }
 
-.mf-icon{
-    &-0{
-        background: #f3caca;
-    }
-    &-1{
-        background: #cadbf3;
-    }
-    &-2{
-        background: #e8eaf6;
-    }
-    &-3{
-        background: #ffebee;
-    }
-    &-4{
-        background: #deedd7;
-    }
-    &-5{
-        background: #caf3ef;
-    }
-}
-
 .mf-home-limited{
     padding: 20px 30px;
     min-width: 700px;
+}
+
+.mf-dropdown-more{
+    box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+    border-radius: 4px;
+    background: #ffffff;
+    width: 150px;
+    padding: 8px;
+    .dropdown-more-item{
+        cursor: pointer;
+        padding: 5px;
+        &:hover{
+            background: #f4f4f4;
+        }
+    }
 }
 
 ::-webkit-scrollbar {

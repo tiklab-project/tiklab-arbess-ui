@@ -56,7 +56,7 @@ const FormsAuth = props =>{
                 return findCommonAuth()
             case 'gitee':
             case 'github':
-            case 'gittork':
+            case 'gittok':
             case 'teston':
             case 'sonar':
                 return finsServer(taskType)
@@ -145,7 +145,7 @@ const FormsAuth = props =>{
             case 'gitee':
             case 'github':
                 return "授权信息"
-            case 'gittork':
+            case 'gittok':
             case 'teston':
             case 'sonar':
                 return "服务地址"
@@ -178,7 +178,7 @@ const FormsAuth = props =>{
                 return item.authId
             case 'gitee':
             case 'github':
-            case 'gittork':
+            case 'gittok':
             case 'teston':
             case 'sonar':
                 return item.serverId
@@ -232,7 +232,7 @@ const FormsAuth = props =>{
             case 'sonar':
             case 'xcode':
             case 'teston':
-                if((taskType==='gittork' || taskType==='teston') && version!=='ce'){
+                if((taskType==='gittok' || taskType==='teston') && version!=='ce'){
                     return null
                 }
                 return (
@@ -293,7 +293,7 @@ const FormsAuth = props =>{
             case 'git':
             case 'gitlab':
             case 'svn':
-            case 'gittork':
+            case 'gittok':
             case 'teston':
                 return item.name+"("+(item.authType===1?item.username:"私钥")+")"
             case 'gitee':

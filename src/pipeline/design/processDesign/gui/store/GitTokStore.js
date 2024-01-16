@@ -2,7 +2,7 @@ import {action} from "mobx";
 import {Axios} from "thoughtware-core-ui";
 import {message} from "antd";
 
-class GitTorkStore {
+class GitTokStore {
 
     /**
      * 获取xcode仓库
@@ -36,4 +36,4 @@ class GitTorkStore {
 
 }
 
-export default new GitTorkStore()
+export default new GitTokStore()

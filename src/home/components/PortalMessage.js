@@ -4,13 +4,13 @@ import {
     BellOutlined,
     LoadingOutlined,
     CloseOutlined,
-    MessageOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
 import ListEmpty from "../../common/component/list/ListEmpty";
 import Btn from "../../common/component/btn/Btn";
 import messageStore from "../store/MessageStore"
 import "./PortalMessage.scss";
+import Profile from "../../common/component/profile/Profile";
 
 /**
  * 消息通知
@@ -184,7 +184,11 @@ const PortalMessage = props =>{
             return(
                 <div key={index} className={`message-item ${item.status===1 ? "message-read":""}`} onClick={()=>goHref(item)}>
                     <div className="message-item-left">
-                        <div className="message-item-icon"><MessageOutlined /></div>
+                        <div className="message-item-icon">
+                            <Profile
+                                userInfo={sendUser}
+                            />
+                        </div>
                         <div className="message-item-center">
                             <div className="message-item-user">
                                 <Space>
@@ -201,7 +205,7 @@ const PortalMessage = props =>{
                                 <div className='message-item-info-action'>{action}</div>
                                 {
                                     dataObj?.message &&
-                                    <div className="message-item-info-message"> {dataObj?.message}</div>
+                                    <div className="message-item-info-message" title={dataObj?.message}> {dataObj?.message}</div>
                                 }
                             </div>
                         </div>
@@ -220,7 +224,6 @@ const PortalMessage = props =>{
             maskStyle={{background:"transparent"}}
             contentWrapperStyle={{width:450,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
-            className="mf"
         >
             <div className="messageModal">
                 <div className="messageModal-up">

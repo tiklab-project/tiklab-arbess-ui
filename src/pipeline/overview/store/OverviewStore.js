@@ -18,6 +18,17 @@ class OverviewStore {
     }
 
     /**
+     * 获取所有动态筛选类型
+     * @returns {Promise<*>}
+     */
+    @action
+    findlogtype = async () =>{
+        return await Axios.post("/oplog/type/findlogtypelist", {
+            bgroup:"matflow"
+        })
+    }
+
+    /**
      * 获取运行概况数据
      * @param value
      * @returns {Promise<unknown>}
@@ -49,8 +60,7 @@ class OverviewStore {
             bgroup:"matflow",
             userId: getUser().userId,
         }
-        const data = await Axios.post("/todo/findtodopage",params)
-        return data
+        return await Axios.post("/todo/findtodopage", params)
     }
 
 }

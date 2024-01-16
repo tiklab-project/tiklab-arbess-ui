@@ -23,8 +23,7 @@ const  Portal = props =>{
 
     let path = props.location.pathname
     const {t} = useTranslation()
-    // 当前路由
-    const [currentLink,setCurrentLink] = useState(path)
+
     // 消息抽屉状态
     const [visible,setVisible] = useState(false)
     // 未读消息数量
@@ -34,11 +33,6 @@ const  Portal = props =>{
         // 获取系统权限
         getSystemPermissions(getUser().userId)
     },[])
-
-    useEffect(()=>{
-        if(path.indexOf("/pipeline")===0) path = "/pipeline"
-        setCurrentLink(path)
-    },[path])
 
     // 一级标题
     const routers=[
@@ -72,7 +66,7 @@ const  Portal = props =>{
                             routers && routers.map(routers =>(
                                 <div key={routers.key}
                                      onClick={() => props.history.push(routers.to)}
-                                     className={currentLink === routers.to ? "headers-active" : null}
+                                     className={path.indexOf(routers.to) === 0 ? "headers-active" : null}
                                 >
                                     {t(routers.title)}
                                 </div>

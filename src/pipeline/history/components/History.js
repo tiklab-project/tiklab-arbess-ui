@@ -9,7 +9,6 @@ import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Page from "../../../common/component/page/Page";
 import ListAction from "../../../common/component/list/ListAction";
 import PipelineDrawer from "../../../common/component/drawer/Drawer";
-import DiskModal from "../../../common/component/modal/DiskModal";
 import HistoryScreen from "./HistoryScreen";
 import HistoryDetail from "./HistoryDetail";
 import {runStatusIcon,runStatusText} from "./HistoryCommon";
@@ -34,9 +33,6 @@ const History = props =>{
 
     // 历史信息
     const [historyItem,setHistoryItem] = useState(null)
-
-    // 磁盘内存状态弹出框
-    const [diskVisible,setDiskVisible] = useState(false)
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
@@ -199,8 +195,9 @@ const History = props =>{
                     return message.info("当前流水线正在在运行！")
                 }
                 execStart(pipeline.id).then(res=>{
-                    if(res.code===0) return details(res.data)
-                    if(res.code===9000) return setDiskVisible(true)
+                    if(res.code===0){
+                        details(res.data)
+                    }
                 })
             }
         })
@@ -288,10 +285,10 @@ const History = props =>{
                         </Tooltip>
                     default:
                         return <>
-                            <ListAction del={()=>del(record)}/>
-                            <span style={{marginLeft:15}} onClick={()=>terminateOperation(record)}>
+                            <span style={{marginRight:15}} onClick={()=>terminateOperation(record)}>
                                 <PlayCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
                             </span>
+                            <ListAction del={()=>del(record)}/>
                         </>
                 }
             }
@@ -336,10 +333,6 @@ const History = props =>{
                         />
                     </div>
                 </div>
-                <DiskModal
-                    visible={diskVisible}
-                    setVisible={setDiskVisible}
-                />
                 <PipelineDrawer
                     width={"75%"}
                     visible={detail}

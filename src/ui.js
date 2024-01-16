@@ -2,8 +2,9 @@ import {store as pipelineStore} from "./store";
 import App from "./app";
 import Portal from "./home/components/Portal";
 import SettingContent from "./setting/navigator/SettingContent";
-
 import AsyncComponent from "./common/lazy/SyncComponent";
+
+const Index=AsyncComponent(()=>import("./home/components/Home"))
 
 const Login=AsyncComponent(()=>import("./login/Login"))
 const Logout=AsyncComponent(()=>import("./login/Logout"))
@@ -22,25 +23,24 @@ const Pipeline=AsyncComponent(()=>import("./pipeline/pipeline/components/Pipelin
 const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipelineAdd"))
 const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
 const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
+const Dynamic=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
 const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/gui/component/Gui"))
-
 const DesignTrigger=AsyncComponent(()=>import("./pipeline/design/trigger/components/Trigger"))
 const DesignVariable=AsyncComponent(()=>import("./pipeline/design/variable/components/Variable"))
 const DesignPostprocess=AsyncComponent(()=>import("./pipeline/design/postprocess/components/Postprocess"))
-const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
-const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
 const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
-const Dynamic=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
 const Test=AsyncComponent(()=>import("./pipeline/test/component/Test"))
-
 const Scan=AsyncComponent(()=>import("./pipeline/scan/component/Scan"))
+const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
+const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
 
 /**
  * 系统设置
  */
+const Setting=AsyncComponent(()=>import("./setting/navigator/Setting"))
 const Auth=AsyncComponent(()=>import("./setting/configure/auth/components/Auth"))
 const Host=AsyncComponent(()=>import("./setting/configure/host/component/Host"))
 const HostGroup=AsyncComponent(()=>import("./setting/configure/host/component/HostGroup"))
@@ -50,13 +50,13 @@ const Resources=AsyncComponent(()=>import("./setting/resources/component/Resourc
 const Grouping=AsyncComponent(()=>import("./setting/configure/grouping/component/Grouping"))
 const Env=AsyncComponent(()=>import("./setting/configure/env/component/Env"))
 
-
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
 
 // message
 const MessageSendType=AsyncComponent(()=>import("./setting/message/MessageSendType"))
 const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice"))
+const DomainMessageNotice=AsyncComponent(()=>import("./setting/message/DomainMessageNotice"))
 
 // security
 const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
@@ -73,6 +73,7 @@ const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
 const DomainRole=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
 const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
 const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
+
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
@@ -93,10 +94,12 @@ const TodoType=AsyncComponent(()=>import("./setting/base/todo/TodoType"))
 const LogTemplate=AsyncComponent(()=>import("./setting/base/log/LogTemplate"))
 const LogType=AsyncComponent(()=>import("./setting/base/log/LogType"))
 
-const MessageManagement=AsyncComponent(()=>import("./setting/base/message/MessageManagement"))
-const MessageNoticeTrue=AsyncComponent(()=>import("./setting/base/message/MessageNoticeTrue"))
-const MessageSendTypeTrue=AsyncComponent(()=>import("./setting/base/message/MessageSendTypeTrue"))
+const MessageSendTypeTrue=AsyncComponent(()=>import("./setting/base/message/MessageSendType"))
 const MessageType=AsyncComponent(()=>import("./setting/base/message/MessageType"))
+const SystemMessageNotice=AsyncComponent(()=>import("./setting/base/message/SystemMessageNotice"))
+const ProjectMessageNotice=AsyncComponent(()=>import("./setting/base/message/ProjectMessageNotice"))
+
+
 
 export {
     pipelineStore,
@@ -105,30 +108,41 @@ export {
     SettingContent,
     AsyncComponent,
 
+    Index,
     Login,
     Logout,
     Wechat,
     ExcludeProductUser,
-    Dynamic,
+
     HomePage,
+
     Pipeline,
     PipelineAdd,
     PipelineDetails,
     Overview,
+    Dynamic,
+
     Design,
     DesignProcess,
     DesignTrigger,
     DesignVariable,
     DesignPostprocess,
-    PipelineSetting,
-    BasicInfo,
+
     Authorize,
+
     History,
     HistoryInstance,
-    Test,
+
     Scan,
+    Test,
+
+    PipelineSetting,
+    BasicInfo,
+    DomainMessageNotice,
     DomainUser,
     DomainRole,
+
+    Setting,
 
     Grouping,
     Env,
@@ -165,10 +179,10 @@ export {
     TodoType,
     LogTemplate,
     LogType,
-    MessageManagement,
-    MessageNoticeTrue,
     MessageSendTypeTrue,
     MessageType,
+    SystemMessageNotice,
+    ProjectMessageNotice,
 }
 
 

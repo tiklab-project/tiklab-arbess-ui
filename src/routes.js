@@ -1,100 +1,85 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
-import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./home/components/Home"))
+import {
 
-const Login=AsyncComponent(()=>import("./login/Login"))
-const Logout=AsyncComponent(()=>import("./login/Logout"))
-const Wechat=AsyncComponent(()=>import("./login/Wechat"))
-const ExcludeProductUser=AsyncComponent(()=>import("./login/ExcludeProductUser"))
+    Index,
+    Login,
+    Logout,
+    Wechat,
+    ExcludeProductUser,
 
-/**
- * 首页
- */
-const HomePage=AsyncComponent(()=>import("./home/components/HomePage"))
+    HomePage,
 
-/**
- * 流水线
- */
-const Pipeline=AsyncComponent(()=>import("./pipeline/pipeline/components/Pipeline"))
-const PipelineAdd=AsyncComponent(()=>import("./pipeline/pipeline/components/pipelineAdd"))
-const PipelineDetails=AsyncComponent(()=>import("./pipeline/navigator/PipelineAside"))
-const Overview=AsyncComponent(()=>import("./pipeline/overview/components/Overview"))
-const Design=AsyncComponent(()=>import("./pipeline/design/navigator/Design"))
-const DesignProcess=AsyncComponent(()=>import("./pipeline/design/processDesign/gui/component/Gui"))
-const DesignTrigger=AsyncComponent(()=>import("./pipeline/design/trigger/components/Trigger"))
-const DesignVariable=AsyncComponent(()=>import("./pipeline/design/variable/components/Variable"))
-const DesignPostprocess=AsyncComponent(()=>import("./pipeline/design/postprocess/components/Postprocess"))
-const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
-const Dynamic=AsyncComponent(()=>import("./pipeline/overview/components/Dynamic"))
-const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
-const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
-const Test=AsyncComponent(()=>import("./pipeline/test/component/Test"))
-const Scan=AsyncComponent(()=>import("./pipeline/scan/component/Scan"))
-const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
-const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
+    Pipeline,
+    PipelineAdd,
+    PipelineDetails,
+    Overview,
+    Dynamic,
 
-/**
- * 系统设置
- */
-const Setting=AsyncComponent(()=>import("./setting/navigator/Setting"))
-const Auth=AsyncComponent(()=>import("./setting/configure/auth/components/Auth"))
-const Host=AsyncComponent(()=>import("./setting/configure/host/component/Host"))
-const HostGroup=AsyncComponent(()=>import("./setting/configure/host/component/HostGroup"))
-const Server=AsyncComponent(()=>import("./setting/server/components/Server"))
-const Tool=AsyncComponent(()=>import("./setting/configure/tool/components/Tool"))
-const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
-const Grouping=AsyncComponent(()=>import("./setting/configure/grouping/component/Grouping"))
-const Env=AsyncComponent(()=>import("./setting/configure/env/component/Env"))
+    Design,
+    DesignProcess,
+    DesignTrigger,
+    DesignVariable,
+    DesignPostprocess,
 
-// plugin
-const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
+    Authorize,
 
-// message
-const MessageSendType=AsyncComponent(()=>import("./setting/message/MessageSendType"))
-const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice"))
+    History,
+    HistoryInstance,
 
-// security
-const MyLog=AsyncComponent(()=>import("./setting/security/MyLog"))
-const BackupRestore=AsyncComponent(()=>import("./setting/security/BackupRestore"))
+    Scan,
+    Test,
 
-// user
-const User=AsyncComponent(()=>import("./setting/user/User"))
-const Directory=AsyncComponent(()=>import("./setting/user/Directory"))
-const Orga=AsyncComponent(()=>import("./setting/user/Orga"))
-const UserGroup=AsyncComponent(()=>import("./setting/user/Group"))
-const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
+    PipelineSetting,
+    BasicInfo,
+    DomainMessageNotice,
+    DomainUser,
+    DomainRole,
 
-// privilege
-const DomainRole=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
-const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
-const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
+    Setting,
 
+    Grouping,
+    Env,
+    Auth,
+    Host,
+    HostGroup,
+    Server,
+    Tool,
+    Resources,
 
-// licence
-const Version=AsyncComponent(()=>import("./setting/licence/Version"))
-const ProductAuth=AsyncComponent(()=>import("./setting/licence/ProductAuth"))
+    Plugin,
+    MessageSendType,
+    MessageNotice,
+    MyLog,
+    BackupRestore,
 
-// base
-const UserGroupTrue=AsyncComponent(()=>import("./setting/base/user/Groupture"))
-const SystemFeature=AsyncComponent(()=>import("./setting/base/privilege/SystemFeature"))
-const SystemRoleTrue=AsyncComponent(()=>import("./setting/base/privilege/SystemRoleTrue"))
-const ProjectRole=AsyncComponent(()=>import("./setting/base/privilege/ProjectRole"))
-const ProjectFeature=AsyncComponent(()=>import("./setting/base/privilege/ProjectFeature"))
+    User,
+    UserGroup,
+    Orga,
+    Directory,
+    SystemRole,
+    NotFound,
+    Version,
+    ProductAuth,
 
-const MyTodoTask=AsyncComponent(()=>import("./setting/base/todo/MyTodoTask"))
-const Task=AsyncComponent(()=>import("./setting/base/todo/Task"))
-const TodoTemp=AsyncComponent(()=>import("./setting/base/todo/TodoTemp"))
-const TodoType=AsyncComponent(()=>import("./setting/base/todo/TodoType"))
+    UserGroupTrue,
+    SystemFeature,
+    SystemRoleTrue,
+    ProjectRole,
+    ProjectFeature,
+    MyTodoTask,
+    Task,
+    TodoTemp,
+    TodoType,
+    LogTemplate,
+    LogType,
+    MessageSendTypeTrue,
+    MessageType,
+    SystemMessageNotice,
+    ProjectMessageNotice,
 
-const LogTemplate=AsyncComponent(()=>import("./setting/base/log/LogTemplate"))
-const LogType=AsyncComponent(()=>import("./setting/base/log/LogType"))
-
-const MessageManagement=AsyncComponent(()=>import("./setting/base/message/MessageManagement"))
-const MessageNoticeTrue=AsyncComponent(()=>import("./setting/base/message/MessageNoticeTrue"))
-const MessageSendTypeTrue=AsyncComponent(()=>import("./setting/base/message/MessageSendTypeTrue"))
-const MessageType=AsyncComponent(()=>import("./setting/base/message/MessageType"))
+} from './ui';
 
 const routers=[
     {
@@ -230,6 +215,11 @@ const routers=[
                             {
                                 path:"/pipeline/:id/set/user",
                                 component: DomainUser,
+                                exact: true,
+                            },
+                            {
+                                path:"/pipeline/:id/set/message",
+                                component: DomainMessageNotice,
                                 exact: true,
                             },
                             {
@@ -400,11 +390,6 @@ const routers=[
                         exact: true,
                     },
                     {
-                        path:"/setting/management",
-                        component: MessageManagement,
-                        exact: true,
-                    },
-                    {
                         path:"/setting/type",
                         component: MessageType,
                         exact: true,
@@ -415,8 +400,13 @@ const routers=[
                         exact: true,
                     },
                     {
-                        path:"/setting/noticetrue",
-                        component: MessageNoticeTrue,
+                        path:"/setting/systemNotice",
+                        component: SystemMessageNotice,
+                        exact: true,
+                    },
+                    {
+                        path:"/setting/projectNotice",
+                        component: ProjectMessageNotice,
                         exact: true,
                     },
                     {

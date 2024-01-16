@@ -1,10 +1,9 @@
 .post-pose{
-    padding: var(--thoughtware-padding-item);
     min-width: 576px;
     .post-pose-up{
         display: flex;
         align-items: center;
-        padding-bottom: 10px;
+        padding-bottom: var(--thoughtware-padding-item);
         font-size: var(--thoughtware-font-13);
         .post-pose-up-num{
             flex: 1;
