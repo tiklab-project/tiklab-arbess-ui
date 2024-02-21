@@ -30,7 +30,7 @@ const Pipeline = props =>{
     const [fresh,setFresh] = useState(false)
 
     // 加载状态
-    const [isLoading,setIsLoading] = useState(true)
+    const [isLoading,setIsLoading] = useState(false);
 
     const [pageParam] = useState({
         pageSize:15,
@@ -84,6 +84,7 @@ const Pipeline = props =>{
      * 获取流水线
      */
     const findPipeline = () =>{
+        setIsLoading(true)
         let param = pipelineParam
         if(listType==='follow'){
             param = {
@@ -109,7 +110,6 @@ const Pipeline = props =>{
      * @param e：文本框value
      */
     const onChangeSearch = debounce((e) => {
-        setIsLoading(true)
         setPipelineParam({
             ...pipelineParam,
             pipelineName:e.target.value,
@@ -122,7 +122,6 @@ const Pipeline = props =>{
      * @param page
      */
     const changPage = page =>{
-        setIsLoading(true)
         setPipelineParam({
             ...pipelineParam,
             pageParam:{
@@ -137,7 +136,6 @@ const Pipeline = props =>{
      * @param item
      */
     const clickType = item => {
-        setIsLoading(true)
         setPipelineParam({
             pageParam
         })

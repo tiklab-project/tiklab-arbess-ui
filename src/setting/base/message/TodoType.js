@@ -1,5 +1,5 @@
 import React from "react";
-import {TodoType} from "thoughtware-todotask-ui";
+import {TodoType} from "thoughtware-message-ui";
 
 /**
  * 待办类型

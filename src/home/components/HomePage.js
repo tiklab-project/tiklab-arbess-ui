@@ -70,71 +70,6 @@ const HomePage = props =>{
         })
     },[])
 
-    // 渲染最近访问的流水线
-    const renderOpen = item => {
-        const {pipeline,pipelineExecState} = item
-        return(
-            <div className="pipelineRecent-item" key={pipeline?.id}
-                 onClick={()=> props.history.push(`/pipeline/${pipeline?.id}/history`)}
-            >
-                {
-                    pipeline &&
-                    <div className="pipelineRecent-item-title">
-                        <ListIcon
-                            text={pipeline?.name || "T"}
-                            colors={pipeline?.color}
-                        />
-                        <div className="pipelineRecent-name">
-                            {pipeline?.name}
-                        </div>
-                    </div>
-                }
-                <div className="pipelineRecent-item-details">
-                    <div className="pipelineRecent-item-detail">
-                        <span className="details-desc">成功</span>
-                        <span>{pipelineExecState?.successNumber || 0}</span>
-                    </div>
-                    <div className="pipelineRecent-item-detail">
-                        <span className="details-desc">失败</span>
-                        <span>{pipelineExecState?.errorNumber || 0}</span>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    const lastRunState = runState => {
-        switch (runState) {
-            case 'success': return '成功'
-            case 'error': return '失败'
-            case 'run': return '运行中'
-            case 'halt': return '终止'
-        }
-    }
-
-    const renderBuild = item => (
-        <div
-            key={item.pipelineId}
-            className='pipelineBuild-item'
-            onClick={()=>props.history.push(`/pipeline/${item.pipelineId}/history/${item.instanceId}`)}
-        >
-            <ListIcon
-                text={item?.pipelineName || 'T'}
-                colors={item?.color}
-            />
-            <div className='pipelineBuild-item-info'>
-                <div className='pipelineBuild-item-name'>{item.pipelineName || '无'}</div>
-                <div className='pipelineBuild-item-desc'>
-                    <span className='desc-number'>#{(item.number)}</span>
-                    <span className='desc-lastRunState'>{lastRunState(item.lastRunState)}</span>
-                </div>
-            </div>
-            <div className='pipelineBuild-item-execTime'>
-                {item.execTime}
-            </div>
-        </div>
-    )
-
     return(
         <Row className="homePage" >
             <Col
@@ -157,7 +92,37 @@ const HomePage = props =>{
                                 newlyOpen && newlyOpen.length > 0 ?
                                     <div className="pipelineRecent-content">
                                         {
-                                            newlyOpen.map(item=> renderOpen(item))
+                                            newlyOpen.map(item=> {
+                                                const {pipeline,pipelineExecState} = item
+                                                return(
+                                                    <div className="pipelineRecent-item" key={pipeline?.id}
+                                                         onClick={()=> props.history.push(`/pipeline/${pipeline?.id}/history`)}
+                                                    >
+                                                        {
+                                                            pipeline &&
+                                                            <div className="pipelineRecent-item-title">
+                                                                <ListIcon
+                                                                    text={pipeline?.name || "T"}
+                                                                    colors={pipeline?.color}
+                                                                />
+                                                                <div className="pipelineRecent-name">
+                                                                    {pipeline?.name}
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        <div className="pipelineRecent-item-details">
+                                                            <div className="pipelineRecent-item-detail">
+                                                                <span className="details-desc">成功</span>
+                                                                <span>{pipelineExecState?.successNumber || 0}</span>
+                                                            </div>
+                                                            <div className="pipelineRecent-item-detail">
+                                                                <span className="details-desc">失败</span>
+                                                                <span>{pipelineExecState?.errorNumber || 0}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
                                         }
                                     </div>
                                     :
@@ -175,7 +140,33 @@ const HomePage = props =>{
                                     <SpinLoading type='table'/>
                                     :
                                     newlyBuild && newlyBuild.length > 0 ?
-                                        newlyBuild.map(item=>renderBuild(item))
+                                        newlyBuild.map(item=>(
+                                            <div
+                                                key={item.pipelineId}
+                                                className='pipelineBuild-item'
+                                                onClick={()=>props.history.push(`/pipeline/${item.pipelineId}/history/${item.instanceId}`)}
+                                            >
+                                                <ListIcon
+                                                    text={item?.pipelineName || 'T'}
+                                                    colors={item?.color}
+                                                />
+                                                <div className='pipelineBuild-item-info'>
+                                                    <div className='pipelineBuild-item-name'>{item.pipelineName || '无'}</div>
+                                                    <div className='pipelineBuild-item-desc'>
+                                                        <span className='desc-number'>#{(item.number)}</span>
+                                                        <span className='desc-lastRunState'>
+                                                            {item.lastRunState==='success'&&'成功'}
+                                                            {item.lastRunState==='error'&&'失败'}
+                                                            {item.lastRunState==='run'&&'运行中'}
+                                                            {item.lastRunState==='halt'&&'终止'}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className='pipelineBuild-item-execTime'>
+                                                    {item.execTime}
+                                                </div>
+                                            </div>
+                                        ))
                                         :
                                         <ListEmpty title={"暂无构建流水线"}/>
                             }
@@ -199,7 +190,6 @@ const HomePage = props =>{
                                     <SpinLoading type='table'/>
                                     :
                                     <DynamicList dynamicList={dyna}/>
-
                             }
                         </div>
                     </div>

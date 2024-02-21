@@ -41,11 +41,11 @@ class OverviewStore {
             Axios.post("/overview/pipelineCensus",param).then(res=>{
                 resolve(res)
             }).catch(error=>{
-                console.log(error)
                 reject()
             })
         })
     }
+
     /**
      * 获取待办
      * @returns {Promise<void>}

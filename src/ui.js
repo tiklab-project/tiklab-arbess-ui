@@ -86,10 +86,10 @@ const SystemRoleTrue=AsyncComponent(()=>import("./setting/base/privilege/SystemR
 const ProjectRole=AsyncComponent(()=>import("./setting/base/privilege/ProjectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./setting/base/privilege/ProjectFeature"))
 
-const MyTodoTask=AsyncComponent(()=>import("./setting/base/todo/MyTodoTask"))
-const Task=AsyncComponent(()=>import("./setting/base/todo/Task"))
-const TodoTemp=AsyncComponent(()=>import("./setting/base/todo/TodoTemp"))
-const TodoType=AsyncComponent(()=>import("./setting/base/todo/TodoType"))
+const MyTodoTask=AsyncComponent(()=>import("./setting/base/message/MyTodoTask"))
+const Task=AsyncComponent(()=>import("./setting/base/message/Task"))
+const TodoTemp=AsyncComponent(()=>import("./setting/base/message/TodoTemp"))
+const TodoType=AsyncComponent(()=>import("./setting/base/message/TodoType"))
 
 const LogTemplate=AsyncComponent(()=>import("./setting/base/log/LogTemplate"))
 const LogType=AsyncComponent(()=>import("./setting/base/log/LogType"))

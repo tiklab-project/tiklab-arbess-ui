@@ -323,8 +323,8 @@ const PipelineAddInfo = props =>{
                 layout={"vertical"}
                 initialValues={{
                     name: baseInfo?.name,
-                    group: "default",
-                    env: "default",
+                    group: baseInfo?.group || "default",
+                    env: baseInfo?.env || "default",
                 }}
             >
                 <Form.Item label={"流水线名称"} name="name" rules={rules}>

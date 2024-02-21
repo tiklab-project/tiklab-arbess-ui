@@ -1,5 +1,5 @@
 import React from "react";
-import {TodoTemp} from "thoughtware-todotask-ui";
+import {TodoTemp} from "thoughtware-message-ui";
 
 /**
  * 待办模板

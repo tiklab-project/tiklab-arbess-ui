@@ -156,22 +156,6 @@ const PortalMessage = props =>{
         setMessagePagination(1)
     }
 
-    const renderTabs = item => {
-        return (
-            <div key={item.id} className={`title-item ${item.id===selected?"title-select":""}`} onClick={()=>changMessage(item)}>
-                {item.title}
-                {
-                    item.id === 0 &&
-                    <span className={`messageModal-screen-tab ${unread< 100 ?"":"messageModal-screen-much"}`}>
-                        {
-                            unread < 100 ? unread : 99
-                        }
-                    </span>
-                }
-            </div>
-        )
-    }
-
     /**
      * 渲染消息列表
      * @param messageList
@@ -240,7 +224,23 @@ const PortalMessage = props =>{
                 <div className="messageModal-content">
                     <div className="messageModal-title">
                         {
-                            tabs.map(item=> renderTabs(item))
+                            tabs.map(item=> (
+                                <div
+                                    key={item.id}
+                                    className={`title-item ${item.id===selected?"title-select":""}`}
+                                    onClick={()=>changMessage(item)}
+                                >
+                                    {item.title}
+                                    {
+                                        item.id === 0 &&
+                                        <span className={`messageModal-screen-tab ${unread< 100 ?"":"messageModal-screen-much"}`}>
+                                            {
+                                                unread < 100 ? unread : 99
+                                            }
+                                        </span>
+                                    }
+                                </div>
+                            ))
                         }
                     </div>
                     <div className="messageModal-list">
