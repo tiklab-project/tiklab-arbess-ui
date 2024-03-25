@@ -1,5 +1,5 @@
 import {observable,action} from "mobx";
-import {Axios} from "thoughtware-core-ui";
+import {Axios, getUser} from "thoughtware-core-ui";
 
 class HomePageStore{
 
@@ -23,6 +23,7 @@ class HomePageStore{
     findPipelineRecently = async value =>{
         const param = new FormData()
         param.append("number",value)
+        param.append('userId',getUser().userId)
         const data = await Axios.post('/pipeline/findPipelineRecently',param)
         return data
     }

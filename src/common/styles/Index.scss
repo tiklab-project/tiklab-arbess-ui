@@ -4,98 +4,99 @@ ul li{
     list-style: none;
 }
 
-.mf .ant-form-item{
-    margin-bottom: 8px !important;
-}
-.mf .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):after {
-    display: inline-block;
-    margin-right: 4px;
-    color: #ff4d4f;
-    font-size: 14px;
-    font-family: SimSun,sans-serif;
-    line-height: 1;
-    content: "*";
+.mf {
+    .ant-form-item{
+        margin-bottom: 20px !important;
+    }
+    .ant-form-item-explain-error{
+        min-height: 20px !important;
+        height: 20px !important;
+    }
 }
 
-.mf .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
-    display: none !important;
-    content: "" !important;
+.mf-home-limited{
+    padding: 20px 30px;
+    min-width: 700px;
 }
 
-.mf .ant-form-item-explain{
-    font-size: 13px !important;
-}
+.mf,.mf-home-limited{
+    .ant-form-item-label>label{
+        font-size: 12px;
+        color: #666;
+        font-weight: 600;
+    }
+    .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):after {
+        display: inline-block;
+        margin-left: 4px;
+        color: #ff4d4f;
+        font-size: 14px;
+        font-family: SimSun,sans-serif;
+        line-height: 1;
+        content: "*";
+    }
+    .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+        display: none !important;
+        content: "" !important;
+    }
+    .ant-form-item-explain{
+        font-size: 13px !important;
+    }
+    .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
+        background-color: var(--thoughtware-blue);
+    }
+    .ant-steps-item-finish .ant-steps-item-icon{
+        border-color: var(--thoughtware-blue);
+    }
+    .ant-steps-item-finish .ant-steps-finish-icon{
+        color: var(--thoughtware-blue);
+    }
+    .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title:after{
+        background-color: var(--thoughtware-blue);
+    }
+    .ant-table-thead>tr>th{
+        background: #ffffff;
+        padding: 8px;
+        font-size: 12px;
+        color: #666;
+        font-weight: 600;
+    }
+    .ant-table-tbody>tr>td{
+        border: none;
+        padding: 8px;
+    }
+    .ant-table{
+        border-bottom: 1px solid #f0f0f0;;
+    }
+    .ant-transfer-list{
+        background: #ffffff;
+        border: none;
+    }
+    .ant-transfer-list-search-action{
+        top:22px
+    }
+    .ant-transfer-list-header-dropdown{
+        display: none;
+    }
+    .ant-transfer-list-header{
+        border: none;
+    }
+    .ant-modal-footer{
+        border:none;
+    }
+    .icon {
+        width: 16px;
+        height: 16px;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+    .ant-avatar{
+        width: 22px !important;
+        height: 22px !important;
+        line-height: 22px !important;
+        font-size: 12px !important;
+    }
 
-.mf .ant-form-item-explain-error{
-    min-height: 20px !important;
-    height: 20px !important;
-}
-
-.mf .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
-    background-color: var(--thoughtware-blue);
-}
-
-.mf .ant-steps-item-finish .ant-steps-item-icon{
-    border-color: var(--thoughtware-blue);
-}
-
-.mf .ant-steps-item-finish .ant-steps-finish-icon{
-    color: var(--thoughtware-blue);
-}
-
-.mf .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title:after{
-    background-color: var(--thoughtware-blue);
-}
-
-.mf .ant-table-thead>tr>th{
-    background: #ffffff;
-    padding: 8px;
-}
-
-
-.mf .ant-table-tbody>tr>td{
-    border: none;
-    padding: 8px;
-}
-
-.mf .ant-table{
-    border-bottom: 1px solid #f0f0f0;;
-}
-
-.mf .ant-transfer-list{
-    background: #ffffff;
-    border: none;
-}
-
-.mf .ant-transfer-list-search-action{
-    top:22px
-}
-
-.mf .ant-transfer-list-header-dropdown{
-    display: none;
-}
-
-.mf .ant-transfer-list-header{
-    border: none;
-}
-
-.mf .ant-modal-footer{
-    border:none;
-}
-
-.mf .icon {
-    width: 16px;
-    height: 16px;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
-}
-
-.mf .ant-avatar{
-    width: 22px !important;
-    height: 22px !important;
-    line-height: 22px !important;
-    font-size: 12px !important;
 }
 
 .ant-message{
@@ -105,11 +106,6 @@ ul li{
         background: #e8eaf3;
         box-shadow: none;
     }
-}
-
-.mf-home-limited{
-    padding: 20px 30px;
-    min-width: 700px;
 }
 
 .mf-dropdown-more{
@@ -148,7 +144,7 @@ ul li{
 :root {
     --thoughtware-white: #fff;   /* 主色调白*/
     --thoughtware-black: #000;   /*主色调黑 */
-    --thoughtware-blue: #5D70EA;   /* 主色调蓝*/
+    --thoughtware-blue: #0d66e4;   /* 主色调蓝*/
     --thoughtware-gray-200: #ececec;  /*border 的边线 */
     --thoughtware-gray-300: #EDF0F5;  /*hover颜色 */
     --thoughtware-gray-400: #e3e8f0;  /*左侧导航 选中颜色 */

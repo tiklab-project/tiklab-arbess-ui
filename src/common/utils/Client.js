@@ -68,6 +68,13 @@ export const deleteSuccessReturnCurrenPage = (totalRecord, pageSize, current) =>
     return current
 }
 
+
+/**
+ * 间隔执行防抖
+ * @param {function} func           防抖函数
+ * @param {number} wait             防抖时间间隔
+ * @return {function}               返回客户调用函数
+ */
 function laterDebounce(func, wait = 50) {
     let timer = 0
     return function (...params) {

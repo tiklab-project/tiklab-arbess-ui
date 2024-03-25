@@ -2,11 +2,11 @@
    height: 100%;
     overflow: auto;
     .pipeline-add-type{
+        margin-bottom: 25px;
         .pipeline-type-title{
             padding-bottom: 10px;
         }
         .pipeline-type-ul{
-            padding-bottom: var(--thoughtware-padding-item);
             display: flex;
             flex-direction: row;
         }
@@ -103,7 +103,7 @@
         }
     }
     .steps-top{
-        padding: var(--thoughtware-padding-item) 0 10px 0;
+        padding: var(--thoughtware-padding) 0;
     }
     .steps-content {
         min-height: 100px;

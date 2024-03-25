@@ -176,7 +176,7 @@ const PostprocessUserAdd = props =>{
                 prefix={<SearchOutlined/>}
                 // onChange={findUser}
             />
-            <div className='user-add-table'>
+            <div>
                 <Table
                     rowKey={(record) => record.id}
                     rowSelection={rowSelection}

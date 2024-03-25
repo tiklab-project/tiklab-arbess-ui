@@ -23,6 +23,9 @@ class StageStore {
         if(data.code===0){
             this.stageFresh=!this.stageFresh
         }
+        if(data.code===10000 || data.code===50001){
+            message.info(data.msg)
+        }
         return data
     }
 

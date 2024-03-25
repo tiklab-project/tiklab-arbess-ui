@@ -1,5 +1,5 @@
 import {action,observable} from "mobx";
-import {Axios} from "thoughtware-core-ui";
+import {Axios, getUser} from "thoughtware-core-ui";
 import {message} from "antd";
 
 export class PipelineStore {
@@ -28,7 +28,10 @@ export class PipelineStore {
     @action
     findUserPipelinePage = async value =>{
         return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findUserPipelinePage",value).then(res=>{
+            Axios.post("/pipeline/findUserPipelinePage",{
+                ...value,
+                userId:getUser().userId
+            }).then(res=>{
                 resolve(res)
             }).catch(error=>{
                 console.log(error)
@@ -44,7 +47,7 @@ export class PipelineStore {
     @action
     findUserPipeline = () =>{
         return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findUserPipeline").then(res=>{
+            Axios.post("/pipeline/findUserPipeline",{userId:getUser().userId}).then(res=>{
                 if(res.code===0){
                     this.pipelineList = res.data || []
                 }
@@ -64,7 +67,10 @@ export class PipelineStore {
     @action
     createPipeline = values =>{
         return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/createPipeline",values).then(res=>{
+            Axios.post("/pipeline/createPipeline",{
+                ...values,
+                user:{id:getUser().userId}
+            }).then(res=>{
                 if(res.code===0){
                     message.info("创建成功")
                 }

@@ -2,10 +2,9 @@ import React,{useState,useEffect} from "react";
 import {inject, observer} from "mobx-react";
 import {Form, Input} from "antd";
 import {WhetherChange} from "../Common";
-import CodeGiteeOrGithub from "./code/CodeGiteeOrGithub";
-import CodeGitOrGitlab from "./code/CodeGitOrGitlab";
+import CodeGit from "./code/CodeGit";
 import CodeSvn from "./code/CodeSvn";
-import CodeGitTok from "./code/CodeGitTok";
+import CodeThird from "./code/CodeThird";
 import ScanSonarQuebe from "./scan/ScanSonarQuebe";
 import ScanSpotbugs from "./scan/ScanSpotbugs";
 import TestMvnUnit from "./test/TestMvnUnit";
@@ -34,6 +33,11 @@ const BasicInfo = props => {
     const [enter,setEnter] = useState(false)
 
     useEffect(()=>{
+        form.validateFields().then()
+        return ()=>form.resetFields()
+    },[])
+
+    useEffect(()=>{
         // 初始化表单内容
         const task = dataItem && dataItem.task
         console.log(task)
@@ -59,8 +63,6 @@ const BasicInfo = props => {
                 form.setFieldsValue({
                     ...task,
                     taskName:dataItem?.taskName,
-                    codeName:dataItem.taskType==='gittok' ? task.repository?.name : task?.codeName,
-                    codeBranch:dataItem.taskType==='gittok' ? task.branch?.branchName : task?.codeBranch,
                     putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
                 })
                 break
@@ -80,9 +82,7 @@ const BasicInfo = props => {
                     taskName: dataItem.formType==='task'? dataItem?.taskName : dataItem?.stageName
                 })
         }
-        form.validateFields().then()
-        return ()=>form.resetFields()
-    },[dataItem?.taskId])
+    },[dataItem])
 
     /**
      * 渲染表单
@@ -90,15 +90,14 @@ const BasicInfo = props => {
     const renderForms = dataItem =>{
         switch (dataItem.taskType){
             case 'git':
-            case 'gitlab':
-                return <CodeGitOrGitlab {...props}/>
-            case 'gitee':
-            case 'github':
-                return <CodeGiteeOrGithub {...props}/>
+                return <CodeGit {...props}/>
             case 'svn':
                 return <CodeSvn {...props}/>
+            case 'gitee':
+            case 'github':
+            case 'gitlab':
             case 'gittok':
-                return <CodeGitTok {...props}/>
+                return <CodeThird {...props}/>
             case 'maventest':
                 return <TestMvnUnit {...props}/>
             case 'teston':

@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Input,Select,Space,Row,Col} from "antd";
 import {CaretDownOutlined, PlusOutlined, SearchOutlined} from "@ant-design/icons";
+import {getUser} from "thoughtware-core-ui";
 import PipelineTable from "./PipelineTable";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
@@ -23,6 +24,11 @@ const Pipeline = props =>{
     const {findEnvList} = envStore;
     const {findGroupList} = groupingStore;
 
+    const pageParam = {
+        pageSize:15,
+        currentPage: 1,
+    }
+
     // 流水线分类
     const [listType,setListType] = useState('all')
 
@@ -31,11 +37,6 @@ const Pipeline = props =>{
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(false);
-
-    const [pageParam] = useState({
-        pageSize:15,
-        currentPage: 1,
-    })
 
     // 请求数据
     const [pipelineParam,setPipelineParam] = useState({
@@ -86,6 +87,12 @@ const Pipeline = props =>{
     const findPipeline = () =>{
         setIsLoading(true)
         let param = pipelineParam
+        if(listType==='create'){
+            param = {
+                ...pipelineParam,
+                createUserId:getUser().userId
+            }
+        }
         if(listType==='follow'){
             param = {
                 ...pipelineParam,
@@ -177,6 +184,7 @@ const Pipeline = props =>{
     return(
         <Row className="pipeline">
             <Col
+                xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
@@ -194,14 +202,15 @@ const Pipeline = props =>{
                     </BreadCrumb>
                     <div className="pipeline-flex">
                         <Tabs type={listType} tabLis={[
-                            {id:'all', title:"所有流水线"},
+                            {id:'all', title:"所有"},
+                            {id:'create', title:"我创建的"},
                             {id:'follow', title:"我收藏的"}
                         ]} onClick={clickType}/>
-                        <Space>
+                        <Space size={'middle'}>
                             <Select
                                 showSearch
-                                style={{width:120}}
-                                placeholder={"分组管理"}
+                                style={{width:150}}
+                                placeholder={"分组"}
                                 suffixIcon={<CaretDownOutlined />}
                                 filterOption={(input, option) =>
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -217,8 +226,8 @@ const Pipeline = props =>{
                             </Select>
                             <Select
                                 showSearch
-                                style={{width:120}}
-                                placeholder={"环境管理"}
+                                style={{width:150}}
+                                placeholder={"环境"}
                                 suffixIcon={<CaretDownOutlined />}
                                 filterOption={(input, option) =>
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -238,7 +247,7 @@ const Pipeline = props =>{
                                 autoComplete={"off"}
                                 onPressEnter={onChangeSearch}
                                 prefix={<SearchOutlined />}
-                                style={{ width: 150 }}
+                                style={{ width: 200 }}
                             />
                         </Space>
                     </div>

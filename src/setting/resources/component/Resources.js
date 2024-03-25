@@ -90,16 +90,12 @@ const Resources = props => {
         })
     }
 
-    if(isLoading) return <SpinLoading size="large"/>
-
-    const limitation = (number,unit) =>{
-        if(number < 0) return "不限"
-        return number + unit
-    }
-
+    /**
+     * 升级企业版
+     */
     const upGradation = () => {
         if(version==='ce'){
-            window.open("http://thoughtware.cn/product/matflow/ee")
+            window.open("https://thoughtware.cn/download/matflow/ee")
             return
         }
         const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
@@ -112,6 +108,17 @@ const Resources = props => {
             })}`)
         }
     }
+
+    // 资源监控数据渲染
+    const limitation = (number,unit) =>{
+        if(resourceList){
+            if(number < 0) return "不限"
+            return number + unit
+        }
+        return "--"
+    }
+
+    if(isLoading) return <SpinLoading size="large"/>
 
     return (
         <Row className='resources mf-home-limited mf'>

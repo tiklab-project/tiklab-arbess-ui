@@ -73,6 +73,7 @@ const HomePage = props =>{
     return(
         <Row className="homePage" >
             <Col
+                xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}

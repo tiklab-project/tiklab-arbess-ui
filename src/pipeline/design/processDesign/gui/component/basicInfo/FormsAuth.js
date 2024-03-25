@@ -51,11 +51,11 @@ const FormsAuth = props =>{
     const initList = taskType =>{
         switch (taskType) {
             case 'git':
-            case 'gitlab':
             case 'svn':
                 return findCommonAuth()
             case 'gitee':
             case 'github':
+            case 'gitlab':
             case 'gittok':
             case 'teston':
             case 'sonar':
@@ -139,11 +139,11 @@ const FormsAuth = props =>{
     const label = taskType => {
         switch (taskType) {
             case 'git':
-            case 'gitlab':
             case 'svn':
                 return "凭证"
             case 'gitee':
             case 'github':
+            case 'gitlab':
                 return "授权信息"
             case 'gittok':
             case 'teston':
@@ -173,11 +173,11 @@ const FormsAuth = props =>{
     const setKey = item =>{
         switch (dataItem.taskType) {
             case 'git':
-            case 'gitlab':
             case 'svn':
                 return item.authId
             case 'gitee':
             case 'github':
+            case 'gitlab':
             case 'gittok':
             case 'teston':
             case 'sonar':
@@ -190,16 +190,15 @@ const FormsAuth = props =>{
                 return item.hostId
             case 'artifact_maven':
             case 'artifact_docker':
-                if(dataItem.task?.artifactType !=='ssh'){
-                    return item.serverId
-                }
-                if(item.groupId){
-                    return item.groupId
-                }
-                return item.hostId
             case 'pull_maven':
             case 'pull_docker':
-                if(dataItem.task?.pullType !=='ssh'){
+                let type;
+                if(dataItem.taskType==='artifact_docker' || dataItem.taskType==='artifact_docker'){
+                    type = dataItem.task?.artifactType
+                }else{
+                    type = dataItem.task?.pullType
+                }
+                if(type !=='ssh'){
                     return item.serverId
                 }
                 if(item.groupId){
@@ -217,7 +216,6 @@ const FormsAuth = props =>{
     const renderBtn = taskType =>{
         switch (taskType) {
             case 'git':
-            case 'gitlab':
             case 'svn':
                 return (
                     <AuthAddBtn
@@ -227,14 +225,22 @@ const FormsAuth = props =>{
                         findAuth={findAuth}
                     />
                 )
+            case 'gittok':
+            case 'teston':
+                if(version!=='ce'){return null}
+                return (
+                    <ServerAddBtn
+                        type={taskType}
+                        isConfig={true}
+                        visible={visible}
+                        setVisible={setVisible}
+                        findAuth={findAuth}
+                    />
+                )
             case 'gitee':
             case 'github':
+            case 'gitlab':
             case 'sonar':
-            case 'xcode':
-            case 'teston':
-                if((taskType==='gittok' || taskType==='teston') && version!=='ce'){
-                    return null
-                }
                 return (
                     <ServerAddBtn
                         type={taskType}
@@ -258,9 +264,13 @@ const FormsAuth = props =>{
             case 'artifact_docker':
             case 'pull_maven':
             case 'pull_docker':
-                const artifactType = (dataItem.taskType==='pull_maven' || dataItem.taskType==='pull_docker') ?
-                      dataItem.task?.pullType : dataItem.task?.artifactType
-                if(artifactType==='ssh'){
+                let type;
+                if(dataItem.taskType==='artifact_docker' || dataItem.taskType==='artifact_docker'){
+                    type = dataItem.task?.artifactType
+                }else{
+                    type = dataItem.task?.pullType
+                }
+                if(type==='ssh'){
                     return  <HostAddBtn
                                 isConfig={true}
                                 visible={visible}
@@ -268,10 +278,10 @@ const FormsAuth = props =>{
                                 findAuth={findAuth}
                             />
                 }
-                if((artifactType==='hadess' && version==='ce') || artifactType==='nexus'){
+                if((type==='hadess' && version==='ce') || type==='nexus'){
                     return (
                         <ServerAddBtn
-                            type={artifactType}
+                            type={type}
                             isConfig={true}
                             visible={visible}
                             setVisible={setVisible}
@@ -291,14 +301,14 @@ const FormsAuth = props =>{
     const selectLabel = item =>{
         switch (dataItem.taskType) {
             case 'git':
-            case 'gitlab':
             case 'svn':
-            case 'gittok':
             case 'teston':
+            case 'gittok':
                 return item.name+"("+(item.authType===1?item.username:"私钥")+")"
             case 'gitee':
             case 'github':
-                return item.name+"("+(item.authType===1?item.message:"私钥")+")"
+            case 'gitlab':
+                return item.name+"(私钥)"
             case 'liunx':
             case 'docker':
                 if(item.groupName) {
@@ -307,16 +317,15 @@ const FormsAuth = props =>{
                return item.name+"("+item.ip+")"
             case 'artifact_maven':
             case 'artifact_docker':
-                if(dataItem.task?.artifactType !=='ssh'){
-                    return item.name+"("+(item.authType===1? item.username:"私钥")+")"
-                }
-                if(item.groupName){
-                    return item.groupName + "(主机组)"
-                }
-                return item.name+"("+item.ip+")"
             case 'pull_maven':
             case 'pull_docker':
-                if(dataItem.task?.pullType !=='ssh'){
+                let type;
+                if(dataItem.taskType==='artifact_docker' || dataItem.taskType==='artifact_docker'){
+                    type = dataItem.task?.artifactType
+                }else{
+                    type = dataItem.task?.pullType
+                }
+                if(type !=='ssh'){
                     return item.name+"("+(item.authType===1? item.username:"私钥")+")"
                 }
                 if(item.groupName){

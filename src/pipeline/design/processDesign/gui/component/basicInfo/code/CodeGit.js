@@ -3,12 +3,12 @@ import FormsInput from "../FormsInput";
 import FormsAuth from "../FormsAuth";
 
 /**
- * Git & Gitlab
+ * Git
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const CodeGitOrGitlab = props =>{
+const CodeGit = props =>{
 
     return(
         <>
@@ -28,4 +28,4 @@ const CodeGitOrGitlab = props =>{
     )
 }
 
-export default CodeGitOrGitlab
+export default CodeGit

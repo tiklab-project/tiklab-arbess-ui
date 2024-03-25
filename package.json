@@ -60,7 +60,6 @@
         "thoughtware-plugin-manager-ui": "^1.0.2",
         "thoughtware-privilege-ui": "^1.0.2",
         "thoughtware-security-ui": "^1.0.2",
-        "thoughtware-todotask-ui": "^1.0.2",
         "thoughtware-user-ui": "^1.0.2"
     },
     "devDependencies": {
@@ -185,7 +184,6 @@
         "thoughtware-plugin-manager-ui": "^1.0.2",
         "thoughtware-privilege-ui": "^1.0.2",
         "thoughtware-security-ui": "^1.0.2",
-        "thoughtware-todotask-ui": "^1.0.2",
         "thoughtware-user-ui": "^1.0.2"
     }
 }

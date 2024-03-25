@@ -113,6 +113,7 @@ const Postprocess = props =>{
     return(
         <Row className="design-content">
             <Col
+                xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "18", offset: "3" }}

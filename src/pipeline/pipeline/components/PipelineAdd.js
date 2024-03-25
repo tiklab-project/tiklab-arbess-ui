@@ -31,7 +31,7 @@ const PipelineAdd = props =>{
     // 基本信息
     const [baseInfo,setBaseInfo] = useState({
         power:1,
-        type:1,
+        type:2,
         userList:[{
             ...user,
             id: user.userId,
@@ -69,10 +69,10 @@ const PipelineAdd = props =>{
                    <span>流水线名称：</span>
                    <span>{baseInfo.name}</span>
                </div>
-               <div className="template-base">
-                   <span>流水线类型：</span>
-                   <span>{baseInfo.type===1?"多任务":"多阶段"}</span>
-               </div>
+               {/*<div className="template-base">*/}
+               {/*    <span>流水线类型：</span>*/}
+               {/*    <span>{baseInfo.type===1?"多任务":"多阶段"}</span>*/}
+               {/*</div>*/}
                <div className="template-base">
                    <span>流水线权限：</span>
                    <span>{baseInfo.power===1?"全局":"私有"}</span>
@@ -108,51 +108,52 @@ const PipelineAdd = props =>{
     ]
 
     return (
-        <Spin spinning={isLoading}>
-            <Row className="pipeline-add">
-                <Col
-                    sm={{ span: "24" }}
-                    md={{ span: "24" }}
-                    lg={{ span: "18", offset: "3" }}
-                    xl={{ span: "14", offset: "5" }}
-                    xxl={{ span: "12", offset: "6" }}
-                >
-                    <div className="mf-home-limited mf">
-                        <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/pipeline")}/>
-                        <div className="steps-top">
-                            <Steps current={current}>
-                                {steps.map(item => (
-                                    <Steps.Step key={item.title} title={item.title} />
-                                ))}
-                            </Steps>
-                        </div>
-                        <div className="steps-content">
-                            {steps[current].content}
-                        </div>
-                        {
-                            current===1 &&
-                            <div className="steps-bottom">
-                                <Btn
-                                    onClick={()=>props.history.push("/pipeline")}
-                                    title={"取消"}
-                                    isMar={true}
-                                />
-                                <Btn
-                                    onClick={()=>setCurrent(0)}
-                                    title={"上一步"}
-                                    isMar={true}
-                                />
-                                <Btn
-                                    type={"primary"}
-                                    onClick={()=>createPip()}
-                                    title={"确定"}
-                                />
-                            </div>
-                        }
-                    </div>
-                </Col>
-            </Row>
-        </Spin>
+        <Row className="pipeline-add">
+            <Col
+                xs={{ span: "24" }}
+                sm={{ span: "24" }}
+                md={{ span: "24" }}
+                lg={{ span: "18", offset: "3" }}
+                xl={{ span: "14", offset: "5" }}
+                xxl={{ span: "12", offset: "6" }}
+            >
+               <Spin spinning={isLoading}>
+                   <div className="mf-home-limited">
+                       <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/pipeline")}/>
+                       <div className="steps-top">
+                           <Steps current={current}>
+                               {steps.map(item => (
+                                   <Steps.Step key={item.title} title={item.title} />
+                               ))}
+                           </Steps>
+                       </div>
+                       <div className="steps-content">
+                           {steps[current].content}
+                       </div>
+                       {
+                           current===1 &&
+                           <div className="steps-bottom">
+                               <Btn
+                                   onClick={()=>props.history.push("/pipeline")}
+                                   title={"取消"}
+                                   isMar={true}
+                               />
+                               <Btn
+                                   onClick={()=>setCurrent(0)}
+                                   title={"上一步"}
+                                   isMar={true}
+                               />
+                               <Btn
+                                   type={"primary"}
+                                   onClick={()=>createPip()}
+                                   title={"确定"}
+                               />
+                           </div>
+                       }
+                   </div>
+               </Spin>
+            </Col>
+        </Row>
     )
 
 }

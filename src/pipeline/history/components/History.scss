@@ -18,3 +18,10 @@
         }
     }
 }
+
+.history-screens{
+    padding-top: var(--thoughtware-padding-item);
+    .ant-select,.ant-input{
+        width: 150px;
+    }
+}

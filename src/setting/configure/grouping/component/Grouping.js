@@ -90,7 +90,7 @@ const Grouping = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"30%",
+            width:"28%",
             ellipsis:true,
             render:(text,record) => {
                 return (
@@ -105,7 +105,7 @@ const Grouping = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"25%",
+            width:"27%",
             ellipsis:true,
             render:text => text || "--"
         },
@@ -137,6 +137,7 @@ const Grouping = props =>{
     return(
         <Row className="auth mf-home-limited mf">
             <Col
+                xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}

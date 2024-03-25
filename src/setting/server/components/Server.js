@@ -81,6 +81,7 @@ const Server = props =>{
         {id:'all', title: "全部"},
         {id:'gitee', title:"Gitee"},
         {id:'github', title:"Github"},
+        {id:'gitlab', title:"Gitlab"},
         {id:'gittok', title:"GitTok"},
         {id:'teston', title:"TestOn"},
         {id:'sonar', title:"Sonar"},
@@ -186,8 +187,8 @@ const Server = props =>{
         },
         {
             title:"授权信息",
-            dataIndex:"message",
-            key:"message",
+            dataIndex:"accessToken",
+            key:"accessToken",
             width:"25%",
             ellipsis:true,
         },
@@ -274,6 +275,7 @@ const Server = props =>{
                 return allColumn
             case 'gitee':
             case 'github':
+            case 'gitlab':
                 return authorizeColumn
             case 'gittok':
             case 'teston':
@@ -287,9 +289,10 @@ const Server = props =>{
     return(
         <Row className="auth mf-home-limited mf">
             <Col
+                xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
-                lg={{span: "24"}}
+                lg={{ span: "24" }}
                 xl={{ span: "22", offset: "1"}}
                 xxl={{ span: "18", offset: "3" }}
             >

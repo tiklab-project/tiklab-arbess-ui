@@ -120,16 +120,16 @@ const PipelineAddInfo = props =>{
                         pipeline.name=params.name
                         pipeline.env=params.env
                         pipeline.group=params.group
-                        setIsLoading(false)
                         props.history.push(`/pipeline/${pipeline.id}/survey`)
                     }
+                    setIsLoading(false)
                 })
                 return
             }
             setCurrent(1)
             setBaseInfo({
                 ...value,
-                type: type,
+                type: 2,
                 power: powerType,
                 userList: yUserList,
             })
@@ -349,23 +349,23 @@ const PipelineAddInfo = props =>{
                     </Select>
                 </Form.Item>
             </Form>
-            <div className="pipeline-add-type">
-                <div className="pipeline-type-title">流水线类型</div>
-                <div className="pipeline-type-ul">
-                    <div onClick={()=>setType(1)}
-                         className={`${type===1?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
-                    >多任务</div>
-                    <div onClick={()=>setType(2)}
-                         className={`${type===2?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}
-                    >多阶段</div>
-                </div>
-            </div>
+            {/*<div className="pipeline-add-type">*/}
+            {/*    <div className="pipeline-type-title">流水线类型</div>*/}
+            {/*    <div className="pipeline-type-ul">*/}
+            {/*        <div onClick={()=>setType(1)}*/}
+            {/*             className={`${type===1?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}*/}
+            {/*        >多任务</div>*/}
+            {/*        <div onClick={()=>setType(2)}*/}
+            {/*             className={`${type===2?"pipeline-type-li pipeline-type-select":"pipeline-type-li"}`}*/}
+            {/*        >多阶段</div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             { renderPowerType }
             {
                 powerType === 2 &&
                 <div className="pipeline-user">
                     <div className="pipeline-user-title">
-                        <div>流水线成员</div>
+                        <div className="pipeline-user-title-user">流水线成员</div>
                         <Dropdown
                             getPopupContainer={e => e.parentElement}
                             overlay={

@@ -22,22 +22,18 @@ const ServerModal = props =>{
     const {callbackUrl,createAuthServer,updateAuthServer} = serverStore
     const {findCode,findAccessToken,skin} = authorizeStore
 
-    const [form] = Form.useForm()
+    const [form] = Form.useForm();
 
     // 授权类型
-    const [serverWay,setServerWay] = useState('gitee')
-
+    const [serverWay,setServerWay] = useState('gitee');
     // 去第三方授权按钮是否禁用
-    const [addAuth,setAddAuth] = useState(false)
-
+    const [addAuth,setAddAuth] = useState(false);
     // 刷新
-    const [fresh,setFresh] = useState(false)
-
+    const [fresh,setFresh] = useState(false);
     // 授权信息
-    const [infos,setInfos] = useState("")
-
+    const [infos,setInfos] = useState("");
     // 回调地址
-    const [callUrlWarn,setCallUrlWarn] = useState("")
+    const [callUrlWarn,setCallUrlWarn] = useState("");
 
     useEffect(()=>{
         // 表单初始化
@@ -198,60 +194,6 @@ const ServerModal = props =>{
         })
     }
 
-    // 渲染Gitee和Github授权表单
-    const authorize = (
-       <>
-           <Form.Item label="授权id" name="clientId" rules={[{required:true,message:`授权id不能空`}]}>
-               <Input disabled={formValue}/>
-           </Form.Item>
-           <Form.Item label="授权密码" name="clientSecret" rules={[{required:true,message:`授权密码不能空`}]}>
-               <Input disabled={formValue}/>
-           </Form.Item>
-           <Form.Item
-               name="callbackUrl"
-               label={
-                   <>  回调地址
-                       <Tooltip title="回调地址">
-                           <QuestionCircleOutlined style={{paddingLeft:5,cursor:"pointer"}}/>
-                       </Tooltip>
-                   </>
-               }
-               rules={[
-                   {required:true,message:`回调地址不能空`},
-                   {
-                       pattern:validCallbackUrl,
-                       message:"不是有效的回调地址"
-                   },
-              ]}
-           ><Input disabled={formValue}/>
-           </Form.Item>
-           {
-               callUrlWarn &&
-               <div style={{
-                   marginTop:-10,
-                   fontSize:13,
-                   color:"#999",
-                   paddingBottom:10,
-               }}>将下方地址设置为应用{serverWay==='gitee'?"Gitee":"Github"}回调地址{callUrlWarn}</div>
-           }
-           <Space>
-               <Form.Item name="message" label="服务授权信息" rules={[{required:true,message: "服务授权信息不能空" }]}>
-                   <Select style={{width:360}} disabled={formValue}>
-                       <Select.Option value={infos}>{infos}</Select.Option>
-                   </Select>
-               </Form.Item>
-               <div style={{paddingTop:22}}>
-                   <Btn
-                       title={"新建"}
-                       icon={<PlusOutlined/>}
-                       onClick={addAuth ? goUrl:null}
-                       type={addAuth ? "link" : "link-disabled"}
-                   />
-               </div>
-           </Space>
-       </>
-    )
-
     /**
      * 服务地址是否禁用
      * @returns {boolean}
@@ -264,29 +206,47 @@ const ServerModal = props =>{
         return false
     }
 
-    // 渲染sonar和nexus授权表单
-    const server = (
-        <>
-            <Form.Item
-                label={
-                    <>  服务器地址
-                        <Tooltip title="服务器地址">
-                            <QuestionCircleOutlined style={{paddingLeft:5,cursor:"pointer"}}/>
-                        </Tooltip>
-                    </>}
-                name="serverAddress"
-                rules={[
-                    {required:true,message:"服务器地址不能空"},
-                    {
-                        pattern:/^(https?:\/\/)[^\s\/]+(\.[^\s\/]+)+(\/[^\s\/]*)*[^\s\/\\.,。，、;:'"?!]$/,
-                        message:"请输入正确的服务地址"
-                    }
-                ]}
-            ><Input disabled={serverAddressDisabled()} type={"url"}/>
-            </Form.Item>
-            <AuthType/>
-        </>
-    )
+    const serverWayHtml = () => {
+        switch (serverWay) {
+            case 'gitee':
+            case 'github':
+            case 'gitlab':
+                return (
+                    <Form.Item
+                        name={'accessToken'}
+                        label={'AccessTocken'}
+                        rules={[
+                            {required:true,message:"AccessTocken不能空"},
+                        ]}
+                    >
+                        <Input/>
+                    </Form.Item>
+                )
+            default:
+                return (
+                    <>
+                        <Form.Item
+                            label={
+                                <>  服务器地址
+                                    <Tooltip title="服务器地址">
+                                        <QuestionCircleOutlined style={{paddingLeft:5,cursor:"pointer"}}/>
+                                    </Tooltip>
+                                </>}
+                            name="serverAddress"
+                            rules={[
+                                {required:true,message:"服务器地址不能空"},
+                                {
+                                    pattern:/^(https?:\/\/)[^\s\/]+(\.[^\s\/]+)+(\/[^\s\/]*)*[^\s\/\\.,。，、;:'"?!]$/,
+                                    message:"请输入正确的服务地址"
+                                }
+                            ]}
+                        ><Input disabled={serverAddressDisabled()} type={"url"}/>
+                        </Form.Item>
+                        <AuthType/>
+                    </>
+                )
+        }
+    }
 
     return(
         <Modals
@@ -310,6 +270,7 @@ const ServerModal = props =>{
                                     <Select onChange={changeServerWay} disabled={formValue || isConfig}>
                                         <Select.Option value={'gitee'}>Gitee</Select.Option>
                                         <Select.Option value={'github'}>Github</Select.Option>
+                                        <Select.Option value={'gitlab'}>Gitlab</Select.Option>
                                         <Select.Option value={'gittok'}>GitTok</Select.Option>
                                         <Select.Option value={'teston'}>TestOn</Select.Option>
                                         <Select.Option value={'sonar'}>Sonar</Select.Option>
@@ -320,6 +281,7 @@ const ServerModal = props =>{
                                     <Select onChange={changeServerWay} disabled={formValue || isConfig}>
                                         <Select.Option value={'gitee'}>Gitee</Select.Option>
                                         <Select.Option value={'github'}>Github</Select.Option>
+                                        <Select.Option value={'gitlab'}>Gitlab</Select.Option>
                                         <Select.Option value={'sonar'}>Sonar</Select.Option>
                                         <Select.Option value={'nexus'}>Nexus</Select.Option>
                                     </Select>
@@ -331,9 +293,7 @@ const ServerModal = props =>{
                             rules={[{required:true,message:`名称不能空`},Validation("名称")]}
                         ><Input/>
                         </Form.Item>
-                        {
-                            (serverWay==='gitee' || serverWay==='github' ) ? authorize : server
-                        }
+                        { serverWayHtml() }
                     </Form>
                 </div>
             </Spin>
