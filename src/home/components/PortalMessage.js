@@ -128,7 +128,9 @@ const PortalMessage = props =>{
                 findMessage()
             })
         }
-        props.history.push(item.link.split("#")[1])
+        if(item.link){
+            props.history.push(item.link.split("#")[1])
+        }
         setVisible(false)
     }
 

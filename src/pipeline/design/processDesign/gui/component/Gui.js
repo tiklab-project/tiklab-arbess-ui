@@ -39,14 +39,14 @@ const Gui = props =>{
             {
                 pipeline && pipeline.type===1 ?
                     <Task
-                        pipeline={pipeline}
+                        {...props}
                         addTask={addTask}
                         setTaskFormDrawer={setTaskFormDrawer}
                         setCreateValue={setCreateValue}
                     />
                     :
                     <Stage
-                        pipeline={pipeline}
+                        {...props}
                         addTask={addTask}
                         setTaskFormDrawer={setTaskFormDrawer}
                         setCreateValue={setCreateValue}

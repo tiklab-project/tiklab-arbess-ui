@@ -11,7 +11,7 @@ $line-color:#d9d9d9;
         padding: 0 var(--thoughtware-padding-item);
         overflow-y: hidden;
         .group-create{
-            padding-top: 51px;
+            padding-top: 19px;
             display: inline-block;
             vertical-align: top;
             height: 100%;
@@ -28,7 +28,7 @@ $line-color:#d9d9d9;
             transform: rotate(0);
             .group-flow_btn_i{
                 position: absolute;
-                top: 128px;
+                top: 96px;
                 left: 12px;
                 z-index: 2;
                 color: #595959;
@@ -49,7 +49,7 @@ $line-color:#d9d9d9;
                     border-top: 1px solid $line-color;
                     position: absolute;
                     margin-left: -24px;
-                    top: 138px;
+                    top: 106px;
                 }
 
             }
@@ -206,7 +206,7 @@ $line-color:#d9d9d9;
                 &:before{
                     content: "";
                     position: absolute;
-                    top: -33%;
+                    top: -50%;
                     left: 0;
                     border-left: 1px solid $line-color;
                     border-right: 1px solid $line-color;
@@ -225,6 +225,8 @@ $line-color:#d9d9d9;
                 }
                 &:first-child .newStages-contents:before{
                     border-radius: 0;
+                    border-left: none;
+                    border-right: none;
                 }
                 &:last-child:before{
                     top: -50%;
@@ -257,9 +259,11 @@ $line-color:#d9d9d9;
                     width: 200px;
                 }
             }
+            /**
             .newStages-title:hover + .newStages-contents:before{
                 border-color: var(--thoughtware-blue) !important;
             }
+             */
             .newStages-contents{
                 position: relative;
                 &:before{
@@ -267,7 +271,9 @@ $line-color:#d9d9d9;
                     position: absolute;
                     top: -26%;
                     left: 0;
-                    border: 1px solid $line-color;
+                    border-left: 1px solid $line-color;
+                    border-right: 1px solid $line-color;
+                    border-bottom: 1px solid $line-color;
                     width: 100%;
                     height: 76%;
                     transition: border .2s ease-in;

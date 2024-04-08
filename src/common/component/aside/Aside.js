@@ -1,8 +1,7 @@
-import React,{useState} from "react";
+import React from "react";
 import {Dropdown} from "antd";
 import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
 import {renderRoutes} from "react-router-config";
-import {Loading} from "../loading/Loading";
 import ListIcon from "../list/ListIcon";
 import "./Aside.scss";
 
@@ -15,18 +14,13 @@ const Aside = props =>{
 
     const path = location.pathname
 
-    // 加载状态
-    const [isLoading,setIsLoading] = useState(false)
-
     /**
      * 切换流水线
      * @param item
      */
     const changePipeline = item => {
         if(pipeline.id!==item.id){
-            setIsLoading(true)
             props.history.push(`/pipeline/${item.id}/history`)
-            setTimeout(()=>setIsLoading(false),150)
         }
     }
 
@@ -98,9 +92,7 @@ const Aside = props =>{
                     <div>设置</div>
                 </div>
             </div>
-            {
-                isLoading ? <Loading/> : renderRoutes(route.routes)
-            }
+            {renderRoutes(route.routes)}
         </div>
     )
 }

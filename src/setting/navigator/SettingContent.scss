@@ -38,6 +38,18 @@
         .system-aside-first:hover {
             background: var(--thoughtware-gray-300);
         }
+        .system-aside-second{
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+            .aside-second-title{
+                flex: 1;
+            }
+            .aside-second-link{
+                text-align: right;
+                font-size: 13px;
+            }
+        }
         .system-aside-second:hover{
             background: var(--thoughtware-gray-300);
         }

@@ -162,7 +162,7 @@ const Tool = props =>{
     ]
 
     return (
-        <Row className="auth mf-home-limited mf">
+        <Row className="auth">
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -171,34 +171,36 @@ const Tool = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"工具"}>
-                    {
-                        version==='ce' &&
-                        <Btn
-                            onClick={addEnvi}
-                            type={"primary"}
-                            title={"添加工具"}
-                            icon={<PlusOutlined/>}
+                <div className='mf-home-limited mf'>
+                    <BreadCrumb firstItem={"工具"}>
+                        {
+                            version==='ce' &&
+                            <Btn
+                                onClick={addEnvi}
+                                type={"primary"}
+                                title={"添加工具"}
+                                icon={<PlusOutlined/>}
+                            />
+                        }
+                    </BreadCrumb>
+                    <div className="auth-content">
+                        <Table
+                            columns={version==='ce'?columnsCe:columns}
+                            dataSource={enviData}
+                            rowKey={record=>record.scmId}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={'暂无环境配置'}/>}}
                         />
-                    }
-                </BreadCrumb>
-                <div className="auth-content">
-                    <Table
-                        columns={version==='ce'?columnsCe:columns}
-                        dataSource={enviData}
-                        rowKey={record=>record.scmId}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={'暂无环境配置'}/>}}
-                    />
 
-                    <ToolModal
-                        visible={visible}
-                        setVisible={setVisible}
-                        enviData={enviData}
-                        updatePipelineScm={updatePipelineScm}
-                        formValue={formValue}
-                        findAllScm={findAllScm}
-                    />
+                        <ToolModal
+                            visible={visible}
+                            setVisible={setVisible}
+                            enviData={enviData}
+                            updatePipelineScm={updatePipelineScm}
+                            formValue={formValue}
+                            findAllScm={findAllScm}
+                        />
+                    </div>
                 </div>
             </Col>
         </Row>

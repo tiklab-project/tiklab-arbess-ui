@@ -135,7 +135,7 @@ const Grouping = props =>{
     ]
 
     return(
-        <Row className="auth mf-home-limited mf">
+        <Row className="auth">
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -144,28 +144,30 @@ const Grouping = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"分组"}>
-                    <Btn
-                        type={'primary'}
-                        title={"添加分组"}
-                        onClick={createEnv}
-                        icon={<PlusOutlined/>}
+                <div className='mf-home-limited mf'>
+                    <BreadCrumb firstItem={"分组"}>
+                        <Btn
+                            type={'primary'}
+                            title={"添加分组"}
+                            onClick={createEnv}
+                            icon={<PlusOutlined/>}
+                        />
+                    </BreadCrumb>
+                    <GroupingModal
+                        visible={visible}
+                        setVisible={setVisible}
+                        formValue={formValue}
+                        findGrouping={findGrouping}
                     />
-                </BreadCrumb>
-                <GroupingModal
-                    visible={visible}
-                    setVisible={setVisible}
-                    formValue={formValue}
-                    findGrouping={findGrouping}
-                />
-                <div className="auth-content">
-                    <Table
-                        columns={columns}
-                        dataSource={groupList}
-                        rowKey={record=>record.id}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
-                    />
+                    <div className="auth-content">
+                        <Table
+                            columns={columns}
+                            dataSource={groupList}
+                            rowKey={record=>record.id}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
+                        />
+                    </div>
                 </div>
             </Col>
         </Row>

@@ -135,7 +135,7 @@ const Env = props =>{
     ]
 
     return(
-        <Row className="auth mf-home-limited mf">
+        <Row className="auth">
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -144,28 +144,30 @@ const Env = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"环境"}>
-                    <Btn
-                        type={'primary'}
-                        title={"添加环境"}
-                        onClick={createEnv}
-                        icon={<PlusOutlined/>}
+                <div className='mf-home-limited mf'>
+                    <BreadCrumb firstItem={"环境"}>
+                        <Btn
+                            type={'primary'}
+                            title={"添加环境"}
+                            onClick={createEnv}
+                            icon={<PlusOutlined/>}
+                        />
+                    </BreadCrumb>
+                    <EnvModal
+                        visible={visible}
+                        setVisible={setVisible}
+                        formValue={formValue}
+                        findEnv={findEnv}
                     />
-                </BreadCrumb>
-                <EnvModal
-                    visible={visible}
-                    setVisible={setVisible}
-                    formValue={formValue}
-                    findEnv={findEnv}
-                />
-                <div className="auth-content">
-                    <Table
-                        columns={columns}
-                        dataSource={envList}
-                        rowKey={record=>record.id}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
-                    />
+                    <div className="auth-content">
+                        <Table
+                            columns={columns}
+                            dataSource={envList}
+                            rowKey={record=>record.id}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
+                        />
+                    </div>
                 </div>
             </Col>
         </Row>

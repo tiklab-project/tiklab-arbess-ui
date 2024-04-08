@@ -25,9 +25,9 @@ const  Portal = props =>{
     const {t} = useTranslation()
 
     // 消息抽屉状态
-    const [visible,setVisible] = useState(false)
+    const [visible,setVisible] = useState(false);
     // 未读消息数量
-    const [unread,setUnread] = useState(0)
+    const [unread,setUnread] = useState(0);
 
     useEffect(()=>{
         // 获取系统权限
@@ -68,7 +68,7 @@ const  Portal = props =>{
                                      onClick={() => props.history.push(routers.to)}
                                      className={path.indexOf(routers.to) === 0 ? "headers-active" : null}
                                 >
-                                    {t(routers.title)}
+                                    <span className='headers-link-text'>{t(routers.title)}</span>
                                 </div>
                             ))
                         }
@@ -77,7 +77,7 @@ const  Portal = props =>{
                 <div className="frame-header-right">
                     <div className="frame-header-right-text">
                         <div className="text_icon_block_item"
-                             onClick={()=>props.history.push("/setting")}
+                             onClick={()=>props.history.push("/setting/home")}
                              data-title-bottom={'设置'}
                         >
                             <SettingOutlined className="frame-header-icon"/>

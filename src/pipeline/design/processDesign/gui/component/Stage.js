@@ -15,7 +15,7 @@ import {TaskFinalAdd} from "./Common";
  */
 const Stage = props =>{
 
-    const {stageStore,taskStore,pipeline,addTask,setCreateValue,setTaskFormDrawer} = props
+    const {stageStore,taskStore,addTask,setCreateValue,setTaskFormDrawer,match:{params}} = props
 
     const {finAllStage,stageFresh,deleteStage,stageMustField} = stageStore
     const {setDataItem,taskFresh} = taskStore
@@ -28,7 +28,7 @@ const Stage = props =>{
 
     useEffect(()=>{
         // 初始化多阶段
-        finAllStage(pipeline.id).then(res=>{
+        finAllStage(params.id).then(res=>{
             setIsLoading(false)
             if(res.code===0){
                 setStageList(res.data || [])
@@ -103,15 +103,6 @@ const Stage = props =>{
     }
 
     /**
-     * true：源码，fasle：不是源码
-     * @param type
-     * @returns {boolean}
-     */
-    const isCode = type =>{
-        return type === 'git' || type === 'gitee' || type === 'github' || type === 'gitlab' || type === 'svn' || type === 'gittok';
-    }
-
-    /**
      * 渲染多阶段
      * @param group
      * @param groupIndex
@@ -149,14 +140,14 @@ const Stage = props =>{
                         group && group.stageList && group.stageList.map((list,listIndex)=>{
                             return(
                                <div key={listIndex} className={`${!group.code?"multi-content":""}`}>
-                                   <div className="newStages-title" style={group.code? {opacity:0}:null}>
-                                        <span className="newStages-title-name">
-                                            {list?.stageName || "阶段"}
-                                            <span className="newStages-title-icon">
-                                                <EditOutlined onClick={()=>showDetail(list,'parallel')}/>
-                                            </span>
-                                        </span>
-                                   </div>
+                                   {/*<div className="newStages-title" style={group.code? {opacity:0}:null}>*/}
+                                   {/*     <span className="newStages-title-name">*/}
+                                   {/*         {list?.stageName || "阶段"}*/}
+                                   {/*         <span className="newStages-title-icon">*/}
+                                   {/*             <EditOutlined onClick={()=>showDetail(list,'parallel')}/>*/}
+                                   {/*         </span>*/}
+                                   {/*     </span>*/}
+                                   {/*</div>*/}
                                    <div className={`newStages-contents ${group.code?"newStages-code":""}`}>
                                        <div className="newStages-content">
                                            {

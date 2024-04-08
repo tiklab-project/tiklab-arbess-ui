@@ -49,19 +49,26 @@
             &-link{
                 display: flex;
                 flex-direction: row;
-                flex-shrink: 0;
-                & > div{
+                gap: 24px;
+                &>div{
                     cursor: pointer;
-                    margin-right: 10px;
+                    overflow: hidden;
                     height: 48px;
                     line-height: 48px;
-                    padding: 0 10px;
-                    &:not(:last-child){
-                        margin-right: var(--thoughtware-padding-item);
+                    flex-shrink: 0;
+                    .headers-link-text{
+                        padding: 5px;
+                    }
+                    &:hover .headers-link-text{
+                        background: #E1EDFF;
+                        border-radius: 3px;
+                        color: var(--thoughtware-blue);
                     }
                 }
             }
             &-active{
+                font-weight: 600;
+                color: var(--thoughtware-blue);
                 border-bottom: 2px solid var(--thoughtware-blue);
             }
         }

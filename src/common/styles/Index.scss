@@ -12,11 +12,17 @@ ul li{
         min-height: 20px !important;
         height: 20px !important;
     }
+    .ant-avatar{
+        width: 22px !important;
+        height: 22px !important;
+        line-height: 22px !important;
+        font-size: 12px !important;
+    }
 }
 
 .mf-home-limited{
     padding: 20px 30px;
-    min-width: 700px;
+    min-width: 576px;
 }
 
 .mf,.mf-home-limited{
@@ -90,13 +96,6 @@ ul li{
         fill: currentColor;
         overflow: hidden;
     }
-    .ant-avatar{
-        width: 22px !important;
-        height: 22px !important;
-        line-height: 22px !important;
-        font-size: 12px !important;
-    }
-
 }
 
 .ant-message{

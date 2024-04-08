@@ -35,7 +35,7 @@ const History = props =>{
     const [historyItem,setHistoryItem] = useState(null)
 
     // 加载状态
-    const [isLoading,setIsLoading] = useState(true)
+    const [isLoading,setIsLoading] = useState(false)
 
     // 历史详情状态 && 监听关闭定时器的状态
     const [detail,setDetail] = useState(false)
@@ -75,12 +75,13 @@ const History = props =>{
             findInstance()
         }
         return ()=>{clearInterval(inters)}
-    },[detail,params])
+    },[detail,params,match.params.id])
 
     /**
      * 获取历史列表
      */
     const findInstance = () => {
+        setIsLoading(true)
         if(route.path==='/history'){
             findUserInstance(params).then(Res=>{
                 setIsLoading(false)
@@ -148,7 +149,6 @@ const History = props =>{
      * @param value
      */
     const screen = value =>{
-        setIsLoading(true)
         setParams({
             ...params,
             ...value,
@@ -313,7 +313,6 @@ const History = props =>{
                     <BreadCrumb firstItem={"历史"}/>
                     <HistoryScreen
                         {...props}
-                        params={params}
                         screen={screen}
                         pipelineStore={pipelineStore}
                     />

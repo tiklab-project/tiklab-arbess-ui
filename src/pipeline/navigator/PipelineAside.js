@@ -9,7 +9,6 @@ import {
     ExperimentOutlined,
     ScanOutlined
 } from "@ant-design/icons";
-import {Loading} from "../../common/component/loading/Loading";
 import Aside from "../../common/component/aside/Aside";
 import pipelineStore from "../pipeline/store/PipelineStore";
 
@@ -34,9 +33,6 @@ const PipelineAside= (props)=>{
     const id = match.params.id
     const userId = getUser().userId
 
-    // 加载状态
-    const [isAside,setIsAside] = useState(true);
-
     const [recentlyPipeline,setRecentlyPipeline] = useState([])
 
     useEffect(()=>{
@@ -48,7 +44,6 @@ const PipelineAside= (props)=>{
                     props.history.push('/pipeline')
                     return
                 }
-                setIsAside(false)
                 // 获取流水线权限
                 getInitProjectPermissions(userId,id,res.data?.power===1)
                 // 当前流水线打开
@@ -59,7 +54,6 @@ const PipelineAside= (props)=>{
                         setRecentlyPipeline(res.data)
                     }
                 })
-
             })
         }
     },[id])
@@ -97,8 +91,6 @@ const PipelineAside= (props)=>{
             key:"test",
         },
     ]
-
-    if(isAside) return <Loading/>
 
     return (
         <Provider {...store}>

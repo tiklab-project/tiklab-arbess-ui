@@ -24,7 +24,7 @@ const HistoryInstance = props => {
                 return props.history.push(`/404`)
             }
         })
-    },[])
+    },[params.instanceId])
 
     const back = () => props.history.push(`/pipeline/${params.id}/history`)
 

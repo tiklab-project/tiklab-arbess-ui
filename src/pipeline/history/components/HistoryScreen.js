@@ -8,9 +8,9 @@ import {observer} from "mobx-react";
  */
 const HistoryScreen = props =>{
 
-    const {params,screen,pipelineStore,route} = props
+    const {match,screen,pipelineStore,route} = props
 
-    const {findUserPipeline,findDmUserPage,pipeline,pipelineList} = pipelineStore
+    const {findUserPipeline,findDmUserPage,pipelineList} = pipelineStore
 
     // 流水线成员
     const [userList,setUserList] = useState([]);
@@ -39,7 +39,7 @@ const HistoryScreen = props =>{
                 pageSize: 9,
                 currentPage: currentPage,
             },
-            domainId:pipeline.id
+            domainId:match.params.id
         }).then(res=>{
             if(res.code===0){
                 setPage({
@@ -85,7 +85,6 @@ const HistoryScreen = props =>{
                 placeholder="名称"
                 prefix={<SearchOutlined />}
                 onPressEnter={e=>changValue(e.target.value,"number")}
-                defaultValue={params?.number}
             />
             {
                 route.path==='/history' ?
@@ -96,9 +95,9 @@ const HistoryScreen = props =>{
                         filterOption={(input, option) =>
                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
-                        defaultValue={params.pipelineId}
+                        placeholder={'流水线'}
                     >
-                        <Select.Option key={"全部"} value={null}>流水线</Select.Option>
+                        <Select.Option key={"全部"} value={null}>全部</Select.Option>
                         {
                             pipelineList && pipelineList.map(item=>(
                                 <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
@@ -114,9 +113,9 @@ const HistoryScreen = props =>{
                         filterOption={(input, option) =>
                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
-                        defaultValue={params.userId}
+                        placeholder={'执行人'}
                     >
-                        <Select.Option key={"全部"} value={null}>执行人</Select.Option>
+                        <Select.Option key={"全部"} value={null}>全部</Select.Option>
                         {
                             userList && userList.map(item=>(
                                 <Select.Option key={item.id} value={item.user && item.user.id}>{item.user && item.user.nickname}</Select.Option>
@@ -128,20 +127,20 @@ const HistoryScreen = props =>{
             <Select
                 suffixIcon={<CaretDownOutlined />}
                 onChange={value=>changValue(value,"state")}
-                defaultValue={params.state}
+                placeholder={'状态'}
             >
-                <Select.Option value={null}>状态</Select.Option>
+                <Select.Option value={null}>全部</Select.Option>
                 <Select.Option value={"error"}>失败</Select.Option>
                 <Select.Option value={"success"}>成功</Select.Option>
                 <Select.Option value={"halt"}>终止</Select.Option>
-                <Select.Option key={"30"} value={"run"}>运行中</Select.Option>
+                <Select.Option value={"run"}>运行中</Select.Option>
             </Select>
             <Select
                 suffixIcon={<CaretDownOutlined />}
                 onChange={value=>changValue(value,"type")}
-                defaultValue={params.type}
+                placeholder={'执行方式'}
             >
-                <Select.Option value={0}>执行方式</Select.Option>
+                <Select.Option value={0}>全部</Select.Option>
                 <Select.Option value={1}>手动</Select.Option>
                 <Select.Option value={2}>自动</Select.Option>
             </Select>

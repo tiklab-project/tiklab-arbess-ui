@@ -41,6 +41,7 @@ const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInf
  * 系统设置
  */
 const Setting=AsyncComponent(()=>import("./setting/navigator/Setting"))
+const SettingHome=AsyncComponent(()=>import("./setting/home/component/SettingHome"))
 const Auth=AsyncComponent(()=>import("./setting/configure/auth/components/Auth"))
 const Host=AsyncComponent(()=>import("./setting/configure/host/component/Host"))
 const HostGroup=AsyncComponent(()=>import("./setting/configure/host/component/HostGroup"))
@@ -143,6 +144,8 @@ export {
     DomainRole,
 
     Setting,
+
+    SettingHome,
 
     Grouping,
     Env,

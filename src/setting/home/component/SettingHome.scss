@@ -1,0 +1,57 @@
+.setting-home{
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    .home-title{
+        font-size: 12px;
+        color: #999999;
+        margin-bottom: 10px;
+    }
+    .home-chunk-item{
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        background: #f7f7f7;
+    }
+    .home-chunk-label{
+        padding-top: 4px;
+        padding-bottom: 10px;
+        font-weight: bold;
+    }
+    .home-chunk-info{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 10px 0;
+    }
+    .home-chunk-wrap{
+        grid-column-gap: 20px;
+        .home-chunk-wrap-inline{
+            display: flex;
+            align-items: center;
+        }
+    }
+    .home-chunk-desc{
+        font-size: 12px;
+        color: #999999;
+        margin-right: 10px;
+    }
+    .setting-home-chunk{
+        padding: 10px;
+        &:not(:last-child){
+            margin-bottom: 20px;
+        }
+        .home-chunk{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 20px;
+        }
+        .home-chunk-item-inline{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 48px;
+        }
+    }
+}

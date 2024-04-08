@@ -154,7 +154,7 @@ const Dynamic = props =>{
                                     }
                                     notFoundContent={<ListEmpty/>}
                                 >
-                                    <Select.Option key={'all'} value={null}>流水线</Select.Option>
+                                    <Select.Option key={'all'} value={null}>全部</Select.Option>
                                     {
                                         pipelineList && pipelineList.map(item=>{
                                             return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
@@ -167,7 +167,7 @@ const Dynamic = props =>{
                                 style={{width:150}}
                                 onChange={(value)=>changParams(value,"actionType")}
                             >
-                                <Select.Option key={'all'} value={null}>所有操作</Select.Option>
+                                <Select.Option key={'all'} value={null}>全部</Select.Option>
                                 {
                                     dynamicType && dynamicType.map(item=>{
                                         return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>

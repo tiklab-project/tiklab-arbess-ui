@@ -287,7 +287,7 @@ const Server = props =>{
     }
 
     return(
-        <Row className="auth mf-home-limited mf">
+        <Row className="auth">
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -296,29 +296,31 @@ const Server = props =>{
                 xl={{ span: "22", offset: "1"}}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"服务集成"} >
-                    <ServerAddBtn
-                        type={'gitee'}
-                        visible={visible}
-                        setVisible={setVisible}
-                        formValue={formValue}
-                        setFormValue={setFormValue}
-                        findAuth={findAuth}
+                <div className="mf-home-limited mf">
+                    <BreadCrumb firstItem={"服务集成"} >
+                        <ServerAddBtn
+                            type={'gitee'}
+                            visible={visible}
+                            setVisible={setVisible}
+                            formValue={formValue}
+                            setFormValue={setFormValue}
+                            findAuth={findAuth}
+                        />
+                    </BreadCrumb>
+                    <Tabs
+                        tabLis={lis}
+                        type={activeTab}
+                        onClick={clickServerType}
                     />
-                </BreadCrumb>
-                <Tabs
-                    tabLis={lis}
-                    type={activeTab}
-                    onClick={clickServerType}
-                />
-                <div className="auth-content">
-                    <Table
-                        columns={columns(activeTab)}
-                        dataSource={authServerList}
-                        rowKey={record=>record.serverId}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={'暂无服务配置'}/>}}
-                    />
+                    <div className="auth-content">
+                        <Table
+                            columns={columns(activeTab)}
+                            dataSource={authServerList}
+                            rowKey={record=>record.serverId}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={'暂无服务配置'}/>}}
+                        />
+                    </div>
                 </div>
             </Col>
         </Row>

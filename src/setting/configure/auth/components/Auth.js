@@ -123,7 +123,7 @@ const Auth = props =>{
     ]
 
     return(
-        <Row className="auth mf-home-limited mf">
+        <Row className="auth">
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -132,23 +132,25 @@ const Auth = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"认证"}>
-                    <AuthAddBtn
-                        visible={visible}
-                        setVisible={setVisible}
-                        formValue={formValue}
-                        setFormValue={setFormValue}
-                        findAuth={findAuth}
-                    />
-                </BreadCrumb>
-                <div className="auth-content">
-                    <Table
-                        columns={commonColumns}
-                        dataSource={authList}
-                        rowKey={record=>record.authId}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={'暂无认证配置'}/>}}
-                    />
+                <div className='mf-home-limited mf'>
+                    <BreadCrumb firstItem={"认证"}>
+                        <AuthAddBtn
+                            visible={visible}
+                            setVisible={setVisible}
+                            formValue={formValue}
+                            setFormValue={setFormValue}
+                            findAuth={findAuth}
+                        />
+                    </BreadCrumb>
+                    <div className="auth-content">
+                        <Table
+                            columns={commonColumns}
+                            dataSource={authList}
+                            rowKey={record=>record.authId}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={'暂无认证配置'}/>}}
+                        />
+                    </div>
                 </div>
             </Col>
         </Row>

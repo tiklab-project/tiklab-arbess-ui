@@ -3,7 +3,7 @@ import {
     BarsOutlined,
     GroupOutlined,
     MenuOutlined,
-    ProjectOutlined,
+    ProjectOutlined, SafetyCertificateOutlined,
     TeamOutlined,
 } from "@ant-design/icons";
 
@@ -15,7 +15,7 @@ export const departmentRouters =[
         icon: <TeamOutlined/>,
         children: [
             {
-                id: "/setting/org",
+                id: "/setting/orga",
                 title: "部门",
                 purviewCode: "orga",
             },
@@ -30,9 +30,14 @@ export const departmentRouters =[
                 purviewCode: "user_group",
             },
             {
-                id: "/setting/directory",
+                id: "/setting/dir",
                 title: "用户目录",
                 purviewCode: "user_dir",
+            },
+            {
+                id:"/setting/role",
+                title:"权限",
+                purviewCode:"pipeline_permission",
             },
         ]
     }

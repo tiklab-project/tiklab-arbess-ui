@@ -20,12 +20,6 @@ const Setting = props =>{
 
     const applicationRouters =  [
         {
-            id:"/setting/role",
-            title:"权限",
-            icon: <SafetyCertificateOutlined />,
-            purviewCode:"pipeline_permission",
-        },
-        {
             id:"message",
             title: "消息",
             icon:<SoundOutlined/>,

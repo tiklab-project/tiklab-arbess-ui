@@ -15,7 +15,7 @@ import {TaskFinalAdd} from "./Common";
  */
 const Task = props => {
 
-    const {pipeline,taskStore,addTask,setTaskFormDrawer,setCreateValue} = props
+    const {taskStore,addTask,setTaskFormDrawer,setCreateValue,match:{params}} = props
 
     const {findAllTask,taskFresh,setDataItem,deleteTask,taskMustField} = taskStore
 
@@ -27,7 +27,7 @@ const Task = props => {
 
     useEffect(()=>{
         // 获取多任务
-        findAllTask(pipeline.id).then(res=>{
+        findAllTask(params.id).then(res=>{
             setIsLoading(false)
             if(res.code===0){
                 setTaskList(res.data || [])

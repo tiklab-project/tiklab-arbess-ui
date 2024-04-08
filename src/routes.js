@@ -39,6 +39,8 @@ import {
 
     Setting,
 
+    SettingHome,
+
     Grouping,
     Env,
     Auth,
@@ -136,6 +138,10 @@ const routers=[
             },
             {
                 path:"/404",
+                component:NotFound,
+            },
+            {
+                path:"/noaccess",
                 component:NotFound,
             },
             {
@@ -239,7 +245,12 @@ const routers=[
                 component:Setting,
                 routes:[
                     {
-                        path: "/setting/org",
+                        path: "/setting/home",
+                        component: SettingHome,
+                        exact: true,
+                    },
+                    {
+                        path: "/setting/orga",
                         component: Orga,
                         exact: true,
                     },
@@ -254,7 +265,7 @@ const routers=[
                         exact: true,
                     },
                     {
-                        path: "/setting/directory",
+                        path: "/setting/dir",
                         component: Directory,
                         exact: true,
                     },

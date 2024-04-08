@@ -156,7 +156,7 @@ const Host = props =>{
     ]
 
     return(
-        <Row className="auth mf-home-limited mf">
+        <Row className="auth">
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -165,28 +165,30 @@ const Host = props =>{
                 xl={{ span: "22", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <BreadCrumb firstItem={"主机"}>
-                    <HostAddBtn
-                        visible={visible}
-                        setVisible={setVisible}
-                        formValue={formValue}
-                        setFormValue={setFormValue}
-                        findAuth={findAuth}
+                <div className="mf-home-limited mf">
+                    <BreadCrumb firstItem={"主机"}>
+                        <HostAddBtn
+                            visible={visible}
+                            setVisible={setVisible}
+                            formValue={formValue}
+                            setFormValue={setFormValue}
+                            findAuth={findAuth}
+                        />
+                    </BreadCrumb>
+                    <Tabs
+                        tabLis={lis}
+                        type={activeTab}
+                        onClick={clickTab}
                     />
-                </BreadCrumb>
-                <Tabs
-                    tabLis={lis}
-                    type={activeTab}
-                    onClick={clickTab}
-                />
-                <div className="auth-content">
-                    <Table
-                        columns={column}
-                        dataSource={hostList}
-                        rowKey={record=>record.hostId}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty title={'暂无主机配置'}/>}}
-                    />
+                    <div className="auth-content">
+                        <Table
+                            columns={column}
+                            dataSource={hostList}
+                            rowKey={record=>record.hostId}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty title={'暂无主机配置'}/>}}
+                        />
+                    </div>
                 </div>
             </Col>
         </Row>

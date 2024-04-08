@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import {DownOutlined,UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
+import {applyJump} from 'thoughtware-core-ui';
 import {inject,observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
+import  {ExportOutlined} from "@ant-design/icons";
 import {departmentRouters,templateRouter} from "./SettingRouters";
 import "./SettingContent.scss";
 
@@ -37,13 +39,28 @@ const SettingContent= props =>  {
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([""])
 
+    const li = ['orga','user','user_group','user_dir'];
+    const authConfig = JSON.parse(localStorage.getItem("authConfig"));
+    const isUnify = data =>{
+        if(!authConfig?.authType){
+            const isAuth = li.some(item => item===data.purviewCode)
+            if(isAuth){return false}
+        }
+        return true
+    }
 
     /**
      * 路由跳转
      * @param data
      * @returns {*}
      */
-    const select = data => props.history.push(data.id)
+    const select = data => {
+        if(!isUnify(data)){
+            return applyJump(`${authConfig?.authServiceUrl}/#${data.id}`)
+        }
+        props.history.push(data.id)
+    }
+
 
     const isExpandedTree = key => expandedTree.some(item => item ===key)
 
@@ -68,11 +85,9 @@ const SettingContent= props =>  {
                     onClick={()=>select(data)}
                     key={data.id}
                 >
-                    {
-                        data?.icon &&
-                        <span className="sys-content-icon">{data.icon}</span>
-                    }
-                    <span>{data.title}</span>
+                    {data?.icon && <span className="sys-content-icon">{data.icon}</span>}
+                    <span className='aside-second-title'>{data.title}</span>
+                    {!isUnify(data)&&<span className='aside-second-link'><ExportOutlined /></span>}
                 </li>
             </PrivilegeButton>
         )
