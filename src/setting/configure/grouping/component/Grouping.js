@@ -115,22 +115,13 @@ const Grouping = props =>{
             key: "action",
             width:"10%",
             ellipsis:true,
-            render:(_,record) => {
-                if(record.id==='default'){
-                    return (
-                        <span className="grouping-table-ban">
-                            <EditOutlined className="text-ban"/>
-                            <EllipsisOutlined className="text-ban"/>
-                        </span>
-                    )
-                }
-                return (
-                    <ListAction
-                        edit={()=>editAuth(record)}
-                        del={()=>delAuth(record)}
-                    />
-                )
-            }
+            render:(_,record) => (
+                record.id!=='default' &&
+                <ListAction
+                    edit={()=>editAuth(record)}
+                    del={()=>delAuth(record)}
+                />
+            )
         }
     ]
 

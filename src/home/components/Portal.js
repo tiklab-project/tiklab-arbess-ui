@@ -88,9 +88,14 @@ const  Portal = props =>{
                              onClick={()=>setVisible(true)}
                              data-title-bottom={'消息'}
                         >
-                            <Badge count={unread} size="small">
-                                <BellOutlined className="frame-header-icon"/>
-                            </Badge>
+                            {
+                                unread>0?
+                                    <Badge count={unread} size="small">
+                                        <BellOutlined className="frame-header-icon"/>
+                                    </Badge>
+                                    :
+                                    <BellOutlined className="frame-header-icon"/>
+                            }
                         </div>
                         <PortalMessage
                             {...props}

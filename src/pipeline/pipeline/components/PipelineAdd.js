@@ -35,7 +35,7 @@ const PipelineAdd = props =>{
         userList:[{
             ...user,
             id: user.userId,
-            adminRole: true
+            roleType: 2
         }]
     })
 
@@ -50,7 +50,7 @@ const PipelineAdd = props =>{
             power:power,
             env:{id:env},
             group:{id:group},
-            userList:userList && userList.map(item=>({id:item.id,adminRole:item.adminRole})),
+            userList:userList && userList.map(item=>({userId:item.id,roleType:item.roleType})),
             template:templateType,
         }
         setIsLoading(true)
@@ -118,7 +118,7 @@ const PipelineAdd = props =>{
                 xxl={{ span: "12", offset: "6" }}
             >
                <Spin spinning={isLoading}>
-                   <div className="mf-home-limited">
+                   <div className="mf mf-home-limited">
                        <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/pipeline")}/>
                        <div className="steps-top">
                            <Steps current={current}>

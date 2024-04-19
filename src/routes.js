@@ -2,12 +2,13 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 
 import {
-
     Index,
     Login,
     Logout,
     Wechat,
     ExcludeProductUser,
+    NotFound,
+    NoAccess,
 
     HomePage,
 
@@ -61,7 +62,6 @@ import {
     Orga,
     Directory,
     SystemRole,
-    NotFound,
     Version,
     ProductAuth,
 
@@ -142,7 +142,7 @@ const routers=[
             },
             {
                 path:"/noaccess",
-                component:NotFound,
+                component:NoAccess,
             },
             {
                 path:"/pipeline/:id",

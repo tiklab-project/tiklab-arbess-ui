@@ -1,8 +1,7 @@
 import React,{useState,useEffect,Fragment} from "react";
-import {Popconfirm, Tooltip} from "antd";
+import {Popconfirm, Tooltip,Spin} from "antd";
 import {PlusOutlined, EditOutlined, ExclamationCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
-import {SpinLoading} from "../../../../../common/component/loading/Loading";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 import {TaskIcon} from "./TaskTitleIcon";
 import {TaskFinalAdd} from "./Common";
@@ -21,20 +20,28 @@ const Stage = props =>{
     const {setDataItem,taskFresh} = taskStore
 
     // 加载状态
-    const [isLoading,setIsLoading] = useState(true);
+    const [isLoading,setIsLoading] = useState(false);
 
     // 多阶段列表
     const [stageList,setStageList] = useState([])
 
     useEffect(()=>{
-        // 初始化多阶段
+        // 获取多阶段
+        findStage()
+    },[stageFresh,taskFresh])
+
+    /**
+     * 获取多阶段
+     */
+    const findStage = () =>{
+        setIsLoading(true)
         finAllStage(params.id).then(res=>{
             setIsLoading(false)
             if(res.code===0){
                 setStageList(res.data || [])
             }
         })
-    },[stageFresh,taskFresh])
+    }
 
     /**
      * 添加新任务
@@ -237,20 +244,17 @@ const Stage = props =>{
         </Fragment>
     }
 
-    if(isLoading){
-        return <SpinLoading size="large" title="加载中……"/>
-    }
-
-
     return(
-        <div className="guiView-main_group">
-            {
-                stageList && stageList.map((group,groupIndex) => renderMultitask(group,groupIndex))
-            }
-            {
-                TaskFinalAdd("multiBtn",stageList,"新阶段",newTask)
-            }
-        </div>
+        <Spin spinning={isLoading}>
+            <div className="guiView-main_group">
+                {
+                    stageList && stageList.map((group,groupIndex) => renderMultitask(group,groupIndex))
+                }
+                {
+                    TaskFinalAdd("multiBtn",stageList,"新阶段",newTask)
+                }
+            </div>
+        </Spin>
     )
 }
 

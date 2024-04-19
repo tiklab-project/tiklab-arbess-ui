@@ -18,7 +18,7 @@ class ResourceStore {
      * 查看磁盘空间详情
      */
     @action
-    findResourcesDetails = async value =>{
+    findResourcesDetails = async  value =>{
         const param = new FormData();
         param.append('type',value)
         return await Axios.post("/resources/findResourcesDetails", param)

@@ -11,7 +11,7 @@ import {
 export const departmentRouters =[
     {
         id: "user",
-        title: "用户与部门",
+        title: "用户与权限",
         icon: <TeamOutlined/>,
         children: [
             {

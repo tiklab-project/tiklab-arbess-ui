@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {message, Row,Col ,Radio} from 'antd';
-import {getUser,parseUserSearchParams} from "thoughtware-core-ui";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import {SpinLoading} from "../../../common/component/loading/Loading";
 import resourceStore from "../store/ResourceStore";
@@ -100,12 +99,7 @@ const Resources = props => {
         }
         const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
         if(authServiceUrl){
-            const user = getUser();
-            window.open(`${authServiceUrl}/#/enterprise/application?${parseUserSearchParams({
-                ticket:user.ticket,
-                tenant:user.tenant,
-                userId:user.userId
-            })}`)
+            window.open(`${authServiceUrl}/#/enterprise/application`)
         }
     }
 

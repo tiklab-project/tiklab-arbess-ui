@@ -280,16 +280,24 @@ const History = props =>{
             render:(_,record)=> {
                 switch (record.runStatus) {
                     case "run":
-                        return  <Tooltip title={"终止"} onClick={()=>terminateOperation(record)}>
-                            <MinusCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
-                        </Tooltip>
+                        return (
+                            <Tooltip title={"终止"}>
+                                <span onClick={()=>terminateOperation(record)}>
+                                    <MinusCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
+                                </span>
+                            </Tooltip>
+                        )
                     default:
-                        return <>
-                            <span style={{marginRight:15}} onClick={()=>terminateOperation(record)}>
-                                <PlayCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
-                            </span>
-                            <ListAction del={()=>del(record)}/>
-                        </>
+                        return (
+                            <div>
+                                <Tooltip title={"运行"} >
+                                    <span style={{marginRight:15}} onClick={()=>terminateOperation(record)}>
+                                        <PlayCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
+                                    </span>
+                                </Tooltip>
+                                <ListAction del={()=>del(record)}/>
+                            </div>
+                        )
                 }
             }
         }

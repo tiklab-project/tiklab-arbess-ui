@@ -61,7 +61,8 @@ const PipelineUserAdd = props =>{
      */
     const onOk = () => {
         // yUserList（已选择） 添加
-        setYUserList(yUserList.concat(addUser))
+        const mergedArray = Array.from(new Set([...yUserList,...addUser]))
+        setYUserList(mergedArray)
         setVisible(false)
     }
 
@@ -88,10 +89,7 @@ const PipelineUserAdd = props =>{
             // 如果没有选中 -- 选中
             else {
                 selectedRowKeys.push(record.id)
-                addUser.push({
-                    ...record,
-                    adminRole: false
-                })
+                addUser.push({...record, roleType: 0})
             }
             setSelectedRowKeys([...selectedRowKeys])
             setAddUser([...addUser])
@@ -114,7 +112,7 @@ const PipelineUserAdd = props =>{
      */
     const onSelectAll = (selected,selectedRows,changeRows) => {
         const newArr = changeRows.map(item=>item && item.id).filter(Boolean)
-        const newUser = changeRows.map(item=>({...item,adminRole: false})).filter(Boolean)
+        const newUser = changeRows.map(item=>({...item,roleType: 0})).filter(Boolean)
         let row,user
         if(selected){
             row = Array.from(new Set([...selectedRowKeys,...newArr]))

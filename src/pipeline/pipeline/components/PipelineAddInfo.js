@@ -31,25 +31,20 @@ const PipelineAddInfo = props =>{
 
     // 添加用户下拉显示
     const [visible,setVisible] = useState(false);
-
     // 流水线类型 -- 1多任务或2或阶段
     const [type,setType] = useState(baseInfo?.type || 1);
-
     // 流水线权限 -- 1私有或2公有
     const [powerType,setPowerType] = useState(1);
-
     // 流水线私有添加用户
     const [yUserList,setYUserList] = useState(baseInfo?.userList || []);
-
     // 环境管理列表
     const [envList,setEnvList] = useState([]);
-
     // 分组管理列表
     const [groupList,setGroupList] = useState([])
 
     useEffect(()=>{
         // 获取环境和分组管理
-        getEnvOrGroup();
+        findEnvAndGroup();
         if(set){
             // 初始化权限
             setPowerType(pipeline.power)
@@ -64,7 +59,7 @@ const PipelineAddInfo = props =>{
     /**
      * 获取环境和分组管理
      */
-    const getEnvOrGroup = () => {
+    const findEnvAndGroup = () => {
         findEnvList().then(res=>{
             if(res.code===0){
                 setEnvList(res.data || [])
@@ -85,7 +80,7 @@ const PipelineAddInfo = props =>{
     const changePower = (record,value) => {
         yUserList && yUserList.map(item=>{
             if(item.id===record.id){
-                item.adminRole = value
+                item.roleType = value
             }
         })
         setYUserList([...yUserList])
@@ -205,8 +200,8 @@ const PipelineAddInfo = props =>{
         },
         {
             title:"权限",
-            dataIndex:"adminRole",
-            key:"adminRole",
+            dataIndex:"roleType",
+            key:"roleType",
             width:"25",
             ellipsis:true,
             render: (_,record)=>(
@@ -214,12 +209,16 @@ const PipelineAddInfo = props =>{
                     bordered={false}
                     showarrow={"false"}
                     style={{width:120}}
-                    defaultValue={record.adminRole}
+                    defaultValue={record.roleType}
                     disabled={record.id===user.userId}
                     onChange={value=>changePower(record,value)}
                 >
-                    <Select.Option value={true}>管理员角色</Select.Option>
-                    <Select.Option value={false}>默认角色</Select.Option>
+                    {
+                        record.id===user.userId &&
+                        <Select.Option value={2}>超级管理员</Select.Option>
+                    }
+                    <Select.Option value={1}>管理员角色</Select.Option>
+                    <Select.Option value={0}>默认角色</Select.Option>
                 </Select>
             )
         },

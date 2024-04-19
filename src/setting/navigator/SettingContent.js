@@ -144,6 +144,7 @@ const SettingContent= props =>  {
             expandedTree={expandedTree}
             setExpandedTree={setExpandedTree}
             outerPath={"/setting"}
+            noAccessPath={"/noaccess"}
         >
             <div className="system">
                 <div className="system-aside">

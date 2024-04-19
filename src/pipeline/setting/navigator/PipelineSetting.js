@@ -62,6 +62,7 @@ const PipelineSetting = props =>{
             domainId={pipelineId}
             projectRouters={secondRouter}
             outerPath={`/pipeline/${pipelineId}/set`}
+            noAccessPath={"/noaccess"}
         >
             <div className='project-nav'>
                 <div className="project-nav-aside">

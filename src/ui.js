@@ -10,6 +10,9 @@ const Login=AsyncComponent(()=>import("./login/Login"))
 const Logout=AsyncComponent(()=>import("./login/Logout"))
 const Wechat=AsyncComponent(()=>import("./login/Wechat"))
 const ExcludeProductUser=AsyncComponent(()=>import("./login/ExcludeProductUser"))
+const NotFound=AsyncComponent(()=>import("./login/NotFound"))
+
+const NoAccess=AsyncComponent(()=>import("./setting/privilege/NoAccess"))
 
 /**
  * 首页
@@ -73,8 +76,6 @@ const DomainUser=AsyncComponent(()=>import("./setting/user/DomainUser"))
 // privilege
 const DomainRole=AsyncComponent(()=>import("./setting/privilege/DomainRole"))
 const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
-const NotFound=AsyncComponent(()=>import("./setting/privilege/NotFound"))
-
 
 // licence
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
@@ -114,6 +115,8 @@ export {
     Logout,
     Wechat,
     ExcludeProductUser,
+    NotFound,
+    NoAccess,
 
     HomePage,
 
@@ -167,7 +170,6 @@ export {
     Orga,
     Directory,
     SystemRole,
-    NotFound,
     Version,
     ProductAuth,
 

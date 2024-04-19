@@ -2,7 +2,7 @@ import React from "react";
 import {ExcludeProductUser} from "thoughtware-eam-ui";
 
 /**
- * 用户不在产品授权中的页面
+ * 没有应用访问权限
  * @param props
  * @returns {JSX.Element}
  * @constructor
