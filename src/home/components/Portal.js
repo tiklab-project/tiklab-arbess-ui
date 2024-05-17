@@ -1,14 +1,14 @@
 import React,{useState,useEffect} from "react";
 import {Badge} from "antd";
 import {useTranslation} from "react-i18next";
-import {getUser} from "thoughtware-core-ui";
+import {getUser,productImg} from "thoughtware-core-ui";
 import {renderRoutes} from "react-router-config";
 import {
     BellOutlined,
     SettingOutlined,
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/img/matflow.png";
+import logo from "../../assets/images/matflow.png";
 import PortalMessage from "./PortalMessage";
 import "./Portal.scss";
 
@@ -59,7 +59,8 @@ const  Portal = props =>{
                 <div className="frame-header-right">
                     {AppLink}
                     <div className="frame-header-logo">
-                        <img src={logo} alt="logo" />
+                        <img alt={'MatFlow'} src={productImg.matflow} height={24} width={24}/>
+                        <div>MatFlow</div>
                     </div>
                     <div className="headers-link">
                         {

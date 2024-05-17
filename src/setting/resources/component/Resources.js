@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {message, Row,Col ,Radio} from 'antd';
+import {message, Row, Col, Radio, Space} from 'antd';
+import Modals from "../../../common/component/modal/Modal";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import {SpinLoading} from "../../../common/component/loading/Loading";
 import resourceStore from "../store/ResourceStore";
+import pipFeature from "../../../assets/images/pip_feature.png";
+import pipFeature1 from "../../../assets/images/pip_feature1.png";
 import "./Resources.scss";
 
 /**
@@ -17,15 +20,14 @@ const Resources = props => {
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
-
     // 资源占用概况
     const [resourceList,setResourceList] = useState({});
-
     // 日志、制品保存时长
     const [saveDur,setSaveDur] = useState({});
-
     // 资源详情
     const [resourcesDetails,setResourcesDetails] = useState({});
+    // 特性弹出框
+    const [featureModal,setFeatureModal] = useState(false);
 
     useEffect(()=>{
         // 获取占用内存
@@ -78,6 +80,9 @@ const Resources = props => {
      * @param type
      */
     const changeCathe = (e,type) => {
+        if(resourceList?.version===1){
+            return setFeatureModal(true)
+        }
         updateCathe({
             id:saveDur.id,
             [type]:e.target.value
@@ -94,7 +99,7 @@ const Resources = props => {
      */
     const upGradation = () => {
         if(version==='ce'){
-            window.open("https://thoughtware.cn/download/matflow/ee")
+            window.open("https://thoughtware.cn/account/subscribe")
             return
         }
         const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
@@ -169,40 +174,49 @@ const Resources = props => {
                             </div>
                         </div>
                         <div className='resources-info-item'>
+                            <Modals
+                                visible={featureModal}
+                                okText={'订阅'}
+                                title={'增强功能'}
+                                onCancel={()=>setFeatureModal(false)}
+                                onOk={upGradation}
+                            >
+                                <div className='resources-info-enhance-modal'>
+                                    <div className='resources-info-enhance-modal-img'>
+                                        <img src={pipFeature1} width={'100%'} alt={''}/>
+                                    </div>
+                                    <div className='resources-info-enhance-modal-desc'>订阅开启增强功能</div>
+                                </div>
+                            </Modals>
                             <div className='resources-item-title'>日志保存时长</div>
                             <Radio.Group value={saveDur?.logCache} onChange={e => changeCathe(e,'logCache')}>
                                 <Radio value={7}>7天</Radio>
-                                <span data-title-bottom={resourceList?.version===1? "该功能为企业版功能" : null}>
-                                <Radio
-                                    value={15}
-                                    disabled={resourceList?.version===1}
-                                >15天</Radio>
-                            </span>
-                                <span data-title-bottom={resourceList?.version===1? "该功能为企业版功能" : null}>
-                                <Radio
-                                    value={30}
-                                    disabled={resourceList?.version===1}
-                                >30天</Radio>
-                            </span>
-
+                                <Radio value={15}>
+                                    <Space size='small'>
+                                        15天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                    </Space>
+                                </Radio>
+                                <Radio value={30}>
+                                    <Space size={'small'}>
+                                        30天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                    </Space>
+                                </Radio>
                             </Radio.Group>
                         </div>
                         <div className='resources-info-item'>
                             <div className='resources-item-title'>制品保存时长</div>
                             <Radio.Group value={saveDur?.artifactCache} onChange={e => changeCathe(e,'artifactCache')}>
                                 <Radio value={7}>7天</Radio>
-                                <span data-title-bottom={resourceList?.version===1? "该功能为企业版功能" : null}>
-                                <Radio
-                                    value={15}
-                                    disabled={resourceList?.version===1}
-                                >15天</Radio>
-                            </span>
-                                <span data-title-bottom={resourceList?.version===1? "该功能为企业版功能" : null}>
-                                <Radio
-                                    value={30}
-                                    disabled={resourceList?.version===1}
-                                >30天</Radio>
-                            </span>
+                                <Radio value={15}>
+                                    <Space size='small'>
+                                        15天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                    </Space>
+                                </Radio>
+                                <Radio value={30}>
+                                    <Space size='small'>
+                                        30天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                    </Space>
+                                </Radio>
                             </Radio.Group>
                         </div>
                     </div>

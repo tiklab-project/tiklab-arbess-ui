@@ -1,16 +1,90 @@
 import React, {useState} from "react";
-import {DownOutlined,UpOutlined} from "@ant-design/icons";
+import {DownOutlined, ProjectOutlined, UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
 import {applyJump} from 'thoughtware-core-ui';
 import {inject,observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 import  {ExportOutlined} from "@ant-design/icons";
-import {departmentRouters,templateRouter} from "./SettingRouters";
 import "./SettingContent.scss";
+
+// 基础数据路由
+const templateRouter = [
+    {
+        id:"base",
+        title:"基础数据",
+        icon:<ProjectOutlined />,
+        children:[
+            {
+                id:"/setting/syr/feature",
+                title:"系统功能",
+            },
+            {
+                id:"/setting/roletrue",
+                title:"系统角色",
+            },
+            {
+                id:"/setting/project/feature",
+                title:"项目功能",
+            },
+            {
+                id:"/setting/project/role",
+                title:"项目角色",
+            },
+            {
+                id:"/setting/project/vRole",
+                title:"项目虚拟角色",
+            },
+            {
+                id:"/setting/todoTask",
+                title:"待办任务",
+            },
+            {
+                id:"/setting/task",
+                title:"待办事项",
+            },
+            {
+                id:"/setting/todoTemp",
+                title:"待办模板 ",
+            },
+            {
+                id:"/setting/todoType",
+                title:"待办类型 ",
+            },
+            {
+                id:"/setting/logTemplate",
+                title:"日志模板",
+            },
+            {
+                id:"/setting/logType",
+                title:"日志类型",
+            },
+            {
+                id:"/setting/type",
+                title:"消息类型",
+            },
+            {
+                id:"/setting/sendtrue",
+                title:"消息发送方式",
+            },
+            {
+                id:"/setting/systemNotice",
+                title:"系统消息通知方案",
+            },
+            {
+                id:"/setting/projectNotice",
+                title:"项目消息通知方案",
+            },
+            {
+                id:"/setting/userGrouptrue",
+                title:"用户组true",
+            },
+        ]
+    }
+]
 
 const SettingContent= props =>  {
 
-    const {route,isDepartment,applicationRouters,systemRoleStore} = props
+    const {route,applicationRouters,systemRoleStore} = props
 
     const {systemPermissions} = systemRoleStore
 
@@ -19,20 +93,13 @@ const SettingContent= props =>  {
     // 菜单
     let menus = () => {
         try{
-            if(isDepartment && devProduction){
-                return [...departmentRouters,...applicationRouters,...templateRouter]
-            }
-            if(!isDepartment && devProduction){
+            if(devProduction){
                 return [...applicationRouters,...templateRouter]
-            }
-            if(isDepartment && !devProduction){
-                return [...departmentRouters,...applicationRouters]
-            }
-            else {
-                return [...applicationRouters]
+            }else {
+                return applicationRouters
             }
         }catch {
-            return [...applicationRouters]
+            return applicationRouters
         }
     }
 

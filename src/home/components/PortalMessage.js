@@ -131,7 +131,7 @@ const PortalMessage = props =>{
         if(item.link){
             props.history.push(item.link.split("#")[1])
         }
-        setVisible(false)
+        onClose()
     }
 
     /**
@@ -161,12 +161,20 @@ const PortalMessage = props =>{
         })
     }
 
+    const onClose = () =>{
+        setVisible(false)
+        setMessageParams({
+            ...messageParams,
+            pageParam
+        })
+    }
+
     return(
         <Drawer
             closable={false}
             placement="right"
             visible={visible}
-            onClose={()=>setVisible(false)}
+            onClose={onClose}
             maskStyle={{background:"transparent"}}
             contentWrapperStyle={{width:450,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
@@ -177,11 +185,7 @@ const PortalMessage = props =>{
                         <span className="messageModal-up-icon"><BellOutlined/></span>
                         <span>消息</span>
                     </div>
-                    <Btn
-                        title={<CloseOutlined />}
-                        type="text"
-                        onClick={()=>setVisible(false)}
-                    />
+                    <Btn title={<CloseOutlined />} type="text" onClick={onClose}/>
                 </div>
                 <div className="messageModal-content">
                     <div className="messageModal-title">

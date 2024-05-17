@@ -79,9 +79,8 @@ const TestOn = props => {
         const task = dataItem?.task
         const apiEnvValue = task?.apiEnv?.name
         const appEnvValue = task?.appEnv?.name
-        const webEnvValue = task?.webEnv?.name
-        if (!apiEnvValue && !appEnvValue && !webEnvValue) {
-            return Promise.reject(new Error('API环境、APP环境、WEB环境不能同时为空'));
+        if (!apiEnvValue && !appEnvValue) {
+            return Promise.reject(new Error('API环境、APP环境不能同时为空'));
         }
         return Promise.resolve();
     }
@@ -89,6 +88,7 @@ const TestOn = props => {
     return (
         <>
             <FormsAuth />
+
             <FormsSelect
                 rules={[{required:true, message:"测试空间不能为空"}]}
                 name={"testSpace"}
@@ -99,6 +99,21 @@ const TestOn = props => {
             >
                 {
                     testSpace && testSpace.map(item=>{
+                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                    })
+                }
+            </FormsSelect>
+
+            <FormsSelect
+                rules={[{required:true, message:"测试计划不能为空"}]}
+                name={"testPlan"}
+                label={"测试计划"}
+                isSpin={false}
+                onFocus={()=>onFocus('testPlan')}
+                onChange={value=>onChange(value,'testPlan')}
+            >
+                {
+                    testPlan && testPlan.map(item=>{
                         return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
                     })
                 }
@@ -134,35 +149,21 @@ const TestOn = props => {
                 }
             </FormsSelect>
 
-            <FormsSelect
-                rules={[{validator: validatorEnv}]}
-                name={"webEnv"}
-                label={"WEB环境"}
-                isSpin={false}
-                onFocus={()=>onFocus('web')}
-                onChange={value=>onChange(value,'webEnv')}
-            >
-                {
-                    testEnv && testEnv.map(item=>{
-                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                    })
-                }
-            </FormsSelect>
+            {/*<FormsSelect*/}
+            {/*    rules={[{validator: validatorEnv}]}*/}
+            {/*    name={"webEnv"}*/}
+            {/*    label={"WEB环境"}*/}
+            {/*    isSpin={false}*/}
+            {/*    onFocus={()=>onFocus('web')}*/}
+            {/*    onChange={value=>onChange(value,'webEnv')}*/}
+            {/*>*/}
+            {/*    {*/}
+            {/*        testEnv && testEnv.map(item=>{*/}
+            {/*            return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>*/}
+            {/*        })*/}
+            {/*    }*/}
+            {/*</FormsSelect>*/}
 
-            <FormsSelect
-                rules={[{required:true, message:"测试计划不能为空"}]}
-                name={"testPlan"}
-                label={"测试计划"}
-                isSpin={false}
-                onFocus={()=>onFocus('testPlan')}
-                onChange={value=>onChange(value,'testPlan')}
-            >
-                {
-                    testPlan && testPlan.map(item=>{
-                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                    })
-                }
-            </FormsSelect>
         </>
     )
 }

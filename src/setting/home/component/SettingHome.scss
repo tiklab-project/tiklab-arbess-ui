@@ -13,10 +13,18 @@
         cursor: pointer;
         background: #f7f7f7;
     }
+    .label-one{
+        text-align: center;
+        padding-top: 4px;
+        padding-bottom: 10px;
+    }
+    .info-one{
+        text-align: center;
+        padding: 10px 0;
+    }
     .home-chunk-label{
         padding-top: 4px;
         padding-bottom: 10px;
-        font-weight: bold;
     }
     .home-chunk-info{
         display: flex;

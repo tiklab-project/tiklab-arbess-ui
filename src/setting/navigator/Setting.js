@@ -3,10 +3,9 @@ import {
     FileProtectOutlined,
     LayoutOutlined,
     MergeCellsOutlined,
-    SafetyCertificateOutlined,
     SoundOutlined,
     DeploymentUnitOutlined,
-    MacCommandOutlined
+    MacCommandOutlined, TeamOutlined
 } from "@ant-design/icons";
 import SystemContent from "./SettingContent";
 
@@ -19,6 +18,38 @@ import SystemContent from "./SettingContent";
 const Setting = props =>{
 
     const applicationRouters =  [
+        {
+            id: "user",
+            title: "用户与权限",
+            icon: <TeamOutlined/>,
+            children: [
+                {
+                    id: "/setting/orga",
+                    title: "部门",
+                    purviewCode: "orga",
+                },
+                {
+                    id: "/setting/user",
+                    title: "用户",
+                    purviewCode: "user",
+                },
+                {
+                    id: "/setting/userGroup",
+                    title: "用户组",
+                    purviewCode: "user_group",
+                },
+                {
+                    id: "/setting/dir",
+                    title: "用户目录",
+                    purviewCode: "user_dir",
+                },
+                {
+                    id:"/setting/role",
+                    title:"权限",
+                    purviewCode:"pipeline_permission",
+                },
+            ]
+        },
         {
             id:"message",
             title: "消息",
@@ -125,7 +156,6 @@ const Setting = props =>{
 
     return  <SystemContent
                 {...props}
-                isDepartment={true}
                 applicationRouters={applicationRouters}
             />
 }

@@ -51,40 +51,35 @@ const SettingHome = props => {
                                 version==='ce' &&
                                 <>
                                     <div className='home-chunk-item' onClick={()=>goPath('orga')}>
-                                        <div className='home-chunk-label'>部门</div>
-                                        <div className='home-chunk-info'>
-                                            <div className='home-chunk-desc'>部门</div>
-                                            <div className='home-chunk-length'>{count?.orgaNumber || 0}</div>
+                                        <div className='label-one'>部门</div>
+                                        <div className='info-one'>
+                                            {count?.orgaNumber || 0}
                                         </div>
                                     </div>
                                     <div className='home-chunk-item' onClick={()=>goPath('user')}>
-                                        <div className='home-chunk-label'>用户</div>
-                                        <div className='home-chunk-info'>
-                                            <div className='home-chunk-desc'>用户</div>
-                                            <div className='home-chunk-length'>{count?.userNumber || 0}</div>
+                                        <div className='label-one'>用户</div>
+                                        <div className='info-one'>
+                                            {count?.userNumber || 0}
                                         </div>
                                     </div>
                                     <div className='home-chunk-item' onClick={()=>goPath('userGroup')}>
-                                        <div className='home-chunk-label'>用户组</div>
-                                        <div className='home-chunk-info'>
-                                            <div className='home-chunk-desc'>用户组</div>
-                                            <div className='home-chunk-length'>{count?.userGroupNumber || 0}</div>
+                                        <div className='label-one'>用户组</div>
+                                        <div className='info-one'>
+                                            {count?.userGroupNumber || 0}
                                         </div>
                                     </div>
                                     <div className='home-chunk-item' onClick={()=>goPath('dir')}>
-                                        <div className='home-chunk-label'>用户目录</div>
-                                        <div className='home-chunk-info'>
-                                            <div className='home-chunk-desc'>用户目录</div>
-                                            <div className='home-chunk-length'>{count?.userDirNumber || 0}</div>
+                                        <div className='label-one'>用户目录</div>
+                                        <div className='info-one'>
+                                            {count?.userDirNumber || 0}
                                         </div>
                                     </div>
                                 </>
                             }
                             <div className='home-chunk-item' onClick={()=>goPath('role')}>
-                                <div className='home-chunk-label'>权限</div>
-                                <div className='home-chunk-info'>
-                                    <div className='home-chunk-desc'>权限</div>
-                                    <div className='home-chunk-length'>{count?.roleNumber || 0}</div>
+                                <div className='label-one'>权限</div>
+                                <div className='info-one'>
+                                    {count?.roleNumber || 0}
                                 </div>
                             </div>
                         </div>
@@ -93,17 +88,15 @@ const SettingHome = props => {
                         <div className='home-title'>消息</div>
                         <div className='home-chunk'>
                             <div className='home-chunk-item' onClick={()=>goPath('notice')}>
-                                <div className='home-chunk-label'>消息通知方案</div>
-                                <div className='home-chunk-info'>
-                                    <div className='home-chunk-desc'>消息通知方案</div>
-                                    <div className='home-chunk-length'>{count?.noticeNumber || 0}</div>
+                                <div className='label-one'>消息通知方案</div>
+                                <div className='info-one'>
+                                    {count?.noticeNumber || 0}
                                 </div>
                             </div>
                             <div className='home-chunk-item' onClick={()=>goPath('send')}>
-                                <div className='home-chunk-label'>消息发送方式</div>
-                                <div className='home-chunk-info'>
-                                    <div className='home-chunk-desc'>消息发送方式</div>
-                                    <div className='home-chunk-length'>{count?.sendTypeNumber || 0}</div>
+                                <div className='label-one'>消息发送方式</div>
+                                <div className='info-one'>
+                                    {count?.sendTypeNumber || 0}
                                 </div>
                             </div>
                         </div>

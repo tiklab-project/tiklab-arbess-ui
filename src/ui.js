@@ -87,6 +87,7 @@ const SystemFeature=AsyncComponent(()=>import("./setting/base/privilege/SystemFe
 const SystemRoleTrue=AsyncComponent(()=>import("./setting/base/privilege/SystemRoleTrue"))
 const ProjectRole=AsyncComponent(()=>import("./setting/base/privilege/ProjectRole"))
 const ProjectFeature=AsyncComponent(()=>import("./setting/base/privilege/ProjectFeature"))
+const ProjectVirtualRole=AsyncComponent(()=>import("./setting/base/privilege/ProjectVirtualRole"))
 
 const MyTodoTask=AsyncComponent(()=>import("./setting/base/message/MyTodoTask"))
 const Task=AsyncComponent(()=>import("./setting/base/message/Task"))
@@ -178,6 +179,7 @@ export {
     SystemRoleTrue,
     ProjectRole,
     ProjectFeature,
+    ProjectVirtualRole,
     MyTodoTask,
     Task,
     TodoTemp,

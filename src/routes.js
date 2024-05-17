@@ -70,6 +70,7 @@ import {
     SystemRoleTrue,
     ProjectRole,
     ProjectFeature,
+    ProjectVirtualRole,
     MyTodoTask,
     Task,
     TodoTemp,
@@ -367,6 +368,11 @@ const routers=[
                     {
                         path: "/setting/project/feature",
                         component: ProjectFeature,
+                        exact: true,
+                    },
+                    {
+                        path: "/setting/project/vRole",
+                        component: ProjectVirtualRole,
                         exact: true,
                     },
                     {

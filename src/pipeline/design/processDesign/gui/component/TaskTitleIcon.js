@@ -6,7 +6,7 @@ import pip_gitlab from "../../../../../assets/images/svg/pip_gitlab.svg";
 import pip_svn from "../../../../../assets/images/svg/pip_svn.svg";
 import pip_helmet from "../../../../../assets/images/svg/pip_helmet.svg";
 import pip_ceshi from "../../../../../assets/images/svg/pip_ceshi.svg";
-import maven from "../../../../../assets/images/img/maven.png";
+import maven from "../../../../../assets/images/maven.png";
 import pip_nodejs from "../../../../../assets/images/svg/pip_nodejs.svg";
 import pip_liunx from "../../../../../assets/images/svg/pip_liunx.svg";
 import pip_docker from "../../../../../assets/images/svg/pip_docker.svg";

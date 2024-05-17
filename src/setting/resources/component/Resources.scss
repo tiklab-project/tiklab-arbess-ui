@@ -37,3 +37,17 @@
     }
 }
 
+.resources-info-enhance-modal{
+    text-align: center;
+    padding-top: 10px;
+    .resources-info-enhance-modal-img{
+        border: 1px solid #f0f0f0;
+        border-radius: 4px;
+        padding: 4px;
+    }
+    .resources-info-enhance-modal-desc{
+        padding: 10px 0;
+        font-size: var(--thoughtware-font-13);
+        color: var(--thoughtware-gray-500);
+    }
+}

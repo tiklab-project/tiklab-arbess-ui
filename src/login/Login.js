@@ -8,11 +8,13 @@ import {Login} from "thoughtware-eam-ui";
  * @constructor
  */
 const LoginContent = props => {
-    return  <Login
-                {...props}
-                loginGoRouter="/"
-                vaildUserAuthRouter={"/no-auth"}
-            />
+    return (
+        <Login
+            {...props}
+            loginGoRouter="/"
+            vaildUserAuthRouter={"/no-auth"}
+        />
+    )
 }
 
 export default LoginContent

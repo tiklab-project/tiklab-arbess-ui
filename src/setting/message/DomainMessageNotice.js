@@ -9,7 +9,13 @@ import {DomainMessageNotice} from "thoughtware-message-ui";
  */
 const DomainMessageNoticeContent = props =>{
 
-    return <DomainMessageNotice {...props} domainId={props.match.params.id}  bgroup={"matflow"}/>
+    return (
+        <DomainMessageNotice
+            {...props}
+            domainId={props.match.params.id}
+            bgroup={"matflow"}
+        />
+    )
 
 }
 

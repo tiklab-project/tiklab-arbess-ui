@@ -9,7 +9,11 @@ import {Plugin} from "thoughtware-plugin-manager-ui";
  */
 const PluginContent = props =>{
 
-    return <Plugin {...props}/>
+    return (
+        <Plugin
+            {...props}
+        />
+    )
 
 }
 

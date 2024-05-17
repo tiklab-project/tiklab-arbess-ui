@@ -6,7 +6,12 @@ import {MessageNotice} from "thoughtware-message-ui";
  */
 const MessageNoticeContent = props =>{
 
-    return <MessageNotice {...props} bgroup={"matflow"}/>
+    return (
+        <MessageNotice
+            {...props}
+            bgroup={"matflow"}
+        />
+    )
 
 }
 
