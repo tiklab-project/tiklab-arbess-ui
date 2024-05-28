@@ -99,12 +99,11 @@ const Resources = props => {
      */
     const upGradation = () => {
         if(version==='ce'){
-            window.open("https://thoughtware.cn/account/subscribe")
-            return
+            return window.open("https://thoughtware.cn/account/subscribe/apply/matflow")
         }
         const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
         if(authServiceUrl){
-            window.open(`${authServiceUrl}/#/enterprise/application`)
+            window.open(`${authServiceUrl}/#/enterprise/application/matflow`)
         }
     }
 
