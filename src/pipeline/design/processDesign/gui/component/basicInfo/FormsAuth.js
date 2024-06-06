@@ -227,7 +227,7 @@ const FormsAuth = props =>{
                 )
             case 'gittok':
             case 'teston':
-                if(version!=='ce'){return null}
+                if(version==='cloud'){return null}
                 return (
                     <ServerAddBtn
                         type={taskType}
@@ -271,14 +271,16 @@ const FormsAuth = props =>{
                     type = dataItem.task?.pullType
                 }
                 if(type==='ssh'){
-                    return  <HostAddBtn
-                                isConfig={true}
-                                visible={visible}
-                                setVisible={setVisible}
-                                findAuth={findAuth}
-                            />
+                    return (
+                        <HostAddBtn
+                            isConfig={true}
+                            visible={visible}
+                            setVisible={setVisible}
+                            findAuth={findAuth}
+                        />
+                    )
                 }
-                if((type==='hadess' && version==='ce') || type==='nexus'){
+                if((type==='hadess' && version!=='cloud') || type==='nexus'){
                     return (
                         <ServerAddBtn
                             type={type}

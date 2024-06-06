@@ -48,7 +48,7 @@ const SettingHome = props => {
                         <div className='home-title'>用户与权限</div>
                         <div className='home-chunk'>
                             {
-                                version==='ce' &&
+                                version!=='cloud' &&
                                 <>
                                     <div className='home-chunk-item' onClick={()=>goPath('orga')}>
                                         <div className='label-one'>部门</div>
@@ -153,7 +153,7 @@ const SettingHome = props => {
                         </div>
                     </div>
                     {
-                        version==='ce' &&
+                        version!=='cloud' &&
                         <div className='setting-home-chunk'>
                             <div className='home-title'>应用与安全</div>
                             <div className='home-chunk'>

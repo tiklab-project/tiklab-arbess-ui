@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {message, Row, Col, Radio, Space} from 'antd';
+import {disableFunction} from "thoughtware-core-ui";
 import Modals from "../../../common/component/modal/Modal";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import {SpinLoading} from "../../../common/component/loading/Loading";
@@ -28,6 +29,8 @@ const Resources = props => {
     const [resourcesDetails,setResourcesDetails] = useState({});
     // 特性弹出框
     const [featureModal,setFeatureModal] = useState(false);
+
+    const disable = disableFunction();
 
     useEffect(()=>{
         // 获取占用内存
@@ -80,7 +83,7 @@ const Resources = props => {
      * @param type
      */
     const changeCathe = (e,type) => {
-        if(resourceList?.version===1){
+        if(disable){
             return setFeatureModal(true)
         }
         updateCathe({
@@ -98,12 +101,13 @@ const Resources = props => {
      * 升级企业版
      */
     const upGradation = () => {
-        if(version==='ce'){
-            return window.open("https://thoughtware.cn/account/subscribe/apply/matflow")
-        }
-        const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
-        if(authServiceUrl){
-            window.open(`${authServiceUrl}/#/enterprise/application/matflow`)
+        if(version==='cloud'){
+            const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
+            if(authServiceUrl){
+                window.open(`${authServiceUrl}/#/enterprise/application/matflow`)
+            }
+        } else {
+            window.open("https://thoughtware.cn/account/subscribe/apply/matflow")
         }
     }
 
@@ -192,12 +196,12 @@ const Resources = props => {
                                 <Radio value={7}>7天</Radio>
                                 <Radio value={15}>
                                     <Space size='small'>
-                                        15天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                        15天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
                                     </Space>
                                 </Radio>
                                 <Radio value={30}>
                                     <Space size={'small'}>
-                                        30天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                        30天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
                                     </Space>
                                 </Radio>
                             </Radio.Group>
@@ -208,12 +212,12 @@ const Resources = props => {
                                 <Radio value={7}>7天</Radio>
                                 <Radio value={15}>
                                     <Space size='small'>
-                                        15天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                        15天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
                                     </Space>
                                 </Radio>
                                 <Radio value={30}>
                                     <Space size='small'>
-                                        30天 {resourceList?.version===1&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                        30天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
                                     </Space>
                                 </Radio>
                             </Radio.Group>

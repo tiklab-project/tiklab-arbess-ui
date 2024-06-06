@@ -8,7 +8,6 @@ import {
     SettingOutlined,
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import logo from "../../assets/images/matflow.png";
 import PortalMessage from "./PortalMessage";
 import "./Portal.scss";
 

@@ -224,7 +224,7 @@ const PostprocessAddEdit = props =>{
                                         <Checkbox.Group>
                                             {
                                                 typeList.map(item=>{
-                                                    if(version==='ce' && item.value==='sms') return;
+                                                    if(version!=='cloud' && item.value==='sms') return;
                                                     return (
                                                         <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
                                                             <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>

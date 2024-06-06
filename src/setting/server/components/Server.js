@@ -109,7 +109,7 @@ const Server = props =>{
     const action = record =>{
         const {type} = record
         if(type==='gittok' || type==='hadess' || type==='teston'){
-            if(version !=='ce'){
+            if(version ==='cloud'){
                 return (
                     <ListAction
                         edit={()=>editServer(record)}

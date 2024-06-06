@@ -114,12 +114,6 @@ const Setting = props =>{
             purviewCode:"pipeline_resources",
         },
         {
-            id:"/setting/plugin",
-            title:"插件",
-            icon:<MergeCellsOutlined />,
-            purviewCode:"pipeline_plugin",
-        },
-        {
             id:"security",
             title:"安全",
             icon:<LayoutOutlined />,

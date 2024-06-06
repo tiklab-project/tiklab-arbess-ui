@@ -39,7 +39,6 @@ const globals = {
     'react-i18next':'reactI18next',
     "thoughtware-core-ui":"thoughtwareCoreUi",
     "@ant-design/icons":"icons",
-    "thoughtware-plugin-ui":"thoughtwarePluginUi",
     'mobx-react':'mobxReact',
     'mobx':'mobx',
     "react-router-dom":"reactRouterDom"

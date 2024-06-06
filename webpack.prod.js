@@ -85,13 +85,6 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true //遇到重复包直接引用，不重新打包
                 },
-                thoughtwarePluginUI: {
-                    name: "chunk-thoughtware-plugin-manager-ui",
-                    chunks: "all",
-                    test: /thoughtware-plugin-manager-ui/,
-                    priority: 0,
-                    reuseExistingChunk: true
-                },
                 thoughtwareEamUI: {
                     name: "chunk-thoughtware-eam-ui",
                     chunks: "all",

@@ -51,7 +51,6 @@ import {
     Tool,
     Resources,
 
-    Plugin,
     MessageSendType,
     MessageNotice,
     MyLog,
@@ -318,11 +317,6 @@ const routers=[
                     {
                         path:"/setting/tool",
                         component: Tool,
-                        exact: true,
-                    },
-                    {
-                        path: "/setting/plugin",
-                        component: Plugin,
                         exact: true,
                     },
                     {

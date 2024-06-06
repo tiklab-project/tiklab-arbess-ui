@@ -174,7 +174,7 @@ const Tool = props =>{
                 <div className='mf-home-limited mf'>
                     <BreadCrumb firstItem={"工具"}>
                         {
-                            version==='ce' &&
+                            version!=='cloud' &&
                             <Btn
                                 onClick={addEnvi}
                                 type={"primary"}
@@ -185,7 +185,7 @@ const Tool = props =>{
                     </BreadCrumb>
                     <div className="auth-content">
                         <Table
-                            columns={version==='ce'?columnsCe:columns}
+                            columns={version==='cloud'?columns:columnsCe}
                             dataSource={enviData}
                             rowKey={record=>record.scmId}
                             pagination={false}

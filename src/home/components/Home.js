@@ -1,6 +1,5 @@
 import React from "react";
 import {UserVerify} from "thoughtware-eam-ui";
-import {connect} from "thoughtware-plugin-core-ui";
 import {AppLink,HelpLink,AvatarLink} from "thoughtware-licence-ui";
 import Portal from "./Portal";
 
@@ -19,10 +18,4 @@ const Home = props => {
             />
 }
 
-function mapStateToProps(state) {
-    return {
-        pluginStore: state.pluginStore
-    }
-}
-
-export default connect(mapStateToProps)(UserVerify(Home,"/no-auth"))
+export default UserVerify(Home,"/no-auth")
