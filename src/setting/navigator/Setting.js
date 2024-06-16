@@ -2,7 +2,6 @@ import React from "react";
 import {
     FileProtectOutlined,
     LayoutOutlined,
-    MergeCellsOutlined,
     SoundOutlined,
     DeploymentUnitOutlined,
     MacCommandOutlined, TeamOutlined
@@ -72,6 +71,10 @@ const Setting = props =>{
             title:"流水线配置",
             icon:<DeploymentUnitOutlined />,
             children:[
+                {
+                    id:"/setting/agent",
+                    title:"Agent",
+                },
                 {
                     id:"/setting/grouping",
                     title:"分组",

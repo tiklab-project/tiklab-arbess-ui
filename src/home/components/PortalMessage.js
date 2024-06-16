@@ -26,18 +26,18 @@ const PortalMessage = props =>{
         pageSize: 12,
         currentPage: 1
     }
-    // 初始以及切换加载
+    //初始以及切换加载
     const [spinning,setSpinning] = useState(true);
-    // 消息列表
+    //消息列表
     const [messageList,setMessageList] = useState([]);
-    // 消息参数
+    //消息参数
     const [messageParams,setMessageParams] = useState({
         status:0,
         pageParam
     });
-    // 消息分页
+    //消息分页
     const [messagePagination,setMessagePagination] = useState({});
-    // 加载更多
+    //加载更多
     const [isLoading,setIsLoading] = useState(false);
 
     useEffect(()=>{

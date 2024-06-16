@@ -75,30 +75,33 @@ const FormsInput = props =>{
      * 设置表单校验规则
      */
     const rules = () =>{
-        let rule
-        if(isRequire){
-            rule = [
-                {required:true,message:`${label}不能为空`},
-                Validation(label),
-            ]
-            if(name==="codeName"){
-                switch (dataItem.taskType) {
-                    case 'git':
-                    case 'gitlab':
-                        rule =  [
-                            {required:true, message:`${label}不能为空`},
-                            {pattern: validCodeGit, message:"请输入正确的git地址"},
-                        ]
-                        break
-                    case 'svn':
-                        rule =  [
-                            {required: true, message:`${label}不能为空`},
-                            {pattern: validCodeSvn,message:"请输入正确的svn地址"},
-                        ]
-                }
+        if (!isRequire) {
+            return;
+        }
+        let rule = [
+            { required: true, message: `${label}不能为空` },
+            Validation(label),
+        ];
+        if (name === "codeName") {
+            switch (dataItem.taskType) {
+                case 'git':
+                case 'gitlab':
+                    rule = [
+                        { required: true, message: `${label}不能为空` },
+                        { pattern: validCodeGit, message: "请输入正确的git地址" },
+                    ];
+                    break;
+                case 'svn':
+                    rule = [
+                        { required: true, message: `${label}不能为空` },
+                        { pattern: validCodeSvn, message: "请输入正确的svn地址" },
+                    ];
+                    break;
+                default:
+                    break;
             }
         }
-        return rule
+        return rule;
     }
 
 

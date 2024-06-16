@@ -12,6 +12,8 @@ import testOnStore from "../store/TestOnStore";
 import mavenTestStore from "../store/MavenTestStore";
 import "./Test.scss";
 
+const pageSize = 15;
+
 /**
  * 测试页面(teston)
  * @param props
@@ -41,7 +43,7 @@ const Test = props => {
     })
 
     const pageParam= {
-        pageSize:15,
+        pageSize:pageSize,
         currentPage: 1,
     }
 
@@ -104,7 +106,7 @@ const Test = props => {
     const delTeston = (item) => {
         deleteRelevance(item.relevanceId).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,15,param.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,pageSize,param.pageParam.currentPage)
                 changPage(current)
             }
         })
@@ -125,7 +127,7 @@ const Test = props => {
     const delMavenTest = (record) => {
         deleteMavenTest(record.id).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,15,param.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,pageSize,param.pageParam.currentPage)
                 changPage(current)
             }
         })
@@ -138,7 +140,7 @@ const Test = props => {
     const changPage = page => {
         setParam({
             pageParam:{
-                pageSize:15,
+                pageSize:pageSize,
                 currentPage: page
             }
         })

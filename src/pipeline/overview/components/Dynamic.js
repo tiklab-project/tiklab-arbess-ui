@@ -8,7 +8,9 @@ import DynamicList from "../../../common/component/list/DynamicList";
 import overviewStore from "../store/OverviewStore";
 import pipelineStore from "../../pipeline/store/PipelineStore";
 
-const { RangePicker } = DatePicker
+const { RangePicker } = DatePicker;
+
+const pageSize = 15;
 
 /**
  * 动态详情
@@ -24,22 +26,15 @@ const Dynamic = props =>{
     const {findlogpage,findlogtype} = overviewStore
 
     const pageParam = {
-        pageSize:15,
+        pageSize:pageSize,
         currentPage:1
     }
 
     // 获取近期动态请求数据
     const [params,setParams] = useState(
         route.path === '/dyna' ?
-            {
-                pageParam,
-                data:{}
-            }
-            :
-            {
-                pageParam,
-                data:{pipelineId:[match.params.id]},
-            }
+            {pageParam, data:{}} :
+            {pageParam, data:{pipelineId:[match.params.id]},}
     )
 
     // 动态列表
@@ -114,7 +109,7 @@ const Dynamic = props =>{
         setParams({
             ...params,
             pageParam:{
-                pageSize:15,
+                pageSize:pageSize,
                 currentPage:pages
             }
         })

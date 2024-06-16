@@ -93,7 +93,9 @@ const PipelineTable = props =>{
         setIsLoading(true)
         if(record.state === 1){
             // 开始运行
-            execStart(record.id).then(r=>{
+            execStart({
+                pipelineId:record.id
+            }).then(r=>{
                 setIsLoading(false)
                 if(r.code===0){
                     return goInstance({

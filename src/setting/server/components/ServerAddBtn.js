@@ -13,7 +13,6 @@ const ServerAddBtn = props =>{
 
     const {isConfig,visible,setVisible,formValue,setFormValue,findAuth,type} = props
 
-
     /**
      * 添加按钮操作
      */

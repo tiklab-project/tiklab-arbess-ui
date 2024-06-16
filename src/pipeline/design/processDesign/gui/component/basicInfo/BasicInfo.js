@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {inject, observer} from "mobx-react";
+import {observer} from "mobx-react";
 import {Form, Input} from "antd";
 import {WhetherChange} from "../Common";
 import CodeGit from "./code/CodeGit";
@@ -33,15 +33,13 @@ const BasicInfo = props => {
     const [enter,setEnter] = useState(false)
 
     useEffect(()=>{
-        form.validateFields().then()
         return ()=>form.resetFields()
     },[])
 
     useEffect(()=>{
         // 初始化表单内容
-        const task = dataItem && dataItem.task
-        console.log(task)
-        switch(dataItem.taskType){
+        const {taskType,task} = dataItem
+        switch(taskType){
             case 'git':
             case 'gitlab':
             case 'svn':
@@ -82,7 +80,8 @@ const BasicInfo = props => {
                     taskName: dataItem.formType==='task'? dataItem?.taskName : dataItem?.stageName
                 })
         }
-    },[dataItem])
+        form.validateFields().then()
+    },[])
 
     /**
      * 渲染表单
@@ -177,4 +176,4 @@ const BasicInfo = props => {
     )
 }
 
-export default inject("taskStore")(observer(BasicInfo))
+export default observer(BasicInfo)

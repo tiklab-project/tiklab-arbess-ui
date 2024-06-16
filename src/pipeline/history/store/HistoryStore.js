@@ -32,8 +32,9 @@ class HistoryStore {
     @action
     execStart = async value =>{
         const params = {
-            pipelineId:value,
-            userId:getUser().userId
+            ...value,
+            runWay:1,
+            userId:getUser().userId,
         }
         const data = await Axios.post("/exec/start", params)
         if(data.code!==0){

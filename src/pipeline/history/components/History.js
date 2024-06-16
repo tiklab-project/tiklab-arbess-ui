@@ -17,6 +17,8 @@ import pipelineStore from "../../pipeline/store/PipelineStore";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
 import "./History.scss";
 
+const pageSize = 13;
+
 /**
  * 历史列表
  * @param props
@@ -31,17 +33,15 @@ const History = props =>{
 
     const {findUserInstance,findPipelineInstance,deleteInstance,execStart,execStop,page,historyList,setHistoryList} = historyStore
 
-    // 历史信息
+    //历史信息
     const [historyItem,setHistoryItem] = useState(null)
-
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(false)
-
-    // 历史详情状态 && 监听关闭定时器的状态
+    //历史详情状态 && 监听关闭定时器的状态
     const [detail,setDetail] = useState(false)
 
     const pageParam = {
-        pageSize: 13,
+        pageSize: pageSize,
         currentPage: 1,
     }
 
@@ -64,18 +64,22 @@ const History = props =>{
     )
 
     useEffect(()=>{
-        return ()=>{setHistoryList([])}
+        return ()=>{
+            setHistoryList([])
+            clearInterval(inters)
+        }
     },[])
 
     let inters=null
     useEffect(()=>{
+        findInstance()
+    },[params,match.params.id])
+
+    useEffect(()=>{
         if(detail){
             clearInterval(inters)
-        }else {
-            findInstance()
         }
-        return ()=>{clearInterval(inters)}
-    },[detail,params,match.params.id])
+    },[detail])
 
     /**
      * 获取历史列表
@@ -161,7 +165,7 @@ const History = props =>{
     const changPage = pages =>{
         screen({
             pageParam:{
-                pageSize: 13,
+                pageSize: pageSize,
                 currentPage: pages,
             }
         })
@@ -174,7 +178,7 @@ const History = props =>{
     const del = record =>{
         deleteInstance(record.instanceId).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(page.totalRecord,13,params.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(page.totalRecord,pageSize,params.pageParam.currentPage)
                 changPage(current)
             }
         })
@@ -186,7 +190,7 @@ const History = props =>{
     const terminateOperation = debounce(record => {
         const {runStatus,pipeline} = record
         if(runStatus==="run"){
-            execStop(pipeline.id)
+            execStop(pipeline.id).then()
             return
         }
         findOnePipeline(pipeline.id).then(res=>{
@@ -194,7 +198,9 @@ const History = props =>{
                 if(res.data.state===2){
                     return message.info("当前流水线正在在运行！")
                 }
-                execStart(pipeline.id).then(res=>{
+                execStart({
+                    pipelineId:pipeline.id
+                }).then(res=>{
                     if(res.code===0){
                         details(res.data)
                     }
@@ -303,12 +309,15 @@ const History = props =>{
         }
     ]
 
+    /**
+     * 退出
+     */
     const goBack = () => {
         setDetail(false)
     }
 
     return (
-        <Row className="history" style={detail ? { height: "100%", overflow: "hidden" }:{height: "100%", overflow: "auto" }}>
+        <Row className="history">
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -353,7 +362,7 @@ const History = props =>{
                         historyType={"drawer"}
                         historyItem={historyItem}
                         setHistoryItem={setHistoryItem}
-                        historyStore={historyStore}
+                        findHistory={findInstance}
                     />
                 </PipelineDrawer>
             </Col>

@@ -1,9 +1,10 @@
 import React,{useState,useEffect,useRef} from "react";
+import {Skeleton} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import {SpinLoading} from "../../../common/component/loading/Loading";
 import HistoryDetailTree from "./HistoryDetailTree";
+import historyStore from "../store/HistoryStore";
 import {runStatusText,getTime} from "./HistoryCommon";
 import "./HistoryDetail.scss";
 
@@ -15,29 +16,26 @@ import "./HistoryDetail.scss";
  */
 const HistoryDetail = props =>{
 
-    const {historyItem,setHistoryItem,back,historyStore,historyType} = props
+    const {historyItem,setHistoryItem,back,historyType,findHistory} = props
 
     const {findOneInstance,findTaskInstance,findStageInstance} = historyStore
 
     const scrollRef = useRef();
-
-    // 获取当前历史运行状态
-    const isRun = historyItem?.runStatus === "run";
-    // 获取当前流水线信息
-    const pipeline = historyItem && historyItem.pipeline;
-    // 当前流水线运行State
+    //当前流水线运行状态和世家
     const state = pipeline?.type===1 ? "runState":"stageState";
     const time = pipeline?.type===1 ? "runTime":"stageTime";
 
+    //获取当前历史运行状态
+    const isRun = historyItem?.runStatus === "run";
+    //获取当前流水线信息
+    const pipeline = historyItem && historyItem.pipeline;
+    //运行数据
     const [execData,setExecData] = useState([]);
-
-    // 构建详情页面数据未返回时加载状态
+    //构建详情页面数据未返回时加载状态
     const [detailsLoading,setDetailsLoading] = useState(true);
-
-    // 日志滚动条
+    //日志滚动条
     const [isActiveSlide,setIsActiveSlide] = useState(true);
-
-    // 日志id
+    //日志id
     const [id,setId] = useState(null);
 
     let inter;
@@ -77,7 +75,10 @@ const HistoryDetail = props =>{
      */
     const findInstance = () => {
         findOneInstance(historyItem.instanceId).then(res=>{
-            if(res.code===0){setHistoryItem(res.data)}
+            if(res.code===0){
+                setHistoryItem(res.data)
+            }
+            findHistory()
         })
     }
 
@@ -119,6 +120,7 @@ const HistoryDetail = props =>{
         }
         else {
             clearInterval(inter)
+            findHistory()
         }
     }
 
@@ -251,13 +253,6 @@ const HistoryDetail = props =>{
         )
     }
 
-    // 数据获取前加载状态
-    if(detailsLoading){
-        return <div className="str-detail">
-                    <SpinLoading size='large'/>
-                </div>
-    }
-
     // 获取时间
     const setTime = execData && execData.reduce((pre, cur) => {
         return pre + cur[time];
@@ -265,56 +260,57 @@ const HistoryDetail = props =>{
 
     return(
         <div className="str-detail">
-            <div className="str-detail-bread">
-                <BreadCrumb
-                    firstItem={pipeline?.name +" # " + historyItem?.findNumber}
-                    onClick={historyType!=="drawer" ? goBack: undefined}
-                >
-                    {
-                        historyType==="drawer" &&
-                        <Btn
-                            title={<CloseOutlined style={{fontSize:16}}/>}
-                            type="text"
-                            onClick={goBack}
-                        />
-                    }
-                </BreadCrumb>
-                <div className="bread-center">
-                    <div className="bread-center-item">
-                        <span className='bread-center-name'>开始时间</span>
-                        <span className='bread-center-desc'>{historyItem?.createTime }</span>
-                    </div>
-                    <div className="bread-center-item">
-                        <span className='bread-center-name'>运行方式</span>
-                        <span className='bread-center-desc'>{historyItem?.runWay===1 ? historyItem?.user?.nickname + " · 手动触发" : "定时触发" }</span>
-                    </div>
-                    <div className="bread-center-item">
-                        <span className='bread-center-name'>运行状态</span>
-                        <span className={`bread-center-desc bread-center-${historyItem?.runStatus}`}>{runStatusText(historyItem?.runStatus)}</span>
-                    </div>
-                    <div className="bread-center-item">
-                        <span className='bread-center-name'>运行时长</span>
-                        <span className='bread-center-desc'>{getTime(setTime)}</span>
+            <Skeleton loading={detailsLoading} active>
+                <div className="str-detail-bread">
+                    <BreadCrumb
+                        firstItem={pipeline?.name +" # " + historyItem?.findNumber}
+                        onClick={historyType!=="drawer" ? goBack: undefined}
+                    >
+                        {
+                            historyType==="drawer" &&
+                            <Btn
+                                title={<CloseOutlined style={{fontSize:16}}/>}
+                                type="text"
+                                onClick={goBack}
+                            />
+                        }
+                    </BreadCrumb>
+                    <div className="bread-center">
+                        <div className="bread-center-item">
+                            <span className='bread-center-name'>开始时间</span>
+                            <span className='bread-center-desc'>{historyItem?.createTime }</span>
+                        </div>
+                        <div className="bread-center-item">
+                            <span className='bread-center-name'>运行方式</span>
+                            <span className='bread-center-desc'>{historyItem?.runWay===1 ? historyItem?.user?.nickname + " · 手动触发" : "定时触发" }</span>
+                        </div>
+                        <div className="bread-center-item">
+                            <span className='bread-center-name'>运行状态</span>
+                            <span className={`bread-center-desc bread-center-${historyItem?.runStatus}`}>{runStatusText(historyItem?.runStatus)}</span>
+                        </div>
+                        <div className="bread-center-item">
+                            <span className='bread-center-name'>运行时长</span>
+                            <span className='bread-center-desc'>{getTime(setTime)}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="str-detail-bottom">
-                <HistoryDetailTree
-                    id={id}
-                    execData={execData}
-                    pipeline={pipeline}
-                    changeAnchor={changeAnchor}
-                />
-                <div className="str-detail-log"
-                     ref={scrollRef}
-                     onWheel={onWheel}
-                     onMouseDown={handleMouseDown}
-                     onMouseUp={handleMouseUp}
-                >
-                    { renderLog() }
+                <div className="str-detail-bottom">
+                    <HistoryDetailTree
+                        id={id}
+                        execData={execData}
+                        pipeline={pipeline}
+                        changeAnchor={changeAnchor}
+                    />
+                    <div className="str-detail-log"
+                         ref={scrollRef}
+                         onWheel={onWheel}
+                         onMouseDown={handleMouseDown}
+                         onMouseUp={handleMouseUp}
+                    >
+                        { renderLog() }
+                    </div>
                 </div>
-            </div>
-
+            </Skeleton>
         </div>
     )
 }

@@ -19,7 +19,6 @@
 .host-group-host-add{
     .host-group-add-title{
         box-sizing: border-box;
-        margin: 0;
         padding: 0;
         color: rgba(0, 0, 0, 0.85);
         font-size: 14px;
@@ -27,7 +26,7 @@
         line-height: 1.5715;
         list-style: none;
         font-feature-settings: 'tnum';
-        margin-bottom: 8px;
+        margin: 0 0 8px;
         vertical-align: top;
         display: flex;
         align-items: center;
@@ -43,5 +42,18 @@
         &:first-child{
             margin-right: 15px;
         }
+    }
+}
+
+.agent-text{
+    &-default{
+        padding-left: 10px;
+        font-size: 12px;
+    }
+    &-success{
+        color: var(--thoughtware-blue);
+    }
+    &-danger{
+        color: #666666;
     }
 }

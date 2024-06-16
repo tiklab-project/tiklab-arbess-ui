@@ -77,18 +77,6 @@ const Server = props =>{
         })
     }
 
-    const lis = [
-        {id:'all', title: "全部"},
-        {id:'gitee', title:"Gitee"},
-        {id:'github', title:"Github"},
-        {id:'gitlab', title:"Gitlab"},
-        {id:'gittok', title:"GitTok"},
-        {id:'teston', title:"TestOn"},
-        {id:'sonar', title:"Sonar"},
-        {id:'nexus', title:"Nexus"},
-        {id:'hadess', title:"Hadess"},
-    ]
-
     // 标题
     const name = text =>{
         return  <span>
@@ -294,7 +282,7 @@ const Server = props =>{
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
                 xl={{ span: "22", offset: "1"}}
-                xxl={{ span: "18", offset: "3" }}
+                xxl={{ span: "20", offset: "2" }}
             >
                 <div className="mf-home-limited mf">
                     <BreadCrumb firstItem={"服务集成"} >
@@ -308,7 +296,17 @@ const Server = props =>{
                         />
                     </BreadCrumb>
                     <Tabs
-                        tabLis={lis}
+                        tabLis={[
+                            {id:'all', title: "全部"},
+                            {id:'gitee', title:"Gitee"},
+                            {id:'github', title:"Github"},
+                            {id:'gitlab', title:"Gitlab"},
+                            {id:'gittok', title:"GitTok"},
+                            {id:'teston', title:"TestOn"},
+                            {id:'sonar', title:"Sonar"},
+                            {id:'nexus', title:"Nexus"},
+                            {id:'hadess', title:"Hadess"},
+                        ]}
                         type={activeTab}
                         onClick={clickServerType}
                     />

@@ -70,7 +70,7 @@ const Tool = props =>{
         setVisible(true)
     }
 
-    const columnsCe = [
+    const columns = [
         {
             title:"名称",
             dataIndex:"scmName",
@@ -123,7 +123,7 @@ const Tool = props =>{
         }
     ]
 
-    const columns = [
+    const columnsCloud = [
         {
             title:"名称",
             dataIndex:"scmName",
@@ -185,7 +185,7 @@ const Tool = props =>{
                     </BreadCrumb>
                     <div className="auth-content">
                         <Table
-                            columns={version==='cloud'?columns:columnsCe}
+                            columns={version==='cloud'?columnsCloud:columns}
                             dataSource={enviData}
                             rowKey={record=>record.scmId}
                             pagination={false}

@@ -50,6 +50,7 @@ import {
     Server,
     Tool,
     Resources,
+    Agent,
 
     MessageSendType,
     MessageNotice,
@@ -282,6 +283,11 @@ const routers=[
                     {
                         path:"/setting/send",
                         component: MessageSendType,
+                        exact: true,
+                    },
+                    {
+                        path:"/setting/agent",
+                        component: Agent,
                         exact: true,
                     },
                     {

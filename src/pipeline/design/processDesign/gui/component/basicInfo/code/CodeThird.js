@@ -6,7 +6,7 @@ import FormsSelect from "../FormsSelect";
 import codeThirdStore from "../../../store/CodeThirdStore";
 
 /**
- * gitTok
+ * gitTok | gitee | github | gitlab
  * @param props
  * @returns {JSX.Element}
  * @constructor

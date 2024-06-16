@@ -10,8 +10,8 @@ import {
 
 /**
  * 运行状态说明
- * @param type：运行类型
  * @returns {string}
+ * @param type
  */
 export const runStatusText = type =>{
     switch (type) {
@@ -25,8 +25,8 @@ export const runStatusText = type =>{
 
 /**
  * 运行状态图标
- * @param type：运行类型
  * @returns {JSX.Element}
+ * @param type
  */
 export const runStatusIcon = type =>{
     switch(type){

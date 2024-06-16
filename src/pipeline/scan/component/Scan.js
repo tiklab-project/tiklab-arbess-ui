@@ -10,6 +10,8 @@ import scanStore from "../store/ScanStore";
 import ScanDetails from "./ScanDetails";
 import "./Scan.scss";
 
+const pageSize = 15;
+
 const Scan = (props) => {
 
     const {match:{params}} = props
@@ -26,7 +28,7 @@ const Scan = (props) => {
     })
 
     const pageParam = {
-        pageSize:15,
+        pageSize:pageSize,
         currentPage: 1,
     }
 
@@ -69,7 +71,7 @@ const Scan = (props) => {
     const del = record => {
         deleteSpotbugs(record.id).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(scanPage.totalRecord,15,scanParam.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(scanPage.totalRecord,pageSize,scanParam.pageParam.currentPage)
                 changPage(current)
             }
         })
@@ -82,7 +84,7 @@ const Scan = (props) => {
     const changPage = page => {
         setScanParam({
             pageParam:{
-                pageSize:15,
+                pageSize:pageSize,
                 currentPage: page
             }
         })

@@ -12,6 +12,8 @@ import envStore from "../../../setting/configure/env/store/EnvStore";
 import groupingStore from "../../../setting/configure/grouping/store/GroupingStore";
 import "./Pipeline.scss";
 
+const pageSize = 15;
+
 /**
  * 流水线页面
  * @param props
@@ -25,7 +27,7 @@ const Pipeline = props =>{
     const {findGroupList} = groupingStore;
 
     const pageParam = {
-        pageSize:15,
+        pageSize:pageSize,
         currentPage: 1,
     }
 
@@ -132,7 +134,7 @@ const Pipeline = props =>{
         setPipelineParam({
             ...pipelineParam,
             pageParam:{
-                pageSize:15,
+                pageSize:pageSize,
                 currentPage: page,
             }
         })

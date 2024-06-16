@@ -58,5 +58,13 @@
         padding: 20px 30px;
         overflow: auto;
     }
+
+    .design-agent{
+        margin-right: 15px;
+        width: 120px;
+        .ant-select-selector{
+            border-radius: 4px;
+        }
+    }
 }
 

@@ -1,4 +1,7 @@
 .history{
+    height: 100%;
+    width: 100%;
+    overflow: auto;
     .history-table{
         padding-top: 10px;
         .history-table-name:hover{

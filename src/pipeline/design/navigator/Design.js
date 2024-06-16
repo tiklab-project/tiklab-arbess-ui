@@ -15,6 +15,7 @@ import triggerStore from "../trigger/store/TriggerStore";
 import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
+import DesignAgent from "./DesignAgent";
 import {
     DeploymentUnitOutlined,
     CrownOutlined,
@@ -48,17 +49,16 @@ const Design = props =>{
 
     const pipelineId = match.params.id
 
-    // 路由菜单
+    //路由菜单
     const [path,setPath] = useState("");
-
-    // 点击运行按钮
+    //点击运行按钮
     const [isSpin,setIsSpin] = useState(false);
-
-    // 运行页面展示||隐藏
+    //运行页面展示||隐藏
     const [isDetails,setIsDetails] = useState(false);
-
-    // 单个历史信息
+    //单个历史信息
     const [historyItem,setHistoryItem] = useState(null);
+    //默认agent
+    const [defaultAgent,setDefaultAgent] = useState(null);
 
     useEffect(()=>{
         setPath(props.location.pathname)
@@ -89,7 +89,10 @@ const Design = props =>{
      */
     const run = () =>{
         setIsSpin(true)
-        execStart(pipeline.id).then(res=>{
+        execStart(defaultAgent? {
+            agentId:defaultAgent,
+            pipelineId:pipeline.id
+        }:{pipelineId:pipeline.id}).then(res=>{
             setIsSpin(false)
             if(res.code===0){
                 setHistoryItem(res.data && res.data)
@@ -152,6 +155,10 @@ const Design = props =>{
                                     isMar={true}
                                     title={"帮助"}
                                     onClick={()=>window.open('https://thoughtware.cn/document')}
+                                />
+                                <DesignAgent
+                                    defaultAgent={defaultAgent}
+                                    setDefaultAgent={setDefaultAgent}
                                 />
                                 {
                                     pipeline?.state===2 ?
