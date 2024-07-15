@@ -14,10 +14,8 @@ const HistoryScreen = props =>{
 
     // 流水线成员
     const [userList,setUserList] = useState([]);
-
     // 当前页
     const [currentPage,setCurrentPage] = useState(1)
-
     // 分页
     const [page,setPage] = useState({})
 

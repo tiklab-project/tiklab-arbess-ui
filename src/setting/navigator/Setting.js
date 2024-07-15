@@ -4,9 +4,9 @@ import {
     LayoutOutlined,
     SoundOutlined,
     DeploymentUnitOutlined,
-    MacCommandOutlined, TeamOutlined
+    MacCommandOutlined, TeamOutlined, ProjectOutlined
 } from "@ant-design/icons";
-import SystemContent from "./SettingContent";
+import Aside from "../../common/component/aside/Aside";
 
 /**
  * 系统设置页面
@@ -26,21 +26,25 @@ const Setting = props =>{
                     id: "/setting/orga",
                     title: "部门",
                     purviewCode: "orga",
+                    isUnify:true,
                 },
                 {
                     id: "/setting/user",
                     title: "用户",
                     purviewCode: "user",
+                    isUnify:true,
                 },
                 {
                     id: "/setting/userGroup",
                     title: "用户组",
                     purviewCode: "user_group",
+                    isUnify:true,
                 },
                 {
                     id: "/setting/dir",
                     title: "用户目录",
                     purviewCode: "user_dir",
+                    isUnify:true,
                 },
                 {
                     id:"/setting/role",
@@ -151,10 +155,100 @@ const Setting = props =>{
         },
     ]
 
-    return  <SystemContent
-                {...props}
-                applicationRouters={applicationRouters}
-            />
+    const templateRouter = [
+        {
+            id:"base",
+            title:"基础数据",
+            icon:<ProjectOutlined />,
+            children:[
+                {
+                    id:"/setting/syr/feature",
+                    title:"系统功能",
+                },
+                {
+                    id:"/setting/roletrue",
+                    title:"系统角色",
+                },
+                {
+                    id:"/setting/project/feature",
+                    title:"项目功能",
+                },
+                {
+                    id:"/setting/project/role",
+                    title:"项目角色",
+                },
+                {
+                    id:"/setting/project/vRole",
+                    title:"项目虚拟角色",
+                },
+                {
+                    id:"/setting/todoTask",
+                    title:"待办任务",
+                },
+                {
+                    id:"/setting/task",
+                    title:"待办事项",
+                },
+                {
+                    id:"/setting/todoTemp",
+                    title:"待办模板 ",
+                },
+                {
+                    id:"/setting/todoType",
+                    title:"待办类型 ",
+                },
+                {
+                    id:"/setting/logTemplate",
+                    title:"日志模板",
+                },
+                {
+                    id:"/setting/logType",
+                    title:"日志类型",
+                },
+                {
+                    id:"/setting/type",
+                    title:"消息类型",
+                },
+                {
+                    id:"/setting/sendtrue",
+                    title:"消息发送方式",
+                },
+                {
+                    id:"/setting/systemNotice",
+                    title:"系统消息通知方案",
+                },
+                {
+                    id:"/setting/projectNotice",
+                    title:"项目消息通知方案",
+                },
+                {
+                    id:"/setting/userGrouptrue",
+                    title:"用户组true",
+                },
+            ]
+        }
+    ]
+
+    // 菜单
+    const menus = () => {
+        try{
+            if(devProduction){
+                return [...applicationRouters,...templateRouter]
+            }else {
+                return applicationRouters
+            }
+        }catch {
+            return applicationRouters
+        }
+    }
+
+    return (
+        <Aside
+            {...props}
+            outerPath={'/setting'}
+            applicationRouters={menus()}
+        />
+    )
 }
 
 export default Setting

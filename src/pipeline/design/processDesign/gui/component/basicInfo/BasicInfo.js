@@ -39,6 +39,7 @@ const BasicInfo = props => {
     useEffect(()=>{
         // 初始化表单内容
         const {taskType,task} = dataItem
+        console.log('task::',task)
         switch(taskType){
             case 'git':
             case 'gitlab':

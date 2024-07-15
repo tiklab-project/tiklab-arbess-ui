@@ -158,7 +158,6 @@ const Server = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
-            ellipsis:true,
             render:(text,record) => action(record)
         }
     ]
@@ -201,7 +200,6 @@ const Server = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
-            ellipsis:true,
             render:(text,record) => action(record)
         }
     ]
@@ -251,7 +249,6 @@ const Server = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
-            ellipsis:true,
             render:(_,record) => action(record)
         }
     ]

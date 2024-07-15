@@ -1,6 +1,7 @@
 import React from "react";
 import {Dropdown, Modal, Tooltip} from "antd";
 import {EditOutlined,EllipsisOutlined} from "@ant-design/icons";
+import pip_more from "../../../assets/images/svg/pie_more.svg";
 
 /**
  * 表格操作
@@ -46,7 +47,7 @@ const ListAction = ({edit,del}) =>{
                 >
                     <Tooltip title="更多">
                         <span className="del" style={{cursor:"pointer"}}>
-                            <EllipsisOutlined style={{fontSize:17}}/>
+                            <img src={pip_more} width={18} alt={'更多'}/>
                        </span>
                     </Tooltip>
                 </Dropdown>

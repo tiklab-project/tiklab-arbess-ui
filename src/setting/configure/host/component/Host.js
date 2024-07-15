@@ -145,12 +145,13 @@ const Host = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
-            ellipsis:true,
             render:(_,record) => {
-                return  <ListAction
-                            edit={()=>editHost(record)}
-                            del={()=>delHost(record)}
-                        />
+                return (
+                    <ListAction
+                        edit={()=>editHost(record)}
+                        del={()=>delHost(record)}
+                    />
+                )
             }
         }
     ]

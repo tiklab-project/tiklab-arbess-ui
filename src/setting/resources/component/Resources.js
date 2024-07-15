@@ -19,15 +19,15 @@ const Resources = props => {
 
     const {findResourcesList,findAllCathe,updateCathe,findResourcesDetails} = resourceStore
 
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(true)
-    // 资源占用概况
+    //资源占用概况
     const [resourceList,setResourceList] = useState({});
-    // 日志、制品保存时长
+    //日志、制品保存时长
     const [saveDur,setSaveDur] = useState({});
-    // 资源详情
+    //资源详情
     const [resourcesDetails,setResourcesDetails] = useState({});
-    // 特性弹出框
+    //特性弹出框
     const [featureModal,setFeatureModal] = useState(false);
 
     const disable = disableFunction();

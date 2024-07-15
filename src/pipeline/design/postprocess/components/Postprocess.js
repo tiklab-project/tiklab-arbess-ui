@@ -101,10 +101,12 @@ const Postprocess = props =>{
             dataIndex: "action",
             key: "action",
             render:(_,record) => {
-                return  <ListAction
-                            edit={()=>editPostprocess(record)}
-                            del={()=>delPostprocess(record)}
-                        />
+                return (
+                    <ListAction
+                        edit={()=>editPostprocess(record)}
+                        del={()=>delPostprocess(record)}
+                    />
+                )
             }
         },
     ]

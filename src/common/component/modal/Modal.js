@@ -12,7 +12,7 @@ import "./Modal.scss";
  */
 const Modals = props => {
 
-    const {title,children,footer,...res} = props
+    const {title,children,...res} = props
 
     const [height,setHeight] = useState(0)
 
@@ -30,19 +30,19 @@ const Modals = props => {
     const modalFooter = (
         <>
             <Btn onClick={res.onCancel} title={res.cancelText || "取消"} isMar={true}/>
-            <Btn onClick={res.onOk} title={res.okText ||  "确定"} type={"primary"}/>
+            <Btn onClick={res.onOk} title={res.okText ||  "确定"} type={res.okType || "primary"}/>
         </>
     )
 
     return (
         <Modal
-            {...res}
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
             closable={false}
             destroyOnClose={true}
-            footer={footer || modalFooter}
+            footer={modalFooter}
             className="mf mf-modal"
+            {...res}
         >
             <div className='mf-modal-up'>
                 <div>{title}</div>

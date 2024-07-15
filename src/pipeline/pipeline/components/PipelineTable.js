@@ -5,7 +5,11 @@ import {
     LoadingOutlined,
     LockOutlined,
     UnlockOutlined,
-    MinusCircleOutlined, EllipsisOutlined, CloseCircleOutlined, CheckCircleOutlined, ExclamationCircleOutlined
+    MinusCircleOutlined,
+    EllipsisOutlined,
+    CloseCircleOutlined,
+    CheckCircleOutlined,
+    ExclamationCircleOutlined
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
 import historyStore from "../../history/store/HistoryStore";
@@ -18,6 +22,7 @@ import Modals from "../../../common/component/modal/Modal";
 import {debounce} from "../../../common/utils/Client";
 import pip_xingxing from "../../../assets/images/svg/pip_xingxing.svg";
 import pip_xingxing_kong from "../../../assets/images/svg/pip_xingxing-kong.svg";
+import pip_more from "../../../assets/images/svg/pie_more.svg";
 import "./PipelineTable.scss";
 
 /**
@@ -219,7 +224,7 @@ const PipelineTable = props =>{
             title: "流水线名称",
             dataIndex: "name",
             key: "name",
-            width:"30%",
+            width:"28%",
             ellipsis:true,
             render:(text,record)=>{
                 return  <span className='pipelineTable-name' onClick={()=>goPipelineTask(text,record)}>
@@ -232,7 +237,7 @@ const PipelineTable = props =>{
             title: "最近构建信息",
             dataIndex: "lastBuildTime",
             key: "lastBuildTime",
-            width:"30%",
+            width:"28%",
             ellipsis:true,
             render:(text,record) =>{
                 const {buildStatus,number} = record
@@ -252,7 +257,7 @@ const PipelineTable = props =>{
             title: "负责人",
             dataIndex: ["user","nickname"],
             key: "user",
-            width:"16%",
+            width:"17%",
             ellipsis: true,
             render:(text,record) => {
                 return  <Space>
@@ -265,7 +270,7 @@ const PipelineTable = props =>{
             title: "可见范围",
             dataIndex: "power",
             key: "power",
-            width:"12%",
+            width:"13%",
             ellipsis: true,
             render:text => {
                 switch (text) {
@@ -286,8 +291,7 @@ const PipelineTable = props =>{
             title: "操作",
             dataIndex: "action",
             key:"action",
-            width:"12%",
-            ellipsis:true,
+            width:"14%",
             render:(text,record)=>{
                 const {state,collect} = record
                 return(
@@ -316,7 +320,7 @@ const PipelineTable = props =>{
                         >
                             <Tooltip title="更多">
                                 <span className="pipelineTable-action">
-                                    <EllipsisOutlined style={{fontSize:17}}/>
+                                    <img src={pip_more} width={20} alt={'更多'}/>
                                 </span>
                             </Tooltip>
                         </Dropdown>

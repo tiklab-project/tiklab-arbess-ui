@@ -111,7 +111,6 @@ const Tool = props =>{
             dataIndex:"action",
             key:"action",
             width:"10%",
-            ellipsis:true,
             render:(text,record)=>{
                 return (
                     <ListAction
@@ -123,44 +122,6 @@ const Tool = props =>{
         }
     ]
 
-    const columnsCloud = [
-        {
-            title:"名称",
-            dataIndex:"scmName",
-            key:"scmName",
-            width:"30%",
-            ellipsis:true,
-            render:text => {
-                return  <span>
-                            <ListIcon text={text}/>
-                            <span>{text}</span>
-                        </span>
-            }
-        },
-        {
-            title:"类型",
-            dataIndex:"scmType",
-            key:"scmType",
-            width:"30%",
-            ellipsis:true,
-            render:text =>{
-                switch (text) {
-                    case 1:  return <TaskTitleIcon type='git'/>
-                    case 5:  return <TaskTitleIcon type='svn'/>
-                    case 21: return <TaskTitleIcon type='maven'/>
-                    case 22: return <TaskTitleIcon type='nodejs'/>
-                }
-            }
-        },
-        {
-            title:"地址",
-            dataIndex:"scmAddress",
-            key:"scmAddress",
-            width:"40%",
-            ellipsis:true,
-        }
-    ]
-
     return (
         <Row className="auth">
             <Col
@@ -168,24 +129,21 @@ const Tool = props =>{
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
-                xl={{ span: "18", offset: "3" }}
+                xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className='mf-home-limited mf'>
                     <BreadCrumb firstItem={"工具"}>
-                        {
-                            version!=='cloud' &&
-                            <Btn
-                                onClick={addEnvi}
-                                type={"primary"}
-                                title={"添加工具"}
-                                icon={<PlusOutlined/>}
-                            />
-                        }
+                        <Btn
+                            onClick={addEnvi}
+                            type={"primary"}
+                            title={"添加工具"}
+                            icon={<PlusOutlined/>}
+                        />
                     </BreadCrumb>
                     <div className="auth-content">
                         <Table
-                            columns={version==='cloud'?columnsCloud:columns}
+                            columns={columns}
                             dataSource={enviData}
                             rowKey={record=>record.scmId}
                             pagination={false}

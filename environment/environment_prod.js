@@ -16,8 +16,6 @@ const webpackGlobal = {
     version: JSON.stringify('ce'),
     client: JSON.stringify('web'),
 
-    tenant_type: JSON.stringify('single'), // mult  参数带tenant
-
     acc_url: JSON.stringify(''),
     mobile: JSON.stringify(''),
     devProduction: false

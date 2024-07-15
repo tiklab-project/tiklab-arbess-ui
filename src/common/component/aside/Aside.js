@@ -1,100 +1,149 @@
-import React from "react";
-import {Dropdown} from "antd";
-import {SettingOutlined, CaretDownOutlined} from "@ant-design/icons";
+import React, {useState} from "react";
+import {DownOutlined,UpOutlined} from "@ant-design/icons";
+import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
+import {applyJump, disableFunction} from 'thoughtware-core-ui';
+import {inject,observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
-import ListIcon from "../list/ListIcon";
+import  {ExportOutlined} from "@ant-design/icons";
+import feature from '../../../assets/images/pip_feature.png';
 import "./Aside.scss";
 
-/**
- * 左侧路由（二级标题）
- */
-const Aside = props =>{
+const Aside = props =>  {
 
-    const {recentlyPipeline,pipeline,route,location,firstRouters} = props
+    const {route,enhance,outerPath,applicationRouters,systemRoleStore} = props;
 
-    const path = location.pathname
+    const {systemPermissions} = systemRoleStore;
+
+    let path = props.location.pathname;
+    const disable = disableFunction();
+
+    // 树的展开与闭合
+    const [expandedTree,setExpandedTree] = useState([""])
+
+    const authConfig = JSON.parse(localStorage.getItem("authConfig"));
 
     /**
-     * 切换流水线
-     * @param item
+     * 路由跳转
+     * @param data
+     * @returns {*}
      */
-    const changePipeline = item => {
-        if(pipeline.id!==item.id){
-            props.history.push(`/pipeline/${item.id}/history`)
+    const select = data => {
+        const {isUnify,isEnhance,id} = data
+        if(isUnify && !authConfig?.authType){
+            return applyJump(`${authConfig?.authServiceUrl}/#${id}`)
+        }
+        if(isEnhance && disable){
+            if (typeof enhance === 'function') {
+                enhance();
+            }
+            return
+        }
+        props.history.push(id)
+    }
+
+    const isExpandedTree = key => expandedTree.some(item => item ===key)
+
+    /**
+     * 展开 || 闭合
+     * @param key
+     */
+    const setOpenOrClose = key => {
+        if (isExpandedTree(key)) {
+            setExpandedTree(expandedTree.filter(item => item !== key))
+        } else {
+            setExpandedTree(expandedTree.concat(key))
         }
     }
 
-    return(
-        <div className="mf-layout">
-            <div className="mf-normal-aside">
-                <Dropdown
-                    getPopupContainer={e => e.parentElement}
-                    overlayStyle={{width:200,top:48,left:80}}
-                    trigger={['click']}
-                    overlay={
-                        <div className="pipeline-opt">
-                            <div className="pipeline-opt-title">切换流水线</div>
-                            <div className="pipeline-opt-group">
-                                {
-                                    recentlyPipeline && recentlyPipeline.map(item=>{
-                                        if(item){
-                                            return (
-                                                <div onClick={()=>changePipeline(item)}
-                                                     key={item.id}
-                                                     className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
-                                                >
-                                                    <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
-                                                        {item.name.substring(0,1).toUpperCase()}
-                                                    </span>
-                                                    <span className="pipeline-opt-name">
-                                                        {item.name}
-                                                    </span>
-                                                </div>
-                                            )
-                                        }
-                                        return null
-                                    })
-                                }
-                                <div className='pipeline-opt-more'
-                                     onClick={()=>props.history.push('/pipeline')}
-                                >更多</div>
-                            </div>
-                        </div>
-                    }
-                    overlayClassName="normal-aside-dropdown"
+    const renderMenu = (data,deep)=> {
+        return (
+            <PrivilegeButton key={data.id} code={data.purviewCode} {...props}>
+                <li style={{cursor:"pointer",paddingLeft:deep}}
+                    className={`system-aside-li system-aside-second ${path === data.id  ? "system-aside-select":""}`}
+                    onClick={()=>select(data)}
+                    key={data.id}
                 >
-                    <div className='normal-aside-opt' data-title-right={pipeline?.name}>
-                        <div className="normal-aside-opt-icon">
-                            <ListIcon
-                                text={pipeline?.name}
-                                colors={pipeline && pipeline?.color}
-                            />
-                            <span><CaretDownOutlined /></span>
-                        </div>
-                    </div>
-                </Dropdown>
-                <div className="normal-aside-up">
+                    <span>{data.title}</span>
                     {
-                        firstRouters.map(item=>(
-                            <div key={item.key}
-                                 className={`normal-aside-item ${path.indexOf(item.id) === 0 ? "normal-aside-select":""}`}
-                                 onClick={()=>props.history.push(item.id)}
-                            >
-                                <div className="normal-aside-item-icon">{item.icon}</div>
-                                <div className="normal-aside-item-title">{item.title}</div>
-                            </div>
-                        ))
+                        data.isUnify && !authConfig?.authType &&
+                        <span className='aside-second-link'><ExportOutlined /></span>
                     }
-                </div>
+                    {
+                        data.isEnhance && disable &&
+                        <img src={feature} alt="增强功能" width={16} height={16}/>
+                    }
+                </li>
+            </PrivilegeButton>
+        )
+    }
 
-                <div className="normal-aside-item" onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}>
-                    <div className="normal-aside-item-icon"><SettingOutlined/></div>
-                    <div>设置</div>
+    const subMenu = (item,deep) =>{
+        return(
+            <li key={item.id} className="system-aside-li">
+                <div className="system-aside-item system-aside-first"
+                     style={{paddingLeft: deep}}
+                     onClick={()=>setOpenOrClose(item.id)}
+                >
+                    <span className="system-aside-title">{item.title}</span>
+                    <div className="system-aside-item-icon">
+                        {
+                            item.children ?
+                                (isExpandedTree(item.id)?
+                                        <DownOutlined style={{fontSize: "10px"}}/> :
+                                        <UpOutlined style={{fontSize: "10px"}}/>
+                                ): ""
+                        }
+                    </div>
+                </div>
+                <ul className={`system-aside-ul ${isExpandedTree(item.id) ? null: "system-aside-hidden"}`}>
+                    {
+                        item.children && item.children.map(item =>{
+                            const deepnew = deep + 20
+                            return item.children && item.children.length ?
+                                renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
+                        })
+                    }
+                </ul>
+            </li>
+        )
+    }
+
+    const renderSubMenu = (item,deep)=> {
+        const isCode = item.children.some(list=>!list.purviewCode)
+        if(isCode) return subMenu(item,deep)
+        const isPromise = item.children.some(list=> systemPermissions.includes(list.purviewCode))
+        return isPromise && subMenu(item,deep)
+    }
+
+    return (
+        <SystemNav
+            {...props}
+            applicationRouters={applicationRouters}
+            expandedTree={expandedTree}
+            setExpandedTree={setExpandedTree}
+            outerPath={outerPath}
+            noAccessPath={"/noaccess"}
+        >
+            <div className="system">
+                <div className="system-aside">
+                    <ul className="system-aside-top">
+                        <li className='system-aside-top-head'>设置</li>
+                        {
+                            applicationRouters.map(firstItem => {
+                                return firstItem.children && firstItem.children.length > 0 ?
+                                    renderSubMenu(firstItem,20) : renderMenu(firstItem,20)
+                            })
+                        }
+                        {props.children}
+                    </ul>
+                </div>
+                <div className="system-content">
+                    { renderRoutes(route.routes) }
                 </div>
             </div>
-            {renderRoutes(route.routes)}
-        </div>
+        </SystemNav>
     )
 }
 
-export default Aside
+export default inject("systemRoleStore")(observer(Aside))
+

@@ -1,80 +1,180 @@
-.frame{
-    height: 100vh;
-    overflow: hidden;
-    &-header{
+.mf-layout{
+  height: 100vh;
+  overflow: hidden;
+  .mf-layout-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--mf-border-color);
+    padding: 0 30px;
+    height: 48px;
+    .layout-header{
+      display: flex;
+      align-items: center;
+      .layout-header-logo{
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        min-width: 600px;
-        height: var(--mf-head-height);
-        border-bottom: 1px solid var(--thoughtware-gray-200);
-        padding: 0 30px 0 25px;
-        &-logo{
-            display: flex;
-            align-items: center;
-            height: 100%;
-            margin: 0 20px;
-            &>div:last-child{
-                margin-left: 10px;
-                font-size: 19px;
-                font-weight: 500;
-            }
+        margin: 0 25px;
+        cursor: pointer;
+        &>div:last-child{
+          margin-left: 15px;
+          font-size: 19px;
+          font-weight: 500;
         }
-        &-right{
-            display: flex;
-            flex-direction: row;
-            justify-items: flex-end;
-            align-items: center;
-            height: 100%;
-            .frame-header-right-text{
-                margin-left: 20px;
-            }
+      }
+      .layout-header-text{
+        margin-left: 20px;
+      }
+      .layout-header-text-icon{
+        cursor: pointer;
+        padding: 4px;
+        &:hover, &-linked {
+          border-radius: 50%;
+          background: #E1EDFF;
+          .text-icon{
+            color: var(--thoughtware-blue);
+          }
         }
-        &-icon{
-            font-size: var(--thoughtware-icon-size-24);
+        .text-icon{
+          font-size: 24px;
         }
-        .text_icon_block_item{
-            cursor: pointer;
-            padding: 4px;
-        }
-        .text_icon_block_item:hover, .text_icon_block_linked {
-            border-radius: 50%;
-            color: rgb(0, 82, 204);
-            background-color: rgba(222, 235, 255, 0.9);
-            .frame-header-icon{
-                color: rgb(0, 82, 204);
-            }
-        }
-        .headers{
-            &-link{
-                display: flex;
-                flex-direction: row;
-                gap: 20px;
-                &>div{
-                    cursor: pointer;
-                    overflow: hidden;
-                    height: 48px;
-                    line-height: 48px;
-                    flex-shrink: 0;
-                    .headers-link-text{
-                        padding: 5px;
-                    }
-                    &:hover .headers-link-text{
-                        background: #E1EDFF;
-                        border-radius: 3px;
-                        color: var(--thoughtware-blue);
-                    }
-                }
-            }
-            &-active{
-                font-weight: 600;
-                color: var(--thoughtware-blue);
-                border-bottom: 2px solid var(--thoughtware-blue);
-            }
-        }
+      }
     }
-    &-content{
-        height: var(--mf-content-height);
+  }
+  .mf-layout-content{
+    height: calc(100vh - 48px);
+  }
+}
+
+.mf-home{
+  display: flex;
+  height: calc(100vh - 48px);
+  .normal-aside{
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-basis: 80px;
+    height: 100%;
+    background: var(--thoughtware-gray-600);
+    border-right: 1px solid #f0f0f0;
+    padding-bottom: 6px;
+    .normal-aside-up{
+      flex: 1;
+      .normal-aside-item{
+        cursor: pointer;
+        display: flex;
+        height: 50px;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border-left: 3px solid transparent;
+        &:hover{
+          background: var(--thoughtware-gray-300);
+        }
+        &:not(:last-child){
+          margin-bottom: 8px;
+        }
+      }
+      .normal-aside-select{
+        background: var(--thoughtware-gray-400);
+        border-left: 3px solid var(--thoughtware-blue);
+      }
+      .normal-aside-item-icon{
+        font-size: var(--thoughtware-icon-size-16);
+      }
+      .normal-aside-item-back{
+        border-bottom: 1px solid var(--mf-border-color);
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+      }
     }
+    .normal-aside-bottom{
+      padding: 2px 0;
+      .normal-aside-bottom-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 36px;
+        cursor: pointer;
+        &:hover{
+          background: var(--thoughtware-gray-300);
+        }
+        .bottom-icon{
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .normal-aside-opt{
+    cursor: pointer;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding: 5px 0;
+    justify-content: center;
+    .normal-aside-opt-icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 20px;
+    }
+  }
+  .mf-normal-content{
+    flex: 1;
+    width: 0;
+  }
+}
+
+.normal-aside-dropdown{
+  left: 80px !important;
+  top: var(--mf-head-height) !important;
+  box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+  border-radius: 4px;
+  background: #ffffff;
+  .pipeline-opt{
+    &-title{
+      font-weight: var(--thoughtware-font-weight-bold);
+      padding: 0 var(--thoughtware-padding-item);
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid var(--mf-border-color);
+    }
+    &-group{
+      max-height: calc(100vh - 120px);
+      min-height: 45px;
+      overflow: auto;
+    }
+    &-item{
+      padding: 0 var(--thoughtware-padding-item);
+      height: 40px;
+      line-height: 40px;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 200px;
+      &:hover{
+        background: #edf0f5;
+      }
+    }
+    &-icon{
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      margin-right: 15px;
+      border-radius: 4px;
+    }
+    &-active{
+      background:#edf0f5;
+    }
+    &-more{
+      cursor: pointer;
+      text-align: center;
+      padding: 8px 0 ;
+      background: #f8f8f8;
+      color: var(--thoughtware-blue);
+    }
+  }
 }

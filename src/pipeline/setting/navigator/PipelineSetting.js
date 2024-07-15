@@ -42,18 +42,22 @@ const PipelineSetting = props =>{
 
     // 渲染菜单
     const navContent = item =>{
-        return  <div key={item.id}
-                     className={`project-nav-aside-item ${path === item.id ?"project-nav-aside-select":""} `}
-                     onClick={()=>props.history.push(item.id)}
-                >
-                    <span className="project-nav-aside-item-title">{item.title}</span>
-                </div>
+        return (
+            <div key={item.id}
+                 className={`project-nav-aside-item ${path === item.id ?"project-nav-aside-select":""} `}
+                 onClick={()=>props.history.push(item.id)}
+            >
+                <span className="project-nav-aside-item-title">{item.title}</span>
+            </div>
+        )
     }
 
     const renderRouter = item => {
-        return   <PrivilegeProjectButton key={item.id} code={item.purviewCode} domainId={pipelineId}>
-                    {navContent(item)}
-                </PrivilegeProjectButton>
+        return (
+            <PrivilegeProjectButton key={item.id} code={item.purviewCode} domainId={pipelineId}>
+                {navContent(item)}
+            </PrivilegeProjectButton>
+        )
     }
 
     return(

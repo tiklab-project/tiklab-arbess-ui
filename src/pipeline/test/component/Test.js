@@ -229,7 +229,6 @@ const Test = props => {
             dataIndex: "action",
             key:"action",
             width:"5%",
-            ellipsis:true,
             render:(_,record)=> (
                 <ListAction
                     del={()=>delTeston(record)}

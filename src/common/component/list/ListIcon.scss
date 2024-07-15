@@ -1,21 +1,14 @@
-
-.mf-listname-href{
-    cursor: pointer;
-}
-
 .mf-listname-icon{
     display: inline-block;
     width: var(--thoughtware-icon-size-32);
     height: var(--thoughtware-icon-size-32);
     line-height: var(--thoughtware-icon-size-32);
-    margin-right: 10px;
     border-radius: 4px;
     text-align: center;
     color: black;
-}
-
-.mf-listname-name{
-    color: var(--thoughtware-blue);
+    &-mar{
+        margin-right: 10px;
+    }
 }
 
 .mf-icon{

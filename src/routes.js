@@ -5,7 +5,6 @@ import {
     Index,
     Login,
     Logout,
-    Wechat,
     ExcludeProductUser,
     NotFound,
     NoAccess,
@@ -99,11 +98,6 @@ const routers=[
         component:ExcludeProductUser,
     },
     {
-        path: "/project",
-        exact:true,
-        component:Wechat,
-    },
-    {
         path:"/",
         component: Index,
         routes:[
@@ -118,7 +112,7 @@ const routers=[
                 exact: true,
             },
             {
-                path:"/pipeline/new",
+                path:"/pipelineAdd",
                 component:PipelineAdd,
                 exact: true,
             },

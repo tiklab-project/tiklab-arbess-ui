@@ -1,14 +1,13 @@
 import {store as pipelineStore} from "./store";
 import App from "./app";
 import Portal from "./home/components/Portal";
-import SettingContent from "./setting/navigator/SettingContent";
+import Aside from "./common/component/aside/Aside";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Index=AsyncComponent(()=>import("./home/components/Home"))
 
 const Login=AsyncComponent(()=>import("./login/Login"))
 const Logout=AsyncComponent(()=>import("./login/Logout"))
-const Wechat=AsyncComponent(()=>import("./login/Wechat"))
 const ExcludeProductUser=AsyncComponent(()=>import("./login/ExcludeProductUser"))
 const NotFound=AsyncComponent(()=>import("./login/NotFound"))
 
@@ -107,16 +106,16 @@ const ProjectMessageNotice=AsyncComponent(()=>import("./setting/base/message/Pro
 
 
 export {
+    AsyncComponent,
+
     pipelineStore,
     App,
     Portal,
-    SettingContent,
-    AsyncComponent,
+    Aside,
 
     Index,
     Login,
     Logout,
-    Wechat,
     ExcludeProductUser,
     NotFound,
     NoAccess,

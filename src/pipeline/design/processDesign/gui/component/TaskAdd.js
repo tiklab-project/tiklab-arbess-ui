@@ -139,36 +139,17 @@ const TaskAdd = props =>{
      * @param type
      */
     const taskObj = type => {
-        switch (type) {
-            case 'artifact_maven':
-            case 'artifact_docker':
-                return {
-                    artifactType:'nexus',transitive:true
-                }
-            case 'pull_maven':
-            case 'pull_docker':
-                return {
-                    pullType:'nexus',transitive:true
-                }
-            case 'spotbugs':
-                return {
-                    openAssert:false,
-                    openDebug:false,
-                    scanPath:"${DEFAULT_CODE_ADDRESS}",
-                    scanGrade:"default",
-                    errGrade:"default",
-                }
-            case 'maventest':
-                return {
-                    address:"${DEFAULT_CODE_ADDRESS}"
-                }
-            case 'liunx':
-                return {
-                    authType:1
-                }
-            default:
-                return {}
-        }
+        const configMap = {
+            'liunx': { authType: 1 },
+            'artifact_maven': { artifactType: 'nexus', transitive: true },
+            'artifact_docker': { artifactType: 'nexus', transitive: true },
+            'pull_maven': { pullType: 'nexus', transitive: true },
+            'pull_docker': { pullType: 'nexus', transitive: true },
+            'spotbugs': { openAssert: false, openDebug: false, scanPath: "${DEFAULT_CODE_ADDRESS}", scanGrade: "default", errGrade: "default" },
+            'maventest': { address: "${DEFAULT_CODE_ADDRESS}", testOrder: "mvn test" },
+            'maven': { buildAddress: "${DEFAULT_CODE_ADDRESS}", buildOrder: "mvn clean package" }
+        };
+        return configMap[type] || {};
     }
 
     /**

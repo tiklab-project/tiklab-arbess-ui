@@ -152,7 +152,6 @@ const Scan = (props) => {
             dataIndex: "action",
             key:"action",
             width:"6%",
-            ellipsis:true,
             render:(_,record)=> (
                 <ListAction
                     del={()=>del(record)}
@@ -177,7 +176,7 @@ const Scan = (props) => {
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
-                xl={{ span: "18", offset: "3" }}
+                xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited mf">

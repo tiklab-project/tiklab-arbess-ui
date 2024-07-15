@@ -181,11 +181,10 @@ const BasicInfo = props =>{
                 <Modals
                     visible={delVisible}
                     onCancel={onCancel}
+                    onOk={delPipeline}
                     title={"删除流水线"}
-                    footer={<>
-                        <Btn onClick={onCancel} title={"取消"} isMar={true}/>
-                        <Btn onClick={delPipeline} title={"确认删除"} type={"dangerous"}/>
-                    </>}
+                    okText={'确认删除'}
+                    okType={'dangerous'}
                 >
                     <Spin spinning={isLoading} tip="删除中...">
                         <div className="pipelineReDel-modal">

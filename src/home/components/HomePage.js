@@ -7,7 +7,7 @@ import ListEmpty from "../../common/component/list/ListEmpty";
 import ListIcon from "../../common/component/list/ListIcon";
 import DynamicList from "../../common/component/list/DynamicList";
 import {SpinLoading} from "../../common/component/loading/Loading";
-import "./homePage.scss";
+import "./HomePage.scss";
 
 /**
  * 首页

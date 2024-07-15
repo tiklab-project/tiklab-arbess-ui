@@ -1,0 +1,93 @@
+.application-feature-modal{
+    display: flex;
+    grid-gap: 15px;
+    .feature-item{
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+    .feature-item-header{
+        text-align: center;
+        margin-bottom: 15px;
+        background-color: #eff6ff;
+        padding: 8px;
+        .header-title{
+            font-size: 18px;
+            color: var(--thoughtware-blue);
+        }
+        .header-desc{
+            color: var(--thoughtware-gray-500);
+        }
+    }
+    .feature-item-body{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 0 8px;
+        .feature-item-body-title{
+            font-weight: var(--thoughtware-font-weight-bold);
+            padding-bottom: 10px;
+            .feature-item-body-title-ex{
+                font-weight: 500;
+                font-size: 12px;
+                color: var(--thoughtware-gray-500);
+                padding-left: 4px;
+            }
+        }
+        .feature-item-body-icon{
+            width: 6px;
+            height: 6px;
+            background-color: var(--thoughtware-blue);
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .feature-item-body-model{
+            flex: 1;
+            padding: 8px 0;
+            .feature-model-item{
+                display: flex;
+                align-items: center;
+                .feature-model-item-name{
+                    flex: 1;
+                    word-wrap: break-word;
+                    word-break: break-all;
+                }
+            }
+        }
+        .feature-item-body-resources{
+            height: 180px;
+            border-top: 1px solid #e5e7eb;
+            padding: 8px 0;
+            .feature-resources-item{
+                display: flex;
+                align-items: center;
+                .feature-resources-item-key{
+                    margin-right: 8px;
+                }
+                .feature-resources-item-key,.feature-resources-item-values{
+                    flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+        .feature-item-body-customer{
+            height: 180px;
+            border-top: 1px solid #e5e7eb;
+            padding: 8px 0;
+            .feature-customer-item{
+                display: flex;
+                align-items: center;
+                .feature-customer-item-value{
+                    flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

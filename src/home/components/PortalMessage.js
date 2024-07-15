@@ -12,6 +12,8 @@ import messageStore from "../store/MessageStore"
 import Profile from "../../common/component/profile/Profile";
 import "./PortalMessage.scss";
 
+const pageSize = 12;
+
 /**
  * 消息通知
  * @param props
@@ -23,7 +25,7 @@ const PortalMessage = props =>{
     const {unread,setUnread,visible,setVisible} = props
     const {findMessageItemPage,updateMessageItem,deleteMessageItem} = messageStore
     const pageParam = {
-        pageSize: 12,
+        pageSize: pageSize,
         currentPage: 1
     }
     //初始以及切换加载
@@ -43,10 +45,7 @@ const PortalMessage = props =>{
     useEffect(()=>{
         findMessageItemPage({
             status:0,
-            pageParam: {
-                pageSize: 12,
-                currentPage: 1
-            }
+            pageParam,
         }).then(res=>{
             if(res.code===0){
                 setUnread(res.data.totalRecord || 0)
@@ -96,7 +95,7 @@ const PortalMessage = props =>{
         setMessageParams({
             ...messageParams,
             pageParam:{
-                pageSize: 12,
+                pageSize: pageSize,
                 currentPage: messagePagination.currentPage + 1
             }
         })

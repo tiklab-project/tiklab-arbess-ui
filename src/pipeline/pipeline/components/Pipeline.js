@@ -181,7 +181,7 @@ const Pipeline = props =>{
     /**
      * 去添加流水线页面
      */
-    const onClick = () =>props.history.push('/pipeline/new')
+    const onClick = () =>props.history.push('/pipelineAdd')
 
     return(
         <Row className="pipeline">
@@ -190,7 +190,7 @@ const Pipeline = props =>{
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
-                xl={{ span: "18", offset: "3" }}
+                xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited mf">

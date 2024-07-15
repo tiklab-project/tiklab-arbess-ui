@@ -1,21 +1,20 @@
-import React from "react";
-import {UserVerify} from "thoughtware-eam-ui";
+import React from 'react';
 import {AppLink,HelpLink,AvatarLink} from "thoughtware-licence-ui";
 import Portal from "./Portal";
+import {UserVerify} from 'thoughtware-eam-ui'
 
-/**
- * 入口
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
-const Home = props => {
-    return  <Portal
-                {...props}
-                AppLink={<AppLink/>}
-                HelpLink={<HelpLink/>}
-                AvatarLink={<AvatarLink {...props}/>}
-            />
+const Home = props =>{
+
+    return (
+        <Portal
+            {...props}
+            AppLink={<AppLink/>}
+            HelpLink={<HelpLink/>}
+            AvatarLink={<AvatarLink {...props}/>}
+        />
+    )
 }
 
-export default UserVerify(Home,"/no-auth")
+
+export default UserVerify(Home,'/no-auth')
+
