@@ -8,6 +8,7 @@
         flex-shrink: 0;
         flex-basis: 200px;
         background: var(--thoughtware-gray-600);
+        border-right: 1px solid var(--mf-border-color);
         &-sys{
             width: 100%;
             text-align: center;

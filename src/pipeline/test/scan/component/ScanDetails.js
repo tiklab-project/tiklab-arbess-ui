@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import ListEmpty from "../../../common/component/list/ListEmpty";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
 import scanStore from "../store/ScanStore";
 import "./Scan.scss";
 

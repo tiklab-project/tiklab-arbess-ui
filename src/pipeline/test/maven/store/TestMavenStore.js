@@ -2,7 +2,7 @@ import {action} from "mobx";
 import {Axios} from "thoughtware-core-ui";
 import {message} from "antd";
 
-class MavenTestStore {
+class TestMavenStore {
 
     /**
      * 获取maven单元测试列表
@@ -47,4 +47,4 @@ class MavenTestStore {
 
 }
 
-export default new MavenTestStore();
+export default new TestMavenStore();

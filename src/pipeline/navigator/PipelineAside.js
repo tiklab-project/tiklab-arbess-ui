@@ -7,9 +7,11 @@ import {
     CaretDownOutlined,
     ClockCircleOutlined,
     CreditCardOutlined,
-    ExperimentOutlined, LeftCircleOutlined,
+    ExperimentOutlined,
+    LeftCircleOutlined,
     ScanOutlined,
-    SettingOutlined
+    SettingOutlined,
+    RadarChartOutlined
 } from "@ant-design/icons";
 import pipelineStore from "../pipeline/store/PipelineStore";
 import ListIcon from "../../common/component/list/ListIcon";
@@ -92,14 +94,14 @@ const PipelineAside= (props)=>{
             icon: <ClockCircleOutlined />,
         },
         {
-            id:`/pipeline/${id}/scan`,
-            title: "代码扫描",
-            icon: <ScanOutlined />,
-        },
-        {
             id:`/pipeline/${id}/test`,
             title: "测试报告",
             icon: <ExperimentOutlined />,
+        },
+        {
+            id:`/pipeline/${id}/statistics`,
+            title: "统计",
+            icon: <RadarChartOutlined />,
         },
     ]
 

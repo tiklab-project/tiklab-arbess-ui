@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
 import {observer} from "mobx-react";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import Page from "../../../common/component/page/Page";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import ListAction from "../../../common/component/list/ListAction";
-import {deleteSuccessReturnCurrenPage} from "../../../common/utils/Client";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import Page from "../../../../common/component/page/Page";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListAction from "../../../../common/component/list/ListAction";
+import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
 import scanStore from "../store/ScanStore";
 import ScanDetails from "./ScanDetails";
 import "./Scan.scss";

@@ -28,8 +28,15 @@ import {
     History,
     HistoryInstance,
 
-    Scan,
     Test,
+    TestScan,
+    TestOn,
+    TestMaven,
+
+
+    Statistics,
+    StatisticsOperate,
+    StatisticsResult,
 
     PipelineSetting,
     BasicInfo,
@@ -192,12 +199,39 @@ const routers=[
                     {
                         path:"/pipeline/:id/test",
                         component: Test,
-                        exact:true,
+                        routes:[
+                            {
+                                path:"/pipeline/:id/test/scan",
+                                component: TestScan,
+                                exact: true,
+                            },
+                            {
+                                path:"/pipeline/:id/test/teston",
+                                component: TestOn,
+                                exact: true,
+                            },
+                            {
+                                path:"/pipeline/:id/test/maven",
+                                component: TestMaven,
+                                exact: true,
+                            },
+                        ]
                     },
                     {
-                        path:"/pipeline/:id/scan",
-                        component: Scan,
-                        exact:true,
+                        path:"/pipeline/:id/statistics",
+                        component: Statistics,
+                        routes:[
+                            {
+                                path:"/pipeline/:id/statistics/operate",
+                                component: StatisticsOperate,
+                                exact: true,
+                            },
+                            {
+                                path:"/pipeline/:id/statistics/result",
+                                component: StatisticsResult,
+                                exact: true,
+                            },
+                        ]
                     },
                     {
                         path:"/pipeline/:id/set",

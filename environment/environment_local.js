@@ -1,4 +1,5 @@
-const api =  "http://192.168.10.10:8090";
+const api =  "http://matflow-ce-api.local.thoughtware.cn";
+// const api =  "http://192.168.10.10:8090";
 const base_url = JSON.stringify(api);
 
 const webpackGlobal = {

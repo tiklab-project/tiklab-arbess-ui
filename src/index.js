@@ -17,10 +17,12 @@ const Index = observer(() => {
         ...store
     }
 
-    return  <App
-                routes={routes}
-                allStore={allStore}
-            />
+    return (
+        <App
+            routes={routes}
+            allStore={allStore}
+        />
+    )
 })
 
 ReactDOM.render(<Index/>, document.getElementById("root"))

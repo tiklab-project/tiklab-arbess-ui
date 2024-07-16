@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from "react";
 import {Table, Tag,Row,Col} from "antd";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import mavenTestStore from "../store/MavenTestStore";
-import "./Test.scss";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import mavenTestStore from "../store/TestMavenStore";
+import "./TestMaven.scss";
 
 /**
  * maven单元测试详情

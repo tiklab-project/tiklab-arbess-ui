@@ -3,7 +3,7 @@ import {Select} from "antd";
 import {observer} from "mobx-react";
 import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
-import testOnStore from "../../../../../../test/store/TestOnStore";
+import testOnStore from "../../../../../../test/teston/store/TestOnStore";
 
 /**
  * teston接口测试

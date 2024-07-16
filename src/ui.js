@@ -34,10 +34,15 @@ const DesignPostprocess=AsyncComponent(()=>import("./pipeline/design/postprocess
 const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
-const Test=AsyncComponent(()=>import("./pipeline/test/component/Test"))
-const Scan=AsyncComponent(()=>import("./pipeline/scan/component/Scan"))
+const Test=AsyncComponent(()=>import("./pipeline/test/navigator/Test"))
+const TestOn=AsyncComponent(()=>import("./pipeline/test/teston/component/TestOn"))
+const TestMaven=AsyncComponent(()=>import("./pipeline/test/maven/component/TestMaven"))
+const TestScan=AsyncComponent(()=>import("./pipeline/test/scan/component/Scan"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
+const Statistics=AsyncComponent(()=>import("./pipeline/statistics/navigator/Statistics"))
+const StatisticsOperate=AsyncComponent(()=>import("./pipeline/statistics/operate/Operate"))
+const StatisticsResult=AsyncComponent(()=>import("./pipeline/statistics/result/Result"))
 
 /**
  * 系统设置
@@ -139,8 +144,15 @@ export {
     History,
     HistoryInstance,
 
-    Scan,
+
     Test,
+    TestScan,
+    TestOn,
+    TestMaven,
+
+    Statistics,
+    StatisticsOperate,
+    StatisticsResult,
 
     PipelineSetting,
     BasicInfo,
