@@ -72,14 +72,12 @@ const History = props =>{
 
     let inters=null
     useEffect(()=>{
-        findInstance()
-    },[params,match.params.id])
-
-    useEffect(()=>{
         if(detail){
             clearInterval(inters)
+        }else {
+            findInstance()
         }
-    },[detail])
+    },[detail,params,match.params.id])
 
     /**
      * 获取历史列表
@@ -361,7 +359,6 @@ const History = props =>{
                         historyType={"drawer"}
                         historyItem={historyItem}
                         setHistoryItem={setHistoryItem}
-                        findHistory={findInstance}
                     />
                 </PipelineDrawer>
             </Col>

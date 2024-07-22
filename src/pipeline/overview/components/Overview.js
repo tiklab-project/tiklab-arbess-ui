@@ -83,7 +83,7 @@ const Overview = props =>{
                 data: [
                     { value: data && data.successNumber, name: "成功" },
                     { value: data && data.errorNumber, name: "失败" },
-                    { value: data && data.removeNumber, name: "其他" },
+                    { value: data && data.haltNumber, name: "终止" },
                 ],
             }]
         }
@@ -97,7 +97,7 @@ const Overview = props =>{
             icon:<CheckSquareOutlined className="census-successNumber"/>,
         },
         {
-            title:"停止",
+            title:"终止",
             num: <span className="census-removeNumber">{census?.haltNumber || 0} 次</span>,
             icon:<ExclamationCircleOutlined className="census-removeNumber"/>,
         },

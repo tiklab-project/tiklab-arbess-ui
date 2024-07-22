@@ -2,6 +2,7 @@ import {store as pipelineStore} from "./store";
 import App from "./app";
 import Portal from "./home/components/Portal";
 import Aside from "./common/component/aside/Aside";
+import ProjectAside from "./common/component/aside/ProjectAside";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
 const Index=AsyncComponent(()=>import("./home/components/Home"))
@@ -117,6 +118,7 @@ export {
     App,
     Portal,
     Aside,
+    ProjectAside,
 
     Index,
     Login,

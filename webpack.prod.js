@@ -3,16 +3,9 @@ const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const baseWebpackConfig = require("./webpack.base");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const optimizeCss = require("optimize-css-assets-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const webpack = require("webpack");
-const customEnv = process.env.CUSTOM_ENV;
-const {webpackGlobal} = require("./environment/environment_" + customEnv);
-const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = merge(baseWebpackConfig, {
     mode: "production",
@@ -31,27 +24,6 @@ module.exports = merge(baseWebpackConfig, {
                 }
             }
         }),
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            alwaysWriteToDisk: true,
-            title:"MatFlow",
-            template: path.resolve(__dirname, "./public/index.template.html"),
-            favicon: path.resolve('./public/matflowIcon.png'),
-            hash: false,
-            filename: "index.html",
-            inject: "body",
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true,
-                removeAttributeQuotes: true
-            }
-        }),
-        new webpack.DefinePlugin({ENV:JSON.stringify(customEnv), ...webpackGlobal}),
-        new MiniCssExtractPlugin({
-            filename: "css/[name].[contenthash:8].css",
-            ignoreOrder: true
-        }),
-        new CssMinimizerPlugin(),
         new ProgressBarPlugin(),
         new BundleAnalyzerPlugin(),
         new webpack.ContextReplacementPlugin(

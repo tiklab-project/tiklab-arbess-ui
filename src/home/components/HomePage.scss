@@ -2,7 +2,6 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background: var(--mf-backdrop-color);
     &-content{
         .homePage-guide{
             display: flex;
@@ -12,7 +11,6 @@
                 cursor: pointer;
                 font-size: 16px;
             }
-
         }
         .homePage-guide-title{
             height: 40px;
@@ -27,10 +25,8 @@
         }
         .home-recent{
             border-radius: 4px;
-            padding: 10px 10px 0;
-            height: 200px;
             background: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             .pipelineRecent-content{
                 display: flex;
                 justify-content: flex-start;
@@ -87,7 +83,6 @@
         }
         .home-build{
             background: #fff;
-            padding: 10px;
             border-radius: 4px;
             min-height: 200px;
             margin-bottom: var(--thoughtware-padding-item);
@@ -118,7 +113,6 @@
         }
         .home-agent{
             background: #fff;
-            padding: 10px;
             min-height: 400px;
             border-radius: 4px;
         }

@@ -116,25 +116,21 @@ const Design = props =>{
         {
             id:`/pipeline/${pipelineId}/config`,
             title:"流程设计",
-            icon: <DeploymentUnitOutlined/>,
             long:false,
         },
         {
             id:`/pipeline/${pipelineId}/config/tigger`,
             title:"触发设置",
-            icon: <CrownOutlined/>,
             long: triggerData?.length || '0'
         },
         {
             id:`/pipeline/${pipelineId}/config/vari`,
             title:"变量",
-            icon: <BugOutlined/>,
             long: variableData?.length || '0'
         },
         {
             id:`/pipeline/${pipelineId}/config/postprocess`,
             title:"后置处理",
-            icon: <PartitionOutlined/>,
             long: postprocessData?.length || '0'
         }
     ]
@@ -151,11 +147,6 @@ const Design = props =>{
                         <div className="design-top">
                             <BreadCrumb firstItem={"设计"}/>
                             <div className="changeView-btn">
-                                <Btn
-                                    isMar={true}
-                                    title={"帮助"}
-                                    onClick={()=>window.open('https://thoughtware.cn/document')}
-                                />
                                 <DesignAgent
                                     defaultAgent={defaultAgent}
                                     setDefaultAgent={setDefaultAgent}
@@ -185,12 +176,11 @@ const Design = props =>{
                                              className={`design-tab ${path===item.id?"design-active":""}`}
                                              onClick={()=>props.history.push(item.id)}
                                         >
-                                            <div className="design-tab-icon">{item.icon}</div>
                                             <div className="design-tab-title">
                                                 {item.title}
                                                 {
                                                     item?.long &&
-                                                    <span>({item.long})</span>
+                                                    <span className="design-tab-long">{item.long}</span>
                                                 }
                                             </div>
                                         </div>

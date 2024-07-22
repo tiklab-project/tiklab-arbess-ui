@@ -16,11 +16,10 @@ const Aside = props =>  {
 
     let path = props.location.pathname;
     const disable = disableFunction();
+    const authConfig = JSON.parse(localStorage.getItem("authConfig"));
 
     // 树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([""])
-
-    const authConfig = JSON.parse(localStorage.getItem("authConfig"));
 
     /**
      * 路由跳转
@@ -29,8 +28,8 @@ const Aside = props =>  {
      */
     const select = data => {
         const {isUnify,isEnhance,id} = data
-        if(isUnify && !authConfig?.authType){
-            return applyJump(`${authConfig?.authServiceUrl}/#${id}`)
+        if(!!isUnify && !authConfig?.authType){
+            return applyJump(`${authConfig?.authServiceUrl}/#${isUnify}`)
         }
         if(isEnhance && disable){
             if (typeof enhance === 'function') {
@@ -65,7 +64,7 @@ const Aside = props =>  {
                 >
                     <span>{data.title}</span>
                     {
-                        data.isUnify && !authConfig?.authType &&
+                        !!data.isUnify && !authConfig?.authType &&
                         <span className='aside-second-link'><ExportOutlined /></span>
                     }
                     {

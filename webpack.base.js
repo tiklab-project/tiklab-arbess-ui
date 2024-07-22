@@ -1,6 +1,11 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const DIST_PATH = path.resolve(__dirname, "dist");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const customEnv = process.env.CUSTOM_ENV;
+const {webpackGlobal} = require("./environment/environment_" + customEnv);
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -49,7 +54,7 @@ module.exports = {
     output: {
         filename: "js/[name].[hash:8].js",
         chunkFilename: "js/[name].[hash:8].js",
-        path: DIST_PATH,
+        path: path.resolve(__dirname, "dist"),
         publicPath: "/",
     },
     resolve: {
@@ -57,13 +62,8 @@ module.exports = {
         alias: {
             "react-dom": "@hot-loader/react-dom",
             "@src": path.join(__dirname, "./src"),
-            "@stores": path.join(__dirname, "./src/stores"),
-            "@utils": path.join(__dirname, "./src/utils"),
-            "@service": path.join(__dirname, "./src/service"),
         },
-
     },
-
     module:{
         rules: [
             {
@@ -160,6 +160,27 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            title:"MatFlow",
+            template: path.resolve(__dirname, "./public/index.template.html"),
+            favicon: path.resolve('./public/matflowIcon.png'),
+            hash: false,
+            filename: "index.html",
+            inject: "body",
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeAttributeQuotes: true
+            }
+        }),
+        new webpack.DefinePlugin({ENV:JSON.stringify(customEnv), ...webpackGlobal}),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].css",
+            ignoreOrder: true
+        }),
+        new CssMinimizerPlugin(),
     ]
 };
 

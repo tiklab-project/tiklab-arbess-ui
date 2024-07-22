@@ -612,9 +612,9 @@ const PortalFeature = props =>{
 
     const onOk = () =>{
         if(version==='cloud'){
-            window.open(`https://work.thoughtware.cn/#/enterprise/application/eas`)
+            window.open(`https://work.thoughtware.cn/#/enterprise/application/matflow`)
         } else {
-            window.open(`https://thoughtware.cn/account/subscribe/apply/eas`)
+            window.open(`https://thoughtware.cn/account/subscribe/apply/matflow`)
         }
         onCancel()
     }
@@ -711,7 +711,7 @@ const PortalFeature = props =>{
             <BaseModal
                 width={700}
                 title={"版本功能"}
-                okText={'订阅'}
+                okText={isVip?'订阅':'续订'}
                 visible={visible}
                 onOk={onOk}
                 onCancel={onCancel}

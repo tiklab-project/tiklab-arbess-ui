@@ -3,9 +3,8 @@ import {Badge} from "antd";
 import {BellOutlined, ClockCircleOutlined, HomeOutlined,ProjectOutlined,SettingOutlined} from "@ant-design/icons";
 import PortalMessage from "./PortalMessage";
 import {inject, observer} from "mobx-react";
-import logo from 'thoughtware-core-ui/es/assests/matflow.png';
 import PortalFeature from "./PortalFeature";
-import {getUser} from "thoughtware-core-ui";
+import {getUser,productWhiteImg} from "thoughtware-core-ui";
 import {renderRoutes} from "react-router-config";
 import './Portal.scss';
 
@@ -51,7 +50,7 @@ const Layout = props =>{
                 <div className="layout-header">
                     {AppLink}
                     <div className='layout-header-logo' onClick={()=>props.history.push('/home')}>
-                        <img alt={'门户中心'} src={logo} height={24} width={24}/>
+                        <img alt={'MatFlow'} src={productWhiteImg.matflow} height={24} width={22}/>
                         <div>MatFlow</div>
                     </div>
                 </div>

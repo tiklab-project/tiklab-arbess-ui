@@ -12,68 +12,79 @@ const Result = props =>{
 
     const {findPipelineRunResultCount} = statisticsStore
 
-    const numberRef = useRef(null);
-    const rateRef = useRef(null);
+    const chartRefs = {
+        numberTrend:useRef(null),
+        rateTrend: useRef(null)
+    }
 
     //加载状态
-    const [numberSpinning,setNumberSpinning] = useState(false);
-    const [rateSpinning,setRateSpinning] = useState(false);
+    const [spinning, setSpinning] = useState({
+        numberTrend: false,
+        rateTrend: false,
+    })
     //时间筛选
     const [countDay,setCountDay] = useState(7);
 
-    let numberChart,rateChart;
     useEffect(() => {
-        return ()=>{
-            if(numberChart){
-                numberChart.dispose();
-            }
-            if(rateChart){
-                rateChart.dispose();
-            }
-        }
+        const handleResize = () => {
+            Object.keys(chartRefs).forEach((key) => {
+                const chartDom = chartRefs[key].current;
+                if (chartDom) {
+                    const chart = echarts.getInstanceByDom(chartDom);
+                    if (chart) {
+                        chart.resize();
+                    }
+                }
+            });
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            Object.keys(chartRefs).forEach((key) => {
+                const chartDom = chartRefs[key].current;
+                if (chartDom) {
+                    const chart = echarts.getInstanceByDom(chartDom);
+                    if (chart) {
+                        chart.dispose();
+                    }
+                }
+            });
+        };
     }, []);
 
     useEffect(() => {
-        findNumberResult()
-        findRateResult()
+        fetchStatistics()
     }, [countDay]);
 
-    const findResultCount = (type) => {
-        return findPipelineRunResultCount({
-            pipelineId:match.params.id,
-            countDay,type
-        })
+    const fetchStatistics = () =>{
+        fetchTrendStatistics('number','numberTrend','次')
+        fetchTrendStatistics('rate','rateTrend','%')
     }
 
-    const findNumberResult = () => {
-        setNumberSpinning(true)
-        findResultCount('number').then(res=>{
+    const fetchTrendStatistics = (type, chartKey, unit) => {
+        setSpinning(pev=>({...pev, [chartKey]: true}));
+        findPipelineRunResultCount({pipelineId:match.params.id, countDay,type}).then(res=>{
             if(res.code===0){
-                echartsHtml(res.data,numberChart,numberRef,'number')
+                renderTrendChart(res.data, chartKey, unit);
             }
-            setNumberSpinning(false)
+            setSpinning(pev=>({...pev, [chartKey]: false}));
         })
     }
 
-    const findRateResult = () => {
-        setRateSpinning(true)
-        findResultCount('rate').then(res=>{
-            if(res.code===0){
-                echartsHtml(res.data,rateChart,rateRef,'rate')
-            }
-            setRateSpinning(false)
-        })
-    }
-
-    const echartsHtml = (data,chart,ref,title) => {
-        const chartDom = ref.current;
-        chart = echarts.getInstanceByDom(chartDom);
-        if (!chart) {
-            chart = chartDom && echarts.init(chartDom);
-        }
+    const renderTrendChart = (data,chartKey,unit) => {
+        const chartDom = chartRefs[chartKey].current;
+        if(!chartDom){return;}
+        let chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
         const option = {
             tooltip: {
-                trigger: 'axis'
+                trigger: 'axis',
+                formatter: (params) => {
+                    let tooltipText = params[0].name;
+                    params.forEach((item) => {
+                        tooltipText += `<br/>${item.seriesName}: ${item.value}${unit}`;
+                    });
+                    return tooltipText;
+                }
             },
             xAxis: {
                 type: 'category',
@@ -82,27 +93,27 @@ const Result = props =>{
             yAxis: {
                 type: 'value',
                 axisLabel: {
-                    formatter: title==='number' ? '{value}次' : '{value}%'
+                    formatter: `{value}${unit}`
                 }
             },
             legend:{
-                data: title==='number'? ['成功数', '失败数', '终止数']:['成功率', '失败率', '终止率'],
+                data: unit==='次'? ['成功数', '失败数', '终止数']:['成功率', '失败率', '终止率'],
                 top:20
             },
             series: [
                 {
                     type: 'line',
-                    name: title==='number'?'成功数':'成功率',
+                    name: unit==='次'?'成功数':'成功率',
                     data: data && data.map(item => item.successNumber),
                 },
                 {
                     type: 'line',
-                    name: title==='number'?'失败数':'失败率',
+                    name: unit==='次'?'失败数':'失败率',
                     data: data && data.map(item => item.errorNumber),
                 },
                 {
                     type: 'line',
-                    name: title==='number'? '终止数':'终止率',
+                    name: unit==='次' ? '终止数':'终止率',
                     data: data && data.map(item => item.haltNumber),
                 }
             ]
@@ -136,18 +147,17 @@ const Result = props =>{
                     </Select>
                 </div>
                 <div className='statistics-box'>
-                    <div className='statistics-item'>
-                        <div className='statistics-title'>结果数量统计</div>
-                        <Spin spinning={numberSpinning}>
-                            <div ref={numberRef} style={{ height:360 }} />
-                        </Spin>
-                    </div>
-                    <div className='statistics-item'>
-                        <div className='statistics-title'>结果概率统计</div>
-                        <Spin spinning={rateSpinning}>
-                            <div ref={rateRef} style={{ height: 360 }} />
-                        </Spin>
-                    </div>
+                    {['numberTrend', 'rateTrend'].map((key) => (
+                        <div className='statistics-item' key={key}>
+                            <div className='statistics-title'>
+                                {key === 'numberTrend' && '结果数量统计'}
+                                {key === 'rateTrend' && '结果概率统计'}
+                            </div>
+                            <Spin spinning={spinning[key]}>
+                                <div ref={chartRefs[key]} style={{ height: 360 }} />
+                            </Spin>
+                        </div>
+                    ))}
                 </div>
             </Col>
         </Row>

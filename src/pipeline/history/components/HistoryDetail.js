@@ -16,7 +16,7 @@ import "./HistoryDetail.scss";
  */
 const HistoryDetail = props =>{
 
-    const {historyItem,setHistoryItem,back,historyType,findHistory} = props
+    const {historyItem,setHistoryItem,back,historyType} = props
 
     const {findOneInstance,findTaskInstance,findStageInstance} = historyStore
 
@@ -78,7 +78,6 @@ const HistoryDetail = props =>{
             if(res.code===0){
                 setHistoryItem(res.data)
             }
-            findHistory()
         })
     }
 
@@ -117,10 +116,8 @@ const HistoryDetail = props =>{
                     setTimeout(()=>findTask("end"),1000)
                 }
             }
-        }
-        else {
+        } else {
             clearInterval(inter)
-            findHistory()
         }
     }
 

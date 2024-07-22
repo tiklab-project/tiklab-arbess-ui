@@ -20,22 +20,17 @@ const HomePage = props =>{
     const {findPipelineRecently,findAllOpen} = homePageStore;
     const {findlogpage} = overviewStore
 
-    // 常用流水线加载
+    //常用流水线加载
     const [newlyLoading,setNewlyLoading] = useState(true)
-
-    // 常用流水线列表
+    //常用流水线列表
     const [newlyBuild,setNewlyBuild] = useState([])
-
-    // 最近构建的流水线加载
+    //最近构建的流水线加载
     const [buildLoading,setBuildLoading] = useState(true)
-
-    // 最近构建的流水线列表
+    //最近构建的流水线列表
     const [newlyOpen,setNewlyOpen] = useState([]);
-
-    // 最新动态加载
+    //最新动态加载
     const [dynaLoading,setDynaLoading] = useState(true)
-
-    // 最新动态
+    //最新动态
     const [dyna,setDyna] = useState([]);
 
     useEffect(()=>{
