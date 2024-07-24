@@ -15,7 +15,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: var(--thoughtware-padding-item) var(--thoughtware-padding-item) 0;
+        padding: var(--thoughtware-padding-item) 30px 0;
     }
     .changeView-type{
         display: flex;
@@ -34,7 +34,7 @@
     }
     .design-tabs{
         display: flex;
-        padding: 0 var(--thoughtware-padding-item);
+        padding: 0 30px;
         height: 40px;
         line-height: 40px;
         .design-tab{
@@ -48,8 +48,9 @@
                 padding-right: 2px;
             }
             .design-tab-long{
-                font-size: 13px;
-                padding-left: 1px;
+                font-size: 12px;
+                padding-left: 3px;
+                color: #999;
             }
         }
         .design-active{

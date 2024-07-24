@@ -32,19 +32,19 @@ const Setting = props =>{
                     id: "/setting/user",
                     title: "用户",
                     purviewCode: "user",
-                    isUnify:"/user/orga",
+                    isUnify:"/user/user",
                 },
                 {
                     id: "/setting/userGroup",
                     title: "用户组",
                     purviewCode: "user_group",
-                    isUnify:"/user/orga",
+                    isUnify:"/user/userGroup",
                 },
                 {
                     id: "/setting/dir",
                     title: "用户目录",
                     purviewCode: "user_dir",
-                    isUnify:"/user/orga",
+                    isUnify:"/user/dir",
                 },
                 {
                     id:"/setting/role",

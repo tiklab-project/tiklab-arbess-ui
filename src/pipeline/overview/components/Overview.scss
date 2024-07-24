@@ -1,80 +1,138 @@
+$block-spacing: 30px;
+$inline-spacing: 15px;
+
 .overview{
     width: 100%;
     height: 100%;
     overflow: auto;
-    .overview-top{
-        padding-bottom: var(--thoughtware-padding-item);
+    .overview-title{
+        font-weight: var(--thoughtware-font-weight-bold);
     }
-    .overview-guide{
+    .echarts-result-title{
+        padding-bottom: 15px;
+    }
+    .overview-upper{
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 40px;
-        .overview-guide-title{
-            font-weight: var(--thoughtware-font-weight-bold);
-            .overview-guide-title-icon{
-                font-size: 16px;
-            }
-            .overview-guide-title-name{
-                padding-left: 8px;
-            }
-        }
-        .overview-guide-skip{
-            cursor: pointer;
-            font-size: 16px;
-        }
-    }
-    .overview-census{
-        height: 345px;
-        min-width: 550px;
-        border-radius: 4px;
-        background: #fff;
-        margin-bottom: var(--thoughtware-padding-item);
-        &-bottom{
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-        }
-        &-stat{
-            padding-top: 10px;
-            .stat-div{
-                width: 240px;
+        margin-bottom: $block-spacing;
+        .upper-pipeline-box{
+            flex: 1;
+            border-radius: 4px;
+            background: var(--mf-backdrop-color);
+            margin-right: $inline-spacing;
+            padding: var(--thoughtware-padding);
+            .upper-pipeline-info{
                 display: flex;
                 align-items: center;
+                padding-bottom: 15px;
+                .mf-listname-icon{
+                    width: 24px;
+                    height: 24px;
+                    line-height: 24px;
+                }
+            }
+            .upper-pipeline-user{
+                display: flex;
+                align-items: center;
+                padding-bottom: 15px;
+                .ant-avatar{
+                    width: 24px;
+                    height: 24px;
+                    background: #8e9bed;
+                }
+                .pipeline-user-name{
+                    padding-left: 10px;
+                    .pipeline-user-name-desc{
+                        padding-top: 5px;
+                        color: var(--thoughtware-gray-500);
+                        font-size: var(--thoughtware-font-12);
+                    }
+                }
+            }
+            .upper-pipeline-status{
+                display: flex;
                 justify-content: space-between;
-                padding: 10px 0;
-                .stat-div-title{
-                    font-size: 16px;
+                padding-bottom: 15px;
+                .pipeline-status-item{
+                    display: flex;
+                    align-items: center;
+                    .pipeline-status-item-icon{
+                        padding-right: 10px;
+                        font-size: 18px;
+                    }
+                    .pipeline-status-item{
+                        &-num{
+                            color: #666666
+                        }
+                        &-success{
+                            color: #77b3eb
+                        }
+                        &-error{
+                            color: #f06f6f
+                        }
+                        &-halt{
+                            color: #f6c659
+                        }
+                    }
+                    .pipeline-status-item-text{
+                        padding-top: 5px;
+                        font-size: var(--thoughtware-font-12);
+                        color: var(--thoughtware-gray-500);
+                    }
                 }
-                .stat-div-title-icon{
-                    padding-right: 10px;
+            }
+            .upper-pipeline-state{
+                display: flex;
+                align-items: center;
+                padding-bottom: 15px;
+                .pipeline-state-icon{
+                    width: 24px;
+                    font-size: 20px;
+                    margin-right: 10px;
+                    color: #666666;
                 }
-                .census{
-                    &-num{
-                        font-size: 16px;
-                    }
-                    &-number{
-                        color: #f6c659
-                    }
-                    &-successNumber{
-                        color: #77b3eb
-                    }
-                    &-errorNumber{
-                        color: #f06f6f
-                    }
-                    &-removeNumber{
-                        color: #928484
-                    }
-                    &-time{
-                        color:#6852e0cf
-                    }
+                .pipeline-state-desc{
+                    padding-top: 5px;
+                    font-size: var(--thoughtware-font-12);
+                    color: var(--thoughtware-gray-500);
+                }
+            }
+        }
+        .upper-echarts-box{
+            flex: 1;
+            border-radius: 4px;
+            background: var(--mf-backdrop-color);
+            padding: var(--thoughtware-padding-item);
+        }
+    }
+    .overview-center{
+        margin-bottom: $block-spacing;
+        .overview-center-box{
+            display: flex;
+            padding-top: 15px;
+            .center-echarts-box{
+                flex: 1;
+                border-radius: 4px;
+                background: var(--mf-backdrop-color);
+                padding: var(--thoughtware-padding-item);
+                &:first-child{
+                    margin-right: $inline-spacing;
                 }
             }
         }
     }
-    .overview-dyna{
-        background: #fff;
-        min-height: 420px;
-        border-radius: 4px;
+    .overview-bottom{
+        .overview-bottom-box{
+            display: flex;
+            padding-top: 15px;
+            .bottom-echarts-box{
+                flex: 1;
+                border-radius: 4px;
+                background: var(--mf-backdrop-color);
+                padding: var(--thoughtware-padding-item);
+                &:first-child{
+                    margin-right: $inline-spacing;
+                }
+            }
+        }
     }
 }

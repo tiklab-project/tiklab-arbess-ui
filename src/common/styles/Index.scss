@@ -99,7 +99,7 @@ ul li{
 }
 
 .ant-message{
-    top: 50px;
+    top: 60px;
     .ant-message-notice-content{
         width: 30%;
         background: #e8eaf3;
@@ -145,7 +145,7 @@ ul li{
     --thoughtware-black: #000;   /*主色调黑 */
     --thoughtware-blue: #0d66e4;   /* 主色调蓝*/
     --thoughtware-gray-200: #ececec;  /*border 的边线 */
-    --thoughtware-gray-300: #EDF0F5;  /*hover颜色 */
+    --thoughtware-gray-300: #edf0f5;  /*hover颜色 */
     --thoughtware-gray-400: #e3e8f0;  /*左侧导航 选中颜色 */
     --thoughtware-gray-500: #999; /* 文字次级颜色灰色调*/
     --thoughtware-gray-600:#f7f7f7; /* 内容区域侧边栏色调 */
@@ -171,9 +171,7 @@ ul li{
     --thoughtware-icon-size-24: 24px;
     --thoughtware-icon-size-32: 32px;
 
-
     --mf-border-color: #ececec;
-    --mf-sider-color: #efefef;
     --mf-select-color: #e3e8f0;
     --mf-hover-color: #edf0f5;
     --mf-backdrop-color: #f7f7f7;

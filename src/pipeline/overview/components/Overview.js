@@ -1,19 +1,19 @@
-import React,{useEffect,useState} from "react";
-import {Row,Col} from "antd";
+import React, {useEffect, useRef, useState} from "react";
+import {Row, Col, Spin} from "antd";
 import {
-    AimOutlined,
     BorderOuterOutlined,
+    CalendarOutlined,
     CheckSquareOutlined,
-    ClockCircleOutlined,
     CloseSquareOutlined,
+    DashboardOutlined,
     ExclamationCircleOutlined,
-    PieChartOutlined,
-    RightOutlined
+    FundProjectionScreenOutlined,
 } from "@ant-design/icons";
-import DynamicList from "../../../common/component/list/DynamicList";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import echarts from "../../../common/component/echarts/Echarts";
-import overviewStore from "../store/OverviewStore";
+import ListIcon from "../../../common/component/list/ListIcon";
+import Profile from "../../../common/component/profile/Profile";
+import statisticsStore from "../../statistics/common/StatisticsStore";
+import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import "./Overview.scss";
 
 /**
@@ -26,55 +26,152 @@ const Overview = props =>{
 
     const {match:{params}} = props
 
-    const {pipelineCensus,findlogpage} = overviewStore
+    const {
+        findPipelineSurveyCount,findPipelineRunResultCount,findPipelineSurveyResultCount,
+        findPipelineLogTypeCount,findPipelineLogUserCount
+    } = statisticsStore;
 
-    // 运行概况
-    const [census,setCensus] = useState(null)
+    const chartRefs = {
+        survey: useRef(null),
+        surveyResult: useRef(null),
+        rateTrend: useRef(null),
+        logTypeTrend:useRef(null),
+        logUserTrend:useRef(null),
+    }
 
-    // 动态
-    const [dynaData,setDynaData] = useState({});
+    //流水线概况
+    const [pipelineSurveyCount,setPipelineSurveyCount] = useState(null);
+    //加载状态
+    const [spinning,setSpinning] = useState({
+        survey:false,
+        surveyResult:false,
+        rateTrend:false,
+        logTypeTrend:false,
+        logUserTrend:false,
+    })
+
+    useEffect(() => {
+        const handleResize = () => {
+            Object.keys(chartRefs).forEach((key) => {
+                const chartDom = chartRefs[key].current;
+                if (chartDom) {
+                    const chart = echarts.getInstanceByDom(chartDom);
+                    if (chart) {
+                        chart.resize();
+                    }
+                }
+            });
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            Object.keys(chartRefs).forEach((key) => {
+                const chartDom = chartRefs[key].current;
+                if (chartDom) {
+                    const chart = echarts.getInstanceByDom(chartDom);
+                    if (chart) {
+                        chart.dispose();
+                    }
+                }
+            });
+        };
+    }, []);
 
     useEffect(()=>{
-        // 运行概况
-        pipelineCensus(params.id).then(res=>{
-            const data = res.data
-            if(res.code===0){
-                setCensus(data)
-                renderEchart(data)
-            }
-        })
-        // 流水线动态
-        findlogpage({
-            data:{pipelineId:[params.id]},
-            pageParam:{
-                pageSize:10,
-                currentPage:1
-            }
-        }).then(res=>{
-            if(res.code===0){
-                setDynaData({
-                    dynamicList: res.data.dataList || [],
-                })
-            }
-        })
+        fetchSurveyCount()
     },[])
 
-    /**
-     * 渲染图表
-     * @param data：图标所需数据
-     */
-    const renderEchart = data =>{
-        const chartDom=document.getElementById("burn-down")
-        // 获取实例
-        let myChart=chartDom && echarts.getInstanceByDom(chartDom)
+    const fetchSurveyCount = () => {
+        findPipelineSurvey('survey');
+        fetchTrendStatistics('rate','rateTrend');
+        findPipelineSurveyResult('surveyResult');
+        findPipelineLogType('logTypeTrend');
+        findPipelineLogUser('logUserTrend');
+    }
 
-        if (!myChart) // 如果不存在则创建
-        {
-            myChart=chartDom && echarts.init(chartDom)
-        }
-        const option={
-            tooltip: {
-                formatter: "{b}: {c} ({d}%)"
+    /**
+     * 流水线概况统计
+     */
+    const findPipelineSurvey = (chartKey) => {
+        setSpinning(pev=>({...pev, [chartKey]: true}));
+        findPipelineSurveyCount(params.id).then(res=>{
+            if(res.code===0){
+                setPipelineSurveyCount(res.data)
+                renderSurveyChart(res.data,chartKey)
+            }
+            setSpinning(pev=>({...pev, [chartKey]: false}));
+        })
+    }
+
+    /**
+     * 最近运行概率统计
+     */
+    const fetchTrendStatistics = (type, chartKey) => {
+        setSpinning(pev=>({...pev, [chartKey]: true}));
+        findPipelineRunResultCount({pipelineId:params.id, countDay:30,type}).then(res=>{
+            if(res.code===0){
+                renderTrendChart(res.data, chartKey);
+            }
+            setSpinning(pev=>({...pev, [chartKey]: false}));
+        })
+    }
+
+    /**
+     * 最近运行结果统计
+     */
+    const findPipelineSurveyResult = (chartKey) => {
+        setSpinning(pev=>({...pev, [chartKey]: true}));
+        findPipelineSurveyResultCount(params.id).then(res=>{
+            if(res.code===0){
+                renderSurveyResultChart(res.data,chartKey)
+            }
+            setSpinning(pev=>({...pev, [chartKey]: false}));
+        })
+    }
+
+    /**
+     * 动态类型
+     */
+    const findPipelineLogType = (chartKey) => {
+        setSpinning(pev=>({...pev, [chartKey]: true}));
+        findPipelineLogTypeCount(params.id).then(res=>{
+            if(res.code===0){
+                renderLogTypeChart(res.data,chartKey)
+            }
+            setSpinning(pev=>({...pev, [chartKey]: false}));
+        })
+    }
+
+    /**
+     * 动态用户操作
+     */
+    const findPipelineLogUser = (chartKey) => {
+        setSpinning(pev=>({...pev, [chartKey]: true}));
+        findPipelineLogUserCount(params.id).then(res=>{
+            if(res.code===0){
+                renderLogUserChart(res.data,chartKey)
+            }
+            setSpinning(pev=>({...pev, [chartKey]: false}));
+        })
+    }
+
+
+    /**
+     * 饼图(概况统计)
+     * @param data
+     * @param chartKey
+     */
+    const renderSurveyChart = (data,chartKey) => {
+        const chartDom = chartRefs[chartKey].current;
+        if(!chartDom){return;}
+        let chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+        const option = {
+            tooltip: {formatter: "{b}: {c} ({d}%)"},
+            label: {formatter: '{b}: {@2012} ({d}%)'},
+            legend: {
+                orient: 'vertical',
+                right: 15,
+                data: ["成功", "失败", "终止"],
             },
             color:["#77b3eb","#f06f6f","#f6c659"],
             type: "pie",
@@ -87,36 +184,164 @@ const Overview = props =>{
                 ],
             }]
         }
-        myChart && myChart.setOption(option)
+        chart && chart.setOption(option);
     }
 
-    const status = [
-        {
-            title:"成功",
-            num:<span className="census-successNumber">{census?.successNumber || 0} 次</span>,
-            icon:<CheckSquareOutlined className="census-successNumber"/>,
-        },
-        {
-            title:"终止",
-            num: <span className="census-removeNumber">{census?.haltNumber || 0} 次</span>,
-            icon:<ExclamationCircleOutlined className="census-removeNumber"/>,
-        },
-        {
-            title:"失败",
-            num:<span className="census-errorNumber">{census?.errorNumber || 0} 次</span>,
-            icon:<CloseSquareOutlined className="census-errorNumber"/>,
-        },
-        {
-            title:"执行次数",
-            num:<span className="census-number">{census?.allNumber || 0} 次</span>,
-            icon:<BorderOuterOutlined className="census-number"/>,
-        },
-        {
-            title:"平均执行时长",
-            num:<span className="census-time">{census?.time || '--'}</span>,
-            icon:<ClockCircleOutlined className="census-time"/>
-        },
-    ]
+    /**
+     * 折线图(最近运行概率统计)
+     * @param data
+     * @param chartKey
+     */
+    const renderTrendChart = (data,chartKey) => {
+        const chartDom = chartRefs[chartKey].current;
+        if(!chartDom){return;}
+        let chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+        const option = {
+            tooltip: {
+                trigger: 'axis',
+                formatter: (params) => {
+                    let tooltipText = params[0].name;
+                    params.forEach((item) => {
+                        tooltipText += `<br/>${item.seriesName}: ${item.value}%`;
+                    });
+                    return tooltipText;
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: data && data.map(item=>item.day),
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: `{value}%`
+                }
+            },
+            legend:{show:false},
+            series: [
+                {
+                    type: 'line',
+                    name: '成功率',
+                    data: data && data.map(item => item.successNumber),
+                },
+                {
+                    type: 'line',
+                    name: '失败率',
+                    data: data && data.map(item => item.errorNumber),
+                },
+                {
+                    type: 'line',
+                    name: '终止率',
+                    data: data && data.map(item => item.haltNumber),
+                }
+            ]
+        }
+        chart && chart.setOption(option);
+    }
+
+    /**
+     * 柱状图(最近运行结果统计)
+     * @param data
+     * @param chartKey
+     */
+    const renderSurveyResultChart = (data,chartKey) => {
+        const chartDom = chartRefs[chartKey].current;
+        if(!chartDom){return;}
+        let chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+        const option = {
+            tooltip: {trigger: 'axis'},
+            xAxis: {
+                type: 'category',
+                data: ['成功数', '失败数', '终止数'],
+            },
+            yAxis: {type: 'value',},
+            series: [
+                {
+                    data: [
+                        { value: data.successNumber || 0, itemStyle: { color: '#77b3eb' } },
+                        { value: data.errorNumber || 0, itemStyle: { color: '#f06f6f' } },
+                        { value: data.haltNumber || 0, itemStyle: { color: '#f6c23e' } }
+                    ],
+                    type: 'bar'
+                }
+            ]
+        }
+        chart && chart.setOption(option);
+    }
+
+    /**
+     * 柱状图(动态类型)
+     * @param data
+     * @param chartKey
+     */
+    const renderLogTypeChart = (data,chartKey) => {
+        const chartDom = chartRefs[chartKey].current;
+        if(!chartDom){return;}
+        let chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+        const option = {
+            tooltip: {trigger: 'axis'},
+            xAxis: {
+                type: 'category',
+                data: data.map(item=>item?.loggingType?.name),
+            },
+            yAxis: {type: 'value',},
+            series: [
+                {
+                    data: data.map(item => item?.typeNumber || 0),
+                    type: 'bar',
+                }
+            ]
+        }
+        chart && chart.setOption(option);
+    }
+
+    /**
+     * 折线图(用户操作)
+     * @param data
+     * @param chartKey
+     */
+    const renderLogUserChart = (data,chartKey) => {
+        const chartDom = chartRefs[chartKey].current;
+        if(!chartDom){return;}
+        let chart = echarts.getInstanceByDom(chartDom) || echarts.init(chartDom);
+        // 初始化 x 轴数据和 series 数据
+        const xAxisData = data.map(item=>item?.loggingType.id);
+        const seriesData = data.map(item => {
+            const userCountList = item.userCountList;
+            return userCountList.map(dl => ({
+                id: dl.user.id,
+                name: dl.user?.nickname || dl.user.name,
+                value: dl.typeNumber,
+            }));
+        }).flat();
+        const uniqueSeriesData =  seriesData.reduce((acc, dl) => {
+            // 检查当前 dl 是否已经存在于 acc 中，如果不存在则添加到 acc 中
+            if (!acc.some(item => item.id === dl.id)) {
+                acc.push({
+                    id: dl.id,
+                    name: dl.name,
+                    type: 'line',
+                    data: xAxisData.map(id => {
+                        const loggingType = data.find(item => item?.loggingType.id === id);
+                        const loggingTypeUser = loggingType.userCountList.find(d => d.user.id === dl.id);
+                        return loggingTypeUser ? loggingTypeUser.typeNumber : 0;
+                    })
+                });
+            }
+            return acc;
+        }, [])
+        const option = {
+            tooltip: {trigger: 'axis'},
+            xAxis: {
+                type: 'category',
+                data: data.map(item=>item?.loggingType.name),
+            },
+            yAxis: {type: 'value',},
+            series: uniqueSeriesData
+        }
+        chart && chart.setOption(option);
+    }
+
 
     return(
         <Row className="overview">
@@ -129,49 +354,145 @@ const Overview = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited">
-                    <div className="overview-top">
-                        <BreadCrumb firstItem={"概况"}/>
-                    </div>
-                    <div className="overview-bottom">
-                        <div className="overview-census">
-                            <div className='overview-guide'>
-                                <div className='overview-guide-title'>
-                                    <PieChartOutlined className='overview-guide-title-icon'/>
-                                    <span className='overview-guide-title-name'>运行概况</span>
+                    <div className="overview-upper">
+                        <div className="upper-pipeline-box">
+                            <Spin spinning={spinning.survey}>
+                                <div className='upper-pipeline-info'>
+                                    <ListIcon
+                                        colors={pipelineSurveyCount?.pipeline?.color}
+                                        text={pipelineSurveyCount?.pipeline?.name}
+                                    />
+                                    <div className='overview-title'>
+                                        {pipelineSurveyCount?.pipeline?.name}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="overview-census-bottom">
-                                <div className="chart-box" id="burn-down" style={{width:400,height:300}}/>
-                                <div className="overview-census-stat">
-                                    {
-                                        status.map(item=>{
-                                            return(
-                                                <div className="stat-div" key={item.title}>
-                                                    <div className="stat-div-title">
-                                                        <span className="stat-div-title-icon">{item.icon}</span>
-                                                        <span className="stat-div-title-name">{item.title}</span>
-                                                    </div>
-                                                    <div className="census-num">{item.num} </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
+                                <div className='upper-pipeline-user'>
+                                    <Profile
+                                        userInfo={pipelineSurveyCount?.user}
+                                    />
+                                    <div className='pipeline-user-name'>
+                                        <div>{pipelineSurveyCount?.user.nickname || pipelineSurveyCount?.user.name}</div>
+                                        <div className='pipeline-user-name-desc'>负责人</div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div className='upper-pipeline-status'>
+                                    <div className="pipeline-status-item">
+                                        <div className='pipeline-status-item-icon'>
+                                            <BorderOuterOutlined className='pipeline-status-item-num'/>
+                                        </div>
+                                        <div>
+                                            <div>{pipelineSurveyCount?.allInstanceNumber || '0'}</div>
+                                            <div className='pipeline-status-item-text'>全部</div>
+                                        </div>
+                                    </div>
+                                    <div className="pipeline-status-item">
+                                        <div className='pipeline-status-item-icon'>
+                                            <CheckSquareOutlined className='pipeline-status-item-success'/>
+                                        </div>
+                                        <div className='pipeline-status-item-icon'>
+                                            <div>{pipelineSurveyCount?.successNumber || '0'}</div>
+                                            <div className='pipeline-status-item-text'>成功</div>
+                                        </div>
+                                    </div>
+                                    <div className="pipeline-status-item">
+                                        <div className='pipeline-status-item-icon'>
+                                            <CloseSquareOutlined className='pipeline-status-item-error'/>
+                                        </div>
+                                        <div>
+                                            <div>{pipelineSurveyCount?.errorNumber || '0'}</div>
+                                            <div className='pipeline-status-item-text'>失败</div>
+                                        </div>
+                                    </div>
+                                    <div className="pipeline-status-item">
+                                        <div className='pipeline-status-item-icon'>
+                                            <ExclamationCircleOutlined className='pipeline-status-item-halt'/>
+                                        </div>
+                                        <div>
+                                            <div>{pipelineSurveyCount?.haltNumber || '0'}</div>
+                                            <div className='pipeline-status-item-text'>终止</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='upper-pipeline-state'>
+                                    <div className='pipeline-state-icon'>
+                                        <FundProjectionScreenOutlined />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {pipelineSurveyCount?.pipeline?.state === '1' ? '运行中' : '未运行'}
+                                        </div>
+                                        <div className='pipeline-state-desc'>
+                                            状态
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='upper-pipeline-state'>
+                                    <div className='pipeline-state-icon'>
+                                        <DashboardOutlined />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {pipelineSurveyCount?.runTime || '无'}
+                                        </div>
+                                        <div className='pipeline-state-desc'>
+                                            上次运行时长
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='upper-pipeline-state'>
+                                    <div className='pipeline-state-icon'>
+                                        <CalendarOutlined />
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {pipelineSurveyCount?.recentlyRunTime || '无'}
+                                        </div>
+                                        <div className='pipeline-state-desc'>
+                                            上次运行时间
+                                        </div>
+                                    </div>
+                                </div>
+                            </Spin>
                         </div>
-                        <div className="overview-dyna">
-                            <div className='overview-guide'>
-                                <div className='overview-guide-title'>
-                                    <AimOutlined className='overview-guide-title-icon'/>
-                                    <span className='overview-guide-title-name'>最新动态</span>
-                                </div>
-                                <div onClick={()=>props.history.push(`/pipeline/${params.id}/dyna`)}
-                                     className="overview-guide-skip"
-                                >
-                                    <RightOutlined />
-                                </div>
+                        <div className='upper-echarts-box'>
+                            <div className='echarts-result-title overview-title'>
+                                运行概率统计
                             </div>
-                            <DynamicList dynamicList={dynaData?.dynamicList || []}/>
+                            <Spin spinning={spinning.survey}>
+                                <div ref={chartRefs['survey']} style={{ height: 300 }} />
+                            </Spin>
+                        </div>
+                    </div>
+                    <div className='overview-center'>
+                        <BreadCrumb firstItem={'最近运行统计'}/>
+                        <div className='overview-center-box'>
+                            {['surveyResult', 'rateTrend'].map((key) => (
+                                <div className='center-echarts-box' key={key}>
+                                    <div className='echarts-result-title overview-title'>
+                                        {key === 'surveyResult' && '最近运行结果统计'}
+                                        {key === 'rateTrend' && '最近运行概率统计'}
+                                    </div>
+                                    <Spin spinning={spinning[key]}>
+                                        <div ref={chartRefs[key]} style={{ height: 400 }} />
+                                    </Spin>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className='overview-bottom'>
+                        <BreadCrumb firstItem={'动态统计'}/>
+                        <div className='overview-bottom-box'>
+                            {['logTypeTrend', 'logUserTrend'].map((key) => (
+                                <div className='bottom-echarts-box' key={key}>
+                                    <div className='echarts-result-title overview-title'>
+                                        {key === 'logTypeTrend' && '动态类型统计'}
+                                        {key === 'logUserTrend' && '动态人员统计'}
+                                    </div>
+                                    <Spin spinning={spinning[key]}>
+                                        <div ref={chartRefs[key]} style={{ height: 400 }} />
+                                    </Spin>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

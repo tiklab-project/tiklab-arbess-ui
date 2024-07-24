@@ -16,12 +16,6 @@ import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import HistoryDetail from "../../history/components/HistoryDetail";
 import DesignAgent from "./DesignAgent";
-import {
-    DeploymentUnitOutlined,
-    CrownOutlined,
-    BugOutlined,
-    PartitionOutlined,
-} from "@ant-design/icons"
 import "./Design.scss";
 
 /**

@@ -26,7 +26,7 @@
                 padding: 8px;
                 border-radius: 4px;
                 flex: 1;
-                border: 1px solid var(--mf-border-color);
+                background-color: var(--mf-border-color);
                 &:not(:last-child){
                     margin-right: 15px;
                 }

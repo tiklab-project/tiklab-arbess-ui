@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Col,Row} from "antd";
-import {AimOutlined, HistoryOutlined, BlockOutlined, RightOutlined} from "@ant-design/icons";
+import {RightOutlined} from "@ant-design/icons";
 import homePageStore from "../store/HomePageStore";
 import overviewStore from "../../pipeline/overview/store/OverviewStore";
 import ListEmpty from "../../common/component/list/ListEmpty";
@@ -72,14 +72,13 @@ const HomePage = props =>{
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
-                xl={{ span: "18", offset: "3" }}
-                xxl={{ span: "16", offset: "4" }}
+                xl={{ span: "20", offset: "2" }}
+                xxl={{ span: "18", offset: "3" }}
             >
                 <div className="homePage-content mf-home-limited">
                     <div className="home-recent">
                         <div className="homePage-guide-title">
-                            <HistoryOutlined className="guide-icon"/>
-                            <span className="guide-title">常用流水线</span>
+                            常用流水线
                         </div>
                         {
                             newlyLoading ?
@@ -122,13 +121,12 @@ const HomePage = props =>{
                                         }
                                     </div>
                                     :
-                                    <ListEmpty title={"暂无访问流水线"}/>
+                                    <ListEmpty title={"暂无常用流水线"}/>
                         }
                     </div>
                     <div className="home-build">
                         <div className="homePage-guide-title">
-                            <BlockOutlined className="guide-icon"/>
-                            <span className="guide-title">我最近构建的</span>
+                            我最近构建的
                         </div>
                         <div className="home-build-content">
                             {
@@ -171,8 +169,7 @@ const HomePage = props =>{
                     <div className="home-agent">
                         <div className='homePage-guide'>
                             <div className='homePage-guide-title'>
-                                <AimOutlined className='guide-icon'/>
-                                <span className='guide-title'>最新动态</span>
+                                最新动态
                             </div>
                             <div onClick={()=>props.history.push('/dyna')}
                                  className="homePage-guide-skip"

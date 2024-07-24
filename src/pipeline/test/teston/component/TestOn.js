@@ -98,7 +98,7 @@ const TestOn = props => {
             title: "名称",
             dataIndex: ["object","testPlanName"],
             key: "testPlanName",
-            width:"25%",
+            width:"22%",
             ellipsis:true,
             render:(text,record) =>{
                 return (
@@ -162,7 +162,7 @@ const TestOn = props => {
             title: "操作",
             dataIndex: "action",
             key:"action",
-            width:"5%",
+            width:"8%",
             render:(_,record)=> (
                 <ListAction
                     del={()=>delTeston(record)}
@@ -178,7 +178,7 @@ const TestOn = props => {
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{span: "24"}}
-                xl={{ span: "20", offset: "2" }}
+                xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited mf">

@@ -7,7 +7,7 @@
     justify-content: space-between;
     border-bottom: 1px solid var(--mf-border-color);
     padding: 0 30px;
-    height: 48px;
+    height: var(--mf-head-height);
     .layout-header{
       display: flex;
       align-items: center;
@@ -42,13 +42,13 @@
     }
   }
   .mf-layout-content{
-    height: calc(100vh - 48px);
+    height: var(--mf-content-height);
   }
 }
 
 .mf-home{
   display: flex;
-  height: calc(100vh - 48px);
+  height: var(--mf-content-height);
   .normal-aside{
     display: flex;
     flex-direction: column;

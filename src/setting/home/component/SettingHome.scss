@@ -1,65 +1,174 @@
+$block-spacing: 30px;
+$inline-spacing: 15px;
+$inline-padding: 15px;
+
 .setting-home{
     height: 100%;
     width: 100%;
     overflow: auto;
     .home-title{
-        font-size: 12px;
-        color: #999999;
         margin-bottom: 10px;
+        font-weight: var(--thoughtware-font-weight-bold);
     }
-    .home-chunk-item{
-        padding: 10px;
-        border-radius: 4px;
-        cursor: pointer;
-        background: #f7f7f7;
+    .home-label{
+        padding-bottom: $inline-padding;
     }
-    .label-one{
-        text-align: center;
-        padding-top: 4px;
-        padding-bottom: 10px;
+    .home-info{
+        font-weight: var(--thoughtware-font-weight-bold);
     }
-    .info-one{
-        text-align: center;
-        padding: 10px 0;
+    .home-role-box{
+        .home-role .home-role-item{
+            background: var(--mf-backdrop-color);
+            text-align: center;
+            padding: $inline-padding;
+            border-radius: 4px;
+        }
     }
-    .home-chunk-label{
-        padding-top: 4px;
-        padding-bottom: 10px;
+    .home-user-box{
+        margin-bottom: $block-spacing;
+        .home-user{
+            display: flex;
+            .home-user-item{
+                flex: 1;
+                background: var(--mf-backdrop-color);
+                text-align: center;
+                padding: $inline-padding;
+                border-radius: 4px;
+                &:not(:last-child){
+                    margin-right: $inline-spacing;
+                }
+            }
+        }
     }
-    .home-chunk-info{
+    .home-message-box{
+        .home-message{
+            display: flex;
+            .home-message-item{
+                flex: 1;
+                background: var(--mf-backdrop-color);
+                text-align: center;
+                padding: $inline-padding;
+                border-radius: 4px;
+                &:not(:last-child){
+                    margin-right: $inline-spacing;
+                }
+            }
+        }
+    }
+    .home-config-box{
+        margin: $block-spacing 0;
+        .home-config{
+            display: flex;
+            .home-config-item{
+                flex: 1;
+                background: var(--mf-backdrop-color);
+                padding: $inline-padding;
+                border-radius: 4px;
+                &:not(:last-child){
+                    margin-right: $inline-spacing;
+                }
+                .home-config-item-label{
+                    padding-bottom: $inline-padding;
+                }
+                .home-config-item-level,.config-level-item{
+                    display: flex;
+                    align-items: center;
+                    .config-level-item-label{
+                        font-size: 12px;
+                        color: #999999;
+                        margin-right: 10px;
+                    }
+                    .config-level-item-info{
+                        font-weight: var(--thoughtware-font-weight-bold);
+                    }
+                }
+                .home-config-item-level{
+                    grid-column-gap: 20px;
+                    flex-wrap: wrap;
+                }
+            }
+        }
+    }
+    .home-licence-box{
+        .home-licence{
+            display: flex;
+            .home-licence-item{
+                flex: 1;
+                background: var(--mf-backdrop-color);
+                border-radius: 4px;
+                padding: $inline-padding;
+                &:not(:last-child){
+                    margin-right: $inline-spacing;
+                }
+                .home-licence-item-label{
+                    padding-bottom: $inline-padding;
+                }
+                .home-licence-item-level{
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    .licence-level-label{
+                        font-size: 12px;
+                        color: #999999;
+                        margin-right: 10px;
+                    }
+                    .licence-level-info{
+                        font-weight: var(--thoughtware-font-weight-bold);
+                    }
+                }
+            }
+        }
+    }
+    .home-security-box{
+        .home-security .home-security-item{
+            background: var(--mf-backdrop-color);
+            border-radius: 4px;
+            padding: $inline-padding;
+            .home-security-item-label{
+                padding-bottom: $inline-padding;
+            }
+            .home-security-item-level{
+                display: flex;
+                align-items: center;
+                .security-level-label{
+                    font-size: 12px;
+                    color: #999999;
+                    margin-right: 10px;
+                }
+                .security-level-info{
+                    flex: 1;
+                    width: 0;
+                    font-weight: var(--thoughtware-font-weight-bold);
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+    }
+
+    .home-box{
         display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 10px 0;
-    }
-    .home-chunk-wrap{
-        grid-column-gap: 20px;
-        .home-chunk-wrap-inline{
-            display: flex;
-            align-items: center;
+        .home-message-box,.home-licence-box{
+            flex:1;
+        }
+        .home-message-box{
+            margin-right: $inline-spacing;
         }
     }
-    .home-chunk-desc{
-        font-size: 12px;
-        color: #999999;
-        margin-right: 10px;
-    }
-    .setting-home-chunk{
-        padding: 10px;
-        &:not(:last-child){
-            margin-bottom: 20px;
+    .home-chunk-box{
+        display: flex;
+        .home-role-box,.home-message-box{
+            margin-right: $inline-spacing;
         }
-        .home-chunk{
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-gap: 20px;
+        .home-role-box,.home-security-box{
+            flex: 1;
         }
-        .home-chunk-item-inline{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            min-height: 48px;
+        .home-message-box{
+            flex: 2;
         }
     }
+
 }
+
+

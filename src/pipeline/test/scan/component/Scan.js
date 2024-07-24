@@ -20,21 +20,17 @@ const Scan = (props) => {
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
-
     // 页数
     const [scanPage,setScanPage] = useState({
         totalPage:1,
         totalRecord:1
     })
-
     const pageParam = {
         pageSize:pageSize,
         currentPage: 1,
     }
-
     // 请求数据
     const [scanParam,setScanParam] = useState({pageParam})
-
     // 扫描数据
     const [scanList,setScanList] = useState([]);
 
@@ -96,7 +92,7 @@ const Scan = (props) => {
             title: "名称",
             dataIndex: "id",
             key: "id",
-            width:"22%",
+            width:"20%",
             ellipsis:true,
             render:(text,record) =>{
                 return (
@@ -151,7 +147,7 @@ const Scan = (props) => {
             title: "操作",
             dataIndex: "action",
             key:"action",
-            width:"6%",
+            width:"8%",
             render:(_,record)=> (
                 <ListAction
                     del={()=>del(record)}
@@ -176,7 +172,7 @@ const Scan = (props) => {
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
-                xl={{ span: "20", offset: "2" }}
+                xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited mf">

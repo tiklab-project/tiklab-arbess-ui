@@ -15,7 +15,6 @@ const TestMavenDetail = (props) => {
     const {findMavenTestList} = mavenTestStore;
 
     const [mavenTestList,setMavenTestList] = useState([]);
-
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
 
@@ -102,14 +101,11 @@ const TestMavenDetail = (props) => {
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{span: "24"}}
-                xl={{ span: "20", offset: "2" }}
+                xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="mf-home-limited mf">
-                    <BreadCrumb
-                        firstItem={"测试报告"}
-                        onClick={backTest}
-                    />
+                    <BreadCrumb firstItem={"测试报告"} onClick={backTest}/>
                     <div className='test-overview'>
                         <div className="test-overview-info">
                             <div className="test-overview-info-item">
