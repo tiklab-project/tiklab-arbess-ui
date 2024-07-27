@@ -5,134 +5,82 @@ $inline-spacing: 15px;
     width: 100%;
     height: 100%;
     overflow: auto;
-    .overview-title{
+    .overview-guide{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .overview-guide-title{
+        height: 36px;
+        line-height: 36px;
+        font-size: 15px;
         font-weight: var(--thoughtware-font-weight-bold);
     }
-    .echarts-result-title{
-        padding-bottom: 15px;
-    }
     .overview-upper{
-        display: flex;
         margin-bottom: $block-spacing;
-        .upper-pipeline-box{
-            flex: 1;
-            border-radius: 4px;
-            background: var(--mf-backdrop-color);
-            margin-right: $inline-spacing;
-            padding: var(--thoughtware-padding);
-            .upper-pipeline-info{
+        .overview-upper-content{
+            padding-top: 10px;
+            .overview-upper-instance{
                 display: flex;
-                align-items: center;
-                padding-bottom: 15px;
-                .mf-listname-icon{
-                    width: 24px;
-                    height: 24px;
-                    line-height: 24px;
+                gap: 10px;
+                .instance-item{
+                    flex: 1;
+                    padding: 15px;
+                    border-radius: 4px;
+                    background: var(--mf-backdrop-color);
+                    cursor: pointer;
+                    max-width: 25%;
                 }
-            }
-            .upper-pipeline-user{
-                display: flex;
-                align-items: center;
-                padding-bottom: 15px;
-                .ant-avatar{
-                    width: 24px;
-                    height: 24px;
-                    background: #8e9bed;
-                }
-                .pipeline-user-name{
-                    padding-left: 10px;
-                    .pipeline-user-name-desc{
-                        padding-top: 5px;
-                        color: var(--thoughtware-gray-500);
-                        font-size: var(--thoughtware-font-12);
-                    }
-                }
-            }
-            .upper-pipeline-status{
-                display: flex;
-                justify-content: space-between;
-                padding-bottom: 15px;
-                .pipeline-status-item{
+                .instance-item-up{
+                    padding-bottom: 10px;
                     display: flex;
                     align-items: center;
-                    .pipeline-status-item-icon{
-                        padding-right: 10px;
-                        font-size: 18px;
+                    justify-content: space-between;
+                    .instance-item-findNumber{
+                        font-weight: var(--thoughtware-font-weight-bold);
                     }
-                    .pipeline-status-item{
-                        &-num{
-                            color: #666666
-                        }
-                        &-success{
-                            color: #77b3eb
-                        }
-                        &-error{
-                            color: #f06f6f
-                        }
-                        &-halt{
-                            color: #f6c659
-                        }
+                    .instance-item-createTime{
+                        font-size: 13px;
+                        color: #999999;
                     }
-                    .pipeline-status-item-text{
-                        padding-top: 5px;
-                        font-size: var(--thoughtware-font-12);
-                        color: var(--thoughtware-gray-500);
+                }
+                .instance-item-center{
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 5px 20px;
+                    padding: 5px 0;
+                    .instance-item-center-info{
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        &>div:first-child{
+                            font-size: 13px;
+                            color: #999999;
+                        }
+                        &>div:last-child{
+                            flex: 1;
+                            min-width: 0;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            -o-text-overflow: ellipsis;
+                        }
+                        .instance-item-runStatus{
+                            font-size: 16px;
+                        }
                     }
                 }
             }
-            .upper-pipeline-state{
-                display: flex;
-                align-items: center;
-                padding-bottom: 15px;
-                .pipeline-state-icon{
-                    width: 24px;
-                    font-size: 20px;
-                    margin-right: 10px;
-                    color: #666666;
-                }
-                .pipeline-state-desc{
-                    padding-top: 5px;
-                    font-size: var(--thoughtware-font-12);
-                    color: var(--thoughtware-gray-500);
-                }
-            }
-        }
-        .upper-echarts-box{
-            flex: 1;
-            border-radius: 4px;
-            background: var(--mf-backdrop-color);
-            padding: var(--thoughtware-padding-item);
         }
     }
     .overview-center{
         margin-bottom: $block-spacing;
-        .overview-center-box{
-            display: flex;
-            padding-top: 15px;
-            .center-echarts-box{
-                flex: 1;
-                border-radius: 4px;
-                background: var(--mf-backdrop-color);
-                padding: var(--thoughtware-padding-item);
-                &:first-child{
-                    margin-right: $inline-spacing;
-                }
-            }
-        }
-    }
-    .overview-bottom{
-        .overview-bottom-box{
-            display: flex;
-            padding-top: 15px;
-            .bottom-echarts-box{
-                flex: 1;
-                border-radius: 4px;
-                background: var(--mf-backdrop-color);
-                padding: var(--thoughtware-padding-item);
-                &:first-child{
-                    margin-right: $inline-spacing;
-                }
-            }
+        .overview-center-release{
+            background-color: var(--mf-backdrop-color);
+            border-radius: 4px;
+            padding: 20px 10px 10px;
+            margin-top: 15px;
         }
     }
 }

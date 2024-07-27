@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {DownOutlined,UpOutlined} from "@ant-design/icons";
+import {ArrowLeftOutlined, DownOutlined, LeftCircleOutlined, UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
 import {applyJump, disableFunction} from 'thoughtware-core-ui';
 import {inject,observer} from "mobx-react";
@@ -62,7 +62,10 @@ const Aside = props =>  {
                     onClick={()=>select(data)}
                     key={data.id}
                 >
-                    <span>{data.title}</span>
+                    <div>
+                        {data?.icon && <span className="sys-content-icon">{data.icon}</span>}
+                        <span className='aside-second-title'>{data.title}</span>
+                    </div>
                     {
                         !!data.isUnify && !authConfig?.authType &&
                         <span className='aside-second-link'><ExportOutlined /></span>
@@ -83,7 +86,11 @@ const Aside = props =>  {
                      style={{paddingLeft: deep}}
                      onClick={()=>setOpenOrClose(item.id)}
                 >
-                    <span className="system-aside-title">{item.title}</span>
+
+                    <div>
+                        {item?.icon && <span className="sys-content-icon">{item.icon}</span>}
+                        <span className="system-aside-title">{item.title}</span>
+                    </div>
                     <div className="system-aside-item-icon">
                         {
                             item.children ?
@@ -126,11 +133,14 @@ const Aside = props =>  {
             <div className="system">
                 <div className="system-aside">
                     <ul className="system-aside-top">
-                        <li className='system-aside-top-head'>设置</li>
+                        <li className='system-aside-top-head'>
+                            <span className='top-head-icon' onClick={()=>props.history.push('/home')}><ArrowLeftOutlined /></span>
+                            <span className='top-head-text'>设置</span>
+                        </li>
                         {
                             applicationRouters.map(firstItem => {
                                 return firstItem.children && firstItem.children.length > 0 ?
-                                    renderSubMenu(firstItem,20) : renderMenu(firstItem,20)
+                                    renderSubMenu(firstItem,30) : renderMenu(firstItem,30)
                             })
                         }
                         {props.children}

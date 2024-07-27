@@ -6,7 +6,6 @@ import {
     LockOutlined,
     UnlockOutlined,
     MinusCircleOutlined,
-    EllipsisOutlined,
     CloseCircleOutlined,
     CheckCircleOutlined,
     ExclamationCircleOutlined
@@ -320,7 +319,7 @@ const PipelineTable = props =>{
                         >
                             <Tooltip title="更多">
                                 <span className="pipelineTable-action">
-                                    <img src={pip_more} width={20} alt={'更多'}/>
+                                    <img src={pip_more} width={18} alt={'更多'}/>
                                 </span>
                             </Tooltip>
                         </Dropdown>

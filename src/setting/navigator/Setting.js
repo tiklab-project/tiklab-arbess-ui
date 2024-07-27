@@ -4,7 +4,9 @@ import {
     LayoutOutlined,
     SoundOutlined,
     DeploymentUnitOutlined,
-    MacCommandOutlined, TeamOutlined, ProjectOutlined
+    MacCommandOutlined,
+    TeamOutlined,
+    ProjectOutlined
 } from "@ant-design/icons";
 import Aside from "../../common/component/aside/Aside";
 
@@ -23,28 +25,28 @@ const Setting = props =>{
             icon: <TeamOutlined/>,
             children: [
                 {
-                    id: "/setting/orga",
-                    title: "部门",
-                    purviewCode: "orga",
-                    isUnify:"/user/orga",
-                },
-                {
                     id: "/setting/user",
                     title: "用户",
                     purviewCode: "user",
-                    isUnify:"/user/user",
+                    isUnify:"/setting/user",
+                },
+                {
+                    id: "/setting/orga",
+                    title: "部门",
+                    purviewCode: "orga",
+                    isUnify:"/setting/orga",
                 },
                 {
                     id: "/setting/userGroup",
                     title: "用户组",
                     purviewCode: "user_group",
-                    isUnify:"/user/userGroup",
+                    isUnify:"/setting/userGroup",
                 },
                 {
                     id: "/setting/dir",
                     title: "用户目录",
                     purviewCode: "user_dir",
-                    isUnify:"/user/dir",
+                    isUnify:"/setting/dir",
                 },
                 {
                     id:"/setting/role",

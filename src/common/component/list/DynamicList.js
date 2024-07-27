@@ -2,6 +2,7 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 import ListEmpty from "./ListEmpty";
 import Profile from "../profile/Profile";
+import moment from "moment/moment";
 import "./DynamicList.scss";
 
 /**
@@ -18,28 +19,36 @@ const DynamicList = props =>{
         }
     }
 
-    // 渲染动态列表
-    const renderLis = (item) => {
-        const {actionType,action,user,createTime,data} = item
-        const dataObj = data && JSON.parse(data)
+    const renderLis = (item,index) => {
+        const {loggingList,time} = item;
         return (
-            <div key={item.id} className="dynamic-item" onClick={()=>goDynaLink(item)}>
-                <div className="dynamic-item-data">
-                    <Profile
-                        userInfo={user}
-                    />
-                    <div className='item-data-info'>
-                        <div className='item-data-info-name'>{user?.nickname || user?.name} {actionType?.name}</div>
-                        <div className='item-data-info-desc'>
-                            <div className='desc-action'> {action}</div>
-                            {
-                                dataObj?.message &&
-                                <div className='desc-message'>{dataObj.message}</div>
-                            }
-                        </div>
-                    </div>
+            <div key={index} className='dynamic-item'>
+                <div className='dynamic-item-time'>
+                    <span>{time}</span>
                 </div>
-                <div className="dynamic-item-time">{createTime}</div>
+                {
+                    loggingList && loggingList.map(logItem=>{
+                        const {actionType,action,user,createTime,data,id} = logItem
+                        const dataObj = data && JSON.parse(data)
+                        return (
+                            <div key={id} className='dynamic-item-log mf-user-avatar' >
+                                <div className='dynamic-item-log-time'>
+                                    {moment(createTime).format("HH:mm:ss")}
+                                </div>
+                                <Profile userInfo={user}/>
+                                <div className='dynamic-item-log-info'>
+                                     <div className='dynamic-item-log-info-name' onClick={()=>goDynaLink(logItem)}>
+                                         {user?.nickname || user?.name}{actionType?.name}
+                                     </div>
+                                    <div className='dynamic-item-log-desc'>
+                                        <div className='log-desc-action'> {action}</div>
+                                        {dataObj?.message && <div className='log-desc-message'>{dataObj.message}</div>}
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
     }
@@ -48,7 +57,7 @@ const DynamicList = props =>{
         <div className="mf-dynamic-center">
             {
                 dynamicList && dynamicList.length>0 ?
-                dynamicList.map(item=>renderLis(item))
+                dynamicList.map((item,index)=>renderLis(item,index))
                 :
                 <ListEmpty title={"暂无动态"}/>
             }

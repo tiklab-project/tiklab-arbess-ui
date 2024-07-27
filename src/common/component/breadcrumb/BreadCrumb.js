@@ -11,12 +11,12 @@ const BreadCrumb = ({firstItem,secondItem,onClick,children}) =>{
     return (
         <div className="mf-breadcrumb">
             <Space>
-                    <span className={onClick ? "mf-breadcrumb-first":""} onClick={onClick}>
-                        {onClick && <LeftOutlined style={{marginRight:8}}/>}
-                        <span className={secondItem ? "mf-breadcrumb-span":""}>
-                            {firstItem}
-                        </span>
+                <span className={onClick ? "mf-breadcrumb-first":""} onClick={onClick}>
+                    {onClick && <LeftOutlined style={{marginRight:8}}/>}
+                    <span className={secondItem ? "mf-breadcrumb-span":""}>
+                        {firstItem}
                     </span>
+                </span>
                 {secondItem && <span> / &nbsp; {secondItem}</span>}
             </Space>
             <div>{children}</div>

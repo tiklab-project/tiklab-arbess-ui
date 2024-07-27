@@ -48,9 +48,15 @@
             height: 40px;
             line-height: 40px;
             width: 100%;
-            padding: 0 20px;
+            padding: 0 20px 0 30px;
             font-weight: var(--thoughtware-font-weight-bold);
             border-bottom: 1px solid var(--mf-border-color);
+            .top-head-icon{
+                cursor: pointer;
+            }
+            .top-head-text{
+                padding-left: 5px;
+            }
         }
         &-li {
             line-height: 40px;

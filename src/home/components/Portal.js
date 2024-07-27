@@ -8,7 +8,7 @@ import {getUser,productWhiteImg} from "thoughtware-core-ui";
 import {renderRoutes} from "react-router-config";
 import './Portal.scss';
 
-const Layout = props =>{
+const Portal = props =>{
 
     const {history,route,systemRoleStore,HelpLink,AppLink,AvatarLink} = props;
 
@@ -91,7 +91,7 @@ const Layout = props =>{
             <section className='mf-layout-content'>
                 <div className='mf-home'>
                     {
-                        (path==='/pipeline/' || !path.startsWith('/pipeline/')) &&
+                        (path==='/pipeline/' || (!path.startsWith('/pipeline/') && !path.startsWith('/setting')) ) &&
                         <aside className="normal-aside">
                             <div className="normal-aside-up">
                                 {
@@ -107,7 +107,7 @@ const Layout = props =>{
                                 }
                             </div>
                             <div className="normal-aside-bottom"
-                                 onClick={()=>props.history.push(`/setting/home`)}
+                                 onClick={()=>props.history.push(`/setting/myLog`)}
                             >
                                 <div className="normal-aside-bottom-icon" data-title-right='设置'>
                                     <SettingOutlined className='bottom-icon'/>
@@ -124,7 +124,7 @@ const Layout = props =>{
     )
 }
 
-export default inject("systemRoleStore")(observer(Layout))
+export default inject("systemRoleStore")(observer(Portal))
 
 
 

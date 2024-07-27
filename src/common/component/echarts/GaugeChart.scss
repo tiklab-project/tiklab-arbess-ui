@@ -1,0 +1,57 @@
+.gauge-statistics{
+  display: flex;
+  gap: 10px;
+  height: 150px;
+  padding-top: 10px;
+  .statistics-result{
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: var(--mf-backdrop-color);
+  }
+  .statistics-result-title{
+    padding-bottom: 10px;
+  }
+  .statistics-result-box{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .statistics-result-top{
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      clip: rect(auto, 150px, 75px, auto);
+      border-radius: 50%;
+      border: 5px solid var(--thoughtware-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .statistics-result-process{
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      clip: rect(auto, 130px, 65px, auto);
+      border-radius: 50%;
+      border: 25px solid var(--thoughtware-blue);
+    }
+    .statistics-result-data{
+      position: absolute;
+      bottom: 50%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 50%;
+      font-weight: var(--thoughtware-font-weight-bold);
+    }
+    .statistics-result-text{
+      &-successNumber{
+        color: var(--thoughtware-blue);
+      }
+      &-errorNumber{
+        color: #f06f6f;
+      }
+    }
+  }
+}

@@ -18,6 +18,20 @@ class OverviewStore {
     }
 
     /**
+     * 获取所有动态
+     * @param values
+     * @returns {Promise<*>}
+     */
+    @action
+    findLogPageByTime = async values =>{
+        const param = {
+            ...values,
+            bgroup:"matflow",
+        }
+        return await Axios.post("/oplog/findLogPageByTime", param)
+    }
+
+    /**
      * 获取所有动态筛选类型
      * @returns {Promise<*>}
      */

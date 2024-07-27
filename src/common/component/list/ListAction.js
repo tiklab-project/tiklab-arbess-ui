@@ -1,6 +1,6 @@
 import React from "react";
 import {Dropdown, Modal, Tooltip} from "antd";
-import {EditOutlined,EllipsisOutlined} from "@ant-design/icons";
+import {EditOutlined} from "@ant-design/icons";
 import pip_more from "../../../assets/images/svg/pie_more.svg";
 
 /**

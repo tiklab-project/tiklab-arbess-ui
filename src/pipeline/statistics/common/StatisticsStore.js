@@ -9,8 +9,8 @@ class StatisticsStore {
      * @returns {Promise | Promise<unknown>}
      */
     @action
-    findPipelineRunTimeSpan = (params) => {
-        return Axios.post('/pipeline/count/findPipelineRunTimeSpan', params);
+    findPipelineRunTimeSpan = async (params) => {
+        return await Axios.post('/pipeline/count/findPipelineRunTimeSpan', params);
     }
 
     /**
@@ -19,8 +19,8 @@ class StatisticsStore {
      * @returns {Promise | Promise<unknown>}
      */
     @action
-    findPipelineRunCount = (params) => {
-        return Axios.post('/pipeline/count/findPipelineRunCount', params);
+    findPipelineRunCount = async (params) => {
+        return await Axios.post('/pipeline/count/findPipelineRunCount', params);
     }
 
     /**
@@ -29,8 +29,8 @@ class StatisticsStore {
      * @returns {Promise | Promise<unknown>}
      */
     @action
-    findPipelineRunResultCount = (params) => {
-        return Axios.post('/pipeline/count/findPipelineRunResultCount', params);
+    findPipelineRunResultCount = async (params) => {
+        return await Axios.post('/pipeline/count/findPipelineRunResultCount', params);
     }
 
     /**
@@ -39,10 +39,10 @@ class StatisticsStore {
      * @returns {Promise | Promise<unknown>}
      */
     @action
-    findPipelineSurveyCount = (params) => {
+    findPipelineSurveyCount = async (params) => {
         const data = new FormData();
         data.append('pipelineId',params)
-        return Axios.post('/pipeline/count/findPipelineSurveyCount', data);
+        return await Axios.post('/pipeline/count/findPipelineSurveyCount', data);
     }
 
     /**
@@ -51,10 +51,10 @@ class StatisticsStore {
      * @returns {Promise | Promise<unknown>}
      */
     @action
-    findPipelineSurveyResultCount = (params) => {
+    findPipelineSurveyResultCount = async (params) => {
         const data = new FormData();
         data.append('pipelineId',params)
-        return Axios.post('/pipeline/count/findPipelineSurveyResultCount', data);
+        return await Axios.post('/pipeline/count/findPipelineSurveyResultCount', data);
     }
 
     /**
@@ -63,10 +63,10 @@ class StatisticsStore {
      * @returns {Promise | Promise<unknown>}
      */
     @action
-    findPipelineLogTypeCount = (params) => {
+    findPipelineLogTypeCount = async (params) => {
         const data = new FormData();
         data.append('pipelineId',params)
-        return Axios.post('/pipeline/count/findPipelineLogTypeCount', data);
+        return await Axios.post('/pipeline/count/findPipelineLogTypeCount', data);
     }
 
     /**
@@ -75,11 +75,76 @@ class StatisticsStore {
      * @returns {Promise | Promise<unknown>}
      */
     @action
-    findPipelineLogUserCount = (params) => {
+    findPipelineLogUserCount = async (params) => {
         const data = new FormData();
         data.append('pipelineId',params)
-        return Axios.post('/pipeline/count/findPipelineLogUserCount', data);
+        return await Axios.post('/pipeline/count/findPipelineLogUserCount', data);
     }
+
+    /**
+     * 所有动态统计
+     * @returns {Promise | Promise<unknown>}
+     */
+    @action
+    findLogTypeCount = async () => {
+        return await Axios.post('/pipeline/count/findLogTypeCount');
+    }
+
+    /**
+     * 所有动态统计
+     * @returns {Promise | Promise<unknown>}
+     */
+    @action
+    findLogUserCount = async () => {
+        return await Axios.post('/pipeline/count/findLogUserCount');
+    }
+
+    /**
+     * 所有流水线统计
+     * @returns {Promise | Promise<unknown>}
+     */
+    @action
+    findSurveyResultCount = async () => {
+        return await Axios.post('/pipeline/count/findSurveyResultCount');
+    }
+
+    /**
+     * 所有流水线运行统计
+     * @returns {Promise | Promise<unknown>}
+     */
+    @action
+    findRunResultCount = async data => {
+        return await Axios.post('/pipeline/count/findRunResultCount',data);
+    }
+
+    /**
+     * 所有流水线发布总次数
+     * @returns {Promise | Promise<unknown>}
+     */
+    @action
+    findRunTimeSpan = async data => {
+        return await Axios.post('/pipeline/count/findRunTimeSpan',data);
+    }
+
+    /**
+     * 发布次数TOP10统计
+     * @returns {Promise | Promise<unknown>}
+     */
+    @action
+    findDayRateCount = async data => {
+        return await Axios.post('/pipeline/count/findDayRateCount',data);
+    }
+
+    /**
+     * 近七天时间
+     */
+    @action
+    findRecentDaysFormatted = async data => {
+        const value = new  FormData();
+        value.append('day',7)
+        return await Axios.post('/pipeline/count/findRecentDaysFormatted',value);
+    }
+
 
 
 }

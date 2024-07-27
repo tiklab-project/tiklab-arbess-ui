@@ -31,15 +31,15 @@ export const runStatusText = type =>{
 export const runStatusIcon = type =>{
     switch(type){
         case "error" :
-            return  <CloseCircleOutlined style={{fontSize:14,color:"red"}}/>
+            return  <CloseCircleOutlined style={{color:"red"}}/>
         case "success" :
-            return  <CheckCircleOutlined style={{fontSize:14,color:"#0063FF"}}/>
+            return  <CheckCircleOutlined style={{color:"#0063FF"}}/>
         case "halt":
-            return  <ExclamationCircleOutlined style={{fontSize:14}}/>
+            return  <ExclamationCircleOutlined/>
         case "run":
-            return  <Spin indicator={<LoadingOutlined style={{fontSize:14}} spin />} />
+            return  <Spin indicator={<LoadingOutlined spin />} />
         case "wait":
-            return  <PlayCircleOutlined style={{fontSize:14}}/>
+            return  <PlayCircleOutlined />
     }
 }
 

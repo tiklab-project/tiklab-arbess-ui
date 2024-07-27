@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import {DatePicker,Select,Space,Row,Col} from "antd";
+import {DatePicker, Select, Space, Row, Col, Spin} from "antd";
 import {observer} from "mobx-react";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -10,7 +10,7 @@ import pipelineStore from "../../pipeline/store/PipelineStore";
 
 const { RangePicker } = DatePicker;
 
-const pageSize = 15;
+const pageSize = 10;
 
 /**
  * 动态详情
@@ -23,26 +23,28 @@ const Dynamic = props =>{
     const {match,route} = props
 
     const {findUserPipeline,pipelineList} = pipelineStore
-    const {findlogpage,findlogtype} = overviewStore
+    const {findLogPageByTime,findlogtype} = overviewStore
 
     const pageParam = {
         pageSize:pageSize,
         currentPage:1
     }
 
-    // 获取近期动态请求数据
+    //获取近期动态请求数据
     const [params,setParams] = useState(
         route.path === '/dyna' ?
             {pageParam, data:{}} :
             {pageParam, data:{pipelineId:[match.params.id]},}
     )
 
-    // 动态列表
+    //动态列表
     const [dynamicList,setDynamicList] = useState([]);
-    // 动态分页
+    //动态分页
     const [dynaPage,setDynaPage] = useState([]);
-    // 动态操作类型
+    //动态操作类型
     const [dynamicType,setDynamicType] = useState([]);
+    //加载状态
+    const [spinning,setSpinning] = useState(false);
 
     useEffect(()=>{
         if(route.path==='/dyna'){
@@ -58,8 +60,9 @@ const Dynamic = props =>{
     },[])
 
     useEffect(()=>{
-        // 获取动态列表
-        findlogpage(params).then(res=>{
+        //获取动态列表
+        setSpinning(true);
+        findLogPageByTime(params).then(res=>{
             if(res.code===0){
                 setDynamicList(res.data?.dataList || [])
                 setDynaPage({
@@ -68,6 +71,7 @@ const Dynamic = props =>{
                     totalRecord: res.data.totalRecord,
                 })
             }
+            setSpinning(false);
         })
     },[params])
 
@@ -115,6 +119,10 @@ const Dynamic = props =>{
         })
     }
 
+    const onscroll = () => {
+
+    }
+
     const goBack = () =>{
         if(route.path === '/dyna'){
             props.history.push('/home')
@@ -124,7 +132,7 @@ const Dynamic = props =>{
     }
 
     return(
-        <Row className="dyna" style={{height:"100%",width:"100%",overflow:"auto"}}>
+        <Row className="dyna" style={{height:"100%",width:"100%",overflow:"auto"}} onScroll={onscroll}>
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -175,15 +183,17 @@ const Dynamic = props =>{
                             />
                         </Space>
                     </div>
-                    <DynamicList
-                        {...props}
-                        dynamicList={dynamicList}
-                    />
-                    <Page
-                        currentPage={params.pageParam.currentPage}
-                        changPage={changPage}
-                        page={dynaPage}
-                    />
+                    <Spin spinning={spinning} tip={'获取动态中……'}>
+                        <DynamicList
+                            {...props}
+                            dynamicList={dynamicList}
+                        />
+                        <Page
+                            currentPage={params.pageParam.currentPage}
+                            changPage={changPage}
+                            page={dynaPage}
+                        />
+                    </Spin>
                 </div>
             </Col>
         </Row>

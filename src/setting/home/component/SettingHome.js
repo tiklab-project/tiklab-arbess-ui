@@ -27,7 +27,7 @@ const SettingHome = props => {
         if(!authConfig.authType){
             const isAuth = li.some(item => item===path)
             if(isAuth){
-                return applyJump(`${authConfig.authServiceUrl}/#/setting/${path}`)
+                return applyJump(`${authConfig.authServiceUrl}/#/user/${path}`)
             }
         }
         props.history.push(`/setting/${path}`)
@@ -40,125 +40,71 @@ const SettingHome = props => {
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
                 lg={{ span: "24" }}
-                xl={{ span: "21", offset: "1" }}
-                xxl={{ span: "20", offset: "2" }}
+                xl={{ span: "18", offset: "3" }}
+                xxl={{ span: "16", offset: "4" }}
             >
                 <div className='mf-home-limited'>
                     {
-                        version==='cloud' ?
-                            <div className='home-chunk-box'>
-                                <div className='home-role-box'>
-                                    <div className='home-title'>权限</div>
-                                    <div className='home-role'>
-                                        <div className='home-role-item' onClick={()=>goPath('role')}>
-                                            <div className='home-label'>权限</div>
-                                            <div className='home-info'>
-                                                {count?.roleNumber || 0}
-                                            </div>
+                        version==='cloud' ? null
+                            // <div className='home-role-box'>
+                            //     <div className='home-title'>权限</div>
+                            //     <div className='home-role'>
+                            //         <div className='home-role-item' onClick={()=>goPath('role')}>
+                            //             <div className='home-label'>权限</div>
+                            //             <div className='home-info'>
+                            //                 {count?.roleNumber || 0}
+                            //             </div>
+                            //         </div>
+                            //     </div>
+                            // </div>
+                            :
+                            <div className='home-user-box'>
+                                <div className='home-title'>用户与权限</div>
+                                <div className='home-user'>
+                                    <div className='home-user-item' onClick={()=>goPath('orga')}>
+                                        <div className='home-label'>部门</div>
+                                        <div className='home-info'>
+                                            {count?.orgaNumber || 0}
                                         </div>
                                     </div>
-                                </div>
-                                <div className='home-message-box'>
-                                    <div className='home-title'>消息</div>
-                                    <div className='home-message'>
-                                        <div className='home-message-item' onClick={()=>goPath('notice')}>
-                                            <div className='home-label'>消息通知方案</div>
-                                            <div className='home-info'>
-                                                {count?.noticeNumber || 0}
-                                            </div>
-                                        </div>
-                                        <div className='home-message-item' onClick={()=>goPath('send')}>
-                                            <div className='home-label'>消息发送方式</div>
-                                            <div className='home-info'>
-                                                {count?.sendTypeNumber || 0}
-                                            </div>
+                                    <div className='home-user-item' onClick={()=>goPath('user')}>
+                                        <div className='home-label'>用户</div>
+                                        <div className='home-info'>
+                                            {count?.userNumber || 0}
                                         </div>
                                     </div>
-                                </div>
-                                <div className='home-security-box'>
-                                    <div className='home-title'>安全</div>
-                                    <div className='home-security'>
-                                        <div className='home-security-item' onClick={()=>goPath('backups')}>
-                                            <div className='home-security-item-label'>备份与恢复</div>
-                                            <div className='home-security-item-level'>
-                                                <div className='security-level-label'>上次备份时间</div>
-                                                <div className='security-level-info' title={count?.lastBackupsTime}>{count?.lastBackupsTime || '--'}</div>
-                                            </div>
+                                    <div className='home-user-item' onClick={()=>goPath('userGroup')}>
+                                        <div className='home-label'>用户组</div>
+                                        <div className='home-info'>
+                                            {count?.userGroupNumber || 0}
+                                        </div>
+                                    </div>
+                                    <div className='home-user-item' onClick={()=>goPath('role')}>
+                                        <div className='home-label'>权限</div>
+                                        <div className='home-info'>
+                                            {count?.roleNumber || 0}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            :
-                            <>
-                                <div className='home-user-box'>
-                                    <div className='home-title'>用户与权限</div>
-                                    <div className='home-user'>
-                                        <div className='home-user-item' onClick={()=>goPath('orga')}>
-                                            <div className='home-label'>部门</div>
-                                            <div className='home-info'>
-                                                {count?.orgaNumber || 0}
-                                            </div>
-                                        </div>
-                                        <div className='home-user-item' onClick={()=>goPath('user')}>
-                                            <div className='home-label'>用户</div>
-                                            <div className='home-info'>
-                                                {count?.userNumber || 0}
-                                            </div>
-                                        </div>
-                                        <div className='home-user-item' onClick={()=>goPath('userGroup')}>
-                                            <div className='home-label'>用户组</div>
-                                            <div className='home-info'>
-                                                {count?.userGroupNumber || 0}
-                                            </div>
-                                        </div>
-                                        <div className='home-user-item' onClick={()=>goPath('role')}>
-                                            <div className='home-label'>权限</div>
-                                            <div className='home-info'>
-                                                {count?.roleNumber || 0}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='home-box'>
-                                    <div className='home-message-box'>
-                                        <div className='home-title'>消息</div>
-                                        <div className='home-message'>
-                                            <div className='home-message-item' onClick={()=>goPath('notice')}>
-                                                <div className='home-label'>消息通知方案</div>
-                                                <div className='home-info'>
-                                                    {count?.noticeNumber || 0}
-                                                </div>
-                                            </div>
-                                            <div className='home-message-item' onClick={()=>goPath('send')}>
-                                                <div className='home-label'>消息发送方式</div>
-                                                <div className='home-info'>
-                                                    {count?.sendTypeNumber || 0}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='home-licence-box'>
-                                        <div className='home-title'>应用</div>
-                                        <div className='home-licence'>
-                                            <div className='home-licence-item' onClick={()=>goPath('version')}>
-                                                <div className='home-licence-item-label'>版本与许可证</div>
-                                                <div className='home-licence-item-level'>
-                                                    <div className='licence-level-label'>版本类型</div>
-                                                    <div className='licence-level-info'>{count?.version ? '社区版' : '企业版'}</div>
-                                                </div>
-                                            </div>
-                                            <div className='home-licence-item' onClick={()=>goPath('productAuth')}>
-                                                <div className='home-licence-item-label'>应用访问权限</div>
-                                                <div className='home-licence-item-level'>
-                                                    <div className='licence-level-label'>已授权</div>
-                                                    <div className='licence-level-info'>{count?.applyAuthNumber || 0}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
                     }
+                    <div className='home-message-box'>
+                        <div className='home-title'>消息</div>
+                        <div className='home-message'>
+                            <div className='home-message-item' onClick={()=>goPath('notice')}>
+                                <div className='home-label'>消息通知方案</div>
+                                <div className='home-info'>
+                                    {count?.noticeNumber || 0}
+                                </div>
+                            </div>
+                            <div className='home-message-item' onClick={()=>goPath('send')}>
+                                <div className='home-label'>消息发送方式</div>
+                                <div className='home-info'>
+                                    {count?.sendTypeNumber || 0}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className='home-config-box'>
                         <div className='home-title'>流水线配置</div>
                         <div className='home-config'>
@@ -176,7 +122,9 @@ const SettingHome = props => {
                                 </div>
                             </div>
                             <div className='home-config-item' >
-                                <div className='home-config-item-label'>主机配置</div>
+                                <div className='home-config-item-label'>
+                                    主机配置
+                                </div>
                                 <div className='home-config-item-level' onClick={()=>goPath('hostGroup')}>
                                     <div className='config-level-item' >
                                         <div className='config-level-item-label'>主机组</div>
@@ -210,6 +158,40 @@ const SettingHome = props => {
                             </div>
                         </div>
                     </div>
+                    {
+                        version !== 'cloud' &&
+                        <div className='home-licence-box'>
+                            <div className='home-title'>应用</div>
+                            <div className='home-licence'>
+                                <div className='home-licence-item' onClick={()=>goPath('version')}>
+                                    <div className='home-licence-item-label'>版本与许可证</div>
+                                    <div className='home-licence-item-level'>
+                                        <div className='licence-level-label'>版本类型</div>
+                                        <div className='licence-level-info'>{count?.version ? '社区版' : '企业版'}</div>
+                                    </div>
+                                </div>
+                                <div className='home-licence-item' onClick={()=>goPath('productAuth')}>
+                                    <div className='home-licence-item-label'>应用访问权限</div>
+                                    <div className='home-licence-item-level'>
+                                        <div className='licence-level-label'>已授权</div>
+                                        <div className='licence-level-info'>{count?.applyAuthNumber || 0}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    {/*<div className='home-security-box'>*/}
+                    {/*    <div className='home-title'>安全</div>*/}
+                    {/*    <div className='home-security'>*/}
+                    {/*        <div className='home-security-item' onClick={()=>goPath('backups')}>*/}
+                    {/*            <div className='home-security-item-label'>备份与恢复</div>*/}
+                    {/*            <div className='home-security-item-level'>*/}
+                    {/*                <div className='security-level-label'>上次备份时间</div>*/}
+                    {/*                <div className='security-level-info' title={count?.lastBackupsTime}>{count?.lastBackupsTime || '--'}</div>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
             </Col>
         </Row>

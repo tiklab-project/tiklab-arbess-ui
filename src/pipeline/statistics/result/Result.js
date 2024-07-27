@@ -119,7 +119,6 @@ const Result = props =>{
             ]
         }
         chart && chart.setOption(option);
-
     }
 
     return (
