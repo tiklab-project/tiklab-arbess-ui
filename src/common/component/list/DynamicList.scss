@@ -8,7 +8,7 @@ $line-color: #dadfe6;
         .dynamic-item-time{
             font-size: 15px;
             font-weight: bold;
-            line-height: 40px;
+            line-height: 34px;
             padding-left: $main-padding;
             position: relative;
             &:before{
@@ -32,6 +32,11 @@ $line-color: #dadfe6;
                 border: 3px solid var(--thoughtware-blue);
                 border-radius: 50%;
             }
+            &>span{
+                display: inline-block;
+                background: var(--mf-backdrop-color);
+                padding: 0 10px;
+            }
         }
         .dynamic-item-log{
             display: flex;
@@ -54,7 +59,7 @@ $line-color: #dadfe6;
                 display: inline-block;
                 position: absolute;
                 top: 35px;
-                left: 2px;
+                left: 1.5px;
                 width: 8px;
                 height: 8px;
                 background: $line-color;

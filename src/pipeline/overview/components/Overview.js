@@ -104,7 +104,7 @@ const Overview = props =>{
      */
     const findLogPage = (chartKey) => {
         setSpinning(pev=>({...pev, [chartKey]: true}));
-        findLogPageByTime({data:{pipelineId:[params.id]},pageParam:{pageSize:5,currentPage:1}}).then(res=>{
+        findLogPageByTime({data:{pipelineId:[params.id]},pageParam:{pageSize:10,currentPage:1}}).then(res=>{
             if(res.code===0){
                 setDynamicList(res.data?.dataList || [])
             }

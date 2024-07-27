@@ -33,7 +33,7 @@ const DynamicList = props =>{
                         return (
                             <div key={id} className='dynamic-item-log mf-user-avatar' >
                                 <div className='dynamic-item-log-time'>
-                                    {moment(createTime).format("HH:mm:ss")}
+                                    {moment(createTime).format("HH:mm")}
                                 </div>
                                 <Profile userInfo={user}/>
                                 <div className='dynamic-item-log-info'>
