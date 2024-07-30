@@ -44,7 +44,7 @@ const TaskDetails = props =>{
             onClose={onClose}
             width={520}
             mask={true}
-            className="mf task-details"
+            className="task-details"
         >
             <div className="task-details-up">
                 <div className="wrapper-head-title">{HeadlineTitle(dataItem?.taskType)}</div>

@@ -83,14 +83,12 @@ const HostModal = props =>{
                     autoComplete="off"
                     initialValues={{type:"common",authWay:1,authType:2}}
                 >
-                    <Form.Item
-                        name="type"
-                        label="授权类型"
-                    >
+                    <Form.Item name="type" label="授权类型">
                         <Select
                             onChange={changHostType}
                             // disabled={ban}
                             disabled={true}
+                            placeholder={'授权类型'}
                         >
                             <Select.Option value={'common'}>普通</Select.Option>
                             <Select.Option value={'aliyun'}>aliyun</Select.Option>
@@ -102,7 +100,7 @@ const HostModal = props =>{
                         label="名称"
                         rules={[{required:true,message:`名称不能空`},Validation("名称")]}
                     >
-                        <Input/>
+                        <Input placeholder={'名称'}/>
                     </Form.Item>
                     <Form.Item
                         label={<>Ip地址<Tooltip title="Ip地址">
@@ -117,7 +115,7 @@ const HostModal = props =>{
                             }
                         ]}
                     >
-                        <Input/>
+                        <Input placeholder={'Ip地址'}/>
                     </Form.Item>
                     <Form.Item
                         label="端口" name="port"
@@ -129,7 +127,7 @@ const HostModal = props =>{
                             }
                         ]}
                     >
-                        <Input/>
+                        <Input placeholder={'端口'}/>
                     </Form.Item>
                     <AuthType/>
                 </Form>

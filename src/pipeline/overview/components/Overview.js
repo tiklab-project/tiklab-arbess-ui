@@ -9,11 +9,10 @@ import overviewStore from "../store/OverviewStore";
 import historyStore from "../../history/store/HistoryStore";
 import DynamicList from "../../../common/component/list/DynamicList";
 import ListEmpty from "../../../common/component/list/ListEmpty";
-import {runStatusIcon,runStatusText} from "../../history/components/HistoryCommon";
+import {runStatusIcon} from "../../history/components/HistoryCommon";
 import "./Overview.scss";
-import Profile from "../../../common/component/profile/Profile";
-import moment from "moment/moment";
 import GaugeChart from "../../../common/component/echarts/GaugeChart";
+import SearchSelect from "../../../common/component/search/SearchSelect";
 
 
 /**
@@ -251,7 +250,7 @@ const Overview = props =>{
                             <div className='overview-guide-title'>
                                 运行统计
                             </div>
-                            <Select
+                            <SearchSelect
                                 value={runParams}
                                 style={{width:120}}
                                 onChange={value=>setRunParams(value)}
@@ -261,7 +260,7 @@ const Overview = props =>{
                                         <Select.Option key={index} value={index}>{value}</Select.Option>
                                     ))
                                 }
-                            </Select>
+                            </SearchSelect>
                         </div>
                         <Spin spinning={spinning.runResult}>
                             <GaugeChart runResult={runResult}/>

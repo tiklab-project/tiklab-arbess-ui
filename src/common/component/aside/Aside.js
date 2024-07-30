@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import {ArrowLeftOutlined, DownOutlined, LeftCircleOutlined, UpOutlined} from "@ant-design/icons";
+import {DownOutlined, UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
 import {applyJump, disableFunction} from 'thoughtware-core-ui';
 import {inject,observer} from "mobx-react";
 import {renderRoutes} from "react-router-config";
 import  {ExportOutlined} from "@ant-design/icons";
 import feature from '../../../assets/images/pip_feature.png';
+import back from '../../../assets/images/svg/pip_back.svg';
 import "./Aside.scss";
 
 const Aside = props =>  {
@@ -95,8 +96,8 @@ const Aside = props =>  {
                         {
                             item.children ?
                                 (isExpandedTree(item.id)?
-                                        <DownOutlined style={{fontSize: "10px"}}/> :
-                                        <UpOutlined style={{fontSize: "10px"}}/>
+                                        <DownOutlined style={{fontSize: "10px",fontWeight:"bold"}}/> :
+                                        <UpOutlined style={{fontSize: "10px",fontWeight:"bold"}}/>
                                 ): ""
                         }
                     </div>
@@ -134,7 +135,9 @@ const Aside = props =>  {
                 <div className="system-aside">
                     <ul className="system-aside-top">
                         <li className='system-aside-top-head'>
-                            <span className='top-head-icon' onClick={()=>props.history.push('/home')}><ArrowLeftOutlined /></span>
+                            <span className='top-head-icon' onClick={()=>props.history.push('/home')}>
+                                <img src={back} width={19} height={19} alt={''}/>
+                            </span>
                             <span className='top-head-text'>设置</span>
                         </li>
                         {

@@ -367,7 +367,6 @@ const Postprocess = props =>{
                     <Btn
                         title={"添加后置处理"}
                         type={"link-nopadding"}
-                        icon={<PlusCircleOutlined />}
                     />
                 </Dropdown>
             </div>

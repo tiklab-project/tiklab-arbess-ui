@@ -195,7 +195,7 @@ const TaskAdd = props =>{
             visible={newStageDrawer}
             width={600}
             mask={true}
-            className="mf task-add"
+            className="task-add"
         >
             <div className="task-add-up">
                 <div className="wrapper-head-title">选择任务组</div>

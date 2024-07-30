@@ -4,6 +4,7 @@ import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Page from "../../../../common/component/page/Page";
+import SearchInput from "../../../../common/component/search/SearchInput";
 import "./PostprocessUserAdd.scss";
 
 const PostprocessUserAdd = props =>{
@@ -169,12 +170,22 @@ const PostprocessUserAdd = props =>{
         })
     }
 
+    /**
+     * 模糊查询用户
+     * @param e
+     */
+    const changFindUser = e => {
+        setFindUserParam({
+            pageParam,
+            account:e.target.value
+        })
+    }
+
     const userAddMenu = (
         <div className='post-pose-user-add mf'>
-            <Input
-                placeholder={'名称'}
-                prefix={<SearchOutlined/>}
-                // onChange={findUser}
+            <SearchInput
+                placeholder={'搜索姓名'}
+                onPressEnter={changFindUser}
             />
             <div>
                 <Table
@@ -216,7 +227,6 @@ const PostprocessUserAdd = props =>{
         >
             <Btn
                 type={"link-nopadding"}
-                icon={<PlusOutlined/>}
                 title={"添加成员"}
             />
         </Dropdown>

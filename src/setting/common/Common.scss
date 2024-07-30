@@ -1,5 +1,10 @@
 .auth .auth-content{
     padding-top: var(--thoughtware-padding);
+    .ant-avatar{
+        width: 22px;
+        height: 22px;
+        font-size: 12px;
+    }
 }
 
 .host-group-add-drop{

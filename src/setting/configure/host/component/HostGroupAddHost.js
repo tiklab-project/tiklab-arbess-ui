@@ -1,10 +1,11 @@
 import React,{useEffect,useState} from "react";
-import {Dropdown, Input, Table} from "antd";
-import {DeleteOutlined, PlusOutlined, SearchOutlined} from "@ant-design/icons";
+import {Dropdown, Table} from "antd";
+import {DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import hostStore from "../store/HostStore";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Btn from "../../../../common/component/btn/Btn";
 import Page from "../../../../common/component/page/Page";
+import SearchInput from "../../../../common/component/search/SearchInput";
 
 const HostGroupAddHost = (props) => {
 
@@ -162,11 +163,9 @@ const HostGroupAddHost = (props) => {
 
     const hostAddMenu = (
         <div className='host-group-add-drop mf'>
-            <Input
-                placeholder={"名称或ip地址"}
-                prefix={<SearchOutlined/>}
+            <SearchInput
+                placeholder={"搜索名称，ip地址"}
                 onPressEnter={changFindHost}
-                style={{width:160}}
             />
             <div className='host-group-host-table'>
                 <Table
@@ -220,11 +219,11 @@ const HostGroupAddHost = (props) => {
                     visible={hostAddVisible}
                     trigger={['click']}
                     onVisibleChange={visible => setHostAddVisible(visible)}
+                    getPopupContainer={e=>e.parentElement}
                     overlayStyle={{width:300}}
                 >
                     <Btn
                         type={"link-nopadding"}
-                        icon={<PlusOutlined/>}
                         title={"添加主机"}
                     />
                 </Dropdown>

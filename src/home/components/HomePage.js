@@ -7,6 +7,7 @@ import ListIcon from "../../common/component/list/ListIcon";
 import echarts from "../../common/component/echarts/Echarts";
 import Profile from "../../common/component/profile/Profile";
 import GaugeChart from "../../common/component/echarts/GaugeChart";
+import SearchSelect from "../../common/component/search/SearchSelect";
 import "./HomePage.scss";
 
 /**
@@ -291,7 +292,7 @@ const HomePage = props =>{
                             <div className="homePage-guide-title">
                                 运行统计
                             </div>
-                            <Select
+                            <SearchSelect
                                 value={runParams}
                                 style={{width:120}}
                                 onChange={value=>setRunParams(value)}
@@ -301,7 +302,7 @@ const HomePage = props =>{
                                         <Select.Option key={index} value={index}>{value}</Select.Option>
                                     ))
                                 }
-                            </Select>
+                            </SearchSelect>
                         </div>
                         <Spin spinning={spinning.runResult}>
                             <GaugeChart runResult={runResult}/>
@@ -317,7 +318,7 @@ const HomePage = props =>{
                             <div className="homePage-guide-title">
                                 发布次数TOP10统计
                             </div>
-                            <Select
+                            <SearchSelect
                                 value={rayRateParams}
                                 style={{width:120}}
                                 onChange={value=>setRayRateParams(value)}
@@ -327,7 +328,7 @@ const HomePage = props =>{
                                         <Select.Option key={index} value={index}>{value}</Select.Option>
                                     ))
                                 }
-                            </Select>
+                            </SearchSelect>
                         </div>
                         <div className="home-release-content">
                             <div className='home-release-pipeline'>
@@ -358,7 +359,7 @@ const HomePage = props =>{
                                         ...columns,
                                     ]}
                                     pagination={false}
-                                    locale={{emptyText: <ListEmpty title={"暂无"}/>}}
+                                    locale={{emptyText: <ListEmpty/>}}
                                     rowKey={record=>record.pipeline.id}
                                     dataSource={releasePipelineTop}
                                 />
@@ -387,7 +388,7 @@ const HomePage = props =>{
                                         ...columns,
                                     ]}
                                     pagination={false}
-                                    locale={{emptyText: <ListEmpty title={"暂无"}/>}}
+                                    locale={{emptyText: <ListEmpty/>}}
                                     rowKey={record=>record.user.id}
                                     dataSource={releaseUserTop}
                                 />

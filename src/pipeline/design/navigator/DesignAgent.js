@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {Select} from "antd";
 import agentStore from "../../../setting/configure/agent/store/AgentStore";
+import SearchSelect from "../../../common/component/search/SearchSelect";
 
 const DesignAgent = (props) => {
 
@@ -10,8 +11,6 @@ const DesignAgent = (props) => {
 
     //agent列表
     const [agentList,setAgentList] = useState([]);
-    // 是否显示下拉图标
-    const [showArrow,setShoeArrow] = useState(false)
 
     useEffect(()=>{
         findAgentList().then(res=>{
@@ -24,11 +23,8 @@ const DesignAgent = (props) => {
     },[])
 
     return (
-        <Select
+        <SearchSelect
             showSearch
-            showArrow={showArrow}
-            onMouseEnter={()=>setShoeArrow(true)}
-            onMouseLeave={()=>setShoeArrow(false)}
             className='design-agent'
             value={defaultAgent}
             onChange={value=>setDefaultAgent(value)}
@@ -41,7 +37,7 @@ const DesignAgent = (props) => {
                     <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
                 ))
             }
-        </Select>
+        </SearchSelect>
     )
 }
 

@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
 import {Space,Table,Row,Col} from "antd";
-import {EllipsisOutlined, EditOutlined, PlusOutlined} from "@ant-design/icons";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListIcon from "../../../../common/component/list/ListIcon";
@@ -134,13 +133,12 @@ const Grouping = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited mf'>
+                <div className='mf-home-limited'>
                     <BreadCrumb firstItem={"分组"}>
                         <Btn
                             type={'primary'}
                             title={"添加分组"}
                             onClick={createEnv}
-                            icon={<PlusOutlined/>}
                         />
                     </BreadCrumb>
                     <GroupingModal

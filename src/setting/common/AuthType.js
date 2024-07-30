@@ -12,7 +12,7 @@ const AuthType = props =>{
     return(
         <>
             <Form.Item label="认证类型" name="authType">
-                <Select>
+                <Select placeholder={'认证类型'}>
                     <Select.Option value={1}>username&password</Select.Option>
                     <Select.Option value={2}>私钥</Select.Option>
                 </Select>
@@ -27,13 +27,13 @@ const AuthType = props =>{
                                 label="用户名"
                                 name="username"
                                 rules={[{required:true,message:"请输入用户名"}]}
-                            ><Input/>
+                            ><Input placeholder={'用户名'}/>
                             </Form.Item>
                             <Form.Item
                                 label="密码"
                                 name="password"
                                 rules={[{required:true,message:"请输入密码"}]}
-                            ><Input.Password/>
+                            ><Input.Password placeholder={'密码'}/>
                             </Form.Item>
                         </>
                         :
@@ -41,7 +41,7 @@ const AuthType = props =>{
                             label="私钥"
                             name="privateKey"
                             rules={[{required:true,message:"请输入私钥"}]}
-                        ><Input.TextArea autoSize={{minRows: 2, maxRows: 8}}/>
+                        ><Input.TextArea autoSize={{minRows: 2, maxRows: 8}} placeholder={'私钥'}/>
                         </Form.Item>
                 }
             </Form.Item>

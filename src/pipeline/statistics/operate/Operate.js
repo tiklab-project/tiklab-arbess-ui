@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, Spin, Select } from 'antd';
 import BreadCrumb from '../../../common/component/breadcrumb/BreadCrumb';
+import SearchSelect from "../../../common/component/search/SearchSelect";
 import echarts from '../../../common/component/echarts/Echarts';
 import statisticsStore from '../common/StatisticsStore';
 import '../common/Statistics.scss';
@@ -220,16 +221,16 @@ const Operate = (props) => {
                 lg={{ span: "24" }}
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
-                className="mf-home-limited mf"
+                className="mf-home-limited"
             >
                 <div className='statistics-select'>
                     <BreadCrumb firstItem='运行统计' />
-                    <Select onChange={(value) => setCountDay(value)} value={countDay} style={{ width: 180 }}>
+                    <SearchSelect onChange={(value) => setCountDay(value)} value={countDay} style={{ width: 150 }}>
                         <Select.Option value={7}>最近7天</Select.Option>
                         <Select.Option value={14}>最近14天</Select.Option>
                         <Select.Option value={30}>最近30天</Select.Option>
                         <Select.Option value={90}>最近90天</Select.Option>
-                    </Select>
+                    </SearchSelect>
                 </div>
                 <div className='statistics-box'>
                     {['runTimeSpan', 'timeTrend', 'successTrend', 'errorTrend', 'haltTrend'].map((key) => (

@@ -1,11 +1,13 @@
 import React,{useEffect,useState} from "react";
-import {Input,Select,Space,Row,Col} from "antd";
-import {CaretDownOutlined, PlusOutlined, SearchOutlined} from "@ant-design/icons";
+import {Select,Space,Row,Col} from "antd";
+import {CaretDownOutlined} from "@ant-design/icons";
 import {getUser} from "thoughtware-core-ui";
 import PipelineTable from "./PipelineTable";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";
 import Tabs from "../../../common/component/tabs/Tabs";
+import SearchInput from "../../../common/component/search/SearchInput";
+import SearchSelect from "../../../common/component/search/SearchSelect";
 import {debounce} from "../../../common/utils/Client";
 import pipelineStore from "../store/PipelineStore";
 import envStore from "../../../setting/configure/env/store/EnvStore";
@@ -193,14 +195,9 @@ const Pipeline = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited mf">
+                <div className="mf-home-limited">
                     <BreadCrumb firstItem={"流水线"}>
-                        <Btn
-                            onClick={onClick}
-                            type={"primary"}
-                            title={"新建流水线"}
-                            icon={<PlusOutlined/>}
-                        />
+                        <Btn onClick={onClick} type={"primary"} title={"新建流水线"}/>
                     </BreadCrumb>
                     <div className="pipeline-flex">
                         <Tabs type={listType} tabLis={[
@@ -209,14 +206,18 @@ const Pipeline = props =>{
                             {id:'follow', title:"我收藏的"}
                         ]} onClick={clickType}/>
                         <Space size={'middle'}>
-                            <Select
+                            <SearchInput
+                                placeholder="搜索名称"
+                                onPressEnter={onChangeSearch}
+                                style={{ width: 190 }}
+                            />
+                            <SearchSelect
                                 showSearch
-                                style={{width:150}}
-                                placeholder={"分组"}
-                                suffixIcon={<CaretDownOutlined />}
                                 filterOption={(input, option) =>
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
+                                style={{width:150}}
+                                placeholder={"分组"}
                                 onChange={value=>screen(value,"groupId")}
                             >
                                 <Select.Option value={'all'} key={'all'}>全部</Select.Option>
@@ -225,15 +226,14 @@ const Pipeline = props =>{
                                         <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
                                     ))
                                 }
-                            </Select>
-                            <Select
+                            </SearchSelect>
+                            <SearchSelect
                                 showSearch
-                                style={{width:150}}
-                                placeholder={"环境"}
-                                suffixIcon={<CaretDownOutlined />}
                                 filterOption={(input, option) =>
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
+                                style={{width:150}}
+                                placeholder={"环境"}
                                 onChange={value=>screen(value,"envId")}
                             >
                                 <Select.Option value={'all'} key={'all'}>全部</Select.Option>
@@ -242,15 +242,7 @@ const Pipeline = props =>{
                                         <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
                                     ))
                                 }
-                            </Select>
-                            <Input
-                                allowClear
-                                placeholder="流水线名称"
-                                autoComplete={"off"}
-                                onPressEnter={onChangeSearch}
-                                prefix={<SearchOutlined />}
-                                style={{ width: 200 }}
-                            />
+                            </SearchSelect>
                         </Space>
                     </div>
                     <PipelineTable

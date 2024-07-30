@@ -234,7 +234,6 @@ const Condition = props =>{
                 <Btn
                     title={"添加条件"}
                     type={"link-nopadding"}
-                    icon={<PlusCircleOutlined/>}
                     onClick={()=>addCondition()}
                 />
             </div>

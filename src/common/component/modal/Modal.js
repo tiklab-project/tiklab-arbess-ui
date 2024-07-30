@@ -41,7 +41,7 @@ const Modals = props => {
             closable={false}
             destroyOnClose={true}
             footer={modalFooter}
-            className="mf mf-modal"
+            className="mf-modal"
             {...res}
         >
             <div className='mf-modal-up'>

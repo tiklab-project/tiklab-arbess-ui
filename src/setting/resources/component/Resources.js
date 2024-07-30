@@ -131,7 +131,7 @@ const Resources = props => {
                 lg={{ span: "16", offset: "4" }}
                 xl={{ span: "12", offset: "6" }}
             >
-                <div className='mf-home-limited mf'>
+                <div className='mf-home-limited'>
                     <BreadCrumb firstItem={"资源监控"}/>
                     <div className='resources-info'>
                         <div className='resources-info-item'>

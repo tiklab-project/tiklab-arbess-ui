@@ -161,12 +161,18 @@ const History = props =>{
      * 换页
      */
     const changPage = pages =>{
-        screen({
-            pageParam:{
-                pageSize: pageSize,
-                currentPage: pages,
-            }
-        })
+        if(pages==='reset'){
+            setParams({
+                pageParam
+            })
+        } else {
+            screen({
+                pageParam:{
+                    pageSize: pageSize,
+                    currentPage: pages,
+                }
+            })
+        }
     }
 
     /**
@@ -323,12 +329,11 @@ const History = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited mf">
+                <div className="mf-home-limited">
                     <BreadCrumb firstItem={"历史"}/>
                     <HistoryScreen
                         {...props}
                         screen={screen}
-                        pipelineStore={pipelineStore}
                     />
                     <div className="history-table">
                         <Table

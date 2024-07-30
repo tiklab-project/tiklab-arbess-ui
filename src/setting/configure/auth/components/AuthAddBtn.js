@@ -29,7 +29,6 @@ const AuthAddBtn = props =>{
                 onClick={addAuthBtn}
                 type={isConfig?"row":"primary"}
                 title={isConfig?"添加":"添加认证"}
-                icon={<PlusOutlined/>}
             />
             <AuthModal
                 visible={visible}

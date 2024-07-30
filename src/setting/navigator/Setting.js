@@ -6,7 +6,7 @@ import {
     DeploymentUnitOutlined,
     MacCommandOutlined,
     TeamOutlined,
-    ProjectOutlined
+    ProjectOutlined, SafetyCertificateOutlined
 } from "@ant-design/icons";
 import Aside from "../../common/component/aside/Aside";
 
@@ -125,7 +125,7 @@ const Setting = props =>{
         {
             id:"security",
             title:"安全",
-            icon:<LayoutOutlined />,
+            icon:<SafetyCertificateOutlined />,
             children: [
                 {
                     id:"/setting/backups",

@@ -1,14 +1,14 @@
 import React, {useState,useEffect} from "react";
-import {DatePicker, Select, Space, Row, Col, Spin} from "antd";
+import {Select, Space, Row, Col, Spin} from "antd";
 import {observer} from "mobx-react";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";
+import SearchSelect from "../../../common/component/search/SearchSelect";
+import SearchPicker from "../../../common/component/search/SearchPicker";
 import DynamicList from "../../../common/component/list/DynamicList";
 import overviewStore from "../store/OverviewStore";
 import pipelineStore from "../../pipeline/store/PipelineStore";
-
-const { RangePicker } = DatePicker;
 
 const pageSize = 10;
 
@@ -147,7 +147,7 @@ const Dynamic = props =>{
                         <Space>
                             {
                                 route.path==='/dyna' &&
-                                <Select
+                                <SearchSelect
                                     showSearch
                                     placeholder={"流水线"}
                                     style={{width:150}}
@@ -163,9 +163,9 @@ const Dynamic = props =>{
                                             return <Select.Option value={item.id} key={item.id}>{item.name}</Select.Option>
                                         })
                                     }
-                                </Select>
+                                </SearchSelect>
                             }
-                            <Select
+                            <SearchSelect
                                 placeholder={"操作"}
                                 style={{width:150}}
                                 onChange={(value)=>changParams(value,"actionType")}
@@ -176,8 +176,8 @@ const Dynamic = props =>{
                                         return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
                                     })
                                 }
-                            </Select>
-                            <RangePicker
+                            </SearchSelect>
+                            <SearchPicker
                                 onChange={(value,e)=>changParams(e,"timestamp")}
                                 placeholder={["开始时间","结束时间"]}
                             />

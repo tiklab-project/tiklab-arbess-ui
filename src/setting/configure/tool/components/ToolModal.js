@@ -99,7 +99,7 @@ const ToolModal = props =>{
             <div className="resources-modal">
                 <Form form={form} layout="vertical" name="userForm" autoComplete="off">
                     <Form.Item name="scmType" label="环境配置类型" rules={[{required:true,message:`请选择环境配置类型`}]}>
-                        <Select onChange={changScmType} disabled={formValue && formValue}>
+                        <Select onChange={changScmType} disabled={formValue && formValue} placeholder={'环境配置类型'}>
                             {
                                 lis.map(item=>(
                                     <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
@@ -116,7 +116,7 @@ const ToolModal = props =>{
                             {required:true,message:`请输入${scmTitle(scmType)}名称`},
                             Validation(scmTitle(scmType)+"名称")
                         ]}
-                    ><Input/>
+                    ><Input placeholder={'名称'}/>
                     </Form.Item>
                     <Form.Item
                         label="地址"
@@ -125,7 +125,7 @@ const ToolModal = props =>{
                             {required:true,message:`请输入${scmTitle(scmType)}地址`},
                             Validation(scmTitle(scmType)+"地址")
                         ]}
-                    ><Input/>
+                    ><Input placeholder={'地址'}/>
                     </Form.Item>
                 </Form>
             </div>

@@ -87,7 +87,7 @@ const HostGroupAdd = (props) => {
                         name={"groupName"}
                         rules={[{required:true,message:`名称不能空`},Validation("名称")]}
                     >
-                        <Input/>
+                        <Input placeholder={'名称'}/>
                     </Form.Item>
                     <HostGroupAddHost
                         addHost={addHost}

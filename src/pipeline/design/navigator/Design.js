@@ -147,18 +147,8 @@ const Design = props =>{
                                 />
                                 {
                                     pipeline?.state===2 ?
-                                        <Btn
-                                            type={"primary"}
-                                            icon={<Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
-                                            title={"运行中"}
-                                        />
-                                        :
-                                        <Btn
-                                            type={runStatu() ? "primary" : "disabled" }
-                                            onClick={runStatu() ? ()=>run() : undefined }
-                                            icon={<CaretRightOutlined />}
-                                            title={"运行"}
-                                        />
+                                        <Btn type={"primary"} title={"运行中"}/> :
+                                        <Btn type={runStatu() ? "primary" : "disabled" } onClick={runStatu() ? ()=>run() : undefined } title={"运行"}/>
                                 }
                             </div>
                         </div>

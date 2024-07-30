@@ -1,9 +1,9 @@
 import React,{useEffect, useState} from "react";
-import {Table,Input} from "antd";
-import {SearchOutlined} from '@ant-design/icons';
+import {Table} from "antd";
 import Btn from "../../../common/component/btn/Btn";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";
+import SearchInput from "../../../common/component/search/SearchInput";
 
 /**
  * 流水线用户添加
@@ -167,9 +167,8 @@ const PipelineUserAdd = props =>{
 
     return (
         <div className='pipeline-user-add mf'>
-            <Input
-                placeholder={"名称"}
-                prefix={<SearchOutlined/>}
+            <SearchInput
+                placeholder={"搜索姓名"}
                 onPressEnter={changFindUser}
             />
             <div className='pipeline-user-add-table'>

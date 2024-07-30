@@ -30,7 +30,6 @@ const HostAddBtn = props =>{
                 onClick={addHostBtn}
                 type={isConfig?"row":"primary"}
                 title={isConfig?"添加":"添加主机"}
-                icon={<PlusOutlined/>}
             />
 
             <HostModal

@@ -205,7 +205,7 @@ const PostprocessAddEdit = props =>{
                     initialValues={{taskType:'message',typeList:["site"],type:'shell'}}
                 >
                     <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"类型不能为空"}]}>
-                        <Select disabled={formValue && formValue}>
+                        <Select disabled={formValue && formValue} placeholder='类型'>
                             <Select.Option value={'message'}>消息通知</Select.Option>
                             <Select.Option value={'script'}>执行脚本</Select.Option>
                         </Select>
@@ -218,7 +218,7 @@ const PostprocessAddEdit = props =>{
                             getFieldValue('taskType') === 'message' ?
                                 <>
                                     <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
-                                        <Input/>
+                                        <Input placeholder='名称'/>
                                     </Form.Item>
                                     <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"消息发送方式不能为空"}]}>
                                         <Checkbox.Group>
@@ -253,17 +253,16 @@ const PostprocessAddEdit = props =>{
                                         />
                                     </div>
                                 </>
-
                                 :
                                 <>
                                     <Form.Item name="type" label={"脚本类型"} rules={[{required:true, message:"类型不能为空"}]}>
-                                        <Select>
+                                        <Select placeholder='脚本类型'>
                                             <Select.Option value={"shell"}>shell脚本</Select.Option>
                                             <Select.Option value={"bat"}>bat脚本</Select.Option>
                                         </Select>
                                     </Form.Item>
                                     <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
-                                        <Input/>
+                                        <Input placeholder='名称'/>
                                     </Form.Item>
                                     <Form.Item label={'脚本命令'}>
                                         <PostprocessMirrorScenario

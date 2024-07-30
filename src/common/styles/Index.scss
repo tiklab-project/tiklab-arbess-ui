@@ -4,31 +4,18 @@ ul li{
     list-style: none;
 }
 
-.mf {
-    .ant-form-item{
-        margin-bottom: 20px !important;
-    }
-    .ant-form-item-explain-error{
-        min-height: 20px !important;
-        height: 20px !important;
-    }
-    .ant-avatar{
-        width: 22px !important;
-        height: 22px !important;
-        line-height: 22px !important;
-        font-size: 12px !important;
-    }
-}
-
 .mf-home-limited{
     padding: 20px 30px;
     min-width: 576px;
 }
 
-.mf, .mf-home-limited{
+.mf-layout, .ant-modal, .ant-drawer {
+    .ant-form-item{
+        margin-bottom: 20px !important;
+    }
     .ant-form-item-label>label{
-        font-size: 12px;
-        color: #666;
+        font-size: 13px;
+        color: #777;
         font-weight: 600;
     }
     .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):after {
@@ -47,6 +34,10 @@ ul li{
     .ant-form-item-explain{
         font-size: 13px !important;
     }
+    .ant-form-item-explain-error{
+        min-height: 20px !important;
+        height: 20px !important;
+    }
     .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon{
         background-color: var(--thoughtware-blue);
     }
@@ -62,8 +53,8 @@ ul li{
     .ant-table-thead>tr>th{
         background: #ffffff;
         padding: 8px;
-        font-size: 12px;
-        color: #666;
+        font-size: 13px;
+        color: #777;
         font-weight: 600;
     }
     .ant-table-tbody>tr>td{
@@ -89,12 +80,48 @@ ul li{
     .ant-modal-footer{
         border:none;
     }
+    .ant-empty-image{
+        margin-bottom: 0;
+        .ant-empty-img-default{
+            width: 100px;
+        }
+    }
+    .ant-empty-description{
+        font-size: 13px;
+        color: #999;
+        padding-bottom: 8px;
+    }
     .icon {
         width: 16px;
         height: 16px;
         vertical-align: -0.15em;
         fill: currentColor;
         overflow: hidden;
+    }
+}
+
+.ant-modal,.ant-drawer{
+    .ant-btn{
+        font-weight: 600;
+        border-radius: 4px;
+        color: #42526E;
+        background: var(--thoughtware-gray) !important;
+        border: 1px solid var(--thoughtware-gray) !important;
+        &:hover{
+            color: #42526E;
+            background-color: #e3e8f0;
+            border-color: #e3e8f0;
+        }
+    }
+    .ant-btn-primary{
+        background: var(--thoughtware-blue) !important;
+        border-color: var(--thoughtware-blue) !important;
+        color: #ffffff;
+        &:hover{
+            color: #ffffff;
+            background:var(--thoughtware-blue);
+            border-color:var(--thoughtware-blue);
+        }
     }
 }
 
@@ -174,30 +201,29 @@ ul li{
 }
 
 :root {
-    --thoughtware-white: #fff;   /* 主色调白*/
-    --thoughtware-black: #000;   /*主色调黑 */
-    --thoughtware-blue: #0d66e4;   /* 主色调蓝*/
-    --thoughtware-gray-200: #ececec;  /*border 的边线 */
-    --thoughtware-gray-300: #edf0f5;  /*hover颜色 */
-    --thoughtware-gray-400: #e3e8f0;  /*左侧导航 选中颜色 */
-    --thoughtware-gray-500: #999; /* 文字次级颜色灰色调*/
-    --thoughtware-gray-600:#f7f7f7; /* 内容区域侧边栏色调 */
-    --thoughtware-gray: #efefef;  /* 主色调灰 左侧导航*/
+    --thoughtware-white: #fff;
+    --thoughtware-black: #000;
+    --thoughtware-blue: #0d66e4;
+    --thoughtware-gray-200: #ececec;
+    --thoughtware-gray-300: #edf0f5;
+    --thoughtware-gray-400: #e3e8f0;
+    --thoughtware-gray-500: #999;
+    --thoughtware-gray-600:#f7f7f7;
+    --thoughtware-gray: #f7f7f7;
 
-    --thoughtware-padding: 20px;  /*页面边距 */
-    --thoughtware-padding-resove: -20px; /* 页面边距*/
-    --thoughtware-padding-item: 15px;  /*元素间隔边距 */
-    --thoughtware-padding-resove-item:-15px;  /*元素间隔边距 */
+    --thoughtware-padding: 20px;
+    --thoughtware-padding-resove: -20px;
+    --thoughtware-padding-item: 15px;
+    --thoughtware-padding-resove-item:-15px;
 
-    --thoughtware-font-12: 12px;  /*图文排需要的文字 */
-    --thoughtware-font-13: 13px;  /*描述文字 */
-    --thoughtware-font-14: 14px; /*正文 */
-    --thoughtware-font-15: 15px;  /* 2级标题*/
-    --thoughtware-font-16: 16px;  /*标题 */
+    --thoughtware-font-12: 12px;
+    --thoughtware-font-13: 13px;
+    --thoughtware-font-14: 14px;
+    --thoughtware-font-15: 15px;
+    --thoughtware-font-16: 16px;
 
-    --thoughtware-font-weight-bold: bold;  /*标题字重 */
+    --thoughtware-font-weight-bold: bold;
 
-    /* 图标大小 */
     --thoughtware-icon-size-16: 16px;
     --thoughtware-icon-size-20: 20px;
     --thoughtware-icon-size-22: 22px;

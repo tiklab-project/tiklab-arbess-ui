@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {Col, Row, Table} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import PostprocessAddEdit from "./PostprocessAddEdit";
 import {TaskTitleIcon} from "../../processDesign/gui/component/TaskTitleIcon";
@@ -123,8 +122,8 @@ const Postprocess = props =>{
                 className="post-pose"
             >
                 <div className="post-pose-up">
-                    <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}个后置处理</div>
-                    <Btn title={"添加"} icon={<PlusOutlined/>} onClick={()=>addPostprocess()}/>
+                    <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}条</div>
+                    <Btn title={"添加"} onClick={addPostprocess}/>
                     <PostprocessAddEdit
                         {...props}
                         findPost={findPost}

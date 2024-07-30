@@ -4,6 +4,7 @@ import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import statisticsStore from "../common/StatisticsStore";
 import echarts from "../../../common/component/echarts/Echarts";
 import '../common/Statistics.scss';
+import SearchSelect from "../../../common/component/search/SearchSelect";
 
 
 const Result = props =>{
@@ -130,20 +131,20 @@ const Result = props =>{
                 lg={{ span: "24" }}
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
-                className="mf-home-limited mf"
+                className="mf-home-limited"
             >
                 <div className='statistics-select'>
                     <BreadCrumb firstItem={'结果统计'}/>
-                    <Select
+                    <SearchSelect
                         onChange={value=>{setCountDay(value)}}
                         value={countDay}
-                        style={{width:180}}
+                        style={{width:150}}
                     >
                         <Select.Option value={7}>最近7天</Select.Option>
                         <Select.Option value={14}>最近14天</Select.Option>
                         <Select.Option value={30}>最近30天</Select.Option>
                         <Select.Option value={90}>最近90天</Select.Option>
-                    </Select>
+                    </SearchSelect>
                 </div>
                 <div className='statistics-box'>
                     {['numberTrend', 'rateTrend'].map((key) => (

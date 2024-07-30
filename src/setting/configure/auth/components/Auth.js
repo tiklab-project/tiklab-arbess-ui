@@ -133,7 +133,7 @@ const Auth = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited mf'>
+                <div className='mf-home-limited'>
                     <BreadCrumb firstItem={"认证"}>
                         <AuthAddBtn
                             visible={visible}

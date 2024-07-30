@@ -120,7 +120,7 @@ const VariableAddEdit = props =>{
                             }),
                         ]}
                     >
-                        <Input/>
+                        <Input placeholder="变量名"/>
                     </Form.Item>
                     <Form.Item name="varType" label="类别" rules={[{required:true,message:"类别不能为空"}]}>
                         <Select>
@@ -129,7 +129,7 @@ const VariableAddEdit = props =>{
                         </Select>
                     </Form.Item>
                     <Form.Item name="varValue" label="默认值" rules={[{required:true,message:"默认值不能为空"}]}>
-                        <Input/>
+                        <Input  placeholder="默认值"/>
                     </Form.Item>
                     {/*<Form.Item shouldUpdate={(prevValues,currentValues)=> prevValues.varType!==currentValues.varType}>*/}
                     {/*    {({ getFieldValue })=>*/}

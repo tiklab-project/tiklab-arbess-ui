@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {Row, Col, Table} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
@@ -107,12 +106,8 @@ const Variable = props =>{
                 className="variable"
             >
                 <div className="variable-up">
-                    <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}个变量</div>
-                    <Btn
-                        title={"添加"}
-                        icon={<PlusOutlined/>}
-                        onClick={()=>addVariable()}
-                    />
+                    <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}条</div>
+                    <Btn title={"添加"} onClick={addVariable}/>
                     <VariableAddEdit
                         {...props}
                         findVariable={findVariable}

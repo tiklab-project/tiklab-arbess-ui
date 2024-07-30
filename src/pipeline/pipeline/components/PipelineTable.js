@@ -337,7 +337,7 @@ const PipelineTable = props =>{
                 dataSource={pipelineListPage}
                 rowKey={record=>record.id}
                 pagination={false}
-                locale={{emptyText: <ListEmpty title={listType==='all'?"暂无流水线":"暂无收藏"}/>}}
+                locale={{emptyText: <ListEmpty title={listType==='follow'?"暂无收藏":"暂无流水线"}/>}}
             />
             <Page
                 currentPage={pipPage.currentPage}

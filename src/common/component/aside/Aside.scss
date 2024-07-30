@@ -6,7 +6,7 @@
         height: 100%;
         flex-grow: 0;
         flex-shrink: 0;
-        flex-basis: 200px;
+        flex-basis: 220px;
         background: var(--mf-backdrop-color);
         border-right: 1px solid var(--mf-border-color);
         &-top{
@@ -66,6 +66,7 @@
         }
         &-select {
             background: var(--mf-select-color);
+            border-left: 3px solid var(--thoughtware-blue);
         }
     }
     &-content{
@@ -75,5 +76,6 @@
     }
     .sys-content-icon{
         padding-right: 5px;
+        font-size: 17px;
     }
 }

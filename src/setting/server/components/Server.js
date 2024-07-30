@@ -281,7 +281,7 @@ const Server = props =>{
                 xl={{ span: "22", offset: "1"}}
                 xxl={{ span: "20", offset: "2" }}
             >
-                <div className="mf-home-limited mf">
+                <div className="mf-home-limited">
                     <BreadCrumb firstItem={"服务集成"} >
                         <ServerAddBtn
                             type={'gitee'}

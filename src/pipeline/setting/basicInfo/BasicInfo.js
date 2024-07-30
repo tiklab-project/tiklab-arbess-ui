@@ -166,7 +166,7 @@ const BasicInfo = props =>{
                 xl={{ span: "16", offset: "4" }}
                 xxl={{ span: "14", offset: "5" }}
             >
-                <div className="mf-home-limited mf">
+                <div className="mf-home-limited">
                     <div className="pipelineReDel-up">
                         <BreadCrumb firstItem={"流水线信息"}/>
                     </div>

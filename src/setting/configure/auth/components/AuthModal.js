@@ -71,7 +71,7 @@ const AuthModal = props =>{
                     initialValues={{type:1,authWay:1,authType:2}}
                 >
                     <Form.Item name="authPublic" label="认证权限">
-                        <Select>
+                        <Select placeholder={'认证权限'}>
                             <Select.Option value={1}>全局</Select.Option>
                             <Select.Option value={2}>私有</Select.Option>
                         </Select>
@@ -80,7 +80,7 @@ const AuthModal = props =>{
                         name="name"
                         label="名称"
                         rules={[{required:true,message:`名称不能空`},Validation("名称")]}
-                    ><Input/>
+                    ><Input placeholder={'名称'}/>
                     </Form.Item>
                     <AuthType/>
                 </Form>

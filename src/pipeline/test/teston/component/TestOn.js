@@ -181,7 +181,7 @@ const TestOn = props => {
                 xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited mf">
+                <div className="mf-home-limited">
                     <BreadCrumb firstItem={"TestOn自动化测试"}/>
                     <div className='test-table'>
                         <Table
@@ -191,7 +191,7 @@ const TestOn = props => {
                             dataSource={testList}
                             rowKey={record=>record.relevanceId}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={"暂无测试报告"}/>}}
+                            locale={{emptyText: <ListEmpty title={"暂无TestOn自动化测试"}/>}}
                         />
                         <Page
                             currentPage={param.pageParam.currentPage}

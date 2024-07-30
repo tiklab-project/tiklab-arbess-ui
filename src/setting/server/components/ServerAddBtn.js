@@ -1,5 +1,4 @@
 import React from "react";
-import {PlusOutlined} from "@ant-design/icons";
 import Btn from "../../../common/component/btn/Btn";
 import ServerModal from "./ServerModal";
 
@@ -30,7 +29,6 @@ const ServerAddBtn = props =>{
                 onClick={addServerBtn}
                 type={isConfig?"row":"primary"}
                 title={isConfig?"添加":"添加服务"}
-                icon={<PlusOutlined/>}
             />
             <ServerModal
                 visible={visible}

@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
 import toolStore from "../store/ToolStore";
 import ToolModal from "./ToolModal";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -132,13 +131,12 @@ const Tool = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited mf'>
+                <div className='mf-home-limited'>
                     <BreadCrumb firstItem={"工具"}>
                         <Btn
                             onClick={addEnvi}
                             type={"primary"}
                             title={"添加工具"}
-                            icon={<PlusOutlined/>}
                         />
                     </BreadCrumb>
                     <div className="auth-content">

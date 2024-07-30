@@ -1,15 +1,15 @@
 .mf-btn{
     display: inline-block;
-    font-weight: 400;
+    font-weight: 600;
     white-space: nowrap;
     text-align: center;
     cursor: pointer;
     padding: 4px 15px;
     font-size: 14px;
     border-radius: 4px;
-    color: rgba(0,0,0,.85);
-    background: #fff none;
-    border: 1px solid #d9d9d9;
+    color: #42526E;
+    background-color: var(--thoughtware-gray);
+    border: 1px solid var(--thoughtware-gray);
 }
 
 .mf-btn-primary{

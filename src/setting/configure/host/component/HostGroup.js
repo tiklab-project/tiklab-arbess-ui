@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
 import {Col, Row, Space, Table} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import hostGroupStore from "../store/HostGroupStore";
 import Btn from "../../../../common/component/btn/Btn";
@@ -139,13 +138,12 @@ const HostGroup = (props) => {
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited mf'>
+                <div className='mf-home-limited'>
                     <BreadCrumb firstItem={"主机组"}>
                         <Btn
                             type={"primary"}
                             title={"添加主机组"}
                             onClick={addHostGroup}
-                            icon={<PlusOutlined/>}
                         />
                     </BreadCrumb>
                     <HostGroupAdd

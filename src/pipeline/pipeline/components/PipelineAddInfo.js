@@ -148,8 +148,7 @@ const PipelineAddInfo = props =>{
 
     // 权限
     const renderPowerType = (
-        <div className="pipeline-power">
-            <div className="pipeline-power-title">流水线权限</div>
+        <Form.Item className="pipeline-power" label='流水线权限'>
             <div className="pipeline-power-content">
                 {
                     powerLis.map(item=>{
@@ -173,7 +172,7 @@ const PipelineAddInfo = props =>{
                     })
                 }
             </div>
-        </div>
+        </Form.Item>
     )
 
     const columns = [
@@ -248,8 +247,8 @@ const PipelineAddInfo = props =>{
             message:"名称不能为空"
         },
         {
-            pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,30}$/,
-            message: "流水线名称最长30位且不能包含非法字符，如&,%，&，#……等",
+            pattern: /^[\u4e00-\u9fa5a-zA-Z0-9_-]{0,50}$/,
+            message: "流水线名称最长50位且不能包含非法字符，如&,%，&，#……等",
         },
         ({ getFieldValue }) => ({
             validator(rule,value) {
@@ -281,10 +280,10 @@ const PipelineAddInfo = props =>{
                     }}
                 >
                     <Form.Item label={"流水线名称"} name="name" rules={rules}>
-                        <Input allowClear />
+                        <Input allowClear placeholder={'流水线名称'}/>
                     </Form.Item>
                     <Form.Item label={"流水线分组"} name="group">
-                        <Select >
+                        <Select  placeholder={'流水线分组'}>
                             {
                                 groupList && groupList.map(item=>(
                                     <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
@@ -293,7 +292,7 @@ const PipelineAddInfo = props =>{
                         </Select>
                     </Form.Item>
                     <Form.Item label={"流水线环境"} name="env">
-                        <Select>
+                        <Select placeholder={'流水线环境'}>
                             {
                                 envList && envList.map(item=>(
                                     <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
@@ -301,8 +300,8 @@ const PipelineAddInfo = props =>{
                             }
                         </Select>
                     </Form.Item>
+                    { renderPowerType }
                 </Form>
-                { renderPowerType }
                 <Btn onClick={onClick} title={"取消"} isMar={true}/>
                 <PrivilegeProjectButton code={"pipeline_update"} domainId={pipeline && pipeline.id}>
                     <Btn type={"primary"}
@@ -327,10 +326,10 @@ const PipelineAddInfo = props =>{
                 }}
             >
                 <Form.Item label={"流水线名称"} name="name" rules={rules}>
-                    <Input allowClear/>
+                    <Input allowClear style={{width:'50%'}} placeholder={'流水线名称'}/>
                 </Form.Item>
                 <Form.Item label={"流水线分组"} name="group">
-                    <Select>
+                    <Select style={{width:'50%'}} placeholder={'流水线分组'}>
                         {
                             groupList && groupList.map(item=>(
                                 <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
@@ -339,7 +338,7 @@ const PipelineAddInfo = props =>{
                     </Select>
                 </Form.Item>
                 <Form.Item label={"流水线环境"} name="env">
-                    <Select>
+                    <Select style={{width:'50%'}} placeholder={'流水线环境'}>
                         {
                             envList && envList.map(item=>(
                                 <Select.Option value={item.id} key={item.id}>{item.envName}</Select.Option>
@@ -347,7 +346,6 @@ const PipelineAddInfo = props =>{
                         }
                     </Select>
                 </Form.Item>
-            </Form>
             {/*<div className="pipeline-add-type">*/}
             {/*    <div className="pipeline-type-title">流水线类型</div>*/}
             {/*    <div className="pipeline-type-ul">*/}
@@ -362,9 +360,9 @@ const PipelineAddInfo = props =>{
             { renderPowerType }
             {
                 powerType === 2 &&
-                <div className="pipeline-user">
-                    <div className="pipeline-user-title">
-                        <div className="pipeline-user-title-user">流水线成员</div>
+                <Form.Item className="pipeline-user">
+                    <div className="pipeline-user-title ant-form-item-label">
+                        <label>通知对象</label>
                         <Dropdown
                             getPopupContainer={e => e.parentElement}
                             overlay={
@@ -383,7 +381,6 @@ const PipelineAddInfo = props =>{
                         >
                             <Btn
                                 type={"link-nopadding"}
-                                icon={<PlusOutlined/>}
                                 title={"添加成员"}
                             />
                         </Dropdown>
@@ -398,16 +395,11 @@ const PipelineAddInfo = props =>{
                             locale={{emptyText: <ListEmpty/>}}
                         />
                     </div>
-                </div>
+                </Form.Item>
             }
-            <Btn onClick={()=>props.history.push("/pipeline")}
-                 title={"取消"}
-                 isMar={true}
-            />
-            <Btn type={"primary"}
-                 title={"下一步"}
-                 onClick={onOk}
-            />
+            </Form>
+            <Btn onClick={()=>props.history.push("/pipeline")} title={"取消"} isMar={true}/>
+            <Btn type={"primary"} title={"下一步"} onClick={onOk}/>
         </>
     )
 }

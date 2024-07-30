@@ -166,7 +166,7 @@ const Host = props =>{
                 xl={{ span: "22", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited mf">
+                <div className="mf-home-limited">
                     <BreadCrumb firstItem={"主机"}>
                         <HostAddBtn
                             visible={visible}

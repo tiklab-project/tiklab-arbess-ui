@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react";
 import {Table, Row, Col, Tag} from "antd";
-import {PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import TriggerAddEdit from "./TriggerAddEdit";
 import Btn from "../../../../common/component/btn/Btn";
@@ -108,12 +107,8 @@ const Trigger = props =>{
                 className="trigger"
             >
                 <div className="trigger-up">
-                    <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}个定时任务</div>
-                    <Btn
-                        title={"添加"}
-                        icon={<PlusOutlined/>}
-                        onClick={()=>addTrigger()}
-                    />
+                    <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}条</div>
+                    <Btn title={"添加"} onClick={addTrigger}/>
                     <TriggerAddEdit
                         triggerVisible={triggerVisible}
                         setTriggerVisible={setTriggerVisible}

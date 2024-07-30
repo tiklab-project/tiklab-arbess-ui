@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {inject,observer,Provider} from "mobx-react";
 import {getUser} from "thoughtware-core-ui";
-import {Dropdown, message, Spin} from "antd";
+import {Dropdown, message} from "antd";
 import {
     ApartmentOutlined,
     CaretDownOutlined,
@@ -9,7 +9,6 @@ import {
     CreditCardOutlined,
     ExperimentOutlined,
     LeftCircleOutlined,
-    ScanOutlined,
     SettingOutlined,
     RadarChartOutlined
 } from "@ant-design/icons";

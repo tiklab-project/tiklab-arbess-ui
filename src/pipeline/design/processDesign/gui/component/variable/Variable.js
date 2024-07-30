@@ -230,7 +230,6 @@ const Variable = props => {
                 <Btn
                     title={"添加变量"}
                     type={"link-nopadding"}
-                    icon={<PlusCircleOutlined/>}
                     onClick={()=>addInput()}
                 />
             </div>

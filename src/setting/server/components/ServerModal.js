@@ -111,7 +111,7 @@ const ServerModal = props =>{
                             {required:true,message:"AccessTocken不能空"},
                         ]}
                     >
-                        <Input/>
+                        <Input placeholder={'AccessTocken'}/>
                     </Form.Item>
                 )
             default:
@@ -132,7 +132,7 @@ const ServerModal = props =>{
                                     message:"请输入正确的服务地址"
                                 }
                             ]}
-                        ><Input disabled={serverAddressDisabled()} type={"url"}/>
+                        ><Input disabled={serverAddressDisabled()} type={"url"} placeholder={'服务器地址'}/>
                         </Form.Item>
                         <AuthType/>
                     </>
@@ -182,7 +182,7 @@ const ServerModal = props =>{
                             name="name"
                             label="名称"
                             rules={[{required:true,message:`名称不能空`},Validation("名称")]}
-                        ><Input/>
+                        ><Input placeholder={'名称'}/>
                         </Form.Item>
                         { serverWayHtml() }
                     </Form>

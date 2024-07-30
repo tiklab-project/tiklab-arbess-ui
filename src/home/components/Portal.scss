@@ -55,7 +55,7 @@
     flex-shrink: 0;
     flex-basis: 80px;
     height: 100%;
-    background: var(--thoughtware-gray-600);
+    background: var(--mf-backdrop-color);
     border-right: 1px solid var(--mf-border-color);
     padding-bottom: 6px;
     .normal-aside-up{
@@ -69,14 +69,14 @@
         justify-content: center;
         border-left: 3px solid transparent;
         &:hover{
-          background: var(--thoughtware-gray-300);
+          background: var(--mf-hover-color);
         }
         &:not(:last-child){
           margin-bottom: 8px;
         }
       }
       .normal-aside-select{
-        background: var(--thoughtware-gray-400);
+        background: var(--mf-select-color);
         border-left: 3px solid var(--thoughtware-blue);
       }
       .normal-aside-item-icon{
@@ -97,7 +97,7 @@
         height: 36px;
         cursor: pointer;
         &:hover{
-          background: var(--thoughtware-gray-300);
+          background: var(--mf-select-color);
         }
         .bottom-icon{
           font-size: 20px;
