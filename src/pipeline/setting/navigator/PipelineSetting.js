@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectAside from "../../../common/component/aside/ProjectAside";
+import PipelineSetAside from "../../../common/component/aside/PipelineSetAside";
 
 /**
  * 流水线左侧导航（三级导航）
@@ -38,13 +38,13 @@ const PipelineSetting = props =>{
     ]
 
     return(
-        <ProjectAside
+        <PipelineSetAside
             {...props}
             domainId={pipelineId}
             projectRouters={projectRouters}
             outerPath={`/pipeline/${pipelineId}/set`}
         >
-        </ProjectAside>
+        </PipelineSetAside>
     )
 }
 

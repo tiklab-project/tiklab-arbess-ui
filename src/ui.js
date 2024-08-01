@@ -1,11 +1,11 @@
 import {store as pipelineStore} from "./store";
 import App from "./app";
-import Portal from "./home/components/Portal";
-import Aside from "./common/component/aside/Aside";
-import ProjectAside from "./common/component/aside/ProjectAside";
+import Portal from "./common/layout/Portal";
+import SettingAside from "./common/component/aside/SettingAside";
+import PipelineSetAside from "./common/component/aside/PipelineSetAside";
 import AsyncComponent from "./common/lazy/SyncComponent";
 
-const Index=AsyncComponent(()=>import("./home/components/Home"))
+const Index=AsyncComponent(()=>import("./common/layout/Layout"))
 
 const Login=AsyncComponent(()=>import("./login/Login"))
 const Logout=AsyncComponent(()=>import("./login/Logout"))
@@ -117,8 +117,8 @@ export {
     pipelineStore,
     App,
     Portal,
-    Aside,
-    ProjectAside,
+    SettingAside,
+    PipelineSetAside,
 
     Index,
     Login,

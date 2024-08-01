@@ -1,9 +1,9 @@
 import React from "react";
 import {ProjectNav,PrivilegeProjectButton} from "thoughtware-privilege-ui";
 import {renderRoutes} from 'react-router-config';
-import "./ProjectAside.scss";
+import "./PipelineSetAside.scss";
 
-const ProjectAside = props =>{
+const PipelineSetAside = props =>{
 
     const {route,domainId,outerPath,projectRouters} = props
 
@@ -55,4 +55,4 @@ const ProjectAside = props =>{
     )
 }
 
-export default ProjectAside
+export default PipelineSetAside

@@ -1,4 +1,5 @@
 .mf-layout{
+  display: flex;
   height: 100vh;
   overflow: hidden;
   .mf-layout-header{
@@ -42,18 +43,19 @@
     }
   }
   .mf-layout-content{
+    height: 100vh;
+    flex: 1;
+    width: 0;
+  }
+  .mf-layout-home{
     height: var(--mf-content-height);
   }
-}
 
-.mf-home{
-  display: flex;
-  height: var(--mf-content-height);
-  .normal-aside{
+  .mf-normal-aside{
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
-    flex-basis: 80px;
+    flex-basis: 72px;
     height: 100%;
     background: var(--mf-backdrop-color);
     border-right: 1px solid var(--mf-border-color);
@@ -72,7 +74,7 @@
           background: var(--mf-hover-color);
         }
         &:not(:last-child){
-          margin-bottom: 8px;
+          margin-bottom: 5px;
         }
       }
       .normal-aside-select{
@@ -82,11 +84,14 @@
       .normal-aside-item-icon{
         font-size: var(--thoughtware-icon-size-16);
       }
-      .normal-aside-item-back{
-        border-bottom: 1px solid var(--mf-border-color);
-        margin-bottom: 10px;
-        padding-bottom: 5px;
+      .normal-aside-item-title{
+        font-size: 13px;
       }
+    }
+    .normal-aside-item-back{
+      border-bottom: 1px solid var(--mf-border-color);
+      margin-bottom: 10px;
+      padding-bottom: 5px;
     }
     .normal-aside-bottom{
       padding: 2px 0;
@@ -104,29 +109,44 @@
         }
       }
     }
-  }
-  .normal-aside-opt{
-    cursor: pointer;
-    display: flex;
-    height: 50px;
-    align-items: center;
-    padding: 5px 0;
-    justify-content: center;
-    .normal-aside-opt-icon{
+    .normal-aside-opt{
+      cursor: pointer;
       display: flex;
+      height: 50px;
       align-items: center;
+      padding: 5px 0;
       justify-content: center;
-      padding-left: 20px;
+      .normal-aside-opt-icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 15px;
+      }
+    }
+    .normal-aside-logo{
+      cursor: pointer;
+      display: flex;
+      height: 48px;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .normal-aside-pipeline-logo{
+      cursor: pointer;
+      display: flex;
+      height: 48px;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 15px;
     }
   }
-  .mf-normal-content{
-    flex: 1;
-    width: 0;
-  }
+
 }
 
 .normal-aside-dropdown{
-  left: 80px !important;
+  left: 75px !important;
   top: var(--mf-head-height) !important;
   box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
   border-radius: 4px;

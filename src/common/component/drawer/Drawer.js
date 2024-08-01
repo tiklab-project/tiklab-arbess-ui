@@ -5,7 +5,7 @@ const PipelineDrawer = props =>{
 
     const {requireRef,children,...res} = props
 
-    const detailRef = useRef()
+    const detailRef = useRef();
 
     useEffect(() => {
         window.addEventListener("mousedown", closeModal, false);

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectAside from "../../../common/component/aside/ProjectAside";
+import PipelineSetAside from "../../../common/component/aside/PipelineSetAside";
 
 const Statistics = (props) => {
 
@@ -19,13 +19,13 @@ const Statistics = (props) => {
     ]
 
     return (
-        <ProjectAside
+        <PipelineSetAside
             {...props}
             domainId={pipelineId}
             projectRouters={projectRouters}
             outerPath={`/pipeline/${pipelineId}/statistics`}
         >
-        </ProjectAside>
+        </PipelineSetAside>
     )
 }
 
