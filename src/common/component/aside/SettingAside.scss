@@ -51,35 +51,36 @@
     border-left: 3px solid var(--thoughtware-blue);
   }
 
-  .system-aside-logo{
-    cursor: pointer;
-    display: flex;
-    height: 50px;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 0 20px;
-    .system-aside-logo-text{
-      margin-left: 10px;
-      font-size: 19px;
-      font-weight: 500;
-    }
-  }
   .system-aside-head{
-    height: 40px;
-    line-height: 40px;
-    width: 100%;
-    padding: 0 20px;
+    padding-top: 15px;
+    padding-left: 20px;
+    font-size: 16px;
     font-weight: var(--thoughtware-font-weight-bold);
+    margin-bottom: 10px;
+  }
+
+  .system-aside-back{
     border-bottom: 1px solid var(--mf-border-color);
-    .top-head-icon{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    .aside-back-box{
+      display: flex;
+      align-items: center;
+      height: 40px;
+      line-height: 40px;
+      padding-left: 20px;
       cursor: pointer;
-    }
-    .top-head-text{
-      padding-left: 5px;
+      &:hover{
+        background: var(--mf-hover-color);
+      }
+      .aside-back-box-icon{
+        font-size: 18px;
+        padding-right: 5px;
+      }
     }
   }
   .sys-content-icon{
     padding-right: 5px;
-    font-size: 17px;
+    font-size: 18px;
   }
 }

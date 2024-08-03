@@ -11,9 +11,6 @@ $block-spacing: 30px;
             align-items: center;
         }
         .homePage-guide-title{
-            height: 36px;
-            line-height: 36px;
-            font-size: 15px;
             font-weight: var(--thoughtware-font-weight-bold);
         }
         .home-recent{
@@ -23,7 +20,7 @@ $block-spacing: 30px;
             .pipelineRecent-content{
                 display: flex;
                 justify-content: flex-start;
-                padding-top: 5px;
+                padding-top: 10px;
                 gap: 10px;
             }
             .pipelineRecent-item{

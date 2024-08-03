@@ -208,7 +208,7 @@ ul li{
     --thoughtware-gray-300: #edf0f5;
     --thoughtware-gray-400: #e3e8f0;
     --thoughtware-gray-500: #999;
-    --thoughtware-gray-600:#f7f7f7;
+    --thoughtware-gray-600: #f7f7f7;
     --thoughtware-gray: #f7f7f7;
 
     --thoughtware-padding: 20px;
@@ -230,10 +230,10 @@ ul li{
     --thoughtware-icon-size-24: 24px;
     --thoughtware-icon-size-32: 32px;
 
-    --mf-border-color: #ececec;
-    --mf-select-color: #e3e8f0;
-    --mf-hover-color: #edf0f5;
-    --mf-backdrop-color: #f7f7f7;
+    --mf-border-color: var(--thoughtware-gray-200);
+    --mf-select-color: var(--thoughtware-gray-400);
+    --mf-hover-color: var(--thoughtware-gray-300);
+    --mf-backdrop-color: var(--thoughtware-gray);
     --mf-head-height: 48px;
     --mf-content-height: calc(100vh - 48px)
 }

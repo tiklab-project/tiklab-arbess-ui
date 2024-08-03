@@ -39,7 +39,6 @@ const Modals = props => {
             style={{height:height,top:60}}
             bodyStyle={{padding:0}}
             closable={false}
-            destroyOnClose={true}
             footer={modalFooter}
             className="mf-modal"
             {...res}

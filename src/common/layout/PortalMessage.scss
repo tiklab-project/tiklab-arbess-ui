@@ -67,35 +67,6 @@
                 &:hover{
                     background: #fafafa;
                 }
-                &:nth-child(5n+1) {
-                    .ant-avatar {
-                        background-color: #f3caca;
-                    }
-                }
-
-                &:nth-child(5n+2) {
-                    .ant-avatar {
-                        background-color: #cadbf3;
-                    }
-                }
-
-                &:nth-child(5n+3) {
-                    .ant-avatar {
-                        background-color: #e8eaf6;
-                    }
-                }
-
-                &:nth-child(5n+4) {
-                    .ant-avatar {
-                        background-color: #deedd7;
-                    }
-                }
-
-                &:nth-child(5n+5) {
-                    .ant-avatar {
-                        background-color: #caf3ef;
-                    }
-                }
                 &-left{
                     display: flex;
                     align-items: center;
@@ -138,7 +109,6 @@
                     .message-item-info-action{
                         font-size: 13px;
                         color: var(--thoughtware-gray-500);
-                        max-width: 200px;
                     }
                     .message-item-info-message{
                         display: inline-block;

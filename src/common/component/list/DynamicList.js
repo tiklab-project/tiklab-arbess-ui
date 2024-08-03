@@ -32,18 +32,24 @@ const DynamicList = props =>{
                         const dataObj = data && JSON.parse(data)
                         return (
                             <div key={id} className='dynamic-item-log mf-user-avatar' >
+                                <div className='dynamic-item-log-data'>
+                                    <Profile userInfo={user}/>
+                                    <div className='dynamic-item-log-info'>
+                                        <div className='dynamic-item-log-info-name' onClick={()=>goDynaLink(logItem)}>
+                                            {user?.nickname || user?.name}{actionType?.name}
+                                        </div>
+                                        <div className='dynamic-item-log-desc'>
+                                            <div className='log-desc-action'> {action}</div>
+                                            {   dataObj?.message &&
+                                                <div className='log-desc-message' title={dataObj.message}>
+                                                    {dataObj.message}
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className='dynamic-item-log-time'>
                                     {moment(createTime).format("HH:mm")}
-                                </div>
-                                <Profile userInfo={user}/>
-                                <div className='dynamic-item-log-info'>
-                                     <div className='dynamic-item-log-info-name' onClick={()=>goDynaLink(logItem)}>
-                                         {user?.nickname || user?.name}{actionType?.name}
-                                     </div>
-                                    <div className='dynamic-item-log-desc'>
-                                        <div className='log-desc-action'> {action}</div>
-                                        {dataObj?.message && <div className='log-desc-message'>{dataObj.message}</div>}
-                                    </div>
                                 </div>
                             </div>
                         )

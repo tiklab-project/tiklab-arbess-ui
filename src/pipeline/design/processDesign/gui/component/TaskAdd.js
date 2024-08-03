@@ -189,7 +189,7 @@ const TaskAdd = props =>{
         setTaskType(ids.id)
     }
 
-    return(
+    return (
         <PipelineDrawer
             onClose={()=>setNewStageDrawer(false)}
             visible={newStageDrawer}

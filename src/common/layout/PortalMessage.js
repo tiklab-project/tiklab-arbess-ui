@@ -6,10 +6,10 @@ import {
     CloseOutlined,
     DeleteOutlined
 } from "@ant-design/icons";
-import ListEmpty from "../../common/component/list/ListEmpty";
-import Btn from "../../common/component/btn/Btn";
-import messageStore from "../store/MessageStore"
-import Profile from "../../common/component/profile/Profile";
+import ListEmpty from "../component/list/ListEmpty";
+import Btn from "../component/btn/Btn";
+import messageStore from "../../home/store/MessageStore"
+import Profile from "../component/profile/Profile";
 import "./PortalMessage.scss";
 
 const pageSize = 12;
@@ -22,7 +22,7 @@ const pageSize = 12;
  */
 const PortalMessage = props =>{
 
-    const {unread,setUnread,visible,setVisible} = props
+    const {unread,setUnread,visible,setVisible,translateX=75} = props
     const {findMessageItemPage,updateMessageItem,deleteMessageItem} = messageStore
     const pageParam = {
         pageSize: pageSize,
@@ -168,15 +168,16 @@ const PortalMessage = props =>{
         })
     }
 
-    return(
+    return visible && (
         <Drawer
             closable={false}
-            placement="right"
+            placement="left"
             visible={visible}
             onClose={onClose}
+            width={450}
             maskStyle={{background:"transparent"}}
-            contentWrapperStyle={{width:450,top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0}}
+            contentWrapperStyle={visible?{transform:`translateX(${translateX}px)`}:{}}
         >
             <div className="messageModal">
                 <div className="messageModal-up">
@@ -213,7 +214,7 @@ const PortalMessage = props =>{
                                     const {sendUser,messageType,sendTime,action,data} = item
                                     const dataObj = JSON.parse(data)
                                     return(
-                                        <div key={index} className={`message-item ${item.status===1 ? "message-read":""}`} onClick={()=>goHref(item)}>
+                                        <div key={index} className={`message-item mf-user-avatar ${item.status===1 ? "message-read":""}`} onClick={()=>goHref(item)}>
                                             <div className="message-item-left">
                                                 <div className="message-item-icon">
                                                     <Profile

@@ -28,11 +28,9 @@ const PipelineDrawer = props =>{
             {...res}
             placement="right"
             closable={false}
-            destroyOnClose={true}
-            contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
             bodyStyle={{padding:0,overflow:"hidden"}}
         >
-            <div ref={requireRef ? detailRef : null}>
+            <div ref={detailRef}>
                 {children}
             </div>
         </Drawer>

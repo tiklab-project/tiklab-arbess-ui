@@ -181,7 +181,6 @@ const Design = props =>{
                 visible={isDetails}
                 onClose={goBack}
                 closable={false}
-                destroyOnClose={true}
                 width={"75%"}
                 contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
                 bodyStyle={{padding:0}}

@@ -41,6 +41,7 @@ $line-color: #dadfe6;
         .dynamic-item-log{
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 10px 0 10px 30px;
             min-width: 0;
             position: relative;
@@ -65,12 +66,15 @@ $line-color: #dadfe6;
                 background: $line-color;
                 border-radius: 50%;
             }
-            .dynamic-item-log-time{
-                margin-right: 30px;
+            .dynamic-item-log-data{
+                flex-shrink: 1;
+                display: flex;
+                align-items: center;
+                min-width: 0;
             }
             .dynamic-item-log-info{
-                margin-left: 10px;
                 min-width: 0;
+                margin: 0 20px 0 10px;
                 .dynamic-item-log-info-name{
                     &:hover{
                         cursor: pointer;

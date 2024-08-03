@@ -9,9 +9,9 @@ const Layout = props =>{
     return (
         <Portal
             {...props}
-            AppLink={<AppLink/>}
-            HelpLink={<HelpLink/>}
-            AvatarLink={<AvatarLink {...props}/>}
+            AppLink={AppLink}
+            HelpLink={HelpLink}
+            AvatarLink={AvatarLink}
         >
             <SettingAside {...props} />
         </Portal>

@@ -10,14 +10,17 @@ import {
     ExperimentOutlined,
     RadarChartOutlined,
     HomeOutlined,
-    SettingOutlined,
+    SettingOutlined, LeftOutlined, RightOutlined, LeftCircleOutlined, RightCircleOutlined,
 } from "@ant-design/icons";
 import pipelineStore from "../../pipeline/pipeline/store/PipelineStore";
-import {productWhiteImg} from "thoughtware-core-ui";
+import {getUser, productTitle, productWhiteImg} from "thoughtware-core-ui";
 import {observer} from "mobx-react";
+import Profile from "../component/profile/Profile";
 
 
 const PipelineAside = (props) => {
+
+    const {isExpand, setIsExpand,themeType} = props;
 
     const {findRecentlyPipeline,pipeline} = pipelineStore;
 
@@ -80,10 +83,7 @@ const PipelineAside = (props) => {
     }
 
     return (
-        <aside className="mf-normal-aside">
-            <div className='normal-aside-pipeline-logo' onClick={()=>props.history.push('/home')}>
-                <img src={productWhiteImg.matflow} height={32} width={28} alt={''}/>
-            </div>
+        <div className={`mf-aside ${isExpand ? 'mf-aside-expand': 'mf-aside-normal'} mf-aside-${themeType}`}>
             <Dropdown
                 getPopupContainer={e => e.parentElement}
                 overlayStyle={{width:200,top:48,left:80}}
@@ -102,12 +102,12 @@ const PipelineAside = (props) => {
                                                  key={item.id}
                                                  className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
                                             >
-                                                    <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
-                                                        {item.name.substring(0,1).toUpperCase()}
-                                                    </span>
+                                                <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
+                                                    {item.name.substring(0,1).toUpperCase()}
+                                                </span>
                                                 <span className="pipeline-opt-name">
-                                                        {item.name}
-                                                    </span>
+                                                    {item.name}
+                                                </span>
                                             </div>
                                         )
                                     }
@@ -120,47 +120,62 @@ const PipelineAside = (props) => {
                         </div>
                     </div>
                 }
-                overlayClassName="normal-aside-dropdown"
+                overlayClassName="aside-dropdown"
             >
-                <div className='normal-aside-opt' data-title-right={pipeline?.name}>
-                    <div className="normal-aside-opt-icon">
-                        <ListIcon
-                            isMar={false}
-                            text={pipeline?.name}
-                            colors={pipeline && pipeline?.color}
-                        />
-                        <span><CaretDownOutlined /></span>
-                    </div>
+                <div className='aside-opt' data-title-right={isExpand?null:pipeline?.name}>
+                    <ListIcon
+                        isMar={false}
+                        text={pipeline?.name}
+                        colors={pipeline && pipeline?.color}
+                    />
+                    {isExpand && <div className='aside-opt-name'>{pipeline?.name}</div>}
+                    <div style={{opacity:0.8}}><CaretDownOutlined/></div>
                 </div>
             </Dropdown>
-            <div className="normal-aside-up">
-                <div className='normal-aside-item-back'>
-                    <div className='normal-aside-item' onClick={()=>props.history.push('/home')}>
-                        <div className="normal-aside-item-icon">
+            <div className="aside-up">
+                <div className="aside-item-back">
+                    <div className='aside-item' onClick={()=>props.history.push('/home')}>
+                        <div className="aside-item-icon">
                             <HomeOutlined />
                         </div>
-                        <div className="normal-aside-item-title">返回首页</div>
+                        <div className="aside-item-title">返回首页</div>
                     </div>
                 </div>
                 {
                     firstRouters.map(item=>(
                         <div key={item.id}
-                             className={`normal-aside-item ${path.indexOf(item.id) === 0 ? "normal-aside-select":""}`}
+                             className={`aside-item ${path.indexOf(item.id) === 0 ? "aside-select":""}`}
                              onClick={()=>props.history.push(item.id)}
                         >
-                            <div className="normal-aside-item-icon">{item.icon}</div>
-                            <div className="normal-aside-item-title">{item.title}</div>
+                            <div className="aside-item-icon">{item.icon}</div>
+                            <div className="aside-item-title">{item.title}</div>
                         </div>
                     ))
                 }
             </div>
-
-            <div className="normal-aside-bottom" onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}>
-                <div className="normal-aside-bottom-icon" data-title-right='设置'>
-                    <SettingOutlined className='bottom-icon'/>
-                </div>
+            <div className="aside-bottom">
+                {
+                    isExpand ?
+                    <div className='aside-item'
+                         onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}
+                    >
+                        <div className="aside-item-icon"><SettingOutlined /></div>
+                        <div className="aside-item-title">设置</div>
+                    </div>
+                    :
+                    <div
+                        className="aside-bottom-text" data-title-right='设置'
+                        onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}
+                    >
+                        <SettingOutlined />
+                    </div>
+                }
             </div>
-        </aside>
+            <div className="aside-hover-expand"/>
+            <div className="aside-expand" onClick={()=>setIsExpand(!isExpand)}>
+                {isExpand ? <LeftCircleOutlined />:<RightCircleOutlined />}
+            </div>
+        </div>
     )
 }
 

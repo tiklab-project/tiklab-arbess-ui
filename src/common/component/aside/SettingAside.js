@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import {DownOutlined, ProjectOutlined, UpOutlined} from "@ant-design/icons";
+import {DownOutlined, HomeOutlined, ProjectOutlined, UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
-import {applyJump, disableFunction, productWhiteImg} from 'thoughtware-core-ui';
+import {applyJump, disableFunction} from 'thoughtware-core-ui';
 import {inject,observer} from "mobx-react";
 import  {ExportOutlined} from "@ant-design/icons";
 import feature from '../../../assets/images/pip_feature.png';
-import back from '../../../assets/images/svg/pip_back.svg';
 import "./SettingAside.scss";
 
 const templateRouter = [
@@ -217,17 +216,18 @@ const SettingAside = props =>  {
             outerPath={outerPath}
             noAccessPath={"/noaccess"}
         >
-            <aside className="system-aside">
+            <div className="system-aside">
                 <ul className="system-aside-top">
-                    <li className='system-aside-logo' onClick={()=>props.history.push('/home')}>
-                        <img src={productWhiteImg.matflow} height={26} width={22} alt={''}/>
-                        <span className='system-aside-logo-text'>MatFlow</span>
-                    </li>
                     <li className='system-aside-head'>
-                        <span className='top-head-icon' onClick={()=>props.history.push('/home')}>
-                            <img src={back} width={19} height={19} alt={''}/>
-                        </span>
-                        <span className='top-head-text'>设置</span>
+                        设置
+                    </li>
+                    <li className="system-aside-back" onClick={()=>props.history.push('/home')}>
+                        <div className='aside-back-box'>
+                           <span className="aside-back-box-icon">
+                                <HomeOutlined />
+                            </span>
+                            <span className="aside-back-box-title">返回首页</span>
+                        </div>
                     </li>
                     {
                         menus().map(firstItem => {
@@ -237,7 +237,7 @@ const SettingAside = props =>  {
                     }
                     {props.children}
                 </ul>
-            </aside>
+            </div>
         </SystemNav>
     )
 }
