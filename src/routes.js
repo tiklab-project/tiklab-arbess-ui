@@ -33,7 +33,6 @@ import {
     TestOn,
     TestMaven,
 
-
     Statistics,
     StatisticsOperate,
     StatisticsResult,
@@ -53,10 +52,11 @@ import {
     Auth,
     Host,
     HostGroup,
-    Server,
     Tool,
     Resources,
     Agent,
+    Server,
+    K8s,
 
     MessageSendType,
     MessageNotice,
@@ -334,11 +334,6 @@ const routers=[
                         exact: true,
                     },
                     {
-                        path: "/setting/server",
-                        component: Server,
-                        exact: true,
-                    },
-                    {
                         path: "/setting/host",
                         component: Host,
                         exact: true,
@@ -351,6 +346,16 @@ const routers=[
                     {
                         path:"/setting/tool",
                         component: Tool,
+                        exact: true,
+                    },
+                    {
+                        path: "/setting/server",
+                        component: Server,
+                        exact: true,
+                    },
+                    {
+                        path: "/setting/k8s",
+                        component: K8s,
                         exact: true,
                     },
                     {

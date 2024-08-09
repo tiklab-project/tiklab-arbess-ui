@@ -147,7 +147,8 @@ const Operate = (props) => {
             visualMap: {
                 type: 'piecewise',
                 min: 1,
-                max: 30,
+                max: 50,
+                maxOpen: true,
                 calculable: true,
                 show: true,
                 orient: 'horizontal',

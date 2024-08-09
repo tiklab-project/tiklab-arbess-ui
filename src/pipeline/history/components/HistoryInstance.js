@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
-import HistoryDetail from "./HistoryDetail";
 import historyStore from "../store/HistoryStore";
+import HistoryRunDetail from "./HistoryRunDetail";
 
 /**
  * 历史运行实例
@@ -20,8 +20,7 @@ const HistoryInstance = props => {
         // 获取当前构建历史信息
         findOneInstance(params.instanceId).then(res=>{
             if(res.code===0){
-                if(res.data) return setHistoryItem(res.data)
-                return props.history.push(`/404`)
+                setHistoryItem(res.data)
             }
         })
     },[params.instanceId])
@@ -29,11 +28,10 @@ const HistoryInstance = props => {
     const back = () => props.history.push(`/pipeline/${params.id}/history`)
 
     return (
-        <HistoryDetail
+        <HistoryRunDetail
             back={back}
             historyItem={historyItem}
             setHistoryItem={setHistoryItem}
-            historyStore={historyStore}
         />
     )
 }

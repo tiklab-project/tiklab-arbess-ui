@@ -1,8 +1,4 @@
 import React,{useState,useEffect} from "react";
-import {
-    CaretRightOutlined,
-    LoadingOutlined,
-} from "@ant-design/icons";
 import {Spin, Drawer} from "antd";
 import {inject,observer,Provider} from "mobx-react";
 import {renderRoutes} from "react-router-config";
@@ -14,9 +10,10 @@ import postprocessStore from "../postprocess/store/PostprocessStore";
 import triggerStore from "../trigger/store/TriggerStore";
 import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import HistoryDetail from "../../history/components/HistoryDetail";
+import HistoryRunDetail from "../../history/components/HistoryRunDetail";
 import DesignAgent from "./DesignAgent";
 import "./Design.scss";
+import PipelineDrawer from "../../../common/component/drawer/Drawer";
 
 /**
  * 设计页面
@@ -35,16 +32,15 @@ const Design = props =>{
 
     const {pipeline,findOnePipeline} = pipelineStore
     const {execStart} = historyStore
-    const {validTaskMustField, taskMustField,taskFresh} = taskStore
+    const {taskFresh} = taskStore
     const {validStagesMustField,stageMustField,stageFresh} = stageStore
     const {findPipelinePost,postprocessData} = postprocessStore
     const {findAllTrigger,triggerData} = triggerStore
     const {findAllVariable,variableData} = variableStore
 
-    const pipelineId = match.params.id
+    const pipelineId = match.params.id;
+    const path = props.location.pathname;
 
-    //路由菜单
-    const [path,setPath] = useState("");
     //点击运行按钮
     const [isSpin,setIsSpin] = useState(false);
     //运行页面展示||隐藏
@@ -55,20 +51,13 @@ const Design = props =>{
     const [defaultAgent,setDefaultAgent] = useState(null);
 
     useEffect(()=>{
-        setPath(props.location.pathname)
-    },[props.location.pathname])
-
-    useEffect(()=>{
         findPipelinePost(pipelineId).then()
         findAllTrigger(pipelineId).then()
         findAllVariable(pipelineId).then()
     },[])
 
     useEffect(() => {
-        if(pipeline?.type===1){
-            return validTaskMustField(pipelineId)
-        }
-        return validStagesMustField(pipelineId)
+        validStagesMustField(pipelineId).then()
     }, [taskFresh,stageFresh]);
 
     useEffect(()=>{
@@ -100,9 +89,6 @@ const Design = props =>{
      * @returns {boolean}
      */
     const runStatu = () => {
-        if(pipeline?.type===1){
-            return taskMustField?.length <= 0;
-        }
         return stageMustField?.length <= 0;
     }
 
@@ -130,7 +116,8 @@ const Design = props =>{
     ]
 
     const goBack = () =>{
-        setIsDetails(false)
+        setIsDetails(false);
+        setHistoryItem(null);
     }
 
     return(
@@ -176,23 +163,18 @@ const Design = props =>{
                     { renderRoutes(route.routes) }
                 </Spin>
             </div>
-            <Drawer
-                placement="right"
+            <PipelineDrawer
+                width={"75%"}
                 visible={isDetails}
                 onClose={goBack}
-                closable={false}
-                width={"75%"}
-                contentWrapperStyle={{top:48,height:"calc(100% - 48px)"}}
-                bodyStyle={{padding:0}}
             >
-                <HistoryDetail
+                <HistoryRunDetail
                     back={goBack}
                     historyType={"drawer"}
                     historyItem={historyItem}
                     setHistoryItem={setHistoryItem}
-                    historyStore={historyStore}
                 />
-            </Drawer>
+            </PipelineDrawer>
         </Provider>
     )
 }

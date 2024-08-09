@@ -1,18 +1,12 @@
-import React,{useEffect,useState} from "react";
-import {Form, Input, Tooltip, Select} from "antd";
+import React, {useEffect} from "react";
+import {Form, Input, Tooltip} from "antd";
+import Modals from "../../../common/component/modal/Modal";
+import {Validation} from "../../../common/utils/Client";
 import {QuestionCircleOutlined} from "@ant-design/icons";
-import hostStore from "../store/HostStore";
-import AuthType from "../../../common/AuthType";
-import {Validation} from "../../../../common/utils/Client";
-import Modals from "../../../../common/component/modal/Modal";
+import AuthType from "../../common/AuthType";
+import hostStore from "../../configure/host/store/HostStore";
 
-/**
- * 主机配置弹出框，添加，更新
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
-const HostModal = props =>{
+const K8sModal = (props) => {
 
     const {visible,setVisible,formValue,findAuth} = props
 
@@ -20,23 +14,19 @@ const HostModal = props =>{
 
     const [form] = Form.useForm()
 
-    const [hostType,setHostType] = useState('common')
-
     useEffect(()=>{
         if(visible){
             form.setFieldsValue(formValue)
         }
     },[visible])
 
-    /**
-     * 确定添加或者更新
-     */
-    const onOk = () =>{
-        form.validateFields().then((values) => {
+    const onOk = () => {
+        form.validateFields().then(values => {
             if(formValue){
                 const params = {
                     hostId:formValue.hostId,
-                    ...values
+                    type:'k8s',
+                    ...values,
                 }
                 updateAuthHost(params).then(r=>{
                     if(r.code===0){
@@ -44,7 +34,10 @@ const HostModal = props =>{
                     }
                 })
             }else {
-                createAuthHost(values).then(r=>{
+                createAuthHost({
+                    type:'k8s',
+                    ...values,
+                }).then(r=>{
                     if(r.code===0){
                         findAuth()
                     }
@@ -62,11 +55,7 @@ const HostModal = props =>{
         setVisible(false)
     }
 
-    const changHostType = value =>{
-        setHostType(value)
-    }
-
-    return(
+    return (
         <Modals
             visible={visible}
             onCancel={onCancel}
@@ -80,18 +69,6 @@ const HostModal = props =>{
                     autoComplete="off"
                     initialValues={{type:"common",authWay:1,authType:1}}
                 >
-                    <Form.Item name="type" label="授权类型">
-                        <Select
-                            onChange={changHostType}
-                            // disabled={ban}
-                            disabled={true}
-                            placeholder={'授权类型'}
-                        >
-                            <Select.Option value={'common'}>普通</Select.Option>
-                            <Select.Option value={'aliyun'}>aliyun</Select.Option>
-                            <Select.Option value={'tencent'}>腾讯云主机</Select.Option>
-                        </Select>
-                    </Form.Item>
                     <Form.Item
                         name="name"
                         label="名称"
@@ -133,4 +110,4 @@ const HostModal = props =>{
     )
 }
 
-export default HostModal
+export default K8sModal

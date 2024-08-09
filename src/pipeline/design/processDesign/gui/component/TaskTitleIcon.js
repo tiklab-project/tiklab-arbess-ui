@@ -4,18 +4,18 @@ import pip_gitee from "../../../../../assets/images/svg/pip_gitee.svg";
 import pip_github from "../../../../../assets/images/svg/pip_github.svg";
 import pip_gitlab from "../../../../../assets/images/svg/pip_gitlab.svg";
 import pip_svn from "../../../../../assets/images/svg/pip_svn.svg";
-import pip_helmet from "../../../../../assets/images/svg/pip_helmet.svg";
 import pip_ceshi from "../../../../../assets/images/svg/pip_ceshi.svg";
 import maven from "../../../../../assets/images/maven.png";
 import pip_nodejs from "../../../../../assets/images/svg/pip_nodejs.svg";
 import pip_liunx from "../../../../../assets/images/svg/pip_liunx.svg";
 import pip_docker from "../../../../../assets/images/svg/pip_docker.svg";
+import pip_k8s from "../../../../../assets/images/svg/pip_k8s.svg";
 import pip_sonar from "../../../../../assets/images/svg/pip_sonar.svg";
 import pip_message from "../../../../../assets/images/svg/pip_message.svg";
 import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
-import testonImg from "thoughtware-core-ui/es/assests/teston.png";
+import {productWhiteImg} from "thoughtware-core-ui";
 
 /**
  * task的标题
@@ -38,6 +38,7 @@ export const taskTitle = type =>{
         case 'build_docker': return "Docker构建"
         case 'liunx': return "主机部署"
         case 'docker': return "Docker部署"
+        case 'k8s': return "Kubernetes部署"
         case 'sonar': return "SonarQuebe"
         case 'spotbugs': return "spotBugs-Java代码扫描"
         case 'artifact_maven':return "Maven推送"
@@ -62,40 +63,39 @@ export const TaskIcon = props =>{
 
     const {type, width=16, height=16} = props
 
-    const renderImg = img => <img src={img} alt="maven" style={{width,height}}/>
-
-    const iconType = type =>{
+    const iconType = () =>{
         switch (type) {
-            case 'git':  return renderImg(pip_git)
-            case 'gitee':  return renderImg(pip_gitee)
-            case 'github':  return renderImg(pip_github)
-            case 'gitlab':  return renderImg(pip_gitlab)
-            case 'svn':  return renderImg(pip_svn)
-            case 'gittok':  return renderImg(pip_helmet)
-            case 'maventest': return renderImg(pip_ceshi)
-            case 'teston': return renderImg(testonImg)
-            case 'maven': return renderImg(maven)
-            case 'nodejs': return renderImg(pip_nodejs)
-            case 'build_docker': return renderImg(pip_docker)
-            case 'liunx': return renderImg(pip_liunx)
-            case 'docker': return renderImg(pip_docker)
-            case 'sonar': return renderImg(pip_sonar)
-            case 'spotbugs': return renderImg(pip_spotbugs)
-            case 'artifact_maven': return renderImg(maven)
-            case 'artifact_docker': return renderImg(pip_docker)
-            case 'artifact_nodejs': return renderImg(pip_nodejs)
-            case 'pull_maven': return renderImg(maven)
-            case 'pull_nodejs': return renderImg(pip_nodejs)
-            case 'pull_docker': return renderImg(pip_docker)
-            case 'message': return renderImg(pip_message)
-            case 'script': return renderImg(pip_shell)
-            case 'post': return renderImg(pip_post)
+            case 'git':  return pip_git
+            case 'gitee':  return pip_gitee
+            case 'github':  return pip_github
+            case 'gitlab':  return pip_gitlab
+            case 'svn':  return pip_svn
+            case 'gittok':  return productWhiteImg.gittok
+            case 'maventest': return pip_ceshi
+            case 'teston': return productWhiteImg.teston
+            case 'maven': return maven
+            case 'nodejs': return pip_nodejs
+            case 'build_docker': return pip_docker
+            case 'liunx': return pip_liunx
+            case 'docker': return pip_docker
+            case 'k8s': return pip_k8s
+            case 'sonar': return pip_sonar
+            case 'spotbugs': return pip_spotbugs
+            case 'artifact_maven': return maven
+            case 'artifact_docker': return pip_docker
+            case 'artifact_nodejs': return pip_nodejs
+            case 'pull_maven': return maven
+            case 'pull_nodejs': return pip_nodejs
+            case 'pull_docker': return pip_docker
+            case 'message': return pip_message
+            case 'script': return pip_shell
+            case 'post': return pip_post
         }
     }
 
-    return  <>
-                { iconType(type) }
-            </>
+    return (
+        <img src={iconType()} alt="" width={width} height={height}/>
+    )
 
 }
 
@@ -106,12 +106,14 @@ export const TaskTitleIcon = props =>{
 
     const {type} = props
 
-    return  <>
-                <TaskIcon type={type} width={20} height={22}/>
-                <span style={{paddingLeft:8}}>
-                    { taskTitle(type) }
-                </span>
-            </>
+    return (
+        <>
+            <TaskIcon type={type} width={20} height={22}/>
+            <span style={{paddingLeft:8}}>
+                { taskTitle(type) }
+            </span>
+        </>
+    )
 }
 
 

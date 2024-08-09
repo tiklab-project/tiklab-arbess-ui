@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect,useState} from "react";
 import {Skeleton} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
@@ -18,23 +18,24 @@ const TaskDetails = props =>{
 
     const {taskFormDrawer,setTaskFormDrawer,taskStore} = props
 
-    const {dataItem} = taskStore
+    const {dataItem,findOneTasksOrTask} = taskStore;
 
-    // 标签类型
-    const [handleType,setHandleType] = useState("base")
+    //加载状态
+    const [loading,setLoading] = useState(false);
 
-    const lis = [
-        {id:"base", title: "基本信息"},
-        {id:"var", title:"变量"},
-        {id:"cond", title:"条件"},
-        {id:"pose", title:"后置处理"}
-    ]
+    useEffect(() => {
+        if(taskFormDrawer && dataItem?.formType==="task"){
+            setLoading(true)
+            findOneTasksOrTask(dataItem.taskId).then(()=>{
+                setLoading(false)
+            })
+        }
+    }, [taskFormDrawer]);
 
     /**
      * 关闭弹出框
      */
     const onClose = () =>{
-        setHandleType("base")
         setTaskFormDrawer(false)
     }
 
@@ -52,7 +53,7 @@ const TaskDetails = props =>{
             </div>
             <div className="task-details-bottom">
                 <div className="body-taskForm">
-                    <Skeleton loading={false}>
+                    <Skeleton loading={loading}>
                         <BasicInfo {...props}/>
                     </Skeleton>
                 </div>

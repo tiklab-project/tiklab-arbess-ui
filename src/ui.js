@@ -53,13 +53,13 @@ const SettingHome=AsyncComponent(()=>import("./setting/home/component/SettingHom
 const Auth=AsyncComponent(()=>import("./setting/configure/auth/components/Auth"))
 const Host=AsyncComponent(()=>import("./setting/configure/host/component/Host"))
 const HostGroup=AsyncComponent(()=>import("./setting/configure/host/component/HostGroup"))
-const Server=AsyncComponent(()=>import("./setting/server/components/Server"))
 const Tool=AsyncComponent(()=>import("./setting/configure/tool/components/Tool"))
 const Resources=AsyncComponent(()=>import("./setting/resources/component/Resources"))
 const Grouping=AsyncComponent(()=>import("./setting/configure/grouping/component/Grouping"))
 const Env=AsyncComponent(()=>import("./setting/configure/env/component/Env"))
-
 const Agent=AsyncComponent(()=>import('./setting/configure/agent/component/Agent'))
+const Server=AsyncComponent(()=>import("./setting/server/components/Server"))
+const K8s=AsyncComponent(()=>import('./setting/k8s/components/K8s'))
 
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
@@ -146,7 +146,6 @@ export {
     History,
     HistoryInstance,
 
-
     Test,
     TestScan,
     TestOn,
@@ -171,10 +170,11 @@ export {
     Auth,
     Host,
     HostGroup,
-    Server,
     Tool,
     Resources,
     Agent,
+    Server,
+    K8s,
 
     Plugin,
     MessageSendType,

@@ -46,8 +46,11 @@ const HistoryScreen = props =>{
                     totalRecord: res.data.totalRecord,
                     totalPage: res.data.totalPage,
                 })
-                if(currentPage===1){setUserList(res.data.dataList)}
-                else {setUserList([...userList,...res.data.dataList])}
+                if(currentPage===1){
+                    setUserList(res.data.dataList)
+                } else {
+                    setUserList([...userList,...res.data.dataList])
+                }
             }
         })
     }
@@ -84,7 +87,7 @@ const HistoryScreen = props =>{
             <SearchInput
                 placeholder="搜索名称"
                 onPressEnter={e=>changValue(e.target.value,"number")}
-                style={{ width: 190 }}
+                style={{ width: 180 }}
             />
             {
                 route.path==='/history' ?

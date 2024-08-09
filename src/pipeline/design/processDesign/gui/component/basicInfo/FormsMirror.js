@@ -74,17 +74,16 @@ const FormsMirror = props =>{
      * 取消或确定修改事件
      */
     const closeMirror = type => {
-        if(type==='expand'){setVisible(false)}
-        else {setBordered(false)}
+        if(type==='expand'){
+            setVisible(false)
+        } else {
+            setBordered(false)
+        }
     }
 
     return  (
-        <Form.Item
-            name={name}
-            label={label}
-            // rules={isRequire && [{required:true,message:``}]}
-        >
-            <Form.Item>
+        <Form.Item label={label} name={name}>
+            <Form.Item noStyle>
                 <div className={`gui-mirror `} id={name+"_mirror"}>
                     <TaskMirror
                         bordered={bordered}
@@ -92,16 +91,8 @@ const FormsMirror = props =>{
                         mirrorValue={dataItem?.task?.[name] || ""}
                         mirrorRef={narrowMirrorRef}
                         onFocus={e=>onFocus(e)}
-                        // className={
-                        //     isRequire ?
-                        //     mirrorValue ?
-                        //         bordered ? "gui-mirror-has-focus":"gui-mirror-has"
-                        //         :
-                        //         bordered ? "gui-mirror-empty-focus":"gui-mirror-empty"
-                        //         :
-                        //         bordered ? "gui-mirror-has-focus":"gui-mirror-has"
-                        // }
                         className={bordered ? "gui-mirror-has-focus":"gui-mirror-has"}
+                        language={name==='k8sJson'? 'yaml':'shell'}
                     />
                     {
                         bordered &&
@@ -112,11 +103,6 @@ const FormsMirror = props =>{
                         </div>
                     }
                 </div>
-                {/*<div className='ant-form-item-explain ant-form-item-explain-error'>*/}
-                {/*    <div role="alert">*/}
-                {/*        nnn*/}
-                {/*    </div>*/}
-                {/*</div>*/}
                 {
                     bordered &&
                     <div style={{paddingTop:8}}>
@@ -136,6 +122,7 @@ const FormsMirror = props =>{
                             type={true}
                             mirrorRef={expandMirrorRef}
                             mirrorValue={narrowMirrorRef?.current?.editor.getValue()}
+                            language={name==='k8sJson'?'yaml':'shell'}
                         />
                     </div>
                 </Modals>

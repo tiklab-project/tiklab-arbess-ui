@@ -68,7 +68,7 @@ const AuthModal = props =>{
                     form={form}
                     layout="vertical"
                     autoComplete="off"
-                    initialValues={{type:1,authWay:1,authType:2}}
+                    initialValues={{type:1,authWay:1,authType:1}}
                 >
                     <Form.Item name="authPublic" label="认证权限">
                         <Select placeholder={'认证权限'}>

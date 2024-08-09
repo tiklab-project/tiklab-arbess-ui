@@ -12,7 +12,7 @@ import {
 import PortalMessage from "./PortalMessage";
 import {inject, observer} from "mobx-react";
 import PipelineAside from "./PipelineAside";
-import {getUser, productWhitePureImg, productTitle, productWhiteImg} from "thoughtware-core-ui";
+import {getUser, productTitle,productImg,productFrameImg} from "thoughtware-core-ui";
 import {renderRoutes} from "react-router-config";
 import Profile from "../component/profile/Profile";
 import menuBlack from '../../assets/images/menu-black.png';
@@ -86,7 +86,7 @@ const Portal = props =>{
         if(path.startsWith('/setting')){
             return props.children
         }
-        if(path.startsWith('/pipeline/') && path !=='/pipeline/'){
+        if(path !=='/pipeline/' && path.startsWith('/pipeline/')){
             return (
                 <PipelineAside
                     {...props}
@@ -100,12 +100,14 @@ const Portal = props =>{
             <div className={`mf-aside ${isExpand ? 'mf-aside-expand': 'mf-aside-normal'} mf-aside-${themeType}`}>
                 <div className='aside-logo' onClick={()=>history.push('/home')}>
                     {
-                        themeType === 'default' ?
-                            <img src={productWhiteImg.matflow} height={32} width={32} alt={''}/>
+                        isExpand ?
+                            <>
+                                <img src={themeType === 'default' ? productImg.matflow : productFrameImg.matflow} height={24} width={24} alt={''}/>
+                                <div className='aside-logo-text'>{productTitle.matflow}</div>
+                            </>
                             :
-                            <img src={productWhitePureImg.matflow} height={32} width={32} alt={''}/>
+                            <img src={themeType === 'default' ? productImg.matflow : productFrameImg.matflow} height={32} width={32} alt={''}/>
                     }
-                    {isExpand&&<div className='aside-logo-text'>{productTitle.matflow}</div>}
                 </div>
                 <div className="aside-up">
                     {
@@ -134,7 +136,7 @@ const Portal = props =>{
                             <div className="aside-bottom-text text-icon" data-title-right={'消息'}
                                  onClick={()=>setNotificationVisibility(!notificationVisibility)}
                             >
-                                <BellOutlined/>
+                                <BellOutlined className='aside-bottom-text-icon'/>
                             </div>
 
                     }
@@ -156,7 +158,7 @@ const Portal = props =>{
                                 </div>
                                 :
                                 <div className="aside-bottom-text" data-title-right={'帮助与支持'}>
-                                    <QuestionCircleOutlined/>
+                                    <QuestionCircleOutlined className='aside-bottom-text-icon'/>
                                 </div>
                         }
                     />
@@ -166,14 +168,16 @@ const Portal = props =>{
                             isExpand?
                                 <div className='aside-item'>
                                     <div className="aside-item-icon">
-                                        <img src={themeType==='default'?menuBlack:menuWhite} alt="link" width="16" height="16">
+                                        <img src={themeType==='default'?menuBlack:menuWhite} alt="link" width="18" height="18">
                                         </img>
                                     </div>
                                     <div className="aside-item-title">应用</div>
                                 </div>
                                 :
                                 <div className="aside-bottom-text" data-title-right={'应用'}>
-                                    <img src={themeType==='default'?menuBlack:menuWhite} alt="link" width="16" height="16">
+                                    <img src={themeType==='default'?menuBlack:menuWhite} alt="link" width="18" height="18"
+                                         className='aside-bottom-text-icon'
+                                    >
                                     </img>
                                 </div>
                         }

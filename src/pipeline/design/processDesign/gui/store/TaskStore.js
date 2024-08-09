@@ -7,19 +7,15 @@ class TaskStore {
     // 必填配置是否完善
     @observable
     validType = []
-
     // 多任务未填的必需任务
     @observable
     taskMustField = []
-
     // 抽屉详情数据
     @observable
     dataItem = {}
-
     // 重新渲染
     @observable
     taskFresh = false
-
     // 抽屉详情面板遮罩
     @observable
     taskDetailsDrawerMask = false
@@ -94,27 +90,9 @@ class TaskStore {
         }
         const data = await Axios.post("/tasks/updateTask",param)
         if(data.code===0){
-            this.taskFresh=!this.taskFresh
-            // const key = Object.keys(values)[0]
-            // let task = {
-            //     ...this.dataItem,
-            //     task: values
-            // }
-            // if(key==='pullType'){
-            //     task.task = {
-            //         ...values,
-            //         transitive:true,
-            //     }
-            // }
-            // else {
-            //     task.task = {
-            //         ...this.dataItem.task,
-            //         ...values,
-            //     }
-            // }
-            // this.dataItem = task
-            await this.findOneTasksOrTask(this.dataItem.taskId)
-        }else {
+            this.taskFresh = !this.taskFresh
+            await this.findOneTasksOrTask(param.taskId)
+        } else {
             this.dataItem = {...this.dataItem}
         }
         return data
@@ -133,7 +111,7 @@ class TaskStore {
         }
         const data = await Axios.post("/tasks/updateTaskName",param)
         if(data.code===0){
-            this.taskFresh=!this.taskFresh
+            this.taskFresh = !this.taskFresh
             this.dataItem = {
                 ...this.dataItem,
                 taskName
@@ -214,7 +192,6 @@ class TaskStore {
         }
         return data
     }
-
 
 }
 

@@ -93,8 +93,10 @@ const Stage = props =>{
      */
     const showDetail = (item,formType) =>{
         setDataItem({
-            ...item,
-            formType
+            stageId:item.stageId,
+            taskId:item.taskId,
+            stageName:item.stageName,
+            formType:formType,
         })
         setTaskFormDrawer(true)
     }
@@ -147,14 +149,6 @@ const Stage = props =>{
                         group && group.stageList && group.stageList.map((list,listIndex)=>{
                             return(
                                <div key={listIndex} className={`${!group.code?"multi-content":""}`}>
-                                   {/*<div className="newStages-title" style={group.code? {opacity:0}:null}>*/}
-                                   {/*     <span className="newStages-title-name">*/}
-                                   {/*         {list?.stageName || "阶段"}*/}
-                                   {/*         <span className="newStages-title-icon">*/}
-                                   {/*             <EditOutlined onClick={()=>showDetail(list,'parallel')}/>*/}
-                                   {/*         </span>*/}
-                                   {/*     </span>*/}
-                                   {/*</div>*/}
                                    <div className={`newStages-contents ${group.code?"newStages-code":""}`}>
                                        <div className="newStages-content">
                                            {

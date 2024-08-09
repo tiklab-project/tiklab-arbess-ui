@@ -374,7 +374,7 @@ const HomePage = props =>{
                                             title: '用户',
                                             dataIndex: ['user','nickname'],
                                             key: ['user','nickname'],
-                                            width:"40%",
+                                            width:"32%",
                                             ellipsis:true,
                                             render: (text, record) => (
                                                 <span className='home-release-user-name'>

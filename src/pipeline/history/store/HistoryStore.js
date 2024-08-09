@@ -56,6 +56,18 @@ class HistoryStore {
     }
 
     /**
+     * 继续执行
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    keepOn = async value =>{
+        const param = new FormData()
+        param.append("pipelineId",value)
+        return await Axios.post("/exec/keepOn", param)
+    }
+
+    /**
      * 获取多任务历史日志详情
      * @param value
      * @returns {Promise<*>}

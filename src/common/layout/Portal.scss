@@ -14,6 +14,7 @@ $main-padding:10px;
       height: 24px;
       line-height: 24px;
       background: #8e9bed;
+      font-size: 13px;
     }
     .aside-hover-expand{
       position: absolute;
@@ -67,7 +68,7 @@ $main-padding:10px;
         .aside-item {
           cursor: pointer;
           display: flex;
-          height: 50px;
+          height: 52px;
           align-items: center;
           flex-direction: column;
           justify-content: center;
@@ -78,7 +79,9 @@ $main-padding:10px;
           }
         }
         .aside-item-icon {
-          font-size: var(--thoughtware-icon-size-16);
+          font-size: 18px;
+          padding-top: 4px;
+          padding-bottom: 2px;
         }
       }
       .aside-bottom {
@@ -127,11 +130,11 @@ $main-padding:10px;
         align-items: center;
         height: 48px;
         padding-top: 15px;
-        padding-left: 20px;
+        padding-left: 19px;
         margin-bottom: 20px;
         cursor: pointer;
         .aside-logo-text {
-          margin: 0 $main-padding;
+          margin: 0 8px;
           font-size: 20px;
           font-weight: 500;
         }
@@ -170,9 +173,10 @@ $main-padding:10px;
           }
         }
         .aside-item-user{
-          padding-left: 15px !important;
+          padding-left: 16px !important;
           .aside-item-icon {
             margin-right: 7px !important;
+            opacity: 1 !important;
           }
         }
       }
@@ -186,13 +190,18 @@ $main-padding:10px;
         margin-bottom: 10px;
         .aside-opt-name{
           font-weight: var(--thoughtware-font-weight-bold);
-          margin: 0 5px;
+          margin: 0 5px 0 7px;
           min-width: 0;
           max-width: 110px;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
           -o-text-overflow: ellipsis;
+        }
+        .mf-listname-icon{
+          width: 24px;
+          height: 24px;
+          line-height: 24px;
         }
       }
       .aside-item-back{
@@ -230,6 +239,9 @@ $main-padding:10px;
           white-space: nowrap;
           overflow: hidden;
           max-width: 200px;
+          &:hover{
+            background: var(--mf-hover-color);
+          }
         }
         &-icon{
           display: inline-block;
@@ -257,12 +269,12 @@ $main-padding:10px;
   .mf-layout-content {
     height: 100vh;
     flex: 1;
-    width: 0;
+    overflow: auto;
   }
 
   .mf-aside{
     &-default{
-      background: #f7f7f7;
+      background: var(--mf-aside-color);
       .aside-expand{
         background: #edf0f5;
       }
@@ -275,7 +287,7 @@ $main-padding:10px;
         }
       }
       .aside-select{
-        background-color: var(--thoughtware-gray-400);
+        background-color: var(--mf-select-color);
         border-left: 3px solid var(--thoughtware-blue) !important;
       }
     }
@@ -284,6 +296,9 @@ $main-padding:10px;
       color: #f6f7f8;
       .aside-expand{
         background: #7e8085;
+      }
+      .aside-item-icon,.aside-bottom-text-icon{
+        opacity: 0.6;
       }
       .aside-item-back{
         border-bottom: 1px solid #f6f7f81a;
@@ -295,7 +310,7 @@ $main-padding:10px;
       }
       .aside-select{
         background-color: #e9f2ff2e;
-        border-left: 3px solid var(--thoughtware-blue) !important;
+        border-left: 3px solid #ffffff !important;
       }
     }
     &-blue{
@@ -319,5 +334,4 @@ $main-padding:10px;
     }
   }
 }
-
 

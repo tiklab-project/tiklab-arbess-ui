@@ -1,7 +1,7 @@
 .mf-search-select{
   display: inline-block;
   .ant-select{
-    background-color: var(--mf-backdrop-color);
+    background-color: var(--thoughtware-gray);
     border-radius: 4px;
     cursor: pointer;
     &:hover{
@@ -17,14 +17,22 @@
 }
 
 .mf-search-input{
-  border-radius: 4px;
+  border-radius: 4px !important;
   height: 32px;
+  cursor: pointer;
+  input{
+    cursor: pointer;
+  }
+  background-color: var(--thoughtware-gray) !important;
+  &:hover{
+    background-color: var(--mf-select-color) !important;
+  }
 }
 
 .mf-search-picker{
   display: inline-block;
   .ant-picker.ant-picker-borderless{
-    background-color: var(--mf-backdrop-color) !important;
+    background-color: var(--thoughtware-gray) !important;
     border-radius: 4px;
     cursor: pointer;
     &:hover{

@@ -14,6 +14,7 @@ import BuildNode from "./build/BuildNode";
 import BuildDocker from "./build/BuildDocker";
 import DeployLinux from "./deploy/DeployLinux";
 import DeployDocker from "./deploy/DeployDocker";
+import DeployK8s from "./deploy/DeployK8s";
 import ArtifactPushMaven from "./artifact/ArtifactPushMaven";
 import ArtifactPushDocker from "./artifact/ArtifactPushDocker";
 import ArtifactPullMaven from "./artifact/ArtifactPullMaven";
@@ -39,7 +40,8 @@ const BasicInfo = props => {
     useEffect(()=>{
         // 初始化表单内容
         const {taskType,task} = dataItem
-        console.log('task::',task)
+        if(!task) return;
+        console.log('dataItem::',dataItem)
         switch(taskType){
             case 'git':
             case 'gitlab':
@@ -52,6 +54,7 @@ const BasicInfo = props => {
             case 'build_docker':
             case 'liunx':
             case 'docker':
+            case 'k8s':
             case 'sonar':
             case 'spotbugs':
             case 'artifact_maven':
@@ -78,11 +81,11 @@ const BasicInfo = props => {
                 break
             default:
                 form.setFieldsValue({
-                    taskName: dataItem.formType==='task'? dataItem?.taskName : dataItem?.stageName
+                    taskName: dataItem?.stageName
                 })
         }
         form.validateFields().then()
-    },[])
+    },[dataItem?.task])
 
     /**
      * 渲染表单
@@ -112,6 +115,8 @@ const BasicInfo = props => {
                 return <DeployLinux {...props}/>
             case 'docker':
                 return <DeployDocker {...props}/>
+            case 'k8s':
+                return <DeployK8s {...props}/>
             case 'sonar':
                 return <ScanSonarQuebe {...props}/>
             case 'spotbugs':

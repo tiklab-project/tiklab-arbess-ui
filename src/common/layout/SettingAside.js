@@ -3,7 +3,7 @@ import {
     DeploymentUnitOutlined,
     FileProtectOutlined,
     LayoutOutlined,
-    MacCommandOutlined,
+    MacCommandOutlined, MergeCellsOutlined,
     SafetyCertificateOutlined,
     SoundOutlined,
     TeamOutlined,
@@ -106,6 +106,12 @@ const applicationRouters =  [
         id:"/setting/server",
         title:"服务集成",
         icon:<MacCommandOutlined />,
+        purviewCode:"resources_server",
+    },
+    {
+        id:"/setting/k8s",
+        title:"Kubernetes集群",
+        icon:<MergeCellsOutlined />,
         purviewCode:"resources_server",
     },
     {

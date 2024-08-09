@@ -21,8 +21,8 @@ const DeployLinux = props =>{
     /**
      * 切换部署方式
      */
-    const changDeployType = value => {
-        updateTask({authType:value})
+    const changDeployType = (value,type) => {
+        updateTask({[type]:value})
     }
 
     return(
@@ -30,7 +30,7 @@ const DeployLinux = props =>{
             <FormsSelect
                 name={"authType"}
                 label="部署方式"
-                onChange={changDeployType}
+                onChange={value=>changDeployType(value,'authType')}
             >
                 <Select.Option value={1}>结构化部署</Select.Option>
                 <Select.Option value={2}>自定义部署</Select.Option>
@@ -62,6 +62,25 @@ const DeployLinux = props =>{
                             label={"部署命令"}
                             placeholder={"部署命令"}
                         />
+                        <FormsSelect
+                            name={"strategyType"}
+                            label="部署策略"
+                            onChange={value=>changDeployType(value,'strategyType')}
+                        >
+                            <Select.Option value={'default'}>无策略</Select.Option>
+                            <Select.Option value={'one'}>第一批暂停</Select.Option>
+                            <Select.Option value={'all'}>每批都暂停</Select.Option>
+                        </FormsSelect>
+                        <FormsSelect
+                            name={"strategyNumber"}
+                            label="部署主机数量"
+                            onChange={value=>changDeployType(value,'strategyNumber')}
+                        >
+                            <Select.Option value={1}>1</Select.Option>
+                            <Select.Option value={2}>2</Select.Option>
+                            <Select.Option value={3}>3</Select.Option>
+                            <Select.Option value={4}>4</Select.Option>
+                        </FormsSelect>
                     </>
                     :
                     <FormsMirror

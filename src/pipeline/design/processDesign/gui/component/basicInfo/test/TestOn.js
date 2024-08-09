@@ -92,7 +92,7 @@ const TestOn = props => {
             <FormsSelect
                 rules={[{required:true, message:"测试空间不能为空"}]}
                 name={"testSpace"}
-                label={"空间"}
+                label={"测试空间"}
                 isSpin={isSpin}
                 onFocus={()=>onFocus('testSpace')}
                 onChange={value=>onChange(value,'testSpace')}

@@ -14,8 +14,7 @@ class HostStore {
         const data = await Axios.post("/authHost/createAuthHost",value)
         if(data.code===0){
             message.info(`添加成功`)
-        }
-        else {
+        } else {
             message.info(`添加失败`)
         }
         return data

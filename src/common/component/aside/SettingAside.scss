@@ -3,7 +3,7 @@
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: 220px;
-  background: var(--mf-backdrop-color);
+  background: var(--mf-aside-color);
   border-right: 1px solid var(--mf-border-color);
   .system-aside-top{
     height: 100%;
@@ -15,6 +15,10 @@
   }
   .system-aside-hidden {
     display: none;
+  }
+  .system-aside-li-left{
+    display: flex;
+    align-items: center;
   }
   .system-aside-item {
     display: flex;
@@ -75,12 +79,12 @@
       }
       .aside-back-box-icon{
         font-size: 18px;
-        padding-right: 5px;
+        padding-right: 8px;
       }
     }
   }
   .sys-content-icon{
-    padding-right: 5px;
+    padding-right: 8px;
     font-size: 18px;
   }
 }

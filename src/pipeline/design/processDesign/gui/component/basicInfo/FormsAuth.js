@@ -4,6 +4,7 @@ import {Select,Divider} from "antd";
 import ServerAddBtn from "../../../../../../setting/server/components/ServerAddBtn";
 import AuthAddBtn from "../../../../../../setting/configure/auth/components/AuthAddBtn";
 import HostAddBtn from "../../../../../../setting/configure/host/component/HostAddBtn";
+import K8sAddBtn from "../../../../../../setting/k8s/components/K8sAddBtn";
 import authStore from "../../../../../../setting/configure/auth/store/AuthStore";
 import hostStore from "../../../../../../setting/configure/host/store/HostStore";
 import hostGroupStore from "../../../../../../setting/configure/host/store/HostGroupStore";
@@ -19,13 +20,13 @@ import FormsSelect from "./FormsSelect";
  */
 const FormsAuth = props =>{
 
-    const {taskStore}=props
+    const {taskStore}=props;
 
-    const {findAllAuth} = authStore
-    const {findAuthServerList} = serverStore
-    const {findAllAuthHostList} = hostStore
-    const {findHostGroupList} = hostGroupStore
-    const {updateTask,dataItem} = taskStore
+    const {findAllAuth} = authStore;
+    const {findAuthServerList} = serverStore;
+    const {findAllAuthHostList} = hostStore;
+    const {findHostGroupList} = hostGroupStore;
+    const {updateTask,dataItem} = taskStore;
 
     //弹出框
     const [visible,setVisible] = useState(false);
@@ -35,7 +36,7 @@ const FormsAuth = props =>{
     const [open,setOpen] = useState(false);
 
     useEffect(()=>{
-        // 初始化选择框list
+        //list
         findAuth()
     },[dataItem.task?.artifactType,dataItem.task?.pullType])
 
@@ -47,23 +48,30 @@ const FormsAuth = props =>{
         switch (taskType) {
             case 'git':
             case 'svn':
-                return findCommonAuth()
+                findCommonAuth()
+                break
             case 'gitee':
             case 'github':
             case 'gitlab':
             case 'gittok':
             case 'teston':
             case 'sonar':
-                return finsServer(taskType)
+                finsServer(taskType)
+                break
             case 'liunx':
             case 'docker':
-                return findHost()
+                findHost()
+                break
+            case 'k8s':
+                findK8sHost()
+                break
             case 'artifact_maven':
             case 'artifact_docker':
-                return artifactType==='ssh'? findHost():finsServer(artifactType)
+                artifactType==='ssh'? findHost():finsServer(artifactType)
+                break
             case 'pull_maven':
             case 'pull_docker':
-                return pullType==='ssh'? findHost():finsServer(pullType)
+                pullType==='ssh'? findHost():finsServer(pullType)
         }
     }
 
@@ -88,6 +96,17 @@ const FormsAuth = props =>{
         Promise.all([hostGroupRes,hostRes]).then(res=>{
             const filterRes = res.filter(item=>item.code ===0).map(li => li.data).flat();
             setList(filterRes)
+        })
+    }
+
+    /**
+     * 获取K8s
+     */
+    const findK8sHost = () => {
+        findAllAuthHostList('k8s').then(res=>{
+            if(res.code===0){
+                setList(res.data)
+            }
         })
     }
 
@@ -131,6 +150,8 @@ const FormsAuth = props =>{
             case 'liunx':
             case 'docker':
                 return "主机地址"
+            case 'k8s':
+                return "集群地址"
             case 'artifact_maven':
             case 'artifact_docker':
                 return artifactType==='ssh'?'远程地址':'推送地址'
@@ -162,6 +183,8 @@ const FormsAuth = props =>{
             case 'liunx':
             case 'docker':
                 return item?.groupId ? item.groupId : item.hostId
+            case 'k8s':
+                return item.hostId
             case 'artifact_maven':
             case 'artifact_docker':
             case 'pull_maven':
@@ -199,6 +222,8 @@ const FormsAuth = props =>{
             case 'liunx':
             case 'docker':
                 return <HostAddBtn {...commonProps}/>
+            case 'k8s':
+                return <K8sAddBtn {...commonProps}/>
             case 'artifact_maven':
             case 'artifact_docker':
             case 'pull_maven':
@@ -236,6 +261,8 @@ const FormsAuth = props =>{
             case 'liunx':
             case 'docker':
                 return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
+            case 'k8s':
+                return `${item.name}(${item.ip})`
             case 'artifact_maven':
             case 'artifact_docker':
             case 'pull_maven':

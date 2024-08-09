@@ -22,13 +22,10 @@ const Host = props =>{
 
     // 弹出框状态
     const [visible,setVisible] = useState(false)
-
     // 弹出框form表单value
     const [formValue,setFormValue] = useState(null)
-
     // 主机配置类型
     const [activeTab,setActiveTab] = useState('all')
-
     // 主机列表
     const [hostList,setHostList] = useState([])
 

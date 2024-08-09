@@ -4,7 +4,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
-import {taskTitle, TaskTitleIcon} from "./TaskTitleIcon";
+import {taskTitle, TaskIcon} from "./TaskTitleIcon";
 import "./TaskAdd.scss";
 
 /**
@@ -87,6 +87,7 @@ const TaskAdd = props =>{
             desc:[
                 {type:'liunx'},
                 {type:'docker'},
+                {type:'k8s'},
             ]
         },
     ]
@@ -141,6 +142,7 @@ const TaskAdd = props =>{
     const taskObj = type => {
         const configMap = {
             'liunx': { authType: 1 },
+            'k8s': { k8sNamespace: 'default' },
             'artifact_maven': { artifactType: 'nexus', transitive: true },
             'artifact_docker': { artifactType: 'nexus', transitive: true },
             'pull_maven': { pullType: 'nexus', transitive: true },
@@ -233,7 +235,16 @@ const TaskAdd = props =>{
                                                         <div key={index} className={`group-desc ${(item.type==='artifact_nodejs' || item.type==='pull_nodejs')?"group-desc-ban":""}`}
                                                              onClick={()=> (item.type==='artifact_nodejs' || item.type==='pull_nodejs') ? null : addTask(item)}
                                                         >
-                                                            <TaskTitleIcon type={item.type}/>
+                                                            <div className='group-desc-icon'>
+                                                                <TaskIcon
+                                                                    type={item.type}
+                                                                    width={24}
+                                                                    height={24}
+                                                                />
+                                                            </div>
+                                                            <div className='group-desc-title'>
+                                                                {taskTitle(item.type)}
+                                                            </div>
                                                         </div>
                                                     )
                                                 })

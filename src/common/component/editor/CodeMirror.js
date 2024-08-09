@@ -31,16 +31,16 @@ import "codemirror/addon/fold/comment-fold.js";
  */
 export const TaskMirror = props =>{
 
-    const {type,mirrorRef,mirrorValue,bordered,placeholder,...res} = props
+    const {type,mirrorRef,mirrorValue,bordered,placeholder,language="shell",...res} = props;
 
     return(
         <CodeMirror
             {...res}
             ref={mirrorRef}
-            value={mirrorValue}//内容
+            value={mirrorValue}
             options={{
-                mode: {name:"shell",shell: true },//语言
-                theme:type ? "dracula":"default",
+                mode: language,
+                theme: type ? "dracula":"default",
                 autofocus: type,
                 lineNumbers: type, // 是否显示行号
                 placeholder: type ? "" : bordered ? placeholder: "未设置",

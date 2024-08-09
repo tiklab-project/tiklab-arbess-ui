@@ -148,7 +148,7 @@ const SettingAside = props =>  {
                     onClick={()=>select(data)}
                     key={data.id}
                 >
-                    <div>
+                    <div className='system-aside-li-left'>
                         {data?.icon && <span className="sys-content-icon">{data.icon}</span>}
                         <span className='aside-second-title'>{data.title}</span>
                     </div>
@@ -173,9 +173,9 @@ const SettingAside = props =>  {
                      onClick={()=>setOpenOrClose(item.id)}
                 >
 
-                    <div>
+                    <div className='system-aside-li-left'>
                         {item?.icon && <span className="sys-content-icon">{item.icon}</span>}
-                        <span className="system-aside-title">{item.title}</span>
+                        <span className='aside-second-title'>{item.title}</span>
                     </div>
                     <div className="system-aside-item-icon">
                         {
@@ -190,7 +190,7 @@ const SettingAside = props =>  {
                 <ul className={`system-aside-ul ${isExpandedTree(item.id) ? null: "system-aside-hidden"}`}>
                     {
                         item.children && item.children.map(item =>{
-                            const deepnew = deep + 20
+                            const deepnew = deep + 28
                             return item.children && item.children.length ?
                                 renderSubMenu(item,deepnew) : renderMenu(item,deepnew)
                         })

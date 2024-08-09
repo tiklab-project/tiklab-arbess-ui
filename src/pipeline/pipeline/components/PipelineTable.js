@@ -32,7 +32,7 @@ import "./PipelineTable.scss";
  */
 const PipelineTable = props =>{
 
-    const {pipPage,pipelineListPage,changPage,changFresh,listType,isLoading,setIsLoading}=props
+    const {pipPage,pipelineListPage,changPage,changFresh,listType,setIsLoading}=props
 
     const {updateFollow,findPipelineCloneName,pipelineClone,
         importPipelineYaml,findUserPipeline
@@ -41,16 +41,16 @@ const PipelineTable = props =>{
 
     const [form] = Form.useForm();
 
-    // 所有流水线
+    //所有流水线
     const [pipelineList,setPipelineList] = useState([])
 
-    // 克隆的对象
+    //克隆的对象
     const [pipelineObj,setPipelineObj] = useState(null)
 
-    // 克隆弹出框
+    //克隆弹出框
     const [copyVisible,setCopyVisible] = useState(false)
 
-    // 克隆状态
+    //克隆状态
     const [copyStatus,setCopyStatus] = useState(false)
 
     useEffect(()=>{
@@ -96,7 +96,6 @@ const PipelineTable = props =>{
     const work = debounce(record =>{
         setIsLoading(true)
         if(record.state === 1){
-            // 开始运行
             execStart({
                 pipelineId:record.id
             }).then(r=>{
@@ -109,10 +108,11 @@ const PipelineTable = props =>{
                 }
             })
         } else {
-            // 停止运行
             execStop(record.id).then(r=>{
                 setIsLoading(false)
-                if(r.code===0) return changFresh()
+                if(r.code===0){
+                    changFresh()
+                }
             })
         }
     },1000)
@@ -147,8 +147,7 @@ const PipelineTable = props =>{
                     message.info("克隆成功")
                     onCancel()
                     changFresh()
-                }
-                else {
+                } else {
                     message.info("克隆失败")
                 }
                 setCopyStatus(false)
@@ -332,7 +331,6 @@ const PipelineTable = props =>{
     return  (
         <div className="pipelineTable">
             <Table
-                loading={isLoading}
                 columns={columns}
                 dataSource={pipelineListPage}
                 rowKey={record=>record.id}

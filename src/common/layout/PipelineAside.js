@@ -10,13 +10,12 @@ import {
     ExperimentOutlined,
     RadarChartOutlined,
     HomeOutlined,
-    SettingOutlined, LeftOutlined, RightOutlined, LeftCircleOutlined, RightCircleOutlined,
+    SettingOutlined,
+    LeftCircleOutlined,
+    RightCircleOutlined,
 } from "@ant-design/icons";
 import pipelineStore from "../../pipeline/pipeline/store/PipelineStore";
-import {getUser, productTitle, productWhiteImg} from "thoughtware-core-ui";
 import {observer} from "mobx-react";
-import Profile from "../component/profile/Profile";
-
 
 const PipelineAside = (props) => {
 
@@ -167,7 +166,7 @@ const PipelineAside = (props) => {
                         className="aside-bottom-text" data-title-right='设置'
                         onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}
                     >
-                        <SettingOutlined />
+                        <SettingOutlined className='aside-bottom-text-icon'/>
                     </div>
                 }
             </div>

@@ -1,5 +1,5 @@
-import React, {useEffect,useState} from "react";
-import {Table, Tooltip, Row, Col, message, Space} from "antd";
+import React, {useEffect, useRef, useState} from "react";
+import {Table, Tooltip, Row, Col, message, Space, Spin} from "antd";
 import {MinusCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {deleteSuccessReturnCurrenPage,debounce} from "../../../common/utils/Client";
@@ -11,6 +11,7 @@ import ListAction from "../../../common/component/list/ListAction";
 import PipelineDrawer from "../../../common/component/drawer/Drawer";
 import HistoryScreen from "./HistoryScreen";
 import HistoryDetail from "./HistoryDetail";
+import HistoryRunDetail from "./HistoryRunDetail";
 import {runStatusIcon,runStatusText} from "./HistoryCommon";
 import historyStore from "../store/HistoryStore";
 import pipelineStore from "../../pipeline/store/PipelineStore";
@@ -29,16 +30,18 @@ const History = props =>{
 
     const {match,route} = props
 
-    const {findOnePipeline} = pipelineStore
+    const {findOnePipeline} = pipelineStore;
 
-    const {findUserInstance,findPipelineInstance,deleteInstance,execStart,execStop,page,historyList,setHistoryList} = historyStore
+    const {findUserInstance,findPipelineInstance,deleteInstance,execStart,execStop,setHistoryList,page,historyList} = historyStore;
+
+    const intervalRef = useRef(null);
 
     //历史信息
-    const [historyItem,setHistoryItem] = useState(null)
+    const [historyItem,setHistoryItem] = useState(null);
     //加载状态
-    const [isLoading,setIsLoading] = useState(false)
-    //历史详情状态 && 监听关闭定时器的状态
-    const [detail,setDetail] = useState(false)
+    const [isLoading,setIsLoading] = useState(false);
+    //历史运行阶段详情状态
+    const [runVisible,setRunVisible] = useState(false);
 
     const pageParam = {
         pageSize: pageSize,
@@ -63,27 +66,24 @@ const History = props =>{
             }
     )
 
-    useEffect(()=>{
+    useEffect(() => {
         return ()=>{
-            setHistoryList([])
-            clearInterval(inters)
+            setHistoryList([]);
+            clearInterval(intervalRef.current);
         }
-    },[])
+    }, []);
 
-    let inters=null
     useEffect(()=>{
-        if(detail){
-            clearInterval(inters)
-        }else {
+        if(!runVisible){
             findInstance()
         }
-    },[detail,params,match.params.id])
+    },[runVisible,params,match.params.id])
 
     /**
      * 获取历史列表
      */
     const findInstance = () => {
-        setIsLoading(true)
+        setIsLoading(true);
         if(route.path==='/history'){
             findUserInstance(params).then(Res=>{
                 setIsLoading(false)
@@ -94,43 +94,43 @@ const History = props =>{
                     findInter()
                 }
             })
-            return
-        }
-        findPipelineInstance({
-            ...params,
-            pipelineId:match.params.id,
-        }).then(Res=>{
-            setIsLoading(false)
-            if(Res.code===0){
-                if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
-                    return
+        } else {
+            findPipelineInstance({
+                ...params,
+                pipelineId:match.params.id,
+            }).then(Res=>{
+                setIsLoading(false)
+                if(Res.code===0){
+                    if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
+                        return
+                    }
+                    findInter()
                 }
-                findInter()
-            }
-        })
+            })
+        }
     }
 
     /**
      * 开启定时器
      */
     const findInter = () => {
-        clearInterval(inters)
+        clearInterval(intervalRef.current);
         if(route.path==='/history'){
-            inters = setInterval(()=>{
+            intervalRef.current = setInterval(()=>{
                 findUserInstance(params).then(Res=>{
                     if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
-                        clearInterval(inters)
+                        clearInterval(intervalRef.current)
                     }
                 })
             },1000)
-        }else {
-            inters = setInterval(()=>{
+        } else {
+            intervalRef.current = setInterval(()=>{
                 findPipelineInstance({
                     ...params,
                     pipelineId:match.params.id,
                 }).then(Res=>{
                     if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
-                        clearInterval(inters)
+                        clearInterval(intervalRef.current)
                     }
                 })
             },1000)
@@ -142,8 +142,9 @@ const History = props =>{
      * @param record
      */
     const details = record => {
-        setDetail(true)
-        setHistoryItem(record)
+        clearInterval(intervalRef.current);
+        setHistoryItem(record);
+        setRunVisible(true)
     }
 
     /**
@@ -162,9 +163,7 @@ const History = props =>{
      */
     const changPage = pages =>{
         if(pages==='reset'){
-            setParams({
-                pageParam
-            })
+            setParams({pageParam})
         } else {
             screen({
                 pageParam:{
@@ -192,25 +191,30 @@ const History = props =>{
      * 运行开启或终止
      */
     const terminateOperation = debounce(record => {
+        setIsLoading(true);
         const {runStatus,pipeline} = record
         if(runStatus==="run"){
-            execStop(pipeline.id).then()
-            return
-        }
-        findOnePipeline(pipeline.id).then(res=>{
-            if(res.code===0){
-                if(res.data.state===2){
-                    return message.info("当前流水线正在在运行！")
-                }
-                execStart({
-                    pipelineId:pipeline.id
-                }).then(res=>{
-                    if(res.code===0){
-                        details(res.data)
+            execStop(pipeline.id).then(res=>{
+                setIsLoading(false)
+            })
+        } else {
+            findOnePipeline(pipeline.id).then(res=>{
+                if(res.code===0){
+                    if(res.data.state===2){
+                        message.info("当前流水线正在在运行！",0.5,()=>setIsLoading(false))
+                    } else {
+                        execStart({
+                            pipelineId:pipeline.id
+                        }).then(res=>{
+                            if(res.code===0) {
+                                details(res.data)
+                            }
+                            setIsLoading(false)
+                        })
                     }
-                })
-            }
-        })
+                }
+            })
+        }
     },1000)
 
     const columns = [
@@ -316,7 +320,8 @@ const History = props =>{
      * 退出
      */
     const goBack = () => {
-        setDetail(false)
+        setRunVisible(false)
+        setHistoryItem(null);
     }
 
     return (
@@ -331,35 +336,31 @@ const History = props =>{
             >
                 <div className="mf-home-limited">
                     <BreadCrumb firstItem={"历史"}/>
-                    <HistoryScreen
-                        {...props}
-                        screen={screen}
-                    />
-                    <div className="history-table">
-                        <Table
-                            bordered={false}
-                            loading={isLoading}
-                            columns={columns}
-                            dataSource={historyList}
-                            rowKey={record=>record.instanceId}
-                            pagination={false}
-                            locale={{emptyText: <ListEmpty title={"没有查询到历史记录"}/>}}
-                        />
-                        <Page
-                            currentPage={page.currentPage}
-                            changPage={changPage}
-                            page={page}
-                        />
-                    </div>
+                    <HistoryScreen {...props} screen={screen}/>
+                    <Spin spinning={isLoading}>
+                        <div className="history-table">
+                            <Table
+                                bordered={false}
+                                columns={columns}
+                                dataSource={historyList}
+                                rowKey={record=>record.instanceId}
+                                pagination={false}
+                                locale={{emptyText: <ListEmpty title={"没有查询到历史记录"}/>}}
+                            />
+                            <Page
+                                currentPage={page.currentPage}
+                                changPage={changPage}
+                                page={page}
+                            />
+                        </div>
+                    </Spin>
                 </div>
                 <PipelineDrawer
                     width={"75%"}
-                    visible={detail}
+                    visible={runVisible}
                     onClose={goBack}
-                    mask={false}
-                    requireRef={true}
                 >
-                    <HistoryDetail
+                    <HistoryRunDetail
                         back={goBack}
                         historyType={"drawer"}
                         historyItem={historyItem}

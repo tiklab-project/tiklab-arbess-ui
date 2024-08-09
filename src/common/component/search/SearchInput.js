@@ -3,7 +3,6 @@ import {SearchOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import './Search.scss';
 
-
 const SearchInput = props =>{
 
     const {...res} = props;
@@ -12,7 +11,7 @@ const SearchInput = props =>{
         <Input
             {...res}
             allowClear
-            bordered={true}
+            bordered={false}
             autoComplete={"off"}
             prefix={<SearchOutlined style={{fontSize: 16}}/>}
             className='mf-search-input'

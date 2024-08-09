@@ -1,10 +1,17 @@
+$success-color: var(--thoughtware-blue);
+$run-color: #43a890;
+$wait-color: rgba(0, 0, 0, 0.18);
+$halt-color:  #444444;
+$error-color:  #ff0000;
+$suspend-color:  #ff0000;
+
 .str-detail{
     height: 100%;
     width: 100%;
     min-width: 500px;
     padding: 0 30px;
     .str-detail-bread{
-        padding: 15px 0 10px;
+        padding: 20px 0 15px;
         .bread-center{
             display: flex;
             padding-top: 10px;
@@ -21,13 +28,12 @@
                 .bread-center-desc{
                     text-align: center;
                     font-weight: bold;
-                    padding-top:10px;
                 }
             }
         }
     }
     .str-detail-bottom{
-        height: calc(100% - 83px);
+        height: calc(100% - 95px);
         display: flex;
         flex-direction: row;
     }
@@ -103,19 +109,19 @@
     }
     .bread-center{
         &-halt{
-            color: #444444;
+            color: $halt-color;
         }
         &-error{
-            color: #ff0000;
+            color: $error-color;
         }
         &-success{
-            color: var(--thoughtware-blue);
+            color: $success-color;
         }
         &-run{
-            color: #43a890;
+            color: $run-color;
         }
         &-wait{
-            color: rgba(0, 0, 0, 0.18);
+            color: $wait-color;
         }
     }
 }

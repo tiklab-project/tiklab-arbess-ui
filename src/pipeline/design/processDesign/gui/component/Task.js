@@ -62,7 +62,7 @@ const Task = props => {
      */
     const showDetail = item => {
         setDataItem({
-            ...item,
+            taskId:item.taskId,
             formType:'task',
         })
         setTaskFormDrawer(true)

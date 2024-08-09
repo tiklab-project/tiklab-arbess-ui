@@ -17,10 +17,8 @@ const Gui = props =>{
 
     // 新任务抽屉状态
     const [newStageDrawer,setNewStageDrawer] = useState(false)
-
     // 任务详情抽屉状态
     const [taskFormDrawer,setTaskFormDrawer] = useState(false)
-
     // 添加任务的数据
     const [createValue,setCreateValue] = useState({})
 

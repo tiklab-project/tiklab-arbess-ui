@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Select,Space,Row,Col} from "antd";
-import {CaretDownOutlined} from "@ant-design/icons";
+import {Select, Space, Row, Col, Spin} from "antd";
 import {getUser} from "thoughtware-core-ui";
 import PipelineTable from "./PipelineTable";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
@@ -33,30 +32,23 @@ const Pipeline = props =>{
         currentPage: 1,
     }
 
-    // 流水线分类
+    //流水线分类
     const [listType,setListType] = useState('all')
-
-    // 刷新状态
+    //刷新状态
     const [fresh,setFresh] = useState(false)
-
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(false);
-
-    // 请求数据
+    //请求数据
     const [pipelineParam,setPipelineParam] = useState({
         pageParam
     });
-
-    // 流水线列表
+    //流水线列表
     const [pipelineListPage,setPipelineListPage] = useState([]);
-
-    // 流水线分页
+    //流水线分页
     const [pipPage,setPipPage] = useState({});
-
-    // 环境管理列表
+    //环境管理列表
     const [envList,setEnvList] = useState([]);
-
-    // 分组管理列表
+    //分组管理列表
     const [groupList,setGroupList] = useState([]);
 
     useEffect(()=>{
@@ -209,7 +201,7 @@ const Pipeline = props =>{
                             <SearchInput
                                 placeholder="搜索名称"
                                 onPressEnter={onChangeSearch}
-                                style={{ width: 190 }}
+                                style={{ width: 180 }}
                             />
                             <SearchSelect
                                 showSearch
@@ -245,16 +237,17 @@ const Pipeline = props =>{
                             </SearchSelect>
                         </Space>
                     </div>
-                    <PipelineTable
-                        {...props}
-                        listType={listType}
-                        isLoading={isLoading}
-                        setIsLoading={setIsLoading}
-                        changPage={changPage}
-                        changFresh={changFresh}
-                        pipPage={pipPage}
-                        pipelineListPage={pipelineListPage}
-                    />
+                    <Spin spinning={isLoading}>
+                        <PipelineTable
+                            {...props}
+                            listType={listType}
+                            setIsLoading={setIsLoading}
+                            changPage={changPage}
+                            changFresh={changFresh}
+                            pipPage={pipPage}
+                            pipelineListPage={pipelineListPage}
+                        />
+                    </Spin>
                 </div>
             </Col>
         </Row>

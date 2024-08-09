@@ -141,7 +141,7 @@ export class PipelineStore {
     findOnePipeline = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        const data = await Axios.post("/pipeline/findOnePipeline",param)
+        const data = await Axios.post("/pipeline/findPipelineNoQuery",param)
         if(data.code===0){
             this.pipeline = data.data && data.data
         }
