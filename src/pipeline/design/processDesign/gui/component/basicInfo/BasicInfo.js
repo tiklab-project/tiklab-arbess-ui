@@ -8,7 +8,7 @@ import CodeThird from "./code/CodeThird";
 import ScanSonarQuebe from "./scan/ScanSonarQuebe";
 import ScanSpotbugs from "./scan/ScanSpotbugs";
 import TestMvnUnit from "./test/TestMvnUnit";
-import TestOn from "./test/TestOn";
+import TestRubo from "./test/TestRubo";
 import BuildMaven from "./build/BuildMaven";
 import BuildNode from "./build/BuildNode";
 import BuildDocker from "./build/BuildDocker";
@@ -39,16 +39,19 @@ const BasicInfo = props => {
 
     useEffect(()=>{
         // 初始化表单内容
-        const {taskType,task} = dataItem
+        const {formType,taskType,task,taskName,stageName} = dataItem;
+        if(formType==="stage"){
+            form.setFieldsValue({taskName: stageName})
+            return;
+        }
         if(!task) return;
-        console.log('dataItem::',dataItem)
         switch(taskType){
             case 'git':
             case 'gitlab':
             case 'svn':
             case 'gitee':
             case 'github':
-            case 'gittok':
+            case 'gitpuk':
             case 'maven':
             case 'nodejs':
             case 'build_docker':
@@ -64,13 +67,13 @@ const BasicInfo = props => {
             case 'maventest':
                 form.setFieldsValue({
                     ...task,
-                    taskName:dataItem?.taskName,
+                    taskName:taskName,
                     putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
                 })
                 break
-            case 'teston':
+            case 'testrubo':
                 form.setFieldsValue({
-                    taskName:dataItem?.taskName,
+                    taskName:taskName,
                     testSpace:task?.testSpace?.name,
                     apiEnv:task?.apiEnv?.name,
                     appEnv:task?.appEnv?.name,
@@ -81,7 +84,7 @@ const BasicInfo = props => {
                 break
             default:
                 form.setFieldsValue({
-                    taskName: dataItem?.stageName
+                    taskName: taskName
                 })
         }
         form.validateFields().then()
@@ -99,12 +102,12 @@ const BasicInfo = props => {
             case 'gitee':
             case 'github':
             case 'gitlab':
-            case 'gittok':
+            case 'gitpuk':
                 return <CodeThird {...props}/>
             case 'maventest':
                 return <TestMvnUnit {...props}/>
-            case 'teston':
-                return <TestOn {...props}/>
+            case 'testrubo':
+                return <TestRubo {...props}/>
             case 'nodejs':
                 return <BuildNode {...props}/>
             case 'maven':

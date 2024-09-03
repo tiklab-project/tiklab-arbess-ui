@@ -11,8 +11,6 @@ $inline-spacing: 15px;
         align-items: center;
     }
     .overview-guide-title{
-        height: 36px;
-        line-height: 36px;
         font-size: 15px;
         font-weight: var(--thoughtware-font-weight-bold);
     }
@@ -27,7 +25,7 @@ $inline-spacing: 15px;
                     flex: 1;
                     padding: 15px;
                     border-radius: 4px;
-                    background: var(--mf-backdrop-color);
+                    background: var(--arbess-backdrop-color);
                     cursor: pointer;
                     max-width: 25%;
                 }
@@ -77,10 +75,15 @@ $inline-spacing: 15px;
     .overview-center{
         margin-bottom: $block-spacing;
         .overview-center-release{
-            background-color: var(--mf-backdrop-color);
+            background-color: var(--arbess-backdrop-color);
             border-radius: 4px;
             padding: 20px 10px 10px;
             margin-top: 15px;
+        }
+    }
+    .overview-bottom{
+        .overview-bottom-box{
+            padding-top: 10px;
         }
     }
 }

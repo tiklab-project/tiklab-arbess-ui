@@ -9,7 +9,7 @@ import {SystemRole} from "thoughtware-privilege-ui";
  */
 const SystemRoleContent = props =>{
 
-    return <SystemRole {...props} bgroup={"matflow"}/>
+    return <SystemRole {...props} bgroup={"arbess"}/>
 
 }
 

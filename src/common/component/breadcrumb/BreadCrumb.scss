@@ -1,13 +1,13 @@
-.mf-breadcrumb{
+.arbess-breadcrumb{
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 16px;
     font-weight: var(--thoughtware-font-weight-bold);
-    .mf-breadcrumb-first{
+    .arbess-breadcrumb-first{
         cursor: pointer;
     }
-    .mf-breadcrumb-span{
+    .arbess-breadcrumb-span{
         color: #00000073;
     }
 }

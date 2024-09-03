@@ -166,7 +166,7 @@ const PipelineUserAdd = props =>{
     }
 
     return (
-        <div className='pipeline-user-add mf'>
+        <div className='pipeline-user-add'>
             <SearchInput
                 placeholder={"搜索姓名"}
                 onPressEnter={changFindUser}

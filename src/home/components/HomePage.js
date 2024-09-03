@@ -239,7 +239,7 @@ const HomePage = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="homePage-content mf-home-limited">
+                <div className="homePage-content arbess-home-limited">
                     <div className="home-recent">
                         <div className="homePage-guide-title">
                             常用流水线
@@ -283,7 +283,7 @@ const HomePage = props =>{
                                         }
                                     </div>
                                     :
-                                    <ListEmpty title={"暂无常用流水线"}/>
+                                    <ListEmpty />
                             }
                         </Spin>
                     </div>
@@ -368,7 +368,7 @@ const HomePage = props =>{
                                 <div className='home-release-title'>用户发布次数TOP10统计</div>
                                 <Table
                                     loading={spinning.dayRateUserTrend}
-                                    rowClassName='mf-user-avatar'
+                                    rowClassName='arbess-user-avatar'
                                     columns={[
                                         {
                                             title: '用户',

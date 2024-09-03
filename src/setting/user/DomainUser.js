@@ -9,7 +9,7 @@ import {DomainUser} from "thoughtware-user-ui";
  */
 const DomainUserContent = props =>{
 
-    return <DomainUser {...props} domainId={props.match.params.id} bgroup={"matflow"}/>
+    return <DomainUser {...props} domainId={props.match.params.id} bgroup={"arbess"}/>
 
 }
 

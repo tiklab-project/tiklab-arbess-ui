@@ -1,11 +1,11 @@
-.mf-search-select{
+.arbess-search-select{
   display: inline-block;
   .ant-select{
     background-color: var(--thoughtware-gray);
     border-radius: 4px;
     cursor: pointer;
     &:hover{
-      background-color: var(--mf-select-color);
+      background-color: var(--arbess-select-color);
     }
   }
   .ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector{
@@ -16,27 +16,27 @@
   }
 }
 
-.mf-search-input{
+.arbess-search-input{
   border-radius: 4px !important;
   height: 32px;
   cursor: pointer;
+  background-color: var(--thoughtware-gray) !important;
   input{
     cursor: pointer;
   }
-  background-color: var(--thoughtware-gray) !important;
   &:hover{
-    background-color: var(--mf-select-color) !important;
+    background-color: var(--arbess-select-color) !important;
   }
 }
 
-.mf-search-picker{
+.arbess-search-picker{
   display: inline-block;
   .ant-picker.ant-picker-borderless{
     background-color: var(--thoughtware-gray) !important;
     border-radius: 4px;
     cursor: pointer;
     &:hover{
-      background-color: var(--mf-select-color) !important;
+      background-color: var(--arbess-select-color) !important;
     }
   }
 }

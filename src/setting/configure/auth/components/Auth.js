@@ -112,6 +112,7 @@ const Auth = props =>{
             dataIndex: "action",
             key: "action",
             width:"10%",
+            ellipsis:true,
             render:(_,record) => {
                 return (
                     <ListAction
@@ -133,7 +134,7 @@ const Auth = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited'>
+                <div className='arbess-home-limited'>
                     <BreadCrumb firstItem={"认证"}>
                         <AuthAddBtn
                             visible={visible}
@@ -149,7 +150,7 @@ const Auth = props =>{
                             dataSource={authList}
                             rowKey={record=>record.authId}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={'暂无认证配置'}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                     </div>
                 </div>

@@ -86,6 +86,7 @@ const Variable = props =>{
             dataIndex: "action",
             key: "action",
             width:"10%",
+            ellipsis:true,
             render:(_,record) => (
                 <ListAction
                     edit={()=>editVariable(record)}
@@ -101,8 +102,9 @@ const Variable = props =>{
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
-                lg={{ span: "18", offset: "3" }}
-                xl={{ span: "16", offset: "4" }}
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+                xxl={{ span: "16", offset: "4" }}
                 className="variable"
             >
                 <div className="variable-up">
@@ -124,7 +126,7 @@ const Variable = props =>{
                         dataSource={variableData}
                         rowKey={record=>record.varId}
                         pagination={false}
-                        locale={{emptyText: <ListEmpty title={"暂无变量"}/>}}
+                        locale={{emptyText: <ListEmpty />}}
                     />
                 </div>
            </Col>

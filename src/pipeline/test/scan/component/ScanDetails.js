@@ -65,7 +65,7 @@ const ScanDetails = (props) => {
                 xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb
                         firstItem={"代码扫描"}
                         onClick={backScan}

@@ -3,11 +3,15 @@
   gap: 10px;
   height: 150px;
   padding-top: 10px;
+  overflow: hidden;
+  flex-wrap: wrap;
   .statistics-result{
     flex: 1;
+    height: 140px;
+    min-width: 204px;
     padding: 10px;
     border-radius: 4px;
-    background-color: var(--mf-backdrop-color);
+    background-color: var(--arbess-backdrop-color);
   }
   .statistics-result-title{
     padding-bottom: 10px;

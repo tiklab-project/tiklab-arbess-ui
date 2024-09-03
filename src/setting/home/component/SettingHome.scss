@@ -7,162 +7,181 @@ $inline-padding: 15px;
     width: 100%;
     overflow: auto;
     .home-title{
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         font-weight: var(--thoughtware-font-weight-bold);
     }
-    .home-label{
-        padding-bottom: $inline-padding;
+    .home-icon{
+        font-size: 16px;
+        padding-right: 5px;
+    }
+    .home-left{
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
     }
     .home-info{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
         font-weight: var(--thoughtware-font-weight-bold);
     }
+    .home-licence-box{
+        margin-bottom: $block-spacing;
+        .home-licence {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--arbess-backdrop-color);
+            padding: 35px 20px;
+            gap: $inline-spacing;
+            .home-licence-item{
+                display: flex;
+                align-items: center;
+                gap: $inline-spacing;
+                .home-licence-item-level{
+                    display: flex;
+                    align-items: center;
+                    .licence-level-img{
+                        width: 28px;
+                        height: 28px;
+                        margin-right: 8px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .licence-level-info{
+                        font-size: 15px;
+                        font-weight: var(--thoughtware-font-weight-bold);
+                    }
+                    .licence-level-issuedTime{
+                        padding-left: 5px;
+                        font-size: 12px;
+                        color: #999999;
+                    }
+                }
+                .licence-level-applyAuth{
+                    cursor: pointer;
+                    margin-top: 5px;
+                    .licence-level-applyAuth-title{
+                        padding-right: 5px;
+                    }
+                }
+                .licence-level-info{
+                    font-weight: var(--thoughtware-font-weight-bold);
+                }
+            }
+            .home-licence-sub{
+                cursor: pointer;
+                color: var(--thoughtware-blue);
+            }
+        }
+    }
     .home-role-box{
+        background-color: var(--arbess-backdrop-color);
+        padding: $inline-padding;
         .home-role{
-            margin-bottom: $block-spacing;
-            width: calc(25% - 7.5px);;
             .home-role-item{
-                background: var(--mf-backdrop-color);
-                text-align: center;
-                padding: $inline-padding;
-                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 0;
+                cursor: pointer;
+                &:hover{
+                    color: var(--thoughtware-blue);
+                }
             }
         }
     }
     .home-user-box{
-        margin-bottom: $block-spacing;
+        background-color: var(--arbess-backdrop-color);
+        padding: $inline-padding 20px;
         .home-user{
-            display: flex;
-            gap: $inline-spacing;
-            .home-user-item{
-                flex: 1;
-                background: var(--mf-backdrop-color);
-                text-align: center;
-                padding: $inline-padding;
-                border-radius: 4px;
-            }
+           .home-user-item{
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               padding: 8px 0;
+               cursor: pointer;
+               &:hover{
+                   color: var(--thoughtware-blue);
+               }
+           }
         }
     }
     .home-message-box{
+        background-color: var(--arbess-backdrop-color);
+        padding: $inline-padding 20px;
         .home-message{
-            display: flex;
-            gap: $inline-spacing;
-            width: calc(50% - 7.5px);
             .home-message-item{
-                flex: 1;
-                background: var(--mf-backdrop-color);
-                text-align: center;
-                padding: $inline-padding;
-                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 0;
+                cursor: pointer;
+                &:hover{
+                    color: var(--thoughtware-blue);
+                }
             }
         }
     }
     .home-config-box{
-        margin: $block-spacing 0;
+        background-color: var(--arbess-backdrop-color);
+        padding: $inline-padding 20px;
         .home-config{
-            display: flex;
-            gap: $inline-spacing;
             .home-config-item{
-                flex: 1;
-                background: var(--mf-backdrop-color);
-                padding: $inline-padding;
-                border-radius: 4px;
-                .home-config-item-label{
-                    padding-bottom: $inline-padding;
-                }
-                .home-config-item-level,.config-level-item{
-                    display: flex;
-                    align-items: center;
-                    .config-level-item-label{
-                        font-size: 12px;
-                        color: #999999;
-                        margin-right: 10px;
-                    }
-                    .config-level-item-info{
-                        font-weight: var(--thoughtware-font-weight-bold);
-                    }
-                }
-                .home-config-item-level{
-                    grid-column-gap: 20px;
-                    flex-wrap: wrap;
-                }
-            }
-        }
-    }
-    .home-licence-box{
-        .home-licence{
-            display: flex;
-            gap: $inline-spacing;
-            width: calc(50% - 7.5px);
-            .home-licence-item{
-                flex: 1;
-                background: var(--mf-backdrop-color);
-                border-radius: 4px;
-                padding: $inline-padding;
-                .home-licence-item-label{
-                    padding-bottom: $inline-padding;
-                }
-                .home-licence-item-level{
-                    display: flex;
-                    align-items: center;
-                    flex-wrap: wrap;
-                    .licence-level-label{
-                        font-size: 12px;
-                        color: #999999;
-                        margin-right: 10px;
-                    }
-                    .licence-level-info{
-                        font-weight: var(--thoughtware-font-weight-bold);
-                    }
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 0;
+                cursor: pointer;
+                &:hover{
+                    color: var(--thoughtware-blue);
                 }
             }
         }
     }
     .home-security-box{
-        .home-security .home-security-item{
-            background: var(--mf-backdrop-color);
-            border-radius: 4px;
-            padding: $inline-padding;
-            .home-security-item-level{
+        background-color: var(--arbess-backdrop-color);
+        padding: $inline-padding 20px;
+        .home-security{
+            .home-security-item{
                 display: flex;
                 align-items: center;
-                gap: $inline-spacing;
-                .security-level-label{
-                    font-size: 12px;
-                    color: #999999;
-                    margin-right: 10px;
-                }
-                .security-level-info{
-                    flex: 1;
-                    width: 0;
-                    font-weight: var(--thoughtware-font-weight-bold);
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
+                justify-content: space-between;
+                padding: 8px 0;
+                cursor: pointer;
+                &:hover{
+                    color: var(--thoughtware-blue);
                 }
             }
         }
     }
-
-    .home-box{
-        display: flex;
-        .home-message-box,.home-licence-box{
-            flex:1;
-        }
-        .home-message-box{
-            margin-right: $inline-spacing;
+    .home-quick-box{
+        margin-top: 30px;
+        .home-quick{
+            .home-quick-item{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: var(--arbess-backdrop-color);
+                padding: 30px 20px;
+                cursor: pointer;
+                &:hover{
+                    color: var(--thoughtware-blue);
+                }
+                .home-quick-item-title{
+                    flex: 1;
+                }
+            }
         }
     }
     .home-chunk-box{
-        display: flex;
-        .home-role-box,.home-message-box{
-            margin-right: $inline-spacing;
-        }
-        .home-role-box,.home-security-box{
-            flex: 1;
-        }
-        .home-message-box{
-            flex: 2;
-        }
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: $inline-spacing;
+        white-space: nowrap;
     }
 
 }

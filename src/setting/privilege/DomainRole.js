@@ -9,7 +9,7 @@ import {DomainRole} from "thoughtware-privilege-ui";
  */
 const DomainRoleContent = props =>{
 
-    return <DomainRole {...props} domainId={props.match.params.id}  bgroup={"matflow"}/>
+    return <DomainRole {...props} domainId={props.match.params.id}  bgroup={"arbess"}/>
 
 }
 

@@ -6,19 +6,19 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Page from "../../../../common/component/page/Page";
 import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
 import ListAction from "../../../../common/component/list/ListAction";
-import testOnStore from "../store/TestOnStore";
-import "./TestOn.scss";
+import testRuboStore from "../store/TestRuboStore";
+import "./TestRubo.scss";
 
 const pageSize = 15;
 
 /**
  * 测试页面
  */
-const TestOn = props => {
+const TestRubo = props => {
 
     const {match:{params}} = props
 
-    const {findAllRelevance,deleteRelevance} = testOnStore;
+    const {findAllRelevance,deleteRelevance} = testRuboStore;
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
@@ -59,7 +59,7 @@ const TestOn = props => {
      * 查看测试详情
      * @param item
      */
-    const goTestonDetail = item => {
+    const goTestRubo = item => {
         if(item.status===2){
             return message.info("当前测试报告详情已删除")
         }
@@ -102,9 +102,7 @@ const TestOn = props => {
             ellipsis:true,
             render:(text,record) =>{
                 return (
-                    <span className="test-item-name"
-                        onClick={()=>goTestonDetail(record)}
-                    >
+                    <span className="test-item-name" onClick={()=>goTestRubo(record)}>
                         # {text || '--'}
                     </span>
                 )
@@ -163,6 +161,7 @@ const TestOn = props => {
             dataIndex: "action",
             key:"action",
             width:"8%",
+            ellipsis:true,
             render:(_,record)=> (
                 <ListAction
                     del={()=>delTeston(record)}
@@ -181,8 +180,8 @@ const TestOn = props => {
                 xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
-                    <BreadCrumb firstItem={"TestOn自动化测试"}/>
+                <div className="arbess-home-limited">
+                    <BreadCrumb firstItem={"TestRubo自动化测试"}/>
                     <div className='test-table'>
                         <Table
                             bordered={false}
@@ -191,7 +190,7 @@ const TestOn = props => {
                             dataSource={testList}
                             rowKey={record=>record.relevanceId}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={"暂无TestOn自动化测试"}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                         <Page
                             currentPage={param.pageParam.currentPage}
@@ -205,4 +204,4 @@ const TestOn = props => {
     )
 }
 
-export default TestOn
+export default TestRubo

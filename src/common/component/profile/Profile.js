@@ -19,8 +19,7 @@ const ProfileContent = ({userInfo = undefined}) => {
         if (user.name && user.name !== "null") {
             return <Avatar >{user.name.substring(0, 1)}</Avatar>
         }
-
-        return <Avatar size={32} icon={<UserOutlined />} />
+        return <Avatar icon={<UserOutlined />} />
     }
 
     return  <div className={'thoughtware-profile'}>

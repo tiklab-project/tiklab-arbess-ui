@@ -1,5 +1,5 @@
-.mf-modal{
-    .mf-modal-up{
+.arbess-modal{
+    .arbess-modal-up{
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -10,7 +10,7 @@
             font-weight: var(--thoughtware-font-weight-bold);
         }
     }
-    .mf-modal-content{
+    .arbess-modal-content{
         padding: 0 var(--thoughtware-padding);
         min-height: 50px;
         max-height:calc(100% - 120px);

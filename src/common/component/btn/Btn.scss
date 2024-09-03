@@ -1,4 +1,4 @@
-.mf-btn{
+.arbess-btn{
     display: inline-block;
     font-weight: 600;
     white-space: nowrap;
@@ -12,20 +12,20 @@
     border: 1px solid var(--thoughtware-gray);
 }
 
-.mf-btn-primary{
+.arbess-btn-primary{
     background: var(--thoughtware-blue);
     border-color: var(--thoughtware-blue);
     color: #ffffff;
 }
 
-.mf-btn-disabled{
+.arbess-btn-disabled{
     color: rgba(0,0,0,.25);
     background: #f5f5f5;
     border-color: #d9d9d9;
     cursor:not-allowed;
 }
 
-.mf-btn-text {
+.arbess-btn-text {
     color: rgba(0,0,0,.85);
     background: transparent;
     border-color: transparent;
@@ -38,13 +38,13 @@
 
 
 
-.mf-btn-dangerous{
+.arbess-btn-dangerous{
     color: #fff;
     background: #ff0000;
     border-color: #ff0000;;
 }
 
-.mf-btn-link-disabled{
+.arbess-btn-link-disabled{
     color: rgba(0,0,0,.25);
     background: transparent;
     border-color: transparent;
@@ -52,14 +52,14 @@
     cursor:not-allowed;
 }
 
-.mf-btn-link{
+.arbess-btn-link{
     color: var(--thoughtware-blue);
     background: transparent;
     border-color: transparent;
     box-shadow: none;
 }
 
-.mf-btn-link-nopadding{
+.arbess-btn-link-nopadding{
     color: var(--thoughtware-blue);
     background: transparent;
     border-color: transparent;
@@ -67,7 +67,7 @@
     padding: 0;
 }
 
-.mf-btn-row{
+.arbess-btn-row{
     width: 100%;
     text-align: left;
     background: transparent;
@@ -79,11 +79,11 @@
     }
 }
 
-.mf-btn-mar{
+.arbess-btn-mar{
     margin-right: 15px;
 }
 
-.mf-btn-icon{
+.arbess-btn-icon{
     display: inline-block;
     width: 16px;
     height: 16px;

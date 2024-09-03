@@ -11,9 +11,9 @@ const LoginContent = props => {
     return (
         <Login
             {...props}
-            bgroup={'matflow'}
+            bgroup={'arbess'}
             loginGoRouter="/"
-            vaildUserAuthRouter={"/no-auth"}
+            vaildUserAuthRouter={"/noAuth"}
         />
     )
 }

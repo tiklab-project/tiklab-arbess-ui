@@ -148,6 +148,7 @@ const Scan = (props) => {
             dataIndex: "action",
             key:"action",
             width:"8%",
+            ellipsis:true,
             render:(_,record)=> (
                 <ListAction
                     del={()=>del(record)}
@@ -175,7 +176,7 @@ const Scan = (props) => {
                 xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb firstItem={"代码扫描"}/>
                     <div className="scan-table">
                         <Table
@@ -185,7 +186,7 @@ const Scan = (props) => {
                             dataSource={scanList}
                             rowKey={record=>record.id}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={"暂无代码扫描"}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                         <Page
                             currentPage={scanParam.pageParam.currentPage}

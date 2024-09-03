@@ -9,11 +9,11 @@ import "./BreadCrumb.scss";
 const BreadCrumb = ({firstItem,secondItem,onClick,children}) =>{
 
     return (
-        <div className="mf-breadcrumb">
+        <div className="arbess-breadcrumb">
             <Space>
-                <span className={onClick ? "mf-breadcrumb-first":""} onClick={onClick}>
+                <span className={onClick ? "arbess-breadcrumb-first":""} onClick={onClick}>
                     {onClick && <LeftOutlined style={{marginRight:8}}/>}
-                    <span className={secondItem ? "mf-breadcrumb-span":""}>
+                    <span className={secondItem ? "arbess-breadcrumb-span":""}>
                         {firstItem}
                     </span>
                 </span>

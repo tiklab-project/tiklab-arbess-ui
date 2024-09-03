@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {message, Row, Col, Radio, Space} from 'antd';
-import {disableFunction} from "thoughtware-core-ui";
+import {disableFunction,applySubscription} from "thoughtware-core-ui";
 import Modals from "../../../common/component/modal/Modal";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import {SpinLoading} from "../../../common/component/loading/Loading";
@@ -101,14 +101,7 @@ const Resources = props => {
      * 升级企业版
      */
     const upGradation = () => {
-        if(version==='cloud'){
-            const authServiceUrl = JSON.parse(localStorage.getItem("authConfig"))?.authServiceUrl
-            if(authServiceUrl){
-                window.open(`${authServiceUrl}/#/enterprise/application/matflow`)
-            }
-        } else {
-            window.open("https://thoughtware.cn/account/subscribe/apply/matflow")
-        }
+        applySubscription('arbess')
     }
 
     // 资源监控数据渲染
@@ -131,7 +124,7 @@ const Resources = props => {
                 lg={{ span: "16", offset: "4" }}
                 xl={{ span: "12", offset: "6" }}
             >
-                <div className='mf-home-limited'>
+                <div className='arbess-home-limited'>
                     <BreadCrumb firstItem={"资源监控"}/>
                     <div className='resources-info'>
                         <div className='resources-info-item'>

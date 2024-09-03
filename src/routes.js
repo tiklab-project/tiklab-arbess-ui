@@ -30,7 +30,7 @@ import {
 
     Test,
     TestScan,
-    TestOn,
+    TestRubo,
     TestMaven,
 
     Statistics,
@@ -100,7 +100,7 @@ const routers=[
         component:Logout,
     },
     {
-        path:"/no-auth",
+        path:"/noAuth",
         exact:true,
         component:ExcludeProductUser,
     },
@@ -109,7 +109,7 @@ const routers=[
         component: Index,
         routes:[
             {
-                path: "/home",
+                path: "/index",
                 component: HomePage,
                 exact:true,
             },
@@ -151,7 +151,7 @@ const routers=[
                 component: PipelineDetails,
                 routes:[
                     {
-                        path:"/pipeline/:id/survey",
+                        path:"/pipeline/:id/overview",
                         exact:true,
                         component: Overview
                     },
@@ -206,8 +206,8 @@ const routers=[
                                 exact: true,
                             },
                             {
-                                path:"/pipeline/:id/test/teston",
-                                component: TestOn,
+                                path:"/pipeline/:id/test/testRubo",
+                                component: TestRubo,
                                 exact: true,
                             },
                             {
@@ -234,38 +234,30 @@ const routers=[
                         ]
                     },
                     {
-                        path:"/pipeline/:id/set",
+                        path:"/pipeline/:id/setting",
                         component: PipelineSetting,
                         routes:[
                             {
-                                path:"/pipeline/:id/set/role",
+                                path:"/pipeline/:id/setting/role",
                                 component: DomainRole,
                                 exact: true,
                             },
                             {
-                                path:"/pipeline/:id/set/info",
+                                path:"/pipeline/:id/setting/info",
                                 component: BasicInfo,
                                 exact: true,
                             },
                             {
-                                path:"/pipeline/:id/set/user",
+                                path:"/pipeline/:id/setting/user",
                                 component: DomainUser,
                                 exact: true,
                             },
                             {
-                                path:"/pipeline/:id/set/message",
+                                path:"/pipeline/:id/setting/message",
                                 component: DomainMessageNotice,
                                 exact: true,
-                            },
-                            {
-                                path:"/pipeline/:id/set/*",
-                                render:()=><Redirect to={"/404"}/>,
                             }
                         ]
-                    },
-                    {
-                        path:"/pipeline/:id/*",
-                        render:()=><Redirect to={"/404"}/>,
                     }
                 ]
             },
@@ -464,15 +456,11 @@ const routers=[
                         component: UserGroupTrue,
                         exact: true,
                     },
-                    {
-                        path:"/setting/*",
-                        render:()=><Redirect to={"/404"}/>,
-                    }
                 ]
             },
             {
                 path:"/",
-                render:()=><Redirect to="/home"/>,
+                render:()=><Redirect to="/index"/>,
             },
         ]
     },

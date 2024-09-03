@@ -239,7 +239,7 @@ const Variable = props => {
                     variableData && variableData.length>0 ?
                     variableData.map((item,index)=>renderInputs(item,index))
                     :
-                    <ListEmpty title={"暂无变量"}/>
+                    <ListEmpty />
                 }
             </div>
         </div>

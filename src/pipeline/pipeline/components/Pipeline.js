@@ -187,7 +187,7 @@ const Pipeline = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb firstItem={"流水线"}>
                         <Btn onClick={onClick} type={"primary"} title={"新建流水线"}/>
                     </BreadCrumb>

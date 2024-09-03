@@ -19,5 +19,5 @@ const Layout = props =>{
 }
 
 
-export default UserVerify(Layout,'/no-auth')
+export default UserVerify(Layout,'/noAuth')
 

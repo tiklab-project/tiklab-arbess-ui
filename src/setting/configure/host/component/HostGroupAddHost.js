@@ -162,7 +162,7 @@ const HostGroupAddHost = (props) => {
     }
 
     const hostAddMenu = (
-        <div className='host-group-add-drop mf'>
+        <div className='host-group-add-drop'>
             <SearchInput
                 placeholder={"搜索名称，ip地址"}
                 onPressEnter={changFindHost}

@@ -49,7 +49,7 @@ const extensions = ['.js', '.jsx',]
 
 const umdOutput = {
     format: 'umd',
-    name: 'thoughtware-matflow-ui',
+    name: 'thoughtware-arbess-ui',
     globals,
     assetFileNames: '[name].[ext]'
 };

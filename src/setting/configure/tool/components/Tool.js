@@ -110,6 +110,7 @@ const Tool = props =>{
             dataIndex:"action",
             key:"action",
             width:"10%",
+            ellipsis:true,
             render:(text,record)=>{
                 return (
                     <ListAction
@@ -131,7 +132,7 @@ const Tool = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited'>
+                <div className='arbess-home-limited'>
                     <BreadCrumb firstItem={"工具"}>
                         <Btn
                             onClick={addEnvi}
@@ -145,7 +146,7 @@ const Tool = props =>{
                             dataSource={enviData}
                             rowKey={record=>record.scmId}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={'暂无环境配置'}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
 
                         <ToolModal

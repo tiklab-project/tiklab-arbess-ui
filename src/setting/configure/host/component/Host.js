@@ -142,6 +142,7 @@ const Host = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
+            ellipsis:true,
             render:(_,record) => {
                 return (
                     <ListAction
@@ -163,7 +164,7 @@ const Host = props =>{
                 xl={{ span: "22", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb firstItem={"主机"}>
                         <HostAddBtn
                             visible={visible}
@@ -184,7 +185,7 @@ const Host = props =>{
                             dataSource={hostList}
                             rowKey={record=>record.hostId}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={'暂无主机配置'}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                     </div>
                 </div>

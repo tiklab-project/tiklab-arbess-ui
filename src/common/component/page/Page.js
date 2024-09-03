@@ -10,18 +10,18 @@ const Page = props =>{
     const {currentPage,changPage,page:{totalPage=1,totalRecord=1}} = props
 
     return totalPage > 1 && (
-        <div className="mf-page">
-            <div className='mf-page-record'>  共{totalRecord}条 </div>
-            <div className={`${currentPage===1?"mf-page-ban":"mf-page-allow"}`}
+        <div className="arbess-page">
+            <div className='arbess-page-record'>  共{totalRecord}条 </div>
+            <div className={`${currentPage===1?"arbess-page-ban":"arbess-page-allow"}`}
                  onClick={()=>currentPage===1 ? null:changPage(currentPage-1)}
             ><LeftOutlined/></div>
-            <div className="mf-page-current">{currentPage}</div>
-            <div className='mf-page-line'> / </div>
+            <div className="arbess-page-current">{currentPage}</div>
+            <div className='arbess-page-line'> / </div>
             <div>{totalPage}</div>
-            <div className={`${currentPage===totalPage?"mf-page-ban":"mf-page-allow"}`}
+            <div className={`${currentPage===totalPage?"arbess-page-ban":"arbess-page-allow"}`}
                  onClick={()=>currentPage===totalPage? null:changPage(currentPage+1)}
             ><RightOutlined/></div>
-            <div className='mf-page-fresh' onClick={()=>changPage(1)}>
+            <div className='arbess-page-fresh' onClick={()=>changPage(1)}>
                 <SyncOutlined />
             </div>
         </div>

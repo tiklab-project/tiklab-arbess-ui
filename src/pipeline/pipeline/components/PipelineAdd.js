@@ -118,7 +118,7 @@ const PipelineAdd = props =>{
                 xxl={{ span: "12", offset: "6" }}
             >
                <Spin spinning={isLoading}>
-                   <div className="mf-home-limited">
+                   <div className="arbess-home-limited">
                        <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/pipeline")}/>
                        <div className="steps-top">
                            <Steps current={current}>

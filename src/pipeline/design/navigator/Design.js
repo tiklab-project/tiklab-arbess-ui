@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
-import {Spin, Drawer} from "antd";
+import {Spin} from "antd";
 import {inject,observer,Provider} from "mobx-react";
-import {renderRoutes} from "react-router-config";
 import taskStore from "../processDesign/gui/store/TaskStore";
 import stageStore from "../processDesign/gui/store/StageStore";
 import historyStore from "../../history/store/HistoryStore";
@@ -12,8 +11,12 @@ import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import HistoryRunDetail from "../../history/components/HistoryRunDetail";
 import DesignAgent from "./DesignAgent";
-import "./Design.scss";
 import PipelineDrawer from "../../../common/component/drawer/Drawer";
+import Gui from "../processDesign/gui/component/Gui";
+import Trigger from "../trigger/components/Trigger";
+import Variable from "../variable/components/Variable";
+import Postprocess from "../postprocess/components/Postprocess";
+import "./Design.scss";
 
 /**
  * 设计页面
@@ -28,7 +31,7 @@ const Design = props =>{
         triggerStore
     }
 
-    const {route,match,pipelineStore} = props
+    const {match,pipelineStore} = props
 
     const {pipeline,findOnePipeline} = pipelineStore
     const {execStart} = historyStore
@@ -39,7 +42,6 @@ const Design = props =>{
     const {findAllVariable,variableData} = variableStore
 
     const pipelineId = match.params.id;
-    const path = props.location.pathname;
 
     //点击运行按钮
     const [isSpin,setIsSpin] = useState(false);
@@ -49,6 +51,8 @@ const Design = props =>{
     const [historyItem,setHistoryItem] = useState(null);
     //默认agent
     const [defaultAgent,setDefaultAgent] = useState(null);
+    //选择类型
+    const [active,setActive] = useState('config')
 
     useEffect(()=>{
         findPipelinePost(pipelineId).then()
@@ -94,22 +98,22 @@ const Design = props =>{
 
     const typeLis = [
         {
-            id:`/pipeline/${pipelineId}/config`,
+            id:`config`,
             title:"流程设计",
             long:false,
         },
         {
-            id:`/pipeline/${pipelineId}/config/tigger`,
+            id:`tigger`,
             title:"触发设置",
             long: triggerData?.length || '0'
         },
         {
-            id:`/pipeline/${pipelineId}/config/vari`,
+            id:`vari`,
             title:"变量",
             long: variableData?.length || '0'
         },
         {
-            id:`/pipeline/${pipelineId}/config/postprocess`,
+            id:`postprocess`,
             title:"后置处理",
             long: postprocessData?.length || '0'
         }
@@ -122,11 +126,32 @@ const Design = props =>{
 
     return(
         <Provider {...store}>
-            <div className="design mf">
+            <div className="design">
                 <Spin spinning={isSpin}>
                     <div className="design-up">
                         <div className="design-top">
-                            <BreadCrumb firstItem={"设计"}/>
+                            <div>
+                                <BreadCrumb firstItem={"设计"}/>
+                                <div className="design-tabs">
+                                    {
+                                        typeLis.map(item=>{
+                                            return(
+                                                <div key={item.id} className={`design-tab ${active===item.id?"design-active":""}`}
+                                                     onClick={()=>setActive(item.id)}
+                                                >
+                                                    <div className="design-tab-title">
+                                                        {item.title}
+                                                        {
+                                                            item?.long &&
+                                                            <span className="design-tab-long">{item.long}</span>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
                             <div className="changeView-btn">
                                 <DesignAgent
                                     defaultAgent={defaultAgent}
@@ -139,28 +164,11 @@ const Design = props =>{
                                 }
                             </div>
                         </div>
-                        <div className="design-tabs">
-                            {
-                                typeLis.map(item=>{
-                                    return(
-                                        <div key={item.id}
-                                             className={`design-tab ${path===item.id?"design-active":""}`}
-                                             onClick={()=>props.history.push(item.id)}
-                                        >
-                                            <div className="design-tab-title">
-                                                {item.title}
-                                                {
-                                                    item?.long &&
-                                                    <span className="design-tab-long">{item.long}</span>
-                                                }
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
                     </div>
-                    { renderRoutes(route.routes) }
+                    { active==='config'  && <Gui {...props}/> }
+                    { active==='tigger'  && <Trigger {...props}/> }
+                    { active==='vari'  && <Variable {...props}/> }
+                    { active==='postprocess'  && <Postprocess {...props}/> }
                 </Spin>
             </div>
             <PipelineDrawer

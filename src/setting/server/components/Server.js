@@ -96,12 +96,10 @@ const Server = props =>{
     // 操作
     const action = record =>{
         const {type} = record
-        if(type==='gittok' || type==='hadess' || type==='teston'){
+        if(type==='gitpuk' || type==='hadess' || type==='testrubo'){
             if(version ==='cloud'){
                 return (
-                    <ListAction
-                        edit={()=>editServer(record)}
-                    />
+                    <ListAction edit={()=>editServer(record)}/>
                 )
             }
         }
@@ -158,6 +156,7 @@ const Server = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
+            ellipsis:true,
             render:(text,record) => action(record)
         }
     ]
@@ -200,11 +199,12 @@ const Server = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
+            ellipsis:true,
             render:(text,record) => action(record)
         }
     ]
 
-    // sonar & nexus & teston & xcode
+    // sonar & nexus & testrubo & xcode
     const authColumn = [
         {
             title:"名称",
@@ -249,6 +249,7 @@ const Server = props =>{
             dataIndex: "action",
             key: "action",
             width:"8%",
+            ellipsis:true,
             render:(_,record) => action(record)
         }
     ]
@@ -262,8 +263,8 @@ const Server = props =>{
             case 'github':
             case 'gitlab':
                 return authorizeColumn
-            case 'gittok':
-            case 'teston':
+            case 'gitpuk':
+            case 'testrubo':
             case 'sonar' :
             case 'nexus' :
             case 'hadess' :
@@ -281,7 +282,7 @@ const Server = props =>{
                 xl={{ span: "22", offset: "1"}}
                 xxl={{ span: "20", offset: "2" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb firstItem={"服务集成"} >
                         <ServerAddBtn
                             type={'gitee'}
@@ -298,8 +299,8 @@ const Server = props =>{
                             {id:'gitee', title:"Gitee"},
                             {id:'github', title:"Github"},
                             {id:'gitlab', title:"Gitlab"},
-                            {id:'gittok', title:"GitTok"},
-                            {id:'teston', title:"TestOn"},
+                            {id:'gitpuk', title:"GitPuk"},
+                            {id:'testrubo', title:"TestTubo"},
                             {id:'sonar', title:"Sonar"},
                             {id:'nexus', title:"Nexus"},
                             {id:'hadess', title:"Hadess"},
@@ -313,7 +314,7 @@ const Server = props =>{
                             dataSource={authServerList}
                             rowKey={record=>record.serverId}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={'暂无服务配置'}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                     </div>
                 </div>

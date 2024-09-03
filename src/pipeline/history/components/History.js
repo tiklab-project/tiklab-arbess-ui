@@ -10,7 +10,6 @@ import Page from "../../../common/component/page/Page";
 import ListAction from "../../../common/component/list/ListAction";
 import PipelineDrawer from "../../../common/component/drawer/Drawer";
 import HistoryScreen from "./HistoryScreen";
-import HistoryDetail from "./HistoryDetail";
 import HistoryRunDetail from "./HistoryRunDetail";
 import {runStatusIcon,runStatusText} from "./HistoryCommon";
 import historyStore from "../store/HistoryStore";
@@ -74,16 +73,14 @@ const History = props =>{
     }, []);
 
     useEffect(()=>{
-        if(!runVisible){
-            findInstance()
-        }
-    },[runVisible,params,match.params.id])
+        setIsLoading(true);
+        findInstance();
+    },[params,match.params.id])
 
     /**
      * 获取历史列表
      */
     const findInstance = () => {
-        setIsLoading(true);
         if(route.path==='/history'){
             findUserInstance(params).then(Res=>{
                 setIsLoading(false)
@@ -144,7 +141,7 @@ const History = props =>{
     const details = record => {
         clearInterval(intervalRef.current);
         setHistoryItem(record);
-        setRunVisible(true)
+        setRunVisible(true);
     }
 
     /**
@@ -290,6 +287,7 @@ const History = props =>{
             dataIndex: "action",
             key:"action",
             width:"10%",
+            ellipsis:true,
             render:(_,record)=> {
                 switch (record.runStatus) {
                     case "run":
@@ -320,8 +318,9 @@ const History = props =>{
      * 退出
      */
     const goBack = () => {
-        setRunVisible(false)
+        setRunVisible(false);
         setHistoryItem(null);
+        findInstance();
     }
 
     return (
@@ -334,7 +333,7 @@ const History = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb firstItem={"历史"}/>
                     <HistoryScreen {...props} screen={screen}/>
                     <Spin spinning={isLoading}>
@@ -345,7 +344,7 @@ const History = props =>{
                                 dataSource={historyList}
                                 rowKey={record=>record.instanceId}
                                 pagination={false}
-                                locale={{emptyText: <ListEmpty title={"没有查询到历史记录"}/>}}
+                                locale={{emptyText: <ListEmpty />}}
                             />
                             <Page
                                 currentPage={page.currentPage}

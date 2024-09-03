@@ -25,10 +25,10 @@ const PipelineDrawer = props =>{
 
     return (
         <Drawer
-            {...res}
             placement="right"
             closable={false}
             bodyStyle={{padding:0,overflow:"hidden"}}
+            {...res}
         >
             <div ref={detailRef}>
                 {children}

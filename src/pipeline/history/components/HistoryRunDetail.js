@@ -145,12 +145,10 @@ const HistoryRunDetail = (props) => {
         <div className="str-run-detail">
             <div className="str-run-detail-bread">
                 <BreadCrumb
-                    firstItem={pipeline?.name +" # " + historyItem?.findNumber}
+                    firstItem={`${pipeline?.name} # ${historyItem?.findNumber}`}
                     onClick={historyType!=="drawer" ? goBack: undefined}
                 >
-                    {
-                        historyType==="drawer" && <CloseOutlined style={{fontSize:16}} onClick={goBack}/>
-                    }
+                    {historyType==="drawer" && <CloseOutlined style={{fontSize:16}} onClick={goBack}/>}
                 </BreadCrumb>
                 <div className='bread-center-box'>
                     <div className="bread-center">

@@ -163,9 +163,9 @@ module.exports = {
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
-            title:"MatFlow",
+            title:"Arbess",
             template: path.resolve(__dirname, "./public/index.template.html"),
-            favicon: path.resolve('./public/matflowIcon.png'),
+            favicon: path.resolve('./public/arbessIcon.png'),
             hash: false,
             filename: "index.html",
             inject: "body",

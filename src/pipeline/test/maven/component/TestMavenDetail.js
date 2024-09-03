@@ -104,7 +104,7 @@ const TestMavenDetail = (props) => {
                 xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb firstItem={"测试报告"} onClick={backTest}/>
                     <div className='test-overview'>
                         <div className="test-overview-info">

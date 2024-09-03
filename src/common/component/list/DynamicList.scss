@@ -1,7 +1,7 @@
 $main-padding: 30px;
 $line-color: #dadfe6;
 
-.mf-dynamic-center{
+.arbess-dynamic-center{
     box-sizing: border-box;
     .dynamic-item{
         margin-bottom: 30px;
@@ -34,7 +34,7 @@ $line-color: #dadfe6;
             }
             &>span{
                 display: inline-block;
-                background: var(--mf-backdrop-color);
+                background: var(--arbess-backdrop-color);
                 padding: 0 10px;
             }
         }
@@ -72,6 +72,10 @@ $line-color: #dadfe6;
                 margin-left: 10px;
                 min-width: 0;
                 .dynamic-item-log-info-name{
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    -o-text-overflow: ellipsis;
                     &:hover{
                         cursor: pointer;
                         text-decoration: underline;
@@ -94,7 +98,6 @@ $line-color: #dadfe6;
                         color: var(--thoughtware-gray-500);
                     }
                     .log-desc-message{
-                        background-color: #f6f6f6;
                         padding: 4px;
                         border-radius: 4px;
                         font-size: 12px;

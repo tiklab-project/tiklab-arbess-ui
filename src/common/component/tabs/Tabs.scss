@@ -1,9 +1,10 @@
-.mf-tabs{
+.arbess-tabs{
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
-.mf-tab{
+.arbess-tab{
     padding: 10px 0;
     cursor: pointer;
     margin-right: 20px;
@@ -12,7 +13,7 @@
     }
 }
 
-.mf-active-tab{
+.arbess-active-tab{
     color: var(--thoughtware-blue);
     border-bottom: 2px solid var(--thoughtware-blue);
 }

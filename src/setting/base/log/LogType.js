@@ -9,7 +9,7 @@ import {LogType} from "thoughtware-security-ui";
  */
 const LogTypeContent = props =>{
 
-    return <LogType {...props} bgroup={"matflow"}/>
+    return <LogType {...props} bgroup={"arbess"}/>
 
 }
 

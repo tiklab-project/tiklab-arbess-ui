@@ -113,6 +113,7 @@ const Env = props =>{
             dataIndex: "action",
             key: "action",
             width:"10%",
+            ellipsis:true,
             render:(_,record) => (
                 record.id!=='default' &&
                 <ListAction
@@ -133,7 +134,7 @@ const Env = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited'>
+                <div className='arbess-home-limited'>
                     <BreadCrumb firstItem={"环境"}>
                         <Btn
                             type={'primary'}
@@ -153,7 +154,7 @@ const Env = props =>{
                             dataSource={envList}
                             rowKey={record=>record.id}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={'暂无环境管理'}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                     </div>
                 </div>

@@ -31,7 +31,7 @@ const DynamicList = props =>{
                         const {actionType,action,user,createTime,data,id} = logItem
                         const dataObj = data && JSON.parse(data)
                         return (
-                            <div key={id} className='dynamic-item-log mf-user-avatar' >
+                            <div key={id} className='dynamic-item-log arbess-user-avatar' >
                                 <div className='dynamic-item-log-time'>
                                     {moment(createTime).format("HH:mm")}
                                 </div>
@@ -59,12 +59,12 @@ const DynamicList = props =>{
     }
 
     return (
-        <div className="mf-dynamic-center">
+        <div className="arbess-dynamic-center">
             {
                 dynamicList && dynamicList.length>0 ?
                     dynamicList.map((item,index)=>renderLis(item,index))
                     :
-                    <ListEmpty title={"暂无动态"}/>
+                    <ListEmpty />
             }
         </div>
     )

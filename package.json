@@ -1,14 +1,14 @@
 {
-    "name": "thoughtware-matflow-ui",
-    "version": "1.0.2",
-    "description": "thoughtware matflow",
+    "name": "thoughtware-arbess-ui",
+    "version": "1.0.0",
+    "description": "thoughtware arbess",
     "main": "es/src/ui.js",
     "module": "es/src/ui.js",
     "files": [
         "es"
     ],
     "scripts": {
-        "matflow-ce-start": "cross-env NODE_ENV=development CUSTOM_ENV=local webpack-dev-server --progress --config webpack.dev.js",
+        "arbess-ce-start": "cross-env NODE_ENV=development CUSTOM_ENV=local webpack-dev-server --progress --config webpack.dev.js",
         "prod": "cross-env NODE_ENV=production CUSTOM_ENV=prod webpack --config webpack.prod.js",
         "dev": "cross-env NODE_ENV=dev CUSTOM_ENV=dev webpack-dev-server --progress  --config webpack.dev.js --open",
         "build": "rimraf es/* && ./node_modules/.bin/babel src --copy-files --extensions .js --out-dir es/module && ncp ./src/ui.js es/index.js && ncp README.md es/README.md",
@@ -22,7 +22,7 @@
         "build:umd": "rimraf dist && cross-env BABEL_ENV=umd rollup -c"
     },
     "keywords": [
-        "thoughtware-matflow"
+        "thoughtware-arbess"
     ],
     "author": "",
     "license": "ISC",
@@ -51,7 +51,7 @@
         "thoughtware-core-ui": "^1.0.2",
         "thoughtware-eam-ui": "^1.0.2",
         "thoughtware-licence-ui": "^1.0.2",
-        "thoughtware-matflow-ui": "^1.0.2",
+        "thoughtware-arbess-ui": "^1.0.0",
         "thoughtware-message-ui": "^1.0.3",
         "thoughtware-plugin-core-ui": "^1.0.2",
         "thoughtware-plugin-manager-ui": "^1.0.2",

@@ -40,10 +40,10 @@ const Modals = props => {
             bodyStyle={{padding:0}}
             closable={false}
             footer={modalFooter}
-            className="mf-modal"
+            className="arbess-modal"
             {...res}
         >
-            <div className='mf-modal-up'>
+            <div className='arbess-modal-up'>
                 <div>{title}</div>
                 <Btn
                     title={<CloseOutlined style={{fontSize:16}}/>}
@@ -51,7 +51,7 @@ const Modals = props => {
                     onClick={res.onCancel}
                 />
             </div>
-            <div className='mf-modal-content'>
+            <div className='arbess-modal-content'>
                 {children}
             </div>
         </Modal>

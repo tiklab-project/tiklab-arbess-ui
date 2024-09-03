@@ -100,18 +100,17 @@ const applicationRouters =  [
                 title:"工具",
                 purviewCode:"pipeline_env",
             },
+            {
+                id:"/setting/k8s",
+                title:"Kubernetes集群",
+                purviewCode:"resources_server",
+            },
         ]
     },
     {
         id:"/setting/server",
         title:"服务集成",
         icon:<MacCommandOutlined />,
-        purviewCode:"resources_server",
-    },
-    {
-        id:"/setting/k8s",
-        title:"Kubernetes集群",
-        icon:<MergeCellsOutlined />,
         purviewCode:"resources_server",
     },
     {
@@ -133,7 +132,7 @@ const applicationRouters =  [
             {
                 id:"/setting/myLog",
                 title:"操作日志",
-                purviewCode:"pipeline_log",
+                // purviewCode:"pipeline_log",
             }
         ]
     },
@@ -145,7 +144,7 @@ const applicationRouters =  [
             {
                 id:'/setting/version',
                 title: '版本与许可证',
-                purviewCode:'version',
+                // purviewCode:'version',
             },
             {
                 id:'/setting/productAuth',

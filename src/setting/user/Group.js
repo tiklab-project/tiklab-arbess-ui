@@ -9,7 +9,7 @@ import {UserGroup} from "thoughtware-user-ui";
  */
 const Group = props => {
 
-    return <UserGroup {...props} bgroup={"matflow"}/>
+    return <UserGroup {...props} bgroup={"arbess"}/>
 
 }
 

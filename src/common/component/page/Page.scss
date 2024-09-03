@@ -1,26 +1,26 @@
-.mf-page{
+.arbess-page{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 40px;
-    .mf-page-ban{
+    .arbess-page-ban{
         cursor:not-allowed;
         color: var(--thoughtware-gray-500);
     }
-    .mf-page-allow{
+    .arbess-page-allow{
         cursor: pointer;
     }
-    .mf-page-current,.mf-page-allow:hover{
+    .arbess-page-current,.arbess-page-allow:hover{
         color: var(--thoughtware-blue);
     }
-    .mf-page-line{
+    .arbess-page-line{
         margin: 0 5px;
     }
-    .mf-page-record{
+    .arbess-page-record{
         margin-right: 30px;
         font-size: var(--thoughtware-font-12);
     }
-    .mf-page-fresh{
+    .arbess-page-fresh{
         margin-left: 30px;
         cursor: pointer;
     }

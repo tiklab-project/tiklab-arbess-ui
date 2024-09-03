@@ -181,8 +181,8 @@ const SettingAside = props =>  {
                         {
                             item.children ?
                                 (isExpandedTree(item.id)?
-                                        <DownOutlined style={{fontSize: "10px",fontWeight:"bold"}}/> :
-                                        <UpOutlined style={{fontSize: "10px",fontWeight:"bold"}}/>
+                                        <DownOutlined style={{fontSize: "10px"}}/> :
+                                        <UpOutlined style={{fontSize: "10px"}}/>
                                 ): ""
                         }
                     </div>
@@ -211,17 +211,19 @@ const SettingAside = props =>  {
         <SystemNav
             {...props}
             applicationRouters={menus()}
+            outerPath={outerPath}
             expandedTree={expandedTree}
             setExpandedTree={setExpandedTree}
-            outerPath={outerPath}
             noAccessPath={"/noaccess"}
         >
             <div className="system-aside">
                 <ul className="system-aside-top">
                     <li className='system-aside-head'>
-                        设置
+                        <span onClick={()=>props.history.push(`${outerPath}/home`)}>
+                            设置
+                        </span>
                     </li>
-                    <li className="system-aside-back" onClick={()=>props.history.push('/home')}>
+                    <li className="system-aside-back" onClick={()=>props.history.push('/index')}>
                         <div className='aside-back-box'>
                            <span className="aside-back-box-icon">
                                 <HomeOutlined />

@@ -14,7 +14,7 @@ const SearchInput = props =>{
             bordered={false}
             autoComplete={"off"}
             prefix={<SearchOutlined style={{fontSize: 16}}/>}
-            className='mf-search-input'
+            className='arbess-search-input'
             onChange={e=>{
                 if(e.type==='click'){
                     res.onPressEnter(e);

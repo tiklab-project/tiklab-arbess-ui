@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Row, Col, Spin, Select} from "antd";
-import {
-    RightOutlined,
-} from "@ant-design/icons";
+import {RightOutlined} from "@ant-design/icons";
 import echarts from "../../../common/component/echarts/Echarts";
 import statisticsStore from "../../statistics/common/StatisticsStore";
 import overviewStore from "../store/OverviewStore";
@@ -204,7 +202,7 @@ const Overview = props =>{
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <div className="overview-upper">
                         <div className='overview-guide-title'>
                             最近发布
@@ -241,7 +239,7 @@ const Overview = props =>{
                                         }
                                     </div>
                                     :
-                                    <ListEmpty title={'暂无发布'} />
+                                    <ListEmpty />
                             }
                         </div>
                     </div>

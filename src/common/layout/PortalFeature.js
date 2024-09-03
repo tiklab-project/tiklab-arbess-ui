@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import {BaseModal,HeaderDropdown} from "thoughtware-licence-ui/es/commons";
-import {disableFunction} from "thoughtware-core-ui";
+import {disableFunction,applySubscription} from "thoughtware-core-ui";
 import vipLight from '../../assets/images/vip-light.png';
 import vipDark from '../../assets/images/vip-dark.png';
 import "./PortalFeature.scss";
@@ -10,12 +10,12 @@ const featureList = [
     {
         "id": "23rfsd",
         "productType": {
-            "id": "matflow",
+            "id": "arbess",
             "code": null,
             "typeName": null
         },
         "type": "ee",
-        "name": "MatFlow-企业版",
+        "name": "Arbess-企业版",
         "price": "45",
         "version": "V1.0.2",
         "createTime": "2024-01-31 16:17:04.831",
@@ -149,12 +149,12 @@ const featureList = [
     {
         "id": "5943ed320311",
         "productType": {
-            "id": "matflow",
+            "id": "arbess",
             "code": null,
             "typeName": null
         },
         "type": "ce",
-        "name": "MatFlow-社区版",
+        "name": "Arbess-社区版",
         "price": "0",
         "version": "V1.0.1",
         "createTime": "2024-01-31 16:17:04.831",
@@ -332,12 +332,12 @@ const featureList = [
     {
         "id": "2a4627413bef",
         "productType": {
-            "id": "matflow",
+            "id": "arbess",
             "code": null,
             "typeName": null
         },
         "type": "cloud-free",
-        "name": "Matflow-线上免费版",
+        "name": "Arbess-线上免费版",
         "price": "0",
         "version": null,
         "createTime": "2024-03-26 10:56:04.821",
@@ -447,12 +447,12 @@ const featureList = [
     {
         "id": "a6305e348d38",
         "productType": {
-            "id": "matflow",
+            "id": "arbess",
             "code": null,
             "typeName": null
         },
         "type": "cloud-pay",
-        "name": "Matflow-线上付费版",
+        "name": "Arbess-线上付费版",
         "price": "15",
         "version": null,
         "createTime": "2024-03-26 10:56:24.921",
@@ -611,11 +611,7 @@ const PortalFeature = props =>{
     const [visible,setVisible] = useState(false);
 
     const onOk = () =>{
-        if(version==='cloud'){
-            window.open(`https://work.thoughtware.cn/#/enterprise/application/matflow`)
-        } else {
-            window.open(`https://thoughtware.cn/account/subscribe/apply/matflow`)
-        }
+        applySubscription('arbess')
         onCancel()
     }
 

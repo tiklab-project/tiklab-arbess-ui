@@ -9,7 +9,7 @@ import {ProjectFeature} from "thoughtware-privilege-ui";
  */
 const ProjectFeatureContent = props =>{
 
-    return <ProjectFeature {...props} bgroup={"matflow"}/>
+    return <ProjectFeature {...props} bgroup={"arbess"}/>
 
 }
 

@@ -53,8 +53,8 @@ const FormsAuth = props =>{
             case 'gitee':
             case 'github':
             case 'gitlab':
-            case 'gittok':
-            case 'teston':
+            case 'gitpuk':
+            case 'testrubo':
             case 'sonar':
                 finsServer(taskType)
                 break
@@ -143,8 +143,8 @@ const FormsAuth = props =>{
             case 'github':
             case 'gitlab':
                 return "授权信息"
-            case 'gittok':
-            case 'teston':
+            case 'gitpuk':
+            case 'testrubo':
             case 'sonar':
                 return "服务地址"
             case 'liunx':
@@ -176,8 +176,8 @@ const FormsAuth = props =>{
             case 'gitee':
             case 'github':
             case 'gitlab':
-            case 'gittok':
-            case 'teston':
+            case 'gitpuk':
+            case 'testrubo':
             case 'sonar':
                 return item.serverId
             case 'liunx':
@@ -211,8 +211,8 @@ const FormsAuth = props =>{
             case 'git':
             case 'svn':
                 return <AuthAddBtn {...commonProps}/>
-            case 'gittok':
-            case 'teston':
+            case 'gitpuk':
+            case 'testrubo':
                 return version === 'cloud' ? null : <ServerAddBtn type={taskType} {...commonProps}/>;
             case 'gitee':
             case 'github':
@@ -251,8 +251,8 @@ const FormsAuth = props =>{
         switch (taskType) {
             case 'git':
             case 'svn':
-            case 'teston':
-            case 'gittok':
+            case 'testrubo':
+            case 'gitpuk':
                 return `${item.name}(${item.authType === 1 ? item.username : "私钥"})`;
             case 'gitee':
             case 'github':

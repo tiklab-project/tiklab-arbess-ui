@@ -47,7 +47,7 @@ const PipelineAside= (props)=>{
                 renderRoutes(route.routes)
                 :
                 <div style={{paddingTop:50}}>
-                    <ListEmpty title='没有该流水线或者流水线被删除'/>
+                    <ListEmpty />
                 </div>
             }
         </Provider>

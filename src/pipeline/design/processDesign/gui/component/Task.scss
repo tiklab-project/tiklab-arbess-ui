@@ -1,9 +1,9 @@
 $line-color:#d9d9d9;
 
 .guiView{
-    height: calc(100% - 90px);
+    height: calc(100% - 82px);
     overflow: auto;
-    background: var(--mf-backdrop-color);
+    background: var(--arbess-backdrop-color);
     .guiView-main_group{
         position: relative;
         height: 100%;
@@ -109,7 +109,7 @@ $line-color:#d9d9d9;
                     display: none;
                 }
                 .ant-input{
-                    background: var(--mf-backdrop-color);
+                    background: var(--arbess-backdrop-color);
                     width: 220px;
                 }
             }
@@ -242,7 +242,7 @@ $line-color:#d9d9d9;
                 .newStages-title-name{
                     position: relative;
                     z-index: 1;
-                    background: var(--mf-backdrop-color);
+                    background: var(--arbess-backdrop-color);
                     font-size: var(--thoughtware-font-13);
                     color: #8b8b8b;
                     padding: 0 8px;
@@ -255,7 +255,7 @@ $line-color:#d9d9d9;
                     padding-left: 5px;
                 }
                 .ant-input{
-                    background: var(--mf-backdrop-color);
+                    background: var(--arbess-backdrop-color);
                     width: 200px;
                 }
             }

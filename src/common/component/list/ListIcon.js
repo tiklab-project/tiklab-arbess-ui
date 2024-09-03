@@ -7,7 +7,7 @@ import "./ListIcon.scss";
 const ListIcon = ({text,colors,isMar=true}) => {
 
     return (
-        <span className={`mf-listname-icon ${colors?`mf-icon-${colors}`:"mf-icon-1"} ${isMar?'mf-listname-icon-mar':''}`}>
+        <span className={`arbess-listname-icon ${colors?`arbess-icon-${colors}`:"arbess-icon-1"} ${isMar?'arbess-listname-icon-mar':''}`}>
             {text ? text.substring(0,1).toUpperCase() : 'M'}
         </span>
     )

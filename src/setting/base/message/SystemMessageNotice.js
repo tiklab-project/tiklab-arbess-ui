@@ -9,7 +9,7 @@ import {MessageNotice} from "thoughtware-message-ui";
  */
 const MessageNoticeContentTrue = props =>{
 
-    return <MessageNotice {...props} bgroup={"matflow"} isBase={true}/>
+    return <MessageNotice {...props} bgroup={"arbess"} isBase={true}/>
 
 }
 

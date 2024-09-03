@@ -115,7 +115,7 @@ const PipelineAddInfo = props =>{
                         pipeline.name=params.name
                         pipeline.env=params.env
                         pipeline.group=params.group
-                        props.history.push(`/pipeline/${pipeline.id}/survey`)
+                        props.history.push(`/pipeline/${pipeline.id}/overview`)
                     }
                     setIsLoading(false)
                 })

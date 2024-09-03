@@ -13,7 +13,7 @@ import pip_more from "../../../assets/images/svg/pie_more.svg";
 const ListAction = ({edit,del}) =>{
 
     return (
-        <span className="mf-listAction">
+        <span className="arbess-listAction">
             {
                 edit &&
                 <Tooltip title="修改">
@@ -26,7 +26,7 @@ const ListAction = ({edit,del}) =>{
                 del &&
                 <Dropdown
                     overlay={
-                        <div className="mf-dropdown-more">
+                        <div className="arbess-dropdown-more">
                             <div className="dropdown-more-item" onClick={()=>{
                                 Modal.confirm({
                                     title: '确定删除吗？',

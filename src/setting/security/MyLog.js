@@ -9,7 +9,7 @@ import {MyLog} from "thoughtware-security-ui";
  */
 const MyLogContent = props => {
 
-    return <MyLog {...props} bgroup={"matflow"}/>
+    return <MyLog {...props} bgroup={"arbess"}/>
 
 }
 

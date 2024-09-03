@@ -9,6 +9,7 @@ $suspend-color:  #ff0000;
 .str-run-detail{
   height: 100%;
   width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   .str-run-detail-bread{
@@ -43,7 +44,7 @@ $suspend-color:  #ff0000;
   .str-run-detail-center{
     flex: 1;
     overflow: auto;
-    background: var(--mf-backdrop-color);
+    background: var(--arbess-backdrop-color);
     .str-run-detail-box{
       display: grid;
       grid-auto-flow: column;

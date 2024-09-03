@@ -13,12 +13,24 @@ const Test = (props) => {
             title: '代码扫描',
         },
         {
-            id: `/pipeline/${pipelineId}/test/maven`,
-            title: 'Maven单元测试',
+            id: 'unit',
+            title: '单元测试',
+            children: [
+                {
+                    id: `/pipeline/${pipelineId}/test/maven`,
+                    title: 'Maven单元测试',
+                }
+            ]
         },
         {
-            id: `/pipeline/${pipelineId}/test/teston`,
-            title: 'TestOn自动化测试',
+            id: 'automated',
+            title: '自动化测试',
+            children: [
+                {
+                    id: `/pipeline/${pipelineId}/test/testRubo`,
+                    title: 'TestRubo自动化测试',
+                }
+            ]
         },
     ]
 

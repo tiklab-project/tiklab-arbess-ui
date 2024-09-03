@@ -20,6 +20,9 @@ $block-spacing: 30px;
             .pipelineRecent-content{
                 display: flex;
                 justify-content: flex-start;
+                flex-wrap: wrap;
+                overflow: hidden;
+                height: 120px;
                 padding-top: 10px;
                 gap: 10px;
             }
@@ -28,10 +31,10 @@ $block-spacing: 30px;
                 height: 110px;
                 padding: 10px;
                 max-width: calc(100% / 4);
-                min-width: 120px;
+                min-width: 210px;
                 border-radius: 4px;
                 cursor: pointer;
-                background-color: var(--mf-backdrop-color);
+                background-color: var(--arbess-backdrop-color);
                 border-bottom: 2px solid transparent;
             }
             .pipelineRecent-item:hover{
@@ -56,7 +59,8 @@ $block-spacing: 30px;
             .pipelineRecent-item-details{
                 font-size: var(--thoughtware-font-13);
                 display: flex;
-                white-space: nowrap;
+                flex-wrap: wrap;
+                align-items: center;
                 .details-desc{
                     color: #9b9b9b;
                     padding-right: 8px;
@@ -73,7 +77,7 @@ $block-spacing: 30px;
         .home-statistics{
             margin-bottom: $block-spacing;
             .home-statistics-release{
-                background-color: var(--mf-backdrop-color);
+                background-color: var(--arbess-backdrop-color);
                 border-radius: 4px;
                 padding: 20px 10px 10px;
                 margin-top: 15px;
@@ -93,12 +97,12 @@ $block-spacing: 30px;
                 }
                 .home-release-pipeline,.home-release-user{
                     flex: 1;
-                    background-color: var(--mf-backdrop-color);
+                    background-color: var(--arbess-backdrop-color);
                     border-radius: 4px;
                     padding: 15px 10px;
                     min-height: 400px;
                     .home-release-link{
-                        .mf-listname-icon{
+                        .arbess-listname-icon{
                             width: 24px;
                             height: 24px;
                             line-height: 24px;
@@ -138,7 +142,7 @@ $block-spacing: 30px;
                         background: transparent;
                     }
                     .ant-table-tbody > tr:hover td{
-                        background: var(--mf-hover-color);
+                        background: var(--arbess-hover-color);
                     }
                 }
             }

@@ -9,7 +9,7 @@ import {User as UserList} from "thoughtware-user-ui";
  */
 const UserContent = props =>{
 
-    return <UserList {...props} bgroup={"matflow"}/>
+    return <UserList {...props} bgroup={"arbess"}/>
 
 }
 

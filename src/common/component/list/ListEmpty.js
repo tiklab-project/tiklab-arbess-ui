@@ -13,8 +13,8 @@ const ListEmpty = props =>{
 
     return (
         <Empty
-            className='mf-list-empty'
-            description={title ? title : "暂无数据"}
+            className='arbess-list-empty'
+            description={title ? title : "没有查询到数据"}
         />
     )
 

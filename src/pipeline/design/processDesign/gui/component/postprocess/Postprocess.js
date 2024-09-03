@@ -376,7 +376,7 @@ const Postprocess = props =>{
                     postprocessData && postprocessData.length > 0 ?
                         postprocessData.map((item,index)=>renderPose(item,index))
                         :
-                        <ListEmpty title={"暂无后置处理"}/>
+                        <ListEmpty />
                 }
             </div>
         </div>

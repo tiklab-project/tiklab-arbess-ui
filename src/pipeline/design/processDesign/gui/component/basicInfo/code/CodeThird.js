@@ -6,7 +6,7 @@ import FormsSelect from "../FormsSelect";
 import codeThirdStore from "../../../store/CodeThirdStore";
 
 /**
- * gitTok | gitee | github | gitlab
+ * gitPuk | gitee | github | gitlab
  * @param props
  * @returns {JSX.Element}
  * @constructor
@@ -70,16 +70,13 @@ const CodeThird = props =>{
         setSpin(true)
         const authId = dataItem.task.authId;
         let rpyRes;
-        if(dataItem.taskType==='gittok'){
+        if(dataItem.taskType==='gitpuk'){
             rpyRes = await findGittokRpy(authId)
-        }
-        if(dataItem.taskType==='gitee'){
+        } else if(dataItem.taskType==='gitee'){
             rpyRes = await findGiteeRpy(authId)
-        }
-        if(dataItem.taskType==='github'){
+        } else if(dataItem.taskType==='github'){
             rpyRes = await findGithubRpy(authId)
-        }
-        if(dataItem.taskType==='gitlab'){
+        } else if(dataItem.taskType==='gitlab'){
             rpyRes = await findGitlabRpy(authId)
         }
         if(rpyRes.code===0){
@@ -99,16 +96,13 @@ const CodeThird = props =>{
             authId:dataItem.task?.authId,
         };
         let branchRes;
-        if(dataItem.taskType==='gittok'){
+        if(dataItem.taskType==='gitpuk'){
             branchRes = await findGittokBranch(authId)
-        }
-        if(dataItem.taskType==='gitee'){
+        } else if(dataItem.taskType==='gitee'){
             branchRes = await findGiteeBranch(authId)
-        }
-        if(dataItem.taskType==='github'){
+        } else if(dataItem.taskType==='github'){
             branchRes = await findGithubBranch(authId)
-        }
-        if(dataItem.taskType==='gitlab'){
+        } else if(dataItem.taskType==='gitlab'){
             branchRes = await findGitlabBranch(authId)
         }
         if(branchRes.code===0){

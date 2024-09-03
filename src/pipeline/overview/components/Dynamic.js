@@ -125,10 +125,10 @@ const Dynamic = props =>{
 
     const goBack = () =>{
         if(route.path === '/dyna'){
-            props.history.push('/home')
+            props.history.push('/index')
             return
         }
-        props.history.push(`/pipeline/${match.params.id}/survey`)
+        props.history.push(`/pipeline/${match.params.id}/overview`)
     }
 
     return(
@@ -141,10 +141,10 @@ const Dynamic = props =>{
                 xl={{ span: "18", offset: "3" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className="mf-home-limited">
+                <div className="arbess-home-limited">
                     <BreadCrumb firstItem={"动态"} onClick={goBack}/>
                     <div className="dyna-screen" style={{padding:"15px 0"}}>
-                        <Space>
+                        <Space wrap={true}>
                             {
                                 route.path==='/dyna' &&
                                 <SearchSelect

@@ -9,7 +9,7 @@ import {MyTodoTask} from "thoughtware-message-ui";
  */
 const MyTodoTaskContent = props =>{
 
-    return <MyTodoTask {...props} bgroup={"matflow"}/>
+    return <MyTodoTask {...props} bgroup={"arbess"}/>
 
 }
 

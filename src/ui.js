@@ -36,7 +36,7 @@ const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
 const Test=AsyncComponent(()=>import("./pipeline/test/navigator/Test"))
-const TestOn=AsyncComponent(()=>import("./pipeline/test/teston/component/TestOn"))
+const TestRubo=AsyncComponent(()=>import("./pipeline/test/testrubo/component/TestRubo"))
 const TestMaven=AsyncComponent(()=>import("./pipeline/test/maven/component/TestMaven"))
 const TestScan=AsyncComponent(()=>import("./pipeline/test/scan/component/Scan"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
@@ -148,7 +148,7 @@ export {
 
     Test,
     TestScan,
-    TestOn,
+    TestRubo,
     TestMaven,
 
     Statistics,

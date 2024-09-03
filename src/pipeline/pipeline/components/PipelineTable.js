@@ -240,14 +240,14 @@ const PipelineTable = props =>{
             render:(text,record) =>{
                 const {buildStatus,number} = record
                 return (
-                    <Space>
+                    <span>
                         { text || '无构建' }
                         { number &&
                             <span className='pipeline-number' onClick={() => goInstance(record)}># {number}
                                 <span className='pipeline-number-desc'>{renIcon(buildStatus)}</span>
                             </span>
                         }
-                    </Space>
+                    </span>
                 )
             }
         },
@@ -258,10 +258,12 @@ const PipelineTable = props =>{
             width:"17%",
             ellipsis: true,
             render:(text,record) => {
-                return  <Space>
-                            <Profile userInfo={record.user}/>
-                            { text || '--'}
-                        </Space>
+                return (
+                    <Space>
+                        <Profile userInfo={record.user}/>
+                        { text || '--'}
+                    </Space>
+                )
             }
         },
         {
@@ -290,6 +292,7 @@ const PipelineTable = props =>{
             dataIndex: "action",
             key:"action",
             width:"14%",
+            ellipsis:true,
             render:(text,record)=>{
                 const {state,collect} = record
                 return(
@@ -308,7 +311,7 @@ const PipelineTable = props =>{
                         </Tooltip>
                         <Dropdown
                             overlay={
-                                <div className="mf-dropdown-more">
+                                <div className="arbess-dropdown-more">
                                     <div className="dropdown-more-item" onClick={()=>toCopy(record)}>克隆</div>
                                     <div className="dropdown-more-item" onClick={()=>toYaml(record)}>导出YAML文件</div>
                                 </div>
@@ -335,7 +338,7 @@ const PipelineTable = props =>{
                 dataSource={pipelineListPage}
                 rowKey={record=>record.id}
                 pagination={false}
-                locale={{emptyText: <ListEmpty title={listType==='follow'?"暂无收藏":"暂无流水线"}/>}}
+                locale={{emptyText: <ListEmpty />}}
             />
             <Page
                 currentPage={pipPage.currentPage}

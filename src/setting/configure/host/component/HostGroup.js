@@ -118,6 +118,7 @@ const HostGroup = (props) => {
             dataIndex: "action",
             key: "action",
             width:"9%",
+            ellipsis:true,
             render:(_,record) => {
                 return (
                     <ListAction
@@ -138,7 +139,7 @@ const HostGroup = (props) => {
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited'>
+                <div className='arbess-home-limited'>
                     <BreadCrumb firstItem={"主机组"}>
                         <Btn
                             type={"primary"}
@@ -158,7 +159,7 @@ const HostGroup = (props) => {
                             dataSource={hostGroupList}
                             rowKey={record=>record.groupId}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={'暂无主机组'}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                     </div>
                 </div>

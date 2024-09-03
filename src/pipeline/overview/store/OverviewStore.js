@@ -12,7 +12,7 @@ class OverviewStore {
     findlogpage = async values =>{
         const param = {
             ...values,
-            bgroup:"matflow",
+            bgroup:"arbess",
         }
         return await Axios.post("/oplog/findlogpage", param)
     }
@@ -26,7 +26,7 @@ class OverviewStore {
     findLogPageByTime = async values =>{
         const param = {
             ...values,
-            bgroup:"matflow",
+            bgroup:"arbess",
         }
         return await Axios.post("/oplog/findLogPageByTime", param)
     }
@@ -38,7 +38,7 @@ class OverviewStore {
     @action
     findlogtype = async () =>{
         return await Axios.post("/oplog/type/findlogtypelist", {
-            bgroup:"matflow"
+            bgroup:"arbess"
         })
     }
 
@@ -71,7 +71,7 @@ class OverviewStore {
                 pageSize:5,
                 currentPage:1
             },
-            bgroup:"matflow",
+            bgroup:"arbess",
             userId: getUser().userId,
         }
         return await Axios.post("/todo/findtodopage", params)

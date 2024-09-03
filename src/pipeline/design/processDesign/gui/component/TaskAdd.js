@@ -35,7 +35,7 @@ const TaskAdd = props =>{
                 {type:'github'},
                 {type:'gitlab'},
                 {type:'svn'},
-                {type:'gittok'}
+                {type:'gitpuk'}
             ]
         },
         {
@@ -51,7 +51,7 @@ const TaskAdd = props =>{
             title:"测试",
             desc:[
                 {type: 'maventest'},
-                {type: 'teston'}
+                {type: 'testrubo'}
             ]
         },
         {

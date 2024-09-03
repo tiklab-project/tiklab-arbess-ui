@@ -50,12 +50,19 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                antIcon: {
-                    name: "chunk-antIcon",
+                thoughtwareUserUI: {
+                    name: "chunk-thoughtware-user-ui",
                     chunks: "all",
-                    test: /@ant-design/,
-                    priority: 0,
-                    reuseExistingChunk: true //遇到重复包直接引用，不重新打包
+                    test: /thoughtware-user-ui/,
+                    priority: 2,
+                    reuseExistingChunk: true
+                },
+                thoughtwareLicenceUI: {
+                    name: "chunk-thoughtware-licence-ui",
+                    chunks: "all",
+                    test: /thoughtware-licence-ui/,
+                    priority: 2,
+                    reuseExistingChunk: true
                 },
                 thoughtwareEamUI: {
                     name: "chunk-thoughtware-eam-ui",
@@ -64,53 +71,74 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                thoughtwarePrivilegeUI: {
-                    name: "chunk-thoughtware-privilege-ui",
+                thoughtwareSecurityUI: {
+                    name: "chunk-thoughtware-security-ui",
                     chunks: "all",
-                    test: /thoughtware-privilege-ui/,
-                    priority: 0,
+                    test: /thoughtware-security-ui/,
+                    priority: 2,
                     reuseExistingChunk: true
                 },
                 thoughtwareMessageUI: {
-                    name: "chunk-thoughtware-message-ui",
-                    chunks: "all",
+                    name: 'chunk-thoughtware-message-ui',
+                    chunks: 'all',
                     test: /thoughtware-message-ui/,
-                    priority: 0,
+                    priority: 2,
+                    reuseExistingChunk: true
+                },
+                thoughtwarePrivilegeUI: {
+                    name: 'chunk-thoughtware-privilege-ui',
+                    chunks: 'all',
+                    test: /thoughtware-privilege-ui/,
+                    priority: 2,
                     reuseExistingChunk: true
                 },
                 moment: {
                     name: "chunk-moment",
                     chunks: "all",
                     test: /moment/,
-                    priority: 0,
+                    priority: 2,
                     reuseExistingChunk: true
                 },
                 echarts: {
                     name: "chunk-echarts",
                     chunks: "all",
                     test: /echarts/,
-                    priority: 1,
+                    priority: 3,
                     reuseExistingChunk: true
                 },
                 codemirror: {
                     name: "chunk-codemirror",
                     chunks: "all",
                     test: /codemirror/,
-                    priority: 1,
+                    priority: 3,
                     reuseExistingChunk: true
                 },
-                antdUI: {
-                    name: "chunk-antdUI",
+                zrender:{
+                    name: "chunk-zrender",
                     chunks: "all",
-                    test: /antd/,
-                    priority: 1,
+                    test: /zrender/,
+                    priority: 3,
+                    reuseExistingChunk: true
+                },
+                antIcon: {
+                    name: 'chunk-antIcon',
+                    chunks: 'all',
+                    test: /@ant-design/,
+                    priority: 3,
                     reuseExistingChunk: true
                 },
                 rcomponent: {
                     name: "chunk-rcomponent",
                     chunks: "all",
-                    test: /rc-[a-zA-Z]/,
-                    priority: 1,
+                    test: /(rc-[a-zA-Z])/,
+                    priority: 3,
+                    reuseExistingChunk: true
+                },
+                antdUI: {
+                    name: 'chunk-antdUI',
+                    chunks: 'all',
+                    test: /antd/,
+                    priority: 3,
                     reuseExistingChunk: true
                 },
                 /* 提取共用部分，一下提取的部分会议commons 命名 */

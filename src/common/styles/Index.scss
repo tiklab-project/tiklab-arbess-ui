@@ -4,12 +4,12 @@ ul li{
     list-style: none;
 }
 
-.mf-home-limited{
+.arbess-home-limited{
     padding: 20px 30px;
     min-width: 576px;
 }
 
-.mf-layout, .ant-modal, .ant-drawer {
+.arbess-layout, .ant-modal, .ant-drawer {
     .ant-form-item{
         margin-bottom: 20px !important;
     }
@@ -62,7 +62,7 @@ ul li{
         padding: 8px;
     }
     .ant-table{
-        border-bottom: 1px solid #f0f0f0;;
+        border-bottom: 1px solid #f0f0f0;
     }
     .ant-transfer-list{
         background: #ffffff;
@@ -116,7 +116,7 @@ ul li{
     }
 }
 
-.mf-dropdown-more{
+.arbess-dropdown-more,{
     box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
     border-radius: 4px;
     background: #ffffff;
@@ -131,7 +131,7 @@ ul li{
     }
 }
 
-.mf-user-avatar {
+.arbess-user-avatar {
     &:nth-child(5n+1) {
         .ant-avatar {
             background-color: #e9b4b4;
@@ -165,22 +165,19 @@ ul li{
 }
 
 ::-webkit-scrollbar {
-    /* 滚动条宽度， width：对应竖滚动条的宽度  height：对应横滚动条的高度*/
-    background: #fff;
-    width: 10px;
-    height: 10px;
+    max-width: 10px;
+    max-height: 10px;
 }
 
-::-webkit-scrollbar-track {/*滚动条里面轨道*/
+::-webkit-scrollbar-track {
     background: #EDEDED;
 }
 
-/*定义滑块样式*/
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    height:10px;    /* 滚动条滑块长度 */
+    border-radius: 4px;
     background-color: #ccc;
 }
+
 
 :root {
 
@@ -191,8 +188,9 @@ ul li{
     --thoughtware-gray-300: #edf0f5;  /* hover颜色 */
     --thoughtware-gray-400: #e3e8f0;  /* 左侧导航 选中颜色 */
     --thoughtware-gray-500: #999999; /* 文字次级颜色灰色调 */
-    --thoughtware-gray-600: #f7f7f7; /* 内容区域侧边栏色调 */
-    --thoughtware-gray: #efefef;  /* 主色调灰 左侧导航 */
+    --thoughtware-gray-600: #fafbfc; /* 内容区域色调 */
+    --thoughtware-gray-700: #f0f3fa; /* 侧边栏色调 */
+    --thoughtware-gray: #efefef;  /* 主色调灰 */
 
 
     --thoughtware-padding: 20px;  /*页面边距 */
@@ -215,11 +213,11 @@ ul li{
     --thoughtware-icon-size-24: 24px;
     --thoughtware-icon-size-32: 32px;
 
-    --mf-border-color: var(--thoughtware-gray-200);
-    --mf-hover-color: var(--thoughtware-gray-300);
-    --mf-select-color: var(--thoughtware-gray-400);
-    --mf-aside-color: var(--thoughtware-gray-600);
-    --mf-backdrop-color: var(--thoughtware-gray-600);
-    --mf-head-height: 48px;
-    --mf-content-height: calc(100vh - 48px)
+    --arbess-border-color: var(--thoughtware-gray-200);
+    --arbess-hover-color: var(--thoughtware-gray-300);
+    --arbess-select-color: var(--thoughtware-gray-400);
+    --arbess-aside-color: var(--thoughtware-gray-700);
+    --arbess-backdrop-color: var(--thoughtware-gray-600);
+    --arbess-head-height: 48px;
+    --arbess-content-height: calc(100% - 48px)
 }

@@ -35,7 +35,7 @@ const PipelineAside = (props) => {
 
     const firstRouters=[
         {
-            id:`/pipeline/${id}/survey`,
+            id:`/pipeline/${id}/overview`,
             title:"概况",
             icon:<ApartmentOutlined />,
         },
@@ -82,7 +82,7 @@ const PipelineAside = (props) => {
     }
 
     return (
-        <div className={`mf-aside ${isExpand ? 'mf-aside-expand': 'mf-aside-normal'} mf-aside-${themeType}`}>
+        <div className={`arbess-aside ${isExpand ? 'arbess-aside-expand': 'arbess-aside-normal'} arbess-aside-${themeType}`}>
             <Dropdown
                 getPopupContainer={e => e.parentElement}
                 overlayStyle={{width:200,top:48,left:80}}
@@ -101,7 +101,7 @@ const PipelineAside = (props) => {
                                                  key={item.id}
                                                  className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
                                             >
-                                                <span className={`pipeline-opt-icon mf-icon-${item.color}`}>
+                                                <span className={`pipeline-opt-icon arbess-icon-${item.color}`}>
                                                     {item.name.substring(0,1).toUpperCase()}
                                                 </span>
                                                 <span className="pipeline-opt-name">
@@ -132,14 +132,27 @@ const PipelineAside = (props) => {
                 </div>
             </Dropdown>
             <div className="aside-up">
-                <div className="aside-item-back">
-                    <div className='aside-item' onClick={()=>props.history.push('/home')}>
-                        <div className="aside-item-icon">
-                            <HomeOutlined />
+                {
+                    isExpand ?
+                        <div className="aside-item-back">
+                            <div className='aside-item' onClick={()=>props.history.push('/home')}>
+                                <div className="aside-item-icon">
+                                    <HomeOutlined />
+                                </div>
+                                <div className="aside-item-title">返回首页</div>
+                            </div>
                         </div>
-                        <div className="aside-item-title">返回首页</div>
-                    </div>
-                </div>
+                        :
+                        <div className="aside-item-back">
+                            <div className='aside-item-back-home'
+                                 onClick={()=>props.history.push('/home')} data-title-right='返回首页'
+                            >
+                                <div className="aside-item-home-icon">
+                                    <HomeOutlined />
+                                </div>
+                            </div>
+                        </div>
+                }
                 {
                     firstRouters.map(item=>(
                         <div key={item.id}
@@ -156,7 +169,7 @@ const PipelineAside = (props) => {
                 {
                     isExpand ?
                     <div className='aside-item'
-                         onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}
+                         onClick={()=>props.history.push(`/pipeline/${pipeline.id}/setting`)}
                     >
                         <div className="aside-item-icon"><SettingOutlined /></div>
                         <div className="aside-item-title">设置</div>
@@ -164,7 +177,7 @@ const PipelineAside = (props) => {
                     :
                     <div
                         className="aside-bottom-text" data-title-right='设置'
-                        onClick={()=>props.history.push(`/pipeline/${pipeline.id}/set`)}
+                        onClick={()=>props.history.push(`/pipeline/${pipeline.id}/setting`)}
                     >
                         <SettingOutlined className='aside-bottom-text-icon'/>
                     </div>

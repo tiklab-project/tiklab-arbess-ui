@@ -5,7 +5,7 @@ import {message} from "antd";
 class CodeThirdStore {
 
     /**
-     * 获取Gittok仓库
+     * 获取gitpuk仓库
      * @param value
      * @returns {Promise<void>}
      */
@@ -22,7 +22,7 @@ class CodeThirdStore {
     }
 
     /**
-     * 获取Gittok分支
+     * 获取gitpuk分支
      * @param value
      * @returns {Promise<void>}
      */

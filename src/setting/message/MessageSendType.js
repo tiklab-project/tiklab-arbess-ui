@@ -12,7 +12,7 @@ const MessageSendTypeContent = props => {
     return (
         <MessageSendType
             {...props}
-            bgroup={"matflow"}
+            bgroup={"arbess"}
         />
     )
 

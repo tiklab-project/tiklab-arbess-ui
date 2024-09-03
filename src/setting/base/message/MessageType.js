@@ -9,7 +9,7 @@ import {MessageType} from "thoughtware-message-ui";
  */
 const MessageTypeContent = props => {
 
-    return <MessageType {...props} bgroup={"matflow"}/>
+    return <MessageType {...props} bgroup={"arbess"}/>
 
 }
 export default MessageTypeContent

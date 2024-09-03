@@ -10,10 +10,10 @@ import "./Loading.scss";
  */
 export const Loading = props =>{
     return (
-        <div className="mf-loading">
-            <div className="mf-shape"/>
-            <div className="mf-shape"/>
-            <div className="mf-shape"/>
+        <div className="arbess-loading">
+            <div className="arbess-shape"/>
+            <div className="arbess-shape"/>
+            <div className="arbess-shape"/>
         </div>
     )
 }
@@ -34,7 +34,7 @@ export const SpinLoading = ({size, type,title}) => {
                 </div>
     }
 
-    return  <div className='mf-spin-loading'>
+    return  <div className='arbess-spin-loading'>
                 <Spin size={size? size:'default '}/>
                 {
                     title && <div className='spin-loading-title'>{title}</div>

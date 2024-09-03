@@ -30,9 +30,9 @@ export const taskTitle = type =>{
         case 'github':  return "Github"
         case 'gitlab':  return "Gitlab"
         case 'svn':  return "SVN"
-        case 'gittok':  return "GitTok"
+        case 'gitpuk':  return "GitPuk"
         case 'maventest': return "Maven单元测试"
-        case 'teston': return "TestOn自动化测试"
+        case 'testrubo': return "TestRubo自动化测试"
         case 'maven': return "Maven构建"
         case 'nodejs': return "Node.Js构建"
         case 'build_docker': return "Docker构建"
@@ -70,9 +70,9 @@ export const TaskIcon = props =>{
             case 'github':  return pip_github
             case 'gitlab':  return pip_gitlab
             case 'svn':  return pip_svn
-            case 'gittok':  return productWhiteImg.gittok
+            case 'gitpuk':  return productWhiteImg.gitpuk
             case 'maventest': return pip_ceshi
-            case 'teston': return productWhiteImg.teston
+            case 'testrubo': return productWhiteImg.testrubo
             case 'maven': return maven
             case 'nodejs': return pip_nodejs
             case 'build_docker': return pip_docker
@@ -122,7 +122,7 @@ export const HeadlineTitle = type =>{
         case 'git':
         case 'gitlab':
         case 'svn':
-        case 'gittok':
+        case 'gitpuk':
         case 'gitee':
         case 'github':
             return '源码'
@@ -130,7 +130,7 @@ export const HeadlineTitle = type =>{
         case 'spotbugs':
             return '代码扫描'
         case 'maventest':
-        case 'teston':
+        case 'testrubo':
             return '测试'
         case 'maven':
         case 'nodejs':

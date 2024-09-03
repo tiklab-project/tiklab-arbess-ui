@@ -122,6 +122,7 @@ const K8s = (props) => {
             dataIndex: "action",
             key: "action",
             width:"8%",
+            ellipsis:true,
             render:(_,record) => {
                 return (
                     <ListAction
@@ -142,7 +143,7 @@ const K8s = (props) => {
                 lg={{span: "24"}}
                 xl={{ span: "22", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
-                className='mf-home-limited'
+                className='arbess-home-limited'
             >
                 <BreadCrumb firstItem={"Kubernetes集群"}>
                     <K8sAddBtn
@@ -159,7 +160,7 @@ const K8s = (props) => {
                         dataSource={k8sData}
                         rowKey={record=>record.hostId}
                         pagination={false}
-                        locale={{emptyText: <ListEmpty title={'暂无K8S集群'}/>}}
+                        locale={{emptyText: <ListEmpty />}}
                     />
                 </div>
             </Col>

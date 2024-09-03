@@ -182,7 +182,7 @@ const PostprocessUserAdd = props =>{
     }
 
     const userAddMenu = (
-        <div className='post-pose-user-add mf'>
+        <div className='post-pose-user-add'>
             <SearchInput
                 placeholder={'搜索姓名'}
                 onPressEnter={changFindUser}

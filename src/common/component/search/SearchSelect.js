@@ -8,7 +8,7 @@ const SearchSelect = (props) => {
     const {children,...res} = props;
 
     return (
-        <div className='mf-search-select'>
+        <div className='arbess-search-select'>
             <Select
                 {...res}
                 bordered={false}

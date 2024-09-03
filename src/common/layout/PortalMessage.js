@@ -214,7 +214,7 @@ const PortalMessage = props =>{
                                     const {sendUser,messageType,sendTime,action,data} = item
                                     const dataObj = JSON.parse(data)
                                     return(
-                                        <div key={index} className={`message-item mf-user-avatar ${item.status===1 ? "message-read":""}`} onClick={()=>goHref(item)}>
+                                        <div key={index} className={`message-item arbess-user-avatar ${item.status===1 ? "message-read":""}`} onClick={()=>goHref(item)}>
                                             <div className="message-item-left">
                                                 <div className="message-item-icon">
                                                     <Profile
@@ -263,15 +263,7 @@ const PortalMessage = props =>{
                             }
                             {
                                 messageList && messageList.length===0 &&
-                                <div>
-                                    <ListEmpty title={
-                                        <>
-                                            { messageParams.status===0 && "暂无未读消息"}
-                                            { messageParams.status===1 && "暂无已读消息"}
-                                            { messageParams.status===2 && "暂无消息"}
-                                        </>
-                                    }/>
-                                </div>
+                                <ListEmpty />
                             }
                         </div>
                     </Spin>

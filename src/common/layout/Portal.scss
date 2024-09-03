@@ -1,14 +1,15 @@
 $main-padding:10px;
+$aside-border-color: #e4e4e4;
 
-.mf-layout {
-  height: 100vh;
+.arbess-layout {
+  height: 100%;
   display: flex;
   overflow: hidden;
 
-  .mf-aside {
+  .arbess-aside {
     position: relative;
     transition: width 0.3s ease, transform 0.3s ease;
-    border-right: 1px solid var(--mf-border-color);
+    border-right: 1px solid var(--arbess-border-color);
     .ant-avatar {
       width: 24px;
       height: 24px;
@@ -91,7 +92,7 @@ $main-padding:10px;
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 36px;
+          height: 32px;
           font-size: 18px;
           transition: background 0.3s ease;
           cursor: pointer;
@@ -112,6 +113,14 @@ $main-padding:10px;
       .aside-item-back{
         margin-bottom: 10px;
         padding-bottom: 5px;
+        .aside-item-back-home{
+          text-align: center;
+          padding: 8px 0;
+          cursor: pointer;
+          .aside-item-home-icon{
+            font-size: 24px;
+          }
+        }
       }
       .aside-dropdown{
         left: 75px !important;
@@ -144,7 +153,6 @@ $main-padding:10px;
         .aside-item {
           height: 40px;
           display: flex;
-          line-height: 40px;
           width: 100%;
           align-items: center;
           padding-left: 20px;
@@ -161,11 +169,11 @@ $main-padding:10px;
         margin-top: 20px;
         margin-bottom: 10px;
         .aside-item {
-          height: 36px;
+          height: 32px;
           display: flex;
           width: 100%;
           align-items: center;
-          padding-left: 20px;
+          padding-left: 23px;
           cursor: pointer;
           .aside-item-icon {
             margin-right: $main-padding;
@@ -173,7 +181,7 @@ $main-padding:10px;
           }
         }
         .aside-item-user{
-          padding-left: 16px !important;
+          padding-left: 20px !important;
           .aside-item-icon {
             margin-right: 7px !important;
             opacity: 1 !important;
@@ -198,7 +206,7 @@ $main-padding:10px;
           text-overflow: ellipsis;
           -o-text-overflow: ellipsis;
         }
-        .mf-listname-icon{
+        .arbess-listname-icon{
           width: 24px;
           height: 24px;
           line-height: 24px;
@@ -223,10 +231,10 @@ $main-padding:10px;
           padding: 0 var(--thoughtware-padding-item);
           height: 40px;
           line-height: 40px;
-          border-bottom: 1px solid var(--mf-border-color);
+          border-bottom: 1px solid var(--arbess-border-color);
         }
         &-group{
-          max-height: calc(100vh - 120px);
+          max-height: calc(100% - 120px);
           min-height: 45px;
           overflow: auto;
         }
@@ -240,7 +248,7 @@ $main-padding:10px;
           overflow: hidden;
           max-width: 200px;
           &:hover{
-            background: var(--mf-hover-color);
+            background: var(--arbess-hover-color);
           }
         }
         &-icon{
@@ -266,28 +274,31 @@ $main-padding:10px;
     }
   }
 
-  .mf-layout-content {
-    height: 100vh;
+  .arbess-layout-content {
+    height: 100%;
     flex: 1;
     overflow: auto;
   }
 
-  .mf-aside{
+  .arbess-aside{
     &-default{
-      background: var(--mf-aside-color);
+      background: var(--arbess-aside-color);
       .aside-expand{
-        background: #edf0f5;
+        background: #ebebeb;
+      }
+      .aside-item-home-icon{
+        opacity: 0.6;
       }
       .aside-item-back{
-        border-bottom: 1px solid var(--mf-border-color);
+        border-bottom: 1px solid $aside-border-color;
       }
-      .aside-item,.aside-bottom-text{
+      .aside-item,.aside-bottom-text,.aside-item-back-home{
         &:hover{
-          background: #edf0f5;
+          background: var(--arbess-select-color);
         }
       }
       .aside-select{
-        background-color: var(--mf-select-color);
+        background-color: var(--arbess-select-color);
         border-left: 3px solid var(--thoughtware-blue) !important;
       }
     }
@@ -297,13 +308,13 @@ $main-padding:10px;
       .aside-expand{
         background: #7e8085;
       }
-      .aside-item-icon,.aside-bottom-text-icon{
+      .aside-item-icon,.aside-bottom-text-icon,.aside-item-home-icon{
         opacity: 0.6;
       }
       .aside-item-back{
-        border-bottom: 1px solid #f6f7f81a;
+        border-bottom: 1px solid #f6f7f833;
       }
-      .aside-item,.aside-bottom-text{
+      .aside-item,.aside-bottom-text,.aside-item-back-home{
         &:hover{
           background: #e9f2ff2e;
         }
@@ -320,9 +331,9 @@ $main-padding:10px;
         background: #93acd4;
       }
       .aside-item-back{
-        border-bottom: 1px solid #f6f7f81a;
+        border-bottom: 1px solid #f6f7f833;
       }
-      .aside-item,.aside-bottom-text{
+      .aside-item,.aside-bottom-text,.aside-item-back-home{
         &:hover{
           background:#e9f2ff2e;
         }

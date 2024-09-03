@@ -9,7 +9,7 @@ import {Task} from "thoughtware-message-ui";
  */
 const TaskContent = props =>{
 
-    return <Task {...props} bgroup={"matflow"}/>
+    return <Task {...props} bgroup={"arbess"}/>
 
 }
 

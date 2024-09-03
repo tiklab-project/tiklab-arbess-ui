@@ -131,7 +131,7 @@ const Result = props =>{
                 lg={{ span: "24" }}
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
-                className="mf-home-limited"
+                className="arbess-home-limited"
             >
                 <div className='statistics-select'>
                     <BreadCrumb firstItem={'结果统计'}/>

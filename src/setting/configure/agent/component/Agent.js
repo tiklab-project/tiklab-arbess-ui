@@ -125,6 +125,7 @@ const Agent = (props) => {
             dataIndex: "action",
             key: "action",
             width:"10%",
+            ellipsis:true,
             render:(text,record) => (
                <Space size={'middle'}>
                    {
@@ -154,7 +155,7 @@ const Agent = (props) => {
                 xl={{ span: "20", offset: "2" }}
                 xxl={{ span: "18", offset: "3" }}
             >
-                <div className='mf-home-limited'>
+                <div className='arbess-home-limited'>
                     <BreadCrumb firstItem={"Agent"}/>
                     <div className="auth-content">
                         <Table
@@ -162,7 +163,7 @@ const Agent = (props) => {
                             dataSource={agentList}
                             rowKey={record=>record.id}
                             pagination={false}
-                            locale={{emptyText: <ListEmpty title={'暂无Agent'}/>}}
+                            locale={{emptyText: <ListEmpty />}}
                         />
                         <Page
                             currentPage={agentRequest.pageParam.currentPage}

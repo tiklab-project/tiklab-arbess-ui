@@ -9,7 +9,7 @@ import {MessageSendType} from "thoughtware-message-ui";
  */
 const MessageSendTypeContentTrue = props => {
 
-    return <MessageSendType {...props} bgroup={"matflow"} isBase={true}/>
+    return <MessageSendType {...props} bgroup={"arbess"} isBase={true}/>
 
 }
 

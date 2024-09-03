@@ -243,7 +243,7 @@ const Condition = props =>{
                     condData && condData.length > 0 ?
                     condData.map((item,index)=>renderCondData(item,index))
                     :
-                    <ListEmpty title={"暂无条件"}/>
+                    <ListEmpty />
                 }
             </div>
         </div>

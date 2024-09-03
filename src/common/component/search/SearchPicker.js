@@ -6,7 +6,7 @@ const SearchPicker = (props) => {
 
 
     return (
-        <div className='mf-search-picker'>
+        <div className='arbess-search-picker'>
             <DatePicker.RangePicker
                 {...props}
                 bordered={false}

@@ -13,7 +13,7 @@ const DomainMessageNoticeContent = props =>{
         <DomainMessageNotice
             {...props}
             domainId={props.match.params.id}
-            bgroup={"matflow"}
+            bgroup={"arbess"}
         />
     )
 

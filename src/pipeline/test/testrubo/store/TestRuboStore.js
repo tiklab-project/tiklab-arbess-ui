@@ -2,10 +2,10 @@ import {action} from "mobx";
 import {Axios} from "thoughtware-core-ui";
 import {message} from "antd";
 
-class TestOnStore {
+class TestRuboStore {
 
     /**
-     * 获取teston测试空间
+     * 获取testrubo测试空间
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -21,7 +21,7 @@ class TestOnStore {
     }
 
     /**
-     * 获取teston测试环境
+     * 获取testrubo测试环境
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -39,7 +39,7 @@ class TestOnStore {
     }
 
     /**
-     * 获取teston测试计划
+     * 获取testrubo测试计划
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -56,7 +56,7 @@ class TestOnStore {
     }
 
     /**
-     * 获取teston自动化测试列表
+     * 获取testrubo自动化测试列表
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -67,7 +67,7 @@ class TestOnStore {
     }
 
     /**
-     * 删除teston自动化测试
+     * 删除testrubo自动化测试
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -78,8 +78,7 @@ class TestOnStore {
         const data = await Axios.post('/testOnRelevance/deleteRelevance',param)
         if(data.code===0){
             message.info('删除成功')
-        }
-        else {
+        } else {
             message.info('删除失败')
         }
         return data
@@ -87,5 +86,5 @@ class TestOnStore {
 
 }
 
-const testOnStore = new TestOnStore();
-export default testOnStore
+const testRuboStore = new TestRuboStore();
+export default testRuboStore

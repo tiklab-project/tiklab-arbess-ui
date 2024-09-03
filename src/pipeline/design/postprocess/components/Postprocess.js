@@ -99,6 +99,7 @@ const Postprocess = props =>{
             title: "操作",
             dataIndex: "action",
             key: "action",
+            ellipsis:true,
             render:(_,record) => {
                 return (
                     <ListAction
@@ -117,8 +118,9 @@ const Postprocess = props =>{
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
-                lg={{ span: "18", offset: "3" }}
-                xl={{ span: "16", offset: "4" }}
+                lg={{ span: "24" }}
+                xl={{ span: "18", offset: "3" }}
+                xxl={{ span: "16", offset: "4" }}
                 className="post-pose"
             >
                 <div className="post-pose-up">
@@ -139,7 +141,7 @@ const Postprocess = props =>{
                         dataSource={postprocessData}
                         rowKey={record=>record.postId}
                         pagination={false}
-                        locale={{emptyText: <ListEmpty title={"暂无后置处理"}/>}}
+                        locale={{emptyText: <ListEmpty />}}
                     />
                 </div>
             </Col>

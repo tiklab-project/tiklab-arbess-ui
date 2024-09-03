@@ -21,8 +21,8 @@ import './Portal.scss';
 
 const firstRouters=[
     {
-        key:"/home",
-        to:"/home",
+        key:"/index",
+        to:"/index",
         title: "首页",
         icon:<HomeOutlined />
     },
@@ -37,12 +37,6 @@ const firstRouters=[
         to:"/history",
         title:"历史",
         icon: <ClockCircleOutlined />,
-    },
-    {
-        key:"/setting",
-        to:"/setting/myLog",
-        title:"设置",
-        icon: <SettingOutlined />,
     }
 ]
 
@@ -97,16 +91,16 @@ const Portal = props =>{
             )
         }
         return (
-            <div className={`mf-aside ${isExpand ? 'mf-aside-expand': 'mf-aside-normal'} mf-aside-${themeType}`}>
-                <div className='aside-logo' onClick={()=>history.push('/home')}>
+            <div className={`arbess-aside ${isExpand ? 'arbess-aside-expand': 'arbess-aside-normal'} arbess-aside-${themeType}`}>
+                <div className='aside-logo' onClick={()=>history.push('/index')}>
                     {
                         isExpand ?
                             <>
-                                <img src={themeType === 'default' ? productImg.matflow : productFrameImg.matflow} height={24} width={24} alt={''}/>
-                                <div className='aside-logo-text'>{productTitle.matflow}</div>
+                                <img src={themeType === 'default' ? productImg.arbess : productFrameImg.arbess} height={24} width={24} alt={''}/>
+                                <div className='aside-logo-text'>{productTitle.arbess}</div>
                             </>
                             :
-                            <img src={themeType === 'default' ? productImg.matflow : productFrameImg.matflow} height={32} width={32} alt={''}/>
+                            <img src={themeType === 'default' ? productImg.arbess : productFrameImg.arbess} height={32} width={32} alt={''}/>
                     }
                 </div>
                 <div className="aside-up">
@@ -125,19 +119,35 @@ const Portal = props =>{
                 <div className="aside-bottom">
                     {
                         isExpand ?
-                            <div
-                                className={`aside-item`}
-                                onClick={()=>setNotificationVisibility(!notificationVisibility)}
-                            >
-                                <div className="aside-item-icon"><BellOutlined/></div>
-                                <div className="aside-item-title">消息</div>
-                            </div>
+                           <>
+                               <div
+                                   className={`aside-item`}
+                                   onClick={()=>history.push(`/setting/home`)}
+                               >
+                                   <div className="aside-item-icon"><SettingOutlined/></div>
+                                   <div className="aside-item-title">设置</div>
+                               </div>
+                               <div
+                                   className={`aside-item`}
+                                   onClick={()=>setNotificationVisibility(!notificationVisibility)}
+                               >
+                                   <div className="aside-item-icon"><BellOutlined/></div>
+                                   <div className="aside-item-title">消息</div>
+                               </div>
+                           </>
                             :
-                            <div className="aside-bottom-text text-icon" data-title-right={'消息'}
-                                 onClick={()=>setNotificationVisibility(!notificationVisibility)}
-                            >
-                                <BellOutlined className='aside-bottom-text-icon'/>
-                            </div>
+                            <>
+                                <div className="aside-bottom-text text-icon" data-title-right={'设置'}
+                                     onClick={()=>history.push(`/setting/home`)}
+                                >
+                                    <SettingOutlined className='aside-bottom-text-icon'/>
+                                </div>
+                                <div className="aside-bottom-text text-icon" data-title-right={'消息'}
+                                     onClick={()=>setNotificationVisibility(!notificationVisibility)}
+                                >
+                                    <BellOutlined className='aside-bottom-text-icon'/>
+                                </div>
+                            </>
 
                     }
                     <PortalMessage
@@ -149,7 +159,7 @@ const Portal = props =>{
                         setVisible={setNotificationVisibility}
                     />
                     <HelpLink
-                        bgroup={'matflow'}
+                        bgroup={'arbess'}
                         iconComponent={
                             isExpand ?
                                 <div className='aside-item'>
@@ -207,9 +217,9 @@ const Portal = props =>{
     }
 
     return (
-        <main className="mf-layout">
+        <main className="arbess-layout">
             {asideHtml()}
-            <div className='mf-layout-content'>
+            <div className='arbess-layout-content'>
                 {renderRoutes(route.routes)}
             </div>
         </main>

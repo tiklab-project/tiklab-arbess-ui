@@ -35,12 +35,12 @@ const AgentList = props => {
     }
 
     return (
-        <div className='mf-agent-center'>
+        <div className='arbess-agent-center'>
             {
                 agentList && agentList.length>0 ?
                     agentList.map(item=>renderAgent(item))
                     :
-                    <ListEmpty title={"暂无待办"}/>
+                    <ListEmpty />
             }
         </div>
     )
