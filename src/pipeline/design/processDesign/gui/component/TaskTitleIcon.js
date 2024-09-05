@@ -15,7 +15,7 @@ import pip_message from "../../../../../assets/images/svg/pip_message.svg";
 import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
-import {productWhiteImg} from "thoughtware-core-ui";
+import {productImg} from "thoughtware-core-ui";
 
 /**
  * task的标题
@@ -70,9 +70,9 @@ export const TaskIcon = props =>{
             case 'github':  return pip_github
             case 'gitlab':  return pip_gitlab
             case 'svn':  return pip_svn
-            case 'gitpuk':  return productWhiteImg.gitpuk
+            case 'gitpuk':  return productImg.gitpuk
             case 'maventest': return pip_ceshi
-            case 'testrubo': return productWhiteImg.testrubo
+            case 'testrubo': return productImg.testrubo
             case 'maven': return maven
             case 'nodejs': return pip_nodejs
             case 'build_docker': return pip_docker

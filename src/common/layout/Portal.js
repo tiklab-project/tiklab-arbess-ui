@@ -12,7 +12,7 @@ import {
 import PortalMessage from "./PortalMessage";
 import {inject, observer} from "mobx-react";
 import PipelineAside from "./PipelineAside";
-import {getUser, productTitle,productImg,productFrameImg} from "thoughtware-core-ui";
+import {getUser, productTitle,productImg,productWhiteImg} from "thoughtware-core-ui";
 import {renderRoutes} from "react-router-config";
 import Profile from "../component/profile/Profile";
 import menuBlack from '../../assets/images/menu-black.png';
@@ -96,11 +96,11 @@ const Portal = props =>{
                     {
                         isExpand ?
                             <>
-                                <img src={themeType === 'default' ? productImg.arbess : productFrameImg.arbess} height={24} width={24} alt={''}/>
+                                <img src={themeType === 'default' ? productImg.arbess : productWhiteImg.arbess} height={24} width={24} alt={''}/>
                                 <div className='aside-logo-text'>{productTitle.arbess}</div>
                             </>
                             :
-                            <img src={themeType === 'default' ? productImg.arbess : productFrameImg.arbess} height={32} width={32} alt={''}/>
+                            <img src={themeType === 'default' ? productImg.arbess : productWhiteImg.arbess} height={32} width={32} alt={''}/>
                     }
                 </div>
                 <div className="aside-up">

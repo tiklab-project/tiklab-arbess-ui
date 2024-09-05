@@ -165,7 +165,7 @@ module.exports = {
             alwaysWriteToDisk: true,
             title:"Arbess",
             template: path.resolve(__dirname, "./public/index.template.html"),
-            favicon: path.resolve('./public/arbessIcon.png'),
+            favicon: path.resolve('./public/arbess.png'),
             hash: false,
             filename: "index.html",
             inject: "body",
