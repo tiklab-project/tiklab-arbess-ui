@@ -4,6 +4,7 @@ import {Redirect} from "react-router-dom";
 import {
     Index,
     Login,
+    LoginRpw,
     Logout,
     ExcludeProductUser,
     NotFound,
@@ -30,7 +31,7 @@ import {
 
     Test,
     TestScan,
-    TestRubo,
+    TestHubo,
     TestMaven,
 
     Statistics,
@@ -94,6 +95,11 @@ const routers=[
     {
         path:"/login",
         component:Login,
+    },
+    {
+        component: LoginRpw,
+        exact:true,
+        path: '/loginRpw'
     },
     {
         path:"/logout",
@@ -206,8 +212,8 @@ const routers=[
                                 exact: true,
                             },
                             {
-                                path:"/pipeline/:id/test/testRubo",
-                                component: TestRubo,
+                                path:"/pipeline/:id/test/testHubo",
+                                component: TestHubo,
                                 exact: true,
                             },
                             {

@@ -18,8 +18,7 @@ class ServerStore{
         const data = await Axios.post("/authServer/createAuthServer",values)
         if(data.code===0){
             message.info(`添加成功`)
-        }
-        else {
+        } else {
             message.info(`添加失败`)
         }
         return data
@@ -37,8 +36,7 @@ class ServerStore{
         const data = await Axios.post("/authServer/deleteAuthServer",param)
         if(data.code===0){
             message.info(`删除成功`)
-        }
-        else {
+        } else {
             message.info(`删除失败`)
         }
         return data
@@ -54,8 +52,7 @@ class ServerStore{
         const data = await Axios.post("/authServer/updateAuthServer",value)
         if(data.code===0){
             message.info(`修改成功`)
-        }
-        else {
+        } else {
             message.info(`修改失败`)
         }
         return data
@@ -68,7 +65,17 @@ class ServerStore{
      */
     @action
     findAuthServerList = async value=>{
-        return await Axios.post("/authServer/findAuthServerList", {type:value})
+        return await Axios.post("/authServer/findAuthServerList", value)
+    }
+
+    /**
+     * 获取所有服务配置
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    findAuthServerPage = async value=>{
+        return await Axios.post("/authServer/findAuthServerPage", value)
     }
 
     /**

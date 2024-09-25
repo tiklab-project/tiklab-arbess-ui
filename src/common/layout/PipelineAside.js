@@ -127,8 +127,12 @@ const PipelineAside = (props) => {
                         text={pipeline?.name}
                         colors={pipeline && pipeline?.color}
                     />
-                    {isExpand && <div className='aside-opt-name'>{pipeline?.name}</div>}
-                    <div style={{opacity:0.8}}><CaretDownOutlined/></div>
+                    {isExpand &&
+                        <>
+                            <div className='aside-opt-name'>{pipeline?.name}</div>
+                            <div style={{opacity:0.8}}><CaretDownOutlined/></div>
+                        </>
+                    }
                 </div>
             </Dropdown>
             <div className="aside-up">

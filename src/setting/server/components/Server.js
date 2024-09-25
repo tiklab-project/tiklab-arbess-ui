@@ -1,14 +1,18 @@
 import React,{useState,useEffect} from "react";
-import {Space,Table,Row,Col} from "antd";
+import {Space, Table, Row, Col, Select} from "antd";
 import serverStore from "../store/ServerStore";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import ListIcon from "../../../common/component/list/ListIcon";
 import ListAction from "../../../common/component/list/ListAction";
 import Profile from "../../../common/component/profile/Profile";
-import Tabs from "../../../common/component/tabs/Tabs";
 import ServerAddBtn from "./ServerAddBtn";
 import "../../common/Common.scss";
+import SearchInput from "../../../common/component/search/SearchInput";
+import SearchSelect from "../../../common/component/search/SearchSelect";
+import Page from "../../../common/component/page/Page";
+
+const pageSize = 13;
 
 /**
  * 服务集成
@@ -18,42 +22,73 @@ import "../../common/Common.scss";
  */
 const Server = props =>{
 
-    const {findAuthServerList,deleteAuthServer} = serverStore
+    const {findAuthServerPage,deleteAuthServer} = serverStore
 
-    // 弹出框状态
-    const [visible,setVisible] = useState(false)
+    //弹出框状态
+    const [visible,setVisible] = useState(false);
+    //弹出窗form表单value
+    const [formValue,setFormValue] = useState(null);
+    //服务配置列表
+    const [authServer,setAuthServer] = useState({});
 
-    // 弹出窗form表单value
-    const [formValue,setFormValue] = useState(null)
-
-    // 服务配置类型
-    const [activeTab,setActiveTab] = useState('all')
-
-    // 服务配置列表
-    const [authServerList,setAuthServerList] = useState([])
+    const pageParam = {
+        pageSize:pageSize,
+        currentPage: 1,
+    };
+    //请求数据
+    const [requestParams,setRequestParams] = useState({
+        pageParam
+    });
 
     useEffect(()=>{
         // 初始化服务配置
         findAuth()
-    },[activeTab])
+    },[requestParams])
 
     /**
      * 获取服务配置
      */
     const findAuth = () =>{
-        findAuthServerList(activeTab).then(r=>{
+        findAuthServerPage(requestParams).then(r=>{
             if(r.code===0){
-                setAuthServerList(r.data || [])
+                setAuthServer(r.data)
             }
         })
     }
 
     /**
-     * 切换服务配置类型
-     * @param item
+     * 模糊搜索
      */
-    const clickServerType = item =>{
-        setActiveTab(item.id)
+    const onSearch = e => {
+        setRequestParams({
+            ...requestParams,
+            pageParam,
+            name:e.target.value,
+        })
+    }
+
+    /**
+     * 切换服务配置类型
+     */
+    const changeServer = value =>{
+        setRequestParams({
+            ...requestParams,
+            pageParam,
+            type:value==='all' ? null:value
+        })
+    }
+
+    /**
+     * 换页
+     */
+    const changPage = page => {
+        setRequestParams({
+            ...requestParams,
+            pageParam:{
+                pageSize:pageSize,
+                currentPage: page,
+            }
+        })
     }
 
     /**
@@ -78,25 +113,25 @@ const Server = props =>{
     }
 
     // 标题
-    const name = text =>{
-        return  <span>
-                    <ListIcon text={text}/>
-                    <span>{text}</span>
-                </span>
-    }
+    const name = text => (
+        <span>
+            <ListIcon text={text}/>
+            <span>{text}</span>
+        </span>
+    )
 
     // 创建人
-    const user = (text,record) =>{
-        return  <Space>
-                    <Profile userInfo={record.user}/>
-                    {text || '--'}
-                </Space>
-    }
+    const user = (text,record) => (
+        <Space>
+            <Profile userInfo={record.user}/>
+            {text || '--'}
+        </Space>
+    )
 
     // 操作
     const action = record =>{
         const {type} = record
-        if(type==='gitpuk' || type==='hadess' || type==='testrubo'){
+        if(type==='gitpuk' || type==='hadess' || type==='testhubo'){
             if(version ==='cloud'){
                 return (
                     <ListAction edit={()=>editServer(record)}/>
@@ -204,7 +239,7 @@ const Server = props =>{
         }
     ]
 
-    // sonar & nexus & testrubo & xcode
+    // sonar & nexus & testhubo & xcode
     const authColumn = [
         {
             title:"名称",
@@ -255,20 +290,20 @@ const Server = props =>{
     ]
 
     // 表格内容
-    const columns = activeTab =>{
-        switch (activeTab) {
-            case 'all':
-                return allColumn
+    const columns = () =>{
+        switch (requestParams?.type) {
             case 'gitee':
             case 'github':
             case 'gitlab':
                 return authorizeColumn
             case 'gitpuk':
-            case 'testrubo':
+            case 'testhubo':
             case 'sonar' :
             case 'nexus' :
             case 'hadess' :
                 return authColumn
+            default:
+                return allColumn
         }
     }
 
@@ -293,28 +328,46 @@ const Server = props =>{
                             findAuth={findAuth}
                         />
                     </BreadCrumb>
-                    <Tabs
-                        tabLis={[
-                            {id:'all', title: "全部"},
-                            {id:'gitee', title:"Gitee"},
-                            {id:'github', title:"Github"},
-                            {id:'gitlab', title:"Gitlab"},
-                            {id:'gitpuk', title:"GitPuk"},
-                            {id:'testrubo', title:"TestTubo"},
-                            {id:'sonar', title:"Sonar"},
-                            {id:'nexus', title:"Nexus"},
-                            {id:'hadess', title:"Hadess"},
-                        ]}
-                        type={activeTab}
-                        onClick={clickServerType}
-                    />
+                    <div className="auth-select">
+                        <SearchInput
+                            placeholder="搜索名称、服务地址"
+                            style={{ width: 190 }}
+                            onPressEnter={onSearch}
+                        />
+                        <SearchSelect
+                            placeholder="服务类型"
+                            style={{width:150}}
+                            onChange={changeServer}
+                        >
+                            {
+                                [
+                                    {id:'all', title: "全部"},
+                                    {id:'gitee', title:"Gitee"},
+                                    {id:'github', title:"Github"},
+                                    {id:'gitlab', title:"Gitlab"},
+                                    {id:'gitpuk', title:"GitPuk"},
+                                    {id:'testhubo', title:"TestHubo"},
+                                    {id:'sonar', title:"Sonar"},
+                                    {id:'nexus', title:"Nexus"},
+                                    {id:'hadess', title:"Hadess"},
+                                ].map(item=>(
+                                    <Select.Option value={item.id} key={item.id}>{item.title}</Select.Option>
+                                ))
+                            }
+                        </SearchSelect>
+                    </div>
                     <div className="auth-content">
                         <Table
-                            columns={columns(activeTab)}
-                            dataSource={authServerList}
+                            columns={columns()}
+                            dataSource={authServer?.dataList || []}
                             rowKey={record=>record.serverId}
                             pagination={false}
                             locale={{emptyText: <ListEmpty />}}
+                        />
+                        <Page
+                            currentPage={requestParams.pageParam.currentPage}
+                            changPage={changPage}
+                            page={authServer}
                         />
                     </div>
                 </div>

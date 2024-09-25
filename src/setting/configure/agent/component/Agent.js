@@ -97,7 +97,7 @@ const Agent = (props) => {
             )
         },
         {
-            title:"Ip",
+            title:"IP地址",
             dataIndex:"ip",
             key:"ip",
             width:"20%",

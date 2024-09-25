@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from "react";
-import {Space,Table, Row, Col} from "antd";
+import {Space, Table, Row, Col, Select} from "antd";
 import hostStore from "../store/HostStore";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import ListAction from "../../../../common/component/list/ListAction";
 import Profile from "../../../../common/component/profile/Profile";
-import Tabs from "../../../../common/component/tabs/Tabs";
+import SearchInput from "../../../../common/component/search/SearchInput";
+import SearchSelect from "../../../../common/component/search/SearchSelect";
+import Page from "../../../../common/component/page/Page";
 import HostAddBtn from "./HostAddBtn";
+import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
 import "../../../common/Common.scss";
+
+const pageSize = 13;
 
 /**
  * 主机配置页面
@@ -18,39 +23,72 @@ import "../../../common/Common.scss";
  */
 const Host = props =>{
 
-    const {findAllAuthHostList,deleteAuthHost} = hostStore
+    const {findAuthHostPage,deleteAuthHost} = hostStore
 
-    // 弹出框状态
-    const [visible,setVisible] = useState(false)
-    // 弹出框form表单value
-    const [formValue,setFormValue] = useState(null)
-    // 主机配置类型
-    const [activeTab,setActiveTab] = useState('all')
-    // 主机列表
-    const [hostList,setHostList] = useState([])
+    //弹出框状态
+    const [visible,setVisible] = useState(false);
+    //弹出框form表单value
+    const [formValue,setFormValue] = useState(null);
+    //主机
+    const [host,setHost] = useState({});
+
+    const pageParam = {
+        pageSize:pageSize,
+        currentPage: 1,
+    }
+    //请求数据
+    const [requestParams,setRequestParams] = useState({
+        pageParam
+    });
 
     useEffect(()=>{
-        // 初始化主机配置
         findAuth()
-    },[activeTab])
+    },[requestParams])
 
     /**
      * 获取主机配置
      */
     const findAuth = () =>{
-        findAllAuthHostList(activeTab).then(r=>{
+        findAuthHostPage(requestParams).then(r=>{
             if(r.code===0){
-                setHostList(r.data || [])
+                setHost(r.data)
             }
         })
     }
 
     /**
-     * 切换主机配置
-     * @param item
+     * 模糊查询
      */
-    const clickTab = item =>{
-        setActiveTab(item.id)
+    const onSearch = e => {
+        setRequestParams({
+            ...requestParams,
+            pageParam,
+            name:e.target.value,
+        })
+    }
+
+    /**
+     * 筛选
+     */
+    const changeHost = value => {
+        setRequestParams({
+            ...requestParams,
+            pageParam,
+            type:value
+        })
+    }
+
+    /**
+     * 换页
+     */
+    const changPage = page => {
+        setRequestParams({
+            ...requestParams,
+            pageParam:{
+                pageSize:pageSize,
+                currentPage: page,
+            }
+        })
     }
 
     /**
@@ -69,17 +107,11 @@ const Host = props =>{
     const delHost = record =>{
         deleteAuthHost(record.hostId).then(r=>{
             if(r.code===0){
-                findAuth()
+                const page = deleteSuccessReturnCurrenPage(host.totalRecord,pageSize,requestParams.pageParam.currentPage)
+                changPage(page)
             }
         })
     }
-
-    const lis = [
-        {id:'all', title: "全部"},
-        {id:'common', title:"普通"},
-        {id:'aliyun', title:"aliyun"},
-        {id:'tencent', title:"腾讯云主机"}
-    ]
 
     const column = [
         {
@@ -89,14 +121,16 @@ const Host = props =>{
             width:"18%",
             ellipsis:true,
             render:text => {
-                return  <span>
-                            <ListIcon text={text}/>
-                            <span>{text}</span>
-                        </span>
+                return (
+                    <span>
+                        <ListIcon text={text}/>
+                        <span>{text}</span>
+                    </span>
+                )
             }
         },
         {
-            title:"ip地址",
+            title:"IP地址",
             dataIndex: "ip",
             key: "ip",
             width:"15%",
@@ -174,18 +208,35 @@ const Host = props =>{
                             findAuth={findAuth}
                         />
                     </BreadCrumb>
-                    <Tabs
-                        tabLis={lis}
-                        type={activeTab}
-                        onClick={clickTab}
-                    />
+                    <div className="auth-select">
+                        <SearchInput
+                            placeholder="搜索名称、IP地址"
+                            style={{ width: 190 }}
+                            onPressEnter={onSearch}
+                        />
+                        <SearchSelect
+                            placeholder="主机类型"
+                            style={{width:150}}
+                            onChange={changeHost}
+                        >
+                            <Select.Option value={null}>全部</Select.Option>
+                            <Select.Option value={'common'}>普通主机</Select.Option>
+                            <Select.Option value={'aliyun'}>阿里云主机</Select.Option>
+                            <Select.Option value={'tencent'}>腾讯云主机</Select.Option>
+                        </SearchSelect>
+                    </div>
                     <div className="auth-content">
                         <Table
                             columns={column}
-                            dataSource={hostList}
+                            dataSource={host?.dataList || []}
                             rowKey={record=>record.hostId}
                             pagination={false}
                             locale={{emptyText: <ListEmpty />}}
+                        />
+                        <Page
+                            currentPage={requestParams.pageParam.currentPage}
+                            changPage={changPage}
+                            page={host}
                         />
                     </div>
                 </div>

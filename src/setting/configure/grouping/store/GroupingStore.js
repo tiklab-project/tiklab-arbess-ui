@@ -18,8 +18,7 @@ class GroupingStore {
         const data = await Axios.post("/group/createGroup",params)
         if(data.code===0){
             message.info(`添加成功`)
-        }
-        else {
+        } else {
             message.info(`添加失败`)
         }
         return data
@@ -37,8 +36,7 @@ class GroupingStore {
         const data = await Axios.post("/group/deleteGroup",param)
         if(data.code===0){
             message.info(`删除成功`)
-        }
-        else {
+        } else {
             message.info(`删除失败`)
         }
         return data
@@ -54,8 +52,7 @@ class GroupingStore {
         const data = await Axios.post("/group/updateGroup",value)
         if(data.code===0){
             message.info(`修改成功`)
-        }
-        else {
+        } else {
             message.info(`修改失败`)
         }
         return data

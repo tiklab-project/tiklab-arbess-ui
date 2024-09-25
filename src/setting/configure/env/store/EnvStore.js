@@ -18,8 +18,7 @@ class EnvStore {
         const data = await Axios.post("/env/createEnv",params)
         if(data.code===0){
             message.info(`添加成功`)
-        }
-        else {
+        } else {
             message.info(`添加失败`)
         }
         return data
@@ -37,8 +36,7 @@ class EnvStore {
         const data = await Axios.post("/env/deleteEnv",param)
         if(data.code===0){
             message.info(`删除成功`)
-        }
-        else {
+        } else {
             message.info(`删除失败`)
         }
         return data
@@ -54,8 +52,7 @@ class EnvStore {
         const data = await Axios.post("/env/updateEnv",value)
         if(data.code===0){
             message.info(`修改成功`)
-        }
-        else {
+        } else {
             message.info(`修改失败`)
         }
         return data

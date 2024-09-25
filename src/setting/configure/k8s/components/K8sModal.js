@@ -1,16 +1,16 @@
 import React, {useEffect} from "react";
 import {Form, Input, Tooltip} from "antd";
-import Modals from "../../../common/component/modal/Modal";
-import {Validation} from "../../../common/utils/Client";
+import Modals from "../../../../common/component/modal/Modal";
+import {Validation} from "../../../../common/utils/Client";
 import {QuestionCircleOutlined} from "@ant-design/icons";
-import AuthType from "../../common/AuthType";
-import hostStore from "../../configure/host/store/HostStore";
+import AuthType from "../../../common/AuthType";
+import k8sStore from "../store/K8sStore";
 
 const K8sModal = (props) => {
 
     const {visible,setVisible,formValue,findAuth} = props
 
-    const {createAuthHost,updateAuthHost} = hostStore
+    const {createAuthHostK8s,updateAuthHostK8s} = k8sStore;
 
     const [form] = Form.useForm()
 
@@ -28,13 +28,13 @@ const K8sModal = (props) => {
                     type:'k8s',
                     ...values,
                 }
-                updateAuthHost(params).then(r=>{
+                updateAuthHostK8s(params).then(r=>{
                     if(r.code===0){
                         findAuth()
                     }
                 })
             }else {
-                createAuthHost({
+                createAuthHostK8s({
                     type:'k8s',
                     ...values,
                 }).then(r=>{

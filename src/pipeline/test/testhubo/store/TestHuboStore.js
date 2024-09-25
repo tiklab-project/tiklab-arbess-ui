@@ -2,10 +2,10 @@ import {action} from "mobx";
 import {Axios} from "thoughtware-core-ui";
 import {message} from "antd";
 
-class TestRuboStore {
+class TestHuboStore {
 
     /**
-     * 获取testrubo测试空间
+     * 获取testhubo测试空间
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -39,7 +39,7 @@ class TestRuboStore {
     }
 
     /**
-     * 获取testrubo测试计划
+     * 获取testhubo测试计划
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -56,7 +56,7 @@ class TestRuboStore {
     }
 
     /**
-     * 获取testrubo自动化测试列表
+     * 获取testhubo自动化测试列表
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -67,7 +67,7 @@ class TestRuboStore {
     }
 
     /**
-     * 删除testrubo自动化测试
+     * 删除testhubo自动化测试
      * @param value
      * @returns {Promise<unknown>}
      */
@@ -86,5 +86,5 @@ class TestRuboStore {
 
 }
 
-const testRuboStore = new TestRuboStore();
-export default testRuboStore
+const testHuboStore = new TestHuboStore();
+export default testHuboStore

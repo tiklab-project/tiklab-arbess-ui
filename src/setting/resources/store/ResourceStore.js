@@ -32,7 +32,6 @@ class ResourceStore {
         return await Axios.post("/disk/findDiskList")
     }
 
-
     /**
      * 清理磁盘空间
      */
@@ -41,8 +40,11 @@ class ResourceStore {
         const param = new FormData();
         param.append("fileList",value.fileList)
         const data = await Axios.post("/disk/cleanDisk",param)
-        if(data.code===0){message.info("清理成功")}
-        else {message.info("清理失败")}
+        if(data.code===0){
+            message.info("清理成功")
+        } else {
+            message.info("清理失败")
+        }
         return data
     }
 

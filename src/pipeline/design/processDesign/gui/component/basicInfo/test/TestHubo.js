@@ -3,20 +3,20 @@ import {Select} from "antd";
 import {observer} from "mobx-react";
 import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
-import testRuboStore from "../../../../../../test/testrubo/store/TestRuboStore";
+import testHuboStore from "../../../../../../test/testhubo/store/TestHuboStore";
 
 /**
- * TestRubo接口测试
+ * TestHubo接口测试
  * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-const TestRubo = props => {
+const TestHubo = props => {
 
     const {taskStore} = props
 
     const {updateTask,dataItem} = taskStore
-    const {findTestSpace,findTestEnv,findTestPlan} = testRuboStore
+    const {findTestSpace,findTestEnv,findTestPlan} = testHuboStore
 
     // 推送地址获取加载状态
     const [isSpin,setSpin] = useState(false);
@@ -168,5 +168,5 @@ const TestRubo = props => {
     )
 }
 
-export default observer(TestRubo)
+export default observer(TestHubo)
 

@@ -15,6 +15,7 @@ import pip_message from "../../../../../assets/images/svg/pip_message.svg";
 import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
+import pip_nexus from "../../../../../assets/images/svg/pip_nexus.svg";
 import {productImg} from "thoughtware-core-ui";
 
 /**
@@ -32,7 +33,7 @@ export const taskTitle = type =>{
         case 'svn':  return "SVN"
         case 'gitpuk':  return "GitPuk"
         case 'maventest': return "Maven单元测试"
-        case 'testrubo': return "TestRubo自动化测试"
+        case 'testhubo': return "TestHubo自动化测试"
         case 'maven': return "Maven构建"
         case 'nodejs': return "Node.Js构建"
         case 'build_docker': return "Docker构建"
@@ -72,7 +73,7 @@ export const TaskIcon = props =>{
             case 'svn':  return pip_svn
             case 'gitpuk':  return productImg.gitpuk
             case 'maventest': return pip_ceshi
-            case 'testrubo': return productImg.testrubo
+            case 'testhubo': return productImg.testhubo
             case 'maven': return maven
             case 'nodejs': return pip_nodejs
             case 'build_docker': return pip_docker
@@ -90,6 +91,8 @@ export const TaskIcon = props =>{
             case 'message': return pip_message
             case 'script': return pip_shell
             case 'post': return pip_post
+            case 'hadess': return productImg.hadess
+            case 'nexus': return pip_nexus
         }
     }
 
@@ -98,24 +101,6 @@ export const TaskIcon = props =>{
     )
 
 }
-
-/**
- * task的标题&&图标
- */
-export const TaskTitleIcon = props =>{
-
-    const {type} = props
-
-    return (
-        <>
-            <TaskIcon type={type} width={20} height={22}/>
-            <span style={{paddingLeft:8}}>
-                { taskTitle(type) }
-            </span>
-        </>
-    )
-}
-
 
 export const HeadlineTitle = type =>{
     switch (type) {
@@ -130,7 +115,7 @@ export const HeadlineTitle = type =>{
         case 'spotbugs':
             return '代码扫描'
         case 'maventest':
-        case 'testrubo':
+        case 'testhubo':
             return '测试'
         case 'maven':
         case 'nodejs':

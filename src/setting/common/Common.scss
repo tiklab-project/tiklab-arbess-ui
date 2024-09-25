@@ -3,12 +3,18 @@
     height: 100%;
     overflow: auto;
     .auth-content{
-        padding-top: var(--thoughtware-padding);
+        padding-top: var(--thoughtware-padding-item);
         .ant-avatar{
             width: 22px;
             height: 22px;
             font-size: 12px;
         }
+    }
+    .auth-select{
+        padding-top: var(--thoughtware-padding-item);
+        display: flex;
+        align-items: center;
+        gap: 15px;
     }
 }
 
@@ -42,6 +48,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        .host-group-add-title-label{
+            font-size: 13px;
+            color: #777;
+            font-weight: 600;
+        }
     }
 }
 

@@ -30,8 +30,7 @@ class AuthorizeStore {
         if(data.code===0){
             this.skin = false
             message.success("授权成功")
-        }
-        else {
+        } else {
             this.skin = false
             message.info(data.msg)
         }

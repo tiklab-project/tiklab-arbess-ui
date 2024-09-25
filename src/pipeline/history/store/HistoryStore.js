@@ -146,8 +146,7 @@ class HistoryStore {
                 totalPage:data.data.totalPage,
                 totalRecord:data.data.totalRecord,
             }
-        }
-        else{
+        } else{
             this.historyList = []
             this.page = {
                 currentPage:1,

@@ -26,10 +26,8 @@ class HostStore {
      * @returns {Promise<*>}
      */
     @action
-    findAllAuthHostList = async value =>{
-        const param = new FormData()
-        param.append("type",value)
-        return await Axios.post("/authHost/findAllAuthHostList", param)
+    findAuthHostList = async value =>{
+        return await Axios.post("/authHost/findAuthHostList", value)
     }
 
     /**
@@ -54,8 +52,7 @@ class HostStore {
         const data = await Axios.post("/authHost/deleteAuthHost",param)
         if(data.code===0){
             message.info(`删除成功`)
-        }
-        else {
+        } else {
             message.info(`删除失败`)
         }
         return data
@@ -71,8 +68,7 @@ class HostStore {
         const data = await Axios.post("/authHost/updateAuthHost",value)
         if(data.code===0){
             message.info(`修改成功`)
-        }
-        else {
+        } else {
             message.info(`修改失败`)
         }
         return data

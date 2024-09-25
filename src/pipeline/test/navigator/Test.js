@@ -18,7 +18,7 @@ const Test = (props) => {
             children: [
                 {
                     id: `/pipeline/${pipelineId}/test/maven`,
-                    title: 'Maven单元测试',
+                    title: 'Maven',
                 }
             ]
         },
@@ -27,8 +27,8 @@ const Test = (props) => {
             title: '自动化测试',
             children: [
                 {
-                    id: `/pipeline/${pipelineId}/test/testRubo`,
-                    title: 'TestRubo自动化测试',
+                    id: `/pipeline/${pipelineId}/test/testHubo`,
+                    title: 'TestHubo',
                 }
             ]
         },

@@ -39,10 +39,7 @@ const HostGroupAddHost = (props) => {
     },[hostParams])
 
     const findHost = () =>{
-        findAuthHostPage({
-            ...hostParams,
-            type:'all'
-        }).then(res=>{
+        findAuthHostPage(hostParams).then(res=>{
             if(res.code===0){
                 setHostList(res.data?.dataList || [])
                 setHostPage({
@@ -75,7 +72,6 @@ const HostGroupAddHost = (props) => {
         setHostParams({
             pageParam,
             name:e.target.value,
-            ip:e.target.value,
         })
     }
 
@@ -164,7 +160,7 @@ const HostGroupAddHost = (props) => {
     const hostAddMenu = (
         <div className='host-group-add-drop'>
             <SearchInput
-                placeholder={"搜索名称，ip地址"}
+                placeholder={"搜索名称，IP地址"}
                 onPressEnter={changFindHost}
             />
             <div className='host-group-host-table'>
@@ -183,7 +179,7 @@ const HostGroupAddHost = (props) => {
                             ellipsis:true,
                         },
                         {
-                            title:"ip地址",
+                            title:"IP地址",
                             dataIndex:"ip",
                             key:"ip",
                             width:140,
@@ -210,7 +206,7 @@ const HostGroupAddHost = (props) => {
     return (
         <div className="host-group-host-add">
             <div className="host-group-add-title" style={{rowGap:'0'}}>
-                <div>
+                <div className='host-group-add-title-label'>
                     主机
                 </div>
                 <Dropdown
@@ -222,10 +218,7 @@ const HostGroupAddHost = (props) => {
                     getPopupContainer={e=>e.parentElement}
                     overlayStyle={{width:300}}
                 >
-                    <Btn
-                        type={"link-nopadding"}
-                        title={"添加主机"}
-                    />
+                    <Btn type={"link-nopadding"} title={"添加主机"}/>
                 </Dropdown>
             </div>
             <div>
@@ -240,7 +233,7 @@ const HostGroupAddHost = (props) => {
                             ellipsis:true,
                         },
                         {
-                            title:"ip地址",
+                            title:"IP地址",
                             dataIndex: "ip",
                             key: "ip",
                             width:"30%",

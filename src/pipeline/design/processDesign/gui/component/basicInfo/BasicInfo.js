@@ -8,7 +8,7 @@ import CodeThird from "./code/CodeThird";
 import ScanSonarQuebe from "./scan/ScanSonarQuebe";
 import ScanSpotbugs from "./scan/ScanSpotbugs";
 import TestMvnUnit from "./test/TestMvnUnit";
-import TestRubo from "./test/TestRubo";
+import TestHubo from "./test/TestHubo";
 import BuildMaven from "./build/BuildMaven";
 import BuildNode from "./build/BuildNode";
 import BuildDocker from "./build/BuildDocker";
@@ -71,7 +71,7 @@ const BasicInfo = props => {
                     putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
                 })
                 break
-            case 'testrubo':
+            case 'testHubo':
                 form.setFieldsValue({
                     taskName:taskName,
                     testSpace:task?.testSpace?.name,
@@ -83,9 +83,7 @@ const BasicInfo = props => {
                 })
                 break
             default:
-                form.setFieldsValue({
-                    taskName: taskName
-                })
+                form.setFieldsValue({taskName: taskName})
         }
         form.validateFields().then()
     },[dataItem?.task])
@@ -106,8 +104,8 @@ const BasicInfo = props => {
                 return <CodeThird {...props}/>
             case 'maventest':
                 return <TestMvnUnit {...props}/>
-            case 'testrubo':
-                return <TestRubo {...props}/>
+            case 'testHubo':
+                return <TestHubo {...props}/>
             case 'nodejs':
                 return <BuildNode {...props}/>
             case 'maven':

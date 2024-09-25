@@ -4,11 +4,12 @@ import {Select,Divider} from "antd";
 import ServerAddBtn from "../../../../../../setting/server/components/ServerAddBtn";
 import AuthAddBtn from "../../../../../../setting/configure/auth/components/AuthAddBtn";
 import HostAddBtn from "../../../../../../setting/configure/host/component/HostAddBtn";
-import K8sAddBtn from "../../../../../../setting/k8s/components/K8sAddBtn";
+import K8sAddBtn from "../../../../../../setting/configure/k8s/components/K8sAddBtn";
 import authStore from "../../../../../../setting/configure/auth/store/AuthStore";
 import hostStore from "../../../../../../setting/configure/host/store/HostStore";
 import hostGroupStore from "../../../../../../setting/configure/host/store/HostGroupStore";
 import serverStore from "../../../../../../setting/server/store/ServerStore";
+import k8sStore from "../../../../../../setting/configure/k8s/store/K8sStore";
 import FormsSelect from "./FormsSelect";
 
 /**
@@ -24,8 +25,9 @@ const FormsAuth = props =>{
 
     const {findAllAuth} = authStore;
     const {findAuthServerList} = serverStore;
-    const {findAllAuthHostList} = hostStore;
+    const {findAuthHostList} = hostStore;
     const {findHostGroupList} = hostGroupStore;
+    const {findAuthHostK8sList} = k8sStore;
     const {updateTask,dataItem} = taskStore;
 
     //弹出框
@@ -54,7 +56,7 @@ const FormsAuth = props =>{
             case 'github':
             case 'gitlab':
             case 'gitpuk':
-            case 'testrubo':
+            case 'testhubo':
             case 'sonar':
                 finsServer(taskType)
                 break
@@ -92,7 +94,7 @@ const FormsAuth = props =>{
      */
     const findHost = async () => {
         const hostGroupRes = await findHostGroupList();
-        const hostRes = await findAllAuthHostList('all');
+        const hostRes = await findAuthHostList({});
         Promise.all([hostGroupRes,hostRes]).then(res=>{
             const filterRes = res.filter(item=>item.code ===0).map(li => li.data).flat();
             setList(filterRes)
@@ -103,7 +105,7 @@ const FormsAuth = props =>{
      * 获取K8s
      */
     const findK8sHost = () => {
-        findAllAuthHostList('k8s').then(res=>{
+        findAuthHostK8sList({}).then(res=>{
             if(res.code===0){
                 setList(res.data)
             }
@@ -115,7 +117,7 @@ const FormsAuth = props =>{
      * @param serverType
      */
     const finsServer = (serverType) => {
-        findAuthServerList(serverType).then(res=>{
+        findAuthServerList({type:serverType}).then(res=>{
             if(res.code===0){
                 setList(res.data)
             }
@@ -144,7 +146,7 @@ const FormsAuth = props =>{
             case 'gitlab':
                 return "授权信息"
             case 'gitpuk':
-            case 'testrubo':
+            case 'testhubo':
             case 'sonar':
                 return "服务地址"
             case 'liunx':
@@ -177,7 +179,7 @@ const FormsAuth = props =>{
             case 'github':
             case 'gitlab':
             case 'gitpuk':
-            case 'testrubo':
+            case 'testhubo':
             case 'sonar':
                 return item.serverId
             case 'liunx':
@@ -212,7 +214,7 @@ const FormsAuth = props =>{
             case 'svn':
                 return <AuthAddBtn {...commonProps}/>
             case 'gitpuk':
-            case 'testrubo':
+            case 'testhubo':
                 return version === 'cloud' ? null : <ServerAddBtn type={taskType} {...commonProps}/>;
             case 'gitee':
             case 'github':
@@ -251,7 +253,7 @@ const FormsAuth = props =>{
         switch (taskType) {
             case 'git':
             case 'svn':
-            case 'testrubo':
+            case 'testhubo':
             case 'gitpuk':
                 return `${item.name}(${item.authType === 1 ? item.username : "私钥"})`;
             case 'gitee':

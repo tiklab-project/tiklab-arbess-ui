@@ -51,7 +51,7 @@ const TaskAdd = props =>{
             title:"测试",
             desc:[
                 {type: 'maventest'},
-                {type: 'testrubo'}
+                {type: 'testhubo'}
             ]
         },
         {

@@ -48,7 +48,7 @@ const ListAction = ({edit,del}) =>{
                     <Tooltip title="更多">
                         <span className="del" style={{cursor:"pointer"}}>
                             <img src={pip_more} width={18} alt={'更多'}/>
-                       </span>
+                        </span>
                     </Tooltip>
                 </Dropdown>
             }

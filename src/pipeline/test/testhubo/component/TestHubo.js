@@ -6,19 +6,19 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Page from "../../../../common/component/page/Page";
 import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
 import ListAction from "../../../../common/component/list/ListAction";
-import testRuboStore from "../store/TestRuboStore";
-import "./TestRubo.scss";
+import testhuboStore from "../store/TestHuboStore";
+import "./TestHubo.scss";
 
 const pageSize = 15;
 
 /**
  * 测试页面
  */
-const TestRubo = props => {
+const TestHubo = props => {
 
     const {match:{params}} = props
 
-    const {findAllRelevance,deleteRelevance} = testRuboStore;
+    const {findAllRelevance,deleteRelevance} = testhuboStore;
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(true)
@@ -59,7 +59,7 @@ const TestRubo = props => {
      * 查看测试详情
      * @param item
      */
-    const goTestRubo = item => {
+    const goTestHubo = item => {
         if(item.status===2){
             return message.info("当前测试报告详情已删除")
         }
@@ -102,7 +102,7 @@ const TestRubo = props => {
             ellipsis:true,
             render:(text,record) =>{
                 return (
-                    <span className="test-item-name" onClick={()=>goTestRubo(record)}>
+                    <span className="test-item-name" onClick={()=>goTestHubo(record)}>
                         # {text || '--'}
                     </span>
                 )
@@ -181,7 +181,7 @@ const TestRubo = props => {
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"TestRubo自动化测试"}/>
+                    <BreadCrumb firstItem={"TestHubo自动化测试"}/>
                     <div className='test-table'>
                         <Table
                             bordered={false}
@@ -204,4 +204,4 @@ const TestRubo = props => {
     )
 }
 
-export default TestRubo
+export default TestHubo

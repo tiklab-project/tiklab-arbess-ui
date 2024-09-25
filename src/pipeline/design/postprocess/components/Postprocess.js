@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {Col, Row, Table} from "antd";
 import {inject,observer} from "mobx-react";
 import PostprocessAddEdit from "./PostprocessAddEdit";
-import {TaskTitleIcon} from "../../processDesign/gui/component/TaskTitleIcon";
+import {TaskIcon, taskTitle} from "../../processDesign/gui/component/TaskTitleIcon";
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
@@ -93,7 +93,12 @@ const Postprocess = props =>{
             dataIndex: "taskType",
             key: "taskType",
             width:"30%",
-            render:(text,record)=> <TaskTitleIcon type={text}/>
+            render:(text,record)=> (
+                <>
+                    <TaskIcon type={text} width={20} height={20}/>
+                    <span style={{paddingLeft:5}}>{ taskTitle(text) }</span>
+                </>
+            )
         },
         {
             title: "操作",

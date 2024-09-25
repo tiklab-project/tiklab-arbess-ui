@@ -27,8 +27,7 @@ class TestMavenStore {
         const data = await Axios.post('/maven/test/deleteMavenTest',param)
         if(data.code===0){
             message.info('删除成功')
-        }
-        else {
+        } else {
             message.info('删除失败')
         }
         return data

@@ -41,8 +41,7 @@ class HostGroupStore {
         const res = await Axios.post("/authHostGroup/updateAuthHostGroup",params)
         if(res.code===0){
             message.info(`修改成功`)
-        }
-        else {
+        } else {
             message.info(`修改失败`)
         }
         return res
@@ -59,8 +58,7 @@ class HostGroupStore {
         const res = await Axios.post("/authHostGroup/deleteAuthHostGroup",params)
         if(res.code===0){
             message.info(`删除成功`)
-        }
-        else {
+        } else {
             message.info(`删除失败`)
         }
         return res

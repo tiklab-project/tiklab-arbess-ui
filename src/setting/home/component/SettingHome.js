@@ -81,7 +81,7 @@ const SettingHome = props => {
 
     const goAuth = () => {
         if(version==='cloud'){
-            return applyJump('https://work.cloud.thoughtware.cn/#/enterprise/auth/arbess')
+            return applyJump('https://work.cloud.tiklab.net/#/enterprise/auth/arbess')
         }
         props.history.push(`/setting/productAuth`)
     }

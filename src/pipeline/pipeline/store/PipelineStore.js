@@ -73,8 +73,7 @@ export class PipelineStore {
             }).then(res=>{
                 if(res.code===0){
                     message.info("创建成功")
-                }
-                else {
+                } else {
                     message.info("创建失败")
                 }
                 resolve(res)
@@ -98,8 +97,7 @@ export class PipelineStore {
             Axios.post("/pipeline/deletePipeline",param).then(res=>{
                 if(res.code===0){
                     message.info("删除成功")
-                }
-                else {
+                } else {
                     message.info("删除失败")
                 }
                 resolve(res)
@@ -121,8 +119,7 @@ export class PipelineStore {
             Axios.post("/pipeline/updatePipeline",values).then(res=>{
                 if(res.code===0){
                     message.info("更新成功")
-                }
-                else{
+                } else{
                     message.info("更新失败")
                 }
                 resolve(res)

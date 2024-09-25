@@ -1,5 +1,5 @@
 import React from "react";
-import Btn from "../../../common/component/btn/Btn";
+import Btn from "../../../../common/component/btn/Btn";
 import K8sModal from "./K8sModal";
 
 

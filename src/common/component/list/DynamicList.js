@@ -29,7 +29,12 @@ const DynamicList = props =>{
                 {
                     loggingList && loggingList.map(logItem=>{
                         const {actionType,action,user,createTime,data,id} = logItem
-                        const dataObj = data && JSON.parse(data)
+                        let dataObj;
+                        try {
+                            dataObj = data && JSON.parse(data);
+                        } catch (error) {
+                            dataObj = {};
+                        }
                         return (
                             <div key={id} className='dynamic-item-log arbess-user-avatar' >
                                 <div className='dynamic-item-log-time'>

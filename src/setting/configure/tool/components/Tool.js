@@ -6,7 +6,7 @@ import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
-import {TaskTitleIcon} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
+import {TaskIcon,taskTitle} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import "../../../common/Common.scss";
 
@@ -90,12 +90,19 @@ const Tool = props =>{
             width:"25%",
             ellipsis:true,
             render:text =>{
-                switch (text) {
-                    case 1:  return <TaskTitleIcon type='git'/>
-                    case 5:  return <TaskTitleIcon type='svn'/>
-                    case 21: return <TaskTitleIcon type='maven'/>
-                    case 22: return <TaskTitleIcon type='nodejs'/>
-                }
+                const taskMap = {
+                    1: 'git',
+                    5: 'svn',
+                    21: 'maven',
+                    22: 'nodejs'
+                };
+                const taskType = taskMap[text];
+                return (
+                    <>
+                        <TaskIcon type={taskType} width={20} height={20}/>
+                        <span style={{paddingLeft:5}}>{ taskTitle(taskType) }</span>
+                    </>
+                )
             }
         },
         {

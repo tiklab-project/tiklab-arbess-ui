@@ -8,6 +8,8 @@ import AsyncComponent from "./common/lazy/SyncComponent";
 const Index=AsyncComponent(()=>import("./common/layout/Layout"))
 
 const Login=AsyncComponent(()=>import("./login/Login"))
+const LoginRpw=AsyncComponent(()=>import("./login/LoginRpw"))
+
 const Logout=AsyncComponent(()=>import("./login/Logout"))
 const ExcludeProductUser=AsyncComponent(()=>import("./login/ExcludeProductUser"))
 const NotFound=AsyncComponent(()=>import("./login/NotFound"))
@@ -36,7 +38,7 @@ const Authorize=AsyncComponent(()=>import("./pipeline/authorize/Authorize"))
 const History=AsyncComponent(()=>import("./pipeline/history/components/History"))
 const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/HistoryInstance"))
 const Test=AsyncComponent(()=>import("./pipeline/test/navigator/Test"))
-const TestRubo=AsyncComponent(()=>import("./pipeline/test/testrubo/component/TestRubo"))
+const TestHubo=AsyncComponent(()=>import("./pipeline/test/testhubo/component/TestHubo"))
 const TestMaven=AsyncComponent(()=>import("./pipeline/test/maven/component/TestMaven"))
 const TestScan=AsyncComponent(()=>import("./pipeline/test/scan/component/Scan"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
@@ -59,7 +61,7 @@ const Grouping=AsyncComponent(()=>import("./setting/configure/grouping/component
 const Env=AsyncComponent(()=>import("./setting/configure/env/component/Env"))
 const Agent=AsyncComponent(()=>import('./setting/configure/agent/component/Agent'))
 const Server=AsyncComponent(()=>import("./setting/server/components/Server"))
-const K8s=AsyncComponent(()=>import('./setting/k8s/components/K8s'))
+const K8s=AsyncComponent(()=>import('./setting/configure/k8s/components/K8s'))
 
 // plugin
 const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
@@ -122,6 +124,7 @@ export {
 
     Index,
     Login,
+    LoginRpw,
     Logout,
     ExcludeProductUser,
     NotFound,
@@ -148,7 +151,7 @@ export {
 
     Test,
     TestScan,
-    TestRubo,
+    TestHubo,
     TestMaven,
 
     Statistics,
