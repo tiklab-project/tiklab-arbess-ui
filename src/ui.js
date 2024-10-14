@@ -63,9 +63,6 @@ const Agent=AsyncComponent(()=>import('./setting/configure/agent/component/Agent
 const Server=AsyncComponent(()=>import("./setting/server/components/Server"))
 const K8s=AsyncComponent(()=>import('./setting/configure/k8s/components/K8s'))
 
-// plugin
-const Plugin=AsyncComponent(()=>import("./setting/plugins/Plugin"))
-
 // message
 const MessageSendType=AsyncComponent(()=>import("./setting/message/MessageSendType"))
 const MessageNotice=AsyncComponent(()=>import("./setting/message/MessageNotice"))
@@ -179,7 +176,6 @@ export {
     Server,
     K8s,
 
-    Plugin,
     MessageSendType,
     MessageNotice,
     MyLog,

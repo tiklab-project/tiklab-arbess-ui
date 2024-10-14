@@ -1,6 +1,6 @@
 .pipelineTable{
     .pipelineTable-name:hover{
-        color: var(--thoughtware-blue);
+        color: var(--tiklab-blue);
         cursor: pointer;
     }
     .pipelineTable-action,.pipeline-number{
@@ -8,7 +8,7 @@
     }
     .pipeline-number{
         display: inline-block;
-        color: var(--thoughtware-blue);
+        color: var(--tiklab-blue);
         padding: 3px 10px;
         background: #eeeff9;
         border-radius: 30px;
@@ -19,7 +19,7 @@
         }
     }
     .actions-se{
-        font-size: var(--thoughtware-font-16);
+        font-size: var(--tiklab-font-16);
     }
 
     .imgs{

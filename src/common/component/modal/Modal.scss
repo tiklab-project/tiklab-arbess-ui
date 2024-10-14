@@ -4,14 +4,14 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
-        padding: var(--thoughtware-padding) var(--thoughtware-padding) 0;
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0;
         &>div:first-child{
             font-size: 15px;
-            font-weight: var(--thoughtware-font-weight-bold);
+            font-weight: var(--tiklab-font-weight-bold);
         }
     }
     .arbess-modal-content{
-        padding: 0 var(--thoughtware-padding);
+        padding: 0 var(--tiklab-padding);
         min-height: 50px;
         max-height:calc(100% - 120px);
         overflow:auto;

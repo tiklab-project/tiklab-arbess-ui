@@ -3,7 +3,7 @@
     height: 100%;
     overflow: auto;
     .auth-content{
-        padding-top: var(--thoughtware-padding-item);
+        padding-top: var(--tiklab-padding-item);
         .ant-avatar{
             width: 22px;
             height: 22px;
@@ -11,7 +11,7 @@
         }
     }
     .auth-select{
-        padding-top: var(--thoughtware-padding-item);
+        padding-top: var(--tiklab-padding-item);
         display: flex;
         align-items: center;
         gap: 15px;
@@ -58,7 +58,7 @@
 
 .env-table-ban,.grouping-table-ban{
     .text-ban{
-        color: var(--thoughtware-gray-500);
+        color: var(--tiklab-gray-500);
         font-size: 16px;
         &:first-child{
             margin-right: 15px;
@@ -72,7 +72,7 @@
         font-size: 12px;
     }
     &-success{
-        color: var(--thoughtware-blue);
+        color: var(--tiklab-blue);
     }
     &-danger{
         color: #666666;

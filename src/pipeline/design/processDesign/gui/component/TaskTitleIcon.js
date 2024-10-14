@@ -16,7 +16,7 @@ import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
 import pip_nexus from "../../../../../assets/images/svg/pip_nexus.svg";
-import {productImg} from "thoughtware-core-ui";
+import {productImg} from "tiklab-core-ui";
 
 /**
  * task的标题

@@ -1,5 +1,5 @@
 import React from "react";
-import {MyTodoTask} from "thoughtware-message-ui";
+import {MyTodoTask} from "tiklab-message-ui";
 
 /**
  * 待办

@@ -2,11 +2,11 @@
     .trigger-up{
         display: flex;
         align-items: center;
-        padding-bottom: var(--thoughtware-padding-item);
-        font-size: var(--thoughtware-font-13);
+        padding-bottom: var(--tiklab-padding-item);
+        font-size: var(--tiklab-font-13);
         .trigger-up-num{
             flex: 1;
-            margin-right: var(--thoughtware-padding-item);
+            margin-right: var(--tiklab-padding-item);
         }
     }
     .trigger-data-time .data-time-line{
@@ -39,7 +39,7 @@
             }
         }
         &-desc {
-            border: 1px solid var(--thoughtware-gray-200);
+            border: 1px solid var(--tiklab-gray-200);
             border-radius: 4px;
             margin-bottom: 12px;
             width: 214px;
@@ -63,7 +63,7 @@
         }
 
         &-select {
-            border-color: var(--thoughtware-blue);
+            border-color: var(--tiklab-blue);
         }
 
         &-type {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BackupRestore} from 'thoughtware-security-ui';
+import {BackupRestore} from 'tiklab-security-ui';
 
 /**
  * 备份与恢复

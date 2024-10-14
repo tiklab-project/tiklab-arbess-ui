@@ -1,6 +1,6 @@
 .pipelineReDel{
     .pipelineReDel-up{
-        padding-bottom: var(--thoughtware-padding-item);
+        padding-bottom: var(--tiklab-padding-item);
     }
     .pipelineReDel-ul{
         border-radius: 4px;
@@ -25,17 +25,17 @@
             line-height: 16px;
             margin-right: 10px;
             margin-top: 4px;
-            font-weight: var(--thoughtware-font-weight-bold);
+            font-weight: var(--tiklab-font-weight-bold);
         }
         .pipelineReDel-li-center{
             flex-grow: 1;
         }
         .pipelineReDel-li-title{
-            font-weight: var(--thoughtware-font-weight-bold);
+            font-weight: var(--tiklab-font-weight-bold);
         }
         .pipelineReDel-li-desc{
-            font-size: var(--thoughtware-font-13);
-            color: var(--thoughtware-gray-500);
+            font-size: var(--tiklab-font-13);
+            color: var(--tiklab-gray-500);
         }
         .pipelineReDel-li-down{
             align-self: center;

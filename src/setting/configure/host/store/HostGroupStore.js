@@ -1,5 +1,5 @@
 import {action} from "mobx";
-import {Axios,getUser} from "thoughtware-core-ui";
+import {Axios,getUser} from "tiklab-core-ui";
 import {message} from "antd";
 
 class HostGroupStore {

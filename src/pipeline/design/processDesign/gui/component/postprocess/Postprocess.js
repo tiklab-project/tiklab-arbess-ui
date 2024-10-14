@@ -7,7 +7,7 @@ import {
     CaretDownOutlined
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import {getUser} from "thoughtware-core-ui";
+import {getUser} from "tiklab-core-ui";
 import Btn from "../../../../../../common/component/btn/Btn";
 import {Validation} from "../../../../../../common/utils/Client";
 import ListEmpty from "../../../../../../common/component/list/ListEmpty";

@@ -2,11 +2,11 @@
     .post-pose-up{
         display: flex;
         align-items: center;
-        padding-bottom: var(--thoughtware-padding-item);
-        font-size: var(--thoughtware-font-13);
+        padding-bottom: var(--tiklab-padding-item);
+        font-size: var(--tiklab-font-13);
         .post-pose-up-num{
             flex: 1;
-            margin-right: var(--thoughtware-padding-item);
+            margin-right: var(--tiklab-padding-item);
         }
     }
 }
@@ -36,10 +36,10 @@
         padding-top: 8px;
     }
     .postprocess-modal-up{
-        padding: var(--thoughtware-padding) var(--thoughtware-padding) 0 ;
+        padding: var(--tiklab-padding) var(--tiklab-padding) 0 ;
     }
     .postprocess-modal-content{
-        padding: 0 var(--thoughtware-padding);
+        padding: 0 var(--tiklab-padding);
         max-height:calc(100% - 120px);
         overflow:auto;
         .CodeMirror{

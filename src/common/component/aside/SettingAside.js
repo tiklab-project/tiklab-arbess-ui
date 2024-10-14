@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {DownOutlined, HomeOutlined, ProjectOutlined, UpOutlined} from "@ant-design/icons";
-import {SystemNav,PrivilegeButton} from "thoughtware-privilege-ui";
-import {applyJump, disableFunction} from 'thoughtware-core-ui';
+import {SystemNav,PrivilegeButton} from "tiklab-privilege-ui";
+import {applyJump, disableFunction} from 'tiklab-core-ui';
 import {inject,observer} from "mobx-react";
 import  {ExportOutlined} from "@ant-design/icons";
 import feature from '../../../assets/images/pip_feature.png';

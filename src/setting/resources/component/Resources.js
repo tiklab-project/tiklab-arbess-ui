@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {message, Row, Col, Radio, Space} from 'antd';
-import {disableFunction,applySubscription} from "thoughtware-core-ui";
+import {disableFunction,applySubscription} from "tiklab-core-ui";
 import Modals from "../../../common/component/modal/Modal";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import {SpinLoading} from "../../../common/component/loading/Loading";

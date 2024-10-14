@@ -1,7 +1,7 @@
 .arbess-search-select{
   display: inline-block;
   .ant-select{
-    background-color: var(--thoughtware-gray);
+    background-color: var(--tiklab-gray);
     border-radius: 4px;
     cursor: pointer;
     &:hover{
@@ -20,7 +20,7 @@
   border-radius: 4px !important;
   height: 32px;
   cursor: pointer;
-  background-color: var(--thoughtware-gray) !important;
+  background-color: var(--tiklab-gray) !important;
   input{
     cursor: pointer;
   }
@@ -32,7 +32,7 @@
 .arbess-search-picker{
   display: inline-block;
   .ant-picker.ant-picker-borderless{
-    background-color: var(--thoughtware-gray) !important;
+    background-color: var(--tiklab-gray) !important;
     border-radius: 4px;
     cursor: pointer;
     &:hover{

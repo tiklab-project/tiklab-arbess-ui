@@ -15,7 +15,7 @@ module.exports = {
         }],
 
         ["import", {
-            "libraryName": "thoughtware-plugin-manager-ui",
+            "libraryName": "tiklab-eam-ui",
             "libraryDirectory": "es",
             "style": true,
             "customName": (name) => {
@@ -29,12 +29,12 @@ module.exports = {
                     const name = UpBit + lowBit
                     return total += name;
                 },'');
-                return `thoughtware-plugin-manager-ui/es/${fullName}`;
+                return `tiklab-eam-ui/es/${fullName}`;
             }
-        }, "thoughtware-plugin-manager-ui"],
+        },"tiklab-eam-ui"],
 
         ["import", {
-            "libraryName": "thoughtware-eam-ui",
+            "libraryName": "tiklab-privilege-ui",
             "libraryDirectory": "es",
             "style": true,
             "customName": (name) => {
@@ -48,12 +48,12 @@ module.exports = {
                     const name = UpBit + lowBit
                     return total += name;
                 },'');
-                return `thoughtware-eam-ui/es/${fullName}`;
+                return `tiklab-privilege-ui/es/${fullName}`;
             }
-        },"thoughtware-eam-ui"],
+        },"tiklab-privilege-ui"],
 
         ["import", {
-            "libraryName": "thoughtware-privilege-ui",
+            "libraryName": "tiklab-user-ui",
             "libraryDirectory": "es",
             "style": true,
             "customName": (name) => {
@@ -67,12 +67,12 @@ module.exports = {
                     const name = UpBit + lowBit
                     return total += name;
                 },'');
-                return `thoughtware-privilege-ui/es/${fullName}`;
+                return `tiklab-user-ui/es/${fullName}`;
             }
-        },"thoughtware-privilege-ui"],
+        },"tiklab-user-ui"],
 
         ["import", {
-            "libraryName": "thoughtware-user-ui",
+            "libraryName": "tiklab-message-ui",
             "libraryDirectory": "es",
             "style": true,
             "customName": (name) => {
@@ -86,12 +86,12 @@ module.exports = {
                     const name = UpBit + lowBit
                     return total += name;
                 },'');
-                return `thoughtware-user-ui/es/${fullName}`;
+                return `tiklab-message-ui/es/${fullName}`;
             }
-        },"thoughtware-user-ui"],
+        }, "tiklab-message-ui"],
 
         ["import", {
-            "libraryName": "thoughtware-message-ui",
+            "libraryName": "tiklab-security-ui",
             "libraryDirectory": "es",
             "style": true,
             "customName": (name) => {
@@ -105,12 +105,12 @@ module.exports = {
                     const name = UpBit + lowBit
                     return total += name;
                 },'');
-                return `thoughtware-message-ui/es/${fullName}`;
+                return `tiklab-security-ui/es/${fullName}`;
             }
-        }, "thoughtware-message-ui"],
+        }, "tiklab-security-ui"],
 
         ["import", {
-            "libraryName": "thoughtware-security-ui",
+            "libraryName": "tiklab-licence-ui",
             "libraryDirectory": "es",
             "style": true,
             "customName": (name) => {
@@ -124,28 +124,9 @@ module.exports = {
                     const name = UpBit + lowBit
                     return total += name;
                 },'');
-                return `thoughtware-security-ui/es/${fullName}`;
+                return `tiklab-licence-ui/es/${fullName}`;
             }
-        }, "thoughtware-security-ui"],
-
-        ["import", {
-            "libraryName": "thoughtware-licence-ui",
-            "libraryDirectory": "es",
-            "style": true,
-            "customName": (name) => {
-                let split = name.split('-');
-                const fullName = split.reduce((total, currentValue, currentIndex, arr) => {
-                    if(currentIndex=== 0) {
-                        return total += currentValue;
-                    }
-                    const UpBit = currentValue.slice(0,1).toUpperCase();
-                    const lowBit = currentValue.slice(1,currentValue.length);
-                    const name = UpBit + lowBit
-                    return total += name;
-                },'');
-                return `thoughtware-licence-ui/es/${fullName}`;
-            }
-        }, "thoughtware-licence-ui"],
+        }, "tiklab-licence-ui"],
 
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         ["@babel/plugin-proposal-class-properties", { "loose" : false }],

@@ -1,5 +1,5 @@
 import React from "react";
-import {DomainRole} from "thoughtware-privilege-ui";
+import {DomainRole} from "tiklab-privilege-ui";
 
 /**
  * 项目权限

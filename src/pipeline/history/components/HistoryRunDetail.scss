@@ -1,5 +1,5 @@
 $line-color: #d9d9d9;
-$success-color: var(--thoughtware-blue);
+$success-color: var(--tiklab-blue);
 $run-color: #43a890;
 $wait-color: rgba(0, 0, 0, 0.18);
 $halt-color:  #444444;
@@ -60,7 +60,7 @@ $suspend-color:  #ff0000;
         .str-run-item-head{
           height: 40px;
           line-height: 40px;
-          font-weight: var(--thoughtware-font-weight-bold);
+          font-weight: var(--tiklab-font-weight-bold);
         }
         .str-run-item-stage{
           .str-run-stage{
@@ -104,7 +104,7 @@ $suspend-color:  #ff0000;
                 }
                 .card-top-btn{
                   .btn-continue{
-                    background: var(--thoughtware-blue);
+                    background: var(--tiklab-blue);
                     border-radius: 4px;
                     color: #ffffff;
                     font-size: 13px;
@@ -116,10 +116,10 @@ $suspend-color:  #ff0000;
               }
               .card-ct{
                 text-align: center;
-                font-size: var(--thoughtware-font-13);
+                font-size: var(--tiklab-font-13);
               }
               .card-bt{
-                font-size: var(--thoughtware-font-13);
+                font-size: var(--tiklab-font-13);
                 display: flex;
                 justify-content: space-between;
                 .card-bt-log{

@@ -34,7 +34,7 @@ export const runStatusIcon = type =>{
         case "error" :
             return  <CloseCircleOutlined style={{color:"red"}}/>
         case "success" :
-            return  <CheckCircleOutlined style={{color:"var(--thoughtware-blue)"}}/>
+            return  <CheckCircleOutlined style={{color:"var(--tiklab-blue)"}}/>
         case "halt":
             return  <ExclamationCircleOutlined/>
         case "run":

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ProjectNav,PrivilegeProjectButton} from "thoughtware-privilege-ui";
+import {ProjectNav,PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {renderRoutes} from 'react-router-config';
 import "./PipelineSetAside.scss";
 import {observer} from "mobx-react";

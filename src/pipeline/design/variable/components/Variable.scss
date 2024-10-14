@@ -2,11 +2,11 @@
     .variable-up{
         display: flex;
         align-items: center;
-        padding-bottom: var(--thoughtware-padding-item);
-        font-size: var(--thoughtware-font-13);
+        padding-bottom: var(--tiklab-padding-item);
+        font-size: var(--tiklab-font-13);
         .variable-up-num{
             flex: 1;
-            margin-right: var(--thoughtware-padding-item);
+            margin-right: var(--tiklab-padding-item);
         }
     }
 }

@@ -3,10 +3,10 @@
     height: 100%;
     overflow: auto;
     .scan-table{
-        padding-top: var(--thoughtware-padding-item);
+        padding-top: var(--tiklab-padding-item);
         .scan-item-name:hover{
             cursor: pointer;
-            color: var(--thoughtware-blue);
+            color: var(--tiklab-blue);
         }
         .scan-table-expand{
             padding-left: 48px;
@@ -17,7 +17,7 @@
         line-height: 35px;
     }
     .scan-overview{
-        padding-top: var(--thoughtware-padding-item);
+        padding-top: var(--tiklab-padding-item);
         .scan-overview-info{
             display: flex;
             align-items: center;

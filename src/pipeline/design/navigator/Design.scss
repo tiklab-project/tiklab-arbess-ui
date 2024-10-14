@@ -11,7 +11,7 @@
         z-index: 9;
     }
     .design-top{
-        padding: var(--thoughtware-padding-item) 30px 0;
+        padding: var(--tiklab-padding-item) 30px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -53,8 +53,8 @@
             }
         }
         .design-active{
-            color: var(--thoughtware-blue);
-            border-bottom: 2px solid var(--thoughtware-blue);
+            color: var(--tiklab-blue);
+            border-bottom: 2px solid var(--tiklab-blue);
         }
     }
     .design-content{

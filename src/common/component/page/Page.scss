@@ -5,20 +5,20 @@
     height: 40px;
     .arbess-page-ban{
         cursor:not-allowed;
-        color: var(--thoughtware-gray-500);
+        color: var(--tiklab-gray-500);
     }
     .arbess-page-allow{
         cursor: pointer;
     }
     .arbess-page-current,.arbess-page-allow:hover{
-        color: var(--thoughtware-blue);
+        color: var(--tiklab-blue);
     }
     .arbess-page-line{
         margin: 0 5px;
     }
     .arbess-page-record{
         margin-right: 30px;
-        font-size: var(--thoughtware-font-12);
+        font-size: var(--tiklab-font-12);
     }
     .arbess-page-fresh{
         margin-left: 30px;

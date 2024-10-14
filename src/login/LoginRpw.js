@@ -1,5 +1,5 @@
 import React from 'react';
-import {LoginRpw} from "thoughtware-eam-ui";
+import {LoginRpw} from "tiklab-eam-ui";
 
 const LoginRpwContent = props => {
 

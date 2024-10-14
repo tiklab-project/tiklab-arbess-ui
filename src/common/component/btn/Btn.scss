@@ -8,13 +8,13 @@
     font-size: 14px;
     border-radius: 4px;
     color: #42526E;
-    background-color: var(--thoughtware-gray);
-    border: 1px solid var(--thoughtware-gray);
+    background-color: var(--tiklab-gray);
+    border: 1px solid var(--tiklab-gray);
 }
 
 .arbess-btn-primary{
-    background: var(--thoughtware-blue);
-    border-color: var(--thoughtware-blue);
+    background: var(--tiklab-blue);
+    border-color: var(--tiklab-blue);
     color: #ffffff;
 }
 
@@ -53,14 +53,14 @@
 }
 
 .arbess-btn-link{
-    color: var(--thoughtware-blue);
+    color: var(--tiklab-blue);
     background: transparent;
     border-color: transparent;
     box-shadow: none;
 }
 
 .arbess-btn-link-nopadding{
-    color: var(--thoughtware-blue);
+    color: var(--tiklab-blue);
     background: transparent;
     border-color: transparent;
     box-shadow: none;
@@ -87,5 +87,5 @@
     display: inline-block;
     width: 16px;
     height: 16px;
-    font-size: var(--thoughtware-icon-size-16);
+    font-size: var(--tiklab-icon-size-16);
 }

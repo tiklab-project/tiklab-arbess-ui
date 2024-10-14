@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {Select, Space, Row, Col, Spin} from "antd";
-import {getUser} from "thoughtware-core-ui";
+import {getUser} from "tiklab-core-ui";
 import PipelineTable from "./PipelineTable";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Btn from "../../../common/component/btn/Btn";

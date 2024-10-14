@@ -1,5 +1,5 @@
 import React from "react";
-import {DomainUser} from "thoughtware-user-ui";
+import {DomainUser} from "tiklab-user-ui";
 
 /**
  * 项目成员

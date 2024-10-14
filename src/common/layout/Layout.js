@@ -1,6 +1,6 @@
 import React from 'react';
-import {AppLink,HelpLink,AvatarLink} from "thoughtware-licence-ui";
-import {UserVerify} from 'thoughtware-eam-ui';
+import {AppLink,HelpLink,AvatarLink} from "tiklab-licence-ui";
+import {UserVerify} from 'tiklab-eam-ui';
 import SettingAside from "./SettingAside";
 import Portal from "./Portal";
 

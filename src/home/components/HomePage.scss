@@ -11,7 +11,7 @@ $block-spacing: 30px;
             align-items: center;
         }
         .homePage-guide-title{
-            font-weight: var(--thoughtware-font-weight-bold);
+            font-weight: var(--tiklab-font-weight-bold);
         }
         .home-recent{
             border-radius: 4px;
@@ -39,11 +39,11 @@ $block-spacing: 30px;
             }
             .pipelineRecent-item:hover{
                 border-radius: 4px 4px 0 0;
-                border-bottom-color: var(--thoughtware-blue);
+                border-bottom-color: var(--tiklab-blue);
                 transition: 1s;
             }
             .pipelineRecent-item-title{
-                padding-bottom: var(--thoughtware-padding-item);
+                padding-bottom: var(--tiklab-padding-item);
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -53,11 +53,11 @@ $block-spacing: 30px;
                     white-space: nowrap;
                     text-overflow: ellipsis;
                     -o-text-overflow: ellipsis;
-                    font-weight: var(--thoughtware-font-weight-bold);
+                    font-weight: var(--tiklab-font-weight-bold);
                 }
             }
             .pipelineRecent-item-details{
-                font-size: var(--thoughtware-font-13);
+                font-size: var(--tiklab-font-13);
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
@@ -93,7 +93,7 @@ $block-spacing: 30px;
                 .home-release-title{
                     padding-bottom: 10px;
                     text-align: center;
-                    font-weight: var(--thoughtware-font-weight-bold);
+                    font-weight: var(--tiklab-font-weight-bold);
                 }
                 .home-release-pipeline,.home-release-user{
                     flex: 1;
@@ -109,7 +109,7 @@ $block-spacing: 30px;
                             font-size: 12px;
                         }
                         &:hover{
-                            color: var(--thoughtware-blue);
+                            color: var(--tiklab-blue);
                             cursor: pointer;
                             text-decoration: underline;
                         }
@@ -129,7 +129,7 @@ $block-spacing: 30px;
                         }
                     }
                     .home-release-success{
-                        color: var(--thoughtware-blue);
+                        color: var(--tiklab-blue);
                     }
                     .home-release-error{
                         color: #f06f6f;

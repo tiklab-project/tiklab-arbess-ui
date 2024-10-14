@@ -50,45 +50,45 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                thoughtwareUserUI: {
-                    name: "chunk-thoughtware-user-ui",
+                tiklabUserUI: {
+                    name: "chunk-tiklab-user-ui",
                     chunks: "all",
-                    test: /thoughtware-user-ui/,
+                    test: /tiklab-user-ui/,
                     priority: 2,
                     reuseExistingChunk: true
                 },
-                thoughtwareLicenceUI: {
-                    name: "chunk-thoughtware-licence-ui",
+                tiklabLicenceUI: {
+                    name: "chunk-tiklab-licence-ui",
                     chunks: "all",
-                    test: /thoughtware-licence-ui/,
+                    test: /tiklab-licence-ui/,
                     priority: 2,
                     reuseExistingChunk: true
                 },
-                thoughtwareEamUI: {
-                    name: "chunk-thoughtware-eam-ui",
+                tiklabEamUI: {
+                    name: "chunk-tiklab-eam-ui",
                     chunks: "all",
-                    test: /thoughtware-eam-ui/,
+                    test: /tiklab-eam-ui/,
                     priority: 0,
                     reuseExistingChunk: true
                 },
-                thoughtwareSecurityUI: {
-                    name: "chunk-thoughtware-security-ui",
+                tiklabSecurityUI: {
+                    name: "chunk-tiklab-security-ui",
                     chunks: "all",
-                    test: /thoughtware-security-ui/,
+                    test: /tiklab-security-ui/,
                     priority: 2,
                     reuseExistingChunk: true
                 },
-                thoughtwareMessageUI: {
-                    name: 'chunk-thoughtware-message-ui',
+                tiklabMessageUI: {
+                    name: 'chunk-tiklab-message-ui',
                     chunks: 'all',
-                    test: /thoughtware-message-ui/,
+                    test: /tiklab-message-ui/,
                     priority: 2,
                     reuseExistingChunk: true
                 },
-                thoughtwarePrivilegeUI: {
-                    name: 'chunk-thoughtware-privilege-ui',
+                tiklabPrivilegeUI: {
+                    name: 'chunk-tiklab-privilege-ui',
                     chunks: 'all',
-                    test: /thoughtware-privilege-ui/,
+                    test: /tiklab-privilege-ui/,
                     priority: 2,
                     reuseExistingChunk: true
                 },

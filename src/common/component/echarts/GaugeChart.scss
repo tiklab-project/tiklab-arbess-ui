@@ -27,7 +27,7 @@
       height: 150px;
       clip: rect(auto, 150px, 75px, auto);
       border-radius: 50%;
-      border: 5px solid var(--thoughtware-blue);
+      border: 5px solid var(--tiklab-blue);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -38,7 +38,7 @@
       height: 130px;
       clip: rect(auto, 130px, 65px, auto);
       border-radius: 50%;
-      border: 25px solid var(--thoughtware-blue);
+      border: 25px solid var(--tiklab-blue);
     }
     .statistics-result-data{
       position: absolute;
@@ -47,11 +47,11 @@
       white-space: nowrap;
       overflow: hidden;
       max-width: 50%;
-      font-weight: var(--thoughtware-font-weight-bold);
+      font-weight: var(--tiklab-font-weight-bold);
     }
     .statistics-result-text{
       &-successNumber{
-        color: var(--thoughtware-blue);
+        color: var(--tiklab-blue);
       }
       &-errorNumber{
         color: #f06f6f;

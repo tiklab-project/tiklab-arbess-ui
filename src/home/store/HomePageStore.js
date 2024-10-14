@@ -1,5 +1,5 @@
 import {observable,action} from "mobx";
-import {Axios, getUser} from "thoughtware-core-ui";
+import {Axios, getUser} from "tiklab-core-ui";
 
 class HomePageStore{
 

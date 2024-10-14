@@ -12,7 +12,7 @@ $inline-spacing: 15px;
     }
     .overview-guide-title{
         font-size: 15px;
-        font-weight: var(--thoughtware-font-weight-bold);
+        font-weight: var(--tiklab-font-weight-bold);
     }
     .overview-upper{
         margin-bottom: $block-spacing;
@@ -35,7 +35,7 @@ $inline-spacing: 15px;
                     align-items: center;
                     justify-content: space-between;
                     .instance-item-findNumber{
-                        font-weight: var(--thoughtware-font-weight-bold);
+                        font-weight: var(--tiklab-font-weight-bold);
                     }
                     .instance-item-createTime{
                         font-size: 13px;

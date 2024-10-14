@@ -3,10 +3,10 @@
     height: 100%;
     overflow: auto;
     .test-table{
-        padding-top: var(--thoughtware-padding-item);
+        padding-top: var(--tiklab-padding-item);
         .test-item-name:hover{
             cursor: pointer;
-            color: var(--thoughtware-blue);
+            color: var(--tiklab-blue);
         }
         .test-table-expand{
             padding-left: 48px;

@@ -1,5 +1,5 @@
 import React from "react";
-import {ProjectFeature} from "thoughtware-privilege-ui";
+import {ProjectFeature} from "tiklab-privilege-ui";
 
 /**
  * 项目功能管理

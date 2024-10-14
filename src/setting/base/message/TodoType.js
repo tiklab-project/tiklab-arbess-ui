@@ -1,5 +1,5 @@
 import React from "react";
-import {TodoType} from "thoughtware-message-ui";
+import {TodoType} from "tiklab-message-ui";
 
 /**
  * 待办类型

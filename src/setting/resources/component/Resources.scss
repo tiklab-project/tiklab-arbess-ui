@@ -2,7 +2,7 @@
     .resources-info-version{
         margin: 10px 0;
         font-size: 13px;
-        font-weight: var(--thoughtware-font-weight-bold);
+        font-weight: var(--tiklab-font-weight-bold);
     }
     .resources-info{
         padding-top: 10px;
@@ -26,7 +26,7 @@
         }
         .resources-item-allow{
             cursor: pointer;
-            color: var(--thoughtware-blue);
+            color: var(--tiklab-blue);
         }
     }
     .resources-cache-detail{
@@ -47,7 +47,7 @@
     }
     .resources-info-enhance-modal-desc{
         padding: 10px 0;
-        font-size: var(--thoughtware-font-13);
-        color: var(--thoughtware-gray-500);
+        font-size: var(--tiklab-font-13);
+        color: var(--tiklab-gray-500);
     }
 }

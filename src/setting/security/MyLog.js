@@ -1,5 +1,5 @@
 import React from "react";
-import {MyLog} from "thoughtware-security-ui";
+import {MyLog} from "tiklab-security-ui";
 
 /**
  * 我的日志

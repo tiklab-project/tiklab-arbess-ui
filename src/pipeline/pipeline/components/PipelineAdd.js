@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {Spin, Steps, Row, Col} from "antd";
-import {getUser} from "thoughtware-core-ui";
+import {getUser} from "tiklab-core-ui";
 import Btn from "../../../common/component/btn/Btn";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import PipelineAddMould from "./PipelineAddMould";

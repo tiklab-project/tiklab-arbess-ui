@@ -12,7 +12,7 @@ import {
 import PortalMessage from "./PortalMessage";
 import {inject, observer} from "mobx-react";
 import PipelineAside from "./PipelineAside";
-import {getUser, productTitle,productImg,productWhiteImg} from "thoughtware-core-ui";
+import {getUser, productTitle,productImg,productWhiteImg} from "tiklab-core-ui";
 import {renderRoutes} from "react-router-config";
 import Profile from "../component/profile/Profile";
 import menuBlack from '../../assets/images/menu-black.png';
@@ -67,7 +67,7 @@ const Portal = props =>{
 
     /**
      * type三个参数为:
-     * default(默认 --> --thoughtware-gray-600)，
+     * default(默认 --> --tiklab-gray-600)，
      * blue(蓝色 --> #2f5eb1)，
      * black(黑色 --> #131d30)
      */

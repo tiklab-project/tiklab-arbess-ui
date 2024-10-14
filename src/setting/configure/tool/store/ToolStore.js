@@ -1,6 +1,6 @@
 import {action} from "mobx";
 import {message} from "antd";
-import {Axios} from "thoughtware-core-ui";
+import {Axios} from "tiklab-core-ui";
 
 class ToolStore {
 

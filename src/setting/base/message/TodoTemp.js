@@ -1,5 +1,5 @@
 import React from "react";
-import {TodoTemp} from "thoughtware-message-ui";
+import {TodoTemp} from "tiklab-message-ui";
 
 /**
  * 待办模板

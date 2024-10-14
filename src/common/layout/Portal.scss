@@ -197,7 +197,7 @@ $aside-border-color: #e4e4e4;
         padding-top: 15px;
         margin-bottom: 10px;
         .aside-opt-name{
-          font-weight: var(--thoughtware-font-weight-bold);
+          font-weight: var(--tiklab-font-weight-bold);
           margin: 0 5px 0 7px;
           min-width: 0;
           max-width: 110px;
@@ -227,8 +227,8 @@ $aside-border-color: #e4e4e4;
       background: #ffffff;
       .pipeline-opt{
         &-title{
-          font-weight: var(--thoughtware-font-weight-bold);
-          padding: 0 var(--thoughtware-padding-item);
+          font-weight: var(--tiklab-font-weight-bold);
+          padding: 0 var(--tiklab-padding-item);
           height: 40px;
           line-height: 40px;
           border-bottom: 1px solid var(--arbess-border-color);
@@ -239,7 +239,7 @@ $aside-border-color: #e4e4e4;
           overflow: auto;
         }
         &-item{
-          padding: 0 var(--thoughtware-padding-item);
+          padding: 0 var(--tiklab-padding-item);
           height: 40px;
           line-height: 40px;
           cursor: pointer;
@@ -268,7 +268,7 @@ $aside-border-color: #e4e4e4;
           text-align: center;
           padding: 8px 0 ;
           background: #f8f8f8;
-          color: var(--thoughtware-blue);
+          color: var(--tiklab-blue);
         }
       }
     }
@@ -299,7 +299,7 @@ $aside-border-color: #e4e4e4;
       }
       .aside-select{
         background-color: var(--arbess-select-color);
-        border-left: 3px solid var(--thoughtware-blue) !important;
+        border-left: 3px solid var(--tiklab-blue) !important;
       }
     }
     &-black{

@@ -6,7 +6,7 @@
         padding-top: 10px;
         .history-table-name:hover{
             cursor: pointer;
-            color: var(--thoughtware-blue);
+            color: var(--tiklab-blue);
         }
         .history-table-pipeline{
             padding-right: 5px;
@@ -21,7 +21,7 @@
         }
     }
     .history-screens{
-        padding-top: var(--thoughtware-padding-item);
+        padding-top: var(--tiklab-padding-item);
         flex-wrap: wrap;
         gap: 10px 0;
     }

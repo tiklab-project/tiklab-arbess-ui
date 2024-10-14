@@ -34,7 +34,9 @@ const BasicInfo = props => {
     const [enter,setEnter] = useState(false)
 
     useEffect(()=>{
-        return ()=>form.resetFields()
+        return ()=>{
+            form.resetFields();
+        }
     },[])
 
     useEffect(()=>{
@@ -71,7 +73,7 @@ const BasicInfo = props => {
                     putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
                 })
                 break
-            case 'testHubo':
+            case 'testhubo':
                 form.setFieldsValue({
                     taskName:taskName,
                     testSpace:task?.testSpace?.name,
@@ -86,7 +88,7 @@ const BasicInfo = props => {
                 form.setFieldsValue({taskName: taskName})
         }
         form.validateFields().then()
-    },[dataItem?.task])
+    },[dataItem?.task,dataItem?.stageName])
 
     /**
      * 渲染表单
@@ -104,7 +106,7 @@ const BasicInfo = props => {
                 return <CodeThird {...props}/>
             case 'maventest':
                 return <TestMvnUnit {...props}/>
-            case 'testHubo':
+            case 'testhubo':
                 return <TestHubo {...props}/>
             case 'nodejs':
                 return <BuildNode {...props}/>

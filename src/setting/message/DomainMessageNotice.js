@@ -1,5 +1,5 @@
 import React from "react";
-import {DomainMessageNotice} from "thoughtware-message-ui";
+import {DomainMessageNotice} from "tiklab-message-ui";
 
 /**
  * 项目域消息通知方案

@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
 import {Row,Col} from "antd";
 import countStore from "../store/CountStore";
-import {applyJump,applySubscription,getUser} from "thoughtware-core-ui";
+import {applyJump,applySubscription,getUser} from "tiklab-core-ui";
 import overviewStore from "../../../pipeline/overview/store/OverviewStore";
 import vipLight from '../../../assets/images/vip-light.png';
 import vipDark from '../../../assets/images/vip-dark.png';

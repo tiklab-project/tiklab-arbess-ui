@@ -1,4 +1,4 @@
-$success-color: var(--thoughtware-blue);
+$success-color: var(--tiklab-blue);
 $run-color: #43a890;
 $wait-color: rgba(0, 0, 0, 0.18);
 $halt-color:  #444444;
@@ -54,18 +54,18 @@ $suspend-color:  #ff0000;
                 cursor: pointer;
                 padding: 0 5px;
                 &:hover{
-                    background: var(--thoughtware-gray-300);
+                    background: var(--tiklab-gray-300);
                 }
             }
             .tree-li-active{
-                background: var(--thoughtware-gray-400);
+                background: var(--tiklab-gray-400);
             }
             .tree-li-name{
                 flex: 1;
                 width: 0;
             }
             .tree-li-time{
-                font-size: var(--thoughtware-font-13);
+                font-size: var(--tiklab-font-13);
                 color: #999;
                 width: 60px;
                 text-align: right;

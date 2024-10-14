@@ -1,5 +1,5 @@
 import React from 'react';
-import {NoAccess} from "thoughtware-privilege-ui";
+import {NoAccess} from "tiklab-privilege-ui";
 
 const NoAccessContent = props =>{
     return (

@@ -1,5 +1,5 @@
 import React from "react";
-import {SystemFeature} from "thoughtware-privilege-ui";
+import {SystemFeature} from "tiklab-privilege-ui";
 
 /**
  * 系统功能管理

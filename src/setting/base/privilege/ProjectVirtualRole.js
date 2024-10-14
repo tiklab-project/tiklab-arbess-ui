@@ -1,5 +1,5 @@
 import React from "react";
-import {ProjectVirtualRole} from "thoughtware-privilege-ui";
+import {ProjectVirtualRole} from "tiklab-privilege-ui";
 
 /**
  * 虚拟角色

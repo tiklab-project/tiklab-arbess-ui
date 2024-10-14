@@ -1,5 +1,5 @@
 import React from "react";
-import {ProjectRole} from "thoughtware-privilege-ui";
+import {ProjectRole} from "tiklab-privilege-ui";
 
 /**
  * 项目权限
