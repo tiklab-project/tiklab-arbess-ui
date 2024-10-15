@@ -48,7 +48,7 @@ Arbess 是一款强大的开源 CI/CD 工具，旨在帮助开发团队高效管
 ### 构建项目
 
 #### 克隆
-git clone https://github.com/tiklab-project/tiklab-arbess-ui.git
+`git clone https://github.com/tiklab-project/tiklab-arbess-ui.git`
 
 #### 配置npm仓库
 `npm config set registry https://mirror.tiklab.net/repository/tiklab-npm`
