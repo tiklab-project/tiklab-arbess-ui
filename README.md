@@ -57,7 +57,7 @@ Arbess 是一款强大的开源 CI/CD 工具，旨在帮助开发团队高效管
 
 ### 使用示例
 1. 使用IDEA运行arbess-start启动。  
-2. 打开浏览器，访问 http://localhost:3000。
+2. 打开浏览器，访问 http://localhost:3000
 3. 登录信息，用户名：admin 密码：123456。
 
 
@@ -72,7 +72,7 @@ Arbess 是一款强大的开源 CI/CD 工具，旨在帮助开发团队高效管
 
 [官方网站](https://www.tiklab.net)
 
-邮箱: tiklab@126.com
+邮箱: tiklab@163.com
 
 #### 立即体验 Arbess，解锁高效的自动化构建、测试和部署流程！
 
