@@ -47,7 +47,7 @@ Arbess 是一款强大的开源 CI/CD 工具，旨在帮助开发团队高效管
 
 ### 安装
 
-`git clone https://github.com/tiklab/tiklab-arbess-ui.git`
+`git clone https://github.com/tiklab-project/tiklab-arbess-ui.git`
 
 `cd tiklab-arbess-ui`
 
