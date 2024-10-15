@@ -45,21 +45,24 @@ Arbess 是一款强大的开源 CI/CD 工具，旨在帮助开发团队高效管
 - Node 14+
 - Npm 6.14+
 
-### 安装
+### 构建项目
 
-`git clone https://github.com/tiklab-project/tiklab-arbess-ui.git`
+#### 克隆
+git clone https://github.com/tiklab-project/tiklab-arbess-ui.git
 
+#### 配置npm仓库
+`npm config set registry https://mirror.tiklab.net/repository/tiklab-npm`
+
+#### 启动操作
 `cd tiklab-arbess-ui`
 
 `npm install`
 
 `npm run arbess-start`
 
-### 使用示例
-1. 使用IDEA运行arbess-start启动。  
-2. 打开浏览器，访问 http://localhost:3000
-3. 登录信息，用户名：admin 密码：123456。
-
+#### 启动访问
+1. 打开浏览器，访问 http://localhost:3000
+2. 登录信息，用户名：admin 密码：123456。
 
 ### 贡献
 我们欢迎社区的贡献！如果你有好的建议或发现了问题，请通过以下方式联系我：
