@@ -66,7 +66,7 @@ Arbess 是一款强大的开源 CI/CD 工具，旨在帮助开发团队高效管
 
 [联系我们](https://tiklab.net/account/workOrder/add)
 
-邮箱: tiklab@126.com
+邮箱: tiklab@163.com
 
 如需了解更多信息，请访问我们的官方网站或加入我们的社区讨论：
 
