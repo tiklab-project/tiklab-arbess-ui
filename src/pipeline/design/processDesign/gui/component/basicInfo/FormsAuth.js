@@ -255,6 +255,7 @@ const FormsAuth = props =>{
             case 'svn':
             case 'testhubo':
             case 'gitpuk':
+            case 'sonar':
                 return `${item.name}(${item.authType === 1 ? item.username : "私钥"})`;
             case 'gitee':
             case 'github':
@@ -280,10 +281,36 @@ const FormsAuth = props =>{
     };
 
 
+    const rules = () => {
+        const {taskType} = dataItem;
+        let rule = [{required:false}];
+        switch (taskType) {
+            case 'pull_maven':
+            case 'pull_docker':
+            case 'artifact_maven':
+            case 'artifact_docker':
+            case 'liunx':
+            case 'docker':
+            case 'k8s':
+            case 'testhubo':
+            case 'sonar':
+            case 'gitee':
+            case 'github':
+            case 'gitlab':
+            case 'gitpuk':
+                rule = [{required:true,message:`${label()}不能为空`}];
+                break;
+            default:
+                break;
+        }
+        return rule;
+    }
+
     return(
         <FormsSelect
             name={"authId"}
             label={label()}
+            rules={rules()}
             open={open}
             isSpin={false}
             onChange={changeGitSelect}

@@ -38,18 +38,11 @@ class ToolStore {
      */
     @action
     updatePipelineScm = async values=>{
-        const params = {
-            scmId:values.scmId,
-            scmType:values.scmType,
-            scmName:values.scmName,
-            scmAddress:values.scmAddress,
-        }
-        const data = await Axios.post("/scm/updatePipelineScm",params)
+        const data = await Axios.post("/scm/updatePipelineScm",values)
         if(data.code === 0){
-            values.scmId==="" ?  message.info("添加成功") : message.info(`修改成功`)
+            message.info(`${values.scmId?'修改':'添加'}成功`)
         } else {
-            values.scmId==="" ? message.info("添加失败") :  message.info(`修改失败`)
-
+            message.info(`${values.scmId?'修改':'添加'}失败`)
         }
         return data
     }

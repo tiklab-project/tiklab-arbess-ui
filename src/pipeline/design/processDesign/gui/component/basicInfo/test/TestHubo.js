@@ -149,20 +149,6 @@ const TestHubo = props => {
                 }
             </FormsSelect>
 
-            {/*<FormsSelect*/}
-            {/*    rules={[{validator: validatorEnv}]}*/}
-            {/*    name={"webEnv"}*/}
-            {/*    label={"WEB环境"}*/}
-            {/*    isSpin={false}*/}
-            {/*    onFocus={()=>onFocus('web')}*/}
-            {/*    onChange={value=>onChange(value,'webEnv')}*/}
-            {/*>*/}
-            {/*    {*/}
-            {/*        testEnv && testEnv.map(item=>{*/}
-            {/*            return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>*/}
-            {/*        })*/}
-            {/*    }*/}
-            {/*</FormsSelect>*/}
 
         </>
     )

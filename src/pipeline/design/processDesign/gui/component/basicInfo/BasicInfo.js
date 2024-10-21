@@ -46,6 +46,7 @@ const BasicInfo = props => {
             form.setFieldsValue({taskName: stageName})
             return;
         }
+        console.log(task)
         if(!task) return;
         switch(taskType){
             case 'git':

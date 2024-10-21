@@ -77,7 +77,7 @@ const ToolModal = props =>{
     const onOk = () =>{
         form.validateFields().then((values) => {
             const params = {
-                scmId:formValue && formValue.scmId,
+                scmId: formValue && formValue.scmId,
                 ...values
             }
             updatePipelineScm(params).then(res=>{

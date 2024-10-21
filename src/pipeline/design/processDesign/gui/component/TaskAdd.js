@@ -143,6 +143,7 @@ const TaskAdd = props =>{
         const configMap = {
             'liunx': { authType: 1 },
             'k8s': { k8sNamespace: 'default' },
+            'build_docker': { dockerFile: '${DEFAULT_CODE_ADDRESS}', dockerOrder:'docker image build -t default .' },
             'artifact_maven': { artifactType: 'nexus', transitive: true },
             'artifact_docker': { artifactType: 'nexus', transitive: true },
             'pull_maven': { pullType: 'nexus', transitive: true },
