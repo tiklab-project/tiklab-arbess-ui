@@ -116,7 +116,7 @@ ul li{
     }
 }
 
-.arbess-dropdown-more,{
+.arbess-dropdown-more{
     box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
     border-radius: 4px;
     background: #ffffff;
@@ -161,7 +161,11 @@ ul li{
             background-color: #a8d4d0;
         }
     }
+}
 
+.ant-picker-ranges{
+    display: flex;
+    align-items: center;
 }
 
 ::-webkit-scrollbar {

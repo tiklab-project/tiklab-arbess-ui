@@ -9,6 +9,7 @@ const Index=AsyncComponent(()=>import("./common/layout/Layout"))
 
 const Login=AsyncComponent(()=>import("./login/Login"))
 const LoginRpw=AsyncComponent(()=>import("./login/LoginRpw"))
+const SysException=AsyncComponent(()=>import("./login/SysException"))
 
 const Logout=AsyncComponent(()=>import("./login/Logout"))
 const ExcludeProductUser=AsyncComponent(()=>import("./login/ExcludeProductUser"))
@@ -122,6 +123,7 @@ export {
     Index,
     Login,
     LoginRpw,
+    SysException,
     Logout,
     ExcludeProductUser,
     NotFound,

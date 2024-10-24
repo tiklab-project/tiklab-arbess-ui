@@ -111,10 +111,7 @@ const HistoryRunDetail = (props) => {
         setExecLoading(true);
         clearInterval(runInterRef.current);
         execStop(pipeline.id).then(res=>{
-            setTimeout(()=>{
-                setExecLoading(false);
-                findInstance()
-            },1500)
+            setTimeout(()=>findTask("end"),1000)
         })
     }
 

@@ -28,7 +28,9 @@ const ServerModal = props =>{
 
     useEffect(()=>{
         // 表单初始化
-        visible && renderFormValue(formValue)
+        if(visible){
+            renderFormValue(formValue)
+        }
     },[visible])
 
     const renderFormValue = formValue => {
@@ -37,6 +39,7 @@ const ServerModal = props =>{
             setServerWay(formValue.type)
             return
         }
+        form.setFieldsValue({type:type})
         setServerWay(type)
     }
 
@@ -92,7 +95,7 @@ const ServerModal = props =>{
      */
     const serverAddressDisabled = () => {
         const type = formValue?.type
-        if(type==='gitpuk' || type==='hadess' || type==='testrubo'){
+        if(type==='gitpuk' || type==='hadess' || type==='testhubo'){
             return version === 'cloud'
         }
         return false
@@ -171,7 +174,7 @@ const ServerModal = props =>{
                                         <Select.Option value={'github'}>Github</Select.Option>
                                         <Select.Option value={'gitlab'}>Gitlab</Select.Option>
                                         <Select.Option value={'gitpuk'}>GitPuk</Select.Option>
-                                        <Select.Option value={'testrubo'}>TestRubo</Select.Option>
+                                        <Select.Option value={'testhubo'}>TestHubo</Select.Option>
                                         <Select.Option value={'sonar'}>Sonar</Select.Option>
                                         <Select.Option value={'nexus'}>Nexus</Select.Option>
                                         <Select.Option value={'hadess'}>Hadess</Select.Option>

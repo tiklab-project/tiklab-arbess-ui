@@ -63,8 +63,7 @@ const TestHubo = props => {
         if(item.status===2){
             return message.info("当前测试报告详情已删除")
         }
-        const url = item.url+"/#/repository/report/"+item.testonId
-        return applyJump(url)
+        return applyJump(`${item.url}/#/project/${item.testonId}/reportInfo`)
     }
 
     /**

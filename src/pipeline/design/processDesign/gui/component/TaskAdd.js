@@ -141,6 +141,7 @@ const TaskAdd = props =>{
      */
     const taskObj = type => {
         const configMap = {
+            'svn': { svnFile: '/' },
             'liunx': { authType: 1 },
             'k8s': { k8sNamespace: 'default' },
             'build_docker': { dockerFile: '${DEFAULT_CODE_ADDRESS}', dockerOrder:'docker image build -t default .' },

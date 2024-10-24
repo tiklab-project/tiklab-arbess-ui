@@ -202,7 +202,8 @@ const FormsAuth = props =>{
     /**
      * 选择框按钮
      */
-    const renderBtn = taskType =>{
+    const renderBtn = () =>{
+        const {taskType,task:{artifactType,pullType}} = dataItem;
         const commonProps = {
             isConfig: true,
             visible: visible,
@@ -230,7 +231,6 @@ const FormsAuth = props =>{
             case 'artifact_docker':
             case 'pull_maven':
             case 'pull_docker':
-                const { task:{artifactType,pullType}} = dataItem;
                 const type = taskType.startsWith('artifact') ? artifactType : pullType;
                 if(type==='ssh'){
                     return <HostAddBtn {...commonProps}/>
@@ -320,7 +320,7 @@ const FormsAuth = props =>{
                     {menu}
                     <Divider style={{margin:"4px 0"}} />
                     <div style={{cursor:"pointer"}} onClick={()=>setOpen(false)}>
-                        {renderBtn(dataItem.taskType)}
+                        {renderBtn()}
                     </div>
                 </>
             )}

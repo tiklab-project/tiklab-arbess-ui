@@ -21,7 +21,7 @@ class TestHuboStore {
     }
 
     /**
-     * 获取testrubo测试环境
+     * 获取testhubo测试环境
      * @param value
      * @returns {Promise<unknown>}
      */
