@@ -95,7 +95,7 @@ const TestMavenDetail = (props) => {
     ]
 
     return (
-        <Row className='test'>
+        <Row className='test-maven'>
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
@@ -112,10 +112,7 @@ const TestMavenDetail = (props) => {
                                 <div>状态</div>
                                 <div className={`testState-${mavenTestObj?.testState}`}>
                                     {
-                                        mavenTestObj?.testState==='success'?
-                                            "成功"
-                                            :
-                                            "失败"
+                                        mavenTestObj?.testState==='success'? "成功" : "失败"
                                     }
                                 </div>
                             </div>
@@ -125,15 +122,15 @@ const TestMavenDetail = (props) => {
                             </div>
                             <div className="test-overview-info-item">
                                 <div>错误用例数</div>
-                                <div>{mavenTestObj?.errorNumber || 0}</div>
+                                <div className='testState-wrong'>{mavenTestObj?.errorNumber || 0}</div>
                             </div>
                             <div className="test-overview-info-item">
                                 <div>失败用例数</div>
-                                <div>{mavenTestObj?.failNumber || 0}</div>
+                                <div className='testState-error'>{mavenTestObj?.failNumber || 0}</div>
                             </div>
                             <div className="test-overview-info-item">
                                 <div>跳过用例数</div>
-                                <div>{mavenTestObj?.skipNumber || 0}</div>
+                                <div className='testState-jump'>{mavenTestObj?.skipNumber || 0}</div>
                             </div>
                         </div>
                     </div>

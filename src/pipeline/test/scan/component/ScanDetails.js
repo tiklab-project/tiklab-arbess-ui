@@ -12,8 +12,7 @@ const ScanDetails = (props) => {
     const {findBugs} = scanStore;
 
     const [bugsList,setBugsList] = useState([]);
-
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(() => {

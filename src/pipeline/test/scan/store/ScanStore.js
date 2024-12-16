@@ -1,7 +1,5 @@
-import {action,observable} from "mobx";
+import {action} from "mobx";
 import {Axios} from "tiklab-core-ui";
-import {message} from "antd";
-
 
 export class ScanStore {
 

@@ -42,11 +42,7 @@ const PipelineSetAside = props =>{
     const renderMenuHtml = (item,deep) => {
         return (
             <div key={item.id} className='project-nav-aside-ul'>
-                <div
-                    className="project-nav-aside-li"
-                    onClick={()=>select(item.id)}
-                    style={{paddingLeft: deep}}
-                >
+                <div className="project-nav-aside-li" onClick={()=>select(item.id)} style={{paddingLeft: deep}}>
                     <div>{item.title}</div>
                     <div className="system-aside-item-icon">
                         {
@@ -80,7 +76,7 @@ const PipelineSetAside = props =>{
             noAccessPath={"/noaccess"}
         >
             <div className='project-nav'>
-                <div className={`project-nav-aside ${route.path === '/pipeline/:id/test' ? 'test-nav-aside' :'common-nav-aside'}`}>
+                <div className='project-nav-aside'>
                     <div className='project-nav-aside-head'>
                         {route.path === '/pipeline/:id/setting' && "设置"}
                         {route.path === '/pipeline/:id/test' && "测试报告"}

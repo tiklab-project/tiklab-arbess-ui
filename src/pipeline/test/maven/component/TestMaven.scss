@@ -25,7 +25,7 @@
                 padding: 8px;
                 border-radius: 4px;
                 flex: 1;
-                border: 1px solid var(--arbess-border-color);
+                background-color: var(--arbess-backdrop-color);
                 &:not(:last-child){
                     margin-right: 15px;
                 }
@@ -43,6 +43,12 @@
                     }
                     &-error{
                         color: #ff4d4f;
+                    }
+                    &-wrong{
+                        color: #faad14;
+                    }
+                    &-jump{
+                        color: #1890ff;
                     }
                 }
             }

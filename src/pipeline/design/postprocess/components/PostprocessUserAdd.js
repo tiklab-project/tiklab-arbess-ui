@@ -1,6 +1,5 @@
 import React,{useEffect,useState} from "react";
-import {Table, Input, Dropdown} from "antd";
-import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
+import {Table, Dropdown} from "antd";
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Page from "../../../../common/component/page/Page";
@@ -15,26 +14,20 @@ const PostprocessUserAdd = props =>{
 
     // 消息通知人员下拉框
     const [userAddVisible,setUserAddVisible] = useState(false)
-
     // 选中的用户
     const [addUser,setAddUser] = useState([])
-
     // 用户列表
     const [userList,setUserList] = useState([])
-
     // 选中的用户id
     const [selectedRowKeys,setSelectedRowKeys] = useState([])
-
     const pageParam = {
         pageSize:5,
         currentPage:1
     }
-
     // 用户请求数据
     const [findUserParam,setFindUserParam] = useState({
         pageParam
     })
-
     // 用户分页
     const [userPage,setUserPage] = useState({})
 
@@ -95,13 +88,12 @@ const PostprocessUserAdd = props =>{
      */
     const onSelectRow = record => {
         if(!disabledOpt(record)){
-            // 如果已经选中 -- 取消选中
             if (selectedRowKeys.indexOf(record.id) >= 0) {
+                // 如果已经选中 -- 取消选中
                 setAddUser(addUser.filter(item=>item.id!==record.id))
                 selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
-            }
-            // 如果没有选中 -- 选中
-            else {
+            } else {
+                // 如果没有选中 -- 选中
                 selectedRowKeys.push(record.id)
                 addUser.push({
                     ...record,
@@ -133,8 +125,7 @@ const PostprocessUserAdd = props =>{
         if(selected){
             row = Array.from(new Set([...selectedRowKeys,...newArr]))
             user = Array.from(new Set([...addUser,...newUser]))
-        }
-        else {
+        } else {
             row = selectedRowKeys.filter(item=>!newArr.includes(item))
             user = addUser.filter(item=>!newArr.includes(item.id))
         }

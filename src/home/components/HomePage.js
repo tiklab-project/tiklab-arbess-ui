@@ -360,7 +360,7 @@ const HomePage = props =>{
                                     ]}
                                     pagination={false}
                                     locale={{emptyText: <ListEmpty/>}}
-                                    rowKey={record=>record.pipeline.id}
+                                    rowKey={record=>record?.pipeline?.id}
                                     dataSource={releasePipelineTop}
                                 />
                             </div>
@@ -389,7 +389,7 @@ const HomePage = props =>{
                                     ]}
                                     pagination={false}
                                     locale={{emptyText: <ListEmpty/>}}
-                                    rowKey={record=>record.user.id}
+                                    rowKey={record=>record?.user?.id}
                                     dataSource={releaseUserTop}
                                 />
                             </div>

@@ -9,24 +9,20 @@ import {
     CreditCardOutlined,
     ExperimentOutlined,
     RadarChartOutlined,
-    HomeOutlined,
-    SettingOutlined,
-    LeftCircleOutlined,
-    RightCircleOutlined,
 } from "@ant-design/icons";
 import pipelineStore from "../../pipeline/pipeline/store/PipelineStore";
+import Aside from "../component/aside/PipelineAside";
 import {observer} from "mobx-react";
 
 const PipelineAside = (props) => {
 
-    const {isExpand, setIsExpand,themeType} = props;
+    const {isExpand} = props;
 
     const {findRecentlyPipeline,pipeline} = pipelineStore;
 
     const match = useRouteMatch("/pipeline/:id");
 
     const id = match?.params.id;
-    const path = props.location.pathname;
 
     //最近打开的流水线
     const [recentlyPipeline,setRecentlyPipeline] = useState([]);
@@ -82,117 +78,68 @@ const PipelineAside = (props) => {
     }
 
     return (
-        <div className={`arbess-aside ${isExpand ? 'arbess-aside-expand': 'arbess-aside-normal'} arbess-aside-${themeType}`}>
-            <Dropdown
-                getPopupContainer={e => e.parentElement}
-                overlayStyle={{width:200,top:48,left:80}}
-                trigger={['click']}
-                visible={dropdownVisible}
-                onVisibleChange={visible => setDropdownVisible(visible)}
-                overlay={
-                    <div className="pipeline-opt">
-                        <div className="pipeline-opt-title">切换流水线</div>
-                        <div className="pipeline-opt-group">
-                            {
-                                recentlyPipeline && recentlyPipeline.map(item=>{
-                                    if(item){
-                                        return (
-                                            <div onClick={()=>changePipeline(item)}
-                                                 key={item.id}
-                                                 className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
-                                            >
-                                                <span className={`pipeline-opt-icon arbess-icon-${item.color}`}>
-                                                    {item.name.substring(0,1).toUpperCase()}
-                                                </span>
-                                                <span className="pipeline-opt-name">
-                                                    {item.name}
-                                                </span>
-                                            </div>
-                                        )
-                                    }
-                                    return null
-                                })
-                            }
-                            <div className='pipeline-opt-more'
-                                 onClick={()=>props.history.push('/pipeline')}
-                            >更多</div>
+        <Aside
+            {...props}
+            backUrl={'/home'}
+            setUrl={`/pipeline/${id}/setting`}
+            initRouters={firstRouters}
+            ChangeComponent={
+                <Dropdown
+                    getPopupContainer={e => e.parentElement}
+                    overlayStyle={{width:200,top:48,left:80}}
+                    trigger={['click']}
+                    visible={dropdownVisible}
+                    onVisibleChange={visible => setDropdownVisible(visible)}
+                    overlay={
+                        <div className="pipeline-opt">
+                            <div className="pipeline-opt-title">切换流水线</div>
+                            <div className="pipeline-opt-group">
+                                {
+                                    recentlyPipeline && recentlyPipeline.map(item=>{
+                                        if(item){
+                                            return (
+                                                <div onClick={()=>changePipeline(item)}
+                                                     key={item.id}
+                                                     className={`pipeline-opt-item ${item.id===pipeline?.id?"pipeline-opt-active":""}`}
+                                                >
+                                                    <span className={`pipeline-opt-icon arbess-icon-${item.color}`}>
+                                                        {item.name.substring(0,1).toUpperCase()}
+                                                    </span>
+                                                    <span className="pipeline-opt-name">
+                                                        {item.name}
+                                                    </span>
+                                                </div>
+                                            )
+                                        }
+                                        return null
+                                    })
+                                }
+                                <div className='pipeline-opt-more'
+                                     onClick={()=>props.history.push('/pipeline')}
+                                >更多</div>
+                            </div>
                         </div>
-                    </div>
-                }
-                overlayClassName="aside-dropdown"
-            >
-                <div className='aside-opt' data-title-right={isExpand?null:pipeline?.name}>
-                    <ListIcon
-                        isMar={false}
-                        text={pipeline?.name}
-                        colors={pipeline && pipeline?.color}
-                    />
-                    {isExpand &&
-                        <>
-                            <div className='aside-opt-name'>{pipeline?.name}</div>
-                            <div style={{opacity:0.8}}><CaretDownOutlined/></div>
-                        </>
                     }
-                </div>
-            </Dropdown>
-            <div className="aside-up">
-                {
-                    isExpand ?
-                        <div className="aside-item-back">
-                            <div className='aside-item' onClick={()=>props.history.push('/home')}>
-                                <div className="aside-item-icon">
-                                    <HomeOutlined />
-                                </div>
-                                <div className="aside-item-title">返回首页</div>
-                            </div>
-                        </div>
-                        :
-                        <div className="aside-item-back">
-                            <div className='aside-item-back-home'
-                                 onClick={()=>props.history.push('/home')} data-title-right='返回首页'
-                            >
-                                <div className="aside-item-home-icon">
-                                    <HomeOutlined />
-                                </div>
-                            </div>
-                        </div>
-                }
-                {
-                    firstRouters.map(item=>(
-                        <div key={item.id}
-                             className={`aside-item ${path.indexOf(item.id) === 0 ? "aside-select":""}`}
-                             onClick={()=>props.history.push(item.id)}
-                        >
-                            <div className="aside-item-icon">{item.icon}</div>
-                            <div className="aside-item-title">{item.title}</div>
-                        </div>
-                    ))
-                }
-            </div>
-            <div className="aside-bottom">
-                {
-                    isExpand ?
-                    <div className='aside-item'
-                         onClick={()=>props.history.push(`/pipeline/${pipeline.id}/setting`)}
-                    >
-                        <div className="aside-item-icon"><SettingOutlined /></div>
-                        <div className="aside-item-title">设置</div>
+                    overlayClassName="aside-dropdown"
+                >
+                    <div className='aside-opt' data-title-right={isExpand?null:pipeline?.name}>
+                        <ListIcon
+                            isMar={false}
+                            text={pipeline?.name}
+                            colors={pipeline && pipeline?.color}
+                        />
+                        {isExpand &&
+                            <>
+                                <div className='aside-opt-name'>{pipeline?.name}</div>
+                                <div style={{opacity:0.8}}><CaretDownOutlined/></div>
+                            </>
+                        }
                     </div>
-                    :
-                    <div
-                        className="aside-bottom-text" data-title-right='设置'
-                        onClick={()=>props.history.push(`/pipeline/${pipeline.id}/setting`)}
-                    >
-                        <SettingOutlined className='aside-bottom-text-icon'/>
-                    </div>
-                }
-            </div>
-            <div className="aside-hover-expand"/>
-            <div className="aside-expand" onClick={()=>setIsExpand(!isExpand)}>
-                {isExpand ? <LeftCircleOutlined />:<RightCircleOutlined />}
-            </div>
-        </div>
+                </Dropdown>
+            }
+        />
     )
+
 }
 
 export default observer(PipelineAside)

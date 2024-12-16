@@ -172,7 +172,6 @@ const SettingAside = props =>  {
                      style={{paddingLeft: deep}}
                      onClick={()=>setOpenOrClose(item.id)}
                 >
-
                     <div className='system-aside-li-left'>
                         {item?.icon && <span className="sys-content-icon">{item.icon}</span>}
                         <span className='aside-second-title'>{item.title}</span>

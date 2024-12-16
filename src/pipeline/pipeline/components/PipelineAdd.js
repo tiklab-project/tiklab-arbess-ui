@@ -56,10 +56,9 @@ const PipelineAdd = props =>{
         setIsLoading(true)
         createPipeline(params).then(res => {
             if (res.code===0) {
-                setIsLoading(false)
                 props.history.push(`/pipeline/${res.data}/config`)
             }
-        })
+        }).finally(()=>setIsLoading(false))
     }
 
     // 渲染模板

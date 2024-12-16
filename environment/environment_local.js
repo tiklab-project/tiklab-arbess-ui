@@ -1,5 +1,5 @@
 // const api =  "http://arbess-ce-api.local.tiklab.net";
-const api =  "http://192.168.10.42:8090";
+const api =  "http://192.168.10.15:8090";
 const base_url = JSON.stringify(api);
 
 const webpackGlobal = {

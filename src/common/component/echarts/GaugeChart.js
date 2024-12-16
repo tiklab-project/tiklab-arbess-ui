@@ -34,7 +34,7 @@ const GaugeChart = props =>{
                             <div className="statistics-result-box">
                                 <div className="statistics-result-top">
                                     <div className="statistics-result-process" style={{...rotateStyle}}></div>
-                                    <div className={`statistics-result-data statistics-result-text-${key}`}>
+                                    <div className={`statistics-result-data statistics-result-text-${key}`} title={runResult?.[key]}>
                                         {runResult?.[key]||'0'}
                                     </div>
                                 </div>
