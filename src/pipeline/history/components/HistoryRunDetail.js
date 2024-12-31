@@ -45,7 +45,7 @@ const HistoryRunDetail = (props) => {
     const findTask = type => {
         findStageInstance(historyItem.instanceId).then(res=>{
             if(res.code===0){
-                setExecData(res.data)
+                setExecData(res?.data || []);
                 if(isRun && type==='init'){
                     findTaskInter()
                 } else if(isRun && type==='end'){
@@ -54,8 +54,7 @@ const HistoryRunDetail = (props) => {
             } else {
                 clearInterval(runInterRef.current)
             }
-            setExecLoading(false)
-        })
+        }).finally(()=>setExecLoading(false))
     }
 
     /**
@@ -76,13 +75,16 @@ const HistoryRunDetail = (props) => {
         runInterRef.current = setInterval(()=>{
             findStageInstance(historyItem.instanceId).then(res=>{
                 if(res.code===0){
-                    setExecData(res.data && res.data )
-                    const endValue = [...res.data].pop()
-                    if(endValue){
-                        const states = endValue.stageState;
-                        if(states ==="success" || states ==="error" || states ==="halt" ){
-                            clearInterval(runInterRef.current)
-                            setTimeout(()=>findTask("end"),1000)
+                    setExecData(res?.data || []);
+                    const data = [...res.data];
+                    const statesList = data.map(item => item.stageState);
+                    if(statesList?.length){
+                        // 检查是否包含指定状态
+                        const hasCriticalState = statesList.includes('error') || statesList.includes('halt');
+                        const lastStateSuccess = statesList.at(-1) === 'success';
+                        if (hasCriticalState || lastStateSuccess) {
+                            clearInterval(runInterRef.current);
+                            setTimeout(() => findTask("end"), 1000);
                         }
                     }
                 } else {

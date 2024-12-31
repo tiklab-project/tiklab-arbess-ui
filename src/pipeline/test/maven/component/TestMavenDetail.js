@@ -23,11 +23,10 @@ const TestMavenDetail = (props) => {
             findMavenTestList({
                 testId:mavenTestObj.id
             }).then(res => {
-                setIsLoading(false);
                 if(res.code===0){
                     setMavenTestList(res.data);
                 }
-            })
+            }).finally(()=>setIsLoading(false))
         }
     },[mavenTestObj?.id])
 

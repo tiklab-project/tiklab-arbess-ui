@@ -28,11 +28,10 @@ const Task = props => {
     useEffect(()=>{
         // 获取多任务
         findAllTask(params.id).then(res=>{
-            setIsLoading(false)
             if(res.code===0){
                 setTaskList(res.data || [])
             }
-        })
+        }).finally(()=>setIsLoading(false))
     },[taskFresh])
 
     /**

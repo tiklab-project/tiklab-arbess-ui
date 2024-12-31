@@ -83,27 +83,25 @@ const History = props =>{
     const findInstance = () => {
         if(route.path==='/history'){
             findUserInstance(params).then(Res=>{
-                setIsLoading(false)
                 if(Res.code===0){
                     if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
                         return
                     }
                     findInter()
                 }
-            })
+            }).finally(()=>setIsLoading(false))
         } else {
             findPipelineInstance({
                 ...params,
                 pipelineId:match.params.id,
             }).then(Res=>{
-                setIsLoading(false)
                 if(Res.code===0){
                     if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
                         return
                     }
                     findInter()
                 }
-            })
+            }).finally(()=>setIsLoading(false))
         }
     }
 
@@ -192,8 +190,8 @@ const History = props =>{
         const {runStatus,pipeline} = record
         if(runStatus==="run"){
             execStop(pipeline.id).then(res=>{
-                setIsLoading(false)
-            })
+
+            }).finally(()=>setIsLoading(false))
         } else {
             findOnePipeline(pipeline.id).then(res=>{
                 if(res.code===0){
@@ -206,8 +204,7 @@ const History = props =>{
                             if(res.code===0) {
                                 details(res.data)
                             }
-                            setIsLoading(false)
-                        })
+                        }).finally(()=>setIsLoading(false))
                     }
                 }
             })

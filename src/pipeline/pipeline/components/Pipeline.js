@@ -96,7 +96,6 @@ const Pipeline = props =>{
             }
         }
         findUserPipelinePage(param).then(res=>{
-            setIsLoading(false)
             if(res.code===0){
                 setPipelineListPage(res.data.dataList || [])
                 setPipPage({
@@ -105,7 +104,7 @@ const Pipeline = props =>{
                     totalRecord: res.data.totalRecord,
                 })
             }
-        })
+        }).finally(()=>setIsLoading(false))
     }
 
     /**

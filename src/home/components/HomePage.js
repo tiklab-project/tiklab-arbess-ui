@@ -106,8 +106,7 @@ const HomePage = props =>{
             if(res.code===0){
                 setNewlyOpen(res.data || [])
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     /**
@@ -120,8 +119,7 @@ const HomePage = props =>{
             if(res.code===0){
                 setRunResult(res.data)
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     /**
@@ -133,8 +131,7 @@ const HomePage = props =>{
             if(res.code===0){
                 renderRunTimeSpanChart(res.data,chartKey)
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     /**
@@ -150,8 +147,7 @@ const HomePage = props =>{
                     setReleasePipelineTop(res.data)
                 }
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     const renderRunTimeSpanChart = (data, chartKey) => {

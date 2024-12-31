@@ -22,11 +22,9 @@ const Env = props =>{
 
     //环境管理列表
     const [envList,setEnvList] = useState([])
-
-    // 弹出框状态
+    //弹出框状态
     const [visible,setVisible] = useState(false)
-
-    // 弹出框form表单value
+    //弹出框form表单value
     const [formValue,setFormValue] = useState(null)
 
     useEffect(()=>{

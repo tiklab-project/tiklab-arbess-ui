@@ -18,11 +18,10 @@ const ScanDetails = (props) => {
     useEffect(() => {
         if(detailObj?.xmlPath){
             findBugs(detailObj.xmlPath).then(res=>{
-                setIsLoading(false)
                 if(res.code===0){
                     setBugsList(res.data)
                 }
-            })
+            }).finally(()=>setIsLoading(false))
         }
     }, [detailObj?.xmlPath]);
 

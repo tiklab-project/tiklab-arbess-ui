@@ -105,8 +105,7 @@ const Overview = props =>{
             if(res.code===0){
                 setDynamicList(res.data?.dataList || [])
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     /**
@@ -119,8 +118,7 @@ const Overview = props =>{
             if(res.code===0){
                 setInstanceList(res.data?.dataList || [])
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     /**
@@ -133,8 +131,7 @@ const Overview = props =>{
             if(res.code===0){
                 setRunResult(res.data)
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     /**
@@ -146,8 +143,7 @@ const Overview = props =>{
             if(res.code===0){
                 renderRunTimeSpanChart(res.data,chartKey)
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     const renderRunTimeSpanChart = (data, chartKey) => {
@@ -188,7 +184,6 @@ const Overview = props =>{
                 }
             ]
         };
-
         chart.setOption(option);
     }
 

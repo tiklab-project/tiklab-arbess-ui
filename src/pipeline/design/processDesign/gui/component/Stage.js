@@ -36,11 +36,10 @@ const Stage = props =>{
     const findStage = () =>{
         setIsLoading(true)
         finAllStage(params.id).then(res=>{
-            setIsLoading(false)
             if(res.code===0){
                 setStageList(res.data || [])
             }
-        })
+        }).finally(()=>setIsLoading(false))
     }
 
     /**

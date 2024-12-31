@@ -7,6 +7,7 @@ import {observer} from "mobx-react";
 import {store} from "./store";
 import routes from "./routes";
 import App from "./app";
+import {InitInstallProvider} from 'tiklab-eam-ui';
 
 enableAxios()
 const Index = observer(() => {
@@ -18,10 +19,12 @@ const Index = observer(() => {
     }
 
     return (
-        <App
-            routes={routes}
-            allStore={allStore}
-        />
+        <InitInstallProvider bgroup={'arbess'}>
+            <App
+                routes={routes}
+                allStore={allStore}
+            />
+        </InitInstallProvider>
     )
 })
 

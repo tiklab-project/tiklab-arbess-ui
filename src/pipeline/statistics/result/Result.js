@@ -62,14 +62,16 @@ const Result = props =>{
         fetchTrendStatistics('rate','rateTrend','%')
     }
 
+    /**
+     * 获取运行结果
+     */
     const fetchTrendStatistics = (type, chartKey, unit) => {
         setSpinning(pev=>({...pev, [chartKey]: true}));
         findPipelineRunResultCount({pipelineId:match.params.id, countDay,type}).then(res=>{
             if(res.code===0){
                 renderTrendChart(res.data, chartKey, unit);
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     }
 
     const renderTrendChart = (data,chartKey,unit) => {

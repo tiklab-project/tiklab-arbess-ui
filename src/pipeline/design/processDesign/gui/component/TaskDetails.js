@@ -27,8 +27,7 @@ const TaskDetails = props =>{
         if(taskFormDrawer && dataItem?.formType==="task"){
             setLoading(true)
             findOneTasksOrTask(dataItem.taskId).then(()=>{
-                setLoading(false)
-            })
+            }).finally(()=>setLoading(false))
         }
     }, [taskFormDrawer]);
 

@@ -27,17 +27,11 @@ export class PipelineStore {
      */
     @action
     findUserPipelinePage = async value =>{
-        return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findUserPipelinePage",{
-                ...value,
-                userId:getUser().userId
-            }).then(res=>{
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+        const param = {
+            ...value,
+            userId:getUser().userId
+        }
+        return await Axios.post("/pipeline/findUserPipelinePage",param);
     }
 
     /**
@@ -45,18 +39,8 @@ export class PipelineStore {
      * @returns {Promise<unknown>}
      */
     @action
-    findUserPipeline = () =>{
-        return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/findUserPipeline",{userId:getUser().userId}).then(res=>{
-                if(res.code===0){
-                    this.pipelineList = res.data || []
-                }
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+    findUserPipeline = async () =>{
+        return await Axios.post("/pipeline/findUserPipeline",{userId:getUser().userId})
     }
 
     /**
@@ -65,23 +49,18 @@ export class PipelineStore {
      * @returns {Promise<unknown>}
      */
     @action
-    createPipeline = values =>{
-        return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/createPipeline",{
-                ...values,
-                user:{id:getUser().userId}
-            }).then(res=>{
-                if(res.code===0){
-                    message.info("创建成功")
-                } else {
-                    message.info("创建失败")
-                }
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+    createPipeline = async values =>{
+        const param = {
+            ...values,
+            user:{id:getUser().userId}
+        }
+        const res = await Axios.post("/pipeline/createPipeline",param);
+        if(res.code===0){
+            message.info("创建成功")
+        } else {
+            message.info("创建失败")
+        }
+        return res
     }
 
     /**
@@ -93,19 +72,13 @@ export class PipelineStore {
     deletePipeline = async value =>{
         const param = new FormData()
         param.append("pipelineId",value)
-        return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/deletePipeline",param).then(res=>{
-                if(res.code===0){
-                    message.info("删除成功")
-                } else {
-                    message.info("删除失败")
-                }
-                resolve(res)
-            }).catch(error=>{
-                console.log(error)
-                reject()
-            })
-        })
+        const res = await Axios.post("/pipeline/deletePipeline",param);
+        if(res.code===0){
+            message.info("删除成功")
+        } else {
+            message.info("删除失败")
+        }
+        return res
     }
 
     /**
@@ -114,19 +87,14 @@ export class PipelineStore {
      * @returns {Promise<unknown>}
      */
     @action
-    updatePipeline = values =>{
-        return new Promise((resolve, reject) => {
-            Axios.post("/pipeline/updatePipeline",values).then(res=>{
-                if(res.code===0){
-                    message.info("更新成功")
-                } else{
-                    message.info("更新失败")
-                }
-                resolve(res)
-            }).catch(error=>{
-                reject()
-            })
-        })
+    updatePipeline = async values =>{
+        const res = await Axios.post("/pipeline/updatePipeline",values);
+        if(res.code===0){
+            message.info("更新成功")
+        } else{
+            message.info("更新失败")
+        }
+        return res;
     }
 
     /**

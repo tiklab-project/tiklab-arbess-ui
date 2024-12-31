@@ -48,8 +48,7 @@ const Scan = (props) => {
                     totalRecord: r.data?.totalRecord || 1,
                 })
             }
-            setIsLoading(false)
-        })
+        }).finally(()=>setIsLoading(false))
     },[scanParam])
 
     /**

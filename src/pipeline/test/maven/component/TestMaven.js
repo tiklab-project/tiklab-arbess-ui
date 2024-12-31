@@ -52,8 +52,7 @@ const TestMaven = props => {
                     totalRecord: Res.data?.totalRecord || 1,
                 })
             }
-            setIsLoading(false)
-        })
+        }).finally(()=>setIsLoading(false))
     },[param])
 
     /**

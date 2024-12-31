@@ -48,7 +48,7 @@ class EnvStore {
      * @returns {Promise<*>}
      */
     @action
-    updateEnv =async value =>{
+    updateEnv = async value =>{
         const data = await Axios.post("/env/updateEnv",value)
         if(data.code===0){
             message.info(`修改成功`)

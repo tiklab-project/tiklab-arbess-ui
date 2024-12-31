@@ -20,13 +20,11 @@ const Grouping = props =>{
 
     const {findGroupList,deleteGroup} = groupingStore
 
-    // 分组管理列表
+    //分组管理列表
     const [groupList,setGroupList] = useState([])
-
-    // 弹出框状态
+    //弹出框状态
     const [visible,setVisible] = useState(false)
-
-    // 弹出框form表单value
+    //弹出框form表单value
     const [formValue,setFormValue] = useState(null)
 
     useEffect(()=>{
@@ -78,12 +76,12 @@ const Grouping = props =>{
             key:"groupName",
             width:"35%",
             ellipsis:true,
-            render:text => {
-                return  <span>
-                            <ListIcon text={text}/>
-                            <span>{text}</span>
-                        </span>
-            }
+            render:text => (
+                <span>
+                    <ListIcon text={text}/>
+                    <span>{text}</span>
+                </span>
+            )
         },
         {
             title:"创建人",

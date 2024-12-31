@@ -19,13 +19,11 @@ const Auth = props =>{
 
     const {deleteAuth,findAllAuth} = authStore
 
-    // 认证配置列表
+    //认证配置列表
     const [authList,setAuthList] = useState([])
-
-    // 弹出框状态
+    //弹出框状态
     const [visible,setVisible] = useState(false)
-
-    // 弹出框form表单value
+    //弹出框form表单value
     const [formValue,setFormValue] = useState(null)
 
     useEffect(()=>{

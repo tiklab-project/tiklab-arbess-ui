@@ -49,8 +49,7 @@ const Resources = props => {
             if(r.code===0){
                 setResourceList(r.data)
             }
-            setIsLoading(false)
-        })
+        }).finally(()=>setIsLoading(false))
     }
 
     /**

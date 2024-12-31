@@ -73,26 +73,34 @@ const Operate = (props) => {
         fetchTrendStatistics('halt', 'haltTrend', '终止率趋势', '%');
     };
 
+    /**
+     * 运行时间段统计
+     */
     const fetchRunTimeSpan = () => {
         setSpinning(pev=>({...pev, runTimeSpan: true}));
         findPipelineRunTimeSpan({ pipelineId: match.params.id, countDay }).then(res=>{
             if (res.code === 0) {
                 renderRunTimeSpanChart(res.data);
             }
-            setSpinning(pev=>({...pev, runTimeSpan: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, runTimeSpan: false})))
     };
 
+    /**
+     * 运行趋势统计
+     */
     const fetchTrendStatistics = (type, chartKey, title, unit) => {
         setSpinning(pev=>({...pev, [chartKey]: true}));
         findPipelineRunCount({ pipelineId: match.params.id, countDay, type }).then(res=>{
             if (res.code === 0) {
                 renderTrendChart(res.data, chartKey, title, unit);
             }
-            setSpinning(pev=>({...pev, [chartKey]: false}));
-        })
+        }).finally(()=>setSpinning(pev=>({...pev, [chartKey]: false})))
     };
 
+    /**
+     * 运行时间段统计图标渲染
+     * @param runSpan
+     */
     const renderRunTimeSpanChart = (runSpan) => {
         const chartDom = chartRefs.runTimeSpan.current;
         if(!chartDom){return;}
@@ -177,6 +185,9 @@ const Operate = (props) => {
         myChart.setOption(option);
     };
 
+    /**
+     * 运行趋势统计图表
+     */
     const renderTrendChart = (data, chartKey, title, unit) => {
         const chartDom = chartRefs[chartKey].current;
         if(!chartDom){return;}

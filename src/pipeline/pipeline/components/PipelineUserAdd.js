@@ -17,26 +17,21 @@ const PipelineUserAdd = props =>{
 
     const {findUserPage} = pipelineStore
 
-    // 选中的用户
+    //选中的用户
     const [addUser,setAddUser] = useState([])
-
-    // 用户列表
+    //用户列表
     const [userList,setUserList] = useState([])
-
-    // 选中的用户id
+    //选中的用户id
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
-
     const [pageParam] = useState({
         pageSize:5,
         currentPage:1
     })
-
-    // 用户请求数据
+    //用户请求数据
     const [findUserParam,setFindUserParam] = useState({
         pageParam
     })
-
-    // 用户分页
+    //用户分页
     const [userPage,setUserPage] = useState({})
 
     useEffect(()=>{
@@ -85,9 +80,8 @@ const PipelineUserAdd = props =>{
             if (selectedRowKeys.indexOf(record.id) >= 0) {
                 selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
                 addUser.splice(addUser.indexOf(record.id),1)
-            }
-            // 如果没有选中 -- 选中
-            else {
+            } else {
+                // 如果没有选中 -- 选中
                 selectedRowKeys.push(record.id)
                 addUser.push({...record, roleType: 0})
             }
@@ -142,7 +136,7 @@ const PipelineUserAdd = props =>{
 
     /**
      * 模糊查询用户
-     * @param e：文本框value
+     * @param {String} e - value
      */
     const changFindUser = e =>{
         setFindUserParam({

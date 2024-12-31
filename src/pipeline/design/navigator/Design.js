@@ -80,12 +80,11 @@ const Design = props =>{
             agentId:defaultAgent,
             pipelineId:pipeline.id
         }:{pipelineId:pipeline.id}).then(res=>{
-            setIsSpin(false)
             if(res.code===0){
                 setHistoryItem(res.data && res.data)
                 setIsDetails(true)
             }
-        })
+        }).finally(()=>setIsSpin(false))
     }
 
     /**
