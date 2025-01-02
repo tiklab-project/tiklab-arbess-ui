@@ -35,6 +35,9 @@ const PostprocessUserAdd = props =>{
         findDmUser()
     },[findUserParam])
 
+    /**
+     * 获取流水线成员
+     */
     const findDmUser = () => {
         findDmUserPage({
             ...findUserParam,

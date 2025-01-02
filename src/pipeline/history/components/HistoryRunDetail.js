@@ -77,7 +77,7 @@ const HistoryRunDetail = (props) => {
                 if(res.code===0){
                     setExecData(res?.data || []);
                     const data = [...res.data];
-                    const statesList = data.map(item => item.stageState);
+                    const statesList = data?.map(item => item.stageState) || [];
                     if(statesList?.length){
                         // 检查是否包含指定状态
                         const hasCriticalState = statesList.includes('error') || statesList.includes('halt');

@@ -18,6 +18,12 @@ const ArtifactPushMaven = props =>{
 
     const {updateTask,dataItem} = taskStore
 
+    /**
+     * 修改任务
+     * @param value
+     * @param type
+     * @returns {*}
+     */
     const onChange = (value,type) =>{
         if(type==="artifactType"){
             return updateTask({artifactType:value})

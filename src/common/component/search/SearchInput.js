@@ -3,6 +3,12 @@ import {SearchOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import './Search.scss';
 
+/**
+ * 文本搜索框
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const SearchInput = props =>{
 
     const {...res} = props;

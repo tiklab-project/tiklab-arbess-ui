@@ -14,6 +14,12 @@ import pipelineStore from "../../pipeline/pipeline/store/PipelineStore";
 import Aside from "../component/aside/PipelineAside";
 import {observer} from "mobx-react";
 
+/**
+ * 刘淑贤侧边栏
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const PipelineAside = (props) => {
 
     const {isExpand} = props;

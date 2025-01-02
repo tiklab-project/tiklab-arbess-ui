@@ -19,16 +19,13 @@ const PipelineAdd = props =>{
     const {createPipeline} = pipelineStore
     const user = getUser()
 
-    // 添加状态
+    //添加状态
     const [isLoading,setIsLoading] = useState(false)
-
-    // 当前步骤
+    //当前步骤
     const [current,setCurrent] = useState(0)
-
-    // 流水线模板 -- 下标
+    //流水线模板 -- 下标
     const [templateType,setTemplateType] = useState(1)
-
-    // 基本信息
+    //基本信息
     const [baseInfo,setBaseInfo] = useState({
         power:1,
         type:2,

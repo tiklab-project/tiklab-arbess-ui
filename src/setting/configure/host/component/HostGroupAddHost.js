@@ -13,24 +13,21 @@ const HostGroupAddHost = (props) => {
 
     const {findAuthHostPage} = hostStore;
 
-    // 主机列表
+    //主机列表
     const [hostList,setHostList] = useState([]);
-
+    //选中的主机
     const [yHostList,setYHostList] = useState([]);
-
-    // 选中的主机id
+    //选中的主机id
     const [selectedRowKeys,setSelectedRowKeys] = useState([]);
-
-    // 消息通知人员下拉框
+    //消息通知人员下拉框
     const [hostAddVisible,setHostAddVisible] = useState(false);
-
     const pageParam = {
         pageSize:5,
         currentPage:1
     };
-
+    //获取主机请求数据
     const [hostParams,setHostParams] = useState({pageParam});
-
+    //主机数据
     const [hostPage,setHostPage] = useState({totalPage:1,totalRecord:1});
 
     useEffect(()=>{
@@ -38,6 +35,9 @@ const HostGroupAddHost = (props) => {
         findHost()
     },[hostParams])
 
+    /**
+     * 获取主机
+     */
     const findHost = () =>{
         findAuthHostPage(hostParams).then(res=>{
             if(res.code===0){

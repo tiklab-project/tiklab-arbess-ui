@@ -20,10 +20,9 @@ const FormsMirror = props =>{
     const narrowMirrorRef = useRef();
     const expandMirrorRef = useRef();
 
-    // 边框
+    //边框
     const [bordered,setBordered] = useState(false)
-
-    // 代码块弹出框显示
+    //代码块弹出框显示
     const [visible,setVisible] = useState(false)
 
     /**
@@ -53,6 +52,9 @@ const FormsMirror = props =>{
         closeMirror(type)
     }
 
+    /**
+     * 代码框重新赋值
+     */
     const setNarrowMirrorValue = () =>{
         if(dataItem.task){
             narrowMirrorRef.current.editor.setValue(dataItem.task[name] || "")

@@ -13,6 +13,12 @@ import k8sStore from "../store/K8sStore";
 
 const pageSize = 15;
 
+/**
+ * Kubernetes集群
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const K8s = props => {
 
     const {findAuthHostK8sPage,deleteAuthHostK8s} = k8sStore;

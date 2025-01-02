@@ -5,6 +5,12 @@ import "./PipelineSetAside.scss";
 import {observer} from "mobx-react";
 import {DownOutlined, UpOutlined} from "@ant-design/icons";
 
+/**
+ * 三级导航，流水线设置导航--侧边栏
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const PipelineSetAside = props =>{
 
     const {route,domainId,outerPath,projectRouters} = props
@@ -16,6 +22,10 @@ const PipelineSetAside = props =>{
 
     const isExpandedTree = key => expandedTree.some(item => item ===key)
 
+    /**
+     * 展开闭合树
+     * @param key
+     */
     const select = (key) => {
         if (isExpandedTree(key)) {
             setExpandedTree(expandedTree.filter(item => item !== key))

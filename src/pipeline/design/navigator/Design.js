@@ -61,6 +61,7 @@ const Design = props =>{
     },[])
 
     useEffect(() => {
+        //多阶段未填写必需任务
         validStagesMustField(pipelineId).then()
     }, [taskFresh,stageFresh]);
 

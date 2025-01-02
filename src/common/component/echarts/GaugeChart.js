@@ -1,6 +1,12 @@
 import React from 'react';
 import './GaugeChart.scss';
 
+/**
+ * 图标 -- 运行统计
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const GaugeChart = props =>{
 
     const {runResult} = props

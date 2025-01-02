@@ -38,6 +38,9 @@ const PipelineUserAdd = props =>{
         findUser()
     },[findUserParam])
 
+    /**
+     * 获取所有用户
+     */
     const findUser = () => {
         findUserPage(findUserParam).then(res=>{
             if(res.code===0){

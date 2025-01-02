@@ -25,7 +25,7 @@ import pip_more from "../../../assets/images/svg/pie_more.svg";
 import "./PipelineTable.scss";
 
 /**
- * 流水线表格页面
+ * 流水线表格
  * @param props
  * @returns {JSX.Element}
  * @constructor
@@ -43,13 +43,10 @@ const PipelineTable = props =>{
 
     //所有流水线
     const [pipelineList,setPipelineList] = useState([])
-
     //克隆的对象
     const [pipelineObj,setPipelineObj] = useState(null)
-
     //克隆弹出框
     const [copyVisible,setCopyVisible] = useState(false)
-
     //克隆状态
     const [copyStatus,setCopyStatus] = useState(false)
 

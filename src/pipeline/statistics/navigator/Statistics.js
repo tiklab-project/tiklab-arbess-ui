@@ -1,6 +1,12 @@
 import React from 'react';
 import PipelineSetAside from "../../../common/component/aside/PipelineSetAside";
 
+/**
+ * 统计侧边栏--三级导航
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const Statistics = (props) => {
 
     const {match} = props

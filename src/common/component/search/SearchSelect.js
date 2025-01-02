@@ -3,6 +3,12 @@ import {Select} from "antd";
 import {CaretDownOutlined} from "@ant-design/icons";
 import './Search.scss';
 
+/**
+ * 下拉搜索
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const SearchSelect = (props) => {
 
     const {children,...res} = props;

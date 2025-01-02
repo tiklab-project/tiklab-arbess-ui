@@ -9,12 +9,14 @@ export const ArtifactHadess = props =>{
 
     const {findXPackRpy} = hadessStore
 
-    // 推送地址获取加载状态
+    //推送地址获取加载状态
     const [isSpin,setSpin] = useState(false);
-
-    // 仓库
+    //仓库
     const [xpackRpy,setXpackRpy] = useState(false);
 
+    /**
+     * 获取仓库
+     */
     const onFocus = () => {
         if(!dataItem.task?.authId) return;
         setSpin(true)
@@ -22,8 +24,7 @@ export const ArtifactHadess = props =>{
             if(r.code===0){
                 setXpackRpy(r.data)
             }
-            setSpin(false)
-        })
+        }).finally(()=>setSpin(false))
     }
 
     return (

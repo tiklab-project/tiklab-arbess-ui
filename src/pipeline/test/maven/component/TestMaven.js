@@ -20,11 +20,11 @@ const TestMaven = props => {
 
     const {findMavenTestPage,deleteMavenTest} = mavenTestStore;
 
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(true)
-    // 测试列表
+    //测试列表
     const [testList,setTestList] = useState([])
-    // 测试页数
+    //测试页数
     const [testPage,setTestPage] = useState({
         totalPage:1,
         totalRecord:1
@@ -33,10 +33,11 @@ const TestMaven = props => {
         pageSize:pageSize,
         currentPage: 1,
     }
-    // 请求数据
+    //请求数据
     const [param,setParam] = useState({
         pageParam
     })
+    //测试详情
     const [mavenTestObj,setMavenTestObj] = useState(null);
 
     useEffect(()=>{

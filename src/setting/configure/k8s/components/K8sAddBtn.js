@@ -3,7 +3,12 @@ import Btn from "../../../../common/component/btn/Btn";
 import K8sModal from "./K8sModal";
 
 
-
+/**
+ * Kubernetes集群添加按钮
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const K8sAddBtn = props =>{
 
     const {isConfig,visible,setVisible,formValue,setFormValue,findAuth} = props

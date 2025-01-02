@@ -62,6 +62,10 @@ const HostModal = props =>{
         setVisible(false)
     }
 
+    /**
+     * 切换授权类型
+     * @param value
+     */
     const changHostType = value =>{
         setHostType(value)
     }

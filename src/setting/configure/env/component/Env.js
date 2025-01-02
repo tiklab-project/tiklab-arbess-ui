@@ -77,10 +77,12 @@ const Env = props =>{
             width:"35%",
             ellipsis:true,
             render:text => {
-                return  <span>
-                            <ListIcon text={text}/>
-                            <span>{text}</span>
-                        </span>
+                return (
+                    <span>
+                        <ListIcon text={text}/>
+                        <span>{text}</span>
+                    </span>
+                )
             }
         },
         {

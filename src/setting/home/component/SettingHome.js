@@ -23,6 +23,12 @@ import {
     DesktopOutlined,
 } from "@ant-design/icons"
 
+/**
+ * 设置首页
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const SettingHome = props => {
 
     const {findCount,findHomesApplyProduct,findUseLicence} = countStore;
@@ -36,12 +42,14 @@ const SettingHome = props => {
     const [log,setLog] = useState(null);
 
     useEffect(()=>{
+        //获取系统设置统计数据
         findCount().then(res=>{
             if(res.code===0){
                 setCount(res.data)
             }
         })
         if(version==='cloud'){
+            //获取日志
             findlogpage({
                 pageParam: {pageSize: 1, currentPage: 1},
                 userId:getUser().userId
@@ -50,12 +58,14 @@ const SettingHome = props => {
                     setLog(res.data)
                 }
             })
+            //获取版本
             findHomesApplyProduct().then(res=>{
                 if(res.code===0){
                     setLicence(res.data)
                 }
             })
         } else {
+            //获取版本
             findUseLicence().then(res=>{
                 if(res.code===0){
                     setLicence(res.data)
@@ -79,6 +89,10 @@ const SettingHome = props => {
         props.history.push(`/setting/${path}`)
     }
 
+    /**
+     * 去授权
+     * @returns {WindowProxy}
+     */
     const goAuth = () => {
         if(version==='cloud'){
             return applyJump('https://work.cloud.tiklab.net/#/enterprise/auth/arbess')

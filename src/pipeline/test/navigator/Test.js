@@ -1,6 +1,12 @@
 import React from 'react';
 import PipelineSetAside from "../../../common/component/aside/PipelineSetAside";
 
+/**
+ * 流水线测试导航--三级导航
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const Test = (props) => {
 
     const {match} = props

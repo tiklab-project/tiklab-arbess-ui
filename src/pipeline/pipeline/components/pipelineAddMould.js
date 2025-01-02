@@ -72,44 +72,48 @@ const PipelineAddMould = ({templateType,setTemplateType}) =>{
     ]
 
     const name = liName =>{
-        return  <div className="li-step">
-                    <span className="li-step-name">{liName}</span>
-                </div>
+        return (
+            <div className="li-step">
+                <span className="li-step-name">{liName}</span>
+            </div>
+        )
     }
 
-    return <div className="pipeline-template-ul">
-                <div className="pipeline-template-title">流水线模板</div>
-                <div className={`${templateType===1?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
-                     onClick={()=>setTemplateType(1)}
-                >
-                    <div className="li-self">自定义</div>
-                </div>
-                {
-                    templateLis.map(item=>{
-                        return (
-                            <div key={item.id}
-                                 className={`${templateType===item.type?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
-                                 onClick={()=>setTemplateType(item.type)}
-                            >
-                                <div>
-                                    <div className="pipeline-template-li-header">
-                                        <span className="li-header-icon"><NodeIndexOutlined /></span>
-                                        <span className="li-header-name">{item.title}-{item.brand}</span>
-                                        <span>部署到</span>
-                                        <span className="li-header-title">{item.desc}</span>
-                                        <span>环境</span>
-                                    </div>
-                                    <div className="pipeline-template-li-content">
-                                        { item.zreo && name(item.zreo)}
-                                        { name(item.first) }
-                                        { name(item.second) }
-                                    </div>
+    return (
+        <div className="pipeline-template-ul">
+            <div className="pipeline-template-title">流水线模板</div>
+            <div className={`${templateType===1?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
+                 onClick={()=>setTemplateType(1)}
+            >
+                <div className="li-self">自定义</div>
+            </div>
+            {
+                templateLis.map(item=>{
+                    return (
+                        <div key={item.id}
+                             className={`${templateType===item.type?"pipeline-template-li pipeline-template-select":"pipeline-template-li"}`}
+                             onClick={()=>setTemplateType(item.type)}
+                        >
+                            <div>
+                                <div className="pipeline-template-li-header">
+                                    <span className="li-header-icon"><NodeIndexOutlined /></span>
+                                    <span className="li-header-name">{item.title}-{item.brand}</span>
+                                    <span>部署到</span>
+                                    <span className="li-header-title">{item.desc}</span>
+                                    <span>环境</span>
+                                </div>
+                                <div className="pipeline-template-li-content">
+                                    { item.zreo && name(item.zreo)}
+                                    { name(item.first) }
+                                    { name(item.second) }
                                 </div>
                             </div>
-                        )
-                    })
-                }
-            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
+    )
 }
 
 export default PipelineAddMould

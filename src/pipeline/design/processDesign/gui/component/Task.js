@@ -19,10 +19,9 @@ const Task = props => {
 
     const {findAllTask,taskFresh,setDataItem,deleteTask,taskMustField} = taskStore
 
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(true)
-
-    // 多任务列表
+    //多任务列表
     const [taskList,setTaskList] = useState([])
 
     useEffect(()=>{

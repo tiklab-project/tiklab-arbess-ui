@@ -20,6 +20,9 @@ const K8sModal = (props) => {
         }
     },[visible])
 
+    /**
+     * 添加或修改Kubernetes集群
+     */
     const onOk = () => {
         form.validateFields().then(values => {
             if(formValue){

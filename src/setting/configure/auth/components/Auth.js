@@ -71,10 +71,12 @@ const Auth = props =>{
             width:"25%",
             ellipsis:true,
             render:text => {
-                return  <span>
-                            <ListIcon text={text}/>
-                            <span>{text}</span>
-                        </span>
+                return (
+                    <span>
+                        <ListIcon text={text}/>
+                        <span>{text}</span>
+                    </span>
+                )
             }
         },
         {
@@ -92,10 +94,12 @@ const Auth = props =>{
             width:"20%",
             ellipsis:true,
             render:(text,record) => {
-                return  <Space>
-                            <Profile userInfo={record.user}/>
-                            {text}
-                        </Space>
+                return (
+                    <Space>
+                        <Profile userInfo={record.user}/>
+                        {text}
+                    </Space>
+                )
             }
         },
         {

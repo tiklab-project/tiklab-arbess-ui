@@ -154,6 +154,12 @@ const applicationRouters =  [
     },
 ]
 
+/**
+ * 设置
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const Setting = props =>  {
     return (
         <Aside

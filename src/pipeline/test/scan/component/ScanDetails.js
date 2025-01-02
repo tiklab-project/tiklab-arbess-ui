@@ -5,18 +5,26 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import scanStore from "../store/ScanStore";
 import "./Scan.scss";
 
+/**
+ * 代码扫描详情
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const ScanDetails = (props) => {
 
     const {detailObj,setDetailObj} = props
 
     const {findBugs} = scanStore;
 
+    //扫描bug列表
     const [bugsList,setBugsList] = useState([]);
     //加载状态
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(() => {
         if(detailObj?.xmlPath){
+            //扫描bug列表
             findBugs(detailObj.xmlPath).then(res=>{
                 if(res.code===0){
                     setBugsList(res.data)
@@ -25,6 +33,9 @@ const ScanDetails = (props) => {
         }
     }, [detailObj?.xmlPath]);
 
+    /**
+     * 返回
+     */
     const backScan = () => {
         setDetailObj(null)
     }

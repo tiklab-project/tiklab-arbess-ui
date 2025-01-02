@@ -12,7 +12,7 @@ import "./TestHubo.scss";
 const pageSize = 15;
 
 /**
- * 测试页面
+ * testHubo测试页面
  */
 const TestHubo = props => {
 
@@ -20,11 +20,11 @@ const TestHubo = props => {
 
     const {findAllRelevance,deleteRelevance} = testhuboStore;
 
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(true)
-    // 测试列表
+    //测试列表
     const [testList,setTestList] = useState([])
-    // 测试页数
+    //测试页数
     const [testPage,setTestPage] = useState({
         totalPage:1,
         totalRecord:1
@@ -33,13 +33,13 @@ const TestHubo = props => {
         pageSize:pageSize,
         currentPage: 1,
     }
-    // 请求数据
+    //请求数据
     const [param,setParam] = useState({
         pageParam
     })
 
     useEffect(()=>{
-        // 获取测试列表
+        //获取测试列表
         findAllRelevance({
             pipelineId:params.id,
             ...param

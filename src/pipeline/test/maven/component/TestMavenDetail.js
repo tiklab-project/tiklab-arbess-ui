@@ -14,8 +14,9 @@ const TestMavenDetail = (props) => {
 
     const {findMavenTestList} = mavenTestStore;
 
+    //测试详情
     const [mavenTestList,setMavenTestList] = useState([]);
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(true)
 
     useEffect(() => {

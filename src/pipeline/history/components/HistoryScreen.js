@@ -31,7 +31,7 @@ const HistoryScreen = props =>{
     },[currentPage])
 
     /**
-     * 获取项目成员
+     * 获取流水线成员
      */
     const findDmUser = () =>{
         findDmUserPage({
@@ -56,7 +56,7 @@ const HistoryScreen = props =>{
     }
 
     /**
-     * 下拉滚动查看用户
+     * 下拉滚动加载用户
      * @param e
      */
     const scrollEnd = (e) => {

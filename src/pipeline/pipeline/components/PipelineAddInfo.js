@@ -29,18 +29,18 @@ const PipelineAddInfo = props =>{
     const [form] = Form.useForm()
     const user = getUser()
 
-    // 添加用户下拉显示
+    //添加用户下拉显示
     const [visible,setVisible] = useState(false);
-    // 流水线类型 -- 1多任务或2或阶段
+    //流水线类型 -- 1多任务或2或阶段
     const [type,setType] = useState(baseInfo?.type || 1);
-    // 流水线权限 -- 1私有或2公有
+    //流水线权限 -- 1私有或2公有
     const [powerType,setPowerType] = useState(1);
-    // 流水线私有添加用户
+    //流水线私有添加用户
     const [yUserList,setYUserList] = useState(baseInfo?.userList || []);
-    // 环境管理列表
+    //环境管理列表
     const [envList,setEnvList] = useState([]);
-    // 分组管理列表
-    const [groupList,setGroupList] = useState([])
+    //分组管理列表
+    const [groupList,setGroupList] = useState([]);
 
     useEffect(()=>{
         // 获取环境和分组管理

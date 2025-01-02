@@ -13,10 +13,9 @@ const FormsSelect = props => {
 
     const {name,rules,label,isSpin,children,...res} = props
 
-    // 是否显示下拉图标
+    //是否显示下拉图标
     const [showArrow,setShoeArrow] = useState(false)
-
-    // 下拉框聚焦
+    //下拉框聚焦
     const [bordered,setBordered] = useState(false)
 
 

@@ -12,15 +12,21 @@ import "./Scan.scss";
 
 const pageSize = 15;
 
+/**
+ * 代码扫描
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const Scan = (props) => {
 
     const {match:{params}} = props
 
     const {spotbugsScan,deleteSpotbugs} = scanStore
 
-    // 加载状态
+    //加载状态
     const [isLoading,setIsLoading] = useState(true)
-    // 页数
+    //页数
     const [scanPage,setScanPage] = useState({
         totalPage:1,
         totalRecord:1
@@ -29,14 +35,15 @@ const Scan = (props) => {
         pageSize:pageSize,
         currentPage: 1,
     }
-    // 请求数据
+    //请求数据
     const [scanParam,setScanParam] = useState({pageParam})
-    // 扫描数据
+    //扫描数据
     const [scanList,setScanList] = useState([]);
-
+    //扫描详情
     const [detailObj,setDetailObj] = useState(null);
 
     useEffect(()=>{
+        //获取代码扫描
         spotbugsScan({
             pipelineId:params.id,
             ...scanParam

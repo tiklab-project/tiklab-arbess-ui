@@ -26,19 +26,15 @@ const BasicInfo = props =>{
 
     const {deletePipeline,pipeline}=pipelineStore
 
-    // 树的展开与闭合
+    //树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([])
-
-    // 删除加载状态
+    //删除加载状态
     const [isLoading,setIsLoading] = useState(false)
-
-    // 删除弹出框
+    //删除弹出框
     const [delVisible,setDelVisible] = useState(false)
-
-    // 删除文本框内容
+    //删除文本框内容
     const [delValue,setDelValue] = useState("")
-
-    // 删除效验提示内容
+    //删除效验提示内容
     const [delError,setDelError] = useState(null)
 
     /**
@@ -59,6 +55,9 @@ const BasicInfo = props =>{
         })
     }
 
+    /**
+     * 关闭删除流水线弹出框
+     */
     const onCancel = () =>{
         if(!isLoading){
             setIsLoading(false)

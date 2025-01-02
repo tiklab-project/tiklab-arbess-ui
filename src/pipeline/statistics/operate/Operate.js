@@ -7,7 +7,7 @@ import statisticsStore from '../common/StatisticsStore';
 import '../common/Statistics.scss';
 
 /**
- * Operate Statistics
+ * 运行统计
  * @param props
  * @returns {Element}
  * @constructor
@@ -25,7 +25,9 @@ const Operate = (props) => {
         haltTrend: useRef(null)
     };
 
+    //统计时间筛选
     const [countDay, setCountDay] = useState(7);
+    //加载
     const [spinning, setSpinning] = useState({
         runTimeSpan: false,
         timeTrend: false,
@@ -35,6 +37,7 @@ const Operate = (props) => {
     });
 
     useEffect(() => {
+        //echart宽度自适应
         const handleResize = () => {
             Object.keys(chartRefs).forEach((key) => {
                 const chartDom = chartRefs[key].current;
@@ -65,7 +68,11 @@ const Operate = (props) => {
         fetchStatistics();
     }, [countDay]);
 
+    /**
+     * 获取运行统计
+     */
     const fetchStatistics = () => {
+        //运行时间段统计
         fetchRunTimeSpan();
         fetchTrendStatistics('time', 'timeTrend', '平均执行时长趋势', 's');
         fetchTrendStatistics('success', 'successTrend', '成功率趋势', '%');

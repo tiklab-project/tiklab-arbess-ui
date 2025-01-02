@@ -11,7 +11,7 @@ import groupingStore from "../store/GroupingStore";
 import "../../../common/Common.scss";
 
 /**
- * 环境管理
+ * 分组管理
  * @param props
  * @returns {JSX.Element}
  * @constructor
@@ -43,6 +43,9 @@ const Grouping = props =>{
         })
     }
 
+    /**
+     * 添加分组弹出框
+     */
     const createEnv = () => {
         setVisible(true)
         setFormValue(null)

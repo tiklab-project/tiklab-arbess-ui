@@ -6,7 +6,12 @@ import echarts from "../../../common/component/echarts/Echarts";
 import '../common/Statistics.scss';
 import SearchSelect from "../../../common/component/search/SearchSelect";
 
-
+/**
+ * 结果统计
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const Result = props =>{
 
     const {match} = props;
@@ -27,6 +32,7 @@ const Result = props =>{
     const [countDay,setCountDay] = useState(7);
 
     useEffect(() => {
+        //echart宽度自适应
         const handleResize = () => {
             Object.keys(chartRefs).forEach((key) => {
                 const chartDom = chartRefs[key].current;
@@ -57,6 +63,9 @@ const Result = props =>{
         fetchStatistics()
     }, [countDay]);
 
+    /**
+     * 获取结果统计
+     */
     const fetchStatistics = () =>{
         fetchTrendStatistics('number','numberTrend','次')
         fetchTrendStatistics('rate','rateTrend','%')

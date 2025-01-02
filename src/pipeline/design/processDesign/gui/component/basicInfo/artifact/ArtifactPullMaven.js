@@ -17,7 +17,7 @@ const ArtifactPullMaven = props => {
     const {dataItem,updateTask} = taskStore
 
     /**
-     * 更新
+     * 修改任务
      * @param value
      * @param type
      * @returns {*}

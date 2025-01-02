@@ -25,12 +25,10 @@ const CodeThird = props =>{
 
     // 分支选择器是否禁止
     const [prohibited,setProhibited] = useState(true);
-
     // 仓库获取加载
     const [isSpin,setSpin] = useState(false);
     // 分支获取加载
     const [isBranchSpin,setBranchSpin] = useState(false);
-
     // 仓库
     const [codeRpy,setCodeRpy] = useState([]);
     // 分支

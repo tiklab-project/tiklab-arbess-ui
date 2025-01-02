@@ -40,6 +40,12 @@ const firstRouters=[
     }
 ]
 
+/**
+ * 布局
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const Portal = props =>{
 
     const {route,history,systemRoleStore,HelpLink,AppLink,AvatarLink} = props;

@@ -81,6 +81,12 @@ const templateRouter = [
     }
 ]
 
+/**
+ * 设置导航--侧边栏
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const SettingAside = props =>  {
 
     const {enhance,outerPath,applicationRouters,systemRoleStore} = props;

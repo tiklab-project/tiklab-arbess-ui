@@ -36,11 +36,10 @@ const TestHubo = props => {
             case 'testSpace':
                 setSpin(true)
                 findTestSpace(authId).then(res=>{
-                    setSpin(false)
                     if(res.code===0){
                         setTestSpace(res.data)
                     }
-                })
+                }).finally(()=>setSpin(false))
                 return;
             case 'testPlan':
                 findTestPlan({

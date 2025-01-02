@@ -13,6 +13,7 @@ const DesignAgent = (props) => {
     const [agentList,setAgentList] = useState([]);
 
     useEffect(()=>{
+        //获取agent列表
         findAgentList().then(res=>{
             if(res.code===0){
                 setAgentList(res.data)

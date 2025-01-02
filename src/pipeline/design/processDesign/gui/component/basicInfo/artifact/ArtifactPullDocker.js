@@ -16,6 +16,12 @@ const ArtifactPullDocker = props => {
 
     const {dataItem,updateTask} = taskStore
 
+    /**
+     * 修改任务：拉取方式、拉取仓库
+     * @param value
+     * @param type
+     * @returns {*}
+     */
     const onChange = (value,type) => {
         if(type==='pullType'){
             return updateTask({pullType:value})

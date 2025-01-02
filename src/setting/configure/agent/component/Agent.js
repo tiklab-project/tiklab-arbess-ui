@@ -12,6 +12,12 @@ import {UserSwitchOutlined} from "@ant-design/icons";
 
 const pageSize = 15;
 
+/**
+ * Agent
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const Agent = (props) => {
 
     const {findAgentPage,deleteAgent,updateDefaultAgent} = agentStore;
@@ -29,6 +35,7 @@ const Agent = (props) => {
     const [agentPage,setAgentPage]=useState({});
 
     useEffect(()=>{
+        //获取agent
         findAgentPage(agentRequest).then(res=>{
             if(res.code===0){
                 setAgentList(res.data.dataList);

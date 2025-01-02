@@ -2,7 +2,7 @@ import React from "react";
 import "./ListIcon.scss";
 
 /**
- * 表格标题首字母
+ * 图标--列表标题首字母
  */
 const ListIcon = ({text,colors,isMar=true}) => {
 

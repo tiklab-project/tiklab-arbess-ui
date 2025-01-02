@@ -1,6 +1,12 @@
 import React,{useRef,useEffect} from "react";
 import {Drawer} from "antd";
 
+/**
+ * 抽屉
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const PipelineDrawer = props =>{
 
     const {requireRef,children,...res} = props
