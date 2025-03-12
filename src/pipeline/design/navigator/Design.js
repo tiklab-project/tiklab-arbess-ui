@@ -1,5 +1,12 @@
+/**
+ * @Description: 设计
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useEffect} from "react";
-import {Spin} from "antd";
+import {Spin,Tooltip} from "antd";
 import {inject,observer,Provider} from "mobx-react";
 import taskStore from "../processDesign/gui/store/TaskStore";
 import stageStore from "../processDesign/gui/store/StageStore";
@@ -17,10 +24,8 @@ import Trigger from "../trigger/components/Trigger";
 import Variable from "../variable/components/Variable";
 import Postprocess from "../postprocess/components/Postprocess";
 import "./Design.scss";
+import {getUser} from "tiklab-core-ui";
 
-/**
- * 设计页面
- */
 const Design = props =>{
 
     const store = {
@@ -28,20 +33,24 @@ const Design = props =>{
         stageStore,
         postprocessStore,
         variableStore,
-        triggerStore
+        triggerStore,
     }
 
-    const {match,pipelineStore} = props
+    const {match,pipelineStore,systemRoleStore} = props
 
-    const {pipeline,findOnePipeline} = pipelineStore
-    const {execStart} = historyStore
-    const {taskFresh} = taskStore
-    const {validStagesMustField,stageMustField,stageFresh} = stageStore
-    const {findPipelinePost,postprocessData} = postprocessStore
-    const {findAllTrigger,triggerData} = triggerStore
-    const {findAllVariable,variableData} = variableStore
+    const {domainPermissions} = systemRoleStore;
+    const {pipeline,findOnePipeline} = pipelineStore;
+    const {execStart} = historyStore;
+    const {setTaskPermissions,taskFresh,mustFieldFresh} = taskStore;
+    const {validStagesMustField,stageMustField,stageFresh} = stageStore;
+    const {findPipelinePost,postprocessData} = postprocessStore;
+    const {findAllTrigger,triggerData} = triggerStore;
+    const {findAllVariable,variableData} = variableStore;
 
+    const userId = getUser().userId;
     const pipelineId = match.params.id;
+
+    const pipelinePermissions = domainPermissions[`${userId}_${pipelineId}`] && domainPermissions[`${userId}_${pipelineId}`];
 
     //点击运行按钮
     const [isSpin,setIsSpin] = useState(false);
@@ -52,18 +61,28 @@ const Design = props =>{
     //默认agent
     const [defaultAgent,setDefaultAgent] = useState(null);
     //选择类型
-    const [active,setActive] = useState('config')
+    const [active,setActive] = useState('config');
 
     useEffect(()=>{
-        findPipelinePost(pipelineId).then()
-        findAllTrigger(pipelineId).then()
-        findAllVariable(pipelineId).then()
+        //后置处理
+        findPipelinePost(pipelineId).then();
+        //触发器
+        findAllTrigger(pipelineId).then();
+        //变量
+        findAllVariable(pipelineId).then();
     },[])
+
+    useEffect(() => {
+        //权限
+        if(pipelinePermissions){
+            setTaskPermissions(pipelinePermissions);
+        }
+    }, [pipelinePermissions]);
 
     useEffect(() => {
         //多阶段未填写必需任务
         validStagesMustField(pipelineId).then()
-    }, [taskFresh,stageFresh]);
+    }, [taskFresh,stageFresh,mustFieldFresh]);
 
     useEffect(()=>{
         // 监听运行状态，获取流水线信息
@@ -86,14 +105,6 @@ const Design = props =>{
                 setIsDetails(true)
             }
         }).finally(()=>setIsSpin(false))
-    }
-
-    /**
-     * 是否能运行
-     * @returns {boolean}
-     */
-    const runStatu = () => {
-        return stageMustField?.length <= 0;
     }
 
     const typeLis = [
@@ -119,10 +130,42 @@ const Design = props =>{
         }
     ]
 
+    /**
+     * 关闭弹出框
+     */
     const goBack = () =>{
         setIsDetails(false);
         setHistoryItem(null);
     }
+
+    //按钮组件
+    const runButtonHtml = () => {
+        if(!pipeline){return}
+        const {state} = pipeline;
+        if(state===2){
+            return (
+                <Btn type={"primary"} title={"运行中"}/>
+            )
+        }
+        if(stageMustField?.length>0){
+            return (
+                <Btn type={"disabled"} title={"运行"}/>
+            )
+        }
+        if(!pipelinePermissions?.includes('pipeline_task_run')){
+            return (
+                <Tooltip title={'当前没有运行权限，请联系管理员分配'}>
+                    <span>
+                        <Btn title={"运行"}/>
+                    </span>
+                </Tooltip>
+            )
+        }
+        return (
+            <Btn type={"primary"} title={"运行"} onClick={run}/>
+        )
+    }
+
 
     return(
         <Provider {...store}>
@@ -157,11 +200,7 @@ const Design = props =>{
                                     defaultAgent={defaultAgent}
                                     setDefaultAgent={setDefaultAgent}
                                 />
-                                {
-                                    pipeline?.state===2 ?
-                                        <Btn type={"primary"} title={"运行中"}/> :
-                                        <Btn type={runStatu() ? "primary" : "disabled" } onClick={runStatu() ? ()=>run() : undefined } title={"运行"}/>
-                                }
+                                {runButtonHtml()}
                             </div>
                         </div>
                     </div>
@@ -187,4 +226,4 @@ const Design = props =>{
     )
 }
 
-export default inject("pipelineStore")(observer(Design))
+export default inject("pipelineStore","systemRoleStore")(observer(Design))

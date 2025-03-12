@@ -1,3 +1,10 @@
+/**
+ * @Description: 动态
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {withRouter} from "react-router-dom";
 import ListEmpty from "./ListEmpty";
@@ -5,9 +12,6 @@ import Profile from "../profile/Profile";
 import moment from "moment/moment";
 import "./DynamicList.scss";
 
-/**
- * 动态列表
- */
 const DynamicList = props =>{
 
     const {dynamicList} = props

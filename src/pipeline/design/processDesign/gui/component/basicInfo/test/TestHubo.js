@@ -90,7 +90,7 @@ const TestHubo = props => {
 
             <FormsSelect
                 rules={[{required:true, message:"测试空间不能为空"}]}
-                name={"testSpace"}
+                name={["testSpace","name"]}
                 label={"测试空间"}
                 isSpin={isSpin}
                 onFocus={()=>onFocus('testSpace')}
@@ -105,7 +105,7 @@ const TestHubo = props => {
 
             <FormsSelect
                 rules={[{required:true, message:"测试计划不能为空"}]}
-                name={"testPlan"}
+                name={["testPlan","name"]}
                 label={"测试计划"}
                 isSpin={false}
                 onFocus={()=>onFocus('testPlan')}
@@ -120,7 +120,7 @@ const TestHubo = props => {
 
             <FormsSelect
                 rules={[{validator: validatorEnv}]}
-                name={"apiEnv"}
+                name={["apiEnv","name"]}
                 label={"API环境"}
                 isSpin={false}
                 onFocus={()=>onFocus('api')}
@@ -135,7 +135,7 @@ const TestHubo = props => {
 
             <FormsSelect
                 rules={[{validator: validatorEnv}]}
-                name={"appEnv"}
+                name={["appEnv","name"]}
                 label={"APP环境"}
                 isSpin={false}
                 onFocus={()=>onFocus('app')}

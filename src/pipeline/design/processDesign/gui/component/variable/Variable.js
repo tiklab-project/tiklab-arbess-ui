@@ -1,3 +1,10 @@
+/**
+ * @Description: 任务变量
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Input, Popconfirm, Select, Form} from "antd";
@@ -7,9 +14,6 @@ import ListEmpty from "../../../../../../common/component/list/ListEmpty";
 import {Validation} from "../../../../../../common/utils/Client";
 import "./Variable.scss";
 
-/**
- * task的变量
- */
 const Variable = props => {
 
     const {variableStore,dataItem} = props

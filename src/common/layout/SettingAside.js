@@ -1,3 +1,10 @@
+/**
+ * @Description: 系统设置
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {
     DeploymentUnitOutlined,
@@ -101,17 +108,16 @@ const applicationRouters =  [
                 purviewCode:"pipeline_env",
             },
             {
+                id:"/setting/server",
+                title:"服务",
+                purviewCode:"resources_server",
+            },
+            {
                 id:"/setting/k8s",
                 title:"Kubernetes集群",
                 purviewCode:"resources_server",
             },
         ]
-    },
-    {
-        id:"/setting/server",
-        title:"服务集成",
-        icon:<MacCommandOutlined />,
-        purviewCode:"resources_server",
     },
     {
         id:"/setting/resources",
@@ -154,12 +160,6 @@ const applicationRouters =  [
     },
 ]
 
-/**
- * 设置
- * @param props
- * @returns {Element}
- * @constructor
- */
 const Setting = props =>  {
     return (
         <Aside

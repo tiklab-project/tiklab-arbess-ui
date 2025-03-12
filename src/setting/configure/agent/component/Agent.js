@@ -1,3 +1,10 @@
+/**
+ * @Description: Agent
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from 'react';
 import {Row, Col, Table, Tag, Space, Tooltip} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -12,12 +19,6 @@ import {UserSwitchOutlined} from "@ant-design/icons";
 
 const pageSize = 15;
 
-/**
- * Agent
- * @param props
- * @returns {Element}
- * @constructor
- */
 const Agent = (props) => {
 
     const {findAgentPage,deleteAgent,updateDefaultAgent} = agentStore;

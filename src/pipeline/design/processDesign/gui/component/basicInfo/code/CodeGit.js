@@ -1,6 +1,7 @@
 import React from "react";
 import FormsInput from "../FormsInput";
 import FormsAuth from "../FormsAuth";
+import FormsTool from "../FormsTool";
 
 /**
  * Git
@@ -12,9 +13,12 @@ const CodeGit = props =>{
 
     return(
         <>
+            <FormsTool
+                scmType={'git'}
+            />
             <FormsInput
-                placeholder={"git地址"}
-                label={"git地址"}
+                placeholder={"Git仓库地址"}
+                label={"Git仓库地址"}
                 name={"codeName"}
                 isRequire={true}
             />

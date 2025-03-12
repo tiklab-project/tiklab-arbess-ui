@@ -1,13 +1,13 @@
+/**
+ * @Description: 流水线添加模板
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {NodeIndexOutlined} from "@ant-design/icons";
 
-/**
- * 添加流水线模板
- * @param templateType
- * @param setTemplateType
- * @returns {JSX.Element}
- * @constructor
- */
 const PipelineAddMould = ({templateType,setTemplateType}) =>{
 
 

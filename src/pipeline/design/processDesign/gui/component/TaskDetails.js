@@ -1,3 +1,10 @@
+/**
+ * @Description: 任务详情
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React, {useEffect,useState} from "react";
 import {Skeleton} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
@@ -8,12 +15,6 @@ import BasicInfo from "./basicInfo/BasicInfo";
 import {HeadlineTitle} from "./TaskTitleIcon";
 import "./TaskDetails.scss";
 
-/**
- * 任务详情
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const TaskDetails = props =>{
 
     const {taskFormDrawer,setTaskFormDrawer,taskStore} = props

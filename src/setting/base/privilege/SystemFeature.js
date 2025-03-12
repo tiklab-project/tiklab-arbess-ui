@@ -1,15 +1,21 @@
+/**
+ * @Description: 系统功能管理
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {SystemFeature} from "tiklab-privilege-ui";
 
-/**
- * 系统功能管理
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const SystemFeatureContent = props =>{
 
-    return <SystemFeature {...props} bgroup={"arbess"}/>
+    return (
+        <SystemFeature
+            {...props}
+            bgroup={"arbess"}
+        />
+    )
 
 }
 

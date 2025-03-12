@@ -1,14 +1,15 @@
+/**
+ * @Description: 头像
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Avatar} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui"
 
-/**
- * 头像
- * @param userInfo
- * @returns {Element}
- * @constructor
- */
 const ProfileContent = ({userInfo = undefined}) => {
 
     const user = userInfo ? userInfo : getUser();
@@ -28,7 +29,7 @@ const ProfileContent = ({userInfo = undefined}) => {
         return <Avatar icon={<UserOutlined />} />
     }
 
-    return  <div className={'tiklab-profile'}>
+    return  <div className="tiklab-profile">
                 {renderEl()}
             </div>
 }

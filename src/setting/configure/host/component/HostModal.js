@@ -1,3 +1,10 @@
+/**
+ * @Description: 主机配置添加编辑弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Form, Input, Tooltip, Select} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
@@ -6,12 +13,6 @@ import AuthType from "../../../common/AuthType";
 import {Validation} from "../../../../common/utils/Client";
 import Modals from "../../../../common/component/modal/Modal";
 
-/**
- * 主机配置弹出框，添加，更新
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const HostModal = props =>{
 
     const {visible,setVisible,formValue,findAuth} = props

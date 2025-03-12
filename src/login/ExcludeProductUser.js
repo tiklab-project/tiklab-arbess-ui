@@ -1,14 +1,19 @@
+/**
+ * @Description: 没有应用访问权限
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {ExcludeProductUser} from "tiklab-eam-ui";
 
-/**
- * 没有应用访问权限
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const ExcludeProductUserContent = props => {
-    return <ExcludeProductUser {...props}/>
+    return (
+        <ExcludeProductUser
+            {...props}
+        />
+    )
 }
 
 export default ExcludeProductUserContent

@@ -1,3 +1,10 @@
+/**
+ * @Description: 系统设置首页
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useState,useEffect} from "react";
 import {Row,Col} from "antd";
 import countStore from "../store/CountStore";
@@ -23,12 +30,6 @@ import {
     DesktopOutlined,
 } from "@ant-design/icons"
 
-/**
- * 设置首页
- * @param props
- * @returns {Element}
- * @constructor
- */
 const SettingHome = props => {
 
     const {findCount,findHomesApplyProduct,findUseLicence} = countStore;

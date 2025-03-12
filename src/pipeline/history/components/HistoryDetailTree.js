@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线运行日志树
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect, useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
 import {TaskIcon} from "../../design/processDesign/gui/component/TaskTitleIcon";
@@ -62,7 +69,7 @@ const HistoryDetailTree = props =>{
      * 日志
      */
     const taskLog = (item) => {
-        changeAnchor(item.id)
+        changeAnchor(item.id,false)
     }
 
     const renderDeployLi = (item,deep) => {

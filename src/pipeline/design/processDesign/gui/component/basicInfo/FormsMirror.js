@@ -1,24 +1,30 @@
+/**
+ * @Description: 任务代码块命令
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React, {useState, useRef} from "react";
 import {inject,observer} from "mobx-react";
 import {Tooltip,Form} from "antd";
 import {ExpandOutlined} from "@ant-design/icons";
 import Modals from "../../../../../../common/component/modal/Modal";
 import Btn from "../../../../../../common/component/btn/Btn";
-import {TaskMirror} from "../../../../../../common/component/editor/CodeMirror";
+import TaskMirror from "../../../../../../common/component/editor/CodeMirror";
 import {WhetherChange} from "../Common";
 import "./FormsMirror.scss";
 
-/**
- * 任务基本消息，执行命令…… -- 代码块
- */
 const FormsMirror = props =>{
 
     const {isRequire,name,label,placeholder,taskStore} = props
 
-    const {updateTask,dataItem} = taskStore
+    const {updateTask,dataItem,taskPermissions} = taskStore
 
     const narrowMirrorRef = useRef();
     const expandMirrorRef = useRef();
+
+    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
 
     //边框
     const [bordered,setBordered] = useState(false)
@@ -30,6 +36,7 @@ const FormsMirror = props =>{
      * @param e
      */
     const onFocus = e => {
+        if(!taskUpdate){return;}
         setBordered(true)
         if(e.state.placeholder){
             e.state.placeholder.innerHTML=placeholder
@@ -83,23 +90,29 @@ const FormsMirror = props =>{
         }
     }
 
+    const mirrorClass = taskUpdate ? bordered ? "gui-mirror-has-focus":"gui-mirror-has" : 'gui-mirror-disable'
+
     return  (
         <Form.Item label={label} name={name}>
             <Form.Item noStyle>
                 <div className={`gui-mirror `} id={name+"_mirror"}>
                     <TaskMirror
-                        bordered={bordered}
-                        placeholder={placeholder}
                         mirrorValue={dataItem?.task?.[name] || ""}
                         mirrorRef={narrowMirrorRef}
                         onFocus={e=>onFocus(e)}
-                        className={bordered ? "gui-mirror-has-focus":"gui-mirror-has"}
-                        language={name==='k8sJson'? 'yaml':'shell'}
+                        className={mirrorClass}
+                        options={{
+                            mode: name==='k8sJson'? 'yaml':'shell',
+                            theme:'default',
+                            placeholder: bordered ? placeholder : '未设置',
+                            styleActiveLine: bordered,
+                            readOnly: !taskUpdate
+                        }}
                     />
                     {
                         bordered &&
                         <div className="gui-mirror-expand">
-                            <Tooltip title={"全屏编辑"}>
+                            <Tooltip title={taskUpdate?"全屏编辑":"全屏查看"}>
                                 <ExpandOutlined onClick={()=>expand()}/>
                             </Tooltip>
                         </div>
@@ -121,10 +134,15 @@ const FormsMirror = props =>{
                 >
                     <div className="mirror-expand">
                         <TaskMirror
-                            type={true}
                             mirrorRef={expandMirrorRef}
                             mirrorValue={narrowMirrorRef?.current?.editor.getValue()}
-                            language={name==='k8sJson'?'yaml':'shell'}
+                            options={{
+                                mode: name==='k8sJson'? 'yaml':'shell',
+                                theme:'dracula',
+                                lineNumbers: true,
+                                autofocus: taskUpdate,
+                                readOnly: !taskUpdate
+                            }}
                         />
                     </div>
                 </Modals>

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线运行
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useState, useEffect, useRef} from "react";
 import {Skeleton, Spin} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
@@ -117,20 +124,21 @@ const HistoryRunDetail = (props) => {
         })
     }
 
+    /**
+     * 返回
+     */
     const goBack = () => {
         init()
         back()
     }
 
+    /**
+     * 初始
+     */
     const init = ()=>{
         setExecLoading(true);
         clearInterval(runInterRef.current)
     }
-
-    // 获取时间
-    const setTime = execData && execData.reduce((pre, cur) => {
-        return pre + cur.stageTime;
-    }, 0);
 
     /**
      * 获取任务
@@ -138,6 +146,23 @@ const HistoryRunDetail = (props) => {
     const setTaskLog = (task) => {
         setLogData(task.id)
         setLogVisible(true)
+    }
+
+    //获取时间
+    const setTime = execData && execData.reduce((pre, cur) => {
+        return pre + cur.stageTime;
+    }, 0);
+
+    //运行方式
+    const runWay = () =>{
+        switch (historyItem?.runWay) {
+            case 1:
+                return historyItem?.user?.nickname + " · 手动触发"
+            case 2:
+                return "定时触发";
+            case 3:
+                return historyItem?.user?.nickname + " · 回滚触发"
+        }
     }
 
     return (
@@ -157,7 +182,7 @@ const HistoryRunDetail = (props) => {
                         </div>
                         <div className="bread-center-item">
                             <span className='bread-center-name'>运行方式</span>
-                            <span className='bread-center-desc'>{historyItem?.runWay===1 ? historyItem?.user?.nickname + " · 手动触发" : "定时触发" }</span>
+                            <span className='bread-center-desc'>{runWay()}</span>
                         </div>
                         <div className="bread-center-item">
                             <span className='bread-center-name'>运行状态</span>
@@ -195,20 +220,32 @@ const HistoryRunDetail = (props) => {
                                                                         <div className={`str-run-stage-card str-run-stage-card-${runState}`} key={task.id}>
                                                                             <div className="card-top">
                                                                                 <div>
-                                                                                    <span className="card-top-state">{runStatusIcon(runState)}</span>
-                                                                                    <span className="card-top-title">{taskName}</span>
+                                                                                    <span className="card-top-state">
+                                                                                        {runStatusIcon(runState)}
+                                                                                    </span>
+                                                                                    <span className="card-top-title">
+                                                                                        {taskName}
+                                                                                    </span>
                                                                                 </div>
                                                                                 {
                                                                                     runState==='suspend' &&
                                                                                     <div className='card-top-btn'>
-                                                                                        <div className='btn-continue' onClick={execKeep}>继续执行</div>
+                                                                                        <div className='btn-continue' onClick={execKeep}>
+                                                                                            继续执行
+                                                                                        </div>
                                                                                     </div>
                                                                                 }
                                                                             </div>
-                                                                            <div className={`card-ct run-status-${runState}`}>{runStatusText(runState)}</div>
+                                                                            <div className={`card-ct run-status-${runState}`}>
+                                                                                {runStatusText(runState)}
+                                                                            </div>
                                                                             <div className="card-bt">
-                                                                                <span className="card-bt-log" onClick={()=>setTaskLog(task)}>日志</span>
-                                                                                <span className="card-bt-time">{getTime(runTime)}</span>
+                                                                                <span className="card-bt-log" onClick={()=>setTaskLog(task)}>
+                                                                                    日志
+                                                                                </span>
+                                                                                <span className="card-bt-time">
+                                                                                    {getTime(runTime)}
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     )

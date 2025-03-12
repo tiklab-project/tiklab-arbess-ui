@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
 import codeThirdStore from "../../../store/CodeThirdStore";
+import FormsTool from "../FormsTool";
 
 /**
  * gitPuk | gitee | github | gitlab
@@ -111,6 +112,9 @@ const CodeThird = props =>{
 
     return(
         <>
+            <FormsTool
+                scmType={'git'}
+            />
             <FormsAuth />
             <FormsSelect
                 rules={[{required:true, message:"仓库不能为空"}]}

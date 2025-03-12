@@ -15,12 +15,15 @@ import "./Variable.scss";
  */
 const Variable = props =>{
 
-    const {variableStore,match:{params}} = props
+    const {taskStore,variableStore,match:{params}} = props
 
     const {findAllVariable,deleteVariable,variableData} = variableStore
+    const {taskPermissions} = taskStore
 
     const [variableVisible,setVariableVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
+
+    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
 
     /**
      * 获取变量
@@ -81,7 +84,7 @@ const Variable = props =>{
             width:"30%",
             ellipsis:true,
         },
-        {
+        taskUpdate ? {
             title: "操作",
             dataIndex: "action",
             key: "action",
@@ -93,7 +96,7 @@ const Variable = props =>{
                     del={()=>delVariable(record)}
                 />
             )
-        },
+        } : {width:0},
     ]
 
     return(
@@ -109,7 +112,7 @@ const Variable = props =>{
             >
                 <div className="variable-up">
                     <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}条</div>
-                    <Btn title={"添加"} onClick={addVariable}/>
+                    { taskUpdate && <Btn title={"添加"} onClick={addVariable}/> }
                     <VariableAddEdit
                         {...props}
                         findVariable={findVariable}
@@ -134,4 +137,4 @@ const Variable = props =>{
     )
 }
 
-export default inject("variableStore")(observer(Variable))
+export default inject("variableStore","taskStore")(observer(Variable))

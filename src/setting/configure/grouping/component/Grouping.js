@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线分组管理
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Space,Table,Row,Col} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -10,12 +17,6 @@ import GroupingModal from "./GroupingModal";
 import groupingStore from "../store/GroupingStore";
 import "../../../common/Common.scss";
 
-/**
- * 分组管理
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Grouping = props =>{
 
     const {findGroupList,deleteGroup} = groupingStore

@@ -1,18 +1,17 @@
+/**
+ * @Description: Kubernetes集群添加按钮
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import Btn from "../../../../common/component/btn/Btn";
 import K8sModal from "./K8sModal";
 
-
-/**
- * Kubernetes集群添加按钮
- * @param props
- * @returns {Element}
- * @constructor
- */
 const K8sAddBtn = props =>{
 
     const {isConfig,visible,setVisible,formValue,setFormValue,findAuth} = props
-
 
     /**
      * 添加认证

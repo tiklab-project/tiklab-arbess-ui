@@ -1,3 +1,10 @@
+/**
+ * @Description: 主机组添加编辑弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Form, Input} from "antd";
 import {Validation} from "../../../../common/utils/Client";
@@ -5,12 +12,6 @@ import Modals from "../../../../common/component/modal/Modal";
 import HostGroupAddHost from "./HostGroupAddHost";
 import hostGroupStore from "../store/HostGroupStore";
 
-/**
- * 添加或编辑主机组
- * @param props
- * @returns {Element}
- * @constructor
- */
 const HostGroupAdd = (props) => {
 
     const {visible,setVisible,formValue,findAuth} = props;

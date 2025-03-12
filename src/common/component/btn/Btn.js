@@ -1,10 +1,14 @@
+/**
+ * @Description: 按钮
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Space} from "antd";
 import "./Btn.scss";
 
-/**
- * 操作按钮
- */
 const Btn = ({icon,type,title,onClick,isMar,children}) =>{
 
     return (

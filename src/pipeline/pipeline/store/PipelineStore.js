@@ -40,7 +40,11 @@ export class PipelineStore {
      */
     @action
     findUserPipeline = async () =>{
-        return await Axios.post("/pipeline/findUserPipeline",{userId:getUser().userId})
+        const res = await Axios.post("/pipeline/findUserPipeline",{userId:getUser().userId});
+        if(res.code===0){
+            this.pipelineList = res.data
+        }
+        return  res;
     }
 
     /**

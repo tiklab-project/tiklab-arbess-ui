@@ -77,18 +77,20 @@ $line-color:#d9d9d9;
             height: 100%;
             overflow: auto;
             &:hover{
-                .newStages-multi .multi-content:nth-last-child(2) .newStages-contents:before{
-                    border-radius: 0;
-                }
-                .newStages-multi .multi-content:last-child:before {
-                    border-radius: 0 0 16px 16px;
-                }
-                .newStages-multi .add-newStages-contents {
-                    display: block;
-                }
                 .group-head .group-inputBtn{
                     display: block;
                 }
+            }
+        }
+        .group-table-hover:hover{
+            .newStages-multi .multi-content:nth-last-child(2) .newStages-contents:before{
+                border-radius: 0;
+            }
+            .newStages-multi .multi-content:last-child:before {
+                border-radius: 0 0 16px 16px;
+            }
+            .newStages-multi .add-newStages-contents {
+                display: block;
             }
         }
         .group-head{
@@ -138,7 +140,7 @@ $line-color:#d9d9d9;
         }
         .newStages-job-warn{
             color: red;
-            padding-right: 5px;
+            padding: 0 5px;
         }
         .job-name{
             border-color: red !important;
@@ -297,6 +299,12 @@ $line-color:#d9d9d9;
                 display: -ms-flexbox;
                 display: flex;
                 margin: 0 10px;
+            }
+            .view-last-content .newStages-content{
+                margin-right: 0 !important;
+                .newStages-job:last-child .newStages-has-add-right{
+                    display: none;
+                }
             }
             .add-newStage:before{
                 width: 50% !important;

@@ -1,15 +1,15 @@
+/**
+ * @Description: 基础操作
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Dropdown, Modal, Tooltip} from "antd";
 import {EditOutlined} from "@ant-design/icons";
 import pip_more from "../../../assets/images/svg/pie_more.svg";
 
-/**
- * 表格操作
- * @param edit：编辑
- * @param del：删除
- * @returns {JSX.Element}
- * @constructor
- */
 const ListAction = ({edit,del}) =>{
 
     return (

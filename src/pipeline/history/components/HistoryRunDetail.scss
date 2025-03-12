@@ -64,6 +64,7 @@ $suspend-color:  #ff0000;
         }
         .str-run-item-stage{
           .str-run-stage{
+            display: flex;
             &:not(:first-child){
               margin-top: 15px;
             }

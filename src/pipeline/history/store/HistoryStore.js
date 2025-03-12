@@ -25,6 +25,25 @@ class HistoryStore {
     }
 
     /**
+     * 回滚
+     * @param value
+     * @returns {Promise<*>}
+     */
+    @action
+    rollBackStart = async value =>{
+        const params = {
+            ...value,
+            runWay:1,
+            userId:getUser().userId,
+        }
+        const data = await Axios.post("/exec/rollBackStart", params)
+        if(data.code!==0){
+            message.info(data.msg)
+        }
+        return data
+    }
+
+    /**
      * 开始运行
      * @param value
      * @returns {Promise<*>}
@@ -146,7 +165,7 @@ class HistoryStore {
                 totalPage:data.data.totalPage,
                 totalRecord:data.data.totalRecord,
             }
-        } else{
+        } else {
             this.historyList = []
             this.page = {
                 currentPage:1,

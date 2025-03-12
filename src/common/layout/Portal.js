@@ -1,3 +1,10 @@
+/**
+ * @Description: 组件
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect, useState} from "react";
 import {
     BellOutlined,
@@ -40,12 +47,6 @@ const firstRouters=[
     }
 ]
 
-/**
- * 布局
- * @param props
- * @returns {Element}
- * @constructor
- */
 const Portal = props =>{
 
     const {route,history,systemRoleStore,HelpLink,AppLink,AvatarLink} = props;

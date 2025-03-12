@@ -1,3 +1,10 @@
+/**
+ * @Description: 首页
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState,useRef} from "react";
 import {Col, Row, Spin, Table, Select} from "antd";
 import homePageStore from "../store/HomePageStore";
@@ -10,12 +17,6 @@ import GaugeChart from "../../common/component/echarts/GaugeChart";
 import SearchSelect from "../../common/component/search/SearchSelect";
 import "./HomePage.scss";
 
-/**
- * 首页
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const HomePage = props =>{
 
     const {findAllOpen} = homePageStore;

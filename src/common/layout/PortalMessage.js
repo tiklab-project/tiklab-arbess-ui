@@ -1,3 +1,10 @@
+/**
+ * @Description: 消息
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Drawer,Divider,Space,Tooltip,Spin} from "antd";
 import {
@@ -14,12 +21,6 @@ import "./PortalMessage.scss";
 
 const pageSize = 12;
 
-/**
- * 消息通知
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const PortalMessage = props =>{
 
     const {unread,setUnread,visible,setVisible,translateX=75} = props

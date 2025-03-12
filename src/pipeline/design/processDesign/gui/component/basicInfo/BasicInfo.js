@@ -1,3 +1,10 @@
+/**
+ * @Description: 任务表单
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
 import {Form, Input} from "antd";
@@ -20,33 +27,32 @@ import ArtifactPushDocker from "./artifact/ArtifactPushDocker";
 import ArtifactPullMaven from "./artifact/ArtifactPullMaven";
 import ArtifactPullDocker from "./artifact/ArtifactPullDocker";
 
-/**
- * task的基本信息
- */
 const BasicInfo = props => {
 
-    const {taskStore,stageStore} = props
+    const {taskStore,stageStore} = props;
 
-    const {dataItem,setDataItem,updateTaskName} = taskStore
-    const {updateStageName} = stageStore
+    const {dataItem,setDataItem,updateTaskName,taskPermissions} = taskStore;
+    const {updateStageName} = stageStore;
 
-    const [form] = Form.useForm()
-    const [enter,setEnter] = useState(false)
+    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+
+    const [form] = Form.useForm();
+    const [enter,setEnter] = useState(false);
 
     useEffect(()=>{
         return ()=>{
             form.resetFields();
         }
-    },[])
+    },[]);
 
     useEffect(()=>{
         // 初始化表单内容
         const {formType,taskType,task,taskName,stageName} = dataItem;
         if(formType==="stage"){
-            form.setFieldsValue({taskName: stageName})
+            form.setFieldsValue({taskName: stageName});
             return;
         }
-        console.log(task)
+        console.log(dataItem)
         if(!task) return;
         switch(taskType){
             case 'git':
@@ -76,17 +82,14 @@ const BasicInfo = props => {
                 break
             case 'testhubo':
                 form.setFieldsValue({
+                    ...task,
                     taskName:taskName,
-                    testSpace:task?.testSpace?.name,
-                    apiEnv:task?.apiEnv?.name,
-                    appEnv:task?.appEnv?.name,
-                    webEnv:task?.webEnv?.name,
-                    testPlan:task?.testPlan?.name,
-                    authId:task?.authId,
                 })
                 break
             default:
-                form.setFieldsValue({taskName: taskName})
+                form.setFieldsValue({
+                    taskName: taskName
+                })
         }
         form.validateFields().then()
     },[dataItem?.task,dataItem?.stageName])
@@ -170,6 +173,7 @@ const BasicInfo = props => {
                     rules={[{required:true, message:"名称不能为空"}]}
                 >
                     <Input
+                        disabled={!taskUpdate}
                         placeholder={enter? "阶段名称，回车保存":"未设置"}
                         className={`${enter?'':'input-hover'}`}
                         onFocus={()=>setEnter(true)}

@@ -1,3 +1,10 @@
+/**
+ * @Description: Kubernetes集群添加编辑弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect} from "react";
 import {Form, Input, Tooltip} from "antd";
 import Modals from "../../../../common/component/modal/Modal";

@@ -1,15 +1,16 @@
+/**
+ * @Description: 流水线分组管理添加编辑弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect} from "react";
 import {Form, Input} from "antd";
 import Modals from "../../../../common/component/modal/Modal";
 import {Validation} from "../../../../common/utils/Client";
 import groupingStore from "../store/GroupingStore";
 
-/**
- * 环境管理弹出框，添加，更新
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const GroupingModal = props =>{
 
     const {visible,setVisible,formValue,findGrouping} = props

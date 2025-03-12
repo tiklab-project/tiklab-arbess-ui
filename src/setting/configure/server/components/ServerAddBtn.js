@@ -1,13 +1,14 @@
+/**
+ * @Description: 服务配置添加按钮
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
-import Btn from "../../../common/component/btn/Btn";
+import Btn from "../../../../common/component/btn/Btn";
 import ServerModal from "./ServerModal";
 
-/**
- * 服务配置添加按钮
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const ServerAddBtn = props =>{
 
     const {isConfig,visible,setVisible,formValue,setFormValue,findAuth,type} = props

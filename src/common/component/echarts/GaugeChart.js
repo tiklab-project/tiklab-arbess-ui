@@ -1,12 +1,13 @@
+/**
+ * @Description: 运行统计
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from 'react';
 import './GaugeChart.scss';
 
-/**
- * 图标 -- 运行统计
- * @param props
- * @returns {Element}
- * @constructor
- */
 const GaugeChart = props =>{
 
     const {runResult} = props

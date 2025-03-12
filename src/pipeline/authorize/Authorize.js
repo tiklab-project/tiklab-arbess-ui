@@ -1,13 +1,13 @@
+/**
+ * @Description: 流水线授权回调
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect} from "react";
 import {getUrlParam} from "../../common/utils/Client";
 
-/**
- * 授权回调地址页面
- * Gitee&&Github授权
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Authorize = props =>{
 
     useEffect(() => {

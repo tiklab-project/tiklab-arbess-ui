@@ -1,12 +1,13 @@
+/**
+ * @Description: 系统设置入口
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {renderRoutes} from "react-router-config";
 
-/**
- * 系统设置页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Setting = props =>{
 
     const {route} = props

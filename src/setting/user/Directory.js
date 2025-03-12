@@ -1,12 +1,13 @@
+/**
+ * @Description: 用户目录
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Directory} from "tiklab-user-ui";
 
-/**
- * 用户目录
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const UserDirectory = props =>{
 
     return (

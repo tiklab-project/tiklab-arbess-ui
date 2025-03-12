@@ -1,14 +1,15 @@
+/**
+ * @Description: 下拉搜索
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from 'react';
 import {Select} from "antd";
 import {CaretDownOutlined} from "@ant-design/icons";
 import './Search.scss';
 
-/**
- * 下拉搜索
- * @param props
- * @returns {Element}
- * @constructor
- */
 const SearchSelect = (props) => {
 
     const {children,...res} = props;

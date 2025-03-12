@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线信息
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState} from "react";
 import {Input, Spin,Row,Col} from "antd";
 import {
@@ -14,12 +21,6 @@ import Modals from "../../../common/component/modal/Modal";
 import Btn from "../../../common/component/btn/Btn";
 import "./BasicInfo.scss";
 
-/**
- * 流水线信息
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const BasicInfo = props =>{
 
     const {pipelineStore} = props

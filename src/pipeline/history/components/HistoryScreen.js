@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线历史筛选
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Select,Space} from "antd";
 import {observer} from "mobx-react";
@@ -5,9 +12,6 @@ import SearchInput from "../../../common/component/search/SearchInput";
 import SearchSelect from "../../../common/component/search/SearchSelect";
 import pipelineStore from "../../pipeline/store/PipelineStore";
 
-/**
- * 流水线历史筛选
- */
 const HistoryScreen = props =>{
 
     const {match,screen,route} = props
@@ -146,6 +150,7 @@ const HistoryScreen = props =>{
                 <Select.Option value={0}>全部</Select.Option>
                 <Select.Option value={1}>手动</Select.Option>
                 <Select.Option value={2}>自动</Select.Option>
+                <Select.Option value={3}>回滚</Select.Option>
             </SearchSelect>
         </Space>
     )

@@ -1,3 +1,10 @@
+/**
+ * @Description: 认证配置添加编辑弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect} from "react";
 import {Form, Input, Select} from "antd";
 import AuthType from "../../../common/AuthType";
@@ -5,12 +12,6 @@ import {Validation} from "../../../../common/utils/Client";
 import authStore from "../store/AuthStore";
 import Modals from "../../../../common/component/modal/Modal";
 
-/**
- * 认证配置弹出框，添加，更新
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const AuthModal = props =>{
 
     const {visible,setVisible,formValue,findAuth} = props
@@ -38,6 +39,7 @@ const AuthModal = props =>{
             if(formValue){
                 const param = {
                     authId:formValue.authId,
+                    authPublic:1,
                     ...values,
                 }
                 updateAuth(param).then(r=>{
@@ -45,8 +47,11 @@ const AuthModal = props =>{
                         findAuth()
                     }
                 })
-            }else {
-                createAuth(values).then(r=>{
+            } else {
+                createAuth({
+                    authPublic:1,
+                    ...values,
+                }).then(r=>{
                     if(r.code===0){
                         findAuth()
                     }
@@ -70,12 +75,12 @@ const AuthModal = props =>{
                     autoComplete="off"
                     initialValues={{type:1,authWay:1,authType:1}}
                 >
-                    <Form.Item name="authPublic" label="认证权限">
-                        <Select placeholder={'认证权限'}>
-                            <Select.Option value={1}>全局</Select.Option>
-                            <Select.Option value={2}>私有</Select.Option>
-                        </Select>
-                    </Form.Item>
+                    {/*<Form.Item name="authPublic" label="认证权限">*/}
+                    {/*    <Select placeholder={'认证权限'}>*/}
+                    {/*        <Select.Option value={1}>全局</Select.Option>*/}
+                    {/*        <Select.Option value={2}>私有</Select.Option>*/}
+                    {/*    </Select>*/}
+                    {/*</Form.Item>*/}
                     <Form.Item
                         name="name"
                         label="名称"

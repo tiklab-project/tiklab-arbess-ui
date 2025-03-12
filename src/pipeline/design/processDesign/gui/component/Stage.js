@@ -1,29 +1,31 @@
+/**
+ * @Description: 多阶段视图
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useEffect,Fragment} from "react";
 import {Popconfirm, Tooltip,Spin} from "antd";
 import {PlusOutlined, EditOutlined, ExclamationCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 import {TaskIcon} from "./TaskTitleIcon";
-import {TaskFinalAdd} from "./Common";
+import StageView from "./StageView";
 
-/**
- * 多阶段
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Stage = props =>{
 
     const {stageStore,taskStore,addTask,setCreateValue,setTaskFormDrawer,match:{params}} = props
 
-    const {finAllStage,stageFresh,deleteStage,stageMustField} = stageStore
-    const {setDataItem,taskFresh} = taskStore
+    const {finAllStage,stageFresh,deleteStage,stageMustField} = stageStore;
+    const {setDataItem,taskFresh,taskPermissions} = taskStore;
+
+    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(false);
-
     // 多阶段列表
-    const [stageList,setStageList] = useState([])
+    const [stageList,setStageList] = useState([]);
 
     useEffect(()=>{
         // 获取多阶段
@@ -134,7 +136,7 @@ const Stage = props =>{
                     </div>
                 </div>
             }
-            <div className="group-table">
+            <div className="group-table group-table-hover">
                 <div className="group-head">
                     <div className="name">
                         <div className="group-name">{group?.stageName}</div>
@@ -237,16 +239,60 @@ const Stage = props =>{
         </Fragment>
     }
 
-    return(
+    return (
         <Spin spinning={isLoading}>
-            <div className="guiView-main_group">
-                {
-                    stageList && stageList.map((group,groupIndex) => renderMultitask(group,groupIndex))
-                }
-                {
-                    TaskFinalAdd("multiBtn",stageList,"新阶段",newTask)
-                }
-            </div>
+            {
+                taskUpdate ? (
+                    <div className="guiView-main_group">
+                        {
+                            stageList?.length > 0 ? (
+                                <>
+                                    {stageList.map((group,groupIndex)=>renderMultitask(group,groupIndex))}
+                                    <div className="group-flow">
+                                        <div className="group-flow_btn group-flow_multiBtn" />
+                                    </div>
+                                    <div className="group-create">
+                                        <div className="group-head">
+                                            <div className="name" style={{opacity:0}}/>
+                                        </div>
+                                        <div className="newStages-multi">
+                                            <div className="newStages-contents add-newStage">
+                                                <div className="newStages-content">
+                                                    <div className="newStages-job">
+                                                        <div onClick={()=>newTask()} className="newStages-job-content">
+                                                            <PlusOutlined/>
+                                                            <span style={{paddingLeft:5}}>新阶段</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="group-create">
+                                    <div className="group-head">
+                                        <div className="name" style={{opacity:0}}/>
+                                    </div>
+                                    <div className="newStages-multi">
+                                        <div className="newStages-job">
+                                            <div onClick={()=>newTask()} className="newStages-job-content">
+                                                <PlusOutlined/>
+                                                <span style={{paddingLeft:5}}>新阶段</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
+                ) : (
+                    <StageView
+                        {...props}
+                        stageList={stageList}
+                    />
+                )
+            }
         </Spin>
     )
 }

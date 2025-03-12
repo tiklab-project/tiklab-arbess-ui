@@ -1,3 +1,10 @@
+/**
+ * @Description: 系统设置侧边栏
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useState} from "react";
 import {DownOutlined, HomeOutlined, ProjectOutlined, UpOutlined} from "@ant-design/icons";
 import {SystemNav,PrivilegeButton} from "tiklab-privilege-ui";
@@ -81,12 +88,6 @@ const templateRouter = [
     }
 ]
 
-/**
- * 设置导航--侧边栏
- * @param props
- * @returns {Element}
- * @constructor
- */
 const SettingAside = props =>  {
 
     const {enhance,outerPath,applicationRouters,systemRoleStore} = props;
@@ -97,7 +98,7 @@ const SettingAside = props =>  {
     const disable = disableFunction();
     const authConfig = JSON.parse(localStorage.getItem("authConfig"));
 
-    // 树的展开与闭合
+    //树的展开与闭合
     const [expandedTree,setExpandedTree] = useState([""])
 
     //设置菜单

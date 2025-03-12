@@ -7,6 +7,7 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import "./Trigger.scss";
 
+
 /**
  * 触发器页面
  * @param props
@@ -15,13 +16,20 @@ import "./Trigger.scss";
  */
 const Trigger = props =>{
 
-    const {triggerStore,match:{params}} = props
+    const {taskStore,triggerStore,match:{params}} = props
 
     const {updateTrigger,deleteTrigger,createTrigger,findAllTrigger,triggerData} = triggerStore
+    const {taskPermissions} = taskStore
 
     const [formValue,setFormValue] = useState(null)
     const [triggerVisible,setTriggerVisible] = useState(false)
 
+    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+
+
+    /**
+     * 获取触发器
+     */
     const findTrigger = () =>{
         findAllTrigger(params.id)
     }
@@ -82,7 +90,7 @@ const Trigger = props =>{
                 :
                 <Tag color="red">已触发</Tag>
         },
-        {
+        taskUpdate ? {
             title: "操作",
             dataIndex: "action",
             key: "action",
@@ -94,7 +102,7 @@ const Trigger = props =>{
                     del={()=>delTrigger(record)}
                 />
             )
-        },
+        } : {width: 0}
     ]
 
     return (
@@ -110,7 +118,7 @@ const Trigger = props =>{
             >
                 <div className="trigger-up">
                     <div className="trigger-up-num">共{triggerData && triggerData.length?triggerData.length:0}条</div>
-                    <Btn title={"添加"} onClick={addTrigger}/>
+                    { taskUpdate && <Btn title={"添加"} onClick={addTrigger}/> }
                     <TriggerAddEdit
                         triggerVisible={triggerVisible}
                         setTriggerVisible={setTriggerVisible}
@@ -136,4 +144,4 @@ const Trigger = props =>{
     )
 }
 
-export default inject("triggerStore")(observer(Trigger))
+export default inject("triggerStore","taskStore")(observer(Trigger))

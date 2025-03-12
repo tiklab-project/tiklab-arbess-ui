@@ -1,3 +1,10 @@
+/**
+ * @Description: 添加任务
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useRef} from "react";
 import {Col, Row} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
@@ -7,12 +14,6 @@ import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import {taskTitle, TaskIcon} from "./TaskTitleIcon";
 import "./TaskAdd.scss";
 
-/**
- * 添加任务
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const TaskAdd = props =>{
 
     const {pipeline,setTaskFormDrawer,setNewStageDrawer,newStageDrawer,createValue,taskStore,stageStore} = props

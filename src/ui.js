@@ -61,7 +61,7 @@ const Resources=AsyncComponent(()=>import("./setting/resources/component/Resourc
 const Grouping=AsyncComponent(()=>import("./setting/configure/grouping/component/Grouping"))
 const Env=AsyncComponent(()=>import("./setting/configure/env/component/Env"))
 const Agent=AsyncComponent(()=>import('./setting/configure/agent/component/Agent'))
-const Server=AsyncComponent(()=>import("./setting/server/components/Server"))
+const Server=AsyncComponent(()=>import("./setting/configure/server/components/Server"))
 const K8s=AsyncComponent(()=>import('./setting/configure/k8s/components/K8s'))
 
 // message

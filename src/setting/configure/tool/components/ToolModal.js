@@ -1,42 +1,38 @@
+/**
+ * @Description: 工具添加编辑弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
-import {Form,Select,Input} from "antd";
+import {Form, Select, Input, Space} from "antd";
 import {Validation} from "../../../../common/utils/Client";
 import Modals from "../../../../common/component/modal/Modal";
+import {TaskIcon, taskTitle} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
+import toolStore from "../store/ToolStore";
 
-const lis = [
-    {
-        scmId:"1",
-        scmType:1,
-    },
-    {
-        scmId:"5",
-        scmType:5,
-    },
-    {
-        scmId:"22",
-        scmType:22,
-    },
-    {
-        scmId:"21",
-        scmType:21,
-    },
-]
+const scmList = ["jdk","git","svn","maven","nodejs"]
 
 const ToolModal = props =>{
 
-    const {visible,setVisible,enviData,updatePipelineScm,formValue,findAllScm} = props
+    const {visible,setVisible,formValue,findAllScm,externalScmType='jdk',isConfig} = props;
+
+    const {updatePipelineScm} = toolStore;
 
     const [form] = Form.useForm()
-    const [scmType,setScmType] = useState(1)
+    const [scmType,setScmType] = useState("jdk");
 
     useEffect(()=>{
         if(visible){
             // 表单初始化
             if(formValue){
                 form.setFieldsValue(formValue)
+                setScmType(formValue.scmType)
                 return
             }
-            form.resetFields()
+            form.setFieldsValue({scmType:externalScmType})
+            setScmType(externalScmType)
         }
     },[visible])
 
@@ -46,29 +42,6 @@ const ToolModal = props =>{
      */
     const changScmType = value => {
         setScmType(value)
-    }
-
-    /**
-     * 环境标题
-     * @param ScmType
-     * @returns {string}
-     */
-    const scmTitle = ScmType => {
-        switch (ScmType) {
-            case 1:  return "Git"
-            case 5:  return "SVN"
-            case 21: return "Maven"
-            case 22: return "Node"
-        }
-    }
-
-    /**
-     * 环境配置是否已经存在
-     * @param scmType
-     * @returns {*}
-     */
-    const isGray = scmType => {
-        return enviData.some(item=>item.scmType===scmType)
     }
 
     /**
@@ -85,25 +58,36 @@ const ToolModal = props =>{
                     findAllScm()
                 }
             })
-            setVisible(false)
+            onCancel()
         })
+    }
+
+    /**
+     * 关闭弹出框
+     */
+    const onCancel = () => {
+        form.resetFields()
+        setVisible(false)
     }
 
     return(
         <Modals
             visible={visible}
-            onCancel={()=>setVisible(false)}
+            onCancel={onCancel}
             onOk={onOk}
             title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">
                 <Form form={form} layout="vertical" name="userForm" autoComplete="off">
                     <Form.Item name="scmType" label="环境配置类型" rules={[{required:true,message:`请选择环境配置类型`}]}>
-                        <Select onChange={changScmType} disabled={formValue && formValue} placeholder={'环境配置类型'}>
+                        <Select onChange={changScmType} disabled={formValue || isConfig} placeholder={'环境配置类型'}>
                             {
-                                lis.map(item=>(
-                                    <Select.Option value={item.scmType} key={item.scmType} disabled={isGray(item.scmType)}>
-                                        {scmTitle(item.scmType)}
+                                scmList.map(item=>(
+                                    <Select.Option value={item} key={item}>
+                                        <Space>
+                                            <TaskIcon type={item}/>
+                                            {taskTitle(item)}
+                                        </Space>
                                     </Select.Option>
                                 ))
                             }
@@ -113,8 +97,8 @@ const ToolModal = props =>{
                         label="名称"
                         name="scmName"
                         rules={[
-                            {required:true,message:`请输入${scmTitle(scmType)}名称`},
-                            Validation(scmTitle(scmType)+"名称")
+                            {required:true,message:`请输入${taskTitle(scmType)}名称`},
+                            Validation(taskTitle(scmType)+"名称")
                         ]}
                     ><Input placeholder={'名称'}/>
                     </Form.Item>
@@ -122,8 +106,8 @@ const ToolModal = props =>{
                         label="地址"
                         name="scmAddress"
                         rules={[
-                            {required:true,message:`请输入${scmTitle(scmType)}地址`},
-                            Validation(scmTitle(scmType)+"地址")
+                            {required:true,message:`请输入${taskTitle(scmType)}地址`},
+                            Validation(taskTitle(scmType)+"地址")
                         ]}
                     ><Input placeholder={'地址'}/>
                     </Form.Item>

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线TestHubo测试
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {Table,message,Tag,Row,Col} from "antd";
 import {applyJump} from "tiklab-core-ui"
@@ -11,9 +18,6 @@ import "./TestHubo.scss";
 
 const pageSize = 15;
 
-/**
- * testHubo测试页面
- */
 const TestHubo = props => {
 
     const {match:{params}} = props

@@ -1,6 +1,7 @@
 import React from "react";
 import FormsInput from "../FormsInput";
 import FormsAuth from "../FormsAuth";
+import FormsTool from "../FormsTool";
 
 /**
  * Svn
@@ -12,10 +13,13 @@ const CodeSvn = props =>{
 
     return(
         <>
+            <FormsTool
+                scmType={'svn'}
+            />
             <FormsInput
                 name={"codeName"}
-                placeholder={"svn地址"}
-                label={"svn地址"}
+                placeholder={"Svn仓库地址"}
+                label={"Svn仓库地址"}
                 isRequire={true}
             />
             <FormsInput

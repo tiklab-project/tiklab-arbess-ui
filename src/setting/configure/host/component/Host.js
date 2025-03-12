@@ -1,3 +1,10 @@
+/**
+ * @Description: 主机配置页面
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect, useState} from "react";
 import {Space, Table, Row, Col, Select} from "antd";
 import hostStore from "../store/HostStore";
@@ -15,12 +22,6 @@ import "../../../common/Common.scss";
 
 const pageSize = 13;
 
-/**
- * 主机配置页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Host = props =>{
 
     const {findAuthHostPage,deleteAuthHost} = hostStore

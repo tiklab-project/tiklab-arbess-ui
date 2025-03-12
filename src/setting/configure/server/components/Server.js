@@ -1,25 +1,26 @@
+/**
+ * @Description: 服务集成
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {Space, Table, Row, Col, Select} from "antd";
 import serverStore from "../store/ServerStore";
-import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import ListEmpty from "../../../common/component/list/ListEmpty";
-import ListIcon from "../../../common/component/list/ListIcon";
-import ListAction from "../../../common/component/list/ListAction";
-import Profile from "../../../common/component/profile/Profile";
+import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
+import ListEmpty from "../../../../common/component/list/ListEmpty";
+import ListIcon from "../../../../common/component/list/ListIcon";
+import ListAction from "../../../../common/component/list/ListAction";
+import Profile from "../../../../common/component/profile/Profile";
 import ServerAddBtn from "./ServerAddBtn";
-import "../../common/Common.scss";
-import SearchInput from "../../../common/component/search/SearchInput";
-import SearchSelect from "../../../common/component/search/SearchSelect";
-import Page from "../../../common/component/page/Page";
+import "../../../common/Common.scss";
+import SearchInput from "../../../../common/component/search/SearchInput";
+import SearchSelect from "../../../../common/component/search/SearchSelect";
+import Page from "../../../../common/component/page/Page";
 
 const pageSize = 13;
 
-/**
- * 服务集成
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Server = props =>{
 
     const {findAuthServerPage,deleteAuthServer} = serverStore
@@ -318,7 +319,7 @@ const Server = props =>{
                 xxl={{ span: "20", offset: "2" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"服务集成"} >
+                    <BreadCrumb firstItem={"服务"} >
                         <ServerAddBtn
                             type={'gitee'}
                             visible={visible}

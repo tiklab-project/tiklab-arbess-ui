@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线代码扫描
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
 import {observer} from "mobx-react";
@@ -12,12 +19,6 @@ import "./Scan.scss";
 
 const pageSize = 15;
 
-/**
- * 代码扫描
- * @param props
- * @returns {Element}
- * @constructor
- */
 const Scan = (props) => {
 
     const {match:{params}} = props

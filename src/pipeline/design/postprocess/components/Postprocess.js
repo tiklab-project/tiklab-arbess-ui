@@ -1,3 +1,10 @@
+/**
+ * @Description: 后置处理
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useEffect} from "react";
 import {Col, Row, Table} from "antd";
 import {inject,observer} from "mobx-react";
@@ -8,19 +15,14 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import "./Postprocess.scss";
 
-/**
- * 后置处理页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Postprocess = props =>{
 
-    const {postprocessStore,match:{params}} = props
+    const {taskStore,postprocessStore,match:{params}} = props
 
-    const {findPipelinePost,postprocessData,deletePost,
-        findMessageSendType,findOnePost
-    } = postprocessStore
+    const {findPipelinePost,postprocessData,deletePost,findMessageSendType,findOnePost} = postprocessStore
+    const {taskPermissions} = taskStore
+
+    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
 
     // 后置处理添加编辑弹出框
     const [postprocessVisible,setPostprocessVisible] = useState(false)
@@ -30,7 +32,6 @@ const Postprocess = props =>{
     useEffect(()=>{
         // 是否存在消息发送方式
         findMessageSendType()
-
     },[])
 
     /**
@@ -100,7 +101,7 @@ const Postprocess = props =>{
                 </>
             )
         },
-        {
+        taskUpdate ? {
             title: "操作",
             dataIndex: "action",
             key: "action",
@@ -113,7 +114,7 @@ const Postprocess = props =>{
                     />
                 )
             }
-        },
+        } : {width: 0},
     ]
 
 
@@ -130,7 +131,7 @@ const Postprocess = props =>{
             >
                 <div className="post-pose-up">
                     <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}条</div>
-                    <Btn title={"添加"} onClick={addPostprocess}/>
+                    { taskUpdate && <Btn title={"添加"} onClick={addPostprocess}/> }
                     <PostprocessAddEdit
                         {...props}
                         findPost={findPost}
@@ -154,4 +155,4 @@ const Postprocess = props =>{
     )
 }
 
-export default inject("pipelineStore","postprocessStore")(observer(Postprocess))
+export default inject("pipelineStore","postprocessStore","taskStore")(observer(Postprocess))

@@ -1,12 +1,13 @@
+/**
+ * @Description: 流水线设置导航
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import PipelineSetAside from "../../../common/component/aside/PipelineSetAside";
 
-/**
- * 流水线左侧导航（三级导航）
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const PipelineSetting = props =>{
 
     const {match} = props

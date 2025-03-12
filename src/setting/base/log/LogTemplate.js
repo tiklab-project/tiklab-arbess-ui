@@ -1,15 +1,21 @@
+/**
+ * @Description: 日志模板
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {LogTemplate} from "tiklab-security-ui";
 
-/**
- * 日志模板
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const LogTemplateContent = props => {
 
-    return <LogTemplate {...props} bgroup={"arbess"}/>
+    return (
+        <LogTemplate
+            {...props}
+            bgroup={"arbess"}
+        />
+    )
 
 }
 

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线代码扫描详情
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -5,12 +12,6 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import scanStore from "../store/ScanStore";
 import "./Scan.scss";
 
-/**
- * 代码扫描详情
- * @param props
- * @returns {Element}
- * @constructor
- */
 const ScanDetails = (props) => {
 
     const {detailObj,setDetailObj} = props

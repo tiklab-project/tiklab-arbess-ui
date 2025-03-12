@@ -1,12 +1,14 @@
+/**
+ * @Description: 流水线历史运行实例
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import historyStore from "../store/HistoryStore";
 import HistoryRunDetail from "./HistoryRunDetail";
 
-/**
- * 历史运行实例
- * @param {*} props
- * @returns
- */
 const HistoryInstance = props => {
 
     const {match:{params}} = props

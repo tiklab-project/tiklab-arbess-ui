@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线单元maven测试详情
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {Table, Tag,Row,Col} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -5,9 +12,6 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import mavenTestStore from "../store/TestMavenStore";
 import "./TestMaven.scss";
 
-/**
- * maven单元测试详情
- */
 const TestMavenDetail = (props) => {
 
     const {mavenTestObj,setMavenTestObj} = props;
@@ -105,7 +109,10 @@ const TestMavenDetail = (props) => {
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"测试报告"} onClick={backTest}/>
+                    <BreadCrumb
+                        firstItem={"Maven单元测试"}
+                        onClick={backTest}
+                    />
                     <div className='test-overview'>
                         <div className="test-overview-info">
                             <div className="test-overview-info-item">

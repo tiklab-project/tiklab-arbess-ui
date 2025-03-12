@@ -16,6 +16,7 @@ import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
 import pip_nexus from "../../../../../assets/images/svg/pip_nexus.svg";
+import pip_jdk from "../../../../../assets/images/svg/pip_jdk.svg";
 import {productImg} from "tiklab-core-ui";
 
 /**
@@ -30,7 +31,7 @@ export const taskTitle = type =>{
         case 'gitee':  return "Gitee"
         case 'github':  return "Github"
         case 'gitlab':  return "Gitlab"
-        case 'svn':  return "SVN"
+        case 'svn':  return "Svn"
         case 'gitpuk':  return "GitPuk"
         case 'maventest': return "Maven单元测试"
         case 'testhubo': return "TestHubo自动化测试"
@@ -51,6 +52,7 @@ export const taskTitle = type =>{
         case 'message': return "消息通知"
         case 'script': return "执行脚本"
         case 'post': return "后置处理"
+        case 'jdk':return "JDK"
     }
 }
 
@@ -93,6 +95,7 @@ export const TaskIcon = props =>{
             case 'post': return pip_post
             case 'hadess': return productImg.hadess
             case 'nexus': return pip_nexus
+            case 'jdk': return pip_jdk
         }
     }
 
@@ -102,6 +105,12 @@ export const TaskIcon = props =>{
 
 }
 
+/**
+ * 阶段类型
+ * @param type
+ * @returns {string}
+ * @constructor
+ */
 export const HeadlineTitle = type =>{
     switch (type) {
         case 'git':

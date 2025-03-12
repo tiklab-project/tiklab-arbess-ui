@@ -1,13 +1,14 @@
+/**
+ * @Description: 主机配置添加按钮
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import Btn from "../../../../common/component/btn/Btn";
 import HostModal from "./HostModal";
 
-/**
- * 主机配置添加按钮
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const HostAddBtn = props =>{
 
     const {isConfig,visible,setVisible,formValue,setFormValue,findAuth} = props

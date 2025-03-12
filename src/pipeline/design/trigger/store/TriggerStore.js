@@ -49,7 +49,7 @@ class TriggerStore {
         if (data.code===0){
             message.info("添加成功")
         }
-        if(data.code===50001){
+        if(data.code===58001){
             message.info(data.msg)
         }
         return data

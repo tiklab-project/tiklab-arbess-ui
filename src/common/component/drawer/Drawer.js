@@ -1,12 +1,13 @@
+/**
+ * @Description: 抽屉
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useRef,useEffect} from "react";
 import {Drawer} from "antd";
 
-/**
- * 抽屉
- * @param props
- * @returns {Element}
- * @constructor
- */
 const PipelineDrawer = props =>{
 
     const {requireRef,children,...res} = props

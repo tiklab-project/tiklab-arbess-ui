@@ -1,12 +1,13 @@
+/**
+ * @Description: 表单字段认证类型
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Form,Input,Select} from "antd";
 
-/**
- * 认证类型 表单
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const AuthType = props =>{
 
     return(

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线运行统计
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, { useEffect, useState, useRef } from 'react';
 import { Row, Col, Spin, Select } from 'antd';
 import BreadCrumb from '../../../common/component/breadcrumb/BreadCrumb';
@@ -6,12 +13,6 @@ import echarts from '../../../common/component/echarts/Echarts';
 import statisticsStore from '../common/StatisticsStore';
 import '../common/Statistics.scss';
 
-/**
- * 运行统计
- * @param props
- * @returns {Element}
- * @constructor
- */
 const Operate = (props) => {
 
     const { match } = props;

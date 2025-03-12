@@ -1,15 +1,22 @@
+/**
+ * @Description: 消息发送方式
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {MessageSendType} from "tiklab-message-ui";
 
-/**
- * 消息通知类型
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const MessageSendTypeContentTrue = props => {
 
-    return <MessageSendType {...props} bgroup={"arbess"} isBase={true}/>
+    return (
+        <MessageSendType
+            {...props}
+            bgroup={"arbess"}
+            isBase={true}
+        />
+    )
 
 }
 

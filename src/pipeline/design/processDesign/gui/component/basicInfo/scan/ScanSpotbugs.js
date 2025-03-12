@@ -3,6 +3,7 @@ import {Select} from "antd";
 import {observer} from "mobx-react";
 import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
+import FormsTool from "../FormsTool";
 
 /**
  * SonarQuebe代码扫描
@@ -22,6 +23,12 @@ const ScanSpotbugs = props =>{
 
     return(
         <>
+            <FormsTool
+                scmType={'jdk'}
+            />
+            <FormsTool
+                scmType={'maven'}
+            />
             <FormsInput
                 name={"scanPath"}
                 placeholder={"扫描路径"}

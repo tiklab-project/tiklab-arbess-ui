@@ -1,3 +1,10 @@
+/**
+ * @Description: 弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from 'react';
 import {Modal} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
@@ -5,11 +12,6 @@ import {autoHeight} from "../../utils/Client";
 import Btn from "../btn/Btn";
 import "./Modal.scss";
 
-/**
- * 弹出框
- * @param props
- * @constructor
- */
 const Modals = props => {
 
     const {title,children,...res} = props

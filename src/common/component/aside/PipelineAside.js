@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线侧边栏
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useState} from 'react';
 import {
     HomeOutlined,
@@ -7,12 +14,6 @@ import {
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
 
-/**
- * 二级导航，流水线导航--侧边栏
- * @param props
- * @returns {Element}
- * @constructor
- */
 const PipelineAside = (props) => {
 
     const {isExpand,setIsExpand,themeType,initRouters,backUrl,setUrl,ChangeComponent} = props;

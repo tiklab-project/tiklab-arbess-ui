@@ -1,13 +1,14 @@
+/**
+ * @Description: 时间搜索
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {DatePicker} from "antd";
 import "./Search.scss";
 
-/**
- * 时间搜索
- * @param props
- * @returns {Element}
- * @constructor
- */
 const SearchPicker = (props) => {
 
 

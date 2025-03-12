@@ -1,15 +1,20 @@
+/**
+ * @Description: 虚拟角色
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {ProjectVirtualRole} from "tiklab-privilege-ui";
 
-/**
- * 虚拟角色
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const ProjectVirtualRoleContent = props =>{
 
-    return <ProjectVirtualRole {...props}/>
+    return (
+        <ProjectVirtualRole
+            {...props}
+        />
+    )
 
 }
 

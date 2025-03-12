@@ -1,10 +1,14 @@
+/**
+ * @Description: 分页
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {LeftOutlined,RightOutlined,SyncOutlined} from "@ant-design/icons";
 import "./Page.scss";
 
-/**
- * 分页
- */
 const Page = props =>{
 
     const {currentPage,changPage,page:{totalPage=1,totalRecord=1}} = props

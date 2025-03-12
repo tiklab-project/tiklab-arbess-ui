@@ -1,19 +1,19 @@
+/**
+ * @Description: 服务集成添加编辑弹出框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState } from "react";
 import {Form,Input,Select,Tooltip,Spin} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
-import AuthType from "../../common/AuthType";
+import AuthType from "../../../common/AuthType";
 import serverStore from "../store/ServerStore";
-import authorizeStore from "../../../pipeline/design/processDesign/gui/store/AuthorizeStore";
-import {Validation} from "../../../common/utils/Client";
-import Modals from "../../../common/component/modal/Modal";
+import authorizeStore from "../../../../pipeline/design/processDesign/gui/store/AuthorizeStore";
+import {Validation} from "../../../../common/utils/Client";
+import Modals from "../../../../common/component/modal/Modal";
 
-
-/**
- * 服务配置弹出框，添加，更新
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const ServerModal = props =>{
 
     const {visible,setVisible,formValue,findAuth,type, isConfig} = props
@@ -83,8 +83,8 @@ const ServerModal = props =>{
      */
     const onCancel = () => {
         if(!skin){
-            setVisible(false)
             form.resetFields()
+            setVisible(false)
         }
     }
 

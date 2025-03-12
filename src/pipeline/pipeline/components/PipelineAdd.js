@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线添加
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState} from "react";
 import {Spin, Steps, Row, Col} from "antd";
 import {getUser} from "tiklab-core-ui";
@@ -8,12 +15,6 @@ import PipelineAddInfo from "./PipelineAddInfo";
 import pipelineStore from "../store/PipelineStore";
 import "./pipelineAdd.scss";
 
-/**
- * 添加流水线
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const PipelineAdd = props =>{
 
     const {createPipeline} = pipelineStore
@@ -27,8 +28,7 @@ const PipelineAdd = props =>{
     const [templateType,setTemplateType] = useState(1)
     //基本信息
     const [baseInfo,setBaseInfo] = useState({
-        power:1,
-        type:2,
+        power:1,type:2,group:{id:'default'},env:{id:'default'},
         userList:[{
             ...user,
             id: user.userId,
@@ -40,15 +40,11 @@ const PipelineAdd = props =>{
      * 创建流水线
      */
     const createPip = () => {
-        const {name,type,power,userList,group,env} = baseInfo
+        const {userList,...rest} = baseInfo
         const params = {
-            name:name,
-            type:type,
-            power:power,
-            env:{id:env},
-            group:{id:group},
-            userList:userList && userList.map(item=>({userId:item.id,roleType:item.roleType})),
+            ...rest,
             template:templateType,
+            userList: userList && userList.map(item=>({userId:item.id,roleType:item.roleType})),
         }
         setIsLoading(true)
         createPipeline(params).then(res => {

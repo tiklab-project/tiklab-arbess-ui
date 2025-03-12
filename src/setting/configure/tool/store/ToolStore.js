@@ -14,6 +14,14 @@ class ToolStore {
     }
 
     /**
+     * 获取环境配置
+     */
+    @action
+    findPipelineScmList = async value =>{
+        return await Axios.post("/scm/findPipelineScmList",value)
+    }
+
+    /**
      * 删除环境配置
      * @param value
      * @returns {Promise<*>}

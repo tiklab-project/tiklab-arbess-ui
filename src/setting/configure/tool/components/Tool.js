@@ -1,58 +1,53 @@
+/**
+ * @Description: 工具配置
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
 import toolStore from "../store/ToolStore";
-import ToolModal from "./ToolModal";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
-import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import {TaskIcon,taskTitle} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import "../../../common/Common.scss";
+import ToolAddBtn from "./ToolAddBtn";
 
-/**
- * 工具配置
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Tool = props =>{
 
-    const {findAllPipelineScm,deletePipelineScm,updatePipelineScm} = toolStore
+    const {findAllPipelineScm,deletePipelineScm} = toolStore
 
+    //弹出框
     const [visible,setVisible] = useState(false)
-    const [enviData,setEnviData] = useState([])
+    //工具数据
+    const [toolData,setToolData] = useState([])
+    //表单数据
     const [formValue,setFormValue] = useState(null)
 
     useEffect(()=>{
-        // 初始化环境配置
+        // 初始化工具配置
         findAllScm()
     },[])
 
     /**
-     * 获取所有环境配置
+     * 获取所有工具配置
      */
     const findAllScm = () =>{
         findAllPipelineScm().then(res=>{
             if(res.code===0 && res.data){
-                setEnviData(res.data)
+                setToolData(res.data)
             }
         })
     }
 
     /**
-     * 添加环境配置
-     */
-    const addEnvi = () =>{
-        setFormValue(null)
-        setVisible(true)
-    }
-
-    /**
-     * 删除环境配置
+     * 删除工具配置
      * @param record
      */
-    const delEnvi = record => {
+    const delTool = record => {
         deletePipelineScm(record.scmId).then(res=>{
             if(res.code===0){
                 findAllScm()
@@ -61,10 +56,10 @@ const Tool = props =>{
     }
 
     /**
-     * 编辑环境配置
+     * 编辑工具配置
      * @param record
      */
-    const editEnvi = record => {
+    const editTool = record => {
         setFormValue(record)
         setVisible(true)
     }
@@ -90,17 +85,10 @@ const Tool = props =>{
             width:"25%",
             ellipsis:true,
             render:text =>{
-                const taskMap = {
-                    1: 'git',
-                    5: 'svn',
-                    21: 'maven',
-                    22: 'nodejs'
-                };
-                const taskType = taskMap[text];
                 return (
                     <>
-                        <TaskIcon type={taskType} width={20} height={20}/>
-                        <span style={{paddingLeft:5}}>{ taskTitle(taskType) }</span>
+                        <TaskIcon type={text} width={20} height={20}/>
+                        <span style={{paddingLeft:5}}>{ taskTitle(text) }</span>
                     </>
                 )
             }
@@ -121,8 +109,8 @@ const Tool = props =>{
             render:(text,record)=>{
                 return (
                     <ListAction
-                        edit={()=>editEnvi(record)}
-                        del={()=>delEnvi(record)}
+                        edit={()=>editTool(record)}
+                        del={()=>delTool(record)}
                     />
                 )
             }
@@ -141,28 +129,21 @@ const Tool = props =>{
             >
                 <div className='arbess-home-limited'>
                     <BreadCrumb firstItem={"工具"}>
-                        <Btn
-                            onClick={addEnvi}
-                            type={"primary"}
-                            title={"添加工具"}
+                        <ToolAddBtn
+                            visible={visible}
+                            setVisible={setVisible}
+                            formValue={formValue}
+                            setFormValue={setFormValue}
+                            findAllScm={findAllScm}
                         />
                     </BreadCrumb>
                     <div className="auth-content">
                         <Table
                             columns={columns}
-                            dataSource={enviData}
+                            dataSource={toolData}
                             rowKey={record=>record.scmId}
                             pagination={false}
                             locale={{emptyText: <ListEmpty />}}
-                        />
-
-                        <ToolModal
-                            visible={visible}
-                            setVisible={setVisible}
-                            enviData={enviData}
-                            updatePipelineScm={updatePipelineScm}
-                            formValue={formValue}
-                            findAllScm={findAllScm}
                         />
                     </div>
                 </div>

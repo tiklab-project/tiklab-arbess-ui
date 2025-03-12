@@ -1,18 +1,17 @@
+/**
+ * @Description: 多任务视图
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{Fragment,useEffect,useState} from "react";
-import {Popconfirm, Tooltip} from "antd";
-import {DeleteOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
+import {Popconfirm, Spin, Tooltip} from "antd";
+import {DeleteOutlined, ExclamationCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import {SpinLoading} from "../../../../../common/component/loading/Loading";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 import {TaskIcon} from "./TaskTitleIcon";
-import {TaskFinalAdd} from "./Common";
 
-/**
- * 多任务
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Task = props => {
 
     const {taskStore,addTask,setTaskFormDrawer,setCreateValue,match:{params}} = props
@@ -147,19 +146,52 @@ const Task = props => {
         </Fragment>
     }
 
-    if(isLoading){
-        return <SpinLoading size="large" title="加载中……"/>
-    }
-
     return (
-        <div className='guiView-main_group'>
-            {
-                taskList && taskList.map((group,groupIndex)=>renderSingleTask(group,groupIndex))
-            }
-            {
-                TaskFinalAdd("singleBtn",taskList,"新任务",newTask)
-            }
-        </div>
+        <Spin spinning={isLoading}>
+            <div className='guiView-main_group'>
+                {
+                    taskList?.length > 0 ? (
+                        <>
+                            {taskList.map((group,groupIndex)=>renderSingleTask(group,groupIndex))}
+                            <div className="group-flow">
+                                <div className="group-flow_btn group-flow_singleBtn" />
+                            </div>
+                            <div className="group-create">
+                                <div className="group-head">
+                                    <div className="name" style={{opacity:0}}/>
+                                </div>
+                                <div className="newStages-multi">
+                                    <div className="newStages-contents add-newStage">
+                                        <div className="newStages-content">
+                                            <div className="newStages-job">
+                                                <div onClick={()=>newTask()} className="newStages-job-content">
+                                                    <PlusOutlined/>
+                                                    <span style={{paddingLeft:5}}>新任务</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="group-create">
+                            <div className="group-head">
+                                <div className="name" style={{opacity:0}}/>
+                            </div>
+                            <div className="newStages-multi">
+                                <div className="newStages-job">
+                                    <div onClick={()=>newTask()} className="newStages-job-content">
+                                        <PlusOutlined/>
+                                        <span style={{paddingLeft:5}}>新任务</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+            </div>
+        </Spin>
     )
 }
 

@@ -1,15 +1,22 @@
+/**
+ * @Description: 项目集消息通知方案
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {ProjectMessageNotice} from "tiklab-message-ui";
 
-/**
- * 项目消息通知方案
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const ProjectMessageNoticeContent = props =>{
 
-    return <ProjectMessageNotice {...props} bgroup={"arbess"} isBase={true}/>
+    return (
+        <ProjectMessageNotice
+            {...props}
+            bgroup={"arbess"}
+            isBase={true}
+        />
+    )
 
 }
 

@@ -1,3 +1,10 @@
+/**
+ * @Description: 认证配置
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Space,Table, Row, Col} from "antd";
 import authStore from "../store/AuthStore"
@@ -9,12 +16,6 @@ import Profile from "../../../../common/component/profile/Profile";
 import AuthAddBtn from "./AuthAddBtn";
 import "../../../common/Common.scss";
 
-/**
- * 认证配置页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Auth = props =>{
 
     const {deleteAuth,findAllAuth} = authStore
@@ -70,14 +71,12 @@ const Auth = props =>{
             key:"name",
             width:"25%",
             ellipsis:true,
-            render:text => {
-                return (
-                    <span>
-                        <ListIcon text={text}/>
-                        <span>{text}</span>
-                    </span>
-                )
-            }
+            render:text =>  (
+                <span>
+                    <ListIcon text={text}/>
+                    <span>{text}</span>
+                </span>
+            )
         },
         {
             title:"类型",

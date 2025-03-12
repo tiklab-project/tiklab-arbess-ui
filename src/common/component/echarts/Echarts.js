@@ -1,3 +1,10 @@
+/**
+ * @Description: 图表
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import * as echarts from "echarts/core";
 import {PieChart,BarChart,LineChart,HeatmapChart,GaugeChart} from 'echarts/charts';
 

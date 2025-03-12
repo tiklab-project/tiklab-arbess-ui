@@ -1,14 +1,15 @@
+/**
+ * @Description: 版本与许可证
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Version} from "tiklab-licence-ui";
 import {Table} from "antd";
 import {CloseOutlined,CheckOutlined} from "@ant-design/icons";
 
-/**
- * 版本与许可证页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const VersionContent = props =>{
 
     const columns=[

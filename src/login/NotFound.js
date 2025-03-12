@@ -1,12 +1,13 @@
+/**
+ * @Description: 404页面
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from 'react';
 import {NotFound} from "tiklab-eam-ui";
 
-/**
- * 找不到页面
- * @param props
- * @returns {Element}
- * @constructor
- */
 const NotFoundContent = props =>{
     return (
         <NotFound

@@ -1,12 +1,13 @@
+/**
+ * @Description: 消息发送方式
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {MessageSendType} from "tiklab-message-ui";
 
-/**
- * 消息发送方式
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const MessageSendTypeContent = props => {
 
     return (

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线结果统计
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect, useRef, useState} from 'react';
 import {Col, Row, Select, Spin} from "antd";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
@@ -6,12 +13,6 @@ import echarts from "../../../common/component/echarts/Echarts";
 import '../common/Statistics.scss';
 import SearchSelect from "../../../common/component/search/SearchSelect";
 
-/**
- * 结果统计
- * @param props
- * @returns {Element}
- * @constructor
- */
 const Result = props =>{
 
     const {match} = props;

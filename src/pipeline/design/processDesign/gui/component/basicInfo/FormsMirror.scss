@@ -52,6 +52,12 @@
         cursor: pointer;
         z-index: 20;
     }
+    .gui-mirror-disable{
+        border: 1px solid #efeded;
+        .CodeMirror{
+            background-color: #f5f5f5;
+        }
+    }
 }
 
 .CodeMirror-hints{

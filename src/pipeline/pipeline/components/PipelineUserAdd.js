@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线添加用户
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect, useState} from "react";
 import {Table} from "antd";
 import Btn from "../../../common/component/btn/Btn";
@@ -5,12 +12,6 @@ import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";
 import SearchInput from "../../../common/component/search/SearchInput";
 
-/**
- * 流水线用户添加
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const PipelineUserAdd = props =>{
 
     const {setVisible,yUserList,setYUserList,pipelineStore} = props

@@ -1,11 +1,15 @@
+/**
+ * @Description: 面包屑
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Space} from "antd"
 import {LeftOutlined} from "@ant-design/icons";
 import "./BreadCrumb.scss";
 
-/**
- * 面包屑
- */
 const BreadCrumb = ({firstItem,secondItem,onClick,children}) =>{
 
     return (

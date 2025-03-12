@@ -1,14 +1,15 @@
+/**
+ * @Description: 认证配置添加按钮
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {PlusOutlined} from "@ant-design/icons";
 import Btn from "../../../../common/component/btn/Btn";
 import AuthModal from "./AuthModal";
 
-/**
- * 认证配置添加按钮
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const AuthAddBtn = props =>{
 
     const {isConfig,visible,setVisible,formValue,setFormValue,findAuth} = props

@@ -1,6 +1,7 @@
 import React from "react";
 import FormsMirror from "../FormsMirror";
 import FormsInput from "../FormsInput";
+import FormsTool from "../FormsTool";
 
 /**
  * maven构建
@@ -12,6 +13,12 @@ const BuildMaven = props =>{
 
     return(
         <>
+            <FormsTool
+                scmType={'jdk'}
+            />
+            <FormsTool
+                scmType={'maven'}
+            />
             <FormsInput
                 name={"buildAddress"}
                 placeholder={`"\/\" 代表当前源的根目录`}

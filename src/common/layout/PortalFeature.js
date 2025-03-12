@@ -1,3 +1,10 @@
+/**
+ * @Description: 企业特性
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState} from 'react'
 import {BaseModal,HeaderDropdown} from "tiklab-licence-ui/es/commons";
 import {disableFunction,applySubscription} from "tiklab-core-ui";

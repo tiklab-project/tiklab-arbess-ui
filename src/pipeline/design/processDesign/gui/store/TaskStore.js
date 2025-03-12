@@ -4,31 +4,34 @@ import {Axios} from "tiklab-core-ui";
 
 class TaskStore {
 
-    // 必填配置是否完善
-    @observable
-    validType = []
-    // 多任务未填的必需任务
+    //多任务未填的必需任务
     @observable
     taskMustField = []
-    // 抽屉详情数据
+    //必填字段刷新
+    @observable
+    mustFieldFresh = false;
+    //表单数据
     @observable
     dataItem = {}
-    // 重新渲染
+    //重新渲染
     @observable
     taskFresh = false
-    // 抽屉详情面板遮罩
+    //任务权限控制
     @observable
-    taskDetailsDrawerMask = false
+    taskPermissions = [];
 
     /**
-     * 改变抽屉详情面板遮罩
-     * @param value
+     * 设置任务权限控制
      */
     @action
-    setTaskDetailsDrawerMask = value =>{
-        this.taskDetailsDrawerMask = value
+    setTaskPermissions = value =>{
+        this.taskPermissions = value;
     }
 
+    /**
+     * 设置表单数据
+     * @param value
+     */
     @action
     setDataItem = value =>{
         this.dataItem = value
@@ -45,7 +48,7 @@ class TaskStore {
         if(data.code===0){
             this.taskFresh = !this.taskFresh
         }
-        if(data.code===10000 || data.code===50001){
+        if(data.code===58001){
             message.info(data.msg)
         }
         return data
@@ -90,7 +93,8 @@ class TaskStore {
         }
         const data = await Axios.post("/tasks/updateTask",param)
         if(data.code===0){
-            this.taskFresh = !this.taskFresh
+            // this.taskFresh = !this.taskFresh
+            this.mustFieldFresh = !this.mustFieldFresh
             await this.findOneTasksOrTask(param.taskId)
         } else {
             this.dataItem = {...this.dataItem}
@@ -117,7 +121,7 @@ class TaskStore {
                 taskName
             }
         }
-        if(data.code===10000){
+        if(data.code===58001){
             message.info(data.msg)
         }
         return data

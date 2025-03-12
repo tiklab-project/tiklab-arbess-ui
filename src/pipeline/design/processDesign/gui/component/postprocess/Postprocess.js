@@ -1,3 +1,10 @@
+/**
+ * @Description: 任务后置处理
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useEffect,useRef} from "react";
 import {Checkbox, Select, Tooltip, Form, Input, Popconfirm,Dropdown} from "antd";
 import {
@@ -11,18 +18,12 @@ import {getUser} from "tiklab-core-ui";
 import Btn from "../../../../../../common/component/btn/Btn";
 import {Validation} from "../../../../../../common/utils/Client";
 import ListEmpty from "../../../../../../common/component/list/ListEmpty";
-import {PostprocessMirrorScenario} from "../../../../../../common/component/editor/CodeMirror";
+import TaskMirror from "../../../../../../common/component/editor/CodeMirror";
 import PostprocessUserAdd from "../../../../postprocess/components/PostprocessUserAdd";
 import {TaskIcon, taskTitle} from "../TaskTitleIcon";
 import "./Postprocess.scss";
 
 
-/**
- * task的后置处理
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Postprocess = props =>{
 
     const {pipelineStore,postprocessStore,dataItem} = props
@@ -286,12 +287,18 @@ const Postprocess = props =>{
                         :
                         <div className="config-scenario">
                             <div className="config-scenario-title">脚本命令</div>
-                            <PostprocessMirrorScenario
-                                value={poseObj.scriptOrder}
-                                type={poseObj.taskType}
-                                mirrorRefs={mirrorRefs}
-                                styleActiveLine={styleActiveLine}
+                            <TaskMirror
+                                mirrorValue={poseObj.scriptOrder}
+                                mirrorRef={mirrorRefs}
                                 onFocus={()=>setStyleActiveLine(true)}
+                                options={{
+                                    mode: poseObj.taskType ,
+                                    lineNumbers: true,
+                                    lineWrapping:true,
+                                    styleActiveLine:styleActiveLine,
+                                    foldGutter: true,
+                                    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+                                }}
                             />
                         </div>
                     }

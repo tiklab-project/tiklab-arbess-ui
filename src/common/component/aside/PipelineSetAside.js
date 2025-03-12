@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线设置侧边栏
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useState} from "react";
 import {ProjectNav,PrivilegeProjectButton} from "tiklab-privilege-ui";
 import {renderRoutes} from 'react-router-config';
@@ -5,12 +12,6 @@ import "./PipelineSetAside.scss";
 import {observer} from "mobx-react";
 import {DownOutlined, UpOutlined} from "@ant-design/icons";
 
-/**
- * 三级导航，流水线设置导航--侧边栏
- * @param props
- * @returns {Element}
- * @constructor
- */
 const PipelineSetAside = props =>{
 
     const {route,domainId,outerPath,projectRouters} = props

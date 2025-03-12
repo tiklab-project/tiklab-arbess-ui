@@ -1,15 +1,22 @@
+/**
+ * @Description: 项目权限
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {DomainRole} from "tiklab-privilege-ui";
 
-/**
- * 项目权限
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const DomainRoleContent = props =>{
 
-    return <DomainRole {...props} domainId={props.match.params.id}  bgroup={"arbess"}/>
+    return (
+        <DomainRole
+            {...props}
+            domainId={props.match.params.id}
+            bgroup={"arbess"}
+        />
+    )
 
 }
 

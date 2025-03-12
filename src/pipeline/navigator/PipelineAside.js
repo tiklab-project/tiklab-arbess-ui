@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线导航
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect} from "react";
 import {inject,observer,Provider} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
@@ -5,12 +12,6 @@ import pipelineStore from "../pipeline/store/PipelineStore";
 import {renderRoutes} from "react-router-config";
 import ListEmpty from "../../common/component/list/ListEmpty";
 
-/**
- * 流水线左侧导航（二级导航）
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const PipelineAside= (props)=>{
 
     const store = {
@@ -38,7 +39,6 @@ const PipelineAside= (props)=>{
             })
         }
     },[id])
-
 
     return (
         <Provider {...store}>

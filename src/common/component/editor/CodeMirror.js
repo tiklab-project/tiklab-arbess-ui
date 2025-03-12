@@ -1,3 +1,10 @@
+/**
+ * @Description: 代码块
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React from "react";
 import {UnControlled as CodeMirror} from "react-codemirror2";
 import "codemirror/lib/codemirror.js";
@@ -26,51 +33,17 @@ import "codemirror/addon/fold/indent-fold.js";
 import "codemirror/addon/fold/markdown-fold.js";
 import "codemirror/addon/fold/comment-fold.js";
 
-/**
- * 任务命令代码块(task详情)
- */
-export const TaskMirror = props =>{
+const TaskMirror = props =>{
 
-    const {type,mirrorRef,mirrorValue,bordered,placeholder,language="shell",...res} = props;
+    const {mirrorRef,mirrorValue,...res} = props;
 
     return(
         <CodeMirror
             {...res}
             ref={mirrorRef}
             value={mirrorValue}
-            options={{
-                mode: language,
-                theme: type ? "dracula":"default",
-                autofocus: type,
-                lineNumbers: type, // 是否显示行号
-                placeholder: type ? "" : bordered ? placeholder: "未设置",
-                styleActiveLine: bordered,
-            }}
         />
     )
 }
 
-
-/**
- * 后置处理代码块
- */
-export const PostprocessMirrorScenario = props =>{
-
-    const {onFocus,type,mirrorRefs,value,styleActiveLine} = props
-
-    return (
-        <CodeMirror
-            value={value}
-            ref={mirrorRefs}
-            options={{
-                mode: type==='bat' ? "ruby":"shell",
-                lineNumbers: true,
-                lineWrapping:true,
-                styleActiveLine:styleActiveLine,
-                foldGutter: true,
-                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-            }}
-            onFocus={onFocus}
-        />
-    )
-}
+export default TaskMirror

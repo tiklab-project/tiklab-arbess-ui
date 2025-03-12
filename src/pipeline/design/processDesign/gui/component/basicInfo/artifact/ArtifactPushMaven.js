@@ -5,6 +5,7 @@ import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
 import FormsAuth from "../FormsAuth";
 import {ArtifactHadess} from "./ArtifactCommon";
+import FormsTool from "../FormsTool";
 
 /**
  * maven推送制品
@@ -25,10 +26,10 @@ const ArtifactPushMaven = props =>{
      * @returns {*}
      */
     const onChange = (value,type) =>{
-        if(type==="artifactType"){
-            return updateTask({artifactType:value})
+        if(type==="putAddress"){
+            return updateTask({repository: {id:value}})
         }
-        return updateTask({repository: {id:value}})
+        return updateTask({[type]:value})
     }
 
     return (
@@ -43,7 +44,6 @@ const ArtifactPushMaven = props =>{
                 <Select.Option value={"ssh"}>SSH</Select.Option>
             </FormsSelect>
             <FormsAuth />
-
             {
                 dataItem.task?.artifactType==='ssh' ?
                 <>
@@ -67,6 +67,12 @@ const ArtifactPushMaven = props =>{
                 </>
                 :
                 <>
+                    <FormsTool
+                        scmType={'jdk'}
+                    />
+                    <FormsTool
+                        scmType={'maven'}
+                    />
                     {
                         dataItem.task?.artifactType==='hadess' &&
                         <ArtifactHadess

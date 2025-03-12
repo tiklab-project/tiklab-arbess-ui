@@ -4,7 +4,7 @@ import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Modals from "../../../../common/component/modal/Modal";
-import {PostprocessMirrorScenario} from "../../../../common/component/editor/CodeMirror";
+import TaskMirror from "../../../../common/component/editor/CodeMirror";
 import Profile from "../../../../common/component/profile/Profile";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 import {Validation} from "../../../../common/utils/Client";
@@ -265,13 +265,19 @@ const PostprocessAddEdit = props =>{
                                         <Input placeholder='名称'/>
                                     </Form.Item>
                                     <Form.Item label={'脚本命令'}>
-                                        <PostprocessMirrorScenario
-                                            value={formValue?formValue.task?.values.scriptOrder:""}
-                                            mirrorRefs={mirrorRefs}
-                                            styleActiveLine={styleActiveLine}
-                                            onFocus={onFocus}
-                                            type={getFieldValue('type')}
+                                        <TaskMirror
+                                            mirrorValue={formValue ? formValue.task?.values.scriptOrder:""}
+                                            mirrorRef={mirrorRefs}
+                                            options={{
+                                                mode: getFieldValue('type') ,
+                                                lineNumbers: true,
+                                                lineWrapping:true,
+                                                styleActiveLine:styleActiveLine,
+                                                foldGutter: true,
+                                                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+                                            }}
                                         />
+
                                     </Form.Item>
                                 </>
                         }

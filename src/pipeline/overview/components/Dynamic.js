@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线动态
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useState,useEffect} from "react";
 import {Select, Space, Row, Col, Spin} from "antd";
 import {observer} from "mobx-react";
@@ -12,12 +19,6 @@ import pipelineStore from "../../pipeline/store/PipelineStore";
 
 const pageSize = 10;
 
-/**
- * 动态详情
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Dynamic = props =>{
 
     const {match,route} = props

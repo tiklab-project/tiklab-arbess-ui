@@ -1,12 +1,13 @@
+/**
+ * @Description: 暂无数据
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Empty} from "antd";
 
-/**
- * 暂无数据
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const ListEmpty = props =>{
 
     const {title} = props

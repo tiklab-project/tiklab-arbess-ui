@@ -1,3 +1,10 @@
+/**
+ * @Description: 任务条件
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useEffect,useState} from "react";
 import {Popconfirm, Select, Input, Form} from "antd";
 import {
@@ -13,9 +20,6 @@ import {Validation} from "../../../../../../common/utils/Client";
 import condStore from "../../store/ConditionStore";
 import "./Condition.scss";
 
-/**
- * task的条件
- */
 const Condition = props =>{
 
     const {dataItem} = props

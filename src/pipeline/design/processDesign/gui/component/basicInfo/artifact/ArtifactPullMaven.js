@@ -5,6 +5,7 @@ import FormsSelect from "../FormsSelect";
 import FormsAuth from "../FormsAuth";
 import FormsInput from "../FormsInput";
 import {ArtifactHadess} from "./ArtifactCommon";
+import FormsTool from "../FormsTool";
 
 /**
  * maven拉取制品
@@ -23,10 +24,10 @@ const ArtifactPullMaven = props => {
      * @returns {*}
      */
     const onChange = (value,type) => {
-        if(type==='pullType'){
-            return updateTask({pullType:value})
+        if(type==='putAddress'){
+            return updateTask({repository: {id:value}})
         }
-        return updateTask({repository: {id:value}})
+        return updateTask({[type]:value})
     }
 
     return (
@@ -59,6 +60,12 @@ const ArtifactPullMaven = props => {
                 </>
                 :
                 <>
+                    <FormsTool
+                        scmType={'jdk'}
+                    />
+                    <FormsTool
+                        scmType={'maven'}
+                    />
                     {
                         dataItem.task?.pullType==='hadess' &&
                         <ArtifactHadess

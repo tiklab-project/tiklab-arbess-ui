@@ -1,21 +1,26 @@
+/**
+ * @Description: 任务文本框
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useRef,useEffect} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import {WhetherChange} from "../Common";
 import {Validation} from "../../../../../../common/utils/Client";
 
-/**
- * form文本框
- * task文本内容查看，编辑
- */
 const FormsInput = props =>{
 
     const {placeholder,label,name,addonBefore,isRequire,taskStore} = props
 
-    const {dataItem,updateTask} = taskStore
+    const {dataItem,updateTask,taskPermissions} = taskStore
 
     const inputRef = useRef(null)
     const [enter,setEnter] = useState(false)
+
+    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
 
     useEffect(()=>{
         // 文本框聚焦
@@ -104,7 +109,6 @@ const FormsInput = props =>{
         return rule;
     }
 
-
     return (
         <Form.Item
             name={name}
@@ -113,10 +117,11 @@ const FormsInput = props =>{
             validateTrigger="onChange"
         >
             <Input
+                disabled={!taskUpdate}
                 ref={inputRef}
                 addonBefore={enter && addonBefore}
                 placeholder={enter? placeholder+"，回车保存":"未设置"}
-                className={`${enter?'':'input-hover'}`}
+                className={`${enter ? '':'input-hover'}`}
                 onFocus={()=>setEnter(true)}
                 onBlur={(e)=>onBlur(e)}
                 onPressEnter={(e)=>e.target.blur()}

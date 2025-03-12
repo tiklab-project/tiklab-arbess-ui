@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线单元maven测试
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {Table,Tag,Row,Col} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -11,9 +18,6 @@ import "./TestMaven.scss";
 
 const pageSize = 15;
 
-/**
- * 测试页面
- */
 const TestMaven = props => {
 
     const {match:{params}} = props

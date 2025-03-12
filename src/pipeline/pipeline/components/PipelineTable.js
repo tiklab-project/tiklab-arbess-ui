@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线列表
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect} from "react";
 import {message,Tooltip,Table,Space,Spin,Dropdown,Form,Input} from "antd";
 import {
@@ -24,12 +31,6 @@ import pip_xingxing_kong from "../../../assets/images/svg/pip_xingxing-kong.svg"
 import pip_more from "../../../assets/images/svg/pie_more.svg";
 import "./PipelineTable.scss";
 
-/**
- * 流水线表格
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const PipelineTable = props =>{
 
     const {pipPage,pipelineListPage,changPage,changFresh,listType,setIsLoading}=props
@@ -291,16 +292,26 @@ const PipelineTable = props =>{
             width:"14%",
             ellipsis:true,
             render:(text,record)=>{
-                const {state,collect} = record
+                const {state,collect,exec} = record
                 return(
                     <Space size="middle">
-                        <Tooltip title={state===3?"等待":"运行"} >
-                            <span className="pipelineTable-action" onClick={()=>work(record)}>
-                                { state === 1 && <PlayCircleOutlined className="actions-se"/> }
-                                { state === 2 && <Spin indicator={<LoadingOutlined className="actions-se" spin />} /> }
-                                { state === 3 && <MinusCircleOutlined className="actions-se"/> }
-                            </span>
-                        </Tooltip>
+                        {
+                            exec ? (
+                                <Tooltip title={state===3 ? "等待":"运行"} >
+                                    <span className="pipelineTable-action" onClick={()=>work(record)}>
+                                        { state === 1 && <PlayCircleOutlined className="actions-se"/> }
+                                        { state === 2 && <Spin indicator={<LoadingOutlined className="actions-se" spin />} /> }
+                                        { state === 3 && <MinusCircleOutlined className="actions-se"/> }
+                                    </span>
+                                </Tooltip>
+                            ) : (
+                                <Tooltip title={'当前没有运行权限，请联系管理员分配'}>
+                                    <span className="pipelineTable-action-ban">
+                                        <PlayCircleOutlined className="actions-se"/>
+                                    </span>
+                                </Tooltip>
+                            )
+                        }
                         <Tooltip title="收藏">
                             <span className="pipelineTable-action" onClick={()=>collectAction(record)}>
                                 <img src={collect === 0 ? pip_xingxing_kong : pip_xingxing} alt={"收藏"} width={20} height={20}/>

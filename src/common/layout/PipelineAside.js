@@ -15,7 +15,7 @@ import Aside from "../component/aside/PipelineAside";
 import {observer} from "mobx-react";
 
 /**
- * 刘淑贤侧边栏
+ * 流水线侧边栏
  * @param props
  * @returns {Element}
  * @constructor

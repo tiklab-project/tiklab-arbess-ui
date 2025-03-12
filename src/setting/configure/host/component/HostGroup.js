@@ -1,3 +1,10 @@
+/**
+ * @Description: 主机组
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Col, Row, Space, Table} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -10,12 +17,6 @@ import Profile from "../../../../common/component/profile/Profile";
 import ListAction from "../../../../common/component/list/ListAction";
 import "../../../common/Common.scss";
 
-/**
- * 主机组
- * @param props
- * @returns {Element}
- * @constructor
- */
 const HostGroup = (props) => {
 
     const {findHostGroupList,deleteAuthHostGroup} = hostGroupStore;

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流程设计
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState} from "react";
 import {inject,observer} from "mobx-react";
 import Stage from "./Stage";
@@ -6,9 +13,6 @@ import TaskDetails from "./TaskDetails";
 import TaskAdd from "./TaskAdd";
 import "./Task.scss";
 
-/**
- * 流程设计，task图形化界面
- */
 const Gui = props =>{
 
     const {pipelineStore} = props

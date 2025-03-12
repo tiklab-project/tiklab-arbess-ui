@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线运行日志
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useState,useEffect,useRef} from "react";
 import {Skeleton} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
@@ -6,12 +13,6 @@ import HistoryDetailTree from "./HistoryDetailTree";
 import {runStatusText,getTime} from "./HistoryCommon";
 import "./HistoryDetail.scss";
 
-/**
- * 历史运行详情页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const HistoryDetail = props =>{
 
     const {execData,historyItem,back,logData} = props
@@ -27,7 +28,7 @@ const HistoryDetail = props =>{
 
     useEffect(() => {
         if(logData){
-            changeAnchor(logData)
+            changeAnchor(logData,true)
         }
     }, [logData]);
 
@@ -39,6 +40,9 @@ const HistoryDetail = props =>{
         back()
     }
 
+    /**
+     * 初始
+     */
     const init = ()=>{
         setId(null)
         setIsActiveSlide(true)
@@ -47,9 +51,9 @@ const HistoryDetail = props =>{
     /**
      * 锚点跳转
      */
-    const changeAnchor = anchorId =>{
+    const changeAnchor = (anchorId,slide) =>{
         setId(anchorId)
-        setIsActiveSlide(false)
+        setIsActiveSlide(slide)
         const anchorElement = document.getElementById(anchorId)
         if (anchorElement) {
             scrollRef.current.scrollTop = anchorElement.offsetTop - 130
@@ -73,7 +77,7 @@ const HistoryDetail = props =>{
     const handleMouseDown = e =>{
         if(e.button===0){
             if(!isActiveSlide) return
-            startScrollTop = scrollRef.current.scrollTop;
+            startScrollTop =  scrollRef.current.scrollTop;
         }
     }
 
@@ -126,6 +130,18 @@ const HistoryDetail = props =>{
         return pre + cur.stageTime;
     }, 0);
 
+    //运行方式
+    const runWay = () =>{
+        switch (historyItem?.runWay) {
+            case 1:
+                return historyItem?.user?.nickname + " · 手动触发"
+            case 2:
+                return "定时触发";
+            case 3:
+                return historyItem?.user?.nickname + " · 回滚触发"
+        }
+    }
+
     return(
         <div className="str-detail">
             <Skeleton loading={false} active>
@@ -140,7 +156,7 @@ const HistoryDetail = props =>{
                         </div>
                         <div className="bread-center-item">
                             <span className='bread-center-name'>运行方式</span>
-                            <span className='bread-center-desc'>{historyItem?.runWay===1 ? historyItem?.user?.nickname + " · 手动触发" : "定时触发" }</span>
+                            <span className='bread-center-desc'>{runWay()}</span>
                         </div>
                         <div className="bread-center-item">
                             <span className='bread-center-name'>运行状态</span>

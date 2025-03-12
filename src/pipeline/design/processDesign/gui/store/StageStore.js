@@ -4,11 +4,10 @@ import {message} from "antd";
 
 class StageStore {
 
-    // 重新渲染
+    //重新渲染
     @observable
     stageFresh = false
-
-    // 多阶段未填的必需任务
+    //多阶段未填的必需任务
     @observable
     stageMustField = []
 
@@ -23,7 +22,7 @@ class StageStore {
         if(data.code===0){
             this.stageFresh=!this.stageFresh
         }
-        if(data.code===10000 || data.code===50001){
+        if(data.code===58001){
             message.info(data.msg)
         }
         return data
@@ -94,7 +93,7 @@ class StageStore {
         if(data.code===0){
             this.stageFresh = !this.stageFresh
         }
-        if(data.code===10000){
+        if(data.code===58001){
             message.info(data.msg)
         }
         return data

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线添加编辑信息
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect,useState} from "react";
 import {Form, Input, Select, Space, Table, Tooltip,Dropdown} from "antd";
 import {DeleteOutlined, LockOutlined, PlusOutlined, UnlockOutlined} from "@ant-design/icons";
@@ -12,17 +19,11 @@ import envStore from "../../../setting/configure/env/store/EnvStore";
 import groupingStore from "../../../setting/configure/grouping/store/GroupingStore";
 import "./PipelineAddInfo.scss";
 
-/**
- * 流水线信息，添加 | 更改
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const PipelineAddInfo = props =>{
 
     const {set,pipelineStore,setCurrent,onClick,baseInfo,setBaseInfo,setIsLoading} = props
 
-    const {findUserPipeline,updatePipeline,pipeline,pipelineList} = pipelineStore;
+    const {findUserPipeline,updatePipeline,pipeline,setPipeline,pipelineList} = pipelineStore;
     const {findEnvList} = envStore;
     const {findGroupList} = groupingStore;
 
@@ -103,18 +104,17 @@ const PipelineAddInfo = props =>{
             if(set){
                 const params={
                     id: pipeline.id,
-                    name: value.name===""? pipeline.name:value.name,
+                    name: value.name==="" ? pipeline.name : value.name,
                     power: powerType,
-                    env:{id:value.env},
-                    group:{id:value.group},
+                    ...value,
                 }
                 setIsLoading(true)
                 updatePipeline(params).then(res => {
                     if (res.code === 0) {
-                        pipeline.power=params.power
-                        pipeline.name=params.name
-                        pipeline.env=params.env
-                        pipeline.group=params.group
+                        setPipeline({
+                            ...pipeline,
+                            ...params,
+                        })
                         props.history.push(`/pipeline/${pipeline.id}/overview`)
                     }
                     setIsLoading(false)
@@ -191,10 +191,12 @@ const PipelineAddInfo = props =>{
             width:"30%",
             ellipsis:true,
             render:(text,record)=>{
-                return  <Space>
-                            <Profile userInfo={record}/>
-                            {text || '--'}
-                        </Space>
+                return (
+                    <Space>
+                        <Profile userInfo={record}/>
+                        {text || '--'}
+                    </Space>
+                )
             }
         },
         {
@@ -229,13 +231,17 @@ const PipelineAddInfo = props =>{
             ellipsis:true,
             render: (_,record) => {
                 if (record.id !== user.userId) {
-                    return  <Tooltip title="移出用户">
-                                <DeleteOutlined onClick={()=>del(record)}/>
-                            </Tooltip>
+                    return (
+                        <Tooltip title="移出用户">
+                            <DeleteOutlined onClick={()=>del(record)}/>
+                        </Tooltip>
+                    )
                 }
-                return  <span className="user-table-ban">
-                             <DeleteOutlined />
-                        </span>
+                return (
+                    <span className="user-table-ban">
+                         <DeleteOutlined />
+                    </span>
+                )
             }
         },
     ]
@@ -273,16 +279,12 @@ const PipelineAddInfo = props =>{
                     form={form}
                     autoComplete="off"
                     layout={"vertical"}
-                    initialValues={{
-                        name: pipeline?.name ,
-                        group: pipeline?.group?.id ,
-                        env: pipeline?.env?.id ,
-                    }}
+                    initialValues={pipeline}
                 >
                     <Form.Item label={"流水线名称"} name="name" rules={rules}>
                         <Input allowClear placeholder={'流水线名称'}/>
                     </Form.Item>
-                    <Form.Item label={"流水线分组"} name="group">
+                    <Form.Item label={"流水线分组"} name={['group','id']}>
                         <Select  placeholder={'流水线分组'}>
                             {
                                 groupList && groupList.map(item=>(
@@ -291,7 +293,7 @@ const PipelineAddInfo = props =>{
                             }
                         </Select>
                     </Form.Item>
-                    <Form.Item label={"流水线环境"} name="env">
+                    <Form.Item label={"流水线环境"} name={['env','id']}>
                         <Select placeholder={'流水线环境'}>
                             {
                                 envList && envList.map(item=>(
@@ -304,10 +306,7 @@ const PipelineAddInfo = props =>{
                 </Form>
                 <Btn onClick={onClick} title={"取消"} isMar={true}/>
                 <PrivilegeProjectButton code={"pipeline_update"} domainId={pipeline && pipeline.id}>
-                    <Btn type={"primary"}
-                         title={"确定"}
-                         onClick={onOk}
-                    />
+                    <Btn type={"primary"} title={"确定"} onClick={onOk}/>
                 </PrivilegeProjectButton>
             </>
         )
@@ -319,16 +318,12 @@ const PipelineAddInfo = props =>{
                 form={form}
                 autoComplete="off"
                 layout={"vertical"}
-                initialValues={{
-                    name: baseInfo?.name,
-                    group: baseInfo?.group || "default",
-                    env: baseInfo?.env || "default",
-                }}
+                initialValues={baseInfo}
             >
                 <Form.Item label={"流水线名称"} name="name" rules={rules}>
                     <Input allowClear style={{width:'50%'}} placeholder={'流水线名称'}/>
                 </Form.Item>
-                <Form.Item label={"流水线分组"} name="group">
+                <Form.Item label={"流水线分组"} name={['group','id']}>
                     <Select style={{width:'50%'}} placeholder={'流水线分组'}>
                         {
                             groupList && groupList.map(item=>(
@@ -337,7 +332,7 @@ const PipelineAddInfo = props =>{
                         }
                     </Select>
                 </Form.Item>
-                <Form.Item label={"流水线环境"} name="env">
+                <Form.Item label={"流水线环境"} name={['env','id']}>
                     <Select style={{width:'50%'}} placeholder={'流水线环境'}>
                         {
                             envList && envList.map(item=>(

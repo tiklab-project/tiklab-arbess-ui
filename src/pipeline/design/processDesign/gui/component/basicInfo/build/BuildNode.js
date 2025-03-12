@@ -1,6 +1,7 @@
 import React from "react";
 import FormsMirror from "../FormsMirror";
 import FormsInput from "../FormsInput";
+import FormsTool from "../FormsTool";
 
 /**
  * node构建
@@ -12,6 +13,9 @@ const BuildNode = props =>{
 
     return(
         <>
+            <FormsTool
+                scmType={'nodejs'}
+            />
             <FormsInput
                 name={"buildAddress"}
                 placeholder={`"\/\" 代表当前源的根目录`}

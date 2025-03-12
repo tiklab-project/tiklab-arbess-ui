@@ -15,24 +15,33 @@
         .body-taskForm{
             .input-hover,.input-hover .ant-select-selector{
                 border-color: #efeded;
+                &:hover{
+                    background-color: #f2f2f2;
+                }
             }
-            .ant-form-item-has-error .ant-input{
-                background-color: #fff;
-                border-color: #ff4d4f;
+            .ant-form-item-has-error {
+                .ant-input{
+                    border-color: #ff4d4f;
+                }
+                .ant-input:focus{
+                    border-color: #ff7875;
+                }
+                .ant-select-selector{
+                    border-color: #ff4d4f;
+                }
+                .ant-select-selector:focus{
+                    border-color: #ff7875;
+                }
             }
-            .ant-form-item-has-error .ant-input:focus{
-                border-color: #ff7875;
-            }
-            .ant-form-item-has-success .input-hover:hover{
-                background-color: #f2f2f2;
-                border-color: transparent;
-            }
-            .ant-form-item-has-success .input-hover .ant-select-selector:hover{
-                background-color: #f2f2f2;
-                border-color: transparent;
-            }
-            .input-hover:hover{
-                background-color: #f2f2f2;
+            .ant-form-item-has-success{
+                .input-hover:hover{
+                    background-color: #f2f2f2;
+                    border-color: transparent;
+                }
+                .input-hover .ant-select-selector:hover{
+                    background-color: #f2f2f2;
+                    border-color: transparent;
+                }
             }
         }
         .taskForm-forms{

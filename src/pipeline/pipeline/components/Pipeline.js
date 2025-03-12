@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Select, Space, Row, Col, Spin} from "antd";
 import {getUser} from "tiklab-core-ui";
@@ -15,12 +22,6 @@ import "./Pipeline.scss";
 
 const pageSize = 15;
 
-/**
- * 流水线页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Pipeline = props =>{
 
     const {findUserPipelinePage} = pipelineStore;

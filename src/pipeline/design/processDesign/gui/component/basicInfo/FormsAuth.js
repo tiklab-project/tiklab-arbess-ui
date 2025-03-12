@@ -1,24 +1,25 @@
+/**
+ * @Description: 任务认证配置
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/11
+ */
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {Select,Divider} from "antd";
-import ServerAddBtn from "../../../../../../setting/server/components/ServerAddBtn";
+import {Select, Divider, Space} from "antd";
+import ServerAddBtn from "../../../../../../setting/configure/server/components/ServerAddBtn";
 import AuthAddBtn from "../../../../../../setting/configure/auth/components/AuthAddBtn";
 import HostAddBtn from "../../../../../../setting/configure/host/component/HostAddBtn";
 import K8sAddBtn from "../../../../../../setting/configure/k8s/components/K8sAddBtn";
 import authStore from "../../../../../../setting/configure/auth/store/AuthStore";
 import hostStore from "../../../../../../setting/configure/host/store/HostStore";
 import hostGroupStore from "../../../../../../setting/configure/host/store/HostGroupStore";
-import serverStore from "../../../../../../setting/server/store/ServerStore";
+import serverStore from "../../../../../../setting/configure/server/store/ServerStore";
 import k8sStore from "../../../../../../setting/configure/k8s/store/K8sStore";
 import FormsSelect from "./FormsSelect";
+import {taskTitle} from "../TaskTitleIcon";
 
-/**
- * 任务配置
- * 认证，授权，凭证……
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const FormsAuth = props =>{
 
     const {taskStore}=props;
@@ -46,7 +47,7 @@ const FormsAuth = props =>{
      * 获取选择框list
      */
     const findAuth = () =>{
-        const {taskType,task:{artifactType,pullType}} = dataItem
+        const {taskType,task:{artifactType=null,pullType=null}} = dataItem
         switch (taskType) {
             case 'git':
             case 'svn':
@@ -128,7 +129,7 @@ const FormsAuth = props =>{
      * 改变凭证
      * @param value
      */
-    const changeGitSelect = value =>{
+    const changeAuthSelect = value =>{
         updateTask({authId:value})
     }
 
@@ -136,7 +137,8 @@ const FormsAuth = props =>{
      * 认证标题
      */
     const label = () => {
-        const {taskType,task:{artifactType,pullType}} = dataItem
+        const {taskType,task:{artifactType=null,pullType=null}} = dataItem;
+        const title = taskTitle(taskType);
         switch (taskType) {
             case 'git':
             case 'svn':
@@ -144,11 +146,12 @@ const FormsAuth = props =>{
             case 'gitee':
             case 'github':
             case 'gitlab':
-                return "授权信息"
+                return `${title}授权信息`
             case 'gitpuk':
-            case 'testhubo':
             case 'sonar':
-                return "服务地址"
+                return `${title}服务地址`
+            case 'testhubo':
+                return 'TestHubo服务地址'
             case 'liunx':
             case 'docker':
                 return "主机地址"
@@ -160,7 +163,6 @@ const FormsAuth = props =>{
             case 'pull_maven':
             case 'pull_docker':
                 return pullType==='ssh'?'远程地址':'拉取地址'
-
         }
     }
 
@@ -170,7 +172,7 @@ const FormsAuth = props =>{
      * @returns {number}
      */
     const setKey = item =>{
-        const {taskType,task:{artifactType,pullType}} = dataItem
+        const {taskType,task:{artifactType=null,pullType=null}} = dataItem
         switch (taskType) {
             case 'git':
             case 'svn':
@@ -203,7 +205,7 @@ const FormsAuth = props =>{
      * 选择框按钮
      */
     const renderBtn = () =>{
-        const {taskType,task:{artifactType,pullType}} = dataItem;
+        const {taskType,task:{artifactType=null,pullType=null}} = dataItem;
         const commonProps = {
             isConfig: true,
             visible: visible,
@@ -243,24 +245,24 @@ const FormsAuth = props =>{
         }
     }
 
+
     /**
      * 选择框label
-     * @param item
-     * @returns {string}
      */
     const selectLabel = item => {
-        const {taskType,task:{artifactType,pullType}} = dataItem;
+        const {taskType,task:{artifactType=null,pullType=null}} = dataItem;
         switch (taskType) {
             case 'git':
             case 'svn':
-            case 'testhubo':
-            case 'gitpuk':
-            case 'sonar':
                 return `${item.name}(${item.authType === 1 ? item.username : "私钥"})`;
+            case 'gitpuk':
+            case 'testhubo':
+            case 'sonar':
+                return `${item.name}(${item.serverAddress})`;
             case 'gitee':
-            case 'github':
             case 'gitlab':
-                return `${item.name}(私钥)`;
+            case 'github':
+                return `${item.name}(${item.accessToken})`;
             case 'liunx':
             case 'docker':
                 return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
@@ -272,7 +274,7 @@ const FormsAuth = props =>{
             case 'pull_docker':
                 const type = taskType.startsWith('artifact') ? artifactType : pullType;
                 if (type !== 'ssh') {
-                    return `${item.name}(${item.authType === 1 ? item.username : "私钥"})`;
+                    return `${item.name}(${item.serverAddress})`;
                 }
                 return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
             default:
@@ -281,6 +283,9 @@ const FormsAuth = props =>{
     };
 
 
+    /**
+     * 效验
+     */
     const rules = () => {
         const {taskType} = dataItem;
         let rule = [{required:false}];
@@ -313,7 +318,7 @@ const FormsAuth = props =>{
             rules={rules()}
             open={open}
             isSpin={false}
-            onChange={changeGitSelect}
+            onChange={changeAuthSelect}
             onDropdownVisibleChange={(visible)=>setOpen(visible)}
             dropdownRender={menu=> (
                 <>

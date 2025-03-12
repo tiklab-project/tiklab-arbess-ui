@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线概况
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect, useRef, useState} from "react";
 import {Row, Col, Spin, Select} from "antd";
 import {RightOutlined} from "@ant-design/icons";
@@ -12,13 +19,6 @@ import "./Overview.scss";
 import GaugeChart from "../../../common/component/echarts/GaugeChart";
 import SearchSelect from "../../../common/component/search/SearchSelect";
 
-
-/**
- * 概况
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Overview = props =>{
 
     const {match:{params}} = props

@@ -1,3 +1,10 @@
+/**
+ * @Description: 流水线环境管理
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React,{useEffect,useState} from "react";
 import {Space,Table,Row,Col} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
@@ -10,12 +17,6 @@ import EnvModal from "./EnvModal";
 import envStore from "../store/EnvStore";
 import "../../../common/Common.scss";
 
-/**
- * 环境管理
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Env = props =>{
 
     const {findEnvList,deleteEnv} = envStore

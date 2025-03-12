@@ -1,14 +1,15 @@
+/**
+ * @Description: 文本搜索
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {SearchOutlined} from "@ant-design/icons";
 import {Input} from "antd";
 import './Search.scss';
 
-/**
- * 文本搜索框
- * @param props
- * @returns {Element}
- * @constructor
- */
 const SearchInput = props =>{
 
     const {...res} = props;

@@ -1,15 +1,21 @@
+/**
+ * @Description: 待办
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React from "react";
 import {Task} from "tiklab-message-ui";
 
-/**
- * 待办列表
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const TaskContent = props =>{
 
-    return <Task {...props} bgroup={"arbess"}/>
+    return (
+        <Task
+            {...props}
+            bgroup={"arbess"}
+        />
+    )
 
 }
 

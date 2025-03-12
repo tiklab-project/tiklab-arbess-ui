@@ -1,6 +1,17 @@
+/**
+ * @Description: 流水线历史
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/12
+ */
 import React, {useEffect, useRef, useState} from "react";
 import {Table, Tooltip, Row, Col, message, Space, Spin} from "antd";
-import {MinusCircleOutlined,PlayCircleOutlined} from "@ant-design/icons";
+import {
+    HistoryOutlined,
+    MinusCircleOutlined,
+    PlayCircleOutlined,
+} from "@ant-design/icons";
 import {observer} from "mobx-react";
 import {deleteSuccessReturnCurrenPage,debounce} from "../../../common/utils/Client";
 import ListEmpty from "../../../common/component/list/ListEmpty";
@@ -19,19 +30,13 @@ import "./History.scss";
 
 const pageSize = 13;
 
-/**
- * 历史列表
- * @param props
- * @returns {Element}
- * @constructor
- */
 const History = props =>{
 
     const {match,route} = props
 
     const {findOnePipeline} = pipelineStore;
 
-    const {findUserInstance,findPipelineInstance,deleteInstance,execStart,execStop,setHistoryList,page,historyList} = historyStore;
+    const {findUserInstance,findPipelineInstance,deleteInstance,execStart,execStop,rollBackStart,setHistoryList,page,historyList} = historyStore;
 
     const intervalRef = useRef(null);
 
@@ -173,7 +178,7 @@ const History = props =>{
      * 删除历史
      * @param record
      */
-    const del = record =>{
+    const delHistory = record =>{
         deleteInstance(record.instanceId).then(res=>{
             if(res.code===0){
                 const current = deleteSuccessReturnCurrenPage(page.totalRecord,pageSize,params.pageParam.currentPage)
@@ -183,32 +188,61 @@ const History = props =>{
     }
 
     /**
+     * 停止运行
+     */
+    const stopPipeline = debounce(record=>{
+        setIsLoading(true);
+        const {pipeline} = record;
+        execStop(pipeline.id).then(res=>{
+
+        }).finally(()=>setIsLoading(false))
+    },1000);
+
+    /**
+     * 开始运行
+     */
+    const startPipeline = debounce(record=>{
+        setIsLoading(true);
+        const {pipeline} = record;
+        findOnePipeline(pipeline.id).then(res=>{
+            if(res.code===0){
+                if(res.data.state===2){
+                    message.info("当前流水线正在在运行！",0.5,()=>setIsLoading(false))
+                } else {
+                    execStart({
+                        pipelineId:pipeline.id
+                    }).then(res=>{
+                        if(res.code===0) {
+                            details(res.data)
+                        }
+                    }).finally(()=>setIsLoading(false))
+                }
+            }
+        })
+    },1000);
+
+    /**
      * 运行开启或终止
      */
-    const terminateOperation = debounce(record => {
+    const rollBackPipeline = debounce(record => {
         setIsLoading(true);
-        const {runStatus,pipeline} = record
-        if(runStatus==="run"){
-            execStop(pipeline.id).then(res=>{
-
-            }).finally(()=>setIsLoading(false))
-        } else {
-            findOnePipeline(pipeline.id).then(res=>{
-                if(res.code===0){
-                    if(res.data.state===2){
-                        message.info("当前流水线正在在运行！",0.5,()=>setIsLoading(false))
-                    } else {
-                        execStart({
-                            pipelineId:pipeline.id
-                        }).then(res=>{
-                            if(res.code===0) {
-                                details(res.data)
-                            }
-                        }).finally(()=>setIsLoading(false))
-                    }
+        const {pipeline,instanceId} = record;
+        findOnePipeline(pipeline.id).then(res=>{
+            if(res.code===0){
+                if(res.data.state===2){
+                    message.info("当前流水线正在在运行！",0.5,()=>setIsLoading(false))
+                } else {
+                    rollBackStart({
+                        pipelineId:pipeline.id,
+                        instanceId:instanceId
+                    }).then(res=>{
+                        if(res.code===0) {
+                            details(res.data)
+                        }
+                    }).finally(()=>setIsLoading(false))
                 }
-            })
-        }
+            }
+        })
     },1000)
 
     const columns = [
@@ -251,16 +285,25 @@ const History = props =>{
             render:(text,record) => (
                 <div className="history-table-runWay">
                     {
-                        text===1?
-                            <>
-                                <Profile userInfo={record?.user}/>
-                                <div className="runWay-user">{record?.user?.nickname || "--"}手动触发</div>
-                            </>
-                            :
+                        text===1 &&
+                        <>
+                            <Profile userInfo={record?.user}/>
+                            <div className="runWay-user">{record?.user?.nickname || "--"}手动触发</div>
+                        </>
+                    }
+                    {
+                        text===2 &&
                             <>
                                 <img src={pip_trigger} alt={'trigger'} style={{width:22,height:22}}/>
                                 <div className="runWay-user">定时任务自动触发</div>
                             </>
+                    }
+                    {
+                        text===3 &&
+                        <>
+                            <Profile userInfo={record?.user}/>
+                            <div className="runWay-user">{record?.user?.nickname || "--"}回滚触发</div>
+                        </>
                     }
                 </div>
             )
@@ -286,12 +329,25 @@ const History = props =>{
             width:"10%",
             ellipsis:true,
             render:(_,record)=> {
-                switch (record.runStatus) {
+                const {exec,runStatus} = record;
+                if(!exec){
+                    return (
+                        <Tooltip title={"当前没有运行权限，请联系管理员分配"}>
+                            <span className='history-table-action-ban'>
+                                <PlayCircleOutlined />
+                            </span>
+                        </Tooltip>
+                    )
+                }
+                switch (runStatus) {
                     case "run":
                         return (
                             <Tooltip title={"终止"}>
-                                <span onClick={()=>terminateOperation(record)}>
-                                    <MinusCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
+                                <span
+                                    onClick={()=>stopPipeline(record)}
+                                    className='history-table-action'
+                                >
+                                    <MinusCircleOutlined />
                                 </span>
                             </Tooltip>
                         )
@@ -299,11 +355,22 @@ const History = props =>{
                         return (
                             <Space size='middle'>
                                 <Tooltip title={"运行"} >
-                                    <span onClick={()=>terminateOperation(record)}>
-                                        <PlayCircleOutlined style={{cursor:"pointer",fontSize:16}}/>
+                                    <span
+                                        onClick={()=>startPipeline(record)}
+                                        className='history-table-action'
+                                    >
+                                        <PlayCircleOutlined />
                                     </span>
                                 </Tooltip>
-                                <ListAction del={()=>del(record)}/>
+                                <Tooltip title={"回滚"} >
+                                    <span
+                                        onClick={()=>rollBackPipeline(record)}
+                                        className='history-table-action'
+                                    >
+                                        <HistoryOutlined />
+                                    </span>
+                                </Tooltip>
+                                <ListAction del={()=>delHistory(record)}/>
                             </Space>
                         )
                 }
