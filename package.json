@@ -52,8 +52,9 @@
         "tiklab-eam-ui": ">=1.0.0",
         "tiklab-licence-ui": ">=1.0.0",
         "tiklab-message-ui": ">=1.0.0",
+        "tiklab-postin-client-ui": ">=1.0.0",
         "tiklab-privilege-ui": ">=1.0.0",
-        "tiklab-security-ui": ">=1.0.0",
+        "tiklab-security-ui": "^>=1.0.0",
         "tiklab-user-ui": ">=1.0.0"
     },
     "devDependencies": {
@@ -174,6 +175,7 @@
         "tiklab-eam-ui": "^1.0.3",
         "tiklab-licence-ui": "^1.0.3",
         "tiklab-message-ui": "^1.0.3",
+        "tiklab-postin-client-ui": "^1.0.0",
         "tiklab-privilege-ui": "^1.0.3",
         "tiklab-security-ui": "^1.0.3",
         "tiklab-user-ui": "^1.0.3"

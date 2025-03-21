@@ -48,7 +48,7 @@ export const autoHeight = () =>{
 export const Validation = name =>{
     return {
         pattern:/^(?=.*\S).+$/,
-        message:`${name}不能为全为空格`
+        message:`${name}不能全为空格`
     }
 }
 

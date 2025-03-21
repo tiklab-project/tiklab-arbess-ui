@@ -126,7 +126,7 @@ const SettingAside = props =>  {
         }
         if(isEnhance && disable){
             if (typeof enhance === 'function') {
-                enhance();
+                enhance(data);
             }
             return
         }

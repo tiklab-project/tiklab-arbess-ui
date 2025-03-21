@@ -146,6 +146,12 @@ $aside-border-color: #e4e4e4;
           margin: 0 8px;
           font-size: 20px;
           font-weight: 500;
+          flex: 1;
+          width: 0;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          -o-text-overflow: ellipsis;
         }
       }
       .aside-up {

@@ -8,9 +8,7 @@
 import React from "react";
 import {
     DeploymentUnitOutlined,
-    FileProtectOutlined,
-    LayoutOutlined,
-    MacCommandOutlined, MergeCellsOutlined,
+    LayoutOutlined, MacCommandOutlined,
     SafetyCertificateOutlined,
     SoundOutlined,
     TeamOutlined,
@@ -120,10 +118,15 @@ const applicationRouters =  [
         ]
     },
     {
-        id:"/setting/resources",
-        title:"资源监控",
-        icon:<FileProtectOutlined />,
-        purviewCode:"pipeline_resources",
+        id:"integration",
+        title:"集成与开放",
+        icon: <MacCommandOutlined />,
+        children: [
+            {
+                id:"/setting/openApi",
+                title: "openApi",
+            },
+        ]
     },
     {
         id:"security",
@@ -144,17 +147,21 @@ const applicationRouters =  [
     },
     {
         id:"licence",
-        title:"应用",
+        title:"系统",
         icon:<LayoutOutlined />,
         children: [
             {
                 id:'/setting/version',
                 title: '版本与许可证',
-                // purviewCode:'version',
             },
             {
                 id:'/setting/productAuth',
-                title: '应用访问权限',
+                title: '系统访问权限',
+            },
+            {
+                id:"/setting/resources",
+                title:"资源监控",
+                purviewCode:"pipeline_resources",
             },
         ]
     },

@@ -49,7 +49,7 @@ const firstRouters=[
 
 const Portal = props =>{
 
-    const {route,history,systemRoleStore,HelpLink,AppLink,AvatarLink} = props;
+    const {route,history,systemRoleStore,HelpLink,AppLink,AvatarLink,customLogo=null} = props;
 
     const {getSystemPermissions} = systemRoleStore;
 
@@ -83,6 +83,17 @@ const Portal = props =>{
         localStorage.setItem('theme',type)
     }
 
+    //设置图标
+    const logoHtml = () => {
+        const isDefaultTheme = themeType === 'default';
+        const image = isDefaultTheme ? productImg.arbess : productWhiteImg.arbess;
+        return {
+            image: customLogo?.image ? customLogo.image : image,
+            name: customLogo?.name ? customLogo.name :  productTitle.arbess
+        };
+    };
+
+    //侧边导航
     const asideHtml = () => {
         if(path.startsWith('/setting')){
             return props.children
@@ -97,17 +108,18 @@ const Portal = props =>{
                 />
             )
         }
+        const logoData = logoHtml();
         return (
             <div className={`arbess-aside ${isExpand ? 'arbess-aside-expand': 'arbess-aside-normal'} arbess-aside-${themeType}`}>
                 <div className='aside-logo' onClick={()=>history.push('/index')}>
                     {
                         isExpand ?
                             <>
-                                <img src={themeType === 'default' ? productImg.arbess : productWhiteImg.arbess} height={24} width={24} alt={''}/>
-                                <div className='aside-logo-text'>{productTitle.arbess}</div>
+                                <img src={logoData.image} height={24} width={24} alt={''}/>
+                                <div className='aside-logo-text'> {logoData.name} </div>
                             </>
                             :
-                            <img src={themeType === 'default' ? productImg.arbess : productWhiteImg.arbess} height={32} width={32} alt={''}/>
+                            <img src={logoData.image} height={32} width={32} alt={''}/>
                     }
                 </div>
                 <div className="aside-up">

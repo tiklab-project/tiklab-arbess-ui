@@ -222,6 +222,22 @@ export class PipelineStore {
         return data
     }
 
+    /**
+     * 获取用户目录
+     */
+    @action
+    findAllList = async ()=>{
+        return await Axios.post('/user/userdir/findAllList')
+    }
+
+    /**
+     * 更换流水线负责人
+     */
+    @action
+    updatePipelineRootUser = async (value)=>{
+        return await Axios.post('/pipeline/updatePipelineRootUser',value)
+    }
+
 }
 
 export default new PipelineStore();

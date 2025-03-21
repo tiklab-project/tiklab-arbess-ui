@@ -50,6 +50,20 @@ module.exports = merge(baseWebpackConfig, {
                     priority: 0,
                     reuseExistingChunk: true
                 },
+                monacoEditor: {
+                    name: "chunk-monaco-editor",
+                    chunks: "all",
+                    test: /monaco-editor/,
+                    priority: 2,
+                    reuseExistingChunk: true
+                },
+                tiklabPostClientUI: {
+                    name: "chunk-tiklab-postin-client-ui",
+                    chunks: "all",
+                    test: /tiklab-postin-client-ui/,
+                    priority: 2,
+                    reuseExistingChunk: true
+                },
                 tiklabUserUI: {
                     name: "chunk-tiklab-user-ui",
                     chunks: "all",

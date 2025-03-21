@@ -88,6 +88,10 @@ const SystemRole=AsyncComponent(()=>import("./setting/privilege/SystemRole"))
 const Version=AsyncComponent(()=>import("./setting/licence/Version"))
 const ProductAuth=AsyncComponent(()=>import("./setting/licence/ProductAuth"))
 
+//系统集成
+const OpenApi=AsyncComponent(()=>import("./setting/integration/openApi/components/OpenApi"))
+const OpenApiDoc=AsyncComponent(()=>import("./setting/integration/openApi/components/OpenApiDoc"))
+
 // base
 const UserGroupTrue=AsyncComponent(()=>import("./setting/base/user/Groupture"))
 const SystemFeature=AsyncComponent(()=>import("./setting/base/privilege/SystemFeature"))
@@ -190,6 +194,8 @@ export {
     SystemRole,
     Version,
     ProductAuth,
+    OpenApi,
+    OpenApiDoc,
 
     UserGroupTrue,
     SystemFeature,
