@@ -6,7 +6,7 @@ const Agent = props => {
     return (
         <div className='agent'>
             <div className='agent-content home-limited'>
-                <BreadCrumb firstItem={'待办'}/>
+
 
             </div>
         </div>

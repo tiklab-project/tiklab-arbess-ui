@@ -146,7 +146,11 @@ const HistoryDetail = props =>{
         <div className="str-detail">
             <Skeleton loading={false} active>
                 <div className="str-detail-bread">
-                    <BreadCrumb firstItem={pipeline?.name +" # " + historyItem?.findNumber}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:pipeline?.name +" # " + historyItem?.findNumber}
+                        ]}
+                    >
                         <CloseOutlined style={{fontSize:16}} onClick={goBack}/>
                     </BreadCrumb>
                     <div className="bread-center">

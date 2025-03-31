@@ -1,3 +1,10 @@
+/**
+ * @Description: 变量
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/28
+ */
 import React,{useState,useEffect} from "react";
 import {Row, Col, Table} from "antd";
 import {inject,observer} from "mobx-react";
@@ -6,13 +13,8 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import VariableAddEdit from "./VariableAddEdit";
 import "./Variable.scss";
+import {pipeline_task_update} from "../../../../common/utils/Constant";
 
-/**
- * 变量页面
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const Variable = props =>{
 
     const {taskStore,variableStore,match:{params}} = props
@@ -23,7 +25,7 @@ const Variable = props =>{
     const [variableVisible,setVariableVisible] = useState(false)
     const [formValue,setFormValue] = useState("")
 
-    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+    const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
     /**
      * 获取变量

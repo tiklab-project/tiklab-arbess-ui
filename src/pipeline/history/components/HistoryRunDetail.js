@@ -169,8 +169,12 @@ const HistoryRunDetail = (props) => {
         <div className="str-run-detail">
             <div className="str-run-detail-bread">
                 <BreadCrumb
-                    firstItem={`${pipeline?.name} # ${historyItem?.findNumber}`}
-                    onClick={historyType!=="drawer" ? goBack: undefined}
+                    crumbs={[
+                        {
+                            title: `${pipeline?.name} # ${historyItem?.findNumber}`,
+                            click: historyType !== "drawer" ? () => goBack() : undefined
+                        }
+                    ]}
                 >
                     {historyType==="drawer" && <CloseOutlined style={{fontSize:16}} onClick={goBack}/>}
                 </BreadCrumb>

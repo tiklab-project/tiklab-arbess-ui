@@ -188,7 +188,11 @@ const Pipeline = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"流水线"}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'流水线'}
+                        ]}
+                    >
                         <Btn onClick={onClick} type={"primary"} title={"新建流水线"}/>
                     </BreadCrumb>
                     <div className="pipeline-flex">

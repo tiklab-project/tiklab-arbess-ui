@@ -244,7 +244,11 @@ const Operate = (props) => {
                 className="arbess-home-limited"
             >
                 <div className='statistics-select'>
-                    <BreadCrumb firstItem='运行统计' />
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'运行统计'},
+                        ]}
+                    />
                     <SearchSelect onChange={(value) => setCountDay(value)} value={countDay} style={{ width: 150 }}>
                         <Select.Option value={7}>最近7天</Select.Option>
                         <Select.Option value={14}>最近14天</Select.Option>

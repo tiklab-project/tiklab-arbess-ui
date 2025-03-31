@@ -96,11 +96,6 @@ const applicationRouters =  [
                 title:"主机组",
             },
             {
-                id:"/setting/auth",
-                title:"认证",
-                purviewCode:"pipeline_auth",
-            },
-            {
                 id:"/setting/tool",
                 title:"工具",
                 purviewCode:"pipeline_env",

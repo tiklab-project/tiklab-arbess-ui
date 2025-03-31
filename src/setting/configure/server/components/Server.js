@@ -18,6 +18,18 @@ import "../../../common/Common.scss";
 import SearchInput from "../../../../common/component/search/SearchInput";
 import SearchSelect from "../../../../common/component/search/SearchSelect";
 import Page from "../../../../common/component/page/Page";
+import {serverTitle} from "./ServerModal";
+import {
+    serverGitee,
+    serverGithub,
+    serverGitlab,
+    serverPriGitlab,
+    serverGitpuk,
+    serverTesthubo,
+    serverSonar,
+    serverNexus,
+    serverHadess
+} from "../../../../common/utils/Constant";
 
 const pageSize = 13;
 
@@ -31,7 +43,6 @@ const Server = props =>{
     const [formValue,setFormValue] = useState(null);
     //服务配置列表
     const [authServer,setAuthServer] = useState({});
-
     const pageParam = {
         pageSize:pageSize,
         currentPage: 1,
@@ -132,7 +143,7 @@ const Server = props =>{
     // 操作
     const action = record =>{
         const {type} = record
-        if(type==='gitpuk' || type==='hadess' || type==='testhubo'){
+        if(type===serverGitpuk || type===serverHadess || type===serverTesthubo){
             if(version ==='cloud'){
                 return (
                     <ListAction edit={()=>editServer(record)}/>
@@ -169,14 +180,15 @@ const Server = props =>{
             title:"类型",
             dataIndex:"type",
             key:"type",
-            width:"10%",
+            width:"12%",
             ellipsis:true,
+            render: text => serverTitle[text]
         },
         {
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"17%",
+            width:"15%",
             ellipsis:true,
             render:(text,record) => user(text,record)
         },
@@ -211,14 +223,14 @@ const Server = props =>{
             title:"授权信息",
             dataIndex:"accessToken",
             key:"accessToken",
-            width:"25%",
+            width:"30%",
             ellipsis:true,
         },
         {
             title:"创建人",
             dataIndex:["user","nickname"],
             key:["user","nickname"],
-            width:"25%",
+            width:"20%",
             ellipsis:true,
             render:(text,record) => user(text,record)
 
@@ -228,6 +240,56 @@ const Server = props =>{
             dataIndex:"createTime",
             key:"createTime",
             width:"22%",
+            ellipsis:true,
+        },
+        {
+            title:"操作",
+            dataIndex: "action",
+            key: "action",
+            width:"8%",
+            ellipsis:true,
+            render:(text,record) => action(record)
+        }
+    ]
+
+    // 自建Gitlab
+    const priGitlabColumn = [
+        {
+            title:"名称",
+            dataIndex:"name",
+            key:"name",
+            width:"20%",
+            ellipsis:true,
+            render:text => name(text)
+        },
+        {
+            title: "服务地址",
+            dataIndex: "serverAddress",
+            key: "serverAddress",
+            width:"19%",
+            ellipsis:true,
+        },
+        {
+            title:"授权信息",
+            dataIndex:"accessToken",
+            key:"accessToken",
+            width:"19%",
+            ellipsis:true,
+        },
+        {
+            title:"创建人",
+            dataIndex:["user","nickname"],
+            key:["user","nickname"],
+            width:"15%",
+            ellipsis:true,
+            render:(text,record) => user(text,record)
+
+        },
+        {
+            title:"创建时间",
+            dataIndex:"createTime",
+            key:"createTime",
+            width:"19%",
             ellipsis:true,
         },
         {
@@ -254,7 +316,7 @@ const Server = props =>{
             title: "服务地址",
             dataIndex: "serverAddress",
             key: "serverAddress",
-            width:"23%",
+            width:"20%",
             ellipsis:true,
         },
         {
@@ -269,7 +331,7 @@ const Server = props =>{
             title:"创建人",
             dataIndex:["user","nickname"],
             key:["user","nickname"],
-            width:"16%",
+            width:"15%",
             ellipsis:true,
             render:(text,record) => user(text,record)
         },
@@ -277,7 +339,7 @@ const Server = props =>{
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"20%",
+            width:"19%",
             ellipsis:true,
         },
         {
@@ -293,15 +355,17 @@ const Server = props =>{
     // 表格内容
     const columns = () =>{
         switch (requestParams?.type) {
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
+            case serverGitee:
+            case serverGithub:
+            case serverGitlab:
                 return authorizeColumn
-            case 'gitpuk':
-            case 'testhubo':
-            case 'sonar' :
-            case 'nexus' :
-            case 'hadess' :
+            case serverPriGitlab:
+                return priGitlabColumn
+            case serverGitpuk:
+            case serverTesthubo:
+            case serverSonar :
+            case serverNexus :
+            case serverHadess :
                 return authColumn
             default:
                 return allColumn
@@ -319,7 +383,11 @@ const Server = props =>{
                 xxl={{ span: "20", offset: "2" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"服务"} >
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'服务'}
+                        ]}
+                    >
                         <ServerAddBtn
                             type={'gitee'}
                             visible={visible}
@@ -341,18 +409,9 @@ const Server = props =>{
                             onChange={changeServer}
                         >
                             {
-                                [
-                                    {id:'all', title: "全部"},
-                                    {id:'gitee', title:"Gitee"},
-                                    {id:'github', title:"Github"},
-                                    {id:'gitlab', title:"Gitlab"},
-                                    {id:'gitpuk', title:"GitPuk"},
-                                    {id:'testhubo', title:"TestHubo"},
-                                    {id:'sonar', title:"Sonar"},
-                                    {id:'nexus', title:"Nexus"},
-                                    {id:'hadess', title:"Hadess"},
-                                ].map(item=>(
-                                    <Select.Option value={item.id} key={item.id}>{item.title}</Select.Option>
+                                ['all',serverGitee,serverGithub,serverGitlab,serverPriGitlab,serverGitpuk,
+                                    serverTesthubo,serverSonar,serverNexus,serverHadess].map(id=>(
+                                    <Select.Option value={id} key={id}>{id==='all'? '全部' : serverTitle[id]}</Select.Option>
                                 ))
                             }
                         </SearchSelect>

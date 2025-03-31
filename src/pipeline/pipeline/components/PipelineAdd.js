@@ -111,7 +111,11 @@ const PipelineAdd = props =>{
             >
                <Spin spinning={isLoading}>
                    <div className="arbess-home-limited">
-                       <BreadCrumb firstItem={'新建流水线'} onClick={()=>props.history.push("/pipeline")}/>
+                       <BreadCrumb
+                           crumbs={[
+                               {title:'新建流水线',click:()=>props.history.push("/pipeline")},
+                           ]}
+                       />
                        <div className="steps-top">
                            <Steps current={current}>
                                {steps.map(item => (

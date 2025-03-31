@@ -122,7 +122,11 @@ const Resources = props => {
                 xl={{ span: "12", offset: "6" }}
             >
                 <div className='arbess-home-limited'>
-                    <BreadCrumb firstItem={"资源监控"}/>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'资源监控'}
+                        ]}
+                    />
                     <Spin spinning={isLoading}>
                         <div className='resources-info'>
                             <div className='resources-info-item'>

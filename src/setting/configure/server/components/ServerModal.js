@@ -13,6 +13,29 @@ import serverStore from "../store/ServerStore";
 import authorizeStore from "../../../../pipeline/design/processDesign/gui/store/AuthorizeStore";
 import {Validation} from "../../../../common/utils/Client";
 import Modals from "../../../../common/component/modal/Modal";
+import {
+    serverGitee,
+    serverGithub,
+    serverGitlab,
+    serverPriGitlab,
+    serverGitpuk,
+    serverTesthubo,
+    serverSonar,
+    serverNexus,
+    serverHadess
+} from "../../../../common/utils/Constant";
+
+export const serverTitle = {
+    [serverGitee]: 'Gitee',
+    [serverGithub]: 'Github',
+    [serverGitlab]: 'Gitlab',
+    [serverPriGitlab]: '自建Gitlab',
+    [serverSonar]: 'Sonar',
+    [serverNexus]: 'Nexus',
+    [serverGitpuk]: 'GitPuk',
+    [serverTesthubo]: 'TestHubo',
+    [serverHadess]: 'Hadess',
+}
 
 const ServerModal = props =>{
 
@@ -24,7 +47,7 @@ const ServerModal = props =>{
     const [form] = Form.useForm();
 
     // 授权类型
-    const [serverWay,setServerWay] = useState('gitee');
+    const [serverWay,setServerWay] = useState(serverGitee);
 
     useEffect(()=>{
         // 表单初始化
@@ -65,16 +88,17 @@ const ServerModal = props =>{
                 updateAuthServer(param).then(r=>{
                     if(r.code===0){
                         findAuth()
+                        onCancel()
                     }
                 })
             }else {
                 createAuthServer(values).then(r=>{
                     if(r.code===0){
                         findAuth()
+                        onCancel()
                     }
                 })
             }
-            onCancel()
         })
     }
 
@@ -95,7 +119,7 @@ const ServerModal = props =>{
      */
     const serverAddressDisabled = () => {
         const type = formValue?.type
-        if(type==='gitpuk' || type==='hadess' || type==='testhubo'){
+        if(type===serverGitpuk || type===serverHadess || type===serverTesthubo){
             return version === 'cloud'
         }
         return false
@@ -103,9 +127,9 @@ const ServerModal = props =>{
 
     const serverWayHtml = () => {
         switch (serverWay) {
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
+            case serverGitee:
+            case serverGithub:
+            case serverGitlab:
                 return (
                     <Form.Item
                         name={'accessToken'}
@@ -116,6 +140,33 @@ const ServerModal = props =>{
                     >
                         <Input placeholder={'AccessTocken'}/>
                     </Form.Item>
+                )
+            case serverPriGitlab:
+                return (
+                    <>
+                        <Form.Item
+                            name={'serverAddress'}
+                            label={'Gitlab服务器地址'}
+                            rules={[
+                                {required:true,message:"Gitlab服务器地址不能空"},
+                                {
+                                    pattern:/^(https?:\/\/)[^\s\/]+(\.[^\s\/]+)+(\/[^\s\/]*)*[^\s\/\\.,。，、;:'"?!]$/,
+                                    message:"请输入正确的Gitlab服务器地址"
+                                }
+                            ]}
+                        >
+                            <Input placeholder={'Gitlab服务器地址，如 http://172.13.1.10:80'}/>
+                        </Form.Item>
+                        <Form.Item
+                            name={'accessToken'}
+                            label={'AccessTocken'}
+                            rules={[
+                                {required:true,message:"AccessTocken不能空"},
+                            ]}
+                        >
+                            <Input placeholder={'AccessTocken'}/>
+                        </Form.Item>
+                    </>
                 )
             default:
                 return (
@@ -162,22 +213,24 @@ const ServerModal = props =>{
                             {
                                 version==='cloud'?
                                     <Select onChange={changeServerWay} disabled={formValue || isConfig}>
-                                        <Select.Option value={'gitee'}>Gitee</Select.Option>
-                                        <Select.Option value={'github'}>Github</Select.Option>
-                                        <Select.Option value={'gitlab'}>Gitlab</Select.Option>
-                                        <Select.Option value={'sonar'}>Sonar</Select.Option>
-                                        <Select.Option value={'nexus'}>Nexus</Select.Option>
+                                        <Select.Option value={serverGitee}>{serverTitle[serverGitee]}</Select.Option>
+                                        <Select.Option value={serverGithub}>{serverTitle[serverGithub]}</Select.Option>
+                                        <Select.Option value={serverGitlab}>{serverTitle[serverGitlab]}</Select.Option>
+                                        <Select.Option value={serverPriGitlab}>{serverTitle[serverPriGitlab]}</Select.Option>
+                                        <Select.Option value={serverSonar}>{serverTitle[serverSonar]}</Select.Option>
+                                        <Select.Option value={serverNexus}>{serverTitle[serverNexus]}</Select.Option>
                                     </Select>
                                     :
                                     <Select onChange={changeServerWay} disabled={formValue || isConfig}>
-                                        <Select.Option value={'gitee'}>Gitee</Select.Option>
-                                        <Select.Option value={'github'}>Github</Select.Option>
-                                        <Select.Option value={'gitlab'}>Gitlab</Select.Option>
-                                        <Select.Option value={'gitpuk'}>GitPuk</Select.Option>
-                                        <Select.Option value={'testhubo'}>TestHubo</Select.Option>
-                                        <Select.Option value={'sonar'}>Sonar</Select.Option>
-                                        <Select.Option value={'nexus'}>Nexus</Select.Option>
-                                        <Select.Option value={'hadess'}>Hadess</Select.Option>
+                                        <Select.Option value={serverGitee}>{serverTitle[serverGitee]}</Select.Option>
+                                        <Select.Option value={serverGithub}>{serverTitle[serverGithub]}</Select.Option>
+                                        <Select.Option value={serverGitlab}>{serverTitle[serverGitlab]}</Select.Option>
+                                        <Select.Option value={serverPriGitlab}>{serverTitle[serverPriGitlab]}</Select.Option>
+                                        <Select.Option value={serverGitpuk}>{serverTitle[serverGitpuk]}</Select.Option>
+                                        <Select.Option value={serverTesthubo}>{serverTitle[serverTesthubo]}</Select.Option>
+                                        <Select.Option value={serverSonar}>{serverTitle[serverSonar]}</Select.Option>
+                                        <Select.Option value={serverNexus}>{serverTitle[serverNexus]}</Select.Option>
+                                        <Select.Option value={serverHadess}>{serverTitle[serverHadess]}</Select.Option>
                                     </Select>
                             }
                         </Form.Item>

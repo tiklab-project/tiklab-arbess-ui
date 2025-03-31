@@ -10,6 +10,7 @@ import {Form,Select, Spin} from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 import ListEmpty from "../../../../../../common/component/list/ListEmpty";
 import {inject, observer} from "mobx-react";
+import {pipeline_task_update} from "../../../../../../common/utils/Constant";
 
 const FormsSelect = props => {
 
@@ -17,7 +18,7 @@ const FormsSelect = props => {
 
     const {taskPermissions} = taskStore;
 
-    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+    const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
     //是否显示下拉图标
     const [showArrow,setShoeArrow] = useState(false)

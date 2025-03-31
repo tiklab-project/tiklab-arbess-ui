@@ -12,6 +12,7 @@ import {observer,inject} from "mobx-react";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
 import {TaskIcon} from "./TaskTitleIcon";
 import StageView from "./StageView";
+import {pipeline_task_update} from "../../../../../common/utils/Constant";
 
 const Stage = props =>{
 
@@ -20,7 +21,7 @@ const Stage = props =>{
     const {finAllStage,stageFresh,deleteStage,stageMustField} = stageStore;
     const {setDataItem,taskFresh,taskPermissions} = taskStore;
 
-    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+    const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
     // 加载状态
     const [isLoading,setIsLoading] = useState(false);

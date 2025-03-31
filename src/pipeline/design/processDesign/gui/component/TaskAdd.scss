@@ -87,8 +87,12 @@
                             justify-content: center;
                             width: 44px;
                         }
-                        .group-desc-title{
+                        .group-desc-right{
                             margin-left: 10px;
+                            .group-desc-info{
+                                font-size: 13px;
+                                color: #999999;
+                            }
                         }
                     }
                     .group-desc-ban{

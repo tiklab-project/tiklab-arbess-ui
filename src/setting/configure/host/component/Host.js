@@ -200,7 +200,11 @@ const Host = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"主机"}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'主机'}
+                        ]}
+                    >
                         <HostAddBtn
                             visible={visible}
                             setVisible={setVisible}

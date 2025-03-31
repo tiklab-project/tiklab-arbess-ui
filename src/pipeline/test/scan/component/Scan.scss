@@ -4,14 +4,49 @@
     overflow: auto;
     .scan-table{
         padding-top: var(--tiklab-padding-item);
-        .scan-item-name:hover{
-            cursor: pointer;
-            color: var(--tiklab-blue);
-        }
         .scan-table-expand{
             padding-left: 48px;
         }
+        .data-item-name{
+            font-weight: var(--tiklab-font-weight-bold);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            max-width: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            &:hover{
+                cursor: pointer;
+                color: var(--tiklab-blue);
+            }
+        }
+        .data-item-count{
+            display: flex;
+            align-items: center;
+            padding-top: 5px;
+            color: var(--tiklab-gray-500);
+            font-size: 13px;
+            .data-item-pass{
+                max-width: 25%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+            }
+            .data-item-fail{
+                max-width: 25%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+            }
+            .count-key{
+                padding-right: 5px;
+            }
+        }
     }
+
     .scan-data-height{
         height: 35px;
         line-height: 35px;

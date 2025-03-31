@@ -1,3 +1,10 @@
+/**
+ * @Description: maven推送制品
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/28
+ */
 import React from "react";
 import {Select} from "antd";
 import { observer} from "mobx-react";
@@ -6,13 +13,8 @@ import FormsSelect from "../FormsSelect";
 import FormsAuth from "../FormsAuth";
 import {ArtifactHadess} from "./ArtifactCommon";
 import FormsTool from "../FormsTool";
+import {hadess, nexus, ssh, toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
 
-/**
- * maven推送制品
- * @param props
- * @returns {Element}
- * @constructor
- */
 const ArtifactPushMaven = props =>{
 
     const {taskStore} = props
@@ -39,13 +41,13 @@ const ArtifactPushMaven = props =>{
                 label={"推送方式"}
                 onChange={e=>onChange(e,'artifactType')}
             >
-                <Select.Option value={"hadess"}>Hadess</Select.Option>
-                <Select.Option value={"nexus"}>Nexus</Select.Option>
-                <Select.Option value={"ssh"}>SSH</Select.Option>
+                <Select.Option value={hadess}>Hadess</Select.Option>
+                <Select.Option value={nexus}>Nexus</Select.Option>
+                <Select.Option value={ssh}>SSH</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.artifactType==='ssh' ?
+                dataItem.task?.artifactType===ssh ?
                 <>
                     <FormsInput
                         name={"putAddress"}
@@ -68,13 +70,13 @@ const ArtifactPushMaven = props =>{
                 :
                 <>
                     <FormsTool
-                        scmType={'jdk'}
+                        scmType={toolJdk}
                     />
                     <FormsTool
-                        scmType={'maven'}
+                        scmType={toolMaven}
                     />
                     {
-                        dataItem.task?.artifactType==='hadess' &&
+                        dataItem.task?.artifactType===hadess &&
                         <ArtifactHadess
                             label={'推送仓库'}
                             dataItem={dataItem}

@@ -12,6 +12,29 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import {taskTitle, TaskIcon} from "./TaskTitleIcon";
+import {
+    git,
+    gitee,
+    gitlab,
+    github,
+    svn,
+    gitpuk,
+    pri_gitlab,
+    sonar,
+    spotbugs,
+    testhubo,
+    maventest,
+    mvn,
+    nodejs,
+    build_docker,
+    pull_maven,
+    pull_nodejs,
+    pull_docker,
+    artifact_maven,
+    artifact_nodejs,
+    artifact_docker,
+    docker, k8s, liunx,
+} from '../../../../../common/utils/Constant';
 import "./TaskAdd.scss";
 
 const TaskAdd = props =>{
@@ -31,64 +54,65 @@ const TaskAdd = props =>{
             id:"code",
             title:"源码",
             desc:[
-                {type:'git'},
-                {type:'gitee'},
-                {type:'github'},
-                {type:'gitlab'},
-                {type:'svn'},
-                {type:'gitpuk'}
+                {type: git},
+                {type: gitee},
+                {type: github},
+                {type: gitlab},
+                {type: svn},
+                {type: gitpuk},
+                {type: pri_gitlab}
             ]
         },
         {
             id:"scan",
             title: "代码扫描",
             desc: [
-                {type: 'sonar'},
-                {type: 'spotbugs'}
+                {type: sonar},
+                {type: spotbugs}
             ]
         },
         {
             id:"test",
             title:"测试",
             desc:[
-                {type: 'maventest'},
-                {type: 'testhubo'}
+                {type: maventest},
+                {type: testhubo}
             ]
         },
         {
             id:"build",
             title: "构建",
             desc:[
-                {type: 'maven'},
-                {type: 'nodejs'},
-                {type: 'build_docker'},
+                {type: mvn},
+                {type: nodejs},
+                {type: build_docker},
             ]
         },
         {
             id:"artifact_pull",
             title: "拉取制品",
             desc: [
-                {type:'pull_maven'},
-                {type:'pull_nodejs'},
-                {type:'pull_docker'}
+                {type: pull_maven},
+                {type: pull_nodejs},
+                {type: pull_docker}
             ]
         },
         {
             id:"artifact_push",
             title: "推送制品",
             desc: [
-                {type:'artifact_maven'},
-                {type:'artifact_nodejs'},
-                {type:'artifact_docker'}
+                {type: artifact_maven},
+                {type: artifact_nodejs},
+                {type: artifact_docker}
             ]
         },
         {
             id:"deploy",
             title: "部署",
             desc:[
-                {type:'liunx'},
-                {type:'docker'},
-                {type:'k8s'},
+                {type: liunx},
+                {type: docker},
+                {type: k8s},
             ]
         },
     ]
@@ -142,17 +166,18 @@ const TaskAdd = props =>{
      */
     const taskObj = type => {
         const configMap = {
-            'svn': { svnFile: '/' },
-            'liunx': { authType: 1 },
-            'k8s': { k8sNamespace: 'default' },
-            'build_docker': { dockerFile: '${DEFAULT_CODE_ADDRESS}', dockerOrder:'docker image build -t default .' },
-            'artifact_maven': { artifactType: 'nexus', transitive: true },
-            'artifact_docker': { artifactType: 'nexus', transitive: true },
-            'pull_maven': { pullType: 'nexus', transitive: true },
-            'pull_docker': { pullType: 'nexus', transitive: true },
-            'spotbugs': { openAssert: false, openDebug: false, scanPath: "${DEFAULT_CODE_ADDRESS}", scanGrade: "default", errGrade: "default" },
-            'maventest': { address: "${DEFAULT_CODE_ADDRESS}", testOrder: "mvn test" },
-            'maven': { buildAddress: "${DEFAULT_CODE_ADDRESS}", buildOrder: "mvn clean package" }
+            [git]: { authType: 'userPass' },
+            [svn]: { svnFile: '/', authType: 'userPass' },
+            [liunx]: { authType: 1 },
+            [k8s]: { k8sNamespace: 'default' },
+            [build_docker]: { dockerFile: '${DEFAULT_CODE_ADDRESS}', dockerOrder:'docker image build -t default .' },
+            [artifact_maven]: { artifactType: 'nexus', transitive: true },
+            [artifact_docker]: { artifactType: 'nexus', transitive: true },
+            [pull_maven]: { pullType: 'nexus', transitive: true },
+            [pull_docker]: { pullType: 'nexus', transitive: true },
+            [spotbugs]: { openAssert: false, openDebug: false, scanPath: "${DEFAULT_CODE_ADDRESS}", scanGrade: "default", errGrade: "default" },
+            [maventest]: { address: "${DEFAULT_CODE_ADDRESS}", testOrder: "mvn test" },
+            [mvn]: { buildAddress: "${DEFAULT_CODE_ADDRESS}", buildOrder: "mvn clean package" }
         };
         return configMap[type] || {};
     }
@@ -235,8 +260,8 @@ const TaskAdd = props =>{
                                             {
                                                 group.desc && group.desc.map((item,index)=>{
                                                     return(
-                                                        <div key={index} className={`group-desc ${(item.type==='artifact_nodejs' || item.type==='pull_nodejs')?"group-desc-ban":""}`}
-                                                             onClick={()=> (item.type==='artifact_nodejs' || item.type==='pull_nodejs') ? null : addTask(item)}
+                                                        <div key={index} className={`group-desc ${(item.type===artifact_nodejs || item.type===pull_nodejs)?"group-desc-ban":""}`}
+                                                             onClick={()=> (item.type===artifact_nodejs || item.type===pull_nodejs) ? null : addTask(item)}
                                                         >
                                                             <div className='group-desc-icon'>
                                                                 <TaskIcon
@@ -245,8 +270,14 @@ const TaskAdd = props =>{
                                                                     height={24}
                                                                 />
                                                             </div>
-                                                            <div className='group-desc-title'>
-                                                                {taskTitle(item.type)}
+                                                            <div className='group-desc-right'>
+                                                                <div className='group-desc-title'>
+                                                                    {taskTitle(item.type)}
+                                                                </div>
+                                                                {
+                                                                    item.type===pri_gitlab &&
+                                                                    <div className='group-desc-info'>API V4及以上版本</div>
+                                                                }
                                                             </div>
                                                         </div>
                                                     )

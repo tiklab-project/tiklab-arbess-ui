@@ -168,7 +168,11 @@ const BasicInfo = props =>{
             >
                 <div className="arbess-home-limited">
                     <div className="pipelineReDel-up">
-                        <BreadCrumb firstItem={"流水线信息"}/>
+                        <BreadCrumb
+                            crumbs={[
+                                {title:'流水线信息'},
+                            ]}
+                        />
                     </div>
                     <div className="pipelineReDel-content">
                         <div className="pipelineReDel-ul">

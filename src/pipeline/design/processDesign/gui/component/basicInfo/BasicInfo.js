@@ -26,6 +26,23 @@ import ArtifactPushMaven from "./artifact/ArtifactPushMaven";
 import ArtifactPushDocker from "./artifact/ArtifactPushDocker";
 import ArtifactPullMaven from "./artifact/ArtifactPullMaven";
 import ArtifactPullDocker from "./artifact/ArtifactPullDocker";
+import {
+    artifact_docker,
+    artifact_maven,
+    build_docker, docker,
+    git,
+    gitee,
+    github,
+    gitlab,
+    gitpuk, k8s,
+    liunx,
+    maventest,
+    mvn,
+    nodejs, pipeline_task_update,
+    pri_gitlab, pull_docker, pull_maven, sonar, spotbugs, ssh,
+    svn,
+    testhubo
+} from "../../../../../../common/utils/Constant";
 
 const BasicInfo = props => {
 
@@ -34,7 +51,7 @@ const BasicInfo = props => {
     const {dataItem,setDataItem,updateTaskName,taskPermissions} = taskStore;
     const {updateStageName} = stageStore;
 
-    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+    const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
     const [form] = Form.useForm();
     const [enter,setEnter] = useState(false);
@@ -55,32 +72,33 @@ const BasicInfo = props => {
         console.log(dataItem)
         if(!task) return;
         switch(taskType){
-            case 'git':
-            case 'gitlab':
-            case 'svn':
-            case 'gitee':
-            case 'github':
-            case 'gitpuk':
-            case 'maven':
-            case 'nodejs':
-            case 'build_docker':
-            case 'liunx':
-            case 'docker':
-            case 'k8s':
-            case 'sonar':
-            case 'spotbugs':
-            case 'artifact_maven':
-            case 'artifact_docker':
-            case 'pull_maven':
-            case 'pull_docker':
-            case 'maventest':
+            case git:
+            case gitlab:
+            case pri_gitlab:
+            case svn:
+            case gitee:
+            case github:
+            case gitpuk:
+            case mvn:
+            case nodejs:
+            case build_docker:
+            case liunx:
+            case docker:
+            case k8s:
+            case sonar:
+            case spotbugs:
+            case artifact_maven:
+            case artifact_docker:
+            case pull_maven:
+            case pull_docker:
+            case maventest:
                 form.setFieldsValue({
                     ...task,
-                    taskName:taskName,
-                    putAddress:task?.artifactType==='ssh'? task?.putAddress : task?.repository?.name,
+                    taskName: taskName,
+                    putAddress: task?.artifactType===ssh ? task?.putAddress : task?.repository?.name,
                 })
                 break
-            case 'testhubo':
+            case testhubo:
                 form.setFieldsValue({
                     ...task,
                     taskName:taskName,
@@ -99,42 +117,43 @@ const BasicInfo = props => {
      */
     const renderForms = dataItem =>{
         switch (dataItem.taskType){
-            case 'git':
+            case git:
                 return <CodeGit {...props}/>
-            case 'svn':
+            case svn:
                 return <CodeSvn {...props}/>
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
-            case 'gitpuk':
+            case gitee:
+            case github:
+            case gitlab:
+            case pri_gitlab:
+            case gitpuk:
                 return <CodeThird {...props}/>
-            case 'maventest':
+            case maventest:
                 return <TestMvnUnit {...props}/>
-            case 'testhubo':
+            case testhubo:
                 return <TestHubo {...props}/>
-            case 'nodejs':
+            case nodejs:
                 return <BuildNode {...props}/>
-            case 'maven':
+            case mvn:
                 return <BuildMaven {...props}/>
-            case 'build_docker':
+            case build_docker:
                 return <BuildDocker {...props}/>
-            case 'liunx':
+            case liunx:
                 return <DeployLinux {...props}/>
-            case 'docker':
+            case docker:
                 return <DeployDocker {...props}/>
-            case 'k8s':
+            case k8s:
                 return <DeployK8s {...props}/>
-            case 'sonar':
+            case sonar:
                 return <ScanSonarQuebe {...props}/>
-            case 'spotbugs':
+            case spotbugs:
                 return <ScanSpotbugs {...props}/>
-            case 'artifact_maven':
+            case artifact_maven:
                 return <ArtifactPushMaven {...props}/>
-            case 'artifact_docker':
+            case artifact_docker:
                 return <ArtifactPushDocker {...props}/>
-            case 'pull_maven':
+            case pull_maven:
                 return <ArtifactPullMaven {...props}/>
-            case 'pull_docker':
+            case pull_docker:
                 return <ArtifactPullDocker {...props}/>
         }
     }

@@ -6,7 +6,7 @@
  * @LastEditTime: 2025/3/12
  */
 import React,{useState,useEffect} from "react";
-import {Table,Row,Col} from "antd";
+import {Row, Col, Spin, Divider, Table} from "antd";
 import {observer} from "mobx-react";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import Page from "../../../../common/component/page/Page";
@@ -21,25 +21,20 @@ const pageSize = 15;
 
 const Scan = (props) => {
 
-    const {match:{params}} = props
+    const {match:{params}} = props;
 
-    const {spotbugsScan,deleteSpotbugs} = scanStore
+    const {spotbugsScan,deleteSpotbugs} = scanStore;
 
     //加载状态
-    const [isLoading,setIsLoading] = useState(true)
-    //页数
-    const [scanPage,setScanPage] = useState({
-        totalPage:1,
-        totalRecord:1
-    })
+    const [isLoading,setIsLoading] = useState(true);
+    //代码扫描数据
+    const [scanData,setScanData] = useState({});
     const pageParam = {
-        pageSize:pageSize,
+        pageSize: pageSize,
         currentPage: 1,
-    }
+    };
     //请求数据
-    const [scanParam,setScanParam] = useState({pageParam})
-    //扫描数据
-    const [scanList,setScanList] = useState([]);
+    const [scanParam,setScanParam] = useState({pageParam});
     //扫描详情
     const [detailObj,setDetailObj] = useState(null);
 
@@ -50,11 +45,7 @@ const Scan = (props) => {
             ...scanParam
         }).then(r=>{
             if(r.code===0){
-                setScanList(r.data?.dataList || [])
-                setScanPage({
-                    totalPage: r.data?.totalPage || 1,
-                    totalRecord: r.data?.totalRecord || 1,
-                })
+                setScanData(r.data)
             }
         }).finally(()=>setIsLoading(false))
     },[scanParam])
@@ -74,7 +65,7 @@ const Scan = (props) => {
     const del = record => {
         deleteSpotbugs(record.id).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(scanPage.totalRecord,pageSize,scanParam.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(scanData.totalRecord,pageSize,scanParam.pageParam.currentPage)
                 changPage(current)
             }
         })
@@ -87,66 +78,51 @@ const Scan = (props) => {
     const changPage = page => {
         setScanParam({
             pageParam:{
-                pageSize:pageSize,
+                pageSize: pageSize,
                 currentPage: page
             }
         })
     }
-
 
     const columns = [
         {
             title: "名称",
             dataIndex: "id",
             key: "id",
-            width:"20%",
+            width:"65%",
             ellipsis:true,
             render:(text,record) =>{
+                const {priorityOne, priorityTwo, priorityThree} = record;
                 return (
-                    <span className="scan-item-name" onClick={()=>getBugs(record)}>
-                        # {text}
-                    </span>
+                    <div className='data-item-left'>
+                        <span className='data-item-name' onClick={()=>getBugs(record)}>
+                            # {text || '--'}
+                        </span>
+                        <div className='data-item-count'>
+                            <div className='data-item-pass'>
+                                <span className='count-key'>一级问题</span>
+                                {priorityOne || '0'}
+                            </div>
+                            <Divider type="vertical" />
+                            <div className='data-item-fail'>
+                                <span className='count-key'>二级问题</span>
+                                {priorityTwo || '0'}
+                            </div>
+                            <Divider type="vertical" />
+                            <div className='data-item-fail'>
+                                <span className='count-key'>三级问题</span>
+                                {priorityThree || '0'}
+                            </div>
+                        </div>
+                    </div>
                 )
             }
-        },
-        {
-            title: "Bug数量",
-            dataIndex: "totalBugs",
-            key: "totalBugs",
-            width:"13%",
-            ellipsis:true,
-            render:text=>(
-                <div className="scan-data-height">{text || '0'}</div>
-            )
-        },
-        {
-            title: "一级问题",
-            dataIndex: "priorityOne",
-            key: "priorityOne",
-            width:"13%",
-            ellipsis:true,
-        },
-        {
-            title: "二级问题",
-            dataIndex: "priorityTwo",
-            key: "priorityTwo",
-            width:"13%",
-            ellipsis:true,
-            render:text=>text || '0'
-        },
-        {
-            title: "三级问题",
-            dataIndex: "priorityThree",
-            key: "priorityThree",
-            width:"13%",
-            ellipsis:true,
-            render:text=>text || '0'
         },
         {
             title: "扫描时间",
             dataIndex: "scanTime",
             key: "scanTime",
-            width:"20%",
+            width:"27%",
             ellipsis:true,
             render:text=>text || '--'
         },
@@ -184,23 +160,28 @@ const Scan = (props) => {
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"代码扫描"}/>
-                    <div className="scan-table">
-                        <Table
-                            bordered={false}
-                            loading={isLoading}
-                            columns={columns}
-                            dataSource={scanList}
-                            rowKey={record=>record.id}
-                            pagination={false}
-                            locale={{emptyText: <ListEmpty />}}
-                        />
-                        <Page
-                            currentPage={scanParam.pageParam.currentPage}
-                            changPage={changPage}
-                            page={scanPage}
-                        />
-                    </div>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'代码扫描'}
+                        ]}
+                    />
+                    <Spin spinning={isLoading}>
+                        <div className="scan-table">
+                            <Table
+                                bordered={false}
+                                columns={columns}
+                                dataSource={scanData?.dataList || []}
+                                rowKey={record=>record.id}
+                                pagination={false}
+                                locale={{emptyText: <ListEmpty />}}
+                            />
+                            <Page
+                                currentPage={scanParam.pageParam.currentPage}
+                                changPage={changPage}
+                                page={scanData}
+                            />
+                        </div>
+                    </Spin>
                 </div>
             </Col>
         </Row>

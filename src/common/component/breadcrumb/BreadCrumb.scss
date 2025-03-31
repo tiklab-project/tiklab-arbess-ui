@@ -4,6 +4,12 @@
     align-items: center;
     font-size: 16px;
     font-weight: var(--tiklab-font-weight-bold);
+    gap: 10px;
+    .arbess-breadcrumb-left{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .arbess-breadcrumb-first{
         cursor: pointer;
     }

@@ -140,7 +140,11 @@ const HostGroup = (props) => {
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className='arbess-home-limited'>
-                    <BreadCrumb firstItem={"主机组"}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'主机组'}
+                        ]}
+                    >
                         <Btn
                             type={"primary"}
                             title={"添加主机组"}

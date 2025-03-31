@@ -142,7 +142,11 @@ const Dynamic = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"动态"} onClick={goBack}/>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'动态',click:()=>goBack()}
+                        ]}
+                    />
                     <div className="dyna-screen" style={{padding:"15px 0"}}>
                         <Space wrap={true}>
                             {

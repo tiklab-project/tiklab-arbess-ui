@@ -146,7 +146,11 @@ const Result = props =>{
                 className="arbess-home-limited"
             >
                 <div className='statistics-select'>
-                    <BreadCrumb firstItem={'结果统计'}/>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'结果统计'},
+                        ]}
+                    />
                     <SearchSelect
                         onChange={value=>{setCountDay(value)}}
                         value={countDay}

@@ -1,12 +1,14 @@
+/**
+ * @Description: docker构建
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/28
+ */
 import React from "react";
 import FormsInput from "../FormsInput";
 import FormsMirror from "../FormsMirror";
 
-/**
- * docker构建
- * @param props
- * @constructor
- */
 const BuildDocker = props => {
 
     return (

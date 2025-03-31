@@ -179,7 +179,11 @@ const K8s = props => {
                 xxl={{ span: "18", offset: "3" }}
                 className='arbess-home-limited'
             >
-                <BreadCrumb firstItem={"Kubernetes集群"}>
+                <BreadCrumb
+                    crumbs={[
+                        {title:'Kubernetes集群'}
+                    ]}
+                >
                     <K8sAddBtn
                         visible={visible}
                         setVisible={setVisible}

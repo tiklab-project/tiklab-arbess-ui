@@ -6,15 +6,16 @@
  * @LastEditTime: 2025/3/12
  */
 import React,{useState,useEffect} from "react";
-import {Table,Row,Col} from "antd";
+import {Table, Row, Col, Space} from "antd";
 import toolStore from "../store/ToolStore";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
-import {TaskIcon,taskTitle} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
+import {TaskIcon} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import "../../../common/Common.scss";
 import ToolAddBtn from "./ToolAddBtn";
+import {scmTypeName} from "./ToolModal";
 
 const Tool = props =>{
 
@@ -69,29 +70,27 @@ const Tool = props =>{
             title:"名称",
             dataIndex:"scmName",
             key:"scmName",
-            width:"25%",
+            width:"30%",
             ellipsis:true,
-            render:text => {
-                return  <span>
-                            <ListIcon text={text}/>
-                            <span>{text}</span>
-                        </span>
-            }
+            render:text => (
+                <span>
+                    <ListIcon text={text}/>
+                    <span>{text}</span>
+                </span>
+            )
         },
         {
             title:"类型",
             dataIndex:"scmType",
             key:"scmType",
-            width:"25%",
+            width:"20%",
             ellipsis:true,
-            render:text =>{
-                return (
-                    <>
-                        <TaskIcon type={text} width={20} height={20}/>
-                        <span style={{paddingLeft:5}}>{ taskTitle(text) }</span>
-                    </>
-                )
-            }
+            render:text =>(
+                <Space size={'small'}>
+                    <TaskIcon type={text} width={20} height={20}/>
+                    <span>{ scmTypeName[text] }</span>
+                </Space>
+            )
         },
         {
             title:"地址",
@@ -128,7 +127,11 @@ const Tool = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className='arbess-home-limited'>
-                    <BreadCrumb firstItem={"工具"}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'工具'}
+                        ]}
+                    >
                         <ToolAddBtn
                             visible={visible}
                             setVisible={setVisible}

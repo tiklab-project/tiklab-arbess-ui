@@ -6,13 +6,19 @@
  * @LastEditTime: 2025/3/12
  */
 import React,{useEffect,useState} from "react";
-import {Form, Select, Input, Space} from "antd";
+import {Form, Select, Input} from "antd";
 import {Validation} from "../../../../common/utils/Client";
 import Modals from "../../../../common/component/modal/Modal";
-import {TaskIcon, taskTitle} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
 import toolStore from "../store/ToolStore";
+import {toolGit, toolJdk, toolMaven, toolNode, toolSvn} from "../../../../common/utils/Constant";
 
-const scmList = ["jdk","git","svn","maven","nodejs"]
+export const scmTypeName = {
+    [toolJdk]: 'JDK',
+    [toolGit]: 'Git',
+    [toolSvn]: 'Svn',
+    [toolMaven]: 'Maven',
+    [toolNode]: 'Node',
+};
 
 const ToolModal = props =>{
 
@@ -56,9 +62,9 @@ const ToolModal = props =>{
             updatePipelineScm(params).then(res=>{
                 if(res.code===0){
                     findAllScm()
+                    onCancel()
                 }
             })
-            onCancel()
         })
     }
 
@@ -69,6 +75,16 @@ const ToolModal = props =>{
         form.resetFields()
         setVisible(false)
     }
+
+    const scmList = [toolJdk,toolGit,toolSvn,toolMaven,toolNode];
+
+    const addressPlaceholder = {
+        [toolJdk]: '请输入JDK安装路径，如 D:\\jdk-16.0.2\\bin',
+        [toolGit]: '请输入Git安装路径，如 D:\\Git\\bin',
+        [toolSvn]: '请输入Svn安装路径，如 D:\\SVN-1.14\\bin',
+        [toolMaven]: '请输入Maven安装路径，如 D:\\apache-maven-3.9.9\\bin',
+        [toolNode]: '请输入Node安装路径，如 D:\\Node-v18.20.7\\bin',
+    };
 
     return(
         <Modals
@@ -84,32 +100,31 @@ const ToolModal = props =>{
                             {
                                 scmList.map(item=>(
                                     <Select.Option value={item} key={item}>
-                                        <Space>
-                                            <TaskIcon type={item}/>
-                                            {taskTitle(item)}
-                                        </Space>
+                                        {scmTypeName[item]}
                                     </Select.Option>
                                 ))
                             }
                         </Select>
                     </Form.Item>
                     <Form.Item
-                        label="名称"
+                        label={`名称`}
                         name="scmName"
                         rules={[
-                            {required:true,message:`请输入${taskTitle(scmType)}名称`},
-                            Validation(taskTitle(scmType)+"名称")
+                            {required:true,message:`请输入名称`},
+                            Validation(`名称`)
                         ]}
-                    ><Input placeholder={'名称'}/>
+                    >
+                        <Input placeholder={`名称`}/>
                     </Form.Item>
                     <Form.Item
-                        label="地址"
+                        label={`${scmTypeName[scmType]}安装路径`}
                         name="scmAddress"
                         rules={[
-                            {required:true,message:`请输入${taskTitle(scmType)}地址`},
-                            Validation(taskTitle(scmType)+"地址")
+                            {required:true,message:`请输入${scmTypeName[scmType]}安装路径`},
+                            Validation(`${scmTypeName[scmType]}安装路径`)
                         ]}
-                    ><Input placeholder={'地址'}/>
+                    >
+                        <Input placeholder={addressPlaceholder[scmType]}/>
                     </Form.Item>
                 </Form>
             </div>

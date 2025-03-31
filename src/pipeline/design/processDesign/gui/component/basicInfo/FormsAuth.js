@@ -18,6 +18,22 @@ import hostGroupStore from "../../../../../../setting/configure/host/store/HostG
 import serverStore from "../../../../../../setting/configure/server/store/ServerStore";
 import k8sStore from "../../../../../../setting/configure/k8s/store/K8sStore";
 import FormsSelect from "./FormsSelect";
+import {
+    artifact_docker,
+    artifact_maven,
+    docker,
+    git,
+    gitee,
+    github,
+    gitlab,
+    gitpuk, hadess, k8s,
+    liunx, nexus,
+    pri_gitlab,
+    pull_docker, pull_maven,
+    sonar, ssh,
+    svn,
+    testhubo
+} from "../../../../../../common/utils/Constant";
 import {taskTitle} from "../TaskTitleIcon";
 
 const FormsAuth = props =>{
@@ -29,7 +45,16 @@ const FormsAuth = props =>{
     const {findAuthHostList} = hostStore;
     const {findHostGroupList} = hostGroupStore;
     const {findAuthHostK8sList} = k8sStore;
-    const {updateTask,dataItem} = taskStore;
+    const {
+        updateTask,
+        dataItem: {
+            taskType = '',
+            task: {
+                artifactType = null,
+                pullType = null
+            } = {}
+        } = {} ,dataItem
+    } = taskStore;
 
     //弹出框
     const [visible,setVisible] = useState(false);
@@ -39,42 +64,42 @@ const FormsAuth = props =>{
     const [open,setOpen] = useState(false);
 
     useEffect(()=>{
-        //list
+        //获取服务列表
         findAuth()
-    },[dataItem.task?.artifactType,dataItem.task?.pullType])
+    },[artifactType,pullType])
 
     /**
      * 获取选择框list
      */
     const findAuth = () =>{
-        const {taskType,task:{artifactType=null,pullType=null}} = dataItem
         switch (taskType) {
-            case 'git':
-            case 'svn':
+            case git:
+            case svn:
                 findCommonAuth()
                 break
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
-            case 'gitpuk':
-            case 'testhubo':
-            case 'sonar':
+            case gitee:
+            case github:
+            case gitlab:
+            case pri_gitlab:
+            case gitpuk:
+            case testhubo:
+            case sonar:
                 finsServer(taskType)
                 break
-            case 'liunx':
-            case 'docker':
+            case liunx:
+            case docker:
                 findHost()
                 break
-            case 'k8s':
+            case k8s:
                 findK8sHost()
                 break
-            case 'artifact_maven':
-            case 'artifact_docker':
-                artifactType==='ssh'? findHost():finsServer(artifactType)
+            case artifact_maven:
+            case artifact_docker:
+                artifactType===ssh ? findHost() : finsServer(artifactType)
                 break
-            case 'pull_maven':
-            case 'pull_docker':
-                pullType==='ssh'? findHost():finsServer(pullType)
+            case pull_maven:
+            case pull_docker:
+                pullType===ssh ? findHost() : finsServer(pullType)
         }
     }
 
@@ -91,7 +116,6 @@ const FormsAuth = props =>{
 
     /**
      * 获取主机
-     * @returns {Promise<void>}
      */
     const findHost = async () => {
         const hostGroupRes = await findHostGroupList();
@@ -137,32 +161,32 @@ const FormsAuth = props =>{
      * 认证标题
      */
     const label = () => {
-        const {taskType,task:{artifactType=null,pullType=null}} = dataItem;
         const title = taskTitle(taskType);
         switch (taskType) {
-            case 'git':
-            case 'svn':
+            case git:
+            case svn:
                 return "凭证"
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
+            case gitee:
+            case github:
+            case gitlab:
+            case pri_gitlab:
                 return `${title}授权信息`
-            case 'gitpuk':
-            case 'sonar':
+            case gitpuk:
+            case sonar:
                 return `${title}服务地址`
-            case 'testhubo':
+            case testhubo:
                 return 'TestHubo服务地址'
-            case 'liunx':
-            case 'docker':
+            case liunx:
+            case docker:
                 return "主机地址"
-            case 'k8s':
+            case k8s:
                 return "集群地址"
-            case 'artifact_maven':
-            case 'artifact_docker':
-                return artifactType==='ssh'?'远程地址':'推送地址'
-            case 'pull_maven':
-            case 'pull_docker':
-                return pullType==='ssh'?'远程地址':'拉取地址'
+            case artifact_maven:
+            case artifact_docker:
+                return artifactType===ssh ? '远程地址' : '推送地址'
+            case pull_maven:
+            case pull_docker:
+                return pullType===ssh ? '远程地址' : '拉取地址'
         }
     }
 
@@ -172,29 +196,29 @@ const FormsAuth = props =>{
      * @returns {number}
      */
     const setKey = item =>{
-        const {taskType,task:{artifactType=null,pullType=null}} = dataItem
         switch (taskType) {
-            case 'git':
-            case 'svn':
+            case git:
+            case svn:
                 return item.authId
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
-            case 'gitpuk':
-            case 'testhubo':
-            case 'sonar':
+            case gitee:
+            case github:
+            case gitlab:
+            case pri_gitlab:
+            case gitpuk:
+            case testhubo:
+            case sonar:
                 return item.serverId
-            case 'liunx':
-            case 'docker':
+            case liunx:
+            case docker:
                 return item?.groupId ? item.groupId : item.hostId
-            case 'k8s':
+            case k8s:
                 return item.hostId
-            case 'artifact_maven':
-            case 'artifact_docker':
-            case 'pull_maven':
-            case 'pull_docker':
+            case artifact_maven:
+            case artifact_docker:
+            case pull_maven:
+            case pull_docker:
                 const type = taskType.startsWith('artifact') ? artifactType : pullType;
-                if(type!=='ssh'){
+                if(type!==ssh){
                     return item.serverId
                 }
                 return item?.groupId ? item.groupId : item.hostId
@@ -205,7 +229,6 @@ const FormsAuth = props =>{
      * 选择框按钮
      */
     const renderBtn = () =>{
-        const {taskType,task:{artifactType=null,pullType=null}} = dataItem;
         const commonProps = {
             isConfig: true,
             visible: visible,
@@ -213,31 +236,32 @@ const FormsAuth = props =>{
             findAuth: findAuth
         };
         switch (taskType) {
-            case 'git':
-            case 'svn':
+            case git:
+            case svn:
                 return <AuthAddBtn {...commonProps}/>
-            case 'gitpuk':
-            case 'testhubo':
+            case gitpuk:
+            case testhubo:
                 return version === 'cloud' ? null : <ServerAddBtn type={taskType} {...commonProps}/>;
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
-            case 'sonar':
+            case gitee:
+            case github:
+            case gitlab:
+            case pri_gitlab:
+            case sonar:
                 return <ServerAddBtn type={taskType} {...commonProps}/>;
-            case 'liunx':
-            case 'docker':
+            case liunx:
+            case docker:
                 return <HostAddBtn {...commonProps}/>
-            case 'k8s':
+            case k8s:
                 return <K8sAddBtn {...commonProps}/>
-            case 'artifact_maven':
-            case 'artifact_docker':
-            case 'pull_maven':
-            case 'pull_docker':
+            case artifact_maven:
+            case artifact_docker:
+            case pull_maven:
+            case pull_docker:
                 const type = taskType.startsWith('artifact') ? artifactType : pullType;
-                if(type==='ssh'){
+                if(type===ssh){
                     return <HostAddBtn {...commonProps}/>
                 }
-                if((type==='hadess' && version!=='cloud') || type==='nexus'){
+                if((type===hadess && version!=='cloud') || type===nexus){
                     return <ServerAddBtn type={type} {...commonProps}/>
                 }
                 return null
@@ -250,30 +274,30 @@ const FormsAuth = props =>{
      * 选择框label
      */
     const selectLabel = item => {
-        const {taskType,task:{artifactType=null,pullType=null}} = dataItem;
         switch (taskType) {
-            case 'git':
-            case 'svn':
+            case git:
+            case svn:
                 return `${item.name}(${item.authType === 1 ? item.username : "私钥"})`;
-            case 'gitpuk':
-            case 'testhubo':
-            case 'sonar':
+            case gitpuk:
+            case testhubo:
+            case sonar:
                 return `${item.name}(${item.serverAddress})`;
-            case 'gitee':
-            case 'gitlab':
-            case 'github':
+            case gitee:
+            case gitlab:
+            case pri_gitlab:
+            case github:
                 return `${item.name}(${item.accessToken})`;
-            case 'liunx':
-            case 'docker':
+            case liunx:
+            case docker:
                 return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
-            case 'k8s':
+            case k8s:
                 return `${item.name}(${item.ip})`
-            case 'artifact_maven':
-            case 'artifact_docker':
-            case 'pull_maven':
-            case 'pull_docker':
+            case artifact_maven:
+            case artifact_docker:
+            case pull_maven:
+            case pull_docker:
                 const type = taskType.startsWith('artifact') ? artifactType : pullType;
-                if (type !== 'ssh') {
+                if (type !== ssh) {
                     return `${item.name}(${item.serverAddress})`;
                 }
                 return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
@@ -287,22 +311,22 @@ const FormsAuth = props =>{
      * 效验
      */
     const rules = () => {
-        const {taskType} = dataItem;
         let rule = [{required:false}];
         switch (taskType) {
-            case 'pull_maven':
-            case 'pull_docker':
-            case 'artifact_maven':
-            case 'artifact_docker':
-            case 'liunx':
-            case 'docker':
-            case 'k8s':
-            case 'testhubo':
-            case 'sonar':
-            case 'gitee':
-            case 'github':
-            case 'gitlab':
-            case 'gitpuk':
+            case pull_maven:
+            case pull_docker:
+            case artifact_maven:
+            case artifact_docker:
+            case liunx:
+            case docker:
+            case k8s:
+            case testhubo:
+            case sonar:
+            case gitee:
+            case github:
+            case gitlab:
+            case pri_gitlab:
+            case gitpuk:
                 rule = [{required:true,message:`${label()}不能为空`}];
                 break;
             default:

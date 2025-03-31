@@ -136,7 +136,11 @@ const Env = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className='arbess-home-limited'>
-                    <BreadCrumb firstItem={"环境"}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'环境'}
+                        ]}
+                    >
                         <Btn
                             type={'primary'}
                             title={"添加环境"}

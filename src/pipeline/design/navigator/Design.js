@@ -174,7 +174,11 @@ const Design = props =>{
                     <div className="design-up">
                         <div className="design-top">
                             <div>
-                                <BreadCrumb firstItem={"设计"}/>
+                                <BreadCrumb
+                                    crumbs={[
+                                        {title:'设计'}
+                                    ]}
+                                />
                                 <div className="design-tabs">
                                     {
                                         typeLis.map(item=>{

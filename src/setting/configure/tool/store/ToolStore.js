@@ -49,8 +49,10 @@ class ToolStore {
         const data = await Axios.post("/scm/updatePipelineScm",values)
         if(data.code === 0){
             message.info(`${values.scmId?'修改':'添加'}成功`)
+        }else if(data.code===40000){
+            message.error(data.msg);
         } else {
-            message.info(`${values.scmId?'修改':'添加'}失败`)
+            message.error(`${values.scmId?'修改':'添加'}失败`)
         }
         return data
     }

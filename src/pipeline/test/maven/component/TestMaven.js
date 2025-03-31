@@ -1,12 +1,12 @@
 /**
- * @Description: 流水线单元maven测试
+ * @Description: 流水线maven单元测试
  * @Author: gaomengyuan
  * @Date:
  * @LastEditors: gaomengyuan
  * @LastEditTime: 2025/3/12
  */
 import React,{useState,useEffect} from "react";
-import {Table,Tag,Row,Col} from "antd";
+import {Row, Col, Spin, Divider, Table, Tag} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Page from "../../../../common/component/page/Page";
@@ -15,6 +15,7 @@ import ListAction from "../../../../common/component/list/ListAction";
 import TestMavenDetail from "./TestMavenDetail";
 import mavenTestStore from "../store/TestMavenStore";
 import "./TestMaven.scss";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 
 const pageSize = 15;
 
@@ -26,13 +27,8 @@ const TestMaven = props => {
 
     //加载状态
     const [isLoading,setIsLoading] = useState(true)
-    //测试列表
-    const [testList,setTestList] = useState([])
-    //测试页数
-    const [testPage,setTestPage] = useState({
-        totalPage:1,
-        totalRecord:1
-    })
+    //测试数据
+    const [testData,setTestData] = useState({});
     const pageParam= {
         pageSize:pageSize,
         currentPage: 1,
@@ -51,11 +47,7 @@ const TestMaven = props => {
             ...param
         }).then(Res=>{
             if(Res.code===0){
-                setTestList(Res.data?.dataList || [])
-                setTestPage({
-                    totalPage: Res.data?.totalPage || 1,
-                    totalRecord: Res.data?.totalRecord || 1,
-                })
+                setTestData(Res.data)
             }
         }).finally(()=>setIsLoading(false))
     },[param])
@@ -74,7 +66,7 @@ const TestMaven = props => {
     const delMavenTest = (record) => {
         deleteMavenTest(record.id).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,pageSize,param.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(testData.totalRecord,pageSize,param.pageParam.currentPage)
                 changPage(current)
             }
         })
@@ -93,75 +85,66 @@ const TestMaven = props => {
         })
     }
 
+    if(mavenTestObj){
+        return (
+            <TestMavenDetail
+                mavenTestObj={mavenTestObj}
+                setMavenTestObj={setMavenTestObj}
+            />
+        )
+    }
+
     const columns = [
         {
-            title: "名称",
+            title: "测试信息",
             dataIndex: "id",
             key: "id",
-            width:"22%",
+            width:"65%",
             ellipsis:true,
             render:(text,record) =>{
+                const { id, testState, allNumber, errorNumber, failNumber, skipNumber } = record;
                 return (
-                    <span
-                        className="test-item-name"
-                        onClick={()=>goMavenTestDetail(record)}
-                    >
-                        # {text}
-                    </span>
+                    <div className='data-item-left'>
+                        <span className='data-item-name' onClick={()=>goMavenTestDetail(record)}>
+                            # {id || '--'}
+                        </span>
+                        {
+                            testState==='success' ?
+                                <CheckCircleOutlined className='success-text'/>
+                                :
+                                <CloseCircleOutlined className='fail-text'/>
+                        }
+                        <div className='data-item-count'>
+                            <div className='data-item-pass'>
+                                <span className='count-key'>总数</span>
+                                {allNumber}
+                            </div>
+                            <Divider type="vertical" />
+                            <div className='data-item-pass'>
+                                <span className='count-key'>错误数</span>
+                                {errorNumber}
+                            </div>
+                            <Divider type="vertical" />
+                            <div className='data-item-fail'>
+                                <span className='count-key'>失败数</span>
+                                {failNumber}
+                            </div>
+                            <Divider type="vertical" />
+                            <div className='data-item-fail'>
+                                <span className='count-key'>跳过数</span>
+                                {skipNumber}
+                            </div>
+                        </div>
+                    </div>
                 )
             }
-        },
-        {
-            title: "状态",
-            dataIndex: "testState",
-            key: "testState",
-            width:"10%",
-            ellipsis:true,
-            render:text=>(
-                text==='success'?
-                <Tag color="green">成功</Tag>
-                :
-                <Tag color="red">失败</Tag>
-            )
-        },
-        {
-            title: "总用例数",
-            dataIndex: "allNumber",
-            key: "allNumber",
-            width:"10%",
-            ellipsis:true,
-            render:text=>text || '0'
-        },
-        {
-            title: "错误用例数",
-            dataIndex: "errorNumber",
-            key: "errorNumber",
-            width:"10%",
-            ellipsis:true,
-            render:text=>text || '0'
-        },
-        {
-            title: "失败用例数",
-            dataIndex: "failNumber",
-            key: "failNumber",
-            width:"10%",
-            ellipsis:true,
-            render:text=>text || '0'
-        },
-        {
-            title: "跳过用例数",
-            dataIndex: "skipNumber",
-            key: "skipNumber",
-            width:"10%",
-            ellipsis:true,
-            render:text=>text || '0'
         },
         {
             title: "执行时间",
             dataIndex: "createTime",
             key: "createTime",
-            width:"20%",
-            ellipsis:true,
+            width: "27%",
+            ellipsis: true,
         },
         {
             title: "操作",
@@ -177,43 +160,40 @@ const TestMaven = props => {
         }
     ]
 
-    if(mavenTestObj){
-        return (
-            <TestMavenDetail
-                mavenTestObj={mavenTestObj}
-                setMavenTestObj={setMavenTestObj}
-            />
-        )
-    }
-
     return (
         <Row className='test-maven'>
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
-                lg={{span: "24"}}
+                lg={{ span: "24" }}
                 xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"Maven单元测试"}/>
-                    <div className='test-table'>
-                        <Table
-                            bordered={false}
-                            loading={isLoading}
-                            columns={columns}
-                            dataSource={testList}
-                            rowKey={record=>record.id}
-                            pagination={false}
-                            locale={{emptyText: <ListEmpty />}}
-                        />
-                        <Page
-                            currentPage={param.pageParam.currentPage}
-                            changPage={changPage}
-                            page={testPage}
-                        />
-                    </div>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'单元测试'},
+                            {title:'Maven'}
+                        ]}
+                    />
+                    <Spin spinning={isLoading}>
+                        <div className='test-table'>
+                            <Table
+                                bordered={false}
+                                columns={columns}
+                                dataSource={testData?.dataList || []}
+                                rowKey={record=>record.id}
+                                pagination={false}
+                                locale={{emptyText: <ListEmpty />}}
+                            />
+                            <Page
+                                currentPage={param.pageParam.currentPage}
+                                changPage={changPage}
+                                page={testData}
+                            />
+                        </div>
+                    </Spin>
                 </div>
             </Col>
         </Row>

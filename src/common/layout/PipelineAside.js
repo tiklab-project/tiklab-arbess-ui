@@ -86,6 +86,7 @@ const PipelineAside = (props) => {
     return (
         <Aside
             {...props}
+            id={id}
             backUrl={'/home'}
             setUrl={`/pipeline/${id}/setting`}
             initRouters={firstRouters}

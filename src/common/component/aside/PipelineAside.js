@@ -5,7 +5,7 @@
  * @LastEditors: gaomengyuan
  * @LastEditTime: 2025/3/12
  */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     HomeOutlined,
     SettingOutlined,
@@ -16,11 +16,16 @@ import {observer} from "mobx-react";
 
 const PipelineAside = (props) => {
 
-    const {isExpand,setIsExpand,themeType,initRouters,backUrl,setUrl,ChangeComponent} = props;
+    const {isExpand,setIsExpand,themeType,initRouters,backUrl,setUrl,ChangeComponent,id} = props;
 
     const path = props.location.pathname;
 
-    const [pipelineRouters,setPipelineRouters] = useState(initRouters)
+    //路由
+    const [pipelineRouters,setPipelineRouters] = useState(initRouters);
+
+    useEffect(() => {
+        setPipelineRouters(initRouters)
+    }, [id]);
 
     const goBack = () => {
         props.history.push(backUrl)
@@ -54,7 +59,7 @@ const PipelineAside = (props) => {
                         </div>
                 }
                 {
-                    initRouters.map(item=>(
+                    pipelineRouters.map(item=>(
                         <div key={item.id}
                              className={`aside-item ${path.indexOf(item.id) === 0 ? "aside-select":""}`}
                              onClick={()=>props.history.push(item.id)}

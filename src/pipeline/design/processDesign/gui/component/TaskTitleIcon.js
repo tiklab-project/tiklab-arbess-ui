@@ -18,6 +18,31 @@ import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
 import pip_nexus from "../../../../../assets/images/svg/pip_nexus.svg";
 import pip_jdk from "../../../../../assets/images/svg/pip_jdk.svg";
 import {productImg} from "tiklab-core-ui";
+import {
+    git,
+    gitee,
+    gitlab,
+    github,
+    svn,
+    gitpuk,
+    pri_gitlab,
+    sonar,
+    spotbugs,
+    testhubo,
+    maventest,
+    mvn,
+    nodejs,
+    build_docker,
+    pull_maven,
+    pull_nodejs,
+    pull_docker,
+    artifact_maven,
+    artifact_nodejs,
+    artifact_docker,
+    docker, k8s, liunx,
+    message, jdk, post, script, nexus, hadess
+} from '../../../../../common/utils/Constant';
+
 
 /**
  * task的标题
@@ -27,32 +52,33 @@ import {productImg} from "tiklab-core-ui";
  */
 export const taskTitle = type =>{
     switch (type){
-        case 'git':  return "通用Git"
-        case 'gitee':  return "Gitee"
-        case 'github':  return "Github"
-        case 'gitlab':  return "Gitlab"
-        case 'svn':  return "Svn"
-        case 'gitpuk':  return "GitPuk"
-        case 'maventest': return "Maven单元测试"
-        case 'testhubo': return "TestHubo自动化测试"
-        case 'maven': return "Maven构建"
-        case 'nodejs': return "Node.Js构建"
-        case 'build_docker': return "Docker构建"
-        case 'liunx': return "主机部署"
-        case 'docker': return "Docker部署"
-        case 'k8s': return "Kubernetes部署"
-        case 'sonar': return "SonarQuebe"
-        case 'spotbugs': return "spotBugs-Java代码扫描"
-        case 'artifact_maven':return "Maven推送"
-        case 'artifact_docker':return "Docker推送"
-        case 'artifact_nodejs':return "Node.Js推送"
-        case 'pull_maven':return "Maven拉取"
-        case 'pull_nodejs':return "Node.Js拉取"
-        case 'pull_docker':return "Docker拉取"
-        case 'message': return "消息通知"
-        case 'script': return "执行脚本"
-        case 'post': return "后置处理"
-        case 'jdk':return "JDK"
+        case git:  return "通用Git"
+        case gitee: return "Gitee"
+        case github: return "Github"
+        case gitlab: return "Gitlab"
+        case pri_gitlab:  return "自建Gitlab"
+        case svn:  return "Svn"
+        case gitpuk:  return "GitPuk"
+        case maventest: return "Maven单元测试"
+        case testhubo: return "TestHubo自动化测试"
+        case mvn: return "Maven构建"
+        case nodejs: return "Node.Js构建"
+        case build_docker: return "Docker构建"
+        case liunx: return "主机部署"
+        case docker: return "Docker部署"
+        case k8s: return "Kubernetes部署"
+        case sonar: return "SonarQuebe"
+        case spotbugs: return "spotBugs-Java代码扫描"
+        case artifact_maven: return "Maven推送"
+        case artifact_docker: return "Docker推送"
+        case artifact_nodejs: return "Node.Js推送"
+        case pull_maven: return "Maven拉取"
+        case pull_nodejs: return "Node.Js拉取"
+        case pull_docker: return "Docker拉取"
+        case message: return "消息通知"
+        case script: return "执行脚本"
+        case post: return "后置处理"
+        case jdk: return "JDK"
     }
 }
 
@@ -63,39 +89,38 @@ export const taskTitle = type =>{
  * @constructor
  */
 export const TaskIcon = props =>{
-
     const {type, width=16, height=16} = props
-
     const iconType = () =>{
         switch (type) {
-            case 'git':  return pip_git
-            case 'gitee':  return pip_gitee
-            case 'github':  return pip_github
-            case 'gitlab':  return pip_gitlab
-            case 'svn':  return pip_svn
-            case 'gitpuk':  return productImg.gitpuk
-            case 'maventest': return pip_ceshi
-            case 'testhubo': return productImg.testhubo
-            case 'maven': return maven
-            case 'nodejs': return pip_nodejs
-            case 'build_docker': return pip_docker
-            case 'liunx': return pip_liunx
-            case 'docker': return pip_docker
-            case 'k8s': return pip_k8s
-            case 'sonar': return pip_sonar
-            case 'spotbugs': return pip_spotbugs
-            case 'artifact_maven': return maven
-            case 'artifact_docker': return pip_docker
-            case 'artifact_nodejs': return pip_nodejs
-            case 'pull_maven': return maven
-            case 'pull_nodejs': return pip_nodejs
-            case 'pull_docker': return pip_docker
-            case 'message': return pip_message
-            case 'script': return pip_shell
-            case 'post': return pip_post
-            case 'hadess': return productImg.hadess
-            case 'nexus': return pip_nexus
-            case 'jdk': return pip_jdk
+            case git: return pip_git
+            case gitee: return pip_gitee
+            case github: return pip_github
+            case gitlab: return pip_gitlab
+            case pri_gitlab:  return pip_gitlab
+            case svn:  return pip_svn
+            case gitpuk:  return productImg.gitpuk
+            case maventest: return pip_ceshi
+            case testhubo: return productImg.testhubo
+            case mvn: return maven
+            case nodejs: return pip_nodejs
+            case build_docker: return pip_docker
+            case liunx: return pip_liunx
+            case docker: return pip_docker
+            case k8s: return pip_k8s
+            case sonar: return pip_sonar
+            case spotbugs: return pip_spotbugs
+            case artifact_maven: return maven
+            case artifact_docker: return pip_docker
+            case artifact_nodejs: return pip_nodejs
+            case pull_maven: return maven
+            case pull_nodejs: return pip_nodejs
+            case pull_docker: return pip_docker
+            case message: return pip_message
+            case script: return pip_shell
+            case post: return pip_post
+            case hadess: return productImg.hadess
+            case nexus: return pip_nexus
+            case jdk: return pip_jdk
         }
     }
 
@@ -113,33 +138,34 @@ export const TaskIcon = props =>{
  */
 export const HeadlineTitle = type =>{
     switch (type) {
-        case 'git':
-        case 'gitlab':
-        case 'svn':
-        case 'gitpuk':
-        case 'gitee':
-        case 'github':
+        case git:
+        case gitlab:
+        case pri_gitlab:
+        case svn:
+        case gitpuk:
+        case gitee:
+        case github:
             return '源码'
-        case 'sonar':
-        case 'spotbugs':
+        case sonar:
+        case spotbugs:
             return '代码扫描'
-        case 'maventest':
-        case 'testhubo':
+        case maventest:
+        case testhubo:
             return '测试'
-        case 'maven':
-        case 'nodejs':
-        case 'build_docker':
+        case mvn:
+        case nodejs:
+        case build_docker:
             return '构建'
-        case 'artifact_maven':
-        case 'artifact_nodejs':
-        case 'artifact_docker':
+        case artifact_maven:
+        case artifact_nodejs:
+        case artifact_docker:
             return '推送制品'
-        case 'pull_maven':
-        case 'pull_nodejs':
-        case 'pull_docker':
+        case pull_maven:
+        case pull_nodejs:
+        case pull_docker:
             return '拉取制品'
-        case 'liunx':
-        case 'docker':
+        case liunx:
+        case docker:
             return '部署'
         default :
             return "阶段名称"

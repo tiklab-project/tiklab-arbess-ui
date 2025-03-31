@@ -14,6 +14,7 @@ import Btn from "../../../../../../common/component/btn/Btn";
 import TaskMirror from "../../../../../../common/component/editor/CodeMirror";
 import {WhetherChange} from "../Common";
 import "./FormsMirror.scss";
+import {pipeline_task_update} from "../../../../../../common/utils/Constant";
 
 const FormsMirror = props =>{
 
@@ -24,7 +25,7 @@ const FormsMirror = props =>{
     const narrowMirrorRef = useRef();
     const expandMirrorRef = useRef();
 
-    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+    const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
     //边框
     const [bordered,setBordered] = useState(false)

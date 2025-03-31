@@ -164,7 +164,11 @@ const Agent = (props) => {
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className='arbess-home-limited'>
-                    <BreadCrumb firstItem={"Agent"}/>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'Agent'}
+                        ]}
+                    />
                     <div className="auth-content">
                         <Table
                             columns={columns}

@@ -1,3 +1,10 @@
+/**
+ * @Description: 第三方源码
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/28
+ */
 import React, {useEffect, useState} from "react";
 import {Select} from "antd";
 import {observer} from "mobx-react";
@@ -5,13 +12,8 @@ import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
 import codeThirdStore from "../../../store/CodeThirdStore";
 import FormsTool from "../FormsTool";
+import {gitee, github, gitlab, gitpuk, pri_gitlab, toolGit} from "../../../../../../../common/utils/Constant";
 
-/**
- * gitPuk | gitee | github | gitlab
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const CodeThird = props =>{
 
     const {taskStore} = props
@@ -21,6 +23,7 @@ const CodeThird = props =>{
         findGiteeRpy,findGiteeBranch,
         findGithubRpy,findGithubBranch,
         findGitlabRpy,findGitlabBranch,
+        findPriGitlabRpy,findPriGitlabBranch,
     } = codeThirdStore
     const {updateTask,dataItem} = taskStore
 
@@ -69,14 +72,16 @@ const CodeThird = props =>{
         setSpin(true)
         const authId = dataItem.task.authId;
         let rpyRes;
-        if(dataItem.taskType==='gitpuk'){
+        if(dataItem.taskType===gitpuk){
             rpyRes = await findGittokRpy(authId)
-        } else if(dataItem.taskType==='gitee'){
+        } else if(dataItem.taskType===gitee){
             rpyRes = await findGiteeRpy(authId)
-        } else if(dataItem.taskType==='github'){
+        } else if(dataItem.taskType===github){
             rpyRes = await findGithubRpy(authId)
-        } else if(dataItem.taskType==='gitlab'){
+        } else if(dataItem.taskType===gitlab){
             rpyRes = await findGitlabRpy(authId)
+        } else if(dataItem.taskType===pri_gitlab){
+            rpyRes = await findPriGitlabRpy(authId)
         }
         if(rpyRes.code===0){
             setCodeRpy(rpyRes.data)
@@ -95,14 +100,16 @@ const CodeThird = props =>{
             authId:dataItem.task?.authId,
         };
         let branchRes;
-        if(dataItem.taskType==='gitpuk'){
+        if(dataItem.taskType===gitpuk){
             branchRes = await findGittokBranch(authId)
-        } else if(dataItem.taskType==='gitee'){
+        } else if(dataItem.taskType===gitee){
             branchRes = await findGiteeBranch(authId)
-        } else if(dataItem.taskType==='github'){
+        } else if(dataItem.taskType===github){
             branchRes = await findGithubBranch(authId)
-        } else if(dataItem.taskType==='gitlab'){
+        } else if(dataItem.taskType===gitlab){
             branchRes = await findGitlabBranch(authId)
+        } else if(dataItem.taskType===pri_gitlab){
+            branchRes = await findPriGitlabBranch(authId)
         }
         if(branchRes.code===0){
             setCodeBranch(branchRes.data)
@@ -113,7 +120,7 @@ const CodeThird = props =>{
     return(
         <>
             <FormsTool
-                scmType={'git'}
+                scmType={toolGit}
             />
             <FormsAuth />
             <FormsSelect

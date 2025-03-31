@@ -29,7 +29,11 @@ const OpenApi = (props) => {
                 xl={{ span: "16", offset: "4" }}
                 xxl={{ span: "14", offset: "5" }}
             >
-                <BreadCrumb firstItem={'openApi'}/>
+                <BreadCrumb
+                    crumbs={[
+                        {title:'openApi'},
+                    ]}
+                />
                 <div className="integration-openApi-ul">
                     <div className="integration-openApi-li" onClick={goOpenApiDoc}>
                         <div className="openApi-li-icon">

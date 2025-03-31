@@ -1,3 +1,10 @@
+/**
+ * @Description: docker推送制品
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/28
+ */
 import React from "react";
 import {Select} from "antd";
 import {observer} from "mobx-react";
@@ -5,13 +12,8 @@ import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
 import FormsAuth from "../FormsAuth";
 import {ArtifactHadess} from "./ArtifactCommon";
+import {hadess, nexus} from "../../../../../../../common/utils/Constant";
 
-/**
- * docker推送制品
- * @param props
- * @returns {Element}
- * @constructor
- */
 const ArtifactPushDocker = props =>{
 
     const {taskStore} = props
@@ -38,12 +40,12 @@ const ArtifactPushDocker = props =>{
                 label={"推送方式"}
                 onChange={e=>onChange(e,'artifactType')}
             >
-                <Select.Option value={"hadess"}>Hadess</Select.Option>
-                <Select.Option value={"nexus"}>Nexus</Select.Option>
+                <Select.Option value={hadess}>Hadess</Select.Option>
+                <Select.Option value={nexus}>Nexus</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.artifactType==='hadess' &&
+                dataItem.task?.artifactType===hadess &&
                 <ArtifactHadess
                     label={'推送仓库'}
                     dataItem={dataItem}

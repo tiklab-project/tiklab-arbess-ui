@@ -1,5 +1,5 @@
 /**
- * @Description: 流水线单元maven测试详情
+ * @Description: 流水线maven单元测试详情
  * @Author: gaomengyuan
  * @Date:
  * @LastEditors: gaomengyuan
@@ -110,8 +110,11 @@ const TestMavenDetail = (props) => {
             >
                 <div className="arbess-home-limited">
                     <BreadCrumb
-                        firstItem={"Maven单元测试"}
-                        onClick={backTest}
+                        crumbs={[
+                            {title:'单元测试',click:()=>backTest()},
+                            {title:'Maven',},
+                            {title:mavenTestObj?.id,}
+                        ]}
                     />
                     <div className='test-overview'>
                         <div className="test-overview-info">

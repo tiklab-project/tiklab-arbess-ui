@@ -398,7 +398,11 @@ const History = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"历史"}/>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'历史'}
+                        ]}
+                    />
                     <HistoryScreen {...props} screen={screen}/>
                     <Spin spinning={isLoading}>
                         <div className="history-table">

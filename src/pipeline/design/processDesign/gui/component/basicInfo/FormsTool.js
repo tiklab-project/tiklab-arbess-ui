@@ -53,7 +53,7 @@ const FormsTool = (props) => {
     //名称
     const nameSuffix = `tool${title[scmType]}`;
     //标签
-    const label = `${title[scmType]}地址`;
+    const label = `${title[scmType]}安装地址`;
 
     /**
      * 更新程序地址

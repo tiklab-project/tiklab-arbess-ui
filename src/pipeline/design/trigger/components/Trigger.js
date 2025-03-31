@@ -6,6 +6,7 @@ import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import "./Trigger.scss";
+import {pipeline_task_update} from "../../../../common/utils/Constant";
 
 
 /**
@@ -24,7 +25,7 @@ const Trigger = props =>{
     const [formValue,setFormValue] = useState(null)
     const [triggerVisible,setTriggerVisible] = useState(false)
 
-    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+    const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
 
     /**

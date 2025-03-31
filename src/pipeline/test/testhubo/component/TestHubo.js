@@ -1,12 +1,12 @@
 /**
- * @Description: 流水线TestHubo测试
+ * @Description: 流水线TestHubo自动化测试
  * @Author: gaomengyuan
  * @Date:
  * @LastEditors: gaomengyuan
  * @LastEditTime: 2025/3/12
  */
 import React,{useState,useEffect} from "react";
-import {Table,message,Tag,Row,Col} from "antd";
+import {message, Row, Col, Divider, Spin, Table} from "antd";
 import {applyJump} from "tiklab-core-ui"
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
@@ -25,14 +25,9 @@ const TestHubo = props => {
     const {findAllRelevance,deleteRelevance} = testhuboStore;
 
     //加载状态
-    const [isLoading,setIsLoading] = useState(true)
-    //测试列表
-    const [testList,setTestList] = useState([])
-    //测试页数
-    const [testPage,setTestPage] = useState({
-        totalPage:1,
-        totalRecord:1
-    })
+    const [isLoading,setIsLoading] = useState(true);
+    //测试数据
+    const [testData,setTestData] = useState({});
     const pageParam= {
         pageSize:pageSize,
         currentPage: 1,
@@ -49,11 +44,7 @@ const TestHubo = props => {
             ...param
         }).then(Res=>{
             if(Res.code===0){
-                setTestList(Res.data?.dataList || [])
-                setTestPage({
-                    totalPage: Res.data?.totalPage || 1,
-                    totalRecord: Res.data?.totalRecord || 1,
-                })
+                setTestData(Res.data)
             }
         }).finally(()=>setIsLoading(false))
     },[param])
@@ -73,10 +64,10 @@ const TestHubo = props => {
      * 删除自动化测试
      * @param item
      */
-    const delTeston = (item) => {
+    const delTestHubo = (item) => {
         deleteRelevance(item.relevanceId).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(testPage.totalRecord,pageSize,param.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(testData.totalRecord,pageSize,param.pageParam.currentPage)
                 changPage(current)
             }
         })
@@ -97,64 +88,39 @@ const TestHubo = props => {
 
     const columns = [
         {
-            title: "名称",
+            title: "测试信息",
             dataIndex: ["object","testPlanName"],
             key: "testPlanName",
-            width:"22%",
+            width:"65%",
             ellipsis:true,
             render:(text,record) =>{
+                const { object } = record;
+                const { passNum='0', failNum='0' } = object || {};
                 return (
-                    <span className="test-item-name" onClick={()=>goTestHubo(record)}>
-                        # {text || '--'}
-                    </span>
+                    <div className='data-item-left'>
+                        <span className='data-item-name' onClick={()=>goTestHubo(record)}>
+                            # {text || '--'}
+                        </span>
+                        <div className='data-item-count'>
+                            <div className='data-item-pass'>
+                                <span className='count-key'>成功数</span>
+                                {passNum}
+                            </div>
+                            <Divider type="vertical" />
+                            <div className='data-item-fail'>
+                                <span className='count-key'>失败数</span>
+                                {failNum}
+                            </div>
+                        </div>
+                    </div>
                 )
             }
-        },
-        {
-            title: "用例数",
-            dataIndex: ["object","total"],
-            key: "total",
-            width:"10%",
-            ellipsis:true,
-            render:text=>text || '0'
-        },
-        {
-            title: "成功数",
-            dataIndex: ["object","passNum"],
-            key: "passNum",
-            width:"10%",
-            ellipsis:true,
-            render:text=>text || '0'
-        },
-        {
-            title: "失败数",
-            dataIndex: ["object","failNum"],
-            key: "failNum",
-            width:"10%",
-            ellipsis:true,
-            render:text=>text || '0'
-        },
-        {
-            title: "通过率",
-            dataIndex: ["object","passRate"],
-            key: "passRate",
-            width:"10%",
-            ellipsis:true,
-            render:text=> <Tag color="green">{text || "0.00%"}</Tag>
-        },
-        {
-            title: "失误率",
-            dataIndex: ["object","errorRate"],
-            key: "errorRate",
-            width:"10%",
-            ellipsis:true,
-            render:text=> <Tag color="red">{text || "0.00%"}</Tag>
         },
         {
             title: "执行时间",
             dataIndex: "time",
             key: "time",
-            width:"20%",
+            width:"27%",
             ellipsis:true,
             render:text=>text || '--'
         },
@@ -166,40 +132,46 @@ const TestHubo = props => {
             ellipsis:true,
             render:(_,record)=> (
                 <ListAction
-                    del={()=>delTeston(record)}
+                    del={()=>delTestHubo(record)}
                 />
             )
         }
     ]
 
     return (
-        <Row className='test-on'>
+        <Row className='test-hubo'>
             <Col
                 xs={{ span: "24" }}
                 sm={{ span: "24" }}
                 md={{ span: "24" }}
-                lg={{span: "24"}}
+                lg={{ span: "24" }}
                 xl={{ span: "21", offset: "1" }}
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className="arbess-home-limited">
-                    <BreadCrumb firstItem={"TestHubo自动化测试"}/>
-                    <div className='test-table'>
-                        <Table
-                            bordered={false}
-                            loading={isLoading}
-                            columns={columns}
-                            dataSource={testList}
-                            rowKey={record=>record.relevanceId}
-                            pagination={false}
-                            locale={{emptyText: <ListEmpty />}}
-                        />
-                        <Page
-                            currentPage={param.pageParam.currentPage}
-                            changPage={changPage}
-                            page={testPage}
-                        />
-                    </div>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'自动化测试'},
+                            {title:'TestHubo'}
+                        ]}
+                    />
+                   <Spin spinning={isLoading}>
+                       <div className='test-table'>
+                           <Table
+                               bordered={false}
+                               pagination={false}
+                               columns={columns}
+                               dataSource={testData?.dataList || []}
+                               rowKey={record=>record.relevanceId}
+                               locale={{emptyText: <ListEmpty />}}
+                           />
+                           <Page
+                               currentPage={param.pageParam.currentPage}
+                               changPage={changPage}
+                               page={testData}
+                           />
+                       </div>
+                   </Spin>
                 </div>
             </Col>
         </Row>

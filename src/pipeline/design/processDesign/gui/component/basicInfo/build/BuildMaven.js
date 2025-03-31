@@ -1,23 +1,25 @@
+/**
+ * @Description: maven构建
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/28
+ */
 import React from "react";
 import FormsMirror from "../FormsMirror";
 import FormsInput from "../FormsInput";
 import FormsTool from "../FormsTool";
+import {toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
 
-/**
- * maven构建
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const BuildMaven = props =>{
 
     return(
         <>
             <FormsTool
-                scmType={'jdk'}
+                scmType={toolJdk}
             />
             <FormsTool
-                scmType={'maven'}
+                scmType={toolMaven}
             />
             <FormsInput
                 name={"buildAddress"}

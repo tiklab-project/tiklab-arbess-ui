@@ -1,3 +1,10 @@
+/**
+ * @Description: maven拉取制品
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/3/28
+ */
 import React from "react";
 import {Select} from "antd";
 import {observer} from "mobx-react";
@@ -6,11 +13,8 @@ import FormsAuth from "../FormsAuth";
 import FormsInput from "../FormsInput";
 import {ArtifactHadess} from "./ArtifactCommon";
 import FormsTool from "../FormsTool";
+import {hadess, nexus, ssh, toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
 
-/**
- * maven拉取制品
- * @constructor
- */
 const ArtifactPullMaven = props => {
 
     const {taskStore} = props
@@ -37,13 +41,13 @@ const ArtifactPullMaven = props => {
                 label={"拉取方式"}
                 onChange={e=>onChange(e,'pullType')}
             >
-                <Select.Option value={"hadess"}>Hadess</Select.Option>
-                <Select.Option value={"nexus"}>Nexus</Select.Option>
-                <Select.Option value={"ssh"}>SSH</Select.Option>
+                <Select.Option value={hadess}>Hadess</Select.Option>
+                <Select.Option value={nexus}>Nexus</Select.Option>
+                <Select.Option value={ssh}>SSH</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.pullType==='ssh' ?
+                dataItem.task?.pullType===ssh ?
                 <>
                     <FormsInput
                         name={"remoteAddress"}
@@ -61,13 +65,13 @@ const ArtifactPullMaven = props => {
                 :
                 <>
                     <FormsTool
-                        scmType={'jdk'}
+                        scmType={toolJdk}
                     />
                     <FormsTool
-                        scmType={'maven'}
+                        scmType={toolMaven}
                     />
                     {
-                        dataItem.task?.pullType==='hadess' &&
+                        dataItem.task?.pullType===hadess &&
                         <ArtifactHadess
                             label={'拉取仓库'}
                             dataItem={dataItem}

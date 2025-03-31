@@ -136,7 +136,11 @@ const Auth = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className='arbess-home-limited'>
-                    <BreadCrumb firstItem={"认证"}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'认证'}
+                        ]}
+                    >
                         <AuthAddBtn
                             visible={visible}
                             setVisible={setVisible}

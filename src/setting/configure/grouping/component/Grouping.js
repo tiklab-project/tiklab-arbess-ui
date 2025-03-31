@@ -137,7 +137,11 @@ const Grouping = props =>{
                 xxl={{ span: "18", offset: "3" }}
             >
                 <div className='arbess-home-limited'>
-                    <BreadCrumb firstItem={"分组"}>
+                    <BreadCrumb
+                        crumbs={[
+                            {title:'分组'}
+                        ]}
+                    >
                         <Btn
                             type={'primary'}
                             title={"添加分组"}

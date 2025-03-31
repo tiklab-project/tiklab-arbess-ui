@@ -77,8 +77,10 @@ const ScanDetails = (props) => {
             >
                 <div className="arbess-home-limited">
                     <BreadCrumb
-                        firstItem={"代码扫描"}
-                        onClick={backScan}
+                        crumbs={[
+                            {title:'代码扫描',click:()=>backScan()},
+                            {title:detailObj?.id}
+                        ]}
                     />
                     <div className="scan-overview">
                         <div className="scan-overview-info">

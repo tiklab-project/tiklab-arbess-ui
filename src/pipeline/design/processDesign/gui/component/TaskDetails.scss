@@ -13,7 +13,16 @@
         width: 100%;
         padding: 0 15px;
         .body-taskForm{
-            .input-hover,.input-hover .ant-select-selector{
+            .input-hover {
+                .ant-input{
+                    background: transparent;
+                }
+                .ant-select-selector{
+                    border-color: #efeded;
+                    background: transparent;
+                }
+            }
+            .input-hover{
                 border-color: #efeded;
                 &:hover{
                     background-color: #f2f2f2;
@@ -30,6 +39,12 @@
                     border-color: #ff4d4f;
                 }
                 .ant-select-selector:focus{
+                    border-color: #ff7875;
+                }
+                .ant-input-affix-wrapper{
+                    border-color: #ff4d4f;
+                }
+                .ant-input-affix-wrapper:focus{
                     border-color: #ff7875;
                 }
             }

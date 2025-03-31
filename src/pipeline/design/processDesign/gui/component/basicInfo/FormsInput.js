@@ -10,6 +10,7 @@ import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
 import {WhetherChange} from "../Common";
 import {Validation} from "../../../../../../common/utils/Client";
+import {pipeline_task_update} from "../../../../../../common/utils/Constant";
 
 const FormsInput = props =>{
 
@@ -20,7 +21,7 @@ const FormsInput = props =>{
     const inputRef = useRef(null)
     const [enter,setEnter] = useState(false)
 
-    const taskUpdate = taskPermissions?.includes('pipeline_task_update');
+    const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
     useEffect(()=>{
         // 文本框聚焦
@@ -48,14 +49,14 @@ const FormsInput = props =>{
             case "codeName":
                 if(type==='svn'){
                     return validCodeSvn.test(value)
-                }else if(type==='git'||type==='gitlab'){
+                } else if(type==='git'||type==='gitlab'){
                     return validCodeGit.test(value)
                 }
                 break
             default:
                 if(isRequire){
                     return value && value.trim() !== ""
-                }else {
+                } else {
                     return true
                 }
         }
@@ -67,8 +68,9 @@ const FormsInput = props =>{
      */
     const onBlur = e => {
         const value = e.target.value
-        // 文本内容效验是否通过
+        //文本内容效验是否通过
         const valid =  validation(value,dataItem.taskType,name)
+        //文本内容是否改变
         const isTaskChange =  WhetherChange(value,dataItem.task?.[name])
         setEnter(false)
         if(valid && isTaskChange){
@@ -106,7 +108,35 @@ const FormsInput = props =>{
                     break;
             }
         }
+        if (name==="priKey"){
+            rule = [
+                { required: true, message: `${label}不能为空` },
+            ]
+        }
         return rule;
+    }
+
+    const commonInputProps = {
+        disabled: !taskUpdate,
+        ref: inputRef,
+        addonBefore: enter && addonBefore,
+        placeholder: enter ? `${placeholder || '请输入'}，回车保存` : '未设置',
+        className: enter ? '' : 'input-hover',
+        onFocus: () => setEnter(true),
+        onBlur: (e) => onBlur(e),
+        onPressEnter: (e) => e.target.blur(),
+    };
+
+    const InputComponentMap = {
+        Password: Input.Password,
+        TextArea: Input.TextArea,
+        default: Input,
+    };
+
+    const inputHtml = () =>{
+        const InputType = props.InputType || 'default';
+        const InputComponent = InputComponentMap[InputType];
+        return <InputComponent  {...commonInputProps}/>
     }
 
     return (
@@ -116,16 +146,7 @@ const FormsInput = props =>{
             rules={rules()}
             validateTrigger="onChange"
         >
-            <Input
-                disabled={!taskUpdate}
-                ref={inputRef}
-                addonBefore={enter && addonBefore}
-                placeholder={enter? placeholder+"，回车保存":"未设置"}
-                className={`${enter ? '':'input-hover'}`}
-                onFocus={()=>setEnter(true)}
-                onBlur={(e)=>onBlur(e)}
-                onPressEnter={(e)=>e.target.blur()}
-            />
+            { inputHtml() }
         </Form.Item>
     )
 
